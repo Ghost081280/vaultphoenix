@@ -89,17 +89,16 @@ body {
     transform: scale(1.05);
 }
 
-.logo-icon {
-    font-size: 36px;
-    animation: phoenixFlame 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px rgba(215, 51, 39, 0.5));
+.logo-image {
+    height: 40px;
+    width: auto;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 8px rgba(215, 51, 39, 0.3));
 }
 
-@keyframes phoenixFlame {
-    0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-    25% { transform: translateY(-3px) rotate(-5deg) scale(1.1); }
-    50% { transform: translateY(-5px) rotate(0deg) scale(1.05); }
-    75% { transform: translateY(-2px) rotate(5deg) scale(1.1); }
+.logo-image:hover {
+    filter: drop-shadow(0 0 12px rgba(215, 51, 39, 0.6));
+    transform: scale(1.05);
 }
 
 .nav-links {
@@ -1248,6 +1247,12 @@ body {
     align-items: center;
     justify-content: center;
     gap: 12px;
+}
+
+.footer-logo-image {
+    height: 32px;
+    width: auto;
+    filter: drop-shadow(0 0 6px rgba(215, 51, 39, 0.3));
 }
 
 .footer-text {
