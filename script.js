@@ -1,5 +1,5 @@
 // Vault Phoenix - Interactive JavaScript
-// Phoenix Rising from Digital Ashes
+// Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 
 // Enhanced gallery function with correct image order
 function changeImage(imageSrc, title) {
@@ -32,7 +32,7 @@ function changeImage(imageSrc, title) {
     });
 }
 
-// Enhanced navbar scroll effect with phoenix theme
+// Enhanced navbar scroll effect with phoenix crypto theme
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -44,7 +44,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Enhanced scroll reveal animation with phoenix timing
+// Enhanced scroll reveal animation with phoenix crypto timing
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -80px 0px'
@@ -79,12 +79,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Enhanced interactive card effects with phoenix animation
-document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb').forEach(card => {
+// Enhanced interactive card effects with phoenix crypto animation
+document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto-benefit').forEach(card => {
     card.addEventListener('mouseenter', function() {
-        this.style.transform = this.classList.contains('simple-thumb') 
-            ? 'translateY(-5px) scale(1.05)' 
-            : 'translateY(-10px) scale(1.02)';
+        if (this.classList.contains('simple-thumb')) {
+            this.style.transform = 'translateY(-5px) scale(1.05)';
+        } else if (this.classList.contains('crypto-benefit')) {
+            this.style.transform = 'translateX(15px)';
+        } else {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        }
         
         // Add subtle phoenix glow effect
         if (this.classList.contains('feature-card') || this.classList.contains('use-case-card')) {
@@ -95,12 +99,15 @@ document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb').forEac
     card.addEventListener('mouseleave', function() {
         if (!this.classList.contains('active')) {
             this.style.transform = 'translateY(0) scale(1)';
+            if (this.classList.contains('crypto-benefit')) {
+                this.style.transform = 'translateX(0)';
+            }
             this.style.boxShadow = '';
         }
     });
 });
 
-// Enhanced stats animation with realistic counting and phoenix theme
+// Enhanced stats animation with realistic counting and phoenix crypto theme
 function animateStats() {
     const stats = document.querySelectorAll('.stat-number, .revenue-number');
     stats.forEach(stat => {
@@ -146,14 +153,14 @@ if (heroSection) {
     heroObserver.observe(heroSection);
 }
 
-// Auto-rotate gallery showcase with phoenix-themed images
+// Auto-rotate gallery showcase with phoenix crypto-themed images
 let currentImageIndex = 0;
 const imageRotation = [
-    { src: 'images/IMG_7910.PNG', title: 'Phoenix Collection System' },
-    { src: 'images/IMG_4380.jpg', title: 'Legendary Item Discovery' },
-    { src: 'images/IMG_4383.jpg', title: 'Phoenix Dashboard Command' },
-    { src: 'images/IMG_4381.jpg', title: 'AR Phoenix Hunt Mode' },
-    { src: 'images/IMG_4382.jpg', title: 'Territory Map Conquest' },
+    { src: 'images/IMG_7910.PNG', title: 'Phoenix Crypto Collection System' },
+    { src: 'images/IMG_4380.jpg', title: 'Legendary Coin Discovery' },
+    { src: 'images/IMG_4383.jpg', title: 'Phoenix Crypto Dashboard' },
+    { src: 'images/IMG_4381.jpg', title: 'AR Crypto Hunt Mode' },
+    { src: 'images/IMG_4382.jpg', title: 'Crypto Territory Map' },
     { src: 'images/IMG_4378.jpg', title: 'Phoenix Navigation System' }
 ];
 
@@ -189,14 +196,14 @@ document.querySelectorAll('.simple-thumb').forEach(thumb => {
     });
 });
 
-// PHOENIX MOBILE MENU SYSTEM - BULLETPROOF VERSION
+// PHOENIX CRYPTO MOBILE MENU SYSTEM - BULLETPROOF VERSION
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥 Phoenix Rising - DOM loaded, initializing mobile menu...');
+    console.log('🔥🪙 Phoenix Crypto Rising - DOM loaded, initializing mobile menu...');
     
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     
-    console.log('Found phoenix elements:', { 
+    console.log('Found phoenix crypto elements:', { 
         mobileMenuBtn: !!mobileMenuBtn, 
         navLinks: !!navLinks 
     });
@@ -207,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             e.stopPropagation();
             
-            console.log('🔥 Phoenix menu button ignited!');
+            console.log('🔥🪙 Phoenix crypto menu button ignited!');
             console.log('Current classes:', navLinks.className);
             
             // Toggle the mobile-active class
@@ -216,24 +223,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('mobile-active');
                 mobileMenuBtn.innerHTML = '☰';
                 document.body.style.overflow = '';
-                console.log('Phoenix menu extinguished');
+                console.log('Phoenix crypto menu extinguished');
             } else {
                 // Open menu
                 navLinks.classList.add('mobile-active');
                 mobileMenuBtn.innerHTML = '✕';
                 document.body.style.overflow = 'hidden';
-                console.log('Phoenix menu blazing!');
+                console.log('Phoenix crypto menu blazing!');
                 console.log('New classes:', navLinks.className);
             }
         });
 
         // Close menu when clicking nav links
         const navLinksArray = navLinks.querySelectorAll('a');
-        console.log('Found phoenix nav links:', navLinksArray.length);
+        console.log('Found phoenix crypto nav links:', navLinksArray.length);
         
         navLinksArray.forEach((link, index) => {
             link.addEventListener('click', function() {
-                console.log('Phoenix nav link activated:', index);
+                console.log('Phoenix crypto nav link activated:', index);
                 navLinks.classList.remove('mobile-active');
                 mobileMenuBtn.innerHTML = '☰';
                 document.body.style.overflow = '';
@@ -246,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('mobile-active');
                 mobileMenuBtn.innerHTML = '☰';
                 document.body.style.overflow = '';
-                console.log('Phoenix menu closed via escape');
+                console.log('Phoenix crypto menu closed via escape');
             }
         });
 
@@ -258,19 +265,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('mobile-active');
                 mobileMenuBtn.innerHTML = '☰';
                 document.body.style.overflow = '';
-                console.log('Phoenix menu closed via outside click');
+                console.log('Phoenix crypto menu closed via outside click');
             }
         });
 
     } else {
-        console.error('🔥 Phoenix menu elements not found!');
+        console.error('🔥🪙 Phoenix crypto menu elements not found!');
     }
 });
 
-// Enhanced form validation and UX with phoenix theme
+// Enhanced form validation and UX with phoenix crypto theme
 document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
     link.addEventListener('click', (e) => {
-        console.log('🔥 Phoenix email CTA ignited:', link.href);
+        console.log('🔥🪙 Phoenix crypto email CTA ignited:', link.href);
         
         // Add subtle animation feedback
         link.style.transform = 'scale(0.95)';
@@ -282,7 +289,7 @@ document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
 
 document.querySelectorAll('a[href^="sms:"]').forEach(link => {
     link.addEventListener('click', (e) => {
-        console.log('🔥 Phoenix SMS CTA ignited:', link.href);
+        console.log('🔥🪙 Phoenix crypto SMS CTA ignited:', link.href);
         
         // Add subtle animation feedback
         link.style.transform = 'scale(0.95)';
@@ -292,11 +299,11 @@ document.querySelectorAll('a[href^="sms:"]').forEach(link => {
     });
 });
 
-// Add loading states for better UX with phoenix theme
+// Add loading states for better UX with phoenix crypto theme
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
     
-    // Trigger initial animations with phoenix timing
+    // Trigger initial animations with phoenix crypto timing
     setTimeout(() => {
         document.querySelectorAll('.fade-in').forEach((el, index) => {
             setTimeout(() => {
@@ -307,12 +314,12 @@ window.addEventListener('load', () => {
     }, 500);
 });
 
-// Add error handling for images with phoenix fallback
+// Add error handling for images with phoenix crypto fallback
 document.querySelectorAll('img').forEach(img => {
     img.addEventListener('error', function() {
-        console.warn('🔥 Phoenix image failed to load:', this.src);
+        console.warn('🔥🪙 Phoenix crypto image failed to load:', this.src);
         this.style.opacity = '0.5';
-        this.alt = 'Phoenix image rising...';
+        this.alt = 'Phoenix crypto image rising...';
     });
     
     img.addEventListener('load', function() {
@@ -320,10 +327,11 @@ document.querySelectorAll('img').forEach(img => {
     });
 });
 
-// Preload critical phoenix images for better performance
-function preloadPhoenixImages() {
+// Preload critical phoenix crypto images for better performance
+function preloadPhoenixCryptoImages() {
     const criticalImages = [
-        'images/IMG_7910.PNG', // Main phoenix image
+        'images/IMG_7910.PNG', // Main phoenix crypto image
+        'images/9FBD9FC3-8B64-44F7-9B5A-785531847CB9.PNG', // Phoenix holding coin
         'images/IMG_4380.jpg',
         'images/IMG_4383.jpg',
         'images/IMG_4381.jpg'
@@ -332,72 +340,123 @@ function preloadPhoenixImages() {
     criticalImages.forEach(src => {
         const img = new Image();
         img.src = src;
-        img.onload = () => console.log('🔥 Phoenix image preloaded:', src);
-        img.onerror = () => console.warn('🔥 Phoenix image preload failed:', src);
+        img.onload = () => console.log('🔥🪙 Phoenix crypto image preloaded:', src);
+        img.onerror = () => console.warn('🔥🪙 Phoenix crypto image preload failed:', src);
     });
 }
 
-// Phoenix particle effect for hero section (optional enhancement)
-function createPhoenixParticles() {
+// Phoenix crypto coin floating effect for hero section
+function createPhoenixCryptoParticles() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
     
-    // Create subtle floating particles
-    for (let i = 0; i < 20; i++) {
+    // Create subtle floating crypto coin particles
+    for (let i = 0; i < 15; i++) {
         const particle = document.createElement('div');
+        particle.innerHTML = '🪙';
         particle.style.cssText = `
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(215, 51, 39, 0.6);
-            border-radius: 50%;
+            font-size: ${Math.random() * 12 + 8}px;
+            color: rgba(251, 146, 60, 0.3);
             pointer-events: none;
-            animation: phoenixFloat ${3 + Math.random() * 4}s ease-in-out infinite;
-            animation-delay: ${Math.random() * 2}s;
+            animation: cryptoFloat ${4 + Math.random() * 6}s ease-in-out infinite;
+            animation-delay: ${Math.random() * 3}s;
             left: ${Math.random() * 100}%;
             top: ${Math.random() * 100}%;
             z-index: 1;
         `;
         hero.appendChild(particle);
     }
+    
+    // Add CSS animation for crypto floating
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes cryptoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); opacity: 0.3; }
+            25% { transform: translateY(-20px) rotate(90deg) scale(1.1); opacity: 0.6; }
+            50% { transform: translateY(-10px) rotate(180deg) scale(0.9); opacity: 0.4; }
+            75% { transform: translateY(-25px) rotate(270deg) scale(1.2); opacity: 0.5; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Enhanced crypto coin image interaction
+function initializeCryptoCoinImage() {
+    const cryptoImage = document.querySelector('.phoenix-coin-image');
+    if (!cryptoImage) return;
+    
+    // Add special crypto coin glow effect on hover
+    cryptoImage.addEventListener('mouseenter', function() {
+        this.style.filter = 'drop-shadow(0 0 30px rgba(251, 146, 60, 0.8)) brightness(1.1)';
+    });
+    
+    cryptoImage.addEventListener('mouseleave', function() {
+        this.style.filter = '';
+    });
+    
+    // Add subtle rotation animation
+    let rotationDegree = 0;
+    setInterval(() => {
+        rotationDegree += 0.5;
+        cryptoImage.style.transform = `rotate(${rotationDegree}deg)`;
+    }, 100);
 }
 
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    preloadPhoenixImages();
-    createPhoenixParticles();
+    preloadPhoenixCryptoImages();
+    createPhoenixCryptoParticles();
+    initializeCryptoCoinImage();
     
     // Add smooth entrance animations
     setTimeout(() => {
         document.body.style.opacity = '1';
     }, 100);
     
-    // Phoenix-specific initialization
-    console.log('🔥 Phoenix systems online and ready for action!');
+    // Phoenix crypto-specific initialization
+    console.log('🔥🪙 Phoenix crypto systems online and ready for action!');
 });
 
-// Console welcome message with phoenix theme
-console.log('%c🔥 VAULT PHOENIX - AR Marketing Revolution', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 Built by Phoenix Developers - Premium AR Marketing Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
+// Console welcome message with phoenix crypto theme
+console.log('%c🔥🪙 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
+console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
 console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
-console.log('%c🔥 From ashes to greatness - Phoenix Rising!', 'color: #d73327; font-size: 12px; font-style: italic;');
+console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with Blockchain Power!', 'color: #d73327; font-size: 12px; font-style: italic;');
 
-// Performance monitoring with phoenix theme
+// Performance monitoring with phoenix crypto theme
 window.addEventListener('load', () => {
     const loadTime = performance.now();
-    console.log(`%c🔥 Phoenix arose in ${Math.round(loadTime)}ms - Ready to ignite!`, 'color: #22c55e; font-weight: bold;');
+    console.log(`%c🔥🪙 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect coins!`, 'color: #22c55e; font-weight: bold;');
     
     // Optional: Add phoenix flame effect to logo after load
     const logoIcon = document.querySelector('.logo-icon');
     if (logoIcon) {
-        logoIcon.style.filter = 'drop-shadow(0 0 10px rgba(215, 51, 39, 0.8))';
+        logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
     }
 });
 
-// Enhanced interactive feedback for all CTA buttons
+// Enhanced interactive feedback for all CTA buttons with crypto theme
 document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
+        // Add subtle coin sparkle effect
+        if (Math.random() > 0.7) {
+            const sparkle = document.createElement('span');
+            sparkle.innerHTML = '🪙';
+            sparkle.style.cssText = `
+                position: absolute;
+                font-size: 12px;
+                animation: sparkle 0.8s ease-out forwards;
+                pointer-events: none;
+                top: ${Math.random() * 20 - 10}px;
+                left: ${Math.random() * 20 - 10}px;
+            `;
+            this.style.position = 'relative';
+            this.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 800);
+        }
     });
     
     button.addEventListener('mouseleave', function() {
@@ -413,18 +472,29 @@ document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-butt
     });
 });
 
-// Phoenix-themed scroll progress indicator (optional)
-function createPhoenixScrollIndicator() {
+// Add sparkle animation CSS
+const sparkleStyle = document.createElement('style');
+sparkleStyle.textContent = `
+    @keyframes sparkle {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-20px) scale(0); opacity: 0; }
+    }
+`;
+document.head.appendChild(sparkleStyle);
+
+// Phoenix crypto-themed scroll progress indicator
+function createPhoenixCryptoScrollIndicator() {
     const indicator = document.createElement('div');
     indicator.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
         height: 4px;
-        background: linear-gradient(90deg, #d73327, #fb923c);
+        background: linear-gradient(90deg, #d73327, #fb923c, #f59e0b);
         z-index: 9999;
         transition: width 0.3s ease;
         width: 0%;
+        box-shadow: 0 2px 10px rgba(215, 51, 39, 0.3);
     `;
     document.body.appendChild(indicator);
     
@@ -433,8 +503,110 @@ function createPhoenixScrollIndicator() {
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
         indicator.style.width = scrolled + '%';
+        
+        // Add crypto coin at the end of progress bar
+        if (scrolled > 95) {
+            indicator.style.background = 'linear-gradient(90deg, #d73327, #fb923c, #f59e0b) 🪙';
+        }
     });
 }
 
-// Initialize phoenix scroll indicator
-createPhoenixScrollIndicator();
+// Crypto benefits animation on scroll
+function initializeCryptoBenefits() {
+    const benefits = document.querySelectorAll('.crypto-benefit');
+    if (!benefits.length) return;
+    
+    const benefitsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.transform = 'translateX(0)';
+                    entry.target.style.opacity = '1';
+                    
+                    // Add a subtle coin bounce effect
+                    const icon = entry.target.querySelector('.benefit-icon');
+                    if (icon) {
+                        icon.style.animation = 'coinBounce 0.6s ease-out';
+                    }
+                }, index * 200);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    benefits.forEach(benefit => {
+        benefit.style.transform = 'translateX(-50px)';
+        benefit.style.opacity = '0';
+        benefitsObserver.observe(benefit);
+    });
+    
+    // Add coin bounce animation
+    const coinBounceStyle = document.createElement('style');
+    coinBounceStyle.textContent = `
+        @keyframes coinBounce {
+            0% { transform: scale(1) rotateY(0deg); }
+            50% { transform: scale(1.2) rotateY(180deg); }
+            100% { transform: scale(1) rotateY(360deg); }
+        }
+    `;
+    document.head.appendChild(coinBounceStyle);
+}
+
+// Initialize crypto-specific features
+document.addEventListener('DOMContentLoaded', function() {
+    initializeCryptoBenefits();
+    createPhoenixCryptoScrollIndicator();
+});
+
+// Easter egg: Konami code for bonus crypto coins
+let konamiCode = [];
+const konamiSequence = [
+    'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+    'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+    'KeyB', 'KeyA'
+];
+
+document.addEventListener('keydown', (e) => {
+    konamiCode.push(e.code);
+    if (konamiCode.length > konamiSequence.length) {
+        konamiCode.shift();
+    }
+    
+    if (konamiCode.join(',') === konamiSequence.join(',')) {
+        // Trigger bonus crypto coin rain
+        console.log('🔥🪙 BONUS CRYPTO ACTIVATED! 🪙🔥');
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const coin = document.createElement('div');
+                coin.innerHTML = '🪙';
+                coin.style.cssText = `
+                    position: fixed;
+                    font-size: ${Math.random() * 20 + 15}px;
+                    left: ${Math.random() * 100}vw;
+                    top: -50px;
+                    z-index: 10000;
+                    pointer-events: none;
+                    animation: coinFall ${Math.random() * 3 + 2}s linear forwards;
+                `;
+                document.body.appendChild(coin);
+                
+                setTimeout(() => coin.remove(), 5000);
+            }, i * 100);
+        }
+        
+        // Add coin fall animation
+        const coinFallStyle = document.createElement('style');
+        coinFallStyle.textContent = `
+            @keyframes coinFall {
+                to { 
+                    transform: translateY(calc(100vh + 100px)) rotate(720deg); 
+                    opacity: 0; 
+                }
+            }
+        `;
+        document.head.appendChild(coinFallStyle);
+        
+        konamiCode = []; // Reset
+    }
+});
+
+console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
