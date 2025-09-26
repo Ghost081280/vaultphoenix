@@ -406,6 +406,24 @@ body {
     box-shadow: 0 8px 20px rgba(215, 51, 39, 0.4);
 }
 
+.benefit-icon.coin-image {
+    padding: 8px;
+    background: linear-gradient(135deg, #d73327, #fb923c);
+}
+
+.custom-coin-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.crypto-benefit:hover .custom-coin-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)) brightness(1.1);
+}
+
 .benefit-content h4 {
     font-size: 1.3rem;
     font-weight: 800;
