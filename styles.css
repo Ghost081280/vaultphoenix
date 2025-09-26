@@ -999,25 +999,49 @@ body {
     font-size: 1rem;
 }
 
+/* Pricing Header Layout */
+.pricing-header {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.pricing-text {
+    text-align: left;
+}
+
+.pricing-text .section-title {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.pricing-text .section-subtitle {
+    text-align: left;
+    margin-bottom: 0;
+    max-width: none;
+}
+
 /* Investment Image */
 .investment-image-container {
     text-align: center;
-    margin: 60px auto;
-    max-width: 800px;
+    margin: 0;
+    max-width: 100%;
 }
 
 .investment-image {
     max-width: 100%;
     height: auto;
-    border-radius: 20px;
-    box-shadow: 0 30px 80px rgba(215, 51, 39, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.3);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid rgba(215, 51, 39, 0.2);
 }
 
 .investment-image:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 40px 100px rgba(215, 51, 39, 0.4);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 80px rgba(215, 51, 39, 0.4);
     border-color: rgba(215, 51, 39, 0.4);
 }
 
@@ -1728,13 +1752,18 @@ body {
         border-radius: 15px;
     }
 
+    .pricing-header {
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
     .investment-image-container {
-        margin: 30px auto;
+        max-width: 300px;
         padding: 0 15px;
     }
 
     .investment-image {
-        border-radius: 12px;
+        border-radius: 10px;
     }
 
     .pricing-card {
