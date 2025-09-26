@@ -90,7 +90,7 @@ body {
 }
 
 .logo-image {
-    height: 65px;
+    height: 80px;
     width: auto;
     transition: all 0.3s ease;
     filter: drop-shadow(0 0 8px rgba(215, 51, 39, 0.3));
@@ -1275,7 +1275,7 @@ body {
 }
 
 .footer-logo-image {
-    height: 50px;
+    height: 60px;
     width: auto;
     filter: drop-shadow(0 0 6px rgba(215, 51, 39, 0.3));
 }
