@@ -999,6 +999,28 @@ body {
     font-size: 1rem;
 }
 
+/* Investment Image */
+.investment-image-container {
+    text-align: center;
+    margin: 60px auto;
+    max-width: 800px;
+}
+
+.investment-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(215, 51, 39, 0.3);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(215, 51, 39, 0.2);
+}
+
+.investment-image:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 40px 100px rgba(215, 51, 39, 0.4);
+    border-color: rgba(215, 51, 39, 0.4);
+}
+
 /* Pricing Section - Phoenix Crypto Theme */
 .pricing {
     padding: 120px 40px;
@@ -1694,6 +1716,25 @@ body {
 
     .use-case-title {
         font-size: 1.2rem;
+    }
+
+    .investment-image-container {
+        margin: 40px auto;
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .investment-image {
+        border-radius: 15px;
+    }
+
+    .investment-image-container {
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+
+    .investment-image {
+        border-radius: 12px;
     }
 
     .pricing-card {
