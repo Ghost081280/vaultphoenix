@@ -395,12 +395,14 @@ function initializeCryptoCoinImage() {
         this.style.filter = '';
     });
     
-    // Add subtle rotation animation
-    let rotationDegree = 0;
+    // Add subtle side-to-side floating animation
+    let time = 0;
     setInterval(() => {
-        rotationDegree += 0.5;
-        cryptoImage.style.transform = `rotate(${rotationDegree}deg)`;
-    }, 100);
+        time += 0.02;
+        const sideMovement = Math.sin(time) * 8; // Move 8px side to side
+        const upDownMovement = Math.cos(time * 0.8) * 3; // Subtle up/down movement
+        cryptoImage.style.transform = `translateX(${sideMovement}px) translateY(${upDownMovement}px)`;
+    }, 50);
 }
 
 // Initialize everything when DOM is ready
