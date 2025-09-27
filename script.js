@@ -346,12 +346,12 @@ function preloadPhoenixCryptoImages() {
     });
 }
 
-// Phoenix crypto coin floating effect for hero section - MATCHED TO LOADING SCREEN
+// Phoenix crypto coin floating effect for hero section - BACKGROUND ONLY VERSION
 function createPhoenixCryptoParticles() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
     
-    // Create floating coins container that matches loading screen setup
+    // Create floating coins container that stays strictly in background
     const floatingCoins = document.createElement('div');
     floatingCoins.className = 'hero-floating-coins';
     floatingCoins.style.cssText = `
@@ -361,17 +361,18 @@ function createPhoenixCryptoParticles() {
         width: 100%;
         height: 100%;
         pointer-events: none;
-        z-index: 1;
+        z-index: -1;
+        overflow: hidden;
     `;
     
-    // Create 6 coins with exact same positioning and behavior as loading screen
+    // Repositioned coins to avoid content areas - kept away from center
     const coinPositions = [
-        { top: '20%', left: '10%', delay: '0s', duration: '6s' },
-        { top: '60%', left: '15%', delay: '1s', duration: '7s' },
-        { top: '30%', right: '20%', delay: '2s', duration: '8s' },
-        { top: '70%', right: '15%', delay: '3s', duration: '6s' },
-        { top: '15%', left: '50%', delay: '4s', duration: '7s' },
-        { bottom: '20%', right: '40%', delay: '5s', duration: '9s' }
+        { top: '15%', left: '8%', delay: '0s', duration: '6s' },
+        { top: '75%', left: '12%', delay: '1s', duration: '7s' },
+        { top: '25%', right: '8%', delay: '2s', duration: '8s' },
+        { top: '65%', right: '12%', delay: '3s', duration: '6s' },
+        { top: '10%', left: '85%', delay: '4s', duration: '7s' },
+        { bottom: '15%', right: '88%', delay: '5s', duration: '9s' }
     ];
     
     coinPositions.forEach((pos, index) => {
@@ -383,24 +384,25 @@ function createPhoenixCryptoParticles() {
         coinImg.alt = 'Golden Crypto Coin';
         coinImg.className = 'hero-crypto-coin-icon';
         coinImg.style.cssText = `
-            width: clamp(30px, 5vw, 50px);
-            height: clamp(30px, 5vw, 50px);
+            width: clamp(25px, 4vw, 40px);
+            height: clamp(25px, 4vw, 40px);
             object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.7));
+            filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
             transition: all 0.3s ease;
-            opacity: 0.6;
+            opacity: 0.4;
             visibility: visible;
             display: block;
         `;
         
         coin.appendChild(coinImg);
         
-        // Apply exact positioning from loading screen
+        // Apply positioning with strict background z-index
         coin.style.cssText = `
             position: absolute;
             animation: heroCoinFloat ${pos.duration} ease-in-out infinite;
             animation-delay: ${pos.delay};
-            z-index: 1;
+            z-index: -1;
+            pointer-events: none;
             ${pos.top ? `top: ${pos.top};` : ''}
             ${pos.bottom ? `bottom: ${pos.bottom};` : ''}
             ${pos.left ? `left: ${pos.left};` : ''}
@@ -410,49 +412,59 @@ function createPhoenixCryptoParticles() {
         floatingCoins.appendChild(coin);
     });
     
-    hero.appendChild(floatingCoins);
+    // Insert at the very beginning of hero section to ensure background positioning
+    hero.insertBefore(floatingCoins, hero.firstChild);
     
-    // Add exact same CSS animation as loading screen
+    // Add exact same CSS animation as loading screen with strict background positioning
     const style = document.createElement('style');
     style.textContent = `
         @keyframes heroCoinFloat {
             0%, 100% { 
                 transform: translateY(0px) rotate(0deg) scale(1); 
-                opacity: 0.4; 
+                opacity: 0.3; 
             }
             25% { 
-                transform: translateY(-20px) rotate(90deg) scale(1.1); 
-                opacity: 0.7; 
-            }
-            50% { 
-                transform: translateY(-10px) rotate(180deg) scale(0.9); 
+                transform: translateY(-15px) rotate(90deg) scale(1.05); 
                 opacity: 0.5; 
             }
+            50% { 
+                transform: translateY(-8px) rotate(180deg) scale(0.95); 
+                opacity: 0.4; 
+            }
             75% { 
-                transform: translateY(-25px) rotate(270deg) scale(1.2); 
-                opacity: 0.6; 
+                transform: translateY(-18px) rotate(270deg) scale(1.1); 
+                opacity: 0.45; 
             }
         }
         
-        /* Mobile responsive sizing to match loading screen */
+        /* Ensure coins stay in background on all screen sizes */
+        .hero-floating-coins,
+        .hero-coin,
+        .hero-crypto-coin-icon {
+            z-index: -1 !important;
+            pointer-events: none !important;
+        }
+        
+        /* Mobile responsive sizing - smaller to avoid overlap */
         @media (max-width: 768px) {
             .hero-crypto-coin-icon {
-                width: clamp(25px, 6vw, 40px) !important;
-                height: clamp(25px, 6vw, 40px) !important;
+                width: clamp(20px, 3vw, 30px) !important;
+                height: clamp(20px, 3vw, 30px) !important;
+                opacity: 0.3 !important;
             }
         }
         
         @media (max-width: 480px) {
             .hero-crypto-coin-icon {
-                width: clamp(20px, 7vw, 35px) !important;
-                height: clamp(20px, 7vw, 35px) !important;
+                width: clamp(15px, 2.5vw, 25px) !important;
+                height: clamp(15px, 2.5vw, 25px) !important;
+                opacity: 0.25 !important;
             }
         }
         
-        /* Enhanced coin hover effects matching loading screen */
-        .hero-coin:hover .hero-crypto-coin-icon {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 15px rgba(240, 165, 0, 1)) brightness(1.2);
+        /* Remove hover effects to maintain background status */
+        .hero-coin .hero-crypto-coin-icon {
+            transition: none !important;
         }
     `;
     document.head.appendChild(style);
