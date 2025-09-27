@@ -248,9 +248,15 @@ body {
 
 .coin {
     position: absolute;
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    color: rgba(251, 146, 60, 0.7);
     animation: coinFloat 8s ease-in-out infinite;
+}
+
+.crypto-coin-icon {
+    width: clamp(30px, 5vw, 50px);
+    height: clamp(30px, 5vw, 50px);
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(251, 146, 60, 0.7));
+    transition: all 0.3s ease;
 }
 
 .coin-1 {
@@ -298,19 +304,19 @@ body {
 @keyframes coinFloat {
     0%, 100% { 
         transform: translateY(0px) rotate(0deg) scale(1); 
-        opacity: 0.3; 
+        opacity: 0.6; 
     }
     25% { 
         transform: translateY(-20px) rotate(90deg) scale(1.1); 
-        opacity: 0.7; 
+        opacity: 0.9; 
     }
     50% { 
         transform: translateY(-10px) rotate(180deg) scale(0.9); 
-        opacity: 0.5; 
+        opacity: 0.7; 
     }
     75% { 
         transform: translateY(-25px) rotate(270deg) scale(1.2); 
-        opacity: 0.6; 
+        opacity: 0.8; 
     }
 }
 
@@ -352,8 +358,9 @@ body {
         font-size: 1rem;
     }
     
-    .coin {
-        font-size: clamp(1rem, 4vw, 1.5rem);
+    .crypto-coin-icon {
+        width: clamp(25px, 6vw, 40px);
+        height: clamp(25px, 6vw, 40px);
     }
 }
 
@@ -399,15 +406,34 @@ body {
         height: 400px;
     }
     
-    .coin {
-        font-size: clamp(0.8rem, 5vw, 1.2rem);
+    .crypto-coin-icon {
+        width: clamp(20px, 7vw, 35px);
+        height: clamp(20px, 7vw, 35px);
     }
 }
 
 /* High DPI Displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .phoenix-image {
+    .phoenix-image,
+    .crypto-coin-icon {
         image-rendering: -webkit-optimize-contrast;
         image-rendering: crisp-edges;
     }
+}
+
+/* Enhanced coin hover effects for interactive loading */
+.coin:hover .crypto-coin-icon {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 15px rgba(251, 146, 60, 1)) brightness(1.2);
+}
+
+/* Loading completion state */
+.loading-complete .crypto-coin-icon {
+    animation: coinCelebration 1s ease-out;
+}
+
+@keyframes coinCelebration {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.3) rotate(180deg); }
+    100% { transform: scale(1) rotate(360deg); }
 }
