@@ -421,6 +421,11 @@ body {
     background: linear-gradient(135deg, #d73327, #fb923c);
 }
 
+.benefit-icon.revenue-image {
+    padding: 8px;
+    background: linear-gradient(135deg, #d73327, #fb923c);
+}
+
 .custom-coin-icon {
     width: 100%;
     height: 100%;
@@ -429,7 +434,16 @@ body {
     transition: all 0.3s ease;
 }
 
-.crypto-benefit:hover .custom-coin-icon {
+.custom-revenue-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.crypto-benefit:hover .custom-coin-icon,
+.crypto-benefit:hover .custom-revenue-icon {
     transform: scale(1.1);
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)) brightness(1.1);
 }
@@ -630,7 +644,16 @@ body {
     transition: all 0.3s ease;
 }
 
-.feature-card:hover .feature-coin-icon {
+.feature-revenue-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-coin-icon,
+.feature-card:hover .feature-revenue-icon {
     transform: scale(1.1) rotate(5deg);
     filter: drop-shadow(0 6px 12px rgba(215, 51, 39, 0.4)) brightness(1.1);
 }
@@ -1535,6 +1558,11 @@ body {
         height: 35px;
     }
 
+    .custom-revenue-icon {
+        width: 44px;
+        height: 44px;
+    }
+
     .badge-icon {
         width: 50px;
         height: 50px;
@@ -1670,7 +1698,8 @@ body {
         margin-bottom: 15px;
     }
 
-    .feature-coin-icon {
+    .feature-coin-icon,
+    .feature-revenue-icon {
         width: 48px;
         height: 48px;
     }
@@ -1932,6 +1961,11 @@ body {
         height: 30px;
     }
 
+    .custom-revenue-icon {
+        width: 36px;
+        height: 36px;
+    }
+
     .badge-icon {
         width: 40px;
         height: 40px;
@@ -2051,7 +2085,8 @@ body {
         margin-bottom: 12px;
     }
 
-    .feature-coin-icon {
+    .feature-coin-icon,
+    .feature-revenue-icon {
         width: 40px;
         height: 40px;
     }
