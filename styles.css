@@ -1593,7 +1593,236 @@ body {
         padding: 60px 20px;
     }
 
-    .section-title {
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .feature-card, .use-case-card {
+        padding: 20px;
+    }
+
+    .feature-icon, .use-case-icon {
+        font-size: 2.5rem;
+    }
+
+    .feature-coin-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .feature-title, .use-case-title {
+        font-size: 1.1rem;
+    }
+
+    .proven-badge {
+        padding: 20px;
+    }
+
+    .badge-content h4 {
+        font-size: 1.1rem;
+    }
+
+    .badge-content p {
+        font-size: 0.95rem;
+    }
+
+    .phone-frame {
+        width: 180px;
+        height: 360px;
+        padding: 12px;
+    }
+
+    .thumbnail-grid {
+        max-width: 180px;
+        gap: 8px;
+    }
+
+    .simple-thumb {
+        width: 50px;
+        height: 85px;
+    }
+
+    .thumb-label {
+        font-size: 7px;
+        padding: 3px 1px;
+    }
+
+    .showcase-title {
+        font-size: 1.3rem;
+    }
+
+    .highlight-item {
+        padding: 15px;
+    }
+
+    .highlight-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
+    .highlight-content h4 {
+        font-size: 1rem;
+    }
+
+    .highlight-content p {
+        font-size: 0.9rem;
+    }
+
+    .showcase-stat {
+        padding: 15px;
+    }
+
+    .showcase-stat .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .demo-highlight {
+        padding: 20px 15px;
+    }
+
+    .demo-cta h4 {
+        font-size: 1.2rem;
+    }
+
+    .demo-cta p {
+        font-size: 1rem;
+    }
+
+    .demo-button {
+        padding: 12px 25px;
+        width: 100%;
+    }
+
+    .demo-text {
+        font-size: 1rem;
+    }
+
+    .pricing-card {
+        padding: 25px 15px;
+    }
+
+    .pricing-amount {
+        font-size: 2.5rem;
+    }
+
+    .pricing-period {
+        font-size: 1rem;
+    }
+
+    .pricing-features {
+        max-width: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .pricing-features li {
+        padding: 20px 0 20px 70px !important;
+        font-size: 0.95rem !important;
+        line-height: 1.7 !important;
+        min-height: 50px !important;
+    }
+
+    .pricing-features li::before {
+        content: '✓' !important;
+        position: absolute !important;
+        left: 25px !important;
+        top: 20px !important;
+        color: #d73327 !important;
+        font-weight: 900 !important;
+        font-size: 1.2rem !important;
+        line-height: 1.2 !important;
+        width: 20px !important;
+        height: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: rgba(215, 51, 39, 0.2) !important;
+        border-radius: 50% !important;
+        border: 2px solid #d73327 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .revenue-example {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .revenue-stat {
+        padding: 12px;
+    }
+
+    .development-story {
+        padding: 15px;
+    }
+
+    .final-cta-title {
+        font-size: clamp(1.5rem, 8vw, 2rem);
+    }
+
+    .final-cta-subtitle {
+        font-size: 1rem;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+
+    .footer {
+        padding: 30px 15px;
+    }
+
+    .footer-text {
+        font-size: 1rem;
+    }
+
+    .mobile-menu-btn {
+        padding: 10px 12px !important;
+        font-size: 18px !important;
+    }
+
+    .nav-links.mobile-active a {
+        font-size: 18px !important;
+        padding: 18px 25px !important;
+    }
+
+    .nav-links.mobile-active {
+        gap: 25px !important;
+        padding: 30px 15px !important;
+    }
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}title {
         font-size: clamp(1.8rem, 6vw, 2.5rem);
         margin-bottom: 15px;
     }
@@ -1965,233 +2194,4 @@ body {
         font-size: clamp(1.4rem, 8vw, 1.8rem);
     }
 
-    .section-subtitle {
-        font-size: 1rem;
-    }
-
-    .feature-card, .use-case-card {
-        padding: 20px;
-    }
-
-    .feature-icon, .use-case-icon {
-        font-size: 2.5rem;
-    }
-
-    .feature-coin-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .feature-title, .use-case-title {
-        font-size: 1.1rem;
-    }
-
-    .proven-badge {
-        padding: 20px;
-    }
-
-    .badge-content h4 {
-        font-size: 1.1rem;
-    }
-
-    .badge-content p {
-        font-size: 0.95rem;
-    }
-
-    .phone-frame {
-        width: 180px;
-        height: 360px;
-        padding: 12px;
-    }
-
-    .thumbnail-grid {
-        max-width: 180px;
-        gap: 8px;
-    }
-
-    .simple-thumb {
-        width: 50px;
-        height: 85px;
-    }
-
-    .thumb-label {
-        font-size: 7px;
-        padding: 3px 1px;
-    }
-
-    .showcase-title {
-        font-size: 1.3rem;
-    }
-
-    .highlight-item {
-        padding: 15px;
-    }
-
-    .highlight-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.5rem;
-    }
-
-    .highlight-content h4 {
-        font-size: 1rem;
-    }
-
-    .highlight-content p {
-        font-size: 0.9rem;
-    }
-
-    .showcase-stat {
-        padding: 15px;
-    }
-
-    .showcase-stat .stat-number {
-        font-size: 1.5rem;
-    }
-
-    .demo-highlight {
-        padding: 20px 15px;
-    }
-
-    .demo-cta h4 {
-        font-size: 1.2rem;
-    }
-
-    .demo-cta p {
-        font-size: 1rem;
-    }
-
-    .demo-button {
-        padding: 12px 25px;
-        width: 100%;
-    }
-
-    .demo-text {
-        font-size: 1rem;
-    }
-
-    .pricing-card {
-        padding: 25px 15px;
-    }
-
-    .pricing-amount {
-        font-size: 2.5rem;
-    }
-
-    .pricing-period {
-        font-size: 1rem;
-    }
-
-    .pricing-features {
-        max-width: 100%;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    .pricing-features li {
-        padding: 20px 0 20px 70px !important;
-        font-size: 0.95rem !important;
-        line-height: 1.7 !important;
-        min-height: 50px !important;
-    }
-
-    .pricing-features li::before {
-        content: '✓' !important;
-        position: absolute !important;
-        left: 25px !important;
-        top: 20px !important;
-        color: #d73327 !important;
-        font-weight: 900 !important;
-        font-size: 1.2rem !important;
-        line-height: 1.2 !important;
-        width: 20px !important;
-        height: 20px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        background: rgba(215, 51, 39, 0.2) !important;
-        border-radius: 50% !important;
-        border: 2px solid #d73327 !important;
-        flex-shrink: 0 !important;
-    }
-
-    .revenue-example {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .revenue-stat {
-        padding: 12px;
-    }
-
-    .development-story {
-        padding: 15px;
-    }
-
-    .final-cta-title {
-        font-size: clamp(1.5rem, 8vw, 2rem);
-    }
-
-    .final-cta-subtitle {
-        font-size: 1rem;
-    }
-
-    .cta-primary,
-    .cta-secondary {
-        padding: 15px 30px;
-        font-size: 1rem;
-    }
-
-    .footer {
-        padding: 30px 15px;
-    }
-
-    .footer-text {
-        font-size: 1rem;
-    }
-
-    .mobile-menu-btn {
-        padding: 10px 12px !important;
-        font-size: 18px !important;
-    }
-
-    .nav-links.mobile-active a {
-        font-size: 18px !important;
-        padding: 18px 25px !important;
-    }
-
-    .nav-links.mobile-active {
-        gap: 25px !important;
-        padding: 30px 15px !important;
-    }
-}
-
-/* Animations */
-.fade-in {
-    opacity: 0;
-    transform: translateY(40px);
-    animation: fadeInUp 1s ease forwards;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.scroll-reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-}
+    .section-
