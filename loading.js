@@ -167,8 +167,8 @@ function completeLoading() {
     
     console.log('🔥🪙 Phoenix Crypto Loading Complete - Rising to Glory!');
     
-    // Final message
-    statusMessage.textContent = "Phoenix transformation complete!";
+    // Keep the same message - no change
+    statusMessage.textContent = "Awakening the Phoenix...";
     
     // Add simple completion effects WITHOUT coin burst
     addSimpleCompletionEffects();
