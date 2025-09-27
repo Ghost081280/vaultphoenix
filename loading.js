@@ -97,7 +97,7 @@ function updateProgress() {
     }
 }
 
-// Initialize floating coins with proper layering
+// Initialize floating coins with proper layering and consistent visibility
 function initializeFloatingCoins() {
     const floatingCoins = document.querySelector('.floating-coins');
     if (!floatingCoins) return;
@@ -108,18 +108,17 @@ function initializeFloatingCoins() {
     
     // Replace existing coin images with golden coin
     const coinImages = floatingCoins.querySelectorAll('.crypto-coin-icon');
-    coinImages.forEach(img => {
+    coinImages.forEach((img, index) => {
         img.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
         img.alt = 'Golden Crypto Coin';
         
-        // Ensure coins start hidden and fade in
-        img.style.opacity = '0';
-        img.style.transition = 'opacity 0.5s ease-in-out';
+        // Ensure coins start with consistent opacity and stay visible
+        img.style.opacity = '0.6';
+        img.style.transition = 'none'; // Remove transition to prevent flickering
         
-        // Fade in after a short delay
-        setTimeout(() => {
-            img.style.opacity = '0.6';
-        }, Math.random() * 1000 + 500);
+        // Set consistent visibility immediately - no fade delays
+        img.style.visibility = 'visible';
+        img.style.display = 'block';
     });
 }
 
