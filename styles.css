@@ -525,6 +525,23 @@ body {
     background: linear-gradient(90deg, #d73327, #fb923c, #d73327);
 }
 
+/* Custom Badge and Highlight Icon Images */
+.custom-badge-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
+    transition: all 0.3s ease;
+}
+
+.custom-highlight-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(215, 51, 39, 0.3));
+    transition: all 0.3s ease;
+}
+
 .badge-icon {
     font-size: 2.5rem;
     background: linear-gradient(135deg, #d73327, #fb923c);
@@ -532,6 +549,11 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .badge-content h4 {
@@ -1494,6 +1516,27 @@ body {
 
 /* Enhanced Mobile Responsive Design */
 @media (max-width: 768px) {
+    .custom-badge-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .custom-highlight-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .badge-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .highlight-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+
     .navbar {
         padding: 15px 20px;
     }
@@ -1870,6 +1913,27 @@ body {
 }
 
 @media (max-width: 480px) {
+    .custom-badge-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .custom-highlight-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .badge-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .highlight-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
     .navbar {
         padding: 12px 15px;
     }
