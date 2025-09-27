@@ -366,7 +366,7 @@ function createPhoenixCryptoParticles() {
             left: ${Math.random() * 100}%;
             top: ${Math.random() * 100}%;
             z-index: 1;
-            opacity: 0.3;
+            opacity: 0.4;
             filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
         `;
         hero.appendChild(particle);
@@ -376,10 +376,10 @@ function createPhoenixCryptoParticles() {
     const style = document.createElement('style');
     style.textContent = `
         @keyframes cryptoFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); opacity: 0.2; }
-            25% { transform: translateY(-20px) rotate(90deg) scale(1.1); opacity: 0.4; }
-            50% { transform: translateY(-10px) rotate(180deg) scale(0.9); opacity: 0.3; }
-            75% { transform: translateY(-25px) rotate(270deg) scale(1.2); opacity: 0.35; }
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); opacity: 0.3; }
+            25% { transform: translateY(-20px) rotate(90deg) scale(1.1); opacity: 0.6; }
+            50% { transform: translateY(-10px) rotate(180deg) scale(0.9); opacity: 0.4; }
+            75% { transform: translateY(-25px) rotate(270deg) scale(1.2); opacity: 0.5; }
         }
     `;
     document.head.appendChild(style);
@@ -442,7 +442,7 @@ window.addEventListener('load', () => {
     }
 });
 
-// Enhanced interactive feedback for all CTA buttons with crypto theme
+// Enhanced interactive feedback for all CTA buttons with crypto theme - UPDATED WITH GOLDEN COINS
 document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
@@ -491,7 +491,7 @@ sparkleStyle.textContent = `
 `;
 document.head.appendChild(sparkleStyle);
 
-// Phoenix crypto-themed scroll progress indicator
+// Phoenix crypto-themed scroll progress indicator - UPDATED WITH GOLDEN COIN
 function createPhoenixCryptoScrollIndicator() {
     const indicator = document.createElement('div');
     indicator.style.cssText = `
