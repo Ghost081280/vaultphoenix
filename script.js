@@ -332,6 +332,7 @@ function preloadPhoenixCryptoImages() {
     const criticalImages = [
         'images/IMG_7910.PNG', // Main phoenix crypto image
         'images/9FBD9FC3-8B64-44F7-9B5A-785531847CB9.PNG', // Phoenix holding coin
+        'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG', // Golden coin
         'images/IMG_4380.jpg',
         'images/IMG_4383.jpg',
         'images/IMG_4381.jpg'
@@ -345,25 +346,28 @@ function preloadPhoenixCryptoImages() {
     });
 }
 
-// Phoenix crypto coin floating effect for hero section
+// Phoenix crypto coin floating effect for hero section - UPDATED WITH GOLDEN COIN
 function createPhoenixCryptoParticles() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
     
-    // Create subtle floating crypto coin particles
+    // Create subtle floating crypto coin particles using golden coin image
     for (let i = 0; i < 15; i++) {
-        const particle = document.createElement('div');
-        particle.innerHTML = '🪙';
+        const particle = document.createElement('img');
+        particle.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
+        particle.alt = 'Golden Crypto Coin';
         particle.style.cssText = `
             position: absolute;
-            font-size: ${Math.random() * 12 + 8}px;
-            color: rgba(251, 146, 60, 0.3);
+            width: ${Math.random() * 20 + 15}px;
+            height: ${Math.random() * 20 + 15}px;
             pointer-events: none;
             animation: cryptoFloat ${4 + Math.random() * 6}s ease-in-out infinite;
             animation-delay: ${Math.random() * 3}s;
             left: ${Math.random() * 100}%;
             top: ${Math.random() * 100}%;
             z-index: 1;
+            opacity: 0.3;
+            filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
         `;
         hero.appendChild(particle);
     }
@@ -372,10 +376,10 @@ function createPhoenixCryptoParticles() {
     const style = document.createElement('style');
     style.textContent = `
         @keyframes cryptoFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); opacity: 0.3; }
-            25% { transform: translateY(-20px) rotate(90deg) scale(1.1); opacity: 0.6; }
-            50% { transform: translateY(-10px) rotate(180deg) scale(0.9); opacity: 0.4; }
-            75% { transform: translateY(-25px) rotate(270deg) scale(1.2); opacity: 0.5; }
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); opacity: 0.2; }
+            25% { transform: translateY(-20px) rotate(90deg) scale(1.1); opacity: 0.4; }
+            50% { transform: translateY(-10px) rotate(180deg) scale(0.9); opacity: 0.3; }
+            75% { transform: translateY(-25px) rotate(270deg) scale(1.2); opacity: 0.35; }
         }
     `;
     document.head.appendChild(style);
@@ -442,17 +446,20 @@ window.addEventListener('load', () => {
 document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
-        // Add subtle coin sparkle effect
+        // Add subtle coin sparkle effect using golden coin
         if (Math.random() > 0.7) {
-            const sparkle = document.createElement('span');
-            sparkle.innerHTML = '🪙';
+            const sparkle = document.createElement('img');
+            sparkle.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
+            sparkle.alt = 'Golden Coin Sparkle';
             sparkle.style.cssText = `
                 position: absolute;
-                font-size: 12px;
+                width: 12px;
+                height: 12px;
                 animation: sparkle 0.8s ease-out forwards;
                 pointer-events: none;
                 top: ${Math.random() * 20 - 10}px;
                 left: ${Math.random() * 20 - 10}px;
+                filter: drop-shadow(0 0 4px rgba(240, 165, 0, 0.8));
             `;
             this.style.position = 'relative';
             this.appendChild(sparkle);
@@ -492,7 +499,7 @@ function createPhoenixCryptoScrollIndicator() {
         top: 0;
         left: 0;
         height: 4px;
-        background: linear-gradient(90deg, #d73327, #fb923c, #f59e0b);
+        background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
         z-index: 9999;
         transition: width 0.3s ease;
         width: 0%;
@@ -506,9 +513,20 @@ function createPhoenixCryptoScrollIndicator() {
         const scrolled = (winScroll / height) * 100;
         indicator.style.width = scrolled + '%';
         
-        // Add crypto coin at the end of progress bar
-        if (scrolled > 95) {
-            indicator.style.background = 'linear-gradient(90deg, #d73327, #fb923c, #f59e0b) 🪙';
+        // Add golden coin at the end of progress bar
+        if (scrolled > 95 && !indicator.querySelector('.scroll-coin')) {
+            const coin = document.createElement('img');
+            coin.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
+            coin.className = 'scroll-coin';
+            coin.style.cssText = `
+                position: absolute;
+                right: -10px;
+                top: -8px;
+                width: 20px;
+                height: 20px;
+                filter: drop-shadow(0 0 4px rgba(240, 165, 0, 0.8));
+            `;
+            indicator.appendChild(coin);
         }
     });
 }
@@ -559,7 +577,7 @@ document.addEventListener('DOMContentLoaded', function() {
     createPhoenixCryptoScrollIndicator();
 });
 
-// Easter egg: Konami code for bonus crypto coins
+// Easter egg: Konami code for bonus crypto coins - UPDATED WITH GOLDEN COINS
 let konamiCode = [];
 const konamiSequence = [
     'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
@@ -574,20 +592,23 @@ document.addEventListener('keydown', (e) => {
     }
     
     if (konamiCode.join(',') === konamiSequence.join(',')) {
-        // Trigger bonus crypto coin rain
+        // Trigger bonus crypto coin rain with golden coins
         console.log('🔥🪙 BONUS CRYPTO ACTIVATED! 🪙🔥');
         for (let i = 0; i < 50; i++) {
             setTimeout(() => {
-                const coin = document.createElement('div');
-                coin.innerHTML = '🪙';
+                const coin = document.createElement('img');
+                coin.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
+                coin.alt = 'Golden Bonus Coin';
                 coin.style.cssText = `
                     position: fixed;
-                    font-size: ${Math.random() * 20 + 15}px;
+                    width: ${Math.random() * 30 + 20}px;
+                    height: ${Math.random() * 30 + 20}px;
                     left: ${Math.random() * 100}vw;
                     top: -50px;
                     z-index: 10000;
                     pointer-events: none;
                     animation: coinFall ${Math.random() * 3 + 2}s linear forwards;
+                    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.8));
                 `;
                 document.body.appendChild(coin);
                 
