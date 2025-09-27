@@ -327,14 +327,8 @@ function transitionToMainSite() {
     loadingContainer.style.opacity = '0';
     
     setTimeout(() => {
-        // Redirect to main site or remove loading screen
-        // You can modify this based on your implementation needs
-        
-        // Option 1: Redirect to main page
-        window.location.href = 'index.html';
-        
-        // Option 2: Remove loading screen if it's an overlay
-        // loadingContainer.style.display = 'none';
+        // Redirect to main page (updated to main.html)
+        window.location.href = 'main.html';
         
         console.log('🔥🪙 Welcome to Vault Phoenix - AR Crypto Gaming Revolution!');
     }, 1000);
@@ -357,7 +351,7 @@ function setupErrorHandling() {
         
         // Fallback - still proceed to main site
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = 'main.html';
         }, 3000);
     });
     
