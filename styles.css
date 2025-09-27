@@ -1502,8 +1502,8 @@ body {
         font-size: 22px;
     }
 
-    .logo-icon {
-        font-size: 28px;
+    .logo-image {
+        height: 60px;
     }
 
     .hero {
@@ -1593,236 +1593,7 @@ body {
         padding: 60px 20px;
     }
 
-    .section-subtitle {
-        font-size: 1rem;
-    }
-
-    .feature-card, .use-case-card {
-        padding: 20px;
-    }
-
-    .feature-icon, .use-case-icon {
-        font-size: 2.5rem;
-    }
-
-    .feature-coin-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .feature-title, .use-case-title {
-        font-size: 1.1rem;
-    }
-
-    .proven-badge {
-        padding: 20px;
-    }
-
-    .badge-content h4 {
-        font-size: 1.1rem;
-    }
-
-    .badge-content p {
-        font-size: 0.95rem;
-    }
-
-    .phone-frame {
-        width: 180px;
-        height: 360px;
-        padding: 12px;
-    }
-
-    .thumbnail-grid {
-        max-width: 180px;
-        gap: 8px;
-    }
-
-    .simple-thumb {
-        width: 50px;
-        height: 85px;
-    }
-
-    .thumb-label {
-        font-size: 7px;
-        padding: 3px 1px;
-    }
-
-    .showcase-title {
-        font-size: 1.3rem;
-    }
-
-    .highlight-item {
-        padding: 15px;
-    }
-
-    .highlight-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.5rem;
-    }
-
-    .highlight-content h4 {
-        font-size: 1rem;
-    }
-
-    .highlight-content p {
-        font-size: 0.9rem;
-    }
-
-    .showcase-stat {
-        padding: 15px;
-    }
-
-    .showcase-stat .stat-number {
-        font-size: 1.5rem;
-    }
-
-    .demo-highlight {
-        padding: 20px 15px;
-    }
-
-    .demo-cta h4 {
-        font-size: 1.2rem;
-    }
-
-    .demo-cta p {
-        font-size: 1rem;
-    }
-
-    .demo-button {
-        padding: 12px 25px;
-        width: 100%;
-    }
-
-    .demo-text {
-        font-size: 1rem;
-    }
-
-    .pricing-card {
-        padding: 25px 15px;
-    }
-
-    .pricing-amount {
-        font-size: 2.5rem;
-    }
-
-    .pricing-period {
-        font-size: 1rem;
-    }
-
-    .pricing-features {
-        max-width: 100%;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    .pricing-features li {
-        padding: 20px 0 20px 70px !important;
-        font-size: 0.95rem !important;
-        line-height: 1.7 !important;
-        min-height: 50px !important;
-    }
-
-    .pricing-features li::before {
-        content: '✓' !important;
-        position: absolute !important;
-        left: 25px !important;
-        top: 20px !important;
-        color: #d73327 !important;
-        font-weight: 900 !important;
-        font-size: 1.2rem !important;
-        line-height: 1.2 !important;
-        width: 20px !important;
-        height: 20px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        background: rgba(215, 51, 39, 0.2) !important;
-        border-radius: 50% !important;
-        border: 2px solid #d73327 !important;
-        flex-shrink: 0 !important;
-    }
-
-    .revenue-example {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .revenue-stat {
-        padding: 12px;
-    }
-
-    .development-story {
-        padding: 15px;
-    }
-
-    .final-cta-title {
-        font-size: clamp(1.5rem, 8vw, 2rem);
-    }
-
-    .final-cta-subtitle {
-        font-size: 1rem;
-    }
-
-    .cta-primary,
-    .cta-secondary {
-        padding: 15px 30px;
-        font-size: 1rem;
-    }
-
-    .footer {
-        padding: 30px 15px;
-    }
-
-    .footer-text {
-        font-size: 1rem;
-    }
-
-    .mobile-menu-btn {
-        padding: 10px 12px !important;
-        font-size: 18px !important;
-    }
-
-    .nav-links.mobile-active a {
-        font-size: 18px !important;
-        padding: 18px 25px !important;
-    }
-
-    .nav-links.mobile-active {
-        gap: 25px !important;
-        padding: 30px 15px !important;
-    }
-}
-
-/* Animations */
-.fade-in {
-    opacity: 0;
-    transform: translateY(40px);
-    animation: fadeInUp 1s ease forwards;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.scroll-reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-}title {
+    .section-title {
         font-size: clamp(1.8rem, 6vw, 2.5rem);
         margin-bottom: 15px;
     }
@@ -1965,17 +1736,8 @@ body {
         font-size: 1.2rem;
     }
 
-    .investment-image-container {
-        margin: 40px auto;
-        max-width: 100%;
-        padding: 0 20px;
-    }
-
-    .investment-image {
-        border-radius: 15px;
-    }
-
     .pricing-header {
+        grid-template-columns: 1fr;
         gap: 30px;
         margin-bottom: 40px;
     }
@@ -1983,6 +1745,7 @@ body {
     .investment-image-container {
         max-width: 300px;
         padding: 0 15px;
+        margin: 0 auto;
     }
 
     .investment-image {
@@ -2115,8 +1878,8 @@ body {
         font-size: 18px;
     }
 
-    .logo-icon {
-        font-size: 24px;
+    .logo-image {
+        height: 50px;
     }
 
     .hero {
@@ -2192,6 +1955,560 @@ body {
 
     .section-title {
         font-size: clamp(1.4rem, 8vw, 1.8rem);
+        margin-bottom: 15px;
     }
 
-    .section-
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .feature-card {
+        padding: 20px;
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+    }
+
+    .feature-coin-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .feature-title {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+
+    .feature-description {
+        font-size: 0.95rem;
+    }
+
+    .proven-badge {
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .badge-content h4 {
+        font-size: 1.1rem;
+    }
+
+    .badge-content p {
+        font-size: 0.9rem;
+    }
+
+    .showcase-content {
+        gap: 40px;
+    }
+
+    .showcase-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    .highlight-item {
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .highlight-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
+    .highlight-content h4 {
+        font-size: 1rem;
+    }
+
+    .highlight-content p {
+        font-size: 0.9rem;
+    }
+
+    .showcase-stats {
+        gap: 10px;
+    }
+
+    .showcase-stat {
+        padding: 15px;
+    }
+
+    .showcase-stat .stat-number {
+        font-size: 1.3rem;
+    }
+
+    .showcase-stat .stat-label {
+        font-size: 0.8rem;
+    }
+
+    .demo-highlight {
+        padding: 20px 15px;
+        margin-top: 25px;
+    }
+
+    .demo-cta h4 {
+        font-size: 1.2rem;
+    }
+
+    .demo-cta p {
+        font-size: 0.95rem;
+    }
+
+    .demo-button {
+        padding: 12px 25px;
+        width: 100%;
+    }
+
+    .demo-text {
+        font-size: 1rem;
+    }
+
+    .demo-icon {
+        font-size: 1.5rem;
+    }
+
+    .phone-frame {
+        width: 180px;
+        height: 360px;
+        padding: 12px;
+    }
+
+    .phone-frame::before {
+        width: 50px;
+        height: 5px;
+        top: 20px;
+    }
+
+    .thumbnail-grid {
+        max-width: 180px;
+        gap: 8px;
+    }
+
+    .simple-thumb {
+        width: 50px;
+        height: 85px;
+        border-radius: 10px;
+    }
+
+    .thumb-label {
+        font-size: 7px;
+        padding: 3px 1px;
+    }
+
+    .use-cases-grid {
+        gap: 20px;
+    }
+
+    .use-case-card {
+        padding: 20px;
+    }
+
+    .use-case-icon {
+        font-size: 2rem;
+        margin-bottom: 12px;
+    }
+
+    .use-case-title {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+
+    .use-case-example {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    .use-case-description {
+        font-size: 0.9rem;
+    }
+
+    .pricing-header {
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .investment-image-container {
+        max-width: 250px;
+        padding: 0 10px;
+    }
+
+    .pricing-card {
+        padding: 25px 15px;
+        margin-top: 30px;
+    }
+
+    .pricing-amount {
+        font-size: 2.5rem;
+    }
+
+    .pricing-period {
+        font-size: 1rem;
+    }
+
+    .pricing-features li {
+        padding: 20px 0 20px 70px !important;
+        font-size: 0.95rem !important;
+        line-height: 1.7 !important;
+        min-height: 50px !important;
+    }
+
+    .pricing-features li::before {
+        content: '✓' !important;
+        position: absolute !important;
+        left: 25px !important;
+        top: 20px !important;
+        color: #d73327 !important;
+        font-weight: 900 !important;
+        font-size: 1.2rem !important;
+        line-height: 1.2 !important;
+        width: 20px !important;
+        height: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: rgba(215, 51, 39, 0.2) !important;
+        border-radius: 50% !important;
+        border: 2px solid #d73327 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .revenue-model {
+        padding: 20px;
+        margin-top: 30px;
+    }
+
+    .revenue-title {
+        font-size: 1.4rem;
+    }
+
+    .revenue-example {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .revenue-stat {
+        padding: 12px;
+    }
+
+    .revenue-number {
+        font-size: 1.3rem;
+    }
+
+    .revenue-label {
+        font-size: 0.9rem;
+    }
+
+    .development-story {
+        padding: 15px;
+    }
+
+    .final-cta-title {
+        font-size: clamp(1.5rem, 8vw, 2rem);
+    }
+
+    .final-cta-subtitle {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+        padding: 15px 30px;
+        font-size: 1rem;
+        max-width: 280px;
+    }
+
+    .footer {
+        padding: 30px 15px;
+    }
+
+    .footer-logo {
+        font-size: 1.3rem;
+    }
+
+    .footer-logo-image {
+        height: 40px;
+    }
+
+    .footer-text {
+        font-size: 1rem;
+    }
+
+    .footer-links {
+        gap: 12px;
+    }
+
+    .social-media {
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+    }
+
+    .social-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .mobile-menu-btn {
+        padding: 10px 12px !important;
+        font-size: 18px !important;
+    }
+
+    .nav-links.mobile-active a {
+        font-size: 18px !important;
+        padding: 18px 25px !important;
+    }
+
+    .nav-links.mobile-active {
+        gap: 25px !important;
+        padding: 30px 15px !important;
+    }
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Performance Optimizations */
+.hero,
+.crypto-coin-section,
+.features,
+.app-showcase,
+.use-cases,
+.pricing,
+.final-cta {
+    will-change: transform;
+}
+
+/* Smooth scrolling for all browsers */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .scroll-reveal {
+        transform: none;
+        opacity: 1;
+    }
+    
+    .fade-in {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .hero-title,
+    .crypto-title,
+    .section-title {
+        text-shadow: none;
+        -webkit-text-fill-color: inherit;
+        background: none;
+        color: #ffffff;
+    }
+    
+    .cta-button,
+    .demo-button {
+        border: 2px solid #ffffff;
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .mobile-menu-btn,
+    .demo-button,
+    .cta-button,
+    .social-media {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .hero,
+    .crypto-coin-section,
+    .app-showcase,
+    .use-cases,
+    .pricing,
+    .final-cta {
+        background: white !important;
+        color: black !important;
+    }
+}
+
+/* Focus styles for accessibility */
+.cta-button:focus,
+.demo-button:focus,
+.social-link:focus,
+.mobile-menu-btn:focus,
+.nav-links a:focus {
+    outline: 3px solid #d73327;
+    outline-offset: 2px;
+}
+
+/* Loading states */
+.loaded {
+    opacity: 1;
+}
+
+body:not(.loaded) {
+    opacity: 0;
+}
+
+/* Crypto coin sparkle animation for easter eggs */
+@keyframes sparkle {
+    0% { 
+        transform: translateY(0) scale(1); 
+        opacity: 1; 
+    }
+    100% { 
+        transform: translateY(-20px) scale(0); 
+        opacity: 0; 
+    }
+}
+
+/* Additional coin animations */
+@keyframes coinBounce {
+    0% { 
+        transform: scale(1) rotateY(0deg); 
+    }
+    50% { 
+        transform: scale(1.2) rotateY(180deg); 
+    }
+    100% { 
+        transform: scale(1) rotateY(360deg); 
+    }
+}
+
+@keyframes coinFall {
+    to { 
+        transform: translateY(calc(100vh + 100px)) rotate(720deg); 
+        opacity: 0; 
+    }
+}
+
+/* Phoenix glow effects */
+@keyframes phoenixGlow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 20px rgba(215, 51, 39, 0.3)); 
+    }
+    50% { 
+        filter: drop-shadow(0 0 40px rgba(215, 51, 39, 0.6)); 
+    }
+}
+
+/* Crypto floating particles */
+@keyframes cryptoFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1); 
+        opacity: 0.3; 
+    }
+    25% { 
+        transform: translateY(-20px) rotate(90deg) scale(1.1); 
+        opacity: 0.6; 
+    }
+    50% { 
+        transform: translateY(-10px) rotate(180deg) scale(0.9); 
+        opacity: 0.4; 
+    }
+    75% { 
+        transform: translateY(-25px) rotate(270deg) scale(1.2); 
+        opacity: 0.5; 
+    }
+}
+
+/* Success completion effects */
+@keyframes completionFlash {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes interactionCoin {
+    0% { 
+        transform: translate(-50%, -50%) scale(1) rotate(0deg); 
+        opacity: 1; 
+    }
+    100% { 
+        transform: translate(-50%, -50%) translateY(-100px) scale(0) rotate(360deg); 
+        opacity: 0; 
+    }
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #d73327, #fb923c);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #fb923c, #d73327);
+}
+
+/* Selection styling */
+::selection {
+    background: rgba(215, 51, 39, 0.3);
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: rgba(215, 51, 39, 0.3);
+    color: #ffffff;
+}
