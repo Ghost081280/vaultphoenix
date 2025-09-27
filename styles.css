@@ -410,20 +410,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #d73327, #fb923c);
     border-radius: 15px;
     flex-shrink: 0;
-    box-shadow: 0 8px 20px rgba(215, 51, 39, 0.4);
 }
 
 .benefit-icon.coin-image {
     padding: 8px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
 }
 
 .benefit-icon.revenue-image {
     padding: 8px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
 }
 
 .custom-coin-icon {
@@ -569,10 +565,6 @@ body {
 
 .badge-icon {
     font-size: 2.5rem;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     flex-shrink: 0;
     width: 60px;
     height: 60px;
@@ -668,34 +660,28 @@ body {
     transition: all 0.3s ease;
 }
 
-.feature-icon.ar-discovery-image {
-    padding: 8px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    border-radius: 15px;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 20px rgba(215, 51, 39, 0.4);
+.feature-phoenix-brand-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
+    transition: all 0.3s ease;
 }
 
-.feature-icon.crypto-gaming-image {
-    padding: 8px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    border-radius: 15px;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 20px rgba(215, 51, 39, 0.4);
+.feature-analytics-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
+    transition: all 0.3s ease;
 }
 
 .feature-card:hover .feature-coin-icon,
 .feature-card:hover .feature-revenue-icon,
 .feature-card:hover .feature-ar-discovery-icon,
-.feature-card:hover .feature-crypto-gaming-icon {
+.feature-card:hover .feature-crypto-gaming-icon,
+.feature-card:hover .feature-phoenix-brand-icon,
+.feature-card:hover .feature-analytics-icon {
     transform: scale(1.1) rotate(5deg);
     filter: drop-shadow(0 6px 12px rgba(215, 51, 39, 0.4)) brightness(1.1);
 }
@@ -896,10 +882,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #d73327, #fb923c);
     border-radius: 15px;
     flex-shrink: 0;
-    box-shadow: 0 8px 20px rgba(215, 51, 39, 0.4);
 }
 
 .highlight-content h4 {
@@ -1743,15 +1727,11 @@ body {
     .feature-coin-icon,
     .feature-revenue-icon,
     .feature-ar-discovery-icon,
-    .feature-crypto-gaming-icon {
+    .feature-crypto-gaming-icon,
+    .feature-phoenix-brand-icon,
+    .feature-analytics-icon {
         width: 48px;
         height: 48px;
-    }
-
-    .feature-icon.ar-discovery-image,
-    .feature-icon.crypto-gaming-image {
-        width: 64px;
-        height: 64px;
     }
 
     .feature-title {
@@ -2138,15 +2118,11 @@ body {
     .feature-coin-icon,
     .feature-revenue-icon,
     .feature-ar-discovery-icon,
-    .feature-crypto-gaming-icon {
+    .feature-crypto-gaming-icon,
+    .feature-phoenix-brand-icon,
+    .feature-analytics-icon {
         width: 40px;
         height: 40px;
-    }
-
-    .feature-icon.ar-discovery-image,
-    .feature-icon.crypto-gaming-image {
-        width: 56px;
-        height: 56px;
     }
 
     .feature-title {
