@@ -33,6 +33,9 @@ function initializeLoading() {
     
     // Add interaction feedback
     addInteractionEffects();
+    
+    // Initialize floating coins with proper z-index
+    initializeFloatingCoins();
 }
 
 // Simulate realistic loading progress
@@ -94,6 +97,32 @@ function updateProgress() {
     }
 }
 
+// Initialize floating coins with proper layering
+function initializeFloatingCoins() {
+    const floatingCoins = document.querySelector('.floating-coins');
+    if (!floatingCoins) return;
+    
+    // Ensure floating coins stay in background
+    floatingCoins.style.zIndex = '1';
+    floatingCoins.style.pointerEvents = 'none';
+    
+    // Replace existing coin images with golden coin
+    const coinImages = floatingCoins.querySelectorAll('.crypto-coin-icon');
+    coinImages.forEach(img => {
+        img.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
+        img.alt = 'Golden Crypto Coin';
+        
+        // Ensure coins start hidden and fade in
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.5s ease-in-out';
+        
+        // Fade in after a short delay
+        setTimeout(() => {
+            img.style.opacity = '0.6';
+        }, Math.random() * 1000 + 500);
+    });
+}
+
 // Add interactive effects
 function addInteractionEffects() {
     // Create additional floating coins on user interaction
@@ -115,25 +144,27 @@ function addInteractionEffects() {
     }
 }
 
-// Create coin effect on interaction
+// Create coin effect on interaction - using golden coin
 function createInteractionCoin(event) {
-    const coin = document.createElement('div');
-    coin.innerHTML = '🪙';
+    const coin = document.createElement('img');
+    coin.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
+    coin.alt = 'Golden Crypto Coin';
     coin.style.cssText = `
         position: fixed;
         pointer-events: none;
-        font-size: 2rem;
-        color: rgba(251, 146, 60, 0.8);
-        z-index: 9999;
+        width: 30px;
+        height: 30px;
+        z-index: 1;
         animation: interactionCoin 1.5s ease-out forwards;
+        filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.7));
     `;
     
     // Position at click/touch location
     const x = event.clientX || (event.touches && event.touches[0].clientX) || window.innerWidth / 2;
     const y = event.clientY || (event.touches && event.touches[0].clientY) || window.innerHeight / 2;
     
-    coin.style.left = x + 'px';
-    coin.style.top = y + 'px';
+    coin.style.left = (x - 15) + 'px'; // Center the coin
+    coin.style.top = (y - 15) + 'px';
     
     document.body.appendChild(coin);
     
@@ -150,11 +181,11 @@ const interactionCoinStyle = document.createElement('style');
 interactionCoinStyle.textContent = `
     @keyframes interactionCoin {
         0% { 
-            transform: translate(-50%, -50%) scale(1) rotate(0deg); 
+            transform: translate(0, 0) scale(1) rotate(0deg); 
             opacity: 1; 
         }
         100% { 
-            transform: translate(-50%, -50%) translateY(-100px) scale(0) rotate(360deg); 
+            transform: translate(0, -100px) scale(0) rotate(360deg); 
             opacity: 0; 
         }
     }
@@ -204,7 +235,7 @@ function addSimpleCompletionEffects() {
         width: 100vw;
         height: 100vh;
         background: linear-gradient(45deg, rgba(215, 51, 39, 0.3), rgba(251, 146, 60, 0.3));
-        z-index: 9998;
+        z-index: 5;
         animation: completionFlash 1s ease-out forwards;
         pointer-events: none;
     `;
