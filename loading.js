@@ -3,16 +3,7 @@
 
 // Loading messages array - Phoenix crypto themed
 const loadingMessages = [
-    "Igniting crypto engines...",
-    "Awakening the Phoenix...",
-    "Initializing AR systems...",
-    "Forging crypto coins...",
-    "Rising from digital ashes...",
-    "Preparing epic adventures...",
-    "Loading treasure maps...",
-    "Encrypting player data...",
-    "Calibrating GPS systems...",
-    "Phoenix transformation complete!"
+    "Awakening the Phoenix..."
 ];
 
 // Loading progress simulation
@@ -37,8 +28,8 @@ function initializeLoading() {
     // Update progress animation
     updateProgress();
     
-    // Cycle through loading messages
-    cycleLoadingMessages();
+    // Set the single loading message
+    statusMessage.textContent = loadingMessages[0];
     
     // Add interaction feedback
     addInteractionEffects();
@@ -101,30 +92,6 @@ function updateProgress() {
     if (isLoading) {
         requestAnimationFrame(updateProgress);
     }
-}
-
-// Cycle through loading messages
-function cycleLoadingMessages() {
-    if (!isLoading || messageIndex >= loadingMessages.length) return;
-    
-    // Fade out current message
-    statusMessage.style.opacity = '0';
-    
-    setTimeout(() => {
-        // Update message
-        statusMessage.textContent = loadingMessages[messageIndex];
-        
-        // Fade in new message
-        statusMessage.style.opacity = '1';
-        
-        messageIndex++;
-        
-        // Schedule next message
-        setTimeout(() => {
-            cycleLoadingMessages();
-        }, 2000 + Math.random() * 1000); // Vary timing for realism
-        
-    }, 300);
 }
 
 // Add interactive effects
@@ -194,7 +161,7 @@ interactionCoinStyle.textContent = `
 `;
 document.head.appendChild(interactionCoinStyle);
 
-// Complete loading and transition
+// Complete loading and transition - NO COIN BURST
 function completeLoading() {
     isLoading = false;
     
@@ -203,20 +170,17 @@ function completeLoading() {
     // Final message
     statusMessage.textContent = "Phoenix transformation complete!";
     
-    // Add completion effects
-    addCompletionEffects();
+    // Add simple completion effects WITHOUT coin burst
+    addSimpleCompletionEffects();
     
     // Transition to main site after effects
     setTimeout(() => {
         transitionToMainSite();
-    }, 2000);
+    }, 1500);
 }
 
-// Add spectacular completion effects
-function addCompletionEffects() {
-    // Create coin burst effect
-    createCoinBurst();
-    
+// Add simple completion effects WITHOUT spinning coins
+function addSimpleCompletionEffects() {
     // Intensify phoenix glow
     const phoenixImage = document.querySelector('.phoenix-image');
     const logoGlow = document.querySelector('.logo-glow');
@@ -266,58 +230,6 @@ completionFlashStyle.textContent = `
 `;
 document.head.appendChild(completionFlashStyle);
 
-// Create coin burst effect
-function createCoinBurst() {
-    const burstCount = 15;
-    const container = document.querySelector('.loading-container');
-    
-    for (let i = 0; i < burstCount; i++) {
-        setTimeout(() => {
-            const coin = document.createElement('div');
-            coin.innerHTML = '🪙';
-            coin.style.cssText = `
-                position: absolute;
-                font-size: 2rem;
-                color: rgba(251, 146, 60, 0.9);
-                pointer-events: none;
-                z-index: 9999;
-                left: 50%;
-                top: 50%;
-                animation: coinBurst 2s ease-out forwards;
-            `;
-            
-            // Random direction for burst
-            const angle = (360 / burstCount) * i;
-            coin.style.setProperty('--burst-angle', angle + 'deg');
-            
-            container.appendChild(coin);
-            
-            // Remove after animation
-            setTimeout(() => {
-                if (coin.parentNode) {
-                    coin.parentNode.removeChild(coin);
-                }
-            }, 2000);
-        }, i * 50);
-    }
-}
-
-// Add coin burst animation
-const coinBurstStyle = document.createElement('style');
-coinBurstStyle.textContent = `
-    @keyframes coinBurst {
-        0% { 
-            transform: translate(-50%, -50%) rotate(var(--burst-angle)) translateY(0) scale(1); 
-            opacity: 1; 
-        }
-        100% { 
-            transform: translate(-50%, -50%) rotate(var(--burst-angle)) translateY(-200px) scale(0); 
-            opacity: 0; 
-        }
-    }
-`;
-document.head.appendChild(coinBurstStyle);
-
 // Transition to main site
 function transitionToMainSite() {
     // Fade out loading screen
@@ -327,7 +239,7 @@ function transitionToMainSite() {
     loadingContainer.style.opacity = '0';
     
     setTimeout(() => {
-        // Redirect to main page (updated to main.html)
+        // Redirect to main page
         window.location.href = 'main.html';
         
         console.log('🔥🪙 Welcome to Vault Phoenix - AR Crypto Gaming Revolution!');
