@@ -886,6 +886,20 @@ body {
     flex-shrink: 0;
 }
 
+/* Custom Showcase Icon Styling - NEW LARGER ICONS */
+.custom-showcase-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
+    transition: all 0.3s ease;
+}
+
+.highlight-item:hover .custom-showcase-icon {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 6px 12px rgba(215, 51, 39, 0.4)) brightness(1.1);
+}
+
 .highlight-content h4 {
     font-size: 1.2rem;
     font-weight: 800;
@@ -1584,6 +1598,11 @@ body {
         height: 35px;
     }
 
+    .custom-showcase-icon {
+        width: 40px;
+        height: 40px;
+    }
+
     .custom-revenue-icon {
         width: 44px;
         height: 44px;
@@ -1989,6 +2008,11 @@ body {
     .custom-highlight-icon {
         width: 30px;
         height: 30px;
+    }
+
+    .custom-showcase-icon {
+        width: 35px;
+        height: 35px;
     }
 
     .custom-revenue-icon {
