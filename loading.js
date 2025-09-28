@@ -106,11 +106,11 @@ function initializeFloatingCoins() {
     floatingCoins.style.zIndex = '1';
     floatingCoins.style.pointerEvents = 'none';
     
-    // Replace existing coin images with golden coin
+    // FIXED: Update coin image sources to use VPEmberCoin.PNG
     const coinImages = floatingCoins.querySelectorAll('.crypto-coin-icon');
     coinImages.forEach((img, index) => {
-        img.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
-        img.alt = 'Golden Crypto Coin';
+        img.src = 'images/VPEmberCoin.PNG';
+        img.alt = 'VP Ember Coin';
         
         // Ensure coins start with consistent opacity and stay visible
         img.style.opacity = '0.6';
@@ -143,11 +143,11 @@ function addInteractionEffects() {
     }
 }
 
-// Create coin effect on interaction - using golden coin
+// Create coin effect on interaction - FIXED: using VPEmberCoin.PNG
 function createInteractionCoin(event) {
     const coin = document.createElement('img');
-    coin.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
-    coin.alt = 'Golden Crypto Coin';
+    coin.src = 'images/VPEmberCoin.PNG';
+    coin.alt = 'VP Ember Coin';
     coin.style.cssText = `
         position: fixed;
         pointer-events: none;
