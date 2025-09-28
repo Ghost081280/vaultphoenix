@@ -309,7 +309,7 @@ body {
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
 }
 
-/* REDESIGNED: Compact Ember Token Section - Professional Senior Designer Layout */
+/* REDESIGNED: Compact Ember Token Section - REMOVED FIRE EMOJI */
 .ember-token-section {
     padding: 80px 40px;
     background: linear-gradient(135deg, #7c2d12 0%, #dc2626 25%, #ea580c 50%, #f59e0b 75%, #eab308 100%);
@@ -432,7 +432,7 @@ body {
     text-shadow: 0 2px 10px rgba(240, 165, 0, 0.3);
 }
 
-/* Right Side: Content */
+/* Right Side: Content - REMOVED FIRE EMOJI ICON */
 .ember-text {
     display: flex;
     flex-direction: column;
@@ -443,18 +443,7 @@ body {
     text-align: left;
 }
 
-.ember-icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    display: block;
-    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
-    animation: emberPulse 3s ease-in-out infinite;
-}
-
-@keyframes emberPulse {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6)); }
-    50% { transform: scale(1.1); filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8)); }
-}
+/* REMOVED: .ember-icon completely - no more fire emoji */
 
 .ember-title {
     font-size: clamp(2rem, 4vw, 3rem);
@@ -1966,11 +1955,6 @@ body {
         font-size: 1.5rem;
     }
 
-    .ember-icon {
-        font-size: 2rem;
-        margin-bottom: 10px;
-    }
-
     .ember-title {
         font-size: clamp(1.8rem, 6vw, 2.5rem);
         margin-bottom: 10px;
@@ -2254,8 +2238,7 @@ body {
         opacity: 1;
     }
     
-    .ember-glow,
-    .ember-icon {
+    .ember-glow {
         animation: none !important;
     }
 }
