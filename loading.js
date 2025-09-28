@@ -1,6 +1,6 @@
 // Vault Phoenix - Loading Page JavaScript
 // Phoenix Rising from Digital Ashes - ENHANCED UX/UI Design
-// MAJOR UPDATE: Enhanced layout monitoring and responsive optimizations
+// RESTORED: All floating coin functionality and effects
 
 // Loading messages array - Phoenix crypto themed
 const loadingMessages = [
@@ -37,7 +37,7 @@ function initializeLoading() {
     // Add interaction feedback
     addInteractionEffects();
     
-    // Initialize all 12 floating coins
+    // RESTORED: Initialize all 12 floating coins with full functionality
     initializeAllFloatingCoins();
     
     // ENHANCED: Monitor layout for optimal sizing
@@ -112,7 +112,7 @@ function updateProgress() {
     }
 }
 
-// ENHANCED: Initialize all 12 floating coins with improved setup
+// RESTORED: Initialize all 12 floating coins with full enhanced setup
 function initializeAllFloatingCoins() {
     const floatingCoins = document.querySelector('.floating-coins');
     if (!floatingCoins) {
@@ -120,8 +120,8 @@ function initializeAllFloatingCoins() {
         return;
     }
     
-    // ENFORCE strict background positioning
-    floatingCoins.style.zIndex = '-5';
+    // ENFORCE proper background positioning - behind content but visible
+    floatingCoins.style.zIndex = '1';
     floatingCoins.style.pointerEvents = 'none';
     
     // Get all 12 coin images and set them up properly
@@ -133,21 +133,21 @@ function initializeAllFloatingCoins() {
         img.src = 'images/VPEmberCoin.PNG';
         img.alt = 'VP Ember Coin';
         
-        // ENHANCED styling with better visibility
-        img.style.opacity = '0.4'; // More visible than before
-        img.style.transition = 'none';
+        // RESTORED: Enhanced styling with full visibility and animation
+        img.style.opacity = '0.6'; // Visible floating coins
+        img.style.transition = 'all 0.3s ease'; // Smooth hover effects
         img.style.visibility = 'visible';
         img.style.display = 'block';
         img.style.pointerEvents = 'none';
-        img.style.zIndex = '-5';
+        img.style.zIndex = '1';
         
-        // Responsive sizing with better scaling
-        img.style.width = 'clamp(25px, 3vw, 40px)';
-        img.style.height = 'clamp(25px, 3vw, 40px)';
+        // Responsive sizing with proper scaling
+        img.style.width = 'clamp(30px, 4vw, 50px)';
+        img.style.height = 'clamp(30px, 4vw, 50px)';
         
-        // Enhanced glow for visual interest
+        // RESTORED: Enhanced glow for visual interest with variation
         const glowIntensity = 0.5 + (index % 4) * 0.15; // Vary between 0.5-0.95
-        img.style.filter = `drop-shadow(0 0 6px rgba(240, 165, 0, ${glowIntensity}))`;
+        img.style.filter = `drop-shadow(0 0 10px rgba(240, 165, 0, ${glowIntensity}))`;
         
         // Add error handling for each coin
         img.addEventListener('error', function() {
@@ -157,19 +157,32 @@ function initializeAllFloatingCoins() {
         
         img.addEventListener('load', function() {
             console.log(`🔥🪙 Coin ${index + 1} loaded successfully`);
-            this.style.opacity = '0.4';
+            this.style.opacity = '0.6';
+        });
+        
+        // RESTORED: Add enhanced hover effects for interaction
+        img.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.3) rotate(45deg)';
+            this.style.filter = `drop-shadow(0 0 20px rgba(240, 165, 0, 1)) brightness(1.3)`;
+            this.style.opacity = '0.9';
+        });
+        
+        img.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.filter = `drop-shadow(0 0 10px rgba(240, 165, 0, ${glowIntensity}))`;
+            this.style.opacity = '0.6';
         });
     });
     
     // Ensure parent coins have proper positioning
     const coinContainers = floatingCoins.querySelectorAll('.coin');
     coinContainers.forEach((coin, index) => {
-        coin.style.zIndex = '-5';
+        coin.style.zIndex = '1';
         coin.style.pointerEvents = 'none';
         console.log(`🔥🪙 Coin container ${index + 1} initialized`);
     });
     
-    console.log('🔥🪙 All 12 floating coins initialized with enhanced visibility');
+    console.log('🔥🪙 All 12 floating coins initialized with enhanced visibility and animations');
 }
 
 // ENHANCED: Monitor layout optimization for proper content sizing
@@ -218,7 +231,7 @@ function monitorLayoutOptimization() {
     window.addEventListener('resize', debounce(checkLayoutOptimization, 250));
 }
 
-// NEW: Monitor viewport changes for responsive adjustments
+// Monitor viewport changes for responsive adjustments
 function monitorViewportChanges() {
     let currentViewport = {
         width: window.innerWidth,
@@ -260,7 +273,7 @@ function monitorViewportChanges() {
     });
 }
 
-// NEW: Apply responsive optimizations based on viewport
+// Apply responsive optimizations based on viewport
 function applyResponsiveOptimizations(viewport) {
     const loadingContent = document.querySelector('.loading-content');
     const phoenixImage = document.querySelector('.phoenix-image');
@@ -294,7 +307,7 @@ function applyResponsiveOptimizations(viewport) {
     }
 }
 
-// NEW: Apply compact mode if content doesn't fit
+// Apply compact mode if content doesn't fit
 function applyCompactMode() {
     const loadingContent = document.querySelector('.loading-content');
     if (loadingContent) {
@@ -319,7 +332,7 @@ function debounce(func, wait) {
 
 // Add interactive effects
 function addInteractionEffects() {
-    // Minimal interaction coins on user action
+    // RESTORED: Create interaction coins on user action
     document.addEventListener('click', createInteractionCoin);
     document.addEventListener('touchstart', createInteractionCoin);
     
@@ -338,7 +351,7 @@ function addInteractionEffects() {
     }
 }
 
-// ENHANCED: Create interaction coin effect with better sizing
+// RESTORED: Create interaction coin effect with enhanced sizing and animation
 function createInteractionCoin(event) {
     const coin = document.createElement('img');
     coin.src = 'images/VPEmberCoin.PNG';
@@ -346,19 +359,19 @@ function createInteractionCoin(event) {
     coin.style.cssText = `
         position: fixed;
         pointer-events: none;
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
         z-index: 1000;
-        animation: interactionCoin 1.3s ease-out forwards;
-        filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.8));
+        animation: interactionCoin 1.5s ease-out forwards;
+        filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.9));
     `;
     
     // Position at click/touch location
     const x = event.clientX || (event.touches && event.touches[0].clientX) || window.innerWidth / 2;
     const y = event.clientY || (event.touches && event.touches[0].clientY) || window.innerHeight / 2;
     
-    coin.style.left = (x - 15) + 'px'; // Center the coin
-    coin.style.top = (y - 15) + 'px';
+    coin.style.left = (x - 17.5) + 'px'; // Center the coin
+    coin.style.top = (y - 17.5) + 'px';
     
     document.body.appendChild(coin);
     
@@ -367,7 +380,7 @@ function createInteractionCoin(event) {
         if (coin.parentNode) {
             coin.parentNode.removeChild(coin);
         }
-    }, 1300);
+    }, 1500);
 }
 
 // Enhanced interaction coin animation
@@ -379,7 +392,7 @@ interactionCoinStyle.textContent = `
             opacity: 1; 
         }
         100% { 
-            transform: translate(0, -90px) scale(0) rotate(360deg); 
+            transform: translate(0, -100px) scale(0) rotate(360deg); 
             opacity: 0; 
         }
     }
@@ -397,16 +410,16 @@ function completeLoading() {
         statusMessage.textContent = "Awakening the Phoenix...";
     }
     
-    // Add enhanced completion effects
+    // RESTORED: Add enhanced completion effects WITH coin burst
     addEnhancedCompletionEffects();
     
     // Transition to main site after effects
     setTimeout(() => {
         transitionToMainSite();
-    }, 1600);
+    }, 1800);
 }
 
-// ENHANCED: More dramatic completion effects
+// RESTORED: Enhanced completion effects with dramatic coin burst
 function addEnhancedCompletionEffects() {
     // Enhanced phoenix glow
     const phoenixImage = document.querySelector('.phoenix-image');
@@ -422,8 +435,16 @@ function addEnhancedCompletionEffects() {
         logoGlow.style.transform = 'translate(-50%, -50%) scale(1.5)';
     }
     
-    // ENHANCED: Create dramatic completion coin burst
+    // RESTORED: Create dramatic completion coin burst
     createDramaticCompletionCoinBurst();
+    
+    // RESTORED: Trigger coin celebration on all floating coins
+    const floatingCoins = document.querySelectorAll('.crypto-coin-icon');
+    floatingCoins.forEach((coin, index) => {
+        setTimeout(() => {
+            coin.style.animation = 'coinCelebration 1.5s ease-out';
+        }, index * 100);
+    });
     
     // Enhanced flash effect
     const flashEffect = document.createElement('div');
@@ -449,32 +470,32 @@ function addEnhancedCompletionEffects() {
     }, 1400);
 }
 
-// ENHANCED: Create more dramatic completion coin burst
+// RESTORED: Create dramatic completion coin burst
 function createDramaticCompletionCoinBurst() {
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     
-    // Create 15 coins for more dramatic effect
-    for (let i = 0; i < 15; i++) {
+    // Create 20 coins for more dramatic effect
+    for (let i = 0; i < 20; i++) {
         const coin = document.createElement('img');
         coin.src = 'images/VPEmberCoin.PNG';
         coin.alt = 'VP Ember Completion Coin';
         
-        const angle = (i / 15) * Math.PI * 2;
-        const distance = Math.random() * 100 + 150; // Varied distance
+        const angle = (i / 20) * Math.PI * 2;
+        const distance = Math.random() * 150 + 200; // Varied distance
         const endX = centerX + Math.cos(angle) * distance;
         const endY = centerY + Math.sin(angle) * distance;
         
         coin.style.cssText = `
             position: fixed;
-            width: ${Math.random() * 15 + 35}px;
-            height: ${Math.random() * 15 + 35}px;
-            left: ${centerX - 20}px;
-            top: ${centerY - 20}px;
+            width: ${Math.random() * 20 + 40}px;
+            height: ${Math.random() * 20 + 40}px;
+            left: ${centerX - 25}px;
+            top: ${centerY - 25}px;
             z-index: 1000;
             pointer-events: none;
-            filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.9));
-            animation: enhancedCoinBurst${i} 2s ease-out forwards;
+            filter: drop-shadow(0 0 20px rgba(240, 165, 0, 1));
+            animation: enhancedCoinBurst${i} 2.5s ease-out forwards;
         `;
         
         // Create unique animation for each coin
@@ -500,7 +521,7 @@ function createDramaticCompletionCoinBurst() {
             if (coin.parentNode) {
                 coin.parentNode.removeChild(coin);
             }
-        }, 2000);
+        }, 2500);
     }
 }
 
@@ -618,13 +639,15 @@ function applyDeviceOptimizations() {
         }
     }
     
-    // Enhanced mobile coin management
+    // RESTORED: Enhanced mobile coin management
     if (isSmallMobile) {
+        // Hide some coins on small mobile to reduce visual noise
         document.querySelectorAll('.coin-3, .coin-4, .coin-5, .coin-6, .coin-7, .coin-8, .coin-9, .coin-10, .coin-11, .coin-12').forEach(coin => {
             coin.style.display = 'none';
         });
         console.log('🔥🪙 Small mobile optimization: Reduced to 2 coins');
     } else if (isMobile) {
+        // Hide some coins on mobile to reduce visual noise
         document.querySelectorAll('.coin-7, .coin-8, .coin-11, .coin-12').forEach(coin => {
             coin.style.display = 'none';
         });
@@ -636,7 +659,7 @@ function applyDeviceOptimizations() {
     // Enhanced performance optimization
     if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
         document.querySelectorAll('.coin').forEach(coin => {
-            coin.style.animationDuration = '14s'; // Even slower for low-end devices
+            coin.style.animationDuration = '14s'; // Slower for low-end devices
         });
         console.log('🔥🪙 Performance optimization: Slower animations for low-end device');
     }
@@ -648,49 +671,10 @@ function enhanceAccessibility() {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.querySelectorAll('.coin, .crypto-coin-icon').forEach(element => {
             element.style.animation = 'none';
-            element.style.opacity = '0.1';
+            element.style.opacity = '0.2';
         });
         
         const phoenixImage = document.querySelector('.phoenix-image');
         if (phoenixImage) {
             phoenixImage.style.animation = 'none';
         }
-        
-        console.log('🔥🪙 Reduced motion mode activated for accessibility');
-    }
-    
-    // High contrast mode support
-    if (window.matchMedia && window.matchMedia('(prefers-contrast: high)').matches) {
-        document.querySelectorAll('.crypto-coin-icon').forEach(coin => {
-            coin.style.opacity = '0.1';
-        });
-        
-        console.log('🔥🪙 High contrast mode activated');
-    }
-    
-    // Enhanced focus management
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Tab') {
-            // Prevent tab navigation on loading screen
-            e.preventDefault();
-        }
-    });
-}
-
-// Initialize everything when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('🔥🪙 VAULT PHOENIX ENHANCED LOADING SYSTEM ACTIVATED');
-    
-    initializeLoading();
-    monitorPerformance();
-    setupErrorHandling();
-    applyDeviceOptimizations();
-    enhanceAccessibility();
-    
-    console.log('🔥🪙 Enhanced loading sequence with larger layout and optimized sizing initiated...');
-});
-
-// Enhanced console welcome message
-console.log('%c🔥🪙 VAULT PHOENIX - ENHANCED LOADING SYSTEM', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 ENHANCED: Larger phoenix image and optimized content layout', 'color: #fb923c; font-size: 14px; font-weight: bold;');
-console.log('%c🪙 Responsive optimization with enhanced mobile/desktop support', 'color: #f0a500; font-size: 12px; font-style: italic;');
