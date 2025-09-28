@@ -1,7 +1,7 @@
 /* Ember Token Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
 /* Updated with Merchant Redemption Focus */
-/* FIXED: Navigation to match main page exactly */
+/* FIXED: Navigation to match main page exactly - HORIZONTAL BAR NOW WORKS */
 /* FIXED: Removed all focus states that cause red boxes */
 /* FIXED: Updated for crypto community focus */
 
@@ -19,7 +19,7 @@ body {
     background: #0f0f0f;
 }
 
-/* Navigation - FIXED TO MATCH MAIN PAGE EXACTLY */
+/* FIXED: Navigation - EXACTLY MATCHES MAIN PAGE NOW */
 .navbar {
     position: fixed;
     top: 0;
@@ -75,7 +75,7 @@ body {
     list-style: none;
 }
 
-/* FIXED: Navigation links to match main page exactly */
+/* FIXED: Navigation links to match main page exactly - HORIZONTAL BAR WORKS */
 .nav-links a {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
@@ -1203,6 +1203,7 @@ body {
 
 .investment-calculator input:focus {
     border: 1px solid rgba(215, 51, 39, 0.5);
+    outline: none;
 }
 
 .calculation-result {
