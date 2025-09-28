@@ -338,6 +338,7 @@ function preloadPhoenixCryptoImages() {
         'images/IMG_7910.PNG', // Main phoenix crypto image
         'images/9FBD9FC3-8B64-44F7-9B5A-785531847CB9.PNG', // Phoenix holding coin
         'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG', // Golden coin
+        'images/VPEmberCoin.PNG', // New ember coin image
         'images/IMG_4380.jpg',
         'images/IMG_4383.jpg',
         'images/IMG_4381.jpg'
@@ -599,7 +600,7 @@ sparkleStyle.textContent = `
 `;
 document.head.appendChild(sparkleStyle);
 
-// Phoenix crypto-themed scroll progress indicator - UPDATED WITH GOLDEN COIN
+// Phoenix crypto-themed scroll progress indicator - FIXED VERSION WITHOUT BROKEN IMAGES
 function createPhoenixCryptoScrollIndicator() {
     const indicator = document.createElement('div');
     indicator.style.cssText = `
@@ -621,21 +622,8 @@ function createPhoenixCryptoScrollIndicator() {
         const scrolled = (winScroll / height) * 100;
         indicator.style.width = scrolled + '%';
         
-        // Add golden coin at the end of progress bar
-        if (scrolled > 95 && !indicator.querySelector('.scroll-coin')) {
-            const coin = document.createElement('img');
-            coin.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
-            coin.className = 'scroll-coin';
-            coin.style.cssText = `
-                position: absolute;
-                right: -10px;
-                top: -8px;
-                width: 20px;
-                height: 20px;
-                filter: drop-shadow(0 0 4px rgba(240, 165, 0, 0.8));
-            `;
-            indicator.appendChild(coin);
-        }
+        // FIXED: No longer adding coin images to prevent broken image issue
+        // The progress bar now works without any coin elements that could break
     });
 }
 
