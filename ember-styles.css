@@ -1,5 +1,6 @@
 /* Ember Token Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
+/* Updated with Merchant Redemption Focus */
 
 * {
     margin: 0;
@@ -191,12 +192,20 @@ body {
 .ember-hero-title {
     font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 900;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #f0a500 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: -0.02em;
+}
+
+.ember-hero-subtitle-main {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #f0a500;
+    text-shadow: 0 2px 10px rgba(240, 165, 0, 0.3);
 }
 
 .ember-hero-subtitle {
@@ -293,6 +302,191 @@ body {
     transform: translateY(-3px);
 }
 
+/* How It Works Section */
+.how-it-works-section {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
+}
+
+.how-it-works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.stakeholder-card {
+    background: rgba(215, 51, 39, 0.1);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stakeholder-card:hover {
+    transform: translateY(-10px);
+    background: rgba(215, 51, 39, 0.15);
+    box-shadow: 0 30px 60px rgba(215, 51, 39, 0.2);
+}
+
+.stakeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: block;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+}
+
+.stakeholder-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 25px;
+}
+
+.stakeholder-flow {
+    margin-bottom: 30px;
+}
+
+.flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.step-number {
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.step-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.dual-path {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.path-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(240, 165, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+.path-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.path-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.path-divider {
+    text-align: center;
+    color: #f0a500;
+    font-weight: 800;
+    padding: 5px 0;
+}
+
+.stakeholder-benefits h4 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.stakeholder-benefits ul {
+    list-style: none;
+    padding: 0;
+}
+
+.stakeholder-benefits li {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.stakeholder-benefits li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #f0a500;
+    font-weight: 800;
+}
+
+.value-proposition {
+    background: rgba(240, 165, 0, 0.1);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    text-align: center;
+}
+
+.value-proposition h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 30px;
+}
+
+.utility-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.utility-item {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    text-align: center;
+}
+
+.utility-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.utility-item h4 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.utility-item p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
 /* Ember Sections */
 .ember-section {
     padding: 120px 40px;
@@ -371,6 +565,7 @@ body {
     font-size: 1.1rem;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
 }
 
 .whitepaper-sections {
@@ -469,6 +664,21 @@ body {
     background: rgba(240, 165, 0, 0.15);
 }
 
+.pilot-phase {
+    border-color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+}
+
+.expansion-phase {
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.scaling-phase {
+    border-color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
 .roadmap-quarter {
     font-size: 1.5rem;
     font-weight: 900;
@@ -509,12 +719,75 @@ body {
 
 .roadmap-tasks {
     list-style: none;
+    margin-bottom: 20px;
 }
 
 .roadmap-tasks li {
     padding: 8px 0;
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.9);
+}
+
+.roadmap-note {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #f0a500;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.trust-signals {
+    margin-top: 60px;
+}
+
+.trust-signals h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.trust-item {
+    background: rgba(240, 165, 0, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.trust-item:hover {
+    transform: translateY(-5px);
+    background: rgba(240, 165, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
+}
+
+.trust-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+}
+
+.trust-item h4 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.trust-item p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
 }
 
 /* Team Section */
@@ -1224,6 +1497,11 @@ body {
     .presale-form {
         position: static;
     }
+
+    .how-it-works-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1255,6 +1533,11 @@ body {
     .ember-hero-title {
         font-size: clamp(2rem, 8vw, 3.5rem);
         margin-bottom: 20px;
+    }
+
+    .ember-hero-subtitle-main {
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        margin-bottom: 15px;
     }
 
     .ember-hero-subtitle {
@@ -1309,6 +1592,32 @@ body {
         margin-bottom: 60px;
     }
 
+    .how-it-works-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .stakeholder-card {
+        padding: 25px;
+    }
+
+    .stakeholder-icon {
+        font-size: 3rem;
+    }
+
+    .stakeholder-title {
+        font-size: 1.5rem;
+    }
+
+    .utility-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .utility-item {
+        padding: 20px;
+    }
+
     .whitepaper-sections {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -1338,6 +1647,15 @@ body {
 
     .roadmap-title {
         font-size: 1.5rem;
+    }
+
+    .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .trust-item {
+        padding: 25px;
     }
 
     .team-grid {
@@ -1464,6 +1782,22 @@ body {
         padding: 40px 15px;
     }
 
+    .stakeholder-card {
+        padding: 20px;
+    }
+
+    .stakeholder-icon {
+        font-size: 2.5rem;
+    }
+
+    .flow-step {
+        padding: 12px;
+    }
+
+    .utility-item {
+        padding: 15px;
+    }
+
     .whitepaper-overview {
         padding: 25px;
     }
@@ -1478,6 +1812,19 @@ body {
 
     .roadmap-item {
         padding: 25px;
+    }
+
+    .trust-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .trust-item {
+        padding: 20px;
+    }
+
+    .trust-icon {
+        font-size: 2rem;
     }
 
     .team-member {
