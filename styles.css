@@ -173,9 +173,9 @@ body {
     display: none !important;
 }
 
-/* Ember Token Section - UPDATED WITH RED BACKGROUND FROM EMBER.HTML */
+/* REDESIGNED EMBER TOKEN SECTION - Compact & Enhanced */
 .ember-token-section {
-    padding: 100px 40px;
+    padding: 80px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
     color: white;
     position: relative;
@@ -204,8 +204,8 @@ body {
 
 .ember-token-content {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 80px;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 60px;
     align-items: center;
     position: relative;
     z-index: 10;
@@ -217,39 +217,10 @@ body {
     position: relative;
 }
 
-.ember-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.ember-flame {
-    font-size: 1.2rem;
-    animation: emberFlicker 2s ease-in-out infinite alternate;
-}
-
-@keyframes emberFlicker {
-    0% { transform: scale(1) rotate(-2deg); }
-    100% { transform: scale(1.1) rotate(2deg); }
-}
-
-.ember-badge-text {
-    letter-spacing: 0.5px;
-}
-
 .ember-token-title {
     font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: 900;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     color: #ffffff;
     letter-spacing: -0.02em;
     background: linear-gradient(135deg, #ffffff 0%, #f0a500 50%, #d73327 100%);
@@ -259,8 +230,8 @@ body {
 }
 
 .ember-token-description {
-    font-size: 1.25rem;
-    margin-bottom: 35px;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
     color: rgba(255, 255, 255, 0.95);
     line-height: 1.6;
 }
@@ -268,11 +239,11 @@ body {
 .ember-highlights {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    margin-bottom: 40px;
+    gap: 15px;
+    margin-bottom: 0;
 }
 
-/* NEW: Ember highlight links that navigate to ember.html sections */
+/* Enhanced Ember highlight links */
 .ember-highlight-link {
     text-decoration: none;
     color: inherit;
@@ -289,8 +260,8 @@ body {
     align-items: center;
     gap: 15px;
     background: rgba(215, 51, 39, 0.1);
-    padding: 15px 25px;
-    border-radius: 15px;
+    padding: 12px 20px;
+    border-radius: 12px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(215, 51, 39, 0.2);
     transition: all 0.3s ease;
@@ -304,7 +275,7 @@ body {
 }
 
 .highlight-emoji {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     width: 28px;
     text-align: center;
     animation: emberPulse 2s ease-in-out infinite;
@@ -318,71 +289,35 @@ body {
 .highlight-text {
     font-weight: 600;
     color: rgba(255, 255, 255, 0.95);
-    font-size: 1.05rem;
+    font-size: 1rem;
 }
 
-/* NEW: Ember CTA section at bottom */
-.ember-cta {
-    margin-top: 35px;
-    text-align: center;
-}
-
-.ember-cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, #f0a500, #fb923c);
-    color: white;
-    padding: 18px 35px;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.ember-cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(240, 165, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-.ember-icon {
-    font-size: 1.3rem;
-    animation: emberIconPulse 2s ease-in-out infinite;
-}
-
-@keyframes emberIconPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-}
-
-.ember-text {
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-
+/* REDESIGNED: Visual section with repositioned CTA */
 .ember-token-visual {
     text-align: center;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .ember-coin-showcase {
     position: relative;
     display: inline-block;
+    margin-bottom: 25px;
 }
 
-/* ENHANCED: Updated image class for PhoenixHoldingCoin.PNG - BIGGER SIZE */
+/* Enhanced: Vault Phoenix image with restored glow effects */
 .phoenix-holding-coin-image {
-    width: 380px;
-    height: 380px;
+    width: 320px;
+    height: 320px;
     object-fit: contain;
     filter: drop-shadow(0 0 25px rgba(215, 51, 39, 0.6));
     animation: phoenixCoinFloat 4s ease-in-out infinite;
     transition: all 0.4s ease;
     cursor: pointer;
+    position: relative;
+    z-index: 2;
 }
 
 @keyframes phoenixCoinFloat {
@@ -396,29 +331,25 @@ body {
     }
 }
 
-/* ENHANCED: Hover effect brings back yellow glow */
+/* Enhanced: Hover effect with golden glow */
 .phoenix-holding-coin-image:hover {
     transform: scale(1.08) rotate(8deg);
     filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.9));
 }
 
-.phoenix-holding-coin-image:hover + .ember-glow {
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.4) 0%, transparent 70%);
-    transform: translate(-50%, -50%) scale(1.3);
-    opacity: 0.8;
-}
-
+/* RESTORED: Enhanced background glow behind the image */
 .ember-glow {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 420px;
-    height: 420px;
-    background: radial-gradient(circle, rgba(215, 51, 39, 0.2) 0%, transparent 70%);
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(215, 51, 39, 0.2) 0%, rgba(251, 146, 60, 0.1) 30%, transparent 70%);
     animation: emberGlowPulse 3s ease-in-out infinite alternate;
     pointer-events: none;
     transition: all 0.4s ease;
+    z-index: 1;
 }
 
 @keyframes emberGlowPulse {
@@ -430,6 +361,53 @@ body {
         transform: translate(-50%, -50%) scale(1.2); 
         opacity: 0.6; 
     }
+}
+
+/* Enhanced hover glow effect */
+.phoenix-holding-coin-image:hover + .ember-glow {
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.4) 0%, rgba(251, 146, 60, 0.2) 30%, transparent 70%);
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0.8;
+}
+
+/* NEW: Small repositioned CTA button */
+.ember-cta-button-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(240, 165, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 10;
+}
+
+.ember-cta-button-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.ember-icon {
+    font-size: 1.1rem;
+    animation: emberIconPulse 2s ease-in-out infinite;
+}
+
+@keyframes emberIconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.ember-text {
+    font-weight: 600;
+    letter-spacing: 0.3px;
 }
 
 /* Enhanced CTA Button - Phoenix Crypto Theme */
@@ -1854,12 +1832,12 @@ body {
     
     /* Mobile Ember Token Section */
     .ember-token-section {
-        padding: 80px 20px;
+        padding: 60px 20px;
     }
     
     .ember-token-content {
         grid-template-columns: 1fr;
-        gap: 50px;
+        gap: 40px;
         text-align: center;
     }
     
@@ -1876,21 +1854,21 @@ body {
     }
     
     .ember-highlights {
-        gap: 15px;
+        gap: 12px;
     }
     
     .ember-highlight {
-        padding: 12px 20px;
+        padding: 10px 15px;
     }
     
     .phoenix-holding-coin-image {
-        width: 280px;
-        height: 280px;
+        width: 260px;
+        height: 260px;
     }
     
     .ember-glow {
-        width: 320px;
-        height: 320px;
+        width: 300px;
+        height: 300px;
     }
     
     /* Mobile Crypto Section */
@@ -1970,34 +1948,39 @@ body {
 
     /* Mobile Ember Token Section */
     .ember-token-section {
-        padding: 60px 20px;
+        padding: 50px 20px;
     }
     
     .ember-token-content {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 35px;
         text-align: center;
     }
     
     .ember-token-title {
-        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        font-size: clamp(1.6rem, 6vw, 2.2rem);
     }
     
     .ember-token-description {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
     
     .ember-highlights {
-        gap: 12px;
+        gap: 10px;
     }
     
     .ember-highlight {
-        padding: 10px 15px;
+        padding: 8px 12px;
     }
     
     .phoenix-holding-coin-image {
-        width: 220px;
-        height: 220px;
+        width: 200px;
+        height: 200px;
+    }
+    
+    .ember-glow {
+        width: 240px;
+        height: 240px;
     }
 
     /* Mobile Crypto Section */
@@ -2373,7 +2356,7 @@ body {
     }
     
     .ember-token-title {
-        font-size: clamp(1.4rem, 8vw, 2rem);
+        font-size: clamp(1.3rem, 8vw, 1.8rem);
     }
     
     .ember-token-description {
@@ -2381,17 +2364,22 @@ body {
     }
     
     .ember-highlight {
-        padding: 8px 12px;
+        padding: 6px 10px;
     }
     
     .phoenix-holding-coin-image {
-        width: 180px;
-        height: 180px;
+        width: 160px;
+        height: 160px;
     }
     
     .ember-glow {
         width: 200px;
         height: 200px;
+    }
+    
+    .ember-cta-button-small {
+        padding: 10px 20px;
+        font-size: 0.85rem;
     }
 
     /* Ultra Mobile Crypto Section */
@@ -2841,7 +2829,7 @@ html {
     }
     
     .cta-button,
-    .ember-cta-button,
+    .ember-cta-button-small,
     .demo-button {
         border: 2px solid #ffffff;
     }
@@ -2852,7 +2840,7 @@ html {
     .navbar,
     .mobile-menu-btn,
     .demo-button,
-    .ember-cta-button,
+    .ember-cta-button-small,
     .cta-button,
     .social-media {
         display: none !important;
@@ -2877,7 +2865,7 @@ html {
 
 /* Focus styles for accessibility */
 .cta-button:focus,
-.ember-cta-button:focus,
+.ember-cta-button-small:focus,
 .demo-button:focus,
 .social-link:focus,
 .mobile-menu-btn:focus,
