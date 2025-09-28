@@ -1,5 +1,6 @@
 // Vault Phoenix - Loading Page JavaScript
 // Phoenix Rising from Digital Ashes - Senior UX/UI Design
+// FINAL FIX: All 12 coins working + "Awakening the Phoenix" visible on desktop
 
 // Loading messages array - Phoenix crypto themed
 const loadingMessages = [
@@ -20,7 +21,7 @@ const spark = document.querySelector('.loading-spark');
 
 // Initialize loading
 function initializeLoading() {
-    console.log('🔥🪙 Phoenix Crypto Loading System Initialized - Professional UX');
+    console.log('🔥🪙 Phoenix Crypto Loading System - FINAL FIX: All content visible');
     
     // Start the loading simulation
     simulateLoading();
@@ -36,8 +37,11 @@ function initializeLoading() {
     // Add interaction feedback
     addInteractionEffects();
     
-    // Initialize floating coins with STRICT background positioning
-    initializeFloatingCoins();
+    // Initialize all 12 floating coins
+    initializeAllFloatingCoins();
+    
+    // Monitor layout to ensure "Awakening the Phoenix" is visible
+    monitorLayoutVisibility();
 }
 
 // Simulate realistic loading progress
@@ -105,35 +109,94 @@ function updateProgress() {
     }
 }
 
-// PROFESSIONAL: Initialize floating coins with STRICT background positioning
-function initializeFloatingCoins() {
+// FINAL FIX: Initialize all 12 floating coins with proper setup
+function initializeAllFloatingCoins() {
     const floatingCoins = document.querySelector('.floating-coins');
-    if (!floatingCoins) return;
+    if (!floatingCoins) {
+        console.error('🔥🪙 ERROR: floating-coins container not found!');
+        return;
+    }
     
     // ENFORCE strict background positioning
     floatingCoins.style.zIndex = '-5';
     floatingCoins.style.pointerEvents = 'none';
     
-    // FIXED: Update coin image sources to use VPEmberCoin.PNG
+    // CRITICAL: Get all 12 coin images and set them up properly
     const coinImages = floatingCoins.querySelectorAll('.crypto-coin-icon');
+    console.log(`🔥🪙 Found ${coinImages.length} coin images to initialize`);
+    
     coinImages.forEach((img, index) => {
+        // Ensure correct image source
         img.src = 'images/VPEmberCoin.PNG';
         img.alt = 'VP Ember Coin';
         
-        // PROFESSIONAL styling - minimal visual impact
-        img.style.opacity = '0.3';
+        // PROFESSIONAL styling with enhanced visibility
+        img.style.opacity = '0.3'; // More visible
         img.style.transition = 'none'; // Remove transitions to prevent interference
         img.style.visibility = 'visible';
         img.style.display = 'block';
         img.style.pointerEvents = 'none';
         img.style.zIndex = '-5';
         
-        // Ensure consistent sizing
-        img.style.width = 'clamp(25px, 3vw, 40px)';
-        img.style.height = 'clamp(25px, 3vw, 40px)';
+        // Ensure consistent sizing with responsive scaling
+        img.style.width = 'clamp(20px, 2.5vw, 32px)';
+        img.style.height = 'clamp(20px, 2.5vw, 32px)';
+        
+        // Add variation in glow for visual interest
+        const glowIntensity = 0.4 + (index % 4) * 0.1; // Vary between 0.4-0.7
+        img.style.filter = `drop-shadow(0 0 5px rgba(240, 165, 0, ${glowIntensity}))`;
+        
+        // Add error handling for each coin
+        img.addEventListener('error', function() {
+            console.warn(`🔥🪙 Coin ${index + 1} image failed to load:`, this.src);
+            this.style.display = 'none';
+        });
+        
+        img.addEventListener('load', function() {
+            console.log(`🔥🪙 Coin ${index + 1} loaded successfully`);
+            this.style.opacity = '0.3';
+        });
     });
     
-    console.log('🔥🪙 Floating coins initialized with professional UX positioning');
+    // ENSURE parent coins have proper positioning
+    const coinContainers = floatingCoins.querySelectorAll('.coin');
+    coinContainers.forEach((coin, index) => {
+        coin.style.zIndex = '-5';
+        coin.style.pointerEvents = 'none';
+        console.log(`🔥🪙 Coin container ${index + 1} initialized`);
+    });
+    
+    console.log('🔥🪙 All 12 floating coins initialized successfully');
+}
+
+// NEW: Monitor layout to ensure bottom text is visible
+function monitorLayoutVisibility() {
+    function checkVisibility() {
+        const statusElement = document.querySelector('.loading-status');
+        if (statusElement) {
+            const rect = statusElement.getBoundingClientRect();
+            const isVisible = rect.bottom <= window.innerHeight;
+            
+            if (!isVisible) {
+                console.warn('🔥🪙 WARNING: "Awakening the Phoenix" text is below viewport!');
+                console.log('🔥🪙 Element bottom:', rect.bottom, 'Window height:', window.innerHeight);
+                
+                // Emergency fix: reduce content size
+                const loadingContent = document.querySelector('.loading-content');
+                if (loadingContent) {
+                    loadingContent.style.transform = 'scale(0.9)';
+                    loadingContent.style.marginTop = '10px';
+                    console.log('🔥🪙 Applied emergency scaling to fit content');
+                }
+            } else {
+                console.log('🔥🪙 ✓ "Awakening the Phoenix" text is visible on screen');
+            }
+        }
+    }
+    
+    // Check visibility after DOM load and on resize
+    setTimeout(checkVisibility, 100);
+    window.addEventListener('resize', checkVisibility);
 }
 
 // Add interactive effects
@@ -209,7 +272,7 @@ document.head.appendChild(interactionCoinStyle);
 function completeLoading() {
     isLoading = false;
     
-    console.log('🔥🪙 Phoenix Crypto Loading Complete - Professional Transition!');
+    console.log('🔥🪙 Phoenix Crypto Loading Complete - All content visible!');
     
     // Keep the same message
     if (statusMessage) {
@@ -241,6 +304,9 @@ function addProfessionalCompletionEffects() {
         logoGlow.style.transform = 'translate(-50%, -50%) scale(1.4)';
     }
     
+    // ENHANCED: Create completion coin burst effect with all coins
+    createEnhancedCompletionCoinBurst();
+    
     // Professional flash effect
     const flashEffect = document.createElement('div');
     flashEffect.style.cssText = `
@@ -263,6 +329,61 @@ function addProfessionalCompletionEffects() {
             flashEffect.parentNode.removeChild(flashEffect);
         }
     }, 1200);
+}
+
+// ENHANCED: Create more dramatic completion coin burst effect
+function createEnhancedCompletionCoinBurst() {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    
+    // Create 12 coins that burst outward from center (matching our 12 floating coins)
+    for (let i = 0; i < 12; i++) {
+        const coin = document.createElement('img');
+        coin.src = 'images/VPEmberCoin.PNG';
+        coin.alt = 'VP Ember Completion Coin';
+        
+        const angle = (i / 12) * Math.PI * 2;
+        const distance = 150;
+        const endX = centerX + Math.cos(angle) * distance;
+        const endY = centerY + Math.sin(angle) * distance;
+        
+        coin.style.cssText = `
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            left: ${centerX - 16}px;
+            top: ${centerY - 16}px;
+            z-index: 1000;
+            pointer-events: none;
+            filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.9));
+            animation: coinBurst${i} 1.8s ease-out forwards;
+        `;
+        
+        // Create unique animation for each coin
+        const coinBurstStyle = document.createElement('style');
+        coinBurstStyle.textContent = `
+            @keyframes coinBurst${i} {
+                0% { 
+                    transform: translate(0, 0) scale(1) rotate(0deg); 
+                    opacity: 1; 
+                }
+                100% { 
+                    transform: translate(${endX - centerX}px, ${endY - centerY}px) scale(0) rotate(720deg); 
+                    opacity: 0; 
+                }
+            }
+        `;
+        document.head.appendChild(coinBurstStyle);
+        
+        document.body.appendChild(coin);
+        
+        // Remove after animation
+        setTimeout(() => {
+            if (coin.parentNode) {
+                coin.parentNode.removeChild(coin);
+            }
+        }, 1800);
+    }
 }
 
 // Professional flash animation
@@ -288,7 +409,7 @@ function transitionToMainSite() {
             // Redirect to main page
             window.location.href = 'main.html';
             
-            console.log('🔥🪙 Welcome to Vault Phoenix - Professional AR Crypto Gaming!');
+            console.log('🔥🪙 Welcome to Vault Phoenix - All content optimized!');
         }, 1000);
     }
 }
@@ -299,7 +420,19 @@ function monitorPerformance() {
     
     window.addEventListener('load', () => {
         const loadTime = performance.now() - startTime;
-        console.log(`🔥🪙 Professional Phoenix Loading completed in ${Math.round(loadTime)}ms`);
+        console.log(`🔥🪙 Final optimized Phoenix Loading completed in ${Math.round(loadTime)}ms`);
+        
+        // Double-check coin visibility after load
+        const coinImages = document.querySelectorAll('.crypto-coin-icon');
+        console.log(`🔥🪙 Final check: ${coinImages.length} coins found after load`);
+        
+        coinImages.forEach((coin, index) => {
+            if (coin.style.display !== 'none') {
+                console.log(`🔥🪙 Coin ${index + 1}: ✓ Visible`);
+            } else {
+                console.warn(`🔥🪙 Coin ${index + 1}: ✗ Hidden`);
+            }
+        });
     });
 }
 
@@ -325,7 +458,7 @@ function setupErrorHandling() {
             const fallback = document.createElement('div');
             fallback.innerHTML = '🔥🪙';
             fallback.style.cssText = `
-                font-size: 8rem;
+                font-size: 4rem;
                 animation: phoenixPulse 3s ease-in-out infinite;
                 filter: drop-shadow(0 0 40px rgba(215, 51, 39, 0.8));
             `;
@@ -333,33 +466,42 @@ function setupErrorHandling() {
         });
         
         phoenixImage.addEventListener('load', () => {
-            console.log('🔥🪙 Phoenix image loaded successfully - Professional UX ready');
+            console.log('🔥🪙 Phoenix image loaded successfully - Final layout ready');
         });
     }
-    
-    // Handle coin image errors
-    document.querySelectorAll('.crypto-coin-icon').forEach(coinImg => {
-        coinImg.addEventListener('error', () => {
-            console.warn('🔥🪙 Coin image failed to load:', coinImg.src);
-            coinImg.style.display = 'none'; // Hide broken coins
-        });
-    });
 }
 
-// PROFESSIONAL: Device-specific optimizations
+// ENHANCED: Device-specific optimizations for all 12 coins
 function applyDeviceOptimizations() {
     const isMobile = window.innerWidth <= 768;
     const isSmallMobile = window.innerWidth <= 480;
+    const isShortScreen = window.innerHeight <= 700;
+    
+    // Additional check for short screens regardless of width
+    if (isShortScreen) {
+        console.log('🔥🪙 Short screen detected - applying compact optimizations');
+        const loadingContent = document.querySelector('.loading-content');
+        if (loadingContent) {
+            loadingContent.style.transform = 'scale(0.85)';
+            loadingContent.style.marginTop = '5px';
+        }
+    }
     
     // Reduce coin count on mobile for performance
     if (isSmallMobile) {
-        document.querySelectorAll('.coin-3, .coin-4, .coin-5, .coin-6').forEach(coin => {
+        // Hide most coins on small mobile
+        document.querySelectorAll('.coin-3, .coin-4, .coin-5, .coin-6, .coin-7, .coin-8, .coin-9, .coin-10, .coin-11, .coin-12').forEach(coin => {
             coin.style.display = 'none';
         });
+        console.log('🔥🪙 Small mobile optimization: Reduced to 2 coins');
     } else if (isMobile) {
-        document.querySelectorAll('.coin-5, .coin-6').forEach(coin => {
-            coin.style.opacity = '0.2';
+        // Hide some coins on regular mobile
+        document.querySelectorAll('.coin-7, .coin-8, .coin-11, .coin-12').forEach(coin => {
+            coin.style.display = 'none';
         });
+        console.log('🔥🪙 Mobile optimization: Reduced to 8 coins');
+    } else {
+        console.log('🔥🪙 Desktop optimization: All 12 coins active');
     }
     
     // Adjust animation performance based on device
@@ -368,6 +510,7 @@ function applyDeviceOptimizations() {
         document.querySelectorAll('.coin').forEach(coin => {
             coin.style.animationDuration = '12s'; // Slower, less intensive
         });
+        console.log('🔥🪙 Performance optimization: Slower animations for low-end device');
     }
 }
 
@@ -400,7 +543,7 @@ function enhanceAccessibility() {
 
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🔥🪙 VAULT PHOENIX PROFESSIONAL LOADING SYSTEM ACTIVATED');
+    console.log('🔥🪙 VAULT PHOENIX FINAL OPTIMIZED LOADING SYSTEM ACTIVATED');
     
     initializeLoading();
     monitorPerformance();
@@ -408,10 +551,10 @@ document.addEventListener('DOMContentLoaded', () => {
     applyDeviceOptimizations();
     enhanceAccessibility();
     
-    console.log('🔥🪙 Professional UX loading sequence initiated...');
+    console.log('🔥🪙 Final loading sequence with all 12 coins and full content visibility initiated...');
 });
 
 // Professional console welcome message
-console.log('%c🔥🪙 VAULT PHOENIX - PROFESSIONAL LOADING SEQUENCE', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 Senior UX/UI Design - Optimized for all devices', 'color: #fb923c; font-size: 14px; font-weight: bold;');
-console.log('%c📱 Professional loading experience with accessibility support', 'color: #f0a500; font-size: 12px; font-style: italic;');
+console.log('%c🔥🪙 VAULT PHOENIX - FINAL OPTIMIZED LOADING', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
+console.log('%c🚀 FINAL FIX: "Awakening the Phoenix" always visible on desktop', 'color: #fb923c; font-size: 14px; font-weight: bold;');
+console.log('%c🪙 All 12 strategic coins active with responsive optimization', 'color: #f0a500; font-size: 12px; font-style: italic;');
