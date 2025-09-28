@@ -1,5 +1,5 @@
 /* Vault Phoenix - Loading Page Stylesheet */
-/* Phoenix Rising from Digital Ashes - Crypto Gaming Edition */
+/* Phoenix Rising from Digital Ashes - Senior UX/UI Design */
 
 * {
     margin: 0;
@@ -30,14 +30,14 @@ body {
     overflow: hidden;
 }
 
-/* Background Elements */
+/* Background Elements - STRICT BACKGROUND ONLY */
 .loading-background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: -10; /* DEEP BACKGROUND */
 }
 
 .phoenix-particles {
@@ -51,6 +51,7 @@ body {
         radial-gradient(circle at 80% 20%, rgba(251, 146, 60, 0.2) 0%, transparent 50%),
         radial-gradient(circle at 40% 80%, rgba(217, 70, 239, 0.15) 0%, transparent 50%);
     animation: phoenixFloat 20s ease-in-out infinite;
+    z-index: -10; /* DEEP BACKGROUND */
 }
 
 .crypto-glow {
@@ -62,6 +63,7 @@ body {
     height: 600px;
     background: radial-gradient(circle, rgba(215, 51, 39, 0.1) 0%, transparent 70%);
     animation: cryptoPulse 4s ease-in-out infinite;
+    z-index: -10; /* DEEP BACKGROUND */
 }
 
 @keyframes phoenixFloat {
@@ -75,31 +77,32 @@ body {
     50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
 }
 
-/* Loading Content */
+/* Loading Content - HIGH Z-INDEX FOR READABILITY */
 .loading-content {
     position: relative;
-    z-index: 10;
+    z-index: 100; /* HIGH PRIORITY - ALWAYS VISIBLE */
     text-align: center;
     color: white;
-    max-width: 500px;
+    max-width: 600px;
     padding: 0 40px;
 }
 
-/* Phoenix Logo - UPDATED SIZE */
+/* Phoenix Logo - SIGNIFICANTLY LARGER FOR IMPACT */
 .loading-logo {
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     display: inline-block;
+    z-index: 101; /* HIGHEST PRIORITY */
 }
 
 .phoenix-image {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.6));
+    filter: drop-shadow(0 0 40px rgba(215, 51, 39, 0.8));
     animation: phoenixPulse 3s ease-in-out infinite;
     position: relative;
-    z-index: 2;
+    z-index: 101; /* HIGHEST PRIORITY */
 }
 
 .logo-glow {
@@ -107,32 +110,40 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(215, 51, 39, 0.3) 0%, transparent 70%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(215, 51, 39, 0.4) 0%, transparent 70%);
     animation: logoGlowPulse 2s ease-in-out infinite alternate;
-    z-index: 1;
+    z-index: 100; /* BEHIND MAIN IMAGE BUT ABOVE BACKGROUND */
 }
 
 @keyframes phoenixPulse {
-    0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.6)); }
-    50% { transform: scale(1.05) rotate(2deg); filter: drop-shadow(0 0 40px rgba(215, 51, 39, 0.8)); }
+    0%, 100% { 
+        transform: scale(1) rotate(0deg); 
+        filter: drop-shadow(0 0 40px rgba(215, 51, 39, 0.8)); 
+    }
+    50% { 
+        transform: scale(1.05) rotate(2deg); 
+        filter: drop-shadow(0 0 60px rgba(215, 51, 39, 1)); 
+    }
 }
 
 @keyframes logoGlowPulse {
-    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-    100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+    100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
 }
 
-/* Loading Text - SMALLER LOADING TITLE */
+/* Loading Text - PROFESSIONAL TYPOGRAPHY */
 .loading-text {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
+    z-index: 100; /* HIGH PRIORITY */
+    position: relative;
 }
 
 .loading-title {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 900;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     color: #ffffff;
     letter-spacing: -0.02em;
     background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
@@ -140,14 +151,16 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: titleShimmer 3s ease-in-out infinite;
+    z-index: 100; /* HIGH PRIORITY */
 }
 
 .loading-subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
-    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.95);
     font-weight: 600;
     letter-spacing: 0.5px;
     animation: subtitleFade 2s ease-in-out infinite alternate;
+    z-index: 100; /* HIGH PRIORITY */
 }
 
 @keyframes titleShimmer {
@@ -156,35 +169,37 @@ body {
 }
 
 @keyframes subtitleFade {
-    0% { opacity: 0.7; }
+    0% { opacity: 0.8; }
     100% { opacity: 1; }
 }
 
-/* Loading Bar */
+/* Loading Bar - ENHANCED DESIGN */
 .loading-bar-container {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    z-index: 100; /* HIGH PRIORITY */
+    position: relative;
 }
 
 .loading-bar {
     width: 100%;
-    height: 8px;
+    height: 10px;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
     position: relative;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(215, 51, 39, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .loading-progress {
     height: 100%;
-    background: linear-gradient(90deg, #d73327, #fb923c, #f59e0b);
-    border-radius: 10px;
+    background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
+    border-radius: 15px;
     width: 0%;
     transition: width 0.3s ease;
     position: relative;
-    box-shadow: 0 0 20px rgba(215, 51, 39, 0.5);
+    box-shadow: 0 0 25px rgba(215, 51, 39, 0.6);
     animation: progressGlow 2s ease-in-out infinite;
 }
 
@@ -192,16 +207,16 @@ body {
     position: absolute;
     top: 0;
     right: 0;
-    width: 20px;
+    width: 25px;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
     animation: sparkMove 2s ease-in-out infinite;
     opacity: 0;
 }
 
 @keyframes progressGlow {
-    0%, 100% { box-shadow: 0 0 20px rgba(215, 51, 39, 0.5); }
-    50% { box-shadow: 0 0 30px rgba(215, 51, 39, 0.8); }
+    0%, 100% { box-shadow: 0 0 25px rgba(215, 51, 39, 0.6); }
+    50% { box-shadow: 0 0 40px rgba(215, 51, 39, 0.9); }
 }
 
 @keyframes sparkMove {
@@ -211,31 +226,34 @@ body {
 }
 
 .loading-percentage {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    font-weight: 700;
+    margin-top: 20px;
+    font-size: 1.4rem;
+    font-weight: 800;
     color: #f0a500;
-    text-shadow: 0 2px 10px rgba(240, 165, 0, 0.3);
+    text-shadow: 0 3px 15px rgba(240, 165, 0, 0.4);
+    z-index: 100; /* HIGH PRIORITY */
 }
 
 /* Loading Messages */
 .loading-message {
-    margin-top: 20px;
+    margin-top: 30px;
+    z-index: 100; /* HIGH PRIORITY */
 }
 
 .loading-status {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
     animation: statusPulse 2s ease-in-out infinite;
+    z-index: 100; /* HIGH PRIORITY */
 }
 
 @keyframes statusPulse {
-    0%, 100% { opacity: 0.6; }
+    0%, 100% { opacity: 0.7; }
     50% { opacity: 1; }
 }
 
-/* Floating Crypto Coins - FIXED BACKGROUND POSITIONING */
+/* Floating Crypto Coins - STRICT BACKGROUND POSITIONING */
 .floating-coins {
     position: absolute;
     top: 0;
@@ -243,64 +261,68 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1; /* IMPORTANT: Keep behind content */
+    z-index: -5; /* BACKGROUND ONLY - NEVER INTERFERES WITH CONTENT */
+    overflow: hidden;
 }
 
 .coin {
     position: absolute;
     animation: coinFloat 8s ease-in-out infinite;
-    z-index: 1; /* IMPORTANT: Ensure background positioning */
+    z-index: -5; /* BACKGROUND ONLY */
+    pointer-events: none;
 }
 
 .crypto-coin-icon {
-    width: clamp(30px, 5vw, 50px);
-    height: clamp(30px, 5vw, 50px);
+    width: clamp(25px, 3vw, 40px);
+    height: clamp(25px, 3vw, 40px);
     object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.7));
-    transition: all 0.3s ease;
-    opacity: 0.6; /* Consistent starting opacity */
-    visibility: visible; /* Always visible */
-    display: block; /* Always displayed */
+    filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
+    transition: none; /* NO TRANSITIONS TO PREVENT INTERFERENCE */
+    opacity: 0.3; /* SUBTLE BACKGROUND PRESENCE */
+    visibility: visible;
+    display: block;
+    pointer-events: none;
 }
 
+/* STRATEGIC POSITIONING - AVOID CONTENT AREAS */
 .coin-1 {
-    top: 20%;
-    left: 10%;
+    top: 8%;
+    left: 5%;
     animation-delay: 0s;
     animation-duration: 6s;
 }
 
 .coin-2 {
-    top: 60%;
-    left: 15%;
+    top: 85%;
+    left: 8%;
     animation-delay: 1s;
     animation-duration: 7s;
 }
 
 .coin-3 {
-    top: 30%;
-    right: 20%;
+    top: 12%;
+    right: 5%;
     animation-delay: 2s;
     animation-duration: 8s;
 }
 
 .coin-4 {
-    top: 70%;
-    right: 15%;
+    top: 88%;
+    right: 8%;
     animation-delay: 3s;
     animation-duration: 6s;
 }
 
 .coin-5 {
-    top: 15%;
-    left: 50%;
+    top: 5%;
+    left: 85%;
     animation-delay: 4s;
     animation-duration: 7s;
 }
 
 .coin-6 {
-    bottom: 20%;
-    right: 40%;
+    bottom: 5%;
+    right: 85%;
     animation-delay: 5s;
     animation-duration: 9s;
 }
@@ -308,41 +330,92 @@ body {
 @keyframes coinFloat {
     0%, 100% { 
         transform: translateY(0px) rotate(0deg) scale(1); 
-        opacity: 0.4; 
+        opacity: 0.2; 
     }
     25% { 
-        transform: translateY(-20px) rotate(90deg) scale(1.1); 
-        opacity: 0.7; 
+        transform: translateY(-12px) rotate(90deg) scale(1.05); 
+        opacity: 0.4; 
     }
     50% { 
-        transform: translateY(-10px) rotate(180deg) scale(0.9); 
-        opacity: 0.5; 
+        transform: translateY(-6px) rotate(180deg) scale(0.95); 
+        opacity: 0.3; 
     }
     75% { 
-        transform: translateY(-25px) rotate(270deg) scale(1.2); 
-        opacity: 0.6; 
+        transform: translateY(-15px) rotate(270deg) scale(1.1); 
+        opacity: 0.35; 
     }
 }
 
-/* Mobile Responsive Design */
+/* Mobile Responsive Design - PROFESSIONAL SCALING */
 @media (max-width: 768px) {
     .loading-content {
-        padding: 0 20px;
+        padding: 0 30px;
+        max-width: 500px;
     }
     
     .phoenix-image {
-        width: 220px;
-        height: 220px;
+        width: 320px;
+        height: 320px;
     }
     
     .logo-glow {
-        width: 270px;
-        height: 270px;
+        width: 400px;
+        height: 400px;
     }
     
     .loading-title {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-        margin-bottom: 10px;
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        margin-bottom: 15px;
+    }
+    
+    .loading-subtitle {
+        font-size: clamp(1rem, 3.5vw, 1.2rem);
+    }
+    
+    .loading-bar {
+        height: 8px;
+    }
+    
+    .loading-percentage {
+        font-size: 1.2rem;
+        margin-top: 15px;
+    }
+    
+    .loading-status {
+        font-size: 1.1rem;
+    }
+    
+    .crypto-coin-icon {
+        width: clamp(20px, 4vw, 30px);
+        height: clamp(20px, 4vw, 30px);
+        opacity: 0.25; /* EVEN MORE SUBTLE ON MOBILE */
+    }
+    
+    .crypto-glow {
+        width: 500px;
+        height: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loading-content {
+        padding: 0 20px;
+        max-width: 400px;
+    }
+    
+    .phoenix-image {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .logo-glow {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .loading-title {
+        font-size: clamp(1.3rem, 6vw, 1.8rem);
+        margin-bottom: 12px;
     }
     
     .loading-subtitle {
@@ -354,55 +427,12 @@ body {
     }
     
     .loading-percentage {
-        font-size: 1rem;
-        margin-top: 10px;
+        font-size: 1.1rem;
+        margin-top: 12px;
     }
     
     .loading-status {
         font-size: 1rem;
-    }
-    
-    .crypto-coin-icon {
-        width: clamp(25px, 6vw, 40px);
-        height: clamp(25px, 6vw, 40px);
-    }
-}
-
-@media (max-width: 480px) {
-    .loading-content {
-        padding: 0 15px;
-    }
-    
-    .phoenix-image {
-        width: 180px;
-        height: 180px;
-    }
-    
-    .logo-glow {
-        width: 220px;
-        height: 220px;
-    }
-    
-    .loading-title {
-        font-size: clamp(1.2rem, 8vw, 1.7rem);
-        margin-bottom: 8px;
-    }
-    
-    .loading-subtitle {
-        font-size: clamp(0.8rem, 4vw, 1rem);
-    }
-    
-    .loading-bar {
-        height: 5px;
-    }
-    
-    .loading-percentage {
-        font-size: 0.9rem;
-        margin-top: 8px;
-    }
-    
-    .loading-status {
-        font-size: 0.9rem;
     }
     
     .crypto-glow {
@@ -411,12 +441,21 @@ body {
     }
     
     .crypto-coin-icon {
-        width: clamp(20px, 7vw, 35px);
-        height: clamp(20px, 7vw, 35px);
+        width: clamp(15px, 3vw, 25px);
+        height: clamp(15px, 3vw, 25px);
+        opacity: 0.2; /* MINIMAL ON SMALL SCREENS */
+    }
+    
+    /* REDUCE COIN COUNT ON MOBILE FOR CLEANER UX */
+    .coin-3,
+    .coin-4,
+    .coin-5,
+    .coin-6 {
+        display: none;
     }
 }
 
-/* High DPI Displays */
+/* High DPI Displays - CRISP RENDERING */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .phoenix-image,
     .crypto-coin-icon {
@@ -425,19 +464,59 @@ body {
     }
 }
 
-/* Enhanced coin hover effects for interactive loading */
+/* STRICT Z-INDEX HIERARCHY ENFORCEMENT */
+.coin,
+.crypto-coin-icon,
+.floating-coins {
+    z-index: -5 !important;
+    pointer-events: none !important;
+}
+
+.loading-content,
+.loading-text,
+.loading-title,
+.loading-subtitle,
+.loading-bar-container,
+.loading-percentage,
+.loading-message {
+    z-index: 100 !important;
+}
+
+.phoenix-image {
+    z-index: 101 !important;
+}
+
+/* Remove any hover effects that could interfere */
 .coin:hover .crypto-coin-icon {
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 1)) brightness(1.2);
+    transform: none !important;
+    filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5)) !important;
 }
 
-/* Loading completion state */
+/* Loading completion state - SUBTLE */
 .loading-complete .crypto-coin-icon {
-    animation: coinCelebration 1s ease-out;
+    animation: none; /* NO DISTRACTING ANIMATIONS */
 }
 
-@keyframes coinCelebration {
-    0% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.3) rotate(180deg); }
-    100% { transform: scale(1) rotate(360deg); }
+/* ACCESSIBILITY - ENSURE CONTENT READABILITY */
+@media (prefers-reduced-motion: reduce) {
+    .coin,
+    .crypto-coin-icon {
+        animation: none !important;
+        opacity: 0.1 !important;
+    }
+    
+    .phoenix-particles {
+        animation: none !important;
+    }
+    
+    .crypto-glow {
+        animation: none !important;
+    }
+}
+
+/* CONTRAST MODE SUPPORT */
+@media (prefers-contrast: high) {
+    .crypto-coin-icon {
+        opacity: 0.1 !important;
+    }
 }
