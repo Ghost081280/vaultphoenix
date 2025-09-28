@@ -1,5 +1,6 @@
 /* Vault Phoenix - Loading Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - Senior UX/UI Design */
+/* FIXED: Phoenix Safe Image Positioning - Moved down on desktop */
 
 * {
     margin: 0;
@@ -85,9 +86,11 @@ body {
     color: white;
     max-width: 600px;
     padding: 0 40px;
+    /* FIXED: Added top margin to push content down on desktop */
+    margin-top: 60px;
 }
 
-/* Phoenix Logo - SIGNIFICANTLY LARGER FOR IMPACT */
+/* Phoenix Logo - FIXED POSITIONING */
 .loading-logo {
     position: relative;
     margin-bottom: 50px;
@@ -348,9 +351,11 @@ body {
 
 /* Mobile Responsive Design - PROFESSIONAL SCALING */
 @media (max-width: 768px) {
+    /* FIXED: Mobile positioning - keep original good positioning */
     .loading-content {
         padding: 0 30px;
         max-width: 500px;
+        margin-top: 0; /* Remove top margin on mobile - keep original positioning */
     }
     
     .phoenix-image {
@@ -401,6 +406,7 @@ body {
     .loading-content {
         padding: 0 20px;
         max-width: 400px;
+        margin-top: 0; /* Keep mobile positioning */
     }
     
     .phoenix-image {
@@ -452,6 +458,29 @@ body {
     .coin-5,
     .coin-6 {
         display: none;
+    }
+}
+
+/* FIXED: Desktop-specific adjustments for better spacing */
+@media (min-width: 1024px) {
+    .loading-content {
+        margin-top: 80px; /* Increase top margin for larger screens */
+    }
+    
+    .phoenix-image {
+        width: 420px;
+        height: 420px;
+    }
+    
+    .logo-glow {
+        width: 520px;
+        height: 520px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .loading-content {
+        margin-top: 100px; /* Even more spacing on very large screens */
     }
 }
 
