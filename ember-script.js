@@ -1,5 +1,6 @@
 // Ember Token Page JavaScript
 // Phoenix Rising from Digital Ashes - $Ember Token Edition
+// CLEANED: Removed all floating coin references and effects
 
 // Enhanced navbar scroll effect
 window.addEventListener('scroll', () => {
@@ -179,9 +180,9 @@ function initializeButtonEffects() {
         button.addEventListener('mouseenter', function() {
             this.style.filter = 'brightness(1.1) saturate(1.2)';
             
-            // Add ember particle effect
-            if (Math.random() > 0.7) {
-                createEmberParticle(this);
+            // Add subtle ember glow effect
+            if (Math.random() > 0.85) {
+                createEmberGlow(this);
             }
         });
         
@@ -199,41 +200,42 @@ function initializeButtonEffects() {
     });
 }
 
-// Create ember particle effect
-function createEmberParticle(element) {
-    const ember = document.createElement('div');
-    ember.innerHTML = '🔥';
-    ember.style.cssText = `
+// Create subtle ember glow effect
+function createEmberGlow(element) {
+    const glow = document.createElement('div');
+    glow.innerHTML = '✨';
+    glow.style.cssText = `
         position: absolute;
         pointer-events: none;
-        font-size: 12px;
-        animation: emberFloat 1.5s ease-out forwards;
-        top: ${Math.random() * 20 - 10}px;
-        left: ${Math.random() * 20 - 10}px;
+        font-size: 10px;
+        animation: emberGlowFloat 1s ease-out forwards;
+        top: ${Math.random() * 15 - 7}px;
+        left: ${Math.random() * 15 - 7}px;
         z-index: 10000;
+        filter: drop-shadow(0 0 5px rgba(240, 165, 0, 0.8));
     `;
     
     element.style.position = 'relative';
-    element.appendChild(ember);
+    element.appendChild(glow);
     
-    setTimeout(() => ember.remove(), 1500);
+    setTimeout(() => glow.remove(), 1000);
 }
 
-// Add ember float animation
-const emberStyle = document.createElement('style');
-emberStyle.textContent = `
-    @keyframes emberFloat {
+// Add ember glow animation
+const emberGlowStyle = document.createElement('style');
+emberGlowStyle.textContent = `
+    @keyframes emberGlowFloat {
         0% { 
-            transform: translateY(0) scale(1) rotate(0deg); 
+            transform: translateY(0) scale(1); 
             opacity: 1; 
         }
         100% { 
-            transform: translateY(-30px) scale(0) rotate(360deg); 
+            transform: translateY(-20px) scale(0); 
             opacity: 0; 
         }
     }
 `;
-document.head.appendChild(emberStyle);
+document.head.appendChild(emberGlowStyle);
 
 // Progress bar animation
 function animateProgressBar() {
@@ -434,22 +436,23 @@ function initializePresaleHandler() {
 
 // Create celebration effect
 function createCelebrationEffect() {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 12; i++) {
         setTimeout(() => {
             const ember = document.createElement('div');
             ember.innerHTML = '🔥';
             ember.style.cssText = `
                 position: fixed;
                 pointer-events: none;
-                font-size: ${Math.random() * 20 + 15}px;
+                font-size: ${Math.random() * 15 + 12}px;
                 left: ${Math.random() * 100}vw;
                 top: -50px;
                 z-index: 10000;
-                animation: celebrationFall ${Math.random() * 3 + 2}s linear forwards;
+                animation: celebrationFall ${Math.random() * 2 + 1.5}s linear forwards;
+                filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.8));
             `;
             document.body.appendChild(ember);
             
-            setTimeout(() => ember.remove(), 5000);
+            setTimeout(() => ember.remove(), 4000);
         }, i * 100);
     }
 }
@@ -538,7 +541,7 @@ document.addEventListener('DOMContentLoaded', function() {
         heroObserver.observe(heroSection);
     }
     
-    console.log('🔥🪙 $Ember Token page loaded successfully!');
+    console.log('🔥🪙 $Ember Token page loaded successfully - clean and focused!');
 });
 
 // Console welcome message
@@ -556,47 +559,4 @@ window.addEventListener('error', (event) => {
     console.error('🔥🪙 $Ember Token page error:', event.error);
 });
 
-// Add floating ember particles to background
-function createFloatingEmbers() {
-    const emberCount = 6;
-    
-    for (let i = 0; i < emberCount; i++) {
-        const ember = document.createElement('div');
-        ember.innerHTML = '🔥';
-        ember.style.cssText = `
-            position: fixed;
-            pointer-events: none;
-            font-size: ${Math.random() * 20 + 15}px;
-            opacity: 0.3;
-            z-index: -1;
-            animation: floatingEmber ${Math.random() * 10 + 8}s ease-in-out infinite;
-            animation-delay: ${Math.random() * 5}s;
-            top: ${Math.random() * 100}vh;
-            left: ${Math.random() * 100}vw;
-        `;
-        document.body.appendChild(ember);
-    }
-}
-
-// Add floating ember animation
-const floatingEmberStyle = document.createElement('style');
-floatingEmberStyle.textContent = `
-    @keyframes floatingEmber {
-        0%, 100% { 
-            transform: translateY(0px) rotate(0deg) scale(1); 
-            opacity: 0.2; 
-        }
-        33% { 
-            transform: translateY(-20px) rotate(120deg) scale(1.1); 
-            opacity: 0.4; 
-        }
-        66% { 
-            transform: translateY(10px) rotate(240deg) scale(0.9); 
-            opacity: 0.3; 
-        }
-    }
-`;
-document.head.appendChild(floatingEmberStyle);
-
-// Initialize floating embers
-setTimeout(createFloatingEmbers, 1000);
+// REMOVED: All floating ember particle functions and background coin effects
