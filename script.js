@@ -80,12 +80,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Enhanced interactive card effects with phoenix crypto animation
-document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto-benefit').forEach(card => {
+document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto-benefit, .ember-highlight').forEach(card => {
     card.addEventListener('mouseenter', function() {
         if (this.classList.contains('simple-thumb')) {
             this.style.transform = 'translateY(-5px) scale(1.05)';
         } else if (this.classList.contains('crypto-benefit')) {
             this.style.transform = 'translateX(15px)';
+        } else if (this.classList.contains('ember-highlight')) {
+            this.style.transform = 'translateX(8px)';
         } else {
             this.style.transform = 'translateY(-10px) scale(1.02)';
         }
@@ -100,6 +102,9 @@ document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto
         if (!this.classList.contains('active')) {
             this.style.transform = 'translateY(0) scale(1)';
             if (this.classList.contains('crypto-benefit')) {
+                this.style.transform = 'translateX(0)';
+            }
+            if (this.classList.contains('ember-highlight')) {
                 this.style.transform = 'translateX(0)';
             }
             this.style.boxShadow = '';
@@ -494,11 +499,29 @@ function initializeCryptoCoinImage() {
     }, 50);
 }
 
+// NEW: Ember coin image interaction
+function initializeEmberCoinImage() {
+    const emberCoinImage = document.querySelector('.ember-coin-image');
+    if (!emberCoinImage) return;
+    
+    // Add special ember coin glow effect on hover
+    emberCoinImage.addEventListener('mouseenter', function() {
+        this.style.filter = 'drop-shadow(0 0 35px rgba(240, 165, 0, 0.9)) brightness(1.2)';
+        this.style.transform = 'scale(1.1) rotate(180deg)';
+    });
+    
+    emberCoinImage.addEventListener('mouseleave', function() {
+        this.style.filter = '';
+        this.style.transform = '';
+    });
+}
+
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     preloadPhoenixCryptoImages();
     createPhoenixCryptoParticles();
     initializeCryptoCoinImage();
+    initializeEmberCoinImage();
     
     // Add smooth entrance animations
     setTimeout(() => {
@@ -528,7 +551,7 @@ window.addEventListener('load', () => {
 });
 
 // Enhanced interactive feedback for all CTA buttons with crypto theme - UPDATED WITH GOLDEN COINS
-document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button').forEach(button => {
+document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .ember-cta-button').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
         // Add subtle coin sparkle effect using golden coin
@@ -656,9 +679,39 @@ function initializeCryptoBenefits() {
     document.head.appendChild(coinBounceStyle);
 }
 
+// NEW: Ember highlights animation on scroll
+function initializeEmberHighlights() {
+    const highlights = document.querySelectorAll('.ember-highlight');
+    if (!highlights.length) return;
+    
+    const highlightsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.transform = 'translateX(0)';
+                    entry.target.style.opacity = '1';
+                    
+                    // Add ember flame flicker effect
+                    const emoji = entry.target.querySelector('.highlight-emoji');
+                    if (emoji) {
+                        emoji.style.animation = 'emberFlicker 1s ease-in-out';
+                    }
+                }, index * 150);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    highlights.forEach(highlight => {
+        highlight.style.transform = 'translateX(-30px)';
+        highlight.style.opacity = '0';
+        highlightsObserver.observe(highlight);
+    });
+}
+
 // Initialize crypto-specific features
 document.addEventListener('DOMContentLoaded', function() {
     initializeCryptoBenefits();
+    initializeEmberHighlights();
     createPhoenixCryptoScrollIndicator();
 });
 
