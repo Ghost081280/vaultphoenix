@@ -151,6 +151,28 @@ body {
     width: 100%;
 }
 
+/* Ember Link Special Styling */
+.ember-link {
+    background: linear-gradient(135deg, #d73327, #fb923c) !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.ember-link:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.5) !important;
+    color: white !important;
+}
+
+.ember-link::after {
+    display: none !important;
+}
+
 /* Enhanced CTA Button - Phoenix Crypto Theme */
 .cta-button {
     background: linear-gradient(135deg, #d73327, #fb923c);
@@ -307,6 +329,217 @@ body {
 .hero-cta .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
+}
+
+/* Ember Token Section - NEW */
+.ember-token-section {
+    padding: 80px 40px;
+    background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #6b7280 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.ember-token-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(240, 165, 0, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(215, 51, 39, 0.1) 0%, transparent 50%);
+}
+
+.ember-token-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.ember-token-text {
+    position: relative;
+}
+
+.ember-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ember-flame {
+    font-size: 1.2rem;
+    animation: emberFlicker 2s ease-in-out infinite alternate;
+}
+
+@keyframes emberFlicker {
+    0% { transform: scale(1) rotate(-2deg); }
+    100% { transform: scale(1.1) rotate(2deg); }
+}
+
+.ember-badge-text {
+    letter-spacing: 0.5px;
+}
+
+.ember-token-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #f0a500 50%, #d73327 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.ember-token-description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+}
+
+.ember-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.ember-highlight {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    transition: all 0.3s ease;
+}
+
+.ember-highlight:hover {
+    background: rgba(215, 51, 39, 0.15);
+    border-color: rgba(215, 51, 39, 0.4);
+    transform: translateX(5px);
+}
+
+.highlight-emoji {
+    font-size: 1.3rem;
+    width: 24px;
+    text-align: center;
+}
+
+.highlight-text {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.ember-cta {
+    margin-top: 20px;
+}
+
+.ember-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.ember-cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(240, 165, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.ember-icon {
+    font-size: 1.2rem;
+    animation: emberPulse 2s ease-in-out infinite;
+}
+
+@keyframes emberPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.ember-text {
+    font-weight: 700;
+}
+
+.ember-token-visual {
+    text-align: center;
+    position: relative;
+}
+
+.ember-coin-showcase {
+    position: relative;
+    display: inline-block;
+}
+
+.ember-coin-image {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6));
+    animation: emberCoinFloat 4s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+@keyframes emberCoinFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6)); 
+    }
+    50% { 
+        transform: translateY(-15px) rotate(180deg); 
+        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.8)); 
+    }
+}
+
+.ember-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.2) 0%, transparent 70%);
+    animation: emberGlowPulse 3s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes emberGlowPulse {
+    0% { 
+        transform: translate(-50%, -50%) scale(1); 
+        opacity: 0.3; 
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(1.2); 
+        opacity: 0.6; 
+    }
 }
 
 /* NEW: Crypto Coin Section */
@@ -1571,6 +1804,22 @@ body {
         font-size: 24px !important;
     }
     
+    /* Mobile Ember Token Section */
+    .ember-token-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .ember-token-visual {
+        order: -1;
+    }
+    
+    .ember-coin-image {
+        width: 150px;
+        height: 150px;
+    }
+    
     /* Mobile Crypto Section */
     .crypto-content {
         grid-template-columns: 1fr;
@@ -1675,6 +1924,38 @@ body {
         min-width: 160px;
         display: inline-block;
         text-align: center;
+    }
+
+    /* Mobile Ember Token Section */
+    .ember-token-section {
+        padding: 60px 20px;
+    }
+    
+    .ember-token-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .ember-token-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+    
+    .ember-token-description {
+        font-size: 1.1rem;
+    }
+    
+    .ember-highlights {
+        gap: 12px;
+    }
+    
+    .ember-highlight {
+        padding: 10px 15px;
+    }
+    
+    .ember-coin-image {
+        width: 120px;
+        height: 120px;
     }
 
     /* Mobile Crypto Section */
@@ -2073,6 +2354,28 @@ body {
 
     .process-title {
         font-size: 1.4rem;
+    }
+
+    /* Ultra Mobile Ember Token Section */
+    .ember-token-section {
+        padding: 40px 15px;
+    }
+    
+    .ember-token-title {
+        font-size: clamp(1.4rem, 8vw, 2rem);
+    }
+    
+    .ember-token-description {
+        font-size: 1rem;
+    }
+    
+    .ember-highlight {
+        padding: 8px 12px;
+    }
+    
+    .ember-coin-image {
+        width: 100px;
+        height: 100px;
     }
 
     /* Ultra Mobile Crypto Section */
@@ -2475,6 +2778,7 @@ body {
 
 /* Performance Optimizations */
 .hero,
+.ember-token-section,
 .crypto-coin-section,
 .features,
 .app-showcase,
@@ -2511,6 +2815,7 @@ html {
 /* High contrast mode support */
 @media (prefers-contrast: high) {
     .hero-title,
+    .ember-token-title,
     .crypto-title,
     .section-title {
         text-shadow: none;
@@ -2520,6 +2825,7 @@ html {
     }
     
     .cta-button,
+    .ember-cta-button,
     .demo-button {
         border: 2px solid #ffffff;
     }
@@ -2530,6 +2836,7 @@ html {
     .navbar,
     .mobile-menu-btn,
     .demo-button,
+    .ember-cta-button,
     .cta-button,
     .social-media {
         display: none !important;
@@ -2541,6 +2848,7 @@ html {
     }
     
     .hero,
+    .ember-token-section,
     .crypto-coin-section,
     .app-showcase,
     .use-cases,
@@ -2553,6 +2861,7 @@ html {
 
 /* Focus styles for accessibility */
 .cta-button:focus,
+.ember-cta-button:focus,
 .demo-button:focus,
 .social-link:focus,
 .mobile-menu-btn:focus,
