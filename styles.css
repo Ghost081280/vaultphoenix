@@ -370,48 +370,52 @@ body {
     opacity: 1;
 }
 
-/* NEW: Enhanced CTA button styled for the coin image */
+/* NEW: Enhanced CTA button with orange gradient and larger coin */
 .ember-cta-button {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, #1a1a1a, #2d1810);
+    gap: 15px;
+    background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
-    padding: 16px 32px;
-    border-radius: 25px;
+    padding: 20px 40px;
+    border-radius: 30px;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    border: 2px solid rgba(240, 165, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(215, 51, 39, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     position: relative;
     z-index: 10;
+    min-width: 280px;
+    justify-content: center;
 }
 
 .ember-cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(240, 165, 0, 0.5);
-    border-color: rgba(240, 165, 0, 0.6);
-    background: linear-gradient(135deg, #2d1810, #451a03);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #fb923c, #d73327);
 }
 
 .ember-coin-icon {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(240, 165, 0, 0.3));
+    filter: drop-shadow(0 3px 6px rgba(240, 165, 0, 0.4));
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .ember-cta-button:hover .ember-coin-icon {
-    transform: scale(1.1) rotate(15deg);
-    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.6));
+    transform: scale(1.2) rotate(20deg);
+    filter: drop-shadow(0 5px 10px rgba(240, 165, 0, 0.7));
 }
 
 .ember-text {
     font-weight: 700;
     letter-spacing: 0.3px;
+    line-height: 1.2;
 }
 
 /* Enhanced CTA Button - Phoenix Crypto Theme */
@@ -1970,13 +1974,29 @@ body {
     }
     
     .phoenix-holding-coin-image {
-        width: 260px;
-        height: 260px;
+        width: 300px;
+        height: 300px;
     }
     
     .ember-glow {
-        width: 320px;
-        height: 320px;
+        width: 360px;
+        height: 360px;
+    }
+
+    .ember-cta-button {
+        padding: 18px 35px;
+        font-size: 1.1rem;
+        min-width: 240px;
+    }
+
+    .ember-coin-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .ember-cta {
+        padding: 15px;
+        margin-top: 20px;
     }
 
     /* Mobile Crypto Section */
@@ -2364,18 +2384,30 @@ body {
     }
     
     .phoenix-holding-coin-image {
-        width: 200px;
-        height: 200px;
+        width: 240px;
+        height: 240px;
     }
     
     .ember-glow {
-        width: 260px;
-        height: 260px;
+        width: 300px;
+        height: 300px;
     }
     
-    .ember-cta-button-small {
-        padding: 10px 20px;
-        font-size: 0.85rem;
+    .ember-cta-button {
+        padding: 16px 30px;
+        font-size: 1rem;
+        min-width: 220px;
+        gap: 12px;
+    }
+
+    .ember-coin-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .ember-cta {
+        padding: 12px;
+        margin-top: 15px;
     }
 
     /* Ultra Mobile Crypto Section */
