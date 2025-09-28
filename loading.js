@@ -678,3 +678,67 @@ function enhanceAccessibility() {
         if (phoenixImage) {
             phoenixImage.style.animation = 'none';
         }
+        
+        console.log('🔥🪙 Reduced motion preferences detected - animations disabled');
+    }
+    
+    // High contrast support
+    if (window.matchMedia && window.matchMedia('(prefers-contrast: high)').matches) {
+        document.querySelectorAll('.crypto-coin-icon').forEach(coin => {
+            coin.style.filter = 'drop-shadow(0 0 5px rgba(240, 165, 0, 0.9)) contrast(2)';
+        });
+        console.log('🔥🪙 High contrast preferences detected - enhanced visibility');
+    }
+    
+    // Screen reader support
+    const loadingContainer = document.querySelector('.loading-container');
+    if (loadingContainer) {
+        loadingContainer.setAttribute('role', 'progressbar');
+        loadingContainer.setAttribute('aria-label', 'Phoenix cryptocurrency gaming loading');
+        loadingContainer.setAttribute('aria-live', 'polite');
+    }
+    
+    // Keyboard navigation support
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            console.log('🔥🪙 Escape pressed during loading');
+        }
+        if (event.key === 'Enter' || event.key === ' ') {
+            console.log('🔥🪙 User interaction during loading');
+        }
+    });
+}
+
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔥🪙 Phoenix Crypto Loading: DOM loaded - starting initialization...');
+    
+    // Initialize all systems
+    setupErrorHandling();
+    initializeLoading();
+    monitorPerformance();
+    applyDeviceOptimizations();
+    enhanceAccessibility();
+    
+    console.log('🔥🪙 Phoenix crypto loading systems online with restored floating coins!');
+});
+
+// Enhanced window load event
+window.addEventListener('load', function() {
+    const totalLoadTime = performance.now();
+    console.log(`🔥🪙 Enhanced Phoenix Loading completed in ${Math.round(totalLoadTime)}ms`);
+    
+    // Final coin verification
+    const coinImages = document.querySelectorAll('.crypto-coin-icon');
+    console.log(`🔥🪙 Final load verification: ${coinImages.length} coins found`);
+    
+    // Trigger any final optimizations
+    setTimeout(() => {
+        monitorLayoutOptimization();
+    }, 500);
+});
+
+// Console welcome message
+console.log('%c🔥🪙 VAULT PHOENIX - LOADING SYSTEM RESTORED', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
+console.log('%c🚀 Complete loading system with floating coins, progress bar, and main site transition', 'color: #fb923c; font-size: 14px; font-weight: bold;');
+console.log('%c🔥🪙 RESTORED: All functionality including coin animations and site transition!', 'color: #f0a500; font-size: 12px; font-style: italic;');
