@@ -1,6 +1,6 @@
 /* Ember Token Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
-/* NAVIGATION FIX: Added high-specificity horizontal bar at top */
+/* FIXED: Changed mobile override from 1024px to 768px to preserve horizontal bar on desktop */
 
 /* SURGICAL NAVIGATION FIX - High Specificity */
 .navbar .nav-content .nav-links a {
@@ -38,8 +38,8 @@
     width: 100% !important;
 }
 
-/* Mobile override - disable horizontal bar on mobile only */
-@media (max-width: 1024px) {
+/* FIXED: Mobile override - changed from 1024px to 768px to preserve horizontal bar on desktop */
+@media (max-width: 768px) {
     .nav-links.mobile-active a::after {
         display: none !important;
     }
@@ -1494,8 +1494,8 @@ body {
     transform: translateY(-2px);
 }
 
-/* Mobile Responsive Design */
-@media (max-width: 1024px) {
+/* FIXED: Mobile Responsive Design - changed media query from 1024px to 768px */
+@media (max-width: 768px) {
     .mobile-menu-btn {
         display: block;
     }
