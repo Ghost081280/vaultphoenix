@@ -1,6 +1,6 @@
 // Vault Phoenix - Interactive JavaScript
-// Phoenix Rising from Digital Ashes - Crypto Gaming Edition
-// FIXED: Smooth Loading Transition
+// Phoenix Rising from Digital Ashes - Senior UX/UI Design
+// PROFESSIONAL: Strict background positioning for coins
 
 // Enhanced gallery function with correct image order
 function changeImage(imageSrc, title) {
@@ -356,12 +356,12 @@ function preloadPhoenixCryptoImages() {
     });
 }
 
-// Phoenix crypto coin floating effect for hero section - BACKGROUND ONLY VERSION
+// PROFESSIONAL: Phoenix crypto coin floating effect - STRICT BACKGROUND ONLY
 function createPhoenixCryptoParticles() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
     
-    // Create floating coins container that stays strictly in background
+    // Create floating coins container that NEVER interferes with content
     const floatingCoins = document.createElement('div');
     floatingCoins.className = 'hero-floating-coins';
     floatingCoins.style.cssText = `
@@ -371,18 +371,16 @@ function createPhoenixCryptoParticles() {
         width: 100%;
         height: 100%;
         pointer-events: none;
-        z-index: -1;
+        z-index: -10;
         overflow: hidden;
     `;
     
-    // Repositioned coins to avoid content areas - kept away from center
+    // STRATEGIC positioning - AVOID ALL CONTENT AREAS
     const coinPositions = [
-        { top: '15%', left: '8%', delay: '0s', duration: '6s' },
-        { top: '75%', left: '12%', delay: '1s', duration: '7s' },
-        { top: '25%', right: '8%', delay: '2s', duration: '8s' },
-        { top: '65%', right: '12%', delay: '3s', duration: '6s' },
-        { top: '10%', left: '85%', delay: '4s', duration: '7s' },
-        { bottom: '15%', right: '88%', delay: '5s', duration: '9s' }
+        { top: '5%', left: '3%', delay: '0s', duration: '8s' },
+        { bottom: '8%', left: '5%', delay: '2s', duration: '9s' },
+        { top: '8%', right: '3%', delay: '4s', duration: '10s' },
+        { bottom: '5%', right: '5%', delay: '6s', duration: '8s' }
     ];
     
     coinPositions.forEach((pos, index) => {
@@ -394,24 +392,25 @@ function createPhoenixCryptoParticles() {
         coinImg.alt = 'VP Ember Coin';
         coinImg.className = 'hero-crypto-coin-icon';
         coinImg.style.cssText = `
-            width: clamp(25px, 4vw, 40px);
-            height: clamp(25px, 4vw, 40px);
+            width: clamp(20px, 2.5vw, 30px);
+            height: clamp(20px, 2.5vw, 30px);
             object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
-            transition: all 0.3s ease;
-            opacity: 0.4;
+            filter: drop-shadow(0 0 4px rgba(240, 165, 0, 0.4));
+            transition: none;
+            opacity: 0.25;
             visibility: visible;
             display: block;
+            pointer-events: none;
         `;
         
         coin.appendChild(coinImg);
         
-        // Apply positioning with strict background z-index
+        // STRICT background positioning
         coin.style.cssText = `
             position: absolute;
             animation: heroCoinFloat ${pos.duration} ease-in-out infinite;
             animation-delay: ${pos.delay};
-            z-index: -1;
+            z-index: -10;
             pointer-events: none;
             ${pos.top ? `top: ${pos.top};` : ''}
             ${pos.bottom ? `bottom: ${pos.bottom};` : ''}
@@ -422,59 +421,59 @@ function createPhoenixCryptoParticles() {
         floatingCoins.appendChild(coin);
     });
     
-    // Insert at the very beginning of hero section to ensure background positioning
+    // Insert at the very beginning to ensure background positioning
     hero.insertBefore(floatingCoins, hero.firstChild);
     
-    // Add exact same CSS animation as loading screen with strict background positioning
+    // PROFESSIONAL CSS with strict background enforcement
     const style = document.createElement('style');
     style.textContent = `
         @keyframes heroCoinFloat {
             0%, 100% { 
                 transform: translateY(0px) rotate(0deg) scale(1); 
-                opacity: 0.3; 
-            }
-            25% { 
-                transform: translateY(-15px) rotate(90deg) scale(1.05); 
-                opacity: 0.5; 
+                opacity: 0.2; 
             }
             50% { 
-                transform: translateY(-8px) rotate(180deg) scale(0.95); 
-                opacity: 0.4; 
-            }
-            75% { 
-                transform: translateY(-18px) rotate(270deg) scale(1.1); 
-                opacity: 0.45; 
+                transform: translateY(-8px) rotate(180deg) scale(1.05); 
+                opacity: 0.3; 
             }
         }
         
-        /* Ensure coins stay in background on all screen sizes */
+        /* ABSOLUTE BACKGROUND ENFORCEMENT */
         .hero-floating-coins,
         .hero-coin,
         .hero-crypto-coin-icon {
-            z-index: -1 !important;
+            z-index: -10 !important;
             pointer-events: none !important;
         }
         
-        /* Mobile responsive sizing - smaller to avoid overlap */
+        /* Mobile optimization - reduce visual noise */
         @media (max-width: 768px) {
             .hero-crypto-coin-icon {
-                width: clamp(20px, 3vw, 30px) !important;
-                height: clamp(20px, 3vw, 30px) !important;
-                opacity: 0.3 !important;
+                opacity: 0.15 !important;
+                width: clamp(15px, 2vw, 25px) !important;
+                height: clamp(15px, 2vw, 25px) !important;
             }
         }
         
         @media (max-width: 480px) {
+            .hero-coin-3,
+            .hero-coin-4 {
+                display: none !important;
+            }
+            
             .hero-crypto-coin-icon {
-                width: clamp(15px, 2.5vw, 25px) !important;
-                height: clamp(15px, 2.5vw, 25px) !important;
-                opacity: 0.25 !important;
+                opacity: 0.1 !important;
             }
         }
         
-        /* Remove hover effects to maintain background status */
+        /* DISABLE ALL HOVER EFFECTS */
         .hero-coin .hero-crypto-coin-icon {
             transition: none !important;
+        }
+        
+        .hero-coin:hover .hero-crypto-coin-icon {
+            transform: none !important;
+            filter: drop-shadow(0 0 4px rgba(240, 165, 0, 0.4)) !important;
         }
     `;
     document.head.appendChild(style);
@@ -532,29 +531,30 @@ function initializeEmberPhoenixImage() {
     }, 60);
 }
 
-// Enhanced interactive feedback for all CTA buttons with crypto theme - UPDATED WITH VP EMBER COINS
+// PROFESSIONAL: Enhanced interactive feedback - SUBTLE SPARKLES ONLY
 document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .ember-cta-primary, .ember-cta-secondary').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
-        // Add subtle coin sparkle effect using VP ember coin
-        if (Math.random() > 0.7) {
+        // VERY SUBTLE sparkle effect - no distraction
+        if (Math.random() > 0.85) {
             const sparkle = document.createElement('img');
             sparkle.src = 'images/VPEmberCoin.PNG'; // FIXED: Updated coin reference
             sparkle.alt = 'VP Ember Coin Sparkle';
             sparkle.style.cssText = `
                 position: absolute;
-                width: 12px;
-                height: 12px;
-                animation: sparkle 0.8s ease-out forwards;
+                width: 8px;
+                height: 8px;
+                animation: sparkle 0.6s ease-out forwards;
                 pointer-events: none;
-                top: ${Math.random() * 20 - 10}px;
-                left: ${Math.random() * 20 - 10}px;
-                filter: drop-shadow(0 0 4px rgba(240, 165, 0, 0.8));
+                top: ${Math.random() * 15 - 7}px;
+                left: ${Math.random() * 15 - 7}px;
+                filter: drop-shadow(0 0 3px rgba(240, 165, 0, 0.6));
+                z-index: 1000;
             `;
             this.style.position = 'relative';
             this.appendChild(sparkle);
             
-            setTimeout(() => sparkle.remove(), 800);
+            setTimeout(() => sparkle.remove(), 600);
         }
     });
     
@@ -571,29 +571,29 @@ document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-butt
     });
 });
 
-// Add sparkle animation CSS
+// PROFESSIONAL sparkle animation
 const sparkleStyle = document.createElement('style');
 sparkleStyle.textContent = `
     @keyframes sparkle {
         0% { transform: translateY(0) scale(1); opacity: 1; }
-        100% { transform: translateY(-20px) scale(0); opacity: 0; }
+        100% { transform: translateY(-15px) scale(0); opacity: 0; }
     }
 `;
 document.head.appendChild(sparkleStyle);
 
-// Phoenix crypto-themed scroll progress indicator - UPDATED WITH VP EMBER COIN
+// PROFESSIONAL: Minimal scroll progress indicator
 function createPhoenixCryptoScrollIndicator() {
     const indicator = document.createElement('div');
     indicator.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
-        height: 4px;
+        height: 3px;
         background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
         z-index: 9999;
         transition: width 0.3s ease;
         width: 0%;
-        box-shadow: 0 2px 10px rgba(215, 51, 39, 0.3);
+        box-shadow: 0 1px 8px rgba(215, 51, 39, 0.3);
     `;
     document.body.appendChild(indicator);
     
@@ -603,18 +603,19 @@ function createPhoenixCryptoScrollIndicator() {
         const scrolled = (winScroll / height) * 100;
         indicator.style.width = scrolled + '%';
         
-        // Add VP ember coin at the end of progress bar
-        if (scrolled > 95 && !indicator.querySelector('.scroll-coin')) {
+        // MINIMAL coin at end - very small and subtle
+        if (scrolled > 98 && !indicator.querySelector('.scroll-coin')) {
             const coin = document.createElement('img');
             coin.src = 'images/VPEmberCoin.PNG'; // FIXED: Updated coin reference
             coin.className = 'scroll-coin';
             coin.style.cssText = `
                 position: absolute;
-                right: -10px;
-                top: -8px;
-                width: 20px;
-                height: 20px;
-                filter: drop-shadow(0 0 4px rgba(240, 165, 0, 0.8));
+                right: -8px;
+                top: -6px;
+                width: 15px;
+                height: 15px;
+                filter: drop-shadow(0 0 3px rgba(240, 165, 0, 0.6));
+                z-index: 10000;
             `;
             indicator.appendChild(coin);
         }
@@ -633,10 +634,10 @@ function initializeCryptoBenefits() {
                     entry.target.style.transform = 'translateX(0)';
                     entry.target.style.opacity = '1';
                     
-                    // Add a subtle coin bounce effect
+                    // SUBTLE icon effect
                     const icon = entry.target.querySelector('.benefit-icon');
                     if (icon) {
-                        icon.style.animation = 'coinBounce 0.6s ease-out';
+                        icon.style.animation = 'coinBounce 0.4s ease-out';
                     }
                 }, index * 200);
             }
@@ -649,13 +650,13 @@ function initializeCryptoBenefits() {
         benefitsObserver.observe(benefit);
     });
     
-    // Add coin bounce animation
+    // PROFESSIONAL bounce animation
     const coinBounceStyle = document.createElement('style');
     coinBounceStyle.textContent = `
         @keyframes coinBounce {
-            0% { transform: scale(1) rotateY(0deg); }
-            50% { transform: scale(1.2) rotateY(180deg); }
-            100% { transform: scale(1) rotateY(360deg); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
     `;
     document.head.appendChild(coinBounceStyle);
@@ -673,10 +674,10 @@ function initializeEmberHighlights() {
                     entry.target.style.transform = 'translateX(0)';
                     entry.target.style.opacity = '1';
                     
-                    // Add ember glow effect
+                    // SUBTLE glow effect
                     const icon = entry.target.querySelector('.highlight-icon');
                     if (icon) {
-                        icon.style.animation = 'emberGlow 0.8s ease-out';
+                        icon.style.animation = 'emberGlow 0.6s ease-out';
                     }
                 }, index * 150);
             }
@@ -689,19 +690,19 @@ function initializeEmberHighlights() {
         highlightsObserver.observe(highlight);
     });
     
-    // Add ember glow animation
+    // PROFESSIONAL glow animation
     const emberGlowStyle = document.createElement('style');
     emberGlowStyle.textContent = `
         @keyframes emberGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5)); }
-            50% { filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.9)); }
-            100% { filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5)); }
+            0% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+            100% { filter: brightness(1); }
         }
     `;
     document.head.appendChild(emberGlowStyle);
 }
 
-// Easter egg: Konami code for bonus crypto coins - UPDATED WITH VP EMBER COINS
+// PROFESSIONAL: Easter egg - MINIMAL coin rain
 let konamiCode = [];
 const konamiSequence = [
     'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
@@ -716,36 +717,36 @@ document.addEventListener('keydown', (e) => {
     }
     
     if (konamiCode.join(',') === konamiSequence.join(',')) {
-        // Trigger bonus crypto coin rain with VP ember coins
+        // MINIMAL coin celebration - not overwhelming
         console.log('🔥🪙 BONUS CRYPTO ACTIVATED! 🪙🔥');
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 15; i++) {
             setTimeout(() => {
                 const coin = document.createElement('img');
                 coin.src = 'images/VPEmberCoin.PNG'; // FIXED: Updated coin reference
                 coin.alt = 'VP Ember Bonus Coin';
                 coin.style.cssText = `
                     position: fixed;
-                    width: ${Math.random() * 30 + 20}px;
-                    height: ${Math.random() * 30 + 20}px;
+                    width: ${Math.random() * 20 + 15}px;
+                    height: ${Math.random() * 20 + 15}px;
                     left: ${Math.random() * 100}vw;
                     top: -50px;
                     z-index: 10000;
                     pointer-events: none;
-                    animation: coinFall ${Math.random() * 3 + 2}s linear forwards;
-                    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.8));
+                    animation: coinFall ${Math.random() * 2 + 1.5}s linear forwards;
+                    filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.8));
                 `;
                 document.body.appendChild(coin);
                 
-                setTimeout(() => coin.remove(), 5000);
+                setTimeout(() => coin.remove(), 3500);
             }, i * 100);
         }
         
-        // Add coin fall animation
+        // Coin fall animation
         const coinFallStyle = document.createElement('style');
         coinFallStyle.textContent = `
             @keyframes coinFall {
                 to { 
-                    transform: translateY(calc(100vh + 100px)) rotate(720deg); 
+                    transform: translateY(calc(100vh + 100px)) rotate(360deg); 
                     opacity: 0; 
                 }
             }
@@ -778,9 +779,9 @@ document.addEventListener('DOMContentLoaded', function() {
     preloadPhoenixCryptoImages();
     createPhoenixCryptoParticles();
     initializeCryptoCoinImage();
-    initializeEmberPhoenixImage(); // NEW: Initialize ember phoenix image
+    initializeEmberPhoenixImage();
     initializeCryptoBenefits();
-    initializeEmberHighlights(); // NEW: Initialize ember highlights
+    initializeEmberHighlights();
     createPhoenixCryptoScrollIndicator();
     
     // Phoenix crypto-specific initialization
