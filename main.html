@@ -62,54 +62,91 @@
         </div>
     </section>
 
-    <!-- Ember Token Section -->
-    <section class="ember-token-section" id="ember-token">
+    <!-- REBUILT: Compact Ember Token Section with Countdown Timer -->
+    <section class="ember-token-section-v2" id="ember-token">
         <div class="container">
-            <div class="ember-token-content">
-                <div class="ember-token-text">
-                    <h2 class="ember-token-title scroll-reveal">Join the Phoenix Token Evolution</h2>
-                    <p class="ember-token-description scroll-reveal stagger-1">
+            <div class="ember-token-grid">
+                <!-- Left Column: Text & Countdown -->
+                <div class="ember-token-left">
+                    <h2 class="ember-token-title-v2 scroll-reveal">Join the Phoenix Token Evolution</h2>
+                    <p class="ember-token-description-v2 scroll-reveal stagger-1">
                         Be among the first to own <span class="golden-highlight">$Ember Tokens</span> - the revolutionary cryptocurrency powering our AR gaming ecosystem. Secure your position in the future of blockchain gaming.
                     </p>
-                    <div class="ember-highlights scroll-reveal stagger-2">
-                        <a href="ember.html#whitepaper" class="ember-highlight-link">
-                            <div class="ember-highlight">
-                                <span class="highlight-emoji">📄</span>
-                                <span class="highlight-text">Technical White Paper</span>
+                    
+                    <!-- Countdown Timer Integration -->
+                    <div class="ember-countdown-widget scroll-reveal stagger-2">
+                        <div class="countdown-header">
+                            <div class="countdown-icon">🔥</div>
+                            <div class="countdown-text">
+                                <h3>Pre-Sale Ends In</h3>
+                                <p>Limited time early access pricing</p>
                             </div>
+                        </div>
+                        <div class="ember-countdown-timer">
+                            <div class="ember-time-unit">
+                                <span class="ember-time-value" id="ember-days">30</span>
+                                <span class="ember-time-label">Days</span>
+                            </div>
+                            <div class="ember-time-unit">
+                                <span class="ember-time-value" id="ember-hours">12</span>
+                                <span class="ember-time-label">Hours</span>
+                            </div>
+                            <div class="ember-time-unit">
+                                <span class="ember-time-value" id="ember-minutes">45</span>
+                                <span class="ember-time-label">Min</span>
+                            </div>
+                            <div class="ember-time-unit">
+                                <span class="ember-time-value" id="ember-seconds">30</span>
+                                <span class="ember-time-label">Sec</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compact highlights -->
+                    <div class="ember-highlights-compact scroll-reveal stagger-3">
+                        <a href="ember.html#whitepaper" class="ember-highlight-compact">
+                            <span class="highlight-emoji-compact">📄</span>
+                            <span class="highlight-text-compact">Technical White Paper</span>
+                            <span class="highlight-arrow">→</span>
                         </a>
-                        <a href="ember.html#roadmap" class="ember-highlight-link">
-                            <div class="ember-highlight">
-                                <span class="highlight-emoji">🗺️</span>
-                                <span class="highlight-text">2025 Roadmap</span>
-                            </div>
+                        <a href="ember.html#roadmap" class="ember-highlight-compact">
+                            <span class="highlight-emoji-compact">🗺️</span>
+                            <span class="highlight-text-compact">2025 Roadmap</span>
+                            <span class="highlight-arrow">→</span>
                         </a>
-                        <a href="ember.html#team" class="ember-highlight-link">
-                            <div class="ember-highlight">
-                                <span class="highlight-emoji">👥</span>
-                                <span class="highlight-text">Meet the Phoenix Builders</span>
-                            </div>
+                        <a href="ember.html#team" class="ember-highlight-compact">
+                            <span class="highlight-emoji-compact">👥</span>
+                            <span class="highlight-text-compact">Phoenix Builders</span>
+                            <span class="highlight-arrow">→</span>
                         </a>
                     </div>
                 </div>
-                <div class="ember-token-visual">
-                    <div class="ember-coin-showcase scroll-reveal">
-                        <img src="images/PhoenixHoldingCoin.PNG" alt="Phoenix Holding Crypto Coin" class="phoenix-holding-coin-image">
-                        <div class="ember-glow"></div>
-                    </div>
-                    <!-- Professional UX-focused CTA -->
-                    <div class="ember-presale-cta scroll-reveal stagger-3">
-                        <div class="presale-cta-card">
-                            <div class="cta-header">
-                                <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="cta-coin-large">
-                                <div class="cta-text-content">
-                                    <h3 class="cta-title">Early Access Available</h3>
-                                    <p class="cta-subtitle">Secure your $Ember tokens at pre-sale pricing</p>
+
+                <!-- Right Column: Visual & CTA -->
+                <div class="ember-token-right">
+                    <div class="ember-visual-stack scroll-reveal">
+                        <!-- Phoenix Image -->
+                        <div class="ember-phoenix-container">
+                            <img src="images/PhoenixHoldingCoin.PNG" alt="Phoenix Holding Crypto Coin" class="phoenix-holding-coin-compact">
+                            <div class="ember-glow-compact"></div>
+                        </div>
+                        
+                        <!-- Enhanced CTA Card -->
+                        <div class="ember-cta-card-v2">
+                            <div class="cta-header-v2">
+                                <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="cta-coin-xl">
+                                <div class="cta-content-v2">
+                                    <h3 class="cta-title-v2">Early Access Available</h3>
+                                    <div class="cta-benefits">
+                                        <span class="cta-benefit">50% Bonus Tokens</span>
+                                        <span class="cta-benefit">$0.001 Price</span>
+                                    </div>
                                 </div>
                             </div>
-                            <a href="ember.html#presale" class="presale-cta-button">
-                                <span class="cta-button-text">Join Pre-Sale Now</span>
-                                <span class="cta-arrow">→</span>
+                            <a href="ember.html#presale" class="ember-cta-button-v2">
+                                <span class="cta-text-main">Join Pre-Sale Now</span>
+                                <span class="cta-text-sub">Secure Your Position</span>
+                                <span class="cta-arrow-v2">🚀</span>
                             </a>
                         </div>
                     </div>
