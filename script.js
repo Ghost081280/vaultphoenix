@@ -1,5 +1,5 @@
 // Vault Phoenix - Interactive JavaScript
-// Phoenix Rising from Digital Ashes - RESTORED: Hero floating coins
+// Phoenix Rising from Digital Ashes - RESTORED: Hero floating coins + Scroll Progress Bar
 
 // Enhanced gallery function with correct image order
 function changeImage(imageSrc, title) {
@@ -552,44 +552,66 @@ subtleGlowStyle.textContent = `
 `;
 document.head.appendChild(subtleGlowStyle);
 
-// Minimal scroll progress indicator
+// CRITICAL: Horizontal scroll progress indicator - FIXED AND ACTIVATED
 function createPhoenixCryptoScrollIndicator() {
     const indicator = document.createElement('div');
+    indicator.id = 'phoenixScrollIndicator';
     indicator.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
-        height: 3px;
+        height: 4px;
         background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
         z-index: 9999;
         transition: width 0.3s ease;
         width: 0%;
-        box-shadow: 0 1px 8px rgba(215, 51, 39, 0.3);
+        box-shadow: 0 2px 10px rgba(215, 51, 39, 0.4);
+        border-radius: 0 2px 2px 0;
     `;
     document.body.appendChild(indicator);
     
-    window.addEventListener('scroll', () => {
+    // Update scroll progress
+    function updateScrollProgress() {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
         indicator.style.width = scrolled + '%';
         
-        // Minimal phoenix icon at end
-        if (scrolled > 98 && !indicator.querySelector('.scroll-phoenix')) {
+        // Add phoenix icon at end when near completion
+        if (scrolled > 95 && !indicator.querySelector('.scroll-phoenix')) {
             const phoenix = document.createElement('div');
             phoenix.innerHTML = '🔥';
             phoenix.className = 'scroll-phoenix';
             phoenix.style.cssText = `
                 position: absolute;
-                right: -8px;
-                top: -6px;
-                font-size: 12px;
-                filter: drop-shadow(0 0 3px rgba(240, 165, 0, 0.6));
+                right: -10px;
+                top: -8px;
+                font-size: 14px;
+                filter: drop-shadow(0 0 4px rgba(240, 165, 0, 0.8));
                 z-index: 10000;
+                animation: phoenixBounce 0.5s ease-out;
             `;
             indicator.appendChild(phoenix);
+        } else if (scrolled <= 95 && indicator.querySelector('.scroll-phoenix')) {
+            const phoenix = indicator.querySelector('.scroll-phoenix');
+            if (phoenix) phoenix.remove();
         }
-    });
+    }
+    
+    window.addEventListener('scroll', updateScrollProgress);
+    
+    // Add phoenix bounce animation
+    const phoenixBounceStyle = document.createElement('style');
+    phoenixBounceStyle.textContent = `
+        @keyframes phoenixBounce {
+            0% { transform: scale(0) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(phoenixBounceStyle);
+    
+    console.log('🔥 Horizontal scroll progress indicator created and activated!');
 }
 
 // Crypto benefits animation on scroll
@@ -688,7 +710,7 @@ document.addEventListener('keydown', (e) => {
     
     if (konamiCode.join(',') === konamiSequence.join(',')) {
         // RESTORED: Coin rain effect
-        console.log('🔥🪙 BONUS PHOENIX ACTIVATED! 🔥🪙');
+        console.log('🔥 BONUS PHOENIX ACTIVATED!');
         for (let i = 0; i < 12; i++) {
             setTimeout(() => {
                 const coin = document.createElement('img');
@@ -730,7 +752,7 @@ document.addEventListener('keydown', (e) => {
 // Enhanced window load event for smooth transition
 window.addEventListener('load', () => {
     const loadTime = performance.now();
-    console.log(`🔥🪙 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect coins!`);
+    console.log(`🔥 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect coins!`);
     
     // Initialize smooth loading after all resources loaded
     initializeSmoothLoading();
@@ -738,7 +760,7 @@ window.addEventListener('load', () => {
 
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥🪙 Phoenix Crypto Main: DOM loaded - starting initialization...');
+    console.log('🔥 Phoenix Crypto Main: DOM loaded - starting initialization...');
     
     preloadPhoenixCryptoImages();
     createPhoenixCryptoParticles(); // RESTORED: Hero floating coins
@@ -746,15 +768,15 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeEmberPhoenixImage();
     initializeCryptoBenefits();
     initializeEmberHighlights();
-    createPhoenixCryptoScrollIndicator();
+    createPhoenixCryptoScrollIndicator(); // CRITICAL: This creates the horizontal scroll bar
     
-    console.log('🔥🪙 Phoenix crypto systems online with restored floating coins!');
+    console.log('🔥 Phoenix crypto systems online with restored floating coins and scroll indicator!');
 });
 
 // Console welcome message
-console.log('%c🔥🪙 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
+console.log('%c🔥 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
 console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
-console.log('%c🔥🪙 RESTORED: Floating coins and full crypto gaming experience!', 'color: #d73327; font-size: 12px; font-style: italic;');
+console.log('%c🔥 RESTORED: Floating coins, scroll progress bar, and full crypto gaming experience!', 'color: #d73327; font-size: 12px; font-style: italic;');
 
-console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
+console.log('🔥 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
         '
