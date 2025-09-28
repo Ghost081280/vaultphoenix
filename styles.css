@@ -331,8 +331,8 @@ body {
 
 /* Enhanced: Larger Vault Phoenix image without animation */
 .phoenix-holding-coin-image {
-    width: 420px;
-    height: 420px;
+    width: 520px;
+    height: 520px;
     object-fit: contain;
     filter: drop-shadow(0 0 25px rgba(215, 51, 39, 0.6));
     transition: all 0.4s ease;
@@ -347,14 +347,14 @@ body {
     filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.9));
 }
 
-/* IMPROVED: Enhanced background glow behind the image that intensifies on hover */
+/* IMPROVED: Enhanced background glow behind the image that intensifies on hover - SINGLE GLOW ONLY */
 .ember-glow {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 480px;
-    height: 480px;
+    width: 580px;
+    height: 580px;
     background: radial-gradient(circle, rgba(215, 51, 39, 0.2) 0%, rgba(251, 146, 60, 0.1) 30%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
@@ -363,55 +363,54 @@ body {
     opacity: 0.6;
 }
 
-/* Enhanced hover glow effect - matching crypto section styling */
+/* Enhanced hover glow effect - single glow only */
 .phoenix-holding-coin-image:hover + .ember-glow {
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(251, 146, 60, 0.3) 30%, rgba(215, 51, 39, 0.2) 50%, transparent 70%);
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(251, 146, 60, 0.3) 30%, transparent 70%);
     transform: translate(-50%, -50%) scale(1.2);
     opacity: 1;
-    box-shadow: 0 0 80px rgba(240, 165, 0, 0.4);
 }
 
-/* NEW: CTA button positioned at the bottom */
-.ember-cta {
-    margin-top: 0;
+/* NEW: Enhanced CTA button styled for the coin image */
+.ember-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #1a1a1a, #2d1810);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(240, 165, 0, 0.3);
     position: relative;
     z-index: 10;
 }
 
-.ember-cta-button-small {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #f0a500, #fb923c);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 6px 20px rgba(240, 165, 0, 0.4);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+.ember-cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(240, 165, 0, 0.5);
+    border-color: rgba(240, 165, 0, 0.6);
+    background: linear-gradient(135deg, #2d1810, #451a03);
 }
 
-.ember-cta-button-small:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.4);
+.ember-coin-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(240, 165, 0, 0.3));
+    transition: all 0.3s ease;
 }
 
-.ember-icon {
-    font-size: 1.1rem;
-    animation: emberIconPulse 2s ease-in-out infinite;
-}
-
-@keyframes emberIconPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
+.ember-cta-button:hover .ember-coin-icon {
+    transform: scale(1.1) rotate(15deg);
+    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.6));
 }
 
 .ember-text {
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.3px;
 }
 
@@ -1859,13 +1858,13 @@ body {
     }
     
     .phoenix-holding-coin-image {
-        width: 320px;
-        height: 320px;
+        width: 380px;
+        height: 380px;
     }
     
     .ember-glow {
-        width: 380px;
-        height: 380px;
+        width: 440px;
+        height: 440px;
     }
     
     /* Mobile Crypto Section */
