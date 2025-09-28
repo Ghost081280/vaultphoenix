@@ -1,6 +1,6 @@
 // Vault Phoenix - Interactive JavaScript
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
-// FIXED: Floating coins now working properly
+// FIXED: Now uses correct VPEmberCoin.PNG for floating coins
 
 // Enhanced gallery function with correct image order
 function changeImage(imageSrc, title) {
@@ -378,8 +378,7 @@ function preloadPhoenixCryptoImages() {
     const criticalImages = [
         'images/IMG_7910.PNG', // Main phoenix crypto image
         'images/9FBD9FC3-8B64-44F7-9B5A-785531847CB9.PNG', // Phoenix holding coin
-        'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG', // Golden coin
-        'images/VPEmberCoin.PNG', // New ember coin image
+        'images/VPEmberCoin.PNG', // CORRECT EMBER COIN FOR FLOATING
         'images/PhoenixHoldingCoin.PNG', // Ember section image
         'images/IMG_4380.jpg',
         'images/IMG_4383.jpg',
@@ -394,7 +393,7 @@ function preloadPhoenixCryptoImages() {
     });
 }
 
-// FIXED: Phoenix crypto coin floating effect for hero section - NOW WORKING VERSION
+// FIXED: Phoenix crypto coin floating effect - NOW USES CORRECT VPEmberCoin.PNG
 function createPhoenixCryptoParticles() {
     const hero = document.querySelector('.hero');
     if (!hero) {
@@ -402,7 +401,7 @@ function createPhoenixCryptoParticles() {
         return;
     }
     
-    console.log('🔥🪙 Creating floating crypto coins...');
+    console.log('🔥🪙 Creating floating crypto coins with VPEmberCoin.PNG...');
     
     // Create floating coins container that stays strictly in background
     const floatingCoins = document.createElement('div');
@@ -432,43 +431,43 @@ function createPhoenixCryptoParticles() {
         const coin = document.createElement('div');
         coin.className = `hero-coin hero-coin-${index + 1}`;
         
-        // FIXED: Use crypto coin emoji as fallback if image fails
-        const coinImg = document.createElement('div');
-        coinImg.innerHTML = '🪙'; // Fallback crypto coin emoji
+        // FIXED: Create proper image element for VPEmberCoin.PNG
+        const coinImg = document.createElement('img');
+        coinImg.src = 'images/VPEmberCoin.PNG'; // CORRECT EMBER COIN IMAGE
+        coinImg.alt = 'VP Ember Coin';
         coinImg.className = 'hero-crypto-coin-icon';
         coinImg.style.cssText = `
             width: clamp(35px, 5vw, 50px);
             height: clamp(35px, 5vw, 50px);
-            font-size: clamp(35px, 5vw, 50px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            object-fit: contain;
             filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
             transition: all 0.3s ease;
-            opacity: 0.6;
-            color: #f0a500;
-            text-shadow: 0 0 10px rgba(240, 165, 0, 0.5);
+            opacity: 0.7;
+            border-radius: 50%;
         `;
         
-        // Try to load the actual image, but keep emoji as backup
-        const actualImg = new Image();
-        actualImg.onload = function() {
-            console.log('🔥🪙 Coin image loaded successfully:', actualImg.src);
-            coinImg.innerHTML = '';
-            coinImg.appendChild(actualImg);
-            actualImg.style.cssText = `
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
+        // Handle image load success/failure
+        coinImg.onload = function() {
+            console.log(`🔥🪙 VPEmberCoin.PNG loaded successfully for coin ${index + 1}`);
+        };
+        
+        coinImg.onerror = function() {
+            console.warn(`🔥🪙 VPEmberCoin.PNG failed to load for coin ${index + 1}, using emoji fallback`);
+            // Replace with emoji fallback if image fails
+            coinImg.style.display = 'none';
+            const fallback = document.createElement('div');
+            fallback.innerHTML = '🪙';
+            fallback.style.cssText = `
+                font-size: clamp(35px, 5vw, 50px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
+                color: #f0a500;
+                text-shadow: 0 0 10px rgba(240, 165, 0, 0.5);
             `;
+            coin.appendChild(fallback);
         };
-        actualImg.onerror = function() {
-            console.warn('🔥🪙 Coin image failed, using emoji fallback');
-            // Keep the emoji fallback
-        };
-        // Try multiple potential coin images
-        actualImg.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
         
         coin.appendChild(coinImg);
         
@@ -486,12 +485,12 @@ function createPhoenixCryptoParticles() {
         `;
         
         floatingCoins.appendChild(coin);
-        console.log(`🔥🪙 Created floating coin ${index + 1} at position:`, pos);
+        console.log(`🔥🪙 Created floating VPEmberCoin ${index + 1} at position:`, pos);
     });
     
     // Insert at the very beginning of hero section to ensure background positioning
     hero.insertBefore(floatingCoins, hero.firstChild);
-    console.log('🔥🪙 Floating coins container added to hero');
+    console.log('🔥🪙 Floating VPEmberCoin coins container added to hero');
     
     // FIXED: Add working CSS animation
     const style = document.createElement('style');
@@ -499,19 +498,19 @@ function createPhoenixCryptoParticles() {
         @keyframes heroCoinFloat {
             0%, 100% { 
                 transform: translateY(0px) rotate(0deg) scale(1); 
-                opacity: 0.6; 
+                opacity: 0.7; 
             }
             25% { 
                 transform: translateY(-20px) rotate(90deg) scale(1.1); 
-                opacity: 0.8; 
+                opacity: 0.9; 
             }
             50% { 
                 transform: translateY(-10px) rotate(180deg) scale(0.9); 
-                opacity: 0.7; 
+                opacity: 0.8; 
             }
             75% { 
                 transform: translateY(-25px) rotate(270deg) scale(1.15); 
-                opacity: 0.75; 
+                opacity: 0.85; 
             }
         }
         
@@ -532,8 +531,7 @@ function createPhoenixCryptoParticles() {
             .hero-crypto-coin-icon {
                 width: clamp(25px, 4vw, 35px) !important;
                 height: clamp(25px, 4vw, 35px) !important;
-                font-size: clamp(25px, 4vw, 35px) !important;
-                opacity: 0.5 !important;
+                opacity: 0.6 !important;
             }
         }
         
@@ -541,13 +539,12 @@ function createPhoenixCryptoParticles() {
             .hero-crypto-coin-icon {
                 width: clamp(20px, 4vw, 30px) !important;
                 height: clamp(20px, 4vw, 30px) !important;
-                font-size: clamp(20px, 4vw, 30px) !important;
-                opacity: 0.4 !important;
+                opacity: 0.5 !important;
             }
         }
     `;
     document.head.appendChild(style);
-    console.log('🔥🪙 Floating coin animations added');
+    console.log('🔥🪙 Floating VPEmberCoin animations added');
 }
 
 // Enhanced crypto coin image interaction
@@ -624,29 +621,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // Phoenix crypto-specific initialization
     console.log('🔥🪙 Phoenix crypto systems online and ready for action!');
     console.log('🔥🪙 Ember Section V2 with Countdown - Ready!');
-    console.log('🔥🪙 Floating coins should now be visible in hero section!');
+    console.log('🔥🪙 Floating VPEmberCoin.PNG coins should now be visible in hero section!');
 });
 
-// Enhanced interactive feedback for all CTA buttons with crypto theme - UPDATED WITH GOLDEN COINS
+// Enhanced interactive feedback for all CTA buttons with crypto theme
 document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .ember-cta-button-v2').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
-        // Add subtle coin sparkle effect using golden coin emoji as fallback
+        // Add subtle coin sparkle effect using VPEmberCoin image
         if (Math.random() > 0.7) {
-            const sparkle = document.createElement('div');
-            sparkle.innerHTML = '✨'; // Using sparkle emoji as reliable fallback
+            const sparkle = document.createElement('img');
+            sparkle.src = 'images/VPEmberCoin.PNG';
+            sparkle.alt = 'VP Ember Coin Sparkle';
             sparkle.style.cssText = `
                 position: absolute;
                 width: 12px;
                 height: 12px;
-                font-size: 12px;
                 animation: sparkle 0.8s ease-out forwards;
                 pointer-events: none;
                 top: ${Math.random() * 20 - 10}px;
                 left: ${Math.random() * 20 - 10}px;
                 filter: drop-shadow(0 0 4px rgba(240, 165, 0, 0.8));
                 z-index: 10;
+                border-radius: 50%;
             `;
+            
+            // Fallback to emoji if image fails
+            sparkle.onerror = function() {
+                this.style.display = 'none';
+                const fallback = document.createElement('div');
+                fallback.innerHTML = '✨';
+                fallback.style.cssText = this.style.cssText;
+                fallback.style.fontSize = '12px';
+                this.parentNode.appendChild(fallback);
+            };
+            
             this.style.position = 'relative';
             this.appendChild(sparkle);
             
@@ -789,7 +798,7 @@ document.addEventListener('DOMContentLoaded', function() {
     createPhoenixCryptoScrollIndicator();
 });
 
-// Easter egg: Konami code for bonus crypto coins - UPDATED WITH RELIABLE EMOJIS
+// Easter egg: Konami code for bonus crypto coins - UPDATED WITH VPEmberCoin.PNG
 let konamiCode = [];
 const konamiSequence = [
     'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
@@ -804,25 +813,39 @@ document.addEventListener('keydown', (e) => {
     }
     
     if (konamiCode.join(',') === konamiSequence.join(',')) {
-        // Trigger bonus crypto coin rain with reliable emojis
+        // Trigger bonus crypto coin rain with VPEmberCoin.PNG
         console.log('🔥🪙 BONUS CRYPTO ACTIVATED! 🪙🔥');
         for (let i = 0; i < 30; i++) {
             setTimeout(() => {
-                const coin = document.createElement('div');
-                coin.innerHTML = '🪙'; // Reliable coin emoji
+                const coin = document.createElement('img');
+                coin.src = 'images/VPEmberCoin.PNG';
+                coin.alt = 'VP Ember Bonus Coin';
                 coin.style.cssText = `
                     position: fixed;
-                    font-size: ${Math.random() * 20 + 25}px;
+                    width: ${Math.random() * 20 + 25}px;
+                    height: ${Math.random() * 20 + 25}px;
                     left: ${Math.random() * 100}vw;
                     top: -50px;
                     z-index: 10000;
                     pointer-events: none;
                     animation: coinFall ${Math.random() * 3 + 2}s linear forwards;
                     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.8));
-                    color: #f0a500;
+                    border-radius: 50%;
                 `;
-                document.body.appendChild(coin);
                 
+                // Fallback to emoji if image fails
+                coin.onerror = function() {
+                    this.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.innerHTML = '🪙';
+                    fallback.style.cssText = this.style.cssText;
+                    fallback.style.fontSize = this.style.width;
+                    fallback.style.color = '#f0a500';
+                    document.body.appendChild(fallback);
+                    setTimeout(() => fallback.remove(), 5000);
+                };
+                
+                document.body.appendChild(coin);
                 setTimeout(() => coin.remove(), 5000);
             }, i * 150);
         }
@@ -847,13 +870,13 @@ document.addEventListener('keydown', (e) => {
 console.log('%c🔥🪙 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
 console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
 console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
-console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with Blockchain Power!', 'color: #d73327; font-size: 12px; font-style: italic;');
+console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with VPEmberCoin.PNG!', 'color: #d73327; font-size: 12px; font-style: italic;');
 console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
 
 // Performance monitoring with phoenix crypto theme
 window.addEventListener('load', () => {
     const loadTime = performance.now();
-    console.log(`%c🔥🪙 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect coins!`, 'color: #22c55e; font-weight: bold;');
+    console.log(`%c🔥🪙 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect VPEmberCoins!`, 'color: #22c55e; font-weight: bold;');
     
     // Optional: Add phoenix flame effect to logo after load
     const logoIcon = document.querySelector('.logo-icon');
@@ -865,7 +888,7 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         const floatingCoins = document.querySelector('.hero-floating-coins');
         if (floatingCoins) {
-            console.log('🔥🪙 SUCCESS: Floating coins are active!');
+            console.log('🔥🪙 SUCCESS: Floating VPEmberCoin.PNG coins are active!');
         } else {
             console.warn('🔥🪙 WARNING: Floating coins not found!');
         }
