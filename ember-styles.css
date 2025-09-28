@@ -1,6 +1,5 @@
-/* Ember Token Page Stylesheet */
-/* Phoenix Rising from Digital Ashes - $Ember Token Edition */
-/* FINAL FIX: Navigation horizontal bar NOW WORKS PROPERLY - EXACT COPY FROM MAIN.HTML */
+/* DEBUGGING VERSION - EMBER STYLES WITH FORCED HORIZONTAL BAR */
+/* This version has enhanced debugging and forced visibility */
 
 * {
     margin: 0;
@@ -16,7 +15,7 @@ body {
     background: #0f0f0f;
 }
 
-/* EXACT COPY FROM MAIN.HTML: Navigation system */
+/* DEBUG: Navigation with FORCED horizontal bar visibility */
 .navbar {
     position: fixed;
     top: 0;
@@ -67,53 +66,73 @@ body {
     filter: drop-shadow(0 0 8px rgba(215, 51, 39, 0.3));
 }
 
-.logo-image:hover {
-    filter: drop-shadow(0 0 12px rgba(215, 51, 39, 0.6));
-    transform: scale(1.05);
-}
-
 .nav-links {
     display: flex;
     gap: 40px;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links li {
     display: inline-block;
+    margin: 0;
+    padding: 0;
+    position: relative;
 }
 
-/* EXACT COPY FROM MAIN.HTML: Nav links with horizontal bar */
+/* DEBUG: ENHANCED nav links with FORCED horizontal bar */
 .nav-links a {
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    padding: 10px 0;
-    display: inline-block;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    padding: 10px 0 !important;
+    display: inline-block !important;
+    border: none !important;
+    outline: none !important;
 }
 
 .nav-links a:hover {
-    color: #fb923c;
-    transform: translateY(-2px);
+    color: #fb923c !important;
+    transform: translateY(-2px) !important;
 }
 
-/* EXACT COPY FROM MAIN.HTML: Horizontal bar animation - THE CRITICAL PART */
+/* DEBUG: FORCED horizontal bar with maximum visibility */
 .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #d73327, #fb923c);
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 2px;
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 3px !important;
+    background: linear-gradient(90deg, #d73327, #fb923c) !important;
+    background-color: #d73327 !important; /* Fallback */
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-radius: 2px !important;
+    display: block !important;
+    z-index: 999 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .nav-links a:hover::after {
-    width: 100%;
+    width: 100% !important;
+}
+
+/* DEBUG: Add a visible test bar that's always showing */
+.nav-links a::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -5px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 1px !important;
+    background: rgba(255, 0, 0, 0.3) !important; /* Red test line */
+    display: block !important;
+    z-index: 998 !important;
 }
 
 .cta-button {
@@ -147,12 +166,6 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.mobile-menu-btn:hover {
-    background: #d73327;
-    transform: scale(1.05);
 }
 
 /* Ember Hero Section */
@@ -322,6 +335,65 @@ body {
     border-color: white;
     transform: translateY(-3px);
 }
+
+/* DEBUG: Mobile menu with disabled horizontal bar */
+@media (max-width: 1024px) {
+    .mobile-menu-btn {
+        display: block !important;
+    }
+    
+    .nav-links {
+        display: none !important;
+    }
+
+    .nav-links.mobile-active {
+        display: flex !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #0f0f0f !important;
+        z-index: 9998 !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 30px !important;
+        padding: 40px 20px !important;
+    }
+
+    .nav-links.mobile-active li {
+        display: block !important;
+        width: 100% !important;
+        max-width: 300px !important;
+    }
+
+    .nav-links.mobile-active a {
+        display: block !important;
+        width: 100% !important;
+        padding: 20px 30px !important;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        background: rgba(215, 51, 39, 0.9) !important;
+        border: 3px solid #d73327 !important;
+        border-radius: 12px !important;
+        text-align: center !important;
+        text-decoration: none !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
+    }
+
+    /* DEBUG: Disable horizontal bar ONLY on mobile */
+    .nav-links.mobile-active a::after,
+    .nav-links.mobile-active a::before {
+        display: none !important;
+    }
+}
+
+/* Continue with rest of styles... */
 
 /* How It Works Section */
 .how-it-works-section {
@@ -508,7 +580,9 @@ body {
     font-size: 0.95rem;
 }
 
-/* Ember Sections */
+/* Add the rest of your existing styles here... */
+
+/* Container and sections */
 .ember-section {
     padding: 120px 40px;
     position: relative;
@@ -527,922 +601,6 @@ body {
     margin: 0 auto;
     position: relative;
     z-index: 10;
-}
-
-.ember-section-header {
-    text-align: center;
-    margin-bottom: 80px;
-}
-
-.ember-section-icon {
-    font-size: 4rem;
-    margin-bottom: 25px;
-    display: block;
-    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
-}
-
-.ember-section-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    margin-bottom: 25px;
-    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #f0a500 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.02em;
-}
-
-.ember-section-subtitle {
-    font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 700px;
-    margin: 0 auto;
-    font-weight: 500;
-}
-
-/* White Paper Section */
-.whitepaper-content {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.whitepaper-overview {
-    background: rgba(215, 51, 39, 0.1);
-    padding: 40px;
-    border-radius: 20px;
-    margin-bottom: 50px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(215, 51, 39, 0.2);
-}
-
-.whitepaper-overview h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 20px;
-}
-
-.whitepaper-overview p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 15px;
-}
-
-.whitepaper-sections {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
-    margin-bottom: 50px;
-}
-
-.whitepaper-section {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 30px;
-    border-radius: 15px;
-    border: 1px solid rgba(215, 51, 39, 0.2);
-    backdrop-filter: blur(10px);
-}
-
-.whitepaper-section h4 {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #fb923c;
-    margin-bottom: 15px;
-}
-
-.whitepaper-section p {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.6;
-}
-
-.download-section {
-    text-align: center;
-    background: rgba(240, 165, 0, 0.1);
-    padding: 40px;
-    border-radius: 20px;
-    border: 1px solid rgba(240, 165, 0, 0.3);
-}
-
-.download-section h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 15px;
-}
-
-.download-section p {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 25px;
-    font-size: 1.1rem;
-}
-
-.download-button {
-    background: linear-gradient(135deg, #f0a500, #fb923c);
-    color: white;
-    padding: 15px 35px;
-    border: none;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(240, 165, 0, 0.4);
-}
-
-.download-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(240, 165, 0, 0.5);
-}
-
-/* Continue with all other sections - same as original but with fixed navigation */
-
-/* EXACT COPY FROM MAIN.HTML: Mobile Navigation System */
-@media (max-width: 1024px) {
-    .mobile-menu-btn {
-        display: block !important;
-    }
-    
-    .nav-links {
-        display: none !important;
-    }
-
-    .nav-links.mobile-active {
-        display: flex !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        background: #0f0f0f !important;
-        z-index: 9998 !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 30px !important;
-        padding: 40px 20px !important;
-        margin: 0 !important;
-        list-style: none !important;
-    }
-
-    .nav-links.mobile-active li {
-        display: block !important;
-        width: 100% !important;
-        max-width: 300px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .nav-links.mobile-active a {
-        display: block !important;
-        width: 100% !important;
-        padding: 20px 30px !important;
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        color: #ffffff !important;
-        background: rgba(215, 51, 39, 0.9) !important;
-        border: 3px solid #d73327 !important;
-        border-radius: 12px !important;
-        text-align: center !important;
-        text-decoration: none !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
-        margin: 0 !important;
-    }
-
-    .nav-links.mobile-active a:hover,
-    .nav-links.mobile-active a:active {
-        background: #d73327 !important;
-        border-color: #fb923c !important;
-        transform: scale(1.05) !important;
-        box-shadow: 0 12px 30px rgba(215, 51, 39, 0.6) !important;
-        color: #ffffff !important;
-    }
-
-    /* EXACT COPY FROM MAIN.HTML: Disable horizontal bar ONLY on mobile */
-    .nav-links.mobile-active a::after {
-        display: none !important;
-    }
-}
-
-/* Rest of CSS remains the same as original ember styles... */
-
-/* Roadmap Section */
-.roadmap-section {
-    background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
-}
-
-.roadmap-timeline {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.roadmap-item {
-    background: rgba(215, 51, 39, 0.1);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: 20px;
-    padding: 40px;
-    margin-bottom: 30px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-.roadmap-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(215, 51, 39, 0.2);
-}
-
-.roadmap-item.active {
-    border-color: #f0a500;
-    background: rgba(240, 165, 0, 0.15);
-}
-
-.mainnet-phase {
-    border-color: #4ade80;
-    background: rgba(74, 222, 128, 0.1);
-}
-
-.expansion-phase {
-    border-color: #3b82f6;
-    background: rgba(59, 130, 246, 0.1);
-}
-
-.scaling-phase {
-    border-color: #8b5cf6;
-    background: rgba(139, 92, 246, 0.1);
-}
-
-.roadmap-quarter {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #f0a500;
-    margin-bottom: 10px;
-}
-
-.roadmap-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 10px;
-}
-
-.roadmap-status {
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: 15px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.roadmap-item.active .roadmap-status {
-    background: #f0a500;
-    color: #0f0f0f;
-}
-
-.roadmap-item.upcoming .roadmap-status {
-    background: #fb923c;
-    color: white;
-}
-
-.roadmap-item.future .roadmap-status {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-}
-
-.roadmap-tasks {
-    list-style: none;
-    margin-bottom: 20px;
-}
-
-.roadmap-tasks li {
-    padding: 8px 0;
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.roadmap-note {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    border-radius: 10px;
-    border-left: 4px solid #f0a500;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.trust-signals {
-    margin-top: 60px;
-}
-
-.trust-signals h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.trust-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.trust-item {
-    background: rgba(240, 165, 0, 0.1);
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-.trust-item:hover {
-    transform: translateY(-5px);
-    background: rgba(240, 165, 0, 0.15);
-    box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
-}
-
-.trust-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    display: block;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
-}
-
-.trust-item h4 {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 15px;
-}
-
-.trust-item p {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.6;
-}
-
-/* Team Section */
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
-    margin-bottom: 60px;
-}
-
-.team-member {
-    background: rgba(215, 51, 39, 0.1);
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    border: 1px solid rgba(215, 51, 39, 0.2);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-.team-member:hover {
-    transform: translateY(-5px);
-    background: rgba(215, 51, 39, 0.15);
-    box-shadow: 0 20px 40px rgba(215, 51, 39, 0.2);
-}
-
-.member-avatar {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
-}
-
-.member-name {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 8px;
-}
-
-.member-role {
-    font-size: 1.1rem;
-    color: #f0a500;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.member-bio {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.member-skills {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.skill-tag {
-    background: rgba(240, 165, 0, 0.2);
-    color: #f0a500;
-    padding: 5px 12px;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border: 1px solid rgba(240, 165, 0, 0.3);
-}
-
-.advisors-section {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 40px;
-    border-radius: 20px;
-    border: 1px solid rgba(215, 51, 39, 0.2);
-}
-
-.advisors-section h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 15px;
-}
-
-.advisors-section p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-/* Tokenomics Section */
-.tokenomics-section {
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
-}
-
-.tokenomics-content {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.token-distribution {
-    margin-bottom: 60px;
-}
-
-.token-distribution h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.distribution-chart {
-    background: rgba(215, 51, 39, 0.1);
-    padding: 40px;
-    border-radius: 20px;
-    border: 1px solid rgba(215, 51, 39, 0.2);
-}
-
-.chart-item {
-    margin-bottom: 15px;
-}
-
-.chart-bar {
-    height: 50px;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.chart-label {
-    color: white;
-    font-weight: 700;
-    font-size: 1rem;
-    z-index: 10;
-    position: relative;
-}
-
-.tokenomics-details {
-    margin-bottom: 60px;
-}
-
-.tokenomics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.tokenomics-card {
-    background: rgba(240, 165, 0, 0.1);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-.tokenomics-card:hover {
-    transform: translateY(-5px);
-    background: rgba(240, 165, 0, 0.15);
-    box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
-}
-
-.tokenomics-card h4 {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 15px;
-}
-
-.tokenomics-card p {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.6;
-}
-
-.token-metrics {
-    text-align: center;
-}
-
-.token-metrics h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 30px;
-}
-
-.metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-}
-
-.metric-item {
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    padding: 30px;
-    border-radius: 20px;
-    color: white;
-    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.4);
-}
-
-.metric-value {
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 8px;
-}
-
-.metric-label {
-    font-size: 1rem;
-    font-weight: 600;
-    opacity: 0.95;
-}
-
-/* $Ember Token Sale Section */
-.presale-section {
-    background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
-}
-
-.presale-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-    margin-bottom: 80px;
-}
-
-.presale-main {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.presale-timer {
-    background: rgba(215, 51, 39, 0.1);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    text-align: center;
-}
-
-.presale-timer h3 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 20px;
-}
-
-.countdown-timer {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-}
-
-.time-unit {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-}
-
-.time-value {
-    font-size: 2rem;
-    font-weight: 900;
-    color: #f0a500;
-    display: block;
-}
-
-.time-label {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 600;
-}
-
-.presale-progress {
-    background: rgba(215, 51, 39, 0.1);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(215, 51, 39, 0.3);
-}
-
-.presale-progress h3 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.progress-bar {
-    background: rgba(0, 0, 0, 0.3);
-    height: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
-    border-radius: 10px;
-    transition: width 0.3s ease;
-}
-
-.progress-stats {
-    display: flex;
-    justify-content: space-between;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 600;
-}
-
-.presale-bonus {
-    background: rgba(240, 165, 0, 0.1);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(240, 165, 0, 0.3);
-}
-
-.presale-bonus h3 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.bonus-tiers {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.bonus-tier {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.bonus-tier.active {
-    border-color: #f0a500;
-    background: rgba(240, 165, 0, 0.2);
-}
-
-.tier-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #f0a500;
-    margin-bottom: 5px;
-}
-
-.tier-bonus {
-    font-size: 1.3rem;
-    font-weight: 900;
-    color: white;
-    margin-bottom: 5px;
-}
-
-.tier-desc {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.presale-form {
-    position: sticky;
-    top: 140px;
-}
-
-.presale-card {
-    background: rgba(215, 51, 39, 0.1);
-    padding: 40px;
-    border-radius: 20px;
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    backdrop-filter: blur(10px);
-}
-
-.presale-card h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.investment-calculator {
-    margin-bottom: 30px;
-}
-
-.investment-calculator label {
-    display: block;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.investment-calculator input {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.3);
-    color: white;
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-}
-
-.investment-calculator input:focus {
-    border: 1px solid rgba(215, 51, 39, 0.5);
-    outline: none;
-}
-
-.calculation-result {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid rgba(240, 165, 0, 0.3);
-}
-
-.result-line {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.result-line.bonus {
-    color: #f0a500;
-}
-
-.result-line.total {
-    font-weight: 800;
-    font-size: 1.1rem;
-    color: white;
-    border-bottom: none;
-    padding-top: 15px;
-    margin-top: 10px;
-    border-top: 2px solid rgba(240, 165, 0, 0.5);
-}
-
-.payment-methods {
-    margin-bottom: 30px;
-}
-
-.payment-methods h4 {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.payment-options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-
-.payment-option {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.payment-option:hover {
-    background: rgba(215, 51, 39, 0.2);
-    border-color: #f0a500;
-}
-
-.payment-icon {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.presale-button {
-    width: 100%;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    color: white;
-    padding: 18px;
-    border: none;
-    border-radius: 15px;
-    font-size: 1.2rem;
-    font-weight: 800;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(215, 51, 39, 0.4);
-    margin-bottom: 20px;
-}
-
-.presale-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
-}
-
-.presale-note {
-    text-align: center;
-}
-
-.presale-note p {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 5px;
-}
-
-.presale-benefits {
-    margin-top: 80px;
-}
-
-.presale-benefits h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 40px;
-    text-align: center;
-}
-
-.benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.benefit-item {
-    background: rgba(240, 165, 0, 0.1);
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-.benefit-item:hover {
-    transform: translateY(-5px);
-    background: rgba(240, 165, 0, 0.15);
-    box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
-}
-
-.benefit-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    display: block;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
-}
-
-.benefit-item h4 {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 15px;
-}
-
-.benefit-item p {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.6;
 }
 
 /* Footer */
@@ -1535,408 +693,6 @@ body {
 .footer-links a:hover {
     color: #f0a500;
     transform: translateY(-2px);
-}
-
-/* Continue with responsive breakpoints... */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 15px 20px;
-    }
-
-    .logo {
-        font-size: 20px;
-    }
-
-    .logo-image {
-        height: 60px;
-    }
-
-    .ember-hero {
-        padding: 120px 0 60px;
-    }
-
-    .ember-hero-content {
-        padding: 0 20px;
-    }
-
-    .ember-token-icon {
-        font-size: 5rem;
-        margin-bottom: 20px;
-    }
-
-    .ember-hero-title {
-        font-size: clamp(2rem, 8vw, 3.5rem);
-        margin-bottom: 20px;
-    }
-
-    .ember-hero-subtitle-main {
-        font-size: clamp(1.2rem, 4vw, 1.8rem);
-        margin-bottom: 15px;
-    }
-
-    .ember-hero-subtitle {
-        font-size: clamp(1rem, 4vw, 1.3rem);
-        margin-bottom: 40px;
-    }
-
-    .ember-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        margin-bottom: 40px;
-    }
-
-    .ember-stat-card {
-        padding: 20px;
-    }
-
-    .stat-number {
-        font-size: 2rem;
-    }
-
-    .ember-hero-cta {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .ember-cta-primary,
-    .ember-cta-secondary {
-        width: 100%;
-        max-width: 300px;
-        padding: 15px 35px;
-        font-size: 1.1rem;
-    }
-
-    .ember-section {
-        padding: 60px 20px;
-    }
-
-    .ember-section-icon {
-        font-size: 3rem;
-        margin-bottom: 20px;
-    }
-
-    .ember-section-title {
-        font-size: clamp(1.8rem, 6vw, 2.5rem);
-        margin-bottom: 20px;
-    }
-
-    .ember-section-subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 60px;
-    }
-
-    .how-it-works-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-
-    .stakeholder-card {
-        padding: 25px;
-    }
-
-    .stakeholder-icon {
-        font-size: 3rem;
-    }
-
-    .stakeholder-title {
-        font-size: 1.5rem;
-    }
-
-    .utility-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .utility-item {
-        padding: 20px;
-    }
-
-    .whitepaper-sections {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .whitepaper-section {
-        padding: 25px;
-    }
-
-    .whitepaper-overview {
-        padding: 30px;
-        margin-bottom: 40px;
-    }
-
-    .download-section {
-        padding: 30px;
-    }
-
-    .roadmap-item {
-        padding: 30px;
-        margin-bottom: 20px;
-    }
-
-    .roadmap-quarter {
-        font-size: 1.3rem;
-    }
-
-    .roadmap-title {
-        font-size: 1.5rem;
-    }
-
-    .trust-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .trust-item {
-        padding: 25px;
-    }
-
-    .team-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .team-member {
-        padding: 30px;
-    }
-
-    .member-avatar {
-        font-size: 3rem;
-    }
-
-    .advisors-section {
-        padding: 30px;
-    }
-
-    .tokenomics-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .tokenomics-card {
-        padding: 25px;
-    }
-
-    .distribution-chart {
-        padding: 30px;
-    }
-
-    .metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .metric-item {
-        padding: 25px;
-    }
-
-    .metric-value {
-        font-size: 1.5rem;
-    }
-
-    .countdown-timer {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-
-    .time-unit {
-        padding: 15px;
-    }
-
-    .time-value {
-        font-size: 1.5rem;
-    }
-
-    .bonus-tiers {
-        gap: 10px;
-    }
-
-    .bonus-tier {
-        padding: 15px;
-    }
-
-    .presale-card {
-        padding: 30px;
-    }
-
-    .payment-options {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .benefits-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .benefit-item {
-        padding: 25px;
-    }
-
-    .benefit-icon {
-        font-size: 2.5rem;
-    }
-
-    .footer {
-        padding: 40px 20px;
-    }
-
-    .footer-logo {
-        font-size: 1.5rem;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .footer-links {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .social-media {
-        gap: 20px;
-    }
-
-    .presale-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .presale-form {
-        position: static;
-    }
-}
-
-@media (max-width: 480px) {
-    .ember-stats-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .ember-stat-card {
-        padding: 15px;
-    }
-
-    .stat-number {
-        font-size: 1.8rem;
-    }
-
-    .ember-section {
-        padding: 40px 15px;
-    }
-
-    .stakeholder-card {
-        padding: 20px;
-    }
-
-    .stakeholder-icon {
-        font-size: 2.5rem;
-    }
-
-    .flow-step {
-        padding: 12px;
-    }
-
-    .utility-item {
-        padding: 15px;
-    }
-
-    .whitepaper-overview {
-        padding: 25px;
-    }
-
-    .whitepaper-section {
-        padding: 20px;
-    }
-
-    .download-section {
-        padding: 25px;
-    }
-
-    .roadmap-item {
-        padding: 25px;
-    }
-
-    .trust-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .trust-item {
-        padding: 20px;
-    }
-
-    .trust-icon {
-        font-size: 2rem;
-    }
-
-    .team-member {
-        padding: 25px;
-    }
-
-    .member-avatar {
-        font-size: 2.5rem;
-    }
-
-    .tokenomics-card {
-        padding: 20px;
-    }
-
-    .distribution-chart {
-        padding: 25px;
-    }
-
-    .chart-bar {
-        height: 40px;
-        padding: 0 15px;
-    }
-
-    .chart-label {
-        font-size: 0.9rem;
-    }
-
-    .metrics-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .metric-item {
-        padding: 20px;
-    }
-
-    .countdown-timer {
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-
-    .time-unit {
-        padding: 12px;
-    }
-
-    .time-value {
-        font-size: 1.3rem;
-    }
-
-    .presale-card {
-        padding: 25px;
-    }
-
-    .presale-card h3 {
-        font-size: 1.5rem;
-    }
-
-    .presale-button {
-        padding: 15px;
-        font-size: 1.1rem;
-    }
-
-    .benefit-item {
-        padding: 20px;
-    }
-
-    .benefit-icon {
-        font-size: 2rem;
-    }
 }
 
 /* Scroll Animations */
