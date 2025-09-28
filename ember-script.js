@@ -1,5 +1,6 @@
 // Ember Token Page JavaScript
 // Phoenix Rising from Digital Ashes - $Ember Token Edition
+// FIXED: Updated for crypto community focus
 // CLEANED: Removed all floating coin references and effects
 
 // Enhanced navbar scroll effect
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Pre-sale countdown timer
+// Token sale countdown timer
 function initializeCountdown() {
     // Set the target date (30 days from now)
     const targetDate = new Date();
@@ -391,7 +392,7 @@ function initializeRoadmapAnimation() {
     });
 }
 
-// Form validation for pre-sale
+// Form validation for token sale
 function initializeFormValidation() {
     const investmentInput = document.getElementById('investment-amount');
     const presaleButton = document.querySelector('.presale-button');
@@ -417,8 +418,8 @@ function initializeFormValidation() {
     validateInput(); // Initial validation
 }
 
-// Pre-sale button click handler
-function initializePresaleHandler() {
+// Token sale button click handler
+function initializeTokenSaleHandler() {
     const presaleButton = document.querySelector('.presale-button');
     
     if (presaleButton) {
@@ -428,8 +429,8 @@ function initializePresaleHandler() {
             // Create celebration effect
             createCelebrationEffect();
             
-            // Show success message (replace with actual pre-sale logic)
-            showPresaleModal();
+            // Show success message (replace with actual token sale logic)
+            showTokenSaleModal();
         });
     }
 }
@@ -469,8 +470,8 @@ celebrationStyle.textContent = `
 `;
 document.head.appendChild(celebrationStyle);
 
-// Show pre-sale modal (placeholder)
-function showPresaleModal() {
+// Show token sale modal (placeholder)
+function showTokenSaleModal() {
     const modal = document.createElement('div');
     modal.innerHTML = `
         <div style="
@@ -496,8 +497,8 @@ function showPresaleModal() {
                 margin: 20px;
             ">
                 <div style="font-size: 4rem; margin-bottom: 20px;">🔥</div>
-                <h2 style="color: #f0a500; margin-bottom: 15px;">Pre-Sale Coming Soon!</h2>
-                <p style="margin-bottom: 25px;">Thank you for your interest in $Ember Token. Our pre-sale will be launching soon. Stay tuned for updates!</p>
+                <h2 style="color: #f0a500; margin-bottom: 15px;">$Ember Token Sale Coming Soon!</h2>
+                <p style="margin-bottom: 25px;">Thank you for your interest in $Ember Token. Our community sale will be launching soon. Stay tuned for updates!</p>
                 <button onclick="this.parentElement.parentElement.remove()" style="
                     background: linear-gradient(135deg, #d73327, #fb923c);
                     color: white;
@@ -524,7 +525,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTeamEffects();
     initializeRoadmapAnimation();
     initializeFormValidation();
-    initializePresaleHandler();
+    initializeTokenSaleHandler();
     
     // Trigger stats animation when visible
     const heroObserver = new IntersectionObserver((entries) => {
@@ -541,22 +542,20 @@ document.addEventListener('DOMContentLoaded', function() {
         heroObserver.observe(heroSection);
     }
     
-    console.log('🔥🪙 $Ember Token page loaded successfully - clean and focused!');
+    console.log('🔥🪙 $Ember Token page loaded successfully - crypto community ready!');
 });
 
 // Console welcome message
 console.log('%c🔥🪙 $EMBER TOKEN - THE FUTURE OF AR CRYPTO GAMING', 'color: #f0a500; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 Join the Pre-Sale and Rise from Digital Ashes!', 'color: #fb923c; font-size: 14px; font-weight: bold;');
+console.log('%c🚀 Join the Community Sale and Build the Ecosystem!', 'color: #fb923c; font-size: 14px; font-weight: bold;');
 
 // Performance monitoring
 window.addEventListener('load', () => {
     const loadTime = performance.now();
-    console.log(`%c🔥🪙 $Ember Token page loaded in ${Math.round(loadTime)}ms - Ready to ignite!`, 'color: #22c55e; font-weight: bold;');
+    console.log(`%c🔥🪙 $Ember Token page loaded in ${Math.round(loadTime)}ms - Ready to revolutionize!`, 'color: #22c55e; font-weight: bold;');
 });
 
 // Error handling
 window.addEventListener('error', (event) => {
     console.error('🔥🪙 $Ember Token page error:', event.error);
 });
-
-// REMOVED: All floating ember particle functions and background coin effects
