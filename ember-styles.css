@@ -1,7 +1,7 @@
 /* Ember Token Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
 /* Updated with Merchant Redemption Focus */
-/* FIXED: Added horizontal nav bar animation to match main page */
+/* FIXED: Navigation to match main page exactly */
 /* FIXED: Removed all focus states that cause red boxes */
 /* FIXED: Updated for crypto community focus */
 
@@ -9,20 +9,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-/* GLOBAL FIX: Remove all focus outlines that cause red boxes */
-*:focus,
-*:active,
-*:visited,
-a:focus,
-a:active,
-a:visited,
-button:focus,
-button:active {
-    outline: none !important;
-    border: none !important;
-    box-shadow: none !important;
 }
 
 body {
@@ -33,7 +19,7 @@ body {
     background: #0f0f0f;
 }
 
-/* Navigation - Ember Theme with horizontal bar FIXED TO MATCH MAIN PAGE */
+/* Navigation - FIXED TO MATCH MAIN PAGE EXACTLY */
 .navbar {
     position: fixed;
     top: 0;
@@ -70,18 +56,10 @@ body {
     color: white;
     text-decoration: none;
     transition: all 0.3s ease;
-    outline: none !important;
 }
 
 .logo:hover {
     transform: scale(1.05);
-}
-
-.logo:focus,
-.logo:active {
-    outline: none !important;
-    border: none !important;
-    box-shadow: none !important;
 }
 
 .logo-image {
@@ -97,43 +75,23 @@ body {
     list-style: none;
 }
 
-/* FIXED: Added horizontal bar like main page + removed all focus states */
+/* FIXED: Navigation links to match main page exactly */
 .nav-links a {
-    color: rgba(255, 255, 255, 0.9) !important;
-    text-decoration: none !important;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
     font-weight: 600;
     font-size: 16px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     padding: 10px 0;
-    outline: none !important;
-    border: none !important;
-    background: none !important;
-    box-shadow: none !important;
 }
 
 .nav-links a:hover {
-    color: #fb923c !important;
+    color: #fb923c;
     transform: translateY(-2px);
 }
 
-.nav-links a:focus,
-.nav-links a:active,
-.nav-links a:visited,
-.nav-links a:link {
-    outline: none !important;
-    border: none !important;
-    background: none !important;
-    box-shadow: none !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
-.nav-links a:focus:hover,
-.nav-links a:active:hover {
-    color: #fb923c !important;
-}
-
-/* FIXED: Added horizontal bar animation to match main page */
+/* FIXED: Horizontal bar animation to match main page exactly */
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -161,18 +119,11 @@ body {
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
-    outline: none !important;
 }
 
 .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5);
-}
-
-.cta-button:focus,
-.cta-button:active {
-    outline: none !important;
-    color: white !important;
 }
 
 /* Mobile Menu */
@@ -186,12 +137,6 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    outline: none !important;
-}
-
-.mobile-menu-btn:focus,
-.mobile-menu-btn:active {
-    outline: none !important;
 }
 
 /* Ember Hero Section */
@@ -337,18 +282,11 @@ body {
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
-    outline: none !important;
 }
 
 .ember-cta-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 20px 50px rgba(215, 51, 39, 0.6);
-}
-
-.ember-cta-primary:focus,
-.ember-cta-primary:active {
-    outline: none !important;
-    color: white !important;
 }
 
 .ember-cta-secondary {
@@ -361,19 +299,12 @@ body {
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    outline: none !important;
 }
 
 .ember-cta-secondary:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: white;
     transform: translateY(-3px);
-}
-
-.ember-cta-secondary:focus,
-.ember-cta-secondary:active {
-    outline: none !important;
-    color: white !important;
 }
 
 /* How It Works Section */
@@ -701,18 +632,11 @@ body {
     text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(240, 165, 0, 0.4);
-    outline: none !important;
 }
 
 .download-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 15px 40px rgba(240, 165, 0, 0.5);
-}
-
-.download-button:focus,
-.download-button:active {
-    outline: none !important;
-    color: white !important;
 }
 
 /* Roadmap Section */
@@ -1275,12 +1199,9 @@ body {
     color: white;
     font-size: 1.1rem;
     margin-bottom: 20px;
-    outline: none !important;
 }
 
-.investment-calculator input:focus,
-.investment-calculator input:active {
-    outline: none !important;
+.investment-calculator input:focus {
     border: 1px solid rgba(215, 51, 39, 0.5);
 }
 
@@ -1337,17 +1258,11 @@ body {
     border: 1px solid rgba(215, 51, 39, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
-    outline: none !important;
 }
 
 .payment-option:hover {
     background: rgba(215, 51, 39, 0.2);
     border-color: #f0a500;
-}
-
-.payment-option:focus,
-.payment-option:active {
-    outline: none !important;
 }
 
 .payment-icon {
@@ -1369,18 +1284,11 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(215, 51, 39, 0.4);
     margin-bottom: 20px;
-    outline: none !important;
 }
 
 .presale-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
-}
-
-.presale-button:focus,
-.presale-button:active {
-    outline: none !important;
-    color: white !important;
 }
 
 .presale-note {
@@ -1504,19 +1412,12 @@ body {
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 25px rgba(215, 51, 39, 0.3);
-    outline: none !important;
 }
 
 .social-link:hover {
     transform: translateY(-3px) scale(1.1);
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
     background: linear-gradient(135deg, #fb923c, #d73327);
-}
-
-.social-link:focus,
-.social-link:active {
-    outline: none !important;
-    color: white !important;
 }
 
 .social-icon {
@@ -1538,23 +1439,11 @@ body {
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
-    outline: none !important;
 }
 
 .footer-links a:hover {
     color: #f0a500;
     transform: translateY(-2px);
-}
-
-.footer-links a:focus,
-.footer-links a:active {
-    outline: none !important;
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.footer-links a:focus:hover,
-.footer-links a:active:hover {
-    color: #f0a500 !important;
 }
 
 /* Mobile Responsive Design */
@@ -1592,7 +1481,7 @@ body {
         padding: 20px 30px;
         font-size: 20px;
         font-weight: 700;
-        color: #ffffff !important;
+        color: #ffffff;
         background: rgba(215, 51, 39, 0.9);
         border: 3px solid #d73327;
         border-radius: 12px;
@@ -1600,18 +1489,14 @@ body {
         text-decoration: none;
         transition: all 0.3s ease;
         box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
-        outline: none !important;
     }
 
-    .nav-links.mobile-active a:hover,
-    .nav-links.mobile-active a:focus,
-    .nav-links.mobile-active a:active {
-        background: #d73327 !important;
-        border-color: #fb923c !important;
-        transform: scale(1.05) !important;
-        box-shadow: 0 12px 30px rgba(215, 51, 39, 0.6) !important;
-        color: #ffffff !important;
-        outline: none !important;
+    .nav-links.mobile-active a:hover {
+        background: #d73327;
+        border-color: #fb923c;
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(215, 51, 39, 0.6);
+        color: #ffffff;
     }
 
     .nav-links.mobile-active a::after {
@@ -2064,17 +1949,6 @@ html {
         transform: none;
         opacity: 1;
     }
-}
-
-/* Focus styles for accessibility - Only where absolutely needed */
-.ember-cta-primary:focus-visible,
-.ember-cta-secondary:focus-visible,
-.presale-button:focus-visible,
-.download-button:focus-visible,
-.social-link:focus-visible,
-.mobile-menu-btn:focus-visible {
-    outline: 2px solid #f0a500 !important;
-    outline-offset: 2px !important;
 }
 
 /* Custom scrollbar */
