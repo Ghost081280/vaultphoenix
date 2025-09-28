@@ -1,6 +1,6 @@
 /* Vault Phoenix - Loading Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - Senior UX/UI Design */
-/* OPTIMIZED: Full layout fits on screen with strategic coin placement */
+/* FINAL FIX: Aggressive spacing to ensure "Awakening the Phoenix" is visible on all desktop sizes */
 
 * {
     margin: 0;
@@ -78,7 +78,7 @@ body {
     50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
 }
 
-/* OPTIMIZED: Loading Content - Balanced spacing to fit all content */
+/* FINAL FIX: Aggressive spacing reduction to fit all content */
 .loading-content {
     position: relative;
     z-index: 100; /* HIGH PRIORITY - ALWAYS VISIBLE */
@@ -86,24 +86,27 @@ body {
     color: white;
     max-width: 600px;
     padding: 0 40px;
-    /* OPTIMIZED: Reduced top margin to fit all content */
-    margin-top: 40px;
+    /* AGGRESSIVE: Much smaller top margin to ensure bottom text is visible */
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* CRITICAL: Ensure content doesn't overflow viewport */
+    max-height: calc(100vh - 40px);
+    justify-content: center;
 }
 
-/* OPTIMIZED: Phoenix Logo - Reduced size to fit layout */
+/* FINAL FIX: Significantly smaller phoenix image */
 .loading-logo {
     position: relative;
-    margin-bottom: 30px; /* Reduced from 50px */
+    margin-bottom: 20px; /* Reduced from 30px */
     display: inline-block;
     z-index: 101; /* HIGHEST PRIORITY */
 }
 
 .phoenix-image {
-    width: 320px; /* Reduced from 400px */
-    height: 320px; /* Reduced from 400px */
+    width: 260px; /* AGGRESSIVE: Reduced from 320px */
+    height: 260px; /* AGGRESSIVE: Reduced from 320px */
     object-fit: contain;
     filter: drop-shadow(0 0 40px rgba(215, 51, 39, 0.8));
     animation: phoenixPulse 3s ease-in-out infinite;
@@ -116,8 +119,8 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px; /* Reduced from 500px */
-    height: 400px; /* Reduced from 500px */
+    width: 320px; /* Reduced to match image */
+    height: 320px; /* Reduced to match image */
     background: radial-gradient(circle, rgba(215, 51, 39, 0.4) 0%, transparent 70%);
     animation: logoGlowPulse 2s ease-in-out infinite alternate;
     z-index: 100; /* BEHIND MAIN IMAGE BUT ABOVE BACKGROUND */
@@ -139,17 +142,17 @@ body {
     100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
 }
 
-/* OPTIMIZED: Loading Text - Reduced spacing */
+/* FINAL FIX: Minimal text spacing */
 .loading-text {
-    margin-bottom: 35px; /* Reduced from 50px */
+    margin-bottom: 25px; /* Reduced from 35px */
     z-index: 100; /* HIGH PRIORITY */
     position: relative;
 }
 
 .loading-title {
-    font-size: clamp(1.6rem, 3.5vw, 2.2rem); /* Slightly reduced */
+    font-size: clamp(1.4rem, 3vw, 1.8rem); /* REDUCED: Smaller font */
     font-weight: 900;
-    margin-bottom: 15px; /* Reduced from 20px */
+    margin-bottom: 10px; /* Reduced from 15px */
     color: #ffffff;
     letter-spacing: -0.02em;
     background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
@@ -161,7 +164,7 @@ body {
 }
 
 .loading-subtitle {
-    font-size: clamp(1rem, 2.2vw, 1.3rem); /* Slightly reduced */
+    font-size: clamp(0.9rem, 2vw, 1.1rem); /* REDUCED: Smaller font */
     color: rgba(255, 255, 255, 0.95);
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -179,9 +182,9 @@ body {
     100% { opacity: 1; }
 }
 
-/* OPTIMIZED: Loading Bar - Reduced spacing */
+/* FINAL FIX: Compact loading bar */
 .loading-bar-container {
-    margin-bottom: 30px; /* Reduced from 40px */
+    margin-bottom: 20px; /* Reduced from 30px */
     z-index: 100; /* HIGH PRIORITY */
     position: relative;
     width: 100%;
@@ -189,7 +192,7 @@ body {
 
 .loading-bar {
     width: 100%;
-    height: 10px;
+    height: 8px; /* Reduced from 10px */
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     overflow: hidden;
@@ -233,22 +236,22 @@ body {
 }
 
 .loading-percentage {
-    margin-top: 15px; /* Reduced from 20px */
-    font-size: 1.3rem; /* Slightly reduced */
+    margin-top: 10px; /* Reduced from 15px */
+    font-size: 1.2rem; /* Reduced */
     font-weight: 800;
     color: #f0a500;
     text-shadow: 0 3px 15px rgba(240, 165, 0, 0.4);
     z-index: 100; /* HIGH PRIORITY */
 }
 
-/* OPTIMIZED: Loading Messages - Reduced spacing */
+/* FINAL FIX: Minimal message spacing */
 .loading-message {
-    margin-top: 20px; /* Reduced from 30px */
+    margin-top: 15px; /* Reduced from 20px */
     z-index: 100; /* HIGH PRIORITY */
 }
 
 .loading-status {
-    font-size: 1.1rem; /* Slightly reduced */
+    font-size: 1rem; /* Reduced */
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
     animation: statusPulse 2s ease-in-out infinite;
@@ -260,7 +263,7 @@ body {
     50% { opacity: 1; }
 }
 
-/* ENHANCED: More Strategic Coin Placement - Background Only */
+/* ENHANCED: More Strategic Coin Placement - All 12 coins visible */
 .floating-coins {
     position: absolute;
     top: 0;
@@ -280,99 +283,99 @@ body {
 }
 
 .crypto-coin-icon {
-    width: clamp(22px, 2.8vw, 35px);
-    height: clamp(22px, 2.8vw, 35px);
+    width: clamp(20px, 2.5vw, 32px);
+    height: clamp(20px, 2.5vw, 32px);
     object-fit: contain;
-    filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 5px rgba(240, 165, 0, 0.5));
     transition: none; /* NO TRANSITIONS TO PREVENT INTERFERENCE */
-    opacity: 0.25; /* SUBTLE BACKGROUND PRESENCE */
+    opacity: 0.3; /* More visible */
     visibility: visible;
     display: block;
     pointer-events: none;
 }
 
-/* ENHANCED: Strategic Positioning - More coins, avoid content areas */
+/* ENHANCED: All 12 Strategic Coin Positions - Carefully avoiding content */
 .coin-1 {
-    top: 8%;
+    top: 5%;
     left: 5%;
     animation-delay: 0s;
     animation-duration: 6s;
 }
 
 .coin-2 {
-    top: 85%;
+    bottom: 5%;
     left: 8%;
     animation-delay: 1s;
     animation-duration: 7s;
 }
 
 .coin-3 {
-    top: 12%;
+    top: 8%;
     right: 5%;
     animation-delay: 2s;
     animation-duration: 8s;
 }
 
 .coin-4 {
-    top: 88%;
+    bottom: 8%;
     right: 8%;
     animation-delay: 3s;
     animation-duration: 6s;
 }
 
 .coin-5 {
-    top: 5%;
-    left: 85%;
+    top: 3%;
+    left: 88%;
     animation-delay: 4s;
     animation-duration: 7s;
 }
 
 .coin-6 {
-    bottom: 5%;
-    right: 85%;
+    bottom: 3%;
+    right: 88%;
     animation-delay: 5s;
     animation-duration: 9s;
 }
 
-/* NEW: Additional strategic coins for better space filling */
+/* NEW: Additional coins strategically placed */
 .coin-7 {
-    top: 25%;
-    left: 12%;
+    top: 22%;
+    left: 10%;
     animation-delay: 6s;
     animation-duration: 8s;
 }
 
 .coin-8 {
-    top: 65%;
-    right: 15%;
+    top: 75%;
+    right: 12%;
     animation-delay: 7s;
     animation-duration: 7s;
 }
 
 .coin-9 {
     top: 45%;
-    left: 3%;
+    left: 2%;
     animation-delay: 8s;
     animation-duration: 9s;
 }
 
 .coin-10 {
     top: 35%;
-    right: 3%;
+    right: 2%;
     animation-delay: 9s;
     animation-duration: 6s;
 }
 
 .coin-11 {
-    bottom: 25%;
-    left: 15%;
+    bottom: 22%;
+    left: 12%;
     animation-delay: 10s;
     animation-duration: 8s;
 }
 
 .coin-12 {
-    bottom: 15%;
-    right: 12%;
+    bottom: 12%;
+    right: 10%;
     animation-delay: 11s;
     animation-duration: 7s;
 }
@@ -380,88 +383,87 @@ body {
 @keyframes coinFloat {
     0%, 100% { 
         transform: translateY(0px) rotate(0deg) scale(1); 
-        opacity: 0.2; 
-    }
-    25% { 
-        transform: translateY(-12px) rotate(90deg) scale(1.05); 
-        opacity: 0.3; 
-    }
-    50% { 
-        transform: translateY(-6px) rotate(180deg) scale(0.95); 
         opacity: 0.25; 
     }
+    25% { 
+        transform: translateY(-10px) rotate(90deg) scale(1.05); 
+        opacity: 0.35; 
+    }
+    50% { 
+        transform: translateY(-5px) rotate(180deg) scale(0.95); 
+        opacity: 0.3; 
+    }
     75% { 
-        transform: translateY(-15px) rotate(270deg) scale(1.1); 
-        opacity: 0.28; 
+        transform: translateY(-12px) rotate(270deg) scale(1.1); 
+        opacity: 0.32; 
     }
 }
 
 /* Mobile Responsive Design - PROFESSIONAL SCALING */
 @media (max-width: 768px) {
-    /* Mobile positioning - optimized for smaller screens */
     .loading-content {
         padding: 0 30px;
         max-width: 500px;
-        margin-top: 20px; /* Slight margin for mobile */
+        margin-top: 10px; /* Minimal margin on mobile */
     }
     
     .phoenix-image {
-        width: 280px; /* Reduced for mobile */
-        height: 280px;
+        width: 220px; /* Smaller on mobile */
+        height: 220px;
     }
     
     .logo-glow {
-        width: 350px;
-        height: 350px;
+        width: 280px;
+        height: 280px;
     }
     
     .loading-logo {
-        margin-bottom: 25px;
+        margin-bottom: 18px;
     }
     
     .loading-text {
-        margin-bottom: 25px;
+        margin-bottom: 20px;
     }
     
     .loading-title {
-        font-size: clamp(1.4rem, 5vw, 1.8rem);
-        margin-bottom: 12px;
+        font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+        margin-bottom: 8px;
     }
     
     .loading-subtitle {
-        font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+        font-size: clamp(0.85rem, 3vw, 1rem);
     }
     
     .loading-bar {
-        height: 8px;
+        height: 6px;
     }
     
     .loading-bar-container {
-        margin-bottom: 25px;
+        margin-bottom: 18px;
     }
     
     .loading-percentage {
-        font-size: 1.1rem;
-        margin-top: 12px;
+        font-size: 1rem;
+        margin-top: 8px;
     }
     
     .loading-message {
-        margin-top: 15px;
+        margin-top: 12px;
     }
     
     .loading-status {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     
     .crypto-coin-icon {
-        width: clamp(18px, 3.5vw, 28px);
-        height: clamp(18px, 3.5vw, 28px);
-        opacity: 0.2; /* More subtle on mobile */
+        width: clamp(16px, 3vw, 24px);
+        height: clamp(16px, 3vw, 24px);
+        opacity: 0.25;
     }
     
     .crypto-glow {
-        width: 400px;
-        height: 400px;
+        width: 350px;
+        height: 350px;
     }
     
     /* Hide some coins on mobile to avoid clutter */
@@ -477,69 +479,69 @@ body {
     .loading-content {
         padding: 0 20px;
         max-width: 400px;
-        margin-top: 15px;
+        margin-top: 5px;
     }
     
     .phoenix-image {
-        width: 240px; /* Further reduced for small mobile */
-        height: 240px;
+        width: 180px; /* Even smaller on small mobile */
+        height: 180px;
     }
     
     .logo-glow {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .loading-logo {
+        margin-bottom: 15px;
+    }
+    
+    .loading-text {
+        margin-bottom: 15px;
+    }
+    
+    .loading-title {
+        font-size: clamp(1rem, 5vw, 1.4rem);
+        margin-bottom: 6px;
+    }
+    
+    .loading-subtitle {
+        font-size: clamp(0.75rem, 3.5vw, 0.9rem);
+    }
+    
+    .loading-bar {
+        height: 5px;
+    }
+    
+    .loading-bar-container {
+        margin-bottom: 15px;
+    }
+    
+    .loading-percentage {
+        font-size: 0.9rem;
+        margin-top: 6px;
+    }
+    
+    .loading-message {
+        margin-top: 10px;
+    }
+    
+    .loading-status {
+        font-size: 0.8rem;
+    }
+    
+    .crypto-glow {
         width: 300px;
         height: 300px;
     }
     
-    .loading-logo {
-        margin-bottom: 20px;
-    }
-    
-    .loading-text {
-        margin-bottom: 20px;
-    }
-    
-    .loading-title {
-        font-size: clamp(1.2rem, 6vw, 1.6rem);
-        margin-bottom: 10px;
-    }
-    
-    .loading-subtitle {
-        font-size: clamp(0.85rem, 4vw, 1rem);
-    }
-    
-    .loading-bar {
-        height: 6px;
-    }
-    
-    .loading-bar-container {
-        margin-bottom: 20px;
-    }
-    
-    .loading-percentage {
-        font-size: 1rem;
-        margin-top: 10px;
-    }
-    
-    .loading-message {
-        margin-top: 12px;
-    }
-    
-    .loading-status {
-        font-size: 0.9rem;
-    }
-    
-    .crypto-glow {
-        width: 350px;
-        height: 350px;
-    }
-    
     .crypto-coin-icon {
-        width: clamp(15px, 3vw, 22px);
-        height: clamp(15px, 3vw, 22px);
-        opacity: 0.15; /* Very subtle on small screens */
+        width: clamp(12px, 2.5vw, 18px);
+        height: clamp(12px, 2.5vw, 18px);
+        opacity: 0.2;
     }
     
-    /* Hide even more coins on small mobile */
+    /* Hide most coins on small mobile */
     .coin-3,
     .coin-4,
     .coin-5,
@@ -554,52 +556,151 @@ body {
     }
 }
 
-/* Desktop-specific optimizations */
-@media (min-width: 1024px) {
+/* Desktop-specific optimizations - AGGRESSIVE sizing for content fit */
+@media (min-width: 769px) {
     .loading-content {
-        margin-top: 50px; /* Balanced for desktop */
+        margin-top: 30px; /* Larger screens get more margin */
     }
     
     .phoenix-image {
-        width: 340px; /* Optimized size */
-        height: 340px;
+        width: 280px; /* Balanced size for desktop */
+        height: 280px;
     }
     
     .logo-glow {
-        width: 420px;
-        height: 420px;
+        width: 340px;
+        height: 340px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .loading-content {
+        margin-top: 40px;
+    }
+    
+    .phoenix-image {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .logo-glow {
+        width: 360px;
+        height: 360px;
     }
 }
 
 @media (min-width: 1200px) {
     .loading-content {
-        margin-top: 60px; /* More space on large screens */
+        margin-top: 50px;
     }
     
     .phoenix-image {
-        width: 360px;
-        height: 360px;
+        width: 320px;
+        height: 320px;
     }
     
     .logo-glow {
-        width: 450px;
-        height: 450px;
+        width: 380px;
+        height: 380px;
     }
 }
 
 @media (min-width: 1440px) {
     .loading-content {
-        margin-top: 70px; /* Maximum spacing for very large screens */
+        margin-top: 60px; /* Maximum spacing for very large screens */
     }
     
     .phoenix-image {
-        width: 380px;
-        height: 380px;
+        width: 340px;
+        height: 340px;
     }
     
     .logo-glow {
-        width: 480px;
-        height: 480px;
+        width: 400px;
+        height: 400px;
+    }
+}
+
+/* CRITICAL: Viewport height optimization to ensure bottom text is always visible */
+@media (max-height: 700px) {
+    .loading-content {
+        margin-top: 10px;
+    }
+    
+    .phoenix-image {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .logo-glow {
+        width: 260px;
+        height: 260px;
+    }
+    
+    .loading-logo {
+        margin-bottom: 15px;
+    }
+    
+    .loading-text {
+        margin-bottom: 15px;
+    }
+    
+    .loading-bar-container {
+        margin-bottom: 15px;
+    }
+    
+    .loading-message {
+        margin-top: 10px;
+    }
+}
+
+@media (max-height: 600px) {
+    .loading-content {
+        margin-top: 5px;
+    }
+    
+    .phoenix-image {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .logo-glow {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .loading-logo {
+        margin-bottom: 10px;
+    }
+    
+    .loading-text {
+        margin-bottom: 10px;
+    }
+    
+    .loading-title {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    
+    .loading-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .loading-bar-container {
+        margin-bottom: 10px;
+    }
+    
+    .loading-percentage {
+        font-size: 1rem;
+        margin-top: 5px;
+    }
+    
+    .loading-message {
+        margin-top: 8px;
+    }
+    
+    .loading-status {
+        font-size: 0.8rem;
     }
 }
 
@@ -637,12 +738,12 @@ body {
 /* Remove any hover effects that could interfere */
 .coin:hover .crypto-coin-icon {
     transform: none !important;
-    filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5)) !important;
+    filter: drop-shadow(0 0 5px rgba(240, 165, 0, 0.5)) !important;
 }
 
 /* Loading completion state - SUBTLE */
 .loading-complete .crypto-coin-icon {
-    animation: none; /* NO DISTRACTING ANIMATIONS */
+    animation: none;
 }
 
 /* ACCESSIBILITY - ENSURE CONTENT READABILITY */
