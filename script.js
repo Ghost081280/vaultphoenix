@@ -1,6 +1,6 @@
 // Vault Phoenix - Interactive JavaScript
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
-// FIXED: Now uses correct VPEmberCoin.PNG for floating coins
+// FIXED: Now uses correct VPEmberCoin.PNG for floating coins throughout
 
 // Enhanced gallery function with correct image order
 function changeImage(imageSrc, title) {
@@ -631,7 +631,7 @@ document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-butt
         // Add subtle coin sparkle effect using VPEmberCoin image
         if (Math.random() > 0.7) {
             const sparkle = document.createElement('img');
-            sparkle.src = 'images/VPEmberCoin.PNG';
+            sparkle.src = 'images/VPEmberCoin.PNG'; // CORRECT COIN IMAGE
             sparkle.alt = 'VP Ember Coin Sparkle';
             sparkle.style.cssText = `
                 position: absolute;
@@ -818,7 +818,7 @@ document.addEventListener('keydown', (e) => {
         for (let i = 0; i < 30; i++) {
             setTimeout(() => {
                 const coin = document.createElement('img');
-                coin.src = 'images/VPEmberCoin.PNG';
+                coin.src = 'images/VPEmberCoin.PNG'; // CORRECT COIN IMAGE
                 coin.alt = 'VP Ember Bonus Coin';
                 coin.style.cssText = `
                     position: fixed;
