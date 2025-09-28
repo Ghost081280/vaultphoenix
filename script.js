@@ -1,5 +1,6 @@
 // Vault Phoenix - Interactive JavaScript
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
+// FIXED: Smooth Loading Transition
 
 // Enhanced gallery function with correct image order
 function changeImage(imageSrc, title) {
@@ -307,20 +308,20 @@ document.querySelectorAll('a[href^="sms:"]').forEach(link => {
     });
 });
 
-// Add loading states for better UX with phoenix crypto theme
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
+// FIXED: Enhanced smooth loading for fade-in elements
+function initializeSmoothLoading() {
+    console.log('🔥🪙 Phoenix: Initializing smooth loading...');
     
-    // Trigger initial animations with phoenix crypto timing
+    // Trigger fade-in animations for hero elements
     setTimeout(() => {
         document.querySelectorAll('.fade-in').forEach((el, index) => {
             setTimeout(() => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, index * 150); // Slightly more dramatic spacing
+                el.classList.add('visible');
+                console.log('🔥🪙 Fade-in element visible:', index);
+            }, index * 150); // Staggered animation
         });
-    }, 500);
-});
+    }, 800); // Wait for transition to complete
+}
 
 // Add error handling for images with phoenix crypto fallback
 document.querySelectorAll('img').forEach(img => {
@@ -531,40 +532,6 @@ function initializeEmberPhoenixImage() {
     }, 60);
 }
 
-// Initialize everything when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-    preloadPhoenixCryptoImages();
-    createPhoenixCryptoParticles();
-    initializeCryptoCoinImage();
-    initializeEmberPhoenixImage(); // NEW: Initialize ember phoenix image
-    
-    // Add smooth entrance animations
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
-    
-    // Phoenix crypto-specific initialization
-    console.log('🔥🪙 Phoenix crypto systems online and ready for action!');
-});
-
-// Console welcome message with phoenix crypto theme
-console.log('%c🔥🪙 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
-console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
-console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with Blockchain Power!', 'color: #d73327; font-size: 12px; font-style: italic;');
-
-// Performance monitoring with phoenix crypto theme
-window.addEventListener('load', () => {
-    const loadTime = performance.now();
-    console.log(`%c🔥🪙 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect coins!`, 'color: #22c55e; font-weight: bold;');
-    
-    // Optional: Add phoenix flame effect to logo after load
-    const logoIcon = document.querySelector('.logo-icon');
-    if (logoIcon) {
-        logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
-    }
-});
-
 // Enhanced interactive feedback for all CTA buttons with crypto theme - UPDATED WITH GOLDEN COINS
 document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .ember-cta-primary, .ember-cta-secondary').forEach(button => {
     button.addEventListener('mouseenter', function() {
@@ -734,13 +701,6 @@ function initializeEmberHighlights() {
     document.head.appendChild(emberGlowStyle);
 }
 
-// Initialize crypto-specific features
-document.addEventListener('DOMContentLoaded', function() {
-    initializeCryptoBenefits();
-    initializeEmberHighlights(); // NEW: Initialize ember highlights
-    createPhoenixCryptoScrollIndicator();
-});
-
 // Easter egg: Konami code for bonus crypto coins - UPDATED WITH GOLDEN COINS
 let konamiCode = [];
 const konamiSequence = [
@@ -795,5 +755,42 @@ document.addEventListener('keydown', (e) => {
         konamiCode = []; // Reset
     }
 });
+
+// FIXED: Enhanced window load event for smooth transition
+window.addEventListener('load', () => {
+    const loadTime = performance.now();
+    console.log(`🔥🪙 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect coins!`);
+    
+    // Initialize smooth loading after all resources loaded
+    initializeSmoothLoading();
+    
+    // Optional: Add phoenix flame effect to logo after load
+    const logoIcon = document.querySelector('.logo-icon');
+    if (logoIcon) {
+        logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
+    }
+});
+
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔥🪙 Phoenix Crypto Main: DOM loaded - starting initialization...');
+    
+    preloadPhoenixCryptoImages();
+    createPhoenixCryptoParticles();
+    initializeCryptoCoinImage();
+    initializeEmberPhoenixImage(); // NEW: Initialize ember phoenix image
+    initializeCryptoBenefits();
+    initializeEmberHighlights(); // NEW: Initialize ember highlights
+    createPhoenixCryptoScrollIndicator();
+    
+    // Phoenix crypto-specific initialization
+    console.log('🔥🪙 Phoenix crypto systems online and ready for action!');
+});
+
+// Console welcome message with phoenix crypto theme
+console.log('%c🔥🪙 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
+console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
+console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
+console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with Blockchain Power!', 'color: #d73327; font-size: 12px; font-style: italic;');
 
 console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
