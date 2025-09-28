@@ -3,6 +3,7 @@
 /* Updated with Merchant Redemption Focus */
 /* FIXED: Added horizontal nav bar animation to match main page */
 /* FIXED: Removed all focus states that cause red boxes */
+/* FIXED: Updated for crypto community focus */
 
 * {
     margin: 0;
@@ -744,7 +745,7 @@ body {
     background: rgba(240, 165, 0, 0.15);
 }
 
-.pilot-phase {
+.mainnet-phase {
     border-color: #4ade80;
     background: rgba(74, 222, 128, 0.1);
 }
@@ -1083,7 +1084,7 @@ body {
     opacity: 0.95;
 }
 
-/* Pre-Sale Section */
+/* $Ember Token Sale Section */
 .presale-section {
     background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
 }
