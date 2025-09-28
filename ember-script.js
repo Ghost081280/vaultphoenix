@@ -2,8 +2,9 @@
 // Phoenix Rising from Digital Ashes - $Ember Token Edition
 // FIXED: Updated for crypto community focus
 // CLEANED: Removed all floating coin references and effects
+// EXACT COPY FROM MAIN.HTML: All working navigation functionality with horizontal bar
 
-// Enhanced navbar scroll effect
+// EXACT COPY FROM MAIN.HTML: Enhanced navbar scroll effect
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -15,7 +16,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Enhanced scroll reveal animation
+// EXACT COPY FROM MAIN.HTML: Enhanced scroll reveal animation
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -80px 0px'
@@ -35,7 +36,7 @@ document.querySelectorAll('.scroll-reveal').forEach(el => {
     observer.observe(el);
 });
 
-// Smooth scrolling for navigation links
+// EXACT COPY FROM MAIN.HTML: Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -50,30 +51,51 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Mobile menu functionality
+// EXACT COPY FROM MAIN.HTML: PHOENIX CRYPTO MOBILE MENU SYSTEM - BULLETPROOF VERSION
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔥🪙 Phoenix Crypto Rising - DOM loaded, initializing mobile menu...');
+    
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     
+    console.log('Found phoenix crypto elements:', { 
+        mobileMenuBtn: !!mobileMenuBtn, 
+        navLinks: !!navLinks 
+    });
+
     if (mobileMenuBtn && navLinks) {
+        // Add click handler to mobile menu button
         mobileMenuBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
+            console.log('🔥🪙 Phoenix crypto menu button ignited!');
+            console.log('Current classes:', navLinks.className);
+            
+            // Toggle the mobile-active class
             if (navLinks.classList.contains('mobile-active')) {
+                // Close menu
                 navLinks.classList.remove('mobile-active');
                 mobileMenuBtn.innerHTML = '☰';
                 document.body.style.overflow = '';
+                console.log('Phoenix crypto menu extinguished');
             } else {
+                // Open menu
                 navLinks.classList.add('mobile-active');
                 mobileMenuBtn.innerHTML = '✕';
                 document.body.style.overflow = 'hidden';
+                console.log('Phoenix crypto menu blazing!');
+                console.log('New classes:', navLinks.className);
             }
         });
 
         // Close menu when clicking nav links
-        navLinks.querySelectorAll('a').forEach(link => {
+        const navLinksArray = navLinks.querySelectorAll('a');
+        console.log('Found phoenix crypto nav links:', navLinksArray.length);
+        
+        navLinksArray.forEach((link, index) => {
             link.addEventListener('click', function() {
+                console.log('Phoenix crypto nav link activated:', index);
                 navLinks.classList.remove('mobile-active');
                 mobileMenuBtn.innerHTML = '☰';
                 document.body.style.overflow = '';
@@ -86,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('mobile-active');
                 mobileMenuBtn.innerHTML = '☰';
                 document.body.style.overflow = '';
+                console.log('Phoenix crypto menu closed via escape');
             }
         });
 
@@ -97,8 +120,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('mobile-active');
                 mobileMenuBtn.innerHTML = '☰';
                 document.body.style.overflow = '';
+                console.log('Phoenix crypto menu closed via outside click');
             }
         });
+
+    } else {
+        console.error('🔥🪙 Phoenix crypto menu elements not found!');
     }
 });
 
