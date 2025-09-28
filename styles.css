@@ -2,6 +2,7 @@
 /* Phoenix Rising from Digital Ashes - Crypto Gaming Edition */
 /* FIXED: Hero section with working floating coins using VPEmberCoin.PNG */
 /* FIXED: Removed red box overlay on nav links */
+/* FIXED: Added proper spacing for compliance disclaimer */
 
 * {
     margin: 0;
@@ -479,6 +480,33 @@ body {
 
 .ember-highlight-compact:hover .highlight-arrow {
     transform: translateX(3px);
+}
+
+/* FIXED: Regulatory Compliance Disclaimer with proper spacing */
+.compliance-disclaimer {
+    background: rgba(240, 165, 0, 0.1);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 30px; /* ADDED: More spacing from highlights above */
+    backdrop-filter: blur(10px);
+}
+
+.compliance-disclaimer h4 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.compliance-disclaimer p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin: 0;
 }
 
 /* Right Column: Visual Stack */
@@ -2283,7 +2311,87 @@ body {
         margin-bottom: 40px;
     }
 
-    /* Continue with all mobile styles... */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .feature-card {
+        padding: 30px;
+    }
+
+    .showcase-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .phone-frame {
+        width: 280px;
+        height: 560px;
+    }
+
+    .thumbnail-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        max-width: 280px;
+    }
+
+    .simple-thumb {
+        width: 80px;
+        height: 140px;
+    }
+
+    .use-cases-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .use-case-card {
+        padding: 30px;
+    }
+
+    .pricing-header {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .pricing-text .section-title,
+    .pricing-text .section-subtitle {
+        text-align: center;
+    }
+
+    .pricing-card {
+        padding: 40px;
+        margin: 60px auto 0;
+    }
+
+    .pricing-amount {
+        font-size: 3rem;
+    }
+
+    .revenue-example {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .revenue-stat {
+        padding: 20px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+        width: 100%;
+        max-width: 300px;
+        padding: 15px 35px;
+        font-size: 1.1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2293,8 +2401,252 @@ body {
         height: clamp(15px, 3vw, 25px) !important;
         opacity: 0.3 !important;
     }
-    
-    /* All other ultra mobile styles... */
+
+    .navbar {
+        padding: 12px 15px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .logo-image {
+        height: 50px;
+    }
+
+    .hero {
+        padding: 120px 0 40px;
+    }
+
+    .hero-content {
+        padding: 0 15px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        margin-bottom: 15px;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        margin-bottom: 25px;
+    }
+
+    .step {
+        padding: 15px;
+    }
+
+    .step-number {
+        font-size: 1.3rem;
+    }
+
+    .hero-cta .cta-button {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 0 10px 0;
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    .ember-token-section-v2 {
+        padding: 30px 15px;
+    }
+
+    .ember-token-title-v2 {
+        font-size: clamp(1.4rem, 6vw, 1.8rem);
+        margin-bottom: 10px;
+    }
+
+    .ember-token-description-v2 {
+        font-size: 0.9rem;
+        margin-bottom: 18px;
+    }
+
+    .ember-countdown-widget {
+        padding: 14px;
+        margin-bottom: 14px;
+    }
+
+    .ember-countdown-timer {
+        gap: 4px;
+    }
+
+    .ember-time-unit {
+        padding: 8px 4px;
+    }
+
+    .ember-time-value {
+        font-size: 1rem;
+    }
+
+    .ember-time-label {
+        font-size: 0.6rem;
+    }
+
+    .phoenix-holding-coin-compact {
+        width: 200px;
+        height: 200px;
+    }
+
+    .ember-glow-compact {
+        width: 250px;
+        height: 250px;
+    }
+
+    .ember-cta-card-v2 {
+        max-width: 260px;
+        padding: 16px;
+    }
+
+    .cta-coin-xl {
+        width: 40px;
+        height: 40px;
+    }
+
+    .cta-title-v2 {
+        font-size: 1rem;
+    }
+
+    .ember-cta-button-v2 {
+        padding: 12px 18px;
+    }
+
+    .compliance-disclaimer {
+        padding: 16px;
+        margin-top: 20px;
+    }
+
+    .compliance-disclaimer h4 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .compliance-disclaimer p {
+        font-size: 0.85rem;
+    }
+
+    .features, .app-showcase, .use-cases, .pricing, .final-cta {
+        padding: 40px 15px;
+    }
+
+    .section-title {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .feature-card {
+        padding: 25px;
+    }
+
+    .feature-coin-icon,
+    .feature-revenue-icon,
+    .feature-ar-discovery-icon,
+    .feature-crypto-gaming-icon,
+    .feature-phoenix-brand-icon,
+    .feature-analytics-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .feature-title {
+        font-size: 1.3rem;
+    }
+
+    .phone-frame {
+        width: 240px;
+        height: 480px;
+    }
+
+    .thumbnail-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 240px;
+    }
+
+    .simple-thumb {
+        width: 70px;
+        height: 120px;
+    }
+
+    .showcase-title {
+        font-size: 2rem;
+    }
+
+    .use-case-card {
+        padding: 25px;
+    }
+
+    .use-case-icon {
+        font-size: 2.5rem;
+    }
+
+    .pricing-card {
+        padding: 30px;
+    }
+
+    .pricing-amount {
+        font-size: 2.5rem;
+    }
+
+    .pricing-features li {
+        padding: 12px 0 12px 45px;
+        font-size: 1rem;
+    }
+
+    .revenue-example {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .revenue-stat {
+        padding: 15px;
+    }
+
+    .revenue-number {
+        font-size: 1.5rem;
+    }
+
+    .footer {
+        padding: 30px 15px;
+    }
+
+    .footer-logo {
+        font-size: 1.4rem;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .footer-logo-image {
+        height: 50px;
+    }
+
+    .footer-text {
+        font-size: 1rem;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .social-media {
+        gap: 15px;
+    }
+
+    .social-link {
+        width: 45px;
+        height: 45px;
+    }
+
+    .social-icon {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 /* Animations */
