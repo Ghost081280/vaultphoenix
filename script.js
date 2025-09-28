@@ -80,12 +80,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Enhanced interactive card effects with phoenix crypto animation
-document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto-benefit').forEach(card => {
+document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto-benefit, .ember-highlight').forEach(card => {
     card.addEventListener('mouseenter', function() {
         if (this.classList.contains('simple-thumb')) {
             this.style.transform = 'translateY(-5px) scale(1.05)';
         } else if (this.classList.contains('crypto-benefit')) {
             this.style.transform = 'translateX(15px)';
+        } else if (this.classList.contains('ember-highlight')) {
+            this.style.transform = 'translateX(8px)';
         } else {
             this.style.transform = 'translateY(-10px) scale(1.02)';
         }
@@ -99,7 +101,7 @@ document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto
     card.addEventListener('mouseleave', function() {
         if (!this.classList.contains('active')) {
             this.style.transform = 'translateY(0) scale(1)';
-            if (this.classList.contains('crypto-benefit')) {
+            if (this.classList.contains('crypto-benefit') || this.classList.contains('ember-highlight')) {
                 this.style.transform = 'translateX(0)';
             }
             this.style.boxShadow = '';
@@ -109,9 +111,14 @@ document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto
 
 // FIXED: Enhanced stats animation - EXCLUDES Ember Token stats to prevent spinning numbers
 function animateStats() {
-    // Only target specific stats that should animate, EXCLUDE ember token stats
+    // CRITICAL: Only target showcase and revenue stats, NEVER ember stats
     const stats = document.querySelectorAll('.showcase-stat .stat-number, .revenue-number');
     stats.forEach(stat => {
+        // Extra safety check to avoid ember stats
+        if (stat.closest('.ember-token-section') || stat.closest('.ember-stats-compact') || stat.closest('.stat-pair')) {
+            return; // Skip ember token stats completely
+        }
+        
         const finalValue = stat.textContent;
         const numericValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
         
@@ -331,6 +338,7 @@ document.querySelectorAll('img').forEach(img => {
 // Preload critical phoenix crypto images for better performance
 function preloadPhoenixCryptoImages() {
     const criticalImages = [
+        'images/PhoenixHoldingCoin.PNG', // NEW: Compact Ember section image
         'images/IMG_7910.PNG', // Main phoenix crypto image
         'images/9FBD9FC3-8B64-44F7-9B5A-785531847CB9.PNG', // Phoenix holding coin
         'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG', // Golden coin
@@ -495,11 +503,40 @@ function initializeCryptoCoinImage() {
     }, 50);
 }
 
+// NEW: Enhanced Ember Phoenix Image interaction for compact section
+function initializeEmberPhoenixImage() {
+    const emberImage = document.querySelector('.ember-phoenix-image');
+    if (!emberImage) return;
+    
+    // Add special ember glow effect on hover
+    emberImage.addEventListener('mouseenter', function() {
+        this.style.filter = 'drop-shadow(0 0 40px rgba(240, 165, 0, 0.9)) brightness(1.15)';
+        this.style.transform = 'translateY(-8px) scale(1.05)';
+    });
+    
+    emberImage.addEventListener('mouseleave', function() {
+        this.style.filter = '';
+        this.style.transform = '';
+    });
+    
+    // Add subtle floating animation
+    let emberTime = 0;
+    setInterval(() => {
+        emberTime += 0.015;
+        const floatMovement = Math.sin(emberTime) * 5; // Gentle floating
+        const rotateMovement = Math.cos(emberTime * 0.7) * 2; // Subtle rotation
+        if (!emberImage.matches(':hover')) {
+            emberImage.style.transform = `translateY(${floatMovement}px) rotate(${rotateMovement}deg)`;
+        }
+    }, 60);
+}
+
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     preloadPhoenixCryptoImages();
     createPhoenixCryptoParticles();
     initializeCryptoCoinImage();
+    initializeEmberPhoenixImage(); // NEW: Initialize ember phoenix image
     
     // Add smooth entrance animations
     setTimeout(() => {
@@ -529,7 +566,7 @@ window.addEventListener('load', () => {
 });
 
 // Enhanced interactive feedback for all CTA buttons with crypto theme - UPDATED WITH GOLDEN COINS
-document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button').forEach(button => {
+document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .ember-cta-primary, .ember-cta-secondary').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
         // Add subtle coin sparkle effect using golden coin
@@ -657,9 +694,50 @@ function initializeCryptoBenefits() {
     document.head.appendChild(coinBounceStyle);
 }
 
+// NEW: Initialize Ember highlights animation on scroll
+function initializeEmberHighlights() {
+    const highlights = document.querySelectorAll('.ember-highlight');
+    if (!highlights.length) return;
+    
+    const highlightsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.transform = 'translateX(0)';
+                    entry.target.style.opacity = '1';
+                    
+                    // Add ember glow effect
+                    const icon = entry.target.querySelector('.highlight-icon');
+                    if (icon) {
+                        icon.style.animation = 'emberGlow 0.8s ease-out';
+                    }
+                }, index * 150);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    highlights.forEach(highlight => {
+        highlight.style.transform = 'translateX(-30px)';
+        highlight.style.opacity = '0';
+        highlightsObserver.observe(highlight);
+    });
+    
+    // Add ember glow animation
+    const emberGlowStyle = document.createElement('style');
+    emberGlowStyle.textContent = `
+        @keyframes emberGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.9)); }
+            100% { filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5)); }
+        }
+    `;
+    document.head.appendChild(emberGlowStyle);
+}
+
 // Initialize crypto-specific features
 document.addEventListener('DOMContentLoaded', function() {
     initializeCryptoBenefits();
+    initializeEmberHighlights(); // NEW: Initialize ember highlights
     createPhoenixCryptoScrollIndicator();
 });
 
