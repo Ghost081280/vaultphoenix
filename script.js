@@ -342,7 +342,7 @@ function preloadPhoenixCryptoImages() {
         'images/PhoenixHoldingCoin.PNG', // NEW: Compact Ember section image
         'images/IMG_7910.PNG', // Main phoenix crypto image
         'images/9FBD9FC3-8B64-44F7-9B5A-785531847CB9.PNG', // Phoenix holding coin
-        'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG', // Golden coin
+        'images/VPEmberCoin.PNG', // FIXED: Updated coin reference
         'images/IMG_4380.jpg',
         'images/IMG_4383.jpg',
         'images/IMG_4381.jpg'
@@ -390,8 +390,8 @@ function createPhoenixCryptoParticles() {
         coin.className = `hero-coin hero-coin-${index + 1}`;
         
         const coinImg = document.createElement('img');
-        coinImg.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
-        coinImg.alt = 'Golden Crypto Coin';
+        coinImg.src = 'images/VPEmberCoin.PNG'; // FIXED: Updated coin reference
+        coinImg.alt = 'VP Ember Coin';
         coinImg.className = 'hero-crypto-coin-icon';
         coinImg.style.cssText = `
             width: clamp(25px, 4vw, 40px);
@@ -532,15 +532,15 @@ function initializeEmberPhoenixImage() {
     }, 60);
 }
 
-// Enhanced interactive feedback for all CTA buttons with crypto theme - UPDATED WITH GOLDEN COINS
+// Enhanced interactive feedback for all CTA buttons with crypto theme - UPDATED WITH VP EMBER COINS
 document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .ember-cta-primary, .ember-cta-secondary').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
-        // Add subtle coin sparkle effect using golden coin
+        // Add subtle coin sparkle effect using VP ember coin
         if (Math.random() > 0.7) {
             const sparkle = document.createElement('img');
-            sparkle.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
-            sparkle.alt = 'Golden Coin Sparkle';
+            sparkle.src = 'images/VPEmberCoin.PNG'; // FIXED: Updated coin reference
+            sparkle.alt = 'VP Ember Coin Sparkle';
             sparkle.style.cssText = `
                 position: absolute;
                 width: 12px;
@@ -581,7 +581,7 @@ sparkleStyle.textContent = `
 `;
 document.head.appendChild(sparkleStyle);
 
-// Phoenix crypto-themed scroll progress indicator - UPDATED WITH GOLDEN COIN
+// Phoenix crypto-themed scroll progress indicator - UPDATED WITH VP EMBER COIN
 function createPhoenixCryptoScrollIndicator() {
     const indicator = document.createElement('div');
     indicator.style.cssText = `
@@ -603,10 +603,10 @@ function createPhoenixCryptoScrollIndicator() {
         const scrolled = (winScroll / height) * 100;
         indicator.style.width = scrolled + '%';
         
-        // Add golden coin at the end of progress bar
+        // Add VP ember coin at the end of progress bar
         if (scrolled > 95 && !indicator.querySelector('.scroll-coin')) {
             const coin = document.createElement('img');
-            coin.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
+            coin.src = 'images/VPEmberCoin.PNG'; // FIXED: Updated coin reference
             coin.className = 'scroll-coin';
             coin.style.cssText = `
                 position: absolute;
@@ -701,7 +701,7 @@ function initializeEmberHighlights() {
     document.head.appendChild(emberGlowStyle);
 }
 
-// Easter egg: Konami code for bonus crypto coins - UPDATED WITH GOLDEN COINS
+// Easter egg: Konami code for bonus crypto coins - UPDATED WITH VP EMBER COINS
 let konamiCode = [];
 const konamiSequence = [
     'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
@@ -716,13 +716,13 @@ document.addEventListener('keydown', (e) => {
     }
     
     if (konamiCode.join(',') === konamiSequence.join(',')) {
-        // Trigger bonus crypto coin rain with golden coins
+        // Trigger bonus crypto coin rain with VP ember coins
         console.log('🔥🪙 BONUS CRYPTO ACTIVATED! 🪙🔥');
         for (let i = 0; i < 50; i++) {
             setTimeout(() => {
                 const coin = document.createElement('img');
-                coin.src = 'images/F784709F-BE0F-4902-A67E-AC5775B02F38.PNG';
-                coin.alt = 'Golden Bonus Coin';
+                coin.src = 'images/VPEmberCoin.PNG'; // FIXED: Updated coin reference
+                coin.alt = 'VP Ember Bonus Coin';
                 coin.style.cssText = `
                     position: fixed;
                     width: ${Math.random() * 30 + 20}px;
