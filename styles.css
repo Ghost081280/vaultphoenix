@@ -173,165 +173,7 @@ body {
     display: none !important;
 }
 
-/* Enhanced CTA Button - Phoenix Crypto Theme */
-.cta-button {
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    color: white;
-    padding: 14px 28px;
-    border: none;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 15px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-}
-
-.cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.cta-button:hover::before {
-    left: 100%;
-}
-
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5);
-}
-
-.cta-button:active {
-    transform: translateY(0);
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
-}
-
-.secondary-button {
-    background: transparent !important;
-    border: 3px solid white !important;
-    color: white !important;
-}
-
-.secondary-button:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: white !important;
-}
-
-.hero-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 40px;
-    text-align: center;
-    color: white;
-    z-index: 10;
-    position: relative;
-}
-
-.hero-title {
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 900;
-    margin-bottom: 30px;
-    color: #ffffff;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-subtitle {
-    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-    margin-bottom: 50px;
-    color: rgba(255, 255, 255, 0.95);
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: 500;
-    line-height: 1.4;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Hero Process Section - Phoenix Crypto Theme */
-.hero-process {
-    margin: 50px 0;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.process-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #d73327;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.process-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-}
-
-.step {
-    background: rgba(215, 51, 39, 0.15);
-    padding: 25px;
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-align: center;
-}
-
-.step:hover {
-    transform: translateY(-5px);
-    background: rgba(215, 51, 39, 0.25);
-    box-shadow: 0 20px 40px rgba(215, 51, 39, 0.2);
-}
-
-.step-number {
-    font-size: 2rem;
-    font-weight: 900;
-    display: block;
-    margin-bottom: 8px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.step-label {
-    font-size: 1rem;
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.hero-cta {
-    margin-top: 60px;
-    margin-bottom: 40px;
-}
-
-.hero-cta .cta-button {
-    font-size: 1.3rem;
-    padding: 20px 45px;
-    margin: 0 15px 15px 0;
-    display: inline-block;
-}
-
-.hero-cta .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
-}
-
-/* Ember Token Section - NEW */
+/* Ember Token Section - COMPLETE STYLING */
 .ember-token-section {
     padding: 80px 40px;
     background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #6b7280 100%);
@@ -359,6 +201,8 @@ body {
     align-items: center;
     position: relative;
     z-index: 10;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .ember-token-text {
@@ -540,6 +384,164 @@ body {
         transform: translate(-50%, -50%) scale(1.2); 
         opacity: 0.6; 
     }
+}
+
+/* Enhanced CTA Button - Phoenix Crypto Theme */
+.cta-button {
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5);
+}
+
+.cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+}
+
+.secondary-button {
+    background: transparent !important;
+    border: 3px solid white !important;
+    color: white !important;
+}
+
+.secondary-button:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: white !important;
+}
+
+.hero-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    text-align: center;
+    color: white;
+    z-index: 10;
+    position: relative;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 30px;
+    color: #ffffff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    margin-bottom: 50px;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+    line-height: 1.4;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Hero Process Section - Phoenix Crypto Theme */
+.hero-process {
+    margin: 50px 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.process-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #d73327;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.step {
+    background: rgba(215, 51, 39, 0.15);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+}
+
+.step:hover {
+    transform: translateY(-5px);
+    background: rgba(215, 51, 39, 0.25);
+    box-shadow: 0 20px 40px rgba(215, 51, 39, 0.2);
+}
+
+.step-number {
+    font-size: 2rem;
+    font-weight: 900;
+    display: block;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.step-label {
+    font-size: 1rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.hero-cta {
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.hero-cta .cta-button {
+    font-size: 1.3rem;
+    padding: 20px 45px;
+    margin: 0 15px 15px 0;
+    display: inline-block;
+}
+
+.hero-cta .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
 }
 
 /* NEW: Crypto Coin Section */
@@ -1805,6 +1807,10 @@ body {
     }
     
     /* Mobile Ember Token Section */
+    .ember-token-section {
+        padding: 60px 20px;
+    }
+    
     .ember-token-content {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1815,9 +1821,30 @@ body {
         order: -1;
     }
     
+    .ember-token-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+    
+    .ember-token-description {
+        font-size: 1.1rem;
+    }
+    
+    .ember-highlights {
+        gap: 12px;
+    }
+    
+    .ember-highlight {
+        padding: 10px 15px;
+    }
+    
     .ember-coin-image {
         width: 150px;
         height: 150px;
+    }
+    
+    .ember-glow {
+        width: 200px;
+        height: 200px;
     }
     
     /* Mobile Crypto Section */
@@ -2376,6 +2403,11 @@ body {
     .ember-coin-image {
         width: 100px;
         height: 100px;
+    }
+    
+    .ember-glow {
+        width: 120px;
+        height: 120px;
     }
 
     /* Ultra Mobile Crypto Section */
