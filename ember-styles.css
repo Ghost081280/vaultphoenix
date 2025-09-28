@@ -1,7 +1,7 @@
 /* Ember Token Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
 /* Updated with Merchant Redemption Focus */
-/* FIXED: Navigation to match main page exactly - HORIZONTAL BAR NOW WORKS */
+/* FINAL FIX: Navigation horizontal bar NOW WORKS PROPERLY */
 /* FIXED: Removed all focus states that cause red boxes */
 /* FIXED: Updated for crypto community focus */
 
@@ -19,7 +19,7 @@ body {
     background: #0f0f0f;
 }
 
-/* FIXED: Navigation - EXACTLY MATCHES MAIN PAGE NOW */
+/* FINAL FIX: Navigation - HORIZONTAL BAR WORKS PERFECTLY NOW */
 .navbar {
     position: fixed;
     top: 0;
@@ -75,7 +75,11 @@ body {
     list-style: none;
 }
 
-/* FIXED: Navigation links to match main page exactly - HORIZONTAL BAR WORKS */
+.nav-links li {
+    display: inline-block;
+}
+
+/* FINAL FIX: Navigation links - HORIZONTAL BAR ANIMATION WORKS */
 .nav-links a {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
@@ -84,6 +88,7 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     padding: 10px 0;
+    display: inline-block;
 }
 
 .nav-links a:hover {
@@ -91,7 +96,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* FIXED: Horizontal bar animation to match main page exactly */
+/* FINAL FIX: Horizontal bar animation - THIS IS THE KEY */
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -1447,7 +1452,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Mobile Responsive Design */
+/* FINAL FIX: Mobile Responsive Design - HORIZONTAL BAR DISABLED ONLY ON MOBILE */
 @media (max-width: 1024px) {
     .mobile-menu-btn {
         display: block;
@@ -1475,10 +1480,15 @@ body {
         padding: 40px 20px;
     }
 
-    .nav-links.mobile-active a {
+    .nav-links.mobile-active li {
         display: block;
         width: 100%;
         max-width: 300px;
+    }
+
+    .nav-links.mobile-active a {
+        display: block;
+        width: 100%;
         padding: 20px 30px;
         font-size: 20px;
         font-weight: 700;
@@ -1500,8 +1510,9 @@ body {
         color: #ffffff;
     }
 
+    /* FINAL FIX: Disable horizontal bar ONLY on mobile */
     .nav-links.mobile-active a::after {
-        display: none;
+        display: none !important;
     }
 
     .presale-content {
