@@ -1,6 +1,6 @@
 /* Vault Phoenix - Main Stylesheet */
 /* Phoenix Rising from Digital Ashes - Crypto Gaming Edition */
-/* FIXED: Smooth Loading Transition */
+/* CLEANED: Removed floating coin references */
 
 * {
     margin: 0;
@@ -1145,7 +1145,7 @@ html {
     flex-shrink: 0;
 }
 
-/* Custom Showcase Icon Styling - NEW LARGER ICONS */
+/* Custom Showcase Icon Styling - LARGER ICONS */
 .custom-showcase-icon {
     width: 50px;
     height: 50px;
@@ -2299,6 +2299,3 @@ html {
     background: rgba(240, 165, 0, 0.3);
     color: #ffffff;
 }
-
-/* REMOVED: Loading state CSS that caused flash */
-/* Body starts with correct background, no opacity fade needed */
