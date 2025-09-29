@@ -2,6 +2,8 @@
 /* Phoenix Rising from Digital Ashes - Crypto Gaming Edition */
 /* UPDATED: Enhanced Phoenix Token Evolution section with larger vault image and improved CTA card */
 /* UPDATED: New crypto coin images properly sized and positioned */
+/* UPDATED: Bigger crypto coin icons and larger rocket icon */
+/* UPDATED: All feature icons replaced with new images */
 
 * {
     margin: 0;
@@ -364,22 +366,22 @@ body {
 }
 
 .countdown-icon {
-    width: 36px;
-    height: 36px;
+    width: 48px; /* UPDATED: Made bigger */
+    height: 48px; /* UPDATED: Made bigger */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.ember-countdown-icon {
-    width: 32px;
-    height: 32px;
+.ember-countdown-icon-large {
+    width: 44px; /* UPDATED: Made bigger */
+    height: 44px; /* UPDATED: Made bigger */
     object-fit: contain;
     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
     transition: all 0.3s ease;
 }
 
-.ember-countdown-icon:hover {
+.ember-countdown-icon-large:hover {
     transform: scale(1.1) rotate(10deg);
     filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.8));
 }
@@ -1038,8 +1040,8 @@ body {
 
 .benefit-icon {
     font-size: 2.5rem;
-    width: 60px;
-    height: 60px;
+    width: 80px; /* UPDATED: Made bigger */
+    height: 80px; /* UPDATED: Made bigger */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1053,8 +1055,8 @@ body {
     padding: 8px;
 }
 
-/* UPDATED: New Crypto Coin Icons with Perfect Sizing */
-.custom-coin-icon {
+/* UPDATED: New Crypto Coin Icons with Bigger Sizing */
+.custom-coin-icon-large {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -1062,7 +1064,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.custom-placement-icon {
+.custom-placement-icon-large {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -1070,7 +1072,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.custom-revenue-icon {
+.custom-revenue-icon-large {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -1078,9 +1080,9 @@ body {
     transition: all 0.3s ease;
 }
 
-.crypto-benefit:hover .custom-coin-icon,
-.crypto-benefit:hover .custom-placement-icon,
-.crypto-benefit:hover .custom-revenue-icon {
+.crypto-benefit:hover .custom-coin-icon-large,
+.crypto-benefit:hover .custom-placement-icon-large,
+.crypto-benefit:hover .custom-revenue-icon-large {
     transform: scale(1.1);
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)) brightness(1.1);
 }
@@ -2152,6 +2154,23 @@ body {
         max-width: 340px;
         margin: 0 auto;
     }
+
+    /* UPDATED: Bigger rocket icon on mobile */
+    .countdown-icon {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    .ember-countdown-icon-large {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    /* UPDATED: Bigger crypto coin icons on mobile */
+    .benefit-icon {
+        width: 70px !important;
+        height: 70px !important;
+    }
     
     /* Mobile Crypto Section */
     .crypto-content {
@@ -2301,6 +2320,23 @@ body {
     .compliance-disclaimer {
         padding: 20px;
         margin-top: 24px;
+    }
+
+    /* UPDATED: Bigger rocket icon on 768px mobile */
+    .countdown-icon {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .ember-countdown-icon-large {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    /* UPDATED: Bigger crypto coin icons on 768px mobile */
+    .benefit-icon {
+        width: 65px !important;
+        height: 65px !important;
     }
 
     /* FIXED: Mobile floating coins sizing for 768px */
@@ -2539,6 +2575,23 @@ body {
 
     .compliance-disclaimer p {
         font-size: 0.85rem;
+    }
+
+    /* UPDATED: Biggest rocket icon on ultra mobile */
+    .countdown-icon {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .ember-countdown-icon-large {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    /* UPDATED: Bigger crypto coin icons on ultra mobile */
+    .benefit-icon {
+        width: 60px !important;
+        height: 60px !important;
     }
 
     .features, .app-showcase, .use-cases, .pricing, .final-cta {
