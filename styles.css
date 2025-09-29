@@ -154,6 +154,15 @@ body {
     width: 100%;
 }
 
+/* Remove red box on clicked nav links */
+.nav-links a:focus {
+    outline: none;
+}
+
+.nav-links a:active::after {
+    width: 0;
+}
+
 /* Ember Link Special Styling */
 .ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
@@ -457,9 +466,10 @@ body {
     gap: 8px;
 }
 
+/* LARGER compliance icon */
 .compliance-icon {
-    width: 28px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(240, 165, 0, 0.4));
 }
@@ -832,7 +842,7 @@ body {
 .process-title {
     font-size: 1.8rem;
     font-weight: 800;
-    color: #d73327;
+    color: #ffffff;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -1277,7 +1287,7 @@ body {
     font-size: 1.05rem;
 }
 
-/* App Showcase Section - REBUILT */
+/* App Showcase Section */
 .app-showcase {
     padding: 120px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
@@ -1451,6 +1461,7 @@ body {
 /* Laptop Gallery */
 .laptop-gallery {
     text-align: center;
+    position: relative;
 }
 
 .laptop-mockup {
@@ -1543,7 +1554,53 @@ body {
     padding: 6px 3px;
 }
 
-/* Demo Buttons Compact */
+/* Phoenix Safe Container - NEW */
+.phoenix-safe-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.phoenix-safe-image {
+    width: 320px;
+    height: 320px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5));
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.phoenix-safe-image:hover {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.7));
+}
+
+.phoenix-safe-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.3) 0%, rgba(251, 146, 60, 0.15) 30%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    transition: all 0.4s ease;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+.phoenix-safe-image:hover + .phoenix-safe-glow {
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(251, 146, 60, 0.4) 30%, transparent 70%);
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 1;
+}
+
+/* Demo Buttons Compact - ENHANCED */
 .demo-highlight-mobile,
 .demo-highlight-laptop {
     display: flex;
@@ -1553,17 +1610,17 @@ body {
 .demo-button-compact {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
-    padding: 12px 24px;
-    border-radius: 15px;
+    padding: 14px 28px;
+    border-radius: 16px;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 10px 25px rgba(215, 51, 39, 0.4);
     border: 2px solid transparent;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
 .demo-button-compact:hover {
@@ -1580,26 +1637,27 @@ body {
     box-shadow: 0 15px 35px rgba(99, 102, 241, 0.5);
 }
 
+/* ENHANCED: Bigger icon with white background */
 .demo-icon-compact {
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 10px;
+    padding: 6px;
 }
 
 .demo-icon-image-compact {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    background: rgba(255, 255, 255, 0.95);
-    padding: 4px;
-    border-radius: 6px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .demo-text-compact {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 800;
 }
 
@@ -1643,7 +1701,7 @@ body {
     filter: drop-shadow(0 2px 4px rgba(240, 165, 0, 0.4));
 }
 
-/* System Benefits */
+/* System Benefits - ENHANCED ICONS */
 .system-benefits {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1668,9 +1726,10 @@ body {
     margin-bottom: 20px;
 }
 
+/* LARGER benefit header icons */
 .benefit-header-icon {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
     filter: drop-shadow(0 3px 6px rgba(215, 51, 39, 0.3));
 }
@@ -1704,7 +1763,7 @@ body {
     font-size: 1.1rem;
 }
 
-/* Use Cases Section - REBUILT with Larger Icons */
+/* Use Cases Section */
 .use-cases {
     padding: 120px 40px;
     background: linear-gradient(135deg, #7c2d12 0%, #dc2626 25%, #ea580c 50%, #f59e0b 75%, #eab308 100%);
@@ -1756,7 +1815,6 @@ body {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* UPDATED: Larger use case icons filling empty space */
 .use-case-icon-container-large {
     position: absolute;
     top: 15px;
@@ -2270,7 +2328,6 @@ body {
     backdrop-filter: blur(10px);
 }
 
-/* UPDATED: Even larger development story icon - 140px */
 .development-story-icon {
     width: 140px;
     height: 140px;
@@ -2869,6 +2926,16 @@ body {
         max-width: 400px;
     }
 
+    .phoenix-safe-image {
+        width: 260px;
+        height: 260px;
+    }
+
+    .phoenix-safe-glow {
+        width: 320px;
+        height: 320px;
+    }
+
     .use-case-icon-container-large {
         width: 85px;
         height: 85px;
@@ -2893,6 +2960,16 @@ body {
     .cta-icon-image {
         width: 28px;
         height: 28px;
+    }
+
+    .compliance-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .benefit-header-icon {
+        width: 60px;
+        height: 60px;
     }
 }
 
@@ -2929,6 +3006,16 @@ body {
         max-width: 300px;
     }
 
+    .phoenix-safe-image {
+        width: 220px;
+        height: 220px;
+    }
+
+    .phoenix-safe-glow {
+        width: 280px;
+        height: 280px;
+    }
+
     .use-case-icon-container-large {
         width: 75px;
         height: 75px;
@@ -2954,6 +3041,21 @@ body {
     .cta-icon-image {
         width: 24px;
         height: 24px;
+    }
+
+    .compliance-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .benefit-header-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .demo-icon-compact {
+        width: 32px;
+        height: 32px;
     }
 
     .github-link-card-inline {
@@ -3013,10 +3115,13 @@ html {
 .cta-button:focus,
 .demo-button:focus,
 .social-link:focus,
-.mobile-menu-btn:focus,
-.nav-links a:focus {
+.mobile-menu-btn:focus {
     outline: 3px solid #d73327;
     outline-offset: 2px;
+}
+
+.nav-links a:focus {
+    outline: none;
 }
 
 ::-webkit-scrollbar {
