@@ -1,8 +1,6 @@
 // Ember Token Page JavaScript
 // Phoenix Rising from Digital Ashes - $Ember Token Edition
-// FIXED: Updated for crypto community focus
-// CLEANED: Removed all floating coin references and effects
-// EXACT COPY FROM MAIN.HTML: All working navigation functionality with horizontal bar
+// FIXED: Added scroll progress indicator from main.html
 
 // EXACT COPY FROM MAIN.HTML: Enhanced navbar scroll effect
 window.addEventListener('scroll', () => {
@@ -15,6 +13,30 @@ window.addEventListener('scroll', () => {
         navbar.classList.remove('scrolled');
     }
 });
+
+// ADDED: Phoenix crypto-themed scroll progress indicator (copied from main.html)
+function createPhoenixCryptoScrollIndicator() {
+    const indicator = document.createElement('div');
+    indicator.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
+        z-index: 9999;
+        transition: width 0.3s ease;
+        width: 0%;
+        box-shadow: 0 2px 10px rgba(215, 51, 39, 0.3);
+    `;
+    document.body.appendChild(indicator);
+    
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        indicator.style.width = scrolled + '%';
+    });
+}
 
 // EXACT COPY FROM MAIN.HTML: Enhanced scroll reveal animation
 const observerOptions = {
@@ -543,6 +565,9 @@ function showTokenSaleModal() {
 
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+    // ADDED: Initialize scroll progress indicator first
+    createPhoenixCryptoScrollIndicator();
+    
     initializeCountdown();
     initializeCalculator();
     initializeButtonEffects();
@@ -570,6 +595,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     console.log('🔥🪙 $Ember Token page loaded successfully - crypto community ready!');
+    console.log('🔥🪙 Scroll progress indicator active!');
 });
 
 // Console welcome message
