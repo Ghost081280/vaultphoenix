@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Vault Phoenix - AR Crypto Gaming</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-coin"></div>
+        <div class="floating-coin"></div>
+        <div class="floating-coin"></div>
+        <div class="floating-coin"></div>
+    </div>
+
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="app-logo">🔥</div>
+            <h1 class="app-title">Vault Phoenix</h1>
+            <p class="app-subtitle">AR Crypto Gaming</p>
+        </div>
+
+        <div class="demo-badge">
+            <div class="demo-badge-title">🎮 Demo Access - Collect Real $Ember Tokens</div>
+            <div class="demo-credentials">
+                <strong>demo@vaultphoenix.com</strong> • <strong>phoenix123</strong>
+            </div>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <input 
+                    type="email" 
+                    id="email" 
+                    class="form-input" 
+                    placeholder="Email address"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <input 
+                    type="password" 
+                    id="password" 
+                    class="form-input" 
+                    placeholder="Password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="login-button" id="loginBtn">
+                <span id="loginText">🔥 Start Crypto Hunt</span>
+            </button>
+        </form>
+
+        <div class="crypto-features">
+            <div class="feature-item">
+                <span class="feature-icon">💎</span>
+                <span class="feature-text">Collect $Ember Tokens</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🏦</span>
+                <span class="feature-text">Coinbase Wallet Integration</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🎯</span>
+                <span class="feature-text">Redeem at Partner Locations</span>
+            </div>
+        </div>
+
+        <div class="forgot-password">
+            <a href="#" id="forgotPassword">Forgot password?</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
