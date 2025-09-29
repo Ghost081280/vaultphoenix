@@ -1,8 +1,8 @@
 // Vault Phoenix - Interactive JavaScript
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
-// FIXED: Now uses correct VPEmberCoin.PNG for floating coins throughout
+// UPDATED: Now works with crypto-game/ folder screenshots
 
-// Enhanced gallery function with correct image order
+// Enhanced gallery function with correct image order for crypto game screenshots
 function changeImage(imageSrc, title) {
     const mainImg = document.getElementById('mainScreenshot');
     const showcaseTitle = document.getElementById('showcaseTitle');
@@ -12,6 +12,7 @@ function changeImage(imageSrc, title) {
         mainImg.style.opacity = '0.7';
         setTimeout(() => {
             mainImg.src = imageSrc;
+            mainImg.alt = title;
             mainImg.style.opacity = '1';
         }, 150);
     }
@@ -25,9 +26,10 @@ function changeImage(imageSrc, title) {
         thumb.classList.remove('active');
     });
     
-    // Find and activate clicked thumb
+    // Find and activate clicked thumb based on image source
     thumbs.forEach(thumb => {
-        if (thumb.getAttribute('onclick') && thumb.getAttribute('onclick').includes(imageSrc)) {
+        const thumbImg = thumb.querySelector('img');
+        if (thumbImg && thumbImg.src.includes(imageSrc.split('/').pop())) {
             thumb.classList.add('active');
         }
     });
@@ -159,15 +161,15 @@ if (heroSection) {
     heroObserver.observe(heroSection);
 }
 
-// Auto-rotate gallery showcase with phoenix crypto-themed images
+// Auto-rotate gallery showcase with UPDATED crypto-game screenshots
 let currentImageIndex = 0;
 const imageRotation = [
-    { src: 'images/IMG_7910.PNG', title: 'Phoenix Crypto Collection System' },
-    { src: 'images/IMG_4380.jpg', title: 'Legendary Coin Discovery' },
-    { src: 'images/IMG_4383.jpg', title: 'Phoenix Crypto Dashboard' },
-    { src: 'images/IMG_4381.jpg', title: 'AR Crypto Hunt Mode' },
-    { src: 'images/IMG_4382.jpg', title: 'Crypto Territory Map' },
-    { src: 'images/IMG_4378.jpg', title: 'Phoenix Navigation System' }
+    { src: 'crypto-game/images/IMG_7910.PNG', title: 'Phoenix Crypto Login System' },
+    { src: 'crypto-game/images/IMG_4380.jpg', title: 'Legendary Dashboard View' },
+    { src: 'crypto-game/images/IMG_4383.jpg', title: 'Phoenix Territory Map' },
+    { src: 'crypto-game/images/IMG_4381.jpg', title: 'AR Crypto Hunt Mode' },
+    { src: 'crypto-game/images/IMG_4382.jpg', title: 'Crypto Vault System' },
+    { src: 'crypto-game/images/IMG_4378.jpg', title: 'Phoenix Navigation Portal' }
 ];
 
 function autoRotateGallery() {
@@ -376,13 +378,15 @@ document.querySelectorAll('img').forEach(img => {
 // Preload critical phoenix crypto images for better performance
 function preloadPhoenixCryptoImages() {
     const criticalImages = [
-        'images/IMG_7910.PNG', // Main phoenix crypto image
-        'images/9FBD9FC3-8B64-44F7-9B5A-785531847CB9.PNG', // Phoenix holding coin
+        'crypto-game/images/IMG_7910.PNG', // Main phoenix crypto login
+        'crypto-game/images/IMG_4380.jpg', // Dashboard
+        'crypto-game/images/IMG_4383.jpg', // Map
+        'crypto-game/images/IMG_4381.jpg', // AR Hunt
+        'crypto-game/images/IMG_4382.jpg', // Vault
+        'crypto-game/images/IMG_4378.jpg', // Navigation
         'images/VPEmberCoin.PNG', // CORRECT EMBER COIN FOR FLOATING
         'images/PhoenixHoldingCoin.PNG', // Ember section image
-        'images/IMG_4380.jpg',
-        'images/IMG_4383.jpg',
-        'images/IMG_4381.jpg'
+        'images/VPLogoNoText.PNG' // Logo
     ];
     
     criticalImages.forEach(src => {
@@ -573,7 +577,7 @@ function initializeCryptoCoinImage() {
 
 // Enhanced: Ember coin image interaction for the new compact section
 function initializeEmberCoinImage() {
-    const emberCoinImage = document.querySelector('.phoenix-holding-coin-compact');
+    const emberCoinImage = document.querySelector('.phoenix-holding-coin-enhanced');
     if (!emberCoinImage) return;
     
     // Add special ember coin glow effect on hover
@@ -622,10 +626,11 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥🪙 Phoenix crypto systems online and ready for action!');
     console.log('🔥🪙 Ember Section V2 with Countdown - Ready!');
     console.log('🔥🪙 Floating VPEmberCoin.PNG coins should now be visible in hero section!');
+    console.log('🔥🪙 Crypto-game screenshots ready for gallery!');
 });
 
 // Enhanced interactive feedback for all CTA buttons with crypto theme
-document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .ember-cta-button-v2').forEach(button => {
+document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .ember-cta-button-enhanced, .demo-button-enhanced').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
         // Add subtle coin sparkle effect using VPEmberCoin image
@@ -870,7 +875,7 @@ document.addEventListener('keydown', (e) => {
 console.log('%c🔥🪙 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
 console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
 console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
-console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with VPEmberCoin.PNG!', 'color: #d73327; font-size: 12px; font-style: italic;');
+console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with crypto-game screenshots!', 'color: #d73327; font-size: 12px; font-style: italic;');
 console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
 
 // Performance monitoring with phoenix crypto theme
@@ -893,4 +898,14 @@ window.addEventListener('load', () => {
             console.warn('🔥🪙 WARNING: Floating coins not found!');
         }
     }, 2000);
+    
+    // Check if crypto-game gallery is working
+    setTimeout(() => {
+        const mainScreenshot = document.getElementById('mainScreenshot');
+        if (mainScreenshot && mainScreenshot.src.includes('crypto-game/')) {
+            console.log('🔥🪙 SUCCESS: Crypto-game screenshots loaded in gallery!');
+        } else {
+            console.warn('🔥🪙 WARNING: Crypto-game screenshots not detected!');
+        }
+    }, 1000);
 });
