@@ -1919,6 +1919,15 @@ body {
     margin-bottom: 30px;
 }
 
+.solution-category-title {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
 .solution-badge {
     display: inline-block;
     background: linear-gradient(135deg, #d73327, #fb923c);
@@ -2554,7 +2563,7 @@ body {
     margin: 0;
 }
 
-/* Journey Section - NEW ENHANCED DESIGN */
+/* Journey Section - ENHANCED DESIGN */
 .journey-section {
     margin-top: 50px;
     padding: 45px;
@@ -2604,67 +2613,102 @@ body {
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.2);
 }
 
-.path-header {
+/* ENHANCED Path Header with Better Layout */
+.path-header-enhanced {
     display: flex;
-    align-items: center;
-    gap: 15px;
+    align-items: flex-start;
+    gap: 20px;
     margin-bottom: 25px;
-    position: relative;
 }
 
-.path-icon {
-    width: 60px;
-    height: 60px;
+.path-icon-enhanced {
+    width: 90px;
+    height: 90px;
     object-fit: contain;
     filter: drop-shadow(0 3px 6px rgba(240, 165, 0, 0.4));
     flex-shrink: 0;
+    margin-top: 5px;
 }
 
-.path-header h5 {
-    font-size: 1.4rem;
+.path-header-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.path-category {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+
+.path-title {
+    font-size: 1.3rem;
     font-weight: 800;
     color: #ffffff;
-    margin: 0;
-    flex: 1;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
 }
 
 .path-badge {
-    position: absolute;
-    top: -10px;
-    right: 0;
+    display: inline-block;
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
-    padding: 6px 16px;
-    border-radius: 20px;
+    padding: 4px 12px;
+    border-radius: 15px;
     font-size: 0.75rem;
     font-weight: 700;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+    box-shadow: 0 3px 10px rgba(215, 51, 39, 0.4);
 }
 
 .sdk-badge-alt {
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.4);
 }
 
-.path-steps {
+/* ENHANCED Path Steps with Checkmarks */
+.path-steps-enhanced {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.path-steps li {
-    padding: 15px 0;
+.path-steps-enhanced li {
+    padding: 15px 0 15px 40px;
     border-bottom: 1px solid rgba(215, 51, 39, 0.15);
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.7;
     font-size: 0.95rem;
+    position: relative;
 }
 
-.path-steps li:last-child {
+.path-steps-enhanced li:last-child {
     border-bottom: none;
 }
 
-.path-steps li strong {
+/* Enhanced Checkmark Icons */
+.path-steps-enhanced li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 15px;
+    color: #f0a500;
+    font-weight: 900;
+    font-size: 1.2rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(240, 165, 0, 0.15);
+    border-radius: 50%;
+    border: 2px solid rgba(240, 165, 0, 0.4);
+}
+
+.path-steps-enhanced li strong {
     color: #ffffff;
     font-weight: 700;
 }
@@ -3074,9 +3118,20 @@ body {
         height: 55px;
     }
 
-    .path-icon {
-        width: 50px;
-        height: 50px;
+    .path-icon-enhanced {
+        width: 70px;
+        height: 70px;
+    }
+
+    .path-header-enhanced {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .path-icon-enhanced {
+        margin-top: 0;
     }
 }
 
@@ -3183,9 +3238,9 @@ body {
         height: 45px;
     }
 
-    .path-icon {
-        width: 45px;
-        height: 45px;
+    .path-icon-enhanced {
+        width: 60px;
+        height: 60px;
     }
 
     .path-badge {
