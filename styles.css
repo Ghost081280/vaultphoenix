@@ -27,7 +27,7 @@ body {
     text-shadow: 0 1px 4px rgba(240, 165, 0, 0.2);
 }
 
-/* FIXED: Enhanced Hero Section - Phoenix Crypto Theme */
+/* Hero Section */
 .hero {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
@@ -60,7 +60,7 @@ body {
     66% { transform: translateY(8px) scale(0.98) rotate(-1deg); }
 }
 
-/* FIXED: Navigation */
+/* Navigation */
 .navbar {
     position: fixed;
     top: 0;
@@ -154,7 +154,7 @@ body {
     width: 100%;
 }
 
-/* Ember Link Special Styling with Coin Image */
+/* Ember Link Special Styling */
 .ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
@@ -191,7 +191,7 @@ body {
     transform: scale(1.1) rotate(10deg);
 }
 
-/* Footer Ember Link Button Styling with Coin */
+/* Footer Ember Link */
 .footer-ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
@@ -226,7 +226,7 @@ body {
     transform: scale(1.1) rotate(10deg);
 }
 
-/* ENHANCED: Phoenix Token Section V2 */
+/* Phoenix Token Section V2 */
 .ember-token-section-v2 {
     padding: 80px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
@@ -293,7 +293,7 @@ body {
     line-height: 1.6;
 }
 
-/* ENHANCED: Countdown Widget */
+/* Countdown Widget */
 .ember-countdown-widget {
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
@@ -318,7 +318,6 @@ body {
     justify-content: center;
 }
 
-/* UPDATED: Larger countdown icon - matches "What Happens Next" size */
 .ember-countdown-icon-large {
     width: 52px;
     height: 52px;
@@ -378,7 +377,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Compact Highlights */
+/* Compact Highlights with Image Icons */
 .ember-highlights-compact {
     display: flex;
     flex-direction: column;
@@ -407,9 +406,19 @@ body {
 }
 
 .highlight-emoji-compact {
-    font-size: 1.1rem;
-    width: 22px;
-    text-align: center;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.highlight-icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(240, 165, 0, 0.4));
 }
 
 .highlight-text-compact {
@@ -455,7 +464,7 @@ body {
     margin: 0;
 }
 
-/* ENHANCED: Right Column */
+/* Right Column */
 .ember-token-right {
     display: flex;
     justify-content: center;
@@ -755,6 +764,20 @@ body {
     transform: translateY(-3px);
 }
 
+/* CTA Buttons with Icons */
+.cta-with-icon {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+.cta-icon-image {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
 /* Hero Content */
 .hero-content {
     max-width: 1400px;
@@ -996,7 +1019,6 @@ body {
     padding: 8px;
 }
 
-/* REMOVED: White backgrounds from these icons */
 .custom-coin-icon-large {
     width: 100%;
     height: 100%;
@@ -1248,7 +1270,7 @@ body {
     font-size: 1.05rem;
 }
 
-/* App Showcase Section */
+/* App Showcase Section - REBUILT */
 .app-showcase {
     padding: 120px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
@@ -1276,33 +1298,41 @@ body {
 
 .showcase-content {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 100px;
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: flex-start;
     margin-top: 80px;
     position: relative;
     z-index: 10;
 }
 
+.device-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #f0a500;
+}
+
+/* Phone Gallery */
 .phone-gallery {
     text-align: center;
-    position: relative;
 }
 
 .phone-mockup {
     display: inline-block;
     position: relative;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .phone-frame {
-    width: 320px;
-    height: 640px;
+    width: 280px;
+    height: 560px;
     background: linear-gradient(145deg, #0f0f0f, #2d1810);
-    border-radius: 40px;
-    padding: 20px;
+    border-radius: 35px;
+    padding: 15px;
     box-shadow: 
-        0 40px 100px rgba(0, 0, 0, 0.4),
+        0 30px 80px rgba(0, 0, 0, 0.4),
         inset 0 0 0 3px rgba(215, 51, 39, 0.2);
     position: relative;
     overflow: hidden;
@@ -1311,23 +1341,23 @@ body {
 .phone-frame::before {
     content: '';
     position: absolute;
-    top: 30px;
+    top: 25px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 8px;
+    width: 60px;
+    height: 6px;
     background: #374151;
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 .phone-screen {
     width: 100%;
     height: 100%;
-    border-radius: 28px;
+    border-radius: 25px;
     overflow: hidden;
     background: #000;
     position: relative;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 .phone-screen img {
@@ -1340,32 +1370,32 @@ body {
 .thumbnail-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    max-width: 320px;
-    margin: 0 auto;
+    gap: 15px;
+    max-width: 280px;
+    margin: 0 auto 25px;
 }
 
 .simple-thumb {
-    width: 90px;
-    height: 160px;
+    width: 80px;
+    height: 140px;
     background: white;
-    border-radius: 15px;
+    border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     position: relative;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .simple-thumb:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .simple-thumb.active {
     border-color: #d73327;
-    box-shadow: 0 15px 35px rgba(215, 51, 39, 0.4);
+    box-shadow: 0 12px 30px rgba(215, 51, 39, 0.4);
 }
 
 .simple-thumb img {
@@ -1381,198 +1411,183 @@ body {
     right: 0;
     background: linear-gradient(135deg, #0f0f0f, #2d1810);
     color: white;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     text-align: center;
-    padding: 8px 4px;
+    padding: 6px 3px;
 }
 
-.showcase-features {
+/* Laptop Gallery */
+.laptop-gallery {
+    text-align: center;
+}
+
+.laptop-mockup {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 25px;
+}
+
+.laptop-screen {
+    background: #000;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    aspect-ratio: 16 / 10;
     position: relative;
 }
 
-.showcase-title {
-    font-size: 2.8rem;
-    font-weight: 900;
-    margin-bottom: 35px;
-    color: white;
-    transition: all 0.5s ease;
-    letter-spacing: -0.02em;
+.laptop-screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.feature-highlights {
-    margin-bottom: 50px;
+.laptop-base {
+    width: 110%;
+    height: 15px;
+    background: linear-gradient(to bottom, #2d2d2d, #1a1a1a);
+    margin: 0 auto;
+    border-radius: 0 0 15px 15px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.highlight-item {
+.laptop-notch {
+    width: 60px;
+    height: 4px;
+    background: #1a1a1a;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* Demo Buttons Compact */
+.demo-highlight-mobile,
+.demo-highlight-laptop {
     display: flex;
-    align-items: flex-start;
-    gap: 25px;
-    margin-bottom: 30px;
-    padding: 25px;
-    background: rgba(215, 51, 39, 0.1);
-    border-radius: 18px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(215, 51, 39, 0.2);
+    justify-content: center;
+}
+
+.demo-button-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 15px;
+    text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 25px rgba(215, 51, 39, 0.4);
+    border: 2px solid transparent;
+    font-weight: 700;
+    font-size: 0.95rem;
 }
 
-.highlight-item:hover {
-    transform: translateX(10px);
-    background: rgba(215, 51, 39, 0.15);
-    border-color: rgba(215, 51, 39, 0.4);
+.demo-button-compact:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(215, 51, 39, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
-.highlight-icon {
-    font-size: 2.5rem;
-    width: 75px;
-    height: 75px;
+.management-button {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.management-button:hover {
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.5);
+}
+
+.demo-icon-compact {
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 15px;
-    flex-shrink: 0;
 }
 
-/* UPDATED: All showcase icons same size as Cross-Realm (which was 130%) */
-.custom-showcase-icon {
-    width: 130%;
-    height: 130%;
+.demo-icon-image-compact {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
-    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    background: rgba(255, 255, 255, 0.95);
+    padding: 4px;
+    border-radius: 6px;
 }
 
-.highlight-item:hover .custom-showcase-icon {
-    transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 6px 12px rgba(215, 51, 39, 0.4)) brightness(1.1);
-}
-
-.highlight-content h4 {
-    font-size: 1.2rem;
+.demo-text-compact {
+    font-size: 1rem;
     font-weight: 800;
-    margin-bottom: 8px;
-    color: white;
 }
 
-.highlight-content p {
+/* System Benefits */
+.system-benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 60px;
+    position: relative;
+    z-index: 10;
+}
+
+.benefit-column {
+    background: rgba(215, 51, 39, 0.1);
+    padding: 35px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+}
+
+.benefit-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.benefit-header-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(215, 51, 39, 0.3));
+}
+
+.benefit-header h4 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.benefit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefit-list li {
+    padding: 10px 0 10px 30px;
+    position: relative;
     color: rgba(255, 255, 255, 0.9);
     font-size: 1rem;
     line-height: 1.6;
 }
 
-.showcase-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-top: 50px;
-}
-
-.showcase-stat {
-    text-align: center;
-    padding: 25px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    border-radius: 18px;
-    color: white;
-    box-shadow: 0 10px 30px rgba(215, 51, 39, 0.4);
-}
-
-.showcase-stat .stat-number {
-    font-size: 2rem;
+.benefit-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #f0a500;
     font-weight: 900;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.showcase-stat .stat-label {
-    font-size: 0.95rem;
-    opacity: 0.95;
-    font-weight: 600;
-    color: white !important;
-}
-
-.demo-icon {
-    font-size: 2rem;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* KEPT: Demo Icon with White Background - this is the ONLY one that keeps white background */
-.demo-icon-image {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 1);
-    padding: 10px;
-    border-radius: 14px;
-}
-
-.demo-button:hover .demo-icon-image {
-    transform: scale(1.15);
-    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.4));
-    background: rgba(255, 255, 255, 1);
-}
-
-.demo-highlight {
-    margin-top: 40px;
-    background: rgba(215, 51, 39, 0.15);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 35px;
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    text-align: center;
-}
-
-.demo-cta h4 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin-bottom: 15px;
-}
-
-.demo-cta p {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 25px;
     font-size: 1.1rem;
-    line-height: 1.5;
 }
 
-.demo-button {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    color: white;
-    padding: 20px 40px;
-    border-radius: 20px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
-    border: 2px solid transparent;
-}
-
-.demo-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 60px rgba(215, 51, 39, 0.6);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.demo-text {
-    font-size: 1.2rem;
-    font-weight: 800;
-    margin-bottom: 5px;
-}
-
-.demo-subtext {
-    font-size: 0.9rem;
-    opacity: 0.9;
-    font-weight: 600;
-}
-
-/* Use Cases Section */
+/* Use Cases Section - REBUILT with Larger Icons */
 .use-cases {
     padding: 120px 40px;
     background: linear-gradient(135deg, #7c2d12 0%, #dc2626 25%, #ea580c 50%, #f59e0b 75%, #eab308 100%);
@@ -1624,29 +1639,29 @@ body {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* REMOVED: White background from use case icons */
-.use-case-icon-container {
+/* UPDATED: Larger use case icons filling empty space */
+.use-case-icon-container-large {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 70px;
-    height: 70px;
+    top: 15px;
+    right: 15px;
+    width: 110px;
+    height: 110px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.use-case-icon-image {
+.use-case-icon-image-large {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
 }
 
-.use-case-card:hover .use-case-icon-image {
+.use-case-card:hover .use-case-icon-image-large {
     transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.4));
 }
 
 .use-case-title {
@@ -1654,7 +1669,7 @@ body {
     font-weight: 800;
     margin-bottom: 18px;
     color: #ffffff;
-    padding-right: 80px;
+    padding-right: 120px;
 }
 
 .use-case-example {
@@ -1920,70 +1935,114 @@ body {
     font-style: italic;
 }
 
-/* GitHub Hero Section */
-.github-hero {
+/* GitHub Hero Inline */
+.github-hero-inline {
     margin: 25px 0;
-    text-align: center;
 }
 
-.github-link-card {
-    display: inline-flex;
+.github-link-card-inline {
+    display: flex;
     align-items: center;
-    gap: 20px;
-    background: rgba(0, 0, 0, 0.4);
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.3);
     border: 2px solid rgba(139, 92, 246, 0.4);
-    border-radius: 18px;
-    padding: 25px 35px;
+    border-radius: 15px;
+    padding: 18px 24px;
     text-decoration: none;
     transition: all 0.3s ease;
     color: inherit;
 }
 
-.github-link-card:hover {
-    background: rgba(0, 0, 0, 0.6);
+.github-link-card-inline:hover {
+    background: rgba(0, 0, 0, 0.5);
     border-color: rgba(139, 92, 246, 0.6);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
 }
 
-.github-icon {
+.github-icon-inline {
     color: #a78bfa;
     flex-shrink: 0;
 }
 
-.github-link-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
+.github-link-text-inline {
+    flex: 1;
 }
 
-.github-title {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #ffffff;
-}
-
-.github-subtitle {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.7);
+.github-title-inline {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
     font-family: monospace;
 }
 
-.solution-coming-soon {
-    text-align: center;
-    margin: 20px 0;
+/* SDK Pricing Tiers */
+.sdk-pricing-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
 }
 
-.coming-soon-badge {
-    display: inline-block;
-    background: rgba(139, 92, 246, 0.15);
-    color: #a78bfa;
-    padding: 10px 25px;
-    border-radius: 20px;
-    font-size: 0.95rem;
+.sdk-tier {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 12px;
+    padding: 20px 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.sdk-tier:hover {
+    transform: translateY(-3px);
+    border-color: rgba(139, 92, 246, 0.5);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.sdk-tier.featured {
+    border: 2px solid #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.tier-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    padding: 4px 14px;
+    border-radius: 10px;
+    font-size: 0.7rem;
     font-weight: 700;
-    border: 2px solid rgba(139, 92, 246, 0.4);
+    white-space: nowrap;
+}
+
+.tier-name {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #a78bfa;
+    margin-bottom: 10px;
+}
+
+.tier-price {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.tier-price span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.tier-info {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
 }
 
 /* SDK Features Preview */
@@ -2047,7 +2106,6 @@ body {
     gap: 18px;
 }
 
-/* REMOVED: White backgrounds from solution highlight icons */
 .solution-highlight-icon {
     width: 65px;
     height: 65px;
@@ -2090,10 +2148,10 @@ body {
     backdrop-filter: blur(10px);
 }
 
-/* UPDATED: Much larger development story icon - matches "What Happens Next" size */
+/* UPDATED: Even larger development story icon - 140px */
 .development-story-icon {
-    width: 100px;
-    height: 100px;
+    width: 140px;
+    height: 140px;
     object-fit: contain;
     flex-shrink: 0;
     filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4));
@@ -2133,7 +2191,6 @@ body {
     gap: 15px;
 }
 
-/* UPDATED: Much larger revenue header icon */
 .revenue-header-icon {
     width: 140px;
     height: 140px;
@@ -2180,7 +2237,6 @@ body {
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.2);
 }
 
-/* REMOVED: White background from revenue industry icons */
 .revenue-card-header {
     display: flex;
     align-items: center;
@@ -2308,7 +2364,6 @@ body {
     transform: translateX(5px);
 }
 
-/* UPDATED: Larger benefit icon - matches "Why Location Partners" size */
 .benefit-icon-small {
     width: 70px;
     height: 70px;
@@ -2340,7 +2395,6 @@ body {
     margin: 0;
 }
 
-/* UPDATED: Journey icon - matches countdown icon size (52px) */
 .journey-icon {
     width: 52px;
     height: 52px;
@@ -2523,7 +2577,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Mobile Navigation */
+/* Responsive Design */
 @media (max-width: 1024px) {
     .mobile-menu-btn {
         display: block !important;
@@ -2591,23 +2645,9 @@ body {
         display: none !important;
     }
 
-    .nav-links.mobile-active ~ .mobile-menu-btn {
-        position: fixed !important;
-        top: 20px !important;
-        right: 20px !important;
-        z-index: 9999 !important;
-        background: rgba(215, 51, 39, 0.9) !important;
-        font-size: 24px !important;
-    }
-    
-    .ember-token-section-v2 {
-        padding: 50px 20px;
-    }
-    
     .ember-token-grid {
         grid-template-columns: 1fr;
         gap: 40px;
-        text-align: center;
     }
     
     .ember-token-right {
@@ -2624,26 +2664,6 @@ body {
         height: 400px;
     }
     
-    .ember-cta-card-enhanced {
-        max-width: 340px;
-        margin: 0 auto;
-    }
-
-    .countdown-icon {
-        width: 48px !important;
-        height: 48px !important;
-    }
-
-    .ember-countdown-icon-large {
-        width: 44px !important;
-        height: 44px !important;
-    }
-
-    .benefit-icon {
-        width: 80px !important;
-        height: 80px !important;
-    }
-    
     .crypto-content {
         grid-template-columns: 1fr;
         gap: 50px;
@@ -2652,19 +2672,25 @@ body {
     .crypto-image {
         order: -1;
     }
-    
-    .phoenix-coin-image {
-        max-width: 300px;
+
+    .showcase-content {
+        grid-template-columns: 1fr;
+        gap: 60px;
     }
 
-    .feature-ar-discovery-icon {
-        width: 105px !important;
-        height: 105px !important;
+    .system-benefits {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
 
     .pricing-two-column {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+
+    .sdk-pricing-tiers {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .revenue-examples-grid {
@@ -2677,184 +2703,15 @@ body {
         gap: 20px;
     }
 
-    .revenue-examples-section {
-        padding: 35px 25px;
-    }
-
-    .demo-icon-image {
-        width: 54px;
-        height: 54px;
-    }
-
-    .solution-highlight-icon {
-        width: 58px;
-        height: 58px;
-    }
-
-    .development-story-icon {
-        width: 85px;
-        height: 85px;
-    }
-
-    .revenue-header-icon {
-        width: 115px;
-        height: 115px;
-    }
-
-    .use-case-icon-container {
-        width: 65px;
-        height: 65px;
-    }
-
-    .benefit-icon-small {
-        width: 60px;
-        height: 60px;
-    }
-
-    .journey-icon {
-        width: 45px;
-        height: 45px;
+    .use-case-icon-container-large {
+        width: 90px;
+        height: 90px;
     }
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        padding: 15px 20px;
-    }
-
-    .logo {
-        font-size: 22px;
-    }
-
-    .logo-image {
-        height: 60px;
-    }
-
     .hero {
         padding: 140px 0 60px;
-        min-height: auto;
-    }
-
-    .hero-content {
-        padding: 0 20px;
-    }
-
-    .hero-title {
-        font-size: clamp(2rem, 8vw, 3rem);
-        margin-bottom: 20px;
-    }
-
-    .hero-subtitle {
-        font-size: clamp(1rem, 4vw, 1.2rem);
-        margin-bottom: 30px;
-    }
-
-    .process-steps {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .step {
-        padding: 20px;
-    }
-
-    .step-number {
-        font-size: 1.5rem;
-    }
-
-    .hero-cta {
-        margin-top: 40px;
-    }
-
-    .hero-cta .cta-button {
-        font-size: 1.1rem;
-        padding: 15px 30px;
-        margin: 0 10px 15px 0;
-        width: calc(50% - 5px);
-        min-width: 160px;
-        display: inline-block;
-        text-align: center;
-    }
-
-    .ember-token-section-v2 {
-        padding: 40px 20px;
-    }
-    
-    .ember-token-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-    }
-    
-    .ember-token-title-v2 {
-        font-size: clamp(1.8rem, 6vw, 2.4rem);
-        margin-bottom: 16px;
-    }
-    
-    .ember-token-description-v2 {
-        font-size: 1.05rem;
-        margin-bottom: 24px;
-    }
-    
-    .ember-countdown-widget {
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-    
-    .ember-countdown-timer {
-        gap: 8px;
-    }
-    
-    .ember-time-unit {
-        padding: 12px 8px;
-    }
-    
-    .ember-time-value {
-        font-size: 1.4rem;
-    }
-    
-    .ember-time-label {
-        font-size: 0.7rem;
-    }
-    
-    .phoenix-holding-coin-enhanced {
-        width: 280px;
-        height: 280px;
-    }
-    
-    .ember-glow-enhanced {
-        width: 360px;
-        height: 360px;
-    }
-    
-    .ember-cta-card-enhanced {
-        max-width: 300px;
-        padding: 24px;
-    }
-    
-    .cta-coin-enhanced {
-        width: 56px;
-        height: 56px;
-    }
-
-    .compliance-disclaimer {
-        padding: 20px;
-        margin-top: 24px;
-    }
-
-    .countdown-icon {
-        width: 44px !important;
-        height: 44px !important;
-    }
-
-    .ember-countdown-icon-large {
-        width: 40px !important;
-        height: 40px !important;
-    }
-
-    .benefit-icon {
-        width: 75px !important;
-        height: 75px !important;
     }
 
     .features, .app-showcase, .use-cases, .pricing, .final-cta {
@@ -2863,12 +2720,6 @@ body {
 
     .section-title {
         font-size: clamp(1.8rem, 6vw, 2.5rem);
-        margin-bottom: 15px;
-    }
-
-    .section-subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 40px;
     }
 
     .features-grid {
@@ -2876,95 +2727,40 @@ body {
         gap: 30px;
     }
 
-    .feature-card {
-        padding: 30px;
-    }
-
-    .feature-coin-icon,
-    .feature-revenue-icon,
-    .feature-ar-discovery-icon,
-    .feature-crypto-gaming-icon,
-    .feature-phoenix-brand-icon,
-    .feature-analytics-icon {
-        width: 95px;
-        height: 95px;
-    }
-
-    .feature-ar-discovery-icon {
-        width: 110px !important;
-        height: 110px !important;
-    }
-
-    .showcase-content {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
-
     .phone-frame {
-        width: 280px;
-        height: 560px;
+        width: 260px;
+        height: 520px;
     }
 
     .thumbnail-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-        max-width: 280px;
+        gap: 12px;
+        max-width: 260px;
     }
 
     .simple-thumb {
-        width: 80px;
-        height: 140px;
+        width: 75px;
+        height: 130px;
     }
 
-    .highlight-icon {
-        width: 65px;
-        height: 65px;
+    .laptop-mockup {
+        max-width: 400px;
     }
 
-    .use-cases-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
+    .use-case-icon-container-large {
+        width: 85px;
+        height: 85px;
+        top: 12px;
+        right: 12px;
     }
 
-    .use-case-card {
-        padding: 30px;
+    .use-case-title {
+        padding-right: 95px;
     }
 
-    .use-case-icon-container {
-        width: 60px;
-        height: 60px;
-    }
-
-    .pricing-solution {
-        padding: 35px;
-    }
-
-    .solution-title {
-        font-size: 1.5rem;
-    }
-
-    .price-amount {
-        font-size: 2rem;
-    }
-
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .cta-primary,
-    .cta-secondary {
-        width: 100%;
-        max-width: 300px;
-        padding: 15px 35px;
-        font-size: 1.1rem;
-    }
-
-    .demo-icon-image {
-        width: 50px;
-        height: 50px;
-        padding: 8px;
+    .development-story-icon {
+        width: 110px;
+        height: 110px;
     }
 
     .revenue-header-icon {
@@ -2972,181 +2768,15 @@ body {
         height: 110px;
     }
 
-    .revenue-examples-header h3 {
-        font-size: 1.8rem;
-    }
-
-    .revenue-examples-header p {
-        font-size: 1rem;
-    }
-
-    .example-title {
-        font-size: 1.3rem;
-    }
-
-    .revenue-industry-icon {
-        width: 55px;
-        height: 55px;
-    }
-
-    .solution-highlight-icon {
-        width: 55px;
-        height: 55px;
-    }
-
-    .development-story-icon {
-        width: 80px;
-        height: 80px;
-    }
-
-    .journey-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .benefit-icon-small {
-        width: 55px;
-        height: 55px;
+    .cta-icon-image {
+        width: 28px;
+        height: 28px;
     }
 }
 
 @media (max-width: 480px) {
-    .navbar {
-        padding: 12px 15px;
-    }
-
-    .logo {
-        font-size: 18px;
-    }
-
-    .logo-image {
-        height: 50px;
-    }
-
     .hero {
         padding: 120px 0 40px;
-    }
-
-    .hero-content {
-        padding: 0 15px;
-    }
-
-    .hero-title {
-        font-size: clamp(1.8rem, 8vw, 2.5rem);
-        margin-bottom: 15px;
-    }
-
-    .hero-subtitle {
-        font-size: clamp(0.9rem, 4vw, 1.1rem);
-        margin-bottom: 25px;
-    }
-
-    .step {
-        padding: 15px;
-    }
-
-    .step-number {
-        font-size: 1.3rem;
-    }
-
-    .hero-cta .cta-button {
-        width: 100%;
-        max-width: 280px;
-        margin: 0 0 10px 0;
-        padding: 12px 25px;
-        font-size: 1rem;
-    }
-
-    .ember-token-section-v2 {
-        padding: 30px 15px;
-    }
-
-    .ember-token-title-v2 {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-        margin-bottom: 12px;
-    }
-
-    .ember-token-description-v2 {
-        font-size: 0.95rem;
-        margin-bottom: 20px;
-    }
-
-    .ember-countdown-widget {
-        padding: 16px;
-        margin-bottom: 16px;
-    }
-
-    .ember-countdown-timer {
-        gap: 6px;
-    }
-
-    .ember-time-unit {
-        padding: 10px 6px;
-    }
-
-    .ember-time-value {
-        font-size: 1.2rem;
-    }
-
-    .ember-time-label {
-        font-size: 0.65rem;
-    }
-
-    .phoenix-holding-coin-enhanced {
-        width: 220px;
-        height: 220px;
-    }
-
-    .ember-glow-enhanced {
-        width: 280px;
-        height: 280px;
-    }
-
-    .ember-cta-card-enhanced {
-        max-width: 280px;
-        padding: 20px;
-    }
-
-    .cta-coin-enhanced {
-        width: 48px;
-        height: 48px;
-    }
-
-    .cta-title-enhanced {
-        font-size: 1.1rem;
-    }
-
-    .ember-cta-button-enhanced {
-        padding: 16px 20px;
-    }
-
-    .compliance-disclaimer {
-        padding: 16px;
-        margin-top: 20px;
-    }
-
-    .compliance-disclaimer h4 {
-        font-size: 1rem;
-        margin-bottom: 10px;
-    }
-
-    .compliance-disclaimer p {
-        font-size: 0.85rem;
-    }
-
-    .countdown-icon {
-        width: 40px !important;
-        height: 40px !important;
-    }
-
-    .ember-countdown-icon-large {
-        width: 36px !important;
-        height: 36px !important;
-    }
-
-    .benefit-icon {
-        width: 70px !important;
-        height: 70px !important;
     }
 
     .features, .app-showcase, .use-cases, .pricing, .final-cta {
@@ -3155,35 +2785,6 @@ body {
 
     .section-title {
         font-size: clamp(1.5rem, 6vw, 2rem);
-        margin-bottom: 12px;
-    }
-
-    .section-subtitle {
-        font-size: 1rem;
-        margin-bottom: 30px;
-    }
-
-    .feature-card {
-        padding: 25px;
-    }
-
-    .feature-coin-icon,
-    .feature-revenue-icon,
-    .feature-ar-discovery-icon,
-    .feature-crypto-gaming-icon,
-    .feature-phoenix-brand-icon,
-    .feature-analytics-icon {
-        width: 85px;
-        height: 85px;
-    }
-
-    .feature-ar-discovery-icon {
-        width: 95px !important;
-        height: 95px !important;
-    }
-
-    .feature-title {
-        font-size: 1.3rem;
     }
 
     .phone-frame {
@@ -3202,86 +2803,25 @@ body {
         height: 120px;
     }
 
-    .showcase-title {
-        font-size: 2rem;
+    .laptop-mockup {
+        max-width: 300px;
     }
 
-    .highlight-icon {
-        width: 60px;
-        height: 60px;
+    .use-case-icon-container-large {
+        width: 75px;
+        height: 75px;
+        top: 10px;
+        right: 10px;
     }
 
-    .use-case-card {
-        padding: 25px;
+    .use-case-title {
+        padding-right: 85px;
+        font-size: 1.2rem;
     }
 
-    .use-case-icon-container {
-        width: 58px;
-        height: 58px;
-    }
-
-    .pricing-solution {
-        padding: 25px;
-    }
-
-    .solution-title {
-        font-size: 1.3rem;
-    }
-
-    .price-amount {
-        font-size: 1.8rem;
-    }
-
-    .solution-features li {
-        padding: 10px 0 10px 35px;
-        font-size: 0.95rem;
-    }
-
-    .footer {
-        padding: 30px 15px;
-    }
-
-    .footer-logo {
-        font-size: 1.4rem;
-        flex-direction: column;
-        gap: 6px;
-    }
-
-    .footer-logo-image {
-        height: 50px;
-    }
-
-    .footer-text {
-        font-size: 1rem;
-    }
-
-    .footer-links {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .social-media {
-        gap: 15px;
-    }
-
-    .social-link {
-        width: 45px;
-        height: 45px;
-    }
-
-    .social-icon {
-        width: 20px;
-        height: 20px;
-    }
-
-    .demo-icon-image {
-        width: 44px;
-        height: 44px;
-        padding: 7px;
-    }
-
-    .revenue-examples-section {
-        padding: 25px 20px;
+    .development-story-icon {
+        width: 90px;
+        height: 90px;
     }
 
     .revenue-header-icon {
@@ -3289,90 +2829,20 @@ body {
         height: 90px;
     }
 
-    .revenue-examples-header h3 {
-        font-size: 1.5rem;
+    .cta-icon-image {
+        width: 24px;
+        height: 24px;
     }
 
-    .revenue-examples-header p {
-        font-size: 0.95rem;
-    }
-
-    .example-title {
-        font-size: 1.2rem;
-    }
-
-    .revenue-industry-icon {
-        width: 50px;
-        height: 50px;
-    }
-
-    .revenue-model-benefits h4 {
-        font-size: 1.3rem;
-    }
-
-    .benefit-icon-small {
-        width: 50px;
-        height: 50px;
-    }
-
-    .benefit-text strong {
-        font-size: 1rem;
-    }
-
-    .benefit-text p {
-        font-size: 0.85rem;
-    }
-
-    .solution-highlight-icon {
-        width: 50px;
-        height: 50px;
-    }
-
-    .development-story-icon {
-        width: 70px;
-        height: 70px;
-    }
-
-    .journey-icon {
-        width: 36px;
-        height: 36px;
-    }
-
-    .development-story-card {
-        padding: 25px;
-        gap: 15px;
-    }
-
-    .development-story-content h4 {
-        font-size: 1.2rem;
-    }
-
-    .development-story-content p {
-        font-size: 0.95rem;
-    }
-
-    .github-link-card {
+    .github-link-card-inline {
         flex-direction: column;
-        padding: 20px 25px;
-        gap: 15px;
-    }
-
-    .github-icon {
-        width: 48px;
-        height: 48px;
-    }
-
-    .github-link-text {
-        align-items: center;
+        padding: 15px 20px;
         text-align: center;
     }
 
-    .github-title {
-        font-size: 1.1rem;
-    }
-
-    .github-subtitle {
-        font-size: 0.85rem;
+    .github-icon-inline {
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -3406,18 +2876,6 @@ body {
     transform: translateY(0);
 }
 
-/* Performance Optimizations */
-.hero,
-.ember-token-section-v2,
-.crypto-coin-section,
-.features,
-.app-showcase,
-.use-cases,
-.pricing,
-.final-cta {
-    will-change: transform;
-}
-
 html {
     scroll-behavior: smooth;
 }
@@ -3428,79 +2886,15 @@ html {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-    
-    .scroll-reveal {
-        transform: none;
-        opacity: 1;
-    }
-    
-    .fade-in {
-        transform: none;
-        opacity: 1;
-    }
-}
-
-@media (prefers-contrast: high) {
-    .hero-title,
-    .ember-token-title-v2,
-    .crypto-title,
-    .section-title {
-        text-shadow: none;
-        -webkit-text-fill-color: inherit;
-        background: none;
-        color: #ffffff;
-    }
-    
-    .cta-button,
-    .ember-cta-button-enhanced,
-    .demo-button {
-        border: 2px solid #ffffff;
-    }
-}
-
-@media print {
-    .navbar,
-    .mobile-menu-btn,
-    .demo-button,
-    .ember-cta-button-enhanced,
-    .cta-button,
-    .social-media {
-        display: none !important;
-    }
-    
-    body {
-        background: white !important;
-        color: black !important;
-    }
-    
-    .hero,
-    .ember-token-section-v2,
-    .crypto-coin-section,
-    .app-showcase,
-    .use-cases,
-    .pricing,
-    .final-cta {
-        background: white !important;
-        color: black !important;
-    }
 }
 
 .cta-button:focus,
-.ember-cta-button-enhanced:focus,
 .demo-button:focus,
 .social-link:focus,
 .mobile-menu-btn:focus,
 .nav-links a:focus {
     outline: 3px solid #d73327;
     outline-offset: 2px;
-}
-
-.loaded {
-    opacity: 1;
-}
-
-body:not(.loaded) {
-    opacity: 0;
 }
 
 ::-webkit-scrollbar {
