@@ -1,6 +1,5 @@
 /* Vault Phoenix - Main Stylesheet */
 /* Phoenix Rising from Digital Ashes - Crypto Gaming Edition */
-/* UPDATED: All changes implemented including larger icons, white backgrounds, and background image */
 
 * {
     margin: 0;
@@ -28,7 +27,7 @@ body {
     text-shadow: 0 1px 4px rgba(240, 165, 0, 0.2);
 }
 
-/* FIXED: Enhanced Hero Section - Phoenix Crypto Theme with Working Floating Coins */
+/* FIXED: Enhanced Hero Section - Phoenix Crypto Theme */
 .hero {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
@@ -55,62 +54,13 @@ body {
     z-index: 0;
 }
 
-/* FIXED: Floating Coins Container - Now Working with VPEmberCoin.PNG */
-.hero-floating-coins {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
-    overflow: hidden !important;
-}
-
-.hero-coin {
-    position: absolute !important;
-    z-index: 1 !important;
-    pointer-events: none !important;
-    animation: heroCoinFloat 6s ease-in-out infinite !important;
-}
-
-.hero-crypto-coin-icon {
-    z-index: 1 !important;
-    pointer-events: none !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    opacity: 0.6 !important;
-    transition: all 0.3s ease !important;
-}
-
-/* FIXED: Floating Animation - Now Visible */
-@keyframes heroCoinFloat {
-    0%, 100% { 
-        transform: translateY(0px) rotate(0deg) scale(1); 
-        opacity: 0.6; 
-    }
-    25% { 
-        transform: translateY(-20px) rotate(90deg) scale(1.1); 
-        opacity: 0.8; 
-    }
-    50% { 
-        transform: translateY(-10px) rotate(180deg) scale(0.9); 
-        opacity: 0.7; 
-    }
-    75% { 
-        transform: translateY(-25px) rotate(270deg) scale(1.15); 
-        opacity: 0.75; 
-    }
-}
-
 @keyframes phoenixFloat {
     0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
     33% { transform: translateY(-15px) scale(1.02) rotate(1deg); }
     66% { transform: translateY(8px) scale(0.98) rotate(-1deg); }
 }
 
-/* FIXED: Navigation - Removed red overlay box */
+/* FIXED: Navigation */
 .navbar {
     position: fixed;
     top: 0;
@@ -172,7 +122,6 @@ body {
     list-style: none;
 }
 
-/* FIXED: Nav links styling - removed red box overlay */
 .nav-links a {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
@@ -189,7 +138,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* FIXED: Added horizontal bar like ember page */
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -231,7 +179,6 @@ body {
     display: none !important;
 }
 
-/* UPDATED: Larger Ember Coin in Nav */
 .nav-ember-coin {
     width: 22px;
     height: 22px;
@@ -267,7 +214,6 @@ body {
     color: white !important;
 }
 
-/* UPDATED: Larger Ember Coin in Footer */
 .footer-ember-coin {
     width: 22px;
     height: 22px;
@@ -280,7 +226,7 @@ body {
     transform: scale(1.1) rotate(10deg);
 }
 
-/* ENHANCED: Phoenix Token Section V2 - Larger Vault Image & Better CTA Card */
+/* ENHANCED: Phoenix Token Section V2 */
 .ember-token-section-v2 {
     padding: 80px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
@@ -347,7 +293,7 @@ body {
     line-height: 1.6;
 }
 
-/* ENHANCED: Countdown Widget with Better Spacing */
+/* ENHANCED: Countdown Widget */
 .ember-countdown-widget {
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
@@ -372,9 +318,10 @@ body {
     justify-content: center;
 }
 
+/* UPDATED: Larger countdown icon - matches "What Happens Next" size */
 .ember-countdown-icon-large {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     object-fit: contain;
     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
     transition: all 0.3s ease;
@@ -482,7 +429,6 @@ body {
     transform: translateX(4px);
 }
 
-/* FIXED: Regulatory Compliance Disclaimer with proper spacing */
 .compliance-disclaimer {
     background: rgba(240, 165, 0, 0.1);
     border: 1px solid rgba(240, 165, 0, 0.3);
@@ -509,7 +455,7 @@ body {
     margin: 0;
 }
 
-/* ENHANCED: Right Column with Larger Visual Stack */
+/* ENHANCED: Right Column */
 .ember-token-right {
     display: flex;
     justify-content: center;
@@ -524,7 +470,6 @@ body {
     width: 100%;
 }
 
-/* ENHANCED: Larger Phoenix Container */
 .ember-phoenix-container-enhanced {
     position: relative;
     display: flex;
@@ -569,7 +514,6 @@ body {
     opacity: 1;
 }
 
-/* ENHANCED: Better CTA Card Design */
 .ember-cta-card-enhanced {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 1));
     backdrop-filter: blur(20px);
@@ -712,7 +656,7 @@ body {
     margin-top: 3px;
 }
 
-/* Enhanced CTA Button - Phoenix Crypto Theme */
+/* Enhanced CTA Button */
 .cta-button {
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
@@ -811,7 +755,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* Hero Content and Process - Phoenix Crypto Theme */
+/* Hero Content */
 .hero-content {
     max-width: 1400px;
     margin: 0 auto;
@@ -848,7 +792,6 @@ body {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Hero Process Section - Phoenix Crypto Theme */
 .hero-process {
     margin: 50px 0;
     max-width: 800px;
@@ -917,7 +860,7 @@ body {
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
 }
 
-/* UPDATED: Crypto Coin Section with New Images */
+/* Crypto Coin Section */
 .crypto-coin-section {
     padding: 120px 40px;
     background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
@@ -967,7 +910,6 @@ body {
     box-shadow: 0 40px 100px rgba(215, 51, 39, 0.4);
 }
 
-/* ENHANCED: Improved crypto image glow effect */
 .crypto-image-glow {
     position: absolute;
     top: 50%;
@@ -1054,7 +996,7 @@ body {
     padding: 8px;
 }
 
-/* UPDATED: New Crypto Coin Icons with Bigger Sizing */
+/* REMOVED: White backgrounds from these icons */
 .custom-coin-icon-large {
     width: 100%;
     height: 100%;
@@ -1156,7 +1098,6 @@ body {
     z-index: 10;
 }
 
-/* Proven Model Section */
 .proven-model {
     margin-bottom: 60px;
     position: relative;
@@ -1493,15 +1434,8 @@ body {
     flex-shrink: 0;
 }
 
-.custom-showcase-icon-large {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
-    transition: all 0.3s ease;
-}
-
-.custom-showcase-icon-extra-large {
+/* UPDATED: All showcase icons same size as Cross-Realm (which was 130%) */
+.custom-showcase-icon {
     width: 130%;
     height: 130%;
     object-fit: contain;
@@ -1509,8 +1443,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.highlight-item:hover .custom-showcase-icon-large,
-.highlight-item:hover .custom-showcase-icon-extra-large {
+.highlight-item:hover .custom-showcase-icon {
     transform: scale(1.1) rotate(5deg);
     filter: drop-shadow(0 6px 12px rgba(215, 51, 39, 0.4)) brightness(1.1);
 }
@@ -1566,7 +1499,7 @@ body {
     justify-content: center;
 }
 
-/* UPDATED: Demo Icon with White Background and Larger Size */
+/* KEPT: Demo Icon with White Background - this is the ONLY one that keeps white background */
 .demo-icon-image {
     width: 60px;
     height: 60px;
@@ -1597,7 +1530,6 @@ body {
 .demo-cta h4 {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #d73327;
     margin-bottom: 15px;
 }
 
@@ -1692,7 +1624,7 @@ body {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* UPDATED: Use Case Icon Container with Image and White Background */
+/* REMOVED: White background from use case icons */
 .use-case-icon-container {
     position: absolute;
     top: 20px;
@@ -1702,10 +1634,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .use-case-icon-image {
@@ -1743,7 +1671,7 @@ body {
     font-size: 1rem;
 }
 
-/* NEW: Pricing Section - Two Pathways */
+/* Pricing Section */
 .pricing {
     padding: 120px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
@@ -1775,7 +1703,6 @@ body {
     z-index: 10;
 }
 
-/* Two Column Layout */
 .pricing-two-column {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1813,7 +1740,6 @@ body {
     border-color: rgba(215, 51, 39, 0.4);
 }
 
-/* Solution Headers */
 .solution-header {
     margin-bottom: 30px;
 }
@@ -1848,7 +1774,6 @@ body {
     line-height: 1.5;
 }
 
-/* Solution Pricing */
 .solution-price {
     margin: 25px 0;
     padding: 20px 0;
@@ -1869,7 +1794,6 @@ body {
     font-weight: 600;
 }
 
-/* Solution Description */
 .solution-description {
     margin: 25px 0;
 }
@@ -1880,7 +1804,6 @@ body {
     font-size: 1.05rem;
 }
 
-/* Solution Features List */
 .solution-features {
     list-style: none;
     margin: 30px 0;
@@ -1913,7 +1836,6 @@ body {
     border: 2px solid rgba(240, 165, 0, 0.4);
 }
 
-/* Solution CTA */
 .solution-cta {
     margin-top: 35px;
 }
@@ -1971,6 +1893,12 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid rgba(139, 92, 246, 0.4);
     box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .cta-secondary-large:hover {
@@ -1978,6 +1906,10 @@ body {
     background: rgba(99, 102, 241, 0.25);
     border-color: rgba(139, 92, 246, 0.6);
     box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+}
+
+.cta-github-icon {
+    flex-shrink: 0;
 }
 
 .cta-footnote {
@@ -1988,7 +1920,110 @@ body {
     font-style: italic;
 }
 
-/* Solution Highlight Box */
+/* GitHub Hero Section */
+.github-hero {
+    margin: 25px 0;
+    text-align: center;
+}
+
+.github-link-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    border-radius: 18px;
+    padding: 25px 35px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: inherit;
+}
+
+.github-link-card:hover {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(139, 92, 246, 0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
+}
+
+.github-icon {
+    color: #a78bfa;
+    flex-shrink: 0;
+}
+
+.github-link-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.github-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.github-subtitle {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: monospace;
+}
+
+.solution-coming-soon {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.coming-soon-badge {
+    display: inline-block;
+    background: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: 2px solid rgba(139, 92, 246, 0.4);
+}
+
+/* SDK Features Preview */
+.sdk-features-preview {
+    margin: 30px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.sdk-features-preview h5 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #a78bfa;
+    margin-bottom: 15px;
+}
+
+.sdk-features-preview ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sdk-features-preview ul li {
+    padding: 8px 0 8px 30px;
+    position: relative;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+.sdk-features-preview ul li::before {
+    content: '•';
+    position: absolute;
+    left: 10px;
+    color: #8b5cf6;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
 .solution-highlight {
     margin-top: 30px;
     background: rgba(240, 165, 0, 0.1);
@@ -2012,16 +2047,8 @@ body {
     gap: 18px;
 }
 
-/* UPDATED: Larger Solution Highlight Icons */
-.solution-highlight-icon-large {
-    width: 65px;
-    height: 65px;
-    object-fit: contain;
-    flex-shrink: 0;
-    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
-}
-
-.solution-highlight-icon-extra-large {
+/* REMOVED: White backgrounds from solution highlight icons */
+.solution-highlight-icon {
     width: 65px;
     height: 65px;
     object-fit: contain;
@@ -2041,130 +2068,6 @@ body {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
     margin: 0;
-}
-
-/* SDK Coming Soon Badge */
-.solution-coming-soon {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.coming-soon-badge {
-    display: inline-block;
-    background: rgba(139, 92, 246, 0.15);
-    color: #a78bfa;
-    padding: 10px 25px;
-    border-radius: 20px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    border: 2px solid rgba(139, 92, 246, 0.4);
-}
-
-/* SDK Compact Pricing */
-.sdk-pricing-compact {
-    display: flex;
-    gap: 15px;
-    margin: 25px 0;
-}
-
-.sdk-tier-compact {
-    flex: 1;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: 12px;
-    padding: 18px 12px;
-    text-align: center;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.sdk-tier-compact:hover {
-    transform: translateY(-3px);
-    border-color: rgba(139, 92, 246, 0.5);
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.sdk-tier-compact.featured {
-    border: 2px solid #8b5cf6;
-    background: rgba(139, 92, 246, 0.1);
-}
-
-.tier-badge-compact {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: white;
-    padding: 3px 12px;
-    border-radius: 10px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-.tier-name-compact {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #a78bfa;
-    margin-bottom: 8px;
-}
-
-.tier-price-compact {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #ffffff;
-    margin-bottom: 8px;
-}
-
-.tier-price-compact span {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.tier-info-compact {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.4;
-}
-
-/* SDK Features List */
-.sdk-features-list {
-    margin: 30px 0;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
-    padding: 25px;
-    border: 1px solid rgba(139, 92, 246, 0.2);
-}
-
-.sdk-features-list h5 {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #a78bfa;
-    margin-bottom: 15px;
-}
-
-.sdk-features-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sdk-features-list ul li {
-    padding: 8px 0 8px 30px;
-    position: relative;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.95rem;
-}
-
-.sdk-features-list ul li::before {
-    content: '•';
-    position: absolute;
-    left: 10px;
-    color: #8b5cf6;
-    font-size: 1.5rem;
-    line-height: 1;
 }
 
 /* Development Story Section */
@@ -2187,16 +2090,8 @@ body {
     backdrop-filter: blur(10px);
 }
 
-/* UPDATED: Larger Development Story Icon */
-.development-story-icon-large {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    flex-shrink: 0;
-    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4));
-}
-
-.development-story-icon-extra-large {
+/* UPDATED: Much larger development story icon - matches "What Happens Next" size */
+.development-story-icon {
     width: 100px;
     height: 100px;
     object-fit: contain;
@@ -2218,7 +2113,7 @@ body {
     margin: 0;
 }
 
-/* NEW: Revenue Examples Section */
+/* Revenue Examples Section */
 .revenue-examples-section {
     margin-top: 70px;
     padding: 50px;
@@ -2238,17 +2133,10 @@ body {
     gap: 15px;
 }
 
-/* UPDATED: Larger Revenue Header Icon */
+/* UPDATED: Much larger revenue header icon */
 .revenue-header-icon {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5));
-}
-
-.revenue-header-icon-large {
-    width: 115px;
-    height: 115px;
+    width: 140px;
+    height: 140px;
     object-fit: contain;
     filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5));
 }
@@ -2292,7 +2180,7 @@ body {
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.2);
 }
 
-/* UPDATED: Revenue Card Header with Icon and White Background */
+/* REMOVED: White background from revenue industry icons */
 .revenue-card-header {
     display: flex;
     align-items: center;
@@ -2306,9 +2194,6 @@ body {
     object-fit: contain;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
     flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    padding: 8px;
 }
 
 .example-industry {
@@ -2423,10 +2308,10 @@ body {
     transform: translateX(5px);
 }
 
-/* UPDATED: Benefit Icon Small with Image - Bigger Size */
+/* UPDATED: Larger benefit icon - matches "Why Location Partners" size */
 .benefit-icon-small {
-    width: 55px;
-    height: 55px;
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2455,15 +2340,15 @@ body {
     margin: 0;
 }
 
-/* UPDATED: Journey Icon - Bigger */
-.journey-icon-large {
-    width: 40px;
-    height: 40px;
+/* UPDATED: Journey icon - matches countdown icon size (52px) */
+.journey-icon {
+    width: 52px;
+    height: 52px;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
 }
 
-/* CTA Section with Background Image */
+/* CTA Section */
 .final-cta {
     padding: 120px 40px;
     background: linear-gradient(135deg, #d73327, #fb923c);
@@ -2771,13 +2656,6 @@ body {
     .phoenix-coin-image {
         max-width: 300px;
     }
-    
-    .hero-crypto-coin-icon {
-        width: clamp(25px, 4vw, 35px) !important;
-        height: clamp(25px, 4vw, 35px) !important;
-        font-size: clamp(25px, 4vw, 35px) !important;
-        opacity: 0.5 !important;
-    }
 
     .feature-ar-discovery-icon {
         width: 105px !important;
@@ -2787,11 +2665,6 @@ body {
     .pricing-two-column {
         grid-template-columns: 1fr;
         gap: 40px;
-    }
-
-    .sdk-pricing-compact {
-        flex-direction: column;
-        gap: 20px;
     }
 
     .revenue-examples-grid {
@@ -2813,20 +2686,19 @@ body {
         height: 54px;
     }
 
-    .solution-highlight-icon-large,
-    .solution-highlight-icon-extra-large {
+    .solution-highlight-icon {
         width: 58px;
         height: 58px;
     }
 
-    .development-story-icon-extra-large {
+    .development-story-icon {
         width: 85px;
         height: 85px;
     }
 
-    .revenue-header-icon-large {
-        width: 100px;
-        height: 100px;
+    .revenue-header-icon {
+        width: 115px;
+        height: 115px;
     }
 
     .use-case-icon-container {
@@ -2835,13 +2707,13 @@ body {
     }
 
     .benefit-icon-small {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
     }
 
-    .journey-icon-large {
-        width: 35px;
-        height: 35px;
+    .journey-icon {
+        width: 45px;
+        height: 45px;
     }
 }
 
@@ -2985,13 +2857,6 @@ body {
         height: 75px !important;
     }
 
-    .hero-crypto-coin-icon {
-        width: clamp(20px, 3.5vw, 30px) !important;
-        height: clamp(20px, 3.5vw, 30px) !important;
-        font-size: clamp(20px, 3.5vw, 30px) !important;
-        opacity: 0.4 !important;
-    }
-
     .features, .app-showcase, .use-cases, .pricing, .final-cta {
         padding: 60px 20px;
     }
@@ -3102,9 +2967,9 @@ body {
         padding: 8px;
     }
 
-    .revenue-header-icon-large {
-        width: 90px;
-        height: 90px;
+    .revenue-header-icon {
+        width: 110px;
+        height: 110px;
     }
 
     .revenue-examples-header h3 {
@@ -3124,35 +2989,28 @@ body {
         height: 55px;
     }
 
-    .solution-highlight-icon-large,
-    .solution-highlight-icon-extra-large {
+    .solution-highlight-icon {
         width: 55px;
         height: 55px;
     }
 
-    .development-story-icon-extra-large {
+    .development-story-icon {
         width: 80px;
         height: 80px;
     }
 
-    .journey-icon-large {
-        width: 32px;
-        height: 32px;
+    .journey-icon {
+        width: 40px;
+        height: 40px;
     }
 
     .benefit-icon-small {
-        width: 48px;
-        height: 48px;
+        width: 55px;
+        height: 55px;
     }
 }
 
 @media (max-width: 480px) {
-    .hero-crypto-coin-icon {
-        width: clamp(15px, 3vw, 25px) !important;
-        height: clamp(15px, 3vw, 25px) !important;
-        opacity: 0.3 !important;
-    }
-
     .navbar {
         padding: 12px 15px;
     }
@@ -3426,9 +3284,9 @@ body {
         padding: 25px 20px;
     }
 
-    .revenue-header-icon-large {
-        width: 75px;
-        height: 75px;
+    .revenue-header-icon {
+        width: 90px;
+        height: 90px;
     }
 
     .revenue-examples-header h3 {
@@ -3453,8 +3311,8 @@ body {
     }
 
     .benefit-icon-small {
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
     }
 
     .benefit-text strong {
@@ -3465,20 +3323,19 @@ body {
         font-size: 0.85rem;
     }
 
-    .solution-highlight-icon-large,
-    .solution-highlight-icon-extra-large {
+    .solution-highlight-icon {
         width: 50px;
         height: 50px;
     }
 
-    .development-story-icon-extra-large {
+    .development-story-icon {
         width: 70px;
         height: 70px;
     }
 
-    .journey-icon-large {
-        width: 28px;
-        height: 28px;
+    .journey-icon {
+        width: 36px;
+        height: 36px;
     }
 
     .development-story-card {
@@ -3492,6 +3349,30 @@ body {
 
     .development-story-content p {
         font-size: 0.95rem;
+    }
+
+    .github-link-card {
+        flex-direction: column;
+        padding: 20px 25px;
+        gap: 15px;
+    }
+
+    .github-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .github-link-text {
+        align-items: center;
+        text-align: center;
+    }
+
+    .github-title {
+        font-size: 1.1rem;
+    }
+
+    .github-subtitle {
+        font-size: 0.85rem;
     }
 }
 
@@ -3557,10 +3438,6 @@ html {
         transform: none;
         opacity: 1;
     }
-    
-    .hero-crypto-coin-icon {
-        animation: none !important;
-    }
 }
 
 @media (prefers-contrast: high) {
@@ -3587,8 +3464,7 @@ html {
     .demo-button,
     .ember-cta-button-enhanced,
     .cta-button,
-    .social-media,
-    .hero-floating-coins {
+    .social-media {
         display: none !important;
     }
     
