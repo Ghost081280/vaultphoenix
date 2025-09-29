@@ -1,5 +1,5 @@
-/* Vault Phoenix - Main Stylesheet */
-/* Phoenix Rising from Digital Ashes - Crypto Gaming Edition */
+/* Vault Phoenix - Enhanced Stylesheet */
+/* Complete redesign with improved buttons, icons, and journey section */
 
 * {
     margin: 0;
@@ -154,7 +154,6 @@ body {
     width: 100%;
 }
 
-/* Remove red box on clicked nav links */
 .nav-links a:focus {
     outline: none;
 }
@@ -163,7 +162,6 @@ body {
     width: 0;
 }
 
-/* Ember Link Special Styling */
 .ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
@@ -200,7 +198,6 @@ body {
     transform: scale(1.1) rotate(10deg);
 }
 
-/* Footer Ember Link */
 .footer-ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
@@ -302,7 +299,6 @@ body {
     line-height: 1.6;
 }
 
-/* Countdown Widget */
 .ember-countdown-widget {
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
@@ -386,7 +382,6 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Compact Highlights with Image Icons */
 .ember-highlights-compact {
     display: flex;
     flex-direction: column;
@@ -466,7 +461,6 @@ body {
     gap: 8px;
 }
 
-/* LARGER compliance icon */
 .compliance-icon {
     width: 40px;
     height: 40px;
@@ -481,7 +475,6 @@ body {
     margin: 0;
 }
 
-/* Right Column */
 .ember-token-right {
     display: flex;
     justify-content: center;
@@ -781,18 +774,19 @@ body {
     transform: translateY(-3px);
 }
 
-/* CTA Buttons with Icons */
-.cta-with-icon {
+/* ENHANCED CTA Buttons with BIGGER Icons */
+.cta-with-icon-enhanced {
     display: flex !important;
     align-items: center !important;
-    gap: 12px !important;
+    gap: 15px !important;
+    padding: 20px 50px !important;
 }
 
-.cta-icon-image {
-    width: 32px;
-    height: 32px;
+.cta-icon-image-enhanced {
+    width: 50px !important;
+    height: 50px !important;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
 }
 
 /* Hero Content */
@@ -1434,28 +1428,80 @@ body {
     padding: 6px 3px;
 }
 
-/* Demo Card Wrapper */
+/* ENHANCED Demo Card with Separate Icon */
 .demo-card-wrapper {
     display: flex;
     justify-content: center;
     margin-top: 10px;
 }
 
-.demo-card {
+.demo-card-enhanced {
     background: rgba(215, 51, 39, 0.1);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: 16px;
-    padding: 20px;
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 20px;
+    padding: 25px;
     text-align: center;
     backdrop-filter: blur(10px);
-    max-width: 280px;
+    max-width: 320px;
+    width: 100%;
 }
 
 .demo-card-instruction {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     font-weight: 600;
+}
+
+.demo-button-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+}
+
+.demo-icon-standalone {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4));
+    flex-shrink: 0;
+}
+
+.demo-button-enhanced {
+    background: rgba(215, 51, 39, 0.2);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 16px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(215, 51, 39, 0.4);
+    font-weight: 700;
+    font-size: 1rem;
+    flex: 1;
+}
+
+.demo-button-enhanced:hover {
+    background: rgba(215, 51, 39, 0.3);
+    border-color: rgba(215, 51, 39, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(215, 51, 39, 0.3);
+}
+
+.management-button-enhanced {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.management-button-enhanced:hover {
+    background: rgba(99, 102, 241, 0.3);
+    border-color: rgba(139, 92, 246, 0.6);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
+.demo-text-enhanced {
+    font-size: 1.05rem;
+    font-weight: 800;
 }
 
 /* Laptop Gallery */
@@ -1554,7 +1600,7 @@ body {
     padding: 6px 3px;
 }
 
-/* Phoenix Safe Container - NEW */
+/* Phoenix Safe Container */
 .phoenix-safe-container {
     position: relative;
     display: flex;
@@ -1600,67 +1646,6 @@ body {
     opacity: 1;
 }
 
-/* Demo Buttons Compact - ENHANCED */
-.demo-highlight-mobile,
-.demo-highlight-laptop {
-    display: flex;
-    justify-content: center;
-}
-
-.demo-button-compact {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    color: white;
-    padding: 14px 28px;
-    border-radius: 16px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 10px 25px rgba(215, 51, 39, 0.4);
-    border: 2px solid transparent;
-    font-weight: 700;
-    font-size: 1rem;
-}
-
-.demo-button-compact:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(215, 51, 39, 0.5);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.management-button {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-}
-
-.management-button:hover {
-    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.5);
-}
-
-/* ENHANCED: Bigger icon with white background */
-.demo-icon-compact {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.98);
-    border-radius: 10px;
-    padding: 6px;
-}
-
-.demo-icon-image-compact {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-.demo-text-compact {
-    font-size: 1.05rem;
-    font-weight: 800;
-}
-
 /* System Connection */
 .system-connection {
     margin-top: 80px;
@@ -1701,7 +1686,7 @@ body {
     filter: drop-shadow(0 2px 4px rgba(240, 165, 0, 0.4));
 }
 
-/* System Benefits - ENHANCED ICONS */
+/* System Benefits - BIGGER ICONS */
 .system-benefits {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1726,10 +1711,10 @@ body {
     margin-bottom: 20px;
 }
 
-/* LARGER benefit header icons */
+/* BIGGER benefit header icons - 90px */
 .benefit-header-icon {
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
     filter: drop-shadow(0 3px 6px rgba(215, 51, 39, 0.3));
 }
@@ -2110,7 +2095,6 @@ body {
     font-style: italic;
 }
 
-/* GitHub Hero Inline */
 .github-hero-inline {
     margin: 25px 0;
 }
@@ -2151,7 +2135,6 @@ body {
     font-family: monospace;
 }
 
-/* SDK Pricing Tiers */
 .sdk-pricing-tiers {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -2220,7 +2203,6 @@ body {
     line-height: 1.5;
 }
 
-/* SDK Features Preview */
 .sdk-features-preview {
     margin: 30px 0;
     background: rgba(0, 0, 0, 0.2);
@@ -2308,7 +2290,6 @@ body {
     margin: 0;
 }
 
-/* Development Story Section */
 .development-story-section {
     margin-top: 60px;
     position: relative;
@@ -2350,7 +2331,6 @@ body {
     margin: 0;
 }
 
-/* Revenue Examples Section */
 .revenue-examples-section {
     margin-top: 70px;
     padding: 50px;
@@ -2574,11 +2554,119 @@ body {
     margin: 0;
 }
 
-.journey-icon {
-    width: 52px;
-    height: 52px;
+/* Journey Section - NEW ENHANCED DESIGN */
+.journey-section {
+    margin-top: 50px;
+    padding: 45px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(240, 165, 0, 0.3);
+}
+
+.journey-title {
+    margin-bottom: 40px;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-align: center;
+}
+
+.journey-icon-large {
+    width: 70px;
+    height: 70px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.5));
+}
+
+.journey-paths {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+}
+
+.journey-path {
+    background: rgba(215, 51, 39, 0.08);
+    border: 2px solid rgba(215, 51, 39, 0.25);
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.journey-path:hover {
+    transform: translateY(-5px);
+    border-color: rgba(215, 51, 39, 0.4);
+    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.2);
+}
+
+.path-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.path-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(240, 165, 0, 0.4));
+    flex-shrink: 0;
+}
+
+.path-header h5 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    flex: 1;
+}
+
+.path-badge {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+}
+
+.sdk-badge-alt {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.path-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.path-steps li {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(215, 51, 39, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.path-steps li:last-child {
+    border-bottom: none;
+}
+
+.path-steps li strong {
+    color: #ffffff;
+    font-weight: 700;
 }
 
 /* CTA Section */
@@ -2735,7 +2823,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Mobile Menu Button */
 .mobile-menu-btn {
     display: none;
     position: relative;
@@ -2882,6 +2969,11 @@ body {
         gap: 20px;
     }
 
+    .journey-paths {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
     .use-case-icon-container-large {
         width: 90px;
         height: 90px;
@@ -2936,6 +3028,16 @@ body {
         height: 320px;
     }
 
+    .demo-icon-standalone {
+        width: 50px;
+        height: 50px;
+    }
+
+    .benefit-header-icon {
+        width: 70px;
+        height: 70px;
+    }
+
     .use-case-icon-container-large {
         width: 85px;
         height: 85px;
@@ -2957,9 +3059,9 @@ body {
         height: 110px;
     }
 
-    .cta-icon-image {
-        width: 28px;
-        height: 28px;
+    .cta-icon-image-enhanced {
+        width: 42px !important;
+        height: 42px !important;
     }
 
     .compliance-icon {
@@ -2967,9 +3069,14 @@ body {
         height: 32px;
     }
 
-    .benefit-header-icon {
-        width: 60px;
-        height: 60px;
+    .journey-icon-large {
+        width: 55px;
+        height: 55px;
+    }
+
+    .path-icon {
+        width: 50px;
+        height: 50px;
     }
 }
 
@@ -3016,6 +3123,25 @@ body {
         height: 280px;
     }
 
+    .demo-button-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .demo-icon-standalone {
+        width: 45px;
+        height: 45px;
+    }
+
+    .demo-button-enhanced {
+        width: 100%;
+    }
+
+    .benefit-header-icon {
+        width: 60px;
+        height: 60px;
+    }
+
     .use-case-icon-container-large {
         width: 75px;
         height: 75px;
@@ -3038,9 +3164,9 @@ body {
         height: 90px;
     }
 
-    .cta-icon-image {
-        width: 24px;
-        height: 24px;
+    .cta-icon-image-enhanced {
+        width: 36px !important;
+        height: 36px !important;
     }
 
     .compliance-icon {
@@ -3048,14 +3174,24 @@ body {
         height: 28px;
     }
 
-    .benefit-header-icon {
-        width: 50px;
-        height: 50px;
+    .journey-section {
+        padding: 30px 20px;
     }
 
-    .demo-icon-compact {
-        width: 32px;
-        height: 32px;
+    .journey-icon-large {
+        width: 45px;
+        height: 45px;
+    }
+
+    .path-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .path-badge {
+        position: static;
+        display: inline-block;
+        margin-top: 10px;
     }
 
     .github-link-card-inline {
