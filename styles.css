@@ -1564,21 +1564,22 @@ body {
     justify-content: center;
 }
 
+/* UPDATED: Demo Icon with White Background and Larger Size */
 .demo-icon-image {
-    width: 52px;
-    height: 52px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
-    filter: drop-shadow(0 3px 6px rgba(255, 255, 255, 0.4));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.15);
-    padding: 8px;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 1);
+    padding: 10px;
+    border-radius: 14px;
 }
 
 .demo-button:hover .demo-icon-image {
     transform: scale(1.15);
-    filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.6));
-    background: rgba(255, 255, 255, 0.25);
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.4));
+    background: rgba(255, 255, 255, 1);
 }
 
 .demo-highlight {
@@ -1680,6 +1681,7 @@ body {
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 
 .use-case-card:hover {
@@ -1688,10 +1690,29 @@ body {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
 
-.use-case-icon {
-    font-size: 3rem;
-    margin-bottom: 25px;
-    display: block;
+/* UPDATED: Use Case Icon Container with Image */
+.use-case-icon-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.use-case-icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.use-case-card:hover .use-case-icon-image {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
 }
 
 .use-case-title {
@@ -1699,6 +1720,7 @@ body {
     font-weight: 800;
     margin-bottom: 18px;
     color: #ffffff;
+    padding-right: 70px;
 }
 
 .use-case-example {
@@ -1984,9 +2006,18 @@ body {
     gap: 18px;
 }
 
+/* UPDATED: Larger Solution Highlight Icons */
 .solution-highlight-icon-large {
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+}
+
+.solution-highlight-icon-extra-large {
+    width: 65px;
+    height: 65px;
     object-fit: contain;
     flex-shrink: 0;
     filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
@@ -2150,9 +2181,18 @@ body {
     backdrop-filter: blur(10px);
 }
 
+/* UPDATED: Larger Development Story Icon */
 .development-story-icon-large {
-    width: 65px;
-    height: 65px;
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4));
+}
+
+.development-story-icon-extra-large {
+    width: 85px;
+    height: 85px;
     object-fit: contain;
     flex-shrink: 0;
     filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4));
@@ -2192,9 +2232,17 @@ body {
     gap: 15px;
 }
 
+/* UPDATED: Larger Revenue Header Icon */
 .revenue-header-icon {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5));
+}
+
+.revenue-header-icon-large {
+    width: 95px;
+    height: 95px;
     object-fit: contain;
     filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5));
 }
@@ -2228,6 +2276,7 @@ body {
     padding: 30px;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .revenue-example-card:hover {
@@ -2235,6 +2284,22 @@ body {
     border-color: rgba(215, 51, 39, 0.5);
     background: rgba(0, 0, 0, 0.4);
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.2);
+}
+
+/* UPDATED: Revenue Card Header with Icon */
+.revenue-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.revenue-industry-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+    flex-shrink: 0;
 }
 
 .example-industry {
@@ -2245,7 +2310,7 @@ body {
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 700;
-    margin-bottom: 15px;
+    flex: 1;
 }
 
 .example-title {
@@ -2349,14 +2414,21 @@ body {
     transform: translateX(5px);
 }
 
+/* UPDATED: Benefit Icon Small with Image */
 .benefit-icon-small {
-    font-size: 1.8rem;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+}
+
+.benefit-icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .benefit-text strong {
@@ -2706,6 +2778,27 @@ body {
     .revenue-examples-section {
         padding: 35px 25px;
     }
+
+    .demo-icon-image {
+        width: 54px;
+        height: 54px;
+    }
+
+    .solution-highlight-icon-large,
+    .solution-highlight-icon-extra-large {
+        width: 58px;
+        height: 58px;
+    }
+
+    .development-story-icon-extra-large {
+        width: 75px;
+        height: 75px;
+    }
+
+    .revenue-header-icon-large {
+        width: 85px;
+        height: 85px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -2928,6 +3021,11 @@ body {
         padding: 30px;
     }
 
+    .use-case-icon-container {
+        width: 55px;
+        height: 55px;
+    }
+
     .pricing-solution {
         padding: 35px;
     }
@@ -2955,13 +3053,14 @@ body {
     }
 
     .demo-icon-image {
-        width: 44px;
-        height: 44px;
+        width: 50px;
+        height: 50px;
+        padding: 8px;
     }
 
-    .revenue-header-icon {
-        width: 60px;
-        height: 60px;
+    .revenue-header-icon-large {
+        width: 75px;
+        height: 75px;
     }
 
     .revenue-examples-header h3 {
@@ -2976,9 +3075,20 @@ body {
         font-size: 1.3rem;
     }
 
-    .development-story-icon-large {
+    .revenue-industry-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .solution-highlight-icon-large,
+    .solution-highlight-icon-extra-large {
         width: 55px;
         height: 55px;
+    }
+
+    .development-story-icon-extra-large {
+        width: 70px;
+        height: 70px;
     }
 
     .journey-icon-large {
@@ -2986,9 +3096,9 @@ body {
         height: 28px;
     }
 
-    .solution-highlight-icon-large {
-        width: 45px;
-        height: 45px;
+    .benefit-icon-small {
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -3203,8 +3313,9 @@ body {
         padding: 25px;
     }
 
-    .use-case-icon {
-        font-size: 2.5rem;
+    .use-case-icon-container {
+        width: 50px;
+        height: 50px;
     }
 
     .pricing-solution {
@@ -3262,17 +3373,18 @@ body {
     }
 
     .demo-icon-image {
-        width: 38px;
-        height: 38px;
+        width: 44px;
+        height: 44px;
+        padding: 7px;
     }
 
     .revenue-examples-section {
         padding: 25px 20px;
     }
 
-    .revenue-header-icon {
-        width: 50px;
-        height: 50px;
+    .revenue-header-icon-large {
+        width: 65px;
+        height: 65px;
     }
 
     .revenue-examples-header h3 {
@@ -3287,8 +3399,18 @@ body {
         font-size: 1.2rem;
     }
 
+    .revenue-industry-icon {
+        width: 40px;
+        height: 40px;
+    }
+
     .revenue-model-benefits h4 {
         font-size: 1.3rem;
+    }
+
+    .benefit-icon-small {
+        width: 38px;
+        height: 38px;
     }
 
     .benefit-text strong {
@@ -3299,19 +3421,20 @@ body {
         font-size: 0.85rem;
     }
 
-    .development-story-icon-large {
+    .solution-highlight-icon-large,
+    .solution-highlight-icon-extra-large {
         width: 50px;
         height: 50px;
+    }
+
+    .development-story-icon-extra-large {
+        width: 65px;
+        height: 65px;
     }
 
     .journey-icon-large {
         width: 24px;
         height: 24px;
-    }
-
-    .solution-highlight-icon-large {
-        width: 40px;
-        height: 40px;
     }
 
     .development-story-card {
