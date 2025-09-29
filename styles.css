@@ -1,6 +1,6 @@
 /* Vault Phoenix - Main Stylesheet */
 /* Phoenix Rising from Digital Ashes - Crypto Gaming Edition */
-/* UPDATED: All icons increased, new pricing section with SDK, revenue examples section */
+/* UPDATED: All changes implemented including larger icons, white backgrounds, and background image */
 
 * {
     margin: 0;
@@ -231,9 +231,10 @@ body {
     display: none !important;
 }
 
+/* UPDATED: Larger Ember Coin in Nav */
 .nav-ember-coin {
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
@@ -266,9 +267,10 @@ body {
     color: white !important;
 }
 
+/* UPDATED: Larger Ember Coin in Footer */
 .footer-ember-coin {
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
@@ -1690,23 +1692,27 @@ body {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* UPDATED: Use Case Icon Container with Image */
+/* UPDATED: Use Case Icon Container with Image and White Background */
 .use-case-icon-container {
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .use-case-icon-image {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
     transition: all 0.3s ease;
 }
 
@@ -1720,7 +1726,7 @@ body {
     font-weight: 800;
     margin-bottom: 18px;
     color: #ffffff;
-    padding-right: 70px;
+    padding-right: 80px;
 }
 
 .use-case-example {
@@ -2183,16 +2189,16 @@ body {
 
 /* UPDATED: Larger Development Story Icon */
 .development-story-icon-large {
-    width: 75px;
-    height: 75px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
     flex-shrink: 0;
     filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4));
 }
 
 .development-story-icon-extra-large {
-    width: 85px;
-    height: 85px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
     flex-shrink: 0;
     filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4));
@@ -2234,15 +2240,15 @@ body {
 
 /* UPDATED: Larger Revenue Header Icon */
 .revenue-header-icon {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
     filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5));
 }
 
 .revenue-header-icon-large {
-    width: 95px;
-    height: 95px;
+    width: 115px;
+    height: 115px;
     object-fit: contain;
     filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5));
 }
@@ -2286,7 +2292,7 @@ body {
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.2);
 }
 
-/* UPDATED: Revenue Card Header with Icon */
+/* UPDATED: Revenue Card Header with Icon and White Background */
 .revenue-card-header {
     display: flex;
     align-items: center;
@@ -2295,11 +2301,14 @@ body {
 }
 
 .revenue-industry-icon {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
     flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 8px;
 }
 
 .example-industry {
@@ -2414,10 +2423,10 @@ body {
     transform: translateX(5px);
 }
 
-/* UPDATED: Benefit Icon Small with Image */
+/* UPDATED: Benefit Icon Small with Image - Bigger Size */
 .benefit-icon-small {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2428,7 +2437,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
 }
 
 .benefit-text strong {
@@ -2446,15 +2455,15 @@ body {
     margin: 0;
 }
 
-/* Journey Icon */
+/* UPDATED: Journey Icon - Bigger */
 .journey-icon-large {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
 }
 
-/* CTA Section */
+/* CTA Section with Background Image */
 .final-cta {
     padding: 120px 40px;
     background: linear-gradient(135deg, #d73327, #fb923c);
@@ -2462,6 +2471,20 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
+}
+
+.final-cta-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('images/EmberCoinDigitalMap.PNG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    z-index: 0;
 }
 
 .final-cta::before {
@@ -2474,6 +2497,12 @@ body {
     background: 
         radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.1) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.final-cta .container {
+    position: relative;
+    z-index: 10;
 }
 
 .final-cta-title {
@@ -2791,13 +2820,28 @@ body {
     }
 
     .development-story-icon-extra-large {
-        width: 75px;
-        height: 75px;
+        width: 85px;
+        height: 85px;
     }
 
     .revenue-header-icon-large {
-        width: 85px;
-        height: 85px;
+        width: 100px;
+        height: 100px;
+    }
+
+    .use-case-icon-container {
+        width: 65px;
+        height: 65px;
+    }
+
+    .benefit-icon-small {
+        width: 50px;
+        height: 50px;
+    }
+
+    .journey-icon-large {
+        width: 35px;
+        height: 35px;
     }
 }
 
@@ -3022,8 +3066,8 @@ body {
     }
 
     .use-case-icon-container {
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
     }
 
     .pricing-solution {
@@ -3059,8 +3103,8 @@ body {
     }
 
     .revenue-header-icon-large {
-        width: 75px;
-        height: 75px;
+        width: 90px;
+        height: 90px;
     }
 
     .revenue-examples-header h3 {
@@ -3076,8 +3120,8 @@ body {
     }
 
     .revenue-industry-icon {
-        width: 45px;
-        height: 45px;
+        width: 55px;
+        height: 55px;
     }
 
     .solution-highlight-icon-large,
@@ -3087,18 +3131,18 @@ body {
     }
 
     .development-story-icon-extra-large {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
     }
 
     .journey-icon-large {
-        width: 28px;
-        height: 28px;
+        width: 32px;
+        height: 32px;
     }
 
     .benefit-icon-small {
-        width: 40px;
-        height: 40px;
+        width: 48px;
+        height: 48px;
     }
 }
 
@@ -3314,8 +3358,8 @@ body {
     }
 
     .use-case-icon-container {
-        width: 50px;
-        height: 50px;
+        width: 58px;
+        height: 58px;
     }
 
     .pricing-solution {
@@ -3383,8 +3427,8 @@ body {
     }
 
     .revenue-header-icon-large {
-        width: 65px;
-        height: 65px;
+        width: 75px;
+        height: 75px;
     }
 
     .revenue-examples-header h3 {
@@ -3400,8 +3444,8 @@ body {
     }
 
     .revenue-industry-icon {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
     }
 
     .revenue-model-benefits h4 {
@@ -3409,8 +3453,8 @@ body {
     }
 
     .benefit-icon-small {
-        width: 38px;
-        height: 38px;
+        width: 45px;
+        height: 45px;
     }
 
     .benefit-text strong {
@@ -3428,13 +3472,13 @@ body {
     }
 
     .development-story-icon-extra-large {
-        width: 65px;
-        height: 65px;
+        width: 70px;
+        height: 70px;
     }
 
     .journey-icon-large {
-        width: 24px;
-        height: 24px;
+        width: 28px;
+        height: 28px;
     }
 
     .development-story-card {
