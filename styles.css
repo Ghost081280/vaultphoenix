@@ -4,6 +4,8 @@
 /* UPDATED: New crypto coin images properly sized and positioned */
 /* UPDATED: Bigger crypto coin icons and larger rocket icon */
 /* UPDATED: All feature icons replaced with new images */
+/* UPDATED: All new images for showcase section and demo button */
+/* UPDATED: Revenue section icons and development story icons */
 
 * {
     margin: 0;
@@ -366,16 +368,16 @@ body {
 }
 
 .countdown-icon {
-    width: 48px; /* UPDATED: Made bigger */
-    height: 48px; /* UPDATED: Made bigger */
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .ember-countdown-icon-large {
-    width: 44px; /* UPDATED: Made bigger */
-    height: 44px; /* UPDATED: Made bigger */
+    width: 44px;
+    height: 44px;
     object-fit: contain;
     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
     transition: all 0.3s ease;
@@ -1040,8 +1042,8 @@ body {
 
 .benefit-icon {
     font-size: 2.5rem;
-    width: 80px; /* UPDATED: Made bigger */
-    height: 80px; /* UPDATED: Made bigger */
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1100,7 +1102,7 @@ body {
     line-height: 1.6;
 }
 
-/* Features Section - FIXED WHITE OVERLAY ISSUE */
+/* Features Section */
 .features {
     padding: 120px 40px;
     background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
@@ -1144,7 +1146,7 @@ body {
     z-index: 10;
 }
 
-/* Proven Model Section - Phoenix Crypto Theme */
+/* Proven Model Section */
 .proven-model {
     margin-bottom: 60px;
     position: relative;
@@ -1177,20 +1179,11 @@ body {
     background: linear-gradient(90deg, #d73327, #fb923c, #d73327);
 }
 
-/* Custom Badge and Highlight Icon Images */
 .custom-badge-icon {
     width: 60px;
     height: 60px;
     object-fit: contain;
     filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
-    transition: all 0.3s ease;
-}
-
-.custom-highlight-icon {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(215, 51, 39, 0.3));
     transition: all 0.3s ease;
 }
 
@@ -1275,6 +1268,11 @@ body {
     transition: all 0.3s ease;
 }
 
+.feature-ar-discovery-icon {
+    width: 110px;
+    height: 110px;
+}
+
 .feature-card:hover .feature-coin-icon,
 .feature-card:hover .feature-revenue-icon,
 .feature-card:hover .feature-ar-discovery-icon,
@@ -1299,7 +1297,7 @@ body {
     font-size: 1.05rem;
 }
 
-/* App Showcase Section - Phoenix Crypto Theme */
+/* App Showcase Section */
 .app-showcase {
     padding: 120px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
@@ -1485,7 +1483,6 @@ body {
     flex-shrink: 0;
 }
 
-/* Custom Showcase Icon Styling - NEW LARGER ICONS */
 .custom-showcase-icon {
     width: 50px;
     height: 50px;
@@ -1542,7 +1539,27 @@ body {
     color: white !important;
 }
 
-/* Demo Highlight Section - Phoenix Crypto Theme */
+.demo-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.demo-icon-image {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.demo-button:hover .demo-icon-image {
+    transform: scale(1.1);
+    filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
+}
+
 .demo-highlight {
     margin-top: 40px;
     background: rgba(215, 51, 39, 0.15);
@@ -1587,11 +1604,6 @@ body {
     border-color: rgba(255, 255, 255, 0.3);
 }
 
-.demo-icon {
-    font-size: 2rem;
-    margin-bottom: 8px;
-}
-
 .demo-text {
     font-size: 1.2rem;
     font-weight: 800;
@@ -1604,7 +1616,7 @@ body {
     font-weight: 600;
 }
 
-/* Use Cases Section - Phoenix Crypto Theme */
+/* Use Cases Section */
 .use-cases {
     padding: 120px 40px;
     background: linear-gradient(135deg, #7c2d12 0%, #dc2626 25%, #ea580c 50%, #f59e0b 75%, #eab308 100%);
@@ -1682,7 +1694,7 @@ body {
     font-size: 1rem;
 }
 
-/* Pricing Section - Phoenix Crypto Theme */
+/* Pricing Section */
 .pricing {
     padding: 120px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
@@ -1694,7 +1706,6 @@ body {
     color: #ffffff;
 }
 
-/* Pricing Header Layout */
 .pricing-header {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -1718,7 +1729,6 @@ body {
     max-width: none;
 }
 
-/* Investment Image */
 .investment-image-container {
     text-align: center;
     margin: 0;
@@ -1839,7 +1849,6 @@ body {
     flex-shrink: 0;
 }
 
-/* Development Story Section - Phoenix Crypto Theme */
 .development-story {
     background: rgba(0, 0, 0, 0.2);
     padding: 30px;
@@ -1863,6 +1872,38 @@ body {
     margin-bottom: 25px;
     text-align: center;
     color: #d73327;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.revenue-title-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(215, 51, 39, 0.3));
+    transition: all 0.3s ease;
+}
+
+.revenue-title:hover .revenue-title-icon {
+    transform: scale(1.1);
+}
+
+.development-story-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(215, 51, 39, 0.3));
+    transition: all 0.3s ease;
+}
+
+.journey-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+    transition: all 0.3s ease;
 }
 
 .revenue-example {
@@ -1892,7 +1933,7 @@ body {
     font-weight: 600;
 }
 
-/* CTA Section - Phoenix Crypto Theme */
+/* CTA Section */
 .final-cta {
     padding: 120px 40px;
     background: linear-gradient(135deg, #d73327, #fb923c);
@@ -1933,7 +1974,7 @@ body {
     z-index: 10;
 }
 
-/* Footer - Phoenix Crypto Theme */
+/* Footer */
 .footer {
     background: #0f0f0f;
     color: white;
@@ -1941,7 +1982,6 @@ body {
     text-align: center;
 }
 
-/* Social Media Icons */
 .social-media {
     display: flex;
     justify-content: center;
@@ -2048,7 +2088,7 @@ body {
     transform: scale(1.05);
 }
 
-/* ENHANCED: Mobile Navigation - Better responsive styling */
+/* Mobile Navigation */
 @media (max-width: 1024px) {
     .mobile-menu-btn {
         display: block !important;
@@ -2125,7 +2165,6 @@ body {
         font-size: 24px !important;
     }
     
-    /* ENHANCED: Mobile Phoenix Token Section V2 */
     .ember-token-section-v2 {
         padding: 50px 20px;
     }
@@ -2155,7 +2194,6 @@ body {
         margin: 0 auto;
     }
 
-    /* UPDATED: Bigger rocket icon on mobile */
     .countdown-icon {
         width: 44px !important;
         height: 44px !important;
@@ -2166,13 +2204,11 @@ body {
         height: 40px !important;
     }
 
-    /* UPDATED: Bigger crypto coin icons on mobile */
     .benefit-icon {
         width: 70px !important;
         height: 70px !important;
     }
     
-    /* Mobile Crypto Section */
     .crypto-content {
         grid-template-columns: 1fr;
         gap: 50px;
@@ -2186,16 +2222,19 @@ body {
         max-width: 300px;
     }
     
-    /* FIXED: Mobile floating coins sizing */
     .hero-crypto-coin-icon {
         width: clamp(25px, 4vw, 35px) !important;
         height: clamp(25px, 4vw, 35px) !important;
         font-size: clamp(25px, 4vw, 35px) !important;
         opacity: 0.5 !important;
     }
+
+    .feature-ar-discovery-icon {
+        width: 90px !important;
+        height: 90px !important;
+    }
 }
 
-/* Enhanced Mobile Responsive Design */
 @media (max-width: 768px) {
     .navbar {
         padding: 15px 20px;
@@ -2255,7 +2294,6 @@ body {
         text-align: center;
     }
 
-    /* ENHANCED: Mobile Phoenix Token Section */
     .ember-token-section-v2 {
         padding: 40px 20px;
     }
@@ -2322,7 +2360,6 @@ body {
         margin-top: 24px;
     }
 
-    /* UPDATED: Bigger rocket icon on 768px mobile */
     .countdown-icon {
         width: 40px !important;
         height: 40px !important;
@@ -2333,13 +2370,11 @@ body {
         height: 36px !important;
     }
 
-    /* UPDATED: Bigger crypto coin icons on 768px mobile */
     .benefit-icon {
         width: 65px !important;
         height: 65px !important;
     }
 
-    /* FIXED: Mobile floating coins sizing for 768px */
     .hero-crypto-coin-icon {
         width: clamp(20px, 3.5vw, 30px) !important;
         height: clamp(20px, 3.5vw, 30px) !important;
@@ -2347,7 +2382,6 @@ body {
         opacity: 0.4 !important;
     }
 
-    /* Rest of mobile styles... */
     .features, .app-showcase, .use-cases, .pricing, .final-cta {
         padding: 60px 20px;
     }
@@ -2369,6 +2403,21 @@ body {
 
     .feature-card {
         padding: 30px;
+    }
+
+    .feature-coin-icon,
+    .feature-revenue-icon,
+    .feature-ar-discovery-icon,
+    .feature-crypto-gaming-icon,
+    .feature-phoenix-brand-icon,
+    .feature-analytics-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .feature-ar-discovery-icon {
+        width: 90px !important;
+        height: 90px !important;
     }
 
     .showcase-content {
@@ -2443,10 +2492,29 @@ body {
         padding: 15px 35px;
         font-size: 1.1rem;
     }
+
+    .demo-icon-image {
+        width: 28px;
+        height: 28px;
+    }
+
+    .revenue-title-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .development-story-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .journey-icon {
+        width: 24px;
+        height: 24px;
+    }
 }
 
 @media (max-width: 480px) {
-    /* Ultra mobile styles */
     .hero-crypto-coin-icon {
         width: clamp(15px, 3vw, 25px) !important;
         height: clamp(15px, 3vw, 25px) !important;
@@ -2499,7 +2567,6 @@ body {
         font-size: 1rem;
     }
 
-    /* ENHANCED: Ultra Mobile Phoenix Token Section */
     .ember-token-section-v2 {
         padding: 30px 15px;
     }
@@ -2577,7 +2644,6 @@ body {
         font-size: 0.85rem;
     }
 
-    /* UPDATED: Biggest rocket icon on ultra mobile */
     .countdown-icon {
         width: 36px !important;
         height: 36px !important;
@@ -2588,7 +2654,6 @@ body {
         height: 32px !important;
     }
 
-    /* UPDATED: Bigger crypto coin icons on ultra mobile */
     .benefit-icon {
         width: 60px !important;
         height: 60px !important;
@@ -2618,8 +2683,13 @@ body {
     .feature-crypto-gaming-icon,
     .feature-phoenix-brand-icon,
     .feature-analytics-icon {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
+    }
+
+    .feature-ar-discovery-icon {
+        width: 80px !important;
+        height: 80px !important;
     }
 
     .feature-title {
@@ -2716,6 +2786,26 @@ body {
         width: 20px;
         height: 20px;
     }
+
+    .demo-icon-image {
+        width: 24px;
+        height: 24px;
+    }
+
+    .revenue-title-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .development-story-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .journey-icon {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 /* Animations */
@@ -2760,12 +2850,10 @@ body {
     will-change: transform;
 }
 
-/* Smooth scrolling for all browsers */
 html {
     scroll-behavior: smooth;
 }
 
-/* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
@@ -2788,7 +2876,6 @@ html {
     }
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
     .hero-title,
     .ember-token-title-v2,
@@ -2807,7 +2894,6 @@ html {
     }
 }
 
-/* Print styles */
 @media print {
     .navbar,
     .mobile-menu-btn,
@@ -2836,7 +2922,6 @@ html {
     }
 }
 
-/* Focus styles for accessibility */
 .cta-button:focus,
 .ember-cta-button-enhanced:focus,
 .demo-button:focus,
@@ -2847,7 +2932,6 @@ html {
     outline-offset: 2px;
 }
 
-/* Loading states */
 .loaded {
     opacity: 1;
 }
@@ -2856,7 +2940,6 @@ body:not(.loaded) {
     opacity: 0;
 }
 
-/* Custom scrollbar for webkit browsers */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -2874,7 +2957,6 @@ body:not(.loaded) {
     background: linear-gradient(180deg, #fb923c, #d73327);
 }
 
-/* Selection styling */
 ::selection {
     background: rgba(215, 51, 39, 0.3);
     color: #ffffff;
