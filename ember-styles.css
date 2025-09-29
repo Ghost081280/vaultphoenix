@@ -1,6 +1,6 @@
 /* Ember Token Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
-/* FIXED: Added custom scrollbar styling to match main.html exactly */
+/* UPDATED: Added VPEmberCoin.PNG support and floating coins exactly like main.html */
 
 /* EXACT COPY FROM WORKING MAIN.HTML - Navigation system */
 .navbar {
@@ -196,8 +196,7 @@
     }
 }
 
-/* ORIGINAL EMBER STYLES BELOW */
-
+/* RESET AND BASE STYLES */
 * {
     margin: 0;
     padding: 0;
@@ -212,7 +211,7 @@ body {
     background: #0f0f0f;
 }
 
-/* Ember Hero Section */
+/* REBUILT: Ember Hero Section - EXACT MATCH TO MAIN.HTML SIZING */
 .ember-hero {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
@@ -236,6 +235,7 @@ body {
         radial-gradient(circle at 80% 20%, rgba(251, 146, 60, 0.2) 0%, transparent 50%),
         radial-gradient(circle at 40% 80%, rgba(240, 165, 0, 0.15) 0%, transparent 50%);
     animation: emberFloat 20s ease-in-out infinite;
+    z-index: 0;
 }
 
 @keyframes emberFloat {
@@ -244,8 +244,102 @@ body {
     66% { transform: translateY(8px) scale(0.98) rotate(-1deg); }
 }
 
+/* FLOATING COINS - EXACT COPY FROM MAIN.HTML */
+.hero-floating-coins {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+}
+
+.hero-coin {
+    position: absolute !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    animation: heroCoinFloat 6s ease-in-out infinite !important;
+}
+
+.hero-crypto-coin-icon {
+    width: clamp(35px, 5vw, 50px) !important;
+    height: clamp(35px, 5vw, 50px) !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6)) !important;
+    transition: all 0.3s ease !important;
+    opacity: 0.6 !important;
+    border-radius: 50% !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+
+/* Coin Positions - EXACT FROM MAIN.HTML */
+.hero-coin-1 {
+    top: 15%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 6s;
+}
+
+.hero-coin-2 {
+    top: 70%;
+    left: 8%;
+    animation-delay: 1s;
+    animation-duration: 7s;
+}
+
+.hero-coin-3 {
+    top: 25%;
+    right: 12%;
+    animation-delay: 2s;
+    animation-duration: 8s;
+}
+
+.hero-coin-4 {
+    top: 65%;
+    right: 10%;
+    animation-delay: 3s;
+    animation-duration: 6s;
+}
+
+.hero-coin-5 {
+    top: 10%;
+    left: 80%;
+    animation-delay: 4s;
+    animation-duration: 7s;
+}
+
+.hero-coin-6 {
+    bottom: 20%;
+    right: 85%;
+    animation-delay: 5s;
+    animation-duration: 9s;
+}
+
+@keyframes heroCoinFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1); 
+        opacity: 0.6; 
+    }
+    25% { 
+        transform: translateY(-20px) rotate(90deg) scale(1.1); 
+        opacity: 0.8; 
+    }
+    50% { 
+        transform: translateY(-10px) rotate(180deg) scale(0.9); 
+        opacity: 0.7; 
+    }
+    75% { 
+        transform: translateY(-25px) rotate(270deg) scale(1.15); 
+        opacity: 0.75; 
+    }
+}
+
+/* HERO CONTENT - REBUILT TO MATCH MAIN.HTML */
 .ember-hero-content {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 40px;
     text-align: center;
@@ -254,21 +348,37 @@ body {
     position: relative;
 }
 
-.ember-token-icon {
-    font-size: 8rem;
+/* UPDATED: VPEmberCoin.PNG Icon Container */
+.ember-token-icon-container {
     margin-bottom: 30px;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ember-token-icon-image {
+    width: clamp(120px, 15vw, 160px);
+    height: clamp(120px, 15vw, 160px);
+    object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6));
     animation: emberPulse 3s ease-in-out infinite;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
 @keyframes emberPulse {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6)); }
-    50% { transform: scale(1.1); filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.8)); }
+    0%, 100% { 
+        transform: scale(1); 
+        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6)); 
+    }
+    50% { 
+        transform: scale(1.1); 
+        filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.8)); 
+    }
 }
 
 .ember-hero-title {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 900;
     margin-bottom: 15px;
     background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #f0a500 100%);
@@ -276,6 +386,7 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: -0.02em;
+    line-height: 1.1;
 }
 
 .ember-hero-subtitle-main {
@@ -287,20 +398,21 @@ body {
 }
 
 .ember-hero-subtitle {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    margin-bottom: 60px;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    margin-bottom: 50px;
     color: rgba(255, 255, 255, 0.95);
-    max-width: 800px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
     font-weight: 500;
+    line-height: 1.4;
 }
 
 .ember-stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -337,11 +449,13 @@ body {
     font-weight: 600;
 }
 
+/* FIXED: Hero CTA with proper spacing */
 .ember-hero-cta {
     display: flex;
     gap: 25px;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 40px;
 }
 
 .ember-cta-primary {
@@ -1591,32 +1705,20 @@ body {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-}
 
-@media (max-width: 768px) {
-    .navbar {
-        padding: 15px 20px;
-    }
-
-    .logo {
-        font-size: 20px;
-    }
-
-    .logo-image {
-        height: 60px;
-    }
-
+    /* Mobile hero adjustments */
     .ember-hero {
         padding: 120px 0 60px;
+        min-height: auto;
     }
 
     .ember-hero-content {
         padding: 0 20px;
     }
 
-    .ember-token-icon {
-        font-size: 5rem;
-        margin-bottom: 20px;
+    .ember-token-icon-image {
+        width: clamp(100px, 20vw, 140px);
+        height: clamp(100px, 20vw, 140px);
     }
 
     .ember-hero-title {
@@ -1652,6 +1754,7 @@ body {
         flex-direction: column;
         align-items: center;
         gap: 15px;
+        margin-bottom: 30px;
     }
 
     .ember-cta-primary,
@@ -1662,198 +1765,22 @@ body {
         font-size: 1.1rem;
     }
 
-    .ember-section {
-        padding: 60px 20px;
-    }
-
-    .ember-section-icon {
-        font-size: 3rem;
-        margin-bottom: 20px;
-    }
-
-    .ember-section-title {
-        font-size: clamp(1.8rem, 6vw, 2.5rem);
-        margin-bottom: 20px;
-    }
-
-    .ember-section-subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 60px;
-    }
-
-    .how-it-works-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-
-    .stakeholder-card {
-        padding: 25px;
-    }
-
-    .stakeholder-icon {
-        font-size: 3rem;
-    }
-
-    .stakeholder-title {
-        font-size: 1.5rem;
-    }
-
-    .utility-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .utility-item {
-        padding: 20px;
-    }
-
-    .whitepaper-sections {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .whitepaper-section {
-        padding: 25px;
-    }
-
-    .whitepaper-overview {
-        padding: 30px;
-        margin-bottom: 40px;
-    }
-
-    .download-section {
-        padding: 30px;
-    }
-
-    .roadmap-item {
-        padding: 30px;
-        margin-bottom: 20px;
-    }
-
-    .roadmap-quarter {
-        font-size: 1.3rem;
-    }
-
-    .roadmap-title {
-        font-size: 1.5rem;
-    }
-
-    .trust-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .trust-item {
-        padding: 25px;
-    }
-
-    .team-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .team-member {
-        padding: 30px;
-    }
-
-    .member-avatar {
-        font-size: 3rem;
-    }
-
-    .advisors-section {
-        padding: 30px;
-    }
-
-    .tokenomics-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .tokenomics-card {
-        padding: 25px;
-    }
-
-    .distribution-chart {
-        padding: 30px;
-    }
-
-    .metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .metric-item {
-        padding: 25px;
-    }
-
-    .metric-value {
-        font-size: 1.5rem;
-    }
-
-    .countdown-timer {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-
-    .time-unit {
-        padding: 15px;
-    }
-
-    .time-value {
-        font-size: 1.5rem;
-    }
-
-    .bonus-tiers {
-        gap: 10px;
-    }
-
-    .bonus-tier {
-        padding: 15px;
-    }
-
-    .presale-card {
-        padding: 30px;
-    }
-
-    .payment-options {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .benefits-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .benefit-item {
-        padding: 25px;
-    }
-
-    .benefit-icon {
-        font-size: 2.5rem;
-    }
-
-    .footer {
-        padding: 40px 20px;
-    }
-
-    .footer-logo {
-        font-size: 1.5rem;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .footer-links {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .social-media {
-        gap: 20px;
+    /* Mobile floating coins */
+    .hero-crypto-coin-icon {
+        width: clamp(25px, 4vw, 35px) !important;
+        height: clamp(25px, 4vw, 35px) !important;
+        opacity: 0.5 !important;
     }
 }
 
 @media (max-width: 480px) {
+    /* Mobile floating coins - smaller */
+    .hero-crypto-coin-icon {
+        width: clamp(20px, 3vw, 30px) !important;
+        height: clamp(20px, 3vw, 30px) !important;
+        opacity: 0.4 !important;
+    }
+
     .ember-stats-grid {
         grid-template-columns: 1fr;
         gap: 15px;
@@ -1867,121 +1794,9 @@ body {
         font-size: 1.8rem;
     }
 
-    .ember-section {
-        padding: 40px 15px;
-    }
-
-    .stakeholder-card {
-        padding: 20px;
-    }
-
-    .stakeholder-icon {
-        font-size: 2.5rem;
-    }
-
-    .flow-step {
-        padding: 12px;
-    }
-
-    .utility-item {
-        padding: 15px;
-    }
-
-    .whitepaper-overview {
-        padding: 25px;
-    }
-
-    .whitepaper-section {
-        padding: 20px;
-    }
-
-    .download-section {
-        padding: 25px;
-    }
-
-    .roadmap-item {
-        padding: 25px;
-    }
-
-    .trust-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .trust-item {
-        padding: 20px;
-    }
-
-    .trust-icon {
-        font-size: 2rem;
-    }
-
-    .team-member {
-        padding: 25px;
-    }
-
-    .member-avatar {
-        font-size: 2.5rem;
-    }
-
-    .tokenomics-card {
-        padding: 20px;
-    }
-
-    .distribution-chart {
-        padding: 25px;
-    }
-
-    .chart-bar {
-        height: 40px;
-        padding: 0 15px;
-    }
-
-    .chart-label {
-        font-size: 0.9rem;
-    }
-
-    .metrics-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .metric-item {
-        padding: 20px;
-    }
-
-    .countdown-timer {
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-
-    .time-unit {
-        padding: 12px;
-    }
-
-    .time-value {
-        font-size: 1.3rem;
-    }
-
-    .presale-card {
-        padding: 25px;
-    }
-
-    .presale-card h3 {
-        font-size: 1.5rem;
-    }
-
-    .presale-button {
-        padding: 15px;
-        font-size: 1.1rem;
-    }
-
-    .benefit-item {
-        padding: 20px;
-    }
-
-    .benefit-icon {
-        font-size: 2rem;
+    .ember-token-icon-image {
+        width: clamp(80px, 25vw, 120px);
+        height: clamp(80px, 25vw, 120px);
     }
 }
 
@@ -2024,9 +1839,17 @@ html {
         transform: none;
         opacity: 1;
     }
+
+    .hero-crypto-coin-icon {
+        animation: none !important;
+    }
+
+    .ember-token-icon-image {
+        animation: none !important;
+    }
 }
 
-/* FIXED: Custom scrollbar styling to match main.html exactly */
+/* Custom scrollbar styling to match main.html exactly */
 ::-webkit-scrollbar {
     width: 8px;
 }
