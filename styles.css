@@ -1,8 +1,7 @@
 /* Vault Phoenix - Main Stylesheet */
 /* Phoenix Rising from Digital Ashes - Crypto Gaming Edition */
-/* FIXED: Hero section with working floating coins using VPEmberCoin.PNG */
-/* FIXED: Removed red box overlay on nav links */
-/* FIXED: Added proper spacing for compliance disclaimer */
+/* UPDATED: Enhanced Phoenix Token Evolution section with larger vault image and improved CTA card */
+/* UPDATED: New crypto coin images properly sized and positioned */
 
 * {
     margin: 0;
@@ -280,9 +279,9 @@ body {
     transform: scale(1.1) rotate(10deg);
 }
 
-/* REBUILT: Compact Ember Token Section V2 */
+/* ENHANCED: Phoenix Token Section V2 - Larger Vault Image & Better CTA Card */
 .ember-token-section-v2 {
-    padding: 60px 40px;
+    padding: 80px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
     color: white;
     position: relative;
@@ -316,8 +315,8 @@ body {
 
 .ember-token-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
     align-items: center;
     position: relative;
     z-index: 10;
@@ -328,9 +327,9 @@ body {
 }
 
 .ember-token-title-v2 {
-    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: 900;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     color: #ffffff;
     letter-spacing: -0.02em;
     background: linear-gradient(135deg, #ffffff 0%, #f0a500 50%, #d73327 100%);
@@ -341,40 +340,40 @@ body {
 }
 
 .ember-token-description-v2 {
-    font-size: 1.1rem;
-    margin-bottom: 24px;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
     color: rgba(255, 255, 255, 0.95);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
-/* NEW: Compact Countdown Widget */
+/* ENHANCED: Countdown Widget with Better Spacing */
 .ember-countdown-widget {
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 24px;
     backdrop-filter: blur(10px);
 }
 
 .countdown-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 14px;
+    margin-bottom: 18px;
 }
 
 .countdown-icon {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .ember-countdown-icon {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
     transition: all 0.3s ease;
@@ -386,15 +385,15 @@ body {
 }
 
 .countdown-text h3 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 800;
     color: #f0a500;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     line-height: 1.2;
 }
 
 .countdown-text p {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
     line-height: 1.2;
@@ -403,19 +402,19 @@ body {
 .ember-countdown-timer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    gap: 10px;
 }
 
 .ember-time-unit {
     background: rgba(0, 0, 0, 0.3);
-    padding: 12px 8px;
-    border-radius: 10px;
+    padding: 14px 10px;
+    border-radius: 12px;
     text-align: center;
     border: 1px solid rgba(240, 165, 0, 0.2);
 }
 
 .ember-time-value {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 900;
     color: #f0a500;
     display: block;
@@ -423,10 +422,10 @@ body {
 }
 
 .ember-time-label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 600;
-    margin-top: 2px;
+    margin-top: 4px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -435,33 +434,33 @@ body {
 .ember-highlights-compact {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .ember-highlight-compact {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background: rgba(215, 51, 39, 0.08);
-    padding: 8px 12px;
-    border-radius: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(215, 51, 39, 0.15);
     transition: all 0.3s ease;
     text-decoration: none;
     color: inherit;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 
 .ember-highlight-compact:hover {
     background: rgba(215, 51, 39, 0.15);
     border-color: rgba(215, 51, 39, 0.3);
-    transform: translateX(6px);
+    transform: translateX(8px);
 }
 
 .highlight-emoji-compact {
-    font-size: 1rem;
-    width: 20px;
+    font-size: 1.1rem;
+    width: 22px;
     text-align: center;
 }
 
@@ -472,44 +471,44 @@ body {
 }
 
 .highlight-arrow {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: #f0a500;
     font-weight: 700;
     transition: all 0.3s ease;
 }
 
 .ember-highlight-compact:hover .highlight-arrow {
-    transform: translateX(3px);
+    transform: translateX(4px);
 }
 
 /* FIXED: Regulatory Compliance Disclaimer with proper spacing */
 .compliance-disclaimer {
     background: rgba(240, 165, 0, 0.1);
     border: 1px solid rgba(240, 165, 0, 0.3);
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 30px; /* ADDED: More spacing from highlights above */
+    border-radius: 14px;
+    padding: 24px;
+    margin-top: 36px;
     backdrop-filter: blur(10px);
 }
 
 .compliance-disclaimer h4 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: #f0a500;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .compliance-disclaimer p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.9);
-    line-height: 1.5;
+    line-height: 1.6;
     margin: 0;
 }
 
-/* Right Column: Visual Stack */
+/* ENHANCED: Right Column with Larger Visual Stack */
 .ember-token-right {
     display: flex;
     justify-content: center;
@@ -520,135 +519,144 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 30px;
     width: 100%;
 }
 
-.ember-phoenix-container {
+/* ENHANCED: Larger Phoenix Container */
+.ember-phoenix-container-enhanced {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.phoenix-holding-coin-compact {
-    width: 320px;
-    height: 320px;
+.phoenix-holding-coin-enhanced {
+    width: 420px;
+    height: 420px;
     object-fit: contain;
-    filter: drop-shadow(0 0 20px rgba(215, 51, 39, 0.6));
+    filter: drop-shadow(0 0 25px rgba(215, 51, 39, 0.6));
     transition: all 0.4s ease;
     cursor: pointer;
     position: relative;
     z-index: 2;
 }
 
-.phoenix-holding-coin-compact:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8));
+.phoenix-holding-coin-enhanced:hover {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 45px rgba(240, 165, 0, 0.8));
 }
 
-.ember-glow-compact {
+.ember-glow-enhanced {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 380px;
-    height: 380px;
+    width: 500px;
+    height: 500px;
     background: radial-gradient(circle, rgba(215, 51, 39, 0.2) 0%, rgba(251, 146, 60, 0.1) 30%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
     transition: all 0.4s ease;
     z-index: 1;
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
-.phoenix-holding-coin-compact:hover + .ember-glow-compact {
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.5) 0%, rgba(251, 146, 60, 0.3) 30%, transparent 70%);
-    transform: translate(-50%, -50%) scale(1.2);
+.phoenix-holding-coin-enhanced:hover + .ember-glow-enhanced {
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(251, 146, 60, 0.4) 30%, transparent 70%);
+    transform: translate(-50%, -50%) scale(1.3);
     opacity: 1;
 }
 
-/* Enhanced CTA Card V2 */
-.ember-cta-card-v2 {
+/* ENHANCED: Better CTA Card Design */
+.ember-cta-card-enhanced {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 1));
     backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.12);
     border: 1px solid rgba(215, 51, 39, 0.1);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     width: 100%;
-    max-width: 320px;
+    max-width: 380px;
 }
 
-.ember-cta-card-v2::before {
+.ember-cta-card-enhanced::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 4px;
     background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
-    border-radius: 20px 20px 0 0;
+    border-radius: 24px 24px 0 0;
 }
 
-.ember-cta-card-v2:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 30px 80px rgba(215, 51, 39, 0.15);
+.ember-cta-card-enhanced:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 35px 90px rgba(215, 51, 39, 0.18);
 }
 
-.cta-header-v2 {
+.cta-header-enhanced {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 16px;
+    margin-bottom: 20px;
 }
 
-.cta-coin-xl {
-    width: 56px;
-    height: 56px;
+.cta-coin-enhanced {
+    width: 64px;
+    height: 64px;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.4));
     transition: all 0.3s ease;
     flex-shrink: 0;
 }
 
-.ember-cta-card-v2:hover .cta-coin-xl {
-    transform: scale(1.1) rotate(15deg);
-    filter: drop-shadow(0 6px 12px rgba(240, 165, 0, 0.6));
+.ember-cta-card-enhanced:hover .cta-coin-enhanced {
+    transform: scale(1.15) rotate(18deg);
+    filter: drop-shadow(0 6px 15px rgba(240, 165, 0, 0.6));
 }
 
-.cta-content-v2 {
+.cta-content-enhanced {
     flex: 1;
 }
 
-.cta-title-v2 {
-    font-size: 1.2rem;
+.cta-title-enhanced {
+    font-size: 1.3rem;
     font-weight: 800;
     color: #0f0f0f;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     line-height: 1.2;
 }
 
-.cta-benefits {
+.cta-benefits-enhanced {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
-.cta-benefit {
-    background: rgba(215, 51, 39, 0.1);
-    color: #d73327;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.75rem;
+.cta-benefit-enhanced {
+    padding: 3px 10px;
+    border-radius: 14px;
+    font-size: 0.8rem;
     font-weight: 700;
     border: 1px solid rgba(215, 51, 39, 0.2);
 }
 
-.ember-cta-button-v2 {
+.cta-benefit-enhanced.primary {
+    background: rgba(215, 51, 39, 0.1);
+    color: #d73327;
+}
+
+.cta-benefit-enhanced.secondary {
+    background: rgba(240, 165, 0, 0.1);
+    color: #f0a500;
+}
+
+.ember-cta-button-enhanced {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -656,18 +664,18 @@ body {
     width: 100%;
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
-    padding: 14px 20px;
-    border-radius: 14px;
+    padding: 18px 24px;
+    border-radius: 18px;
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.3);
+    box-shadow: 0 10px 30px rgba(215, 51, 39, 0.3);
     border: none;
     position: relative;
     overflow: hidden;
 }
 
-.ember-cta-button-v2::before {
+.ember-cta-button-enhanced::before {
     content: '';
     position: absolute;
     top: 0;
@@ -678,40 +686,29 @@ body {
     transition: left 0.6s ease;
 }
 
-.ember-cta-button-v2:hover::before {
+.ember-cta-button-enhanced:hover::before {
     left: 100%;
 }
 
-.ember-cta-button-v2:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.4);
+.ember-cta-button-enhanced:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.4);
     background: linear-gradient(135deg, #fb923c, #d73327);
 }
 
-.cta-text-main {
-    font-size: 1rem;
+.cta-text-enhanced {
+    font-size: 1.1rem;
     font-weight: 800;
     letter-spacing: 0.3px;
     line-height: 1.2;
 }
 
-.cta-text-sub {
-    font-size: 0.8rem;
+.cta-subtext-enhanced {
+    font-size: 0.85rem;
     font-weight: 600;
     opacity: 0.9;
     line-height: 1.2;
-    margin-top: 2px;
-}
-
-.cta-arrow-v2 {
-    position: absolute;
-    right: 16px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.ember-cta-button-v2:hover .cta-arrow-v2 {
-    transform: translateX(4px) scale(1.1);
+    margin-top: 3px;
 }
 
 /* Enhanced CTA Button - Phoenix Crypto Theme */
@@ -919,7 +916,7 @@ body {
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
 }
 
-/* NEW: Crypto Coin Section with Improved Glow */
+/* UPDATED: Crypto Coin Section with New Images */
 .crypto-coin-section {
     padding: 120px 40px;
     background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
@@ -969,7 +966,7 @@ body {
     box-shadow: 0 40px 100px rgba(215, 51, 39, 0.4);
 }
 
-/* NEW: Improved crypto image glow effect */
+/* ENHANCED: Improved crypto image glow effect */
 .crypto-image-glow {
     position: absolute;
     top: 50%;
@@ -1050,15 +1047,22 @@ body {
     flex-shrink: 0;
 }
 
-.benefit-icon.coin-image {
-    padding: 8px;
-}
-
+.benefit-icon.coin-image,
+.benefit-icon.placement-image,
 .benefit-icon.revenue-image {
     padding: 8px;
 }
 
+/* UPDATED: New Crypto Coin Icons with Perfect Sizing */
 .custom-coin-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.custom-placement-icon {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -1075,6 +1079,7 @@ body {
 }
 
 .crypto-benefit:hover .custom-coin-icon,
+.crypto-benefit:hover .custom-placement-icon,
 .crypto-benefit:hover .custom-revenue-icon {
     transform: scale(1.1);
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)) brightness(1.1);
@@ -2041,7 +2046,7 @@ body {
     transform: scale(1.05);
 }
 
-/* FIXED: Mobile Navigation - Better responsive styling */
+/* ENHANCED: Mobile Navigation - Better responsive styling */
 @media (max-width: 1024px) {
     .mobile-menu-btn {
         display: block !important;
@@ -2118,14 +2123,14 @@ body {
         font-size: 24px !important;
     }
     
-    /* Mobile Ember Token Section V2 */
+    /* ENHANCED: Mobile Phoenix Token Section V2 */
     .ember-token-section-v2 {
-        padding: 40px 20px;
+        padding: 50px 20px;
     }
     
     .ember-token-grid {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 40px;
         text-align: center;
     }
     
@@ -2133,14 +2138,19 @@ body {
         order: -1;
     }
     
-    .phoenix-holding-coin-compact {
-        width: 280px;
-        height: 280px;
+    .phoenix-holding-coin-enhanced {
+        width: 320px;
+        height: 320px;
     }
     
-    .ember-glow-compact {
-        width: 340px;
-        height: 340px;
+    .ember-glow-enhanced {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .ember-cta-card-enhanced {
+        max-width: 340px;
+        margin: 0 auto;
     }
     
     /* Mobile Crypto Section */
@@ -2226,6 +2236,73 @@ body {
         text-align: center;
     }
 
+    /* ENHANCED: Mobile Phoenix Token Section */
+    .ember-token-section-v2 {
+        padding: 40px 20px;
+    }
+    
+    .ember-token-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .ember-token-title-v2 {
+        font-size: clamp(1.8rem, 6vw, 2.4rem);
+        margin-bottom: 16px;
+    }
+    
+    .ember-token-description-v2 {
+        font-size: 1.05rem;
+        margin-bottom: 24px;
+    }
+    
+    .ember-countdown-widget {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .ember-countdown-timer {
+        gap: 8px;
+    }
+    
+    .ember-time-unit {
+        padding: 12px 8px;
+    }
+    
+    .ember-time-value {
+        font-size: 1.4rem;
+    }
+    
+    .ember-time-label {
+        font-size: 0.7rem;
+    }
+    
+    .phoenix-holding-coin-enhanced {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .ember-glow-enhanced {
+        width: 360px;
+        height: 360px;
+    }
+    
+    .ember-cta-card-enhanced {
+        max-width: 300px;
+        padding: 24px;
+    }
+    
+    .cta-coin-enhanced {
+        width: 56px;
+        height: 56px;
+    }
+
+    .compliance-disclaimer {
+        padding: 20px;
+        margin-top: 24px;
+    }
+
     /* FIXED: Mobile floating coins sizing for 768px */
     .hero-crypto-coin-icon {
         width: clamp(20px, 3.5vw, 30px) !important;
@@ -2235,68 +2312,6 @@ body {
     }
 
     /* Rest of mobile styles... */
-    .ember-token-section-v2 {
-        padding: 40px 20px;
-    }
-    
-    .ember-token-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        text-align: center;
-    }
-    
-    .ember-token-title-v2 {
-        font-size: clamp(1.6rem, 6vw, 2.2rem);
-        margin-bottom: 12px;
-    }
-    
-    .ember-token-description-v2 {
-        font-size: 1rem;
-        margin-bottom: 20px;
-    }
-    
-    .ember-countdown-widget {
-        padding: 16px;
-        margin-bottom: 16px;
-    }
-    
-    .ember-countdown-timer {
-        gap: 6px;
-    }
-    
-    .ember-time-unit {
-        padding: 10px 6px;
-    }
-    
-    .ember-time-value {
-        font-size: 1.2rem;
-    }
-    
-    .ember-time-label {
-        font-size: 0.65rem;
-    }
-    
-    .phoenix-holding-coin-compact {
-        width: 240px;
-        height: 240px;
-    }
-    
-    .ember-glow-compact {
-        width: 300px;
-        height: 300px;
-    }
-    
-    .ember-cta-card-v2 {
-        max-width: 280px;
-        padding: 18px;
-    }
-    
-    .cta-coin-xl {
-        width: 48px;
-        height: 48px;
-    }
-
-    /* All other sections follow the same pattern... */
     .features, .app-showcase, .use-cases, .pricing, .final-cta {
         padding: 60px 20px;
     }
@@ -2448,67 +2463,68 @@ body {
         font-size: 1rem;
     }
 
+    /* ENHANCED: Ultra Mobile Phoenix Token Section */
     .ember-token-section-v2 {
         padding: 30px 15px;
     }
 
     .ember-token-title-v2 {
-        font-size: clamp(1.4rem, 6vw, 1.8rem);
-        margin-bottom: 10px;
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        margin-bottom: 12px;
     }
 
     .ember-token-description-v2 {
-        font-size: 0.9rem;
-        margin-bottom: 18px;
+        font-size: 0.95rem;
+        margin-bottom: 20px;
     }
 
     .ember-countdown-widget {
-        padding: 14px;
-        margin-bottom: 14px;
+        padding: 16px;
+        margin-bottom: 16px;
     }
 
     .ember-countdown-timer {
-        gap: 4px;
+        gap: 6px;
     }
 
     .ember-time-unit {
-        padding: 8px 4px;
+        padding: 10px 6px;
     }
 
     .ember-time-value {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     .ember-time-label {
-        font-size: 0.6rem;
+        font-size: 0.65rem;
     }
 
-    .phoenix-holding-coin-compact {
-        width: 200px;
-        height: 200px;
+    .phoenix-holding-coin-enhanced {
+        width: 220px;
+        height: 220px;
     }
 
-    .ember-glow-compact {
-        width: 250px;
-        height: 250px;
+    .ember-glow-enhanced {
+        width: 280px;
+        height: 280px;
     }
 
-    .ember-cta-card-v2 {
-        max-width: 260px;
-        padding: 16px;
+    .ember-cta-card-enhanced {
+        max-width: 280px;
+        padding: 20px;
     }
 
-    .cta-coin-xl {
-        width: 40px;
-        height: 40px;
+    .cta-coin-enhanced {
+        width: 48px;
+        height: 48px;
     }
 
-    .cta-title-v2 {
-        font-size: 1rem;
+    .cta-title-enhanced {
+        font-size: 1.1rem;
     }
 
-    .ember-cta-button-v2 {
-        padding: 12px 18px;
+    .ember-cta-button-enhanced {
+        padding: 16px 20px;
     }
 
     .compliance-disclaimer {
@@ -2732,7 +2748,7 @@ html {
     }
     
     .cta-button,
-    .ember-cta-button-v2,
+    .ember-cta-button-enhanced,
     .demo-button {
         border: 2px solid #ffffff;
     }
@@ -2743,7 +2759,7 @@ html {
     .navbar,
     .mobile-menu-btn,
     .demo-button,
-    .ember-cta-button-v2,
+    .ember-cta-button-enhanced,
     .cta-button,
     .social-media,
     .hero-floating-coins {
@@ -2769,7 +2785,7 @@ html {
 
 /* Focus styles for accessibility */
 .cta-button:focus,
-.ember-cta-button-v2:focus,
+.ember-cta-button-enhanced:focus,
 .demo-button:focus,
 .social-link:focus,
 .mobile-menu-btn:focus,
