@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="ember-styles.css">
 </head>
 <body>
-    <!-- FIXED: Navigation - Corrected HTML structure to match main.html exactly -->
+    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-content">
             <a href="main.html" class="logo">
                 <img src="images/VPlogoNotext.svg.svg" alt="Vault Phoenix Logo" class="logo-image">
                 <span>Vault Phoenix</span>
             </a>
-            <!-- FIXED: Removed the extra div wrapper around nav-links -->
             <ul class="nav-links">
                 <li><a href="#whitepaper">White Paper</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
@@ -30,10 +29,36 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="ember-hero">
+    <!-- REBUILT: Hero Section with VPEmberCoin.PNG and Background Coins -->
+    <section class="ember-hero" id="hero-section">
+        <!-- Background floating coins (same as main.html) -->
+        <div class="hero-floating-coins">
+            <div class="hero-coin hero-coin-1">
+                <img src="images/VPEmberCoin.PNG" alt="VP Ember Coin" class="hero-crypto-coin-icon">
+            </div>
+            <div class="hero-coin hero-coin-2">
+                <img src="images/VPEmberCoin.PNG" alt="VP Ember Coin" class="hero-crypto-coin-icon">
+            </div>
+            <div class="hero-coin hero-coin-3">
+                <img src="images/VPEmberCoin.PNG" alt="VP Ember Coin" class="hero-crypto-coin-icon">
+            </div>
+            <div class="hero-coin hero-coin-4">
+                <img src="images/VPEmberCoin.PNG" alt="VP Ember Coin" class="hero-crypto-coin-icon">
+            </div>
+            <div class="hero-coin hero-coin-5">
+                <img src="images/VPEmberCoin.PNG" alt="VP Ember Coin" class="hero-crypto-coin-icon">
+            </div>
+            <div class="hero-coin hero-coin-6">
+                <img src="images/VPEmberCoin.PNG" alt="VP Ember Coin" class="hero-crypto-coin-icon">
+            </div>
+        </div>
+        
         <div class="ember-hero-content">
-            <div class="ember-token-icon">🔥</div>
+            <!-- FIXED: Replace fire emoji with VPEmberCoin.PNG -->
+            <div class="ember-token-icon-container">
+                <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-token-icon-image">
+            </div>
+            
             <h1 class="ember-hero-title">$Ember Token</h1>
             <h2 class="ember-hero-subtitle-main">Powering AR Crypto Gaming + Local Redemption</h2>
             <p class="ember-hero-subtitle">Collect, redeem at local businesses, or cash out — real value where you live.</p>
@@ -52,11 +77,13 @@
                     <div class="stat-label">Early Bonus</div>
                 </div>
                 <div class="ember-stat-card">
-                    <div class="stat-number">Q2 2025</div>
+                    <!-- UPDATED: Changed to Q4 2025 -->
+                    <div class="stat-number">Q4 2025</div>
                     <div class="stat-label">Mainnet Launch</div>
                 </div>
             </div>
             
+            <!-- FIXED: Better spacing for CTA buttons -->
             <div class="ember-hero-cta">
                 <a href="#token-sale" class="ember-cta-primary">🔥 Join $Ember Sale</a>
                 <a href="#how-it-works" class="ember-cta-secondary">📄 Learn More</a>
@@ -260,7 +287,8 @@
             
             <div class="roadmap-timeline">
                 <div class="roadmap-item active mainnet-phase">
-                    <div class="roadmap-quarter">Q2-Q3 2025</div>
+                    <!-- UPDATED: Changed to Q4 2025 -->
+                    <div class="roadmap-quarter">Q4 2025</div>
                     <div class="roadmap-title">🔥 Mainnet Launch</div>
                     <div class="roadmap-status">ACTIVE</div>
                     <ul class="roadmap-tasks">
@@ -278,7 +306,7 @@
                 </div>
                 
                 <div class="roadmap-item upcoming expansion-phase">
-                    <div class="roadmap-quarter">Q4 2025</div>
+                    <div class="roadmap-quarter">Q1 2026</div>
                     <div class="roadmap-title">🚀 Ecosystem Expansion</div>
                     <div class="roadmap-status">UPCOMING</div>
                     <ul class="roadmap-tasks">
@@ -292,7 +320,7 @@
                 </div>
                 
                 <div class="roadmap-item future scaling-phase">
-                    <div class="roadmap-quarter">2026</div>
+                    <div class="roadmap-quarter">2026+</div>
                     <div class="roadmap-title">🌍 Global Scaling</div>
                     <div class="roadmap-status">PLANNED</div>
                     <ul class="roadmap-tasks">
@@ -602,7 +630,8 @@
                         
                         <div class="presale-note">
                             <p>⚠️ Minimum investment: $10 USD | Maximum: $10,000 USD</p>
-                            <p>🔒 Tokens distributed at mainnet launch (Q2 2025)</p>
+                            <!-- UPDATED: Changed to Q4 2025 -->
+                            <p>🔒 Tokens distributed at mainnet launch (Q4 2025)</p>
                         </div>
                     </div>
                 </div>
