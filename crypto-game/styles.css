@@ -208,6 +208,58 @@ body:not(.dashboard) {
     flex-shrink: 0;
 }
 
+/* Login Button with Flame Icon */
+.login-button {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.login-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.login-button:hover::before {
+    left: 100%;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(240, 165, 0, 0.5);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.login-flame-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+    filter: brightness(1.2);
+}
+
 /* DASHBOARD PAGE STYLES */
 
 /* Dashboard overrides for body */
@@ -2332,49 +2384,6 @@ body.dashboard {
     box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.2);
     transform: translateY(-1px);
     background: rgba(0, 0, 0, 0.6);
-}
-
-.login-button {
-    width: 100%;
-    padding: 16px;
-    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 16px;
-}
-
-.login-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-.login-button:hover::before {
-    left: 100%;
-}
-
-.login-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(240, 165, 0, 0.5);
-}
-
-.login-button:active {
-    transform: translateY(0);
 }
 
 .forgot-password {
