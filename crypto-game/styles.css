@@ -320,7 +320,7 @@ body.dashboard {
 /* Proximity Notification */
 .proximity-notification {
     position: fixed;
-    top: calc(env(safe-area-inset-top, 8px) + 220px);
+    top: calc(env(safe-area-inset-top, 8px) + 140px);
     left: 12px;
     right: 12px;
     z-index: 170;
@@ -683,8 +683,8 @@ body.dashboard {
     background: linear-gradient(135deg, rgba(244, 67, 54, 1), rgba(244, 67, 54, 0.8));
 }
 
-/* Status Panel */
-.status-panel {
+/* FIXED: Hunt Status Panel - Better positioned and clearer info */
+.hunt-status-panel {
     position: fixed;
     top: calc(env(safe-area-inset-top, 8px) + 72px);
     left: 12px;
@@ -699,49 +699,50 @@ body.dashboard {
     transition: all 0.3s ease;
 }
 
-.status-grid {
+.hunt-status-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
 }
 
-.status-item {
+.hunt-status-item {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 4px;
-    position: relative;
+    text-align: center;
 }
 
-.status-label {
-    font-size: 11px;
+.hunt-status-label {
+    font-size: 10px;
     opacity: 0.7;
     text-transform: uppercase;
     letter-spacing: 0.8px;
     font-weight: 700;
 }
 
-.status-value {
-    font-size: 15px;
+.hunt-status-value {
+    font-size: 14px;
     font-weight: 800;
     color: #f0a500;
 }
 
-.status-indicator {
+.hunt-status-indicator {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
-.status-dot {
-    width: 10px;
-    height: 10px;
+.hunt-status-dot {
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: #4CAF50;
     animation: statusPulse 2s ease-in-out infinite;
     box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
 }
 
-.status-dot.error {
+.hunt-status-dot.error {
     background: #f44336;
     animation: errorPulse 2s ease-in-out infinite;
     box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
@@ -759,89 +760,383 @@ body.dashboard {
     100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
 }
 
-/* Compass Component */
-.compass-container {
+/* FIXED: Interactive Map Container - Real map implementation */
+.interactive-map-container {
     position: absolute;
-    top: 50%;
-    right: 8px;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
+    top: calc(env(safe-area-inset-top, 8px) + 140px);
+    left: 12px;
+    right: 12px;
+    bottom: 280px;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 16px;
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    z-index: 5;
 }
 
-.compass {
+.map-interface {
+    position: relative;
     width: 100%;
     height: 100%;
-    border: 3px solid rgba(240, 165, 0, 0.8);
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.2) 0%, rgba(240, 165, 0, 0.05) 100%);
-    position: relative;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #1a4a3a, #2d6b4a, #4a8c5a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.compass-needle {
+.map-loading-state {
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.map-error-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: #f0a500;
+}
+
+.map-error-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.map-error-message {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+.map-retry-btn {
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.map-retry-btn:active {
+    transform: scale(0.98);
+}
+
+.phoenix-map-grid {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(240, 165, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(240, 165, 0, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #1a4a3a, #2d6b4a, #4a8c5a);
+}
+
+.phoenix-location-marker {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: rgba(240, 165, 0, 0.9);
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.phoenix-location-marker:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(240, 165, 0, 0.5);
+}
+
+.phoenix-location-marker.collected {
+    background: rgba(76, 175, 80, 0.9);
+    opacity: 0.6;
+}
+
+.phoenix-user-marker {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 4px;
-    height: 16px;
     transform: translate(-50%, -50%);
-    transform-origin: center center;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 16px;
+    height: 16px;
+    background: #2196F3;
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px rgba(33, 150, 243, 0.3);
+    animation: userLocationPulse 2s ease-in-out infinite;
+    z-index: 3;
 }
 
-.compass-needle::before {
-    content: '';
+@keyframes userLocationPulse {
+    0% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7); }
+    70% { box-shadow: 0 0 0 16px rgba(33, 150, 243, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0); }
+}
+
+.map-controls-panel {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+}
+
+.map-control-button {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+
+.map-control-button:active {
+    transform: scale(0.95);
+    background: rgba(240, 165, 0, 0.9);
+    color: white;
+}
+
+/* FIXED: Enhanced Token Locations Slider - Improved UX */
+.token-locations-slider {
+    position: fixed;
+    bottom: calc(env(safe-area-inset-bottom, 12px) + 84px);
+    left: 0;
+    right: 0;
+    z-index: 160;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(30px);
+    border-top: 3px solid rgba(240, 165, 0, 0.5);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 220px;
+    overflow: hidden;
+}
+
+.token-locations-slider.expanded {
+    max-height: calc(100vh - env(safe-area-inset-top, 8px) - 72px - env(safe-area-inset-bottom, 12px) - 84px);
+    border-radius: 20px 20px 0 0;
+    bottom: calc(env(safe-area-inset-bottom, 12px) + 84px);
+    left: 0;
+    right: 0;
+}
+
+.slider-handle {
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(240, 165, 0, 0.1);
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.slider-handle-bar {
+    width: 40px;
+    height: 4px;
+    background: rgba(240, 165, 0, 0.8);
+    border-radius: 2px;
+    margin: 0 auto 8px auto;
+    transition: all 0.3s ease;
+}
+
+.slider-handle-text {
+    color: #f0a500;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.token-locations-slider.expanded .slider-handle-text {
+    transform: rotate(180deg);
+}
+
+.token-locations-content {
+    padding: 16px;
+    height: calc(100% - 40px);
+    overflow-y: auto;
+}
+
+.token-locations-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.locations-title {
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.locations-icon {
+    width: 20px;
+    height: 20px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
+}
+
+.locations-count {
+    color: #f0a500;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.token-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.token-list-item {
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.15), rgba(240, 165, 0, 0.05));
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 16px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.token-list-item:active {
+    transform: scale(0.98);
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.25), rgba(240, 165, 0, 0.15));
+}
+
+.token-list-item.collected {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(76, 175, 80, 0.05));
+    border-color: rgba(76, 175, 80, 0.4);
+    opacity: 0.8;
+}
+
+.token-item-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.token-item-icon {
+    width: 40px;
+    height: 40px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
+    border: 2px solid rgba(240, 165, 0, 0.6);
+    flex-shrink: 0;
+}
+
+.token-item-icon.collected {
+    border-color: rgba(76, 175, 80, 0.6);
+    filter: saturate(0.7);
+}
+
+.token-item-info {
+    flex: 1;
+}
+
+.token-item-location {
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.token-item-sponsor {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.token-item-value {
+    color: #f0a500;
+    font-size: 16px;
+    font-weight: 800;
+    text-align: right;
+}
+
+.token-item-value.collected {
+    color: #4CAF50;
+}
+
+.token-item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.token-item-distance {
+    font-weight: 600;
+}
+
+.token-item-status {
+    background: rgba(240, 165, 0, 0.8);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.token-item-status.collected {
+    background: rgba(76, 175, 80, 0.8);
+}
+
+.token-tier-indicator {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background: #f0a500;
-    border-radius: 3px 3px 0 0;
-    box-shadow: 0 0 4px rgba(240, 165, 0, 0.8);
+    right: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 0 14px 14px 0;
 }
 
-.compass-needle::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 0 0 3px 3px;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+.token-tier-high {
+    background: linear-gradient(180deg, #FFD700, #FFA500);
 }
 
-.compass-n {
-    position: absolute;
-    top: 3px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 10px;
-    color: #f0a500;
-    font-weight: 900;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+.token-tier-medium {
+    background: linear-gradient(180deg, #FFA500, #FF8C00);
 }
 
-.compass-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 5px;
-    height: 5px;
-    background: #f0a500;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.8);
+.token-tier-low {
+    background: linear-gradient(180deg, #FF8C00, #FF6347);
 }
 
 /* Enhanced AR Instructions with Flame Icon */
 .ar-instructions {
     position: fixed;
-    top: calc(env(safe-area-inset-top, 8px) + 220px);
+    top: calc(env(safe-area-inset-top, 8px) + 140px);
     left: 12px;
     right: 12px;
     z-index: 160;
@@ -2379,450 +2674,6 @@ body.dashboard {
     line-height: 1.4;
 }
 
-/* Enhanced Map Content */
-.map-fallback-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: calc(env(safe-area-inset-bottom, 12px) + 84px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-.map-central-card {
-    background: rgba(240, 165, 0, 0.2);
-    border: 2px solid rgba(240, 165, 0, 0.5);
-    border-radius: 15px;
-    padding: 24px;
-    max-width: 280px;
-    margin-bottom: 20px;
-}
-
-.map-card-icon {
-    font-size: 40px;
-    margin-bottom: 12px;
-}
-
-.map-title {
-    margin: 0 0 8px 0;
-    color: #f0a500;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.map-description {
-    margin: 0 0 12px 0;
-    opacity: 0.8;
-    font-size: 13px;
-    line-height: 1.4;
-}
-
-.map-location-box {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 12px;
-}
-
-.map-location-label {
-    font-size: 11px;
-    opacity: 0.7;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.map-location-coords {
-    font-size: 14px;
-    font-weight: 600;
-    color: #f0a500;
-}
-
-.hunt-status {
-    background: rgba(76, 175, 80, 0.2);
-    border-radius: 8px;
-    padding: 8px;
-    margin-top: 8px;
-}
-
-.hunt-status-label {
-    font-size: 10px;
-    opacity: 0.7;
-    margin-bottom: 2px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.hunt-status-value {
-    font-size: 12px;
-    font-weight: 600;
-    color: #4CAF50;
-}
-
-/* Enhanced Token Locations Module */
-.map-token-locations {
-    position: absolute;
-    bottom: calc(env(safe-area-inset-bottom, 12px) + 140px);
-    left: 16px;
-    right: 16px;
-    background: rgba(0, 0, 0, 0.9);
-    border-radius: 16px;
-    padding: 16px;
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    max-height: 300px;
-    overflow: hidden;
-}
-
-.map-token-locations.expanded {
-    bottom: calc(env(safe-area-inset-bottom, 12px) + 84px);
-    max-height: 50vh;
-    overflow-y: auto;
-}
-
-.map-token-locations-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.map-token-locations-label {
-    font-size: 12px;
-    opacity: 0.8;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 700;
-}
-
-.swipe-indicator {
-    font-size: 10px;
-    color: #f0a500;
-    opacity: 0.7;
-}
-
-.map-token-locations-icons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.ember-token-display {
-    width: 24px;
-    height: 24px;
-    background: url('../images/VPEmberCoin.PNG') center/cover;
-    border-radius: 50%;
-    animation: tokenFloat 2s ease-in-out infinite;
-}
-
-.ember-token-display:nth-child(2) { animation-delay: 0.3s; }
-.ember-token-display:nth-child(3) { animation-delay: 0.6s; }
-
-@keyframes tokenFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
-}
-
-.ember-flame-display {
-    width: 24px;
-    height: 24px;
-    background: url('../images/VPEmberFlame.svg') center/cover;
-    animation: flameFlicker 1.5s ease-in-out infinite;
-}
-
-@keyframes flameFlicker {
-    0%, 100% { opacity: 0.8; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.1); }
-}
-
-.map-locations-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* Enhanced Token Location Buttons */
-.token-location-btn-enhanced {
-    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(240, 165, 0, 0.1));
-    border: 2px solid rgba(240, 165, 0, 0.4);
-    color: white;
-    padding: 16px;
-    border-radius: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    position: relative;
-    overflow: hidden;
-}
-
-.token-location-btn-enhanced:active {
-    transform: scale(0.98);
-    background: linear-gradient(135deg, rgba(240, 165, 0, 0.3), rgba(240, 165, 0, 0.2));
-}
-
-.token-location-btn-enhanced.collected {
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1));
-    border-color: rgba(76, 175, 80, 0.4);
-}
-
-.token-btn-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-}
-
-.token-btn-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.token-btn-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.token-btn-info {
-    flex: 1;
-}
-
-.token-btn-location {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 2px;
-    color: white;
-}
-
-.token-btn-sponsor {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.token-btn-right {
-    text-align: right;
-    flex-shrink: 0;
-}
-
-.token-btn-value {
-    font-size: 14px;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 2px;
-}
-
-.token-btn-distance {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.token-btn-status {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.token-btn-tier {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 4px;
-    height: 100%;
-    border-radius: 0 14px 14px 0;
-}
-
-.token-tier-high {
-    background: linear-gradient(180deg, #FFD700, #FFA500);
-}
-
-.token-tier-medium {
-    background: linear-gradient(180deg, #FFA500, #FF8C00);
-}
-
-.token-tier-low {
-    background: linear-gradient(180deg, #FF8C00, #FF6347);
-}
-
-/* Enhanced Google Map Container */
-.google-map-container {
-    position: absolute;
-    top: calc(env(safe-area-inset-top, 8px) + 200px);
-    left: 16px;
-    right: 16px;
-    height: 200px;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 16px;
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    overflow: hidden;
-    backdrop-filter: blur(20px);
-}
-
-.google-map-placeholder {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.map-loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #f0a500;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.actual-google-map {
-    width: 100%;
-    height: 100%;
-}
-
-.simulated-google-map {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #2d5016, #3d6b1f, #4a7c23);
-    overflow: hidden;
-}
-
-.map-controls {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 10;
-}
-
-.map-control-btn {
-    width: 32px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    border-radius: 6px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.map-control-btn:active {
-    transform: scale(0.95);
-}
-
-.map-grid {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.user-location-marker {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-}
-
-.user-marker-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
-    background: rgba(33, 150, 243, 0.3);
-    border-radius: 50%;
-    animation: userPulse 2s ease-in-out infinite;
-}
-
-@keyframes userPulse {
-    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-}
-
-.user-marker-icon {
-    position: relative;
-    font-size: 20px;
-    color: #2196F3;
-    z-index: 1;
-}
-
-.map-token-marker {
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 3;
-}
-
-.map-token-marker:active {
-    transform: scale(1.2);
-}
-
-.map-token-marker.collected {
-    opacity: 0.5;
-    filter: grayscale(100%);
-}
-
-.token-marker-icon {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.token-marker-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.token-marker-value {
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(240, 165, 0, 0.9);
-    color: white;
-    font-size: 8px;
-    font-weight: 700;
-    padding: 2px 4px;
-    border-radius: 4px;
-    white-space: nowrap;
-}
-
-.map-attribution {
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(0, 0, 0, 0.5);
-    padding: 4px 8px;
-    border-radius: 4px;
-}
-
 /* Navigation Modal */
 .navigation-modal {
     position: fixed;
@@ -3195,108 +3046,49 @@ body.dashboard {
         border-radius: 16px;
     }
     
-    .app-logo {
-        width: 56px;
-        height: 56px;
-        margin-bottom: 10px;
-    }
-    
-    .app-title {
-        font-size: 22px;
-    }
-    
-    .demo-badge {
-        padding: 10px;
-        margin-bottom: 16px;
-    }
-    
-    .crypto-features {
-        margin: 12px 0;
-        padding: 10px;
-        gap: 6px;
-    }
-    
-    .feature-item {
-        font-size: 12px;
-        gap: 8px;
-    }
-    
-    .feature-icon {
-        width: 18px;
-        height: 18px;
-    }
-    
-    .form-group {
-        margin-bottom: 14px;
-    }
-    
-    .form-input {
-        padding: 12px 16px;
-    }
-    
-    .login-button {
-        padding: 14px;
-        font-size: 15px;
-    }
-    
-    .vault-container {
-        padding: 0 12px;
-    }
-    
-    .campaigns-container {
-        padding: 0 12px;
-    }
-    
-    .nav-tabs {
-        padding: 0 8px;
-    }
-    
-    .status-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-    }
-    
-    .status-panel {
+    .hunt-status-panel {
         left: 8px;
         right: 8px;
-        padding: 8px 12px;
+        padding: 12px;
     }
-
+    
+    .hunt-status-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+    }
+    
+    .hunt-status-value {
+        font-size: 12px;
+    }
+    
+    .interactive-map-container {
+        left: 8px;
+        right: 8px;
+        top: calc(env(safe-area-inset-top, 8px) + 120px);
+        bottom: 260px;
+    }
+    
+    .token-locations-slider {
+        border-radius: 16px 16px 0 0;
+    }
+    
+    .token-locations-content {
+        padding: 12px;
+    }
+    
+    .token-list-item {
+        padding: 12px;
+    }
+    
     .ar-ember-coin {
         width: 100px;
         height: 100px;
     }
 
     .token-discovery {
+        left: 8px;
+        right: 8px;
         padding: 0;
-        left: 8px;
-        right: 8px;
-    }
-
-    .token-discovery-header {
-        padding: 16px 20px 12px 20px;
-    }
-
-    .sponsor-info-front,
-    .sponsor-info-back {
-        padding: 20px;
-    }
-
-    .token-preview {
-        flex-direction: column;
-        text-align: center;
-        gap: 16px;
-    }
-
-    .token-image {
-        width: 70px;
-        height: 70px;
-    }
-
-    .map-token-locations {
-        left: 8px;
-        right: 8px;
-        padding: 12px;
     }
 
     .navigation-content {
@@ -3323,53 +3115,24 @@ body.dashboard {
         width: 28px;
         height: 28px;
     }
-
-    .google-map-container {
-        height: 150px;
-    }
 }
 
 @media (max-height: 640px) {
-    .login-container {
-        padding: 14px 16px 18px 16px;
-        margin: 6px 8px;
-    }
-    
-    .logo-section {
-        margin-bottom: 16px;
-    }
-    
-    .app-logo {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 8px;
-    }
-    
-    .app-title {
-        font-size: 20px;
-    }
-    
-    .demo-badge {
-        margin-bottom: 14px;
+    .hunt-status-panel {
         padding: 8px 10px;
-    }
-    
-    .crypto-features {
-        margin: 10px 0;
-        padding: 8px;
-    }
-    
-    .form-group {
-        margin-bottom: 12px;
     }
 
-    .status-panel {
-        top: calc(env(safe-area-inset-top, 8px) + 72px);
-        padding: 8px 10px;
+    .interactive-map-container {
+        top: calc(env(safe-area-inset-top, 8px) + 100px);
+        bottom: 240px;
+    }
+    
+    .token-locations-slider {
+        max-height: 180px;
     }
 
     .ar-instructions {
-        top: calc(env(safe-area-inset-top, 8px) + 180px);
+        top: calc(env(safe-area-inset-top, 8px) + 100px);
         padding: 14px;
     }
 
@@ -3381,10 +3144,6 @@ body.dashboard {
         min-height: 60px;
         min-width: 240px;
         padding: 16px 24px;
-    }
-
-    .google-map-container {
-        height: 120px;
     }
 }
 
@@ -3398,12 +3157,13 @@ body.dashboard {
 .vault-action-btn,
 .filter-btn,
 .ar-ember-coin,
-.token-location-btn-enhanced,
+.token-list-item,
 .adventure-card,
 .adventure-start-btn,
 .proximity-button,
-.map-token-marker,
-.adventure-map-preview {
+.phoenix-location-marker,
+.adventure-map-preview,
+.slider-handle {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
@@ -3420,7 +3180,7 @@ body.dashboard {
 .filter-btn,
 .ar-ember-coin,
 .adventure-card,
-.token-location-btn-enhanced {
+.token-list-item {
     contain: layout style paint;
 }
 
