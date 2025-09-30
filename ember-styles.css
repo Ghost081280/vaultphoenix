@@ -1,6 +1,6 @@
-/* Ember Token Page Stylesheet */
+/* Ember Token Page Stylesheet - Updated Complete Version */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
-/* UPDATED: Enhanced design with improved three-player ecosystem and TPA functionality */
+/* COMPREHENSIVE CSS for the complete ember.html structure */
 
 /* EXACT COPY FROM WORKING MAIN.HTML - Navigation system */
 .navbar {
@@ -717,7 +717,8 @@ body {
     font-weight: 800;
 }
 
-.value-proposition {
+/* Value Proposition Enhanced */
+.value-proposition-enhanced {
     background: rgba(240, 165, 0, 0.1);
     padding: 40px;
     border-radius: 20px;
@@ -727,7 +728,7 @@ body {
     overflow: hidden;
 }
 
-.value-proposition::before {
+.value-proposition-enhanced::before {
     content: '';
     position: absolute;
     top: 0;
@@ -738,7 +739,7 @@ body {
     z-index: 0;
 }
 
-.value-proposition h3 {
+.value-proposition-enhanced h3 {
     font-size: 1.8rem;
     font-weight: 800;
     color: #f0a500;
@@ -747,7 +748,7 @@ body {
     z-index: 1;
 }
 
-.utility-grid {
+.utility-grid-enhanced {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
@@ -755,7 +756,7 @@ body {
     z-index: 1;
 }
 
-.utility-item {
+.utility-item-enhanced {
     background: rgba(0, 0, 0, 0.2);
     padding: 30px;
     border-radius: 15px;
@@ -764,7 +765,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.utility-item:hover {
+.utility-item-enhanced:hover {
     background: rgba(215, 51, 39, 0.1);
     border-color: rgba(240, 165, 0, 0.4);
     transform: translateY(-5px);
@@ -776,14 +777,14 @@ body {
     display: block;
 }
 
-.utility-item h4 {
+.utility-item-enhanced h4 {
     color: white;
     margin-bottom: 10px;
     font-size: 1.2rem;
     font-weight: 700;
 }
 
-.utility-item p {
+.utility-item-enhanced p {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
     font-size: 0.95rem;
@@ -2494,6 +2495,62 @@ body {
     box-shadow: 0 15px 35px rgba(74, 222, 128, 0.5);
 }
 
+/* Compliance Grid Styles */
+.compliance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.compliance-card {
+    background: rgba(240, 165, 0, 0.1);
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.compliance-card:hover {
+    transform: translateY(-5px);
+    background: rgba(240, 165, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
+}
+
+.compliance-card h3 {
+    color: #f0a500;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.compliance-card p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.compliance-card ul {
+    list-style: none;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.compliance-card li {
+    padding: 5px 0;
+    position: relative;
+    padding-left: 20px;
+}
+
+.compliance-card li span {
+    position: absolute;
+    left: 0;
+    color: #f0a500;
+}
+
 /* Footer */
 .footer {
     background: #0f0f0f;
@@ -2714,6 +2771,11 @@ body {
         width: clamp(25px, 4vw, 35px) !important;
         height: clamp(25px, 4vw, 35px) !important;
         opacity: 0.5 !important;
+    }
+
+    .compliance-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
 }
 
