@@ -16,11 +16,17 @@
             <div class="loading-text">Initializing AR $Ember Hunt...</div>
         </div>
 
-        <!-- Start Button -->
-        <button id="startBtn" class="start-button">
-            <span class="start-icon">🔥</span>
-            <span class="start-text">Start $Ember Hunt</span>
-            <span class="start-subtitle">Discover Hidden Crypto Tokens</span>
+        <!-- Welcome Button -->
+        <button id="welcomeBtn" class="welcome-button">
+            <span class="welcome-icon">
+                <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="welcome-flame-icon">
+            </span>
+            <span class="welcome-text">Welcome Back, Hunter!</span>
+            <span class="welcome-subtitle">Preparing Your Adventure</span>
+            <div class="welcome-loading-bar">
+                <div class="welcome-loading-fill" id="welcomeLoadingFill"></div>
+            </div>
+            <div class="welcome-loading-text" id="welcomeLoadingText">Loading Game...</div>
         </button>
         
         <!-- Base Content Layers -->
@@ -145,8 +151,8 @@
                     </div>
                 </div>
                 <div class="status-item">
-                    <div class="status-label">$Ember Tokens</div>
-                    <div class="status-value" id="emberCount">0 $Ember</div>
+                    <div class="status-label">Available Tokens</div>
+                    <div class="status-value" id="availableTokens">12 Available</div>
                 </div>
                 <div class="status-item">
                     <div class="status-label">Location</div>
