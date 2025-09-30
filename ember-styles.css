@@ -1,6 +1,6 @@
 /* Ember Token Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
-/* UPDATED: Added VPEmberCoin.PNG support and floating coins exactly like main.html */
+/* UPDATED: Added professional tokenomics and presale sections */
 
 /* EXACT COPY FROM WORKING MAIN.HTML - Navigation system */
 .navbar {
@@ -1070,16 +1070,50 @@ body {
     line-height: 1.6;
 }
 
-/* Tokenomics Section */
+/* Updated Professional Tokenomics Section */
 .tokenomics-section {
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
 }
 
 .tokenomics-content {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
+/* Token Overview Stats */
+.token-overview {
+    margin-bottom: 60px;
+}
+
+.overview-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.overview-stat {
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.3);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.stat-desc {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Token Distribution with Visual Chart */
 .token-distribution {
     margin-bottom: 60px;
 }
@@ -1088,121 +1122,212 @@ body {
     font-size: 1.8rem;
     font-weight: 800;
     color: #f0a500;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.distribution-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.distribution-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pie-chart {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #d73327 0deg 90deg,
+        #fb923c 90deg 162deg,
+        #f0a500 162deg 216deg,
+        #4ade80 216deg 270deg,
+        #3b82f6 270deg 306deg,
+        #8b5cf6 306deg 342deg,
+        #ef4444 342deg 360deg
+    );
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.pie-chart::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: #0f0f0f;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.distribution-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    background: rgba(240, 165, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(240, 165, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.legend-item:hover {
+    background: rgba(240, 165, 0, 0.15);
+    border-color: rgba(240, 165, 0, 0.4);
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.legend-info {
+    flex: 1;
+}
+
+.legend-label {
+    font-weight: 600;
+    color: white;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+.legend-value {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Professional Allocation Table */
+.allocation-table {
+    margin-bottom: 60px;
+}
+
+.allocation-table h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f0a500;
     margin-bottom: 30px;
     text-align: center;
 }
 
-.distribution-chart {
+.table-container {
+    overflow-x: auto;
     background: rgba(215, 51, 39, 0.1);
-    padding: 40px;
-    border-radius: 20px;
+    border-radius: 15px;
     border: 1px solid rgba(215, 51, 39, 0.2);
 }
 
-.chart-item {
-    margin-bottom: 15px;
+.tokenomics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
 }
 
-.chart-bar {
-    height: 50px;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    position: relative;
-    overflow: hidden;
+.tokenomics-table th,
+.tokenomics-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
 }
 
-.chart-label {
-    color: white;
+.tokenomics-table th {
+    background: rgba(240, 165, 0, 0.2);
+    color: #f0a500;
     font-weight: 700;
-    font-size: 1rem;
-    z-index: 10;
-    position: relative;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.tokenomics-details {
-    margin-bottom: 60px;
+.tokenomics-table td {
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.tokenomics-grid {
+.tokenomics-table tbody tr:hover {
+    background: rgba(240, 165, 0, 0.05);
+}
+
+.tokenomics-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Trust & Security Features */
+.trust-features {
+    text-align: center;
+}
+
+.trust-features h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 40px;
+}
+
+.trust-features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
 }
 
-.tokenomics-card {
+.trust-feature {
     background: rgba(240, 165, 0, 0.1);
     padding: 30px;
     border-radius: 20px;
     border: 1px solid rgba(240, 165, 0, 0.3);
-    backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
 
-.tokenomics-card:hover {
+.trust-feature:hover {
     transform: translateY(-5px);
     background: rgba(240, 165, 0, 0.15);
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
-.tokenomics-card h4 {
+.trust-feature .trust-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.trust-feature h4 {
     font-size: 1.3rem;
     font-weight: 800;
-    color: #f0a500;
+    color: white;
     margin-bottom: 15px;
 }
 
-.tokenomics-card p {
+.trust-feature p {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
 }
 
-.token-metrics {
-    text-align: center;
-}
-
-.token-metrics h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 30px;
-}
-
-.metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-}
-
-.metric-item {
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    padding: 30px;
-    border-radius: 20px;
-    color: white;
-    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.4);
-}
-
-.metric-value {
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 8px;
-}
-
-.metric-label {
-    font-size: 1rem;
-    font-weight: 600;
-    opacity: 0.95;
-}
-
-/* $Ember Token Sale Section */
+/* Updated Professional Presale Section */
 .presale-section {
     background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
 }
 
 .presale-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 400px;
     gap: 60px;
     align-items: start;
     margin-bottom: 80px;
@@ -1214,6 +1339,61 @@ body {
     gap: 40px;
 }
 
+/* Presale Key Metrics */
+.presale-metrics h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.metrics-grid-presale {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.metric-card {
+    background: rgba(215, 51, 39, 0.15);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    background: rgba(215, 51, 39, 0.2);
+    transform: translateY(-3px);
+}
+
+.metric-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #f0a500;
+    margin-bottom: 5px;
+}
+
+.metric-label {
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.metric-desc {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Countdown Timer */
 .presale-timer {
     background: rgba(215, 51, 39, 0.1);
     padding: 30px;
@@ -1255,6 +1435,7 @@ body {
     font-weight: 600;
 }
 
+/* Progress Bar */
 .presale-progress {
     background: rgba(215, 51, 39, 0.1);
     padding: 30px;
@@ -1292,59 +1473,62 @@ body {
     font-weight: 600;
 }
 
-.presale-bonus {
+/* Fund Usage Breakdown */
+.fund-usage {
     background: rgba(240, 165, 0, 0.1);
     padding: 30px;
     border-radius: 20px;
     border: 1px solid rgba(240, 165, 0, 0.3);
 }
 
-.presale-bonus h3 {
+.fund-usage h3 {
     font-size: 1.5rem;
     font-weight: 800;
     color: #f0a500;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: center;
 }
 
-.bonus-tiers {
+.usage-breakdown {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.bonus-tier {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+.usage-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
-.bonus-tier.active {
-    border-color: #f0a500;
-    background: rgba(240, 165, 0, 0.2);
-}
-
-.tier-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #f0a500;
-    margin-bottom: 5px;
-}
-
-.tier-bonus {
-    font-size: 1.3rem;
+.usage-percentage {
+    font-size: 1.8rem;
     font-weight: 900;
+    color: #f0a500;
+    min-width: 60px;
+    text-align: center;
+}
+
+.usage-details {
+    flex: 1;
+}
+
+.usage-title {
+    font-weight: 700;
     color: white;
     margin-bottom: 5px;
 }
 
-.tier-desc {
+.usage-desc {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
 }
 
+/* Presale Form/Calculator */
 .presale-form {
     position: sticky;
     top: 140px;
@@ -1408,10 +1592,6 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
-.result-line.bonus {
-    color: #f0a500;
-}
-
 .result-line.total {
     font-weight: 800;
     font-size: 1.1rem;
@@ -1422,6 +1602,44 @@ body {
     border-top: 2px solid rgba(240, 165, 0, 0.5);
 }
 
+/* Vesting Information */
+.vesting-info {
+    margin-bottom: 30px;
+}
+
+.vesting-info h4 {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.vesting-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.vesting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.vesting-percentage {
+    font-weight: 700;
+    color: #f0a500;
+}
+
+.vesting-time {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Payment Methods */
 .payment-methods {
     margin-bottom: 30px;
 }
@@ -1489,6 +1707,7 @@ body {
     margin-bottom: 5px;
 }
 
+/* Presale Benefits */
 .presale-benefits {
     margin-top: 80px;
 }
@@ -1540,6 +1759,115 @@ body {
 .benefit-item p {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
+}
+
+/* CTA Presale Section */
+.cta-presale-section {
+    background: linear-gradient(135deg, #d73327 0%, #fb923c 50%, #f0a500 100%);
+    text-align: center;
+}
+
+.cta-presale-content {
+    max-width: 800px;
+    margin: 0 auto;
+    color: white;
+}
+
+.cta-presale-icon {
+    font-size: 5rem;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+}
+
+.cta-presale-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.cta-presale-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    font-weight: 500;
+}
+
+.cta-presale-highlights {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.cta-highlight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px 20px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.highlight-icon {
+    font-size: 1.2rem;
+}
+
+.highlight-text {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.cta-presale-buttons {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.cta-presale-primary {
+    background: rgba(255, 255, 255, 0.95);
+    color: #d73327;
+    padding: 18px 40px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cta-presale-primary:hover {
+    background: white;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.cta-presale-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    padding: 16px 38px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.cta-presale-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    transform: translateY(-3px);
+}
+
+.cta-presale-disclaimer {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 500;
 }
 
 /* Footer */
@@ -1692,6 +2020,10 @@ body {
         color: #ffffff;
     }
 
+    .nav-links.mobile-active a::after {
+        display: none;
+    }
+
     .presale-content {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1704,6 +2036,39 @@ body {
     .how-it-works-grid {
         grid-template-columns: 1fr;
         gap: 30px;
+    }
+
+    .distribution-visual {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .pie-chart {
+        width: 250px;
+        height: 250px;
+    }
+
+    .metrics-grid-presale {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .cta-presale-highlights {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .cta-presale-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .cta-presale-primary,
+    .cta-presale-secondary {
+        width: 100%;
+        max-width: 300px;
     }
 
     /* Mobile hero adjustments */
@@ -1797,6 +2162,15 @@ body {
     .ember-token-icon-image {
         width: clamp(80px, 25vw, 120px);
         height: clamp(80px, 25vw, 120px);
+    }
+
+    .table-container {
+        font-size: 0.8rem;
+    }
+
+    .tokenomics-table th,
+    .tokenomics-table td {
+        padding: 10px 8px;
     }
 }
 
