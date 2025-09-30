@@ -22,14 +22,17 @@ body {
 
 /* LOGIN PAGE STYLES - MOBILE FIRST */
 
-/* Default mobile layout */
+/* Default mobile layout - Better vertical centering */
 body:not(.dashboard) {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: 8px;
+    padding: 20px 8px; /* Increased top/bottom padding */
     overflow-y: auto;
+    /* Add more space from top to prevent cutoff */
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 /* Floating Background Elements */
@@ -83,6 +86,8 @@ body:not(.dashboard) {
     transition: all 0.3s ease;
     color: white;
     margin: 0 auto;
+    /* Ensure container can expand for messages */
+    min-height: auto;
 }
 
 .login-container:hover {
@@ -94,7 +99,7 @@ body:not(.dashboard) {
 
 .logo-section {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px; /* More space after logo */
 }
 
 .app-logo {
@@ -147,7 +152,7 @@ body:not(.dashboard) {
     border: 2px solid rgba(240, 165, 0, 0.4);
     border-radius: 14px;
     padding: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 24px; /* More space after demo badge */
     text-align: center;
     font-size: 12px;
 }
@@ -184,7 +189,7 @@ body:not(.dashboard) {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin: 16px 0;
+    margin: 20px 0; /* More space around features */
     padding: 12px;
     background: rgba(240, 165, 0, 0.1);
     border-radius: 14px;
@@ -225,7 +230,7 @@ body:not(.dashboard) {
     box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
     position: relative;
     overflow: hidden;
-    margin-bottom: 16px;
+    margin-bottom: 20px; /* More space after button */
 }
 
 .login-button::before {
@@ -2396,7 +2401,7 @@ body.dashboard {
 
 /* Form Inputs for Login - Optimized for Mobile */
 .form-group {
-    margin-bottom: 16px;
+    margin-bottom: 18px; /* Slightly more space */
     position: relative;
 }
 
@@ -2427,6 +2432,7 @@ body.dashboard {
 
 .forgot-password {
     text-align: center;
+    margin-top: 16px; /* Add top margin */
 }
 
 .forgot-password a {
@@ -2442,36 +2448,53 @@ body.dashboard {
 }
 
 .error-message, .success-message {
-    padding: 12px 16px;
-    border-radius: 10px;
-    margin-bottom: 16px;
+    padding: 16px 20px; /* Increased padding */
+    border-radius: 12px; /* Larger border radius */
+    margin-bottom: 20px; /* Increased margin */
     text-align: center;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14px; /* Slightly larger font */
+    font-weight: 600; /* Bolder text */
     display: none;
     animation: slideIn 0.3s ease;
+    line-height: 1.4; /* Better line spacing */
+    word-wrap: break-word; /* Prevent text overflow */
+    min-height: 48px; /* Minimum height for messages */
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes slideIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(-12px) scale(0.95); /* Enhanced from: translateY(-8px) */
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
 }
 
 .error-message {
-    background: linear-gradient(135deg, rgba(244, 67, 54, 0.2), rgba(244, 67, 54, 0.1));
-    border: 1px solid rgba(244, 67, 54, 0.4);
-    color: #ff6b6b;
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.25), rgba(244, 67, 54, 0.15)); /* Enhanced opacity */
+    border: 2px solid rgba(244, 67, 54, 0.6); /* Changed from: border: 1px solid rgba(244, 67, 54, 0.4); */
+    color: #ef5350; /* Changed from: color: #ff6b6b; */
+    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.2); /* NEW - Add glow effect */
 }
 
 .success-message {
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1));
-    border: 1px solid rgba(76, 175, 80, 0.4);
-    color: #4CAF50;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.25), rgba(76, 175, 80, 0.15)); /* Enhanced opacity */
+    border: 2px solid rgba(76, 175, 80, 0.6); /* Changed from: border: 1px solid rgba(76, 175, 80, 0.4); */
+    color: #66bb6a; /* Changed from: color: #4CAF50; */
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2); /* NEW - Add glow effect */
 }
 
 .loading {
-    opacity: 0.7;
+    opacity: 0.8;
     pointer-events: none;
+}
+
+.loading .login-container {
+    transform: scale(1.01); /* Slight scale on loading */
 }
 
 .loading .login-button {
@@ -2491,17 +2514,46 @@ body.dashboard {
     margin-right: 8px;
 }
 
+/* NEW STATE CLASSES */
+.login-container.success {
+    border-color: rgba(76, 175, 80, 0.6);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 8px 20px rgba(76, 175, 80, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.login-container.error {
+    border-color: rgba(244, 67, 54, 0.6);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 8px 20px rgba(244, 67, 54, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
-    20%, 40%, 60%, 80% { transform: translateX(3px); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+    20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+/* ENSURE MESSAGES ARE VISIBLE */
+.error-message:not([style*="display: none"]),
+.success-message:not([style*="display: none"]) {
+    display: flex !important;
 }
 
 /* Mobile Responsive Adjustments */
 @media (max-width: 480px) {
+    body:not(.dashboard) {
+        padding: 24px 8px; /* More generous padding on mobile */
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+    
     .login-container {
         margin: 0 8px;
-        padding: 16px 16px 20px 16px;
+        padding: 18px 18px 22px 18px;
         max-width: none;
         border-radius: 16px;
     }
@@ -2518,11 +2570,11 @@ body.dashboard {
     
     .demo-badge {
         padding: 10px;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
     }
     
     .crypto-features {
-        margin: 12px 0;
+        margin: 16px 0;
         padding: 10px;
         gap: 6px;
     }
@@ -2538,7 +2590,7 @@ body.dashboard {
     }
     
     .form-group {
-        margin-bottom: 14px;
+        margin-bottom: 16px;
     }
     
     .form-input {
@@ -2548,6 +2600,14 @@ body.dashboard {
     .login-button {
         padding: 14px;
         font-size: 15px;
+        margin-bottom: 18px;
+    }
+    
+    .error-message, .success-message {
+        padding: 14px 16px;
+        font-size: 13px;
+        margin-bottom: 18px;
+        min-height: 44px;
     }
     
     .vault-container {
@@ -2636,13 +2696,19 @@ body.dashboard {
 }
 
 @media (max-height: 640px) {
+    body:not(.dashboard) {
+        padding: 16px 8px; /* Reduced padding for short screens */
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
     .login-container {
-        padding: 14px 16px 18px 16px;
+        padding: 16px 18px 20px 18px;
         margin: 6px 8px;
     }
     
     .logo-section {
-        margin-bottom: 16px;
+        margin-bottom: 18px;
     }
     
     .app-logo {
@@ -2656,17 +2722,28 @@ body.dashboard {
     }
     
     .demo-badge {
-        margin-bottom: 14px;
+        margin-bottom: 18px;
         padding: 8px 10px;
     }
     
     .crypto-features {
-        margin: 10px 0;
+        margin: 14px 0;
         padding: 8px;
     }
     
     .form-group {
-        margin-bottom: 12px;
+        margin-bottom: 14px;
+    }
+
+    .error-message, .success-message {
+        padding: 12px 14px;
+        font-size: 12px;
+        margin-bottom: 16px;
+        min-height: 40px;
+    }
+
+    .login-button {
+        margin-bottom: 16px;
     }
 
     .status-panel {
@@ -2687,6 +2764,44 @@ body.dashboard {
         min-height: 160px;
         min-width: 260px;
         padding: 24px 32px;
+    }
+}
+
+/* VERY SHORT SCREENS */
+@media (max-height: 580px) {
+    body:not(.dashboard) {
+        padding: 12px 8px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        justify-content: flex-start; /* Align to top instead of center */
+    }
+    
+    .login-container {
+        margin-top: 8px; /* Small top margin */
+    }
+    
+    .logo-section {
+        margin-bottom: 14px;
+    }
+    
+    .app-logo {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 8px;
+    }
+    
+    .app-title {
+        font-size: 20px;
+    }
+    
+    .demo-badge {
+        margin-bottom: 14px;
+        padding: 8px;
+    }
+    
+    .crypto-features {
+        margin: 10px 0;
+        padding: 8px;
     }
 }
 
