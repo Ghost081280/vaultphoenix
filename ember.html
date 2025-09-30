@@ -87,7 +87,7 @@
                 <div class="ember-stat-card-enhanced">
                     <div class="stat-icon">🚀</div>
                     <div class="stat-content">
-                        <div class="stat-number">Q2 2025</div>
+                        <div class="stat-number">Q4 2025</div>
                         <div class="stat-label">App Launch</div>
                     </div>
                 </div>
@@ -218,28 +218,39 @@
                 </div>
             </div>
 
-            <div class="value-proposition">
-                <h3>Token Utility & Ecosystem Connection</h3>
-                <div class="utility-grid">
-                    <div class="utility-item">
+            <!-- UPDATED: Enhanced Token Utility Section with 6 modules -->
+            <div class="value-proposition-enhanced">
+                <h3>$Ember Token Utility & Ecosystem Connection</h3>
+                <div class="utility-grid-enhanced">
+                    <div class="utility-item-enhanced">
                         <span class="utility-icon">🎮</span>
                         <h4>Platform Currency</h4>
                         <p>Platform Operators and Merchants <strong>purchase $Ember tokens</strong> to deploy campaigns and enhance visibility</p>
                     </div>
-                    <div class="utility-item">
+                    <div class="utility-item-enhanced">
+                        <span class="utility-icon">🛠️</span>
+                        <h4>SDK Integration Revenue</h4>
+                        <p>White-label apps and SDK licenses <strong>create ongoing demand</strong> through the management system for token purchases</p>
+                    </div>
+                    <div class="utility-item-enhanced">
                         <span class="utility-icon">🏪</span>
-                        <h4>Local Redemption</h4>
+                        <h4>Local Redemption Network</h4>
                         <p>Players <strong>collect tokens</strong> and redeem them at partner businesses for goods, services, or discounts</p>
                     </div>
-                    <div class="utility-item">
+                    <div class="utility-item-enhanced">
                         <span class="utility-icon">💰</span>
-                        <h4>Cash-Out Option</h4>
+                        <h4>Instant Cash-Out Option</h4>
                         <p>Players can also <strong>cash out tokens</strong> through Coinbase Wallet to bank accounts for real money</p>
                     </div>
-                    <div class="utility-item">
+                    <div class="utility-item-enhanced">
                         <span class="utility-icon">🔄</span>
-                        <h4>Circular Economy</h4>
-                        <p>Continuous demand cycle: Operators and Merchants buy tokens → Players collect → Redeem or cash out</p>
+                        <h4>Circular Token Economy</h4>
+                        <p>Continuous demand cycle: Operators/Merchants buy tokens → Players collect → Redeem or cash out → Repeat</p>
+                    </div>
+                    <div class="utility-item-enhanced">
+                        <span class="utility-icon">📈</span>
+                        <h4>Built-In Value Creation</h4>
+                        <p>Every campaign deployment and merchant partnership <strong>drives real utility</strong> and token demand growth</p>
                     </div>
                 </div>
             </div>
@@ -304,7 +315,7 @@
             
             <div class="roadmap-timeline">
                 <div class="roadmap-item active mainnet-phase">
-                    <div class="roadmap-quarter">Q2 2025</div>
+                    <div class="roadmap-quarter">Q4 2025</div>
                     <div class="roadmap-title">🔥 Platform Launch</div>
                     <div class="roadmap-status">ACTIVE</div>
                     <ul class="roadmap-tasks">
@@ -322,7 +333,7 @@
                 </div>
                 
                 <div class="roadmap-item upcoming expansion-phase">
-                    <div class="roadmap-quarter">Q3-Q4 2025</div>
+                    <div class="roadmap-quarter">Q1 2026</div>
                     <div class="roadmap-title">🚀 Distribution Expansion</div>
                     <div class="roadmap-status">UPCOMING</div>
                     <ul class="roadmap-tasks">
@@ -484,7 +495,7 @@
                         <div class="incentive-card">
                             <div class="incentive-icon">💎</div>
                             <h4>Built-In Demand Generation</h4>
-                            <p>Every white-label app sold creates <strong>ongoing token demand</strong>. Platform Operators and merchants must purchase $Ember tokens to deploy campaigns, creating constant buying pressure.</p>
+                            <p>White-label apps and SDK licenses <strong>create ongoing token demand</strong> through the management system. Platform Operators and merchants must purchase $Ember tokens constantly.</p>
                         </div>
                         <div class="incentive-card">
                             <div class="incentive-icon">📈</div>
@@ -831,11 +842,11 @@
                             </div>
                         </div>
 
-                        <!-- Token Purchase Agreement Section -->
+                        <!-- FIXED: Token Purchase Agreement Section -->
                         <div class="tpa-section">
                             <h4>📄 Token Purchase Agreement</h4>
                             <p class="tpa-instruction">Review our Token Purchase Agreement before proceeding with your investment.</p>
-                            <button class="tpa-download-button" onclick="showTpaModal()">
+                            <button class="tpa-download-button" onclick="window.showTpaModal()">
                                 📄 View & Download Agreement
                             </button>
                         </div>
@@ -858,7 +869,7 @@
                         
                         <div class="presale-note">
                             <p>⚠️ Minimum investment: $10 USD | Maximum: $50,000 USD</p>
-                            <p>🔒 Tokens distributed at TGE (Q2 2025)</p>
+                            <p>🔒 Tokens distributed at TGE (Q4 2025)</p>
                             <p>🛡️ Multi-sig security, KYC required for large purchases</p>
                         </div>
                     </div>
@@ -877,7 +888,7 @@
                     <div class="benefit-item">
                         <span class="benefit-icon">🎮</span>
                         <h4>Built-In Demand</h4>
-                        <p>Every white-label app sold creates ongoing token demand through management system</p>
+                        <p>White-label apps and SDK licenses create ongoing token demand through management system</p>
                     </div>
                     <div class="benefit-item">
                         <span class="benefit-icon">💰</span>
@@ -1187,33 +1198,36 @@
         </div>
     </footer>
 
-    <!-- TPA Modal -->
+    <!-- FIXED: TPA Modal with proper functionality -->
     <div id="tpaModal" class="tpa-modal" style="display: none;">
-        <div class="tpa-modal-overlay" onclick="closeTpaModal()"></div>
+        <div class="tpa-modal-overlay" onclick="window.closeTpaModal()"></div>
         <div class="tpa-modal-content">
             <div class="tpa-modal-header">
-                <h3>Token Purchase Agreement</h3>
-                <button class="tpa-modal-close" onclick="closeTpaModal()">×</button>
+                <h3>📄 Token Purchase Agreement</h3>
+                <button class="tpa-modal-close" onclick="window.closeTpaModal()">×</button>
             </div>
             <div class="tpa-modal-body">
                 <div class="tpa-preview">
-                    <h4>📄 Token Purchase Agreement Preview</h4>
+                    <h4>Token Purchase Agreement Preview</h4>
                     <p>This Token Purchase Agreement governs your participation in the $Ember Token presale. Key terms include:</p>
                     <ul>
-                        <li>Token utility and platform integration requirements</li>
-                        <li>Vesting schedule and distribution timeline</li>
-                        <li>Risk disclosures and investment limitations</li>
-                        <li>Regulatory compliance and KYC requirements</li>
-                        <li>Platform governance and token economics</li>
+                        <li><strong>Token Utility:</strong> $Ember tokens are utility tokens for the Vault Phoenix AR gaming platform</li>
+                        <li><strong>Vesting Schedule:</strong> 10% at Token Generation Event (TGE), 90% linear vesting over 3 months</li>
+                        <li><strong>Investment Limits:</strong> Minimum $10 USD, Maximum $50,000 USD per participant</li>
+                        <li><strong>KYC Requirements:</strong> Identity verification required for purchases over $1,000</li>
+                        <li><strong>Risk Disclosures:</strong> Comprehensive risk factors and investment warnings</li>
+                        <li><strong>Regulatory Compliance:</strong> Full legal and financial oversight procedures</li>
+                        <li><strong>Platform Integration:</strong> Token requirements for campaign deployment and merchant participation</li>
+                        <li><strong>Redemption Rights:</strong> Dual redemption system (merchant locations or Coinbase wallet cash-out)</li>
                     </ul>
-                    <p><strong>Important:</strong> Please review the complete agreement before proceeding with your investment.</p>
+                    <p><strong>Important:</strong> Please review the complete agreement before proceeding with your investment. This document contains critical legal terms and risk disclosures.</p>
                 </div>
                 <div class="tpa-modal-actions">
                     <a href="docs/Token_Purchase_Agreement_Vault_Phoenix.pdf" target="_blank" class="tpa-download-btn">
                         📄 Download Full Agreement (PDF)
                     </a>
-                    <button class="tpa-agree-btn" onclick="agreeTpa()">
-                        ✓ I Have Read and Agree
+                    <button class="tpa-agree-btn" onclick="window.agreeTpa()">
+                        ✓ I Have Read and Agree to Terms
                     </button>
                 </div>
             </div>
@@ -1221,5 +1235,41 @@
     </div>
 
     <script src="ember-script.js"></script>
+
+    <script>
+    // FIXED: TPA Modal Functions - Global scope
+    window.showTpaModal = function() {
+        document.getElementById('tpaModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeTpaModal = function() {
+        document.getElementById('tpaModal').style.display = 'none';
+        document.body.style.overflow = '';
+    };
+
+    window.agreeTpa = function() {
+        const checkbox = document.getElementById('tpa-agree-checkbox');
+        const presaleButton = document.getElementById('presale-buy-button');
+        
+        if (checkbox && presaleButton) {
+            checkbox.checked = true;
+            presaleButton.disabled = false;
+            presaleButton.style.opacity = '1';
+        }
+        
+        window.closeTpaModal();
+        
+        // Show confirmation
+        alert('✅ Thank you for agreeing to the Token Purchase Agreement. You can now proceed with your investment.');
+    };
+
+    // Close modal on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            window.closeTpaModal();
+        }
+    });
+    </script>
 </body>
 </html>
