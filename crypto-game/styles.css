@@ -1,4 +1,4 @@
-/* Vault Phoenix AR Crypto Gaming - Complete Styles */
+/* Vault Phoenix AR Crypto Gaming - Fixed Complete Styles */
 
 * {
     margin: 0;
@@ -9,13 +9,17 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: #000;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
     overflow: hidden;
     -webkit-user-select: none;
     user-select: none;
     position: relative;
     width: 100vw;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 /* LOGIN PAGE STYLES */
@@ -65,13 +69,11 @@ body {
     max-width: 380px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
-    margin: 20px auto;
-    top: 50%;
-    transform: translateY(-50%);
+    margin: 20px;
 }
 
 .login-container:hover {
-    transform: translateY(-50%) translateY(-3px);
+    transform: translateY(-3px);
     box-shadow: 
         0 25px 70px rgba(0, 0, 0, 0.4),
         0 12px 25px rgba(0, 0, 0, 0.3);
@@ -310,7 +312,37 @@ body {
     transform: none;
 }
 
+/* Loading Spinner */
+.loading-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+    20%, 40%, 60%, 80% { transform: translateX(3px); }
+}
+
 /* DASHBOARD PAGE STYLES */
+
+/* Dashboard overrides for body */
+body.dashboard {
+    display: block;
+    background: #000;
+    min-height: auto;
+    overflow: hidden;
+}
 
 #container {
     position: relative;
@@ -1887,10 +1919,6 @@ body {
     animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
 .loading-text {
     font-weight: 600;
     text-align: center;
@@ -1904,8 +1932,6 @@ body {
         max-width: 100%;
         margin: 16px;
         padding: 24px 20px;
-        top: 50%;
-        transform: translateY(-50%);
     }
     
     .app-logo {
@@ -2009,20 +2035,4 @@ body {
 .token-history-item {
     contain: layout style paint;
     touch-action: manipulation;
-}
-
-/* Login page centering for all screen sizes */
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
-}
-
-/* Dashboard overrides for body */
-body.dashboard {
-    display: block;
-    background: #000;
-    min-height: auto;
 }
