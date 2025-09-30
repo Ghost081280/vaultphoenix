@@ -13,11 +13,15 @@
         <!-- Loading Overlay -->
         <div class="loading-overlay" id="loadingOverlay">
             <div class="loading-spinner"></div>
-            <div class="loading-text">Initializing AR Crypto Hunt...</div>
+            <div class="loading-text">Initializing AR $Ember Hunt...</div>
         </div>
 
         <!-- Start Button -->
-        <button id="startBtn" class="start-button">🔥 Start Hunt</button>
+        <button id="startBtn" class="start-button">
+            <span class="start-icon">🔥</span>
+            <span class="start-text">Start $Ember Hunt</span>
+            <span class="start-subtitle">Discover Hidden Crypto Tokens</span>
+        </button>
         
         <!-- Base Content Layers -->
         <div id="map"></div>
@@ -27,6 +31,18 @@
         <!-- AR Ember Coin -->
         <div class="ar-ember-coin" id="arEmberCoin">
             <div class="ember-coin-icon"></div>
+        </div>
+
+        <!-- Proximity Notification -->
+        <div class="proximity-notification" id="proximityNotification">
+            <div class="proximity-icon">
+                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin">
+            </div>
+            <div class="proximity-content">
+                <div class="proximity-title">$Ember Token Detected!</div>
+                <div class="proximity-subtitle">Switch to AR Mode to collect</div>
+            </div>
+            <button class="proximity-button" id="proximityARButton">Open AR</button>
         </div>
         
         <!-- Navigation -->
@@ -84,13 +100,13 @@
                 </div>
                 
                 <div class="menu-section">
-                    <div class="menu-section-title">Campaigns</div>
+                    <div class="menu-section-title">Adventures</div>
                 </div>
                 
-                <div class="menu-item" data-mode="leaderboard">
+                <div class="menu-item" data-mode="campaigns">
                     <div class="menu-item-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')"></div>
-                    <div class="menu-item-text">Campaign Ranks</div>
-                    <div class="menu-item-badge">Top 10</div>
+                    <div class="menu-item-text">Themed Adventures</div>
+                    <div class="menu-item-badge">3 Active</div>
                 </div>
                 
                 <div class="menu-section">
@@ -155,44 +171,80 @@
         <!-- AR Instructions -->
         <div class="ar-instructions" id="arInstructions">
             <div class="ar-instructions-title">🔥 AR Hunt Mode</div>
-            <div class="ar-instructions-text">Point your camera around and tap the glowing Ember coin to discover $Ember tokens!</div>
+            <div class="ar-instructions-text">Point your camera around and tap the glowing $Ember coin to discover tokens!</div>
         </div>
         
         <!-- Token Discovery Modal -->
         <div class="token-discovery" id="tokenDiscovery">
-            <div class="token-discovery-header">
-                <div class="token-found-title">
-                    <div class="token-found-icon"></div>
-                    <span>$Ember Token Found!</span>
+            <div class="token-discovery-content">
+                <div class="token-discovery-header">
+                    <div class="token-found-title">
+                        <div class="token-found-icon"></div>
+                        <span>$Ember Token Found!</span>
+                    </div>
+                    <div class="token-amount-badge" id="tokenAmountBadge">500 $Ember</div>
                 </div>
-                <div class="token-rarity" id="tokenRarity">Legendary</div>
-            </div>
-            
-            <div class="sponsor-message">
-                <div class="sponsor-title">Sponsored by Phoenix Suns Arena</div>
-                <div class="sponsor-text">Exclusive courtside experience awaits!</div>
-            </div>
-            
-            <div class="token-preview">
-                <div class="token-image">
-                    <div class="token-value" id="discoveredTokenValue">500</div>
+                
+                <div class="sponsor-info-front" id="sponsorInfoFront">
+                    <div class="sponsor-message">
+                        <div class="sponsor-title">Sponsored by Phoenix Suns Arena</div>
+                        <div class="sponsor-text">Exclusive courtside experience awaits!</div>
+                    </div>
+                    
+                    <div class="token-preview">
+                        <div class="token-image">
+                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="token-coin-img">
+                        </div>
+                        <div class="token-details">
+                            <div class="token-amount" id="discoveredTokenAmount">500 $Ember</div>
+                            <div class="token-usd-value" id="discoveredTokenUSD">~$0.50 USD</div>
+                            <div class="token-location" id="discoveredTokenLocation">Downtown Phoenix</div>
+                        </div>
+                    </div>
+                    
+                    <div class="token-actions">
+                        <button class="token-action-btn" id="collectTokenBtn">
+                            <span>💎</span>
+                            <span>Collect $Ember</span>
+                        </button>
+                        <button class="token-action-btn secondary" id="sponsorInfoBtn">
+                            <span>ℹ️</span>
+                            <span>Learn More</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="token-details">
-                    <div class="token-amount" id="discoveredTokenAmount">500 $Ember</div>
-                    <div class="token-usd-value" id="discoveredTokenUSD">~$0.50 USD</div>
-                    <div class="token-location" id="discoveredTokenLocation">Downtown Phoenix</div>
+
+                <div class="sponsor-info-back" id="sponsorInfoBack">
+                    <div class="sponsor-details">
+                        <div class="sponsor-logo">
+                            <div class="sponsor-logo-placeholder">🏀</div>
+                        </div>
+                        <div class="sponsor-name" id="sponsorDetailsName">Phoenix Suns Arena</div>
+                        <div class="sponsor-description" id="sponsorDetailsDescription">
+                            Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours. Your $Ember tokens unlock premium experiences at Phoenix's premier entertainment destination.
+                        </div>
+                        
+                        <div class="sponsor-offers">
+                            <div class="offer-item">
+                                <span class="offer-icon">🎫</span>
+                                <span>Game Tickets</span>
+                            </div>
+                            <div class="offer-item">
+                                <span class="offer-icon">🍽️</span>
+                                <span>VIP Dining</span>
+                            </div>
+                            <div class="offer-item">
+                                <span class="offer-icon">🎯</span>
+                                <span>Arena Tours</span>
+                            </div>
+                        </div>
+                        
+                        <button class="sponsor-back-btn" id="sponsorBackBtn">
+                            <span>⬅️</span>
+                            <span>Back to Token</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="token-actions">
-                <button class="token-action-btn" id="collectTokenBtn">
-                    <span>💎</span>
-                    <span>Collect Token</span>
-                </button>
-                <button class="token-action-btn secondary" id="skipTokenBtn">
-                    <span>⏭️</span>
-                    <span>Skip</span>
-                </button>
             </div>
         </div>
         
@@ -221,36 +273,118 @@
                     </button>
                 </div>
 
-                <div class="campaign-section">
-                    <div class="campaign-title">
+                <div class="vault-stats-section">
+                    <div class="vault-stats-title">
                         <div class="vault-title-icon"></div>
-                        Active Campaigns
+                        Transaction History
                     </div>
-                    <div class="campaign-list">
-                        <div class="campaign-item">
-                            <div class="campaign-name">Phoenix Suns Season</div>
-                            <div class="campaign-reward">+50% tokens</div>
+                    <div class="vault-stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalCollected">0</div>
+                            <div class="stat-label">Tokens Collected</div>
                         </div>
-                        <div class="campaign-item">
-                            <div class="campaign-name">Desert Adventures</div>
-                            <div class="campaign-reward">Free gear</div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="locationsVisited">0</div>
+                            <div class="stat-label">Locations Visited</div>
                         </div>
-                        <div class="campaign-item">
-                            <div class="campaign-name">Local Business Boost</div>
-                            <div class="campaign-reward">2x rewards</div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalValue">$0.00</div>
+                            <div class="stat-label">Total Value</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="lastActivity">Never</div>
+                            <div class="stat-label">Last Activity</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="vault-filters">
                     <button class="filter-btn active" data-filter="all">All Tokens</button>
-                    <button class="filter-btn" data-filter="legendary">Legendary</button>
-                    <button class="filter-btn" data-filter="rare">Rare</button>
-                    <button class="filter-btn" data-filter="common">Common</button>
+                    <button class="filter-btn" data-filter="high">High Value</button>
+                    <button class="filter-btn" data-filter="medium">Medium Value</button>
+                    <button class="filter-btn" data-filter="low">Low Value</button>
                 </div>
                 
                 <div class="token-history" id="tokenHistory">
                     <!-- Token history will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Themed Adventures View -->
+        <div class="campaigns-view" id="campaignsView">
+            <div class="campaigns-container">
+                <div class="campaigns-header">
+                    <div class="campaigns-title">
+                        <div class="campaigns-title-icon"></div>
+                        Themed Adventures
+                    </div>
+                    <div class="campaigns-subtitle">Curated $Ember token experiences around Phoenix</div>
+                </div>
+
+                <div class="active-adventures">
+                    <div class="adventure-card active-adventure" data-adventure="phoenix-sports">
+                        <div class="adventure-header">
+                            <div class="adventure-icon">🏀</div>
+                            <div class="adventure-info">
+                                <div class="adventure-name">Phoenix Sports Trail</div>
+                                <div class="adventure-description">Follow the championship path</div>
+                            </div>
+                            <div class="adventure-status active">ACTIVE</div>
+                        </div>
+                        <div class="adventure-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                            <div class="progress-text">3 of 5 locations visited</div>
+                        </div>
+                        <div class="adventure-rewards">
+                            <span class="reward-badge">+50% $Ember Bonus</span>
+                            <span class="reward-badge">VIP Access</span>
+                        </div>
+                    </div>
+
+                    <div class="adventure-card" data-adventure="desert-discovery">
+                        <div class="adventure-header">
+                            <div class="adventure-icon">🌵</div>
+                            <div class="adventure-info">
+                                <div class="adventure-name">Desert Discovery</div>
+                                <div class="adventure-description">Explore Arizona's natural wonders</div>
+                            </div>
+                            <div class="adventure-status">AVAILABLE</div>
+                        </div>
+                        <div class="adventure-details">
+                            <div class="adventure-locations">5 unique desert locations</div>
+                            <div class="adventure-reward-preview">Exclusive outdoor gear rewards</div>
+                        </div>
+                        <button class="adventure-start-btn">Start Adventure</button>
+                    </div>
+
+                    <div class="adventure-card" data-adventure="foodie-trail">
+                        <div class="adventure-header">
+                            <div class="adventure-icon">🍴</div>
+                            <div class="adventure-info">
+                                <div class="adventure-name">Foodie Trail</div>
+                                <div class="adventure-description">Taste Phoenix's culinary scene</div>
+                            </div>
+                            <div class="adventure-status">AVAILABLE</div>
+                        </div>
+                        <div class="adventure-details">
+                            <div class="adventure-locations">8 top restaurants & cafes</div>
+                            <div class="adventure-reward-preview">Dining discounts & free meals</div>
+                        </div>
+                        <button class="adventure-start-btn">Start Adventure</button>
+                    </div>
+                </div>
+
+                <div class="adventure-map-preview">
+                    <div class="map-preview-title">Adventure Locations</div>
+                    <div class="adventure-mini-map" id="adventureMiniMap">
+                        <div class="map-placeholder">
+                            <div class="map-icon">🗺️</div>
+                            <div class="map-text">Interactive adventure map</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -264,7 +398,7 @@
                         <span>Navigate to Token</span>
                     </div>
                     <div class="navigation-coin-info">
-                        <div class="navigation-coin-value" id="navPlayerName">500 $Ember Token</div>
+                        <div class="navigation-coin-value" id="navTokenName">500 $Ember Token</div>
                         <div class="navigation-distance" id="navDistance">~1.2km away</div>
                     </div>
                 </div>
@@ -363,9 +497,9 @@
                     <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixSafe.PNG')"></div>
                     <div class="nav-tab-label">Vault</div>
                 </div>
-                <div class="nav-tab" data-mode="leaderboard">
+                <div class="nav-tab" data-mode="campaigns">
                     <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')"></div>
-                    <div class="nav-tab-label">Campaigns</div>
+                    <div class="nav-tab-label">Adventures</div>
                 </div>
             </div>
         </nav>
