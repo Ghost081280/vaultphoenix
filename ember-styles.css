@@ -1,6 +1,6 @@
 /* Ember Token Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
-/* UPDATED: Added professional tokenomics and presale sections */
+/* UPDATED: Added TPA compliance styling and professional tokenomics */
 
 /* EXACT COPY FROM WORKING MAIN.HTML - Navigation system */
 .navbar {
@@ -1677,6 +1677,124 @@ body {
     display: block;
 }
 
+/* Token Purchase Agreement Section */
+.tpa-section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(240, 165, 0, 0.1);
+    border-radius: 15px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+.tpa-section h4 {
+    color: #f0a500;
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.tpa-instruction {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.tpa-download-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(240, 165, 0, 0.3);
+}
+
+.tpa-download-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(240, 165, 0, 0.4);
+    background: linear-gradient(135deg, #fb923c, #f0a500);
+}
+
+/* TPA Compliance Checkbox */
+.tpa-compliance {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(215, 51, 39, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(215, 51, 39, 0.3);
+}
+
+.tpa-checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    position: relative;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.tpa-checkbox {
+    display: none;
+}
+
+.tpa-checkmark {
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(240, 165, 0, 0.5);
+    border-radius: 4px;
+    position: relative;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: all 0.3s ease;
+}
+
+.tpa-checkmark::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tpa-checkbox:checked + .tpa-checkmark {
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    border-color: #f0a500;
+}
+
+.tpa-checkbox:checked + .tpa-checkmark::after {
+    opacity: 1;
+}
+
+.tpa-checkbox-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+
+.tpa-compliance-note {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.tpa-compliance-note p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-style: italic;
+}
+
 .presale-button {
     width: 100%;
     background: linear-gradient(135deg, #d73327, #fb923c);
@@ -1692,9 +1810,21 @@ body {
     margin-bottom: 20px;
 }
 
-.presale-button:hover {
+.presale-button:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
+}
+
+.presale-button:disabled {
+    background: rgba(128, 128, 128, 0.5);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.presale-button:disabled:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 .presale-note {
