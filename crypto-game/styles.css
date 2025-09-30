@@ -28,7 +28,8 @@ body:not(.dashboard) {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: 16px;
+    padding: 8px;
+    overflow-y: auto;
 }
 
 /* Floating Background Elements */
@@ -70,14 +71,14 @@ body:not(.dashboard) {
     z-index: 10;
     background: rgba(20, 20, 20, 0.95);
     backdrop-filter: blur(30px);
-    border-radius: 24px;
-    padding: 32px 28px;
+    border-radius: 20px;
+    padding: 20px 20px 24px 20px;
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.5),
         0 8px 20px rgba(240, 165, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     width: 100%;
-    max-width: 380px;
+    max-width: 340px;
     border: 1px solid rgba(240, 165, 0, 0.3);
     transition: all 0.3s ease;
     color: white;
@@ -85,7 +86,7 @@ body:not(.dashboard) {
 }
 
 .login-container:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: 
         0 25px 70px rgba(0, 0, 0, 0.6),
         0 12px 25px rgba(240, 165, 0, 0.3);
@@ -93,15 +94,15 @@ body:not(.dashboard) {
 
 .logo-section {
     text-align: center;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
 }
 
 .app-logo {
-    width: 80px;
-    height: 80px;
+    width: 64px;
+    height: 64px;
     background: url('../images/VPLogoNoText.PNG') center/cover;
-    border-radius: 20px;
-    margin: 0 auto 16px;
+    border-radius: 16px;
+    margin: 0 auto 12px;
     box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
     position: relative;
     overflow: hidden;
@@ -125,7 +126,7 @@ body:not(.dashboard) {
 }
 
 .app-title {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 800;
     background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
     -webkit-background-clip: text;
@@ -136,7 +137,7 @@ body:not(.dashboard) {
 }
 
 .app-subtitle {
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
 }
@@ -144,11 +145,11 @@ body:not(.dashboard) {
 .demo-badge {
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(215, 51, 39, 0.1));
     border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 24px;
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 20px;
     text-align: center;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .demo-badge-title {
@@ -159,12 +160,12 @@ body:not(.dashboard) {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .demo-badge-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     background: url('../images/VPEmberCoin.PNG') center/cover;
     border-radius: 50%;
 }
@@ -172,36 +173,36 @@ body:not(.dashboard) {
 .demo-credentials {
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.3;
     background: rgba(0, 0, 0, 0.3);
-    padding: 8px;
+    padding: 6px;
     border-radius: 8px;
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 .crypto-features {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin: 20px 0;
-    padding: 16px;
+    gap: 8px;
+    margin: 16px 0;
+    padding: 12px;
     background: rgba(240, 165, 0, 0.1);
-    border-radius: 16px;
+    border-radius: 14px;
     border: 1px solid rgba(240, 165, 0, 0.2);
 }
 
 .feature-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 14px;
+    gap: 10px;
+    font-size: 13px;
     color: white;
     font-weight: 600;
 }
 
 .feature-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     background: url('../images/VPEmberCoin.PNG') center/cover;
     border-radius: 50%;
     flex-shrink: 0;
@@ -257,7 +258,7 @@ body.dashboard {
     z-index: 1;
 }
 
-/* AR Ember Coin */
+/* AR Ember Coin - Removed background box */
 .ar-ember-coin {
     position: absolute;
     top: 50%;
@@ -305,6 +306,80 @@ body.dashboard {
         box-shadow: 0 0 0 25px rgba(240, 165, 0, 0);
         filter: drop-shadow(0 6px 20px rgba(240, 165, 0, 0.6)) drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
     }
+}
+
+/* Proximity Notification */
+.proximity-notification {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 8px) + 220px);
+    left: 12px;
+    right: 12px;
+    z-index: 170;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.95), rgba(251, 146, 60, 0.95));
+    border: 2px solid rgba(240, 165, 0, 0.8);
+    border-radius: 16px;
+    padding: 16px;
+    color: white;
+    display: none;
+    transform: translateY(-100%);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
+    backdrop-filter: blur(20px);
+}
+
+.proximity-notification.show {
+    display: flex;
+    transform: translateY(0);
+    animation: proximityPulse 2s ease-in-out infinite;
+}
+
+@keyframes proximityPulse {
+    0%, 100% { box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4); }
+    50% { box-shadow: 0 8px 35px rgba(240, 165, 0, 0.7); }
+}
+
+.proximity-notification {
+    align-items: center;
+    gap: 12px;
+}
+
+.proximity-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.proximity-content {
+    flex: 1;
+}
+
+.proximity-title {
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.proximity-subtitle {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.proximity-button {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: 2px solid white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.proximity-button:active {
+    transform: scale(0.95);
+    background: rgba(0, 0, 0, 0.9);
 }
 
 /* Navigation Bar */
@@ -797,7 +872,7 @@ body.dashboard {
     line-height: 1.5;
 }
 
-/* Token Discovery Modal */
+/* Token Discovery Modal - Redesigned */
 .token-discovery {
     position: fixed;
     bottom: calc(env(safe-area-inset-bottom, 12px) + 84px);
@@ -808,7 +883,7 @@ body.dashboard {
     backdrop-filter: blur(30px);
     border: 3px solid #f0a500;
     border-radius: 20px;
-    padding: 24px;
+    padding: 0;
     color: white;
     display: none;
     transform: translateY(100%);
@@ -817,7 +892,7 @@ body.dashboard {
         0 20px 60px rgba(0, 0, 0, 0.7),
         0 0 0 1px rgba(240, 165, 0, 0.2);
     max-height: calc(100vh - env(safe-area-inset-bottom, 12px) - 96px - env(safe-area-inset-top, 8px) - 160px);
-    overflow-y: auto;
+    overflow: hidden;
 }
 
 .token-discovery.show {
@@ -825,16 +900,23 @@ body.dashboard {
     transform: translateY(0);
 }
 
+.token-discovery-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 .token-discovery-header {
     text-align: center;
-    margin-bottom: 20px;
+    padding: 20px 24px 16px 24px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
 }
 
 .token-found-title {
     font-size: 20px;
     font-weight: 800;
     color: #f0a500;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     letter-spacing: -0.3px;
     display: flex;
     align-items: center;
@@ -849,16 +931,53 @@ body.dashboard {
     border-radius: 50%;
 }
 
-.token-rarity {
+.token-amount-badge {
     background: linear-gradient(45deg, #FFD700, #FFA500);
     color: #000;
-    padding: 6px 12px;
-    border-radius: 12px;
-    font-size: 12px;
+    padding: 8px 16px;
+    border-radius: 16px;
+    font-size: 14px;
     font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
     display: inline-block;
+}
+
+.sponsor-info-front,
+.sponsor-info-back {
+    padding: 24px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sponsor-info-back {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(26, 26, 46, 0.95));
+    border-radius: 17px;
+}
+
+.sponsor-message {
+    background: rgba(240, 165, 0, 0.1);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.sponsor-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #f0a500;
+    margin-bottom: 4px;
+}
+
+.sponsor-text {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
 }
 
 .token-preview {
@@ -869,49 +988,25 @@ body.dashboard {
 }
 
 .token-image {
-    width: 90px;
-    height: 90px;
-    background: url('../images/VPEmberCoin.PNG') center/cover;
-    border-radius: 50%;
+    width: 80px;
+    height: 80px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
     border: 3px solid #FFD700;
     position: relative;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(240, 165, 0, 0.5);
     flex-shrink: 0;
+    background: rgba(240, 165, 0, 0.1);
 }
 
-.token-image::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    animation: tokenShimmer 2s ease-in-out infinite;
-}
-
-@keyframes tokenShimmer {
-    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-    50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-    100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-}
-
-.token-value {
-    position: absolute;
-    bottom: -5px;
-    right: -5px;
-    background: rgba(0, 0, 0, 0.9);
-    color: #f0a500;
-    padding: 4px 8px;
-    border-radius: 8px;
-    font-size: 10px;
-    font-weight: 800;
-    border: 2px solid rgba(240, 165, 0, 0.5);
+.token-coin-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .token-details {
@@ -942,28 +1037,6 @@ body.dashboard {
     font-weight: 600;
     display: inline-block;
     border: 1px solid rgba(240, 165, 0, 0.3);
-}
-
-.sponsor-message {
-    background: rgba(240, 165, 0, 0.1);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    border-radius: 12px;
-    padding: 12px;
-    margin-bottom: 16px;
-    text-align: center;
-}
-
-.sponsor-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: #f0a500;
-    margin-bottom: 4px;
-}
-
-.sponsor-text {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.4;
 }
 
 .token-actions {
@@ -998,6 +1071,97 @@ body.dashboard {
 .token-action-btn.secondary {
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Sponsor Details Back View */
+.sponsor-details {
+    padding: 20px 0;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sponsor-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    background: rgba(240, 165, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(240, 165, 0, 0.5);
+}
+
+.sponsor-logo-placeholder {
+    font-size: 32px;
+}
+
+.sponsor-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 12px;
+}
+
+.sponsor-description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 20px;
+}
+
+.sponsor-offers {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.offer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: rgba(240, 165, 0, 0.1);
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    min-width: 80px;
+}
+
+.offer-icon {
+    font-size: 20px;
+}
+
+.offer-item span:last-child {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.sponsor-back-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto;
+}
+
+.sponsor-back-btn:active {
+    transform: scale(0.98);
 }
 
 /* $Ember Vault View */
@@ -1124,6 +1288,51 @@ body.dashboard {
     font-size: 18px;
 }
 
+/* Vault Stats Section */
+.vault-stats-section {
+    margin: 20px 0;
+    padding: 16px;
+    background: rgba(240, 165, 0, 0.1);
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 16px;
+}
+
+.vault-stats-title {
+    color: #f0a500;
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vault-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.stat-item {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.stat-value {
+    color: #f0a500;
+    font-weight: 800;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    font-weight: 600;
+}
+
 .vault-filters {
     display: flex;
     gap: 8px;
@@ -1212,50 +1421,238 @@ body.dashboard {
     text-align: right;
 }
 
-/* Campaign Integration */
-.campaign-section {
-    margin: 20px 0;
-    padding: 16px;
+/* Themed Adventures View */
+.campaigns-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 160;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
+    display: none;
+    overflow-y: auto;
+    padding: calc(env(safe-area-inset-top, 8px) + 72px) 0 calc(env(safe-area-inset-bottom, 12px) + 84px) 0;
+}
+
+.campaigns-container {
+    padding: 0 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.campaigns-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 24px;
+    background: rgba(240, 165, 0, 0.15);
+    border-radius: 20px;
+    border: 2px solid rgba(240, 165, 0, 0.3);
+}
+
+.campaigns-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.campaigns-title-icon {
+    width: 32px;
+    height: 32px;
+    background: url('../images/PhoenixGoldTrophy.PNG') center/cover;
+}
+
+.campaigns-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.active-adventures {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.adventure-card {
     background: rgba(240, 165, 0, 0.1);
     border: 2px solid rgba(240, 165, 0, 0.3);
     border-radius: 16px;
+    padding: 20px;
+    transition: all 0.3s ease;
 }
 
-.campaign-title {
-    color: #f0a500;
+.adventure-card.active-adventure {
+    background: rgba(240, 165, 0, 0.2);
+    border-color: rgba(240, 165, 0, 0.5);
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.2);
+}
+
+.adventure-card:active {
+    transform: scale(0.98);
+}
+
+.adventure-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.adventure-icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    background: rgba(240, 165, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(240, 165, 0, 0.5);
+}
+
+.adventure-info {
+    flex: 1;
+}
+
+.adventure-name {
+    color: white;
     font-weight: 800;
     font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.adventure-description {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+}
+
+.adventure-status {
+    background: rgba(76, 175, 80, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.adventure-status:not(.active) {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.adventure-progress {
     margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
-.campaign-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
 }
 
-.campaign-item {
-    background: rgba(0, 0, 0, 0.3);
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f0a500, #fb923c);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.adventure-rewards {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.reward-badge {
+    background: rgba(240, 165, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.adventure-details {
+    margin-bottom: 12px;
+}
+
+.adventure-locations,
+.adventure-reward-preview {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.adventure-start-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: white;
+    border: none;
     padding: 12px;
     border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.campaign-name {
-    color: white;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.campaign-reward {
+.adventure-start-btn:active {
+    transform: scale(0.98);
+}
+
+.adventure-map-preview {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(240, 165, 0, 0.2);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.map-preview-title {
     color: #f0a500;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.adventure-mini-map {
+    height: 120px;
+    background: rgba(240, 165, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-placeholder {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.map-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.map-text {
+    font-size: 12px;
+    font-weight: 600;
 }
 
 /* QR Modal */
@@ -1450,32 +1847,69 @@ body.dashboard {
     color: #f0a500;
 }
 
-/* Start Button */
+/* Enhanced Start Button */
 .start-button {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 250;
-    background: linear-gradient(135deg, #f0a500, #fb923c);
+    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
     color: white;
     border: none;
-    padding: 20px 40px;
-    font-size: 18px;
+    padding: 24px 32px;
+    font-size: 16px;
     font-weight: 800;
-    border-radius: 20px;
+    border-radius: 24px;
     cursor: pointer;
     box-shadow: 
-        0 12px 32px rgba(240, 165, 0, 0.4),
-        0 6px 16px rgba(240, 165, 0, 0.3);
+        0 16px 40px rgba(240, 165, 0, 0.4),
+        0 8px 20px rgba(240, 165, 0, 0.3);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    min-height: 60px;
+    min-height: 80px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    animation: startButtonPulse 3s ease-in-out infinite;
+}
+
+@keyframes startButtonPulse {
+    0%, 100% { 
+        box-shadow: 
+            0 16px 40px rgba(240, 165, 0, 0.4),
+            0 8px 20px rgba(240, 165, 0, 0.3);
+    }
+    50% { 
+        box-shadow: 
+            0 20px 50px rgba(240, 165, 0, 0.6),
+            0 12px 30px rgba(240, 165, 0, 0.5);
+    }
 }
 
 .start-button:active {
     transform: translate(-50%, -50%) scale(0.95);
+}
+
+.start-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.start-text {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.start-subtitle {
+    font-size: 12px;
+    opacity: 0.9;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 /* Loading Overlay */
@@ -1517,7 +1951,7 @@ body.dashboard {
     line-height: 1.4;
 }
 
-/* Map Content */
+/* Map Content - Enhanced */
 .map-fallback-content {
     position: absolute;
     top: 0;
@@ -1605,9 +2039,24 @@ body.dashboard {
 }
 
 .map-token-locations-icons {
-    font-size: 24px;
-    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     margin-bottom: 8px;
+}
+
+.ember-token-display {
+    width: 24px;
+    height: 24px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
+}
+
+.ember-flame-display {
+    width: 24px;
+    height: 24px;
+    background: url('../images/VPEmberFlame.svg') center/cover;
 }
 
 .map-token-locations-hint {
@@ -1854,17 +2303,17 @@ body.dashboard {
     transform: scale(0.98);
 }
 
-/* Form Inputs for Login */
+/* Form Inputs for Login - Optimized for Mobile */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     position: relative;
 }
 
 .form-input {
     width: 100%;
-    padding: 16px 20px;
+    padding: 14px 18px;
     border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: 14px;
+    border-radius: 12px;
     font-size: 16px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: rgba(0, 0, 0, 0.4);
@@ -1887,11 +2336,11 @@ body.dashboard {
 
 .login-button {
     width: 100%;
-    padding: 18px;
+    padding: 16px;
     background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
     color: white;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -2003,12 +2452,61 @@ body.dashboard {
 /* Mobile Responsive Adjustments */
 @media (max-width: 480px) {
     .login-container {
-        margin: 0 12px;
-        padding: 20px 16px;
+        margin: 0 8px;
+        padding: 16px 16px 20px 16px;
         max-width: none;
+        border-radius: 16px;
+    }
+    
+    .app-logo {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 10px;
+    }
+    
+    .app-title {
+        font-size: 22px;
+    }
+    
+    .demo-badge {
+        padding: 10px;
+        margin-bottom: 16px;
+    }
+    
+    .crypto-features {
+        margin: 12px 0;
+        padding: 10px;
+        gap: 6px;
+    }
+    
+    .feature-item {
+        font-size: 12px;
+        gap: 8px;
+    }
+    
+    .feature-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .form-group {
+        margin-bottom: 14px;
+    }
+    
+    .form-input {
+        padding: 12px 16px;
+    }
+    
+    .login-button {
+        padding: 14px;
+        font-size: 15px;
     }
     
     .vault-container {
+        padding: 0 12px;
+    }
+    
+    .campaigns-container {
         padding: 0 12px;
     }
     
@@ -2033,9 +2531,18 @@ body.dashboard {
     }
 
     .token-discovery {
-        padding: 16px;
+        padding: 0;
         left: 8px;
         right: 8px;
+    }
+
+    .token-discovery-header {
+        padding: 16px 20px 12px 20px;
+    }
+
+    .sponsor-info-front,
+    .sponsor-info-back {
+        padding: 20px;
     }
 
     .token-preview {
@@ -2064,17 +2571,36 @@ body.dashboard {
         max-width: 320px;
         padding: 20px;
     }
+
+    .start-button {
+        min-width: 260px;
+        min-height: 70px;
+        padding: 20px 28px;
+    }
+
+    .start-text {
+        font-size: 16px;
+    }
+
+    .start-icon {
+        font-size: 20px;
+    }
 }
 
 @media (max-height: 640px) {
     .login-container {
-        padding: 18px 16px;
-        margin: 8px 12px;
+        padding: 14px 16px 18px 16px;
+        margin: 6px 8px;
+    }
+    
+    .logo-section {
+        margin-bottom: 16px;
     }
     
     .app-logo {
-        width: 60px;
-        height: 60px;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 8px;
     }
     
     .app-title {
@@ -2082,31 +2608,37 @@ body.dashboard {
     }
     
     .demo-badge {
-        margin-bottom: 16px;
-        padding: 10px 12px;
+        margin-bottom: 14px;
+        padding: 8px 10px;
     }
     
     .crypto-features {
-        margin: 14px 0;
-        padding: 12px;
+        margin: 10px 0;
+        padding: 8px;
     }
     
     .form-group {
-        margin-bottom: 14px;
+        margin-bottom: 12px;
     }
 
     .status-panel {
         top: calc(env(safe-area-inset-top, 8px) + 72px);
-        padding: 10px 12px;
+        padding: 8px 10px;
     }
 
     .ar-instructions {
         top: calc(env(safe-area-inset-top, 8px) + 180px);
-        padding: 16px;
+        padding: 14px;
     }
 
     .token-discovery {
         max-height: calc(100vh - env(safe-area-inset-bottom, 12px) - 84px - env(safe-area-inset-top, 8px) - 120px);
+    }
+
+    .start-button {
+        min-height: 60px;
+        min-width: 240px;
+        padding: 16px 24px;
     }
 }
 
@@ -2119,7 +2651,11 @@ body.dashboard {
 .token-action-btn,
 .vault-action-btn,
 .filter-btn,
-.ar-ember-coin {
+.ar-ember-coin,
+.token-location-btn,
+.adventure-card,
+.adventure-start-btn,
+.proximity-button {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
@@ -2134,7 +2670,8 @@ body.dashboard {
 .token-action-btn,
 .vault-action-btn,
 .filter-btn,
-.ar-ember-coin {
+.ar-ember-coin,
+.adventure-card {
     contain: layout style paint;
 }
 
