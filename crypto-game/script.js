@@ -111,7 +111,7 @@ class VaultPhoenixCryptoGame {
             // Check if we're on the login page or dashboard
             if (document.getElementById('loginForm')) {
                 this.setupLoginListeners();
-                this.loadSavedCredentials();
+                // REMOVED: this.loadSavedCredentials(); - Users must enter credentials manually
                 console.log('✅ Login page initialized');
             } else if (document.getElementById('container')) {
                 this.ensureSession();
@@ -268,15 +268,10 @@ class VaultPhoenixCryptoGame {
             input.addEventListener('input', () => this.validateInput(input));
         });
 
-        this.addHapticFeedback();
-    }
+        // DO NOT auto-fill credentials - users must enter them manually
+        // this.loadSavedCredentials(); // REMOVED
 
-    loadSavedCredentials() {
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        
-        if (emailInput) emailInput.value = 'demo@vaultphoenix.com';
-        if (passwordInput) passwordInput.value = 'phoenix123';
+        this.addHapticFeedback();
     }
 
     animateInput(input, focused) {
@@ -353,7 +348,7 @@ class VaultPhoenixCryptoGame {
 
         } catch (error) {
             if (loginBtn) loginBtn.style.transform = 'scale(1)';
-            if (loginText) loginText.innerHTML = '🔥 Start $Ember Hunt';
+            if (loginText) loginText.innerHTML = '<img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="login-flame-icon">Start $Ember Hunt';
             if (container) container.classList.remove('loading');
             
             this.showError(error.message);
