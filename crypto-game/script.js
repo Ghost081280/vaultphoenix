@@ -1,4 +1,4 @@
-// Vault Phoenix AR Crypto Gaming - Enhanced Game Engine
+// Vault Phoenix AR Crypto Gaming - Enhanced Game Engine with Google Maps Integration
 class VaultPhoenixCryptoGame {
     constructor() {
         console.log('🔥💎 Vault Phoenix AR Crypto Gaming starting...');
@@ -26,28 +26,69 @@ class VaultPhoenixCryptoGame {
         this.compassInterval = null;
         this.isCompassActive = false;
         this.currentNavigationToken = null;
+        this.proximityCheckInterval = null;
+        this.isShowingSponsorDetails = false;
+        this.googleMapsLoaded = false;
+        this.locationsVisited = 0;
+        this.lastActivityTime = null;
 
-        // Enhanced Ember Token System with Real Locations
+        // Enhanced Ember Token System with Real Locations and Value Tiers
         this.emberTokens = [
-            { id: 1, value: 500, rarity: "legendary", location: "Downtown Phoenix", lat: 33.4484, lng: -112.0740, sponsor: "Phoenix Suns Arena", message: "Exclusive courtside experience awaits!" },
-            { id: 2, value: 250, rarity: "rare", location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards unlocked!" },
-            { id: 3, value: 100, rarity: "common", location: "Tempe Town Lake", lat: 33.4255, lng: -111.9400, sponsor: "Local Coffee Co.", message: "Free coffee for early hunters!" },
-            { id: 4, value: 150, rarity: "common", location: "Old Town Scottsdale", lat: 33.4942, lng: -111.9261, sponsor: "Arizona Bike Tours", message: "Adventure awaits in the desert!" },
-            { id: 5, value: 300, rarity: "rare", location: "Arizona State University", lat: 33.4194, lng: -111.9339, sponsor: "ASU Bookstore", message: "Student discounts and exclusive gear!" },
-            { id: 6, value: 75, rarity: "common", location: "Phoenix Sky Harbor", lat: 33.4343, lng: -112.0116, sponsor: "Sky Harbor Shops", message: "Travel rewards for your next adventure!" },
-            { id: 7, value: 200, rarity: "rare", location: "Camelback Mountain", lat: 33.5186, lng: -111.9717, sponsor: "Desert Hiking Gear", message: "Gear up for your next hike!" },
-            { id: 8, value: 50, rarity: "common", location: "Desert Botanical Garden", lat: 33.4619, lng: -111.9463, sponsor: "Garden Cafe", message: "Nature-inspired dining experience!" },
-            { id: 9, value: 125, rarity: "common", location: "Roosevelt Row", lat: 33.4524, lng: -112.0708, sponsor: "Local Art Gallery", message: "Support local artists and creators!" },
-            { id: 10, value: 400, rarity: "legendary", location: "Chase Field", lat: 33.4453, lng: -112.0667, sponsor: "Arizona Diamondbacks", message: "Baseball season tickets await!" },
-            { id: 11, value: 90, rarity: "common", location: "Papago Park", lat: 33.4551, lng: -111.9511, sponsor: "Park Recreation Center", message: "Family fun activities included!" },
-            { id: 12, value: 175, rarity: "rare", location: "Biltmore Fashion Park", lat: 33.5117, lng: -112.0736, sponsor: "Luxury Boutiques", message: "Exclusive fashion rewards!" }
+            { id: 1, value: 500, tier: "high", location: "Downtown Phoenix", lat: 33.4484, lng: -112.0740, sponsor: "Phoenix Suns Arena", message: "Exclusive courtside experience awaits!", description: "Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours." },
+            { id: 2, value: 250, tier: "medium", location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards unlocked!", description: "Discover luxury shopping with exclusive discounts and VIP personal shopping services." },
+            { id: 3, value: 100, tier: "low", location: "Tempe Town Lake", lat: 33.4255, lng: -111.9400, sponsor: "Local Coffee Co.", message: "Free coffee for early hunters!", description: "Enjoy artisanal coffee and cozy workspace with special $Ember holder benefits." },
+            { id: 4, value: 150, tier: "medium", location: "Old Town Scottsdale", lat: 33.4942, lng: -111.9261, sponsor: "Arizona Bike Tours", message: "Adventure awaits in the desert!", description: "Explore the Sonoran Desert with guided tours and premium bike rentals." },
+            { id: 5, value: 300, tier: "medium", location: "Arizona State University", lat: 33.4194, lng: -111.9339, sponsor: "ASU Bookstore", message: "Student discounts and exclusive gear!", description: "Access student resources and exclusive Sun Devil merchandise." },
+            { id: 6, value: 75, tier: "low", location: "Phoenix Sky Harbor", lat: 33.4343, lng: -112.0116, sponsor: "Sky Harbor Shops", message: "Travel rewards for your next adventure!", description: "Unlock travel perks and duty-free shopping benefits." },
+            { id: 7, value: 200, tier: "medium", location: "Camelback Mountain", lat: 33.5186, lng: -111.9717, sponsor: "Desert Hiking Gear", message: "Gear up for your next hike!", description: "Professional hiking equipment and guided desert expedition packages." },
+            { id: 8, value: 50, tier: "low", location: "Desert Botanical Garden", lat: 33.4619, lng: -111.9463, sponsor: "Garden Cafe", message: "Nature-inspired dining experience!", description: "Farm-to-table dining surrounded by stunning desert flora." },
+            { id: 9, value: 125, tier: "low", location: "Roosevelt Row", lat: 33.4524, lng: -112.0708, sponsor: "Local Art Gallery", message: "Support local artists and creators!", description: "Discover emerging artists and exclusive art collection access." },
+            { id: 10, value: 400, tier: "high", location: "Chase Field", lat: 33.4453, lng: -112.0667, sponsor: "Arizona Diamondbacks", message: "Baseball season tickets await!", description: "Premium baseball experiences with season ticket perks and dugout tours." },
+            { id: 11, value: 90, tier: "low", location: "Papago Park", lat: 33.4551, lng: -111.9511, sponsor: "Park Recreation Center", message: "Family fun activities included!", description: "Family-friendly activities and recreational programs for all ages." },
+            { id: 12, value: 175, tier: "medium", location: "Biltmore Fashion Park", lat: 33.5117, lng: -112.0736, sponsor: "Luxury Boutiques", message: "Exclusive fashion rewards!", description: "High-end fashion with personal styling services and exclusive previews." }
         ];
 
-        // Marketing Campaign Integration
-        this.activeCampaigns = [
-            { id: 1, name: "Phoenix Suns Season", reward: "+50% tokens", active: true },
-            { id: 2, name: "Desert Adventures", reward: "Free gear", active: true },
-            { id: 3, name: "Local Business Boost", reward: "2x rewards", active: false }
+        // Themed Adventure Campaigns for Marketers
+        this.themedAdventures = [
+            {
+                id: 'phoenix-sports',
+                name: 'Phoenix Sports Trail',
+                description: 'Follow the championship path',
+                icon: '🏀',
+                active: true,
+                progress: 3,
+                total: 5,
+                bonus: '+50% $Ember Bonus',
+                rewards: ['VIP Access', 'Season Tickets'],
+                locations: [1, 10, 5], // Token IDs in this adventure
+                completed: false
+            },
+            {
+                id: 'desert-discovery',
+                name: 'Desert Discovery',
+                description: 'Explore Arizona\'s natural wonders',
+                icon: '🌵',
+                active: false,
+                progress: 0,
+                total: 5,
+                bonus: 'Free Gear',
+                rewards: ['Hiking Equipment', 'Guided Tours'],
+                locations: [7, 8, 11, 6, 3],
+                completed: false
+            },
+            {
+                id: 'foodie-trail',
+                name: 'Foodie Trail',
+                description: 'Taste Phoenix\'s culinary scene',
+                icon: '🍴',
+                active: false,
+                progress: 0,
+                total: 8,
+                bonus: '2x Dining Rewards',
+                rewards: ['Free Meals', 'Chef Experiences'],
+                locations: [3, 8, 2, 4, 9, 12],
+                completed: false
+            }
         ];
 
         // Initialize immediately when DOM is ready
@@ -59,6 +100,9 @@ class VaultPhoenixCryptoGame {
         
         // Make app globally accessible
         window.vaultPhoenixApp = this;
+        
+        // Load Google Maps
+        this.loadGoogleMaps();
     }
 
     init() {
@@ -75,6 +119,7 @@ class VaultPhoenixCryptoGame {
                 this.loadCollectedTokens();
                 this.setupEventListeners();
                 this.initializeVault();
+                this.initializeCampaigns();
                 this.addHapticFeedback();
                 document.body.classList.add('dashboard');
                 console.log('✅ Dashboard initialized');
@@ -84,6 +129,121 @@ class VaultPhoenixCryptoGame {
             this.collectedTokens = [];
             this.totalTokenValue = 0;
             this.updateVaultStats();
+        }
+    }
+
+    // GOOGLE MAPS INTEGRATION
+    loadGoogleMaps() {
+        if (window.google && window.google.maps) {
+            this.googleMapsLoaded = true;
+            console.log('✅ Google Maps already loaded');
+            return;
+        }
+
+        // For demo purposes, we'll use a fallback implementation
+        // In production, you would load the actual Google Maps API
+        console.log('📍 Loading Google Maps API...');
+        
+        // Simulate Google Maps loading
+        setTimeout(() => {
+            this.googleMapsLoaded = true;
+            console.log('✅ Google Maps API loaded (simulated)');
+            if (this.isStarted) {
+                this.initializeGoogleMap();
+            }
+        }, 1000);
+    }
+
+    initializeGoogleMap() {
+        try {
+            const mapElement = document.getElementById('map');
+            if (!mapElement || !this.googleMapsLoaded) {
+                console.warn('Map element or Google Maps not ready');
+                this.createFallbackMap();
+                return;
+            }
+
+            // For demo, we'll create an enhanced fallback map
+            // In production, this would initialize actual Google Maps
+            this.createEnhancedMap();
+            console.log('🗺️ Google Maps initialized');
+        } catch (error) {
+            console.error('❌ Google Maps initialization error:', error);
+            this.createFallbackMap();
+        }
+    }
+
+    createEnhancedMap() {
+        try {
+            const mapElement = document.getElementById('map');
+            if (!mapElement) return;
+
+            mapElement.innerHTML = `
+                <div class="map-fallback-content">
+                    <div class="map-central-card">
+                        <div class="map-card-icon">🗺️</div>
+                        <h2 class="map-title">$Ember Token Hunt</h2>
+                        <p class="map-description">
+                            Explore Phoenix to discover hidden $Ember tokens using AR technology.
+                        </p>
+                        <div class="map-location-box">
+                            <div class="map-location-label">YOUR LOCATION</div>
+                            <div class="map-location-coords">
+                                <span id="fallbackLat">33.4484</span>, <span id="fallbackLng">-112.0740</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-token-locations">
+                    <div class="map-token-locations-label">$EMBER TOKENS NEARBY</div>
+                    <div class="map-token-locations-icons">
+                        <div class="ember-token-display"></div>
+                        <div class="ember-flame-display"></div>
+                        <div class="ember-token-display"></div>
+                        <div class="ember-flame-display"></div>
+                        <div class="ember-token-display"></div>
+                    </div>
+                    <div class="map-token-locations-hint">Tap locations to navigate!</div>
+                    <div class="map-locations-grid" id="tokenLocationGrid">
+                        <!-- Dynamic token buttons will be inserted here -->
+                    </div>
+                </div>
+            `;
+
+            this.populateTokenLocationButtons();
+            this.updateEnhancedMap();
+        } catch (error) {
+            console.error('❌ Enhanced map creation error:', error);
+        }
+    }
+
+    populateTokenLocationButtons() {
+        const grid = document.getElementById('tokenLocationGrid');
+        if (!grid) return;
+
+        // Show nearby tokens based on user location
+        const nearbyTokens = this.emberTokens.slice(0, 6); // Show first 6 for demo
+        
+        grid.innerHTML = '';
+        nearbyTokens.forEach(token => {
+            const button = document.createElement('button');
+            button.className = 'token-location-btn';
+            button.innerHTML = `📍 ${token.location} (${token.value} $E)`;
+            button.addEventListener('click', () => this.showNavigationModal(token));
+            grid.appendChild(button);
+        });
+    }
+
+    updateEnhancedMap() {
+        try {
+            const latEl = document.getElementById('fallbackLat');
+            const lngEl = document.getElementById('fallbackLng');
+            
+            if (latEl && this.userLat) latEl.textContent = this.userLat.toFixed(4);
+            if (lngEl && this.userLng) lngEl.textContent = this.userLng.toFixed(4);
+        } catch (error) {
+            console.error('❌ Enhanced map update error:', error);
         }
     }
 
@@ -183,7 +343,7 @@ class VaultPhoenixCryptoGame {
             if (loginText) loginText.innerHTML = '✅ Access Granted!';
             if (loginBtn) loginBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
             
-            this.showSuccess('Login successful! Launching AR Crypto Hunt...');
+            this.showSuccess('Login successful! Launching AR $Ember Hunt...');
             
             this.storeSession(email);
             
@@ -193,7 +353,7 @@ class VaultPhoenixCryptoGame {
 
         } catch (error) {
             if (loginBtn) loginBtn.style.transform = 'scale(1)';
-            if (loginText) loginText.innerHTML = '🔥 Start Crypto Hunt';
+            if (loginText) loginText.innerHTML = '🔥 Start $Ember Hunt';
             if (container) container.classList.remove('loading');
             
             this.showError(error.message);
@@ -374,16 +534,20 @@ class VaultPhoenixCryptoGame {
             if (saved) {
                 this.collectedTokens = JSON.parse(saved);
                 this.calculateTotalValue();
+                this.calculateStats();
                 console.log('✅ Loaded', this.collectedTokens.length, 'tokens worth', this.totalTokenValue, '$Ember');
             } else {
                 this.collectedTokens = [];
                 this.totalTokenValue = 0;
+                this.locationsVisited = 0;
+                this.lastActivityTime = null;
                 console.log('📦 No saved tokens, starting fresh vault');
             }
         } catch (error) {
             console.error('❌ Token loading error:', error);
             this.collectedTokens = [];
             this.totalTokenValue = 0;
+            this.locationsVisited = 0;
         }
         this.updateVaultStats();
     }
@@ -392,6 +556,7 @@ class VaultPhoenixCryptoGame {
         try {
             localStorage.setItem('vaultPhoenixTokens', JSON.stringify(this.collectedTokens));
             this.calculateTotalValue();
+            this.calculateStats();
             this.updateVaultStats();
             console.log('💾 Tokens saved:', this.collectedTokens.length, 'worth', this.totalTokenValue, '$Ember');
         } catch (error) {
@@ -403,6 +568,16 @@ class VaultPhoenixCryptoGame {
         this.totalTokenValue = this.collectedTokens.reduce((total, token) => total + token.value, 0);
     }
 
+    calculateStats() {
+        const uniqueLocations = new Set(this.collectedTokens.map(token => token.location));
+        this.locationsVisited = uniqueLocations.size;
+        
+        if (this.collectedTokens.length > 0) {
+            const lastToken = this.collectedTokens[this.collectedTokens.length - 1];
+            this.lastActivityTime = lastToken.collectedAt ? new Date(lastToken.collectedAt) : new Date();
+        }
+    }
+
     updateVaultStats() {
         try {
             const elements = {
@@ -411,9 +586,12 @@ class VaultPhoenixCryptoGame {
                 menuEmberCount: document.getElementById('menuEmberCount'),
                 vaultBalance: document.getElementById('vaultBalance'),
                 vaultUsdValue: document.getElementById('vaultUsdValue'),
-                tokensFound: document.getElementById('tokensFound'),
                 qrTokenAmount: document.getElementById('qrTokenAmount'),
-                qrTokenValue: document.getElementById('qrTokenValue')
+                qrTokenValue: document.getElementById('qrTokenValue'),
+                totalCollected: document.getElementById('totalCollected'),
+                locationsVisited: document.getElementById('locationsVisited'),
+                totalValue: document.getElementById('totalValue'),
+                lastActivity: document.getElementById('lastActivity')
             };
             
             const usdValue = (this.totalTokenValue * 0.001).toFixed(2);
@@ -422,14 +600,36 @@ class VaultPhoenixCryptoGame {
             if (elements.navEmberCount) elements.navEmberCount.textContent = this.totalTokenValue;
             if (elements.menuEmberCount) elements.menuEmberCount.textContent = this.totalTokenValue;
             if (elements.vaultBalance) elements.vaultBalance.textContent = `${this.totalTokenValue} $Ember Tokens`;
-            if (elements.vaultUsdValue) elements.vaultUsdValue.textContent = `$${usdValue} USD`;
-            if (elements.tokensFound) elements.tokensFound.textContent = this.totalTokenValue;
+            if (elements.vaultUsdValue) elements.vaultUsdValue.textContent = `${usdValue} USD`;
             if (elements.qrTokenAmount) elements.qrTokenAmount.textContent = `${this.totalTokenValue} $Ember`;
-            if (elements.qrTokenValue) elements.qrTokenValue.textContent = `$${usdValue} USD`;
+            if (elements.qrTokenValue) elements.qrTokenValue.textContent = `${usdValue} USD`;
+            if (elements.totalCollected) elements.totalCollected.textContent = this.collectedTokens.length;
+            if (elements.locationsVisited) elements.locationsVisited.textContent = this.locationsVisited;
+            if (elements.totalValue) elements.totalValue.textContent = `${usdValue}`;
+            if (elements.lastActivity) {
+                if (this.lastActivityTime) {
+                    const timeAgo = this.getTimeAgo(this.lastActivityTime);
+                    elements.lastActivity.textContent = timeAgo;
+                } else {
+                    elements.lastActivity.textContent = 'Never';
+                }
+            }
             
         } catch (error) {
             console.error('❌ Stats update error:', error);
         }
+    }
+
+    getTimeAgo(date) {
+        const now = new Date();
+        const diffTime = Math.abs(now - date);
+        const diffMinutes = Math.ceil(diffTime / (1000 * 60));
+        const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffMinutes < 60) return `${diffMinutes}m ago`;
+        if (diffHours < 24) return `${diffHours}h ago`;
+        return `${diffDays}d ago`;
     }
 
     setupEventListeners() {
@@ -442,7 +642,8 @@ class VaultPhoenixCryptoGame {
                 { id: 'menuOverlay', event: 'click', handler: () => this.closeMenu() },
                 { id: 'sideMenuLogout', event: 'click', handler: () => this.showLogoutConfirmation() },
                 { id: 'collectTokenBtn', event: 'click', handler: () => this.collectToken() },
-                { id: 'skipTokenBtn', event: 'click', handler: () => this.skipToken() },
+                { id: 'sponsorInfoBtn', event: 'click', handler: () => this.showSponsorDetails() },
+                { id: 'sponsorBackBtn', event: 'click', handler: () => this.hideSponsorDetails() },
                 { id: 'arEmberCoin', event: 'click', handler: () => this.onEmberCoinClick() },
                 { id: 'vaultBadge', event: 'click', handler: () => this.switchMode('vault') },
                 { id: 'cancelLogout', event: 'click', handler: () => this.hideLogoutConfirmation() },
@@ -455,7 +656,8 @@ class VaultPhoenixCryptoGame {
                 { id: 'redeemQRBtn', event: 'click', handler: () => this.showQRCode() },
                 { id: 'qrClose', event: 'click', handler: () => this.hideQRCode() },
                 { id: 'coinbaseWallet', event: 'click', handler: () => this.openCoinbaseWallet() },
-                { id: 'redeemTokens', event: 'click', handler: () => this.showQRCode() }
+                { id: 'redeemTokens', event: 'click', handler: () => this.showQRCode() },
+                { id: 'proximityARButton', event: 'click', handler: () => this.switchMode('ar') }
             ];
             
             handlers.forEach(({ id, event, handler }) => {
@@ -487,8 +689,15 @@ class VaultPhoenixCryptoGame {
                 btn.addEventListener('click', (e) => this.filterVault(e.target.dataset.filter));
             });
 
-            // Token location buttons
-            this.setupTokenLocationButtons();
+            // Adventure cards
+            document.querySelectorAll('.adventure-start-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const card = e.target.closest('.adventure-card');
+                    if (card) {
+                        this.startAdventure(card.dataset.adventure);
+                    }
+                });
+            });
 
             console.log('✅ Event listeners setup complete');
         } catch (error) {
@@ -496,33 +705,21 @@ class VaultPhoenixCryptoGame {
         }
     }
 
-    setupTokenLocationButtons() {
-        // Add demo token location buttons
-        setTimeout(() => {
-            const locationButtons = document.querySelectorAll('.token-location-btn');
-            locationButtons.forEach((btn, index) => {
-                btn.addEventListener('click', () => {
-                    const demoTokens = [
-                        { name: 'Messi Token', value: 500, location: 'Downtown Phoenix' },
-                        { name: 'Mbappé Token', value: 250, location: 'Scottsdale Quarter' },
-                        { name: 'Neymar Token', value: 100, location: 'Tempe Town Lake' }
-                    ];
-                    
-                    if (demoTokens[index]) {
-                        this.showNavigationModal(demoTokens[index]);
-                    }
-                });
-            });
-        }, 1000);
-    }
-
     initializeVault() {
         console.log('💎 Initializing vault...');
         try {
             this.generateTokenHistory();
-            this.updateCampaignDisplay();
         } catch (error) {
             console.error('❌ Vault initialization error:', error);
+        }
+    }
+
+    initializeCampaigns() {
+        console.log('🏆 Initializing campaigns...');
+        try {
+            this.updateCampaignDisplay();
+        } catch (error) {
+            console.error('❌ Campaign initialization error:', error);
         }
     }
 
@@ -532,26 +729,44 @@ class VaultPhoenixCryptoGame {
 
         historyContainer.innerHTML = '';
 
-        // Add some demo history items
-        const demoHistory = [
-            { name: 'Phoenix Downtown Token', value: 100, location: 'Downtown Phoenix', timestamp: new Date(Date.now() - 86400000) },
-            { name: 'Scottsdale Rare Token', value: 250, location: 'Scottsdale Quarter', timestamp: new Date(Date.now() - 172800000) },
-            { name: 'ASU Campus Token', value: 75, location: 'Arizona State University', timestamp: new Date(Date.now() - 259200000) }
-        ];
+        if (this.collectedTokens.length === 0) {
+            // Add demo history items
+            const demoHistory = [
+                { name: 'Welcome Bonus', value: 50, location: 'Vault Phoenix HQ', timestamp: new Date(Date.now() - 86400000), tier: 'low' },
+                { name: 'Tutorial Complete', value: 25, location: 'Getting Started', timestamp: new Date(Date.now() - 172800000), tier: 'low' }
+            ];
 
-        demoHistory.forEach(item => {
-            const historyItem = document.createElement('div');
-            historyItem.className = 'history-item';
-            historyItem.innerHTML = `
-                <div class="history-icon"></div>
-                <div class="history-details">
-                    <div class="history-title">${item.name}</div>
-                    <div class="history-subtitle">${item.location} • ${this.formatDate(item.timestamp)}</div>
-                </div>
-                <div class="history-value">+${item.value}</div>
-            `;
-            historyContainer.appendChild(historyItem);
-        });
+            demoHistory.forEach(item => {
+                const historyItem = this.createHistoryItem(item);
+                historyContainer.appendChild(historyItem);
+            });
+        } else {
+            // Show actual collected tokens
+            const sortedTokens = [...this.collectedTokens].reverse();
+            sortedTokens.forEach(token => {
+                const historyItem = this.createHistoryItem(token);
+                historyContainer.appendChild(historyItem);
+            });
+        }
+    }
+
+    createHistoryItem(item) {
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item';
+        
+        const tierClass = item.tier || 'low';
+        const timestamp = item.timestamp || (item.collectedAt ? new Date(item.collectedAt) : new Date());
+        
+        historyItem.innerHTML = `
+            <div class="history-icon"></div>
+            <div class="history-details">
+                <div class="history-title">${item.name || item.location}</div>
+                <div class="history-subtitle">${item.location} • ${this.formatDate(timestamp)} • ${tierClass.toUpperCase()}</div>
+            </div>
+            <div class="history-value">+${item.value}</div>
+        `;
+        
+        return historyItem;
     }
 
     formatDate(date) {
@@ -565,13 +780,58 @@ class VaultPhoenixCryptoGame {
     }
 
     updateCampaignDisplay() {
-        // This would integrate with marketer's campaign management system
         console.log('📈 Campaign display updated');
+        
+        // Update adventure cards with current progress
+        this.themedAdventures.forEach(adventure => {
+            const card = document.querySelector(`[data-adventure="${adventure.id}"]`);
+            if (card) {
+                const progressFill = card.querySelector('.progress-fill');
+                const progressText = card.querySelector('.progress-text');
+                
+                if (progressFill) {
+                    const progressPercent = (adventure.progress / adventure.total) * 100;
+                    progressFill.style.width = `${progressPercent}%`;
+                }
+                
+                if (progressText) {
+                    progressText.textContent = `${adventure.progress} of ${adventure.total} locations visited`;
+                }
+            }
+        });
+    }
+
+    startAdventure(adventureId) {
+        console.log('🚀 Starting adventure:', adventureId);
+        
+        const adventure = this.themedAdventures.find(a => a.id === adventureId);
+        if (!adventure) return;
+
+        // Mark adventure as active
+        this.themedAdventures.forEach(a => a.active = false);
+        adventure.active = true;
+        
+        // Update UI
+        this.updateCampaignDisplay();
+        
+        // Show adventure tokens on map
+        this.switchMode('map');
+        
+        // Provide haptic feedback
+        if (navigator.vibrate) {
+            navigator.vibrate(50);
+        }
+        
+        this.updateStatus(`Started ${adventure.name} adventure!`, false);
+        
+        setTimeout(() => {
+            alert(`🎯 ${adventure.name} activated!\n\nExplore ${adventure.total} themed locations to earn ${adventure.bonus} and unlock exclusive rewards!`);
+        }, 500);
     }
 
     addHapticFeedback() {
         try {
-            const interactiveElements = document.querySelectorAll('.nav-tab, .token-action-btn, .vault-action-btn, .filter-btn, .menu-item, .ar-ember-coin, .token-history-item');
+            const interactiveElements = document.querySelectorAll('.nav-tab, .token-action-btn, .vault-action-btn, .filter-btn, .menu-item, .ar-ember-coin, .token-history-item, .adventure-start-btn, .proximity-button');
             
             interactiveElements.forEach(element => {
                 element.addEventListener('touchstart', () => {
@@ -599,10 +859,11 @@ class VaultPhoenixCryptoGame {
         
         try {
             await this.setupGPS();
-            this.initializeMap();
+            this.initializeGoogleMap();
             this.setupThreeJS();
             this.generateTokenLocations();
             await this.initializeCompass();
+            this.startProximityCheck();
             
             this.updateStatus("Ready! Start hunting for $Ember tokens!", false);
             this.showLoading(false);
@@ -645,7 +906,7 @@ class VaultPhoenixCryptoGame {
                         options
                     );
                     
-                    this.updateFallbackMap();
+                    this.updateEnhancedMap();
                     resolve();
                 },
                 (error) => {
@@ -653,80 +914,12 @@ class VaultPhoenixCryptoGame {
                     this.userLat = 33.4484;
                     this.userLng = -112.0740;
                     console.log('📍 Using Phoenix, AZ for demo');
-                    this.updateFallbackMap();
+                    this.updateEnhancedMap();
                     resolve();
                 },
                 options
             );
         });
-    }
-
-    initializeMap() {
-        try {
-            const mapElement = document.getElementById('map');
-            if (!mapElement) {
-                console.warn('Map element not found');
-                return;
-            }
-
-            this.createFallbackMap();
-            console.log('🗺️ Map initialized');
-        } catch (error) {
-            console.error('❌ Map initialization error:', error);
-            this.createFallbackMap();
-        }
-    }
-
-    createFallbackMap() {
-        try {
-            const mapElement = document.getElementById('map');
-            if (!mapElement) return;
-
-            mapElement.innerHTML = `
-                <div class="map-fallback-content">
-                    <div class="map-central-card">
-                        <div class="map-card-icon">🗺️</div>
-                        <h2 class="map-title">$Ember Token Hunt</h2>
-                        <p class="map-description">
-                            Explore Phoenix to discover hidden $Ember tokens using AR technology.
-                        </p>
-                        <div class="map-location-box">
-                            <div class="map-location-label">YOUR LOCATION</div>
-                            <div class="map-location-coords">
-                                <span id="fallbackLat">33.4484</span>, <span id="fallbackLng">-112.0740</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="map-token-locations">
-                    <div class="map-token-locations-label">EMBER TOKENS NEARBY</div>
-                    <div class="map-token-locations-icons">💎 🔥 💎 🔥 💎</div>
-                    <div class="map-token-locations-hint">Tap locations to navigate!</div>
-                    <div class="map-locations-grid">
-                        <button class="token-location-btn">📍 Downtown (500 $E)</button>
-                        <button class="token-location-btn">📍 Scottsdale (250 $E)</button>
-                        <button class="token-location-btn">📍 Tempe (100 $E)</button>
-                    </div>
-                </div>
-            `;
-
-            this.updateFallbackMap();
-        } catch (error) {
-            console.error('❌ Fallback map creation error:', error);
-        }
-    }
-
-    updateFallbackMap() {
-        try {
-            const latEl = document.getElementById('fallbackLat');
-            const lngEl = document.getElementById('fallbackLng');
-            
-            if (latEl && this.userLat) latEl.textContent = this.userLat.toFixed(4);
-            if (lngEl && this.userLng) lngEl.textContent = this.userLng.toFixed(4);
-        } catch (error) {
-            console.error('❌ Fallback map update error:', error);
-        }
     }
 
     generateTokenLocations() {
@@ -736,6 +929,75 @@ class VaultPhoenixCryptoGame {
             console.log('🗺️ Generated', this.tokenLocations.length, 'token locations');
         } catch (error) {
             console.error('❌ Token location generation error:', error);
+        }
+    }
+
+    // PROXIMITY DETECTION SYSTEM
+    startProximityCheck() {
+        console.log('📡 Starting proximity detection...');
+        
+        if (this.proximityCheckInterval) {
+            clearInterval(this.proximityCheckInterval);
+        }
+        
+        this.proximityCheckInterval = setInterval(() => {
+            this.checkTokenProximity();
+        }, 5000); // Check every 5 seconds
+    }
+
+    checkTokenProximity() {
+        if (!this.userLat || !this.userLng || this.currentMode === 'ar') return;
+        
+        const proximityRadius = 0.1; // miles - very close for demo
+        
+        for (const token of this.emberTokens) {
+            if (this.isTokenCollected(token.id)) continue;
+            
+            const distance = this.calculateDistance(
+                this.userLat, this.userLng,
+                token.lat, token.lng
+            );
+            
+            if (distance <= proximityRadius) {
+                this.showProximityNotification(token);
+                break; // Show only one notification at a time
+            }
+        }
+    }
+
+    isTokenCollected(tokenId) {
+        return this.collectedTokens.some(token => token.id === tokenId);
+    }
+
+    showProximityNotification(token) {
+        const notification = document.getElementById('proximityNotification');
+        if (!notification || notification.classList.contains('show')) return;
+        
+        const title = notification.querySelector('.proximity-title');
+        const subtitle = notification.querySelector('.proximity-subtitle');
+        
+        if (title) title.textContent = '$Ember Token Detected!';
+        if (subtitle) subtitle.textContent = `${token.location} - ${token.value} $Ember nearby`;
+        
+        notification.classList.add('show');
+        
+        // Auto-hide after 10 seconds
+        setTimeout(() => {
+            this.hideProximityNotification();
+        }, 10000);
+        
+        // Haptic feedback
+        if (navigator.vibrate) {
+            navigator.vibrate([200, 100, 200]);
+        }
+        
+        console.log('📍 Proximity notification shown for:', token.location);
+    }
+
+    hideProximityNotification() {
+        const notification = document.getElementById('proximityNotification');
+        if (notification) {
+            notification.classList.remove('show');
         }
     }
 
@@ -882,6 +1144,11 @@ class VaultPhoenixCryptoGame {
             if (needle) {
                 needle.style.transform = `translate(-50%, -50%) rotate(${heading}deg)`;
             }
+
+            const headingElement = document.getElementById('heading');
+            if (headingElement) {
+                headingElement.textContent = heading;
+            }
         } catch (error) {
             console.error('❌ Compass update error:', error);
         }
@@ -895,6 +1162,9 @@ class VaultPhoenixCryptoGame {
             document.getElementById('video').style.display = 'block';
             document.getElementById('canvas').style.display = 'block';
             document.getElementById('vaultView').style.display = 'none';
+            document.getElementById('campaignsView').style.display = 'none';
+            
+            this.hideProximityNotification();
             
             try {
                 const permissions = await this.requestDevicePermissions();
@@ -1074,7 +1344,7 @@ class VaultPhoenixCryptoGame {
             const randomToken = tokenPool[Math.floor(Math.random() * tokenPool.length)];
             
             this.showTokenDiscovery(randomToken);
-            console.log('🎴 Random token shown:', randomToken.name);
+            console.log('🎴 Random token shown:', randomToken.location);
         } catch (error) {
             console.error('❌ Random token error:', error);
         }
@@ -1083,19 +1353,23 @@ class VaultPhoenixCryptoGame {
     showTokenDiscovery(token) {
         try {
             const elements = {
-                rarity: document.getElementById('tokenRarity'),
                 amount: document.getElementById('discoveredTokenAmount'),
                 usdValue: document.getElementById('discoveredTokenUSD'),
                 location: document.getElementById('discoveredTokenLocation'),
-                value: document.getElementById('discoveredTokenValue'),
-                discovery: document.getElementById('tokenDiscovery')
+                badge: document.getElementById('tokenAmountBadge'),
+                discovery: document.getElementById('tokenDiscovery'),
+                sponsorName: document.getElementById('sponsorDetailsName'),
+                sponsorDescription: document.getElementById('sponsorDetailsDescription')
             };
             
-            if (elements.rarity) elements.rarity.textContent = token.rarity.toUpperCase();
             if (elements.amount) elements.amount.textContent = `${token.value} $Ember`;
-            if (elements.usdValue) elements.usdValue.textContent = `~$${(token.value * 0.001).toFixed(2)} USD`;
+            if (elements.usdValue) elements.usdValue.textContent = `~${(token.value * 0.001).toFixed(2)} USD`;
             if (elements.location) elements.location.textContent = token.location;
-            if (elements.value) elements.value.textContent = token.value;
+            if (elements.badge) elements.badge.textContent = `${token.value} $Ember`;
+            
+            // Update sponsor details
+            if (elements.sponsorName) elements.sponsorName.textContent = token.sponsor || 'Mystery Sponsor';
+            if (elements.sponsorDescription) elements.sponsorDescription.textContent = token.description || token.message || 'Amazing rewards await!';
             
             // Add sponsor message if available
             const sponsorContainer = document.querySelector('.sponsor-message');
@@ -1111,11 +1385,59 @@ class VaultPhoenixCryptoGame {
             }
             
             this.currentDiscoveredToken = token;
+            this.isShowingSponsorDetails = false;
+            
+            // Show front view, hide back view
+            const frontView = document.getElementById('sponsorInfoFront');
+            const backView = document.getElementById('sponsorInfoBack');
+            if (frontView) frontView.style.display = 'block';
+            if (backView) backView.style.display = 'none';
+            
             if (elements.discovery) elements.discovery.classList.add('show');
             
             console.log('🎴 Token discovery shown:', token.location);
         } catch (error) {
             console.error('❌ Token discovery show error:', error);
+        }
+    }
+
+    showSponsorDetails() {
+        try {
+            if (!this.currentDiscoveredToken || this.isShowingSponsorDetails) return;
+            
+            this.isShowingSponsorDetails = true;
+            
+            const frontView = document.getElementById('sponsorInfoFront');
+            const backView = document.getElementById('sponsorInfoBack');
+            
+            if (frontView && backView) {
+                frontView.style.display = 'none';
+                backView.style.display = 'block';
+            }
+            
+            console.log('ℹ️ Showing sponsor details');
+        } catch (error) {
+            console.error('❌ Sponsor details show error:', error);
+        }
+    }
+
+    hideSponsorDetails() {
+        try {
+            if (!this.isShowingSponsorDetails) return;
+            
+            this.isShowingSponsorDetails = false;
+            
+            const frontView = document.getElementById('sponsorInfoFront');
+            const backView = document.getElementById('sponsorInfoBack');
+            
+            if (frontView && backView) {
+                frontView.style.display = 'block';
+                backView.style.display = 'none';
+            }
+            
+            console.log('⬅️ Hiding sponsor details');
+        } catch (error) {
+            console.error('❌ Sponsor details hide error:', error);
         }
     }
 
@@ -1126,7 +1448,8 @@ class VaultPhoenixCryptoGame {
                 const collectedToken = {
                     ...this.currentDiscoveredToken,
                     collectedAt: new Date().toISOString(),
-                    collectionMethod: 'AR Hunt'
+                    collectionMethod: 'AR Hunt',
+                    name: `${this.currentDiscoveredToken.location} Token`
                 };
                 
                 this.collectedTokens.push(collectedToken);
@@ -1134,8 +1457,12 @@ class VaultPhoenixCryptoGame {
                 
                 console.log('✅ Token collected:', this.currentDiscoveredToken.location);
                 
+                // Update adventure progress if applicable
+                this.updateAdventureProgress(this.currentDiscoveredToken.id);
+                
                 this.hideTokenDiscovery();
                 this.currentDiscoveredToken = null;
+                this.isShowingSponsorDetails = false;
                 
                 // Refresh vault if we're in vault mode
                 if (this.currentMode === 'vault') {
@@ -1156,23 +1483,20 @@ class VaultPhoenixCryptoGame {
         }
     }
 
-    skipToken() {
-        try {
-            this.hideTokenDiscovery();
-            this.currentDiscoveredToken = null;
-            
-            console.log('⏭️ Token skipped');
-            
-            if (this.currentMode === 'ar') {
-                setTimeout(() => {
-                    if (this.currentMode === 'ar') {
-                        this.showTappableEmberCoin();
-                    }
-                }, 3000);
-            }
-        } catch (error) {
-            console.error('❌ Token skip error:', error);
+    updateAdventureProgress(tokenId) {
+        const activeAdventure = this.themedAdventures.find(a => a.active);
+        if (!activeAdventure || !activeAdventure.locations.includes(tokenId)) return;
+        
+        activeAdventure.progress = Math.min(activeAdventure.progress + 1, activeAdventure.total);
+        
+        if (activeAdventure.progress === activeAdventure.total) {
+            activeAdventure.completed = true;
+            setTimeout(() => {
+                alert(`🎉 Adventure Complete!\n\n${activeAdventure.name} finished! You've unlocked ${activeAdventure.bonus} and exclusive rewards!`);
+            }, 1000);
         }
+        
+        this.updateCampaignDisplay();
     }
 
     hideTokenDiscovery() {
@@ -1250,7 +1574,6 @@ class VaultPhoenixCryptoGame {
         try {
             const menu = document.getElementById('sideMenu');
             const overlay = document.getElementById('menuOverlay');
-            const icon = document.getElementById('menuIcon');
             
             if (!menu || !overlay) return;
             
@@ -1298,6 +1621,7 @@ class VaultPhoenixCryptoGame {
         this.updateNavigationState();
         this.hideTokenDiscovery();
         this.hideEmberCoin();
+        this.hideProximityNotification();
         
         switch (mode) {
             case 'map':
@@ -1309,8 +1633,8 @@ class VaultPhoenixCryptoGame {
             case 'vault':
                 this.switchToVault();
                 break;
-            case 'leaderboard':
-                this.switchToLeaderboard();
+            case 'campaigns':
+                this.switchToCampaigns();
                 break;
         }
     }
@@ -1333,11 +1657,12 @@ class VaultPhoenixCryptoGame {
             document.getElementById('video').style.display = 'none';
             document.getElementById('canvas').style.display = 'none';
             document.getElementById('vaultView').style.display = 'none';
+            document.getElementById('campaignsView').style.display = 'none';
             
             this.hideARInstructions();
             this.hideEmberCoin();
             this.stopCamera();
-            this.updateFallbackMap();
+            this.updateEnhancedMap();
         } catch (error) {
             console.error('❌ Map switch error:', error);
         }
@@ -1350,6 +1675,7 @@ class VaultPhoenixCryptoGame {
             document.getElementById('video').style.display = 'none';
             document.getElementById('canvas').style.display = 'none';
             document.getElementById('vaultView').style.display = 'block';
+            document.getElementById('campaignsView').style.display = 'none';
             
             this.hideARInstructions();
             this.hideEmberCoin();
@@ -1360,10 +1686,22 @@ class VaultPhoenixCryptoGame {
         }
     }
 
-    switchToLeaderboard() {
-        console.log('🏆 Switching to Leaderboard mode');
-        // This would show campaign leaderboards for marketers
-        this.switchToVault(); // For now, redirect to vault
+    switchToCampaigns() {
+        console.log('🏆 Switching to Campaigns mode');
+        try {
+            document.getElementById('map').style.display = 'none';
+            document.getElementById('video').style.display = 'none';
+            document.getElementById('canvas').style.display = 'none';
+            document.getElementById('vaultView').style.display = 'none';
+            document.getElementById('campaignsView').style.display = 'block';
+            
+            this.hideARInstructions();
+            this.hideEmberCoin();
+            this.stopCamera();
+            this.updateCampaignDisplay();
+        } catch (error) {
+            console.error('❌ Campaigns switch error:', error);
+        }
     }
 
     // WALLET INTEGRATION
@@ -1450,7 +1788,8 @@ class VaultPhoenixCryptoGame {
             value: -this.totalTokenValue,
             location: 'Coinbase Wallet',
             timestamp: new Date(),
-            type: 'transfer'
+            type: 'transfer',
+            tier: 'transfer'
         };
         
         // Add to beginning of collected tokens for history display
@@ -1488,12 +1827,12 @@ class VaultPhoenixCryptoGame {
             }
             
             // Update modal content
-            const playerName = document.getElementById('navPlayerName');
+            const tokenName = document.getElementById('navTokenName');
             const distance = document.getElementById('navDistance');
             const walkTime = document.getElementById('navWalkTime');
             const driveTime = document.getElementById('navDriveTime');
             
-            if (playerName) playerName.textContent = tokenLocation.name || `${tokenLocation.value} $Ember Token`;
+            if (tokenName) tokenName.textContent = `${tokenLocation.value} $Ember Token`;
             
             // Calculate distance if user location is available
             if (this.userLat && this.userLng && tokenLocation.lat && tokenLocation.lng) {
@@ -1517,6 +1856,8 @@ class VaultPhoenixCryptoGame {
             }
             
             modal.style.display = 'flex';
+            
+            console.log('🗺️ Navigation modal shown for:', tokenLocation.location);
             
         } catch (error) {
             console.error('❌ Navigation modal error:', error);
@@ -1592,9 +1933,9 @@ class VaultPhoenixCryptoGame {
             this.hideNavigationModal();
             
             // Show confirmation
-            this.updateStatus(`Opening ${travelMode} directions to ${this.currentNavigationToken.name || 'token location'}`, false);
+            this.updateStatus(`Opening ${travelMode} directions to ${this.currentNavigationToken.location}`, false);
             
-            console.log(`🗺️ Opening ${travelMode} navigation to ${this.currentNavigationToken.name || 'token'}`);
+            console.log(`🗺️ Opening ${travelMode} navigation to ${this.currentNavigationToken.location}`);
             
         } catch (error) {
             console.error('❌ Maps navigation error:', error);
@@ -1606,7 +1947,7 @@ class VaultPhoenixCryptoGame {
         try {
             this.hideNavigationModal();
             this.switchMode('ar');
-            this.updateStatus(`AR Hunt mode: Look for ${this.currentNavigationToken?.name || 'nearby tokens'}`, false);
+            this.updateStatus(`AR Hunt mode: Look for ${this.currentNavigationToken?.location || 'nearby tokens'}`, false);
         } catch (error) {
             console.error('❌ AR hunt start error:', error);
         }
@@ -1621,9 +1962,32 @@ class VaultPhoenixCryptoGame {
 
             const historyItems = document.querySelectorAll('.history-item');
             historyItems.forEach(item => {
-                // For demo purposes, show all items
-                // In real implementation, filter by token rarity
-                item.style.display = 'flex';
+                const historyTitle = item.querySelector('.history-title');
+                const historySubtitle = item.querySelector('.history-subtitle');
+                
+                if (!historyTitle || !historySubtitle) {
+                    item.style.display = 'flex';
+                    return;
+                }
+                
+                const subtitleText = historySubtitle.textContent.toLowerCase();
+                
+                switch (filter) {
+                    case 'all':
+                        item.style.display = 'flex';
+                        break;
+                    case 'high':
+                        item.style.display = subtitleText.includes('high') ? 'flex' : 'none';
+                        break;
+                    case 'medium':
+                        item.style.display = subtitleText.includes('medium') ? 'flex' : 'none';
+                        break;
+                    case 'low':
+                        item.style.display = subtitleText.includes('low') ? 'flex' : 'none';
+                        break;
+                    default:
+                        item.style.display = 'flex';
+                }
             });
             
             console.log('🔍 Vault filtered by:', filter);
@@ -1661,6 +2025,7 @@ class VaultPhoenixCryptoGame {
         try {
             this.stopCamera();
             this.stopCompass();
+            this.stopProximityCheck();
             sessionStorage.removeItem('vaultPhoenixSession');
             
             // Navigate to login page
@@ -1692,6 +2057,18 @@ class VaultPhoenixCryptoGame {
         }
     }
 
+    stopProximityCheck() {
+        try {
+            if (this.proximityCheckInterval) {
+                clearInterval(this.proximityCheckInterval);
+                this.proximityCheckInterval = null;
+                console.log('📡 Proximity check stopped');
+            }
+        } catch (error) {
+            console.error('❌ Proximity check stop error:', error);
+        }
+    }
+
     // UTILITY FUNCTIONS
     showLoading(show) {
         try {
@@ -1707,7 +2084,6 @@ class VaultPhoenixCryptoGame {
     updateStatus(message, isError = false) {
         try {
             const statusText = document.getElementById('gpsStatus');
-            const statusDot = document.querySelector('.status-dot');
             
             if (statusText) {
                 statusText.innerHTML = `
@@ -1727,10 +2103,19 @@ class VaultPhoenixCryptoGame {
             this.userLat = position.coords.latitude;
             this.userLng = position.coords.longitude;
             
-            this.updateFallbackMap();
+            this.updateEnhancedMap();
         } catch (error) {
             console.error('❌ Position update error:', error);
         }
+    }
+
+    // FALLBACK MAP CREATION (for backward compatibility)
+    createFallbackMap() {
+        this.createEnhancedMap();
+    }
+
+    updateFallbackMap() {
+        this.updateEnhancedMap();
     }
 }
 
