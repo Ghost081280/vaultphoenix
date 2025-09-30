@@ -1,134 +1,32 @@
-// Vault Phoenix AR Crypto Gaming - Enhanced Game Engine with Google Maps Integration
-class VaultPhoenixCryptoGame {
-    constructor() {
-        console.log('🔥💎 Vault Phoenix AR Crypto Gaming starting...');
-        
-        // Initialize all properties safely
-        this.userLat = null;
-        this.userLng = null;
-        this.heading = 0;
-        this.scene = null;
-        this.camera = null;
-        this.renderer = null;
-        this.tokenLocations = [];
-        this.tokenObjects = [];
-        this.mapMarkers = [];
-        this.isStarted = false;
-        this.currentMode = 'map';
-        this.map = null;
-        this.userMarker = null;
-        this.animationStarted = false;
-        this.collectedTokens = [];
-        this.totalTokenValue = 0;
-        this.currentDiscoveredToken = null;
-        this.cameraStream = null;
-        this.hasReceivedOrientationData = false;
-        this.compassInterval = null;
-        this.isCompassActive = false;
-        this.currentNavigationToken = null;
-        this.proximityCheckInterval = null;
-        this.isShowingSponsorDetails = false;
-        this.googleMapsLoaded = false;
-        this.locationsVisited = 0;
-        this.lastActivityTime = null;
-
-        // Enhanced Ember Token System with Real Locations and Value Tiers
-        this.emberTokens = [
-            { id: 1, value: 500, tier: "high", location: "Downtown Phoenix", lat: 33.4484, lng: -112.0740, sponsor: "Phoenix Suns Arena", message: "Exclusive courtside experience awaits!", description: "Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours." },
-            { id: 2, value: 250, tier: "medium", location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards unlocked!", description: "Discover luxury shopping with exclusive discounts and VIP personal shopping services." },
-            { id: 3, value: 100, tier: "low", location: "Tempe Town Lake", lat: 33.4255, lng: -111.9400, sponsor: "Local Coffee Co.", message: "Free coffee for early hunters!", description: "Enjoy artisanal coffee and cozy workspace with special $Ember holder benefits." },
-            { id: 4, value: 150, tier: "medium", location: "Old Town Scottsdale", lat: 33.4942, lng: -111.9261, sponsor: "Arizona Bike Tours", message: "Adventure awaits in the desert!", description: "Explore the Sonoran Desert with guided tours and premium bike rentals." },
-            { id: 5, value: 300, tier: "medium", location: "Arizona State University", lat: 33.4194, lng: -111.9339, sponsor: "ASU Bookstore", message: "Student discounts and exclusive gear!", description: "Access student resources and exclusive Sun Devil merchandise." },
-            { id: 6, value: 75, tier: "low", location: "Phoenix Sky Harbor", lat: 33.4343, lng: -112.0116, sponsor: "Sky Harbor Shops", message: "Travel rewards for your next adventure!", description: "Unlock travel perks and duty-free shopping benefits." },
-            { id: 7, value: 200, tier: "medium", location: "Camelback Mountain", lat: 33.5186, lng: -111.9717, sponsor: "Desert Hiking Gear", message: "Gear up for your next hike!", description: "Professional hiking equipment and guided desert expedition packages." },
-            { id: 8, value: 50, tier: "low", location: "Desert Botanical Garden", lat: 33.4619, lng: -111.9463, sponsor: "Garden Cafe", message: "Nature-inspired dining experience!", description: "Farm-to-table dining surrounded by stunning desert flora." },
-            { id: 9, value: 125, tier: "low", location: "Roosevelt Row", lat: 33.4524, lng: -112.0708, sponsor: "Local Art Gallery", message: "Support local artists and creators!", description: "Discover emerging artists and exclusive art collection access." },
-            { id: 10, value: 400, tier: "high", location: "Chase Field", lat: 33.4453, lng: -112.0667, sponsor: "Arizona Diamondbacks", message: "Baseball season tickets await!", description: "Premium baseball experiences with season ticket perks and dugout tours." },
-            { id: 11, value: 90, tier: "low", location: "Papago Park", lat: 33.4551, lng: -111.9511, sponsor: "Park Recreation Center", message: "Family fun activities included!", description: "Family-friendly activities and recreational programs for all ages." },
-            { id: 12, value: 175, tier: "medium", location: "Biltmore Fashion Park", lat: 33.5117, lng: -112.0736, sponsor: "Luxury Boutiques", message: "Exclusive fashion rewards!", description: "High-end fashion with personal styling services and exclusive previews." }
-        ];
-
-        // Themed Adventure Campaigns for Marketers
-        this.themedAdventures = [
-            {
-                id: 'phoenix-sports',
-                name: 'Phoenix Sports Trail',
-                description: 'Follow the championship path',
-                icon: '🏀',
-                active: true,
-                progress: 3,
-                total: 5,
-                bonus: '+50% $Ember Bonus',
-                rewards: ['VIP Access', 'Season Tickets'],
-                locations: [1, 10, 5], // Token IDs in this adventure
-                completed: false
-            },
-            {
-                id: 'desert-discovery',
-                name: 'Desert Discovery',
-                description: 'Explore Arizona\'s natural wonders',
-                icon: '🌵',
-                active: false,
-                progress: 0,
-                total: 5,
-                bonus: 'Free Gear',
-                rewards: ['Hiking Equipment', 'Guided Tours'],
-                locations: [7, 8, 11, 6, 3],
-                completed: false
-            },
-            {
-                id: 'foodie-trail',
-                name: 'Foodie Trail',
-                description: 'Taste Phoenix\'s culinary scene',
-                icon: '🍴',
-                active: false,
-                progress: 0,
-                total: 8,
-                bonus: '2x Dining Rewards',
-                rewards: ['Free Meals', 'Chef Experiences'],
-                locations: [3, 8, 2, 4, 9, 12],
-                completed: false
-            }
-        ];
-
-        // Initialize immediately when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.init());
-        } else {
-            this.init();
+autoStartGame() {
+        console.log('🚀 Auto-starting game...');
+        try {
+            // Initialize game systems
+            this.start();
+            
+            // Update available tokens count
+            this.updateAvailableTokensCount();
+            
+        } catch (error) {
+            console.error('❌ Auto-start error:', error);
         }
-        
-        // Make app globally accessible
-        window.vaultPhoenixApp = this;
-        
-        // Load Google Maps
-        this.loadGoogleMaps();
     }
 
-    init() {
-        console.log('🔧 Initializing Vault Phoenix...');
+    updateAvailableTokensCount() {
         try {
-            // Check if we're on the login page or dashboard
-            if (document.getElementById('loginForm')) {
-                this.setupLoginListeners();
-                // REMOVED: this.loadSavedCredentials(); - Users must enter credentials manually
-                console.log('✅ Login page initialized');
-            } else if (document.getElementById('container')) {
-                this.ensureSession();
-                this.loadUserInfo();
-                this.loadCollectedTokens();
-                this.setupEventListeners();
-                this.initializeVault();
-                this.initializeCampaigns();
-                this.addHapticFeedback();
-                document.body.classList.add('dashboard');
-                console.log('✅ Dashboard initialized');
+            // Calculate uncollected tokens
+            const collectedTokenIds = this.collectedTokens.map(token => token.id);
+            const uncollectedTokens = this.emberTokens.filter(token => !collectedTokenIds.includes(token.id));
+            this.availableTokensCount = uncollectedTokens.length;
+            
+            const availableTokensEl = document.getElementById('availableTokens');
+            if (availableTokensEl) {
+                availableTokensEl.textContent = `${this.availableTokensCount} Available`;
             }
+            
+            console.log('📊 Available tokens updated:', this.availableTokensCount);
         } catch (error) {
-            console.error('❌ Initialization error:', error);
-            this.collectedTokens = [];
-            this.totalTokenValue = 0;
-            this.updateVaultStats();
+            console.error('❌ Available tokens update error:', error);
         }
     }
 
@@ -273,6 +171,8 @@ class VaultPhoenixCryptoGame {
 
         this.addHapticFeedback();
     }
+
+    // REMOVED loadSavedCredentials() method - users must enter credentials manually
 
     animateInput(input, focused) {
         const container = input.closest('.form-group');
@@ -545,6 +445,7 @@ class VaultPhoenixCryptoGame {
             this.locationsVisited = 0;
         }
         this.updateVaultStats();
+        this.updateAvailableTokensCount();
     }
 
     saveCollectedTokens() {
@@ -553,6 +454,7 @@ class VaultPhoenixCryptoGame {
             this.calculateTotalValue();
             this.calculateStats();
             this.updateVaultStats();
+            this.updateAvailableTokensCount();
             console.log('💾 Tokens saved:', this.collectedTokens.length, 'worth', this.totalTokenValue, '$Ember');
         } catch (error) {
             console.error('❌ Token saving error:', error);
@@ -631,7 +533,7 @@ class VaultPhoenixCryptoGame {
         console.log('🎧 Setting up event listeners...');
         try {
             const handlers = [
-                { id: 'startBtn', event: 'click', handler: () => this.start() },
+                // REMOVED: { id: 'startBtn', event: 'click', handler: () => this.start() }, - No more start button
                 { id: 'homeBtn', event: 'click', handler: () => this.goHome() },
                 { id: 'menuToggle', event: 'click', handler: () => this.toggleMenu() },
                 { id: 'menuOverlay', event: 'click', handler: () => this.closeMenu() },
@@ -847,8 +749,7 @@ class VaultPhoenixCryptoGame {
 
         console.log('🚀 Starting Vault Phoenix...');
         
-        const startBtn = document.getElementById('startBtn');
-        if (startBtn) startBtn.style.display = 'none';
+        // No start button to hide anymore - welcome screen handles this
         
         this.showLoading(true);
         
@@ -2178,4 +2079,243 @@ window.addEventListener('load', () => {
 console.log('%c🔥💎 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #f0a500; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
 console.log('%c🚀 Revolutionary AR gaming that lets you collect real $Ember tokens', 'color: #fb923c; font-size: 14px; font-weight: bold;');
 console.log('%c📧 Contact: contact@vaultphoenix.com', 'color: #374151; font-size: 14px;');
-console.log('%c🔥💎 From ashes to crypto greatness - Phoenix Rising!', 'color: #d73327; font-size: 12px; font-style: italic;');
+console.log('%c🔥💎 From ashes to crypto greatness - Phoenix Rising!', 'color: #d73327; font-size: 12px; font-style: italic;');// Vault Phoenix AR Crypto Gaming - Enhanced Game Engine with Welcome Screen
+class VaultPhoenixCryptoGame {
+    constructor() {
+        console.log('🔥💎 Vault Phoenix AR Crypto Gaming starting...');
+        
+        // Initialize all properties safely
+        this.userLat = null;
+        this.userLng = null;
+        this.heading = 0;
+        this.scene = null;
+        this.camera = null;
+        this.renderer = null;
+        this.tokenLocations = [];
+        this.tokenObjects = [];
+        this.mapMarkers = [];
+        this.isStarted = false;
+        this.currentMode = 'map';
+        this.map = null;
+        this.userMarker = null;
+        this.animationStarted = false;
+        this.collectedTokens = [];
+        this.totalTokenValue = 0;
+        this.currentDiscoveredToken = null;
+        this.cameraStream = null;
+        this.hasReceivedOrientationData = false;
+        this.compassInterval = null;
+        this.isCompassActive = false;
+        this.currentNavigationToken = null;
+        this.proximityCheckInterval = null;
+        this.isShowingSponsorDetails = false;
+        this.googleMapsLoaded = false;
+        this.locationsVisited = 0;
+        this.lastActivityTime = null;
+        this.welcomeShown = false;
+        this.availableTokensCount = 12; // Total tokens available in campaign
+
+        // Enhanced Ember Token System with Real Locations and Value Tiers
+        this.emberTokens = [
+            { id: 1, value: 500, tier: "high", location: "Downtown Phoenix", lat: 33.4484, lng: -112.0740, sponsor: "Phoenix Suns Arena", message: "Exclusive courtside experience awaits!", description: "Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours." },
+            { id: 2, value: 250, tier: "medium", location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards unlocked!", description: "Discover luxury shopping with exclusive discounts and VIP personal shopping services." },
+            { id: 3, value: 100, tier: "low", location: "Tempe Town Lake", lat: 33.4255, lng: -111.9400, sponsor: "Local Coffee Co.", message: "Free coffee for early hunters!", description: "Enjoy artisanal coffee and cozy workspace with special $Ember holder benefits." },
+            { id: 4, value: 150, tier: "medium", location: "Old Town Scottsdale", lat: 33.4942, lng: -111.9261, sponsor: "Arizona Bike Tours", message: "Adventure awaits in the desert!", description: "Explore the Sonoran Desert with guided tours and premium bike rentals." },
+            { id: 5, value: 300, tier: "medium", location: "Arizona State University", lat: 33.4194, lng: -111.9339, sponsor: "ASU Bookstore", message: "Student discounts and exclusive gear!", description: "Access student resources and exclusive Sun Devil merchandise." },
+            { id: 6, value: 75, tier: "low", location: "Phoenix Sky Harbor", lat: 33.4343, lng: -112.0116, sponsor: "Sky Harbor Shops", message: "Travel rewards for your next adventure!", description: "Unlock travel perks and duty-free shopping benefits." },
+            { id: 7, value: 200, tier: "medium", location: "Camelback Mountain", lat: 33.5186, lng: -111.9717, sponsor: "Desert Hiking Gear", message: "Gear up for your next hike!", description: "Professional hiking equipment and guided desert expedition packages." },
+            { id: 8, value: 50, tier: "low", location: "Desert Botanical Garden", lat: 33.4619, lng: -111.9463, sponsor: "Garden Cafe", message: "Nature-inspired dining experience!", description: "Farm-to-table dining surrounded by stunning desert flora." },
+            { id: 9, value: 125, tier: "low", location: "Roosevelt Row", lat: 33.4524, lng: -112.0708, sponsor: "Local Art Gallery", message: "Support local artists and creators!", description: "Discover emerging artists and exclusive art collection access." },
+            { id: 10, value: 400, tier: "high", location: "Chase Field", lat: 33.4453, lng: -112.0667, sponsor: "Arizona Diamondbacks", message: "Baseball season tickets await!", description: "Premium baseball experiences with season ticket perks and dugout tours." },
+            { id: 11, value: 90, tier: "low", location: "Papago Park", lat: 33.4551, lng: -111.9511, sponsor: "Park Recreation Center", message: "Family fun activities included!", description: "Family-friendly activities and recreational programs for all ages." },
+            { id: 12, value: 175, tier: "medium", location: "Biltmore Fashion Park", lat: 33.5117, lng: -112.0736, sponsor: "Luxury Boutiques", message: "Exclusive fashion rewards!", description: "High-end fashion with personal styling services and exclusive previews." }
+        ];
+
+        // Themed Adventure Campaigns for Marketers
+        this.themedAdventures = [
+            {
+                id: 'phoenix-sports',
+                name: 'Phoenix Sports Trail',
+                description: 'Follow the championship path',
+                icon: '🏀',
+                active: true,
+                progress: 3,
+                total: 5,
+                bonus: '+50% $Ember Bonus',
+                rewards: ['VIP Access', 'Season Tickets'],
+                locations: [1, 10, 5], // Token IDs in this adventure
+                completed: false
+            },
+            {
+                id: 'desert-discovery',
+                name: 'Desert Discovery',
+                description: 'Explore Arizona\'s natural wonders',
+                icon: '🌵',
+                active: false,
+                progress: 0,
+                total: 5,
+                bonus: 'Free Gear',
+                rewards: ['Hiking Equipment', 'Guided Tours'],
+                locations: [7, 8, 11, 6, 3],
+                completed: false
+            },
+            {
+                id: 'foodie-trail',
+                name: 'Foodie Trail',
+                description: 'Taste Phoenix\'s culinary scene',
+                icon: '🍴',
+                active: false,
+                progress: 0,
+                total: 8,
+                bonus: '2x Dining Rewards',
+                rewards: ['Free Meals', 'Chef Experiences'],
+                locations: [3, 8, 2, 4, 9, 12],
+                completed: false
+            }
+        ];
+
+        // Initialize immediately when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.init());
+        } else {
+            this.init();
+        }
+        
+        // Make app globally accessible
+        window.vaultPhoenixApp = this;
+        
+        // Load Google Maps
+        this.loadGoogleMaps();
+    }
+
+    init() {
+        console.log('🔧 Initializing Vault Phoenix...');
+        try {
+            // Check if we're on the login page or dashboard
+            if (document.getElementById('loginForm')) {
+                this.setupLoginListeners();
+                // REMOVED: this.loadSavedCredentials(); - Users must enter credentials manually
+                console.log('✅ Login page initialized');
+            } else if (document.getElementById('container')) {
+                this.ensureSession();
+                this.loadUserInfo();
+                this.loadCollectedTokens();
+                this.setupEventListeners();
+                this.initializeVault();
+                this.initializeCampaigns();
+                this.addHapticFeedback();
+                this.showWelcomeScreen(); // Show welcome screen first
+                document.body.classList.add('dashboard');
+                console.log('✅ Dashboard initialized');
+            }
+        } catch (error) {
+            console.error('❌ Initialization error:', error);
+            this.collectedTokens = [];
+            this.totalTokenValue = 0;
+            this.updateVaultStats();
+        }
+    }
+
+    // WELCOME SCREEN SYSTEM
+    showWelcomeScreen() {
+        console.log('👋 Showing welcome screen...');
+        try {
+            const welcomeBtn = document.getElementById('welcomeBtn');
+            const container = document.getElementById('container');
+            
+            if (!welcomeBtn || this.welcomeShown) return;
+            
+            // Disable navigation during welcome
+            if (container) container.classList.add('welcome-active');
+            
+            // Show welcome button
+            welcomeBtn.style.display = 'flex';
+            
+            // Start loading animation
+            this.startWelcomeLoading();
+            
+            this.welcomeShown = true;
+            
+        } catch (error) {
+            console.error('❌ Welcome screen error:', error);
+            this.hideWelcomeScreen();
+        }
+    }
+
+    startWelcomeLoading() {
+        try {
+            const loadingFill = document.getElementById('welcomeLoadingFill');
+            const loadingText = document.getElementById('welcomeLoadingText');
+            
+            const loadingMessages = [
+                'Loading Game...',
+                'Connecting to Phoenix...',
+                'Initializing AR System...',
+                'Preparing Token Hunt...',
+                'Ready to Hunt!'
+            ];
+            
+            let currentMessage = 0;
+            let progress = 0;
+            
+            const loadingInterval = setInterval(() => {
+                progress += Math.random() * 15 + 5; // Random progress between 5-20%
+                
+                if (progress >= 100) {
+                    progress = 100;
+                    if (loadingFill) loadingFill.style.width = '100%';
+                    if (loadingText) loadingText.textContent = loadingMessages[4];
+                    
+                    clearInterval(loadingInterval);
+                    
+                    // Hide welcome screen after completion
+                    setTimeout(() => {
+                        this.hideWelcomeScreen();
+                    }, 800);
+                    
+                } else {
+                    if (loadingFill) loadingFill.style.width = `${progress}%`;
+                    
+                    // Update loading message
+                    if (progress > currentMessage * 20 && currentMessage < 4) {
+                        currentMessage++;
+                        if (loadingText) loadingText.textContent = loadingMessages[currentMessage];
+                    }
+                }
+            }, 200);
+            
+        } catch (error) {
+            console.error('❌ Welcome loading error:', error);
+            this.hideWelcomeScreen();
+        }
+    }
+
+    hideWelcomeScreen() {
+        console.log('👋 Hiding welcome screen...');
+        try {
+            const welcomeBtn = document.getElementById('welcomeBtn');
+            const container = document.getElementById('container');
+            
+            if (welcomeBtn) {
+                welcomeBtn.style.display = 'none';
+            }
+            
+            // Re-enable navigation
+            if (container) container.classList.remove('welcome-active');
+            
+            // Auto-start the game
+            this.autoStartGame();
+            
+        } catch (error) {
+            console.error('❌ Welcome screen hide error:', error);
+        }
+    }
+
+    autoStartGame() {
+        console.log('🚀 Auto-starting game...');
+        try {
+            // Initialize game systems
+            this.start();
+            
+            // Update available tokens count
+            this.update
