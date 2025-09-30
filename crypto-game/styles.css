@@ -542,6 +542,110 @@ body.dashboard {
     background: rgba(255, 255, 255, 0.2);
 }
 
+/* Welcome Button - Replaces Start Button */
+.welcome-button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 250;
+    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
+    color: white;
+    border: none;
+    padding: 32px 40px;
+    font-size: 16px;
+    font-weight: 800;
+    border-radius: 24px;
+    cursor: pointer;
+    box-shadow: 
+        0 16px 40px rgba(240, 165, 0, 0.4),
+        0 8px 20px rgba(240, 165, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.5px;
+    min-height: 200px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: welcomeButtonPulse 3s ease-in-out infinite;
+    pointer-events: none; /* User cannot click it */
+}
+
+@keyframes welcomeButtonPulse {
+    0%, 100% { 
+        box-shadow: 
+            0 16px 40px rgba(240, 165, 0, 0.4),
+            0 8px 20px rgba(240, 165, 0, 0.3);
+    }
+    50% { 
+        box-shadow: 
+            0 20px 50px rgba(240, 165, 0, 0.6),
+            0 12px 30px rgba(240, 165, 0, 0.5);
+    }
+}
+
+.welcome-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.welcome-flame-icon {
+    width: 32px;
+    height: 32px;
+    filter: brightness(1.2);
+}
+
+.welcome-text {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.welcome-subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.welcome-loading-bar {
+    width: 200px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.welcome-loading-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.8));
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.3s ease;
+    animation: loadingFill 3s ease-in-out forwards;
+}
+
+@keyframes loadingFill {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+.welcome-loading-text {
+    font-size: 12px;
+    opacity: 0.8;
+    font-weight: 600;
+}
+
+/* Disable navigation during welcome */
+.welcome-active .navigation,
+.welcome-active .bottom-nav,
+.welcome-active .status-panel {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 /* Side Menu */
 .side-menu {
     position: fixed;
@@ -1899,71 +2003,6 @@ body.dashboard {
     color: #f0a500;
 }
 
-/* Enhanced Start Button */
-.start-button {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 250;
-    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
-    color: white;
-    border: none;
-    padding: 24px 32px;
-    font-size: 16px;
-    font-weight: 800;
-    border-radius: 24px;
-    cursor: pointer;
-    box-shadow: 
-        0 16px 40px rgba(240, 165, 0, 0.4),
-        0 8px 20px rgba(240, 165, 0, 0.3);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    min-height: 80px;
-    min-width: 280px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    animation: startButtonPulse 3s ease-in-out infinite;
-}
-
-@keyframes startButtonPulse {
-    0%, 100% { 
-        box-shadow: 
-            0 16px 40px rgba(240, 165, 0, 0.4),
-            0 8px 20px rgba(240, 165, 0, 0.3);
-    }
-    50% { 
-        box-shadow: 
-            0 20px 50px rgba(240, 165, 0, 0.6),
-            0 12px 30px rgba(240, 165, 0, 0.5);
-    }
-}
-
-.start-button:active {
-    transform: translate(-50%, -50%) scale(0.95);
-}
-
-.start-icon {
-    font-size: 24px;
-    margin-bottom: 4px;
-}
-
-.start-text {
-    font-size: 18px;
-    font-weight: 800;
-}
-
-.start-subtitle {
-    font-size: 12px;
-    opacity: 0.9;
-    font-weight: 600;
-    text-transform: none;
-    letter-spacing: normal;
-}
-
 /* Loading Overlay */
 .loading-overlay {
     position: fixed;
@@ -2581,18 +2620,18 @@ body.dashboard {
         padding: 20px;
     }
 
-    .start-button {
-        min-width: 260px;
-        min-height: 70px;
-        padding: 20px 28px;
+    .welcome-button {
+        min-width: 280px;
+        min-height: 180px;
+        padding: 28px 36px;
     }
 
-    .start-text {
-        font-size: 16px;
+    .welcome-text {
+        font-size: 18px;
     }
 
-    .start-icon {
-        font-size: 20px;
+    .welcome-icon {
+        font-size: 28px;
     }
 }
 
@@ -2644,10 +2683,10 @@ body.dashboard {
         max-height: calc(100vh - env(safe-area-inset-bottom, 12px) - 84px - env(safe-area-inset-top, 8px) - 120px);
     }
 
-    .start-button {
-        min-height: 60px;
-        min-width: 240px;
-        padding: 16px 24px;
+    .welcome-button {
+        min-height: 160px;
+        min-width: 260px;
+        padding: 24px 32px;
     }
 }
 
