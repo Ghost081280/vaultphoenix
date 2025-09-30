@@ -1,4 +1,4 @@
-/* Vault Phoenix AR Crypto Gaming - Fixed Mobile Styles */
+/* Vault Phoenix AR Crypto Gaming - Enhanced Mobile Styles */
 
 * {
     margin: 0;
@@ -44,66 +44,65 @@ body:not(.dashboard) {
 
 .floating-coin {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(45deg, #d73327, #fb923c);
+    width: 40px;
+    height: 40px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
     border-radius: 50%;
-    opacity: 0.1;
+    opacity: 0.15;
     animation: float 8s ease-in-out infinite;
+    box-shadow: 0 4px 20px rgba(240, 165, 0, 0.3);
 }
 
 .floating-coin:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
 .floating-coin:nth-child(2) { top: 25%; right: 15%; animation-delay: 2s; }
 .floating-coin:nth-child(3) { bottom: 25%; left: 15%; animation-delay: 4s; }
 .floating-coin:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 6s; }
+.floating-coin:nth-child(5) { top: 60%; left: 5%; animation-delay: 1s; }
+.floating-coin:nth-child(6) { top: 40%; right: 8%; animation-delay: 3s; }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0px) scale(1); opacity: 0.1; }
-    50% { transform: translateY(-15px) scale(1.05); opacity: 0.2; }
+    0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); opacity: 0.1; }
+    50% { transform: translateY(-20px) scale(1.1) rotate(180deg); opacity: 0.25; }
 }
 
 .login-container {
     position: relative;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(20, 20, 20, 0.95);
     backdrop-filter: blur(30px);
-    border-radius: 20px;
-    padding: 24px 20px;
+    border-radius: 24px;
+    padding: 32px 28px;
     box-shadow: 
-        0 16px 48px rgba(0, 0, 0, 0.3),
-        0 8px 20px rgba(0, 0, 0, 0.2);
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 8px 20px rgba(240, 165, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     width: 100%;
-    max-width: 360px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 380px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
     transition: all 0.3s ease;
+    color: white;
     margin: 0 auto;
 }
 
 .login-container:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: 
-        0 20px 56px rgba(0, 0, 0, 0.35),
-        0 10px 24px rgba(0, 0, 0, 0.25);
+        0 25px 70px rgba(0, 0, 0, 0.6),
+        0 12px 25px rgba(240, 165, 0, 0.3);
 }
 
 .logo-section {
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .app-logo {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    border-radius: 18px;
-    margin: 0 auto 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    color: white;
-    font-weight: 800;
-    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.4);
+    width: 80px;
+    height: 80px;
+    background: url('../images/VPLogoNoText.PNG') center/cover;
+    border-radius: 20px;
+    margin: 0 auto 16px;
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
     position: relative;
     overflow: hidden;
 }
@@ -126,219 +125,86 @@ body:not(.dashboard) {
 }
 
 .app-title {
-    font-size: 22px;
+    font-size: 28px;
     font-weight: 800;
-    background: linear-gradient(135deg, #d73327, #fb923c);
+    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 4px;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.5px;
 }
 
 .app-subtitle {
     font-size: 14px;
-    color: #666;
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
 }
 
 .demo-badge {
-    background: linear-gradient(135deg, rgba(215, 51, 39, 0.15), rgba(247, 147, 30, 0.1));
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: 12px;
-    padding: 12px 14px;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(215, 51, 39, 0.1));
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 24px;
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .demo-badge-title {
-    color: #d73327;
-    font-weight: 700;
-    margin-bottom: 4px;
+    color: #f0a500;
+    font-weight: 800;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.demo-badge-icon {
+    width: 24px;
+    height: 24px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
 }
 
 .demo-credentials {
-    color: #555;
-    font-weight: 500;
-    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    line-height: 1.4;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 8px;
 }
 
 .crypto-features {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin: 18px 0;
-    padding: 14px;
-    background: rgba(215, 51, 39, 0.1);
-    border-radius: 12px;
-    border: 1px solid rgba(215, 51, 39, 0.2);
+    gap: 12px;
+    margin: 20px 0;
+    padding: 16px;
+    background: rgba(240, 165, 0, 0.1);
+    border-radius: 16px;
+    border: 1px solid rgba(240, 165, 0, 0.2);
 }
 
 .feature-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: #333;
+    gap: 12px;
+    font-size: 14px;
+    color: white;
     font-weight: 600;
 }
 
 .feature-icon {
-    font-size: 16px;
-}
-
-.form-group {
-    margin-bottom: 18px;
-    position: relative;
-}
-
-.form-input {
-    width: 100%;
-    padding: 14px 18px;
-    border: 2px solid #e8f0fe;
-    border-radius: 12px;
-    font-size: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-}
-
-.form-input::placeholder {
-    color: rgba(0, 0, 0, 0.4);
-    font-weight: 500;
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: #d73327;
-    box-shadow: 0 0 0 3px rgba(215, 51, 39, 0.1);
-    transform: translateY(-1px);
-    background: rgba(255, 255, 255, 1);
-}
-
-.login-button {
-    width: 100%;
-    padding: 16px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.3);
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 14px;
-}
-
-.login-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-.login-button:hover::before {
-    left: 100%;
-}
-
-.login-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(215, 51, 39, 0.4);
-}
-
-.login-button:active {
-    transform: translateY(0);
-}
-
-.forgot-password {
-    text-align: center;
-}
-
-.forgot-password a {
-    color: #d73327;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.forgot-password a:hover {
-    color: #fb923c;
-}
-
-.error-message, .success-message {
-    padding: 12px 16px;
-    border-radius: 10px;
-    margin-bottom: 16px;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 500;
-    display: none;
-    animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.error-message {
-    background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(244, 67, 54, 0.05));
-    border: 1px solid rgba(244, 67, 54, 0.2);
-    color: #d32f2f;
-}
-
-.success-message {
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
-    border: 1px solid rgba(76, 175, 80, 0.2);
-    color: #388e3c;
-}
-
-.loading {
-    opacity: 0.7;
-    pointer-events: none;
-}
-
-.loading .login-button {
-    background: linear-gradient(135deg, #ccc, #aaa);
-    box-shadow: none;
-    transform: none;
-}
-
-/* Loading Spinner */
-.loading-spinner {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    width: 24px;
+    height: 24px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
     border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 8px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
-    20%, 40%, 60%, 80% { transform: translateX(3px); }
+    flex-shrink: 0;
 }
 
 /* DASHBOARD PAGE STYLES */
@@ -391,92 +257,30 @@ body.dashboard {
     z-index: 1;
 }
 
-/* Status Indicator */
-.status-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    min-width: 8px;
-    min-height: 8px;
-    border-radius: 50%;
-    background: #4CAF50;
-    animation: statusPulse 2s ease-in-out infinite;
-    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
-    flex-shrink: 0;
-}
-
-.status-dot.error {
-    background: #f44336;
-    animation: errorPulse 2s ease-in-out infinite;
-    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
-}
-
-@keyframes statusPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 6px rgba(76, 175, 80, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
-    }
-}
-
-@keyframes errorPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 6px rgba(244, 67, 54, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
-    }
-}
-
 /* AR Ember Coin */
 .ar-ember-coin {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     z-index: 50;
     display: none;
     cursor: pointer;
     animation: floatBounce 2s ease-in-out infinite;
-    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 6px 20px rgba(240, 165, 0, 0.6));
 }
 
 .ember-coin-icon {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #f0a500 0%, #fb923c 50%, #d73327 100%);
+    background: url('../images/VPEmberCoin.PNG') center/cover;
     border-radius: 50%;
-    position: relative;
-    border: 3px solid #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 
-        inset 0 2px 4px rgba(255, 255, 255, 0.3),
-        0 4px 8px rgba(240, 165, 0, 0.2);
-}
-
-.ember-coin-icon::before {
-    content: '💎';
-    font-size: 40px;
-    filter: none;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        0 0 20px rgba(240, 165, 0, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .ar-ember-coin:active .ember-coin-icon {
@@ -488,18 +292,18 @@ body.dashboard {
 }
 
 @keyframes floatBounce {
-    0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
-    50% { transform: translate(-50%, -50%) translateY(-10px); }
+    0%, 100% { transform: translate(-50%, -50%) translateY(0px) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) translateY(-15px) rotate(180deg); }
 }
 
 @keyframes pulse {
     0%, 100% { 
         box-shadow: 0 0 0 0 rgba(240, 165, 0, 0.7);
-        filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.4));
+        filter: drop-shadow(0 6px 20px rgba(240, 165, 0, 0.6));
     }
     70% { 
-        box-shadow: 0 0 0 20px rgba(240, 165, 0, 0);
-        filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.4)) drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+        box-shadow: 0 0 0 25px rgba(240, 165, 0, 0);
+        filter: drop-shadow(0 6px 20px rgba(240, 165, 0, 0.6)) drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
     }
 }
 
@@ -512,7 +316,7 @@ body.dashboard {
     z-index: 200;
     background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(215, 51, 39, 0.2);
+    border-bottom: 1px solid rgba(240, 165, 0, 0.3);
     padding: env(safe-area-inset-top, 8px) 16px 8px 16px;
     height: calc(env(safe-area-inset-top, 8px) + 64px);
 }
@@ -534,17 +338,11 @@ body.dashboard {
 .nav-logo {
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
+    background: url('../images/VPLogoNoText.PNG') center/cover;
     border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: white;
-    font-weight: 800;
-    box-shadow: 0 3px 12px rgba(215, 51, 39, 0.4);
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 3px 12px rgba(240, 165, 0, 0.4);
 }
 
 .nav-logo:active {
@@ -567,10 +365,10 @@ body.dashboard {
 .vault-badge {
     display: flex;
     align-items: center;
-    gap: 6px;
-    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(247, 147, 30, 0.1));
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    padding: 6px 10px;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.25), rgba(247, 147, 30, 0.15));
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    padding: 8px 12px;
     border-radius: 16px;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
@@ -582,14 +380,17 @@ body.dashboard {
 }
 
 .badge-icon {
-    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
 }
 
 .badge-count {
     color: #f0a500;
-    font-weight: 700;
-    font-size: 13px;
-    min-width: 20px;
+    font-weight: 800;
+    font-size: 14px;
+    min-width: 24px;
     text-align: center;
 }
 
@@ -618,12 +419,12 @@ body.dashboard {
 .side-menu {
     position: fixed;
     top: 0;
-    right: -300px;
-    width: 300px;
+    right: -320px;
+    width: 320px;
     height: 100vh;
-    background: linear-gradient(180deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
+    background: linear-gradient(180deg, rgba(15, 15, 15, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
     backdrop-filter: blur(30px);
-    border-left: 1px solid rgba(215, 51, 39, 0.2);
+    border-left: 2px solid rgba(240, 165, 0, 0.3);
     z-index: 300;
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
@@ -641,7 +442,7 @@ body.dashboard {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 250;
     opacity: 0;
     visibility: hidden;
@@ -655,28 +456,23 @@ body.dashboard {
 }
 
 .menu-header {
-    padding: calc(env(safe-area-inset-top, 8px) + 16px) 16px 16px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: calc(env(safe-area-inset-top, 8px) + 16px) 20px 20px 20px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
     flex-shrink: 0;
 }
 
 .menu-user {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
 }
 
 .menu-avatar {
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
+    width: 48px;
+    height: 48px;
+    background: url('../images/VPLogoNoText.PNG') center/cover;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: white;
-    font-weight: 700;
+    border: 2px solid rgba(240, 165, 0, 0.5);
 }
 
 .menu-user-info {
@@ -685,25 +481,25 @@ body.dashboard {
 
 .menu-user-name {
     color: white;
-    font-weight: 600;
-    font-size: 15px;
-    margin-bottom: 2px;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
 }
 
 .menu-user-email {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .menu-content {
     flex: 1;
     overflow-y: auto;
-    padding: 4px 0 20px 0;
+    padding: 8px 0 20px 0;
     min-height: 0;
 }
 
 .menu-section {
-    padding: 8px 16px 4px 16px;
+    padding: 12px 20px 8px 20px;
 }
 
 .menu-section-title {
@@ -711,76 +507,91 @@ body.dashboard {
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-weight: 600;
-    margin-bottom: 8px;
+    font-weight: 700;
+    margin-bottom: 12px;
 }
 
 .menu-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 16px;
+    gap: 14px;
+    padding: 14px 20px;
     color: white;
     text-decoration: none;
     transition: all 0.3s ease;
-    border-radius: 0;
+    border-radius: 12px;
     position: relative;
     cursor: pointer;
-    min-height: 44px;
+    min-height: 52px;
+    margin-bottom: 4px;
 }
 
 .menu-item:hover,
 .menu-item:active {
-    background: rgba(215, 51, 39, 0.1);
-    color: #d73327;
+    background: rgba(240, 165, 0, 0.15);
+    color: #f0a500;
 }
 
 .menu-item.active {
-    background: linear-gradient(90deg, rgba(215, 51, 39, 0.15), transparent);
-    color: #d73327;
-    border-right: 3px solid #d73327;
+    background: linear-gradient(90deg, rgba(240, 165, 0, 0.2), rgba(240, 165, 0, 0.1));
+    color: #f0a500;
+    border: 1px solid rgba(240, 165, 0, 0.3);
 }
 
 .menu-item-icon {
-    width: 20px;
+    width: 24px;
+    height: 24px;
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-item-icon.image {
+    background-size: cover;
+    background-position: center;
 }
 
 .menu-item-text {
     flex: 1;
-    font-weight: 500;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .menu-item-badge {
-    background: #d73327;
-    color: white;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 8px;
-    min-width: 18px;
+    background: #f0a500;
+    color: #000;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 10px;
+    min-width: 22px;
     text-align: center;
+}
+
+.logout-section {
+    padding: 20px;
+    border-top: 1px solid rgba(240, 165, 0, 0.2);
 }
 
 .logout-button {
     width: 100%;
     background: linear-gradient(135deg, rgba(244, 67, 54, 0.8), rgba(244, 67, 54, 0.6));
     color: white;
-    border: 1px solid rgba(244, 67, 54, 0.4);
-    padding: 14px;
-    border-radius: 10px;
-    font-weight: 600;
+    border: 2px solid rgba(244, 67, 54, 0.5);
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    font-size: 14px;
-    min-height: 48px;
+    font-size: 15px;
+    min-height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 .logout-button:active {
@@ -795,11 +606,11 @@ body.dashboard {
     left: 12px;
     right: 12px;
     z-index: 150;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(25px);
-    border: 1px solid rgba(215, 51, 39, 0.2);
+    border: 2px solid rgba(240, 165, 0, 0.3);
     border-radius: 16px;
-    padding: 12px 16px;
+    padding: 16px;
     color: white;
     transition: all 0.3s ease;
 }
@@ -807,61 +618,90 @@ body.dashboard {
 .status-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 16px;
 }
 
 .status-item {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
     position: relative;
 }
 
 .status-label {
-    font-size: 10px;
+    font-size: 11px;
     opacity: 0.7;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
-    font-weight: 600;
+    letter-spacing: 0.8px;
+    font-weight: 700;
 }
 
 .status-value {
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 800;
     color: #f0a500;
 }
 
-.status-value.error {
-    color: #f44336;
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4CAF50;
+    animation: statusPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+}
+
+.status-dot.error {
+    background: #f44336;
+    animation: errorPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+}
+
+@keyframes statusPulse {
+    0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(76, 175, 80, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+}
+
+@keyframes errorPulse {
+    0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(244, 67, 54, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
 }
 
 /* Compass Component */
 .compass-container {
     position: absolute;
     top: 50%;
-    right: 4px;
+    right: 8px;
     transform: translateY(-50%);
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
 }
 
 .compass {
     width: 100%;
     height: 100%;
-    border: 2px solid rgba(240, 165, 0, 0.8);
+    border: 3px solid rgba(240, 165, 0, 0.8);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.15) 0%, rgba(240, 165, 0, 0.05) 100%);
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.2) 0%, rgba(240, 165, 0, 0.05) 100%);
     position: relative;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .compass-needle {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 3px;
-    height: 14px;
+    width: 4px;
+    height: 16px;
     transform: translate(-50%, -50%);
     transform-origin: center center;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -875,8 +715,8 @@ body.dashboard {
     width: 100%;
     height: 50%;
     background: #f0a500;
-    border-radius: 2px 2px 0 0;
-    box-shadow: 0 0 3px rgba(240, 165, 0, 0.8);
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 0 4px rgba(240, 165, 0, 0.8);
 }
 
 .compass-needle::after {
@@ -887,19 +727,19 @@ body.dashboard {
     width: 100%;
     height: 50%;
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 0 0 2px 2px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
 .compass-n {
     position: absolute;
-    top: 2px;
+    top: 3px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 10px;
     color: #f0a500;
-    font-weight: 800;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    font-weight: 900;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .compass-center {
@@ -907,11 +747,623 @@ body.dashboard {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
     background: #f0a500;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* AR Instructions */
+.ar-instructions {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 8px) + 220px);
+    left: 12px;
+    right: 12px;
+    z-index: 160;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    border: 2px solid #f0a500;
+    border-radius: 16px;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    display: none;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ar-instructions.show {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.ar-instructions-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ar-instructions-text {
+    font-size: 15px;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* Token Discovery Modal */
+.token-discovery {
+    position: fixed;
+    bottom: calc(env(safe-area-inset-bottom, 12px) + 84px);
+    left: 12px;
+    right: 12px;
+    z-index: 180;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(26, 26, 46, 0.95));
+    backdrop-filter: blur(30px);
+    border: 3px solid #f0a500;
+    border-radius: 20px;
+    padding: 24px;
+    color: white;
+    display: none;
+    transform: translateY(100%);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(240, 165, 0, 0.2);
+    max-height: calc(100vh - env(safe-area-inset-bottom, 12px) - 96px - env(safe-area-inset-top, 8px) - 160px);
+    overflow-y: auto;
+}
+
+.token-discovery.show {
+    display: block;
+    transform: translateY(0);
+}
+
+.token-discovery-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.token-found-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.token-found-icon {
+    width: 24px;
+    height: 24px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
+}
+
+.token-rarity {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.token-preview {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.token-image {
+    width: 90px;
+    height: 90px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #FFD700;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.5);
+    flex-shrink: 0;
+}
+
+.token-image::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: tokenShimmer 2s ease-in-out infinite;
+}
+
+@keyframes tokenShimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+}
+
+.token-value {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #f0a500;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 800;
+    border: 2px solid rgba(240, 165, 0, 0.5);
+}
+
+.token-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.token-amount {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    color: #f0a500;
+}
+
+.token-usd-value {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.token-location {
+    background: rgba(240, 165, 0, 0.2);
+    color: #f0a500;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+.sponsor-message {
+    background: rgba(240, 165, 0, 0.1);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.sponsor-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #f0a500;
+    margin-bottom: 4px;
+}
+
+.sponsor-text {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+}
+
+.token-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.token-action-btn {
+    flex: 1;
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    border: none;
+    color: white;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.token-action-btn:active {
+    transform: scale(0.98);
+}
+
+.token-action-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* $Ember Vault View */
+.vault-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 160;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
+    display: none;
+    overflow-y: auto;
+    padding: calc(env(safe-area-inset-top, 8px) + 72px) 0 calc(env(safe-area-inset-bottom, 12px) + 84px) 0;
+}
+
+.vault-container {
+    padding: 0 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.vault-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 24px;
+    background: rgba(240, 165, 0, 0.15);
+    border-radius: 20px;
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.vault-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../images/PhoenixSafe.PNG') center/contain no-repeat;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.vault-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.vault-title-icon {
+    width: 32px;
+    height: 32px;
+    background: url('../images/PhoenixSafe.PNG') center/cover;
+}
+
+.vault-balance {
+    background: rgba(240, 165, 0, 0.2);
+    border-radius: 16px;
+    padding: 16px;
+    display: inline-block;
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+}
+
+.vault-balance-text {
+    color: #f0a500;
+    font-weight: 800;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.vault-usd-value {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.vault-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.vault-action-btn {
+    flex: 1;
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: white;
+    border: none;
+    padding: 16px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.vault-action-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.vault-action-btn:active {
+    transform: scale(0.98);
+}
+
+.vault-btn-icon {
+    font-size: 18px;
+}
+
+.vault-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 4px;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 16px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    min-height: 44px;
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    box-shadow: 0 3px 12px rgba(240, 165, 0, 0.3);
+}
+
+.filter-btn:active {
+    transform: scale(0.95);
+}
+
+.token-history {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.history-item {
+    background: rgba(240, 165, 0, 0.1);
+    border: 1px solid rgba(240, 165, 0, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.history-item:active {
+    transform: scale(0.98);
+    background: rgba(240, 165, 0, 0.15);
+}
+
+.history-icon {
+    width: 40px;
+    height: 40px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.history-details {
+    flex: 1;
+}
+
+.history-title {
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.history-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+}
+
+.history-value {
+    color: #f0a500;
+    font-weight: 800;
+    font-size: 16px;
+    text-align: right;
+}
+
+/* Campaign Integration */
+.campaign-section {
+    margin: 20px 0;
+    padding: 16px;
+    background: rgba(240, 165, 0, 0.1);
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 16px;
+}
+
+.campaign-title {
+    color: #f0a500;
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.campaign-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campaign-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.campaign-name {
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.campaign-reward {
+    color: #f0a500;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+/* QR Modal */
+.qr-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(15px);
+    z-index: 400;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.qr-modal-content {
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.98), rgba(26, 26, 26, 0.98));
+    border-radius: 20px;
+    padding: 28px;
+    max-width: 380px;
+    width: 100%;
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: white;
+}
+
+.qr-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.qr-modal-header h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #f0a500;
+}
+
+.qr-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.qr-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.qr-code-container {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.qr-placeholder {
+    text-align: center;
+    color: #333;
+    font-weight: 600;
+}
+
+.qr-instructions {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.qr-token-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(240, 165, 0, 0.1);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+.qr-token-amount {
+    color: #f0a500;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.qr-token-value {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    font-size: 14px;
 }
 
 /* Bottom Navigation */
@@ -970,6 +1422,16 @@ body.dashboard {
     font-size: 20px;
     color: white;
     transition: all 0.3s ease;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-tab-icon.image {
+    background-size: cover;
+    background-position: center;
 }
 
 .nav-tab.active .nav-tab-icon {
@@ -1016,45 +1478,170 @@ body.dashboard {
     transform: translate(-50%, -50%) scale(0.95);
 }
 
-/* Vault View */
-.vault-view {
+/* Loading Overlay */
+.loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 160;
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 46, 0.9));
     display: none;
-    overflow-y: auto;
-    padding: calc(env(safe-area-inset-top, 8px) + 72px) 0 calc(env(safe-area-inset-bottom, 12px) + 84px) 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+    color: white;
+    font-size: 16px;
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    gap: 20px;
 }
 
-.vault-container {
-    padding: 0 16px;
-    max-width: 600px;
-    margin: 0 auto;
+.loading-spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: #f0a500;
+    animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-.vault-header {
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    font-weight: 600;
     text-align: center;
+    max-width: 280px;
+    line-height: 1.4;
+}
+
+/* Map Content */
+.map-fallback-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: calc(env(safe-area-inset-bottom, 12px) + 84px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.map-central-card {
+    background: rgba(240, 165, 0, 0.2);
+    border: 2px solid rgba(240, 165, 0, 0.5);
+    border-radius: 15px;
+    padding: 24px;
+    max-width: 280px;
     margin-bottom: 20px;
+}
+
+.map-card-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.map-title {
+    margin: 0 0 8px 0;
+    color: #f0a500;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.map-description {
+    margin: 0 0 12px 0;
+    opacity: 0.8;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.map-location-box {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 12px;
+}
+
+.map-location-label {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.map-location-coords {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f0a500;
+}
+
+.map-token-locations {
+    position: absolute;
+    bottom: calc(env(safe-area-inset-bottom, 12px) + 140px);
+    left: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 12px;
     padding: 16px;
-    background: rgba(240, 165, 0, 0.1);
-    border-radius: 16px;
+    text-align: center;
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(240, 165, 0, 0.2);
 }
 
-.vault-title {
-    font-size: 20px;
-    font-weight: 800;
-    color: white;
+.map-token-locations-label {
+    font-size: 12px;
+    opacity: 0.7;
     margin-bottom: 8px;
-    letter-spacing: -0.3px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* QR Modal */
-.qr-modal {
+.map-token-locations-icons {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.map-token-locations-hint {
+    font-size: 12px;
+    margin-bottom: 12px;
+    color: #f0a500;
+}
+
+.map-locations-grid {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.token-location-btn {
+    background: rgba(240, 165, 0, 0.2);
+    border: 1px solid rgba(240, 165, 0, 0.5);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.token-location-btn:active {
+    transform: scale(0.95);
+    background: rgba(240, 165, 0, 0.4);
+}
+
+/* Navigation Modal */
+.navigation-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -1069,15 +1656,127 @@ body.dashboard {
     padding: 20px;
 }
 
-.qr-modal-content {
-    background: linear-gradient(135deg, rgba(26, 26, 46, 0.98), rgba(22, 33, 62, 0.98));
+.navigation-content {
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.98), rgba(26, 26, 26, 0.98));
     border-radius: 20px;
     padding: 24px;
     max-width: 360px;
     width: 100%;
-    border: 1px solid rgba(240, 165, 0, 0.2);
+    border: 2px solid rgba(240, 165, 0, 0.3);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
     text-align: center;
+}
+
+.navigation-header {
+    margin-bottom: 20px;
+}
+
+.navigation-title {
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.navigation-coin-info {
+    background: rgba(240, 165, 0, 0.1);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 16px;
+}
+
+.navigation-coin-value {
+    color: #f0a500;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.navigation-distance {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.navigation-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.navigation-option {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 60px;
+}
+
+.navigation-option:hover,
+.navigation-option:active {
+    background: rgba(240, 165, 0, 0.2);
+    border-color: rgba(240, 165, 0, 0.5);
+    transform: scale(0.98);
+}
+
+.navigation-option-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.navigation-option-icon {
+    font-size: 24px;
+    width: 40px;
+    text-align: center;
+}
+
+.navigation-option-info {
+    text-align: left;
+}
+
+.navigation-option-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.navigation-option-subtitle {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.navigation-option-time {
+    font-weight: 700;
+    color: #f0a500;
+    font-size: 14px;
+}
+
+.navigation-close {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navigation-close:active {
+    transform: scale(0.98);
 }
 
 /* Logout Modal */
@@ -1155,48 +1854,150 @@ body.dashboard {
     transform: scale(0.98);
 }
 
-/* Map Content */
-.map-fallback-content {
+/* Form Inputs for Login */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 14px;
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    color: white;
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #f0a500;
+    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.2);
+    transform: translateY(-1px);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.login-button {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.login-button::before {
+    content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: calc(env(safe-area-inset-bottom, 12px) + 84px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.login-button:hover::before {
+    left: 100%;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(240, 165, 0, 0.5);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.forgot-password {
     text-align: center;
-    padding: 20px;
 }
 
-.map-central-card {
-    background: rgba(240, 165, 0, 0.2);
-    border: 2px solid rgba(240, 165, 0, 0.5);
-    border-radius: 15px;
-    padding: 24px;
-    max-width: 280px;
-    margin-bottom: 20px;
-}
-
-.map-card-icon {
-    font-size: 40px;
-    margin-bottom: 12px;
-}
-
-.map-title {
-    margin: 0 0 8px 0;
+.forgot-password a {
     color: #f0a500;
-    font-size: 18px;
-    font-weight: 700;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
-.map-description {
-    margin: 0 0 12px 0;
-    opacity: 0.8;
+.forgot-password a:hover {
+    color: #fb923c;
+}
+
+.error-message, .success-message {
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    text-align: center;
     font-size: 13px;
-    line-height: 1.4;
+    font-weight: 500;
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.error-message {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.2), rgba(244, 67, 54, 0.1));
+    border: 1px solid rgba(244, 67, 54, 0.4);
+    color: #ff6b6b;
+}
+
+.success-message {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1));
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    color: #4CAF50;
+}
+
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading .login-button {
+    background: linear-gradient(135deg, #666, #888);
+    box-shadow: none;
+    transform: none;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 8px;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+    20%, 40%, 60%, 80% { transform: translateX(3px); }
 }
 
 /* Mobile Responsive Adjustments */
@@ -1225,6 +2026,44 @@ body.dashboard {
         right: 8px;
         padding: 8px 12px;
     }
+
+    .ar-ember-coin {
+        width: 70px;
+        height: 70px;
+    }
+
+    .token-discovery {
+        padding: 16px;
+        left: 8px;
+        right: 8px;
+    }
+
+    .token-preview {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .token-image {
+        width: 70px;
+        height: 70px;
+    }
+
+    .map-token-locations {
+        left: 8px;
+        right: 8px;
+        padding: 12px;
+    }
+
+    .navigation-content {
+        max-width: 320px;
+        padding: 20px;
+    }
+
+    .qr-modal-content {
+        max-width: 320px;
+        padding: 20px;
+    }
 }
 
 @media (max-height: 640px) {
@@ -1236,7 +2075,6 @@ body.dashboard {
     .app-logo {
         width: 60px;
         height: 60px;
-        font-size: 24px;
     }
     
     .app-title {
@@ -1256,6 +2094,20 @@ body.dashboard {
     .form-group {
         margin-bottom: 14px;
     }
+
+    .status-panel {
+        top: calc(env(safe-area-inset-top, 8px) + 72px);
+        padding: 10px 12px;
+    }
+
+    .ar-instructions {
+        top: calc(env(safe-area-inset-top, 8px) + 180px);
+        padding: 16px;
+    }
+
+    .token-discovery {
+        max-height: calc(100vh - env(safe-area-inset-bottom, 12px) - 84px - env(safe-area-inset-top, 8px) - 120px);
+    }
 }
 
 /* Touch improvements */
@@ -1263,30 +2115,63 @@ body.dashboard {
 .menu-item,
 .vault-badge,
 .nav-menu-button,
-.nav-logo {
+.nav-logo,
+.token-action-btn,
+.vault-action-btn,
+.filter-btn,
+.ar-ember-coin {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
+    touch-action: manipulation;
 }
 
 /* Performance optimizations */
 .nav-tab,
 .menu-item,
 .vault-badge,
-.nav-menu-button {
+.nav-menu-button,
+.token-action-btn,
+.vault-action-btn,
+.filter-btn,
+.ar-ember-coin {
     contain: layout style paint;
-    touch-action: manipulation;
 }
 
-/* Hide unused dashboard elements for now */
-.token-discovery,
-.ar-instructions,
-.mode-indicator,
-.navigation-modal,
-.qr-modal,
-.loading-overlay,
-.token-history,
-.vault-actions,
-.vault-filters {
-    display: none !important;
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+    .login-container {
+        background: rgba(10, 10, 10, 0.98);
+        border-color: rgba(240, 165, 0, 0.4);
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .login-container {
+        border: 2px solid #f0a500;
+    }
+
+    .form-input {
+        border-width: 2px;
+    }
+
+    .login-button {
+        border: 2px solid #fff;
+    }
+
+    .vault-badge,
+    .nav-menu-button,
+    .token-action-btn,
+    .vault-action-btn {
+        border-width: 2px;
+    }
 }
