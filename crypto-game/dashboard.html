@@ -4,51 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Vault Phoenix - AR Crypto Gaming Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
 </head>
 <body class="dashboard">
     <div id="container">
-        <!-- AR Camera Video -->
-        <video id="video" autoplay muted playsinline></video>
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Initializing AR Crypto Hunt...</div>
+        </div>
+
+        <!-- Start Button -->
+        <button id="startBtn" class="start-button">🔥 Start Hunt</button>
         
-        <!-- Three.js Canvas -->
-        <canvas id="canvas"></canvas>
-        
-        <!-- Map Container -->
+        <!-- Base Content Layers -->
         <div id="map"></div>
+        <video id="video" autoplay muted playsinline></video>
+        <canvas id="canvas"></canvas>
         
         <!-- AR Ember Coin -->
         <div class="ar-ember-coin" id="arEmberCoin">
             <div class="ember-coin-icon"></div>
         </div>
         
-        <!-- Navigation Bar -->
+        <!-- Navigation -->
         <nav class="navigation">
             <div class="nav-content">
                 <div class="nav-brand">
-                    <div class="nav-logo" id="homeBtn">🔥</div>
+                    <div class="nav-logo" id="homeBtn"></div>
                     <div class="nav-title">Vault Phoenix</div>
                 </div>
-                
                 <div class="nav-actions">
                     <div class="vault-badge" id="vaultBadge">
-                        <span class="badge-icon">💎</span>
+                        <div class="badge-icon"></div>
                         <span class="badge-count" id="navEmberCount">0</span>
                     </div>
                     <button class="nav-menu-button" id="menuToggle">
-                        <span>☰</span>
+                        <span id="menuIcon">☰</span>
                     </button>
                 </div>
             </div>
         </nav>
-        
+
         <!-- Side Menu -->
         <div class="menu-overlay" id="menuOverlay"></div>
-        <nav class="side-menu" id="sideMenu">
+        <div class="side-menu" id="sideMenu">
             <div class="menu-header">
                 <div class="menu-user">
-                    <div class="menu-avatar" id="menuAvatar">P</div>
+                    <div class="menu-avatar" id="menuAvatar"></div>
                     <div class="menu-user-info">
                         <div class="menu-user-name">Phoenix Hunter</div>
                         <div class="menu-user-email" id="menuUserEmail">demo@vaultphoenix.com</div>
@@ -59,98 +64,117 @@
             <div class="menu-content">
                 <div class="menu-section">
                     <div class="menu-section-title">Gaming</div>
-                    <div class="menu-item" data-mode="map">
-                        <span class="menu-item-icon">🗺️</span>
-                        <span class="menu-item-text">Token Hunt</span>
-                    </div>
-                    <div class="menu-item" data-mode="vault">
-                        <span class="menu-item-icon">💎</span>
-                        <span class="menu-item-text">Token Vault</span>
-                        <span class="menu-item-badge" id="menuEmberCount">0</span>
-                    </div>
+                </div>
+                
+                <div class="menu-item active" data-mode="map">
+                    <div class="menu-item-icon">🗺️</div>
+                    <div class="menu-item-text">Token Hunt</div>
+                </div>
+                
+                <div class="menu-item" data-mode="ar">
+                    <div class="menu-item-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')"></div>
+                    <div class="menu-item-text">AR Discovery</div>
+                    <div class="menu-item-badge" id="nearbyTokens">6</div>
+                </div>
+                
+                <div class="menu-item" data-mode="vault">
+                    <div class="menu-item-icon image" style="background-image: url('../images/PhoenixSafe.PNG')"></div>
+                    <div class="menu-item-text">$Ember Vault</div>
+                    <div class="menu-item-badge" id="menuEmberCount">0</div>
+                </div>
+                
+                <div class="menu-section">
+                    <div class="menu-section-title">Campaigns</div>
+                </div>
+                
+                <div class="menu-item" data-mode="leaderboard">
+                    <div class="menu-item-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')"></div>
+                    <div class="menu-item-text">Campaign Ranks</div>
+                    <div class="menu-item-badge">Top 10</div>
                 </div>
                 
                 <div class="menu-section">
                     <div class="menu-section-title">Wallet</div>
-                    <div class="menu-item" id="coinbaseWallet">
-                        <span class="menu-item-icon">🏦</span>
-                        <span class="menu-item-text">Coinbase Wallet</span>
-                    </div>
-                    <div class="menu-item" id="redeemTokens">
-                        <span class="menu-item-icon">📱</span>
-                        <span class="menu-item-text">Redeem QR</span>
-                    </div>
+                </div>
+                
+                <div class="menu-item" id="coinbaseWallet">
+                    <div class="menu-item-icon">🏦</div>
+                    <div class="menu-item-text">Coinbase Wallet</div>
+                </div>
+                
+                <div class="menu-item" id="redeemTokens">
+                    <div class="menu-item-icon">📱</div>
+                    <div class="menu-item-text">Payment QR</div>
                 </div>
             </div>
             
-            <div style="padding: 16px;">
+            <div class="logout-section">
                 <button class="logout-button" id="sideMenuLogout">
                     <span>🚪</span>
                     <span>Sign Out</span>
                 </button>
             </div>
-        </nav>
+        </div>
         
         <!-- Status Panel -->
-        <div class="status-panel">
+        <div class="status-panel" id="statusPanel">
             <div class="status-grid">
                 <div class="status-item">
                     <div class="status-label">GPS Status</div>
                     <div class="status-value" id="gpsStatus">
                         <div class="status-indicator">
                             <div class="status-dot"></div>
-                            <span>Searching...</span>
+                            <span>Ready to start!</span>
                         </div>
                     </div>
                 </div>
                 <div class="status-item">
-                    <div class="status-label">Ember Tokens</div>
+                    <div class="status-label">$Ember Tokens</div>
                     <div class="status-value" id="emberCount">0 $Ember</div>
                 </div>
                 <div class="status-item">
-                    <div class="status-label">Distance</div>
-                    <div class="status-value" id="distance">-- meters</div>
-                    <div class="compass-container">
-                        <div class="compass" id="compass">
-                            <div class="compass-needle" id="compassNeedle"></div>
-                            <div class="compass-n">N</div>
-                            <div class="compass-center"></div>
-                        </div>
+                    <div class="status-label">Location</div>
+                    <div class="status-value">
+                        <span id="lat">33.4484</span>, <span id="lng">-112.0740</span>
                     </div>
                 </div>
                 <div class="status-item">
-                    <div class="status-label">Next Token</div>
-                    <div class="status-value" id="nextToken">Scanning area...</div>
+                    <div class="status-label">Heading</div>
+                    <div class="status-value"><span id="heading">--</span>°</div>
+                    <div class="compass-container">
+                        <div class="compass">
+                            <div class="compass-needle" id="compassNeedle"></div>
+                            <div class="compass-center"></div>
+                            <div class="compass-n">N</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Mode Indicator -->
-        <div class="mode-indicator vault-mode" id="modeIndicator">
-            <span>💎</span>
-            <span>Vault Mode</span>
-        </div>
-        
         <!-- AR Instructions -->
         <div class="ar-instructions" id="arInstructions">
-            <div class="ar-instructions-title">🔥 Token Found Nearby!</div>
-            <div class="ar-instructions-text">Point your camera around to find the glowing Ember token. Tap to collect!</div>
+            <div class="ar-instructions-title">🔥 AR Hunt Mode</div>
+            <div class="ar-instructions-text">Point your camera around and tap the glowing Ember coin to discover $Ember tokens!</div>
         </div>
         
         <!-- Token Discovery Modal -->
         <div class="token-discovery" id="tokenDiscovery">
             <div class="token-discovery-header">
                 <div class="token-found-title">
-                    <span class="token-found-icon">💎</span>
-                    <span>Ember Token Found!</span>
+                    <div class="token-found-icon"></div>
+                    <span>$Ember Token Found!</span>
                 </div>
                 <div class="token-rarity" id="tokenRarity">Legendary</div>
             </div>
             
+            <div class="sponsor-message">
+                <div class="sponsor-title">Sponsored by Phoenix Suns Arena</div>
+                <div class="sponsor-text">Exclusive courtside experience awaits!</div>
+            </div>
+            
             <div class="token-preview">
                 <div class="token-image">
-                    <div class="token-glow"></div>
-                    <div class="token-symbol">💎</div>
                     <div class="token-value" id="discoveredTokenValue">500</div>
                 </div>
                 <div class="token-details">
@@ -172,11 +196,14 @@
             </div>
         </div>
         
-        <!-- Vault View -->
+        <!-- $Ember Vault View -->
         <div class="vault-view" id="vaultView">
             <div class="vault-container">
                 <div class="vault-header">
-                    <h2 class="vault-title">🔥 Token Vault</h2>
+                    <div class="vault-title">
+                        <div class="vault-title-icon"></div>
+                        $Ember Vault
+                    </div>
                     <div class="vault-balance">
                         <div class="vault-balance-text" id="vaultBalance">0 $Ember Tokens</div>
                         <div class="vault-usd-value" id="vaultUsdValue">$0.00 USD</div>
@@ -185,13 +212,34 @@
                 
                 <div class="vault-actions">
                     <button class="vault-action-btn" id="coinbaseTransferBtn">
-                        <span class="vault-btn-icon">🏦</span>
+                        <div class="vault-btn-icon">🏦</div>
                         <span>Transfer to Coinbase</span>
                     </button>
                     <button class="vault-action-btn secondary" id="redeemQRBtn">
-                        <span class="vault-btn-icon">📱</span>
-                        <span>Redeem QR</span>
+                        <div class="vault-btn-icon">📱</div>
+                        <span>Payment QR</span>
                     </button>
+                </div>
+
+                <div class="campaign-section">
+                    <div class="campaign-title">
+                        <div class="vault-title-icon"></div>
+                        Active Campaigns
+                    </div>
+                    <div class="campaign-list">
+                        <div class="campaign-item">
+                            <div class="campaign-name">Phoenix Suns Season</div>
+                            <div class="campaign-reward">+50% tokens</div>
+                        </div>
+                        <div class="campaign-item">
+                            <div class="campaign-name">Desert Adventures</div>
+                            <div class="campaign-reward">Free gear</div>
+                        </div>
+                        <div class="campaign-item">
+                            <div class="campaign-name">Local Business Boost</div>
+                            <div class="campaign-reward">2x rewards</div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="vault-filters">
@@ -216,8 +264,8 @@
                         <span>Navigate to Token</span>
                     </div>
                     <div class="navigation-coin-info">
-                        <div class="navigation-coin-value">500 $Ember Token</div>
-                        <div class="navigation-distance">~1.2km away</div>
+                        <div class="navigation-coin-value" id="navPlayerName">500 $Ember Token</div>
+                        <div class="navigation-distance" id="navDistance">~1.2km away</div>
                     </div>
                 </div>
                 
@@ -230,7 +278,7 @@
                                 <div class="navigation-option-subtitle">Apple/Google Maps</div>
                             </div>
                         </div>
-                        <div class="navigation-option-time">~15 min</div>
+                        <div class="navigation-option-time" id="navWalkTime">~15 min</div>
                     </div>
                     
                     <div class="navigation-option" id="navDriving">
@@ -241,7 +289,7 @@
                                 <div class="navigation-option-subtitle">Apple/Google Maps</div>
                             </div>
                         </div>
-                        <div class="navigation-option-time">~5 min</div>
+                        <div class="navigation-option-time" id="navDriveTime">~5 min</div>
                     </div>
                     
                     <div class="navigation-option" id="navAR">
@@ -264,7 +312,7 @@
         <div class="qr-modal" id="qrModal">
             <div class="qr-modal-content">
                 <div class="qr-modal-header">
-                    <h3>🔥 Redeem Tokens</h3>
+                    <h3>🔥 Payment QR Code</h3>
                     <button class="qr-close" id="qrClose">✕</button>
                 </div>
                 
@@ -276,7 +324,7 @@
                 </div>
                 
                 <div class="qr-instructions">
-                    Show this QR code at any Vault Phoenix partner location to redeem your $Ember tokens for real rewards!
+                    Show this QR code at any Vault Phoenix partner location to pay with your $Ember tokens for real rewards and discounts!
                 </div>
                 
                 <div class="qr-token-info">
@@ -291,45 +339,13 @@
             <div class="logout-modal">
                 <div class="logout-modal-title">🚪 Sign Out</div>
                 <div class="logout-modal-text">
-                    Are you sure you want to sign out? Your tokens will be saved securely.
+                    Are you sure you want to sign out? Your $Ember tokens will be saved securely in your vault.
                 </div>
                 <div class="logout-modal-actions">
                     <button class="logout-modal-btn logout-modal-cancel" id="cancelLogout">Cancel</button>
                     <button class="logout-modal-btn logout-modal-confirm" id="confirmLogout">Sign Out</button>
                 </div>
             </div>
-        </div>
-        
-        <!-- Map Content -->
-        <div class="map-fallback-content">
-            <div class="map-central-card">
-                <div class="map-card-icon">🗺️</div>
-                <h2 class="map-title">Token Hunt Active</h2>
-                <p class="map-description">
-                    Explore Phoenix to discover hidden $Ember tokens using AR technology.
-                </p>
-                <div class="map-location-box">
-                    <div class="map-location-label">Your Location</div>
-                    <div class="map-location-coords" id="userLocation">Locating...</div>
-                </div>
-            </div>
-            
-            <div class="map-token-locations">
-                <div class="map-token-locations-label">Available Tokens Nearby</div>
-                <div class="map-token-locations-icons">💎 🔥 💎 🔥 💎</div>
-                <div class="map-token-locations-hint">Tap locations to navigate</div>
-            </div>
-        </div>
-        
-        <!-- Start Button -->
-        <button class="start-button" id="startBtn">
-            🔥 Start Hunt
-        </button>
-        
-        <!-- Loading Overlay -->
-        <div class="loading-overlay" id="loadingOverlay">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Initializing AR Crypto Hunt...</div>
         </div>
         
         <!-- Bottom Navigation -->
@@ -340,16 +356,16 @@
                     <div class="nav-tab-label">Hunt</div>
                 </div>
                 <div class="nav-tab" data-mode="ar">
-                    <div class="nav-tab-icon">📱</div>
+                    <div class="nav-tab-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')"></div>
                     <div class="nav-tab-label">AR View</div>
                 </div>
                 <div class="nav-tab" data-mode="vault">
-                    <div class="nav-tab-icon">💎</div>
+                    <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixSafe.PNG')"></div>
                     <div class="nav-tab-label">Vault</div>
                 </div>
                 <div class="nav-tab" data-mode="leaderboard">
-                    <div class="nav-tab-icon">🏆</div>
-                    <div class="nav-tab-label">Ranks</div>
+                    <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')"></div>
+                    <div class="nav-tab-label">Campaigns</div>
                 </div>
             </div>
         </nav>
