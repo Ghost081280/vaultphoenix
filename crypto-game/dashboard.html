@@ -18,9 +18,9 @@
 
         <!-- Start Button -->
         <button id="startBtn" class="start-button">
-            <span class="start-icon">🔥</span>
+            <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="start-flame-icon">
             <span class="start-text">Start $Ember Hunt</span>
-            <span class="start-subtitle">Discover Hidden Crypto Tokens</span>
+            <span class="start-subtitle">Welcome to Phoenix Adventure</span>
         </button>
         
         <!-- Base Content Layers -->
@@ -88,7 +88,7 @@
                 </div>
                 
                 <div class="menu-item" data-mode="ar">
-                    <div class="menu-item-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')"></div>
+                    <div class="menu-item-icon image" style="background-image: url('../images/VPEmberCoin.PNG')"></div>
                     <div class="menu-item-text">AR Discovery</div>
                     <div class="menu-item-badge" id="nearbyTokens">6</div>
                 </div>
@@ -121,6 +121,11 @@
                 <div class="menu-item" id="redeemTokens">
                     <div class="menu-item-icon">📱</div>
                     <div class="menu-item-text">Payment QR</div>
+                </div>
+
+                <div class="menu-item" id="howToPlay">
+                    <div class="menu-item-icon">❓</div>
+                    <div class="menu-item-text">How to Play</div>
                 </div>
             </div>
             
@@ -170,8 +175,11 @@
         
         <!-- AR Instructions -->
         <div class="ar-instructions" id="arInstructions">
-            <div class="ar-instructions-title">🔥 AR Hunt Mode</div>
-            <div class="ar-instructions-text">Point your camera around and tap the glowing $Ember coin to discover tokens!</div>
+            <div class="ar-instructions-title">
+                <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ar-flame-icon">
+                AR Hunt Mode
+            </div>
+            <div class="ar-instructions-text">Point your camera around and tap the glowing $Ember coin to collect tokens!</div>
         </div>
         
         <!-- Token Discovery Modal -->
@@ -180,7 +188,7 @@
                 <div class="token-discovery-header">
                     <div class="token-found-title">
                         <div class="token-found-icon"></div>
-                        <span>$Ember Token Found!</span>
+                        <span>$Ember Token Collected!</span>
                     </div>
                     <div class="token-amount-badge" id="tokenAmountBadge">500 $Ember</div>
                 </div>
@@ -203,12 +211,8 @@
                     </div>
                     
                     <div class="token-actions">
-                        <button class="token-action-btn" id="collectTokenBtn">
-                            <span>💎</span>
-                            <span>Collect $Ember</span>
-                        </button>
-                        <button class="token-action-btn secondary" id="sponsorInfoBtn">
-                            <span>ℹ️</span>
+                        <button class="token-action-btn learn-more-btn" id="sponsorInfoBtn">
+                            <img src="../images/PhoenixBullseye.PNG" alt="Learn More" class="learn-more-icon">
                             <span>Learn More</span>
                         </button>
                     </div>
@@ -237,6 +241,13 @@
                                 <span class="offer-icon">🎯</span>
                                 <span>Arena Tours</span>
                             </div>
+                        </div>
+                        
+                        <div class="sponsor-actions">
+                            <button class="sponsor-cta-btn" id="sponsorActionBtn">
+                                <span>🎯</span>
+                                <span>Book Experience</span>
+                            </button>
                         </div>
                         
                         <button class="sponsor-back-btn" id="sponsorBackBtn">
@@ -276,7 +287,7 @@
                 <div class="vault-stats-section">
                     <div class="vault-stats-title">
                         <div class="vault-title-icon"></div>
-                        Transaction History
+                        Collection History
                     </div>
                     <div class="vault-stats-grid">
                         <div class="stat-item">
@@ -299,10 +310,7 @@
                 </div>
                 
                 <div class="vault-filters">
-                    <button class="filter-btn active" data-filter="all">All Tokens</button>
-                    <button class="filter-btn" data-filter="high">High Value</button>
-                    <button class="filter-btn" data-filter="medium">Medium Value</button>
-                    <button class="filter-btn" data-filter="low">Low Value</button>
+                    <button class="filter-btn active" data-filter="all">All Tokens Collected</button>
                 </div>
                 
                 <div class="token-history" id="tokenHistory">
@@ -465,6 +473,70 @@
                     <div class="qr-token-amount" id="qrTokenAmount">0 $Ember</div>
                     <div class="qr-token-value" id="qrTokenValue">$0.00 USD</div>
                 </div>
+
+                <div class="qr-actions">
+                    <button class="logout-btn" id="qrLogoutBtn">
+                        <span>🚪</span>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Play Modal -->
+        <div class="how-to-play-modal" id="howToPlayModal">
+            <div class="how-to-play-content">
+                <div class="how-to-play-header">
+                    <h3>🎮 How to Play Vault Phoenix</h3>
+                    <button class="how-to-play-close" id="howToPlayClose">✕</button>
+                </div>
+                
+                <div class="how-to-play-steps">
+                    <div class="play-step">
+                        <div class="step-icon">🗺️</div>
+                        <div class="step-content">
+                            <div class="step-title">1. Explore the Map</div>
+                            <div class="step-description">Find $Ember tokens scattered across Phoenix locations</div>
+                        </div>
+                    </div>
+                    
+                    <div class="play-step">
+                        <div class="step-icon">📱</div>
+                        <div class="step-content">
+                            <div class="step-title">2. Switch to AR Mode</div>
+                            <div class="step-description">Use your camera to discover and collect tokens in augmented reality</div>
+                        </div>
+                    </div>
+                    
+                    <div class="play-step">
+                        <div class="step-icon">💎</div>
+                        <div class="step-content">
+                            <div class="step-title">3. Collect & Store</div>
+                            <div class="step-description">Tap coins to collect them and store in your secure vault</div>
+                        </div>
+                    </div>
+                    
+                    <div class="play-step">
+                        <div class="step-icon">🏆</div>
+                        <div class="step-content">
+                            <div class="step-title">4. Complete Adventures</div>
+                            <div class="step-description">Join themed adventures for bonus rewards and exclusive experiences</div>
+                        </div>
+                    </div>
+                    
+                    <div class="play-step">
+                        <div class="step-icon">🏦</div>
+                        <div class="step-content">
+                            <div class="step-title">5. Redeem Rewards</div>
+                            <div class="step-description">Use tokens at partner locations or transfer to Coinbase Wallet</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="start-playing-btn" id="startPlayingBtn">
+                    <img src="../images/VPEmberFlame.svg" alt="Start" class="start-playing-icon">
+                    <span>Start Playing Now!</span>
+                </button>
             </div>
         </div>
         
@@ -490,7 +562,7 @@
                     <div class="nav-tab-label">Hunt</div>
                 </div>
                 <div class="nav-tab" data-mode="ar">
-                    <div class="nav-tab-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')"></div>
+                    <div class="nav-tab-icon image" style="background-image: url('../images/VPEmberCoin.PNG')"></div>
                     <div class="nav-tab-label">AR View</div>
                 </div>
                 <div class="nav-tab" data-mode="vault">
