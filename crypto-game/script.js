@@ -112,12 +112,14 @@ class VaultPhoenixCryptoGame {
 
     animateInput(input, focused) {
         const container = input.closest('.form-group');
-        if (focused) {
-            container.style.transform = 'scale(1.01)';
-            container.style.zIndex = '10';
-        } else {
-            container.style.transform = 'scale(1)';
-            container.style.zIndex = '1';
+        if (container) {
+            if (focused) {
+                container.style.transform = 'scale(1.01)';
+                container.style.zIndex = '10';
+            } else {
+                container.style.transform = 'scale(1)';
+                container.style.zIndex = '1';
+            }
         }
     }
 
@@ -158,16 +160,16 @@ class VaultPhoenixCryptoGame {
             return;
         }
 
-        container.classList.add('loading');
-        loginText.innerHTML = '<span class="loading-spinner"></span>Authenticating...';
+        if (container) container.classList.add('loading');
+        if (loginText) loginText.innerHTML = '<span class="loading-spinner"></span>Authenticating...';
         
-        loginBtn.style.transform = 'scale(0.98)';
+        if (loginBtn) loginBtn.style.transform = 'scale(0.98)';
 
         try {
             await this.authenticateUser(email, password);
             
-            loginText.textContent = '✅ Access Granted!';
-            loginBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+            if (loginText) loginText.textContent = '✅ Access Granted!';
+            if (loginBtn) loginBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
             
             this.showSuccess('Login successful! Launching AR Crypto Hunt...');
             
@@ -178,22 +180,26 @@ class VaultPhoenixCryptoGame {
             }, 1500);
 
         } catch (error) {
-            loginBtn.style.transform = 'scale(1)';
-            loginText.innerHTML = '🔥 Start Crypto Hunt';
-            container.classList.remove('loading');
+            if (loginBtn) loginBtn.style.transform = 'scale(1)';
+            if (loginText) loginText.innerHTML = '🔥 Start Crypto Hunt';
+            if (container) container.classList.remove('loading');
             
             this.showError(error.message);
             
-            container.style.animation = 'shake 0.5s ease-in-out';
-            setTimeout(() => {
-                container.style.animation = '';
-            }, 500);
+            if (container) {
+                container.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    container.style.animation = '';
+                }, 500);
+            }
         }
     }
 
     focusInput(input) {
-        input.focus();
-        input.select();
+        if (input) {
+            input.focus();
+            input.select();
+        }
     }
 
     async authenticateUser(email, password) {
@@ -389,6 +395,7 @@ class VaultPhoenixCryptoGame {
         try {
             const elements = {
                 emberCount: document.getElementById('emberCount'),
+                navEmberCount: document.getElementById('navEmberCount'),
                 menuEmberCount: document.getElementById('menuEmberCount'),
                 vaultBalance: document.getElementById('vaultBalance'),
                 vaultUsdValue: document.getElementById('vaultUsdValue'),
@@ -400,6 +407,7 @@ class VaultPhoenixCryptoGame {
             const usdValue = (this.totalTokenValue * 0.001).toFixed(2);
             
             if (elements.emberCount) elements.emberCount.textContent = `${this.totalTokenValue} $Ember`;
+            if (elements.navEmberCount) elements.navEmberCount.textContent = this.totalTokenValue;
             if (elements.menuEmberCount) elements.menuEmberCount.textContent = this.totalTokenValue;
             if (elements.vaultBalance) elements.vaultBalance.textContent = `${this.totalTokenValue} $Ember Tokens`;
             if (elements.vaultUsdValue) elements.vaultUsdValue.textContent = `$${usdValue} USD`;
@@ -495,27 +503,158 @@ class VaultPhoenixCryptoGame {
         }
     }
 
-    // Placeholder methods to prevent errors
-    start() { console.log('🚀 Starting game...'); }
-    goHome() { console.log('🏠 Going home...'); }
-    toggleMenu() { console.log('📱 Toggling menu...'); }
-    closeMenu() { console.log('📱 Closing menu...'); }
-    showLogoutConfirmation() { console.log('🚪 Show logout...'); }
-    hideLogoutConfirmation() { console.log('🚪 Hide logout...'); }
-    logout() { 
-        sessionStorage.removeItem('vaultPhoenixSession');
-        window.location.href = 'index.html';
+    // Enhanced methods with better error handling
+    start() { 
+        console.log('🚀 Starting game...');
+        try {
+            const startBtn = document.getElementById('startBtn');
+            if (startBtn) {
+                startBtn.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('❌ Start error:', error);
+        }
     }
+
+    goHome() { 
+        console.log('🏠 Going home...');
+        try {
+            this.switchMode('map');
+        } catch (error) {
+            console.error('❌ Go home error:', error);
+        }
+    }
+
+    toggleMenu() { 
+        console.log('📱 Toggling menu...');
+        try {
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            
+            if (sideMenu && menuOverlay) {
+                const isOpen = sideMenu.classList.contains('open');
+                
+                if (isOpen) {
+                    sideMenu.classList.remove('open');
+                    menuOverlay.classList.remove('active');
+                } else {
+                    sideMenu.classList.add('open');
+                    menuOverlay.classList.add('active');
+                }
+            }
+        } catch (error) {
+            console.error('❌ Toggle menu error:', error);
+        }
+    }
+
+    closeMenu() { 
+        console.log('📱 Closing menu...');
+        try {
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            
+            if (sideMenu) sideMenu.classList.remove('open');
+            if (menuOverlay) menuOverlay.classList.remove('active');
+        } catch (error) {
+            console.error('❌ Close menu error:', error);
+        }
+    }
+
+    showLogoutConfirmation() { 
+        console.log('🚪 Show logout...');
+        try {
+            const logoutOverlay = document.getElementById('logoutOverlay');
+            if (logoutOverlay) {
+                logoutOverlay.style.display = 'flex';
+            }
+        } catch (error) {
+            console.error('❌ Show logout error:', error);
+        }
+    }
+
+    hideLogoutConfirmation() { 
+        console.log('🚪 Hide logout...');
+        try {
+            const logoutOverlay = document.getElementById('logoutOverlay');
+            if (logoutOverlay) {
+                logoutOverlay.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('❌ Hide logout error:', error);
+        }
+    }
+
+    logout() { 
+        console.log('🚪 Logging out...');
+        try {
+            sessionStorage.removeItem('vaultPhoenixSession');
+            window.location.href = 'index.html';
+        } catch (error) {
+            console.error('❌ Logout error:', error);
+            window.location.href = 'index.html';
+        }
+    }
+
     collectToken() { console.log('💎 Collecting token...'); }
     skipToken() { console.log('⏭️ Skipping token...'); }
     onEmberCoinClick() { console.log('💎 Ember coin clicked...'); }
-    switchMode(mode) { console.log('🔄 Switching to mode:', mode); }
+    
+    switchMode(mode) { 
+        console.log('🔄 Switching to mode:', mode);
+        try {
+            // Update navigation tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.mode === mode) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Handle vault view
+            const vaultView = document.getElementById('vaultView');
+            if (vaultView) {
+                if (mode === 'vault') {
+                    vaultView.style.display = 'block';
+                } else {
+                    vaultView.style.display = 'none';
+                }
+            }
+
+            this.currentMode = mode;
+        } catch (error) {
+            console.error('❌ Switch mode error:', error);
+        }
+    }
+
     hideNavigationModal() { console.log('🗺️ Hiding nav modal...'); }
     openMapsNavigation(mode) { console.log('🗺️ Opening maps:', mode); }
     startARHunt() { console.log('📱 Starting AR hunt...'); }
     transferToCoinbase() { console.log('🏦 Transfer to Coinbase...'); }
-    showQRCode() { console.log('📱 Showing QR code...'); }
-    hideQRCode() { console.log('📱 Hiding QR code...'); }
+    
+    showQRCode() { 
+        console.log('📱 Showing QR code...');
+        try {
+            const qrModal = document.getElementById('qrModal');
+            if (qrModal) {
+                qrModal.style.display = 'flex';
+            }
+        } catch (error) {
+            console.error('❌ Show QR error:', error);
+        }
+    }
+    
+    hideQRCode() { 
+        console.log('📱 Hiding QR code...');
+        try {
+            const qrModal = document.getElementById('qrModal');
+            if (qrModal) {
+                qrModal.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('❌ Hide QR error:', error);
+        }
+    }
+
     openCoinbaseWallet() { console.log('🏦 Opening Coinbase...'); }
     filterVault(filter) { console.log('🔍 Filtering vault:', filter); }
 }
@@ -536,6 +675,7 @@ window.addEventListener('load', () => {
                 const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
                 
                 if (hoursDiff < 24) {
+                    console.log('🔄 Auto-redirecting to dashboard...');
                     window.location.href = 'dashboard.html';
                 }
             } catch (error) {
