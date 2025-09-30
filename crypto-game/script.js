@@ -1260,39 +1260,6 @@ class VaultPhoenixCryptoGame {
             notification.classList.remove('show');
         }
     }
-
-    // Additional stub methods for Three.js compatibility
-    setupThreeJS() {
-        console.log('🎮 Setting up Three.js...');
-    }
-
-    setupGPS() {
-        console.log('📍 Setting up GPS...');
-        return Promise.resolve();
-    }
-
-    generateTokenLocations() {
-        console.log('🗺️ Generating token locations...');
-        this.tokenLocations = [...this.emberTokens];
-    }
-
-    initializeCompass() {
-        console.log('🧭 Initializing compass...');
-        return Promise.resolve();
-    }
-
-    createTokenSlider() {
-        console.log('📋 Creating token slider...');
-    }
-
-    updatePosition(position) {
-        this.userLat = position.coords.latitude;
-        this.userLng = position.coords.longitude;
-    }
-
-    updateHuntLocationDisplay() {
-        console.log('📍 Updating hunt location display...');
-    }
 }
 
 // Initialize the game when the script loads
