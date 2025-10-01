@@ -1,7 +1,7 @@
 /* Vault Phoenix AR Crypto Gaming - ISOLATED STYLES */
-/* This file is ONLY for crypto game - prevents interference from main site */
+/* PROTECTION: Only affects crypto game pages - prevents main site interference */
 
-/* FORCE ISOLATION - PREVENT EXTERNAL INTERFERENCE */
+/* RESET AND FORCE ISOLATION */
 * {
     margin: 0;
     padding: 0;
@@ -9,8 +9,8 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-/* CRYPTO GAME SPECIFIC BODY STYLES - ISOLATED */
-body.crypto-game-login {
+/* CRYPTO LOGIN PAGE STYLES */
+body.crypto-login-page {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%) !important;
     overflow: hidden !important;
@@ -27,6 +27,21 @@ body.crypto-game-login {
     min-height: 100vh !important;
     padding-top: 40px !important;
     padding-bottom: 40px !important;
+}
+
+/* CRYPTO DASHBOARD PAGE STYLES */
+body.crypto-dashboard-page {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%) !important;
+    overflow: hidden !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    position: relative !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
 }
 
 /* Floating Background Elements */
@@ -377,9 +392,352 @@ body.crypto-game-login {
     to { transform: rotate(360deg); }
 }
 
+/* DASHBOARD STYLES */
+#container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
+}
+
+/* Base Content Layers */
+#video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    display: none;
+}
+
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    display: none;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Welcome Button */
+.welcome-button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 250;
+    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
+    color: white;
+    border: none;
+    padding: 32px 40px;
+    font-size: 16px;
+    font-weight: 800;
+    border-radius: 24px;
+    cursor: pointer;
+    box-shadow: 
+        0 16px 40px rgba(240, 165, 0, 0.4),
+        0 8px 20px rgba(240, 165, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.5px;
+    min-height: 200px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: welcomeButtonPulse 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes welcomeButtonPulse {
+    0%, 100% { 
+        box-shadow: 
+            0 16px 40px rgba(240, 165, 0, 0.4),
+            0 8px 20px rgba(240, 165, 0, 0.3);
+    }
+    50% { 
+        box-shadow: 
+            0 20px 50px rgba(240, 165, 0, 0.6),
+            0 12px 30px rgba(240, 165, 0, 0.5);
+    }
+}
+
+.welcome-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.welcome-flame-icon {
+    width: 32px;
+    height: 32px;
+    filter: brightness(1.2);
+}
+
+.welcome-text {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.welcome-subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.welcome-loading-bar {
+    width: 200px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.welcome-loading-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.8));
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.welcome-loading-text {
+    font-size: 12px;
+    opacity: 0.8;
+    font-weight: 600;
+}
+
+/* Navigation */
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(240, 165, 0, 0.3);
+    padding: env(safe-area-inset-top, 8px) 16px 8px 16px;
+    height: calc(env(safe-area-inset-top, 8px) + 64px);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.nav-logo {
+    width: 36px;
+    height: 36px;
+    background: url('../images/VPLogoNoText.PNG') center/cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 3px 12px rgba(240, 165, 0, 0.4);
+}
+
+.nav-logo:active {
+    transform: scale(0.95);
+}
+
+.nav-title {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.vault-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.25), rgba(247, 147, 30, 0.15));
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    padding: 8px 12px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.vault-badge:active {
+    transform: scale(0.95);
+}
+
+.badge-icon {
+    width: 20px;
+    height: 20px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
+}
+
+.badge-count {
+    color: #f0a500;
+    font-weight: 800;
+    font-size: 14px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.nav-menu-button {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.nav-menu-button:active {
+    transform: scale(0.9);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 190;
+    background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.98) 100%);
+    backdrop-filter: blur(30px);
+    border-top: 1px solid rgba(240, 165, 0, 0.2);
+    padding: 10px 12px calc(env(safe-area-inset-bottom, 12px) + 10px) 12px;
+    height: calc(env(safe-area-inset-bottom, 12px) + 72px);
+}
+
+.nav-tabs {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    height: 52px;
+}
+
+.nav-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 6px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+    position: relative;
+    min-height: 52px;
+    justify-content: center;
+}
+
+.nav-tab:active {
+    transform: scale(0.95);
+}
+
+.nav-tab.active {
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(247, 147, 30, 0.1));
+    border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+.nav-tab-icon {
+    font-size: 20px;
+    color: white;
+    transition: all 0.3s ease;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-tab-icon.image {
+    background-size: cover;
+    background-position: center;
+}
+
+.nav-tab.active .nav-tab-icon {
+    color: #f0a500;
+    transform: scale(1.1);
+}
+
+.nav-tab-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-tab.active .nav-tab-label {
+    color: #f0a500;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 46, 0.9));
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+    color: white;
+    font-size: 16px;
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    gap: 20px;
+}
+
+.loading-text {
+    font-weight: 600;
+    text-align: center;
+    max-width: 280px;
+    line-height: 1.4;
+}
+
 /* Mobile Responsive Adjustments */
 @media (max-width: 480px) {
-    body.crypto-game-login {
+    body.crypto-login-page {
         padding: 24px 8px;
         padding-top: 32px;
         padding-bottom: 32px;
@@ -402,51 +760,19 @@ body.crypto-game-login {
         font-size: 22px;
     }
     
-    .demo-badge {
-        padding: 10px;
-        margin-bottom: 20px;
+    .welcome-button {
+        min-width: 280px;
+        min-height: 180px;
+        padding: 28px 36px;
     }
     
-    .crypto-features {
-        margin: 16px 0;
-        padding: 10px;
-        gap: 6px;
-    }
-    
-    .feature-item {
-        font-size: 12px;
-        gap: 8px;
-    }
-    
-    .feature-icon {
-        width: 18px;
-        height: 18px;
-    }
-    
-    .form-group {
-        margin-bottom: 16px;
-    }
-    
-    .form-input {
-        padding: 12px 16px;
-    }
-    
-    .login-button {
-        padding: 14px;
-        font-size: 15px;
-        margin-bottom: 18px;
-    }
-    
-    .error-message, .success-message {
-        padding: 14px 16px;
-        font-size: 13px;
-        margin-bottom: 18px;
-        min-height: 44px;
+    .welcome-text {
+        font-size: 18px;
     }
 }
 
 @media (max-height: 640px) {
-    body.crypto-game-login {
+    body.crypto-login-page {
         padding: 16px 8px;
         padding-top: 20px;
         padding-bottom: 20px;
@@ -457,97 +783,11 @@ body.crypto-game-login {
         margin: 6px 8px;
     }
     
-    .logo-section {
-        margin-bottom: 18px;
+    .welcome-button {
+        min-height: 160px;
+        min-width: 260px;
+        padding: 24px 32px;
     }
-    
-    .app-logo {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 8px;
-    }
-    
-    .app-title {
-        font-size: 20px;
-    }
-    
-    .demo-badge {
-        margin-bottom: 18px;
-        padding: 8px 10px;
-    }
-    
-    .crypto-features {
-        margin: 14px 0;
-        padding: 8px;
-    }
-    
-    .form-group {
-        margin-bottom: 14px;
-    }
-
-    .error-message, .success-message {
-        padding: 12px 14px;
-        font-size: 12px;
-        margin-bottom: 16px;
-        min-height: 40px;
-    }
-
-    .login-button {
-        margin-bottom: 16px;
-    }
-}
-
-/* VERY SHORT SCREENS */
-@media (max-height: 580px) {
-    body.crypto-game-login {
-        padding: 12px 8px;
-        padding-top: 16px;
-        padding-bottom: 16px;
-        justify-content: flex-start;
-    }
-    
-    .login-container {
-        margin-top: 8px;
-    }
-    
-    .logo-section {
-        margin-bottom: 14px;
-    }
-    
-    .app-logo {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 8px;
-    }
-    
-    .app-title {
-        font-size: 20px;
-    }
-    
-    .demo-badge {
-        margin-bottom: 14px;
-        padding: 8px;
-    }
-    
-    .crypto-features {
-        margin: 10px 0;
-        padding: 8px;
-    }
-}
-
-/* Dashboard Styles - Prevent Main Site Interference */
-body.dashboard {
-    display: block !important;
-    background: #000 !important;
-    min-height: auto !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-}
-
-/* ENSURE MESSAGES ARE VISIBLE */
-.error-message:not([style*="display: none"]),
-.success-message:not([style*="display: none"]) {
-    display: flex !important;
 }
 
 /* Accessibility */
@@ -559,16 +799,8 @@ body.dashboard {
     }
 }
 
-@media (prefers-contrast: high) {
-    .login-container {
-        border: 2px solid #f0a500;
-    }
-
-    .form-input {
-        border-width: 2px;
-    }
-
-    .login-button {
-        border: 2px solid #fff;
-    }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+    20%, 40%, 60%, 80% { transform: translateX(4px); }
 }
