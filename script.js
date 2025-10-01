@@ -1,16 +1,38 @@
 // Vault Phoenix - Interactive JavaScript
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // UPDATED: Now works with main images/ folder screenshots
-// FIXED: Prevent black/white flash on page load
+// FIXED: Optimized for seamless transition from loading page
 
-// FIXED: Immediately prevent flash by setting dark background
+// FIXED: Immediately prevent flash by setting dark background - FASTER RESPONSE
 (function() {
     // Set background immediately before DOM loads
     document.documentElement.style.background = '#0f0f0f';
     if (document.body) {
         document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
+        document.body.style.opacity = '1'; // Immediately visible for seamless transition
     }
 })();
+
+// FIXED: Set up seamless transition reception
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔥🪙 Main page loading - optimized for seamless transition...');
+    
+    // FIXED: Immediately ensure dark background and full opacity
+    document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
+    document.body.style.opacity = '1';
+    document.body.classList.add('loaded');
+    
+    // FIXED: Initialize main page features immediately
+    initializeMainCountdown();
+    preloadPhoenixCryptoImages();
+    initializeCryptoCoinImage();
+    initializeEmberCoinImageV3();
+    
+    // FIXED: Create floating coins immediately without delay
+    createPhoenixCryptoParticles();
+    
+    console.log('🔥🪙 Main page loaded seamlessly from loading screen!');
+});
 
 // Enhanced gallery function with correct image order for crypto game screenshots
 function changeImage(imageSrc, title) {
@@ -356,28 +378,12 @@ document.querySelectorAll('a[href^="sms:"]').forEach(link => {
     });
 });
 
-// FIXED: Smooth page loading without flash
+// FIXED: Smooth page loading without flash - OPTIMIZED FOR SEAMLESS TRANSITION
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥🪙 Phoenix Crypto Systems Initializing...');
     
-    // FIXED: Ensure dark background is set immediately
-    document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
-    
-    initializeMainCountdown(); // NEW: Main page countdown
-    preloadPhoenixCryptoImages();
-    initializeCryptoCoinImage();
-    initializeEmberCoinImageV3(); // NEW: V3 ember coin interaction
-    
-    // FIXED: Create floating coins after a short delay to ensure hero exists
-    setTimeout(() => {
-        createPhoenixCryptoParticles();
-    }, 100);
-    
-    // FIXED: Smooth entrance animations without flash
-    setTimeout(() => {
-        document.body.classList.add('loaded');
-        document.body.style.opacity = '1';
-    }, 200); // FIXED: Faster fade-in
+    // FIXED: These initialization calls are now handled above for seamless transition
+    // All main features are initialized immediately when DOM loads
     
     // Phoenix crypto-specific initialization
     console.log('🔥🪙 Phoenix crypto systems online and ready for action!');
@@ -386,20 +392,46 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥🪙 Crypto game screenshots ready for gallery!');
 });
 
-// Add loading states for better UX with phoenix crypto theme
+// FIXED: Enhanced page load handling for seamless transition
 window.addEventListener('load', () => {
-    // FIXED: Ensure body is fully loaded and visible
-    document.body.classList.add('loaded');
+    // FIXED: Page is already fully loaded and visible - no additional fade-in needed
+    console.log('🔥🪙 Main page fully loaded and ready!');
     
-    // Trigger initial animations with phoenix crypto timing
+    // Optional: Add phoenix flame effect to logo after load
+    const logoIcon = document.querySelector('.logo-icon');
+    if (logoIcon) {
+        logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
+    }
+    
+    // FIXED: Performance monitoring and status checks
     setTimeout(() => {
-        document.querySelectorAll('.fade-in').forEach((el, index) => {
-            setTimeout(() => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, index * 150); // Slightly more dramatic spacing
-        });
-    }, 100); // FIXED: Faster initial animation
+        const floatingCoins = document.querySelector('.hero-floating-coins');
+        if (floatingCoins) {
+            console.log('🔥🪙 SUCCESS: Floating VPEmberCoin.PNG coins are active!');
+        } else {
+            console.warn('🔥🪙 WARNING: Floating coins not found!');
+        }
+    }, 500);
+    
+    // Check if crypto game gallery is working
+    setTimeout(() => {
+        const mainScreenshot = document.getElementById('mainScreenshot');
+        if (mainScreenshot && mainScreenshot.src.includes('crypto-')) {
+            console.log('🔥🪙 SUCCESS: Crypto game screenshots loaded in gallery!');
+        } else {
+            console.warn('🔥🪙 WARNING: Crypto game screenshots not detected!');
+        }
+    }, 300);
+    
+    // Check if main countdown is working
+    setTimeout(() => {
+        const mainDays = document.getElementById('main-days');
+        if (mainDays && mainDays.textContent !== '--') {
+            console.log('🔥🪙 SUCCESS: Main page countdown to Nov 1, 2025 is active!');
+        } else {
+            console.warn('🔥🪙 WARNING: Main page countdown not working!');
+        }
+    }, 400);
 });
 
 // Add error handling for images with phoenix crypto fallback
@@ -885,40 +917,4 @@ console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise!
 window.addEventListener('load', () => {
     const loadTime = performance.now();
     console.log(`%c🔥🪙 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect VPEmberCoins!`, 'color: #22c55e; font-weight: bold;');
-    
-    // Optional: Add phoenix flame effect to logo after load
-    const logoIcon = document.querySelector('.logo-icon');
-    if (logoIcon) {
-        logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
-    }
-    
-    // FIXED: Check if floating coins are working
-    setTimeout(() => {
-        const floatingCoins = document.querySelector('.hero-floating-coins');
-        if (floatingCoins) {
-            console.log('🔥🪙 SUCCESS: Floating VPEmberCoin.PNG coins are active!');
-        } else {
-            console.warn('🔥🪙 WARNING: Floating coins not found!');
-        }
-    }, 2000);
-    
-    // Check if crypto game gallery is working
-    setTimeout(() => {
-        const mainScreenshot = document.getElementById('mainScreenshot');
-        if (mainScreenshot && mainScreenshot.src.includes('crypto-')) {
-            console.log('🔥🪙 SUCCESS: Crypto game screenshots loaded in gallery!');
-        } else {
-            console.warn('🔥🪙 WARNING: Crypto game screenshots not detected!');
-        }
-    }, 1000);
-    
-    // Check if main countdown is working
-    setTimeout(() => {
-        const mainDays = document.getElementById('main-days');
-        if (mainDays && mainDays.textContent !== '--') {
-            console.log('🔥🪙 SUCCESS: Main page countdown to Nov 1, 2025 is active!');
-        } else {
-            console.warn('🔥🪙 WARNING: Main page countdown not working!');
-        }
-    }, 1500);
 });
