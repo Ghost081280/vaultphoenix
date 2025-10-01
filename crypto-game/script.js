@@ -1,23 +1,26 @@
 // Vault Phoenix AR Crypto Gaming - ISOLATED JAVASCRIPT
-// This file is ONLY for crypto game - prevents interference from main site
-// PROTECTION: Only runs if this is a crypto game page
+// PROTECTION: Only runs on crypto game pages - prevents main site interference
 
-// IMMEDIATE PROTECTION - PREVENT MAIN SITE JS FROM INTERFERING
+// IMMEDIATE PROTECTION - CHECK IF THIS IS A CRYPTO GAME PAGE
 (function() {
-    // Mark this as crypto game to prevent main site JS interference
-    window.isVaultPhoenixCryptoGame = true;
+    // Check for crypto game flag
+    const cryptoFlag = document.getElementById('cryptoGameFlag');
+    const isCryptoPage = cryptoFlag || document.body.classList.contains('crypto-login-page') || document.body.classList.contains('crypto-dashboard-page');
     
-    // Prevent main site background override
-    if (document.body && document.body.classList.contains('crypto-game-login')) {
-        console.log('🔥💎 Crypto Game Login Protected - Main site JS blocked');
+    if (!isCryptoPage) {
+        console.log('🚫 Not a crypto game page - blocking JavaScript execution');
+        return;
     }
+    
+    // Mark this as crypto game
+    window.isVaultPhoenixCryptoGame = true;
+    console.log('🔥💎 Crypto Game JavaScript ACTIVE - Protected Mode');
 })();
 
-// CRYPTO GAME PROTECTION - Only run if we're on crypto game pages
+// ONLY RUN IF THIS IS A CRYPTO GAME PAGE
 if (window.isVaultPhoenixCryptoGame) {
-    console.log('🔥💎 Vault Phoenix Crypto Game JavaScript - ISOLATED MODE');
 
-    // Vault Phoenix AR Crypto Gaming - Complete Enhanced Game Engine
+    // Vault Phoenix AR Crypto Gaming - Complete Game Engine
     class VaultPhoenixCryptoGame {
         constructor() {
             console.log('🔥💎 Vault Phoenix AR Crypto Gaming starting...');
@@ -54,7 +57,7 @@ if (window.isVaultPhoenixCryptoGame) {
             this.availableTokensCount = 12;
             this.orientationHandler = null;
 
-            // Enhanced Ember Token System with Real Locations and Value Tiers
+            // Enhanced Ember Token System
             this.emberTokens = [
                 { id: 1, value: 500, tier: "high", location: "Downtown Phoenix", lat: 33.4484, lng: -112.0740, sponsor: "Phoenix Suns Arena", message: "Exclusive courtside experience awaits!", description: "Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours." },
                 { id: 2, value: 250, tier: "medium", location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards unlocked!", description: "Discover luxury shopping with exclusive discounts and VIP personal shopping services." },
@@ -64,7 +67,7 @@ if (window.isVaultPhoenixCryptoGame) {
                 { id: 6, value: 75, tier: "low", location: "Phoenix Sky Harbor", lat: 33.4343, lng: -112.0116, sponsor: "Sky Harbor Shops", message: "Travel rewards for your next adventure!", description: "Unlock travel perks and duty-free shopping benefits." }
             ];
 
-            // Initialize immediately when DOM is ready
+            // Initialize when DOM is ready
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', () => this.init());
             } else {
@@ -78,7 +81,7 @@ if (window.isVaultPhoenixCryptoGame) {
         init() {
             console.log('🔧 Initializing Vault Phoenix...');
             try {
-                // Check if we're on the login page or dashboard
+                // Check if we're on login page or dashboard
                 if (document.getElementById('loginForm')) {
                     this.setupLoginListeners();
                     console.log('✅ Login page initialized');
@@ -86,23 +89,20 @@ if (window.isVaultPhoenixCryptoGame) {
                     this.ensureSession();
                     this.loadUserInfo();
                     this.loadCollectedTokens();
-                    this.setupEventListeners();
+                    this.setupDashboardListeners();
                     this.initializeVault();
-                    this.initializeCampaigns();
-                    this.addHapticFeedback();
                     this.showWelcomeScreen();
-                    document.body.classList.add('dashboard');
+                    document.body.classList.add('crypto-dashboard-page');
                     console.log('✅ Dashboard initialized');
                 }
             } catch (error) {
                 console.error('❌ Initialization error:', error);
                 this.collectedTokens = [];
                 this.totalTokenValue = 0;
-                this.updateVaultStats();
             }
         }
 
-        // LOGIN SYSTEM
+        // ===== LOGIN SYSTEM =====
         setupLoginListeners() {
             const loginForm = document.getElementById('loginForm');
             const forgotPassword = document.getElementById('forgotPassword');
@@ -296,42 +296,268 @@ if (window.isVaultPhoenixCryptoGame) {
             alert('Password reset would be implemented here.\n\nFor demo: demo@vaultphoenix.com / phoenix123');
         }
 
-        // DASHBOARD SYSTEM PLACEHOLDER METHODS
+        // ===== DASHBOARD SYSTEM =====
         ensureSession() {
-            console.log('🔍 Session management...');
+            console.log('🔍 Ensuring session exists...');
+            try {
+                const existingSession = sessionStorage.getItem('vaultPhoenixSession');
+                let sessionData = null;
+                
+                if (existingSession) {
+                    try {
+                        sessionData = JSON.parse(existingSession);
+                        console.log('📄 Found existing session');
+                    } catch (parseError) {
+                        console.log('⚠️ Session parse error, creating new session');
+                        sessionData = null;
+                    }
+                }
+                
+                if (!sessionData || typeof sessionData !== 'object' || !sessionData.email) {
+                    console.log('🔧 Creating new session...');
+                    sessionData = {
+                        email: 'demo@vaultphoenix.com',
+                        loginTime: new Date().toISOString(),
+                        userId: 'phoenix-hunter-' + Date.now(),
+                        walletAddress: '0x' + Math.random().toString(16).substr(2, 40)
+                    };
+                    sessionStorage.setItem('vaultPhoenixSession', JSON.stringify(sessionData));
+                    console.log('✅ Session created:', sessionData.email);
+                } else {
+                    console.log('✅ Session valid:', sessionData.email);
+                }
+                
+            } catch (error) {
+                console.error('❌ Session error:', error);
+                const fallbackSession = {
+                    email: 'demo@vaultphoenix.com',
+                    loginTime: new Date().toISOString(),
+                    userId: 'fallback-phoenix-user',
+                    walletAddress: '0x1234567890abcdef1234567890abcdef12345678'
+                };
+                sessionStorage.setItem('vaultPhoenixSession', JSON.stringify(fallbackSession));
+                console.log('🆘 Fallback session created');
+            }
         }
 
         loadUserInfo() {
             console.log('👤 Loading user info...');
+            // Placeholder for user info loading
         }
 
         loadCollectedTokens() {
-            console.log('💎 Loading tokens...');
+            console.log('💎 Loading collected tokens...');
+            try {
+                const saved = localStorage.getItem('vaultPhoenixTokens');
+                if (saved) {
+                    this.collectedTokens = JSON.parse(saved);
+                    this.calculateTotalValue();
+                    console.log('✅ Loaded', this.collectedTokens.length, 'tokens worth', this.totalTokenValue, '$Ember');
+                } else {
+                    this.collectedTokens = [];
+                    this.totalTokenValue = 0;
+                    console.log('📦 No saved tokens, starting fresh vault');
+                }
+            } catch (error) {
+                console.error('❌ Token loading error:', error);
+                this.collectedTokens = [];
+                this.totalTokenValue = 0;
+            }
         }
 
-        setupEventListeners() {
+        calculateTotalValue() {
+            this.totalTokenValue = this.collectedTokens.reduce((total, token) => total + token.value, 0);
+        }
+
+        setupDashboardListeners() {
             console.log('🎧 Setting up dashboard listeners...');
+            try {
+                // Basic dashboard event listeners
+                const homeBtn = document.getElementById('homeBtn');
+                const menuToggle = document.getElementById('menuToggle');
+                
+                if (homeBtn) {
+                    homeBtn.addEventListener('click', () => this.goHome());
+                }
+                
+                if (menuToggle) {
+                    menuToggle.addEventListener('click', () => this.toggleMenu());
+                }
+                
+                // Navigation tabs
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        if (!tab.classList.contains('disabled')) {
+                            this.switchMode(tab.dataset.mode);
+                        }
+                    });
+                });
+                
+                console.log('✅ Dashboard listeners setup complete');
+            } catch (error) {
+                console.error('❌ Dashboard listener error:', error);
+            }
         }
 
         initializeVault() {
             console.log('💎 Initializing vault...');
-        }
-
-        initializeCampaigns() {
-            console.log('🏆 Initializing campaigns...');
+            // Placeholder for vault initialization
         }
 
         showWelcomeScreen() {
-            console.log('👋 Welcome screen...');
+            console.log('👋 Showing welcome screen...');
+            try {
+                const welcomeBtn = document.getElementById('welcomeBtn');
+                const container = document.getElementById('container');
+                
+                if (!welcomeBtn || this.welcomeShown) return;
+                
+                // Show welcome button
+                welcomeBtn.style.display = 'flex';
+                
+                // Start loading animation
+                this.startWelcomeLoading();
+                
+                this.welcomeShown = true;
+                
+            } catch (error) {
+                console.error('❌ Welcome screen error:', error);
+                this.hideWelcomeScreen();
+            }
         }
 
-        updateVaultStats() {
-            console.log('📊 Updating vault stats...');
+        startWelcomeLoading() {
+            try {
+                const loadingFill = document.getElementById('welcomeLoadingFill');
+                const loadingText = document.getElementById('welcomeLoadingText');
+                
+                const loadingMessages = [
+                    'Loading Game...',
+                    'Connecting to Phoenix...',
+                    'Initializing AR System...',
+                    'Preparing Token Hunt...',
+                    'Ready to Hunt!'
+                ];
+                
+                let currentMessage = 0;
+                let progress = 0;
+                
+                const loadingInterval = setInterval(() => {
+                    progress += Math.random() * 15 + 5;
+                    
+                    if (progress >= 100) {
+                        progress = 100;
+                        if (loadingFill) loadingFill.style.width = '100%';
+                        if (loadingText) loadingText.textContent = loadingMessages[4];
+                        
+                        clearInterval(loadingInterval);
+                        
+                        setTimeout(() => {
+                            this.hideWelcomeScreen();
+                        }, 800);
+                        
+                    } else {
+                        if (loadingFill) loadingFill.style.width = `${progress}%`;
+                        
+                        if (progress > currentMessage * 20 && currentMessage < 4) {
+                            currentMessage++;
+                            if (loadingText) loadingText.textContent = loadingMessages[currentMessage];
+                        }
+                    }
+                }, 200);
+                
+            } catch (error) {
+                console.error('❌ Welcome loading error:', error);
+                this.hideWelcomeScreen();
+            }
+        }
+
+        hideWelcomeScreen() {
+            console.log('👋 Hiding welcome screen...');
+            try {
+                const welcomeBtn = document.getElementById('welcomeBtn');
+                
+                if (welcomeBtn) {
+                    welcomeBtn.style.display = 'none';
+                }
+                
+                // Auto-start the game
+                this.autoStartGame();
+                
+            } catch (error) {
+                console.error('❌ Welcome screen hide error:', error);
+            }
+        }
+
+        autoStartGame() {
+            console.log('🚀 Auto-starting game...');
+            try {
+                // Initialize game systems
+                this.start();
+                
+            } catch (error) {
+                console.error('❌ Auto-start error:', error);
+            }
+        }
+
+        start() {
+            if (this.isStarted) return;
+            this.isStarted = true;
+            console.log('🚀 Starting Vault Phoenix game...');
+            
+            // Basic game initialization
+            this.setupGPS();
+            this.generateTokenLocations();
+            
+            console.log('✅ Vault Phoenix started successfully');
+        }
+
+        setupGPS() {
+            console.log('📍 Setting up GPS...');
+            // Placeholder GPS setup
+            this.userLat = 33.4484; // Phoenix, AZ
+            this.userLng = -112.0740;
+        }
+
+        generateTokenLocations() {
+            console.log('🗺️ Generating token locations...');
+            this.tokenLocations = [...this.emberTokens];
+        }
+
+        // ===== NAVIGATION SYSTEM =====
+        goHome() {
+            console.log('🏠 Going home...');
+            if (this.currentMode !== 'map') {
+                this.switchMode('map');
+            }
+        }
+
+        toggleMenu() {
+            console.log('📋 Toggling menu...');
+            // Placeholder menu toggle
+        }
+
+        switchMode(mode) {
+            if (mode === this.currentMode) return;
+            
+            console.log('🔄 Switching to mode:', mode);
+            this.currentMode = mode;
+            this.updateNavigationState();
+        }
+
+        updateNavigationState() {
+            try {
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.mode === this.currentMode);
+                });
+            } catch (error) {
+                console.error('❌ Navigation update error:', error);
+            }
         }
 
         addHapticFeedback() {
             try {
-                const interactiveElements = document.querySelectorAll('.login-button, .form-input, .forgot-password a');
+                const interactiveElements = document.querySelectorAll('.login-button, .form-input, .forgot-password a, .nav-tab, .nav-logo, .vault-badge');
                 
                 interactiveElements.forEach(element => {
                     element.addEventListener('touchstart', () => {
@@ -346,8 +572,8 @@ if (window.isVaultPhoenixCryptoGame) {
         }
     }
 
-    // Initialize the app ONLY for crypto game pages
-    window.addEventListener('load', () => {
+    // Initialize the app when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
         console.log('🔥💎 Vault Phoenix Crypto Game loading...');
         try {
             const app = new VaultPhoenixCryptoGame();
@@ -373,6 +599,8 @@ if (window.isVaultPhoenixCryptoGame) {
             
         } catch (error) {
             console.error('💥 Failed to initialize Vault Phoenix:', error);
+            
+            // Show error screen
             document.body.innerHTML = `
                 <div style="
                     display: flex;
@@ -410,7 +638,7 @@ if (window.isVaultPhoenixCryptoGame) {
     console.log('%c🔥💎 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #f0a500; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
     console.log('%c🚀 Revolutionary AR gaming that lets you collect real $Ember tokens', 'color: #fb923c; font-size: 14px; font-weight: bold;');
     console.log('%c📧 Contact: contact@vaultphoenix.com', 'color: #374151; font-size: 14px;');
-    console.log('%c🔥💎 From ashes to crypto greatness - Phoenix Rising! ISOLATED MODE', 'color: #d73327; font-size: 12px; font-style: italic;');
+    console.log('%c🔥💎 ISOLATED MODE - Protected from main site interference!', 'color: #d73327; font-size: 12px; font-style: italic;');
 
 } else {
     console.log('🚫 Crypto Game JS blocked - not a crypto game page');
