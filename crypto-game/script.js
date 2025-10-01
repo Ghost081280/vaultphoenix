@@ -1,6 +1,6 @@
 // Vault Phoenix AR Crypto Gaming - COMPLETE ISOLATED JAVASCRIPT
 // PROTECTION: Only affects crypto-game/ folder - prevents main site interference
-// FILE PATH: crypto-game/crypto-game.js
+// FILE PATH: crypto-game/script.js
 
 console.log('🔥💎 Vault Phoenix Crypto Game JavaScript Loading...');
 
