@@ -1,6 +1,16 @@
 // Vault Phoenix - Interactive JavaScript
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // UPDATED: Now works with main images/ folder screenshots
+// FIXED: Prevent black/white flash on page load
+
+// FIXED: Immediately prevent flash by setting dark background
+(function() {
+    // Set background immediately before DOM loads
+    document.documentElement.style.background = '#0f0f0f';
+    if (document.body) {
+        document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
+    }
+})();
 
 // Enhanced gallery function with correct image order for crypto game screenshots
 function changeImage(imageSrc, title) {
@@ -346,8 +356,39 @@ document.querySelectorAll('a[href^="sms:"]').forEach(link => {
     });
 });
 
+// FIXED: Smooth page loading without flash
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔥🪙 Phoenix Crypto Systems Initializing...');
+    
+    // FIXED: Ensure dark background is set immediately
+    document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
+    
+    initializeMainCountdown(); // NEW: Main page countdown
+    preloadPhoenixCryptoImages();
+    initializeCryptoCoinImage();
+    initializeEmberCoinImageV3(); // NEW: V3 ember coin interaction
+    
+    // FIXED: Create floating coins after a short delay to ensure hero exists
+    setTimeout(() => {
+        createPhoenixCryptoParticles();
+    }, 100);
+    
+    // FIXED: Smooth entrance animations without flash
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+        document.body.style.opacity = '1';
+    }, 200); // FIXED: Faster fade-in
+    
+    // Phoenix crypto-specific initialization
+    console.log('🔥🪙 Phoenix crypto systems online and ready for action!');
+    console.log('🔥🪙 Main Page Countdown to Nov 1, 2025 - Ready!');
+    console.log('🔥🪙 Floating VPEmberCoin.PNG coins should now be visible in hero section!');
+    console.log('🔥🪙 Crypto game screenshots ready for gallery!');
+});
+
 // Add loading states for better UX with phoenix crypto theme
 window.addEventListener('load', () => {
+    // FIXED: Ensure body is fully loaded and visible
     document.body.classList.add('loaded');
     
     // Trigger initial animations with phoenix crypto timing
@@ -358,7 +399,7 @@ window.addEventListener('load', () => {
                 el.style.transform = 'translateY(0)';
             }, index * 150); // Slightly more dramatic spacing
         });
-    }, 500);
+    }, 100); // FIXED: Faster initial animation
 });
 
 // Add error handling for images with phoenix crypto fallback
@@ -677,32 +718,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCryptoBenefits();
     initializeEmberHighlightsV3();
     createPhoenixCryptoScrollIndicator();
-});
-
-// FIXED: Initialize everything when DOM is ready - WITH PROPER TIMING
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥🪙 Phoenix Crypto Systems Initializing...');
-    
-    initializeMainCountdown(); // NEW: Main page countdown
-    preloadPhoenixCryptoImages();
-    initializeCryptoCoinImage();
-    initializeEmberCoinImageV3(); // NEW: V3 ember coin interaction
-    
-    // FIXED: Create floating coins after a short delay to ensure hero exists
-    setTimeout(() => {
-        createPhoenixCryptoParticles();
-    }, 100);
-    
-    // Add smooth entrance animations
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
-    
-    // Phoenix crypto-specific initialization
-    console.log('🔥🪙 Phoenix crypto systems online and ready for action!');
-    console.log('🔥🪙 Main Page Countdown to Nov 1, 2025 - Ready!');
-    console.log('🔥🪙 Floating VPEmberCoin.PNG coins should now be visible in hero section!');
-    console.log('🔥🪙 Crypto game screenshots ready for gallery!');
 });
 
 // Enhanced interactive feedback for all CTA buttons with crypto theme
