@@ -6,8 +6,8 @@
     <title>Vault Phoenix - AR Crypto Gaming</title>
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
     
-    <!-- ISOLATED CRYPTO GAME CSS - ONLY AFFECTS crypto-game/ FOLDER -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- FORCE CSS CACHE REFRESH WITH VERSION -->
+    <link rel="stylesheet" href="styles.css?v=2.0">
     
     <!-- Mobile Height Detection Script -->
     <script>
@@ -71,6 +71,16 @@
             if (container) {
                 container.style.margin = '0 auto';
                 container.style.alignSelf = 'center';
+            }
+            
+            // FORCE CENTER THE HELP LINK ON MOBILE
+            const helpLink = document.querySelector('.forgot-password');
+            if (helpLink) {
+                helpLink.style.textAlign = 'center';
+                helpLink.style.width = '100%';
+                helpLink.style.display = 'flex';
+                helpLink.style.justifyContent = 'center';
+                helpLink.style.alignItems = 'center';
             }
         });
     </script>
@@ -209,9 +219,30 @@
         </div>
     </div>
 
-    <!-- FORGOT PASSWORD LINK - OUTSIDE MODULE WITH PERFECT CENTERING -->
-    <div class="forgot-password">
-        <a href="#" id="forgotPassword">Need help?</a>
+    <!-- MOBILE-OPTIMIZED FORGOT PASSWORD LINK -->
+    <div class="forgot-password" style="
+        text-align: center !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 20px auto 0 auto !important;
+        padding: 0 20px !important;
+        box-sizing: border-box !important;
+    ">
+        <a href="#" id="forgotPassword" style="
+            color: #f0a500 !important;
+            text-decoration: none !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            padding: 12px 20px !important;
+            border-radius: 12px !important;
+            background: rgba(240, 165, 0, 0.15) !important;
+            border: 2px solid rgba(240, 165, 0, 0.4) !important;
+            text-align: center !important;
+            display: block !important;
+            min-width: 120px !important;
+        ">Need help?</a>
     </div>
 
     <!-- ISOLATED CRYPTO GAME JAVASCRIPT - ONLY AFFECTS crypto-game/ FOLDER -->
