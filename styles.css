@@ -1,5 +1,6 @@
 /* Vault Phoenix - Enhanced Stylesheet */
 /* Complete redesign with improved buttons, icons, and journey section */
+/* FIXED: Prevent black/white flash during page load */
 
 * {
     margin: 0;
@@ -7,12 +8,27 @@
     box-sizing: border-box;
 }
 
+/* FIXED: Prevent flash by starting with dark background immediately */
+html {
+    background: #0f0f0f;
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #ffffff;
     overflow-x: hidden;
-    background: #ffffff;
+    /* FIXED: Changed from white to dark background to prevent flash */
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
+    /* FIXED: Start with slight opacity and transition smoothly */
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* FIXED: Smooth fade-in when page is loaded */
+body.loaded {
+    opacity: 1;
 }
 
 /* Golden Yellow Accent Classes */
