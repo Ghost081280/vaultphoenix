@@ -1,7 +1,7 @@
 // Vault Phoenix - Loading Page JavaScript
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // UPDATED: Faster loading, smooth transitions, removed loading messages array
-// FIXED: Seamless transition to main page without black screen
+// FIXED: Clean direct transition to main page without overlay flash
 
 // UPDATED: Single loading message - moved up to replace title
 const loadingMessage = "Awakening the Phoenix...";
@@ -18,7 +18,7 @@ const spark = document.querySelector('.loading-spark');
 
 // Initialize loading
 function initializeLoading() {
-    console.log('🔥🪙 Phoenix Crypto Loading System Initialized - FAST MODE');
+    console.log('🔥🪙 Phoenix Crypto Loading System Initialized - SEAMLESS MODE');
     
     // Start the loading simulation
     simulateLoading();
@@ -240,22 +240,49 @@ interactionCoinStyle.textContent = `
 `;
 document.head.appendChild(interactionCoinStyle);
 
-// UPDATED: Complete loading and transition - Enhanced with smoother transition
+// UPDATED: Complete loading and transition - Clean direct transition
 function completeLoading() {
     isLoading = false;
     
-    console.log('🔥🪙 Phoenix Crypto Loading Complete - Rising to Glory!');
+    console.log('🔥🪙 Phoenix Crypto Loading Complete - Direct transition starting!');
     
-    // Add enhanced completion effects for new image
-    addEnhancedCompletionEffects();
-    
-    // FIXED: Start preloading main page while showing completion effects
+    // FIXED: Start preloading immediately
     preloadMainPageResources();
     
-    // IMPROVED: Smooth transition to main site
+    // FIXED: Quick completion effects without delay
+    addQuickCompletionEffects();
+    
+    // FIXED: Direct transition after brief completion effects
     setTimeout(() => {
         transitionToMainSite();
-    }, 800); // SPEED UP: 1500 -> 800ms
+    }, 400); // Reduced delay for cleaner transition
+}
+
+// FIXED: Quick completion effects - no long animations
+function addQuickCompletionEffects() {
+    // Quick phoenix glow intensification
+    const phoenixImage = document.querySelector('.phoenix-image');
+    const logoGlow = document.querySelector('.logo-glow');
+    
+    if (phoenixImage) {
+        phoenixImage.style.filter = 'drop-shadow(0 0 60px rgba(240, 165, 0, 1)) brightness(1.2)';
+        phoenixImage.style.transform = 'scale(1.15) rotate(5deg)';
+        phoenixImage.classList.add('loading-complete');
+    }
+    
+    if (logoGlow) {
+        logoGlow.style.background = 'radial-gradient(circle, rgba(240, 165, 0, 0.8) 0%, rgba(215, 51, 39, 0.5) 40%, transparent 70%)';
+        logoGlow.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        logoGlow.style.opacity = '1';
+    }
+    
+    // Quick coin celebration
+    const coinImages = document.querySelectorAll('.crypto-coin-icon');
+    coinImages.forEach((coin, index) => {
+        setTimeout(() => {
+            coin.classList.add('loading-complete');
+        }, index * 30); // Much faster celebration
+    });
 }
 
 // FIXED: Preload main page resources for seamless transition
@@ -266,10 +293,7 @@ function preloadMainPageResources() {
     const criticalResources = [
         'main.html',
         'styles.css',
-        'script.js',
-        'images/VPLogoNoText.PNG',
-        'images/PhoenixHoldingCoin.PNG',
-        'images/crypto-login.jpg'
+        'script.js'
     ];
     
     criticalResources.forEach(resource => {
@@ -279,126 +303,35 @@ function preloadMainPageResources() {
                 .then(response => response.text())
                 .then(() => console.log(`🔥🪙 Preloaded: ${resource}`))
                 .catch(() => console.warn(`🔥🪙 Failed to preload: ${resource}`));
-        } else if (resource.endsWith('.css') || resource.endsWith('.js')) {
+        } else {
             // Preload CSS/JS
             const link = document.createElement('link');
-            link.rel = resource.endsWith('.css') ? 'preload' : 'preload';
+            link.rel = 'preload';
             link.as = resource.endsWith('.css') ? 'style' : 'script';
             link.href = resource;
             document.head.appendChild(link);
-        } else {
-            // Preload images
-            const img = new Image();
-            img.src = resource;
-            img.onload = () => console.log(`🔥🪙 Preloaded image: ${resource}`);
-            img.onerror = () => console.warn(`🔥🪙 Failed to preload image: ${resource}`);
         }
     });
 }
 
-// Add enhanced completion effects for the new PhoenixEmberSafe image
-function addEnhancedCompletionEffects() {
-    // Intensify phoenix glow with new image considerations
-    const phoenixImage = document.querySelector('.phoenix-image');
-    const logoGlow = document.querySelector('.logo-glow');
-    
-    if (phoenixImage) {
-        phoenixImage.style.filter = 'drop-shadow(0 0 60px rgba(240, 165, 0, 1)) brightness(1.1)';
-        phoenixImage.style.transform = 'scale(1.1) rotate(3deg)';
-        phoenixImage.classList.add('loading-complete');
-    }
-    
-    if (logoGlow) {
-        logoGlow.style.background = 'radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(215, 51, 39, 0.4) 40%, transparent 70%)';
-        logoGlow.style.transform = 'translate(-50%, -50%) scale(1.3)';
-        logoGlow.style.opacity = '0.8';
-    }
-    
-    // Enhanced flash effect - FASTER
-    const flashEffect = document.createElement('div');
-    flashEffect.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: linear-gradient(45deg, 
-            rgba(240, 165, 0, 0.3), 
-            rgba(215, 51, 39, 0.3), 
-            rgba(251, 146, 60, 0.3)
-        );
-        z-index: 5;
-        animation: completionFlash 0.8s ease-out forwards; /* SPEED UP: 1.2s -> 0.8s */
-        pointer-events: none;
-    `;
-    
-    document.body.appendChild(flashEffect);
-    
-    // Trigger ember coin celebration - FASTER
-    const coinImages = document.querySelectorAll('.crypto-coin-icon');
-    coinImages.forEach((coin, index) => {
-        setTimeout(() => {
-            coin.classList.add('loading-complete');
-        }, index * 60); // SPEED UP: 100 -> 60ms
-    });
-    
-    // Remove flash effect
-    setTimeout(() => {
-        if (flashEffect.parentNode) {
-            flashEffect.parentNode.removeChild(flashEffect);
-        }
-    }, 800); // SPEED UP: 1200 -> 800ms
-}
-
-// Add completion flash animation - FASTER
-const completionFlashStyle = document.createElement('style');
-completionFlashStyle.textContent = `
-    @keyframes completionFlash {
-        0% { opacity: 0; }
-        30% { opacity: 0.8; }
-        70% { opacity: 0.6; }
-        100% { opacity: 0; }
-    }
-`;
-document.head.appendChild(completionFlashStyle);
-
-// FIXED: Seamless transition to main site - NO BLACK SCREEN
+// FIXED: Clean direct transition - no overlay, no fade-back
 function transitionToMainSite() {
-    console.log('🔥🪙 Starting seamless transition to main page...');
+    console.log('🔥🪙 Starting DIRECT transition to main page...');
     
     const loadingContainer = document.querySelector('.loading-container');
     
     if (loadingContainer) {
-        // FIXED: Create seamless transition overlay
-        const transitionOverlay = document.createElement('div');
-        transitionOverlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.6s ease-in-out;
-            pointer-events: none;
-        `;
+        // FIXED: Direct redirect with minimal visual transition
+        // Just maintain the dark background and redirect immediately
+        loadingContainer.style.opacity = '0.95';
         
-        document.body.appendChild(transitionOverlay);
-        
-        // FIXED: Start transition overlay fade-in while loading screen fades out
+        // FIXED: Almost immediate redirect for clean transition
         setTimeout(() => {
-            transitionOverlay.style.opacity = '1';
-            loadingContainer.classList.add('fade-out');
-        }, 50);
-        
-        // FIXED: Redirect during overlay peak opacity (no black screen)
-        setTimeout(() => {
-            console.log('🔥🪙 Redirecting to main page during overlay...');
+            console.log('🔥🪙 Direct redirect to main page...');
             window.location.href = 'main.html';
-        }, 400); // Redirect while overlay is solid
+        }, 100); // Minimal delay for smooth visual continuity
         
-        console.log('🔥🪙 Seamless transition initiated - Welcome to Vault Phoenix!');
+        console.log('🔥🪙 Clean direct transition initiated!');
     } else {
         // Fallback if container not found
         window.location.href = 'main.html';
@@ -420,7 +353,7 @@ function monitorPerformance() {
         imagesLoaded++;
         if (imagesLoaded === totalImages) {
             const imageLoadTime = performance.now() - startTime;
-            console.log(`🔥🪙 All images loaded in ${Math.round(imageLoadTime)}ms - FAST MODE`);
+            console.log(`🔥🪙 All images loaded in ${Math.round(imageLoadTime)}ms - SEAMLESS MODE`);
         }
     }
     
@@ -436,7 +369,7 @@ function monitorPerformance() {
     
     window.addEventListener('load', () => {
         const loadTime = performance.now() - startTime;
-        console.log(`🔥🪙 Phoenix Loading Page loaded in ${Math.round(loadTime)}ms - OPTIMIZED`);
+        console.log(`🔥🪙 Phoenix Loading Page loaded in ${Math.round(loadTime)}ms - SEAMLESS`);
     });
 }
 
@@ -518,11 +451,11 @@ document.addEventListener('DOMContentLoaded', () => {
     setupErrorHandling();
     handleResponsiveChanges();
     
-    console.log('🔥🪙 VAULT PHOENIX LOADING SYSTEM ACTIVATED - SEAMLESS TRANSITION MODE');
-    console.log('🚀 Phoenix Rising from Digital Ashes - SPEED OPTIMIZED');
+    console.log('🔥🪙 VAULT PHOENIX LOADING SYSTEM ACTIVATED - DIRECT TRANSITION MODE');
+    console.log('🚀 Phoenix Rising from Digital Ashes - CLEAN SEAMLESS TRANSITION');
 });
 
 // Console welcome message
-console.log('%c🔥🪙 VAULT PHOENIX - SEAMLESS LOADING SEQUENCE INITIATED', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 From ashes to crypto greatness - Phoenix Loading with SEAMLESS TRANSITION!', 'color: #fb923c; font-size: 14px; font-weight: bold;');
-console.log('%c🔥 PhoenixEmberSafe image loaded - SEAMLESS transition ready!', 'color: #f0a500; font-size: 12px; font-weight: bold;');
+console.log('%c🔥🪙 VAULT PHOENIX - DIRECT TRANSITION LOADING SEQUENCE', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
+console.log('%c🚀 From ashes to crypto greatness - CLEAN DIRECT TRANSITION!', 'color: #fb923c; font-size: 14px; font-weight: bold;');
+console.log('%c🔥 PhoenixEmberSafe image loaded - DIRECT transition ready!', 'color: #f0a500; font-size: 12px; font-weight: bold;');
