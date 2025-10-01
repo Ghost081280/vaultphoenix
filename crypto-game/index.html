@@ -2,34 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover, maximum-scale=1.0, minimum-scale=1.0">
     <title>Vault Phoenix - AR Crypto Gaming</title>
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
     
     <!-- ISOLATED CRYPTO GAME CSS - ONLY AFFECTS crypto-game/ FOLDER -->
     <link rel="stylesheet" href="styles.css">
     
-    <!-- MOBILE LOCK STYLES -->
-    <style>
-        /* CRITICAL: Lock the page in place - prevent any movement */
-        html, body {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            overflow: hidden !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            overscroll-behavior: none !important;
-            touch-action: manipulation !important;
+    <!-- Mobile Height Detection Script -->
+    <script>
+        // Set CSS custom property for real viewport height
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            document.documentElement.style.setProperty('--real-vh', `${window.innerHeight}px`);
         }
         
-        /* Prevent any scrolling or movement */
-        * {
-            overscroll-behavior: none !important;
-        }
-    </style>
+        // Set on load and resize
+        window.addEventListener('load', setVH);
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(setVH, 100);
+        });
+        
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
+        // Prevent scrolling
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    </script>
 </head>
 <body class="crypto-login-page">
     <!-- CRYPTO GAME PROTECTION FLAG -->
