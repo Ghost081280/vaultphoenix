@@ -67,6 +67,8 @@ body.crypto-login-page {
     touch-action: manipulation !important;
     -webkit-overflow-scrolling: touch !important;
     -webkit-appearance: none !important;
+    /* Force perfect centering */
+    flex-direction: column !important;
 }
 
 /* Background coverage fix for mobile */
@@ -190,17 +192,20 @@ body.crypto-login-page::before {
         0 10px 30px rgba(240, 165, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.12),
         0 0 0 2px rgba(240, 165, 0, 0.3);
-    width: 88%;
+    width: 90%;
     max-width: 340px;
     max-height: 85vh;
     border: 2px solid rgba(240, 165, 0, 0.45);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     color: white;
+    /* CRITICAL: Force center alignment */
     margin: 0 auto;
     position: relative;
     overflow: visible;
-    /* CRITICAL: Remove any transforms that interfere with centering */
     transform: none !important;
+    /* Prevent stretching */
+    flex-shrink: 0;
+    align-self: center;
 }
 
 .crypto-login-page .login-container::before {
@@ -746,11 +751,23 @@ body.crypto-login-page::before {
 
 /* MOBILE RESPONSIVE BREAKPOINTS */
 @media (max-width: 375px) {
+    body.crypto-login-page {
+        /* Ensure perfect centering on small screens */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-direction: column !important;
+    }
+    
     .crypto-login-page .login-container {
         padding: 16px;
         max-width: 320px;
-        width: 92%;
+        width: 85%; /* Reduced width to prevent stretching */
         max-height: 82vh;
+        /* Force center positioning */
+        margin: 0 auto;
+        align-self: center;
+        justify-self: center;
     }
     
     .crypto-login-page .app-logo {
@@ -785,11 +802,23 @@ body.crypto-login-page::before {
 }
 
 @media (max-width: 320px) {
+    body.crypto-login-page {
+        /* Ensure perfect centering on very small screens */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-direction: column !important;
+    }
+    
     .crypto-login-page .login-container {
         padding: 14px;
         max-width: 300px;
-        width: 94%;
+        width: 80%; /* Further reduced width */
         max-height: 80vh;
+        /* Force center positioning */
+        margin: 0 auto;
+        align-self: center;
+        justify-self: center;
     }
     
     .crypto-login-page .app-logo {
@@ -827,11 +856,39 @@ body.crypto-login-page::before {
     }
 }
 
+/* Additional mobile centering fixes */
+@media screen and (max-width: 767px) {
+    body.crypto-login-page {
+        /* Absolute centering for mobile */
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-direction: column !important;
+    }
+    
+    .crypto-login-page .login-container {
+        /* Prevent module from stretching or misaligning */
+        position: relative;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        transform: none !important;
+        width: 85%;
+        max-width: 340px;
+    }
+}
+
 /* Landscape orientation optimization */
 @media (max-height: 600px) and (orientation: landscape) {
     .crypto-login-page .login-container {
         max-height: 92vh;
         padding: 12px;
+        width: 80%; /* Compact width for landscape */
     }
     
     .crypto-login-page .logo-section {
@@ -867,11 +924,20 @@ body.crypto-login-page::before {
     body.crypto-login-page {
         height: -webkit-fill-available !important;
         min-height: -webkit-fill-available !important;
+        /* Force flex centering on iOS */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     
     .crypto-login-page .floating-elements {
         height: -webkit-fill-available !important;
         min-height: -webkit-fill-available !important;
+    }
+    
+    .crypto-login-page .login-container {
+        align-self: center;
+        justify-self: center;
     }
 }
 
