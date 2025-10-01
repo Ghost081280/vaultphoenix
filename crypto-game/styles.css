@@ -9,6 +9,9 @@ html, body {
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
+    height: 100dvh !important; /* Dynamic viewport height for mobile */
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
     overflow: hidden !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -17,6 +20,7 @@ html, body {
     -webkit-overflow-scrolling: touch !important;
     -webkit-user-select: none !important;
     user-select: none !important;
+    -webkit-fill-available: 100vh !important; /* WebKit mobile fix */
 }
 
 /* GLOBAL RESET FOR CRYPTO GAME ONLY */
@@ -38,6 +42,11 @@ body.crypto-login-page {
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
+    height: 100dvh !important; /* Dynamic viewport height for mobile */
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    max-height: 100vh !important;
+    max-height: 100dvh !important;
     overflow: hidden !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -48,6 +57,13 @@ body.crypto-login-page {
     overscroll-behavior: none !important;
     touch-action: manipulation !important;
     -webkit-overflow-scrolling: touch !important;
+    -webkit-fill-available: 100vh !important; /* WebKit mobile fix */
+    -webkit-appearance: none !important;
+    /* Mobile browser UI compensation */
+    padding-top: constant(safe-area-inset-top) !important;
+    padding-top: env(safe-area-inset-top) !important;
+    padding-bottom: constant(safe-area-inset-bottom) !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
 }
 
 /* FULL SCREEN floating background elements */
@@ -57,9 +73,19 @@ body.crypto-login-page {
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
+    min-height: 100vh;
+    min-height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
     overflow: hidden;
     z-index: 1;
     pointer-events: none;
+    /* Mobile browser UI compensation */
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .crypto-login-page .floating-coin {
@@ -118,6 +144,10 @@ body.crypto-login-page {
     z-index: 2;
     animation: phoenixGlow 12s ease-in-out infinite;
     pointer-events: none;
+    /* Ensure it covers full screen on mobile */
+    min-width: 100vw;
+    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 @keyframes phoenixGlow {
@@ -146,7 +176,8 @@ body.crypto-login-page {
         0 0 0 2px rgba(240, 165, 0, 0.3);
     width: 88%;
     max-width: 340px;
-    max-height: 88vh;
+    max-height: 85vh; /* Reduced to ensure visibility on mobile */
+    max-height: 85dvh; /* Dynamic viewport height */
     border: 2px solid rgba(240, 165, 0, 0.45);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     color: white;
@@ -155,6 +186,11 @@ body.crypto-login-page {
     overflow: visible;
     /* CRITICAL: Remove any transforms that interfere with centering */
     transform: none !important;
+    /* Mobile safe area compensation */
+    margin-top: constant(safe-area-inset-top);
+    margin-top: env(safe-area-inset-top);
+    margin-bottom: constant(safe-area-inset-bottom);
+    margin-bottom: env(safe-area-inset-bottom);
 }
 
 .crypto-login-page .login-container::before {
@@ -704,6 +740,8 @@ body.crypto-login-page {
         padding: 16px;
         max-width: 320px;
         width: 92%;
+        max-height: 82vh; /* Even more compact for small screens */
+        max-height: 82dvh;
     }
     
     .crypto-login-page .app-logo {
@@ -742,6 +780,8 @@ body.crypto-login-page {
         padding: 14px;
         max-width: 300px;
         width: 94%;
+        max-height: 80vh; /* Most compact for very small screens */
+        max-height: 80dvh;
     }
     
     .crypto-login-page .app-logo {
@@ -782,7 +822,8 @@ body.crypto-login-page {
 /* Landscape orientation optimization */
 @media (max-height: 600px) and (orientation: landscape) {
     .crypto-login-page .login-container {
-        max-height: 95vh;
+        max-height: 92vh;
+        max-height: 92dvh;
         padding: 12px;
     }
     
@@ -811,6 +852,42 @@ body.crypto-login-page {
     .crypto-login-page .feature-item {
         margin-bottom: 3px;
         padding: 4px;
+    }
+}
+
+/* Mobile viewport height fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    body.crypto-login-page {
+        height: -webkit-fill-available !important;
+        min-height: -webkit-fill-available !important;
+    }
+    
+    .crypto-login-page .floating-elements {
+        height: -webkit-fill-available !important;
+        min-height: -webkit-fill-available !important;
+    }
+}
+
+/* Additional mobile fixes */
+@media screen and (max-width: 767px) {
+    body.crypto-login-page {
+        /* Prevent zoom on input focus */
+        -webkit-text-size-adjust: 100% !important;
+        text-size-adjust: 100% !important;
+    }
+    
+    .crypto-login-page .floating-elements {
+        /* Ensure background covers mobile browser UI */
+        top: -10vh;
+        height: 120vh;
+        height: 120dvh;
+    }
+    
+    .crypto-login-page .phoenix-glow-bg {
+        /* Ensure glow covers full mobile screen */
+        width: 150vw;
+        height: 150vh;
+        height: 150dvh;
     }
 }
 
