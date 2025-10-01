@@ -2417,42 +2417,6 @@ body {
     margin: 0;
 }
 
-.token-demand-box {
-    margin: 25px 0;
-    background: rgba(240, 165, 0, 0.08);
-    border: 1px solid rgba(240, 165, 0, 0.25);
-    border-radius: 15px;
-    padding: 22px;
-}
-
-.token-demand-box h4 {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 15px;
-}
-
-.token-demand-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.token-demand-list li {
-    padding: 8px 0 8px 25px;
-    position: relative;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-.token-demand-list li::before {
-    content: '🔥';
-    position: absolute;
-    left: 0;
-    font-size: 1rem;
-}
-
 .development-story-section {
     margin-top: 60px;
     position: relative;
@@ -2717,7 +2681,7 @@ body {
     margin: 0;
 }
 
-/* Final CTA Section - FIXED WHITE BUTTON ISSUE */
+/* Final CTA Section - FIXED: Better Themed CTA Button */
 .final-cta {
     padding: 120px 40px;
     background: linear-gradient(135deg, #d73327, #fb923c);
@@ -2778,7 +2742,7 @@ body {
     z-index: 10;
 }
 
-/* FIXED: Better CTA Buttons */
+/* FIXED: Better Themed CTA Buttons */
 .cta-primary-enhanced {
     background: linear-gradient(135deg, #1a202c, #2d3748) !important;
     color: white !important;
