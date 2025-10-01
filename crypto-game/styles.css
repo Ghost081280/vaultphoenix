@@ -94,20 +94,28 @@ body.crypto-login-page::before {
     min-height: 100vh;
     min-height: -webkit-fill-available;
     overflow: hidden;
-    z-index: 1;
+    z-index: 5; /* INCREASED z-index to show above background but below module */
     pointer-events: none;
 }
 
-/* Ensure content is above background */
-.crypto-login-page .floating-elements,
+/* Ensure content layering */
 .crypto-login-page .phoenix-glow-bg {
-    position: relative;
-    z-index: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.15) 0%, rgba(215, 51, 39, 0.08) 40%, transparent 70%);
+    border-radius: 50%;
+    z-index: 3; /* Lower than floating elements */
+    animation: phoenixGlow 12s ease-in-out infinite;
+    pointer-events: none;
 }
 
 .crypto-login-page .login-container {
     position: relative;
-    z-index: 10;
+    z-index: 10; /* Highest z-index */
 }
 
 .crypto-login-page .floating-coin {
@@ -153,21 +161,6 @@ body.crypto-login-page::before {
     }
 }
 
-/* FULL SCREEN phoenix glow background effect */
-.crypto-login-page .phoenix-glow-bg {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 600px;
-    height: 600px;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.15) 0%, rgba(215, 51, 39, 0.08) 40%, transparent 70%);
-    border-radius: 50%;
-    z-index: 2;
-    animation: phoenixGlow 12s ease-in-out infinite;
-    pointer-events: none;
-}
-
 @keyframes phoenixGlow {
     0%, 100% { 
         transform: translate(-50%, -50%) scale(1);
@@ -194,12 +187,12 @@ body.crypto-login-page::before {
         0 0 0 2px rgba(240, 165, 0, 0.3);
     width: 90%;
     max-width: 320px; /* Reduced max-width */
-    max-height: 75vh; /* Reduced max-height to fit better */
+    max-height: 70vh; /* Further reduced max-height */
     border: 2px solid rgba(240, 165, 0, 0.45);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     color: white;
-    /* CRITICAL: Force center alignment */
-    margin: 0 auto;
+    /* CRITICAL: Force center alignment and move up slightly */
+    margin: -5vh auto 0 auto; /* Negative top margin to move up */
     position: relative;
     overflow: visible;
     transform: none !important;
@@ -218,6 +211,7 @@ body.crypto-login-page::before {
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.08) 0%, rgba(215, 51, 39, 0.04) 50%, rgba(251, 146, 60, 0.08) 100%);
     z-index: -1;
     border-radius: 18px;
+    /* REMOVE backdrop-filter to allow coins to show through */
 }
 
 /* Enhanced Phoenix flame decoration */
@@ -763,9 +757,9 @@ body.crypto-login-page::before {
         padding: 14px; /* Reduced padding */
         max-width: 300px; /* Smaller max-width */
         width: 80%; /* Reduced width to prevent stretching */
-        max-height: 70vh; /* Reduced max-height */
-        /* Force center positioning */
-        margin: 0 auto;
+        max-height: 65vh; /* Further reduced max-height */
+        /* Force center positioning and move up */
+        margin: -8vh auto 0 auto; /* More negative margin for mobile */
         align-self: center;
         justify-self: center;
     }
@@ -819,9 +813,9 @@ body.crypto-login-page::before {
         padding: 12px; /* Further reduced padding */
         max-width: 280px; /* Even smaller max-width */
         width: 75%; /* Further reduced width */
-        max-height: 65vh; /* Further reduced max-height */
-        /* Force center positioning */
-        margin: 0 auto;
+        max-height: 60vh; /* Further reduced max-height */
+        /* Force center positioning and move up */
+        margin: -10vh auto 0 auto; /* Even more negative margin for very small screens */
         align-self: center;
         justify-self: center;
     }
@@ -879,7 +873,7 @@ body.crypto-login-page::before {
     .crypto-login-page .login-container {
         /* Prevent module from stretching or misaligning */
         position: relative;
-        margin: 0 auto;
+        margin: -5vh auto 0 auto;
         left: 0;
         right: 0;
         transform: none !important;
@@ -894,6 +888,7 @@ body.crypto-login-page::before {
         max-height: 92vh;
         padding: 12px;
         width: 80%; /* Compact width for landscape */
+        margin: -3vh auto 0 auto; /* Less negative margin for landscape */
     }
     
     .crypto-login-page .logo-section {
