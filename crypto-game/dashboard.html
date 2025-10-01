@@ -6,7 +6,7 @@
     <title>Vault Phoenix - AR Crypto Gaming Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
-    <!-- ISOLATED CRYPTO GAME CSS - NO EXTERNAL CONFLICTS -->
+    <!-- ISOLATED CRYPTO GAME CSS - ONLY AFFECTS crypto-game/ FOLDER -->
     <link rel="stylesheet" href="crypto-game.css">
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
 </head>
@@ -39,7 +39,7 @@
             <div class="map-fallback-content">
                 <div class="map-central-card">
                     <div class="map-card-icon">
-                        <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="map-ember-icon">
+                        <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="map-ember-icon" onerror="this.textContent='💎'">
                     </div>
                     <h2 class="map-title">$Ember Token Hunt</h2>
                     <p class="map-description">
@@ -55,7 +55,7 @@
                     <!-- Enhanced Start Hunt Button -->
                     <div class="map-action-section">
                         <button class="start-hunt-button" onclick="vaultPhoenixApp?.switchMode('ar')">
-                            <img src="../images/IphoneVPLogo.PNG" alt="AR Mode" class="hunt-button-icon">
+                            <img src="../images/IphoneVPLogo.PNG" alt="AR Mode" class="hunt-button-icon" onerror="this.textContent='📱'">
                             <div class="hunt-button-content">
                                 <span class="hunt-button-main">Start AR Hunt</span>
                                 <span class="hunt-button-sub">Switch to Camera Mode</span>
@@ -69,19 +69,19 @@
                 <div class="map-token-locations-label">$EMBER TOKENS NEARBY</div>
                 <div class="map-token-locations-icons">
                     <div class="ember-token-display">
-                        <img src="../images/VPEmberCoin.PNG" alt="Ember Token" class="token-icon-small">
+                        <img src="../images/VPEmberCoin.PNG" alt="Ember Token" class="token-icon-small" onerror="this.textContent='💎'">
                     </div>
                     <div class="ember-flame-display">
-                        <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="flame-icon-small">
+                        <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="flame-icon-small" onerror="this.textContent='🔥'">
                     </div>
                     <div class="ember-token-display">
-                        <img src="../images/VPEmberCoin.PNG" alt="Ember Token" class="token-icon-small">
+                        <img src="../images/VPEmberCoin.PNG" alt="Ember Token" class="token-icon-small" onerror="this.textContent='💎'">
                     </div>
                     <div class="ember-flame-display">
-                        <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="flame-icon-small">
+                        <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="flame-icon-small" onerror="this.textContent='🔥'">
                     </div>
                     <div class="ember-token-display">
-                        <img src="../images/VPEmberCoin.PNG" alt="Ember Token" class="token-icon-small">
+                        <img src="../images/VPEmberCoin.PNG" alt="Ember Token" class="token-icon-small" onerror="this.textContent='💎'">
                     </div>
                 </div>
                 <div class="map-token-locations-hint">Tap locations to navigate!</div>
@@ -138,21 +138,21 @@
         <!-- AR Ember Coin -->
         <div class="ar-ember-coin" id="arEmberCoin">
             <div class="ember-coin-icon">
-                <img src="../images/VPEmberCoin.PNG" alt="AR Ember Coin" class="ar-coin-image">
+                <img src="../images/VPEmberCoin.PNG" alt="AR Ember Coin" class="ar-coin-image" onerror="this.textContent='💎'">
             </div>
         </div>
 
         <!-- Enhanced Proximity Notification -->
         <div class="proximity-notification" id="proximityNotification">
             <div class="proximity-icon">
-                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="proximity-coin-icon">
+                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="proximity-coin-icon" onerror="this.textContent='💎'">
             </div>
             <div class="proximity-content">
                 <div class="proximity-title">$Ember Token Detected!</div>
                 <div class="proximity-subtitle">Switch to AR Mode to collect</div>
             </div>
             <button class="proximity-button" id="proximityARButton">
-                <img src="../images/IphoneVPLogo.PNG" alt="AR" class="proximity-ar-icon">
+                <img src="../images/IphoneVPLogo.PNG" alt="AR" class="proximity-ar-icon" onerror="this.textContent='📱'">
                 Open AR
             </button>
         </div>
@@ -162,14 +162,14 @@
             <div class="nav-content">
                 <div class="nav-brand">
                     <div class="nav-logo" id="homeBtn">
-                        <img src="../images/VPLogoNoText.PNG" alt="Phoenix Logo" class="nav-logo-image">
+                        <img src="../images/VPLogoNoText.PNG" alt="Phoenix Logo" class="nav-logo-image" onerror="this.textContent='🔥'">
                     </div>
                     <div class="nav-title">Vault Phoenix</div>
                 </div>
                 <div class="nav-actions">
                     <div class="vault-badge" id="vaultBadge" onclick="vaultPhoenixApp?.switchMode('vault')">
                         <div class="badge-icon">
-                            <img src="../images/VPEmberCoin.PNG" alt="Ember Count" class="badge-coin-icon">
+                            <img src="../images/VPEmberCoin.PNG" alt="Ember Count" class="badge-coin-icon" onerror="this.textContent='💎'">
                         </div>
                         <span class="badge-count" id="navEmberCount">0</span>
                     </div>
@@ -186,7 +186,7 @@
             <div class="menu-header">
                 <div class="menu-user">
                     <div class="menu-avatar" id="menuAvatar">
-                        <img src="../images/VPLogoNoText.PNG" alt="Avatar" class="avatar-image">
+                        <img src="../images/VPLogoNoText.PNG" alt="Avatar" class="avatar-image" onerror="this.textContent='🔥'">
                     </div>
                     <div class="menu-user-info">
                         <div class="menu-user-name">Phoenix Hunter</div>
@@ -206,13 +206,13 @@
                 </div>
                 
                 <div class="menu-item" data-mode="ar" onclick="vaultPhoenixApp?.switchMode('ar')">
-                    <div class="menu-item-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')"></div>
+                    <div class="menu-item-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')">📱</div>
                     <div class="menu-item-text">AR Discovery</div>
                     <div class="menu-item-badge" id="nearbyTokens">6</div>
                 </div>
                 
                 <div class="menu-item" data-mode="vault" onclick="vaultPhoenixApp?.switchMode('vault')">
-                    <div class="menu-item-icon image" style="background-image: url('../images/PhoenixSafe.PNG')"></div>
+                    <div class="menu-item-icon image" style="background-image: url('../images/PhoenixSafe.PNG')">🔒</div>
                     <div class="menu-item-text">$Ember Vault</div>
                     <div class="menu-item-badge" id="menuEmberCount">0</div>
                 </div>
@@ -222,7 +222,7 @@
                 </div>
                 
                 <div class="menu-item" data-mode="campaigns" onclick="vaultPhoenixApp?.switchMode('campaigns')">
-                    <div class="menu-item-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')"></div>
+                    <div class="menu-item-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')">🏆</div>
                     <div class="menu-item-text">Themed Adventures</div>
                     <div class="menu-item-badge">3 Active</div>
                 </div>
@@ -298,7 +298,7 @@
                 <div class="token-discovery-header">
                     <div class="token-found-title">
                         <div class="token-found-icon">
-                            <img src="../images/VPEmberFlame.svg" alt="Found" class="found-flame-icon">
+                            <img src="../images/VPEmberFlame.svg" alt="Found" class="found-flame-icon" onerror="this.textContent='🔥'">
                         </div>
                         <span>$Ember Token Found!</span>
                     </div>
@@ -313,7 +313,7 @@
                     
                     <div class="token-preview">
                         <div class="token-image">
-                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="token-coin-img">
+                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="token-coin-img" onerror="this.textContent='💎'">
                         </div>
                         <div class="token-details">
                             <div class="token-amount" id="discoveredTokenAmount">500 $Ember</div>
@@ -374,7 +374,7 @@
                 <div class="vault-header">
                     <div class="vault-title">
                         <div class="vault-title-icon">
-                            <img src="../images/PhoenixSafe.PNG" alt="Vault" class="vault-icon-image">
+                            <img src="../images/PhoenixSafe.PNG" alt="Vault" class="vault-icon-image" onerror="this.textContent='🔒'">
                         </div>
                         $Ember Vault
                     </div>
@@ -398,7 +398,7 @@
                 <div class="vault-stats-section">
                     <div class="vault-stats-title">
                         <div class="vault-title-icon">
-                            <img src="../images/EmberAnalytics.PNG" alt="Analytics" class="vault-icon-image">
+                            <img src="../images/EmberAnalytics.PNG" alt="Analytics" class="vault-icon-image" onerror="this.textContent='📊'">
                         </div>
                         Transaction History
                     </div>
@@ -432,7 +432,7 @@
                 <div class="token-history" id="tokenHistory">
                     <div class="history-item">
                         <div class="history-icon">
-                            <img src="../images/VPEmberCoin.PNG" alt="Welcome Bonus" class="history-coin-icon">
+                            <img src="../images/VPEmberCoin.PNG" alt="Welcome Bonus" class="history-coin-icon" onerror="this.textContent='💎'">
                         </div>
                         <div class="history-details">
                             <div class="history-title">Welcome Bonus</div>
@@ -450,7 +450,7 @@
                 <div class="campaigns-header">
                     <div class="campaigns-title">
                         <div class="campaigns-title-icon">
-                            <img src="../images/PhoenixGoldTrophy.PNG" alt="Adventures" class="campaigns-icon-image">
+                            <img src="../images/PhoenixGoldTrophy.PNG" alt="Adventures" class="campaigns-icon-image" onerror="this.textContent='🏆'">
                         </div>
                         Themed Adventures
                     </div>
@@ -535,7 +535,7 @@
                 <div class="qr-code-container">
                     <div class="qr-placeholder">
                         <div class="qr-icon">
-                            <img src="../images/VPEmberCoin.PNG" alt="QR Code" class="qr-ember-icon">
+                            <img src="../images/VPEmberCoin.PNG" alt="QR Code" class="qr-ember-icon" onerror="this.textContent='💎'">
                         </div>
                         QR Code will appear here<br>
                         <small>Show this at partner locations</small>
@@ -575,22 +575,22 @@
                     <div class="nav-tab-label">Hunt</div>
                 </div>
                 <div class="nav-tab" data-mode="ar" onclick="vaultPhoenixApp?.switchMode('ar')">
-                    <div class="nav-tab-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')"></div>
+                    <div class="nav-tab-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')">📱</div>
                     <div class="nav-tab-label">AR View</div>
                 </div>
                 <div class="nav-tab" data-mode="vault" onclick="vaultPhoenixApp?.switchMode('vault')">
-                    <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixSafe.PNG')"></div>
+                    <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixSafe.PNG')">🔒</div>
                     <div class="nav-tab-label">Vault</div>
                 </div>
                 <div class="nav-tab" data-mode="campaigns" onclick="vaultPhoenixApp?.switchMode('campaigns')">
-                    <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')"></div>
+                    <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')">🏆</div>
                     <div class="nav-tab-label">Adventures</div>
                 </div>
             </div>
         </nav>
     </div>
     
-    <!-- ISOLATED CRYPTO GAME JAVASCRIPT - NO EXTERNAL CONFLICTS -->
+    <!-- ISOLATED CRYPTO GAME JAVASCRIPT - ONLY AFFECTS crypto-game/ FOLDER -->
     <script src="crypto-game.js"></script>
 </body>
 </html>
