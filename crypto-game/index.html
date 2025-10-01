@@ -2,18 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Vault Phoenix - AR Crypto Gaming</title>
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
     
     <!-- ISOLATED CRYPTO GAME CSS - ONLY AFFECTS crypto-game/ FOLDER -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- MOBILE LOCK STYLES -->
+    <style>
+        /* CRITICAL: Lock the page in place - prevent any movement */
+        html, body {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overscroll-behavior: none !important;
+            touch-action: pan-y !important;
+        }
+        
+        /* Prevent any scrolling or movement */
+        * {
+            overscroll-behavior: none !important;
+        }
+    </style>
 </head>
 <body class="crypto-login-page">
     <!-- CRYPTO GAME PROTECTION FLAG -->
     <div id="cryptoGameFlag" style="display: none;">CRYPTO_GAME_PAGE</div>
     
-    <!-- Enhanced floating background elements -->
+    <!-- Reduced floating background elements for mobile -->
     <div class="floating-elements">
         <div class="floating-coin floating-coin-1">
             <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="floating-coin-image" onerror="this.style.display='none'">
@@ -22,15 +44,6 @@
             <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="floating-coin-image" onerror="this.style.display='none'">
         </div>
         <div class="floating-coin floating-coin-3">
-            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="floating-coin-image" onerror="this.style.display='none'">
-        </div>
-        <div class="floating-coin floating-coin-4">
-            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="floating-coin-image" onerror="this.style.display='none'">
-        </div>
-        <div class="floating-coin floating-coin-5">
-            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="floating-coin-image" onerror="this.style.display='none'">
-        </div>
-        <div class="floating-coin floating-coin-6">
             <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="floating-coin-image" onerror="this.style.display='none'">
         </div>
     </div>
@@ -50,7 +63,7 @@
                 <div class="logo-glow"></div>
             </div>
             <h1 class="app-title">Vault Phoenix</h1>
-            <p class="app-subtitle">AR Crypto Gaming Revolution</p>
+            <p class="app-subtitle">AR Crypto Gaming</p>
         </div>
 
         <div class="demo-badge">
@@ -58,11 +71,10 @@
                 <div class="demo-badge-icon">
                     <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="demo-coin-icon" onerror="this.textContent='💎'">
                 </div>
-                Demo Access - Collect Real $Ember Tokens
+                Demo Access - Real $Ember Tokens
             </div>
             <div class="demo-credentials">
-                <strong>demo@vaultphoenix.com</strong><br>
-                <strong>phoenix123</strong>
+                <strong>Tap login to start demo</strong>
             </div>
         </div>
 
@@ -76,12 +88,13 @@
                     id="email" 
                     class="form-input" 
                     placeholder="Email address"
+                    value="demo@vaultphoenix.com"
                     autocomplete="email"
                     required
                 >
                 <div class="input-glow"></div>
                 <div class="input-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
@@ -94,12 +107,13 @@
                     id="password" 
                     class="form-input" 
                     placeholder="Password"
+                    value="phoenix123"
                     autocomplete="current-password"
                     required
                 >
                 <div class="input-glow"></div>
                 <div class="input-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                         <circle cx="12" cy="16" r="1"></circle>
                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
@@ -142,7 +156,7 @@
         </div>
 
         <div class="forgot-password">
-            <a href="#" id="forgotPassword">Forgot password?</a>
+            <a href="#" id="forgotPassword">Need help?</a>
         </div>
     </div>
 
