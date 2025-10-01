@@ -2502,7 +2502,42 @@ body {
     box-shadow: 0 15px 35px rgba(74, 222, 128, 0.5);
 }
 
-/* Compliance Grid Styles */
+/* Legal & Regulatory Compliance Section */
+.legal-compliance-section {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
+}
+
+.legal-disclaimer {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    margin-top: 40px;
+}
+
+.legal-disclaimer h3 {
+    color: #f0a500;
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.disclaimer-content {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.disclaimer-content p {
+    margin-bottom: 15px;
+}
+
+.disclaimer-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Compliance Grid Styles - Updated */
 .compliance-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
