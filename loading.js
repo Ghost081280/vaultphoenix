@@ -1,38 +1,29 @@
 // Vault Phoenix - Loading Page JavaScript
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
-// UPDATED: New PhoenixEmberSafe image and improved UX
+// UPDATED: Faster loading, smooth transitions, removed loading messages array
 
-// Loading messages array - Phoenix crypto themed
-const loadingMessages = [
-    "Awakening the Phoenix..."
-];
+// UPDATED: Single loading message - moved up to replace title
+const loadingMessage = "Awakening the Phoenix...";
 
-// Loading progress simulation
+// Loading progress simulation - SPEED UP
 let currentProgress = 0;
 let targetProgress = 0;
-let messageIndex = 0;
 let isLoading = true;
 
 // DOM elements
 const progressBar = document.querySelector('.loading-progress');
 const percentageDisplay = document.querySelector('.loading-percentage');
-const statusMessage = document.querySelector('.loading-status');
 const spark = document.querySelector('.loading-spark');
 
 // Initialize loading
 function initializeLoading() {
-    console.log('🔥🪙 Phoenix Crypto Loading System Initialized');
+    console.log('🔥🪙 Phoenix Crypto Loading System Initialized - FAST MODE');
     
     // Start the loading simulation
     simulateLoading();
     
     // Update progress animation
     updateProgress();
-    
-    // Set the single loading message
-    if (statusMessage) {
-        statusMessage.textContent = loadingMessages[0];
-    }
     
     // Add interaction feedback
     addInteractionEffects();
@@ -41,14 +32,14 @@ function initializeLoading() {
     initializeFloatingCoins();
 }
 
-// Simulate realistic loading progress
+// UPDATED: Faster loading simulation - reduced timing
 function simulateLoading() {
     const phases = [
-        { duration: 1000, progress: 15 },   // Initial load
-        { duration: 1500, progress: 35 },   // Asset loading
-        { duration: 2000, progress: 60 },   // System initialization
-        { duration: 1800, progress: 85 },   // Final preparations
-        { duration: 1200, progress: 100 }   // Complete
+        { duration: 600, progress: 20 },   // SPEED UP: 1000 -> 600ms
+        { duration: 800, progress: 45 },   // SPEED UP: 1500 -> 800ms
+        { duration: 1000, progress: 70 },  // SPEED UP: 2000 -> 1000ms
+        { duration: 900, progress: 90 },   // SPEED UP: 1800 -> 900ms
+        { duration: 600, progress: 100 }   // SPEED UP: 1200 -> 600ms
     ];
     
     let currentPhase = 0;
@@ -66,17 +57,17 @@ function simulateLoading() {
             // Loading complete - transition to main site
             setTimeout(() => {
                 completeLoading();
-            }, 500);
+            }, 300); // SPEED UP: 500 -> 300ms
         }
     }
     
     nextPhase();
 }
 
-// Smooth progress bar animation
+// Smooth progress bar animation - FASTER
 function updateProgress() {
     if (currentProgress < targetProgress) {
-        currentProgress += Math.random() * 2 + 0.5; // Variable speed for realism
+        currentProgress += Math.random() * 3 + 1; // SPEED UP: increased increment
         
         if (currentProgress > targetProgress) {
             currentProgress = targetProgress;
@@ -163,10 +154,10 @@ function addInteractionEffects() {
         
         // Add click effect for mobile
         phoenixImage.addEventListener('click', () => {
-            phoenixImage.style.animation = 'phoenixPulse 0.5s ease-out';
+            phoenixImage.style.animation = 'phoenixPulse 0.4s ease-out'; // SPEED UP: 0.5s -> 0.4s
             setTimeout(() => {
-                phoenixImage.style.animation = 'phoenixPulse 3s ease-in-out infinite';
-            }, 500);
+                phoenixImage.style.animation = 'phoenixPulse 2.5s ease-in-out infinite';
+            }, 400); // SPEED UP: 500 -> 400ms
         });
         
         // Error handling for the new phoenix image
@@ -179,7 +170,7 @@ function addInteractionEffects() {
             fallback.innerHTML = '🔥🪙';
             fallback.style.cssText = `
                 font-size: clamp(120px, 20vw, 180px);
-                animation: phoenixPulse 3s ease-in-out infinite;
+                animation: phoenixPulse 2.5s ease-in-out infinite;
                 filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
                 display: flex;
                 align-items: center;
@@ -210,7 +201,7 @@ function createInteractionCoin(event) {
         width: clamp(25px, 5vw, 35px);
         height: clamp(25px, 5vw, 35px);
         z-index: 1000;
-        animation: interactionCoin 1.5s ease-out forwards;
+        animation: interactionCoin 1.2s ease-out forwards; /* SPEED UP: 1.5s -> 1.2s */
         filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.7));
         border-radius: 50%;
     `;
@@ -229,10 +220,10 @@ function createInteractionCoin(event) {
         if (coin.parentNode) {
             coin.parentNode.removeChild(coin);
         }
-    }, 1500);
+    }, 1200); // SPEED UP: 1500 -> 1200ms
 }
 
-// Add interaction coin animation
+// Add interaction coin animation - FASTER
 const interactionCoinStyle = document.createElement('style');
 interactionCoinStyle.textContent = `
     @keyframes interactionCoin {
@@ -248,24 +239,19 @@ interactionCoinStyle.textContent = `
 `;
 document.head.appendChild(interactionCoinStyle);
 
-// Complete loading and transition - Enhanced with new image
+// UPDATED: Complete loading and transition - Enhanced with smoother transition
 function completeLoading() {
     isLoading = false;
     
     console.log('🔥🪙 Phoenix Crypto Loading Complete - Rising to Glory!');
     
-    // Keep the same message - no change
-    if (statusMessage) {
-        statusMessage.textContent = "Awakening the Phoenix...";
-    }
-    
     // Add enhanced completion effects for new image
     addEnhancedCompletionEffects();
     
-    // Transition to main site after effects
+    // IMPROVED: Smooth transition to main site
     setTimeout(() => {
         transitionToMainSite();
-    }, 1500);
+    }, 800); // SPEED UP: 1500 -> 800ms
 }
 
 // Add enhanced completion effects for the new PhoenixEmberSafe image
@@ -286,7 +272,7 @@ function addEnhancedCompletionEffects() {
         logoGlow.style.opacity = '0.8';
     }
     
-    // Enhanced flash effect
+    // Enhanced flash effect - FASTER
     const flashEffect = document.createElement('div');
     flashEffect.style.cssText = `
         position: fixed;
@@ -300,18 +286,18 @@ function addEnhancedCompletionEffects() {
             rgba(251, 146, 60, 0.3)
         );
         z-index: 5;
-        animation: completionFlash 1.2s ease-out forwards;
+        animation: completionFlash 0.8s ease-out forwards; /* SPEED UP: 1.2s -> 0.8s */
         pointer-events: none;
     `;
     
     document.body.appendChild(flashEffect);
     
-    // Trigger ember coin celebration
+    // Trigger ember coin celebration - FASTER
     const coinImages = document.querySelectorAll('.crypto-coin-icon');
     coinImages.forEach((coin, index) => {
         setTimeout(() => {
             coin.classList.add('loading-complete');
-        }, index * 100);
+        }, index * 60); // SPEED UP: 100 -> 60ms
     });
     
     // Remove flash effect
@@ -319,10 +305,10 @@ function addEnhancedCompletionEffects() {
         if (flashEffect.parentNode) {
             flashEffect.parentNode.removeChild(flashEffect);
         }
-    }, 1200);
+    }, 800); // SPEED UP: 1200 -> 800ms
 }
 
-// Add completion flash animation
+// Add completion flash animation - FASTER
 const completionFlashStyle = document.createElement('style');
 completionFlashStyle.textContent = `
     @keyframes completionFlash {
@@ -334,22 +320,21 @@ completionFlashStyle.textContent = `
 `;
 document.head.appendChild(completionFlashStyle);
 
-// Transition to main site with enhanced feedback
+// UPDATED: Smooth transition to main site - FIXED black background issue
 function transitionToMainSite() {
-    // Fade out loading screen
+    // FIXED: Smooth fade out loading screen
     const loadingContainer = document.querySelector('.loading-container');
     
     if (loadingContainer) {
-        loadingContainer.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
-        loadingContainer.style.opacity = '0';
-        loadingContainer.style.transform = 'scale(0.95)';
+        // Add fade-out class for smooth transition
+        loadingContainer.classList.add('fade-out');
         
         setTimeout(() => {
             // Redirect to main page
             window.location.href = 'main.html';
             
             console.log('🔥🪙 Welcome to Vault Phoenix - AR Crypto Gaming Revolution!');
-        }, 1000);
+        }, 800); // SPEED UP: 1000 -> 800ms (matches CSS transition)
     } else {
         // Fallback if container not found
         window.location.href = 'main.html';
@@ -371,7 +356,7 @@ function monitorPerformance() {
         imagesLoaded++;
         if (imagesLoaded === totalImages) {
             const imageLoadTime = performance.now() - startTime;
-            console.log(`🔥🪙 All images loaded in ${Math.round(imageLoadTime)}ms`);
+            console.log(`🔥🪙 All images loaded in ${Math.round(imageLoadTime)}ms - FAST MODE`);
         }
     }
     
@@ -387,7 +372,7 @@ function monitorPerformance() {
     
     window.addEventListener('load', () => {
         const loadTime = performance.now() - startTime;
-        console.log(`🔥🪙 Phoenix Loading Page loaded in ${Math.round(loadTime)}ms`);
+        console.log(`🔥🪙 Phoenix Loading Page loaded in ${Math.round(loadTime)}ms - OPTIMIZED`);
     });
 }
 
@@ -397,15 +382,9 @@ function setupErrorHandling() {
         console.error('🔥🪙 Phoenix Loading Error:', event.error);
         
         // Enhanced fallback - still proceed to main site with user feedback
-        const statusMessage = document.querySelector('.loading-status');
-        if (statusMessage) {
-            statusMessage.textContent = 'Phoenix experiencing turbulence... Redirecting...';
-            statusMessage.style.color = '#fb923c';
-        }
-        
         setTimeout(() => {
             window.location.href = 'main.html';
-        }, 3000);
+        }, 2000); // SPEED UP: 3000 -> 2000ms
     });
     
     // Enhanced image error handling for the new images
@@ -443,16 +422,16 @@ function handleResponsiveChanges() {
                     phoenixImage.style.transform = 'scale(1.01)';
                     setTimeout(() => {
                         phoenixImage.style.transform = '';
-                    }, 100);
+                    }, 50); // SPEED UP: 100 -> 50ms
                 }
             }
-        }, 100);
+        }, 50); // SPEED UP: 100 -> 50ms
     });
     
     // Handle resize events
     window.addEventListener('resize', debounce(() => {
         console.log('🔥🪙 Window resized - optimizing display');
-    }, 250));
+    }, 150)); // SPEED UP: 250 -> 150ms
 }
 
 // Utility function for debouncing
@@ -468,18 +447,18 @@ function debounce(func, wait) {
     };
 }
 
-// Initialize everything when DOM is ready
+// Initialize everything when DOM is ready - FASTER
 document.addEventListener('DOMContentLoaded', () => {
     initializeLoading();
     monitorPerformance();
     setupErrorHandling();
     handleResponsiveChanges();
     
-    console.log('🔥🪙 VAULT PHOENIX LOADING SYSTEM ACTIVATED');
-    console.log('🚀 Phoenix Rising from Digital Ashes with new PhoenixEmberSafe image...');
+    console.log('🔥🪙 VAULT PHOENIX LOADING SYSTEM ACTIVATED - FAST MODE');
+    console.log('🚀 Phoenix Rising from Digital Ashes - SPEED OPTIMIZED');
 });
 
 // Console welcome message
-console.log('%c🔥🪙 VAULT PHOENIX - LOADING SEQUENCE INITIATED', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 From ashes to crypto greatness - Phoenix Loading with Enhanced UX!', 'color: #fb923c; font-size: 14px; font-weight: bold;');
-console.log('%c🔥 PhoenixEmberSafe image loaded - New visual identity activated!', 'color: #f0a500; font-size: 12px; font-weight: bold;');
+console.log('%c🔥🪙 VAULT PHOENIX - FAST LOADING SEQUENCE INITIATED', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
+console.log('%c🚀 From ashes to crypto greatness - Phoenix Loading OPTIMIZED!', 'color: #fb923c; font-size: 14px; font-weight: bold;');
+console.log('%c🔥 PhoenixEmberSafe image loaded - FAST transition ready!', 'color: #f0a500; font-size: 12px; font-weight: bold;');
