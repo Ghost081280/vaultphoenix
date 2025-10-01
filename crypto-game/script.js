@@ -84,6 +84,7 @@ if (window.isVaultPhoenixCryptoGame) {
                 // Check if we're on login page or dashboard
                 if (document.getElementById('loginForm')) {
                     this.setupLoginListeners();
+                    this.initializeEnhancedLoginEffects();
                     console.log('✅ Login page initialized');
                 } else if (document.getElementById('container')) {
                     this.ensureSession();
@@ -100,6 +101,187 @@ if (window.isVaultPhoenixCryptoGame) {
                 this.collectedTokens = [];
                 this.totalTokenValue = 0;
             }
+        }
+
+        // Enhanced Login Effects
+        initializeEnhancedLoginEffects() {
+            this.initializeFloatingCoins();
+            this.initializePhoenixGlow();
+            this.initializeParticleSystem();
+            this.setupEnhancedFormValidation();
+            this.addHapticFeedback();
+        }
+
+        initializeFloatingCoins() {
+            const coins = document.querySelectorAll('.floating-coin');
+            coins.forEach((coin, index) => {
+                // Add random delays and speeds
+                coin.style.animationDelay = `${Math.random() * 5}s`;
+                coin.style.animationDuration = `${12 + Math.random() * 8}s`;
+                
+                // Add hover interaction
+                coin.addEventListener('mouseenter', () => {
+                    coin.style.transform = 'scale(1.2) rotate(180deg)';
+                    coin.style.opacity = '0.8';
+                });
+                
+                coin.addEventListener('mouseleave', () => {
+                    coin.style.transform = '';
+                    coin.style.opacity = '';
+                });
+            });
+        }
+
+        initializePhoenixGlow() {
+            const glowElement = document.querySelector('.phoenix-glow-bg');
+            if (glowElement) {
+                // Add mouse tracking for glow effect
+                document.addEventListener('mousemove', (e) => {
+                    const x = (e.clientX / window.innerWidth) * 100;
+                    const y = (e.clientY / window.innerHeight) * 100;
+                    
+                    glowElement.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(240, 165, 0, 0.15) 0%, rgba(215, 51, 39, 0.08) 40%, transparent 70%)`;
+                });
+            }
+        }
+
+        initializeParticleSystem() {
+            // Create dynamic particle effects on button interactions
+            const loginButton = document.getElementById('loginBtn');
+            if (loginButton) {
+                loginButton.addEventListener('click', (e) => {
+                    this.createButtonParticles(e.target);
+                });
+            }
+        }
+
+        createButtonParticles(element) {
+            const rect = element.getBoundingClientRect();
+            const particlesContainer = document.getElementById('loadingParticles');
+            
+            if (!particlesContainer) return;
+            
+            for (let i = 0; i < 6; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.position = 'absolute';
+                particle.style.left = `${rect.left + rect.width / 2}px`;
+                particle.style.top = `${rect.top + rect.height / 2}px`;
+                particle.style.width = '6px';
+                particle.style.height = '6px';
+                particle.style.background = '#f0a500';
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '9999';
+                
+                const angle = (i / 6) * Math.PI * 2;
+                const distance = 100 + Math.random() * 50;
+                const endX = Math.cos(angle) * distance;
+                const endY = Math.sin(angle) * distance;
+                
+                particle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${endX}px, ${endY}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 1000,
+                    easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                }).onfinish = () => particle.remove();
+                
+                document.body.appendChild(particle);
+            }
+        }
+
+        setupEnhancedFormValidation() {
+            const inputs = document.querySelectorAll('.form-input');
+            inputs.forEach(input => {
+                input.addEventListener('input', () => this.validateInputEnhanced(input));
+                input.addEventListener('focus', () => this.onInputFocus(input));
+                input.addEventListener('blur', () => this.onInputBlur(input));
+            });
+        }
+
+        validateInputEnhanced(input) {
+            const isValid = input.checkValidity();
+            const formGroup = input.closest('.form-group');
+            
+            if (input.value) {
+                if (isValid) {
+                    this.showInputSuccess(formGroup);
+                } else {
+                    this.showInputError(formGroup);
+                }
+            } else {
+                this.resetInputState(formGroup);
+            }
+        }
+
+        showInputSuccess(formGroup) {
+            formGroup.style.borderColor = '#4CAF50';
+            formGroup.style.boxShadow = '0 0 0 3px rgba(76, 175, 80, 0.2)';
+            this.addSuccessIcon(formGroup);
+        }
+
+        showInputError(formGroup) {
+            formGroup.style.borderColor = '#f44336';
+            formGroup.style.boxShadow = '0 0 0 3px rgba(244, 67, 54, 0.2)';
+            this.addErrorIcon(formGroup);
+        }
+
+        resetInputState(formGroup) {
+            formGroup.style.borderColor = '';
+            formGroup.style.boxShadow = '';
+            this.removeValidationIcons(formGroup);
+        }
+
+        addSuccessIcon(formGroup) {
+            this.removeValidationIcons(formGroup);
+            const icon = document.createElement('div');
+            icon.className = 'validation-icon success';
+            icon.innerHTML = '✓';
+            icon.style.cssText = `
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #4CAF50;
+                font-weight: bold;
+                z-index: 10;
+            `;
+            formGroup.appendChild(icon);
+        }
+
+        addErrorIcon(formGroup) {
+            this.removeValidationIcons(formGroup);
+            const icon = document.createElement('div');
+            icon.className = 'validation-icon error';
+            icon.innerHTML = '✗';
+            icon.style.cssText = `
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #f44336;
+                font-weight: bold;
+                z-index: 10;
+            `;
+            formGroup.appendChild(icon);
+        }
+
+        removeValidationIcons(formGroup) {
+            const existingIcons = formGroup.querySelectorAll('.validation-icon');
+            existingIcons.forEach(icon => icon.remove());
+        }
+
+        onInputFocus(input) {
+            const formGroup = input.closest('.form-group');
+            formGroup.style.transform = 'scale(1.02)';
+            formGroup.style.zIndex = '10';
+        }
+
+        onInputBlur(input) {
+            const formGroup = input.closest('.form-group');
+            formGroup.style.transform = 'scale(1)';
+            formGroup.style.zIndex = '1';
         }
 
         // ===== LOGIN SYSTEM =====
@@ -151,7 +333,7 @@ if (window.isVaultPhoenixCryptoGame) {
                     input.style.boxShadow = '0 0 0 3px rgba(244, 67, 54, 0.2)';
                 }
             } else {
-                input.style.borderColor = 'rgba(240, 165, 0, 0.3)';
+                input.style.borderColor = 'rgba(240, 165, 0, 0.4)';
                 input.style.boxShadow = 'none';
             }
         }
@@ -179,28 +361,51 @@ if (window.isVaultPhoenixCryptoGame) {
                 return;
             }
 
+            // Enhanced loading state
             if (container) container.classList.add('loading');
-            if (loginText) loginText.innerHTML = '<span class="loading-spinner"></span>Authenticating...';
+            if (loginText) {
+                loginText.innerHTML = `
+                    <span class="loading-spinner"></span>
+                    <span class="login-main-text">Authenticating...</span>
+                    <span class="login-sub-text">Connecting to Phoenix Network</span>
+                `;
+            }
             
             if (loginBtn) loginBtn.style.transform = 'scale(0.98)';
 
             try {
                 await this.authenticateUser(email, password);
                 
-                if (loginText) loginText.innerHTML = '✅ Access Granted!';
+                if (loginText) {
+                    loginText.innerHTML = `
+                        <span style="color: #4CAF50; font-size: 24px;">✅</span>
+                        <span class="login-main-text">Access Granted!</span>
+                        <span class="login-sub-text">Welcome to the Hunt</span>
+                    `;
+                }
                 if (loginBtn) loginBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
                 
                 this.showSuccess('Login successful! Launching AR $Ember Hunt...');
                 
                 this.storeSession(email);
                 
+                // Enhanced transition effect
                 setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1500);
+                    this.createTransitionEffect();
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 800);
+                }, 1200);
 
             } catch (error) {
                 if (loginBtn) loginBtn.style.transform = 'scale(1)';
-                if (loginText) loginText.innerHTML = '<img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="login-flame-icon">Start $Ember Hunt';
+                if (loginText) {
+                    loginText.innerHTML = `
+                        <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="login-flame-icon">
+                        <span class="login-main-text">Start $Ember Hunt</span>
+                        <span class="login-sub-text">Begin Your Adventure</span>
+                    `;
+                }
                 if (container) container.classList.remove('loading');
                 
                 this.showError(error.message);
@@ -214,6 +419,38 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
+        createTransitionEffect() {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
+                z-index: 10000;
+                opacity: 0;
+                transition: opacity 0.8s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 24px;
+                font-weight: bold;
+            `;
+            overlay.innerHTML = `
+                <div style="text-align: center;">
+                    <img src="../images/VPLogoNoText.PNG" alt="Phoenix" style="width: 80px; height: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));">
+                    <div>Launching AR Experience...</div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+            }, 100);
+        }
+
         focusInput(input) {
             if (input) {
                 input.focus();
@@ -222,7 +459,7 @@ if (window.isVaultPhoenixCryptoGame) {
         }
 
         async authenticateUser(email, password) {
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
             const validCredentials = [
                 { email: 'demo@vaultphoenix.com', password: 'phoenix123' },
@@ -293,7 +530,63 @@ if (window.isVaultPhoenixCryptoGame) {
 
         handleForgotPassword(event) {
             event.preventDefault();
-            alert('Password reset would be implemented here.\n\nFor demo: demo@vaultphoenix.com / phoenix123');
+            
+            // Enhanced forgot password modal
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                backdrop-filter: blur(10px);
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95), rgba(45, 24, 16, 0.95));
+                    padding: 40px;
+                    border-radius: 20px;
+                    border: 2px solid rgba(240, 165, 0, 0.4);
+                    max-width: 400px;
+                    text-align: center;
+                    color: white;
+                    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+                ">
+                    <img src="../images/VPEmberFlame.svg" alt="Phoenix" style="width: 60px; height: 60px; margin-bottom: 20px;">
+                    <h3 style="color: #f0a500; margin-bottom: 20px;">Password Reset</h3>
+                    <p style="margin-bottom: 20px; line-height: 1.6;">
+                        Password reset functionality would be implemented here.
+                    </p>
+                    <div style="background: rgba(240, 165, 0, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                        <strong>For demo access:</strong><br>
+                        demo@vaultphoenix.com<br>
+                        phoenix123
+                    </div>
+                    <button onclick="this.closest('div').style.display='none'" style="
+                        background: linear-gradient(135deg, #f0a500, #fb923c);
+                        color: white;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        font-weight: bold;
+                    ">Close</button>
+                </div>
+            `;
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+            
+            document.body.appendChild(modal);
         }
 
         // ===== DASHBOARD SYSTEM =====
@@ -342,7 +635,23 @@ if (window.isVaultPhoenixCryptoGame) {
 
         loadUserInfo() {
             console.log('👤 Loading user info...');
-            // Placeholder for user info loading
+            // Enhanced user info loading with session data
+            try {
+                const session = JSON.parse(sessionStorage.getItem('vaultPhoenixSession') || '{}');
+                this.currentUser = {
+                    email: session.email || 'demo@vaultphoenix.com',
+                    loginTime: session.loginTime || new Date().toISOString(),
+                    walletAddress: session.walletAddress || '0x' + Math.random().toString(16).substr(2, 40)
+                };
+                console.log('✅ User info loaded:', this.currentUser.email);
+            } catch (error) {
+                console.error('❌ User info loading error:', error);
+                this.currentUser = {
+                    email: 'demo@vaultphoenix.com',
+                    loginTime: new Date().toISOString(),
+                    walletAddress: '0x1234567890abcdef1234567890abcdef12345678'
+                };
+            }
         }
 
         loadCollectedTokens() {
@@ -401,7 +710,29 @@ if (window.isVaultPhoenixCryptoGame) {
 
         initializeVault() {
             console.log('💎 Initializing vault...');
-            // Placeholder for vault initialization
+            // Enhanced vault initialization
+            this.updateVaultDisplay();
+        }
+
+        updateVaultDisplay() {
+            // Update vault-related UI elements
+            const emberCountElements = document.querySelectorAll('#navEmberCount, #menuEmberCount');
+            emberCountElements.forEach(element => {
+                if (element) {
+                    element.textContent = this.totalTokenValue.toString();
+                }
+            });
+
+            const vaultBalanceElement = document.getElementById('vaultBalance');
+            if (vaultBalanceElement) {
+                vaultBalanceElement.textContent = `${this.totalTokenValue} $Ember Tokens`;
+            }
+
+            const vaultUsdElement = document.getElementById('vaultUsdValue');
+            if (vaultUsdElement) {
+                const usdValue = (this.totalTokenValue * 0.001).toFixed(2);
+                vaultUsdElement.textContent = `${usdValue} USD`;
+            }
         }
 
         showWelcomeScreen() {
@@ -514,9 +845,39 @@ if (window.isVaultPhoenixCryptoGame) {
 
         setupGPS() {
             console.log('📍 Setting up GPS...');
-            // Placeholder GPS setup
-            this.userLat = 33.4484; // Phoenix, AZ
-            this.userLng = -112.0740;
+            // Enhanced GPS setup with geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        this.userLat = position.coords.latitude;
+                        this.userLng = position.coords.longitude;
+                        console.log('✅ GPS location acquired:', this.userLat, this.userLng);
+                        this.updateLocationDisplay();
+                    },
+                    (error) => {
+                        console.log('📍 GPS fallback to Phoenix, AZ');
+                        this.userLat = 33.4484; // Phoenix, AZ
+                        this.userLng = -112.0740;
+                        this.updateLocationDisplay();
+                    }
+                );
+            } else {
+                this.userLat = 33.4484; // Phoenix, AZ
+                this.userLng = -112.0740;
+                this.updateLocationDisplay();
+            }
+        }
+
+        updateLocationDisplay() {
+            const latElement = document.getElementById('lat');
+            const lngElement = document.getElementById('lng');
+            const fallbackLatElement = document.getElementById('fallbackLat');
+            const fallbackLngElement = document.getElementById('fallbackLng');
+            
+            if (latElement) latElement.textContent = this.userLat.toFixed(4);
+            if (lngElement) lngElement.textContent = this.userLng.toFixed(4);
+            if (fallbackLatElement) fallbackLatElement.textContent = this.userLat.toFixed(4);
+            if (fallbackLngElement) fallbackLngElement.textContent = this.userLng.toFixed(4);
         }
 
         generateTokenLocations() {
@@ -534,7 +895,21 @@ if (window.isVaultPhoenixCryptoGame) {
 
         toggleMenu() {
             console.log('📋 Toggling menu...');
-            // Placeholder menu toggle
+            // Enhanced menu toggle with animation
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            
+            if (sideMenu && menuOverlay) {
+                const isOpen = sideMenu.classList.contains('open');
+                
+                if (isOpen) {
+                    sideMenu.classList.remove('open');
+                    menuOverlay.classList.remove('open');
+                } else {
+                    sideMenu.classList.add('open');
+                    menuOverlay.classList.add('open');
+                }
+            }
         }
 
         switchMode(mode) {
@@ -543,6 +918,7 @@ if (window.isVaultPhoenixCryptoGame) {
             console.log('🔄 Switching to mode:', mode);
             this.currentMode = mode;
             this.updateNavigationState();
+            this.updateViewVisibility();
         }
 
         updateNavigationState() {
@@ -550,21 +926,51 @@ if (window.isVaultPhoenixCryptoGame) {
                 document.querySelectorAll('.nav-tab').forEach(tab => {
                     tab.classList.toggle('active', tab.dataset.mode === this.currentMode);
                 });
+                
+                document.querySelectorAll('.menu-item').forEach(item => {
+                    item.classList.toggle('active', item.dataset.mode === this.currentMode);
+                });
             } catch (error) {
                 console.error('❌ Navigation update error:', error);
             }
         }
 
+        updateViewVisibility() {
+            const views = {
+                'map': document.getElementById('map'),
+                'ar': document.getElementById('video'),
+                'vault': document.getElementById('vaultView'),
+                'campaigns': document.getElementById('campaignsView')
+            };
+            
+            Object.keys(views).forEach(viewKey => {
+                const view = views[viewKey];
+                if (view) {
+                    view.style.display = viewKey === this.currentMode ? 'block' : 'none';
+                }
+            });
+        }
+
         addHapticFeedback() {
             try {
-                const interactiveElements = document.querySelectorAll('.login-button, .form-input, .forgot-password a, .nav-tab, .nav-logo, .vault-badge');
+                const interactiveElements = document.querySelectorAll(`
+                    .login-button, .form-input, .forgot-password a, .nav-tab, 
+                    .nav-logo, .vault-badge, .demo-badge, .feature-item, 
+                    .quick-start-tip, .phoenix-flame-decoration
+                `);
                 
                 interactiveElements.forEach(element => {
                     element.addEventListener('touchstart', () => {
                         if (navigator.vibrate) {
                             navigator.vibrate(10);
                         }
-                    });
+                    }, { passive: true });
+                    
+                    element.addEventListener('click', () => {
+                        if (navigator.vibrate) {
+                            navigator.vibrate(5);
+                        }
+                    }, { passive: true });
                 });
             } catch (error) {
                 console.error('❌ Haptic feedback error:', error);
@@ -600,7 +1006,7 @@ if (window.isVaultPhoenixCryptoGame) {
         } catch (error) {
             console.error('💥 Failed to initialize Vault Phoenix:', error);
             
-            // Show error screen
+            // Enhanced error screen
             document.body.innerHTML = `
                 <div style="
                     display: flex;
@@ -613,7 +1019,15 @@ if (window.isVaultPhoenixCryptoGame) {
                     padding: 20px;
                     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 ">
-                    <div>
+                    <div style="
+                        background: rgba(15, 15, 15, 0.95);
+                        backdrop-filter: blur(30px);
+                        border-radius: 24px;
+                        padding: 40px;
+                        border: 2px solid rgba(240, 165, 0, 0.4);
+                        max-width: 500px;
+                    ">
+                        <img src="../images/VPLogoNoText.PNG" alt="Phoenix" style="width: 80px; height: 80px; margin-bottom: 20px;">
                         <h2 style="color: #f0a500; margin-bottom: 16px;">🔥 Vault Phoenix</h2>
                         <p style="margin-bottom: 24px; opacity: 0.8;">Something went wrong during initialization.</p>
                         <button onclick="window.location.reload()" style="
@@ -625,7 +1039,8 @@ if (window.isVaultPhoenixCryptoGame) {
                             cursor: pointer;
                             font-size: 16px;
                             font-weight: 600;
-                        ">
+                            transition: all 0.3s ease;
+                        " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
                             Try Again
                         </button>
                     </div>
