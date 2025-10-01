@@ -1,4 +1,4 @@
-/* Vault Phoenix AR Crypto Gaming - ISOLATED STYLES */
+/* Vault Phoenix AR Crypto Gaming - BEAUTIFUL DESIGN */
 /* PROTECTION: Only affects crypto game pages - prevents main site interference */
 
 /* RESET AND FORCE ISOLATION */
@@ -9,7 +9,7 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-/* CRYPTO LOGIN PAGE STYLES */
+/* ENHANCED CRYPTO LOGIN PAGE STYLES */
 body.crypto-login-page {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%) !important;
@@ -20,13 +20,621 @@ body.crypto-login-page {
     width: 100vw !important;
     height: 100vh !important;
     margin: 0 !important;
-    padding: 20px 8px !important;
+    padding: 20px 12px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     min-height: 100vh !important;
     padding-top: 40px !important;
     padding-bottom: 40px !important;
+}
+
+/* Enhanced floating background elements */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.floating-coin {
+    position: absolute;
+    width: clamp(30px, 4vw, 50px);
+    height: clamp(30px, 4vw, 50px);
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: phoenixFloat 12s ease-in-out infinite;
+    box-shadow: 0 4px 20px rgba(240, 165, 0, 0.4);
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.6));
+}
+
+.floating-coin:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; animation-duration: 15s; }
+.floating-coin:nth-child(2) { top: 20%; right: 10%; animation-delay: 3s; animation-duration: 18s; }
+.floating-coin:nth-child(3) { bottom: 20%; left: 8%; animation-delay: 6s; animation-duration: 14s; }
+.floating-coin:nth-child(4) { bottom: 10%; right: 5%; animation-delay: 9s; animation-duration: 16s; }
+.floating-coin:nth-child(5) { top: 50%; left: 2%; animation-delay: 2s; animation-duration: 20s; }
+.floating-coin:nth-child(6) { top: 70%; right: 3%; animation-delay: 5s; animation-duration: 17s; }
+.floating-coin:nth-child(7) { top: 30%; left: 85%; animation-delay: 8s; animation-duration: 13s; }
+.floating-coin:nth-child(8) { bottom: 40%; right: 88%; animation-delay: 1s; animation-duration: 19s; }
+
+@keyframes phoenixFloat {
+    0%, 100% { 
+        transform: translateY(0px) translateX(0px) scale(1) rotate(0deg); 
+        opacity: 0.15; 
+    }
+    25% { 
+        transform: translateY(-20px) translateX(10px) scale(1.1) rotate(90deg); 
+        opacity: 0.3; 
+    }
+    50% { 
+        transform: translateY(-15px) translateX(-10px) scale(0.9) rotate(180deg); 
+        opacity: 0.25; 
+    }
+    75% { 
+        transform: translateY(-25px) translateX(15px) scale(1.15) rotate(270deg); 
+        opacity: 0.35; 
+    }
+}
+
+/* Phoenix glow background effect */
+.phoenix-glow-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.1) 0%, rgba(215, 51, 39, 0.05) 40%, transparent 70%);
+    border-radius: 50%;
+    z-index: 2;
+    animation: phoenixGlow 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes phoenixGlow {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* Enhanced login container with phoenix theme */
+.login-container {
+    position: relative;
+    z-index: 10;
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(30px);
+    border-radius: 24px;
+    padding: 32px 28px 36px 28px;
+    box-shadow: 
+        0 25px 80px rgba(0, 0, 0, 0.6),
+        0 10px 30px rgba(240, 165, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(240, 165, 0, 0.2);
+    width: 100%;
+    max-width: 380px;
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: white;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.05) 0%, rgba(215, 51, 39, 0.02) 50%, rgba(251, 146, 60, 0.05) 100%);
+    z-index: -1;
+    border-radius: 22px;
+}
+
+.login-container:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+        0 35px 100px rgba(0, 0, 0, 0.7),
+        0 15px 40px rgba(240, 165, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 0 0 1px rgba(240, 165, 0, 0.3);
+}
+
+/* Phoenix flame decoration */
+.phoenix-flame-decoration {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    background: url('../images/VPEmberFlame.svg') center/cover;
+    opacity: 0.8;
+    animation: flameFlicker 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes flameFlicker {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: scale(1.1) rotate(5deg);
+        opacity: 1;
+    }
+}
+
+/* Enhanced logo section */
+.logo-section {
+    text-align: center;
+    margin-bottom: 28px;
+    position: relative;
+}
+
+.app-logo {
+    width: 72px;
+    height: 72px;
+    background: url('../images/VPLogoNoText.PNG') center/cover;
+    border-radius: 18px;
+    margin: 0 auto 16px;
+    box-shadow: 
+        0 10px 30px rgba(240, 165, 0, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.app-logo:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 
+        0 15px 40px rgba(240, 165, 0, 0.7),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.app-logo::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: logoShimmer 4s ease-in-out infinite;
+}
+
+@keyframes logoShimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+}
+
+.app-title {
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #f0a500 0%, #fb923c 50%, #d73327 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+    letter-spacing: -0.8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.app-subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Enhanced demo badge */
+.demo-badge {
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.25), rgba(215, 51, 39, 0.15));
+    border: 2px solid rgba(240, 165, 0, 0.5);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 28px;
+    text-align: center;
+    font-size: 13px;
+    position: relative;
+    overflow: hidden;
+}
+
+.demo-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(240, 165, 0, 0.1), transparent);
+    animation: badgeShine 3s ease-in-out infinite;
+}
+
+@keyframes badgeShine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.demo-badge-title {
+    color: #f0a500;
+    font-weight: 800;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.demo-badge-icon {
+    width: 22px;
+    height: 22px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
+    animation: coinSpin 6s linear infinite;
+}
+
+@keyframes coinSpin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+.demo-credentials {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+    line-height: 1.4;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-top: 8px;
+    border: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+/* Enhanced crypto features */
+.crypto-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 24px 0;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.15), rgba(251, 146, 60, 0.1));
+    border-radius: 16px;
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.crypto-features::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #f0a500, transparent);
+    animation: featureGlow 2s ease-in-out infinite;
+}
+
+@keyframes featureGlow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateX(5px);
+    color: #f0a500;
+}
+
+.feature-icon {
+    width: 22px;
+    height: 22px;
+    background: url('../images/VPEmberCoin.PNG') center/cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: iconPulse 4s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Enhanced form inputs */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: 14px;
+    font-size: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    color: white;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 500;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #f0a500;
+    box-shadow: 
+        0 0 0 4px rgba(240, 165, 0, 0.25),
+        0 8px 25px rgba(240, 165, 0, 0.3);
+    transform: translateY(-2px);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.input-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 14px;
+    background: linear-gradient(45deg, transparent, rgba(240, 165, 0, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.form-input:focus + .input-glow {
+    opacity: 1;
+}
+
+/* Enhanced login button */
+.login-button {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #f0a500 0%, #fb923c 50%, #d73327 100%);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 
+        0 10px 30px rgba(240, 165, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.button-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+.login-button:hover .button-glow {
+    left: 100%;
+}
+
+.login-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 15px 40px rgba(240, 165, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.login-button:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.login-flame-icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+    vertical-align: middle;
+    filter: brightness(1.3);
+    z-index: 2;
+    position: relative;
+}
+
+/* Forgot password link */
+.forgot-password {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.forgot-password a {
+    color: #f0a500;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.forgot-password a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #f0a500, #fb923c);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.forgot-password a:hover::after {
+    width: 100%;
+}
+
+.forgot-password a:hover {
+    color: #fb923c;
+    transform: translateY(-1px);
+}
+
+/* Enhanced error and success messages */
+.error-message, .success-message {
+    padding: 18px 22px;
+    border-radius: 14px;
+    margin-bottom: 22px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    display: none;
+    animation: messageSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    line-height: 1.5;
+    word-wrap: break-word;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes messageSlideIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(-15px) scale(0.9);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+.error-message {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.3), rgba(244, 67, 54, 0.2));
+    border: 2px solid rgba(244, 67, 54, 0.7);
+    color: #ff6b6b;
+    box-shadow: 0 6px 20px rgba(244, 67, 54, 0.3);
+}
+
+.success-message {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.3), rgba(76, 175, 80, 0.2));
+    border: 2px solid rgba(76, 175, 80, 0.7);
+    color: #4ade80;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+}
+
+/* Loading effects */
+.loading {
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.loading .login-container {
+    transform: scale(1.02);
+}
+
+.loading .login-button {
+    background: linear-gradient(135deg, #666, #888);
+    box-shadow: none;
+    transform: none;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Loading particles effect */
+.loading-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.loading .loading-particles {
+    opacity: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #f0a500;
+    border-radius: 50%;
+    animation: particleFloat 3s ease-in-out infinite;
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 0.5s; }
+.particle:nth-child(3) { left: 30%; animation-delay: 1s; }
+.particle:nth-child(4) { left: 70%; animation-delay: 1.5s; }
+.particle:nth-child(5) { left: 80%; animation-delay: 2s; }
+.particle:nth-child(6) { left: 90%; animation-delay: 2.5s; }
+
+@keyframes particleFloat {
+    0% { 
+        transform: translateY(100vh) scale(0); 
+        opacity: 0; 
+    }
+    10% { 
+        opacity: 1; 
+        transform: translateY(90vh) scale(1); 
+    }
+    90% { 
+        opacity: 1; 
+        transform: translateY(10vh) scale(1); 
+    }
+    100% { 
+        transform: translateY(0vh) scale(0); 
+        opacity: 0; 
+    }
 }
 
 /* CRYPTO DASHBOARD PAGE STYLES */
@@ -44,355 +652,7 @@ body.crypto-dashboard-page {
     display: block !important;
 }
 
-/* Floating Background Elements */
-.floating-elements {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.floating-coin {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background: url('../images/VPEmberCoin.PNG') center/cover;
-    border-radius: 50%;
-    opacity: 0.15;
-    animation: float 8s ease-in-out infinite;
-    box-shadow: 0 4px 20px rgba(240, 165, 0, 0.3);
-}
-
-.floating-coin:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
-.floating-coin:nth-child(2) { top: 25%; right: 15%; animation-delay: 2s; }
-.floating-coin:nth-child(3) { bottom: 25%; left: 15%; animation-delay: 4s; }
-.floating-coin:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 6s; }
-.floating-coin:nth-child(5) { top: 60%; left: 5%; animation-delay: 1s; }
-.floating-coin:nth-child(6) { top: 40%; right: 8%; animation-delay: 3s; }
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); opacity: 0.1; }
-    50% { transform: translateY(-20px) scale(1.1) rotate(180deg); opacity: 0.25; }
-}
-
-.login-container {
-    position: relative;
-    z-index: 10;
-    background: rgba(20, 20, 20, 0.95);
-    backdrop-filter: blur(30px);
-    border-radius: 20px;
-    padding: 20px 20px 24px 20px;
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        0 8px 20px rgba(240, 165, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    width: 100%;
-    max-width: 340px;
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    transition: all 0.3s ease;
-    color: white;
-    margin: 0 auto;
-    min-height: auto;
-}
-
-.login-container:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-        0 25px 70px rgba(0, 0, 0, 0.6),
-        0 12px 25px rgba(240, 165, 0, 0.3);
-}
-
-.logo-section {
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.app-logo {
-    width: 64px;
-    height: 64px;
-    background: url('../images/VPLogoNoText.PNG') center/cover;
-    border-radius: 16px;
-    margin: 0 auto 12px;
-    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
-    position: relative;
-    overflow: hidden;
-}
-
-.app-logo::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    animation: shimmer 3s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-    50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-    100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-}
-
-.app-title {
-    font-size: 24px;
-    font-weight: 800;
-    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 4px;
-    letter-spacing: -0.5px;
-}
-
-.app-subtitle {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
-}
-
-.demo-badge {
-    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(215, 51, 39, 0.1));
-    border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: 14px;
-    padding: 12px;
-    margin-bottom: 24px;
-    text-align: center;
-    font-size: 12px;
-}
-
-.demo-badge-title {
-    color: #f0a500;
-    font-weight: 800;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 13px;
-}
-
-.demo-badge-icon {
-    width: 20px;
-    height: 20px;
-    background: url('../images/VPEmberCoin.PNG') center/cover;
-    border-radius: 50%;
-}
-
-.demo-credentials {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 600;
-    line-height: 1.3;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 6px;
-    border-radius: 8px;
-    margin-top: 6px;
-}
-
-.crypto-features {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 20px 0;
-    padding: 12px;
-    background: rgba(240, 165, 0, 0.1);
-    border-radius: 14px;
-    border: 1px solid rgba(240, 165, 0, 0.2);
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: white;
-    font-weight: 600;
-}
-
-.feature-icon {
-    width: 20px;
-    height: 20px;
-    background: url('../images/VPEmberCoin.PNG') center/cover;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-/* Login Button with Flame Icon */
-.login-button {
-    width: 100%;
-    padding: 16px;
-    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.4);
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.login-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-.login-button:hover::before {
-    left: 100%;
-}
-
-.login-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(240, 165, 0, 0.5);
-}
-
-.login-button:active {
-    transform: translateY(0);
-}
-
-.login-flame-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    vertical-align: middle;
-    filter: brightness(1.2);
-}
-
-/* Form Inputs - Optimized for Mobile */
-.form-group {
-    margin-bottom: 18px;
-    position: relative;
-}
-
-.form-input {
-    width: 100%;
-    padding: 14px 18px;
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: 12px;
-    font-size: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-    color: white;
-}
-
-.form-input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 500;
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: #f0a500;
-    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.2);
-    transform: translateY(-1px);
-    background: rgba(0, 0, 0, 0.6);
-}
-
-.forgot-password {
-    text-align: center;
-    margin-top: 16px;
-}
-
-.forgot-password a {
-    color: #f0a500;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.forgot-password a:hover {
-    color: #fb923c;
-}
-
-.error-message, .success-message {
-    padding: 16px 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    display: none;
-    animation: slideIn 0.3s ease;
-    line-height: 1.4;
-    word-wrap: break-word;
-    min-height: 48px;
-    align-items: center;
-    justify-content: center;
-}
-
-@keyframes slideIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(-12px) scale(0.95);
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0) scale(1); 
-    }
-}
-
-.error-message {
-    background: linear-gradient(135deg, rgba(244, 67, 54, 0.25), rgba(244, 67, 54, 0.15));
-    border: 2px solid rgba(244, 67, 54, 0.6);
-    color: #ef5350;
-    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.2);
-}
-
-.success-message {
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.25), rgba(76, 175, 80, 0.15));
-    border: 2px solid rgba(76, 175, 80, 0.6);
-    color: #66bb6a;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
-}
-
-.loading {
-    opacity: 0.8;
-    pointer-events: none;
-}
-
-.loading .login-container {
-    transform: scale(1.01);
-}
-
-.loading .login-button {
-    background: linear-gradient(135deg, #666, #888);
-    box-shadow: none;
-    transform: none;
-}
-
-.loading-spinner {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 8px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* DASHBOARD STYLES */
+/* Dashboard styles will continue from existing CSS... */
 #container {
     position: relative;
     width: 100vw;
@@ -430,96 +690,6 @@ body.crypto-dashboard-page {
     width: 100%;
     height: 100%;
     z-index: 1;
-}
-
-/* Welcome Button */
-.welcome-button {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 250;
-    background: linear-gradient(135deg, #f0a500, #fb923c, #d73327);
-    color: white;
-    border: none;
-    padding: 32px 40px;
-    font-size: 16px;
-    font-weight: 800;
-    border-radius: 24px;
-    cursor: pointer;
-    box-shadow: 
-        0 16px 40px rgba(240, 165, 0, 0.4),
-        0 8px 20px rgba(240, 165, 0, 0.3);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    letter-spacing: 0.5px;
-    min-height: 200px;
-    min-width: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    animation: welcomeButtonPulse 3s ease-in-out infinite;
-    pointer-events: none;
-}
-
-@keyframes welcomeButtonPulse {
-    0%, 100% { 
-        box-shadow: 
-            0 16px 40px rgba(240, 165, 0, 0.4),
-            0 8px 20px rgba(240, 165, 0, 0.3);
-    }
-    50% { 
-        box-shadow: 
-            0 20px 50px rgba(240, 165, 0, 0.6),
-            0 12px 30px rgba(240, 165, 0, 0.5);
-    }
-}
-
-.welcome-icon {
-    font-size: 32px;
-    margin-bottom: 8px;
-}
-
-.welcome-flame-icon {
-    width: 32px;
-    height: 32px;
-    filter: brightness(1.2);
-}
-
-.welcome-text {
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 4px;
-}
-
-.welcome-subtitle {
-    font-size: 14px;
-    opacity: 0.9;
-    font-weight: 600;
-    margin-bottom: 16px;
-}
-
-.welcome-loading-bar {
-    width: 200px;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-bottom: 8px;
-}
-
-.welcome-loading-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.8));
-    border-radius: 3px;
-    width: 0%;
-    transition: width 0.3s ease;
-}
-
-.welcome-loading-text {
-    font-size: 12px;
-    opacity: 0.8;
-    font-weight: 600;
 }
 
 /* Navigation */
@@ -709,45 +879,67 @@ body.crypto-dashboard-page {
     color: #f0a500;
 }
 
-/* Loading Overlay */
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 46, 0.9));
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 300;
-    color: white;
-    font-size: 16px;
-    backdrop-filter: blur(20px);
-    flex-direction: column;
-    gap: 20px;
-}
-
-.loading-text {
-    font-weight: 600;
-    text-align: center;
-    max-width: 280px;
-    line-height: 1.4;
-}
-
 /* Mobile Responsive Adjustments */
 @media (max-width: 480px) {
     body.crypto-login-page {
-        padding: 24px 8px;
-        padding-top: 32px;
-        padding-bottom: 32px;
+        padding: 20px 8px;
+        padding-top: 28px;
+        padding-bottom: 28px;
     }
     
     .login-container {
-        margin: 0 8px;
-        padding: 18px 18px 22px 18px;
+        margin: 0 4px;
+        padding: 24px 20px 28px 20px;
         max-width: none;
-        border-radius: 16px;
+        border-radius: 20px;
+    }
+    
+    .app-logo {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 12px;
+    }
+    
+    .app-title {
+        font-size: 24px;
+    }
+    
+    .demo-badge {
+        padding: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .crypto-features {
+        margin: 20px 0;
+        padding: 12px;
+        gap: 8px;
+    }
+    
+    .feature-item {
+        font-size: 13px;
+        gap: 10px;
+    }
+    
+    .feature-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-height: 640px) {
+    body.crypto-login-page {
+        padding: 16px 8px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .login-container {
+        padding: 20px 24px 24px 24px;
+        margin: 4px 8px;
+    }
+    
+    .logo-section {
+        margin-bottom: 20px;
     }
     
     .app-logo {
@@ -760,33 +952,14 @@ body.crypto-dashboard-page {
         font-size: 22px;
     }
     
-    .welcome-button {
-        min-width: 280px;
-        min-height: 180px;
-        padding: 28px 36px;
+    .demo-badge {
+        margin-bottom: 20px;
+        padding: 10px 12px;
     }
     
-    .welcome-text {
-        font-size: 18px;
-    }
-}
-
-@media (max-height: 640px) {
-    body.crypto-login-page {
-        padding: 16px 8px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-    
-    .login-container {
-        padding: 16px 18px 20px 18px;
-        margin: 6px 8px;
-    }
-    
-    .welcome-button {
-        min-height: 160px;
-        min-width: 260px;
-        padding: 24px 32px;
+    .crypto-features {
+        margin: 16px 0;
+        padding: 10px;
     }
 }
 
