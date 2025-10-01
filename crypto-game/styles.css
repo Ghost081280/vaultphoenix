@@ -60,7 +60,7 @@ body.crypto-login-page {
     margin: 0 !important;
     padding: 0 !important;
     display: flex !important;
-    align-items: center !important;
+    align-items: flex-start !important; /* CHANGED: Use flex-start to push content up */
     justify-content: center !important;
     color: white !important;
     overscroll-behavior: none !important;
@@ -68,6 +68,7 @@ body.crypto-login-page {
     -webkit-overflow-scrolling: touch !important;
     -webkit-appearance: none !important;
     flex-direction: column !important;
+    padding-top: 8vh !important; /* REDUCED from 12vh - Module moved up more */
 }
 
 /* Background coverage fix for mobile */
@@ -171,22 +172,22 @@ body.crypto-login-page::before {
     }
 }
 
-/* PERFECTLY CENTERED COMPACT LOGIN CONTAINER - REDUCED HEIGHT */
+/* PERFECTLY CENTERED COMPACT LOGIN CONTAINER - FURTHER REDUCED HEIGHT */
 .crypto-login-page .login-container {
     position: relative;
     z-index: 10;
     background: rgba(12, 12, 12, 0.97);
     backdrop-filter: blur(25px);
     border-radius: 20px;
-    padding: 12px; /* REDUCED from 16px */
+    padding: 10px; /* REDUCED from 12px */
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.8),
         0 10px 30px rgba(240, 165, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.12),
         0 0 0 2px rgba(240, 165, 0, 0.3);
     width: 90%;
-    max-width: 300px; /* REDUCED from 320px */
-    max-height: 60vh; /* REDUCED from 70vh */
+    max-width: 290px; /* REDUCED from 300px */
+    max-height: 55vh; /* REDUCED from 60vh */
     border: 2px solid rgba(240, 165, 0, 0.45);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     color: white;
@@ -249,18 +250,18 @@ body.crypto-login-page::before {
     }
 }
 
-/* ENHANCED LOGO SECTION - REDUCED SPACING */
+/* ENHANCED LOGO SECTION - FURTHER REDUCED SPACING */
 .crypto-login-page .logo-section {
     text-align: center;
-    margin-bottom: 8px; /* REDUCED from 12px */
+    margin-bottom: 6px; /* REDUCED from 8px */
     position: relative;
 }
 
 .crypto-login-page .app-logo {
-    width: 44px; /* REDUCED from 48px */
-    height: 44px;
+    width: 42px; /* REDUCED from 44px */
+    height: 42px;
     border-radius: 12px;
-    margin: 0 auto 8px; /* REDUCED from 10px */
+    margin: 0 auto 6px; /* REDUCED from 8px */
     box-shadow: 0 8px 24px rgba(240, 165, 0, 0.6);
     position: relative;
     overflow: hidden;
@@ -273,8 +274,8 @@ body.crypto-login-page::before {
 }
 
 .crypto-login-page .logo-image {
-    width: 34px; /* REDUCED from 38px */
-    height: 34px;
+    width: 32px; /* REDUCED from 34px */
+    height: 32px;
     object-fit: contain;
     transition: all 0.4s ease;
     position: relative;
@@ -287,8 +288,8 @@ body.crypto-login-page::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 56px; /* REDUCED from 60px */
-    height: 56px;
+    width: 54px; /* REDUCED from 56px */
+    height: 54px;
     background: radial-gradient(circle, rgba(240, 165, 0, 0.3) 0%, transparent 70%);
     border-radius: 50%;
     opacity: 0;
@@ -306,33 +307,33 @@ body.crypto-login-page::before {
 }
 
 .crypto-login-page .app-title {
-    font-size: 18px; /* REDUCED from 20px */
+    font-size: 17px; /* REDUCED from 18px */
     font-weight: 900;
     background: linear-gradient(135deg, #f0a500 0%, #fb923c 50%, #d73327 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 2px; /* REDUCED from 3px */
+    margin-bottom: 1px; /* REDUCED from 2px */
     letter-spacing: -0.5px;
     text-shadow: 0 2px 4px rgba(240, 165, 0, 0.3);
 }
 
 .crypto-login-page .app-subtitle {
-    font-size: 11px; /* REDUCED from 12px */
+    font-size: 10px; /* REDUCED from 11px */
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
     letter-spacing: 0.5px;
 }
 
-/* ENHANCED DEMO BADGE - REDUCED SPACING */
+/* ENHANCED DEMO BADGE - FURTHER REDUCED SPACING */
 .crypto-login-page .demo-badge {
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.25), rgba(215, 51, 39, 0.16));
     border: 2px solid rgba(240, 165, 0, 0.5);
-    border-radius: 10px; /* REDUCED from 12px */
-    padding: 8px; /* REDUCED from 10px */
-    margin-bottom: 8px; /* REDUCED from 12px */
+    border-radius: 8px; /* REDUCED from 10px */
+    padding: 6px; /* REDUCED from 8px */
+    margin-bottom: 6px; /* REDUCED from 8px */
     text-align: center;
-    font-size: 10px; /* REDUCED from 11px */
+    font-size: 9px; /* REDUCED from 10px */
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
@@ -342,18 +343,18 @@ body.crypto-login-page::before {
 .crypto-login-page .demo-badge-title {
     color: #f0a500;
     font-weight: 800;
-    margin-bottom: 6px; /* REDUCED from 8px */
+    margin-bottom: 4px; /* REDUCED from 6px */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px; /* REDUCED from 8px */
-    font-size: 11px; /* REDUCED from 12px */
+    gap: 4px; /* REDUCED from 6px */
+    font-size: 10px; /* REDUCED from 11px */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .crypto-login-page .demo-badge-icon {
-    width: 28px; /* REDUCED from 32px */
-    height: 28px;
+    width: 26px; /* REDUCED from 28px */
+    height: 26px;
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.25), rgba(251, 146, 60, 0.2));
     border-radius: 50%;
     display: flex;
@@ -369,8 +370,8 @@ body.crypto-login-page::before {
 }
 
 .crypto-login-page .demo-coin-icon {
-    width: 20px; /* REDUCED from 24px */
-    height: 20px;
+    width: 18px; /* REDUCED from 20px */
+    height: 18px;
     object-fit: contain;
     filter: brightness(1.2) drop-shadow(0 2px 4px rgba(240, 165, 0, 0.4));
 }
@@ -378,27 +379,27 @@ body.crypto-login-page::before {
 .crypto-login-page .demo-credentials {
     color: rgba(255, 255, 255, 0.95);
     font-weight: 700;
-    line-height: 1.2; /* REDUCED from 1.3 */
+    line-height: 1.1; /* REDUCED from 1.2 */
     background: rgba(0, 0, 0, 0.4);
-    padding: 5px 8px; /* REDUCED from 6px 10px */
-    border-radius: 6px; /* REDUCED from 8px */
-    margin-top: 4px; /* REDUCED from 6px */
+    padding: 4px 6px; /* REDUCED from 5px 8px */
+    border-radius: 4px; /* REDUCED from 6px */
+    margin-top: 3px; /* REDUCED from 4px */
     border: 1px solid rgba(240, 165, 0, 0.3);
-    font-size: 10px; /* REDUCED from 11px */
+    font-size: 9px; /* REDUCED from 10px */
     backdrop-filter: blur(5px);
 }
 
-/* ENHANCED FORM STYLES - REDUCED SPACING */
+/* ENHANCED FORM STYLES - FURTHER REDUCED SPACING */
 .crypto-login-page .form-group {
-    margin-bottom: 8px; /* REDUCED from 10px */
+    margin-bottom: 6px; /* REDUCED from 8px */
     position: relative;
 }
 
 .crypto-login-page .form-input {
     width: 100%;
-    padding: 8px 14px 8px 30px; /* REDUCED from 10px 16px 10px 34px */
+    padding: 6px 12px 6px 28px; /* REDUCED from 8px 14px 8px 30px */
     border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: 8px; /* REDUCED from 10px */
+    border-radius: 6px; /* REDUCED from 8px */
     font-size: 16px; /* Keep at 16px to prevent iOS zoom */
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: rgba(0, 0, 0, 0.5);
@@ -407,7 +408,7 @@ body.crypto-login-page::before {
     font-weight: 500;
     position: relative;
     z-index: 2;
-    min-height: 40px; /* REDUCED from 44px */
+    min-height: 38px; /* REDUCED from 40px */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -426,14 +427,14 @@ body.crypto-login-page::before {
 
 .crypto-login-page .input-icon {
     position: absolute;
-    left: 12px; /* REDUCED from 14px */
+    left: 10px; /* REDUCED from 12px */
     top: 50%;
     transform: translateY(-50%);
     color: rgba(240, 165, 0, 0.8);
     z-index: 3;
     transition: all 0.4s ease;
-    width: 16px; /* REDUCED from 18px */
-    height: 16px;
+    width: 14px; /* REDUCED from 16px */
+    height: 14px;
 }
 
 .crypto-login-page .form-input:focus + .input-glow + .input-icon {
@@ -447,7 +448,7 @@ body.crypto-login-page::before {
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 8px; /* REDUCED from 10px */
+    border-radius: 6px; /* REDUCED from 8px */
     background: linear-gradient(45deg, transparent, rgba(240, 165, 0, 0.15), transparent);
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -458,25 +459,25 @@ body.crypto-login-page::before {
     opacity: 1;
 }
 
-/* ENHANCED LOGIN BUTTON - BIGGER FLAME ICON */
+/* ENHANCED LOGIN BUTTON - MUCH BIGGER FLAME ICON */
 .crypto-login-page .login-button {
     width: 100%;
-    padding: 12px; /* REDUCED from 14px */
+    padding: 10px; /* REDUCED from 12px */
     background: linear-gradient(135deg, #f0a500 0%, #fb923c 50%, #d73327 100%);
     color: white;
     border: none;
-    border-radius: 10px; /* REDUCED from 12px */
-    font-size: 14px;
+    border-radius: 8px; /* REDUCED from 10px */
+    font-size: 13px; /* REDUCED from 14px */
     font-weight: 800;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
-    letter-spacing: 0.6px; /* REDUCED from 0.8px */
-    box-shadow: 0 6px 20px rgba(240, 165, 0, 0.5); /* REDUCED from 0 8px 24px */
+    letter-spacing: 0.5px; /* REDUCED from 0.6px */
+    box-shadow: 0 4px 16px rgba(240, 165, 0, 0.5); /* REDUCED from 0 6px 20px */
     position: relative;
     overflow: hidden;
-    margin-bottom: 8px; /* REDUCED from 12px */
-    min-height: 48px; /* REDUCED from 52px */
+    margin-bottom: 6px; /* REDUCED from 8px */
+    min-height: 44px; /* REDUCED from 48px */
     border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -484,25 +485,25 @@ body.crypto-login-page::before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1px; /* REDUCED from 2px */
+    gap: 0px; /* REDUCED from 1px */
     position: relative;
     z-index: 2;
 }
 
 .crypto-login-page .login-main-text {
-    font-size: 12px; /* REDUCED from 13px */
+    font-size: 11px; /* REDUCED from 12px */
     font-weight: 900;
     display: flex;
     align-items: center;
-    gap: 6px; /* REDUCED from 8px */
+    gap: 4px; /* REDUCED from 6px */
 }
 
 .crypto-login-page .login-sub-text {
-    font-size: 9px; /* REDUCED from 10px */
+    font-size: 8px; /* REDUCED from 9px */
     opacity: 0.9;
     font-weight: 600;
     text-transform: none;
-    letter-spacing: 0.2px; /* REDUCED from 0.3px */
+    letter-spacing: 0.1px; /* REDUCED from 0.2px */
 }
 
 .crypto-login-page .button-glow {
@@ -529,10 +530,10 @@ body.crypto-login-page::before {
     transform: scale(0.98);
 }
 
-/* BIGGER FLAME ICON IN BUTTON - AS REQUESTED */
+/* MUCH BIGGER FLAME ICON IN BUTTON - SIGNIFICANTLY INCREASED */
 .crypto-login-page .login-flame-icon {
-    width: 28px; /* INCREASED from 22px - MADE EVEN BIGGER */
-    height: 28px; /* INCREASED from 22px - MADE EVEN BIGGER */
+    width: 36px; /* INCREASED from 28px - MUCH BIGGER */
+    height: 36px; /* INCREASED from 28px - MUCH BIGGER */
     object-fit: contain;
     filter: brightness(1.4) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
     z-index: 2;
@@ -555,12 +556,12 @@ body.crypto-login-page::before {
     to { transform: rotate(360deg); }
 }
 
-/* ENHANCED CRYPTO FEATURES - REDUCED SPACING */
+/* ENHANCED CRYPTO FEATURES - FURTHER REDUCED SPACING */
 .crypto-login-page .crypto-features {
-    margin: 6px 0; /* REDUCED from 10px 0 */
-    padding: 8px; /* REDUCED from 10px */
+    margin: 4px 0; /* REDUCED from 6px 0 */
+    padding: 6px; /* REDUCED from 8px */
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.16), rgba(251, 146, 60, 0.11));
-    border-radius: 10px; /* REDUCED from 12px */
+    border-radius: 8px; /* REDUCED from 10px */
     border: 2px solid rgba(240, 165, 0, 0.35);
     position: relative;
     overflow: hidden;
@@ -570,26 +571,26 @@ body.crypto-login-page::before {
 
 .crypto-login-page .features-title {
     text-align: center;
-    font-size: 10px; /* REDUCED from 11px */
+    font-size: 9px; /* REDUCED from 10px */
     font-weight: 800;
     color: #f0a500;
-    margin-bottom: 6px; /* REDUCED from 8px */
+    margin-bottom: 4px; /* REDUCED from 6px */
     text-transform: uppercase;
-    letter-spacing: 0.4px; /* REDUCED from 0.5px */
+    letter-spacing: 0.3px; /* REDUCED from 0.4px */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .crypto-login-page .feature-item {
     display: flex;
     align-items: center;
-    gap: 6px; /* REDUCED from 8px */
-    font-size: 10px; /* REDUCED from 11px */
+    gap: 4px; /* REDUCED from 6px */
+    font-size: 9px; /* REDUCED from 10px */
     color: white;
     font-weight: 600;
     transition: all 0.4s ease;
-    padding: 4px; /* REDUCED from 6px */
-    border-radius: 4px; /* REDUCED from 6px */
-    margin-bottom: 2px; /* REDUCED from 4px */
+    padding: 2px; /* REDUCED from 4px */
+    border-radius: 3px; /* REDUCED from 4px */
+    margin-bottom: 1px; /* REDUCED from 2px */
 }
 
 .crypto-login-page .feature-item:last-child {
@@ -603,12 +604,12 @@ body.crypto-login-page::before {
 }
 
 .crypto-login-page .feature-icon {
-    width: 18px; /* REDUCED from 20px */
-    height: 18px;
+    width: 16px; /* REDUCED from 18px */
+    height: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 3px; /* REDUCED from 4px */
+    border-radius: 2px; /* REDUCED from 3px */
     flex-shrink: 0;
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(251, 146, 60, 0.15));
     border: 1px solid rgba(240, 165, 0, 0.4);
@@ -618,8 +619,8 @@ body.crypto-login-page::before {
 .crypto-login-page .feature-coin,
 .crypto-login-page .feature-safe,
 .crypto-login-page .feature-money {
-    width: 12px; /* REDUCED from 14px */
-    height: 12px;
+    width: 10px; /* REDUCED from 12px */
+    height: 10px;
     object-fit: contain;
     transition: all 0.4s ease;
     filter: brightness(1.2);
@@ -631,10 +632,10 @@ body.crypto-login-page::before {
     transform: scale(1.15) rotate(5deg);
 }
 
-/* FORGOT PASSWORD LINK - OUTSIDE MODULE */
+/* FORGOT PASSWORD LINK - OUTSIDE MODULE WITH MORE SPACE */
 .crypto-login-page .forgot-password {
     text-align: center;
-    margin-top: 12px;
+    margin-top: 16px; /* INCREASED from 12px - More space from module */
     z-index: 15;
     position: relative;
 }
@@ -673,17 +674,17 @@ body.crypto-login-page::before {
 /* ENHANCED ERROR/SUCCESS MESSAGES */
 .crypto-login-page .error-message, 
 .crypto-login-page .success-message {
-    padding: 8px 12px; /* REDUCED from 10px 14px */
-    border-radius: 8px; /* REDUCED from 10px */
-    margin-bottom: 8px; /* REDUCED from 12px */
+    padding: 6px 10px; /* REDUCED from 8px 12px */
+    border-radius: 6px; /* REDUCED from 8px */
+    margin-bottom: 6px; /* REDUCED from 8px */
     text-align: center;
-    font-size: 12px; /* REDUCED from 13px */
+    font-size: 11px; /* REDUCED from 12px */
     font-weight: 700;
     display: none;
     animation: messageSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    line-height: 1.3; /* REDUCED from 1.4 */
+    line-height: 1.2; /* REDUCED from 1.3 */
     word-wrap: break-word;
-    min-height: 32px; /* REDUCED from 36px */
+    min-height: 30px; /* REDUCED from 32px */
     align-items: center;
     justify-content: center;
     position: relative;
@@ -741,123 +742,139 @@ body.crypto-login-page::before {
 
 /* MOBILE RESPONSIVE BREAKPOINTS */
 @media (max-width: 375px) {
-    .crypto-login-page .login-container {
-        padding: 10px; /* REDUCED */
-        max-width: 280px; /* REDUCED */
-        max-height: 55vh; /* REDUCED */
+    body.crypto-login-page {
+        padding-top: 6vh !important; /* REDUCED - Module moved up even more on mobile */
     }
     
-    .crypto-login-page .app-logo {
-        width: 40px; /* REDUCED */
-        height: 40px;
-    }
-    
-    .crypto-login-page .logo-image {
-        width: 30px; /* REDUCED */
-        height: 30px;
-    }
-    
-    .crypto-login-page .app-title {
-        font-size: 16px; /* REDUCED */
-    }
-    
-    .crypto-login-page .form-input {
-        padding: 6px 12px 6px 28px; /* REDUCED */
-        min-height: 38px; /* REDUCED */
-    }
-    
-    .crypto-login-page .input-icon {
-        left: 8px; /* REDUCED */
-        width: 14px; /* REDUCED */
-        height: 14px;
-    }
-    
-    .crypto-login-page .login-button {
-        padding: 10px; /* REDUCED */
-        min-height: 44px; /* REDUCED */
-    }
-    
-    .crypto-login-page .login-flame-icon {
-        width: 26px; /* Still bigger than before */
-        height: 26px;
-    }
-}
-
-@media (max-width: 320px) {
     .crypto-login-page .login-container {
         padding: 8px; /* REDUCED */
-        max-width: 260px; /* REDUCED */
+        max-width: 270px; /* REDUCED */
         max-height: 50vh; /* REDUCED */
     }
     
     .crypto-login-page .app-logo {
-        width: 36px; /* REDUCED */
-        height: 36px;
+        width: 38px; /* REDUCED */
+        height: 38px;
     }
     
     .crypto-login-page .logo-image {
-        width: 26px; /* REDUCED */
-        height: 26px;
+        width: 28px; /* REDUCED */
+        height: 28px;
     }
     
     .crypto-login-page .app-title {
-        font-size: 14px; /* REDUCED */
+        font-size: 15px; /* REDUCED */
     }
     
-    .crypto-login-page .demo-badge-icon {
-        width: 24px; /* REDUCED */
-        height: 24px;
+    .crypto-login-page .form-input {
+        padding: 5px 10px 5px 26px; /* REDUCED */
+        min-height: 36px; /* REDUCED */
     }
     
-    .crypto-login-page .demo-coin-icon {
-        width: 16px; /* REDUCED */
-        height: 16px;
-    }
-    
-    .crypto-login-page .login-flame-icon {
-        width: 24px; /* Still bigger than before */
-        height: 24px;
+    .crypto-login-page .input-icon {
+        left: 6px; /* REDUCED */
+        width: 12px; /* REDUCED */
+        height: 12px;
     }
     
     .crypto-login-page .login-button {
         padding: 8px; /* REDUCED */
         min-height: 40px; /* REDUCED */
     }
+    
+    .crypto-login-page .login-flame-icon {
+        width: 32px; /* Still very big on mobile */
+        height: 32px;
+    }
+}
+
+@media (max-width: 320px) {
+    body.crypto-login-page {
+        padding-top: 4vh !important; /* REDUCED - Module moved up even more on very small mobile */
+    }
+    
+    .crypto-login-page .login-container {
+        padding: 6px; /* REDUCED */
+        max-width: 250px; /* REDUCED */
+        max-height: 45vh; /* REDUCED */
+    }
+    
+    .crypto-login-page .app-logo {
+        width: 34px; /* REDUCED */
+        height: 34px;
+    }
+    
+    .crypto-login-page .logo-image {
+        width: 24px; /* REDUCED */
+        height: 24px;
+    }
+    
+    .crypto-login-page .app-title {
+        font-size: 13px; /* REDUCED */
+    }
+    
+    .crypto-login-page .demo-badge-icon {
+        width: 22px; /* REDUCED */
+        height: 22px;
+    }
+    
+    .crypto-login-page .demo-coin-icon {
+        width: 14px; /* REDUCED */
+        height: 14px;
+    }
+    
+    .crypto-login-page .login-flame-icon {
+        width: 30px; /* Still very big on very small mobile */
+        height: 30px;
+    }
+    
+    .crypto-login-page .login-button {
+        padding: 6px; /* REDUCED */
+        min-height: 36px; /* REDUCED */
+    }
 }
 
 /* Landscape orientation optimization */
 @media (max-height: 600px) and (orientation: landscape) {
+    body.crypto-login-page {
+        padding-top: 2vh !important; /* REDUCED - Module moved up more in landscape */
+    }
+    
     .crypto-login-page .login-container {
-        max-height: 85vh; /* REDUCED */
-        padding: 8px; /* REDUCED */
-        max-width: 280px; /* REDUCED for landscape */
+        max-height: 80vh; /* REDUCED */
+        padding: 6px; /* REDUCED */
+        max-width: 270px; /* REDUCED for landscape */
     }
     
     .crypto-login-page .logo-section {
-        margin-bottom: 4px; /* REDUCED */
+        margin-bottom: 3px; /* REDUCED */
     }
     
     .crypto-login-page .demo-badge {
-        margin-bottom: 4px; /* REDUCED */
-        padding: 6px; /* REDUCED */
+        margin-bottom: 3px; /* REDUCED */
+        padding: 4px; /* REDUCED */
     }
     
     .crypto-login-page .form-group {
-        margin-bottom: 6px; /* REDUCED */
-    }
-    
-    .crypto-login-page .crypto-features {
-        margin: 4px 0; /* REDUCED */
-        padding: 6px; /* REDUCED */
-    }
-    
-    .crypto-login-page .features-title {
         margin-bottom: 4px; /* REDUCED */
     }
     
+    .crypto-login-page .crypto-features {
+        margin: 2px 0; /* REDUCED */
+        padding: 4px; /* REDUCED */
+    }
+    
+    .crypto-login-page .features-title {
+        margin-bottom: 2px; /* REDUCED */
+    }
+    
     .crypto-login-page .feature-item {
-        margin-bottom: 1px; /* REDUCED */
-        padding: 2px; /* REDUCED */
+        margin-bottom: 0px; /* REDUCED */
+        padding: 1px; /* REDUCED */
+    }
+    
+    .crypto-login-page .forgot-password {
+        margin-top: 8px; /* REDUCED for landscape */
     }
 }
 
@@ -867,8 +884,9 @@ body.crypto-login-page::before {
         height: -webkit-fill-available !important;
         min-height: -webkit-fill-available !important;
         display: flex !important;
-        align-items: center !important;
+        align-items: flex-start !important; /* Keep flex-start for iOS */
         justify-content: center !important;
+        padding-top: 6vh !important; /* Consistent with mobile */
     }
     
     .crypto-login-page .floating-elements {
