@@ -157,7 +157,7 @@ body {
 }
 
 .loading-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-size: clamp(1.4rem, 3.5vw, 2rem); /* REDUCED: 1.8rem->1.4rem, 4vw->3.5vw, 2.5rem->2rem */
     font-weight: 900;
     margin-bottom: 0; /* REMOVED: No margin since no subtitle */
     color: #ffffff;
@@ -168,6 +168,7 @@ body {
     background-clip: text;
     animation: titleShimmer 2.5s ease-in-out infinite; /* SPEED UP: 3s -> 2.5s */
     line-height: 1.2;
+    white-space: nowrap; /* ADDED: Prevent text wrapping */
 }
 
 @keyframes titleShimmer {
@@ -440,8 +441,9 @@ body {
     }
     
     .loading-title {
-        font-size: clamp(1.2rem, 4vw, 1.6rem);
+        font-size: clamp(1rem, 3.5vw, 1.3rem); /* REDUCED: landscape spacing */
         margin-bottom: 20px; /* ADJUSTED: landscape spacing */
+        white-space: nowrap; /* ADDED: Prevent wrapping in landscape */
     }
     
     .loading-bar-container {
