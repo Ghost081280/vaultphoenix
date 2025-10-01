@@ -25,7 +25,7 @@
             setTimeout(setVH, 100);
         });
         
-        // Prevent zoom on double tap
+        // CRITICAL: Prevent zoom completely
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function (event) {
             const now = (new Date()).getTime();
@@ -35,10 +35,35 @@
             lastTouchEnd = now;
         }, false);
         
-        // Prevent scrolling
-        document.addEventListener('touchmove', function(e) {
+        // Prevent pinch-to-zoom
+        document.addEventListener('gesturestart', function (e) {
             e.preventDefault();
+        });
+        
+        document.addEventListener('gesturechange', function (e) {
+            e.preventDefault();
+        });
+        
+        document.addEventListener('gestureend', function (e) {
+            e.preventDefault();
+        });
+        
+        // Prevent scrolling and zooming
+        document.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
         }, { passive: false });
+        
+        // Prevent double-tap zoom
+        let lastTouch = 0;
+        document.addEventListener('touchstart', function(e) {
+            const now = Date.now();
+            if (now - lastTouch <= 300) {
+                e.preventDefault();
+            }
+            lastTouch = now;
+        });
         
         // Force centering on load
         window.addEventListener('load', function() {
@@ -184,7 +209,7 @@
         </div>
     </div>
 
-    <!-- FORGOT PASSWORD LINK - OUTSIDE MODULE -->
+    <!-- FORGOT PASSWORD LINK - OUTSIDE MODULE WITH PERFECT CENTERING -->
     <div class="forgot-password">
         <a href="#" id="forgotPassword">Need help?</a>
     </div>
