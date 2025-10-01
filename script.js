@@ -83,14 +83,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Enhanced interactive card effects with phoenix crypto animation
-document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto-benefit, .ember-highlight-compact').forEach(card => {
+document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto-benefit, .ember-highlight-v3').forEach(card => {
     card.addEventListener('mouseenter', function() {
         if (this.classList.contains('simple-thumb')) {
             this.style.transform = 'translateY(-5px) scale(1.05)';
         } else if (this.classList.contains('crypto-benefit')) {
             this.style.transform = 'translateX(15px)';
-        } else if (this.classList.contains('ember-highlight-compact')) {
-            this.style.transform = 'translateX(8px)';
+        } else if (this.classList.contains('ember-highlight-v3')) {
+            this.style.transform = 'translateX(12px)';
         } else {
             this.style.transform = 'translateY(-10px) scale(1.02)';
         }
@@ -107,7 +107,7 @@ document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto
             if (this.classList.contains('crypto-benefit')) {
                 this.style.transform = 'translateX(0)';
             }
-            if (this.classList.contains('ember-highlight-compact')) {
+            if (this.classList.contains('ember-highlight-v3')) {
                 this.style.transform = 'translateX(0)';
             }
             this.style.boxShadow = '';
@@ -282,13 +282,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Enhanced Countdown Timer Integration for Ember Section
-function initializeEmberCountdown() {
-    // Set the target date (30 days from now)
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 30);
+// UPDATED: Main Page Countdown Timer Integration for November 1, 2025
+function initializeMainCountdown() {
+    // Set the target date to November 1, 2025
+    const targetDate = new Date('November 1, 2025 00:00:00 UTC');
     
-    function updateEmberCountdown() {
+    function updateMainCountdown() {
         const now = new Date().getTime();
         const distance = targetDate.getTime() - now;
         
@@ -297,11 +296,11 @@ function initializeEmberCountdown() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
-        // Update display
-        const daysEl = document.getElementById('ember-days');
-        const hoursEl = document.getElementById('ember-hours');
-        const minutesEl = document.getElementById('ember-minutes');
-        const secondsEl = document.getElementById('ember-seconds');
+        // Update display elements (main page countdown)
+        const daysEl = document.getElementById('main-days');
+        const hoursEl = document.getElementById('main-hours');
+        const minutesEl = document.getElementById('main-minutes');
+        const secondsEl = document.getElementById('main-seconds');
         
         if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
         if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
@@ -318,8 +317,8 @@ function initializeEmberCountdown() {
     }
     
     // Update every second
-    updateEmberCountdown();
-    setInterval(updateEmberCountdown, 1000);
+    updateMainCountdown();
+    setInterval(updateMainCountdown, 1000);
 }
 
 // Enhanced form validation and UX with phoenix crypto theme
@@ -575,42 +574,119 @@ function initializeCryptoCoinImage() {
     }, 50);
 }
 
-// Enhanced: Ember coin image interaction for the new compact section
-function initializeEmberCoinImage() {
-    const emberCoinImage = document.querySelector('.phoenix-holding-coin-enhanced');
+// Enhanced: V3 Ember coin image interaction for the new enhanced section
+function initializeEmberCoinImageV3() {
+    const emberCoinImage = document.querySelector('.phoenix-holding-coin-v3');
     if (!emberCoinImage) return;
     
     // Add special ember coin glow effect on hover
     emberCoinImage.addEventListener('mouseenter', function() {
-        this.style.filter = 'drop-shadow(0 0 40px rgba(240, 165, 0, 0.9)) brightness(1.2)';
-        this.style.transform = 'scale(1.05) rotate(2deg)';
+        this.style.filter = 'drop-shadow(0 0 50px rgba(240, 165, 0, 0.9)) brightness(1.2)';
+        this.style.transform = 'scale(1.1) translateY(-10px)';
     });
     
     emberCoinImage.addEventListener('mouseleave', function() {
         this.style.filter = '';
         this.style.transform = '';
     });
-    
-    // Add subtle floating animation for the compact ember image
-    let emberTime = 0;
-    setInterval(() => {
-        emberTime += 0.015;
-        const floatMovement = Math.sin(emberTime) * 5; // Gentle floating
-        const scaleMovement = Math.cos(emberTime * 1.2) * 0.02; // Subtle breathing
-        if (!emberCoinImage.matches(':hover')) {
-            emberCoinImage.style.transform = `translateY(${floatMovement}px) scale(${1 + scaleMovement})`;
-        }
-    }, 60);
 }
+
+// Crypto benefits animation on scroll
+function initializeCryptoBenefits() {
+    const benefits = document.querySelectorAll('.crypto-benefit');
+    if (!benefits.length) return;
+    
+    const benefitsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.transform = 'translateX(0)';
+                    entry.target.style.opacity = '1';
+                    
+                    // Add a subtle coin bounce effect
+                    const icon = entry.target.querySelector('.benefit-icon');
+                    if (icon) {
+                        icon.style.animation = 'coinBounce 0.6s ease-out';
+                    }
+                }, index * 200);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    benefits.forEach(benefit => {
+        benefit.style.transform = 'translateX(-50px)';
+        benefit.style.opacity = '0';
+        benefitsObserver.observe(benefit);
+    });
+    
+    // Add coin bounce animation
+    const coinBounceStyle = document.createElement('style');
+    coinBounceStyle.textContent = `
+        @keyframes coinBounce {
+            0% { transform: scale(1) rotateY(0deg); }
+            50% { transform: scale(1.2) rotateY(180deg); }
+            100% { transform: scale(1) rotateY(360deg); }
+        }
+    `;
+    document.head.appendChild(coinBounceStyle);
+}
+
+// Enhanced: V3 Ember highlights animation on scroll for the new enhanced section
+function initializeEmberHighlightsV3() {
+    const highlights = document.querySelectorAll('.ember-highlight-v3');
+    if (!highlights.length) return;
+    
+    const highlightsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.transform = 'translateX(0)';
+                    entry.target.style.opacity = '1';
+                    
+                    // Add ember flame flicker effect
+                    const emoji = entry.target.querySelector('.highlight-emoji-v3');
+                    if (emoji) {
+                        emoji.style.animation = 'emberFlickerV3 1s ease-in-out';
+                    }
+                }, index * 150);
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    highlights.forEach(highlight => {
+        highlight.style.transform = 'translateX(-30px)';
+        highlight.style.opacity = '0';
+        highlightsObserver.observe(highlight);
+    });
+    
+    // Add ember flicker animation V3
+    const emberFlickerStyleV3 = document.createElement('style');
+    emberFlickerStyleV3.textContent = `
+        @keyframes emberFlickerV3 {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(240, 165, 0, 0.6)); }
+            25% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.8)); }
+            50% { transform: scale(0.95); filter: drop-shadow(0 0 3px rgba(240, 165, 0, 0.5)); }
+            75% { transform: scale(1.05); filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.7)); }
+        }
+    `;
+    document.head.appendChild(emberFlickerStyleV3);
+}
+
+// Initialize crypto-specific features
+document.addEventListener('DOMContentLoaded', function() {
+    initializeCryptoBenefits();
+    initializeEmberHighlightsV3();
+    createPhoenixCryptoScrollIndicator();
+});
 
 // FIXED: Initialize everything when DOM is ready - WITH PROPER TIMING
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥🪙 Phoenix Crypto Systems Initializing...');
     
-    initializeEmberCountdown();
+    initializeMainCountdown(); // NEW: Main page countdown
     preloadPhoenixCryptoImages();
     initializeCryptoCoinImage();
-    initializeEmberCoinImage();
+    initializeEmberCoinImageV3(); // NEW: V3 ember coin interaction
     
     // FIXED: Create floating coins after a short delay to ensure hero exists
     setTimeout(() => {
@@ -624,13 +700,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Phoenix crypto-specific initialization
     console.log('🔥🪙 Phoenix crypto systems online and ready for action!');
-    console.log('🔥🪙 Ember Section V2 with Countdown - Ready!');
+    console.log('🔥🪙 Main Page Countdown to Nov 1, 2025 - Ready!');
     console.log('🔥🪙 Floating VPEmberCoin.PNG coins should now be visible in hero section!');
     console.log('🔥🪙 Crypto game screenshots ready for gallery!');
 });
 
 // Enhanced interactive feedback for all CTA buttons with crypto theme
-document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .ember-cta-button-enhanced, .demo-button-enhanced').forEach(button => {
+document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .ember-cta-button-v3, .demo-button-enhanced').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
         // Add subtle coin sparkle effect using VPEmberCoin image
@@ -714,94 +790,6 @@ function createPhoenixCryptoScrollIndicator() {
         indicator.style.width = scrolled + '%';
     });
 }
-
-// Crypto benefits animation on scroll
-function initializeCryptoBenefits() {
-    const benefits = document.querySelectorAll('.crypto-benefit');
-    if (!benefits.length) return;
-    
-    const benefitsObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.transform = 'translateX(0)';
-                    entry.target.style.opacity = '1';
-                    
-                    // Add a subtle coin bounce effect
-                    const icon = entry.target.querySelector('.benefit-icon');
-                    if (icon) {
-                        icon.style.animation = 'coinBounce 0.6s ease-out';
-                    }
-                }, index * 200);
-            }
-        });
-    }, { threshold: 0.3 });
-    
-    benefits.forEach(benefit => {
-        benefit.style.transform = 'translateX(-50px)';
-        benefit.style.opacity = '0';
-        benefitsObserver.observe(benefit);
-    });
-    
-    // Add coin bounce animation
-    const coinBounceStyle = document.createElement('style');
-    coinBounceStyle.textContent = `
-        @keyframes coinBounce {
-            0% { transform: scale(1) rotateY(0deg); }
-            50% { transform: scale(1.2) rotateY(180deg); }
-            100% { transform: scale(1) rotateY(360deg); }
-        }
-    `;
-    document.head.appendChild(coinBounceStyle);
-}
-
-// Enhanced: Ember highlights animation on scroll for the new compact section
-function initializeEmberHighlights() {
-    const highlights = document.querySelectorAll('.ember-highlight-compact');
-    if (!highlights.length) return;
-    
-    const highlightsObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.transform = 'translateX(0)';
-                    entry.target.style.opacity = '1';
-                    
-                    // Add ember flame flicker effect
-                    const emoji = entry.target.querySelector('.highlight-emoji-compact');
-                    if (emoji) {
-                        emoji.style.animation = 'emberFlicker 1s ease-in-out';
-                    }
-                }, index * 150);
-            }
-        });
-    }, { threshold: 0.3 });
-    
-    highlights.forEach(highlight => {
-        highlight.style.transform = 'translateX(-30px)';
-        highlight.style.opacity = '0';
-        highlightsObserver.observe(highlight);
-    });
-    
-    // Add ember flicker animation
-    const emberFlickerStyle = document.createElement('style');
-    emberFlickerStyle.textContent = `
-        @keyframes emberFlicker {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(240, 165, 0, 0.6)); }
-            25% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.8)); }
-            50% { transform: scale(0.95); filter: drop-shadow(0 0 3px rgba(240, 165, 0, 0.5)); }
-            75% { transform: scale(1.05); filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.7)); }
-        }
-    `;
-    document.head.appendChild(emberFlickerStyle);
-}
-
-// Initialize crypto-specific features
-document.addEventListener('DOMContentLoaded', function() {
-    initializeCryptoBenefits();
-    initializeEmberHighlights();
-    createPhoenixCryptoScrollIndicator();
-});
 
 // Easter egg: Konami code for bonus crypto coins - UPDATED WITH VPEmberCoin.PNG
 let konamiCode = [];
@@ -908,4 +896,14 @@ window.addEventListener('load', () => {
             console.warn('🔥🪙 WARNING: Crypto game screenshots not detected!');
         }
     }, 1000);
+    
+    // Check if main countdown is working
+    setTimeout(() => {
+        const mainDays = document.getElementById('main-days');
+        if (mainDays && mainDays.textContent !== '--') {
+            console.log('🔥🪙 SUCCESS: Main page countdown to Nov 1, 2025 is active!');
+        } else {
+            console.warn('🔥🪙 WARNING: Main page countdown not working!');
+        }
+    }, 1500);
 });
