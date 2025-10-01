@@ -1,4 +1,4 @@
-/* Ember Token Page Stylesheet - Updated Complete Version */
+/* Ember Token Page Stylesheet - Updated for $500K Hard Cap */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
 /* COMPREHENSIVE CSS for the complete ember.html structure */
 
@@ -403,7 +403,7 @@ body {
     line-height: 1.4;
 }
 
-/* ENHANCED STATS GRID */
+/* ENHANCED STATS GRID - Updated for 3 columns */
 .ember-stats-grid-enhanced {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -412,6 +412,13 @@ body {
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* NEW: 3-column centered layout for hero stats */
+.ember-stats-three-col {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 800px;
+    justify-content: center;
 }
 
 .ember-stat-card-enhanced {
@@ -2645,6 +2652,80 @@ body {
 
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
+    /* Mobile hero adjustments */
+    .ember-hero {
+        padding: 120px 0 60px;
+        min-height: auto;
+    }
+
+    .ember-hero-content {
+        padding: 0 20px;
+    }
+
+    .ember-token-icon-image {
+        width: clamp(100px, 20vw, 140px);
+        height: clamp(100px, 20vw, 140px);
+    }
+
+    .ember-hero-title {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+        margin-bottom: 20px;
+    }
+
+    .ember-hero-subtitle-main {
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        margin-bottom: 15px;
+    }
+
+    .ember-hero-subtitle {
+        font-size: clamp(1rem, 4vw, 1.3rem);
+        margin-bottom: 40px;
+    }
+
+    /* Mobile stats grid - centered 3 columns to single column on mobile */
+    .ember-stats-three-col {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .ember-stat-card-enhanced {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .stat-content {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+    }
+
+    .ember-hero-cta {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .ember-cta-primary,
+    .ember-cta-secondary {
+        width: 100%;
+        max-width: 300px;
+        padding: 15px 35px;
+        font-size: 1.1rem;
+    }
+
+    /* Mobile floating coins */
+    .hero-crypto-coin-icon {
+        width: clamp(25px, 4vw, 35px) !important;
+        height: clamp(25px, 4vw, 35px) !important;
+        opacity: 0.5 !important;
+    }
+
     .presale-content {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -2700,79 +2781,6 @@ body {
         display: none;
     }
 
-    /* Mobile hero adjustments */
-    .ember-hero {
-        padding: 120px 0 60px;
-        min-height: auto;
-    }
-
-    .ember-hero-content {
-        padding: 0 20px;
-    }
-
-    .ember-token-icon-image {
-        width: clamp(100px, 20vw, 140px);
-        height: clamp(100px, 20vw, 140px);
-    }
-
-    .ember-hero-title {
-        font-size: clamp(2rem, 8vw, 3.5rem);
-        margin-bottom: 20px;
-    }
-
-    .ember-hero-subtitle-main {
-        font-size: clamp(1.2rem, 4vw, 1.8rem);
-        margin-bottom: 15px;
-    }
-
-    .ember-hero-subtitle {
-        font-size: clamp(1rem, 4vw, 1.3rem);
-        margin-bottom: 40px;
-    }
-
-    .ember-stats-grid-enhanced {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        margin-bottom: 40px;
-    }
-
-    .ember-stat-card-enhanced {
-        padding: 20px;
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .stat-content {
-        text-align: center;
-    }
-
-    .stat-number {
-        font-size: 1.8rem;
-    }
-
-    .ember-hero-cta {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 30px;
-    }
-
-    .ember-cta-primary,
-    .ember-cta-secondary {
-        width: 100%;
-        max-width: 300px;
-        padding: 15px 35px;
-        font-size: 1.1rem;
-    }
-
-    /* Mobile floating coins */
-    .hero-crypto-coin-icon {
-        width: clamp(25px, 4vw, 35px) !important;
-        height: clamp(25px, 4vw, 35px) !important;
-        opacity: 0.5 !important;
-    }
-
     .compliance-grid {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -2785,19 +2793,6 @@ body {
         width: clamp(20px, 3vw, 30px) !important;
         height: clamp(20px, 3vw, 30px) !important;
         opacity: 0.4 !important;
-    }
-
-    .ember-stats-grid-enhanced {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .ember-stat-card-enhanced {
-        padding: 15px;
-    }
-
-    .stat-number {
-        font-size: 1.6rem;
     }
 
     .ember-token-icon-image {
