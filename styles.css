@@ -2681,7 +2681,7 @@ body {
     margin: 0;
 }
 
-/* Final CTA Section - FIXED: Better Themed CTA Button */
+/* Final CTA Section - UPDATED: Better Themed CTA Button */
 .final-cta {
     padding: 120px 40px;
     background: linear-gradient(135deg, #d73327, #fb923c);
@@ -2742,9 +2742,9 @@ body {
     z-index: 10;
 }
 
-/* FIXED: Better Themed CTA Buttons */
+/* UPDATED: Better Themed CTA Buttons */
 .cta-primary-enhanced {
-    background: linear-gradient(135deg, #1a202c, #2d3748) !important;
+    background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
     padding: 20px 50px !important;
     border: 3px solid rgba(255, 255, 255, 0.3) !important;
@@ -2761,7 +2761,7 @@ body {
 .cta-primary-enhanced:hover {
     transform: translateY(-3px) !important;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4) !important;
-    background: linear-gradient(135deg, #2d3748, #374151) !important;
+    background: linear-gradient(135deg, #fb923c, #f0a500) !important;
     border-color: rgba(255, 255, 255, 0.5) !important;
     color: white !important;
 }
