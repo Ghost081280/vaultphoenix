@@ -1,6 +1,6 @@
 /* Vault Phoenix - Loading Page Stylesheet */
 /* Phoenix Rising from Digital Ashes - Crypto Gaming Edition */
-/* UPDATED: New Phoenix image and improved mobile/desktop UX */
+/* UPDATED: Removed loading/subtitle text, improved transitions, faster loading */
 
 * {
     margin: 0;
@@ -15,7 +15,7 @@ body {
     background: #0f0f0f;
 }
 
-/* Loading Container */
+/* Loading Container - UPDATED: Fixed transition issues */
 .loading-container {
     position: fixed;
     top: 0;
@@ -29,6 +29,15 @@ body {
     align-items: center;
     z-index: 10000;
     overflow: hidden;
+    /* FIXED: Smooth transition out */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* ADDED: Smooth exit animation */
+.loading-container.fade-out {
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
 }
 
 /* Background Elements */
@@ -51,7 +60,7 @@ body {
         radial-gradient(circle at 20% 50%, rgba(215, 51, 39, 0.3) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(251, 146, 60, 0.2) 0%, transparent 50%),
         radial-gradient(circle at 40% 80%, rgba(240, 165, 0, 0.15) 0%, transparent 50%);
-    animation: phoenixFloat 20s ease-in-out infinite;
+    animation: phoenixFloat 15s ease-in-out infinite; /* SPEED UP: 20s -> 15s */
 }
 
 .crypto-glow {
@@ -62,7 +71,7 @@ body {
     width: 600px;
     height: 600px;
     background: radial-gradient(circle, rgba(215, 51, 39, 0.1) 0%, transparent 70%);
-    animation: cryptoPulse 4s ease-in-out infinite;
+    animation: cryptoPulse 3s ease-in-out infinite; /* SPEED UP: 4s -> 3s */
 }
 
 @keyframes phoenixFloat {
@@ -98,7 +107,7 @@ body {
     height: clamp(180px, 25vw, 240px);
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.6));
-    animation: phoenixPulse 3s ease-in-out infinite;
+    animation: phoenixPulse 2.5s ease-in-out infinite; /* SPEED UP: 3s -> 2.5s */
     position: relative;
     z-index: 2;
     border-radius: 15px;
@@ -113,7 +122,7 @@ body {
     width: clamp(220px, 30vw, 300px);
     height: clamp(220px, 30vw, 300px);
     background: radial-gradient(circle, rgba(215, 51, 39, 0.3) 0%, rgba(240, 165, 0, 0.2) 40%, transparent 70%);
-    animation: logoGlowPulse 2s ease-in-out infinite alternate;
+    animation: logoGlowPulse 1.5s ease-in-out infinite alternate; /* SPEED UP: 2s -> 1.5s */
     z-index: 1;
     border-radius: 50%;
 }
@@ -142,42 +151,28 @@ body {
     }
 }
 
-/* Loading Text - IMPROVED sizing */
+/* Loading Text - UPDATED: Single title, moved up */
 .loading-text {
     margin-bottom: 40px;
 }
 
 .loading-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem); /* REDUCED from 2.5rem-4rem */
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 900;
-    margin-bottom: 15px;
+    margin-bottom: 0; /* REMOVED: No margin since no subtitle */
     color: #ffffff;
     letter-spacing: -0.02em;
     background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #f0a500 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: titleShimmer 3s ease-in-out infinite;
+    animation: titleShimmer 2.5s ease-in-out infinite; /* SPEED UP: 3s -> 2.5s */
     line-height: 1.2;
-}
-
-.loading-subtitle {
-    font-size: clamp(1rem, 2.2vw, 1.3rem);
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    animation: subtitleFade 2s ease-in-out infinite alternate;
-    line-height: 1.4;
 }
 
 @keyframes titleShimmer {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.8; }
-}
-
-@keyframes subtitleFade {
-    0% { opacity: 0.7; }
-    100% { opacity: 1; }
 }
 
 /* Loading Bar - ENHANCED */
@@ -204,10 +199,10 @@ body {
     background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
     border-radius: 10px;
     width: 0%;
-    transition: width 0.3s ease;
+    transition: width 0.2s ease; /* SPEED UP: 0.3s -> 0.2s */
     position: relative;
     box-shadow: 0 0 20px rgba(215, 51, 39, 0.5);
-    animation: progressGlow 2s ease-in-out infinite;
+    animation: progressGlow 1.5s ease-in-out infinite; /* SPEED UP: 2s -> 1.5s */
 }
 
 .loading-spark {
@@ -217,7 +212,7 @@ body {
     width: 20px;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-    animation: sparkMove 2s ease-in-out infinite;
+    animation: sparkMove 1.5s ease-in-out infinite; /* SPEED UP: 2s -> 1.5s */
     opacity: 0;
 }
 
@@ -240,24 +235,7 @@ body {
     text-shadow: 0 2px 10px rgba(240, 165, 0, 0.3);
 }
 
-/* Loading Messages */
-.loading-message {
-    margin-top: 20px;
-}
-
-.loading-status {
-    font-size: clamp(0.95rem, 2.2vw, 1.1rem);
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
-    animation: statusPulse 2s ease-in-out infinite;
-}
-
-@keyframes statusPulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-}
-
-/* Floating Crypto Coins - UPDATED with new ember coin */
+/* Floating Crypto Coins - UPDATED with faster animations */
 .floating-coins {
     position: absolute;
     top: 0;
@@ -270,7 +248,7 @@ body {
 
 .coin {
     position: absolute;
-    animation: coinFloat 8s ease-in-out infinite;
+    animation: coinFloat 6s ease-in-out infinite; /* SPEED UP: 8s -> 6s */
     z-index: 1;
 }
 
@@ -290,42 +268,42 @@ body {
     top: 15%;
     left: 8%;
     animation-delay: 0s;
-    animation-duration: 6s;
+    animation-duration: 4.5s; /* SPEED UP: 6s -> 4.5s */
 }
 
 .coin-2 {
     top: 65%;
     left: 12%;
-    animation-delay: 1s;
-    animation-duration: 7s;
+    animation-delay: 0.8s; /* SPEED UP: 1s -> 0.8s */
+    animation-duration: 5.2s; /* SPEED UP: 7s -> 5.2s */
 }
 
 .coin-3 {
     top: 25%;
     right: 15%;
-    animation-delay: 2s;
-    animation-duration: 8s;
+    animation-delay: 1.5s; /* SPEED UP: 2s -> 1.5s */
+    animation-duration: 6s; /* SPEED UP: 8s -> 6s */
 }
 
 .coin-4 {
     top: 75%;
     right: 10%;
-    animation-delay: 3s;
-    animation-duration: 6s;
+    animation-delay: 2.2s; /* SPEED UP: 3s -> 2.2s */
+    animation-duration: 4.5s; /* SPEED UP: 6s -> 4.5s */
 }
 
 .coin-5 {
     top: 10%;
     left: 45%;
-    animation-delay: 4s;
-    animation-duration: 7s;
+    animation-delay: 3s; /* SPEED UP: 4s -> 3s */
+    animation-duration: 5.2s; /* SPEED UP: 7s -> 5.2s */
 }
 
 .coin-6 {
     bottom: 15%;
     right: 45%;
-    animation-delay: 5s;
-    animation-duration: 9s;
+    animation-delay: 3.8s; /* SPEED UP: 5s -> 3.8s */
+    animation-duration: 6.7s; /* SPEED UP: 9s -> 6.7s */
 }
 
 @keyframes coinFloat {
@@ -365,13 +343,8 @@ body {
     }
     
     .loading-title {
-        font-size: clamp(1.4rem, 6vw, 2rem); /* Better mobile scaling */
-        margin-bottom: 12px;
-    }
-    
-    .loading-subtitle {
-        font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-        margin-bottom: 30px;
+        font-size: clamp(1.4rem, 6vw, 2rem);
+        margin-bottom: 30px; /* ADJUSTED: spacing for single title */
     }
     
     .loading-bar {
@@ -382,10 +355,6 @@ body {
     .loading-percentage {
         font-size: clamp(0.9rem, 3vw, 1rem);
         margin-top: 12px;
-    }
-    
-    .loading-status {
-        font-size: clamp(0.85rem, 3vw, 1rem);
     }
     
     .crypto-coin-icon {
@@ -417,15 +386,9 @@ body {
     }
     
     .loading-title {
-        font-size: clamp(1.2rem, 7vw, 1.6rem); /* Smaller on very small screens */
-        margin-bottom: 10px;
+        font-size: clamp(1.2rem, 7vw, 1.6rem);
+        margin-bottom: 25px; /* ADJUSTED: spacing for single title */
         line-height: 1.1;
-    }
-    
-    .loading-subtitle {
-        font-size: clamp(0.8rem, 4vw, 1rem);
-        margin-bottom: 25px;
-        line-height: 1.3;
     }
     
     .loading-bar {
@@ -436,11 +399,6 @@ body {
     .loading-percentage {
         font-size: clamp(0.8rem, 3.5vw, 0.9rem);
         margin-top: 10px;
-    }
-    
-    .loading-status {
-        font-size: clamp(0.75rem, 3.5vw, 0.9rem);
-        margin-top: 15px;
     }
     
     .crypto-glow {
@@ -483,20 +441,11 @@ body {
     
     .loading-title {
         font-size: clamp(1.2rem, 4vw, 1.6rem);
-        margin-bottom: 8px;
-    }
-    
-    .loading-subtitle {
-        font-size: clamp(0.8rem, 2.5vw, 1rem);
-        margin-bottom: 20px;
+        margin-bottom: 20px; /* ADJUSTED: landscape spacing */
     }
     
     .loading-bar-container {
         margin-bottom: 20px;
-    }
-    
-    .loading-message {
-        margin-top: 15px;
     }
 }
 
@@ -553,7 +502,7 @@ body {
 }
 
 .loading-complete .crypto-coin-icon {
-    animation: coinCelebration 1s ease-out;
+    animation: coinCelebration 0.8s ease-out; /* SPEED UP: 1s -> 0.8s */
 }
 
 @keyframes coinCelebration {
