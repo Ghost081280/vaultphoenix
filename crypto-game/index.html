@@ -6,14 +6,17 @@
     <title>Vault Phoenix - AR Crypto Gaming</title>
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
     
-    <!-- ISOLATED CRYPTO GAME CSS - NO EXTERNAL CONFLICTS -->
+    <!-- ISOLATED CRYPTO GAME CSS -->
     <link rel="stylesheet" href="crypto-game.css">
 </head>
 <body class="crypto-login-page">
     <!-- CRYPTO GAME PROTECTION FLAG -->
     <div id="cryptoGameFlag" style="display: none;">CRYPTO_GAME_PAGE</div>
     
+    <!-- Enhanced floating background elements -->
     <div class="floating-elements">
+        <div class="floating-coin"></div>
+        <div class="floating-coin"></div>
         <div class="floating-coin"></div>
         <div class="floating-coin"></div>
         <div class="floating-coin"></div>
@@ -22,7 +25,13 @@
         <div class="floating-coin"></div>
     </div>
 
+    <!-- Phoenix glow background effect -->
+    <div class="phoenix-glow-bg"></div>
+
     <div class="login-container">
+        <!-- Phoenix flame decoration -->
+        <div class="phoenix-flame-decoration"></div>
+        
         <div class="logo-section">
             <div class="app-logo"></div>
             <h1 class="app-title">Vault Phoenix</h1>
@@ -53,6 +62,7 @@
                     autocomplete="email"
                     required
                 >
+                <div class="input-glow"></div>
             </div>
 
             <div class="form-group">
@@ -64,9 +74,11 @@
                     autocomplete="current-password"
                     required
                 >
+                <div class="input-glow"></div>
             </div>
 
             <button type="submit" class="login-button" id="loginBtn">
+                <span class="button-glow"></span>
                 <span id="loginText">
                     <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="login-flame-icon">
                     Start $Ember Hunt
@@ -94,7 +106,17 @@
         </div>
     </div>
 
-    <!-- ISOLATED CRYPTO GAME JAVASCRIPT - NO EXTERNAL CONFLICTS -->
+    <!-- Loading particles effect -->
+    <div class="loading-particles" id="loadingParticles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- ISOLATED CRYPTO GAME JAVASCRIPT -->
     <script src="crypto-game.js"></script>
 </body>
 </html>
