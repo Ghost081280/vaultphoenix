@@ -60,7 +60,7 @@ body.crypto-login-page {
     margin: 0 !important;
     padding: 0 !important;
     display: flex !important;
-    align-items: center !important;
+    align-items: flex-start !important; /* CHANGED: Use flex-start instead of center */
     justify-content: center !important;
     color: white !important;
     overscroll-behavior: none !important;
@@ -69,6 +69,7 @@ body.crypto-login-page {
     -webkit-appearance: none !important;
     /* Force perfect centering */
     flex-direction: column !important;
+    padding-top: 15vh !important; /* ADDED: Push content down from top to center it */
 }
 
 /* Background coverage fix for mobile */
@@ -191,8 +192,8 @@ body.crypto-login-page::before {
     border: 2px solid rgba(240, 165, 0, 0.45);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     color: white;
-    /* CRITICAL: Force center alignment and move up slightly */
-    margin: -5vh auto 0 auto; /* Negative top margin to move up */
+    /* CRITICAL: Use normal margin since we're using padding-top on body */
+    margin: 0 auto; /* CHANGED: Back to normal centering */
     position: relative;
     overflow: visible;
     transform: none !important;
@@ -748,9 +749,10 @@ body.crypto-login-page::before {
     body.crypto-login-page {
         /* Ensure perfect centering on small screens */
         display: flex !important;
-        align-items: center !important;
+        align-items: flex-start !important; /* CHANGED: Use flex-start */
         justify-content: center !important;
         flex-direction: column !important;
+        padding-top: 12vh !important; /* CHANGED: Less padding for mobile */
     }
     
     .crypto-login-page .login-container {
@@ -758,8 +760,8 @@ body.crypto-login-page::before {
         max-width: 300px; /* Smaller max-width */
         width: 80%; /* Reduced width to prevent stretching */
         max-height: 65vh; /* Further reduced max-height */
-        /* Force center positioning and move up */
-        margin: -8vh auto 0 auto; /* More negative margin for mobile */
+        /* CHANGED: Use normal margin */
+        margin: 0 auto;
         align-self: center;
         justify-self: center;
     }
@@ -804,9 +806,10 @@ body.crypto-login-page::before {
     body.crypto-login-page {
         /* Ensure perfect centering on very small screens */
         display: flex !important;
-        align-items: center !important;
+        align-items: flex-start !important; /* CHANGED: Use flex-start */
         justify-content: center !important;
         flex-direction: column !important;
+        padding-top: 10vh !important; /* CHANGED: Even less padding for very small screens */
     }
     
     .crypto-login-page .login-container {
@@ -814,8 +817,8 @@ body.crypto-login-page::before {
         max-width: 280px; /* Even smaller max-width */
         width: 75%; /* Further reduced width */
         max-height: 60vh; /* Further reduced max-height */
-        /* Force center positioning and move up */
-        margin: -10vh auto 0 auto; /* Even more negative margin for very small screens */
+        /* CHANGED: Use normal margin */
+        margin: 0 auto;
         align-self: center;
         justify-self: center;
     }
@@ -865,15 +868,16 @@ body.crypto-login-page::before {
         width: 100vw !important;
         height: 100vh !important;
         display: flex !important;
-        align-items: center !important;
+        align-items: flex-start !important; /* CHANGED: Use flex-start */
         justify-content: center !important;
         flex-direction: column !important;
+        padding-top: 12vh !important; /* CHANGED: Use padding instead of negative margin */
     }
     
     .crypto-login-page .login-container {
         /* Prevent module from stretching or misaligning */
         position: relative;
-        margin: -5vh auto 0 auto;
+        margin: 0 auto; /* CHANGED: Normal margin */
         left: 0;
         right: 0;
         transform: none !important;
@@ -884,11 +888,15 @@ body.crypto-login-page::before {
 
 /* Landscape orientation optimization */
 @media (max-height: 600px) and (orientation: landscape) {
+    body.crypto-login-page {
+        padding-top: 5vh !important; /* CHANGED: Less padding for landscape */
+    }
+    
     .crypto-login-page .login-container {
         max-height: 92vh;
         padding: 12px;
         width: 80%; /* Compact width for landscape */
-        margin: -3vh auto 0 auto; /* Less negative margin for landscape */
+        margin: 0 auto; /* CHANGED: Normal margin */
     }
     
     .crypto-login-page .logo-section {
