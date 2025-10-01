@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Vault Phoenix - AR Crypto Gaming</title>
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- ONLY CRYPTO GAME STYLES - NO EXTERNAL CSS -->
+    <link rel="stylesheet" href="crypto-styles.css">
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
+    
+    <!-- PREVENT MAIN SITE JS FROM INTERFERING -->
+    <script>
+        // Block main site JS from affecting crypto game
+        window.isVaultPhoenixCryptoGame = true;
+    </script>
 </head>
-<body>
+<body class="crypto-game-login">
     <div class="floating-elements">
         <div class="floating-coin"></div>
         <div class="floating-coin"></div>
@@ -89,6 +97,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- ONLY CRYPTO GAME JAVASCRIPT -->
+    <script src="crypto-script.js"></script>
 </body>
 </html>
