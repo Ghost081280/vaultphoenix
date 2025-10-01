@@ -1,6 +1,6 @@
 // Ember Token Page JavaScript
 // Phoenix Rising from Digital Ashes - $Ember Token Edition
-// FIXED: Added scroll progress indicator from main.html
+// UPDATED: Presale countdown to November 1, 2025
 
 // EXACT COPY FROM MAIN.HTML: Enhanced navbar scroll effect
 window.addEventListener('scroll', () => {
@@ -151,15 +151,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Token sale countdown timer
+// UPDATED: Token sale countdown timer - November 1, 2025 Launch
 function initializeCountdown() {
-    // Set the target date (30 days from now)
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 30);
+    // Set the target date to November 1, 2025 at 12:00 PM UTC
+    const targetDate = new Date('2025-11-01T12:00:00Z');
     
     function updateCountdown() {
         const now = new Date().getTime();
         const distance = targetDate.getTime() - now;
+        
+        // If countdown has finished
+        if (distance < 0) {
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            
+            if (daysEl) daysEl.textContent = '00';
+            if (hoursEl) hoursEl.textContent = '00';
+            if (minutesEl) minutesEl.textContent = '00';
+            if (secondsEl) secondsEl.textContent = '00';
+            
+            // Update timer title to show presale is live
+            const timerTitle = document.querySelector('.presale-timer h3');
+            if (timerTitle) {
+                timerTitle.textContent = '🔥 Presale is LIVE!';
+                timerTitle.style.color = '#4ade80';
+            }
+            return;
+        }
         
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -176,43 +196,32 @@ function initializeCountdown() {
         if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
         if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
         if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
-        
-        // If countdown is finished
-        if (distance < 0) {
-            if (daysEl) daysEl.textContent = '00';
-            if (hoursEl) hoursEl.textContent = '00';
-            if (minutesEl) minutesEl.textContent = '00';
-            if (secondsEl) secondsEl.textContent = '00';
-        }
     }
     
     // Update every second
     updateCountdown();
     setInterval(updateCountdown, 1000);
+    
+    console.log('🔥🪙 Countdown initialized for November 1, 2025 presale launch!');
 }
 
-// Investment calculator
+// UPDATED: Investment calculator for $0.003 price
 function initializeCalculator() {
     const investmentInput = document.getElementById('investment-amount');
-    const baseTokensEl = document.getElementById('base-tokens');
-    const bonusTokensEl = document.getElementById('bonus-tokens');
-    const totalTokensEl = document.getElementById('total-tokens');
+    const emberTokensEl = document.getElementById('ember-tokens');
+    const totalInvestmentEl = document.getElementById('total-investment');
     
-    if (!investmentInput || !baseTokensEl || !bonusTokensEl || !totalTokensEl) return;
+    if (!investmentInput || !emberTokensEl || !totalInvestmentEl) return;
     
     function calculateTokens() {
-        const investment = parseFloat(investmentInput.value) || 0;
-        const tokenPrice = 0.001; // $0.001 per token
-        const bonusPercentage = 0.5; // 50% bonus
+        const investment = parseFloat(investmentInput.value) || 100; // Default to $100
+        const tokenPrice = 0.003; // $0.003 per token
         
-        const baseTokens = Math.floor(investment / tokenPrice);
-        const bonusTokens = Math.floor(baseTokens * bonusPercentage);
-        const totalTokens = baseTokens + bonusTokens;
+        const totalTokens = Math.floor(investment / tokenPrice);
         
         // Format numbers with commas
-        baseTokensEl.textContent = baseTokens.toLocaleString();
-        bonusTokensEl.textContent = bonusTokens.toLocaleString();
-        totalTokensEl.textContent = totalTokens.toLocaleString();
+        emberTokensEl.textContent = totalTokens.toLocaleString();
+        totalInvestmentEl.textContent = `$${investment}`;
     }
     
     // Calculate on input change
@@ -220,6 +229,8 @@ function initializeCalculator() {
     
     // Initial calculation
     calculateTokens();
+    
+    console.log('🔥🪙 Investment calculator initialized - $0.003 per EMBER token');
 }
 
 // Enhanced button interactions with ember effects
@@ -445,25 +456,33 @@ function initializeRoadmapAnimation() {
 function initializeFormValidation() {
     const investmentInput = document.getElementById('investment-amount');
     const presaleButton = document.querySelector('.presale-button');
+    const tpaCheckbox = document.getElementById('tpa-agree-checkbox');
     
     if (!investmentInput || !presaleButton) return;
     
     function validateInput() {
         const value = parseFloat(investmentInput.value);
-        const isValid = value >= 10 && value <= 10000;
+        const isValidAmount = value >= 10 && value <= 50000;
+        const hasAgreedTPA = tpaCheckbox ? tpaCheckbox.checked : true;
+        const isValid = isValidAmount && hasAgreedTPA;
         
-        if (isValid) {
+        if (isValidAmount) {
             investmentInput.style.borderColor = 'rgba(64, 224, 64, 0.5)';
-            presaleButton.disabled = false;
-            presaleButton.style.opacity = '1';
         } else {
             investmentInput.style.borderColor = 'rgba(255, 0, 0, 0.5)';
-            presaleButton.disabled = true;
-            presaleButton.style.opacity = '0.5';
+        }
+        
+        if (presaleButton) {
+            presaleButton.disabled = !isValid;
+            presaleButton.style.opacity = isValid ? '1' : '0.6';
         }
     }
     
     investmentInput.addEventListener('input', validateInput);
+    if (tpaCheckbox) {
+        tpaCheckbox.addEventListener('change', validateInput);
+    }
+    
     validateInput(); // Initial validation
 }
 
@@ -546,8 +565,8 @@ function showTokenSaleModal() {
                 margin: 20px;
             ">
                 <div style="font-size: 4rem; margin-bottom: 20px;">🔥</div>
-                <h2 style="color: #f0a500; margin-bottom: 15px;">$Ember Token Sale Coming Soon!</h2>
-                <p style="margin-bottom: 25px;">Thank you for your interest in $Ember Token. Our community sale will be launching soon. Stay tuned for updates!</p>
+                <h2 style="color: #f0a500; margin-bottom: 15px;">$Ember Token Presale - November 1, 2025!</h2>
+                <p style="margin-bottom: 25px;">Thank you for your interest in $Ember Token. Our presale launches November 1, 2025 at 12:00 PM UTC. Join our community for updates!</p>
                 <button onclick="this.parentElement.parentElement.remove()" style="
                     background: linear-gradient(135deg, #d73327, #fb923c);
                     color: white;
@@ -594,13 +613,13 @@ document.addEventListener('DOMContentLoaded', function() {
         heroObserver.observe(heroSection);
     }
     
-    console.log('🔥🪙 $Ember Token page loaded successfully - crypto community ready!');
+    console.log('🔥🪙 $Ember Token page loaded successfully - November 1, 2025 presale ready!');
     console.log('🔥🪙 Scroll progress indicator active!');
 });
 
 // Console welcome message
 console.log('%c🔥🪙 $EMBER TOKEN - THE FUTURE OF AR CRYPTO GAMING', 'color: #f0a500; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 Join the Community Sale and Build the Ecosystem!', 'color: #fb923c; font-size: 14px; font-weight: bold;');
+console.log('%c🚀 Presale launches November 1, 2025 - Join the Revolution!', 'color: #fb923c; font-size: 14px; font-weight: bold;');
 
 // Performance monitoring
 window.addEventListener('load', () => {
