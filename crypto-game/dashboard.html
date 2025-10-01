@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Vault Phoenix - AR Crypto Gaming Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- ISOLATED CRYPTO GAME CSS - NO EXTERNAL CONFLICTS -->
+    <link rel="stylesheet" href="crypto-game.css">
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
 </head>
-<body class="dashboard">
+<body class="crypto-dashboard-page">
+    <!-- CRYPTO GAME PROTECTION FLAG -->
+    <div id="cryptoGameFlag" style="display: none;">CRYPTO_GAME_PAGE</div>
+    
     <div id="container">
         <!-- Loading Overlay -->
         <div class="loading-overlay" id="loadingOverlay">
@@ -30,7 +35,44 @@
         </button>
         
         <!-- Base Content Layers -->
-        <div id="map"></div>
+        <div id="map">
+            <div class="map-fallback-content">
+                <div class="map-central-card">
+                    <div class="map-card-icon">🗺️</div>
+                    <h2 class="map-title">$Ember Token Hunt</h2>
+                    <p class="map-description">
+                        Explore Phoenix to discover hidden $Ember tokens using AR technology.
+                    </p>
+                    <div class="map-location-box">
+                        <div class="map-location-label">YOUR LOCATION</div>
+                        <div class="map-location-coords">
+                            <span id="fallbackLat">33.4484</span>, <span id="fallbackLng">-112.0740</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-token-locations">
+                <div class="map-token-locations-label">$EMBER TOKENS NEARBY</div>
+                <div class="map-token-locations-icons">
+                    <div class="ember-token-display"></div>
+                    <div class="ember-flame-display"></div>
+                    <div class="ember-token-display"></div>
+                    <div class="ember-flame-display"></div>
+                    <div class="ember-token-display"></div>
+                </div>
+                <div class="map-token-locations-hint">Tap locations to navigate!</div>
+                <div class="map-locations-grid" id="tokenLocationGrid">
+                    <button class="token-location-btn">📍 Downtown Phoenix (500 $E)</button>
+                    <button class="token-location-btn">📍 Scottsdale Quarter (250 $E)</button>
+                    <button class="token-location-btn">📍 Tempe Town Lake (100 $E)</button>
+                    <button class="token-location-btn">📍 Old Town Scottsdale (150 $E)</button>
+                    <button class="token-location-btn">📍 ASU Campus (300 $E)</button>
+                    <button class="token-location-btn">📍 Sky Harbor Airport (75 $E)</button>
+                </div>
+            </div>
+        </div>
+        
         <video id="video" autoplay muted playsinline></video>
         <canvas id="canvas"></canvas>
         
@@ -75,7 +117,7 @@
         <div class="side-menu" id="sideMenu">
             <div class="menu-header">
                 <div class="menu-user">
-                    <div class="menu-avatar" id="menuAvatar"></div>
+                    <div class="menu-avatar" id="menuAvatar">P</div>
                     <div class="menu-user-info">
                         <div class="menu-user-name">Phoenix Hunter</div>
                         <div class="menu-user-email" id="menuUserEmail">demo@vaultphoenix.com</div>
@@ -312,7 +354,14 @@
                 </div>
                 
                 <div class="token-history" id="tokenHistory">
-                    <!-- Token history will be populated by JavaScript -->
+                    <div class="history-item">
+                        <div class="history-icon"></div>
+                        <div class="history-details">
+                            <div class="history-title">Welcome Bonus</div>
+                            <div class="history-subtitle">Vault Phoenix HQ • Today • LOW</div>
+                        </div>
+                        <div class="history-value">+50</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -395,59 +444,6 @@
             </div>
         </div>
         
-        <!-- Navigation Modal -->
-        <div class="navigation-modal" id="navigationModal">
-            <div class="navigation-content">
-                <div class="navigation-header">
-                    <div class="navigation-title">
-                        <span>🗺️</span>
-                        <span>Navigate to Token</span>
-                    </div>
-                    <div class="navigation-coin-info">
-                        <div class="navigation-coin-value" id="navTokenName">500 $Ember Token</div>
-                        <div class="navigation-distance" id="navDistance">~1.2km away</div>
-                    </div>
-                </div>
-                
-                <div class="navigation-options">
-                    <div class="navigation-option" id="navWalking">
-                        <div class="navigation-option-left">
-                            <div class="navigation-option-icon">🚶</div>
-                            <div class="navigation-option-info">
-                                <div class="navigation-option-title">Walking</div>
-                                <div class="navigation-option-subtitle">Apple/Google Maps</div>
-                            </div>
-                        </div>
-                        <div class="navigation-option-time" id="navWalkTime">~15 min</div>
-                    </div>
-                    
-                    <div class="navigation-option" id="navDriving">
-                        <div class="navigation-option-left">
-                            <div class="navigation-option-icon">🚗</div>
-                            <div class="navigation-option-info">
-                                <div class="navigation-option-title">Driving</div>
-                                <div class="navigation-option-subtitle">Apple/Google Maps</div>
-                            </div>
-                        </div>
-                        <div class="navigation-option-time" id="navDriveTime">~5 min</div>
-                    </div>
-                    
-                    <div class="navigation-option" id="navAR">
-                        <div class="navigation-option-left">
-                            <div class="navigation-option-icon">📱</div>
-                            <div class="navigation-option-info">
-                                <div class="navigation-option-title">AR Hunt Mode</div>
-                                <div class="navigation-option-subtitle">Camera + GPS</div>
-                            </div>
-                        </div>
-                        <div class="navigation-option-time">Live</div>
-                    </div>
-                </div>
-                
-                <button class="navigation-close" id="navClose">Close</button>
-            </div>
-        </div>
-        
         <!-- QR Code Modal -->
         <div class="qr-modal" id="qrModal">
             <div class="qr-modal-content">
@@ -511,6 +507,7 @@
         </nav>
     </div>
     
-    <script src="script.js"></script>
+    <!-- ISOLATED CRYPTO GAME JAVASCRIPT - NO EXTERNAL CONFLICTS -->
+    <script src="crypto-game.js"></script>
 </body>
 </html>
