@@ -656,12 +656,12 @@ if (window.isVaultPhoenixCryptoGame) {
                 if (elements.navEmberCount) elements.navEmberCount.textContent = this.totalTokenValue;
                 if (elements.menuEmberCount) elements.menuEmberCount.textContent = this.totalTokenValue;
                 if (elements.vaultBalance) elements.vaultBalance.textContent = `${this.totalTokenValue} $Ember Tokens`;
-                if (elements.vaultUsdValue) elements.vaultUsdValue.textContent = `${usdValue} USD`;
+                if (elements.vaultUsdValue) elements.vaultUsdValue.textContent = `$${usdValue} USD`;
                 if (elements.qrTokenAmount) elements.qrTokenAmount.textContent = `${this.totalTokenValue} $Ember`;
-                if (elements.qrTokenValue) elements.qrTokenValue.textContent = `${usdValue} USD`;
+                if (elements.qrTokenValue) elements.qrTokenValue.textContent = `$${usdValue} USD`;
                 if (elements.totalCollected) elements.totalCollected.textContent = this.collectedTokens.length;
                 if (elements.locationsVisited) elements.locationsVisited.textContent = this.locationsVisited;
-                if (elements.totalValue) elements.totalValue.textContent = `${usdValue}`;
+                if (elements.totalValue) elements.totalValue.textContent = `$${usdValue}`;
                 if (elements.lastActivity) {
                     if (this.lastActivityTime) {
                         const timeAgo = this.getTimeAgo(this.lastActivityTime);
@@ -813,7 +813,9 @@ if (window.isVaultPhoenixCryptoGame) {
             const timestamp = item.timestamp || (item.collectedAt ? new Date(item.collectedAt) : new Date());
             
             historyItem.innerHTML = `
-                <div class="history-icon"></div>
+                <div class="history-icon">
+                    <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="history-coin-icon" onerror="this.textContent='💎'">
+                </div>
                 <div class="history-details">
                     <div class="history-title">${item.name || item.location}</div>
                     <div class="history-subtitle">${item.location} • ${this.formatDate(timestamp)} • ${tierClass.toUpperCase()}</div>
@@ -1010,6 +1012,18 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
+        onWindowResize() {
+            try {
+                if (this.camera && this.renderer) {
+                    this.camera.aspect = window.innerWidth / window.innerHeight;
+                    this.camera.updateProjectionMatrix();
+                    this.renderer.setSize(window.innerWidth, window.innerHeight);
+                }
+            } catch (error) {
+                console.error('❌ Window resize error:', error);
+            }
+        }
+
         generateTokenLocations() {
             try {
                 // Use the pre-defined Phoenix locations
@@ -1169,6 +1183,23 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
+        calculateDistance(lat1, lng1, lat2, lng2) {
+            const R = 3959; // Earth's radius in miles
+            const dLat = this.toRadians(lat2 - lat1);
+            const dLng = this.toRadians(lng2 - lng1);
+            
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                     Math.cos(this.toRadians(lat1)) * Math.cos(this.toRadians(lat2)) *
+                     Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        toRadians(degrees) {
+            return degrees * (Math.PI / 180);
+        }
+
         isTokenCollected(tokenId) {
             return this.collectedTokens.some(token => token.id === tokenId);
         }
@@ -1276,24 +1307,17 @@ if (window.isVaultPhoenixCryptoGame) {
                 
                 this.hideProximityNotification();
                 
-                try {
-                    this.requestDevicePermissions().then(permissions => {
-                        console.log('📷🧭 Device permissions:', permissions);
-                        
-                        if (permissions.camera) {
-                            this.updateStatus('AR mode active - camera ready!', false);
-                        }
-                    }).catch(error => {
-                        console.error('❌ Device permissions failed:', error);
-                        this.updateStatus('❌ Camera access required for AR mode', true);
-                        return;
-                    });
+                this.requestDevicePermissions().then(permissions => {
+                    console.log('📷🧭 Device permissions:', permissions);
                     
-                } catch (error) {
+                    if (permissions.camera) {
+                        this.updateStatus('AR mode active - camera ready!', false);
+                    }
+                }).catch(error => {
                     console.error('❌ Device permissions failed:', error);
                     this.updateStatus('❌ Camera access required for AR mode', true);
                     return;
-                }
+                });
                 
                 this.showARInstructions();
                 
@@ -1348,9 +1372,235 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // Rest of the methods remain exactly the same as in your original file...
-        // [All other methods from the original script.js file continue unchanged]
+        // AR FUNCTIONALITY
+        showARInstructions() {
+            const instructions = document.getElementById('arInstructions');
+            if (instructions) {
+                instructions.classList.add('show');
+                setTimeout(() => {
+                    this.hideARInstructions();
+                }, 5000);
+            }
+        }
 
+        hideARInstructions() {
+            const instructions = document.getElementById('arInstructions');
+            if (instructions) {
+                instructions.classList.remove('show');
+            }
+        }
+
+        showTappableEmberCoin() {
+            const coin = document.getElementById('arEmberCoin');
+            if (coin) {
+                coin.style.display = 'block';
+                coin.classList.add('tappable');
+            }
+        }
+
+        hideEmberCoin() {
+            const coin = document.getElementById('arEmberCoin');
+            if (coin) {
+                coin.style.display = 'none';
+                coin.classList.remove('tappable');
+            }
+        }
+
+        onEmberCoinClick() {
+            console.log('💎 AR Ember coin clicked!');
+            
+            // Haptic feedback
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
+            // Hide the coin
+            this.hideEmberCoin();
+            
+            // Show token discovery modal
+            this.showRandomTokenDiscovery();
+        }
+
+        showRandomTokenDiscovery() {
+            // Select a random uncollected token
+            const uncollectedTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
+            
+            if (uncollectedTokens.length === 0) {
+                alert('🎉 All tokens collected! You are the ultimate $Ember hunter!');
+                return;
+            }
+            
+            const randomToken = uncollectedTokens[Math.floor(Math.random() * uncollectedTokens.length)];
+            this.showTokenDiscovery(randomToken);
+        }
+
+        showTokenDiscovery(token) {
+            this.currentDiscoveredToken = token;
+            
+            const modal = document.getElementById('tokenDiscovery');
+            const amountBadge = document.getElementById('tokenAmountBadge');
+            const tokenAmount = document.getElementById('discoveredTokenAmount');
+            const tokenUSD = document.getElementById('discoveredTokenUSD');
+            const tokenLocation = document.getElementById('discoveredTokenLocation');
+            
+            if (amountBadge) amountBadge.textContent = `${token.value} $Ember`;
+            if (tokenAmount) tokenAmount.textContent = `${token.value} $Ember`;
+            if (tokenUSD) tokenUSD.textContent = `~${(token.value * 0.001).toFixed(2)} USD`;
+            if (tokenLocation) tokenLocation.textContent = token.location;
+            
+            // Update sponsor info
+            const sponsorTitle = document.querySelector('.sponsor-title');
+            const sponsorText = document.querySelector('.sponsor-text');
+            const sponsorName = document.getElementById('sponsorDetailsName');
+            const sponsorDesc = document.getElementById('sponsorDetailsDescription');
+            
+            if (sponsorTitle) sponsorTitle.textContent = `Sponsored by ${token.sponsor}`;
+            if (sponsorText) sponsorText.textContent = token.message;
+            if (sponsorName) sponsorName.textContent = token.sponsor;
+            if (sponsorDesc) sponsorDesc.textContent = token.description;
+            
+            if (modal) {
+                modal.classList.add('show');
+            }
+        }
+
+        hideTokenDiscovery() {
+            const modal = document.getElementById('tokenDiscovery');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
+
+        collectToken() {
+            if (!this.currentDiscoveredToken) return;
+            
+            console.log('💰 Collecting token:', this.currentDiscoveredToken.location);
+            
+            // Add to collected tokens
+            const collectedToken = {
+                ...this.currentDiscoveredToken,
+                collectedAt: new Date().toISOString(),
+                timestamp: new Date()
+            };
+            
+            this.collectedTokens.push(collectedToken);
+            this.saveCollectedTokens();
+            
+            // Hide modal
+            this.hideTokenDiscovery();
+            
+            // Show success feedback
+            this.showCollectionSuccess(collectedToken);
+            
+            // Clear current token
+            this.currentDiscoveredToken = null;
+        }
+
+        showCollectionSuccess(token) {
+            // Haptic celebration
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200, 100, 200]);
+            }
+            
+            // Show success message
+            setTimeout(() => {
+                alert(`🎉 Token Collected!\n\n+${token.value} $Ember added to your vault!\n\nTotal: ${this.totalTokenValue} $Ember`);
+            }, 500);
+        }
+
+        showSponsorDetails() {
+            const frontInfo = document.getElementById('sponsorInfoFront');
+            const backInfo = document.getElementById('sponsorInfoBack');
+            
+            if (frontInfo && backInfo) {
+                frontInfo.style.display = 'none';
+                backInfo.style.display = 'block';
+                this.isShowingSponsorDetails = true;
+            }
+        }
+
+        hideSponsorDetails() {
+            const frontInfo = document.getElementById('sponsorInfoFront');
+            const backInfo = document.getElementById('sponsorInfoBack');
+            
+            if (frontInfo && backInfo) {
+                frontInfo.style.display = 'block';
+                backInfo.style.display = 'none';
+                this.isShowingSponsorDetails = false;
+            }
+        }
+
+        animate() {
+            if (!this.renderer || !this.scene || !this.camera) return;
+            
+            requestAnimationFrame(() => this.animate());
+            
+            try {
+                this.renderer.render(this.scene, this.camera);
+            } catch (error) {
+                console.error('❌ Animation error:', error);
+            }
+        }
+
+        async requestDevicePermissions() {
+            const permissions = {
+                camera: false,
+                compass: false
+            };
+
+            try {
+                const video = document.getElementById('video');
+                if (!video) throw new Error('Video element not found');
+                
+                const constraints = {
+                    video: {
+                        facingMode: 'environment',
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    }
+                };
+
+                this.cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                video.srcObject = this.cameraStream;
+                permissions.camera = true;
+                console.log('📷 Camera permission granted');
+
+                await new Promise((resolve) => {
+                    video.onloadedmetadata = () => {
+                        video.play();
+                        resolve();
+                    };
+                });
+
+                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    try {
+                        const compassPermission = await DeviceOrientationEvent.requestPermission();
+                        if (compassPermission === 'granted') {
+                            permissions.compass = true;
+                            this.setupOrientationListener();
+                            console.log('🧭 Compass permission granted');
+                        } else {
+                            console.log('❌ Compass permission denied, using fallback');
+                            this.setupFallbackCompass();
+                        }
+                    } catch (permissionError) {
+                        console.log('⚠️ Compass permission error, using fallback');
+                        this.setupFallbackCompass();
+                    }
+                } else {
+                    permissions.compass = true;
+                    console.log('🧭 Compass available without permission');
+                }
+
+            } catch (error) {
+                console.error('❌ Device permissions error:', error);
+                throw error;
+            }
+
+            return permissions;
+        }
+
+        // UTILITY METHODS
         goHome() {
             if (this.currentMode !== 'map') {
                 this.switchMode('map');
@@ -1459,6 +1709,21 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
+        // LOGOUT AND CLEANUP
+        showLogoutConfirmation() {
+            const overlay = document.getElementById('logoutOverlay');
+            if (overlay) {
+                overlay.classList.add('show');
+            }
+        }
+
+        hideLogoutConfirmation() {
+            const overlay = document.getElementById('logoutOverlay');
+            if (overlay) {
+                overlay.classList.remove('show');
+            }
+        }
+
         logout() {
             console.log('🚪 Logging out...');
             try {
@@ -1527,42 +1792,73 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        async requestDevicePermissions() {
-            const permissions = {
-                camera: false,
-                compass: false
-            };
+        // ADDITIONAL FEATURES
+        filterVault(filter) {
+            console.log('🔍 Filtering vault by:', filter);
+            
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+            
+            // Show filtered tokens
+            this.generateTokenHistory(filter);
+        }
 
-            try {
-                const video = document.getElementById('video');
-                if (!video) throw new Error('Video element not found');
-                
-                const constraints = {
-                    video: {
-                        facingMode: 'environment',
-                        width: { ideal: 1280 },
-                        height: { ideal: 720 }
-                    }
-                };
+        transferToCoinbase() {
+            if (this.totalTokenValue === 0) {
+                alert('⚠️ No $Ember tokens to transfer!');
+                return;
+            }
+            
+            alert(`🏦 Coinbase Transfer\n\nTransferring ${this.totalTokenValue} $Ember tokens to your Coinbase wallet...\n\nThis feature would integrate with Coinbase API in production.`);
+        }
 
-                this.cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
-                video.srcObject = this.cameraStream;
-                permissions.camera = true;
-                console.log('📷 Camera permission granted');
+        showQRCode() {
+            const modal = document.getElementById('qrModal');
+            if (modal) {
+                modal.classList.add('show');
+            }
+        }
 
-                await new Promise((resolve) => {
-                    video.onloadedmetadata = () => {
-                        video.play();
-                        resolve();
-                    };
-                });
+        hideQRCode() {
+            const modal = document.getElementById('qrModal');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
 
-                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    try {
-                        const compassPermission = await DeviceOrientationEvent.requestPermission();
-                        if (compassPermission === 'granted') {
-                            permissions.compass = true;
-                            this.setupOrientationListener();
-                            console.log('🧭 Compass permission granted');
-                        } else {
-                            console.log('❌ Compass permission denied, using fallback');
+        openCoinbaseWallet() {
+            alert('🏦 Coinbase Integration\n\nThis would open the Coinbase wallet integration for managing your $Ember tokens.');
+        }
+
+        hideNavigationModal() {
+            const modal = document.getElementById('navigationModal');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
+
+        openMapsNavigation(mode) {
+            console.log('🗺️ Opening maps navigation:', mode);
+            alert(`🗺️ Navigation\n\nThis would open ${mode} directions in your default maps app.`);
+        }
+
+        startARHunt() {
+            this.hideNavigationModal();
+            this.switchMode('ar');
+        }
+    }
+
+    // Initialize the game when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            new VaultPhoenixCryptoGame();
+        });
+    } else {
+        new VaultPhoenixCryptoGame();
+    }
+    
+} else {
+    console.log('🚫 Vault Phoenix blocked - not a crypto game page');
+}
