@@ -9,7 +9,6 @@
     <script src="session-protection.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="stylesheet" href="shared.css">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
 </head>
@@ -169,18 +168,18 @@
                     <div class="menu-section-title">Gaming</div>
                 </div>
                 
-                <div class="menu-item active" data-mode="map">
+                <div class="menu-item active" data-mode="map" id="menuMap">
                     <div class="menu-item-icon">🗺️</div>
                     <div class="menu-item-text">Token Hunt</div>
                 </div>
                 
-                <div class="menu-item" data-mode="ar">
+                <div class="menu-item" data-mode="ar" id="menuAR">
                     <div class="menu-item-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')">📱</div>
                     <div class="menu-item-text">AR Discovery</div>
                     <div class="menu-item-badge" id="nearbyTokens">Close to unlock</div>
                 </div>
                 
-                <div class="menu-item" data-mode="vault">
+                <div class="menu-item" data-mode="vault" id="menuVault">
                     <div class="menu-item-icon image" style="background-image: url('../images/PhoenixSafe.PNG')">🔒</div>
                     <div class="menu-item-text">$Ember Vault</div>
                     <div class="menu-item-badge" id="menuEmberCount">0</div>
@@ -190,7 +189,7 @@
                     <div class="menu-section-title">Adventures</div>
                 </div>
                 
-                <div class="menu-item" data-mode="campaigns">
+                <div class="menu-item" data-mode="campaigns" id="menuCampaigns">
                     <div class="menu-item-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')">🏆</div>
                     <div class="menu-item-text">Themed Adventures</div>
                     <div class="menu-item-badge">3 Active</div>
@@ -456,7 +455,7 @@
                     <div class="campaigns-subtitle">Curated $Ember token experiences around Phoenix</div>
                 </div>
 
-                <div class="active-adventures">
+                <div class="active-adventures" id="activeAdventures">
                     <div class="adventure-card active-adventure" data-adventure="phoenix-sports">
                         <div class="adventure-header">
                             <div class="adventure-icon">🏀</div>
@@ -523,7 +522,7 @@
             </div>
         </div>
         
-        <!-- Navigation Modal -->
+        <!-- Navigation Modal - FIXED IDs -->
         <div class="navigation-modal" id="navigationModal">
             <div class="navigation-content">
                 <div class="navigation-header">
@@ -622,19 +621,19 @@
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
             <div class="nav-tabs">
-                <div class="nav-tab active" data-mode="map">
+                <div class="nav-tab active" data-mode="map" id="tabMap">
                     <div class="nav-tab-icon">🗺️</div>
                     <div class="nav-tab-label">Hunt</div>
                 </div>
-                <div class="nav-tab" data-mode="ar">
+                <div class="nav-tab" data-mode="ar" id="tabAR">
                     <div class="nav-tab-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')">📱</div>
                     <div class="nav-tab-label">AR View</div>
                 </div>
-                <div class="nav-tab" data-mode="vault">
+                <div class="nav-tab" data-mode="vault" id="tabVault">
                     <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixSafe.PNG')">🔒</div>
                     <div class="nav-tab-label">Vault</div>
                 </div>
-                <div class="nav-tab" data-mode="campaigns">
+                <div class="nav-tab" data-mode="campaigns" id="tabCampaigns">
                     <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')">🏆</div>
                     <div class="nav-tab-label">Adventures</div>
                 </div>
