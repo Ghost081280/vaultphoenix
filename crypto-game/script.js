@@ -94,8 +94,22 @@ if (window.isVaultPhoenixCryptoGame) {
             this.tokenMarkers = [];
             this.infoWindows = [];
 
+            // UPDATED: Map pan/zoom properties
+            this.mapScale = 1;
+            this.mapTranslateX = 0;
+            this.mapTranslateY = 0;
+            this.isDraggingMap = false;
+            this.lastTouchX = 0;
+            this.lastTouchY = 0;
+            this.lastDistance = 0;
+            this.mapContainer = null;
+            this.isNearToken = false;
+
             // Enhanced Ember Token System with Real Locations and Value Tiers
+            // UPDATED: Added a nearby token for demo purposes
             this.emberTokens = [
+                // DEMO: Nearby token for AR mode demonstration
+                { id: 13, value: 100, tier: "low", location: "Phoenix Downtown Plaza", lat: 33.4485, lng: -112.0742, sponsor: "Demo Location", message: "You're close! Try AR mode!", description: "This is a demo token placed nearby to show AR functionality." },
                 { id: 1, value: 500, tier: "high", location: "Downtown Phoenix", lat: 33.4484, lng: -112.0740, sponsor: "Phoenix Suns Arena", message: "Exclusive courtside experience awaits!", description: "Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours." },
                 { id: 2, value: 250, tier: "medium", location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards unlocked!", description: "Discover luxury shopping with exclusive discounts and VIP personal shopping services." },
                 { id: 3, value: 100, tier: "low", location: "Tempe Town Lake", lat: 33.4255, lng: -111.9400, sponsor: "Local Coffee Co.", message: "Free coffee for early hunters!", description: "Enjoy artisanal coffee and cozy workspace with special $Ember holder benefits." },
@@ -477,7 +491,7 @@ if (window.isVaultPhoenixCryptoGame) {
                 }
 
                 // ALWAYS use demo map since Google Maps API isn't configured
-                console.log('🎮 Using demo map');
+                console.log('🎮 Using interactive demo map');
                 this.initializeDemoMap(mapContainer);
                 
             } catch (error) {
@@ -486,9 +500,9 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // FIXED: Demo map initialization
+        // UPDATED: Interactive demo map with pan/zoom
         initializeDemoMap(mapContainer = null) {
-            console.log('🎮 Initializing demo map...');
+            console.log('🎮 Initializing interactive demo map...');
             try {
                 const container = mapContainer || document.getElementById('googleMap');
                 if (!container) {
@@ -496,26 +510,42 @@ if (window.isVaultPhoenixCryptoGame) {
                     return;
                 }
 
-                console.log('🗺️ Creating demo map structure...');
+                console.log('🗺️ Creating interactive map structure...');
 
                 // Clear existing content
                 container.innerHTML = '';
 
-                // Create demo map HTML structure
+                // Create demo map HTML structure with streets and realistic elements
                 container.innerHTML = `
                     <div class="demo-loading-overlay">
-                        🗺️ Loading Phoenix $Ember Hunt Map...
+                        🗺️ Loading Phoenix Interactive Map...
                     </div>
-                    <div class="demo-map-container">
+                    <div class="demo-map-container" id="demoMapContainer">
                         <div class="demo-map-grid"></div>
+                        <div class="demo-map-streets">
+                            <div class="demo-street horizontal" style="top: 20%;"></div>
+                            <div class="demo-street horizontal" style="top: 40%;"></div>
+                            <div class="demo-street horizontal" style="top: 60%;"></div>
+                            <div class="demo-street horizontal" style="top: 80%;"></div>
+                            <div class="demo-street vertical" style="left: 25%;"></div>
+                            <div class="demo-street vertical" style="left: 50%;"></div>
+                            <div class="demo-street vertical" style="left: 75%;"></div>
+                        </div>
                         <div class="demo-phoenix-label">🏜️ Phoenix, Arizona</div>
                         <div class="demo-user-marker" title="Your Location - Phoenix, AZ"></div>
                         <div class="demo-map-markers" id="demoMarkers"></div>
                         <div class="demo-map-labels" id="demoLabels"></div>
                     </div>
+                    <div class="demo-map-controls">
+                        <button class="map-control-btn" id="zoomInBtn" title="Zoom In">+</button>
+                        <button class="map-control-btn" id="zoomOutBtn" title="Zoom Out">-</button>
+                    </div>
                 `;
 
-                console.log('✅ Demo map HTML structure created');
+                console.log('✅ Interactive map HTML structure created');
+
+                // Store map container reference
+                this.mapContainer = document.getElementById('demoMapContainer');
 
                 // CRITICAL: Force map container to be visible and properly positioned
                 container.style.display = 'block';
@@ -525,18 +555,21 @@ if (window.isVaultPhoenixCryptoGame) {
                 container.style.width = '100%';
                 container.style.height = '100%';
                 container.style.zIndex = '1';
-                container.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2d1810 25%, #451a03 50%, #7c2d12 75%, #0f0f0f 100%)';
 
-                console.log('✅ Demo map container styled and positioned');
+                // Setup map interactions
+                this.setupMapInteractions();
+
+                console.log('✅ Map interactions setup complete');
 
                 // Add demo token markers after a delay to let the map render
                 setTimeout(() => {
-                    console.log('🎯 Adding demo token markers...');
+                    console.log('🎯 Adding interactive token markers...');
                     this.addDemoTokenMarkers();
+                    this.checkTokenProximity(); // Check if near any tokens
                 }, 1000);
 
                 this.googleMapsLoaded = true;
-                console.log('✅ Demo map initialized successfully');
+                console.log('✅ Interactive demo map initialized successfully');
                 
             } catch (error) {
                 console.error('❌ Demo map initialization error:', error);
@@ -551,9 +584,133 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // FIXED: Demo token markers
+        // UPDATED: Setup pan and zoom interactions
+        setupMapInteractions() {
+            if (!this.mapContainer) return;
+
+            console.log('🖱️ Setting up map pan/zoom interactions...');
+
+            // Zoom controls
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => this.zoomMap(1.2));
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => this.zoomMap(0.8));
+            }
+
+            // Touch/mouse events for panning
+            this.mapContainer.addEventListener('mousedown', (e) => this.startMapDrag(e));
+            this.mapContainer.addEventListener('touchstart', (e) => this.startMapDrag(e), { passive: false });
+
+            document.addEventListener('mousemove', (e) => this.dragMap(e));
+            document.addEventListener('touchmove', (e) => this.dragMap(e), { passive: false });
+
+            document.addEventListener('mouseup', () => this.endMapDrag());
+            document.addEventListener('touchend', () => this.endMapDrag());
+
+            // Pinch-to-zoom for touch devices
+            this.mapContainer.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 2) {
+                    this.lastDistance = this.getDistance(e.touches[0], e.touches[1]);
+                }
+            }, { passive: false });
+
+            this.mapContainer.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 2) {
+                    e.preventDefault();
+                    const currentDistance = this.getDistance(e.touches[0], e.touches[1]);
+                    const scale = currentDistance / this.lastDistance;
+                    this.zoomMap(scale);
+                    this.lastDistance = currentDistance;
+                }
+            }, { passive: false });
+
+            // Mouse wheel zoom
+            this.mapContainer.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const scale = e.deltaY > 0 ? 0.9 : 1.1;
+                this.zoomMap(scale);
+            });
+
+            console.log('✅ Map interactions setup complete');
+        }
+
+        startMapDrag(e) {
+            if (e.touches && e.touches.length > 1) return; // Ignore multi-touch
+
+            this.isDraggingMap = true;
+            this.mapContainer.style.cursor = 'grabbing';
+
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            this.lastTouchX = clientX;
+            this.lastTouchY = clientY;
+
+            if (e.preventDefault) e.preventDefault();
+        }
+
+        dragMap(e) {
+            if (!this.isDraggingMap) return;
+
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            const deltaX = clientX - this.lastTouchX;
+            const deltaY = clientY - this.lastTouchY;
+
+            this.mapTranslateX += deltaX;
+            this.mapTranslateY += deltaY;
+
+            this.updateMapTransform();
+
+            this.lastTouchX = clientX;
+            this.lastTouchY = clientY;
+
+            if (e.preventDefault) e.preventDefault();
+        }
+
+        endMapDrag() {
+            this.isDraggingMap = false;
+            if (this.mapContainer) {
+                this.mapContainer.style.cursor = 'grab';
+            }
+        }
+
+        zoomMap(scale) {
+            // Constrain zoom levels
+            const newScale = Math.max(0.5, Math.min(3, this.mapScale * scale));
+            
+            if (newScale !== this.mapScale) {
+                this.mapScale = newScale;
+                this.updateMapTransform();
+
+                // Vibrate on zoom change
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            }
+        }
+
+        updateMapTransform() {
+            if (this.mapContainer) {
+                this.mapContainer.style.transform = `translate(${this.mapTranslateX}px, ${this.mapTranslateY}px) scale(${this.mapScale})`;
+            }
+        }
+
+        getDistance(touch1, touch2) {
+            const dx = touch1.clientX - touch2.clientX;
+            const dy = touch1.clientY - touch2.clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        // UPDATED: Demo token markers using VPEmberCoin.PNG
         addDemoTokenMarkers() {
-            console.log('💎 Adding demo token markers...');
+            console.log('💎 Adding demo token markers with VPEmberCoin.PNG...');
             try {
                 const markersContainer = document.getElementById('demoMarkers');
                 const labelsContainer = document.getElementById('demoLabels');
@@ -584,10 +741,12 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
+        // UPDATED: Use VPEmberCoin.PNG for token markers
         addDemoTokenMarker(token, index, markersContainer, labelsContainer) {
             try {
                 // Calculate position based on token data (simulate map positioning)
                 const positions = [
+                    { x: 52, y: 48 }, // DEMO: Nearby token (very close to user)
                     { x: 45, y: 60 }, // Downtown Phoenix
                     { x: 75, y: 25 }, // Scottsdale Quarter  
                     { x: 55, y: 85 }, // Tempe Town Lake
@@ -604,14 +763,34 @@ if (window.isVaultPhoenixCryptoGame) {
 
                 const position = positions[index] || { x: 50 + (index * 10) % 40, y: 50 + (index * 15) % 40 };
 
-                // Create marker element
+                // Create marker element with VPEmberCoin.PNG
                 const marker = document.createElement('div');
                 marker.className = `demo-token-marker ${token.tier}`;
                 marker.style.left = `${position.x}%`;
                 marker.style.top = `${position.y}%`;
-                marker.textContent = token.value;
                 marker.title = `${token.location} - ${token.value} $Ember`;
                 marker.dataset.tokenId = token.id;
+
+                // Create image element for VPEmberCoin.PNG
+                const tokenImage = document.createElement('img');
+                tokenImage.src = '../images/VPEmberCoin.PNG';
+                tokenImage.alt = 'Ember Coin';
+                tokenImage.className = 'demo-token-image';
+                tokenImage.onerror = function() {
+                    // Fallback to emoji if image fails to load
+                    this.style.display = 'none';
+                    marker.textContent = '💎';
+                    marker.style.fontSize = '16px';
+                    marker.style.color = '#f0a500';
+                };
+
+                // Create value overlay
+                const valueOverlay = document.createElement('div');
+                valueOverlay.className = 'demo-token-value';
+                valueOverlay.textContent = token.value;
+
+                marker.appendChild(tokenImage);
+                marker.appendChild(valueOverlay);
 
                 // Create label element
                 const label = document.createElement('div');
@@ -628,7 +807,7 @@ if (window.isVaultPhoenixCryptoGame) {
                     console.log('🎯 Demo marker clicked:', token.location);
                     
                     // Add visual feedback
-                    marker.style.transform = 'scale(1.5)';
+                    marker.style.transform = 'scale(1.3)';
                     marker.style.zIndex = '1000';
                     label.style.opacity = '1';
                     label.style.transform = 'translate(-50%, -100%) scale(1.2)';
@@ -645,9 +824,9 @@ if (window.isVaultPhoenixCryptoGame) {
                         token.lat, token.lng
                     );
                     
-                    // Show navigation modal after brief delay
+                    // Show token discovery modal instead of navigation
                     setTimeout(() => {
-                        this.showNavigationModal(token);
+                        this.showTokenDiscoveryModal(token);
                     }, 400);
                     
                     if (navigator.vibrate) {
@@ -672,13 +851,166 @@ if (window.isVaultPhoenixCryptoGame) {
                 // Animate marker appearance
                 setTimeout(() => {
                     marker.style.opacity = '1';
-                    marker.style.animation = `markerPulse 2s ease-in-out infinite ${index * 0.2}s`;
+                    marker.style.animation = `markerPulse 3s ease-in-out infinite ${index * 0.2}s`;
                 }, index * 150);
 
-                console.log(`📌 Added marker for ${token.location} at ${position.x}%, ${position.y}%`);
+                console.log(`📌 Added VPEmberCoin marker for ${token.location} at ${position.x}%, ${position.y}%`);
 
             } catch (error) {
                 console.error('❌ Demo token marker creation error:', error);
+            }
+        }
+
+        // UPDATED: Show token discovery modal when tapping coins
+        showTokenDiscoveryModal(token) {
+            console.log('🎯 Showing token discovery modal for:', token.location);
+            try {
+                const modal = document.getElementById('tokenDiscovery');
+                
+                // Update modal content
+                const tokenAmountBadge = document.getElementById('tokenAmountBadge');
+                const discoveredTokenAmount = document.getElementById('discoveredTokenAmount');
+                const discoveredTokenUSD = document.getElementById('discoveredTokenUSD');
+                const discoveredTokenLocation = document.getElementById('discoveredTokenLocation');
+                
+                if (tokenAmountBadge) tokenAmountBadge.textContent = `${token.value} $Ember`;
+                if (discoveredTokenAmount) discoveredTokenAmount.textContent = `${token.value} $Ember`;
+                if (discoveredTokenUSD) discoveredTokenUSD.textContent = `~$${(token.value * 0.001).toFixed(2)} USD`;
+                if (discoveredTokenLocation) discoveredTokenLocation.textContent = token.location;
+                
+                // Show modal
+                if (modal) {
+                    modal.classList.add('show');
+                }
+                
+                // Setup collect button
+                const collectBtn = document.getElementById('collectTokenBtn');
+                if (collectBtn) {
+                    collectBtn.onclick = () => {
+                        this.collectToken(token);
+                        this.hideTokenDiscoveryModal();
+                    };
+                }
+                
+                // Setup navigation button (remove AR hunt option)
+                const sponsorInfoBtn = document.getElementById('sponsorInfoBtn');
+                if (sponsorInfoBtn) {
+                    sponsorInfoBtn.onclick = () => {
+                        this.hideTokenDiscoveryModal();
+                        this.showNavigationModal(token);
+                    };
+                }
+                
+            } catch (error) {
+                console.error('❌ Token discovery modal error:', error);
+            }
+        }
+
+        hideTokenDiscoveryModal() {
+            const modal = document.getElementById('tokenDiscovery');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
+
+        collectToken(token) {
+            console.log('💎 Collecting token:', token.location, token.value);
+            
+            // Add to collected tokens
+            this.collectedTokens.push({
+                ...token,
+                collectedAt: new Date().toISOString()
+            });
+            
+            // Save and update UI
+            this.saveCollectedTokens();
+            
+            // Remove marker from map
+            const marker = document.querySelector(`[data-token-id="${token.id}"]`);
+            if (marker) {
+                marker.style.animation = 'none';
+                marker.style.transform = 'scale(0)';
+                marker.style.opacity = '0';
+                setTimeout(() => marker.remove(), 300);
+            }
+            
+            // Show success feedback
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+        }
+
+        // UPDATED: Check proximity to tokens and enable/disable AR mode
+        checkTokenProximity() {
+            console.log('📍 Checking token proximity...');
+            
+            // Find the nearest uncollected token
+            const uncollectedTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
+            
+            let nearestToken = null;
+            let minDistance = Infinity;
+            
+            uncollectedTokens.forEach(token => {
+                const distance = this.calculateDistance(
+                    this.userLat, this.userLng,
+                    token.lat, token.lng
+                );
+                
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestToken = token;
+                }
+            });
+            
+            // Check if within proximity threshold (0.1 km = 100 meters for demo)
+            const proximityThreshold = 0.1; // km
+            this.isNearToken = nearestToken && minDistance <= proximityThreshold;
+            
+            console.log('📍 Nearest token:', nearestToken?.location, 'Distance:', minDistance.toFixed(3), 'km');
+            console.log('📍 Is near token:', this.isNearToken);
+            
+            // Update AR mode availability
+            this.updateARModeAvailability();
+            
+            // Start proximity checking interval
+            if (!this.proximityCheckInterval) {
+                this.proximityCheckInterval = setInterval(() => {
+                    this.checkTokenProximity();
+                }, 5000); // Check every 5 seconds
+            }
+        }
+
+        // UPDATED: Enable/disable AR mode based on proximity
+        updateARModeAvailability() {
+            const arTab = document.querySelector('.nav-tab[data-mode="ar"]');
+            const arMenuItem = document.querySelector('.menu-item[data-mode="ar"]');
+            
+            if (this.isNearToken) {
+                // Enable AR mode - make it glow
+                if (arTab) {
+                    arTab.classList.add('near-token');
+                    arTab.classList.remove('disabled');
+                    arTab.style.pointerEvents = 'auto';
+                }
+                if (arMenuItem) {
+                    arMenuItem.classList.add('near-token');
+                    arMenuItem.style.pointerEvents = 'auto';
+                }
+                
+                console.log('✅ AR mode enabled - near token');
+            } else {
+                // Disable AR mode - grey it out
+                if (arTab) {
+                    arTab.classList.remove('near-token');
+                    arTab.classList.add('disabled');
+                    arTab.style.pointerEvents = 'none';
+                }
+                if (arMenuItem) {
+                    arMenuItem.classList.remove('near-token');
+                    arMenuItem.style.pointerEvents = 'none';
+                }
+                
+                console.log('⚪ AR mode disabled - not near token');
             }
         }
 
@@ -694,6 +1026,9 @@ if (window.isVaultPhoenixCryptoGame) {
                 if (this.googleMapsLoaded) {
                     this.addDemoTokenMarkers(); // Demo map
                 }
+                
+                // Recheck proximity after collecting token
+                this.checkTokenProximity();
                 
                 console.log('💾 Tokens saved:', this.collectedTokens.length, 'worth', this.totalTokenValue, '$Ember');
             } catch (error) {
@@ -723,8 +1058,9 @@ if (window.isVaultPhoenixCryptoGame) {
                 this.totalTokenValue = 0;
                 this.locationsVisited = 0;
                 this.lastActivityTime = null;
-                this.availableTokensCount = 12;
+                this.availableTokensCount = 13; // Updated for new demo token
                 this.currentDiscoveredToken = null;
+                this.isNearToken = false;
                 
                 // Reset adventure progress
                 this.themedAdventures.forEach(adventure => {
@@ -738,6 +1074,7 @@ if (window.isVaultPhoenixCryptoGame) {
                 this.updateAvailableTokensCount();
                 this.generateTokenHistory();
                 this.updateCampaignDisplay();
+                this.updateARModeAvailability();
                 
                 // Update map markers (demo)
                 if (this.googleMapsLoaded) {
@@ -828,7 +1165,7 @@ if (window.isVaultPhoenixCryptoGame) {
                 const loadingMessages = [
                     'Loading Game...',
                     'Connecting to Phoenix...',
-                    'Initializing Map System...',
+                    'Initializing Interactive Map...',
                     'Preparing Token Hunt...',
                     'Ready to Hunt!'
                 ];
@@ -898,8 +1235,8 @@ if (window.isVaultPhoenixCryptoGame) {
                 // Update available tokens count
                 this.updateAvailableTokensCount();
                 
-                // CRITICAL: Initialize demo map immediately
-                console.log('🗺️ Auto-initializing demo map for hunt screen...');
+                // CRITICAL: Initialize interactive demo map immediately
+                console.log('🗺️ Auto-initializing interactive demo map...');
                 setTimeout(() => {
                     this.initializeDemoMap();
                 }, 500);
@@ -935,7 +1272,7 @@ if (window.isVaultPhoenixCryptoGame) {
                     
                     // Initialize demo map if not already done
                     if (!this.googleMapsLoaded) {
-                        console.log('🎮 Initializing demo map for hunt screen...');
+                        console.log('🎮 Initializing interactive demo map for hunt screen...');
                         this.initializeDemoMap(mapContainer);
                     }
                 }
@@ -1174,9 +1511,9 @@ if (window.isVaultPhoenixCryptoGame) {
                 </div>
             `;
 
-            // Add click handler
+            // Add click handler - show token discovery modal instead of navigation
             itemDiv.addEventListener('click', () => {
-                this.showNavigationModal(token);
+                this.showTokenDiscoveryModal(token);
                 
                 if (navigator.vibrate) {
                     navigator.vibrate(30);
@@ -1228,6 +1565,12 @@ if (window.isVaultPhoenixCryptoGame) {
                     if (driveTime) driveTime.textContent = `~${driveMinutes} min`;
                 }
                 
+                // Hide AR option in navigation modal (AR only available when near token)
+                const arOption = document.getElementById('navAR');
+                if (arOption) {
+                    arOption.style.display = 'none';
+                }
+                
                 if (modal) {
                     modal.classList.add('show');
                 }
@@ -1277,11 +1620,6 @@ if (window.isVaultPhoenixCryptoGame) {
             }
             
             console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
-        }
-
-        startARHunt() {
-            this.hideNavigationModal();
-            this.switchMode('ar');
         }
 
         // Additional utility methods for distance calculation
@@ -1436,7 +1774,6 @@ if (window.isVaultPhoenixCryptoGame) {
                     { id: 'navClose', event: 'click', handler: () => this.hideNavigationModal() },
                     { id: 'navWalking', event: 'click', handler: () => this.openMapsNavigation('walking') },
                     { id: 'navDriving', event: 'click', handler: () => this.openMapsNavigation('driving') },
-                    { id: 'navAR', event: 'click', handler: () => this.startARHunt() },
                     { id: 'resetGameBtn', event: 'click', handler: () => this.showResetGameConfirmation() },
                     { id: 'confirmResetGame', event: 'click', handler: () => this.resetGame() },
                     { id: 'cancelResetGame', event: 'click', handler: () => this.hideResetGameConfirmation() }
@@ -1449,19 +1786,35 @@ if (window.isVaultPhoenixCryptoGame) {
                     }
                 });
 
-                // Navigation tabs
+                // Navigation tabs - Updated to handle AR mode restrictions
                 document.querySelectorAll('.nav-tab').forEach(tab => {
                     tab.addEventListener('click', () => {
                         if (!tab.classList.contains('disabled')) {
-                            this.switchMode(tab.dataset.mode);
+                            const mode = tab.dataset.mode;
+                            
+                            // Check if trying to access AR mode when not near token
+                            if (mode === 'ar' && !this.isNearToken) {
+                                alert('🚫 AR Mode Unavailable\n\nYou need to be near a token location to use AR mode. Find a token on the map and get closer to unlock AR hunting!');
+                                return;
+                            }
+                            
+                            this.switchMode(mode);
                         }
                     });
                 });
 
-                // Menu items
+                // Menu items - Updated to handle AR mode restrictions
                 document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
                     item.addEventListener('click', () => {
-                        this.switchMode(item.dataset.mode);
+                        const mode = item.dataset.mode;
+                        
+                        // Check if trying to access AR mode when not near token
+                        if (mode === 'ar' && !this.isNearToken) {
+                            alert('🚫 AR Mode Unavailable\n\nYou need to be near a token location to use AR mode. Find a token on the map and get closer to unlock AR hunting!');
+                            return;
+                        }
+                        
+                        this.switchMode(mode);
                         this.closeMenu();
                     });
                 });
