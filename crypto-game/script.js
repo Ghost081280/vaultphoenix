@@ -1,4 +1,4 @@
-// Vault Phoenix AR Crypto Gaming - COMPLETE ISOLATED JAVASCRIPT
+// Vault Phoenix AR Crypto Gaming - COMPLETE WORKING JAVASCRIPT
 // PROTECTION: Only affects crypto-game/ folder - prevents main site interference
 // FILE PATH: crypto-game/script.js
 
@@ -93,8 +93,8 @@ if (window.isVaultPhoenixCryptoGame) {
 
             // Enhanced Ember Token System with Real Locations and Value Tiers
             this.emberTokens = [
-                // DEMO: Nearby token for AR mode demonstration
-                { id: 13, value: 100, tier: "low", location: "Phoenix Downtown Plaza", lat: 33.4485, lng: -112.0742, sponsor: "Demo Location", message: "You're close! Try AR mode!", description: "This is a demo token placed nearby to show AR functionality." },
+                // DEMO: Nearby token for AR mode demonstration - FIXED POSITIONING
+                { id: 13, value: 100, tier: "low", location: "Phoenix Downtown Plaza", lat: 33.4486, lng: -112.0742, sponsor: "Demo Location", message: "You're close! Try AR mode!", description: "This is a demo token placed nearby to show AR functionality." },
                 { id: 1, value: 500, tier: "high", location: "Downtown Phoenix", lat: 33.4484, lng: -112.0740, sponsor: "Phoenix Suns Arena", message: "Exclusive courtside experience awaits!", description: "Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours." },
                 { id: 2, value: 250, tier: "medium", location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards unlocked!", description: "Discover luxury shopping with exclusive discounts and VIP personal shopping services." },
                 { id: 3, value: 50, tier: "low", location: "Desert Botanical Garden", lat: 33.4619, lng: -111.9463, sponsor: "Garden Cafe", message: "Nature-inspired dining experience!", description: "Farm-to-table dining surrounded by stunning desert flora." },
@@ -140,10 +140,10 @@ if (window.isVaultPhoenixCryptoGame) {
                     document.body.classList.add('crypto-dashboard-page');
                     this.setModeAttribute('map');
                     
-                    // Initialize Google Maps if API is already loaded
-                    if (window.googleMapsReady || (typeof google !== 'undefined' && google.maps)) {
-                        this.onGoogleMapsLoaded();
-                    }
+                    // Initialize demo map immediately
+                    setTimeout(() => {
+                        this.initializeGoogleMap();
+                    }, 500);
                     
                     console.log('✅ Dashboard initialized');
                 }
@@ -157,13 +157,7 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // =================== GOOGLE MAPS INTEGRATION ===================
-        onGoogleMapsLoaded() {
-            console.log('🗺️ Google Maps API is ready, initializing map...');
-            this.googleMapsLoaded = true;
-            this.initializeGoogleMap();
-        }
-
+        // =================== MAP SYSTEM ===================
         initializeGoogleMap() {
             console.log('🗺️ Initializing Map System...');
             try {
@@ -176,8 +170,8 @@ if (window.isVaultPhoenixCryptoGame) {
                 // Show loading overlay
                 this.showMapLoading();
 
-                // For demo purposes, always use demo map
-                console.log('🎮 Using enhanced demo map for demo experience...');
+                // Always use demo map for demo experience
+                console.log('🎮 Creating enhanced demo map...');
                 this.createDemoMap(mapContainer);
                 
             } catch (error) {
@@ -200,82 +194,6 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // Create real Google Map
-        createRealGoogleMap(mapContainer) {
-            console.log('🗺️ Creating real Google Map...');
-            try {
-                // Hide loading overlay
-                this.hideMapLoading();
-
-                // Create map centered on Phoenix
-                this.googleMap = new google.maps.Map(mapContainer, {
-                    center: { lat: this.userLat, lng: this.userLng },
-                    zoom: 12,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    styles: [
-                        {
-                            featureType: "all",
-                            elementType: "geometry.fill",
-                            stylers: [{ color: "#2c1810" }]
-                        },
-                        {
-                            featureType: "water",
-                            elementType: "geometry",
-                            stylers: [{ color: "#193047" }]
-                        },
-                        {
-                            featureType: "road",
-                            elementType: "geometry",
-                            stylers: [{ color: "#451a03" }]
-                        },
-                        {
-                            featureType: "landscape",
-                            elementType: "geometry",
-                            stylers: [{ color: "#2d1810" }]
-                        }
-                    ],
-                    disableDefaultUI: true,
-                    zoomControl: true,
-                    zoomControlOptions: {
-                        position: google.maps.ControlPosition.RIGHT_BOTTOM
-                    },
-                    gestureHandling: 'greedy'
-                });
-
-                // Add user marker
-                this.userMarker = new google.maps.Marker({
-                    position: { lat: this.userLat, lng: this.userLng },
-                    map: this.googleMap,
-                    title: 'Your Location - Phoenix, AZ',
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 8,
-                        fillColor: '#4285F4',
-                        fillOpacity: 1,
-                        strokeColor: '#ffffff',
-                        strokeWeight: 3
-                    },
-                    zIndex: 1000
-                });
-
-                // Add token markers
-                this.addTokenMarkers();
-
-                this.mapLoadingComplete = true;
-                
-                // Start game features after map loads
-                setTimeout(() => {
-                    this.startGameFeatures();
-                }, 1000);
-
-                console.log('✅ Real Google Map initialized successfully');
-                
-            } catch (error) {
-                console.error('❌ Real Google Map creation error:', error);
-                this.createDemoMap(mapContainer);
-            }
-        }
-
         // Create enhanced demo map that looks like a real map
         createDemoMap(mapContainer) {
             console.log('🎮 Creating enhanced demo map...');
@@ -285,7 +203,7 @@ if (window.isVaultPhoenixCryptoGame) {
 
                 // Create realistic demo map HTML
                 mapContainer.innerHTML = `
-                    <div class="demo-map-container" style="
+                    <div class="demo-map-container" id="demoMapContainer" style="
                         position: absolute;
                         top: 0;
                         left: 0;
@@ -439,7 +357,7 @@ if (window.isVaultPhoenixCryptoGame) {
                     this.addDemoTokenMarkers();
                     this.mapLoadingComplete = true;
                     this.startGameFeatures();
-                }, 800);
+                }, 1000);
 
                 console.log('✅ Enhanced demo map initialized successfully');
                 
@@ -448,66 +366,9 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // Add token markers to real Google Map
-        addTokenMarkers() {
-            console.log('💎 Adding token markers to Google Map...');
-            
-            this.emberTokens.forEach((token, index) => {
-                if (!this.isTokenCollected(token.id)) {
-                    const marker = new google.maps.Marker({
-                        position: { lat: token.lat, lng: token.lng },
-                        map: this.googleMap,
-                        title: `${token.location} - ${token.value} $Ember`,
-                        icon: {
-                            url: '../images/VPEmberCoin.PNG',
-                            scaledSize: new google.maps.Size(40, 40),
-                            origin: new google.maps.Point(0, 0),
-                            anchor: new google.maps.Point(20, 20)
-                        },
-                        zIndex: 100
-                    });
-
-                    // Create info window
-                    const infoWindow = new google.maps.InfoWindow({
-                        content: `
-                            <div style="padding: 10px; text-align: center;">
-                                <h3 style="margin: 0 0 5px 0; color: #f0a500;">${token.value} $Ember</h3>
-                                <p style="margin: 0 0 5px 0; font-weight: bold;">${token.location}</p>
-                                <p style="margin: 0; font-size: 12px; color: #666;">${token.sponsor}</p>
-                                <button onclick="vaultPhoenixApp.showNavigationModal(${JSON.stringify(token).replace(/"/g, '&quot;')})" 
-                                        style="margin-top: 10px; background: #f0a500; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
-                                    Navigate
-                                </button>
-                            </div>
-                        `
-                    });
-
-                    // Add click listener
-                    marker.addListener('click', () => {
-                        // Close all other info windows
-                        this.infoWindows.forEach(iw => iw.close());
-                        
-                        // Open this info window
-                        infoWindow.open(this.googleMap, marker);
-                        
-                        // Calculate distance for navigation
-                        token.distance = this.calculateDistance(
-                            this.userLat, this.userLng,
-                            token.lat, token.lng
-                        );
-                    });
-
-                    this.tokenMarkers.push({ marker, token, infoWindow });
-                    this.infoWindows.push(infoWindow);
-                }
-            });
-
-            console.log(`✅ Added ${this.tokenMarkers.length} token markers to Google Map`);
-        }
-
-        // Add demo token markers with mobile optimization
+        // Add demo token markers with proper desktop/mobile compatibility
         addDemoTokenMarkers() {
-            console.log('💎 Adding mobile-optimized demo token markers...');
+            console.log('💎 Adding demo token markers...');
             try {
                 const markersContainer = document.getElementById('demoMarkers');
                 if (!markersContainer) {
@@ -517,7 +378,7 @@ if (window.isVaultPhoenixCryptoGame) {
 
                 markersContainer.innerHTML = '';
 
-                // Mobile-optimized positions - more spread out for touch
+                // FIXED positions for consistent display across devices
                 const positions = [
                     { x: 52, y: 48 }, // Demo nearby token - center
                     { x: 42, y: 32 }, // Downtown Phoenix - upper left
@@ -565,17 +426,15 @@ if (window.isVaultPhoenixCryptoGame) {
                             transform: translate(-50%, -50%);
                             -webkit-tap-highlight-color: transparent;
                             touch-action: manipulation;
-                            -webkit-transform: translate(-50%, -50%) translate3d(0,0,0);
-                            will-change: transform;
-                            opacity: 0;
+                            opacity: 1;
                         `;
                         marker.title = `${token.location} - ${token.value} $Ember`;
                         marker.dataset.tokenId = token.id;
 
+                        // Token image
                         const tokenImage = document.createElement('img');
                         tokenImage.src = '../images/VPEmberCoin.PNG';
                         tokenImage.alt = 'Ember Coin';
-                        tokenImage.className = 'demo-token-image';
                         tokenImage.style.cssText = `
                             width: 38px;
                             height: 38px;
@@ -592,8 +451,8 @@ if (window.isVaultPhoenixCryptoGame) {
                             marker.style.fontWeight = 'bold';
                         };
 
+                        // Value overlay
                         const valueOverlay = document.createElement('div');
-                        valueOverlay.className = 'demo-token-value';
                         valueOverlay.style.cssText = `
                             position: absolute;
                             bottom: -14px;
@@ -616,8 +475,8 @@ if (window.isVaultPhoenixCryptoGame) {
                         marker.appendChild(tokenImage);
                         marker.appendChild(valueOverlay);
 
-                        // Enhanced mobile click handler
-                        marker.addEventListener('click', (e) => {
+                        // Click handler for both desktop and mobile
+                        const handleTokenClick = (e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             
@@ -644,61 +503,28 @@ if (window.isVaultPhoenixCryptoGame) {
                             if (navigator.vibrate) {
                                 navigator.vibrate([30, 10, 30]);
                             }
-                        });
+                        };
 
-                        // Touch event handlers for mobile
-                        marker.addEventListener('touchstart', (e) => {
-                            e.preventDefault();
-                            marker.style.transform = 'translate(-50%, -50%) scale(1.2)';
-                        }, { passive: false });
-
-                        marker.addEventListener('touchend', (e) => {
-                            e.preventDefault();
-                            setTimeout(() => {
-                                marker.style.transform = 'translate(-50%, -50%) scale(1)';
-                            }, 150);
-                        }, { passive: false });
+                        // Add event listeners
+                        marker.addEventListener('click', handleTokenClick);
+                        marker.addEventListener('touchend', handleTokenClick);
 
                         markersContainer.appendChild(marker);
                         markerCount++;
-
-                        // Animate appearance with staggered timing
-                        setTimeout(() => {
-                            marker.style.opacity = '1';
-                            marker.style.transform = 'translate(-50%, -50%) scale(1)';
-                        }, index * 200 + 500);
                     }
                 });
 
-                console.log(`✅ Added ${markerCount} mobile-optimized demo markers`);
+                console.log(`✅ Added ${markerCount} demo token markers`);
+                
+                // Add animation styles
+                this.addMapAnimationStyles();
+                
             } catch (error) {
                 console.error('❌ Demo token markers error:', error);
             }
         }
 
-        // Start game features after map loads
-        startGameFeatures() {
-            console.log('🎮 Starting game features...');
-            
-            // Add animation styles
-            this.addMapAnimationStyles();
-            
-            // Update location display with coordinates
-            this.updateLocationDisplay();
-            
-            // Start proximity checking
-            this.startProximityChecking();
-            
-            // Update nearby tokens display
-            this.updateNearbyTokens();
-            
-            // Update token counts
-            this.updateTokenCounts();
-            
-            console.log('✅ Game features started');
-        }
-
-        // Add CSS animations for map markers
+        // Add CSS keyframes for animations
         addMapAnimationStyles() {
             if (document.getElementById('mapAnimationStyles')) return;
             
@@ -716,9 +542,20 @@ if (window.isVaultPhoenixCryptoGame) {
                     }
                 }
                 
+                @keyframes userLocationPulse {
+                    0%, 100% { 
+                        transform: translate(-50%, -50%) scale(1);
+                        box-shadow: 0 3px 15px rgba(66, 133, 244, 0.8), 0 0 0 0 rgba(66, 133, 244, 0.4);
+                    }
+                    50% { 
+                        transform: translate(-50%, -50%) scale(1.1);
+                        box-shadow: 0 3px 15px rgba(66, 133, 244, 0.8), 0 0 0 20px rgba(66, 133, 244, 0);
+                    }
+                }
+                
                 .demo-token-marker:hover {
                     transform: translate(-50%, -50%) scale(1.15) !important;
-                    z-index: 25 !important;
+                    z-index: 100 !important;
                 }
                 
                 .demo-token-marker.high {
@@ -735,8 +572,37 @@ if (window.isVaultPhoenixCryptoGame) {
                     border-color: #4CAF50 !important;
                     box-shadow: 0 0 20px rgba(76, 175, 80, 0.6) !important;
                 }
+                
+                .map-control-btn:hover {
+                    background: rgba(240, 165, 0, 1) !important;
+                    transform: scale(1.05);
+                    box-shadow: 0 6px 16px rgba(240, 165, 0, 0.6) !important;
+                }
+                
+                .map-control-btn:active {
+                    transform: scale(0.95);
+                }
             `;
             document.head.appendChild(style);
+        }
+
+        // Start game features after map loads
+        startGameFeatures() {
+            console.log('🎮 Starting game features...');
+            
+            // Update location display with coordinates
+            this.updateLocationDisplay();
+            
+            // Start proximity checking
+            this.startProximityChecking();
+            
+            // Update nearby tokens display
+            this.updateNearbyTokens();
+            
+            // Update token counts
+            this.updateTokenCounts();
+            
+            console.log('✅ Game features started');
         }
 
         // Update location display
@@ -995,6 +861,32 @@ if (window.isVaultPhoenixCryptoGame) {
             }
             
             console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
+        }
+
+        // Setup map interactions
+        setupMapInteractions() {
+            if (!this.mapContainer) return;
+
+            console.log('🖱️ Setting up map interactions...');
+
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                    console.log('🔍 Zoom in clicked');
+                    // Add zoom functionality here if needed
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                    console.log('🔍 Zoom out clicked');
+                    // Add zoom functionality here if needed
+                });
+            }
+
+            console.log('✅ Map interactions setup complete');
         }
 
         // =================== LOGIN SYSTEM ===================
@@ -1559,13 +1451,3 @@ if (window.isVaultPhoenixCryptoGame) {
 } else {
     console.log('🚫 Vault Phoenix blocked - not a crypto game page');
 }
-
-// Make Google Maps callback available globally
-window.initMap = function() {
-    console.log('🗺️ Legacy Google Maps callback - redirecting to new handler');
-    if (window.vaultPhoenixApp && typeof window.vaultPhoenixApp.onGoogleMapsLoaded === 'function') {
-        window.vaultPhoenixApp.onGoogleMapsLoaded();
-    } else {
-        window.googleMapsReady = true;
-    }
-};
