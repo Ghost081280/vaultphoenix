@@ -9,7 +9,6 @@
     <script src="session-protection.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Using Demo Map for Demo Experience -->
     <link rel="stylesheet" href="shared.css">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
@@ -40,7 +39,7 @@
         
         <!-- Base Content Layers -->
         <div id="map" style="display: block;">
-            <!-- Google Maps Container - FIXED -->
+            <!-- Google Maps Container -->
             <div id="googleMapContainer" class="google-map-container">
                 <!-- Map will be initialized here by JavaScript -->
                 <div class="map-loading-overlay" id="mapLoadingOverlay">
@@ -49,9 +48,8 @@
                 </div>
             </div>
             
-            <!-- Map Overlay UI - GPS & CAMPAIGN INFO -->
+            <!-- Map Overlay UI -->
             <div class="map-overlay-ui">
-                <!-- Current Location Info Card -->
                 <div class="current-location-card">
                     <div class="location-header">
                         <div class="location-icon">📍</div>
@@ -66,8 +64,6 @@
                             <span>Ready</span>
                         </div>
                     </div>
-                    
-                    <!-- Campaign Info -->
                     <div class="campaign-info">
                         <div class="campaign-text">$Ember Tokens Available</div>
                         <div class="token-count" id="availableTokenCount">13 tokens</div>
@@ -77,7 +73,6 @@
             
             <!-- Swipeable Token Locations Module -->
             <div class="token-locations-module collapsed" id="tokenLocationsModule">
-                <!-- Swipe Handle -->
                 <div class="swipe-handle" id="swipeHandle">
                     <div class="handle-bar"></div>
                     <div class="handle-text">
@@ -85,8 +80,6 @@
                         <span class="handle-count" id="nearbyTokenCount">3 locations</span>
                     </div>
                 </div>
-                
-                <!-- Module Content -->
                 <div class="module-content" id="moduleContent">
                     <div class="module-header">
                         <div class="module-title">
@@ -95,11 +88,9 @@
                         </div>
                         <div class="total-available" id="totalAvailable">13 total available</div>
                     </div>
-                    
                     <div class="token-locations-list" id="tokenLocationsList">
                         <!-- Token locations will be populated by JavaScript -->
                     </div>
-                    
                     <div class="module-footer">
                         <div class="footer-hint">
                             <span class="hint-icon">ℹ️</span>
@@ -120,7 +111,7 @@
             </div>
         </div>
 
-        <!-- PROXIMITY NOTIFICATION - Shows when near token -->
+        <!-- Proximity Notification -->
         <div class="proximity-notification" id="proximityNotification">
             <div class="proximity-icon">
                 <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="proximity-coin-icon" onerror="this.textContent='💎'">
@@ -223,7 +214,6 @@
                     <div class="menu-section-title">Settings</div>
                 </div>
                 
-                <!-- RESET GAME BUTTON -->
                 <div class="menu-item reset-game-item" id="resetGameBtn">
                     <div class="menu-item-icon">🔄</div>
                     <div class="menu-item-text">Reset Game</div>
@@ -329,7 +319,7 @@
                         </div>
                         <div class="sponsor-name" id="sponsorDetailsName">Phoenix Suns Arena</div>
                         <div class="sponsor-description" id="sponsorDetailsDescription">
-                            Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours. Your $Ember tokens unlock premium experiences at Phoenix's premier entertainment destination.
+                            Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours.
                         </div>
                         
                         <div class="sponsor-offers">
@@ -652,7 +642,7 @@
         </nav>
     </div>
     
-    <!-- DASHBOARD JAVASCRIPT - SEPARATE FROM LOGIN -->
+    <!-- DASHBOARD JAVASCRIPT -->
     <script src="dashboard.js"></script>
 </body>
 </html>
