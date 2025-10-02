@@ -466,7 +466,7 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // GOOGLE MAPS INTEGRATION WITH DEMO FALLBACK
+        // GOOGLE MAPS INTEGRATION WITH DEMO FALLBACK - FIXED
         initializeGoogleMap() {
             console.log('🗺️ Initializing Google Maps...');
             try {
@@ -476,13 +476,9 @@ if (window.isVaultPhoenixCryptoGame) {
                     return;
                 }
 
-                if (typeof google !== 'undefined' && google.maps && google.maps.Map) {
-                    console.log('✅ Real Google Maps API detected');
-                    this.initializeRealGoogleMap(mapContainer);
-                } else {
-                    console.log('🎮 Using demo map fallback');
-                    this.initializeDemoMap(mapContainer);
-                }
+                // ALWAYS use demo map since Google Maps API isn't configured
+                console.log('🎮 Using demo map');
+                this.initializeDemoMap(mapContainer);
                 
             } catch (error) {
                 console.error('❌ Google Maps initialization error:', error);
@@ -490,77 +486,52 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        initializeRealGoogleMap(mapContainer) {
-            try {
-                // Create map centered on Phoenix
-                this.googleMap = new google.maps.Map(mapContainer, {
-                    center: { lat: this.userLat, lng: this.userLng },
-                    zoom: 12,
-                    styles: [
-                        {
-                            "featureType": "all",
-                            "elementType": "geometry.fill",
-                            "stylers": [{"color": "#1a1a1a"}]
-                        },
-                        {
-                            "featureType": "all",
-                            "elementType": "geometry.stroke",
-                            "stylers": [{"color": "#2d1810"}]
-                        },
-                        {
-                            "featureType": "all",
-                            "elementType": "labels.text.fill",
-                            "stylers": [{"color": "#f0a500"}]
-                        },
-                        {
-                            "featureType": "water",
-                            "elementType": "geometry.fill",
-                            "stylers": [{"color": "#0f0f0f"}]
-                        }
-                    ],
-                    disableDefaultUI: true,
-                    zoomControl: true,
-                    zoomControlOptions: {
-                        position: google.maps.ControlPosition.RIGHT_BOTTOM
-                    }
-                });
-
-                // Add user location marker
-                this.addUserLocationMarker();
-                
-                // Add token markers
-                this.addTokenMarkers();
-                
-                this.googleMapsLoaded = true;
-                console.log('✅ Real Google Maps initialized successfully');
-            } catch (error) {
-                console.error('❌ Real Google Maps error:', error);
-                this.initializeDemoMap(mapContainer);
-            }
-        }
-
+        // FIXED: Demo map initialization
         initializeDemoMap(mapContainer = null) {
             console.log('🎮 Initializing demo map...');
             try {
                 const container = mapContainer || document.getElementById('googleMap');
-                if (!container) return;
+                if (!container) {
+                    console.error('❌ Map container not found');
+                    return;
+                }
+
+                console.log('🗺️ Creating demo map structure...');
+
+                // Clear existing content
+                container.innerHTML = '';
 
                 // Create demo map HTML structure
                 container.innerHTML = `
                     <div class="demo-loading-overlay">
-                        🗺️ Loading Phoenix Map...
+                        🗺️ Loading Phoenix $Ember Hunt Map...
                     </div>
                     <div class="demo-map-container">
                         <div class="demo-map-grid"></div>
-                        <div class="demo-phoenix-label">🏜️ Phoenix, AZ</div>
-                        <div class="demo-user-marker" title="Your Location"></div>
+                        <div class="demo-phoenix-label">🏜️ Phoenix, Arizona</div>
+                        <div class="demo-user-marker" title="Your Location - Phoenix, AZ"></div>
                         <div class="demo-map-markers" id="demoMarkers"></div>
                         <div class="demo-map-labels" id="demoLabels"></div>
                     </div>
                 `;
 
-                // Add demo token markers
+                console.log('✅ Demo map HTML structure created');
+
+                // CRITICAL: Force map container to be visible and properly positioned
+                container.style.display = 'block';
+                container.style.position = 'absolute';
+                container.style.top = '0';
+                container.style.left = '0';
+                container.style.width = '100%';
+                container.style.height = '100%';
+                container.style.zIndex = '1';
+                container.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2d1810 25%, #451a03 50%, #7c2d12 75%, #0f0f0f 100%)';
+
+                console.log('✅ Demo map container styled and positioned');
+
+                // Add demo token markers after a delay to let the map render
                 setTimeout(() => {
+                    console.log('🎯 Adding demo token markers...');
                     this.addDemoTokenMarkers();
                 }, 1000);
 
@@ -569,9 +540,18 @@ if (window.isVaultPhoenixCryptoGame) {
                 
             } catch (error) {
                 console.error('❌ Demo map initialization error:', error);
+                // Fallback: Show basic map message
+                if (container) {
+                    container.innerHTML = `
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #f0a500; font-size: 16px; font-weight: 600;">
+                            🗺️ Phoenix Map Loading...
+                        </div>
+                    `;
+                }
             }
         }
 
+        // FIXED: Demo token markers
         addDemoTokenMarkers() {
             console.log('💎 Adding demo token markers...');
             try {
@@ -593,7 +573,7 @@ if (window.isVaultPhoenixCryptoGame) {
                 let markerCount = 0;
                 this.emberTokens.forEach((token, index) => {
                     if (!this.isTokenCollected(token.id)) {
-                        this.addDemoTokenMarker(token, markerCount, markersContainer, labelsContainer);
+                        this.addDemoTokenMarker(token, index, markersContainer, labelsContainer);
                         markerCount++;
                     }
                 });
@@ -710,13 +690,9 @@ if (window.isVaultPhoenixCryptoGame) {
                 this.updateVaultStats();
                 this.updateAvailableTokensCount();
                 
-                // Update map markers (both real and demo)
+                // Update map markers (demo)
                 if (this.googleMapsLoaded) {
-                    if (typeof google !== 'undefined' && google.maps && this.googleMap) {
-                        this.addTokenMarkers(); // Real Google Maps
-                    } else {
-                        this.addDemoTokenMarkers(); // Demo map
-                    }
+                    this.addDemoTokenMarkers(); // Demo map
                 }
                 
                 console.log('💾 Tokens saved:', this.collectedTokens.length, 'worth', this.totalTokenValue, '$Ember');
@@ -763,13 +739,9 @@ if (window.isVaultPhoenixCryptoGame) {
                 this.generateTokenHistory();
                 this.updateCampaignDisplay();
                 
-                // Update map markers (both real and demo)
+                // Update map markers (demo)
                 if (this.googleMapsLoaded) {
-                    if (typeof google !== 'undefined' && google.maps && this.googleMap) {
-                        this.addTokenMarkers(); // Real Google Maps
-                    } else {
-                        this.addDemoTokenMarkers(); // Demo map
-                    }
+                    this.addDemoTokenMarkers(); // Demo map
                 }
                 
                 // Hide any open modals
@@ -801,129 +773,175 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        addUserLocationMarker() {
+        updateAvailableTokensCount() {
             try {
-                if (!this.googleMap) return;
-
-                const userIcon = {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    fillColor: '#4285F4',
-                    fillOpacity: 1,
-                    strokeColor: '#ffffff',
-                    strokeWeight: 3,
-                    scale: 8
-                };
-
-                this.userMarker = new google.maps.Marker({
-                    position: { lat: this.userLat, lng: this.userLng },
-                    map: this.googleMap,
-                    icon: userIcon,
-                    title: 'Your Location',
-                    zIndex: 1000
-                });
-
-                console.log('📍 User location marker added');
+                // Calculate uncollected tokens
+                const collectedTokenIds = this.collectedTokens.map(token => token.id);
+                const uncollectedTokens = this.emberTokens.filter(token => !collectedTokenIds.includes(token.id));
+                this.availableTokensCount = uncollectedTokens.length;
+                
+                const availableTokensEl = document.getElementById('availableTokens');
+                if (availableTokensEl) {
+                    availableTokensEl.textContent = `${this.availableTokensCount} Available`;
+                }
+                
+                // Update nearby tokens display
+                this.updateNearbyTokens();
+                
+                console.log('📊 Available tokens updated:', this.availableTokensCount);
             } catch (error) {
-                console.error('❌ User marker error:', error);
+                console.error('❌ Available tokens update error:', error);
             }
         }
 
-        addTokenMarkers() {
+        // WELCOME SCREEN SYSTEM - FIXED TO AUTO-INITIALIZE MAP
+        showWelcomeScreen() {
+            console.log('👋 Showing welcome screen...');
             try {
-                if (!this.googleMap) return;
+                const welcomeBtn = document.getElementById('welcomeBtn');
+                const container = document.getElementById('container');
+                
+                if (!welcomeBtn || this.welcomeShown) return;
+                
+                // Disable navigation during welcome
+                if (container) container.classList.add('welcome-active');
+                
+                // Show welcome button
+                welcomeBtn.style.display = 'flex';
+                
+                // Start loading animation
+                this.startWelcomeLoading();
+                
+                this.welcomeShown = true;
+                
+            } catch (error) {
+                console.error('❌ Welcome screen error:', error);
+                this.hideWelcomeScreen();
+            }
+        }
 
-                // Clear existing markers
-                this.tokenMarkers.forEach(marker => marker.setMap(null));
-                this.tokenMarkers = [];
-                this.infoWindows.forEach(infoWindow => infoWindow.close());
-                this.infoWindows = [];
-
-                // Add markers for uncollected tokens only
-                this.emberTokens.forEach(token => {
-                    if (!this.isTokenCollected(token.id)) {
-                        this.addTokenMarker(token);
+        startWelcomeLoading() {
+            try {
+                const loadingFill = document.getElementById('welcomeLoadingFill');
+                const loadingText = document.getElementById('welcomeLoadingText');
+                
+                const loadingMessages = [
+                    'Loading Game...',
+                    'Connecting to Phoenix...',
+                    'Initializing Map System...',
+                    'Preparing Token Hunt...',
+                    'Ready to Hunt!'
+                ];
+                
+                let currentMessage = 0;
+                let progress = 0;
+                
+                const loadingInterval = setInterval(() => {
+                    progress += Math.random() * 15 + 5; // Random progress between 5-20%
+                    
+                    if (progress >= 100) {
+                        progress = 100;
+                        if (loadingFill) loadingFill.style.width = '100%';
+                        if (loadingText) loadingText.textContent = loadingMessages[4];
+                        
+                        clearInterval(loadingInterval);
+                        
+                        // Hide welcome screen after completion
+                        setTimeout(() => {
+                            this.hideWelcomeScreen();
+                        }, 800);
+                        
+                    } else {
+                        if (loadingFill) loadingFill.style.width = `${progress}%`;
+                        
+                        // Update loading message
+                        if (progress > currentMessage * 20 && currentMessage < 4) {
+                            currentMessage++;
+                            if (loadingText) loadingText.textContent = loadingMessages[currentMessage];
+                        }
                     }
-                });
-
-                console.log('💎 Token markers added to map');
+                }, 200);
+                
             } catch (error) {
-                console.error('❌ Token markers error:', error);
+                console.error('❌ Welcome loading error:', error);
+                this.hideWelcomeScreen();
             }
         }
 
-        addTokenMarker(token) {
+        hideWelcomeScreen() {
+            console.log('👋 Hiding welcome screen...');
             try {
-                // Create custom marker icon based on tier
-                const markerIcon = {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    fillColor: this.getTierColor(token.tier),
-                    fillOpacity: 0.9,
-                    strokeColor: '#f0a500',
-                    strokeWeight: 3,
-                    scale: 12
-                };
-
-                const marker = new google.maps.Marker({
-                    position: { lat: token.lat, lng: token.lng },
-                    map: this.googleMap,
-                    icon: markerIcon,
-                    title: `${token.location} - ${token.value} $Ember`,
-                    zIndex: 100
-                });
-
-                // Create info window
-                const infoWindow = new google.maps.InfoWindow({
-                    content: this.createTokenInfoContent(token)
-                });
-
-                // Add click listener
-                marker.addListener('click', () => {
-                    // Close all other info windows
-                    this.infoWindows.forEach(iw => iw.close());
-                    
-                    // Open this info window
-                    infoWindow.open(this.googleMap, marker);
-                    
-                    // Show navigation options after a brief delay
-                    setTimeout(() => {
-                        this.showNavigationModal(token);
-                    }, 500);
-                });
-
-                this.tokenMarkers.push(marker);
-                this.infoWindows.push(infoWindow);
-
+                const welcomeBtn = document.getElementById('welcomeBtn');
+                const container = document.getElementById('container');
+                
+                if (welcomeBtn) {
+                    welcomeBtn.style.display = 'none';
+                }
+                
+                // Re-enable navigation
+                if (container) container.classList.remove('welcome-active');
+                
+                // CRITICAL: Auto-start the game and initialize map
+                this.autoStartGame();
+                
             } catch (error) {
-                console.error('❌ Token marker creation error:', error);
+                console.error('❌ Welcome screen hide error:', error);
             }
         }
 
-        getTierColor(tier) {
-            switch (tier) {
-                case 'high': return '#ff6b6b';
-                case 'medium': return '#fb923c';
-                case 'low': return '#4CAF50';
-                default: return '#f0a500';
+        autoStartGame() {
+            console.log('🚀 Auto-starting game...');
+            try {
+                // Initialize game systems
+                this.start();
+                
+                // Update available tokens count
+                this.updateAvailableTokensCount();
+                
+                // CRITICAL: Initialize demo map immediately
+                console.log('🗺️ Auto-initializing demo map for hunt screen...');
+                setTimeout(() => {
+                    this.initializeDemoMap();
+                }, 500);
+                
+            } catch (error) {
+                console.error('❌ Auto-start error:', error);
             }
         }
 
-        createTokenInfoContent(token) {
-            return `
-                <div style="color: #333; padding: 8px; min-width: 200px;">
-                    <h4 style="margin: 0 0 8px 0; color: #f0a500;">${token.location}</h4>
-                    <p style="margin: 0 0 4px 0; font-weight: bold;">${token.value} $Ember Token</p>
-                    <p style="margin: 0 0 8px 0; font-size: 12px;">Sponsored by ${token.sponsor}</p>
-                    <p style="margin: 0; font-size: 11px; color: #666;">${token.message}</p>
-                </div>
-            `;
-        }
-
-        showMapFallback() {
-            console.log('🗺️ Showing map fallback');
-            // Keep the existing fallback content visible
-            const mapContainer = document.getElementById('googleMap');
-            if (mapContainer) {
-                mapContainer.style.display = 'none';
+        switchToMap() {
+            console.log('🗺️ Switching to Map mode');
+            try {
+                document.getElementById('map').style.display = 'block';
+                document.getElementById('video').style.display = 'none';
+                document.getElementById('canvas').style.display = 'none';
+                document.getElementById('vaultView').style.display = 'none';
+                document.getElementById('campaignsView').style.display = 'none';
+                
+                this.hideARInstructions();
+                this.hideEmberCoin();
+                this.stopCamera();
+                
+                // Show the swipeable module
+                const module = document.getElementById('tokenLocationsModule');
+                if (module) {
+                    module.style.display = 'block';
+                }
+                
+                // CRITICAL: Ensure map is visible and initialized
+                const mapContainer = document.getElementById('googleMap');
+                if (mapContainer) {
+                    mapContainer.style.display = 'block';
+                    
+                    // Initialize demo map if not already done
+                    if (!this.googleMapsLoaded) {
+                        console.log('🎮 Initializing demo map for hunt screen...');
+                        this.initializeDemoMap(mapContainer);
+                    }
+                }
+                
+            } catch (error) {
+                console.error('❌ Map switch error:', error);
             }
         }
 
@@ -1288,225 +1306,6 @@ if (window.isVaultPhoenixCryptoGame) {
             return this.collectedTokens.some(token => token.id === tokenId);
         }
 
-        // WELCOME SCREEN SYSTEM
-        showWelcomeScreen() {
-            console.log('👋 Showing welcome screen...');
-            try {
-                const welcomeBtn = document.getElementById('welcomeBtn');
-                const container = document.getElementById('container');
-                
-                if (!welcomeBtn || this.welcomeShown) return;
-                
-                // Disable navigation during welcome
-                if (container) container.classList.add('welcome-active');
-                
-                // Show welcome button
-                welcomeBtn.style.display = 'flex';
-                
-                // Start loading animation
-                this.startWelcomeLoading();
-                
-                this.welcomeShown = true;
-                
-            } catch (error) {
-                console.error('❌ Welcome screen error:', error);
-                this.hideWelcomeScreen();
-            }
-        }
-
-        startWelcomeLoading() {
-            try {
-                const loadingFill = document.getElementById('welcomeLoadingFill');
-                const loadingText = document.getElementById('welcomeLoadingText');
-                
-                const loadingMessages = [
-                    'Loading Game...',
-                    'Connecting to Phoenix...',
-                    'Initializing AR System...',
-                    'Preparing Token Hunt...',
-                    'Ready to Hunt!'
-                ];
-                
-                let currentMessage = 0;
-                let progress = 0;
-                
-                const loadingInterval = setInterval(() => {
-                    progress += Math.random() * 15 + 5; // Random progress between 5-20%
-                    
-                    if (progress >= 100) {
-                        progress = 100;
-                        if (loadingFill) loadingFill.style.width = '100%';
-                        if (loadingText) loadingText.textContent = loadingMessages[4];
-                        
-                        clearInterval(loadingInterval);
-                        
-                        // Hide welcome screen after completion
-                        setTimeout(() => {
-                            this.hideWelcomeScreen();
-                        }, 800);
-                        
-                    } else {
-                        if (loadingFill) loadingFill.style.width = `${progress}%`;
-                        
-                        // Update loading message
-                        if (progress > currentMessage * 20 && currentMessage < 4) {
-                            currentMessage++;
-                            if (loadingText) loadingText.textContent = loadingMessages[currentMessage];
-                        }
-                    }
-                }, 200);
-                
-            } catch (error) {
-                console.error('❌ Welcome loading error:', error);
-                this.hideWelcomeScreen();
-            }
-        }
-
-        hideWelcomeScreen() {
-            console.log('👋 Hiding welcome screen...');
-            try {
-                const welcomeBtn = document.getElementById('welcomeBtn');
-                const container = document.getElementById('container');
-                
-                if (welcomeBtn) {
-                    welcomeBtn.style.display = 'none';
-                }
-                
-                // Re-enable navigation
-                if (container) container.classList.remove('welcome-active');
-                
-                // Auto-start the game
-                this.autoStartGame();
-                
-            } catch (error) {
-                console.error('❌ Welcome screen hide error:', error);
-            }
-        }
-
-        autoStartGame() {
-            console.log('🚀 Auto-starting game...');
-            try {
-                // Initialize game systems
-                this.start();
-                
-                // Update available tokens count
-                this.updateAvailableTokensCount();
-                
-                // CRITICAL: Initialize map immediately for demo
-                console.log('🗺️ Initializing demo map for hunt screen...');
-                this.initializeDemoMap();
-                
-            } catch (error) {
-                console.error('❌ Auto-start error:', error);
-            }
-        }
-
-        switchToMap() {
-            console.log('🗺️ Switching to Map mode');
-            try {
-                document.getElementById('map').style.display = 'block';
-                document.getElementById('video').style.display = 'none';
-                document.getElementById('canvas').style.display = 'none';
-                document.getElementById('vaultView').style.display = 'none';
-                document.getElementById('campaignsView').style.display = 'none';
-                
-                this.hideARInstructions();
-                this.hideEmberCoin();
-                this.stopCamera();
-                
-                // Show the swipeable module
-                const module = document.getElementById('tokenLocationsModule');
-                if (module) {
-                    module.style.display = 'block';
-                }
-                
-                // CRITICAL: Ensure map is visible and initialized
-                const mapContainer = document.getElementById('googleMap');
-                if (mapContainer) {
-                    mapContainer.style.display = 'block';
-                    
-                    // Initialize demo map if not already done
-                    if (!this.googleMapsLoaded) {
-                        console.log('🎮 Initializing demo map for hunt screen...');
-                        this.initializeDemoMap();
-                    }
-                }
-                
-            } catch (error) {
-                console.error('❌ Map switch error:', error);
-            }
-        }
-
-        initializeDemoMap(mapContainer = null) {
-            console.log('🎮 Initializing demo map...');
-            try {
-                const container = mapContainer || document.getElementById('googleMap');
-                if (!container) {
-                    console.error('❌ Map container not found');
-                    return;
-                }
-
-                console.log('🗺️ Creating demo map structure...');
-
-                // Create demo map HTML structure
-                container.innerHTML = `
-                    <div class="demo-loading-overlay">
-                        🗺️ Loading Phoenix $Ember Hunt Map...
-                    </div>
-                    <div class="demo-map-container">
-                        <div class="demo-map-grid"></div>
-                        <div class="demo-phoenix-label">🏜️ Phoenix, Arizona</div>
-                        <div class="demo-user-marker" title="Your Location - Phoenix, AZ"></div>
-                        <div class="demo-map-markers" id="demoMarkers"></div>
-                        <div class="demo-map-labels" id="demoLabels"></div>
-                    </div>
-                `;
-
-                // Force container to be visible
-                container.style.display = 'block';
-                container.style.position = 'absolute';
-                container.style.top = '0';
-                container.style.left = '0';
-                container.style.width = '100%';
-                container.style.height = '100%';
-                container.style.zIndex = '1';
-
-                console.log('✅ Demo map container created');
-
-                // Add demo token markers after a short delay
-                setTimeout(() => {
-                    this.addDemoTokenMarkers();
-                }, 1500);
-
-                this.googleMapsLoaded = true;
-                console.log('✅ Demo map initialized successfully');
-                
-            } catch (error) {
-                console.error('❌ Demo map initialization error:', error);
-            }
-        }
-
-        updateAvailableTokensCount() {
-            try {
-                // Calculate uncollected tokens
-                const collectedTokenIds = this.collectedTokens.map(token => token.id);
-                const uncollectedTokens = this.emberTokens.filter(token => !collectedTokenIds.includes(token.id));
-                this.availableTokensCount = uncollectedTokens.length;
-                
-                const availableTokensEl = document.getElementById('availableTokens');
-                if (availableTokensEl) {
-                    availableTokensEl.textContent = `${this.availableTokensCount} Available`;
-                }
-                
-                // Update nearby tokens display
-                this.updateNearbyTokens();
-                
-                console.log('📊 Available tokens updated:', this.availableTokensCount);
-            } catch (error) {
-                console.error('❌ Available tokens update error:', error);
-            }
-        }
-
         // PLACEHOLDER METHODS - Add full implementation as needed
         ensureSession() { 
             console.log('🔍 Session management...');
@@ -1543,18 +1342,87 @@ if (window.isVaultPhoenixCryptoGame) {
             this.totalTokenValue = this.collectedTokens.reduce((total, token) => total + token.value, 0);
         }
 
+        calculateStats() {
+            // Calculate game statistics
+            this.locationsVisited = new Set(this.collectedTokens.map(token => token.location)).size;
+            if (this.collectedTokens.length > 0) {
+                this.lastActivityTime = new Date().toLocaleDateString();
+            }
+        }
+
         updateVaultStats() {
             console.log('📊 Updating vault stats...');
             try {
                 const elements = {
                     navEmberCount: document.getElementById('navEmberCount'),
-                    menuEmberCount: document.getElementById('menuEmberCount')
+                    menuEmberCount: document.getElementById('menuEmberCount'),
+                    vaultBalance: document.getElementById('vaultBalance'),
+                    vaultUsdValue: document.getElementById('vaultUsdValue'),
+                    totalCollected: document.getElementById('totalCollected'),
+                    locationsVisited: document.getElementById('locationsVisited'),
+                    totalValue: document.getElementById('totalValue'),
+                    lastActivity: document.getElementById('lastActivity')
                 };
                 
                 if (elements.navEmberCount) elements.navEmberCount.textContent = this.totalTokenValue;
                 if (elements.menuEmberCount) elements.menuEmberCount.textContent = this.totalTokenValue;
+                if (elements.vaultBalance) elements.vaultBalance.textContent = `${this.totalTokenValue} $Ember Tokens`;
+                if (elements.vaultUsdValue) elements.vaultUsdValue.textContent = `${(this.totalTokenValue * 0.001).toFixed(2)} USD`;
+                if (elements.totalCollected) elements.totalCollected.textContent = this.collectedTokens.length;
+                if (elements.locationsVisited) elements.locationsVisited.textContent = this.locationsVisited;
+                if (elements.totalValue) elements.totalValue.textContent = `${(this.totalTokenValue * 0.001).toFixed(2)}`;
+                if (elements.lastActivity) elements.lastActivity.textContent = this.lastActivityTime || 'Never';
+                
             } catch (error) {
                 console.error('❌ Vault stats update error:', error);
+            }
+        }
+
+        generateTokenHistory() {
+            console.log('📜 Generating token history...');
+            try {
+                const historyContainer = document.getElementById('tokenHistory');
+                if (!historyContainer) return;
+
+                // Clear existing history
+                historyContainer.innerHTML = '';
+
+                // Add welcome bonus if no tokens collected
+                if (this.collectedTokens.length === 0) {
+                    const welcomeItem = document.createElement('div');
+                    welcomeItem.className = 'history-item';
+                    welcomeItem.innerHTML = `
+                        <div class="history-icon">
+                            <img src="../images/VPEmberCoin.PNG" alt="Welcome Bonus" class="history-coin-icon" onerror="this.textContent='💎'">
+                        </div>
+                        <div class="history-details">
+                            <div class="history-title">Welcome Bonus</div>
+                            <div class="history-subtitle">Vault Phoenix HQ • Today • LOW</div>
+                        </div>
+                        <div class="history-value">+50</div>
+                    `;
+                    historyContainer.appendChild(welcomeItem);
+                }
+
+                // Add collected tokens to history
+                this.collectedTokens.forEach(token => {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = 'history-item';
+                    historyItem.innerHTML = `
+                        <div class="history-icon">
+                            <img src="../images/VPEmberCoin.PNG" alt="${token.location}" class="history-coin-icon" onerror="this.textContent='💎'">
+                        </div>
+                        <div class="history-details">
+                            <div class="history-title">${token.location}</div>
+                            <div class="history-subtitle">${token.sponsor} • Today • ${token.tier.toUpperCase()}</div>
+                        </div>
+                        <div class="history-value">+${token.value}</div>
+                    `;
+                    historyContainer.appendChild(historyItem);
+                });
+
+            } catch (error) {
+                console.error('❌ Token history generation error:', error);
             }
         }
 
@@ -1568,7 +1436,10 @@ if (window.isVaultPhoenixCryptoGame) {
                     { id: 'navClose', event: 'click', handler: () => this.hideNavigationModal() },
                     { id: 'navWalking', event: 'click', handler: () => this.openMapsNavigation('walking') },
                     { id: 'navDriving', event: 'click', handler: () => this.openMapsNavigation('driving') },
-                    { id: 'navAR', event: 'click', handler: () => this.startARHunt() }
+                    { id: 'navAR', event: 'click', handler: () => this.startARHunt() },
+                    { id: 'resetGameBtn', event: 'click', handler: () => this.showResetGameConfirmation() },
+                    { id: 'confirmResetGame', event: 'click', handler: () => this.resetGame() },
+                    { id: 'cancelResetGame', event: 'click', handler: () => this.hideResetGameConfirmation() }
                 ];
                 
                 handlers.forEach(({ id, event, handler }) => {
@@ -1601,14 +1472,58 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
+        showResetGameConfirmation() {
+            const overlay = document.getElementById('resetGameOverlay');
+            if (overlay) {
+                overlay.classList.add('show');
+            }
+        }
+
+        hideResetGameConfirmation() {
+            const overlay = document.getElementById('resetGameOverlay');
+            if (overlay) {
+                overlay.classList.remove('show');
+            }
+        }
+
         initializeVault() {
             console.log('💎 Initializing vault...');
-            // Add vault initialization logic here  
+            try {
+                this.generateTokenHistory();
+                
+                // Setup filter buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        const filter = btn.dataset.filter;
+                        this.filterTokenHistory(filter);
+                    });
+                });
+                
+            } catch (error) {
+                console.error('❌ Vault initialization error:', error);
+            }
+        }
+
+        filterTokenHistory(filter) {
+            console.log('🔍 Filtering token history:', filter);
+            // Add filtering logic here
         }
 
         initializeCampaigns() {
             console.log('🏆 Initializing campaigns...');
-            // Add campaigns initialization logic here
+            try {
+                this.updateCampaignDisplay();
+            } catch (error) {
+                console.error('❌ Campaigns initialization error:', error);
+            }
+        }
+
+        updateCampaignDisplay() {
+            console.log('🏆 Updating campaign display...');
+            // Add campaign display update logic here
         }
 
         addHapticFeedback() {
@@ -1790,6 +1705,8 @@ if (window.isVaultPhoenixCryptoGame) {
         // Utility methods that need to work
         hideARInstructions() { console.log('🔇 Hiding AR instructions'); }
         hideEmberCoin() { console.log('💎 Hiding ember coin'); }
+        hideTokenDiscovery() { console.log('🔍 Hiding token discovery'); }
+        hideProximityNotification() { console.log('📍 Hiding proximity notification'); }
         stopCamera() { console.log('📷 Stopping camera'); }
     }
 
