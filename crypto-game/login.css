@@ -1,4 +1,4 @@
-/* Vault Phoenix AR Crypto Gaming - LOGIN PAGE STYLES */
+/* Vault Phoenix AR Crypto Gaming - LOGIN PAGE STYLES (COMPLETE) */
 /* PROTECTION: Only affects crypto-game/ folder - prevents main site interference */
 /* FILE PATH: crypto-game/login.css */
 
@@ -333,6 +333,7 @@ body.crypto-login-page::before {
     z-index: 2;
     min-height: 44px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
 }
 
 .crypto-login-page .form-input::placeholder {
@@ -402,6 +403,7 @@ body.crypto-login-page::before {
     margin-bottom: 12px;
     min-height: 44px;
     border: 2px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
 }
 
 .crypto-login-page .login-text-content {
@@ -626,6 +628,7 @@ body.crypto-login-page::before {
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
+    box-sizing: border-box;
 }
 
 .crypto-login-page .error-message {
@@ -810,5 +813,234 @@ body.crypto-login-page::before {
     .crypto-login-page .login-container {
         align-self: center !important;
         justify-self: center !important;
+    }
+}
+
+/* CRITICAL FIX: Ensure form submission works */
+.crypto-login-page form {
+    width: 100%;
+}
+
+.crypto-login-page form input {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+
+/* Fix input autofill */
+.crypto-login-page .form-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5) inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Prevent double-tap zoom specifically */
+.crypto-login-page .login-button,
+.crypto-login-page .form-input,
+.crypto-login-page .forgot-password a {
+    touch-action: manipulation;
+}
+
+/* Force hardware acceleration for smooth animations */
+.crypto-login-page .login-container,
+.crypto-login-page .login-button,
+.crypto-login-page .form-input {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* ADDITIONAL ANIMATIONS AND POLISH */
+@keyframes flameFlicker {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 0.8;
+        box-shadow: 0 4px 16px rgba(240, 165, 0, 0.4);
+    }
+    25% { 
+        transform: scale(1.05) rotate(-2deg);
+        opacity: 0.9;
+        box-shadow: 0 5px 18px rgba(240, 165, 0, 0.5);
+    }
+    50% { 
+        transform: scale(1.1) rotate(2deg);
+        opacity: 1;
+        box-shadow: 0 6px 20px rgba(240, 165, 0, 0.6);
+    }
+    75% { 
+        transform: scale(1.05) rotate(-1deg);
+        opacity: 0.9;
+        box-shadow: 0 5px 18px rgba(240, 165, 0, 0.5);
+    }
+}
+
+@keyframes phoenixGlow {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    33% { 
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.7;
+    }
+    66% { 
+        transform: translate(-50%, -50%) scale(1.4);
+        opacity: 0.8;
+    }
+}
+
+@keyframes phoenixFloat {
+    0%, 100% { 
+        transform: translateY(0px) translateX(0px) scale(1) rotate(0deg); 
+        opacity: 0.25; 
+    }
+    20% { 
+        transform: translateY(-15px) translateX(10px) scale(1.05) rotate(45deg); 
+        opacity: 0.35; 
+    }
+    40% { 
+        transform: translateY(-30px) translateX(20px) scale(1.15) rotate(90deg); 
+        opacity: 0.4; 
+    }
+    60% { 
+        transform: translateY(-20px) translateX(-25px) scale(0.85) rotate(180deg); 
+        opacity: 0.3; 
+    }
+    80% { 
+        transform: translateY(-35px) translateX(30px) scale(1.2) rotate(270deg); 
+        opacity: 0.45; 
+    }
+}
+
+@keyframes messageSlideIn {
+    0% { 
+        opacity: 0; 
+        transform: translateY(-12px) scale(0.9);
+        filter: blur(4px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(-4px) scale(0.98);
+        filter: blur(2px);
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+        filter: blur(0px);
+    }
+}
+
+/* ENHANCED ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+    .crypto-login-page *,
+    .crypto-login-page *::before,
+    .crypto-login-page *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .crypto-login-page .floating-coin {
+        animation: none !important;
+        opacity: 0.2 !important;
+    }
+    
+    .crypto-login-page .phoenix-glow-bg {
+        animation: none !important;
+    }
+    
+    .crypto-login-page .phoenix-flame-decoration {
+        animation: none !important;
+    }
+}
+
+/* HIGH CONTRAST MODE */
+@media (prefers-contrast: high) {
+    .crypto-login-page .login-container {
+        border: 3px solid #f0a500;
+        background: rgba(0, 0, 0, 0.95);
+    }
+    
+    .crypto-login-page .form-input {
+        border: 2px solid #f0a500;
+        background: rgba(0, 0, 0, 0.9);
+    }
+    
+    .crypto-login-page .login-button {
+        border: 2px solid #ffffff;
+    }
+}
+
+/* PRINT STYLES */
+@media print {
+    .crypto-login-page {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .crypto-login-page .floating-elements,
+    .crypto-login-page .phoenix-glow-bg,
+    .crypto-login-page .phoenix-flame-decoration {
+        display: none !important;
+    }
+    
+    .crypto-login-page .login-container {
+        background: white !important;
+        border: 2px solid black !important;
+        box-shadow: none !important;
+    }
+}
+
+/* FOCUS MANAGEMENT FOR KEYBOARD USERS */
+.crypto-login-page .form-input:focus-visible {
+    outline: 3px solid #f0a500;
+    outline-offset: 2px;
+}
+
+.crypto-login-page .login-button:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+.crypto-login-page .forgot-password a:focus-visible {
+    outline: 2px solid #f0a500;
+    outline-offset: 1px;
+}
+
+/* ENSURE TEXT REMAINS SELECTABLE WHERE NEEDED */
+.crypto-login-page .app-title,
+.crypto-login-page .app-subtitle,
+.crypto-login-page .demo-credentials,
+.crypto-login-page .features-title,
+.crypto-login-page .feature-text,
+.crypto-login-page .error-message,
+.crypto-login-page .success-message {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+
+/* FINAL POLISH AND PERFORMANCE OPTIMIZATIONS */
+.crypto-login-page .login-container,
+.crypto-login-page .app-logo,
+.crypto-login-page .form-input,
+.crypto-login-page .login-button {
+    contain: layout style paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* ENSURE CRISP RENDERING ON HIGH-DPI DISPLAYS */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .crypto-login-page .logo-image,
+    .crypto-login-page .demo-coin-icon,
+    .crypto-login-page .login-flame-icon,
+    .crypto-login-page .feature-coin,
+    .crypto-login-page .feature-safe,
+    .crypto-login-page .feature-money {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
     }
 }
