@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Vault Phoenix - AR Crypto Gaming Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=geometry"></script>
     <link rel="stylesheet" href="shared.css">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
@@ -35,98 +37,60 @@
         
         <!-- Base Content Layers -->
         <div id="map" style="display: block;">
-            <div class="map-fallback-content">
-                <div class="map-central-card">
-                    <div class="map-card-icon">
-                        <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="map-ember-icon" onerror="this.textContent='💎'">
-                    </div>
-                    <h2 class="map-title">$Ember Token Hunt</h2>
-                    <p class="map-description">
-                        Explore Phoenix to discover hidden $Ember tokens using AR technology.
-                    </p>
-                    <div class="map-location-box">
-                        <div class="map-location-label">YOUR LOCATION</div>
-                        <div class="map-location-coords">
-                            <span id="fallbackLat">33.4484</span>, <span id="fallbackLng">-112.0740</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Enhanced Start Hunt Button -->
-                    <div class="map-action-section">
-                        <button class="start-hunt-button" onclick="vaultPhoenixApp?.switchMode('ar')">
-                            <img src="../images/IphoneVPLogo.PNG" alt="AR Mode" class="hunt-button-icon" onerror="this.textContent='📱'">
-                            <div class="hunt-button-content">
-                                <span class="hunt-button-main">Start AR Hunt</span>
-                                <span class="hunt-button-sub">Switch to Camera Mode</span>
+            <!-- Google Maps Container -->
+            <div id="googleMap" class="google-map-container"></div>
+            
+            <!-- Map Overlay UI -->
+            <div class="map-overlay-ui">
+                <!-- Current Location Info Card -->
+                <div class="current-location-card">
+                    <div class="location-header">
+                        <div class="location-icon">📍</div>
+                        <div class="location-info">
+                            <div class="location-title">Current Location</div>
+                            <div class="location-coords">
+                                <span id="fallbackLat">33.4484</span>, <span id="fallbackLng">-112.0740</span>
                             </div>
-                        </button>
+                        </div>
+                        <div class="location-status">
+                            <div class="status-dot active"></div>
+                            <span>GPS Ready</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="map-token-locations">
-                <div class="map-token-locations-label">$EMBER TOKENS NEARBY</div>
-                <div class="map-token-locations-icons">
-                    <div class="ember-token-display">
-                        <img src="../images/VPEmberCoin.PNG" alt="Ember Token" class="token-icon-small" onerror="this.textContent='💎'">
-                    </div>
-                    <div class="ember-flame-display">
-                        <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="flame-icon-small" onerror="this.textContent='🔥'">
-                    </div>
-                    <div class="ember-token-display">
-                        <img src="../images/VPEmberCoin.PNG" alt="Ember Token" class="token-icon-small" onerror="this.textContent='💎'">
-                    </div>
-                    <div class="ember-flame-display">
-                        <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="flame-icon-small" onerror="this.textContent='🔥'">
-                    </div>
-                    <div class="ember-token-display">
-                        <img src="../images/VPEmberCoin.PNG" alt="Ember Token" class="token-icon-small" onerror="this.textContent='💎'">
+            <!-- Swipeable Token Locations Module -->
+            <div class="token-locations-module" id="tokenLocationsModule">
+                <!-- Swipe Handle -->
+                <div class="swipe-handle" id="swipeHandle">
+                    <div class="handle-bar"></div>
+                    <div class="handle-text">
+                        <span class="handle-title">$Ember Tokens Nearby</span>
+                        <span class="handle-count" id="nearbyTokenCount">3 locations</span>
                     </div>
                 </div>
-                <div class="map-token-locations-hint">Tap locations to navigate!</div>
-                <div class="map-locations-grid" id="tokenLocationGrid">
-                    <button class="token-location-btn">
-                        <span class="location-icon">📍</span>
-                        <div class="location-details">
-                            <span class="location-name">Downtown Phoenix</span>
-                            <span class="location-reward">500 $E</span>
+                
+                <!-- Module Content -->
+                <div class="module-content" id="moduleContent">
+                    <div class="module-header">
+                        <div class="module-title">
+                            <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
+                            Nearest Token Locations
                         </div>
-                    </button>
-                    <button class="token-location-btn">
-                        <span class="location-icon">📍</span>
-                        <div class="location-details">
-                            <span class="location-name">Scottsdale Quarter</span>
-                            <span class="location-reward">250 $E</span>
+                        <div class="total-available" id="totalAvailable">8 total available</div>
+                    </div>
+                    
+                    <div class="token-locations-list" id="tokenLocationsList">
+                        <!-- Token locations will be populated by JavaScript -->
+                    </div>
+                    
+                    <div class="module-footer">
+                        <div class="footer-hint">
+                            <span class="hint-icon">ℹ️</span>
+                            <span>Tap any location to get directions</span>
                         </div>
-                    </button>
-                    <button class="token-location-btn">
-                        <span class="location-icon">📍</span>
-                        <div class="location-details">
-                            <span class="location-name">Tempe Town Lake</span>
-                            <span class="location-reward">100 $E</span>
-                        </div>
-                    </button>
-                    <button class="token-location-btn">
-                        <span class="location-icon">📍</span>
-                        <div class="location-details">
-                            <span class="location-name">Old Town Scottsdale</span>
-                            <span class="location-reward">150 $E</span>
-                        </div>
-                    </button>
-                    <button class="token-location-btn">
-                        <span class="location-icon">📍</span>
-                        <div class="location-details">
-                            <span class="location-name">ASU Campus</span>
-                            <span class="location-reward">300 $E</span>
-                        </div>
-                    </button>
-                    <button class="token-location-btn">
-                        <span class="location-icon">📍</span>
-                        <div class="location-details">
-                            <span class="location-name">Sky Harbor Airport</span>
-                            <span class="location-reward">75 $E</span>
-                        </div>
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -163,7 +127,7 @@
                     <div class="nav-logo" id="homeBtn">
                         <img src="../images/VPLogoNoText.PNG" alt="Phoenix Logo" class="nav-logo-image" onerror="this.textContent='🔥'">
                     </div>
-                    <div class="nav-title">Vault Phoenix</div>
+                    <div class="nav-title">$Ember Hunt</div>
                 </div>
                 <div class="nav-actions">
                     <div class="vault-badge" id="vaultBadge" onclick="vaultPhoenixApp?.switchMode('vault')">
@@ -267,7 +231,7 @@
                     <div class="status-value" id="gpsStatus">
                         <div class="status-indicator">
                             <div class="status-dot active"></div>
-                            <span>Ready to start!</span>
+                            <span>Ready to hunt!</span>
                         </div>
                     </div>
                 </div>
@@ -554,7 +518,7 @@
             </div>
         </div>
         
-        <!-- Navigation Modal -->
+        <!-- Navigation Modal for Driving/Walking Directions -->
         <div class="navigation-modal" id="navigationModal">
             <div class="navigation-content">
                 <div class="navigation-header">
