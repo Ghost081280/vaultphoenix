@@ -165,28 +165,23 @@ if (window.isVaultPhoenixCryptoGame) {
         }
 
         initializeGoogleMap() {
-            console.log('🗺️ Initializing Google Maps...');
+            console.log('🗺️ Initializing Map System...');
             try {
                 const mapContainer = document.getElementById('googleMapContainer');
                 if (!mapContainer) {
-                    console.error('❌ Google Map container not found');
+                    console.error('❌ Map container not found');
                     return;
                 }
 
                 // Show loading overlay
                 this.showMapLoading();
 
-                // Check if Google Maps API is loaded
-                if (typeof google !== 'undefined' && google.maps) {
-                    console.log('✅ Google Maps API detected, creating real map...');
-                    this.createRealGoogleMap(mapContainer);
-                } else {
-                    console.log('⚠️ Google Maps API not available, using demo map...');
-                    this.createDemoMap(mapContainer);
-                }
+                // For demo purposes, always use demo map
+                console.log('🎮 Using enhanced demo map for demo experience...');
+                this.createDemoMap(mapContainer);
                 
             } catch (error) {
-                console.error('❌ Google Maps initialization error:', error);
+                console.error('❌ Map initialization error:', error);
                 this.createDemoMap(document.getElementById('googleMapContainer'));
             }
         }
@@ -281,14 +276,14 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // Create demo map as fallback
+        // Create enhanced demo map that looks like a real map
         createDemoMap(mapContainer) {
-            console.log('🎮 Creating demo map...');
+            console.log('🎮 Creating enhanced demo map...');
             try {
                 // Hide loading overlay
                 this.hideMapLoading();
 
-                // Create demo map HTML
+                // Create realistic demo map HTML
                 mapContainer.innerHTML = `
                     <div class="demo-map-container" style="
                         position: absolute;
@@ -296,62 +291,157 @@ if (window.isVaultPhoenixCryptoGame) {
                         left: 0;
                         width: 100%;
                         height: 100%;
-                        background: linear-gradient(135deg, #d4a574 0%, #e6c896 25%, #f0d4a8 50%, #f5e2bf 75%, #faf0d1 100%);
+                        background: linear-gradient(135deg, #f2e8d3 0%, #e8dcc7 25%, #ddd1bb 50%, #d1c5af 75%, #c5b9a3 100%);
                         overflow: hidden;
                         z-index: 1;
+                        cursor: grab;
                     ">
-                        <div class="demo-map-grid" style="
+                        <!-- Road Network -->
+                        <div class="demo-roads" style="
                             position: absolute;
                             top: 0;
                             left: 0;
                             width: 100%;
                             height: 100%;
-                            background-image: 
-                                linear-gradient(rgba(139, 69, 19, 0.3) 1px, transparent 1px),
-                                linear-gradient(90deg, rgba(139, 69, 19, 0.3) 1px, transparent 1px);
-                            background-size: 50px 50px;
-                            opacity: 0.4;
-                        "></div>
+                            z-index: 2;
+                        ">
+                            <!-- Major Highways -->
+                            <div style="position: absolute; top: 30%; left: 0; width: 100%; height: 3px; background: #8B4513; opacity: 0.8;"></div>
+                            <div style="position: absolute; top: 60%; left: 0; width: 100%; height: 3px; background: #8B4513; opacity: 0.8;"></div>
+                            <div style="position: absolute; left: 40%; top: 0; width: 3px; height: 100%; background: #8B4513; opacity: 0.8;"></div>
+                            <div style="position: absolute; left: 70%; top: 0; width: 3px; height: 100%; background: #8B4513; opacity: 0.8;"></div>
+                            
+                            <!-- Minor Roads -->
+                            <div style="position: absolute; top: 15%; left: 0; width: 100%; height: 1px; background: #A0522D; opacity: 0.6;"></div>
+                            <div style="position: absolute; top: 45%; left: 0; width: 100%; height: 1px; background: #A0522D; opacity: 0.6;"></div>
+                            <div style="position: absolute; top: 75%; left: 0; width: 100%; height: 1px; background: #A0522D; opacity: 0.6;"></div>
+                            <div style="position: absolute; left: 20%; top: 0; width: 1px; height: 100%; background: #A0522D; opacity: 0.6;"></div>
+                            <div style="position: absolute; left: 55%; top: 0; width: 1px; height: 100%; background: #A0522D; opacity: 0.6;"></div>
+                            <div style="position: absolute; left: 85%; top: 0; width: 1px; height: 100%; background: #A0522D; opacity: 0.6;"></div>
+                        </div>
                         
+                        <!-- Landmarks -->
+                        <div class="demo-landmarks" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3;">
+                            <!-- Downtown Phoenix -->
+                            <div style="position: absolute; left: 45%; top: 35%; width: 8px; height: 8px; background: #4A4A4A; border-radius: 2px;" title="Downtown Phoenix"></div>
+                            <div style="position: absolute; left: 44%; top: 33%; font-size: 10px; color: #333; font-weight: bold;">Downtown</div>
+                            
+                            <!-- Sky Harbor Airport -->
+                            <div style="position: absolute; left: 35%; top: 80%; width: 12px; height: 6px; background: #666; border-radius: 2px;" title="Sky Harbor Airport"></div>
+                            <div style="position: absolute; left: 32%; top: 77%; font-size: 9px; color: #333; font-weight: bold;">✈️ Sky Harbor</div>
+                            
+                            <!-- Scottsdale -->
+                            <div style="position: absolute; left: 70%; top: 25%; width: 6px; height: 6px; background: #8B4513; border-radius: 3px;" title="Scottsdale"></div>
+                            <div style="position: absolute; left: 67%; top: 22%; font-size: 9px; color: #333; font-weight: bold;">Scottsdale</div>
+                            
+                            <!-- Camelback Mountain -->
+                            <div style="position: absolute; left: 55%; top: 15%; width: 10px; height: 6px; background: #8B6914; border-radius: 50%;" title="Camelback Mtn"></div>
+                            <div style="position: absolute; left: 52%; top: 12%; font-size: 8px; color: #333; font-weight: bold;">🏔️ Camelback</div>
+                        </div>
+                        
+                        <!-- Phoenix Label -->
                         <div class="demo-phoenix-label" style="
                             position: absolute;
                             top: 10px;
                             left: 10px;
-                            color: rgba(139, 69, 19, 0.8);
-                            font-size: 16px;
-                            font-weight: 700;
+                            color: rgba(139, 69, 19, 0.9);
+                            font-size: 14px;
+                            font-weight: 800;
                             z-index: 5;
-                            background: rgba(255, 255, 255, 0.8);
-                            padding: 4px 8px;
-                            border-radius: 4px;
+                            background: rgba(255, 255, 255, 0.9);
+                            padding: 6px 12px;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                            border: 1px solid rgba(240, 165, 0, 0.3);
                         ">🏜️ Phoenix, Arizona</div>
                         
+                        <!-- Zoom Controls -->
+                        <div class="demo-map-controls" style="
+                            position: absolute;
+                            bottom: 20px;
+                            right: 20px;
+                            z-index: 20;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 8px;
+                        ">
+                            <button class="map-control-btn" id="zoomInBtn" title="Zoom In" style="
+                                width: 40px;
+                                height: 40px;
+                                background: rgba(240, 165, 0, 0.95);
+                                border: 2px solid rgba(255, 255, 255, 0.9);
+                                border-radius: 8px;
+                                color: white;
+                                font-size: 18px;
+                                font-weight: bold;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
+                                transition: all 0.2s ease;
+                            ">+</button>
+                            <button class="map-control-btn" id="zoomOutBtn" title="Zoom Out" style="
+                                width: 40px;
+                                height: 40px;
+                                background: rgba(240, 165, 0, 0.95);
+                                border: 2px solid rgba(255, 255, 255, 0.9);
+                                border-radius: 8px;
+                                color: white;
+                                font-size: 18px;
+                                font-weight: bold;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
+                                transition: all 0.2s ease;
+                            ">-</button>
+                        </div>
+                        
+                        <!-- User Location Marker -->
                         <div class="demo-user-marker" title="Your Location - Phoenix, AZ" style="
                             position: absolute;
                             top: 50%;
                             left: 50%;
-                            width: 24px;
-                            height: 24px;
+                            width: 20px;
+                            height: 20px;
                             background: #4285F4;
-                            border: 4px solid white;
+                            border: 3px solid white;
                             border-radius: 50%;
                             transform: translate(-50%, -50%);
-                            z-index: 30;
+                            z-index: 50;
                             box-shadow: 0 3px 15px rgba(66, 133, 244, 0.8);
+                            animation: userLocationPulse 2s ease-in-out infinite;
                         "></div>
                         
-                        <div class="demo-map-markers" id="demoMarkers" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 15;"></div>
+                        <!-- Token Markers Container -->
+                        <div class="demo-map-markers" id="demoMarkers" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 25;"></div>
                     </div>
                 `;
 
-                // Add demo token markers
+                // Ensure container is visible and properly styled
+                mapContainer.style.display = 'block';
+                mapContainer.style.position = 'absolute';
+                mapContainer.style.top = '0';
+                mapContainer.style.left = '0';
+                mapContainer.style.width = '100%';
+                mapContainer.style.height = '100%';
+                mapContainer.style.zIndex = '1';
+                mapContainer.style.overflow = 'hidden';
+
+                // Set up map interactions
+                this.mapContainer = mapContainer.querySelector('.demo-map-container');
+                this.setupMapInteractions();
+
+                // Add token markers after a brief delay
                 setTimeout(() => {
                     this.addDemoTokenMarkers();
                     this.mapLoadingComplete = true;
                     this.startGameFeatures();
-                }, 500);
+                }, 800);
 
-                console.log('✅ Demo map initialized successfully');
+                console.log('✅ Enhanced demo map initialized successfully');
                 
             } catch (error) {
                 console.error('❌ Demo map creation error:', error);
@@ -415,9 +505,9 @@ if (window.isVaultPhoenixCryptoGame) {
             console.log(`✅ Added ${this.tokenMarkers.length} token markers to Google Map`);
         }
 
-        // Add demo token markers
+        // Add demo token markers with mobile optimization
         addDemoTokenMarkers() {
-            console.log('💎 Adding demo token markers...');
+            console.log('💎 Adding mobile-optimized demo token markers...');
             try {
                 const markersContainer = document.getElementById('demoMarkers');
                 if (!markersContainer) {
@@ -427,28 +517,29 @@ if (window.isVaultPhoenixCryptoGame) {
 
                 markersContainer.innerHTML = '';
 
+                // Mobile-optimized positions - more spread out for touch
                 const positions = [
                     { x: 52, y: 48 }, // Demo nearby token - center
-                    { x: 45, y: 35 }, // Downtown Phoenix
-                    { x: 75, y: 25 }, // Scottsdale Quarter
-                    { x: 55, y: 85 }, // Desert Botanical Garden
-                    { x: 80, y: 30 }, // Old Town Scottsdale
-                    { x: 30, y: 70 }, // Arizona State University
-                    { x: 40, y: 90 }, // Phoenix Sky Harbor
-                    { x: 65, y: 15 }, // Camelback Mountain
-                    { x: 25, y: 55 }, // Roosevelt Row
-                    { x: 35, y: 40 }, // Tempe Town Lake
-                    { x: 70, y: 75 }, // Chase Field
-                    { x: 60, y: 65 }, // Papago Park
-                    { x: 70, y: 20 }  // Biltmore Fashion Park
+                    { x: 42, y: 32 }, // Downtown Phoenix - upper left
+                    { x: 78, y: 22 }, // Scottsdale Quarter - upper right
+                    { x: 58, y: 88 }, // Desert Botanical Garden - lower center
+                    { x: 82, y: 28 }, // Old Town Scottsdale - upper right
+                    { x: 28, y: 72 }, // Arizona State University - lower left
+                    { x: 38, y: 92 }, // Phoenix Sky Harbor - bottom left
+                    { x: 68, y: 12 }, // Camelback Mountain - top center
+                    { x: 22, y: 58 }, // Roosevelt Row - left center
+                    { x: 32, y: 38 }, // Tempe Town Lake - left center
+                    { x: 72, y: 78 }, // Chase Field - lower right
+                    { x: 62, y: 68 }, // Papago Park - center right
+                    { x: 75, y: 18 }  // Biltmore Fashion Park - upper right
                 ];
 
                 let markerCount = 0;
                 this.emberTokens.forEach((token, index) => {
                     if (!this.isTokenCollected(token.id)) {
                         const position = positions[index] || { 
-                            x: 50 + (index * 10) % 40, 
-                            y: 50 + (index * 15) % 40 
+                            x: 50 + (index * 15) % 35, 
+                            y: 50 + (index * 20) % 35 
                         };
 
                         const marker = document.createElement('div');
@@ -457,21 +548,26 @@ if (window.isVaultPhoenixCryptoGame) {
                             position: absolute;
                             left: ${position.x}%;
                             top: ${position.y}%;
-                            width: 40px;
-                            height: 40px;
+                            width: 44px;
+                            height: 44px;
                             cursor: pointer;
                             pointer-events: auto;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             transition: all 0.3s ease;
-                            z-index: 15;
+                            z-index: 25;
                             border-radius: 50%;
                             background: rgba(240, 165, 0, 0.1);
                             border: 3px solid rgba(240, 165, 0, 0.6);
                             box-shadow: 0 0 20px rgba(240, 165, 0, 0.6);
                             animation: markerPulse 3s ease-in-out infinite;
                             transform: translate(-50%, -50%);
+                            -webkit-tap-highlight-color: transparent;
+                            touch-action: manipulation;
+                            -webkit-transform: translate(-50%, -50%) translate3d(0,0,0);
+                            will-change: transform;
+                            opacity: 0;
                         `;
                         marker.title = `${token.location} - ${token.value} $Ember`;
                         marker.dataset.tokenId = token.id;
@@ -479,52 +575,62 @@ if (window.isVaultPhoenixCryptoGame) {
                         const tokenImage = document.createElement('img');
                         tokenImage.src = '../images/VPEmberCoin.PNG';
                         tokenImage.alt = 'Ember Coin';
+                        tokenImage.className = 'demo-token-image';
                         tokenImage.style.cssText = `
-                            width: 34px;
-                            height: 34px;
+                            width: 38px;
+                            height: 38px;
                             border-radius: 50%;
                             object-fit: cover;
                             filter: brightness(1.2) drop-shadow(0 3px 12px rgba(240, 165, 0, 0.8));
+                            pointer-events: none;
                         `;
                         tokenImage.onerror = function() {
                             this.style.display = 'none';
                             marker.textContent = '💎';
-                            marker.style.fontSize = '16px';
+                            marker.style.fontSize = '18px';
                             marker.style.color = '#f0a500';
+                            marker.style.fontWeight = 'bold';
                         };
 
                         const valueOverlay = document.createElement('div');
+                        valueOverlay.className = 'demo-token-value';
                         valueOverlay.style.cssText = `
                             position: absolute;
-                            bottom: -12px;
+                            bottom: -14px;
                             left: 50%;
                             transform: translateX(-50%);
                             background: linear-gradient(135deg, #f0a500, #fb923c);
                             color: white;
-                            font-size: 11px;
+                            font-size: 12px;
                             font-weight: 900;
-                            padding: 4px 8px;
+                            padding: 5px 9px;
                             border-radius: 12px;
                             border: 2px solid white;
                             white-space: nowrap;
                             pointer-events: none;
                             box-shadow: 0 3px 12px rgba(240, 165, 0, 0.6);
+                            z-index: 1;
                         `;
                         valueOverlay.textContent = `${token.value}`;
 
                         marker.appendChild(tokenImage);
                         marker.appendChild(valueOverlay);
 
-                        // Click handler
+                        // Enhanced mobile click handler
                         marker.addEventListener('click', (e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             
+                            console.log('💎 Token clicked:', token.location);
+                            
                             // Visual feedback
-                            marker.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                            marker.style.transform = 'translate(-50%, -50%) scale(1.3)';
+                            marker.style.zIndex = '100';
+                            
                             setTimeout(() => {
                                 marker.style.transform = 'translate(-50%, -50%) scale(1)';
-                            }, 300);
+                                marker.style.zIndex = '25';
+                            }, 200);
                             
                             // Calculate distance and show navigation modal
                             token.distance = this.calculateDistance(
@@ -534,22 +640,37 @@ if (window.isVaultPhoenixCryptoGame) {
                             
                             this.showNavigationModal(token);
                             
+                            // Haptic feedback
                             if (navigator.vibrate) {
-                                navigator.vibrate(30);
+                                navigator.vibrate([30, 10, 30]);
                             }
                         });
+
+                        // Touch event handlers for mobile
+                        marker.addEventListener('touchstart', (e) => {
+                            e.preventDefault();
+                            marker.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                        }, { passive: false });
+
+                        marker.addEventListener('touchend', (e) => {
+                            e.preventDefault();
+                            setTimeout(() => {
+                                marker.style.transform = 'translate(-50%, -50%) scale(1)';
+                            }, 150);
+                        }, { passive: false });
 
                         markersContainer.appendChild(marker);
                         markerCount++;
 
-                        // Animate appearance
+                        // Animate appearance with staggered timing
                         setTimeout(() => {
                             marker.style.opacity = '1';
-                        }, index * 150);
+                            marker.style.transform = 'translate(-50%, -50%) scale(1)';
+                        }, index * 200 + 500);
                     }
                 });
 
-                console.log(`✅ Added ${markerCount} demo token markers`);
+                console.log(`✅ Added ${markerCount} mobile-optimized demo markers`);
             } catch (error) {
                 console.error('❌ Demo token markers error:', error);
             }
