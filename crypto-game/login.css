@@ -143,13 +143,13 @@ body.crypto-login-page::before {
     border-radius: 20px;
 }
 
-/* Enhanced Phoenix flame decoration */
+/* ENHANCED: Phoenix flame decoration - NOW OUTSIDE CONTAINER */
 .crypto-login-page .phoenix-flame-decoration {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 36px;
-    height: 36px;
+    position: fixed;
+    top: calc(50% - 200px);
+    right: calc(50% - 200px);
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -157,14 +157,15 @@ body.crypto-login-page::before {
     border-radius: 50%;
     border: 2px solid rgba(240, 165, 0, 0.5);
     animation: flameFlicker 3.5s ease-in-out infinite;
-    z-index: 1;
+    z-index: 15;
     backdrop-filter: blur(12px);
     box-shadow: 0 4px 16px rgba(240, 165, 0, 0.4);
+    pointer-events: none;
 }
 
 .crypto-login-page .phoenix-flame-icon {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     filter: drop-shadow(0 2px 8px rgba(240, 165, 0, 0.6)) brightness(1.2);
 }
@@ -670,6 +671,18 @@ body.crypto-login-page::before {
         width: 84%;
     }
     
+    .crypto-login-page .phoenix-flame-decoration {
+        top: calc(50% - 180px);
+        right: calc(50% - 180px);
+        width: 44px;
+        height: 44px;
+    }
+    
+    .crypto-login-page .phoenix-flame-icon {
+        width: 26px;
+        height: 26px;
+    }
+    
     .crypto-login-page .app-logo {
         width: 44px;
         height: 44px;
@@ -736,6 +749,18 @@ body.crypto-login-page::before {
         width: 86%;
     }
     
+    .crypto-login-page .phoenix-flame-decoration {
+        top: calc(50% - 160px);
+        right: calc(50% - 160px);
+        width: 40px;
+        height: 40px;
+    }
+    
+    .crypto-login-page .phoenix-flame-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
     .crypto-login-page .app-logo {
         width: 40px;
         height: 40px;
@@ -788,6 +813,11 @@ body.crypto-login-page::before {
         max-height: 94vh;
         padding: 10px;
         max-width: 370px;
+    }
+    
+    .crypto-login-page .phoenix-flame-decoration {
+        top: calc(50% - 140px);
+        right: calc(50% - 140px);
     }
     
     .crypto-login-page .forgot-password {
