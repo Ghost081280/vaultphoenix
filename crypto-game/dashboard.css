@@ -2391,4 +2391,97 @@ body.crypto-dashboard-page {
     height: 60px;
     margin: 0 auto 12px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(240
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(251, 146, 60, 0.1));
+    border: 3px solid rgba(240, 165, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crypto-dashboard-page .qr-ember-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    filter: brightness(1.1);
+}
+
+.crypto-dashboard-page .qr-instructions {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+.crypto-dashboard-page .qr-token-info {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 12px;
+    padding: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.crypto-dashboard-page .qr-token-amount {
+    color: #f0a500;
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.crypto-dashboard-page .qr-token-value {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Logout Modal Specific */
+.crypto-dashboard-page .logout-modal-title {
+    color: white;
+    font-size: 18px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.crypto-dashboard-page .logout-modal-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.crypto-dashboard-page .logout-modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.crypto-dashboard-page .logout-modal-btn {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 44px;
+    border: none;
+}
+
+.crypto-dashboard-page .logout-modal-cancel {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    color: white;
+}
+
+.crypto-dashboard-page .logout-modal-confirm {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+}
+
+.crypto-dashboard-page .logout-modal-btn:active {
+    transform: scale(0.98);
+}
