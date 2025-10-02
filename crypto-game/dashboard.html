@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Vault Phoenix - AR Crypto Gaming Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Google Maps API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=geometry"></script>
+    <!-- Google Maps API with proper key -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBk_QpJ1q8v3m7f3b7C2kT8w9g2H6i4Z8o&callback=initMap&libraries=geometry"></script>
     <link rel="stylesheet" href="shared.css">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
@@ -37,30 +37,31 @@
         
         <!-- Base Content Layers -->
         <div id="map" style="display: block;">
-            <!-- Google Maps Container -->
+            <!-- Google Maps Container - ENHANCED -->
             <div id="googleMap" class="google-map-container"></div>
             
-            <!-- Map Overlay UI -->
+            <!-- Map Overlay UI - ENHANCED WITH GPS & CAMPAIGN INFO -->
             <div class="map-overlay-ui">
                 <!-- Current Location Info Card -->
                 <div class="current-location-card">
                     <div class="location-header">
                         <div class="location-icon">📍</div>
                         <div class="location-info">
-                            <div class="location-title">Current Location</div>
+                            <div class="location-title">GPS Active</div>
                             <div class="location-coords">
                                 <span id="fallbackLat">33.4484</span>, <span id="fallbackLng">-112.0740</span>
                             </div>
                         </div>
                         <div class="location-status">
                             <div class="status-dot active"></div>
-                            <span>GPS Ready</span>
+                            <span>Ready</span>
                         </div>
                     </div>
+                    <!-- Campaign info will be added by JavaScript -->
                 </div>
             </div>
             
-            <!-- Swipeable Token Locations Module -->
+            <!-- Swipeable Token Locations Module - FIXED HEIGHT -->
             <div class="token-locations-module" id="tokenLocationsModule">
                 <!-- Swipe Handle -->
                 <div class="swipe-handle" id="swipeHandle">
@@ -78,7 +79,7 @@
                             <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
                             Nearest Token Locations
                         </div>
-                        <div class="total-available" id="totalAvailable">8 total available</div>
+                        <div class="total-available" id="totalAvailable">13 total available</div>
                     </div>
                     
                     <div class="token-locations-list" id="tokenLocationsList">
@@ -88,7 +89,7 @@
                     <div class="module-footer">
                         <div class="footer-hint">
                             <span class="hint-icon">ℹ️</span>
-                            <span>Tap any location to get directions</span>
+                            <span>Tap any location to navigate</span>
                         </div>
                     </div>
                 </div>
@@ -105,7 +106,7 @@
             </div>
         </div>
 
-        <!-- Proximity Notification - POSITIONED AT TOP -->
+        <!-- ENHANCED: Proximity Notification - Only shows after map loads -->
         <div class="proximity-notification" id="proximityNotification">
             <div class="proximity-icon">
                 <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="proximity-coin-icon" onerror="this.textContent='💎'">
@@ -171,7 +172,7 @@
                 <div class="menu-item" data-mode="ar" onclick="vaultPhoenixApp?.switchMode('ar')">
                     <div class="menu-item-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')">📱</div>
                     <div class="menu-item-text">AR Discovery</div>
-                    <div class="menu-item-badge" id="nearbyTokens">6</div>
+                    <div class="menu-item-badge" id="nearbyTokens">Close to unlock</div>
                 </div>
                 
                 <div class="menu-item" data-mode="vault" onclick="vaultPhoenixApp?.switchMode('vault')">
@@ -223,7 +224,7 @@
             </div>
         </div>
         
-        <!-- Status Panel - POSITIONED AT TOP FOR MAP/AR MODES -->
+        <!-- Status Panel - POSITIONED AT TOP FOR AR MODE ONLY -->
         <div class="status-panel" id="statusPanel">
             <div class="status-grid">
                 <div class="status-item">
@@ -237,7 +238,7 @@
                 </div>
                 <div class="status-item">
                     <div class="status-label">Available Tokens</div>
-                    <div class="status-value" id="availableTokens">12 Available</div>
+                    <div class="status-value" id="availableTokens">13 Available</div>
                 </div>
                 <div class="status-item">
                     <div class="status-label">Location</div>
@@ -265,7 +266,7 @@
             <div class="ar-instructions-text">Point your camera around and tap the glowing $Ember coin to collect tokens!</div>
         </div>
         
-        <!-- Token Discovery Modal - COMPLETE STRUCTURE -->
+        <!-- ENHANCED: Token Discovery Modal - CLEAN COLLECTION FLOW -->
         <div class="token-discovery" id="tokenDiscovery">
             <div class="token-discovery-content">
                 <div class="token-discovery-header">
@@ -273,15 +274,15 @@
                         <div class="token-found-icon">
                             <img src="../images/VPEmberFlame.svg" alt="Found" class="found-flame-icon" onerror="this.textContent='🔥'">
                         </div>
-                        <span>$Ember Token Collected!</span>
+                        <span>$Ember Token Found!</span>
                     </div>
                     <div class="token-amount-badge" id="tokenAmountBadge">500 $Ember</div>
                 </div>
                 
                 <div class="sponsor-info-front" id="sponsorInfoFront">
                     <div class="sponsor-message">
-                        <div class="sponsor-title">Sponsored by Phoenix Suns Arena</div>
-                        <div class="sponsor-text">Exclusive courtside experience awaits!</div>
+                        <div class="sponsor-title">Ready to Collect</div>
+                        <div class="sponsor-text">Tap collect to add this token to your vault!</div>
                     </div>
                     
                     <div class="token-preview">
@@ -297,8 +298,8 @@
                     
                     <div class="token-actions">
                         <button class="token-action-btn" id="collectTokenBtn">
-                            <span>✅</span>
-                            <span>Collected!</span>
+                            <span>💎</span>
+                            <span>Collect Token</span>
                         </button>
                         <button class="token-action-btn secondary" id="sponsorInfoBtn">
                             <span>ℹ️</span>
@@ -518,7 +519,7 @@
             </div>
         </div>
         
-        <!-- Navigation Modal for Driving/Walking Directions -->
+        <!-- ENHANCED: Navigation Modal with AR Option -->
         <div class="navigation-modal" id="navigationModal">
             <div class="navigation-content">
                 <div class="navigation-header">
@@ -555,15 +556,15 @@
                         <div class="navigation-option-time" id="navDriveTime">~5 min</div>
                     </div>
                     
-                    <div class="navigation-option" id="navAR">
+                    <div class="navigation-option" id="navAR" style="display: none;">
                         <div class="navigation-option-left">
                             <div class="navigation-option-icon">📱</div>
                             <div class="navigation-option-info">
                                 <div class="navigation-option-title">AR Hunt Mode</div>
-                                <div class="navigation-option-subtitle">Camera + GPS</div>
+                                <div class="navigation-option-subtitle">Collect with Camera</div>
                             </div>
                         </div>
-                        <div class="navigation-option-time">Live</div>
+                        <div class="navigation-option-time">Available</div>
                     </div>
                 </div>
                 
@@ -614,7 +615,7 @@
             </div>
         </div>
         
-        <!-- Bottom Navigation -->
+        <!-- ENHANCED: Bottom Navigation with AR View Always Visible -->
         <nav class="bottom-nav">
             <div class="nav-tabs">
                 <div class="nav-tab active" data-mode="map" onclick="vaultPhoenixApp?.switchMode('map')">
