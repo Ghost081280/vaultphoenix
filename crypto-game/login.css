@@ -143,12 +143,12 @@ body.crypto-login-page::before {
     border-radius: 20px;
 }
 
-/* FIXED: Phoenix flame decoration - BREAKS OUT OF CONTAINER COMPLETELY */
+/* FIXED: Phoenix flame decoration - TOP RIGHT CORNER OF LOGIN CONTAINER */
 .crypto-login-page .phoenix-flame-decoration {
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
-    transform: translate(calc(41% - 28px), calc(-50% - 28px)) !important;
+    transform: translate(calc(41% / 2 + 183px - 28px), calc(-43.5vh - 28px)) !important;
     width: 56px;
     height: 56px;
     display: flex;
@@ -679,7 +679,7 @@ body.crypto-login-page::before {
     }
     
     .crypto-login-page .phoenix-flame-decoration {
-        transform: translate(calc(42% - 26px), calc(-50% - 26px)) !important;
+        transform: translate(calc(42% / 2 + 175px - 26px), calc(-42.5vh - 26px)) !important;
         width: 52px;
         height: 52px;
     }
@@ -756,7 +756,7 @@ body.crypto-login-page::before {
     }
     
     .crypto-login-page .phoenix-flame-decoration {
-        transform: translate(calc(43% - 24px), calc(-50% - 24px)) !important;
+        transform: translate(calc(43% / 2 + 155px - 24px), calc(-41vh - 24px)) !important;
         width: 48px;
         height: 48px;
     }
@@ -821,7 +821,7 @@ body.crypto-login-page::before {
     }
     
     .crypto-login-page .phoenix-flame-decoration {
-        transform: translate(calc(44% - 26px), calc(-50% - 26px)) !important;
+        transform: translate(calc(44% / 2 + 185px - 26px), calc(-47vh - 26px)) !important;
     }
     
     .crypto-login-page .forgot-password {
