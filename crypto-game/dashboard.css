@@ -207,7 +207,6 @@ body.crypto-dashboard-page {
     border-radius: 0 !important;
     overflow: hidden !important;
     display: block !important;
-    /* Enable touch interactions */
     touch-action: pan-x pan-y pinch-zoom !important;
     cursor: grab !important;
 }
@@ -1150,6 +1149,186 @@ body.crypto-dashboard-page {
     color: #f0a500;
 }
 
+/* =================== NAVIGATION MODAL STYLES =================== */
+.crypto-dashboard-page .navigation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 250;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(20px);
+    padding: 20px;
+}
+
+.crypto-dashboard-page .navigation-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.crypto-dashboard-page .navigation-content {
+    background: linear-gradient(135deg, rgba(12, 12, 12, 0.98), rgba(20, 20, 20, 0.98));
+    backdrop-filter: blur(30px);
+    border: 2px solid rgba(240, 165, 0, 0.5);
+    border-radius: 20px;
+    padding: 24px;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(240, 165, 0, 0.3);
+    animation: navigationSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes navigationSlideIn {
+    0% { 
+        opacity: 0; 
+        transform: translateY(-20px) scale(0.95); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+.crypto-dashboard-page .navigation-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.crypto-dashboard-page .navigation-title {
+    color: #f0a500;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.crypto-dashboard-page .navigation-coin-info {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.crypto-dashboard-page .navigation-coin-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.crypto-dashboard-page .navigation-distance {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+}
+
+.crypto-dashboard-page .navigation-options {
+    margin-bottom: 20px;
+}
+
+.crypto-dashboard-page .navigation-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: rgba(240, 165, 0, 0.1);
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.crypto-dashboard-page .navigation-option:hover {
+    background: rgba(240, 165, 0, 0.2);
+    border-color: rgba(240, 165, 0, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(240, 165, 0, 0.3);
+}
+
+.crypto-dashboard-page .navigation-option:active {
+    transform: translateY(0);
+}
+
+.crypto-dashboard-page .navigation-option-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.crypto-dashboard-page .navigation-option-icon {
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(240, 165, 0, 0.2);
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.crypto-dashboard-page .navigation-option-info {
+    flex: 1;
+}
+
+.crypto-dashboard-page .navigation-option-title {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.crypto-dashboard-page .navigation-option-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.crypto-dashboard-page .navigation-option-time {
+    color: #f0a500;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.crypto-dashboard-page .navigation-close {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.3), rgba(251, 146, 60, 0.2));
+    color: white;
+    border: 2px solid rgba(240, 165, 0, 0.5);
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.crypto-dashboard-page .navigation-close:hover {
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.4), rgba(251, 146, 60, 0.3));
+    border-color: rgba(240, 165, 0, 0.7);
+    transform: translateY(-2px);
+}
+
+.crypto-dashboard-page .navigation-close:active {
+    transform: scale(0.98);
+}
+
 /* =================== TOKEN DISCOVERY MODAL - ENHANCED FLOW =================== */
 .crypto-dashboard-page .token-discovery {
     position: fixed;
@@ -1189,6 +1368,71 @@ body.crypto-dashboard-page {
     animation: tokenDiscoverySlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* =================== SIDE MENU STYLES =================== */
+.crypto-dashboard-page .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 210;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.crypto-dashboard-page .menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.crypto-dashboard-page .side-menu {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 320px;
+    height: 100vh;
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.98) 0%, rgba(20, 20, 20, 0.98) 100%);
+    backdrop-filter: blur(30px);
+    border-left: 2px solid rgba(240, 165, 0, 0.3);
+    z-index: 220;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.crypto-dashboard-page .side-menu.open {
+    right: 0;
+}
+
+/* =================== VAULT VIEW =================== */
+.crypto-dashboard-page .vault-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
+    overflow-y: auto;
+    padding: calc(env(safe-area-inset-top, 8px) + 80px) 16px calc(env(safe-area-inset-bottom, 12px) + 80px) 16px;
+    z-index: 1;
+}
+
+/* =================== CAMPAIGNS VIEW =================== */
+.crypto-dashboard-page .campaigns-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
+    overflow-y: auto;
+    padding: calc(env(safe-area-inset-top, 8px) + 80px) 16px calc(env(safe-area-inset-bottom, 12px) + 80px) 16px;
+    z-index: 1;
+}
+
 /* =================== RESPONSIVE DESIGN =================== */
 @media (max-width: 375px) {
     .crypto-dashboard-page .navigation {
@@ -1210,6 +1454,26 @@ body.crypto-dashboard-page {
     .crypto-dashboard-page .token-locations-module {
         bottom: calc(env(safe-area-inset-bottom, 10px) + 120px);
     }
+    
+    .crypto-dashboard-page .navigation-content {
+        margin: 10px;
+        padding: 20px;
+        max-width: calc(100vw - 40px);
+    }
+    
+    .crypto-dashboard-page .navigation-option {
+        padding: 14px;
+    }
+    
+    .crypto-dashboard-page .navigation-option-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+    
+    .crypto-dashboard-page .navigation-option-title {
+        font-size: 15px;
+    }
 }
 
 /* =================== ACCESSIBILITY =================== */
@@ -1220,5 +1484,32 @@ body.crypto-dashboard-page {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+/* =================== GLOBAL KEYFRAMES =================== */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes modalSlideIn {
+    0% { 
+        opacity: 0; 
+        transform: translateY(-20px) scale(0.95); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+@keyframes tokenDiscoverySlideIn {
+    0% { 
+        opacity: 0; 
+        transform: translateY(-30px) scale(0.9); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
     }
 }
