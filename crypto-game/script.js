@@ -34,16 +34,6 @@ console.log('🔥💎 Vault Phoenix Crypto Game JavaScript Loading...');
     }
 })();
 
-// ENHANCED: Global Google Maps callback function
-window.initMap = function() {
-    console.log('🗺️ Google Maps API loaded successfully');
-    if (window.vaultPhoenixApp && typeof window.vaultPhoenixApp.initializeGoogleMap === 'function') {
-        window.vaultPhoenixApp.initializeGoogleMap();
-    } else {
-        console.log('⏳ Vault Phoenix app not ready, will initialize when ready');
-    }
-};
-
 // ONLY RUN IF THIS IS A CRYPTO GAME PAGE
 if (window.isVaultPhoenixCryptoGame) {
 
@@ -63,7 +53,7 @@ if (window.isVaultPhoenixCryptoGame) {
             this.mapMarkers = [];
             this.isStarted = false;
             this.currentMode = 'map';
-            this.map = null;
+            this.googleMap = null;
             this.userMarker = null;
             this.animationStarted = false;
             this.collectedTokens = [];
@@ -96,28 +86,10 @@ if (window.isVaultPhoenixCryptoGame) {
             this.isDragging = false;
             this.moduleTranslateY = 0;
             
-            // Google Maps properties - ENHANCED
-            this.googleMap = null;
+            // Google Maps properties
             this.tokenMarkers = [];
             this.infoWindows = [];
-            this.googleMapsAPI = null;
-
-            // Map pan/zoom properties
-            this.mapScale = 1;
-            this.mapTranslateX = 0;
-            this.mapTranslateY = 0;
-            this.isDraggingMap = false;
-            this.lastTouchX = 0;
-            this.lastTouchY = 0;
-            this.lastDistance = 0;
-            this.mapContainer = null;
             this.isNearToken = false;
-
-            // AR Camera properties
-            this.arActive = false;
-            this.arCameraPermissionGranted = false;
-            this.videoElement = null;
-            this.canvasElement = null;
 
             // Enhanced Ember Token System with Real Locations and Value Tiers
             this.emberTokens = [
@@ -165,9 +137,14 @@ if (window.isVaultPhoenixCryptoGame) {
                     this.initializeCampaigns();
                     this.setupSwipeableModule();
                     this.addHapticFeedback();
-                    this.showWelcomeScreen();
                     document.body.classList.add('crypto-dashboard-page');
                     this.setModeAttribute('map');
+                    
+                    // Initialize Google Maps if API is already loaded
+                    if (window.googleMapsReady || (typeof google !== 'undefined' && google.maps)) {
+                        this.onGoogleMapsLoaded();
+                    }
+                    
                     console.log('✅ Dashboard initialized');
                 }
             } catch (error) {
@@ -178,6 +155,725 @@ if (window.isVaultPhoenixCryptoGame) {
                     this.updateVaultStats();
                 }
             }
+        }
+
+        // =================== GOOGLE MAPS INTEGRATION ===================
+        onGoogleMapsLoaded() {
+            console.log('🗺️ Google Maps API is ready, initializing map...');
+            this.googleMapsLoaded = true;
+            this.initializeGoogleMap();
+        }
+
+        initializeGoogleMap() {
+            console.log('🗺️ Initializing Google Maps...');
+            try {
+                const mapContainer = document.getElementById('googleMapContainer');
+                if (!mapContainer) {
+                    console.error('❌ Google Map container not found');
+                    return;
+                }
+
+                // Show loading overlay
+                this.showMapLoading();
+
+                // Check if Google Maps API is loaded
+                if (typeof google !== 'undefined' && google.maps) {
+                    console.log('✅ Google Maps API detected, creating real map...');
+                    this.createRealGoogleMap(mapContainer);
+                } else {
+                    console.log('⚠️ Google Maps API not available, using demo map...');
+                    this.createDemoMap(mapContainer);
+                }
+                
+            } catch (error) {
+                console.error('❌ Google Maps initialization error:', error);
+                this.createDemoMap(document.getElementById('googleMapContainer'));
+            }
+        }
+
+        showMapLoading() {
+            const loadingOverlay = document.getElementById('mapLoadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.style.display = 'flex';
+            }
+        }
+
+        hideMapLoading() {
+            const loadingOverlay = document.getElementById('mapLoadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.style.display = 'none';
+            }
+        }
+
+        // Create real Google Map
+        createRealGoogleMap(mapContainer) {
+            console.log('🗺️ Creating real Google Map...');
+            try {
+                // Hide loading overlay
+                this.hideMapLoading();
+
+                // Create map centered on Phoenix
+                this.googleMap = new google.maps.Map(mapContainer, {
+                    center: { lat: this.userLat, lng: this.userLng },
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    styles: [
+                        {
+                            featureType: "all",
+                            elementType: "geometry.fill",
+                            stylers: [{ color: "#2c1810" }]
+                        },
+                        {
+                            featureType: "water",
+                            elementType: "geometry",
+                            stylers: [{ color: "#193047" }]
+                        },
+                        {
+                            featureType: "road",
+                            elementType: "geometry",
+                            stylers: [{ color: "#451a03" }]
+                        },
+                        {
+                            featureType: "landscape",
+                            elementType: "geometry",
+                            stylers: [{ color: "#2d1810" }]
+                        }
+                    ],
+                    disableDefaultUI: true,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                        position: google.maps.ControlPosition.RIGHT_BOTTOM
+                    },
+                    gestureHandling: 'greedy'
+                });
+
+                // Add user marker
+                this.userMarker = new google.maps.Marker({
+                    position: { lat: this.userLat, lng: this.userLng },
+                    map: this.googleMap,
+                    title: 'Your Location - Phoenix, AZ',
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 8,
+                        fillColor: '#4285F4',
+                        fillOpacity: 1,
+                        strokeColor: '#ffffff',
+                        strokeWeight: 3
+                    },
+                    zIndex: 1000
+                });
+
+                // Add token markers
+                this.addTokenMarkers();
+
+                this.mapLoadingComplete = true;
+                
+                // Start game features after map loads
+                setTimeout(() => {
+                    this.startGameFeatures();
+                }, 1000);
+
+                console.log('✅ Real Google Map initialized successfully');
+                
+            } catch (error) {
+                console.error('❌ Real Google Map creation error:', error);
+                this.createDemoMap(mapContainer);
+            }
+        }
+
+        // Create demo map as fallback
+        createDemoMap(mapContainer) {
+            console.log('🎮 Creating demo map...');
+            try {
+                // Hide loading overlay
+                this.hideMapLoading();
+
+                // Create demo map HTML
+                mapContainer.innerHTML = `
+                    <div class="demo-map-container" style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(135deg, #d4a574 0%, #e6c896 25%, #f0d4a8 50%, #f5e2bf 75%, #faf0d1 100%);
+                        overflow: hidden;
+                        z-index: 1;
+                    ">
+                        <div class="demo-map-grid" style="
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-image: 
+                                linear-gradient(rgba(139, 69, 19, 0.3) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(139, 69, 19, 0.3) 1px, transparent 1px);
+                            background-size: 50px 50px;
+                            opacity: 0.4;
+                        "></div>
+                        
+                        <div class="demo-phoenix-label" style="
+                            position: absolute;
+                            top: 10px;
+                            left: 10px;
+                            color: rgba(139, 69, 19, 0.8);
+                            font-size: 16px;
+                            font-weight: 700;
+                            z-index: 5;
+                            background: rgba(255, 255, 255, 0.8);
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                        ">🏜️ Phoenix, Arizona</div>
+                        
+                        <div class="demo-user-marker" title="Your Location - Phoenix, AZ" style="
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            width: 24px;
+                            height: 24px;
+                            background: #4285F4;
+                            border: 4px solid white;
+                            border-radius: 50%;
+                            transform: translate(-50%, -50%);
+                            z-index: 30;
+                            box-shadow: 0 3px 15px rgba(66, 133, 244, 0.8);
+                        "></div>
+                        
+                        <div class="demo-map-markers" id="demoMarkers" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 15;"></div>
+                    </div>
+                `;
+
+                // Add demo token markers
+                setTimeout(() => {
+                    this.addDemoTokenMarkers();
+                    this.mapLoadingComplete = true;
+                    this.startGameFeatures();
+                }, 500);
+
+                console.log('✅ Demo map initialized successfully');
+                
+            } catch (error) {
+                console.error('❌ Demo map creation error:', error);
+            }
+        }
+
+        // Add token markers to real Google Map
+        addTokenMarkers() {
+            console.log('💎 Adding token markers to Google Map...');
+            
+            this.emberTokens.forEach((token, index) => {
+                if (!this.isTokenCollected(token.id)) {
+                    const marker = new google.maps.Marker({
+                        position: { lat: token.lat, lng: token.lng },
+                        map: this.googleMap,
+                        title: `${token.location} - ${token.value} $Ember`,
+                        icon: {
+                            url: '../images/VPEmberCoin.PNG',
+                            scaledSize: new google.maps.Size(40, 40),
+                            origin: new google.maps.Point(0, 0),
+                            anchor: new google.maps.Point(20, 20)
+                        },
+                        zIndex: 100
+                    });
+
+                    // Create info window
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `
+                            <div style="padding: 10px; text-align: center;">
+                                <h3 style="margin: 0 0 5px 0; color: #f0a500;">${token.value} $Ember</h3>
+                                <p style="margin: 0 0 5px 0; font-weight: bold;">${token.location}</p>
+                                <p style="margin: 0; font-size: 12px; color: #666;">${token.sponsor}</p>
+                                <button onclick="vaultPhoenixApp.showNavigationModal(${JSON.stringify(token).replace(/"/g, '&quot;')})" 
+                                        style="margin-top: 10px; background: #f0a500; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
+                                    Navigate
+                                </button>
+                            </div>
+                        `
+                    });
+
+                    // Add click listener
+                    marker.addListener('click', () => {
+                        // Close all other info windows
+                        this.infoWindows.forEach(iw => iw.close());
+                        
+                        // Open this info window
+                        infoWindow.open(this.googleMap, marker);
+                        
+                        // Calculate distance for navigation
+                        token.distance = this.calculateDistance(
+                            this.userLat, this.userLng,
+                            token.lat, token.lng
+                        );
+                    });
+
+                    this.tokenMarkers.push({ marker, token, infoWindow });
+                    this.infoWindows.push(infoWindow);
+                }
+            });
+
+            console.log(`✅ Added ${this.tokenMarkers.length} token markers to Google Map`);
+        }
+
+        // Add demo token markers
+        addDemoTokenMarkers() {
+            console.log('💎 Adding demo token markers...');
+            try {
+                const markersContainer = document.getElementById('demoMarkers');
+                if (!markersContainer) {
+                    console.error('❌ Demo markers container not found');
+                    return;
+                }
+
+                markersContainer.innerHTML = '';
+
+                const positions = [
+                    { x: 52, y: 48 }, // Demo nearby token - center
+                    { x: 45, y: 35 }, // Downtown Phoenix
+                    { x: 75, y: 25 }, // Scottsdale Quarter
+                    { x: 55, y: 85 }, // Desert Botanical Garden
+                    { x: 80, y: 30 }, // Old Town Scottsdale
+                    { x: 30, y: 70 }, // Arizona State University
+                    { x: 40, y: 90 }, // Phoenix Sky Harbor
+                    { x: 65, y: 15 }, // Camelback Mountain
+                    { x: 25, y: 55 }, // Roosevelt Row
+                    { x: 35, y: 40 }, // Tempe Town Lake
+                    { x: 70, y: 75 }, // Chase Field
+                    { x: 60, y: 65 }, // Papago Park
+                    { x: 70, y: 20 }  // Biltmore Fashion Park
+                ];
+
+                let markerCount = 0;
+                this.emberTokens.forEach((token, index) => {
+                    if (!this.isTokenCollected(token.id)) {
+                        const position = positions[index] || { 
+                            x: 50 + (index * 10) % 40, 
+                            y: 50 + (index * 15) % 40 
+                        };
+
+                        const marker = document.createElement('div');
+                        marker.className = `demo-token-marker ${token.tier}`;
+                        marker.style.cssText = `
+                            position: absolute;
+                            left: ${position.x}%;
+                            top: ${position.y}%;
+                            width: 40px;
+                            height: 40px;
+                            cursor: pointer;
+                            pointer-events: auto;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            transition: all 0.3s ease;
+                            z-index: 15;
+                            border-radius: 50%;
+                            background: rgba(240, 165, 0, 0.1);
+                            border: 3px solid rgba(240, 165, 0, 0.6);
+                            box-shadow: 0 0 20px rgba(240, 165, 0, 0.6);
+                            animation: markerPulse 3s ease-in-out infinite;
+                            transform: translate(-50%, -50%);
+                        `;
+                        marker.title = `${token.location} - ${token.value} $Ember`;
+                        marker.dataset.tokenId = token.id;
+
+                        const tokenImage = document.createElement('img');
+                        tokenImage.src = '../images/VPEmberCoin.PNG';
+                        tokenImage.alt = 'Ember Coin';
+                        tokenImage.style.cssText = `
+                            width: 34px;
+                            height: 34px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            filter: brightness(1.2) drop-shadow(0 3px 12px rgba(240, 165, 0, 0.8));
+                        `;
+                        tokenImage.onerror = function() {
+                            this.style.display = 'none';
+                            marker.textContent = '💎';
+                            marker.style.fontSize = '16px';
+                            marker.style.color = '#f0a500';
+                        };
+
+                        const valueOverlay = document.createElement('div');
+                        valueOverlay.style.cssText = `
+                            position: absolute;
+                            bottom: -12px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: linear-gradient(135deg, #f0a500, #fb923c);
+                            color: white;
+                            font-size: 11px;
+                            font-weight: 900;
+                            padding: 4px 8px;
+                            border-radius: 12px;
+                            border: 2px solid white;
+                            white-space: nowrap;
+                            pointer-events: none;
+                            box-shadow: 0 3px 12px rgba(240, 165, 0, 0.6);
+                        `;
+                        valueOverlay.textContent = `${token.value}`;
+
+                        marker.appendChild(tokenImage);
+                        marker.appendChild(valueOverlay);
+
+                        // Click handler
+                        marker.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            
+                            // Visual feedback
+                            marker.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                            setTimeout(() => {
+                                marker.style.transform = 'translate(-50%, -50%) scale(1)';
+                            }, 300);
+                            
+                            // Calculate distance and show navigation modal
+                            token.distance = this.calculateDistance(
+                                this.userLat, this.userLng,
+                                token.lat, token.lng
+                            );
+                            
+                            this.showNavigationModal(token);
+                            
+                            if (navigator.vibrate) {
+                                navigator.vibrate(30);
+                            }
+                        });
+
+                        markersContainer.appendChild(marker);
+                        markerCount++;
+
+                        // Animate appearance
+                        setTimeout(() => {
+                            marker.style.opacity = '1';
+                        }, index * 150);
+                    }
+                });
+
+                console.log(`✅ Added ${markerCount} demo token markers`);
+            } catch (error) {
+                console.error('❌ Demo token markers error:', error);
+            }
+        }
+
+        // Start game features after map loads
+        startGameFeatures() {
+            console.log('🎮 Starting game features...');
+            
+            // Add animation styles
+            this.addMapAnimationStyles();
+            
+            // Update location display with coordinates
+            this.updateLocationDisplay();
+            
+            // Start proximity checking
+            this.startProximityChecking();
+            
+            // Update nearby tokens display
+            this.updateNearbyTokens();
+            
+            // Update token counts
+            this.updateTokenCounts();
+            
+            console.log('✅ Game features started');
+        }
+
+        // Add CSS animations for map markers
+        addMapAnimationStyles() {
+            if (document.getElementById('mapAnimationStyles')) return;
+            
+            const style = document.createElement('style');
+            style.id = 'mapAnimationStyles';
+            style.textContent = `
+                @keyframes markerPulse {
+                    0%, 100% { 
+                        box-shadow: 0 0 0 0 rgba(240, 165, 0, 0.7);
+                        transform: translate(-50%, -50%) scale(1);
+                    }
+                    50% { 
+                        box-shadow: 0 0 0 20px rgba(240, 165, 0, 0);
+                        transform: translate(-50%, -50%) scale(1.05);
+                    }
+                }
+                
+                .demo-token-marker:hover {
+                    transform: translate(-50%, -50%) scale(1.15) !important;
+                    z-index: 25 !important;
+                }
+                
+                .demo-token-marker.high {
+                    border-color: #ff6b6b !important;
+                    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6) !important;
+                }
+                
+                .demo-token-marker.medium {
+                    border-color: #fb923c !important;
+                    box-shadow: 0 0 20px rgba(251, 146, 60, 0.6) !important;
+                }
+                
+                .demo-token-marker.low {
+                    border-color: #4CAF50 !important;
+                    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6) !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Update location display
+        updateLocationDisplay() {
+            try {
+                const latEl = document.getElementById('currentLat');
+                const lngEl = document.getElementById('currentLng');
+                
+                if (latEl) latEl.textContent = this.userLat.toFixed(4);
+                if (lngEl) lngEl.textContent = this.userLng.toFixed(4);
+                
+            } catch (error) {
+                console.error('❌ Location display update error:', error);
+            }
+        }
+
+        // Start proximity checking
+        startProximityChecking() {
+            console.log('📍 Starting proximity checking...');
+            
+            // Check proximity every 5 seconds
+            this.proximityCheckInterval = setInterval(() => {
+                this.checkTokenProximity();
+            }, 5000);
+            
+            // Initial check
+            this.checkTokenProximity();
+        }
+
+        // Check if user is near any tokens
+        checkTokenProximity() {
+            try {
+                let nearestToken = null;
+                let nearestDistance = Infinity;
+                
+                this.emberTokens.forEach(token => {
+                    if (!this.isTokenCollected(token.id)) {
+                        const distance = this.calculateDistance(
+                            this.userLat, this.userLng,
+                            token.lat, token.lng  
+                        );
+                        
+                        if (distance < nearestDistance) {
+                            nearestDistance = distance;
+                            nearestToken = token;
+                        }
+                    }
+                });
+                
+                // Show proximity notification if within 100m (0.1km)
+                const wasNearToken = this.isNearToken;
+                this.isNearToken = nearestDistance <= 0.1;
+                
+                if (this.isNearToken && !wasNearToken) {
+                    this.showProximityNotification(nearestToken);
+                } else if (!this.isNearToken && wasNearToken) {
+                    this.hideProximityNotification();
+                }
+                
+                // Update AR availability in menu
+                const nearbyTokensEl = document.getElementById('nearbyTokens');
+                if (nearbyTokensEl) {
+                    nearbyTokensEl.textContent = this.isNearToken ? 'Available!' : 'Get closer';
+                }
+                
+            } catch (error) {
+                console.error('❌ Proximity check error:', error);
+            }
+        }
+
+        // Show proximity notification
+        showProximityNotification(token) {
+            console.log('🔔 Showing proximity notification for:', token.location);
+            try {
+                const notification = document.getElementById('proximityNotification');
+                const arButton = document.getElementById('proximityARButton');
+                
+                if (notification) {
+                    notification.classList.add('show');
+                    
+                    // Update notification content
+                    const title = notification.querySelector('.proximity-title');
+                    const subtitle = notification.querySelector('.proximity-subtitle');
+                    
+                    if (title) title.textContent = `${token.value} $Ember Token Detected!`;
+                    if (subtitle) subtitle.textContent = `${token.location} - Switch to AR to collect`;
+                }
+                
+                if (arButton) {
+                    arButton.onclick = () => {
+                        this.hideProximityNotification();
+                        this.switchMode('ar');
+                    };
+                }
+                
+            } catch (error) {
+                console.error('❌ Proximity notification error:', error);
+            }
+        }
+
+        // Hide proximity notification
+        hideProximityNotification() {
+            try {
+                const notification = document.getElementById('proximityNotification');
+                if (notification) {
+                    notification.classList.remove('show');
+                }
+            } catch (error) {
+                console.error('❌ Hide proximity notification error:', error);
+            }
+        }
+
+        // Update nearby tokens display
+        updateNearbyTokens() {
+            console.log('🔍 Updating nearby tokens display...');
+            try {
+                const nearbyTokens = this.emberTokens
+                    .filter(token => !this.isTokenCollected(token.id))
+                    .map(token => ({
+                        ...token,
+                        distance: this.calculateDistance(this.userLat, this.userLng, token.lat, token.lng)
+                    }))
+                    .sort((a, b) => a.distance - b.distance)
+                    .slice(0, 5); // Show top 5 nearest
+
+                const nearbyCount = document.getElementById('nearbyTokenCount');
+                if (nearbyCount) {
+                    nearbyCount.textContent = `${nearbyTokens.length} nearby`;
+                }
+
+                // Update token locations list
+                const tokensList = document.getElementById('tokenLocationsList');
+                if (tokensList) {
+                    tokensList.innerHTML = nearbyTokens.map(token => `
+                        <div class="token-location-item" onclick="vaultPhoenixApp.showNavigationModal(${JSON.stringify(token).replace(/"/g, '&quot;')})">
+                            <div class="token-location-icon">
+                                <img src="../images/VPEmberCoin.PNG" alt="Ember" style="width: 24px; height: 24px; border-radius: 50%;" onerror="this.textContent='💎'">
+                            </div>
+                            <div class="token-location-info">
+                                <div class="token-location-name">${token.location}</div>
+                                <div class="token-location-distance">${token.distance < 1 ? (token.distance * 1000).toFixed(0) + 'm' : token.distance.toFixed(1) + 'km'} away</div>
+                            </div>
+                            <div class="token-location-value">${token.value} $Ember</div>
+                        </div>
+                    `).join('');
+                }
+                
+            } catch (error) {
+                console.error('❌ Nearby tokens update error:', error);
+            }
+        }
+
+        // Update token counts
+        updateTokenCounts() {
+            try {
+                const availableCount = this.emberTokens.filter(token => !this.isTokenCollected(token.id)).length;
+                
+                const elements = [
+                    'availableTokenCount',
+                    'totalAvailable',
+                    'availableTokens'
+                ];
+                
+                elements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.textContent = id === 'availableTokens' ? `${availableCount} Available` : `${availableCount} tokens`;
+                    }
+                });
+                
+            } catch (error) {
+                console.error('❌ Token counts update error:', error);
+            }
+        }
+
+        // Show navigation modal
+        showNavigationModal(token) {
+            console.log('🗺️ Showing navigation modal for:', token.location);
+            try {
+                this.currentNavigationToken = token;
+                
+                const modal = document.getElementById('navigationModal');
+                const tokenName = document.getElementById('navTokenName');
+                const distance = document.getElementById('navDistance');
+                const walkTime = document.getElementById('navWalkTime');
+                const driveTime = document.getElementById('navDriveTime');
+                const arOption = document.getElementById('navAR');
+                
+                if (tokenName) tokenName.textContent = `${token.value} $Ember - ${token.location}`;
+                
+                if (token.distance !== undefined) {
+                    const distanceText = token.distance < 1 ? 
+                        `${(token.distance * 1000).toFixed(0)}m away` : 
+                        `${token.distance.toFixed(1)}km away`;
+                    
+                    if (distance) distance.textContent = distanceText;
+                    
+                    const walkMinutes = Math.round(token.distance * 12);
+                    const driveMinutes = Math.round(token.distance * 2);
+                    
+                    if (walkTime) walkTime.textContent = `~${walkMinutes} min`;
+                    if (driveTime) driveTime.textContent = `~${driveMinutes} min`;
+                    
+                    // Show AR option if close enough
+                    const isCloseEnough = token.distance <= 0.1;
+                    if (arOption) {
+                        arOption.style.display = isCloseEnough ? 'flex' : 'none';
+                        if (isCloseEnough) {
+                            arOption.onclick = () => {
+                                this.hideNavigationModal();
+                                this.switchMode('ar');
+                            };
+                        }
+                    }
+                }
+                
+                if (modal) {
+                    modal.classList.add('show');
+                }
+                
+            } catch (error) {
+                console.error('❌ Navigation modal error:', error);
+            }
+        }
+
+        hideNavigationModal() {
+            const modal = document.getElementById('navigationModal');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+            this.currentNavigationToken = null;
+        }
+
+        openMapsNavigation(mode) {
+            if (!this.currentNavigationToken) return;
+            
+            const token = this.currentNavigationToken;
+            const destination = `${token.lat},${token.lng}`;
+            
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            
+            let mapsUrl;
+            if (mode === 'walking') {
+                mapsUrl = isIOS ? 
+                    `maps://maps.google.com/maps?daddr=${destination}&dirflg=w` :
+                    `https://maps.google.com/maps?daddr=${destination}&dirflg=w`;
+            } else if (mode === 'driving') {
+                mapsUrl = isIOS ? 
+                    `maps://maps.google.com/maps?daddr=${destination}&dirflg=d` :
+                    `https://maps.google.com/maps?daddr=${destination}&dirflg=d`;
+            }
+            
+            if (mapsUrl) {
+                window.open(mapsUrl, '_blank');
+                this.hideNavigationModal();
+            }
+            
+            console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
         }
 
         // =================== LOGIN SYSTEM ===================
@@ -438,7 +1134,7 @@ if (window.isVaultPhoenixCryptoGame) {
             alert('Password reset would be implemented here.\n\nFor demo: demo@vaultphoenix.com / phoenix123');
         }
 
-        // =================== ENHANCED DASHBOARD SYSTEM ===================
+        // =================== DASHBOARD SYSTEM ===================
         setModeAttribute(mode) {
             try {
                 document.body.setAttribute('data-mode', mode);
@@ -448,741 +1144,6 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // =================== GOOGLE MAPS INTEGRATION - COMPLETE RESTORATION ===================
-        initializeGoogleMap() {
-            console.log('🗺️ Initializing Google Maps with enhanced features...');
-            try {
-                const mapContainer = document.getElementById('googleMap');
-                if (!mapContainer) {
-                    console.error('❌ Google Map container not found');
-                    return;
-                }
-
-                // Show loading overlay
-                this.showMapLoading();
-
-                // Check if Google Maps API is loaded
-                if (typeof google !== 'undefined' && google.maps) {
-                    console.log('✅ Google Maps API detected, initializing real map...');
-                    this.createRealGoogleMap(mapContainer);
-                } else {
-                    console.log('⚠️ Google Maps API not available, using enhanced demo map...');
-                    this.createEnhancedDemoMap(mapContainer);
-                }
-                
-            } catch (error) {
-                console.error('❌ Google Maps initialization error:', error);
-                this.createEnhancedDemoMap(document.getElementById('googleMap'));
-            }
-        }
-
-        showMapLoading() {
-            const mapContainer = document.getElementById('googleMap');
-            if (mapContainer) {
-                mapContainer.innerHTML = `
-                    <div class="map-loading-overlay">
-                        <div class="map-loading-spinner"></div>
-                        <div>Loading Phoenix Map...</div>
-                    </div>
-                `;
-            }
-        }
-
-        // ENHANCED: Real Google Maps implementation
-        createRealGoogleMap(mapContainer) {
-            console.log('🗺️ Creating real Google Map...');
-            try {
-                // Clear loading overlay
-                mapContainer.innerHTML = '';
-
-                // Create map centered on Phoenix
-                this.googleMap = new google.maps.Map(mapContainer, {
-                    center: { lat: this.userLat, lng: this.userLng },
-                    zoom: 12,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    styles: [
-                        {
-                            featureType: "all",
-                            elementType: "geometry.fill",
-                            stylers: [{ color: "#2c1810" }]
-                        },
-                        {
-                            featureType: "water",
-                            elementType: "geometry",
-                            stylers: [{ color: "#193047" }]
-                        },
-                        {
-                            featureType: "road",
-                            elementType: "geometry",
-                            stylers: [{ color: "#451a03" }]
-                        }
-                    ],
-                    disableDefaultUI: true,
-                    zoomControl: true,
-                    zoomControlOptions: {
-                        position: google.maps.ControlPosition.RIGHT_BOTTOM
-                    }
-                });
-
-                // Add user marker
-                this.userMarker = new google.maps.Marker({
-                    position: { lat: this.userLat, lng: this.userLng },
-                    map: this.googleMap,
-                    title: 'Your Location',
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 8,
-                        fillColor: '#4285F4',
-                        fillOpacity: 1,
-                        strokeColor: '#ffffff',
-                        strokeWeight: 3
-                    }
-                });
-
-                // Add token markers
-                this.addRealTokenMarkers();
-
-                this.googleMapsLoaded = true;
-                this.mapLoadingComplete = true;
-                
-                // Start game features after map loads
-                setTimeout(() => {
-                    this.startGameFeatures();
-                }, 1000);
-
-                console.log('✅ Real Google Map initialized successfully');
-                
-            } catch (error) {
-                console.error('❌ Real Google Map creation error:', error);
-                this.createEnhancedDemoMap(mapContainer);
-            }
-        }
-
-        // Add real token markers to Google Maps
-        addRealTokenMarkers() {
-            console.log('💎 Adding real token markers to Google Map...');
-            
-            this.emberTokens.forEach((token, index) => {
-                if (!this.isTokenCollected(token.id)) {
-                    const marker = new google.maps.Marker({
-                        position: { lat: token.lat, lng: token.lng },
-                        map: this.googleMap,
-                        title: `${token.location} - ${token.value} $Ember`,
-                        icon: {
-                            url: '../images/VPEmberCoin.PNG',
-                            scaledSize: new google.maps.Size(40, 40),
-                            origin: new google.maps.Point(0, 0),
-                            anchor: new google.maps.Point(20, 20)
-                        }
-                    });
-
-                    // Add click listener
-                    marker.addListener('click', () => {
-                        token.distance = this.calculateDistance(
-                            this.userLat, this.userLng,
-                            token.lat, token.lng
-                        );
-                        this.showTokenModal(token);
-                    });
-
-                    this.tokenMarkers.push({ marker, token });
-                }
-            });
-        }
-
-        // ENHANCED: Demo map with better features - COMPLETE RESTORATION
-        createEnhancedDemoMap(mapContainer) {
-            console.log('🎮 Creating enhanced demo map...');
-            try {
-                // Clear loading overlay
-                mapContainer.innerHTML = '';
-
-                // Create enhanced demo map structure
-                mapContainer.innerHTML = `
-                    <div class="demo-map-container" id="demoMapContainer" style="
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: linear-gradient(135deg, #d4a574 0%, #e6c896 25%, #f0d4a8 50%, #f5e2bf 75%, #faf0d1 100%);
-                        overflow: hidden;
-                        z-index: 1;
-                    ">
-                        <div class="demo-map-grid" style="
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            background-image: 
-                                linear-gradient(rgba(139, 69, 19, 0.3) 1px, transparent 1px),
-                                linear-gradient(90deg, rgba(139, 69, 19, 0.3) 1px, transparent 1px);
-                            background-size: 50px 50px;
-                            opacity: 0.4;
-                        "></div>
-                        
-                        <div class="demo-map-streets">
-                            <div class="demo-street horizontal" style="position: absolute; top: 20%; width: 100%; height: 4px; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
-                            <div class="demo-street horizontal" style="position: absolute; top: 40%; width: 100%; height: 4px; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
-                            <div class="demo-street horizontal" style="position: absolute; top: 60%; width: 100%; height: 4px; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
-                            <div class="demo-street horizontal" style="position: absolute; top: 80%; width: 100%; height: 4px; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
-                            <div class="demo-street vertical" style="position: absolute; left: 25%; width: 4px; height: 100%; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
-                            <div class="demo-street vertical" style="position: absolute; left: 50%; width: 4px; height: 100%; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
-                            <div class="demo-street vertical" style="position: absolute; left: 75%; width: 4px; height: 100%; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
-                        </div>
-                        
-                        <div class="demo-phoenix-label" style="
-                            position: absolute;
-                            top: 10px;
-                            left: 10px;
-                            color: rgba(139, 69, 19, 0.8);
-                            font-size: 16px;
-                            font-weight: 700;
-                            z-index: 5;
-                            background: rgba(255, 255, 255, 0.8);
-                            padding: 4px 8px;
-                            border-radius: 4px;
-                        ">🏜️ Phoenix, Arizona</div>
-                        
-                        <div class="demo-user-marker" title="Your Location - Phoenix, AZ" style="
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            width: 24px;
-                            height: 24px;
-                            background: #4285F4;
-                            border: 4px solid white;
-                            border-radius: 50%;
-                            transform: translate(-50%, -50%);
-                            z-index: 30;
-                            box-shadow: 0 3px 15px rgba(66, 133, 244, 0.8);
-                        "></div>
-                        
-                        <div class="demo-map-markers" id="demoMarkers" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 15;"></div>
-                        <div class="demo-map-labels" id="demoLabels" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 12;"></div>
-                    </div>
-                    <div class="demo-map-controls" style="
-                        position: absolute;
-                        bottom: 20px;
-                        right: 20px;
-                        z-index: 20;
-                        display: flex;
-                        flex-direction: column;
-                        gap: 8px;
-                    ">
-                        <button class="map-control-btn" id="zoomInBtn" title="Zoom In" style="
-                            width: 40px;
-                            height: 40px;
-                            background: rgba(240, 165, 0, 0.9);
-                            border: 2px solid rgba(255, 255, 255, 0.8);
-                            border-radius: 8px;
-                            color: white;
-                            font-size: 18px;
-                            font-weight: bold;
-                            cursor: pointer;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
-                        ">+</button>
-                        <button class="map-control-btn" id="zoomOutBtn" title="Zoom Out" style="
-                            width: 40px;
-                            height: 40px;
-                            background: rgba(240, 165, 0, 0.9);
-                            border: 2px solid rgba(255, 255, 255, 0.8);
-                            border-radius: 8px;
-                            color: white;
-                            font-size: 18px;
-                            font-weight: bold;
-                            cursor: pointer;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
-                        ">-</button>
-                    </div>
-                `;
-
-                // Ensure container is visible
-                mapContainer.style.display = 'block';
-                mapContainer.style.position = 'absolute';
-                mapContainer.style.top = '0';
-                mapContainer.style.left = '0';
-                mapContainer.style.width = '100%';
-                mapContainer.style.height = '100%';
-                mapContainer.style.zIndex = '1';
-
-                this.mapContainer = document.getElementById('demoMapContainer');
-                this.setupMapInteractions();
-
-                // Add demo token markers
-                setTimeout(() => {
-                    this.addDemoTokenMarkers();
-                    this.googleMapsLoaded = true;
-                    this.mapLoadingComplete = true;
-                    this.startGameFeatures();
-                }, 500);
-
-                console.log('✅ Enhanced demo map initialized successfully');
-                
-            } catch (error) {
-                console.error('❌ Enhanced demo map creation error:', error);
-            }
-        }
-
-        // ENHANCED: Demo token markers with better labels - COMPLETE RESTORATION
-        addDemoTokenMarkers() {
-            console.log('💎 Adding enhanced demo token markers...');
-            try {
-                const markersContainer = document.getElementById('demoMarkers');
-                const labelsContainer = document.getElementById('demoLabels');
-                
-                if (!markersContainer) {
-                    console.error('❌ Demo markers containers not found');
-                    return;
-                }
-
-                markersContainer.innerHTML = '';
-                if (labelsContainer) labelsContainer.innerHTML = '';
-
-                let markerCount = 0;
-                this.emberTokens.forEach((token, index) => {
-                    if (!this.isTokenCollected(token.id)) {
-                        this.addEnhancedDemoMarker(token, index, markersContainer, labelsContainer);
-                        markerCount++;
-                    }
-                });
-
-                console.log(`✅ Added ${markerCount} enhanced demo markers`);
-            } catch (error) {
-                console.error('❌ Demo token markers error:', error);
-            }
-        }
-
-        addEnhancedDemoMarker(token, index, markersContainer, labelsContainer) {
-            try {
-                const positions = [
-                    { x: 52, y: 48 }, // Demo nearby token - center
-                    { x: 45, y: 35 }, // Downtown Phoenix - upper left
-                    { x: 75, y: 25 }, // Scottsdale Quarter - upper right
-                    { x: 55, y: 85 }, // Desert Botanical Garden - lower center
-                    { x: 80, y: 30 }, // Old Town Scottsdale - upper right
-                    { x: 30, y: 70 }, // Arizona State University - lower left
-                    { x: 40, y: 90 }, // Phoenix Sky Harbor - bottom left
-                    { x: 65, y: 15 }, // Camelback Mountain - top center
-                    { x: 25, y: 55 }, // Roosevelt Row - left center
-                    { x: 35, y: 40 }, // Tempe Town Lake - left center
-                    { x: 70, y: 75 }, // Chase Field - lower right
-                    { x: 60, y: 65 }, // Papago Park - center right
-                    { x: 70, y: 20 }  // Biltmore Fashion Park - upper right
-                ];
-
-                const position = positions[index] || { 
-                    x: 50 + (index * 10) % 40, 
-                    y: 50 + (index * 15) % 40 
-                };
-
-                // Create enhanced marker with proper styling
-                const marker = document.createElement('div');
-                marker.className = `demo-token-marker ${token.tier}`;
-                marker.style.cssText = `
-                    position: absolute;
-                    left: ${position.x}%;
-                    top: ${position.y}%;
-                    width: 40px;
-                    height: 40px;
-                    cursor: pointer;
-                    pointer-events: auto;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    transition: all 0.3s ease;
-                    z-index: 15;
-                    border-radius: 50%;
-                    background: rgba(240, 165, 0, 0.1);
-                    border: 3px solid rgba(240, 165, 0, 0.6);
-                    box-shadow: 0 0 20px rgba(240, 165, 0, 0.6);
-                    animation: markerPulse 3s ease-in-out infinite;
-                    transform: translate(-50%, -50%);
-                `;
-                marker.title = `${token.location} - ${token.value} $Ember`;
-                marker.dataset.tokenId = token.id;
-
-                const tokenImage = document.createElement('img');
-                tokenImage.src = '../images/VPEmberCoin.PNG';
-                tokenImage.alt = 'Ember Coin';
-                tokenImage.style.cssText = `
-                    width: 34px;
-                    height: 34px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    filter: brightness(1.2) drop-shadow(0 3px 12px rgba(240, 165, 0, 0.8));
-                    transition: all 0.3s ease;
-                `;
-                tokenImage.onerror = function() {
-                    this.style.display = 'none';
-                    marker.textContent = '💎';
-                    marker.style.fontSize = '16px';
-                    marker.style.color = '#f0a500';
-                };
-
-                // ENHANCED: Better value overlay
-                const valueOverlay = document.createElement('div');
-                valueOverlay.style.cssText = `
-                    position: absolute;
-                    bottom: -12px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: linear-gradient(135deg, #f0a500, #fb923c);
-                    color: white;
-                    font-size: 11px;
-                    font-weight: 900;
-                    padding: 4px 8px;
-                    border-radius: 12px;
-                    border: 2px solid white;
-                    backdrop-filter: blur(5px);
-                    white-space: nowrap;
-                    pointer-events: none;
-                    box-shadow: 0 3px 12px rgba(240, 165, 0, 0.6);
-                    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-                    animation: valueBadgePulse 2s ease-in-out infinite;
-                `;
-                valueOverlay.textContent = `${token.value}`;
-
-                marker.appendChild(tokenImage);
-                marker.appendChild(valueOverlay);
-
-                // ENHANCED: Click handler shows proper navigation modal
-                marker.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    // Visual feedback
-                    marker.style.transform = 'translate(-50%, -50%) scale(1.2)';
-                    marker.style.zIndex = '1000';
-                    
-                    setTimeout(() => {
-                        marker.style.transform = 'translate(-50%, -50%) scale(1)';
-                        marker.style.zIndex = '15';
-                    }, 300);
-                    
-                    // Calculate distance and show navigation modal
-                    token.distance = this.calculateDistance(
-                        this.userLat, this.userLng,
-                        token.lat, token.lng
-                    );
-                    
-                    this.showNavigationModal(token);
-                    
-                    if (navigator.vibrate) {
-                        navigator.vibrate(30);
-                    }
-                });
-
-                // Add location label
-                if (labelsContainer) {
-                    const label = document.createElement('div');
-                    label.style.cssText = `
-                        position: absolute;
-                        left: ${position.x}%;
-                        top: ${position.y - 8}%;
-                        transform: translateX(-50%);
-                        background: rgba(139, 69, 19, 0.9);
-                        color: white;
-                        font-size: 12px;
-                        font-weight: 700;
-                        padding: 4px 8px;
-                        border-radius: 8px;
-                        white-space: nowrap;
-                        pointer-events: none;
-                        z-index: 12;
-                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-                        border: 1px solid rgba(240, 165, 0, 0.4);
-                    `;
-                    label.textContent = token.location;
-                    labelsContainer.appendChild(label);
-                }
-
-                markersContainer.appendChild(marker);
-
-                // Animate appearance
-                setTimeout(() => {
-                    marker.style.opacity = '1';
-                }, index * 150);
-
-            } catch (error) {
-                console.error('❌ Enhanced demo marker creation error:', error);
-            }
-        }
-
-        // Add CSS keyframes for animations
-        addMapAnimationStyles() {
-            if (document.getElementById('mapAnimationStyles')) return;
-            
-            const style = document.createElement('style');
-            style.id = 'mapAnimationStyles';
-            style.textContent = `
-                @keyframes markerPulse {
-                    0%, 100% { 
-                        box-shadow: 0 0 0 0 rgba(240, 165, 0, 0.7);
-                        transform: translate(-50%, -50%) scale(1);
-                    }
-                    50% { 
-                        box-shadow: 0 0 0 20px rgba(240, 165, 0, 0);
-                        transform: translate(-50%, -50%) scale(1.05);
-                    }
-                }
-                
-                @keyframes valueBadgePulse {
-                    0%, 100% { transform: translateX(-50%) scale(1); }
-                    50% { transform: translateX(-50%) scale(1.05); }
-                }
-                
-                .demo-token-marker:hover {
-                    transform: translate(-50%, -50%) scale(1.15) !important;
-                    z-index: 25 !important;
-                }
-                
-                .demo-token-marker:active {
-                    transform: translate(-50%, -50%) scale(0.95) !important;
-                }
-                
-                .demo-token-marker.high {
-                    border-color: #ff6b6b !important;
-                    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6) !important;
-                }
-                
-                .demo-token-marker.medium {
-                    border-color: #fb923c !important;
-                    box-shadow: 0 0 20px rgba(251, 146, 60, 0.6) !important;
-                }
-                
-                .demo-token-marker.low {
-                    border-color: #4CAF50 !important;
-                    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6) !important;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        // ENHANCED: Start game features after map loads
-        startGameFeatures() {
-            console.log('🎮 Starting game features...');
-            
-            // Add animation styles
-            this.addMapAnimationStyles();
-            
-            // Update location card with coordinates
-            this.updateLocationDisplay();
-            
-            // Start proximity checking
-            this.checkTokenProximity();
-            
-            // Update nearby tokens display
-            this.updateNearbyTokens();
-            
-            console.log('✅ Game features started');
-        }
-
-        // ENHANCED: Update location display with campaign info
-        updateLocationDisplay() {
-            try {
-                const latEl = document.getElementById('fallbackLat');
-                const lngEl = document.getElementById('fallbackLng');
-                
-                if (latEl) latEl.textContent = this.userLat.toFixed(4);
-                if (lngEl) lngEl.textContent = this.userLng.toFixed(4);
-                
-            } catch (error) {
-                console.error('❌ Location display update error:', error);
-            }
-        }
-
-        // ENHANCED: Navigation modal with driving/walking directions
-        showNavigationModal(token) {
-            console.log('🗺️ Showing navigation modal for:', token.location);
-            try {
-                this.currentNavigationToken = token;
-                
-                const modal = document.getElementById('navigationModal');
-                const tokenName = document.getElementById('navTokenName');
-                const distance = document.getElementById('navDistance');
-                const walkTime = document.getElementById('navWalkTime');
-                const driveTime = document.getElementById('navDriveTime');
-                const arOption = document.getElementById('navAR');
-                
-                if (tokenName) tokenName.textContent = `${token.value} $Ember Token`;
-                
-                if (token.distance) {
-                    const distanceText = token.distance < 1 ? 
-                        `${(token.distance * 1000).toFixed(0)}m away` : 
-                        `${token.distance.toFixed(1)}km away`;
-                    
-                    if (distance) distance.textContent = distanceText;
-                    
-                    const walkMinutes = Math.round(token.distance * 12);
-                    const driveMinutes = Math.round(token.distance * 2);
-                    
-                    if (walkTime) walkTime.textContent = `~${walkMinutes} min`;
-                    if (driveTime) driveTime.textContent = `~${driveMinutes} min`;
-                    
-                    // Show AR option if close enough
-                    const isCloseEnough = token.distance <= 0.1;
-                    if (arOption) {
-                        arOption.style.display = isCloseEnough ? 'flex' : 'none';
-                        if (isCloseEnough) {
-                            arOption.onclick = () => {
-                                this.hideNavigationModal();
-                                this.switchMode('ar');
-                            };
-                        }
-                    }
-                }
-                
-                if (modal) {
-                    modal.classList.add('show');
-                }
-                
-            } catch (error) {
-                console.error('❌ Navigation modal error:', error);
-            }
-        }
-
-        hideNavigationModal() {
-            const modal = document.getElementById('navigationModal');
-            if (modal) {
-                modal.classList.remove('show');
-            }
-            this.currentNavigationToken = null;
-        }
-
-        openMapsNavigation(mode) {
-            if (!this.currentNavigationToken) return;
-            
-            const token = this.currentNavigationToken;
-            const destination = `${token.lat},${token.lng}`;
-            
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-            
-            let mapsUrl;
-            if (mode === 'walking') {
-                mapsUrl = isIOS ? 
-                    `maps://maps.google.com/maps?daddr=${destination}&dirflg=w` :
-                    `https://maps.google.com/maps?daddr=${destination}&dirflg=w`;
-            } else if (mode === 'driving') {
-                mapsUrl = isIOS ? 
-                    `maps://maps.google.com/maps?daddr=${destination}&dirflg=d` :
-                    `https://maps.google.com/maps?daddr=${destination}&dirflg=d`;
-            }
-            
-            if (mapsUrl) {
-                window.open(mapsUrl, '_blank');
-                this.hideNavigationModal();
-            }
-            
-            console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
-        }
-
-        // ENHANCED: Setup map interactions
-        setupMapInteractions() {
-            if (!this.mapContainer) return;
-
-            console.log('🖱️ Setting up enhanced map interactions...');
-
-            const zoomInBtn = document.getElementById('zoomInBtn');
-            const zoomOutBtn = document.getElementById('zoomOutBtn');
-
-            if (zoomInBtn) {
-                zoomInBtn.addEventListener('click', () => this.zoomMap(1.2));
-            }
-
-            if (zoomOutBtn) {
-                zoomOutBtn.addEventListener('click', () => this.zoomMap(0.8));
-            }
-
-            // Touch/mouse events for panning
-            this.mapContainer.addEventListener('mousedown', (e) => this.startMapDrag(e));
-            this.mapContainer.addEventListener('touchstart', (e) => this.startMapDrag(e), { passive: false });
-
-            document.addEventListener('mousemove', (e) => this.dragMap(e));
-            document.addEventListener('touchmove', (e) => this.dragMap(e), { passive: false });
-
-            document.addEventListener('mouseup', () => this.endMapDrag());
-            document.addEventListener('touchend', () => this.endMapDrag());
-
-            // Mouse wheel zoom
-            this.mapContainer.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                const scale = e.deltaY > 0 ? 0.9 : 1.1;
-                this.zoomMap(scale);
-            });
-
-            console.log('✅ Enhanced map interactions setup complete');
-        }
-
-        startMapDrag(e) {
-            if (e.touches && e.touches.length > 1) return;
-
-            this.isDraggingMap = true;
-            this.mapContainer.style.cursor = 'grabbing';
-
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-            this.lastTouchX = clientX;
-            this.lastTouchY = clientY;
-
-            if (e.preventDefault) e.preventDefault();
-        }
-
-        dragMap(e) {
-            if (!this.isDraggingMap) return;
-
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-            const deltaX = clientX - this.lastTouchX;
-            const deltaY = clientY - this.lastTouchY;
-
-            this.mapTranslateX += deltaX;
-            this.mapTranslateY += deltaY;
-
-            this.updateMapTransform();
-
-            this.lastTouchX = clientX;
-            this.lastTouchY = clientY;
-
-            if (e.preventDefault) e.preventDefault();
-        }
-
-        endMapDrag() {
-            this.isDraggingMap = false;
-            if (this.mapContainer) {
-                this.mapContainer.style.cursor = 'grab';
-            }
-        }
-
-        zoomMap(scale) {
-            const newScale = Math.max(0.5, Math.min(3, this.mapScale * scale));
-            
-            if (newScale !== this.mapScale) {
-                this.mapScale = newScale;
-                this.updateMapTransform();
-
-                if (navigator.vibrate) {
-                    navigator.vibrate(10);
-                }
-            }
-        }
-
-        updateMapTransform() {
-            if (this.mapContainer) {
-                this.mapContainer.style.transform = `translate(${this.mapTranslateX}px, ${this.mapTranslateY}px) scale(${this.mapScale})`;
-            }
-        }
-
-        // Continue with remaining methods in next response...
         switchMode(mode) {
             if (mode === this.currentMode) return;
             
@@ -1222,11 +1183,11 @@ if (window.isVaultPhoenixCryptoGame) {
                 document.getElementById('vaultView').style.display = 'none';
                 document.getElementById('campaignsView').style.display = 'none';
                 
-                const mapContainer = document.getElementById('googleMap');
+                const mapContainer = document.getElementById('googleMapContainer');
                 if (mapContainer) {
                     mapContainer.style.display = 'block';
                     
-                    if (!this.googleMapsLoaded) {
+                    if (!this.googleMapsLoaded && !this.mapLoadingComplete) {
                         console.log('🎮 Initializing map for hunt screen...');
                         this.initializeGoogleMap();
                     }
@@ -1271,7 +1232,10 @@ if (window.isVaultPhoenixCryptoGame) {
                 document.getElementById('canvas').style.display = 'block';
                 document.getElementById('vaultView').style.display = 'none';
                 document.getElementById('campaignsView').style.display = 'none';
-            } catch (error) {
+                
+                // TODO: Initialize AR camera here
+                
+            } catch (error) {  
                 console.error('❌ AR switch error:', error);
             }
         }
@@ -1283,7 +1247,7 @@ if (window.isVaultPhoenixCryptoGame) {
 
         // =================== UTILITY METHODS ===================
         calculateDistance(lat1, lng1, lat2, lng2) {
-            const R = 6371;
+            const R = 6371; // Earth's radius in km
             const dLat = this.toRadians(lat2 - lat1);
             const dLng = this.toRadians(lng2 - lng1);
             
@@ -1303,16 +1267,7 @@ if (window.isVaultPhoenixCryptoGame) {
             return this.collectedTokens.some(token => token.id === tokenId);
         }
 
-        checkTokenProximity() {
-            // Proximity checking logic
-            console.log('📍 Checking token proximity...');
-        }
-
-        updateNearbyTokens() {
-            console.log('🔍 Updating nearby tokens...');
-        }
-
-        // =================== DASHBOARD METHODS ===================
+        // =================== SESSION & DATA METHODS ===================
         ensureSession() { 
             console.log('🔍 Session management...');
         }
@@ -1467,18 +1422,6 @@ if (window.isVaultPhoenixCryptoGame) {
         addHapticFeedback() {
             console.log('📳 Adding haptic feedback...');
         }
-
-        showWelcomeScreen() {
-            console.log('👋 Showing welcome screen...');
-            try {
-                // Auto-initialize map after brief delay
-                setTimeout(() => {
-                    this.initializeGoogleMap();
-                }, 1000);
-            } catch (error) {
-                console.error('❌ Welcome screen error:', error);
-            }
-        }
     }
 
     // Initialize the game when DOM is ready
@@ -1495,3 +1438,13 @@ if (window.isVaultPhoenixCryptoGame) {
 } else {
     console.log('🚫 Vault Phoenix blocked - not a crypto game page');
 }
+
+// Make Google Maps callback available globally
+window.initMap = function() {
+    console.log('🗺️ Legacy Google Maps callback - redirecting to new handler');
+    if (window.vaultPhoenixApp && typeof window.vaultPhoenixApp.onGoogleMapsLoaded === 'function') {
+        window.vaultPhoenixApp.onGoogleMapsLoaded();
+    } else {
+        window.googleMapsReady = true;
+    }
+};
