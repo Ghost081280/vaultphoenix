@@ -239,6 +239,16 @@
                     <div class="menu-item-icon">📱</div>
                     <div class="menu-item-text">Payment QR</div>
                 </div>
+                
+                <div class="menu-section">
+                    <div class="menu-section-title">Settings</div>
+                </div>
+                
+                <!-- NEW RESET GAME BUTTON -->
+                <div class="menu-item reset-game-item" id="resetGameBtn">
+                    <div class="menu-item-icon">🔄</div>
+                    <div class="menu-item-text">Reset Game</div>
+                </div>
             </div>
             
             <div class="logout-section">
@@ -363,6 +373,27 @@
                             <span>Back to Token</span>
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reset Game Confirmation Modal -->
+        <div class="reset-game-overlay" id="resetGameOverlay">
+            <div class="reset-game-modal">
+                <div class="reset-game-modal-title">🔄 Reset Game Progress</div>
+                <div class="reset-game-modal-text">
+                    Are you sure you want to reset your game progress? This will:
+                    <br><br>
+                    • Clear all collected $Ember tokens<br>
+                    • Reset adventure progress<br>
+                    • Clear token history<br>
+                    • Reset vault balance to $0.00<br>
+                    <br>
+                    <strong>This action cannot be undone!</strong>
+                </div>
+                <div class="reset-game-modal-actions">
+                    <button class="reset-game-modal-btn reset-game-modal-cancel" id="cancelResetGame">Cancel</button>
+                    <button class="reset-game-modal-btn reset-game-modal-confirm" id="confirmResetGame">Reset Game</button>
                 </div>
             </div>
         </div>
