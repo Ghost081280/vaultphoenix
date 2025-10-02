@@ -6,8 +6,9 @@
     <title>Vault Phoenix - AR Crypto Gaming</title>
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
     
-    <!-- FORCE CSS CACHE REFRESH WITH VERSION -->
-    <link rel="stylesheet" href="styles.css?v=2.0">
+    <!-- SPLIT CSS FILES FOR BETTER PERFORMANCE -->
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="login.css">
     
     <!-- Mobile Height Detection Script -->
     <script>
@@ -115,12 +116,7 @@
     <div class="phoenix-glow-bg"></div>
 
     <!-- PERFECTLY CENTERED LOGIN CONTAINER -->
-    <div class="login-container">
-        <!-- Phoenix flame decoration -->
-        <div class="phoenix-flame-decoration">
-            <img src="../images/VPEmberFlame.svg" alt="Phoenix Flame" class="phoenix-flame-icon" onerror="this.textContent='🔥'">
-        </div>
-        
+    <div class="login-container">        
         <div class="logo-section">
             <div class="app-logo">
                 <img src="../images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="logo-image" onerror="this.textContent='🔥'">
@@ -217,6 +213,11 @@
                 <span class="feature-text">Cash Out to Coinbase Wallet</span>
             </div>
         </div>
+    </div>
+
+    <!-- Phoenix flame decoration - MOVED OUTSIDE CONTAINER -->
+    <div class="phoenix-flame-decoration">
+        <img src="../images/VPEmberFlame.svg" alt="Phoenix Flame" class="phoenix-flame-icon" onerror="this.textContent='🔥'">
     </div>
 
     <!-- MOBILE-OPTIMIZED FORGOT PASSWORD LINK -->
