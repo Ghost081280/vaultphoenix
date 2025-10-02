@@ -466,7 +466,7 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // GOOGLE MAPS INTEGRATION
+        // GOOGLE MAPS INTEGRATION WITH DEMO FALLBACK
         initializeGoogleMap() {
             console.log('🗺️ Initializing Google Maps...');
             try {
@@ -476,6 +476,22 @@ if (window.isVaultPhoenixCryptoGame) {
                     return;
                 }
 
+                if (typeof google !== 'undefined' && google.maps && google.maps.Map) {
+                    console.log('✅ Real Google Maps API detected');
+                    this.initializeRealGoogleMap(mapContainer);
+                } else {
+                    console.log('🎮 Using demo map fallback');
+                    this.initializeDemoMap(mapContainer);
+                }
+                
+            } catch (error) {
+                console.error('❌ Google Maps initialization error:', error);
+                this.initializeDemoMap(document.getElementById('googleMap'));
+            }
+        }
+
+        initializeRealGoogleMap(mapContainer) {
+            try {
                 // Create map centered on Phoenix
                 this.googleMap = new google.maps.Map(mapContainer, {
                     center: { lat: this.userLat, lng: this.userLng },
@@ -516,12 +532,246 @@ if (window.isVaultPhoenixCryptoGame) {
                 this.addTokenMarkers();
                 
                 this.googleMapsLoaded = true;
-                console.log('✅ Google Maps initialized successfully');
+                console.log('✅ Real Google Maps initialized successfully');
+            } catch (error) {
+                console.error('❌ Real Google Maps error:', error);
+                this.initializeDemoMap(mapContainer);
+            }
+        }
+
+        initializeDemoMap(mapContainer = null) {
+            console.log('🎮 Initializing demo map...');
+            try {
+                const container = mapContainer || document.getElementById('googleMap');
+                if (!container) return;
+
+                // Create demo map HTML structure
+                container.innerHTML = `
+                    <div class="demo-loading-overlay">
+                        🗺️ Loading Phoenix Map...
+                    </div>
+                    <div class="demo-map-container">
+                        <div class="demo-map-grid"></div>
+                        <div class="demo-phoenix-label">🏜️ Phoenix, AZ</div>
+                        <div class="demo-user-marker" title="Your Location"></div>
+                        <div class="demo-map-markers" id="demoMarkers"></div>
+                        <div class="demo-map-labels" id="demoLabels"></div>
+                    </div>
+                `;
+
+                // Add demo token markers
+                setTimeout(() => {
+                    this.addDemoTokenMarkers();
+                }, 1000);
+
+                this.googleMapsLoaded = true;
+                console.log('✅ Demo map initialized successfully');
                 
             } catch (error) {
-                console.error('❌ Google Maps initialization error:', error);
-                // Fall back to basic map display
-                this.showMapFallback();
+                console.error('❌ Demo map initialization error:', error);
+            }
+        }
+
+        addDemoTokenMarkers() {
+            try {
+                const markersContainer = document.getElementById('demoMarkers');
+                const labelsContainer = document.getElementById('demoLabels');
+                
+                if (!markersContainer || !labelsContainer) return;
+
+                // Clear existing markers
+                markersContainer.innerHTML = '';
+                labelsContainer.innerHTML = '';
+
+                // Add markers for uncollected tokens only
+                this.emberTokens.forEach((token, index) => {
+                    if (!this.isTokenCollected(token.id)) {
+                        this.addDemoTokenMarker(token, index, markersContainer, labelsContainer);
+                    }
+                });
+
+                console.log('💎 Demo token markers added');
+            } catch (error) {
+                console.error('❌ Demo token markers error:', error);
+            }
+        }
+
+        addDemoTokenMarker(token, index, markersContainer, labelsContainer) {
+            try {
+                // Calculate position based on token data (simulate map positioning)
+                const positions = [
+                    { x: 45, y: 60 }, // Downtown Phoenix
+                    { x: 75, y: 25 }, // Scottsdale Quarter  
+                    { x: 55, y: 85 }, // Tempe Town Lake
+                    { x: 80, y: 30 }, // Old Town Scottsdale
+                    { x: 50, y: 90 }, // ASU
+                    { x: 40, y: 70 }, // Sky Harbor
+                    { x: 65, y: 15 }, // Camelback Mountain
+                    { x: 70, y: 45 }, // Desert Botanical Garden
+                    { x: 35, y: 55 }, // Roosevelt Row
+                    { x: 45, y: 75 }, // Chase Field
+                    { x: 60, y: 65 }, // Papago Park
+                    { x: 70, y: 20 }  // Biltmore Fashion Park
+                ];
+
+                const position = positions[index] || { x: 50 + (index * 10) % 40, y: 50 + (index * 15) % 40 };
+
+                // Create marker element
+                const marker = document.createElement('div');
+                marker.className = `demo-token-marker ${token.tier}`;
+                marker.style.left = `${position.x}%`;
+                marker.style.top = `${position.y}%`;
+                marker.textContent = token.value;
+                marker.title = `${token.location} - ${token.value} $Ember`;
+                marker.dataset.tokenId = token.id;
+
+                // Create label element
+                const label = document.createElement('div');
+                label.className = 'demo-map-label';
+                label.style.left = `${position.x}%`;
+                label.style.top = `${position.y}%`;
+                label.textContent = token.location;
+
+                // Add click handler
+                marker.addEventListener('click', () => {
+                    console.log('🎯 Demo marker clicked:', token.location);
+                    
+                    // Add visual feedback
+                    marker.style.transform = 'scale(1.3)';
+                    setTimeout(() => {
+                        marker.style.transform = 'scale(1)';
+                    }, 200);
+                    
+                    // Show navigation modal after brief delay
+                    setTimeout(() => {
+                        this.showNavigationModal(token);
+                    }, 300);
+                    
+                    if (navigator.vibrate) {
+                        navigator.vibrate(30);
+                    }
+                });
+
+                // Add hover effect for labels
+                marker.addEventListener('mouseenter', () => {
+                    label.style.opacity = '1';
+                    label.style.transform = 'translate(-50%, -100%) scale(1.1)';
+                });
+
+                marker.addEventListener('mouseleave', () => {
+                    label.style.opacity = '0.7';
+                    label.style.transform = 'translate(-50%, -100%) scale(1)';
+                });
+
+                markersContainer.appendChild(marker);
+                labelsContainer.appendChild(label);
+
+                // Animate marker appearance
+                setTimeout(() => {
+                    marker.style.animation = `markerPulse 2s ease-in-out infinite ${index * 0.2}s`;
+                }, index * 100);
+
+            } catch (error) {
+                console.error('❌ Demo token marker creation error:', error);
+            }
+        }
+
+        saveCollectedTokens() {
+            try {
+                localStorage.setItem('vaultPhoenixTokens', JSON.stringify(this.collectedTokens));
+                this.calculateTotalValue();
+                this.calculateStats();
+                this.updateVaultStats();
+                this.updateAvailableTokensCount();
+                
+                // Update map markers (both real and demo)
+                if (this.googleMapsLoaded) {
+                    if (typeof google !== 'undefined' && google.maps && this.googleMap) {
+                        this.addTokenMarkers(); // Real Google Maps
+                    } else {
+                        this.addDemoTokenMarkers(); // Demo map
+                    }
+                }
+                
+                console.log('💾 Tokens saved:', this.collectedTokens.length, 'worth', this.totalTokenValue, '$Ember');
+            } catch (error) {
+                console.error('❌ Token saving error:', error);
+            }
+        }
+
+        resetGame() {
+            console.log('🔄 Resetting game progress...');
+            try {
+                // Hide the confirmation modal first
+                this.hideResetGameConfirmation();
+                
+                // Show loading overlay
+                this.showLoading(true);
+                
+                // Clear localStorage data
+                try {
+                    localStorage.removeItem('vaultPhoenixTokens');
+                    console.log('✅ Cleared collected tokens from localStorage');
+                } catch (error) {
+                    console.log('⚠️ localStorage clear error:', error);
+                }
+                
+                // Reset all game data
+                this.collectedTokens = [];
+                this.totalTokenValue = 0;
+                this.locationsVisited = 0;
+                this.lastActivityTime = null;
+                this.availableTokensCount = 12;
+                this.currentDiscoveredToken = null;
+                
+                // Reset adventure progress
+                this.themedAdventures.forEach(adventure => {
+                    adventure.active = adventure.id === 'phoenix-sports'; // Reset to default
+                    adventure.progress = 0; // Reset all progress
+                    adventure.completed = false;
+                });
+                
+                // Update all UI elements
+                this.updateVaultStats();
+                this.updateAvailableTokensCount();
+                this.generateTokenHistory();
+                this.updateCampaignDisplay();
+                
+                // Update map markers (both real and demo)
+                if (this.googleMapsLoaded) {
+                    if (typeof google !== 'undefined' && google.maps && this.googleMap) {
+                        this.addTokenMarkers(); // Real Google Maps
+                    } else {
+                        this.addDemoTokenMarkers(); // Demo map
+                    }
+                }
+                
+                // Hide any open modals
+                this.hideTokenDiscovery();
+                this.hideEmberCoin();
+                this.hideProximityNotification();
+                
+                // Hide loading overlay
+                this.showLoading(false);
+                
+                // Show success message with celebration
+                if (navigator.vibrate) {
+                    navigator.vibrate([200, 100, 200, 100, 200]);
+                }
+                
+                // Switch to map mode
+                this.switchMode('map');
+                
+                setTimeout(() => {
+                    alert('🎮 Game Reset Complete!\n\n✅ All tokens cleared\n✅ Progress reset\n✅ Adventures reset\n\n🔥 Ready to start your $Ember hunt again!');
+                }, 500);
+                
+                console.log('✅ Game reset completed successfully');
+                
+            } catch (error) {
+                console.error('❌ Game reset error:', error);
+                this.showLoading(false);
+                alert('❌ Reset failed. Please try again or refresh the page.');
             }
         }
 
