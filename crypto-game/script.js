@@ -1,173 +1,4 @@
-// Vault Phoenix AR Crypto Gaming - COMPLETE WORKING JAVASCRIPT
-// PROTECTION: Only affects crypto-game/ folder - prevents main site interference
-// FILE PATH: crypto-game/script.js
-
-console.log('🔥💎 Vault Phoenix Crypto Game JavaScript Loading...');
-
-// IMMEDIATE PROTECTION - CHECK IF THIS IS A CRYPTO GAME PAGE
-(function() {
-    const cryptoFlag = document.getElementById('cryptoGameFlag');
-    const isCryptoPage = cryptoFlag || 
-                        document.body.classList.contains('crypto-login-page') || 
-                        document.body.classList.contains('crypto-dashboard-page') ||
-                        window.location.pathname.includes('crypto-game') ||
-                        document.title.includes('Vault Phoenix');
-    
-    if (!isCryptoPage) {
-        console.log('🚫 Not a crypto game page - blocking JavaScript execution');
-        return;
-    }
-    
-    window.isVaultPhoenixCryptoGame = true;
-    console.log('🔥💎 Crypto Game JavaScript ACTIVE - Page confirmed');
-    
-    // Force apply login page class if we detect login elements
-    if (document.getElementById('loginForm') && !document.body.classList.contains('crypto-login-page')) {
-        document.body.classList.add('crypto-login-page');
-        console.log('🔧 Applied crypto-login-page class');
-    }
-    
-    // Force apply dashboard page class if we detect dashboard elements
-    if (document.getElementById('container') && !document.body.classList.contains('crypto-dashboard-page')) {
-        document.body.classList.add('crypto-dashboard-page');
-        console.log('🔧 Applied crypto-dashboard-page class');
-    }
-})();
-
-// ONLY RUN IF THIS IS A CRYPTO GAME PAGE
-if (window.isVaultPhoenixCryptoGame) {
-
-    class VaultPhoenixCryptoGame {
-        constructor() {
-            console.log('🔥💎 Vault Phoenix initializing...');
-            
-            // Initialize all properties safely
-            this.userLat = 33.4484; // Phoenix, AZ default
-            this.userLng = -112.0740;
-            this.heading = 0;
-            this.scene = null;
-            this.camera = null;
-            this.renderer = null;
-            this.tokenLocations = [];
-            this.tokenObjects = [];
-            this.mapMarkers = [];
-            this.isStarted = false;
-            this.currentMode = 'map';
-            this.googleMap = null;
-            this.userMarker = null;
-            this.animationStarted = false;
-            this.collectedTokens = [];
-            this.totalTokenValue = 0;
-            this.currentDiscoveredToken = null;
-            this.cameraStream = null;
-            this.hasReceivedOrientationData = false;
-            this.compassInterval = null;
-            this.isCompassActive = false;
-            this.currentNavigationToken = null;
-            this.proximityCheckInterval = null;
-            this.isShowingSponsorDetails = false;
-            this.googleMapsLoaded = false;
-            this.locationsVisited = 0;
-            this.lastActivityTime = null;
-            this.welcomeShown = false;
-            this.availableTokensCount = 13;
-            this.orientationHandler = null;
-            this.currentUser = null;
-            
-            // Enhanced properties
-            this.mapLoadingComplete = false;
-            this.newTokenInterval = null;
-            this.lastProximityCheck = 0;
-            
-            // Swipeable module properties
-            this.moduleExpanded = false;
-            this.moduleStartY = 0;
-            this.moduleCurrentY = 0;
-            this.isDragging = false;
-            this.moduleTranslateY = 0;
-            
-            // Google Maps properties
-            this.tokenMarkers = [];
-            this.infoWindows = [];
-            this.isNearToken = false;
-
-            // Enhanced Ember Token System with Real Locations and Value Tiers
-            this.emberTokens = [
-                // DEMO: Nearby token for AR mode demonstration - FIXED POSITIONING
-                { id: 13, value: 100, tier: "low", location: "Phoenix Downtown Plaza", lat: 33.4486, lng: -112.0742, sponsor: "Demo Location", message: "You're close! Try AR mode!", description: "This is a demo token placed nearby to show AR functionality." },
-                { id: 1, value: 500, tier: "high", location: "Downtown Phoenix", lat: 33.4484, lng: -112.0740, sponsor: "Phoenix Suns Arena", message: "Exclusive courtside experience awaits!", description: "Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours." },
-                { id: 2, value: 250, tier: "medium", location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards unlocked!", description: "Discover luxury shopping with exclusive discounts and VIP personal shopping services." },
-                { id: 3, value: 50, tier: "low", location: "Desert Botanical Garden", lat: 33.4619, lng: -111.9463, sponsor: "Garden Cafe", message: "Nature-inspired dining experience!", description: "Farm-to-table dining surrounded by stunning desert flora." },
-                { id: 4, value: 150, tier: "medium", location: "Old Town Scottsdale", lat: 33.4942, lng: -111.9261, sponsor: "Arizona Bike Tours", message: "Adventure awaits in the desert!", description: "Explore the Sonoran Desert with guided tours and premium bike rentals." },
-                { id: 5, value: 300, tier: "medium", location: "Arizona State University", lat: 33.4194, lng: -111.9339, sponsor: "ASU Bookstore", message: "Student discounts and exclusive gear!", description: "Access student resources and exclusive Sun Devil merchandise." },
-                { id: 6, value: 75, tier: "low", location: "Phoenix Sky Harbor", lat: 33.4343, lng: -112.0116, sponsor: "Sky Harbor Shops", message: "Travel rewards for your next adventure!", description: "Unlock travel perks and duty-free shopping benefits." },
-                { id: 7, value: 200, tier: "medium", location: "Camelback Mountain", lat: 33.5186, lng: -111.9717, sponsor: "Desert Hiking Gear", message: "Gear up for your next hike!", description: "Professional hiking equipment and guided desert expedition packages." },
-                { id: 8, value: 125, tier: "low", location: "Roosevelt Row", lat: 33.4524, lng: -112.0708, sponsor: "Local Art Gallery", message: "Support local artists and creators!", description: "Discover emerging artists and exclusive art collection access." },
-                { id: 9, value: 100, tier: "low", location: "Tempe Town Lake", lat: 33.4255, lng: -111.9400, sponsor: "Local Coffee Co.", message: "Free coffee for early hunters!", description: "Enjoy artisanal coffee and cozy workspace with special $Ember holder benefits." },
-                { id: 10, value: 400, tier: "high", location: "Chase Field", lat: 33.4453, lng: -112.0667, sponsor: "Arizona Diamondbacks", message: "Baseball season tickets await!", description: "Premium baseball experiences with season ticket perks and dugout tours." },
-                { id: 11, value: 90, tier: "low", location: "Papago Park", lat: 33.4551, lng: -111.9511, sponsor: "Park Recreation Center", message: "Family fun activities included!", description: "Family-friendly activities and recreational programs for all ages." },
-                { id: 12, value: 175, tier: "medium", location: "Biltmore Fashion Park", lat: 33.5117, lng: -112.0736, sponsor: "Luxury Boutiques", message: "Exclusive fashion rewards!", description: "High-end fashion with personal styling services and exclusive previews." }
-            ];
-
-            // Initialize when DOM is ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => this.init());
-            } else {
-                this.init();
-            }
-            
-            // Make globally accessible
-            window.vaultPhoenixApp = this;
-        }
-
-        init() {
-            console.log('🔧 Initializing Vault Phoenix...');
-            try {
-                if (document.getElementById('loginForm')) {
-                    console.log('📱 Detected login page, setting up login listeners...');
-                    this.setupLoginListeners();
-                    console.log('✅ Login page initialized');
-                } else if (document.getElementById('container')) {
-                    console.log('🎮 Detected dashboard page, setting up dashboard...');
-                    this.ensureSession();
-                    this.loadUserInfo();
-                    this.loadCollectedTokens();
-                    this.setupEventListeners();
-                    this.initializeVault();
-                    this.initializeCampaigns();
-                    this.setupSwipeableModule();
-                    this.addHapticFeedback();
-                    document.body.classList.add('crypto-dashboard-page');
-                    this.setModeAttribute('map');
-                    
-                    // Initialize demo map immediately
-                    setTimeout(() => {
-                        this.initializeGoogleMap();
-                    }, 500);
-                    
-                    console.log('✅ Dashboard initialized');
-                }
-            } catch (error) {
-                console.error('❌ Initialization error:', error);
-                if (document.getElementById('container')) {
-                    this.collectedTokens = [];
-                    this.totalTokenValue = 0;
-                    this.updateVaultStats();
-                }
-            }
-        }
-
-        // =================== MAP SYSTEM ===================
-        initializeGoogleMap() {
-            console.log('🗺️ Initializing Map System...');
-            try {
-                const mapContainer = document.getElementById('googleMapContainer');
-                if (!mapContainer) {
-                    console.error('❌ Map container not found');
-                    return;
-                }
-
-                // Show loading overlay
+// Show loading overlay
                 this.showMapLoading();
 
                 // Always use demo map for demo experience
@@ -889,6 +720,308 @@ if (window.isVaultPhoenixCryptoGame) {
             console.log('✅ Map interactions setup complete');
         }
 
+        // =================== SWIPEABLE MODULE SYSTEM ===================
+        setupSwipeableModule() {
+            console.log('👆 Setting up swipeable token locations module...');
+            try {
+                const module = document.getElementById('tokenLocationsModule');
+                const handle = document.getElementById('swipeHandle');
+                
+                if (!module || !handle) {
+                    console.error('❌ Swipeable module elements not found');
+                    return;
+                }
+
+                // Initial state - collapsed
+                module.classList.add('collapsed');
+                this.moduleExpanded = false;
+
+                // Touch events for mobile
+                handle.addEventListener('touchstart', (e) => {
+                    this.handleTouchStart(e);
+                }, { passive: true });
+
+                handle.addEventListener('touchmove', (e) => {
+                    this.handleTouchMove(e);
+                }, { passive: true });
+
+                handle.addEventListener('touchend', (e) => {
+                    this.handleTouchEnd(e);
+                }, { passive: true });
+
+                // Mouse events for desktop
+                handle.addEventListener('mousedown', (e) => {
+                    this.handleMouseDown(e);
+                });
+
+                handle.addEventListener('click', (e) => {
+                    // Simple click toggle if no drag occurred
+                    if (!this.isDragging) {
+                        this.toggleModule();
+                    }
+                    this.isDragging = false;
+                });
+
+                console.log('✅ Swipeable module setup complete');
+                
+            } catch (error) {
+                console.error('❌ Swipeable module setup error:', error);
+            }
+        }
+
+        handleTouchStart(e) {
+            this.isDragging = true;
+            this.moduleStartY = e.touches[0].clientY;
+            this.moduleCurrentY = this.moduleStartY;
+        }
+
+        handleTouchMove(e) {
+            if (!this.isDragging) return;
+            
+            this.moduleCurrentY = e.touches[0].clientY;
+            const deltaY = this.moduleStartY - this.moduleCurrentY;
+            
+            // Update visual feedback
+            const module = document.getElementById('tokenLocationsModule');
+            const handleBar = document.querySelector('.handle-bar');
+            
+            if (deltaY > 10) {
+                // Swiping up
+                if (handleBar) handleBar.style.background = '#f0a500';
+            } else if (deltaY < -10) {
+                // Swiping down
+                if (handleBar) handleBar.style.background = 'rgba(240, 165, 0, 0.6)';
+            }
+        }
+
+        handleTouchEnd(e) {
+            if (!this.isDragging) return;
+            
+            const deltaY = this.moduleStartY - this.moduleCurrentY;
+            const threshold = 50; // Minimum swipe distance
+            
+            if (Math.abs(deltaY) > threshold) {
+                if (deltaY > 0 && !this.moduleExpanded) {
+                    // Swiped up - expand
+                    this.expandModule();
+                } else if (deltaY < 0 && this.moduleExpanded) {
+                    // Swiped down - collapse
+                    this.collapseModule();
+                }
+            }
+            
+            // Reset visual feedback
+            const handleBar = document.querySelector('.handle-bar');
+            if (handleBar) {
+                handleBar.style.background = 'rgba(240, 165, 0, 0.6)';
+            }
+            
+            this.isDragging = false;
+        }
+
+        handleMouseDown(e) {
+            this.isDragging = true;
+            this.moduleStartY = e.clientY;
+            
+            const handleMouseMove = (e) => {
+                if (!this.isDragging) return;
+                
+                this.moduleCurrentY = e.clientY;
+                const deltaY = this.moduleStartY - this.moduleCurrentY;
+                
+                // Visual feedback
+                const handleBar = document.querySelector('.handle-bar');
+                if (deltaY > 10) {
+                    if (handleBar) handleBar.style.background = '#f0a500';
+                } else if (deltaY < -10) {
+                    if (handleBar) handleBar.style.background = 'rgba(240, 165, 0, 0.6)';
+                }
+            };
+            
+            const handleMouseUp = (e) => {
+                if (!this.isDragging) return;
+                
+                const deltaY = this.moduleStartY - this.moduleCurrentY;
+                const threshold = 30;
+                
+                if (Math.abs(deltaY) > threshold) {
+                    if (deltaY > 0 && !this.moduleExpanded) {
+                        this.expandModule();
+                    } else if (deltaY < 0 && this.moduleExpanded) {
+                        this.collapseModule();
+                    }
+                }
+                
+                // Clean up
+                document.removeEventListener('mousemove', handleMouseMove);
+                document.removeEventListener('mouseup', handleMouseUp);
+                
+                const handleBar = document.querySelector('.handle-bar');
+                if (handleBar) {
+                    handleBar.style.background = 'rgba(240, 165, 0, 0.6)';
+                }
+                
+                this.isDragging = false;
+            };
+            
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        }
+
+        toggleModule() {
+            if (this.moduleExpanded) {
+                this.collapseModule();
+            } else {
+                this.expandModule();
+            }
+        }
+
+        expandModule() {
+            console.log('📈 Expanding token locations module');
+            const module = document.getElementById('tokenLocationsModule');
+            if (module) {
+                module.classList.remove('collapsed');
+                module.classList.add('expanded');
+                this.moduleExpanded = true;
+                
+                // Haptic feedback
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+            }
+        }
+
+        collapseModule() {
+            console.log('📉 Collapsing token locations module');
+            const module = document.getElementById('tokenLocationsModule');
+            if (module) {
+                module.classList.remove('expanded');
+                module.classList.add('collapsed');
+                this.moduleExpanded = false;
+                
+                // Haptic feedback
+                if (navigator.vibrate) {
+                    navigator.vibrate(30);
+                }
+            }
+        }
+
+        // =================== RESET GAME FUNCTION - FIXED ===================
+        resetGame() {
+            console.log('🔄 Starting game reset...');
+            try {
+                // Show confirmation modal
+                const resetOverlay = document.getElementById('resetGameOverlay');
+                if (resetOverlay) {
+                    resetOverlay.classList.add('show');
+                    resetOverlay.style.display = 'flex';
+                    resetOverlay.style.opacity = '1';
+                    resetOverlay.style.visibility = 'visible';
+                }
+                
+            } catch (error) {
+                console.error('❌ Reset game modal error:', error);
+            }
+        }
+
+        confirmResetGame() {
+            console.log('✅ Confirming game reset...');
+            try {
+                // Clear all saved data
+                localStorage.removeItem('vaultPhoenixTokens');
+                localStorage.removeItem('vaultPhoenixProgress');
+                localStorage.removeItem('vaultPhoenixStats');
+                localStorage.removeItem('vaultPhoenixUser');
+                
+                // Reset instance variables
+                this.collectedTokens = [];
+                this.totalTokenValue = 0;
+                this.locationsVisited = 0;
+                this.lastActivityTime = null;
+                
+                // Update UI
+                this.updateVaultStats();
+                this.updateTokenCounts();
+                this.updateNearbyTokens();
+                
+                // Regenerate token markers
+                if (this.mapLoadingComplete) {
+                    this.addDemoTokenMarkers();
+                }
+                
+                // Hide modal
+                this.hideResetGameModal();
+                
+                // Show success message
+                this.showResetSuccessMessage();
+                
+                console.log('🎉 Game reset completed successfully!');
+                
+            } catch (error) {
+                console.error('❌ Game reset error:', error);
+                alert('Error resetting game. Please refresh the page.');
+            }
+        }
+
+        hideResetGameModal() {
+            const resetOverlay = document.getElementById('resetGameOverlay');
+            if (resetOverlay) {
+                resetOverlay.classList.remove('show');
+                resetOverlay.style.display = 'none';
+                resetOverlay.style.opacity = '0';
+                resetOverlay.style.visibility = 'hidden';
+            }
+        }
+
+        showResetSuccessMessage() {
+            // Create temporary success notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(67, 160, 71, 0.95));
+                color: white;
+                padding: 20px 30px;
+                border-radius: 16px;
+                font-size: 16px;
+                font-weight: 700;
+                z-index: 400;
+                box-shadow: 0 12px 32px rgba(76, 175, 80, 0.5);
+                backdrop-filter: blur(20px);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                text-align: center;
+                animation: successFadeIn 0.5s ease-out;
+            `;
+            notification.innerHTML = `
+                <div style="font-size: 20px; margin-bottom: 8px;">🎉</div>
+                <div>Game Reset Complete!</div>
+                <div style="font-size: 14px; opacity: 0.9; margin-top: 4px;">All tokens are available again</div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Add CSS animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes successFadeIn {
+                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'successFadeIn 0.5s ease-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                    document.head.removeChild(style);
+                }, 500);
+            }, 3000);
+        }
+
         // =================== LOGIN SYSTEM ===================
         setupLoginListeners() {
             console.log('🔧 Setting up login listeners...');
@@ -1339,13 +1472,17 @@ if (window.isVaultPhoenixCryptoGame) {
                     { id: 'menuOverlay', event: 'click', handler: () => this.closeMenu() },
                     { id: 'navClose', event: 'click', handler: () => this.hideNavigationModal() },
                     { id: 'navWalking', event: 'click', handler: () => this.openMapsNavigation('walking') },
-                    { id: 'navDriving', event: 'click', handler: () => this.openMapsNavigation('driving') }
+                    { id: 'navDriving', event: 'click', handler: () => this.openMapsNavigation('driving') },
+                    { id: 'resetGameBtn', event: 'click', handler: () => this.resetGame() },
+                    { id: 'confirmResetGame', event: 'click', handler: () => this.confirmResetGame() },
+                    { id: 'cancelResetGame', event: 'click', handler: () => this.hideResetGameModal() }
                 ];
                 
                 handlers.forEach(({ id, event, handler }) => {
                     const element = document.getElementById(id);
                     if (element) {
                         element.addEventListener(event, handler);
+                        console.log(`✅ Added ${event} listener for ${id}`);
                     }
                 });
 
@@ -1428,10 +1565,6 @@ if (window.isVaultPhoenixCryptoGame) {
             console.log('🏆 Initializing campaigns...');
         }
 
-        setupSwipeableModule() {
-            console.log('👆 Setting up swipeable module...');
-        }
-
         addHapticFeedback() {
             console.log('📳 Adding haptic feedback...');
         }
@@ -1450,4 +1583,171 @@ if (window.isVaultPhoenixCryptoGame) {
     
 } else {
     console.log('🚫 Vault Phoenix blocked - not a crypto game page');
-}
+}// Vault Phoenix AR Crypto Gaming - COMPLETE WORKING JAVASCRIPT
+// PROTECTION: Only affects crypto-game/ folder - prevents main site interference
+// FILE PATH: crypto-game/script.js
+
+console.log('🔥💎 Vault Phoenix Crypto Game JavaScript Loading...');
+
+// IMMEDIATE PROTECTION - CHECK IF THIS IS A CRYPTO GAME PAGE
+(function() {
+    const cryptoFlag = document.getElementById('cryptoGameFlag');
+    const isCryptoPage = cryptoFlag || 
+                        document.body.classList.contains('crypto-login-page') || 
+                        document.body.classList.contains('crypto-dashboard-page') ||
+                        window.location.pathname.includes('crypto-game') ||
+                        document.title.includes('Vault Phoenix');
+    
+    if (!isCryptoPage) {
+        console.log('🚫 Not a crypto game page - blocking JavaScript execution');
+        return;
+    }
+    
+    window.isVaultPhoenixCryptoGame = true;
+    console.log('🔥💎 Crypto Game JavaScript ACTIVE - Page confirmed');
+    
+    // Force apply login page class if we detect login elements
+    if (document.getElementById('loginForm') && !document.body.classList.contains('crypto-login-page')) {
+        document.body.classList.add('crypto-login-page');
+        console.log('🔧 Applied crypto-login-page class');
+    }
+    
+    // Force apply dashboard page class if we detect dashboard elements
+    if (document.getElementById('container') && !document.body.classList.contains('crypto-dashboard-page')) {
+        document.body.classList.add('crypto-dashboard-page');
+        console.log('🔧 Applied crypto-dashboard-page class');
+    }
+})();
+
+// ONLY RUN IF THIS IS A CRYPTO GAME PAGE
+if (window.isVaultPhoenixCryptoGame) {
+
+    class VaultPhoenixCryptoGame {
+        constructor() {
+            console.log('🔥💎 Vault Phoenix initializing...');
+            
+            // Initialize all properties safely
+            this.userLat = 33.4484; // Phoenix, AZ default
+            this.userLng = -112.0740;
+            this.heading = 0;
+            this.scene = null;
+            this.camera = null;
+            this.renderer = null;
+            this.tokenLocations = [];
+            this.tokenObjects = [];
+            this.mapMarkers = [];
+            this.isStarted = false;
+            this.currentMode = 'map';
+            this.googleMap = null;
+            this.userMarker = null;
+            this.animationStarted = false;
+            this.collectedTokens = [];
+            this.totalTokenValue = 0;
+            this.currentDiscoveredToken = null;
+            this.cameraStream = null;
+            this.hasReceivedOrientationData = false;
+            this.compassInterval = null;
+            this.isCompassActive = false;
+            this.currentNavigationToken = null;
+            this.proximityCheckInterval = null;
+            this.isShowingSponsorDetails = false;
+            this.googleMapsLoaded = false;
+            this.locationsVisited = 0;
+            this.lastActivityTime = null;
+            this.welcomeShown = false;
+            this.availableTokensCount = 13;
+            this.orientationHandler = null;
+            this.currentUser = null;
+            
+            // Enhanced properties
+            this.mapLoadingComplete = false;
+            this.newTokenInterval = null;
+            this.lastProximityCheck = 0;
+            
+            // Swipeable module properties
+            this.moduleExpanded = false;
+            this.moduleStartY = 0;
+            this.moduleCurrentY = 0;
+            this.isDragging = false;
+            this.moduleTranslateY = 0;
+            
+            // Google Maps properties
+            this.tokenMarkers = [];
+            this.infoWindows = [];
+            this.isNearToken = false;
+
+            // Enhanced Ember Token System with Real Locations and Value Tiers
+            this.emberTokens = [
+                // DEMO: Nearby token for AR mode demonstration - FIXED POSITIONING
+                { id: 13, value: 100, tier: "low", location: "Phoenix Downtown Plaza", lat: 33.4486, lng: -112.0742, sponsor: "Demo Location", message: "You're close! Try AR mode!", description: "This is a demo token placed nearby to show AR functionality." },
+                { id: 1, value: 500, tier: "high", location: "Downtown Phoenix", lat: 33.4484, lng: -112.0740, sponsor: "Phoenix Suns Arena", message: "Exclusive courtside experience awaits!", description: "Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours." },
+                { id: 2, value: 250, tier: "medium", location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards unlocked!", description: "Discover luxury shopping with exclusive discounts and VIP personal shopping services." },
+                { id: 3, value: 50, tier: "low", location: "Desert Botanical Garden", lat: 33.4619, lng: -111.9463, sponsor: "Garden Cafe", message: "Nature-inspired dining experience!", description: "Farm-to-table dining surrounded by stunning desert flora." },
+                { id: 4, value: 150, tier: "medium", location: "Old Town Scottsdale", lat: 33.4942, lng: -111.9261, sponsor: "Arizona Bike Tours", message: "Adventure awaits in the desert!", description: "Explore the Sonoran Desert with guided tours and premium bike rentals." },
+                { id: 5, value: 300, tier: "medium", location: "Arizona State University", lat: 33.4194, lng: -111.9339, sponsor: "ASU Bookstore", message: "Student discounts and exclusive gear!", description: "Access student resources and exclusive Sun Devil merchandise." },
+                { id: 6, value: 75, tier: "low", location: "Phoenix Sky Harbor", lat: 33.4343, lng: -112.0116, sponsor: "Sky Harbor Shops", message: "Travel rewards for your next adventure!", description: "Unlock travel perks and duty-free shopping benefits." },
+                { id: 7, value: 200, tier: "medium", location: "Camelback Mountain", lat: 33.5186, lng: -111.9717, sponsor: "Desert Hiking Gear", message: "Gear up for your next hike!", description: "Professional hiking equipment and guided desert expedition packages." },
+                { id: 8, value: 125, tier: "low", location: "Roosevelt Row", lat: 33.4524, lng: -112.0708, sponsor: "Local Art Gallery", message: "Support local artists and creators!", description: "Discover emerging artists and exclusive art collection access." },
+                { id: 9, value: 100, tier: "low", location: "Tempe Town Lake", lat: 33.4255, lng: -111.9400, sponsor: "Local Coffee Co.", message: "Free coffee for early hunters!", description: "Enjoy artisanal coffee and cozy workspace with special $Ember holder benefits." },
+                { id: 10, value: 400, tier: "high", location: "Chase Field", lat: 33.4453, lng: -112.0667, sponsor: "Arizona Diamondbacks", message: "Baseball season tickets await!", description: "Premium baseball experiences with season ticket perks and dugout tours." },
+                { id: 11, value: 90, tier: "low", location: "Papago Park", lat: 33.4551, lng: -111.9511, sponsor: "Park Recreation Center", message: "Family fun activities included!", description: "Family-friendly activities and recreational programs for all ages." },
+                { id: 12, value: 175, tier: "medium", location: "Biltmore Fashion Park", lat: 33.5117, lng: -112.0736, sponsor: "Luxury Boutiques", message: "Exclusive fashion rewards!", description: "High-end fashion with personal styling services and exclusive previews." }
+            ];
+
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => this.init());
+            } else {
+                this.init();
+            }
+            
+            // Make globally accessible
+            window.vaultPhoenixApp = this;
+        }
+
+        init() {
+            console.log('🔧 Initializing Vault Phoenix...');
+            try {
+                if (document.getElementById('loginForm')) {
+                    console.log('📱 Detected login page, setting up login listeners...');
+                    this.setupLoginListeners();
+                    console.log('✅ Login page initialized');
+                } else if (document.getElementById('container')) {
+                    console.log('🎮 Detected dashboard page, setting up dashboard...');
+                    this.ensureSession();
+                    this.loadUserInfo();
+                    this.loadCollectedTokens();
+                    this.setupEventListeners();
+                    this.initializeVault();
+                    this.initializeCampaigns();
+                    this.setupSwipeableModule();
+                    this.addHapticFeedback();
+                    document.body.classList.add('crypto-dashboard-page');
+                    this.setModeAttribute('map');
+                    
+                    // Initialize demo map immediately
+                    setTimeout(() => {
+                        this.initializeGoogleMap();
+                    }, 500);
+                    
+                    console.log('✅ Dashboard initialized');
+                }
+            } catch (error) {
+                console.error('❌ Initialization error:', error);
+                if (document.getElementById('container')) {
+                    this.collectedTokens = [];
+                    this.totalTokenValue = 0;
+                    this.updateVaultStats();
+                }
+            }
+        }
+
+        // =================== MAP SYSTEM ===================
+        initializeGoogleMap() {
+            console.log('🗺️ Initializing Map System...');
+            try {
+                const mapContainer = document.getElementById('googleMapContainer');
+                if (!mapContainer) {
+                    console.error('❌ Map container not found');
+                    return;
+                }
