@@ -1139,116 +1139,6 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // =================== RESET GAME FUNCTION ===================
-        resetGame() {
-            console.log('🔄 Starting game reset...');
-            try {
-                // Show confirmation modal
-                const resetOverlay = document.getElementById('resetGameOverlay');
-                if (resetOverlay) {
-                    resetOverlay.classList.add('show');
-                }
-                
-            } catch (error) {
-                console.error('❌ Reset game modal error:', error);
-            }
-        }
-
-        confirmResetGame() {
-            console.log('✅ Confirming game reset...');
-            try {
-                // Clear all saved data
-                localStorage.removeItem('vaultPhoenixTokens');
-                localStorage.removeItem('vaultPhoenixProgress');
-                localStorage.removeItem('vaultPhoenixStats');
-                localStorage.removeItem('vaultPhoenixUser');
-                
-                // Reset instance variables
-                this.collectedTokens = [];
-                this.totalTokenValue = 0;
-                this.locationsVisited = 0;
-                this.lastActivityTime = null;
-                
-                // Update UI
-                this.updateVaultStats();
-                this.updateTokenCounts();
-                this.updateNearbyTokens();
-                
-                // Regenerate token markers
-                if (this.mapLoadingComplete) {
-                    this.addDemoTokenMarkers();
-                }
-                
-                // Hide modal
-                this.hideResetGameModal();
-                
-                // Show success message
-                this.showResetSuccessMessage();
-                
-                console.log('🎉 Game reset completed successfully!');
-                
-            } catch (error) {
-                console.error('❌ Game reset error:', error);
-                alert('Error resetting game. Please refresh the page.');
-            }
-        }
-
-        hideResetGameModal() {
-            const resetOverlay = document.getElementById('resetGameOverlay');
-            if (resetOverlay) {
-                resetOverlay.classList.remove('show');
-            }
-        }
-
-        showResetSuccessMessage() {
-            // Create temporary success notification
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(67, 160, 71, 0.95));
-                color: white;
-                padding: 20px 30px;
-                border-radius: 16px;
-                font-size: 16px;
-                font-weight: 700;
-                z-index: 400;
-                box-shadow: 0 12px 32px rgba(76, 175, 80, 0.5);
-                backdrop-filter: blur(20px);
-                border: 2px solid rgba(255, 255, 255, 0.3);
-                text-align: center;
-                animation: successFadeIn 0.5s ease-out;
-            `;
-            notification.innerHTML = `
-                <div style="font-size: 20px; margin-bottom: 8px;">🎉</div>
-                <div>Game Reset Complete!</div>
-                <div style="font-size: 14px; opacity: 0.9; margin-top: 4px;">All tokens are available again</div>
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Add CSS animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes successFadeIn {
-                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                notification.style.animation = 'successFadeIn 0.5s ease-out reverse';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                    document.head.removeChild(style);
-                }, 500);
-            }, 3000);
-        }
-
         // =================== DASHBOARD SYSTEM ===================
         setModeAttribute(mode) {
             try {
@@ -1357,7 +1247,8 @@ if (window.isVaultPhoenixDashboard) {
                     }, 5000);
                 }
                 
-                // TODO: Initialize AR camera here
+                // Simulate AR token if near one
+                this.simulateARTokenDiscovery();
                 
             } catch (error) {  
                 console.error('❌ AR switch error:', error);
@@ -1601,6 +1492,116 @@ if (window.isVaultPhoenixDashboard) {
                 sessionStorage.removeItem('vaultPhoenixSession');
                 window.location.href = 'index.html';
             }
+        }
+
+        // =================== RESET GAME FUNCTION ===================
+        resetGame() {
+            console.log('🔄 Starting game reset...');
+            try {
+                // Show confirmation modal
+                const resetOverlay = document.getElementById('resetGameOverlay');
+                if (resetOverlay) {
+                    resetOverlay.classList.add('show');
+                }
+                
+            } catch (error) {
+                console.error('❌ Reset game modal error:', error);
+            }
+        }
+
+        confirmResetGame() {
+            console.log('✅ Confirming game reset...');
+            try {
+                // Clear all saved data
+                localStorage.removeItem('vaultPhoenixTokens');
+                localStorage.removeItem('vaultPhoenixProgress');
+                localStorage.removeItem('vaultPhoenixStats');
+                localStorage.removeItem('vaultPhoenixUser');
+                
+                // Reset instance variables
+                this.collectedTokens = [];
+                this.totalTokenValue = 0;
+                this.locationsVisited = 0;
+                this.lastActivityTime = null;
+                
+                // Update UI
+                this.updateVaultStats();
+                this.updateTokenCounts();
+                this.updateNearbyTokens();
+                
+                // Regenerate token markers
+                if (this.mapLoadingComplete) {
+                    this.addDemoTokenMarkers();
+                }
+                
+                // Hide modal
+                this.hideResetGameModal();
+                
+                // Show success message
+                this.showResetSuccessMessage();
+                
+                console.log('🎉 Game reset completed successfully!');
+                
+            } catch (error) {
+                console.error('❌ Game reset error:', error);
+                alert('Error resetting game. Please refresh the page.');
+            }
+        }
+
+        hideResetGameModal() {
+            const resetOverlay = document.getElementById('resetGameOverlay');
+            if (resetOverlay) {
+                resetOverlay.classList.remove('show');
+            }
+        }
+
+        showResetSuccessMessage() {
+            // Create temporary success notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(67, 160, 71, 0.95));
+                color: white;
+                padding: 20px 30px;
+                border-radius: 16px;
+                font-size: 16px;
+                font-weight: 700;
+                z-index: 400;
+                box-shadow: 0 12px 32px rgba(76, 175, 80, 0.5);
+                backdrop-filter: blur(20px);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                text-align: center;
+                animation: successFadeIn 0.5s ease-out;
+            `;
+            notification.innerHTML = `
+                <div style="font-size: 20px; margin-bottom: 8px;">🎉</div>
+                <div>Game Reset Complete!</div>
+                <div style="font-size: 14px; opacity: 0.9; margin-top: 4px;">All tokens are available again</div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Add CSS animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes successFadeIn {
+                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'successFadeIn 0.5s ease-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                    document.head.removeChild(style);
+                }, 500);
+            }, 3000);
         }
 
         initializeVault() {
