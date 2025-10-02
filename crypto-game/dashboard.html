@@ -145,7 +145,7 @@
                     <div class="nav-title">$Ember Hunt</div>
                 </div>
                 <div class="nav-actions">
-                    <div class="vault-badge" id="vaultBadge" onclick="vaultPhoenixApp?.switchMode('vault')">
+                    <div class="vault-badge" id="vaultBadge">
                         <div class="badge-icon">
                             <img src="../images/VPEmberCoin.PNG" alt="Ember Count" class="badge-coin-icon" onerror="this.textContent='💎'">
                         </div>
@@ -159,7 +159,7 @@
         </nav>
 
         <!-- Side Menu -->
-        <div class="menu-overlay" id="menuOverlay" onclick="vaultPhoenixApp?.toggleMenu()"></div>
+        <div class="menu-overlay" id="menuOverlay"></div>
         <div class="side-menu" id="sideMenu">
             <div class="menu-header">
                 <div class="menu-user">
@@ -178,18 +178,18 @@
                     <div class="menu-section-title">Gaming</div>
                 </div>
                 
-                <div class="menu-item active" data-mode="map" onclick="vaultPhoenixApp?.switchMode('map')">
+                <div class="menu-item active" data-mode="map">
                     <div class="menu-item-icon">🗺️</div>
                     <div class="menu-item-text">Token Hunt</div>
                 </div>
                 
-                <div class="menu-item" data-mode="ar" onclick="vaultPhoenixApp?.switchMode('ar')">
+                <div class="menu-item" data-mode="ar">
                     <div class="menu-item-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')">📱</div>
                     <div class="menu-item-text">AR Discovery</div>
                     <div class="menu-item-badge" id="nearbyTokens">Close to unlock</div>
                 </div>
                 
-                <div class="menu-item" data-mode="vault" onclick="vaultPhoenixApp?.switchMode('vault')">
+                <div class="menu-item" data-mode="vault">
                     <div class="menu-item-icon image" style="background-image: url('../images/PhoenixSafe.PNG')">🔒</div>
                     <div class="menu-item-text">$Ember Vault</div>
                     <div class="menu-item-badge" id="menuEmberCount">0</div>
@@ -199,7 +199,7 @@
                     <div class="menu-section-title">Adventures</div>
                 </div>
                 
-                <div class="menu-item" data-mode="campaigns" onclick="vaultPhoenixApp?.switchMode('campaigns')">
+                <div class="menu-item" data-mode="campaigns">
                     <div class="menu-item-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')">🏆</div>
                     <div class="menu-item-text">Themed Adventures</div>
                     <div class="menu-item-badge">3 Active</div>
@@ -632,19 +632,19 @@
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
             <div class="nav-tabs">
-                <div class="nav-tab active" data-mode="map" onclick="vaultPhoenixApp?.switchMode('map')">
+                <div class="nav-tab active" data-mode="map">
                     <div class="nav-tab-icon">🗺️</div>
                     <div class="nav-tab-label">Hunt</div>
                 </div>
-                <div class="nav-tab" data-mode="ar" onclick="vaultPhoenixApp?.switchMode('ar')">
+                <div class="nav-tab" data-mode="ar">
                     <div class="nav-tab-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')">📱</div>
                     <div class="nav-tab-label">AR View</div>
                 </div>
-                <div class="nav-tab" data-mode="vault" onclick="vaultPhoenixApp?.switchMode('vault')">
+                <div class="nav-tab" data-mode="vault">
                     <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixSafe.PNG')">🔒</div>
                     <div class="nav-tab-label">Vault</div>
                 </div>
-                <div class="nav-tab" data-mode="campaigns" onclick="vaultPhoenixApp?.switchMode('campaigns')">
+                <div class="nav-tab" data-mode="campaigns">
                     <div class="nav-tab-icon image" style="background-image: url('../images/PhoenixGoldTrophy.PNG')">🏆</div>
                     <div class="nav-tab-label">Adventures</div>
                 </div>
