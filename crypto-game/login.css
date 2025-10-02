@@ -143,11 +143,12 @@ body.crypto-login-page::before {
     border-radius: 20px;
 }
 
-/* FIXED: Phoenix flame decoration - SIMPLE TOP RIGHT POSITIONING */
+/* FIXED: Phoenix flame decoration - ESCAPES CONTAINER BOUNDS */
 .crypto-login-page .phoenix-flame-decoration {
-    position: absolute !important;
-    top: -20px !important;
-    right: -20px !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(calc(150px - 28px), calc(-150px - 28px)) !important;
     width: 56px;
     height: 56px;
     display: flex;
