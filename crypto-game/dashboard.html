@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Vault Phoenix - AR Crypto Gaming Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Google Maps API with proper key -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBk_QpJ1q8v3m7f3b7C2kT8w9g2H6i4Z8o&callback=initMap&libraries=geometry"></script>
+    <!-- Google Maps API with callback -->
+    <script>
+        window.googleMapsCallback = function() {
+            console.log('🗺️ Google Maps API loaded via callback');
+            if (window.vaultPhoenixApp && typeof window.vaultPhoenixApp.onGoogleMapsLoaded === 'function') {
+                window.vaultPhoenixApp.onGoogleMapsLoaded();
+            } else {
+                console.log('⏳ Vault Phoenix app not ready, storing callback for later');
+                window.googleMapsReady = true;
+            }
+        };
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBk_QpJ1q8v3m7f3b7C2kT8w9g2H6i4Z8o&callback=googleMapsCallback&libraries=geometry"></script>
     <link rel="stylesheet" href="shared.css">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
@@ -37,10 +48,16 @@
         
         <!-- Base Content Layers -->
         <div id="map" style="display: block;">
-            <!-- Google Maps Container - ENHANCED -->
-            <div id="googleMap" class="google-map-container"></div>
+            <!-- Google Maps Container - FIXED -->
+            <div id="googleMapContainer" class="google-map-container">
+                <!-- Map will be initialized here by JavaScript -->
+                <div class="map-loading-overlay" id="mapLoadingOverlay">
+                    <div class="map-loading-spinner"></div>
+                    <div>Loading Phoenix Map...</div>
+                </div>
+            </div>
             
-            <!-- Map Overlay UI - ENHANCED WITH GPS & CAMPAIGN INFO -->
+            <!-- Map Overlay UI - GPS & CAMPAIGN INFO -->
             <div class="map-overlay-ui">
                 <!-- Current Location Info Card -->
                 <div class="current-location-card">
@@ -49,7 +66,7 @@
                         <div class="location-info">
                             <div class="location-title">GPS Active</div>
                             <div class="location-coords">
-                                <span id="fallbackLat">33.4484</span>, <span id="fallbackLng">-112.0740</span>
+                                <span id="currentLat">33.4484</span>, <span id="currentLng">-112.0740</span>
                             </div>
                         </div>
                         <div class="location-status">
@@ -57,12 +74,17 @@
                             <span>Ready</span>
                         </div>
                     </div>
-                    <!-- Campaign info will be added by JavaScript -->
+                    
+                    <!-- Campaign Info -->
+                    <div class="campaign-info">
+                        <div class="campaign-text">$Ember Tokens Available</div>
+                        <div class="token-count" id="availableTokenCount">13 tokens</div>
+                    </div>
                 </div>
             </div>
             
-            <!-- Swipeable Token Locations Module - FIXED HEIGHT -->
-            <div class="token-locations-module" id="tokenLocationsModule">
+            <!-- Swipeable Token Locations Module -->
+            <div class="token-locations-module collapsed" id="tokenLocationsModule">
                 <!-- Swipe Handle -->
                 <div class="swipe-handle" id="swipeHandle">
                     <div class="handle-bar"></div>
@@ -106,7 +128,7 @@
             </div>
         </div>
 
-        <!-- ENHANCED: Proximity Notification - Only shows after map loads -->
+        <!-- PROXIMITY NOTIFICATION - Shows when near token -->
         <div class="proximity-notification" id="proximityNotification">
             <div class="proximity-icon">
                 <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="proximity-coin-icon" onerror="this.textContent='💎'">
@@ -224,7 +246,7 @@
             </div>
         </div>
         
-        <!-- Status Panel - POSITIONED AT TOP FOR AR MODE ONLY -->
+        <!-- Status Panel - FOR AR MODE ONLY -->
         <div class="status-panel" id="statusPanel">
             <div class="status-grid">
                 <div class="status-item">
@@ -260,13 +282,13 @@
             </div>
         </div>
         
-        <!-- AR Instructions - POSITIONED BELOW STATUS PANEL -->
+        <!-- AR Instructions -->
         <div class="ar-instructions" id="arInstructions">
             <div class="ar-instructions-title">🔥 AR Hunt Mode</div>
             <div class="ar-instructions-text">Point your camera around and tap the glowing $Ember coin to collect tokens!</div>
         </div>
         
-        <!-- ENHANCED: Token Discovery Modal - CLEAN COLLECTION FLOW -->
+        <!-- Token Discovery Modal -->
         <div class="token-discovery" id="tokenDiscovery">
             <div class="token-discovery-content">
                 <div class="token-discovery-header">
@@ -519,7 +541,7 @@
             </div>
         </div>
         
-        <!-- ENHANCED: Navigation Modal with AR Option -->
+        <!-- Navigation Modal -->
         <div class="navigation-modal" id="navigationModal">
             <div class="navigation-content">
                 <div class="navigation-header">
@@ -615,7 +637,7 @@
             </div>
         </div>
         
-        <!-- ENHANCED: Bottom Navigation with AR View Always Visible -->
+        <!-- Bottom Navigation -->
         <nav class="bottom-nav">
             <div class="nav-tabs">
                 <div class="nav-tab active" data-mode="map" onclick="vaultPhoenixApp?.switchMode('map')">
