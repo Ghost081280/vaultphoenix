@@ -105,6 +105,12 @@ if (window.isVaultPhoenixCryptoGame) {
             this.mapContainer = null;
             this.isNearToken = false;
 
+            // AR Camera properties
+            this.arActive = false;
+            this.arCameraPermissionGranted = false;
+            this.videoElement = null;
+            this.canvasElement = null;
+
             // Enhanced Ember Token System with Real Locations and Value Tiers
             // UPDATED: Added a nearby token for demo purposes
             this.emberTokens = [
@@ -500,7 +506,7 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // UPDATED: Interactive demo map with pan/zoom
+        // FIXED: Interactive demo map with proper loading and visibility
         initializeDemoMap(mapContainer = null) {
             console.log('🎮 Initializing interactive demo map...');
             try {
@@ -511,6 +517,15 @@ if (window.isVaultPhoenixCryptoGame) {
                 }
 
                 console.log('🗺️ Creating interactive map structure...');
+
+                // CRITICAL: Ensure container is visible first
+                container.style.display = 'block';
+                container.style.position = 'absolute';
+                container.style.top = '0';
+                container.style.left = '0';
+                container.style.width = '100%';
+                container.style.height = '100%';
+                container.style.zIndex = '1';
 
                 // Clear existing content
                 container.innerHTML = '';
@@ -547,15 +562,6 @@ if (window.isVaultPhoenixCryptoGame) {
                 // Store map container reference
                 this.mapContainer = document.getElementById('demoMapContainer');
 
-                // CRITICAL: Force map container to be visible and properly positioned
-                container.style.display = 'block';
-                container.style.position = 'absolute';
-                container.style.top = '0';
-                container.style.left = '0';
-                container.style.width = '100%';
-                container.style.height = '100%';
-                container.style.zIndex = '1';
-
                 // Setup map interactions
                 this.setupMapInteractions();
 
@@ -566,9 +572,10 @@ if (window.isVaultPhoenixCryptoGame) {
                     console.log('🎯 Adding interactive token markers...');
                     this.addDemoTokenMarkers();
                     this.checkTokenProximity(); // Check if near any tokens
+                    this.googleMapsLoaded = true;
+                    console.log('✅ Demo map fully loaded with tokens');
                 }, 1000);
 
-                this.googleMapsLoaded = true;
                 console.log('✅ Interactive demo map initialized successfully');
                 
             } catch (error) {
@@ -708,7 +715,7 @@ if (window.isVaultPhoenixCryptoGame) {
             return Math.sqrt(dx * dx + dy * dy);
         }
 
-        // UPDATED: Demo token markers using VPEmberCoin.PNG
+        // UPDATED: Demo token markers using VPEmberCoin.PNG with proper click handling
         addDemoTokenMarkers() {
             console.log('💎 Adding demo token markers with VPEmberCoin.PNG...');
             try {
@@ -741,7 +748,7 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // UPDATED: Use VPEmberCoin.PNG for token markers
+        // UPDATED: Use VPEmberCoin.PNG for token markers with proper navigation
         addDemoTokenMarker(token, index, markersContainer, labelsContainer) {
             try {
                 // Calculate position based on token data (simulate map positioning)
@@ -799,7 +806,7 @@ if (window.isVaultPhoenixCryptoGame) {
                 label.style.top = `${position.y}%`;
                 label.textContent = token.location;
 
-                // Add click handler with enhanced feedback
+                // FIXED: Add click handler to show navigation directions (NOT collect)
                 marker.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -824,9 +831,9 @@ if (window.isVaultPhoenixCryptoGame) {
                         token.lat, token.lng
                     );
                     
-                    // Show token discovery modal instead of navigation
+                    // Show navigation modal instead of discovery modal
                     setTimeout(() => {
-                        this.showTokenDiscoveryModal(token);
+                        this.showNavigationModal(token);
                     }, 400);
                     
                     if (navigator.vibrate) {
@@ -861,86 +868,7 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // UPDATED: Show token discovery modal when tapping coins
-        showTokenDiscoveryModal(token) {
-            console.log('🎯 Showing token discovery modal for:', token.location);
-            try {
-                const modal = document.getElementById('tokenDiscovery');
-                
-                // Update modal content
-                const tokenAmountBadge = document.getElementById('tokenAmountBadge');
-                const discoveredTokenAmount = document.getElementById('discoveredTokenAmount');
-                const discoveredTokenUSD = document.getElementById('discoveredTokenUSD');
-                const discoveredTokenLocation = document.getElementById('discoveredTokenLocation');
-                
-                if (tokenAmountBadge) tokenAmountBadge.textContent = `${token.value} $Ember`;
-                if (discoveredTokenAmount) discoveredTokenAmount.textContent = `${token.value} $Ember`;
-                if (discoveredTokenUSD) discoveredTokenUSD.textContent = `~$${(token.value * 0.001).toFixed(2)} USD`;
-                if (discoveredTokenLocation) discoveredTokenLocation.textContent = token.location;
-                
-                // Show modal
-                if (modal) {
-                    modal.classList.add('show');
-                }
-                
-                // Setup collect button
-                const collectBtn = document.getElementById('collectTokenBtn');
-                if (collectBtn) {
-                    collectBtn.onclick = () => {
-                        this.collectToken(token);
-                        this.hideTokenDiscoveryModal();
-                    };
-                }
-                
-                // Setup navigation button (remove AR hunt option)
-                const sponsorInfoBtn = document.getElementById('sponsorInfoBtn');
-                if (sponsorInfoBtn) {
-                    sponsorInfoBtn.onclick = () => {
-                        this.hideTokenDiscoveryModal();
-                        this.showNavigationModal(token);
-                    };
-                }
-                
-            } catch (error) {
-                console.error('❌ Token discovery modal error:', error);
-            }
-        }
-
-        hideTokenDiscoveryModal() {
-            const modal = document.getElementById('tokenDiscovery');
-            if (modal) {
-                modal.classList.remove('show');
-            }
-        }
-
-        collectToken(token) {
-            console.log('💎 Collecting token:', token.location, token.value);
-            
-            // Add to collected tokens
-            this.collectedTokens.push({
-                ...token,
-                collectedAt: new Date().toISOString()
-            });
-            
-            // Save and update UI
-            this.saveCollectedTokens();
-            
-            // Remove marker from map
-            const marker = document.querySelector(`[data-token-id="${token.id}"]`);
-            if (marker) {
-                marker.style.animation = 'none';
-                marker.style.transform = 'scale(0)';
-                marker.style.opacity = '0';
-                setTimeout(() => marker.remove(), 300);
-            }
-            
-            // Show success feedback
-            if (navigator.vibrate) {
-                navigator.vibrate([100, 50, 100]);
-            }
-        }
-
-        // UPDATED: Check proximity to tokens and enable/disable AR mode
+        // UPDATED: Check proximity to tokens and show proper notification
         checkTokenProximity() {
             console.log('📍 Checking token proximity...');
             
@@ -964,19 +892,70 @@ if (window.isVaultPhoenixCryptoGame) {
             
             // Check if within proximity threshold (0.1 km = 100 meters for demo)
             const proximityThreshold = 0.1; // km
+            const wasNearToken = this.isNearToken;
             this.isNearToken = nearestToken && minDistance <= proximityThreshold;
             
             console.log('📍 Nearest token:', nearestToken?.location, 'Distance:', minDistance.toFixed(3), 'km');
             console.log('📍 Is near token:', this.isNearToken);
             
+            // Show/hide proximity notification
+            if (this.isNearToken && !wasNearToken) {
+                this.showProximityNotification(nearestToken);
+            } else if (!this.isNearToken && wasNearToken) {
+                this.hideProximityNotification();
+            }
+            
             // Update AR mode availability
             this.updateARModeAvailability();
             
-            // Start proximity checking interval
+            // Start proximity checking interval if not already running
             if (!this.proximityCheckInterval) {
                 this.proximityCheckInterval = setInterval(() => {
                     this.checkTokenProximity();
                 }, 5000); // Check every 5 seconds
+            }
+        }
+
+        // ENHANCED: Show attractive proximity notification dropdown
+        showProximityNotification(token) {
+            console.log('📢 Showing proximity notification for:', token.location);
+            try {
+                const notification = document.getElementById('proximityNotification');
+                if (!notification) return;
+
+                // Update notification content
+                const title = notification.querySelector('.proximity-title');
+                const subtitle = notification.querySelector('.proximity-subtitle');
+                const button = notification.querySelector('.proximity-button');
+
+                if (title) title.textContent = `${token.location} - ${token.value} $Ember Found!`;
+                if (subtitle) subtitle.textContent = 'You\'re close enough! Switch to AR Mode to collect this token.';
+                
+                if (button) {
+                    button.onclick = () => {
+                        this.hideProximityNotification();
+                        this.switchMode('ar');
+                    };
+                }
+
+                // Show notification with animation
+                notification.classList.add('show');
+
+                // Vibrate to get attention
+                if (navigator.vibrate) {
+                    navigator.vibrate([200, 100, 200]);
+                }
+
+                console.log('✅ Proximity notification shown');
+            } catch (error) {
+                console.error('❌ Proximity notification error:', error);
+            }
+        }
+
+        hideProximityNotification() {
+            const notification = document.getElementById('proximityNotification');
+            if (notification) {
+                notification.classList.remove('show');
             }
         }
 
@@ -1075,6 +1054,7 @@ if (window.isVaultPhoenixCryptoGame) {
                 this.generateTokenHistory();
                 this.updateCampaignDisplay();
                 this.updateARModeAvailability();
+                this.hideProximityNotification();
                 
                 // Update map markers (demo)
                 if (this.googleMapsLoaded) {
@@ -1084,7 +1064,6 @@ if (window.isVaultPhoenixCryptoGame) {
                 // Hide any open modals
                 this.hideTokenDiscovery();
                 this.hideEmberCoin();
-                this.hideProximityNotification();
                 
                 // Hide loading overlay
                 this.showLoading(false);
@@ -1279,6 +1258,211 @@ if (window.isVaultPhoenixCryptoGame) {
                 
             } catch (error) {
                 console.error('❌ Map switch error:', error);
+            }
+        }
+
+        // =================== AR CAMERA SYSTEM - FIXED ===================
+        async switchToAR() {
+            console.log('📱 Switching to AR mode');
+            try {
+                document.getElementById('map').style.display = 'none';
+                document.getElementById('video').style.display = 'block';
+                document.getElementById('canvas').style.display = 'block';
+                document.getElementById('vaultView').style.display = 'none';
+                document.getElementById('campaignsView').style.display = 'none';
+                
+                // Hide the swipeable module in AR mode
+                const module = document.getElementById('tokenLocationsModule');
+                if (module) {
+                    module.style.display = 'none';
+                }
+
+                // Start AR camera
+                await this.startARCamera();
+                
+                console.log('📱 AR mode activated');
+            } catch (error) {
+                console.error('❌ AR switch error:', error);
+                alert('❌ Camera access failed. Please allow camera permissions and try again.');
+                this.switchMode('map');
+            }
+        }
+
+        async startARCamera() {
+            console.log('📷 Starting AR camera...');
+            try {
+                this.videoElement = document.getElementById('video');
+                this.canvasElement = document.getElementById('canvas');
+
+                if (!this.videoElement || !this.canvasElement) {
+                    throw new Error('AR video or canvas elements not found');
+                }
+
+                // Request camera permissions
+                if (!this.arCameraPermissionGranted) {
+                    console.log('📷 Requesting camera permissions...');
+                    
+                    const constraints = {
+                        video: {
+                            facingMode: 'environment', // Use rear camera
+                            width: { ideal: 1280 },
+                            height: { ideal: 720 }
+                        }
+                    };
+
+                    try {
+                        this.cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                        this.arCameraPermissionGranted = true;
+                        console.log('✅ Camera permission granted');
+                    } catch (permissionError) {
+                        console.error('❌ Camera permission denied:', permissionError);
+                        throw new Error('Camera access denied. Please allow camera permissions to use AR mode.');
+                    }
+                }
+
+                // Set up video stream
+                if (this.cameraStream && this.videoElement) {
+                    this.videoElement.srcObject = this.cameraStream;
+                    this.videoElement.play();
+                    
+                    console.log('📷 Camera stream started');
+
+                    // Wait for video to load
+                    this.videoElement.addEventListener('loadedmetadata', () => {
+                        console.log('📷 Video metadata loaded');
+                        this.setupARInterface();
+                    });
+                }
+
+                this.arActive = true;
+
+            } catch (error) {
+                console.error('❌ AR camera start error:', error);
+                throw error;
+            }
+        }
+
+        setupARInterface() {
+            console.log('🎮 Setting up AR interface...');
+            try {
+                // Show AR instructions
+                this.showARInstructions();
+
+                // Show AR coin if near token
+                if (this.isNearToken) {
+                    this.showARCoin();
+                }
+
+                console.log('✅ AR interface setup complete');
+            } catch (error) {
+                console.error('❌ AR interface setup error:', error);
+            }
+        }
+
+        showARInstructions() {
+            const instructions = document.getElementById('arInstructions');
+            if (instructions) {
+                instructions.classList.add('show');
+                
+                // Hide after 5 seconds
+                setTimeout(() => {
+                    instructions.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        hideARInstructions() {
+            const instructions = document.getElementById('arInstructions');
+            if (instructions) {
+                instructions.classList.remove('show');
+            }
+        }
+
+        showARCoin() {
+            console.log('💎 Showing AR coin for collection...');
+            const coin = document.getElementById('arEmberCoin');
+            if (coin) {
+                coin.style.display = 'block';
+                coin.classList.add('tappable');
+                
+                // Add click handler for collection
+                coin.onclick = () => {
+                    this.collectARToken();
+                };
+            }
+        }
+
+        hideEmberCoin() {
+            const coin = document.getElementById('arEmberCoin');
+            if (coin) {
+                coin.style.display = 'none';
+                coin.classList.remove('tappable');
+                coin.onclick = null;
+            }
+        }
+
+        async collectARToken() {
+            console.log('💎 Collecting AR token...');
+            try {
+                // Find the nearest token (the one we can collect)
+                const nearestToken = this.emberTokens.find(token => 
+                    !this.isTokenCollected(token.id) && 
+                    this.calculateDistance(this.userLat, this.userLng, token.lat, token.lng) <= 0.1
+                );
+
+                if (nearestToken) {
+                    // Hide AR coin
+                    this.hideEmberCoin();
+
+                    // Add visual feedback
+                    if (navigator.vibrate) {
+                        navigator.vibrate([200, 100, 200, 100, 200]);
+                    }
+
+                    // Add to collected tokens
+                    this.collectedTokens.push({
+                        ...nearestToken,
+                        collectedAt: new Date().toISOString(),
+                        collectedVia: 'AR'
+                    });
+
+                    // Save and update
+                    this.saveCollectedTokens();
+
+                    // Show success modal
+                    this.showTokenDiscoveryModal(nearestToken);
+
+                    // Switch back to map after a delay
+                    setTimeout(() => {
+                        this.switchMode('map');
+                    }, 3000);
+
+                    console.log('✅ AR token collected successfully');
+                }
+            } catch (error) {
+                console.error('❌ AR token collection error:', error);
+            }
+        }
+
+        stopCamera() {
+            console.log('📷 Stopping camera...');
+            try {
+                if (this.cameraStream) {
+                    this.cameraStream.getTracks().forEach(track => track.stop());
+                    this.cameraStream = null;
+                }
+
+                if (this.videoElement) {
+                    this.videoElement.srcObject = null;
+                }
+
+                this.arActive = false;
+                this.hideEmberCoin();
+                this.hideARInstructions();
+
+                console.log('✅ Camera stopped');
+            } catch (error) {
+                console.error('❌ Camera stop error:', error);
             }
         }
 
@@ -1511,9 +1695,9 @@ if (window.isVaultPhoenixCryptoGame) {
                 </div>
             `;
 
-            // Add click handler - show token discovery modal instead of navigation
+            // Add click handler - show navigation modal instead of collection
             itemDiv.addEventListener('click', () => {
-                this.showTokenDiscoveryModal(token);
+                this.showNavigationModal(token);
                 
                 if (navigator.vibrate) {
                     navigator.vibrate(30);
@@ -1622,9 +1806,68 @@ if (window.isVaultPhoenixCryptoGame) {
             console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
         }
 
+        // TOKEN DISCOVERY MODAL
+        showTokenDiscoveryModal(token) {
+            console.log('🎯 Showing token discovery modal for:', token.location);
+            try {
+                const modal = document.getElementById('tokenDiscovery');
+                
+                // Update modal content
+                const tokenAmountBadge = document.getElementById('tokenAmountBadge');
+                const discoveredTokenAmount = document.getElementById('discoveredTokenAmount');
+                const discoveredTokenUSD = document.getElementById('discoveredTokenUSD');
+                const discoveredTokenLocation = document.getElementById('discoveredTokenLocation');
+                
+                if (tokenAmountBadge) tokenAmountBadge.textContent = `${token.value} $Ember`;
+                if (discoveredTokenAmount) discoveredTokenAmount.textContent = `${token.value} $Ember`;
+                if (discoveredTokenUSD) discoveredTokenUSD.textContent = `~${(token.value * 0.001).toFixed(2)} USD`;
+                if (discoveredTokenLocation) discoveredTokenLocation.textContent = token.location;
+                
+                // Show modal
+                if (modal) {
+                    modal.classList.add('show');
+                }
+                
+                // Setup collect button - close modal
+                const collectBtn = document.getElementById('collectTokenBtn');
+                if (collectBtn) {
+                    collectBtn.onclick = () => {
+                        this.hideTokenDiscoveryModal();
+                    };
+                }
+                
+                // Setup sponsor info button
+                const sponsorInfoBtn = document.getElementById('sponsorInfoBtn');
+                if (sponsorInfoBtn) {
+                    sponsorInfoBtn.onclick = () => {
+                        this.hideTokenDiscoveryModal();
+                    };
+                }
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    this.hideTokenDiscoveryModal();
+                }, 5000);
+                
+            } catch (error) {
+                console.error('❌ Token discovery modal error:', error);
+            }
+        }
+
+        hideTokenDiscoveryModal() {
+            const modal = document.getElementById('tokenDiscovery');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
+
+        hideTokenDiscovery() {
+            this.hideTokenDiscoveryModal();
+        }
+
         // Additional utility methods for distance calculation
         calculateDistance(lat1, lng1, lat2, lng2) {
-            const R = 3959; // Earth's radius in miles
+            const R = 6371; // Earth's radius in kilometers
             const dLat = this.toRadians(lat2 - lat1);
             const dLng = this.toRadians(lng2 - lng1);
             
@@ -1926,27 +2169,6 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        switchToAR() {
-            console.log('📱 Switching to AR mode');
-            try {
-                document.getElementById('map').style.display = 'none';
-                document.getElementById('video').style.display = 'block';
-                document.getElementById('canvas').style.display = 'block';
-                document.getElementById('vaultView').style.display = 'none';
-                document.getElementById('campaignsView').style.display = 'none';
-                
-                // Hide the swipeable module in AR mode
-                const module = document.getElementById('tokenLocationsModule');
-                if (module) {
-                    module.style.display = 'none';
-                }
-                
-                console.log('📱 AR mode activated');
-            } catch (error) {
-                console.error('❌ AR switch error:', error);
-            }
-        }
-
         switchToVault() {
             console.log('💎 Switching to Vault mode');
             try {
@@ -1961,6 +2183,8 @@ if (window.isVaultPhoenixCryptoGame) {
                 if (module) {
                     module.style.display = 'none';
                 }
+
+                this.stopCamera();
             } catch (error) {
                 console.error('❌ Vault switch error:', error);
             }
@@ -1980,6 +2204,8 @@ if (window.isVaultPhoenixCryptoGame) {
                 if (module) {
                     module.style.display = 'none';
                 }
+
+                this.stopCamera();
             } catch (error) {
                 console.error('❌ Campaigns switch error:', error);
             }
@@ -2054,13 +2280,6 @@ if (window.isVaultPhoenixCryptoGame) {
             console.log('📊 Status update:', message);
             // Add status update logic here
         }
-
-        // Utility methods that need to work
-        hideARInstructions() { console.log('🔇 Hiding AR instructions'); }
-        hideEmberCoin() { console.log('💎 Hiding ember coin'); }
-        hideTokenDiscovery() { console.log('🔍 Hiding token discovery'); }
-        hideProximityNotification() { console.log('📍 Hiding proximity notification'); }
-        stopCamera() { console.log('📷 Stopping camera'); }
     }
 
     // Initialize the game when DOM is ready
