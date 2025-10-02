@@ -712,7 +712,12 @@ if (window.isVaultPhoenixCryptoGame) {
                     { id: 'qrClose', event: 'click', handler: () => this.hideQRCode() },
                     { id: 'coinbaseWallet', event: 'click', handler: () => this.openCoinbaseWallet() },
                     { id: 'redeemTokens', event: 'click', handler: () => this.showQRCode() },
-                    { id: 'proximityARButton', event: 'click', handler: () => this.switchMode('ar') }
+                    { id: 'proximityARButton', event: 'click', handler: () => this.switchMode('ar') },
+                    
+                    // RESET GAME FUNCTIONALITY
+                    { id: 'resetGameBtn', event: 'click', handler: () => this.showResetGameConfirmation() },
+                    { id: 'cancelResetGame', event: 'click', handler: () => this.hideResetGameConfirmation() },
+                    { id: 'confirmResetGame', event: 'click', handler: () => this.resetGame() }
                 ];
                 
                 handlers.forEach(({ id, event, handler }) => {
@@ -758,6 +763,152 @@ if (window.isVaultPhoenixCryptoGame) {
             } catch (error) {
                 console.error('❌ Event listener error:', error);
             }
+        }
+
+        // RESET GAME FUNCTIONALITY
+        showResetGameConfirmation() {
+            console.log('🔄 Showing reset game confirmation...');
+            try {
+                const overlay = document.getElementById('resetGameOverlay');
+                if (overlay) {
+                    overlay.classList.add('show');
+                }
+                
+                // Close the side menu
+                this.closeMenu();
+                
+                // Haptic feedback
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+            } catch (error) {
+                console.error('❌ Reset confirmation error:', error);
+            }
+        }
+
+        hideResetGameConfirmation() {
+            console.log('❌ Hiding reset game confirmation...');
+            try {
+                const overlay = document.getElementById('resetGameOverlay');
+                if (overlay) {
+                    overlay.classList.remove('show');
+                }
+            } catch (error) {
+                console.error('❌ Hide reset confirmation error:', error);
+            }
+        }
+
+        resetGame() {
+            console.log('🔄 Resetting game progress...');
+            try {
+                // Hide the confirmation modal first
+                this.hideResetGameConfirmation();
+                
+                // Show loading overlay
+                this.showLoading(true);
+                
+                // Clear localStorage data
+                try {
+                    localStorage.removeItem('vaultPhoenixTokens');
+                    console.log('✅ Cleared collected tokens from localStorage');
+                } catch (error) {
+                    console.log('⚠️ localStorage clear error:', error);
+                }
+                
+                // Reset all game data
+                this.collectedTokens = [];
+                this.totalTokenValue = 0;
+                this.locationsVisited = 0;
+                this.lastActivityTime = null;
+                this.availableTokensCount = 12;
+                this.currentDiscoveredToken = null;
+                
+                // Reset adventure progress
+                this.themedAdventures.forEach(adventure => {
+                    adventure.active = adventure.id === 'phoenix-sports'; // Reset to default
+                    adventure.progress = 0; // Reset all progress
+                    adventure.completed = false;
+                });
+                
+                // Update all UI elements
+                this.updateVaultStats();
+                this.updateAvailableTokensCount();
+                this.generateTokenHistory();
+                this.updateCampaignDisplay();
+                
+                // Hide any open modals
+                this.hideTokenDiscovery();
+                this.hideEmberCoin();
+                this.hideProximityNotification();
+                
+                // Hide loading overlay
+                this.showLoading(false);
+                
+                // Show success message with celebration
+                if (navigator.vibrate) {
+                    navigator.vibrate([200, 100, 200, 100, 200]);
+                }
+                
+                // Switch to map mode
+                this.switchMode('map');
+                
+                setTimeout(() => {
+                    alert('🎮 Game Reset Complete!\n\n✅ All tokens cleared\n✅ Progress reset\n✅ Adventures reset\n\n🔥 Ready to start your $Ember hunt again!');
+                }, 500);
+                
+                console.log('✅ Game reset completed successfully');
+                
+            } catch (error) {
+                console.error('❌ Game reset error:', error);
+                this.showLoading(false);
+                alert('❌ Reset failed. Please try again or refresh the page.');
+            }
+        }
+
+        // Also add this method to provide a direct reset function for testing
+        performGameReset() {
+            console.log('🔄💎 Direct game reset initiated...');
+            
+            // Clear all storage
+            try {
+                localStorage.removeItem('vaultPhoenixTokens');
+                sessionStorage.removeItem('vaultPhoenixSession');
+            } catch (error) {
+                console.log('⚠️ Storage clear error:', error);
+            }
+            
+            // Reset game instance if it exists
+            if (this) {
+                this.collectedTokens = [];
+                this.totalTokenValue = 0;
+                this.locationsVisited = 0;
+                this.lastActivityTime = null;
+                this.availableTokensCount = 12;
+                
+                // Reset adventures
+                this.themedAdventures.forEach(adventure => {
+                    adventure.active = adventure.id === 'phoenix-sports';
+                    adventure.progress = 0;
+                    adventure.completed = false;
+                });
+                
+                // Update UI
+                if (typeof this.updateVaultStats === 'function') {
+                    this.updateVaultStats();
+                }
+                if (typeof this.updateAvailableTokensCount === 'function') {
+                    this.updateAvailableTokensCount();
+                }
+                if (typeof this.generateTokenHistory === 'function') {
+                    this.generateTokenHistory();
+                }
+                if (typeof this.updateCampaignDisplay === 'function') {
+                    this.updateCampaignDisplay();
+                }
+            }
+            
+            console.log('✅ Direct reset complete');
+            return true;
         }
 
         initializeVault() {
@@ -1409,19 +1560,25 @@ if (window.isVaultPhoenixCryptoGame) {
         onEmberCoinClick() {
             console.log('💎 AR Ember coin clicked!');
             
+            // Only allow collection in AR mode
+            if (this.currentMode !== 'ar') {
+                alert('🎯 Switch to AR mode to collect tokens!');
+                return;
+            }
+            
             // Haptic feedback
             if (navigator.vibrate) {
                 navigator.vibrate([100, 50, 100]);
             }
             
-            // Hide the coin
+            // Hide the coin immediately
             this.hideEmberCoin();
             
-            // Show token discovery modal
-            this.showRandomTokenDiscovery();
+            // Auto-collect and show token discovery
+            this.collectRandomToken();
         }
 
-        showRandomTokenDiscovery() {
+        collectRandomToken() {
             // Select a random uncollected token
             const uncollectedTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
             
@@ -1431,10 +1588,24 @@ if (window.isVaultPhoenixCryptoGame) {
             }
             
             const randomToken = uncollectedTokens[Math.floor(Math.random() * uncollectedTokens.length)];
-            this.showTokenDiscovery(randomToken);
+            
+            // Automatically collect the token
+            const collectedToken = {
+                ...randomToken,
+                collectedAt: new Date().toISOString(),
+                timestamp: new Date()
+            };
+            
+            this.collectedTokens.push(collectedToken);
+            this.saveCollectedTokens();
+            
+            // Show token discovery modal with sponsor info
+            this.showTokenDiscoveryWithSponsor(collectedToken);
+            
+            console.log('💰 Token auto-collected:', collectedToken.location);
         }
 
-        showTokenDiscovery(token) {
+        showTokenDiscoveryWithSponsor(token) {
             this.currentDiscoveredToken = token;
             
             const modal = document.getElementById('tokenDiscovery');
@@ -1459,9 +1630,43 @@ if (window.isVaultPhoenixCryptoGame) {
             if (sponsorName) sponsorName.textContent = token.sponsor;
             if (sponsorDesc) sponsorDesc.textContent = token.description;
             
+            // Update collect button to show "Collected!" and disable it
+            const collectBtn = document.getElementById('collectTokenBtn');
+            if (collectBtn) {
+                collectBtn.textContent = '✅ Collected!';
+                collectBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+                collectBtn.disabled = true;
+                collectBtn.onclick = () => this.hideTokenDiscovery();
+            }
+            
             if (modal) {
                 modal.classList.add('show');
             }
+            
+            // Show celebration
+            this.showCollectionCelebration(token);
+        }
+
+        showCollectionCelebration(token) {
+            // Haptic celebration
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200, 100, 200]);
+            }
+            
+            // Update status
+            this.updateStatus(`🎉 +${token.value} $Ember collected!`, false);
+            
+            console.log('🎊 Collection celebration for:', token.location);
+        }
+
+        showRandomTokenDiscovery() {
+            // This method is now replaced by collectRandomToken for auto-collection
+            this.collectRandomToken();
+        }
+
+        showTokenDiscovery(token) {
+            // Legacy method - now redirects to auto-collection
+            this.showTokenDiscoveryWithSponsor(token);
         }
 
         hideTokenDiscovery() {
@@ -1469,43 +1674,27 @@ if (window.isVaultPhoenixCryptoGame) {
             if (modal) {
                 modal.classList.remove('show');
             }
+            
+            // Reset collect button
+            const collectBtn = document.getElementById('collectTokenBtn');
+            if (collectBtn) {
+                collectBtn.innerHTML = '<span>💎</span><span>Collect $Ember</span>';
+                collectBtn.style.background = 'linear-gradient(135deg, #f0a500, #fb923c)';
+                collectBtn.disabled = false;
+                collectBtn.onclick = () => this.collectToken();
+            }
+            
+            // Show next coin after a delay
+            if (this.currentMode === 'ar') {
+                setTimeout(() => {
+                    this.showTappableEmberCoin();
+                }, 3000);
+            }
         }
 
         collectToken() {
-            if (!this.currentDiscoveredToken) return;
-            
-            console.log('💰 Collecting token:', this.currentDiscoveredToken.location);
-            
-            // Add to collected tokens
-            const collectedToken = {
-                ...this.currentDiscoveredToken,
-                collectedAt: new Date().toISOString(),
-                timestamp: new Date()
-            };
-            
-            this.collectedTokens.push(collectedToken);
-            this.saveCollectedTokens();
-            
-            // Hide modal
+            // This method is now mainly for the modal close action
             this.hideTokenDiscovery();
-            
-            // Show success feedback
-            this.showCollectionSuccess(collectedToken);
-            
-            // Clear current token
-            this.currentDiscoveredToken = null;
-        }
-
-        showCollectionSuccess(token) {
-            // Haptic celebration
-            if (navigator.vibrate) {
-                navigator.vibrate([200, 100, 200, 100, 200]);
-            }
-            
-            // Show success message
-            setTimeout(() => {
-                alert(`🎉 Token Collected!\n\n+${token.value} $Ember added to your vault!\n\nTotal: ${this.totalTokenValue} $Ember`);
-            }, 500);
         }
 
         showSponsorDetails() {
