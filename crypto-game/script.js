@@ -573,24 +573,32 @@ if (window.isVaultPhoenixCryptoGame) {
         }
 
         addDemoTokenMarkers() {
+            console.log('💎 Adding demo token markers...');
             try {
                 const markersContainer = document.getElementById('demoMarkers');
                 const labelsContainer = document.getElementById('demoLabels');
                 
-                if (!markersContainer || !labelsContainer) return;
+                if (!markersContainer || !labelsContainer) {
+                    console.error('❌ Demo markers containers not found');
+                    return;
+                }
 
                 // Clear existing markers
                 markersContainer.innerHTML = '';
                 labelsContainer.innerHTML = '';
 
+                console.log('🔍 Checking uncollected tokens...');
+                
                 // Add markers for uncollected tokens only
+                let markerCount = 0;
                 this.emberTokens.forEach((token, index) => {
                     if (!this.isTokenCollected(token.id)) {
-                        this.addDemoTokenMarker(token, index, markersContainer, labelsContainer);
+                        this.addDemoTokenMarker(token, markerCount, markersContainer, labelsContainer);
+                        markerCount++;
                     }
                 });
 
-                console.log('💎 Demo token markers added');
+                console.log(`✅ Added ${markerCount} demo token markers to map`);
             } catch (error) {
                 console.error('❌ Demo token markers error:', error);
             }
@@ -632,20 +640,35 @@ if (window.isVaultPhoenixCryptoGame) {
                 label.style.top = `${position.y}%`;
                 label.textContent = token.location;
 
-                // Add click handler
-                marker.addEventListener('click', () => {
+                // Add click handler with enhanced feedback
+                marker.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
                     console.log('🎯 Demo marker clicked:', token.location);
                     
                     // Add visual feedback
-                    marker.style.transform = 'scale(1.3)';
+                    marker.style.transform = 'scale(1.5)';
+                    marker.style.zIndex = '1000';
+                    label.style.opacity = '1';
+                    label.style.transform = 'translate(-50%, -100%) scale(1.2)';
+                    
                     setTimeout(() => {
                         marker.style.transform = 'scale(1)';
-                    }, 200);
+                        marker.style.zIndex = '';
+                        label.style.transform = 'translate(-50%, -100%) scale(1)';
+                    }, 300);
+                    
+                    // Calculate distance for navigation modal
+                    token.distance = this.calculateDistance(
+                        this.userLat, this.userLng,
+                        token.lat, token.lng
+                    );
                     
                     // Show navigation modal after brief delay
                     setTimeout(() => {
                         this.showNavigationModal(token);
-                    }, 300);
+                    }, 400);
                     
                     if (navigator.vibrate) {
                         navigator.vibrate(30);
@@ -668,8 +691,11 @@ if (window.isVaultPhoenixCryptoGame) {
 
                 // Animate marker appearance
                 setTimeout(() => {
+                    marker.style.opacity = '1';
                     marker.style.animation = `markerPulse 2s ease-in-out infinite ${index * 0.2}s`;
-                }, index * 100);
+                }, index * 150);
+
+                console.log(`📌 Added marker for ${token.location} at ${position.x}%, ${position.y}%`);
 
             } catch (error) {
                 console.error('❌ Demo token marker creation error:', error);
@@ -1366,13 +1392,97 @@ if (window.isVaultPhoenixCryptoGame) {
                 // Update available tokens count
                 this.updateAvailableTokensCount();
                 
-                // Initialize Google Maps if not already loaded
-                if (typeof google !== 'undefined' && google.maps && !this.googleMapsLoaded) {
-                    this.initializeGoogleMap();
-                }
+                // CRITICAL: Initialize map immediately for demo
+                console.log('🗺️ Initializing demo map for hunt screen...');
+                this.initializeDemoMap();
                 
             } catch (error) {
                 console.error('❌ Auto-start error:', error);
+            }
+        }
+
+        switchToMap() {
+            console.log('🗺️ Switching to Map mode');
+            try {
+                document.getElementById('map').style.display = 'block';
+                document.getElementById('video').style.display = 'none';
+                document.getElementById('canvas').style.display = 'none';
+                document.getElementById('vaultView').style.display = 'none';
+                document.getElementById('campaignsView').style.display = 'none';
+                
+                this.hideARInstructions();
+                this.hideEmberCoin();
+                this.stopCamera();
+                
+                // Show the swipeable module
+                const module = document.getElementById('tokenLocationsModule');
+                if (module) {
+                    module.style.display = 'block';
+                }
+                
+                // CRITICAL: Ensure map is visible and initialized
+                const mapContainer = document.getElementById('googleMap');
+                if (mapContainer) {
+                    mapContainer.style.display = 'block';
+                    
+                    // Initialize demo map if not already done
+                    if (!this.googleMapsLoaded) {
+                        console.log('🎮 Initializing demo map for hunt screen...');
+                        this.initializeDemoMap();
+                    }
+                }
+                
+            } catch (error) {
+                console.error('❌ Map switch error:', error);
+            }
+        }
+
+        initializeDemoMap(mapContainer = null) {
+            console.log('🎮 Initializing demo map...');
+            try {
+                const container = mapContainer || document.getElementById('googleMap');
+                if (!container) {
+                    console.error('❌ Map container not found');
+                    return;
+                }
+
+                console.log('🗺️ Creating demo map structure...');
+
+                // Create demo map HTML structure
+                container.innerHTML = `
+                    <div class="demo-loading-overlay">
+                        🗺️ Loading Phoenix $Ember Hunt Map...
+                    </div>
+                    <div class="demo-map-container">
+                        <div class="demo-map-grid"></div>
+                        <div class="demo-phoenix-label">🏜️ Phoenix, Arizona</div>
+                        <div class="demo-user-marker" title="Your Location - Phoenix, AZ"></div>
+                        <div class="demo-map-markers" id="demoMarkers"></div>
+                        <div class="demo-map-labels" id="demoLabels"></div>
+                    </div>
+                `;
+
+                // Force container to be visible
+                container.style.display = 'block';
+                container.style.position = 'absolute';
+                container.style.top = '0';
+                container.style.left = '0';
+                container.style.width = '100%';
+                container.style.height = '100%';
+                container.style.zIndex = '1';
+
+                console.log('✅ Demo map container created');
+
+                // Add demo token markers after a short delay
+                setTimeout(() => {
+                    this.addDemoTokenMarkers();
+                }, 1500);
+
+                this.googleMapsLoaded = true;
+                console.log('✅ Demo map initialized successfully');
+                
+            } catch (error) {
+                console.error('❌ Demo map initialization error:', error);
             }
         }
 
@@ -1410,19 +1520,85 @@ if (window.isVaultPhoenixCryptoGame) {
 
         loadCollectedTokens() {
             console.log('💎 Loading collected tokens...');
-            this.collectedTokens = [];
-            this.totalTokenValue = 0;
+            try {
+                const saved = localStorage.getItem('vaultPhoenixTokens');
+                if (saved) {
+                    this.collectedTokens = JSON.parse(saved);
+                    this.calculateTotalValue();
+                    console.log('✅ Loaded', this.collectedTokens.length, 'collected tokens');
+                } else {
+                    this.collectedTokens = [];
+                    this.totalTokenValue = 0;
+                    console.log('📦 No saved tokens, starting fresh vault');
+                }
+            } catch (error) {
+                console.error('❌ Token loading error:', error);
+                this.collectedTokens = [];
+                this.totalTokenValue = 0;
+            }
             this.updateVaultStats();
+        }
+
+        calculateTotalValue() {
+            this.totalTokenValue = this.collectedTokens.reduce((total, token) => total + token.value, 0);
         }
 
         updateVaultStats() {
             console.log('📊 Updating vault stats...');
-            // Add vault stats update logic here
+            try {
+                const elements = {
+                    navEmberCount: document.getElementById('navEmberCount'),
+                    menuEmberCount: document.getElementById('menuEmberCount')
+                };
+                
+                if (elements.navEmberCount) elements.navEmberCount.textContent = this.totalTokenValue;
+                if (elements.menuEmberCount) elements.menuEmberCount.textContent = this.totalTokenValue;
+            } catch (error) {
+                console.error('❌ Vault stats update error:', error);
+            }
         }
 
         setupEventListeners() {
             console.log('🎧 Setting up event listeners...');
-            // Add comprehensive event listeners here
+            try {
+                const handlers = [
+                    { id: 'homeBtn', event: 'click', handler: () => this.goHome() },
+                    { id: 'menuToggle', event: 'click', handler: () => this.toggleMenu() },
+                    { id: 'menuOverlay', event: 'click', handler: () => this.closeMenu() },
+                    { id: 'navClose', event: 'click', handler: () => this.hideNavigationModal() },
+                    { id: 'navWalking', event: 'click', handler: () => this.openMapsNavigation('walking') },
+                    { id: 'navDriving', event: 'click', handler: () => this.openMapsNavigation('driving') },
+                    { id: 'navAR', event: 'click', handler: () => this.startARHunt() }
+                ];
+                
+                handlers.forEach(({ id, event, handler }) => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.addEventListener(event, handler);
+                    }
+                });
+
+                // Navigation tabs
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        if (!tab.classList.contains('disabled')) {
+                            this.switchMode(tab.dataset.mode);
+                        }
+                    });
+                });
+
+                // Menu items
+                document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
+                    item.addEventListener('click', () => {
+                        this.switchMode(item.dataset.mode);
+                        this.closeMenu();
+                    });
+                });
+
+                console.log('✅ Event listeners setup complete');
+            } catch (error) {
+                console.error('❌ Event listener error:', error);
+            }
         }
 
         initializeVault() {
@@ -1437,7 +1613,19 @@ if (window.isVaultPhoenixCryptoGame) {
 
         addHapticFeedback() {
             console.log('📳 Adding haptic feedback...');
-            // Add haptic feedback logic here
+            try {
+                const interactiveElements = document.querySelectorAll('.nav-tab, .menu-item, .demo-token-marker');
+                
+                interactiveElements.forEach(element => {
+                    element.addEventListener('touchstart', () => {
+                        if (navigator.vibrate) {
+                            navigator.vibrate(10);
+                        }
+                    });
+                });
+            } catch (error) {
+                console.error('❌ Haptic feedback error:', error);
+            }
         }
 
         start() {
@@ -1447,10 +1635,146 @@ if (window.isVaultPhoenixCryptoGame) {
         }
 
         switchMode(mode) {
+            if (mode === this.currentMode) return;
+            
             console.log('🔄 Switching to mode:', mode);
             this.currentMode = mode;
             this.setModeAttribute(mode);
-            // Add mode switching logic here
+            this.updateNavigationState();
+            
+            switch (mode) {
+                case 'map':
+                    this.switchToMap();
+                    break;
+                case 'ar':
+                    this.switchToAR();
+                    break;
+                case 'vault':
+                    this.switchToVault();
+                    break;
+                case 'campaigns':
+                    this.switchToCampaigns();
+                    break;
+            }
+        }
+
+        switchToAR() {
+            console.log('📱 Switching to AR mode');
+            try {
+                document.getElementById('map').style.display = 'none';
+                document.getElementById('video').style.display = 'block';
+                document.getElementById('canvas').style.display = 'block';
+                document.getElementById('vaultView').style.display = 'none';
+                document.getElementById('campaignsView').style.display = 'none';
+                
+                // Hide the swipeable module in AR mode
+                const module = document.getElementById('tokenLocationsModule');
+                if (module) {
+                    module.style.display = 'none';
+                }
+                
+                console.log('📱 AR mode activated');
+            } catch (error) {
+                console.error('❌ AR switch error:', error);
+            }
+        }
+
+        switchToVault() {
+            console.log('💎 Switching to Vault mode');
+            try {
+                document.getElementById('map').style.display = 'none';
+                document.getElementById('video').style.display = 'none';
+                document.getElementById('canvas').style.display = 'none';
+                document.getElementById('vaultView').style.display = 'block';
+                document.getElementById('campaignsView').style.display = 'none';
+                
+                // Hide the swipeable module
+                const module = document.getElementById('tokenLocationsModule');
+                if (module) {
+                    module.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('❌ Vault switch error:', error);
+            }
+        }
+
+        switchToCampaigns() {
+            console.log('🏆 Switching to Campaigns mode');
+            try {
+                document.getElementById('map').style.display = 'none';
+                document.getElementById('video').style.display = 'none';
+                document.getElementById('canvas').style.display = 'none';
+                document.getElementById('vaultView').style.display = 'none';
+                document.getElementById('campaignsView').style.display = 'block';
+                
+                // Hide the swipeable module
+                const module = document.getElementById('tokenLocationsModule');
+                if (module) {
+                    module.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('❌ Campaigns switch error:', error);
+            }
+        }
+
+        updateNavigationState() {
+            try {
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.mode === this.currentMode);
+                });
+                this.updateMenuState();
+            } catch (error) {
+                console.error('❌ Navigation update error:', error);
+            }
+        }
+
+        updateMenuState() {
+            try {
+                document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
+                    item.classList.toggle('active', item.dataset.mode === this.currentMode);
+                });
+            } catch (error) {
+                console.error('❌ Menu state update error:', error);
+            }
+        }
+
+        goHome() {
+            if (this.currentMode !== 'map') {
+                this.switchMode('map');
+            }
+        }
+
+        toggleMenu() {
+            try {
+                const menu = document.getElementById('sideMenu');
+                const overlay = document.getElementById('menuOverlay');
+                
+                if (!menu || !overlay) return;
+                
+                const isOpen = menu.classList.contains('open');
+                
+                if (isOpen) {
+                    this.closeMenu();
+                } else {
+                    menu.classList.add('open');
+                    overlay.classList.add('active');
+                    this.updateMenuState();
+                }
+            } catch (error) {
+                console.error('❌ Menu toggle error:', error);
+            }
+        }
+
+        closeMenu() {
+            try {
+                const menu = document.getElementById('sideMenu');
+                const overlay = document.getElementById('menuOverlay');
+                
+                if (menu) menu.classList.remove('open');
+                if (overlay) overlay.classList.remove('active');
+            } catch (error) {
+                console.error('❌ Menu close error:', error);
+            }
         }
 
         showLoading(show) {
@@ -1462,6 +1786,11 @@ if (window.isVaultPhoenixCryptoGame) {
             console.log('📊 Status update:', message);
             // Add status update logic here
         }
+
+        // Utility methods that need to work
+        hideARInstructions() { console.log('🔇 Hiding AR instructions'); }
+        hideEmberCoin() { console.log('💎 Hiding ember coin'); }
+        stopCamera() { console.log('📷 Stopping camera'); }
     }
 
     // Initialize the game when DOM is ready
