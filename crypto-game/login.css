@@ -143,11 +143,12 @@ body.crypto-login-page::before {
     border-radius: 20px;
 }
 
-/* FIXED: Phoenix flame decoration - PROPERLY OVERLAPPING TOP-RIGHT CORNER */
+/* FIXED: Phoenix flame decoration - BREAKS OUT OF CONTAINER COMPLETELY */
 .crypto-login-page .phoenix-flame-decoration {
-    position: absolute;
-    top: -20px;
-    right: -20px;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(calc(41% - 28px), calc(-50% - 28px)) !important;
     width: 56px;
     height: 56px;
     display: flex;
@@ -157,14 +158,14 @@ body.crypto-login-page::before {
     border-radius: 50%;
     border: 3px solid rgba(240, 165, 0, 0.6);
     animation: flameFlicker 3.5s ease-in-out infinite;
-    z-index: 50;
+    z-index: 9999 !important;
     backdrop-filter: blur(12px);
     box-shadow: 
         0 8px 24px rgba(240, 165, 0, 0.5),
         0 4px 12px rgba(240, 165, 0, 0.3),
         inset 0 2px 0 rgba(255, 255, 255, 0.1);
     pointer-events: none;
-    overflow: visible;
+    overflow: visible !important;
 }
 
 .crypto-login-page .phoenix-flame-icon {
@@ -668,7 +669,7 @@ body.crypto-login-page::before {
     transform: none;
 }
 
-/* MOBILE RESPONSIVE BREAKPOINTS - OPTIMIZED FOR SENIOR UX */
+/* MOBILE RESPONSIVE BREAKPOINTS - FIXED FLAME POSITIONING */
 @media (max-width: 375px) {
     .crypto-login-page .login-container {
         padding: 14px;
@@ -678,8 +679,7 @@ body.crypto-login-page::before {
     }
     
     .crypto-login-page .phoenix-flame-decoration {
-        top: -16px;
-        right: -16px;
+        transform: translate(calc(42% - 26px), calc(-50% - 26px)) !important;
         width: 52px;
         height: 52px;
     }
@@ -756,8 +756,7 @@ body.crypto-login-page::before {
     }
     
     .crypto-login-page .phoenix-flame-decoration {
-        top: -14px;
-        right: -14px;
+        transform: translate(calc(43% - 24px), calc(-50% - 24px)) !important;
         width: 48px;
         height: 48px;
     }
@@ -822,8 +821,7 @@ body.crypto-login-page::before {
     }
     
     .crypto-login-page .phoenix-flame-decoration {
-        top: -14px;
-        right: -14px;
+        transform: translate(calc(44% - 26px), calc(-50% - 26px)) !important;
     }
     
     .crypto-login-page .forgot-password {
