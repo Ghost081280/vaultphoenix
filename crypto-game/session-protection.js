@@ -322,6 +322,58 @@ if (window.isVaultPhoenixSession) {
                 this.redirectToLogin('Logout completed');
             }
         }
+
+        // Demo session creation for testing
+        createDemoSession(email = 'demo@vaultphoenix.com') {
+            try {
+                const sessionData = {
+                    email: email,
+                    sessionId: 'demo-' + Date.now(),
+                    loginTime: new Date().toISOString(),
+                    lastActivity: new Date().toISOString(),
+                    pageViews: 1,
+                    userAgent: navigator.userAgent,
+                    loginMethod: 'demo'
+                };
+                
+                sessionStorage.setItem('vaultPhoenixSession', JSON.stringify(sessionData));
+                console.log('✅ Demo session created for:', email);
+                return true;
+            } catch (error) {
+                console.error('❌ Demo session creation error:', error);
+                return false;
+            }
+        }
+
+        // Enhanced security checks
+        performSecurityCheck() {
+            try {
+                const session = this.getSessionInfo();
+                if (!session) return false;
+
+                // Check for suspicious activity
+                const currentUserAgent = navigator.userAgent;
+                if (session.userAgent && session.userAgent !== currentUserAgent) {
+                    console.warn('⚠️ User agent mismatch detected');
+                    this.clearSession();
+                    this.redirectToLogin('Security check failed - please log in again');
+                    return false;
+                }
+
+                // Check session integrity
+                if (!session.sessionId || !session.loginTime) {
+                    console.warn('⚠️ Session integrity check failed');
+                    this.clearSession();
+                    this.redirectToLogin('Session corrupted - please log in again');
+                    return false;
+                }
+
+                return true;
+            } catch (error) {
+                console.error('❌ Security check error:', error);
+                return false;
+            }
+        }
     }
 
     // Initialize session protection immediately
