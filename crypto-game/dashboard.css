@@ -404,6 +404,28 @@ body.crypto-dashboard-page {
     }
 }
 
+@keyframes userLocationPulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 3px 15px rgba(66, 133, 244, 0.8), 0 0 0 0 rgba(66, 133, 244, 0.4);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 3px 15px rgba(66, 133, 244, 0.8), 0 0 0 20px rgba(66, 133, 244, 0);
+    }
+}
+
+/* Map Control Button Interactions */
+.crypto-dashboard-page .map-control-btn:hover {
+    background: rgba(240, 165, 0, 1) !important;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(240, 165, 0, 0.6) !important;
+}
+
+.crypto-dashboard-page .map-control-btn:active {
+    transform: scale(0.95);
+}
+
 /* =================== SWIPEABLE TOKEN LOCATIONS MODULE =================== */
 .crypto-dashboard-page .token-locations-module {
     position: absolute;
