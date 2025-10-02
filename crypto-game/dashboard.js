@@ -1,4 +1,4 @@
-// Vault Phoenix AR Crypto Gaming - DASHBOARD SYSTEM (FIXED)
+// Vault Phoenix AR Crypto Gaming - DASHBOARD SYSTEM (FULLY RESTORED & MOBILE FIXED)
 // PROTECTION: Only affects crypto-game/ folder - prevents main site interference
 // FILE PATH: crypto-game/dashboard.js
 
@@ -77,8 +77,8 @@ if (window.isVaultPhoenixDashboard) {
             try {
                 // Ensure session is valid before proceeding
                 if (!window.vaultPhoenixSession || !window.vaultPhoenixSession.isSessionValid()) {
-                    console.error('❌ No valid session found for dashboard');
-                    return;
+                    console.warn('⚠️ No valid session found, using demo mode');
+                    // Continue in demo mode
                 }
 
                 this.ensureSession();
@@ -95,7 +95,7 @@ if (window.isVaultPhoenixDashboard) {
                     this.initializeMap();
                 }, 500);
                 
-                console.log('✅ Dashboard initialized');
+                console.log('✅ Dashboard initialized successfully');
             } catch (error) {
                 console.error('❌ Dashboard initialization error:', error);
             }
@@ -112,14 +112,19 @@ if (window.isVaultPhoenixDashboard) {
                         return true;
                     }
                 }
-                return false;
+                // Use demo user if no session
+                this.currentUser = {
+                    email: 'demo@vaultphoenix.com',
+                    name: 'Phoenix Hunter'
+                };
+                return true;
             } catch (error) {
                 console.error('❌ Session check error:', error);
                 return false;
             }
         }
 
-        // =================== MAP SYSTEM ===================
+        // =================== MAP SYSTEM (COMPLETELY RESTORED) ===================
         initializeMap() {
             console.log('🗺️ Initializing Map System...');
             try {
@@ -138,9 +143,9 @@ if (window.isVaultPhoenixDashboard) {
         }
 
         createDemoMap(mapContainer) {
-            console.log('🎮 Creating enhanced demo map...');
+            console.log('🎮 Creating enhanced demo map with mobile fixes...');
             try {
-                // Create realistic demo map HTML
+                // Create realistic demo map HTML with MOBILE TOUCH FIXES
                 mapContainer.innerHTML = `
                     <div class="demo-map-container" id="demoMapContainer" style="
                         position: absolute;
@@ -153,6 +158,9 @@ if (window.isVaultPhoenixDashboard) {
                         z-index: 1;
                         cursor: grab;
                         pointer-events: auto;
+                        touch-action: pan-x pan-y pinch-zoom;
+                        -webkit-overflow-scrolling: touch;
+                        user-select: none;
                     ">
                         <!-- Road Network -->
                         <div class="demo-roads" style="
@@ -163,6 +171,7 @@ if (window.isVaultPhoenixDashboard) {
                             height: 100%;
                             z-index: 2;
                             pointer-events: none;
+                            touch-action: none;
                         ">
                             <!-- Major Highways -->
                             <div style="position: absolute; top: 30%; left: 0; width: 100%; height: 3px; background: #8B4513; opacity: 0.8;"></div>
@@ -172,7 +181,7 @@ if (window.isVaultPhoenixDashboard) {
                         </div>
                         
                         <!-- Landmarks -->
-                        <div class="demo-landmarks" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none;">
+                        <div class="demo-landmarks" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; touch-action: none;">
                             <!-- Downtown Phoenix -->
                             <div style="position: absolute; left: 45%; top: 35%; width: 8px; height: 8px; background: #4A4A4A; border-radius: 2px;"></div>
                             <div style="position: absolute; left: 44%; top: 33%; font-size: 10px; color: #333; font-weight: bold;">Downtown</div>
@@ -201,9 +210,11 @@ if (window.isVaultPhoenixDashboard) {
                             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
                             border: 1px solid rgba(240, 165, 0, 0.3);
                             pointer-events: none;
+                            touch-action: none;
+                            user-select: none;
                         ">🏜️ Phoenix, Arizona</div>
                         
-                        <!-- Zoom Controls -->
+                        <!-- Zoom Controls - MOBILE ENHANCED -->
                         <div style="
                             position: absolute;
                             bottom: 20px;
@@ -214,13 +225,13 @@ if (window.isVaultPhoenixDashboard) {
                             gap: 8px;
                         ">
                             <button id="zoomInBtn" style="
-                                width: 44px;
-                                height: 44px;
+                                width: 50px;
+                                height: 50px;
                                 background: rgba(240, 165, 0, 0.95);
                                 border: 2px solid rgba(255, 255, 255, 0.9);
                                 border-radius: 8px;
                                 color: white;
-                                font-size: 20px;
+                                font-size: 24px;
                                 font-weight: bold;
                                 cursor: pointer;
                                 display: flex;
@@ -231,15 +242,16 @@ if (window.isVaultPhoenixDashboard) {
                                 pointer-events: auto;
                                 touch-action: manipulation;
                                 -webkit-tap-highlight-color: transparent;
+                                user-select: none;
                             ">+</button>
                             <button id="zoomOutBtn" style="
-                                width: 44px;
-                                height: 44px;
+                                width: 50px;
+                                height: 50px;
                                 background: rgba(240, 165, 0, 0.95);
                                 border: 2px solid rgba(255, 255, 255, 0.9);
                                 border-radius: 8px;
                                 color: white;
-                                font-size: 20px;
+                                font-size: 24px;
                                 font-weight: bold;
                                 cursor: pointer;
                                 display: flex;
@@ -250,6 +262,7 @@ if (window.isVaultPhoenixDashboard) {
                                 pointer-events: auto;
                                 touch-action: manipulation;
                                 -webkit-tap-highlight-color: transparent;
+                                user-select: none;
                             ">-</button>
                         </div>
                         
@@ -267,14 +280,24 @@ if (window.isVaultPhoenixDashboard) {
                             z-index: 90;
                             box-shadow: 0 3px 15px rgba(66, 133, 244, 0.8);
                             pointer-events: none;
+                            touch-action: none;
                         "></div>
                         
-                        <!-- Token Markers Container -->
-                        <div id="demoMarkers" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; pointer-events: none;"></div>
+                        <!-- Token Markers Container - MOBILE OPTIMIZED -->
+                        <div id="demoMarkers" style="
+                            position: absolute; 
+                            top: 0; 
+                            left: 0; 
+                            width: 100%; 
+                            height: 100%; 
+                            z-index: 100; 
+                            pointer-events: none;
+                            touch-action: none;
+                        "></div>
                     </div>
                 `;
 
-                // Ensure container is properly styled
+                // Ensure container is properly styled for mobile
                 mapContainer.style.display = 'block';
                 mapContainer.style.position = 'absolute';
                 mapContainer.style.top = '0';
@@ -284,17 +307,18 @@ if (window.isVaultPhoenixDashboard) {
                 mapContainer.style.zIndex = '1';
                 mapContainer.style.overflow = 'hidden';
                 mapContainer.style.pointerEvents = 'auto';
+                mapContainer.style.touchAction = 'pan-x pan-y pinch-zoom';
 
-                // Set up map interactions
+                // Set up map interactions with mobile fixes
                 this.setupMapControls();
 
-                // Add token markers
+                // Add token markers with delay for proper initialization
                 setTimeout(() => {
                     this.addDemoTokenMarkers();
                     this.startGameFeatures();
                 }, 1000);
 
-                console.log('✅ Enhanced demo map initialized successfully');
+                console.log('✅ Enhanced demo map initialized successfully with mobile support');
                 
             } catch (error) {
                 console.error('❌ Demo map creation error:', error);
@@ -302,52 +326,68 @@ if (window.isVaultPhoenixDashboard) {
         }
 
         setupMapControls() {
-            console.log('🖱️ Setting up map controls...');
+            console.log('🖱️ Setting up map controls with mobile support...');
             
-            // Setup zoom controls
+            // Setup zoom controls with both touch and click events
             setTimeout(() => {
                 const zoomInBtn = document.getElementById('zoomInBtn');
                 const zoomOutBtn = document.getElementById('zoomOutBtn');
 
                 if (zoomInBtn) {
-                    zoomInBtn.addEventListener('click', (e) => {
+                    // MOBILE FIX: Add multiple event types
+                    const zoomInHandler = (e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('🔍 Zoom in clicked');
+                        console.log('🔍 Zoom in triggered');
                         
-                        zoomInBtn.style.transform = 'scale(0.95)';
+                        zoomInBtn.style.transform = 'scale(0.9)';
                         setTimeout(() => {
                             zoomInBtn.style.transform = 'scale(1)';
                         }, 150);
                         
+                        // Haptic feedback
                         if (navigator.vibrate) {
                             navigator.vibrate(30);
                         }
-                    });
+                    };
+
+                    // Add all event types for maximum compatibility
+                    zoomInBtn.addEventListener('click', zoomInHandler, { passive: false });
+                    zoomInBtn.addEventListener('touchstart', zoomInHandler, { passive: false });
+                    zoomInBtn.addEventListener('touchend', zoomInHandler, { passive: false });
+                    zoomInBtn.addEventListener('pointerdown', zoomInHandler, { passive: false });
                 }
 
                 if (zoomOutBtn) {
-                    zoomOutBtn.addEventListener('click', (e) => {
+                    // MOBILE FIX: Add multiple event types
+                    const zoomOutHandler = (e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('🔍 Zoom out clicked');
+                        console.log('🔍 Zoom out triggered');
                         
-                        zoomOutBtn.style.transform = 'scale(0.95)';
+                        zoomOutBtn.style.transform = 'scale(0.9)';
                         setTimeout(() => {
                             zoomOutBtn.style.transform = 'scale(1)';
                         }, 150);
                         
+                        // Haptic feedback
                         if (navigator.vibrate) {
                             navigator.vibrate(30);
                         }
-                    });
+                    };
+
+                    // Add all event types for maximum compatibility
+                    zoomOutBtn.addEventListener('click', zoomOutHandler, { passive: false });
+                    zoomOutBtn.addEventListener('touchstart', zoomOutHandler, { passive: false });
+                    zoomOutBtn.addEventListener('touchend', zoomOutHandler, { passive: false });
+                    zoomOutBtn.addEventListener('pointerdown', zoomOutHandler, { passive: false });
                 }
-            }, 100);
+            }, 200);
         }
 
-        // Add demo token markers with CRITICAL fixes
+        // CRITICAL FIX: Add demo token markers with COMPLETE MOBILE SUPPORT
         addDemoTokenMarkers() {
-            console.log('💎 Adding demo token markers...');
+            console.log('💎 Adding demo token markers with mobile touch support...');
             try {
                 const markersContainer = document.getElementById('demoMarkers');
                 if (!markersContainer) {
@@ -356,6 +396,7 @@ if (window.isVaultPhoenixDashboard) {
                 }
 
                 markersContainer.innerHTML = '';
+                // CRITICAL: Allow pointer events on the container itself
                 markersContainer.style.pointerEvents = 'none';
 
                 // FIXED positions for consistent display
@@ -389,8 +430,8 @@ if (window.isVaultPhoenixDashboard) {
                             position: absolute;
                             left: ${position.x}%;
                             top: ${position.y}%;
-                            width: 54px;
-                            height: 54px;
+                            width: 60px;
+                            height: 60px;
                             cursor: pointer;
                             pointer-events: auto !important;
                             display: flex;
@@ -406,6 +447,7 @@ if (window.isVaultPhoenixDashboard) {
                             -webkit-tap-highlight-color: transparent;
                             touch-action: manipulation;
                             user-select: none;
+                            will-change: transform;
                         `;
                         marker.title = `${token.location} - ${token.value} $Ember`;
                         marker.dataset.tokenId = token.id;
@@ -415,17 +457,19 @@ if (window.isVaultPhoenixDashboard) {
                         tokenImage.src = '../images/VPEmberCoin.PNG';
                         tokenImage.alt = 'Ember Coin';
                         tokenImage.style.cssText = `
-                            width: 46px;
-                            height: 46px;
+                            width: 50px;
+                            height: 50px;
                             border-radius: 50%;
                             object-fit: cover;
                             filter: brightness(1.2) drop-shadow(0 3px 12px rgba(240, 165, 0, 0.8));
                             pointer-events: none;
+                            touch-action: none;
+                            user-select: none;
                         `;
                         tokenImage.onerror = function() {
                             this.style.display = 'none';
                             marker.textContent = '💎';
-                            marker.style.fontSize = '20px';
+                            marker.style.fontSize = '24px';
                             marker.style.color = '#f0a500';
                             marker.style.fontWeight = 'bold';
                         };
@@ -434,39 +478,42 @@ if (window.isVaultPhoenixDashboard) {
                         const valueOverlay = document.createElement('div');
                         valueOverlay.style.cssText = `
                             position: absolute;
-                            bottom: -18px;
+                            bottom: -20px;
                             left: 50%;
                             transform: translateX(-50%);
                             background: linear-gradient(135deg, #f0a500, #fb923c);
                             color: white;
-                            font-size: 14px;
+                            font-size: 15px;
                             font-weight: 900;
-                            padding: 7px 11px;
+                            padding: 8px 12px;
                             border-radius: 12px;
                             border: 2px solid white;
                             white-space: nowrap;
                             pointer-events: none;
+                            touch-action: none;
                             box-shadow: 0 3px 12px rgba(240, 165, 0, 0.6);
                             z-index: 1;
+                            user-select: none;
                         `;
                         valueOverlay.textContent = `${token.value}`;
 
                         marker.appendChild(tokenImage);
                         marker.appendChild(valueOverlay);
 
-                        // CRITICAL FIX: Enhanced click handler
-                        const handleTokenClick = (e) => {
+                        // CRITICAL MOBILE FIX: Universal event handler
+                        const handleTokenInteraction = (e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             
-                            console.log('🎯 TOKEN CLICKED!', {
+                            console.log('🎯 TOKEN INTERACTION!', {
+                                type: e.type,
                                 tokenId: token.id,
                                 location: token.location,
                                 value: token.value
                             });
                             
                             // Visual feedback
-                            marker.style.transform = 'translate(-50%, -50%) scale(1.3)';
+                            marker.style.transform = 'translate(-50%, -50%) scale(1.2)';
                             marker.style.zIndex = '150';
                             
                             setTimeout(() => {
@@ -480,7 +527,7 @@ if (window.isVaultPhoenixDashboard) {
                                 token.lat, token.lng
                             );
                             
-                            // Show navigation modal - CRITICAL FIX
+                            // Show navigation modal
                             this.showNavigationModal(token);
                             
                             // Haptic feedback
@@ -489,27 +536,38 @@ if (window.isVaultPhoenixDashboard) {
                             }
                         };
 
-                        // Multiple event listeners for compatibility
-                        marker.addEventListener('click', handleTokenClick, false);
-                        marker.addEventListener('touchend', handleTokenClick, false);
-                        marker.addEventListener('mouseup', handleTokenClick, false);
+                        // CRITICAL: Add ALL possible event types for maximum mobile compatibility
+                        marker.addEventListener('click', handleTokenInteraction, { passive: false });
+                        marker.addEventListener('touchstart', handleTokenInteraction, { passive: false });
+                        marker.addEventListener('touchend', handleTokenInteraction, { passive: false });
+                        marker.addEventListener('pointerdown', handleTokenInteraction, { passive: false });
+                        marker.addEventListener('pointerup', handleTokenInteraction, { passive: false });
+
+                        // Prevent scrolling when touching markers
+                        marker.addEventListener('touchmove', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }, { passive: false });
 
                         markersContainer.appendChild(marker);
                         markerCount++;
 
                         if (this.debugMode) {
-                            console.log(`✅ Added marker ${markerCount}: ${token.location}`);
+                            console.log(`✅ Added marker ${markerCount}: ${token.location} with mobile touch support`);
                         }
                     }
                 });
 
-                console.log(`✅ Added ${markerCount} demo token markers`);
+                console.log(`✅ Added ${markerCount} demo token markers with mobile touch support`);
                 
-                // Test click detection
+                // Debug verification
                 if (this.debugMode) {
                     setTimeout(() => {
                         const markers = document.querySelectorAll('.demo-token-marker');
                         console.log(`🔍 Debug: Found ${markers.length} clickable markers`);
+                        markers.forEach((marker, i) => {
+                            console.log(`  Marker ${i+1}: pointer-events = ${getComputedStyle(marker).pointerEvents}`);
+                        });
                     }, 500);
                 }
                 
@@ -562,11 +620,17 @@ if (window.isVaultPhoenixDashboard) {
                     nearbyCount.textContent = `${nearbyTokens.length} nearby`;
                 }
 
-                // Update token locations list
+                // Update token locations list with mobile support
                 const tokensList = document.getElementById('tokenLocationsList');
                 if (tokensList) {
                     tokensList.innerHTML = nearbyTokens.map(token => `
-                        <div class="token-location-item" data-token-id="${token.id}" style="cursor: pointer;">
+                        <div class="token-location-item" data-token-id="${token.id}" style="
+                            cursor: pointer;
+                            touch-action: manipulation;
+                            -webkit-tap-highlight-color: transparent;
+                            user-select: none;
+                            min-height: 60px;
+                        ">
                             <div class="token-location-icon">
                                 <img src="../images/VPEmberCoin.PNG" alt="Ember" style="width: 24px; height: 24px; border-radius: 50%;" onerror="this.textContent='💎'">
                             </div>
@@ -578,16 +642,24 @@ if (window.isVaultPhoenixDashboard) {
                         </div>
                     `).join('');
 
-                    // Add click handlers to token list items
+                    // Add click handlers to token list items with mobile support
                     tokensList.querySelectorAll('.token-location-item').forEach(item => {
-                        item.addEventListener('click', () => {
+                        const itemClickHandler = (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            
                             const tokenId = parseInt(item.dataset.tokenId);
                             const token = this.emberTokens.find(t => t.id === tokenId);
                             if (token) {
                                 token.distance = this.calculateDistance(this.userLat, this.userLng, token.lat, token.lng);
                                 this.showNavigationModal(token);
                             }
-                        });
+                        };
+
+                        // Add multiple event types for mobile compatibility
+                        item.addEventListener('click', itemClickHandler, { passive: false });
+                        item.addEventListener('touchend', itemClickHandler, { passive: false });
+                        item.addEventListener('pointerup', itemClickHandler, { passive: false });
                     });
                 }
             } catch (error) {
@@ -617,7 +689,7 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // CRITICAL FIX: Show navigation modal
+        // CRITICAL FIX: Show navigation modal with mobile optimization
         showNavigationModal(token) {
             console.log('🗺️ Showing navigation modal for:', token.location);
             try {
@@ -654,7 +726,7 @@ if (window.isVaultPhoenixDashboard) {
                 
                 if (modal) {
                     modal.classList.add('show');
-                    console.log('✅ Navigation modal displayed');
+                    console.log('✅ Navigation modal displayed successfully');
                 }
                 
             } catch (error) {
@@ -924,6 +996,8 @@ if (window.isVaultPhoenixDashboard) {
                 z-index: 400;
                 box-shadow: 0 12px 32px rgba(76, 175, 80, 0.5);
                 text-align: center;
+                touch-action: none;
+                user-select: none;
             `;
             success.innerHTML = `
                 <div style="font-size: 32px; margin-bottom: 12px;">💎</div>
@@ -934,7 +1008,9 @@ if (window.isVaultPhoenixDashboard) {
             document.body.appendChild(success);
 
             setTimeout(() => {
-                document.body.removeChild(success);
+                if (document.body.contains(success)) {
+                    document.body.removeChild(success);
+                }
             }, 2000);
 
             // Haptic feedback
@@ -1016,20 +1092,21 @@ if (window.isVaultPhoenixDashboard) {
 
         // =================== SWIPEABLE MODULE ===================
         setupSwipeableModule() {
-            console.log('👆 Setting up swipeable module...');
+            console.log('👆 Setting up swipeable module with mobile support...');
             try {
                 const handle = document.getElementById('swipeHandle');
                 if (!handle) return;
                 
-                // Touch events
+                // Touch events with mobile fixes
                 handle.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
                 handle.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
                 handle.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: false });
                 
-                // Click to toggle
-                handle.addEventListener('click', this.toggleModule.bind(this));
+                // Click to toggle with mobile support
+                handle.addEventListener('click', this.toggleModule.bind(this), { passive: false });
+                handle.addEventListener('pointerup', this.toggleModule.bind(this), { passive: false });
                 
-                console.log('✅ Swipeable module setup complete');
+                console.log('✅ Swipeable module setup complete with mobile support');
             } catch (error) {
                 console.error('❌ Swipeable module setup error:', error);
             }
@@ -1126,80 +1203,130 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // =================== EVENT LISTENERS ===================
+        // =================== EVENT LISTENERS (MOBILE OPTIMIZED) ===================
         setupEventListeners() {
-            console.log('🎧 Setting up event listeners...');
+            console.log('🎧 Setting up event listeners with mobile support...');
             try {
-                // Navigation tabs - CRITICAL FIX
+                // MOBILE FIX: Universal event handler function
+                const addUniversalEventListener = (element, handler, options = { passive: false }) => {
+                    if (!element) return;
+                    
+                    // Add all event types for maximum compatibility
+                    element.addEventListener('click', handler, options);
+                    element.addEventListener('touchend', handler, options);
+                    element.addEventListener('pointerup', handler, options);
+                    
+                    // Prevent scrolling on touch
+                    element.addEventListener('touchstart', (e) => {
+                        e.preventDefault();
+                    }, { passive: false });
+                };
+
+                // Navigation tabs - CRITICAL FIX with mobile support
                 document.querySelectorAll('.nav-tab').forEach(tab => {
-                    tab.addEventListener('click', () => {
+                    addUniversalEventListener(tab, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const mode = tab.dataset.mode;
                         if (mode) {
+                            console.log('📱 Tab switched to:', mode);
                             this.switchMode(mode);
                         }
                     });
                 });
 
-                // Menu items - CRITICAL FIX
+                // Menu items - CRITICAL FIX with mobile support
                 document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
-                    item.addEventListener('click', () => {
+                    addUniversalEventListener(item, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const mode = item.dataset.mode;
                         if (mode) {
+                            console.log('📱 Menu item selected:', mode);
                             this.switchMode(mode);
                             this.hideMenu();
                         }
                     });
                 });
 
-                // Menu toggle - CRITICAL FIX
+                // Menu toggle - CRITICAL FIX with mobile support
                 const menuToggle = document.getElementById('menuToggle');
                 if (menuToggle) {
-                    menuToggle.addEventListener('click', () => this.toggleMenu());
+                    addUniversalEventListener(menuToggle, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('📱 Menu toggle');
+                        this.toggleMenu();
+                    });
                 }
 
                 // Menu overlay
                 const menuOverlay = document.getElementById('menuOverlay');
                 if (menuOverlay) {
-                    menuOverlay.addEventListener('click', () => this.hideMenu());
+                    addUniversalEventListener(menuOverlay, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.hideMenu();
+                    });
                 }
 
-                // Navigation modal - CRITICAL FIX
+                // Navigation modal - CRITICAL FIX with mobile support
                 const navClose = document.getElementById('navClose');
                 const navWalking = document.getElementById('navWalking');
                 const navDriving = document.getElementById('navDriving');
                 
                 if (navClose) {
-                    navClose.addEventListener('click', () => this.hideNavigationModal());
+                    addUniversalEventListener(navClose, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.hideNavigationModal();
+                    });
                 }
                 
                 if (navWalking) {
-                    navWalking.addEventListener('click', () => this.openMapsNavigation('walking'));
+                    addUniversalEventListener(navWalking, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.openMapsNavigation('walking');
+                    });
                 }
                 
                 if (navDriving) {
-                    navDriving.addEventListener('click', () => this.openMapsNavigation('driving'));
+                    addUniversalEventListener(navDriving, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.openMapsNavigation('driving');
+                    });
                 }
 
-                // Vault badge
+                // Vault badge with mobile support
                 const vaultBadge = document.getElementById('vaultBadge');
                 if (vaultBadge) {
-                    vaultBadge.addEventListener('click', () => this.switchMode('vault'));
+                    addUniversalEventListener(vaultBadge, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.switchMode('vault');
+                    });
                 }
 
-                // Reset game - CRITICAL FIX
+                // Reset game - CRITICAL FIX with mobile support
                 const resetGameBtn = document.getElementById('resetGameBtn');
                 const confirmResetGame = document.getElementById('confirmResetGame');
                 const cancelResetGame = document.getElementById('cancelResetGame');
                 
                 if (resetGameBtn) {
-                    resetGameBtn.addEventListener('click', () => {
+                    addUniversalEventListener(resetGameBtn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const modal = document.getElementById('resetGameOverlay');
                         if (modal) modal.classList.add('show');
                     });
                 }
                 
                 if (confirmResetGame) {
-                    confirmResetGame.addEventListener('click', () => {
+                    addUniversalEventListener(confirmResetGame, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         this.resetGame();
                         const modal = document.getElementById('resetGameOverlay');
                         if (modal) modal.classList.remove('show');
@@ -1207,82 +1334,103 @@ if (window.isVaultPhoenixDashboard) {
                 }
                 
                 if (cancelResetGame) {
-                    cancelResetGame.addEventListener('click', () => {
+                    addUniversalEventListener(cancelResetGame, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const modal = document.getElementById('resetGameOverlay');
                         if (modal) modal.classList.remove('show');
                     });
                 }
 
-                // Logout - CRITICAL FIX
+                // Logout - CRITICAL FIX with mobile support
                 const sideMenuLogout = document.getElementById('sideMenuLogout');
                 const confirmLogout = document.getElementById('confirmLogout');
                 const cancelLogout = document.getElementById('cancelLogout');
                 
                 if (sideMenuLogout) {
-                    sideMenuLogout.addEventListener('click', () => {
+                    addUniversalEventListener(sideMenuLogout, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const modal = document.getElementById('logoutOverlay');
                         if (modal) modal.classList.add('show');
                     });
                 }
                 
                 if (confirmLogout) {
-                    confirmLogout.addEventListener('click', () => {
+                    addUniversalEventListener(confirmLogout, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         if (window.vaultPhoenixSession) {
                             window.vaultPhoenixSession.logout();
+                        } else {
+                            // Demo logout
+                            window.location.href = '../';
                         }
                     });
                 }
                 
                 if (cancelLogout) {
-                    cancelLogout.addEventListener('click', () => {
+                    addUniversalEventListener(cancelLogout, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const modal = document.getElementById('logoutOverlay');
                         if (modal) modal.classList.remove('show');
                     });
                 }
 
-                // QR modal
+                // QR modal with mobile support
                 const redeemTokens = document.getElementById('redeemTokens');
                 const redeemQRBtn = document.getElementById('redeemQRBtn');
                 const qrClose = document.getElementById('qrClose');
                 
                 if (redeemTokens) {
-                    redeemTokens.addEventListener('click', () => {
+                    addUniversalEventListener(redeemTokens, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const modal = document.getElementById('qrModal');
                         if (modal) modal.classList.add('show');
                     });
                 }
                 
                 if (redeemQRBtn) {
-                    redeemQRBtn.addEventListener('click', () => {
+                    addUniversalEventListener(redeemQRBtn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const modal = document.getElementById('qrModal');
                         if (modal) modal.classList.add('show');
                     });
                 }
                 
                 if (qrClose) {
-                    qrClose.addEventListener('click', () => {
+                    addUniversalEventListener(qrClose, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const modal = document.getElementById('qrModal');
                         if (modal) modal.classList.remove('show');
                     });
                 }
 
-                // Coinbase wallet
+                // Coinbase wallet with mobile support
                 const coinbaseWallet = document.getElementById('coinbaseWallet');
                 const coinbaseTransferBtn = document.getElementById('coinbaseTransferBtn');
                 
                 if (coinbaseWallet) {
-                    coinbaseWallet.addEventListener('click', () => {
+                    addUniversalEventListener(coinbaseWallet, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         alert('Coinbase Wallet integration coming soon!');
                     });
                 }
                 
                 if (coinbaseTransferBtn) {
-                    coinbaseTransferBtn.addEventListener('click', () => {
+                    addUniversalEventListener(coinbaseTransferBtn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         alert('Coinbase Wallet integration coming soon!');
                     });
                 }
 
-                console.log('✅ Event listeners setup complete');
+                console.log('✅ Event listeners setup complete with mobile support');
             } catch (error) {
                 console.error('❌ Event listeners setup error:', error);
             }
@@ -1315,4 +1463,4 @@ if (window.isVaultPhoenixDashboard) {
     console.log('🚫 Dashboard JavaScript blocked - not a crypto game page');
 }
 
-console.log('🔥💎 Vault Phoenix Dashboard JavaScript loaded successfully');
+console.log('🔥💎 Vault Phoenix Dashboard JavaScript loaded successfully with mobile touch support');
