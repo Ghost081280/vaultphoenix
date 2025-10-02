@@ -77,6 +77,9 @@ if (window.isVaultPhoenixDashboard) {
             this.tokenMarkers = [];
             this.infoWindows = [];
             this.isNearToken = false;
+            
+            // CRITICAL: Interaction debugging
+            this.debugMode = true;
 
             // Enhanced Ember Token System with Real Locations and Value Tiers
             this.emberTokens = [
@@ -241,6 +244,7 @@ if (window.isVaultPhoenixDashboard) {
                         overflow: hidden;
                         z-index: 1;
                         cursor: grab;
+                        pointer-events: auto;
                     ">
                         <!-- Road Network -->
                         <div class="demo-roads" style="
@@ -250,6 +254,7 @@ if (window.isVaultPhoenixDashboard) {
                             width: 100%;
                             height: 100%;
                             z-index: 2;
+                            pointer-events: none;
                         ">
                             <!-- Major Highways -->
                             <div style="position: absolute; top: 30%; left: 0; width: 100%; height: 3px; background: #8B4513; opacity: 0.8;"></div>
@@ -267,7 +272,7 @@ if (window.isVaultPhoenixDashboard) {
                         </div>
                         
                         <!-- Landmarks -->
-                        <div class="demo-landmarks" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3;">
+                        <div class="demo-landmarks" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none;">
                             <!-- Downtown Phoenix -->
                             <div style="position: absolute; left: 45%; top: 35%; width: 8px; height: 8px; background: #4A4A4A; border-radius: 2px;" title="Downtown Phoenix"></div>
                             <div style="position: absolute; left: 44%; top: 33%; font-size: 10px; color: #333; font-weight: bold;">Downtown</div>
@@ -299,6 +304,7 @@ if (window.isVaultPhoenixDashboard) {
                             border-radius: 8px;
                             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
                             border: 1px solid rgba(240, 165, 0, 0.3);
+                            pointer-events: none;
                         ">🏜️ Phoenix, Arizona</div>
                         
                         <!-- Zoom Controls -->
@@ -306,19 +312,19 @@ if (window.isVaultPhoenixDashboard) {
                             position: absolute;
                             bottom: 20px;
                             right: 20px;
-                            z-index: 20;
+                            z-index: 110;
                             display: flex;
                             flex-direction: column;
                             gap: 8px;
                         ">
                             <button class="map-control-btn" id="zoomInBtn" title="Zoom In" style="
-                                width: 40px;
-                                height: 40px;
+                                width: 44px;
+                                height: 44px;
                                 background: rgba(240, 165, 0, 0.95);
                                 border: 2px solid rgba(255, 255, 255, 0.9);
                                 border-radius: 8px;
                                 color: white;
-                                font-size: 18px;
+                                font-size: 20px;
                                 font-weight: bold;
                                 cursor: pointer;
                                 display: flex;
@@ -326,15 +332,18 @@ if (window.isVaultPhoenixDashboard) {
                                 justify-content: center;
                                 box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
                                 transition: all 0.2s ease;
+                                pointer-events: auto;
+                                touch-action: manipulation;
+                                -webkit-tap-highlight-color: transparent;
                             ">+</button>
                             <button class="map-control-btn" id="zoomOutBtn" title="Zoom Out" style="
-                                width: 40px;
-                                height: 40px;
+                                width: 44px;
+                                height: 44px;
                                 background: rgba(240, 165, 0, 0.95);
                                 border: 2px solid rgba(255, 255, 255, 0.9);
                                 border-radius: 8px;
                                 color: white;
-                                font-size: 18px;
+                                font-size: 20px;
                                 font-weight: bold;
                                 cursor: pointer;
                                 display: flex;
@@ -342,6 +351,9 @@ if (window.isVaultPhoenixDashboard) {
                                 justify-content: center;
                                 box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
                                 transition: all 0.2s ease;
+                                pointer-events: auto;
+                                touch-action: manipulation;
+                                -webkit-tap-highlight-color: transparent;
                             ">-</button>
                         </div>
                         
@@ -356,13 +368,14 @@ if (window.isVaultPhoenixDashboard) {
                             border: 3px solid white;
                             border-radius: 50%;
                             transform: translate(-50%, -50%);
-                            z-index: 50;
+                            z-index: 90;
                             box-shadow: 0 3px 15px rgba(66, 133, 244, 0.8);
                             animation: userLocationPulse 2s ease-in-out infinite;
+                            pointer-events: none;
                         "></div>
                         
                         <!-- Token Markers Container -->
-                        <div class="demo-map-markers" id="demoMarkers" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 25;"></div>
+                        <div class="demo-map-markers" id="demoMarkers" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; pointer-events: none;"></div>
                     </div>
                 `;
 
@@ -375,6 +388,7 @@ if (window.isVaultPhoenixDashboard) {
                 mapContainer.style.height = '100%';
                 mapContainer.style.zIndex = '1';
                 mapContainer.style.overflow = 'hidden';
+                mapContainer.style.pointerEvents = 'auto';
 
                 // Set up map interactions
                 this.mapContainer = mapContainer.querySelector('.demo-map-container');
@@ -394,7 +408,7 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // Add demo token markers with proper desktop/mobile compatibility
+        // Add demo token markers with FIXED interactions
         addDemoTokenMarkers() {
             console.log('💎 Adding demo token markers...');
             try {
@@ -405,6 +419,7 @@ if (window.isVaultPhoenixDashboard) {
                 }
 
                 markersContainer.innerHTML = '';
+                markersContainer.style.pointerEvents = 'none'; // Container doesn't block, but children will have auto
 
                 // FIXED positions for consistent display across devices
                 const positions = [
@@ -437,15 +452,15 @@ if (window.isVaultPhoenixDashboard) {
                             position: absolute;
                             left: ${position.x}%;
                             top: ${position.y}%;
-                            width: 44px;
-                            height: 44px;
+                            width: 54px;
+                            height: 54px;
                             cursor: pointer;
-                            pointer-events: auto;
+                            pointer-events: auto !important;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             transition: all 0.3s ease;
-                            z-index: 25;
+                            z-index: 120;
                             border-radius: 50%;
                             background: rgba(240, 165, 0, 0.1);
                             border: 3px solid rgba(240, 165, 0, 0.6);
@@ -455,6 +470,8 @@ if (window.isVaultPhoenixDashboard) {
                             -webkit-tap-highlight-color: transparent;
                             touch-action: manipulation;
                             opacity: 1;
+                            user-select: none;
+                            -webkit-user-select: none;
                         `;
                         marker.title = `${token.location} - ${token.value} $Ember`;
                         marker.dataset.tokenId = token.id;
@@ -464,8 +481,8 @@ if (window.isVaultPhoenixDashboard) {
                         tokenImage.src = '../images/VPEmberCoin.PNG';
                         tokenImage.alt = 'Ember Coin';
                         tokenImage.style.cssText = `
-                            width: 38px;
-                            height: 38px;
+                            width: 46px;
+                            height: 46px;
                             border-radius: 50%;
                             object-fit: cover;
                             filter: brightness(1.2) drop-shadow(0 3px 12px rgba(240, 165, 0, 0.8));
@@ -474,7 +491,7 @@ if (window.isVaultPhoenixDashboard) {
                         tokenImage.onerror = function() {
                             this.style.display = 'none';
                             marker.textContent = '💎';
-                            marker.style.fontSize = '18px';
+                            marker.style.fontSize = '20px';
                             marker.style.color = '#f0a500';
                             marker.style.fontWeight = 'bold';
                         };
@@ -483,14 +500,14 @@ if (window.isVaultPhoenixDashboard) {
                         const valueOverlay = document.createElement('div');
                         valueOverlay.style.cssText = `
                             position: absolute;
-                            bottom: -14px;
+                            bottom: -18px;
                             left: 50%;
                             transform: translateX(-50%);
                             background: linear-gradient(135deg, #f0a500, #fb923c);
                             color: white;
-                            font-size: 12px;
+                            font-size: 14px;
                             font-weight: 900;
-                            padding: 5px 9px;
+                            padding: 7px 11px;
                             border-radius: 12px;
                             border: 2px solid white;
                             white-space: nowrap;
@@ -503,20 +520,28 @@ if (window.isVaultPhoenixDashboard) {
                         marker.appendChild(tokenImage);
                         marker.appendChild(valueOverlay);
 
-                        // Click handler for both desktop and mobile
+                        // ENHANCED Click handler with debugging
                         const handleTokenClick = (e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             
-                            console.log('💎 Token clicked:', token.location);
+                            if (this.debugMode) {
+                                console.log('🎯 TOKEN CLICKED!', {
+                                    tokenId: token.id,
+                                    location: token.location,
+                                    value: token.value,
+                                    event: e.type,
+                                    target: e.target
+                                });
+                            }
                             
                             // Visual feedback
                             marker.style.transform = 'translate(-50%, -50%) scale(1.3)';
-                            marker.style.zIndex = '100';
+                            marker.style.zIndex = '150';
                             
                             setTimeout(() => {
                                 marker.style.transform = 'translate(-50%, -50%) scale(1)';
-                                marker.style.zIndex = '25';
+                                marker.style.zIndex = '120';
                             }, 200);
                             
                             // Calculate distance and show navigation modal
@@ -525,6 +550,7 @@ if (window.isVaultPhoenixDashboard) {
                                 token.lat, token.lng
                             );
                             
+                            // Show navigation modal
                             this.showNavigationModal(token);
                             
                             // Haptic feedback
@@ -533,12 +559,30 @@ if (window.isVaultPhoenixDashboard) {
                             }
                         };
 
-                        // Add event listeners
-                        marker.addEventListener('click', handleTokenClick);
-                        marker.addEventListener('touchend', handleTokenClick);
+                        // Multiple event listeners for better compatibility
+                        marker.addEventListener('click', handleTokenClick, { passive: false });
+                        marker.addEventListener('touchend', handleTokenClick, { passive: false });
+                        marker.addEventListener('mouseup', handleTokenClick, { passive: false });
+
+                        // Debug hover effects
+                        marker.addEventListener('mouseenter', () => {
+                            if (this.debugMode) {
+                                console.log('🖱️ Marker hover:', token.location);
+                            }
+                            marker.style.transform = 'translate(-50%, -50%) scale(1.1)';
+                        });
+
+                        marker.addEventListener('mouseleave', () => {
+                            marker.style.transform = 'translate(-50%, -50%) scale(1)';
+                        });
 
                         markersContainer.appendChild(marker);
                         markerCount++;
+
+                        // Debug logging
+                        if (this.debugMode) {
+                            console.log(`✅ Added marker ${markerCount}: ${token.location} at ${position.x}%, ${position.y}%`);
+                        }
                     }
                 });
 
@@ -546,6 +590,18 @@ if (window.isVaultPhoenixDashboard) {
                 
                 // Add animation styles
                 this.addMapAnimationStyles();
+                
+                // Test click detection
+                if (this.debugMode) {
+                    setTimeout(() => {
+                        const markers = document.querySelectorAll('.demo-token-marker');
+                        console.log(`🔍 Debug: Found ${markers.length} clickable markers in DOM`);
+                        markers.forEach((marker, i) => {
+                            const rect = marker.getBoundingClientRect();
+                            console.log(`📍 Marker ${i + 1}: ${marker.dataset.tokenId} - Position: ${rect.left.toFixed(0)}, ${rect.top.toFixed(0)} - Size: ${rect.width}x${rect.height}`);
+                        });
+                    }, 500);
+                }
                 
             } catch (error) {
                 console.error('❌ Demo token markers error:', error);
@@ -583,7 +639,7 @@ if (window.isVaultPhoenixDashboard) {
                 
                 .demo-token-marker:hover {
                     transform: translate(-50%, -50%) scale(1.15) !important;
-                    z-index: 100 !important;
+                    z-index: 140 !important;
                 }
                 
                 .demo-token-marker.high {
@@ -638,9 +694,13 @@ if (window.isVaultPhoenixDashboard) {
             try {
                 const latEl = document.getElementById('currentLat');
                 const lngEl = document.getElementById('currentLng');
+                const latEl2 = document.getElementById('lat');
+                const lngEl2 = document.getElementById('lng');
                 
                 if (latEl) latEl.textContent = this.userLat.toFixed(4);
                 if (lngEl) lngEl.textContent = this.userLng.toFixed(4);
+                if (latEl2) latEl2.textContent = this.userLat.toFixed(4);
+                if (lngEl2) lngEl2.textContent = this.userLng.toFixed(4);
                 
             } catch (error) {
                 console.error('❌ Location display update error:', error);
@@ -777,12 +837,15 @@ if (window.isVaultPhoenixDashboard) {
                         </div>
                     `).join('');
 
-                    // Add click handlers to token list items
+                    // Add click handlers to token list items with debugging
                     tokensList.querySelectorAll('.token-location-item').forEach(item => {
                         item.addEventListener('click', () => {
                             const tokenId = parseInt(item.dataset.tokenId);
                             const token = this.emberTokens.find(t => t.id === tokenId);
                             if (token) {
+                                if (this.debugMode) {
+                                    console.log('📝 Token list item clicked:', token.location);
+                                }
                                 token.distance = this.calculateDistance(this.userLat, this.userLng, token.lat, token.lng);
                                 this.showNavigationModal(token);
                             }
@@ -818,7 +881,7 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // Show navigation modal
+        // ENHANCED: Show navigation modal with better debugging
         showNavigationModal(token) {
             console.log('🗺️ Showing navigation modal for:', token.location);
             try {
@@ -861,6 +924,9 @@ if (window.isVaultPhoenixDashboard) {
                 
                 if (modal) {
                     modal.classList.add('show');
+                    if (this.debugMode) {
+                        console.log('✅ Navigation modal displayed successfully');
+                    }
                 }
                 
             } catch (error) {
@@ -903,7 +969,7 @@ if (window.isVaultPhoenixDashboard) {
             console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
         }
 
-        // Setup map interactions
+        // Setup map interactions with debugging
         setupMapInteractions() {
             if (!this.mapContainer) return;
 
@@ -953,152 +1019,754 @@ if (window.isVaultPhoenixDashboard) {
             console.log('✅ Map interactions setup complete');
         }
 
-        // =================== SWIPEABLE MODULE SYSTEM ===================
+        // =================== MODE SWITCHING ===================
+        switchMode(mode) {
+            console.log('🔄 Switching to mode:', mode);
+            try {
+                this.currentMode = mode;
+                this.setModeAttribute(mode);
+                
+                // Update navigation
+                this.updateActiveTab(mode);
+                
+                // Handle mode-specific logic
+                switch (mode) {
+                    case 'map':
+                        this.hideProximityNotification();
+                        this.hideARInstructions();
+                        this.stopAR();
+                        break;
+                    case 'ar':
+                        this.startAR();
+                        break;
+                    case 'vault':
+                        this.updateVaultDisplay();
+                        break;
+                    case 'campaigns':
+                        this.updateCampaignsDisplay();
+                        break;
+                }
+                
+                console.log('✅ Mode switched to:', mode);
+            } catch (error) {
+                console.error('❌ Mode switch error:', error);
+            }
+        }
+
+        setModeAttribute(mode) {
+            document.body.setAttribute('data-mode', mode);
+        }
+
+        updateActiveTab(mode) {
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            const activeTab = document.querySelector(`[data-mode="${mode}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+        }
+
+        // =================== AR SYSTEM ===================
+        startAR() {
+            console.log('📱 Starting AR mode...');
+            try {
+                this.stopCamera();
+                this.requestCameraAccess();
+                this.showARInstructions();
+                this.startCompass();
+                
+                // Hide unnecessary UI elements
+                this.hideProximityNotification();
+                
+                // Check if near tokens for AR
+                const nearbyTokens = this.emberTokens.filter(token => {
+                    if (this.isTokenCollected(token.id)) return false;
+                    const distance = this.calculateDistance(this.userLat, this.userLng, token.lat, token.lng);
+                    return distance <= 0.1; // Within 100m
+                });
+                
+                if (nearbyTokens.length > 0) {
+                    setTimeout(() => {
+                        this.showARToken(nearbyTokens[0]);
+                    }, 3000);
+                } else {
+                    console.log('📍 No tokens nearby for AR');
+                }
+                
+            } catch (error) {
+                console.error('❌ AR start error:', error);
+            }
+        }
+
+        stopAR() {
+            console.log('📱 Stopping AR mode...');
+            this.stopCamera();
+            this.stopCompass();
+            this.hideARInstructions();
+            this.hideARToken();
+        }
+
+        requestCameraAccess() {
+            console.log('📷 Requesting camera access...');
+            
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        facingMode: 'environment',
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    } 
+                })
+                .then(stream => {
+                    this.cameraStream = stream;
+                    const video = document.getElementById('video');
+                    if (video) {
+                        video.srcObject = stream;
+                        video.style.display = 'block';
+                        video.play();
+                    }
+                    console.log('✅ Camera access granted');
+                })
+                .catch(error => {
+                    console.error('❌ Camera access denied:', error);
+                    this.showCameraError();
+                });
+            } else {
+                console.error('❌ Camera not supported');
+                this.showCameraError();
+            }
+        }
+
+        stopCamera() {
+            if (this.cameraStream) {
+                this.cameraStream.getTracks().forEach(track => track.stop());
+                this.cameraStream = null;
+            }
+            
+            const video = document.getElementById('video');
+            if (video) {
+                video.style.display = 'none';
+                video.srcObject = null;
+            }
+        }
+
+        showCameraError() {
+            const arInstructions = document.getElementById('arInstructions');
+            if (arInstructions) {
+                const title = arInstructions.querySelector('.ar-instructions-title');
+                const text = arInstructions.querySelector('.ar-instructions-text');
+                
+                if (title) title.textContent = 'Camera Access Required';
+                if (text) text.textContent = 'Please allow camera access to use AR mode, or use Map mode to navigate to tokens.';
+                
+                arInstructions.classList.add('show');
+            }
+        }
+
+        showARInstructions() {
+            const arInstructions = document.getElementById('arInstructions');
+            if (arInstructions) {
+                arInstructions.classList.add('show');
+                
+                setTimeout(() => {
+                    arInstructions.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        hideARInstructions() {
+            const arInstructions = document.getElementById('arInstructions');
+            if (arInstructions) {
+                arInstructions.classList.remove('show');
+            }
+        }
+
+        showARToken(token) {
+            console.log('💎 Showing AR token:', token.location);
+            try {
+                const arToken = document.getElementById('arEmberCoin');
+                if (arToken) {
+                    arToken.style.display = 'block';
+                    arToken.classList.add('tappable');
+                    
+                    arToken.onclick = () => {
+                        this.collectToken(token);
+                        this.hideARToken();
+                    };
+                    
+                    console.log('✅ AR token displayed');
+                }
+            } catch (error) {
+                console.error('❌ AR token display error:', error);
+            }
+        }
+
+        hideARToken() {
+            const arToken = document.getElementById('arEmberCoin');
+            if (arToken) {
+                arToken.style.display = 'none';
+                arToken.classList.remove('tappable');
+                arToken.onclick = null;
+            }
+        }
+
+        startCompass() {
+            if (this.isCompassActive) return;
+            
+            console.log('🧭 Starting compass...');
+            this.isCompassActive = true;
+            
+            // Request device orientation permission on iOS
+            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(response => {
+                        if (response === 'granted') {
+                            this.addOrientationListener();
+                        } else {
+                            console.log('📱 Device orientation permission denied');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('❌ Orientation permission error:', error);
+                    });
+            } else {
+                this.addOrientationListener();
+            }
+        }
+
+        addOrientationListener() {
+            this.orientationHandler = (event) => {
+                if (event.alpha !== null) {
+                    this.heading = event.alpha;
+                    this.updateCompass();
+                    
+                    if (!this.hasReceivedOrientationData) {
+                        this.hasReceivedOrientationData = true;
+                        console.log('✅ Receiving orientation data');
+                    }
+                }
+            };
+            
+            window.addEventListener('deviceorientation', this.orientationHandler);
+        }
+
+        stopCompass() {
+            this.isCompassActive = false;
+            
+            if (this.orientationHandler) {
+                window.removeEventListener('deviceorientation', this.orientationHandler);
+                this.orientationHandler = null;
+            }
+            
+            if (this.compassInterval) {
+                clearInterval(this.compassInterval);
+                this.compassInterval = null;
+            }
+        }
+
+        updateCompass() {
+            const needle = document.querySelector('.compass-needle');
+            if (needle) {
+                needle.style.transform = `translate(-50%, -100%) rotate(${this.heading}deg)`;
+            }
+            
+            const headingEl = document.getElementById('heading');
+            if (headingEl) {
+                headingEl.textContent = Math.round(this.heading) + '°';
+            }
+        }
+
+        // =================== TOKEN COLLECTION ===================
+        collectToken(token) {
+            console.log('💰 Collecting token:', token);
+            try {
+                // Add to collected tokens
+                this.collectedTokens.push({
+                    ...token,
+                    collectedAt: new Date().toISOString(),
+                    collectedLocation: { lat: this.userLat, lng: this.userLng }
+                });
+                
+                // Update total value
+                this.totalTokenValue += token.value;
+                
+                // Save to localStorage
+                this.saveCollectedTokens();
+                
+                // Update displays
+                this.updateTokenCounts();
+                this.updateVaultDisplay();
+                this.updateNearbyTokens();
+                
+                // Remove marker from map
+                this.removeTokenMarker(token.id);
+                
+                // Show discovery modal
+                this.showTokenDiscovery(token);
+                
+                // Haptic feedback
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100, 50, 200]);
+                }
+                
+                console.log('✅ Token collected successfully');
+                
+            } catch (error) {
+                console.error('❌ Token collection error:', error);
+            }
+        }
+
+        removeTokenMarker(tokenId) {
+            const marker = document.querySelector(`[data-token-id="${tokenId}"]`);
+            if (marker) {
+                marker.remove();
+            }
+        }
+
+        showTokenDiscovery(token) {
+            console.log('🎉 Showing token discovery for:', token.location);
+            try {
+                this.currentDiscoveredToken = token;
+                
+                const modal = document.getElementById('tokenDiscovery');
+                const amount = document.getElementById('discoveredAmount');
+                const location = document.getElementById('discoveredLocation');
+                const sponsorTitle = document.getElementById('sponsorTitle');
+                const sponsorText = document.getElementById('sponsorText');
+                
+                if (amount) amount.textContent = `${token.value} $Ember`;
+                if (location) location.textContent = token.location;
+                if (sponsorTitle) sponsorTitle.textContent = token.sponsor;
+                if (sponsorText) sponsorText.textContent = token.message;
+                
+                if (modal) {
+                    modal.classList.add('show');
+                }
+                
+            } catch (error) {
+                console.error('❌ Token discovery error:', error);
+            }
+        }
+
+        hideTokenDiscovery() {
+            const modal = document.getElementById('tokenDiscovery');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+            this.currentDiscoveredToken = null;
+        }
+
+        showSponsorDetails() {
+            console.log('ℹ️ Showing sponsor details');
+            try {
+                const frontView = document.querySelector('.sponsor-info-front');
+                const backView = document.querySelector('.sponsor-info-back');
+                
+                if (frontView && backView) {
+                    frontView.style.display = 'none';
+                    backView.style.display = 'block';
+                    this.isShowingSponsorDetails = true;
+                }
+            } catch (error) {
+                console.error('❌ Sponsor details error:', error);
+            }
+        }
+
+        hideSponsorDetails() {
+            const frontView = document.querySelector('.sponsor-info-front');
+            const backView = document.querySelector('.sponsor-info-back');
+            
+            if (frontView && backView) {
+                frontView.style.display = 'block';
+                backView.style.display = 'none';
+                this.isShowingSponsorDetails = false;
+            }
+        }
+
+        // =================== DATA PERSISTENCE ===================
+        saveCollectedTokens() {
+            try {
+                localStorage.setItem('vaultPhoenix_collectedTokens', JSON.stringify(this.collectedTokens));
+                localStorage.setItem('vaultPhoenix_totalValue', this.totalTokenValue.toString());
+            } catch (error) {
+                console.error('❌ Save collected tokens error:', error);
+            }
+        }
+
+        loadCollectedTokens() {
+            try {
+                const saved = localStorage.getItem('vaultPhoenix_collectedTokens');
+                if (saved) {
+                    this.collectedTokens = JSON.parse(saved);
+                }
+                
+                const savedValue = localStorage.getItem('vaultPhoenix_totalValue');
+                if (savedValue) {
+                    this.totalTokenValue = parseInt(savedValue) || 0;
+                }
+                
+                console.log(`💰 Loaded ${this.collectedTokens.length} collected tokens, total value: ${this.totalTokenValue}`);
+            } catch (error) {
+                console.error('❌ Load collected tokens error:', error);
+                this.collectedTokens = [];
+                this.totalTokenValue = 0;
+            }
+        }
+
+        loadUserInfo() {
+            try {
+                if (this.currentUser) {
+                    console.log('👤 User info loaded:', this.currentUser.email);
+                }
+            } catch (error) {
+                console.error('❌ Load user info error:', error);
+            }
+        }
+
+        isTokenCollected(tokenId) {
+            return this.collectedTokens.some(token => token.id === tokenId);
+        }
+
+        // =================== VAULT SYSTEM ===================
+        initializeVault() {
+            console.log('🏦 Initializing vault...');
+            this.updateVaultDisplay();
+        }
+
+        updateVaultDisplay() {
+            try {
+                // Update vault balance
+                const balanceEl = document.getElementById('vaultBalance');
+                const usdValueEl = document.getElementById('vaultUSDValue');
+                const badgeCountEl = document.querySelector('.badge-count');
+                
+                if (balanceEl) {
+                    balanceEl.textContent = `${this.totalTokenValue.toLocaleString()} $Ember`;
+                }
+                
+                if (usdValueEl) {
+                    const usdValue = (this.totalTokenValue * 0.05).toFixed(2);
+                    usdValueEl.textContent = `~${usdValue} USD`;
+                }
+                
+                if (badgeCountEl) {
+                    badgeCountEl.textContent = this.totalTokenValue.toLocaleString();
+                }
+                
+                // Update stats
+                const totalCollectedEl = document.getElementById('totalCollected');
+                const totalLocationsEl = document.getElementById('totalLocations');
+                const lastActivityEl = document.getElementById('lastActivity');
+                
+                if (totalCollectedEl) {
+                    totalCollectedEl.textContent = this.collectedTokens.length;
+                }
+                
+                if (totalLocationsEl) {
+                    const uniqueLocations = new Set(this.collectedTokens.map(t => t.location)).size;
+                    totalLocationsEl.textContent = uniqueLocations;
+                }
+                
+                if (lastActivityEl && this.collectedTokens.length > 0) {
+                    const lastToken = this.collectedTokens[this.collectedTokens.length - 1];
+                    const lastDate = new Date(lastToken.collectedAt);
+                    lastActivityEl.textContent = lastDate.toLocaleDateString();
+                }
+                
+                // Update history
+                this.updateTokenHistory();
+                
+            } catch (error) {
+                console.error('❌ Vault display update error:', error);
+            }
+        }
+
+        updateTokenHistory() {
+            try {
+                const historyContainer = document.getElementById('tokenHistory');
+                if (!historyContainer) return;
+                
+                if (this.collectedTokens.length === 0) {
+                    historyContainer.innerHTML = `
+                        <div style="text-align: center; color: rgba(255, 255, 255, 0.6); padding: 40px 20px;">
+                            <div style="font-size: 48px; margin-bottom: 16px;">🗺️</div>
+                            <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">No Tokens Collected Yet</div>
+                            <div style="font-size: 14px;">Start exploring to find $Ember tokens!</div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const recentTokens = [...this.collectedTokens]
+                    .sort((a, b) => new Date(b.collectedAt) - new Date(a.collectedAt))
+                    .slice(0, 10);
+                
+                historyContainer.innerHTML = recentTokens.map(token => {
+                    const date = new Date(token.collectedAt);
+                    const timeAgo = this.getTimeAgo(date);
+                    
+                    return `
+                        <div class="history-item">
+                            <div class="history-icon">
+                                <img src="../images/VPEmberCoin.PNG" alt="Ember" class="history-coin-icon" onerror="this.textContent='💎'">
+                            </div>
+                            <div class="history-details">
+                                <div class="history-title">${token.location}</div>
+                                <div class="history-subtitle">${timeAgo} • ${token.sponsor}</div>
+                            </div>
+                            <div class="history-value">+${token.value}</div>
+                        </div>
+                    `;
+                }).join('');
+                
+            } catch (error) {
+                console.error('❌ Token history update error:', error);
+            }
+        }
+
+        getTimeAgo(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+            
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins}m ago`;
+            if (diffHours < 24) return `${diffHours}h ago`;
+            if (diffDays < 30) return `${diffDays}d ago`;
+            return date.toLocaleDateString();
+        }
+
+        // =================== CAMPAIGNS SYSTEM ===================
+        initializeCampaigns() {
+            console.log('🏆 Initializing campaigns...');
+            this.updateCampaignsDisplay();
+        }
+
+        updateCampaignsDisplay() {
+            try {
+                const adventuresContainer = document.getElementById('activeAdventures');
+                if (!adventuresContainer) return;
+                
+                const adventures = [
+                    {
+                        id: 'downtown_explorer',
+                        name: 'Downtown Explorer',
+                        description: 'Collect 3 tokens in downtown Phoenix',
+                        icon: '🏙️',
+                        progress: this.getDowntownProgress(),
+                        total: 3,
+                        rewards: ['250 Bonus $Ember', 'Explorer Badge'],
+                        status: 'available',
+                        locations: ['Downtown Phoenix', 'Roosevelt Row', 'Chase Field']
+                    },
+                    {
+                        id: 'desert_wanderer',
+                        name: 'Desert Wanderer',
+                        description: 'Find tokens in 5 different locations',
+                        icon: '🌵',
+                        progress: new Set(this.collectedTokens.map(t => t.location)).size,
+                        total: 5,
+                        rewards: ['500 Bonus $Ember', 'Wanderer Badge'],
+                        status: 'available',
+                        locations: ['Any 5 locations']
+                    },
+                    {
+                        id: 'high_roller',
+                        name: 'High Roller',
+                        description: 'Collect tokens worth 1000+ $Ember total',
+                        icon: '💎',
+                        progress: this.totalTokenValue,
+                        total: 1000,
+                        rewards: ['1000 Bonus $Ember', 'High Roller Badge'],
+                        status: 'available',
+                        locations: ['Collect high-value tokens']
+                    }
+                ];
+                
+                adventuresContainer.innerHTML = adventures.map(adventure => {
+                    const progressPercent = Math.min((adventure.progress / adventure.total) * 100, 100);
+                    const isCompleted = adventure.progress >= adventure.total;
+                    
+                    return `
+                        <div class="adventure-card ${isCompleted ? 'completed' : ''}" data-adventure-id="${adventure.id}">
+                            <div class="adventure-header">
+                                <div class="adventure-icon">${adventure.icon}</div>
+                                <div class="adventure-info">
+                                    <div class="adventure-name">${adventure.name}</div>
+                                    <div class="adventure-description">${adventure.description}</div>
+                                </div>
+                                <div class="adventure-status ${isCompleted ? 'completed' : adventure.status}">
+                                    ${isCompleted ? 'Completed' : 'Active'}
+                                </div>
+                            </div>
+                            <div class="adventure-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${progressPercent}%"></div>
+                                </div>
+                                <div class="progress-text">${adventure.progress}/${adventure.total} completed</div>
+                            </div>
+                            <div class="adventure-rewards">
+                                ${adventure.rewards.map(reward => `<span class="reward-badge">${reward}</span>`).join('')}
+                            </div>
+                            <div class="adventure-details">
+                                <div class="adventure-locations">📍 ${adventure.locations.join(', ')}</div>
+                            </div>
+                            ${isCompleted ? 
+                                '<button class="adventure-claim-btn">Claim Rewards</button>' :
+                                '<button class="adventure-track-btn">Track Progress</button>'
+                            }
+                        </div>
+                    `;
+                }).join('');
+                
+                // Add click handlers
+                adventuresContainer.querySelectorAll('.adventure-card').forEach(card => {
+                    const claimBtn = card.querySelector('.adventure-claim-btn');
+                    const trackBtn = card.querySelector('.adventure-track-btn');
+                    
+                    if (claimBtn) {
+                        claimBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            this.claimAdventureRewards(card.dataset.adventureId);
+                        });
+                    }
+                    
+                    if (trackBtn) {
+                        trackBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            this.trackAdventure(card.dataset.adventureId);
+                        });
+                    }
+                });
+                
+            } catch (error) {
+                console.error('❌ Campaigns display update error:', error);
+            }
+        }
+
+        getDowntownProgress() {
+            const downtownLocations = ['Downtown Phoenix', 'Roosevelt Row', 'Chase Field'];
+            return this.collectedTokens.filter(token => 
+                downtownLocations.includes(token.location)
+            ).length;
+        }
+
+        claimAdventureRewards(adventureId) {
+            console.log('🏆 Claiming adventure rewards:', adventureId);
+            // Implementation for claiming adventure rewards
+        }
+
+        trackAdventure(adventureId) {
+            console.log('📊 Tracking adventure:', adventureId);
+            // Switch to map mode and highlight relevant tokens
+            this.switchMode('map');
+        }
+
+        // =================== SWIPEABLE MODULE ===================
         setupSwipeableModule() {
-            console.log('👆 Setting up swipeable token locations module...');
+            console.log('👆 Setting up swipeable module...');
             try {
                 const module = document.getElementById('tokenLocationsModule');
                 const handle = document.getElementById('swipeHandle');
                 
-                if (!module || !handle) {
-                    console.error('❌ Swipeable module elements not found');
-                    return;
-                }
-
-                // Initial state - collapsed
-                module.classList.add('collapsed');
-                this.moduleExpanded = false;
-
-                // Touch events for mobile
-                handle.addEventListener('touchstart', (e) => {
-                    this.handleTouchStart(e);
-                }, { passive: true });
-
-                handle.addEventListener('touchmove', (e) => {
-                    this.handleTouchMove(e);
-                }, { passive: true });
-
-                handle.addEventListener('touchend', (e) => {
-                    this.handleTouchEnd(e);
-                }, { passive: true });
-
-                // Mouse events for desktop
-                handle.addEventListener('mousedown', (e) => {
-                    this.handleMouseDown(e);
-                });
-
-                handle.addEventListener('click', (e) => {
-                    // Simple click toggle if no drag occurred
-                    if (!this.isDragging) {
-                        this.toggleModule();
-                    }
-                    this.isDragging = false;
-                });
-
-                console.log('✅ Swipeable module setup complete');
+                if (!module || !handle) return;
                 
+                // Touch events
+                handle.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
+                handle.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+                handle.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: false });
+                
+                // Mouse events for desktop
+                handle.addEventListener('mousedown', this.handleMouseDown.bind(this));
+                document.addEventListener('mousemove', this.handleMouseMove.bind(this));
+                document.addEventListener('mouseup', this.handleMouseUp.bind(this));
+                
+                // Click to toggle
+                handle.addEventListener('click', this.toggleModule.bind(this));
+                
+                console.log('✅ Swipeable module setup complete');
             } catch (error) {
                 console.error('❌ Swipeable module setup error:', error);
             }
         }
 
         handleTouchStart(e) {
+            e.preventDefault();
             this.isDragging = true;
             this.moduleStartY = e.touches[0].clientY;
-            this.moduleCurrentY = this.moduleStartY;
         }
 
         handleTouchMove(e) {
             if (!this.isDragging) return;
+            e.preventDefault();
             
-            this.moduleCurrentY = e.touches[0].clientY;
-            const deltaY = this.moduleStartY - this.moduleCurrentY;
+            const currentY = e.touches[0].clientY;
+            const deltaY = this.moduleStartY - currentY;
             
-            // Update visual feedback
             const module = document.getElementById('tokenLocationsModule');
-            const handleBar = document.querySelector('.handle-bar');
-            
-            if (deltaY > 10) {
-                // Swiping up
-                if (handleBar) handleBar.style.background = '#f0a500';
-            } else if (deltaY < -10) {
-                // Swiping down
-                if (handleBar) handleBar.style.background = 'rgba(240, 165, 0, 0.6)';
+            if (module) {
+                if (deltaY > 0 && !this.moduleExpanded) {
+                    // Swiping up to expand
+                    const progress = Math.min(deltaY / 100, 1);
+                    module.style.transform = `translateY(${(100 - 100) * (1 - progress)}%)`;
+                } else if (deltaY < 0 && this.moduleExpanded) {
+                    // Swiping down to collapse
+                    const progress = Math.min(Math.abs(deltaY) / 100, 1);
+                    module.style.transform = `translateY(${(100 - 100) * progress}%)`;
+                }
             }
         }
 
         handleTouchEnd(e) {
             if (!this.isDragging) return;
+            e.preventDefault();
             
-            const deltaY = this.moduleStartY - this.moduleCurrentY;
-            const threshold = 50; // Minimum swipe distance
+            this.isDragging = false;
+            const deltaY = this.moduleStartY - e.changedTouches[0].clientY;
             
-            if (Math.abs(deltaY) > threshold) {
-                if (deltaY > 0 && !this.moduleExpanded) {
-                    // Swiped up - expand
+            if (Math.abs(deltaY) > 50) {
+                if (deltaY > 0) {
                     this.expandModule();
-                } else if (deltaY < 0 && this.moduleExpanded) {
-                    // Swiped down - collapse
+                } else {
+                    this.collapseModule();
+                }
+            } else {
+                // Snap back to current state
+                if (this.moduleExpanded) {
+                    this.expandModule();
+                } else {
                     this.collapseModule();
                 }
             }
-            
-            // Reset visual feedback
-            const handleBar = document.querySelector('.handle-bar');
-            if (handleBar) {
-                handleBar.style.background = 'rgba(240, 165, 0, 0.8)';
-            }
-            
-            this.isDragging = false;
         }
 
         handleMouseDown(e) {
             this.isDragging = true;
             this.moduleStartY = e.clientY;
+        }
+
+        handleMouseMove(e) {
+            if (!this.isDragging) return;
             
-            const handleMouseMove = (e) => {
-                if (!this.isDragging) return;
-                
-                this.moduleCurrentY = e.clientY;
-                const deltaY = this.moduleStartY - this.moduleCurrentY;
-                
-                // Visual feedback
-                const handleBar = document.querySelector('.handle-bar');
-                if (deltaY > 10) {
-                    if (handleBar) handleBar.style.background = '#f0a500';
-                } else if (deltaY < -10) {
-                    if (handleBar) handleBar.style.background = 'rgba(240, 165, 0, 0.6)';
-                }
-            };
+            const deltaY = this.moduleStartY - e.clientY;
+            const module = document.getElementById('tokenLocationsModule');
             
-            const handleMouseUp = (e) => {
-                if (!this.isDragging) return;
-                
-                const deltaY = this.moduleStartY - this.moduleCurrentY;
-                const threshold = 30;
-                
-                if (Math.abs(deltaY) > threshold) {
-                    if (deltaY > 0 && !this.moduleExpanded) {
-                        this.expandModule();
-                    } else if (deltaY < 0 && this.moduleExpanded) {
-                        this.collapseModule();
-                    }
+            if (module && Math.abs(deltaY) > 50) {
+                if (deltaY > 0 && !this.moduleExpanded) {
+                    this.expandModule();
+                } else if (deltaY < 0 && this.moduleExpanded) {
+                    this.collapseModule();
                 }
-                
-                // Clean up
-                document.removeEventListener('mousemove', handleMouseMove);
-                document.removeEventListener('mouseup', handleMouseUp);
-                
-                const handleBar = document.querySelector('.handle-bar');
-                if (handleBar) {
-                    handleBar.style.background = 'rgba(240, 165, 0, 0.8)';
-                }
-                
                 this.isDragging = false;
-            };
-            
-            document.addEventListener('mousemove', handleMouseMove);
-            document.addEventListener('mouseup', handleMouseUp);
+            }
+        }
+
+        handleMouseUp() {
+            this.isDragging = false;
         }
 
         toggleModule() {
@@ -1110,22 +1778,20 @@ if (window.isVaultPhoenixDashboard) {
         }
 
         expandModule() {
-            console.log('📈 Expanding token locations module');
             const module = document.getElementById('tokenLocationsModule');
             if (module) {
-                module.classList.remove('collapsed');
                 module.classList.add('expanded');
+                module.classList.remove('collapsed');
                 this.moduleExpanded = true;
                 
                 // Haptic feedback
                 if (navigator.vibrate) {
-                    navigator.vibrate(50);
+                    navigator.vibrate(30);
                 }
             }
         }
 
         collapseModule() {
-            console.log('📉 Collapsing token locations module');
             const module = document.getElementById('tokenLocationsModule');
             if (module) {
                 module.classList.remove('expanded');
@@ -1139,335 +1805,259 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // =================== DASHBOARD SYSTEM ===================
-        setModeAttribute(mode) {
-            try {
-                document.body.setAttribute('data-mode', mode);
-                console.log('🔧 Set mode attribute to:', mode);
-            } catch (error) {
-                console.error('❌ Mode attribute error:', error);
-            }
-        }
-
-        switchMode(mode) {
-            if (mode === this.currentMode) return;
-            
-            // Special handling for AR mode
-            if (mode === 'ar' && !this.isNearToken) {
-                this.showARNoAccessModal();
-                return;
-            }
-            
-            console.log('🔄 Switching to mode:', mode);
-            this.currentMode = mode;
-            this.setModeAttribute(mode);
-            this.updateNavigationState();
-            
-            switch (mode) {
-                case 'map':
-                    this.switchToMap();
-                    break;
-                case 'ar':
-                    this.switchToAR();
-                    break;
-                case 'vault':
-                    this.switchToVault();
-                    break;
-                case 'campaigns':
-                    this.switchToCampaigns();
-                    break;
-            }
-        }
-
-        switchToMap() {
-            console.log('🗺️ Switching to Map mode');
-            try {
-                document.getElementById('map').style.display = 'block';
-                document.getElementById('video').style.display = 'none';
-                document.getElementById('canvas').style.display = 'none';
-                document.getElementById('vaultView').style.display = 'none';
-                document.getElementById('campaignsView').style.display = 'none';
-                
-                const mapContainer = document.getElementById('googleMapContainer');
-                if (mapContainer) {
-                    mapContainer.style.display = 'block';
-                    
-                    if (!this.googleMapsLoaded && !this.mapLoadingComplete) {
-                        console.log('🎮 Initializing map for hunt screen...');
-                        this.initializeGoogleMap();
-                    }
-                }
-                
-            } catch (error) {
-                console.error('❌ Map switch error:', error);
-            }
-        }
-
-        switchToVault() {
-            console.log('💎 Switching to Vault mode');
-            try {
-                document.getElementById('map').style.display = 'none';
-                document.getElementById('video').style.display = 'none';
-                document.getElementById('canvas').style.display = 'none';
-                document.getElementById('vaultView').style.display = 'block';
-                document.getElementById('campaignsView').style.display = 'none';
-            } catch (error) {
-                console.error('❌ Vault switch error:', error);
-            }
-        }
-
-        switchToCampaigns() {
-            console.log('🏆 Switching to Campaigns mode');
-            try {
-                document.getElementById('map').style.display = 'none';
-                document.getElementById('video').style.display = 'none';
-                document.getElementById('canvas').style.display = 'none';
-                document.getElementById('vaultView').style.display = 'none';
-                document.getElementById('campaignsView').style.display = 'block';
-            } catch (error) {
-                console.error('❌ Campaigns switch error:', error);
-            }
-        }
-
-        async switchToAR() {
-            console.log('📱 Switching to AR mode');
-            try {
-                document.getElementById('map').style.display = 'none';
-                document.getElementById('video').style.display = 'block';
-                document.getElementById('canvas').style.display = 'block';
-                document.getElementById('vaultView').style.display = 'none';
-                document.getElementById('campaignsView').style.display = 'none';
-                
-                // Show AR instructions
-                const arInstructions = document.getElementById('arInstructions');
-                if (arInstructions) {
-                    arInstructions.classList.add('show');
-                    setTimeout(() => {
-                        arInstructions.classList.remove('show');
-                    }, 5000);
-                }
-                
-                // Simulate AR token if near one
-                this.simulateARTokenDiscovery();
-                
-            } catch (error) {  
-                console.error('❌ AR switch error:', error);
-            }
-        }
-
-        showARNoAccessModal() {
-            console.log('🚫 Showing AR no access modal');
-            alert('AR Mode requires you to be within 100 meters of a token location. Get closer to a token to unlock AR hunting!');
-        }
-
-        // =================== UTILITY METHODS ===================
-        calculateDistance(lat1, lng1, lat2, lng2) {
-            const R = 6371; // Earth's radius in km
-            const dLat = this.toRadians(lat2 - lat1);
-            const dLng = this.toRadians(lng2 - lng1);
-            
-            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                     Math.cos(this.toRadians(lat1)) * Math.cos(this.toRadians(lat2)) *
-                     Math.sin(dLng / 2) * Math.sin(dLng / 2);
-            
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            return R * c;
-        }
-
-        toRadians(degrees) {
-            return degrees * (Math.PI / 180);
-        }
-
-        isTokenCollected(tokenId) {
-            return this.collectedTokens.some(token => token.id === tokenId);
-        }
-
-        // =================== DATA METHODS ===================
-        loadUserInfo() {
-            console.log('👤 Loading user info...');
-            // Get user info from session
-            if (window.vaultPhoenixSession) {
-                this.currentUser = window.vaultPhoenixSession.getSessionInfo();
-            }
-        }
-
-        loadCollectedTokens() {
-            console.log('💎 Loading collected tokens...');
-            try {
-                const saved = localStorage.getItem('vaultPhoenixTokens');
-                if (saved) {
-                    this.collectedTokens = JSON.parse(saved);
-                    this.calculateTotalValue();
-                    console.log('✅ Loaded', this.collectedTokens.length, 'collected tokens');
-                } else {
-                    this.collectedTokens = [];
-                    this.totalTokenValue = 0;
-                    console.log('📦 No saved tokens, starting fresh vault');
-                }
-            } catch (error) {
-                console.error('❌ Token loading error:', error);
-                this.collectedTokens = [];
-                this.totalTokenValue = 0;
-            }
-            this.updateVaultStats();
-        }
-
-        calculateTotalValue() {
-            this.totalTokenValue = this.collectedTokens.reduce((total, token) => total + token.value, 0);
-        }
-
-        updateVaultStats() {
-            console.log('📊 Updating vault stats...');
-            try {
-                const elements = {
-                    navEmberCount: document.getElementById('navEmberCount'),
-                    menuEmberCount: document.getElementById('menuEmberCount'),
-                    vaultBalance: document.getElementById('vaultBalance'),
-                    vaultUsdValue: document.getElementById('vaultUsdValue'),
-                    totalCollected: document.getElementById('totalCollected'),
-                    totalValue: document.getElementById('totalValue'),
-                    locationsVisited: document.getElementById('locationsVisited'),
-                    lastActivity: document.getElementById('lastActivity')
-                };
-                
-                if (elements.navEmberCount) elements.navEmberCount.textContent = this.totalTokenValue;
-                if (elements.menuEmberCount) elements.menuEmberCount.textContent = this.totalTokenValue;
-                if (elements.vaultBalance) elements.vaultBalance.textContent = `${this.totalTokenValue} $Ember Tokens`;
-                if (elements.vaultUsdValue) elements.vaultUsdValue.textContent = `$${(this.totalTokenValue * 0.001).toFixed(2)} USD`;
-                if (elements.totalCollected) elements.totalCollected.textContent = this.collectedTokens.length;
-                if (elements.totalValue) elements.totalValue.textContent = `$${(this.totalTokenValue * 0.001).toFixed(2)}`;
-                if (elements.locationsVisited) elements.locationsVisited.textContent = this.locationsVisited;
-                if (elements.lastActivity) elements.lastActivity.textContent = this.lastActivityTime ? 'Today' : 'Never';
-                
-            } catch (error) {
-                console.error('❌ Vault stats update error:', error);
-            }
-        }
-
+        // =================== EVENT LISTENERS ===================
         setupEventListeners() {
             console.log('🎧 Setting up event listeners...');
             try {
-                const handlers = [
-                    { id: 'homeBtn', event: 'click', handler: () => this.goHome() },
-                    { id: 'menuToggle', event: 'click', handler: () => this.toggleMenu() },
-                    { id: 'menuOverlay', event: 'click', handler: () => this.closeMenu() },
-                    { id: 'navClose', event: 'click', handler: () => this.hideNavigationModal() },
-                    { id: 'navWalking', event: 'click', handler: () => this.openMapsNavigation('walking') },
-                    { id: 'navDriving', event: 'click', handler: () => this.openMapsNavigation('driving') },
-                    { id: 'resetGameBtn', event: 'click', handler: () => this.resetGame() },
-                    { id: 'confirmResetGame', event: 'click', handler: () => this.confirmResetGame() },
-                    { id: 'cancelResetGame', event: 'click', handler: () => this.hideResetGameModal() },
-                    { id: 'sideMenuLogout', event: 'click', handler: () => this.logout() },
-                    { id: 'vaultBadge', event: 'click', handler: () => this.switchMode('vault') },
-                    { id: 'coinbaseWallet', event: 'click', handler: () => this.showCoinbaseModal() },
-                    { id: 'redeemTokens', event: 'click', handler: () => this.showQRModal() },
-                    { id: 'coinbaseTransferBtn', event: 'click', handler: () => this.showCoinbaseModal() },
-                    { id: 'redeemQRBtn', event: 'click', handler: () => this.showQRModal() },
-                    { id: 'qrClose', event: 'click', handler: () => this.hideQRModal() }
-                ];
-                
-                handlers.forEach(({ id, event, handler }) => {
-                    const element = document.getElementById(id);
-                    if (element) {
-                        element.addEventListener(event, handler);
-                        console.log(`✅ Added ${event} listener for ${id}`);
-                    }
-                });
-
-                // Setup navigation tabs
+                // Navigation tabs
                 document.querySelectorAll('.nav-tab').forEach(tab => {
                     tab.addEventListener('click', () => {
-                        if (!tab.classList.contains('disabled')) {
-                            const mode = tab.dataset.mode;
+                        const mode = tab.dataset.mode;
+                        if (mode) {
                             this.switchMode(mode);
                         }
                     });
                 });
 
-                // Setup menu items
-                document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
-                    item.addEventListener('click', () => {
-                        const mode = item.dataset.mode;
-                        this.switchMode(mode);
-                        this.closeMenu();
-                    });
-                });
+                // Menu button
+                const menuButton = document.getElementById('navMenuButton');
+                if (menuButton) {
+                    menuButton.addEventListener('click', () => this.toggleMenu());
+                }
+
+                // Menu overlay
+                const menuOverlay = document.getElementById('menuOverlay');
+                if (menuOverlay) {
+                    menuOverlay.addEventListener('click', () => this.hideMenu());
+                }
+
+                // Logout button
+                const logoutButton = document.getElementById('logoutButton');
+                if (logoutButton) {
+                    logoutButton.addEventListener('click', () => this.showLogoutConfirmation());
+                }
+
+                // Reset game button
+                const resetGameButton = document.getElementById('resetGameButton');
+                if (resetGameButton) {
+                    resetGameButton.addEventListener('click', () => this.showResetGameModal());
+                }
+
+                // Modal close buttons
+                this.setupModalEventListeners();
+
+                // Vault badge click
+                const vaultBadge = document.querySelector('.vault-badge');
+                if (vaultBadge) {
+                    vaultBadge.addEventListener('click', () => this.switchMode('vault'));
+                }
 
                 console.log('✅ Event listeners setup complete');
             } catch (error) {
-                console.error('❌ Event listener error:', error);
+                console.error('❌ Event listeners setup error:', error);
             }
         }
 
-        updateNavigationState() {
-            try {
-                // Update nav tabs
-                document.querySelectorAll('.nav-tab').forEach(tab => {
-                    tab.classList.toggle('active', tab.dataset.mode === this.currentMode);
-                });
+        setupModalEventListeners() {
+            // Token Discovery Modal
+            const discoveryClose = document.getElementById('discoveryClose');
+            const discoveryClaim = document.getElementById('discoveryClaim');
+            const discoveryMore = document.getElementById('discoveryMore');
+            const sponsorBack = document.getElementById('sponsorBack');
+            
+            if (discoveryClose) {
+                discoveryClose.addEventListener('click', () => this.hideTokenDiscovery());
+            }
+            
+            if (discoveryClaim) {
+                discoveryClaim.addEventListener('click', () => this.hideTokenDiscovery());
+            }
+            
+            if (discoveryMore) {
+                discoveryMore.addEventListener('click', () => this.showSponsorDetails());
+            }
+            
+            if (sponsorBack) {
+                sponsorBack.addEventListener('click', () => this.hideSponsorDetails());
+            }
 
-                // Update menu items
-                document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
-                    item.classList.toggle('active', item.dataset.mode === this.currentMode);
-                });
-            } catch (error) {
-                console.error('❌ Navigation update error:', error);
+            // Navigation Modal
+            const navClose = document.getElementById('navClose');
+            const navWalk = document.getElementById('navWalk');
+            const navDrive = document.getElementById('navDrive');
+            
+            if (navClose) {
+                navClose.addEventListener('click', () => this.hideNavigationModal());
+            }
+            
+            if (navWalk) {
+                navWalk.addEventListener('click', () => this.openMapsNavigation('walking'));
+            }
+            
+            if (navDrive) {
+                navDrive.addEventListener('click', () => this.openMapsNavigation('driving'));
+            }
+
+            // Reset Game Modal
+            const resetCancel = document.getElementById('resetCancel');
+            const resetConfirm = document.getElementById('resetConfirm');
+            
+            if (resetCancel) {
+                resetCancel.addEventListener('click', () => this.hideResetGameModal());
+            }
+            
+            if (resetConfirm) {
+                resetConfirm.addEventListener('click', () => this.confirmResetGame());
+            }
+
+            // Logout Modal
+            const logoutCancel = document.getElementById('logoutCancel');
+            const logoutConfirm = document.getElementById('logoutConfirm');
+            
+            if (logoutCancel) {
+                logoutCancel.addEventListener('click', () => this.hideLogoutConfirmation());
+            }
+            
+            if (logoutConfirm) {
+                logoutConfirm.addEventListener('click', () => this.confirmLogout());
+            }
+
+            // QR Modal
+            const qrClose = document.getElementById('qrClose');
+            if (qrClose) {
+                qrClose.addEventListener('click', () => this.hideQRModal());
             }
         }
 
-        goHome() {
-            if (this.currentMode !== 'map') {
-                this.switchMode('map');
-            }
-        }
-
+        // =================== MENU SYSTEM ===================
         toggleMenu() {
-            try {
-                const menu = document.getElementById('sideMenu');
-                const overlay = document.getElementById('menuOverlay');
-                
-                if (!menu || !overlay) return;
-                
+            const menu = document.getElementById('sideMenu');
+            const overlay = document.getElementById('menuOverlay');
+            
+            if (menu && overlay) {
                 const isOpen = menu.classList.contains('open');
                 
                 if (isOpen) {
-                    this.closeMenu();
+                    this.hideMenu();
                 } else {
-                    menu.classList.add('open');
-                    overlay.classList.add('active');
+                    this.showMenu();
                 }
-            } catch (error) {
-                console.error('❌ Menu toggle error:', error);
             }
         }
 
-        closeMenu() {
-            try {
-                const menu = document.getElementById('sideMenu');
-                const overlay = document.getElementById('menuOverlay');
+        showMenu() {
+            const menu = document.getElementById('sideMenu');
+            const overlay = document.getElementById('menuOverlay');
+            
+            if (menu && overlay) {
+                menu.classList.add('open');
+                overlay.classList.add('active');
                 
-                if (menu) menu.classList.remove('open');
-                if (overlay) overlay.classList.remove('active');
+                // Update menu items
+                this.updateMenuItems();
+            }
+        }
+
+        hideMenu() {
+            const menu = document.getElementById('sideMenu');
+            const overlay = document.getElementById('menuOverlay');
+            
+            if (menu && overlay) {
+                menu.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+        }
+
+        updateMenuItems() {
+            // Update active menu item
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            const activeItem = document.querySelector(`[data-menu-mode="${this.currentMode}"]`);
+            if (activeItem) {
+                activeItem.classList.add('active');
+            }
+        }
+
+        // =================== MODAL SYSTEMS ===================
+        showLogoutConfirmation() {
+            const modal = document.getElementById('logoutOverlay');
+            if (modal) {
+                modal.classList.add('show');
+            }
+        }
+
+        hideLogoutConfirmation() {
+            const modal = document.getElementById('logoutOverlay');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
+
+        confirmLogout() {
+            console.log('👋 Logging out...');
+            this.hideLogoutConfirmation();
+            
+            if (window.vaultPhoenixSession) {
+                window.vaultPhoenixSession.logout();
+            }
+        }
+
+        showResetGameModal() {
+            const modal = document.getElementById('resetGameOverlay');
+            if (modal) {
+                modal.classList.add('show');
+            }
+        }
+
+        hideResetGameModal() {
+            const modal = document.getElementById('resetGameOverlay');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
+
+        confirmResetGame() {
+            console.log('🔄 Resetting game...');
+            try {
+                // Clear all collected tokens
+                this.collectedTokens = [];
+                this.totalTokenValue = 0;
+                
+                // Clear localStorage
+                localStorage.removeItem('vaultPhoenix_collectedTokens');
+                localStorage.removeItem('vaultPhoenix_totalValue');
+                
+                // Update displays
+                this.updateVaultDisplay();
+                this.updateTokenCounts();
+                this.updateNearbyTokens();
+                this.updateCampaignsDisplay();
+                
+                // Reinitialize map with all tokens
+                setTimeout(() => {
+                    this.addDemoTokenMarkers();
+                }, 500);
+                
+                this.hideResetGameModal();
+                
+                // Show success feedback
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100]);
+                }
+                
+                console.log('✅ Game reset successfully');
+                
             } catch (error) {
-                console.error('❌ Menu close error:', error);
+                console.error('❌ Game reset error:', error);
             }
         }
 
         showQRModal() {
-            console.log('📱 Showing QR modal');
-            try {
-                const modal = document.getElementById('qrModal');
-                const tokenAmount = document.getElementById('qrTokenAmount');
-                const tokenValue = document.getElementById('qrTokenValue');
-                
-                if (tokenAmount) tokenAmount.textContent = `${this.totalTokenValue} $Ember`;
-                if (tokenValue) tokenValue.textContent = `${(this.totalTokenValue * 0.001).toFixed(2)} USD`;
-                
-                if (modal) {
-                    modal.classList.add('show');
-                }
-            } catch (error) {
-                console.error('❌ QR modal error:', error);
+            const modal = document.getElementById('qrModal');
+            if (modal) {
+                modal.classList.add('show');
             }
         }
 
@@ -1478,438 +2068,80 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        showCoinbaseModal() {
-            console.log('🏦 Showing Coinbase modal');
-            alert('Coinbase Wallet integration coming soon! Your tokens will be safely stored until then.');
+        // =================== UTILITY METHODS ===================
+        calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Earth's radius in kilometers
+            const dLat = this.toRadians(lat2 - lat1);
+            const dLon = this.toRadians(lon2 - lon1);
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(this.toRadians(lat1)) * Math.cos(this.toRadians(lat2)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
         }
 
-        logout() {
-            console.log('🚪 Logout initiated from dashboard');
-            if (window.vaultPhoenixSession) {
-                window.vaultPhoenixSession.logout();
-            } else {
-                // Fallback logout
-                sessionStorage.removeItem('vaultPhoenixSession');
-                window.location.href = 'index.html';
-            }
-        }
-
-        // =================== RESET GAME FUNCTION ===================
-        resetGame() {
-            console.log('🔄 Starting game reset...');
-            try {
-                // Show confirmation modal
-                const resetOverlay = document.getElementById('resetGameOverlay');
-                if (resetOverlay) {
-                    resetOverlay.classList.add('show');
-                }
-                
-            } catch (error) {
-                console.error('❌ Reset game modal error:', error);
-            }
-        }
-
-        confirmResetGame() {
-            console.log('✅ Confirming game reset...');
-            try {
-                // Clear all saved data
-                localStorage.removeItem('vaultPhoenixTokens');
-                localStorage.removeItem('vaultPhoenixProgress');
-                localStorage.removeItem('vaultPhoenixStats');
-                localStorage.removeItem('vaultPhoenixUser');
-                
-                // Reset instance variables
-                this.collectedTokens = [];
-                this.totalTokenValue = 0;
-                this.locationsVisited = 0;
-                this.lastActivityTime = null;
-                
-                // Update UI
-                this.updateVaultStats();
-                this.updateTokenCounts();
-                this.updateNearbyTokens();
-                
-                // Regenerate token markers
-                if (this.mapLoadingComplete) {
-                    this.addDemoTokenMarkers();
-                }
-                
-                // Hide modal
-                this.hideResetGameModal();
-                
-                // Show success message
-                this.showResetSuccessMessage();
-                
-                console.log('🎉 Game reset completed successfully!');
-                
-            } catch (error) {
-                console.error('❌ Game reset error:', error);
-                alert('Error resetting game. Please refresh the page.');
-            }
-        }
-
-        hideResetGameModal() {
-            const resetOverlay = document.getElementById('resetGameOverlay');
-            if (resetOverlay) {
-                resetOverlay.classList.remove('show');
-            }
-        }
-
-        showResetSuccessMessage() {
-            // Create temporary success notification
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(67, 160, 71, 0.95));
-                color: white;
-                padding: 20px 30px;
-                border-radius: 16px;
-                font-size: 16px;
-                font-weight: 700;
-                z-index: 400;
-                box-shadow: 0 12px 32px rgba(76, 175, 80, 0.5);
-                backdrop-filter: blur(20px);
-                border: 2px solid rgba(255, 255, 255, 0.3);
-                text-align: center;
-                animation: successFadeIn 0.5s ease-out;
-            `;
-            notification.innerHTML = `
-                <div style="font-size: 20px; margin-bottom: 8px;">🎉</div>
-                <div>Game Reset Complete!</div>
-                <div style="font-size: 14px; opacity: 0.9; margin-top: 4px;">All tokens are available again</div>
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Add CSS animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes successFadeIn {
-                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                notification.style.animation = 'successFadeIn 0.5s ease-out reverse';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                    document.head.removeChild(style);
-                }, 500);
-            }, 3000);
-        }
-
-        initializeVault() {
-            console.log('💎 Initializing vault...');
-            try {
-                // Setup vault filter buttons
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        // Remove active from all buttons
-                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                        // Add active to clicked button
-                        btn.classList.add('active');
-                        
-                        const filter = btn.dataset.filter;
-                        this.filterTokenHistory(filter);
-                    });
-                });
-
-                this.updateTokenHistory();
-            } catch (error) {
-                console.error('❌ Vault initialization error:', error);
-            }
-        }
-
-        filterTokenHistory(filter) {
-            console.log('🔍 Filtering token history:', filter);
-            // Implementation for filtering token history
-        }
-
-        updateTokenHistory() {
-            try {
-                const historyContainer = document.getElementById('tokenHistory');
-                if (!historyContainer) return;
-
-                if (this.collectedTokens.length === 0) {
-                    historyContainer.innerHTML = `
-                        <div class="history-item">
-                            <div class="history-icon">
-                                <img src="../images/VPEmberCoin.PNG" alt="Welcome Bonus" class="history-coin-icon" onerror="this.textContent='💎'">
-                            </div>
-                            <div class="history-details">
-                                <div class="history-title">Welcome Bonus</div>
-                                <div class="history-subtitle">Vault Phoenix HQ • Today • LOW</div>
-                            </div>
-                            <div class="history-value">+50</div>
-                        </div>
-                        <div style="text-align: center; color: rgba(255, 255, 255, 0.6); padding: 20px; font-size: 14px;">
-                            Start hunting tokens to see your collection history!
-                        </div>
-                    `;
-                } else {
-                    historyContainer.innerHTML = this.collectedTokens.map(token => `
-                        <div class="history-item">
-                            <div class="history-icon">
-                                <img src="../images/VPEmberCoin.PNG" alt="${token.location}" class="history-coin-icon" onerror="this.textContent='💎'">
-                            </div>
-                            <div class="history-details">
-                                <div class="history-title">${token.location}</div>
-                                <div class="history-subtitle">${token.sponsor} • Today • ${token.tier.toUpperCase()}</div>
-                            </div>
-                            <div class="history-value">+${token.value}</div>
-                        </div>
-                    `).join('');
-                }
-            } catch (error) {
-                console.error('❌ Token history update error:', error);
-            }
-        }
-
-        initializeCampaigns() {
-            console.log('🏆 Initializing campaigns...');
-            try {
-                // Setup adventure cards click handlers
-                document.querySelectorAll('.adventure-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const adventure = card.dataset.adventure;
-                        this.selectAdventure(adventure);
-                    });
-                });
-
-                // Setup adventure start buttons
-                document.querySelectorAll('.adventure-start-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const adventure = btn.closest('.adventure-card').dataset.adventure;
-                        this.startAdventure(adventure);
-                    });
-                });
-
-            } catch (error) {
-                console.error('❌ Campaigns initialization error:', error);
-            }
-        }
-
-        selectAdventure(adventure) {
-            console.log('🎯 Selected adventure:', adventure);
-            // Highlight selected adventure
-            document.querySelectorAll('.adventure-card').forEach(card => {
-                card.classList.toggle('selected', card.dataset.adventure === adventure);
-            });
-        }
-
-        startAdventure(adventure) {
-            console.log('🚀 Starting adventure:', adventure);
-            alert(`Starting ${adventure} adventure! This feature is coming soon.`);
+        toRadians(degrees) {
+            return degrees * (Math.PI/180);
         }
 
         addHapticFeedback() {
-            console.log('📳 Adding haptic feedback...');
-            try {
-                // Add haptic feedback to all clickable elements
-                document.addEventListener('click', (e) => {
-                    if (e.target.closest('button, .nav-tab, .menu-item, .token-location-item, .demo-token-marker')) {
-                        if (navigator.vibrate) {
-                            navigator.vibrate(30);
-                        }
+            // Add haptic feedback to buttons
+            const buttons = document.querySelectorAll('button, .nav-tab, .menu-item, .token-action-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (navigator.vibrate) {
+                        navigator.vibrate(30);
                     }
                 });
-            } catch (error) {
-                console.error('❌ Haptic feedback error:', error);
-            }
-        }
-
-        // =================== TOKEN COLLECTION SYSTEM ===================
-        collectToken(tokenId) {
-            console.log('💎 Collecting token:', tokenId);
-            try {
-                const token = this.emberTokens.find(t => t.id === tokenId);
-                if (!token || this.isTokenCollected(tokenId)) {
-                    console.warn('❌ Token not found or already collected');
-                    return false;
-                }
-
-                // Add to collected tokens
-                const collectedToken = {
-                    ...token,
-                    collectedAt: new Date().toISOString(),
-                    collectedLocation: { lat: this.userLat, lng: this.userLng }
-                };
-
-                this.collectedTokens.push(collectedToken);
-                this.calculateTotalValue();
-                this.locationsVisited++;
-                this.lastActivityTime = new Date().toISOString();
-
-                // Save to localStorage
-                localStorage.setItem('vaultPhoenixTokens', JSON.stringify(this.collectedTokens));
-
-                // Update UI
-                this.updateVaultStats();
-                this.updateTokenCounts();
-                this.updateNearbyTokens();
-                this.updateTokenHistory();
-
-                // Remove token marker from map
-                this.removeTokenMarker(tokenId);
-
-                // Show collection success
-                this.showTokenCollectionSuccess(token);
-
-                console.log('✅ Token collected successfully');
-                return true;
-
-            } catch (error) {
-                console.error('❌ Token collection error:', error);
-                return false;
-            }
-        }
-
-        removeTokenMarker(tokenId) {
-            try {
-                const marker = document.querySelector(`[data-token-id="${tokenId}"]`);
-                if (marker) {
-                    marker.style.animation = 'tokenCollected 0.5s ease-out forwards';
-                    setTimeout(() => {
-                        marker.remove();
-                    }, 500);
-                }
-            } catch (error) {
-                console.error('❌ Remove token marker error:', error);
-            }
-        }
-
-        showTokenCollectionSuccess(token) {
-            try {
-                // Create success animation
-                const success = document.createElement('div');
-                success.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(67, 160, 71, 0.95));
-                    color: white;
-                    padding: 24px;
-                    border-radius: 16px;
-                    font-size: 18px;
-                    font-weight: 700;
-                    z-index: 400;
-                    box-shadow: 0 12px 32px rgba(76, 175, 80, 0.5);
-                    backdrop-filter: blur(20px);
-                    border: 2px solid rgba(255, 255, 255, 0.3);
-                    text-align: center;
-                    animation: tokenSuccessAnimation 2s ease-out forwards;
-                `;
-                success.innerHTML = `
-                    <div style="font-size: 32px; margin-bottom: 12px;">💎</div>
-                    <div>Token Collected!</div>
-                    <div style="font-size: 16px; opacity: 0.9; margin-top: 8px;">+${token.value} $Ember</div>
-                    <div style="font-size: 14px; opacity: 0.8; margin-top: 4px;">${token.location}</div>
-                `;
-
-                document.body.appendChild(success);
-
-                // Add animation style
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes tokenSuccessAnimation {
-                        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                        20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-                        80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                        100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                    }
-                    @keyframes tokenCollected {
-                        0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                        50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.5); }
-                        100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
-                    }
-                `;
-                document.head.appendChild(style);
-
-                // Remove after animation
-                setTimeout(() => {
-                    document.body.removeChild(success);
-                    document.head.removeChild(style);
-                }, 2000);
-
-                // Haptic feedback
-                if (navigator.vibrate) {
-                    navigator.vibrate([100, 50, 100, 50, 200]);
-                }
-
-            } catch (error) {
-                console.error('❌ Token collection success error:', error);
-            }
-        }
-
-        // =================== AR TOKEN SIMULATION ===================
-        simulateARTokenDiscovery() {
-            if (!this.isNearToken) return;
-
-            // Find nearest uncollected token
-            let nearestToken = null;
-            let nearestDistance = Infinity;
-
-            this.emberTokens.forEach(token => {
-                if (!this.isTokenCollected(token.id)) {
-                    const distance = this.calculateDistance(
-                        this.userLat, this.userLng,
-                        token.lat, token.lng
-                    );
-                    if (distance < nearestDistance) {
-                        nearestDistance = distance;
-                        nearestToken = token;
-                    }
-                }
             });
+        }
 
-            if (nearestToken && nearestDistance <= 0.1) {
-                this.showARToken(nearestToken);
+        // =================== INITIALIZATION COMPLETE ===================
+        onInitComplete() {
+            console.log('🎉 Vault Phoenix Dashboard fully initialized');
+            
+            // Mark as initialized
+            this.isStarted = true;
+            
+            // Final setup
+            this.setModeAttribute('map');
+            this.updateActiveTab('map');
+            
+            // Show welcome if first time
+            if (!this.welcomeShown) {
+                this.showWelcomeButton();
             }
         }
 
-        showARToken(token) {
-            console.log('📱 Showing AR token:', token.location);
-            try {
-                const arCoin = document.getElementById('arEmberCoin');
-                if (arCoin) {
-                    arCoin.style.display = 'block';
-                    arCoin.classList.add('tappable');
-                    
-                    // Add click handler for collection
-                    const collectHandler = () => {
-                        this.collectToken(token.id);
-                        arCoin.style.display = 'none';
-                        arCoin.classList.remove('tappable');
-                        arCoin.removeEventListener('click', collectHandler);
-                    };
-                    
-                    arCoin.addEventListener('click', collectHandler);
-                }
-            } catch (error) {
-                console.error('❌ AR token display error:', error);
-            }
+        showWelcomeButton() {
+            // Implementation for welcome experience
+            console.log('👋 Welcome to Vault Phoenix!');
+            this.welcomeShown = true;
         }
     }
 
-    // Initialize the dashboard when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('📄 DOM loaded, initializing Vault Phoenix Dashboard...');
-            new VaultPhoenixDashboard();
-        });
-    } else {
-        console.log('📄 DOM already loaded, initializing Vault Phoenix Dashboard...');
-        new VaultPhoenixDashboard();
-    }
-    
+    // =================== GLOBAL INITIALIZATION ===================
+    // Initialize the dashboard application
+    console.log('🔥💎 Creating Vault Phoenix Dashboard instance...');
+    window.vaultPhoenixDashboard = new VaultPhoenixDashboard();
+
 } else {
-    console.log('🚫 Vault Phoenix Dashboard blocked - not a crypto game page');
+    console.log('🚫 Dashboard JavaScript blocked - not a crypto game page');
 }
+
+// =================== GLOBAL ERROR HANDLING ===================
+window.addEventListener('error', (event) => {
+    if (window.isVaultPhoenixDashboard) {
+        console.error('🚨 Dashboard Error:', event.error);
+    }
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+    if (window.isVaultPhoenixDashboard) {
+        console.error('🚨 Dashboard Promise Rejection:', event.reason);
+    }
+});
+
+console.log('🔥💎 Vault Phoenix Dashboard JavaScript loaded successfully');
