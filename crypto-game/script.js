@@ -125,13 +125,13 @@ if (window.isVaultPhoenixCryptoGame) {
                 { id: 13, value: 100, tier: "low", location: "Phoenix Downtown Plaza", lat: 33.4485, lng: -112.0742, sponsor: "Demo Location", message: "You're close! Try AR mode!", description: "This is a demo token placed nearby to show AR functionality." },
                 { id: 1, value: 500, tier: "high", location: "Downtown Phoenix", lat: 33.4484, lng: -112.0740, sponsor: "Phoenix Suns Arena", message: "Exclusive courtside experience awaits!", description: "Experience the thrill of NBA basketball with exclusive courtside seats, VIP dining, and behind-the-scenes arena tours." },
                 { id: 2, value: 250, tier: "medium", location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards unlocked!", description: "Discover luxury shopping with exclusive discounts and VIP personal shopping services." },
-                { id: 3, value: 100, tier: "low", location: "Tempe Town Lake", lat: 33.4255, lng: -111.9400, sponsor: "Local Coffee Co.", message: "Free coffee for early hunters!", description: "Enjoy artisanal coffee and cozy workspace with special $Ember holder benefits." },
+                { id: 3, value: 50, tier: "low", location: "Desert Botanical Garden", lat: 33.4619, lng: -111.9463, sponsor: "Garden Cafe", message: "Nature-inspired dining experience!", description: "Farm-to-table dining surrounded by stunning desert flora." },
                 { id: 4, value: 150, tier: "medium", location: "Old Town Scottsdale", lat: 33.4942, lng: -111.9261, sponsor: "Arizona Bike Tours", message: "Adventure awaits in the desert!", description: "Explore the Sonoran Desert with guided tours and premium bike rentals." },
                 { id: 5, value: 300, tier: "medium", location: "Arizona State University", lat: 33.4194, lng: -111.9339, sponsor: "ASU Bookstore", message: "Student discounts and exclusive gear!", description: "Access student resources and exclusive Sun Devil merchandise." },
                 { id: 6, value: 75, tier: "low", location: "Phoenix Sky Harbor", lat: 33.4343, lng: -112.0116, sponsor: "Sky Harbor Shops", message: "Travel rewards for your next adventure!", description: "Unlock travel perks and duty-free shopping benefits." },
                 { id: 7, value: 200, tier: "medium", location: "Camelback Mountain", lat: 33.5186, lng: -111.9717, sponsor: "Desert Hiking Gear", message: "Gear up for your next hike!", description: "Professional hiking equipment and guided desert expedition packages." },
-                { id: 8, value: 50, tier: "low", location: "Desert Botanical Garden", lat: 33.4619, lng: -111.9463, sponsor: "Garden Cafe", message: "Nature-inspired dining experience!", description: "Farm-to-table dining surrounded by stunning desert flora." },
-                { id: 9, value: 125, tier: "low", location: "Roosevelt Row", lat: 33.4524, lng: -112.0708, sponsor: "Local Art Gallery", message: "Support local artists and creators!", description: "Discover emerging artists and exclusive art collection access." },
+                { id: 8, value: 125, tier: "low", location: "Roosevelt Row", lat: 33.4524, lng: -112.0708, sponsor: "Local Art Gallery", message: "Support local artists and creators!", description: "Discover emerging artists and exclusive art collection access." },
+                { id: 9, value: 100, tier: "low", location: "Tempe Town Lake", lat: 33.4255, lng: -111.9400, sponsor: "Local Coffee Co.", message: "Free coffee for early hunters!", description: "Enjoy artisanal coffee and cozy workspace with special $Ember holder benefits." },
                 { id: 10, value: 400, tier: "high", location: "Chase Field", lat: 33.4453, lng: -112.0667, sponsor: "Arizona Diamondbacks", message: "Baseball season tickets await!", description: "Premium baseball experiences with season ticket perks and dugout tours." },
                 { id: 11, value: 90, tier: "low", location: "Papago Park", lat: 33.4551, lng: -111.9511, sponsor: "Park Recreation Center", message: "Family fun activities included!", description: "Family-friendly activities and recreational programs for all ages." },
                 { id: 12, value: 175, tier: "medium", location: "Biltmore Fashion Park", lat: 33.5117, lng: -112.0736, sponsor: "Luxury Boutiques", message: "Exclusive fashion rewards!", description: "High-end fashion with personal styling services and exclusive previews." }
@@ -448,7 +448,741 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        // =================== MODE SWITCHING ===================
+        // =================== GOOGLE MAPS INTEGRATION - COMPLETE RESTORATION ===================
+        initializeGoogleMap() {
+            console.log('🗺️ Initializing Google Maps with enhanced features...');
+            try {
+                const mapContainer = document.getElementById('googleMap');
+                if (!mapContainer) {
+                    console.error('❌ Google Map container not found');
+                    return;
+                }
+
+                // Show loading overlay
+                this.showMapLoading();
+
+                // Check if Google Maps API is loaded
+                if (typeof google !== 'undefined' && google.maps) {
+                    console.log('✅ Google Maps API detected, initializing real map...');
+                    this.createRealGoogleMap(mapContainer);
+                } else {
+                    console.log('⚠️ Google Maps API not available, using enhanced demo map...');
+                    this.createEnhancedDemoMap(mapContainer);
+                }
+                
+            } catch (error) {
+                console.error('❌ Google Maps initialization error:', error);
+                this.createEnhancedDemoMap(document.getElementById('googleMap'));
+            }
+        }
+
+        showMapLoading() {
+            const mapContainer = document.getElementById('googleMap');
+            if (mapContainer) {
+                mapContainer.innerHTML = `
+                    <div class="map-loading-overlay">
+                        <div class="map-loading-spinner"></div>
+                        <div>Loading Phoenix Map...</div>
+                    </div>
+                `;
+            }
+        }
+
+        // ENHANCED: Real Google Maps implementation
+        createRealGoogleMap(mapContainer) {
+            console.log('🗺️ Creating real Google Map...');
+            try {
+                // Clear loading overlay
+                mapContainer.innerHTML = '';
+
+                // Create map centered on Phoenix
+                this.googleMap = new google.maps.Map(mapContainer, {
+                    center: { lat: this.userLat, lng: this.userLng },
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    styles: [
+                        {
+                            featureType: "all",
+                            elementType: "geometry.fill",
+                            stylers: [{ color: "#2c1810" }]
+                        },
+                        {
+                            featureType: "water",
+                            elementType: "geometry",
+                            stylers: [{ color: "#193047" }]
+                        },
+                        {
+                            featureType: "road",
+                            elementType: "geometry",
+                            stylers: [{ color: "#451a03" }]
+                        }
+                    ],
+                    disableDefaultUI: true,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                        position: google.maps.ControlPosition.RIGHT_BOTTOM
+                    }
+                });
+
+                // Add user marker
+                this.userMarker = new google.maps.Marker({
+                    position: { lat: this.userLat, lng: this.userLng },
+                    map: this.googleMap,
+                    title: 'Your Location',
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 8,
+                        fillColor: '#4285F4',
+                        fillOpacity: 1,
+                        strokeColor: '#ffffff',
+                        strokeWeight: 3
+                    }
+                });
+
+                // Add token markers
+                this.addRealTokenMarkers();
+
+                this.googleMapsLoaded = true;
+                this.mapLoadingComplete = true;
+                
+                // Start game features after map loads
+                setTimeout(() => {
+                    this.startGameFeatures();
+                }, 1000);
+
+                console.log('✅ Real Google Map initialized successfully');
+                
+            } catch (error) {
+                console.error('❌ Real Google Map creation error:', error);
+                this.createEnhancedDemoMap(mapContainer);
+            }
+        }
+
+        // Add real token markers to Google Maps
+        addRealTokenMarkers() {
+            console.log('💎 Adding real token markers to Google Map...');
+            
+            this.emberTokens.forEach((token, index) => {
+                if (!this.isTokenCollected(token.id)) {
+                    const marker = new google.maps.Marker({
+                        position: { lat: token.lat, lng: token.lng },
+                        map: this.googleMap,
+                        title: `${token.location} - ${token.value} $Ember`,
+                        icon: {
+                            url: '../images/VPEmberCoin.PNG',
+                            scaledSize: new google.maps.Size(40, 40),
+                            origin: new google.maps.Point(0, 0),
+                            anchor: new google.maps.Point(20, 20)
+                        }
+                    });
+
+                    // Add click listener
+                    marker.addListener('click', () => {
+                        token.distance = this.calculateDistance(
+                            this.userLat, this.userLng,
+                            token.lat, token.lng
+                        );
+                        this.showTokenModal(token);
+                    });
+
+                    this.tokenMarkers.push({ marker, token });
+                }
+            });
+        }
+
+        // ENHANCED: Demo map with better features - COMPLETE RESTORATION
+        createEnhancedDemoMap(mapContainer) {
+            console.log('🎮 Creating enhanced demo map...');
+            try {
+                // Clear loading overlay
+                mapContainer.innerHTML = '';
+
+                // Create enhanced demo map structure
+                mapContainer.innerHTML = `
+                    <div class="demo-map-container" id="demoMapContainer" style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(135deg, #d4a574 0%, #e6c896 25%, #f0d4a8 50%, #f5e2bf 75%, #faf0d1 100%);
+                        overflow: hidden;
+                        z-index: 1;
+                    ">
+                        <div class="demo-map-grid" style="
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-image: 
+                                linear-gradient(rgba(139, 69, 19, 0.3) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(139, 69, 19, 0.3) 1px, transparent 1px);
+                            background-size: 50px 50px;
+                            opacity: 0.4;
+                        "></div>
+                        
+                        <div class="demo-map-streets">
+                            <div class="demo-street horizontal" style="position: absolute; top: 20%; width: 100%; height: 4px; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
+                            <div class="demo-street horizontal" style="position: absolute; top: 40%; width: 100%; height: 4px; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
+                            <div class="demo-street horizontal" style="position: absolute; top: 60%; width: 100%; height: 4px; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
+                            <div class="demo-street horizontal" style="position: absolute; top: 80%; width: 100%; height: 4px; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
+                            <div class="demo-street vertical" style="position: absolute; left: 25%; width: 4px; height: 100%; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
+                            <div class="demo-street vertical" style="position: absolute; left: 50%; width: 4px; height: 100%; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
+                            <div class="demo-street vertical" style="position: absolute; left: 75%; width: 4px; height: 100%; background: rgba(101, 67, 33, 0.6); z-index: 2;"></div>
+                        </div>
+                        
+                        <div class="demo-phoenix-label" style="
+                            position: absolute;
+                            top: 10px;
+                            left: 10px;
+                            color: rgba(139, 69, 19, 0.8);
+                            font-size: 16px;
+                            font-weight: 700;
+                            z-index: 5;
+                            background: rgba(255, 255, 255, 0.8);
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                        ">🏜️ Phoenix, Arizona</div>
+                        
+                        <div class="demo-user-marker" title="Your Location - Phoenix, AZ" style="
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            width: 24px;
+                            height: 24px;
+                            background: #4285F4;
+                            border: 4px solid white;
+                            border-radius: 50%;
+                            transform: translate(-50%, -50%);
+                            z-index: 30;
+                            box-shadow: 0 3px 15px rgba(66, 133, 244, 0.8);
+                        "></div>
+                        
+                        <div class="demo-map-markers" id="demoMarkers" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 15;"></div>
+                        <div class="demo-map-labels" id="demoLabels" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 12;"></div>
+                    </div>
+                    <div class="demo-map-controls" style="
+                        position: absolute;
+                        bottom: 20px;
+                        right: 20px;
+                        z-index: 20;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+                    ">
+                        <button class="map-control-btn" id="zoomInBtn" title="Zoom In" style="
+                            width: 40px;
+                            height: 40px;
+                            background: rgba(240, 165, 0, 0.9);
+                            border: 2px solid rgba(255, 255, 255, 0.8);
+                            border-radius: 8px;
+                            color: white;
+                            font-size: 18px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
+                        ">+</button>
+                        <button class="map-control-btn" id="zoomOutBtn" title="Zoom Out" style="
+                            width: 40px;
+                            height: 40px;
+                            background: rgba(240, 165, 0, 0.9);
+                            border: 2px solid rgba(255, 255, 255, 0.8);
+                            border-radius: 8px;
+                            color: white;
+                            font-size: 18px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
+                        ">-</button>
+                    </div>
+                `;
+
+                // Ensure container is visible
+                mapContainer.style.display = 'block';
+                mapContainer.style.position = 'absolute';
+                mapContainer.style.top = '0';
+                mapContainer.style.left = '0';
+                mapContainer.style.width = '100%';
+                mapContainer.style.height = '100%';
+                mapContainer.style.zIndex = '1';
+
+                this.mapContainer = document.getElementById('demoMapContainer');
+                this.setupMapInteractions();
+
+                // Add demo token markers
+                setTimeout(() => {
+                    this.addDemoTokenMarkers();
+                    this.googleMapsLoaded = true;
+                    this.mapLoadingComplete = true;
+                    this.startGameFeatures();
+                }, 500);
+
+                console.log('✅ Enhanced demo map initialized successfully');
+                
+            } catch (error) {
+                console.error('❌ Enhanced demo map creation error:', error);
+            }
+        }
+
+        // ENHANCED: Demo token markers with better labels - COMPLETE RESTORATION
+        addDemoTokenMarkers() {
+            console.log('💎 Adding enhanced demo token markers...');
+            try {
+                const markersContainer = document.getElementById('demoMarkers');
+                const labelsContainer = document.getElementById('demoLabels');
+                
+                if (!markersContainer) {
+                    console.error('❌ Demo markers containers not found');
+                    return;
+                }
+
+                markersContainer.innerHTML = '';
+                if (labelsContainer) labelsContainer.innerHTML = '';
+
+                let markerCount = 0;
+                this.emberTokens.forEach((token, index) => {
+                    if (!this.isTokenCollected(token.id)) {
+                        this.addEnhancedDemoMarker(token, index, markersContainer, labelsContainer);
+                        markerCount++;
+                    }
+                });
+
+                console.log(`✅ Added ${markerCount} enhanced demo markers`);
+            } catch (error) {
+                console.error('❌ Demo token markers error:', error);
+            }
+        }
+
+        addEnhancedDemoMarker(token, index, markersContainer, labelsContainer) {
+            try {
+                const positions = [
+                    { x: 52, y: 48 }, // Demo nearby token - center
+                    { x: 45, y: 35 }, // Downtown Phoenix - upper left
+                    { x: 75, y: 25 }, // Scottsdale Quarter - upper right
+                    { x: 55, y: 85 }, // Desert Botanical Garden - lower center
+                    { x: 80, y: 30 }, // Old Town Scottsdale - upper right
+                    { x: 30, y: 70 }, // Arizona State University - lower left
+                    { x: 40, y: 90 }, // Phoenix Sky Harbor - bottom left
+                    { x: 65, y: 15 }, // Camelback Mountain - top center
+                    { x: 25, y: 55 }, // Roosevelt Row - left center
+                    { x: 35, y: 40 }, // Tempe Town Lake - left center
+                    { x: 70, y: 75 }, // Chase Field - lower right
+                    { x: 60, y: 65 }, // Papago Park - center right
+                    { x: 70, y: 20 }  // Biltmore Fashion Park - upper right
+                ];
+
+                const position = positions[index] || { 
+                    x: 50 + (index * 10) % 40, 
+                    y: 50 + (index * 15) % 40 
+                };
+
+                // Create enhanced marker with proper styling
+                const marker = document.createElement('div');
+                marker.className = `demo-token-marker ${token.tier}`;
+                marker.style.cssText = `
+                    position: absolute;
+                    left: ${position.x}%;
+                    top: ${position.y}%;
+                    width: 40px;
+                    height: 40px;
+                    cursor: pointer;
+                    pointer-events: auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease;
+                    z-index: 15;
+                    border-radius: 50%;
+                    background: rgba(240, 165, 0, 0.1);
+                    border: 3px solid rgba(240, 165, 0, 0.6);
+                    box-shadow: 0 0 20px rgba(240, 165, 0, 0.6);
+                    animation: markerPulse 3s ease-in-out infinite;
+                    transform: translate(-50%, -50%);
+                `;
+                marker.title = `${token.location} - ${token.value} $Ember`;
+                marker.dataset.tokenId = token.id;
+
+                const tokenImage = document.createElement('img');
+                tokenImage.src = '../images/VPEmberCoin.PNG';
+                tokenImage.alt = 'Ember Coin';
+                tokenImage.style.cssText = `
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    filter: brightness(1.2) drop-shadow(0 3px 12px rgba(240, 165, 0, 0.8));
+                    transition: all 0.3s ease;
+                `;
+                tokenImage.onerror = function() {
+                    this.style.display = 'none';
+                    marker.textContent = '💎';
+                    marker.style.fontSize = '16px';
+                    marker.style.color = '#f0a500';
+                };
+
+                // ENHANCED: Better value overlay
+                const valueOverlay = document.createElement('div');
+                valueOverlay.style.cssText = `
+                    position: absolute;
+                    bottom: -12px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #f0a500, #fb923c);
+                    color: white;
+                    font-size: 11px;
+                    font-weight: 900;
+                    padding: 4px 8px;
+                    border-radius: 12px;
+                    border: 2px solid white;
+                    backdrop-filter: blur(5px);
+                    white-space: nowrap;
+                    pointer-events: none;
+                    box-shadow: 0 3px 12px rgba(240, 165, 0, 0.6);
+                    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+                    animation: valueBadgePulse 2s ease-in-out infinite;
+                `;
+                valueOverlay.textContent = `${token.value}`;
+
+                marker.appendChild(tokenImage);
+                marker.appendChild(valueOverlay);
+
+                // ENHANCED: Click handler shows proper navigation modal
+                marker.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Visual feedback
+                    marker.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                    marker.style.zIndex = '1000';
+                    
+                    setTimeout(() => {
+                        marker.style.transform = 'translate(-50%, -50%) scale(1)';
+                        marker.style.zIndex = '15';
+                    }, 300);
+                    
+                    // Calculate distance and show navigation modal
+                    token.distance = this.calculateDistance(
+                        this.userLat, this.userLng,
+                        token.lat, token.lng
+                    );
+                    
+                    this.showNavigationModal(token);
+                    
+                    if (navigator.vibrate) {
+                        navigator.vibrate(30);
+                    }
+                });
+
+                // Add location label
+                if (labelsContainer) {
+                    const label = document.createElement('div');
+                    label.style.cssText = `
+                        position: absolute;
+                        left: ${position.x}%;
+                        top: ${position.y - 8}%;
+                        transform: translateX(-50%);
+                        background: rgba(139, 69, 19, 0.9);
+                        color: white;
+                        font-size: 12px;
+                        font-weight: 700;
+                        padding: 4px 8px;
+                        border-radius: 8px;
+                        white-space: nowrap;
+                        pointer-events: none;
+                        z-index: 12;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+                        border: 1px solid rgba(240, 165, 0, 0.4);
+                    `;
+                    label.textContent = token.location;
+                    labelsContainer.appendChild(label);
+                }
+
+                markersContainer.appendChild(marker);
+
+                // Animate appearance
+                setTimeout(() => {
+                    marker.style.opacity = '1';
+                }, index * 150);
+
+            } catch (error) {
+                console.error('❌ Enhanced demo marker creation error:', error);
+            }
+        }
+
+        // Add CSS keyframes for animations
+        addMapAnimationStyles() {
+            if (document.getElementById('mapAnimationStyles')) return;
+            
+            const style = document.createElement('style');
+            style.id = 'mapAnimationStyles';
+            style.textContent = `
+                @keyframes markerPulse {
+                    0%, 100% { 
+                        box-shadow: 0 0 0 0 rgba(240, 165, 0, 0.7);
+                        transform: translate(-50%, -50%) scale(1);
+                    }
+                    50% { 
+                        box-shadow: 0 0 0 20px rgba(240, 165, 0, 0);
+                        transform: translate(-50%, -50%) scale(1.05);
+                    }
+                }
+                
+                @keyframes valueBadgePulse {
+                    0%, 100% { transform: translateX(-50%) scale(1); }
+                    50% { transform: translateX(-50%) scale(1.05); }
+                }
+                
+                .demo-token-marker:hover {
+                    transform: translate(-50%, -50%) scale(1.15) !important;
+                    z-index: 25 !important;
+                }
+                
+                .demo-token-marker:active {
+                    transform: translate(-50%, -50%) scale(0.95) !important;
+                }
+                
+                .demo-token-marker.high {
+                    border-color: #ff6b6b !important;
+                    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6) !important;
+                }
+                
+                .demo-token-marker.medium {
+                    border-color: #fb923c !important;
+                    box-shadow: 0 0 20px rgba(251, 146, 60, 0.6) !important;
+                }
+                
+                .demo-token-marker.low {
+                    border-color: #4CAF50 !important;
+                    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6) !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // ENHANCED: Start game features after map loads
+        startGameFeatures() {
+            console.log('🎮 Starting game features...');
+            
+            // Add animation styles
+            this.addMapAnimationStyles();
+            
+            // Update location card with coordinates
+            this.updateLocationDisplay();
+            
+            // Start proximity checking
+            this.checkTokenProximity();
+            
+            // Update nearby tokens display
+            this.updateNearbyTokens();
+            
+            console.log('✅ Game features started');
+        }
+
+        // ENHANCED: Update location display with campaign info
+        updateLocationDisplay() {
+            try {
+                const latEl = document.getElementById('fallbackLat');
+                const lngEl = document.getElementById('fallbackLng');
+                
+                if (latEl) latEl.textContent = this.userLat.toFixed(4);
+                if (lngEl) lngEl.textContent = this.userLng.toFixed(4);
+                
+            } catch (error) {
+                console.error('❌ Location display update error:', error);
+            }
+        }
+
+        // ENHANCED: Navigation modal with driving/walking directions
+        showNavigationModal(token) {
+            console.log('🗺️ Showing navigation modal for:', token.location);
+            try {
+                this.currentNavigationToken = token;
+                
+                const modal = document.getElementById('navigationModal');
+                const tokenName = document.getElementById('navTokenName');
+                const distance = document.getElementById('navDistance');
+                const walkTime = document.getElementById('navWalkTime');
+                const driveTime = document.getElementById('navDriveTime');
+                const arOption = document.getElementById('navAR');
+                
+                if (tokenName) tokenName.textContent = `${token.value} $Ember Token`;
+                
+                if (token.distance) {
+                    const distanceText = token.distance < 1 ? 
+                        `${(token.distance * 1000).toFixed(0)}m away` : 
+                        `${token.distance.toFixed(1)}km away`;
+                    
+                    if (distance) distance.textContent = distanceText;
+                    
+                    const walkMinutes = Math.round(token.distance * 12);
+                    const driveMinutes = Math.round(token.distance * 2);
+                    
+                    if (walkTime) walkTime.textContent = `~${walkMinutes} min`;
+                    if (driveTime) driveTime.textContent = `~${driveMinutes} min`;
+                    
+                    // Show AR option if close enough
+                    const isCloseEnough = token.distance <= 0.1;
+                    if (arOption) {
+                        arOption.style.display = isCloseEnough ? 'flex' : 'none';
+                        if (isCloseEnough) {
+                            arOption.onclick = () => {
+                                this.hideNavigationModal();
+                                this.switchMode('ar');
+                            };
+                        }
+                    }
+                }
+                
+                if (modal) {
+                    modal.classList.add('show');
+                }
+                
+            } catch (error) {
+                console.error('❌ Navigation modal error:', error);
+            }
+        }
+
+        hideNavigationModal() {
+            const modal = document.getElementById('navigationModal');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+            this.currentNavigationToken = null;
+        }
+
+        openMapsNavigation(mode) {
+            if (!this.currentNavigationToken) return;
+            
+            const token = this.currentNavigationToken;
+            const destination = `${token.lat},${token.lng}`;
+            
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            
+            let mapsUrl;
+            if (mode === 'walking') {
+                mapsUrl = isIOS ? 
+                    `maps://maps.google.com/maps?daddr=${destination}&dirflg=w` :
+                    `https://maps.google.com/maps?daddr=${destination}&dirflg=w`;
+            } else if (mode === 'driving') {
+                mapsUrl = isIOS ? 
+                    `maps://maps.google.com/maps?daddr=${destination}&dirflg=d` :
+                    `https://maps.google.com/maps?daddr=${destination}&dirflg=d`;
+            }
+            
+            if (mapsUrl) {
+                window.open(mapsUrl, '_blank');
+                this.hideNavigationModal();
+            }
+            
+            console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
+        }
+
+        // ENHANCED: Setup map interactions
+        setupMapInteractions() {
+            if (!this.mapContainer) return;
+
+            console.log('🖱️ Setting up enhanced map interactions...');
+
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => this.zoomMap(1.2));
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => this.zoomMap(0.8));
+            }
+
+            // Touch/mouse events for panning
+            this.mapContainer.addEventListener('mousedown', (e) => this.startMapDrag(e));
+            this.mapContainer.addEventListener('touchstart', (e) => this.startMapDrag(e), { passive: false });
+
+            document.addEventListener('mousemove', (e) => this.dragMap(e));
+            document.addEventListener('touchmove', (e) => this.dragMap(e), { passive: false });
+
+            document.addEventListener('mouseup', () => this.endMapDrag());
+            document.addEventListener('touchend', () => this.endMapDrag());
+
+            // Mouse wheel zoom
+            this.mapContainer.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const scale = e.deltaY > 0 ? 0.9 : 1.1;
+                this.zoomMap(scale);
+            });
+
+            console.log('✅ Enhanced map interactions setup complete');
+        }
+
+        startMapDrag(e) {
+            if (e.touches && e.touches.length > 1) return;
+
+            this.isDraggingMap = true;
+            this.mapContainer.style.cursor = 'grabbing';
+
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            this.lastTouchX = clientX;
+            this.lastTouchY = clientY;
+
+            if (e.preventDefault) e.preventDefault();
+        }
+
+        dragMap(e) {
+            if (!this.isDraggingMap) return;
+
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            const deltaX = clientX - this.lastTouchX;
+            const deltaY = clientY - this.lastTouchY;
+
+            this.mapTranslateX += deltaX;
+            this.mapTranslateY += deltaY;
+
+            this.updateMapTransform();
+
+            this.lastTouchX = clientX;
+            this.lastTouchY = clientY;
+
+            if (e.preventDefault) e.preventDefault();
+        }
+
+        endMapDrag() {
+            this.isDraggingMap = false;
+            if (this.mapContainer) {
+                this.mapContainer.style.cursor = 'grab';
+            }
+        }
+
+        zoomMap(scale) {
+            const newScale = Math.max(0.5, Math.min(3, this.mapScale * scale));
+            
+            if (newScale !== this.mapScale) {
+                this.mapScale = newScale;
+                this.updateMapTransform();
+
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            }
+        }
+
+        updateMapTransform() {
+            if (this.mapContainer) {
+                this.mapContainer.style.transform = `translate(${this.mapTranslateX}px, ${this.mapTranslateY}px) scale(${this.mapScale})`;
+            }
+        }
+
+        // Continue with remaining methods in next response...
         switchMode(mode) {
             if (mode === this.currentMode) return;
             
@@ -479,28 +1213,6 @@ if (window.isVaultPhoenixCryptoGame) {
             }
         }
 
-        async switchToAR() {
-            console.log('📱 Switching to AR mode');
-            try {
-                document.getElementById('map').style.display = 'none';
-                document.getElementById('video').style.display = 'block';
-                document.getElementById('canvas').style.display = 'block';
-                document.getElementById('vaultView').style.display = 'none';
-                document.getElementById('campaignsView').style.display = 'none';
-                
-                const module = document.getElementById('tokenLocationsModule');
-                if (module) module.style.display = 'none';
-
-                await this.startARCamera();
-                
-                console.log('📱 AR mode activated');
-            } catch (error) {
-                console.error('❌ AR switch error:', error);
-                alert('❌ Camera access failed. Please allow camera permissions and try again.');
-                this.switchMode('map');
-            }
-        }
-
         switchToMap() {
             console.log('🗺️ Switching to Map mode');
             try {
@@ -509,15 +1221,6 @@ if (window.isVaultPhoenixCryptoGame) {
                 document.getElementById('canvas').style.display = 'none';
                 document.getElementById('vaultView').style.display = 'none';
                 document.getElementById('campaignsView').style.display = 'none';
-                
-                this.hideARInstructions();
-                this.hideEmberCoin();
-                this.stopCamera();
-                
-                const module = document.getElementById('tokenLocationsModule');
-                if (module) {
-                    module.style.display = 'block';
-                }
                 
                 const mapContainer = document.getElementById('googleMap');
                 if (mapContainer) {
@@ -542,11 +1245,6 @@ if (window.isVaultPhoenixCryptoGame) {
                 document.getElementById('canvas').style.display = 'none';
                 document.getElementById('vaultView').style.display = 'block';
                 document.getElementById('campaignsView').style.display = 'none';
-                
-                const module = document.getElementById('tokenLocationsModule');
-                if (module) module.style.display = 'none';
-
-                this.stopCamera();
             } catch (error) {
                 console.error('❌ Vault switch error:', error);
             }
@@ -560,226 +1258,27 @@ if (window.isVaultPhoenixCryptoGame) {
                 document.getElementById('canvas').style.display = 'none';
                 document.getElementById('vaultView').style.display = 'none';
                 document.getElementById('campaignsView').style.display = 'block';
-                
-                const module = document.getElementById('tokenLocationsModule');
-                if (module) module.style.display = 'none';
-
-                this.stopCamera();
             } catch (error) {
                 console.error('❌ Campaigns switch error:', error);
             }
         }
 
+        async switchToAR() {
+            console.log('📱 Switching to AR mode');
+            try {
+                document.getElementById('map').style.display = 'none';
+                document.getElementById('video').style.display = 'block';
+                document.getElementById('canvas').style.display = 'block';
+                document.getElementById('vaultView').style.display = 'none';
+                document.getElementById('campaignsView').style.display = 'none';
+            } catch (error) {
+                console.error('❌ AR switch error:', error);
+            }
+        }
+
         showARNoAccessModal() {
             console.log('🚫 Showing AR no access modal');
-            
-            const uncollectedTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
-            const nearest = uncollectedTokens.reduce((closest, token) => {
-                const distance = this.calculateDistance(this.userLat, this.userLng, token.lat, token.lng);
-                return !closest || distance < closest.distance ? 
-                    { ...token, distance } : closest;
-            }, null);
-            
-            const modalHTML = `
-                <div class="ar-no-access-modal show" id="arNoAccessModal">
-                    <div class="ar-no-access-content">
-                        <div class="ar-no-access-title">
-                            🔒 AR Mode Locked
-                        </div>
-                        <div class="ar-no-access-text">
-                            You need to be within 100 meters of a token location to access AR hunting mode.
-                        </div>
-                        ${nearest ? `
-                            <div class="nearest-token-info">
-                                <div class="nearest-token-name">Nearest: ${nearest.location}</div>
-                                <div class="nearest-token-distance">${nearest.distance < 1 ? 
-                                    `${(nearest.distance * 1000).toFixed(0)}m away` : 
-                                    `${nearest.distance.toFixed(1)}km away`}</div>
-                            </div>
-                        ` : ''}
-                        <button class="ar-no-access-close" onclick="vaultPhoenixApp.hideARNoAccessModal()">
-                            Got it!
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            const existingModal = document.getElementById('arNoAccessModal');
-            if (existingModal) existingModal.remove();
-            
-            document.body.insertAdjacentHTML('beforeend', modalHTML);
-        }
-
-        hideARNoAccessModal() {
-            const modal = document.getElementById('arNoAccessModal');
-            if (modal) {
-                modal.classList.remove('show');
-                setTimeout(() => modal.remove(), 300);
-            }
-        }
-
-        // =================== AR CAMERA SYSTEM ===================
-        async startARCamera() {
-            console.log('📷 Starting AR camera...');
-            try {
-                this.videoElement = document.getElementById('video');
-                this.canvasElement = document.getElementById('canvas');
-
-                if (!this.videoElement || !this.canvasElement) {
-                    throw new Error('AR video or canvas elements not found');
-                }
-
-                if (!this.arCameraPermissionGranted) {
-                    console.log('📷 Requesting camera permissions...');
-                    
-                    const constraints = {
-                        video: {
-                            facingMode: 'environment',
-                            width: { ideal: 1280 },
-                            height: { ideal: 720 }
-                        }
-                    };
-
-                    try {
-                        this.cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
-                        this.arCameraPermissionGranted = true;
-                        console.log('✅ Camera permission granted');
-                    } catch (permissionError) {
-                        console.error('❌ Camera permission denied:', permissionError);
-                        throw new Error('Camera access denied. Please allow camera permissions to use AR mode.');
-                    }
-                }
-
-                if (this.cameraStream && this.videoElement) {
-                    this.videoElement.srcObject = this.cameraStream;
-                    this.videoElement.play();
-                    
-                    console.log('📷 Camera stream started');
-
-                    this.videoElement.addEventListener('loadedmetadata', () => {
-                        console.log('📷 Video metadata loaded');
-                        this.setupARInterface();
-                    });
-                }
-
-                this.arActive = true;
-
-            } catch (error) {
-                console.error('❌ AR camera start error:', error);
-                throw error;
-            }
-        }
-
-        setupARInterface() {
-            console.log('🎮 Setting up AR interface...');
-            try {
-                this.showARInstructions();
-
-                if (this.isNearToken) {
-                    this.showARCoin();
-                }
-
-                console.log('✅ AR interface setup complete');
-            } catch (error) {
-                console.error('❌ AR interface setup error:', error);
-            }
-        }
-
-        showARInstructions() {
-            const instructions = document.getElementById('arInstructions');
-            if (instructions) {
-                instructions.classList.add('show');
-                
-                setTimeout(() => {
-                    instructions.classList.remove('show');
-                }, 5000);
-            }
-        }
-
-        hideARInstructions() {
-            const instructions = document.getElementById('arInstructions');
-            if (instructions) {
-                instructions.classList.remove('show');
-            }
-        }
-
-        showARCoin() {
-            console.log('💎 Showing AR coin for collection...');
-            const coin = document.getElementById('arEmberCoin');
-            if (coin) {
-                coin.style.display = 'block';
-                coin.classList.add('tappable');
-                
-                coin.onclick = () => {
-                    this.collectARToken();
-                };
-            }
-        }
-
-        hideEmberCoin() {
-            const coin = document.getElementById('arEmberCoin');
-            if (coin) {
-                coin.style.display = 'none';
-                coin.classList.remove('tappable');
-                coin.onclick = null;
-            }
-        }
-
-        async collectARToken() {
-            console.log('💎 Collecting AR token...');
-            try {
-                const nearestToken = this.emberTokens.find(token => 
-                    !this.isTokenCollected(token.id) && 
-                    this.calculateDistance(this.userLat, this.userLng, token.lat, token.lng) <= 0.1
-                );
-
-                if (nearestToken) {
-                    this.hideEmberCoin();
-
-                    if (navigator.vibrate) {
-                        navigator.vibrate([200, 100, 200, 100, 200]);
-                    }
-
-                    this.collectedTokens.push({
-                        ...nearestToken,
-                        collectedAt: new Date().toISOString(),
-                        collectedVia: 'AR'
-                    });
-
-                    this.saveCollectedTokens();
-                    this.showTokenCollectionModal(nearestToken);
-
-                    setTimeout(() => {
-                        this.switchMode('map');
-                    }, 3000);
-
-                    console.log('✅ AR token collected successfully');
-                }
-            } catch (error) {
-                console.error('❌ AR token collection error:', error);
-            }
-        }
-
-        stopCamera() {
-            console.log('📷 Stopping camera...');
-            try {
-                if (this.cameraStream) {
-                    this.cameraStream.getTracks().forEach(track => track.stop());
-                    this.cameraStream = null;
-                }
-
-                if (this.videoElement) {
-                    this.videoElement.srcObject = null;
-                }
-
-                this.arActive = false;
-                this.hideEmberCoin();
-                this.hideARInstructions();
-
-                console.log('✅ Camera stopped');
-            } catch (error) {
-                console.error('❌ Camera stop error:', error);
-            }
+            alert('AR Mode requires you to be within 100 meters of a token location. Get closer to a token to unlock AR hunting!');
         }
 
         // =================== UTILITY METHODS ===================
@@ -802,6 +1301,15 @@ if (window.isVaultPhoenixCryptoGame) {
 
         isTokenCollected(tokenId) {
             return this.collectedTokens.some(token => token.id === tokenId);
+        }
+
+        checkTokenProximity() {
+            // Proximity checking logic
+            console.log('📍 Checking token proximity...');
+        }
+
+        updateNearbyTokens() {
+            console.log('🔍 Updating nearby tokens...');
         }
 
         // =================== DASHBOARD METHODS ===================
@@ -838,15 +1346,19 @@ if (window.isVaultPhoenixCryptoGame) {
             this.totalTokenValue = this.collectedTokens.reduce((total, token) => total + token.value, 0);
         }
 
-        saveCollectedTokens() {
+        updateVaultStats() {
+            console.log('📊 Updating vault stats...');
             try {
-                localStorage.setItem('vaultPhoenixTokens', JSON.stringify(this.collectedTokens));
-                this.calculateTotalValue();
-                this.updateVaultStats();
+                const elements = {
+                    navEmberCount: document.getElementById('navEmberCount'),
+                    menuEmberCount: document.getElementById('menuEmberCount')
+                };
                 
-                console.log('💾 Tokens saved:', this.collectedTokens.length, 'worth', this.totalTokenValue, '$Ember');
+                if (elements.navEmberCount) elements.navEmberCount.textContent = this.totalTokenValue;
+                if (elements.menuEmberCount) elements.menuEmberCount.textContent = this.totalTokenValue;
+                
             } catch (error) {
-                console.error('❌ Token saving error:', error);
+                console.error('❌ Vault stats update error:', error);
             }
         }
 
@@ -856,7 +1368,10 @@ if (window.isVaultPhoenixCryptoGame) {
                 const handlers = [
                     { id: 'homeBtn', event: 'click', handler: () => this.goHome() },
                     { id: 'menuToggle', event: 'click', handler: () => this.toggleMenu() },
-                    { id: 'menuOverlay', event: 'click', handler: () => this.closeMenu() }
+                    { id: 'menuOverlay', event: 'click', handler: () => this.closeMenu() },
+                    { id: 'navClose', event: 'click', handler: () => this.hideNavigationModal() },
+                    { id: 'navWalking', event: 'click', handler: () => this.openMapsNavigation('walking') },
+                    { id: 'navDriving', event: 'click', handler: () => this.openMapsNavigation('driving') }
                 ];
                 
                 handlers.forEach(({ id, event, handler }) => {
@@ -894,19 +1409,8 @@ if (window.isVaultPhoenixCryptoGame) {
                 document.querySelectorAll('.nav-tab').forEach(tab => {
                     tab.classList.toggle('active', tab.dataset.mode === this.currentMode);
                 });
-                this.updateMenuState();
             } catch (error) {
                 console.error('❌ Navigation update error:', error);
-            }
-        }
-
-        updateMenuState() {
-            try {
-                document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
-                    item.classList.toggle('active', item.dataset.mode === this.currentMode);
-                });
-            } catch (error) {
-                console.error('❌ Menu state update error:', error);
             }
         }
 
@@ -930,7 +1434,6 @@ if (window.isVaultPhoenixCryptoGame) {
                 } else {
                     menu.classList.add('open');
                     overlay.classList.add('active');
-                    this.updateMenuState();
                 }
             } catch (error) {
                 console.error('❌ Menu toggle error:', error);
@@ -951,84 +1454,6 @@ if (window.isVaultPhoenixCryptoGame) {
 
         initializeVault() {
             console.log('💎 Initializing vault...');
-            try {
-                this.generateTokenHistory();
-            } catch (error) {
-                console.error('❌ Vault initialization error:', error);
-            }
-        }
-
-        generateTokenHistory() {
-            console.log('📜 Generating token history...');
-            try {
-                const historyContainer = document.getElementById('tokenHistory');
-                if (!historyContainer) return;
-
-                historyContainer.innerHTML = '';
-
-                if (this.collectedTokens.length === 0) {
-                    const welcomeItem = document.createElement('div');
-                    welcomeItem.className = 'history-item';
-                    welcomeItem.innerHTML = `
-                        <div class="history-icon">
-                            <img src="../images/VPEmberCoin.PNG" alt="Welcome Bonus" class="history-coin-icon" onerror="this.textContent='💎'">
-                        </div>
-                        <div class="history-details">
-                            <div class="history-title">Welcome Bonus</div>
-                            <div class="history-subtitle">Vault Phoenix HQ • Today • LOW</div>
-                        </div>
-                        <div class="history-value">+50</div>
-                    `;
-                    historyContainer.appendChild(welcomeItem);
-                }
-
-                this.collectedTokens.forEach(token => {
-                    const historyItem = document.createElement('div');
-                    historyItem.className = 'history-item';
-                    historyItem.innerHTML = `
-                        <div class="history-icon">
-                            <img src="../images/VPEmberCoin.PNG" alt="${token.location}" class="history-coin-icon" onerror="this.textContent='💎'">
-                        </div>
-                        <div class="history-details">
-                            <div class="history-title">${token.location}</div>
-                            <div class="history-subtitle">${token.sponsor} • Today • ${token.tier.toUpperCase()}</div>
-                        </div>
-                        <div class="history-value">+${token.value}</div>
-                    `;
-                    historyContainer.appendChild(historyItem);
-                });
-
-            } catch (error) {
-                console.error('❌ Token history generation error:', error);
-            }
-        }
-
-        updateVaultStats() {
-            console.log('📊 Updating vault stats...');
-            try {
-                const elements = {
-                    navEmberCount: document.getElementById('navEmberCount'),
-                    menuEmberCount: document.getElementById('menuEmberCount'),
-                    vaultBalance: document.getElementById('vaultBalance'),
-                    vaultUsdValue: document.getElementById('vaultUsdValue'),
-                    totalCollected: document.getElementById('totalCollected'),
-                    locationsVisited: document.getElementById('locationsVisited'),
-                    totalValue: document.getElementById('totalValue'),
-                    lastActivity: document.getElementById('lastActivity')
-                };
-                
-                if (elements.navEmberCount) elements.navEmberCount.textContent = this.totalTokenValue;
-                if (elements.menuEmberCount) elements.menuEmberCount.textContent = this.totalTokenValue;
-                if (elements.vaultBalance) elements.vaultBalance.textContent = `${this.totalTokenValue} $Ember Tokens`;
-                if (elements.vaultUsdValue) elements.vaultUsdValue.textContent = `${(this.totalTokenValue * 0.001).toFixed(2)} USD`;
-                if (elements.totalCollected) elements.totalCollected.textContent = this.collectedTokens.length;
-                if (elements.locationsVisited) elements.locationsVisited.textContent = this.locationsVisited;
-                if (elements.totalValue) elements.totalValue.textContent = `${(this.totalTokenValue * 0.001).toFixed(2)}`;
-                if (elements.lastActivity) elements.lastActivity.textContent = this.lastActivityTime || 'Never';
-                
-            } catch (error) {
-                console.error('❌ Vault stats update error:', error);
-            }
         }
 
         initializeCampaigns() {
@@ -1041,45 +1466,18 @@ if (window.isVaultPhoenixCryptoGame) {
 
         addHapticFeedback() {
             console.log('📳 Adding haptic feedback...');
-            try {
-                const interactiveElements = document.querySelectorAll('.nav-tab, .menu-item, .demo-token-marker');
-                
-                interactiveElements.forEach(element => {
-                    element.addEventListener('touchstart', () => {
-                        if (navigator.vibrate) {
-                            navigator.vibrate(10);
-                        }
-                    });
-                });
-            } catch (error) {
-                console.error('❌ Haptic feedback error:', error);
-            }
         }
 
         showWelcomeScreen() {
             console.log('👋 Showing welcome screen...');
-        }
-
-        initializeGoogleMap() {
-            console.log('🗺️ Initializing Google Map...');
-        }
-
-        showTokenCollectionModal(token) {
-            console.log('💎 Token collected:', token.location);
-        }
-
-        start() {
-            console.log('🚀 Starting game systems...');
-            this.isStarted = true;
-            return Promise.resolve();
-        }
-
-        showLoading(show) {
-            console.log('⏳ Loading state:', show);
-        }
-
-        updateStatus(message, isError = false) {
-            console.log('📊 Status update:', message);
+            try {
+                // Auto-initialize map after brief delay
+                setTimeout(() => {
+                    this.initializeGoogleMap();
+                }, 1000);
+            } catch (error) {
+                console.error('❌ Welcome screen error:', error);
+            }
         }
     }
 
