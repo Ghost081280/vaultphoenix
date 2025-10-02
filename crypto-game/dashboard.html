@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Vault Phoenix - AR Crypto Gaming Dashboard</title>
+    
+    <!-- CRITICAL: Session protection MUST load first -->
+    <script src="session-protection.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <!-- Using Demo Map for Demo Experience -->
     <link rel="stylesheet" href="shared.css">
@@ -648,6 +652,7 @@
         </nav>
     </div>
     
-    <script src="script.js"></script>
+    <!-- DASHBOARD JAVASCRIPT - SEPARATE FROM LOGIN -->
+    <script src="dashboard.js"></script>
 </body>
 </html>
