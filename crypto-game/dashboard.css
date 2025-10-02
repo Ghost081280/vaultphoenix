@@ -1,6 +1,69 @@
-/* Vault Phoenix AR Crypto Gaming - DASHBOARD STYLES (MOBILE OPTIMIZED) */
+/* Vault Phoenix AR Crypto Gaming - DASHBOARD STYLES (COMPLETE & SELF-CONTAINED) */
 /* PROTECTION: Only affects crypto-game/ folder - prevents main site interference */
 /* FILE PATH: crypto-game/dashboard.css */
+
+/* =================== CSS CUSTOM PROPERTIES FOR MOBILE HEIGHTS =================== */
+:root {
+    --vh: 1vh;
+    --real-vh: 100vh;
+}
+
+/* =================== CRITICAL: LOCK PAGE IN PLACE - PREVENT ANY MOVEMENT OR ZOOM =================== */
+html, body {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overscroll-behavior: none !important;
+    touch-action: manipulation !important;
+    -webkit-overflow-scrolling: touch !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    /* CRITICAL: Prevent ALL zooming */
+    -webkit-text-size-adjust: 100% !important;
+    -moz-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+}
+
+/* Mobile browser height fixes */
+html {
+    height: -webkit-fill-available !important;
+}
+
+body {
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important;
+}
+
+/* =================== GLOBAL RESET FOR DASHBOARD PAGE ONLY =================== */
+.crypto-dashboard-page *,
+.crypto-dashboard-page *::before,
+.crypto-dashboard-page *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none !important;
+    /* Prevent text selection and zoom */
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Allow text selection only for inputs */
+.crypto-dashboard-page input,
+.crypto-dashboard-page textarea {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
 
 /* =================== DASHBOARD PAGE STYLES (COMPLETE) =================== */
 body.crypto-dashboard-page {
@@ -3098,3 +3161,4 @@ body.crypto-dashboard-page {
 /* =================== GLOBAL KEYFRAMES =================== */
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
