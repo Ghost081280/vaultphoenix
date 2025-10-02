@@ -212,7 +212,7 @@ body.crypto-dashboard-page {
         radial-gradient(circle at 70% 60%, rgba(139, 69, 19, 0.2) 0%, transparent 25%),
         radial-gradient(circle at 50% 80%, rgba(70, 130, 180, 0.4) 0%, transparent 20%),
         linear-gradient(135deg, #f5f5dc 0%, #deb887 25%, #d2b48c 50%, #bc9a6a 75%, #8fbc8f 100%);
-    display: flex;
+    display: block;
     align-items: center;
     justify-content: center;
     /* Enable touch interactions */
@@ -628,13 +628,13 @@ body.crypto-dashboard-page {
     50% { opacity: 0.5; }
 }
 
-/* =================== SWIPEABLE TOKEN LOCATIONS MODULE =================== */
+/* =================== SWIPEABLE TOKEN LOCATIONS MODULE - FIXED FOR MOBILE =================== */
 .crypto-dashboard-page .token-locations-module {
     position: absolute;
-    bottom: calc(env(safe-area-inset-bottom, 12px) + 80px);
+    bottom: calc(env(safe-area-inset-bottom, 12px) + 100px); /* FIXED: Raised higher above nav */
     left: 0;
     right: 0;
-    z-index: 10;
+    z-index: 20; /* FIXED: Higher z-index than nav */
     background: linear-gradient(180deg, rgba(12, 12, 12, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
     backdrop-filter: blur(30px);
     border-top-left-radius: 24px;
@@ -644,7 +644,7 @@ body.crypto-dashboard-page {
     box-shadow: 0 -8px 32px rgba(240, 165, 0, 0.2);
     transform: translateY(calc(100% - 80px));
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    max-height: 60vh;
+    max-height: 50vh; /* FIXED: Reduced max height for mobile */
     overflow: hidden;
 }
 
@@ -708,7 +708,7 @@ body.crypto-dashboard-page {
 .crypto-dashboard-page .module-content {
     padding: 0 20px 20px 20px;
     overflow-y: auto;
-    max-height: calc(60vh - 80px);
+    max-height: calc(50vh - 80px); /* FIXED: Proper scrolling height */
 }
 
 .crypto-dashboard-page .module-header {
@@ -954,16 +954,16 @@ body.crypto-dashboard-page {
     filter: brightness(1.3) drop-shadow(0 4px 12px rgba(240, 165, 0, 0.6));
 }
 
-/* =================== PROXIMITY NOTIFICATION =================== */
+/* =================== PROXIMITY NOTIFICATION - DROPDOWN STYLE =================== */
 .crypto-dashboard-page .proximity-notification {
     position: fixed;
     top: calc(env(safe-area-inset-top, 8px) + 72px);
     left: 16px;
     right: 16px;
     z-index: 180;
-    background: linear-gradient(135deg, rgba(12, 12, 12, 0.95), rgba(20, 20, 20, 0.95));
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(240, 165, 0, 0.5);
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.95), rgba(251, 146, 60, 0.95));
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     padding: 16px;
     display: flex;
@@ -972,37 +972,71 @@ body.crypto-dashboard-page {
     transform: translateY(-120px);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 12px 32px rgba(240, 165, 0, 0.3);
+    box-shadow: 0 12px 32px rgba(240, 165, 0, 0.5);
+    backdrop-filter: blur(20px);
+    /* ENHANCED: More attention-grabbing */
+    animation: proximityDropDown 0.6s ease-out forwards;
+}
+
+@keyframes proximityDropDown {
+    0% {
+        transform: translateY(-120px);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(240, 165, 0, 0);
+    }
+    50% {
+        transform: translateY(10px);
+        opacity: 0.8;
+        box-shadow: 0 8px 24px rgba(240, 165, 0, 0.4);
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        box-shadow: 0 12px 32px rgba(240, 165, 0, 0.5);
+    }
 }
 
 .crypto-dashboard-page .proximity-notification.show {
     transform: translateY(0);
     opacity: 1;
+    animation: proximityPulse 2s ease-in-out infinite;
+}
+
+@keyframes proximityPulse {
+    0%, 100% { 
+        box-shadow: 0 12px 32px rgba(240, 165, 0, 0.5);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+    50% { 
+        box-shadow: 0 16px 40px rgba(240, 165, 0, 0.7);
+        border-color: rgba(255, 255, 255, 0.6);
+    }
 }
 
 .crypto-dashboard-page .proximity-icon {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(240, 165, 0, 0.25), rgba(251, 146, 60, 0.15));
-    border: 2px solid rgba(240, 165, 0, 0.4);
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    animation: proximityIconPulse 2s ease-in-out infinite;
+    animation: proximityIconBounce 2s ease-in-out infinite;
 }
 
-@keyframes proximityIconPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+@keyframes proximityIconBounce {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(-5deg); }
+    75% { transform: scale(1.1) rotate(5deg); }
 }
 
 .crypto-dashboard-page .proximity-coin-icon {
     width: 32px;
     height: 32px;
     object-fit: contain;
-    filter: brightness(1.2);
+    filter: brightness(1.3) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
 
 .crypto-dashboard-page .proximity-content {
@@ -1010,33 +1044,43 @@ body.crypto-dashboard-page {
 }
 
 .crypto-dashboard-page .proximity-title {
-    color: #f0a500;
-    font-size: 14px;
-    font-weight: 800;
+    color: white;
+    font-size: 16px;
+    font-weight: 900;
     margin-bottom: 2px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .crypto-dashboard-page .proximity-subtitle {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
     font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .crypto-dashboard-page .proximity-button {
-    background: linear-gradient(135deg, #f0a500, #fb923c);
+    background: rgba(255, 255, 255, 0.2);
     color: white;
-    border: none;
-    padding: 10px 16px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    padding: 12px 16px;
     border-radius: 12px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 800;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 6px;
     transition: all 0.3s ease;
-    min-height: 40px;
+    min-height: 44px;
     flex-shrink: 0;
+    backdrop-filter: blur(10px);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.crypto-dashboard-page .proximity-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
 }
 
 .crypto-dashboard-page .proximity-button:active {
@@ -1559,7 +1603,7 @@ body.crypto-dashboard-page {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 190;
+    z-index: 15; /* FIXED: Lower z-index than token module */
     background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.98) 100%);
     backdrop-filter: blur(30px);
     border-top: 1px solid rgba(240, 165, 0, 0.2);
@@ -1980,7 +2024,7 @@ body.crypto-dashboard-page {
     }
     
     .crypto-dashboard-page .token-locations-module {
-        bottom: calc(env(safe-area-inset-bottom, 10px) + 76px);
+        bottom: calc(env(safe-area-inset-bottom, 10px) + 120px); /* FIXED: Even higher on small screens */
     }
 }
 
@@ -2013,8 +2057,8 @@ body.crypto-dashboard-page {
     }
     
     .crypto-dashboard-page .token-locations-module {
-        bottom: calc(env(safe-area-inset-bottom, 8px) + 72px);
-        max-height: 50vh;
+        bottom: calc(env(safe-area-inset-bottom, 8px) + 110px); /* FIXED: Higher in landscape */
+        max-height: 40vh;
     }
 }
 
