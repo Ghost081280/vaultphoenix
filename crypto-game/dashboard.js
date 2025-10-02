@@ -858,179 +858,6 @@ if (window.isVaultPhoenixDashboard) {
             console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
         }
 
-                // ENHANCED: AR Hunt mode navigation
-                if (navAR) {
-                    addUniversalEventListener(navAR, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        this.openMapsNavigation('ar');
-                    });
-                }
-
-                // Vault badge
-                const vaultBadge = document.getElementById('vaultBadge');
-                if (vaultBadge) {
-                    addUniversalEventListener(vaultBadge, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        this.switchMode('vault');
-                    });
-                }
-
-                // Reset game
-                const resetGameBtn = document.getElementById('resetGameBtn');
-                const confirmResetGame = document.getElementById('confirmResetGame');
-                const cancelResetGame = document.getElementById('cancelResetGame');
-                
-                if (resetGameBtn) {
-                    addUniversalEventListener(resetGameBtn, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const modal = document.getElementById('resetGameOverlay');
-                        if (modal) modal.classList.add('show');
-                    });
-                }
-                
-                if (confirmResetGame) {
-                    addUniversalEventListener(confirmResetGame, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        this.resetGame();
-                        const modal = document.getElementById('resetGameOverlay');
-                        if (modal) modal.classList.remove('show');
-                    });
-                }
-                
-                if (cancelResetGame) {
-                    addUniversalEventListener(cancelResetGame, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const modal = document.getElementById('resetGameOverlay');
-                        if (modal) modal.classList.remove('show');
-                    });
-                }
-
-                // Logout
-                const sideMenuLogout = document.getElementById('sideMenuLogout');
-                const confirmLogout = document.getElementById('confirmLogout');
-                const cancelLogout = document.getElementById('cancelLogout');
-                
-                if (sideMenuLogout) {
-                    addUniversalEventListener(sideMenuLogout, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const modal = document.getElementById('logoutOverlay');
-                        if (modal) modal.classList.add('show');
-                    });
-                }
-                
-                if (confirmLogout) {
-                    addUniversalEventListener(confirmLogout, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if (window.vaultPhoenixSession) {
-                            window.vaultPhoenixSession.logout();
-                        } else {
-                            window.location.href = '../';
-                        }
-                    });
-                }
-                
-                if (cancelLogout) {
-                    addUniversalEventListener(cancelLogout, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const modal = document.getElementById('logoutOverlay');
-                        if (modal) modal.classList.remove('show');
-                    });
-                }
-
-                // QR modal
-                const redeemTokens = document.getElementById('redeemTokens');
-                const redeemQRBtn = document.getElementById('redeemQRBtn');
-                const qrClose = document.getElementById('qrClose');
-                
-                if (redeemTokens) {
-                    addUniversalEventListener(redeemTokens, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const modal = document.getElementById('qrModal');
-                        if (modal) modal.classList.add('show');
-                    });
-                }
-                
-                if (redeemQRBtn) {
-                    addUniversalEventListener(redeemQRBtn, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const modal = document.getElementById('qrModal');
-                        if (modal) modal.classList.add('show');
-                    });
-                }
-                
-                if (qrClose) {
-                    addUniversalEventListener(qrClose, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const modal = document.getElementById('qrModal');
-                        if (modal) modal.classList.remove('show');
-                    });
-                }
-
-                // Coinbase wallet
-                const coinbaseWallet = document.getElementById('coinbaseWallet');
-                const coinbaseTransferBtn = document.getElementById('coinbaseTransferBtn');
-                
-                if (coinbaseWallet) {
-                    addUniversalEventListener(coinbaseWallet, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        alert('Coinbase Wallet integration coming soon!');
-                    });
-                }
-                
-                if (coinbaseTransferBtn) {
-                    addUniversalEventListener(coinbaseTransferBtn, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        alert('Coinbase Wallet integration coming soon!');
-                    });
-                }
-
-                console.log('✅ Enhanced event listeners setup complete');
-            } catch (error) {
-                console.error('❌ Event listeners setup error:', error);
-            }
-        }
-
-        // =================== UTILITY METHODS ===================
-        calculateDistance(lat1, lon1, lat2, lon2) {
-            const R = 6371; // Earth's radius in kilometers
-            const dLat = this.toRadians(lat2 - lat1);
-            const dLon = this.toRadians(lon2 - lon1);
-            const a = 
-                Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.cos(this.toRadians(lat1)) * Math.cos(this.toRadians(lat2)) * 
-                Math.sin(dLon/2) * Math.sin(dLon/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            return R * c;
-        }
-
-        toRadians(degrees) {
-            return degrees * (Math.PI/180);
-        }
-    }
-
-    // =================== GLOBAL INITIALIZATION ===================
-    console.log('🔥💎 Creating Hunt Screen Dashboard instance...');
-    window.vaultPhoenixDashboard = new VaultPhoenixDashboard();
-
-} else {
-    console.log('🚫 Hunt Screen JavaScript blocked - not a crypto game page');
-}
-
-console.log('🔥💎 Hunt Screen JavaScript loaded successfully');
-
         // =================== MODE SWITCHING ===================
         switchMode(mode) {
             console.log('🔄 Switching to mode:', mode);
@@ -1544,4 +1371,175 @@ console.log('🔥💎 Hunt Screen JavaScript loaded successfully');
                     });
                 }
 
-                //
+                // ENHANCED: AR Hunt mode navigation
+                if (navAR) {
+                    addUniversalEventListener(navAR, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.openMapsNavigation('ar');
+                    });
+                }
+
+                // Vault badge
+                const vaultBadge = document.getElementById('vaultBadge');
+                if (vaultBadge) {
+                    addUniversalEventListener(vaultBadge, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.switchMode('vault');
+                    });
+                }
+
+                // Reset game
+                const resetGameBtn = document.getElementById('resetGameBtn');
+                const confirmResetGame = document.getElementById('confirmResetGame');
+                const cancelResetGame = document.getElementById('cancelResetGame');
+                
+                if (resetGameBtn) {
+                    addUniversalEventListener(resetGameBtn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const modal = document.getElementById('resetGameOverlay');
+                        if (modal) modal.classList.add('show');
+                    });
+                }
+                
+                if (confirmResetGame) {
+                    addUniversalEventListener(confirmResetGame, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.resetGame();
+                        const modal = document.getElementById('resetGameOverlay');
+                        if (modal) modal.classList.remove('show');
+                    });
+                }
+                
+                if (cancelResetGame) {
+                    addUniversalEventListener(cancelResetGame, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const modal = document.getElementById('resetGameOverlay');
+                        if (modal) modal.classList.remove('show');
+                    });
+                }
+
+                // Logout
+                const sideMenuLogout = document.getElementById('sideMenuLogout');
+                const confirmLogout = document.getElementById('confirmLogout');
+                const cancelLogout = document.getElementById('cancelLogout');
+                
+                if (sideMenuLogout) {
+                    addUniversalEventListener(sideMenuLogout, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const modal = document.getElementById('logoutOverlay');
+                        if (modal) modal.classList.add('show');
+                    });
+                }
+                
+                if (confirmLogout) {
+                    addUniversalEventListener(confirmLogout, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (window.vaultPhoenixSession) {
+                            window.vaultPhoenixSession.logout();
+                        } else {
+                            window.location.href = '../';
+                        }
+                    });
+                }
+                
+                if (cancelLogout) {
+                    addUniversalEventListener(cancelLogout, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const modal = document.getElementById('logoutOverlay');
+                        if (modal) modal.classList.remove('show');
+                    });
+                }
+
+                // QR modal
+                const redeemTokens = document.getElementById('redeemTokens');
+                const redeemQRBtn = document.getElementById('redeemQRBtn');
+                const qrClose = document.getElementById('qrClose');
+                
+                if (redeemTokens) {
+                    addUniversalEventListener(redeemTokens, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const modal = document.getElementById('qrModal');
+                        if (modal) modal.classList.add('show');
+                    });
+                }
+                
+                if (redeemQRBtn) {
+                    addUniversalEventListener(redeemQRBtn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const modal = document.getElementById('qrModal');
+                        if (modal) modal.classList.add('show');
+                    });
+                }
+                
+                if (qrClose) {
+                    addUniversalEventListener(qrClose, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const modal = document.getElementById('qrModal');
+                        if (modal) modal.classList.remove('show');
+                    });
+                }
+
+                // Coinbase wallet
+                const coinbaseWallet = document.getElementById('coinbaseWallet');
+                const coinbaseTransferBtn = document.getElementById('coinbaseTransferBtn');
+                
+                if (coinbaseWallet) {
+                    addUniversalEventListener(coinbaseWallet, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        alert('Coinbase Wallet integration coming soon!');
+                    });
+                }
+                
+                if (coinbaseTransferBtn) {
+                    addUniversalEventListener(coinbaseTransferBtn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        alert('Coinbase Wallet integration coming soon!');
+                    });
+                }
+
+                console.log('✅ Enhanced event listeners setup complete');
+            } catch (error) {
+                console.error('❌ Event listeners setup error:', error);
+            }
+        }
+
+        // =================== UTILITY METHODS ===================
+        calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Earth's radius in kilometers
+            const dLat = this.toRadians(lat2 - lat1);
+            const dLon = this.toRadians(lon2 - lon1);
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(this.toRadians(lat1)) * Math.cos(this.toRadians(lat2)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        toRadians(degrees) {
+            return degrees * (Math.PI/180);
+        }
+    }
+
+    // =================== GLOBAL INITIALIZATION ===================
+    console.log('🔥💎 Creating Hunt Screen Dashboard instance...');
+    window.vaultPhoenixDashboard = new VaultPhoenixDashboard();
+
+} else {
+    console.log('🚫 Hunt Screen JavaScript blocked - not a crypto game page');
+}
+
+console.log('🔥💎 Hunt Screen JavaScript loaded successfully');
