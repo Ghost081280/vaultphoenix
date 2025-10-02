@@ -365,35 +365,58 @@ if (window.isVaultPhoenixCryptoGame) {
 
         async handleLogin(event) {
             event.preventDefault();
+            console.log('🚀 Login form submitted');
             
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+            const email = document.getElementById('email')?.value?.trim() || '';
+            const password = document.getElementById('password')?.value || '';
             const loginBtn = document.getElementById('loginBtn');
             const loginText = document.getElementById('loginText');
             const container = document.querySelector('.login-container');
 
+            console.log('📧 Email input:', email);
+            console.log('🔑 Password length:', password.length);
+
             this.hideMessages();
 
+            // Validation
+            if (!email) {
+                console.error('❌ No email provided');
+                this.showError('Please enter your email address');
+                this.focusInput(document.getElementById('email'));
+                return;
+            }
+
             if (!this.validateEmail(email)) {
+                console.error('❌ Invalid email format:', email);
                 this.showError('Please enter a valid email address');
                 this.focusInput(document.getElementById('email'));
                 return;
             }
 
+            if (!password) {
+                console.error('❌ No password provided');
+                this.showError('Please enter your password');
+                this.focusInput(document.getElementById('password'));
+                return;
+            }
+
             if (password.length < 6) {
+                console.error('❌ Password too short');
                 this.showError('Password must be at least 6 characters long');
                 this.focusInput(document.getElementById('password'));
                 return;
             }
 
+            // Show loading state
             if (container) container.classList.add('loading');
             if (loginText) loginText.innerHTML = '<span class="loading-spinner"></span>Authenticating...';
-            
             if (loginBtn) loginBtn.style.transform = 'scale(0.98)';
 
             try {
+                console.log('🔐 Starting authentication...');
                 await this.authenticateUser(email, password);
                 
+                console.log('✅ Login successful!');
                 if (loginText) loginText.innerHTML = '✅ Access Granted!';
                 if (loginBtn) loginBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
                 
@@ -402,16 +425,21 @@ if (window.isVaultPhoenixCryptoGame) {
                 this.storeSession(email);
                 
                 setTimeout(() => {
+                    console.log('🚀 Redirecting to dashboard...');
                     window.location.href = 'dashboard.html';
                 }, 1500);
 
             } catch (error) {
+                console.error('❌ Login failed:', error.message);
+                
+                // Reset UI
                 if (loginBtn) loginBtn.style.transform = 'scale(1)';
-                if (loginText) loginText.innerHTML = '<span class="login-main-text"><img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="login-flame-icon" onerror="this.textContent=\'🔥\'">Start $Ember Hunt</span><span class="login-sub-text">Begin Your Adventure</span>';
+                if (loginText) loginText.innerHTML = '<span class="login-main-text"><img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="login-flame-icon" onerror="this.textContent=\'🔥\'">START $EMBER HUNT</span><span class="login-sub-text">Begin Your Adventure</span>';
                 if (container) container.classList.remove('loading');
                 
                 this.showError(error.message);
                 
+                // Shake animation
                 if (container) {
                     container.style.animation = 'shake 0.5s ease-in-out';
                     setTimeout(() => {
@@ -429,29 +457,51 @@ if (window.isVaultPhoenixCryptoGame) {
         }
 
         async authenticateUser(email, password) {
+            console.log('🔐 Authenticating user:', email);
+            
+            // Simulate network delay
             await new Promise(resolve => setTimeout(resolve, 1000));
 
             const validCredentials = [
                 { email: 'demo@vaultphoenix.com', password: 'phoenix123' },
                 { email: 'admin@vaultphoenix.com', password: 'admin123' },
                 { email: 'hunter@crypto.com', password: 'crypto123' },
-                { email: 'player@ember.com', password: 'ember123' }
+                { email: 'player@ember.com', password: 'ember123' },
+                { email: 'test@test.com', password: 'test123' },
+                { email: 'user@vault.com', password: 'vault123' }
             ];
 
-            const isValid = validCredentials.some(cred => 
-                cred.email.toLowerCase() === email.toLowerCase() && cred.password === password
-            );
+            console.log('🔍 Checking credentials against valid list...');
+            
+            const isValid = validCredentials.some(cred => {
+                const emailMatch = cred.email.toLowerCase().trim() === email.toLowerCase().trim();
+                const passwordMatch = cred.password === password;
+                console.log(`📧 Email match (${cred.email}):`, emailMatch, '🔑 Password match:', passwordMatch);
+                return emailMatch && passwordMatch;
+            });
+
+            console.log('✅ Validation result:', isValid);
 
             if (!isValid) {
-                throw new Error('Invalid credentials. Try: demo@vaultphoenix.com / phoenix123');
+                console.error('❌ Authentication failed for:', email);
+                throw new Error('Invalid email or password. Try: demo@vaultphoenix.com / phoenix123');
             }
 
+            console.log('🎉 Authentication successful!');
             return { success: true, email, timestamp: Date.now() };
         }
 
         validateEmail(email) {
+            console.log('📧 Validating email:', email);
+            if (!email || typeof email !== 'string') {
+                console.error('❌ Email validation failed: empty or invalid type');
+                return false;
+            }
+            
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+            const isValid = emailRegex.test(email.trim());
+            console.log('✅ Email validation result:', isValid);
+            return isValid;
         }
 
         storeSession(email) {
