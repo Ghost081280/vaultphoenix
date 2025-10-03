@@ -115,7 +115,7 @@
                 </div>
                 <button class="airdrop-button" id="airdropClaimButton">
                     <span class="airdrop-btn-icon">💎</span>
-                    <span>Claim Reward</span>
+                    <span>Collect</span>
                 </button>
             </div>
         </div>
@@ -173,7 +173,7 @@
             <video id="cameraVideo" autoplay muted playsinline></video>
             <div class="ar-overlay">
                 <div class="ar-tokens-container" id="arTokensContainer"></div>
-                <div class="ar-ui">
+                <div class="ar-ui" id="arUI">
                     <div class="ar-instructions">
                         <div class="ar-icon">📱</div>
                         <div class="ar-text">
@@ -259,7 +259,7 @@
                             <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
                             <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
                         </div>
-                        AR Ready Tokens
+                        $Ember Tokens Nearby
                     </span>
                     <span class="handle-count" id="nearbyTokenCount">Get closer</span>
                 </div>
@@ -270,7 +270,7 @@
                         <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
                         Collectable Tokens
                     </div>
-                    <div class="total-available" id="totalAvailable">Ready for AR collection</div>
+                    <div class="total-available" id="totalAvailable">Ready for collection</div>
                 </div>
                 <div class="token-locations-list" id="tokenLocationsList">
                     <!-- Token locations will be populated by JavaScript -->
@@ -300,7 +300,7 @@
         <div class="token-modal" id="tokenModal" style="display: none;">
             <div class="token-modal-content">
                 <div class="token-modal-header">
-                    <div class="token-found-title">
+                    <div class="token-found-title" id="tokenFoundTitle">
                         <span>🔥 $Ember Token Found!</span>
                     </div>
                     <div class="token-amount-badge" id="tokenAmountBadge">500 $Ember</div>
@@ -322,7 +322,7 @@
                     <div class="sponsor-text" id="sponsorText">Exclusive downtown experience awaits!</div>
                 </div>
                 
-                <div class="token-actions">
+                <div class="token-actions" id="tokenActions">
                     <button class="token-action-btn" id="collectTokenBtn">
                         <span>💎</span>
                         <span>Collect $Ember</span>
@@ -441,7 +441,7 @@
                     <div class="navigation-option ar-option" id="navAR" style="display: none;">
                         <div class="navigation-option-icon">📱</div>
                         <div class="navigation-option-text">
-                            <div class="navigation-option-title">AR Collection</div>
+                            <div class="navigation-option-title">Collect $Ember</div>
                             <div class="navigation-option-time">Available Now</div>
                         </div>
                     </div>
@@ -508,8 +508,8 @@
                 </div>
                 
                 <div class="qr-token-info">
-                    <div class="qr-token-amount" id="qrTokenAmount">Payment Ready</div>
-                    <div class="qr-token-value" id="qrTokenValue">Use at partner locations</div>
+                    <div class="qr-token-amount" id="qrTokenAmount">0 $Ember</div>
+                    <div class="qr-token-value" id="qrTokenValue">$0.00 USD</div>
                 </div>
             </div>
         </div>
