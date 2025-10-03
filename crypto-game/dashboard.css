@@ -1,5 +1,5 @@
-/* Vault Phoenix AR Crypto Gaming - UPDATED CSS */
-/* CLEAN 3-SCREEN GAME: HUNT, AR VIEW, VAULT */
+/* Vault Phoenix AR Crypto Gaming - OPTIMIZED CSS */
+/* IMPROVED MOBILE INTERACTIONS & SCROLLING */
 
 /* =================== CORE RESET & STRUCTURE =================== */
 * {
@@ -362,35 +362,49 @@ html, body {
     background: rgba(244, 67, 54, 0.2);
 }
 
-/* =================== AIRDROP NOTIFICATION (UPDATED) =================== */
+/* =================== IMPROVED AIRDROP NOTIFICATION =================== */
 .airdrop-notification {
     position: fixed;
-    top: -200px; /* Start hidden above screen */
+    top: -250px; /* Start hidden above screen */
     left: 50%;
     transform: translateX(-50%);
-    z-index: 300;
+    z-index: 350;
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.98), rgba(251, 146, 60, 0.98));
     backdrop-filter: blur(30px);
-    border: 3px solid rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
     color: white;
     display: none;
-    transition: top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: top 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     box-shadow: 
-        0 20px 60px rgba(240, 165, 0, 0.7),
-        0 0 0 2px rgba(255, 255, 255, 0.2);
-    max-width: 320px; /* Smaller */
-    width: 85%; /* Smaller */
+        0 25px 70px rgba(240, 165, 0, 0.8),
+        0 0 0 3px rgba(255, 255, 255, 0.3);
+    max-width: 340px;
+    width: 90%;
     overflow: hidden;
+    animation: airdropGlow 3s ease-in-out infinite;
 }
 
 .airdrop-notification.show {
     display: block;
-    top: calc(env(safe-area-inset-top, 8px) + 90px); /* Position below nav */
+    top: calc(env(safe-area-inset-top, 8px) + 90px);
+}
+
+@keyframes airdropGlow {
+    0%, 100% {
+        box-shadow: 
+            0 25px 70px rgba(240, 165, 0, 0.8),
+            0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 
+            0 30px 80px rgba(240, 165, 0, 1),
+            0 0 0 4px rgba(255, 255, 255, 0.5);
+    }
 }
 
 .airdrop-content {
-    padding: 20px; /* Reduced padding */
+    padding: 24px;
     text-align: center;
 }
 
@@ -398,36 +412,36 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px; /* Reduced gap */
-    margin-bottom: 12px; /* Reduced margin */
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
 .airdrop-icon {
-    font-size: 30px; /* Smaller */
+    font-size: 36px;
     animation: airdropIconFloat 3s ease-in-out infinite;
 }
 
 .airdrop-title {
-    font-size: 18px; /* Smaller */
+    font-size: 20px;
     font-weight: 800;
     color: white;
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .airdrop-body {
-    margin-bottom: 16px; /* Reduced margin */
+    margin-bottom: 20px;
 }
 
 .airdrop-amount {
-    font-size: 20px; /* Smaller */
+    font-size: 24px;
     font-weight: 900;
     color: white;
-    margin-bottom: 6px; /* Reduced margin */
+    margin-bottom: 8px;
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .airdrop-subtitle {
-    font-size: 13px; /* Smaller */
+    font-size: 14px;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
 }
@@ -436,19 +450,19 @@ html, body {
     background: linear-gradient(135deg, #ffffff, #f8f9fa);
     color: #2e7d32;
     border: none;
-    padding: 12px 20px; /* Smaller padding */
-    border-radius: 14px; /* Smaller radius */
-    font-size: 15px; /* Smaller font */
+    padding: 14px 24px;
+    border-radius: 16px;
+    font-size: 16px;
     font-weight: 800;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px; /* Smaller gap */
+    gap: 8px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     width: 100%;
-    min-height: 48px; /* Smaller height */
+    min-height: 52px;
 }
 
 .airdrop-button:hover {
@@ -461,7 +475,7 @@ html, body {
 }
 
 .airdrop-btn-icon {
-    font-size: 16px; /* Smaller */
+    font-size: 18px;
 }
 
 @keyframes airdropIconFloat {
@@ -469,7 +483,7 @@ html, body {
         transform: translateY(0px) rotate(0deg);
     }
     50% {
-        transform: translateY(-3px) rotate(3deg); /* Smaller movement */
+        transform: translateY(-4px) rotate(5deg);
     }
 }
 
@@ -715,7 +729,7 @@ html, body {
     }
 }
 
-/* Token Markers */
+/* Token Markers - IMPROVED FOR MOBILE */
 .token-markers {
     position: absolute;
     top: 0;
@@ -736,6 +750,10 @@ html, body {
     align-items: center;
     transition: all 0.3s ease;
     z-index: 45;
+    /* IMPROVED MOBILE TAP TARGET */
+    min-width: 60px;
+    min-height: 60px;
+    padding: 5px;
 }
 
 .token-marker.collectable {
@@ -799,11 +817,11 @@ html, body {
     white-space: nowrap;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
-    max-width: 90px; /* REDUCED to prevent overlap */
+    max-width: 90px;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.1; /* REDUCED line height */
+    line-height: 1.1;
 }
 
 @keyframes collectablePulse {
@@ -817,12 +835,12 @@ html, body {
     }
 }
 
-/* Map Controls - FIXED Z-INDEX */
+/* Map Controls */
 .map-controls {
     position: fixed;
     bottom: calc(env(safe-area-inset-bottom, 14px) + 200px);
     right: 20px;
-    z-index: 80; /* REDUCED - Now below slider when expanded */
+    z-index: 80;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -977,7 +995,6 @@ html, body {
     transition: opacity 0.5s ease;
 }
 
-/* Auto-hide AR UI after 3 seconds */
 .ar-ui.fade-out {
     opacity: 0;
 }
@@ -1013,7 +1030,7 @@ html, body {
     font-weight: 600;
 }
 
-/* =================== VAULT SCREEN =================== */
+/* =================== IMPROVED VAULT SCREEN =================== */
 .vault-screen {
     position: absolute;
     top: 0;
@@ -1021,7 +1038,7 @@ html, body {
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    padding: calc(env(safe-area-inset-top, 8px) + 72px) 0 calc(env(safe-area-inset-bottom, 12px) + 120px) 0;
+    padding: calc(env(safe-area-inset-top, 8px) + 72px) 0 0 0;
     scroll-behavior: smooth;
 }
 
@@ -1029,7 +1046,8 @@ html, body {
     padding: 0 16px;
     max-width: 600px;
     margin: 0 auto;
-    min-height: calc(100vh - calc(env(safe-area-inset-top, 8px) + 72px) - calc(env(safe-area-inset-bottom, 12px) + 120px));
+    min-height: calc(100vh - calc(env(safe-area-inset-top, 8px) + 72px));
+    padding-bottom: calc(env(safe-area-inset-bottom, 12px) + 200px); /* FIXED: More padding for token slider */
 }
 
 .vault-header {
@@ -1166,9 +1184,9 @@ html, body {
     font-weight: 600;
 }
 
-/* ENHANCED VAULT RECEIPTS SECTION - Better scrolling */
+/* ENHANCED VAULT RECEIPTS SECTION */
 .vault-receipts-section {
-    margin-bottom: 60px; /* More space at bottom for scrolling */
+    margin-bottom: 80px; /* INCREASED for better scrolling */
 }
 
 .token-history {
@@ -1176,9 +1194,9 @@ html, body {
     border: 1px solid rgba(240, 165, 0, 0.2);
     border-radius: 16px;
     padding: 16px;
-    max-height: 500px; /* INCREASED height for better scrolling */
+    max-height: 400px; /* FIXED: Better height for scrolling */
     overflow-y: auto;
-    margin-bottom: 40px; /* More space */
+    margin-bottom: 40px;
 }
 
 .history-placeholder {
@@ -1261,13 +1279,19 @@ html, body {
     flex-shrink: 0;
 }
 
+/* VAULT BOTTOM PADDING - FIXED */
+.vault-bottom-padding {
+    height: 120px; /* Extra space for token slider */
+    width: 100%;
+}
+
 /* =================== EMBER TOKENS SLIDER (ALL SCREENS) =================== */
 .token-locations-module {
     position: fixed;
     bottom: calc(env(safe-area-inset-bottom, 8px) + 80px);
     left: 0;
     right: 0;
-    z-index: 100; /* INCREASED - Now above map controls */
+    z-index: 100;
     background: linear-gradient(180deg, rgba(8, 8, 8, 0.98) 0%, rgba(16, 16, 16, 0.98) 100%);
     backdrop-filter: blur(25px);
     border-top-left-radius: 20px;
@@ -1867,7 +1891,6 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* NEW REDEMPTION SECTION */
 .redemption-section {
     margin-bottom: 24px;
 }
@@ -2113,7 +2136,7 @@ html, body {
     transform: scale(0.98);
 }
 
-/* QR Modal - UPDATED with balance display */
+/* QR Modal */
 .qr-modal-header {
     display: flex;
     justify-content: space-between;
