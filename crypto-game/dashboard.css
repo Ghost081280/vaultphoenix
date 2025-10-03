@@ -806,17 +806,20 @@ html, body {
 .token-label {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
     color: white;
-    padding: 6px 10px;
-    border-radius: 12px;
-    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 10px;
     font-weight: 700;
     border: 2px solid rgba(240, 165, 0, 0.5);
     backdrop-filter: blur(10px);
     white-space: nowrap;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
-    max-width: 120px;
+    max-width: 100px;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
 }
 
 @keyframes collectablePulse {
@@ -830,12 +833,12 @@ html, body {
     }
 }
 
-/* Map Controls */
+/* Map Controls - FIXED Z-INDEX */
 .map-controls {
     position: fixed;
     bottom: calc(env(safe-area-inset-bottom, 14px) + 200px);
     right: 20px;
-    z-index: 100;
+    z-index: 80; /* REDUCED - Now below slider when expanded */
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -1027,13 +1030,15 @@ html, body {
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    padding: calc(env(safe-area-inset-top, 8px) + 72px) 0 calc(env(safe-area-inset-bottom, 12px) + 84px) 0;
+    padding: calc(env(safe-area-inset-top, 8px) + 72px) 0 calc(env(safe-area-inset-bottom, 12px) + 120px) 0; /* INCREASED bottom padding */
+    scroll-behavior: smooth;
 }
 
 .vault-container {
     padding: 0 16px;
     max-width: 600px;
     margin: 0 auto;
+    min-height: calc(100vh - calc(env(safe-area-inset-top, 8px) + 72px) - calc(env(safe-area-inset-bottom, 12px) + 120px));
 }
 
 .vault-header {
@@ -1170,13 +1175,19 @@ html, body {
     font-weight: 600;
 }
 
+/* FIXED VAULT RECEIPTS SECTION */
+.vault-receipts-section {
+    margin-bottom: 40px; /* Extra space at bottom */
+}
+
 .token-history {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(240, 165, 0, 0.2);
     border-radius: 16px;
     padding: 16px;
-    max-height: 300px;
+    max-height: 400px; /* INCREASED height */
     overflow-y: auto;
+    margin-bottom: 20px; /* Extra space */
 }
 
 .history-placeholder {
@@ -1265,7 +1276,7 @@ html, body {
     bottom: calc(env(safe-area-inset-bottom, 8px) + 80px);
     left: 0;
     right: 0;
-    z-index: 60;
+    z-index: 100; /* INCREASED - Now above map controls */
     background: linear-gradient(180deg, rgba(8, 8, 8, 0.98) 0%, rgba(16, 16, 16, 0.98) 100%);
     backdrop-filter: blur(25px);
     border-top-left-radius: 20px;
@@ -1793,7 +1804,7 @@ html, body {
     border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Sponsor Modal */
+/* ENHANCED SPONSOR MODAL */
 .sponsor-modal-header {
     display: flex;
     justify-content: space-between;
@@ -1865,6 +1876,60 @@ html, body {
     margin-bottom: 20px;
 }
 
+/* NEW REDEMPTION SECTION */
+.redemption-section {
+    margin-bottom: 24px;
+}
+
+.redemption-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #f0a500;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.redemption-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.redemption-item {
+    background: rgba(76, 175, 80, 0.1);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.redemption-item:hover {
+    border-color: rgba(76, 175, 80, 0.5);
+    background: rgba(76, 175, 80, 0.15);
+}
+
+.redemption-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.redemption-cost {
+    font-size: 12px;
+    font-weight: 700;
+    color: #4CAF50;
+    margin-bottom: 4px;
+}
+
+.redemption-desc {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
 .sponsor-benefits {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1904,25 +1969,40 @@ html, body {
 .cta-text {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     line-height: 1.4;
+    text-align: center;
+}
+
+.sponsor-actions {
+    display: flex;
+    gap: 8px;
 }
 
 .sponsor-cta-btn {
-    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+    flex: 1;
     border: none;
     color: white;
-    padding: 14px 24px;
+    padding: 12px 16px;
     border-radius: 12px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    width: 100%;
+    gap: 6px;
+    min-height: 48px;
+}
+
+.sponsor-cta-btn.primary {
+    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+}
+
+.sponsor-cta-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .sponsor-cta-btn:active {
