@@ -1,5 +1,5 @@
-// Vault Phoenix AR Crypto Gaming - OPTIMIZED JAVASCRIPT
-// IMPROVED MOBILE INTERACTIONS, AR TOKEN FILTERING, SPONSOR MODAL, VAULT SCROLLING
+// Vault Phoenix AR Crypto Gaming - FIXED JAVASCRIPT
+// FOCUSED ON: MAP TOKEN BEHAVIOR, AR FILTERING, NEARBY SLIDER, LEARN MORE BUTTON
 
 console.log('🔥💎 Vault Phoenix Game Loading...');
 
@@ -38,8 +38,8 @@ if (window.isVaultPhoenixGame) {
             this.currentSponsorToken = null;
             this.showingCollectionActions = false;
             
-            // IMPROVED: Specific token targeting for AR
-            this.targetedTokenForAR = null; // NEW: When clicking from map/slider, only show this token in AR
+            // FIXED: Specific token targeting for AR
+            this.targetedTokenForAR = null; // When clicking from map/slider, only show this token in AR
             
             // Map state
             this.mapScale = 1.5;
@@ -418,8 +418,8 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== SCREEN MANAGEMENT ===================
-        switchScreen(screen) {
+        // =================== FIXED SCREEN MANAGEMENT ===================
+        switchScreen(screen, targetTokenId = null) {
             console.log('🔄 Switching to screen:', screen);
             
             this.currentScreen = screen;
@@ -427,9 +427,17 @@ if (window.isVaultPhoenixGame) {
             // Always collapse module when switching screens
             this.collapseModule();
             
-            // IMPROVED: Clear targeted token when manually switching to AR
+            // FIXED: Handle AR token targeting based on how AR was accessed
             if (screen === 'ar') {
-                this.targetedTokenForAR = null;
+                if (targetTokenId) {
+                    // Accessed from map or nearby slider - show only this token
+                    this.targetedTokenForAR = targetTokenId;
+                    console.log('🎯 AR accessed from map/slider - targeting token:', targetTokenId);
+                } else {
+                    // Accessed directly from navigation - show all available tokens
+                    this.targetedTokenForAR = null;
+                    console.log('🎯 AR accessed directly - showing all available tokens');
+                }
             }
             
             // Hide all screens
@@ -615,6 +623,7 @@ if (window.isVaultPhoenixGame) {
             if (navigator.vibrate) navigator.vibrate([30, 10, 30]);
         }
 
+        // =================== FIXED MAP TOKEN BEHAVIOR ===================
         updateMapTokens() {
             console.log('💎 Updating map tokens...');
             
@@ -649,7 +658,7 @@ if (window.isVaultPhoenixGame) {
 
                 coin.appendChild(coinImg);
 
-                // FIXED: Shortened location label to prevent overlap
+                // Location label
                 const label = document.createElement('div');
                 label.className = 'token-label';
                 const shortLocation = token.location.length > 10 ? 
@@ -659,7 +668,7 @@ if (window.isVaultPhoenixGame) {
                 marker.appendChild(coin);
                 marker.appendChild(label);
 
-                // IMPROVED: Enhanced click handler for mobile with proper token routing
+                // FIXED: Enhanced click handler for different token types
                 const handleTokenClick = (e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -669,15 +678,22 @@ if (window.isVaultPhoenixGame) {
                         marker.style.transform = 'translate(-50%, -50%) scale(1)';
                     }, 200);
                     
-                    // IMPROVED: Show navigation modal for ALL tokens from map
-                    this.showNavigationModal(token);
+                    if (token.collectable) {
+                        // COLLECTABLE TOKEN: Go directly to AR with this token only
+                        console.log('🎯 Collectable token tapped - going to AR with token:', token.location);
+                        this.switchScreen('ar', token.id);
+                    } else {
+                        // DISTANT TOKEN: Show navigation modal
+                        console.log('🗺️ Distant token tapped - showing navigation modal');
+                        this.showNavigationModal(token);
+                    }
                     
                     if (navigator.vibrate) {
                         navigator.vibrate([50, 20, 50]);
                     }
                 };
 
-                // IMPROVED: Better mobile tap handling
+                // Better mobile tap handling
                 marker.addEventListener('click', handleTokenClick, { passive: false });
                 marker.addEventListener('touchend', handleTokenClick, { passive: false });
 
@@ -751,7 +767,7 @@ if (window.isVaultPhoenixGame) {
 
             let tokensToShow = [];
 
-            // IMPROVED: If we have a targeted token (from map/slider), show only that token
+            // FIXED: If we have a targeted token (from map/slider), show only that token
             if (this.targetedTokenForAR) {
                 const targetToken = this.emberTokens.find(t => t.id === this.targetedTokenForAR);
                 if (targetToken && !this.isTokenCollected(targetToken.id) && targetToken.collectable) {
@@ -1112,7 +1128,7 @@ if (window.isVaultPhoenixGame) {
             if (mode === 'ar') {
                 // IMPROVED: Set targeted token for AR and switch to AR mode
                 this.targetedTokenForAR = token.id;
-                this.switchScreen('ar');
+                this.switchScreen('ar', token.id);
                 this.hideNavigationModal();
                 console.log('🎯 Targeting token for AR:', token.location);
                 return;
@@ -1211,7 +1227,7 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== NEARBY TOKENS SLIDER (OPTIMIZED) ===================
+        // =================== FIXED NEARBY TOKENS SLIDER ===================
         updateNearbyTokens() {
             console.log('🔍 Updating nearby tokens...');
             
@@ -1273,7 +1289,7 @@ if (window.isVaultPhoenixGame) {
                         </div>
                     `).join('');
 
-                    // Add click handlers
+                    // FIXED: Add click handlers for ember tokens nearby
                     tokensList.querySelectorAll('.token-location-item').forEach(item => {
                         const handleClick = (e) => {
                             e.preventDefault();
@@ -1287,9 +1303,11 @@ if (window.isVaultPhoenixGame) {
                                     item.style.transform = '';
                                 }, 200);
                                 
-                                // IMPROVED: Set targeted token and show navigation modal
-                                this.targetedTokenForAR = token.id;
-                                this.showNavigationModal(token);
+                                // FIXED: Go directly to AR with only this token (same as map behavior)
+                                console.log('🎯 Nearby token tapped - going to AR with token:', token.location);
+                                this.switchScreen('ar', token.id);
+                                this.collapseModule(); // Close the slider
+                                
                                 if (navigator.vibrate) navigator.vibrate([40, 15, 40]);
                             }
                         };
@@ -1533,7 +1551,7 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== EVENT LISTENERS ===================
+        // =================== FIXED EVENT LISTENERS ===================
         setupEventListeners() {
             console.log('🎧 Setting up event listeners...');
             
@@ -1543,7 +1561,7 @@ if (window.isVaultPhoenixGame) {
                     e.preventDefault();
                     const mode = tab.dataset.mode;
                     if (mode) {
-                        this.switchScreen(mode);
+                        this.switchScreen(mode); // No targetTokenId - show all tokens if AR
                     }
                 });
             });
@@ -1554,7 +1572,7 @@ if (window.isVaultPhoenixGame) {
                     e.preventDefault();
                     const mode = item.dataset.mode;
                     if (mode) {
-                        this.switchScreen(mode);
+                        this.switchScreen(mode); // No targetTokenId - show all tokens if AR
                         this.hideMenu();
                     }
                 });
@@ -1620,13 +1638,19 @@ if (window.isVaultPhoenixGame) {
                 });
             }
             
-            // FIXED: Learn More button functionality
+            // FIXED: Learn More button functionality with debugging
             if (learnMoreBtn) {
                 learnMoreBtn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    console.log('🏢 Learn More button clicked');
                     if (this.currentDiscoveredToken) {
+                        console.log('🏢 Opening sponsor modal for:', this.currentDiscoveredToken.sponsor);
                         this.hideTokenModal();
-                        this.showSponsorModal(this.currentDiscoveredToken);
+                        setTimeout(() => {
+                            this.showSponsorModal(this.currentDiscoveredToken);
+                        }, 100);
+                    } else {
+                        console.error('❌ No current discovered token for Learn More');
                     }
                 });
             }
@@ -1639,13 +1663,19 @@ if (window.isVaultPhoenixGame) {
                 });
             }
             
-            // FIXED: Learn More After button functionality
+            // FIXED: Learn More After button functionality with debugging
             if (learnMoreAfterBtn) {
                 learnMoreAfterBtn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    console.log('🏢 Learn More After button clicked');
                     if (this.currentDiscoveredToken) {
+                        console.log('🏢 Opening sponsor modal for:', this.currentDiscoveredToken.sponsor);
                         this.hideTokenModal();
-                        this.showSponsorModal(this.currentDiscoveredToken);
+                        setTimeout(() => {
+                            this.showSponsorModal(this.currentDiscoveredToken);
+                        }, 100);
+                    } else {
+                        console.error('❌ No current discovered token for Learn More After');
                     }
                 });
             }
