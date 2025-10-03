@@ -202,7 +202,7 @@ body.crypto-dashboard-page {
 }
 
 .crypto-dashboard-page[data-mode="vault"] .google-map-container,
-.crypto-dashboard-page[data-mode="campaigns"] .google-map-container {
+.crypto-dashboard-page[data-mode="rewards"] .google-map-container {
     display: none !important;
 }
 
@@ -1347,9 +1347,8 @@ body.crypto-dashboard-page {
     text-shadow: 0 1px 2px rgba(240, 165, 0, 0.4);
 }
 
-/* =================== VAULT AND CAMPAIGNS VIEWS - COMPLETE RESTORATION =================== */
-.crypto-dashboard-page .vault-view,
-.crypto-dashboard-page .campaigns-view {
+/* =================== VAULT VIEW STYLES (MAINTAINED) =================== */
+.crypto-dashboard-page .vault-view {
     position: fixed;
     top: 0;
     left: 0;
@@ -1363,15 +1362,13 @@ body.crypto-dashboard-page {
     -webkit-overflow-scrolling: touch;
 }
 
-.crypto-dashboard-page .vault-container,
-.crypto-dashboard-page .campaigns-container {
+.crypto-dashboard-page .vault-container {
     padding: 0 16px;
     max-width: 600px;
     margin: 0 auto;
 }
 
-.crypto-dashboard-page .vault-header,
-.crypto-dashboard-page .campaigns-header {
+.crypto-dashboard-page .vault-header {
     text-align: center;
     margin-bottom: 24px;
     padding: 24px;
@@ -1382,8 +1379,7 @@ body.crypto-dashboard-page {
     overflow: hidden;
 }
 
-.crypto-dashboard-page .vault-title,
-.crypto-dashboard-page .campaigns-title {
+.crypto-dashboard-page .vault-title {
     font-size: 24px;
     font-weight: 800;
     color: white;
@@ -1397,8 +1393,7 @@ body.crypto-dashboard-page {
     gap: 12px;
 }
 
-.crypto-dashboard-page .vault-title-icon,
-.crypto-dashboard-page .campaigns-title-icon {
+.crypto-dashboard-page .vault-title-icon {
     width: 48px;
     height: 48px;
     display: flex;
@@ -1410,8 +1405,7 @@ body.crypto-dashboard-page {
     flex-shrink: 0;
 }
 
-.crypto-dashboard-page .vault-icon-image,
-.crypto-dashboard-page .campaigns-icon-image {
+.crypto-dashboard-page .vault-icon-image {
     width: 32px;
     height: 32px;
     object-fit: contain;
@@ -1433,13 +1427,6 @@ body.crypto-dashboard-page {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 600;
-}
-
-.crypto-dashboard-page .campaigns-subtitle {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 14px;
-    font-weight: 500;
-    margin-top: 8px;
 }
 
 /* Vault Actions */
@@ -1626,9 +1613,554 @@ body.crypto-dashboard-page {
     flex-shrink: 0;
 }
 
-/* =================== CAMPAIGNS/ADVENTURES VIEW =================== */
-.crypto-dashboard-page .active-adventures {
+/* =================== NEW: CHALLENGES & REWARDS HUB STYLES =================== */
+.crypto-dashboard-page .rewards-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 160;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
+    display: none;
+    overflow-y: auto;
+    padding: calc(env(safe-area-inset-top, 8px) + 72px) 0 calc(env(safe-area-inset-bottom, 12px) + 84px) 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.crypto-dashboard-page .rewards-container {
+    padding: 0 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.crypto-dashboard-page .rewards-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.15), rgba(156, 39, 176, 0.1));
+    border-radius: 20px;
+    border: 2px solid rgba(33, 150, 243, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.crypto-dashboard-page .rewards-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.crypto-dashboard-page .rewards-title-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.2), rgba(156, 39, 176, 0.15));
+    border: 2px solid rgba(33, 150, 243, 0.4);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.crypto-dashboard-page .rewards-icon {
+    font-size: 28px;
+    filter: brightness(1.2);
+}
+
+.crypto-dashboard-page .rewards-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 8px;
+    line-height: 1.4;
+}
+
+/* Challenges Sections */
+.crypto-dashboard-page .challenges-section {
     margin-bottom: 32px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(240, 165, 0, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.crypto-dashboard-page .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.crypto-dashboard-page .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.crypto-dashboard-page .section-icon {
+    font-size: 20px;
+}
+
+.crypto-dashboard-page .section-timer {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(240, 165, 0, 0.1);
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+.crypto-dashboard-page .section-badge {
+    color: #4CAF50;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(76, 175, 80, 0.1);
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.crypto-dashboard-page .section-count {
+    color: #f0a500;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(240, 165, 0, 0.1);
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+/* Challenge Cards */
+.crypto-dashboard-page .challenges-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.crypto-dashboard-page .challenge-card {
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.1), rgba(251, 146, 60, 0.05));
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.crypto-dashboard-page .challenge-card:active {
+    transform: scale(0.98);
+    border-color: rgba(240, 165, 0, 0.5);
+    box-shadow: 0 4px 16px rgba(240, 165, 0, 0.3);
+}
+
+.crypto-dashboard-page .challenge-card.daily-challenge {
+    border-color: rgba(33, 150, 243, 0.4);
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(156, 39, 176, 0.05));
+}
+
+.crypto-dashboard-page .challenge-card.location-challenge {
+    border-color: rgba(76, 175, 80, 0.4);
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(129, 199, 132, 0.05));
+}
+
+.crypto-dashboard-page .challenge-card.weekly-challenge {
+    border-color: rgba(255, 152, 0, 0.4);
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(255, 193, 7, 0.05));
+}
+
+.crypto-dashboard-page .challenge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.crypto-dashboard-page .challenge-icon {
+    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    background: rgba(240, 165, 0, 0.15);
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.crypto-dashboard-page .challenge-progress {
+    text-align: right;
+    min-width: 80px;
+}
+
+.crypto-dashboard-page .progress-bar {
+    width: 80px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+    margin-left: auto;
+}
+
+.crypto-dashboard-page .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #66BB6A);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.crypto-dashboard-page .progress-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.crypto-dashboard-page .challenge-info {
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.crypto-dashboard-page .challenge-title {
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.crypto-dashboard-page .challenge-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.crypto-dashboard-page .challenge-reward {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #f0a500;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.crypto-dashboard-page .reward-icon {
+    font-size: 16px;
+}
+
+/* Challenge Sponsor Section */
+.crypto-dashboard-page .challenge-sponsor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.crypto-dashboard-page .sponsor-logo {
+    width: 40px;
+    height: 40px;
+    background: rgba(240, 165, 0, 0.15);
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.crypto-dashboard-page .sponsor-name {
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Challenge Actions */
+.crypto-dashboard-page .challenge-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.crypto-dashboard-page .challenge-navigate-btn,
+.crypto-dashboard-page .challenge-qr-btn,
+.crypto-dashboard-page .challenge-digital-btn,
+.crypto-dashboard-page .challenge-claim-btn {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.crypto-dashboard-page .challenge-navigate-btn {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    color: white;
+}
+
+.crypto-dashboard-page .challenge-qr-btn {
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: white;
+}
+
+.crypto-dashboard-page .challenge-digital-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.crypto-dashboard-page .challenge-claim-btn {
+    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+    color: white;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.crypto-dashboard-page .challenge-navigate-btn:active,
+.crypto-dashboard-page .challenge-qr-btn:active,
+.crypto-dashboard-page .challenge-digital-btn:active,
+.crypto-dashboard-page .challenge-claim-btn:active {
+    transform: scale(0.95);
+}
+
+/* Rewards Earned Section */
+.crypto-dashboard-page .rewards-earned-section {
+    margin-bottom: 32px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.crypto-dashboard-page .rewards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.crypto-dashboard-page .reward-item {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(129, 199, 132, 0.05));
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.crypto-dashboard-page .reward-item.claimed {
+    opacity: 0.7;
+    background: linear-gradient(135deg, rgba(96, 125, 139, 0.1), rgba(120, 144, 156, 0.05));
+    border-color: rgba(96, 125, 139, 0.3);
+}
+
+.crypto-dashboard-page .reward-item .reward-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(76, 175, 80, 0.15);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.crypto-dashboard-page .reward-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.crypto-dashboard-page .reward-title {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.crypto-dashboard-page .reward-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.crypto-dashboard-page .reward-value {
+    color: #4CAF50;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.crypto-dashboard-page .reward-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    min-width: 120px;
+}
+
+.crypto-dashboard-page .reward-qr-btn,
+.crypto-dashboard-page .reward-digital-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.crypto-dashboard-page .reward-qr-btn {
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: white;
+}
+
+.crypto-dashboard-page .reward-digital-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.crypto-dashboard-page .reward-qr-btn:active,
+.crypto-dashboard-page .reward-digital-btn:active {
+    transform: scale(0.95);
+}
+
+.crypto-dashboard-page .reward-status {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 10px;
+    font-weight: 600;
+    text-align: right;
+}
+
+/* =================== ADVENTURES OVERLAY MODULE =================== */
+.crypto-dashboard-page .adventures-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    z-index: 250;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.crypto-dashboard-page .adventures-overlay.show {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+.crypto-dashboard-page .adventures-overlay-content {
+    background: linear-gradient(135deg, rgba(12, 12, 12, 0.98), rgba(20, 20, 20, 0.98));
+    backdrop-filter: blur(30px);
+    border: 2px solid rgba(240, 165, 0, 0.5);
+    border-radius: 20px;
+    padding: 24px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: white;
+    -webkit-overflow-scrolling: touch;
+}
+
+.crypto-dashboard-page .adventures-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.crypto-dashboard-page .adventures-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #f0a500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.crypto-dashboard-page .adventures-icon {
+    font-size: 24px;
+}
+
+.crypto-dashboard-page .adventures-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crypto-dashboard-page .adventures-close:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.crypto-dashboard-page .adventures-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .crypto-dashboard-page .adventure-card {
@@ -1636,7 +2168,6 @@ body.crypto-dashboard-page {
     border: 2px solid rgba(240, 165, 0, 0.3);
     border-radius: 16px;
     padding: 20px;
-    margin-bottom: 16px;
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -1709,7 +2240,7 @@ body.crypto-dashboard-page {
     margin-bottom: 12px;
 }
 
-.crypto-dashboard-page .progress-bar {
+.crypto-dashboard-page .adventure-progress .progress-bar {
     width: 100%;
     height: 6px;
     background: rgba(255, 255, 255, 0.2);
@@ -1718,14 +2249,14 @@ body.crypto-dashboard-page {
     margin-bottom: 8px;
 }
 
-.crypto-dashboard-page .progress-fill {
+.crypto-dashboard-page .adventure-progress .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, #4CAF50, #66BB6A);
     border-radius: 3px;
     transition: width 0.3s ease;
 }
 
-.crypto-dashboard-page .progress-text {
+.crypto-dashboard-page .adventure-progress .progress-text {
     color: rgba(255, 255, 255, 0.8);
     font-size: 11px;
     font-weight: 600;
@@ -1735,6 +2266,7 @@ body.crypto-dashboard-page {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    margin-bottom: 16px;
 }
 
 .crypto-dashboard-page .reward-badge {
@@ -1764,7 +2296,7 @@ body.crypto-dashboard-page {
     font-weight: 500;
 }
 
-.crypto-dashboard-page .adventure-start-btn {
+.crypto-dashboard-page .adventure-select-btn {
     width: 100%;
     background: linear-gradient(135deg, #f0a500, #fb923c);
     border: none;
@@ -1777,49 +2309,8 @@ body.crypto-dashboard-page {
     transition: all 0.3s ease;
 }
 
-.crypto-dashboard-page .adventure-start-btn:active {
+.crypto-dashboard-page .adventure-select-btn:active {
     transform: scale(0.98);
-}
-
-/* Adventure Map Preview */
-.crypto-dashboard-page .adventure-map-preview {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(240, 165, 0, 0.2);
-    border-radius: 16px;
-    padding: 20px;
-}
-
-.crypto-dashboard-page .map-preview-title {
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    text-align: center;
-}
-
-.crypto-dashboard-page .adventure-mini-map {
-    height: 120px;
-    background: rgba(240, 165, 0, 0.1);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.crypto-dashboard-page .map-placeholder {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.crypto-dashboard-page .map-icon {
-    font-size: 32px;
-    margin-bottom: 8px;
-}
-
-.crypto-dashboard-page .map-text {
-    font-size: 12px;
-    font-weight: 600;
 }
 
 /* =================== MODALS AND OVERLAYS =================== */
@@ -2655,7 +3146,15 @@ body.crypto-dashboard-page {
 .crypto-dashboard-page .menu-item,
 .crypto-dashboard-page .adventure-card,
 .crypto-dashboard-page .vault-action-btn,
-.crypto-dashboard-page .filter-btn {
+.crypto-dashboard-page .filter-btn,
+.crypto-dashboard-page .challenge-card,
+.crypto-dashboard-page .challenge-navigate-btn,
+.crypto-dashboard-page .challenge-qr-btn,
+.crypto-dashboard-page .challenge-digital-btn,
+.crypto-dashboard-page .challenge-claim-btn,
+.crypto-dashboard-page .reward-qr-btn,
+.crypto-dashboard-page .reward-digital-btn,
+.crypto-dashboard-page .adventure-select-btn {
     pointer-events: auto !important;
     touch-action: manipulation !important;
     -webkit-tap-highlight-color: transparent !important;
