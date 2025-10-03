@@ -48,6 +48,11 @@ if (window.isVaultPhoenixDashboard) {
             this.currentDiscoveredToken = null;
             this.isShowingSponsorDetails = false;
             
+            // AIRDROP SYSTEM
+            this.airdropTimer = null;
+            this.airdropShown = false;
+            this.pendingAirdropValue = 0;
+            
             // MAP DRAGGING PROPERTIES
             this.mapIsDragging = false;
             this.mapStartX = 0;
@@ -106,6 +111,9 @@ if (window.isVaultPhoenixDashboard) {
                 // Update nearest token for airdrop detection
                 this.updateNearestToken();
                 
+                // START AIRDROP TIMER - Show after 5-7 seconds randomly
+                this.startAirdropTimer();
+                
                 console.log('✅ Dashboard initialized successfully');
             } catch (error) {
                 console.error('❌ Dashboard initialization error:', error);
@@ -135,7 +143,23 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // =================== FIXED AIRDROP SYSTEM ===================
+        // =================== ENHANCED AIRDROP SYSTEM ===================
+        startAirdropTimer() {
+            // Clear any existing timer
+            if (this.airdropTimer) {
+                clearTimeout(this.airdropTimer);
+            }
+            
+            // Show airdrop after random 5-7 seconds on non-hunt screens
+            const delay = (5 + Math.random() * 2) * 1000; // 5-7 seconds
+            
+            this.airdropTimer = setTimeout(() => {
+                this.updateNearestToken();
+            }, delay);
+            
+            console.log(`🪂 Airdrop timer set for ${Math.round(delay/1000)} seconds`);
+        }
+
         updateNearestToken() {
             const availableTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
             if (availableTokens.length === 0) return;
@@ -156,24 +180,30 @@ if (window.isVaultPhoenixDashboard) {
 
             this.nearestToken = nearest;
             
-            // Show airdrop notification for non-hunt screens with random chance
-            if (this.currentMode !== 'map' && this.currentMode !== 'ar' && Math.random() < 0.15) {
+            // Show airdrop notification for non-hunt screens with chance
+            if (!this.airdropShown && (this.currentMode === 'vault' || this.currentMode === 'campaigns') && Math.random() < 0.8) {
                 this.showAirdropNotification();
             } else if (this.currentMode === 'map' || this.currentMode === 'ar') {
                 this.hideAirdropNotification();
+                this.airdropShown = false; // Reset for next non-hunt screen
             }
         }
 
         showAirdropNotification() {
+            if (this.airdropShown) return;
+            
             const notification = document.getElementById('airdropNotification');
             if (!notification || notification.classList.contains('show')) return;
 
+            console.log('🪂 Showing airdrop notification');
+            
             // Random airdrop values
             const airdropValues = [100, 250, 500, 750, 1000];
             const randomValue = airdropValues[Math.floor(Math.random() * airdropValues.length)];
 
             // Store airdrop value for claiming
             this.pendingAirdropValue = randomValue;
+            this.airdropShown = true;
 
             // Update notification content for airdrop
             const title = notification.querySelector('.airdrop-title');
@@ -194,10 +224,15 @@ if (window.isVaultPhoenixDashboard) {
 
             notification.classList.add('show');
             
-            // Auto-hide after 12 seconds
+            // Haptic feedback
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
+            // Auto-hide after 15 seconds
             setTimeout(() => {
                 this.hideAirdropNotification();
-            }, 12000);
+            }, 15000);
         }
 
         hideAirdropNotification() {
@@ -228,6 +263,12 @@ if (window.isVaultPhoenixDashboard) {
             
             // Show success message
             this.showAirdropSuccess(value);
+            
+            // Reset airdrop timer for next opportunity
+            setTimeout(() => {
+                this.airdropShown = false;
+                this.startAirdropTimer();
+            }, 30000); // 30 seconds before next airdrop opportunity
         }
 
         showAirdropSuccess(value) {
@@ -249,6 +290,7 @@ if (window.isVaultPhoenixDashboard) {
                 touch-action: none;
                 user-select: none;
                 border: 3px solid rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(20px);
             `;
             success.innerHTML = `
                 <div style="font-size: 48px; margin-bottom: 16px;">🪂</div>
@@ -902,8 +944,7 @@ if (window.isVaultPhoenixDashboard) {
 
                 // Update handle counts with better text
                 const nearbyCountElements = [
-                    'nearbyTokenCount', 'nearbyTokenCountVault', 
-                    'nearbyTokenCountCampaigns'
+                    'nearbyTokenCount'
                 ];
                 
                 nearbyCountElements.forEach(id => {
@@ -1075,7 +1116,7 @@ if (window.isVaultPhoenixDashboard) {
             console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
         }
 
-        // =================== AR MODE ===================
+        // =================== MODE SWITCHING - FIXED FOR ALL SCREENS ===================
         switchMode(mode) {
             console.log('🔄 Switching to mode:', mode);
             try {
@@ -1094,36 +1135,47 @@ if (window.isVaultPhoenixDashboard) {
                     if (view) view.style.display = 'none';
                 });
                 
-                // Show appropriate view
+                // Show appropriate view and ensure token module is visible
                 switch (mode) {
                     case 'map':
                         const mapView = document.getElementById('map');
                         if (mapView) mapView.style.display = 'block';
                         this.hideAirdropNotification();
                         this.stopARMode();
+                        this.showTokenModule();
                         break;
                     case 'vault':
                         const vaultView = document.getElementById('vaultView');
                         if (vaultView) vaultView.style.display = 'block';
                         this.updateVaultStats();
                         this.stopARMode();
+                        this.showTokenModule();
                         break;
                     case 'campaigns':
                         const campaignsView = document.getElementById('campaignsView');
                         if (campaignsView) campaignsView.style.display = 'block';
                         this.stopARMode();
+                        this.showTokenModule();
                         break;
                     case 'ar':
                         const mapViewAR = document.getElementById('map');
                         if (mapViewAR) mapViewAR.style.display = 'block';
                         this.startARMode();
                         this.hideAirdropNotification();
+                        this.showTokenModule();
                         break;
                 }
                 
                 console.log('✅ Mode switched to:', mode);
             } catch (error) {
                 console.error('❌ Mode switch error:', error);
+            }
+        }
+
+        showTokenModule() {
+            const tokenModule = document.getElementById('tokenLocationsModule');
+            if (tokenModule) {
+                tokenModule.style.display = 'block';
             }
         }
 
@@ -1149,6 +1201,7 @@ if (window.isVaultPhoenixDashboard) {
             if (activeItem) activeItem.classList.add('active');
         }
 
+        // =================== AR MODE ===================
         async startARMode() {
             console.log('📱 Starting AR Mode with camera access...');
             try {
@@ -1237,7 +1290,7 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // =================== RESTORED TOKEN DISCOVERY MODAL ===================
+        // =================== TOKEN DISCOVERY MODAL ===================
         showTokenDiscovery(token) {
             try {
                 const elements = {
@@ -1395,6 +1448,7 @@ if (window.isVaultPhoenixDashboard) {
                 touch-action: none;
                 user-select: none;
                 border: 3px solid rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(20px);
             `;
             success.innerHTML = `
                 <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
@@ -1594,79 +1648,70 @@ if (window.isVaultPhoenixDashboard) {
         setupSwipeableModule() {
             console.log('👆 Setting up enhanced swipeable module...');
             try {
-                // Setup for all module instances
-                const moduleIds = [
-                    'swipeHandle', 'swipeHandleVault', 'swipeHandleCampaigns'
-                ];
+                const handle = document.getElementById('swipeHandle');
+                if (!handle) return;
                 
-                moduleIds.forEach(handleId => {
-                    const handle = document.getElementById(handleId);
-                    if (!handle) return;
+                let startY = 0;
+                let currentY = 0;
+                let isDragging = false;
+
+                const handleTouchStart = (e) => {
+                    isDragging = true;
+                    startY = e.touches ? e.touches[0].clientY : e.clientY;
+                    currentY = startY;
+                    e.preventDefault();
+                };
+
+                const handleTouchMove = (e) => {
+                    if (!isDragging) return;
                     
-                    let startY = 0;
-                    let currentY = 0;
-                    let isDragging = false;
+                    currentY = e.touches ? e.touches[0].clientY : e.clientY;
+                    const deltaY = startY - currentY;
+                    
+                    // Visual feedback during drag
+                    const module = document.getElementById('tokenLocationsModule');
+                    if (module && Math.abs(deltaY) > 10) {
+                        const progress = Math.min(Math.abs(deltaY) / 100, 1);
+                        module.style.opacity = 0.8 + (progress * 0.2);
+                    }
+                    
+                    e.preventDefault();
+                };
 
-                    const handleTouchStart = (e) => {
-                        isDragging = true;
-                        startY = e.touches ? e.touches[0].clientY : e.clientY;
-                        currentY = startY;
-                        e.preventDefault();
-                    };
-
-                    const handleTouchMove = (e) => {
-                        if (!isDragging) return;
-                        
-                        currentY = e.touches ? e.touches[0].clientY : e.clientY;
-                        const deltaY = startY - currentY;
-                        
-                        // Visual feedback during drag
-                        const moduleId = handleId.replace('swipeHandle', 'tokenLocationsModule') || 'tokenLocationsModule';
-                        const module = document.getElementById(moduleId);
-                        if (module && Math.abs(deltaY) > 10) {
-                            const progress = Math.min(Math.abs(deltaY) / 100, 1);
-                            module.style.opacity = 0.8 + (progress * 0.2);
-                        }
-                        
-                        e.preventDefault();
-                    };
-
-                    const handleTouchEnd = (e) => {
-                        if (!isDragging) return;
-                        isDragging = false;
-                        
-                        const deltaY = startY - currentY;
-                        const threshold = 60;
-                        
-                        if (Math.abs(deltaY) > threshold) {
-                            if (deltaY > 0) {
-                                this.expandModule(handleId);
-                            } else {
-                                this.collapseModule(handleId);
-                            }
+                const handleTouchEnd = (e) => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    
+                    const deltaY = startY - currentY;
+                    const threshold = 60;
+                    
+                    if (Math.abs(deltaY) > threshold) {
+                        if (deltaY > 0) {
+                            this.expandModule();
                         } else {
-                            this.toggleModule(handleId);
+                            this.collapseModule();
                         }
-                        
-                        // Reset opacity
-                        const moduleId = handleId.replace('swipeHandle', 'tokenLocationsModule') || 'tokenLocationsModule';
-                        const module = document.getElementById(moduleId);
-                        if (module) {
-                            module.style.opacity = '';
-                        }
-                        
-                        e.preventDefault();
-                    };
+                    } else {
+                        this.toggleModule();
+                    }
+                    
+                    // Reset opacity
+                    const module = document.getElementById('tokenLocationsModule');
+                    if (module) {
+                        module.style.opacity = '';
+                    }
+                    
+                    e.preventDefault();
+                };
 
-                    // Add event listeners
-                    handle.addEventListener('touchstart', handleTouchStart, { passive: false });
-                    handle.addEventListener('touchmove', handleTouchMove, { passive: false });
-                    handle.addEventListener('touchend', handleTouchEnd, { passive: false });
-                    handle.addEventListener('mousedown', handleTouchStart, { passive: false });
-                    handle.addEventListener('mousemove', handleTouchMove, { passive: false });
-                    handle.addEventListener('mouseup', handleTouchEnd, { passive: false });
-                    handle.addEventListener('click', () => this.toggleModule(handleId), { passive: false });
-                });
+                // Add event listeners
+                handle.addEventListener('touchstart', handleTouchStart, { passive: false });
+                handle.addEventListener('touchmove', handleTouchMove, { passive: false });
+                handle.addEventListener('touchend', handleTouchEnd, { passive: false });
+                handle.addEventListener('mousedown', handleTouchStart, { passive: false });
+                handle.addEventListener('mousemove', handleTouchMove, { passive: false });
+                handle.addEventListener('mouseup', handleTouchEnd, { passive: false });
+                handle.addEventListener('click', () => this.toggleModule(), { passive: false });
                 
                 console.log('✅ Enhanced swipeable module setup complete');
             } catch (error) {
@@ -1674,22 +1719,20 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        toggleModule(handleId) {
-            const moduleId = this.getModuleId(handleId);
-            const module = document.getElementById(moduleId);
+        toggleModule() {
+            const module = document.getElementById('tokenLocationsModule');
             
             if (module) {
                 if (module.classList.contains('expanded')) {
-                    this.collapseModule(handleId);
+                    this.collapseModule();
                 } else {
-                    this.expandModule(handleId);
+                    this.expandModule();
                 }
             }
         }
 
-        expandModule(handleId) {
-            const moduleId = this.getModuleId(handleId);
-            const module = document.getElementById(moduleId);
+        expandModule() {
+            const module = document.getElementById('tokenLocationsModule');
             
             if (module) {
                 module.classList.add('expanded');
@@ -1697,13 +1740,12 @@ if (window.isVaultPhoenixDashboard) {
                 this.moduleExpanded = true;
                 
                 if (navigator.vibrate) navigator.vibrate(40);
-                console.log('📱 Module expanded:', moduleId);
+                console.log('📱 Module expanded');
             }
         }
 
-        collapseModule(handleId) {
-            const moduleId = this.getModuleId(handleId);
-            const module = document.getElementById(moduleId);
+        collapseModule() {
+            const module = document.getElementById('tokenLocationsModule');
             
             if (module) {
                 module.classList.remove('expanded');
@@ -1711,17 +1753,8 @@ if (window.isVaultPhoenixDashboard) {
                 this.moduleExpanded = false;
                 
                 if (navigator.vibrate) navigator.vibrate(30);
-                console.log('📱 Module collapsed:', moduleId);
+                console.log('📱 Module collapsed');
             }
-        }
-
-        getModuleId(handleId) {
-            const mapping = {
-                'swipeHandle': 'tokenLocationsModule',
-                'swipeHandleVault': 'tokenLocationsModuleVault',
-                'swipeHandleCampaigns': 'tokenLocationsModuleCampaigns'
-            };
-            return mapping[handleId] || 'tokenLocationsModule';
         }
 
         // =================== RESET GAME ===================
@@ -1741,6 +1774,10 @@ if (window.isVaultPhoenixDashboard) {
                 setTimeout(() => {
                     this.addPhoenixTokenMarkers();
                 }, 500);
+                
+                // Reset airdrop system
+                this.airdropShown = false;
+                this.startAirdropTimer();
                 
                 console.log('✅ Game reset successfully');
                 
@@ -2010,12 +2047,20 @@ if (window.isVaultPhoenixDashboard) {
                     });
                 }
 
-                // Airdrop claim button - FIXED
-                const airdropClaimButton = document.getElementById('airdropClaimButton');
-                if (airdropClaimButton) {
-                    // This button's handler is set dynamically in showAirdropNotification
-                    // to ensure it captures the correct airdrop value
-                }
+                // Vault filters
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    addUniversalEventListener(btn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        // Update active filter
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        // Filter functionality would go here
+                        console.log('Filter selected:', btn.dataset.filter);
+                    });
+                });
 
                 // Mode switches when leaving AR
                 document.addEventListener('visibilitychange', () => {
