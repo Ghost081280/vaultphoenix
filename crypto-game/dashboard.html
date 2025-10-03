@@ -119,6 +119,8 @@
                 </button>
             </div>
         </div>
+        
+        <!-- Hunt Screen -->
         <div class="hunt-screen" id="huntScreen">
             <div class="map-container" id="mapContainer">
                 <div class="phoenix-map" id="phoenixMap">
@@ -232,11 +234,14 @@
                     </div>
                 </div>
                 
-                <div class="token-history" id="tokenHistory">
-                    <div class="history-placeholder">
-                        <div class="history-placeholder-icon">🗺️</div>
-                        <div class="history-placeholder-title">No Tokens Collected Yet</div>
-                        <div class="history-placeholder-text">Start exploring to find $Ember tokens!</div>
+                <div class="vault-receipts-section">
+                    <div class="vault-stats-title">Recent Activity</div>
+                    <div class="token-history" id="tokenHistory">
+                        <div class="history-placeholder">
+                            <div class="history-placeholder-icon">🗺️</div>
+                            <div class="history-placeholder-title">No Tokens Collected Yet</div>
+                            <div class="history-placeholder-text">Start exploring to find $Ember tokens!</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -254,18 +259,18 @@
                             <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
                             <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
                         </div>
-                        $Ember Tokens Nearby
+                        AR Ready Tokens
                     </span>
-                    <span class="handle-count" id="nearbyTokenCount">Explore locations</span>
+                    <span class="handle-count" id="nearbyTokenCount">Get closer</span>
                 </div>
             </div>
             <div class="module-content" id="moduleContent">
                 <div class="module-header">
                     <div class="module-title">
                         <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
-                        Token Locations
+                        Collectable Tokens
                     </div>
-                    <div class="total-available" id="totalAvailable">10 total available</div>
+                    <div class="total-available" id="totalAvailable">Ready for AR collection</div>
                 </div>
                 <div class="token-locations-list" id="tokenLocationsList">
                     <!-- Token locations will be populated by JavaScript -->
@@ -341,7 +346,7 @@
             </div>
         </div>
 
-        <!-- Sponsor Details Modal -->
+        <!-- Enhanced Sponsor Details Modal -->
         <div class="sponsor-modal" id="sponsorModal" style="display: none;">
             <div class="sponsor-modal-content">
                 <div class="sponsor-modal-header">
@@ -356,6 +361,14 @@
                     <div class="sponsor-name-large" id="sponsorNameLarge">Phoenix Plaza</div>
                     <div class="sponsor-description-large" id="sponsorDescriptionLarge">
                         Experience exclusive downtown Phoenix benefits and VIP access to premium services.
+                    </div>
+                    
+                    <!-- Redemption Options -->
+                    <div class="redemption-section">
+                        <div class="redemption-title">Redeem Your $Ember For:</div>
+                        <div class="redemption-grid" id="redemptionGrid">
+                            <!-- Redemption options will be populated by JavaScript -->
+                        </div>
                     </div>
                     
                     <div class="sponsor-benefits">
@@ -378,11 +391,17 @@
                     </div>
                     
                     <div class="sponsor-cta">
-                        <div class="cta-text">Visit location to redeem your $Ember tokens for exclusive benefits!</div>
-                        <button class="sponsor-cta-btn" id="sponsorNavigateBtn">
-                            <span>🗺️</span>
-                            <span>Get Directions</span>
-                        </button>
+                        <div class="cta-text">Visit our location to redeem your $Ember tokens for exclusive rewards and experiences!</div>
+                        <div class="sponsor-actions">
+                            <button class="sponsor-cta-btn primary" id="sponsorNavigateBtn">
+                                <span>🗺️</span>
+                                <span>Get Directions</span>
+                            </button>
+                            <button class="sponsor-cta-btn secondary" id="sponsorCallBtn">
+                                <span>📞</span>
+                                <span>Call Location</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -422,8 +441,8 @@
                     <div class="navigation-option ar-option" id="navAR" style="display: none;">
                         <div class="navigation-option-icon">📱</div>
                         <div class="navigation-option-text">
-                            <div class="navigation-option-title">AR View</div>
-                            <div class="navigation-option-time">Available</div>
+                            <div class="navigation-option-title">AR Collection</div>
+                            <div class="navigation-option-time">Available Now</div>
                         </div>
                     </div>
                 </div>
@@ -465,6 +484,8 @@
                 </div>
             </div>
         </div>
+        
+        <!-- QR Modal -->
         <div class="qr-modal" id="qrModal" style="display: none;">
             <div class="qr-modal-content">
                 <div class="qr-modal-header">
