@@ -21,14 +21,104 @@
                     </div>
                     <div class="nav-title">$Ember Hunt</div>
                 </div>
-                <div class="ember-count" id="vaultBadge">
-                    <img src="../images/VPEmberCoin.PNG" alt="Ember" class="ember-icon" onerror="this.textContent='💎'">
-                    <span class="ember-count-text" id="navEmberCount">0</span>
+                <div class="nav-actions">
+                    <div class="ember-count" id="vaultBadge">
+                        <img src="../images/VPEmberCoin.PNG" alt="Ember" class="ember-icon" onerror="this.textContent='💎'">
+                        <span class="ember-count-text" id="navEmberCount">0</span>
+                    </div>
+                    <button class="nav-menu-button" id="menuToggle">
+                        <span id="menuIcon">☰</span>
+                    </button>
                 </div>
             </div>
         </nav>
 
-        <!-- Hunt Screen (Map View) -->
+        <!-- Side Menu -->
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <div class="side-menu" id="sideMenu">
+            <div class="menu-header">
+                <div class="menu-user">
+                    <div class="menu-avatar">
+                        <img src="../images/VPLogoNoText.PNG" alt="Avatar" class="avatar-image" onerror="this.textContent='🔥'">
+                    </div>
+                    <div class="menu-user-info">
+                        <div class="menu-user-name">Phoenix Hunter</div>
+                        <div class="menu-user-email">demo@vaultphoenix.com</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="menu-content">
+                <div class="menu-section">
+                    <div class="menu-section-title">Gaming</div>
+                </div>
+                
+                <div class="menu-item active" data-mode="hunt" id="menuHunt">
+                    <div class="menu-item-icon">🗺️</div>
+                    <div class="menu-item-text">Token Hunt</div>
+                </div>
+                
+                <div class="menu-item" data-mode="ar" id="menuAR">
+                    <div class="menu-item-icon">📱</div>
+                    <div class="menu-item-text">AR Discovery</div>
+                    <div class="menu-item-badge" id="nearbyARTokens">Get closer</div>
+                </div>
+                
+                <div class="menu-item" data-mode="vault" id="menuVault">
+                    <div class="menu-item-icon">🔒</div>
+                    <div class="menu-item-text">$Ember Vault</div>
+                    <div class="menu-item-badge" id="menuEmberCount">0</div>
+                </div>
+                
+                <div class="menu-section">
+                    <div class="menu-section-title">Wallet</div>
+                </div>
+                
+                <div class="menu-item" id="coinbaseWallet">
+                    <div class="menu-item-icon">🏦</div>
+                    <div class="menu-item-text">Coinbase Wallet</div>
+                </div>
+                
+                <div class="menu-item" id="redeemTokens">
+                    <div class="menu-item-icon">📱</div>
+                    <div class="menu-item-text">Payment QR</div>
+                </div>
+                
+                <div class="menu-section">
+                    <div class="menu-section-title">Settings</div>
+                </div>
+                
+                <div class="menu-item reset-game-item" id="resetGameBtn">
+                    <div class="menu-item-icon">🔄</div>
+                    <div class="menu-item-text">Reset Game</div>
+                </div>
+            </div>
+            
+            <div class="logout-section">
+                <button class="logout-button" id="sideMenuLogout">
+                    <span>🚪</span>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Airdrop Notification -->
+        <div class="airdrop-notification" id="airdropNotification">
+            <div class="airdrop-content">
+                <div class="airdrop-header">
+                    <div class="airdrop-icon">🪂</div>
+                    <div class="airdrop-title">$Ember Air Drop!</div>
+                </div>
+                <div class="airdrop-body">
+                    <div class="airdrop-amount" id="airdropAmount">500 $Ember</div>
+                    <div class="airdrop-subtitle">Limited time bonus available</div>
+                </div>
+                <button class="airdrop-button" id="airdropClaimButton">
+                    <span class="airdrop-btn-icon">💎</span>
+                    <span>Claim Reward</span>
+                </button>
+            </div>
+        </div>
         <div class="hunt-screen" id="huntScreen">
             <div class="map-container" id="mapContainer">
                 <div class="phoenix-map" id="phoenixMap">
@@ -232,10 +322,68 @@
                         <span>💎</span>
                         <span>Collect $Ember</span>
                     </button>
-                    <button class="token-action-btn secondary" id="closeTokenBtn">
-                        <span>❌</span>
-                        <span>Close</span>
+                    <button class="token-action-btn secondary" id="learnMoreBtn">
+                        <span>ℹ️</span>
+                        <span>Learn More</span>
                     </button>
+                </div>
+                
+                <div class="token-collection-actions" style="display: none;" id="tokenCollectionActions">
+                    <button class="token-action-btn" id="backToHuntBtn">
+                        <span>🗺️</span>
+                        <span>Back to Hunt</span>
+                    </button>
+                    <button class="token-action-btn secondary" id="learnMoreAfterBtn">
+                        <span>ℹ️</span>
+                        <span>Learn More</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sponsor Details Modal -->
+        <div class="sponsor-modal" id="sponsorModal" style="display: none;">
+            <div class="sponsor-modal-content">
+                <div class="sponsor-modal-header">
+                    <div class="sponsor-modal-title" id="sponsorModalTitle">Partner Benefits</div>
+                    <button class="sponsor-close" id="sponsorClose">✕</button>
+                </div>
+                
+                <div class="sponsor-details">
+                    <div class="sponsor-logo-large">
+                        <div class="sponsor-logo-placeholder" id="sponsorLogoPlaceholder">🏢</div>
+                    </div>
+                    <div class="sponsor-name-large" id="sponsorNameLarge">Phoenix Plaza</div>
+                    <div class="sponsor-description-large" id="sponsorDescriptionLarge">
+                        Experience exclusive downtown Phoenix benefits and VIP access to premium services.
+                    </div>
+                    
+                    <div class="sponsor-benefits">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🎫</span>
+                            <span class="benefit-text">VIP Event Access</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🍽️</span>
+                            <span class="benefit-text">Dining Discounts</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🅿️</span>
+                            <span class="benefit-text">Priority Parking</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🛍️</span>
+                            <span class="benefit-text">Shopping Perks</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sponsor-cta">
+                        <div class="cta-text">Visit location to redeem your $Ember tokens for exclusive benefits!</div>
+                        <button class="sponsor-cta-btn" id="sponsorNavigateBtn">
+                            <span>🗺️</span>
+                            <span>Get Directions</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -284,7 +432,39 @@
             </div>
         </div>
 
-        <!-- QR Code Modal -->
+        <!-- Reset Game Confirmation Modal -->
+        <div class="reset-game-overlay" id="resetGameOverlay" style="display: none;">
+            <div class="reset-game-modal">
+                <div class="reset-game-modal-title">🔄 Reset Game Progress</div>
+                <div class="reset-game-modal-text">
+                    Are you sure you want to reset your game progress? This will:
+                    <br><br>
+                    • Clear all collected $Ember tokens<br>
+                    • Reset vault balance to $0.00<br>
+                    • Clear token history<br>
+                    <br>
+                    <strong>This action cannot be undone!</strong>
+                </div>
+                <div class="reset-game-modal-actions">
+                    <button class="reset-game-modal-btn reset-game-modal-cancel" id="cancelResetGame">Cancel</button>
+                    <button class="reset-game-modal-btn reset-game-modal-confirm" id="confirmResetGame">Reset Game</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout Confirmation -->
+        <div class="logout-overlay" id="logoutOverlay" style="display: none;">
+            <div class="logout-modal">
+                <div class="logout-modal-title">🚪 Sign Out</div>
+                <div class="logout-modal-text">
+                    Are you sure you want to sign out? Your $Ember tokens will be saved securely in your vault.
+                </div>
+                <div class="logout-modal-actions">
+                    <button class="logout-modal-btn logout-modal-cancel" id="cancelLogout">Cancel</button>
+                    <button class="logout-modal-btn logout-modal-confirm" id="confirmLogout">Sign Out</button>
+                </div>
+            </div>
+        </div>
         <div class="qr-modal" id="qrModal" style="display: none;">
             <div class="qr-modal-content">
                 <div class="qr-modal-header">
