@@ -47,6 +47,8 @@ if (window.isVaultPhoenixDashboard) {
             this.arCoinVisible = false;
             this.currentDiscoveredToken = null;
             this.isShowingSponsorDetails = false;
+            this.currentAdventure = 'phoenix-sports'; // Default active adventure
+            this.currentQRContext = null; // Track QR modal context
             
             // AIRDROP SYSTEM
             this.airdropTimer = null;
@@ -60,6 +62,121 @@ if (window.isVaultPhoenixDashboard) {
             this.mapTranslateX = 0;
             this.mapTranslateY = 0;
             this.mapScale = 1;
+
+            // CHALLENGES & REWARDS SYSTEM
+            this.challenges = {
+                daily: [
+                    {
+                        id: 'daily-1',
+                        title: 'Token Explorer',
+                        description: 'Collect 5 tokens in different locations',
+                        progress: 3,
+                        target: 5,
+                        reward: 250,
+                        type: 'collect',
+                        completed: false,
+                        icon: '🗺️'
+                    },
+                    {
+                        id: 'daily-2',
+                        title: 'AR Master',
+                        description: 'Use AR mode to collect 3 tokens',
+                        progress: 3,
+                        target: 3,
+                        reward: 150,
+                        type: 'ar_collect',
+                        completed: true,
+                        icon: '📱'
+                    }
+                ],
+                weekly: [
+                    {
+                        id: 'weekly-1',
+                        title: 'Phoenix Explorer',
+                        description: 'Visit 5 different Phoenix districts this week',
+                        progress: 2,
+                        target: 5,
+                        reward: 1000,
+                        type: 'locations',
+                        completed: false,
+                        icon: '🌟'
+                    },
+                    {
+                        id: 'weekly-2',
+                        title: 'Gaming Streak',
+                        description: 'Play 10 days consecutively',
+                        progress: 8,
+                        target: 10,
+                        reward: 'multiplier',
+                        type: 'streak',
+                        completed: false,
+                        icon: '🎮'
+                    }
+                ],
+                location: [
+                    {
+                        id: 'location-1',
+                        title: 'Arena VIP Experience',
+                        description: 'Visit Chase Field and collect special game day tokens',
+                        sponsor: 'Phoenix Suns Arena',
+                        sponsorLogo: '🏀',
+                        reward: 'VIP Game Tickets + 500 $Ember',
+                        rewardIcon: '🎫',
+                        location: 'chase-field',
+                        type: 'visit_location',
+                        completed: false,
+                        hasQR: true,
+                        hasDigital: false
+                    },
+                    {
+                        id: 'location-2',
+                        title: 'Foodie Adventure',
+                        description: 'Show QR code for 20% off your meal',
+                        sponsor: 'Local Pizza Co.',
+                        sponsorLogo: '🍕',
+                        reward: '20% Off + 100 $Ember',
+                        rewardIcon: '🍽️',
+                        type: 'merchant_discount',
+                        completed: false,
+                        hasQR: true,
+                        hasDigital: true,
+                        digitalUrl: 'https://localpizza.com/ember-deal'
+                    }
+                ]
+            };
+
+            this.earnedRewards = [
+                {
+                    id: 'reward-1',
+                    title: 'Free Coffee',
+                    description: 'Local Coffee Co. - Valid until Dec 31',
+                    value: '$5.00',
+                    icon: '🎫',
+                    status: 'claimed',
+                    type: 'qr',
+                    qrData: 'coffee-free'
+                },
+                {
+                    id: 'reward-2',
+                    title: 'Pizza Discount',
+                    description: '20% off any large pizza',
+                    value: 'Save up to $6.00',
+                    icon: '🍕',
+                    status: 'pending',
+                    type: 'qr',
+                    qrData: 'pizza-discount'
+                },
+                {
+                    id: 'reward-3',
+                    title: 'Shopping Voucher',
+                    description: '$10 off purchases over $50',
+                    value: '$10.00',
+                    icon: '🛍️',
+                    status: 'pending',
+                    type: 'digital',
+                    digitalUrl: 'https://shop.example.com/ember'
+                }
+            ];
 
             // Enhanced Ember Token System with COLLECTABLE tokens near demo player
             this.emberTokens = [
@@ -96,6 +213,7 @@ if (window.isVaultPhoenixDashboard) {
             try {
                 this.ensureSession();
                 this.loadCollectedTokens();
+                this.loadChallengeProgress();
                 this.setupEventListeners();
                 this.setupSwipeableModule();
                 
@@ -113,6 +231,9 @@ if (window.isVaultPhoenixDashboard) {
                 
                 // START AIRDROP TIMER - Show after 5-7 seconds randomly
                 this.startAirdropTimer();
+                
+                // Initialize challenge timers
+                this.startChallengeTimers();
                 
                 console.log('✅ Dashboard initialized successfully');
             } catch (error) {
@@ -141,6 +262,339 @@ if (window.isVaultPhoenixDashboard) {
                 console.error('❌ Session check error:', error);
                 return false;
             }
+        }
+
+        // =================== CHALLENGES & REWARDS SYSTEM ===================
+        loadChallengeProgress() {
+            try {
+                const saved = localStorage.getItem('vaultPhoenix_challenges');
+                if (saved) {
+                    const savedChallenges = JSON.parse(saved);
+                    this.challenges = { ...this.challenges, ...savedChallenges };
+                }
+                
+                const savedRewards = localStorage.getItem('vaultPhoenix_earnedRewards');
+                if (savedRewards) {
+                    this.earnedRewards = JSON.parse(savedRewards);
+                }
+                
+                console.log('💎 Loaded challenge progress');
+            } catch (error) {
+                console.error('❌ Challenge load error:', error);
+            }
+        }
+
+        saveChallengeProgress() {
+            try {
+                localStorage.setItem('vaultPhoenix_challenges', JSON.stringify(this.challenges));
+                localStorage.setItem('vaultPhoenix_earnedRewards', JSON.stringify(this.earnedRewards));
+            } catch (error) {
+                console.error('❌ Challenge save error:', error);
+            }
+        }
+
+        startChallengeTimers() {
+            // Update daily timer
+            setInterval(() => {
+                const now = new Date();
+                const tomorrow = new Date(now);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(0, 0, 0, 0);
+                
+                const timeLeft = tomorrow - now;
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                const timerEl = document.getElementById('dailyTimer');
+                if (timerEl) {
+                    timerEl.textContent = `Resets in ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+
+            // Update weekly timer  
+            setInterval(() => {
+                const now = new Date();
+                const nextWeek = new Date(now);
+                nextWeek.setDate(nextWeek.getDate() + (7 - now.getDay()));
+                nextWeek.setHours(0, 0, 0, 0);
+                
+                const timeLeft = nextWeek - now;
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                
+                const weeklyTimerEl = document.getElementById('weeklyTimer');
+                if (weeklyTimerEl) {
+                    weeklyTimerEl.textContent = `Resets in ${days} day${days !== 1 ? 's' : ''}`;
+                }
+            }, 60000); // Update every minute
+        }
+
+        updateChallengeProgress(type, data = {}) {
+            console.log('🎯 Updating challenge progress:', type, data);
+            
+            // Update daily challenges
+            this.challenges.daily.forEach(challenge => {
+                if (challenge.completed) return;
+                
+                switch (challenge.type) {
+                    case 'collect':
+                        if (type === 'token_collected') {
+                            challenge.progress = Math.min(challenge.progress + 1, challenge.target);
+                            if (challenge.progress >= challenge.target) {
+                                challenge.completed = true;
+                                this.showChallengeComplete(challenge);
+                            }
+                        }
+                        break;
+                    case 'ar_collect':
+                        if (type === 'ar_token_collected') {
+                            challenge.progress = Math.min(challenge.progress + 1, challenge.target);
+                            if (challenge.progress >= challenge.target) {
+                                challenge.completed = true;
+                                this.showChallengeComplete(challenge);
+                            }
+                        }
+                        break;
+                }
+            });
+
+            // Update weekly challenges
+            this.challenges.weekly.forEach(challenge => {
+                if (challenge.completed) return;
+                
+                switch (challenge.type) {
+                    case 'locations':
+                        if (type === 'location_visited') {
+                            const uniqueLocations = new Set(this.collectedTokens.map(t => t.location)).size;
+                            challenge.progress = Math.min(uniqueLocations, challenge.target);
+                            if (challenge.progress >= challenge.target) {
+                                challenge.completed = true;
+                                this.showChallengeComplete(challenge);
+                            }
+                        }
+                        break;
+                    case 'streak':
+                        // Streak logic would be implemented with daily login tracking
+                        break;
+                }
+            });
+
+            this.saveChallengeProgress();
+            this.updateRewardsDisplay();
+        }
+
+        showChallengeComplete(challenge) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, rgba(33, 150, 243, 0.95), rgba(156, 39, 176, 0.9));
+                color: white;
+                padding: 32px;
+                border-radius: 20px;
+                font-size: 18px;
+                font-weight: 800;
+                z-index: 400;
+                box-shadow: 0 16px 40px rgba(33, 150, 243, 0.6);
+                text-align: center;
+                touch-action: none;
+                user-select: none;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(20px);
+                max-width: 320px;
+                width: 90%;
+            `;
+            notification.innerHTML = `
+                <div style="font-size: 48px; margin-bottom: 16px;">${challenge.icon}</div>
+                <div>Challenge Complete!</div>
+                <div style="font-size: 16px; margin-top: 12px; opacity: 0.9;">${challenge.title}</div>
+                <div style="font-size: 14px; margin-top: 8px; opacity: 0.8;">+${challenge.reward} $Ember reward available</div>
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 4000);
+
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100, 50, 200]);
+            }
+        }
+
+        claimChallengeReward(challengeId) {
+            console.log('🎁 Claiming challenge reward:', challengeId);
+            
+            let challenge = null;
+            let challengeType = '';
+            
+            // Find the challenge
+            for (const [type, challenges] of Object.entries(this.challenges)) {
+                const found = challenges.find(c => c.id === challengeId);
+                if (found) {
+                    challenge = found;
+                    challengeType = type;
+                    break;
+                }
+            }
+            
+            if (!challenge || !challenge.completed) {
+                console.error('❌ Challenge not found or not completed:', challengeId);
+                return;
+            }
+            
+            // Add reward tokens
+            if (typeof challenge.reward === 'number') {
+                this.totalTokenValue += challenge.reward;
+                this.collectedTokens.push({
+                    id: Date.now(),
+                    value: challenge.reward,
+                    location: 'Challenge Reward',
+                    sponsor: 'Vault Phoenix',
+                    tier: 'bonus',
+                    collectedAt: new Date().toISOString(),
+                    isChallenge: true,
+                    challengeId: challengeId
+                });
+                
+                this.saveCollectedTokens();
+                this.updateVaultStats();
+            }
+            
+            // Mark as claimed
+            challenge.claimed = true;
+            this.saveChallengeProgress();
+            this.updateRewardsDisplay();
+            
+            // Show success
+            this.showRewardClaimed(challenge.reward);
+        }
+
+        showRewardClaimed(reward) {
+            const success = document.createElement('div');
+            success.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(67, 160, 71, 0.95));
+                color: white;
+                padding: 32px;
+                border-radius: 20px;
+                font-size: 20px;
+                font-weight: 800;
+                z-index: 400;
+                box-shadow: 0 16px 40px rgba(76, 175, 80, 0.6);
+                text-align: center;
+                touch-action: none;
+                user-select: none;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(20px);
+            `;
+            success.innerHTML = `
+                <div style="font-size: 48px; margin-bottom: 16px;">🎁</div>
+                <div>Reward Claimed!</div>
+                <div style="font-size: 18px; margin-top: 12px; opacity: 0.9;">+${reward} $Ember</div>
+                <div style="font-size: 14px; margin-top: 8px; opacity: 0.8;">Added to your vault</div>
+            `;
+
+            document.body.appendChild(success);
+
+            setTimeout(() => {
+                if (document.body.contains(success)) {
+                    document.body.removeChild(success);
+                }
+            }, 3000);
+
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100, 50, 200]);
+            }
+        }
+
+        updateRewardsDisplay() {
+            // Update rewards badge in menu
+            const rewardsBadge = document.getElementById('rewardsBadge');
+            if (rewardsBadge) {
+                const activeRewards = this.earnedRewards.filter(r => r.status === 'pending').length;
+                const completedChallenges = [...this.challenges.daily, ...this.challenges.weekly].filter(c => c.completed && !c.claimed).length;
+                const total = activeRewards + completedChallenges;
+                rewardsBadge.textContent = total > 0 ? `${total} Ready` : '2 Active';
+            }
+
+            // Update rewards count
+            const rewardsCount = document.getElementById('rewardsCount');
+            if (rewardsCount) {
+                const availableCount = this.earnedRewards.filter(r => r.status === 'pending').length;
+                rewardsCount.textContent = `${availableCount} Available`;
+            }
+        }
+
+        // =================== QR CODE SYSTEM ===================
+        showQRCode(context, data = {}) {
+            console.log('📱 Showing QR code for:', context, data);
+            
+            this.currentQRContext = { context, data };
+            
+            const modal = document.getElementById('qrModal');
+            const title = document.getElementById('qrModalTitle');
+            const content = document.getElementById('qrCodeContent');
+            const instructions = document.getElementById('qrInstructions');
+            const tokenAmount = document.getElementById('qrTokenAmount');
+            const tokenValue = document.getElementById('qrTokenValue');
+            
+            if (!modal) return;
+            
+            // Update content based on context
+            switch (context) {
+                case 'payment':
+                    if (title) title.textContent = '🔥 Payment QR Code';
+                    if (content) content.innerHTML = `
+                        <div style="font-size: 48px; margin-bottom: 16px;">📱</div>
+                        Payment QR Code<br>
+                        <small>Scan at partner locations</small>
+                    `;
+                    if (instructions) instructions.textContent = 'Show this QR code at any Vault Phoenix partner location to pay with your $Ember tokens for real rewards and discounts!';
+                    if (tokenAmount) tokenAmount.textContent = `${this.totalTokenValue} $Ember`;
+                    if (tokenValue) tokenValue.textContent = `${(this.totalTokenValue * 0.001).toFixed(2)} USD`;
+                    break;
+                    
+                case 'reward':
+                    const reward = this.earnedRewards.find(r => r.qrData === data.rewardId);
+                    if (title) title.textContent = `🎁 ${reward?.title || 'Reward'} QR`;
+                    if (content) content.innerHTML = `
+                        <div style="font-size: 48px; margin-bottom: 16px;">${reward?.icon || '🎫'}</div>
+                        ${reward?.title || 'Reward'} QR Code<br>
+                        <small>Show to merchant</small>
+                    `;
+                    if (instructions) instructions.textContent = `Show this QR code to redeem your ${reward?.title || 'reward'} at the participating location.`;
+                    if (tokenAmount) tokenAmount.textContent = reward?.title || 'Reward';
+                    if (tokenValue) tokenValue.textContent = reward?.value || 'Special Offer';
+                    break;
+                    
+                case 'challenge':
+                    if (title) title.textContent = '🎯 Challenge QR Code';
+                    if (content) content.innerHTML = `
+                        <div style="font-size: 48px; margin-bottom: 16px;">🎯</div>
+                        Challenge QR Code<br>
+                        <small>Scan at location to complete</small>
+                    `;
+                    if (instructions) instructions.textContent = 'Show this QR code at the challenge location to complete your mission and earn rewards!';
+                    if (tokenAmount) tokenAmount.textContent = 'Challenge';
+                    if (tokenValue) tokenValue.textContent = 'Mission Unlock';
+                    break;
+            }
+            
+            modal.classList.add('show');
+        }
+
+        hideQRCode() {
+            const modal = document.getElementById('qrModal');
+            if (modal) modal.classList.remove('show');
+            this.currentQRContext = null;
         }
 
         // =================== ENHANCED AIRDROP SYSTEM ===================
@@ -180,8 +634,10 @@ if (window.isVaultPhoenixDashboard) {
 
             this.nearestToken = nearest;
             
-            // Show airdrop notification for non-hunt screens with chance
-            if (!this.airdropShown && (this.currentMode === 'vault' || this.currentMode === 'campaigns') && Math.random() < 0.8) {
+            // Show airdrop notification for rewards screen with chance
+            if (!this.airdropShown && this.currentMode === 'rewards' && Math.random() < 0.8) {
+                this.showAirdropNotification();
+            } else if (this.currentMode === 'vault' && !this.airdropShown && Math.random() < 0.6) {
                 this.showAirdropNotification();
             } else if (this.currentMode === 'map' || this.currentMode === 'ar') {
                 this.hideAirdropNotification();
@@ -905,6 +1361,7 @@ if (window.isVaultPhoenixDashboard) {
             this.updateNearbyTokens();
             this.updateTokenCounts();
             this.updateVaultStats();
+            this.updateRewardsDisplay();
             
             // Hide airdrop on map and AR screens
             if (this.currentMode === 'map' || this.currentMode === 'ar') {
@@ -1116,7 +1573,7 @@ if (window.isVaultPhoenixDashboard) {
             console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
         }
 
-        // =================== MODE SWITCHING - FIXED FOR ALL SCREENS ===================
+        // =================== MODE SWITCHING - UPDATED FOR REWARDS SCREEN ===================
         switchMode(mode) {
             console.log('🔄 Switching to mode:', mode);
             try {
@@ -1129,7 +1586,7 @@ if (window.isVaultPhoenixDashboard) {
                 this.updateNearestToken();
                 
                 // Hide all views first
-                const views = ['map', 'vaultView', 'campaignsView'];
+                const views = ['map', 'vaultView', 'rewardsView'];
                 views.forEach(viewId => {
                     const view = document.getElementById(viewId);
                     if (view) view.style.display = 'none';
@@ -1151,9 +1608,11 @@ if (window.isVaultPhoenixDashboard) {
                         this.stopARMode();
                         this.showTokenModule();
                         break;
-                    case 'campaigns':
-                        const campaignsView = document.getElementById('campaignsView');
-                        if (campaignsView) campaignsView.style.display = 'block';
+                    case 'rewards':
+                        const rewardsView = document.getElementById('rewardsView');
+                        if (rewardsView) rewardsView.style.display = 'block';
+                        this.updateRewardsDisplay();
+                        this.renderChallenges();
                         this.stopARMode();
                         this.showTokenModule();
                         break;
@@ -1170,6 +1629,226 @@ if (window.isVaultPhoenixDashboard) {
             } catch (error) {
                 console.error('❌ Mode switch error:', error);
             }
+        }
+
+        // =================== CHALLENGES RENDERING ===================
+        renderChallenges() {
+            this.renderDailyChallenges();
+            this.renderWeeklyChallenges();
+            this.renderLocationChallenges();
+            this.renderEarnedRewards();
+        }
+
+        renderDailyChallenges() {
+            const container = document.getElementById('dailyChallenges');
+            if (!container) return;
+
+            container.innerHTML = this.challenges.daily.map(challenge => {
+                const progressPercent = Math.round((challenge.progress / challenge.target) * 100);
+                const isCompleted = challenge.completed;
+                const isClaimed = challenge.claimed;
+
+                return `
+                    <div class="challenge-card daily-challenge" data-challenge-id="${challenge.id}">
+                        <div class="challenge-header">
+                            <div class="challenge-icon">${challenge.icon}</div>
+                            <div class="challenge-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${progressPercent}%"></div>
+                                </div>
+                                <div class="progress-text">${isCompleted ? 'READY' : `${challenge.progress}/${challenge.target}`}</div>
+                            </div>
+                        </div>
+                        <div class="challenge-info">
+                            <div class="challenge-title">${challenge.title}</div>
+                            <div class="challenge-description">${challenge.description}</div>
+                            <div class="challenge-reward">
+                                <span class="reward-icon">💎</span>
+                                <span>${challenge.reward} $Ember</span>
+                            </div>
+                        </div>
+                        ${isCompleted && !isClaimed ? `
+                            <button class="challenge-claim-btn" data-reward="${challenge.reward}" data-challenge-id="${challenge.id}">Claim Reward</button>
+                        ` : ''}
+                        ${isClaimed ? `
+                            <div style="text-align: center; color: #4CAF50; font-weight: 700; padding: 12px;">✅ Claimed</div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+
+            // Add claim event listeners
+            container.querySelectorAll('.challenge-claim-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const challengeId = btn.dataset.challengeId;
+                    this.claimChallengeReward(challengeId);
+                });
+            });
+        }
+
+        renderWeeklyChallenges() {
+            const container = document.getElementById('weeklyChallenges');
+            if (!container) return;
+
+            container.innerHTML = this.challenges.weekly.map(challenge => {
+                const progressPercent = Math.round((challenge.progress / challenge.target) * 100);
+
+                return `
+                    <div class="challenge-card weekly-challenge" data-challenge-id="${challenge.id}">
+                        <div class="challenge-header">
+                            <div class="challenge-icon">${challenge.icon}</div>
+                            <div class="challenge-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${progressPercent}%"></div>
+                                </div>
+                                <div class="progress-text">${challenge.progress}/${challenge.target}</div>
+                            </div>
+                        </div>
+                        <div class="challenge-info">
+                            <div class="challenge-title">${challenge.title}</div>
+                            <div class="challenge-description">${challenge.description}</div>
+                            <div class="challenge-reward">
+                                <span class="reward-icon">${challenge.reward === 'multiplier' ? '🔥' : '💎'}</span>
+                                <span>${challenge.reward === 'multiplier' ? 'Streak Multiplier x2' : challenge.reward + ' $Ember + Bonus Pack'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        renderLocationChallenges() {
+            const container = document.getElementById('locationChallenges');
+            if (!container) return;
+
+            container.innerHTML = this.challenges.location.map(challenge => `
+                <div class="challenge-card location-challenge" data-challenge-id="${challenge.id}">
+                    <div class="challenge-sponsor">
+                        <div class="sponsor-logo">${challenge.sponsorLogo}</div>
+                        <div class="sponsor-name">${challenge.sponsor}</div>
+                    </div>
+                    <div class="challenge-info">
+                        <div class="challenge-title">${challenge.title}</div>
+                        <div class="challenge-description">${challenge.description}</div>
+                        <div class="challenge-reward">
+                            <span class="reward-icon">${challenge.rewardIcon}</span>
+                            <span>${challenge.reward}</span>
+                        </div>
+                    </div>
+                    <div class="challenge-actions">
+                        ${challenge.location ? `
+                            <button class="challenge-navigate-btn" data-location="${challenge.location}">Navigate</button>
+                        ` : ''}
+                        ${challenge.hasDigital ? `
+                            <button class="challenge-digital-btn" data-url="${challenge.digitalUrl}">Shop Online</button>
+                        ` : ''}
+                        ${challenge.hasQR ? `
+                            <button class="challenge-qr-btn" data-challenge="${challenge.id}">QR Redeem</button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            // Add event listeners
+            container.querySelectorAll('.challenge-navigate-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const location = btn.dataset.location;
+                    // Find token at this location and show navigation
+                    const token = this.emberTokens.find(t => t.location.toLowerCase().includes(location.replace('-', ' ')));
+                    if (token) {
+                        this.showNavigationModal(token);
+                    }
+                });
+            });
+
+            container.querySelectorAll('.challenge-digital-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const url = btn.dataset.url;
+                    window.open(url, '_blank');
+                });
+            });
+
+            container.querySelectorAll('.challenge-qr-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const challengeId = btn.dataset.challenge;
+                    this.showQRCode('challenge', { challengeId });
+                });
+            });
+        }
+
+        renderEarnedRewards() {
+            const container = document.getElementById('earnedRewardsList');
+            if (!container) return;
+
+            container.innerHTML = this.earnedRewards.map(reward => `
+                <div class="reward-item ${reward.status}" data-reward-id="${reward.id}">
+                    <div class="reward-icon">${reward.icon}</div>
+                    <div class="reward-info">
+                        <div class="reward-title">${reward.title}</div>
+                        <div class="reward-description">${reward.description}</div>
+                        <div class="reward-value">Worth ${reward.value}</div>
+                    </div>
+                    <div class="reward-actions">
+                        ${reward.status === 'pending' ? `
+                            ${reward.type === 'qr' ? `
+                                <button class="reward-qr-btn" data-reward="${reward.qrData}">Show QR</button>
+                            ` : `
+                                <button class="reward-digital-btn" data-url="${reward.digitalUrl}">Shop Online</button>
+                            `}
+                        ` : ''}
+                        <div class="reward-status">${reward.status === 'claimed' ? '✅ Claimed' : '🔄 Ready to use'}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add event listeners
+            container.querySelectorAll('.reward-qr-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const rewardId = btn.dataset.reward;
+                    this.showQRCode('reward', { rewardId });
+                });
+            });
+
+            container.querySelectorAll('.reward-digital-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const url = btn.dataset.url;
+                    window.open(url, '_blank');
+                });
+            });
+        }
+
+        // =================== ADVENTURES OVERLAY ===================
+        showAdventuresOverlay() {
+            const overlay = document.getElementById('adventuresOverlay');
+            if (overlay) {
+                overlay.classList.add('show');
+            }
+        }
+
+        hideAdventuresOverlay() {
+            const overlay = document.getElementById('adventuresOverlay');
+            if (overlay) {
+                overlay.classList.remove('show');
+            }
+        }
+
+        selectAdventure(adventureId) {
+            console.log('🏆 Selecting adventure:', adventureId);
+            this.currentAdventure = adventureId;
+            this.hideAdventuresOverlay();
+            
+            // Update token markers for selected adventure
+            // This would filter tokens based on the selected adventure theme
+            this.addPhoenixTokenMarkers();
+            
+            // Switch to map view to see adventure tokens
+            this.switchMode('map');
         }
 
         showTokenModule() {
@@ -1389,7 +2068,7 @@ if (window.isVaultPhoenixDashboard) {
                     const collectedToken = {
                         ...this.currentDiscoveredToken,
                         collectedAt: new Date().toISOString(),
-                        collectionMethod: 'AR Hunt',
+                        collectionMethod: this.currentMode === 'ar' ? 'AR Hunt' : 'Map Collection',
                         name: `${this.currentDiscoveredToken.location} Token`
                     };
                     
@@ -1398,6 +2077,14 @@ if (window.isVaultPhoenixDashboard) {
                     this.saveCollectedTokens();
                     
                     console.log('✅ Token collected:', this.currentDiscoveredToken.location);
+                    
+                    // Update challenge progress
+                    if (this.currentMode === 'ar') {
+                        this.updateChallengeProgress('ar_token_collected');
+                    } else {
+                        this.updateChallengeProgress('token_collected');
+                    }
+                    this.updateChallengeProgress('location_visited');
                     
                     this.updateTokenCounts();
                     this.updateVaultStats();
@@ -1562,7 +2249,7 @@ if (window.isVaultPhoenixDashboard) {
                             </div>
                             <div class="history-details">
                                 <div class="history-title">${token.location}</div>
-                                <div class="history-subtitle">${token.isAirdrop ? 'Airdrop Bonus' : token.sponsor} • ${token.tier?.toUpperCase() || 'BONUS'}</div>
+                                <div class="history-subtitle">${token.isAirdrop ? 'Airdrop Bonus' : (token.isChallenge ? 'Challenge Reward' : token.sponsor)} • ${token.tier?.toUpperCase() || 'BONUS'}</div>
                             </div>
                             <div class="history-value">+${token.value}</div>
                         </div>
@@ -1764,12 +2451,33 @@ if (window.isVaultPhoenixDashboard) {
                 this.collectedTokens = [];
                 this.totalTokenValue = 0;
                 
+                // Reset challenges
+                this.challenges.daily.forEach(challenge => {
+                    challenge.progress = 0;
+                    challenge.completed = false;
+                    challenge.claimed = false;
+                });
+                
+                this.challenges.weekly.forEach(challenge => {
+                    challenge.progress = 0;
+                    challenge.completed = false;
+                    challenge.claimed = false;
+                });
+                
+                // Reset earned rewards
+                this.earnedRewards.forEach(reward => {
+                    reward.status = 'pending';
+                });
+                
                 localStorage.removeItem('vaultPhoenix_collectedTokens');
                 localStorage.removeItem('vaultPhoenix_totalValue');
+                localStorage.removeItem('vaultPhoenix_challenges');
+                localStorage.removeItem('vaultPhoenix_earnedRewards');
                 
                 this.updateVaultStats();
                 this.updateTokenCounts();
                 this.updateNearbyTokens();
+                this.updateRewardsDisplay();
                 
                 setTimeout(() => {
                     this.addPhoenixTokenMarkers();
@@ -1815,7 +2523,7 @@ if (window.isVaultPhoenixDashboard) {
                     });
                 });
 
-                // Menu items
+                // Menu items with mode switching
                 document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
                     addUniversalEventListener(item, (e) => {
                         e.preventDefault();
@@ -1825,6 +2533,39 @@ if (window.isVaultPhoenixDashboard) {
                             console.log('📱 Menu item selected:', mode);
                             this.switchMode(mode);
                             this.hideMenu();
+                        }
+                    });
+                });
+
+                // Adventures overlay toggle
+                const adventuresOverlayBtn = document.getElementById('adventuresOverlay');
+                if (adventuresOverlayBtn) {
+                    addUniversalEventListener(adventuresOverlayBtn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.showAdventuresOverlay();
+                        this.hideMenu();
+                    });
+                }
+
+                // Adventures overlay close
+                const adventuresClose = document.getElementById('adventuresClose');
+                if (adventuresClose) {
+                    addUniversalEventListener(adventuresClose, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.hideAdventuresOverlay();
+                    });
+                }
+
+                // Adventure selection
+                document.querySelectorAll('.adventure-select-btn').forEach(btn => {
+                    addUniversalEventListener(btn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const adventure = btn.dataset.adventure;
+                        if (adventure) {
+                            this.selectAdventure(adventure);
                         }
                     });
                 });
@@ -2004,8 +2745,7 @@ if (window.isVaultPhoenixDashboard) {
                     addUniversalEventListener(redeemTokens, (e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        const modal = document.getElementById('qrModal');
-                        if (modal) modal.classList.add('show');
+                        this.showQRCode('payment');
                     });
                 }
                 
@@ -2013,8 +2753,7 @@ if (window.isVaultPhoenixDashboard) {
                     addUniversalEventListener(redeemQRBtn, (e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        const modal = document.getElementById('qrModal');
-                        if (modal) modal.classList.add('show');
+                        this.showQRCode('payment');
                     });
                 }
                 
@@ -2022,8 +2761,7 @@ if (window.isVaultPhoenixDashboard) {
                     addUniversalEventListener(qrClose, (e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        const modal = document.getElementById('qrModal');
-                        if (modal) modal.classList.remove('show');
+                        this.hideQRCode();
                     });
                 }
 
