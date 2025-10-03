@@ -1,4 +1,4 @@
-/* Vault Phoenix AR Crypto Gaming - REBUILT CSS */
+/* Vault Phoenix AR Crypto Gaming - UPDATED CSS */
 /* CLEAN 3-SCREEN GAME: HUNT, AR VIEW, VAULT */
 
 /* =================== CORE RESET & STRUCTURE =================== */
@@ -100,6 +100,12 @@ html, body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .ember-count {
     display: flex;
     align-items: center;
@@ -132,6 +138,357 @@ html, body {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+.nav-menu-button {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    touch-action: manipulation;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-menu-button:active {
+    transform: scale(0.9);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* =================== SIDE MENU =================== */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 199;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(8, 8, 8, 0.98), rgba(16, 16, 16, 0.98));
+    backdrop-filter: blur(30px);
+    border-left: 2px solid rgba(240, 165, 0, 0.3);
+    z-index: 200;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.side-menu.open {
+    right: 0;
+}
+
+.menu-header {
+    padding: calc(env(safe-area-inset-top, 8px) + 20px) 20px 20px 20px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.1), rgba(251, 146, 60, 0.05));
+}
+
+.menu-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu-avatar {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(251, 146, 60, 0.15));
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-user-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.menu-user-name {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.menu-user-email {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.menu-content {
+    padding: 20px 0;
+}
+
+.menu-section {
+    margin-bottom: 8px;
+}
+
+.menu-section-title {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0 20px;
+    margin-bottom: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background: rgba(240, 165, 0, 0.1);
+    border-left-color: #f0a500;
+}
+
+.menu-item:active {
+    background: rgba(240, 165, 0, 0.2);
+}
+
+.menu-item-icon {
+    font-size: 18px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.8);
+    flex-shrink: 0;
+}
+
+.menu-item.active .menu-item-icon {
+    color: #f0a500;
+}
+
+.menu-item-text {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    flex: 1;
+}
+
+.menu-item.active .menu-item-text {
+    color: #f0a500;
+    font-weight: 700;
+}
+
+.menu-item-badge {
+    background: rgba(240, 165, 0, 0.2);
+    color: #f0a500;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+.reset-game-item {
+    color: #ff6b6b !important;
+}
+
+.reset-game-item .menu-item-icon {
+    color: #ff6b6b !important;
+}
+
+.logout-section {
+    padding: 20px;
+    border-top: 1px solid rgba(240, 165, 0, 0.2);
+    margin-top: auto;
+}
+
+.logout-button {
+    width: 100%;
+    background: rgba(244, 67, 54, 0.1);
+    border: 2px solid rgba(244, 67, 54, 0.3);
+    color: #ff6b6b;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.logout-button:active {
+    transform: scale(0.98);
+    background: rgba(244, 67, 54, 0.2);
+}
+
+/* =================== AIRDROP NOTIFICATION =================== */
+.airdrop-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    z-index: 300;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.98), rgba(251, 146, 60, 0.98));
+    backdrop-filter: blur(30px);
+    border: 4px solid rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
+    color: white;
+    display: none;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 
+        0 24px 80px rgba(240, 165, 0, 0.8),
+        0 0 0 2px rgba(255, 255, 255, 0.2);
+    max-width: 360px;
+    width: 90%;
+    overflow: hidden;
+}
+
+.airdrop-notification.show {
+    display: block;
+    transform: translate(-50%, -50%) scale(1);
+    animation: airdropEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.airdrop-content {
+    padding: 24px;
+    text-align: center;
+}
+
+.airdrop-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.airdrop-icon {
+    font-size: 36px;
+    animation: airdropIconFloat 3s ease-in-out infinite;
+}
+
+.airdrop-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.airdrop-body {
+    margin-bottom: 20px;
+}
+
+.airdrop-amount {
+    font-size: 24px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.airdrop-subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+
+.airdrop-button {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    color: #2e7d32;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    min-height: 56px;
+}
+
+.airdrop-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.airdrop-button:active {
+    transform: scale(0.98);
+}
+
+.airdrop-btn-icon {
+    font-size: 18px;
+}
+
+@keyframes airdropEntrance {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5) rotate(-5deg);
+        opacity: 0;
+    }
+    60% {
+        transform: translate(-50%, -50%) scale(1.05) rotate(2deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes airdropIconFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-4px) rotate(5deg);
+    }
+}
+
 /* =================== HUNT SCREEN (MAP) =================== */
 .hunt-screen {
     position: absolute;
@@ -152,6 +509,7 @@ html, body {
     cursor: grab;
     touch-action: pan-x pan-y;
     user-select: none;
+    background: linear-gradient(135deg, #e8f5e8 0%, #d4ecd4 25%, #c1e3c1 50%, #aedaae 75%, #9bd19b 100%);
 }
 
 .map-container:active {
@@ -160,12 +518,12 @@ html, body {
 
 .phoenix-map {
     position: relative;
-    width: 200%;
-    height: 200%;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(135deg, #e8f5e8 0%, #d4ecd4 25%, #c1e3c1 50%, #aedaae 75%, #9bd19b 100%);
     transform-origin: center center;
     will-change: transform;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease-out;
     min-width: 100vw;
     min-height: 100vh;
 }
@@ -345,31 +703,31 @@ html, body {
     background: linear-gradient(135deg, #228B22, #32CD32);
 }
 
-/* Player Location */
+/* Player Location - Centered */
 .player-location {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     background: linear-gradient(135deg, #4285F4, #1565C0);
-    border: 3px solid white;
+    border: 4px solid white;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     z-index: 50;
     animation: playerPulse 3s ease-in-out infinite;
-    box-shadow: 0 4px 20px rgba(66, 133, 244, 0.8);
+    box-shadow: 0 6px 24px rgba(66, 133, 244, 0.9);
     pointer-events: none;
 }
 
 @keyframes playerPulse {
     0%, 100% { 
         transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 4px 20px rgba(66, 133, 244, 0.8);
+        box-shadow: 0 6px 24px rgba(66, 133, 244, 0.9);
     }
     50% { 
-        transform: translate(-50%, -50%) scale(1.1);
-        box-shadow: 0 6px 30px rgba(66, 133, 244, 1);
+        transform: translate(-50%, -50%) scale(1.15);
+        box-shadow: 0 8px 32px rgba(66, 133, 244, 1);
     }
 }
 
@@ -574,27 +932,15 @@ html, body {
 .ar-token-coin {
     border-radius: 50%;
     background: linear-gradient(135deg, #f0a500, #fb923c);
-    border: 4px solid white;
+    border: 4px solid #4CAF50;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 24px rgba(240, 165, 0, 0.7);
+    box-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
     margin-bottom: 8px;
     animation: arTokenFloat 3s ease-in-out infinite;
-}
-
-.ar-token.near .ar-token-coin {
     width: 80px;
     height: 80px;
-    border-color: #4CAF50;
-    box-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
-}
-
-.ar-token.far .ar-token-coin {
-    width: 50px;
-    height: 50px;
-    border-color: #f44336;
-    box-shadow: 0 0 20px rgba(244, 67, 54, 0.6);
 }
 
 .ar-token-img {
@@ -1262,7 +1608,10 @@ html, body {
 /* =================== MODALS =================== */
 .token-modal,
 .navigation-modal,
-.qr-modal {
+.qr-modal,
+.sponsor-modal,
+.reset-game-overlay,
+.logout-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -1282,14 +1631,20 @@ html, body {
 
 .token-modal.show,
 .navigation-modal.show,
-.qr-modal.show {
+.qr-modal.show,
+.sponsor-modal.show,
+.reset-game-overlay.show,
+.logout-overlay.show {
     opacity: 1;
     visibility: visible;
 }
 
 .token-modal-content,
 .navigation-content,
-.qr-modal-content {
+.qr-modal-content,
+.sponsor-modal-content,
+.reset-game-modal,
+.logout-modal {
     background: linear-gradient(135deg, rgba(12, 12, 12, 0.98), rgba(20, 20, 20, 0.98));
     backdrop-filter: blur(30px);
     border: 2px solid rgba(240, 165, 0, 0.5);
@@ -1405,7 +1760,8 @@ html, body {
     line-height: 1.4;
 }
 
-.token-actions {
+.token-actions,
+.token-collection-actions {
     display: flex;
     gap: 12px;
 }
@@ -1435,6 +1791,142 @@ html, body {
 .token-action-btn.secondary {
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Sponsor Modal */
+.sponsor-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.sponsor-modal-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #f0a500;
+    margin: 0;
+}
+
+.sponsor-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sponsor-close:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sponsor-details {
+    text-align: center;
+}
+
+.sponsor-logo-large {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    background: rgba(240, 165, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(240, 165, 0, 0.5);
+}
+
+.sponsor-logo-placeholder {
+    font-size: 32px;
+}
+
+.sponsor-name-large {
+    font-size: 20px;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 12px;
+}
+
+.sponsor-description-large {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+}
+
+.sponsor-benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.benefit-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: rgba(240, 165, 0, 0.1);
+    padding: 16px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+.benefit-icon {
+    font-size: 24px;
+}
+
+.benefit-text {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+}
+
+.sponsor-cta {
+    background: rgba(240, 165, 0, 0.1);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.cta-text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.sponsor-cta-btn {
+    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+    border: none;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.sponsor-cta-btn:active {
+    transform: scale(0.98);
 }
 
 /* Navigation Modal */
@@ -1645,6 +2137,101 @@ html, body {
     font-weight: 600;
 }
 
+/* Reset Game Modal */
+.reset-game-modal-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.reset-game-modal-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.reset-game-modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.reset-game-modal-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reset-game-modal-cancel {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.reset-game-modal-confirm {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+}
+
+.reset-game-modal-btn:active {
+    transform: scale(0.98);
+}
+
+/* Logout Modal */
+.logout-modal-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.logout-modal-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.logout-modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.logout-modal-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-modal-cancel {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.logout-modal-confirm {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+}
+
+.logout-modal-btn:active {
+    transform: scale(0.98);
+}
+
 /* =================== SCREEN VISIBILITY =================== */
 .hunt-screen,
 .ar-screen,
@@ -1693,14 +2280,9 @@ html, body {
         height: 50px;
     }
     
-    .ar-token.near .ar-token-coin {
+    .ar-token-coin {
         width: 70px;
         height: 70px;
-    }
-    
-    .ar-token.far .ar-token-coin {
-        width: 45px;
-        height: 45px;
     }
 }
 
