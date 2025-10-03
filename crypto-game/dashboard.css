@@ -1,5 +1,5 @@
-/* Vault Phoenix AR Crypto Gaming - COMPLETE UPDATED CSS */
-/* FULLY INTEGRATED WITH FIXED HTML & JS */
+/* Vault Phoenix AR Crypto Gaming - FIXED CSS */
+/* MOBILE-OPTIMIZED GREEN CIRCLE ANIMATIONS & REDESIGNED AIRDROP */
 
 /* =================== CORE RESET & STRUCTURE =================== */
 * {
@@ -362,27 +362,25 @@ html, body {
     background: rgba(244, 67, 54, 0.2);
 }
 
-/* =================== ENHANCED AIRDROP NOTIFICATION =================== */
+/* =================== REDESIGNED AIRDROP NOTIFICATION =================== */
 .airdrop-notification {
     position: fixed;
-    top: -250px;
+    top: -200px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 350;
-    background: linear-gradient(135deg, rgba(240, 165, 0, 0.98), rgba(251, 146, 60, 0.98));
-    backdrop-filter: blur(30px);
-    border: 3px solid rgba(255, 255, 255, 0.9);
-    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(8, 8, 8, 0.98), rgba(16, 16, 16, 0.98));
+    backdrop-filter: blur(25px);
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: 20px;
     color: white;
     display: none;
-    transition: top 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 
-        0 25px 70px rgba(240, 165, 0, 0.8),
-        0 0 0 3px rgba(255, 255, 255, 0.3);
-    max-width: 340px;
+    transition: top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 32px rgba(240, 165, 0, 0.3);
+    max-width: 320px;
     width: 90%;
     overflow: hidden;
-    animation: airdropGlow 3s ease-in-out infinite;
+    padding: 20px;
 }
 
 .airdrop-notification.show {
@@ -390,84 +388,74 @@ html, body {
     top: calc(env(safe-area-inset-top, 8px) + 90px);
 }
 
-@keyframes airdropGlow {
-    0%, 100% {
-        box-shadow: 
-            0 25px 70px rgba(240, 165, 0, 0.8),
-            0 0 0 3px rgba(255, 255, 255, 0.3);
-    }
-    50% {
-        box-shadow: 
-            0 30px 80px rgba(240, 165, 0, 1),
-            0 0 0 4px rgba(255, 255, 255, 0.5);
-    }
-}
-
-.airdrop-content {
-    padding: 24px;
-    text-align: center;
-}
-
 .airdrop-header {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 12px;
     margin-bottom: 16px;
 }
 
-.airdrop-icon {
-    font-size: 36px;
-    animation: airdropIconFloat 3s ease-in-out infinite;
+.airdrop-icon-container {
+    width: 40px;
+    height: 40px;
+    background: rgba(240, 165, 0, 0.2);
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.airdrop-ember-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: brightness(1.2);
 }
 
 .airdrop-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     color: white;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    flex: 1;
 }
 
 .airdrop-body {
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .airdrop-amount {
     font-size: 24px;
     font-weight: 900;
-    color: white;
+    color: #f0a500;
     margin-bottom: 8px;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .airdrop-subtitle {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 600;
 }
 
 .airdrop-button {
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    color: #2e7d32;
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: white;
     border: none;
-    padding: 14px 24px;
-    border-radius: 16px;
+    padding: 16px 24px;
+    border-radius: 12px;
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     width: 100%;
     min-height: 52px;
-}
-
-.airdrop-button:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 16px rgba(240, 165, 0, 0.3);
 }
 
 .airdrop-button:active {
@@ -476,15 +464,6 @@ html, body {
 
 .airdrop-btn-icon {
     font-size: 18px;
-}
-
-@keyframes airdropIconFloat {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-4px) rotate(5deg);
-    }
 }
 
 /* =================== HUNT SCREEN (MAP) =================== */
@@ -701,9 +680,9 @@ html, body {
     background: linear-gradient(135deg, #228B22, #32CD32);
 }
 
-/* Player Location - Centered */
+/* FIXED: Player Location - Stays centered when map moves */
 .player-location {
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     width: 24px;
@@ -712,7 +691,7 @@ html, body {
     border: 4px solid white;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    z-index: 50;
+    z-index: 100;
     animation: playerPulse 3s ease-in-out infinite;
     box-shadow: 0 6px 24px rgba(66, 133, 244, 0.9);
     pointer-events: none;
@@ -729,7 +708,7 @@ html, body {
     }
 }
 
-/* Token Markers - IMPROVED FOR MOBILE */
+/* Token Markers - FIXED MOBILE GREEN CIRCLE ANIMATIONS */
 .token-markers {
     position: absolute;
     top: 0;
@@ -754,12 +733,28 @@ html, body {
     min-width: 70px;
     min-height: 70px;
     padding: 10px;
-    border-radius: 50%;
+    /* CRITICAL: Remove border-radius that was causing mobile box issue */
 }
 
+/* FIXED: Mobile-optimized collectable pulse animation */
 .token-marker.collectable {
-    animation: collectablePulse 2.5s ease-in-out infinite;
     z-index: 48;
+    position: relative;
+}
+
+.token-marker.collectable::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 80px;
+    height: 80px;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(76, 175, 80, 0.6);
+    border-radius: 50%;
+    animation: collectablePulse 2.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
 }
 
 .token-marker.distant {
@@ -825,14 +820,15 @@ html, body {
     line-height: 1.1;
 }
 
+/* FIXED: Mobile-optimized pulse animation */
 @keyframes collectablePulse {
     0%, 100% { 
         transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+        opacity: 0.6;
     }
     50% { 
-        transform: translate(-50%, -50%) scale(1.05);
-        box-shadow: 0 0 0 15px rgba(76, 175, 80, 0);
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 0;
     }
 }
 
@@ -1682,6 +1678,7 @@ html, body {
     overflow-y: auto;
 }
 
+/* =================== ENHANCED TOKEN MODAL WITH EXPANDABLE SPONSOR =================== */
 .token-modal-header {
     text-align: center;
     margin-bottom: 20px;
@@ -1763,26 +1760,167 @@ html, body {
     border: 1px solid rgba(240, 165, 0, 0.3);
 }
 
+/* ENHANCED SPONSOR MESSAGE WITH EXPANDABLE DETAILS */
 .sponsor-message {
     background: rgba(240, 165, 0, 0.1);
     border: 1px solid rgba(240, 165, 0, 0.3);
     border-radius: 12px;
-    padding: 12px;
-    margin-bottom: 16px;
-    text-align: center;
+    padding: 16px;
+    margin-bottom: 20px;
+    position: relative;
 }
 
 .sponsor-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     color: #f0a500;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
 }
 
 .sponsor-text {
-    font-size: 12px;
+    font-size: 13px;
     color: rgba(255, 255, 255, 0.8);
     line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+/* EXPANDABLE DETAILS SECTION */
+.sponsor-details-expandable {
+    border-top: 1px solid rgba(240, 165, 0, 0.2);
+    padding-top: 16px;
+    margin-top: 16px;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sponsor-description {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.redemption-section-compact {
+    margin-bottom: 16px;
+}
+
+.redemption-title-compact {
+    font-size: 13px;
+    font-weight: 700;
+    color: #f0a500;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.redemption-options-compact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.redemption-option-compact {
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.redemption-option-icon {
+    font-size: 16px;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.redemption-option-cost {
+    font-size: 9px;
+    font-weight: 700;
+    color: #4CAF50;
+    margin-bottom: 2px;
+}
+
+.redemption-option-desc {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.location-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.location-action-btn {
+    flex: 1;
+    border: none;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 40px;
+}
+
+.location-action-btn.primary {
+    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+}
+
+.location-action-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.location-action-btn:active {
+    transform: scale(0.98);
+}
+
+/* LEARN MORE TOGGLE BUTTON */
+.learn-more-toggle {
+    width: 100%;
+    background: rgba(240, 165, 0, 0.1);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    color: #f0a500;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.learn-more-toggle:active {
+    transform: scale(0.98);
+    background: rgba(240, 165, 0, 0.15);
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+.toggle-icon.expanded {
+    transform: rotate(180deg);
 }
 
 .token-actions,
@@ -1816,210 +1954,6 @@ html, body {
 .token-action-btn.secondary {
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-/* ENHANCED SPONSOR MODAL */
-.sponsor-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
-}
-
-.sponsor-modal-title {
-    font-size: 18px;
-    font-weight: 800;
-    color: #f0a500;
-    margin: 0;
-}
-
-.sponsor-close {
-    background: none;
-    border: none;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 4px;
-    transition: all 0.3s ease;
-    border-radius: 6px;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sponsor-close:hover {
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.sponsor-details {
-    text-align: center;
-}
-
-.sponsor-logo-large {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 16px;
-    background: rgba(240, 165, 0, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgba(240, 165, 0, 0.5);
-}
-
-.sponsor-logo-placeholder {
-    font-size: 32px;
-}
-
-.sponsor-name-large {
-    font-size: 20px;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 12px;
-}
-
-.sponsor-description-large {
-    font-size: 14px;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 20px;
-}
-
-.redemption-section {
-    margin-bottom: 24px;
-}
-
-.redemption-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #f0a500;
-    margin-bottom: 16px;
-    text-align: center;
-}
-
-.redemption-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.redemption-item {
-    background: rgba(76, 175, 80, 0.1);
-    border: 2px solid rgba(76, 175, 80, 0.3);
-    border-radius: 12px;
-    padding: 12px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.redemption-item:hover {
-    border-color: rgba(76, 175, 80, 0.5);
-    background: rgba(76, 175, 80, 0.15);
-}
-
-.redemption-icon {
-    font-size: 24px;
-    margin-bottom: 8px;
-    display: block;
-}
-
-.redemption-cost {
-    font-size: 12px;
-    font-weight: 700;
-    color: #4CAF50;
-    margin-bottom: 4px;
-}
-
-.redemption-desc {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
-    line-height: 1.2;
-}
-
-.sponsor-benefits {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.benefit-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    background: rgba(240, 165, 0, 0.1);
-    padding: 16px 12px;
-    border-radius: 12px;
-    border: 1px solid rgba(240, 165, 0, 0.3);
-}
-
-.benefit-icon {
-    font-size: 24px;
-}
-
-.benefit-text {
-    font-size: 11px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-}
-
-.sponsor-cta {
-    background: rgba(240, 165, 0, 0.1);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    border-radius: 12px;
-    padding: 16px;
-}
-
-.cta-text {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 16px;
-    line-height: 1.4;
-    text-align: center;
-}
-
-.sponsor-actions {
-    display: flex;
-    gap: 8px;
-}
-
-.sponsor-cta-btn {
-    flex: 1;
-    border: none;
-    color: white;
-    padding: 12px 16px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    min-height: 48px;
-}
-
-.sponsor-cta-btn.primary {
-    background: linear-gradient(135deg, #4CAF50, #66BB6A);
-}
-
-.sponsor-cta-btn.secondary {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.sponsor-cta-btn:active {
-    transform: scale(0.98);
 }
 
 /* =================== NAVIGATION MODAL =================== */
@@ -2337,13 +2271,13 @@ html, body {
     }
     
     .airdrop-notification {
-        max-width: 300px;
+        max-width: 280px;
+        padding: 16px;
     }
     
     .token-modal-content,
     .navigation-content,
-    .qr-modal-content,
-    .sponsor-modal-content {
+    .qr-modal-content {
         max-width: 350px;
         padding: 20px;
     }
@@ -2383,11 +2317,7 @@ html, body {
         transition-duration: 0.01ms !important;
     }
     
-    .token-marker.collectable {
-        animation: none;
-    }
-    
-    .airdrop-notification {
+    .token-marker.collectable::before {
         animation: none;
     }
     
@@ -2400,10 +2330,6 @@ html, body {
     }
     
     .ar-token-coin {
-        animation: none;
-    }
-    
-    .airdrop-icon {
         animation: none;
     }
 }
@@ -2427,13 +2353,8 @@ html, body {
     }
     
     .airdrop-notification {
-        border-width: 4px;
+        border-width: 3px;
     }
-}
-
-/* =================== DARK MODE SUPPORT =================== */
-@media (prefers-color-scheme: dark) {
-    /* Already optimized for dark mode */
 }
 
 /* =================== PRINT STYLES =================== */
