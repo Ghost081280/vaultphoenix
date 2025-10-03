@@ -1,8 +1,8 @@
-// Vault Phoenix AR Crypto Gaming - HUNT SCREEN FIXES (CLEAN & FUNCTIONAL)
+// Vault Phoenix AR Crypto Gaming - COMPLETE REDESIGNED DASHBOARD (ALL FIXES APPLIED)
 // PROTECTION: Only affects crypto-game/ folder - prevents main site interference
 // FILE PATH: crypto-game/dashboard.js
 
-console.log('🔥💎 Vault Phoenix Hunt Screen JavaScript Loading...');
+console.log('🔥💎 Vault Phoenix Dashboard JavaScript Loading...');
 
 // IMMEDIATE PROTECTION - CHECK IF THIS IS A CRYPTO GAME PAGE
 (function() {
@@ -18,7 +18,7 @@ console.log('🔥💎 Vault Phoenix Hunt Screen JavaScript Loading...');
     }
     
     window.isVaultPhoenixDashboard = true;
-    console.log('🔥💎 Hunt Screen JavaScript ACTIVE - Page confirmed');
+    console.log('🔥💎 Dashboard JavaScript ACTIVE - Page confirmed');
 })();
 
 // ONLY RUN DASHBOARD IF THIS IS A CRYPTO GAME PAGE AND SESSION IS VALID
@@ -26,7 +26,7 @@ if (window.isVaultPhoenixDashboard) {
 
     class VaultPhoenixDashboard {
         constructor() {
-            console.log('🔥💎 Vault Phoenix Hunt Screen initializing...');
+            console.log('🔥💎 Vault Phoenix Dashboard initializing...');
             
             // Initialize all properties safely
             this.userLat = 33.4484; // Phoenix, AZ default (demo player location)
@@ -43,6 +43,8 @@ if (window.isVaultPhoenixDashboard) {
             this.currentUser = null;
             this.debugMode = true;
             this.nearestToken = null;
+            this.cameraStream = null;
+            this.arCoinVisible = false;
             
             // MAP DRAGGING PROPERTIES
             this.mapIsDragging = false;
@@ -52,7 +54,7 @@ if (window.isVaultPhoenixDashboard) {
             this.mapTranslateY = 0;
             this.mapScale = 1;
 
-            // GAME DESIGNER OPTIMIZED: Enhanced Ember Token System with COLLECTABLE tokens near demo player
+            // Enhanced Ember Token System with COLLECTABLE tokens near demo player
             this.emberTokens = [
                 // CRITICAL: Demo tokens within 10m collection range for AR mode
                 { id: 1, value: 500, tier: "high", location: "Phoenix Plaza Central", lat: 33.4485, lng: -112.0741, sponsor: "Phoenix Downtown Partnership", message: "Premium downtown experience awaits!", description: "Exclusive access to downtown Phoenix events, VIP parking, and luxury dining experiences.", distance: 8, collectable: true },
@@ -83,7 +85,7 @@ if (window.isVaultPhoenixDashboard) {
         }
 
         init() {
-            console.log('🔧 Initializing Hunt Screen Dashboard...');
+            console.log('🔧 Initializing Dashboard...');
             try {
                 this.ensureSession();
                 this.loadCollectedTokens();
@@ -94,17 +96,17 @@ if (window.isVaultPhoenixDashboard) {
                 document.body.classList.add('crypto-dashboard-page');
                 this.setModeAttribute('map');
                 
-                // Initialize demo map with DESIGNED MAP
+                // Initialize map with proper boundaries
                 setTimeout(() => {
                     this.initializeMap();
                 }, 500);
                 
-                // Update nearest token for proximity detection
+                // Update nearest token for airdrop detection
                 this.updateNearestToken();
                 
-                console.log('✅ Hunt Screen initialized successfully');
+                console.log('✅ Dashboard initialized successfully');
             } catch (error) {
-                console.error('❌ Hunt Screen initialization error:', error);
+                console.error('❌ Dashboard initialization error:', error);
             }
         }
 
@@ -131,7 +133,7 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // =================== PROXIMITY DETECTION SYSTEM ===================
+        // =================== AIRDROP SYSTEM (REPLACES PROXIMITY) ===================
         updateNearestToken() {
             const availableTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
             if (availableTokens.length === 0) return;
@@ -152,49 +154,117 @@ if (window.isVaultPhoenixDashboard) {
 
             this.nearestToken = nearest;
             
-            // Update proximity notification for non-hunt screens
-            if (this.currentMode !== 'map' && nearest && nearest.distance <= 50) {
-                this.showProximityNotification(nearest);
-            } else if (this.currentMode !== 'map') {
-                this.hideProximityNotification();
+            // Show airdrop notification for non-hunt screens with random chance
+            if (this.currentMode !== 'map' && Math.random() < 0.3) { // 30% chance to show airdrop
+                this.showAirdropNotification();
+            } else if (this.currentMode === 'map') {
+                this.hideAirdropNotification();
             }
         }
 
-        showProximityNotification(token) {
-            const notification = document.getElementById('proximityNotification');
+        showAirdropNotification() {
+            const notification = document.getElementById('airdropNotification');
             if (!notification) return;
 
-            // Update notification content
-            const title = notification.querySelector('.proximity-title');
-            const subtitle = notification.querySelector('.proximity-subtitle');
-            const button = notification.querySelector('.proximity-button');
+            // Random airdrop values
+            const airdropValues = [100, 250, 500, 750, 1000];
+            const randomValue = airdropValues[Math.floor(Math.random() * airdropValues.length)];
 
-            if (title) title.textContent = `${token.value} $Ember Token Detected!`;
-            if (subtitle) subtitle.textContent = `${token.location} - ${token.distance}m away`;
+            // Update notification content for airdrop
+            const title = notification.querySelector('.airdrop-title');
+            const subtitle = notification.querySelector('.airdrop-subtitle');
+            const button = notification.querySelector('.airdrop-button');
+
+            if (title) title.textContent = `$Ember Air Drop!`;
+            if (subtitle) subtitle.textContent = `${randomValue} $Ember tokens available now`;
             
             if (button) {
                 button.onclick = () => {
-                    if (token.collectable) {
-                        this.switchMode('ar');
-                    } else {
-                        this.showNavigationModal(token);
-                    }
+                    this.claimAirdrop(randomValue);
                 };
             }
 
             notification.classList.add('show');
+            
+            // Auto-hide after 8 seconds
+            setTimeout(() => {
+                this.hideAirdropNotification();
+            }, 8000);
         }
 
-        hideProximityNotification() {
-            const notification = document.getElementById('proximityNotification');
+        hideAirdropNotification() {
+            const notification = document.getElementById('airdropNotification');
             if (notification) {
                 notification.classList.remove('show');
             }
         }
 
-        // =================== ENHANCED DESIGNED MAP SYSTEM WITH DRAGGING ===================
+        claimAirdrop(value) {
+            console.log('🪂 Claiming airdrop:', value);
+            
+            // Add airdrop tokens to vault
+            this.totalTokenValue += value;
+            this.collectedTokens.push({
+                id: Date.now(), // Unique ID for airdrop
+                value: value,
+                location: 'Airdrop Bonus',
+                sponsor: 'Vault Phoenix',
+                tier: 'bonus',
+                collectedAt: new Date().toISOString(),
+                isAirdrop: true
+            });
+            
+            this.saveCollectedTokens();
+            this.updateVaultStats();
+            this.hideAirdropNotification();
+            
+            // Show success message
+            this.showAirdropSuccess(value);
+        }
+
+        showAirdropSuccess(value) {
+            const success = document.createElement('div');
+            success.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(67, 160, 71, 0.95));
+                color: white;
+                padding: 32px;
+                border-radius: 20px;
+                font-size: 20px;
+                font-weight: 800;
+                z-index: 400;
+                box-shadow: 0 16px 40px rgba(76, 175, 80, 0.6);
+                text-align: center;
+                touch-action: none;
+                user-select: none;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+            `;
+            success.innerHTML = `
+                <div style="font-size: 48px; margin-bottom: 16px;">🪂</div>
+                <div>Airdrop Claimed!</div>
+                <div style="font-size: 18px; margin-top: 12px; opacity: 0.9;">+${value} $Ember</div>
+                <div style="font-size: 14px; margin-top: 8px; opacity: 0.8;">Added to your vault</div>
+            `;
+
+            document.body.appendChild(success);
+
+            setTimeout(() => {
+                if (document.body.contains(success)) {
+                    document.body.removeChild(success);
+                }
+            }, 3000);
+
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100, 50, 200]);
+            }
+        }
+
+        // =================== ENHANCED MAP SYSTEM WITH BOUNDARIES ===================
         initializeMap() {
-            console.log('🗺️ Initializing ENHANCED Map System with Dragging...');
+            console.log('🗺️ Initializing Enhanced Map System...');
             try {
                 const mapContainer = document.getElementById('googleMapContainer');
                 if (!mapContainer) {
@@ -202,7 +272,7 @@ if (window.isVaultPhoenixDashboard) {
                     return;
                 }
 
-                console.log('🎨 Creating ENHANCED Phoenix map with full screen dragging...');
+                console.log('🎨 Creating Phoenix map with proper boundaries...');
                 this.createEnhancedPhoenixMap(mapContainer);
                 
             } catch (error) {
@@ -211,16 +281,16 @@ if (window.isVaultPhoenixDashboard) {
         }
 
         createEnhancedPhoenixMap(mapContainer) {
-            console.log('🎨 Creating enhanced draggable Phoenix map...');
+            console.log('🎨 Creating enhanced Phoenix map with zoom boundaries...');
             try {
-                // Create ENHANCED Phoenix map with DRAGGING functionality
+                // Create enhanced Phoenix map with proper zoom boundaries
                 mapContainer.innerHTML = `
                     <div class="designed-phoenix-map" id="phoenixMapContainer" style="
                         position: absolute;
                         top: 0;
                         left: 0;
-                        width: 200%;
-                        height: 200%;
+                        width: 150%;
+                        height: 150%;
                         background: linear-gradient(135deg, #f4f1e8 0%, #e8dcc7 25%, #ddd1bb 50%, #d1c5af 75%, #c5b9a3 100%);
                         overflow: visible;
                         z-index: 1;
@@ -228,7 +298,7 @@ if (window.isVaultPhoenixDashboard) {
                         pointer-events: auto;
                         touch-action: pan-x pan-y;
                         user-select: none;
-                        transform-origin: 0 0;
+                        transform-origin: center center;
                         will-change: transform;
                     ">
                         <!-- Phoenix Mountains Background -->
@@ -247,9 +317,9 @@ if (window.isVaultPhoenixDashboard) {
                         <!-- Major Roads and Highways -->
                         <div class="road-network" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none;">
                             <!-- I-10 Highway (East-West) -->
-                            <div style="position: absolute; top: 65%; left: 0; width: 100%; height: 4px; background: #4a4a4a; opacity: 0.8; border-radius: 2px;"></div>
+                            <div style="position: absolute; top: 65%; left: 0; width: 100%; height: 4px; background: #4a4a4a; opacity: 0.8; border-radius: 2px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
                             <!-- I-17 Highway (North-South) -->
-                            <div style="position: absolute; left: 45%; top: 0; width: 4px; height: 100%; background: #4a4a4a; opacity: 0.8; border-radius: 2px;"></div>
+                            <div style="position: absolute; left: 45%; top: 0; width: 4px; height: 100%; background: #4a4a4a; opacity: 0.8; border-radius: 2px; box-shadow: 2px 0 4px rgba(0,0,0,0.2);"></div>
                             <!-- Loop 101 -->
                             <div style="position: absolute; top: 40%; left: 60%; width: 35%; height: 3px; background: #666; opacity: 0.7; border-radius: 1px; transform: rotate(15deg);"></div>
                             <!-- Central Avenue -->
@@ -262,18 +332,18 @@ if (window.isVaultPhoenixDashboard) {
                         <div class="phoenix-landmarks" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none;">
                             <!-- Downtown Phoenix Skyline -->
                             <div class="downtown-skyline" style="position: absolute; left: 42%; top: 58%; width: 12%; height: 15%;">
-                                <div style="background: #2c3e50; width: 15%; height: 80%; position: absolute; left: 0; bottom: 0; border-radius: 1px 1px 0 0;"></div>
-                                <div style="background: #34495e; width: 20%; height: 100%; position: absolute; left: 20%; bottom: 0; border-radius: 1px 1px 0 0;"></div>
-                                <div style="background: #2c3e50; width: 18%; height: 70%; position: absolute; left: 45%; bottom: 0; border-radius: 1px 1px 0 0;"></div>
-                                <div style="background: #34495e; width: 25%; height: 85%; position: absolute; left: 68%; bottom: 0; border-radius: 1px 1px 0 0;"></div>
+                                <div style="background: #2c3e50; width: 15%; height: 80%; position: absolute; left: 0; bottom: 0; border-radius: 1px 1px 0 0; border: 1px solid rgba(255,255,255,0.1);"></div>
+                                <div style="background: #34495e; width: 20%; height: 100%; position: absolute; left: 20%; bottom: 0; border-radius: 1px 1px 0 0; border: 1px solid rgba(255,255,255,0.1);"></div>
+                                <div style="background: #2c3e50; width: 18%; height: 70%; position: absolute; left: 45%; bottom: 0; border-radius: 1px 1px 0 0; border: 1px solid rgba(255,255,255,0.1);"></div>
+                                <div style="background: #34495e; width: 25%; height: 85%; position: absolute; left: 68%; bottom: 0; border-radius: 1px 1px 0 0; border: 1px solid rgba(255,255,255,0.1);"></div>
                             </div>
                             
                             <!-- Camelback Mountain -->
-                            <div style="position: absolute; left: 65%; top: 20%; width: 8px; height: 6px; background: #8B4513; border-radius: 4px 4px 0 0; transform: skew(-10deg);"></div>
+                            <div style="position: absolute; left: 65%; top: 20%; width: 8px; height: 6px; background: #8B4513; border-radius: 4px 4px 0 0; transform: skew(-10deg); filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));"></div>
                             <div style="position: absolute; left: 63%; top: 18%; font-size: 8px; color: #5d4037; font-weight: bold;">Camelback</div>
                             
                             <!-- Sky Harbor Airport -->
-                            <div style="position: absolute; left: 35%; top: 75%; width: 16px; height: 8px; background: #607d8b; border-radius: 2px;"></div>
+                            <div style="position: absolute; left: 35%; top: 75%; width: 16px; height: 8px; background: #607d8b; border-radius: 2px; border: 1px solid rgba(255,255,255,0.1);"></div>
                             <div style="position: absolute; left: 37%; top: 76%; width: 12px; height: 6px; background: #546e7a; border-radius: 1px;"></div>
                             <div style="position: absolute; left: 32%; top: 72%; font-size: 8px; color: #37474f; font-weight: bold;">✈️ PHX</div>
                             
@@ -308,7 +378,7 @@ if (window.isVaultPhoenixDashboard) {
                             backdrop-filter: blur(10px);
                         ">🏜️ Phoenix Metropolitan Area</div>
                         
-                        <!-- Map Controls - ALWAYS VISIBLE -->
+                        <!-- Map Controls - FIXED POSITIONING -->
                         <div style="
                             position: fixed;
                             bottom: calc(env(safe-area-inset-bottom, 14px) + 280px);
@@ -386,8 +456,8 @@ if (window.isVaultPhoenixDashboard) {
                         <!-- Demo Player Location (You Are Here) -->
                         <div id="playerLocation" style="
                             position: absolute;
-                            top: 30%;
-                            left: 23%;
+                            top: 50%;
+                            left: 50%;
                             width: 24px;
                             height: 24px;
                             background: linear-gradient(135deg, #4285F4, #1565C0);
@@ -403,8 +473,8 @@ if (window.isVaultPhoenixDashboard) {
                         <!-- You Are Here Label -->
                         <div id="playerLocationLabel" style="
                             position: absolute;
-                            top: 26%;
-                            left: 23%;
+                            top: 46%;
+                            left: 50%;
                             transform: translateX(-50%);
                             background: rgba(66, 133, 244, 0.95);
                             color: white;
@@ -423,16 +493,16 @@ if (window.isVaultPhoenixDashboard) {
                     </div>
                 `;
 
-                // Set up enhanced map interactions with dragging
+                // Set up map controls with proper boundaries
                 this.setupEnhancedMapControls();
 
-                // Add token markers with proper positioning
+                // Add token markers
                 setTimeout(() => {
                     this.addPhoenixTokenMarkers();
                     this.startGameFeatures();
                 }, 1000);
 
-                console.log('✅ Enhanced draggable Phoenix map initialized successfully');
+                console.log('✅ Enhanced Phoenix map with boundaries initialized');
                 
             } catch (error) {
                 console.error('❌ Enhanced map creation error:', error);
@@ -440,7 +510,7 @@ if (window.isVaultPhoenixDashboard) {
         }
 
         setupEnhancedMapControls() {
-            console.log('🖱️ Setting up enhanced map controls with dragging...');
+            console.log('🖱️ Setting up map controls with boundaries...');
             
             setTimeout(() => {
                 const mapContainer = document.getElementById('phoenixMapContainer');
@@ -448,7 +518,7 @@ if (window.isVaultPhoenixDashboard) {
                 const zoomOutBtn = document.getElementById('zoomOutBtn');
                 const centerMapBtn = document.getElementById('centerMapBtn');
 
-                // ENHANCED MAP DRAGGING FUNCTIONALITY
+                // Enhanced map dragging with boundaries
                 if (mapContainer) {
                     let isDragging = false;
                     let startX = 0;
@@ -456,7 +526,19 @@ if (window.isVaultPhoenixDashboard) {
                     let currentX = this.mapTranslateX;
                     let currentY = this.mapTranslateY;
 
-                    // Mouse/Touch start
+                    // Get map boundaries
+                    const getBoundaries = () => {
+                        const containerRect = mapContainer.parentElement.getBoundingClientRect();
+                        const mapRect = mapContainer.getBoundingClientRect();
+                        
+                        return {
+                            minX: -(mapRect.width - containerRect.width) / this.mapScale,
+                            maxX: 0,
+                            minY: -(mapRect.height - containerRect.height) / this.mapScale,
+                            maxY: 0
+                        };
+                    };
+
                     const handleStart = (e) => {
                         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -471,7 +553,6 @@ if (window.isVaultPhoenixDashboard) {
                         e.preventDefault();
                     };
 
-                    // Mouse/Touch move
                     const handleMove = (e) => {
                         if (!isDragging) return;
                         
@@ -481,21 +562,16 @@ if (window.isVaultPhoenixDashboard) {
                         currentX = clientX - startX;
                         currentY = clientY - startY;
                         
-                        // Constrain dragging bounds
-                        const maxX = window.innerWidth * 0.3;
-                        const minX = -window.innerWidth * 0.8;
-                        const maxY = window.innerHeight * 0.3;
-                        const minY = -window.innerHeight * 0.8;
-                        
-                        currentX = Math.max(minX, Math.min(maxX, currentX));
-                        currentY = Math.max(minY, Math.min(maxY, currentY));
+                        // Apply boundaries
+                        const boundaries = getBoundaries();
+                        currentX = Math.max(boundaries.minX, Math.min(boundaries.maxX, currentX));
+                        currentY = Math.max(boundaries.minY, Math.min(boundaries.maxY, currentY));
                         
                         this.updateMapTransform(currentX, currentY, this.mapScale);
                         
                         e.preventDefault();
                     };
 
-                    // Mouse/Touch end
                     const handleEnd = (e) => {
                         if (!isDragging) return;
                         
@@ -509,7 +585,7 @@ if (window.isVaultPhoenixDashboard) {
                         e.preventDefault();
                     };
 
-                    // Add event listeners for dragging
+                    // Add event listeners
                     mapContainer.addEventListener('mousedown', handleStart, { passive: false });
                     mapContainer.addEventListener('touchstart', handleStart, { passive: false });
                     
@@ -519,57 +595,60 @@ if (window.isVaultPhoenixDashboard) {
                     document.addEventListener('mouseup', handleEnd, { passive: false });
                     document.addEventListener('touchend', handleEnd, { passive: false });
                     
-                    // Prevent context menu on long press
                     mapContainer.addEventListener('contextmenu', (e) => e.preventDefault());
                 }
 
-                // ZOOM IN BUTTON
+                // Enhanced zoom controls with boundaries
                 if (zoomInBtn) {
                     const zoomInHandler = (e) => {
                         e.preventDefault();
                         e.stopPropagation();
                         
-                        this.mapScale = Math.min(this.mapScale * 1.2, 3);
-                        this.updateMapTransform(this.mapTranslateX, this.mapTranslateY, this.mapScale);
-                        
-                        // Visual feedback
-                        zoomInBtn.style.transform = 'scale(0.9)';
-                        setTimeout(() => {
-                            zoomInBtn.style.transform = 'scale(1)';
-                        }, 150);
-                        
-                        if (navigator.vibrate) navigator.vibrate(30);
-                        console.log('🔍 Zoomed in to', this.mapScale);
+                        const newScale = Math.min(this.mapScale * 1.3, 3);
+                        if (newScale !== this.mapScale) {
+                            this.mapScale = newScale;
+                            this.updateMapTransform(this.mapTranslateX, this.mapTranslateY, this.mapScale);
+                            
+                            // Visual feedback
+                            zoomInBtn.style.transform = 'scale(0.9)';
+                            setTimeout(() => {
+                                zoomInBtn.style.transform = 'scale(1)';
+                            }, 150);
+                            
+                            if (navigator.vibrate) navigator.vibrate(30);
+                            console.log('🔍 Zoomed in to', this.mapScale);
+                        }
                     };
 
                     zoomInBtn.addEventListener('click', zoomInHandler, { passive: false });
                     zoomInBtn.addEventListener('touchend', zoomInHandler, { passive: false });
                 }
 
-                // ZOOM OUT BUTTON
                 if (zoomOutBtn) {
                     const zoomOutHandler = (e) => {
                         e.preventDefault();
                         e.stopPropagation();
                         
-                        this.mapScale = Math.max(this.mapScale / 1.2, 0.5);
-                        this.updateMapTransform(this.mapTranslateX, this.mapTranslateY, this.mapScale);
-                        
-                        // Visual feedback
-                        zoomOutBtn.style.transform = 'scale(0.9)';
-                        setTimeout(() => {
-                            zoomOutBtn.style.transform = 'scale(1)';
-                        }, 150);
-                        
-                        if (navigator.vibrate) navigator.vibrate(30);
-                        console.log('🔍 Zoomed out to', this.mapScale);
+                        const newScale = Math.max(this.mapScale / 1.3, 0.5);
+                        if (newScale !== this.mapScale) {
+                            this.mapScale = newScale;
+                            this.updateMapTransform(this.mapTranslateX, this.mapTranslateY, this.mapScale);
+                            
+                            // Visual feedback
+                            zoomOutBtn.style.transform = 'scale(0.9)';
+                            setTimeout(() => {
+                                zoomOutBtn.style.transform = 'scale(1)';
+                            }, 150);
+                            
+                            if (navigator.vibrate) navigator.vibrate(30);
+                            console.log('🔍 Zoomed out to', this.mapScale);
+                        }
                     };
 
                     zoomOutBtn.addEventListener('click', zoomOutHandler, { passive: false });
                     zoomOutBtn.addEventListener('touchend', zoomOutHandler, { passive: false });
                 }
 
-                // CENTER MAP BUTTON
                 if (centerMapBtn) {
                     const centerMapHandler = (e) => {
                         e.preventDefault();
@@ -587,7 +666,7 @@ if (window.isVaultPhoenixDashboard) {
                         }, 150);
                         
                         if (navigator.vibrate) navigator.vibrate([30, 10, 30]);
-                        console.log('🎯 Map centered');
+                        console.log('🎯 Map centered and reset');
                     };
 
                     centerMapBtn.addEventListener('click', centerMapHandler, { passive: false });
@@ -603,37 +682,37 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // Add Phoenix-positioned token markers
+        // =================== TOKEN MARKERS ===================
         addPhoenixTokenMarkers() {
             console.log('💎 Adding Phoenix token markers...');
             try {
                 const markersContainer = document.getElementById('phoenixTokenMarkers');
                 if (!markersContainer) {
-                    console.error('❌ Phoenix markers container not found');
+                    console.error('❌ Markers container not found');
                     return;
                 }
 
                 markersContainer.innerHTML = '';
                 markersContainer.style.pointerEvents = 'none';
 
-                // Enhanced Phoenix-specific positions for 200% sized map
+                // Phoenix-specific positions
                 const phoenixPositions = {
-                    1: { x: 23.25, y: 29.75 }, // Phoenix Plaza Central (very close to player)
-                    2: { x: 22.9, y: 30.1 },   // Heritage Square (very close to player)  
-                    3: { x: 23.6, y: 29.9 },   // Roosevelt Row Art Walk (very close to player)
-                    4: { x: 22, y: 31 },       // Chase Field
-                    5: { x: 23.5, y: 29 },     // Phoenix Convention Center
-                    6: { x: 17.5, y: 37.5 },   // Sky Harbor Airport
-                    7: { x: 37.5, y: 12.5 },   // Scottsdale Quarter
-                    8: { x: 27.5, y: 34 },     // Desert Botanical Garden
-                    9: { x: 32.5, y: 10 },     // Camelback Mountain
-                    10: { x: 26, y: 35 }       // Tempe Town Lake
+                    1: { x: 49, y: 49 },     // Phoenix Plaza Central (close to player)
+                    2: { x: 48, y: 51 },     // Heritage Square (close to player)  
+                    3: { x: 51, y: 48 },     // Roosevelt Row Art Walk (close to player)
+                    4: { x: 45, y: 55 },     // Chase Field
+                    5: { x: 52, y: 47 },     // Phoenix Convention Center
+                    6: { x: 35, y: 70 },     // Sky Harbor Airport
+                    7: { x: 75, y: 25 },     // Scottsdale Quarter
+                    8: { x: 55, y: 65 },     // Desert Botanical Garden
+                    9: { x: 65, y: 20 },     // Camelback Mountain
+                    10: { x: 52, y: 68 }     // Tempe Town Lake
                 };
 
                 let markerCount = 0;
                 this.emberTokens.forEach((token) => {
                     if (!this.isTokenCollected(token.id)) {
-                        const position = phoenixPositions[token.id] || { x: 25, y: 25 };
+                        const position = phoenixPositions[token.id] || { x: 50, y: 50 };
 
                         const marker = document.createElement('div');
                         marker.className = `phoenix-token-marker ${token.tier} ${token.collectable ? 'collectable' : 'distant'}`;
@@ -683,7 +762,7 @@ if (window.isVaultPhoenixDashboard) {
                             marker.style.fontWeight = 'bold';
                         };
 
-                        // Value and distance overlay
+                        // Value overlay
                         const valueOverlay = document.createElement('div');
                         valueOverlay.style.cssText = `
                             position: absolute;
@@ -704,7 +783,7 @@ if (window.isVaultPhoenixDashboard) {
                         `;
                         valueOverlay.innerHTML = `${token.value}<br><span style="font-size: 12px; opacity: 0.9;">${token.distance}m</span>`;
 
-                        // Collection indicator for nearby tokens
+                        // Collection indicator for collectable tokens
                         if (token.collectable) {
                             const collectIndicator = document.createElement('div');
                             collectIndicator.style.cssText = `
@@ -736,86 +815,74 @@ if (window.isVaultPhoenixDashboard) {
                             e.preventDefault();
                             e.stopPropagation();
                             
-                            console.log('🎯 Phoenix token clicked!', {
-                                location: token.location,
-                                value: token.value,
-                                distance: token.distance,
-                                collectable: token.collectable
-                            });
+                            console.log('🎯 Token clicked:', token.location);
                             
-                            // Enhanced visual feedback
+                            // Visual feedback
                             marker.style.transform = 'translate(-50%, -50%) scale(1.15)';
                             marker.style.zIndex = '150';
-                            marker.style.boxShadow = '0 0 40px rgba(240, 165, 0, 1)';
                             
                             setTimeout(() => {
                                 marker.style.transform = 'translate(-50%, -50%) scale(1)';
                                 marker.style.zIndex = token.collectable ? '125' : '120';
-                                marker.style.boxShadow = `0 0 ${token.collectable ? '25px' : '20px'} rgba(240, 165, 0, ${token.collectable ? '0.8' : '0.6'})`;
                             }, 300);
                             
-                            // Show navigation modal with AR option if collectable
                             this.showNavigationModal(token);
                             
-                            // Enhanced haptic feedback
                             if (navigator.vibrate) {
-                                navigator.vibrate(token.collectable ? [50, 20, 50, 20, 100] : [30, 10, 30]);
+                                navigator.vibrate(token.collectable ? [50, 20, 50] : [30]);
                             }
                         };
 
-                        // Universal event listeners
                         marker.addEventListener('click', handleTokenInteraction, { passive: false });
                         marker.addEventListener('touchend', handleTokenInteraction, { passive: false });
-                        marker.addEventListener('pointerup', handleTokenInteraction, { passive: false });
 
                         markersContainer.appendChild(marker);
                         markerCount++;
                     }
                 });
 
-                console.log(`✅ Added ${markerCount} Phoenix token markers`);
+                console.log(`✅ Added ${markerCount} token markers`);
                 
             } catch (error) {
-                console.error('❌ Phoenix token markers error:', error);
+                console.error('❌ Token markers error:', error);
             }
         }
 
-        // Start game features
+        // =================== GAME FEATURES ===================
         startGameFeatures() {
-            console.log('🎮 Starting Hunt Screen features...');
+            console.log('🎮 Starting game features...');
             this.updateLocationDisplay();
             this.updateNearbyTokens();
             this.updateTokenCounts();
             this.updateVaultStats();
             
-            // Remove proximity notification from hunt screen
+            // Hide airdrop on map screen
             if (this.currentMode === 'map') {
-                this.hideProximityNotification();
+                this.hideAirdropNotification();
             }
         }
 
-        // Update location display
         updateLocationDisplay() {
             try {
-                const latEl = document.getElementById('currentLat');
-                const lngEl = document.getElementById('currentLng');
-                const latEl2 = document.getElementById('lat');
-                const lngEl2 = document.getElementById('lng');
+                const elements = [
+                    { id: 'currentLat', value: this.userLat.toFixed(4) },
+                    { id: 'currentLng', value: this.userLng.toFixed(4) },
+                    { id: 'lat', value: this.userLat.toFixed(4) },
+                    { id: 'lng', value: this.userLng.toFixed(4) }
+                ];
                 
-                if (latEl) latEl.textContent = this.userLat.toFixed(4);
-                if (lngEl) lngEl.textContent = this.userLng.toFixed(4);
-                if (latEl2) latEl2.textContent = this.userLat.toFixed(4);
-                if (lngEl2) lngEl2.textContent = this.userLng.toFixed(4);
+                elements.forEach(({id, value}) => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = value;
+                });
             } catch (error) {
-                console.error('❌ Location display update error:', error);
+                console.error('❌ Location display error:', error);
             }
         }
 
-        // ENHANCED: Only show coin images in token locations list
         updateNearbyTokens() {
-            console.log('🔍 Updating nearby collectable tokens...');
+            console.log('🔍 Updating nearby tokens...');
             try {
-                // Focus on collectable tokens first, then show nearby ones
                 const collectableTokens = this.emberTokens
                     .filter(token => !this.isTokenCollected(token.id) && token.collectable)
                     .sort((a, b) => a.distance - b.distance);
@@ -826,37 +893,41 @@ if (window.isVaultPhoenixDashboard) {
                 
                 const allNearbyTokens = [...collectableTokens, ...nearbyTokens].slice(0, 5);
 
-                const nearbyCount = document.getElementById('nearbyTokenCount');
-                if (nearbyCount) {
-                    nearbyCount.textContent = `${collectableTokens.length} ready to collect`;
-                }
+                // Update handle counts
+                const nearbyCountElements = [
+                    'nearbyTokenCount', 'nearbyTokenCountVault', 
+                    'nearbyTokenCountCampaigns'
+                ];
+                
+                nearbyCountElements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = `${collectableTokens.length} ready`;
+                });
 
-                // Update token locations list with ONLY COIN IMAGES as requested
+                // Update token list
                 const tokensList = document.getElementById('tokenLocationsList');
                 if (tokensList) {
-                    tokensList.innerHTML = allNearbyTokens.map((token) => {
-                        return `
-                            <div class="token-location-item ${token.collectable ? 'collectable-token' : 'distant-token'}" 
-                                 data-token-id="${token.id}" 
-                                 style="cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; min-height: 95px;">
-                                <div class="token-location-icon ${token.collectable ? 'collectable-icon' : ''}">
-                                    <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" 
-                                         style="width: 32px; height: 32px; border-radius: 50%;" 
-                                         onerror="this.textContent='💎'">
-                                </div>
-                                <div class="token-location-info">
-                                    <div class="token-location-name">${token.location}</div>
-                                    <div class="token-location-distance">
-                                        ${token.distance}m away • ${token.collectable ? '📱 AR Ready' : '🗺️ Navigate'}
-                                    </div>
-                                    <div class="token-sponsor">${token.sponsor}</div>
-                                </div>
-                                <div class="token-location-value ${token.collectable ? 'collectable-value' : ''}">${token.value}</div>
+                    tokensList.innerHTML = allNearbyTokens.map((token) => `
+                        <div class="token-location-item ${token.collectable ? 'collectable-token' : ''}" 
+                             data-token-id="${token.id}" 
+                             style="cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none;">
+                            <div class="token-location-icon ${token.collectable ? 'collectable-icon' : ''}">
+                                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" 
+                                     style="width: 32px; height: 32px; border-radius: 50%;" 
+                                     onerror="this.textContent='💎'">
                             </div>
-                        `;
-                    }).join('');
+                            <div class="token-location-info">
+                                <div class="token-location-name">${token.location}</div>
+                                <div class="token-location-distance">
+                                    ${token.distance}m away • ${token.collectable ? '📱 AR Ready' : '🗺️ Navigate'}
+                                </div>
+                                <div class="token-sponsor">${token.sponsor}</div>
+                            </div>
+                            <div class="token-location-value ${token.collectable ? 'collectable-value' : ''}">${token.value}</div>
+                        </div>
+                    `).join('');
 
-                    // Add enhanced click handlers
+                    // Add click handlers
                     tokensList.querySelectorAll('.token-location-item').forEach(item => {
                         const itemClickHandler = (e) => {
                             e.preventDefault();
@@ -865,36 +936,25 @@ if (window.isVaultPhoenixDashboard) {
                             const tokenId = parseInt(item.dataset.tokenId);
                             const token = this.emberTokens.find(t => t.id === tokenId);
                             if (token) {
-                                console.log('🎯 Token list item clicked:', token.location);
-                                
-                                // Visual feedback
                                 item.style.transform = 'translateY(-4px) scale(1.02)';
-                                item.style.boxShadow = '0 10px 30px rgba(240, 165, 0, 0.5)';
-                                
                                 setTimeout(() => {
                                     item.style.transform = '';
-                                    item.style.boxShadow = '';
                                 }, 200);
                                 
                                 this.showNavigationModal(token);
-                                
-                                if (navigator.vibrate) {
-                                    navigator.vibrate(token.collectable ? [40, 15, 40] : [25]);
-                                }
+                                if (navigator.vibrate) navigator.vibrate([40, 15, 40]);
                             }
                         };
 
                         item.addEventListener('click', itemClickHandler, { passive: false });
                         item.addEventListener('touchend', itemClickHandler, { passive: false });
-                        item.addEventListener('pointerup', itemClickHandler, { passive: false });
                     });
                 }
             } catch (error) {
-                console.error('❌ Nearby tokens update error:', error);
+                console.error('❌ Nearby tokens error:', error);
             }
         }
 
-        // Update token counts
         updateTokenCounts() {
             try {
                 const availableCount = this.emberTokens.filter(token => !this.isTokenCollected(token.id)).length;
@@ -911,13 +971,13 @@ if (window.isVaultPhoenixDashboard) {
                     if (el) el.textContent = text;
                 });
             } catch (error) {
-                console.error('❌ Token counts update error:', error);
+                console.error('❌ Token counts error:', error);
             }
         }
 
-        // ENHANCED: Show navigation modal with AR Hunt mode for collectable tokens
+        // =================== ENHANCED NAVIGATION MODAL ===================
         showNavigationModal(token) {
-            console.log('🗺️ Showing enhanced navigation modal for:', token.location);
+            console.log('🗺️ Showing navigation modal for:', token.location);
             try {
                 this.currentNavigationToken = token;
                 
@@ -929,37 +989,24 @@ if (window.isVaultPhoenixDashboard) {
                 const arOption = document.getElementById('navAR');
                 
                 if (tokenName) tokenName.textContent = `${token.value} $Ember - ${token.location}`;
+                if (distance) distance.textContent = `${token.distance}m away`;
                 
-                const distanceText = `${token.distance}m away`;
-                if (distance) distance.textContent = distanceText;
-                
-                const walkMinutes = Math.max(1, Math.round(token.distance / 80)); // Walking speed
-                const driveMinutes = Math.max(1, Math.round(token.distance / 300)); // Driving speed
+                const walkMinutes = Math.max(1, Math.round(token.distance / 80));
+                const driveMinutes = Math.max(1, Math.round(token.distance / 300));
                 
                 if (walkTime) walkTime.textContent = `~${walkMinutes} min`;
                 if (driveTime) driveTime.textContent = `~${driveMinutes} min`;
                 
-                // CRITICAL: Show AR Hunt mode for collectable tokens
+                // Show AR option for collectable tokens
                 if (arOption) {
                     if (token.collectable) {
                         arOption.style.display = 'flex';
-                        arOption.querySelector('.navigation-option-title').textContent = 'AR Hunt Mode';
-                        arOption.querySelector('.navigation-option-subtitle').textContent = 'Collect with Camera';
-                        arOption.querySelector('.navigation-option-time').textContent = 'Ready!';
-                        
-                        // Enhanced AR button styling
-                        arOption.style.background = 'linear-gradient(135deg, rgba(76, 175, 80, 0.3), rgba(129, 199, 132, 0.2))';
-                        arOption.style.borderColor = 'rgba(76, 175, 80, 0.6)';
-                        arOption.style.animation = 'arOptionPulse 2s ease-in-out infinite';
                     } else {
                         arOption.style.display = 'none';
                     }
                 }
                 
-                if (modal) {
-                    modal.classList.add('show');
-                    console.log('✅ Enhanced navigation modal displayed');
-                }
+                if (modal) modal.classList.add('show');
                 
             } catch (error) {
                 console.error('❌ Navigation modal error:', error);
@@ -968,9 +1015,7 @@ if (window.isVaultPhoenixDashboard) {
 
         hideNavigationModal() {
             const modal = document.getElementById('navigationModal');
-            if (modal) {
-                modal.classList.remove('show');
-            }
+            if (modal) modal.classList.remove('show');
             this.currentNavigationToken = null;
         }
 
@@ -978,8 +1023,14 @@ if (window.isVaultPhoenixDashboard) {
             if (!this.currentNavigationToken) return;
             
             const token = this.currentNavigationToken;
-            const destination = `${token.lat},${token.lng}`;
             
+            if (mode === 'ar') {
+                this.switchMode('ar');
+                this.hideNavigationModal();
+                return;
+            }
+            
+            const destination = `${token.lat},${token.lng}`;
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
             
             let mapsUrl;
@@ -991,10 +1042,6 @@ if (window.isVaultPhoenixDashboard) {
                 mapsUrl = isIOS ? 
                     `maps://maps.google.com/maps?daddr=${destination}&dirflg=d` :
                     `https://maps.google.com/maps?daddr=${destination}&dirflg=d`;
-            } else if (mode === 'ar') {
-                this.switchMode('ar');
-                this.hideNavigationModal();
-                return;
             }
             
             if (mapsUrl) {
@@ -1005,7 +1052,7 @@ if (window.isVaultPhoenixDashboard) {
             console.log(`🗺️ Opening ${mode} navigation to ${token.location}`);
         }
 
-        // =================== MODE SWITCHING ===================
+        // =================== AR MODE ===================
         switchMode(mode) {
             console.log('🔄 Switching to mode:', mode);
             try {
@@ -1014,16 +1061,14 @@ if (window.isVaultPhoenixDashboard) {
                 this.updateActiveTab(mode);
                 this.updateMenuItems();
                 
-                // Update proximity notifications based on mode
+                // Update airdrop notifications
                 this.updateNearestToken();
                 
                 // Hide all views first
                 const views = ['map', 'vaultView', 'campaignsView'];
                 views.forEach(viewId => {
                     const view = document.getElementById(viewId);
-                    if (view) {
-                        view.style.display = 'none';
-                    }
+                    if (view) view.style.display = 'none';
                 });
                 
                 // Show appropriate view
@@ -1031,7 +1076,7 @@ if (window.isVaultPhoenixDashboard) {
                     case 'map':
                         const mapView = document.getElementById('map');
                         if (mapView) mapView.style.display = 'block';
-                        this.hideProximityNotification(); // Remove from hunt screen
+                        this.hideAirdropNotification();
                         break;
                     case 'vault':
                         const vaultView = document.getElementById('vaultView');
@@ -1046,7 +1091,7 @@ if (window.isVaultPhoenixDashboard) {
                         const mapViewAR = document.getElementById('map');
                         if (mapViewAR) mapViewAR.style.display = 'block';
                         this.startARMode();
-                        this.hideProximityNotification(); // Hide during AR mode
+                        this.hideAirdropNotification();
                         break;
                 }
                 
@@ -1066,9 +1111,7 @@ if (window.isVaultPhoenixDashboard) {
             });
             
             const activeTab = document.querySelector(`[data-mode="${mode}"]`);
-            if (activeTab) {
-                activeTab.classList.add('active');
-            }
+            if (activeTab) activeTab.classList.add('active');
         }
 
         updateMenuItems() {
@@ -1077,60 +1120,135 @@ if (window.isVaultPhoenixDashboard) {
             });
             
             const activeItem = document.querySelector(`[data-mode="${this.currentMode}"]`);
-            if (activeItem) {
-                activeItem.classList.add('active');
+            if (activeItem) activeItem.classList.add('active');
+        }
+
+        async startARMode() {
+            console.log('📱 Starting AR Mode with camera access...');
+            try {
+                const video = document.getElementById('video');
+                const canvas = document.getElementById('canvas');
+                const arCoin = document.getElementById('arEmberCoin');
+                
+                if (!video || !canvas || !arCoin) {
+                    console.error('❌ AR elements not found');
+                    return;
+                }
+
+                // Request camera access
+                try {
+                    this.cameraStream = await navigator.mediaDevices.getUserMedia({
+                        video: { 
+                            facingMode: 'environment',
+                            width: { ideal: 1920 },
+                            height: { ideal: 1080 }
+                        }
+                    });
+                    
+                    video.srcObject = this.cameraStream;
+                    video.style.display = 'block';
+                    canvas.style.display = 'block';
+                    
+                    // Show AR coin for collection
+                    setTimeout(() => {
+                        arCoin.style.display = 'block';
+                        this.arCoinVisible = true;
+                        
+                        // Add collection handler
+                        const collectHandler = (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            this.collectARToken();
+                        };
+                        
+                        arCoin.addEventListener('click', collectHandler, { passive: false });
+                        arCoin.addEventListener('touchend', collectHandler, { passive: false });
+                    }, 1000);
+                    
+                    console.log('✅ AR camera started successfully');
+                    
+                } catch (cameraError) {
+                    console.error('❌ Camera access denied:', cameraError);
+                    alert('Camera access is required for AR mode. Please allow camera access and try again.');
+                    this.switchMode('map');
+                }
+                
+            } catch (error) {
+                console.error('❌ AR mode error:', error);
+                this.switchMode('map');
             }
         }
 
-        startARMode() {
-            console.log('📱 Starting AR Hunt Mode...');
-            const arInstructions = document.getElementById('arInstructions');
-            if (arInstructions) {
-                arInstructions.classList.add('show');
+        collectARToken() {
+            console.log('📱 Collecting AR token...');
+            
+            // Find nearest collectable token
+            const collectableToken = this.emberTokens.find(token => 
+                !this.isTokenCollected(token.id) && token.collectable
+            );
+            
+            if (collectableToken) {
+                this.collectToken(collectableToken);
+                
+                // Hide AR coin
+                const arCoin = document.getElementById('arEmberCoin');
+                if (arCoin) arCoin.style.display = 'none';
+                this.arCoinVisible = false;
+                
+                // Switch back to map after collection
                 setTimeout(() => {
-                    arInstructions.classList.remove('show');
-                }, 5000);
+                    this.switchMode('map');
+                }, 2000);
+            }
+        }
+
+        stopARMode() {
+            console.log('📱 Stopping AR mode...');
+            try {
+                if (this.cameraStream) {
+                    this.cameraStream.getTracks().forEach(track => track.stop());
+                    this.cameraStream = null;
+                }
+                
+                const video = document.getElementById('video');
+                const canvas = document.getElementById('canvas');
+                const arCoin = document.getElementById('arEmberCoin');
+                
+                if (video) video.style.display = 'none';
+                if (canvas) canvas.style.display = 'none';
+                if (arCoin) {
+                    arCoin.style.display = 'none';
+                    this.arCoinVisible = false;
+                }
+                
+                console.log('✅ AR mode stopped');
+            } catch (error) {
+                console.error('❌ AR stop error:', error);
             }
         }
 
         // =================== VAULT SYSTEM ===================
         updateVaultStats() {
             try {
-                const badgeCountEl = document.querySelector('.badge-count');
-                const vaultBalanceEl = document.getElementById('vaultBalance');
-                const vaultUsdValueEl = document.getElementById('vaultUsdValue');
-                const totalCollectedEl = document.getElementById('totalCollected');
-                const totalValueEl = document.getElementById('totalValue');
-                const locationsVisitedEl = document.getElementById('locationsVisited');
+                const elements = [
+                    { id: 'navEmberCount', value: this.totalTokenValue.toLocaleString() },
+                    { id: 'menuEmberCount', value: this.totalTokenValue.toLocaleString() },
+                    { id: 'vaultBalance', value: `${this.totalTokenValue.toLocaleString()} $Ember Tokens` },
+                    { id: 'vaultUsdValue', value: `$${(this.totalTokenValue * 0.001).toFixed(2)} USD` },
+                    { id: 'totalCollected', value: this.collectedTokens.length },
+                    { id: 'totalValue', value: `$${(this.totalTokenValue * 0.001).toFixed(2)}` },
+                    { id: 'locationsVisited', value: new Set(this.collectedTokens.map(t => t.location)).size },
+                    { id: 'qrTokenAmount', value: `${this.totalTokenValue} $Ember` },
+                    { id: 'qrTokenValue', value: `$${(this.totalTokenValue * 0.001).toFixed(2)} USD` }
+                ];
+                
+                elements.forEach(({id, value}) => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = value;
+                });
+                
+                // Update last activity
                 const lastActivityEl = document.getElementById('lastActivity');
-                
-                if (badgeCountEl) {
-                    badgeCountEl.textContent = this.totalTokenValue.toLocaleString();
-                }
-                
-                if (vaultBalanceEl) {
-                    vaultBalanceEl.textContent = `${this.totalTokenValue.toLocaleString()} $Ember Tokens`;
-                }
-                
-                if (vaultUsdValueEl) {
-                    const usdValue = (this.totalTokenValue * 0.001).toFixed(2);
-                    vaultUsdValueEl.textContent = `${usdValue} USD`;
-                }
-                
-                if (totalCollectedEl) {
-                    totalCollectedEl.textContent = this.collectedTokens.length;
-                }
-                
-                if (totalValueEl) {
-                    const totalUsd = (this.totalTokenValue * 0.001).toFixed(2);
-                    totalValueEl.textContent = `${totalUsd}`;
-                }
-                
-                if (locationsVisitedEl) {
-                    const uniqueLocations = new Set(this.collectedTokens.map(t => t.location)).size;
-                    locationsVisitedEl.textContent = uniqueLocations;
-                }
-                
                 if (lastActivityEl && this.collectedTokens.length > 0) {
                     lastActivityEl.textContent = 'Today';
                 }
@@ -1138,7 +1256,7 @@ if (window.isVaultPhoenixDashboard) {
                 this.updateTokenHistory();
                 
             } catch (error) {
-                console.error('❌ Vault stats update error:', error);
+                console.error('❌ Vault stats error:', error);
             }
         }
 
@@ -1165,14 +1283,14 @@ if (window.isVaultPhoenixDashboard) {
                             </div>
                             <div class="history-details">
                                 <div class="history-title">${token.location}</div>
-                                <div class="history-subtitle">Just now • ${token.sponsor}</div>
+                                <div class="history-subtitle">${token.isAirdrop ? 'Airdrop Bonus' : token.sponsor} • ${token.tier?.toUpperCase() || 'BONUS'}</div>
                             </div>
                             <div class="history-value">+${token.value}</div>
                         </div>
                     `).join('');
                 }
             } catch (error) {
-                console.error('❌ Token history update error:', error);
+                console.error('❌ Token history error:', error);
             }
         }
 
@@ -1324,71 +1442,79 @@ if (window.isVaultPhoenixDashboard) {
         setupSwipeableModule() {
             console.log('👆 Setting up enhanced swipeable module...');
             try {
-                const handle = document.getElementById('swipeHandle');
-                if (!handle) return;
+                // Setup for all module instances
+                const moduleIds = [
+                    'swipeHandle', 'swipeHandleVault', 'swipeHandleCampaigns'
+                ];
                 
-                let startY = 0;
-                let currentY = 0;
-                let isDragging = false;
+                moduleIds.forEach(handleId => {
+                    const handle = document.getElementById(handleId);
+                    if (!handle) return;
+                    
+                    let startY = 0;
+                    let currentY = 0;
+                    let isDragging = false;
 
-                const handleTouchStart = (e) => {
-                    isDragging = true;
-                    startY = e.touches ? e.touches[0].clientY : e.clientY;
-                    currentY = startY;
-                    e.preventDefault();
-                };
+                    const handleTouchStart = (e) => {
+                        isDragging = true;
+                        startY = e.touches ? e.touches[0].clientY : e.clientY;
+                        currentY = startY;
+                        e.preventDefault();
+                    };
 
-                const handleTouchMove = (e) => {
-                    if (!isDragging) return;
-                    
-                    currentY = e.touches ? e.touches[0].clientY : e.clientY;
-                    const deltaY = startY - currentY;
-                    
-                    // Visual feedback during drag
-                    const module = document.getElementById('tokenLocationsModule');
-                    if (module && Math.abs(deltaY) > 10) {
-                        const progress = Math.min(Math.abs(deltaY) / 100, 1);
-                        module.style.opacity = 0.8 + (progress * 0.2);
-                    }
-                    
-                    e.preventDefault();
-                };
-
-                const handleTouchEnd = (e) => {
-                    if (!isDragging) return;
-                    isDragging = false;
-                    
-                    const deltaY = startY - currentY;
-                    const threshold = 60; // Increased threshold for better mobile experience
-                    
-                    if (Math.abs(deltaY) > threshold) {
-                        if (deltaY > 0) {
-                            this.expandModule();
-                        } else {
-                            this.collapseModule();
+                    const handleTouchMove = (e) => {
+                        if (!isDragging) return;
+                        
+                        currentY = e.touches ? e.touches[0].clientY : e.clientY;
+                        const deltaY = startY - currentY;
+                        
+                        // Visual feedback during drag
+                        const moduleId = handleId.replace('swipeHandle', 'tokenLocationsModule') || 'tokenLocationsModule';
+                        const module = document.getElementById(moduleId);
+                        if (module && Math.abs(deltaY) > 10) {
+                            const progress = Math.min(Math.abs(deltaY) / 100, 1);
+                            module.style.opacity = 0.8 + (progress * 0.2);
                         }
-                    } else {
-                        // Toggle on tap if no significant drag
-                        this.toggleModule();
-                    }
-                    
-                    // Reset opacity
-                    const module = document.getElementById('tokenLocationsModule');
-                    if (module) {
-                        module.style.opacity = '';
-                    }
-                    
-                    e.preventDefault();
-                };
+                        
+                        e.preventDefault();
+                    };
 
-                // Add all event listeners
-                handle.addEventListener('touchstart', handleTouchStart, { passive: false });
-                handle.addEventListener('touchmove', handleTouchMove, { passive: false });
-                handle.addEventListener('touchend', handleTouchEnd, { passive: false });
-                handle.addEventListener('mousedown', handleTouchStart, { passive: false });
-                handle.addEventListener('mousemove', handleTouchMove, { passive: false });
-                handle.addEventListener('mouseup', handleTouchEnd, { passive: false });
-                handle.addEventListener('click', this.toggleModule.bind(this), { passive: false });
+                    const handleTouchEnd = (e) => {
+                        if (!isDragging) return;
+                        isDragging = false;
+                        
+                        const deltaY = startY - currentY;
+                        const threshold = 60;
+                        
+                        if (Math.abs(deltaY) > threshold) {
+                            if (deltaY > 0) {
+                                this.expandModule(handleId);
+                            } else {
+                                this.collapseModule(handleId);
+                            }
+                        } else {
+                            this.toggleModule(handleId);
+                        }
+                        
+                        // Reset opacity
+                        const moduleId = handleId.replace('swipeHandle', 'tokenLocationsModule') || 'tokenLocationsModule';
+                        const module = document.getElementById(moduleId);
+                        if (module) {
+                            module.style.opacity = '';
+                        }
+                        
+                        e.preventDefault();
+                    };
+
+                    // Add event listeners
+                    handle.addEventListener('touchstart', handleTouchStart, { passive: false });
+                    handle.addEventListener('touchmove', handleTouchMove, { passive: false });
+                    handle.addEventListener('touchend', handleTouchEnd, { passive: false });
+                    handle.addEventListener('mousedown', handleTouchStart, { passive: false });
+                    handle.addEventListener('mousemove', handleTouchMove, { passive: false });
+                    handle.addEventListener('mouseup', handleTouchEnd, { passive: false });
+                    handle.addEventListener('click', () => this.toggleModule(handleId), { passive: false });
+                });
                 
                 console.log('✅ Enhanced swipeable module setup complete');
             } catch (error) {
@@ -1396,42 +1522,54 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        toggleModule() {
-            if (this.moduleExpanded) {
-                this.collapseModule();
-            } else {
-                this.expandModule();
+        toggleModule(handleId) {
+            const moduleId = this.getModuleId(handleId);
+            const module = document.getElementById(moduleId);
+            
+            if (module) {
+                if (module.classList.contains('expanded')) {
+                    this.collapseModule(handleId);
+                } else {
+                    this.expandModule(handleId);
+                }
             }
         }
 
-        expandModule() {
-            const module = document.getElementById('tokenLocationsModule');
+        expandModule(handleId) {
+            const moduleId = this.getModuleId(handleId);
+            const module = document.getElementById(moduleId);
+            
             if (module) {
                 module.classList.add('expanded');
                 module.classList.remove('collapsed');
                 this.moduleExpanded = true;
                 
-                if (navigator.vibrate) {
-                    navigator.vibrate(40);
-                }
-                
-                console.log('📱 Module expanded');
+                if (navigator.vibrate) navigator.vibrate(40);
+                console.log('📱 Module expanded:', moduleId);
             }
         }
 
-        collapseModule() {
-            const module = document.getElementById('tokenLocationsModule');
+        collapseModule(handleId) {
+            const moduleId = this.getModuleId(handleId);
+            const module = document.getElementById(moduleId);
+            
             if (module) {
                 module.classList.remove('expanded');
                 module.classList.add('collapsed');
                 this.moduleExpanded = false;
                 
-                if (navigator.vibrate) {
-                    navigator.vibrate(30);
-                }
-                
-                console.log('📱 Module collapsed');
+                if (navigator.vibrate) navigator.vibrate(30);
+                console.log('📱 Module collapsed:', moduleId);
             }
+        }
+
+        getModuleId(handleId) {
+            const mapping = {
+                'swipeHandle': 'tokenLocationsModule',
+                'swipeHandleVault': 'tokenLocationsModuleVault',
+                'swipeHandleCampaigns': 'tokenLocationsModuleCampaigns'
+            };
+            return mapping[handleId] || 'tokenLocationsModule';
         }
 
         // =================== RESET GAME ===================
@@ -1552,7 +1690,7 @@ if (window.isVaultPhoenixDashboard) {
                     });
                 }
 
-                // ENHANCED: AR Hunt mode navigation
+                // AR Hunt mode navigation
                 if (navAR) {
                     addUniversalEventListener(navAR, (e) => {
                         e.preventDefault();
@@ -1691,6 +1829,23 @@ if (window.isVaultPhoenixDashboard) {
                     });
                 }
 
+                // Airdrop claim button
+                const airdropClaimButton = document.getElementById('airdropClaimButton');
+                if (airdropClaimButton) {
+                    addUniversalEventListener(airdropClaimButton, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // This will be handled by the showAirdropNotification function
+                    });
+                }
+
+                // Mode switches when leaving AR
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden && this.currentMode === 'ar') {
+                        this.stopARMode();
+                    }
+                });
+
                 console.log('✅ Enhanced event listeners setup complete');
             } catch (error) {
                 console.error('❌ Event listeners setup error:', error);
@@ -1716,11 +1871,11 @@ if (window.isVaultPhoenixDashboard) {
     }
 
     // =================== GLOBAL INITIALIZATION ===================
-    console.log('🔥💎 Creating Hunt Screen Dashboard instance...');
+    console.log('🔥💎 Creating Dashboard instance...');
     window.vaultPhoenixDashboard = new VaultPhoenixDashboard();
 
 } else {
-    console.log('🚫 Hunt Screen JavaScript blocked - not a crypto game page');
+    console.log('🚫 Dashboard JavaScript blocked - not a crypto game page');
 }
 
-console.log('🔥💎 Hunt Screen JavaScript loaded successfully');
+console.log('🔥💎 Dashboard JavaScript loaded successfully');
