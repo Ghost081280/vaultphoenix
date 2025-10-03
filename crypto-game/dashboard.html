@@ -69,37 +69,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Token Locations Module - FIXED (NO GAP) -->
-            <div class="token-locations-module collapsed" id="tokenLocationsModule">
-                <div class="swipe-handle" id="swipeHandle">
-                    <div class="handle-bar"></div>
-                    <div class="handle-text">
-                        <span class="handle-title">
-                            <div class="ember-icons-container">
-                                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
-                                <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
-                                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
-                                <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
-                            </div>
-                            $Ember Tokens Nearby
-                        </span>
-                        <span class="handle-count" id="nearbyTokenCount">Explore locations</span>
-                    </div>
-                </div>
-                <div class="module-content" id="moduleContent">
-                    <div class="module-header">
-                        <div class="module-title">
-                            <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
-                            Token Locations
-                        </div>
-                        <div class="total-available" id="totalAvailable">10 total available</div>
-                    </div>
-                    <div class="token-locations-list" id="tokenLocationsList">
-                        <!-- Token locations will be populated by JavaScript -->
-                    </div>
-                </div>
-            </div>
         </div>
         
         <video id="video" autoplay muted playsinline style="display: none;"></video>
@@ -112,7 +81,7 @@
             </div>
         </div>
 
-        <!-- Airdrop Notification -->
+        <!-- ENHANCED AIRDROP NOTIFICATION -->
         <div class="airdrop-notification" id="airdropNotification">
             <div class="airdrop-icon">🪂</div>
             <div class="airdrop-content">
@@ -227,6 +196,37 @@
             </div>
         </div>
         
+        <!-- UNIVERSAL TOKEN LOCATIONS MODULE - SHOWS ON ALL SCREENS -->
+        <div class="token-locations-module collapsed" id="tokenLocationsModule">
+            <div class="swipe-handle" id="swipeHandle">
+                <div class="handle-bar"></div>
+                <div class="handle-text">
+                    <span class="handle-title">
+                        <div class="ember-icons-container">
+                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
+                            <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
+                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
+                            <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
+                        </div>
+                        $Ember Tokens Nearby
+                    </span>
+                    <span class="handle-count" id="nearbyTokenCount">Explore locations</span>
+                </div>
+            </div>
+            <div class="module-content" id="moduleContent">
+                <div class="module-header">
+                    <div class="module-title">
+                        <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
+                        Token Locations
+                    </div>
+                    <div class="total-available" id="totalAvailable">10 total available</div>
+                </div>
+                <div class="token-locations-list" id="tokenLocationsList">
+                    <!-- Token locations will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
         <!-- Status Panel - FOR AR MODE ONLY -->
         <div class="status-panel" id="statusPanel">
             <div class="status-grid">
@@ -269,7 +269,7 @@
             <div class="ar-instructions-text">Point your camera around and tap the glowing $Ember coin to collect tokens!</div>
         </div>
         
-        <!-- Token Discovery Modal - RESTORED -->
+        <!-- Token Discovery Modal -->
         <div class="token-discovery" id="tokenDiscovery">
             <div class="token-discovery-content">
                 <div class="token-discovery-header">
@@ -366,27 +366,8 @@
             </div>
         </div>
         
-        <!-- $Ember Vault View - RESTORED -->
+        <!-- $Ember Vault View - COMPLETE RESTORATION -->
         <div class="vault-view" id="vaultView" style="display: none;">
-            <!-- Include Token Module on Vault Screen -->
-            <div class="token-locations-module collapsed" id="tokenLocationsModuleVault">
-                <div class="swipe-handle" id="swipeHandleVault">
-                    <div class="handle-bar"></div>
-                    <div class="handle-text">
-                        <span class="handle-title">
-                            <div class="ember-icons-container">
-                                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
-                                <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
-                                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
-                                <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
-                            </div>
-                            $Ember Tokens Nearby
-                        </span>
-                        <span class="handle-count" id="nearbyTokenCountVault">Explore locations</span>
-                    </div>
-                </div>
-            </div>
-            
             <div class="vault-container">
                 <div class="vault-header">
                     <div class="vault-title">
@@ -461,27 +442,8 @@
             </div>
         </div>
 
-        <!-- Themed Adventures View - RESTORED -->
+        <!-- Themed Adventures View - COMPLETE RESTORATION -->
         <div class="campaigns-view" id="campaignsView" style="display: none;">
-            <!-- Include Token Module on Campaigns Screen -->
-            <div class="token-locations-module collapsed" id="tokenLocationsModuleCampaigns">
-                <div class="swipe-handle" id="swipeHandleCampaigns">
-                    <div class="handle-bar"></div>
-                    <div class="handle-text">
-                        <span class="handle-title">
-                            <div class="ember-icons-container">
-                                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
-                                <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
-                                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
-                                <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
-                            </div>
-                            $Ember Tokens Nearby
-                        </span>
-                        <span class="handle-count" id="nearbyTokenCountCampaigns">Explore locations</span>
-                    </div>
-                </div>
-            </div>
-            
             <div class="campaigns-container">
                 <div class="campaigns-header">
                     <div class="campaigns-title">
