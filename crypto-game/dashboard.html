@@ -102,21 +102,21 @@
             </div>
         </div>
 
-        <!-- REDESIGNED AIRDROP NOTIFICATION - MATCHES GAME STYLE -->
+        <!-- IMPROVED AIRDROP NOTIFICATION - SINGLE MODULE -->
         <div class="airdrop-notification" id="airdropNotification">
             <div class="airdrop-header">
                 <div class="airdrop-icon-container">
                     <img src="../images/VPEmberCoin.PNG" alt="Ember" class="airdrop-ember-icon" onerror="this.textContent='💎'">
                 </div>
-                <div class="airdrop-title">$Ember Airdrop!</div>
+                <div class="airdrop-title" id="airdropTitle">$Ember Airdrop!</div>
             </div>
             <div class="airdrop-body">
                 <div class="airdrop-amount" id="airdropAmount">500 $Ember</div>
-                <div class="airdrop-subtitle">Limited time bonus - collect now!</div>
+                <div class="airdrop-subtitle" id="airdropSubtitle">Limited time bonus - collect now!</div>
             </div>
             <button class="airdrop-button" id="airdropClaimButton">
                 <span class="airdrop-btn-icon">💎</span>
-                <span>Collect Now</span>
+                <span id="airdropButtonText">Collect Now</span>
             </button>
         </div>
         
@@ -155,7 +155,7 @@
                     <!-- Token Markers Container -->
                     <div class="token-markers" id="tokenMarkers"></div>
                     
-                    <!-- FIXED: Player Location - Now inside map so it moves with map -->
+                    <!-- Player Location -->
                     <div class="player-location" id="playerLocation"></div>
                 </div>
             </div>
@@ -178,7 +178,7 @@
                         <div class="ar-icon">📱</div>
                         <div class="ar-text">
                             <div class="ar-title">AR Hunt Mode</div>
-                            <div class="ar-subtitle">Point camera to collect $Ember tokens</div>
+                            <div class="ar-subtitle">Tap tokens to collect $Ember</div>
                         </div>
                     </div>
                 </div>
@@ -299,7 +299,7 @@
             </div>
         </nav>
 
-        <!-- POLISHED: Token Collection Modal with improved layout -->
+        <!-- IMPROVED: Token Collection Modal with better button logic -->
         <div class="token-modal" id="tokenModal" style="display: none;">
             <div class="token-modal-content">
                 <div class="token-modal-header">
@@ -370,14 +370,15 @@
                     </button>
                 </div>
                 
+                <!-- IMPROVED: Better button labels after collection -->
                 <div class="token-collection-actions" style="display: none;" id="tokenCollectionActions">
-                    <button class="token-action-btn" id="goToVaultBtn">
+                    <button class="token-action-btn" id="goToHuntBtn">
+                        <span>🗺️</span>
+                        <span>Go to Hunt</span>
+                    </button>
+                    <button class="token-action-btn secondary" id="goToVaultBtn">
                         <span>🔒</span>
                         <span>Go to Vault</span>
-                    </button>
-                    <button class="token-action-btn secondary" id="closeCollectedModalBtn">
-                        <span>✕</span>
-                        <span>Close</span>
                     </button>
                 </div>
             </div>
