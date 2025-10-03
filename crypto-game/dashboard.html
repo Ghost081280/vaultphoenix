@@ -33,6 +33,19 @@
             </div>
         </nav>
 
+        <!-- Compass (AR mode only) -->
+        <div class="compass-container" id="compassContainer" style="display: none;">
+            <div class="compass" id="compass">
+                <div class="compass-needle" id="compassNeedle"></div>
+                <div class="compass-directions">
+                    <div class="compass-direction north">N</div>
+                    <div class="compass-direction south">S</div>
+                    <div class="compass-direction east">E</div>
+                    <div class="compass-direction west">W</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Side Menu -->
         <div class="menu-overlay" id="menuOverlay"></div>
         <div class="side-menu" id="sideMenu">
@@ -102,7 +115,7 @@
             </div>
         </div>
 
-        <!-- IMPROVED AIRDROP NOTIFICATION - SINGLE MODULE -->
+        <!-- Airdrop Notification -->
         <div class="airdrop-notification" id="airdropNotification">
             <div class="airdrop-header">
                 <div class="airdrop-icon-container">
@@ -185,7 +198,7 @@
             </div>
         </div>
 
-        <!-- IMPROVED VAULT SCREEN -->
+        <!-- Vault Screen -->
         <div class="vault-screen" id="vaultScreen" style="display: none;">
             <div class="vault-container">
                 <div class="vault-header">
@@ -250,7 +263,7 @@
             </div>
         </div>
 
-        <!-- Ember Tokens Nearby Slider (Appears on all screens) -->
+        <!-- Ember Tokens Nearby Slider -->
         <div class="token-locations-module collapsed" id="tokenLocationsModule">
             <div class="swipe-handle" id="swipeHandle">
                 <div class="handle-bar"></div>
@@ -299,7 +312,7 @@
             </div>
         </nav>
 
-        <!-- IMPROVED: Token Collection Modal with better button logic -->
+        <!-- Token Collection Modal -->
         <div class="token-modal" id="tokenModal" style="display: none;">
             <div class="token-modal-content">
                 <div class="token-modal-header">
@@ -320,18 +333,18 @@
                     </div>
                 </div>
                 
-                <!-- EXPANDABLE SPONSOR MESSAGE -->
+                <!-- Sponsor Message -->
                 <div class="sponsor-message" id="sponsorMessage">
                     <div class="sponsor-title" id="sponsorTitle">Sponsored by Phoenix Plaza</div>
                     <div class="sponsor-text" id="sponsorText">Exclusive downtown experience awaits!</div>
                     
-                    <!-- EXPANDABLE DETAILS SECTION -->
+                    <!-- Expandable Details Section -->
                     <div class="sponsor-details-expandable" id="sponsorDetailsExpandable" style="display: none;">
                         <div class="sponsor-description" id="sponsorDescription">
                             Experience VIP access to downtown events, priority parking, and exclusive dining experiences.
                         </div>
                         
-                        <!-- REDEMPTION OPTIONS -->
+                        <!-- Redemption Options -->
                         <div class="redemption-section-compact">
                             <div class="redemption-title-compact">Redeem Your $Ember For:</div>
                             <div class="redemption-options-compact" id="redemptionOptionsCompact">
@@ -339,7 +352,7 @@
                             </div>
                         </div>
                         
-                        <!-- IMPROVED: Location Actions with better spacing -->
+                        <!-- Location Actions -->
                         <div class="location-actions">
                             <button class="location-action-btn primary" id="getDirectionsBtn">
                                 <span>🗺️</span>
@@ -352,7 +365,7 @@
                         </div>
                     </div>
                     
-                    <!-- LEARN MORE TOGGLE BUTTON -->
+                    <!-- Learn More Toggle Button -->
                     <button class="learn-more-toggle" id="learnMoreToggle">
                         <span class="toggle-text" id="toggleText">Learn More</span>
                         <span class="toggle-icon" id="toggleIcon">▼</span>
@@ -370,7 +383,7 @@
                     </button>
                 </div>
                 
-                <!-- IMPROVED: Better button labels after collection -->
+                <!-- Button actions after collection -->
                 <div class="token-collection-actions" style="display: none;" id="tokenCollectionActions">
                     <button class="token-action-btn" id="goToHuntBtn">
                         <span>🗺️</span>
