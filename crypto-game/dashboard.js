@@ -1,5 +1,5 @@
-// Vault Phoenix AR Crypto Gaming - IMPROVED JAVASCRIPT
-// IMPROVED: Fixed airdrop timing (7-9 seconds), single module reuse, better mobile map interaction, AR labels with $Ember amounts, improved token button behaviors
+// Vault Phoenix AR Crypto Gaming - OPTIMIZED JAVASCRIPT
+// OPTIMIZED: Removed token amount labels, GPS-anchored AR tokens, compass, mobile layout fixes
 
 console.log('🔥💎 Vault Phoenix Game Loading...');
 
@@ -35,24 +35,28 @@ if (window.isVaultPhoenixGame) {
             this.totalEmberTokens = 0;
             this.currentDiscoveredToken = null;
             this.currentNavigationToken = null;
-            this.showingCollectionActions = false;
             
             // Specific token targeting for AR
-            this.targetedTokenForAR = null; // When clicking from map/slider, only show this token in AR
+            this.targetedTokenForAR = null;
             
-            // Map state - IMPROVED for better mobile interaction
+            // Map state
             this.mapScale = 1.5;
             this.mapTranslateX = 0;
             this.mapTranslateY = 0;
             this.mapMinScale = 0.8;
             this.mapMaxScale = 3.0;
-            this.mapIsDragging = false; // Prevent token clicks during map drag
-            this.mapDragThreshold = 10; // Minimum distance to register as drag
+            this.mapIsDragging = false;
+            this.mapDragThreshold = 10;
             
-            // AR state
+            // AR state with GPS anchoring
             this.cameraStream = null;
             this.arTokens = [];
             this.arUITimer = null;
+            this.deviceOrientation = 0; // For compass and GPS anchoring
+            this.watchPositionId = null;
+            
+            // Compass state
+            this.compassNeedle = null;
             
             // Module state
             this.moduleExpanded = false;
@@ -60,15 +64,14 @@ if (window.isVaultPhoenixGame) {
             // Sponsor expandable state
             this.sponsorExpanded = false;
             
-            // IMPROVED AIRDROP SYSTEM - 7-9 seconds, once per session, single module
+            // OPTIMIZED AIRDROP SYSTEM
             this.airdropShown = sessionStorage.getItem('vaultPhoenix_airdropShown') === 'true';
             this.airdropTimer = null;
             this.pendingAirdropValue = 0;
-            this.airdropCollected = false;
             
-            // Enhanced $Ember Token System - Phoenix Locations centered around player
+            // Enhanced $Ember Token System
             this.emberTokens = [
-                // COLLECTABLE tokens (close to player - green circles in AR)
+                // COLLECTABLE tokens (close to player)
                 { 
                     id: 1, 
                     value: 500, 
@@ -136,7 +139,7 @@ if (window.isVaultPhoenixGame) {
                     ]
                 },
                 
-                // DISTANT tokens (require navigation - red circles in AR)
+                // DISTANT tokens (require navigation)
                 { 
                     id: 4, 
                     value: 750, 
@@ -311,10 +314,11 @@ if (window.isVaultPhoenixGame) {
                 this.setupEventListeners();
                 this.setupSwipeableModule();
                 this.initializeMap();
+                this.setupCompass();
                 this.updateUI();
                 this.switchScreen('hunt');
                 
-                // IMPROVED: Start airdrop system with 7-9 second delay, once per session
+                // Start airdrop system with 7-9 second delay, once per session
                 if (!this.airdropShown) {
                     this.startAirdropSystem();
                 }
@@ -325,7 +329,69 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== IMPROVED AIRDROP SYSTEM - 7-9 SECONDS, SINGLE MODULE =================== 
+        // =================== COMPASS SYSTEM =================== 
+        setupCompass() {
+            this.compassNeedle = document.getElementById('compassNeedle');
+            
+            // Check for device orientation support
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (event) => {
+                    this.handleDeviceOrientation(event);
+                }, true);
+            } else {
+                console.log('📍 Device orientation not supported - using fallback compass');
+                this.startFallbackCompass();
+            }
+        }
+
+        handleDeviceOrientation(event) {
+            if (event.alpha !== null) {
+                this.deviceOrientation = event.alpha;
+                this.updateCompass(event.alpha);
+                
+                // Update AR token positions if in AR mode
+                if (this.currentScreen === 'ar') {
+                    this.updateARTokenPositions();
+                }
+            }
+        }
+
+        startFallbackCompass() {
+            // Simulate compass movement for demo purposes
+            let angle = 0;
+            setInterval(() => {
+                angle = (angle + 1) % 360;
+                this.deviceOrientation = angle;
+                this.updateCompass(angle);
+                
+                if (this.currentScreen === 'ar') {
+                    this.updateARTokenPositions();
+                }
+            }, 100);
+        }
+
+        updateCompass(heading) {
+            if (this.compassNeedle) {
+                // Rotate needle to point north
+                this.compassNeedle.style.transform = `rotate(${-heading}deg)`;
+            }
+        }
+
+        showCompass() {
+            const compassContainer = document.getElementById('compassContainer');
+            if (compassContainer) {
+                compassContainer.style.display = 'block';
+            }
+        }
+
+        hideCompass() {
+            const compassContainer = document.getElementById('compassContainer');
+            if (compassContainer) {
+                compassContainer.style.display = 'none';
+            }
+        }
+
+        // =================== AIRDROP SYSTEM =================== 
         startAirdropSystem() {
             if (!this.airdropShown) {
                 const delay = (7 + Math.random() * 2) * 1000; // 7-9 seconds delay
@@ -344,7 +410,7 @@ if (window.isVaultPhoenixGame) {
             const notification = document.getElementById('airdropNotification');
             if (!notification) return;
 
-            console.log('🪂 Showing airdrop notification - single module design');
+            console.log('🪂 Showing airdrop notification');
             
             // Random airdrop values
             const airdropValues = [250, 500, 750, 1000];
@@ -352,13 +418,12 @@ if (window.isVaultPhoenixGame) {
 
             this.pendingAirdropValue = randomValue;
             this.airdropShown = true;
-            this.airdropCollected = false;
             
             // Mark as shown in session
             sessionStorage.setItem('vaultPhoenix_airdropShown', 'true');
 
-            // Update notification content for uncollected state
-            this.updateAirdropUI(false);
+            // Update notification content
+            this.updateAirdropUI();
             
             notification.classList.add('show');
             
@@ -368,46 +433,25 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        updateAirdropUI(collected) {
+        updateAirdropUI() {
             const titleEl = document.getElementById('airdropTitle');
             const amountEl = document.getElementById('airdropAmount');
             const subtitleEl = document.getElementById('airdropSubtitle');
-            const buttonEl = document.getElementById('airdropClaimButton');
             const buttonTextEl = document.getElementById('airdropButtonText');
             
-            if (collected) {
-                // COLLECTED STATE
-                if (titleEl) titleEl.textContent = '$Ember Collected!';
-                if (amountEl) amountEl.textContent = `${this.pendingAirdropValue} $Ember`;
-                if (subtitleEl) subtitleEl.textContent = 'Added to your vault successfully!';
-                if (buttonTextEl) buttonTextEl.textContent = 'Continue Playing';
-                if (buttonEl) {
-                    buttonEl.style.background = 'linear-gradient(135deg, #4CAF50, #66BB6A)';
-                }
-            } else {
-                // UNCOLLECTED STATE
-                if (titleEl) titleEl.textContent = '$Ember Airdrop!';
-                if (amountEl) amountEl.textContent = `${this.pendingAirdropValue} $Ember`;
-                if (subtitleEl) subtitleEl.textContent = 'Limited time bonus - collect now!';
-                if (buttonTextEl) buttonTextEl.textContent = 'Collect Now';
-                if (buttonEl) {
-                    buttonEl.style.background = 'linear-gradient(135deg, #f0a500, #fb923c)';
-                }
-            }
+            if (titleEl) titleEl.textContent = '$Ember Airdrop!';
+            if (amountEl) amountEl.textContent = `${this.pendingAirdropValue} $Ember`;
+            if (subtitleEl) subtitleEl.textContent = 'Limited time bonus - collect now!';
+            if (buttonTextEl) buttonTextEl.textContent = 'Collect Now';
         }
 
         handleAirdropButtonClick() {
-            if (!this.airdropCollected) {
-                // COLLECT AIRDROP
-                this.claimAirdrop();
-            } else {
-                // CLOSE AIRDROP
-                this.hideAirdropNotification();
-            }
+            // OPTIMIZED: Just collect and show success, then auto-hide
+            this.claimAirdrop();
         }
 
         claimAirdrop() {
-            if (!this.pendingAirdropValue || this.airdropCollected) return;
+            if (!this.pendingAirdropValue) return;
             
             console.log('🪂 Claiming airdrop:', this.pendingAirdropValue);
             
@@ -425,19 +469,22 @@ if (window.isVaultPhoenixGame) {
                 isAirdrop: true
             });
             
-            this.airdropCollected = true;
             this.saveGameData();
             this.updateUI();
             this.updateVaultDisplay();
             
-            // Update UI to collected state
-            this.updateAirdropUI(true);
+            // Update UI to show success
+            const titleEl = document.getElementById('airdropTitle');
+            const subtitleEl = document.getElementById('airdropSubtitle');
+            
+            if (titleEl) titleEl.textContent = '$Ember Collected!';
+            if (subtitleEl) subtitleEl.textContent = 'Added to your vault successfully!';
             
             if (navigator.vibrate) {
                 navigator.vibrate([100, 50, 100, 50, 200]);
             }
             
-            // Auto-hide after 3 seconds
+            // OPTIMIZED: Auto-hide after 3 seconds - no additional button needed
             setTimeout(() => {
                 this.hideAirdropNotification();
             }, 3000);
@@ -493,14 +540,17 @@ if (window.isVaultPhoenixGame) {
             switch (screen) {
                 case 'hunt':
                     this.stopARMode();
+                    this.hideCompass();
                     this.updateMapTokens();
                     this.centerMapOnPlayer();
                     break;
                 case 'ar':
                     this.startARMode();
+                    this.showCompass();
                     break;
                 case 'vault':
                     this.stopARMode();
+                    this.hideCompass();
                     this.updateVaultDisplay();
                     break;
             }
@@ -526,7 +576,7 @@ if (window.isVaultPhoenixGame) {
             });
         }
 
-        // =================== IMPROVED MAP SYSTEM - BETTER MOBILE INTERACTION ===================
+        // =================== MAP SYSTEM ===================
         initializeMap() {
             console.log('🗺️ Initializing Enhanced Map...');
             
@@ -573,7 +623,6 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // IMPROVED: Better mobile map dragging - prevents accidental token clicks
         setupMapDragging() {
             const mapContainer = document.getElementById('mapContainer');
             if (!mapContainer) return;
@@ -599,7 +648,7 @@ if (window.isVaultPhoenixGame) {
                 startTouchY = clientY;
                 
                 mapContainer.style.cursor = 'grabbing';
-                this.mapIsDragging = false; // Reset drag state
+                this.mapIsDragging = false;
             };
 
             const handleMove = (e) => {
@@ -608,12 +657,10 @@ if (window.isVaultPhoenixGame) {
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
                 
-                // Calculate distance moved
                 const deltaX = Math.abs(clientX - startTouchX);
                 const deltaY = Math.abs(clientY - startTouchY);
                 const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
                 
-                // Only start dragging if moved beyond threshold
                 if (distance > this.mapDragThreshold) {
                     hasMoved = true;
                     this.mapIsDragging = true;
@@ -636,7 +683,6 @@ if (window.isVaultPhoenixGame) {
                 
                 mapContainer.style.cursor = 'grab';
                 
-                // Keep drag state active briefly to prevent token clicks
                 setTimeout(() => {
                     this.mapIsDragging = false;
                 }, 100);
@@ -644,7 +690,6 @@ if (window.isVaultPhoenixGame) {
                 e.preventDefault();
             };
 
-            // Add event listeners
             mapContainer.addEventListener('mousedown', handleStart, { passive: false });
             mapContainer.addEventListener('touchstart', handleStart, { passive: false });
             
@@ -681,7 +726,7 @@ if (window.isVaultPhoenixGame) {
             if (navigator.vibrate) navigator.vibrate([30, 10, 30]);
         }
 
-        // =================== IMPROVED MAP TOKEN BEHAVIOR - SMALLER LABELS ===================
+        // =================== OPTIMIZED MAP TOKENS - NO LABELS ===================
         updateMapTokens() {
             console.log('💎 Updating map tokens...');
             
@@ -699,7 +744,7 @@ if (window.isVaultPhoenixGame) {
                 marker.style.top = `${token.mapY}%`;
                 marker.dataset.tokenId = token.id;
 
-                // Token coin
+                // Token coin (no label)
                 const coin = document.createElement('div');
                 coin.className = 'token-coin';
                 
@@ -710,26 +755,18 @@ if (window.isVaultPhoenixGame) {
                 coinImg.onerror = function() {
                     this.style.display = 'none';
                     coin.textContent = '💎';
-                    coin.style.fontSize = '24px';
+                    coin.style.fontSize = '20px';
                     coin.style.color = '#f0a500';
                 };
 
                 coin.appendChild(coinImg);
-
-                // IMPROVED: Smaller, cleaner labels with $Ember amount
-                const label = document.createElement('div');
-                label.className = 'token-label';
-                label.textContent = `${token.value} $Ember`;
-
                 marker.appendChild(coin);
-                marker.appendChild(label);
 
-                // IMPROVED: Better click handler that respects map dragging
+                // Click handler
                 const handleTokenClick = (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    // Prevent clicks during/immediately after map dragging
                     if (this.mapIsDragging) {
                         console.log('🚫 Token click blocked - map is dragging');
                         return;
@@ -741,11 +778,9 @@ if (window.isVaultPhoenixGame) {
                     }, 200);
                     
                     if (token.collectable) {
-                        // COLLECTABLE TOKEN: Go directly to AR with this token only
                         console.log('🎯 Collectable token tapped - going to AR with token:', token.location);
                         this.switchScreen('ar', token.id);
                     } else {
-                        // DISTANT TOKEN: Show navigation modal
                         console.log('🗺️ Distant token tapped - showing navigation modal');
                         this.showNavigationModal(token);
                     }
@@ -755,7 +790,6 @@ if (window.isVaultPhoenixGame) {
                     }
                 };
 
-                // Better mobile tap handling
                 marker.addEventListener('click', handleTokenClick, { passive: false });
                 marker.addEventListener('touchend', (e) => {
                     e.preventDefault();
@@ -771,7 +805,7 @@ if (window.isVaultPhoenixGame) {
             console.log(`✅ Updated ${availableTokens.length} map tokens`);
         }
 
-        // =================== IMPROVED AR SYSTEM - LONGER UI DISPLAY, $EMBER LABELS ===================
+        // =================== OPTIMIZED AR SYSTEM - GPS ANCHORED TOKENS ===================
         async startARMode() {
             console.log('📱 Starting AR Mode...');
             
@@ -792,13 +826,16 @@ if (window.isVaultPhoenixGame) {
                     video.srcObject = this.cameraStream;
                 }
 
-                // Create AR tokens based on context
-                this.createARTokens();
+                // Create GPS-anchored AR tokens
+                this.createGPSAnchoredARTokens();
                 
-                // IMPROVED: Auto-hide AR UI after 6 seconds (longer for reading)
+                // Start position tracking for GPS anchoring
+                this.startPositionTracking();
+                
+                // Auto-hide AR UI after 6 seconds
                 this.startARUITimer();
                 
-                console.log('✅ AR mode started');
+                console.log('✅ AR mode started with GPS anchoring');
                 
             } catch (error) {
                 console.error('❌ AR mode error:', error);
@@ -807,27 +844,45 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
+        startPositionTracking() {
+            if ('geolocation' in navigator) {
+                this.watchPositionId = navigator.geolocation.watchPosition(
+                    (position) => {
+                        this.playerLat = position.coords.latitude;
+                        this.playerLng = position.coords.longitude;
+                        this.updateARTokenPositions();
+                    },
+                    (error) => {
+                        console.warn('📍 Geolocation error:', error);
+                        // Continue with demo position
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        maximumAge: 1000,
+                        timeout: 5000
+                    }
+                );
+            }
+        }
+
         startARUITimer() {
             const arUI = document.getElementById('arUI');
             if (!arUI) return;
             
-            // Clear any existing timer
             if (this.arUITimer) {
                 clearTimeout(this.arUITimer);
             }
             
-            // Show UI initially
             arUI.classList.remove('fade-out');
             
-            // IMPROVED: Hide after 6 seconds (longer for players to read)
             this.arUITimer = setTimeout(() => {
                 arUI.classList.add('fade-out');
             }, 6000);
         }
 
-        // IMPROVED: AR tokens now show $Ember amounts
-        createARTokens() {
-            console.log('🪙 Creating AR tokens...');
+        // OPTIMIZED: GPS-anchored AR tokens that match map style
+        createGPSAnchoredARTokens() {
+            console.log('🪙 Creating GPS-anchored AR tokens...');
             
             const container = document.getElementById('arTokensContainer');
             if (!container) return;
@@ -836,7 +891,6 @@ if (window.isVaultPhoenixGame) {
 
             let tokensToShow = [];
 
-            // If we have a targeted token (from map/slider), show only that token
             if (this.targetedTokenForAR) {
                 const targetToken = this.emberTokens.find(t => t.id === this.targetedTokenForAR);
                 if (targetToken && !this.isTokenCollected(targetToken.id) && targetToken.collectable) {
@@ -844,7 +898,6 @@ if (window.isVaultPhoenixGame) {
                     console.log('📱 Showing targeted token in AR:', targetToken.location);
                 }
             } else {
-                // Show all collectable tokens if accessing AR directly
                 tokensToShow = this.emberTokens.filter(token => 
                     !this.isTokenCollected(token.id) && token.collectable
                 );
@@ -856,24 +909,19 @@ if (window.isVaultPhoenixGame) {
                 return;
             }
 
-            // Fixed positions simulating GPS lock for demo
-            const demoPositions = [
-                { x: 20, bearing: 'left' },
-                { x: 50, bearing: 'center' },
-                { x: 80, bearing: 'right' }
-            ];
-
             tokensToShow.forEach((token, index) => {
-                if (index >= demoPositions.length) return;
+                if (index >= 3) return; // Limit to 3 tokens in AR view
                 
-                const position = demoPositions[index];
                 const arToken = document.createElement('div');
                 arToken.className = 'ar-token near';
                 arToken.dataset.tokenId = token.id;
                 
+                // Calculate GPS-based position
+                const position = this.calculateARPosition(token, index);
                 arToken.style.left = `${position.x}%`;
+                arToken.style.top = `${position.y}%`;
                 
-                // Token visual
+                // Token visual - matching map style
                 const coin = document.createElement('div');
                 coin.className = 'ar-token-coin';
                 
@@ -884,36 +932,108 @@ if (window.isVaultPhoenixGame) {
                 coinImg.onerror = function() {
                     this.style.display = 'none';
                     coin.textContent = '💎';
-                    coin.style.fontSize = '32px';
+                    coin.style.fontSize = '20px';
                     coin.style.color = '#f0a500';
                 };
                 
                 coin.appendChild(coinImg);
-                
-                // IMPROVED: Add $Ember amount labels in AR view
-                const label = document.createElement('div');
-                label.className = 'ar-token-label';
-                label.textContent = `${token.value} $Ember`;
-                
                 arToken.appendChild(coin);
-                arToken.appendChild(label);
                 
-                // Click handler for automatic collection
+                // Click handler for collection with haptic feedback
                 arToken.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    this.collectToken(token, true); // true = from AR
-                    
+                    // OPTIMIZED: Strong haptic feedback on collection
                     if (navigator.vibrate) {
-                        navigator.vibrate([100, 50, 100]);
+                        navigator.vibrate([200, 100, 200, 100, 300]);
                     }
+                    
+                    this.collectToken(token, true);
                 });
                 
                 container.appendChild(arToken);
             });
             
-            console.log(`✅ Created ${Math.min(tokensToShow.length, 3)} AR tokens with $Ember labels`);
+            console.log(`✅ Created ${Math.min(tokensToShow.length, 3)} GPS-anchored AR tokens`);
+        }
+
+        // Calculate AR token position based on GPS coordinates and device orientation
+        calculateARPosition(token, index) {
+            // Calculate bearing from player to token
+            const bearing = this.calculateBearing(
+                this.playerLat, this.playerLng, 
+                token.lat, token.lng
+            );
+            
+            // Adjust bearing based on device orientation
+            const adjustedBearing = (bearing - this.deviceOrientation + 360) % 360;
+            
+            // Convert bearing to screen position
+            // Map 360 degrees to screen width
+            let x = (adjustedBearing / 360) * 100;
+            
+            // Wrap around if needed
+            if (x > 100) x -= 100;
+            if (x < 0) x += 100;
+            
+            // Vertical position based on distance
+            const distance = this.calculateDistance(
+                this.playerLat, this.playerLng,
+                token.lat, token.lng
+            );
+            
+            // Closer tokens appear higher on screen
+            const y = Math.max(20, Math.min(80, 50 + (distance / 100)));
+            
+            return { x, y };
+        }
+
+        // Update AR token positions based on device orientation changes
+        updateARTokenPositions() {
+            if (this.currentScreen !== 'ar') return;
+            
+            const arTokens = document.querySelectorAll('.ar-token');
+            arTokens.forEach((arToken, index) => {
+                const tokenId = parseInt(arToken.dataset.tokenId);
+                const token = this.emberTokens.find(t => t.id === tokenId);
+                
+                if (token) {
+                    const position = this.calculateARPosition(token, index);
+                    arToken.style.left = `${position.x}%`;
+                    arToken.style.top = `${position.y}%`;
+                }
+            });
+        }
+
+        // Calculate bearing between two GPS coordinates
+        calculateBearing(lat1, lng1, lat2, lng2) {
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const lat1Rad = lat1 * Math.PI / 180;
+            const lat2Rad = lat2 * Math.PI / 180;
+            
+            const y = Math.sin(dLng) * Math.cos(lat2Rad);
+            const x = Math.cos(lat1Rad) * Math.sin(lat2Rad) - 
+                     Math.sin(lat1Rad) * Math.cos(lat2Rad) * Math.cos(dLng);
+            
+            let bearing = Math.atan2(y, x) * 180 / Math.PI;
+            return (bearing + 360) % 360;
+        }
+
+        // Calculate distance between two GPS coordinates
+        calculateDistance(lat1, lng1, lat2, lng2) {
+            const R = 6371e3; // Earth's radius in meters
+            const φ1 = lat1 * Math.PI/180;
+            const φ2 = lat2 * Math.PI/180;
+            const Δφ = (lat2-lat1) * Math.PI/180;
+            const Δλ = (lng2-lng1) * Math.PI/180;
+
+            const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                     Math.cos(φ1) * Math.cos(φ2) *
+                     Math.sin(Δλ/2) * Math.sin(Δλ/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+            return R * c;
         }
 
         stopARMode() {
@@ -928,6 +1048,12 @@ if (window.isVaultPhoenixGame) {
                 if (video) {
                     video.srcObject = null;
                 }
+            }
+            
+            // Stop position tracking
+            if (this.watchPositionId) {
+                navigator.geolocation.clearWatch(this.watchPositionId);
+                this.watchPositionId = null;
             }
             
             // Clear AR tokens
@@ -990,14 +1116,13 @@ if (window.isVaultPhoenixGame) {
             console.log('✅ Token collected successfully');
         }
 
-        // =================== IMPROVED TOKEN MODAL WITH BETTER BUTTON BEHAVIOR ===================
+        // =================== TOKEN MODAL ===================
         showTokenModal(token, fromAR = false) {
             const modal = document.getElementById('tokenModal');
             if (!modal) return;
             
             this.currentDiscoveredToken = token;
-            this.showingCollectionActions = fromAR;
-            this.sponsorExpanded = false; // Reset expansion state
+            this.sponsorExpanded = false;
             
             // Update header based on collection state
             const titleEl = document.getElementById('tokenFoundTitle');
@@ -1033,7 +1158,7 @@ if (window.isVaultPhoenixGame) {
             // Populate redemption options
             this.populateRedemptionOptions(token);
             
-            // IMPROVED: Show appropriate action buttons with better labels
+            // Show appropriate action buttons
             if (fromAR) {
                 // From AR - show "Go to Hunt" and "Go to Vault"
                 if (elements.tokenActions) elements.tokenActions.style.display = 'none';
@@ -1061,7 +1186,6 @@ if (window.isVaultPhoenixGame) {
             `).join('');
         }
 
-        // TOGGLE SPONSOR DETAILS EXPANSION
         toggleSponsorDetails() {
             const expandableSection = document.getElementById('sponsorDetailsExpandable');
             const toggleIcon = document.getElementById('toggleIcon');
@@ -1088,7 +1212,6 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // LOCATION ACTIONS
         getDirectionsToLocation() {
             if (!this.currentDiscoveredToken) return;
             
@@ -1118,11 +1241,9 @@ if (window.isVaultPhoenixGame) {
                 modal.style.display = 'none';
             }
             this.currentDiscoveredToken = null;
-            this.showingCollectionActions = false;
             this.sponsorExpanded = false;
         }
 
-        // IMPROVED: Better button behavior after token collection
         goToHunt() {
             this.hideTokenModal();
             this.switchScreen('hunt');
@@ -1190,7 +1311,6 @@ if (window.isVaultPhoenixGame) {
             const token = this.currentNavigationToken;
             
             if (mode === 'ar') {
-                // Set targeted token for AR and switch to AR mode
                 this.targetedTokenForAR = token.id;
                 this.switchScreen('ar', token.id);
                 this.hideNavigationModal();
@@ -1290,7 +1410,7 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== IMPROVED NEARBY TOKENS SLIDER - WITH $EMBER LABELS ===================
+        // =================== OPTIMIZED NEARBY TOKENS SLIDER ===================
         updateNearbyTokens() {
             console.log('🔍 Updating nearby tokens...');
             
@@ -1303,7 +1423,8 @@ if (window.isVaultPhoenixGame) {
                 if (collectableTokens.length > 0) {
                     nearbyCountEl.textContent = `${collectableTokens.length} ready`;
                 } else {
-                    nearbyCountEl.textContent = 'All collected!';
+                    // OPTIMIZED: Change to "Keep Exploring" when all collected
+                    nearbyCountEl.textContent = 'Keep Exploring';
                 }
             }
             
@@ -1319,11 +1440,11 @@ if (window.isVaultPhoenixGame) {
                 if (collectableTokens.length > 0) {
                     nearbyARTokensEl.textContent = `${collectableTokens.length} ready`;
                 } else {
-                    nearbyARTokensEl.textContent = 'All collected';
+                    nearbyARTokensEl.textContent = 'Keep exploring';
                 }
             }
 
-            // IMPROVED: Update token list with $Ember labels
+            // Update token list
             const tokensList = document.getElementById('tokenLocationsList');
             if (tokensList) {
                 if (collectableTokens.length === 0) {
@@ -1366,10 +1487,9 @@ if (window.isVaultPhoenixGame) {
                                     item.style.transform = '';
                                 }, 200);
                                 
-                                // Go directly to AR with only this token
                                 console.log('🎯 Nearby token tapped - going to AR with token:', token.location);
                                 this.switchScreen('ar', token.id);
-                                this.collapseModule(); // Close the slider
+                                this.collapseModule();
                                 
                                 if (navigator.vibrate) navigator.vibrate([40, 15, 40]);
                             }
@@ -1426,7 +1546,6 @@ if (window.isVaultPhoenixGame) {
                 e.preventDefault();
             };
 
-            // Add event listeners
             handle.addEventListener('touchstart', handleTouchStart, { passive: false });
             handle.addEventListener('touchmove', handleTouchMove, { passive: false });
             handle.addEventListener('touchend', handleTouchEnd, { passive: false });
@@ -1512,7 +1631,6 @@ if (window.isVaultPhoenixGame) {
                 this.collectedTokens = [];
                 this.totalEmberTokens = 0;
                 this.airdropShown = false;
-                this.airdropCollected = false;
                 this.targetedTokenForAR = null;
                 
                 localStorage.removeItem('vaultPhoenix_collectedTokens');
@@ -1615,7 +1733,7 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== IMPROVED EVENT LISTENERS ===================
+        // =================== EVENT LISTENERS ===================
         setupEventListeners() {
             console.log('🎧 Setting up event listeners...');
             
@@ -1625,7 +1743,7 @@ if (window.isVaultPhoenixGame) {
                     e.preventDefault();
                     const mode = tab.dataset.mode;
                     if (mode) {
-                        this.switchScreen(mode); // No targetTokenId - show all tokens if AR
+                        this.switchScreen(mode);
                     }
                 });
             });
@@ -1636,7 +1754,7 @@ if (window.isVaultPhoenixGame) {
                     e.preventDefault();
                     const mode = item.dataset.mode;
                     if (mode) {
-                        this.switchScreen(mode); // No targetTokenId - show all tokens if AR
+                        this.switchScreen(mode);
                         this.hideMenu();
                     }
                 });
@@ -1678,7 +1796,7 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // IMPROVED: Airdrop button with smart behavior
+            // Airdrop button
             const airdropClaimButton = document.getElementById('airdropClaimButton');
             if (airdropClaimButton) {
                 airdropClaimButton.addEventListener('click', (e) => {
@@ -1689,8 +1807,8 @@ if (window.isVaultPhoenixGame) {
 
             // Token modal buttons
             const collectTokenBtn = document.getElementById('collectTokenBtn');
-            const goToHuntBtn = document.getElementById('goToHuntBtn'); // IMPROVED: Go to Hunt button
-            const goToVaultBtn = document.getElementById('goToVaultBtn'); // IMPROVED: Go to Vault button
+            const goToHuntBtn = document.getElementById('goToHuntBtn');
+            const goToVaultBtn = document.getElementById('goToVaultBtn');
             const closeTokenModalBtn = document.getElementById('closeTokenModalBtn');
             
             if (collectTokenBtn) {
@@ -1702,7 +1820,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
             
-            // IMPROVED: Go to Hunt button handler
             if (goToHuntBtn) {
                 goToHuntBtn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1710,7 +1827,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
             
-            // IMPROVED: Go to Vault button handler  
             if (goToVaultBtn) {
                 goToVaultBtn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1730,7 +1846,6 @@ if (window.isVaultPhoenixGame) {
             if (learnMoreToggle) {
                 learnMoreToggle.addEventListener('click', (e) => {
                     e.preventDefault();
-                    console.log('🏢 Learn More toggle clicked');
                     this.toggleSponsorDetails();
                 });
             }
