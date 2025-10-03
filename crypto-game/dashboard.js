@@ -1,5 +1,5 @@
 // Vault Phoenix AR Crypto Gaming - COMPLETE UPDATED JAVASCRIPT
-// CLEAN 3-SCREEN GAME WITH PROPER FLOW AND AIRDROP SYSTEM
+// CLEAN 3-SCREEN GAME WITH PROPER FLOW AND ENHANCED FEATURES
 
 console.log('🔥💎 Vault Phoenix Game Loading...');
 
@@ -52,10 +52,9 @@ if (window.isVaultPhoenixGame) {
             // Module state
             this.moduleExpanded = false;
             
-            // Airdrop system - once per session
-            this.airdropShown = false;
+            // FIXED AIRDROP SYSTEM - Once per session only
+            this.airdropShown = sessionStorage.getItem('vaultPhoenix_airdropShown') === 'true';
             this.airdropTimer = null;
-            this.sessionAirdropCount = 0;
             this.pendingAirdropValue = 0;
             
             // Enhanced $Ember Token System - Phoenix Locations centered around player
@@ -72,7 +71,14 @@ if (window.isVaultPhoenixGame) {
                     description: "Enjoy VIP access to downtown events, priority parking, and exclusive dining experiences at Phoenix's premier entertainment district.",
                     distance: 15, 
                     collectable: true,
-                    mapX: 48, mapY: 46 // Positioned around center (50, 50)
+                    mapX: 48, mapY: 46, // Positioned around center (50, 50)
+                    phone: "(602) 555-0123",
+                    redemptionOptions: [
+                        { icon: "🍽️", cost: "100 $Ember", desc: "Lunch Credit" },
+                        { icon: "🅿️", cost: "50 $Ember", desc: "Free Parking" },
+                        { icon: "🎫", cost: "200 $Ember", desc: "Event Ticket" },
+                        { icon: "☕", cost: "25 $Ember", desc: "Coffee & Pastry" }
+                    ]
                 },
                 { 
                     id: 2, 
@@ -85,7 +91,14 @@ if (window.isVaultPhoenixGame) {
                     description: "Experience guided historic tours, museum access, and exclusive educational programs celebrating Arizona's rich cultural heritage.",
                     distance: 12, 
                     collectable: true,
-                    mapX: 52, mapY: 48
+                    mapX: 52, mapY: 48,
+                    phone: "(602) 555-0124",
+                    redemptionOptions: [
+                        { icon: "🏛️", cost: "150 $Ember", desc: "Museum Tour" },
+                        { icon: "📚", cost: "75 $Ember", desc: "History Book" },
+                        { icon: "🎧", cost: "50 $Ember", desc: "Audio Guide" },
+                        { icon: "📸", cost: "100 $Ember", desc: "Photo Package" }
+                    ]
                 },
                 { 
                     id: 3, 
@@ -98,7 +111,14 @@ if (window.isVaultPhoenixGame) {
                     description: "Gain access to exclusive art gallery openings, artist meet-and-greets, and special purchasing opportunities for local artwork.",
                     distance: 18, 
                     collectable: true,
-                    mapX: 51, mapY: 52
+                    mapX: 51, mapY: 52,
+                    phone: "(602) 555-0125",
+                    redemptionOptions: [
+                        { icon: "🎨", cost: "200 $Ember", desc: "Art Print" },
+                        { icon: "🖼️", cost: "150 $Ember", desc: "Gallery Pass" },
+                        { icon: "☕", cost: "50 $Ember", desc: "Artist Cafe" },
+                        { icon: "🎭", cost: "100 $Ember", desc: "Workshop" }
+                    ]
                 },
                 
                 // DISTANT tokens (require navigation - red circles in AR)
@@ -113,7 +133,14 @@ if (window.isVaultPhoenixGame) {
                     description: "Experience premium baseball with season ticket holder perks, dugout tours, and exclusive team merchandise discounts.",
                     distance: 850, 
                     collectable: false,
-                    mapX: 46, mapY: 58
+                    mapX: 46, mapY: 58,
+                    phone: "(602) 555-0126",
+                    redemptionOptions: [
+                        { icon: "⚾", cost: "500 $Ember", desc: "Game Ticket" },
+                        { icon: "🍕", cost: "100 $Ember", desc: "Concession Credit" },
+                        { icon: "👕", cost: "200 $Ember", desc: "Team Jersey" },
+                        { icon: "🎫", cost: "300 $Ember", desc: "VIP Experience" }
+                    ]
                 },
                 { 
                     id: 5, 
@@ -126,7 +153,14 @@ if (window.isVaultPhoenixGame) {
                     description: "Unlock travel perks including priority security, duty-free shopping discounts, and airport lounge access benefits.",
                     distance: 1500, 
                     collectable: false,
-                    mapX: 35, mapY: 75
+                    mapX: 35, mapY: 75,
+                    phone: "(602) 555-0127",
+                    redemptionOptions: [
+                        { icon: "✈️", cost: "300 $Ember", desc: "Lounge Access" },
+                        { icon: "🛍️", cost: "150 $Ember", desc: "Duty Free Deal" },
+                        { icon: "☕", cost: "50 $Ember", desc: "Airport Cafe" },
+                        { icon: "🅿️", cost: "100 $Ember", desc: "Parking Credit" }
+                    ]
                 },
                 { 
                     id: 6, 
@@ -139,7 +173,14 @@ if (window.isVaultPhoenixGame) {
                     description: "Enjoy luxury shopping with VIP personal shopping services, exclusive brand access, and special member-only events.",
                     distance: 2200, 
                     collectable: false,
-                    mapX: 75, mapY: 25
+                    mapX: 75, mapY: 25,
+                    phone: "(602) 555-0128",
+                    redemptionOptions: [
+                        { icon: "🛍️", cost: "400 $Ember", desc: "Shopping Credit" },
+                        { icon: "💅", cost: "200 $Ember", desc: "Spa Service" },
+                        { icon: "🍽️", cost: "150 $Ember", desc: "Fine Dining" },
+                        { icon: "🎁", cost: "100 $Ember", desc: "Gift Wrap" }
+                    ]
                 },
                 { 
                     id: 7, 
@@ -152,7 +193,14 @@ if (window.isVaultPhoenixGame) {
                     description: "Experience farm-to-table dining surrounded by stunning desert flora, with guided nature walks and botanical workshops.",
                     distance: 1800, 
                     collectable: false,
-                    mapX: 65, mapY: 45
+                    mapX: 65, mapY: 45,
+                    phone: "(602) 555-0129",
+                    redemptionOptions: [
+                        { icon: "🌿", cost: "200 $Ember", desc: "Garden Tour" },
+                        { icon: "🥗", cost: "150 $Ember", desc: "Farm Lunch" },
+                        { icon: "🌸", cost: "100 $Ember", desc: "Plant Workshop" },
+                        { icon: "📸", cost: "75 $Ember", desc: "Photo Tour" }
+                    ]
                 },
                 { 
                     id: 8, 
@@ -165,7 +213,14 @@ if (window.isVaultPhoenixGame) {
                     description: "Professional hiking equipment rentals, guided desert expeditions, and exclusive access to member-only trail experiences.",
                     distance: 2800, 
                     collectable: false,
-                    mapX: 70, mapY: 20
+                    mapX: 70, mapY: 20,
+                    phone: "(602) 555-0130",
+                    redemptionOptions: [
+                        { icon: "🥾", cost: "300 $Ember", desc: "Gear Rental" },
+                        { icon: "🗺️", cost: "150 $Ember", desc: "Guided Hike" },
+                        { icon: "💧", cost: "50 $Ember", desc: "Water & Snacks" },
+                        { icon: "📱", cost: "100 $Ember", desc: "GPS Device" }
+                    ]
                 },
                 { 
                     id: 9, 
@@ -178,7 +233,14 @@ if (window.isVaultPhoenixGame) {
                     description: "Enjoy artisanal coffee with lakeside seating, co-working space access, and exclusive member brewing workshops.",
                     distance: 1200, 
                     collectable: false,
-                    mapX: 60, mapY: 68
+                    mapX: 60, mapY: 68,
+                    phone: "(602) 555-0131",
+                    redemptionOptions: [
+                        { icon: "☕", cost: "100 $Ember", desc: "Coffee & Pastry" },
+                        { icon: "💻", cost: "150 $Ember", desc: "Co-work Day Pass" },
+                        { icon: "🥐", cost: "75 $Ember", desc: "Breakfast Set" },
+                        { icon: "📚", cost: "50 $Ember", desc: "WiFi & Book" }
+                    ]
                 },
                 { 
                     id: 10, 
@@ -191,7 +253,14 @@ if (window.isVaultPhoenixGame) {
                     description: "Guided desert tours, rock climbing experiences, and exclusive access to hidden geological formations with expert naturalists.",
                     distance: 1600, 
                     collectable: false,
-                    mapX: 68, mapY: 42
+                    mapX: 68, mapY: 42,
+                    phone: "(602) 555-0132",
+                    redemptionOptions: [
+                        { icon: "🧗", cost: "300 $Ember", desc: "Climbing Tour" },
+                        { icon: "🌵", cost: "150 $Ember", desc: "Nature Walk" },
+                        { icon: "📸", cost: "100 $Ember", desc: "Photo Safari" },
+                        { icon: "🎒", cost: "200 $Ember", desc: "Adventure Kit" }
+                    ]
                 }
             ];
 
@@ -215,7 +284,11 @@ if (window.isVaultPhoenixGame) {
                 this.initializeMap();
                 this.updateUI();
                 this.switchScreen('hunt');
-                this.startAirdropSystem();
+                
+                // Start airdrop system only if not shown yet
+                if (!this.airdropShown) {
+                    this.startAirdropSystem();
+                }
                 
                 console.log('✅ Game initialized successfully');
             } catch (error) {
@@ -226,7 +299,7 @@ if (window.isVaultPhoenixGame) {
         // =================== AIRDROP SYSTEM (Once per session) ===================
         startAirdropSystem() {
             // Only show airdrop once per session
-            if (this.sessionAirdropCount === 0) {
+            if (!this.airdropShown) {
                 const delay = (8 + Math.random() * 4) * 1000; // 8-12 seconds delay
                 
                 this.airdropTimer = setTimeout(() => {
@@ -238,7 +311,7 @@ if (window.isVaultPhoenixGame) {
         }
 
         showAirdropNotification() {
-            if (this.airdropShown || this.sessionAirdropCount > 0) return;
+            if (this.airdropShown) return;
             
             const notification = document.getElementById('airdropNotification');
             if (!notification) return;
@@ -251,7 +324,9 @@ if (window.isVaultPhoenixGame) {
 
             this.pendingAirdropValue = randomValue;
             this.airdropShown = true;
-            this.sessionAirdropCount++;
+            
+            // Mark as shown in session
+            sessionStorage.setItem('vaultPhoenix_airdropShown', 'true');
 
             // Update notification content
             const amountEl = document.getElementById('airdropAmount');
@@ -571,15 +646,17 @@ if (window.isVaultPhoenixGame) {
 
                 coin.appendChild(coinImg);
 
-                // Location label
+                // FIXED: Shortened location label to prevent overlap
                 const label = document.createElement('div');
                 label.className = 'token-label';
-                label.textContent = token.location;
+                const shortLocation = token.location.length > 12 ? 
+                    token.location.substring(0, 12) + '...' : token.location;
+                label.textContent = shortLocation;
 
                 marker.appendChild(coin);
                 marker.appendChild(label);
 
-                // Click handler
+                // ENHANCED: Click handler with proper token routing
                 marker.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -589,6 +666,7 @@ if (window.isVaultPhoenixGame) {
                         marker.style.transform = 'translate(-50%, -50%) scale(1)';
                     }, 200);
                     
+                    // Show navigation modal with appropriate options
                     this.showNavigationModal(token);
                     
                     if (navigator.vibrate) {
@@ -779,7 +857,7 @@ if (window.isVaultPhoenixGame) {
             
             if (elements.tokenAmountBadge) elements.tokenAmountBadge.textContent = `${token.value} $Ember`;
             if (elements.discoveredTokenAmount) elements.discoveredTokenAmount.textContent = `${token.value} $Ember`;
-            if (elements.discoveredTokenUSD) elements.discoveredTokenUSD.textContent = `~$${(token.value * 0.001).toFixed(2)} USD`;
+            if (elements.discoveredTokenUSD) elements.discoveredTokenUSD.textContent = `~${(token.value * 0.001).toFixed(2)} USD`;
             if (elements.discoveredTokenLocation) elements.discoveredTokenLocation.textContent = token.location;
             if (elements.sponsorTitle) elements.sponsorTitle.textContent = `Sponsored by ${token.sponsor}`;
             if (elements.sponsorText) elements.sponsorText.textContent = token.message;
@@ -809,6 +887,7 @@ if (window.isVaultPhoenixGame) {
             this.showingCollectionActions = false;
         }
 
+        // =================== ENHANCED SPONSOR MODAL ===================
         showSponsorModal(token) {
             const modal = document.getElementById('sponsorModal');
             if (!modal) return;
@@ -820,7 +899,8 @@ if (window.isVaultPhoenixGame) {
                 sponsorModalTitle: document.getElementById('sponsorModalTitle'),
                 sponsorLogoPlaceholder: document.getElementById('sponsorLogoPlaceholder'),
                 sponsorNameLarge: document.getElementById('sponsorNameLarge'),
-                sponsorDescriptionLarge: document.getElementById('sponsorDescriptionLarge')
+                sponsorDescriptionLarge: document.getElementById('sponsorDescriptionLarge'),
+                redemptionGrid: document.getElementById('redemptionGrid')
             };
             
             if (elements.sponsorModalTitle) elements.sponsorModalTitle.textContent = `${token.sponsor} Benefits`;
@@ -842,6 +922,17 @@ if (window.isVaultPhoenixGame) {
             }
             if (elements.sponsorNameLarge) elements.sponsorNameLarge.textContent = token.sponsor;
             if (elements.sponsorDescriptionLarge) elements.sponsorDescriptionLarge.textContent = token.description;
+            
+            // POPULATE REDEMPTION OPTIONS
+            if (elements.redemptionGrid && token.redemptionOptions) {
+                elements.redemptionGrid.innerHTML = token.redemptionOptions.map(option => `
+                    <div class="redemption-item">
+                        <span class="redemption-icon">${option.icon}</span>
+                        <div class="redemption-cost">${option.cost}</div>
+                        <div class="redemption-desc">${option.desc}</div>
+                    </div>
+                `).join('');
+            }
             
             modal.classList.add('show');
             modal.style.display = 'flex';
@@ -871,6 +962,13 @@ if (window.isVaultPhoenixGame) {
             this.hideSponsorModal();
         }
 
+        callSponsor() {
+            if (!this.currentSponsorToken || !this.currentSponsorToken.phone) return;
+            
+            const phoneUrl = `tel:${this.currentSponsorToken.phone}`;
+            window.open(phoneUrl);
+        }
+
         // =================== NAVIGATION MODAL ===================
         showNavigationModal(token) {
             const modal = document.getElementById('navigationModal');
@@ -898,7 +996,7 @@ if (window.isVaultPhoenixGame) {
             if (elements.navWalkTime) elements.navWalkTime.textContent = `~${walkMinutes} min`;
             if (elements.navDriveTime) elements.navDriveTime.textContent = `~${driveMinutes} min`;
             
-            // Show AR option only for collectable tokens (green coins)
+            // FIXED: Show AR option ONLY for collectable tokens (green coins)
             if (elements.navAR) {
                 if (token.collectable) {
                     elements.navAR.style.display = 'flex';
@@ -970,7 +1068,7 @@ if (window.isVaultPhoenixGame) {
             }
             
             if (elements.vaultUsdValue) {
-                elements.vaultUsdValue.textContent = `$${(this.totalEmberTokens * 0.001).toFixed(2)} USD`;
+                elements.vaultUsdValue.textContent = `${(this.totalEmberTokens * 0.001).toFixed(2)} USD`;
             }
             
             if (elements.totalCollected) {
@@ -983,7 +1081,7 @@ if (window.isVaultPhoenixGame) {
             }
             
             if (elements.totalValue) {
-                elements.totalValue.textContent = `$${(this.totalEmberTokens * 0.001).toFixed(2)}`;
+                elements.totalValue.textContent = `${(this.totalEmberTokens * 0.001).toFixed(2)}`;
             }
             
             if (elements.lastActivity && this.collectedTokens.length > 0) {
@@ -1024,20 +1122,19 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== NEARBY TOKENS SLIDER ===================
+        // =================== NEARBY TOKENS SLIDER (OPTIMIZED) ===================
         updateNearbyTokens() {
             console.log('🔍 Updating nearby tokens...');
             
             const availableTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
+            // FIXED: Only show COLLECTABLE tokens in slider
             const collectableTokens = availableTokens.filter(token => token.collectable);
             
             // Update handle count
             const nearbyCountEl = document.getElementById('nearbyTokenCount');
             if (nearbyCountEl) {
                 if (collectableTokens.length > 0) {
-                    nearbyCountEl.textContent = `${collectableTokens.length} ready to collect`;
-                } else if (availableTokens.length > 0) {
-                    nearbyCountEl.textContent = `${availableTokens.length} available`;
+                    nearbyCountEl.textContent = `${collectableTokens.length} ready`;
                 } else {
                     nearbyCountEl.textContent = 'All collected!';
                 }
@@ -1046,7 +1143,7 @@ if (window.isVaultPhoenixGame) {
             // Update total available
             const totalAvailableEl = document.getElementById('totalAvailable');
             if (totalAvailableEl) {
-                totalAvailableEl.textContent = `${availableTokens.length} total available`;
+                totalAvailableEl.textContent = `Ready for AR collection`;
             }
 
             // Update AR badge in menu
@@ -1055,49 +1152,59 @@ if (window.isVaultPhoenixGame) {
                 if (collectableTokens.length > 0) {
                     nearbyARTokensEl.textContent = `${collectableTokens.length} ready`;
                 } else {
-                    nearbyARTokensEl.textContent = 'Get closer';
+                    nearbyARTokensEl.textContent = 'All collected';
                 }
             }
 
-            // Update token list
+            // Update token list - ONLY COLLECTABLE TOKENS
             const tokensList = document.getElementById('tokenLocationsList');
             if (tokensList) {
-                tokensList.innerHTML = availableTokens.map((token) => `
-                    <div class="token-location-item ${token.collectable ? 'collectable-token' : ''}" 
-                         data-token-id="${token.id}">
-                        <div class="token-location-icon ${token.collectable ? 'collectable-icon' : ''}">
-                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" onerror="this.textContent='💎'">
+                if (collectableTokens.length === 0) {
+                    tokensList.innerHTML = `
+                        <div style="text-align: center; padding: 40px 20px; color: rgba(255, 255, 255, 0.6);">
+                            <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
+                            <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">All AR Tokens Collected!</div>
+                            <div style="font-size: 14px;">Explore further to find more distant tokens</div>
                         </div>
-                        <div class="token-location-info">
-                            <div class="token-location-name">${token.location}</div>
-                            <div class="token-location-distance">
-                                ${token.distance}m away • ${token.collectable ? '📱 AR Ready' : '🗺️ Navigate'}
+                    `;
+                } else {
+                    tokensList.innerHTML = collectableTokens.map((token) => `
+                        <div class="token-location-item collectable-token" 
+                             data-token-id="${token.id}">
+                            <div class="token-location-icon collectable-icon">
+                                <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" onerror="this.textContent='💎'">
                             </div>
-                            <div class="token-sponsor">${token.sponsor}</div>
+                            <div class="token-location-info">
+                                <div class="token-location-name">${token.location}</div>
+                                <div class="token-location-distance">
+                                    ${token.distance}m away • 📱 AR Ready
+                                </div>
+                                <div class="token-sponsor">${token.sponsor}</div>
+                            </div>
+                            <div class="token-location-value">${token.value}</div>
                         </div>
-                        <div class="token-location-value">${token.value}</div>
-                    </div>
-                `).join('');
+                    `).join('');
 
-                // Add click handlers
-                tokensList.querySelectorAll('.token-location-item').forEach(item => {
-                    item.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        const tokenId = parseInt(item.dataset.tokenId);
-                        const token = this.emberTokens.find(t => t.id === tokenId);
-                        if (token) {
-                            item.style.transform = 'translateY(-4px) scale(1.02)';
-                            setTimeout(() => {
-                                item.style.transform = '';
-                            }, 200);
+                    // Add click handlers
+                    tokensList.querySelectorAll('.token-location-item').forEach(item => {
+                        item.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
                             
-                            this.showNavigationModal(token);
-                            if (navigator.vibrate) navigator.vibrate([40, 15, 40]);
-                        }
+                            const tokenId = parseInt(item.dataset.tokenId);
+                            const token = this.emberTokens.find(t => t.id === tokenId);
+                            if (token) {
+                                item.style.transform = 'translateY(-4px) scale(1.02)';
+                                setTimeout(() => {
+                                    item.style.transform = '';
+                                }, 200);
+                                
+                                this.showNavigationModal(token);
+                                if (navigator.vibrate) navigator.vibrate([40, 15, 40]);
+                            }
+                        });
                     });
-                });
+                }
             }
         }
 
@@ -1231,10 +1338,10 @@ if (window.isVaultPhoenixGame) {
                 this.collectedTokens = [];
                 this.totalEmberTokens = 0;
                 this.airdropShown = false;
-                this.sessionAirdropCount = 0;
                 
                 localStorage.removeItem('vaultPhoenix_collectedTokens');
                 localStorage.removeItem('vaultPhoenix_totalEmberTokens');
+                sessionStorage.removeItem('vaultPhoenix_airdropShown');
                 
                 this.updateUI();
                 this.updateVaultDisplay();
@@ -1438,6 +1545,7 @@ if (window.isVaultPhoenixGame) {
             // Sponsor modal buttons
             const sponsorClose = document.getElementById('sponsorClose');
             const sponsorNavigateBtn = document.getElementById('sponsorNavigateBtn');
+            const sponsorCallBtn = document.getElementById('sponsorCallBtn');
             
             if (sponsorClose) {
                 sponsorClose.addEventListener('click', (e) => {
@@ -1450,6 +1558,13 @@ if (window.isVaultPhoenixGame) {
                 sponsorNavigateBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     this.navigateToSponsor();
+                });
+            }
+
+            if (sponsorCallBtn) {
+                sponsorCallBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.callSponsor();
                 });
             }
 
