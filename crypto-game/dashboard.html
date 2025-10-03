@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="campaign-info">
-                        <div class="campaign-text">Total Token Locations</div>
+                        <div class="campaign-text">Adventure Tokens</div>
                         <div class="token-count" id="availableTokenCount">10 available</div>
                     </div>
                 </div>
@@ -74,24 +74,27 @@
         <video id="video" autoplay muted playsinline style="display: none;"></video>
         <canvas id="canvas" style="display: none;"></canvas>
         
-        <!-- AR Ember Coin -->
-        <div class="ar-ember-coin" id="arEmberCoin">
-            <div class="ember-coin-icon">
-                <img src="../images/VPEmberCoin.PNG" alt="AR Ember Coin" class="ar-coin-image" onerror="this.textContent='💎'">
-            </div>
+        <!-- AR Ember Coins Container -->
+        <div class="ar-coins-container" id="arCoinsContainer">
+            <!-- AR coins will be populated dynamically -->
         </div>
 
         <!-- ENHANCED AIRDROP NOTIFICATION -->
         <div class="airdrop-notification" id="airdropNotification">
-            <div class="airdrop-icon">🪂</div>
             <div class="airdrop-content">
-                <div class="airdrop-title">$Ember Air Drop!</div>
-                <div class="airdrop-subtitle">Limited time bonus available</div>
+                <div class="airdrop-header">
+                    <div class="airdrop-icon">🪂</div>
+                    <div class="airdrop-title">$Ember Air Drop!</div>
+                </div>
+                <div class="airdrop-body">
+                    <div class="airdrop-amount" id="airdropAmount">500 $Ember</div>
+                    <div class="airdrop-subtitle">Limited time bonus available</div>
+                </div>
+                <button class="airdrop-button" id="airdropClaimButton">
+                    <span class="airdrop-btn-icon">💎</span>
+                    <span>Claim Reward</span>
+                </button>
             </div>
-            <button class="airdrop-button" id="airdropClaimButton">
-                <span>💎</span>
-                Claim Airdrop
-            </button>
         </div>
         
         <!-- Navigation -->
@@ -233,46 +236,15 @@
             </div>
         </div>
         
-        <!-- Status Panel - FOR AR MODE ONLY -->
-        <div class="status-panel" id="statusPanel">
-            <div class="status-grid">
-                <div class="status-item">
-                    <div class="status-label">GPS Status</div>
-                    <div class="status-value" id="gpsStatus">
-                        <div class="status-indicator">
-                            <div class="status-dot active"></div>
-                            <span>Ready to hunt!</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Available Tokens</div>
-                    <div class="status-value" id="availableTokens">10 Available</div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Location</div>
-                    <div class="status-value">
-                        <span id="lat">33.4484</span>, <span id="lng">-112.0740</span>
-                    </div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Heading</div>
-                    <div class="status-value"><span id="heading">--</span>°</div>
-                    <div class="compass-container">
-                        <div class="compass">
-                            <div class="compass-needle" id="compassNeedle"></div>
-                            <div class="compass-center"></div>
-                            <div class="compass-n">N</div>
-                        </div>
-                    </div>
+        <!-- AR Hunt Mode Module - Top of AR Screen -->
+        <div class="ar-hunt-module" id="arHuntModule">
+            <div class="ar-hunt-content">
+                <div class="ar-hunt-icon">🔥</div>
+                <div class="ar-hunt-text">
+                    <div class="ar-hunt-title">AR Hunt Mode Active</div>
+                    <div class="ar-hunt-subtitle">Point camera to collect $Ember coins</div>
                 </div>
             </div>
-        </div>
-        
-        <!-- AR Instructions -->
-        <div class="ar-instructions" id="arInstructions">
-            <div class="ar-instructions-title">🔥 AR Hunt Mode</div>
-            <div class="ar-instructions-text">Point your camera around and tap the glowing $Ember coin to collect tokens!</div>
         </div>
         
         <!-- Token Discovery Modal -->
@@ -342,6 +314,13 @@
                             </div>
                         </div>
                         
+                        <div class="sponsor-cta-section">
+                            <button class="sponsor-cta-btn" id="sponsorCTABtn">
+                                <span>🎫</span>
+                                <span>Redeem at Location</span>
+                            </button>
+                        </div>
+                        
                         <button class="sponsor-back-btn" id="sponsorBackBtn">
                             <span>⬅️</span>
                             <span>Back to Token</span>
@@ -372,7 +351,7 @@
             </div>
         </div>
         
-        <!-- $Ember Vault View - COMPLETE RESTORATION -->
+        <!-- $Ember Vault View -->
         <div class="vault-view" id="vaultView" style="display: none;">
             <div class="vault-container">
                 <div class="vault-header">
@@ -404,7 +383,7 @@
                         <div class="vault-title-icon">
                             <img src="../images/EmberAnalytics.PNG" alt="Analytics" class="vault-icon-image" onerror="this.textContent='📊'">
                         </div>
-                        Transaction History
+                        Collection History
                     </div>
                     <div class="vault-stats-grid">
                         <div class="stat-item">
@@ -426,29 +405,17 @@
                     </div>
                 </div>
                 
-                <div class="vault-filters">
-                    <button class="filter-btn active" data-filter="all">All Tokens</button>
-                    <button class="filter-btn" data-filter="high">High Value</button>
-                    <button class="filter-btn" data-filter="medium">Medium Value</button>
-                    <button class="filter-btn" data-filter="low">Low Value</button>
-                </div>
-                
                 <div class="token-history" id="tokenHistory">
-                    <div class="history-item">
-                        <div class="history-icon">
-                            <img src="../images/VPEmberCoin.PNG" alt="Welcome Bonus" class="history-coin-icon" onerror="this.textContent='💎'">
-                        </div>
-                        <div class="history-details">
-                            <div class="history-title">Welcome Bonus</div>
-                            <div class="history-subtitle">Vault Phoenix HQ • Today • LOW</div>
-                        </div>
-                        <div class="history-value">+50</div>
+                    <div class="history-placeholder">
+                        <div class="history-placeholder-icon">🗺️</div>
+                        <div class="history-placeholder-title">No Tokens Collected Yet</div>
+                        <div class="history-placeholder-text">Start exploring to find $Ember tokens!</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- NEW: Challenges & Rewards Hub View -->
+        <!-- Challenges & Rewards Hub View -->
         <div class="rewards-view" id="rewardsView" style="display: none;">
             <div class="rewards-container">
                 <div class="rewards-header">
@@ -458,7 +425,7 @@
                         </div>
                         Challenges & Rewards Hub
                     </div>
-                    <div class="rewards-subtitle">Complete challenges to earn $Ember rewards and redeem at partner locations</div>
+                    <div class="rewards-subtitle">Complete challenges to unlock exclusive rewards at partner locations</div>
                 </div>
 
                 <!-- Daily Challenges Section -->
@@ -486,8 +453,8 @@
                                 <div class="challenge-title">Token Explorer</div>
                                 <div class="challenge-description">Collect 5 tokens in different locations</div>
                                 <div class="challenge-reward">
-                                    <span class="reward-icon">💎</span>
-                                    <span>250 $Ember</span>
+                                    <span class="reward-icon">🎁</span>
+                                    <span>Unlock Special Offer</span>
                                 </div>
                             </div>
                         </div>
@@ -503,14 +470,14 @@
                                 </div>
                             </div>
                             <div class="challenge-info">
-                                <div class="challenge-title">AR Master</div>
-                                <div class="challenge-description">Use AR mode to collect 3 tokens</div>
+                                <div class="challenge-title">Location Scout</div>
+                                <div class="challenge-description">Visit 3 sponsor locations</div>
                                 <div class="challenge-reward">
-                                    <span class="reward-icon">💎</span>
-                                    <span>150 $Ember</span>
+                                    <span class="reward-icon">🎁</span>
+                                    <span>VIP Access Unlocked</span>
                                 </div>
                             </div>
-                            <button class="challenge-claim-btn" data-reward="150">Claim Reward</button>
+                            <button class="challenge-claim-btn" data-challenge-id="daily-2">Claim Reward</button>
                         </div>
                     </div>
                 </div>
@@ -522,7 +489,6 @@
                             <span class="section-icon">📍</span>
                             <span>Location Missions</span>
                         </div>
-                        <div class="section-badge">Sponsor Driven</div>
                     </div>
 
                     <div class="challenges-grid" id="locationChallenges">
@@ -533,10 +499,10 @@
                             </div>
                             <div class="challenge-info">
                                 <div class="challenge-title">Arena VIP Experience</div>
-                                <div class="challenge-description">Visit Chase Field and collect special game day tokens</div>
+                                <div class="challenge-description">Visit Chase Field and redeem your special offer</div>
                                 <div class="challenge-reward">
                                     <span class="reward-icon">🎫</span>
-                                    <span>VIP Game Tickets + 500 $Ember</span>
+                                    <span>VIP Game Experience</span>
                                 </div>
                             </div>
                             <div class="challenge-actions">
@@ -552,14 +518,13 @@
                             </div>
                             <div class="challenge-info">
                                 <div class="challenge-title">Foodie Adventure</div>
-                                <div class="challenge-description">Show QR code for 20% off your meal</div>
+                                <div class="challenge-description">Show QR code for exclusive dining offer</div>
                                 <div class="challenge-reward">
                                     <span class="reward-icon">🍽️</span>
-                                    <span>20% Off + 100 $Ember</span>
+                                    <span>20% Off Meal</span>
                                 </div>
                             </div>
                             <div class="challenge-actions">
-                                <button class="challenge-digital-btn" data-url="https://localpizza.com/ember-deal">Shop Online</button>
                                 <button class="challenge-qr-btn" data-challenge="foodie-deal">QR Redeem</button>
                             </div>
                         </div>
@@ -591,8 +556,8 @@
                                 <div class="challenge-title">Phoenix Explorer</div>
                                 <div class="challenge-description">Visit 5 different Phoenix districts this week</div>
                                 <div class="challenge-reward">
-                                    <span class="reward-icon">💎</span>
-                                    <span>1,000 $Ember + Bonus Pack</span>
+                                    <span class="reward-icon">🎁</span>
+                                    <span>Premium Experience Pack</span>
                                 </div>
                             </div>
                         </div>
@@ -612,7 +577,7 @@
                                 <div class="challenge-description">Play 10 days consecutively</div>
                                 <div class="challenge-reward">
                                     <span class="reward-icon">🔥</span>
-                                    <span>Streak Multiplier x2</span>
+                                    <span>Streak Bonus Multiplier</span>
                                 </div>
                             </div>
                         </div>
@@ -624,31 +589,31 @@
                     <div class="section-header">
                         <div class="section-title">
                             <span class="section-icon">🎁</span>
-                            <span>Rewards Earned</span>
+                            <span>Rewards Available</span>
                         </div>
-                        <div class="section-count" id="rewardsCount">3 Available</div>
+                        <div class="section-count" id="rewardsCount">3 Ready</div>
                     </div>
 
                     <div class="rewards-list" id="earnedRewardsList">
-                        <div class="reward-item claimed" data-reward-id="reward-1">
+                        <div class="reward-item available" data-reward-id="reward-1">
                             <div class="reward-icon">🎫</div>
                             <div class="reward-info">
                                 <div class="reward-title">Free Coffee</div>
                                 <div class="reward-description">Local Coffee Co. - Valid until Dec 31</div>
-                                <div class="reward-value">Worth $5.00</div>
+                                <div class="reward-value">Show QR at location</div>
                             </div>
                             <div class="reward-actions">
                                 <button class="reward-qr-btn" data-reward="coffee-free">Show QR</button>
-                                <div class="reward-status">✅ Claimed</div>
+                                <div class="reward-status">🔄 Ready to use</div>
                             </div>
                         </div>
 
-                        <div class="reward-item pending" data-reward-id="reward-2">
+                        <div class="reward-item available" data-reward-id="reward-2">
                             <div class="reward-icon">🍕</div>
                             <div class="reward-info">
                                 <div class="reward-title">Pizza Discount</div>
                                 <div class="reward-description">20% off any large pizza</div>
-                                <div class="reward-value">Save up to $6.00</div>
+                                <div class="reward-value">Show QR at location</div>
                             </div>
                             <div class="reward-actions">
                                 <button class="reward-qr-btn" data-reward="pizza-discount">Show QR</button>
@@ -656,15 +621,15 @@
                             </div>
                         </div>
 
-                        <div class="reward-item pending" data-reward-id="reward-3">
+                        <div class="reward-item available" data-reward-id="reward-3">
                             <div class="reward-icon">🛍️</div>
                             <div class="reward-info">
                                 <div class="reward-title">Shopping Voucher</div>
                                 <div class="reward-description">$10 off purchases over $50</div>
-                                <div class="reward-value">Worth $10.00</div>
+                                <div class="reward-value">Show QR at location</div>
                             </div>
                             <div class="reward-actions">
-                                <button class="reward-digital-btn" data-url="https://shop.example.com/ember">Shop Online</button>
+                                <button class="reward-qr-btn" data-reward="shopping-voucher">Show QR</button>
                                 <div class="reward-status">🔄 Ready to use</div>
                             </div>
                         </div>
@@ -673,7 +638,7 @@
             </div>
         </div>
 
-        <!-- Adventures Overlay Module (replaces the old campaigns view) -->
+        <!-- Adventures Overlay Module -->
         <div class="adventures-overlay" id="adventuresOverlay" style="display: none;">
             <div class="adventures-overlay-content">
                 <div class="adventures-header">
@@ -701,8 +666,8 @@
                             <div class="progress-text">3 of 5 locations visited</div>
                         </div>
                         <div class="adventure-rewards">
-                            <span class="reward-badge">+50% $Ember Bonus</span>
                             <span class="reward-badge">VIP Access</span>
+                            <span class="reward-badge">Exclusive Offers</span>
                         </div>
                         <button class="adventure-select-btn" data-adventure="phoenix-sports">Continue Adventure</button>
                     </div>
@@ -742,7 +707,7 @@
             </div>
         </div>
         
-        <!-- Navigation Modal - MOBILE OPTIMIZED -->
+        <!-- Navigation Modal -->
         <div class="navigation-modal" id="navigationModal">
             <div class="navigation-content">
                 <div class="navigation-header">
@@ -751,8 +716,9 @@
                         <span>Navigate to Token</span>
                     </div>
                     <div class="navigation-coin-info">
-                        <div class="navigation-coin-value" id="navTokenName">500 $Ember Token</div>
+                        <div class="navigation-coin-value" id="navTokenName">Phoenix Plaza Central</div>
                         <div class="navigation-distance" id="navDistance">~1.2km away</div>
+                        <div class="navigation-ember-amount" id="navEmberAmount">500 $Ember</div>
                     </div>
                 </div>
                 
@@ -779,7 +745,7 @@
                         <div class="navigation-option-time" id="navDriveTime">~5 min</div>
                     </div>
                     
-                    <div class="navigation-option" id="navAR" style="display: none;">
+                    <div class="navigation-option ar-option" id="navAR" style="display: none;">
                         <div class="navigation-option-left">
                             <div class="navigation-option-icon">📱</div>
                             <div class="navigation-option-info">
@@ -799,7 +765,7 @@
         <div class="qr-modal" id="qrModal">
             <div class="qr-modal-content">
                 <div class="qr-modal-header">
-                    <h3 id="qrModalTitle">🔥 Payment QR Code</h3>
+                    <h3 id="qrModalTitle">🔥 Reward QR Code</h3>
                     <button class="qr-close" id="qrClose">✕</button>
                 </div>
                 
@@ -809,17 +775,17 @@
                             <img src="../images/VPEmberCoin.PNG" alt="QR Code" class="qr-ember-icon" onerror="this.textContent='💎'">
                         </div>
                         <div id="qrCodeContent">QR Code will appear here<br>
-                        <small>Show this at partner locations</small></div>
+                        <small>Show this at partner location</small></div>
                     </div>
                 </div>
                 
                 <div class="qr-instructions" id="qrInstructions">
-                    Show this QR code at any Vault Phoenix partner location to pay with your $Ember tokens for real rewards and discounts!
+                    Show this QR code at the partner location to redeem your reward!
                 </div>
                 
                 <div class="qr-token-info">
-                    <div class="qr-token-amount" id="qrTokenAmount">0 $Ember</div>
-                    <div class="qr-token-value" id="qrTokenValue">$0.00 USD</div>
+                    <div class="qr-token-amount" id="qrTokenAmount">Free Coffee</div>
+                    <div class="qr-token-value" id="qrTokenValue">Valid until Dec 31</div>
                 </div>
             </div>
         </div>
@@ -838,7 +804,7 @@
             </div>
         </div>
         
-        <!-- Bottom Navigation - Updated with Challenges & Rewards Hub -->
+        <!-- Bottom Navigation -->
         <nav class="bottom-nav">
             <div class="nav-tabs">
                 <div class="nav-tab active" data-mode="map" id="tabMap">
