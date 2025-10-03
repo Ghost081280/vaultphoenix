@@ -1,4 +1,4 @@
-// Vault Phoenix AR Crypto Gaming - COMPLETE REDESIGNED DASHBOARD (ALL FIXES APPLIED)
+// Vault Phoenix AR Crypto Gaming - COMPLETE FIXED DASHBOARD
 // PROTECTION: Only affects crypto-game/ folder - prevents main site interference
 // FILE PATH: crypto-game/dashboard.js
 
@@ -45,6 +45,8 @@ if (window.isVaultPhoenixDashboard) {
             this.nearestToken = null;
             this.cameraStream = null;
             this.arCoinVisible = false;
+            this.currentDiscoveredToken = null;
+            this.isShowingSponsorDetails = false;
             
             // MAP DRAGGING PROPERTIES
             this.mapIsDragging = false;
@@ -133,7 +135,7 @@ if (window.isVaultPhoenixDashboard) {
             }
         }
 
-        // =================== AIRDROP SYSTEM (REPLACES PROXIMITY) ===================
+        // =================== FIXED AIRDROP SYSTEM ===================
         updateNearestToken() {
             const availableTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
             if (availableTokens.length === 0) return;
@@ -155,20 +157,23 @@ if (window.isVaultPhoenixDashboard) {
             this.nearestToken = nearest;
             
             // Show airdrop notification for non-hunt screens with random chance
-            if (this.currentMode !== 'map' && Math.random() < 0.3) { // 30% chance to show airdrop
+            if (this.currentMode !== 'map' && this.currentMode !== 'ar' && Math.random() < 0.15) {
                 this.showAirdropNotification();
-            } else if (this.currentMode === 'map') {
+            } else if (this.currentMode === 'map' || this.currentMode === 'ar') {
                 this.hideAirdropNotification();
             }
         }
 
         showAirdropNotification() {
             const notification = document.getElementById('airdropNotification');
-            if (!notification) return;
+            if (!notification || notification.classList.contains('show')) return;
 
             // Random airdrop values
             const airdropValues = [100, 250, 500, 750, 1000];
             const randomValue = airdropValues[Math.floor(Math.random() * airdropValues.length)];
+
+            // Store airdrop value for claiming
+            this.pendingAirdropValue = randomValue;
 
             // Update notification content for airdrop
             const title = notification.querySelector('.airdrop-title');
@@ -176,20 +181,23 @@ if (window.isVaultPhoenixDashboard) {
             const button = notification.querySelector('.airdrop-button');
 
             if (title) title.textContent = `$Ember Air Drop!`;
-            if (subtitle) subtitle.textContent = `${randomValue} $Ember tokens available now`;
+            if (subtitle) subtitle.textContent = `Claim ${randomValue} $Ember tokens now`;
             
             if (button) {
-                button.onclick = () => {
+                // Remove any existing event listeners
+                button.replaceWith(button.cloneNode(true));
+                const newButton = notification.querySelector('.airdrop-button');
+                newButton.onclick = () => {
                     this.claimAirdrop(randomValue);
                 };
             }
 
             notification.classList.add('show');
             
-            // Auto-hide after 8 seconds
+            // Auto-hide after 12 seconds
             setTimeout(() => {
                 this.hideAirdropNotification();
-            }, 8000);
+            }, 12000);
         }
 
         hideAirdropNotification() {
@@ -856,8 +864,8 @@ if (window.isVaultPhoenixDashboard) {
             this.updateTokenCounts();
             this.updateVaultStats();
             
-            // Hide airdrop on map screen
-            if (this.currentMode === 'map') {
+            // Hide airdrop on map and AR screens
+            if (this.currentMode === 'map' || this.currentMode === 'ar') {
                 this.hideAirdropNotification();
             }
         }
@@ -883,17 +891,16 @@ if (window.isVaultPhoenixDashboard) {
         updateNearbyTokens() {
             console.log('🔍 Updating nearby tokens...');
             try {
-                const collectableTokens = this.emberTokens
-                    .filter(token => !this.isTokenCollected(token.id) && token.collectable)
-                    .sort((a, b) => a.distance - b.distance);
+                const availableTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
+                const collectableTokens = availableTokens.filter(token => token.collectable);
+                const nearbyTokens = availableTokens.filter(token => !token.collectable && token.distance <= 100);
                 
-                const nearbyTokens = this.emberTokens
-                    .filter(token => !this.isTokenCollected(token.id) && !token.collectable && token.distance <= 100)
+                // Show ALL available tokens, not just nearby ones
+                const allTokensToShow = [...collectableTokens, ...nearbyTokens, ...availableTokens.filter(token => !token.collectable && token.distance > 100)]
+                    .filter((token, index, self) => self.findIndex(t => t.id === token.id) === index) // Remove duplicates
                     .sort((a, b) => a.distance - b.distance);
-                
-                const allNearbyTokens = [...collectableTokens, ...nearbyTokens].slice(0, 5);
 
-                // Update handle counts
+                // Update handle counts with better text
                 const nearbyCountElements = [
                     'nearbyTokenCount', 'nearbyTokenCountVault', 
                     'nearbyTokenCountCampaigns'
@@ -901,13 +908,19 @@ if (window.isVaultPhoenixDashboard) {
                 
                 nearbyCountElements.forEach(id => {
                     const el = document.getElementById(id);
-                    if (el) el.textContent = `${collectableTokens.length} ready`;
+                    if (el) {
+                        if (collectableTokens.length > 0) {
+                            el.textContent = `${collectableTokens.length} ready to collect`;
+                        } else {
+                            el.textContent = `Explore locations`;
+                        }
+                    }
                 });
 
-                // Update token list
+                // Update token list with ALL available tokens
                 const tokensList = document.getElementById('tokenLocationsList');
                 if (tokensList) {
-                    tokensList.innerHTML = allNearbyTokens.map((token) => `
+                    tokensList.innerHTML = allTokensToShow.map((token) => `
                         <div class="token-location-item ${token.collectable ? 'collectable-token' : ''}" 
                              data-token-id="${token.id}" 
                              style="cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none;">
@@ -961,7 +974,7 @@ if (window.isVaultPhoenixDashboard) {
                 const collectableCount = this.emberTokens.filter(token => !this.isTokenCollected(token.id) && token.collectable).length;
                 
                 const elements = [
-                    { id: 'availableTokenCount', text: `${collectableCount} ready to collect` },
+                    { id: 'availableTokenCount', text: `${availableCount} locations available` },
                     { id: 'totalAvailable', text: `${availableCount} total available` },
                     { id: 'availableTokens', text: `${availableCount} Available` }
                 ];
@@ -970,6 +983,16 @@ if (window.isVaultPhoenixDashboard) {
                     const el = document.getElementById(id);
                     if (el) el.textContent = text;
                 });
+
+                // Update AR badge in menu
+                const nearbyTokensEl = document.getElementById('nearbyTokens');
+                if (nearbyTokensEl) {
+                    if (collectableCount > 0) {
+                        nearbyTokensEl.textContent = `${collectableCount} ready`;
+                    } else {
+                        nearbyTokensEl.textContent = 'Get closer';
+                    }
+                }
             } catch (error) {
                 console.error('❌ Token counts error:', error);
             }
@@ -997,7 +1020,7 @@ if (window.isVaultPhoenixDashboard) {
                 if (walkTime) walkTime.textContent = `~${walkMinutes} min`;
                 if (driveTime) driveTime.textContent = `~${driveMinutes} min`;
                 
-                // Show AR option for collectable tokens
+                // Show AR option ONLY for collectable tokens
                 if (arOption) {
                     if (token.collectable) {
                         arOption.style.display = 'flex';
@@ -1077,15 +1100,18 @@ if (window.isVaultPhoenixDashboard) {
                         const mapView = document.getElementById('map');
                         if (mapView) mapView.style.display = 'block';
                         this.hideAirdropNotification();
+                        this.stopARMode();
                         break;
                     case 'vault':
                         const vaultView = document.getElementById('vaultView');
                         if (vaultView) vaultView.style.display = 'block';
                         this.updateVaultStats();
+                        this.stopARMode();
                         break;
                     case 'campaigns':
                         const campaignsView = document.getElementById('campaignsView');
                         if (campaignsView) campaignsView.style.display = 'block';
+                        this.stopARMode();
                         break;
                     case 'ar':
                         const mapViewAR = document.getElementById('map');
@@ -1135,6 +1161,16 @@ if (window.isVaultPhoenixDashboard) {
                     return;
                 }
 
+                // Check if we have collectable tokens before starting AR
+                const collectableTokens = this.emberTokens.filter(token => 
+                    !this.isTokenCollected(token.id) && token.collectable
+                );
+
+                if (collectableTokens.length === 0) {
+                    console.log('📱 No collectable tokens available - not showing AR coin');
+                    // Still show camera but don't show coin
+                }
+
                 // Request camera access
                 try {
                     this.cameraStream = await navigator.mediaDevices.getUserMedia({
@@ -1149,21 +1185,23 @@ if (window.isVaultPhoenixDashboard) {
                     video.style.display = 'block';
                     canvas.style.display = 'block';
                     
-                    // Show AR coin for collection
-                    setTimeout(() => {
-                        arCoin.style.display = 'block';
-                        this.arCoinVisible = true;
-                        
-                        // Add collection handler
-                        const collectHandler = (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            this.collectARToken();
-                        };
-                        
-                        arCoin.addEventListener('click', collectHandler, { passive: false });
-                        arCoin.addEventListener('touchend', collectHandler, { passive: false });
-                    }, 1000);
+                    // Only show AR coin if we have collectable tokens
+                    if (collectableTokens.length > 0) {
+                        setTimeout(() => {
+                            arCoin.style.display = 'block';
+                            this.arCoinVisible = true;
+                            
+                            // Add collection handler
+                            const collectHandler = (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                this.collectARToken();
+                            };
+                            
+                            arCoin.addEventListener('click', collectHandler, { passive: false });
+                            arCoin.addEventListener('touchend', collectHandler, { passive: false });
+                        }, 1000);
+                    }
                     
                     console.log('✅ AR camera started successfully');
                     
@@ -1188,17 +1226,204 @@ if (window.isVaultPhoenixDashboard) {
             );
             
             if (collectableToken) {
-                this.collectToken(collectableToken);
+                // Show token discovery modal BEFORE collecting
+                this.currentDiscoveredToken = collectableToken;
+                this.showTokenDiscovery(collectableToken);
                 
                 // Hide AR coin
                 const arCoin = document.getElementById('arEmberCoin');
                 if (arCoin) arCoin.style.display = 'none';
                 this.arCoinVisible = false;
+            }
+        }
+
+        // =================== RESTORED TOKEN DISCOVERY MODAL ===================
+        showTokenDiscovery(token) {
+            try {
+                const elements = {
+                    amount: document.getElementById('discoveredTokenAmount'),
+                    usdValue: document.getElementById('discoveredTokenUSD'),
+                    location: document.getElementById('discoveredTokenLocation'),
+                    badge: document.getElementById('tokenAmountBadge'),
+                    discovery: document.getElementById('tokenDiscovery'),
+                    sponsorName: document.getElementById('sponsorDetailsName'),
+                    sponsorDescription: document.getElementById('sponsorDetailsDescription')
+                };
                 
-                // Switch back to map after collection
-                setTimeout(() => {
-                    this.switchMode('map');
-                }, 2000);
+                if (elements.amount) elements.amount.textContent = `${token.value} $Ember`;
+                if (elements.usdValue) elements.usdValue.textContent = `~${(token.value * 0.001).toFixed(2)} USD`;
+                if (elements.location) elements.location.textContent = token.location;
+                if (elements.badge) elements.badge.textContent = `${token.value} $Ember`;
+                
+                // Update sponsor details
+                if (elements.sponsorName) elements.sponsorName.textContent = token.sponsor || 'Mystery Sponsor';
+                if (elements.sponsorDescription) elements.sponsorDescription.textContent = token.description || token.message || 'Amazing rewards await!';
+                
+                // Add sponsor message if available
+                const sponsorContainer = document.querySelector('.sponsor-message');
+                if (sponsorContainer && token.sponsor) {
+                    sponsorContainer.style.display = 'block';
+                    const sponsorTitle = sponsorContainer.querySelector('.sponsor-title');
+                    const sponsorText = sponsorContainer.querySelector('.sponsor-text');
+                    
+                    if (sponsorTitle) sponsorTitle.textContent = `Sponsored by ${token.sponsor}`;
+                    if (sponsorText) sponsorText.textContent = token.message || 'Thank you for exploring Phoenix!';
+                } else if (sponsorContainer) {
+                    sponsorContainer.style.display = 'none';
+                }
+                
+                this.currentDiscoveredToken = token;
+                this.isShowingSponsorDetails = false;
+                
+                // Show front view, hide back view
+                const frontView = document.getElementById('sponsorInfoFront');
+                const backView = document.getElementById('sponsorInfoBack');
+                if (frontView) frontView.style.display = 'block';
+                if (backView) backView.style.display = 'none';
+                
+                if (elements.discovery) elements.discovery.classList.add('show');
+                
+                console.log('🎴 Token discovery shown:', token.location);
+            } catch (error) {
+                console.error('❌ Token discovery show error:', error);
+            }
+        }
+
+        showSponsorDetails() {
+            try {
+                if (!this.currentDiscoveredToken || this.isShowingSponsorDetails) return;
+                
+                this.isShowingSponsorDetails = true;
+                
+                const frontView = document.getElementById('sponsorInfoFront');
+                const backView = document.getElementById('sponsorInfoBack');
+                
+                if (frontView && backView) {
+                    frontView.style.display = 'none';
+                    backView.style.display = 'block';
+                }
+                
+                console.log('ℹ️ Showing sponsor details');
+            } catch (error) {
+                console.error('❌ Sponsor details show error:', error);
+            }
+        }
+
+        hideSponsorDetails() {
+            try {
+                if (!this.isShowingSponsorDetails) return;
+                
+                this.isShowingSponsorDetails = false;
+                
+                const frontView = document.getElementById('sponsorInfoFront');
+                const backView = document.getElementById('sponsorInfoBack');
+                
+                if (frontView && backView) {
+                    frontView.style.display = 'block';
+                    backView.style.display = 'none';
+                }
+                
+                console.log('⬅️ Hiding sponsor details');
+            } catch (error) {
+                console.error('❌ Sponsor details hide error:', error);
+            }
+        }
+
+        collectToken() {
+            try {
+                if (this.currentDiscoveredToken) {
+                    // Add timestamp and collection info
+                    const collectedToken = {
+                        ...this.currentDiscoveredToken,
+                        collectedAt: new Date().toISOString(),
+                        collectionMethod: 'AR Hunt',
+                        name: `${this.currentDiscoveredToken.location} Token`
+                    };
+                    
+                    this.collectedTokens.push(collectedToken);
+                    this.totalTokenValue += this.currentDiscoveredToken.value;
+                    this.saveCollectedTokens();
+                    
+                    console.log('✅ Token collected:', this.currentDiscoveredToken.location);
+                    
+                    this.updateTokenCounts();
+                    this.updateVaultStats();
+                    this.updateNearbyTokens();
+                    
+                    this.removeTokenMarker(this.currentDiscoveredToken.id);
+                    
+                    this.hideTokenDiscovery();
+                    this.currentDiscoveredToken = null;
+                    this.isShowingSponsorDetails = false;
+                    
+                    // Show collection success
+                    this.showCollectionSuccess(collectedToken);
+                    
+                    // Switch back to map after collection
+                    setTimeout(() => {
+                        this.switchMode('map');
+                    }, 3000);
+                }
+            } catch (error) {
+                console.error('❌ Token collect error:', error);
+            }
+        }
+
+        removeTokenMarker(tokenId) {
+            const marker = document.querySelector(`[data-token-id="${tokenId}"]`);
+            if (marker) {
+                marker.remove();
+            }
+        }
+
+        showCollectionSuccess(token) {
+            const success = document.createElement('div');
+            success.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(67, 160, 71, 0.95));
+                color: white;
+                padding: 32px;
+                border-radius: 20px;
+                font-size: 20px;
+                font-weight: 800;
+                z-index: 400;
+                box-shadow: 0 16px 40px rgba(76, 175, 80, 0.6);
+                text-align: center;
+                touch-action: none;
+                user-select: none;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+            `;
+            success.innerHTML = `
+                <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
+                <div>$Ember Token Collected!</div>
+                <div style="font-size: 18px; margin-top: 12px; opacity: 0.9;">+${token.value} $Ember</div>
+                <div style="font-size: 14px; margin-top: 8px; opacity: 0.8;">${token.location}</div>
+            `;
+
+            document.body.appendChild(success);
+
+            setTimeout(() => {
+                if (document.body.contains(success)) {
+                    document.body.removeChild(success);
+                }
+            }, 3000);
+
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100, 50, 200, 50, 300]);
+            }
+        }
+
+        hideTokenDiscovery() {
+            try {
+                const tokenDiscovery = document.getElementById('tokenDiscovery');
+                if (tokenDiscovery) {
+                    tokenDiscovery.classList.remove('show');
+                }
+            } catch (error) {
+                console.error('❌ Token discovery hide error:', error);
             }
         }
 
@@ -1234,12 +1459,12 @@ if (window.isVaultPhoenixDashboard) {
                     { id: 'navEmberCount', value: this.totalTokenValue.toLocaleString() },
                     { id: 'menuEmberCount', value: this.totalTokenValue.toLocaleString() },
                     { id: 'vaultBalance', value: `${this.totalTokenValue.toLocaleString()} $Ember Tokens` },
-                    { id: 'vaultUsdValue', value: `$${(this.totalTokenValue * 0.001).toFixed(2)} USD` },
+                    { id: 'vaultUsdValue', value: `${(this.totalTokenValue * 0.001).toFixed(2)} USD` },
                     { id: 'totalCollected', value: this.collectedTokens.length },
-                    { id: 'totalValue', value: `$${(this.totalTokenValue * 0.001).toFixed(2)}` },
+                    { id: 'totalValue', value: `${(this.totalTokenValue * 0.001).toFixed(2)}` },
                     { id: 'locationsVisited', value: new Set(this.collectedTokens.map(t => t.location)).size },
                     { id: 'qrTokenAmount', value: `${this.totalTokenValue} $Ember` },
-                    { id: 'qrTokenValue', value: `$${(this.totalTokenValue * 0.001).toFixed(2)} USD` }
+                    { id: 'qrTokenValue', value: `${(this.totalTokenValue * 0.001).toFixed(2)} USD` }
                 ];
                 
                 elements.forEach(({id, value}) => {
@@ -1291,79 +1516,6 @@ if (window.isVaultPhoenixDashboard) {
                 }
             } catch (error) {
                 console.error('❌ Token history error:', error);
-            }
-        }
-
-        // =================== TOKEN COLLECTION ===================
-        collectToken(token) {
-            console.log('💰 Collecting token:', token.location);
-            try {
-                this.collectedTokens.push({
-                    ...token,
-                    collectedAt: new Date().toISOString()
-                });
-                
-                this.totalTokenValue += token.value;
-                this.saveCollectedTokens();
-                
-                this.updateTokenCounts();
-                this.updateVaultStats();
-                this.updateNearbyTokens();
-                
-                this.removeTokenMarker(token.id);
-                this.showCollectionSuccess(token);
-                
-                console.log('✅ Token collected successfully');
-                
-            } catch (error) {
-                console.error('❌ Token collection error:', error);
-            }
-        }
-
-        removeTokenMarker(tokenId) {
-            const marker = document.querySelector(`[data-token-id="${tokenId}"]`);
-            if (marker) {
-                marker.remove();
-            }
-        }
-
-        showCollectionSuccess(token) {
-            const success = document.createElement('div');
-            success.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(67, 160, 71, 0.95));
-                color: white;
-                padding: 32px;
-                border-radius: 20px;
-                font-size: 20px;
-                font-weight: 800;
-                z-index: 400;
-                box-shadow: 0 16px 40px rgba(76, 175, 80, 0.6);
-                text-align: center;
-                touch-action: none;
-                user-select: none;
-                border: 3px solid rgba(255, 255, 255, 0.3);
-            `;
-            success.innerHTML = `
-                <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
-                <div>$Ember Token Collected!</div>
-                <div style="font-size: 18px; margin-top: 12px; opacity: 0.9;">+${token.value} $Ember</div>
-                <div style="font-size: 14px; margin-top: 8px; opacity: 0.8;">${token.location}</div>
-            `;
-
-            document.body.appendChild(success);
-
-            setTimeout(() => {
-                if (document.body.contains(success)) {
-                    document.body.removeChild(success);
-                }
-            }, 3000);
-
-            if (navigator.vibrate) {
-                navigator.vibrate([100, 50, 100, 50, 200, 50, 300]);
             }
         }
 
@@ -1709,6 +1861,35 @@ if (window.isVaultPhoenixDashboard) {
                     });
                 }
 
+                // Token Discovery Modal buttons
+                const collectTokenBtn = document.getElementById('collectTokenBtn');
+                const sponsorInfoBtn = document.getElementById('sponsorInfoBtn');
+                const sponsorBackBtn = document.getElementById('sponsorBackBtn');
+
+                if (collectTokenBtn) {
+                    addUniversalEventListener(collectTokenBtn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.collectToken();
+                    });
+                }
+
+                if (sponsorInfoBtn) {
+                    addUniversalEventListener(sponsorInfoBtn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.showSponsorDetails();
+                    });
+                }
+
+                if (sponsorBackBtn) {
+                    addUniversalEventListener(sponsorBackBtn, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.hideSponsorDetails();
+                    });
+                }
+
                 // Reset game
                 const resetGameBtn = document.getElementById('resetGameBtn');
                 const confirmResetGame = document.getElementById('confirmResetGame');
@@ -1829,14 +2010,11 @@ if (window.isVaultPhoenixDashboard) {
                     });
                 }
 
-                // Airdrop claim button
+                // Airdrop claim button - FIXED
                 const airdropClaimButton = document.getElementById('airdropClaimButton');
                 if (airdropClaimButton) {
-                    addUniversalEventListener(airdropClaimButton, (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        // This will be handled by the showAirdropNotification function
-                    });
+                    // This button's handler is set dynamically in showAirdropNotification
+                    // to ensure it captures the correct airdrop value
                 }
 
                 // Mode switches when leaving AR
