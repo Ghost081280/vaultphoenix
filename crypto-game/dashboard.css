@@ -1,5 +1,5 @@
-/* Vault Phoenix AR Crypto Gaming - FIXED CSS */
-/* FIXED: Demo compass styling, improved token positioning, mobile layout fixes */
+/* Vault Phoenix AR Crypto Gaming - IMPROVED MOBILE CSS */
+/* IMPROVED: Better mobile map interaction, smaller token labels, centered animations, improved AR labels */
 
 /* =================== CORE RESET & STRUCTURE =================== */
 * {
@@ -38,7 +38,7 @@ html, body {
     overflow: hidden;
 }
 
-/* =================== TOP NAVIGATION =================== */
+/* =================== IMPROVED TOP NAVIGATION =================== */
 .top-nav {
     position: fixed;
     top: 0;
@@ -164,81 +164,6 @@ html, body {
 .nav-menu-button:active {
     transform: scale(0.9);
     background: rgba(255, 255, 255, 0.15);
-}
-
-/* =================== FIXED DEMO COMPASS =================== */
-.compass-container {
-    position: fixed;
-    top: calc(env(safe-area-inset-top, 8px) + 90px);
-    right: 20px;
-    z-index: 150;
-    width: 60px;
-    height: 60px;
-}
-
-.compass {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(20,20,20,0.9));
-    border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(15px);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-}
-
-.compass-needle {
-    position: absolute;
-    width: 2px;
-    height: 20px;
-    background: linear-gradient(to top, #f0a500, #ff4444);
-    border-radius: 1px;
-    transform-origin: bottom center;
-    transition: transform 0.3s ease;
-    box-shadow: 0 0 6px rgba(255, 68, 68, 0.6);
-}
-
-.compass-directions {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.compass-direction {
-    position: absolute;
-    font-size: 10px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-.compass-direction.north {
-    top: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #ff4444;
-}
-
-.compass-direction.south {
-    bottom: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.compass-direction.east {
-    right: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.compass-direction.west {
-    left: 4px;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 /* =================== SIDE MENU =================== */
@@ -441,7 +366,7 @@ html, body {
     background: rgba(244, 67, 54, 0.2);
 }
 
-/* =================== AIRDROP NOTIFICATION =================== */
+/* =================== IMPROVED AIRDROP NOTIFICATION - SINGLE MODULE =================== */
 .airdrop-notification {
     position: fixed;
     top: -200px;
@@ -584,7 +509,7 @@ html, body {
     min-height: 100vh;
 }
 
-/* =================== MAP FEATURES =================== */
+/* =================== ENHANCED MAP FEATURES =================== */
 .map-roads {
     position: absolute;
     top: 0;
@@ -759,7 +684,7 @@ html, body {
     background: linear-gradient(135deg, #228B22, #32CD32);
 }
 
-/* Player Location (Blue Dot) */
+/* Player Location - Locked to map position */
 .player-location {
     position: absolute;
     left: 50%;
@@ -787,7 +712,7 @@ html, body {
     }
 }
 
-/* =================== FIXED TOKEN MARKERS - NO LABELS =================== */
+/* =================== IMPROVED TOKEN MARKERS - BETTER MOBILE INTERACTION =================== */
 .token-markers {
     position: absolute;
     top: 0;
@@ -808,13 +733,16 @@ html, body {
     align-items: center;
     transition: all 0.3s ease;
     z-index: 45;
-    min-width: 80px;
-    min-height: 80px;
-    padding: 15px;
+    /* IMPROVED: Larger tap area for better mobile interaction - no accidental map movement */
+    min-width: 100px;
+    min-height: 100px;
+    padding: 20px;
     border-radius: 50%;
+    /* IMPROVED: Prevent map dragging when touching tokens */
     touch-action: none;
 }
 
+/* IMPROVED: Better collectable pulse animation - perfectly centered */
 .token-marker.collectable {
     z-index: 48;
     position: relative;
@@ -825,8 +753,8 @@ html, body {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     transform: translate(-50%, -50%);
     border: 3px solid rgba(76, 175, 80, 0.6);
     border-radius: 50%;
@@ -846,8 +774,8 @@ html, body {
 }
 
 .token-coin {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: linear-gradient(135deg, #f0a500, #fb923c);
     border: 3px solid white;
     border-radius: 50%;
@@ -855,12 +783,13 @@ html, body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 16px rgba(240, 165, 0, 0.6);
+    margin-bottom: 6px;
     overflow: hidden;
 }
 
 .token-marker.collectable .token-coin {
-    width: 44px;
-    height: 44px;
+    width: 56px;
+    height: 56px;
     border: 4px solid #4CAF50;
     box-shadow: 0 6px 20px rgba(76, 175, 80, 0.8);
 }
@@ -878,6 +807,31 @@ html, body {
     filter: brightness(1.2);
 }
 
+/* IMPROVED: Smaller, cleaner token labels with proper text sizing */
+.token-label {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
+    color: #f0a500;
+    padding: 3px 6px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 800;
+    border: 1px solid rgba(240, 165, 0, 0.6);
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    min-width: 45px;
+    text-align: center;
+    line-height: 1.1;
+    /* IMPROVED: Better text fitting */
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* IMPROVED: Ensure readability */
+    letter-spacing: -0.2px;
+}
+
+/* IMPROVED: Better pulse animation - perfectly centered */
 @keyframes collectablePulse {
     0%, 100% { 
         transform: translate(-50%, -50%) scale(1);
@@ -962,17 +916,19 @@ html, body {
 
 .ar-tokens-container {
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 2px;
+    transform: translateY(-50%);
     pointer-events: none;
     z-index: 15;
 }
 
-/* =================== FIXED AR TOKENS - MATCH MAP STYLE =================== */
 .ar-token {
     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
     pointer-events: auto;
     display: flex;
@@ -980,9 +936,6 @@ html, body {
     align-items: center;
     transition: all 0.3s ease;
     z-index: 20;
-    transform: translate(-50%, -50%);
-    /* GPS anchored positioning with smooth transitions */
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ar-token.near {
@@ -990,8 +943,6 @@ html, body {
 }
 
 .ar-token-coin {
-    width: 40px;
-    height: 40px;
     border-radius: 50%;
     background: linear-gradient(135deg, #f0a500, #fb923c);
     border: 4px solid #4CAF50;
@@ -999,20 +950,44 @@ html, body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
+    margin-bottom: 6px;
     animation: arTokenFloat 3s ease-in-out infinite;
-    overflow: hidden;
+    width: 80px;
+    height: 80px;
 }
 
 .ar-token-img {
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
     object-fit: cover;
     border-radius: 50%;
-    filter: brightness(1.2);
+    filter: brightness(1.3);
+}
+
+/* IMPROVED: AR token labels with $Ember amounts */
+.ar-token-label {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
+    color: #f0a500;
+    padding: 3px 6px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 800;
+    border: 1px solid rgba(240, 165, 0, 0.6);
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    min-width: 45px;
+    text-align: center;
+    line-height: 1.1;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.2px;
 }
 
 .ar-token:active {
-    transform: translate(-50%, -50%) scale(0.95);
+    transform: translateY(-50%) scale(0.95);
 }
 
 @keyframes arTokenFloat {
@@ -1070,7 +1045,7 @@ html, body {
     font-weight: 600;
 }
 
-/* =================== VAULT SCREEN =================== */
+/* =================== IMPROVED VAULT SCREEN =================== */
 .vault-screen {
     position: absolute;
     top: 0;
@@ -1721,7 +1696,7 @@ html, body {
     overflow-y: auto;
 }
 
-/* =================== TOKEN MODAL - OPTIMIZED FOR MOBILE =================== */
+/* =================== TOKEN MODAL WITH BETTER SPACING =================== */
 .token-modal-header {
     text-align: center;
     margin-bottom: 20px;
@@ -1803,7 +1778,7 @@ html, body {
     border: 1px solid rgba(240, 165, 0, 0.3);
 }
 
-/* OPTIMIZED SPONSOR MESSAGE - BETTER MOBILE FIT */
+/* EXPANDABLE SPONSOR MESSAGE WITH BETTER SPACING */
 .sponsor-message {
     background: rgba(240, 165, 0, 0.1);
     border: 1px solid rgba(240, 165, 0, 0.3);
@@ -1827,13 +1802,13 @@ html, body {
     margin-bottom: 12px;
 }
 
-/* OPTIMIZED EXPANDABLE DETAILS - MOBILE FRIENDLY HEIGHT */
+/* EXPANDABLE DETAILS SECTION WITH MOBILE OPTIMIZATION */
 .sponsor-details-expandable {
     border-top: 1px solid rgba(240, 165, 0, 0.2);
-    padding-top: 16px;
-    margin-top: 12px;
+    padding-top: 20px;
+    margin-top: 16px;
     animation: slideDown 0.3s ease-out;
-    max-height: 50vh;
+    max-height: calc(100vh - 400px);
     overflow-y: auto;
 }
 
@@ -1851,79 +1826,79 @@ html, body {
 .sponsor-description {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.8);
-    line-height: 1.4;
-    margin-bottom: 16px;
-}
-
-.redemption-section-compact {
+    line-height: 1.5;
     margin-bottom: 20px;
 }
 
+.redemption-section-compact {
+    margin-bottom: 24px;
+}
+
 .redemption-title-compact {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     color: #f0a500;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     text-align: center;
 }
 
 .redemption-options-compact {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-bottom: 16px;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
 .redemption-option-compact {
     background: rgba(76, 175, 80, 0.1);
     border: 1px solid rgba(76, 175, 80, 0.3);
-    border-radius: 6px;
-    padding: 6px;
+    border-radius: 8px;
+    padding: 8px;
     text-align: center;
-    font-size: 9px;
+    font-size: 10px;
 }
 
 .redemption-option-icon {
-    font-size: 14px;
-    margin-bottom: 3px;
+    font-size: 16px;
+    margin-bottom: 4px;
     display: block;
 }
 
 .redemption-option-cost {
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 700;
     color: #4CAF50;
     margin-bottom: 2px;
 }
 
 .redemption-option-desc {
-    font-size: 7px;
+    font-size: 8px;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
 }
 
-/* OPTIMIZED LOCATION ACTIONS */
+/* IMPROVED: Better spacing for location actions */
 .location-actions {
     display: flex;
-    gap: 8px;
-    margin-top: 16px;
+    gap: 12px;
+    margin-top: 20px;
 }
 
 .location-action-btn {
     flex: 1;
     border: none;
     color: white;
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 11px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 12px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    min-height: 36px;
+    gap: 6px;
+    min-height: 44px;
 }
 
 .location-action-btn.primary {
@@ -1939,23 +1914,23 @@ html, body {
     transform: scale(0.98);
 }
 
-/* OPTIMIZED LEARN MORE TOGGLE */
+/* LEARN MORE TOGGLE BUTTON WITH BETTER SPACING */
 .learn-more-toggle {
     width: 100%;
     background: rgba(240, 165, 0, 0.1);
     border: 1px solid rgba(240, 165, 0, 0.3);
     color: #f0a500;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 12px;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    margin-top: 12px;
+    gap: 8px;
+    margin-top: 16px;
 }
 
 .learn-more-toggle:active {
@@ -2303,19 +2278,26 @@ html, body {
     }
     
     .token-marker {
-        min-width: 70px;
-        min-height: 70px;
-        padding: 12px;
+        min-width: 80px;
+        min-height: 80px;
+        padding: 15px;
     }
     
     .token-coin {
-        width: 36px;
-        height: 36px;
+        width: 45px;
+        height: 45px;
     }
     
     .token-marker.collectable .token-coin {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .token-label {
+        font-size: 9px;
+        padding: 2px 4px;
+        min-width: 40px;
+        max-width: 60px;
     }
     
     .airdrop-notification {
@@ -2332,13 +2314,7 @@ html, body {
     }
     
     .sponsor-details-expandable {
-        max-height: 45vh;
-    }
-    
-    .compass-container {
-        width: 50px;
-        height: 50px;
-        right: 15px;
+        max-height: calc(100vh - 450px);
     }
 }
 
@@ -2365,17 +2341,15 @@ html, body {
         font-size: 16px;
     }
     
+    .token-label {
+        font-size: 8px;
+        padding: 2px 3px;
+        min-width: 35px;
+        max-width: 55px;
+    }
+    
     .sponsor-details-expandable {
-        max-height: 40vh;
-    }
-    
-    .compass-container {
-        width: 45px;
-        height: 45px;
-    }
-    
-    .compass-needle {
-        height: 16px;
+        max-height: calc(100vh - 500px);
     }
 }
 
@@ -2404,10 +2378,6 @@ html, body {
     .ar-token-coin {
         animation: none;
     }
-    
-    .compass-needle {
-        transition: none;
-    }
 }
 
 /* =================== HIGH CONTRAST MODE =================== */
@@ -2429,10 +2399,6 @@ html, body {
     }
     
     .airdrop-notification {
-        border-width: 3px;
-    }
-    
-    .compass {
         border-width: 3px;
     }
 }
