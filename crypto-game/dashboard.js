@@ -1,5 +1,5 @@
-// Vault Phoenix AR Crypto Gaming - FIXED JAVASCRIPT
-// FOCUSED ON: MAP TOKEN BEHAVIOR, AR FILTERING, NEARBY SLIDER, LEARN MORE BUTTON
+// Vault Phoenix AR Crypto Gaming - COMPLETE FIXED JAVASCRIPT
+// FIXES: Mobile circles, airdrop design, learn more expandable, map player location, vault totals
 
 console.log('🔥💎 Vault Phoenix Game Loading...');
 
@@ -35,7 +35,6 @@ if (window.isVaultPhoenixGame) {
             this.totalEmberTokens = 0;
             this.currentDiscoveredToken = null;
             this.currentNavigationToken = null;
-            this.currentSponsorToken = null;
             this.showingCollectionActions = false;
             
             // FIXED: Specific token targeting for AR
@@ -55,6 +54,9 @@ if (window.isVaultPhoenixGame) {
             
             // Module state
             this.moduleExpanded = false;
+            
+            // Sponsor expandable state
+            this.sponsorExpanded = false;
             
             // IMPROVED AIRDROP SYSTEM - Once per session only
             this.airdropShown = sessionStorage.getItem('vaultPhoenix_airdropShown') === 'true';
@@ -77,6 +79,7 @@ if (window.isVaultPhoenixGame) {
                     collectable: true,
                     mapX: 48, mapY: 46,
                     phone: "(602) 555-0123",
+                    address: "1 E Washington St, Phoenix, AZ 85004",
                     redemptionOptions: [
                         { icon: "🍽️", cost: "100 $Ember", desc: "Lunch Credit" },
                         { icon: "🅿️", cost: "50 $Ember", desc: "Free Parking" },
@@ -97,6 +100,7 @@ if (window.isVaultPhoenixGame) {
                     collectable: true,
                     mapX: 52, mapY: 48,
                     phone: "(602) 555-0124",
+                    address: "115 N 6th St, Phoenix, AZ 85004",
                     redemptionOptions: [
                         { icon: "🏛️", cost: "150 $Ember", desc: "Museum Tour" },
                         { icon: "📚", cost: "75 $Ember", desc: "History Book" },
@@ -117,6 +121,7 @@ if (window.isVaultPhoenixGame) {
                     collectable: true,
                     mapX: 51, mapY: 52,
                     phone: "(602) 555-0125",
+                    address: "300 E Roosevelt St, Phoenix, AZ 85004",
                     redemptionOptions: [
                         { icon: "🎨", cost: "200 $Ember", desc: "Art Print" },
                         { icon: "🖼️", cost: "150 $Ember", desc: "Gallery Pass" },
@@ -139,6 +144,7 @@ if (window.isVaultPhoenixGame) {
                     collectable: false,
                     mapX: 46, mapY: 58,
                     phone: "(602) 555-0126",
+                    address: "401 E Jefferson St, Phoenix, AZ 85004",
                     redemptionOptions: [
                         { icon: "⚾", cost: "500 $Ember", desc: "Game Ticket" },
                         { icon: "🍕", cost: "100 $Ember", desc: "Concession Credit" },
@@ -159,6 +165,7 @@ if (window.isVaultPhoenixGame) {
                     collectable: false,
                     mapX: 35, mapY: 75,
                     phone: "(602) 555-0127",
+                    address: "3400 E Sky Harbor Blvd, Phoenix, AZ 85034",
                     redemptionOptions: [
                         { icon: "✈️", cost: "300 $Ember", desc: "Lounge Access" },
                         { icon: "🛍️", cost: "150 $Ember", desc: "Duty Free Deal" },
@@ -179,6 +186,7 @@ if (window.isVaultPhoenixGame) {
                     collectable: false,
                     mapX: 75, mapY: 25,
                     phone: "(602) 555-0128",
+                    address: "15059 N Scottsdale Rd, Scottsdale, AZ 85254",
                     redemptionOptions: [
                         { icon: "🛍️", cost: "400 $Ember", desc: "Shopping Credit" },
                         { icon: "💅", cost: "200 $Ember", desc: "Spa Service" },
@@ -199,6 +207,7 @@ if (window.isVaultPhoenixGame) {
                     collectable: false,
                     mapX: 65, mapY: 45,
                     phone: "(602) 555-0129",
+                    address: "1201 N Galvin Pkwy, Phoenix, AZ 85008",
                     redemptionOptions: [
                         { icon: "🌿", cost: "200 $Ember", desc: "Garden Tour" },
                         { icon: "🥗", cost: "150 $Ember", desc: "Farm Lunch" },
@@ -219,6 +228,7 @@ if (window.isVaultPhoenixGame) {
                     collectable: false,
                     mapX: 70, mapY: 20,
                     phone: "(602) 555-0130",
+                    address: "5700 N Echo Canyon Pkwy, Phoenix, AZ 85018",
                     redemptionOptions: [
                         { icon: "🥾", cost: "300 $Ember", desc: "Gear Rental" },
                         { icon: "🗺️", cost: "150 $Ember", desc: "Guided Hike" },
@@ -239,6 +249,7 @@ if (window.isVaultPhoenixGame) {
                     collectable: false,
                     mapX: 60, mapY: 68,
                     phone: "(602) 555-0131",
+                    address: "80 W Rio Salado Pkwy, Tempe, AZ 85281",
                     redemptionOptions: [
                         { icon: "☕", cost: "100 $Ember", desc: "Coffee & Pastry" },
                         { icon: "💻", cost: "150 $Ember", desc: "Co-work Day Pass" },
@@ -259,6 +270,7 @@ if (window.isVaultPhoenixGame) {
                     collectable: false,
                     mapX: 68, mapY: 42,
                     phone: "(602) 555-0132",
+                    address: "625 N Galvin Pkwy, Phoenix, AZ 85008",
                     redemptionOptions: [
                         { icon: "🧗", cost: "300 $Ember", desc: "Climbing Tour" },
                         { icon: "🌵", cost: "150 $Ember", desc: "Nature Walk" },
@@ -319,7 +331,7 @@ if (window.isVaultPhoenixGame) {
             const notification = document.getElementById('airdropNotification');
             if (!notification) return;
 
-            console.log('🪂 Showing airdrop notification - slow drop from top');
+            console.log('🪂 Showing airdrop notification - redesigned style');
             
             // Random airdrop values
             const airdropValues = [250, 500, 750, 1000];
@@ -895,6 +907,7 @@ if (window.isVaultPhoenixGame) {
             this.updateUI();
             this.updateMapTokens();
             this.updateNearbyTokens();
+            this.updateVaultDisplay(); // FIXED: Update vault immediately
             
             // Show collection modal with appropriate buttons
             this.showTokenModal(token, fromAR);
@@ -920,12 +933,14 @@ if (window.isVaultPhoenixGame) {
             console.log('✅ Token collected successfully');
         }
 
+        // =================== ENHANCED TOKEN MODAL WITH EXPANDABLE SPONSOR ===================
         showTokenModal(token, fromAR = false) {
             const modal = document.getElementById('tokenModal');
             if (!modal) return;
             
             this.currentDiscoveredToken = token;
             this.showingCollectionActions = fromAR;
+            this.sponsorExpanded = false; // Reset expansion state
             
             // Update header based on collection state
             const titleEl = document.getElementById('tokenFoundTitle');
@@ -945,6 +960,7 @@ if (window.isVaultPhoenixGame) {
                 discoveredTokenLocation: document.getElementById('discoveredTokenLocation'),
                 sponsorTitle: document.getElementById('sponsorTitle'),
                 sponsorText: document.getElementById('sponsorText'),
+                sponsorDescription: document.getElementById('sponsorDescription'),
                 tokenActions: document.getElementById('tokenActions'),
                 tokenCollectionActions: document.getElementById('tokenCollectionActions')
             };
@@ -955,20 +971,88 @@ if (window.isVaultPhoenixGame) {
             if (elements.discoveredTokenLocation) elements.discoveredTokenLocation.textContent = token.location;
             if (elements.sponsorTitle) elements.sponsorTitle.textContent = `Sponsored by ${token.sponsor}`;
             if (elements.sponsorText) elements.sponsorText.textContent = token.message;
+            if (elements.sponsorDescription) elements.sponsorDescription.textContent = token.description;
+            
+            // POPULATE REDEMPTION OPTIONS IN COMPACT FORMAT
+            this.populateRedemptionOptions(token);
             
             // Show appropriate action buttons
             if (fromAR) {
-                // From AR - show "Back to Hunt" and "Learn More"
+                // From AR - show "Back to Hunt" and "Close"
                 if (elements.tokenActions) elements.tokenActions.style.display = 'none';
                 if (elements.tokenCollectionActions) elements.tokenCollectionActions.style.display = 'flex';
             } else {
-                // From Hunt - show "Collect $Ember" and "Learn More"
+                // From Hunt - show "Collect $Ember" and "Close"
                 if (elements.tokenActions) elements.tokenActions.style.display = 'flex';
                 if (elements.tokenCollectionActions) elements.tokenCollectionActions.style.display = 'none';
             }
             
             modal.classList.add('show');
             modal.style.display = 'flex';
+        }
+
+        populateRedemptionOptions(token) {
+            const container = document.getElementById('redemptionOptionsCompact');
+            if (!container || !token.redemptionOptions) return;
+            
+            container.innerHTML = token.redemptionOptions.map(option => `
+                <div class="redemption-option-compact">
+                    <span class="redemption-option-icon">${option.icon}</span>
+                    <div class="redemption-option-cost">${option.cost}</div>
+                    <div class="redemption-option-desc">${option.desc}</div>
+                </div>
+            `).join('');
+        }
+
+        // TOGGLE SPONSOR DETAILS EXPANSION
+        toggleSponsorDetails() {
+            const expandableSection = document.getElementById('sponsorDetailsExpandable');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const toggleText = document.getElementById('toggleText');
+            
+            if (!expandableSection || !toggleIcon || !toggleText) return;
+            
+            this.sponsorExpanded = !this.sponsorExpanded;
+            
+            if (this.sponsorExpanded) {
+                expandableSection.style.display = 'block';
+                toggleIcon.classList.add('expanded');
+                toggleText.textContent = 'Show Less';
+                console.log('📖 Sponsor details expanded');
+            } else {
+                expandableSection.style.display = 'none';
+                toggleIcon.classList.remove('expanded');
+                toggleText.textContent = 'Learn More';
+                console.log('📖 Sponsor details collapsed');
+            }
+            
+            if (navigator.vibrate) {
+                navigator.vibrate(30);
+            }
+        }
+
+        // HANDLE LOCATION ACTIONS
+        getDirectionsToLocation() {
+            if (!this.currentDiscoveredToken) return;
+            
+            const token = this.currentDiscoveredToken;
+            const destination = token.address || `${token.lat},${token.lng}`;
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            
+            const mapsUrl = isIOS ? 
+                `maps://maps.google.com/maps?daddr=${encodeURIComponent(destination)}` :
+                `https://maps.google.com/maps?daddr=${encodeURIComponent(destination)}`;
+            
+            window.open(mapsUrl, '_blank');
+            console.log('🗺️ Opening directions to:', destination);
+        }
+
+        callLocation() {
+            if (!this.currentDiscoveredToken || !this.currentDiscoveredToken.phone) return;
+            
+            const phoneUrl = `tel:${this.currentDiscoveredToken.phone}`;
+            window.open(phoneUrl);
+            console.log('📞 Calling:', this.currentDiscoveredToken.phone);
         }
 
         hideTokenModal() {
@@ -979,93 +1063,7 @@ if (window.isVaultPhoenixGame) {
             }
             this.currentDiscoveredToken = null;
             this.showingCollectionActions = false;
-        }
-
-        // =================== IMPROVED SPONSOR MODAL ===================
-        showSponsorModal(token) {
-            const modal = document.getElementById('sponsorModal');
-            if (!modal) return;
-            
-            this.currentSponsorToken = token;
-            
-            console.log('🏢 Showing sponsor modal for:', token.sponsor);
-            
-            // Update sponsor modal content
-            const elements = {
-                sponsorModalTitle: document.getElementById('sponsorModalTitle'),
-                sponsorLogoPlaceholder: document.getElementById('sponsorLogoPlaceholder'),
-                sponsorNameLarge: document.getElementById('sponsorNameLarge'),
-                sponsorDescriptionLarge: document.getElementById('sponsorDescriptionLarge'),
-                redemptionGrid: document.getElementById('redemptionGrid')
-            };
-            
-            if (elements.sponsorModalTitle) elements.sponsorModalTitle.textContent = `${token.sponsor} Benefits`;
-            if (elements.sponsorLogoPlaceholder) {
-                // Set appropriate emoji based on sponsor
-                const logoEmojis = {
-                    'Phoenix Downtown Partnership': '🏢',
-                    'Arizona Heritage Foundation': '🏛️',
-                    'Local Artists Collective': '🎨',
-                    'Arizona Diamondbacks': '⚾',
-                    'Sky Harbor Shops': '✈️',
-                    'Scottsdale Fashion Square': '🛍️',
-                    'Garden Cafe': '🌿',
-                    'Desert Hiking Adventures': '🏔️',
-                    'Lakeside Coffee Co.': '☕',
-                    'Arizona Nature Tours': '🌵'
-                };
-                elements.sponsorLogoPlaceholder.textContent = logoEmojis[token.sponsor] || '🏢';
-            }
-            if (elements.sponsorNameLarge) elements.sponsorNameLarge.textContent = token.sponsor;
-            if (elements.sponsorDescriptionLarge) elements.sponsorDescriptionLarge.textContent = token.description;
-            
-            // IMPROVED: POPULATE REDEMPTION OPTIONS
-            if (elements.redemptionGrid && token.redemptionOptions) {
-                elements.redemptionGrid.innerHTML = token.redemptionOptions.map(option => `
-                    <div class="redemption-item">
-                        <span class="redemption-icon">${option.icon}</span>
-                        <div class="redemption-cost">${option.cost}</div>
-                        <div class="redemption-desc">${option.desc}</div>
-                    </div>
-                `).join('');
-            }
-            
-            modal.classList.add('show');
-            modal.style.display = 'flex';
-            
-            console.log('✅ Sponsor modal displayed');
-        }
-
-        hideSponsorModal() {
-            const modal = document.getElementById('sponsorModal');
-            if (modal) {
-                modal.classList.remove('show');
-                modal.style.display = 'none';
-            }
-            this.currentSponsorToken = null;
-            console.log('🏢 Sponsor modal hidden');
-        }
-
-        navigateToSponsor() {
-            if (!this.currentSponsorToken) return;
-            
-            const token = this.currentSponsorToken;
-            const destination = `${token.lat},${token.lng}`;
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-            
-            const mapsUrl = isIOS ? 
-                `maps://maps.google.com/maps?daddr=${destination}` :
-                `https://maps.google.com/maps?daddr=${destination}`;
-            
-            window.open(mapsUrl, '_blank');
-            this.hideSponsorModal();
-        }
-
-        callSponsor() {
-            if (!this.currentSponsorToken || !this.currentSponsorToken.phone) return;
-            
-            const phoneUrl = `tel:${this.currentSponsorToken.phone}`;
-            window.open(phoneUrl);
+            this.sponsorExpanded = false;
         }
 
         // =================== IMPROVED NAVIGATION MODAL ===================
@@ -1134,18 +1132,18 @@ if (window.isVaultPhoenixGame) {
                 return;
             }
             
-            const destination = `${token.lat},${token.lng}`;
+            const destination = token.address || `${token.lat},${token.lng}`;
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
             
             let mapsUrl;
             if (mode === 'walking') {
                 mapsUrl = isIOS ? 
-                    `maps://maps.google.com/maps?daddr=${destination}&dirflg=w` :
-                    `https://maps.google.com/maps?daddr=${destination}&dirflg=w`;
+                    `maps://maps.google.com/maps?daddr=${encodeURIComponent(destination)}&dirflg=w` :
+                    `https://maps.google.com/maps?daddr=${encodeURIComponent(destination)}&dirflg=w`;
             } else if (mode === 'driving') {
                 mapsUrl = isIOS ? 
-                    `maps://maps.google.com/maps?daddr=${destination}&dirflg=d` :
-                    `https://maps.google.com/maps?daddr=${destination}&dirflg=d`;
+                    `maps://maps.google.com/maps?daddr=${encodeURIComponent(destination)}&dirflg=d` :
+                    `https://maps.google.com/maps?daddr=${encodeURIComponent(destination)}&dirflg=d`;
             }
             
             if (mapsUrl) {
@@ -1154,7 +1152,7 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== IMPROVED VAULT SYSTEM ===================
+        // =================== FIXED VAULT SYSTEM ===================
         updateVaultDisplay() {
             console.log('🔒 Updating vault display...');
             
@@ -1176,8 +1174,9 @@ if (window.isVaultPhoenixGame) {
                 elements.vaultUsdValue.textContent = `${(this.totalEmberTokens * 0.001).toFixed(2)} USD`;
             }
             
+            // FIXED: Ensure total collected equals ember vault amount
             if (elements.totalCollected) {
-                elements.totalCollected.textContent = this.collectedTokens.length;
+                elements.totalCollected.textContent = this.totalEmberTokens.toLocaleString();
             }
             
             if (elements.locationsVisited) {
@@ -1551,7 +1550,7 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== FIXED EVENT LISTENERS ===================
+        // =================== COMPLETE EVENT LISTENERS ===================
         setupEventListeners() {
             console.log('🎧 Setting up event listeners...');
             
@@ -1625,32 +1624,15 @@ if (window.isVaultPhoenixGame) {
 
             // Token modal buttons
             const collectTokenBtn = document.getElementById('collectTokenBtn');
-            const learnMoreBtn = document.getElementById('learnMoreBtn');
             const backToHuntBtn = document.getElementById('backToHuntBtn');
-            const learnMoreAfterBtn = document.getElementById('learnMoreAfterBtn');
+            const closeTokenModalBtn = document.getElementById('closeTokenModalBtn');
+            const closeCollectedModalBtn = document.getElementById('closeCollectedModalBtn');
             
             if (collectTokenBtn) {
                 collectTokenBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     if (this.currentDiscoveredToken) {
                         this.collectToken(this.currentDiscoveredToken, false);
-                    }
-                });
-            }
-            
-            // FIXED: Learn More button functionality with debugging
-            if (learnMoreBtn) {
-                learnMoreBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    console.log('🏢 Learn More button clicked');
-                    if (this.currentDiscoveredToken) {
-                        console.log('🏢 Opening sponsor modal for:', this.currentDiscoveredToken.sponsor);
-                        this.hideTokenModal();
-                        setTimeout(() => {
-                            this.showSponsorModal(this.currentDiscoveredToken);
-                        }, 100);
-                    } else {
-                        console.error('❌ No current discovered token for Learn More');
                     }
                 });
             }
@@ -1663,46 +1645,45 @@ if (window.isVaultPhoenixGame) {
                 });
             }
             
-            // FIXED: Learn More After button functionality with debugging
-            if (learnMoreAfterBtn) {
-                learnMoreAfterBtn.addEventListener('click', (e) => {
+            if (closeTokenModalBtn) {
+                closeTokenModalBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    console.log('🏢 Learn More After button clicked');
-                    if (this.currentDiscoveredToken) {
-                        console.log('🏢 Opening sponsor modal for:', this.currentDiscoveredToken.sponsor);
-                        this.hideTokenModal();
-                        setTimeout(() => {
-                            this.showSponsorModal(this.currentDiscoveredToken);
-                        }, 100);
-                    } else {
-                        console.error('❌ No current discovered token for Learn More After');
-                    }
-                });
-            }
-
-            // Sponsor modal buttons
-            const sponsorClose = document.getElementById('sponsorClose');
-            const sponsorNavigateBtn = document.getElementById('sponsorNavigateBtn');
-            const sponsorCallBtn = document.getElementById('sponsorCallBtn');
-            
-            if (sponsorClose) {
-                sponsorClose.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.hideSponsorModal();
+                    this.hideTokenModal();
                 });
             }
             
-            if (sponsorNavigateBtn) {
-                sponsorNavigateBtn.addEventListener('click', (e) => {
+            if (closeCollectedModalBtn) {
+                closeCollectedModalBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    this.navigateToSponsor();
+                    this.hideTokenModal();
                 });
             }
 
-            if (sponsorCallBtn) {
-                sponsorCallBtn.addEventListener('click', (e) => {
+            // FIXED: Learn More Toggle Button
+            const learnMoreToggle = document.getElementById('learnMoreToggle');
+            if (learnMoreToggle) {
+                learnMoreToggle.addEventListener('click', (e) => {
                     e.preventDefault();
-                    this.callSponsor();
+                    console.log('🏢 Learn More toggle clicked');
+                    this.toggleSponsorDetails();
+                });
+            }
+
+            // FIXED: Location Action Buttons
+            const getDirectionsBtn = document.getElementById('getDirectionsBtn');
+            const callLocationBtn = document.getElementById('callLocationBtn');
+            
+            if (getDirectionsBtn) {
+                getDirectionsBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.getDirectionsToLocation();
+                });
+            }
+            
+            if (callLocationBtn) {
+                callLocationBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.callLocation();
                 });
             }
 
