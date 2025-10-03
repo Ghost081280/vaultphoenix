@@ -60,7 +60,7 @@
                 
                 <div class="menu-item" data-mode="ar" id="menuAR">
                     <div class="menu-item-icon">📱</div>
-                    <div class="menu-item-text">AR Discovery</div>
+                    <div class="menu-item-text">AR View</div>
                     <div class="menu-item-badge" id="nearbyARTokens">Get closer</div>
                 </div>
                 
@@ -154,10 +154,10 @@
                     
                     <!-- Token Markers Container -->
                     <div class="token-markers" id="tokenMarkers"></div>
+                    
+                    <!-- FIXED: Player Location - Now inside map so it moves with map -->
+                    <div class="player-location" id="playerLocation"></div>
                 </div>
-                
-                <!-- FIXED: Player Location - Now OUTSIDE map container so it stays centered -->
-                <div class="player-location" id="playerLocation"></div>
             </div>
             
             <!-- Map Controls -->
@@ -299,7 +299,7 @@
             </div>
         </nav>
 
-        <!-- FIXED: Token Collection Modal with proper Learn More functionality -->
+        <!-- POLISHED: Token Collection Modal with improved layout -->
         <div class="token-modal" id="tokenModal" style="display: none;">
             <div class="token-modal-content">
                 <div class="token-modal-header">
@@ -339,15 +339,15 @@
                             </div>
                         </div>
                         
-                        <!-- LOCATION ACTIONS -->
+                        <!-- IMPROVED: Location Actions with better spacing -->
                         <div class="location-actions">
                             <button class="location-action-btn primary" id="getDirectionsBtn">
                                 <span>🗺️</span>
                                 <span>Get Directions</span>
                             </button>
-                            <button class="location-action-btn secondary" id="callLocationBtn">
-                                <span>📞</span>
-                                <span>Call Location</span>
+                            <button class="location-action-btn secondary" id="learnMoreWebsiteBtn">
+                                <span>🌐</span>
+                                <span>Learn More</span>
                             </button>
                         </div>
                     </div>
@@ -371,9 +371,9 @@
                 </div>
                 
                 <div class="token-collection-actions" style="display: none;" id="tokenCollectionActions">
-                    <button class="token-action-btn" id="backToHuntBtn">
-                        <span>🗺️</span>
-                        <span>Back to Hunt</span>
+                    <button class="token-action-btn" id="goToVaultBtn">
+                        <span>🔒</span>
+                        <span>Go to Vault</span>
                     </button>
                     <button class="token-action-btn secondary" id="closeCollectedModalBtn">
                         <span>✕</span>
