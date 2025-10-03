@@ -102,22 +102,22 @@
             </div>
         </div>
 
-        <!-- IMPROVED AIRDROP NOTIFICATION -->
+        <!-- REDESIGNED AIRDROP NOTIFICATION - MATCHES GAME STYLE -->
         <div class="airdrop-notification" id="airdropNotification">
-            <div class="airdrop-content">
-                <div class="airdrop-header">
-                    <div class="airdrop-icon">🪂</div>
-                    <div class="airdrop-title">$Ember Air Drop!</div>
+            <div class="airdrop-header">
+                <div class="airdrop-icon-container">
+                    <img src="../images/VPEmberCoin.PNG" alt="Ember" class="airdrop-ember-icon" onerror="this.textContent='💎'">
                 </div>
-                <div class="airdrop-body">
-                    <div class="airdrop-amount" id="airdropAmount">500 $Ember</div>
-                    <div class="airdrop-subtitle">Limited time bonus - collect now!</div>
-                </div>
-                <button class="airdrop-button" id="airdropClaimButton">
-                    <span class="airdrop-btn-icon">💎</span>
-                    <span>Collect Now</span>
-                </button>
+                <div class="airdrop-title">$Ember Airdrop!</div>
             </div>
+            <div class="airdrop-body">
+                <div class="airdrop-amount" id="airdropAmount">500 $Ember</div>
+                <div class="airdrop-subtitle">Limited time bonus - collect now!</div>
+            </div>
+            <button class="airdrop-button" id="airdropClaimButton">
+                <span class="airdrop-btn-icon">💎</span>
+                <span>Collect Now</span>
+            </button>
         </div>
         
         <!-- Hunt Screen -->
@@ -152,12 +152,12 @@
                         <div class="landmark papago-park" title="Papago Park"></div>
                     </div>
                     
-                    <!-- Player Location -->
-                    <div class="player-location" id="playerLocation"></div>
-                    
                     <!-- Token Markers Container -->
                     <div class="token-markers" id="tokenMarkers"></div>
                 </div>
+                
+                <!-- FIXED: Player Location - Now OUTSIDE map container so it stays centered -->
+                <div class="player-location" id="playerLocation"></div>
             </div>
             
             <!-- Map Controls -->
@@ -185,7 +185,7 @@
             </div>
         </div>
 
-        <!-- IMPROVED VAULT SCREEN WITH BETTER SCROLLING -->
+        <!-- IMPROVED VAULT SCREEN -->
         <div class="vault-screen" id="vaultScreen" style="display: none;">
             <div class="vault-container">
                 <div class="vault-header">
@@ -299,7 +299,7 @@
             </div>
         </nav>
 
-        <!-- Token Collection Modal -->
+        <!-- FIXED: Token Collection Modal with proper Learn More functionality -->
         <div class="token-modal" id="tokenModal" style="display: none;">
             <div class="token-modal-content">
                 <div class="token-modal-header">
@@ -320,9 +320,43 @@
                     </div>
                 </div>
                 
-                <div class="sponsor-message">
+                <!-- EXPANDABLE SPONSOR MESSAGE -->
+                <div class="sponsor-message" id="sponsorMessage">
                     <div class="sponsor-title" id="sponsorTitle">Sponsored by Phoenix Plaza</div>
                     <div class="sponsor-text" id="sponsorText">Exclusive downtown experience awaits!</div>
+                    
+                    <!-- EXPANDABLE DETAILS SECTION -->
+                    <div class="sponsor-details-expandable" id="sponsorDetailsExpandable" style="display: none;">
+                        <div class="sponsor-description" id="sponsorDescription">
+                            Experience VIP access to downtown events, priority parking, and exclusive dining experiences.
+                        </div>
+                        
+                        <!-- REDEMPTION OPTIONS -->
+                        <div class="redemption-section-compact">
+                            <div class="redemption-title-compact">Redeem Your $Ember For:</div>
+                            <div class="redemption-options-compact" id="redemptionOptionsCompact">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- LOCATION ACTIONS -->
+                        <div class="location-actions">
+                            <button class="location-action-btn primary" id="getDirectionsBtn">
+                                <span>🗺️</span>
+                                <span>Get Directions</span>
+                            </button>
+                            <button class="location-action-btn secondary" id="callLocationBtn">
+                                <span>📞</span>
+                                <span>Call Location</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- LEARN MORE TOGGLE BUTTON -->
+                    <button class="learn-more-toggle" id="learnMoreToggle">
+                        <span class="toggle-text" id="toggleText">Learn More</span>
+                        <span class="toggle-icon" id="toggleIcon">▼</span>
+                    </button>
                 </div>
                 
                 <div class="token-actions" id="tokenActions">
@@ -330,9 +364,9 @@
                         <span>💎</span>
                         <span>Collect $Ember</span>
                     </button>
-                    <button class="token-action-btn secondary" id="learnMoreBtn">
-                        <span>ℹ️</span>
-                        <span>Learn More</span>
+                    <button class="token-action-btn secondary" id="closeTokenModalBtn">
+                        <span>✕</span>
+                        <span>Close</span>
                     </button>
                 </div>
                 
@@ -341,71 +375,10 @@
                         <span>🗺️</span>
                         <span>Back to Hunt</span>
                     </button>
-                    <button class="token-action-btn secondary" id="learnMoreAfterBtn">
-                        <span>ℹ️</span>
-                        <span>Learn More</span>
+                    <button class="token-action-btn secondary" id="closeCollectedModalBtn">
+                        <span>✕</span>
+                        <span>Close</span>
                     </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ENHANCED SPONSOR DETAILS MODAL -->
-        <div class="sponsor-modal" id="sponsorModal" style="display: none;">
-            <div class="sponsor-modal-content">
-                <div class="sponsor-modal-header">
-                    <div class="sponsor-modal-title" id="sponsorModalTitle">Partner Benefits</div>
-                    <button class="sponsor-close" id="sponsorClose">✕</button>
-                </div>
-                
-                <div class="sponsor-details">
-                    <div class="sponsor-logo-large">
-                        <div class="sponsor-logo-placeholder" id="sponsorLogoPlaceholder">🏢</div>
-                    </div>
-                    <div class="sponsor-name-large" id="sponsorNameLarge">Phoenix Plaza</div>
-                    <div class="sponsor-description-large" id="sponsorDescriptionLarge">
-                        Experience exclusive downtown Phoenix benefits and VIP access to premium services.
-                    </div>
-                    
-                    <!-- Redemption Options -->
-                    <div class="redemption-section">
-                        <div class="redemption-title">Redeem Your $Ember For:</div>
-                        <div class="redemption-grid" id="redemptionGrid">
-                            <!-- Redemption options will be populated by JavaScript -->
-                        </div>
-                    </div>
-                    
-                    <div class="sponsor-benefits">
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🎫</span>
-                            <span class="benefit-text">VIP Event Access</span>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🍽️</span>
-                            <span class="benefit-text">Dining Discounts</span>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🅿️</span>
-                            <span class="benefit-text">Priority Parking</span>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🛍️</span>
-                            <span class="benefit-text">Shopping Perks</span>
-                        </div>
-                    </div>
-                    
-                    <div class="sponsor-cta">
-                        <div class="cta-text">Visit our location to redeem your $Ember tokens for exclusive rewards and experiences!</div>
-                        <div class="sponsor-actions">
-                            <button class="sponsor-cta-btn primary" id="sponsorNavigateBtn">
-                                <span>🗺️</span>
-                                <span>Get Directions</span>
-                            </button>
-                            <button class="sponsor-cta-btn secondary" id="sponsorCallBtn">
-                                <span>📞</span>
-                                <span>Call Location</span>
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
