@@ -362,36 +362,35 @@ html, body {
     background: rgba(244, 67, 54, 0.2);
 }
 
-/* =================== AIRDROP NOTIFICATION =================== */
+/* =================== AIRDROP NOTIFICATION (UPDATED) =================== */
 .airdrop-notification {
     position: fixed;
-    top: 50%;
+    top: -200px; /* Start hidden above screen */
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
+    transform: translateX(-50%);
     z-index: 300;
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.98), rgba(251, 146, 60, 0.98));
     backdrop-filter: blur(30px);
-    border: 4px solid rgba(255, 255, 255, 0.9);
-    border-radius: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
     color: white;
     display: none;
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     box-shadow: 
-        0 24px 80px rgba(240, 165, 0, 0.8),
+        0 20px 60px rgba(240, 165, 0, 0.7),
         0 0 0 2px rgba(255, 255, 255, 0.2);
-    max-width: 360px;
-    width: 90%;
+    max-width: 320px; /* Smaller */
+    width: 85%; /* Smaller */
     overflow: hidden;
 }
 
 .airdrop-notification.show {
     display: block;
-    transform: translate(-50%, -50%) scale(1);
-    animation: airdropEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    top: calc(env(safe-area-inset-top, 8px) + 90px); /* Position below nav */
 }
 
 .airdrop-content {
-    padding: 24px;
+    padding: 20px; /* Reduced padding */
     text-align: center;
 }
 
@@ -399,36 +398,36 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 10px; /* Reduced gap */
+    margin-bottom: 12px; /* Reduced margin */
 }
 
 .airdrop-icon {
-    font-size: 36px;
+    font-size: 30px; /* Smaller */
     animation: airdropIconFloat 3s ease-in-out infinite;
 }
 
 .airdrop-title {
-    font-size: 20px;
+    font-size: 18px; /* Smaller */
     font-weight: 800;
     color: white;
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .airdrop-body {
-    margin-bottom: 20px;
+    margin-bottom: 16px; /* Reduced margin */
 }
 
 .airdrop-amount {
-    font-size: 24px;
+    font-size: 20px; /* Smaller */
     font-weight: 900;
     color: white;
-    margin-bottom: 8px;
+    margin-bottom: 6px; /* Reduced margin */
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .airdrop-subtitle {
-    font-size: 14px;
+    font-size: 13px; /* Smaller */
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
 }
@@ -437,19 +436,19 @@ html, body {
     background: linear-gradient(135deg, #ffffff, #f8f9fa);
     color: #2e7d32;
     border: none;
-    padding: 14px 24px;
-    border-radius: 16px;
-    font-size: 16px;
+    padding: 12px 20px; /* Smaller padding */
+    border-radius: 14px; /* Smaller radius */
+    font-size: 15px; /* Smaller font */
     font-weight: 800;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px; /* Smaller gap */
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     width: 100%;
-    min-height: 56px;
+    min-height: 48px; /* Smaller height */
 }
 
 .airdrop-button:hover {
@@ -462,22 +461,7 @@ html, body {
 }
 
 .airdrop-btn-icon {
-    font-size: 18px;
-}
-
-@keyframes airdropEntrance {
-    0% {
-        transform: translate(-50%, -50%) scale(0.5) rotate(-5deg);
-        opacity: 0;
-    }
-    60% {
-        transform: translate(-50%, -50%) scale(1.05) rotate(2deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1) rotate(0deg);
-        opacity: 1;
-    }
+    font-size: 16px; /* Smaller */
 }
 
 @keyframes airdropIconFloat {
@@ -485,7 +469,7 @@ html, body {
         transform: translateY(0px) rotate(0deg);
     }
     50% {
-        transform: translateY(-4px) rotate(5deg);
+        transform: translateY(-3px) rotate(3deg); /* Smaller movement */
     }
 }
 
@@ -815,11 +799,11 @@ html, body {
     white-space: nowrap;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
-    max-width: 100px;
+    max-width: 90px; /* REDUCED to prevent overlap */
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.2;
+    line-height: 1.1; /* REDUCED line height */
 }
 
 @keyframes collectablePulse {
@@ -989,6 +973,13 @@ html, body {
     transform: translateX(-50%);
     z-index: 30;
     pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* Auto-hide AR UI after 3 seconds */
+.ar-ui.fade-out {
+    opacity: 0;
 }
 
 .ar-instructions {
@@ -1030,7 +1021,7 @@ html, body {
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    padding: calc(env(safe-area-inset-top, 8px) + 72px) 0 calc(env(safe-area-inset-bottom, 12px) + 120px) 0; /* INCREASED bottom padding */
+    padding: calc(env(safe-area-inset-top, 8px) + 72px) 0 calc(env(safe-area-inset-bottom, 12px) + 120px) 0;
     scroll-behavior: smooth;
 }
 
@@ -1175,9 +1166,9 @@ html, body {
     font-weight: 600;
 }
 
-/* FIXED VAULT RECEIPTS SECTION */
+/* ENHANCED VAULT RECEIPTS SECTION - Better scrolling */
 .vault-receipts-section {
-    margin-bottom: 40px; /* Extra space at bottom */
+    margin-bottom: 60px; /* More space at bottom for scrolling */
 }
 
 .token-history {
@@ -1185,9 +1176,9 @@ html, body {
     border: 1px solid rgba(240, 165, 0, 0.2);
     border-radius: 16px;
     padding: 16px;
-    max-height: 400px; /* INCREASED height */
+    max-height: 500px; /* INCREASED height for better scrolling */
     overflow-y: auto;
-    margin-bottom: 20px; /* Extra space */
+    margin-bottom: 40px; /* More space */
 }
 
 .history-placeholder {
@@ -2122,7 +2113,7 @@ html, body {
     transform: scale(0.98);
 }
 
-/* QR Modal */
+/* QR Modal - UPDATED with balance display */
 .qr-modal-header {
     display: flex;
     justify-content: space-between;
