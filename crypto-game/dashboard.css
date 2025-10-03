@@ -1,5 +1,5 @@
-/* Vault Phoenix AR Crypto Gaming - FIXED CSS */
-/* IMPROVED MOBILE INTERACTIONS & TOKEN TARGETING */
+/* Vault Phoenix AR Crypto Gaming - COMPLETE UPDATED CSS */
+/* FULLY INTEGRATED WITH FIXED HTML & JS */
 
 /* =================== CORE RESET & STRUCTURE =================== */
 * {
@@ -362,7 +362,7 @@ html, body {
     background: rgba(244, 67, 54, 0.2);
 }
 
-/* =================== IMPROVED AIRDROP NOTIFICATION =================== */
+/* =================== ENHANCED AIRDROP NOTIFICATION =================== */
 .airdrop-notification {
     position: fixed;
     top: -250px;
@@ -1682,7 +1682,6 @@ html, body {
     overflow-y: auto;
 }
 
-/* Continue with all remaining modal and component styles... */
 .token-modal-header {
     text-align: center;
     margin-bottom: 20px;
@@ -2023,8 +2022,284 @@ html, body {
     transform: scale(0.98);
 }
 
-/* =================== REMAINING STYLES =================== */
-/* Navigation Modal, QR Modal, Reset Game Modal, etc. continue with existing styles... */
+/* =================== NAVIGATION MODAL =================== */
+.navigation-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.navigation-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 16px;
+}
+
+.navigation-info {
+    background: rgba(240, 165, 0, 0.1);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.navigation-token-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.navigation-distance {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 4px;
+}
+
+.navigation-ember-amount {
+    font-size: 14px;
+    color: #f0a500;
+    font-weight: 600;
+}
+
+.navigation-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.navigation-option {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navigation-option:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.navigation-option:active {
+    transform: scale(0.98);
+}
+
+.navigation-option.ar-option {
+    background: rgba(76, 175, 80, 0.1);
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.navigation-option.ar-option:hover {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: rgba(76, 175, 80, 0.4);
+}
+
+.navigation-option-icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(240, 165, 0, 0.2);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.navigation-option.ar-option .navigation-option-icon {
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.navigation-option-text {
+    flex: 1;
+}
+
+.navigation-option-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.navigation-option-time {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.navigation-close {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navigation-close:active {
+    transform: scale(0.98);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* =================== QR MODAL =================== */
+.qr-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.qr-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-close:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.qr-code-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.qr-placeholder {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(251, 146, 60, 0.15));
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.qr-icon {
+    margin-bottom: 12px;
+}
+
+.qr-ember-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: brightness(1.2);
+}
+
+.qr-instructions {
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.qr-token-info {
+    background: rgba(240, 165, 0, 0.1);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+.qr-token-amount {
+    font-size: 18px;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 4px;
+}
+
+.qr-token-value {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* =================== RESET GAME & LOGOUT MODALS =================== */
+.reset-game-modal-title,
+.logout-modal-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #f0a500;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.reset-game-modal-text,
+.logout-modal-text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.reset-game-modal-actions,
+.logout-modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.reset-game-modal-btn,
+.logout-modal-btn {
+    flex: 1;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 52px;
+}
+
+.reset-game-modal-cancel,
+.logout-modal-cancel {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.reset-game-modal-confirm {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+}
+
+.logout-modal-confirm {
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: white;
+}
+
+.reset-game-modal-btn:active,
+.logout-modal-btn:active {
+    transform: scale(0.98);
+}
 
 /* =================== SCREEN VISIBILITY =================== */
 .hunt-screen,
@@ -2060,6 +2335,42 @@ html, body {
         width: 50px;
         height: 50px;
     }
+    
+    .airdrop-notification {
+        max-width: 300px;
+    }
+    
+    .token-modal-content,
+    .navigation-content,
+    .qr-modal-content,
+    .sponsor-modal-content {
+        max-width: 350px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 320px) {
+    .nav-title {
+        font-size: 16px;
+    }
+    
+    .ember-count {
+        padding: 6px 10px;
+    }
+    
+    .ember-count-text {
+        font-size: 12px;
+    }
+    
+    .map-control-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+    
+    .map-control-btn.center-btn {
+        font-size: 16px;
+    }
 }
 
 /* =================== ACCESSIBILITY =================== */
@@ -2070,5 +2381,64 @@ html, body {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+    
+    .token-marker.collectable {
+        animation: none;
+    }
+    
+    .airdrop-notification {
+        animation: none;
+    }
+    
+    .player-location {
+        animation: none;
+    }
+    
+    .ember-icon {
+        animation: none;
+    }
+    
+    .ar-token-coin {
+        animation: none;
+    }
+    
+    .airdrop-icon {
+        animation: none;
+    }
+}
+
+/* =================== HIGH CONTRAST MODE =================== */
+@media (prefers-contrast: high) {
+    .token-marker.collectable .token-coin {
+        border-width: 6px;
+        border-color: #00ff00;
+    }
+    
+    .token-marker.distant .token-coin {
+        border-width: 6px;
+        border-color: #ff0000;
+    }
+    
+    .nav-logo,
+    .ember-count,
+    .map-control-btn {
+        border-width: 3px;
+    }
+    
+    .airdrop-notification {
+        border-width: 4px;
+    }
+}
+
+/* =================== DARK MODE SUPPORT =================== */
+@media (prefers-color-scheme: dark) {
+    /* Already optimized for dark mode */
+}
+
+/* =================== PRINT STYLES =================== */
+@media print {
+    .crypto-dashboard-page {
+        display: none !important;
     }
 }
