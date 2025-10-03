@@ -64,13 +64,13 @@
                         </div>
                     </div>
                     <div class="campaign-info">
-                        <div class="campaign-text">Total Tokens Available</div>
-                        <div class="token-count" id="availableTokenCount">10 tokens</div>
+                        <div class="campaign-text">Total Token Locations</div>
+                        <div class="token-count" id="availableTokenCount">10 available</div>
                     </div>
                 </div>
             </div>
             
-            <!-- Compact Token Locations Module - REDESIGNED WITH 4 EMBER ICONS -->
+            <!-- Token Locations Module - FIXED (NO GAP) -->
             <div class="token-locations-module collapsed" id="tokenLocationsModule">
                 <div class="swipe-handle" id="swipeHandle">
                     <div class="handle-bar"></div>
@@ -84,25 +84,19 @@
                             </div>
                             $Ember Tokens Nearby
                         </span>
-                        <span class="handle-count" id="nearbyTokenCount">3 ready</span>
+                        <span class="handle-count" id="nearbyTokenCount">Explore locations</span>
                     </div>
                 </div>
                 <div class="module-content" id="moduleContent">
                     <div class="module-header">
                         <div class="module-title">
                             <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
-                            Nearest Token Locations
+                            Token Locations
                         </div>
                         <div class="total-available" id="totalAvailable">10 total available</div>
                     </div>
                     <div class="token-locations-list" id="tokenLocationsList">
                         <!-- Token locations will be populated by JavaScript -->
-                    </div>
-                    <div class="module-footer">
-                        <div class="footer-hint">
-                            <span class="hint-icon">ℹ️</span>
-                            <span>Tap any location to navigate</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -118,7 +112,7 @@
             </div>
         </div>
 
-        <!-- Airdrop Notification - REDESIGNED FROM PROXIMITY -->
+        <!-- Airdrop Notification -->
         <div class="airdrop-notification" id="airdropNotification">
             <div class="airdrop-icon">🪂</div>
             <div class="airdrop-content">
@@ -182,7 +176,7 @@
                 <div class="menu-item" data-mode="ar" id="menuAR">
                     <div class="menu-item-icon image" style="background-image: url('../images/IphoneVPLogo.PNG')">📱</div>
                     <div class="menu-item-text">AR Discovery</div>
-                    <div class="menu-item-badge" id="nearbyTokens">Close to unlock</div>
+                    <div class="menu-item-badge" id="nearbyTokens">Get closer</div>
                 </div>
                 
                 <div class="menu-item" data-mode="vault" id="menuVault">
@@ -275,7 +269,7 @@
             <div class="ar-instructions-text">Point your camera around and tap the glowing $Ember coin to collect tokens!</div>
         </div>
         
-        <!-- Token Discovery Modal -->
+        <!-- Token Discovery Modal - RESTORED -->
         <div class="token-discovery" id="tokenDiscovery">
             <div class="token-discovery-content">
                 <div class="token-discovery-header">
@@ -290,8 +284,8 @@
                 
                 <div class="sponsor-info-front" id="sponsorInfoFront">
                     <div class="sponsor-message">
-                        <div class="sponsor-title">Ready to Collect</div>
-                        <div class="sponsor-text">Tap collect to add this token to your vault!</div>
+                        <div class="sponsor-title">Sponsored by Phoenix Suns Arena</div>
+                        <div class="sponsor-text">Exclusive courtside experience awaits!</div>
                     </div>
                     
                     <div class="token-preview">
@@ -308,7 +302,7 @@
                     <div class="token-actions">
                         <button class="token-action-btn" id="collectTokenBtn">
                             <span>💎</span>
-                            <span>Collect Token</span>
+                            <span>Collect $Ember</span>
                         </button>
                         <button class="token-action-btn secondary" id="sponsorInfoBtn">
                             <span>ℹ️</span>
@@ -372,9 +366,9 @@
             </div>
         </div>
         
-        <!-- $Ember Vault View -->
+        <!-- $Ember Vault View - RESTORED -->
         <div class="vault-view" id="vaultView" style="display: none;">
-            <!-- Include Token Module on All Screens -->
+            <!-- Include Token Module on Vault Screen -->
             <div class="token-locations-module collapsed" id="tokenLocationsModuleVault">
                 <div class="swipe-handle" id="swipeHandleVault">
                     <div class="handle-bar"></div>
@@ -388,7 +382,7 @@
                             </div>
                             $Ember Tokens Nearby
                         </span>
-                        <span class="handle-count" id="nearbyTokenCountVault">3 ready</span>
+                        <span class="handle-count" id="nearbyTokenCountVault">Explore locations</span>
                     </div>
                 </div>
             </div>
@@ -467,9 +461,9 @@
             </div>
         </div>
 
-        <!-- Themed Adventures View -->
+        <!-- Themed Adventures View - RESTORED -->
         <div class="campaigns-view" id="campaignsView" style="display: none;">
-            <!-- Include Token Module on All Screens -->
+            <!-- Include Token Module on Campaigns Screen -->
             <div class="token-locations-module collapsed" id="tokenLocationsModuleCampaigns">
                 <div class="swipe-handle" id="swipeHandleCampaigns">
                     <div class="handle-bar"></div>
@@ -483,7 +477,7 @@
                             </div>
                             $Ember Tokens Nearby
                         </span>
-                        <span class="handle-count" id="nearbyTokenCountCampaigns">3 ready</span>
+                        <span class="handle-count" id="nearbyTokenCountCampaigns">Explore locations</span>
                     </div>
                 </div>
             </div>
