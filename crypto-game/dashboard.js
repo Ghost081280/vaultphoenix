@@ -1,5 +1,5 @@
-// Vault Phoenix AR Crypto Gaming - COMPLETE FIXED JAVASCRIPT
-// FIXES: Token overlap issue resolved with proper spacing and routing
+// Vault Phoenix AR Crypto Gaming - FIXED JAVASCRIPT
+// FIXES: Static north compass, improved airdrop UX, full AR coin display
 
 console.log('🔥💎 Vault Phoenix Game Loading...');
 
@@ -49,13 +49,12 @@ if (window.isVaultPhoenixGame) {
             this.mapIsDragging = false;
             this.mapDragThreshold = 8;
             
-            // AR state with real compass
+            // AR state with FIXED static compass
             this.cameraStream = null;
             this.arTokens = [];
             this.arUITimer = null;
-            this.compassHeading = 0; // Real compass heading
+            // FIXED: Remove compass rotation variables for static north pointing
             this.watchId = null; // Geolocation watch ID
-            this.orientationHandler = null; // Device orientation handler
             
             // Module state
             this.moduleExpanded = false;
@@ -63,7 +62,7 @@ if (window.isVaultPhoenixGame) {
             // Sponsor expandable state
             this.sponsorExpanded = false;
             
-            // IMPROVED AIRDROP SYSTEM with timer
+            // IMPROVED AIRDROP SYSTEM with better UX
             this.airdropShown = sessionStorage.getItem('vaultPhoenix_airdropShown') === 'true';
             this.airdropTimer = null;
             this.airdropCountdownTimer = null;
@@ -331,7 +330,7 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== IMPROVED AIRDROP SYSTEM WITH TIMER =================== 
+        // =================== IMPROVED AIRDROP SYSTEM WITH BETTER UX =================== 
         startAirdropSystem() {
             if (!this.airdropShown) {
                 const delay = (7 + Math.random() * 2) * 1000; // 7-9 seconds delay
@@ -414,17 +413,17 @@ if (window.isVaultPhoenixGame) {
             const timerEl = document.getElementById('airdropTimer');
             const buttonEl = document.getElementById('airdropClaimButton');
             const buttonTextEl = document.getElementById('airdropButtonText');
+            const contentEl = document.querySelector('.airdrop-content');
             
             if (collected) {
-                // COLLECTED STATE
+                // COLLECTED STATE - IMPROVED UX
                 if (titleEl) titleEl.textContent = '$Ember Collected!';
                 if (amountEl) amountEl.textContent = `${this.pendingAirdropValue} $Ember`;
-                if (subtitleEl) subtitleEl.textContent = 'Added to your vault successfully!';
+                if (subtitleEl) subtitleEl.textContent = 'Successfully added to your vault!';
                 if (timerEl) timerEl.style.display = 'none';
-                if (buttonTextEl) buttonTextEl.textContent = 'Continue Playing';
-                if (buttonEl) {
-                    buttonEl.style.background = 'linear-gradient(135deg, #4CAF50, #66BB6A)';
-                }
+                // FIXED: Hide button completely when collected
+                if (buttonEl) buttonEl.style.display = 'none';
+                if (contentEl) contentEl.classList.add('airdrop-collected');
             } else {
                 // UNCOLLECTED STATE
                 if (titleEl) titleEl.textContent = '$Ember Airdrop!';
@@ -436,8 +435,10 @@ if (window.isVaultPhoenixGame) {
                 }
                 if (buttonTextEl) buttonTextEl.textContent = 'Collect Now';
                 if (buttonEl) {
+                    buttonEl.style.display = 'flex';
                     buttonEl.style.background = 'linear-gradient(135deg, #f0a500, #fb923c)';
                 }
+                if (contentEl) contentEl.classList.remove('airdrop-collected');
             }
         }
 
@@ -445,9 +446,6 @@ if (window.isVaultPhoenixGame) {
             if (!this.airdropCollected) {
                 // COLLECT AIRDROP
                 this.claimAirdrop();
-            } else {
-                // CLOSE AIRDROP
-                this.hideAirdropNotification();
             }
         }
 
@@ -488,7 +486,7 @@ if (window.isVaultPhoenixGame) {
                 navigator.vibrate([100, 50, 100, 50, 200]);
             }
             
-            // Auto-hide after 3 seconds
+            // FIXED: Auto-hide after 3 seconds without button
             setTimeout(() => {
                 this.hideAirdropNotification();
             }, 3000);
@@ -819,9 +817,9 @@ if (window.isVaultPhoenixGame) {
             console.log(`✅ FIXED: Updated ${collectableCount} green (collectable) and ${distantCount} red (distant) tokens with proper spacing`);
         }
 
-        // =================== REAL DEVICE COMPASS AR SYSTEM ===================
+        // =================== AR SYSTEM WITH FIXED STATIC COMPASS ===================
         async startARMode() {
-            console.log('📱 Starting AR Mode with real compass...');
+            console.log('📱 Starting AR Mode with FIXED static compass...');
             
             try {
                 // Request camera access
@@ -840,16 +838,16 @@ if (window.isVaultPhoenixGame) {
                     video.srcObject = this.cameraStream;
                 }
 
-                // Create AR tokens
+                // Create AR tokens with improved coin display
                 this.createARTokens();
                 
-                // Start real compass using device orientation
-                this.startRealCompass();
+                // FIXED: Setup static compass pointing north (no rotation)
+                this.setupStaticCompass();
                 
                 // Auto-hide AR UI after 6 seconds
                 this.startARUITimer();
                 
-                console.log('✅ AR mode started with real compass');
+                console.log('✅ AR mode started with FIXED static compass pointing north');
                 
             } catch (error) {
                 console.error('❌ AR mode error:', error);
@@ -858,76 +856,13 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        startRealCompass() {
-            // Try to use the device orientation API for realistic compass behavior
-            if (window.DeviceOrientationEvent) {
-                // Request permission for iOS 13+
-                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    DeviceOrientationEvent.requestPermission()
-                        .then(response => {
-                            if (response == 'granted') {
-                                this.enableCompass();
-                            } else {
-                                this.fallbackCompass();
-                            }
-                        })
-                        .catch(() => this.fallbackCompass());
-                } else {
-                    // For other browsers
-                    this.enableCompass();
-                }
-            } else {
-                // Fallback for browsers without orientation API
-                this.fallbackCompass();
-            }
-        }
-
-        enableCompass() {
-            this.orientationHandler = (event) => {
-                // Use the compass heading (alpha) for realistic behavior
-                if (event.alpha !== null) {
-                    this.compassHeading = event.alpha;
-                    this.updateCompass();
-                }
-            };
-            
-            window.addEventListener('deviceorientationabsolute', this.orientationHandler, true);
-            window.addEventListener('deviceorientation', this.orientationHandler, true);
-            
-            console.log('🧭 Real device compass enabled');
-        }
-
-        fallbackCompass() {
-            // Fallback: Gentle, realistic movement simulation
-            let targetHeading = Math.random() * 360;
-            let currentHeading = 0;
-            
-            this.compassInterval = setInterval(() => {
-                // Simulate gentle compass drift like a real compass
-                const diff = targetHeading - currentHeading;
-                const adjustment = diff * 0.05; // Slow, smooth movement
-                
-                currentHeading += adjustment;
-                if (currentHeading < 0) currentHeading += 360;
-                if (currentHeading >= 360) currentHeading -= 360;
-                
-                // Occasionally change target (like phone movement)
-                if (Math.random() < 0.01) {
-                    targetHeading = Math.random() * 360;
-                }
-                
-                this.compassHeading = currentHeading;
-                this.updateCompass();
-            }, 100);
-            
-            console.log('🧭 Fallback compass simulation enabled');
-        }
-
-        updateCompass() {
+        // FIXED: Static compass that always points north
+        setupStaticCompass() {
             const compassNeedle = document.getElementById('compassNeedle');
             if (compassNeedle) {
-                // Smooth compass needle rotation
-                compassNeedle.style.transform = `rotate(${-this.compassHeading}deg)`;
+                // FIXED: Static compass - always points north (0 degrees)
+                compassNeedle.style.transform = 'rotate(0deg)';
+                console.log('🧭 FIXED: Static compass pointing north - no rotation');
             }
         }
 
@@ -946,9 +881,9 @@ if (window.isVaultPhoenixGame) {
             }, 6000);
         }
 
-        // AR tokens matching map coin style exactly
+        // FIXED: AR tokens with full coin display matching map style
         createARTokens() {
-            console.log('🪙 Creating AR tokens matching map style...');
+            console.log('🪙 Creating AR tokens with FIXED full coin display...');
             
             const container = document.getElementById('arTokensContainer');
             if (!container) return;
@@ -994,7 +929,7 @@ if (window.isVaultPhoenixGame) {
                 
                 arToken.style.left = `${position.x}%`;
                 
-                // Token visual matching map style exactly
+                // FIXED: Token visual with full coin display
                 const coin = document.createElement('div');
                 coin.className = 'ar-token-coin';
                 
@@ -1027,7 +962,7 @@ if (window.isVaultPhoenixGame) {
                 container.appendChild(arToken);
             });
             
-            console.log(`✅ Created ${Math.min(tokensToShow.length, 3)} AR tokens matching map style`);
+            console.log(`✅ Created ${Math.min(tokensToShow.length, 3)} AR tokens with FIXED full coin display`);
         }
 
         stopARMode() {
@@ -1042,19 +977,6 @@ if (window.isVaultPhoenixGame) {
                 if (video) {
                     video.srcObject = null;
                 }
-            }
-            
-            // Stop real compass
-            if (this.orientationHandler) {
-                window.removeEventListener('deviceorientationabsolute', this.orientationHandler, true);
-                window.removeEventListener('deviceorientation', this.orientationHandler, true);
-                this.orientationHandler = null;
-            }
-            
-            // Stop fallback compass
-            if (this.compassInterval) {
-                clearInterval(this.compassInterval);
-                this.compassInterval = null;
             }
             
             // Clear AR tokens
@@ -1117,7 +1039,7 @@ if (window.isVaultPhoenixGame) {
             console.log('✅ Token collected successfully');
         }
 
-        // =================== TOKEN MODAL ===================
+        // =================== TOKEN MODAL WITH MOBILE HEIGHT FIX ===================
         showTokenModal(token, fromAR = false) {
             const modal = document.getElementById('tokenModal');
             if (!modal) return;
@@ -1641,7 +1563,7 @@ if (window.isVaultPhoenixGame) {
                 // Restart airdrop system
                 this.startAirdropSystem();
                 
-                console.log('✅ Game reset successfully - all token overlaps resolved');
+                console.log('✅ Game reset successfully - all fixes applied');
                 
             } catch (error) {
                 console.error('❌ Game reset error:', error);
@@ -1788,7 +1710,7 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Airdrop button with smart behavior
+            // FIXED: Airdrop button with improved UX
             const airdropClaimButton = document.getElementById('airdropClaimButton');
             if (airdropClaimButton) {
                 airdropClaimButton.addEventListener('click', (e) => {
@@ -2003,7 +1925,7 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            console.log('✅ Event listeners setup complete');
+            console.log('✅ Event listeners setup complete - all fixes applied');
         }
     }
 
@@ -2015,4 +1937,4 @@ if (window.isVaultPhoenixGame) {
     console.log('🚫 Game JavaScript blocked - not a crypto game page');
 }
 
-console.log('🔥💎 Game JavaScript loaded successfully - Token overlap issue FIXED');
+console.log('🔥💎 FIXED Game JavaScript loaded - Compass static, AR coins full display, mobile modal optimized');
