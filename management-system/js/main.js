@@ -59,6 +59,20 @@ const RoleConfig = {
             { icon: '💰', label: 'ROI Calculator', section: 'budget' },
             { icon: '⚙️', label: 'Account Settings', section: 'settings' }
         ]
+    },
+    'system-admin': {
+        name: 'System Admin',
+        icon: '⚙️',
+        showTokenBalance: false,
+        navigation: [
+            { icon: '📊', label: 'Global Dashboard', section: 'overview' },
+            { icon: '💎', label: 'Token Economics', section: 'token-economics' },
+            { icon: '🔧', label: 'Smithii.io Integration', section: 'smithii' },
+            { icon: '👥', label: 'User Management', section: 'users' },
+            { icon: '💰', label: 'Revenue Monitoring', section: 'revenue' },
+            { icon: '🔒', label: 'Compliance Center', section: 'compliance' },
+            { icon: '🌐', label: 'Global Analytics', section: 'analytics' }
+        ]
     }
 };
 
