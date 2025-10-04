@@ -1505,10 +1505,20 @@ if (window.isVaultPhoenixGame) {
         }
 
         setupSwipeableModule() {
-            console.log('👆 Setting up optimized swipeable module...');
+            console.log('👆 Setting up professional swipeable module with layered effect...');
             
             const handle = document.getElementById('swipeHandle');
-            if (!handle) return;
+            const module = document.getElementById('tokenLocationsModule');
+            
+            if (!handle || !module) {
+                console.error('❌ Swipe handle or module not found');
+                return;
+            }
+            
+            // Ensure module starts in collapsed state
+            module.classList.add('collapsed');
+            module.classList.remove('expanded');
+            this.moduleExpanded = false;
             
             let startY = 0;
             let currentY = 0;
@@ -1518,6 +1528,7 @@ if (window.isVaultPhoenixGame) {
                 isDragging = true;
                 startY = e.touches ? e.touches[0].clientY : e.clientY;
                 currentY = startY;
+                console.log('👆 Swipe started');
                 e.preventDefault();
             };
 
@@ -1535,26 +1546,37 @@ if (window.isVaultPhoenixGame) {
                 const deltaY = startY - currentY;
                 const threshold = 50;
                 
+                console.log('👆 Swipe ended, deltaY:', deltaY);
+                
                 if (Math.abs(deltaY) > threshold) {
                     if (deltaY > 0) {
+                        console.log('📋 Expanding module - sliding up from behind nav');
                         this.expandModule();
                     } else {
+                        console.log('📋 Collapsing module - sliding down behind nav');
                         this.collapseModule();
                     }
                 } else {
+                    console.log('📋 Toggling module state');
                     this.toggleModule();
                 }
                 
                 e.preventDefault();
             };
 
+            // Add event listeners
             handle.addEventListener('touchstart', handleTouchStart, { passive: false });
             handle.addEventListener('touchmove', handleTouchMove, { passive: false });
             handle.addEventListener('touchend', handleTouchEnd, { passive: false });
             handle.addEventListener('mousedown', handleTouchStart, { passive: false });
             handle.addEventListener('mousemove', handleTouchMove, { passive: false });
             handle.addEventListener('mouseup', handleTouchEnd, { passive: false });
-            handle.addEventListener('click', () => this.toggleModule(), { passive: false });
+            handle.addEventListener('click', () => {
+                console.log('📋 Handle clicked - toggling module');
+                this.toggleModule();
+            }, { passive: false });
+            
+            console.log('✅ Professional swipeable module setup complete');
         }
 
         toggleModule() {
