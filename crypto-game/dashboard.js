@@ -1,4 +1,4 @@
-// Vault Phoenix AR Crypto Gaming - POLISHED ENHANCED SLIDER NAVIGATION JavaScript
+// Vault Phoenix AR Crypto Gaming - POLISHED WITH AR FIX JavaScript
 
 (function() {
     const cryptoFlag = document.getElementById('cryptoGameFlag');
@@ -617,21 +617,12 @@ if (window.isVaultPhoenixGame) {
             
             if (tokensToShow.length === 0) return;
 
-            const demoPositions = [
-                { x: 20, bearing: 'left' },
-                { x: 50, bearing: 'center' },
-                { x: 80, bearing: 'right' }
-            ];
-
-            tokensToShow.forEach((token, index) => {
-                if (index >= demoPositions.length) return;
-                
-                const position = demoPositions[index];
+            // If only one token (targeted), center it
+            if (tokensToShow.length === 1) {
+                const token = tokensToShow[0];
                 const arToken = document.createElement('div');
                 arToken.className = 'ar-token near';
                 arToken.dataset.tokenId = token.id;
-                
-                arToken.style.left = `${position.x}%`;
                 
                 const coin = document.createElement('div');
                 coin.className = 'ar-token-coin';
@@ -662,7 +653,44 @@ if (window.isVaultPhoenixGame) {
                 });
                 
                 container.appendChild(arToken);
-            });
+            } else {
+                // Multiple tokens - show all in a row
+                tokensToShow.forEach((token) => {
+                    const arToken = document.createElement('div');
+                    arToken.className = 'ar-token near';
+                    arToken.dataset.tokenId = token.id;
+                    
+                    const coin = document.createElement('div');
+                    coin.className = 'ar-token-coin';
+                    
+                    const coinImg = document.createElement('img');
+                    coinImg.src = '../images/VPEmberCoin.PNG';
+                    coinImg.alt = 'AR Ember Coin';
+                    coinImg.className = 'ar-token-img';
+                    coinImg.onerror = function() {
+                        this.style.display = 'none';
+                        coin.textContent = '💎';
+                        coin.style.fontSize = '36px';
+                        coin.style.color = '#f0a500';
+                    };
+                    
+                    coin.appendChild(coinImg);
+                    arToken.appendChild(coin);
+                    
+                    arToken.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        this.collectToken(token, true);
+                        
+                        if (navigator.vibrate) {
+                            navigator.vibrate([80, 40, 80]);
+                        }
+                    });
+                    
+                    container.appendChild(arToken);
+                });
+            }
         }
 
         stopARMode() {
@@ -709,7 +737,7 @@ if (window.isVaultPhoenixGame) {
                 const arToken = document.querySelector(`[data-token-id="${token.id}"]`);
                 if (arToken && arToken.closest('.ar-tokens-container')) {
                     arToken.style.animation = 'none';
-                    arToken.style.transform = 'translateY(-50%) scale(0)';
+                    arToken.style.transform = 'scale(0)';
                     arToken.style.opacity = '0';
                     setTimeout(() => {
                         if (arToken.parentNode) arToken.parentNode.removeChild(arToken);
