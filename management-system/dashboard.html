@@ -44,7 +44,7 @@
                 </div>
                 
                 <div class="header-right">
-                    <!-- Token Balance Widget (Platform Operators & SDK Customers Only) -->
+                    <!-- Token Balance Widget (Campaign Managers Only) -->
                     <div class="token-balance-widget" id="tokenBalanceWidget" style="display: none;">
                         <img src="images/VPEmberCoin.PNG" alt="$Ember" class="token-icon" onerror="this.style.display='none'">
                         <div class="token-amount">
@@ -53,28 +53,20 @@
                         </div>
                     </div>
                     
-                    <!-- Role Switcher (Demo Mode) -->
+                    <!-- Role Switcher -->
                     <div class="role-switcher">
                         <button class="role-switcher-btn" id="roleSwitcherBtn">
-                            <span id="currentRoleName">Platform Operator</span>
+                            <span id="currentRoleName">Campaign Manager</span>
                             <span>▼</span>
                         </button>
                         <div class="role-dropdown" id="roleDropdown">
-                            <div class="role-option" data-role="platform-operator">
+                            <div class="role-option" data-role="campaign-manager">
                                 <span>🚀</span>
-                                <span>Platform Operator</span>
+                                <span>Campaign Manager</span>
                             </div>
-                            <div class="role-option" data-role="sdk-customer">
-                                <span>🔌</span>
-                                <span>SDK Customer</span>
-                            </div>
-                            <div class="role-option" data-role="merchant">
-                                <span>🏢</span>
-                                <span>Merchant</span>
-                            </div>
-                            <div class="role-option" data-role="system-admin">
-                                <span>⚙️</span>
-                                <span>System Admin</span>
+                            <div class="role-option" data-role="advertiser">
+                                <span>📍</span>
+                                <span>Advertiser</span>
                             </div>
                         </div>
                     </div>
@@ -86,7 +78,7 @@
                     </div>
                     
                     <!-- User Profile -->
-                    <div class="user-profile" id="userProfile">
+                    <div class="user-profile" id="userProfile" onclick="showUserMenu()">
                         <div class="user-avatar">VP</div>
                         <span class="user-name">Demo User</span>
                     </div>
@@ -110,9 +102,21 @@
     
     <!-- JavaScript Files -->
     <script src="js/main.js"></script>
+    <script src="js/app-setup.js"></script>
+    <script src="js/marketplace.js"></script>
+    <script src="js/wallet.js"></script>
     <script src="js/token-economy.js"></script>
     <script src="js/airdrop-system.js"></script>
     <script src="js/analytics.js"></script>
     <script src="js/ember-hunt-demo.js"></script>
+    
+    <script>
+        function showUserMenu() {
+            const confirmLogout = confirm('User Menu\n\nLogged in as: demo@phoenix.com\n\nDo you want to logout?');
+            if (confirmLogout) {
+                logout();
+            }
+        }
+    </script>
 </body>
 </html>
