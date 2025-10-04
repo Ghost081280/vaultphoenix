@@ -1,4 +1,4 @@
-/* Vault Phoenix AR Crypto Gaming - COMPLETE ENHANCED SLIDER NAVIGATION CSS */
+/* Vault Phoenix AR Crypto Gaming - POLISHED ENHANCED SLIDER NAVIGATION CSS */
 
 /* =================== CORE RESET & STRUCTURE =================== */
 * {
@@ -1058,19 +1058,46 @@ html, body {
 
 .ar-token.near {
     z-index: 25;
+    position: relative;
+}
+
+.ar-token.near::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    transform: translate(-50%, -50%);
+    border: 4px solid rgba(76, 175, 80, 0.6);
+    border-radius: 50%;
+    animation: arCollectablePulse 2.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes arCollectablePulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 0;
+    }
 }
 
 .ar-token-coin {
     border-radius: 50%;
     background: linear-gradient(135deg, #f0a500, #fb923c);
-    border: 4px solid #4CAF50;
+    border: 5px solid #4CAF50;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
+    box-shadow: 0 0 40px rgba(76, 175, 80, 0.9);
     animation: arTokenFloat 3s ease-in-out infinite;
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
     overflow: hidden;
     padding: 0;
 }
@@ -1395,7 +1422,7 @@ html, body {
     width: 100%;
 }
 
-/* =================== ENHANCED SLIDER MODULE (COMPACT PRIMARY NAVIGATION) =================== */
+/* =================== ENHANCED SLIDER MODULE (POLISHED) =================== */
 .token-locations-module {
     position: fixed;
     bottom: 0;
@@ -1409,7 +1436,7 @@ html, body {
     border: 1px solid rgba(240, 165, 0, 0.3);
     border-bottom: none;
     box-shadow: 0 -8px 32px rgba(240, 165, 0, 0.2);
-    transform: translateY(calc(100% - 100px));
+    transform: translateY(calc(100% - 110px));
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     max-height: 70vh;
     overflow: hidden;
@@ -1420,13 +1447,13 @@ html, body {
 }
 
 .swipe-handle {
-    padding: 12px 16px 10px 16px;
+    padding: 14px 20px 14px 20px;
     cursor: pointer;
     user-select: none;
     border-bottom: 1px solid rgba(240, 165, 0, 0.2);
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.12), rgba(251, 146, 60, 0.08));
     touch-action: manipulation;
-    min-height: 100px;
+    min-height: 110px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1439,7 +1466,7 @@ html, body {
     height: 4px;
     background: linear-gradient(90deg, #f0a500, #fb923c);
     border-radius: 2px;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 14px auto;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(240, 165, 0, 0.4);
 }
@@ -1451,23 +1478,31 @@ html, body {
 
 .handle-content-compact {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+    gap: 12px;
+}
+
+.handle-header-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
 }
 
 .ember-icons-compact {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     flex-shrink: 0;
 }
 
 .ember-icon-compact {
-    width: 28px;
-    height: 28px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    filter: brightness(1.2) drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+    filter: brightness(1.2) drop-shadow(0 2px 8px rgba(240, 165, 0, 0.5));
     animation: emberIconFloat 3s ease-in-out infinite;
 }
 
@@ -1478,17 +1513,17 @@ html, body {
 @keyframes emberIconFloat {
     0%, 100% { 
         transform: translateY(0) rotate(0deg);
-        filter: brightness(1.2) drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+        filter: brightness(1.2) drop-shadow(0 2px 8px rgba(240, 165, 0, 0.5));
     }
     50% { 
-        transform: translateY(-3px) rotate(5deg);
-        filter: brightness(1.4) drop-shadow(0 4px 10px rgba(240, 165, 0, 0.6));
+        transform: translateY(-4px) rotate(5deg);
+        filter: brightness(1.4) drop-shadow(0 4px 12px rgba(240, 165, 0, 0.7));
     }
 }
 
 .handle-title-compact {
     color: white;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 800;
     letter-spacing: -0.3px;
     flex: 1;
@@ -1496,8 +1531,8 @@ html, body {
 }
 
 .radar-scanner-compact {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     position: relative;
     flex-shrink: 0;
 }
@@ -1569,18 +1604,6 @@ html, body {
     border-radius: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 8px rgba(76, 175, 80, 0.9);
-    animation: radarCenterPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes radarCenterPulse {
-    0%, 100% { 
-        transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 8px rgba(76, 175, 80, 0.9);
-    }
-    50% { 
-        transform: translate(-50%, -50%) scale(1.5);
-        box-shadow: 0 0 14px rgba(76, 175, 80, 1);
-    }
 }
 
 .radar-dots {
@@ -1641,8 +1664,10 @@ html, body {
 
 .module-content {
     display: none;
-    max-height: calc(70vh - 100px);
+    max-height: calc(70vh - 110px);
     overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 .token-locations-module.expanded .module-content {
@@ -1713,9 +1738,9 @@ html, body {
     line-height: 1.2;
 }
 
-/* =================== TOKEN LOCATIONS SECTION =================== */
+/* =================== TOKEN LOCATIONS SECTION (COMPACT) =================== */
 .module-header {
-    padding: 16px 20px;
+    padding: 14px 20px;
     border-bottom: 1px solid rgba(240, 165, 0, 0.2);
     background: rgba(240, 165, 0, 0.08);
 }
@@ -1727,7 +1752,7 @@ html, body {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .module-ember-icon {
@@ -1740,47 +1765,47 @@ html, body {
 
 .total-available {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
 }
 
 .token-locations-list {
-    padding: 16px 20px;
+    padding: 12px 20px 20px 20px;
 }
 
 .token-location-item {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 16px;
-    margin-bottom: 12px;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
     background: rgba(240, 165, 0, 0.12);
     border: 1px solid rgba(240, 165, 0, 0.3);
-    border-radius: 16px;
+    border-radius: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
     touch-action: manipulation;
-    min-height: 72px;
+    min-height: 64px;
     user-select: none;
-    box-shadow: 0 2px 8px rgba(240, 165, 0, 0.15);
+    box-shadow: 0 2px 6px rgba(240, 165, 0, 0.15);
 }
 
 .token-location-item.collectable-token {
     background: rgba(76, 175, 80, 0.18);
     border-color: rgba(76, 175, 80, 0.5);
     animation: collectableItemPulse 3s ease-in-out infinite;
-    box-shadow: 0 3px 12px rgba(76, 175, 80, 0.25);
+    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.25);
 }
 
 .token-location-item:active {
     background: rgba(240, 165, 0, 0.22);
     transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 4px 16px rgba(240, 165, 0, 0.3);
+    box-shadow: 0 4px 14px rgba(240, 165, 0, 0.3);
 }
 
 .token-location-icon {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: rgba(240, 165, 0, 0.25);
     border: 3px solid rgba(240, 165, 0, 0.5);
@@ -1788,77 +1813,85 @@ html, body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 2px 10px rgba(240, 165, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(240, 165, 0, 0.3);
     overflow: hidden;
 }
 
 .token-location-icon.collectable-icon {
     background: rgba(76, 175, 80, 0.25);
     border-color: rgba(76, 175, 80, 0.5);
-    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
     animation: collectableIconPulse 2s ease-in-out infinite;
 }
 
 .token-location-icon img {
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
     filter: brightness(1.15);
 }
 
 .token-location-info {
     flex: 1;
+    min-width: 0;
 }
 
 .token-location-name {
     color: white;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .token-location-distance {
     color: rgba(255, 255, 255, 0.85);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
 .token-sponsor {
     color: rgba(255, 255, 255, 0.65);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
     font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .token-location-value {
     color: #f0a500;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 900;
     text-align: right;
     flex-shrink: 0;
+    white-space: nowrap;
 }
 
 @keyframes collectableItemPulse {
     0%, 100% { 
         border-color: rgba(76, 175, 80, 0.5);
-        box-shadow: 0 3px 12px rgba(76, 175, 80, 0.25);
+        box-shadow: 0 2px 10px rgba(76, 175, 80, 0.25);
     }
     50% { 
         border-color: rgba(76, 175, 80, 0.7);
-        box-shadow: 0 4px 16px rgba(76, 175, 80, 0.35);
+        box-shadow: 0 3px 14px rgba(76, 175, 80, 0.35);
     }
 }
 
 @keyframes collectableIconPulse {
     0%, 100% { 
         transform: scale(1);
-        box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
     }
     50% { 
         transform: scale(1.08);
-        box-shadow: 0 3px 14px rgba(76, 175, 80, 0.45);
+        box-shadow: 0 3px 12px rgba(76, 175, 80, 0.45);
     }
 }
 
@@ -2513,17 +2546,17 @@ html, body {
     }
     
     .radar-scanner-compact {
-        width: 46px;
-        height: 46px;
+        width: 54px;
+        height: 54px;
     }
     
     .ember-icon-compact {
-        width: 26px;
-        height: 26px;
+        width: 34px;
+        height: 34px;
     }
     
     .handle-title-compact {
-        font-size: 14px;
+        font-size: 17px;
     }
     
     .quick-nav-icon {
@@ -2532,6 +2565,17 @@ html, body {
     
     .quick-nav-label {
         font-size: 12px;
+    }
+    
+    .ar-token-coin {
+        width: 80px;
+        height: 80px;
+        border-width: 4px;
+    }
+    
+    .ar-token.near::before {
+        width: 110px;
+        height: 110px;
     }
 }
 
@@ -2573,17 +2617,17 @@ html, body {
     }
     
     .radar-scanner-compact {
-        width: 42px;
-        height: 42px;
+        width: 50px;
+        height: 50px;
     }
     
     .ember-icon-compact {
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
     }
     
     .handle-title-compact {
-        font-size: 13px;
+        font-size: 16px;
     }
     
     .quick-nav-buttons {
@@ -2601,6 +2645,17 @@ html, body {
     
     .quick-nav-label {
         font-size: 11px;
+    }
+    
+    .ar-token-coin {
+        width: 75px;
+        height: 75px;
+        border-width: 4px;
+    }
+    
+    .ar-token.near::before {
+        width: 100px;
+        height: 100px;
     }
 }
 
@@ -2643,6 +2698,10 @@ html, body {
     .quick-nav-btn {
         border-width: 3px;
     }
+    
+    .ar-token-coin {
+        border-width: 7px;
+    }
 }
 
 @media print {
@@ -2651,4 +2710,4 @@ html, body {
     }
 }
 
-/* =================== END OF COMPLETE CSS FILE =================== */
+/* =================== END OF POLISHED CSS FILE =================== */
