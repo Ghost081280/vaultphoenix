@@ -1,4 +1,4 @@
-/* Vault Phoenix AR Crypto Gaming - POLISHED ENHANCED SLIDER NAVIGATION CSS */
+/* Vault Phoenix AR Crypto Gaming - POLISHED WITH AR FIX CSS */
 
 /* =================== CORE RESET & STRUCTURE =================== */
 * {
@@ -1032,7 +1032,7 @@ html, body {
     transform: translateY(-50%);
 }
 
-.ar-tokens-container {
+.ar-horizon-line {
     position: absolute;
     top: 50%;
     left: 0;
@@ -1043,10 +1043,19 @@ html, body {
     z-index: 15;
 }
 
+.ar-tokens-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    pointer-events: none;
+}
+
 .ar-token {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
     cursor: pointer;
     pointer-events: auto;
     display: flex;
@@ -1054,6 +1063,7 @@ html, body {
     align-items: center;
     transition: all 0.3s ease;
     z-index: 20;
+    flex-shrink: 0;
 }
 
 .ar-token.near {
@@ -1111,7 +1121,7 @@ html, body {
 }
 
 .ar-token:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: scale(0.95);
 }
 
 @keyframes arTokenFloat {
