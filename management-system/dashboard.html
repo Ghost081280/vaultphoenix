@@ -15,7 +15,7 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-logo">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" onerror="this.style.display='none'">
+                <img src="images/VPLogo.PNG" alt="Vault Phoenix" onerror="this.style.display='none'">
                 <span class="sidebar-brand">Vault Phoenix</span>
             </div>
             
@@ -50,24 +50,6 @@
                         <div class="token-amount">
                             <span class="token-count" id="tokenCount">28,450 $Ember</span>
                             <span class="token-value" id="tokenValue">~$99.58 USD</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Role Switcher -->
-                    <div class="role-switcher">
-                        <button class="role-switcher-btn" id="roleSwitcherBtn">
-                            <span id="currentRoleName">Campaign Manager</span>
-                            <span>▼</span>
-                        </button>
-                        <div class="role-dropdown" id="roleDropdown">
-                            <div class="role-option" data-role="campaign-manager">
-                                <span>🚀</span>
-                                <span>Campaign Manager</span>
-                            </div>
-                            <div class="role-option" data-role="advertiser">
-                                <span>📍</span>
-                                <span>Advertiser</span>
-                            </div>
                         </div>
                     </div>
                     
@@ -109,10 +91,14 @@
     <script src="js/airdrop-system.js"></script>
     <script src="js/analytics.js"></script>
     <script src="js/ember-hunt-demo.js"></script>
+    <script src="js/advertiser-dashboard.js"></script>
     
     <script>
         function showUserMenu() {
-            const confirmLogout = confirm('User Menu\n\nLogged in as: demo@phoenix.com\n\nDo you want to logout?');
+            const role = sessionStorage.getItem('selectedRole');
+            const roleName = role === 'campaign-manager' ? 'Campaign Manager' : 'Advertiser';
+            
+            const confirmLogout = confirm(`User Menu\n\nLogged in as: demo@phoenix.com\nRole: ${roleName}\n\nDo you want to logout?`);
             if (confirmLogout) {
                 logout();
             }
