@@ -252,7 +252,7 @@
             </div>
         </div>
 
-        <!-- Ember Tokens Slider - ABOVE Bottom Nav -->
+        <!-- Enhanced Navigation Slider Module -->
         <div class="token-locations-module" id="tokenLocationsModule">
             <div class="swipe-handle" id="swipeHandle">
                 <div class="handle-bar"></div>
@@ -262,7 +262,7 @@
                             <img src="../images/VPEmberCoin.PNG" alt="Ember" class="ember-icon-large" onerror="this.textContent='💎'">
                             <img src="../images/VPEmberFlame.svg" alt="Flame" class="ember-icon-large" onerror="this.textContent='🔥'">
                         </div>
-                        <span class="handle-title">$Ember Tokens Nearby</span>
+                        <span class="handle-title">Navigation & Tokens</span>
                     </div>
                     <div class="radar-scanner" id="radarScanner">
                         <div class="radar-circle">
@@ -274,6 +274,26 @@
                 </div>
             </div>
             <div class="module-content" id="moduleContent">
+                <!-- Quick Navigation Section -->
+                <div class="quick-nav-section">
+                    <div class="quick-nav-title">Quick Navigation</div>
+                    <div class="quick-nav-buttons">
+                        <button class="quick-nav-btn" data-nav="hunt" id="quickNavHunt">
+                            <div class="quick-nav-icon">🗺️</div>
+                            <div class="quick-nav-label">Hunt Map</div>
+                        </button>
+                        <button class="quick-nav-btn" data-nav="ar" id="quickNavAR">
+                            <div class="quick-nav-icon">📱</div>
+                            <div class="quick-nav-label">AR View</div>
+                        </button>
+                        <button class="quick-nav-btn" data-nav="vault" id="quickNavVault">
+                            <div class="quick-nav-icon">🔒</div>
+                            <div class="quick-nav-label">Vault</div>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Token Locations Section -->
                 <div class="module-header">
                     <div class="module-title">
                         <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
@@ -285,25 +305,7 @@
             </div>
         </div>
 
-        <!-- Bottom Navigation - BELOW Slider -->
-        <nav class="bottom-nav">
-            <div class="nav-tabs">
-                <div class="nav-tab active" data-mode="hunt" id="tabHunt">
-                    <div class="nav-tab-icon">🗺️</div>
-                    <div class="nav-tab-label">Hunt</div>
-                </div>
-                <div class="nav-tab" data-mode="ar" id="tabAR">
-                    <div class="nav-tab-icon">📱</div>
-                    <div class="nav-tab-label">AR View</div>
-                </div>
-                <div class="nav-tab" data-mode="vault" id="tabVault">
-                    <div class="nav-tab-icon">🔒</div>
-                    <div class="nav-tab-label">Vault</div>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Modals -->
+        <!-- Modals (unchanged) -->
         <div class="token-modal" id="tokenModal">
             <div class="token-modal-content">
                 <div class="token-modal-header">
