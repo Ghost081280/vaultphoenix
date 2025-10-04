@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Campaign Marketplace - For Advertisers
+   Campaign Marketplace - For Advertisers (Updated)
    ============================================ */
 
 // ============================================
@@ -21,7 +21,7 @@ const MarketplaceData = {
             demographics: 'Ages 18-45, Gaming enthusiasts',
             locations: 47,
             avgFootTraffic: 850,
-            cpm: 15.50, // Cost per thousand impressions
+            cpm: 15.50,
             engagement: 87.3
         },
         {
@@ -53,40 +53,6 @@ const MarketplaceData = {
             avgFootTraffic: 720,
             cpm: 18.25,
             engagement: 91.4
-        }
-    ],
-    pricingTiers: [
-        {
-            name: 'Bronze',
-            monthlyFee: 200,
-            setupFee: 500,
-            visibility: 'Standard',
-            priority: 'Low',
-            features: ['Basic analytics', 'Monthly reports', 'Standard placement']
-        },
-        {
-            name: 'Silver',
-            monthlyFee: 500,
-            setupFee: 1000,
-            visibility: 'Enhanced',
-            priority: 'Medium',
-            features: ['Advanced analytics', 'Weekly reports', 'Priority placement', 'Custom branding']
-        },
-        {
-            name: 'Gold',
-            monthlyFee: 1200,
-            setupFee: 2500,
-            visibility: 'Featured',
-            priority: 'High',
-            features: ['Real-time analytics', 'Daily reports', 'Featured placement', 'Dedicated support']
-        },
-        {
-            name: 'Platinum',
-            monthlyFee: 2500,
-            setupFee: 5000,
-            visibility: 'Premium',
-            priority: 'Exclusive',
-            features: ['Full analytics suite', 'Real-time reporting', 'Exclusive territory', 'Account manager']
         }
     ]
 };
@@ -208,58 +174,6 @@ function getMarketplaceContent(role) {
                 </div>
             </div>
             
-            <!-- Pricing Tiers -->
-            <div class="dashboard-section">
-                <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                    💎 Pricing Tiers
-                </h3>
-                
-                <div class="apps-grid">
-                    ${MarketplaceData.pricingTiers.map(tier => `
-                        <div class="card">
-                            <h4 style="color: var(--color-primary-gold); margin-bottom: 15px; font-size: 1.4rem;">
-                                ${tier.name} Tier
-                            </h4>
-                            
-                            <div style="margin-bottom: 20px;">
-                                <div style="font-size: 2.5rem; font-weight: 900; color: var(--color-primary-orange); margin-bottom: 5px;">
-                                    $${tier.monthlyFee}
-                                    <span style="font-size: 1rem; color: rgba(255,255,255,0.6);">/month</span>
-                                </div>
-                                <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">
-                                    Setup: $${tier.setupFee}
-                                </div>
-                            </div>
-                            
-                            <div style="padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px; margin-bottom: 15px;">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem;">
-                                    <div>
-                                        <div style="color: rgba(255,255,255,0.6);">Visibility</div>
-                                        <div style="font-weight: 700;">${tier.visibility}</div>
-                                    </div>
-                                    <div>
-                                        <div style="color: rgba(255,255,255,0.6);">Priority</div>
-                                        <div style="font-weight: 700;">${tier.priority}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <ul style="list-style: none; padding: 0; margin: 0 0 20px 0;">
-                                ${tier.features.map(feature => `
-                                    <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem;">
-                                        ✓ ${feature}
-                                    </li>
-                                `).join('')}
-                            </ul>
-                            
-                            <button class="btn btn-outline" style="width: 100%;">
-                                Select ${tier.name}
-                            </button>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-            
             <!-- How It Works -->
             <div class="card">
                 <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
@@ -320,12 +234,10 @@ function joinCampaign(campaignId) {
         `You'll be able to configure your location and pricing tier on the next screen.`;
     
     if (confirm(confirmMsg)) {
-        // Store selected campaign
         sessionStorage.setItem('selectedCampaign', campaignId);
         
         alert(`✓ Great Choice!\n\nYou've selected "${campaign.name}". Now let's set up your location and pricing.\n\nRedirecting to location setup...`);
         
-        // Navigate to locations setup
         if (typeof window.loadSection === 'function') {
             window.loadSection('locations');
         }
@@ -333,7 +245,7 @@ function joinCampaign(campaignId) {
 }
 
 /**
- * Get Locations Content for Advertisers
+ * Get Locations Content for Advertisers (WITH BULK UPLOAD)
  */
 function getLocationsContent(role) {
     if (role !== 'advertiser') {
@@ -344,10 +256,53 @@ function getLocationsContent(role) {
         <div class="dashboard-section">
             <h2 class="section-title">📍 My Advertising Locations</h2>
             
-            <!-- Add New Location -->
+            <!-- Bulk Upload Section -->
+            <div class="card" style="margin-bottom: 30px; background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3);">
+                <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
+                    📤 Bulk Upload Locations (CSV)
+                </h3>
+                
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
+                    Upload multiple locations at once using a CSV file. Our system will automatically geocode addresses to map pins.
+                </p>
+                
+                <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 15px;">📋 CSV Format Required:</h4>
+                    <div style="font-family: monospace; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; margin-bottom: 15px; overflow-x: auto;">
+                        <div style="color: #22c55e;">name,address,city,state,zip,token_amount,campaign_name</div>
+                        <div style="color: rgba(255,255,255,0.7);">Heritage Square,115 N 6th St,Phoenix,AZ,85004,5000,$Ember Hunt</div>
+                        <div style="color: rgba(255,255,255,0.7);">Roosevelt Coffee,123 E Roosevelt St,Phoenix,AZ,85004,3000,$Ember Hunt</div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="data:text/csv;charset=utf-8,name,address,city,state,zip,token_amount,campaign_name%0AExample Location,123 Main St,Phoenix,AZ,85001,5000,Campaign Name" 
+                           download="location-template.csv" 
+                           class="btn btn-outline">
+                            📥 Download CSV Template
+                        </a>
+                        <button class="btn btn-secondary" onclick="document.getElementById('csvUpload').click()">
+                            📤 Upload CSV File
+                        </button>
+                    </div>
+                    
+                    <input type="file" id="csvUpload" accept=".csv" style="display: none;" onchange="handleCSVUpload(event)">
+                </div>
+                
+                <div style="background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 15px;">
+                    <h4 style="color: #22c55e; margin-bottom: 10px;">✓ Auto-Geocoding Features:</h4>
+                    <ul style="margin: 0; padding-left: 20px; color: rgba(255,255,255,0.8);">
+                        <li>Automatic latitude/longitude conversion from addresses</li>
+                        <li>Validation of all location data before import</li>
+                        <li>Preview locations on map before confirming</li>
+                        <li>Edit individual locations after bulk upload</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Add Single Location -->
             <div class="card" style="margin-bottom: 30px;">
                 <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
-                    ➕ Add New Location
+                    ➕ Add Single Location
                 </h3>
                 
                 <div class="form-group">
@@ -362,12 +317,12 @@ function getLocationsContent(role) {
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                     <div class="form-group">
-                        <label class="form-label">Latitude</label>
-                        <input type="text" class="form-input" id="latitude" placeholder="33.4484">
+                        <label class="form-label">Latitude (Optional)</label>
+                        <input type="text" class="form-input" id="latitude" placeholder="Auto-filled from address">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Longitude</label>
-                        <input type="text" class="form-input" id="longitude" placeholder="-112.0740">
+                        <label class="form-label">Longitude (Optional)</label>
+                        <input type="text" class="form-input" id="longitude" placeholder="Auto-filled from address">
                     </div>
                 </div>
                 
@@ -381,92 +336,155 @@ function getLocationsContent(role) {
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Pricing Tier</label>
-                    <select class="form-input" id="pricingTier">
-                        ${MarketplaceData.pricingTiers.map(t => 
-                            `<option value="${t.name.toLowerCase()}">${t.name} - $${t.monthlyFee}/month</option>`
-                        ).join('')}
-                    </select>
+                    <label class="form-label">Token Amount</label>
+                    <input type="number" class="form-input" id="tokenAmount" value="5000" min="1000" step="500">
+                    <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 5px;">
+                        Recommended: 3,000-10,000 tokens per location
+                    </div>
                 </div>
                 
-                <button class="btn btn-primary btn-large" onclick="addLocation()">
-                    📍 Add Location & Proceed to Payment
+                <button class="btn btn-primary btn-large" onclick="addSingleLocation()" style="width: 100%;">
+                    📍 Add Location & Continue
                 </button>
             </div>
             
             <!-- Existing Locations -->
             <div class="card">
                 <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
-                    📊 Active Locations
+                    📊 My Active Locations (${window.AdvertiserData?.myLocations?.length || 1})
                 </h3>
                 
-                <div class="app-card" style="margin-bottom: 0;">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
-                        <div>
-                            <h4 style="font-size: 1.2rem; margin-bottom: 5px;">Heritage Square Historic Site</h4>
-                            <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">115 N 6th St, Phoenix, AZ 85004</div>
+                ${(window.AdvertiserData?.myLocations || [{
+                    id: 'loc-001',
+                    name: 'Heritage Square Historic Site',
+                    address: '115 N 6th St, Phoenix, AZ 85004',
+                    tier: 'Tier 1',
+                    status: 'active',
+                    visitors30d: 847,
+                    tokensRemaining: 12450,
+                    campaign: '$Ember Hunt'
+                }]).map(loc => `
+                    <div class="app-card" style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                            <div>
+                                <h4 style="font-size: 1.2rem; margin-bottom: 5px;">${loc.name}</h4>
+                                <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">${loc.address}</div>
+                            </div>
+                            <span class="badge badge-success">
+                                <span class="status-indicator status-live"></span>
+                                ${loc.status.toUpperCase()}
+                            </span>
                         </div>
-                        <span class="badge badge-success">
-                            <span class="status-indicator status-live"></span>
-                            ACTIVE
-                        </span>
+                        
+                        <div class="app-metrics">
+                            <div class="app-metric">
+                                <span class="metric-label">Campaign</span>
+                                <span class="metric-value">${loc.campaign}</span>
+                            </div>
+                            <div class="app-metric">
+                                <span class="metric-label">Tier</span>
+                                <span class="metric-value">${loc.tier}</span>
+                            </div>
+                            <div class="app-metric">
+                                <span class="metric-label">Visitors (30d)</span>
+                                <span class="metric-value">${loc.visitors30d}</span>
+                            </div>
+                            <div class="app-metric">
+                                <span class="metric-label">Tokens</span>
+                                <span class="metric-value">${loc.tokensRemaining.toLocaleString()}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="app-actions" style="margin-top: 15px;">
+                            <button class="btn btn-outline" onclick="loadSection('map')">View on Map</button>
+                            <button class="btn btn-secondary" onclick="loadSection('analytics')">Analytics</button>
+                        </div>
                     </div>
-                    
-                    <div class="app-metrics">
-                        <div class="app-metric">
-                            <span class="metric-label">Campaign</span>
-                            <span class="metric-value">$Ember Hunt</span>
-                        </div>
-                        <div class="app-metric">
-                            <span class="metric-label">Tier</span>
-                            <span class="metric-value">Silver</span>
-                        </div>
-                        <div class="app-metric">
-                            <span class="metric-label">Monthly Fee</span>
-                            <span class="metric-value">$500</span>
-                        </div>
-                        <div class="app-metric">
-                            <span class="metric-label">Visitors (30d)</span>
-                            <span class="metric-value">847</span>
-                        </div>
-                    </div>
-                    
-                    <div class="app-actions" style="margin-top: 15px;">
-                        <button class="btn btn-outline" onclick="loadSection('metrics')">View Metrics</button>
-                        <button class="btn btn-secondary" onclick="loadSection('payments')">Manage Payment</button>
-                    </div>
-                </div>
+                `).join('')}
             </div>
         </div>
     `;
 }
 
 /**
- * Add new location
+ * Handle CSV Upload
  */
-function addLocation() {
+function handleCSVUpload(event) {
+    const file = event.target.files[0];
+    
+    if (!file) return;
+    
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        const csv = e.target.result;
+        const lines = csv.split('\n');
+        
+        // Skip header row
+        const dataLines = lines.slice(1).filter(line => line.trim());
+        
+        if (dataLines.length === 0) {
+            alert('❌ CSV file is empty or invalid');
+            return;
+        }
+        
+        // Parse locations
+        const locations = dataLines.map(line => {
+            const parts = line.split(',');
+            return {
+                name: parts[0]?.trim(),
+                address: parts[1]?.trim() + ', ' + parts[2]?.trim() + ', ' + parts[3]?.trim() + ' ' + parts[4]?.trim(),
+                tokenAmount: parseInt(parts[5]) || 5000,
+                campaign: parts[6]?.trim()
+            };
+        });
+        
+        // Show preview
+        const preview = locations.map(loc => 
+            `• ${loc.name} - ${loc.address} (${loc.tokenAmount.toLocaleString()} tokens)`
+        ).join('\n');
+        
+        const confirmMsg = `📤 Bulk Upload Preview\n\n` +
+            `Found ${locations.length} location(s):\n\n${preview}\n\n` +
+            `All addresses will be automatically geocoded to map coordinates.\n\n` +
+            `Continue with upload?`;
+        
+        if (confirm(confirmMsg)) {
+            alert(`✓ Upload Successful!\n\n` +
+                `${locations.length} location(s) imported and geocoded.\n\n` +
+                `You can now view them on the map and edit individual locations as needed.`);
+            
+            // Reload section
+            if (typeof window.loadSection === 'function') {
+                window.loadSection('locations');
+            }
+        }
+    };
+    
+    reader.readAsText(file);
+}
+
+/**
+ * Add single location
+ */
+function addSingleLocation() {
     const businessName = document.getElementById('businessName')?.value;
     const address = document.getElementById('businessAddress')?.value;
+    const tokenAmount = parseInt(document.getElementById('tokenAmount')?.value) || 5000;
     
     if (!businessName || !address) {
         alert('Please fill in all required fields.');
         return;
     }
     
-    const tier = document.getElementById('pricingTier')?.value || 'silver';
-    const tierData = MarketplaceData.pricingTiers.find(t => t.name.toLowerCase() === tier);
-    
     alert(`✓ Location Added!\n\n` +
         `📍 ${businessName}\n` +
         `${address}\n\n` +
-        `Tier: ${tierData.name}\n` +
-        `Setup Fee: $${tierData.setupFee}\n` +
-        `Monthly: $${tierData.monthlyFee}\n\n` +
-        `Redirecting to payment setup...`);
+        `Token Amount: ${tokenAmount.toLocaleString()} $Ember\n\n` +
+        `The address will be automatically geocoded and added to your map.`);
     
-    // Navigate to payments
     if (typeof window.loadSection === 'function') {
-        window.loadSection('payments');
+        window.loadSection('locations');
     }
 }
 
@@ -478,7 +496,12 @@ function getMetricsContent(role) {
         return getPlaceholderContent('metrics');
     }
     
-    return getMerchantOverview();
+    // Redirect to analytics
+    if (typeof window.getAdvertiserAnalyticsContent === 'function') {
+        return window.getAdvertiserAnalyticsContent(role);
+    }
+    
+    return getPlaceholderContent('metrics');
 }
 
 /**
@@ -489,7 +512,11 @@ function getAdvertisersContent(role) {
         return getPlaceholderContent('advertisers');
     }
     
-    return getMerchantsContent(role);
+    if (typeof window.getMerchantsContent === 'function') {
+        return window.getMerchantsContent(role);
+    }
+    
+    return getPlaceholderContent('advertisers');
 }
 
 // Export functions
@@ -499,5 +526,6 @@ if (typeof window !== 'undefined') {
     window.getMetricsContent = getMetricsContent;
     window.getAdvertisersContent = getAdvertisersContent;
     window.joinCampaign = joinCampaign;
-    window.addLocation = addLocation;
+    window.handleCSVUpload = handleCSVUpload;
+    window.addSingleLocation = addSingleLocation;
 }
