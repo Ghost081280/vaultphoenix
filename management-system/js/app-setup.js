@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   App Setup - White Label Builder & SDK Integration
+   App Setup - White Label Builder & SDK Integration (Updated)
    ============================================ */
 
 // ============================================
@@ -8,7 +8,7 @@
 // ============================================
 
 const AppSetupState = {
-    setupType: null, // 'white-label' or 'sdk'
+    setupType: null,
     whiteLabel: {
         appName: '',
         logo: null,
@@ -19,11 +19,13 @@ const AppSetupState = {
         appIcon: null
     },
     sdk: {
-        platform: null, // 'ios', 'android', 'web', 'unity'
+        platform: null,
         repositoryUrl: 'https://github.com/vaultphoenix/sdk',
         apiKey: null,
         integrationStatus: 'pending'
-    }
+    },
+    // Template URL for live preview
+    playerAppTemplate: 'https://ghost081280.github.io/vaultphoenix/crypto-game/dashboard.html'
 };
 
 /**
@@ -49,14 +51,17 @@ function getAppSetupContent(role) {
                         <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">White Label App</h3>
                         <p style="color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 20px;">
                             Launch a fully branded mobile app in minutes. No coding required - just customize colors, 
-                            upload your logo, and deploy.
+                            upload your logo, and deploy with live preview.
                         </p>
                         <ul style="list-style: none; padding: 0; text-align: left; margin-bottom: 25px;">
                             <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
                                 ✓ Visual App Builder
                             </li>
                             <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                ✓ Custom Branding
+                                ✓ Live Preview with Template
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                ✓ Custom Branding & Colors
                             </li>
                             <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
                                 ✓ Instant Deployment
@@ -89,6 +94,9 @@ function getAppSetupContent(role) {
                             <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
                                 ✓ API Key Management
                             </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                ✓ Code Examples
+                            </li>
                             <li style="padding: 8px 0;">
                                 ✓ Technical Support
                             </li>
@@ -103,7 +111,7 @@ function getAppSetupContent(role) {
             <!-- White Label Builder (Hidden Initially) -->
             <div id="whiteLabelBuilder" style="display: none;">
                 <div class="dashboard-section">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
                         <h3 style="font-size: 1.8rem; color: var(--color-primary-gold);">
                             🎨 White Label App Builder
                         </h3>
@@ -119,12 +127,12 @@ function getAppSetupContent(role) {
                             
                             <div class="form-group">
                                 <label class="form-label">App Name *</label>
-                                <input type="text" class="form-input" id="appName" placeholder="My AR Crypto Hunt" value="">
+                                <input type="text" class="form-input" id="appName" placeholder="My AR Crypto Hunt" value="" oninput="updatePreview()">
                             </div>
                             
                             <div class="form-group">
                                 <label class="form-label">App Description</label>
-                                <textarea class="form-input" id="appDescription" rows="3" placeholder="Describe your campaign..."></textarea>
+                                <textarea class="form-input" id="appDescription" rows="3" placeholder="Discover crypto rewards in the real world!" oninput="updatePreview()"></textarea>
                             </div>
                             
                             <div class="form-group">
@@ -170,20 +178,32 @@ function getAppSetupContent(role) {
                                 <div id="previewLogo" style="width: 80px; height: 80px; margin: 0 auto 20px; background: var(--gradient-fire); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
                                     🔥
                                 </div>
-                                <div id="previewAppName" style="font-size: 1.5rem; font-weight: 900; margin-bottom: 10px;">
+                                <div id="previewAppName" style="font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; color: #d73327;">
                                     My AR Crypto Hunt
                                 </div>
                                 <div id="previewDescription" style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">
-                                    Find tokens in the real world!
+                                    Discover crypto rewards in the real world!
                                 </div>
-                                <button class="btn btn-primary" id="previewButton" style="background: var(--gradient-fire);">
+                                <button class="btn btn-primary" id="previewButton" style="background: linear-gradient(135deg, #d73327, #fb923c);">
                                     Start Hunting
                                 </button>
                             </div>
                             
                             <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
-                                    This preview shows how your app will appear to players. Customize the colors and branding above.
+                                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 15px;">
+                                    This preview shows how your app will appear to players. Changes update in real-time.
+                                </div>
+                                <button class="btn btn-secondary" onclick="openLivePreview()" style="width: 100%;">
+                                    🔗 Open Full Template Preview
+                                </button>
+                            </div>
+                            
+                            <div style="margin-top: 15px; padding: 15px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px;">
+                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.8);">
+                                    <strong>Template URL:</strong><br>
+                                    <a href="${AppSetupState.playerAppTemplate}" target="_blank" style="color: var(--color-primary-gold); word-break: break-all;">
+                                        ${AppSetupState.playerAppTemplate}
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -194,7 +214,7 @@ function getAppSetupContent(role) {
             <!-- SDK Integration (Hidden Initially) -->
             <div id="sdkIntegration" style="display: none;">
                 <div class="dashboard-section">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
                         <h3 style="font-size: 1.8rem; color: var(--color-primary-gold);">
                             🔌 SDK Integration Guide
                         </h3>
@@ -227,7 +247,7 @@ function getAppSetupContent(role) {
                         <h4 style="margin-bottom: 20px;">Your API Credentials</h4>
                         <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 15px;">
                             <div style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 8px;">API Key</div>
-                            <div style="font-family: monospace; font-size: 1.1rem; color: var(--color-primary-gold); word-break: break-all;">
+                            <div id="apiKeyDisplay" style="font-family: monospace; font-size: 1.1rem; color: var(--color-primary-gold); word-break: break-all;">
                                 vp_live_${Math.random().toString(36).substring(2, 15)}${Math.random().toString(36).substring(2, 15)}
                             </div>
                         </div>
@@ -299,6 +319,7 @@ function selectSetupType(type) {
     
     if (type === 'white-label') {
         document.getElementById('whiteLabelBuilder').style.display = 'block';
+        updatePreview(); // Initialize preview
     } else if (type === 'sdk') {
         document.getElementById('sdkIntegration').style.display = 'block';
     }
@@ -338,19 +359,39 @@ function previewLogo(event) {
 }
 
 /**
- * Update preview
+ * Update live preview
  */
 function updatePreview() {
     const appName = document.getElementById('appName')?.value || 'My AR Crypto Hunt';
-    const appDescription = document.getElementById('appDescription')?.value || 'Find tokens in the real world!';
+    const appDescription = document.getElementById('appDescription')?.value || 'Discover crypto rewards in the real world!';
     const primaryColor = document.getElementById('primaryColor')?.value || '#d73327';
     const secondaryColor = document.getElementById('secondaryColor')?.value || '#fb923c';
     
     document.getElementById('previewAppName').textContent = appName;
+    document.getElementById('previewAppName').style.color = primaryColor;
     document.getElementById('previewDescription').textContent = appDescription;
     
     const previewButton = document.getElementById('previewButton');
     previewButton.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
+}
+
+/**
+ * Open live preview in template
+ */
+function openLivePreview() {
+    const appName = document.getElementById('appName')?.value || 'My AR Crypto Hunt';
+    const primaryColor = document.getElementById('primaryColor')?.value || '#d73327';
+    
+    const msg = `🔗 Opening Live Template Preview\n\n` +
+        `Your customizations:\n` +
+        `• App Name: ${appName}\n` +
+        `• Primary Color: ${primaryColor}\n\n` +
+        `Template URL:\n${AppSetupState.playerAppTemplate}\n\n` +
+        `The template will open in a new window. In production, your branding would be dynamically applied.`;
+    
+    alert(msg);
+    
+    window.open(AppSetupState.playerAppTemplate, '_blank');
 }
 
 /**
@@ -370,13 +411,13 @@ function deployWhiteLabelApp() {
     AppSetupState.whiteLabel.secondaryColor = document.getElementById('secondaryColor')?.value || '#fb923c';
     AppSetupState.whiteLabel.accentColor = document.getElementById('accentColor')?.value || '#f0a500';
     
-    alert(`🚀 Deploying "${appName}"...\n\nYour white label app is being built with your custom branding.\n\n✓ App configured\n✓ $Ember integration enabled\n✓ AR features activated\n\nYour app will be ready in 5-10 minutes. You'll receive an email with download links.`);
+    alert(`🚀 Deploying "${appName}"...\n\nYour white label app is being built with your custom branding.\n\n✓ App configured\n✓ $Ember integration enabled\n✓ AR features activated\n✓ Template customized\n\nYour app will be ready in 5-10 minutes. You'll receive an email with download links.`);
     
     // Simulate deployment
     setTimeout(() => {
-        alert(`✓ "${appName}" Deployed Successfully!\n\nYour app is now live. View it in the "My Campaigns" section.`);
+        alert(`✓ "${appName}" Deployed Successfully!\n\nYour app is now live and using the template:\n${AppSetupState.playerAppTemplate}\n\nView it in the "Campaign Control" section.`);
         if (typeof window.loadSection === 'function') {
-            window.loadSection('overview');
+            window.loadSection('campaigns');
         }
     }, 2000);
 }
@@ -408,10 +449,21 @@ function selectPlatform(platform) {
  * Copy API key
  */
 function copyApiKey() {
-    const apiKeyElement = document.querySelector('.card:nth-of-type(2) .form-input');
+    const apiKeyElement = document.getElementById('apiKeyDisplay');
     if (apiKeyElement) {
-        navigator.clipboard.writeText(apiKeyElement.textContent.trim());
-        alert('✓ API Key copied to clipboard!');
+        const apiKey = apiKeyElement.textContent.trim();
+        navigator.clipboard.writeText(apiKey).then(() => {
+            alert('✓ API Key copied to clipboard!');
+        }).catch(() => {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = apiKey;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('✓ API Key copied to clipboard!');
+        });
     }
 }
 
@@ -434,6 +486,7 @@ if (typeof window !== 'undefined') {
     window.backToSetupSelection = backToSetupSelection;
     window.previewLogo = previewLogo;
     window.updatePreview = updatePreview;
+    window.openLivePreview = openLivePreview;
     window.deployWhiteLabelApp = deployWhiteLabelApp;
     window.selectPlatform = selectPlatform;
     window.copyApiKey = copyApiKey;
