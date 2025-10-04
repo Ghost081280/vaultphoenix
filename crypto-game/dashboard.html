@@ -3,44 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <!-- PORTRAIT LOCK -->
-    <meta name="screen-orientation" content="portrait">
-    <meta name="orientation" content="portrait">
     <title>Vault Phoenix - AR $Ember Hunt</title>
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
     <link rel="stylesheet" href="dashboard.css">
-    
-    <!-- PORTRAIT LOCK STYLES - MOBILE ONLY -->
-    <style>
-        @media screen and (orientation: landscape) and (max-width: 1024px) {
-            body::before {
-                content: "📱 Please rotate your device to portrait mode for the best experience";
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background: rgba(0, 0, 0, 0.95);
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                font-size: 18px;
-                font-weight: 600;
-                z-index: 9999;
-                padding: 20px;
-                backdrop-filter: blur(10px);
-            }
-        }
-        
-        @media screen and (orientation: landscape) and (max-width: 1024px) {
-            #gameContainer {
-                filter: blur(5px);
-                pointer-events: none;
-            }
-        }
-    </style>
 </head>
 <body class="crypto-dashboard-page">
     <!-- CRYPTO GAME PROTECTION FLAG -->
