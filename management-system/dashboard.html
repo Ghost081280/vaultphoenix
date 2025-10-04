@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault Phoenix Management Dashboard</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Dashboard Wrapper -->
+    <div class="dashboard-wrapper">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" onerror="this.style.display='none'">
+                <span class="sidebar-brand">Vault Phoenix</span>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <!-- Navigation items will be dynamically loaded based on role -->
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <div class="main-wrapper">
+            
+            <!-- Header / Top Bar -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle" style="display: none;">
+                        <span>☰</span>
+                    </button>
+                    <h1 class="page-title" id="pageTitle">Dashboard Overview</h1>
+                    <div class="breadcrumb" id="breadcrumb">
+                        <span>Home</span>
+                        <span class="breadcrumb-separator">›</span>
+                        <span>Dashboard</span>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <!-- Token Balance Widget (Platform Operators & SDK Customers Only) -->
+                    <div class="token-balance-widget" id="tokenBalanceWidget" style="display: none;">
+                        <img src="images/VPEmberCoin.PNG" alt="$Ember" class="token-icon" onerror="this.style.display='none'">
+                        <div class="token-amount">
+                            <span class="token-count" id="tokenCount">28,450 $Ember</span>
+                            <span class="token-value" id="tokenValue">~$99.58 USD</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Role Switcher (Demo Mode) -->
+                    <div class="role-switcher">
+                        <button class="role-switcher-btn" id="roleSwitcherBtn">
+                            <span id="currentRoleName">Platform Operator</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="role-dropdown" id="roleDropdown">
+                            <div class="role-option" data-role="platform-operator">
+                                <span>🚀</span>
+                                <span>Platform Operator</span>
+                            </div>
+                            <div class="role-option" data-role="sdk-customer">
+                                <span>🔌</span>
+                                <span>SDK Customer</span>
+                            </div>
+                            <div class="role-option" data-role="merchant">
+                                <span>🏢</span>
+                                <span>Merchant</span>
+                            </div>
+                            <div class="role-option" data-role="system-admin">
+                                <span>⚙️</span>
+                                <span>System Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="notification-bell" id="notificationBell">
+                        <span style="font-size: 1.5rem;">🔔</span>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </div>
+                    
+                    <!-- User Profile -->
+                    <div class="user-profile" id="userProfile">
+                        <div class="user-avatar">VP</div>
+                        <span class="user-name">Demo User</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main Content -->
+            <main class="main-content" id="mainContent">
+                <!-- Content will be dynamically loaded based on role and section -->
+                <div id="dashboardContent">
+                    <!-- Default: Loading state -->
+                    <div class="loading-state" style="text-align: center; padding: 60px;">
+                        <h2>Loading Dashboard...</h2>
+                        <p style="color: rgba(255, 255, 255, 0.6);">Please wait while we load your dashboard.</p>
+                    </div>
+                </div>
+            </main>
+            
+        </div>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/token-economy.js"></script>
+    <script src="js/airdrop-system.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/ember-hunt-demo.js"></script>
+</body>
+</html>
