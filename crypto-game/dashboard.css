@@ -1,5 +1,5 @@
-/* Vault Phoenix AR Crypto Gaming - FIXED CSS FILE */
-/* FIXES: AR coins full size, mobile modal height, static north compass, airdrop design */
+/* Vault Phoenix AR Crypto Gaming - UPDATED CSS FILE */
+/* UPDATES: Portrait lock, radar scanner, slider behind bottom nav */
 
 /* =================== CORE RESET & STRUCTURE =================== */
 * {
@@ -7,6 +7,13 @@
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+}
+
+/* PORTRAIT LOCK ENFORCEMENT */
+@supports (orientation: portrait) {
+    html {
+        orientation: portrait;
+    }
 }
 
 html, body {
@@ -1417,13 +1424,14 @@ html, body {
     width: 100%;
 }
 
-/* =================== EMBER TOKENS SLIDER =================== */
+/* =================== UPDATED: EMBER TOKENS SLIDER BEHIND BOTTOM NAV =================== */
 .token-locations-module {
     position: fixed;
-    bottom: calc(env(safe-area-inset-bottom, 8px) + 80px);
+    /* UPDATED: Position it behind the bottom nav */
+    bottom: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 25; /* Lower than bottom nav (30) so it appears behind */
     background: linear-gradient(180deg, rgba(8, 8, 8, 0.98) 0%, rgba(16, 16, 16, 0.98) 100%);
     backdrop-filter: blur(25px);
     border-top-left-radius: 20px;
@@ -1431,18 +1439,21 @@ html, body {
     border: 1px solid rgba(240, 165, 0, 0.3);
     border-bottom: none;
     box-shadow: 0 -8px 24px rgba(240, 165, 0, 0.2);
-    transform: translateY(calc(100% - 80px));
-    transition: transform 0.4s ease;
+    /* UPDATED: Start completely hidden behind bottom nav */
+    transform: translateY(calc(100% - env(safe-area-inset-bottom, 8px) - 80px));
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     max-height: 60vh;
     overflow: hidden;
 }
 
 .token-locations-module.expanded {
-    transform: translateY(0);
+    /* UPDATED: Slide up from behind bottom nav */
+    transform: translateY(calc(env(safe-area-inset-bottom, 8px) + 80px));
 }
 
 .token-locations-module.collapsed {
-    transform: translateY(calc(100% - 80px));
+    /* UPDATED: Hide behind bottom nav, showing only handle */
+    transform: translateY(calc(100% - env(safe-area-inset-bottom, 8px) - 80px));
 }
 
 .swipe-handle {
@@ -1518,15 +1529,149 @@ html, body {
     }
 }
 
-.handle-count {
-    color: #f0a500;
-    font-size: 12px;
-    font-weight: 700;
-    background: rgba(240, 165, 0, 0.2);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    padding: 4px 8px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(240, 165, 0, 0.2);
+/* =================== NEW: RADAR SCANNER COMPONENT =================== */
+.radar-scanner {
+    width: 48px;
+    height: 48px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.radar-circle {
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(76, 175, 80, 0.4);
+    border-radius: 50%;
+    position: relative;
+    background: radial-gradient(
+        circle at center,
+        rgba(76, 175, 80, 0.1) 0%,
+        rgba(76, 175, 80, 0.05) 50%,
+        transparent 70%
+    );
+    box-shadow: 
+        0 0 20px rgba(76, 175, 80, 0.3),
+        inset 0 0 20px rgba(76, 175, 80, 0.1);
+    animation: radarPulse 3s ease-in-out infinite;
+}
+
+@keyframes radarPulse {
+    0%, 100% { 
+        border-color: rgba(76, 175, 80, 0.4);
+        box-shadow: 
+            0 0 20px rgba(76, 175, 80, 0.3),
+            inset 0 0 20px rgba(76, 175, 80, 0.1);
+    }
+    50% { 
+        border-color: rgba(76, 175, 80, 0.8);
+        box-shadow: 
+            0 0 30px rgba(76, 175, 80, 0.6),
+            inset 0 0 30px rgba(76, 175, 80, 0.2);
+    }
+}
+
+.radar-sweep {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 50%;
+    background: linear-gradient(
+        to bottom,
+        rgba(76, 175, 80, 0.9),
+        rgba(76, 175, 80, 0.3),
+        transparent
+    );
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%) rotate(0deg);
+    animation: radarSweep 2s linear infinite;
+    border-radius: 1px;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
+}
+
+@keyframes radarSweep {
+    0% { transform: translate(-50%, -100%) rotate(0deg); }
+    100% { transform: translate(-50%, -100%) rotate(360deg); }
+}
+
+.radar-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: #4CAF50;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
+    animation: radarCenterPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes radarCenterPulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.5);
+        box-shadow: 0 0 15px rgba(76, 175, 80, 1);
+    }
+}
+
+.radar-dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.radar-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #4CAF50;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.8);
+    animation: radarDotPulse 2s ease-in-out infinite;
+}
+
+.radar-dot:nth-child(1) { 
+    top: 25%; 
+    left: 30%; 
+    animation-delay: 0s; 
+}
+
+.radar-dot:nth-child(2) { 
+    top: 60%; 
+    left: 70%; 
+    animation-delay: 0.5s; 
+}
+
+.radar-dot:nth-child(3) { 
+    top: 40%; 
+    left: 15%; 
+    animation-delay: 1s; 
+}
+
+.radar-dot:nth-child(4) { 
+    top: 70%; 
+    left: 45%; 
+    animation-delay: 1.5s; 
+}
+
+@keyframes radarDotPulse {
+    0%, 100% { 
+        opacity: 0.6;
+        transform: scale(1);
+        box-shadow: 0 0 6px rgba(76, 175, 80, 0.8);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.3);
+        box-shadow: 0 0 12px rgba(76, 175, 80, 1);
+    }
 }
 
 .module-content {
@@ -1687,13 +1832,13 @@ html, body {
     }
 }
 
-/* =================== BOTTOM NAVIGATION =================== */
+/* =================== BOTTOM NAVIGATION (ABOVE SLIDER) =================== */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 30;
+    z-index: 30; /* Higher than slider (25) so it appears on top */
     background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.98) 100%);
     backdrop-filter: blur(25px);
     border-top: 1px solid rgba(240, 165, 0, 0.2);
@@ -2425,6 +2570,11 @@ html, body {
     .sponsor-details-expandable {
         max-height: 40vh;
     }
+    
+    .radar-scanner {
+        width: 42px;
+        height: 42px;
+    }
 }
 
 @media (max-width: 320px) {
@@ -2464,6 +2614,11 @@ html, body {
     .sponsor-details-expandable {
         max-height: 35vh;
     }
+    
+    .radar-scanner {
+        width: 38px;
+        height: 38px;
+    }
 }
 
 /* =================== ACCESSIBILITY =================== */
@@ -2496,6 +2651,14 @@ html, body {
     .compass-needle {
         animation: none;
     }
+    
+    /* Disable radar animations */
+    .radar-sweep,
+    .radar-center,
+    .radar-dot,
+    .radar-circle {
+        animation: none;
+    }
 }
 
 /* =================== HIGH CONTRAST MODE =================== */
@@ -2517,6 +2680,10 @@ html, body {
     }
     
     .airdrop-notification {
+        border-width: 3px;
+    }
+    
+    .radar-circle {
         border-width: 3px;
     }
 }
