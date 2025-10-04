@@ -3,100 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vault Phoenix Management System - Select Role</title>
+    <title>Vault Phoenix - Login</title>
     <link rel="stylesheet" href="css/shared.css">
-    <link rel="stylesheet" href="css/role-selection.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-background);
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 20px;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: var(--card-radius);
+            padding: 50px 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--card-shadow);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-section img {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 0 20px rgba(215, 51, 39, 0.5));
+            animation: float 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-section h1 {
+            font-size: 2rem;
+            font-weight: var(--font-weight-black);
+            background: var(--gradient-ember);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 10px 0;
+        }
+
+        .logo-section p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .demo-notice {
+            background: rgba(240, 165, 0, 0.1);
+            border: 1px solid rgba(240, 165, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .demo-notice h3 {
+            color: var(--color-primary-gold);
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-bold);
+            margin: 0 0 10px 0;
+        }
+
+        .demo-credentials {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .demo-credentials div {
+            margin: 5px 0;
+        }
+
+        .demo-credentials strong {
+            color: var(--color-primary-gold);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: var(--font-weight-medium);
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all var(--transition-normal);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary-orange);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient-fire);
+            border: none;
+            border-radius: var(--button-radius);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: var(--font-weight-black);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--button-shadow);
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--button-shadow-hover);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            color: #ef4444;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links a {
+            color: var(--color-primary-orange);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color var(--transition-normal);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary-gold);
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 40px 25px;
+            }
+
+            .logo-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .logo-section img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo-container">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="logo" onerror="this.style.display='none'">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-section">
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" onerror="this.style.display='none'">
                 <h1>Vault Phoenix</h1>
-            </div>
-            <p class="subtitle">Enterprise Management System</p>
-            <p class="description">
-                Control center for AR crypto gaming campaigns. Manage multi-app deployments, 
-                token distributions, merchant partnerships, and real-time player engagement across your entire ecosystem.
-            </p>
-        </div>
-
-        <div class="role-grid">
-            <div class="role-card" onclick="selectRole('platform-operator')">
-                <div class="role-icon">🚀</div>
-                <h2 class="role-title">Platform Operator</h2>
-                <p class="role-description">
-                    Launch and manage AR crypto gaming campaigns. Control token distributions, monitor live player activity, and oversee revenue streams.
-                </p>
-                <ul class="role-features">
-                    <li>Campaign Control Center</li>
-                    <li>Live Player Monitoring</li>
-                    <li>Airdrop Management</li>
-                    <li>$100 Starter Token Bonus</li>
-                    <li>Multi-App Dashboard</li>
-                </ul>
-                <button class="role-button">Launch Dashboard</button>
+                <p>Location-Based Marketing Platform</p>
             </div>
 
-            <div class="role-card" onclick="selectRole('sdk-customer')">
-                <div class="role-icon">🔌</div>
-                <h2 class="role-title">SDK Customer</h2>
-                <p class="role-description">
-                    Integrate Vault Phoenix into your applications. Manage cross-platform campaigns, aggregate analytics, and distribute tokens across multiple apps.
-                </p>
-                <ul class="role-features">
-                    <li>Multi-App Integration</li>
-                    <li>Aggregated Analytics</li>
-                    <li>Cross-Platform Airdrops</li>
-                    <li>$100 Integration Bonus</li>
-                    <li>API Documentation</li>
-                </ul>
-                <button class="role-button">Launch Dashboard</button>
+            <div class="demo-notice">
+                <h3>🎮 Demo Access Credentials</h3>
+                <div class="demo-credentials">
+                    <div><strong>Email:</strong> demo@phoenix.com</div>
+                    <div><strong>Password:</strong> phoenix123</div>
+                </div>
             </div>
 
-            <div class="role-card" onclick="selectRole('merchant')">
-                <div class="role-icon">🏢</div>
-                <h2 class="role-title">Merchant</h2>
-                <p class="role-description">
-                    Drive foot traffic to your locations with AR crypto gaming. Track visitor metrics, manage payments, and view ROI with simple business analytics.
-                </p>
-                <ul class="role-features">
-                    <li>GPS-Verified Visitor Tracking</li>
-                    <li>Simple Payment Management</li>
-                    <li>ROI Calculator</li>
-                    <li>Performance Metrics</li>
-                    <li>Budget Planning Tools</li>
-                </ul>
-                <button class="role-button">Launch Dashboard</button>
-            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        class="form-input" 
+                        placeholder="demo@phoenix.com"
+                        required
+                    >
+                </div>
 
-            <div class="role-card" onclick="selectRole('system-admin')">
-                <div class="role-icon">⚙️</div>
-                <h2 class="role-title">System Admin</h2>
-                <p class="role-description">
-                    Full system oversight and configuration. Manage token economics, Smithii.io integration, user accounts, and global platform analytics.
-                </p>
-                <ul class="role-features">
-                    <li>Token Economics Dashboard</li>
-                    <li>Smithii.io Integration</li>
-                    <li>User Management</li>
-                    <li>Revenue Monitoring</li>
-                    <li>Compliance Center</li>
-                </ul>
-                <button class="role-button">Launch Dashboard</button>
-            </div>
-        </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-input" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
 
-        <div class="demo-notice">
-            <h3>🎮 Demo Mode</h3>
-            <p>
-                This is a demonstration of the Vault Phoenix Management System. In the full version, users would authenticate 
-                and be automatically assigned their appropriate role. For this demo, you can switch between roles to explore 
-                each interface. Data shown is simulated but represents real system capabilities.
-            </p>
+                <button type="submit" class="login-button">
+                    🔥 Sign In to Dashboard
+                </button>
+
+                <div class="error-message" id="errorMessage">
+                    Invalid credentials. Please try again.
+                </div>
+            </form>
+
+            <div class="footer-links">
+                <a href="https://ghost081280.github.io/vaultphoenix/main.html" target="_blank">Learn More About Vault Phoenix</a>
+            </div>
         </div>
     </div>
 
-    <script src="js/role-selection.js"></script>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Admin credentials check (hidden from public)
+            if (email === 'admin' && password === 'admin') {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', 'admin@phoenix.com');
+                sessionStorage.setItem('selectedRole', 'system-admin');
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            
+            // Demo credentials check
+            if (email === 'demo@phoenix.com' && password === 'phoenix123') {
+                // Store login state
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                
+                // Redirect to role selection
+                window.location.href = 'role-selection.html';
+            } else {
+                // Show error
+                errorMessage.style.display = 'block';
+                
+                // Shake animation
+                const loginCard = document.querySelector('.login-card');
+                loginCard.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    loginCard.style.animation = 'fadeInUp 0.8s ease-out';
+                }, 500);
+            }
+        }
+
+        // Check if already logged in
+        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+            window.location.href = 'role-selection.html';
+        }
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+                20%, 40%, 60%, 80% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
