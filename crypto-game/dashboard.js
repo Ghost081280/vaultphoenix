@@ -1,7 +1,7 @@
-// Vault Phoenix AR Crypto Gaming - FIXED JAVASCRIPT
-// FIXES: Static north compass, improved airdrop UX, full AR coin display
+// Vault Phoenix AR Crypto Gaming - UPDATED JAVASCRIPT
+// UPDATES: Portrait lock, functional radar scanner, slider behind nav
 
-console.log('🔥💎 Vault Phoenix Game Loading...');
+console.log('🔥💎 Vault Phoenix Game Loading with Radar Scanner...');
 
 // IMMEDIATE PROTECTION - CHECK IF THIS IS A CRYPTO GAME PAGE
 (function() {
@@ -20,12 +20,33 @@ console.log('🔥💎 Vault Phoenix Game Loading...');
     console.log('🔥💎 Game JavaScript ACTIVE - Page confirmed');
 })();
 
+// PORTRAIT LOCK ENFORCEMENT
+function enforcePortraitMode() {
+    // Lock screen orientation to portrait if supported
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('portrait').catch(err => {
+            console.log('📱 Portrait lock not available:', err.message);
+        });
+    }
+    
+    // Alternative method for mobile browsers
+    if (screen.lockOrientation) {
+        screen.lockOrientation('portrait');
+    } else if (screen.webkitLockOrientation) {
+        screen.webkitLockOrientation('portrait');
+    } else if (screen.mozLockOrientation) {
+        screen.mozLockOrientation('portrait');
+    }
+    
+    console.log('📱 Portrait mode enforcement applied');
+}
+
 // ONLY RUN GAME IF THIS IS A CRYPTO GAME PAGE
 if (window.isVaultPhoenixGame) {
 
     class VaultPhoenixGame {
         constructor() {
-            console.log('🔥💎 Vault Phoenix Game initializing...');
+            console.log('🔥💎 Vault Phoenix Game initializing with Radar Scanner...');
             
             // Core game state
             this.currentScreen = 'hunt';
@@ -69,6 +90,10 @@ if (window.isVaultPhoenixGame) {
             this.pendingAirdropValue = 0;
             this.airdropCollected = false;
             this.airdropTimeLeft = 30; // 30 seconds countdown
+            
+            // NEW: RADAR SYSTEM
+            this.radarUpdateInterval = null;
+            this.nearbyTokenCount = 0;
             
             // FIXED TOKEN SYSTEM - Better spacing to eliminate overlap
             this.emberTokens = [
@@ -309,8 +334,11 @@ if (window.isVaultPhoenixGame) {
         }
 
         init() {
-            console.log('🔧 Initializing Game...');
+            console.log('🔧 Initializing Game with Radar Scanner...');
             try {
+                // Apply portrait lock
+                enforcePortraitMode();
+                
                 this.loadGameData();
                 this.setupEventListeners();
                 this.setupSwipeableModule();
@@ -318,15 +346,85 @@ if (window.isVaultPhoenixGame) {
                 this.updateUI();
                 this.switchScreen('hunt');
                 
+                // Initialize radar system
+                this.initializeRadarSystem();
+                
                 // Start airdrop system with 7-9 second delay, once per session
                 if (!this.airdropShown) {
                     this.startAirdropSystem();
                 }
                 
-                console.log('✅ Game initialized successfully');
+                console.log('✅ Game initialized successfully with Radar Scanner');
                 console.log('🗺️ Token positioning fixed - no more overlaps');
+                console.log('📡 Radar system active - scanning for nearby tokens');
             } catch (error) {
                 console.error('❌ Game initialization error:', error);
+            }
+        }
+
+        // =================== NEW: RADAR SCANNER SYSTEM ===================
+        initializeRadarSystem() {
+            console.log('📡 Initializing Radar Scanner System...');
+            
+            // Start radar update loop
+            this.startRadarUpdates();
+            
+            // Initial radar update
+            this.updateRadarScanner();
+            
+            console.log('✅ Radar Scanner System active');
+        }
+
+        startRadarUpdates() {
+            // Update radar every 2 seconds to show dynamic scanning
+            this.radarUpdateInterval = setInterval(() => {
+                this.updateRadarScanner();
+            }, 2000);
+        }
+
+        stopRadarUpdates() {
+            if (this.radarUpdateInterval) {
+                clearInterval(this.radarUpdateInterval);
+                this.radarUpdateInterval = null;
+            }
+        }
+
+        updateRadarScanner() {
+            const radarDots = document.getElementById('radarDots');
+            if (!radarDots) return;
+
+            // Calculate nearby collectable tokens
+            const availableTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
+            const collectableTokens = availableTokens.filter(token => token.collectable);
+            
+            this.nearbyTokenCount = collectableTokens.length;
+            
+            // Clear existing dots
+            radarDots.innerHTML = '';
+            
+            // Create dots based on actual nearby token count
+            if (this.nearbyTokenCount > 0) {
+                // Define positions for up to 4 dots (we have 3 collectable tokens max)
+                const dotPositions = [
+                    { top: '25%', left: '30%' },
+                    { top: '60%', left: '70%' },
+                    { top: '40%', left: '15%' },
+                    { top: '70%', left: '45%' }
+                ];
+                
+                // Create dots for each nearby token
+                for (let i = 0; i < Math.min(this.nearbyTokenCount, 4); i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'radar-dot';
+                    dot.style.top = dotPositions[i].top;
+                    dot.style.left = dotPositions[i].left;
+                    dot.style.animationDelay = `${i * 0.5}s`;
+                    radarDots.appendChild(dot);
+                }
+                
+                console.log(`📡 Radar updated: ${this.nearbyTokenCount} tokens detected`);
+            } else {
+                console.log('📡 Radar scan: No collectable tokens nearby');
             }
         }
 
@@ -815,6 +913,9 @@ if (window.isVaultPhoenixGame) {
             const collectableCount = availableTokens.filter(t => t.collectable).length;
             const distantCount = availableTokens.filter(t => !t.collectable).length;
             console.log(`✅ FIXED: Updated ${collectableCount} green (collectable) and ${distantCount} red (distant) tokens with proper spacing`);
+            
+            // Update radar after updating map tokens
+            this.updateRadarScanner();
         }
 
         // =================== AR SYSTEM WITH FIXED STATIC COMPASS ===================
@@ -1314,28 +1415,15 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== NEARBY TOKENS SLIDER ===================
+        // =================== NEARBY TOKENS SLIDER WITH RADAR ===================
         updateNearbyTokens() {
-            console.log('🔍 Updating nearby tokens...');
+            console.log('🔍 Updating nearby tokens with radar...');
             
             const availableTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
             const collectableTokens = availableTokens.filter(token => token.collectable);
             
-            // Update handle count
-            const nearbyCountEl = document.getElementById('nearbyTokenCount');
-            if (nearbyCountEl) {
-                if (collectableTokens.length > 0) {
-                    nearbyCountEl.textContent = `${collectableTokens.length} ready`;
-                } else {
-                    nearbyCountEl.textContent = 'All collected!';
-                }
-            }
-            
-            // Update total available
-            const totalAvailableEl = document.getElementById('totalAvailable');
-            if (totalAvailableEl) {
-                totalAvailableEl.textContent = `Ready for collection`;
-            }
+            // Update radar scanner
+            this.updateRadarScanner();
 
             // Update AR badge in menu
             const nearbyARTokensEl = document.getElementById('nearbyARTokens');
@@ -1345,6 +1433,12 @@ if (window.isVaultPhoenixGame) {
                 } else {
                     nearbyARTokensEl.textContent = 'All collected';
                 }
+            }
+
+            // Update total available
+            const totalAvailableEl = document.getElementById('totalAvailable');
+            if (totalAvailableEl) {
+                totalAvailableEl.textContent = `Ready for collection`;
             }
 
             // Update token list
@@ -1647,9 +1741,36 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
+        // =================== CLEANUP ===================
+        destroy() {
+            console.log('🔧 Cleaning up game resources...');
+            
+            // Stop radar updates
+            this.stopRadarUpdates();
+            
+            // Clear timers
+            if (this.airdropTimer) {
+                clearTimeout(this.airdropTimer);
+                this.airdropTimer = null;
+            }
+            if (this.airdropCountdownTimer) {
+                clearInterval(this.airdropCountdownTimer);
+                this.airdropCountdownTimer = null;
+            }
+            if (this.arUITimer) {
+                clearTimeout(this.arUITimer);
+                this.arUITimer = null;
+            }
+            
+            // Stop AR mode
+            this.stopARMode();
+            
+            console.log('✅ Game resources cleaned up');
+        }
+
         // =================== EVENT LISTENERS ===================
         setupEventListeners() {
-            console.log('🎧 Setting up event listeners...');
+            console.log('🎧 Setting up event listeners with radar support...');
             
             // Navigation tabs
             document.querySelectorAll('.nav-tab').forEach(tab => {
@@ -1925,16 +2046,21 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            console.log('✅ Event listeners setup complete - all fixes applied');
+            // Window cleanup on unload
+            window.addEventListener('beforeunload', () => {
+                this.destroy();
+            });
+
+            console.log('✅ Event listeners setup complete with radar system - all fixes applied');
         }
     }
 
     // =================== INITIALIZE GAME ===================
-    console.log('🔥💎 Creating Game instance...');
+    console.log('🔥💎 Creating Game instance with Radar Scanner...');
     window.vaultPhoenixGame = new VaultPhoenixGame();
 
 } else {
     console.log('🚫 Game JavaScript blocked - not a crypto game page');
 }
 
-console.log('🔥💎 FIXED Game JavaScript loaded - Compass static, AR coins full display, mobile modal optimized');
+console.log('🔥💎 UPDATED Game JavaScript loaded - Portrait lock, Radar Scanner, Slider behind nav');
