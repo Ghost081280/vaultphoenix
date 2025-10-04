@@ -349,6 +349,9 @@ if (window.isVaultPhoenixGame) {
                 // Initialize radar system
                 this.initializeRadarSystem();
                 
+                // FIXED: Ensure slider is in collapsed state and visible
+                this.collapseModule();
+                
                 // Start airdrop system with 7-9 second delay, once per session
                 if (!this.airdropShown) {
                     this.startAirdropSystem();
@@ -357,6 +360,7 @@ if (window.isVaultPhoenixGame) {
                 console.log('✅ Game initialized successfully with Radar Scanner');
                 console.log('🗺️ Token positioning fixed - no more overlaps');
                 console.log('📡 Radar system active - scanning for nearby tokens');
+                console.log('📋 Slider should be visible above bottom nav');
             } catch (error) {
                 console.error('❌ Game initialization error:', error);
             }
