@@ -1,5 +1,4 @@
 /* Vault Phoenix AR Crypto Gaming - COMPLETE CSS FILE */
-/* UPDATES: Portrait lock, radar scanner, slider behind bottom nav */
 
 /* =================== CORE RESET & STRUCTURE =================== */
 * {
@@ -7,13 +6,6 @@
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
-}
-
-/* PORTRAIT LOCK ENFORCEMENT */
-@supports (orientation: portrait) {
-    html {
-        orientation: portrait;
-    }
 }
 
 html, body {
@@ -373,7 +365,7 @@ html, body {
     background: rgba(244, 67, 54, 0.2);
 }
 
-/* =================== IMPROVED AIRDROP NOTIFICATION =================== */
+/* =================== AIRDROP NOTIFICATION =================== */
 .airdrop-notification {
     position: fixed;
     top: -300px;
@@ -540,7 +532,6 @@ html, body {
     box-shadow: 0 4px 16px rgba(240, 165, 0, 0.5);
 }
 
-/* FIXED: Hide button when collected - auto-close after 3 seconds */
 .airdrop-collected .airdrop-button {
     display: none;
 }
@@ -573,14 +564,7 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    cursor: grab;
-    touch-action: pan-x pan-y;
-    user-select: none;
     background: linear-gradient(135deg, #e8f5e8 0%, #d4ecd4 25%, #c1e3c1 50%, #aedaae 75%, #9bd19b 100%);
-}
-
-.map-container:active {
-    cursor: grabbing;
 }
 
 .phoenix-map {
@@ -590,12 +574,10 @@ html, body {
     background: linear-gradient(135deg, #e8f5e8 0%, #d4ecd4 25%, #c1e3c1 50%, #aedaae 75%, #9bd19b 100%);
     transform-origin: center center;
     will-change: transform;
-    transition: transform 0.2s ease-out;
     min-width: 100vw;
     min-height: 100vh;
 }
 
-/* =================== MAP FEATURES =================== */
 .map-roads {
     position: absolute;
     top: 0;
@@ -662,7 +644,6 @@ html, body {
     height: 2px;
 }
 
-/* City Districts */
 .city-districts {
     position: absolute;
     top: 0;
@@ -716,7 +697,6 @@ html, body {
     opacity: 0.5;
 }
 
-/* Landmarks */
 .landmarks {
     position: absolute;
     top: 0;
@@ -770,7 +750,6 @@ html, body {
     background: linear-gradient(135deg, #228B22, #32CD32);
 }
 
-/* Player Location */
 .player-location {
     position: absolute;
     left: 50%;
@@ -798,7 +777,6 @@ html, body {
     }
 }
 
-/* =================== TOKEN MARKERS =================== */
 .token-markers {
     position: absolute;
     top: 0;
@@ -850,7 +828,6 @@ html, body {
     opacity: 0.9;
 }
 
-.token-marker:hover,
 .token-marker:active {
     transform: translate(-50%, -50%) scale(1.1);
     z-index: 50;
@@ -900,7 +877,6 @@ html, body {
     }
 }
 
-/* Map Controls */
 .map-controls {
     position: fixed;
     bottom: calc(env(safe-area-inset-bottom, 14px) + 200px);
@@ -940,7 +916,7 @@ html, body {
     transform: scale(0.9);
 }
 
-/* =================== AR SCREEN WITH FIXED COMPASS =================== */
+/* =================== AR SCREEN =================== */
 .ar-screen {
     position: absolute;
     top: 0;
@@ -971,7 +947,6 @@ html, body {
     pointer-events: none;
 }
 
-/* =================== FIXED AR COMPASS - POINTS NORTH =================== */
 .ar-compass {
     position: absolute;
     top: calc(env(safe-area-inset-top, 8px) + 90px);
@@ -1001,7 +976,6 @@ html, body {
     border-radius: 2px;
     position: relative;
     transform-origin: center bottom;
-    /* FIXED: Static compass pointing north - no spinning animation */
     transform: rotate(0deg);
     box-shadow: 0 2px 8px rgba(240, 165, 0, 0.6);
 }
@@ -1086,7 +1060,6 @@ html, body {
     z-index: 25;
 }
 
-/* FIXED: AR token coin fills entire green circle like map tokens */
 .ar-token-coin {
     border-radius: 50%;
     background: linear-gradient(135deg, #f0a500, #fb923c);
@@ -1099,12 +1072,10 @@ html, body {
     width: 60px;
     height: 60px;
     overflow: hidden;
-    /* FIXED: Remove padding to let coin image fill completely */
     padding: 0;
 }
 
 .ar-token-img {
-    /* FIXED: Full size coin image like map tokens */
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1424,426 +1395,18 @@ html, body {
     width: 100%;
 }
 
-/* =================== EMBER TOKENS SLIDER WITH RADAR SCANNER =================== */
-.token-locations-module {
-    position: fixed;
-    bottom: calc(env(safe-area-inset-bottom, 8px) + 80px);
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: linear-gradient(180deg, rgba(8, 8, 8, 0.98) 0%, rgba(16, 16, 16, 0.98) 100%);
-    backdrop-filter: blur(25px);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    border-bottom: none;
-    box-shadow: 0 -8px 24px rgba(240, 165, 0, 0.2);
-    transform: translateY(calc(100% - 80px));
-    transition: transform 0.4s ease;
-    max-height: 60vh;
-    overflow: hidden;
-}
-
-.token-locations-module.expanded {
-    transform: translateY(0);
-}
-
-.token-locations-module.collapsed {
-    transform: translateY(calc(100% - 80px));
-}
-
-.swipe-handle {
-    padding: 16px 16px 12px 16px;
-    cursor: pointer;
-    user-select: none;
-    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
-    background: linear-gradient(135deg, rgba(240, 165, 0, 0.08), rgba(251, 146, 60, 0.05));
-    touch-action: manipulation;
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.handle-bar {
-    width: 40px;
-    height: 4px;
-    background: linear-gradient(90deg, #f0a500, #fb923c);
-    border-radius: 2px;
-    margin: 0 auto 12px auto;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(240, 165, 0, 0.3);
-}
-
-.swipe-handle:active .handle-bar {
-    width: 50px;
-    box-shadow: 0 3px 8px rgba(240, 165, 0, 0.5);
-}
-
-.handle-text {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.handle-title {
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.ember-icons-container {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin-right: 8px;
-}
-
-.ember-icon {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    filter: brightness(1.2);
-    animation: emberIconFloat 3s ease-in-out infinite;
-}
-
-.ember-icon:nth-child(2) { animation-delay: 0.3s; }
-.ember-icon:nth-child(3) { animation-delay: 0.6s; }
-.ember-icon:nth-child(4) { animation-delay: 0.9s; }
-
-@keyframes emberIconFloat {
-    0%, 100% { 
-        transform: translateY(0) rotate(0deg);
-        filter: brightness(1.2);
-    }
-    50% { 
-        transform: translateY(-2px) rotate(3deg);
-        filter: brightness(1.4);
-    }
-}
-
-/* =================== NEW: RADAR SCANNER COMPONENT =================== */
-.radar-scanner {
-    width: 48px;
-    height: 48px;
-    position: relative;
-    flex-shrink: 0;
-}
-
-.radar-circle {
-    width: 100%;
-    height: 100%;
-    border: 2px solid rgba(76, 175, 80, 0.4);
-    border-radius: 50%;
-    position: relative;
-    background: radial-gradient(
-        circle at center,
-        rgba(76, 175, 80, 0.1) 0%,
-        rgba(76, 175, 80, 0.05) 50%,
-        transparent 70%
-    );
-    box-shadow: 
-        0 0 20px rgba(76, 175, 80, 0.3),
-        inset 0 0 20px rgba(76, 175, 80, 0.1);
-    animation: radarPulse 3s ease-in-out infinite;
-}
-
-@keyframes radarPulse {
-    0%, 100% { 
-        border-color: rgba(76, 175, 80, 0.4);
-        box-shadow: 
-            0 0 20px rgba(76, 175, 80, 0.3),
-            inset 0 0 20px rgba(76, 175, 80, 0.1);
-    }
-    50% { 
-        border-color: rgba(76, 175, 80, 0.8);
-        box-shadow: 
-            0 0 30px rgba(76, 175, 80, 0.6),
-            inset 0 0 30px rgba(76, 175, 80, 0.2);
-    }
-}
-
-.radar-sweep {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 2px;
-    height: 50%;
-    background: linear-gradient(
-        to bottom,
-        rgba(76, 175, 80, 0.9),
-        rgba(76, 175, 80, 0.3),
-        transparent
-    );
-    transform-origin: bottom center;
-    transform: translate(-50%, -100%) rotate(0deg);
-    animation: radarSweep 2s linear infinite;
-    border-radius: 1px;
-    box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
-}
-
-@keyframes radarSweep {
-    0% { transform: translate(-50%, -100%) rotate(0deg); }
-    100% { transform: translate(-50%, -100%) rotate(360deg); }
-}
-
-.radar-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4px;
-    height: 4px;
-    background: #4CAF50;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
-    animation: radarCenterPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes radarCenterPulse {
-    0%, 100% { 
-        transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
-    }
-    50% { 
-        transform: translate(-50%, -50%) scale(1.5);
-        box-shadow: 0 0 15px rgba(76, 175, 80, 1);
-    }
-}
-
-.radar-dots {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.radar-dot {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: #4CAF50;
-    border-radius: 50%;
-    box-shadow: 0 0 6px rgba(76, 175, 80, 0.8);
-    animation: radarDotPulse 2s ease-in-out infinite;
-}
-
-.radar-dot:nth-child(1) { 
-    top: 25%; 
-    left: 30%; 
-    animation-delay: 0s; 
-}
-
-.radar-dot:nth-child(2) { 
-    top: 60%; 
-    left: 70%; 
-    animation-delay: 0.5s; 
-}
-
-.radar-dot:nth-child(3) { 
-    top: 40%; 
-    left: 15%; 
-    animation-delay: 1s; 
-}
-
-.radar-dot:nth-child(4) { 
-    top: 70%; 
-    left: 45%; 
-    animation-delay: 1.5s; 
-}
-
-@keyframes radarDotPulse {
-    0%, 100% { 
-        opacity: 0.6;
-        transform: scale(1);
-        box-shadow: 0 0 6px rgba(76, 175, 80, 0.8);
-    }
-    50% { 
-        opacity: 1;
-        transform: scale(1.3);
-        box-shadow: 0 0 12px rgba(76, 175, 80, 1);
-    }
-}
-
-.module-content {
-    display: none;
-}
-
-.token-locations-module.expanded .module-content {
-    display: block;
-}
-
-.module-header {
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
-    background: rgba(240, 165, 0, 0.05);
-}
-
-.module-title {
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 4px;
-}
-
-.module-ember-icon {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    object-fit: contain;
-    filter: brightness(1.2);
-}
-
-.total-available {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 11px;
-    font-weight: 500;
-}
-
-.token-locations-list {
-    padding: 12px 16px;
-    max-height: 45vh;
-    overflow-y: auto;
-}
-
-.token-location-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
-    margin-bottom: 8px;
-    background: rgba(240, 165, 0, 0.1);
-    border: 1px solid rgba(240, 165, 0, 0.25);
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    touch-action: manipulation;
-    min-height: 60px;
-    user-select: none;
-    box-shadow: 0 2px 8px rgba(240, 165, 0, 0.1);
-}
-
-.token-location-item.collectable-token {
-    background: rgba(76, 175, 80, 0.15);
-    border-color: rgba(76, 175, 80, 0.4);
-    animation: collectableItemPulse 3s ease-in-out infinite;
-    box-shadow: 0 3px 10px rgba(76, 175, 80, 0.2);
-}
-
-.token-location-item:active {
-    background: rgba(240, 165, 0, 0.2);
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 4px 12px rgba(240, 165, 0, 0.3);
-}
-
-.token-location-icon {
-    /* INCREASED SIZE for better visibility */
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(240, 165, 0, 0.2);
-    border: 2px solid rgba(240, 165, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(240, 165, 0, 0.2);
-    overflow: hidden;
-}
-
-.token-location-icon.collectable-icon {
-    background: rgba(76, 175, 80, 0.2);
-    border-color: rgba(76, 175, 80, 0.4);
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
-    animation: collectableIconPulse 2s ease-in-out infinite;
-}
-
-.token-location-icon img {
-    /* INCREASED SIZE to match larger container */
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    filter: brightness(1.1);
-}
-
-.token-location-info {
-    flex: 1;
-}
-
-.token-location-name {
-    color: white;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    line-height: 1.2;
-}
-
-.token-location-distance {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 11px;
-    font-weight: 500;
-    margin-bottom: 2px;
-}
-
-.token-sponsor {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 10px;
-    font-weight: 400;
-    font-style: italic;
-}
-
-.token-location-value {
-    color: #f0a500;
-    font-size: 14px;
-    font-weight: 800;
-    text-align: right;
-    flex-shrink: 0;
-}
-
-@keyframes collectableItemPulse {
-    0%, 100% { 
-        border-color: rgba(76, 175, 80, 0.4);
-        box-shadow: 0 3px 10px rgba(76, 175, 80, 0.2);
-    }
-    50% { 
-        border-color: rgba(76, 175, 80, 0.6);
-        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-    }
-}
-
-@keyframes collectableIconPulse {
-    0%, 100% { 
-        transform: scale(1);
-        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
-    }
-    50% { 
-        transform: scale(1.05);
-        box-shadow: 0 3px 10px rgba(76, 175, 80, 0.4);
-    }
-}
-
-/* =================== BOTTOM NAVIGATION (ABOVE SLIDER) =================== */
+/* =================== BOTTOM NAVIGATION - HIGHEST Z-INDEX =================== */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 100; /* Much higher than slider (40) to be clearly on top */
+    z-index: 150;
     background: linear-gradient(180deg, rgba(0,0,0,0.98) 0%, rgba(0,0,0,1) 100%);
     backdrop-filter: blur(25px);
     border-top: 1px solid rgba(240, 165, 0, 0.2);
     padding: 12px 12px calc(env(safe-area-inset-bottom, 8px) + 12px) 12px;
     height: calc(env(safe-area-inset-bottom, 8px) + 80px);
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
-    /* Add stronger shadow to enhance the "on top" effect */
     box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.8);
 }
 
@@ -1908,11 +1471,415 @@ html, body {
     font-weight: 700;
 }
 
-/* =================== MODALS - FIXED MOBILE HEIGHT =================== */
+/* =================== SLIDER MODULE - BEHIND NAV WITH LAYERED EFFECT =================== */
+.token-locations-module {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: linear-gradient(180deg, rgba(8, 8, 8, 0.98) 0%, rgba(16, 16, 16, 0.98) 100%);
+    backdrop-filter: blur(25px);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-bottom: none;
+    box-shadow: 0 -8px 32px rgba(240, 165, 0, 0.2);
+    transform: translateY(calc(100% - 100px));
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 65vh;
+    overflow: hidden;
+}
+
+.token-locations-module.expanded {
+    transform: translateY(calc(env(safe-area-inset-bottom, 8px) + 80px));
+}
+
+.swipe-handle {
+    padding: 20px 20px 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.12), rgba(251, 146, 60, 0.08));
+    touch-action: manipulation;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+}
+
+.handle-bar {
+    width: 50px;
+    height: 5px;
+    background: linear-gradient(90deg, #f0a500, #fb923c);
+    border-radius: 3px;
+    margin: 0 auto 16px auto;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(240, 165, 0, 0.4);
+}
+
+.swipe-handle:active .handle-bar {
+    width: 60px;
+    box-shadow: 0 3px 12px rgba(240, 165, 0, 0.6);
+}
+
+.handle-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.handle-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.ember-icons-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ember-icon-large {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    filter: brightness(1.2) drop-shadow(0 2px 8px rgba(240, 165, 0, 0.4));
+    animation: emberIconFloat 3s ease-in-out infinite;
+}
+
+.ember-icon-large:nth-child(2) { 
+    animation-delay: 0.4s; 
+}
+
+@keyframes emberIconFloat {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg);
+        filter: brightness(1.2) drop-shadow(0 2px 8px rgba(240, 165, 0, 0.4));
+    }
+    50% { 
+        transform: translateY(-4px) rotate(5deg);
+        filter: brightness(1.4) drop-shadow(0 4px 12px rgba(240, 165, 0, 0.6));
+    }
+}
+
+.handle-title {
+    color: white;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+}
+
+.radar-scanner {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.radar-circle {
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgba(76, 175, 80, 0.5);
+    border-radius: 50%;
+    position: relative;
+    background: radial-gradient(
+        circle at center,
+        rgba(76, 175, 80, 0.15) 0%,
+        rgba(76, 175, 80, 0.08) 50%,
+        transparent 70%
+    );
+    box-shadow: 
+        0 0 24px rgba(76, 175, 80, 0.4),
+        inset 0 0 24px rgba(76, 175, 80, 0.15);
+    animation: radarPulse 3s ease-in-out infinite;
+}
+
+@keyframes radarPulse {
+    0%, 100% { 
+        border-color: rgba(76, 175, 80, 0.5);
+        box-shadow: 
+            0 0 24px rgba(76, 175, 80, 0.4),
+            inset 0 0 24px rgba(76, 175, 80, 0.15);
+    }
+    50% { 
+        border-color: rgba(76, 175, 80, 0.9);
+        box-shadow: 
+            0 0 36px rgba(76, 175, 80, 0.7),
+            inset 0 0 36px rgba(76, 175, 80, 0.25);
+    }
+}
+
+.radar-sweep {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 50%;
+    background: linear-gradient(
+        to bottom,
+        rgba(76, 175, 80, 1),
+        rgba(76, 175, 80, 0.4),
+        transparent
+    );
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%) rotate(0deg);
+    animation: radarSweep 2s linear infinite;
+    border-radius: 2px;
+    box-shadow: 0 0 12px rgba(76, 175, 80, 0.9);
+}
+
+@keyframes radarSweep {
+    0% { transform: translate(-50%, -100%) rotate(0deg); }
+    100% { transform: translate(-50%, -100%) rotate(360deg); }
+}
+
+.radar-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: #4CAF50;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.9);
+    animation: radarCenterPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes radarCenterPulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.9);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.6);
+        box-shadow: 0 0 18px rgba(76, 175, 80, 1);
+    }
+}
+
+.radar-dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.radar-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.9);
+    animation: radarDotPulse 2s ease-in-out infinite;
+}
+
+.radar-dot:nth-child(1) { 
+    top: 25%; 
+    left: 30%; 
+    animation-delay: 0s; 
+}
+
+.radar-dot:nth-child(2) { 
+    top: 60%; 
+    left: 70%; 
+    animation-delay: 0.5s; 
+}
+
+.radar-dot:nth-child(3) { 
+    top: 40%; 
+    left: 15%; 
+    animation-delay: 1s; 
+}
+
+.radar-dot:nth-child(4) { 
+    top: 70%; 
+    left: 45%; 
+    animation-delay: 1.5s; 
+}
+
+@keyframes radarDotPulse {
+    0%, 100% { 
+        opacity: 0.6;
+        transform: scale(1);
+        box-shadow: 0 0 8px rgba(76, 175, 80, 0.9);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.4);
+        box-shadow: 0 0 16px rgba(76, 175, 80, 1);
+    }
+}
+
+.module-content {
+    display: none;
+    max-height: calc(65vh - 100px);
+    overflow-y: auto;
+}
+
+.token-locations-module.expanded .module-content {
+    display: block;
+}
+
+.module-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+    background: rgba(240, 165, 0, 0.08);
+}
+
+.module-title {
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.module-ember-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: contain;
+    filter: brightness(1.2);
+}
+
+.total-available {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.token-locations-list {
+    padding: 16px 20px;
+}
+
+.token-location-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: rgba(240, 165, 0, 0.12);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    touch-action: manipulation;
+    min-height: 72px;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(240, 165, 0, 0.15);
+}
+
+.token-location-item.collectable-token {
+    background: rgba(76, 175, 80, 0.18);
+    border-color: rgba(76, 175, 80, 0.5);
+    animation: collectableItemPulse 3s ease-in-out infinite;
+    box-shadow: 0 3px 12px rgba(76, 175, 80, 0.25);
+}
+
+.token-location-item:active {
+    background: rgba(240, 165, 0, 0.22);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 4px 16px rgba(240, 165, 0, 0.3);
+}
+
+.token-location-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(240, 165, 0, 0.25);
+    border: 3px solid rgba(240, 165, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(240, 165, 0, 0.3);
+    overflow: hidden;
+}
+
+.token-location-icon.collectable-icon {
+    background: rgba(76, 175, 80, 0.25);
+    border-color: rgba(76, 175, 80, 0.5);
+    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+    animation: collectableIconPulse 2s ease-in-out infinite;
+}
+
+.token-location-icon img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    filter: brightness(1.15);
+}
+
+.token-location-info {
+    flex: 1;
+}
+
+.token-location-name {
+    color: white;
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+
+.token-location-distance {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.token-sponsor {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 12px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.token-location-value {
+    color: #f0a500;
+    font-size: 16px;
+    font-weight: 900;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+@keyframes collectableItemPulse {
+    0%, 100% { 
+        border-color: rgba(76, 175, 80, 0.5);
+        box-shadow: 0 3px 12px rgba(76, 175, 80, 0.25);
+    }
+    50% { 
+        border-color: rgba(76, 175, 80, 0.7);
+        box-shadow: 0 4px 16px rgba(76, 175, 80, 0.35);
+    }
+}
+
+@keyframes collectableIconPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+    }
+    50% { 
+        transform: scale(1.08);
+        box-shadow: 0 3px 14px rgba(76, 175, 80, 0.45);
+    }
+}
+
+/* =================== MODALS =================== */
 .token-modal,
 .navigation-modal,
 .qr-modal,
-.sponsor-modal,
 .reset-game-overlay,
 .logout-overlay {
     position: fixed;
@@ -1935,7 +1902,6 @@ html, body {
 .token-modal.show,
 .navigation-modal.show,
 .qr-modal.show,
-.sponsor-modal.show,
 .reset-game-overlay.show,
 .logout-overlay.show {
     opacity: 1;
@@ -1945,7 +1911,6 @@ html, body {
 .token-modal-content,
 .navigation-content,
 .qr-modal-content,
-.sponsor-modal-content,
 .reset-game-modal,
 .logout-modal {
     background: linear-gradient(135deg, rgba(12, 12, 12, 0.98), rgba(20, 20, 20, 0.98));
@@ -1956,12 +1921,10 @@ html, body {
     max-width: 400px;
     width: 100%;
     color: white;
-    /* FIXED: Constrain modal height for mobile */
     max-height: 85vh;
     overflow-y: auto;
 }
 
-/* =================== TOKEN MODAL =================== */
 .token-modal-header {
     text-align: center;
     margin-bottom: 20px;
@@ -2043,7 +2006,6 @@ html, body {
     border: 1px solid rgba(240, 165, 0, 0.3);
 }
 
-/* SPONSOR MESSAGE */
 .sponsor-message {
     background: rgba(240, 165, 0, 0.1);
     border: 1px solid rgba(240, 165, 0, 0.3);
@@ -2067,13 +2029,11 @@ html, body {
     margin-bottom: 12px;
 }
 
-/* FIXED: EXPANDABLE DETAILS - MOBILE HEIGHT CONSTRAINT */
 .sponsor-details-expandable {
     border-top: 1px solid rgba(240, 165, 0, 0.2);
     padding-top: 16px;
     margin-top: 12px;
     animation: slideDown 0.3s ease-out;
-    /* FIXED: Limit height to prevent overflow on mobile */
     max-height: 50vh;
     overflow-y: auto;
 }
@@ -2243,7 +2203,6 @@ html, body {
     border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-/* =================== NAVIGATION MODAL =================== */
 .navigation-header {
     text-align: center;
     margin-bottom: 24px;
@@ -2358,7 +2317,6 @@ html, body {
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* =================== QR MODAL =================== */
 .qr-modal-header {
     display: flex;
     justify-content: space-between;
@@ -2448,7 +2406,6 @@ html, body {
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* =================== RESET GAME & LOGOUT MODALS =================== */
 .reset-game-modal-title,
 .logout-modal-title {
     font-size: 20px;
@@ -2530,7 +2487,6 @@ html, body {
     .token-marker {
         min-width: 60px;
         min-height: 60px;
-        padding: 10px;
     }
     
     .token-coin {
@@ -2566,14 +2522,22 @@ html, body {
         height: 70px;
     }
 
-    /* FIXED: Mobile modal height constraints */
     .sponsor-details-expandable {
         max-height: 40vh;
     }
     
     .radar-scanner {
-        width: 42px;
-        height: 42px;
+        width: 56px;
+        height: 56px;
+    }
+    
+    .ember-icon-large {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .handle-title {
+        font-size: 16px;
     }
 }
 
@@ -2610,14 +2574,22 @@ html, body {
         height: 60px;
     }
 
-    /* FIXED: Smaller mobile modal constraints */
     .sponsor-details-expandable {
         max-height: 35vh;
     }
     
     .radar-scanner {
-        width: 38px;
-        height: 38px;
+        width: 52px;
+        height: 52px;
+    }
+    
+    .ember-icon-large {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .handle-title {
+        font-size: 15px;
     }
 }
 
@@ -2630,38 +2602,8 @@ html, body {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-    
-    .token-marker.collectable::before {
-        animation: none;
-    }
-    
-    .player-location {
-        animation: none;
-    }
-    
-    .ember-icon {
-        animation: none;
-    }
-    
-    .ar-token-coin {
-        animation: none;
-    }
-    
-    /* FIXED: Compass no longer animates */
-    .compass-needle {
-        animation: none;
-    }
-    
-    /* Disable radar animations */
-    .radar-sweep,
-    .radar-center,
-    .radar-dot,
-    .radar-circle {
-        animation: none;
-    }
 }
 
-/* =================== HIGH CONTRAST MODE =================== */
 @media (prefers-contrast: high) {
     .token-marker.collectable .token-coin {
         border-width: 6px;
@@ -2688,7 +2630,6 @@ html, body {
     }
 }
 
-/* =================== PRINT STYLES =================== */
 @media print {
     .crypto-dashboard-page {
         display: none !important;
