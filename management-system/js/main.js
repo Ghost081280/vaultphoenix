@@ -26,7 +26,7 @@ const AppState = {
 };
 
 // ============================================
-// ROLE CONFIGURATIONS (UPDATED)
+// ROLE CONFIGURATIONS (UPDATED - NO ROLE SWITCHING)
 // ============================================
 
 const RoleConfig = {
@@ -54,24 +54,12 @@ const RoleConfig = {
             { icon: '📊', label: 'Dashboard Overview', section: 'overview' },
             { icon: '🛒', label: 'Campaign Marketplace', section: 'marketplace' },
             { icon: '📍', label: 'My Locations', section: 'locations' },
+            { icon: '🗺️', label: 'Location Map', section: 'map' },
+            { icon: '🎁', label: 'Airdrop Requests', section: 'airdrop-requests' },
             { icon: '💳', label: 'Payment Center', section: 'payments' },
-            { icon: '📈', label: 'Performance Metrics', section: 'metrics' },
+            { icon: '📈', label: 'Performance Analytics', section: 'analytics' },
             { icon: '💰', label: 'ROI Calculator', section: 'budget' },
             { icon: '⚙️', label: 'Account Settings', section: 'settings' }
-        ]
-    },
-    'system-admin': {
-        name: 'System Admin',
-        icon: '⚙️',
-        showTokenBalance: false,
-        navigation: [
-            { icon: '📊', label: 'Global Dashboard', section: 'overview' },
-            { icon: '💎', label: 'Token Economics', section: 'token-economics' },
-            { icon: '🔧', label: 'Smithii.io Integration', section: 'smithii' },
-            { icon: '👥', label: 'User Management', section: 'users' },
-            { icon: '💰', label: 'Revenue Monitoring', section: 'revenue' },
-            { icon: '🔒', label: 'Compliance Center', section: 'compliance' },
-            { icon: '🌐', label: 'Global Analytics', section: 'analytics' }
         ]
     }
 };
@@ -140,20 +128,11 @@ function initializeApp(role) {
 function setupRoleBasedUI(role) {
     const config = RoleConfig[role];
     
-    // Update current role display
-    const currentRoleName = document.getElementById('currentRoleName');
-    if (currentRoleName) {
-        currentRoleName.textContent = config.name;
-    }
-    
     // Show/hide token balance widget
     const tokenWidget = document.getElementById('tokenBalanceWidget');
     if (tokenWidget) {
         tokenWidget.style.display = config.showTokenBalance ? 'flex' : 'none';
     }
-    
-    // Update active role in dropdown
-    updateActiveRoleInDropdown(role);
 }
 
 /**
@@ -246,10 +225,16 @@ function getSectionContent(section) {
         return getPaymentsContent(role);
     } else if (section === 'locations') {
         return getLocationsContent(role);
-    } else if (section === 'metrics') {
-        return getMetricsContent(role);
+    } else if (section === 'map') {
+        return getMapContent(role);
+    } else if (section === 'airdrop-requests') {
+        return getAirdropRequestsContent(role);
+    } else if (section === 'analytics') {
+        return getAdvertiserAnalyticsContent(role);
     } else if (section === 'budget') {
         return getBudgetContent(role);
+    } else if (section === 'settings') {
+        return getSettingsContent(role);
     } else {
         return getPlaceholderContent(section);
     }
@@ -338,7 +323,7 @@ function getCampaignManagerOverview() {
             </div>
             
             <div class="apps-grid">
-                <div class="app-card" onclick="openAppMonitoring('ember-hunt')">
+                <div class="app-card" onclick="loadSection('campaigns')">
                     <div class="app-header">
                         <div class="app-name">🔥 $Ember Hunt</div>
                         <div class="app-status">
@@ -366,7 +351,7 @@ function getCampaignManagerOverview() {
                     </div>
                     <div class="app-actions">
                         <button class="btn btn-outline" onclick="event.stopPropagation(); loadSection('campaigns')">Manage</button>
-                        <button class="btn btn-primary" onclick="event.stopPropagation(); openPlayerApp()">View App ↗</button>
+                        <button class="btn btn-primary" onclick="event.stopPropagation(); window.open('https://ghost081280.github.io/vaultphoenix/crypto-game/dashboard.html', '_blank')">View App ↗</button>
                     </div>
                 </div>
                 
@@ -398,13 +383,6 @@ function getCampaignManagerOverview() {
 }
 
 /**
- * Get Advertiser Overview
- */
-function getAdvertiserOverview() {
-    return getMerchantOverview();
-}
-
-/**
  * Update active navigation item
  */
 function updateActiveNavItem(section) {
@@ -433,20 +411,6 @@ function updatePageTitle(section) {
 }
 
 /**
- * Update active role in dropdown
- */
-function updateActiveRoleInDropdown(role) {
-    const roleOptions = document.querySelectorAll('.role-option');
-    roleOptions.forEach(option => {
-        if (option.dataset.role === role) {
-            option.classList.add('active');
-        } else {
-            option.classList.remove('active');
-        }
-    });
-}
-
-/**
  * Update token balance display
  */
 function updateTokenBalance() {
@@ -467,30 +431,6 @@ function updateTokenBalance() {
  * Setup event listeners
  */
 function setupEventListeners() {
-    // Role switcher
-    const roleSwitcherBtn = document.getElementById('roleSwitcherBtn');
-    const roleDropdown = document.getElementById('roleDropdown');
-    
-    if (roleSwitcherBtn && roleDropdown) {
-        roleSwitcherBtn.addEventListener('click', () => {
-            roleDropdown.classList.toggle('active');
-        });
-        
-        document.addEventListener('click', (e) => {
-            if (!roleSwitcherBtn.contains(e.target) && !roleDropdown.contains(e.target)) {
-                roleDropdown.classList.remove('active');
-            }
-        });
-        
-        const roleOptions = document.querySelectorAll('.role-option');
-        roleOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const newRole = option.dataset.role;
-                switchRole(newRole);
-            });
-        });
-    }
-    
     const menuToggle = document.getElementById('menuToggle');
     if (menuToggle) {
         menuToggle.addEventListener('click', toggleSidebar);
@@ -498,14 +438,6 @@ function setupEventListeners() {
     
     handleResponsiveSidebar();
     window.addEventListener('resize', handleResponsiveSidebar);
-}
-
-/**
- * Switch to a different role
- */
-function switchRole(newRole) {
-    sessionStorage.setItem('selectedRole', newRole);
-    window.location.reload();
 }
 
 /**
@@ -552,7 +484,6 @@ function handleResponsiveSidebar() {
  * Initialize Coinbase Wallet
  */
 function initializeCoinbaseWallet() {
-    // Check if wallet was previously connected
     const savedAddress = sessionStorage.getItem('walletAddress');
     if (savedAddress) {
         AppState.walletConnected = true;
@@ -568,7 +499,7 @@ function getPlaceholderContent(section) {
         <div style="text-align: center; padding: 80px 20px;">
             <div style="font-size: 4rem; margin-bottom: 20px;">🚧</div>
             <h2 style="font-size: 2rem; margin-bottom: 15px; color: var(--color-primary-gold);">
-                ${section.charAt(0).toUpperCase() + section.slice(1)} Section
+                ${section.charAt(0).toUpperCase() + section.slice(1).replace('-', ' ')} Section
             </h2>
             <p style="color: rgba(255, 255, 255, 0.6); font-size: 1.1rem;">
                 This section is under development and will be available soon.
@@ -581,18 +512,29 @@ function getPlaceholderContent(section) {
 }
 
 /**
- * Open app monitoring view
+ * Get settings content
  */
-function openAppMonitoring(appId) {
-    console.log('Opening monitoring for app:', appId);
-    loadSection('campaigns');
-}
-
-/**
- * Open player app
- */
-function openPlayerApp() {
-    alert('🔥 This would open the player app in a new window, showing the mobile experience your users see.');
+function getSettingsContent(role) {
+    const roleName = role === 'campaign-manager' ? 'Campaign Manager' : 'Advertiser';
+    
+    return `
+        <div class="dashboard-section">
+            <h2 class="section-title">⚙️ Account Settings</h2>
+            
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">Profile Information</h3>
+                <div style="margin-bottom: 20px;">
+                    <strong>Email:</strong> demo@phoenix.com<br>
+                    <strong>Role:</strong> ${roleName}<br>
+                    <strong>Account Status:</strong> <span style="color: #22c55e;">Active</span>
+                </div>
+                
+                <button class="btn btn-outline" onclick="if(confirm('Switch to a different role?')) { sessionStorage.removeItem('selectedRole'); window.location.href = 'role-selection.html'; }">
+                    Change Role
+                </button>
+            </div>
+        </div>
+    `;
 }
 
 /**
@@ -607,7 +549,5 @@ function logout() {
 if (typeof window !== 'undefined') {
     window.AppState = AppState;
     window.loadSection = loadSection;
-    window.openAppMonitoring = openAppMonitoring;
-    window.openPlayerApp = openPlayerApp;
     window.logout = logout;
 }
