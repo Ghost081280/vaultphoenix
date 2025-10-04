@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- PORTRAIT LOCK -->
+    <meta name="screen-orientation" content="portrait">
+    <meta name="orientation" content="portrait">
     <title>Vault Phoenix - AR $Ember Hunt</title>
     <link rel="icon" href="../images/VPLogoNoText.PNG" type="image/png">
     <link rel="stylesheet" href="dashboard.css">
+    
+    <!-- PORTRAIT LOCK STYLES -->
+    <style>
+        @media screen and (orientation: landscape) {
+            body::before {
+                content: "📱 Please rotate your device to portrait mode for the best experience";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.95);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                font-size: 18px;
+                font-weight: 600;
+                z-index: 9999;
+                padding: 20px;
+                backdrop-filter: blur(10px);
+            }
+        }
+        
+        @media screen and (orientation: landscape) {
+            #gameContainer {
+                filter: blur(5px);
+                pointer-events: none;
+            }
+        }
+    </style>
 </head>
 <body class="crypto-dashboard-page">
     <!-- CRYPTO GAME PROTECTION FLAG -->
@@ -266,37 +301,6 @@
             </div>
         </div>
 
-        <!-- Ember Tokens Nearby Slider (Appears on all screens) -->
-        <div class="token-locations-module collapsed" id="tokenLocationsModule">
-            <div class="swipe-handle" id="swipeHandle">
-                <div class="handle-bar"></div>
-                <div class="handle-text">
-                    <span class="handle-title">
-                        <div class="ember-icons-container">
-                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
-                            <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
-                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
-                            <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
-                        </div>
-                        $Ember Tokens Nearby
-                    </span>
-                    <span class="handle-count" id="nearbyTokenCount">Get closer</span>
-                </div>
-            </div>
-            <div class="module-content" id="moduleContent">
-                <div class="module-header">
-                    <div class="module-title">
-                        <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
-                        Collectable Tokens
-                    </div>
-                    <div class="total-available" id="totalAvailable">Ready for collection</div>
-                </div>
-                <div class="token-locations-list" id="tokenLocationsList">
-                    <!-- Token locations will be populated by JavaScript -->
-                </div>
-            </div>
-        </div>
-
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
             <div class="nav-tabs">
@@ -314,6 +318,46 @@
                 </div>
             </div>
         </nav>
+
+        <!-- UPDATED: Ember Tokens Nearby Slider with Radar (Behind Bottom Nav) -->
+        <div class="token-locations-module collapsed" id="tokenLocationsModule">
+            <div class="swipe-handle" id="swipeHandle">
+                <div class="handle-bar"></div>
+                <div class="handle-text">
+                    <span class="handle-title">
+                        <div class="ember-icons-container">
+                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
+                            <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
+                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
+                            <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
+                        </div>
+                        $Ember Tokens Nearby
+                    </span>
+                    <!-- REPLACED: Badge with Radar Component -->
+                    <div class="radar-scanner" id="radarScanner">
+                        <div class="radar-circle">
+                            <div class="radar-sweep" id="radarSweep"></div>
+                            <div class="radar-center"></div>
+                            <div class="radar-dots" id="radarDots">
+                                <!-- Dots will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="module-content" id="moduleContent">
+                <div class="module-header">
+                    <div class="module-title">
+                        <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
+                        Collectable Tokens
+                    </div>
+                    <div class="total-available" id="totalAvailable">Ready for collection</div>
+                </div>
+                <div class="token-locations-list" id="tokenLocationsList">
+                    <!-- Token locations will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
 
         <!-- Token Collection Modal - FIXED: Mobile height constraints -->
         <div class="token-modal" id="tokenModal" style="display: none;">
