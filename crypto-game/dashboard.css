@@ -1439,21 +1439,21 @@ html, body {
     border: 1px solid rgba(240, 165, 0, 0.3);
     border-bottom: none;
     box-shadow: 0 -8px 24px rgba(240, 165, 0, 0.2);
-    /* UPDATED: Start completely hidden behind bottom nav */
-    transform: translateY(calc(100% - env(safe-area-inset-bottom, 8px) - 80px));
+    /* FIXED: Show handle above bottom nav but content hidden */
+    transform: translateY(calc(100% - 85px));
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    max-height: 60vh;
+    max-height: 70vh;
     overflow: hidden;
 }
 
 .token-locations-module.expanded {
     /* UPDATED: Slide up from behind bottom nav */
-    transform: translateY(calc(env(safe-area-inset-bottom, 8px) + 80px));
+    transform: translateY(0);
 }
 
 .token-locations-module.collapsed {
-    /* UPDATED: Hide behind bottom nav, showing only handle */
-    transform: translateY(calc(100% - env(safe-area-inset-bottom, 8px) - 80px));
+    /* FIXED: Show handle above bottom nav, content hidden */
+    transform: translateY(calc(100% - 85px));
 }
 
 .swipe-handle {
