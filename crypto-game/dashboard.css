@@ -1745,8 +1745,9 @@ html, body {
 }
 
 .token-location-icon {
-    width: 36px;
-    height: 36px;
+    /* INCREASED SIZE for better visibility */
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: rgba(240, 165, 0, 0.2);
     border: 2px solid rgba(240, 165, 0, 0.4);
@@ -1766,8 +1767,9 @@ html, body {
 }
 
 .token-location-icon img {
-    width: 20px;
-    height: 20px;
+    /* INCREASED SIZE to match larger container */
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     filter: brightness(1.1);
 }
@@ -1834,7 +1836,7 @@ html, body {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 30; /* Higher than slider (25) so it appears on top */
+    z-index: 50; /* Higher than slider (40) so it appears on top */
     background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.98) 100%);
     backdrop-filter: blur(25px);
     border-top: 1px solid rgba(240, 165, 0, 0.2);
