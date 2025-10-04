@@ -1,5 +1,5 @@
 /* Vault Phoenix AR Crypto Gaming - COMPLETE CSS FILE */
-/* IMPROVED: Better airdrop experience, AR compass, no token labels, fixed token routing */
+/* FIXED: Token overlap issue - proper spacing between green and red tokens */
 
 /* =================== CORE RESET & STRUCTURE =================== */
 * {
@@ -786,7 +786,7 @@ html, body {
     }
 }
 
-/* =================== IMPROVED TOKEN MARKERS - NO LABELS =================== */
+/* =================== FIXED TOKEN MARKERS - PROPER SPACING =================== */
 .token-markers {
     position: absolute;
     top: 0;
