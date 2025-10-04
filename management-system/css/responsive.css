@@ -1,0 +1,776 @@
+/* ============================================
+   VAULT PHOENIX MANAGEMENT SYSTEM
+   Responsive Design - Desktop-Optimized
+   ============================================ */
+
+/* ============================================
+   DESKTOP FIRST - LARGE SCREENS (1440px+)
+   ============================================ */
+
+@media (min-width: 1440px) {
+    :root {
+        --max-width: 1600px;
+        --sidebar-width: 300px;
+    }
+    
+    .container {
+        max-width: 1600px;
+    }
+    
+    .main-content {
+        padding: var(--spacing-4xl) var(--spacing-3xl);
+    }
+    
+    .hero-stats {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .apps-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .monitoring-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+    }
+}
+
+/* ============================================
+   STANDARD DESKTOP (1200px - 1439px)
+   ============================================ */
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .hero-stats {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .apps-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .revenue-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ============================================
+   SMALL DESKTOP / LARGE TABLET (1024px - 1199px)
+   ============================================ */
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+    :root {
+        --sidebar-width: 260px;
+    }
+    
+    .main-content {
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+    
+    .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .apps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .revenue-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .performance-cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Adjust font sizes slightly */
+    .page-title {
+        font-size: 1.6rem;
+    }
+    
+    .stat-value {
+        font-size: 2.2rem;
+    }
+}
+
+/* ============================================
+   TABLET LANDSCAPE (768px - 1023px)
+   ============================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    :root {
+        --sidebar-width: 240px;
+        --header-height: 70px;
+    }
+    
+    /* Hide sidebar by default on tablet */
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: var(--z-modal);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Adjust header for mobile sidebar */
+    .dashboard-header {
+        left: 0;
+        padding: 0 var(--spacing-md);
+    }
+    
+    /* Add hamburger menu button */
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: var(--card-radius-small);
+        cursor: pointer;
+        transition: all var(--transition-normal);
+    }
+    
+    .menu-toggle:hover {
+        border-color: var(--card-border-hover);
+    }
+    
+    /* Full width main content */
+    .main-content {
+        margin-left: 0;
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+    
+    /* Grid adjustments */
+    .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+    
+    .apps-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+    
+    .revenue-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .monitoring-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .performance-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Reduce font sizes */
+    .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .stat-value {
+        font-size: 2rem;
+    }
+    
+    .revenue-amount {
+        font-size: 2.5rem;
+    }
+    
+    .revenue-total-amount {
+        font-size: 3rem;
+    }
+    
+    /* Hide less important elements */
+    .breadcrumb {
+        display: none;
+    }
+    
+    .user-name {
+        display: none;
+    }
+    
+    /* Simplify token balance widget */
+    .token-balance-widget {
+        padding: 8px 14px;
+    }
+    
+    .token-value {
+        display: none;
+    }
+}
+
+/* ============================================
+   TABLET PORTRAIT / LARGE MOBILE (480px - 767px)
+   ============================================ */
+
+@media (min-width: 480px) and (max-width: 767px) {
+    :root {
+        --sidebar-width: 100%;
+        --header-height: 60px;
+    }
+    
+    /* Sidebar full screen on mobile */
+    .sidebar {
+        width: 100%;
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    /* Header adjustments */
+    .dashboard-header {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .page-title {
+        font-size: 1.3rem;
+    }
+    
+    .header-right {
+        gap: var(--spacing-xs);
+    }
+    
+    /* Hide token balance text on very small screens */
+    .token-count {
+        font-size: 0.9rem;
+    }
+    
+    /* Main content */
+    .main-content {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+    
+    /* Single column layouts */
+    .hero-stats {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .apps-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .revenue-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .monitoring-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .performance-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+    
+    /* Stat cards */
+    .stat-card {
+        padding: var(--spacing-md);
+    }
+    
+    .stat-value {
+        font-size: 1.8rem;
+    }
+    
+    .stat-label {
+        font-size: 0.85rem;
+    }
+    
+    /* App cards */
+    .app-card {
+        padding: var(--spacing-md);
+    }
+    
+    .app-name {
+        font-size: 1.1rem;
+    }
+    
+    /* Revenue cards */
+    .revenue-stream {
+        padding: var(--spacing-lg);
+    }
+    
+    .revenue-amount {
+        font-size: 2rem;
+    }
+    
+    .revenue-total-amount {
+        font-size: 2.5rem;
+    }
+    
+    /* Live monitoring */
+    .live-map {
+        height: 300px;
+    }
+    
+    .monitoring-panel {
+        padding: var(--spacing-md);
+    }
+    
+    /* Activity feed */
+    .activity-feed {
+        max-height: 300px;
+    }
+    
+    .activity-item {
+        padding: var(--spacing-xs);
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .btn-large {
+        padding: 14px 30px;
+        font-size: 1rem;
+    }
+    
+    /* Tables */
+    .merchants-table {
+        font-size: 0.85rem;
+    }
+    
+    .merchants-table th,
+    .merchants-table td {
+        padding: var(--spacing-xs);
+    }
+    
+    /* Section spacing */
+    .dashboard-section {
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+}
+
+/* ============================================
+   MOBILE (320px - 479px)
+   ============================================ */
+
+@media (max-width: 479px) {
+    :root {
+        --sidebar-width: 100%;
+        --header-height: 60px;
+        --spacing-xs: 6px;
+        --spacing-sm: 12px;
+        --spacing-md: 18px;
+        --spacing-lg: 24px;
+        --spacing-xl: 32px;
+    }
+    
+    html {
+        font-size: 14px;
+    }
+    
+    /* Sidebar full screen */
+    .sidebar {
+        width: 100%;
+        padding: var(--spacing-md);
+    }
+    
+    .sidebar-logo {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .sidebar-brand {
+        font-size: 1.1rem;
+    }
+    
+    /* Header very compact */
+    .dashboard-header {
+        padding: 0 var(--spacing-sm);
+        height: 60px;
+    }
+    
+    .page-title {
+        font-size: 1.1rem;
+    }
+    
+    .header-right {
+        gap: 4px;
+    }
+    
+    /* Hide non-essential header items */
+    .role-switcher {
+        display: none;
+    }
+    
+    .token-balance-widget {
+        padding: 6px 10px;
+    }
+    
+    .token-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .token-count {
+        font-size: 0.8rem;
+    }
+    
+    .notification-bell {
+        padding: 6px;
+    }
+    
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+    
+    /* Main content very compact */
+    .main-content {
+        padding: var(--spacing-sm);
+        margin-top: 60px;
+    }
+    
+    /* All grids single column */
+    .hero-stats,
+    .apps-grid,
+    .revenue-grid,
+    .monitoring-grid,
+    .performance-cards {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    /* Stat cards */
+    .stat-card {
+        padding: var(--spacing-sm);
+    }
+    
+    .stat-icon {
+        font-size: 1.5rem;
+    }
+    
+    .stat-value {
+        font-size: 1.6rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    /* App cards */
+    .app-card {
+        padding: var(--spacing-sm);
+    }
+    
+    .app-name {
+        font-size: 1rem;
+    }
+    
+    .app-metric {
+        padding: 6px 0;
+        font-size: 0.85rem;
+    }
+    
+    .app-actions {
+        flex-direction: column;
+    }
+    
+    /* Revenue cards */
+    .revenue-stream {
+        padding: var(--spacing-md);
+    }
+    
+    .revenue-icon {
+        font-size: 2rem;
+    }
+    
+    .revenue-title {
+        font-size: 1.2rem;
+    }
+    
+    .revenue-amount {
+        font-size: 1.8rem;
+    }
+    
+    .revenue-total {
+        padding: var(--spacing-md);
+    }
+    
+    .revenue-total-amount {
+        font-size: 2rem;
+    }
+    
+    /* Live monitoring */
+    .live-monitoring {
+        padding: var(--spacing-md);
+    }
+    
+    .monitoring-title {
+        font-size: 1.2rem;
+    }
+    
+    .live-map {
+        height: 250px;
+    }
+    
+    .monitoring-panel {
+        padding: var(--spacing-sm);
+    }
+    
+    .panel-title {
+        font-size: 1rem;
+    }
+    
+    .map-controls {
+        gap: 4px;
+    }
+    
+    .map-controls .btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+    
+    /* Activity feed */
+    .activity-feed {
+        max-height: 250px;
+    }
+    
+    .activity-item {
+        padding: var(--spacing-xs);
+        gap: var(--spacing-xs);
+    }
+    
+    .activity-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+    
+    .activity-text {
+        font-size: 0.85rem;
+    }
+    
+    .activity-time {
+        font-size: 0.75rem;
+    }
+    
+    /* Airdrop controls */
+    .airdrop-controls {
+        padding: var(--spacing-sm);
+    }
+    
+    .form-group {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .form-input {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .radio-group {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .btn-large {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+    
+    .btn-small {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+    }
+    
+    /* Tables - force horizontal scroll */
+    .merchants-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .merchants-table {
+        min-width: 600px;
+        font-size: 0.8rem;
+    }
+    
+    .merchants-table th,
+    .merchants-table td {
+        padding: 8px;
+        white-space: nowrap;
+    }
+    
+    /* Section headers */
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+    }
+    
+    .section-actions {
+        width: 100%;
+    }
+    
+    .section-actions .btn {
+        flex: 1;
+    }
+    
+    /* Dashboard section spacing */
+    .dashboard-section {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    /* Cards */
+    .card {
+        padding: var(--spacing-md);
+        border-radius: var(--card-radius-medium);
+    }
+    
+    /* Performance cards */
+    .performance-card {
+        padding: var(--spacing-sm);
+    }
+    
+    .performance-value {
+        font-size: 1.5rem;
+    }
+    
+    .performance-label {
+        font-size: 0.8rem;
+    }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION ADJUSTMENTS
+   ============================================ */
+
+@media (max-height: 600px) and (orientation: landscape) {
+    .sidebar {
+        height: 100vh;
+        overflow-y: auto;
+    }
+    
+    .live-map {
+        height: 250px;
+    }
+    
+    .activity-feed {
+        max-height: 200px;
+    }
+    
+    .main-content {
+        padding-top: var(--spacing-lg);
+        padding-bottom: var(--spacing-lg);
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+    .sidebar,
+    .dashboard-header,
+    .menu-toggle,
+    .notification-bell,
+    .user-profile,
+    .role-switcher,
+    .section-actions,
+    .app-actions,
+    .map-controls,
+    .btn {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        margin-top: 0;
+        padding: 0;
+    }
+    
+    .card,
+    .stat-card,
+    .app-card,
+    .revenue-stream {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .page-title,
+    .section-title,
+    .stat-value,
+    .revenue-amount {
+        color: black;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .logo {
+        animation: none;
+    }
+    
+    .status-live {
+        animation: none;
+    }
+}
+
+/* ============================================
+   HIGH CONTRAST MODE
+   ============================================ */
+
+@media (prefers-contrast: high) {
+    :root {
+        --card-border: rgba(255, 255, 255, 0.8);
+        --card-border-hover: rgba(255, 255, 255, 1);
+    }
+    
+    .card,
+    .stat-card,
+    .app-card,
+    .revenue-stream {
+        border-width: 3px;
+    }
+    
+    .btn {
+        border: 2px solid white;
+    }
+}
