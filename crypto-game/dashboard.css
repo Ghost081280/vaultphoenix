@@ -1424,14 +1424,13 @@ html, body {
     width: 100%;
 }
 
-/* =================== UPDATED: EMBER TOKENS SLIDER BEHIND BOTTOM NAV =================== */
+/* =================== EMBER TOKENS SLIDER WITH RADAR SCANNER =================== */
 .token-locations-module {
     position: fixed;
-    /* UPDATED: Position it behind the bottom nav */
-    bottom: 0;
+    bottom: calc(env(safe-area-inset-bottom, 8px) + 80px);
     left: 0;
     right: 0;
-    z-index: 25; /* Lower than bottom nav (30) so it appears behind */
+    z-index: 100;
     background: linear-gradient(180deg, rgba(8, 8, 8, 0.98) 0%, rgba(16, 16, 16, 0.98) 100%);
     backdrop-filter: blur(25px);
     border-top-left-radius: 20px;
@@ -1439,21 +1438,18 @@ html, body {
     border: 1px solid rgba(240, 165, 0, 0.3);
     border-bottom: none;
     box-shadow: 0 -8px 24px rgba(240, 165, 0, 0.2);
-    /* FIXED: Show handle above bottom nav but content hidden */
-    transform: translateY(calc(100% - 85px));
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    max-height: 70vh;
+    transform: translateY(calc(100% - 80px));
+    transition: transform 0.4s ease;
+    max-height: 60vh;
     overflow: hidden;
 }
 
 .token-locations-module.expanded {
-    /* UPDATED: Slide up from behind bottom nav */
     transform: translateY(0);
 }
 
 .token-locations-module.collapsed {
-    /* FIXED: Show handle above bottom nav, content hidden */
-    transform: translateY(calc(100% - 85px));
+    transform: translateY(calc(100% - 80px));
 }
 
 .swipe-handle {
