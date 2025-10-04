@@ -1,4 +1,4 @@
-// Vault Phoenix AR Crypto Gaming - ENHANCED SLIDER NAVIGATION JavaScript
+// Vault Phoenix AR Crypto Gaming - POLISHED ENHANCED SLIDER NAVIGATION JavaScript
 
 (function() {
     const cryptoFlag = document.getElementById('cryptoGameFlag');
@@ -41,6 +41,9 @@ if (window.isVaultPhoenixGame) {
             
             this.moduleExpanded = false;
             this.sponsorExpanded = false;
+            this.isScrollingList = false;
+            this.scrollStartY = 0;
+            this.scrollThreshold = 10;
             
             this.airdropShown = sessionStorage.getItem('vaultPhoenix_airdropShown') === 'true';
             this.airdropTimer = null;
@@ -332,7 +335,6 @@ if (window.isVaultPhoenixGame) {
         }
 
         updateNavigation() {
-            // Update quick nav buttons in slider
             document.querySelectorAll('.quick-nav-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.dataset.nav === this.currentScreen) {
@@ -340,7 +342,6 @@ if (window.isVaultPhoenixGame) {
                 }
             });
             
-            // Update side menu items
             document.querySelectorAll('.menu-item').forEach(item => {
                 item.classList.remove('active');
                 if (item.dataset.mode === this.currentScreen) {
@@ -642,7 +643,7 @@ if (window.isVaultPhoenixGame) {
                 coinImg.onerror = function() {
                     this.style.display = 'none';
                     coin.textContent = '💎';
-                    coin.style.fontSize = '28px';
+                    coin.style.fontSize = '36px';
                     coin.style.color = '#f0a500';
                 };
                 
@@ -1023,35 +1024,99 @@ if (window.isVaultPhoenixGame) {
                                 </div>
                                 <div class="token-sponsor">${token.sponsor}</div>
                             </div>
-                            <div class="token-location-value">${token.value} $Ember</div>
+                            <div class="token-location-value">${token.value}</div>
                         </div>
                     `).join('');
 
-                    tokensList.querySelectorAll('.token-location-item').forEach(item => {
-                        const handleClick = (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            
-                            const tokenId = parseInt(item.dataset.tokenId);
-                            const token = this.emberTokens.find(t => t.id === tokenId);
-                            if (token) {
-                                item.style.transform = 'translateY(-4px) scale(1.02)';
-                                setTimeout(() => {
-                                    item.style.transform = '';
-                                }, 200);
-                                
-                                this.switchScreen('ar', token.id);
-                                this.collapseModule();
-                                
-                                if (navigator.vibrate) navigator.vibrate([30, 10, 30]);
-                            }
-                        };
-
-                        item.addEventListener('click', handleClick);
-                        item.addEventListener('touchend', handleClick);
-                    });
+                    this.setupListItemScrollHandlers();
                 }
             }
+        }
+
+        setupListItemScrollHandlers() {
+            const tokensList = document.getElementById('tokenLocationsList');
+            if (!tokensList) return;
+
+            tokensList.querySelectorAll('.token-location-item').forEach(item => {
+                let touchStartY = 0;
+                let touchStartTime = 0;
+                let hasMoved = false;
+
+                const handleTouchStart = (e) => {
+                    touchStartY = e.touches[0].clientY;
+                    touchStartTime = Date.now();
+                    hasMoved = false;
+                    this.isScrollingList = false;
+                };
+
+                const handleTouchMove = (e) => {
+                    const touchCurrentY = e.touches[0].clientY;
+                    const deltaY = Math.abs(touchCurrentY - touchStartY);
+                    
+                    if (deltaY > this.scrollThreshold) {
+                        hasMoved = true;
+                        this.isScrollingList = true;
+                    }
+                };
+
+                const handleTouchEnd = (e) => {
+                    const touchDuration = Date.now() - touchStartTime;
+                    
+                    if (!hasMoved && touchDuration < 300) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const tokenId = parseInt(item.dataset.tokenId);
+                        const token = this.emberTokens.find(t => t.id === tokenId);
+                        
+                        if (token) {
+                            item.style.transform = 'translateY(-4px) scale(1.02)';
+                            setTimeout(() => {
+                                item.style.transform = '';
+                            }, 200);
+                            
+                            this.switchScreen('ar', token.id);
+                            this.collapseModule();
+                            
+                            if (navigator.vibrate) navigator.vibrate([30, 10, 30]);
+                        }
+                    }
+                    
+                    setTimeout(() => {
+                        this.isScrollingList = false;
+                    }, 100);
+                };
+
+                item.addEventListener('touchstart', handleTouchStart, { passive: true });
+                item.addEventListener('touchmove', handleTouchMove, { passive: true });
+                item.addEventListener('touchend', handleTouchEnd, { passive: false });
+                
+                item.addEventListener('click', (e) => {
+                    if (this.isScrollingList || hasMoved) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const tokenId = parseInt(item.dataset.tokenId);
+                    const token = this.emberTokens.find(t => t.id === tokenId);
+                    
+                    if (token) {
+                        item.style.transform = 'translateY(-4px) scale(1.02)';
+                        setTimeout(() => {
+                            item.style.transform = '';
+                        }, 200);
+                        
+                        this.switchScreen('ar', token.id);
+                        this.collapseModule();
+                        
+                        if (navigator.vibrate) navigator.vibrate([30, 10, 30]);
+                    }
+                });
+            });
         }
 
         setupSwipeableModule() {
@@ -1065,25 +1130,30 @@ if (window.isVaultPhoenixGame) {
             let startY = 0;
             let currentY = 0;
             let isDragging = false;
+            let dragStartTime = 0;
 
             const handleTouchStart = (e) => {
+                if (this.isScrollingList) return;
+                
                 isDragging = true;
                 startY = e.touches ? e.touches[0].clientY : e.clientY;
                 currentY = startY;
+                dragStartTime = Date.now();
                 e.preventDefault();
             };
 
             const handleTouchMove = (e) => {
-                if (!isDragging) return;
+                if (!isDragging || this.isScrollingList) return;
                 currentY = e.touches ? e.touches[0].clientY : e.clientY;
                 e.preventDefault();
             };
 
             const handleTouchEnd = (e) => {
-                if (!isDragging) return;
+                if (!isDragging || this.isScrollingList) return;
                 isDragging = false;
                 
                 const deltaY = startY - currentY;
+                const dragDuration = Date.now() - dragStartTime;
                 const threshold = 50;
                 
                 if (Math.abs(deltaY) > threshold) {
@@ -1092,7 +1162,7 @@ if (window.isVaultPhoenixGame) {
                     } else {
                         this.collapseModule();
                     }
-                } else {
+                } else if (dragDuration < 300) {
                     this.toggleModule();
                 }
                 
@@ -1106,7 +1176,9 @@ if (window.isVaultPhoenixGame) {
             handle.addEventListener('mousemove', handleTouchMove, { passive: false });
             handle.addEventListener('mouseup', handleTouchEnd, { passive: false });
             handle.addEventListener('click', () => {
-                this.toggleModule();
+                if (!this.isScrollingList) {
+                    this.toggleModule();
+                }
             }, { passive: false });
         }
 
@@ -1304,7 +1376,6 @@ if (window.isVaultPhoenixGame) {
         }
 
         setupEventListeners() {
-            // Quick Navigation Buttons (in slider)
             document.querySelectorAll('.quick-nav-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1316,7 +1387,6 @@ if (window.isVaultPhoenixGame) {
                 });
             });
 
-            // Side Menu Items
             document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
