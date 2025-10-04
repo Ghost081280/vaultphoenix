@@ -352,6 +352,16 @@ if (window.isVaultPhoenixGame) {
                 // FIXED: Ensure slider is in collapsed state and visible
                 this.collapseModule();
                 
+                // Debug slider positioning
+                const module = document.getElementById('tokenLocationsModule');
+                if (module) {
+                    console.log('📋 Slider element found:', module);
+                    console.log('📋 Slider classes:', module.className);
+                    console.log('📋 Slider style:', window.getComputedStyle(module).transform);
+                } else {
+                    console.error('❌ Slider element NOT found!');
+                }
+                
                 // Start airdrop system with 7-9 second delay, once per session
                 if (!this.airdropShown) {
                     this.startAirdropSystem();
