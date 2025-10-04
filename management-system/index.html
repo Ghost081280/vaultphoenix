@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault Phoenix Management System - Select Role</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/role-selection.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="logo" onerror="this.style.display='none'">
+                <h1>Vault Phoenix</h1>
+            </div>
+            <p class="subtitle">Enterprise Management System</p>
+            <p class="description">
+                Control center for AR crypto gaming campaigns. Manage multi-app deployments, 
+                token distributions, merchant partnerships, and real-time player engagement across your entire ecosystem.
+            </p>
+        </div>
+
+        <div class="role-grid">
+            <div class="role-card" onclick="selectRole('platform-operator')">
+                <div class="role-icon">🚀</div>
+                <h2 class="role-title">Platform Operator</h2>
+                <p class="role-description">
+                    Launch and manage AR crypto gaming campaigns. Control token distributions, monitor live player activity, and oversee revenue streams.
+                </p>
+                <ul class="role-features">
+                    <li>Campaign Control Center</li>
+                    <li>Live Player Monitoring</li>
+                    <li>Airdrop Management</li>
+                    <li>$100 Starter Token Bonus</li>
+                    <li>Multi-App Dashboard</li>
+                </ul>
+                <button class="role-button">Launch Dashboard</button>
+            </div>
+
+            <div class="role-card" onclick="selectRole('sdk-customer')">
+                <div class="role-icon">🔌</div>
+                <h2 class="role-title">SDK Customer</h2>
+                <p class="role-description">
+                    Integrate Vault Phoenix into your applications. Manage cross-platform campaigns, aggregate analytics, and distribute tokens across multiple apps.
+                </p>
+                <ul class="role-features">
+                    <li>Multi-App Integration</li>
+                    <li>Aggregated Analytics</li>
+                    <li>Cross-Platform Airdrops</li>
+                    <li>$100 Integration Bonus</li>
+                    <li>API Documentation</li>
+                </ul>
+                <button class="role-button">Launch Dashboard</button>
+            </div>
+
+            <div class="role-card" onclick="selectRole('merchant')">
+                <div class="role-icon">🏢</div>
+                <h2 class="role-title">Merchant</h2>
+                <p class="role-description">
+                    Drive foot traffic to your locations with AR crypto gaming. Track visitor metrics, manage payments, and view ROI with simple business analytics.
+                </p>
+                <ul class="role-features">
+                    <li>GPS-Verified Visitor Tracking</li>
+                    <li>Simple Payment Management</li>
+                    <li>ROI Calculator</li>
+                    <li>Performance Metrics</li>
+                    <li>Budget Planning Tools</li>
+                </ul>
+                <button class="role-button">Launch Dashboard</button>
+            </div>
+
+            <div class="role-card" onclick="selectRole('system-admin')">
+                <div class="role-icon">⚙️</div>
+                <h2 class="role-title">System Admin</h2>
+                <p class="role-description">
+                    Full system oversight and configuration. Manage token economics, Smithii.io integration, user accounts, and global platform analytics.
+                </p>
+                <ul class="role-features">
+                    <li>Token Economics Dashboard</li>
+                    <li>Smithii.io Integration</li>
+                    <li>User Management</li>
+                    <li>Revenue Monitoring</li>
+                    <li>Compliance Center</li>
+                </ul>
+                <button class="role-button">Launch Dashboard</button>
+            </div>
+        </div>
+
+        <div class="demo-notice">
+            <h3>🎮 Demo Mode</h3>
+            <p>
+                This is a demonstration of the Vault Phoenix Management System. In the full version, users would authenticate 
+                and be automatically assigned their appropriate role. For this demo, you can switch between roles to explore 
+                each interface. Data shown is simulated but represents real system capabilities.
+            </p>
+        </div>
+    </div>
+
+    <script src="js/role-selection.js"></script>
+</body>
+</html>
