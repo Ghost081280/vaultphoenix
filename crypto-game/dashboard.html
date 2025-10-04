@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body class="crypto-dashboard-page">
-    <!-- CRYPTO GAME PROTECTION FLAG -->
-    <div id="cryptoGameFlag" style="display: none;">CRYPTO_GAME_PAGE</div>
-    
     <div id="gameContainer">
         <!-- Top Navigation -->
         <nav class="top-nav">
@@ -102,7 +99,7 @@
             </div>
         </div>
 
-        <!-- IMPROVED AIRDROP NOTIFICATION -->
+        <!-- Airdrop Notification -->
         <div class="airdrop-notification" id="airdropNotification">
             <div class="airdrop-content">
                 <div class="airdrop-header">
@@ -124,15 +121,13 @@
         </div>
         
         <!-- Hunt Screen -->
-        <div class="hunt-screen" id="huntScreen">
+        <div class="hunt-screen active" id="huntScreen">
             <div class="map-container" id="mapContainer">
                 <div class="phoenix-map" id="phoenixMap">
                     <!-- Map Background Elements -->
                     <div class="map-roads">
-                        <!-- Major Highways -->
                         <div class="highway highway-i10"></div>
                         <div class="highway highway-i17"></div>
-                        <!-- Streets -->
                         <div class="street central-ave"></div>
                         <div class="street camelback-rd"></div>
                         <div class="street mcdowell-rd"></div>
@@ -166,16 +161,16 @@
             <!-- Map Controls -->
             <div class="map-controls">
                 <button class="map-control-btn" id="zoomInBtn">+</button>
-                <button class="map-control-btn" id="zoomOutBtn">-</button>
+                <button class="map-control-btn" id="zoomOutBtn">−</button>
                 <button class="map-control-btn center-btn" id="centerMapBtn">🎯</button>
             </div>
         </div>
 
         <!-- AR View Screen -->
-        <div class="ar-screen" id="arScreen" style="display: none;">
+        <div class="ar-screen" id="arScreen">
             <video id="cameraVideo" autoplay muted playsinline></video>
             <div class="ar-overlay">
-                <!-- AR Compass - FIXED: Points North -->
+                <!-- AR Compass -->
                 <div class="ar-compass" id="arCompass">
                     <div class="compass-ring">
                         <div class="compass-needle" id="compassNeedle"></div>
@@ -201,8 +196,8 @@
             </div>
         </div>
 
-        <!-- IMPROVED VAULT SCREEN -->
-        <div class="vault-screen" id="vaultScreen" style="display: none;">
+        <!-- Vault Screen -->
+        <div class="vault-screen" id="vaultScreen">
             <div class="vault-container">
                 <div class="vault-header">
                     <div class="vault-title">
@@ -261,12 +256,44 @@
                     </div>
                 </div>
                 
-                <!-- Vault padding bottom for token slider -->
                 <div class="vault-bottom-padding"></div>
             </div>
         </div>
 
-        <!-- Bottom Navigation -->
+        <!-- Ember Tokens Nearby Slider (Behind Bottom Nav) -->
+        <div class="token-locations-module collapsed" id="tokenLocationsModule">
+            <div class="swipe-handle" id="swipeHandle">
+                <div class="handle-bar"></div>
+                <div class="handle-content">
+                    <div class="handle-left">
+                        <div class="ember-icons-row">
+                            <img src="../images/VPEmberCoin.PNG" alt="Ember" class="ember-icon-large" onerror="this.textContent='💎'">
+                            <img src="../images/VPEmberFlame.svg" alt="Flame" class="ember-icon-large" onerror="this.textContent='🔥'">
+                        </div>
+                        <span class="handle-title">$Ember Tokens Nearby</span>
+                    </div>
+                    <div class="radar-scanner" id="radarScanner">
+                        <div class="radar-circle">
+                            <div class="radar-sweep"></div>
+                            <div class="radar-center"></div>
+                            <div class="radar-dots" id="radarDots"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="module-content" id="moduleContent">
+                <div class="module-header">
+                    <div class="module-title">
+                        <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
+                        Collectable Tokens
+                    </div>
+                    <div class="total-available" id="totalAvailable">Ready for collection</div>
+                </div>
+                <div class="token-locations-list" id="tokenLocationsList"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation (On Top) -->
         <nav class="bottom-nav">
             <div class="nav-tabs">
                 <div class="nav-tab active" data-mode="hunt" id="tabHunt">
@@ -284,48 +311,8 @@
             </div>
         </nav>
 
-        <!-- Ember Tokens Nearby Slider (Appears on all screens) -->
-        <div class="token-locations-module collapsed" id="tokenLocationsModule">
-            <div class="swipe-handle" id="swipeHandle">
-                <div class="handle-bar"></div>
-                <div class="handle-text">
-                    <span class="handle-title">
-                        <div class="ember-icons-container">
-                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
-                            <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
-                            <img src="../images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-icon" onerror="this.textContent='💎'">
-                            <img src="../images/VPEmberFlame.svg" alt="Ember Flame" class="ember-icon" onerror="this.textContent='🔥'">
-                        </div>
-                        $Ember Tokens Nearby
-                    </span>
-                    <!-- REPLACED: Badge with Radar Component -->
-                    <div class="radar-scanner" id="radarScanner">
-                        <div class="radar-circle">
-                            <div class="radar-sweep" id="radarSweep"></div>
-                            <div class="radar-center"></div>
-                            <div class="radar-dots" id="radarDots">
-                                <!-- Dots will be populated by JavaScript -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="module-content" id="moduleContent">
-                <div class="module-header">
-                    <div class="module-title">
-                        <img src="../images/VPEmberCoin.PNG" alt="Ember" class="module-ember-icon" onerror="this.textContent='💎'">
-                        Collectable Tokens
-                    </div>
-                    <div class="total-available" id="totalAvailable">Ready for collection</div>
-                </div>
-                <div class="token-locations-list" id="tokenLocationsList">
-                    <!-- Token locations will be populated by JavaScript -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Token Collection Modal - FIXED: Mobile height constraints -->
-        <div class="token-modal" id="tokenModal" style="display: none;">
+        <!-- Token Collection Modal -->
+        <div class="token-modal" id="tokenModal">
             <div class="token-modal-content">
                 <div class="token-modal-header">
                     <div class="token-found-title" id="tokenFoundTitle">
@@ -345,26 +332,20 @@
                     </div>
                 </div>
                 
-                <!-- EXPANDABLE SPONSOR MESSAGE -->
                 <div class="sponsor-message" id="sponsorMessage">
                     <div class="sponsor-title" id="sponsorTitle">Sponsored by Phoenix Plaza</div>
                     <div class="sponsor-text" id="sponsorText">Exclusive downtown experience awaits!</div>
                     
-                    <!-- EXPANDABLE DETAILS SECTION -->
                     <div class="sponsor-details-expandable" id="sponsorDetailsExpandable" style="display: none;">
                         <div class="sponsor-description" id="sponsorDescription">
                             Experience VIP access to downtown events, priority parking, and exclusive dining experiences.
                         </div>
                         
-                        <!-- REDEMPTION OPTIONS -->
                         <div class="redemption-section-compact">
                             <div class="redemption-title-compact">Redeem Your $Ember For:</div>
-                            <div class="redemption-options-compact" id="redemptionOptionsCompact">
-                                <!-- Will be populated by JavaScript -->
-                            </div>
+                            <div class="redemption-options-compact" id="redemptionOptionsCompact"></div>
                         </div>
                         
-                        <!-- Location Actions -->
                         <div class="location-actions">
                             <button class="location-action-btn primary" id="getDirectionsBtn">
                                 <span>🗺️</span>
@@ -377,7 +358,6 @@
                         </div>
                     </div>
                     
-                    <!-- LEARN MORE TOGGLE BUTTON -->
                     <button class="learn-more-toggle" id="learnMoreToggle">
                         <span class="toggle-text" id="toggleText">Learn More</span>
                         <span class="toggle-icon" id="toggleIcon">▼</span>
@@ -409,7 +389,7 @@
         </div>
 
         <!-- Navigation Modal -->
-        <div class="navigation-modal" id="navigationModal" style="display: none;">
+        <div class="navigation-modal" id="navigationModal">
             <div class="navigation-content">
                 <div class="navigation-header">
                     <div class="navigation-title">
@@ -445,7 +425,7 @@
         </div>
 
         <!-- Reset Game Confirmation Modal -->
-        <div class="reset-game-overlay" id="resetGameOverlay" style="display: none;">
+        <div class="reset-game-overlay" id="resetGameOverlay">
             <div class="reset-game-modal">
                 <div class="reset-game-modal-title">🔄 Reset Game Progress</div>
                 <div class="reset-game-modal-text">
@@ -465,7 +445,7 @@
         </div>
 
         <!-- Logout Confirmation -->
-        <div class="logout-overlay" id="logoutOverlay" style="display: none;">
+        <div class="logout-overlay" id="logoutOverlay">
             <div class="logout-modal">
                 <div class="logout-modal-title">🚪 Sign Out</div>
                 <div class="logout-modal-text">
@@ -479,7 +459,7 @@
         </div>
         
         <!-- QR Modal -->
-        <div class="qr-modal" id="qrModal" style="display: none;">
+        <div class="qr-modal" id="qrModal">
             <div class="qr-modal-content">
                 <div class="qr-modal-header">
                     <h3 id="qrModalTitle">🔥 Payment QR Code</h3>
