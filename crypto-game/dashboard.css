@@ -879,7 +879,7 @@ html, body {
 
 .map-controls {
     position: fixed;
-    bottom: calc(env(safe-area-inset-bottom, 14px) + 200px);
+    bottom: calc(env(safe-area-inset-bottom, 14px) + 130px);
     right: 20px;
     z-index: 80;
     display: flex;
@@ -1159,7 +1159,7 @@ html, body {
     max-width: 600px;
     margin: 0 auto;
     min-height: calc(100vh - calc(env(safe-area-inset-top, 8px) + 72px));
-    padding-bottom: calc(env(safe-area-inset-bottom, 12px) + 200px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 12px) + 130px);
 }
 
 .vault-header {
@@ -1395,7 +1395,7 @@ html, body {
     width: 100%;
 }
 
-/* =================== ENHANCED SLIDER MODULE (PRIMARY NAVIGATION) =================== */
+/* =================== ENHANCED SLIDER MODULE (COMPACT PRIMARY NAVIGATION) =================== */
 .token-locations-module {
     position: fixed;
     bottom: 0;
@@ -1409,7 +1409,7 @@ html, body {
     border: 1px solid rgba(240, 165, 0, 0.3);
     border-bottom: none;
     box-shadow: 0 -8px 32px rgba(240, 165, 0, 0.2);
-    transform: translateY(calc(100% - 160px));
+    transform: translateY(calc(100% - 100px));
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     max-height: 70vh;
     overflow: hidden;
@@ -1420,13 +1420,13 @@ html, body {
 }
 
 .swipe-handle {
-    padding: 20px 20px 16px 20px;
+    padding: 12px 16px 10px 16px;
     cursor: pointer;
     user-select: none;
     border-bottom: 1px solid rgba(240, 165, 0, 0.2);
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.12), rgba(251, 146, 60, 0.08));
     touch-action: manipulation;
-    min-height: 160px;
+    min-height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1435,72 +1435,69 @@ html, body {
 }
 
 .handle-bar {
-    width: 50px;
-    height: 5px;
+    width: 40px;
+    height: 4px;
     background: linear-gradient(90deg, #f0a500, #fb923c);
-    border-radius: 3px;
-    margin: 0 auto 16px auto;
+    border-radius: 2px;
+    margin: 0 auto 10px auto;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(240, 165, 0, 0.4);
 }
 
 .swipe-handle:active .handle-bar {
-    width: 60px;
+    width: 50px;
     box-shadow: 0 3px 12px rgba(240, 165, 0, 0.6);
 }
 
-.handle-content {
+.handle-content-compact {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
 }
 
-.handle-left {
+.ember-icons-compact {
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex: 1;
+    gap: 6px;
+    flex-shrink: 0;
 }
 
-.ember-icons-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.ember-icon-large {
-    width: 36px;
-    height: 36px;
+.ember-icon-compact {
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    filter: brightness(1.2) drop-shadow(0 2px 8px rgba(240, 165, 0, 0.4));
+    filter: brightness(1.2) drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
     animation: emberIconFloat 3s ease-in-out infinite;
 }
 
-.ember-icon-large:nth-child(2) { 
+.ember-icon-compact:nth-child(2) { 
     animation-delay: 0.4s; 
 }
 
 @keyframes emberIconFloat {
     0%, 100% { 
         transform: translateY(0) rotate(0deg);
-        filter: brightness(1.2) drop-shadow(0 2px 8px rgba(240, 165, 0, 0.4));
+        filter: brightness(1.2) drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
     }
     50% { 
-        transform: translateY(-4px) rotate(5deg);
-        filter: brightness(1.4) drop-shadow(0 4px 12px rgba(240, 165, 0, 0.6));
+        transform: translateY(-3px) rotate(5deg);
+        filter: brightness(1.4) drop-shadow(0 4px 10px rgba(240, 165, 0, 0.6));
     }
 }
 
-.handle-title {
+.handle-title-compact {
     color: white;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 800;
     letter-spacing: -0.3px;
+    flex: 1;
+    text-align: center;
 }
 
-.radar-scanner {
-    width: 64px;
-    height: 64px;
+.radar-scanner-compact {
+    width: 50px;
+    height: 50px;
     position: relative;
     flex-shrink: 0;
 }
@@ -1508,7 +1505,7 @@ html, body {
 .radar-circle {
     width: 100%;
     height: 100%;
-    border: 3px solid rgba(76, 175, 80, 0.5);
+    border: 2px solid rgba(76, 175, 80, 0.5);
     border-radius: 50%;
     position: relative;
     background: radial-gradient(
@@ -1518,8 +1515,8 @@ html, body {
         transparent 70%
     );
     box-shadow: 
-        0 0 24px rgba(76, 175, 80, 0.4),
-        inset 0 0 24px rgba(76, 175, 80, 0.15);
+        0 0 20px rgba(76, 175, 80, 0.4),
+        inset 0 0 20px rgba(76, 175, 80, 0.15);
     animation: radarPulse 3s ease-in-out infinite;
 }
 
@@ -1527,14 +1524,14 @@ html, body {
     0%, 100% { 
         border-color: rgba(76, 175, 80, 0.5);
         box-shadow: 
-            0 0 24px rgba(76, 175, 80, 0.4),
-            inset 0 0 24px rgba(76, 175, 80, 0.15);
+            0 0 20px rgba(76, 175, 80, 0.4),
+            inset 0 0 20px rgba(76, 175, 80, 0.15);
     }
     50% { 
         border-color: rgba(76, 175, 80, 0.9);
         box-shadow: 
-            0 0 36px rgba(76, 175, 80, 0.7),
-            inset 0 0 36px rgba(76, 175, 80, 0.25);
+            0 0 30px rgba(76, 175, 80, 0.7),
+            inset 0 0 30px rgba(76, 175, 80, 0.25);
     }
 }
 
@@ -1542,7 +1539,7 @@ html, body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 3px;
+    width: 2px;
     height: 50%;
     background: linear-gradient(
         to bottom,
@@ -1554,7 +1551,7 @@ html, body {
     transform: translate(-50%, -100%) rotate(0deg);
     animation: radarSweep 2s linear infinite;
     border-radius: 2px;
-    box-shadow: 0 0 12px rgba(76, 175, 80, 0.9);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.9);
 }
 
 @keyframes radarSweep {
@@ -1566,23 +1563,23 @@ html, body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     background: #4CAF50;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px rgba(76, 175, 80, 0.9);
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.9);
     animation: radarCenterPulse 1.5s ease-in-out infinite;
 }
 
 @keyframes radarCenterPulse {
     0%, 100% { 
         transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 10px rgba(76, 175, 80, 0.9);
+        box-shadow: 0 0 8px rgba(76, 175, 80, 0.9);
     }
     50% { 
-        transform: translate(-50%, -50%) scale(1.6);
-        box-shadow: 0 0 18px rgba(76, 175, 80, 1);
+        transform: translate(-50%, -50%) scale(1.5);
+        box-shadow: 0 0 14px rgba(76, 175, 80, 1);
     }
 }
 
@@ -1597,11 +1594,11 @@ html, body {
 
 .radar-dot {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     background: #4CAF50;
     border-radius: 50%;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.9);
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.9);
     animation: radarDotPulse 2s ease-in-out infinite;
 }
 
@@ -1633,18 +1630,18 @@ html, body {
     0%, 100% { 
         opacity: 0.6;
         transform: scale(1);
-        box-shadow: 0 0 8px rgba(76, 175, 80, 0.9);
+        box-shadow: 0 0 6px rgba(76, 175, 80, 0.9);
     }
     50% { 
         opacity: 1;
-        transform: scale(1.4);
-        box-shadow: 0 0 16px rgba(76, 175, 80, 1);
+        transform: scale(1.3);
+        box-shadow: 0 0 12px rgba(76, 175, 80, 1);
     }
 }
 
 .module-content {
     display: none;
-    max-height: calc(70vh - 160px);
+    max-height: calc(70vh - 100px);
     overflow-y: auto;
 }
 
@@ -2515,18 +2512,18 @@ html, body {
         max-height: 40vh;
     }
     
-    .radar-scanner {
-        width: 56px;
-        height: 56px;
+    .radar-scanner-compact {
+        width: 46px;
+        height: 46px;
     }
     
-    .ember-icon-large {
-        width: 32px;
-        height: 32px;
+    .ember-icon-compact {
+        width: 26px;
+        height: 26px;
     }
     
-    .handle-title {
-        font-size: 16px;
+    .handle-title-compact {
+        font-size: 14px;
     }
     
     .quick-nav-icon {
@@ -2575,18 +2572,18 @@ html, body {
         max-height: 35vh;
     }
     
-    .radar-scanner {
-        width: 52px;
-        height: 52px;
+    .radar-scanner-compact {
+        width: 42px;
+        height: 42px;
     }
     
-    .ember-icon-large {
-        width: 28px;
-        height: 28px;
+    .ember-icon-compact {
+        width: 24px;
+        height: 24px;
     }
     
-    .handle-title {
-        font-size: 15px;
+    .handle-title-compact {
+        font-size: 13px;
     }
     
     .quick-nav-buttons {
