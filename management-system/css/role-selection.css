@@ -1,0 +1,383 @@
+/* ============================================
+   VAULT PHOENIX MANAGEMENT SYSTEM
+   Role Selection Page Styles
+   ============================================ */
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* ============================================
+   HEADER SECTION
+   ============================================ */
+
+.header {
+    margin-bottom: 60px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(0 0 20px rgba(215, 51, 39, 0.5));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.header h1 {
+    font-size: 3.5rem;
+    font-weight: var(--font-weight-black);
+    margin: 0;
+    background: var(--gradient-ember);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(240, 165, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.4rem;
+    color: var(--color-primary-orange);
+    margin-top: 15px;
+    font-weight: var(--font-weight-medium);
+}
+
+.description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 800px;
+    margin: 30px auto 0;
+    line-height: 1.6;
+}
+
+/* ============================================
+   ROLE GRID
+   ============================================ */
+
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+/* ============================================
+   ROLE CARDS
+   ============================================ */
+
+.role-card {
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: var(--card-radius);
+    padding: 40px 30px;
+    backdrop-filter: blur(20px);
+    box-shadow: var(--card-shadow);
+    transition: all var(--transition-slow) var(--transition-smooth);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.role-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.1), rgba(251, 146, 60, 0.1));
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+    z-index: 0;
+}
+
+.role-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--card-border-hover);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.role-card:hover::before {
+    opacity: 1;
+}
+
+.role-card:active {
+    transform: translateY(-4px);
+}
+
+/* Role Card Content */
+.role-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.role-title {
+    font-size: 1.8rem;
+    font-weight: var(--font-weight-black);
+    margin-bottom: 15px;
+    color: var(--color-primary-gold);
+    position: relative;
+    z-index: 1;
+}
+
+.role-description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Role Features List */
+.role-features {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+}
+
+.role-features li {
+    padding: 8px 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem;
+    transition: color var(--transition-normal);
+}
+
+.role-features li::before {
+    content: '✓';
+    color: var(--color-primary-gold);
+    font-weight: var(--font-weight-bold);
+    margin-right: 10px;
+    display: inline-block;
+    width: 20px;
+}
+
+.role-card:hover .role-features li {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Role Button */
+.role-button {
+    background: var(--gradient-fire);
+    border: none;
+    border-radius: var(--button-radius);
+    padding: 16px 40px;
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-black);
+    color: white;
+    cursor: pointer;
+    box-shadow: var(--button-shadow);
+    transition: all var(--transition-normal) var(--transition-smooth);
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.role-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--button-shadow-hover);
+}
+
+.role-button:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   DEMO NOTICE
+   ============================================ */
+
+.demo-notice {
+    background: rgba(240, 165, 0, 0.1);
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: var(--card-radius-medium);
+    padding: 30px;
+    margin-top: 60px;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+    backdrop-filter: blur(20px);
+}
+
+.demo-notice h3 {
+    color: var(--color-primary-gold);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-black);
+}
+
+.demo-notice p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .role-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    
+    .header h1 {
+        font-size: 3rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+    }
+    
+    .header {
+        margin-bottom: 40px;
+    }
+    
+    .header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .description {
+        font-size: 1rem;
+        margin-top: 20px;
+    }
+    
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .role-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 40px;
+    }
+    
+    .role-card {
+        padding: 30px 20px;
+    }
+    
+    .role-icon {
+        font-size: 3rem;
+    }
+    
+    .role-title {
+        font-size: 1.6rem;
+    }
+    
+    .role-description {
+        font-size: 0.95rem;
+    }
+    
+    .role-features li {
+        font-size: 0.9rem;
+    }
+    
+    .role-button {
+        padding: 14px 32px;
+        font-size: 1rem;
+    }
+    
+    .demo-notice {
+        padding: 25px 20px;
+        margin-top: 40px;
+    }
+    
+    .demo-notice h3 {
+        font-size: 1.3rem;
+    }
+    
+    .demo-notice p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 15px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .description {
+        font-size: 0.9rem;
+    }
+    
+    .logo-container {
+        gap: 15px;
+    }
+    
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .role-card {
+        padding: 25px 15px;
+    }
+    
+    .role-icon {
+        font-size: 2.5rem;
+    }
+    
+    .role-title {
+        font-size: 1.4rem;
+    }
+    
+    .role-button {
+        padding: 12px 28px;
+        font-size: 0.95rem;
+    }
+}
