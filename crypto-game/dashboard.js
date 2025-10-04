@@ -1,9 +1,5 @@
-// Vault Phoenix AR Crypto Gaming - UPDATED JAVASCRIPT
-// UPDATES: Portrait lock, functional radar scanner, slider behind nav
+// Vault Phoenix AR Crypto Gaming - COMPLETE JavaScript
 
-console.log('🔥💎 Vault Phoenix Game Loading with Radar Scanner...');
-
-// IMMEDIATE PROTECTION - CHECK IF THIS IS A CRYPTO GAME PAGE
 (function() {
     const cryptoFlag = document.getElementById('cryptoGameFlag');
     const isCryptoPage = cryptoFlag || 
@@ -11,386 +7,97 @@ console.log('🔥💎 Vault Phoenix Game Loading with Radar Scanner...');
                         window.location.pathname.includes('crypto-game') ||
                         document.title.includes('Vault Phoenix');
     
-    if (!isCryptoPage) {
-        console.log('🚫 Not a crypto game page - blocking game JavaScript execution');
-        return;
-    }
+    if (!isCryptoPage) return;
     
     window.isVaultPhoenixGame = true;
-    console.log('🔥💎 Game JavaScript ACTIVE - Page confirmed');
 })();
 
-// PORTRAIT LOCK ENFORCEMENT
-function enforcePortraitMode() {
-    // Lock screen orientation to portrait if supported
-    if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock('portrait').catch(err => {
-            console.log('📱 Portrait lock not available:', err.message);
-        });
-    }
-    
-    // Alternative method for mobile browsers
-    if (screen.lockOrientation) {
-        screen.lockOrientation('portrait');
-    } else if (screen.webkitLockOrientation) {
-        screen.webkitLockOrientation('portrait');
-    } else if (screen.mozLockOrientation) {
-        screen.mozLockOrientation('portrait');
-    }
-    
-    console.log('📱 Portrait mode enforcement applied');
-}
-
-// ONLY RUN GAME IF THIS IS A CRYPTO GAME PAGE
 if (window.isVaultPhoenixGame) {
 
     class VaultPhoenixGame {
         constructor() {
-            console.log('🔥💎 Vault Phoenix Game initializing with Radar Scanner...');
-            
-            // Core game state
             this.currentScreen = 'hunt';
-            this.playerLat = 33.4484; // Phoenix, AZ demo location
+            this.playerLat = 33.4484;
             this.playerLng = -112.0740;
             this.collectedTokens = [];
             this.totalEmberTokens = 0;
             this.currentDiscoveredToken = null;
             this.currentNavigationToken = null;
             this.showingCollectionActions = false;
+            this.targetedTokenForAR = null;
             
-            // Specific token targeting for AR
-            this.targetedTokenForAR = null; // When clicking from map/slider, only show this token in AR
-            
-            // Map state (optimized for mobile)
             this.mapScale = 1.2;
             this.mapTranslateX = 0;
             this.mapTranslateY = 0;
             this.mapMinScale = 0.8;
             this.mapMaxScale = 2.5;
             this.mapIsDragging = false;
-            this.mapDragThreshold = 8;
+            this.mapDragStart = { x: 0, y: 0 };
             
-            // AR state with FIXED static compass
             this.cameraStream = null;
             this.arTokens = [];
             this.arUITimer = null;
-            // FIXED: Remove compass rotation variables for static north pointing
-            this.watchId = null; // Geolocation watch ID
+            this.watchId = null;
             
-            // Module state
             this.moduleExpanded = false;
-            
-            // Sponsor expandable state
             this.sponsorExpanded = false;
             
-            // IMPROVED AIRDROP SYSTEM with better UX
             this.airdropShown = sessionStorage.getItem('vaultPhoenix_airdropShown') === 'true';
             this.airdropTimer = null;
             this.airdropCountdownTimer = null;
             this.pendingAirdropValue = 0;
             this.airdropCollected = false;
-            this.airdropTimeLeft = 30; // 30 seconds countdown
+            this.airdropTimeLeft = 30;
             
-            // NEW: RADAR SYSTEM
             this.radarUpdateInterval = null;
             this.nearbyTokenCount = 0;
             
-            // FIXED TOKEN SYSTEM - Better spacing to eliminate overlap
             this.emberTokens = [
-                // COLLECTABLE tokens (close to player - GREEN CIRCLES) - All within 25m for demo
-                { 
-                    id: 1, 
-                    value: 500, 
-                    location: "Downtown Phoenix Plaza", 
-                    lat: 33.4485, 
-                    lng: -112.0741, 
-                    sponsor: "Phoenix Downtown Partnership", 
-                    message: "Premium downtown experience awaits!", 
-                    description: "Enjoy VIP access to downtown events, priority parking, and exclusive dining experiences at Phoenix's premier entertainment district.",
-                    distance: 15, 
-                    collectable: true,
-                    mapX: 48, mapY: 46, // FIXED: Moved away from overlap zone
-                    phone: "(602) 555-0123",
-                    address: "1 E Washington St, Phoenix, AZ 85004",
-                    website: "https://downtownphoenix.com",
-                    redemptionOptions: [
-                        { icon: "🍽️", cost: "100 $Ember", desc: "Lunch Credit" },
-                        { icon: "🅿️", cost: "50 $Ember", desc: "Free Parking" },
-                        { icon: "🎫", cost: "200 $Ember", desc: "Event Ticket" },
-                        { icon: "☕", cost: "25 $Ember", desc: "Coffee & Pastry" }
-                    ]
-                },
-                { 
-                    id: 2, 
-                    value: 250, 
-                    location: "Heritage Square", 
-                    lat: 33.4483, 
-                    lng: -112.0742, 
-                    sponsor: "Arizona Heritage Foundation", 
-                    message: "Discover Phoenix history!", 
-                    description: "Experience guided historic tours, museum access, and exclusive educational programs celebrating Arizona's rich cultural heritage.",
-                    distance: 18, 
-                    collectable: true,
-                    mapX: 54, mapY: 54, // FIXED: Moved far from other tokens
-                    phone: "(602) 555-0124",
-                    address: "115 N 6th St, Phoenix, AZ 85004",
-                    website: "https://heritagesquarephx.org",
-                    redemptionOptions: [
-                        { icon: "🏛️", cost: "150 $Ember", desc: "Museum Tour" },
-                        { icon: "📚", cost: "75 $Ember", desc: "History Book" },
-                        { icon: "🎧", cost: "50 $Ember", desc: "Audio Guide" },
-                        { icon: "📸", cost: "100 $Ember", desc: "Photo Package" }
-                    ]
-                },
-                { 
-                    id: 3, 
-                    value: 300, 
-                    location: "Roosevelt Row Arts", 
-                    lat: 33.4486, 
-                    lng: -112.0739, 
-                    sponsor: "Local Artists Collective", 
-                    message: "Support local Phoenix artists!", 
-                    description: "Gain access to exclusive art gallery openings, artist meet-and-greets, and special purchasing opportunities for local artwork.",
-                    distance: 20, 
-                    collectable: true,
-                    mapX: 44, mapY: 42, // FIXED: Properly spaced from others
-                    phone: "(602) 555-0125",
-                    address: "300 E Roosevelt St, Phoenix, AZ 85004",
-                    website: "https://rooseveltrow.org",
-                    redemptionOptions: [
-                        { icon: "🎨", cost: "200 $Ember", desc: "Art Print" },
-                        { icon: "🖼️", cost: "150 $Ember", desc: "Gallery Pass" },
-                        { icon: "☕", cost: "50 $Ember", desc: "Artist Cafe" },
-                        { icon: "🎭", cost: "100 $Ember", desc: "Workshop" }
-                    ]
-                },
-                
-                // DISTANT tokens (require navigation - RED CIRCLES) - All far from player, properly spaced
-                { 
-                    id: 4, 
-                    value: 750, 
-                    location: "Chase Field", 
-                    lat: 33.4453, 
-                    lng: -112.0667, 
-                    sponsor: "Arizona Diamondbacks", 
-                    message: "Baseball season tickets await!", 
-                    description: "Experience premium baseball with season ticket holder perks, dugout tours, and exclusive team merchandise discounts.",
-                    distance: 850, 
-                    collectable: false,
-                    mapX: 46, mapY: 68, // FIXED: Moved away from green tokens
-                    phone: "(602) 555-0126",
-                    address: "401 E Jefferson St, Phoenix, AZ 85004",
-                    website: "https://mlb.com/dbacks",
-                    redemptionOptions: [
-                        { icon: "⚾", cost: "500 $Ember", desc: "Game Ticket" },
-                        { icon: "🍕", cost: "100 $Ember", desc: "Concession Credit" },
-                        { icon: "👕", cost: "200 $Ember", desc: "Team Jersey" },
-                        { icon: "🎫", cost: "300 $Ember", desc: "VIP Experience" }
-                    ]
-                },
-                { 
-                    id: 5, 
-                    value: 400, 
-                    location: "Phoenix Sky Harbor", 
-                    lat: 33.4343, 
-                    lng: -112.0116, 
-                    sponsor: "Sky Harbor Shops", 
-                    message: "Travel rewards await!", 
-                    description: "Unlock travel perks including priority security, duty-free shopping discounts, and airport lounge access benefits.",
-                    distance: 1500, 
-                    collectable: false,
-                    mapX: 35, mapY: 85, // FAR from player - bottom area
-                    phone: "(602) 555-0127",
-                    address: "3400 E Sky Harbor Blvd, Phoenix, AZ 85034",
-                    website: "https://skyharbor.com",
-                    redemptionOptions: [
-                        { icon: "✈️", cost: "300 $Ember", desc: "Lounge Access" },
-                        { icon: "🛍️", cost: "150 $Ember", desc: "Duty Free Deal" },
-                        { icon: "☕", cost: "50 $Ember", desc: "Airport Cafe" },
-                        { icon: "🅿️", cost: "100 $Ember", desc: "Parking Credit" }
-                    ]
-                },
-                { 
-                    id: 6, 
-                    value: 600, 
-                    location: "Scottsdale Quarter", 
-                    lat: 33.4942, 
-                    lng: -111.9261, 
-                    sponsor: "Scottsdale Fashion Square", 
-                    message: "Premium shopping rewards!", 
-                    description: "Enjoy luxury shopping with VIP personal shopping services, exclusive brand access, and special member-only events.",
-                    distance: 2200, 
-                    collectable: false,
-                    mapX: 82, mapY: 25, // FAR from player - top right
-                    phone: "(602) 555-0128",
-                    address: "15059 N Scottsdale Rd, Scottsdale, AZ 85254",
-                    website: "https://fashionsquare.com",
-                    redemptionOptions: [
-                        { icon: "🛍️", cost: "400 $Ember", desc: "Shopping Credit" },
-                        { icon: "💅", cost: "200 $Ember", desc: "Spa Service" },
-                        { icon: "🍽️", cost: "150 $Ember", desc: "Fine Dining" },
-                        { icon: "🎁", cost: "100 $Ember", desc: "Gift Wrap" }
-                    ]
-                },
-                { 
-                    id: 7, 
-                    value: 350, 
-                    location: "Desert Botanical Garden", 
-                    lat: 33.4619, 
-                    lng: -111.9463, 
-                    sponsor: "Garden Cafe", 
-                    message: "Nature dining experience!", 
-                    description: "Experience farm-to-table dining surrounded by stunning desert flora, with guided nature walks and botanical workshops.",
-                    distance: 1800, 
-                    collectable: false,
-                    mapX: 75, mapY: 38, // FAR from player - right side
-                    phone: "(602) 555-0129",
-                    address: "1201 N Galvin Pkwy, Phoenix, AZ 85008",
-                    website: "https://dbg.org",
-                    redemptionOptions: [
-                        { icon: "🌿", cost: "200 $Ember", desc: "Garden Tour" },
-                        { icon: "🥗", cost: "150 $Ember", desc: "Farm Lunch" },
-                        { icon: "🌸", cost: "100 $Ember", desc: "Plant Workshop" },
-                        { icon: "📸", cost: "75 $Ember", desc: "Photo Tour" }
-                    ]
-                },
-                { 
-                    id: 8, 
-                    value: 500, 
-                    location: "Camelback Mountain", 
-                    lat: 33.5186, 
-                    lng: -111.9717, 
-                    sponsor: "Desert Hiking Adventures", 
-                    message: "Gear up for adventure!", 
-                    description: "Professional hiking equipment rentals, guided desert expeditions, and exclusive access to member-only trail experiences.",
-                    distance: 2800, 
-                    collectable: false,
-                    mapX: 68, mapY: 18, // FAR from player - top area
-                    phone: "(602) 555-0130",
-                    address: "5700 N Echo Canyon Pkwy, Phoenix, AZ 85018",
-                    website: "https://hikecamelback.com",
-                    redemptionOptions: [
-                        { icon: "🥾", cost: "300 $Ember", desc: "Gear Rental" },
-                        { icon: "🗺️", cost: "150 $Ember", desc: "Guided Hike" },
-                        { icon: "💧", cost: "50 $Ember", desc: "Water & Snacks" },
-                        { icon: "📱", cost: "100 $Ember", desc: "GPS Device" }
-                    ]
-                },
-                { 
-                    id: 9, 
-                    value: 200, 
-                    location: "Tempe Town Lake", 
-                    lat: 33.4255, 
-                    lng: -111.9400, 
-                    sponsor: "Lakeside Coffee Co.", 
-                    message: "Waterfront coffee experience!", 
-                    description: "Enjoy artisanal coffee with lakeside seating, co-working space access, and exclusive member brewing workshops.",
-                    distance: 1200, 
-                    collectable: false,
-                    mapX: 65, mapY: 78, // FAR from player - bottom right
-                    phone: "(602) 555-0131",
-                    address: "80 W Rio Salado Pkwy, Tempe, AZ 85281",
-                    website: "https://lakesidecoffee.com",
-                    redemptionOptions: [
-                        { icon: "☕", cost: "100 $Ember", desc: "Coffee & Pastry" },
-                        { icon: "💻", cost: "150 $Ember", desc: "Co-work Day Pass" },
-                        { icon: "🥐", cost: "75 $Ember", desc: "Breakfast Set" },
-                        { icon: "📚", cost: "50 $Ember", desc: "WiFi & Book" }
-                    ]
-                },
-                { 
-                    id: 10, 
-                    value: 450, 
-                    location: "Papago Park", 
-                    lat: 33.4581, 
-                    lng: -111.9485, 
-                    sponsor: "Arizona Nature Tours", 
-                    message: "Desert adventure awaits!", 
-                    description: "Guided desert tours, rock climbing experiences, and exclusive access to hidden geological formations with expert naturalists.",
-                    distance: 1600, 
-                    collectable: false,
-                    mapX: 25, mapY: 35, // FAR from player - left side
-                    phone: "(602) 555-0132",
-                    address: "625 N Galvin Pkwy, Phoenix, AZ 85008",
-                    website: "https://arizonanaturetours.com",
-                    redemptionOptions: [
-                        { icon: "🧗", cost: "300 $Ember", desc: "Climbing Tour" },
-                        { icon: "🌵", cost: "150 $Ember", desc: "Nature Walk" },
-                        { icon: "📸", cost: "100 $Ember", desc: "Photo Safari" },
-                        { icon: "🎒", cost: "200 $Ember", desc: "Adventure Kit" }
-                    ]
-                }
+                { id: 1, value: 500, location: "Downtown Phoenix Plaza", lat: 33.4485, lng: -112.0741, sponsor: "Phoenix Downtown Partnership", message: "Premium downtown experience awaits!", description: "Enjoy VIP access to downtown events, priority parking, and exclusive dining experiences at Phoenix's premier entertainment district.", distance: 15, collectable: true, mapX: 48, mapY: 46, phone: "(602) 555-0123", address: "1 E Washington St, Phoenix, AZ 85004", website: "https://downtownphoenix.com", redemptionOptions: [{ icon: "🍽️", cost: "100 $Ember", desc: "Lunch Credit" }, { icon: "🅿️", cost: "50 $Ember", desc: "Free Parking" }, { icon: "🎫", cost: "200 $Ember", desc: "Event Ticket" }, { icon: "☕", cost: "25 $Ember", desc: "Coffee & Pastry" }] },
+                { id: 2, value: 250, location: "Heritage Square", lat: 33.4483, lng: -112.0742, sponsor: "Arizona Heritage Foundation", message: "Discover Phoenix history!", description: "Experience guided historic tours, museum access, and exclusive educational programs celebrating Arizona's rich cultural heritage.", distance: 18, collectable: true, mapX: 54, mapY: 54, phone: "(602) 555-0124", address: "115 N 6th St, Phoenix, AZ 85004", website: "https://heritagesquarephx.org", redemptionOptions: [{ icon: "🏛️", cost: "150 $Ember", desc: "Museum Tour" }, { icon: "📚", cost: "75 $Ember", desc: "History Book" }, { icon: "🎧", cost: "50 $Ember", desc: "Audio Guide" }, { icon: "📸", cost: "100 $Ember", desc: "Photo Package" }] },
+                { id: 3, value: 300, location: "Roosevelt Row Arts", lat: 33.4486, lng: -112.0739, sponsor: "Local Artists Collective", message: "Support local Phoenix artists!", description: "Gain access to exclusive art gallery openings, artist meet-and-greets, and special purchasing opportunities for local artwork.", distance: 20, collectable: true, mapX: 44, mapY: 42, phone: "(602) 555-0125", address: "300 E Roosevelt St, Phoenix, AZ 85004", website: "https://rooseveltrow.org", redemptionOptions: [{ icon: "🎨", cost: "200 $Ember", desc: "Art Print" }, { icon: "🖼️", cost: "150 $Ember", desc: "Gallery Pass" }, { icon: "☕", cost: "50 $Ember", desc: "Artist Cafe" }, { icon: "🎭", cost: "100 $Ember", desc: "Workshop" }] },
+                { id: 4, value: 750, location: "Chase Field", lat: 33.4453, lng: -112.0667, sponsor: "Arizona Diamondbacks", message: "Baseball season tickets await!", description: "Experience premium baseball with season ticket holder perks, dugout tours, and exclusive team merchandise discounts.", distance: 850, collectable: false, mapX: 46, mapY: 68, phone: "(602) 555-0126", address: "401 E Jefferson St, Phoenix, AZ 85004", website: "https://mlb.com/dbacks", redemptionOptions: [{ icon: "⚾", cost: "500 $Ember", desc: "Game Ticket" }, { icon: "🍕", cost: "100 $Ember", desc: "Concession Credit" }, { icon: "👕", cost: "200 $Ember", desc: "Team Jersey" }, { icon: "🎫", cost: "300 $Ember", desc: "VIP Experience" }] },
+                { id: 5, value: 400, location: "Phoenix Sky Harbor", lat: 33.4343, lng: -112.0116, sponsor: "Sky Harbor Shops", message: "Travel rewards await!", description: "Unlock travel perks including priority security, duty-free shopping discounts, and airport lounge access benefits.", distance: 1500, collectable: false, mapX: 35, mapY: 85, phone: "(602) 555-0127", address: "3400 E Sky Harbor Blvd, Phoenix, AZ 85034", website: "https://skyharbor.com", redemptionOptions: [{ icon: "✈️", cost: "300 $Ember", desc: "Lounge Access" }, { icon: "🛍️", cost: "150 $Ember", desc: "Duty Free Deal" }, { icon: "☕", cost: "50 $Ember", desc: "Airport Cafe" }, { icon: "🅿️", cost: "100 $Ember", desc: "Parking Credit" }] },
+                { id: 6, value: 600, location: "Scottsdale Quarter", lat: 33.4942, lng: -111.9261, sponsor: "Scottsdale Fashion Square", message: "Premium shopping rewards!", description: "Enjoy luxury shopping with VIP personal shopping services, exclusive brand access, and special member-only events.", distance: 2200, collectable: false, mapX: 82, mapY: 25, phone: "(602) 555-0128", address: "15059 N Scottsdale Rd, Scottsdale, AZ 85254", website: "https://fashionsquare.com", redemptionOptions: [{ icon: "🛍️", cost: "400 $Ember", desc: "Shopping Credit" }, { icon: "💅", cost: "200 $Ember", desc: "Spa Service" }, { icon: "🍽️", cost: "150 $Ember", desc: "Fine Dining" }, { icon: "🎁", cost: "100 $Ember", desc: "Gift Wrap" }] },
+                { id: 7, value: 350, location: "Desert Botanical Garden", lat: 33.4619, lng: -111.9463, sponsor: "Garden Cafe", message: "Nature dining experience!", description: "Experience farm-to-table dining surrounded by stunning desert flora, with guided nature walks and botanical workshops.", distance: 1800, collectable: false, mapX: 75, mapY: 38, phone: "(602) 555-0129", address: "1201 N Galvin Pkwy, Phoenix, AZ 85008", website: "https://dbg.org", redemptionOptions: [{ icon: "🌿", cost: "200 $Ember", desc: "Garden Tour" }, { icon: "🥗", cost: "150 $Ember", desc: "Farm Lunch" }, { icon: "🌸", cost: "100 $Ember", desc: "Plant Workshop" }, { icon: "📸", cost: "75 $Ember", desc: "Photo Tour" }] },
+                { id: 8, value: 500, location: "Camelback Mountain", lat: 33.5186, lng: -111.9717, sponsor: "Desert Hiking Adventures", message: "Gear up for adventure!", description: "Professional hiking equipment rentals, guided desert expeditions, and exclusive access to member-only trail experiences.", distance: 2800, collectable: false, mapX: 68, mapY: 18, phone: "(602) 555-0130", address: "5700 N Echo Canyon Pkwy, Phoenix, AZ 85018", website: "https://hikecamelback.com", redemptionOptions: [{ icon: "🥾", cost: "300 $Ember", desc: "Gear Rental" }, { icon: "🗺️", cost: "150 $Ember", desc: "Guided Hike" }, { icon: "💧", cost: "50 $Ember", desc: "Water & Snacks" }, { icon: "📱", cost: "100 $Ember", desc: "GPS Device" }] },
+                { id: 9, value: 200, location: "Tempe Town Lake", lat: 33.4255, lng: -111.9400, sponsor: "Lakeside Coffee Co.", message: "Waterfront coffee experience!", description: "Enjoy artisanal coffee with lakeside seating, co-working space access, and exclusive member brewing workshops.", distance: 1200, collectable: false, mapX: 65, mapY: 78, phone: "(602) 555-0131", address: "80 W Rio Salado Pkwy, Tempe, AZ 85281", website: "https://lakesidecoffee.com", redemptionOptions: [{ icon: "☕", cost: "100 $Ember", desc: "Coffee & Pastry" }, { icon: "💻", cost: "150 $Ember", desc: "Co-work Day Pass" }, { icon: "🥐", cost: "75 $Ember", desc: "Breakfast Set" }, { icon: "📚", cost: "50 $Ember", desc: "WiFi & Book" }] },
+                { id: 10, value: 450, location: "Papago Park", lat: 33.4581, lng: -111.9485, sponsor: "Arizona Nature Tours", message: "Desert adventure awaits!", description: "Guided desert tours, rock climbing experiences, and exclusive access to hidden geological formations with expert naturalists.", distance: 1600, collectable: false, mapX: 25, mapY: 35, phone: "(602) 555-0132", address: "625 N Galvin Pkwy, Phoenix, AZ 85008", website: "https://arizonanaturetours.com", redemptionOptions: [{ icon: "🧗", cost: "300 $Ember", desc: "Climbing Tour" }, { icon: "🌵", cost: "150 $Ember", desc: "Nature Walk" }, { icon: "📸", cost: "100 $Ember", desc: "Photo Safari" }, { icon: "🎒", cost: "200 $Ember", desc: "Adventure Kit" }] }
             ];
 
-            // Initialize when DOM is ready
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', () => this.init());
             } else {
                 this.init();
             }
             
-            // Make globally accessible
             window.vaultPhoenixGame = this;
         }
 
         init() {
-            console.log('🔧 Initializing Game with Radar Scanner...');
             try {
-                // Apply portrait lock
-                enforcePortraitMode();
-                
                 this.loadGameData();
                 this.setupEventListeners();
                 this.setupSwipeableModule();
                 this.initializeMap();
                 this.updateUI();
                 this.switchScreen('hunt');
-                
-                // Initialize radar system
                 this.initializeRadarSystem();
                 
-                // FIXED: Ensure slider is in collapsed state and visible
-                this.collapseModule();
-                
-                // Debug slider positioning
-                const module = document.getElementById('tokenLocationsModule');
-                if (module) {
-                    console.log('📋 Slider element found:', module);
-                    console.log('📋 Slider classes:', module.className);
-                    console.log('📋 Slider style:', window.getComputedStyle(module).transform);
-                } else {
-                    console.error('❌ Slider element NOT found!');
-                }
-                
-                // Start airdrop system with 7-9 second delay, once per session
                 if (!this.airdropShown) {
                     this.startAirdropSystem();
                 }
-                
-                console.log('✅ Game initialized successfully with Radar Scanner');
-                console.log('🗺️ Token positioning fixed - no more overlaps');
-                console.log('📡 Radar system active - scanning for nearby tokens');
-                console.log('📋 Slider should be visible above bottom nav');
             } catch (error) {
-                console.error('❌ Game initialization error:', error);
+                console.error('Game initialization error:', error);
             }
         }
 
-        // =================== NEW: RADAR SCANNER SYSTEM ===================
         initializeRadarSystem() {
-            console.log('📡 Initializing Radar Scanner System...');
-            
-            // Start radar update loop
             this.startRadarUpdates();
-            
-            // Initial radar update
             this.updateRadarScanner();
-            
-            console.log('✅ Radar Scanner System active');
         }
 
         startRadarUpdates() {
-            // Update radar every 2 seconds to show dynamic scanning
             this.radarUpdateInterval = setInterval(() => {
                 this.updateRadarScanner();
             }, 2000);
@@ -407,18 +114,13 @@ if (window.isVaultPhoenixGame) {
             const radarDots = document.getElementById('radarDots');
             if (!radarDots) return;
 
-            // Calculate nearby collectable tokens
             const availableTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
             const collectableTokens = availableTokens.filter(token => token.collectable);
             
             this.nearbyTokenCount = collectableTokens.length;
-            
-            // Clear existing dots
             radarDots.innerHTML = '';
             
-            // Create dots based on actual nearby token count
             if (this.nearbyTokenCount > 0) {
-                // Define positions for up to 4 dots (we have 3 collectable tokens max)
                 const dotPositions = [
                     { top: '25%', left: '30%' },
                     { top: '60%', left: '70%' },
@@ -426,7 +128,6 @@ if (window.isVaultPhoenixGame) {
                     { top: '70%', left: '45%' }
                 ];
                 
-                // Create dots for each nearby token
                 for (let i = 0; i < Math.min(this.nearbyTokenCount, 4); i++) {
                     const dot = document.createElement('div');
                     dot.className = 'radar-dot';
@@ -435,23 +136,15 @@ if (window.isVaultPhoenixGame) {
                     dot.style.animationDelay = `${i * 0.5}s`;
                     radarDots.appendChild(dot);
                 }
-                
-                console.log(`📡 Radar updated: ${this.nearbyTokenCount} tokens detected`);
-            } else {
-                console.log('📡 Radar scan: No collectable tokens nearby');
             }
         }
 
-        // =================== IMPROVED AIRDROP SYSTEM WITH BETTER UX =================== 
         startAirdropSystem() {
             if (!this.airdropShown) {
-                const delay = (7 + Math.random() * 2) * 1000; // 7-9 seconds delay
-                
+                const delay = (7 + Math.random() * 2) * 1000;
                 this.airdropTimer = setTimeout(() => {
                     this.showAirdropNotification();
                 }, delay);
-                
-                console.log(`🪂 Airdrop scheduled for ${Math.round(delay/1000)} seconds`);
             }
         }
 
@@ -461,29 +154,19 @@ if (window.isVaultPhoenixGame) {
             const notification = document.getElementById('airdropNotification');
             if (!notification) return;
 
-            console.log('🪂 Showing airdrop notification with countdown timer');
-            
-            // Random airdrop values
             const airdropValues = [250, 500, 750, 1000];
             const randomValue = airdropValues[Math.floor(Math.random() * airdropValues.length)];
 
             this.pendingAirdropValue = randomValue;
             this.airdropShown = true;
             this.airdropCollected = false;
-            this.airdropTimeLeft = 30; // Reset timer
+            this.airdropTimeLeft = 30;
             
-            // Mark as shown in session
             sessionStorage.setItem('vaultPhoenix_airdropShown', 'true');
-
-            // Update notification content for uncollected state
             this.updateAirdropUI(false);
-            
             notification.classList.add('show');
-            
-            // Start countdown timer
             this.startAirdropCountdown();
             
-            // Haptic feedback
             if (navigator.vibrate) {
                 navigator.vibrate([100, 50, 100]);
             }
@@ -507,8 +190,6 @@ if (window.isVaultPhoenixGame) {
         }
 
         expireAirdrop() {
-            console.log('🪂 Airdrop expired');
-            
             if (this.airdropCountdownTimer) {
                 clearInterval(this.airdropCountdownTimer);
                 this.airdropCountdownTimer = null;
@@ -528,16 +209,13 @@ if (window.isVaultPhoenixGame) {
             const contentEl = document.querySelector('.airdrop-content');
             
             if (collected) {
-                // COLLECTED STATE - IMPROVED UX
                 if (titleEl) titleEl.textContent = '$Ember Collected!';
                 if (amountEl) amountEl.textContent = `${this.pendingAirdropValue} $Ember`;
                 if (subtitleEl) subtitleEl.textContent = 'Successfully added to your vault!';
                 if (timerEl) timerEl.style.display = 'none';
-                // FIXED: Hide button completely when collected
                 if (buttonEl) buttonEl.style.display = 'none';
                 if (contentEl) contentEl.classList.add('airdrop-collected');
             } else {
-                // UNCOLLECTED STATE
                 if (titleEl) titleEl.textContent = '$Ember Airdrop!';
                 if (amountEl) amountEl.textContent = `${this.pendingAirdropValue} $Ember`;
                 if (subtitleEl) subtitleEl.textContent = 'Limited time bonus - collect now!';
@@ -556,7 +234,6 @@ if (window.isVaultPhoenixGame) {
 
         handleAirdropButtonClick() {
             if (!this.airdropCollected) {
-                // COLLECT AIRDROP
                 this.claimAirdrop();
             }
         }
@@ -564,15 +241,11 @@ if (window.isVaultPhoenixGame) {
         claimAirdrop() {
             if (!this.pendingAirdropValue || this.airdropCollected) return;
             
-            console.log('🪂 Claiming airdrop:', this.pendingAirdropValue);
-            
-            // Stop countdown timer
             if (this.airdropCountdownTimer) {
                 clearInterval(this.airdropCountdownTimer);
                 this.airdropCountdownTimer = null;
             }
             
-            // Add airdrop tokens to vault
             this.totalEmberTokens += this.pendingAirdropValue;
             this.collectedTokens.push({
                 id: Date.now(),
@@ -590,15 +263,12 @@ if (window.isVaultPhoenixGame) {
             this.saveGameData();
             this.updateUI();
             this.updateVaultDisplay();
-            
-            // Update UI to collected state
             this.updateAirdropUI(true);
             
             if (navigator.vibrate) {
                 navigator.vibrate([100, 50, 100, 50, 200]);
             }
             
-            // FIXED: Auto-hide after 3 seconds without button
             setTimeout(() => {
                 this.hideAirdropNotification();
             }, 3000);
@@ -610,7 +280,6 @@ if (window.isVaultPhoenixGame) {
                 notification.classList.remove('show');
             }
             
-            // Clear timers
             if (this.airdropCountdownTimer) {
                 clearInterval(this.airdropCountdownTimer);
                 this.airdropCountdownTimer = null;
@@ -619,45 +288,31 @@ if (window.isVaultPhoenixGame) {
             this.pendingAirdropValue = 0;
         }
 
-        // =================== SCREEN MANAGEMENT ===================
         switchScreen(screen, targetTokenId = null) {
-            console.log('🔄 Switching to screen:', screen);
-            
             this.currentScreen = screen;
-            
-            // Always collapse module when switching screens
             this.collapseModule();
             
-            // Handle AR token targeting based on how AR was accessed
             if (screen === 'ar') {
                 if (targetTokenId) {
-                    // Accessed from map or nearby slider - show only this token
                     this.targetedTokenForAR = targetTokenId;
-                    console.log('🎯 AR accessed from map/slider - targeting token:', targetTokenId);
                 } else {
-                    // Accessed directly from navigation - show all available tokens
                     this.targetedTokenForAR = null;
-                    console.log('🎯 AR accessed directly - showing all available tokens');
                 }
             }
             
-            // Hide all screens
             document.querySelectorAll('.hunt-screen, .ar-screen, .vault-screen').forEach(el => {
                 el.classList.remove('active');
                 el.style.display = 'none';
             });
             
-            // Show selected screen
             const targetScreen = document.getElementById(screen + 'Screen');
             if (targetScreen) {
                 targetScreen.style.display = 'block';
                 targetScreen.classList.add('active');
             }
             
-            // Update navigation
             this.updateNavigation();
             
-            // Screen-specific actions
             switch (screen) {
                 case 'hunt':
                     this.stopARMode();
@@ -673,7 +328,6 @@ if (window.isVaultPhoenixGame) {
                     break;
             }
             
-            // Update ember tokens slider for all screens
             this.updateNearbyTokens();
         }
 
@@ -685,7 +339,6 @@ if (window.isVaultPhoenixGame) {
                 }
             });
             
-            // Update menu items
             document.querySelectorAll('.menu-item').forEach(item => {
                 item.classList.remove('active');
                 if (item.dataset.mode === this.currentScreen) {
@@ -694,24 +347,16 @@ if (window.isVaultPhoenixGame) {
             });
         }
 
-        // =================== OPTIMIZED MAP SYSTEM FOR MOBILE ===================
         initializeMap() {
-            console.log('🗺️ Initializing Optimized Map for Mobile...');
-            
             const mapContainer = document.getElementById('mapContainer');
             const phoenixMap = document.getElementById('phoenixMap');
             
-            if (!mapContainer || !phoenixMap) {
-                console.error('❌ Map elements not found');
-                return;
-            }
+            if (!mapContainer || !phoenixMap) return;
 
             this.setupMapControls();
             this.setupMapDragging();
             this.updateMapTokens();
             this.centerMapOnPlayer();
-            
-            console.log('✅ Mobile-optimized map initialized');
         }
 
         setupMapControls() {
@@ -746,84 +391,68 @@ if (window.isVaultPhoenixGame) {
             if (!mapContainer) return;
 
             let isDragging = false;
-            let hasMoved = false;
             let startX = 0;
             let startY = 0;
-            let startTouchX = 0;
-            let startTouchY = 0;
             let currentX = this.mapTranslateX;
             let currentY = this.mapTranslateY;
 
             const handleStart = (e) => {
+                e.preventDefault();
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
                 
                 isDragging = true;
-                hasMoved = false;
                 startX = clientX - currentX;
                 startY = clientY - currentY;
-                startTouchX = clientX;
-                startTouchY = clientY;
-                
-                mapContainer.style.cursor = 'grabbing';
+                this.mapDragStart = { x: clientX, y: clientY };
                 this.mapIsDragging = false;
             };
 
             const handleMove = (e) => {
                 if (!isDragging) return;
+                e.preventDefault();
                 
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
                 
-                const deltaX = Math.abs(clientX - startTouchX);
-                const deltaY = Math.abs(clientY - startTouchY);
-                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                const deltaX = Math.abs(clientX - this.mapDragStart.x);
+                const deltaY = Math.abs(clientY - this.mapDragStart.y);
                 
-                if (distance > this.mapDragThreshold) {
-                    hasMoved = true;
+                if (deltaX > 5 || deltaY > 5) {
                     this.mapIsDragging = true;
-                    
                     currentX = clientX - startX;
                     currentY = clientY - startY;
-                    
-                    // Optimize map transform for mobile performance
                     this.updateMapTransform(currentX, currentY, this.mapScale);
                 }
-                
-                e.preventDefault();
             };
 
             const handleEnd = (e) => {
                 if (!isDragging) return;
+                e.preventDefault();
                 
                 isDragging = false;
                 this.mapTranslateX = currentX;
                 this.mapTranslateY = currentY;
                 
-                mapContainer.style.cursor = 'grab';
-                
                 setTimeout(() => {
                     this.mapIsDragging = false;
                 }, 100);
-                
-                e.preventDefault();
             };
 
-            mapContainer.addEventListener('mousedown', handleStart, { passive: false });
+            mapContainer.addEventListener('mousedown', handleStart);
             mapContainer.addEventListener('touchstart', handleStart, { passive: false });
             
-            document.addEventListener('mousemove', handleMove, { passive: false });
+            document.addEventListener('mousemove', handleMove);
             document.addEventListener('touchmove', handleMove, { passive: false });
             
-            document.addEventListener('mouseup', handleEnd, { passive: false });
-            document.addEventListener('touchend', handleEnd, { passive: false });
+            document.addEventListener('mouseup', handleEnd);
+            document.addEventListener('touchend', handleEnd);
         }
 
         updateMapTransform(x, y, scale) {
             const phoenixMap = document.getElementById('phoenixMap');
             if (phoenixMap) {
-                // Use transform3d for better mobile performance
-                phoenixMap.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+                phoenixMap.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
             }
         }
 
@@ -846,10 +475,7 @@ if (window.isVaultPhoenixGame) {
             if (navigator.vibrate) navigator.vibrate([25, 10, 25]);
         }
 
-        // =================== FIXED TOKEN POSITIONING & ROUTING ===================
         updateMapTokens() {
-            console.log('💎 Updating map tokens with FIXED spacing - no overlaps...');
-            
             const markersContainer = document.getElementById('tokenMarkers');
             if (!markersContainer) return;
 
@@ -864,7 +490,6 @@ if (window.isVaultPhoenixGame) {
                 marker.style.top = `${token.mapY}%`;
                 marker.dataset.tokenId = token.id;
 
-                // Token coin (no labels)
                 const coin = document.createElement('div');
                 coin.className = 'token-coin';
                 
@@ -882,15 +507,11 @@ if (window.isVaultPhoenixGame) {
                 coin.appendChild(coinImg);
                 marker.appendChild(coin);
 
-                // FIXED: Clear token routing logic with proper spacing
                 const handleTokenClick = (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    if (this.mapIsDragging) {
-                        console.log('🚫 Token click blocked - map is dragging');
-                        return;
-                    }
+                    if (this.mapIsDragging) return;
                     
                     marker.style.transform = 'translate(-50%, -50%) scale(1.1)';
                     setTimeout(() => {
@@ -898,12 +519,8 @@ if (window.isVaultPhoenixGame) {
                     }, 200);
                     
                     if (token.collectable) {
-                        // GREEN CIRCLE TOKEN: Go directly to AR with this token only
-                        console.log('🟢 Collectable token (green) tapped - going to AR with token:', token.location);
                         this.switchScreen('ar', token.id);
                     } else {
-                        // RED CIRCLE TOKEN: Show navigation modal (NO AR option)
-                        console.log('🔴 Distant token (red) tapped - showing navigation modal');
                         this.showNavigationModal(token);
                     }
                     
@@ -912,32 +529,23 @@ if (window.isVaultPhoenixGame) {
                     }
                 };
 
-                marker.addEventListener('click', handleTokenClick, { passive: false });
+                marker.addEventListener('click', handleTokenClick);
                 marker.addEventListener('touchend', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     if (!this.mapIsDragging) {
                         handleTokenClick(e);
                     }
-                }, { passive: false });
+                });
 
                 markersContainer.appendChild(marker);
             });
-
-            const collectableCount = availableTokens.filter(t => t.collectable).length;
-            const distantCount = availableTokens.filter(t => !t.collectable).length;
-            console.log(`✅ FIXED: Updated ${collectableCount} green (collectable) and ${distantCount} red (distant) tokens with proper spacing`);
             
-            // Update radar after updating map tokens
             this.updateRadarScanner();
         }
 
-        // =================== AR SYSTEM WITH FIXED STATIC COMPASS ===================
         async startARMode() {
-            console.log('📱 Starting AR Mode with FIXED static compass...');
-            
             try {
-                // Request camera access
                 if (!this.cameraStream) {
                     this.cameraStream = await navigator.mediaDevices.getUserMedia({
                         video: { 
@@ -953,31 +561,20 @@ if (window.isVaultPhoenixGame) {
                     video.srcObject = this.cameraStream;
                 }
 
-                // Create AR tokens with improved coin display
                 this.createARTokens();
-                
-                // FIXED: Setup static compass pointing north (no rotation)
                 this.setupStaticCompass();
-                
-                // Auto-hide AR UI after 6 seconds
                 this.startARUITimer();
                 
-                console.log('✅ AR mode started with FIXED static compass pointing north');
-                
             } catch (error) {
-                console.error('❌ AR mode error:', error);
                 alert('Camera access is required for AR mode. Please allow camera access and try again.');
                 this.switchScreen('hunt');
             }
         }
 
-        // FIXED: Static compass that always points north
         setupStaticCompass() {
             const compassNeedle = document.getElementById('compassNeedle');
             if (compassNeedle) {
-                // FIXED: Static compass - always points north (0 degrees)
                 compassNeedle.style.transform = 'rotate(0deg)';
-                console.log('🧭 FIXED: Static compass pointing north - no rotation');
             }
         }
 
@@ -996,10 +593,7 @@ if (window.isVaultPhoenixGame) {
             }, 6000);
         }
 
-        // FIXED: AR tokens with full coin display matching map style
         createARTokens() {
-            console.log('🪙 Creating AR tokens with FIXED full coin display...');
-            
             const container = document.getElementById('arTokensContainer');
             if (!container) return;
 
@@ -1007,27 +601,19 @@ if (window.isVaultPhoenixGame) {
 
             let tokensToShow = [];
 
-            // If we have a targeted token (from map/slider), show only that token
             if (this.targetedTokenForAR) {
                 const targetToken = this.emberTokens.find(t => t.id === this.targetedTokenForAR);
                 if (targetToken && !this.isTokenCollected(targetToken.id) && targetToken.collectable) {
                     tokensToShow = [targetToken];
-                    console.log('📱 Showing targeted token in AR:', targetToken.location);
                 }
             } else {
-                // Show all collectable tokens if accessing AR directly
                 tokensToShow = this.emberTokens.filter(token => 
                     !this.isTokenCollected(token.id) && token.collectable
                 );
-                console.log('📱 Showing all collectable tokens in AR');
             }
             
-            if (tokensToShow.length === 0) {
-                console.log('📱 No tokens available for AR');
-                return;
-            }
+            if (tokensToShow.length === 0) return;
 
-            // Fixed positions simulating GPS lock for demo
             const demoPositions = [
                 { x: 20, bearing: 'left' },
                 { x: 50, bearing: 'center' },
@@ -1044,7 +630,6 @@ if (window.isVaultPhoenixGame) {
                 
                 arToken.style.left = `${position.x}%`;
                 
-                // FIXED: Token visual with full coin display
                 const coin = document.createElement('div');
                 coin.className = 'ar-token-coin';
                 
@@ -1062,12 +647,11 @@ if (window.isVaultPhoenixGame) {
                 coin.appendChild(coinImg);
                 arToken.appendChild(coin);
                 
-                // Click handler for automatic collection
                 arToken.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    this.collectToken(token, true); // true = from AR
+                    this.collectToken(token, true);
                     
                     if (navigator.vibrate) {
                         navigator.vibrate([80, 40, 80]);
@@ -1076,14 +660,9 @@ if (window.isVaultPhoenixGame) {
                 
                 container.appendChild(arToken);
             });
-            
-            console.log(`✅ Created ${Math.min(tokensToShow.length, 3)} AR tokens with FIXED full coin display`);
         }
 
         stopARMode() {
-            console.log('📱 Stopping AR mode...');
-            
-            // Stop camera stream
             if (this.cameraStream) {
                 this.cameraStream.getTracks().forEach(track => track.stop());
                 this.cameraStream = null;
@@ -1094,26 +673,18 @@ if (window.isVaultPhoenixGame) {
                 }
             }
             
-            // Clear AR tokens
             const arContainer = document.getElementById('arTokensContainer');
             if (arContainer) {
                 arContainer.innerHTML = '';
             }
             
-            // Clear AR UI timer
             if (this.arUITimer) {
                 clearTimeout(this.arUITimer);
                 this.arUITimer = null;
             }
-            
-            console.log('✅ AR mode stopped');
         }
 
-        // =================== TOKEN COLLECTION ===================
         collectToken(token, fromAR = false) {
-            console.log('💎 Collecting token:', token.location, fromAR ? '(from AR)' : '(from Hunt)');
-            
-            // Add to collected tokens
             const collectedToken = {
                 ...token,
                 collectedAt: new Date().toISOString(),
@@ -1124,16 +695,13 @@ if (window.isVaultPhoenixGame) {
             this.totalEmberTokens += token.value;
             this.saveGameData();
             
-            // Update UI
             this.updateUI();
             this.updateMapTokens();
             this.updateNearbyTokens();
             this.updateVaultDisplay();
             
-            // Show collection modal with appropriate buttons
             this.showTokenModal(token, fromAR);
             
-            // Remove from AR if in AR mode
             if (fromAR) {
                 const arToken = document.querySelector(`[data-token-id="${token.id}"]`);
                 if (arToken && arToken.closest('.ar-tokens-container')) {
@@ -1146,15 +714,11 @@ if (window.isVaultPhoenixGame) {
                 }
             }
             
-            // Clear targeted token after collection
             if (this.targetedTokenForAR === token.id) {
                 this.targetedTokenForAR = null;
             }
-            
-            console.log('✅ Token collected successfully');
         }
 
-        // =================== TOKEN MODAL WITH MOBILE HEIGHT FIX ===================
         showTokenModal(token, fromAR = false) {
             const modal = document.getElementById('tokenModal');
             if (!modal) return;
@@ -1163,7 +727,6 @@ if (window.isVaultPhoenixGame) {
             this.showingCollectionActions = fromAR;
             this.sponsorExpanded = false;
             
-            // Update header based on collection state
             const titleEl = document.getElementById('tokenFoundTitle');
             if (titleEl) {
                 if (fromAR) {
@@ -1173,7 +736,6 @@ if (window.isVaultPhoenixGame) {
                 }
             }
             
-            // Update modal content
             const elements = {
                 tokenAmountBadge: document.getElementById('tokenAmountBadge'),
                 discoveredTokenAmount: document.getElementById('discoveredTokenAmount'),
@@ -1194,16 +756,12 @@ if (window.isVaultPhoenixGame) {
             if (elements.sponsorText) elements.sponsorText.textContent = token.message;
             if (elements.sponsorDescription) elements.sponsorDescription.textContent = token.description;
             
-            // Populate redemption options
             this.populateRedemptionOptions(token);
             
-            // Show appropriate action buttons
             if (fromAR) {
-                // From AR - show "Go to Hunt" and "Go to Vault"
                 if (elements.tokenActions) elements.tokenActions.style.display = 'none';
                 if (elements.tokenCollectionActions) elements.tokenCollectionActions.style.display = 'flex';
             } else {
-                // From Hunt - show "Collect $Ember" and "Close"
                 if (elements.tokenActions) elements.tokenActions.style.display = 'flex';
                 if (elements.tokenCollectionActions) elements.tokenCollectionActions.style.display = 'none';
             }
@@ -1261,14 +819,12 @@ if (window.isVaultPhoenixGame) {
                 `https://maps.google.com/maps?daddr=${encodeURIComponent(destination)}`;
             
             window.open(mapsUrl, '_blank');
-            console.log('🗺️ Opening directions to:', destination);
         }
 
         learnMoreWebsite() {
             if (!this.currentDiscoveredToken || !this.currentDiscoveredToken.website) return;
             
             window.open(this.currentDiscoveredToken.website, '_blank');
-            console.log('🌐 Opening website:', this.currentDiscoveredToken.website);
         }
 
         hideTokenModal() {
@@ -1292,14 +848,12 @@ if (window.isVaultPhoenixGame) {
             this.switchScreen('vault');
         }
 
-        // =================== NAVIGATION MODAL - NO AR FOR DISTANT TOKENS ===================
         showNavigationModal(token) {
             const modal = document.getElementById('navigationModal');
             if (!modal) return;
             
             this.currentNavigationToken = token;
             
-            // Update modal content
             const elements = {
                 navTokenName: document.getElementById('navTokenName'),
                 navDistance: document.getElementById('navDistance'),
@@ -1317,8 +871,6 @@ if (window.isVaultPhoenixGame) {
             
             if (elements.navWalkTime) elements.navWalkTime.textContent = `~${walkMinutes} min`;
             if (elements.navDriveTime) elements.navDriveTime.textContent = `~${driveMinutes} min`;
-            
-            console.log('🗺️ Navigation modal for distant token - no AR option shown');
             
             modal.classList.add('show');
             modal.style.display = 'flex';
@@ -1357,18 +909,14 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== VAULT SYSTEM ===================
         updateVaultDisplay() {
-            console.log('🔒 Updating vault display...');
-            
             const elements = {
                 vaultBalance: document.getElementById('vaultBalance'),
                 vaultUsdValue: document.getElementById('vaultUsdValue'),
                 totalCollected: document.getElementById('totalCollected'),
                 locationsVisited: document.getElementById('locationsVisited'),
                 totalValue: document.getElementById('totalValue'),
-                lastActivity: document.getElementById('lastActivity'),
-                tokenHistory: document.getElementById('tokenHistory')
+                lastActivity: document.getElementById('lastActivity')
             };
             
             if (elements.vaultBalance) {
@@ -1429,17 +977,12 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== NEARBY TOKENS SLIDER WITH RADAR ===================
         updateNearbyTokens() {
-            console.log('🔍 Updating nearby tokens with radar...');
-            
             const availableTokens = this.emberTokens.filter(token => !this.isTokenCollected(token.id));
             const collectableTokens = availableTokens.filter(token => token.collectable);
             
-            // Update radar scanner
             this.updateRadarScanner();
 
-            // Update AR badge in menu
             const nearbyARTokensEl = document.getElementById('nearbyARTokens');
             if (nearbyARTokensEl) {
                 if (collectableTokens.length > 0) {
@@ -1449,13 +992,11 @@ if (window.isVaultPhoenixGame) {
                 }
             }
 
-            // Update total available
             const totalAvailableEl = document.getElementById('totalAvailable');
             if (totalAvailableEl) {
                 totalAvailableEl.textContent = `Ready for collection`;
             }
 
-            // Update token list
             const tokensList = document.getElementById('tokenLocationsList');
             if (tokensList) {
                 if (collectableTokens.length === 0) {
@@ -1484,7 +1025,6 @@ if (window.isVaultPhoenixGame) {
                         </div>
                     `).join('');
 
-                    // Add click handlers for ember tokens nearby
                     tokensList.querySelectorAll('.token-location-item').forEach(item => {
                         const handleClick = (e) => {
                             e.preventDefault();
@@ -1498,8 +1038,6 @@ if (window.isVaultPhoenixGame) {
                                     item.style.transform = '';
                                 }, 200);
                                 
-                                // Go directly to AR with only this token
-                                console.log('🎯 Nearby token tapped - going to AR with token:', token.location);
                                 this.switchScreen('ar', token.id);
                                 this.collapseModule();
                                 
@@ -1515,20 +1053,12 @@ if (window.isVaultPhoenixGame) {
         }
 
         setupSwipeableModule() {
-            console.log('👆 Setting up professional swipeable module with layered effect...');
-            
             const handle = document.getElementById('swipeHandle');
             const module = document.getElementById('tokenLocationsModule');
             
-            if (!handle || !module) {
-                console.error('❌ Swipe handle or module not found');
-                return;
-            }
+            if (!handle || !module) return;
             
-            // Ensure module starts in collapsed state
-            module.classList.add('collapsed');
-            module.classList.remove('expanded');
-            this.moduleExpanded = false;
+            this.collapseModule();
             
             let startY = 0;
             let currentY = 0;
@@ -1538,13 +1068,11 @@ if (window.isVaultPhoenixGame) {
                 isDragging = true;
                 startY = e.touches ? e.touches[0].clientY : e.clientY;
                 currentY = startY;
-                console.log('👆 Swipe started');
                 e.preventDefault();
             };
 
             const handleTouchMove = (e) => {
                 if (!isDragging) return;
-                
                 currentY = e.touches ? e.touches[0].clientY : e.clientY;
                 e.preventDefault();
             };
@@ -1556,25 +1084,19 @@ if (window.isVaultPhoenixGame) {
                 const deltaY = startY - currentY;
                 const threshold = 50;
                 
-                console.log('👆 Swipe ended, deltaY:', deltaY);
-                
                 if (Math.abs(deltaY) > threshold) {
                     if (deltaY > 0) {
-                        console.log('📋 Expanding module - sliding up from behind nav');
                         this.expandModule();
                     } else {
-                        console.log('📋 Collapsing module - sliding down behind nav');
                         this.collapseModule();
                     }
                 } else {
-                    console.log('📋 Toggling module state');
                     this.toggleModule();
                 }
                 
                 e.preventDefault();
             };
 
-            // Add event listeners
             handle.addEventListener('touchstart', handleTouchStart, { passive: false });
             handle.addEventListener('touchmove', handleTouchMove, { passive: false });
             handle.addEventListener('touchend', handleTouchEnd, { passive: false });
@@ -1582,11 +1104,8 @@ if (window.isVaultPhoenixGame) {
             handle.addEventListener('mousemove', handleTouchMove, { passive: false });
             handle.addEventListener('mouseup', handleTouchEnd, { passive: false });
             handle.addEventListener('click', () => {
-                console.log('📋 Handle clicked - toggling module');
                 this.toggleModule();
             }, { passive: false });
-            
-            console.log('✅ Professional swipeable module setup complete');
         }
 
         toggleModule() {
@@ -1622,7 +1141,6 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== MENU SYSTEM ===================
         toggleMenu() {
             const menu = document.getElementById('sideMenu');
             const overlay = document.getElementById('menuOverlay');
@@ -1658,9 +1176,7 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== RESET GAME ===================
         resetGame() {
-            console.log('🔄 Resetting game...');
             try {
                 this.collectedTokens = [];
                 this.totalEmberTokens = 0;
@@ -1672,7 +1188,6 @@ if (window.isVaultPhoenixGame) {
                 localStorage.removeItem('vaultPhoenix_totalEmberTokens');
                 sessionStorage.removeItem('vaultPhoenix_airdropShown');
                 
-                // Clear airdrop timers
                 if (this.airdropTimer) {
                     clearTimeout(this.airdropTimer);
                     this.airdropTimer = null;
@@ -1690,17 +1205,13 @@ if (window.isVaultPhoenixGame) {
                     this.updateMapTokens();
                 }, 500);
                 
-                // Restart airdrop system
                 this.startAirdropSystem();
                 
-                console.log('✅ Game reset successfully - all fixes applied');
-                
             } catch (error) {
-                console.error('❌ Game reset error:', error);
+                console.error('Game reset error:', error);
             }
         }
 
-        // =================== QR CODE SYSTEM ===================
         showQRModal() {
             const modal = document.getElementById('qrModal');
             if (modal) {
@@ -1728,13 +1239,12 @@ if (window.isVaultPhoenixGame) {
             }
         }
 
-        // =================== DATA PERSISTENCE ===================
         saveGameData() {
             try {
                 localStorage.setItem('vaultPhoenix_collectedTokens', JSON.stringify(this.collectedTokens));
                 localStorage.setItem('vaultPhoenix_totalEmberTokens', this.totalEmberTokens.toString());
             } catch (error) {
-                console.error('❌ Save error:', error);
+                console.error('Save error:', error);
             }
         }
 
@@ -1749,10 +1259,8 @@ if (window.isVaultPhoenixGame) {
                 if (savedTotal) {
                     this.totalEmberTokens = parseInt(savedTotal) || 0;
                 }
-                
-                console.log(`💰 Loaded ${this.collectedTokens.length} collected tokens`);
             } catch (error) {
-                console.error('❌ Load error:', error);
+                console.error('Load error:', error);
                 this.collectedTokens = [];
                 this.totalEmberTokens = 0;
             }
@@ -1762,29 +1270,21 @@ if (window.isVaultPhoenixGame) {
             return this.collectedTokens.some(token => token.id === tokenId);
         }
 
-        // =================== UI UPDATES ===================
         updateUI() {
-            // Update ember count in navigation
             const navEmberCount = document.getElementById('navEmberCount');
             if (navEmberCount) {
                 navEmberCount.textContent = this.totalEmberTokens.toLocaleString();
             }
             
-            // Update ember count in menu
             const menuEmberCount = document.getElementById('menuEmberCount');
             if (menuEmberCount) {
                 menuEmberCount.textContent = this.totalEmberTokens.toLocaleString();
             }
         }
 
-        // =================== CLEANUP ===================
         destroy() {
-            console.log('🔧 Cleaning up game resources...');
-            
-            // Stop radar updates
             this.stopRadarUpdates();
             
-            // Clear timers
             if (this.airdropTimer) {
                 clearTimeout(this.airdropTimer);
                 this.airdropTimer = null;
@@ -1798,17 +1298,10 @@ if (window.isVaultPhoenixGame) {
                 this.arUITimer = null;
             }
             
-            // Stop AR mode
             this.stopARMode();
-            
-            console.log('✅ Game resources cleaned up');
         }
 
-        // =================== EVENT LISTENERS ===================
         setupEventListeners() {
-            console.log('🎧 Setting up event listeners with radar support...');
-            
-            // Navigation tabs
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1819,7 +1312,6 @@ if (window.isVaultPhoenixGame) {
                 });
             });
 
-            // Menu items with mode switching
             document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1831,7 +1323,6 @@ if (window.isVaultPhoenixGame) {
                 });
             });
 
-            // Home button (logo)
             const homeBtn = document.getElementById('homeBtn');
             if (homeBtn) {
                 homeBtn.addEventListener('click', (e) => {
@@ -1840,7 +1331,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Vault badge
             const vaultBadge = document.getElementById('vaultBadge');
             if (vaultBadge) {
                 vaultBadge.addEventListener('click', (e) => {
@@ -1849,7 +1339,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Menu toggle
             const menuToggle = document.getElementById('menuToggle');
             if (menuToggle) {
                 menuToggle.addEventListener('click', (e) => {
@@ -1858,7 +1347,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Menu overlay
             const menuOverlay = document.getElementById('menuOverlay');
             if (menuOverlay) {
                 menuOverlay.addEventListener('click', (e) => {
@@ -1867,7 +1355,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // FIXED: Airdrop button with improved UX
             const airdropClaimButton = document.getElementById('airdropClaimButton');
             if (airdropClaimButton) {
                 airdropClaimButton.addEventListener('click', (e) => {
@@ -1876,7 +1363,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Token modal buttons
             const collectTokenBtn = document.getElementById('collectTokenBtn');
             const goToHuntBtn = document.getElementById('goToHuntBtn');
             const goToVaultBtn = document.getElementById('goToVaultBtn');
@@ -1912,7 +1398,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Learn More Toggle Button
             const learnMoreToggle = document.getElementById('learnMoreToggle');
             if (learnMoreToggle) {
                 learnMoreToggle.addEventListener('click', (e) => {
@@ -1921,7 +1406,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Location Action Buttons
             const getDirectionsBtn = document.getElementById('getDirectionsBtn');
             const learnMoreWebsiteBtn = document.getElementById('learnMoreWebsiteBtn');
             
@@ -1939,7 +1423,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Navigation modal buttons
             const navClose = document.getElementById('navClose');
             const navWalking = document.getElementById('navWalking');
             const navDriving = document.getElementById('navDriving');
@@ -1965,7 +1448,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // QR modal
             const redeemQRBtn = document.getElementById('redeemQRBtn');
             const redeemTokens = document.getElementById('redeemTokens');
             const qrClose = document.getElementById('qrClose');
@@ -1991,7 +1473,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Reset game
             const resetGameBtn = document.getElementById('resetGameBtn');
             const confirmResetGame = document.getElementById('confirmResetGame');
             const cancelResetGame = document.getElementById('cancelResetGame');
@@ -2030,7 +1511,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Logout
             const sideMenuLogout = document.getElementById('sideMenuLogout');
             const confirmLogout = document.getElementById('confirmLogout');
             const cancelLogout = document.getElementById('cancelLogout');
@@ -2064,7 +1544,6 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Coinbase integration placeholder
             const coinbaseTransferBtn = document.getElementById('coinbaseTransferBtn');
             const coinbaseWallet = document.getElementById('coinbaseWallet');
             
@@ -2082,21 +1561,11 @@ if (window.isVaultPhoenixGame) {
                 });
             }
 
-            // Window cleanup on unload
             window.addEventListener('beforeunload', () => {
                 this.destroy();
             });
-
-            console.log('✅ Event listeners setup complete with radar system - all fixes applied');
         }
     }
 
-    // =================== INITIALIZE GAME ===================
-    console.log('🔥💎 Creating Game instance with Radar Scanner...');
     window.vaultPhoenixGame = new VaultPhoenixGame();
-
-} else {
-    console.log('🚫 Game JavaScript blocked - not a crypto game page');
 }
-
-console.log('🔥💎 UPDATED Game JavaScript loaded - Portrait lock, Radar Scanner, Slider behind nav');
