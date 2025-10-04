@@ -124,7 +124,6 @@
         <div class="hunt-screen active" id="huntScreen">
             <div class="map-container" id="mapContainer">
                 <div class="phoenix-map" id="phoenixMap">
-                    <!-- Map Background Elements -->
                     <div class="map-roads">
                         <div class="highway highway-i10"></div>
                         <div class="highway highway-i17"></div>
@@ -134,7 +133,6 @@
                         <div class="street thomas-rd"></div>
                     </div>
                     
-                    <!-- City Districts -->
                     <div class="city-districts">
                         <div class="district downtown"></div>
                         <div class="district scottsdale"></div>
@@ -142,7 +140,6 @@
                         <div class="district glendale"></div>
                     </div>
                     
-                    <!-- Landmarks -->
                     <div class="landmarks">
                         <div class="landmark chase-field" title="Chase Field"></div>
                         <div class="landmark airport" title="Sky Harbor Airport"></div>
@@ -150,15 +147,11 @@
                         <div class="landmark papago-park" title="Papago Park"></div>
                     </div>
                     
-                    <!-- Token Markers Container -->
                     <div class="token-markers" id="tokenMarkers"></div>
-                    
-                    <!-- Player Location -->
                     <div class="player-location" id="playerLocation"></div>
                 </div>
             </div>
             
-            <!-- Map Controls -->
             <div class="map-controls">
                 <button class="map-control-btn" id="zoomInBtn">+</button>
                 <button class="map-control-btn" id="zoomOutBtn">−</button>
@@ -170,7 +163,6 @@
         <div class="ar-screen" id="arScreen">
             <video id="cameraVideo" autoplay muted playsinline></video>
             <div class="ar-overlay">
-                <!-- AR Compass -->
                 <div class="ar-compass" id="arCompass">
                     <div class="compass-ring">
                         <div class="compass-needle" id="compassNeedle"></div>
@@ -260,8 +252,8 @@
             </div>
         </div>
 
-        <!-- Ember Tokens Nearby Slider (Behind Bottom Nav) -->
-        <div class="token-locations-module collapsed" id="tokenLocationsModule">
+        <!-- Ember Tokens Slider - BEHIND Bottom Nav -->
+        <div class="token-locations-module" id="tokenLocationsModule">
             <div class="swipe-handle" id="swipeHandle">
                 <div class="handle-bar"></div>
                 <div class="handle-content">
@@ -293,7 +285,7 @@
             </div>
         </div>
 
-        <!-- Bottom Navigation (On Top) -->
+        <!-- Bottom Navigation - ON TOP -->
         <nav class="bottom-nav">
             <div class="nav-tabs">
                 <div class="nav-tab active" data-mode="hunt" id="tabHunt">
@@ -311,7 +303,7 @@
             </div>
         </nav>
 
-        <!-- Token Collection Modal -->
+        <!-- Modals -->
         <div class="token-modal" id="tokenModal">
             <div class="token-modal-content">
                 <div class="token-modal-header">
@@ -388,7 +380,6 @@
             </div>
         </div>
 
-        <!-- Navigation Modal -->
         <div class="navigation-modal" id="navigationModal">
             <div class="navigation-content">
                 <div class="navigation-header">
@@ -424,17 +415,11 @@
             </div>
         </div>
 
-        <!-- Reset Game Confirmation Modal -->
         <div class="reset-game-overlay" id="resetGameOverlay">
             <div class="reset-game-modal">
                 <div class="reset-game-modal-title">🔄 Reset Game Progress</div>
                 <div class="reset-game-modal-text">
-                    Are you sure you want to reset your game progress? This will:
-                    <br><br>
-                    • Clear all collected $Ember tokens<br>
-                    • Reset vault balance to $0.00<br>
-                    • Clear token history<br>
-                    <br>
+                    Are you sure you want to reset your game progress? This will clear all collected $Ember tokens and reset your vault balance.<br><br>
                     <strong>This action cannot be undone!</strong>
                 </div>
                 <div class="reset-game-modal-actions">
@@ -444,7 +429,6 @@
             </div>
         </div>
 
-        <!-- Logout Confirmation -->
         <div class="logout-overlay" id="logoutOverlay">
             <div class="logout-modal">
                 <div class="logout-modal-title">🚪 Sign Out</div>
@@ -458,7 +442,6 @@
             </div>
         </div>
         
-        <!-- QR Modal -->
         <div class="qr-modal" id="qrModal">
             <div class="qr-modal-content">
                 <div class="qr-modal-header">
