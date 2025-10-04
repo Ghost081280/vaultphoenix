@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Analytics - Reporting & Performance Metrics
+   Analytics - Reporting & Performance Metrics (Updated)
    ============================================ */
 
 // ============================================
@@ -18,8 +18,8 @@ const AnalyticsData = {
         averageSessionTime: 12.4 // minutes
     },
     
-    // Merchant analytics
-    merchants: {
+    // Advertiser analytics
+    advertisers: {
         totalActive: 47,
         totalPending: 12,
         averageRevenue: 1008,
@@ -50,7 +50,7 @@ const AnalyticsData = {
         revenue: [6200, 6800, 7100, 6500, 7300, 6900, 7500],
         players: [198, 212, 224, 219, 231, 227, 234],
         tokens: [420000, 485000, 512000, 498000, 534000, 521000, 556000],
-        merchants: [42, 43, 44, 45, 46, 46, 47],
+        advertisers: [42, 43, 44, 45, 46, 46, 47],
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     },
     
@@ -63,8 +63,8 @@ const AnalyticsData = {
         { name: 'Glendale Zone', players: 12, collections: 167, revenue: 2300 }
     ],
     
-    // Merchant performance tiers
-    merchantPerformance: {
+    // Advertiser performance tiers
+    advertiserPerformance: {
         platinum: { count: 8, avgRevenue: 3175, engagement: 92.1 },
         gold: { count: 12, avgRevenue: 1408, engagement: 88.7 },
         silver: { count: 18, avgRevenue: 625, engagement: 84.3 },
@@ -73,11 +73,11 @@ const AnalyticsData = {
 };
 
 // ============================================
-// MERCHANT CONTENT GENERATORS
+// ADVERTISER CONTENT GENERATORS
 // ============================================
 
 /**
- * Get merchant overview
+ * Get advertiser overview
  */
 function getMerchantOverview() {
     return `
@@ -189,10 +189,10 @@ function getMerchantOverview() {
 }
 
 /**
- * Get merchant payments content
+ * Get advertiser payments content
  */
 function getPaymentsContent(role) {
-    if (role !== 'merchant') {
+    if (role !== 'advertiser') {
         return getPlaceholderContent('payments');
     }
     
@@ -220,7 +220,7 @@ function getPaymentsContent(role) {
                         <div style="padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
                             <div style="display: flex; justify-content: space-between; padding: 8px 0;">
                                 <span style="color: rgba(255,255,255,0.7);">Next Payment Due:</span>
-                                <span style="font-weight: 700;">May 15, 2025</span>
+                                <span style="font-weight: 700;">Nov 4, 2025</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 8px 0;">
                                 <span style="color: rgba(255,255,255,0.7);">Payment Method:</span>
@@ -239,7 +239,7 @@ function getPaymentsContent(role) {
                 <div class="card">
                     <h3 style="color: var(--color-primary-gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
                         <span style="font-size: 2rem;">💎</span>
-                        Campaign Funding
+                        Campaign Token Funding
                     </h3>
                     
                     <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
@@ -259,7 +259,7 @@ function getPaymentsContent(role) {
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 8px 0;">
                                 <span style="color: rgba(255,255,255,0.7);">Last funded:</span>
-                                <span style="font-weight: 700;">April 1, 2025</span>
+                                <span style="font-weight: 700;">Oct 1, 2025</span>
                             </div>
                         </div>
                     </div>
@@ -326,31 +326,24 @@ function getPaymentsContent(role) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Apr 15, 2025</td>
+                            <td>Oct 4, 2025</td>
                             <td>Location Fee</td>
                             <td>Silver Tier - Monthly</td>
                             <td>$500.00</td>
                             <td><span class="badge badge-success">Paid</span></td>
                         </tr>
                         <tr>
-                            <td>Apr 1, 2025</td>
+                            <td>Oct 1, 2025</td>
                             <td>Campaign Funding</td>
                             <td>Token Purchase</td>
                             <td>$138.50</td>
                             <td><span class="badge badge-success">Paid</span></td>
                         </tr>
                         <tr>
-                            <td>Mar 15, 2025</td>
+                            <td>Sep 4, 2025</td>
                             <td>Location Fee</td>
                             <td>Silver Tier - Monthly</td>
                             <td>$500.00</td>
-                            <td><span class="badge badge-success">Paid</span></td>
-                        </tr>
-                        <tr>
-                            <td>Mar 1, 2025</td>
-                            <td>Campaign Funding</td>
-                            <td>Token Purchase</td>
-                            <td>$142.75</td>
                             <td><span class="badge badge-success">Paid</span></td>
                         </tr>
                     </tbody>
@@ -361,10 +354,10 @@ function getPaymentsContent(role) {
 }
 
 /**
- * Get merchant budget/ROI content
+ * Get advertiser budget/ROI content
  */
 function getBudgetContent(role) {
-    if (role !== 'merchant') {
+    if (role !== 'advertiser') {
         return getPlaceholderContent('budget');
     }
     
@@ -380,7 +373,7 @@ function getBudgetContent(role) {
                 
                 <div style="text-align: center; margin-bottom: 30px;">
                     <div style="font-size: 5rem; font-weight: 900; background: var(--gradient-ember); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px;">
-                        5,870%
+                        5,970%
                     </div>
                     <div style="font-size: 1.5rem; color: #22c55e; font-weight: 700;">
                         Return on Campaign Investment! 🎉
@@ -400,140 +393,35 @@ function getBudgetContent(role) {
             </div>
         </div>
         
-        <!-- Detailed Breakdown -->
+        <!-- Continue with existing ROI content... -->
         <div class="dashboard-section">
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                📊 Detailed Cost-Benefit Analysis
+                💡 Why Vault Phoenix Works
             </h3>
             
-            <div class="revenue-grid">
-                <div class="card">
-                    <h4 style="color: var(--color-primary-orange); margin-bottom: 20px;">Your Investment (Last 30 Days)</h4>
-                    
-                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                        <span>Location Fee:</span>
-                        <span style="font-weight: 700;">$500.00</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                        <span>Campaign Funding:</span>
-                        <span style="font-weight: 700;">$138.50</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 15px 0; font-size: 1.2rem; font-weight: 900;">
-                        <span>Total Investment:</span>
-                        <span style="color: var(--color-primary-gold);">$638.50</span>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h4 style="color: var(--color-primary-orange); margin-bottom: 20px;">Your Returns</h4>
-                    
-                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                        <span>GPS-Verified Visitors:</span>
-                        <span style="font-weight: 700;">847</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                        <span>Avg Spending per Visitor:</span>
-                        <span style="font-weight: 700;">~$45</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 15px 0; font-size: 1.2rem; font-weight: 900;">
-                        <span>Est. Revenue Generated:</span>
-                        <span style="color: #22c55e;">~$38,115</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Comparison to Traditional Advertising -->
-        <div class="dashboard-section">
-            <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                📢 Comparison to Traditional Advertising
-            </h3>
-            
-            <div class="card">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
-                    <div style="padding: 20px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px;">
-                        <div style="font-size: 1.5rem; margin-bottom: 10px;">📻</div>
-                        <div style="font-weight: 700; margin-bottom: 8px;">Radio Ads</div>
-                        <div style="font-size: 1.3rem; font-weight: 700; color: #ef4444;">$2,000-5,000/mo</div>
-                        <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 5px;">Same reach</div>
-                    </div>
-                    
-                    <div style="padding: 20px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px;">
-                        <div style="font-size: 1.5rem; margin-bottom: 10px;">📰</div>
-                        <div style="font-weight: 700; margin-bottom: 8px;">Print Ads</div>
-                        <div style="font-size: 1.3rem; font-weight: 700; color: #ef4444;">$1,500-3,000/mo</div>
-                        <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 5px;">Same reach</div>
-                    </div>
-                    
-                    <div style="padding: 20px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px;">
-                        <div style="font-size: 1.5rem; margin-bottom: 10px;">📱</div>
-                        <div style="font-weight: 700; margin-bottom: 8px;">Social Media Ads</div>
-                        <div style="font-size: 1.3rem; font-weight: 700; color: #ef4444;">$1,000-2,500/mo</div>
-                        <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 5px;">Same reach</div>
-                    </div>
-                    
-                    <div style="padding: 20px; background: rgba(34,197,94,0.2); border: 1px solid rgba(34,197,94,0.4); border-radius: 12px;">
-                        <div style="font-size: 1.5rem; margin-bottom: 10px;">🔥</div>
-                        <div style="font-weight: 700; margin-bottom: 8px;">Vault Phoenix</div>
-                        <div style="font-size: 1.3rem; font-weight: 700; color: #22c55e;">$620-680/mo</div>
-                        <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-top: 5px;">Better results!</div>
-                    </div>
-                </div>
-                
-                <div style="background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 25px; text-align: center;">
-                    <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">
-                        You're saving 95% compared to traditional advertising! 📈
-                    </div>
-                    <div style="color: rgba(255,255,255,0.7);">
-                        With better targeting, real-time tracking, and measurable results
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Cost Per Visitor -->
-        <div class="dashboard-section">
             <div class="apps-grid">
                 <div class="card">
-                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Your Cost Per Visitor</h4>
-                    <div style="font-size: 3rem; font-weight: 900; color: var(--color-primary-gold); margin-bottom: 10px;">
-                        $0.75
-                    </div>
-                    <div style="color: rgba(255,255,255,0.6);">
-                        Per GPS-verified visitor
-                    </div>
+                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">GPS-Verified Traffic</h4>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">
+                        Unlike traditional advertising, every visitor is GPS-verified. You only pay for real, 
+                        measurable foot traffic to your location.
+                    </p>
                 </div>
                 
                 <div class="card">
-                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Industry Average</h4>
-                    <div style="font-size: 3rem; font-weight: 900; color: #ef4444; margin-bottom: 10px;">
-                        $15-30
-                    </div>
-                    <div style="color: rgba(255,255,255,0.6);">
-                        Traditional advertising
-                    </div>
+                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Engaged Audience</h4>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">
+                        Players are actively seeking rewards at your location. They arrive motivated and 
+                        ready to engage with your business.
+                    </p>
                 </div>
                 
-                <div class="card" style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.4);">
-                    <h4 style="color: #22c55e; margin-bottom: 15px;">Your Savings</h4>
-                    <div style="font-size: 3rem; font-weight: 900; color: #22c55e; margin-bottom: 10px;">
-                        95%
-                    </div>
-                    <div style="color: rgba(255,255,255,0.8); font-weight: 700;">
-                        More efficient than competitors
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Actions -->
-        <div class="dashboard-section">
-            <div class="card" style="text-align: center;">
-                <h3 style="margin-bottom: 20px;">Ready to maximize your ROI?</h3>
-                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn btn-primary btn-large">Upgrade to Gold Tier</button>
-                    <button class="btn btn-secondary btn-large">Increase Campaign Budget</button>
-                    <button class="btn btn-outline btn-large">Download Full Report</button>
+                <div class="card">
+                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Real-Time Analytics</h4>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">
+                        Track performance in real-time. See exactly how many visitors you're getting 
+                        and adjust your strategy accordingly.
+                    </p>
                 </div>
             </div>
         </div>
@@ -541,14 +429,105 @@ function getBudgetContent(role) {
 }
 
 /**
- * Get SDK customer overview
+ * Get Campaign Manager's view of advertisers
  */
-function getSDKCustomerOverview() {
-    return getPlatformOperatorOverview(); // Similar layout for now
+function getMerchantsContent(role) {
+    if (role !== 'campaign-manager') {
+        return getPlaceholderContent('advertisers');
+    }
+    
+    return `
+        <div class="dashboard-section">
+            <h2 class="section-title">📍 Advertiser Management</h2>
+            
+            <!-- Stats -->
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">🏢</div>
+                    <div class="stat-label">Active Advertisers</div>
+                    <div class="stat-value">47</div>
+                    <div class="stat-change positive">+5 this month</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-label">Pending Approval</div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-change">Awaiting review</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-label">Monthly Recurring Revenue</div>
+                    <div class="stat-value">$32.4K</div>
+                    <div class="stat-change positive">+18% ↑</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-label">Avg Revenue per Advertiser</div>
+                    <div class="stat-value">$689</div>
+                    <div class="stat-change">Per month</div>
+                </div>
+            </div>
+            
+            <!-- Advertiser Table -->
+            <div class="merchants-table-wrapper">
+                <table class="merchants-table">
+                    <thead>
+                        <tr>
+                            <th>Advertiser</th>
+                            <th>Location</th>
+                            <th>Tier</th>
+                            <th>Monthly Fee</th>
+                            <th>Visitors (30d)</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Heritage Square</td>
+                            <td>Downtown Phoenix</td>
+                            <td><span class="tier-badge tier-silver">Silver</span></td>
+                            <td>$500</td>
+                            <td>847</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <button class="btn btn-small btn-outline">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Downtown Plaza</td>
+                            <td>Phoenix Metro</td>
+                            <td><span class="tier-badge tier-platinum">Platinum</span></td>
+                            <td>$2,500</td>
+                            <td>1,245</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <button class="btn btn-small btn-outline">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Scottsdale Mall</td>
+                            <td>Scottsdale</td>
+                            <td><span class="tier-badge tier-gold">Gold</span></td>
+                            <td>$1,200</td>
+                            <td>967</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <button class="btn btn-small btn-outline">View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
 }
 
 /**
- * Get system admin overview
+ * System Admin Overview
  */
 function getSystemAdminOverview() {
     return `
@@ -619,6 +598,6 @@ if (typeof window !== 'undefined') {
     window.getMerchantOverview = getMerchantOverview;
     window.getPaymentsContent = getPaymentsContent;
     window.getBudgetContent = getBudgetContent;
-    window.getSDKCustomerOverview = getSDKCustomerOverview;
+    window.getMerchantsContent = getMerchantsContent;
     window.getSystemAdminOverview = getSystemAdminOverview;
 }
