@@ -1836,13 +1836,15 @@ html, body {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 50; /* Higher than slider (40) so it appears on top */
-    background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.98) 100%);
+    z-index: 100; /* Much higher than slider (40) to be clearly on top */
+    background: linear-gradient(180deg, rgba(0,0,0,0.98) 0%, rgba(0,0,0,1) 100%);
     backdrop-filter: blur(25px);
     border-top: 1px solid rgba(240, 165, 0, 0.2);
     padding: 12px 12px calc(env(safe-area-inset-bottom, 8px) + 12px) 12px;
     height: calc(env(safe-area-inset-bottom, 8px) + 80px);
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
+    /* Add stronger shadow to enhance the "on top" effect */
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.8);
 }
 
 .nav-tabs {
