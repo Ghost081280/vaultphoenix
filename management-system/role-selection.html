@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault Phoenix - Select Your Path</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/role-selection.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="logo" onerror="this.style.display='none'">
+                <h1>Welcome to Vault Phoenix</h1>
+            </div>
+            <p class="subtitle">Choose Your Marketing Path</p>
+            <p class="description">
+                Launch location-based AR crypto gaming campaigns that drive real foot traffic to physical locations.
+                Choose your role below to get started.
+            </p>
+        </div>
+
+        <div class="role-grid">
+            <!-- Campaign Manager (White Label + SDK) -->
+            <div class="role-card" onclick="selectRole('campaign-manager')">
+                <div class="role-icon">🚀</div>
+                <h2 class="role-title">Campaign Manager</h2>
+                <p class="role-description">
+                    Launch and manage AR crypto gaming campaigns. Choose between white-label apps or integrate our SDK into your existing applications.
+                </p>
+                <ul class="role-features">
+                    <li>White-Label App Builder</li>
+                    <li>SDK Integration Support</li>
+                    <li>Live Campaign Monitoring</li>
+                    <li>Token Distribution Control</li>
+                    <li>Coinbase Wallet Integration</li>
+                    <li>$100 Starter $Ember Bonus</li>
+                </ul>
+                <button class="role-button">Launch Campaign Dashboard</button>
+            </div>
+
+            <!-- Advertiser (Merchant/Sponsor) -->
+            <div class="role-card" onclick="selectRole('advertiser')">
+                <div class="role-icon">📍</div>
+                <h2 class="role-title">Advertiser / Sponsor</h2>
+                <p class="role-description">
+                    Advertise your business location in active campaigns. Drive verified foot traffic with GPS-based AR gaming and track your ROI in real-time.
+                </p>
+                <ul class="role-features">
+                    <li>GPS-Verified Visitor Tracking</li>
+                    <li>Active Campaign Marketplace</li>
+                    <li>Transparent Pricing Tiers</li>
+                    <li>Real-Time Performance Metrics</li>
+                    <li>Dual Payment System</li>
+                    <li>ROI Calculator & Reporting</li>
+                </ul>
+                <button class="role-button">View Advertising Options</button>
+            </div>
+        </div>
+
+        <div class="demo-notice">
+            <h3>🎮 Demo Mode Active</h3>
+            <p>
+                You're logged in as <strong>demo@phoenix.com</strong>. Explore both dashboards to see how Vault Phoenix 
+                helps campaign managers launch location-based games and advertisers drive real foot traffic to their locations.
+                <a href="#" onclick="logout()" style="color: var(--color-primary-gold); margin-left: 10px;">Logout</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+
+        function selectRole(role) {
+            sessionStorage.setItem('selectedRole', role);
+            
+            // Visual feedback
+            const clickedCard = event.currentTarget;
+            clickedCard.style.transform = 'scale(0.98)';
+            clickedCard.style.opacity = '0.8';
+            
+            console.log('Role selected:', role);
+            
+            // Navigate to dashboard
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 200);
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.role-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.animation = `fadeInUp 0.8s ease-out ${0.3 + (index * 0.15)}s forwards`;
+            });
+        });
+    </script>
+</body>
+</html>
