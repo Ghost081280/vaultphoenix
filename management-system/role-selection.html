@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vault Phoenix - Select Your Path</title>
+    <title>Vault Phoenix - Select Your Role</title>
     <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/role-selection.css">
 </head>
@@ -11,60 +11,66 @@
     <div class="container">
         <div class="header">
             <div class="logo-container">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="logo" onerror="this.style.display='none'">
+                <img src="images/VPLogo.PNG" alt="Vault Phoenix Logo" class="logo" onerror="this.style.display='none'">
                 <h1>Welcome to Vault Phoenix</h1>
             </div>
-            <p class="subtitle">Choose Your Marketing Path</p>
+            <p class="subtitle">Choose Your Dashboard</p>
             <p class="description">
-                Launch location-based AR crypto gaming campaigns that drive real foot traffic to physical locations.
-                Choose your role below to get started.
+                Select your role to access the appropriate dashboard. Each role has a completely separate interface 
+                designed for specific needs in location-based crypto marketing.
             </p>
         </div>
 
         <div class="role-grid">
-            <!-- Campaign Manager (White Label + SDK) -->
+            <!-- Campaign Manager -->
             <div class="role-card" onclick="selectRole('campaign-manager')">
                 <div class="role-icon">🚀</div>
                 <h2 class="role-title">Campaign Manager</h2>
                 <p class="role-description">
-                    Launch and manage AR crypto gaming campaigns. Choose between white-label apps or integrate our SDK into your existing applications.
+                    Launch and manage AR crypto gaming campaigns. Build white-label apps or integrate via SDK, 
+                    manage advertisers, distribute tokens, and track campaign performance in real-time.
                 </p>
                 <ul class="role-features">
                     <li>White-Label App Builder</li>
-                    <li>SDK Integration Support</li>
+                    <li>SDK Integration Tools</li>
                     <li>Live Campaign Monitoring</li>
-                    <li>Token Distribution Control</li>
+                    <li>Advertiser Management</li>
+                    <li>Airdrop Control Center</li>
+                    <li>Token Inventory ($100 Starter Bonus)</li>
                     <li>Coinbase Wallet Integration</li>
-                    <li>$100 Starter $Ember Bonus</li>
+                    <li>Revenue Analytics Dashboard</li>
                 </ul>
-                <button class="role-button">Launch Campaign Dashboard</button>
+                <button class="role-button">Enter Campaign Dashboard</button>
             </div>
 
-            <!-- Advertiser (Merchant/Sponsor) -->
+            <!-- Advertiser -->
             <div class="role-card" onclick="selectRole('advertiser')">
                 <div class="role-icon">📍</div>
-                <h2 class="role-title">Advertiser / Sponsor</h2>
+                <h2 class="role-title">Advertiser</h2>
                 <p class="role-description">
-                    Advertise your business location in active campaigns. Drive verified foot traffic with GPS-based AR gaming and track your ROI in real-time.
+                    Drive verified foot traffic to your physical location through AR gaming campaigns. 
+                    Choose pricing tiers, manage locations, track GPS-verified visitors, and measure ROI in real-time.
                 </p>
                 <ul class="role-features">
+                    <li>Browse Campaign Marketplace</li>
+                    <li>3-Tier Pricing System (1-3, 4-10, 11+ locations)</li>
+                    <li>Google Maps Integration</li>
                     <li>GPS-Verified Visitor Tracking</li>
-                    <li>Active Campaign Marketplace</li>
-                    <li>Transparent Pricing Tiers</li>
-                    <li>Real-Time Performance Metrics</li>
-                    <li>Dual Payment System</li>
-                    <li>ROI Calculator & Reporting</li>
+                    <li>Request Player Airdrops</li>
+                    <li>Airdrop Performance Analytics</li>
+                    <li>Bulk Location Upload (CSV)</li>
+                    <li>Real-Time ROI Calculator</li>
                 </ul>
-                <button class="role-button">View Advertising Options</button>
+                <button class="role-button">Enter Advertiser Dashboard</button>
             </div>
         </div>
 
         <div class="demo-notice">
             <h3>🎮 Demo Mode Active</h3>
             <p>
-                You're logged in as <strong>demo@phoenix.com</strong>. Explore both dashboards to see how Vault Phoenix 
-                helps campaign managers launch location-based games and advertisers drive real foot traffic to their locations.
-                <a href="#" onclick="logout()" style="color: var(--color-primary-gold); margin-left: 10px;">Logout</a>
+                You're logged in as <strong>demo@phoenix.com</strong>. Explore both dashboards to see the complete 
+                Vault Phoenix platform - from campaign creation to advertiser performance tracking.
+                <a href="#" onclick="logout()" style="color: var(--color-primary-gold); margin-left: 10px; text-decoration: underline;">Logout</a>
             </p>
         </div>
     </div>
@@ -76,6 +82,7 @@
         }
 
         function selectRole(role) {
+            // Store selected role
             sessionStorage.setItem('selectedRole', role);
             
             // Visual feedback
@@ -85,15 +92,17 @@
             
             console.log('Role selected:', role);
             
-            // Navigate to dashboard
+            // Navigate to dashboard after brief animation
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
             }, 200);
         }
 
         function logout() {
-            sessionStorage.clear();
-            window.location.href = 'index.html';
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
         }
 
         // Initialize animations
