@@ -76,7 +76,7 @@ const EmberHuntDemo = {
  * Get campaigns/monitoring content
  */
 function getCampaignsContent(role) {
-    if (role === 'merchant') {
+    if (role === 'advertiser') {
         return getPlaceholderContent('campaigns');
     }
     
@@ -230,7 +230,7 @@ function getCampaignsContent(role) {
                                 </div>
                             </div>
                             
-                            <button class="btn btn-secondary" style="width: 100%;" onclick="showPurchaseTokenModal()">
+                            <button class="btn btn-secondary" style="width: 100%;" onclick="loadSection('wallet')">
                                 Purchase More Tokens
                             </button>
                             
@@ -265,7 +265,7 @@ function getCampaignsContent(role) {
                         
                         <div class="performance-card">
                             <div class="performance-value">12</div>
-                            <div class="performance-label">Merchant Inquiries</div>
+                            <div class="performance-label">Advertiser Inquiries</div>
                         </div>
                     </div>
                 </div>
@@ -315,7 +315,7 @@ function renderActivityFeed() {
             text = `Airdrop distributed to ${activity.recipients} players in ${activity.location}`;
         } else if (activity.type === 'payment') {
             icon = '💳';
-            text = `Merchant "${activity.merchant}" location fee processed - $${activity.amount}`;
+            text = `Advertiser "${activity.merchant}" location fee processed - $${activity.amount}`;
         }
         
         return `
@@ -331,7 +331,7 @@ function renderActivityFeed() {
 }
 
 /**
- * Get relative time (from airdrop-system.js but duplicated for independence)
+ * Get relative time
  */
 function getRelativeTime(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
@@ -360,15 +360,12 @@ function simulateLiveUpdate() {
         }
     ];
     
-    // Add to beginning of activity feed
     EmberHuntDemo.recentActivity = activities.concat(EmberHuntDemo.recentActivity.slice(0, 9));
     
-    // Update the feed if it's visible
     const activityFeed = document.getElementById('activityFeed');
     if (activityFeed) {
         activityFeed.innerHTML = renderActivityFeed();
         
-        // Highlight the new activity
         const firstItem = activityFeed.querySelector('.activity-item');
         if (firstItem) {
             firstItem.style.background = 'rgba(240,165,0,0.2)';
@@ -378,7 +375,6 @@ function simulateLiveUpdate() {
         }
     }
     
-    // Show notification
     showNotification('🔄 Live Update', 'New activity detected in $Ember Hunt app');
 }
 
@@ -388,12 +384,11 @@ function simulateLiveUpdate() {
 function startActivityAutoRefresh() {
     setInterval(() => {
         if (window.AppState?.currentSection === 'campaigns') {
-            // Randomly add new activities
             if (Math.random() > 0.7) {
                 simulateLiveUpdate();
             }
         }
-    }, 15000); // Every 15 seconds
+    }, 15000);
 }
 
 // ============================================
@@ -407,25 +402,21 @@ function sendQuickAirdropFromMonitoring() {
     const amount = parseInt(document.getElementById('quickAirdropAmount')?.value) || 500;
     const target = document.querySelector('input[name="target"]:checked')?.value || 'all';
     
-    // Get recipient count based on target
     let recipients = EmberHuntDemo.performance.playersNow;
     if (target === 'area') recipients = 12;
     if (target === 'players') recipients = 5;
     
     const totalTokens = amount * recipients;
     
-    // Validate balance
     if (window.AppState?.tokenBalance && totalTokens > window.AppState.tokenBalance.amount) {
         alert('⚠️ Insufficient token balance!\n\nYou need ' + totalTokens.toLocaleString() + ' $Ember but only have ' + window.AppState.tokenBalance.amount.toLocaleString() + ' $Ember.');
         return;
     }
     
-    // Confirm
     if (!confirm(`Send Airdrop?\n\nAmount: ${amount.toLocaleString()} $Ember per recipient\nTarget: ${target}\nRecipients: ${recipients}\nTotal: ${totalTokens.toLocaleString()} $Ember`)) {
         return;
     }
     
-    // Deduct tokens
     if (window.AppState?.tokenBalance) {
         window.AppState.tokenBalance.amount -= totalTokens;
         if (typeof window.updateTokenBalance === 'function') {
@@ -433,7 +424,6 @@ function sendQuickAirdropFromMonitoring() {
         }
     }
     
-    // Add to activity feed
     EmberHuntDemo.recentActivity.unshift({
         type: 'airdrop',
         recipients: recipients,
@@ -441,10 +431,8 @@ function sendQuickAirdropFromMonitoring() {
         timestamp: new Date()
     });
     
-    // Show success
     alert(`✓ Airdrop Sent!\n\n${totalTokens.toLocaleString()} $Ember distributed to ${recipients} players.`);
     
-    // Refresh view
     if (typeof window.loadSection === 'function') {
         window.loadSection('campaigns');
     }
@@ -456,7 +444,6 @@ function sendQuickAirdropFromMonitoring() {
 function openPlayerAppDemo() {
     const playerAppURL = '../crypto-game/dashboard.html';
     
-    // Try to open in new window
     const playerWindow = window.open(playerAppURL, '_blank', 'width=400,height=800,toolbar=no,location=no,status=no,menubar=no');
     
     if (playerWindow) {
@@ -470,7 +457,6 @@ function openPlayerAppDemo() {
  * Show notification
  */
 function showNotification(title, message) {
-    // Simple notification (could be enhanced with a proper notification system)
     const notification = document.createElement('div');
     notification.style.cssText = `
         position: fixed;
@@ -559,7 +545,7 @@ function getTokenEconomicsContent(role) {
                     </div>
                     
                     <div style="padding: 20px; background: rgba(251,146,60,0.1); border: 1px solid rgba(251,146,60,0.3); border-radius: 12px;">
-                        <div style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Platform/SDK Incentives</div>
+                        <div style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Platform Incentives</div>
                         <div style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary-orange);">30%</div>
                         <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">300,000,000 $Ember</div>
                     </div>
@@ -667,15 +653,7 @@ function getTokenEconomicsContent(role) {
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                     <div style="padding: 20px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px;">
-                        <div style="font-weight: 700; margin-bottom: 10px;">Platform Operators</div>
-                        <div style="font-size: 1.5rem; color: #22c55e; margin-bottom: 5px;">✓ $100 worth at market price</div>
-                        <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">
-                            Current equivalent: ${Math.floor(100 / (window.TokenEconomy?.marketPrice || 0.0035)).toLocaleString()} tokens
-                        </div>
-                    </div>
-                    
-                    <div style="padding: 20px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px;">
-                        <div style="font-weight: 700; margin-bottom: 10px;">SDK Customers</div>
+                        <div style="font-weight: 700; margin-bottom: 10px;">Campaign Managers</div>
                         <div style="font-size: 1.5rem; color: #22c55e; margin-bottom: 5px;">✓ $100 worth at market price</div>
                         <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">
                             Current equivalent: ${Math.floor(100 / (window.TokenEconomy?.marketPrice || 0.0035)).toLocaleString()} tokens
@@ -683,7 +661,7 @@ function getTokenEconomicsContent(role) {
                     </div>
                     
                     <div style="padding: 20px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px;">
-                        <div style="font-weight: 700; margin-bottom: 10px;">Merchants</div>
+                        <div style="font-weight: 700; margin-bottom: 10px;">Advertisers</div>
                         <div style="font-size: 1.5rem; color: #ef4444; margin-bottom: 5px;">✗ No starter tokens</div>
                         <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">
                             Must purchase at market price
@@ -698,7 +676,7 @@ function getTokenEconomicsContent(role) {
                     </div>
                     <div style="display: flex; justify-content: space-between; padding: 8px 0;">
                         <span>Source:</span>
-                        <span style="font-weight: 700;">Platform/SDK Incentives Pool (300M)</span>
+                        <span style="font-weight: 700;">Platform Incentives Pool (300M)</span>
                     </div>
                 </div>
             </div>
@@ -785,12 +763,8 @@ function getSmithiiContent(role) {
                     
                     <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px; margin-bottom: 15px;">
                         <div style="display: flex; justify-content: space-between; padding: 8px 0;">
-                            <span>Platform Operator Starter Tokens:</span>
+                            <span>Campaign Manager Starter Tokens:</span>
                             <span style="font-weight: 700;">$15,300</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; padding: 8px 0;">
-                            <span>SDK Customer Starter Tokens:</span>
-                            <span style="font-weight: 700;">$0 (0 integrations)</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; padding: 8px 0;">
                             <span>Market Purchases:</span>
@@ -813,11 +787,130 @@ function getSmithiiContent(role) {
     `;
 }
 
+/**
+ * Get User Management Content (System Admin only)
+ */
+function getUserManagementContent(role) {
+    if (role !== 'system-admin') {
+        return getPlaceholderContent('users');
+    }
+    
+    return `
+        <div class="dashboard-section">
+            <h2 class="section-title">👥 User Management</h2>
+            
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">🚀</div>
+                    <div class="stat-label">Campaign Managers</div>
+                    <div class="stat-value">153</div>
+                    <div class="stat-change positive">+12 this month</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">📍</div>
+                    <div class="stat-label">Advertisers</div>
+                    <div class="stat-value">47</div>
+                    <div class="stat-change positive">+5 this month</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🎮</div>
+                    <div class="stat-label">Active Players</div>
+                    <div class="stat-value">1,847</div>
+                    <div class="stat-change positive">+234 this week</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">⚙️</div>
+                    <div class="stat-label">System Admins</div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-change">Active</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">Recent User Activity</h3>
+                <p style="color: rgba(255,255,255,0.7);">User management features coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Get Compliance Content (System Admin only)
+ */
+function getComplianceContent(role) {
+    if (role !== 'system-admin') {
+        return getPlaceholderContent('compliance');
+    }
+    
+    return `
+        <div class="dashboard-section">
+            <h2 class="section-title">🔒 Compliance Center</h2>
+            
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">Regulatory Compliance</h3>
+                <p style="color: rgba(255,255,255,0.7);">Compliance monitoring features coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Get Global Analytics Content (System Admin only)
+ */
+function getGlobalAnalyticsContent(role) {
+    if (role !== 'system-admin') {
+        return getPlaceholderContent('analytics');
+    }
+    
+    return `
+        <div class="dashboard-section">
+            <h2 class="section-title">🌐 Global Analytics</h2>
+            
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-label">Total Platform Revenue</div>
+                    <div class="stat-value">$47,392</div>
+                    <div class="stat-change positive">+19.8% ↑</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🎮</div>
+                    <div class="stat-label">Active Campaigns</div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-change">Across platform</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">📍</div>
+                    <div class="stat-label">Advertiser Locations</div>
+                    <div class="stat-value">47</div>
+                    <div class="stat-change positive">+5 this month</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">💎</div>
+                    <div class="stat-label">Tokens Distributed</div>
+                    <div class="stat-value">3.67M</div>
+                    <div class="stat-change">$Ember</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">Platform Performance</h3>
+                <p style="color: rgba(255,255,255,0.7);">Advanced analytics dashboard coming soon...</p>
+            </div>
+        </div>
+    `;
+}
+
 // ============================================
 // INITIALIZE
 // ============================================
 
-// Start activity auto-refresh when page loads
 if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
         startActivityAutoRefresh();
@@ -833,6 +926,9 @@ if (typeof window !== 'undefined') {
     window.getCampaignsContent = getCampaignsContent;
     window.getTokenEconomicsContent = getTokenEconomicsContent;
     window.getSmithiiContent = getSmithiiContent;
+    window.getUserManagementContent = getUserManagementContent;
+    window.getComplianceContent = getComplianceContent;
+    window.getGlobalAnalyticsContent = getGlobalAnalyticsContent;
     window.simulateLiveUpdate = simulateLiveUpdate;
     window.sendQuickAirdropFromMonitoring = sendQuickAirdropFromMonitoring;
     window.openPlayerApp = openPlayerAppDemo;
