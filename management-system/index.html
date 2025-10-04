@@ -201,7 +201,7 @@
     <div class="login-container">
         <div class="login-card">
             <div class="logo-section">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" onerror="this.style.display='none'">
+                <img src="images/VPLogo.PNG" alt="Vault Phoenix" onerror="this.style.display='none'">
                 <h1>Vault Phoenix</h1>
                 <p>Location-Based Marketing Platform</p>
             </div>
@@ -259,15 +259,6 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('errorMessage');
-            
-            // Admin credentials check (hidden from public)
-            if (email === 'admin' && password === 'admin') {
-                sessionStorage.setItem('isLoggedIn', 'true');
-                sessionStorage.setItem('userEmail', 'admin@phoenix.com');
-                sessionStorage.setItem('selectedRole', 'system-admin');
-                window.location.href = 'dashboard.html';
-                return;
-            }
             
             // Demo credentials check
             if (email === 'demo@phoenix.com' && password === 'phoenix123') {
