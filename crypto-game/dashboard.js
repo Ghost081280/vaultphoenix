@@ -1,4 +1,4 @@
-// Vault Phoenix AR Crypto Gaming - COMPLETE JavaScript
+// Vault Phoenix AR Crypto Gaming - ENHANCED SLIDER NAVIGATION JavaScript
 
 (function() {
     const cryptoFlag = document.getElementById('cryptoGameFlag');
@@ -332,13 +332,15 @@ if (window.isVaultPhoenixGame) {
         }
 
         updateNavigation() {
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.classList.remove('active');
-                if (tab.dataset.mode === this.currentScreen) {
-                    tab.classList.add('active');
+            // Update quick nav buttons in slider
+            document.querySelectorAll('.quick-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.nav === this.currentScreen) {
+                    btn.classList.add('active');
                 }
             });
             
+            // Update side menu items
             document.querySelectorAll('.menu-item').forEach(item => {
                 item.classList.remove('active');
                 if (item.dataset.mode === this.currentScreen) {
@@ -1302,16 +1304,19 @@ if (window.isVaultPhoenixGame) {
         }
 
         setupEventListeners() {
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.addEventListener('click', (e) => {
+            // Quick Navigation Buttons (in slider)
+            document.querySelectorAll('.quick-nav-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const mode = tab.dataset.mode;
+                    const mode = btn.dataset.nav;
                     if (mode) {
                         this.switchScreen(mode);
+                        this.collapseModule();
                     }
                 });
             });
 
+            // Side Menu Items
             document.querySelectorAll('.menu-item[data-mode]').forEach(item => {
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1569,3 +1574,5 @@ if (window.isVaultPhoenixGame) {
 
     window.vaultPhoenixGame = new VaultPhoenixGame();
 }
+
+// =================== END OF JAVASCRIPT FILE ===================
