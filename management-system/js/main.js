@@ -26,7 +26,7 @@ const AppState = {
 };
 
 // ============================================
-// ROLE CONFIGURATIONS (UPDATED - NO ROLE SWITCHING)
+// ROLE CONFIGURATIONS
 // ============================================
 
 const RoleConfig = {
@@ -53,7 +53,7 @@ const RoleConfig = {
         navigation: [
             { icon: '📊', label: 'Dashboard Overview', section: 'overview' },
             { icon: '🛒', label: 'Campaign Marketplace', section: 'marketplace' },
-            { icon: '📍', label: 'My Locations', section: 'locations' },
+            { icon: '📍', label: 'My Token Locations', section: 'locations' },
             { icon: '🗺️', label: 'Location Map', section: 'map' },
             { icon: '🎁', label: 'Airdrop Requests', section: 'airdrop-requests' },
             { icon: '💳', label: 'Payment Center', section: 'payments' },
@@ -71,13 +71,11 @@ const RoleConfig = {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Vault Phoenix Management System - Initializing...');
     
-    // Check if user is logged in
     if (sessionStorage.getItem('isLoggedIn') !== 'true') {
         window.location.href = 'index.html';
         return;
     }
     
-    // Check for selected role
     const selectedRole = sessionStorage.getItem('selectedRole');
     
     if (!selectedRole) {
@@ -86,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     
-    // Initialize app with selected role
     initializeApp(selectedRole);
 });
 
@@ -96,25 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeApp(role) {
     console.log('Initializing app with role:', role);
     
-    // Set current role
     AppState.currentRole = role;
     
-    // Setup UI based on role
     setupRoleBasedUI(role);
-    
-    // Load navigation menu
     loadNavigationMenu(role);
-    
-    // Load default section (overview)
     loadSection('overview');
-    
-    // Setup event listeners
     setupEventListeners();
-    
-    // Initialize token balance (if applicable)
     updateTokenBalance();
     
-    // Initialize Coinbase wallet (for campaign managers)
     if (role === 'campaign-manager') {
         initializeCoinbaseWallet();
     }
@@ -128,7 +114,6 @@ function initializeApp(role) {
 function setupRoleBasedUI(role) {
     const config = RoleConfig[role];
     
-    // Show/hide token balance widget
     const tokenWidget = document.getElementById('tokenBalanceWidget');
     if (tokenWidget) {
         tokenWidget.style.display = config.showTokenBalance ? 'flex' : 'none';
@@ -203,41 +188,40 @@ function loadSection(section) {
 function getSectionContent(section) {
     const role = AppState.currentRole;
     
+    // Overview
     if (section === 'overview') {
         return getOverviewContent(role);
-    } else if (section === 'app-setup') {
-        return getAppSetupContent(role);
-    } else if (section === 'marketplace') {
-        return getMarketplaceContent(role);
-    } else if (section === 'campaigns') {
-        return getCampaignsContent(role);
-    } else if (section === 'revenue') {
-        return getRevenueContent(role);
-    } else if (section === 'airdrops') {
-        return getAirdropsContent(role);
-    } else if (section === 'advertisers') {
-        return getAdvertisersContent(role);
-    } else if (section === 'tokens') {
-        return getTokensContent(role);
-    } else if (section === 'wallet') {
-        return getWalletContent(role);
-    } else if (section === 'payments') {
-        return getPaymentsContent(role);
-    } else if (section === 'locations') {
-        return getLocationsContent(role);
-    } else if (section === 'map') {
-        return getMapContent(role);
-    } else if (section === 'airdrop-requests') {
-        return getAirdropRequestsContent(role);
-    } else if (section === 'analytics') {
-        return getAdvertiserAnalyticsContent(role);
-    } else if (section === 'budget') {
-        return getBudgetContent(role);
-    } else if (section === 'settings') {
-        return getSettingsContent(role);
-    } else {
-        return getPlaceholderContent(section);
     }
+    
+    // Campaign Manager sections
+    if (role === 'campaign-manager') {
+        if (section === 'app-setup') return getAppSetupContent(role);
+        if (section === 'campaigns') return getCampaignsContent(role);
+        if (section === 'revenue') return getRevenueContent(role);
+        if (section === 'airdrops') return getAirdropsContent(role);
+        if (section === 'advertisers') return getMerchantsContent(role);
+        if (section === 'tokens') return getTokensContent(role);
+        if (section === 'wallet') return getWalletContent(role);
+    }
+    
+    // Advertiser sections
+    if (role === 'advertiser') {
+        if (section === 'marketplace') return getMarketplaceContent(role);
+        if (section === 'locations') return getAdvertiserLocationsContent();
+        if (section === 'map') return getAdvertiserMapContent();
+        if (section === 'airdrop-requests') return getAirdropRequestsContent(role);
+        if (section === 'payments') return getPaymentsContent(role);
+        if (section === 'analytics') return getAdvertiserAnalyticsContent(role);
+        if (section === 'budget') return getBudgetContent(role);
+    }
+    
+    // Common sections
+    if (section === 'settings') {
+        return getSettingsContent(role);
+    }
+    
+    // Fallback
+    return getPlaceholderContent(section);
 }
 
 /**
@@ -304,11 +288,11 @@ function getCampaignManagerOverview() {
                 <button class="btn btn-primary" onclick="loadSection('app-setup')" style="padding: 20px; font-size: 1.1rem;">
                     🎮 Launch New Campaign
                 </button>
-                <button class="btn btn-secondary" onclick="loadSection('wallet')" style="padding: 20px; font-size: 1.1rem;">
-                    👛 Connect Coinbase Wallet
+                <button class="btn btn-secondary" onclick="loadSection('campaigns')" style="padding: 20px; font-size: 1.1rem;">
+                    📍 Add Token Locations
                 </button>
-                <button class="btn btn-outline" onclick="loadSection('advertisers')" style="padding: 20px; font-size: 1.1rem;">
-                    📍 Manage Advertisers
+                <button class="btn btn-outline" onclick="loadSection('wallet')" style="padding: 20px; font-size: 1.1rem;">
+                    👛 Connect Wallet
                 </button>
             </div>
         </div>
@@ -341,8 +325,8 @@ function getCampaignManagerOverview() {
                             <span class="metric-value">47</span>
                         </div>
                         <div class="app-metric">
-                            <span class="metric-label">Advertisers</span>
-                            <span class="metric-value">23</span>
+                            <span class="metric-label">Token Locations</span>
+                            <span class="metric-value">4</span>
                         </div>
                         <div class="app-metric">
                             <span class="metric-label">Revenue/Day</span>
