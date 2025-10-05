@@ -29,6 +29,19 @@ const EmberHuntDemo = {
         { id: 'token-004', lat: 33.4508, lng: -112.0725, amount: 500, location: 'Chase Field Area', collectable: true }
     ],
     
+    // Campaign Manager Locations (Blue Pins)
+    campaignLocations: [
+        { id: 'cm-001', lat: 33.4484, lng: -112.0740, name: 'Heritage Square Historic Site', type: 'campaign-manager' },
+        { id: 'cm-002', lat: 33.4495, lng: -112.0730, name: 'Downtown Phoenix Plaza', type: 'campaign-manager' }
+    ],
+    
+    // Advertiser Locations (Gold Pins)
+    advertiserLocations: [
+        { id: 'adv-001', lat: 33.4501, lng: -112.0728, name: 'Chase Field Area', advertiser: 'Sports Arena Co.', type: 'advertiser' },
+        { id: 'adv-002', lat: 33.4472, lng: -112.0752, name: 'Roosevelt Arts District', advertiser: 'Art Gallery LLC', type: 'advertiser' },
+        { id: 'adv-003', lat: 33.4468, lng: -112.0745, name: 'Cityscape Shopping', advertiser: 'Retail Partners', type: 'advertiser' }
+    ],
+    
     // Recent activity feed
     recentActivity: [
         { 
@@ -103,32 +116,32 @@ function getCampaignsContent(role) {
                 
                 <!-- Main Monitoring Grid -->
                 <div class="monitoring-grid">
-                    <!-- Live Player Map -->
+                    <!-- Live Player Map with Google Maps -->
                     <div class="monitoring-panel">
-                        <div class="panel-title">🗺️ Live Player Map</div>
+                        <div class="panel-title">🗺️ Live Player & Location Map</div>
                         
-                        <div class="live-map">
-                            <div class="map-placeholder">
-                                <div style="text-align: center;">
-                                    <div style="font-size: 3rem; margin-bottom: 15px;">🗺️</div>
-                                    <div style="color: rgba(255,255,255,0.8); font-weight: 700; margin-bottom: 10px;">
-                                        Interactive Phoenix Map
-                                    </div>
-                                    <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.6;">
-                                        • Blue dots = Active players<br>
-                                        • Gold coins = Token locations<br>
-                                        • Green = Collectable range<br>
-                                        • Red = Out of range
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="live-map" id="campaignMap" style="height: 400px; border-radius: 12px; overflow: hidden;">
+                            <!-- Google Maps will load here -->
                         </div>
                         
-                        <div class="map-controls">
-                            <button class="btn btn-small btn-outline">Zoom In</button>
-                            <button class="btn btn-small btn-outline">Zoom Out</button>
-                            <button class="btn btn-small btn-outline">Center View</button>
-                            <button class="btn btn-small btn-secondary">Fullscreen</button>
+                        <div class="map-controls" style="margin-top: 15px;">
+                            <button class="btn btn-small btn-outline" onclick="campaignZoomIn()">Zoom In</button>
+                            <button class="btn btn-small btn-outline" onclick="campaignZoomOut()">Zoom Out</button>
+                            <button class="btn btn-small btn-outline" onclick="campaignCenterMap()">Center View</button>
+                            <button class="btn btn-small btn-secondary" onclick="campaignToggleFullscreen()">Fullscreen</button>
+                        </div>
+                        
+                        <!-- Map Filters -->
+                        <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn btn-small" id="filterPlayers" onclick="toggleMapFilter('players')" style="background: rgba(34, 197, 94, 0.3); border: 1px solid #22c55e;">
+                                👥 Players (${EmberHuntDemo.activePlayers.length})
+                            </button>
+                            <button class="btn btn-small" id="filterCampaign" onclick="toggleMapFilter('campaign')" style="background: rgba(59, 130, 246, 0.3); border: 1px solid #3b82f6;">
+                                📍 Campaign Mgr (${EmberHuntDemo.campaignLocations.length})
+                            </button>
+                            <button class="btn btn-small" id="filterAdvertisers" onclick="toggleMapFilter('advertisers')" style="background: rgba(240, 165, 0, 0.3); border: 1px solid #f0a500;">
+                                🏢 Advertisers (${EmberHuntDemo.advertiserLocations.length})
+                            </button>
                         </div>
                         
                         <div class="map-stats">
@@ -139,6 +152,25 @@ function getCampaignsContent(role) {
                             <div class="map-stat">
                                 <div class="map-stat-value">${EmberHuntDemo.performance.tokensActive}</div>
                                 <div class="map-stat-label">Tokens Available</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Map Legend -->
+                        <div style="margin-top: 15px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                            <div style="font-weight: 700; margin-bottom: 8px; font-size: 0.9rem;">Map Legend:</div>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; font-size: 0.85rem;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="width: 10px; height: 10px; background: #3b82f6; border-radius: 50%; display: inline-block;"></span>
+                                    <span>Campaign Manager</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="width: 10px; height: 10px; background: #f0a500; border-radius: 50%; display: inline-block;"></span>
+                                    <span>Advertiser</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%; display: inline-block;"></span>
+                                    <span>Active Player</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -293,6 +325,238 @@ function getCampaignsContent(role) {
                 </div>
             </div>
         </div>
+        
+        <!-- Google Maps Integration Script -->
+        <script>
+            let campaignMapInstance;
+            let playerMarkers = [];
+            let campaignMgrMarkers = [];
+            let advertiserMarkers = [];
+            let mapFilters = {
+                players: true,
+                campaign: true,
+                advertisers: true
+            };
+            
+            // Initialize Google Map for Campaign Manager
+            function initCampaignMap() {
+                const mapElement = document.getElementById('campaignMap');
+                if (!mapElement) return;
+                
+                // Check if Google Maps API is loaded
+                if (typeof google === 'undefined') {
+                    mapElement.innerHTML = \`
+                        <div style="height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px; text-align: center; background: linear-gradient(135deg, rgba(15, 15, 15, 0.5), rgba(45, 24, 16, 0.5));">
+                            <div style="font-size: 3rem; margin-bottom: 20px;">🗺️</div>
+                            <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">Google Maps API Required</h3>
+                            <p style="color: rgba(255,255,255,0.7); max-width: 500px; margin-bottom: 20px;">
+                                To display the live map with players and locations, add your Google Maps API key.
+                            </p>
+                            <button class="btn btn-primary" onclick="alert('Add to dashboard.html before closing </body>:\\n\\n<script src=\\\\"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY\\\\"><\\\\/script>')">
+                                Configure API Key
+                            </button>
+                            <div style="margin-top: 20px; padding: 15px; background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; max-width: 500px;">
+                                <strong>Demo Mode:</strong> Map functionality ready. Add API key to see live tracking.
+                            </div>
+                        </div>
+                    \`;
+                    return;
+                }
+                
+                // Initialize map centered on Phoenix
+                campaignMapInstance = new google.maps.Map(mapElement, {
+                    center: { lat: 33.4484, lng: -112.0740 },
+                    zoom: 14,
+                    styles: [
+                        { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
+                        { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
+                        { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+                        {
+                            featureType: "administrative.locality",
+                            elementType: "labels.text.fill",
+                            stylers: [{ color: "#d59563" }],
+                        },
+                        {
+                            featureType: "poi",
+                            elementType: "labels.text.fill",
+                            stylers: [{ color: "#d59563" }],
+                        },
+                        {
+                            featureType: "road",
+                            elementType: "geometry",
+                            stylers: [{ color: "#38414e" }],
+                        },
+                        {
+                            featureType: "road",
+                            elementType: "geometry.stroke",
+                            stylers: [{ color: "#212a37" }],
+                        },
+                        {
+                            featureType: "road",
+                            elementType: "labels.text.fill",
+                            stylers: [{ color: "#9ca5b3" }],
+                        },
+                        {
+                            featureType: "water",
+                            elementType: "geometry",
+                            stylers: [{ color: "#0f0f0f" }],
+                        },
+                    ],
+                });
+                
+                // Add active player markers (Green pins)
+                EmberHuntDemo.activePlayers.forEach(player => {
+                    const marker = new google.maps.Marker({
+                        position: { lat: player.lat, lng: player.lng },
+                        map: campaignMapInstance,
+                        title: player.username,
+                        icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            scale: 8,
+                            fillColor: '#22c55e',
+                            fillOpacity: 0.9,
+                            strokeColor: '#fff',
+                            strokeWeight: 2
+                        }
+                    });
+                    
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: \`
+                            <div style="color: #000; padding: 10px;">
+                                <h4 style="margin: 0 0 10px 0; color: #22c55e;">👤 \${player.username}</h4>
+                                <p style="margin: 5px 0;"><strong>Status:</strong> \${player.collecting ? '🎯 Collecting' : '🚶 Walking'}</p>
+                                <p style="margin: 5px 0;"><strong>Player ID:</strong> \${player.id}</p>
+                            </div>
+                        \`
+                    });
+                    
+                    marker.addListener('click', () => {
+                        infoWindow.open(campaignMapInstance, marker);
+                    });
+                    
+                    playerMarkers.push(marker);
+                });
+                
+                // Add Campaign Manager locations (Blue pins)
+                EmberHuntDemo.campaignLocations.forEach(location => {
+                    const marker = new google.maps.Marker({
+                        position: { lat: location.lat, lng: location.lng },
+                        map: campaignMapInstance,
+                        title: location.name,
+                        icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            scale: 10,
+                            fillColor: '#3b82f6',
+                            fillOpacity: 0.9,
+                            strokeColor: '#fff',
+                            strokeWeight: 2
+                        }
+                    });
+                    
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: \`
+                            <div style="color: #000; padding: 10px;">
+                                <h4 style="margin: 0 0 10px 0; color: #3b82f6;">📍 \${location.name}</h4>
+                                <p style="margin: 5px 0;"><strong>Type:</strong> Campaign Manager Location</p>
+                                <p style="margin: 5px 0;"><strong>Status:</strong> Active</p>
+                            </div>
+                        \`
+                    });
+                    
+                    marker.addListener('click', () => {
+                        infoWindow.open(campaignMapInstance, marker);
+                    });
+                    
+                    campaignMgrMarkers.push(marker);
+                });
+                
+                // Add Advertiser locations (Gold pins)
+                EmberHuntDemo.advertiserLocations.forEach(location => {
+                    const marker = new google.maps.Marker({
+                        position: { lat: location.lat, lng: location.lng },
+                        map: campaignMapInstance,
+                        title: location.name,
+                        icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            scale: 10,
+                            fillColor: '#f0a500',
+                            fillOpacity: 0.9,
+                            strokeColor: '#fff',
+                            strokeWeight: 2
+                        }
+                    });
+                    
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: \`
+                            <div style="color: #000; padding: 10px;">
+                                <h4 style="margin: 0 0 10px 0; color: #f0a500;">🏢 \${location.name}</h4>
+                                <p style="margin: 5px 0;"><strong>Advertiser:</strong> \${location.advertiser}</p>
+                                <p style="margin: 5px 0;"><strong>Type:</strong> Advertiser Location</p>
+                                <p style="margin: 5px 0;"><strong>Status:</strong> Active</p>
+                            </div>
+                        \`
+                    });
+                    
+                    marker.addListener('click', () => {
+                        infoWindow.open(campaignMapInstance, marker);
+                    });
+                    
+                    advertiserMarkers.push(marker);
+                });
+            }
+            
+            // Map control functions
+            function campaignZoomIn() {
+                if (campaignMapInstance) {
+                    campaignMapInstance.setZoom(campaignMapInstance.getZoom() + 1);
+                }
+            }
+            
+            function campaignZoomOut() {
+                if (campaignMapInstance) {
+                    campaignMapInstance.setZoom(campaignMapInstance.getZoom() - 1);
+                }
+            }
+            
+            function campaignCenterMap() {
+                if (campaignMapInstance) {
+                    campaignMapInstance.setCenter({ lat: 33.4484, lng: -112.0740 });
+                    campaignMapInstance.setZoom(14);
+                }
+            }
+            
+            function campaignToggleFullscreen() {
+                const mapElement = document.getElementById('campaignMap');
+                if (!document.fullscreenElement) {
+                    mapElement.requestFullscreen().catch(err => {
+                        alert('Fullscreen not supported');
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+            
+            // Toggle map filters
+            function toggleMapFilter(filterType) {
+                mapFilters[filterType] = !mapFilters[filterType];
+                
+                const button = document.getElementById('filter' + filterType.charAt(0).toUpperCase() + filterType.slice(1));
+                
+                if (filterType === 'players') {
+                    playerMarkers.forEach(marker => marker.setVisible(mapFilters.players));
+                    if (button) button.style.opacity = mapFilters.players ? '1' : '0.4';
+                } else if (filterType === 'campaign') {
+                    campaignMgrMarkers.forEach(marker => marker.setVisible(mapFilters.campaign));
+                    if (button) button.style.opacity = mapFilters.campaign ? '1' : '0.4';
+                } else if (filterType === 'advertisers') {
+                    advertiserMarkers.forEach(marker => marker.setVisible(mapFilters.advertisers));
+                    if (button) button.style.opacity = mapFilters.advertisers ? '1' : '0.4';
+                }
+            }
+            
+            // Initialize map when section loads
+            setTimeout(initCampaignMap, 500);
+        </script>
     `;
 }
 
