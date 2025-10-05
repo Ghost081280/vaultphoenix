@@ -239,11 +239,11 @@ function getAppSetupContent(role) {
                         <div class="preview-info">
                             <h5>What You're Building:</h5>
                             <ul>
-                                <li>✓ <strong>AR Token Hunt:</strong> Players find $Ember tokens at your locations using their phone camera</li>
+                                <li>✓ <strong>AR Token Hunt:</strong> Players find $Ember tokens at locations using phone camera</li>
                                 <li>✓ <strong>Live Map:</strong> Shows all active token locations in real-time</li>
-                                <li>✓ <strong>Wallet Integration:</strong> Players collect and manage their $Ember earnings</li>
-                                <li>✓ <strong>Leaderboards:</strong> Gamification to drive engagement and competition</li>
-                                <li>✓ <strong>Push Notifications:</strong> Alert players when new tokens are nearby</li>
+                                <li>✓ <strong>Wallet Integration:</strong> Players collect and manage $Ember earnings</li>
+                                <li>✓ <strong>Circular Economy:</strong> Recovered tokens can be reused for new stops</li>
+                                <li>✓ <strong>Custom Message Airdrops:</strong> Send targeted messages to players</li>
                             </ul>
                             
                             <div class="tech-stack">
@@ -476,15 +476,12 @@ function updateLivePreview() {
         
         iframeDoc.head.insertAdjacentHTML('beforeend', customCSS);
         
-        // Update nav title
         const navTitle = iframeDoc.querySelector('.nav-title');
         if (navTitle) navTitle.textContent = appName;
         
-        // Update side menu title
         const sideMenuTitle = iframeDoc.querySelector('.side-menu-title');
         if (sideMenuTitle) sideMenuTitle.textContent = appName;
         
-        // Update logo in nav and side menu
         if (AppSetupState.whiteLabel.logo) {
             const logoImg = iframeDoc.querySelector('.nav-logo-image');
             if (logoImg) logoImg.src = AppSetupState.whiteLabel.logo;
@@ -516,7 +513,6 @@ function updateCustomDomain() {
         
         if (dnsHost) dnsHost.textContent = subdomain;
         
-        // Create URL-friendly app name
         const urlSafeName = appName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         
         if (finalUrl) finalUrl.textContent = `https://${customDomain}/${urlSafeName}`;
