@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Advertiser Campaign Control - Advertisement Token Stop Creation
+   Advertiser Campaign Control - Simplified Pricing Model
    ============================================ */
 
 // This file handles the advertiser's campaign control page where they create
@@ -34,11 +34,16 @@ function getCampaignControlContent(campaignId) {
     const advertiserBalance = window.AdvertiserData?.tokenBalance?.owned || 0;
     const advertiserAvailable = window.AdvertiserData?.tokenBalance?.available || 0;
     
+    // Calculate current pricing based on location count
+    const currentLocationCount = locations.length;
+    const nextLocationCount = currentLocationCount + 1;
+    const currentPrice = window.getPricePerLocation ? window.getPricePerLocation(campaign, nextLocationCount) : campaign.pricePerLocation;
+    
     return `
         <div class="dashboard-section">
             <div class="builder-header">
                 <h2 class="section-title">🎮 ${campaign.name} - Campaign Control</h2>
-                <button class="btn btn-outline" onclick="loadSection('overview')">← Back to Dashboard</button>
+                <button class="btn btn-outline" onclick="loadSection('marketplace')">← Back to Marketplace</button>
             </div>
             
             <p style="color: rgba(255,255,255,0.8); margin-bottom: 25px;">
@@ -120,26 +125,52 @@ function getCampaignControlContent(campaignId) {
                 </ul>
             </div>
             
+            <!-- Pricing Info -->
+            <div class="card" style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.4); margin-bottom: 20px;">
+                <h4 style="color: #22c55e; margin-bottom: 15px;">💰 Pricing for Your Next Location (All Features Included)</h4>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                    <div>
+                        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 5px;">
+                            ${currentLocationCount === 0 ? 'First Location' : `Location #${nextLocationCount}`}
+                        </div>
+                        <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-gold);">
+                            ${typeof currentPrice === 'number' ? `$${currentPrice}/month` : currentPrice}
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">+ Token Purchase</div>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #22c55e;">One-time</div>
+                    </div>
+                </div>
+                <div style="margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                    <h5 style="margin-bottom: 10px;">Volume Pricing Benefits:</h5>
+                    <div style="display: grid; gap: 5px; font-size: 0.9rem;">
+                        ${campaign.volumePricing.map(tier => `
+                            <div style="display: flex; justify-content: space-between; padding: 5px 0;">
+                                <span style="color: rgba(255,255,255,0.7);">
+                                    ${tier.min === tier.max ? `${tier.min} location` : 
+                                      tier.max === 999 ? `${tier.min}+ locations` : 
+                                      `${tier.min}-${tier.max} locations`}:
+                                </span>
+                                <span style="font-weight: 700; color: var(--color-primary-gold);">
+                                    ${typeof tier.price === 'number' ? `$${tier.price}/mo each` : tier.price}
+                                </span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+            
             <!-- Location Form -->
             <div class="card">
                 <h4 style="color: var(--color-primary-gold); margin-bottom: 20px;">
                     📍 Location Details
                 </h4>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div style="display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 15px;">
                     <div class="form-group">
                         <label class="form-label">Location Name *</label>
                         <input type="text" class="form-input" id="advLocationName_${campaignId}" placeholder="My Business Name">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Select Tier *</label>
-                        <select class="form-input" id="advTier_${campaignId}" onchange="updateTokenRequirement('${campaignId}')">
-                            <option value="bronze">Bronze - $200/month (5,000 tokens min)</option>
-                            <option value="silver" selected>Silver - $500/month (10,000 tokens min)</option>
-                            <option value="gold">Gold - $1,200/month (25,000 tokens min)</option>
-                            <option value="platinum">Platinum - $2,500/month (50,000 tokens min)</option>
-                        </select>
                     </div>
                 </div>
                 
@@ -306,13 +337,12 @@ function getCampaignControlContent(campaignId) {
                     <h4 style="color: #22c55e; margin-bottom: 15px;">✓ Final Checklist Before Creating:</h4>
                     <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8;">
                         <li>✓ Location name and address are correct</li>
-                        <li>✓ Tier selected matches your budget</li>
                         <li>✓ Sufficient $Ember tokens allocated (min: ${campaign.minTokensPerStop.toLocaleString()})</li>
                         <li>✓ Advertisement title is compelling (max ${campaign.adSpecs.titleMaxLength} chars)</li>
                         <li>✓ Description includes redemption instructions (max ${campaign.adSpecs.descriptionMaxLength} chars)</li>
                         <li>✓ Eye-catching image uploaded</li>
                         <li>✓ Redemption offer is clear and specific</li>
-                        <li>✓ Scanner App downloaded and ready</li>
+                        <li>✓ Scanner App link ready to share with staff</li>
                     </ul>
                 </div>
                 
@@ -342,13 +372,10 @@ function getCampaignControlContent(campaignId) {
                             <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">${loc.address}</div>
                         </div>
                         <div style="text-align: right;">
-                            <span class="tier-badge tier-${loc.tier}">${loc.tier}</span>
-                            ${loc.scannerActive ? `
-                                <div style="margin-top: 8px;">
-                                    <span class="status-indicator status-live"></span>
-                                    <span style="color: #22c55e; font-size: 0.85rem;">Scanner Active</span>
-                                </div>
-                            ` : ''}
+                            <div style="font-size: 1.2rem; font-weight: 700; color: var(--color-primary-gold); margin-bottom: 5px;">
+                                $${loc.monthlyFee || currentPrice}/month
+                            </div>
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">All features included</div>
                         </div>
                     </div>
                     
@@ -388,7 +415,7 @@ function getCampaignControlContent(campaignId) {
                     ` : ''}
                     
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn btn-primary" onclick="openScannerApp()">Open Scanner</button>
+                        <button class="btn btn-primary" onclick="loadSection('scanner')">Get Scanner Link</button>
                         <button class="btn btn-secondary" onclick="editAdvertisement('${loc.id}', '${campaignId}')">Edit Advertisement</button>
                         <button class="btn btn-outline" onclick="addMoreTokens('${loc.id}', '${campaignId}')">Add Tokens</button>
                         <button class="btn btn-outline" onclick="viewLocationAnalytics('${loc.id}', '${campaignId}')">Analytics</button>
@@ -480,29 +507,6 @@ function previewAdImage(event, campaignId) {
 }
 
 /**
- * Update token requirement based on tier
- */
-function updateTokenRequirement(campaignId) {
-    const tier = document.getElementById(`advTier_${campaignId}`)?.value;
-    const tokenInput = document.getElementById(`advTokensAllocate_${campaignId}`);
-    
-    const minTokens = {
-        bronze: 5000,
-        silver: 10000,
-        gold: 25000,
-        platinum: 50000
-    };
-    
-    if (tokenInput && tier) {
-        tokenInput.min = minTokens[tier];
-        if (parseInt(tokenInput.value) < minTokens[tier]) {
-            tokenInput.value = minTokens[tier];
-        }
-        updateTokenAllocationSummary(campaignId);
-    }
-}
-
-/**
  * Update token allocation summary
  */
 function updateTokenAllocationSummary(campaignId) {
@@ -537,7 +541,6 @@ function createAdvertisementTokenStop(campaignId) {
     
     // Collect all form data
     const name = document.getElementById(`advLocationName_${campaignId}`)?.value;
-    const tier = document.getElementById(`advTier_${campaignId}`)?.value;
     const address = document.getElementById(`advAddress_${campaignId}`)?.value;
     const tokensAllocate = parseInt(document.getElementById(`advTokensAllocate_${campaignId}`)?.value) || 0;
     
@@ -590,15 +593,11 @@ function createAdvertisementTokenStop(campaignId) {
         return;
     }
     
-    // Get tier pricing
-    const tierPricing = {
-        bronze: { fee: 200, minTokens: 5000 },
-        silver: { fee: 500, minTokens: 10000 },
-        gold: { fee: 1200, minTokens: 25000 },
-        platinum: { fee: 2500, minTokens: 50000 }
-    };
+    // Get current location count to determine pricing
+    const locations = window.AdvertiserData?.campaignLocations[campaignId] || [];
+    const nextLocationCount = locations.length + 1;
+    const monthlyFee = window.getPricePerLocation ? window.getPricePerLocation(campaign, nextLocationCount) : campaign.pricePerLocation;
     
-    const pricing = tierPricing[tier];
     const tokenCost = (tokensAllocate * 0.0035).toFixed(2);
     
     // Confirmation
@@ -606,14 +605,14 @@ function createAdvertisementTokenStop(campaignId) {
         `📍 Location: ${name}\n` +
         `${address}\n\n` +
         `💰 COSTS:\n` +
-        `• Monthly Fee: $${pricing.fee}\n` +
+        `• Monthly Fee: $${monthlyFee} (all features included)\n` +
         `• Tokens Allocated: ${tokensAllocate.toLocaleString()} $Ember\n\n` +
         `📢 ADVERTISEMENT:\n` +
         `• Title: "${adTitle}"\n` +
         `• Offer: "${offer}" (${offerCost} $Ember)\n\n` +
         `After creation:\n` +
         `• Available tokens: ${(advertiserAvailable - tokensAllocate).toLocaleString()}\n` +
-        `• Scanner App required for redemptions\n\n` +
+        `• Scanner link available in Scanner section\n\n` +
         `Continue?`;
     
     if (confirm(confirmMsg)) {
@@ -622,11 +621,11 @@ function createAdvertisementTokenStop(campaignId) {
             `📍 ${name} is now live in ${campaign.name}\n\n` +
             `${tokensAllocate.toLocaleString()} $Ember allocated with your advertisement.\n\n` +
             `Next Steps:\n` +
-            `1. Ensure Scanner App is downloaded\n` +
+            `1. Get Scanner App link from Scanner section\n` +
             `2. Train staff on redemption process\n` +
             `3. Players will start collecting & seeing your ad!\n` +
             `4. Monitor redemptions in analytics\n\n` +
-            `Monthly fee of $${pricing.fee} will be charged starting next month.`);
+            `Monthly fee of $${monthlyFee} will be charged starting next month.`);
         
         // Update advertiser balance (in real app, this would be server-side)
         if (window.AdvertiserData?.tokenBalance) {
@@ -685,14 +684,21 @@ function addMoreTokens(locationId, campaignId) {
     }
 }
 
+/**
+ * View location analytics
+ */
+function viewLocationAnalytics(locationId, campaignId) {
+    alert(`Location Analytics\n\nThis would show:\n• Collection trends\n• Redemption rates\n• Player demographics\n• Peak hours\n• ROI calculations`);
+}
+
 // Export functions
 if (typeof window !== 'undefined') {
     window.getCampaignControlContent = getCampaignControlContent;
     window.updateCharCount = updateCharCount;
     window.previewAdImage = previewAdImage;
-    window.updateTokenRequirement = updateTokenRequirement;
     window.updateTokenAllocationSummary = updateTokenAllocationSummary;
     window.createAdvertisementTokenStop = createAdvertisementTokenStop;
     window.editAdvertisement = editAdvertisement;
     window.addMoreTokens = addMoreTokens;
+    window.viewLocationAnalytics = viewLocationAnalytics;
 }
