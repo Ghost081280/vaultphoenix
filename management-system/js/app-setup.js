@@ -153,7 +153,7 @@ function getAppSetupContent(role) {
                                 <div class="token-symbol">💎</div>
                                 <div class="token-details">
                                     <div class="token-name">$Ember Token System</div>
-                                    <div class="token-desc">Your app comes with $Ember already integrated. Players collect tokens at your locations, and you manage distribution through your dashboard.</div>
+                                    <div class="token-desc">Your app comes with $Ember already integrated. Players collect tokens at your locations.</div>
                                 </div>
                             </div>
                         </div>
