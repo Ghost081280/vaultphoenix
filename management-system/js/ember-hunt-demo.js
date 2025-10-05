@@ -25,6 +25,19 @@ const EmberHuntDemo = {
             tokenAmount: 75,
             status: 'active',
             message: 'Downtown Phoenix welcomes you! Collect your tokens and discover local businesses.',
+            
+            // Campaign Manager can now add advertisements too
+            hasAdvertisement: true,
+            advertisement: {
+                title: 'Explore Downtown Phoenix!',
+                description: 'Discover amazing local businesses, restaurants, and entertainment. Use your $Ember tokens for exclusive deals!',
+                imageUrl: 'images/downtown-phoenix.jpg',
+                offer: 'Welcome Bonus',
+                offerEmberValue: 0,
+                ctaText: 'Explore Downtown',
+                ctaUrl: 'https://downtownphoenix.com'
+            },
+            
             sponsorName: 'Downtown Phoenix Inc.',
             sponsorInfo: 'Building a vibrant urban core',
             ctaButtons: [
@@ -32,8 +45,7 @@ const EmberHuntDemo = {
                 { text: 'Events Calendar', url: 'https://downtownphoenix.com/events' }
             ],
             addedBy: 'Campaign Manager',
-            campaign: '$Ember Hunt',
-            hasAdvertisement: false // Campaign manager locations don't have advertiser ads
+            campaign: '$Ember Hunt'
         }
     ],
     
@@ -47,10 +59,10 @@ const EmberHuntDemo = {
             lng: -112.0740,
             
             // Token allocation
-            tokensAllocated: 5000,      // Advertiser purchased this many
-            tokensRemaining: 3250,       // Still available for collection
-            tokensCollected: 1750,       // Already collected by players
-            tokenAmount: 50,             // Amount per collection
+            tokensAllocated: 5000,
+            tokensRemaining: 3250,
+            tokensCollected: 1750,
+            tokenAmount: 50,
             
             status: 'active',
             
@@ -60,7 +72,7 @@ const EmberHuntDemo = {
                 description: 'Visit Heritage Square Historic Site and redeem your $Ember for 10% off museum tours, gift shop purchases, or get a free guided tour souvenir! We accept $Ember redemptions at our front desk.',
                 imageUrl: 'images/heritage-square-ad.jpg',
                 offer: '10% Off Tours & Gift Shop OR Free Souvenir',
-                offerEmberValue: 50,      // Cost to redeem in $Ember
+                offerEmberValue: 50,
                 ctaText: 'Visit Us & Redeem',
                 ctaUrl: 'https://heritagesquarephx.org'
             },
@@ -70,8 +82,8 @@ const EmberHuntDemo = {
                 total: 65,
                 thisMonth: 65,
                 averageTokens: 50,
-                totalTokensRedeemed: 3250,  // Tokens advertiser got back
-                conversionRate: 7.8         // 7.8% of collectors redeem
+                totalTokensRedeemed: 3250,
+                conversionRate: 7.8
             },
             
             // Advertiser info
@@ -79,14 +91,15 @@ const EmberHuntDemo = {
             advertiserName: 'Heritage Square Historic Site',
             advertiserEmail: 'marketing@heritagesquare.org',
             campaign: '$Ember Hunt',
-            tier: 'silver',
-            monthlyFee: 500,
+            locationCount: 1, // Used for pricing calculation
+            monthlyFeePerLocation: 500,
+            totalMonthlyFee: 500,
             tokensPurchased: 5000,
-            tokenCost: 17.50,           // $5000 tokens × $0.0035
+            tokenCost: 17.50,
             totalMonthlyInvestment: 517.50,
             
             hasAdvertisement: true,
-            scannerActive: true,
+            scannerWebAppAccess: true,
             
             addedDate: new Date('2024-09-01')
         }
@@ -123,7 +136,7 @@ const EmberHuntDemo = {
             amount: 75, 
             location: 'Downtown Phoenix Plaza', 
             timestamp: new Date(Date.now() - 120000),
-            hasAd: false
+            hasAd: true
         }
     ],
     
@@ -189,64 +202,10 @@ function getCampaignsContent(role) {
             </div>
         </div>
         
-        <!-- Ecosystem Overview -->
-        <div class="dashboard-section">
-            <div class="card" style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3);">
-                <h3 style="color: var(--color-primary-gold); margin-bottom: 20px; font-size: 1.5rem;">
-                    💡 How The $Ember Advertisement Ecosystem Works
-                </h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                    <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">1️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Advertisers Join</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.85rem; margin: 0; line-height: 1.5;">
-                            Pay monthly location fee + purchase $Ember tokens to fund stops
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">2️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Create Ad Stop</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.85rem; margin: 0; line-height: 1.5;">
-                            Add location with advertisement content and token allocation
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">3️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Players Collect</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.85rem; margin: 0; line-height: 1.5;">
-                            Visit location in AR, collect tokens, see advertisement
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">4️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Cash Out or Redeem</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.85rem; margin: 0; line-height: 1.5;">
-                            Players cash out to Coinbase OR visit advertiser to redeem offer
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">5️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Scan & Recover</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.85rem; margin: 0; line-height: 1.5;">
-                            Advertiser scans player QR → receives $Ember back → gives offer
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">6️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Circular Economy</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.85rem; margin: 0; line-height: 1.5;">
-                            Recovered tokens can fund new stops or be held/sold
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
         <!-- Add Token Location -->
         <div class="dashboard-section">
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                ➕ Add Campaign Token Locations (No Advertisements)
+                ➕ Add Campaign Token Locations (With Advertisements)
             </h3>
             
             <div class="card" style="background: rgba(59,130,246,0.1); border: 2px solid rgba(59,130,246,0.3); margin-bottom: 20px;">
@@ -257,8 +216,8 @@ function getCampaignsContent(role) {
                         <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; line-height: 1.7;">
                             <li>✓ No monthly fees</li>
                             <li>✓ Use your campaign token pool</li>
-                            <li>✓ No advertisements attached</li>
-                            <li>✓ General campaign messaging</li>
+                            <li>✓ Can include advertisements</li>
+                            <li>✓ Scanner web app access</li>
                         </ul>
                     </div>
                     <div>
@@ -278,19 +237,19 @@ function getCampaignsContent(role) {
                 <h4 style="color: var(--color-primary-gold); margin-bottom: 15px;">📤 Bulk Upload (CSV)</h4>
                 
                 <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px;">
-                    Upload multiple campaign token locations at once with sponsor messages and call-to-action buttons.
+                    Upload multiple campaign token locations at once with advertisement content and call-to-action buttons.
                 </p>
                 
                 <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
                     <h5 style="margin-bottom: 10px;">CSV Format:</h5>
                     <div style="font-family: monospace; background: rgba(0,0,0,0.5); padding: 12px; border-radius: 8px; overflow-x: auto; font-size: 0.85rem;">
-                        <div style="color: #22c55e;">name,address,city,state,zip,token_amount,message,sponsor_name,sponsor_info,cta1_text,cta1_url,cta2_text,cta2_url</div>
-                        <div style="color: rgba(255,255,255,0.7);">Downtown Plaza,100 N Central,Phoenix,AZ,85004,75,Welcome!,Downtown Inc,Since 2010,Visit,https://example.com,Events,https://example.com/events</div>
+                        <div style="color: #22c55e;">name,address,city,state,zip,token_amount,message,ad_title,ad_description,ad_offer,ad_offer_cost,cta_text,cta_url</div>
+                        <div style="color: rgba(255,255,255,0.7);">Downtown Plaza,100 N Central,Phoenix,AZ,85004,75,Welcome!,Special Offer,Visit us for deals,10% Off,50,Visit Now,https://example.com</div>
                     </div>
                 </div>
                 
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a href="data:text/csv;charset=utf-8,name,address,city,state,zip,token_amount,message,sponsor_name,sponsor_info,cta1_text,cta1_url,cta2_text,cta2_url%0AExample Location,123 Main St,Phoenix,AZ,85001,75,Welcome message,Sponsor Name,Sponsor info,Button 1,https://example.com,Button 2,https://example.com/page" 
+                    <a href="data:text/csv;charset=utf-8,name,address,city,state,zip,token_amount,message,ad_title,ad_description,ad_offer,ad_offer_cost,cta_text,cta_url%0AExample Location,123 Main St,Phoenix,AZ,85001,75,Welcome message,Ad Title,Ad Description,Offer Details,50,Click Here,https://example.com" 
                        download="token-locations-template.csv" 
                        class="btn btn-outline">
                         📥 Download CSV Template
@@ -303,7 +262,7 @@ function getCampaignsContent(role) {
                 <input type="file" id="cmCsvUpload" accept=".csv" style="display: none;" onchange="handleCMCSVUpload(event)">
             </div>
             
-            <!-- Single Location Form -->
+            <!-- Single Location Form with Advertisement -->
             <div class="card">
                 <h4 style="color: var(--color-primary-gold); margin-bottom: 20px;">
                     📍 Add Single Campaign Token Location
@@ -330,40 +289,90 @@ function getCampaignsContent(role) {
                 <div class="form-group">
                     <label class="form-label">Collection Message *</label>
                     <textarea class="form-input" id="cmMessage" rows="2" placeholder="Welcome! Collect your $Ember tokens here..."></textarea>
-                    <div class="form-hint">Players see this message after collecting tokens (no advertisement)</div>
+                    <div class="form-hint">Players see this message after collecting tokens</div>
                 </div>
                 
-                <div style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
-                    <h5 style="color: #3b82f6; margin-bottom: 15px;">📢 Sponsor Information (Optional)</h5>
+                <!-- Advertisement Section -->
+                <div style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
+                    <h5 style="color: var(--color-primary-gold); margin-bottom: 15px;">📢 Advertisement Content (Optional)</h5>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Advertisement Title</label>
+                        <input type="text" class="form-input" id="cmAdTitle" maxlength="60" placeholder="Explore Downtown Phoenix!">
+                        <div class="form-hint">Max 60 characters</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Advertisement Description</label>
+                        <textarea class="form-input" id="cmAdDescription" rows="3" maxlength="200" placeholder="Discover amazing local businesses and exclusive deals..."></textarea>
+                        <div class="form-hint">Max 200 characters</div>
+                    </div>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                         <div class="form-group">
-                            <label class="form-label">Sponsor Name</label>
-                            <input type="text" class="form-input" id="cmSponsorName" placeholder="Downtown Phoenix Inc">
+                            <label class="form-label">Offer Details</label>
+                            <input type="text" class="form-input" id="cmAdOffer" placeholder="Welcome Bonus">
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">Sponsor Tagline</label>
-                            <input type="text" class="form-input" id="cmSponsorInfo" placeholder="Building a vibrant urban core">
+                            <label class="form-label">Offer Cost (in $Ember)</label>
+                            <input type="number" class="form-input" id="cmAdOfferCost" value="0" min="0" step="25">
                         </div>
                     </div>
                     
-                    <h6 style="color: var(--color-primary-gold); margin: 15px 0 10px 0;">Call-to-Action Buttons</h6>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px; margin-bottom: 10px;">
-                        <input type="text" class="form-input" id="cmCta1Text" placeholder="Button 1 Text">
-                        <input type="text" class="form-input" id="cmCta1Url" placeholder="https://example.com">
-                    </div>
-                    
                     <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px;">
-                        <input type="text" class="form-input" id="cmCta2Text" placeholder="Button 2 Text (Optional)">
-                        <input type="text" class="form-input" id="cmCta2Url" placeholder="https://example.com/page">
+                        <div class="form-group">
+                            <label class="form-label">CTA Button Text</label>
+                            <input type="text" class="form-input" id="cmCtaText" placeholder="Learn More">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">CTA URL</label>
+                            <input type="text" class="form-input" id="cmCtaUrl" placeholder="https://example.com">
+                        </div>
                     </div>
                 </div>
                 
                 <button class="btn btn-primary btn-large" onclick="addCMTokenLocation()" style="width: 100%;">
                     💎 Add Campaign Token Location
                 </button>
+            </div>
+        </div>
+        
+        <!-- Scanner Web App Access -->
+        <div class="dashboard-section">
+            <div class="card" style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.3);">
+                <h3 style="color: #22c55e; margin-bottom: 20px; font-size: 1.5rem;">
+                    📱 QR Scanner Web App Access
+                </h3>
+                
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.6;">
+                    Get your unique scanner web app link to accept $Ember redemptions. Share this link with your staff - 
+                    they can access it on any device with a browser and camera.
+                </p>
+                
+                <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <h4 style="color: var(--color-primary-gold); margin-bottom: 15px;">How the Scanner Web App Works:</h4>
+                    <ol style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                        <li>Click "Get Scanner Link" below to generate your unique web app URL</li>
+                        <li>Share the link via email with your staff members</li>
+                        <li>Staff opens the link on any device (phone, tablet, computer)</li>
+                        <li>No app download required - works in any browser</li>
+                        <li>Point camera at player's QR code to scan and accept redemptions</li>
+                        <li>Tokens transfer instantly to your account</li>
+                    </ol>
+                </div>
+                
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <button class="btn btn-primary btn-large" onclick="getCMScannerLink()">
+                        🔗 Get Scanner Web App Link
+                    </button>
+                    <button class="btn btn-secondary" onclick="emailScannerLink()">
+                        📧 Email Link to Staff
+                    </button>
+                    <button class="btn btn-outline" onclick="viewScannerGuide()">
+                        📚 Scanner Guide
+                    </button>
+                </div>
             </div>
         </div>
         
@@ -395,11 +404,11 @@ function getCampaignsContent(role) {
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; font-size: 0.85rem;">
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <span style="width: 10px; height: 10px; background: #3b82f6; border-radius: 50%; display: inline-block;"></span>
-                            <span>Campaign Locations (No Ads)</span>
+                            <span>Campaign Locations</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <span style="width: 10px; height: 10px; background: #f0a500; border-radius: 50%; display: inline-block;"></span>
-                            <span>Advertiser Locations (With Ads)</span>
+                            <span>Advertiser Locations</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <span style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%; display: inline-block;"></span>
@@ -422,7 +431,7 @@ function getCampaignsContent(role) {
                         <div>
                             <h4 style="color: #3b82f6; margin-bottom: 5px;">${loc.name}</h4>
                             <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">${loc.address}</div>
-                            <div style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 3px;">Campaign Location (No Advertisement)</div>
+                            <div style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 3px;">Campaign Location</div>
                         </div>
                         <span class="badge badge-success">
                             <span class="status-indicator status-live"></span>
@@ -445,26 +454,24 @@ function getCampaignsContent(role) {
                         </div>
                     </div>
                     
-                    <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; margin-bottom: 15px;">
-                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">Collection Message:</div>
-                        <div style="color: rgba(255,255,255,0.9);">${loc.message}</div>
-                    </div>
-                    
-                    ${loc.sponsorName ? `
-                        <div style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 8px; padding: 12px; margin-bottom: 15px;">
-                            <div style="font-weight: 700; margin-bottom: 5px;">${loc.sponsorName}</div>
-                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">${loc.sponsorInfo}</div>
-                            ${loc.ctaButtons && loc.ctaButtons.length > 0 ? `
-                                <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-                                    ${loc.ctaButtons.map(btn => `
-                                        <a href="${btn.url}" target="_blank" class="btn btn-small btn-outline">${btn.text}</a>
-                                    `).join('')}
+                    ${loc.advertisement ? `
+                        <div style="background: rgba(240,165,0,0.15); border: 2px solid rgba(240,165,0,0.4); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                            <h5 style="color: var(--color-primary-gold); margin-bottom: 10px;">📢 Advertisement:</h5>
+                            <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px;">
+                                <h4 style="color: #f0a500; margin-bottom: 8px; font-size: 1rem;">${loc.advertisement.title}</h4>
+                                <p style="color: rgba(255,255,255,0.9); margin-bottom: 10px; font-size: 0.9rem; line-height: 1.5;">
+                                    ${loc.advertisement.description}
+                                </p>
+                                <div style="padding: 8px; background: rgba(34,197,94,0.2); border: 1px solid rgba(34,197,94,0.4); border-radius: 6px;">
+                                    <div style="font-size: 0.85rem;">Offer: ${loc.advertisement.offer}</div>
+                                    ${loc.advertisement.offerEmberValue > 0 ? `<div style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">Cost: ${loc.advertisement.offerEmberValue} $Ember</div>` : ''}
                                 </div>
-                            ` : ''}
+                            </div>
                         </div>
                     ` : ''}
                     
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="getCMScannerLink()">Get Scanner Link</button>
                         <button class="btn btn-outline" onclick="editCMLocation('${loc.id}')">Edit</button>
                         <button class="btn btn-secondary" onclick="refillTokens('${loc.id}')">Add More Tokens</button>
                         <button class="btn" onclick="viewLocationAnalytics('${loc.id}')" style="background: rgba(34,197,94,0.3); border: 1px solid #22c55e;">Analytics</button>
@@ -486,12 +493,11 @@ function getCampaignsContent(role) {
                             <h4 style="color: #f0a500; margin-bottom: 5px;">${loc.name}</h4>
                             <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">${loc.address}</div>
                             <div style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 3px;">
-                                By: ${loc.advertiserName} • ${loc.tier} Tier ($${loc.monthlyFee}/mo)
+                                By: ${loc.advertiserName} • ${loc.locationCount} ${loc.locationCount === 1 ? 'location' : 'locations'} ($${loc.monthlyFeePerLocation}/mo each)
                             </div>
                         </div>
                         <div style="text-align: right;">
-                            <span class="tier-badge tier-${loc.tier}">${loc.tier}</span>
-                            ${loc.scannerActive ? `
+                            ${loc.scannerWebAppAccess ? `
                                 <div style="margin-top: 8px;">
                                     <span class="status-indicator status-live"></span>
                                     <span style="color: #22c55e; font-size: 0.85rem;">Scanner Active</span>
@@ -641,7 +647,7 @@ function getCampaignsContent(role) {
                             <p style="margin: 5px 0;"><strong>Type:</strong> Campaign Location</p>
                             <p style="margin: 5px 0;"><strong>Tokens:</strong> \${location.tokensRemaining.toLocaleString()} remaining</p>
                             <p style="margin: 5px 0;"><strong>Amount:</strong> \${location.tokenAmount} per collection</p>
-                            <p style="margin: 5px 0;"><strong>Advertisement:</strong> None</p>
+                            <p style="margin: 5px 0;"><strong>Advertisement:</strong> ${location.hasAdvertisement ? 'Yes' : 'No'}</p>
                         </div>
                     \`;
                     
@@ -671,7 +677,7 @@ function getCampaignsContent(role) {
                             <h4 style="margin: 0 0 10px 0; color: #f0a500;">🏢 \${location.name}</h4>
                             <p style="margin: 5px 0;"><strong>Type:</strong> Advertiser Location</p>
                             <p style="margin: 5px 0;"><strong>Advertiser:</strong> \${location.advertiserName}</p>
-                            <p style="margin: 5px 0;"><strong>Tier:</strong> \${location.tier}</p>
+                            <p style="margin: 5px 0;"><strong>Locations:</strong> \${location.locationCount}</p>
                             <p style="margin: 5px 0;"><strong>Tokens:</strong> \${location.tokensRemaining.toLocaleString()} remaining</p>
                             <p style="margin: 5px 0;"><strong>Redeemed:</strong> \${location.redemptions.totalTokensRedeemed.toLocaleString()}</p>
                             <p style="margin: 5px 0;"><strong>Advertisement:</strong> Yes</p>
@@ -748,17 +754,17 @@ function handleCMCSVUpload(event) {
                 address: `${parts[1]?.trim()}, ${parts[2]?.trim()}, ${parts[3]?.trim()} ${parts[4]?.trim()}`,
                 tokenAmount: parseInt(parts[5]) || 75,
                 message: parts[6]?.trim(),
-                sponsorName: parts[7]?.trim(),
-                sponsorInfo: parts[8]?.trim(),
-                cta1Text: parts[9]?.trim(),
-                cta1Url: parts[10]?.trim(),
-                cta2Text: parts[11]?.trim(),
-                cta2Url: parts[12]?.trim()
+                adTitle: parts[7]?.trim(),
+                adDescription: parts[8]?.trim(),
+                adOffer: parts[9]?.trim(),
+                adOfferCost: parseInt(parts[10]) || 0,
+                ctaText: parts[11]?.trim(),
+                ctaUrl: parts[12]?.trim()
             };
         });
         
         const preview = locations.map(loc => 
-            `• ${loc.name} - ${loc.tokenAmount} tokens/collection`
+            `• ${loc.name} - ${loc.tokenAmount} tokens/collection${loc.adTitle ? ' (with ad)' : ''}`
         ).join('\n');
         
         if (confirm(`📤 Bulk Upload Preview\n\n${locations.length} location(s):\n\n${preview}\n\nContinue?`)) {
@@ -776,12 +782,14 @@ function addCMTokenLocation() {
     const address = document.getElementById('cmAddress')?.value;
     const tokenAmount = parseInt(document.getElementById('cmTokenAmount')?.value) || 75;
     const message = document.getElementById('cmMessage')?.value;
-    const sponsorName = document.getElementById('cmSponsorName')?.value;
-    const sponsorInfo = document.getElementById('cmSponsorInfo')?.value;
-    const cta1Text = document.getElementById('cmCta1Text')?.value;
-    const cta1Url = document.getElementById('cmCta1Url')?.value;
-    const cta2Text = document.getElementById('cmCta2Text')?.value;
-    const cta2Url = document.getElementById('cmCta2Url')?.value;
+    
+    // Advertisement fields (optional)
+    const adTitle = document.getElementById('cmAdTitle')?.value;
+    const adDescription = document.getElementById('cmAdDescription')?.value;
+    const adOffer = document.getElementById('cmAdOffer')?.value;
+    const adOfferCost = parseInt(document.getElementById('cmAdOfferCost')?.value) || 0;
+    const ctaText = document.getElementById('cmCtaText')?.value;
+    const ctaUrl = document.getElementById('cmCtaUrl')?.value;
     
     if (!name || !address || !message) {
         alert('Please fill in all required fields (Name, Address, Message)');
@@ -790,12 +798,10 @@ function addCMTokenLocation() {
     
     let summary = `✓ Campaign Token Location Added!\n\n📍 ${name}\n${address}\n💎 ${tokenAmount} tokens per collection\n\n"${message}"`;
     
-    if (sponsorName) {
-        summary += `\n\n📢 Sponsor: ${sponsorName}`;
-        if (cta1Text) summary += `\n• CTA: "${cta1Text}"`;
+    if (adTitle) {
+        summary += `\n\n📢 Advertisement: "${adTitle}"`;
+        if (adOffer) summary += `\n🎁 Offer: ${adOffer}`;
     }
-    
-    summary += `\n\n⚠️ Note: This is a campaign location with NO advertiser advertisement.`;
     
     alert(summary);
     
@@ -804,8 +810,63 @@ function addCMTokenLocation() {
     }
 }
 
+function getCMScannerLink() {
+    const userEmail = sessionStorage.getItem('userEmail') || 'demo@phoenix.com';
+    const scannerUrl = `https://scanner.vaultphoenix.com/?token=${btoa(userEmail)}&role=cm`;
+    
+    const message = `📱 Your Scanner Web App Link\n\n` +
+        `Access URL:\n${scannerUrl}\n\n` +
+        `Share this link with your staff:\n` +
+        `• Email the link to employees\n` +
+        `• They can bookmark it on any device\n` +
+        `• Works on phones, tablets, and computers\n` +
+        `• No app download required!\n\n` +
+        `How to use:\n` +
+        `1. Open link on any device with camera\n` +
+        `2. Point camera at player's QR code\n` +
+        `3. Enter redemption amount\n` +
+        `4. Tokens transfer instantly!\n\n` +
+        `Would you like to:\n` +
+        `• Copy link to clipboard?\n` +
+        `• Email link to staff?`;
+    
+    if (confirm(message)) {
+        navigator.clipboard.writeText(scannerUrl).then(() => {
+            alert('✓ Scanner link copied to clipboard!\n\nYou can now paste and share it with your staff.');
+        }).catch(() => {
+            const textArea = document.createElement('textarea');
+            textArea.value = scannerUrl;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('✓ Scanner link copied to clipboard!\n\nYou can now paste and share it with your staff.');
+        });
+    }
+}
+
+function emailScannerLink() {
+    const userEmail = sessionStorage.getItem('userEmail') || 'demo@phoenix.com';
+    const scannerUrl = `https://scanner.vaultphoenix.com/?token=${btoa(userEmail)}&role=cm`;
+    
+    const emailAddress = prompt('Enter staff email address:', '');
+    
+    if (emailAddress) {
+        const subject = encodeURIComponent('Vault Phoenix Scanner Web App Access');
+        const body = encodeURIComponent(`Hi,\n\nHere's your access link to the Vault Phoenix QR Scanner Web App:\n\n${scannerUrl}\n\nHow to use:\n1. Open this link on any device with a camera\n2. Point camera at player's QR code\n3. Enter redemption amount\n4. Confirm transfer\n\nNo app download required - works in any browser!\n\nBest regards,\nVault Phoenix Team`);
+        
+        window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+        
+        alert(`✓ Email draft created!\n\nYour email client should open with a pre-filled message to ${emailAddress}.`);
+    }
+}
+
+function viewScannerGuide() {
+    alert(`📚 Scanner Web App Guide\n\nQuick Start:\n1. Open the scanner web link\n2. Point camera at player QR code\n3. Ready to scan!\n\nScanning Process:\n1. Player shows QR code\n2. Scan with web app camera\n3. Enter redemption amount\n4. Confirm transfer\n5. Give offer to player\n\nFull documentation available at:\nvaultphoenix.com/docs/scanner`);
+}
+
 function editCMLocation(locationId) {
-    alert(`Edit location: ${locationId}\n\nThis would open an edit form with the location's current settings.`);
+    alert(`Edit location: ${locationId}\n\nThis would open an edit form with the location's current settings including advertisement content.`);
 }
 
 function refillTokens(locationId) {
@@ -819,7 +880,7 @@ function refillTokens(locationId) {
 }
 
 function viewLocationAnalytics(locationId) {
-    alert(`Location Analytics\n\nThis would show:\n• Total collections\n• Unique visitors\n• Peak collection times\n• Player demographics\n• For advertiser locations: Redemption stats`);
+    alert(`Location Analytics\n\nThis would show:\n• Total collections\n• Unique visitors\n• Peak collection times\n• Player demographics\n• Advertisement performance\n• Redemption stats (if applicable)`);
 }
 
 // Export functions
@@ -828,6 +889,9 @@ if (typeof window !== 'undefined') {
     window.getCampaignsContent = getCampaignsContent;
     window.handleCMCSVUpload = handleCMCSVUpload;
     window.addCMTokenLocation = addCMTokenLocation;
+    window.getCMScannerLink = getCMScannerLink;
+    window.emailScannerLink = emailScannerLink;
+    window.viewScannerGuide = viewScannerGuide;
     window.editCMLocation = editCMLocation;
     window.refillTokens = refillTokens;
     window.viewLocationAnalytics = viewLocationAnalytics;
