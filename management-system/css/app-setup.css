@@ -76,12 +76,14 @@
     margin: 0;
 }
 
-/* Builder Grid Layout - FIXED: No scroll bars, auto-fit content */
+/* Builder Grid Layout - FIXED */
 .builder-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
     align-items: start;
+    max-width: 100%;
+    width: 100%;
 }
 
 .builder-panel {
@@ -93,11 +95,10 @@
     box-shadow: var(--card-shadow);
     display: flex;
     flex-direction: column;
-    /* REMOVED: max-height and overflow-y */
     min-height: auto;
+    max-width: 100%;
+    box-sizing: border-box;
 }
-
-/* REMOVED: Custom scrollbar styles as they're no longer needed */
 
 .panel-title {
     font-size: 1.2rem;
@@ -177,49 +178,59 @@
     object-fit: cover;
 }
 
-/* Color Picker Grid - MORE COMPACT */
+/* Color Picker Grid - FIXED TO FIT IN MODULE */
 .color-grid-compact {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
+    max-width: 100%;
 }
 
 .color-picker-group {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    min-width: 0; /* Allow shrinking */
 }
 
 .color-picker-group .form-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .color-picker-wrapper {
     display: flex;
     gap: 4px;
     align-items: center;
+    min-width: 0; /* Allow shrinking */
+    max-width: 100%;
 }
 
 .color-picker-wrapper input[type="color"] {
-    width: 35px;
-    height: 30px;
+    width: 32px;
+    height: 28px;
     border: 2px solid var(--card-border);
     border-radius: 6px;
     cursor: pointer;
     background: transparent;
     padding: 2px;
+    flex-shrink: 0;
 }
 
 .color-picker-wrapper input[type="text"] {
     flex: 1;
-    padding: 5px 6px;
+    min-width: 0; /* Allow shrinking */
+    padding: 4px 6px;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
     color: white;
     font-family: monospace;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    box-sizing: border-box;
 }
 
 /* Token Info Box - MORE COMPACT */
@@ -385,23 +396,27 @@
     font-size: 1rem;
 }
 
-/* Phone Mockup - MORE COMPACT */
+/* Phone Mockup - FIXED TO FIT PERFECTLY */
 .phone-mockup {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 12px 0;
+    width: 100%;
+    max-width: 100%;
 }
 
 .phone-frame {
     width: 100%;
-    max-width: 300px;
-    border: 10px solid #1a1a1a;
-    border-radius: 38px;
+    max-width: 320px;
+    aspect-ratio: 9 / 19.5; /* iPhone aspect ratio */
+    border: 12px solid #1a1a1a;
+    border-radius: 42px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 0 2px #333;
     position: relative;
     background: #000;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .phone-notch {
@@ -418,15 +433,16 @@
 
 .phone-frame iframe {
     width: 100%;
-    height: 520px;
+    height: 100%;
     border: none;
-    border-radius: 26px;
+    border-radius: 30px;
     background: #000;
+    display: block;
 }
 
 .phone-indicator {
     position: absolute;
-    bottom: 5px;
+    bottom: 8px;
     left: 50%;
     transform: translateX(-50%);
     width: 110px;
@@ -438,9 +454,10 @@
 
 .phone-label {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 12px;
     color: rgba(255, 255, 255, 0.5);
     font-size: 0.75rem;
+    max-width: 320px;
 }
 
 /* Preview Info Section - MORE COMPACT */
@@ -618,6 +635,7 @@
     color: white;
     font-size: 0.9rem;
     transition: all var(--transition-normal);
+    box-sizing: border-box;
 }
 
 .form-input:focus {
@@ -640,6 +658,10 @@
     
     .setup-type-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .phone-frame {
+        max-width: 280px;
     }
 }
 
@@ -664,6 +686,10 @@
     .sdk-actions .btn {
         width: 100%;
     }
+    
+    .phone-frame {
+        max-width: 260px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -673,9 +699,5 @@
     
     .phone-frame {
         max-width: 100%;
-    }
-    
-    .phone-frame iframe {
-        height: 450px;
     }
 }
