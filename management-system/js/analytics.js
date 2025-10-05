@@ -1,19 +1,19 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Analytics - Reporting & Performance Metrics
+   Analytics - QR Scanner Exchange Model
    ============================================ */
 
 // ============================================
-// ANALYTICS DATA - ACCURATE & CONSISTENT
+// ANALYTICS DATA - QR EXCHANGE MODEL
 // ============================================
 
 const AnalyticsData = {
     // Campaign performance (for $Ember Hunt)
     campaigns: {
         totalActive: 1, // Only $Ember Hunt
-        totalRevenue: 650, // $500 location fee + $150 token funding
+        totalRevenue: 500, // Just location fee
         totalPlayers: 847,
-        totalTokensDistributed: 21200, // Tokens collected so far
+        totalTokensDistributed: 21200, // Tokens collected from campaign manager's pools
         engagementRate: 87.3,
         averageSessionTime: 12.4
     },
@@ -22,9 +22,11 @@ const AnalyticsData = {
     advertisers: {
         totalActive: 1, // Heritage Square
         totalPending: 0,
-        averageRevenue: 650,
+        averageRevenue: 500, // Location fee only
         topPerformer: 'Heritage Square Historic Site',
-        retentionRate: 100
+        retentionRate: 100,
+        totalQRScans: 847, // Players scanning QR codes at location
+        tokensReceivedBack: 42350 // $Ember received from players via QR scans
     },
     
     // Player analytics
@@ -33,28 +35,35 @@ const AnalyticsData = {
         newToday: 18,
         returningUsers: 89.3,
         averageCollections: 8.7,
-        topLocation: 'Heritage Square Historic Site'
+        topLocation: 'Heritage Square Historic Site',
+        avgQRScanValue: 50 // Average $Ember exchanged per scan
     },
     
-    // Time series data (last 7 days) - simplified
+    // Time series data (last 7 days)
     timeSeries: {
-        revenue: [500, 510, 530, 550, 580, 620, 650],
+        revenue: [500, 500, 500, 500, 500, 500, 500], // Consistent location fee
         players: [720, 750, 780, 800, 820, 835, 847],
-        tokens: [18000, 18500, 19200, 19800, 20400, 20800, 21200],
-        advertisers: [1, 1, 1, 1, 1, 1, 1],
+        qrScans: [680, 710, 745, 770, 800, 825, 847],
+        tokensExchanged: [34000, 35500, 37250, 38500, 40000, 41250, 42350],
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     },
     
     // Geographic distribution
     locations: [
-        { name: 'Heritage Square Historic Site', players: 847, collections: 2340, revenue: 650, type: 'advertiser' },
-        { name: 'Downtown Phoenix Plaza', players: 420, collections: 890, revenue: 0, type: 'campaign-manager' },
-        { name: 'Phoenix Historical Society', players: 385, collections: 720, revenue: 0, type: 'campaign-manager' }
+        { 
+            name: 'Heritage Square Historic Site', 
+            players: 847, 
+            qrScans: 847,
+            tokensReceived: 42350,
+            avgScanValue: 50,
+            revenue: 500, 
+            type: 'advertiser' 
+        }
     ]
 };
 
 // ============================================
-// ADVERTISER OVERVIEW (Used in advertiser-dashboard.js)
+// ADVERTISER OVERVIEW
 // ============================================
 
 function getAdvertiserOverview() {
@@ -83,10 +92,66 @@ function getAdvertiserOverview() {
             </div>
             
             <div class="stat-card">
-                <div class="stat-icon">💰</div>
-                <div class="stat-label">Monthly Investment</div>
-                <div class="stat-value">$650</div>
-                <div class="stat-change">Location + Tokens</div>
+                <div class="stat-icon">📱</div>
+                <div class="stat-label">QR Code Scans</div>
+                <div class="stat-value">847</div>
+                <div class="stat-change positive">Players exchanged $Ember</div>
+            </div>
+        </div>
+        
+        <!-- QR Scanner Info -->
+        <div class="dashboard-section">
+            <div class="card" style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.4);">
+                <div style="display: flex; justify-content: space-between; align-items: start; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="color: #22c55e; margin-bottom: 15px; font-size: 1.8rem;">
+                            📱 Get the $Ember Scanner App
+                        </h3>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
+                            Accept $Ember payments from players at your location. When players scan your QR code, 
+                            they transfer $Ember to you in exchange for your products or services.
+                        </p>
+                        
+                        <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                            <h4 style="color: var(--color-primary-gold); margin-bottom: 15px;">How It Works:</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <strong style="color: #22c55e;">1.</strong> Download the Scanner App to your tablet or phone
+                                </li>
+                                <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <strong style="color: #22c55e;">2.</strong> Players show you their QR code at checkout
+                                </li>
+                                <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <strong style="color: #22c55e;">3.</strong> Scan their code with your app
+                                </li>
+                                <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <strong style="color: #22c55e;">4.</strong> Enter the discount/offer amount in $Ember
+                                </li>
+                                <li style="padding: 10px 0;">
+                                    <strong style="color: #22c55e;">5.</strong> $Ember instantly transfers to your account!
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <button class="btn btn-primary btn-large" onclick="downloadScanner()">
+                                📱 Download Scanner App
+                            </button>
+                            <button class="btn btn-secondary" onclick="viewScannerGuide()">
+                                📚 Setup Guide
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <div style="width: 200px; height: 200px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <div style="font-size: 4rem;">📱</div>
+                        </div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+                            Scanner App QR Code
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -113,12 +178,12 @@ function getAdvertiserOverview() {
                             <span class="metric-value">1</span>
                         </div>
                         <div class="app-metric">
-                            <span class="metric-label">Total Locations</span>
-                            <span class="metric-value">3</span>
+                            <span class="metric-label">QR Scans</span>
+                            <span class="metric-value">847</span>
                         </div>
                         <div class="app-metric">
-                            <span class="metric-label">Active Players</span>
-                            <span class="metric-value">847</span>
+                            <span class="metric-label">$Ember Received</span>
+                            <span class="metric-value">42,350</span>
                         </div>
                     </div>
                     <div class="app-actions">
@@ -133,11 +198,11 @@ function getAdvertiserOverview() {
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">⚡ Quick Actions</h3>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <button class="btn btn-primary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('marketplace')">
-                    🛒 Browse More Campaigns
+                <button class="btn btn-primary" style="padding: 20px; font-size: 1.1rem;" onclick="downloadScanner()">
+                    📱 Get Scanner App
                 </button>
-                <button class="btn btn-secondary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('payments')">
-                    💳 Payment Center
+                <button class="btn btn-secondary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('marketplace')">
+                    🛒 Browse More Campaigns
                 </button>
                 <button class="btn btn-outline" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('analytics')">
                     📊 View Analytics
@@ -203,80 +268,100 @@ function getPaymentsContent(role) {
                     </div>
                 </div>
                 
-                <!-- Campaign Token Funding -->
+                <!-- $Ember Received via QR Scans -->
                 <div class="card">
                     <h3 style="color: var(--color-primary-gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 2rem;">💎</span>
-                        Campaign Token Funding
+                        <span style="font-size: 2rem;">📱</span>
+                        $Ember Received (QR Scans)
                     </h3>
                     
                     <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
-                        <div style="color: rgba(255,255,255,0.7); margin-bottom: 10px;">Current Status</div>
+                        <div style="color: rgba(255,255,255,0.7); margin-bottom: 10px;">Current Month</div>
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
                             <span class="status-indicator status-live"></span>
-                            <span style="font-size: 1.5rem; font-weight: 700; color: #22c55e;">Fully Funded</span>
+                            <span style="font-size: 1.5rem; font-weight: 700; color: #22c55e;">Scanner Active</span>
                         </div>
-                        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 15px;">
-                            Est. Monthly: <span style="color: var(--color-primary-gold);">~$120-180</span>
+                        <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-gold); margin-bottom: 5px;">
+                            42,350 $Ember
+                        </div>
+                        <div style="font-size: 1.1rem; color: rgba(255,255,255,0.6); margin-bottom: 15px;">
+                            ≈ $148.23 USD value
                         </div>
                         
                         <div style="padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
                             <div style="display: flex; justify-content: space-between; padding: 8px 0;">
-                                <span style="color: rgba(255,255,255,0.7);">Tokens Remaining:</span>
-                                <span style="font-weight: 700;">12,450</span>
+                                <span style="color: rgba(255,255,255,0.7);">Total QR Scans:</span>
+                                <span style="font-weight: 700;">847</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 8px 0;">
-                                <span style="color: rgba(255,255,255,0.7);">Last funded:</span>
-                                <span style="font-weight: 700;">Oct 1, 2025</span>
+                                <span style="color: rgba(255,255,255,0.7);">Avg per Scan:</span>
+                                <span style="font-weight: 700;">50 $Ember</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 8px 0;">
-                                <span style="color: rgba(255,255,255,0.7);">Tokens collected:</span>
-                                <span style="font-weight: 700;">2,340</span>
+                                <span style="color: rgba(255,255,255,0.7);">Growth:</span>
+                                <span style="font-weight: 700; color: #22c55e;">+18%</span>
                             </div>
                         </div>
                     </div>
                     
                     <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <button class="btn btn-primary">Add Campaign Funds</button>
-                        <button class="btn btn-outline">Auto-Replenish Setup</button>
+                        <button class="btn btn-primary" onclick="downloadScanner()">Get Scanner App</button>
+                        <button class="btn btn-outline" onclick="convertToUSD()">Convert $Ember to USD</button>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Budget Calculator -->
+        <!-- How The System Works -->
         <div class="dashboard-section">
-            <h2 class="section-title">💰 Budget Calculator & Forecasting</h2>
+            <h2 class="section-title">💡 How $Ember Exchange Works</h2>
             
-            <div class="card">
-                <div style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 25px; margin-bottom: 25px;">
-                    <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">Estimated Monthly Costs</h3>
+            <div class="card" style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">1️⃣</div>
+                        <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">Players Collect Tokens</h4>
+                        <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6;">
+                            Players find and collect $Ember tokens at your location by playing the AR game. 
+                            They accumulate $Ember in their wallet.
+                        </p>
+                    </div>
                     
-                    <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 2px solid rgba(255,255,255,0.2);">
-                        <span style="font-size: 1.1rem;">Location Fee (Silver):</span>
-                        <span style="font-size: 1.3rem; font-weight: 700;">$500.00</span>
+                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">2️⃣</div>
+                        <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">They Visit Your Location</h4>
+                        <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6;">
+                            Players come to your physical location to redeem their $Ember for your products, 
+                            services, or special offers.
+                        </p>
                     </div>
-                    <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 2px solid rgba(255,255,255,0.2);">
-                        <span style="font-size: 1.1rem;">Campaign Funding:</span>
-                        <span style="font-size: 1.3rem; font-weight: 700;">~$120-180</span>
+                    
+                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">3️⃣</div>
+                        <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">Scan Their QR Code</h4>
+                        <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6;">
+                            Use the Scanner App to scan the player's QR code and enter the $Ember amount 
+                            they're spending with you.
+                        </p>
                     </div>
-                    <div style="display: flex; justify-content: space-between; padding: 20px 0; font-size: 1.3rem; font-weight: 900;">
-                        <span>Total Estimated:</span>
-                        <span style="color: var(--color-primary-gold); font-size: 1.8rem;">$620-680/month</span>
+                    
+                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">4️⃣</div>
+                        <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">Receive $Ember</h4>
+                        <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6;">
+                            The $Ember instantly transfers from the player's wallet to your advertiser account. 
+                            Track all transactions in real-time!
+                        </p>
                     </div>
                 </div>
                 
-                <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 25px;">
-                    <p style="color: rgba(255,255,255,0.8); line-height: 1.6; margin: 0;">
-                        Based on your location's traffic patterns (847 visitors/month) and typical customer engagement. 
-                        We recommend maintaining adequate campaign funding for consistent visitor attraction.
+                <div style="margin-top: 30px; padding: 25px; background: rgba(34,197,94,0.15); border: 2px solid rgba(34,197,94,0.4); border-radius: 12px;">
+                    <h4 style="color: #22c55e; margin-bottom: 15px; font-size: 1.3rem;">💰 The Circular Economy</h4>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0; font-size: 1.05rem; line-height: 1.7;">
+                        Campaign managers fund token pools → Players collect tokens at your location → 
+                        Players spend tokens with you for products/services → You receive $Ember back → 
+                        Convert to USD or hold for future use. This creates verified foot traffic and real customer engagement!
                     </p>
-                </div>
-                
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <button class="btn btn-primary">Set Auto-Replenish</button>
-                    <button class="btn btn-secondary">Adjust Budget</button>
-                    <button class="btn btn-outline" onclick="loadSection('budget')">View ROI Calculator</button>
                 </div>
             </div>
         </div>
@@ -305,13 +390,6 @@ function getPaymentsContent(role) {
                             <td><span class="badge badge-success">Paid</span></td>
                         </tr>
                         <tr>
-                            <td>Oct 1, 2025</td>
-                            <td>Campaign Funding</td>
-                            <td>Token Purchase</td>
-                            <td>$138.50</td>
-                            <td><span class="badge badge-success">Paid</span></td>
-                        </tr>
-                        <tr>
                             <td>Sep 4, 2025</td>
                             <td>Location Fee</td>
                             <td>Silver Tier - Monthly</td>
@@ -326,13 +404,24 @@ function getPaymentsContent(role) {
 }
 
 // ============================================
-// ADVERTISER BUDGET/ROI CONTENT
+// ADVERTISER BUDGET/ROI CONTENT - UPDATED
 // ============================================
 
 function getBudgetContent(role) {
     if (role !== 'advertiser') {
         return getPlaceholderContent('budget');
     }
+    
+    // Calculate ROI based on QR scan model
+    const monthlyLocationFee = 500;
+    const qrScansPerMonth = 847;
+    const avgEmberPerScan = 50;
+    const totalEmberReceived = qrScansPerMonth * avgEmberPerScan;
+    const emberPrice = 0.0035;
+    const totalEmberValue = totalEmberReceived * emberPrice;
+    const avgSpendPerVisitor = 45; // Average customer spend at location
+    const totalRevenue = qrScansPerMonth * avgSpendPerVisitor;
+    const roi = ((totalRevenue - monthlyLocationFee) / monthlyLocationFee * 100).toFixed(1);
     
     return `
         <div class="dashboard-section">
@@ -346,7 +435,7 @@ function getBudgetContent(role) {
                 
                 <div style="text-align: center; margin-bottom: 30px;">
                     <div style="font-size: 5rem; font-weight: 900; background: var(--gradient-ember); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px;">
-                        5,970%
+                        ${roi}%
                     </div>
                     <div style="font-size: 1.5rem; color: #22c55e; font-weight: 700;">
                         Return on Campaign Investment! 🎉
@@ -355,14 +444,88 @@ function getBudgetContent(role) {
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
                     <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Your Investment</div>
-                        <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-gold);">$638.50</div>
-                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">This month</div>
+                        <div style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Monthly Location Fee</div>
+                        <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-gold);">$${monthlyLocationFee}</div>
+                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">Your only cost</div>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                        <div style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">QR Code Scans</div>
+                        <div style="font-size: 2rem; font-weight: 900; color: #22c55e;">${qrScansPerMonth.toLocaleString()}</div>
+                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">Verified visitors</div>
                     </div>
                     <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
                         <div style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Est. Revenue Generated</div>
-                        <div style="font-size: 2rem; font-weight: 900; color: #22c55e;">~$38,115</div>
-                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">From 847 visitors</div>
+                        <div style="font-size: 2rem; font-weight: 900; color: #22c55e;">~$${totalRevenue.toLocaleString()}</div>
+                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">From QR visitors</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Detailed Breakdown -->
+        <div class="dashboard-section">
+            <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
+                📊 Revenue Breakdown
+            </h3>
+            
+            <div class="apps-grid">
+                <div class="card">
+                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Customer Visits</h4>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--color-primary-gold); margin-bottom: 10px;">
+                        ${qrScansPerMonth}
+                    </div>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 15px;">
+                        GPS-verified visitors who scanned QR codes at your location this month.
+                    </p>
+                    <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; padding: 5px 0;">
+                            <span style="color: rgba(255,255,255,0.6);">Avg per Day:</span>
+                            <span style="font-weight: 700;">${Math.round(qrScansPerMonth / 30)}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 5px 0;">
+                            <span style="color: rgba(255,255,255,0.6);">Peak Day:</span>
+                            <span style="font-weight: 700;">47 visits</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">$Ember Received</h4>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--color-primary-gold); margin-bottom: 10px;">
+                        ${totalEmberReceived.toLocaleString()}
+                    </div>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 15px;">
+                        Total $Ember received from players via QR code exchanges.
+                    </p>
+                    <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; padding: 5px 0;">
+                            <span style="color: rgba(255,255,255,0.6);">USD Value:</span>
+                            <span style="font-weight: 700;">$${totalEmberValue.toFixed(2)}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 5px 0;">
+                            <span style="color: rgba(255,255,255,0.6);">Avg per Scan:</span>
+                            <span style="font-weight: 700;">${avgEmberPerScan} $Ember</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Revenue Impact</h4>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: #22c55e; margin-bottom: 10px;">
+                        $${totalRevenue.toLocaleString()}
+                    </div>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 15px;">
+                        Estimated revenue from ${qrScansPerMonth} verified customers.
+                    </p>
+                    <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; padding: 5px 0;">
+                            <span style="color: rgba(255,255,255,0.6);">Avg Spend:</span>
+                            <span style="font-weight: 700;">$${avgSpendPerVisitor}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 5px 0;">
+                            <span style="color: rgba(255,255,255,0.6);">Net Profit:</span>
+                            <span style="font-weight: 700; color: #22c55e;">$${(totalRevenue - monthlyLocationFee).toLocaleString()}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -371,31 +534,31 @@ function getBudgetContent(role) {
         <!-- Why It Works -->
         <div class="dashboard-section">
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                💡 Why Vault Phoenix Works
+                💡 Why The QR Exchange Model Works
             </h3>
             
             <div class="apps-grid">
                 <div class="card">
                     <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">GPS-Verified Traffic</h4>
                     <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">
-                        Unlike traditional advertising, every visitor is GPS-verified. You only pay for real, 
-                        measurable foot traffic to your location. 847 verified visitors this month.
+                        Every QR scan is GPS-verified. You only get foot traffic from real people who physically 
+                        visited your location. No bots, no fraud - just real customers.
                     </p>
                 </div>
                 
                 <div class="card">
-                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Engaged Audience</h4>
+                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Pre-Qualified Customers</h4>
                     <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">
-                        Players are actively seeking rewards at your location. They arrive motivated and 
-                        ready to engage with your business. 88.4% engagement rate.
+                        Players arrive with $Ember they want to spend. They're not just browsing - they came specifically 
+                        to redeem their tokens with you. High intent = high conversion.
                     </p>
                 </div>
                 
                 <div class="card">
-                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Real-Time Analytics</h4>
+                    <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Circular Economy</h4>
                     <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">
-                        Track performance in real-time. See exactly how many visitors you're getting 
-                        and adjust your strategy accordingly.
+                        Players collect tokens, spend them with you, you receive $Ember back. You can convert to USD 
+                        or hold the tokens. Either way, you're getting real customers and revenue.
                     </p>
                 </div>
             </div>
@@ -435,15 +598,15 @@ function getMerchantsContent(role) {
                 <div class="stat-card">
                     <div class="stat-icon">💰</div>
                     <div class="stat-label">Monthly Recurring Revenue</div>
-                    <div class="stat-value">$650</div>
-                    <div class="stat-change positive">From 1 advertiser</div>
+                    <div class="stat-value">$500</div>
+                    <div class="stat-change positive">From location fees</div>
                 </div>
                 
                 <div class="stat-card">
-                    <div class="stat-icon">📊</div>
-                    <div class="stat-label">Total Locations</div>
-                    <div class="stat-value">1</div>
-                    <div class="stat-change">Advertiser locations</div>
+                    <div class="stat-icon">📱</div>
+                    <div class="stat-label">Total QR Scans</div>
+                    <div class="stat-value">847</div>
+                    <div class="stat-change positive">This month</div>
                 </div>
             </div>
             
@@ -460,7 +623,8 @@ function getMerchantsContent(role) {
                                 <th>Locations</th>
                                 <th>Tier</th>
                                 <th>Monthly Fee</th>
-                                <th>Visitors (30d)</th>
+                                <th>QR Scans</th>
+                                <th>$Ember Received</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -472,6 +636,7 @@ function getMerchantsContent(role) {
                                 <td><span class="tier-badge tier-silver">Silver</span></td>
                                 <td>$500</td>
                                 <td>847</td>
+                                <td>42,350</td>
                                 <td><span class="badge badge-success">Active</span></td>
                             </tr>
                         </tbody>
@@ -482,6 +647,22 @@ function getMerchantsContent(role) {
     `;
 }
 
+// ============================================
+// SCANNER APP FUNCTIONS
+// ============================================
+
+function downloadScanner() {
+    alert(`📱 Download $Ember Scanner App\n\nAvailable for:\n• iOS (App Store)\n• Android (Google Play)\n• Web App (PWA)\n\nSearch for "Vault Phoenix Scanner" or scan the QR code in your dashboard.\n\nSetup takes less than 2 minutes!`);
+}
+
+function viewScannerGuide() {
+    alert(`📚 Scanner App Setup Guide\n\n1. Download the app\n2. Login with your advertiser credentials\n3. Link your location\n4. Start scanning player QR codes!\n\nFull documentation available at:\nvaultphoenix.com/docs/scanner`);
+}
+
+function convertToUSD() {
+    alert(`💱 Convert $Ember to USD\n\nYou can convert your received $Ember to USD at any time:\n\n• Current balance: 42,350 $Ember\n• Current value: ~$148.23 USD\n• Market price: $0.0035 per $Ember\n\nConvert via your wallet or hold for potential appreciation!`);
+}
+
 // Export functions
 if (typeof window !== 'undefined') {
     window.AnalyticsData = AnalyticsData;
@@ -489,4 +670,7 @@ if (typeof window !== 'undefined') {
     window.getPaymentsContent = getPaymentsContent;
     window.getBudgetContent = getBudgetContent;
     window.getMerchantsContent = getMerchantsContent;
+    window.downloadScanner = downloadScanner;
+    window.viewScannerGuide = viewScannerGuide;
+    window.convertToUSD = convertToUSD;
 }
