@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Role Selection Page JavaScript
+   Role Selection Page JavaScript - FIXED
    ============================================ */
 
 /**
@@ -8,8 +8,8 @@
  * @param {string} role - The selected role identifier
  */
 function selectRole(role) {
-    // Validate role
-    const validRoles = ['platform-operator', 'sdk-customer', 'merchant', 'system-admin'];
+    // Validate role - REMOVED admin references
+    const validRoles = ['campaign-manager', 'advertiser'];
     
     if (!validRoles.includes(role)) {
         console.error('Invalid role selected:', role);
@@ -209,6 +209,16 @@ function displayTimeBasedGreeting() {
     console.log(greeting);
 }
 
+/**
+ * Logout function
+ */
+function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+    }
+}
+
 // ============================================
 // EVENT LISTENERS & INITIALIZATION
 // ============================================
@@ -238,6 +248,12 @@ window.addEventListener('beforeunload', () => {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         selectRole,
-        trackRoleSelection
+        trackRoleSelection,
+        logout
     };
+}
+
+// Make logout available globally
+if (typeof window !== 'undefined') {
+    window.logout = logout;
 }
