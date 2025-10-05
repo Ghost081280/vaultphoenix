@@ -23,12 +23,13 @@ const AppState = {
     sidebarOpen: false,
     walletConnected: false,
     walletAddress: null,
-    currentCampaignId: null, // Track current campaign for advertisers
-    scannerAppDownloaded: false // Track if advertiser has scanner app
+    currentCampaignId: null,
+    scannerWebAppUrl: null,
+    hasSeenOnboarding: false
 };
 
 // ============================================
-// ROLE CONFIGURATIONS - UPDATED FOR AD TOKEN MODEL
+// ROLE CONFIGURATIONS - UPDATED
 // ============================================
 
 const RoleConfig = {
@@ -51,7 +52,7 @@ const RoleConfig = {
     'advertiser': {
         name: 'Advertiser',
         icon: '📍',
-        showTokenBalance: false, // Advertisers don't see campaign manager's balance
+        showTokenBalance: false,
         navigation: [
             { icon: '📊', label: 'Dashboard Overview', section: 'overview' },
             { icon: '🛒', label: 'Campaign Marketplace', section: 'marketplace' },
@@ -61,11 +62,284 @@ const RoleConfig = {
             { icon: '💳', label: 'Payment Center', section: 'payments' },
             { icon: '📈', label: 'Performance Analytics', section: 'analytics' },
             { icon: '💰', label: 'ROI Calculator', section: 'budget' },
-            { icon: '📱', label: 'Scanner App', section: 'scanner' },
             { icon: '⚙️', label: 'Account Settings', section: 'settings' }
         ]
     }
 };
+
+// ============================================
+// ONBOARDING CONTENT
+// ============================================
+
+const OnboardingFlows = {
+    'campaign-manager': [
+        {
+            id: 'intro',
+            title: 'Welcome to Vault Phoenix',
+            content: `
+                <div style="text-align: center; padding: 40px 20px;">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 120px; height: 120px; margin-bottom: 30px;" onerror="this.style.display='none'">
+                    <h2 style="font-size: 2.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
+                        Welcome to Vault Phoenix
+                    </h2>
+                    <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8); max-width: 700px; margin: 0 auto 40px; line-height: 1.7;">
+                        You're about to launch location-based AR crypto gaming campaigns that drive real foot traffic to physical businesses through $Ember token rewards and advertisements.
+                    </p>
+                    <button class="btn btn-primary btn-large" onclick="showNextOnboarding()" style="font-size: 1.2rem; padding: 18px 50px;">
+                        Get Started →
+                    </button>
+                </div>
+            `
+        },
+        {
+            id: 'ecosystem',
+            title: 'The $Ember Advertisement Ecosystem',
+            content: `
+                <div style="padding: 20px;">
+                    <h2 style="font-size: 2rem; color: var(--color-primary-gold); margin-bottom: 30px; text-align: center;">
+                        💡 The $Ember Advertisement Ecosystem
+                    </h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                        <div style="text-align: center; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">1️⃣</div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Advertiser Joins</h4>
+                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
+                                Pays monthly location fee + buys $Ember tokens
+                            </p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">2️⃣</div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Creates Token Stop</h4>
+                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
+                                Funds location with $Ember + advertisement content
+                            </p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">3️⃣</div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Players Collect</h4>
+                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
+                                Visit location, collect tokens, see ad
+                            </p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">4️⃣</div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Cash Out or Redeem</h4>
+                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
+                                Player chooses: Coinbase OR visit advertiser
+                            </p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">5️⃣</div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Scan & Recover</h4>
+                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
+                                Advertiser scans QR → gets $Ember back
+                            </p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">6️⃣</div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Circular Economy</h4>
+                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
+                                Recovered tokens fund new stops
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button class="btn btn-primary btn-large" onclick="showNextOnboarding()" style="font-size: 1.1rem; padding: 16px 45px;">
+                            Continue →
+                        </button>
+                    </div>
+                </div>
+            `
+        },
+        {
+            id: 'revenue',
+            title: 'Your Revenue Sources',
+            content: `
+                <div style="padding: 20px;">
+                    <h2 style="font-size: 2rem; color: var(--color-primary-gold); margin-bottom: 30px; text-align: center;">
+                        💰 Your Revenue Sources
+                    </h2>
+                    
+                    <div style="max-width: 800px; margin: 0 auto;">
+                        <div style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 30px; margin-bottom: 25px;">
+                            <h3 style="color: var(--color-primary-gold); margin-bottom: 20px; font-size: 1.5rem;">📍 Location Placement Fees</h3>
+                            <p style="color: rgba(255,255,255,0.9); line-height: 1.7; margin-bottom: 15px;">
+                                Advertisers pay monthly fees based on their location count:
+                            </p>
+                            <ul style="list-style: none; padding: 0; margin: 0 0 15px 0;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    ✓ 1 Location: You set the price (e.g., $500/mo)
+                                </li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    ✓ 2-5 Locations: Discounted rate per location
+                                </li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    ✓ 6-10 Locations: Better rate per location
+                                </li>
+                                <li style="padding: 8px 0;">
+                                    ✓ 11+ Locations: Custom pricing
+                                </li>
+                            </ul>
+                            <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin: 0;">
+                                All features included regardless of location count!
+                            </p>
+                        </div>
+                        
+                        <div style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 30px;">
+                            <h3 style="color: #22c55e; margin-bottom: 20px; font-size: 1.5rem;">💎 $Ember Token Sales</h3>
+                            <p style="color: rgba(255,255,255,0.9); line-height: 1.7; margin: 0;">
+                                Advertisers purchase $Ember tokens from you to fund their token stops. You earn on every token sold at the current market price.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 40px;">
+                        <button class="btn btn-primary btn-large" onclick="completeOnboarding()" style="font-size: 1.1rem; padding: 16px 45px;">
+                            Go to Dashboard →
+                        </button>
+                    </div>
+                </div>
+            `
+        }
+    ],
+    'advertiser': [
+        {
+            id: 'intro',
+            title: 'Welcome Advertiser',
+            content: `
+                <div style="text-align: center; padding: 40px 20px;">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 120px; height: 120px; margin-bottom: 30px;" onerror="this.style.display='none'">
+                    <h2 style="font-size: 2.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
+                        Welcome to Vault Phoenix
+                    </h2>
+                    <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8); max-width: 700px; margin: 0 auto 40px; line-height: 1.7;">
+                        Drive verified foot traffic to your business through AR gaming campaigns. Players collect $Ember tokens at your location and see your advertisements.
+                    </p>
+                    <button class="btn btn-primary btn-large" onclick="showNextOnboarding()" style="font-size: 1.2rem; padding: 18px 50px;">
+                        Get Started →
+                    </button>
+                </div>
+            `
+        },
+        {
+            id: 'how-it-works',
+            title: 'How The $Ember Advertisement System Works',
+            content: `
+                <div style="padding: 20px;">
+                    <h2 style="font-size: 2rem; color: var(--color-primary-gold); margin-bottom: 30px; text-align: center;">
+                        💡 How The $Ember Advertisement System Works
+                    </h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                        <div style="padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">1️⃣</div>
+                            <h4 style="margin-bottom: 12px;">Purchase Tokens</h4>
+                            <p style="color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
+                                Buy $Ember tokens at current market price to fund your token stops in campaigns.
+                            </p>
+                        </div>
+                        
+                        <div style="padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">2️⃣</div>
+                            <h4 style="margin-bottom: 12px;">Add Advertisement</h4>
+                            <p style="color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
+                                Your tokens include your ad content - title, description, image, and offer details.
+                            </p>
+                        </div>
+                        
+                        <div style="padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">3️⃣</div>
+                            <h4 style="margin-bottom: 12px;">Players Collect</h4>
+                            <p style="color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
+                                Players visit your location, collect tokens, and see your advertisement.
+                            </p>
+                        </div>
+                        
+                        <div style="padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">4️⃣</div>
+                            <h4 style="margin-bottom: 12px;">Redeem & Recover</h4>
+                            <p style="color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
+                                Players redeem at your location. You scan their QR code → get $Ember back → give offer.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button class="btn btn-primary btn-large" onclick="showNextOnboarding()" style="font-size: 1.1rem; padding: 16px 45px;">
+                            Continue →
+                        </button>
+                    </div>
+                </div>
+            `
+        },
+        {
+            id: 'campaign-advertising',
+            title: 'How Campaign Advertising Works',
+            content: `
+                <div style="padding: 20px;">
+                    <h2 style="font-size: 2rem; color: var(--color-primary-gold); margin-bottom: 30px; text-align: center;">
+                        📢 How Campaign Advertising Works
+                    </h2>
+                    
+                    <div style="max-width: 900px; margin: 0 auto;">
+                        <div style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 30px; margin-bottom: 25px;">
+                            <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">🎯 Choose a Campaign</h3>
+                            <p style="color: rgba(255,255,255,0.9); line-height: 1.7; margin: 0;">
+                                Browse active AR gaming campaigns in the marketplace. Each campaign has active players, geographic coverage, and engagement metrics. Pick the campaign that matches your target audience.
+                            </p>
+                        </div>
+                        
+                        <div style="background: rgba(59,130,246,0.1); border: 2px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 30px; margin-bottom: 25px;">
+                            <h3 style="color: #3b82f6; margin-bottom: 20px;">💳 Simple Pricing</h3>
+                            <p style="color: rgba(255,255,255,0.9); line-height: 1.7; margin-bottom: 15px;">
+                                Pay a monthly fee based on your location count:
+                            </p>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    ✓ 1 location: One price per month
+                                </li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    ✓ 2-5 locations: Discounted rate per location
+                                </li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    ✓ 6-10 locations: Better rate per location
+                                </li>
+                                <li style="padding: 8px 0;">
+                                    ✓ 11+ locations: Custom enterprise pricing
+                                </li>
+                            </ul>
+                            <p style="color: rgba(255,255,255,0.7); margin: 15px 0 0 0; font-size: 0.95rem;">
+                                All features included: Scanner web app, analytics, unlimited advertisements!
+                            </p>
+                        </div>
+                        
+                        <div style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 30px;">
+                            <h3 style="color: #22c55e; margin-bottom: 20px;">📱 Scanner Web App</h3>
+                            <p style="color: rgba(255,255,255,0.9); line-height: 1.7; margin: 0;">
+                                Get a unique web app link for your staff to scan player QR codes and accept $Ember redemptions. No app download required - works on any device with a camera and browser.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 40px;">
+                        <button class="btn btn-primary btn-large" onclick="completeOnboarding()" style="font-size: 1.1rem; padding: 16px 45px;">
+                            Go to Dashboard →
+                        </button>
+                    </div>
+                </div>
+            `
+        }
+    ]
+};
+
+let currentOnboardingStep = 0;
 
 // ============================================
 // INITIALIZATION
@@ -103,7 +377,16 @@ function initializeApp(role) {
     
     setupRoleBasedUI(role);
     loadNavigationMenu(role);
-    loadSection('overview');
+    
+    // Check onboarding status
+    const hasSeenOnboarding = sessionStorage.getItem(`onboarding_${role}_complete`);
+    
+    if (!hasSeenOnboarding) {
+        showOnboarding(role);
+    } else {
+        loadSection('overview');
+    }
+    
     setupEventListeners();
     updateTokenBalance();
     
@@ -111,53 +394,86 @@ function initializeApp(role) {
         initializeCoinbaseWallet();
     }
     
-    if (role === 'advertiser') {
-        initializeAdvertiserScanner();
-    }
-    
     console.log('App initialization complete');
 }
 
 /**
- * Initialize advertiser scanner app status
+ * Show onboarding flow
  */
-function initializeAdvertiserScanner() {
-    const scannerDownloaded = sessionStorage.getItem('scannerAppDownloaded');
-    if (scannerDownloaded === 'true') {
-        AppState.scannerAppDownloaded = true;
-        
-        // Update AdvertiserData if available
-        if (window.AdvertiserData?.scannerApp) {
-            window.AdvertiserData.scannerApp.downloaded = true;
-        }
+function showOnboarding(role) {
+    const steps = OnboardingFlows[role];
+    if (!steps || steps.length === 0) {
+        loadSection('overview');
+        return;
     }
+    
+    currentOnboardingStep = 0;
+    displayOnboardingStep(steps[currentOnboardingStep]);
+}
+
+/**
+ * Display onboarding step
+ */
+function displayOnboardingStep(step) {
+    const mainContent = document.getElementById('dashboardContent');
+    if (mainContent) {
+        mainContent.innerHTML = step.content;
+    }
+    
+    // Update page title
+    const pageTitle = document.getElementById('pageTitle');
+    if (pageTitle) {
+        pageTitle.textContent = step.title;
+    }
+}
+
+/**
+ * Show next onboarding step
+ */
+function showNextOnboarding() {
+    const role = AppState.currentRole;
+    const steps = OnboardingFlows[role];
+    
+    currentOnboardingStep++;
+    
+    if (currentOnboardingStep < steps.length) {
+        displayOnboardingStep(steps[currentOnboardingStep]);
+    } else {
+        completeOnboarding();
+    }
+}
+
+/**
+ * Complete onboarding
+ */
+function completeOnboarding() {
+    const role = AppState.currentRole;
+    sessionStorage.setItem(`onboarding_${role}_complete`, 'true');
+    AppState.hasSeenOnboarding = true;
+    loadSection('overview');
 }
 
 /**
  * Apply overflow fix to all elements
  */
 function applyOverflowFix() {
-    // Ensure main content fits
     const mainContent = document.getElementById('mainContent');
     if (mainContent) {
         mainContent.style.maxWidth = '100%';
         mainContent.style.overflowX = 'hidden';
     }
     
-    // Fix all builder panels
     document.querySelectorAll('.builder-panel').forEach(panel => {
         panel.style.maxWidth = '100%';
         panel.style.overflowX = 'hidden';
         panel.style.boxSizing = 'border-box';
     });
     
-    // Fix all cards
     document.querySelectorAll('.card, .stat-card, .app-card, .revenue-stream').forEach(card => {
         card.style.maxWidth = '100%';
         card.style.boxSizing = 'border-box';
     });
     
-    // Fix all grids
     document.querySelectorAll('.hero-stats, .apps-grid, .revenue-grid, .monitoring-grid, .builder-grid').forEach(grid => {
         grid.style.maxWidth = '100%';
         grid.style.width = '100%';
@@ -237,7 +553,6 @@ function loadSection(section) {
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
-    // Apply overflow fix after content loads
     setTimeout(applyOverflowFix, 200);
 }
 
@@ -247,12 +562,10 @@ function loadSection(section) {
 function getSectionContent(section) {
     const role = AppState.currentRole;
     
-    // Overview
     if (section === 'overview') {
         return getOverviewContent(role);
     }
     
-    // Campaign Manager sections
     if (role === 'campaign-manager') {
         if (section === 'app-setup') return getAppSetupContent(role);
         if (section === 'campaigns') return getCampaignsContent(role);
@@ -263,7 +576,6 @@ function getSectionContent(section) {
         if (section === 'wallet') return getWalletContent(role);
     }
     
-    // Advertiser sections
     if (role === 'advertiser') {
         if (section === 'marketplace') return getMarketplaceContent(role);
         if (section === 'tokens') return getTokensContent(role);
@@ -272,15 +584,12 @@ function getSectionContent(section) {
         if (section === 'payments') return getPaymentsContent(role);
         if (section === 'analytics') return getAdvertiserAnalyticsContent(role);
         if (section === 'budget') return getBudgetContent(role);
-        if (section === 'scanner') return getScannerAppContent(role);
     }
     
-    // Common sections
     if (section === 'settings') {
         return getSettingsContent(role);
     }
     
-    // Fallback
     return getPlaceholderContent(section);
 }
 
@@ -299,8 +608,8 @@ function getOverviewContent(role) {
  * Campaign Manager Overview
  */
 function getCampaignManagerOverview() {
-    const activeCampaigns = 1; // $Ember Hunt
-    const totalLocations = 3; // 2 CM + 1 Advertiser
+    const activeCampaigns = 1;
+    const totalLocations = 2;
     const advertisers = 1;
     
     return `
@@ -345,7 +654,7 @@ function getCampaignManagerOverview() {
                 <div class="stat-details">
                     <div class="stat-detail-item">
                         <span>Campaign Stops:</span>
-                        <span>2</span>
+                        <span>1</span>
                     </div>
                     <div class="stat-detail-item">
                         <span>Advertiser Stops:</span>
@@ -367,74 +676,6 @@ function getCampaignManagerOverview() {
                         <span>Redemptions:</span>
                         <span>65</span>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- How The Ecosystem Works -->
-        <div class="dashboard-section">
-            <div class="card" style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.3);">
-                <h3 style="color: #22c55e; margin-bottom: 20px; font-size: 1.5rem;">
-                    💡 The $Ember Advertisement Ecosystem
-                </h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                    <div style="text-align: center; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">1️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Advertiser Joins</h4>
-                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0;">
-                            Pays monthly location fee + buys $Ember tokens
-                        </p>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">2️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Creates Token Stop</h4>
-                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0;">
-                            Funds location with $Ember + advertisement
-                        </p>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">3️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Players Collect</h4>
-                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0;">
-                            Visit location, collect tokens, see ad
-                        </p>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">4️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Cash Out or Redeem</h4>
-                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0;">
-                            Player chooses: Coinbase OR visit advertiser
-                        </p>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">5️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">QR Code Scan</h4>
-                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0;">
-                            Advertiser scans → gets $Ember back
-                        </p>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">6️⃣</div>
-                        <h4 style="font-size: 1rem; margin-bottom: 8px;">Circular Economy</h4>
-                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0;">
-                            Recovered tokens fund new stops
-                        </p>
-                    </div>
-                </div>
-                
-                <div style="padding: 15px; background: rgba(240,165,0,0.15); border: 1px solid rgba(240,165,0,0.4); border-radius: 8px;">
-                    <strong style="color: var(--color-primary-gold);">Your Revenue Sources:</strong>
-                    <ul style="margin: 10px 0 0 0; padding-left: 20px; line-height: 1.7;">
-                        <li>Monthly location placement fees from advertisers</li>
-                        <li>Initial $Ember token sales to advertisers</li>
-                        <li>Platform engagement and growth</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -465,7 +706,7 @@ function getCampaignManagerOverview() {
             </div>
             
             <div class="apps-grid">
-                <div class="app-card" onclick="loadSection('campaigns')">
+                <div class="app-card">
                     <div class="app-header">
                         <div class="app-name">🔥 $Ember Hunt</div>
                         <div class="app-status">
@@ -492,8 +733,8 @@ function getCampaignManagerOverview() {
                         </div>
                     </div>
                     <div class="app-actions">
-                        <button class="btn btn-outline" onclick="event.stopPropagation(); loadSection('campaigns')">Manage</button>
-                        <button class="btn btn-primary" onclick="event.stopPropagation(); window.open('https://ghost081280.github.io/vaultphoenix/crypto-game/dashboard.html', '_blank')">View App ↗</button>
+                        <button class="btn btn-primary" onclick="loadCampaignControl('camp-001')">Manage Campaign</button>
+                        <button class="btn btn-outline" onclick="window.open('https://ghost081280.github.io/vaultphoenix/crypto-game/dashboard.html', '_blank')">View App ↗</button>
                     </div>
                 </div>
             </div>
@@ -502,335 +743,22 @@ function getCampaignManagerOverview() {
 }
 
 /**
- * Get Scanner App Content for Advertisers
- */
-function getScannerAppContent(role) {
-    if (role !== 'advertiser') {
-        return getPlaceholderContent('scanner');
-    }
-    
-    const scannerDownloaded = AppState.scannerAppDownloaded || (window.AdvertiserData?.scannerApp?.downloaded);
-    
-    return `
-        <div class="dashboard-section">
-            <h2 class="section-title">📱 $Ember Scanner App</h2>
-            
-            ${!scannerDownloaded ? `
-                <!-- Download Scanner App -->
-                <div class="card" style="text-align: center; padding: 60px 40px;">
-                    <div style="font-size: 5rem; margin-bottom: 20px;">📱</div>
-                    <h3 style="color: var(--color-primary-gold); margin-bottom: 20px; font-size: 2rem;">
-                        Download the Scanner App
-                    </h3>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px; line-height: 1.7;">
-                        The Scanner App allows you to accept $Ember token redemptions from players at your physical location. 
-                        When players want to redeem their tokens for your offers, simply scan their QR code to instantly 
-                        receive the $Ember back into your account.
-                    </p>
-                    
-                    <div style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 25px; margin: 30px auto; max-width: 600px;">
-                        <h4 style="color: var(--color-primary-gold); margin-bottom: 20px; font-size: 1.3rem;">How Redemptions Work:</h4>
-                        
-                        <div style="text-align: left; display: flex; flex-direction: column; gap: 15px;">
-                            <div style="display: flex; gap: 15px; align-items: start;">
-                                <div style="font-size: 2rem; flex-shrink: 0;">1️⃣</div>
-                                <div>
-                                    <h5 style="margin-bottom: 5px; color: #fff;">Player Visits Your Location</h5>
-                                    <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.95rem;">
-                                        After collecting $Ember at your token stop and seeing your advertisement, 
-                                        player decides to visit your physical location to redeem their offer.
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div style="display: flex; gap: 15px; align-items: start;">
-                                <div style="font-size: 2rem; flex-shrink: 0;">2️⃣</div>
-                                <div>
-                                    <h5 style="margin-bottom: 5px; color: #fff;">Player Shows QR Code</h5>
-                                    <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.95rem;">
-                                        Player opens their Vault Phoenix app and displays their unique redemption QR code 
-                                        at checkout or when requesting your offer.
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div style="display: flex; gap: 15px; align-items: start;">
-                                <div style="font-size: 2rem; flex-shrink: 0;">3️⃣</div>
-                                <div>
-                                    <h5 style="margin-bottom: 5px; color: #fff;">You Scan Their Code</h5>
-                                    <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.95rem;">
-                                        Open your Scanner App on your phone/tablet, point at player's QR code, 
-                                        and enter the redemption amount (e.g., 50 $Ember for your offer).
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div style="display: flex; gap: 15px; align-items: start;">
-                                <div style="font-size: 2rem; flex-shrink: 0;">4️⃣</div>
-                                <div>
-                                    <h5 style="margin-bottom: 5px; color: #fff;">Instant $Ember Transfer</h5>
-                                    <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.95rem;">
-                                        $Ember tokens instantly transfer from player's wallet to your advertiser account. 
-                                        You see the confirmation immediately in the Scanner App.
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div style="display: flex; gap: 15px; align-items: start;">
-                                <div style="font-size: 2rem; flex-shrink: 0;">5️⃣</div>
-                                <div>
-                                    <h5 style="margin-bottom: 5px; color: #fff;">Give The Offer</h5>
-                                    <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.95rem;">
-                                        Now that you've received your $Ember back, provide the player with the offer 
-                                        they saw in your advertisement (discount, free item, special service, etc).
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="background: rgba(34,197,94,0.15); border: 2px solid rgba(34,197,94,0.4); border-radius: 12px; padding: 20px; margin: 30px auto; max-width: 600px;">
-                        <h4 style="color: #22c55e; margin-bottom: 15px;">✓ Scanner App Features:</h4>
-                        <ul style="text-align: left; list-style: none; padding: 0; margin: 0;">
-                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                📱 Works on iOS and Android phones/tablets
-                            </li>
-                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                ⚡ Instant QR code scanning
-                            </li>
-                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                💎 Real-time $Ember balance updates
-                            </li>
-                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                📊 Transaction history and analytics
-                            </li>
-                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                🔒 Secure blockchain-verified transfers
-                            </li>
-                            <li style="padding: 8px 0;">
-                                🔔 Push notifications for redemptions
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <button class="btn btn-primary btn-large" onclick="downloadScannerApp()" style="font-size: 1.3rem; padding: 20px 50px;">
-                        📱 Download Scanner App
-                    </button>
-                    
-                    <div style="margin-top: 25px;">
-                        <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">
-                            Available for iOS (App Store) and Android (Google Play)
-                        </p>
-                    </div>
-                </div>
-            ` : `
-                <!-- Scanner App Active -->
-                <div class="revenue-grid">
-                    <div class="card" style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.4);">
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                            <span class="status-indicator status-live"></span>
-                            <h3 style="color: #22c55e; margin: 0; font-size: 1.5rem;">Scanner App Active</h3>
-                        </div>
-                        
-                        <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; margin-bottom: 20px;">
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                                <div>
-                                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">App Version</div>
-                                    <div style="font-size: 1.3rem; font-weight: 900;">${window.AdvertiserData?.scannerApp?.version || '1.2.0'}</div>
-                                </div>
-                                <div>
-                                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">Device Type</div>
-                                    <div style="font-size: 1.3rem; font-weight: 900; text-transform: capitalize;">${window.AdvertiserData?.scannerApp?.deviceType || 'Tablet'}</div>
-                                </div>
-                                <div>
-                                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">Scans Today</div>
-                                    <div style="font-size: 1.3rem; font-weight: 900; color: var(--color-primary-gold);">${window.AdvertiserData?.scannerApp?.scansToday || 3}</div>
-                                </div>
-                                <div>
-                                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">Total Scans</div>
-                                    <div style="font-size: 1.3rem; font-weight: 900; color: #22c55e;">${window.AdvertiserData?.scannerApp?.totalScans || 65}</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <button class="btn btn-primary btn-large" onclick="openScannerApp()">
-                                📱 Open Scanner App
-                            </button>
-                            <button class="btn btn-outline" onclick="viewScanHistory()">
-                                📊 View Scan History
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
-                            📋 Quick Redemption Guide
-                        </h3>
-                        
-                        <ol style="margin: 0; padding-left: 20px; line-height: 1.8;">
-                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <strong>Player visits</strong> your location to redeem $Ember
-                            </li>
-                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <strong>Open Scanner App</strong> on your device
-                            </li>
-                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <strong>Scan</strong> the QR code from player's app
-                            </li>
-                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <strong>Enter</strong> redemption amount (e.g., 50 $Ember)
-                            </li>
-                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <strong>Confirm</strong> - tokens transfer to you instantly
-                            </li>
-                            <li style="padding: 8px 0;">
-                                <strong>Give</strong> the player their offer/discount
-                            </li>
-                        </ol>
-                        
-                        <div style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 15px; margin-top: 20px;">
-                            <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">💡 Pro Tips:</h4>
-                            <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; line-height: 1.6;">
-                                <li>Keep Scanner App open during business hours</li>
-                                <li>Train staff on redemption process</li>
-                                <li>Verify offer details before giving items/discounts</li>
-                                <li>Check transaction history for disputes</li>
-                            </ul>
-                        </div>
-                        
-                        <button class="btn btn-secondary" onclick="downloadScannerGuide()" style="width: 100%; margin-top: 15px;">
-                            📚 Download Full Scanner Guide
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Recent Scans -->
-                <div class="card" style="margin-top: 30px;">
-                    <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
-                        📜 Recent Redemption Scans
-                    </h3>
-                    
-                    <div class="merchants-table-wrapper">
-                        <table class="merchants-table">
-                            <thead>
-                                <tr>
-                                    <th>Time</th>
-                                    <th>Player ID</th>
-                                    <th>Amount</th>
-                                    <th>Offer Given</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>10:24 AM</td>
-                                    <td style="font-family: monospace;">0x8f3a...d21c</td>
-                                    <td>50 $Ember</td>
-                                    <td>Museum Tour 10% Off</td>
-                                    <td><span class="badge badge-success">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td>2:43 PM</td>
-                                    <td style="font-family: monospace;">0x2b7f...8a3e</td>
-                                    <td>50 $Ember</td>
-                                    <td>Gift Shop 10% Off</td>
-                                    <td><span class="badge badge-success">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td>4:15 PM</td>
-                                    <td style="font-family: monospace;">0x9c2d...4f1b</td>
-                                    <td>50 $Ember</td>
-                                    <td>Museum Tour 10% Off</td>
-                                    <td><span class="badge badge-success">Completed</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div style="margin-top: 15px; padding: 15px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                            <div>
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Today's Redemptions</div>
-                                <div style="font-size: 1.5rem; font-weight: 900; color: #22c55e;">3 scans</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">$Ember Received Today</div>
-                                <div style="font-size: 1.5rem; font-weight: 900; color: var(--color-primary-gold);">150 $Ember</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">This Month</div>
-                                <div style="font-size: 1.5rem; font-weight: 900;">65 scans</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `}
-        </div>
-    `;
-}
-
-/**
- * Download Scanner App
- */
-function downloadScannerApp() {
-    alert(`📱 Downloading Scanner App...\n\n` +
-        `The Vault Phoenix Scanner App is now downloading.\n\n` +
-        `Available for:\n` +
-        `• iOS (App Store)\n` +
-        `• Android (Google Play)\n` +
-        `• Web App (PWA)\n\n` +
-        `After installation, login with your advertiser credentials:\n` +
-        `Email: demo@phoenix.com\n\n` +
-        `Setup takes less than 2 minutes!`);
-    
-    // Mark scanner as downloaded
-    AppState.scannerAppDownloaded = true;
-    sessionStorage.setItem('scannerAppDownloaded', 'true');
-    
-    // Update AdvertiserData if available
-    if (window.AdvertiserData?.scannerApp) {
-        window.AdvertiserData.scannerApp.downloaded = true;
-    }
-    
-    // Show success message
-    setTimeout(() => {
-        alert(`✓ Scanner App Installed!\n\n` +
-            `The app is now ready to use.\n\n` +
-            `Quick Start:\n` +
-            `1. Open the Scanner App\n` +
-            `2. Point camera at player's QR code\n` +
-            `3. Enter redemption amount\n` +
-            `4. Confirm transfer\n` +
-            `5. Give player their offer!`);
-        
-        // Reload scanner section to show active state
-        if (typeof window.loadSection === 'function') {
-            window.loadSection('scanner');
-        }
-    }, 1500);
-}
-
-/**
  * Load Campaign Control for specific campaign
  */
 function loadCampaignControl(campaignId) {
     AppState.currentCampaignId = campaignId;
     
-    // Get campaign control content
-    const content = getCampaignControlContent(campaignId);
+    const content = getCampaignControlContent ? getCampaignControlContent(campaignId) : getCampaignsContent(AppState.currentRole);
     const mainContent = document.getElementById('dashboardContent');
     
     if (mainContent) {
         mainContent.innerHTML = content;
     }
     
-    // Update navigation
     updateActiveNavItem('campaigns');
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
-    // Apply overflow fix
     setTimeout(applyOverflowFix, 200);
 }
 
@@ -888,10 +816,15 @@ function setupEventListeners() {
         menuToggle.addEventListener('click', toggleSidebar);
     }
     
+    // Make logo clickable to return to overview
+    const sidebarLogo = document.querySelector('.sidebar-logo');
+    if (sidebarLogo) {
+        sidebarLogo.style.cursor = 'pointer';
+        sidebarLogo.addEventListener('click', () => loadSection('overview'));
+    }
+    
     handleResponsiveSidebar();
     window.addEventListener('resize', handleResponsiveSidebar);
-    
-    // Add overflow fix on resize
     window.addEventListener('resize', applyOverflowFix);
 }
 
@@ -988,6 +921,16 @@ function getSettingsContent(role) {
                     Change Role
                 </button>
             </div>
+            
+            <div class="card" style="margin-top: 30px;">
+                <h3 style="margin-bottom: 20px;">Support</h3>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
+                    Need help? Our support team is here to assist you.
+                </p>
+                <a href="mailto:contact@vaultphoenix.com" class="btn btn-primary">
+                    📧 Contact Support
+                </a>
+            </div>
         </div>
     `;
 }
@@ -1000,7 +943,6 @@ function getAdvertiserAnalyticsContent(role) {
         return getPlaceholderContent('analytics');
     }
     
-    // Use the analytics content from analytics.js
     if (typeof window.getPaymentsContent === 'function') {
         return window.getPaymentsContent(role);
     }
@@ -1021,7 +963,7 @@ if (typeof window !== 'undefined') {
     window.AppState = AppState;
     window.loadSection = loadSection;
     window.loadCampaignControl = loadCampaignControl;
-    window.getScannerAppContent = getScannerAppContent;
-    window.downloadScannerApp = downloadScannerApp;
+    window.showNextOnboarding = showNextOnboarding;
+    window.completeOnboarding = completeOnboarding;
     window.logout = logout;
 }
