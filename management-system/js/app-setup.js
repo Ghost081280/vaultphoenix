@@ -170,23 +170,77 @@ function getAppSetupContent(role) {
                             </button>
                         </div>
                         
-                        <!-- Live Preview -->
+                        <!-- Live Preview with Phone Mockup -->
                         <div class="card">
                             <h4 style="margin-bottom: 20px; color: var(--color-primary-orange);">Live Preview</h4>
                             
-                            <div id="appPreview" style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 30px; text-align: center;">
-                                <div id="previewLogo" style="width: 80px; height: 80px; margin: 0 auto 20px; background: var(--gradient-fire); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
-                                    🔥
+                            <!-- Phone Mockup Frame -->
+                            <div style="max-width: 380px; margin: 0 auto; position: relative;">
+                                <!-- Phone Frame -->
+                                <div style="
+                                    border: 14px solid #1a1a1a;
+                                    border-radius: 48px;
+                                    box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 0 0 2px #333;
+                                    position: relative;
+                                    padding: 12px;
+                                    background: #000;
+                                ">
+                                    <!-- Notch -->
+                                    <div style="
+                                        position: absolute;
+                                        top: 0;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        width: 120px;
+                                        height: 28px;
+                                        background: #1a1a1a;
+                                        border-radius: 0 0 20px 20px;
+                                        z-index: 10;
+                                    "></div>
+                                    
+                                    <!-- Screen Content -->
+                                    <div id="appPreview" style="
+                                        background: linear-gradient(135deg, rgba(15, 15, 15, 0.98), rgba(45, 24, 16, 0.98));
+                                        border-radius: 32px;
+                                        padding: 50px 30px 30px 30px;
+                                        text-align: center;
+                                        min-height: 600px;
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: center;
+                                        overflow: hidden;
+                                    ">
+                                        <div id="previewLogo" style="width: 80px; height: 80px; margin: 0 auto 20px; background: var(--gradient-fire); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                                            🔥
+                                        </div>
+                                        <div id="previewAppName" style="font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; color: #d73327;">
+                                            My AR Crypto Hunt
+                                        </div>
+                                        <div id="previewDescription" style="color: rgba(255,255,255,0.7); margin-bottom: 20px; line-height: 1.6;">
+                                            Discover crypto rewards in the real world!
+                                        </div>
+                                        <button class="btn btn-primary" id="previewButton" style="background: linear-gradient(135deg, #d73327, #fb923c); margin: 0 auto; max-width: 200px;">
+                                            Start Hunting
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Home Indicator -->
+                                    <div style="
+                                        position: absolute;
+                                        bottom: 8px;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        width: 140px;
+                                        height: 4px;
+                                        background: rgba(255,255,255,0.3);
+                                        border-radius: 2px;
+                                    "></div>
                                 </div>
-                                <div id="previewAppName" style="font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; color: #d73327;">
-                                    My AR Crypto Hunt
+                                
+                                <!-- Phone Label -->
+                                <div style="text-align: center; margin-top: 15px; color: rgba(255,255,255,0.5); font-size: 0.85rem;">
+                                    📱 iPhone Preview
                                 </div>
-                                <div id="previewDescription" style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">
-                                    Discover crypto rewards in the real world!
-                                </div>
-                                <button class="btn btn-primary" id="previewButton" style="background: linear-gradient(135deg, #d73327, #fb923c);">
-                                    Start Hunting
-                                </button>
                             </div>
                             
                             <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
