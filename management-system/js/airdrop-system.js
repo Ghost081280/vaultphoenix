@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Airdrop System - With Campaign Selection & Timer
+   Airdrop System - Custom Message Airdrops
    ============================================ */
 
 // ============================================
@@ -8,7 +8,7 @@
 // ============================================
 
 const AirdropSystem = {
-    // Active airdrops with timers
+    // Active airdrops with custom messages
     activeAirdrops: [
         {
             id: 'airdrop-001',
@@ -18,11 +18,12 @@ const AirdropSystem = {
             target: 'area',
             location: 'Downtown Phoenix',
             recipients: 12,
-            claimTimer: 1800, // 30 minutes in seconds
+            claimTimer: 1800,
             timestamp: new Date(Date.now() - 47000),
             status: 'active',
             claimed: 8,
-            unclaimed: 4
+            unclaimed: 4,
+            message: 'Welcome to Downtown Phoenix! Collect your bonus tokens and explore local businesses.'
         },
         {
             id: 'airdrop-002',
@@ -32,43 +33,23 @@ const AirdropSystem = {
             target: 'all',
             location: 'All Players',
             recipients: 47,
-            claimTimer: 3600, // 60 minutes
+            claimTimer: 3600,
             timestamp: new Date(Date.now() - 3600000),
             status: 'completed',
             claimed: 41,
-            unclaimed: 6
+            unclaimed: 6,
+            message: 'Special weekend bonus! Double tokens at all locations this Saturday!'
         }
     ],
-    
-    // Pending airdrop requests from advertisers
-    pendingRequests: [
-        {
-            id: 'req-001',
-            campaignId: 'camp-001',
-            campaignName: '$Ember Hunt',
-            advertiser: 'Heritage Square Historic Site',
-            amount: 500,
-            radius: 1,
-            location: 'Heritage Square',
-            estimatedRecipients: 34,
-            message: 'Visit Heritage Square and claim your bonus tokens!',
-            requestedTime: 'peak',
-            status: 'pending',
-            submittedAt: new Date(Date.now() - 7200000)
-        }
-    ],
-    
-    // Scheduled airdrops (removed - see warning system instead)
-    scheduledAirdrops: [],
     
     // Airdrop history
     totalAirdrops: 156,
     totalTokensDistributed: 3666669,
     
     // Targeting options
-    targetingOptions: ['all', 'area', 'players', 'new-users', 'high-activity'],
+    targetingOptions: ['all', 'area', 'new-users', 'high-activity'],
     
-    // Timer presets (in minutes)
+    // Timer presets (in seconds)
     timerPresets: [
         { label: '15 minutes', value: 900 },
         { label: '30 minutes', value: 1800 },
@@ -80,7 +61,7 @@ const AirdropSystem = {
 };
 
 // ============================================
-// CAMPAIGN MANAGER: AIRDROP CENTER
+// CAMPAIGN MANAGER: CUSTOM MESSAGE AIRDROP CENTER
 // ============================================
 
 /**
@@ -91,7 +72,6 @@ function getAirdropsContent(role) {
         return getPlaceholderContent('airdrops');
     }
     
-    // Get unique campaigns (in real app, this would come from database)
     const campaigns = [
         { id: 'camp-001', name: '$Ember Hunt', activePlayers: 847 },
         { id: 'camp-002', name: 'Desert Quest AR', activePlayers: 423 }
@@ -99,7 +79,7 @@ function getAirdropsContent(role) {
     
     return `
         <div class="dashboard-section">
-            <h2 class="section-title">🎯 Airdrop Control Center</h2>
+            <h2 class="section-title">🎯 Custom Message Airdrop Center</h2>
             
             <!-- Airdrop Stats -->
             <div class="hero-stats">
@@ -125,86 +105,70 @@ function getAirdropsContent(role) {
                 </div>
                 
                 <div class="stat-card">
-                    <div class="stat-icon">⏰</div>
-                    <div class="stat-label">Pending Requests</div>
-                    <div class="stat-value">${AirdropSystem.pendingRequests.length}</div>
-                    <div class="stat-change">From advertisers</div>
+                    <div class="stat-icon">📨</div>
+                    <div class="stat-label">Messages Sent</div>
+                    <div class="stat-value">${AirdropSystem.totalAirdrops}</div>
+                    <div class="stat-change">With custom messages</div>
                 </div>
             </div>
         </div>
         
-        <!-- Pending Advertiser Requests -->
-        ${AirdropSystem.pendingRequests.length > 0 ? `
-            <div class="dashboard-section">
-                <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                    📬 Pending Airdrop Requests from Advertisers (${AirdropSystem.pendingRequests.length})
+        <!-- What are Custom Message Airdrops -->
+        <div class="dashboard-section">
+            <div class="card" style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3);">
+                <h3 style="color: var(--color-primary-gold); margin-bottom: 20px; font-size: 1.5rem;">
+                    💡 What are Custom Message Airdrops?
                 </h3>
+                <p style="color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 20px;">
+                    Send targeted $Ember tokens with personalized messages directly to players in your campaign. 
+                    Perfect for special events, promotions, or driving engagement to specific locations. Players 
+                    receive push notifications with your custom message and a claim timer.
+                </p>
                 
-                ${AirdropSystem.pendingRequests.map(req => `
-                    <div class="card" style="margin-bottom: 20px; border: 2px solid rgba(240,165,0,0.5);">
-                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; flex-wrap: wrap; gap: 15px;">
-                            <div>
-                                <h4 style="color: var(--color-primary-gold); margin-bottom: 5px;">${req.advertiser}</h4>
-                                <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">
-                                    Campaign: ${req.campaignName} • Location: ${req.location}
-                                </div>
-                                <div style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 3px;">
-                                    Requested ${formatRelativeTime(req.submittedAt)}
-                                </div>
-                            </div>
-                            <span class="badge badge-warning">Pending Approval</span>
-                        </div>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 15px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                            <div>
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Amount</div>
-                                <div style="font-size: 1.3rem; font-weight: 900; color: var(--color-primary-gold);">${req.amount.toLocaleString()} $Ember</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Radius</div>
-                                <div style="font-size: 1.3rem; font-weight: 900;">${req.radius} mile(s)</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Est. Recipients</div>
-                                <div style="font-size: 1.3rem; font-weight: 900;">${req.estimatedRecipients}</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Total Cost</div>
-                                <div style="font-size: 1.3rem; font-weight: 900; color: #fb923c;">${(req.amount * req.estimatedRecipients).toLocaleString()}</div>
-                            </div>
-                        </div>
-                        
-                        ${req.message ? `
-                            <div style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 8px; padding: 12px; margin-bottom: 15px;">
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">Advertiser Message:</div>
-                                <div style="color: rgba(255,255,255,0.9);">${req.message}</div>
-                            </div>
-                        ` : ''}
-                        
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <button class="btn btn-primary" onclick="approveAdvertiserAirdrop('${req.id}')">
-                                ✓ Approve & Send Now
-                            </button>
-                            <button class="btn btn-secondary" onclick="editAdvertiserAirdrop('${req.id}')">
-                                Edit Amount/Recipients
-                            </button>
-                            <button class="btn btn-outline" onclick="rejectAdvertiserAirdrop('${req.id}')" style="background: rgba(239,68,68,0.2); border-color: #ef4444;">
-                                ✗ Reject
-                            </button>
-                        </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">📍</div>
+                        <h4 style="margin-bottom: 8px; font-size: 1rem;">Target Specific Areas</h4>
+                        <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.85rem;">
+                            Send to players in specific geographic locations
+                        </p>
                     </div>
-                `).join('')}
+                    
+                    <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">💬</div>
+                        <h4 style="margin-bottom: 8px; font-size: 1rem;">Custom Messages</h4>
+                        <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.85rem;">
+                            Add personalized messages for events or promotions
+                        </p>
+                    </div>
+                    
+                    <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">⏰</div>
+                        <h4 style="margin-bottom: 8px; font-size: 1rem;">Claim Timers</h4>
+                        <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.85rem;">
+                            Set urgency with customizable claim deadlines
+                        </p>
+                    </div>
+                    
+                    <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">📊</div>
+                        <h4 style="margin-bottom: 8px; font-size: 1rem;">Track Results</h4>
+                        <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.85rem;">
+                            Monitor claim rates and engagement in real-time
+                        </p>
+                    </div>
+                </div>
             </div>
-        ` : ''}
+        </div>
         
-        <!-- Quick Airdrop Panel -->
+        <!-- Send Custom Message Airdrop -->
         <div class="dashboard-section">
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                ⚡ Send Airdrop
+                ⚡ Send Custom Message Airdrop
             </h3>
             
             <div class="card">
-                <form onsubmit="sendQuickAirdrop(event)" id="quickAirdropForm">
+                <form onsubmit="sendCustomMessageAirdrop(event)" id="airdropForm">
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px;">
                         <div class="form-group">
                             <label class="form-label">Select Campaign *</label>
@@ -238,7 +202,6 @@ function getAirdropsContent(role) {
                             <select class="form-input" id="airdropTarget" onchange="updateTargetDetails()">
                                 <option value="all">All Active Players</option>
                                 <option value="area">Specific Area</option>
-                                <option value="players">Selected Players</option>
                                 <option value="new-users">New Users (Last 7 Days)</option>
                                 <option value="high-activity">High Activity Users</option>
                             </select>
@@ -256,13 +219,20 @@ function getAirdropsContent(role) {
                         </div>
                     </div>
                     
+                    <!-- Custom Message -->
+                    <div class="form-group">
+                        <label class="form-label">Custom Message *</label>
+                        <textarea class="form-input" id="airdropMessage" rows="3" placeholder="Special event tonight! Come to downtown Phoenix and collect your bonus tokens. Limited time offer!" required></textarea>
+                        <div class="form-hint">This message will be shown to players with the airdrop notification</div>
+                    </div>
+                    
                     <!-- Target Summary -->
                     <div id="targetSummary" style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 15px; margin-bottom: 20px;">
                         <div style="font-weight: 700; margin-bottom: 10px;">Airdrop Summary</div>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
                             <div>
                                 <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Campaign</div>
-                                <div style="font-size: 1.3rem; font-weight: 700; color: var(--color-primary-gold);" id="summaryCapaign">$Ember Hunt</div>
+                                <div style="font-size: 1.3rem; font-weight: 700; color: var(--color-primary-gold);" id="summaryCampaign">$Ember Hunt</div>
                             </div>
                             <div>
                                 <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Est. Recipients</div>
@@ -279,18 +249,9 @@ function getAirdropsContent(role) {
                         </div>
                     </div>
                     
-                    <!-- Message (Optional) -->
-                    <div class="form-group">
-                        <label class="form-label">Custom Message (Optional)</label>
-                        <textarea class="form-input" id="airdropMessage" rows="3" placeholder="Add a custom message to your airdrop..."></textarea>
-                    </div>
-                    
                     <div style="display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap;">
                         <button type="submit" class="btn btn-primary btn-large">
                             🎁 Send Airdrop Now
-                        </button>
-                        <button type="button" class="btn btn-outline" onclick="showFutureAirdropWarning()">
-                            ⏰ About Scheduling
                         </button>
                     </div>
                 </form>
@@ -300,7 +261,7 @@ function getAirdropsContent(role) {
         <!-- Active Airdrops -->
         <div class="dashboard-section">
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                📊 Active Airdrops (With Claim Timers)
+                📊 Active Airdrops (With Custom Messages)
             </h3>
             
             ${AirdropSystem.activeAirdrops.filter(a => a.status === 'active').map(airdrop => `
@@ -323,10 +284,17 @@ function getAirdropsContent(role) {
                         </span>
                     </div>
                     
+                    ${airdrop.message ? `
+                        <div style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 8px; padding: 12px; margin-bottom: 15px;">
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">Custom Message:</div>
+                            <div style="color: rgba(255,255,255,0.9);">"${airdrop.message}"</div>
+                        </div>
+                    ` : ''}
+                    
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
                         <div>
                             <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Claim Timer</div>
-                            <div style="font-size: 1.3rem; font-weight: 900; color: #fb923c;" id="timer_${airdrop.id}">
+                            <div style="font-size: 1.3rem; font-weight: 900; color: #fb923c;">
                                 ${formatTimer(airdrop.claimTimer)}
                             </div>
                         </div>
@@ -345,165 +313,8 @@ function getAirdropsContent(role) {
                             </div>
                         </div>
                     </div>
-                    
-                    <button class="btn btn-small btn-outline" onclick="viewAirdropDetails('${airdrop.id}')" style="margin-top: 15px;">
-                        View Details
-                    </button>
                 </div>
             `).join('')}
-        </div>
-        
-        <!-- Recent Completed Airdrops -->
-        <div class="dashboard-section">
-            <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                📜 Recent Completed Airdrops
-            </h3>
-            
-            <div class="card">
-                ${AirdropSystem.activeAirdrops.filter(a => a.status === 'completed').map(airdrop => `
-                    <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                        <div>
-                            <div style="font-weight: 700; margin-bottom: 5px;">
-                                ${airdrop.amount.toLocaleString()} $Ember • ${airdrop.campaignName}
-                                <span class="badge badge-success" style="margin-left: 10px;">${airdrop.status}</span>
-                            </div>
-                            <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">
-                                ${airdrop.location} • ${airdrop.claimed}/${airdrop.recipients} claimed (${Math.round((airdrop.claimed / airdrop.recipients) * 100)}%)
-                            </div>
-                        </div>
-                        <button class="btn btn-small btn-outline" onclick="viewAirdropDetails('${airdrop.id}')">
-                            View Details
-                        </button>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-}
-
-// ============================================
-// ADVERTISER: AIRDROP REQUESTS
-// ============================================
-
-/**
- * Get airdrop requests content for Advertisers
- */
-function getAirdropRequestsContent(role) {
-    if (role !== 'advertiser') {
-        return getPlaceholderContent('airdrop-requests');
-    }
-    
-    // Get advertiser's campaigns
-    const campaigns = [
-        { id: 'camp-001', name: '$Ember Hunt', activePlayers: 847 }
-    ];
-    
-    return `
-        <div class="dashboard-section">
-            <h2 class="section-title">🎁 Request Player Airdrop</h2>
-            
-            <div class="card" style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); margin-bottom: 30px;">
-                <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">What is a Player Airdrop?</h3>
-                <p style="color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 15px;">
-                    Request the campaign manager to airdrop tokens directly to players near your location. This drives immediate foot traffic and increases engagement.
-                </p>
-                <ul style="list-style: none; padding: 0; color: rgba(255,255,255,0.8);">
-                    <li style="padding: 5px 0;">✓ Tokens sent to active players in your area</li>
-                    <li style="padding: 5px 0;">✓ Players receive push notification with claim timer</li>
-                    <li style="padding: 5px 0;">✓ Increases immediate foot traffic</li>
-                    <li style="padding: 5px 0;">✓ Campaign manager approves and executes</li>
-                </ul>
-            </div>
-            
-            <div class="card">
-                <h3 style="margin-bottom: 20px;">📝 Submit Airdrop Request</h3>
-                
-                <div class="form-group">
-                    <label class="form-label">Select Campaign *</label>
-                    <select class="form-input" id="advAirdropCampaign">
-                        ${campaigns.map(c => 
-                            `<option value="${c.id}">${c.name} (${c.activePlayers} active players)</option>`
-                        ).join('')}
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Your Location *</label>
-                    <select class="form-input" id="airdropLocation">
-                        <option value="adv-loc-001">Heritage Square Historic Site</option>
-                    </select>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                    <div class="form-group">
-                        <label class="form-label">Requested Token Amount *</label>
-                        <input type="number" class="form-input" id="airdropAmountAdv" value="500" min="100" step="100">
-                        <div class="form-hint">Amount per player</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Target Radius</label>
-                        <select class="form-input" id="airdropRadiusAdv">
-                            <option value="0.5">0.5 miles</option>
-                            <option value="1" selected>1 mile</option>
-                            <option value="2">2 miles</option>
-                            <option value="5">5 miles</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Message to Players</label>
-                    <textarea class="form-input" id="airdropMessageAdv" rows="3" placeholder="Visit Heritage Square and claim your bonus tokens! Limited time offer."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Preferred Time</label>
-                    <select class="form-input" id="airdropTimeAdv">
-                        <option value="now">Send Immediately</option>
-                        <option value="peak">Peak Hours (2pm-5pm)</option>
-                        <option value="evening">Evening (5pm-8pm)</option>
-                        <option value="weekend">Next Weekend</option>
-                    </select>
-                    <div class="form-hint" style="color: #fb923c; margin-top: 8px;">
-                        ⚠️ Note: Campaign manager must approve before airdrop is sent
-                    </div>
-                </div>
-                
-                <button class="btn btn-primary btn-large" onclick="submitAirdropRequest()" style="width: 100%;">
-                    🎁 Submit Airdrop Request
-                </button>
-            </div>
-            
-            <div class="card" style="margin-top: 30px;">
-                <h3 style="margin-bottom: 20px;">📋 My Airdrop Requests</h3>
-                
-                <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
-                        <div>
-                            <div style="font-weight: 700;">500 $Ember - 1 mile radius • $Ember Hunt</div>
-                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.6);">Oct 5, 2025 10:30 AM</div>
-                        </div>
-                        <span class="badge badge-warning">Pending Approval</span>
-                    </div>
-                    <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
-                        Awaiting campaign manager approval • Est. 34 recipients
-                    </div>
-                </div>
-                
-                <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
-                        <div>
-                            <div style="font-weight: 700;">1,000 $Ember - 1 mile radius • $Ember Hunt</div>
-                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.6);">Oct 3, 2025 2:30 PM</div>
-                        </div>
-                        <span class="badge badge-success">Approved</span>
-                    </div>
-                    <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
-                        Result: 47 players received tokens, 34 visited location
-                    </div>
-                </div>
-            </div>
         </div>
     `;
 }
@@ -516,8 +327,6 @@ function getAirdropRequestsContent(role) {
  * Update campaign players display
  */
 function updateCampaignPlayers() {
-    const campaignId = document.getElementById('airdropCampaign')?.value;
-    // In real app, would fetch player count for selected campaign
     updateTargetDetails();
 }
 
@@ -530,15 +339,12 @@ function updateTargetDetails() {
     const amount = parseInt(document.getElementById('airdropAmount')?.value) || 500;
     const timer = parseInt(document.getElementById('airdropTimer')?.value) || 1800;
     
-    // Show/hide area selector
     if (areaGroup) {
         areaGroup.style.display = target === 'area' ? 'block' : 'none';
     }
     
-    // Update estimated recipients
     let recipients = 47;
     if (target === 'area') recipients = 12;
-    else if (target === 'players') recipients = 5;
     else if (target === 'new-users') recipients = 23;
     else if (target === 'high-activity') recipients = 18;
     
@@ -547,13 +353,11 @@ function updateTargetDetails() {
         estimatedRecipients.textContent = recipients;
     }
     
-    // Update total cost
     const totalCost = document.getElementById('totalCost');
     if (totalCost) {
         totalCost.textContent = `${(amount * recipients).toLocaleString()} $Ember`;
     }
     
-    // Update timer display
     const timerDisplay = document.getElementById('claimTimerDisplay');
     if (timerDisplay) {
         timerDisplay.textContent = formatTimer(timer);
@@ -587,16 +391,9 @@ function getRelativeTime(date) {
 }
 
 /**
- * Format relative time
+ * Send custom message airdrop
  */
-function formatRelativeTime(date) {
-    return getRelativeTime(date);
-}
-
-/**
- * Send quick airdrop
- */
-function sendQuickAirdrop(event) {
+function sendCustomMessageAirdrop(event) {
     event.preventDefault();
     
     const campaignId = document.getElementById('airdropCampaign')?.value;
@@ -614,18 +411,26 @@ function sendQuickAirdrop(event) {
     const targetName = target === 'all' ? 'All Active Players' : 
                        target.charAt(0).toUpperCase() + target.slice(1).replace('-', ' ');
     
-    if (!confirm(`Send Airdrop to ${campaignText}?\n\n` +
+    if (!message) {
+        alert('Please enter a custom message for the airdrop');
+        return;
+    }
+    
+    if (!confirm(`Send Custom Message Airdrop?\n\n` +
+        `Campaign: ${campaignText}\n` +
         `Amount: ${amount.toLocaleString()} $Ember per recipient\n` +
         `Target: ${targetName}\n` +
         `Recipients: ${recipients}\n` +
         `Claim Timer: ${formatTimer(timer)}\n` +
         `Total: ${totalTokens.toLocaleString()} $Ember\n\n` +
-        `Players must claim within ${formatTimer(timer)}. Continue?`)) {
+        `Message: "${message}"\n\n` +
+        `Players will receive a push notification with your custom message. Continue?`)) {
         return;
     }
     
-    alert(`✓ Airdrop Sent!\n\n` +
-        `${totalTokens.toLocaleString()} $Ember distributed to ${recipients} recipients in ${campaignText}.\n\n` +
+    alert(`✓ Custom Message Airdrop Sent!\n\n` +
+        `${totalTokens.toLocaleString()} $Ember distributed to ${recipients} recipients.\n\n` +
+        `Your message: "${message}"\n\n` +
         `Players have ${formatTimer(timer)} to claim their tokens.`);
     
     if (typeof window.loadSection === 'function') {
@@ -633,118 +438,10 @@ function sendQuickAirdrop(event) {
     }
 }
 
-/**
- * Show future airdrop warning
- */
-function showFutureAirdropWarning() {
-    alert(`⚠️ About Scheduling Airdrops\n\n` +
-        `Scheduling airdrops for later is not recommended because:\n\n` +
-        `• Active player count can change significantly\n` +
-        `• You may end up paying for more/fewer recipients than expected\n` +
-        `• Current estimate: Based on NOW, not future time\n\n` +
-        `Best Practice:\n` +
-        `Send airdrops when you know the current player count and can approve the exact amount.`);
-}
-
-/**
- * Approve advertiser airdrop
- */
-function approveAdvertiserAirdrop(requestId) {
-    const request = AirdropSystem.pendingRequests.find(r => r.id === requestId);
-    if (!request) return;
-    
-    if (confirm(`Approve Airdrop Request?\n\n` +
-        `From: ${request.advertiser}\n` +
-        `Campaign: ${request.campaignName}\n` +
-        `Amount: ${request.amount.toLocaleString()} $Ember × ${request.estimatedRecipients} players\n` +
-        `Total: ${(request.amount * request.estimatedRecipients).toLocaleString()} $Ember\n\n` +
-        `Send immediately?`)) {
-        
-        alert(`✓ Airdrop Approved & Sent!\n\nThe advertiser will be notified.`);
-        
-        // Remove from pending
-        const index = AirdropSystem.pendingRequests.findIndex(r => r.id === requestId);
-        if (index > -1) {
-            AirdropSystem.pendingRequests.splice(index, 1);
-        }
-        
-        if (typeof window.loadSection === 'function') {
-            window.loadSection('airdrops');
-        }
-    }
-}
-
-/**
- * Edit advertiser airdrop
- */
-function editAdvertiserAirdrop(requestId) {
-    const newAmount = prompt('Enter new token amount per player:', '500');
-    if (newAmount) {
-        alert(`✓ Request updated to ${parseInt(newAmount).toLocaleString()} $Ember per player.`);
-    }
-}
-
-/**
- * Reject advertiser airdrop
- */
-function rejectAdvertiserAirdrop(requestId) {
-    if (confirm('Reject this airdrop request?')) {
-        const reason = prompt('Reason for rejection (will be sent to advertiser):', '');
-        alert(`✓ Request rejected${reason ? ` with reason: "${reason}"` : ''}.\n\nThe advertiser will be notified.`);
-        
-        // Remove from pending
-        const index = AirdropSystem.pendingRequests.findIndex(r => r.id === requestId);
-        if (index > -1) {
-            AirdropSystem.pendingRequests.splice(index, 1);
-        }
-        
-        if (typeof window.loadSection === 'function') {
-            window.loadSection('airdrops');
-        }
-    }
-}
-
-/**
- * Submit airdrop request (Advertiser)
- */
-function submitAirdropRequest() {
-    const campaignId = document.getElementById('advAirdropCampaign')?.value;
-    const campaignText = document.getElementById('advAirdropCampaign')?.selectedOptions[0]?.text || '';
-    const amount = document.getElementById('airdropAmountAdv')?.value || 500;
-    const radius = document.getElementById('airdropRadiusAdv')?.value || 1;
-    const message = document.getElementById('airdropMessageAdv')?.value;
-    
-    alert(`🎁 Airdrop Request Submitted!\n\n` +
-        `Campaign: ${campaignText}\n` +
-        `Amount: ${parseInt(amount).toLocaleString()} tokens\n` +
-        `Radius: ${radius} mile(s)\n\n` +
-        `The campaign manager will review and approve your request.`);
-}
-
-/**
- * View airdrop details
- */
-function viewAirdropDetails(airdropId) {
-    const airdrop = AirdropSystem.activeAirdrops.find(a => a.id === airdropId);
-    if (airdrop) {
-        alert(`Airdrop Details\n\n` +
-            `ID: ${airdrop.id}\n` +
-            `Campaign: ${airdrop.campaignName}\n` +
-            `Amount: ${airdrop.amount.toLocaleString()} $Ember\n` +
-            `Target: ${airdrop.location}\n` +
-            `Recipients: ${airdrop.recipients}\n` +
-            `Claimed: ${airdrop.claimed}\n` +
-            `Unclaimed: ${airdrop.unclaimed}\n` +
-            `Claim Rate: ${Math.round((airdrop.claimed / airdrop.recipients) * 100)}%\n` +
-            `Status: ${airdrop.status}`);
-    }
-}
-
 // ============================================
 // INITIALIZE
 // ============================================
 
-// Setup airdrop amount change listener
 document.addEventListener('DOMContentLoaded', () => {
     const amountInput = document.getElementById('airdropAmount');
     if (amountInput) {
@@ -764,15 +461,8 @@ document.addEventListener('DOMContentLoaded', () => {
 if (typeof window !== 'undefined') {
     window.AirdropSystem = AirdropSystem;
     window.getAirdropsContent = getAirdropsContent;
-    window.getAirdropRequestsContent = getAirdropRequestsContent;
     window.updateCampaignPlayers = updateCampaignPlayers;
     window.updateTargetDetails = updateTargetDetails;
-    window.sendQuickAirdrop = sendQuickAirdrop;
-    window.showFutureAirdropWarning = showFutureAirdropWarning;
-    window.approveAdvertiserAirdrop = approveAdvertiserAirdrop;
-    window.editAdvertiserAirdrop = editAdvertiserAirdrop;
-    window.rejectAdvertiserAirdrop = rejectAdvertiserAirdrop;
-    window.submitAirdropRequest = submitAirdropRequest;
-    window.viewAirdropDetails = viewAirdropDetails;
+    window.sendCustomMessageAirdrop = sendCustomMessageAirdrop;
     window.formatTimer = formatTimer;
 }
