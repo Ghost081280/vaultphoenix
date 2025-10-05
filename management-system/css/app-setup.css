@@ -1,12 +1,13 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
    App Setup / Builder Complete Styles
+   File: management-system/css/app-setup.css
    ============================================ */
 
 /* Setup Type Selection Grid */
 .setup-type-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
     margin-bottom: 40px;
 }
@@ -90,7 +91,6 @@
     padding: 30px;
     backdrop-filter: blur(20px);
     box-shadow: var(--card-shadow);
-    min-height: 800px;
     display: flex;
     flex-direction: column;
 }
@@ -106,8 +106,8 @@
 
 /* Configuration Sections */
 .config-section {
-    margin-bottom: 30px;
-    padding-bottom: 25px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -121,10 +121,17 @@
     font-size: 1.1rem;
 }
 
+/* Form Hints */
+.form-hint {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
 /* Logo Upload */
 .logo-upload-area {
     width: 100%;
-    height: 150px;
+    height: 140px;
     border: 2px dashed var(--card-border);
     border-radius: 12px;
     display: flex;
@@ -153,17 +160,17 @@
 }
 
 .logo-preview-img {
-    max-width: 120px;
-    max-height: 120px;
+    max-width: 110px;
+    max-height: 110px;
     border-radius: 12px;
     object-fit: cover;
 }
 
-/* Color Picker Grid */
-.color-grid {
+/* Color Picker Grid - Compact Version */
+.color-grid-compact {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
 }
 
 .color-picker-group {
@@ -173,13 +180,13 @@
 
 .color-picker-wrapper {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
 }
 
 .color-picker-wrapper input[type="color"] {
-    width: 50px;
-    height: 40px;
+    width: 45px;
+    height: 38px;
     border: 2px solid var(--card-border);
     border-radius: 8px;
     cursor: pointer;
@@ -189,13 +196,13 @@
 
 .color-picker-wrapper input[type="text"] {
     flex: 1;
-    padding: 8px 12px;
+    padding: 8px 10px;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     color: white;
     font-family: monospace;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 /* Token Info Box */
@@ -203,14 +210,14 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 20px;
+    padding: 18px;
     background: rgba(240, 165, 0, 0.1);
     border: 1px solid rgba(240, 165, 0, 0.3);
     border-radius: 12px;
 }
 
 .token-symbol {
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 .token-details {
@@ -218,7 +225,7 @@
 }
 
 .token-name {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-gold);
     margin-bottom: 5px;
@@ -227,45 +234,126 @@
 .token-desc {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Domain Info Box */
+.domain-info-box {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+    margin-top: 12px;
+}
+
+.info-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.info-content {
+    flex: 1;
+}
+
+.info-content strong {
+    color: var(--color-primary-gold);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.info-content p {
+    margin: 4px 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
 }
 
 /* Domain Instructions */
 .domain-instructions {
-    margin-top: 15px;
+    margin-top: 20px;
     padding: 20px;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 12px;
+    border: 1px solid var(--card-border);
 }
 
 .instructions-title {
     font-weight: var(--font-weight-bold);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     color: var(--color-primary-gold);
+    font-size: 1.1rem;
+}
+
+.step-box {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 3px solid var(--color-primary-orange);
+}
+
+.step-box strong {
+    color: var(--color-primary-gold);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.step-box p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
 }
 
 .dns-config {
     background: rgba(0, 0, 0, 0.5);
     padding: 15px;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-top: 10px;
     font-family: monospace;
     font-size: 0.9rem;
 }
 
 .dns-config div {
     padding: 5px 0;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.final-url {
-    padding: 12px;
+.dns-config strong {
+    color: var(--color-primary-orange);
+}
+
+.dns-config span {
+    color: var(--color-primary-gold);
+}
+
+.final-url-box {
     background: rgba(34, 197, 94, 0.1);
     border: 1px solid rgba(34, 197, 94, 0.3);
-    border-radius: 8px;
-    color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 15px;
 }
 
-.final-url strong {
+.url-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.url-display {
+    font-size: 1.2rem;
+    font-weight: var(--font-weight-bold);
     color: var(--color-primary-gold);
+    font-family: monospace;
+    word-break: break-all;
+    margin-bottom: 12px;
+}
+
+.url-note {
+    color: #fb923c;
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-medium);
 }
 
 /* Deploy Button */
@@ -334,12 +422,68 @@
     font-size: 0.85rem;
 }
 
-/* Preview Controls */
-.preview-controls {
+/* Preview Info Section */
+.preview-info {
+    margin-top: 30px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+}
+
+.preview-info h5 {
+    color: var(--color-primary-gold);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.preview-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.preview-info ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+
+.preview-info ul li:last-child {
+    border-bottom: none;
+}
+
+.preview-info ul li strong {
+    color: var(--color-primary-orange);
+}
+
+.tech-stack {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tech-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.tech-items {
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 20px;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tech-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(240, 165, 0, 0.2);
+    border: 1px solid rgba(240, 165, 0, 0.4);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--color-primary-gold);
+    font-weight: var(--font-weight-medium);
 }
 
 /* SDK Content */
@@ -431,13 +575,15 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    .color-grid-compact {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 1024px) {
     .builder-grid {
         grid-template-columns: 1fr;
-    }
-    
-    .builder-panel {
-        min-height: auto;
     }
     
     .setup-type-grid {
@@ -451,7 +597,7 @@
         align-items: flex-start;
     }
     
-    .color-grid {
+    .color-grid-compact {
         grid-template-columns: 1fr;
     }
     
