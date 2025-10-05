@@ -15,7 +15,7 @@ const AnalyticsData = {
         totalPlayers: 234,
         totalTokensDistributed: 3666669,
         engagementRate: 87.3,
-        averageSessionTime: 12.4 // minutes
+        averageSessionTime: 12.4
     },
     
     // Advertiser analytics
@@ -31,18 +31,9 @@ const AnalyticsData = {
     players: {
         totalActive: 234,
         newToday: 18,
-        returningUsers: 89.3, // percentage
+        returningUsers: 89.3,
         averageCollections: 8.7,
         topLocation: 'Downtown Phoenix'
-    },
-    
-    // Token economics (Admin only)
-    tokenMetrics: {
-        circulatingSupply: 12450000,
-        totalSupply: 1000000000,
-        marketCap: 43575, // USD
-        holders: 1847,
-        dailyVolume: 47392
     },
     
     // Time series data (last 7 days)
@@ -61,25 +52,14 @@ const AnalyticsData = {
         { name: 'Tempe/ASU Area', players: 45, collections: 634, revenue: 8500 },
         { name: 'Mesa District', players: 21, collections: 298, revenue: 4200 },
         { name: 'Glendale Zone', players: 12, collections: 167, revenue: 2300 }
-    ],
-    
-    // Advertiser performance tiers
-    advertiserPerformance: {
-        platinum: { count: 8, avgRevenue: 3175, engagement: 92.1 },
-        gold: { count: 12, avgRevenue: 1408, engagement: 88.7 },
-        silver: { count: 18, avgRevenue: 625, engagement: 84.3 },
-        bronze: { count: 9, avgRevenue: 287, engagement: 79.8 }
-    }
+    ]
 };
 
 // ============================================
-// ADVERTISER CONTENT GENERATORS
+// ADVERTISER OVERVIEW (Used in main.js)
 // ============================================
 
-/**
- * Get advertiser overview
- */
-function getMerchantOverview() {
+function getAdvertiserOverview() {
     return `
         <!-- Hero Stats -->
         <div class="hero-stats">
@@ -108,7 +88,7 @@ function getMerchantOverview() {
                 <div class="stat-icon">💰</div>
                 <div class="stat-label">Monthly Investment</div>
                 <div class="stat-value">$650</div>
-                <div class="stat-change">Location + Campaign</div>
+                <div class="stat-change">Location + Tokens</div>
             </div>
         </div>
         
@@ -154,14 +134,14 @@ function getMerchantOverview() {
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">⚡ Quick Actions</h3>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <button class="btn btn-primary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('payments')">
-                    💳 Manage Payments
+                <button class="btn btn-primary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('locations')">
+                    📍 Manage Token Locations
                 </button>
-                <button class="btn btn-secondary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('metrics')">
+                <button class="btn btn-secondary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('payments')">
+                    💳 Payment Center
+                </button>
+                <button class="btn btn-outline" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('analytics')">
                     📊 View Full Analytics
-                </button>
-                <button class="btn btn-outline" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('budget')">
-                    💰 ROI Calculator
                 </button>
             </div>
         </div>
@@ -188,9 +168,10 @@ function getMerchantOverview() {
     `;
 }
 
-/**
- * Get advertiser payments content
- */
+// ============================================
+// ADVERTISER PAYMENTS CONTENT
+// ============================================
+
 function getPaymentsContent(role) {
     if (role !== 'advertiser') {
         return getPlaceholderContent('payments');
@@ -198,7 +179,7 @@ function getPaymentsContent(role) {
     
     return `
         <div class="dashboard-section">
-            <h2 class="section-title">💳 Dual Payment Center</h2>
+            <h2 class="section-title">💳 Payment Center</h2>
             
             <div class="revenue-grid">
                 <!-- Location Placement Fee -->
@@ -235,7 +216,7 @@ function getPaymentsContent(role) {
                     </div>
                 </div>
                 
-                <!-- Campaign Funding -->
+                <!-- Campaign Token Funding -->
                 <div class="card">
                     <h3 style="color: var(--color-primary-gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
                         <span style="font-size: 2rem;">💎</span>
@@ -254,8 +235,8 @@ function getPaymentsContent(role) {
                         
                         <div style="padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
                             <div style="display: flex; justify-content: space-between; padding: 8px 0;">
-                                <span style="color: rgba(255,255,255,0.7);">Based on traffic:</span>
-                                <span style="font-weight: 700;">Medium</span>
+                                <span style="color: rgba(255,255,255,0.7);">Tokens Remaining:</span>
+                                <span style="font-weight: 700;">12,450</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 8px 0;">
                                 <span style="color: rgba(255,255,255,0.7);">Last funded:</span>
@@ -353,9 +334,10 @@ function getPaymentsContent(role) {
     `;
 }
 
-/**
- * Get advertiser budget/ROI content
- */
+// ============================================
+// ADVERTISER BUDGET/ROI CONTENT
+// ============================================
+
 function getBudgetContent(role) {
     if (role !== 'advertiser') {
         return getPlaceholderContent('budget');
@@ -393,7 +375,7 @@ function getBudgetContent(role) {
             </div>
         </div>
         
-        <!-- Continue with existing ROI content... -->
+        <!-- Why It Works -->
         <div class="dashboard-section">
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
                 💡 Why Vault Phoenix Works
@@ -428,9 +410,10 @@ function getBudgetContent(role) {
     `;
 }
 
-/**
- * Get Campaign Manager's view of advertisers
- */
+// ============================================
+// CAMPAIGN MANAGER: MERCHANT MANAGEMENT
+// ============================================
+
 function getMerchantsContent(role) {
     if (role !== 'campaign-manager') {
         return getPlaceholderContent('advertisers');
@@ -526,78 +509,11 @@ function getMerchantsContent(role) {
     `;
 }
 
-/**
- * System Admin Overview
- */
-function getSystemAdminOverview() {
-    return `
-        <!-- Global Stats -->
-        <div class="hero-stats">
-            <div class="stat-card">
-                <div class="stat-icon">💰</div>
-                <div class="stat-label">Global Revenue</div>
-                <div class="stat-value">$47,392</div>
-                <div class="stat-change positive">+19.8% ↑</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon">👥</div>
-                <div class="stat-label">Total Users</div>
-                <div class="stat-value">1,847</div>
-                <div class="stat-change positive">+234 this week</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon">💎</div>
-                <div class="stat-label">Circulating Supply</div>
-                <div class="stat-value">12.45M</div>
-                <div class="stat-change">$Ember (1.245%)</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon">⚙️</div>
-                <div class="stat-label">System Health</div>
-                <div class="stat-value">99.8%</div>
-                <div class="stat-change positive">All systems operational</div>
-            </div>
-        </div>
-        
-        <div class="dashboard-section">
-            <h2 class="section-title">🌐 System Administrator Dashboard</h2>
-            <div class="card">
-                <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 30px;">
-                    Welcome to the System Administrator control panel. Access token economics, 
-                    Smithii.io integration, user management, and global analytics from the navigation menu.
-                </p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                    <button class="btn btn-primary" onclick="loadSection('token-economics')">
-                        📊 Token Economics
-                    </button>
-                    <button class="btn btn-secondary" onclick="loadSection('smithii')">
-                        🔧 Smithii.io Integration
-                    </button>
-                    <button class="btn btn-outline" onclick="loadSection('users')">
-                        👥 User Management
-                    </button>
-                    <button class="btn btn-outline" onclick="loadSection('analytics')">
-                        🌐 Global Analytics
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// ============================================
-// EXPORT FUNCTIONS
-// ============================================
-
+// Export functions
 if (typeof window !== 'undefined') {
     window.AnalyticsData = AnalyticsData;
-    window.getMerchantOverview = getMerchantOverview;
+    window.getAdvertiserOverview = getAdvertiserOverview;
     window.getPaymentsContent = getPaymentsContent;
     window.getBudgetContent = getBudgetContent;
     window.getMerchantsContent = getMerchantsContent;
-    window.getSystemAdminOverview = getSystemAdminOverview;
 }
