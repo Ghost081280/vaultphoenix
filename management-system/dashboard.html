@@ -82,21 +82,29 @@
         </div>
     </div>
     
-    <!-- JavaScript Files -->
-    <script src="js/main.js"></script>
-    <script src="js/app-setup.js"></script>
-    <script src="js/marketplace.js"></script>
-    <script src="js/wallet.js"></script>
+    <!-- JavaScript Files - LOAD ORDER IS IMPORTANT -->
     <script src="js/token-economy.js"></script>
-    <script src="js/airdrop-system.js"></script>
+    <script src="js/wallet.js"></script>
     <script src="js/analytics.js"></script>
-    <script src="js/ember-hunt-demo.js"></script>
     <script src="js/advertiser-dashboard.js"></script>
+    <script src="js/marketplace.js"></script>
+    <script src="js/airdrop-system.js"></script>
+    <script src="js/ember-hunt-demo.js"></script>
+    <script src="js/app-setup.js"></script>
+    <script src="js/main.js"></script>
     
     <!-- Google Maps API (Replace YOUR_API_KEY with actual key) -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" async defer></script>
+    <!-- To enable maps: Get a key from https://console.cloud.google.com/google/maps-apis -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMaps" async defer></script>
     
     <script>
+        // Initialize maps callback (called when Google Maps API loads)
+        function initMaps() {
+            console.log('Google Maps API loaded');
+            // Maps will be initialized by individual page scripts
+        }
+        
+        // User menu function
         function showUserMenu() {
             const role = sessionStorage.getItem('selectedRole');
             const roleName = role === 'campaign-manager' ? 'Campaign Manager' : 'Advertiser';
