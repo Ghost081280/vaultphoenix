@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Campaign Marketplace - Advertisement Token Model
+   Campaign Marketplace - Simplified Location Pricing Model
    ============================================ */
 
 // ============================================
@@ -17,7 +17,6 @@ const MarketplaceData = {
             status: 'live',
             activePlayers: 847,
             coverage: 'Phoenix Metro Area',
-            minMonthlyFee: 200,
             demographics: 'Ages 18-45, Gaming enthusiasts',
             totalLocations: 3,
             advertiserLocations: 1,
@@ -25,6 +24,17 @@ const MarketplaceData = {
             avgRedemptionRate: 7.8,
             engagement: 87.3,
             isParticipating: true,
+            
+            // Simplified pricing per location (no tiers)
+            pricePerLocation: 500, // Campaign manager sets this
+            
+            // Volume discounts
+            volumePricing: [
+                { min: 1, max: 1, price: 500 },
+                { min: 2, max: 5, price: 450 },
+                { min: 6, max: 10, price: 400 },
+                { min: 11, max: 999, price: 'Contact for custom pricing' }
+            ],
             
             // Token requirements
             minTokensPerStop: 5000,
@@ -48,7 +58,6 @@ const MarketplaceData = {
             status: 'live',
             activePlayers: 423,
             coverage: 'Scottsdale & Tempe',
-            minMonthlyFee: 200,
             demographics: 'Ages 21-35, Active lifestyle',
             totalLocations: 28,
             advertiserLocations: 0,
@@ -56,6 +65,14 @@ const MarketplaceData = {
             avgRedemptionRate: 6.5,
             engagement: 82.1,
             isParticipating: false,
+            
+            pricePerLocation: 450,
+            volumePricing: [
+                { min: 1, max: 1, price: 450 },
+                { min: 2, max: 5, price: 400 },
+                { min: 6, max: 10, price: 350 },
+                { min: 11, max: 999, price: 'Contact for custom pricing' }
+            ],
             
             minTokensPerStop: 5000,
             recommendedTokens: 10000,
@@ -77,7 +94,6 @@ const MarketplaceData = {
             status: 'live',
             activePlayers: 634,
             coverage: 'Downtown Phoenix',
-            minMonthlyFee: 500,
             demographics: 'Ages 25-50, Urban professionals',
             totalLocations: 35,
             advertiserLocations: 0,
@@ -85,6 +101,14 @@ const MarketplaceData = {
             avgRedemptionRate: 9.2,
             engagement: 91.4,
             isParticipating: false,
+            
+            pricePerLocation: 600,
+            volumePricing: [
+                { min: 1, max: 1, price: 600 },
+                { min: 2, max: 5, price: 550 },
+                { min: 6, max: 10, price: 500 },
+                { min: 11, max: 999, price: 'Contact for custom pricing' }
+            ],
             
             minTokensPerStop: 10000,
             recommendedTokens: 20000,
@@ -100,6 +124,16 @@ const MarketplaceData = {
         }
     ]
 };
+
+/**
+ * Get price per location based on quantity
+ */
+function getPricePerLocation(campaign, quantity) {
+    const pricing = campaign.volumePricing.find(tier => 
+        quantity >= tier.min && quantity <= tier.max
+    );
+    return pricing ? pricing.price : campaign.pricePerLocation;
+}
 
 /**
  * Get Marketplace Content for Advertisers
@@ -170,77 +204,12 @@ function getMarketplaceContent(role) {
                                     <button class="btn btn-primary" onclick="loadCampaignControl('${campaign.id}')" style="flex: 1;">
                                         Manage Campaign
                                     </button>
-                                    <button class="btn btn-secondary" onclick="openScannerApp()">
-                                        📱 Scanner
-                                    </button>
                                 </div>
                             </div>
                         `).join('')}
                     </div>
                 </div>
             ` : ''}
-            
-            <!-- How The Advertisement Token System Works -->
-            <div class="card" style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.3); margin-bottom: 30px;">
-                <h3 style="color: #22c55e; margin-bottom: 20px; font-size: 1.5rem;">
-                    💡 How The $Ember Advertisement System Works
-                </h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
-                    <div style="text-align: center; padding: 15px;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">1️⃣</div>
-                        <h4 style="margin-bottom: 8px;">Buy $Ember</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
-                            Purchase $Ember tokens to fund your token stops
-                        </p>
-                    </div>
-                    <div style="text-align: center; padding: 15px;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">2️⃣</div>
-                        <h4 style="margin-bottom: 8px;">Create Token Stop</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
-                            Add your location + advertisement to campaign
-                        </p>
-                    </div>
-                    <div style="text-align: center; padding: 15px;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">3️⃣</div>
-                        <h4 style="margin-bottom: 8px;">Players Collect</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
-                            Players collect tokens & see your advertisement
-                        </p>
-                    </div>
-                    <div style="text-align: center; padding: 15px;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">4️⃣</div>
-                        <h4 style="margin-bottom: 8px;">They Cash Out or Redeem</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
-                            Players cash out to Coinbase OR visit you to redeem
-                        </p>
-                    </div>
-                    <div style="text-align: center; padding: 15px;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">5️⃣</div>
-                        <h4 style="margin-bottom: 8px;">Scan & Recover</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
-                            You scan player QR → get $Ember back → give offer
-                        </p>
-                    </div>
-                    <div style="text-align: center; padding: 15px;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">6️⃣</div>
-                        <h4 style="margin-bottom: 8px;">Reuse Tokens</h4>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
-                            Recovered tokens can fund new token stops!
-                        </p>
-                    </div>
-                </div>
-                
-                <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                    <strong style="color: var(--color-primary-gold);">💰 Your Investment:</strong>
-                    <ul style="margin: 10px 0 0 0; padding-left: 20px; line-height: 1.8;">
-                        <li>Monthly location fee (placement in campaign)</li>
-                        <li>One-time $Ember token purchase (reusable when redeemed)</li>
-                        <li>No per-transaction fees</li>
-                        <li>Get tokens back when players redeem</li>
-                    </ul>
-                </div>
-            </div>
             
             <!-- Search & Filter -->
             <div class="card" style="margin-bottom: 30px;">
@@ -264,9 +233,9 @@ function getMarketplaceContent(role) {
                         <label class="form-label">Budget Range</label>
                         <select class="form-input" id="budgetFilter">
                             <option value="">Any Budget</option>
-                            <option value="low">$200 - $500/mo</option>
-                            <option value="medium">$500 - $1,200/mo</option>
-                            <option value="high">$1,200+/mo</option>
+                            <option value="low">$350 - $500/mo</option>
+                            <option value="medium">$500 - $700/mo</option>
+                            <option value="high">$700+/mo</option>
                         </select>
                     </div>
                 </div>
@@ -370,24 +339,27 @@ function getMarketplaceContent(role) {
                                     </div>
                                 </div>
                                 
-                                <!-- Pricing -->
+                                <!-- Simplified Pricing -->
                                 <div style="padding: 15px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px; margin-bottom: 15px;">
-                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                                        <div>
-                                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Monthly Location Fee</div>
-                                            <div style="font-size: 1.5rem; font-weight: 900; color: var(--color-primary-gold);">
-                                                $${campaign.minMonthlyFee}/mo
+                                    <h4 style="color: #22c55e; margin-bottom: 12px; font-size: 1rem;">💰 Simple Pricing - All Features Included:</h4>
+                                    
+                                    <div style="display: grid; gap: 8px; margin-bottom: 15px;">
+                                        ${campaign.volumePricing.map(tier => `
+                                            <div style="display: flex; justify-content: space-between; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                                                <span style="font-size: 0.9rem;">
+                                                    ${tier.min === tier.max ? `${tier.min} location` : 
+                                                      tier.max === 999 ? `${tier.min}+ locations` : 
+                                                      `${tier.min}-${tier.max} locations`}
+                                                </span>
+                                                <span style="font-weight: 700; color: var(--color-primary-gold);">
+                                                    ${typeof tier.price === 'number' ? `$${tier.price}/mo each` : tier.price}
+                                                </span>
                                             </div>
-                                        </div>
-                                        <div style="text-align: right;">
-                                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">+ Token Purchase</div>
-                                            <div style="font-size: 1.3rem; font-weight: 900; color: #22c55e;">
-                                                One-time
-                                            </div>
-                                        </div>
+                                        `).join('')}
                                     </div>
+                                    
                                     <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                        📱 Includes Scanner App • Advertisement Display • Token Recovery via Redemptions
+                                        ✓ All features included • Scanner app access • Advertisement display • Full analytics • Token recovery via redemptions
                                     </div>
                                 </div>
                                 
@@ -397,105 +369,6 @@ function getMarketplaceContent(role) {
                             </div>
                         `;
                     }).join('')}
-                </div>
-            </div>
-            
-            <!-- Pricing Tiers -->
-            <div class="dashboard-section">
-                <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                    💳 Location Placement Tiers
-                </h3>
-                
-                <div class="apps-grid">
-                    ${[
-                        { tier: 'Bronze', fee: 200, tokens: 5000, features: ['Basic visibility', 'Standard placement', 'Monthly reporting', 'Scanner app', 'Advertisement display'] },
-                        { tier: 'Silver', fee: 500, tokens: 10000, features: ['Enhanced visibility', 'Priority placement', 'Weekly reporting', 'Custom branding', 'Scanner app', 'Advertisement display', 'Analytics dashboard'] },
-                        { tier: 'Gold', fee: 1200, tokens: 25000, features: ['Featured placement', 'Exclusive territory', 'Daily reporting', 'Premium support', 'Scanner app', 'Advertisement display', 'Advanced analytics', 'Custom ad design'] }
-                    ].map(pricing => `
-                        <div class="card">
-                            <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">
-                                ${pricing.tier} Tier
-                            </h3>
-                            <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-orange); margin-bottom: 10px;">
-                                $${pricing.fee}<span style="font-size: 1rem; color: rgba(255,255,255,0.6);">/month</span>
-                            </div>
-                            <div style="background: rgba(240,165,0,0.15); border: 1px solid rgba(240,165,0,0.4); border-radius: 8px; padding: 12px; margin-bottom: 15px;">
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 5px;">
-                                    Min Token Purchase
-                                </div>
-                                <div style="font-size: 1.3rem; font-weight: 900; color: var(--color-primary-gold);">
-                                    ${pricing.tokens.toLocaleString()} $Ember
-                                </div>
-                                <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 5px;">
-                                    ≈ $${(pricing.tokens * 0.0035).toFixed(2)} one-time
-                                </div>
-                            </div>
-                            <ul style="list-style: none; padding: 0; margin: 0;">
-                                ${pricing.features.map(feature => `
-                                    <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                        ✓ ${feature}
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-            
-            <!-- How It Works -->
-            <div class="card">
-                <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
-                    📚 How Campaign Advertising Works
-                </h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                    <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 10px;">1️⃣</div>
-                        <h4 style="margin-bottom: 10px;">Choose Campaign & Tier</h4>
-                        <p style="color: rgba(255,255,255,0.7); margin: 0;">
-                            Browse campaigns that match your demographics. Select your pricing tier based on desired visibility.
-                        </p>
-                    </div>
-                    
-                    <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 10px;">2️⃣</div>
-                        <h4 style="margin-bottom: 10px;">Purchase $Ember Tokens</h4>
-                        <p style="color: rgba(255,255,255,0.7); margin: 0;">
-                            Buy $Ember tokens to fund your token stop. Minimum amounts vary by tier and campaign.
-                        </p>
-                    </div>
-                    
-                    <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 10px;">3️⃣</div>
-                        <h4 style="margin-bottom: 10px;">Create Advertisement</h4>
-                        <p style="color: rgba(255,255,255,0.7); margin: 0;">
-                            Design your ad with title, description, image, and offer details. Players see this after collecting tokens.
-                        </p>
-                    </div>
-                    
-                    <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 10px;">4️⃣</div>
-                        <h4 style="margin-bottom: 10px;">Setup Scanner App</h4>
-                        <p style="color: rgba(255,255,255,0.7); margin: 0;">
-                            Download the Scanner App to your device to redeem tokens when players visit your location.
-                        </p>
-                    </div>
-                    
-                    <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 10px;">5️⃣</div>
-                        <h4 style="margin-bottom: 10px;">Players Collect & See Ad</h4>
-                        <p style="color: rgba(255,255,255,0.7); margin: 0;">
-                            Players visit your GPS location in the AR game, collect tokens, and immediately see your advertisement.
-                        </p>
-                    </div>
-                    
-                    <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div style="font-size: 2rem; margin-bottom: 10px;">6️⃣</div>
-                        <h4 style="margin-bottom: 10px;">Redeem & Recover</h4>
-                        <p style="color: rgba(255,255,255,0.7); margin: 0;">
-                            Players visit to redeem. Scan their QR code → receive $Ember back → give them your offer. Reuse tokens!
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -514,12 +387,13 @@ function joinCampaign(campaignId) {
     const recommendedTokenCost = (campaign.recommendedTokens * 0.0035).toFixed(2);
     const estimatedCollections = campaign.avgCollectionsPerMonth * campaign.tokensPerCollection;
     const estimatedRedemptions = Math.floor(estimatedCollections * (campaign.avgRedemptionRate / 100));
+    const price1Location = getPricePerLocation(campaign, 1);
     
     const confirmMsg = `Join "${campaign.name}"?\n\n` +
         `📍 Coverage: ${campaign.coverage}\n` +
         `👥 Active Players: ${campaign.activePlayers.toLocaleString()}\n\n` +
-        `💰 COSTS:\n` +
-        `• Monthly Location Fee: $${campaign.minMonthlyFee}\n` +
+        `💰 PRICING (All Features Included):\n` +
+        `• First Location: $${price1Location}/month\n` +
         `• Token Purchase (one-time): $${minTokenCost} - $${recommendedTokenCost}\n` +
         `  (${campaign.minTokensPerStop.toLocaleString()} - ${campaign.recommendedTokens.toLocaleString()} $Ember)\n\n` +
         `📊 ESTIMATED MONTHLY:\n` +
@@ -529,7 +403,7 @@ function joinCampaign(campaignId) {
         `After joining, you'll:\n` +
         `1. Purchase $Ember tokens\n` +
         `2. Create token stop with advertisement\n` +
-        `3. Download Scanner App\n` +
+        `3. Get Scanner App link\n` +
         `4. Start receiving redemptions!\n\n` +
         `Continue?`;
     
@@ -544,7 +418,7 @@ function joinCampaign(campaignId) {
             `Next Steps:\n` +
             `1. Go to Wallet → Purchase $Ember tokens\n` +
             `2. Go to Campaign Control → Add token stop with advertisement\n` +
-            `3. Download Scanner App\n` +
+            `3. Get Scanner App link\n` +
             `4. Start accepting redemptions!\n\n` +
             `Redirecting to wallet to purchase tokens...`);
         
@@ -559,4 +433,5 @@ if (typeof window !== 'undefined') {
     window.MarketplaceData = MarketplaceData;
     window.getMarketplaceContent = getMarketplaceContent;
     window.joinCampaign = joinCampaign;
+    window.getPricePerLocation = getPricePerLocation;
 }
