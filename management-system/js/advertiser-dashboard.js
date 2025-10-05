@@ -42,14 +42,13 @@ const AdvertiserData = {
                 address: '115 N 6th St, Phoenix, AZ 85004',
                 lat: 33.4484,
                 lng: -112.0740,
-                tier: 'Silver',
                 status: 'active',
                 
                 // Token stop details
-                tokensFunded: 5000,         // Initial tokens allocated
-                tokensRemaining: 3250,      // Still available for collection
-                tokensCollected: 1750,      // Collected by players
-                tokensPerCollection: 50,    // Amount per player visit
+                tokensAllocated: 5000,
+                tokensRemaining: 3250,
+                tokensCollected: 1750,
+                tokensPerCollection: 50,
                 
                 // Advertisement content
                 advertisement: {
@@ -57,9 +56,9 @@ const AdvertiserData = {
                     description: 'Visit Heritage Square and get 10% off any museum tour or gift shop purchase. Redeem your $Ember tokens at our front desk!',
                     imageUrl: 'images/heritage-square-ad.jpg',
                     offer: '10% Off Museum Tours & Gift Shop',
-                    offerValue: 50,         // $Ember cost to redeem
+                    offerEmberValue: 50,
                     ctaText: 'Visit Us & Redeem',
-                    websiteUrl: 'https://heritagesquarephx.org'
+                    ctaUrl: 'https://heritagesquarephx.org'
                 },
                 
                 // Redemption stats
@@ -68,7 +67,7 @@ const AdvertiserData = {
                     thisMonth: 65,
                     averageTokens: 50,
                     totalTokensRedeemed: 3250,
-                    conversionRate: 0.078   // 7.8% of collectors redeem
+                    conversionRate: 0.078
                 },
                 
                 // Performance metrics
@@ -82,12 +81,11 @@ const AdvertiserData = {
         ]
     },
     
-    // Scanner app info
-    scannerApp: {
-        downloaded: true,
-        version: '1.2.0',
-        lastSync: new Date(),
-        deviceType: 'tablet',
+    // Scanner web app info
+    scannerWebApp: {
+        url: null,
+        credentials: null,
+        lastAccess: null,
         totalScans: 65,
         scansToday: 3
     },
@@ -189,7 +187,7 @@ function getAdvertiserOverview() {
                             <button class="btn btn-primary" onclick="loadSection('wallet')">
                                 💳 Buy More $Ember
                             </button>
-                            <button class="btn btn-secondary" onclick="loadCampaignControl('camp-001')">
+                            <button class="btn btn-secondary" onclick="loadSection('marketplace')">
                                 📍 Add Token Stop
                             </button>
                         </div>
@@ -207,75 +205,56 @@ function getAdvertiserOverview() {
             </div>
         </div>
         
-        <!-- Scanner App Status -->
+        <!-- Scanner Web App Access -->
         <div class="dashboard-section">
             <div class="card" style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.4);">
                 <div style="display: flex; justify-content: space-between; align-items: start; gap: 20px; flex-wrap: wrap;">
                     <div style="flex: 1; min-width: 300px;">
                         <h3 style="color: #22c55e; margin-bottom: 15px; font-size: 1.8rem;">
-                            📱 $Ember Scanner App
+                            📱 QR Scanner Web App
                         </h3>
                         
-                        ${AdvertiserData.scannerApp.downloaded ? `
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                                <span class="status-indicator status-live"></span>
-                                <span style="font-size: 1.3rem; font-weight: 700; color: #22c55e;">Scanner Active</span>
-                            </div>
-                            
-                            <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                                    <div>
-                                        <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 5px;">Version</div>
-                                        <div style="font-size: 1.2rem; font-weight: 700;">${AdvertiserData.scannerApp.version}</div>
-                                    </div>
-                                    <div>
-                                        <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 5px;">Device</div>
-                                        <div style="font-size: 1.2rem; font-weight: 700; text-transform: capitalize;">${AdvertiserData.scannerApp.deviceType}</div>
-                                    </div>
-                                    <div>
-                                        <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 5px;">Scans Today</div>
-                                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--color-primary-gold);">${AdvertiserData.scannerApp.scansToday}</div>
-                                    </div>
-                                    <div>
-                                        <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 5px;">Total Scans</div>
-                                        <div style="font-size: 1.2rem; font-weight: 700; color: #22c55e;">${AdvertiserData.scannerApp.totalScans}</div>
-                                    </div>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                            <span class="status-indicator status-live"></span>
+                            <span style="font-size: 1.3rem; font-weight: 700; color: #22c55e;">Scanner Active</span>
+                        </div>
+                        
+                        <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                                <div>
+                                    <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 5px;">Scans Today</div>
+                                    <div style="font-size: 1.2rem; font-weight: 700; color: var(--color-primary-gold);">${AdvertiserData.scannerWebApp.scansToday}</div>
+                                </div>
+                                <div>
+                                    <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 5px;">Total Scans</div>
+                                    <div style="font-size: 1.2rem; font-weight: 700; color: #22c55e;">${AdvertiserData.scannerWebApp.totalScans}</div>
                                 </div>
                             </div>
-                            
-                            <div style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 15px; margin-bottom: 20px;">
-                                <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">How to Redeem:</h4>
-                                <ol style="margin: 0; padding-left: 20px; font-size: 0.9rem; line-height: 1.6;">
-                                    <li>Player visits your location to redeem $Ember</li>
-                                    <li>Open Scanner App on your device</li>
-                                    <li>Scan the QR code from player's app</li>
-                                    <li>Enter redemption amount (e.g., 50 $Ember)</li>
-                                    <li>Tokens transfer to you instantly!</li>
-                                    <li>Give the player their offer/discount</li>
-                                </ol>
-                            </div>
-                            
-                            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                                <button class="btn btn-primary" onclick="openScannerApp()">
-                                    📱 Open Scanner App
-                                </button>
-                                <button class="btn btn-outline" onclick="viewScanHistory()">
-                                    📊 View Scan History
-                                </button>
-                                <button class="btn btn-secondary" onclick="downloadScannerGuide()">
-                                    📚 Scanner Guide
-                                </button>
-                            </div>
-                        ` : `
-                            <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
-                                Download the Scanner App to redeem $Ember from players. When players visit to redeem, 
-                                scan their QR code to receive $Ember back and give them your offer.
-                            </p>
-                            
-                            <button class="btn btn-primary btn-large" onclick="downloadScanner()">
-                                📱 Download Scanner App
+                        </div>
+                        
+                        <div style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 15px; margin-bottom: 20px;">
+                            <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">How to Redeem:</h4>
+                            <ol style="margin: 0; padding-left: 20px; font-size: 0.9rem; line-height: 1.6;">
+                                <li>Player visits your location to redeem $Ember</li>
+                                <li>Open Scanner Web App on any device</li>
+                                <li>Scan the QR code from player's app</li>
+                                <li>Enter redemption amount (e.g., 50 $Ember)</li>
+                                <li>Tokens transfer to you instantly!</li>
+                                <li>Give the player their offer/discount</li>
+                            </ol>
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="getScannerWebAppLink()">
+                                🔗 Get Scanner Link
                             </button>
-                        `}
+                            <button class="btn btn-outline" onclick="viewScanHistory()">
+                                📊 View Scan History
+                            </button>
+                            <button class="btn btn-secondary" onclick="downloadScannerGuide()">
+                                📚 Scanner Guide
+                            </button>
+                        </div>
                     </div>
                     
                     <div style="text-align: center;">
@@ -283,7 +262,7 @@ function getAdvertiserOverview() {
                             <div style="font-size: 4rem;">📱</div>
                         </div>
                         <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">
-                            Scanner App QR Code
+                            Scanner Web App QR Code
                         </div>
                     </div>
                 </div>
@@ -296,7 +275,7 @@ function getAdvertiserOverview() {
             
             <div class="apps-grid">
                 ${AdvertiserData.activeCampaigns.map(campaign => `
-                    <div class="app-card" onclick="loadCampaignControl('${campaign.id}')">
+                    <div class="app-card">
                         <div class="app-header">
                             <div class="app-name">${campaign.name}</div>
                             <div class="app-status">
@@ -323,7 +302,7 @@ function getAdvertiserOverview() {
                             </div>
                         </div>
                         <div class="app-actions">
-                            <button class="btn btn-primary" onclick="event.stopPropagation(); loadCampaignControl('${campaign.id}')">Manage Campaign</button>
+                            <button class="btn btn-primary" onclick="loadCampaignControl('${campaign.id}')">Manage Campaign</button>
                         </div>
                     </div>
                 `).join('')}
@@ -335,8 +314,8 @@ function getAdvertiserOverview() {
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">⚡ Quick Actions</h3>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <button class="btn btn-primary" style="padding: 20px; font-size: 1.1rem;" onclick="openScannerApp()">
-                    📱 Open Scanner App
+                <button class="btn btn-primary" style="padding: 20px; font-size: 1.1rem;" onclick="getScannerWebAppLink()">
+                    📱 Get Scanner Link
                 </button>
                 <button class="btn btn-secondary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('wallet')">
                     💎 Buy $Ember Tokens
@@ -350,27 +329,43 @@ function getAdvertiserOverview() {
 }
 
 // ============================================
-// SCANNER APP FUNCTIONS
+// SCANNER WEB APP FUNCTIONS
 // ============================================
 
-function downloadScanner() {
-    alert(`📱 Download $Ember Scanner App\n\nAvailable for:\n• iOS (App Store)\n• Android (Google Play)\n• Web App (PWA)\n\nSearch for "Vault Phoenix Scanner" or scan the QR code in your dashboard.\n\nSetup takes less than 2 minutes!`);
+function getScannerWebAppLink() {
+    const userEmail = sessionStorage.getItem('userEmail') || 'demo@phoenix.com';
+    const scannerUrl = `https://scanner.vaultphoenix.com/?token=${btoa(userEmail)}`;
     
-    // Mark as downloaded for demo
-    AdvertiserData.scannerApp.downloaded = true;
+    const message = `📱 Your QR Scanner Web App Link\n\n` +
+        `Access URL:\n${scannerUrl}\n\n` +
+        `Share this link with your staff:\n` +
+        `• Email the link to employees\n` +
+        `• They can bookmark it on any device\n` +
+        `• Works on phones, tablets, and computers\n` +
+        `• No app download required!\n\n` +
+        `How to use:\n` +
+        `1. Open link on any device with camera\n` +
+        `2. Point camera at player's QR code\n` +
+        `3. Enter redemption amount\n` +
+        `4. Tokens transfer instantly!\n\n` +
+        `Would you like to:\n` +
+        `• Copy link to clipboard?\n` +
+        `• Email link to staff?`;
     
-    if (typeof window.loadSection === 'function') {
-        window.loadSection('overview');
-    }
-}
-
-function openScannerApp() {
-    if (AdvertiserData.scannerApp.downloaded) {
-        alert(`📱 Opening Scanner App...\n\nThe Scanner App would open on your device.\n\nHow to use:\n1. Point camera at player's QR code\n2. App automatically reads code\n3. Enter redemption amount\n4. Confirm transfer\n5. $Ember transfers to you instantly!`);
-    } else {
-        if (confirm('Scanner App not found. Download now?')) {
-            downloadScanner();
-        }
+    if (confirm(message)) {
+        // Copy to clipboard
+        navigator.clipboard.writeText(scannerUrl).then(() => {
+            alert('✓ Scanner link copied to clipboard!\n\nYou can now paste and share it with your staff.');
+        }).catch(() => {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = scannerUrl;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('✓ Scanner link copied to clipboard!\n\nYou can now paste and share it with your staff.');
+        });
     }
 }
 
@@ -379,15 +374,14 @@ function viewScanHistory() {
 }
 
 function downloadScannerGuide() {
-    alert(`📚 Scanner App Guide\n\nQuick Start:\n1. Download app from store\n2. Login with advertiser credentials\n3. Link to your locations\n4. Ready to scan!\n\nScanning Process:\n1. Player shows QR code\n2. Scan with app camera\n3. Enter redemption amount\n4. Confirm transfer\n5. Give offer to player\n\nFull documentation available at:\nvaultphoenix.com/docs/scanner`);
+    alert(`📚 Scanner Web App Guide\n\nQuick Start:\n1. Open the scanner web link\n2. Login with provided credentials\n3. Point camera at player QR code\n4. Ready to scan!\n\nScanning Process:\n1. Player shows QR code\n2. Scan with web app camera\n3. Enter redemption amount\n4. Confirm transfer\n5. Give offer to player\n\nFull documentation available at:\nvaultphoenix.com/docs/scanner`);
 }
 
 // Export functions
 if (typeof window !== 'undefined') {
     window.AdvertiserData = AdvertiserData;
     window.getAdvertiserOverview = getAdvertiserOverview;
-    window.downloadScanner = downloadScanner;
-    window.openScannerApp = openScannerApp;
+    window.getScannerWebAppLink = getScannerWebAppLink;
     window.viewScanHistory = viewScanHistory;
     window.downloadScannerGuide = downloadScannerGuide;
 }
