@@ -42,7 +42,7 @@ function getCampaignManagerWalletContent(isConnected) {
         <div class="dashboard-section">
             <h2 class="section-title">👛 Coinbase Wallet & Funding</h2>
             <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 30px;">
-                Connect your Coinbase wallet to purchase $Ember tokens and fund your campaigns.
+                Connect your Coinbase wallet to manage your starter bonus tokens and purchase additional $Ember if needed.
             </p>
             
             ${!isConnected ? getWalletConnectionSection() : getCampaignManagerConnectedWallet()}
@@ -56,10 +56,10 @@ function getCampaignManagerWalletContent(isConnected) {
 function getAdvertiserWalletContent(isConnected) {
     return `
         <div class="dashboard-section">
-            <h2 class="section-title">💎 Purchase $Ember Tokens</h2>
+            <h2 class="section-title">💎 Purchase $Ember Tokens from Coinbase</h2>
             <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 30px;">
-                Buy $Ember tokens to fund your token stops with advertisements. Tokens you receive back from 
-                redemptions can be reused for new token stops!
+                Buy $Ember tokens directly from Coinbase at market price to fund your token stops with advertisements. 
+                Tokens you receive back from redemptions can be reused for new token stops!
             </p>
             
             ${!isConnected ? getWalletConnectionSection() : getAdvertiserConnectedWallet()}
@@ -79,15 +79,15 @@ function getWalletConnectionSection() {
                     Connect Your Coinbase Wallet
                 </h3>
                 <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px;">
-                    Link your Coinbase wallet to purchase $Ember tokens at the current market price and 
-                    manage all your token inventory in one secure place.
+                    Link your Coinbase wallet to purchase $Ember tokens directly from Coinbase at current market price 
+                    and manage all your token inventory in one secure place.
                 </p>
                 
                 <div style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 20px; margin: 30px auto; max-width: 500px;">
                     <h4 style="color: var(--color-primary-gold); margin-bottom: 15px;">Why Coinbase Wallet?</h4>
                     <ul style="text-align: left; list-style: none; padding: 0; margin: 0;">
                         <li style="padding: 8px 0;">✓ Secure & trusted by millions</li>
-                        <li style="padding: 8px 0;">✓ Easy $Ember token purchases</li>
+                        <li style="padding: 8px 0;">✓ Buy $Ember at market price</li>
                         <li style="padding: 8px 0;">✓ Real-time balance updates</li>
                         <li style="padding: 8px 0;">✓ Transaction history tracking</li>
                         <li style="padding: 8px 0;">✓ Same wallet your players use</li>
@@ -162,16 +162,16 @@ function getCampaignManagerConnectedWallet() {
                     </button>
                 </div>
                 
-                <!-- Quick Purchase -->
+                <!-- Quick Purchase from Coinbase -->
                 <div class="card">
                     <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
-                        💎 Purchase $Ember
+                        💎 Purchase $Ember from Coinbase
                     </h3>
                     
                     <div style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 15px; margin-bottom: 20px;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Market Price</div>
+                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Coinbase Market Price</div>
                                 <div style="font-size: 1.5rem; font-weight: 900; color: var(--color-primary-gold);">
                                     $0.0035
                                 </div>
@@ -208,7 +208,7 @@ function getCampaignManagerConnectedWallet() {
                     </div>
                     
                     <button class="btn btn-primary btn-large" onclick="purchaseEmber()" style="width: 100%; font-size: 1.1rem;">
-                        💳 Purchase with Coinbase
+                        💳 Buy from Coinbase
                     </button>
                 </div>
             </div>
@@ -287,13 +287,13 @@ function getAdvertiserConnectedWallet() {
             <!-- Purchase Form -->
             <div class="card">
                 <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
-                    💳 Buy $Ember Tokens
+                    💳 Buy $Ember from Coinbase
                 </h3>
                 
                 <div style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 15px; margin-bottom: 20px;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Current Market Price</div>
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Coinbase Market Price</div>
                             <div style="font-size: 1.5rem; font-weight: 900; color: var(--color-primary-gold);">
                                 $0.0035 per $Ember
                             </div>
@@ -331,7 +331,7 @@ function getAdvertiserConnectedWallet() {
                 </div>
                 
                 <button class="btn btn-primary btn-large" onclick="purchaseEmberAdvertiser()" style="width: 100%; font-size: 1.1rem;">
-                    💳 Purchase $Ember Tokens
+                    💳 Buy from Coinbase
                 </button>
             </div>
             
@@ -383,9 +383,9 @@ function getAdvertiserConnectedWallet() {
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                 <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
                     <div style="font-size: 2.5rem; margin-bottom: 10px;">1️⃣</div>
-                    <h4 style="margin-bottom: 10px;">Purchase Tokens</h4>
+                    <h4 style="margin-bottom: 10px;">Buy from Coinbase</h4>
                     <p style="color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
-                        Buy $Ember tokens from this page using your Coinbase wallet. Tokens are added to your balance instantly.
+                        Purchase $Ember tokens directly from Coinbase at market price. Tokens are added to your balance instantly.
                     </p>
                 </div>
                 
@@ -436,8 +436,8 @@ function getTransactionHistory() {
                             <th>Date</th>
                             <th>Type</th>
                             <th>Amount</th>
+                            <th>Source</th>
                             <th>Status</th>
-                            <th>Tx Hash</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -445,22 +445,22 @@ function getTransactionHistory() {
                             <td>Oct 4, 2025 10:24 AM</td>
                             <td>Purchase</td>
                             <td>28,450 $Ember</td>
+                            <td>Coinbase</td>
                             <td><span class="badge badge-success">Confirmed</span></td>
-                            <td style="font-family: monospace; font-size: 0.85rem;">0x8f3a...d21c</td>
                         </tr>
                         <tr>
                             <td>Oct 3, 2025 3:15 PM</td>
                             <td>Token Stop Fund</td>
                             <td>-5,000 $Ember</td>
+                            <td>Campaign</td>
                             <td><span class="badge badge-success">Confirmed</span></td>
-                            <td style="font-family: monospace; font-size: 0.85rem;">0x2b7f...8a3e</td>
                         </tr>
                         <tr>
                             <td>Oct 2, 2025 11:42 AM</td>
                             <td>Purchase</td>
                             <td>15,000 $Ember</td>
+                            <td>Coinbase</td>
                             <td><span class="badge badge-success">Confirmed</span></td>
-                            <td style="font-family: monospace; font-size: 0.85rem;">0x9c2d...4f1b</td>
                         </tr>
                     </tbody>
                 </table>
@@ -501,8 +501,8 @@ function getEmberTokenInfo() {
             <div style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 20px;">
                 <p style="margin: 0 0 15px 0; color: rgba(255,255,255,0.8); line-height: 1.6;">
                     $Ember is the native token powering Vault Phoenix's location-based AR gaming ecosystem. 
-                    Advertisers fund token stops with $Ember that includes their advertisements. Players collect 
-                    tokens and can either cash out to Coinbase or redeem offers at advertiser locations.
+                    Available on Coinbase, advertisers purchase tokens at market price to fund token stops with their advertisements. 
+                    Players collect tokens and can either cash out to Coinbase or redeem offers at advertiser locations.
                 </p>
                 <a href="https://ghost081280.github.io/vaultphoenix/ember.html" target="_blank" class="btn btn-secondary">
                     📚 Learn More About $Ember
@@ -613,7 +613,7 @@ function setAdvertiserPurchaseAmount(amount) {
 }
 
 /**
- * Purchase $Ember tokens (Campaign Manager)
+ * Purchase $Ember tokens from Coinbase (Campaign Manager)
  */
 async function purchaseEmber() {
     const amount = parseFloat(document.getElementById('purchaseAmount')?.value) || 100;
@@ -627,15 +627,15 @@ async function purchaseEmber() {
         return;
     }
     
-    const confirmMsg = `Purchase $Ember Tokens?\n\n` +
+    const confirmMsg = `Purchase $Ember from Coinbase?\n\n` +
         `Amount: $${amount} USD\n` +
         `Tokens: ${tokens.toLocaleString()} $Ember\n` +
         `Network Fee: $${networkFee}\n` +
         `Total: $${total.toFixed(2)}\n\n` +
-        `This transaction will be processed through Coinbase.`;
+        `This transaction will be processed through Coinbase at current market price.`;
     
     if (confirm(confirmMsg)) {
-        alert('🔄 Processing Purchase...\n\nPlease confirm the transaction in your Coinbase Wallet.');
+        alert('🔄 Processing Purchase from Coinbase...\n\nPlease confirm the transaction in your Coinbase Wallet.');
         
         await new Promise(resolve => setTimeout(resolve, 2000));
         
@@ -647,7 +647,7 @@ async function purchaseEmber() {
         }
         
         alert(`✓ Purchase Successful!\n\n` +
-            `You received ${tokens.toLocaleString()} $Ember tokens.\n\n` +
+            `You received ${tokens.toLocaleString()} $Ember tokens from Coinbase.\n\n` +
             `Transaction hash: 0x${Math.random().toString(16).substr(2, 64)}\n\n` +
             `New balance: ${(window.AppState?.tokenBalance?.amount || tokens).toLocaleString()} $Ember`);
         
@@ -658,7 +658,7 @@ async function purchaseEmber() {
 }
 
 /**
- * Purchase $Ember tokens (Advertiser)
+ * Purchase $Ember tokens from Coinbase (Advertiser)
  */
 async function purchaseEmberAdvertiser() {
     const amount = parseFloat(document.getElementById('advertiserPurchaseAmount')?.value) || 100;
@@ -672,27 +672,26 @@ async function purchaseEmberAdvertiser() {
         return;
     }
     
-    const confirmMsg = `Purchase $Ember Tokens?\n\n` +
+    const confirmMsg = `Purchase $Ember from Coinbase?\n\n` +
         `Amount: $${amount} USD\n` +
         `Tokens: ${tokens.toLocaleString()} $Ember\n` +
         `Network Fee: $${networkFee}\n` +
         `Total: $${total.toFixed(2)}\n\n` +
         `These tokens can be used to fund your token stops with advertisements.\n\n` +
-        `Continue?`;
+        `Purchase from Coinbase at current market price?`;
     
     if (confirm(confirmMsg)) {
-        alert('🔄 Processing Purchase...\n\nPlease confirm the transaction in your Coinbase Wallet.');
+        alert('🔄 Processing Purchase from Coinbase...\n\nPlease confirm the transaction in your Coinbase Wallet.');
         
         await new Promise(resolve => setTimeout(resolve, 2000));
         
-        // Update advertiser balance
         if (window.AdvertiserData?.tokenBalance) {
             window.AdvertiserData.tokenBalance.owned += tokens;
             window.AdvertiserData.tokenBalance.available += tokens;
         }
         
         alert(`✓ Purchase Successful!\n\n` +
-            `You received ${tokens.toLocaleString()} $Ember tokens.\n\n` +
+            `You received ${tokens.toLocaleString()} $Ember tokens from Coinbase.\n\n` +
             `Transaction hash: 0x${Math.random().toString(16).substr(2, 64)}\n\n` +
             `New balance: ${(window.AdvertiserData?.tokenBalance?.owned || tokens).toLocaleString()} $Ember\n\n` +
             `Next: Go to Campaign Control to create a token stop with your advertisement!`);
