@@ -7,154 +7,6 @@
 @import url('app-setup.css');
 
 /* ============================================
-   ONBOARDING MODULE STYLES - FIXED SIZE
-   ============================================ */
-
-.onboarding-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    animation: fadeIn 0.5s ease-out;
-    overflow-y: auto;
-}
-
-.onboarding-module {
-    max-width: 800px;
-    width: 100%;
-    max-height: 85vh;
-    background: var(--card-bg);
-    border: 2px solid var(--card-border);
-    border-radius: 20px;
-    padding: 25px 30px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
-    animation: slideInUp 0.6s ease-out;
-    overflow-y: auto;
-    margin: auto;
-    box-sizing: border-box;
-}
-
-.onboarding-progress {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 18px;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.progress-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transition: all var(--transition-normal);
-    flex-shrink: 0;
-}
-
-.progress-dot.active {
-    background: var(--color-primary-gold);
-    box-shadow: 0 0 12px var(--color-primary-gold);
-}
-
-.onboarding-content {
-    text-align: center;
-    overflow-y: auto;
-    max-height: calc(85vh - 160px);
-    padding-right: 5px;
-}
-
-.onboarding-content h2 {
-    color: var(--color-primary-gold);
-    font-size: 1.6rem;
-    margin-bottom: 15px;
-    line-height: 1.2;
-}
-
-.onboarding-content h3 {
-    font-size: 1.2rem;
-    margin-bottom: 12px;
-    line-height: 1.3;
-}
-
-.onboarding-content h4 {
-    font-size: 1rem;
-    margin-bottom: 8px;
-    line-height: 1.3;
-}
-
-.onboarding-content p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 12px;
-}
-
-.onboarding-content ul {
-    font-size: 0.9rem;
-    line-height: 1.7;
-}
-
-.onboarding-content li {
-    margin-bottom: 4px;
-}
-
-.onboarding-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
-}
-
-.onboarding-actions .btn {
-    white-space: nowrap;
-    padding: 12px 24px;
-}
-
-/* Custom scrollbar for onboarding */
-.onboarding-module::-webkit-scrollbar,
-.onboarding-content::-webkit-scrollbar {
-    width: 8px;
-}
-
-.onboarding-module::-webkit-scrollbar-track,
-.onboarding-content::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-}
-
-.onboarding-module::-webkit-scrollbar-thumb,
-.onboarding-content::-webkit-scrollbar-thumb {
-    background: var(--gradient-fire);
-    border-radius: 4px;
-}
-
-.onboarding-module::-webkit-scrollbar-thumb:hover,
-.onboarding-content::-webkit-scrollbar-thumb:hover {
-    background: var(--gradient-ember);
-}
-
-.onboarding-content * {
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-.onboarding-content div[style*="display: grid"],
-.onboarding-content div[style*="display: flex"] {
-    max-width: 100%;
-}
-
-/* ============================================
    MAIN LAYOUT
    ============================================ */
 
@@ -162,6 +14,8 @@
     display: flex;
     min-height: 100vh;
     background: var(--gradient-background);
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 /* ============================================
@@ -183,6 +37,8 @@
     padding: 0 var(--spacing-lg);
     z-index: var(--z-sticky);
     transition: left var(--transition-normal);
+    max-width: 100vw;
+    box-sizing: border-box;
 }
 
 .header-left {
@@ -422,6 +278,7 @@
     transition: margin-left var(--transition-normal);
     max-width: 100%;
     overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 /* ============================================
@@ -430,6 +287,8 @@
 
 .dashboard-section {
     margin-bottom: var(--spacing-xl);
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .section-header {
@@ -437,6 +296,8 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .section-title {
@@ -451,6 +312,7 @@
 .section-actions {
     display: flex;
     gap: var(--spacing-sm);
+    flex-wrap: wrap;
 }
 
 /* ============================================
@@ -459,9 +321,10 @@
 
 .hero-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
+    max-width: 100%;
 }
 
 .stat-card {
@@ -474,6 +337,8 @@
     transition: all var(--transition-normal);
     position: relative;
     overflow: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .stat-card::before {
@@ -549,8 +414,9 @@
 
 .apps-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--spacing-md);
+    max-width: 100%;
 }
 
 .app-card {
@@ -562,6 +428,8 @@
     box-shadow: var(--card-shadow);
     transition: all var(--transition-normal);
     cursor: pointer;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .app-card:hover {
@@ -575,6 +443,8 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--spacing-sm);
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .app-name {
@@ -623,269 +493,42 @@
     display: flex;
     gap: var(--spacing-sm);
     margin-top: var(--spacing-sm);
+    flex-wrap: wrap;
 }
 
 .app-actions .btn {
     flex: 1;
     padding: 10px;
     font-size: 0.85rem;
+    min-width: 100px;
 }
 
 /* ============================================
-   LIVE APP MONITORING VIEW - FIXED
+   CARDS & GENERAL COMPONENTS
    ============================================ */
 
-.live-monitoring {
+.card {
     background: var(--card-bg);
     border: 2px solid var(--card-border);
     border-radius: var(--card-radius);
     padding: var(--spacing-lg);
     backdrop-filter: blur(20px);
     box-shadow: var(--card-shadow);
-}
-
-.monitoring-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--spacing-md);
-    padding-bottom: var(--spacing-sm);
-    border-bottom: 2px solid var(--card-border);
-}
-
-.monitoring-title {
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-black);
-    color: var(--color-primary-gold);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.monitoring-actions {
-    display: flex;
-    gap: var(--spacing-sm);
-}
-
-.monitoring-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-}
-
-.monitoring-panel {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--card-radius-small);
-    padding: var(--spacing-md);
-}
-
-.panel-title {
-    font-size: 1.1rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary-orange);
-    margin-bottom: var(--spacing-sm);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-}
-
-/* Live Map Container - FIXED */
-.live-map {
-    width: 100%;
-    height: 350px;
-    background: linear-gradient(135deg, rgba(15, 15, 15, 0.5), rgba(45, 24, 16, 0.5));
-    border-radius: var(--card-radius-small);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    max-width: 100%;
+    box-sizing: border-box;
     overflow: hidden;
-    margin-bottom: var(--spacing-sm);
-}
-
-.map-placeholder {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.9rem;
-}
-
-.map-controls {
-    display: flex;
-    gap: var(--spacing-xs);
-    flex-wrap: wrap;
-}
-
-.map-controls .btn {
-    padding: 6px 12px;
-    font-size: 0.8rem;
-}
-
-.map-stats {
-    display: flex;
-    justify-content: space-around;
-    margin-top: var(--spacing-sm);
-    padding-top: var(--spacing-sm);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.map-stat {
-    text-align: center;
-}
-
-.map-stat-value {
-    font-size: 1.3rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary-gold);
-}
-
-.map-stat-label {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-/* Real-Time Activity Feed - FIXED */
-.activity-feed {
-    max-height: 350px;
-    overflow-y: auto;
-}
-
-.activity-item {
-    display: flex;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-xs);
-    margin-bottom: var(--spacing-xs);
-    border-radius: var(--card-radius-small);
-    background: rgba(255, 255, 255, 0.03);
-    transition: all var(--transition-fast);
-}
-
-.activity-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.activity-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--gradient-fire);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
-}
-
-.activity-content {
-    flex: 1;
-}
-
-.activity-text {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.85rem;
-    margin-bottom: 2px;
-}
-
-.activity-time {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.75rem;
-}
-
-/* Airdrop Control Panel */
-.airdrop-controls {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--card-radius-small);
-    padding: var(--spacing-md);
-}
-
-.form-group {
-    margin-bottom: var(--spacing-sm);
-}
-
-.form-label {
-    display: block;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: var(--font-weight-medium);
-    margin-bottom: var(--spacing-xs);
-    font-size: 0.85rem;
-}
-
-.form-input {
-    width: 100%;
-    padding: 10px 12px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--card-radius-small);
-    color: white;
-    font-size: 0.9rem;
-    transition: all var(--transition-normal);
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: var(--color-primary-orange);
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.radio-group {
-    display: flex;
-    gap: var(--spacing-md);
-}
-
-.radio-option {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-}
-
-.radio-option input[type="radio"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
 }
 
 /* ============================================
-   CAMPAIGN PERFORMANCE - FIXED
-   ============================================ */
-
-.performance-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: var(--spacing-sm);
-    margin-top: var(--spacing-md);
-}
-
-.performance-card {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--card-radius-small);
-    padding: var(--spacing-sm);
-    text-align: center;
-}
-
-.performance-value {
-    font-size: 1.8rem;
-    font-weight: var(--font-weight-black);
-    color: var(--color-primary-gold);
-    margin-bottom: var(--spacing-xs);
-}
-
-.performance-label {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.8rem;
-}
-
-/* ============================================
-   DUAL REVENUE STREAMS - FIXED
+   REVENUE GRIDS
    ============================================ */
 
 .revenue-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
+    max-width: 100%;
 }
 
 .revenue-stream {
@@ -895,6 +538,8 @@
     padding: var(--spacing-lg);
     backdrop-filter: blur(20px);
     box-shadow: var(--card-shadow);
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .revenue-header {
@@ -967,6 +612,8 @@
     padding: var(--spacing-lg);
     text-align: center;
     backdrop-filter: blur(20px);
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .revenue-total-label {
@@ -1013,7 +660,7 @@
 }
 
 /* ============================================
-   MERCHANT PERFORMANCE TABLE - FIXED
+   TABLES
    ============================================ */
 
 .merchants-table-wrapper {
@@ -1023,11 +670,13 @@
     padding: var(--spacing-md);
     backdrop-filter: blur(20px);
     overflow-x: auto;
+    max-width: 100%;
 }
 
 .merchants-table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 600px;
 }
 
 .merchants-table thead {
@@ -1058,7 +707,7 @@
 }
 
 /* ============================================
-   CENTERED WALLET LAYOUT
+   WALLET CENTERED LAYOUT
    ============================================ */
 
 .wallet-centered {
@@ -1070,21 +719,7 @@
    RESPONSIVE DESIGN
    ============================================ */
 
-/* Onboarding responsive - Medium screens */
 @media (max-width: 1024px) {
-    .onboarding-module {
-        max-height: 88vh;
-        padding: 20px 25px;
-    }
-    
-    .onboarding-content {
-        max-height: calc(88vh - 145px);
-    }
-    
-    .onboarding-content h2 {
-        font-size: 1.5rem;
-    }
-    
     .dashboard-header {
         left: 0;
     }
@@ -1101,62 +736,12 @@
         margin-left: 0;
     }
     
-    .monitoring-grid {
-        grid-template-columns: 1fr;
-    }
-    
     .revenue-grid {
         grid-template-columns: 1fr;
     }
 }
 
-/* Onboarding responsive - Tablets */
 @media (max-width: 768px) {
-    .onboarding-overlay {
-        padding: 10px;
-    }
-    
-    .onboarding-module {
-        padding: 18px 20px;
-        max-height: 90vh;
-        border-radius: 16px;
-    }
-    
-    .onboarding-content {
-        max-height: calc(90vh - 135px);
-    }
-    
-    .onboarding-content h2 {
-        font-size: 1.4rem;
-        margin-bottom: 12px;
-    }
-    
-    .onboarding-content h3 {
-        font-size: 1.1rem;
-    }
-    
-    .onboarding-content h4 {
-        font-size: 0.95rem;
-    }
-    
-    .onboarding-content p {
-        font-size: 0.9rem;
-    }
-    
-    .onboarding-content ul {
-        font-size: 0.85rem;
-    }
-    
-    .onboarding-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .onboarding-actions .btn {
-        width: 100%;
-        padding: 10px 20px;
-    }
-    
     .dashboard-header {
         padding: 0 var(--spacing-md);
     }
@@ -1184,73 +769,9 @@
     .apps-grid {
         grid-template-columns: 1fr;
     }
-    
-    .performance-cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .merchants-table-wrapper {
-        overflow-x: scroll;
-    }
 }
 
-/* Onboarding responsive - Mobile */
 @media (max-width: 480px) {
-    .onboarding-overlay {
-        padding: 8px;
-    }
-    
-    .onboarding-module {
-        padding: 15px;
-        max-height: 92vh;
-        border-radius: 12px;
-    }
-    
-    .onboarding-content {
-        max-height: calc(92vh - 120px);
-    }
-    
-    .onboarding-content h2 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
-    
-    .onboarding-content h3 {
-        font-size: 1rem;
-        margin-bottom: 8px;
-    }
-    
-    .onboarding-content h4 {
-        font-size: 0.9rem;
-        margin-bottom: 6px;
-    }
-    
-    .onboarding-content p {
-        font-size: 0.85rem;
-        line-height: 1.5;
-        margin-bottom: 10px;
-    }
-    
-    .onboarding-content ul {
-        font-size: 0.8rem;
-        line-height: 1.6;
-    }
-    
-    .progress-dot {
-        width: 8px;
-        height: 8px;
-    }
-    
-    .onboarding-actions {
-        margin-top: 15px;
-        padding-top: 12px;
-    }
-    
-    .onboarding-actions .btn {
-        padding: 10px 18px;
-        font-size: 0.9rem;
-    }
-    
     .stat-value {
         font-size: 1.8rem;
     }
@@ -1261,60 +782,5 @@
     
     .revenue-total-amount {
         font-size: 2.5rem;
-    }
-    
-    .performance-cards {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Onboarding responsive - Very small phones */
-@media (max-width: 360px) {
-    .onboarding-module {
-        padding: 12px;
-        max-height: 94vh;
-    }
-    
-    .onboarding-content {
-        max-height: calc(94vh - 110px);
-    }
-    
-    .onboarding-content h2 {
-        font-size: 1.1rem;
-    }
-    
-    .onboarding-content h3 {
-        font-size: 0.95rem;
-    }
-    
-    .onboarding-content p {
-        font-size: 0.8rem;
-    }
-}
-
-/* Onboarding landscape mode fix */
-@media (max-height: 600px) and (orientation: landscape) {
-    .onboarding-module {
-        max-height: 95vh;
-        padding: 12px 20px;
-    }
-    
-    .onboarding-content {
-        max-height: calc(95vh - 100px);
-    }
-    
-    .onboarding-content h2 {
-        font-size: 1.3rem;
-        margin-bottom: 8px;
-    }
-    
-    .onboarding-content p {
-        font-size: 0.85rem;
-        margin-bottom: 8px;
-    }
-    
-    .onboarding-actions {
-        margin-top: 12px;
-        padding-top: 10px;
     }
 }
