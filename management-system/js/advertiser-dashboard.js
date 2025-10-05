@@ -385,3 +385,137 @@ if (typeof window !== 'undefined') {
     window.viewScanHistory = viewScanHistory;
     window.downloadScannerGuide = downloadScannerGuide;
 }
+
+/* ============================================
+   AIRDROP SYSTEM - CUSTOM MESSAGE AIRDROPS
+   ============================================ */
+
+const AirdropSystem = {
+    activeAirdrops: [
+        {
+            id: 'airdrop-001',
+            campaignId: 'camp-001',
+            campaignName: '$Ember Hunt',
+            amount: 500,
+            target: 'area',
+            location: 'Downtown Phoenix',
+            recipients: 12,
+            claimTimer: 1800,
+            timestamp: new Date(Date.now() - 47000),
+            status: 'active',
+            claimed: 8,
+            unclaimed: 4,
+            message: 'Welcome to Downtown! Collect your bonus tokens.'
+        }
+    ],
+    
+    pendingRequests: [],
+    
+    timerPresets: [
+        { label: '15 minutes', value: 900 },
+        { label: '30 minutes', value: 1800 },
+        { label: '1 hour', value: 3600 },
+        { label: '2 hours', value: 7200 },
+        { label: '4 hours', value: 14400 },
+        { label: '24 hours', value: 86400 }
+    ]
+};
+
+function getAirdropsContent(role) {
+    if (role !== 'campaign-manager') {
+        return getPlaceholderContent('airdrops');
+    }
+    
+    const campaigns = [
+        { id: 'camp-001', name: '$Ember Hunt', activePlayers: 847 },
+        { id: 'camp-002', name: 'Desert Quest AR', activePlayers: 423 }
+    ];
+    
+    return `
+        <div class="dashboard-section">
+            <h2 class="section-title">🎯 Custom Message Airdrop Center</h2>
+            
+            <div class="card" style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); margin-bottom: 30px;">
+                <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">💡 What are Custom Message Airdrops?</h3>
+                <p style="color: rgba(255,255,255,0.8); line-height: 1.6; margin: 0;">
+                    Send targeted $Ember tokens with custom messages directly to players. Perfect for special events, 
+                    promotions, or driving engagement to specific locations. Players receive push notifications with your 
+                    message and claim timer.
+                </p>
+            </div>
+            
+            <!-- Quick Airdrop Panel -->
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">⚡ Send Custom Message Airdrop</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Select Campaign *</label>
+                    <select class="form-input" id="airdropCampaign">
+                        ${campaigns.map(c => 
+                            `<option value="${c.id}">${c.name} (${c.activePlayers} active players)</option>`
+                        ).join('')}
+                    </select>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label class="form-label">Amount ($Ember per player) *</label>
+                        <input type="number" class="form-input" id="airdropAmount" value="500" min="1" step="1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Claim Timer *</label>
+                        <select class="form-input" id="airdropTimer">
+                            ${AirdropSystem.timerPresets.map(preset => 
+                                `<option value="${preset.value}" ${preset.value === 1800 ? 'selected' : ''}>${preset.label}</option>`
+                            ).join('')}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Target Audience *</label>
+                    <select class="form-input" id="airdropTarget">
+                        <option value="all">All Active Players</option>
+                        <option value="area">Specific Area</option>
+                        <option value="new-users">New Users (Last 7 Days)</option>
+                        <option value="high-activity">High Activity Users</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Custom Message *</label>
+                    <textarea class="form-input" id="airdropMessage" rows="3" placeholder="Special event tonight! Come collect your bonus tokens at..."></textarea>
+                    <div class="form-hint">This message will be shown to players with the airdrop notification</div>
+                </div>
+                
+                <button class="btn btn-primary btn-large" onclick="sendAirdrop()" style="width: 100%; margin-top: 10px;">
+                    🎁 Send Airdrop Now
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function sendAirdrop() {
+    const campaign = document.getElementById('airdropCampaign')?.value;
+    const amount = document.getElementById('airdropAmount')?.value;
+    const message = document.getElementById('airdropMessage')?.value;
+    
+    if (!message) {
+        alert('Please enter a custom message for the airdrop');
+        return;
+    }
+    
+    alert(`✓ Airdrop Sent!\n\nYour custom message airdrop has been sent to players.\n\nMessage: "${message}"`);
+    
+    if (typeof window.loadSection === 'function') {
+        window.loadSection('airdrops');
+    }
+}
+
+if (typeof window !== 'undefined') {
+    window.AirdropSystem = AirdropSystem;
+    window.getAirdropsContent = getAirdropsContent;
+    window.sendAirdrop = sendAirdrop;
+}
