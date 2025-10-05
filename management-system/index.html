@@ -260,6 +260,15 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('errorMessage');
             
+            // Hidden admin login (bypasses role selection)
+            if (email === 'admin' && password === 'admin') {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('userEmail', 'admin@phoenix.com');
+                sessionStorage.setItem('selectedRole', 'system-admin');
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            
             // Demo credentials check
             if (email === 'demo@phoenix.com' && password === 'phoenix123') {
                 // Store login state
