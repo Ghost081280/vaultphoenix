@@ -200,7 +200,7 @@ function getAppSetupContent(role) {
                                     
                                     <!-- Screen Content -->
                                     <div id="appPreview" style="
-                                        background: linear-gradient(135deg, rgba(15, 15, 15, 0.98), rgba(45, 24, 16, 0.98));
+                                        background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
                                         border-radius: 32px;
                                         padding: 50px 30px 30px 30px;
                                         text-align: center;
@@ -210,7 +210,7 @@ function getAppSetupContent(role) {
                                         justify-content: center;
                                         overflow: hidden;
                                     ">
-                                        <div id="previewLogo" style="width: 80px; height: 80px; margin: 0 auto 20px; background: var(--gradient-fire); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                                        <div id="previewLogo" style="width: 80px; height: 80px; margin: 0 auto 20px; background: linear-gradient(135deg, #d73327, #fb923c); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
                                             🔥
                                         </div>
                                         <div id="previewAppName" style="font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; color: #d73327;">
@@ -239,25 +239,59 @@ function getAppSetupContent(role) {
                                 
                                 <!-- Phone Label -->
                                 <div style="text-align: center; margin-top: 15px; color: rgba(255,255,255,0.5); font-size: 0.85rem;">
-                                    📱 iPhone Preview
+                                    📱 Live Theme Preview
                                 </div>
                             </div>
                             
+                            <!-- Custom Domain Setup -->
+                            <div style="margin-top: 20px; padding: 20px; background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px;">
+                                <h4 style="color: var(--color-primary-gold); margin-bottom: 15px;">🌐 Custom Domain Setup</h4>
+                                
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="form-label">Your Custom URL (Optional)</label>
+                                    <input type="text" class="form-input" id="customDomain" placeholder="hunt.yourdomain.com" oninput="updateCustomDomain()">
+                                    <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 8px;">
+                                        Enter your custom domain where your app will be hosted
+                                    </div>
+                                </div>
+                                
+                                <div id="domainInstructions" style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; display: none;">
+                                    <div style="font-weight: 700; margin-bottom: 10px;">📋 DNS Configuration Steps:</div>
+                                    <ol style="margin: 0; padding-left: 20px; color: rgba(255,255,255,0.8); font-size: 0.9rem;">
+                                        <li style="margin-bottom: 8px;">Login to your domain provider (GoDaddy, Namecheap, etc.)</li>
+                                        <li style="margin-bottom: 8px;">Go to DNS Management / DNS Settings</li>
+                                        <li style="margin-bottom: 8px;">Add a CNAME record:
+                                            <div style="background: rgba(0,0,0,0.5); padding: 10px; border-radius: 6px; margin-top: 8px; font-family: monospace;">
+                                                <strong>Type:</strong> CNAME<br>
+                                                <strong>Host:</strong> <span id="dnsHost">hunt</span><br>
+                                                <strong>Points to:</strong> vault-phoenix.app<br>
+                                                <strong>TTL:</strong> 3600
+                                            </div>
+                                        </li>
+                                        <li>Save changes and wait 5-10 minutes for DNS propagation</li>
+                                    </ol>
+                                    
+                                    <div style="margin-top: 15px; padding: 12px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px;">
+                                        <div style="font-weight: 700; margin-bottom: 5px; color: #22c55e;">✓ After Setup:</div>
+                                        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                                            Your app will be accessible at: <span style="color: var(--color-primary-gold); font-weight: 700;" id="finalUrl">https://hunt.yourdomain.com</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Deployment Info -->
                             <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 15px;">
-                                    This preview shows how your app will appear to players. Changes update in real-time.
+                                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 10px;">
+                                    <strong>Hosting:</strong> Your app will be deployed to our secure servers with SSL encryption and global CDN distribution.
                                 </div>
-                                <button class="btn btn-secondary" onclick="openLivePreview()" style="width: 100%;">
-                                    🔗 Open Full Template Preview
-                                </button>
-                            </div>
-                            
-                            <div style="margin-top: 15px; padding: 15px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px;">
-                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.8);">
-                                    <strong>Template URL:</strong><br>
-                                    <a href="${AppSetupState.playerAppTemplate}" target="_blank" style="color: var(--color-primary-gold); word-break: break-all;">
-                                        ${AppSetupState.playerAppTemplate}
-                                    </a>
+                                <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem;">
+                                    <span style="color: #22c55e;">✓</span>
+                                    <span style="color: rgba(255,255,255,0.6);">99.9% Uptime SLA</span>
+                                    <span style="color: #22c55e;">✓</span>
+                                    <span style="color: rgba(255,255,255,0.6);">Auto-scaling</span>
+                                    <span style="color: #22c55e;">✓</span>
+                                    <span style="color: rgba(255,255,255,0.6);">Free SSL</span>
                                 </div>
                             </div>
                         </div>
@@ -407,26 +441,99 @@ function previewLogo(event) {
             previewLogo.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">`;
             
             AppSetupState.whiteLabel.logo = e.target.result;
+            
+            // Update preview to maintain theme even with logo
+            updatePreview();
         };
         reader.readAsDataURL(file);
     }
 }
 
 /**
- * Update live preview
+ * Update live preview with theme
  */
 function updatePreview() {
     const appName = document.getElementById('appName')?.value || 'My AR Crypto Hunt';
     const appDescription = document.getElementById('appDescription')?.value || 'Discover crypto rewards in the real world!';
     const primaryColor = document.getElementById('primaryColor')?.value || '#d73327';
     const secondaryColor = document.getElementById('secondaryColor')?.value || '#fb923c';
+    const accentColor = document.getElementById('accentColor')?.value || '#f0a500';
     
-    document.getElementById('previewAppName').textContent = appName;
-    document.getElementById('previewAppName').style.color = primaryColor;
-    document.getElementById('previewDescription').textContent = appDescription;
+    // Update app name and description
+    const previewAppName = document.getElementById('previewAppName');
+    const previewDescription = document.getElementById('previewDescription');
     
+    if (previewAppName) {
+        previewAppName.textContent = appName;
+        previewAppName.style.color = primaryColor;
+    }
+    
+    if (previewDescription) {
+        previewDescription.textContent = appDescription;
+    }
+    
+    // Update button gradient
     const previewButton = document.getElementById('previewButton');
-    previewButton.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
+    if (previewButton) {
+        previewButton.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
+    }
+    
+    // Update logo background gradient
+    const previewLogo = document.getElementById('previewLogo');
+    if (previewLogo && !AppSetupState.whiteLabel.logo) {
+        previewLogo.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
+    }
+    
+    // Update app preview background with themed gradient
+    const appPreview = document.getElementById('appPreview');
+    if (appPreview) {
+        // Create themed gradient based on primary color
+        const rgb = hexToRgb(primaryColor);
+        const darkBase = `rgb(${Math.max(0, rgb.r - 30)}, ${Math.max(0, rgb.g - 30)}, ${Math.max(0, rgb.b - 30)})`;
+        const mediumBase = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)`;
+        
+        appPreview.style.background = `linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, ${darkBase} 50%, ${mediumBase} 75%, ${secondaryColor}20 100%)`;
+    }
+}
+
+/**
+ * Convert hex color to RGB
+ */
+function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : { r: 215, g: 51, b: 39 };
+}
+
+/**
+ * Update custom domain display
+ */
+function updateCustomDomain() {
+    const customDomain = document.getElementById('customDomain')?.value || '';
+    const domainInstructions = document.getElementById('domainInstructions');
+    const dnsHost = document.getElementById('dnsHost');
+    const finalUrl = document.getElementById('finalUrl');
+    
+    if (customDomain && domainInstructions) {
+        domainInstructions.style.display = 'block';
+        
+        // Extract subdomain from custom domain
+        const parts = customDomain.split('.');
+        const subdomain = parts.length > 2 ? parts[0] : customDomain.split('.')[0];
+        
+        if (dnsHost) {
+            dnsHost.textContent = subdomain;
+        }
+        
+        if (finalUrl) {
+            finalUrl.textContent = `https://${customDomain}`;
+        }
+    } else if (domainInstructions) {
+        domainInstructions.style.display = 'none';
+    }
 }
 
 /**
@@ -453,6 +560,7 @@ function openLivePreview() {
  */
 function deployWhiteLabelApp() {
     const appName = document.getElementById('appName')?.value;
+    const customDomain = document.getElementById('customDomain')?.value;
     
     if (!appName) {
         alert('Please enter an app name');
@@ -465,11 +573,36 @@ function deployWhiteLabelApp() {
     AppSetupState.whiteLabel.secondaryColor = document.getElementById('secondaryColor')?.value || '#fb923c';
     AppSetupState.whiteLabel.accentColor = document.getElementById('accentColor')?.value || '#f0a500';
     
-    alert(`🚀 Deploying "${appName}"...\n\nYour white label app is being built with your custom branding.\n\n✓ App configured\n✓ $Ember integration enabled\n✓ AR features activated\n✓ Template customized\n\nYour app will be ready in 5-10 minutes. You'll receive an email with download links.`);
+    let deployMsg = `🚀 Deploying "${appName}"...\n\nYour white label app is being built with your custom branding.\n\n✓ App configured\n✓ $Ember integration enabled\n✓ AR features activated\n✓ Template customized`;
+    
+    if (customDomain) {
+        deployMsg += `\n✓ Custom domain: ${customDomain}`;
+    }
+    
+    deployMsg += `\n\nYour app will be ready in 5-10 minutes. You'll receive an email with `;
+    
+    if (customDomain) {
+        deployMsg += `your custom URL and download links.`;
+    } else {
+        deployMsg += `download links and default hosting URL.`;
+    }
+    
+    alert(deployMsg);
     
     // Simulate deployment
     setTimeout(() => {
-        alert(`✓ "${appName}" Deployed Successfully!\n\nYour app is now live and using the template:\n${AppSetupState.playerAppTemplate}\n\nView it in the "Campaign Control" section.`);
+        let successMsg = `✓ "${appName}" Deployed Successfully!\n\nYour app is now live`;
+        
+        if (customDomain) {
+            successMsg += ` at https://${customDomain}`;
+        } else {
+            successMsg += ` and using the template:\n${AppSetupState.playerAppTemplate}`;
+        }
+        
+        successMsg += `\n\nView it in the "Campaign Control" section.`;
+        
+        alert(successMsg);
+        
         if (typeof window.loadSection === 'function') {
             window.loadSection('campaigns');
         }
@@ -545,4 +678,5 @@ if (typeof window !== 'undefined') {
     window.selectPlatform = selectPlatform;
     window.copyApiKey = copyApiKey;
     window.testIntegration = testIntegration;
+    window.updateCustomDomain = updateCustomDomain;
 }
