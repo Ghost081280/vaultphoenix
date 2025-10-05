@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Coinbase Wallet Integration & $Ember Token Purchases
+   Coinbase Wallet Integration & $Ember Token Purchases - REFACTORED
    ============================================ */
 
 // ============================================
@@ -35,13 +35,13 @@ function getWalletContent(role) {
 }
 
 /**
- * Campaign Manager Wallet Content
+ * Campaign Manager Wallet Content - CENTERED LAYOUT
  */
 function getCampaignManagerWalletContent(isConnected) {
     return `
-        <div class="dashboard-section">
+        <div class="dashboard-section wallet-centered">
             <h2 class="section-title">👛 Coinbase Wallet & Funding</h2>
-            <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 30px;">
+            <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 30px; text-align: center;">
                 Connect your Coinbase wallet to purchase $Ember tokens and fund your campaigns.
             </p>
             
@@ -72,7 +72,7 @@ function getAdvertiserWalletContent(isConnected) {
  */
 function getWalletConnectionSection() {
     return `
-        <div class="card" style="text-align: center; padding: 60px 40px;">
+        <div class="card" style="text-align: center; padding: 60px 40px; max-width: 800px; margin: 0 auto;">
             <div style="font-size: 5rem; margin-bottom: 20px;">👛</div>
             <h3 style="color: var(--color-primary-gold); margin-bottom: 20px; font-size: 2rem;">
                 Connect Your Coinbase Wallet
@@ -109,109 +109,111 @@ function getWalletConnectionSection() {
 }
 
 /**
- * Campaign Manager Connected Wallet
+ * Campaign Manager Connected Wallet - CENTERED LAYOUT
  */
 function getCampaignManagerConnectedWallet() {
     return `
-        <div class="revenue-grid">
-            <!-- Wallet Info -->
-            <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
-                    <div>
-                        <h3 style="color: var(--color-primary-gold); margin-bottom: 10px;">
-                            Wallet Connected
-                        </h3>
-                        <div style="font-family: monospace; color: rgba(255,255,255,0.7); font-size: 0.9rem; word-break: break-all;">
-                            ${WalletState.address || sessionStorage.getItem('walletAddress') || '0x742d...9C4A'}
-                        </div>
-                    </div>
-                    <span class="badge badge-success">
-                        <span class="status-indicator status-live"></span>
-                        CONNECTED
-                    </span>
-                </div>
-                
-                <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; margin-bottom: 20px;">
-                    <div style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 8px;">
-                        $Ember Balance
-                    </div>
-                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--color-primary-gold); margin-bottom: 5px;">
-                        ${(window.AppState?.tokenBalance?.amount || 28450).toLocaleString()}
-                    </div>
-                    <div style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">
-                        ≈ $${((window.AppState?.tokenBalance?.amount || 28450) * 0.0035).toFixed(2)} USD
-                    </div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                    <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; text-align: center;">
-                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">ETH</div>
-                        <div style="font-size: 1.2rem; font-weight: 700;">0.025</div>
-                    </div>
-                    <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; text-align: center;">
-                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">USD</div>
-                        <div style="font-size: 1.2rem; font-weight: 700;">$85.43</div>
-                    </div>
-                </div>
-                
-                <button class="btn btn-outline" onclick="disconnectWallet()" style="width: 100%;">
-                    Disconnect Wallet
-                </button>
-            </div>
-            
-            <!-- Quick Purchase -->
-            <div class="card">
-                <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
-                    💎 Purchase $Ember
-                </h3>
-                
-                <div style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 15px; margin-bottom: 20px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div class="revenue-grid">
+                <!-- Wallet Info -->
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
                         <div>
-                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Market Price</div>
-                            <div style="font-size: 1.5rem; font-weight: 900; color: var(--color-primary-gold);">
-                                $0.0035
+                            <h3 style="color: var(--color-primary-gold); margin-bottom: 10px;">
+                                Wallet Connected
+                            </h3>
+                            <div style="font-family: monospace; color: rgba(255,255,255,0.7); font-size: 0.9rem; word-break: break-all;">
+                                ${WalletState.address || sessionStorage.getItem('walletAddress') || '0x742d...9C4A'}
                             </div>
                         </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">24h Change</div>
-                            <div style="font-size: 1.2rem; font-weight: 700; color: #22c55e;">
-                                +16.7%
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Amount (USD)</label>
-                    <input type="number" class="form-input" id="purchaseAmount" value="100" min="10" step="10" onchange="updateTokenEstimate()">
-                </div>
-                
-                <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; margin-bottom: 20px;">
-                    <div style="display: flex; justify-content: space-between; padding: 8px 0;">
-                        <span style="color: rgba(255,255,255,0.7);">You'll Receive:</span>
-                        <span style="font-weight: 700; color: var(--color-primary-gold);" id="tokenEstimate">
-                            ${Math.floor(100 / 0.0035).toLocaleString()} $Ember
+                        <span class="badge badge-success">
+                            <span class="status-indicator status-live"></span>
+                            CONNECTED
                         </span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <span style="color: rgba(255,255,255,0.7);">Network Fee:</span>
-                        <span style="font-weight: 700;">~$2.50</span>
+                    
+                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; margin-bottom: 20px;">
+                        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 8px;">
+                            $Ember Balance
+                        </div>
+                        <div style="font-size: 2.5rem; font-weight: 900; color: var(--color-primary-gold); margin-bottom: 5px;">
+                            ${(window.AppState?.tokenBalance?.amount || 28450).toLocaleString()}
+                        </div>
+                        <div style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">
+                            ≈ $${((window.AppState?.tokenBalance?.amount || 28450) * 0.0035).toFixed(2)} USD
+                        </div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.1); font-size: 1.1rem; font-weight: 900;">
-                        <span>Total:</span>
-                        <span style="color: var(--color-primary-gold);" id="totalCost">$102.50</span>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; text-align: center;">
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">ETH</div>
+                            <div style="font-size: 1.2rem; font-weight: 700;">0.025</div>
+                        </div>
+                        <div style="padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; text-align: center;">
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">USD</div>
+                            <div style="font-size: 1.2rem; font-weight: 700;">$85.43</div>
+                        </div>
                     </div>
+                    
+                    <button class="btn btn-outline" onclick="disconnectWallet()" style="width: 100%;">
+                        Disconnect Wallet
+                    </button>
                 </div>
                 
-                <button class="btn btn-primary btn-large" onclick="purchaseEmber()" style="width: 100%; font-size: 1.1rem;">
-                    💳 Purchase with Coinbase
-                </button>
+                <!-- Quick Purchase -->
+                <div class="card">
+                    <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">
+                        💎 Purchase $Ember
+                    </h3>
+                    
+                    <div style="background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 15px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Market Price</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; color: var(--color-primary-gold);">
+                                    $0.0035
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">24h Change</div>
+                                <div style="font-size: 1.2rem; font-weight: 700; color: #22c55e;">
+                                    +16.7%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Amount (USD)</label>
+                        <input type="number" class="form-input" id="purchaseAmount" value="100" min="10" step="10" onchange="updateTokenEstimate()">
+                    </div>
+                    
+                    <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                            <span style="color: rgba(255,255,255,0.7);">You'll Receive:</span>
+                            <span style="font-weight: 700; color: var(--color-primary-gold);" id="tokenEstimate">
+                                ${Math.floor(100 / 0.0035).toLocaleString()} $Ember
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <span style="color: rgba(255,255,255,0.7);">Network Fee:</span>
+                            <span style="font-weight: 700;">~$2.50</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.1); font-size: 1.1rem; font-weight: 900;">
+                            <span>Total:</span>
+                            <span style="color: var(--color-primary-gold);" id="totalCost">$102.50</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-large" onclick="purchaseEmber()" style="width: 100%; font-size: 1.1rem;">
+                        💳 Purchase with Coinbase
+                    </button>
+                </div>
             </div>
+            
+            ${getTransactionHistory()}
+            ${getEmberTokenInfo()}
         </div>
-        
-        ${getTransactionHistory()}
-        ${getEmberTokenInfo()}
     `;
 }
 
@@ -389,7 +391,7 @@ function getAdvertiserConnectedWallet() {
                     <div style="font-size: 2.5rem; margin-bottom: 10px;">2️⃣</div>
                     <h4 style="margin-bottom: 10px;">Create Token Stop</h4>
                     <p style="color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
-                        Go to Campaign Control → Add your location with advertisement → Allocate tokens to the stop.
+                        Go to Campaign Marketplace → Join campaign → Add your location with advertisement → Allocate tokens.
                     </p>
                 </div>
                 
@@ -691,10 +693,10 @@ async function purchaseEmberAdvertiser() {
             `You received ${tokens.toLocaleString()} $Ember tokens.\n\n` +
             `Transaction hash: 0x${Math.random().toString(16).substr(2, 64)}\n\n` +
             `New balance: ${(window.AdvertiserData?.tokenBalance?.owned || tokens).toLocaleString()} $Ember\n\n` +
-            `Next: Go to Campaign Control to create a token stop with your advertisement!`);
+            `Next: Go to Campaign Marketplace to join a campaign and create token stops!`);
         
         if (typeof window.loadSection === 'function') {
-            window.loadSection('wallet');
+            window.loadSection('marketplace');
         }
     }
 }
