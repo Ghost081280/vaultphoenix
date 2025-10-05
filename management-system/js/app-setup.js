@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   App Setup - White Label Builder & SDK Integration - FIXED
+   App Setup - White Label Builder & SDK Integration - REFACTORED
    File: management-system/js/app-setup.js
    ============================================ */
 
@@ -239,11 +239,11 @@ function getAppSetupContent(role) {
                         <div class="preview-info">
                             <h5>What You're Building:</h5>
                             <ul>
-                                <li>✓ <strong>AR Token Hunt:</strong> Players find $Ember tokens at your locations using their phone camera</li>
+                                <li>✓ <strong>AR Token Hunt:</strong> Players find $Ember tokens at locations using phone camera</li>
                                 <li>✓ <strong>Live Map:</strong> Shows all active token locations in real-time</li>
-                                <li>✓ <strong>Wallet Integration:</strong> Players collect and manage their $Ember earnings</li>
-                                <li>✓ <strong>Leaderboards:</strong> Gamification to drive engagement and competition</li>
-                                <li>✓ <strong>Push Notifications:</strong> Alert players when new tokens are nearby</li>
+                                <li>✓ <strong>Wallet Integration:</strong> Players collect and manage $Ember earnings</li>
+                                <li>✓ <strong>Circular Economy:</strong> Recovered tokens can be reused for new stops</li>
+                                <li>✓ <strong>Custom Message Airdrops:</strong> Send targeted messages to players</li>
                             </ul>
                             
                             <div class="tech-stack">
