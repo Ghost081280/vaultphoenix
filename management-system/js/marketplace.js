@@ -18,19 +18,19 @@ const MarketplaceData = {
             activePlayers: 847,
             coverage: 'Phoenix Metro Area',
             demographics: 'Ages 18-45, Gaming enthusiasts',
-            totalLocations: 3,
+            totalLocations: 2,
             advertiserLocations: 1,
             avgCollectionsPerMonth: 175,
             avgRedemptionRate: 7.8,
             engagement: 87.3,
             isParticipating: true,
             
-            // Pricing set by Campaign Manager
+            // Pricing set by Campaign Manager (per location count)
             pricing: {
-                singleLocation: 500,
-                smallBusiness: 400,  // 2-5 locations, per location
-                mediumBusiness: 350, // 6-10 locations, per location
-                enterprise: 'Contact' // 11+ locations
+                oneLocation: 500,       // 1 location
+                twoToFive: 400,         // 2-5 locations, per location
+                sixToTen: 350,          // 6-10 locations, per location
+                elevenPlus: 'Contact'   // 11+ locations
             },
             
             // Token requirements
@@ -64,10 +64,10 @@ const MarketplaceData = {
             isParticipating: false,
             
             pricing: {
-                singleLocation: 450,
-                smallBusiness: 375,
-                mediumBusiness: 325,
-                enterprise: 'Contact'
+                oneLocation: 450,
+                twoToFive: 375,
+                sixToTen: 325,
+                elevenPlus: 'Contact'
             },
             
             minTokensPerStop: 5000,
@@ -99,10 +99,10 @@ const MarketplaceData = {
             isParticipating: false,
             
             pricing: {
-                singleLocation: 600,
-                smallBusiness: 500,
-                mediumBusiness: 425,
-                enterprise: 'Contact'
+                oneLocation: 600,
+                twoToFive: 500,
+                sixToTen: 425,
+                elevenPlus: 'Contact'
             },
             
             minTokensPerStop: 10000,
@@ -324,25 +324,25 @@ function getMarketplaceContent(role) {
                                     </div>
                                 </div>
                                 
-                                <!-- Simplified Pricing -->
+                                <!-- Simplified Pricing by Location Count -->
                                 <div style="padding: 15px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px; margin-bottom: 15px;">
                                     <h4 style="color: #22c55e; margin-bottom: 12px; font-size: 1rem;">💳 Simple Pricing (All Features Included)</h4>
                                     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 0.9rem;">
                                         <div>
                                             <div style="color: rgba(255,255,255,0.6);">1 Location</div>
-                                            <div style="font-weight: 700; color: var(--color-primary-gold);">$${campaign.pricing.singleLocation}/mo</div>
+                                            <div style="font-weight: 700; color: var(--color-primary-gold);">$${campaign.pricing.oneLocation}/mo</div>
                                         </div>
                                         <div>
                                             <div style="color: rgba(255,255,255,0.6);">2-5 Locations</div>
-                                            <div style="font-weight: 700; color: var(--color-primary-gold);">$${campaign.pricing.smallBusiness}/mo each</div>
+                                            <div style="font-weight: 700; color: var(--color-primary-gold);">$${campaign.pricing.twoToFive}/mo each</div>
                                         </div>
                                         <div>
                                             <div style="color: rgba(255,255,255,0.6);">6-10 Locations</div>
-                                            <div style="font-weight: 700; color: var(--color-primary-gold);">$${campaign.pricing.mediumBusiness}/mo each</div>
+                                            <div style="font-weight: 700; color: var(--color-primary-gold);">$${campaign.pricing.sixToTen}/mo each</div>
                                         </div>
                                         <div>
                                             <div style="color: rgba(255,255,255,0.6);">11+ Locations</div>
-                                            <div style="font-weight: 700; color: var(--color-primary-gold);">${campaign.pricing.enterprise}</div>
+                                            <div style="font-weight: 700; color: var(--color-primary-gold);">${campaign.pricing.elevenPlus}</div>
                                         </div>
                                     </div>
                                     <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 10px;">
@@ -379,10 +379,10 @@ function joinCampaign(campaignId) {
         `📍 Coverage: ${campaign.coverage}\n` +
         `👥 Active Players: ${campaign.activePlayers.toLocaleString()}\n\n` +
         `💰 PRICING (Based on Location Count):\n` +
-        `• 1 Location: $${campaign.pricing.singleLocation}/month\n` +
-        `• 2-5 Locations: $${campaign.pricing.smallBusiness}/month each\n` +
-        `• 6-10 Locations: $${campaign.pricing.mediumBusiness}/month each\n` +
-        `• 11+ Locations: ${campaign.pricing.enterprise}\n\n` +
+        `• 1 Location: $${campaign.pricing.oneLocation}/month\n` +
+        `• 2-5 Locations: $${campaign.pricing.twoToFive}/month each\n` +
+        `• 6-10 Locations: $${campaign.pricing.sixToTen}/month each\n` +
+        `• 11+ Locations: ${campaign.pricing.elevenPlus}\n\n` +
         `💎 TOKEN PURCHASE (One-Time):\n` +
         `• Minimum: ${campaign.minTokensPerStop.toLocaleString()} $Ember (≈$${minTokenCost})\n` +
         `• Recommended: ${campaign.recommendedTokens.toLocaleString()} $Ember (≈$${recommendedTokenCost})\n\n` +
@@ -390,6 +390,11 @@ function joinCampaign(campaignId) {
         `• Collections: ${campaign.avgCollectionsPerMonth} (${estimatedCollections.toLocaleString()} $Ember distributed)\n` +
         `• Redemptions: ${estimatedRedemptions.toLocaleString()} $Ember (${campaign.avgRedemptionRate}% recovery rate)\n` +
         `• Engagement: ${campaign.engagement}%\n\n` +
+        `📱 INCLUDES:\n` +
+        `• Scanner Web App Access (unique URL)\n` +
+        `• Advertisement Display System\n` +
+        `• Full Analytics Dashboard\n` +
+        `• All Features (no tiers!)\n\n` +
         `After joining, you'll:\n` +
         `1. Purchase $Ember tokens\n` +
         `2. Create token stop with advertisement\n` +
@@ -407,9 +412,10 @@ function joinCampaign(campaignId) {
             `You've successfully joined the campaign.\n\n` +
             `Next Steps:\n` +
             `1. Go to Wallet → Purchase $Ember tokens\n` +
-            `2. Go to My $Ember Balance → Add Token Stop (redirects to marketplace)\n` +
+            `2. Go to Campaign Control to add token stops\n` +
             `3. Get Scanner Web App link\n` +
-            `4. Start accepting redemptions!\n\n` +
+            `4. Share link with staff via email\n` +
+            `5. Start accepting redemptions!\n\n` +
             `Redirecting to wallet to purchase tokens...`);
         
         if (typeof window.loadSection === 'function') {
