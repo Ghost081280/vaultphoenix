@@ -57,47 +57,25 @@ const EmberHuntDemo = {
     advertiserTokenLocations: [
         {
             id: 'adv-token-001',
-            name: 'Chase Field Area',
-            address: '401 E Jefferson St, Phoenix, AZ 85004',
-            lat: 33.4451,
-            lng: -112.0667,
-            tokensRemaining: 15000,
-            tokenAmount: 1000,
-            status: 'active',
-            message: 'Game Day Special! Collect tokens near Chase Field before the game!',
-            sponsorName: 'Sports Arena Co.',
-            sponsorInfo: 'Your home for Arizona sports and entertainment',
-            ctaButtons: [
-                { text: 'Get Tickets', url: 'https://www.mlb.com/dbacks/tickets' },
-                { text: 'Concessions Menu', url: 'https://www.mlb.com/dbacks/ballpark/food' }
-            ],
-            addedBy: 'Advertiser',
-            advertiserName: 'Sports Arena Co.',
-            campaign: '$Ember Hunt',
-            tier: 'platinum',
-            monthlyFee: 2500
-        },
-        {
-            id: 'adv-token-002',
-            name: 'Roosevelt Arts District',
-            address: '300 E Roosevelt St, Phoenix, AZ 85004',
-            lat: 33.4472,
-            lng: -112.0652,
-            tokensRemaining: 6500,
+            name: 'Heritage Square Historic Site',
+            address: '115 N 6th St, Phoenix, AZ 85004',
+            lat: 33.4484,
+            lng: -112.0740,
+            tokensRemaining: 12450,
             tokenAmount: 500,
             status: 'active',
-            message: 'Discover local art! Collect tokens and explore galleries in Roosevelt Row.',
-            sponsorName: 'Art Gallery LLC',
-            sponsorInfo: 'Supporting local artists and creative community',
+            message: 'Welcome to Heritage Square! Collect your tokens and explore Phoenix history.',
+            sponsorName: 'Heritage Square Historic Site',
+            sponsorInfo: 'Phoenix\'s premier historic landmark since 1895',
             ctaButtons: [
-                { text: 'Gallery Hours', url: 'https://rooseveltrow.org' },
-                { text: 'First Fridays', url: 'https://artlinkphoenix.com' }
+                { text: 'Visit Museum', url: 'https://heritagesquarephx.org' },
+                { text: 'Tour Schedule', url: 'https://heritagesquarephx.org/tours' }
             ],
             addedBy: 'Advertiser',
-            advertiserName: 'Art Gallery LLC',
+            advertiserName: 'Heritage Square Historic Site',
             campaign: '$Ember Hunt',
-            tier: 'gold',
-            monthlyFee: 1200
+            tier: 'silver',
+            monthlyFee: 500
         }
     ],
     
@@ -148,6 +126,7 @@ function getCampaignsContent(role) {
     const allLocations = [...EmberHuntDemo.campaignTokenLocations, ...EmberHuntDemo.advertiserTokenLocations];
     const cmLocations = EmberHuntDemo.campaignTokenLocations;
     const advLocations = EmberHuntDemo.advertiserTokenLocations;
+    const totalAdvertisers = 1; // Count of unique advertisers
     
     return `
         <div class="dashboard-section">
@@ -166,14 +145,14 @@ function getCampaignsContent(role) {
                     <div class="stat-icon">🏢</div>
                     <div class="stat-label">Advertiser Locations</div>
                     <div class="stat-value">${advLocations.length}</div>
-                    <div class="stat-change">Paid Placements</div>
+                    <div class="stat-change">${totalAdvertisers} ${totalAdvertisers === 1 ? 'advertiser' : 'advertisers'}</div>
                 </div>
                 
                 <div class="stat-card">
                     <div class="stat-icon">💎</div>
                     <div class="stat-label">Total Tokens Active</div>
                     <div class="stat-value">${allLocations.reduce((sum, loc) => sum + loc.tokensRemaining, 0).toLocaleString()}</div>
-                    <div class="stat-change">Across All Locations</div>
+                    <div class="stat-change">All locations combined</div>
                 </div>
                 
                 <div class="stat-card">
@@ -338,7 +317,7 @@ function getCampaignsContent(role) {
             
             ${cmLocations.map(loc => `
                 <div class="card" style="margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; flex-wrap: wrap; gap: 15px;">
                         <div>
                             <h4 style="color: var(--color-primary-gold); margin-bottom: 5px;">${loc.name}</h4>
                             <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">${loc.address}</div>
@@ -370,7 +349,7 @@ function getCampaignsContent(role) {
                             <div style="font-weight: 700; margin-bottom: 5px;">${loc.sponsorName}</div>
                             <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">${loc.sponsorInfo}</div>
                             ${loc.ctaButtons && loc.ctaButtons.length > 0 ? `
-                                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
                                     ${loc.ctaButtons.map(btn => `
                                         <a href="${btn.url}" target="_blank" class="btn btn-small btn-outline">${btn.text}</a>
                                     `).join('')}
@@ -379,7 +358,7 @@ function getCampaignsContent(role) {
                         </div>
                     ` : ''}
                     
-                    <div style="display: flex; gap: 10px;">
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <button class="btn btn-outline" onclick="editCMLocation('${loc.id}')">Edit</button>
                         <button class="btn btn-secondary" onclick="refillTokens('${loc.id}')">Refill Tokens</button>
                         <button class="btn" onclick="viewLocationAnalytics('${loc.id}')" style="background: rgba(34,197,94,0.3); border: 1px solid #22c55e;">Analytics</button>
@@ -396,7 +375,7 @@ function getCampaignsContent(role) {
             
             ${advLocations.map(loc => `
                 <div class="card" style="margin-bottom: 15px; border-color: rgba(240,165,0,0.5);">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; flex-wrap: wrap; gap: 15px;">
                         <div>
                             <h4 style="color: #f0a500; margin-bottom: 5px;">${loc.name}</h4>
                             <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">${loc.address}</div>
