@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Token Economy - Advertisement-Based Model
+   Token Economy - Advertisement-Based Model - FIXED
    ============================================ */
 
 // ============================================
@@ -8,7 +8,7 @@
 // ============================================
 
 const TokenEconomy = {
-    // Current market price (updated from Smithii.io)
+    // Current market price (from Coinbase/public exchanges)
     marketPrice: 0.0035,
     lastPriceUpdate: new Date(),
     priceUpdateInterval: 300000, // 5 minutes
@@ -41,13 +41,13 @@ const TokenEconomy = {
     starterBonus: {
         amount: 100, // USD value
         campaignManagers: true,
-        advertisers: false // Advertisers must purchase tokens
+        advertisers: false // Advertisers must purchase tokens from Coinbase
     },
     
     // Advertisement-Based Token Model
     tokenModel: {
         enabled: true,
-        description: 'Advertisers fund token stops with $Ember that includes their advertisement. Players collect tokens, see ads, then redeem at advertiser locations.',
+        description: 'Advertisers fund token stops with $Ember purchased from Coinbase that includes their advertisement. Players collect tokens, see ads, then redeem at advertiser locations.',
         
         // Token stop requirements
         tokenStop: {
@@ -143,19 +143,17 @@ const LocationPricing = {
 };
 
 // ============================================
-// REVENUE TRACKING
+// REVENUE TRACKING - FIXED (Location Fees Only)
 // ============================================
 
 const RevenueData = {
     currentMonth: {
-        locationFees: 32400,      // Monthly location fees
-        tokenSales: 45600,        // Tokens sold to advertisers
-        total: 78000              // Total revenue
+        locationFees: 500,        // Monthly location fees from advertisers
+        total: 500                // Total revenue (location fees only)
     },
     lastMonth: {
-        locationFees: 27500,
-        tokenSales: 38200,
-        total: 65700
+        locationFees: 500,
+        total: 500
     },
     
     // Advertiser spending
@@ -165,12 +163,12 @@ const RevenueData = {
             locationCount: 1,
             monthlyFeePerLocation: 500,
             totalMonthlyFee: 500,
-            tokensOwned: 12450,
-            tokensDistributed: 8750,
-            tokensRedeemed: 3250,  // Received back via redemptions
-            totalSpent: 500 + (12450 * 0.0035),  // Location fee + token purchase
+            tokensOwned: 12450,           // Purchased from Coinbase
+            tokensDistributed: 8750,      // Currently in circulation at stops
+            tokensRedeemed: 3250,         // Received back via redemptions
+            tokensPurchasedFromCoinbase: 12450, // Total purchased from Coinbase
             redemptionsThisMonth: 65,
-            averageRedemption: 50  // tokens per redemption
+            averageRedemption: 50         // tokens per redemption
         }
     ]
 };
@@ -215,7 +213,7 @@ function getPricingForLocationCount(locationCount) {
 }
 
 /**
- * Calculate total cost for advertiser (location fee + tokens)
+ * Calculate total cost for advertiser (location fee + tokens from Coinbase)
  */
 function calculateAdvertiserTotalCost(locationCount, tokenAmount) {
     const pricing = getPricingForLocationCount(locationCount);
@@ -224,7 +222,7 @@ function calculateAdvertiserTotalCost(locationCount, tokenAmount) {
     
     return {
         locationFee: locationFee,
-        tokenCost: tokenCost,
+        tokenCostFromCoinbase: tokenCost, // FIXED: Clarify tokens bought from Coinbase
         total: (typeof locationFee === 'number' ? locationFee : 0) + tokenCost,
         pricePerLocation: pricing.monthlyFeePerLocation || pricing.monthlyFee
     };
@@ -248,10 +246,10 @@ function formatTokens(amount) {
 }
 
 /**
- * Update market price from Smithii.io (simulated)
+ * Update market price from Coinbase (simulated)
  */
 function updateMarketPrice() {
-    // In production, this would fetch from Smithii.io API
+    // In production, this would fetch from Coinbase/public exchange API
     const fluctuation = (Math.random() - 0.5) * 0.0001;
     TokenEconomy.marketPrice = Math.max(0.002, TokenEconomy.marketPrice + fluctuation);
     TokenEconomy.lastPriceUpdate = new Date();
@@ -268,7 +266,7 @@ function updateMarketPrice() {
 }
 
 // ============================================
-// REVENUE ANALYTICS CONTENT
+// REVENUE ANALYTICS CONTENT - FIXED
 // ============================================
 
 /**
@@ -286,46 +284,54 @@ function getRevenueContent(role) {
             <h2 class="section-title">💰 Revenue Analytics</h2>
             
             <div class="revenue-grid">
-                <!-- Location Placement Fees -->
+                <!-- Location Placement Fees (Only Revenue Source) -->
                 <div class="revenue-stream">
                     <div class="revenue-header">
                         <div class="revenue-icon">📍</div>
                         <div class="revenue-title">Location Placement Fees</div>
                     </div>
                     <div class="revenue-amount">${formatCurrency(RevenueData.currentMonth.locationFees)}</div>
-                    <div class="revenue-change positive">
-                        +${((RevenueData.currentMonth.locationFees - RevenueData.lastMonth.locationFees) / RevenueData.lastMonth.locationFees * 100).toFixed(1)}% vs last month
+                    <div class="revenue-change ${percentChange >= 0 ? 'positive' : 'negative'}">
+                        ${percentChange >= 0 ? '+' : ''}${percentChange}% vs last month
                     </div>
                     <ul class="revenue-details">
                         <li class="revenue-detail">
-                            <span class="revenue-detail-label">Active Locations</span>
-                            <span class="revenue-detail-value">47</span>
+                            <span class="revenue-detail-label">Active Advertisers</span>
+                            <span class="revenue-detail-value">1</span>
+                        </li>
+                        <li class="revenue-detail">
+                            <span class="revenue-detail-label">Total Locations</span>
+                            <span class="revenue-detail-value">1</span>
                         </li>
                         <li class="revenue-detail">
                             <span class="revenue-detail-label">Avg per Location</span>
-                            <span class="revenue-detail-value">${formatCurrency(RevenueData.currentMonth.locationFees / 47)}</span>
+                            <span class="revenue-detail-value">${formatCurrency(RevenueData.currentMonth.locationFees / 1)}</span>
                         </li>
                     </ul>
                 </div>
                 
-                <!-- Token Sales to Advertisers -->
-                <div class="revenue-stream">
+                <!-- Token Flow Information (Not Revenue) -->
+                <div class="revenue-stream" style="background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3);">
                     <div class="revenue-header">
                         <div class="revenue-icon">💎</div>
-                        <div class="revenue-title">$Ember Token Sales</div>
+                        <div class="revenue-title">$Ember Token Flow</div>
                     </div>
-                    <div class="revenue-amount">${formatCurrency(RevenueData.currentMonth.tokenSales)}</div>
-                    <div class="revenue-change positive">
-                        +${((RevenueData.currentMonth.tokenSales - RevenueData.lastMonth.tokenSales) / RevenueData.lastMonth.tokenSales * 100).toFixed(1)}% vs last month
+                    <div class="revenue-amount" style="color: #3b82f6;">Info Only</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 15px;">
+                        Advertisers buy from Coinbase
                     </div>
                     <ul class="revenue-details">
                         <li class="revenue-detail">
-                            <span class="revenue-detail-label">Tokens Sold</span>
-                            <span class="revenue-detail-value">${formatTokens(RevenueData.currentMonth.tokenSales / TokenEconomy.marketPrice)}</span>
+                            <span class="revenue-detail-label">Advertiser Holdings:</span>
+                            <span class="revenue-detail-value">${formatTokens(RevenueData.advertisers.reduce((sum, a) => sum + a.tokensOwned, 0))}</span>
                         </li>
                         <li class="revenue-detail">
-                            <span class="revenue-detail-label">Avg Price</span>
-                            <span class="revenue-detail-value">$${TokenEconomy.marketPrice.toFixed(4)}</span>
+                            <span class="revenue-detail-label">In Circulation:</span>
+                            <span class="revenue-detail-value">${formatTokens(RevenueData.advertisers.reduce((sum, a) => sum + a.tokensDistributed, 0))}</span>
+                        </li>
+                        <li class="revenue-detail">
+                            <span class="revenue-detail-label">Redeemed Back:</span>
+                            <span class="revenue-detail-value">${formatTokens(RevenueData.advertisers.reduce((sum, a) => sum + a.tokensRedeemed, 0))}</span>
                         </li>
                     </ul>
                 </div>
@@ -336,24 +342,20 @@ function getRevenueContent(role) {
                 <div class="revenue-total-label">Total Monthly Revenue</div>
                 <div class="revenue-total-amount">${formatCurrency(RevenueData.currentMonth.total)}</div>
                 
-                <div class="revenue-breakdown">
-                    <div class="breakdown-bar">
-                        <div class="breakdown-fill" style="width: ${(RevenueData.currentMonth.locationFees / RevenueData.currentMonth.total * 100)}%">
-                            Location Fees: ${formatCurrency(RevenueData.currentMonth.locationFees)}
-                        </div>
-                    </div>
-                    <div class="breakdown-bar">
-                        <div class="breakdown-fill" style="width: ${(RevenueData.currentMonth.tokenSales / RevenueData.currentMonth.total * 100)}%">
-                            Token Sales: ${formatCurrency(RevenueData.currentMonth.tokenSales)}
-                        </div>
-                    </div>
+                <div style="max-width: 600px; margin: 20px auto 0; padding: 20px; background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px;">
+                    <h4 style="color: var(--color-primary-gold); margin-bottom: 15px;">💡 Your Revenue Model</h4>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0; line-height: 1.6;">
+                        You earn <strong>100% from monthly location fees</strong> paid by advertisers. Advertisers purchase 
+                        $Ember tokens directly from Coinbase (not from you) to fund their advertisement token stops. 
+                        Your revenue is predictable and recurring from location fees only.
+                    </p>
                 </div>
             </div>
         </div>
         
         <!-- Pricing Structure -->
         <div class="dashboard-section">
-            <h2 class="section-title">💳 Location Placement Pricing</h2>
+            <h2 class="section-title">💳 Your Location Placement Pricing</h2>
             
             <div class="card" style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); margin-bottom: 30px;">
                 <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">
@@ -396,6 +398,51 @@ function getRevenueContent(role) {
                 `).join('')}
             </div>
         </div>
+        
+        <!-- Token Flow Explanation -->
+        <div class="dashboard-section">
+            <h2 class="section-title">💎 How $Ember Tokens Flow</h2>
+            
+            <div class="card" style="background: rgba(59,130,246,0.1); border: 2px solid rgba(59,130,246,0.3);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">1️⃣</div>
+                        <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">Advertiser Buys from Coinbase</h4>
+                        <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6;">
+                            Advertisers purchase $Ember tokens directly from Coinbase at market price. 
+                            You don't sell tokens - they buy from public exchanges.
+                        </p>
+                    </div>
+                    
+                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">2️⃣</div>
+                        <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">Pays You Location Fee</h4>
+                        <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6;">
+                            Advertiser pays you a monthly location fee based on number of locations. 
+                            This is your revenue - predictable and recurring.
+                        </p>
+                    </div>
+                    
+                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">3️⃣</div>
+                        <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">Funds Token Stops</h4>
+                        <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6;">
+                            Advertiser uses their Coinbase-purchased tokens to fund advertisement token 
+                            stops in your campaign.
+                        </p>
+                    </div>
+                    
+                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">4️⃣</div>
+                        <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">Circular Token Flow</h4>
+                        <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6;">
+                            Players collect tokens, then redeem at advertiser locations. Advertiser 
+                            gets tokens back and reuses them for more stops.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     `;
 }
 
@@ -429,7 +476,7 @@ function getCampaignManagerTokenContent() {
                             Current Value: ${formatCurrency(calculateUSDFromTokens(window.AppState?.tokenBalance?.amount || 28450))} USD
                         </div>
                         <div style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-top: 5px;">
-                            Market Price: $${TokenEconomy.marketPrice.toFixed(4)} per $Ember
+                            Market Price: $${TokenEconomy.marketPrice.toFixed(4)} per $Ember (from Coinbase)
                         </div>
                     </div>
                 </div>
@@ -459,14 +506,14 @@ function getAdvertiserTokenContent() {
                 <div style="text-align: center; padding: 20px;">
                     <div style="font-size: 4rem; margin-bottom: 20px;">💎</div>
                     <h3 style="font-size: 2rem; color: var(--color-primary-gold); margin-bottom: 15px;">
-                        Purchase $Ember Tokens
+                        Purchase $Ember from Coinbase
                     </h3>
                     <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 25px;">
-                        To add token stops to campaigns, you must first purchase $Ember tokens. These tokens fund your 
-                        location stops and include your advertisements that players see when collecting.
+                        To add token stops to campaigns, you must first purchase $Ember tokens from Coinbase at market price. 
+                        These tokens fund your location stops and include your advertisements that players see when collecting.
                     </p>
                     <button class="btn btn-primary btn-large" onclick="loadSection('wallet')" style="font-size: 1.2rem; padding: 18px 40px;">
-                        Buy $Ember Tokens
+                        Buy $Ember from Coinbase
                     </button>
                 </div>
             </div>
@@ -480,9 +527,9 @@ function getAdvertiserTokenContent() {
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 25px;">
                     <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
                         <div style="font-size: 2.5rem; margin-bottom: 10px;">1️⃣</div>
-                        <h4 style="margin-bottom: 10px;">Purchase Tokens</h4>
+                        <h4 style="margin-bottom: 10px;">Purchase from Coinbase</h4>
                         <p style="color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
-                            Buy $Ember tokens at current market price to fund your token stops in campaigns.
+                            Buy $Ember tokens directly from Coinbase at current market price to fund your token stops.
                         </p>
                     </div>
                     
@@ -514,7 +561,7 @@ function getAdvertiserTokenContent() {
                 <div style="background: rgba(34,197,94,0.15); border: 2px solid rgba(34,197,94,0.4); border-radius: 12px; padding: 20px;">
                     <h4 style="color: #22c55e; margin-bottom: 12px;">💰 The Circular Economy</h4>
                     <p style="color: rgba(255,255,255,0.9); margin: 0; line-height: 1.7;">
-                        You purchase $Ember → Fund token stops with ads → Players collect & see your ad → 
+                        You purchase $Ember from Coinbase → Fund token stops with ads → Players collect & see your ad → 
                         Players visit to redeem → You scan QR & receive $Ember back → Reuse tokens for more stops!
                     </p>
                 </div>
