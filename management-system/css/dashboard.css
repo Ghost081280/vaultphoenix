@@ -68,7 +68,7 @@
     gap: var(--spacing-md);
 }
 
-/* Token Balance Widget (Platform Operators & SDK Customers Only) */
+/* Token Balance Widget (Campaign Managers Only) */
 .token-balance-widget {
     display: flex;
     align-items: center;
@@ -106,71 +106,6 @@
 .token-value {
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.6);
-}
-
-/* Role Switcher (Demo Mode) */
-.role-switcher {
-    position: relative;
-}
-
-.role-switcher-btn {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--button-radius);
-    padding: 10px 20px;
-    color: white;
-    cursor: pointer;
-    transition: all var(--transition-normal);
-}
-
-.role-switcher-btn:hover {
-    border-color: var(--card-border-hover);
-}
-
-.role-dropdown {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    background: rgba(15, 15, 15, 0.98);
-    border: 2px solid var(--card-border);
-    border-radius: var(--card-radius-small);
-    padding: var(--spacing-sm);
-    min-width: 250px;
-    box-shadow: var(--card-shadow);
-    backdrop-filter: blur(20px);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all var(--transition-normal);
-    z-index: var(--z-dropdown);
-}
-
-.role-dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.role-option {
-    padding: 12px 16px;
-    border-radius: var(--card-radius-small);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.role-option:hover {
-    background: var(--card-bg);
-}
-
-.role-option.active {
-    background: var(--gradient-fire);
-    font-weight: var(--font-weight-bold);
 }
 
 /* Notification Bell */
@@ -257,12 +192,23 @@
     margin-bottom: var(--spacing-xl);
     padding-bottom: var(--spacing-lg);
     border-bottom: 2px solid var(--card-border);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.sidebar-logo:hover {
+    opacity: 0.8;
 }
 
 .sidebar-logo img {
     width: 50px;
     height: 50px;
     filter: drop-shadow(0 0 15px rgba(215, 51, 39, 0.5));
+    transition: transform var(--transition-normal);
+}
+
+.sidebar-logo:hover img {
+    transform: scale(1.05);
 }
 
 .sidebar-brand {
@@ -963,35 +909,13 @@
     background: rgba(255, 255, 255, 0.03);
 }
 
-.tier-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-}
+/* ============================================
+   CENTERED WALLET LAYOUT
+   ============================================ */
 
-.tier-platinum {
-    background: linear-gradient(135deg, #e5e7eb, #9ca3af);
-    color: #000;
-}
-
-.tier-gold {
-    background: var(--gradient-ember);
-    color: #000;
-}
-
-.tier-silver {
-    background: rgba(156, 163, 175, 0.3);
-    color: #d1d5db;
-    border: 1px solid #9ca3af;
-}
-
-.tier-bronze {
-    background: rgba(180, 83, 9, 0.3);
-    color: #fdba74;
-    border: 1px solid #b45309;
+.wallet-centered {
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 /* ============================================
