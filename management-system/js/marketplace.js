@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Campaign Marketplace - For Advertisers
+   Campaign Marketplace - QR Scanner Model
    ============================================ */
 
 // ============================================
@@ -17,14 +17,15 @@ const MarketplaceData = {
             status: 'live',
             activePlayers: 847,
             coverage: 'Phoenix Metro Area',
-            minBudget: 500,
+            minMonthlyFee: 200,
             demographics: 'Ages 18-45, Gaming enthusiasts',
             totalLocations: 3,
             advertiserLocations: 1,
-            avgFootTraffic: 850,
-            cpm: 15.50,
+            avgQRScans: 850,
+            avgEmberPerScan: 50,
             engagement: 87.3,
-            isParticipating: true // Advertiser is already in this campaign
+            isParticipating: true,
+            scannerRequired: true
         },
         {
             id: 'camp-002',
@@ -34,14 +35,15 @@ const MarketplaceData = {
             status: 'live',
             activePlayers: 423,
             coverage: 'Scottsdale & Tempe',
-            minBudget: 350,
+            minMonthlyFee: 200,
             demographics: 'Ages 21-35, Active lifestyle',
             totalLocations: 28,
             advertiserLocations: 0,
-            avgFootTraffic: 420,
-            cpm: 12.75,
+            avgQRScans: 420,
+            avgEmberPerScan: 45,
             engagement: 82.1,
-            isParticipating: false
+            isParticipating: false,
+            scannerRequired: true
         },
         {
             id: 'camp-003',
@@ -51,14 +53,15 @@ const MarketplaceData = {
             status: 'live',
             activePlayers: 634,
             coverage: 'Downtown Phoenix',
-            minBudget: 750,
+            minMonthlyFee: 500,
             demographics: 'Ages 25-50, Urban professionals',
             totalLocations: 35,
             advertiserLocations: 0,
-            avgFootTraffic: 720,
-            cpm: 18.25,
+            avgQRScans: 720,
+            avgEmberPerScan: 55,
             engagement: 91.4,
-            isParticipating: false
+            isParticipating: false,
+            scannerRequired: true
         }
     ]
 };
@@ -78,7 +81,8 @@ function getMarketplaceContent(role) {
         <div class="dashboard-section">
             <h2 class="section-title">🛒 Campaign Marketplace</h2>
             <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 30px;">
-                Browse active AR crypto gaming campaigns and advertise your location to drive real foot traffic.
+                Browse active AR crypto gaming campaigns. Players collect tokens, then visit your location to exchange 
+                $Ember for your products/services using QR codes.
             </p>
             
             <!-- My Active Campaigns -->
@@ -117,8 +121,8 @@ function getMarketplaceContent(role) {
                                             <div style="font-weight: 700;">${campaign.totalLocations}</div>
                                         </div>
                                         <div>
-                                            <div style="color: rgba(255,255,255,0.6);">Active Players</div>
-                                            <div style="font-weight: 700;">${campaign.activePlayers.toLocaleString()}</div>
+                                            <div style="color: rgba(255,255,255,0.6);">QR Scans/Month</div>
+                                            <div style="font-weight: 700;">${campaign.avgQRScans}</div>
                                         </div>
                                         <div>
                                             <div style="color: rgba(255,255,255,0.6);">Engagement</div>
@@ -131,8 +135,8 @@ function getMarketplaceContent(role) {
                                     <button class="btn btn-primary" onclick="loadCampaignControl('${campaign.id}')" style="flex: 1;">
                                         Manage Campaign
                                     </button>
-                                    <button class="btn btn-secondary" onclick="requestAirdropForCampaign('${campaign.id}')">
-                                        Request Airdrop
+                                    <button class="btn btn-secondary" onclick="openScannerApp()">
+                                        📱 Scanner
                                     </button>
                                 </div>
                             </div>
@@ -140,6 +144,49 @@ function getMarketplaceContent(role) {
                     </div>
                 </div>
             ` : ''}
+            
+            <!-- How The QR Exchange Works -->
+            <div class="card" style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.3); margin-bottom: 30px;">
+                <h3 style="color: #22c55e; margin-bottom: 20px; font-size: 1.5rem;">
+                    📱 How The $Ember Exchange Works
+                </h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                    <div style="text-align: center; padding: 15px;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">1️⃣</div>
+                        <h4 style="margin-bottom: 8px;">Players Collect</h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
+                            Players find $Ember tokens at your location via AR game
+                        </p>
+                    </div>
+                    <div style="text-align: center; padding: 15px;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">2️⃣</div>
+                        <h4 style="margin-bottom: 8px;">They Visit You</h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
+                            Players come to redeem $Ember for your offers
+                        </p>
+                    </div>
+                    <div style="text-align: center; padding: 15px;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">3️⃣</div>
+                        <h4 style="margin-bottom: 8px;">Scan QR Code</h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
+                            Use Scanner App to receive their $Ember payment
+                        </p>
+                    </div>
+                    <div style="text-align: center; padding: 15px;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">4️⃣</div>
+                        <h4 style="margin-bottom: 8px;">You Get Paid</h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
+                            $Ember transfers to your account instantly
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                    <strong style="color: var(--color-primary-gold);">💡 Your Investment:</strong> Monthly location fee only. 
+                    No per-transaction fees on $Ember exchanges. Players bring the tokens to you!
+                </div>
+            </div>
             
             <!-- Search & Filter -->
             <div class="card" style="margin-bottom: 30px;">
@@ -164,8 +211,8 @@ function getMarketplaceContent(role) {
                         <select class="form-input" id="budgetFilter">
                             <option value="">Any Budget</option>
                             <option value="low">$200 - $500</option>
-                            <option value="medium">$500 - $1,500</option>
-                            <option value="high">$1,500+</option>
+                            <option value="medium">$500 - $1,200</option>
+                            <option value="high">$1,200+</option>
                         </select>
                     </div>
                 </div>
@@ -206,8 +253,8 @@ function getMarketplaceContent(role) {
                                         <div style="font-weight: 700;">${campaign.totalLocations}</div>
                                     </div>
                                     <div>
-                                        <div style="color: rgba(255,255,255,0.6);">Coverage</div>
-                                        <div style="font-weight: 700;">${campaign.coverage}</div>
+                                        <div style="color: rgba(255,255,255,0.6);">Avg QR Scans</div>
+                                        <div style="font-weight: 700;">${campaign.avgQRScans}/mo</div>
                                     </div>
                                     <div>
                                         <div style="color: rgba(255,255,255,0.6);">Engagement</div>
@@ -219,20 +266,26 @@ function getMarketplaceContent(role) {
                             <div style="padding: 12px; background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 8px; margin-bottom: 15px;">
                                 <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 5px;">Target Demographics</div>
                                 <div style="font-size: 0.95rem; font-weight: 600;">${campaign.demographics}</div>
+                                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 8px;">Coverage: ${campaign.coverage}</div>
                             </div>
                             
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                <div>
-                                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Min. Monthly</div>
-                                    <div style="font-size: 1.3rem; font-weight: 900; color: var(--color-primary-gold);">
-                                        $${campaign.minBudget}
+                            <div style="padding: 15px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px; margin-bottom: 15px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <div>
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Starting At</div>
+                                        <div style="font-size: 1.5rem; font-weight: 900; color: var(--color-primary-gold);">
+                                            $${campaign.minMonthlyFee}/mo
+                                        </div>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Est. $Ember/Month</div>
+                                        <div style="font-size: 1.3rem; font-weight: 900; color: #22c55e;">
+                                            ${(campaign.avgQRScans * campaign.avgEmberPerScan).toLocaleString()}
+                                        </div>
                                     </div>
                                 </div>
-                                <div style="text-align: right;">
-                                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Avg. Traffic</div>
-                                    <div style="font-size: 1.3rem; font-weight: 900;">
-                                        ${campaign.avgFootTraffic}/mo
-                                    </div>
+                                <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    📱 Includes Scanner App access
                                 </div>
                             </div>
                             
@@ -241,6 +294,61 @@ function getMarketplaceContent(role) {
                             </button>
                         </div>
                     `).join('')}
+                </div>
+            </div>
+            
+            <!-- Pricing Tiers -->
+            <div class="dashboard-section">
+                <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
+                    💳 Location Placement Tiers
+                </h3>
+                
+                <div class="apps-grid">
+                    <div class="card">
+                        <h4 style="color: var(--color-primary-orange); margin-bottom: 10px;">Bronze Tier</h4>
+                        <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-gold); margin-bottom: 15px;">
+                            $200<span style="font-size: 1rem; color: rgba(255,255,255,0.6);">/month</span>
+                        </div>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Basic visibility</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Standard placement</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Monthly reporting</li>
+                            <li style="padding: 8px 0;">✓ Scanner App access</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card" style="border: 2px solid var(--color-primary-gold);">
+                        <div style="background: var(--gradient-ember); padding: 4px 12px; border-radius: 6px; display: inline-block; margin-bottom: 10px; font-size: 0.8rem; font-weight: 700;">
+                            MOST POPULAR
+                        </div>
+                        <h4 style="color: var(--color-primary-orange); margin-bottom: 10px;">Silver Tier</h4>
+                        <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-gold); margin-bottom: 15px;">
+                            $500<span style="font-size: 1rem; color: rgba(255,255,255,0.6);">/month</span>
+                        </div>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Enhanced visibility</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Priority placement</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Weekly reporting</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Custom branding</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Scanner App access</li>
+                            <li style="padding: 8px 0;">✓ QR analytics</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4 style="color: var(--color-primary-orange); margin-bottom: 10px;">Gold Tier</h4>
+                        <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-gold); margin-bottom: 15px;">
+                            $1,200<span style="font-size: 1rem; color: rgba(255,255,255,0.6);">/month</span>
+                        </div>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Featured placement</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Exclusive territory</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Daily reporting</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Premium support</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Scanner App access</li>
+                            <li style="padding: 8px 0;">✓ Real-time QR tracking</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             
@@ -255,31 +363,31 @@ function getMarketplaceContent(role) {
                         <div style="font-size: 2rem; margin-bottom: 10px;">1️⃣</div>
                         <h4 style="margin-bottom: 10px;">Choose a Campaign</h4>
                         <p style="color: rgba(255,255,255,0.7); margin: 0;">
-                            Browse active AR gaming campaigns and select one that matches your target demographics and area.
+                            Browse campaigns that match your demographics and coverage area. Pay a simple monthly location fee.
                         </p>
                     </div>
                     
                     <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">2️⃣</div>
-                        <h4 style="margin-bottom: 10px;">Add Token Locations</h4>
+                        <h4 style="margin-bottom: 10px;">Setup Your Offers</h4>
                         <p style="color: rgba(255,255,255,0.7); margin: 0;">
-                            Add your business locations with $Ember tokens. Include sponsor messages and call-to-action buttons.
+                            Define what players can exchange $Ember for: discounts, free items, special offers. You set the value.
                         </p>
                     </div>
                     
                     <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">3️⃣</div>
-                        <h4 style="margin-bottom: 10px;">Request Airdrops</h4>
+                        <h4 style="margin-bottom: 10px;">Get Scanner App</h4>
                         <p style="color: rgba(255,255,255,0.7); margin: 0;">
-                            Request player airdrops to drive immediate foot traffic during peak hours or special events.
+                            Download the free Scanner App. Use it to scan player QR codes and receive $Ember instantly.
                         </p>
                     </div>
                     
                     <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">4️⃣</div>
-                        <h4 style="margin-bottom: 10px;">Track Performance</h4>
+                        <h4 style="margin-bottom: 10px;">Track & Optimize</h4>
                         <p style="color: rgba(255,255,255,0.7); margin: 0;">
-                            Monitor GPS-verified foot traffic, engagement metrics, and ROI in real-time from your campaign dashboard.
+                            Monitor GPS-verified visits, QR scans, and $Ember exchanges. Adjust offers to maximize ROI.
                         </p>
                     </div>
                 </div>
@@ -296,16 +404,21 @@ function joinCampaign(campaignId) {
     
     if (!campaign) return;
     
+    const estimatedEmber = campaign.avgQRScans * campaign.avgEmberPerScan;
+    const estimatedValue = (estimatedEmber * 0.0035).toFixed(2);
+    
     const confirmMsg = `Join "${campaign.name}"?\n\n` +
         `📍 Coverage: ${campaign.coverage}\n` +
         `👥 Active Players: ${campaign.activePlayers.toLocaleString()}\n` +
-        `💰 Minimum Budget: $${campaign.minBudget}/month\n` +
-        `📊 Engagement Rate: ${campaign.engagement}%\n\n` +
-        `After joining, you'll be able to:\n` +
-        `• Add your token locations\n` +
-        `• Configure sponsor messages\n` +
-        `• Request player airdrops\n` +
-        `• Track GPS-verified visitors\n\n` +
+        `💰 Starting At: $${campaign.minMonthlyFee}/month\n` +
+        `📱 Avg QR Scans: ${campaign.avgQRScans}/month\n` +
+        `💎 Est. $Ember Received: ${estimatedEmber.toLocaleString()} ($${estimatedValue} value)\n` +
+        `📊 Engagement: ${campaign.engagement}%\n\n` +
+        `After joining, you'll:\n` +
+        `• Add your location & offers\n` +
+        `• Get the Scanner App\n` +
+        `• Start receiving $Ember from players\n` +
+        `• Track all exchanges in real-time\n\n` +
         `Continue?`;
     
     if (confirm(confirmMsg)) {
@@ -318,16 +431,16 @@ function joinCampaign(campaignId) {
         alert(`✓ Welcome to ${campaign.name}!\n\n` +
             `You've successfully joined the campaign.\n\n` +
             `Next Steps:\n` +
-            `1. Add your first token location\n` +
-            `2. Configure sponsor messages\n` +
-            `3. Fund your campaign with tokens\n\n` +
-            `Redirecting to campaign control...`);
+            `1. Add your first location\n` +
+            `2. Define your $Ember offers\n` +
+            `3. Download the Scanner App\n` +
+            `4. Start accepting $Ember from players!\n\n` +
+            `Redirecting to campaign setup...`);
         
         // Redirect to campaign control
         if (typeof window.loadCampaignControl === 'function') {
             window.loadCampaignControl(campaignId);
         } else {
-            alert('Campaign control is loading...');
             if (typeof window.loadSection === 'function') {
                 window.loadSection('marketplace');
             }
@@ -387,15 +500,15 @@ function getAdvertisersContent(role) {
                 <div class="stat-card">
                     <div class="stat-icon">💰</div>
                     <div class="stat-label">Monthly Recurring Revenue</div>
-                    <div class="stat-value">$650</div>
-                    <div class="stat-change">Location + Tokens</div>
+                    <div class="stat-value">$500</div>
+                    <div class="stat-change">Location fees</div>
                 </div>
                 
                 <div class="stat-card">
-                    <div class="stat-icon">📊</div>
-                    <div class="stat-label">Avg Revenue per Advertiser</div>
-                    <div class="stat-value">$650</div>
-                    <div class="stat-change">Per month</div>
+                    <div class="stat-icon">📱</div>
+                    <div class="stat-label">Total QR Scans</div>
+                    <div class="stat-value">847</div>
+                    <div class="stat-change positive">This month</div>
                 </div>
             </div>
             
@@ -412,8 +525,9 @@ function getAdvertisersContent(role) {
                                 <th>Locations</th>
                                 <th>Tier</th>
                                 <th>Monthly Fee</th>
+                                <th>QR Scans</th>
+                                <th>$Ember Received</th>
                                 <th>Status</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -423,10 +537,9 @@ function getAdvertisersContent(role) {
                                 <td>1</td>
                                 <td><span class="tier-badge tier-silver">Silver</span></td>
                                 <td>$500</td>
+                                <td>847</td>
+                                <td>42,350</td>
                                 <td><span class="badge badge-success">Active</span></td>
-                                <td>
-                                    <button class="btn btn-small btn-outline">View</button>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
