@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   App Setup - White Label Builder & SDK Integration (Enhanced Live Preview)
+   App Setup - White Label Builder & SDK Integration (Enhanced)
    ============================================ */
 
 // ============================================
@@ -20,12 +20,7 @@ const AppSetupState = {
         buttonStyle: 'gradient',
         borderRadius: '12px',
         appDescription: '',
-        appIcon: null,
-        tokenName: '$Ember',
-        tokenSymbol: '💎',
-        enableAR: true,
-        enableMap: true,
-        enableVault: true
+        appIcon: null
     },
     sdk: {
         platform: null,
@@ -33,7 +28,6 @@ const AppSetupState = {
         apiKey: null,
         integrationStatus: 'pending'
     },
-    // Template URL for live preview
     playerAppTemplate: 'https://ghost081280.github.io/vaultphoenix/crypto-game/dashboard.html'
 };
 
@@ -89,7 +83,7 @@ function getAppSetupContent(role) {
                     <div style="text-align: center;">
                         <div style="font-size: 4rem; margin-bottom: 20px;">🔌</div>
                         <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">SDK Integration</h3>
-                        <p style="color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 20px;">
+                        <p style="color: rgba(255,255,255,0.7); line-line: 1.6; margin-bottom: 20px;">
                             Integrate Vault Phoenix into your existing app. Add location-based gaming features 
                             with our developer-friendly SDK.
                         </p>
@@ -129,251 +123,256 @@ function getAppSetupContent(role) {
                         </button>
                     </div>
                     
-                    <div class="revenue-grid">
-                        <!-- Builder Form - Enhanced -->
-                        <div class="card" style="max-height: 800px; overflow-y: auto;">
-                            <h4 style="margin-bottom: 20px; color: var(--color-primary-orange);">App Configuration</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                        <!-- App Configuration - Equal Height -->
+                        <div class="card" style="display: flex; flex-direction: column; height: 900px;">
+                            <h4 style="margin-bottom: 20px; color: var(--color-primary-orange); flex-shrink: 0;">⚙️ App Configuration</h4>
                             
-                            <!-- Basic Info -->
-                            <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <h5 style="color: var(--color-primary-gold); margin-bottom: 15px;">📱 Basic Info</h5>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">App Name *</label>
-                                    <input type="text" class="form-input" id="appName" placeholder="My AR Crypto Hunt" value="My AR Crypto Hunt" oninput="updateLivePreview()">
+                            <div style="flex: 1; overflow-y: auto; padding-right: 10px;">
+                                <!-- Basic Info -->
+                                <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <h5 style="color: var(--color-primary-gold); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                        <span>📱</span> App Identity
+                                    </h5>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">App Name *</label>
+                                        <input type="text" class="form-input" id="appName" placeholder="My AR Crypto Hunt" value="$Ember Hunt" oninput="updateLivePreview()">
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">
+                                            This appears in the app header and navigation
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">App Tagline</label>
+                                        <textarea class="form-input" id="appDescription" rows="2" placeholder="Discover crypto rewards in the real world!" oninput="updateLivePreview()">Discover crypto rewards in the real world!</textarea>
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">
+                                            Shown on login screen and app store
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">App Logo (Square, 1024x1024 recommended)</label>
+                                        <input type="file" class="form-input" id="appLogo" accept="image/*" onchange="previewLogo(event)">
+                                        <div id="logoPreview" style="margin-top: 10px; display: none;">
+                                            <img id="logoPreviewImg" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 2px solid var(--color-primary-gold);">
+                                        </div>
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">
+                                            Used in navigation bar, login screen, and app icon
+                                        </div>
+                                    </div>
                                 </div>
                                 
-                                <div class="form-group">
-                                    <label class="form-label">App Description</label>
-                                    <textarea class="form-input" id="appDescription" rows="3" placeholder="Discover crypto rewards in the real world!" oninput="updateLivePreview()">Discover crypto rewards in the real world!</textarea>
+                                <!-- Token Info (Read-only) -->
+                                <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <h5 style="color: var(--color-primary-gold); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                        <span>💎</span> Token Integration
+                                    </h5>
+                                    
+                                    <div style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 20px;">
+                                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                            <img src="../images/VPEmberCoin.PNG" alt="Ember" style="width: 50px; height: 50px; border-radius: 50%;" onerror="this.textContent='💎'">
+                                            <div style="flex: 1;">
+                                                <div style="font-weight: 700; font-size: 1.2rem; color: var(--color-primary-gold); margin-bottom: 5px;">
+                                                    $Ember Tokens
+                                                </div>
+                                                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                                                    Official Vault Phoenix Currency
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5;">
+                                            ✓ All campaigns use $Ember tokens<br>
+                                            ✓ Players collect and redeem at your locations<br>
+                                            ✓ Integrated with Coinbase Wallet<br>
+                                            ✓ Blockchain-verified transactions
+                                        </div>
+                                    </div>
                                 </div>
                                 
-                                <div class="form-group">
-                                    <label class="form-label">App Logo (Square, PNG/JPG)</label>
-                                    <input type="file" class="form-input" id="appLogo" accept="image/*" onchange="previewLogo(event)">
-                                    <div id="logoPreview" style="margin-top: 10px; display: none;">
-                                        <img id="logoPreviewImg" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover;">
+                                <!-- Brand Colors -->
+                                <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <h5 style="color: var(--color-primary-gold); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                        <span>🎨</span> Brand Colors
+                                    </h5>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Primary Color (Main UI Elements)</label>
+                                        <div style="display: flex; gap: 10px; align-items: center;">
+                                            <input type="color" class="form-input" id="primaryColor" value="#f0a500" onchange="updateLivePreview()" style="width: 70px; height: 50px; padding: 5px; cursor: pointer;">
+                                            <input type="text" class="form-input" id="primaryColorHex" value="#f0a500" oninput="syncColorInput('primary', this.value)" style="flex: 1; font-family: monospace;">
+                                        </div>
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">
+                                            Navigation, buttons, token badges
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Secondary Color (Gradients & Accents)</label>
+                                        <div style="display: flex; gap: 10px; align-items: center;">
+                                            <input type="color" class="form-input" id="secondaryColor" value="#fb923c" onchange="updateLivePreview()" style="width: 70px; height: 50px; padding: 5px; cursor: pointer;">
+                                            <input type="text" class="form-input" id="secondaryColorHex" value="#fb923c" oninput="syncColorInput('secondary', this.value)" style="flex: 1; font-family: monospace;">
+                                        </div>
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">
+                                            Button gradients, hover states
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Accent Color (Highlights)</label>
+                                        <div style="display: flex; gap: 10px; align-items: center;">
+                                            <input type="color" class="form-input" id="accentColor" value="#d73327" onchange="updateLivePreview()" style="width: 70px; height: 50px; padding: 5px; cursor: pointer;">
+                                            <input type="text" class="form-input" id="accentColorHex" value="#d73327" oninput="syncColorInput('accent', this.value)" style="flex: 1; font-family: monospace;">
+                                        </div>
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">
+                                            Alert notifications, special elements
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Background Theme</label>
+                                        <div style="display: flex; gap: 10px; align-items: center;">
+                                            <input type="color" class="form-input" id="backgroundColor" value="#1a1a1a" onchange="updateLivePreview()" style="width: 70px; height: 50px; padding: 5px; cursor: pointer;">
+                                            <input type="text" class="form-input" id="backgroundColorHex" value="#1a1a1a" oninput="syncColorInput('background', this.value)" style="flex: 1; font-family: monospace;">
+                                        </div>
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">
+                                            Main background and card surfaces
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- UI Style -->
+                                <div style="margin-bottom: 25px;">
+                                    <h5 style="color: var(--color-primary-gold); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                        <span>✨</span> UI Style
+                                    </h5>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Button Style</label>
+                                        <select class="form-input" id="buttonStyle" onchange="updateLivePreview()">
+                                            <option value="gradient">Gradient (Recommended)</option>
+                                            <option value="solid">Solid Color</option>
+                                            <option value="outline">Outline</option>
+                                        </select>
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">
+                                            How buttons appear throughout the app
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Corner Roundness</label>
+                                        <select class="form-input" id="borderRadius" onchange="updateLivePreview()">
+                                            <option value="4px">Sharp (4px)</option>
+                                            <option value="8px">Subtle (8px)</option>
+                                            <option value="12px" selected>Standard (12px)</option>
+                                            <option value="16px">Rounded (16px)</option>
+                                            <option value="24px">Very Rounded (24px)</option>
+                                        </select>
+                                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">
+                                            Border radius for cards and buttons
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- Token Configuration -->
-                            <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <h5 style="color: var(--color-primary-gold); margin-bottom: 15px;">💎 Token Configuration</h5>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Token Name</label>
-                                    <input type="text" class="form-input" id="tokenName" value="$Ember" oninput="updateLivePreview()">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Token Symbol (Emoji)</label>
-                                    <input type="text" class="form-input" id="tokenSymbol" value="💎" maxlength="2" oninput="updateLivePreview()">
-                                </div>
+                            <!-- Deploy Button - Fixed at bottom -->
+                            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); flex-shrink: 0;">
+                                <button class="btn btn-primary btn-large" onclick="deployWhiteLabelApp()" style="width: 100%;">
+                                    🚀 Deploy Your White Label App
+                                </button>
                             </div>
-                            
-                            <!-- Brand Colors -->
-                            <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <h5 style="color: var(--color-primary-gold); margin-bottom: 15px;">🎨 Brand Colors</h5>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Primary Color (Buttons, Highlights)</label>
-                                    <div style="display: flex; gap: 10px; align-items: center;">
-                                        <input type="color" class="form-input" id="primaryColor" value="#f0a500" onchange="updateLivePreview()" style="width: 80px; height: 50px; padding: 5px;">
-                                        <input type="text" class="form-input" id="primaryColorHex" value="#f0a500" oninput="syncColorInput('primary', this.value)" style="flex: 1;">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Secondary Color (Gradients)</label>
-                                    <div style="display: flex; gap: 10px; align-items: center;">
-                                        <input type="color" class="form-input" id="secondaryColor" value="#fb923c" onchange="updateLivePreview()" style="width: 80px; height: 50px; padding: 5px;">
-                                        <input type="text" class="form-input" id="secondaryColorHex" value="#fb923c" oninput="syncColorInput('secondary', this.value)" style="flex: 1;">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Accent Color (Icons, Links)</label>
-                                    <div style="display: flex; gap: 10px; align-items: center;">
-                                        <input type="color" class="form-input" id="accentColor" value="#d73327" onchange="updateLivePreview()" style="width: 80px; height: 50px; padding: 5px;">
-                                        <input type="text" class="form-input" id="accentColorHex" value="#d73327" oninput="syncColorInput('accent', this.value)" style="flex: 1;">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Background Color</label>
-                                    <div style="display: flex; gap: 10px; align-items: center;">
-                                        <input type="color" class="form-input" id="backgroundColor" value="#1a1a1a" onchange="updateLivePreview()" style="width: 80px; height: 50px; padding: 5px;">
-                                        <input type="text" class="form-input" id="backgroundColorHex" value="#1a1a1a" oninput="syncColorInput('background', this.value)" style="flex: 1;">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Text Color</label>
-                                    <div style="display: flex; gap: 10px; align-items: center;">
-                                        <input type="color" class="form-input" id="textColor" value="#ffffff" onchange="updateLivePreview()" style="width: 80px; height: 50px; padding: 5px;">
-                                        <input type="text" class="form-input" id="textColorHex" value="#ffffff" oninput="syncColorInput('text', this.value)" style="flex: 1;">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- UI Style -->
-                            <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <h5 style="color: var(--color-primary-gold); margin-bottom: 15px;">✨ UI Style</h5>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Button Style</label>
-                                    <select class="form-input" id="buttonStyle" onchange="updateLivePreview()">
-                                        <option value="gradient">Gradient</option>
-                                        <option value="solid">Solid</option>
-                                        <option value="outline">Outline</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Border Radius</label>
-                                    <select class="form-input" id="borderRadius" onchange="updateLivePreview()">
-                                        <option value="4px">Sharp (4px)</option>
-                                        <option value="8px">Subtle (8px)</option>
-                                        <option value="12px" selected>Standard (12px)</option>
-                                        <option value="16px">Rounded (16px)</option>
-                                        <option value="24px">Very Rounded (24px)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <!-- Features -->
-                            <div style="margin-bottom: 25px;">
-                                <h5 style="color: var(--color-primary-gold); margin-bottom: 15px;">🎮 Features</h5>
-                                
-                                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
-                                    <input type="checkbox" id="enableAR" checked onchange="updateLivePreview()" style="width: 20px; height: 20px;">
-                                    <label class="form-label" style="margin: 0;">Enable AR Hunt Mode</label>
-                                </div>
-                                
-                                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
-                                    <input type="checkbox" id="enableMap" checked onchange="updateLivePreview()" style="width: 20px; height: 20px;">
-                                    <label class="form-label" style="margin: 0;">Enable Map View</label>
-                                </div>
-                                
-                                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
-                                    <input type="checkbox" id="enableVault" checked onchange="updateLivePreview()" style="width: 20px; height: 20px;">
-                                    <label class="form-label" style="margin: 0;">Enable Token Vault</label>
-                                </div>
-                            </div>
-                            
-                            <button class="btn btn-primary btn-large" onclick="deployWhiteLabelApp()" style="width: 100%;">
-                                🚀 Deploy App
-                            </button>
                         </div>
                         
-                        <!-- Live Preview with Real Game Frame -->
-                        <div class="card">
-                            <h4 style="margin-bottom: 20px; color: var(--color-primary-orange);">📱 Live Preview</h4>
+                        <!-- Live Preview - Equal Height -->
+                        <div class="card" style="display: flex; flex-direction: column; height: 900px;">
+                            <h4 style="margin-bottom: 20px; color: var(--color-primary-orange); flex-shrink: 0;">📱 Live Preview</h4>
                             
-                            <!-- Phone Mockup Frame -->
-                            <div style="max-width: 380px; margin: 0 auto; position: relative;">
-                                <!-- Phone Frame -->
-                                <div style="
-                                    border: 14px solid #1a1a1a;
-                                    border-radius: 48px;
-                                    box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 0 0 2px #333;
-                                    position: relative;
-                                    padding: 0;
-                                    background: #000;
-                                    overflow: hidden;
-                                ">
-                                    <!-- Notch -->
+                            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; overflow: hidden;">
+                                <!-- Phone Mockup Frame -->
+                                <div style="position: relative; width: 100%; max-width: 340px; flex-shrink: 0;">
+                                    <!-- Phone Frame -->
                                     <div style="
-                                        position: absolute;
-                                        top: 0;
-                                        left: 50%;
-                                        transform: translateX(-50%);
-                                        width: 120px;
-                                        height: 28px;
-                                        background: #1a1a1a;
-                                        border-radius: 0 0 20px 20px;
-                                        z-index: 10;
-                                    "></div>
+                                        border: 12px solid #1a1a1a;
+                                        border-radius: 42px;
+                                        box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 0 0 2px #333;
+                                        position: relative;
+                                        padding: 0;
+                                        background: #000;
+                                        overflow: hidden;
+                                    ">
+                                        <!-- Notch -->
+                                        <div style="
+                                            position: absolute;
+                                            top: 0;
+                                            left: 50%;
+                                            transform: translateX(-50%);
+                                            width: 100px;
+                                            height: 24px;
+                                            background: #1a1a1a;
+                                            border-radius: 0 0 16px 16px;
+                                            z-index: 10;
+                                        "></div>
+                                        
+                                        <!-- Live Game Preview iFrame -->
+                                        <iframe 
+                                            id="gamePreviewFrame" 
+                                            src="https://ghost081280.github.io/vaultphoenix/crypto-game/dashboard.html"
+                                            style="
+                                                width: 100%;
+                                                height: 600px;
+                                                border: none;
+                                                border-radius: 28px;
+                                                background: #000;
+                                                display: block;
+                                            "
+                                            allow="geolocation; camera"
+                                            sandbox="allow-scripts allow-same-origin"
+                                        ></iframe>
+                                        
+                                        <!-- Home Indicator -->
+                                        <div style="
+                                            position: absolute;
+                                            bottom: 6px;
+                                            left: 50%;
+                                            transform: translateX(-50%);
+                                            width: 120px;
+                                            height: 4px;
+                                            background: rgba(255,255,255,0.3);
+                                            border-radius: 2px;
+                                            z-index: 10;
+                                        "></div>
+                                    </div>
                                     
-                                    <!-- Live Game Preview iFrame -->
-                                    <iframe 
-                                        id="gamePreviewFrame" 
-                                        src="https://ghost081280.github.io/vaultphoenix/crypto-game/dashboard.html"
-                                        style="
-                                            width: 100%;
-                                            height: 667px;
-                                            border: none;
-                                            border-radius: 32px;
-                                            background: #000;
-                                        "
-                                        allow="geolocation; camera"
-                                        sandbox="allow-scripts allow-same-origin"
-                                    ></iframe>
-                                    
-                                    <!-- Home Indicator -->
-                                    <div style="
-                                        position: absolute;
-                                        bottom: 8px;
-                                        left: 50%;
-                                        transform: translateX(-50%);
-                                        width: 140px;
-                                        height: 4px;
-                                        background: rgba(255,255,255,0.3);
-                                        border-radius: 2px;
-                                        z-index: 10;
-                                    "></div>
-                                </div>
-                                
-                                <!-- Phone Label -->
-                                <div style="text-align: center; margin-top: 15px; color: rgba(255,255,255,0.5); font-size: 0.85rem;">
-                                    📱 Real-Time Theme Preview
-                                </div>
-                            </div>
-                            
-                            <!-- Preview Controls -->
-                            <div style="margin-top: 20px; text-align: center;">
-                                <button class="btn btn-secondary" onclick="refreshPreview()" style="margin-right: 10px;">
-                                    🔄 Refresh Preview
-                                </button>
-                                <button class="btn btn-outline" onclick="openFullPreview()">
-                                    🔗 Open Full Screen
-                                </button>
-                            </div>
-                            
-                            <!-- Custom Domain Setup -->
-                            <div style="margin-top: 20px; padding: 20px; background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px;">
-                                <h4 style="color: var(--color-primary-gold); margin-bottom: 15px;">🌐 Custom Domain Setup</h4>
-                                
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <label class="form-label">Your Custom URL (Optional)</label>
-                                    <input type="text" class="form-input" id="customDomain" placeholder="hunt.yourdomain.com" oninput="updateCustomDomain()">
-                                    <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 8px;">
-                                        Enter your custom domain where your app will be hosted
+                                    <!-- Preview Controls -->
+                                    <div style="text-align: center; margin-top: 15px;">
+                                        <button class="btn btn-secondary" onclick="refreshPreview()">
+                                            🔄 Refresh Preview
+                                        </button>
                                     </div>
                                 </div>
                                 
-                                <div id="domainInstructions" style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px; display: none;">
-                                    <div style="font-weight: 700; margin-bottom: 10px;">📋 DNS Configuration Steps:</div>
-                                    <ol style="margin: 0; padding-left: 20px; color: rgba(255,255,255,0.8); font-size: 0.9rem;">
-                                        <li style="margin-bottom: 8px;">Login to your domain provider (GoDaddy, Namecheap, etc.)</li>
-                                        <li style="margin-bottom: 8px;">Go to DNS Management / DNS Settings</li>
-                                        <li style="margin-bottom: 8px;">Add a CNAME record:
-                                            <div style="background: rgba(0,0,0,0.5); padding: 10px; border-radius: 6px; margin-top: 8px; font-family: monospace;">
-                                                <strong>Type:</strong> CNAME<br>
-                                                <strong>Host:</strong> <span id="dnsHost">hunt</span><br>
-                                                <strong>Points to:</strong> vault-phoenix.app<br>
-                                                <strong>TTL:</strong> 3600
-                                            </div>
-                                        </li>
-                                        <li>Save changes and wait 5-10 minutes for DNS propagation</li>
-                                    </ol>
+                                <!-- Live Changes Indicator -->
+                                <div style="margin-top: 20px; padding: 15px; background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.3); border-radius: 12px; width: 100%; max-width: 340px; flex-shrink: 0;">
+                                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                        <div style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%; animation: pulse 2s ease-in-out infinite;"></div>
+                                        <div style="font-weight: 700; color: #22c55e;">Live Theme Preview</div>
+                                    </div>
+                                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.4;">
+                                        All changes update instantly in the app above. Your branding is applied in real-time across navigation, buttons, tokens, and UI elements.
+                                    </div>
+                                </div>
+                                
+                                <!-- Custom Domain Setup -->
+                                <div style="margin-top: 20px; padding: 15px; background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px; width: 100%; max-width: 340px; flex-shrink: 0;">
+                                    <h5 style="color: var(--color-primary-gold); margin-bottom: 12px; font-size: 1rem;">🌐 Custom Domain (Optional)</h5>
                                     
-                                    <div style="margin-top: 15px; padding: 12px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px;">
-                                        <div style="font-weight: 700; margin-bottom: 5px; color: #22c55e;">✓ After Setup:</div>
-                                        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">
-                                            Your app will be accessible at: <span style="color: var(--color-primary-gold); font-weight: 700;" id="finalUrl">https://hunt.yourdomain.com</span>
-                                        </div>
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <input type="text" class="form-input" id="customDomain" placeholder="hunt.yourdomain.com" oninput="updateCustomDomain()" style="font-size: 0.9rem;">
+                                    </div>
+                                    
+                                    <div id="domainInstructions" style="margin-top: 12px; font-size: 0.8rem; color: rgba(255,255,255,0.6); display: none;">
+                                        Your app will be accessible at:<br>
+                                        <span style="color: var(--color-primary-gold); font-weight: 700;" id="finalUrl"></span>
                                     </div>
                                 </div>
                             </div>
@@ -477,6 +476,32 @@ const vp = new VaultPhoenix({
                 </div>
             </div>
         </div>
+        
+        <style>
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+            
+            /* Custom scrollbar for app configuration */
+            .card > div::-webkit-scrollbar {
+                width: 6px;
+            }
+            
+            .card > div::-webkit-scrollbar-track {
+                background: rgba(255,255,255,0.05);
+                border-radius: 3px;
+            }
+            
+            .card > div::-webkit-scrollbar-thumb {
+                background: rgba(240,165,0,0.3);
+                border-radius: 3px;
+            }
+            
+            .card > div::-webkit-scrollbar-thumb:hover {
+                background: rgba(240,165,0,0.5);
+            }
+        </style>
     `;
 }
 
@@ -490,7 +515,6 @@ function selectSetupType(type) {
     
     if (type === 'white-label') {
         document.getElementById('whiteLabelBuilder').style.display = 'block';
-        // Initialize preview after DOM is ready
         setTimeout(() => {
             updateLivePreview();
         }, 100);
@@ -553,52 +577,44 @@ function updateLivePreview() {
     if (!iframe || !iframe.contentWindow) return;
     
     try {
-        // Get all values
-        const appName = document.getElementById('appName')?.value || 'My AR Crypto Hunt';
-        const tokenName = document.getElementById('tokenName')?.value || '$Ember';
-        const tokenSymbol = document.getElementById('tokenSymbol')?.value || '💎';
+        const appName = document.getElementById('appName')?.value || '$Ember Hunt';
         const primaryColor = document.getElementById('primaryColor')?.value || '#f0a500';
         const secondaryColor = document.getElementById('secondaryColor')?.value || '#fb923c';
         const accentColor = document.getElementById('accentColor')?.value || '#d73327';
         const backgroundColor = document.getElementById('backgroundColor')?.value || '#1a1a1a';
-        const textColor = document.getElementById('textColor')?.value || '#ffffff';
         const buttonStyle = document.getElementById('buttonStyle')?.value || 'gradient';
         const borderRadius = document.getElementById('borderRadius')?.value || '12px';
         
-        // Create custom CSS to inject
         const customCSS = `
             <style id="whiteLabelCustomCSS">
-                /* Override primary colors */
                 :root {
                     --primary-color: ${primaryColor};
                     --secondary-color: ${secondaryColor};
                     --accent-color: ${accentColor};
                     --bg-color: ${backgroundColor};
-                    --text-color: ${textColor};
                     --border-radius: ${borderRadius};
                 }
                 
-                /* Background gradient */
                 body, .crypto-dashboard-page {
                     background: linear-gradient(135deg, ${backgroundColor} 0%, ${shadeColor(backgroundColor, -10)} 25%, ${accentColor}20 50%, ${primaryColor}15 75%, ${secondaryColor}20 100%) !important;
                 }
                 
-                /* Primary color overrides */
                 .nav-logo,
                 .ember-count,
                 .airdrop-icon-container,
                 .token-coin,
                 .ar-token-coin,
-                .map-control-btn {
+                .map-control-btn,
+                .token-location-icon {
                     background: linear-gradient(135deg, ${primaryColor}, ${secondaryColor}) !important;
                     border-color: ${primaryColor} !important;
                 }
                 
-                /* Button styles */
                 ${buttonStyle === 'gradient' ? `
                 .login-button,
                 .airdrop-button,
                 .token-action-btn,
+                .vault-action-btn,
                 .btn-primary {
                     background: linear-gradient(135deg, ${primaryColor}, ${secondaryColor}) !important;
                     border: none !important;
@@ -607,6 +623,7 @@ function updateLivePreview() {
                 .login-button,
                 .airdrop-button,
                 .token-action-btn,
+                .vault-action-btn,
                 .btn-primary {
                     background: ${primaryColor} !important;
                     border: none !important;
@@ -615,6 +632,7 @@ function updateLivePreview() {
                 .login-button,
                 .airdrop-button,
                 .token-action-btn,
+                .vault-action-btn,
                 .btn-primary {
                     background: transparent !important;
                     border: 2px solid ${primaryColor} !important;
@@ -622,7 +640,6 @@ function updateLivePreview() {
                 }
                 `}
                 
-                /* Border radius */
                 .nav-logo,
                 .ember-count,
                 .map-control-btn,
@@ -630,55 +647,56 @@ function updateLivePreview() {
                 .ar-token-coin,
                 .form-input,
                 button,
-                .card {
+                .card,
+                .airdrop-content,
+                .token-modal-content,
+                .navigation-content {
                     border-radius: ${borderRadius} !important;
                 }
                 
-                /* Text colors */
-                .nav-title,
-                .ember-count-text,
-                .airdrop-title,
-                h1, h2, h3, h4 {
-                    color: ${textColor} !important;
-                }
-                
-                /* Accent color */
                 .airdrop-amount,
                 .ember-count-text,
-                .token-location-value {
+                .token-location-value,
+                .vault-balance-text,
+                .stat-value {
                     color: ${primaryColor} !important;
                 }
                 
-                /* Border colors */
                 .nav-logo,
                 .ember-count,
                 .side-menu,
                 .airdrop-content,
-                .token-modal-content {
+                .token-modal-content,
+                .token-location-item,
+                .quick-nav-btn {
                     border-color: ${primaryColor} !important;
+                }
+                
+                .side-menu {
+                    border-left-color: ${primaryColor} !important;
+                }
+                
+                .menu-item:hover,
+                .menu-item.active {
+                    border-left-color: ${primaryColor} !important;
                 }
             </style>
         `;
         
-        // Try to inject CSS into iframe
         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
         
-        // Remove old custom CSS if exists
         const oldStyle = iframeDoc.getElementById('whiteLabelCustomCSS');
         if (oldStyle) {
             oldStyle.remove();
         }
         
-        // Inject new CSS
         iframeDoc.head.insertAdjacentHTML('beforeend', customCSS);
         
-        // Update app name if element exists
         const navTitle = iframeDoc.querySelector('.nav-title');
         if (navTitle) {
             navTitle.textContent = appName;
         }
         
-        // Update logo if uploaded
         if (AppSetupState.whiteLabel.logo) {
             const logoImg = iframeDoc.querySelector('.nav-logo-image');
             if (logoImg) {
@@ -688,7 +706,6 @@ function updateLivePreview() {
         
     } catch (error) {
         console.log('Preview update:', error.message);
-        // Iframe might not be loaded yet or cross-origin restriction
     }
 }
 
@@ -712,18 +729,11 @@ function shadeColor(color, percent) {
 function refreshPreview() {
     const iframe = document.getElementById('gamePreviewFrame');
     if (iframe) {
-        iframe.src = iframe.src; // Reload iframe
+        iframe.src = iframe.src;
         setTimeout(() => {
             updateLivePreview();
         }, 500);
     }
-}
-
-/**
- * Open full preview
- */
-function openFullPreview() {
-    window.open(AppSetupState.playerAppTemplate, '_blank');
 }
 
 /**
@@ -732,18 +742,10 @@ function openFullPreview() {
 function updateCustomDomain() {
     const customDomain = document.getElementById('customDomain')?.value || '';
     const domainInstructions = document.getElementById('domainInstructions');
-    const dnsHost = document.getElementById('dnsHost');
     const finalUrl = document.getElementById('finalUrl');
     
     if (customDomain && domainInstructions) {
         domainInstructions.style.display = 'block';
-        
-        const parts = customDomain.split('.');
-        const subdomain = parts.length > 2 ? parts[0] : customDomain.split('.')[0];
-        
-        if (dnsHost) {
-            dnsHost.textContent = subdomain;
-        }
         
         if (finalUrl) {
             finalUrl.textContent = `https://${customDomain}`;
@@ -765,38 +767,29 @@ function deployWhiteLabelApp() {
         return;
     }
     
-    // Save all settings
     AppSetupState.whiteLabel.appName = appName;
     AppSetupState.whiteLabel.appDescription = document.getElementById('appDescription')?.value || '';
-    AppSetupState.whiteLabel.tokenName = document.getElementById('tokenName')?.value || '$Ember';
     AppSetupState.whiteLabel.primaryColor = document.getElementById('primaryColor')?.value || '#f0a500';
     AppSetupState.whiteLabel.secondaryColor = document.getElementById('secondaryColor')?.value || '#fb923c';
     AppSetupState.whiteLabel.accentColor = document.getElementById('accentColor')?.value || '#d73327';
-    AppSetupState.whiteLabel.enableAR = document.getElementById('enableAR')?.checked || true;
     
-    let deployMsg = `🚀 Deploying "${appName}"...\n\nYour white label app is being built with your custom branding.\n\n✓ App configured\n✓ ${AppSetupState.whiteLabel.tokenName} integration enabled\n✓ AR features activated\n✓ Custom theme applied`;
+    let deployMsg = `🚀 Deploying "${appName}"...\n\nYour white label app is being built with:\n\n✓ Custom branding applied\n✓ $Ember token integration\n✓ AR Hunt features enabled\n✓ Map view configured\n✓ Token vault activated`;
     
     if (customDomain) {
         deployMsg += `\n✓ Custom domain: ${customDomain}`;
     }
     
-    deployMsg += `\n\nYour app will be ready in 5-10 minutes. You'll receive an email with `;
-    
-    if (customDomain) {
-        deployMsg += `your custom URL and download links.`;
-    } else {
-        deployMsg += `download links and default hosting URL.`;
-    }
+    deployMsg += `\n\nDeployment will complete in 5-10 minutes.`;
     
     alert(deployMsg);
     
     setTimeout(() => {
-        let successMsg = `✓ "${appName}" Deployed Successfully!\n\nYour app is now live`;
+        let successMsg = `✅ "${appName}" Deployed Successfully!\n\nYour white label app is now live`;
         
         if (customDomain) {
             successMsg += ` at https://${customDomain}`;
         } else {
-            successMsg += ` and using the template:\n${AppSetupState.playerAppTemplate}`;
+            successMsg += `!`;
         }
         
         successMsg += `\n\nView it in the "Campaign Control" section.`;
@@ -859,10 +852,9 @@ function testIntegration() {
         return;
     }
     
-    alert(`🧪 Testing ${AppSetupState.sdk.platform.toUpperCase()} Integration...\n\n✓ API Key Valid\n✓ SDK Connection Established\n✓ Token System Ready\n✓ AR Features Available\n\nYour integration is working correctly!`);
+    alert(`🧪 Testing ${AppSetupState.sdk.platform.toUpperCase()} Integration...\n\n✓ API Key Valid\n✓ SDK Connection Established\n✓ $Ember Token System Ready\n✓ AR Features Available\n\nYour integration is working correctly!`);
 }
 
-// Export functions
 if (typeof window !== 'undefined') {
     window.getAppSetupContent = getAppSetupContent;
     window.selectSetupType = selectSetupType;
@@ -871,7 +863,6 @@ if (typeof window !== 'undefined') {
     window.syncColorInput = syncColorInput;
     window.updateLivePreview = updateLivePreview;
     window.refreshPreview = refreshPreview;
-    window.openFullPreview = openFullPreview;
     window.deployWhiteLabelApp = deployWhiteLabelApp;
     window.selectPlatform = selectPlatform;
     window.copyApiKey = copyApiKey;
