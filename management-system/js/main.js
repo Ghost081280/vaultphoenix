@@ -29,7 +29,7 @@ const AppState = {
 };
 
 // ============================================
-// ROLE CONFIGURATIONS - UPDATED
+// ROLE CONFIGURATIONS - FIXED
 // ============================================
 
 const RoleConfig = {
@@ -58,7 +58,6 @@ const RoleConfig = {
             { icon: '🛒', label: 'Campaign Marketplace', section: 'marketplace' },
             { icon: '💎', label: 'My $Ember Balance', section: 'tokens' },
             { icon: '👛', label: 'Buy $Ember Tokens', section: 'wallet' },
-            { icon: '🎁', label: 'Airdrop Requests', section: 'airdrop-requests' },
             { icon: '💳', label: 'Payment Center', section: 'payments' },
             { icon: '📈', label: 'Performance Analytics', section: 'analytics' },
             { icon: '💰', label: 'ROI Calculator', section: 'budget' },
@@ -68,7 +67,7 @@ const RoleConfig = {
 };
 
 // ============================================
-// ONBOARDING CONTENT
+// ONBOARDING CONTENT - FIXED
 // ============================================
 
 const OnboardingFlows = {
@@ -105,7 +104,7 @@ const OnboardingFlows = {
                             <div style="font-size: 3rem; margin-bottom: 15px;">1️⃣</div>
                             <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Advertiser Joins</h4>
                             <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
-                                Pays monthly location fee + buys $Ember tokens
+                                Pays monthly location fee + buys $Ember from Coinbase
                             </p>
                         </div>
                         
@@ -164,14 +163,14 @@ const OnboardingFlows = {
             content: `
                 <div style="padding: 20px;">
                     <h2 style="font-size: 2rem; color: var(--color-primary-gold); margin-bottom: 30px; text-align: center;">
-                        💰 Your Revenue Sources
+                        💰 Your Revenue Source
                     </h2>
                     
                     <div style="max-width: 800px; margin: 0 auto;">
                         <div style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); border-radius: 12px; padding: 30px; margin-bottom: 25px;">
                             <h3 style="color: var(--color-primary-gold); margin-bottom: 20px; font-size: 1.5rem;">📍 Location Placement Fees</h3>
                             <p style="color: rgba(255,255,255,0.9); line-height: 1.7; margin-bottom: 15px;">
-                                Advertisers pay monthly fees based on their location count:
+                                Your revenue comes from monthly location fees paid by advertisers:
                             </p>
                             <ul style="list-style: none; padding: 0; margin: 0 0 15px 0;">
                                 <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
@@ -193,9 +192,9 @@ const OnboardingFlows = {
                         </div>
                         
                         <div style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 30px;">
-                            <h3 style="color: #22c55e; margin-bottom: 20px; font-size: 1.5rem;">💎 $Ember Token Sales</h3>
+                            <h3 style="color: #22c55e; margin-bottom: 20px; font-size: 1.5rem;">💎 $Ember Token Flow</h3>
                             <p style="color: rgba(255,255,255,0.9); line-height: 1.7; margin: 0;">
-                                Advertisers purchase $Ember tokens from you to fund their token stops. You earn on every token sold at the current market price.
+                                Advertisers purchase $Ember tokens directly from Coinbase (not from you). They use these tokens to fund their advertisement token stops. You earn purely from monthly location fees.
                             </p>
                         </div>
                     </div>
@@ -240,9 +239,9 @@ const OnboardingFlows = {
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px;">
                         <div style="padding: 25px; background: rgba(0,0,0,0.2); border-radius: 12px;">
                             <div style="font-size: 3rem; margin-bottom: 15px;">1️⃣</div>
-                            <h4 style="margin-bottom: 12px;">Purchase Tokens</h4>
+                            <h4 style="margin-bottom: 12px;">Purchase Tokens from Coinbase</h4>
                             <p style="color: rgba(255,255,255,0.7); margin: 0; line-height: 1.6;">
-                                Buy $Ember tokens at current market price to fund your token stops in campaigns.
+                                Buy $Ember tokens directly from Coinbase at market price to fund your token stops.
                             </p>
                         </div>
                         
@@ -299,7 +298,7 @@ const OnboardingFlows = {
                         <div style="background: rgba(59,130,246,0.1); border: 2px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 30px; margin-bottom: 25px;">
                             <h3 style="color: #3b82f6; margin-bottom: 20px;">💳 Simple Pricing</h3>
                             <p style="color: rgba(255,255,255,0.9); line-height: 1.7; margin-bottom: 15px;">
-                                Pay a monthly fee based on your location count:
+                                Pay a monthly fee to the campaign manager based on your location count:
                             </p>
                             <ul style="list-style: none; padding: 0; margin: 0;">
                                 <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
@@ -321,9 +320,9 @@ const OnboardingFlows = {
                         </div>
                         
                         <div style="background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 30px;">
-                            <h3 style="color: #22c55e; margin-bottom: 20px;">📱 Scanner Web App</h3>
+                            <h3 style="color: #22c55e; margin-bottom: 20px;">📱 Buy $Ember from Coinbase</h3>
                             <p style="color: rgba(255,255,255,0.9); line-height: 1.7; margin: 0;">
-                                Get a unique web app link for your staff to scan player QR codes and accept $Ember redemptions. No app download required - works on any device with a camera and browser.
+                                Purchase $Ember tokens directly from Coinbase at market price. Use these tokens to fund your advertisement token stops. Get tokens back when players redeem at your location!
                             </p>
                         </div>
                     </div>
@@ -363,7 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     initializeApp(selectedRole);
     
-    // Apply overflow fix after initialization
     setTimeout(applyOverflowFix, 500);
 });
 
@@ -378,7 +376,6 @@ function initializeApp(role) {
     setupRoleBasedUI(role);
     loadNavigationMenu(role);
     
-    // Check onboarding status
     const hasSeenOnboarding = sessionStorage.getItem(`onboarding_${role}_complete`);
     
     if (!hasSeenOnboarding) {
@@ -420,7 +417,6 @@ function displayOnboardingStep(step) {
         mainContent.innerHTML = step.content;
     }
     
-    // Update page title
     const pageTitle = document.getElementById('pageTitle');
     if (pageTitle) {
         pageTitle.textContent = step.title;
@@ -531,7 +527,7 @@ function loadNavigationMenu(role) {
 }
 
 /**
- * Load content section
+ * Load content section - FIXED
  */
 function loadSection(section) {
     console.log('Loading section:', section);
@@ -557,7 +553,7 @@ function loadSection(section) {
 }
 
 /**
- * Get section content based on role and section
+ * Get section content based on role and section - FIXED
  */
 function getSectionContent(section) {
     const role = AppState.currentRole;
@@ -580,9 +576,8 @@ function getSectionContent(section) {
         if (section === 'marketplace') return getMarketplaceContent(role);
         if (section === 'tokens') return getTokensContent(role);
         if (section === 'wallet') return getWalletContent(role);
-        if (section === 'airdrop-requests') return getAirdropRequestsContent(role);
         if (section === 'payments') return getPaymentsContent(role);
-        if (section === 'analytics') return getAdvertiserAnalyticsContent(role);
+        if (section === 'analytics') return getPaymentsContent(role); // FIXED: was calling wrong function
         if (section === 'budget') return getBudgetContent(role);
     }
     
@@ -605,7 +600,7 @@ function getOverviewContent(role) {
 }
 
 /**
- * Campaign Manager Overview
+ * Campaign Manager Overview - FIXED
  */
 function getCampaignManagerOverview() {
     const activeCampaigns = 1;
@@ -618,15 +613,15 @@ function getCampaignManagerOverview() {
             <div class="stat-card">
                 <div class="stat-icon">💰</div>
                 <div class="stat-label">Monthly Revenue</div>
-                <div class="stat-value">$650</div>
+                <div class="stat-value">$500</div>
                 <div class="stat-details">
                     <div class="stat-detail-item">
                         <span>Location Fees:</span>
                         <span>$500</span>
                     </div>
                     <div class="stat-detail-item">
-                        <span>Token Sales:</span>
-                        <span>$150</span>
+                        <span>From Advertisers:</span>
+                        <span>1 advertiser</span>
                     </div>
                 </div>
             </div>
@@ -733,7 +728,7 @@ function getCampaignManagerOverview() {
                         </div>
                     </div>
                     <div class="app-actions">
-                        <button class="btn btn-primary" onclick="loadCampaignControl('camp-001')">Manage Campaign</button>
+                        <button class="btn btn-primary" onclick="loadSection('campaigns')">Manage Campaign</button>
                         <button class="btn btn-outline" onclick="window.open('https://ghost081280.github.io/vaultphoenix/crypto-game/dashboard.html', '_blank')">View App ↗</button>
                     </div>
                 </div>
@@ -743,11 +738,12 @@ function getCampaignManagerOverview() {
 }
 
 /**
- * Load Campaign Control for specific campaign
+ * Load Campaign Control for specific campaign - REMOVED ROLE RESTRICTION
  */
 function loadCampaignControl(campaignId) {
     AppState.currentCampaignId = campaignId;
     
+    // Campaign managers can now access their own campaigns
     const content = getCampaignControlContent ? getCampaignControlContent(campaignId) : getCampaignsContent(AppState.currentRole);
     const mainContent = document.getElementById('dashboardContent');
     
@@ -816,7 +812,6 @@ function setupEventListeners() {
         menuToggle.addEventListener('click', toggleSidebar);
     }
     
-    // Make logo clickable to return to overview
     const sidebarLogo = document.querySelector('.sidebar-logo');
     if (sidebarLogo) {
         sidebarLogo.style.cursor = 'pointer';
@@ -933,21 +928,6 @@ function getSettingsContent(role) {
             </div>
         </div>
     `;
-}
-
-/**
- * Get Advertiser Analytics Content
- */
-function getAdvertiserAnalyticsContent(role) {
-    if (role !== 'advertiser') {
-        return getPlaceholderContent('analytics');
-    }
-    
-    if (typeof window.getPaymentsContent === 'function') {
-        return window.getPaymentsContent(role);
-    }
-    
-    return getPlaceholderContent('analytics');
 }
 
 /**
