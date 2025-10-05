@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Token Economy - Dual Revenue System
+   Token Economy - QR Code Exchange Model
    ============================================ */
 
 // ============================================
@@ -43,6 +43,15 @@ const TokenEconomy = {
         platformOperators: true,
         sdkCustomers: true,
         merchants: false
+    },
+    
+    // QR Code Exchange Model
+    qrExchangeModel: {
+        enabled: true,
+        scannerAppRequired: true,
+        transactionFee: 0, // No platform fee on direct exchanges
+        averageTransactionValue: 50, // tokens per scan
+        description: 'Players scan advertiser QR codes to exchange $Ember for products/services'
     }
 };
 
@@ -55,52 +64,25 @@ const LocationPricing = {
         name: 'Bronze',
         monthlyFee: 200,
         setupFee: 500,
-        features: ['Basic visibility', 'Standard placement', 'Monthly reporting']
+        features: ['Basic visibility', 'Standard placement', 'Monthly reporting', 'Scanner app access']
     },
     silver: {
         name: 'Silver',
         monthlyFee: 500,
         setupFee: 1000,
-        features: ['Enhanced visibility', 'Priority placement', 'Weekly reporting', 'Custom branding']
+        features: ['Enhanced visibility', 'Priority placement', 'Weekly reporting', 'Custom branding', 'Scanner app access', 'QR code analytics']
     },
     gold: {
         name: 'Gold',
         monthlyFee: 1200,
         setupFee: 2500,
-        features: ['Featured placement', 'Exclusive territory', 'Daily reporting', 'Premium support', 'Analytics dashboard']
+        features: ['Featured placement', 'Exclusive territory', 'Daily reporting', 'Premium support', 'Analytics dashboard', 'Scanner app access', 'Real-time QR tracking']
     },
     platinum: {
         name: 'Platinum',
         monthlyFee: 2500,
         setupFee: 5000,
-        features: ['Premium positioning', 'Guaranteed traffic', 'Real-time reporting', 'Dedicated account manager', 'Custom integration', 'Priority support']
-    }
-};
-
-// ============================================
-// TOKEN REQUIREMENTS BY LOCATION TYPE
-// ============================================
-
-const TokenRequirements = {
-    lowTraffic: {
-        name: 'Low Traffic',
-        range: [1000, 2500],
-        description: 'Residential/suburban areas'
-    },
-    mediumTraffic: {
-        name: 'Medium Traffic',
-        range: [2500, 5000],
-        description: 'Shopping districts, restaurants'
-    },
-    highTraffic: {
-        name: 'High Traffic',
-        range: [5000, 10000],
-        description: 'Stadiums, events, tourist attractions'
-    },
-    premiumZones: {
-        name: 'Premium Zones',
-        range: [10000, 50000],
-        description: 'Major venues, exclusive partnerships'
+        features: ['Premium positioning', 'Guaranteed traffic', 'Real-time reporting', 'Dedicated account manager', 'Custom integration', 'Priority support', 'Scanner app access', 'Advanced QR analytics']
     }
 };
 
@@ -111,46 +93,52 @@ const TokenRequirements = {
 const RevenueData = {
     currentMonth: {
         locationFees: 32400,
-        tokenFunding: 14992,
-        total: 47392
+        tokenFunding: 0, // No longer selling tokens to advertisers
+        qrTransactions: 14992, // Revenue from location fees drives QR exchange economy
+        total: 32400
     },
     lastMonth: {
         locationFees: 27500,
-        tokenFunding: 12000,
-        total: 39500
+        tokenFunding: 0,
+        qrTransactions: 12000,
+        total: 27500
     },
     merchants: [
         {
             name: 'Downtown Plaza',
             tier: 'platinum',
             locationFee: 2500,
-            tokenPurchases: 450,
-            tokensAmount: 15000,
-            total: 2950
+            qrScansMonth: 450,
+            avgTokensPerScan: 50,
+            totalTokensReceived: 22500,
+            total: 2500
         },
         {
             name: 'Heritage Square',
             tier: 'gold',
             locationFee: 1200,
-            tokenPurchases: 225,
-            tokensAmount: 7500,
-            total: 1425
+            qrScansMonth: 225,
+            avgTokensPerScan: 50,
+            totalTokensReceived: 11250,
+            total: 1200
         },
         {
             name: 'Roosevelt Arts',
             tier: 'silver',
             locationFee: 500,
-            tokenPurchases: 150,
-            tokensAmount: 5000,
-            total: 650
+            qrScansMonth: 150,
+            avgTokensPerScan: 50,
+            totalTokensReceived: 7500,
+            total: 500
         },
         {
             name: 'Chase Field',
             tier: 'platinum',
             locationFee: 2500,
-            tokenPurchases: 900,
-            tokensAmount: 30000,
-            total: 3400
+            qrScansMonth: 900,
+            avgTokensPerScan: 50,
+            totalTokensReceived: 45000,
+            total: 2500
         }
     ]
 };
@@ -226,17 +214,15 @@ function updateMarketPrice() {
  * Get revenue analytics content for Platform Operators
  */
 function getRevenueContent(role) {
-    if (role !== 'platform-operator' && role !== 'system-admin') {
+    if (role !== 'campaign-manager' && role !== 'system-admin') {
         return getPlaceholderContent('revenue');
     }
     
     const percentChange = ((RevenueData.currentMonth.total - RevenueData.lastMonth.total) / RevenueData.lastMonth.total * 100).toFixed(1);
-    const locationFeePercent = (RevenueData.currentMonth.locationFees / RevenueData.currentMonth.total * 100).toFixed(0);
-    const tokenFundingPercent = (RevenueData.currentMonth.tokenFunding / RevenueData.currentMonth.total * 100).toFixed(0);
     
     return `
         <div class="dashboard-section">
-            <h2 class="section-title">💰 Dual Revenue Streams</h2>
+            <h2 class="section-title">💰 Revenue Analytics</h2>
             
             <div class="revenue-grid">
                 <!-- Location Placement Fees -->
@@ -265,28 +251,28 @@ function getRevenueContent(role) {
                     </ul>
                 </div>
                 
-                <!-- Token Funding Revenue -->
+                <!-- QR Exchange Activity -->
                 <div class="revenue-stream">
                     <div class="revenue-header">
-                        <div class="revenue-icon">💎</div>
-                        <div class="revenue-title">Token Funding Revenue</div>
+                        <div class="revenue-icon">📱</div>
+                        <div class="revenue-title">QR Exchange Activity</div>
                     </div>
-                    <div class="revenue-amount">${formatCurrency(RevenueData.currentMonth.tokenFunding)}</div>
+                    <div class="revenue-amount">${formatTokens(RevenueData.currentMonth.qrTransactions)} Scans</div>
                     <div class="revenue-change positive">
-                        +${((RevenueData.currentMonth.tokenFunding - RevenueData.lastMonth.tokenFunding) / RevenueData.lastMonth.tokenFunding * 100).toFixed(1)}% vs last month
+                        +${((RevenueData.currentMonth.qrTransactions - RevenueData.lastMonth.qrTransactions) / RevenueData.lastMonth.qrTransactions * 100).toFixed(1)}% vs last month
                     </div>
                     <ul class="revenue-details">
                         <li class="revenue-detail">
-                            <span class="revenue-detail-label">Tokens Sold</span>
-                            <span class="revenue-detail-value">1.2M</span>
+                            <span class="revenue-detail-label">Active Scanners</span>
+                            <span class="revenue-detail-value">47</span>
                         </li>
                         <li class="revenue-detail">
-                            <span class="revenue-detail-label">Market Price</span>
-                            <span class="revenue-detail-value">$${TokenEconomy.marketPrice.toFixed(4)}</span>
+                            <span class="revenue-detail-label">Avg Tokens/Scan</span>
+                            <span class="revenue-detail-value">50 $Ember</span>
                         </li>
                         <li class="revenue-detail">
-                            <span class="revenue-detail-label">Tokens Distributed</span>
-                            <span class="revenue-detail-value">156K</span>
+                            <span class="revenue-detail-label">Total Tokens Exchanged</span>
+                            <span class="revenue-detail-value">${formatTokens(RevenueData.currentMonth.qrTransactions * 50)}</span>
                         </li>
                     </ul>
                 </div>
@@ -294,19 +280,24 @@ function getRevenueContent(role) {
             
             <!-- Total Revenue Summary -->
             <div class="revenue-total">
-                <div class="revenue-total-label">Total Combined Revenue</div>
+                <div class="revenue-total-label">Total Monthly Revenue</div>
                 <div class="revenue-total-amount">${formatCurrency(RevenueData.currentMonth.total)}</div>
-                <div class="revenue-breakdown">
-                    <div class="breakdown-bar">
-                        <div class="breakdown-fill" style="width: ${locationFeePercent}%;">
-                            ${locationFeePercent}% Location Fees
-                        </div>
-                    </div>
-                    <div class="breakdown-bar">
-                        <div class="breakdown-fill" style="width: ${tokenFundingPercent}%; background: var(--gradient-ember);">
-                            ${tokenFundingPercent}% Token Funding
-                        </div>
-                    </div>
+                <div style="margin-top: 20px; padding: 20px; background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 12px;">
+                    <h4 style="color: var(--color-primary-gold); margin-bottom: 15px;">How The Ecosystem Works:</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            ✓ Advertisers pay monthly location fees to participate in campaigns
+                        </li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            ✓ Campaign managers fund token pools that players collect at locations
+                        </li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            ✓ Players visit advertiser locations and scan QR codes to exchange $Ember for products/services
+                        </li>
+                        <li style="padding: 8px 0;">
+                            ✓ Advertisers receive $Ember back into their accounts, creating a circular economy
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -321,10 +312,10 @@ function getRevenueContent(role) {
                         <tr>
                             <th>Merchant</th>
                             <th>Tier</th>
-                            <th>Location Fee</th>
-                            <th>Token Purchases</th>
-                            <th>Tokens Amount</th>
-                            <th>Total</th>
+                            <th>Monthly Fee</th>
+                            <th>QR Scans</th>
+                            <th>Tokens Received</th>
+                            <th>Avg/Scan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -333,9 +324,9 @@ function getRevenueContent(role) {
                                 <td>${merchant.name}</td>
                                 <td><span class="tier-badge tier-${merchant.tier}">${merchant.tier}</span></td>
                                 <td>${formatCurrency(merchant.locationFee)}/mo</td>
-                                <td>${formatCurrency(merchant.tokenPurchases)}</td>
-                                <td>${formatTokens(merchant.tokensAmount)} $Ember</td>
-                                <td><strong>${formatCurrency(merchant.total)}</strong></td>
+                                <td>${formatTokens(merchant.qrScansMonth)}</td>
+                                <td>${formatTokens(merchant.totalTokensReceived)} $Ember</td>
+                                <td>${merchant.avgTokensPerScan} $Ember</td>
                             </tr>
                         `).join('')}
                     </tbody>
@@ -492,24 +483,6 @@ function getTokensContent(role) {
                     <button class="btn btn-outline" onclick="hidePurchaseInterface()">
                         Cancel
                     </button>
-                </div>
-            </div>
-            
-            <!-- Token Requirements Reference -->
-            <div class="card">
-                <h3 style="margin-bottom: 20px;">📊 Token Requirements by Location Type</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                    ${Object.entries(TokenRequirements).map(([key, req]) => `
-                        <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                            <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">${req.name}</h4>
-                            <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;">
-                                ${formatTokens(req.range[0])} - ${formatTokens(req.range[1])}
-                            </div>
-                            <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">
-                                ${req.description}
-                            </div>
-                        </div>
-                    `).join('')}
                 </div>
             </div>
         </div>
