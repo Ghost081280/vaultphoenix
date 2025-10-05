@@ -29,6 +29,10 @@
     .apps-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+    
+    .monitoring-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+    }
 }
 
 /* ============================================
@@ -81,10 +85,11 @@
         grid-template-columns: 1fr 1fr;
     }
     
-    .builder-grid {
-        grid-template-columns: 1fr;
+    .performance-cards {
+        grid-template-columns: repeat(4, 1fr);
     }
     
+    /* Adjust font sizes slightly */
     .page-title {
         font-size: 1.5rem;
     }
@@ -167,9 +172,13 @@
         gap: var(--spacing-sm);
     }
     
-    .builder-grid {
+    .monitoring-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-sm);
+    }
+    
+    .performance-cards {
+        grid-template-columns: repeat(3, 1fr);
     }
     
     /* Reduce font sizes */
@@ -278,13 +287,13 @@
         gap: var(--spacing-sm);
     }
     
-    .builder-grid {
+    .monitoring-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-sm);
     }
     
-    .setup-type-grid {
-        grid-template-columns: 1fr;
+    .performance-cards {
+        grid-template-columns: repeat(2, 1fr);
         gap: var(--spacing-sm);
     }
     
@@ -323,6 +332,24 @@
         font-size: 2.2rem;
     }
     
+    /* Live monitoring */
+    .live-map {
+        height: 280px;
+    }
+    
+    .monitoring-panel {
+        padding: var(--spacing-sm);
+    }
+    
+    /* Activity feed */
+    .activity-feed {
+        max-height: 280px;
+    }
+    
+    .activity-item {
+        padding: var(--spacing-xs);
+    }
+    
     /* Buttons */
     .btn {
         padding: 9px 18px;
@@ -351,16 +378,6 @@
     
     .section-title {
         font-size: 1.3rem;
-    }
-    
-    /* Builder panels */
-    .builder-panel {
-        padding: var(--spacing-sm);
-    }
-    
-    .phone-frame {
-        max-width: 100%;
-        height: 500px;
     }
 }
 
@@ -412,6 +429,10 @@
     }
     
     /* Hide non-essential header items */
+    .role-switcher {
+        display: none;
+    }
+    
     .token-balance-widget {
         padding: 6px 10px;
     }
@@ -447,8 +468,8 @@
     .hero-stats,
     .apps-grid,
     .revenue-grid,
-    .builder-grid,
-    .setup-type-grid {
+    .monitoring-grid,
+    .performance-cards {
         grid-template-columns: 1fr;
         gap: var(--spacing-sm);
     }
@@ -511,6 +532,79 @@
     
     .revenue-total-amount {
         font-size: 1.8rem;
+    }
+    
+    /* Live monitoring */
+    .live-monitoring {
+        padding: var(--spacing-sm);
+    }
+    
+    .monitoring-title {
+        font-size: 1.1rem;
+    }
+    
+    .live-map {
+        height: 220px;
+    }
+    
+    .monitoring-panel {
+        padding: var(--spacing-sm);
+    }
+    
+    .panel-title {
+        font-size: 0.95rem;
+    }
+    
+    .map-controls {
+        gap: 4px;
+    }
+    
+    .map-controls .btn {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+    }
+    
+    /* Activity feed */
+    .activity-feed {
+        max-height: 220px;
+    }
+    
+    .activity-item {
+        padding: var(--spacing-xs);
+        gap: var(--spacing-xs);
+    }
+    
+    .activity-icon {
+        width: 26px;
+        height: 26px;
+        font-size: 0.85rem;
+    }
+    
+    .activity-text {
+        font-size: 0.8rem;
+    }
+    
+    .activity-time {
+        font-size: 0.7rem;
+    }
+    
+    /* Airdrop controls */
+    .airdrop-controls {
+        padding: var(--spacing-sm);
+    }
+    
+    .form-group {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .form-input {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .radio-group {
+        flex-direction: column;
+        gap: var(--spacing-xs);
     }
     
     /* Buttons */
@@ -576,23 +670,27 @@
         border-radius: var(--card-radius-medium);
     }
     
+    /* Performance cards */
+    .performance-card {
+        padding: var(--spacing-sm);
+    }
+    
+    .performance-value {
+        font-size: 1.4rem;
+    }
+    
+    .performance-label {
+        font-size: 0.75rem;
+    }
+    
     /* Builder panels for mobile */
     .builder-panel {
         padding: var(--spacing-sm);
     }
     
-    .setup-card {
-        padding: 25px 15px;
-    }
-    
-    .phone-frame {
-        max-width: 100%;
-        height: 450px;
-    }
-    
-    /* Color picker adjustments */
-    .color-grid-compact {
+    .builder-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
     }
 }
 
@@ -606,13 +704,17 @@
         overflow-y: auto;
     }
     
+    .live-map {
+        height: 220px;
+    }
+    
+    .activity-feed {
+        max-height: 180px;
+    }
+    
     .main-content {
         padding-top: var(--spacing-md);
         padding-bottom: var(--spacing-md);
-    }
-    
-    .phone-frame {
-        height: 400px;
     }
 }
 
@@ -626,8 +728,10 @@
     .menu-toggle,
     .notification-bell,
     .user-profile,
+    .role-switcher,
     .section-actions,
     .app-actions,
+    .map-controls,
     .btn {
         display: none !important;
     }
@@ -711,7 +815,6 @@
 @media (max-width: 1920px) {
     body {
         overflow-x: hidden;
-        max-width: 100vw;
     }
     
     .main-content {
@@ -722,18 +825,5 @@
     .dashboard-wrapper {
         max-width: 100vw;
         overflow-x: hidden;
-    }
-    
-    .builder-grid,
-    .builder-panel {
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-    
-    .card,
-    .stat-card,
-    .app-card {
-        max-width: 100%;
-        box-sizing: border-box;
     }
 }
