@@ -10,23 +10,23 @@
 const AnalyticsData = {
     // Campaign performance (for $Ember Hunt)
     campaigns: {
-        totalActive: 1, // Only $Ember Hunt
-        totalRevenue: 500, // Just location fee
+        totalActive: 1,
+        totalRevenue: 500,
         totalPlayers: 847,
-        totalTokensDistributed: 21200, // Tokens collected from campaign manager's pools
+        totalTokensDistributed: 21200,
         engagementRate: 87.3,
         averageSessionTime: 12.4
     },
     
     // Advertiser analytics
     advertisers: {
-        totalActive: 1, // Heritage Square
+        totalActive: 1,
         totalPending: 0,
-        averageRevenue: 500, // Location fee only
+        averageRevenue: 500,
         topPerformer: 'Heritage Square Historic Site',
         retentionRate: 100,
-        totalQRScans: 847, // Players scanning QR codes at location
-        tokensReceivedBack: 42350 // $Ember received from players via QR scans
+        totalQRScans: 847,
+        tokensReceivedBack: 42350
     },
     
     // Player analytics
@@ -36,12 +36,12 @@ const AnalyticsData = {
         returningUsers: 89.3,
         averageCollections: 8.7,
         topLocation: 'Heritage Square Historic Site',
-        avgQRScanValue: 50 // Average $Ember exchanged per scan
+        avgQRScanValue: 50
     },
     
     // Time series data (last 7 days)
     timeSeries: {
-        revenue: [500, 500, 500, 500, 500, 500, 500], // Consistent location fee
+        revenue: [500, 500, 500, 500, 500, 500, 500],
         players: [720, 750, 780, 800, 820, 835, 847],
         qrScans: [680, 710, 745, 770, 800, 825, 847],
         tokensExchanged: [34000, 35500, 37250, 38500, 40000, 41250, 42350],
@@ -105,24 +105,25 @@ function getAdvertiserOverview() {
                 <div style="display: flex; justify-content: space-between; align-items: start; gap: 20px; flex-wrap: wrap;">
                     <div style="flex: 1; min-width: 300px;">
                         <h3 style="color: #22c55e; margin-bottom: 15px; font-size: 1.8rem;">
-                            📱 Get the $Ember Scanner App
+                            📱 Get the QR Scanner Web App
                         </h3>
                         <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
-                            Accept $Ember payments from players at your location. When players scan your QR code, 
-                            they transfer $Ember to you in exchange for your products or services.
+                            Access the scanner web app to accept $Ember payments from players at your location. 
+                            When players scan your QR code, they transfer $Ember to you in exchange for your 
+                            products or services.
                         </p>
                         
                         <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
                             <h4 style="color: var(--color-primary-gold); margin-bottom: 15px;">How It Works:</h4>
                             <ul style="list-style: none; padding: 0; margin: 0;">
                                 <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                    <strong style="color: #22c55e;">1.</strong> Download the Scanner App to your tablet or phone
+                                    <strong style="color: #22c55e;">1.</strong> Get your scanner web app link
                                 </li>
                                 <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
                                     <strong style="color: #22c55e;">2.</strong> Players show you their QR code at checkout
                                 </li>
                                 <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                    <strong style="color: #22c55e;">3.</strong> Scan their code with your app
+                                    <strong style="color: #22c55e;">3.</strong> Scan their code with the web app
                                 </li>
                                 <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
                                     <strong style="color: #22c55e;">4.</strong> Enter the discount/offer amount in $Ember
@@ -134,8 +135,8 @@ function getAdvertiserOverview() {
                         </div>
                         
                         <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                            <button class="btn btn-primary btn-large" onclick="downloadScanner()">
-                                📱 Download Scanner App
+                            <button class="btn btn-primary btn-large" onclick="getScannerWebAppLink()">
+                                🔗 Get Scanner Link
                             </button>
                             <button class="btn btn-secondary" onclick="viewScannerGuide()">
                                 📚 Setup Guide
@@ -148,7 +149,7 @@ function getAdvertiserOverview() {
                             <div style="font-size: 4rem;">📱</div>
                         </div>
                         <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">
-                            Scanner App QR Code
+                            Scanner Web App QR Code
                         </div>
                     </div>
                 </div>
@@ -198,8 +199,8 @@ function getAdvertiserOverview() {
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">⚡ Quick Actions</h3>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <button class="btn btn-primary" style="padding: 20px; font-size: 1.1rem;" onclick="downloadScanner()">
-                    📱 Get Scanner App
+                <button class="btn btn-primary" style="padding: 20px; font-size: 1.1rem;" onclick="getScannerWebAppLink()">
+                    🔗 Get Scanner Link
                 </button>
                 <button class="btn btn-secondary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('marketplace')">
                     🛒 Browse More Campaigns
@@ -234,11 +235,8 @@ function getPaymentsContent(role) {
                     </h3>
                     
                     <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
-                        <div style="color: rgba(255,255,255,0.7); margin-bottom: 10px;">Current Plan</div>
+                        <div style="color: rgba(255,255,255,0.7); margin-bottom: 10px;">Monthly Fee</div>
                         <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-gold); margin-bottom: 5px;">
-                            Silver Tier
-                        </div>
-                        <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 15px;">
                             $500<span style="font-size: 1rem; color: rgba(255,255,255,0.6);">/month</span>
                         </div>
                         
@@ -264,7 +262,6 @@ function getPaymentsContent(role) {
                     
                     <div style="display: flex; flex-direction: column; gap: 10px;">
                         <button class="btn btn-outline">Update Payment Method</button>
-                        <button class="btn btn-secondary">Upgrade Tier</button>
                     </div>
                 </div>
                 
@@ -305,7 +302,7 @@ function getPaymentsContent(role) {
                     </div>
                     
                     <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <button class="btn btn-primary" onclick="downloadScanner()">Get Scanner App</button>
+                        <button class="btn btn-primary" onclick="getScannerWebAppLink()">Get Scanner Link</button>
                         <button class="btn btn-outline" onclick="convertToUSD()">Convert $Ember to USD</button>
                     </div>
                 </div>
@@ -340,7 +337,7 @@ function getPaymentsContent(role) {
                         <div style="font-size: 2.5rem; margin-bottom: 15px;">3️⃣</div>
                         <h4 style="color: var(--color-primary-gold); margin-bottom: 10px;">Scan Their QR Code</h4>
                         <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6;">
-                            Use the Scanner App to scan the player's QR code and enter the $Ember amount 
+                            Use the Scanner Web App to scan the player's QR code and enter the $Ember amount 
                             they're spending with you.
                         </p>
                     </div>
@@ -385,14 +382,14 @@ function getPaymentsContent(role) {
                         <tr>
                             <td>Oct 4, 2025</td>
                             <td>Location Fee</td>
-                            <td>Silver Tier - Monthly</td>
+                            <td>Monthly - 1 Location</td>
                             <td>$500.00</td>
                             <td><span class="badge badge-success">Paid</span></td>
                         </tr>
                         <tr>
                             <td>Sep 4, 2025</td>
                             <td>Location Fee</td>
-                            <td>Silver Tier - Monthly</td>
+                            <td>Monthly - 1 Location</td>
                             <td>$500.00</td>
                             <td><span class="badge badge-success">Paid</span></td>
                         </tr>
@@ -412,14 +409,13 @@ function getBudgetContent(role) {
         return getPlaceholderContent('budget');
     }
     
-    // Calculate ROI based on QR scan model
     const monthlyLocationFee = 500;
     const qrScansPerMonth = 847;
     const avgEmberPerScan = 50;
     const totalEmberReceived = qrScansPerMonth * avgEmberPerScan;
     const emberPrice = 0.0035;
     const totalEmberValue = totalEmberReceived * emberPrice;
-    const avgSpendPerVisitor = 45; // Average customer spend at location
+    const avgSpendPerVisitor = 45;
     const totalRevenue = qrScansPerMonth * avgSpendPerVisitor;
     const roi = ((totalRevenue - monthlyLocationFee) / monthlyLocationFee * 100).toFixed(1);
     
@@ -621,7 +617,6 @@ function getMerchantsContent(role) {
                                 <th>Advertiser</th>
                                 <th>Campaign</th>
                                 <th>Locations</th>
-                                <th>Tier</th>
                                 <th>Monthly Fee</th>
                                 <th>QR Scans</th>
                                 <th>$Ember Received</th>
@@ -633,7 +628,6 @@ function getMerchantsContent(role) {
                                 <td>Heritage Square Historic Site</td>
                                 <td>$Ember Hunt</td>
                                 <td>1</td>
-                                <td><span class="tier-badge tier-silver">Silver</span></td>
                                 <td>$500</td>
                                 <td>847</td>
                                 <td>42,350</td>
@@ -648,19 +642,24 @@ function getMerchantsContent(role) {
 }
 
 // ============================================
-// SCANNER APP FUNCTIONS
+// HELPER FUNCTIONS
 // ============================================
 
-function downloadScanner() {
-    alert(`📱 Download $Ember Scanner App\n\nAvailable for:\n• iOS (App Store)\n• Android (Google Play)\n• Web App (PWA)\n\nSearch for "Vault Phoenix Scanner" or scan the QR code in your dashboard.\n\nSetup takes less than 2 minutes!`);
+function getScannerWebAppLink() {
+    const userEmail = sessionStorage.getItem('userEmail') || 'demo@phoenix.com';
+    const scannerUrl = `https://scanner.vaultphoenix.com/?token=${btoa(userEmail)}`;
+    
+    alert(`📱 Your QR Scanner Web App Link\n\n` +
+        `Access URL:\n${scannerUrl}\n\n` +
+        `Share this link with your staff via email or bookmark it on any device.`);
 }
 
 function viewScannerGuide() {
-    alert(`📚 Scanner App Setup Guide\n\n1. Download the app\n2. Login with your advertiser credentials\n3. Link your location\n4. Start scanning player QR codes!\n\nFull documentation available at:\nvaultphoenix.com/docs/scanner`);
+    alert(`📚 Scanner Web App Guide\n\nFull documentation available at:\nvaultphoenix.com/docs/scanner`);
 }
 
 function convertToUSD() {
-    alert(`💱 Convert $Ember to USD\n\nYou can convert your received $Ember to USD at any time:\n\n• Current balance: 42,350 $Ember\n• Current value: ~$148.23 USD\n• Market price: $0.0035 per $Ember\n\nConvert via your wallet or hold for potential appreciation!`);
+    alert(`💱 Convert $Ember to USD\n\nCurrent balance: 42,350 $Ember\nCurrent value: ~$148.23 USD`);
 }
 
 // Export functions
@@ -670,7 +669,7 @@ if (typeof window !== 'undefined') {
     window.getPaymentsContent = getPaymentsContent;
     window.getBudgetContent = getBudgetContent;
     window.getMerchantsContent = getMerchantsContent;
-    window.downloadScanner = downloadScanner;
+    window.getScannerWebAppLink = getScannerWebAppLink;
     window.viewScannerGuide = viewScannerGuide;
     window.convertToUSD = convertToUSD;
 }
