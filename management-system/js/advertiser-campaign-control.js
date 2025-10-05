@@ -1,21 +1,22 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Advertiser Campaign Control - Advertisement Token Stop Creation
+   Advertiser Campaign Control - Advertisement Token Stop Creation - FIXED
    ============================================ */
 
 // This file handles the advertiser's campaign control page where they create
 // token stops with advertisements and manage their locations
 
 /**
- * Get Campaign Control Content for Advertisers
+ * Get Campaign Control Content for Advertisers - FIXED TO ALLOW CAMPAIGN MANAGERS
  */
 function getCampaignControlContent(campaignId) {
     const role = window.AppState?.currentRole;
     
-    if (role !== 'advertiser') {
+    // FIXED: Allow both advertisers AND campaign managers to access
+    if (role !== 'advertiser' && role !== 'campaign-manager') {
         return `<div style="padding: 40px; text-align: center;">
             <h3>Access Denied</h3>
-            <p>This page is only accessible to advertisers.</p>
+            <p>This page is only accessible to campaign managers and advertisers.</p>
             <button class="btn btn-primary" onclick="loadSection('overview')">Back to Dashboard</button>
         </div>`;
     }
@@ -29,8 +30,161 @@ function getCampaignControlContent(campaignId) {
         </div>`;
     }
     
+    // CAMPAIGN MANAGER VIEW
+    if (role === 'campaign-manager') {
+        return getCampaignManagerCampaignView(campaign);
+    }
+    
+    // ADVERTISER VIEW
+    return getAdvertiserCampaignView(campaign);
+}
+
+/**
+ * Campaign Manager's Campaign View
+ */
+function getCampaignManagerCampaignView(campaign) {
     // Get advertiser's locations in this campaign
-    const locations = window.AdvertiserData?.campaignLocations[campaignId] || [];
+    const locations = window.AdvertiserData?.campaignLocations[campaign.id] || [];
+    
+    return `
+        <div class="dashboard-section">
+            <div class="builder-header">
+                <h2 class="section-title">🎮 ${campaign.name} - Campaign Overview</h2>
+                <button class="btn btn-outline" onclick="loadSection('campaigns')">← Back to Campaigns</button>
+            </div>
+            
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 25px;">
+                Manage your ${campaign.name} campaign. View all token locations, advertiser activity, and campaign performance.
+            </p>
+            
+            <!-- Campaign Stats -->
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-label">Active Players</div>
+                    <div class="stat-value">${campaign.activePlayers.toLocaleString()}</div>
+                    <div class="stat-change">Playing now: 47</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">📍</div>
+                    <div class="stat-label">Total Token Stops</div>
+                    <div class="stat-value">${campaign.totalLocations}</div>
+                    <div class="stat-change">${campaign.advertiserLocations} advertiser stops</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-label">Monthly Revenue</div>
+                    <div class="stat-value">$${campaign.totalLocations * 500}</div>
+                    <div class="stat-change">From location fees</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🏢</div>
+                    <div class="stat-label">Active Advertisers</div>
+                    <div class="stat-value">1</div>
+                    <div class="stat-change">${locations.length} locations</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Campaign Actions -->
+        <div class="dashboard-section">
+            <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
+                ⚡ Campaign Management
+            </h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <button class="btn btn-primary" onclick="loadSection('campaigns')" style="padding: 18px; font-size: 1rem;">
+                    📍 Add Token Location
+                </button>
+                <button class="btn btn-secondary" onclick="loadSection('airdrops')" style="padding: 18px; font-size: 1rem;">
+                    🎯 Send Airdrop
+                </button>
+                <button class="btn btn-outline" onclick="loadSection('advertisers')" style="padding: 18px; font-size: 1rem;">
+                    🏢 Manage Advertisers
+                </button>
+                <button class="btn btn-outline" onclick="window.open('https://ghost081280.github.io/vaultphoenix/crypto-game/dashboard.html', '_blank')" style="padding: 18px; font-size: 1rem;">
+                    👁️ View Live App
+                </button>
+            </div>
+        </div>
+        
+        <!-- Advertiser Locations in This Campaign -->
+        <div class="dashboard-section">
+            <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
+                🏢 Advertiser Locations in ${campaign.name} (${locations.length})
+            </h3>
+            
+            ${locations.map(loc => `
+                <div class="card" style="margin-bottom: 15px; border-color: rgba(240,165,0,0.5);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; flex-wrap: wrap; gap: 15px;">
+                        <div>
+                            <h4 style="color: #f0a500; margin-bottom: 5px;">${loc.name}</h4>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">${loc.address}</div>
+                            <div style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 3px;">
+                                By: ${loc.advertiserName} • Monthly Fee: $${loc.monthlyFeePerLocation}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Tokens Allocated</div>
+                            <div style="font-size: 1.5rem; font-weight: 900; color: #f0a500;">${loc.tokensAllocated.toLocaleString()}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Remaining</div>
+                            <div style="font-size: 1.5rem; font-weight: 900; color: var(--color-primary-gold);">${loc.tokensRemaining.toLocaleString()}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Collections</div>
+                            <div style="font-size: 1.5rem; font-weight: 900;">${loc.tokensCollected.toLocaleString()}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">Redeemed Back</div>
+                            <div style="font-size: 1.5rem; font-weight: 900; color: #22c55e;">${loc.redemptions?.totalTokensRedeemed.toLocaleString() || 0}</div>
+                        </div>
+                    </div>
+                    
+                    ${loc.advertisement ? `
+                        <div style="background: rgba(240,165,0,0.15); border: 2px solid rgba(240,165,0,0.4); border-radius: 12px; padding: 15px;">
+                            <h5 style="color: var(--color-primary-gold); margin-bottom: 10px;">📢 Advertisement:</h5>
+                            <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px;">
+                                <h4 style="color: #f0a500; margin-bottom: 8px; font-size: 1rem;">${loc.advertisement.title}</h4>
+                                <p style="color: rgba(255,255,255,0.9); margin-bottom: 10px; font-size: 0.9rem; line-height: 1.5;">
+                                    ${loc.advertisement.description}
+                                </p>
+                                <div style="padding: 8px; background: rgba(34,197,94,0.2); border: 1px solid rgba(34,197,94,0.4); border-radius: 6px;">
+                                    <div style="font-size: 0.85rem;">Offer: ${loc.advertisement.offer}</div>
+                                    <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">Cost: ${loc.advertisement.offerEmberValue} $Ember</div>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('')}
+            
+            ${locations.length === 0 ? `
+                <div class="card" style="text-align: center; padding: 40px;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🏢</div>
+                    <h4 style="margin-bottom: 10px;">No advertiser locations yet</h4>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">
+                        Advertisers will add their token stops with advertisements to your campaign from the marketplace.
+                    </p>
+                </div>
+            ` : ''}
+        </div>
+    `;
+}
+
+/**
+ * Advertiser's Campaign View (Original Function)
+ */
+function getAdvertiserCampaignView(campaign) {
+    // Get advertiser's locations in this campaign
+    const locations = window.AdvertiserData?.campaignLocations[campaign.id] || [];
     const advertiserBalance = window.AdvertiserData?.tokenBalance?.owned || 0;
     const advertiserAvailable = window.AdvertiserData?.tokenBalance?.available || 0;
     
@@ -107,10 +261,10 @@ function getCampaignControlContent(campaignId) {
                                 You currently have <strong>${advertiserAvailable.toLocaleString()} $Ember</strong> available.
                             </p>
                             <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
-                                Purchase more tokens to fund your advertisement token stops.
+                                Purchase more tokens from Coinbase to fund your advertisement token stops.
                             </p>
                             <button class="btn btn-primary btn-large" onclick="loadSection('wallet')">
-                                💳 Buy $Ember Tokens
+                                💳 Buy $Ember from Coinbase
                             </button>
                         </div>
                     </div>
@@ -127,7 +281,7 @@ function getCampaignControlContent(campaignId) {
             <div class="card" style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); margin-bottom: 20px;">
                 <h4 style="color: var(--color-primary-gold); margin-bottom: 15px;">💡 How Advertisement Token Stops Work</h4>
                 <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8;">
-                    <li>✓ You fund the token stop with your $Ember tokens</li>
+                    <li>✓ You fund the token stop with your $Ember tokens (from Coinbase)</li>
                     <li>✓ You create advertisement content (title, description, image, offer)</li>
                     <li>✓ Players visit your location in AR and collect tokens</li>
                     <li>✓ Players immediately see your advertisement after collection</li>
@@ -145,11 +299,11 @@ function getCampaignControlContent(campaignId) {
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
                     <div class="form-group">
                         <label class="form-label">Location Name *</label>
-                        <input type="text" class="form-input" id="advLocationName_${campaignId}" placeholder="My Business Name">
+                        <input type="text" class="form-input" id="advLocationName_${campaign.id}" placeholder="My Business Name">
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Monthly Fee</label>
+                        <label class="form-label">Monthly Fee to Campaign Manager</label>
                         <div style="padding: 10px; background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); border-radius: 8px;">
                             <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 3px;">
                                 Current: ${pricingTier}
@@ -166,13 +320,13 @@ function getCampaignControlContent(campaignId) {
                 
                 <div class="form-group">
                     <label class="form-label">Address *</label>
-                    <input type="text" class="form-input" id="advAddress_${campaignId}" placeholder="123 Main St, Phoenix, AZ 85001">
+                    <input type="text" class="form-input" id="advAddress_${campaign.id}" placeholder="123 Main St, Phoenix, AZ 85001">
                     <div class="form-hint">Auto-geocoded to latitude/longitude</div>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Tokens to Allocate *</label>
-                    <input type="number" class="form-input" id="advTokensAllocate_${campaignId}" value="10000" min="${campaign.minTokensPerStop}" step="1000" onchange="updateTokenAllocationSummary('${campaignId}')">
+                    <label class="form-label">Tokens to Allocate (purchased from Coinbase) *</label>
+                    <input type="number" class="form-input" id="advTokensAllocate_${campaign.id}" value="10000" min="${campaign.minTokensPerStop}" step="1000" onchange="updateTokenAllocationSummary('${campaign.id}')">
                     <div class="form-hint">
                         Minimum: ${campaign.minTokensPerStop.toLocaleString()} | 
                         Recommended: ${campaign.recommendedTokens.toLocaleString()} | 
@@ -189,17 +343,17 @@ function getCampaignControlContent(campaignId) {
                         </div>
                         <div>
                             <div style="color: rgba(255,255,255,0.6);">Est. Collections:</div>
-                            <div style="font-weight: 700;" id="estCollections_${campaignId}">${Math.floor(10000 / campaign.tokensPerCollection)}</div>
+                            <div style="font-weight: 700;" id="estCollections_${campaign.id}">${Math.floor(10000 / campaign.tokensPerCollection)}</div>
                         </div>
                         <div>
                             <div style="color: rgba(255,255,255,0.6);">Est. Duration:</div>
-                            <div style="font-weight: 700;" id="estDuration_${campaignId}">
+                            <div style="font-weight: 700;" id="estDuration_${campaign.id}">
                                 ${Math.floor((10000 / campaign.tokensPerCollection) / campaign.avgCollectionsPerMonth)} months
                             </div>
                         </div>
                         <div>
                             <div style="color: rgba(255,255,255,0.6);">After Allocation:</div>
-                            <div style="font-weight: 700; color: #fb923c;" id="afterAllocation_${campaignId}">
+                            <div style="font-weight: 700; color: #fb923c;" id="afterAllocation_${campaign.id}">
                                 ${(advertiserAvailable - 10000).toLocaleString()} available
                             </div>
                         </div>
@@ -222,33 +376,33 @@ function getCampaignControlContent(campaignId) {
                 
                 <div class="form-group">
                     <label class="form-label">Advertisement Title * (Max ${campaign.adSpecs.titleMaxLength} characters)</label>
-                    <input type="text" class="form-input" id="advAdTitle_${campaignId}" maxlength="${campaign.adSpecs.titleMaxLength}" placeholder="Amazing Offer at Our Location!" onkeyup="updateCharCount('advAdTitle_${campaignId}', 'adTitleCount_${campaignId}', ${campaign.adSpecs.titleMaxLength})">
+                    <input type="text" class="form-input" id="advAdTitle_${campaign.id}" maxlength="${campaign.adSpecs.titleMaxLength}" placeholder="Amazing Offer at Our Location!" onkeyup="updateCharCount('advAdTitle_${campaign.id}', 'adTitleCount_${campaign.id}', ${campaign.adSpecs.titleMaxLength})">
                     <div class="form-hint">
-                        <span id="adTitleCount_${campaignId}">0</span>/${campaign.adSpecs.titleMaxLength} characters
+                        <span id="adTitleCount_${campaign.id}">0</span>/${campaign.adSpecs.titleMaxLength} characters
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">Advertisement Description * (Max ${campaign.adSpecs.descriptionMaxLength} characters)</label>
-                    <textarea class="form-input" id="advAdDescription_${campaignId}" rows="4" maxlength="${campaign.adSpecs.descriptionMaxLength}" placeholder="Visit our location and redeem your $Ember tokens for exclusive discounts, free items, or special offers! We're located at [address] and open [hours]. Scan your QR code at checkout to redeem." onkeyup="updateCharCount('advAdDescription_${campaignId}', 'adDescCount_${campaignId}', ${campaign.adSpecs.descriptionMaxLength})"></textarea>
+                    <textarea class="form-input" id="advAdDescription_${campaign.id}" rows="4" maxlength="${campaign.adSpecs.descriptionMaxLength}" placeholder="Visit our location and redeem your $Ember tokens for exclusive discounts, free items, or special offers! We're located at [address] and open [hours]. Scan your QR code at checkout to redeem." onkeyup="updateCharCount('advAdDescription_${campaign.id}', 'adDescCount_${campaign.id}', ${campaign.adSpecs.descriptionMaxLength})"></textarea>
                     <div class="form-hint">
-                        <span id="adDescCount_${campaignId}">0</span>/${campaign.adSpecs.descriptionMaxLength} characters | 
+                        <span id="adDescCount_${campaign.id}">0</span>/${campaign.adSpecs.descriptionMaxLength} characters | 
                         Include redemption instructions!
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">Advertisement Image * (Square, PNG/JPG, Max 2MB)</label>
-                    <div class="logo-upload-area" onclick="document.getElementById('advAdImage_${campaignId}').click()">
-                        <div id="adImagePreviewContainer_${campaignId}">
-                            <div id="adImagePlaceholder_${campaignId}" class="logo-placeholder">
+                    <div class="logo-upload-area" onclick="document.getElementById('advAdImage_${campaign.id}').click()">
+                        <div id="adImagePreviewContainer_${campaign.id}">
+                            <div id="adImagePlaceholder_${campaign.id}" class="logo-placeholder">
                                 <span>🖼️</span>
                                 <span>Click to upload advertisement image</span>
                             </div>
-                            <img id="adImagePreview_${campaignId}" class="logo-preview-img" style="display: none; max-width: 120px; max-height: 120px;">
+                            <img id="adImagePreview_${campaign.id}" class="logo-preview-img" style="display: none; max-width: 120px; max-height: 120px;">
                         </div>
                     </div>
-                    <input type="file" class="form-input" id="advAdImage_${campaignId}" accept="image/*" onchange="previewAdImage(event, '${campaignId}')" style="display: none;">
+                    <input type="file" class="form-input" id="advAdImage_${campaign.id}" accept="image/*" onchange="previewAdImage(event, '${campaign.id}')" style="display: none;">
                     <div class="form-hint">Recommended: 800x800px, eye-catching design</div>
                 </div>
                 
@@ -257,24 +411,24 @@ function getCampaignControlContent(campaignId) {
                     
                     <div class="form-group">
                         <label class="form-label">What Can Players Redeem? *</label>
-                        <input type="text" class="form-input" id="advOffer_${campaignId}" placeholder="10% Off Any Purchase OR Free Coffee">
+                        <input type="text" class="form-input" id="advOffer_${campaign.id}" placeholder="10% Off Any Purchase OR Free Coffee">
                         <div class="form-hint">Be specific! Example: "10% off, Free appetizer, $5 off $25+"</div>
                     </div>
                     
                     <div class="form-group">
                         <label class="form-label">Redemption Cost (in $Ember) *</label>
-                        <input type="number" class="form-input" id="advOfferCost_${campaignId}" value="50" min="25" step="25">
+                        <input type="number" class="form-input" id="advOfferCost_${campaign.id}" value="50" min="25" step="25">
                         <div class="form-hint">How many $Ember tokens does this offer cost? Default: ${campaign.tokensPerCollection}</div>
                     </div>
                     
                     <div class="form-group">
                         <label class="form-label">Call-to-Action Button Text</label>
-                        <input type="text" class="form-input" id="advCtaText_${campaignId}" value="Visit Us & Redeem" placeholder="Visit Us & Redeem">
+                        <input type="text" class="form-input" id="advCtaText_${campaign.id}" value="Visit Us & Redeem" placeholder="Visit Us & Redeem">
                     </div>
                     
                     <div class="form-group">
                         <label class="form-label">Website/Maps URL (Optional)</label>
-                        <input type="text" class="form-input" id="advCtaUrl_${campaignId}" placeholder="https://yourbusiness.com">
+                        <input type="text" class="form-input" id="advCtaUrl_${campaign.id}" placeholder="https://yourbusiness.com">
                         <div class="form-hint">Link to your website, Google Maps, or booking page</div>
                     </div>
                 </div>
@@ -289,33 +443,33 @@ function getCampaignControlContent(campaignId) {
                 <div style="max-width: 400px; margin: 0 auto; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 12px;">
                     <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px;">
                         <div style="width: 100%; height: 200px; background: rgba(0,0,0,0.3); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; overflow: hidden;">
-                            <img id="adPreviewImage_${campaignId}" style="display: none; width: 100%; height: 100%; object-fit: cover;">
-                            <div id="adPreviewPlaceholder_${campaignId}" style="color: rgba(255,255,255,0.4); text-align: center;">
+                            <img id="adPreviewImage_${campaign.id}" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                            <div id="adPreviewPlaceholder_${campaign.id}" style="color: rgba(255,255,255,0.4); text-align: center;">
                                 <div style="font-size: 3rem; margin-bottom: 10px;">🖼️</div>
                                 <div style="font-size: 0.9rem;">Your image will appear here</div>
                             </div>
                         </div>
                         
-                        <h3 id="adPreviewTitle_${campaignId}" style="color: var(--color-primary-gold); margin-bottom: 12px; font-size: 1.3rem;">
+                        <h3 id="adPreviewTitle_${campaign.id}" style="color: var(--color-primary-gold); margin-bottom: 12px; font-size: 1.3rem;">
                             Your Advertisement Title
                         </h3>
                         
-                        <p id="adPreviewDescription_${campaignId}" style="color: rgba(255,255,255,0.9); margin-bottom: 15px; line-height: 1.5; font-size: 0.95rem;">
+                        <p id="adPreviewDescription_${campaign.id}" style="color: rgba(255,255,255,0.9); margin-bottom: 15px; line-height: 1.5; font-size: 0.95rem;">
                             Your advertisement description will appear here...
                         </p>
                         
                         <div style="background: rgba(34,197,94,0.2); border: 1px solid rgba(34,197,94,0.4); border-radius: 8px; padding: 12px; margin-bottom: 15px;">
                             <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 3px;">Redeem For:</div>
-                            <div id="adPreviewOffer_${campaignId}" style="font-weight: 700; color: #22c55e; margin-bottom: 5px;">
+                            <div id="adPreviewOffer_${campaign.id}" style="font-weight: 700; color: #22c55e; margin-bottom: 5px;">
                                 Your offer will appear here
                             </div>
                             <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">
-                                Cost: <span id="adPreviewCost_${campaignId}">50</span> $Ember
+                                Cost: <span id="adPreviewCost_${campaign.id}">50</span> $Ember
                             </div>
                         </div>
                         
                         <button class="btn btn-primary" style="width: 100%; pointer-events: none;">
-                            <span id="adPreviewCta_${campaignId}">Visit Us & Redeem</span>
+                            <span id="adPreviewCta_${campaign.id}">Visit Us & Redeem</span>
                         </button>
                     </div>
                 </div>
@@ -336,13 +490,13 @@ function getCampaignControlContent(campaignId) {
                     </ul>
                 </div>
                 
-                <button class="btn btn-primary btn-large" onclick="createAdvertisementTokenStop('${campaignId}')" style="width: 100%; font-size: 1.1rem;" ${advertiserAvailable < campaign.minTokensPerStop ? 'disabled' : ''}>
+                <button class="btn btn-primary btn-large" onclick="createAdvertisementTokenStop('${campaign.id}')" style="width: 100%; font-size: 1.1rem;" ${advertiserAvailable < campaign.minTokensPerStop ? 'disabled' : ''}>
                     💎 Create Advertisement Token Stop
                 </button>
                 
                 ${advertiserAvailable < campaign.minTokensPerStop ? `
                     <div style="text-align: center; margin-top: 15px; color: #ef4444;">
-                        ⚠️ Insufficient tokens. Purchase more $Ember to continue.
+                        ⚠️ Insufficient tokens. Purchase more $Ember from Coinbase to continue.
                     </div>
                 ` : ''}
             </div>
@@ -408,9 +562,9 @@ function getCampaignControlContent(campaignId) {
                     
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <button class="btn btn-primary" onclick="getScannerLink()">Get Scanner Link</button>
-                        <button class="btn btn-secondary" onclick="editAdvertisement('${loc.id}', '${campaignId}')">Edit Advertisement</button>
-                        <button class="btn btn-outline" onclick="addMoreTokens('${loc.id}', '${campaignId}')">Add Tokens</button>
-                        <button class="btn btn-outline" onclick="viewLocationAnalytics('${loc.id}', '${campaignId}')">Analytics</button>
+                        <button class="btn btn-secondary" onclick="editAdvertisement('${loc.id}', '${campaign.id}')">Edit Advertisement</button>
+                        <button class="btn btn-outline" onclick="addMoreTokens('${loc.id}', '${campaign.id}')">Add Tokens</button>
+                        <button class="btn btn-outline" onclick="viewLocationAnalytics('${loc.id}', '${campaign.id}')">Analytics</button>
                     </div>
                 </div>
             `).join('')}
@@ -428,24 +582,24 @@ function getCampaignControlContent(campaignId) {
         
         <script>
             // Auto-update preview as user types
-            document.getElementById('advAdTitle_${campaignId}')?.addEventListener('input', function(e) {
-                document.getElementById('adPreviewTitle_${campaignId}').textContent = e.target.value || 'Your Advertisement Title';
+            document.getElementById('advAdTitle_${campaign.id}')?.addEventListener('input', function(e) {
+                document.getElementById('adPreviewTitle_${campaign.id}').textContent = e.target.value || 'Your Advertisement Title';
             });
             
-            document.getElementById('advAdDescription_${campaignId}')?.addEventListener('input', function(e) {
-                document.getElementById('adPreviewDescription_${campaignId}').textContent = e.target.value || 'Your advertisement description will appear here...';
+            document.getElementById('advAdDescription_${campaign.id}')?.addEventListener('input', function(e) {
+                document.getElementById('adPreviewDescription_${campaign.id}').textContent = e.target.value || 'Your advertisement description will appear here...';
             });
             
-            document.getElementById('advOffer_${campaignId}')?.addEventListener('input', function(e) {
-                document.getElementById('adPreviewOffer_${campaignId}').textContent = e.target.value || 'Your offer will appear here';
+            document.getElementById('advOffer_${campaign.id}')?.addEventListener('input', function(e) {
+                document.getElementById('adPreviewOffer_${campaign.id}').textContent = e.target.value || 'Your offer will appear here';
             });
             
-            document.getElementById('advOfferCost_${campaignId}')?.addEventListener('input', function(e) {
-                document.getElementById('adPreviewCost_${campaignId}').textContent = e.target.value || '50';
+            document.getElementById('advOfferCost_${campaign.id}')?.addEventListener('input', function(e) {
+                document.getElementById('adPreviewCost_${campaign.id}').textContent = e.target.value || '50';
             });
             
-            document.getElementById('advCtaText_${campaignId}')?.addEventListener('input', function(e) {
-                document.getElementById('adPreviewCta_${campaignId}').textContent = e.target.value || 'Visit Us & Redeem';
+            document.getElementById('advCtaText_${campaign.id}')?.addEventListener('input', function(e) {
+                document.getElementById('adPreviewCta_${campaign.id}').textContent = e.target.value || 'Visit Us & Redeem';
             });
         </script>
     `;
@@ -605,8 +759,8 @@ function createAdvertisementTokenStop(campaignId) {
         `📍 Location: ${name}\n` +
         `${address}\n\n` +
         `💰 COSTS:\n` +
-        `• Monthly Fee: ${typeof monthlyFee === 'number' ? '$' + monthlyFee : monthlyFee}\n` +
-        `• Tokens Allocated: ${tokensAllocate.toLocaleString()} $Ember\n\n` +
+        `• Monthly Fee to Campaign Manager: ${typeof monthlyFee === 'number' ? '$' + monthlyFee : monthlyFee}\n` +
+        `• Tokens Allocated (from Coinbase): ${tokensAllocate.toLocaleString()} $Ember\n\n` +
         `📢 ADVERTISEMENT:\n` +
         `• Title: "${adTitle}"\n` +
         `• Offer: "${offer}" (${offerCost} $Ember)\n\n` +
@@ -625,7 +779,7 @@ function createAdvertisementTokenStop(campaignId) {
             `2. Share link with staff via email\n` +
             `3. Players will start collecting & seeing your ad!\n` +
             `4. Monitor redemptions in analytics\n\n` +
-            `Monthly fee: ${typeof monthlyFee === 'number' ? '$' + monthlyFee : monthlyFee}`);
+            `Monthly fee to campaign manager: ${typeof monthlyFee === 'number' ? '$' + monthlyFee : monthlyFee}`);
         
         // Update advertiser balance (in real app, this would be server-side)
         if (window.AdvertiserData?.tokenBalance) {
@@ -695,14 +849,14 @@ function editAdvertisement(locationId, campaignId) {
 function addMoreTokens(locationId, campaignId) {
     const advertiserAvailable = window.AdvertiserData?.tokenBalance?.available || 0;
     
-    const amount = prompt(`How many tokens to add?\n\nAvailable: ${advertiserAvailable.toLocaleString()} $Ember`, '5000');
+    const amount = prompt(`How many tokens to add?\n\nAvailable: ${advertiserAvailable.toLocaleString()} $Ember (from Coinbase)`, '5000');
     
     if (amount) {
         const tokens = parseInt(amount);
         
         if (tokens > advertiserAvailable) {
             alert(`Insufficient tokens. You have ${advertiserAvailable.toLocaleString()} available.`);
-            if (confirm('Purchase more tokens?')) {
+            if (confirm('Purchase more tokens from Coinbase?')) {
                 if (typeof window.loadSection === 'function') {
                     window.loadSection('wallet');
                 }
