@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Responsive Design - Desktop-Optimized
+   Responsive Design - Desktop-Optimized - FIXED
    ============================================ */
 
 /* ============================================
@@ -18,7 +18,8 @@
     }
     
     .main-content {
-        padding: var(--spacing-4xl) var(--spacing-3xl);
+        padding: var(--spacing-xl) var(--spacing-3xl);
+        max-width: 100%;
     }
     
     .hero-stats {
@@ -50,6 +51,11 @@
     .revenue-grid {
         grid-template-columns: 1fr 1fr;
     }
+    
+    .main-content {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
 }
 
 /* ============================================
@@ -62,7 +68,9 @@
     }
     
     .main-content {
-        padding: var(--spacing-xl) var(--spacing-lg);
+        padding: var(--spacing-md) var(--spacing-lg);
+        max-width: 100%;
+        overflow-x: hidden;
     }
     
     .hero-stats {
@@ -83,11 +91,15 @@
     
     /* Adjust font sizes slightly */
     .page-title {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
     
     .stat-value {
-        font-size: 2.2rem;
+        font-size: 1.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
     }
 }
 
@@ -139,28 +151,30 @@
     /* Full width main content */
     .main-content {
         margin-left: 0;
-        padding: var(--spacing-lg) var(--spacing-md);
+        padding: var(--spacing-md);
+        max-width: 100%;
+        overflow-x: hidden;
     }
     
     /* Grid adjustments */
     .hero-stats {
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm);
     }
     
     .apps-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm);
     }
     
     .revenue-grid {
         grid-template-columns: 1fr;
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm);
     }
     
     .monitoring-grid {
         grid-template-columns: 1fr;
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm);
     }
     
     .performance-cards {
@@ -169,23 +183,23 @@
     
     /* Reduce font sizes */
     .page-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     
     .section-title {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
     
     .stat-value {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     .revenue-amount {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     
     .revenue-total-amount {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
     
     /* Hide less important elements */
@@ -204,6 +218,11 @@
     
     .token-value {
         display: none;
+    }
+    
+    /* Compact dashboard sections */
+    .dashboard-section {
+        margin-bottom: var(--spacing-lg);
     }
 }
 
@@ -233,7 +252,7 @@
     }
     
     .page-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
     
     .header-right {
@@ -242,12 +261,14 @@
     
     /* Hide token balance text on very small screens */
     .token-count {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
     
     /* Main content */
     .main-content {
-        padding: var(--spacing-md) var(--spacing-sm);
+        padding: var(--spacing-sm);
+        max-width: 100%;
+        overflow-x: hidden;
     }
     
     /* Single column layouts */
@@ -278,51 +299,51 @@
     
     /* Stat cards */
     .stat-card {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
     }
     
     .stat-value {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     .stat-label {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
     
     /* App cards */
     .app-card {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
     }
     
     .app-name {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     /* Revenue cards */
     .revenue-stream {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
     }
     
     .revenue-amount {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     .revenue-total-amount {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     
     /* Live monitoring */
     .live-map {
-        height: 300px;
+        height: 280px;
     }
     
     .monitoring-panel {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
     }
     
     /* Activity feed */
     .activity-feed {
-        max-height: 300px;
+        max-height: 280px;
     }
     
     .activity-item {
@@ -331,18 +352,18 @@
     
     /* Buttons */
     .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+        padding: 9px 18px;
+        font-size: 0.85rem;
     }
     
     .btn-large {
-        padding: 14px 30px;
-        font-size: 1rem;
+        padding: 12px 26px;
+        font-size: 0.95rem;
     }
     
     /* Tables */
     .merchants-table {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
     
     .merchants-table th,
@@ -352,11 +373,11 @@
     
     /* Section spacing */
     .dashboard-section {
-        margin-bottom: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
     }
     
     .section-title {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
 }
 
@@ -369,10 +390,10 @@
         --sidebar-width: 100%;
         --header-height: 60px;
         --spacing-xs: 6px;
-        --spacing-sm: 12px;
-        --spacing-md: 18px;
-        --spacing-lg: 24px;
-        --spacing-xl: 32px;
+        --spacing-sm: 10px;
+        --spacing-md: 16px;
+        --spacing-lg: 22px;
+        --spacing-xl: 28px;
     }
     
     html {
@@ -386,11 +407,11 @@
     }
     
     .sidebar-logo {
-        margin-bottom: var(--spacing-lg);
+        margin-bottom: var(--spacing-md);
     }
     
     .sidebar-brand {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     /* Header very compact */
@@ -400,7 +421,7 @@
     }
     
     .page-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .header-right {
@@ -422,7 +443,7 @@
     }
     
     .token-count {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
     
     .notification-bell {
@@ -439,6 +460,8 @@
     .main-content {
         padding: var(--spacing-sm);
         margin-top: 60px;
+        max-width: 100%;
+        overflow-x: hidden;
     }
     
     /* All grids single column */
@@ -457,15 +480,15 @@
     }
     
     .stat-icon {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     
     .stat-value {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
     
     .stat-label {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
     
     /* App cards */
@@ -474,12 +497,12 @@
     }
     
     .app-name {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     
     .app-metric {
-        padding: 6px 0;
-        font-size: 0.85rem;
+        padding: 5px 0;
+        font-size: 0.8rem;
     }
     
     .app-actions {
@@ -488,40 +511,40 @@
     
     /* Revenue cards */
     .revenue-stream {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
     }
     
     .revenue-icon {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
     
     .revenue-title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     
     .revenue-amount {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     .revenue-total {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
     }
     
     .revenue-total-amount {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     /* Live monitoring */
     .live-monitoring {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
     }
     
     .monitoring-title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     
     .live-map {
-        height: 250px;
+        height: 220px;
     }
     
     .monitoring-panel {
@@ -529,7 +552,7 @@
     }
     
     .panel-title {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     
     .map-controls {
@@ -537,13 +560,13 @@
     }
     
     .map-controls .btn {
-        padding: 6px 12px;
-        font-size: 0.75rem;
+        padding: 5px 10px;
+        font-size: 0.7rem;
     }
     
     /* Activity feed */
     .activity-feed {
-        max-height: 250px;
+        max-height: 220px;
     }
     
     .activity-item {
@@ -552,17 +575,17 @@
     }
     
     .activity-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 0.9rem;
-    }
-    
-    .activity-text {
+        width: 26px;
+        height: 26px;
         font-size: 0.85rem;
     }
     
+    .activity-text {
+        font-size: 0.8rem;
+    }
+    
     .activity-time {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
     
     /* Airdrop controls */
@@ -575,8 +598,8 @@
     }
     
     .form-input {
-        padding: 10px 12px;
-        font-size: 0.9rem;
+        padding: 8px 10px;
+        font-size: 0.85rem;
     }
     
     .radio-group {
@@ -586,18 +609,18 @@
     
     /* Buttons */
     .btn {
-        padding: 8px 16px;
-        font-size: 0.85rem;
+        padding: 7px 14px;
+        font-size: 0.8rem;
     }
     
     .btn-large {
-        padding: 12px 24px;
-        font-size: 0.95rem;
+        padding: 10px 20px;
+        font-size: 0.9rem;
     }
     
     .btn-small {
-        padding: 6px 14px;
-        font-size: 0.8rem;
+        padding: 5px 12px;
+        font-size: 0.75rem;
     }
     
     /* Tables - force horizontal scroll */
@@ -608,12 +631,12 @@
     
     .merchants-table {
         min-width: 600px;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
     
     .merchants-table th,
     .merchants-table td {
-        padding: 8px;
+        padding: 6px;
         white-space: nowrap;
     }
     
@@ -625,7 +648,7 @@
     }
     
     .section-title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     
     .section-actions {
@@ -638,12 +661,12 @@
     
     /* Dashboard section spacing */
     .dashboard-section {
-        margin-bottom: var(--spacing-lg);
+        margin-bottom: var(--spacing-md);
     }
     
     /* Cards */
     .card {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
         border-radius: var(--card-radius-medium);
     }
     
@@ -653,11 +676,21 @@
     }
     
     .performance-value {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     
     .performance-label {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+    }
+    
+    /* Builder panels for mobile */
+    .builder-panel {
+        padding: var(--spacing-sm);
+    }
+    
+    .builder-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
     }
 }
 
@@ -672,16 +705,16 @@
     }
     
     .live-map {
-        height: 250px;
+        height: 220px;
     }
     
     .activity-feed {
-        max-height: 200px;
+        max-height: 180px;
     }
     
     .main-content {
-        padding-top: var(--spacing-lg);
-        padding-bottom: var(--spacing-lg);
+        padding-top: var(--spacing-md);
+        padding-bottom: var(--spacing-md);
     }
 }
 
@@ -772,5 +805,25 @@
     
     .btn {
         border: 2px solid white;
+    }
+}
+
+/* ============================================
+   PREVENT OVERFLOW ON ALL SCREEN SIZES
+   ============================================ */
+
+@media (max-width: 1920px) {
+    body {
+        overflow-x: hidden;
+    }
+    
+    .main-content {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .dashboard-wrapper {
+        max-width: 100vw;
+        overflow-x: hidden;
     }
 }
