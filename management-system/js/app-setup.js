@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   App Setup - White Label Builder & SDK Integration
+   App Setup - White Label Builder & SDK Integration - FIXED
    File: management-system/js/app-setup.js
    ============================================ */
 
@@ -39,7 +39,7 @@ function getAppSetupContent(role) {
     return `
         <div class="dashboard-section">
             <h2 class="section-title">🎮 Launch Your Campaign</h2>
-            <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 30px;">
+            <p style="color: rgba(255,255,255,0.8); font-size: 1rem; margin-bottom: 25px; max-width: 100%;">
                 Deploy your location-based AR crypto gaming campaign in minutes. Choose between our no-code White Label App Builder or integrate our SDK into your existing application.
             </p>
             
@@ -350,9 +350,28 @@ function selectSetupType(type) {
         document.getElementById('whiteLabelBuilder').style.display = 'block';
         setTimeout(() => {
             updateLivePreview();
+            applyBuilderOverflowFix();
         }, 100);
     } else if (type === 'sdk') {
         document.getElementById('sdkIntegration').style.display = 'block';
+        setTimeout(applyBuilderOverflowFix, 100);
+    }
+}
+
+/**
+ * Apply overflow fix specifically for builder
+ */
+function applyBuilderOverflowFix() {
+    document.querySelectorAll('.builder-panel').forEach(panel => {
+        panel.style.maxWidth = '100%';
+        panel.style.overflowX = 'hidden';
+        panel.style.boxSizing = 'border-box';
+    });
+    
+    const builderGrid = document.querySelector('.builder-grid');
+    if (builderGrid) {
+        builderGrid.style.maxWidth = '100%';
+        builderGrid.style.width = '100%';
     }
 }
 
