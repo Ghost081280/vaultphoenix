@@ -13,7 +13,7 @@ const TokenEconomy = {
     lastPriceUpdate: new Date(),
     priceUpdateInterval: 300000, // 5 minutes
     
-    // Presale configuration (Admin only)
+    // Presale configuration
     presale: {
         price: 0.003,
         target: 500000,
@@ -92,66 +92,54 @@ const TokenEconomy = {
 };
 
 // ============================================
-// LOCATION PLACEMENT PRICING TIERS
+// LOCATION PLACEMENT PRICING - SIMPLIFIED
 // ============================================
 
 const LocationPricing = {
-    bronze: {
-        name: 'Bronze',
-        monthlyFee: 200,
-        features: [
-            'Basic visibility',
-            'Standard placement',
-            'Monthly reporting',
-            'Scanner app access',
-            'Advertisement display'
-        ],
-        minTokensRequired: 5000  // Must purchase to fund location
+    // Campaign Manager sets these prices for their campaign
+    defaultPricing: {
+        singleLocation: {
+            name: '1 Location',
+            monthlyFee: 500,
+            description: 'Perfect for single location businesses',
+            allFeaturesIncluded: true
+        },
+        smallBusiness: {
+            name: '2-5 Locations',
+            monthlyFee: 400,
+            monthlyFeePerLocation: 400,
+            description: 'Great for small business chains',
+            allFeaturesIncluded: true
+        },
+        mediumBusiness: {
+            name: '6-10 Locations',
+            monthlyFee: 350,
+            monthlyFeePerLocation: 350,
+            description: 'Ideal for growing businesses',
+            allFeaturesIncluded: true
+        },
+        enterprise: {
+            name: '11+ Locations',
+            monthlyFee: 'Custom',
+            description: 'Custom pricing for large deployments',
+            contactRequired: true,
+            allFeaturesIncluded: true
+        }
     },
-    silver: {
-        name: 'Silver',
-        monthlyFee: 500,
-        features: [
-            'Enhanced visibility',
-            'Priority placement',
-            'Weekly reporting',
-            'Custom branding',
-            'Scanner app access',
-            'Advertisement display',
-            'Analytics dashboard'
-        ],
-        minTokensRequired: 10000
-    },
-    gold: {
-        name: 'Gold',
-        monthlyFee: 1200,
-        features: [
-            'Featured placement',
-            'Exclusive territory',
-            'Daily reporting',
-            'Premium support',
-            'Scanner app access',
-            'Advertisement display',
-            'Advanced analytics',
-            'Custom ad design'
-        ],
-        minTokensRequired: 25000
-    },
-    platinum: {
-        name: 'Platinum',
-        monthlyFee: 2500,
-        features: [
-            'Premium positioning',
-            'Guaranteed traffic',
-            'Real-time reporting',
-            'Dedicated account manager',
-            'Scanner app access',
-            'Advertisement display',
-            'Custom integration',
-            'Video ad support'
-        ],
-        minTokensRequired: 50000
-    }
+    
+    // All features included regardless of location count
+    includedFeatures: [
+        'GPS-verified foot traffic',
+        'Advertisement display system',
+        'Scanner web app access',
+        'Real-time analytics dashboard',
+        'Token recovery via redemptions',
+        'Custom branding options',
+        'Multi-location management',
+        'Email support',
+        'CSV bulk upload',
+        'Performance reporting'
+    ]
 };
 
 // ============================================
@@ -174,8 +162,9 @@ const RevenueData = {
     advertisers: [
         {
             name: 'Heritage Square Historic Site',
-            tier: 'silver',
-            locationFee: 500,
+            locationCount: 1,
+            monthlyFeePerLocation: 500,
+            totalMonthlyFee: 500,
             tokensOwned: 12450,
             tokensDistributed: 8750,
             tokensRedeemed: 3250,  // Received back via redemptions
@@ -205,22 +194,39 @@ function calculateUSDFromTokens(tokenAmount) {
 }
 
 /**
- * Calculate minimum token purchase for tier
+ * Calculate pricing based on location count
  */
-function getMinimumTokensForTier(tier) {
-    return LocationPricing[tier]?.minTokensRequired || 5000;
+function getPricingForLocationCount(locationCount) {
+    if (locationCount === 1) {
+        return LocationPricing.defaultPricing.singleLocation;
+    } else if (locationCount >= 2 && locationCount <= 5) {
+        return {
+            ...LocationPricing.defaultPricing.smallBusiness,
+            totalMonthlyFee: LocationPricing.defaultPricing.smallBusiness.monthlyFeePerLocation * locationCount
+        };
+    } else if (locationCount >= 6 && locationCount <= 10) {
+        return {
+            ...LocationPricing.defaultPricing.mediumBusiness,
+            totalMonthlyFee: LocationPricing.defaultPricing.mediumBusiness.monthlyFeePerLocation * locationCount
+        };
+    } else {
+        return LocationPricing.defaultPricing.enterprise;
+    }
 }
 
 /**
  * Calculate total cost for advertiser (location fee + tokens)
  */
-function calculateAdvertiserTotalCost(tier, tokenAmount) {
-    const locationFee = LocationPricing[tier]?.monthlyFee || 0;
+function calculateAdvertiserTotalCost(locationCount, tokenAmount) {
+    const pricing = getPricingForLocationCount(locationCount);
+    const locationFee = pricing.totalMonthlyFee || pricing.monthlyFee;
     const tokenCost = tokenAmount * TokenEconomy.marketPrice;
+    
     return {
         locationFee: locationFee,
         tokenCost: tokenCost,
-        total: locationFee + tokenCost
+        total: (typeof locationFee === 'number' ? locationFee : 0) + tokenCost,
+        pricePerLocation: pricing.monthlyFeePerLocation || pricing.monthlyFee
     };
 }
 
@@ -269,7 +275,7 @@ function updateMarketPrice() {
  * Get revenue analytics content for Campaign Managers
  */
 function getRevenueContent(role) {
-    if (role !== 'campaign-manager' && role !== 'system-admin') {
+    if (role !== 'campaign-manager') {
         return getPlaceholderContent('revenue');
     }
     
@@ -342,66 +348,50 @@ function getRevenueContent(role) {
                         </div>
                     </div>
                 </div>
-                
-                <div style="margin-top: 30px; padding: 25px; background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); border-radius: 12px;">
-                    <h4 style="color: var(--color-primary-gold); margin-bottom: 15px; font-size: 1.3rem;">
-                        💡 How The $Ember Ecosystem Works
-                    </h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <strong>1.</strong> Advertisers pay monthly location fees to participate in campaigns
-                        </li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <strong>2.</strong> Advertisers purchase $Ember tokens to fund their token stops
-                        </li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <strong>3.</strong> Each token includes the advertiser's advertisement
-                        </li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <strong>4.</strong> Players collect tokens at locations and see the advertisement
-                        </li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <strong>5.</strong> Players can cash out to Coinbase OR redeem offers at advertiser locations
-                        </li>
-                        <li style="padding: 10px 0;">
-                            <strong>6.</strong> Advertisers scan player QR codes → receive $Ember back → give offers
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
         
-        <!-- Pricing Tiers Reference -->
+        <!-- Pricing Structure -->
         <div class="dashboard-section">
-            <h2 class="section-title">💳 Location Placement Pricing Tiers</h2>
+            <h2 class="section-title">💳 Location Placement Pricing</h2>
+            
+            <div class="card" style="background: rgba(240,165,0,0.1); border: 2px solid rgba(240,165,0,0.3); margin-bottom: 30px;">
+                <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">
+                    ✨ All Features Included - No Tiers!
+                </h3>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
+                    Simple pricing based on location count. All advertisers get every feature regardless of how many locations they have.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                    ${LocationPricing.includedFeatures.map(feature => `
+                        <div style="padding: 8px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            ✓ ${feature}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
             
             <div class="apps-grid">
-                ${Object.entries(LocationPricing).map(([key, tier]) => `
+                ${Object.entries(LocationPricing.defaultPricing).map(([key, pricing]) => `
                     <div class="card">
                         <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">
-                            ${tier.name} Tier
+                            ${pricing.name}
                         </h3>
                         <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-orange); margin-bottom: 10px;">
-                            ${formatCurrency(tier.monthlyFee)}<span style="font-size: 1rem; color: rgba(255,255,255,0.6);">/month</span>
+                            ${typeof pricing.monthlyFee === 'number' ? formatCurrency(pricing.monthlyFee) : pricing.monthlyFee}${typeof pricing.monthlyFeePerLocation === 'number' ? `<span style="font-size: 1rem; color: rgba(255,255,255,0.6);">/location/month</span>` : pricing.contactRequired ? '' : '<span style="font-size: 1rem; color: rgba(255,255,255,0.6);">/month</span>'}
                         </div>
-                        <div style="background: rgba(240,165,0,0.15); border: 1px solid rgba(240,165,0,0.4); border-radius: 8px; padding: 12px; margin-bottom: 15px;">
-                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 5px;">
-                                Required Token Purchase
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">
+                            ${pricing.description}
+                        </p>
+                        ${pricing.contactRequired ? `
+                            <div style="padding: 15px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px;">
+                                <div style="font-weight: 700; color: #22c55e; margin-bottom: 5px;">Contact for Pricing</div>
+                                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                                    Custom solutions for large-scale deployments
+                                </div>
                             </div>
-                            <div style="font-size: 1.3rem; font-weight: 900; color: var(--color-primary-gold);">
-                                ${formatTokens(tier.minTokensRequired)} $Ember
-                            </div>
-                            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 5px;">
-                                ≈ ${formatCurrency(tier.minTokensRequired * TokenEconomy.marketPrice)} one-time
-                            </div>
-                        </div>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            ${tier.features.map(feature => `
-                                <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                    ✓ ${feature}
-                                </li>
-                            `).join('')}
-                        </ul>
+                        ` : ''}
                     </div>
                 `).join('')}
             </div>
@@ -546,6 +536,6 @@ if (typeof window !== 'undefined') {
     window.formatTokens = formatTokens;
     window.calculateTokensFromUSD = calculateTokensFromUSD;
     window.calculateUSDFromTokens = calculateUSDFromTokens;
-    window.getMinimumTokensForTier = getMinimumTokensForTier;
+    window.getPricingForLocationCount = getPricingForLocationCount;
     window.calculateAdvertiserTotalCost = calculateAdvertiserTotalCost;
 }
