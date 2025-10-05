@@ -22,11 +22,12 @@ const AppState = {
     },
     sidebarOpen: false,
     walletConnected: false,
-    walletAddress: null
+    walletAddress: null,
+    currentCampaignId: null // Track current campaign for advertisers
 };
 
 // ============================================
-// ROLE CONFIGURATIONS
+// ROLE CONFIGURATIONS - SIMPLIFIED
 // ============================================
 
 const RoleConfig = {
@@ -53,8 +54,6 @@ const RoleConfig = {
         navigation: [
             { icon: '📊', label: 'Dashboard Overview', section: 'overview' },
             { icon: '🛒', label: 'Campaign Marketplace', section: 'marketplace' },
-            { icon: '📍', label: 'My Token Locations', section: 'locations' },
-            { icon: '🗺️', label: 'Location Map', section: 'map' },
             { icon: '🎁', label: 'Airdrop Requests', section: 'airdrop-requests' },
             { icon: '💳', label: 'Payment Center', section: 'payments' },
             { icon: '📈', label: 'Performance Analytics', section: 'analytics' },
@@ -244,8 +243,6 @@ function getSectionContent(section) {
     // Advertiser sections
     if (role === 'advertiser') {
         if (section === 'marketplace') return getMarketplaceContent(role);
-        if (section === 'locations') return getAdvertiserLocationsContent();
-        if (section === 'map') return getAdvertiserMapContent();
         if (section === 'airdrop-requests') return getAirdropRequestsContent(role);
         if (section === 'payments') return getPaymentsContent(role);
         if (section === 'analytics') return getAdvertiserAnalyticsContent(role);
@@ -276,43 +273,47 @@ function getOverviewContent(role) {
  * Campaign Manager Overview
  */
 function getCampaignManagerOverview() {
+    const activeCampaigns = 1; // $Ember Hunt
+    const totalLocations = 3; // 2 CM + 1 Advertiser
+    const advertisers = 1;
+    
     return `
         <!-- Hero Stats Cards -->
         <div class="hero-stats">
             <div class="stat-card">
                 <div class="stat-icon">💰</div>
                 <div class="stat-label">Total Revenue</div>
-                <div class="stat-value">$47,392</div>
-                <div class="stat-change positive">+19.8% ↑ this month</div>
+                <div class="stat-value">$650</div>
+                <div class="stat-change positive">This Month</div>
             </div>
             
             <div class="stat-card">
                 <div class="stat-icon">🎮</div>
                 <div class="stat-label">Active Campaigns</div>
-                <div class="stat-value">8</div>
+                <div class="stat-value">${activeCampaigns}</div>
                 <div class="stat-details">
                     <div class="stat-detail-item">
                         <span>Live Apps:</span>
-                        <span>3</span>
+                        <span>1</span>
                     </div>
                 </div>
             </div>
             
             <div class="stat-card">
-                <div class="stat-icon">💎</div>
-                <div class="stat-label">$Ember Distributed</div>
-                <div class="stat-value">3.67M</div>
-                <div class="stat-change">This Month</div>
+                <div class="stat-icon">📍</div>
+                <div class="stat-label">Total Token Locations</div>
+                <div class="stat-value">${totalLocations}</div>
+                <div class="stat-change">Across all campaigns</div>
             </div>
             
             <div class="stat-card">
-                <div class="stat-icon">📍</div>
+                <div class="stat-icon">🏢</div>
                 <div class="stat-label">Active Advertisers</div>
-                <div class="stat-value">47</div>
+                <div class="stat-value">${advertisers}</div>
                 <div class="stat-details">
                     <div class="stat-detail-item">
                         <span>Pending:</span>
-                        <span>12</span>
+                        <span>0</span>
                     </div>
                 </div>
             </div>
@@ -326,10 +327,10 @@ function getCampaignManagerOverview() {
                     🎮 Launch New Campaign
                 </button>
                 <button class="btn btn-secondary" onclick="loadSection('campaigns')" style="padding: 18px; font-size: 1rem;">
-                    📍 Add Token Locations
+                    📍 Manage Token Locations
                 </button>
-                <button class="btn btn-outline" onclick="loadSection('wallet')" style="padding: 18px; font-size: 1rem;">
-                    👛 Connect Wallet
+                <button class="btn btn-outline" onclick="loadSection('airdrops')" style="padding: 18px; font-size: 1rem;">
+                    🎯 Send Airdrop
                 </button>
             </div>
         </div>
@@ -362,40 +363,17 @@ function getCampaignManagerOverview() {
                             <span class="metric-value">47</span>
                         </div>
                         <div class="app-metric">
-                            <span class="metric-label">Token Locations</span>
-                            <span class="metric-value">4</span>
+                            <span class="metric-label">Total Locations</span>
+                            <span class="metric-value">${totalLocations}</span>
                         </div>
                         <div class="app-metric">
-                            <span class="metric-label">Revenue/Day</span>
-                            <span class="metric-value">$834</span>
+                            <span class="metric-label">Advertisers</span>
+                            <span class="metric-value">${advertisers}</span>
                         </div>
                     </div>
                     <div class="app-actions">
                         <button class="btn btn-outline" onclick="event.stopPropagation(); loadSection('campaigns')">Manage</button>
                         <button class="btn btn-primary" onclick="event.stopPropagation(); window.open('https://ghost081280.github.io/vaultphoenix/crypto-game/dashboard.html', '_blank')">View App ↗</button>
-                    </div>
-                </div>
-                
-                <div class="app-card" style="opacity: 0.6; cursor: default;">
-                    <div class="app-header">
-                        <div class="app-name">🎯 SDK Campaign #2</div>
-                        <div class="app-status">
-                            <span class="status-indicator status-offline"></span>
-                            <span style="color: #6b7280;">Setup</span>
-                        </div>
-                    </div>
-                    <div style="margin: 15px 0; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">Type</div>
-                        <div style="font-weight: 700;">SDK Integration</div>
-                    </div>
-                    <div class="app-metrics">
-                        <div class="app-metric">
-                            <span class="metric-label">Status</span>
-                            <span class="metric-value">Pending Setup</span>
-                        </div>
-                    </div>
-                    <div class="app-actions">
-                        <button class="btn btn-primary" onclick="loadSection('app-setup')">Complete Setup</button>
                     </div>
                 </div>
             </div>
