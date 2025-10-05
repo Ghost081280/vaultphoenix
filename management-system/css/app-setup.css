@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   App Setup / Builder Complete Styles
+   App Setup / Builder Complete Styles - FIXED
    File: management-system/css/app-setup.css
    ============================================ */
 
@@ -76,7 +76,7 @@
     margin: 0;
 }
 
-/* Builder Grid Layout - FIXED FOR SIDE BY SIDE */
+/* Builder Grid Layout - FIXED: No scroll bars, auto-fit content */
 .builder-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -93,28 +93,11 @@
     box-shadow: var(--card-shadow);
     display: flex;
     flex-direction: column;
-    max-height: 850px;
-    overflow-y: auto;
+    /* REMOVED: max-height and overflow-y */
+    min-height: auto;
 }
 
-/* Custom scrollbar for panels */
-.builder-panel::-webkit-scrollbar {
-    width: 8px;
-}
-
-.builder-panel::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-}
-
-.builder-panel::-webkit-scrollbar-thumb {
-    background: var(--gradient-fire);
-    border-radius: 4px;
-}
-
-.builder-panel::-webkit-scrollbar-thumb:hover {
-    background: var(--gradient-ember);
-}
+/* REMOVED: Custom scrollbar styles as they're no longer needed */
 
 .panel-title {
     font-size: 1.2rem;
@@ -125,10 +108,10 @@
     border-bottom: 2px solid var(--card-border);
 }
 
-/* Configuration Sections - COMPACT */
+/* Configuration Sections - MORE COMPACT */
 .config-section {
-    margin-bottom: 20px;
-    padding-bottom: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -140,22 +123,22 @@
 
 .config-section h5 {
     color: var(--color-primary-gold);
-    margin-bottom: 12px;
-    font-size: 1rem;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
 }
 
-/* Form Hints */
+/* Form Hints - More Compact */
 .form-hint {
     color: rgba(255, 255, 255, 0.5);
-    font-size: 0.8rem;
-    margin-top: 5px;
-    line-height: 1.3;
+    font-size: 0.75rem;
+    margin-top: 4px;
+    line-height: 1.2;
 }
 
-/* Logo Upload - COMPACT */
+/* Logo Upload - MORE COMPACT */
 .logo-upload-area {
     width: 100%;
-    height: 120px;
+    height: 100px;
     border: 2px dashed var(--card-border);
     border-radius: 12px;
     display: flex;
@@ -175,52 +158,52 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     color: rgba(255, 255, 255, 0.5);
 }
 
 .logo-placeholder span:first-child {
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .logo-placeholder span:last-child {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .logo-preview-img {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 80px;
+    max-height: 80px;
     border-radius: 12px;
     object-fit: cover;
 }
 
-/* Color Picker Grid - COMPACT */
+/* Color Picker Grid - MORE COMPACT */
 .color-grid-compact {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 8px;
 }
 
 .color-picker-group {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 }
 
 .color-picker-group .form-label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     margin-bottom: 0;
 }
 
 .color-picker-wrapper {
     display: flex;
-    gap: 5px;
+    gap: 4px;
     align-items: center;
 }
 
 .color-picker-wrapper input[type="color"] {
-    width: 40px;
-    height: 35px;
+    width: 35px;
+    height: 30px;
     border: 2px solid var(--card-border);
     border-radius: 6px;
     cursor: pointer;
@@ -230,28 +213,28 @@
 
 .color-picker-wrapper input[type="text"] {
     flex: 1;
-    padding: 6px 8px;
+    padding: 5px 6px;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
     color: white;
     font-family: monospace;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
-/* Token Info Box - COMPACT */
+/* Token Info Box - MORE COMPACT */
 .token-info-box {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 15px;
+    gap: 10px;
+    padding: 12px;
     background: rgba(240, 165, 0, 0.1);
     border: 1px solid rgba(240, 165, 0, 0.3);
     border-radius: 12px;
 }
 
 .token-symbol {
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 .token-details {
@@ -259,31 +242,31 @@
 }
 
 .token-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-gold);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .token-desc {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
-    line-height: 1.4;
+    font-size: 0.8rem;
+    line-height: 1.3;
 }
 
-/* Domain Info Box - COMPACT */
+/* Domain Info Box - MORE COMPACT */
 .domain-info-box {
     display: flex;
-    gap: 12px;
-    padding: 12px;
+    gap: 10px;
+    padding: 10px;
     background: rgba(59, 130, 246, 0.1);
     border: 1px solid rgba(59, 130, 246, 0.3);
     border-radius: 10px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .info-icon {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     flex-shrink: 0;
 }
 
@@ -294,21 +277,21 @@
 .info-content strong {
     color: var(--color-primary-gold);
     display: block;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
 }
 
 .info-content p {
-    margin: 3px 0;
+    margin: 2px 0;
     color: rgba(255, 255, 255, 0.8);
-    font-size: 0.8rem;
-    line-height: 1.4;
+    font-size: 0.75rem;
+    line-height: 1.3;
 }
 
-/* Domain Instructions - COMPACT */
+/* Domain Instructions - MORE COMPACT */
 .domain-instructions {
-    margin-top: 15px;
-    padding: 15px;
+    margin-top: 12px;
+    padding: 12px;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     border: 1px solid var(--card-border);
@@ -316,44 +299,44 @@
 
 .instructions-title {
     font-weight: var(--font-weight-bold);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: var(--color-primary-gold);
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .step-box {
     background: rgba(0, 0, 0, 0.3);
-    padding: 12px;
+    padding: 10px;
     border-radius: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     border-left: 3px solid var(--color-primary-orange);
 }
 
 .step-box strong {
     color: var(--color-primary-gold);
     display: block;
-    margin-bottom: 6px;
-    font-size: 0.9rem;
+    margin-bottom: 5px;
+    font-size: 0.85rem;
 }
 
 .step-box p {
     margin: 0;
     color: rgba(255, 255, 255, 0.8);
-    line-height: 1.4;
-    font-size: 0.85rem;
+    line-height: 1.3;
+    font-size: 0.8rem;
 }
 
 .dns-config {
     background: rgba(0, 0, 0, 0.5);
-    padding: 12px;
+    padding: 10px;
     border-radius: 8px;
-    margin-top: 8px;
+    margin-top: 6px;
     font-family: monospace;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .dns-config div {
-    padding: 4px 0;
+    padding: 3px 0;
     color: rgba(255, 255, 255, 0.9);
 }
 
@@ -369,53 +352,53 @@
     background: rgba(34, 197, 94, 0.1);
     border: 1px solid rgba(34, 197, 94, 0.3);
     border-radius: 10px;
-    padding: 15px;
-    margin-top: 12px;
+    padding: 12px;
+    margin-top: 10px;
 }
 
 .url-label {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
-    margin-bottom: 8px;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
 }
 
 .url-display {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-gold);
     font-family: monospace;
     word-break: break-all;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .url-note {
     color: #fb923c;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: var(--font-weight-medium);
 }
 
 /* Deploy Button */
 .btn-deploy {
-    margin-top: 20px;
+    margin-top: 15px;
     width: 100%;
-    padding: 16px;
-    font-size: 1.05rem;
+    padding: 14px;
+    font-size: 1rem;
 }
 
-/* Phone Mockup - COMPACT */
+/* Phone Mockup - MORE COMPACT */
 .phone-mockup {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 15px 0;
+    margin: 12px 0;
 }
 
 .phone-frame {
     width: 100%;
-    max-width: 340px;
-    border: 12px solid #1a1a1a;
-    border-radius: 42px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 0 2px #333;
+    max-width: 300px;
+    border: 10px solid #1a1a1a;
+    border-radius: 38px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 0 2px #333;
     position: relative;
     background: #000;
     overflow: hidden;
@@ -426,28 +409,28 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 110px;
-    height: 26px;
+    width: 100px;
+    height: 22px;
     background: #1a1a1a;
-    border-radius: 0 0 18px 18px;
+    border-radius: 0 0 16px 16px;
     z-index: 10;
 }
 
 .phone-frame iframe {
     width: 100%;
-    height: 600px;
+    height: 520px;
     border: none;
-    border-radius: 28px;
+    border-radius: 26px;
     background: #000;
 }
 
 .phone-indicator {
     position: absolute;
-    bottom: 6px;
+    bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
-    width: 130px;
-    height: 4px;
+    width: 110px;
+    height: 3px;
     background: rgba(255, 255, 255, 0.3);
     border-radius: 2px;
     z-index: 10;
@@ -455,15 +438,15 @@
 
 .phone-label {
     text-align: center;
-    margin-top: 12px;
+    margin-top: 10px;
     color: rgba(255, 255, 255, 0.5);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
-/* Preview Info Section - COMPACT */
+/* Preview Info Section - MORE COMPACT */
 .preview-info {
-    margin-top: 20px;
-    padding: 18px;
+    margin-top: 15px;
+    padding: 15px;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 12px;
     border: 1px solid var(--card-border);
@@ -471,22 +454,22 @@
 
 .preview-info h5 {
     color: var(--color-primary-gold);
-    margin-bottom: 12px;
-    font-size: 1rem;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
 }
 
 .preview-info ul {
     list-style: none;
     padding: 0;
-    margin: 0 0 15px 0;
+    margin: 0 0 12px 0;
 }
 
 .preview-info ul li {
-    padding: 8px 0;
+    padding: 6px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.8);
-    line-height: 1.4;
-    font-size: 0.85rem;
+    line-height: 1.3;
+    font-size: 0.8rem;
 }
 
 .preview-info ul li:last-child {
@@ -498,29 +481,29 @@
 }
 
 .tech-stack {
-    padding-top: 15px;
+    padding-top: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tech-label {
     color: rgba(255, 255, 255, 0.6);
-    font-size: 0.85rem;
-    margin-bottom: 8px;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
 }
 
 .tech-items {
     display: flex;
-    gap: 6px;
+    gap: 5px;
     flex-wrap: wrap;
 }
 
 .tech-badge {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 4px 8px;
     background: rgba(240, 165, 0, 0.2);
     border: 1px solid rgba(240, 165, 0, 0.4);
     border-radius: 6px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--color-primary-gold);
     font-weight: var(--font-weight-medium);
 }
@@ -613,6 +596,36 @@
     flex-wrap: wrap;
 }
 
+/* Form Groups - MORE COMPACT */
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-label {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--card-radius-small);
+    color: white;
+    font-size: 0.9rem;
+    transition: all var(--transition-normal);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-primary-orange);
+    background: rgba(0, 0, 0, 0.5);
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .color-grid-compact {
@@ -623,10 +636,6 @@
 @media (max-width: 1024px) {
     .builder-grid {
         grid-template-columns: 1fr;
-    }
-    
-    .builder-panel {
-        max-height: none;
     }
     
     .setup-type-grid {
@@ -667,6 +676,6 @@
     }
     
     .phone-frame iframe {
-        height: 500px;
+        height: 450px;
     }
 }
