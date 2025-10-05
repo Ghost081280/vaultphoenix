@@ -1,62 +1,60 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Analytics - Reporting & Performance Metrics (Updated)
+   Analytics - Reporting & Performance Metrics
    ============================================ */
 
 // ============================================
-// ANALYTICS DATA
+// ANALYTICS DATA - ACCURATE & CONSISTENT
 // ============================================
 
 const AnalyticsData = {
-    // Campaign performance
+    // Campaign performance (for $Ember Hunt)
     campaigns: {
-        totalActive: 8,
-        totalRevenue: 47392,
-        totalPlayers: 234,
-        totalTokensDistributed: 3666669,
+        totalActive: 1, // Only $Ember Hunt
+        totalRevenue: 650, // $500 location fee + $150 token funding
+        totalPlayers: 847,
+        totalTokensDistributed: 21200, // Tokens collected so far
         engagementRate: 87.3,
         averageSessionTime: 12.4
     },
     
     // Advertiser analytics
     advertisers: {
-        totalActive: 47,
-        totalPending: 12,
-        averageRevenue: 1008,
-        topPerformer: 'Downtown Plaza',
-        retentionRate: 94.2
+        totalActive: 1, // Heritage Square
+        totalPending: 0,
+        averageRevenue: 650,
+        topPerformer: 'Heritage Square Historic Site',
+        retentionRate: 100
     },
     
     // Player analytics
     players: {
-        totalActive: 234,
+        totalActive: 847,
         newToday: 18,
         returningUsers: 89.3,
         averageCollections: 8.7,
-        topLocation: 'Downtown Phoenix'
+        topLocation: 'Heritage Square Historic Site'
     },
     
-    // Time series data (last 7 days)
+    // Time series data (last 7 days) - simplified
     timeSeries: {
-        revenue: [6200, 6800, 7100, 6500, 7300, 6900, 7500],
-        players: [198, 212, 224, 219, 231, 227, 234],
-        tokens: [420000, 485000, 512000, 498000, 534000, 521000, 556000],
-        advertisers: [42, 43, 44, 45, 46, 46, 47],
+        revenue: [500, 510, 530, 550, 580, 620, 650],
+        players: [720, 750, 780, 800, 820, 835, 847],
+        tokens: [18000, 18500, 19200, 19800, 20400, 20800, 21200],
+        advertisers: [1, 1, 1, 1, 1, 1, 1],
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     },
     
     // Geographic distribution
     locations: [
-        { name: 'Downtown Phoenix', players: 89, collections: 1247, revenue: 15800 },
-        { name: 'Scottsdale Area', players: 67, collections: 892, revenue: 11200 },
-        { name: 'Tempe/ASU Area', players: 45, collections: 634, revenue: 8500 },
-        { name: 'Mesa District', players: 21, collections: 298, revenue: 4200 },
-        { name: 'Glendale Zone', players: 12, collections: 167, revenue: 2300 }
+        { name: 'Heritage Square Historic Site', players: 847, collections: 2340, revenue: 650, type: 'advertiser' },
+        { name: 'Downtown Phoenix Plaza', players: 420, collections: 890, revenue: 0, type: 'campaign-manager' },
+        { name: 'Phoenix Historical Society', players: 385, collections: 720, revenue: 0, type: 'campaign-manager' }
     ]
 };
 
 // ============================================
-// ADVERTISER OVERVIEW (Used in main.js)
+// ADVERTISER OVERVIEW (Used in advertiser-dashboard.js)
 // ============================================
 
 function getAdvertiserOverview() {
@@ -64,24 +62,24 @@ function getAdvertiserOverview() {
         <!-- Hero Stats -->
         <div class="hero-stats">
             <div class="stat-card">
+                <div class="stat-icon">🎮</div>
+                <div class="stat-label">Active Campaigns</div>
+                <div class="stat-value">1</div>
+                <div class="stat-change">$Ember Hunt</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">📍</div>
+                <div class="stat-label">My Token Locations</div>
+                <div class="stat-value">1</div>
+                <div class="stat-change">Heritage Square</div>
+            </div>
+            
+            <div class="stat-card">
                 <div class="stat-icon">👥</div>
                 <div class="stat-label">GPS-Verified Visitors</div>
                 <div class="stat-value">847</div>
                 <div class="stat-change positive">+18% ↑ vs last month</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon">💎</div>
-                <div class="stat-label">Token Collections</div>
-                <div class="stat-value">2,340</div>
-                <div class="stat-change positive">+12% ↑</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon">📊</div>
-                <div class="stat-label">Current Tier</div>
-                <div class="stat-value">Silver</div>
-                <div class="stat-change">Active</div>
             </div>
             
             <div class="stat-card">
@@ -92,38 +90,39 @@ function getAdvertiserOverview() {
             </div>
         </div>
         
-        <!-- Location Performance -->
+        <!-- My Campaigns -->
         <div class="dashboard-section">
-            <h2 class="section-title">📍 Heritage Square Historic Site</h2>
+            <h2 class="section-title">🎮 My Campaigns (1)</h2>
             
-            <div class="card">
-                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid rgba(255,255,255,0.1);">
-                    <div style="color: rgba(255,255,255,0.7); margin-bottom: 5px;">Location Address</div>
-                    <div style="font-size: 1.2rem; font-weight: 700;">115 N 6th St, Phoenix, AZ 85004</div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 8px;">Campaign Status</div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="apps-grid">
+                <div class="app-card" onclick="loadCampaignControl('camp-001')">
+                    <div class="app-header">
+                        <div class="app-name">$Ember Hunt</div>
+                        <div class="app-status">
                             <span class="status-indicator status-live"></span>
-                            <span style="font-size: 1.2rem; font-weight: 700; color: #22c55e;">Active & Funded</span>
+                            <span style="color: #22c55e;">ACTIVE</span>
                         </div>
                     </div>
-                    
-                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 8px;">Avg Daily Visitors</div>
-                        <div style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary-gold);">28</div>
+                    <div style="margin: 15px 0; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 5px;">Campaign Manager</div>
+                        <div style="font-weight: 700;">Phoenix Gaming Co.</div>
                     </div>
-                    
-                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 8px;">Engagement Rate</div>
-                        <div style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary-gold);">88.4%</div>
+                    <div class="app-metrics">
+                        <div class="app-metric">
+                            <span class="metric-label">My Locations</span>
+                            <span class="metric-value">1</span>
+                        </div>
+                        <div class="app-metric">
+                            <span class="metric-label">Total Locations</span>
+                            <span class="metric-value">3</span>
+                        </div>
+                        <div class="app-metric">
+                            <span class="metric-label">Active Players</span>
+                            <span class="metric-value">847</span>
+                        </div>
                     </div>
-                    
-                    <div style="padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
-                        <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 8px;">Peak Hours</div>
-                        <div style="font-size: 1.2rem; font-weight: 700;">2pm - 5pm</div>
+                    <div class="app-actions">
+                        <button class="btn btn-primary" onclick="event.stopPropagation(); loadCampaignControl('camp-001')">Manage Campaign</button>
                     </div>
                 </div>
             </div>
@@ -134,35 +133,15 @@ function getAdvertiserOverview() {
             <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">⚡ Quick Actions</h3>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <button class="btn btn-primary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('locations')">
-                    📍 Manage Token Locations
+                <button class="btn btn-primary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('marketplace')">
+                    🛒 Browse More Campaigns
                 </button>
                 <button class="btn btn-secondary" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('payments')">
                     💳 Payment Center
                 </button>
                 <button class="btn btn-outline" style="padding: 20px; font-size: 1.1rem;" onclick="loadSection('analytics')">
-                    📊 View Full Analytics
+                    📊 View Analytics
                 </button>
-            </div>
-        </div>
-        
-        <!-- Performance Chart Placeholder -->
-        <div class="dashboard-section">
-            <h3 style="font-size: 1.5rem; color: var(--color-primary-gold); margin-bottom: 20px;">
-                📈 Visitor Trends (Last 30 Days)
-            </h3>
-            
-            <div class="card">
-                <div style="height: 300px; background: linear-gradient(135deg, rgba(15, 15, 15, 0.5), rgba(45, 24, 16, 0.5)); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 15px;">📊</div>
-                        <div style="color: rgba(255,255,255,0.7);">Interactive chart showing visitor trends</div>
-                        <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 10px;">
-                            Peak day: Saturday with 47 visitors<br>
-                            Average: 28 visitors/day
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     `;
@@ -199,6 +178,14 @@ function getPaymentsContent(role) {
                         </div>
                         
                         <div style="padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                <span style="color: rgba(255,255,255,0.7);">Campaign:</span>
+                                <span style="font-weight: 700;">$Ember Hunt</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                <span style="color: rgba(255,255,255,0.7);">Location:</span>
+                                <span style="font-weight: 700;">Heritage Square</span>
+                            </div>
                             <div style="display: flex; justify-content: space-between; padding: 8px 0;">
                                 <span style="color: rgba(255,255,255,0.7);">Next Payment Due:</span>
                                 <span style="font-weight: 700;">Nov 4, 2025</span>
@@ -242,6 +229,10 @@ function getPaymentsContent(role) {
                                 <span style="color: rgba(255,255,255,0.7);">Last funded:</span>
                                 <span style="font-weight: 700;">Oct 1, 2025</span>
                             </div>
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                <span style="color: rgba(255,255,255,0.7);">Tokens collected:</span>
+                                <span style="font-weight: 700;">2,340</span>
+                            </div>
                         </div>
                     </div>
                     
@@ -262,7 +253,7 @@ function getPaymentsContent(role) {
                     <h3 style="color: var(--color-primary-gold); margin-bottom: 20px;">Estimated Monthly Costs</h3>
                     
                     <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 2px solid rgba(255,255,255,0.2);">
-                        <span style="font-size: 1.1rem;">Location Fee:</span>
+                        <span style="font-size: 1.1rem;">Location Fee (Silver):</span>
                         <span style="font-size: 1.3rem; font-weight: 700;">$500.00</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 2px solid rgba(255,255,255,0.2);">
@@ -277,7 +268,7 @@ function getPaymentsContent(role) {
                 
                 <div style="padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 25px;">
                     <p style="color: rgba(255,255,255,0.8); line-height: 1.6; margin: 0;">
-                        Based on your location's traffic patterns and typical customer engagement. 
+                        Based on your location's traffic patterns (847 visitors/month) and typical customer engagement. 
                         We recommend maintaining adequate campaign funding for consistent visitor attraction.
                     </p>
                 </div>
@@ -366,10 +357,12 @@ function getBudgetContent(role) {
                     <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
                         <div style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Your Investment</div>
                         <div style="font-size: 2rem; font-weight: 900; color: var(--color-primary-gold);">$638.50</div>
+                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">This month</div>
                     </div>
                     <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 12px;">
                         <div style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Est. Revenue Generated</div>
                         <div style="font-size: 2rem; font-weight: 900; color: #22c55e;">~$38,115</div>
+                        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 5px;">From 847 visitors</div>
                     </div>
                 </div>
             </div>
@@ -386,7 +379,7 @@ function getBudgetContent(role) {
                     <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">GPS-Verified Traffic</h4>
                     <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">
                         Unlike traditional advertising, every visitor is GPS-verified. You only pay for real, 
-                        measurable foot traffic to your location.
+                        measurable foot traffic to your location. 847 verified visitors this month.
                     </p>
                 </div>
                 
@@ -394,7 +387,7 @@ function getBudgetContent(role) {
                     <h4 style="color: var(--color-primary-orange); margin-bottom: 15px;">Engaged Audience</h4>
                     <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">
                         Players are actively seeking rewards at your location. They arrive motivated and 
-                        ready to engage with your business.
+                        ready to engage with your business. 88.4% engagement rate.
                     </p>
                 </div>
                 
@@ -428,82 +421,62 @@ function getMerchantsContent(role) {
                 <div class="stat-card">
                     <div class="stat-icon">🏢</div>
                     <div class="stat-label">Active Advertisers</div>
-                    <div class="stat-value">47</div>
-                    <div class="stat-change positive">+5 this month</div>
+                    <div class="stat-value">1</div>
+                    <div class="stat-change">In $Ember Hunt</div>
                 </div>
                 
                 <div class="stat-card">
                     <div class="stat-icon">⏳</div>
                     <div class="stat-label">Pending Approval</div>
-                    <div class="stat-value">12</div>
-                    <div class="stat-change">Awaiting review</div>
+                    <div class="stat-value">0</div>
+                    <div class="stat-change">No pending</div>
                 </div>
                 
                 <div class="stat-card">
                     <div class="stat-icon">💰</div>
                     <div class="stat-label">Monthly Recurring Revenue</div>
-                    <div class="stat-value">$32.4K</div>
-                    <div class="stat-change positive">+18% ↑</div>
+                    <div class="stat-value">$650</div>
+                    <div class="stat-change positive">From 1 advertiser</div>
                 </div>
                 
                 <div class="stat-card">
                     <div class="stat-icon">📊</div>
-                    <div class="stat-label">Avg Revenue per Advertiser</div>
-                    <div class="stat-value">$689</div>
-                    <div class="stat-change">Per month</div>
+                    <div class="stat-label">Total Locations</div>
+                    <div class="stat-value">1</div>
+                    <div class="stat-change">Advertiser locations</div>
                 </div>
             </div>
             
             <!-- Advertiser Table -->
-            <div class="merchants-table-wrapper">
-                <table class="merchants-table">
-                    <thead>
-                        <tr>
-                            <th>Advertiser</th>
-                            <th>Location</th>
-                            <th>Tier</th>
-                            <th>Monthly Fee</th>
-                            <th>Visitors (30d)</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Heritage Square</td>
-                            <td>Downtown Phoenix</td>
-                            <td><span class="tier-badge tier-silver">Silver</span></td>
-                            <td>$500</td>
-                            <td>847</td>
-                            <td><span class="badge badge-success">Active</span></td>
-                            <td>
-                                <button class="btn btn-small btn-outline">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Downtown Plaza</td>
-                            <td>Phoenix Metro</td>
-                            <td><span class="tier-badge tier-platinum">Platinum</span></td>
-                            <td>$2,500</td>
-                            <td>1,245</td>
-                            <td><span class="badge badge-success">Active</span></td>
-                            <td>
-                                <button class="btn btn-small btn-outline">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Scottsdale Mall</td>
-                            <td>Scottsdale</td>
-                            <td><span class="tier-badge tier-gold">Gold</span></td>
-                            <td>$1,200</td>
-                            <td>967</td>
-                            <td><span class="badge badge-success">Active</span></td>
-                            <td>
-                                <button class="btn btn-small btn-outline">View</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="card" style="margin-top: 30px;">
+                <h3 style="margin-bottom: 20px;">Active Advertisers</h3>
+                
+                <div class="merchants-table-wrapper">
+                    <table class="merchants-table">
+                        <thead>
+                            <tr>
+                                <th>Advertiser</th>
+                                <th>Campaign</th>
+                                <th>Locations</th>
+                                <th>Tier</th>
+                                <th>Monthly Fee</th>
+                                <th>Visitors (30d)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Heritage Square Historic Site</td>
+                                <td>$Ember Hunt</td>
+                                <td>1</td>
+                                <td><span class="tier-badge tier-silver">Silver</span></td>
+                                <td>$500</td>
+                                <td>847</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     `;
