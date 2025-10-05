@@ -1,6 +1,7 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   App Setup - White Label Builder & SDK Integration (Redesigned)
+   App Setup - White Label Builder & SDK Integration
+   File: management-system/js/app-setup.js
    ============================================ */
 
 // ============================================
@@ -171,7 +172,7 @@ function getAppSetupContent(role) {
                             <h5>🌐 Custom Domain (Optional)</h5>
                             <div class="form-group">
                                 <input type="text" class="form-input" id="customDomain" placeholder="hunt.yourdomain.com" oninput="updateCustomDomain()">
-                                <div class="form-hint">Enter your custom domain for app hosting</div>
+                                <div class="form-hint" style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 8px;">Enter your custom domain for app hosting</div>
                             </div>
                             
                             <div id="domainInstructions" class="domain-instructions" style="display: none;">
