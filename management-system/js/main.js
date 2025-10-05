@@ -1,6 +1,6 @@
 /* ============================================
    VAULT PHOENIX MANAGEMENT SYSTEM
-   Main JavaScript - Core App Logic (Updated)
+   Main JavaScript - Core App Logic - FIXED
    ============================================ */
 
 // ============================================
@@ -85,6 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     initializeApp(selectedRole);
+    
+    // Apply overflow fix after initialization
+    setTimeout(applyOverflowFix, 500);
 });
 
 /**
@@ -106,6 +109,37 @@ function initializeApp(role) {
     }
     
     console.log('App initialization complete');
+}
+
+/**
+ * Apply overflow fix to all elements
+ */
+function applyOverflowFix() {
+    // Ensure main content fits
+    const mainContent = document.getElementById('mainContent');
+    if (mainContent) {
+        mainContent.style.maxWidth = '100%';
+        mainContent.style.overflowX = 'hidden';
+    }
+    
+    // Fix all builder panels
+    document.querySelectorAll('.builder-panel').forEach(panel => {
+        panel.style.maxWidth = '100%';
+        panel.style.overflowX = 'hidden';
+        panel.style.boxSizing = 'border-box';
+    });
+    
+    // Fix all cards
+    document.querySelectorAll('.card, .stat-card, .app-card, .revenue-stream').forEach(card => {
+        card.style.maxWidth = '100%';
+        card.style.boxSizing = 'border-box';
+    });
+    
+    // Fix all grids
+    document.querySelectorAll('.hero-stats, .apps-grid, .revenue-grid, .monitoring-grid, .builder-grid').forEach(grid => {
+        grid.style.maxWidth = '100%';
+        grid.style.width = '100%';
+    });
 }
 
 /**
@@ -180,6 +214,9 @@ function loadSection(section) {
     }
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Apply overflow fix after content loads
+    setTimeout(applyOverflowFix, 200);
 }
 
 /**
@@ -284,14 +321,14 @@ function getCampaignManagerOverview() {
         <!-- Quick Actions -->
         <div class="dashboard-section">
             <h2 class="section-title">⚡ Quick Actions</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <button class="btn btn-primary" onclick="loadSection('app-setup')" style="padding: 20px; font-size: 1.1rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; max-width: 100%;">
+                <button class="btn btn-primary" onclick="loadSection('app-setup')" style="padding: 18px; font-size: 1rem;">
                     🎮 Launch New Campaign
                 </button>
-                <button class="btn btn-secondary" onclick="loadSection('campaigns')" style="padding: 20px; font-size: 1.1rem;">
+                <button class="btn btn-secondary" onclick="loadSection('campaigns')" style="padding: 18px; font-size: 1rem;">
                     📍 Add Token Locations
                 </button>
-                <button class="btn btn-outline" onclick="loadSection('wallet')" style="padding: 20px; font-size: 1.1rem;">
+                <button class="btn btn-outline" onclick="loadSection('wallet')" style="padding: 18px; font-size: 1rem;">
                     👛 Connect Wallet
                 </button>
             </div>
@@ -422,6 +459,9 @@ function setupEventListeners() {
     
     handleResponsiveSidebar();
     window.addEventListener('resize', handleResponsiveSidebar);
+    
+    // Add overflow fix on resize
+    window.addEventListener('resize', applyOverflowFix);
 }
 
 /**
@@ -480,15 +520,15 @@ function initializeCoinbaseWallet() {
  */
 function getPlaceholderContent(section) {
     return `
-        <div style="text-align: center; padding: 80px 20px;">
+        <div style="text-align: center; padding: 60px 20px; max-width: 100%;">
             <div style="font-size: 4rem; margin-bottom: 20px;">🚧</div>
-            <h2 style="font-size: 2rem; margin-bottom: 15px; color: var(--color-primary-gold);">
+            <h2 style="font-size: 1.8rem; margin-bottom: 15px; color: var(--color-primary-gold);">
                 ${section.charAt(0).toUpperCase() + section.slice(1).replace('-', ' ')} Section
             </h2>
-            <p style="color: rgba(255, 255, 255, 0.6); font-size: 1.1rem;">
+            <p style="color: rgba(255, 255, 255, 0.6); font-size: 1rem;">
                 This section is under development and will be available soon.
             </p>
-            <button class="btn btn-primary" style="margin-top: 30px;" onclick="loadSection('overview')">
+            <button class="btn btn-primary" style="margin-top: 25px;" onclick="loadSection('overview')">
                 Back to Dashboard
             </button>
         </div>
