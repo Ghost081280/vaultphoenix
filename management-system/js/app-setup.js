@@ -40,20 +40,22 @@ function getAppSetupContent(role) {
         <div class="dashboard-section">
             <h2 class="section-title">🎮 Launch Your Campaign</h2>
             <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 30px;">
-                Choose how you want to deploy your location-based AR crypto gaming campaign.
+                Deploy your location-based AR crypto gaming campaign in minutes. Choose between our no-code White Label App Builder or integrate our SDK into your existing application.
             </p>
             
             <!-- Setup Type Selection -->
             <div class="setup-type-grid" id="setupTypeSelection">
                 <div class="setup-card" onclick="selectSetupType('white-label')">
                     <div class="setup-card-icon">🎨</div>
-                    <h3>White Label App</h3>
-                    <p>Launch a fully branded mobile app in minutes. Customize colors and upload your logo.</p>
+                    <h3>White Label App Builder</h3>
+                    <p>Perfect for marketers! Launch a fully branded AR crypto gaming app without any coding. Customize your brand colors, upload your logo, and deploy instantly to your own domain.</p>
                     <ul>
-                        <li>✓ Visual App Builder</li>
-                        <li>✓ Real-Time Live Preview</li>
-                        <li>✓ Custom Branding & Colors</li>
-                        <li>✓ Instant Deployment</li>
+                        <li>✓ No coding required - visual editor</li>
+                        <li>✓ Real-time preview as you build</li>
+                        <li>✓ Custom branding & colors</li>
+                        <li>✓ $Ember token pre-integrated</li>
+                        <li>✓ Host on your custom domain</li>
+                        <li>✓ Deploy in under 10 minutes</li>
                     </ul>
                     <button class="btn btn-primary btn-large" onclick="event.stopPropagation(); selectSetupType('white-label')">
                         Build White Label App
@@ -63,12 +65,14 @@ function getAppSetupContent(role) {
                 <div class="setup-card" onclick="selectSetupType('sdk')">
                     <div class="setup-card-icon">🔌</div>
                     <h3>SDK Integration</h3>
-                    <p>Integrate Vault Phoenix into your existing app with our developer-friendly SDK.</p>
+                    <p>For developers! Integrate Vault Phoenix's location-based gaming features into your existing mobile or web application using our comprehensive SDK.</p>
                     <ul>
-                        <li>✓ iOS, Android, Web & Unity</li>
-                        <li>✓ Full Documentation</li>
-                        <li>✓ API Key Management</li>
-                        <li>✓ Code Examples</li>
+                        <li>✓ iOS, Android, Web & Unity support</li>
+                        <li>✓ Complete API documentation</li>
+                        <li>✓ Secure API key management</li>
+                        <li>✓ Code examples & tutorials</li>
+                        <li>✓ TypeScript support</li>
+                        <li>✓ Sandbox testing environment</li>
                     </ul>
                     <button class="btn btn-secondary btn-large" onclick="event.stopPropagation(); selectSetupType('sdk')">
                         Integrate SDK
@@ -94,6 +98,7 @@ function getAppSetupContent(role) {
                             <div class="form-group">
                                 <label class="form-label">App Name *</label>
                                 <input type="text" class="form-input" id="appName" placeholder="My AR Crypto Hunt" value="My AR Crypto Hunt" oninput="updateLivePreview()">
+                                <div class="form-hint">This name appears in your app's navigation and title</div>
                             </div>
                             
                             <div class="form-group">
@@ -108,15 +113,16 @@ function getAppSetupContent(role) {
                                     </div>
                                 </div>
                                 <input type="file" class="form-input" id="appLogo" accept="image/*" onchange="previewLogo(event)" style="display: none;">
+                                <div class="form-hint">Recommended: 512x512px PNG with transparent background</div>
                             </div>
                         </div>
                         
                         <div class="config-section">
                             <h5>Brand Colors</h5>
                             
-                            <div class="color-grid">
+                            <div class="color-grid-compact">
                                 <div class="color-picker-group">
-                                    <label class="form-label">Primary Color</label>
+                                    <label class="form-label">Primary</label>
                                     <div class="color-picker-wrapper">
                                         <input type="color" id="primaryColor" value="#f0a500" onchange="updateLivePreview()">
                                         <input type="text" id="primaryColorHex" value="#f0a500" oninput="syncColorInput('primary', this.value)">
@@ -124,7 +130,7 @@ function getAppSetupContent(role) {
                                 </div>
                                 
                                 <div class="color-picker-group">
-                                    <label class="form-label">Secondary Color</label>
+                                    <label class="form-label">Secondary</label>
                                     <div class="color-picker-wrapper">
                                         <input type="color" id="secondaryColor" value="#fb923c" onchange="updateLivePreview()">
                                         <input type="text" id="secondaryColorHex" value="#fb923c" oninput="syncColorInput('secondary', this.value)">
@@ -132,65 +138,83 @@ function getAppSetupContent(role) {
                                 </div>
                                 
                                 <div class="color-picker-group">
-                                    <label class="form-label">Accent Color</label>
+                                    <label class="form-label">Accent</label>
                                     <div class="color-picker-wrapper">
                                         <input type="color" id="accentColor" value="#d73327" onchange="updateLivePreview()">
                                         <input type="text" id="accentColorHex" value="#d73327" oninput="syncColorInput('accent', this.value)">
                                     </div>
                                 </div>
-                                
-                                <div class="color-picker-group">
-                                    <label class="form-label">Background</label>
-                                    <div class="color-picker-wrapper">
-                                        <input type="color" id="backgroundColor" value="#1a1a1a" onchange="updateLivePreview()">
-                                        <input type="text" id="backgroundColorHex" value="#1a1a1a" oninput="syncColorInput('background', this.value)">
-                                    </div>
-                                </div>
-                                
-                                <div class="color-picker-group">
-                                    <label class="form-label">Text Color</label>
-                                    <div class="color-picker-wrapper">
-                                        <input type="color" id="textColor" value="#ffffff" onchange="updateLivePreview()">
-                                        <input type="text" id="textColorHex" value="#ffffff" oninput="syncColorInput('text', this.value)">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         
                         <div class="config-section">
-                            <h5>💎 Token Configuration</h5>
+                            <h5>💎 $Ember Token - Pre-Integrated</h5>
                             <div class="token-info-box">
                                 <div class="token-symbol">💎</div>
                                 <div class="token-details">
-                                    <div class="token-name">$Ember</div>
-                                    <div class="token-desc">Official Vault Phoenix Token</div>
+                                    <div class="token-name">$Ember Token System</div>
+                                    <div class="token-desc">Your app comes with $Ember already integrated. Players collect tokens at your locations, and you manage distribution through your dashboard.</div>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="config-section">
-                            <h5>🌐 Custom Domain (Optional)</h5>
+                            <h5>🌐 Custom Domain Setup</h5>
                             <div class="form-group">
+                                <label class="form-label">Your Domain (Optional)</label>
                                 <input type="text" class="form-input" id="customDomain" placeholder="hunt.yourdomain.com" oninput="updateCustomDomain()">
-                                <div class="form-hint" style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 8px;">Enter your custom domain for app hosting</div>
+                                <div class="form-hint">We host your app! Enter your domain to point it to our hosting.</div>
+                            </div>
+                            
+                            <div class="domain-info-box">
+                                <div class="info-icon">ℹ️</div>
+                                <div class="info-content">
+                                    <strong>How Custom Domains Work:</strong>
+                                    <p>• We host your white label app on our secure servers</p>
+                                    <p>• You point your domain to our hosting using DNS settings</p>
+                                    <p>• Your app URL will be: <strong>yourdomain.com/appname</strong></p>
+                                    <p>• Make sure the page path matches your app name above</p>
+                                </div>
                             </div>
                             
                             <div id="domainInstructions" class="domain-instructions" style="display: none;">
-                                <div class="instructions-title">📋 DNS Configuration:</div>
-                                <div class="dns-config">
-                                    <div><strong>Type:</strong> CNAME</div>
-                                    <div><strong>Host:</strong> <span id="dnsHost">hunt</span></div>
-                                    <div><strong>Points to:</strong> vault-phoenix.app</div>
-                                    <div><strong>TTL:</strong> 3600</div>
+                                <div class="instructions-title">📋 DNS Setup Instructions</div>
+                                
+                                <div class="step-box">
+                                    <strong>Step 1: Login to Your Domain Provider</strong>
+                                    <p>Go to your domain registrar (GoDaddy, Namecheap, Google Domains, etc.) and login to your account.</p>
                                 </div>
-                                <div class="final-url">
-                                    Your app: <strong id="finalUrl">https://hunt.yourdomain.com</strong>
+                                
+                                <div class="step-box">
+                                    <strong>Step 2: Access DNS Management</strong>
+                                    <p>Find "DNS Management", "DNS Settings", or "Manage DNS" in your domain control panel.</p>
+                                </div>
+                                
+                                <div class="step-box">
+                                    <strong>Step 3: Add CNAME Record</strong>
+                                    <div class="dns-config">
+                                        <div><strong>Type:</strong> CNAME</div>
+                                        <div><strong>Host/Name:</strong> <span id="dnsHost">hunt</span></div>
+                                        <div><strong>Points to:</strong> vault-phoenix.app</div>
+                                        <div><strong>TTL:</strong> 3600 (or 1 hour)</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="step-box">
+                                    <strong>Step 4: Save & Wait</strong>
+                                    <p>Save your DNS changes. Propagation takes 5-30 minutes (sometimes up to 24 hours).</p>
+                                </div>
+                                
+                                <div class="final-url-box">
+                                    <div class="url-label">Your App Will Be Live At:</div>
+                                    <div class="url-display" id="finalUrl">https://hunt.yourdomain.com/my-ar-crypto-hunt</div>
+                                    <div class="url-note">⚠️ Make sure the page name matches your app name above!</div>
                                 </div>
                             </div>
                         </div>
                         
                         <button class="btn btn-primary btn-large btn-deploy" onclick="deployWhiteLabelApp()">
-                            🚀 Deploy App
+                            🚀 Deploy App Now
                         </button>
                     </div>
                     
@@ -209,12 +233,28 @@ function getAppSetupContent(role) {
                                 ></iframe>
                                 <div class="phone-indicator"></div>
                             </div>
-                            <div class="phone-label">📱 Real-Time Theme Preview</div>
+                            <div class="phone-label">📱 Real-Time Preview - Changes appear instantly</div>
                         </div>
                         
-                        <div class="preview-controls">
-                            <button class="btn btn-secondary" onclick="refreshPreview()">🔄 Refresh</button>
-                            <button class="btn btn-outline" onclick="openFullPreview()">🔗 Full Screen</button>
+                        <div class="preview-info">
+                            <h5>What You're Building:</h5>
+                            <ul>
+                                <li>✓ <strong>AR Token Hunt:</strong> Players find $Ember tokens at your locations using their phone camera</li>
+                                <li>✓ <strong>Live Map:</strong> Shows all active token locations in real-time</li>
+                                <li>✓ <strong>Wallet Integration:</strong> Players collect and manage their $Ember earnings</li>
+                                <li>✓ <strong>Leaderboards:</strong> Gamification to drive engagement and competition</li>
+                                <li>✓ <strong>Push Notifications:</strong> Alert players when new tokens are nearby</li>
+                            </ul>
+                            
+                            <div class="tech-stack">
+                                <div class="tech-label">Built With:</div>
+                                <div class="tech-items">
+                                    <span class="tech-badge">React Native</span>
+                                    <span class="tech-badge">AR.js</span>
+                                    <span class="tech-badge">Google Maps</span>
+                                    <span class="tech-badge">$Ember Token</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -374,8 +414,6 @@ function updateLivePreview() {
         const primaryColor = document.getElementById('primaryColor')?.value || '#f0a500';
         const secondaryColor = document.getElementById('secondaryColor')?.value || '#fb923c';
         const accentColor = document.getElementById('accentColor')?.value || '#d73327';
-        const backgroundColor = document.getElementById('backgroundColor')?.value || '#1a1a1a';
-        const textColor = document.getElementById('textColor')?.value || '#ffffff';
         
         const customCSS = `
             <style id="whiteLabelCustomCSS">
@@ -383,12 +421,10 @@ function updateLivePreview() {
                     --primary-color: ${primaryColor};
                     --secondary-color: ${secondaryColor};
                     --accent-color: ${accentColor};
-                    --bg-color: ${backgroundColor};
-                    --text-color: ${textColor};
                 }
                 
                 body, .crypto-dashboard-page {
-                    background: linear-gradient(135deg, ${backgroundColor} 0%, ${shadeColor(backgroundColor, -10)} 25%, ${accentColor}20 50%, ${primaryColor}15 75%, ${secondaryColor}20 100%) !important;
+                    background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 25%, ${accentColor}20 50%, ${primaryColor}15 75%, ${secondaryColor}20 100%) !important;
                 }
                 
                 .nav-logo, .ember-count, .airdrop-icon-container, .token-coin, .ar-token-coin, .map-control-btn {
@@ -398,23 +434,18 @@ function updateLivePreview() {
                 
                 .login-button, .airdrop-button, .token-action-btn, .btn-primary {
                     background: linear-gradient(135deg, ${primaryColor}, ${secondaryColor}) !important;
-                    border: none !important;
                 }
                 
-                .nav-logo, .ember-count, .map-control-btn, .token-coin, .ar-token-coin, .form-input, button, .card {
-                    border-radius: 12px !important;
-                }
-                
-                .nav-title, .ember-count-text, .airdrop-title, h1, h2, h3, h4 {
-                    color: ${textColor} !important;
+                .nav-title, .ember-count-text, .airdrop-title {
+                    color: #ffffff !important;
                 }
                 
                 .airdrop-amount, .ember-count-text, .token-location-value {
                     color: ${primaryColor} !important;
                 }
                 
-                .nav-logo, .ember-count, .side-menu, .airdrop-content, .token-modal-content {
-                    border-color: ${primaryColor} !important;
+                .side-menu-title {
+                    color: #ffffff !important;
                 }
             </style>
         `;
@@ -426,12 +457,21 @@ function updateLivePreview() {
         
         iframeDoc.head.insertAdjacentHTML('beforeend', customCSS);
         
+        // Update nav title
         const navTitle = iframeDoc.querySelector('.nav-title');
         if (navTitle) navTitle.textContent = appName;
         
+        // Update side menu title
+        const sideMenuTitle = iframeDoc.querySelector('.side-menu-title');
+        if (sideMenuTitle) sideMenuTitle.textContent = appName;
+        
+        // Update logo in nav and side menu
         if (AppSetupState.whiteLabel.logo) {
             const logoImg = iframeDoc.querySelector('.nav-logo-image');
             if (logoImg) logoImg.src = AppSetupState.whiteLabel.logo;
+            
+            const sideMenuLogo = iframeDoc.querySelector('.side-menu-logo-image');
+            if (sideMenuLogo) sideMenuLogo.src = AppSetupState.whiteLabel.logo;
         }
         
     } catch (error) {
@@ -440,42 +480,11 @@ function updateLivePreview() {
 }
 
 /**
- * Shade color helper
- */
-function shadeColor(color, percent) {
-    const num = parseInt(color.replace("#",""), 16);
-    const amt = Math.round(2.55 * percent);
-    const R = (num >> 16) + amt;
-    const G = (num >> 8 & 0x00FF) + amt;
-    const B = (num & 0x0000FF) + amt;
-    return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 +
-        (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255))
-        .toString(16).slice(1);
-}
-
-/**
- * Refresh preview
- */
-function refreshPreview() {
-    const iframe = document.getElementById('gamePreviewFrame');
-    if (iframe) {
-        iframe.src = iframe.src;
-        setTimeout(() => updateLivePreview(), 500);
-    }
-}
-
-/**
- * Open full preview
- */
-function openFullPreview() {
-    window.open(AppSetupState.playerAppTemplate, '_blank');
-}
-
-/**
  * Update custom domain display
  */
 function updateCustomDomain() {
     const customDomain = document.getElementById('customDomain')?.value || '';
+    const appName = document.getElementById('appName')?.value || 'my-ar-crypto-hunt';
     const domainInstructions = document.getElementById('domainInstructions');
     const dnsHost = document.getElementById('dnsHost');
     const finalUrl = document.getElementById('finalUrl');
@@ -487,7 +496,11 @@ function updateCustomDomain() {
         const subdomain = parts.length > 2 ? parts[0] : customDomain.split('.')[0];
         
         if (dnsHost) dnsHost.textContent = subdomain;
-        if (finalUrl) finalUrl.textContent = `https://${customDomain}`;
+        
+        // Create URL-friendly app name
+        const urlSafeName = appName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        
+        if (finalUrl) finalUrl.textContent = `https://${customDomain}/${urlSafeName}`;
     } else if (domainInstructions) {
         domainInstructions.style.display = 'none';
     }
@@ -507,16 +520,18 @@ function deployWhiteLabelApp() {
     
     AppSetupState.whiteLabel.appName = appName;
     AppSetupState.whiteLabel.primaryColor = document.getElementById('primaryColor')?.value || '#f0a500';
-    AppSetupState.whiteLabel.secondaryColor = document.getElementById('secondaryColor')?.value || '#fb923c';
-    AppSetupState.whiteLabel.accentColor = document.getElementById('accentColor')?.value || '#d73327';
     
-    let deployMsg = `🚀 Deploying "${appName}"...\n\nYour white label app is being built with your custom branding.\n\n✓ App configured\n✓ $Ember integration enabled\n✓ Custom theme applied`;
+    const urlSafeName = appName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    
+    let deployMsg = `🚀 Deploying "${appName}"...\n\nYour white label app is being built with your custom branding.\n\n✓ App configured\n✓ $Ember token integrated\n✓ Custom theme applied\n✓ Hosting setup complete`;
     
     if (customDomain) {
-        deployMsg += `\n✓ Custom domain: ${customDomain}`;
+        deployMsg += `\n✓ Custom domain: ${customDomain}/${urlSafeName}`;
+    } else {
+        deployMsg += `\n✓ Default hosting: vault-phoenix.app/${urlSafeName}`;
     }
     
-    deployMsg += `\n\nYour app will be ready in 5-10 minutes.`;
+    deployMsg += `\n\nYour app will be ready in 5-10 minutes. You'll receive deployment confirmation.`;
     
     alert(deployMsg);
     
@@ -524,10 +539,12 @@ function deployWhiteLabelApp() {
         let successMsg = `✓ "${appName}" Deployed Successfully!\n\nYour app is now live`;
         
         if (customDomain) {
-            successMsg += ` at https://${customDomain}`;
+            successMsg += ` at:\nhttps://${customDomain}/${urlSafeName}`;
+        } else {
+            successMsg += ` at:\nhttps://vault-phoenix.app/${urlSafeName}`;
         }
         
-        successMsg += `\n\nView it in the "Campaign Control" section.`;
+        successMsg += `\n\nView and manage it in the "Campaign Control" section.`;
         
         alert(successMsg);
         
@@ -598,8 +615,6 @@ if (typeof window !== 'undefined') {
     window.previewLogo = previewLogo;
     window.syncColorInput = syncColorInput;
     window.updateLivePreview = updateLivePreview;
-    window.refreshPreview = refreshPreview;
-    window.openFullPreview = openFullPreview;
     window.deployWhiteLabelApp = deployWhiteLabelApp;
     window.selectPlatform = selectPlatform;
     window.copyApiKey = copyApiKey;
