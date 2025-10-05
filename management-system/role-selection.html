@@ -6,6 +6,42 @@
     <title>Vault Phoenix - Select Your Role</title>
     <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/role-selection.css">
+    <style>
+        /* CRITICAL: Prevent overflow */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Ensure container stays within bounds */
+        .container {
+            max-width: 100%;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+        
+        /* Role grid overflow prevention */
+        .role-grid {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Role cards overflow fix */
+        .role-card {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Ensure text wraps */
+        .role-title,
+        .role-description,
+        .demo-notice p {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -111,6 +147,25 @@
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.animation = `fadeInUp 0.8s ease-out ${0.3 + (index * 0.15)}s forwards`;
+            });
+        });
+        
+        // Additional overflow prevention
+        window.addEventListener('load', function() {
+            // Ensure no element exceeds viewport width
+            document.querySelectorAll('.role-card, .container, .role-grid').forEach(function(element) {
+                const rect = element.getBoundingClientRect();
+                if (rect.width > window.innerWidth) {
+                    element.style.maxWidth = '100%';
+                    element.style.overflowX = 'hidden';
+                }
+            });
+        });
+        
+        // Prevent overflow on resize
+        window.addEventListener('resize', function() {
+            document.querySelectorAll('.role-card, .container').forEach(function(element) {
+                element.style.maxWidth = '100%';
             });
         });
     </script>
