@@ -462,6 +462,17 @@ body {
     font-size: 2.5rem;
     filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* NEW: Image icon styling within stat cards */
+.stat-icon img {
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
 }
 
 .stat-content {
@@ -506,6 +517,9 @@ body {
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ember-cta-primary:hover {
@@ -523,6 +537,9 @@ body {
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ember-cta-secondary:hover {
@@ -603,7 +620,17 @@ body {
 .stakeholder-icon {
     font-size: 4rem;
     margin-bottom: 20px;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+}
+
+/* NEW: Image icon styling within stakeholder cards */
+.stakeholder-icon img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
@@ -680,6 +707,16 @@ body {
 .path-icon {
     font-size: 1.8rem;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* NEW: Image icon styling within path options */
+.path-icon img {
+    width: 1.8rem;
+    height: 1.8rem;
+    object-fit: contain;
 }
 
 .path-text {
@@ -826,7 +863,17 @@ body {
 .ember-section-icon {
     font-size: 4rem;
     margin-bottom: 25px;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
+}
+
+/* NEW: Image icon styling within section headers */
+.ember-section-icon img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
 }
 
