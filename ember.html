@@ -919,12 +919,12 @@
                             </div>
                         </div>
 
-                        <!-- FIXED: Token Purchase Agreement Section -->
+                        <!-- UPDATED: Token Agreement & Disclosures Section -->
                         <div class="tpa-section">
-                            <h4>📄 Token Purchase Agreement</h4>
-                            <p class="tpa-instruction">Review our Token Purchase Agreement before proceeding with your investment.</p>
+                            <h4>📄 Required Legal Documents</h4>
+                            <p class="tpa-instruction">Review both the Token Presale Agreement and Token Disclosures before proceeding with your investment.</p>
                             <button class="tpa-download-button" onclick="window.showTpaModal()">
-                                📄 View & Download Agreement
+                                📄 Review Legal Documents
                             </button>
                         </div>
 
@@ -933,10 +933,10 @@
                             <label class="tpa-checkbox-container">
                                 <input type="checkbox" id="tpa-agree-checkbox" class="tpa-checkbox">
                                 <span class="tpa-checkmark"></span>
-                                <span class="tpa-checkbox-text">I have read and agree to the Token Purchase Agreement.</span>
+                                <span class="tpa-checkbox-text">I have read and agree to the Token Presale Agreement and understand all Token Disclosures.</span>
                             </label>
                             <div class="tpa-compliance-note">
-                                <p>⚠️ You must agree to the TPA before proceeding with your purchase.</p>
+                                <p>⚠️ You must review and agree to both documents before proceeding with your purchase.</p>
                             </div>
                         </div>
                         
@@ -1292,36 +1292,58 @@
         </div>
     </footer>
 
-    <!-- FIXED: TPA Modal with proper functionality -->
+    <!-- UPDATED: Combined Legal Documents Modal -->
     <div id="tpaModal" class="tpa-modal" style="display: none;">
         <div class="tpa-modal-overlay" onclick="window.closeTpaModal()"></div>
         <div class="tpa-modal-content">
             <div class="tpa-modal-header">
-                <h3>📄 Token Purchase Agreement</h3>
+                <h3>📄 Token Presale Legal Documents</h3>
                 <button class="tpa-modal-close" onclick="window.closeTpaModal()">×</button>
             </div>
             <div class="tpa-modal-body">
                 <div class="tpa-preview">
-                    <h4>Token Purchase Agreement Preview</h4>
-                    <p>This Token Purchase Agreement governs your participation in the $Ember Token presale. Key terms include:</p>
-                    <ul>
-                        <li><strong>Token Utility:</strong> $Ember tokens are utility tokens for the Vault Phoenix AR gaming platform</li>
-                        <li><strong>Vesting Schedule:</strong> 10% at Token Generation Event (TGE), 90% linear vesting over 3 months</li>
-                        <li><strong>Investment Limits:</strong> Minimum $10 USD, Maximum $50,000 USD per participant</li>
-                        <li><strong>KYC Requirements:</strong> Identity verification required for purchases over $1,000</li>
-                        <li><strong>Risk Disclosures:</strong> Comprehensive risk factors and investment warnings</li>
-                        <li><strong>Regulatory Compliance:</strong> Full legal and financial oversight procedures</li>
-                        <li><strong>Platform Integration:</strong> Token requirements for campaign deployment and merchant participation</li>
-                        <li><strong>Redemption Rights:</strong> Dual redemption system (merchant locations or Coinbase wallet cash-out)</li>
-                    </ul>
-                    <p><strong>Important:</strong> Please review the complete agreement before proceeding with your investment. This document contains critical legal terms and risk disclosures.</p>
+                    <h4>📋 Required Reading: Two Essential Documents</h4>
+                    <p style="margin-bottom: 25px;">Before participating in the $Ember Token presale, you must review and understand both of these legal documents:</p>
+                    
+                    <div style="background: rgba(240, 165, 0, 0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(240, 165, 0, 0.3); margin-bottom: 20px;">
+                        <h4 style="color: #f0a500; margin-bottom: 15px;">📄 1. Token Presale Agreement (Utility Token)</h4>
+                        <p style="margin-bottom: 10px;">This agreement outlines the terms and conditions of your token purchase, including:</p>
+                        <ul style="margin-left: 20px; margin-bottom: 0;">
+                            <li><strong>Token Utility:</strong> $Ember tokens are utility tokens for the Vault Phoenix AR gaming platform</li>
+                            <li><strong>Vesting Schedule:</strong> 10% at Token Generation Event (TGE), 90% linear vesting over 3 months</li>
+                            <li><strong>Investment Limits:</strong> Minimum $10 USD, Maximum $50,000 USD per participant</li>
+                            <li><strong>Purchase Terms:</strong> Payment methods, refund policies, and transaction procedures</li>
+                            <li><strong>Platform Rights:</strong> Token requirements for campaign deployment and merchant participation</li>
+                            <li><strong>Legal Framework:</strong> Governing law, dispute resolution, and jurisdiction</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: rgba(215, 51, 39, 0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 25px;">
+                        <h4 style="color: #fb923c; margin-bottom: 15px;">⚠️ 2. $Ember Token Disclosures</h4>
+                        <p style="margin-bottom: 10px;">This document provides comprehensive risk disclosures and important information about:</p>
+                        <ul style="margin-left: 20px; margin-bottom: 0;">
+                            <li><strong>Investment Risks:</strong> Token value volatility, market risks, and loss of investment</li>
+                            <li><strong>Regulatory Risks:</strong> Potential changes in cryptocurrency regulations and compliance requirements</li>
+                            <li><strong>Technology Risks:</strong> Smart contract vulnerabilities, platform development risks</li>
+                            <li><strong>KYC Requirements:</strong> Identity verification required for purchases over $1,000</li>
+                            <li><strong>No Guarantees:</strong> Forward-looking statements and project success uncertainties</li>
+                            <li><strong>Geographic Restrictions:</strong> Token sales availability by jurisdiction</li>
+                            <li><strong>Tax Implications:</strong> Responsibility for tax reporting and obligations</li>
+                        </ul>
+                    </div>
+
+                    <p style="font-weight: 600; color: #f0a500; margin-bottom: 20px;">⚡ <strong>Important:</strong> Both documents must be reviewed and understood before proceeding with your investment. These documents contain critical legal terms, rights, obligations, and risk disclosures that protect both you and Vault Phoenix.</p>
                 </div>
+                
                 <div class="tpa-modal-actions">
-                    <a href="docs/Token_Purchase_Agreement_Vault_Phoenix.pdf" target="_blank" class="tpa-download-btn">
-                        📄 Download Full Agreement (PDF)
+                    <a href="docs/Token_Presale_Agreement_Utility_Token.pdf" target="_blank" class="tpa-download-btn" style="margin-bottom: 10px;">
+                        📄 Download Token Presale Agreement (PDF)
+                    </a>
+                    <a href="docs/Ember_Token_Disclosures.pdf" target="_blank" class="tpa-download-btn" style="margin-bottom: 20px;">
+                        ⚠️ Download Token Disclosures (PDF)
                     </a>
                     <button class="tpa-agree-btn" onclick="window.agreeTpa()">
-                        ✓ I Have Read and Agree to Terms
+                        ✓ I Have Read Both Documents and Agree to Terms
                     </button>
                 </div>
             </div>
@@ -1331,7 +1353,7 @@
     <script src="ember-script.js"></script>
 
     <script>
-    // FIXED: TPA Modal Functions - Global scope
+    // UPDATED: Combined Legal Documents Modal Functions - Global scope
     window.showTpaModal = function() {
         document.getElementById('tpaModal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
@@ -1355,7 +1377,7 @@
         window.closeTpaModal();
         
         // Show confirmation
-        alert('✅ Thank you for agreeing to the Token Purchase Agreement. You can now proceed with your investment.');
+        alert('✅ Thank you for reviewing and agreeing to the Token Presale Agreement and Token Disclosures. You can now proceed with your investment.');
     };
 
     // Close modal on escape key
