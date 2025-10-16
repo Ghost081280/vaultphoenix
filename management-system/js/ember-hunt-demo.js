@@ -590,7 +590,22 @@ function getCampaignsContent(role) {
             ` : ''}
         </div>
         
-        <!-- Google Maps Script -->
+        <!-- Load Google Maps Script if not already loaded -->
+        <script>
+            // Load Google Maps API dynamically if not already loaded
+            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwvqEgxTA6dsXIVAkMUsNUMtPWhBvb5MU&callback=initCampaignTokenMap';
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+            } else {
+                // Google Maps already loaded, initialize immediately
+                setTimeout(initCampaignTokenMap, 500);
+            }
+        </script>
+        
+        <!-- Google Maps Initialization Script -->
         <script>
             let campaignTokenMapInstance;
             let cmMarkers = [];
@@ -606,9 +621,9 @@ function getCampaignsContent(role) {
                     mapElement.innerHTML = \`
                         <div style="height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px; text-align: center;">
                             <div style="font-size: 3rem; margin-bottom: 20px;">🗺️</div>
-                            <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">Google Maps API Required</h3>
+                            <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">Loading Google Maps...</h3>
                             <p style="color: rgba(255,255,255,0.7); max-width: 500px;">
-                                Add your Google Maps API key to dashboard.html to display the live token location map.
+                                Please wait while the map loads.
                             </p>
                         </div>
                     \`;
@@ -647,7 +662,7 @@ function getCampaignsContent(role) {
                             <p style="margin: 5px 0;"><strong>Type:</strong> Campaign Location</p>
                             <p style="margin: 5px 0;"><strong>Tokens:</strong> \${location.tokensRemaining.toLocaleString()} remaining</p>
                             <p style="margin: 5px 0;"><strong>Amount:</strong> \${location.tokenAmount} per collection</p>
-                            <p style="margin: 5px 0;"><strong>Advertisement:</strong> ${location.hasAdvertisement ? 'Yes' : 'No'}</p>
+                            <p style="margin: 5px 0;"><strong>Advertisement:</strong> \${location.hasAdvertisement ? 'Yes' : 'No'}</p>
                         </div>
                     \`;
                     
@@ -724,7 +739,8 @@ function getCampaignsContent(role) {
                 }
             }
             
-            setTimeout(initCampaignTokenMap, 500);
+            // Make function globally available
+            window.initCampaignTokenMap = initCampaignTokenMap;
         </script>
     `;
 }
