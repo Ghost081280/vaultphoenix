@@ -150,6 +150,176 @@ const EmberHuntDemo = {
 };
 
 // ============================================
+// GOOGLE MAPS INITIALIZATION
+// ============================================
+
+let campaignTokenMapInstance;
+let cmMarkers = [];
+let advMarkers = [];
+let playerMarkers = [];
+let cmMapFilters = { cm: true, adv: true, players: true };
+
+function initCampaignTokenMap() {
+    const mapElement = document.getElementById('campaignTokenMap');
+    if (!mapElement) {
+        console.log('Map element not found');
+        return;
+    }
+    
+    if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+        console.log('Google Maps API not loaded yet');
+        mapElement.innerHTML = `
+            <div style="height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px; text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 20px;">🗺️</div>
+                <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">Loading Google Maps...</h3>
+                <p style="color: rgba(255,255,255,0.7); max-width: 500px;">
+                    Please wait while the map loads.
+                </p>
+            </div>
+        `;
+        return;
+    }
+    
+    console.log('Initializing Campaign Token Map');
+    
+    try {
+        campaignTokenMapInstance = new google.maps.Map(mapElement, {
+            center: { lat: 33.4484, lng: -112.0740 },
+            zoom: 14,
+            styles: [
+                { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
+                { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
+                { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] }
+            ]
+        });
+        
+        console.log('Map instance created');
+        
+        // Clear existing markers
+        cmMarkers = [];
+        advMarkers = [];
+        playerMarkers = [];
+        
+        // Add Campaign Manager locations (blue)
+        EmberHuntDemo.campaignTokenLocations.forEach(location => {
+            const marker = new google.maps.Marker({
+                position: { lat: location.lat, lng: location.lng },
+                map: campaignTokenMapInstance,
+                title: location.name,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 10,
+                    fillColor: '#3b82f6',
+                    fillOpacity: 0.9,
+                    strokeColor: '#fff',
+                    strokeWeight: 2
+                }
+            });
+            
+            const infoContent = `
+                <div style="color: #000; padding: 10px; max-width: 300px;">
+                    <h4 style="margin: 0 0 10px 0; color: #3b82f6;">📍 ${location.name}</h4>
+                    <p style="margin: 5px 0;"><strong>Type:</strong> Campaign Location</p>
+                    <p style="margin: 5px 0;"><strong>Tokens:</strong> ${location.tokensRemaining.toLocaleString()} remaining</p>
+                    <p style="margin: 5px 0;"><strong>Amount:</strong> ${location.tokenAmount} per collection</p>
+                    <p style="margin: 5px 0;"><strong>Advertisement:</strong> ${location.hasAdvertisement ? 'Yes' : 'No'}</p>
+                </div>
+            `;
+            
+            const infoWindow = new google.maps.InfoWindow({ content: infoContent });
+            marker.addListener('click', () => infoWindow.open(campaignTokenMapInstance, marker));
+            cmMarkers.push(marker);
+        });
+        
+        // Add Advertiser locations (gold)
+        EmberHuntDemo.advertiserTokenLocations.forEach(location => {
+            const marker = new google.maps.Marker({
+                position: { lat: location.lat, lng: location.lng },
+                map: campaignTokenMapInstance,
+                title: location.name,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 10,
+                    fillColor: '#f0a500',
+                    fillOpacity: 0.9,
+                    strokeColor: '#fff',
+                    strokeWeight: 2
+                }
+            });
+            
+            const infoContent = `
+                <div style="color: #000; padding: 10px; max-width: 300px;">
+                    <h4 style="margin: 0 0 10px 0; color: #f0a500;">🏢 ${location.name}</h4>
+                    <p style="margin: 5px 0;"><strong>Type:</strong> Advertiser Location</p>
+                    <p style="margin: 5px 0;"><strong>Advertiser:</strong> ${location.advertiserName}</p>
+                    <p style="margin: 5px 0;"><strong>Locations:</strong> ${location.locationCount}</p>
+                    <p style="margin: 5px 0;"><strong>Tokens:</strong> ${location.tokensRemaining.toLocaleString()} remaining</p>
+                    <p style="margin: 5px 0;"><strong>Redeemed:</strong> ${location.redemptions.totalTokensRedeemed.toLocaleString()}</p>
+                    <p style="margin: 5px 0;"><strong>Advertisement:</strong> Yes</p>
+                </div>
+            `;
+            
+            const infoWindow = new google.maps.InfoWindow({ content: infoContent });
+            marker.addListener('click', () => infoWindow.open(campaignTokenMapInstance, marker));
+            advMarkers.push(marker);
+        });
+        
+        // Add Players (green)
+        EmberHuntDemo.activePlayers.forEach(player => {
+            const marker = new google.maps.Marker({
+                position: { lat: player.lat, lng: player.lng },
+                map: campaignTokenMapInstance,
+                title: player.username,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 8,
+                    fillColor: '#22c55e',
+                    fillOpacity: 0.9,
+                    strokeColor: '#fff',
+                    strokeWeight: 2
+                }
+            });
+            playerMarkers.push(marker);
+        });
+        
+        console.log('Markers added:', cmMarkers.length + advMarkers.length + playerMarkers.length);
+    } catch (error) {
+        console.error('Error initializing map:', error);
+        mapElement.innerHTML = `
+            <div style="height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px; text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 20px;">⚠️</div>
+                <h3 style="color: #ef4444; margin-bottom: 15px;">Map Error</h3>
+                <p style="color: rgba(255,255,255,0.7); max-width: 500px;">
+                    ${error.message}
+                </p>
+            </div>
+        `;
+    }
+}
+
+function toggleCMMapFilter(type) {
+    cmMapFilters[type] = !cmMapFilters[type];
+    const button = document.getElementById('filter' + (type === 'cm' ? 'CM' : type === 'adv' ? 'Adv' : 'Players') + 'Locations');
+    
+    if (type === 'cm') {
+        cmMarkers.forEach(m => m.setVisible(cmMapFilters.cm));
+        if (button) button.style.opacity = cmMapFilters.cm ? '1' : '0.4';
+    } else if (type === 'adv') {
+        advMarkers.forEach(m => m.setVisible(cmMapFilters.adv));
+        if (button) button.style.opacity = cmMapFilters.adv ? '1' : '0.4';
+    } else if (type === 'players') {
+        playerMarkers.forEach(m => m.setVisible(cmMapFilters.players));
+        if (button) button.style.opacity = cmMapFilters.players ? '1' : '0.4';
+    }
+}
+
+// Make functions globally available
+if (typeof window !== 'undefined') {
+    window.initCampaignTokenMap = initCampaignTokenMap;
+    window.toggleCMMapFilter = toggleCMMapFilter;
+}
+
+// ============================================
 // CAMPAIGN MANAGER: TOKEN LOCATION MANAGEMENT
 // ============================================
 
@@ -165,6 +335,28 @@ function getCampaignsContent(role) {
     const cmLocations = EmberHuntDemo.campaignTokenLocations;
     const advLocations = EmberHuntDemo.advertiserTokenLocations;
     const totalAdvertisers = 1;
+    
+    // Set up a delayed initialization for the map
+    setTimeout(() => {
+        console.log('Attempting to initialize map...');
+        if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
+            initCampaignTokenMap();
+        } else {
+            console.log('Google Maps not ready, will retry...');
+            // Retry a few times
+            let retries = 0;
+            const retryInterval = setInterval(() => {
+                retries++;
+                if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
+                    clearInterval(retryInterval);
+                    initCampaignTokenMap();
+                } else if (retries > 10) {
+                    clearInterval(retryInterval);
+                    console.error('Google Maps failed to load after multiple retries');
+                }
+            }, 500);
+        }
+    }, 100);
     
     return `
         <div class="dashboard-section">
@@ -384,7 +576,13 @@ function getCampaignsContent(role) {
             
             <div class="card">
                 <div id="campaignTokenMap" style="height: 500px; background: #1a1a1a; border-radius: 12px; position: relative; overflow: hidden;">
-                    <!-- Google Maps loads here -->
+                    <div style="height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">🗺️</div>
+                        <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">Loading Map...</h3>
+                        <p style="color: rgba(255,255,255,0.7); max-width: 500px;">
+                            Please wait while Google Maps loads.
+                        </p>
+                    </div>
                 </div>
                 
                 <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
@@ -589,159 +787,6 @@ function getCampaignsContent(role) {
                 </div>
             ` : ''}
         </div>
-        
-        <!-- Load Google Maps Script if not already loaded -->
-        <script>
-            // Load Google Maps API dynamically if not already loaded
-            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-                const script = document.createElement('script');
-                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAwvqEgxTA6dsXIVAkMUsNUMtPWhBvb5MU&callback=initCampaignTokenMap';
-                script.async = true;
-                script.defer = true;
-                document.head.appendChild(script);
-            } else {
-                // Google Maps already loaded, initialize immediately
-                setTimeout(initCampaignTokenMap, 500);
-            }
-        </script>
-        
-        <!-- Google Maps Initialization Script -->
-        <script>
-            let campaignTokenMapInstance;
-            let cmMarkers = [];
-            let advMarkers = [];
-            let playerMarkers = [];
-            let cmMapFilters = { cm: true, adv: true, players: true };
-            
-            function initCampaignTokenMap() {
-                const mapElement = document.getElementById('campaignTokenMap');
-                if (!mapElement) return;
-                
-                if (typeof google === 'undefined') {
-                    mapElement.innerHTML = \`
-                        <div style="height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px; text-align: center;">
-                            <div style="font-size: 3rem; margin-bottom: 20px;">🗺️</div>
-                            <h3 style="color: var(--color-primary-gold); margin-bottom: 15px;">Loading Google Maps...</h3>
-                            <p style="color: rgba(255,255,255,0.7); max-width: 500px;">
-                                Please wait while the map loads.
-                            </p>
-                        </div>
-                    \`;
-                    return;
-                }
-                
-                campaignTokenMapInstance = new google.maps.Map(mapElement, {
-                    center: { lat: 33.4484, lng: -112.0740 },
-                    zoom: 14,
-                    styles: [
-                        { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
-                        { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
-                        { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] }
-                    ]
-                });
-                
-                // Add Campaign Manager locations (blue)
-                ${JSON.stringify(EmberHuntDemo.campaignTokenLocations)}.forEach(location => {
-                    const marker = new google.maps.Marker({
-                        position: { lat: location.lat, lng: location.lng },
-                        map: campaignTokenMapInstance,
-                        title: location.name,
-                        icon: {
-                            path: google.maps.SymbolPath.CIRCLE,
-                            scale: 10,
-                            fillColor: '#3b82f6',
-                            fillOpacity: 0.9,
-                            strokeColor: '#fff',
-                            strokeWeight: 2
-                        }
-                    });
-                    
-                    const infoContent = \`
-                        <div style="color: #000; padding: 10px; max-width: 300px;">
-                            <h4 style="margin: 0 0 10px 0; color: #3b82f6;">📍 \${location.name}</h4>
-                            <p style="margin: 5px 0;"><strong>Type:</strong> Campaign Location</p>
-                            <p style="margin: 5px 0;"><strong>Tokens:</strong> \${location.tokensRemaining.toLocaleString()} remaining</p>
-                            <p style="margin: 5px 0;"><strong>Amount:</strong> \${location.tokenAmount} per collection</p>
-                            <p style="margin: 5px 0;"><strong>Advertisement:</strong> \${location.hasAdvertisement ? 'Yes' : 'No'}</p>
-                        </div>
-                    \`;
-                    
-                    const infoWindow = new google.maps.InfoWindow({ content: infoContent });
-                    marker.addListener('click', () => infoWindow.open(campaignTokenMapInstance, marker));
-                    cmMarkers.push(marker);
-                });
-                
-                // Add Advertiser locations (gold)
-                ${JSON.stringify(EmberHuntDemo.advertiserTokenLocations)}.forEach(location => {
-                    const marker = new google.maps.Marker({
-                        position: { lat: location.lat, lng: location.lng },
-                        map: campaignTokenMapInstance,
-                        title: location.name,
-                        icon: {
-                            path: google.maps.SymbolPath.CIRCLE,
-                            scale: 10,
-                            fillColor: '#f0a500',
-                            fillOpacity: 0.9,
-                            strokeColor: '#fff',
-                            strokeWeight: 2
-                        }
-                    });
-                    
-                    const infoContent = \`
-                        <div style="color: #000; padding: 10px; max-width: 300px;">
-                            <h4 style="margin: 0 0 10px 0; color: #f0a500;">🏢 \${location.name}</h4>
-                            <p style="margin: 5px 0;"><strong>Type:</strong> Advertiser Location</p>
-                            <p style="margin: 5px 0;"><strong>Advertiser:</strong> \${location.advertiserName}</p>
-                            <p style="margin: 5px 0;"><strong>Locations:</strong> \${location.locationCount}</p>
-                            <p style="margin: 5px 0;"><strong>Tokens:</strong> \${location.tokensRemaining.toLocaleString()} remaining</p>
-                            <p style="margin: 5px 0;"><strong>Redeemed:</strong> \${location.redemptions.totalTokensRedeemed.toLocaleString()}</p>
-                            <p style="margin: 5px 0;"><strong>Advertisement:</strong> Yes</p>
-                        </div>
-                    \`;
-                    
-                    const infoWindow = new google.maps.InfoWindow({ content: infoContent });
-                    marker.addListener('click', () => infoWindow.open(campaignTokenMapInstance, marker));
-                    advMarkers.push(marker);
-                });
-                
-                // Add Players (green)
-                ${JSON.stringify(EmberHuntDemo.activePlayers)}.forEach(player => {
-                    const marker = new google.maps.Marker({
-                        position: { lat: player.lat, lng: player.lng },
-                        map: campaignTokenMapInstance,
-                        title: player.username,
-                        icon: {
-                            path: google.maps.SymbolPath.CIRCLE,
-                            scale: 8,
-                            fillColor: '#22c55e',
-                            fillOpacity: 0.9,
-                            strokeColor: '#fff',
-                            strokeWeight: 2
-                        }
-                    });
-                    playerMarkers.push(marker);
-                });
-            }
-            
-            function toggleCMMapFilter(type) {
-                cmMapFilters[type] = !cmMapFilters[type];
-                const button = document.getElementById('filter' + (type === 'cm' ? 'CM' : type === 'adv' ? 'Adv' : 'Players') + 'Locations');
-                
-                if (type === 'cm') {
-                    cmMarkers.forEach(m => m.setVisible(cmMapFilters.cm));
-                    if (button) button.style.opacity = cmMapFilters.cm ? '1' : '0.4';
-                } else if (type === 'adv') {
-                    advMarkers.forEach(m => m.setVisible(cmMapFilters.adv));
-                    if (button) button.style.opacity = cmMapFilters.adv ? '1' : '0.4';
-                } else if (type === 'players') {
-                    playerMarkers.forEach(m => m.setVisible(cmMapFilters.players));
-                    if (button) button.style.opacity = cmMapFilters.players ? '1' : '0.4';
-                }
-            }
-            
-            // Make function globally available
-            window.initCampaignTokenMap = initCampaignTokenMap;
-        </script>
     `;
 }
 
