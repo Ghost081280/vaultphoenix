@@ -215,28 +215,42 @@ function initializeCalculator() {
     if (!investmentInput || !emberTokensEl || !totalInvestmentEl) return;
     
     function calculateTokens() {
-        const investment = parseFloat(investmentInput.value) || 10; // UPDATED: Default to $10 (minimum)
+        const inputValue = investmentInput.value;
+        const investment = parseFloat(inputValue);
         const tokenPrice = 0.003; // $0.003 per token
         
-        // Enforce min/max limits
-        let validInvestment = investment;
-        if (investment < 10) validInvestment = 10;
-        if (investment > 50000) validInvestment = 50000;
-        
-        // Update input if out of range
-        if (investment !== validInvestment) {
-            investmentInput.value = validInvestment;
+        // If empty or invalid, use minimum for display but don't force it into the input
+        if (!inputValue || isNaN(investment)) {
+            emberTokensEl.textContent = '3,333';
+            totalInvestmentEl.textContent = '$10';
+            return;
         }
         
-        const totalTokens = Math.floor(validInvestment / tokenPrice);
+        // Calculate tokens based on actual input (even if out of range)
+        // This allows user to type freely
+        const displayInvestment = Math.max(10, Math.min(50000, investment));
+        const totalTokens = Math.floor(displayInvestment / tokenPrice);
         
         // Format numbers with commas
         emberTokensEl.textContent = totalTokens.toLocaleString();
-        totalInvestmentEl.textContent = `$${validInvestment}`;
+        totalInvestmentEl.textContent = `${displayInvestment}`;
     }
     
-    // Calculate on input change
+    // Calculate on input change - allows free typing
     investmentInput.addEventListener('input', calculateTokens);
+    
+    // Validate on blur (when user clicks away) to enforce limits
+    investmentInput.addEventListener('blur', function() {
+        const investment = parseFloat(investmentInput.value);
+        
+        if (isNaN(investment) || investment < 10) {
+            investmentInput.value = 10;
+        } else if (investment > 50000) {
+            investmentInput.value = 50000;
+        }
+        
+        calculateTokens();
+    });
     
     // Initial calculation with $10
     calculateTokens();
@@ -473,11 +487,15 @@ function initializeFormValidation() {
     
     function validateInput() {
         const value = parseFloat(investmentInput.value);
-        const isValidAmount = value >= 10 && value <= 50000; // UPDATED: Minimum $10
+        // Allow empty or invalid during typing, but validate actual numbers
+        const isValidAmount = !isNaN(value) && value >= 10 && value <= 50000;
         const hasAgreedTPA = tpaCheckbox ? tpaCheckbox.checked : true;
         const isValid = isValidAmount && hasAgreedTPA;
         
-        if (isValidAmount) {
+        if (isNaN(value) || investmentInput.value === '') {
+            // Neutral state while typing
+            investmentInput.style.borderColor = 'rgba(215, 51, 39, 0.3)';
+        } else if (isValidAmount) {
             investmentInput.style.borderColor = 'rgba(64, 224, 64, 0.5)';
         } else {
             investmentInput.style.borderColor = 'rgba(255, 0, 0, 0.5)';
