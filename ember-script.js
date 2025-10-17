@@ -1,6 +1,7 @@
 // Ember Token Page JavaScript
 // Phoenix Rising from Digital Ashes - $Ember Token Edition
 // UPDATED: Presale countdown to November 1, 2025
+// UPDATED: Calculator starts at $10 minimum investment
 
 // EXACT COPY FROM MAIN.HTML: Enhanced navbar scroll effect
 window.addEventListener('scroll', () => {
@@ -205,7 +206,7 @@ function initializeCountdown() {
     console.log('🔥🪙 Countdown initialized for November 1, 2025 presale launch!');
 }
 
-// UPDATED: Investment calculator for $0.003 price
+// UPDATED: Investment calculator for $0.003 price - STARTS AT $10
 function initializeCalculator() {
     const investmentInput = document.getElementById('investment-amount');
     const emberTokensEl = document.getElementById('ember-tokens');
@@ -214,23 +215,33 @@ function initializeCalculator() {
     if (!investmentInput || !emberTokensEl || !totalInvestmentEl) return;
     
     function calculateTokens() {
-        const investment = parseFloat(investmentInput.value) || 100; // Default to $100
+        const investment = parseFloat(investmentInput.value) || 10; // UPDATED: Default to $10 (minimum)
         const tokenPrice = 0.003; // $0.003 per token
         
-        const totalTokens = Math.floor(investment / tokenPrice);
+        // Enforce min/max limits
+        let validInvestment = investment;
+        if (investment < 10) validInvestment = 10;
+        if (investment > 50000) validInvestment = 50000;
+        
+        // Update input if out of range
+        if (investment !== validInvestment) {
+            investmentInput.value = validInvestment;
+        }
+        
+        const totalTokens = Math.floor(validInvestment / tokenPrice);
         
         // Format numbers with commas
         emberTokensEl.textContent = totalTokens.toLocaleString();
-        totalInvestmentEl.textContent = `$${investment}`;
+        totalInvestmentEl.textContent = `$${validInvestment}`;
     }
     
     // Calculate on input change
     investmentInput.addEventListener('input', calculateTokens);
     
-    // Initial calculation
+    // Initial calculation with $10
     calculateTokens();
     
-    console.log('🔥🪙 Investment calculator initialized - $0.003 per EMBER token');
+    console.log('🔥🪙 Investment calculator initialized - $0.003 per EMBER token, starting at $10');
 }
 
 // Enhanced button interactions with ember effects
@@ -452,7 +463,7 @@ function initializeRoadmapAnimation() {
     });
 }
 
-// Form validation for token sale
+// UPDATED: Form validation for token sale - enforces $10 minimum
 function initializeFormValidation() {
     const investmentInput = document.getElementById('investment-amount');
     const presaleButton = document.querySelector('.presale-button');
@@ -462,7 +473,7 @@ function initializeFormValidation() {
     
     function validateInput() {
         const value = parseFloat(investmentInput.value);
-        const isValidAmount = value >= 10 && value <= 50000;
+        const isValidAmount = value >= 10 && value <= 50000; // UPDATED: Minimum $10
         const hasAgreedTPA = tpaCheckbox ? tpaCheckbox.checked : true;
         const isValid = isValidAmount && hasAgreedTPA;
         
@@ -615,6 +626,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('🔥🪙 $Ember Token page loaded successfully - November 1, 2025 presale ready!');
     console.log('🔥🪙 Scroll progress indicator active!');
+    console.log('🔥🪙 Calculator starts at $10 minimum investment!');
 });
 
 // Console welcome message
