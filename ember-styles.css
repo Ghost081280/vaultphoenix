@@ -705,7 +705,6 @@ body {
 }
 
 .path-icon {
-    font-size: 1.8rem;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -1179,9 +1178,30 @@ body {
 }
 
 .member-avatar {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(240, 165, 0, 0.5);
+    box-shadow: 0 0 25px rgba(240, 165, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.member-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.team-member:hover .member-avatar {
+    border-color: rgba(240, 165, 0, 0.8);
+    box-shadow: 0 0 35px rgba(240, 165, 0, 0.6);
+}
+
+.team-member:hover .member-photo {
+    transform: scale(1.1);
 }
 
 .member-name {
@@ -1219,6 +1239,41 @@ body {
     font-size: 0.9rem;
     font-weight: 600;
     border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+.member-socials {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.social-link-team {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(240, 165, 0, 0.2);
+    border-radius: 50%;
+    color: #f0a500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+}
+
+.social-link-team:hover {
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    color: white;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(215, 51, 39, 0.4);
+}
+
+.social-link-team svg {
+    width: 20px;
+    height: 20px;
 }
 
 .advisors-section {
@@ -1863,7 +1918,7 @@ body {
 
 .vesting-time {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
+    color:rgba(255, 255, 255, 0.8);
 }
 
 /* Payment Methods */
