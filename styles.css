@@ -1,6 +1,7 @@
 /* Vault Phoenix - Enhanced Stylesheet */
 /* Complete redesign with improved buttons, icons, and journey section */
 /* FIXED: Prevent black/white flash during page load */
+/* FIXED: Laptop gallery for proper screenshot display */
 
 * {
     margin: 0;
@@ -870,9 +871,7 @@ body.loaded {
     height: 50px !important;
     object-fit: contain;
     filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
-}
-
-/* Hero Content */
+}/* Hero Content */
 .hero-content {
     max-width: 1400px;
     margin: 0 auto;
@@ -1513,6 +1512,129 @@ body.loaded {
     padding: 6px 3px;
 }
 
+/* FIXED: Laptop Gallery - Complete Redesign for Proper Display */
+.laptop-gallery {
+    text-align: center;
+    position: relative;
+}
+
+.laptop-mockup {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto 25px;
+}
+
+.laptop-screen {
+    background: #1a1a1a;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 8px #2d2d2d,
+        inset 0 0 0 10px #1a1a1a;
+    position: relative;
+    padding: 25px;
+    border: 3px solid #2d2d2d;
+}
+
+/* FIXED: Proper aspect ratio container for screenshots */
+.laptop-screen::before {
+    content: '';
+    display: block;
+    padding-top: 62.5%; /* 16:10 aspect ratio */
+}
+
+.laptop-screenshot {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    right: 25px;
+    bottom: 25px;
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+    object-fit: contain;
+    object-position: center;
+    transition: opacity 0.5s ease;
+    background: #000;
+}
+
+.laptop-base {
+    width: 110%;
+    height: 18px;
+    background: linear-gradient(to bottom, #2d2d2d, #1a1a1a);
+    margin: 0 auto;
+    border-radius: 0 0 15px 15px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.laptop-notch {
+    width: 80px;
+    height: 6px;
+    background: #0f0f0f;
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+    z-index: 10;
+}
+
+/* Laptop thumbnail grid */
+.thumbnail-grid-laptop {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 650px;
+    margin: 0 auto 25px;
+}
+
+.simple-thumb-laptop {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.simple-thumb-laptop:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    border-color: #6366f1;
+}
+
+.simple-thumb-laptop.active {
+    border-color: #6366f1;
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+}
+
+.simple-thumb-laptop img {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+}
+
+.simple-thumb-laptop .thumb-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1e293b, #334155);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 3px;
+}
+
 /* ENHANCED Demo Card with Separate Icon */
 .demo-card-wrapper {
     display: flex;
@@ -1587,102 +1709,6 @@ body.loaded {
 .demo-text-enhanced {
     font-size: 1.05rem;
     font-weight: 800;
-}
-
-/* Laptop Gallery */
-.laptop-gallery {
-    text-align: center;
-    position: relative;
-}
-
-.laptop-mockup {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto 25px;
-}
-
-.laptop-screen {
-    background: #000;
-    border-radius: 8px 8px 0 0;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    aspect-ratio: 16 / 10;
-    position: relative;
-}
-
-.laptop-screenshot {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.laptop-base {
-    width: 110%;
-    height: 15px;
-    background: linear-gradient(to bottom, #2d2d2d, #1a1a1a);
-    margin: 0 auto;
-    border-radius: 0 0 15px 15px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.laptop-notch {
-    width: 60px;
-    height: 4px;
-    background: #1a1a1a;
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-}
-
-.thumbnail-grid-laptop {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    max-width: 500px;
-    margin: 0 auto 25px;
-}
-
-.simple-thumb-laptop {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid transparent;
-    position: relative;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.simple-thumb-laptop:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-    border-color: #6366f1;
-}
-
-.simple-thumb-laptop img {
-    width: 100%;
-    height: 80%;
-    object-fit: cover;
-}
-
-.simple-thumb-laptop .thumb-label {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(135deg, #1e293b, #334155);
-    color: white;
-    font-size: 10px;
-    font-weight: 700;
-    text-align: center;
-    padding: 6px 3px;
 }
 
 /* Phoenix Safe Container */
@@ -1833,7 +1859,7 @@ body.loaded {
     font-size: 1.1rem;
 }
 
-/* Use Cases Section */
+/* Continued in next message due to character limit... *//* Use Cases Section */
 .use-cases {
     padding: 120px 40px;
     background: linear-gradient(135deg, #7c2d12 0%, #dc2626 25%, #ea580c 50%, #f59e0b 75%, #eab308 100%);
@@ -3240,7 +3266,11 @@ body.loaded {
     }
 
     .laptop-mockup {
-        max-width: 400px;
+        max-width: 500px;
+    }
+
+    .thumbnail-grid-laptop {
+        max-width: 500px;
     }
 
     .phoenix-safe-image {
@@ -3364,7 +3394,11 @@ body.loaded {
     }
 
     .laptop-mockup {
-        max-width: 300px;
+        max-width: 400px;
+    }
+
+    .thumbnail-grid-laptop {
+        max-width: 400px;
     }
 
     .phoenix-safe-image {
