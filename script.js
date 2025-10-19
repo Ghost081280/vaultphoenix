@@ -250,8 +250,8 @@ function autoRotateGallery() {
 // NEW: Auto-rotate laptop gallery with management system screenshots
 let currentLaptopImageIndex = 0;
 const laptopImageRotation = [
-    { src: 'images/DashboardOverview.PNG', title: 'Dashboard Overview' },
     { src: 'images/CampaignControl.PNG', title: 'Campaign Control' },
+    { src: 'images/DashboardOverview.PNG', title: 'Dashboard Overview' },
     { src: 'images/AdvertiserManagement.PNG', title: 'Advertiser Management' },
     { src: 'images/AirdropCenter.PNG', title: 'Airdrop Center' },
     { src: 'images/Walletandfunding.PNG', title: 'Wallet and Funding' },
@@ -536,8 +536,8 @@ function preloadPhoenixCryptoImages() {
         'images/crypto-ar-hunt.jpg', // AR Hunt
         'images/crypto-vault.jpg', // Vault
         'images/crypto-navigation.jpg', // Navigation
+        'images/CampaignControl.PNG', // Management Campaign Control
         'images/DashboardOverview.PNG', // Management Dashboard
-        'images/CampaignControl.PNG', // Campaign Control
         'images/AdvertiserManagement.PNG', // Advertiser Management
         'images/AirdropCenter.PNG', // Airdrop Center
         'images/Walletandfunding.PNG', // Wallet and Funding
