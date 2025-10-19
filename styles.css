@@ -844,74 +844,61 @@ body.loaded {
 .phone-screen img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Changed from contain to cover */
+    object-fit: cover;
     object-position: center;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
     background: #000;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .phone-frame {
-        width: 300px;
-        height: 620px;
-        padding: 12px;
-        border-radius: 40px;
-    }
-
-    .phone-frame::before {
-        top: 20px;
-        width: 75px;
-        height: 24px;
-        border-radius: 0 0 14px 14px;
-    }
-
-    .phone-screen {
-        border-radius: 28px;
-    }
-
-    .thumbnail-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        max-width: 300px;
-    }
-
-    .simple-thumb {
-        width: 85px;
-        height: 150px;
-    }
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 340px;
+    margin: 0 auto 25px;
 }
 
-@media (max-width: 480px) {
-    .phone-frame {
-        width: 280px;
-        height: 580px;
-        padding: 11px;
-        border-radius: 38px;
-    }
+.simple-thumb {
+    width: 95px;
+    height: 165px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
 
-    .phone-frame::before {
-        top: 18px;
-        width: 70px;
-        height: 22px;
-        border-radius: 0 0 12px 12px;
-    }
+.simple-thumb:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
 
-    .phone-screen {
-        border-radius: 27px;
-    }
+.simple-thumb.active {
+    border-color: #d73327;
+    box-shadow: 0 12px 30px rgba(215, 51, 39, 0.4);
+}
 
-    .thumbnail-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        max-width: 280px;
-    }
+.simple-thumb img {
+    width: 100%;
+    height: 68%;
+    object-fit: cover;
+}
 
-    .simple-thumb {
-        width: 80px;
-        height: 140px;
-    }
+.thumb-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #0f0f0f, #2d1810);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 3px;
 }
 
 /* FIXED: Laptop Gallery - Perfect Fit WITHOUT Black Space */
@@ -1024,7 +1011,9 @@ body.loaded {
     font-weight: 700;
     text-align: center;
     padding: 6px 3px;
-}/* ENHANCED Demo Card with Separate Icon */
+}
+
+/* ENHANCED Demo Card with Separate Icon */
 .demo-card-wrapper {
     display: flex;
     justify-content: center;
@@ -1098,9 +1087,7 @@ body.loaded {
 .demo-text-enhanced {
     font-size: 1.05rem;
     font-weight: 800;
-}
-
-/* Phoenix Safe Container */
+}/* Phoenix Safe Container */
 .phoenix-safe-container {
     position: relative;
     display: flex;
@@ -1667,7 +1654,9 @@ body.loaded {
     color: rgba(255, 255, 255, 0.9);
     font-size: 1rem;
     line-height: 1.6;
-}/* Features Section */
+}
+
+/* Features Section */
 .features {
     padding: 120px 40px;
     background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
@@ -1935,9 +1924,7 @@ body.loaded {
     color: rgba(255, 255, 255, 0.85);
     line-height: 1.6;
     font-size: 1rem;
-}
-
-/* Pricing Section */
+}/* Pricing Section */
 .pricing {
     padding: 120px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
@@ -2466,7 +2453,9 @@ body.loaded {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.7;
     margin: 0;
-}/* Revenue Examples - Condensed */
+}
+
+/* Revenue Examples - Condensed */
 .revenue-examples-section {
     margin-top: 70px;
     padding: 50px;
@@ -3290,26 +3279,32 @@ html {
     }
 
     .phone-frame {
-        width: 280px;
-        height: 600px;
-        padding: 10px;
+        width: 300px;
+        height: 620px;
+        padding: 12px;
+        border-radius: 40px;
     }
 
     .phone-frame::before {
-        top: 18px;
-        width: 70px;
-        height: 22px;
+        top: 20px;
+        width: 75px;
+        height: 24px;
+        border-radius: 0 0 14px 14px;
+    }
+
+    .phone-screen {
+        border-radius: 28px;
     }
 
     .thumbnail-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 12px;
-        max-width: 280px;
+        max-width: 300px;
     }
 
     .simple-thumb {
-        width: 80px;
-        height: 145px;
+        width: 85px;
+        height: 150px;
     }
 
     .laptop-mockup {
@@ -3425,26 +3420,32 @@ html {
     }
 
     .phone-frame {
-        width: 260px;
-        height: 560px;
-        padding: 10px;
+        width: 280px;
+        height: 580px;
+        padding: 11px;
+        border-radius: 38px;
     }
 
     .phone-frame::before {
-        top: 16px;
-        width: 65px;
-        height: 20px;
+        top: 18px;
+        width: 70px;
+        height: 22px;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .phone-screen {
+        border-radius: 27px;
     }
 
     .thumbnail-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        max-width: 260px;
+        max-width: 280px;
     }
 
     .simple-thumb {
-        width: 75px;
-        height: 135px;
+        width: 80px;
+        height: 140px;
     }
 
     .laptop-mockup {
