@@ -2,7 +2,7 @@
 /* Complete redesign with improved buttons, icons, and journey section */
 /* FIXED: Prevent black/white flash during page load */
 /* FIXED: Laptop gallery for proper screenshot display - NO BLACK SPACE ABOVE/BELOW */
-/* FIXED: Phone gallery for perfect app screenshot fit */
+/* FIXED: Phone gallery for perfect app screenshot fit - NO BLACK BARS */
 
 * {
     margin: 0;
@@ -448,9 +448,7 @@ body.loaded {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-}
-
-/* Continue to Part 2... *//* Presale Stats & Highlights */
+}/* Presale Stats & Highlights */
 .presale-stats-redesigned {
     display: flex;
     align-items: center;
@@ -796,7 +794,7 @@ body.loaded {
     color: #f0a500;
 }
 
-/* FIXED: Phone Gallery - Perfect Screenshot Fit */
+/* FIXED: Phone Gallery - Perfect Screenshot Fit - NO BLACK BARS */
 .phone-gallery {
     text-align: center;
 }
@@ -808,11 +806,11 @@ body.loaded {
 }
 
 .phone-frame {
-    width: 280px;
-    height: 560px;
+    width: 300px;
+    height: 650px;
     background: linear-gradient(145deg, #0f0f0f, #2d1810);
-    border-radius: 35px;
-    padding: 15px;
+    border-radius: 40px;
+    padding: 12px;
     box-shadow: 
         0 30px 80px rgba(0, 0, 0, 0.4),
         inset 0 0 0 3px rgba(215, 51, 39, 0.2);
@@ -823,27 +821,26 @@ body.loaded {
 .phone-frame::before {
     content: '';
     position: absolute;
-    top: 25px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 6px;
-    background: #374151;
-    border-radius: 3px;
+    width: 80px;
+    height: 25px;
+    background: #000;
+    border-radius: 0 0 15px 15px;
     z-index: 5;
 }
 
 .phone-screen {
     width: 100%;
     height: 100%;
-    border-radius: 25px;
+    border-radius: 28px;
     overflow: hidden;
     background: #000;
     position: relative;
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-/* FIXED: Perfect fit for app screenshots */
+/* FIXED: Perfect fit for app screenshots - fills entire screen */
 .phone-screen img {
     width: 100%;
     height: 100%;
@@ -857,13 +854,13 @@ body.loaded {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
-    max-width: 280px;
+    max-width: 300px;
     margin: 0 auto 25px;
 }
 
 .simple-thumb {
-    width: 80px;
-    height: 140px;
+    width: 85px;
+    height: 155px;
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -886,7 +883,7 @@ body.loaded {
 
 .simple-thumb img {
     width: 100%;
-    height: 75%;
+    height: 70%;
     object-fit: cover;
 }
 
@@ -900,7 +897,7 @@ body.loaded {
     font-size: 10px;
     font-weight: 700;
     text-align: center;
-    padding: 6px 3px;
+    padding: 8px 3px;
 }
 
 /* FIXED: Laptop Gallery - Perfect Fit WITHOUT Black Space */
@@ -1013,9 +1010,7 @@ body.loaded {
     font-weight: 700;
     text-align: center;
     padding: 6px 3px;
-}
-
-/* ENHANCED Demo Card with Separate Icon */
+}/* ENHANCED Demo Card with Separate Icon */
 .demo-card-wrapper {
     display: flex;
     justify-content: center;
@@ -1238,7 +1233,7 @@ body.loaded {
     font-size: 1.1rem;
 }
 
-/* Continue to Part 3... *//* Section Title & Subtitle */
+/* Section Title & Subtitle */
 .section-title {
     text-align: center;
     font-size: clamp(2.5rem, 5vw, 4rem);
@@ -1658,9 +1653,7 @@ body.loaded {
     color: rgba(255, 255, 255, 0.9);
     font-size: 1rem;
     line-height: 1.6;
-}
-
-/* Features Section */
+}/* Features Section */
 .features {
     padding: 120px 40px;
     background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
@@ -1930,7 +1923,7 @@ body.loaded {
     font-size: 1rem;
 }
 
-/* Continue to Part 4... *//* Pricing Section */
+/* Pricing Section */
 .pricing {
     padding: 120px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
@@ -2459,9 +2452,7 @@ body.loaded {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.7;
     margin: 0;
-}
-
-/* Revenue Examples - Condensed */
+}/* Revenue Examples - Condensed */
 .revenue-examples-section {
     margin-top: 70px;
     padding: 50px;
@@ -3285,19 +3276,26 @@ html {
     }
 
     .phone-frame {
-        width: 260px;
-        height: 520px;
+        width: 280px;
+        height: 600px;
+        padding: 10px;
+    }
+
+    .phone-frame::before {
+        top: 18px;
+        width: 70px;
+        height: 22px;
     }
 
     .thumbnail-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 12px;
-        max-width: 260px;
+        max-width: 280px;
     }
 
     .simple-thumb {
-        width: 75px;
-        height: 130px;
+        width: 80px;
+        height: 145px;
     }
 
     .laptop-mockup {
@@ -3413,19 +3411,26 @@ html {
     }
 
     .phone-frame {
-        width: 240px;
-        height: 480px;
+        width: 260px;
+        height: 560px;
+        padding: 10px;
+    }
+
+    .phone-frame::before {
+        top: 16px;
+        width: 65px;
+        height: 20px;
     }
 
     .thumbnail-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        max-width: 240px;
+        max-width: 260px;
     }
 
     .simple-thumb {
-        width: 70px;
-        height: 120px;
+        width: 75px;
+        height: 135px;
     }
 
     .laptop-mockup {
