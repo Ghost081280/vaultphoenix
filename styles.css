@@ -794,7 +794,7 @@ body.loaded {
     color: #f0a500;
 }
 
-/* FIXED: Phone Gallery - Perfect Screenshot Fit - CORRECTED DIMENSIONS */
+/* FIXED: Phone Gallery - Perfect Screenshot Fit - NO BLACK BARS */
 .phone-gallery {
     text-align: center;
 }
@@ -840,65 +840,15 @@ body.loaded {
     position: relative;
 }
 
-/* FIXED: Perfect fit for app screenshots - contain to fit properly */
+/* FIXED: Perfect fit for app screenshots - cover to fill entire screen */
 .phone-screen img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; /* Changed from contain to cover */
     object-position: center;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
     background: #000;
-}
-
-.thumbnail-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    max-width: 340px;
-    margin: 0 auto 25px;
-}
-
-.simple-thumb {
-    width: 95px;
-    height: 165px;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid transparent;
-    position: relative;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.simple-thumb:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-}
-
-.simple-thumb.active {
-    border-color: #d73327;
-    box-shadow: 0 12px 30px rgba(215, 51, 39, 0.4);
-}
-
-.simple-thumb img {
-    width: 100%;
-    height: 68%;
-    object-fit: cover;
-}
-
-.thumb-label {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(135deg, #0f0f0f, #2d1810);
-    color: white;
-    font-size: 10px;
-    font-weight: 700;
-    text-align: center;
-    padding: 10px 3px;
 }
 
 /* Mobile Responsive */
