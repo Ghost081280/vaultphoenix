@@ -794,7 +794,7 @@ body.loaded {
     color: #f0a500;
 }
 
-/* FIXED: Phone Gallery - Perfect Screenshot Fit - NO BLACK BARS */
+/* FIXED: Phone Gallery - Perfect Screenshot Fit - CORRECTED DIMENSIONS */
 .phone-gallery {
     text-align: center;
 }
@@ -806,11 +806,11 @@ body.loaded {
 }
 
 .phone-frame {
-    width: 300px;
-    height: 650px;
+    width: 340px;
+    height: 700px;
     background: linear-gradient(145deg, #0f0f0f, #2d1810);
-    border-radius: 40px;
-    padding: 12px;
+    border-radius: 45px;
+    padding: 14px;
     box-shadow: 
         0 30px 80px rgba(0, 0, 0, 0.4),
         inset 0 0 0 3px rgba(215, 51, 39, 0.2);
@@ -821,46 +821,47 @@ body.loaded {
 .phone-frame::before {
     content: '';
     position: absolute;
-    top: 20px;
+    top: 22px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 25px;
+    width: 90px;
+    height: 28px;
     background: #000;
-    border-radius: 0 0 15px 15px;
+    border-radius: 0 0 16px 16px;
     z-index: 5;
 }
 
 .phone-screen {
     width: 100%;
     height: 100%;
-    border-radius: 28px;
+    border-radius: 32px;
     overflow: hidden;
     background: #000;
     position: relative;
 }
 
-/* FIXED: Perfect fit for app screenshots - fills entire screen */
+/* FIXED: Perfect fit for app screenshots - contain to fit properly */
 .phone-screen img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
+    background: #000;
 }
 
 .thumbnail-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
-    max-width: 300px;
+    max-width: 340px;
     margin: 0 auto 25px;
 }
 
 .simple-thumb {
-    width: 85px;
-    height: 155px;
+    width: 95px;
+    height: 165px;
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -883,7 +884,7 @@ body.loaded {
 
 .simple-thumb img {
     width: 100%;
-    height: 70%;
+    height: 68%;
     object-fit: cover;
 }
 
@@ -897,7 +898,70 @@ body.loaded {
     font-size: 10px;
     font-weight: 700;
     text-align: center;
-    padding: 8px 3px;
+    padding: 10px 3px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .phone-frame {
+        width: 300px;
+        height: 620px;
+        padding: 12px;
+        border-radius: 40px;
+    }
+
+    .phone-frame::before {
+        top: 20px;
+        width: 75px;
+        height: 24px;
+        border-radius: 0 0 14px 14px;
+    }
+
+    .phone-screen {
+        border-radius: 28px;
+    }
+
+    .thumbnail-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        max-width: 300px;
+    }
+
+    .simple-thumb {
+        width: 85px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .phone-frame {
+        width: 280px;
+        height: 580px;
+        padding: 11px;
+        border-radius: 38px;
+    }
+
+    .phone-frame::before {
+        top: 18px;
+        width: 70px;
+        height: 22px;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .phone-screen {
+        border-radius: 27px;
+    }
+
+    .thumbnail-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 280px;
+    }
+
+    .simple-thumb {
+        width: 80px;
+        height: 140px;
+    }
 }
 
 /* FIXED: Laptop Gallery - Perfect Fit WITHOUT Black Space */
