@@ -1,8 +1,8 @@
 /* Vault Phoenix - Enhanced Stylesheet */
 /* Complete redesign with improved buttons, icons, and journey section */
 /* FIXED: Prevent black/white flash during page load */
+/* FIXED: Phone gallery for perfect app screenshot fit - NO BLACK BARS - SMALLER FRAME */
 /* FIXED: Laptop gallery for proper screenshot display - NO BLACK SPACE ABOVE/BELOW */
-/* FIXED: Phone gallery for perfect app screenshot fit - NO BLACK BARS */
 
 * {
     margin: 0;
@@ -448,7 +448,9 @@ body.loaded {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-}/* Presale Stats & Highlights */
+}
+
+/* Presale Stats & Highlights */
 .presale-stats-redesigned {
     display: flex;
     align-items: center;
@@ -794,7 +796,9 @@ body.loaded {
     color: #f0a500;
 }
 
-/* FIXED: Phone Gallery - Perfect Screenshot Fit - NO BLACK BARS */
+/* ============================================
+   FIXED: Phone Gallery - Smaller with Perfect Fit
+   ============================================ */
 .phone-gallery {
     text-align: center;
 }
@@ -805,12 +809,13 @@ body.loaded {
     margin-bottom: 30px;
 }
 
+/* FIXED: Smaller phone frame dimensions */
 .phone-frame {
-    width: 340px;
-    height: 700px;
+    width: 280px;
+    height: 580px;
     background: linear-gradient(145deg, #0f0f0f, #2d1810);
-    border-radius: 45px;
-    padding: 14px;
+    border-radius: 40px;
+    padding: 12px;
     box-shadow: 
         0 30px 80px rgba(0, 0, 0, 0.4),
         inset 0 0 0 3px rgba(215, 51, 39, 0.2);
@@ -818,29 +823,30 @@ body.loaded {
     overflow: hidden;
 }
 
+/* Dynamic Island / Notch */
 .phone-frame::before {
     content: '';
     position: absolute;
-    top: 22px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 90px;
-    height: 28px;
+    width: 80px;
+    height: 25px;
     background: #000;
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 15px 15px;
     z-index: 5;
 }
 
 .phone-screen {
     width: 100%;
     height: 100%;
-    border-radius: 32px;
+    border-radius: 28px;
     overflow: hidden;
     background: #000;
     position: relative;
 }
 
-/* FIXED: Perfect fit for app screenshots - cover to fill entire screen */
+/* FIXED: Perfect fit for app screenshots - fills entire screen with no black bars */
 .phone-screen img {
     width: 100%;
     height: 100%;
@@ -851,19 +857,20 @@ body.loaded {
     background: #000;
 }
 
+/* Thumbnail Grid - Updated for smaller size */
 .thumbnail-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    max-width: 340px;
+    gap: 12px;
+    max-width: 280px;
     margin: 0 auto 25px;
 }
 
 .simple-thumb {
-    width: 95px;
-    height: 165px;
+    width: 80px;
+    height: 145px;
     background: white;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -884,7 +891,7 @@ body.loaded {
 
 .simple-thumb img {
     width: 100%;
-    height: 68%;
+    height: 70%;
     object-fit: cover;
 }
 
@@ -895,10 +902,10 @@ body.loaded {
     right: 0;
     background: linear-gradient(135deg, #0f0f0f, #2d1810);
     color: white;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
     text-align: center;
-    padding: 10px 3px;
+    padding: 8px 2px;
 }
 
 /* FIXED: Laptop Gallery - Perfect Fit WITHOUT Black Space */
@@ -1087,7 +1094,9 @@ body.loaded {
 .demo-text-enhanced {
     font-size: 1.05rem;
     font-weight: 800;
-}/* Phoenix Safe Container */
+}
+
+/* Phoenix Safe Container */
 .phoenix-safe-container {
     position: relative;
     display: flex;
@@ -1924,7 +1933,9 @@ body.loaded {
     color: rgba(255, 255, 255, 0.85);
     line-height: 1.6;
     font-size: 1rem;
-}/* Pricing Section */
+}
+
+/* Pricing Section */
 .pricing {
     padding: 120px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
@@ -3278,33 +3289,34 @@ html {
         gap: 30px;
     }
 
+    /* FIXED: Smaller phone for tablets */
     .phone-frame {
-        width: 300px;
-        height: 620px;
-        padding: 12px;
-        border-radius: 40px;
+        width: 260px;
+        height: 540px;
+        padding: 11px;
+        border-radius: 38px;
     }
 
     .phone-frame::before {
-        top: 20px;
+        top: 18px;
         width: 75px;
-        height: 24px;
+        height: 23px;
         border-radius: 0 0 14px 14px;
     }
 
     .phone-screen {
-        border-radius: 28px;
+        border-radius: 27px;
     }
 
     .thumbnail-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        max-width: 300px;
+        gap: 10px;
+        max-width: 260px;
     }
 
     .simple-thumb {
-        width: 85px;
-        height: 150px;
+        width: 75px;
+        height: 135px;
     }
 
     .laptop-mockup {
@@ -3419,33 +3431,34 @@ html {
         font-size: clamp(1.5rem, 6vw, 2rem);
     }
 
+    /* FIXED: Even smaller phone for mobile */
     .phone-frame {
-        width: 280px;
-        height: 580px;
-        padding: 11px;
-        border-radius: 38px;
+        width: 240px;
+        height: 500px;
+        padding: 10px;
+        border-radius: 36px;
     }
 
     .phone-frame::before {
-        top: 18px;
+        top: 16px;
         width: 70px;
         height: 22px;
         border-radius: 0 0 12px 12px;
     }
 
     .phone-screen {
-        border-radius: 27px;
+        border-radius: 26px;
     }
 
     .thumbnail-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        max-width: 280px;
+        gap: 8px;
+        max-width: 240px;
     }
 
     .simple-thumb {
-        width: 80px;
-        height: 140px;
+        width: 70px;
+        height: 125px;
     }
 
     .laptop-mockup {
