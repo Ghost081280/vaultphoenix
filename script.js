@@ -2,6 +2,7 @@
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // UPDATED: Now works with main images/ folder screenshots
 // FIXED: Optimized for seamless transition from loading page
+// ADDED: Laptop gallery auto-rotation with 6 management screenshots
 
 // FIXED: Immediately prevent flash by setting dark background - FASTER RESPONSE
 (function() {
@@ -67,6 +68,34 @@ function changeImage(imageSrc, title) {
     });
 }
 
+// NEW: Laptop gallery function for management system screenshots
+function changeLaptopImage(imageSrc, title) {
+    const mainImg = document.getElementById('mainLaptopScreenshot');
+    const thumbs = document.querySelectorAll('.simple-thumb-laptop');
+    
+    if (mainImg) {
+        mainImg.style.opacity = '0.7';
+        setTimeout(() => {
+            mainImg.src = imageSrc;
+            mainImg.alt = title;
+            mainImg.style.opacity = '1';
+        }, 150);
+    }
+    
+    // Update active states with smooth transitions
+    thumbs.forEach(thumb => {
+        thumb.classList.remove('active');
+    });
+    
+    // Find and activate clicked thumb based on image source
+    thumbs.forEach(thumb => {
+        const thumbImg = thumb.querySelector('img');
+        if (thumbImg && thumbImg.src.includes(imageSrc.split('/').pop())) {
+            thumb.classList.add('active');
+        }
+    });
+}
+
 // Enhanced navbar scroll effect with phoenix crypto theme
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
@@ -115,9 +144,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Enhanced interactive card effects with phoenix crypto animation
-document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .crypto-benefit, .ember-highlight-v3').forEach(card => {
+document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .simple-thumb-laptop, .crypto-benefit, .ember-highlight-v3').forEach(card => {
     card.addEventListener('mouseenter', function() {
-        if (this.classList.contains('simple-thumb')) {
+        if (this.classList.contains('simple-thumb') || this.classList.contains('simple-thumb-laptop')) {
             this.style.transform = 'translateY(-5px) scale(1.05)';
         } else if (this.classList.contains('crypto-benefit')) {
             this.style.transform = 'translateX(15px)';
@@ -218,10 +247,38 @@ function autoRotateGallery() {
     }
 }
 
+// NEW: Auto-rotate laptop gallery with management system screenshots
+let currentLaptopImageIndex = 0;
+const laptopImageRotation = [
+    { src: 'images/DashboardOverview.PNG', title: 'Dashboard Overview' },
+    { src: 'images/CampaignControl.PNG', title: 'Campaign Control' },
+    { src: 'images/AdvertiserManagement.PNG', title: 'Advertiser Management' },
+    { src: 'images/AirdropCenter.PNG', title: 'Airdrop Center' },
+    { src: 'images/Walletandfunding.PNG', title: 'Wallet and Funding' },
+    { src: 'images/AppbuilderSDK.PNG', title: 'App Builder SDK' }
+];
+
+function autoRotateLaptopGallery() {
+    const showcaseSection = document.getElementById('showcase');
+    if (!showcaseSection) return;
+    
+    const rect = showcaseSection.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    
+    if (isVisible) {
+        currentLaptopImageIndex = (currentLaptopImageIndex + 1) % laptopImageRotation.length;
+        const currentImage = laptopImageRotation[currentLaptopImageIndex];
+        changeLaptopImage(currentImage.src, currentImage.title);
+    }
+}
+
 // Start auto-rotation after page load
 let autoRotateInterval;
+let autoRotateLaptopInterval;
+
 setTimeout(() => {
     autoRotateInterval = setInterval(autoRotateGallery, 4500); // Slightly slower for better UX
+    autoRotateLaptopInterval = setInterval(autoRotateLaptopGallery, 4500); // Same timing for laptop
 }, 3000);
 
 // Pause auto-rotation when user interacts with thumbnails
@@ -232,6 +289,18 @@ document.querySelectorAll('.simple-thumb').forEach(thumb => {
         }
         setTimeout(() => {
             autoRotateInterval = setInterval(autoRotateGallery, 4500);
+        }, 15000); // Resume after 15 seconds
+    });
+});
+
+// NEW: Pause laptop auto-rotation when user interacts with laptop thumbnails
+document.querySelectorAll('.simple-thumb-laptop').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+        if (autoRotateLaptopInterval) {
+            clearInterval(autoRotateLaptopInterval);
+        }
+        setTimeout(() => {
+            autoRotateLaptopInterval = setInterval(autoRotateLaptopGallery, 4500);
         }, 15000); // Resume after 15 seconds
     });
 });
@@ -390,6 +459,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥🪙 Main Page Countdown to Nov 1, 2025 - Ready!');
     console.log('🔥🪙 Floating VPEmberCoin.PNG coins should now be visible in hero section!');
     console.log('🔥🪙 Crypto game screenshots ready for gallery!');
+    console.log('🔥🪙 Management system screenshots ready for laptop gallery!');
 });
 
 // FIXED: Enhanced page load handling for seamless transition
@@ -422,6 +492,16 @@ window.addEventListener('load', () => {
             console.warn('🔥🪙 WARNING: Crypto game screenshots not detected!');
         }
     }, 300);
+    
+    // NEW: Check if management system laptop gallery is working
+    setTimeout(() => {
+        const mainLaptopScreenshot = document.getElementById('mainLaptopScreenshot');
+        if (mainLaptopScreenshot && mainLaptopScreenshot.src.includes('.PNG')) {
+            console.log('🔥🪙 SUCCESS: Management system screenshots loaded in laptop gallery!');
+        } else {
+            console.warn('🔥🪙 WARNING: Management system screenshots not detected!');
+        }
+    }, 400);
     
     // Check if main countdown is working
     setTimeout(() => {
@@ -456,6 +536,12 @@ function preloadPhoenixCryptoImages() {
         'images/crypto-ar-hunt.jpg', // AR Hunt
         'images/crypto-vault.jpg', // Vault
         'images/crypto-navigation.jpg', // Navigation
+        'images/DashboardOverview.PNG', // Management Dashboard
+        'images/CampaignControl.PNG', // Campaign Control
+        'images/AdvertiserManagement.PNG', // Advertiser Management
+        'images/AirdropCenter.PNG', // Airdrop Center
+        'images/Walletandfunding.PNG', // Wallet and Funding
+        'images/AppbuilderSDK.PNG', // App Builder SDK
         'images/VPEmberCoin.PNG', // CORRECT EMBER COIN FOR FLOATING
         'images/PhoenixHoldingCoin.PNG', // Ember section image
         'images/VPLogoNoText.PNG' // Logo
@@ -910,7 +996,7 @@ document.addEventListener('keydown', (e) => {
 console.log('%c🔥🪙 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
 console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
 console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
-console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with main images/ screenshots!', 'color: #d73327; font-size: 12px; font-style: italic;');
+console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with management screenshots!', 'color: #d73327; font-size: 12px; font-style: italic;');
 console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
 
 // Performance monitoring with phoenix crypto theme
