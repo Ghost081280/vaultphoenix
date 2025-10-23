@@ -1755,6 +1755,157 @@ body {
     font-weight: 600;
 }
 
+/* NEW: Development Fund Tracker Section */
+.development-fund-tracker {
+    background: rgba(240, 165, 0, 0.1);
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    margin-top: 40px;
+}
+
+.development-fund-tracker h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.tracker-description {
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.tracker-progress {
+    margin-bottom: 30px;
+}
+
+.tracker-bar {
+    background: rgba(0, 0, 0, 0.3);
+    height: 25px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    border: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.tracker-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4ade80, #22c55e, #16a34a);
+    border-radius: 12px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
+}
+
+.tracker-stats {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.tracker-stats #dev-fund-withdrawn {
+    color: #4ade80;
+    font-weight: 900;
+}
+
+.tracker-update {
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+.tracker-update #dev-fund-timestamp {
+    color: #f0a500;
+    font-weight: 600;
+}
+
+.tracker-breakdown {
+    margin-bottom: 25px;
+}
+
+.tracker-breakdown h4 {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.breakdown-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    border: 1px solid rgba(240, 165, 0, 0.2);
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.breakdown-item:hover {
+    background: rgba(240, 165, 0, 0.15);
+    border-color: rgba(240, 165, 0, 0.4);
+    transform: translateX(5px);
+}
+
+.breakdown-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+}
+
+.breakdown-details {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.breakdown-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.breakdown-amount {
+    color: #f0a500;
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.tracker-note {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #f0a500;
+}
+
+.tracker-note p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.tracker-note p:last-child {
+    margin-bottom: 0;
+}
+
+.tracker-note strong {
+    color: #f0a500;
+    font-weight: 800;
+}
+
 /* Fund Usage Breakdown */
 .fund-usage {
     background: rgba(240, 165, 0, 0.1);
