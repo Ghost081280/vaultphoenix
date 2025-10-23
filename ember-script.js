@@ -2,6 +2,7 @@
 // Phoenix Rising from Digital Ashes - $Ember Token Edition
 // UPDATED: Presale countdown to November 1, 2025
 // UPDATED: Calculator starts at $10 minimum investment
+// UPDATED: Development Fund Tracker with real-time updates
 
 // EXACT COPY FROM MAIN.HTML: Enhanced navbar scroll effect
 window.addEventListener('scroll', () => {
@@ -256,6 +257,60 @@ function initializeCalculator() {
     calculateTokens();
     
     console.log('🔥🪙 Investment calculator initialized - $0.003 per EMBER token, starting at $10');
+}
+
+// NEW: Development Fund Tracker Functionality
+function initializeDevelopmentFundTracker() {
+    const devFundWithdrawn = document.getElementById('dev-fund-withdrawn');
+    const devFundFill = document.getElementById('dev-fund-fill');
+    const devFundTimestamp = document.getElementById('dev-fund-timestamp');
+    
+    if (!devFundWithdrawn || !devFundFill || !devFundTimestamp) {
+        console.log('🔥 Development Fund Tracker elements not found - skipping initialization');
+        return;
+    }
+    
+    // In a production environment, this would fetch from an API
+    // For now, we'll set up the structure for manual updates
+    
+    const TOTAL_DEV_FUND = 30000; // $30,000 total
+    
+    // Function to update the tracker (call this when funds are withdrawn)
+    window.updateDevFundTracker = function(amountWithdrawn, timestamp) {
+        const percentage = (amountWithdrawn / TOTAL_DEV_FUND) * 100;
+        
+        // Update withdrawn amount
+        devFundWithdrawn.textContent = `$${amountWithdrawn.toLocaleString()}`;
+        
+        // Update progress bar
+        devFundFill.style.width = `${percentage}%`;
+        
+        // Update timestamp
+        if (timestamp) {
+            const date = new Date(timestamp);
+            const formattedDate = date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            devFundTimestamp.textContent = formattedDate;
+        }
+        
+        console.log(`🔥💰 Development Fund updated: $${amountWithdrawn} withdrawn (${percentage.toFixed(1)}%)`);
+    };
+    
+    // Initialize with $0
+    window.updateDevFundTracker(0, null);
+    
+    // Example usage (commented out - uncomment to test):
+    // setTimeout(() => {
+    //     window.updateDevFundTracker(5000, new Date()); // $5,000 withdrawn
+    // }, 5000);
+    
+    console.log('🔥💰 Development Fund Tracker initialized - ready for updates');
+    console.log('💡 Call window.updateDevFundTracker(amount, timestamp) to update the tracker');
 }
 
 // Enhanced button interactions with ember effects
@@ -618,6 +673,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     initializeCountdown();
     initializeCalculator();
+    initializeDevelopmentFundTracker(); // NEW: Initialize Development Fund Tracker
     initializeButtonEffects();
     animateProgressBar();
     initializeChartAnimation();
@@ -645,6 +701,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥🪙 $Ember Token page loaded successfully - November 1, 2025 presale ready!');
     console.log('🔥🪙 Scroll progress indicator active!');
     console.log('🔥🪙 Calculator starts at $10 minimum investment!');
+    console.log('🔥💰 Development Fund Tracker initialized!');
 });
 
 // Console welcome message
