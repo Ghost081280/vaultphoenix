@@ -5,6 +5,7 @@
 /* FIXED: Laptop gallery for proper screenshot display - NO BLACK SPACE ABOVE/BELOW */
 /* NEW: Premium hero section with 3-step process and dual-path CTAs */
 /* UPDATED: Step number badges repositioned to top right corner */
+/* NEW: Dedicated Social Sharing Section with theme-matching colors */
 
 * {
     margin: 0;
@@ -42,6 +43,244 @@ body.loaded {
     color: #f0a500;
     font-weight: 700;
     text-shadow: 0 1px 4px rgba(240, 165, 0, 0.2);
+}
+
+/* ============================================
+   NEW: DEDICATED SOCIAL SHARING SECTION
+   Theme-Matching Colors & Professional Design
+   ============================================ */
+
+.social-sharing-section {
+    padding: 80px 40px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #451a03 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-sharing-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 25% 25%, rgba(215, 51, 39, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(240, 165, 0, 0.15) 0%, transparent 50%);
+    animation: phoenixFloat 20s ease-in-out infinite;
+}
+
+.social-sharing-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.15), rgba(251, 146, 60, 0.1));
+    border: 3px solid rgba(215, 51, 39, 0.4);
+    border-radius: 30px;
+    padding: 50px 45px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 25px 70px rgba(215, 51, 39, 0.3);
+}
+
+.social-sharing-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #d73327, #fb923c, #f0a500, #fb923c, #d73327);
+    background-size: 200% 100%;
+    animation: gradientShift 4s ease-in-out infinite;
+    border-radius: 30px 30px 0 0;
+}
+
+.social-sharing-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.social-sharing-icon {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(240, 165, 0, 0.6));
+    margin-bottom: 20px;
+    animation: coinPulse 3s ease-in-out infinite;
+}
+
+.social-sharing-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 15px;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(215, 51, 39, 0.3);
+}
+
+.social-sharing-subtitle {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.social-sharing-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.social-share-button-enhanced {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.social-share-button-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.social-share-button-enhanced:hover::before {
+    left: 100%;
+}
+
+.social-share-button-enhanced:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.twitter-share-enhanced {
+    background: linear-gradient(135deg, #1DA1F2, #0c85d0);
+    color: white;
+    border-color: rgba(29, 161, 242, 0.3);
+}
+
+.twitter-share-enhanced:hover {
+    background: linear-gradient(135deg, #0c85d0, #1DA1F2);
+    border-color: rgba(29, 161, 242, 0.6);
+    box-shadow: 0 15px 40px rgba(29, 161, 242, 0.4);
+}
+
+.facebook-share-enhanced {
+    background: linear-gradient(135deg, #4267B2, #365899);
+    color: white;
+    border-color: rgba(66, 103, 178, 0.3);
+}
+
+.facebook-share-enhanced:hover {
+    background: linear-gradient(135deg, #365899, #4267B2);
+    border-color: rgba(66, 103, 178, 0.6);
+    box-shadow: 0 15px 40px rgba(66, 103, 178, 0.4);
+}
+
+.telegram-share-enhanced {
+    background: linear-gradient(135deg, #0088cc, #006699);
+    color: white;
+    border-color: rgba(0, 136, 204, 0.3);
+}
+
+.telegram-share-enhanced:hover {
+    background: linear-gradient(135deg, #006699, #0088cc);
+    border-color: rgba(0, 136, 204, 0.6);
+    box-shadow: 0 15px 40px rgba(0, 136, 204, 0.4);
+}
+
+.social-share-icon {
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.social-share-text {
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+.social-sharing-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 2px solid rgba(215, 51, 39, 0.3);
+}
+
+.sharing-stat {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 18px;
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.sharing-stat:hover {
+    transform: translateY(-5px);
+    border-color: rgba(240, 165, 0, 0.6);
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 15px 35px rgba(240, 165, 0, 0.3);
+}
+
+.sharing-stat .stat-icon {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(215, 51, 39, 0.2));
+    border-radius: 50%;
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    flex-shrink: 0;
+}
+
+.sharing-stat .stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.sharing-stat .stat-value {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #f0a500;
+    line-height: 1;
+}
+
+.sharing-stat .stat-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* Hero Section - PREMIUM REDESIGN */
@@ -3459,11 +3698,11 @@ html {
     overflow: hidden;
 }
 
-.technology-card.gps {
+.technology-card.gps-card {
     border-color: rgba(99, 102, 241, 0.4);
 }
 
-.technology-card.beacon {
+.technology-card.beacon-card {
     border-color: rgba(240, 165, 0, 0.4);
 }
 
@@ -3472,12 +3711,12 @@ html {
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
 }
 
-.technology-card.gps:hover {
+.technology-card.gps-card:hover {
     border-color: rgba(99, 102, 241, 0.7);
     box-shadow: 0 25px 60px rgba(99, 102, 241, 0.3);
 }
 
-.technology-card.beacon:hover {
+.technology-card.beacon-card:hover {
     border-color: rgba(240, 165, 0, 0.7);
     box-shadow: 0 25px 60px rgba(240, 165, 0, 0.3);
 }
@@ -3503,7 +3742,7 @@ html {
     transition: all 0.3s ease;
 }
 
-.technology-card.beacon .technology-icon-container {
+.technology-card.beacon-card .technology-icon-container {
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(251, 146, 60, 0.2));
     border-color: rgba(240, 165, 0, 0.4);
 }
@@ -3538,7 +3777,7 @@ html {
     box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
 }
 
-.technology-card.beacon .technology-badge {
+.technology-card.beacon-card .technology-badge {
     background: linear-gradient(135deg, #f0a500, #fb923c);
     box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4);
 }
@@ -3570,7 +3809,7 @@ html {
     margin-bottom: 15px;
 }
 
-.technology-card.beacon .technology-features h5 {
+.technology-card.beacon-card .technology-features h5 {
     color: #f0a500;
 }
 
@@ -3606,7 +3845,7 @@ html {
     border: 2px solid rgba(99, 102, 241, 0.3);
 }
 
-.technology-card.beacon .technology-features ul li::before {
+.technology-card.beacon-card .technology-features ul li::before {
     color: #f0a500;
     background: rgba(240, 165, 0, 0.15);
     border-color: rgba(240, 165, 0, 0.3);
@@ -3629,7 +3868,7 @@ html {
     transition: all 0.3s ease;
 }
 
-.technology-card.beacon .tech-stat {
+.technology-card.beacon-card .tech-stat {
     border-color: rgba(240, 165, 0, 0.2);
 }
 
@@ -3639,7 +3878,7 @@ html {
     background: rgba(0, 0, 0, 0.4);
 }
 
-.technology-card.beacon .tech-stat:hover {
+.technology-card.beacon-card .tech-stat:hover {
     border-color: rgba(240, 165, 0, 0.4);
 }
 
@@ -3652,7 +3891,7 @@ html {
     line-height: 1;
 }
 
-.technology-card.beacon .tech-stat-number {
+.technology-card.beacon-card .tech-stat-number {
     color: #f0a500;
 }
 
@@ -3675,7 +3914,7 @@ html {
     transition: all 0.3s ease;
 }
 
-.technology-card.beacon .technology-highlight {
+.technology-card.beacon-card .technology-highlight {
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.15), rgba(251, 146, 60, 0.1));
     border-color: rgba(240, 165, 0, 0.3);
 }
@@ -3685,7 +3924,7 @@ html {
     border-color: rgba(99, 102, 241, 0.5);
 }
 
-.technology-card.beacon .technology-highlight:hover {
+.technology-card.beacon-card .technology-highlight:hover {
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(251, 146, 60, 0.15));
     border-color: rgba(240, 165, 0, 0.5);
 }
@@ -4259,6 +4498,44 @@ html {
     .combined-power-description {
         font-size: 1.05rem;
     }
+    
+    /* Social Sharing Responsive */
+    .social-sharing-section {
+        padding: 60px 20px;
+    }
+    
+    .social-sharing-content {
+        padding: 40px 30px;
+    }
+    
+    .social-sharing-icon {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .social-sharing-title {
+        font-size: 2rem;
+    }
+    
+    .social-sharing-subtitle {
+        font-size: 1rem;
+    }
+    
+    .social-sharing-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .social-share-button-enhanced {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 28px;
+    }
+    
+    .social-sharing-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -4548,21 +4825,36 @@ html {
         width: 60px;
         height: 60px;
     }
-}
-
-/* Animation enhancements */
-@keyframes coinPulse {
-    0%, 100% { 
-        transform: scale(1) rotate(0deg); 
-        filter: drop-shadow(0 5px 15px rgba(240, 165, 0, 0.6));
+    
+    /* Social Sharing Mobile */
+    .social-sharing-content {
+        padding: 30px 20px;
     }
-    50% { 
-        transform: scale(1.1) rotate(5deg); 
-        filter: drop-shadow(0 8px 25px rgba(240, 165, 0, 0.9));
+    
+    .social-sharing-icon {
+        width: 60px;
+        height: 60px;
     }
-}
-
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    
+    .social-sharing-title {
+        font-size: 1.6rem;
+    }
+    
+    .social-sharing-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .sharing-stat {
+        padding: 15px;
+    }
+    
+    .sharing-stat .stat-icon {
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .sharing-stat .stat-value {
+        font-size: 1.2rem;
+    }
 }
