@@ -8,6 +8,7 @@
 /* OPTIMIZED: Compact Social Sharing Section with Theme-Matching Colors */
 /* UPDATED: GPS Technology (Orange) and Beacon Technology (Purple) color swap */
 /* NEW: Floating AI Chatbot Button with pulsing glow animation */
+/* UPDATED: Bigger chatbot button (110px), fixed chat window positioning, proper overflow */
 
 * {
     margin: 0;
@@ -48,8 +49,10 @@ body.loaded {
 }
 
 /* ============================================
-   NEW: FLOATING AI CHATBOT BUTTON
+   UPDATED: FLOATING AI CHATBOT BUTTON - BIGGER
    Bottom right corner with pulsing glow
+   Button: 110px (was 90px)
+   Glow: 180px (was 140px)
    ============================================ */
 
 .chatbot-button-container {
@@ -70,8 +73,8 @@ body.loaded {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     background: radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(215, 51, 39, 0.4) 30%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
@@ -92,8 +95,8 @@ body.loaded {
 
 .chatbot-button {
     position: relative;
-    width: 90px;
-    height: 90px;
+    width: 110px;
+    height: 110px;
     background: linear-gradient(135deg, #d73327, #fb923c);
     border-radius: 50%;
     display: flex;
@@ -125,7 +128,7 @@ body.loaded {
 
 .chatbot-tooltip {
     position: absolute;
-    right: 110px;
+    right: 130px;
     top: 50%;
     transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.9);
@@ -144,7 +147,7 @@ body.loaded {
 
 .chatbot-button-container:hover .chatbot-tooltip {
     opacity: 1;
-    right: 115px;
+    right: 135px;
 }
 
 .chatbot-tooltip::after {
@@ -160,13 +163,13 @@ body.loaded {
     border-left: 10px solid rgba(0, 0, 0, 0.9);
 }
 
-/* Chatbot Window Styling */
+/* UPDATED: Chatbot Window - Fixed Positioning & Overflow */
 .chatbot-window {
     position: fixed;
-    bottom: 140px;
+    bottom: 160px;
     right: 30px;
     width: 400px;
-    height: 600px;
+    max-height: calc(100vh - 200px);
     background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #451a03 100%);
     border-radius: 25px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -201,6 +204,7 @@ body.loaded {
     align-items: center;
     justify-content: space-between;
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
 }
 
 .chatbot-header-content {
@@ -251,6 +255,7 @@ body.loaded {
 
 .chatbot-body {
     flex: 1;
+    min-height: 0;
     padding: 20px;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.3);
@@ -260,6 +265,7 @@ body.loaded {
     padding: 20px;
     background: rgba(0, 0, 0, 0.4);
     border-top: 2px solid rgba(215, 51, 39, 0.2);
+    flex-shrink: 0;
 }
 
 .chatbot-input-container {
@@ -310,6 +316,30 @@ body.loaded {
     }
     
     .chatbot-button {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .chatbot-glow {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .chatbot-tooltip {
+        display: none;
+    }
+    
+    .chatbot-window {
+        bottom: 120px;
+        right: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        max-height: calc(100vh - 170px);
+    }
+}
+
+@media (max-width: 480px) {
+    .chatbot-button {
         width: 70px;
         height: 70px;
     }
@@ -319,33 +349,9 @@ body.loaded {
         height: 110px;
     }
     
-    .chatbot-tooltip {
-        display: none;
-    }
-    
     .chatbot-window {
-        bottom: 110px;
-        right: 20px;
-        left: 20px;
-        width: calc(100% - 40px);
-        height: 500px;
-    }
-}
-
-@media (max-width: 480px) {
-    .chatbot-button {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .chatbot-glow {
-        width: 90px;
-        height: 90px;
-    }
-    
-    .chatbot-window {
-        bottom: 90px;
-        height: 450px;
+        bottom: 100px;
+        max-height: calc(100vh - 140px);
     }
 }
 
