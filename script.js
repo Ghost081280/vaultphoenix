@@ -144,12 +144,12 @@ async function sendMessage() {
     if (!message || isTyping) return;
     
     // Check if API key is configured
-    if (CLAUDE_API_KEY === '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') {
-        addMessage('user', message);
-        addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
-        chatbotInput.value = '';
-        return;
-    }
+    // if (CLAUDE_API_KEY === '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') {
+        // addMessage('user', message);
+        // addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
+        // chatbotInput.value = '';
+        // return;
+    // }
     
     // Add user message to chat
     addMessage('user', message);
