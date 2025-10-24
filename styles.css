@@ -4,6 +4,7 @@
 /* FIXED: Phone gallery for perfect app screenshot fit - NO BLACK BARS - SMALLER FRAME */
 /* FIXED: Laptop gallery for proper screenshot display - NO BLACK SPACE ABOVE/BELOW */
 /* NEW: Premium hero section with 3-step process and dual-path CTAs */
+/* UPDATED: Step number badges repositioned to top right corner */
 
 * {
     margin: 0;
@@ -177,10 +178,11 @@ body.loaded {
     filter: drop-shadow(0 6px 20px rgba(240, 165, 0, 0.6));
 }
 
+/* UPDATED: Step Number Badge - Positioned at Top Right Corner */
 .step-number-badge {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: 12px;
+    right: 12px;
     width: 40px;
     height: 40px;
     background: linear-gradient(135deg, #f0a500, #fb923c);
@@ -193,6 +195,7 @@ body.loaded {
     color: white;
     box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4);
     border: 3px solid rgba(255, 255, 255, 0.3);
+    z-index: 10;
 }
 
 .step-content {
