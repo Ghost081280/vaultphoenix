@@ -8,7 +8,7 @@
 // ============================================
 // CLAUDE API CONFIGURATION
 // ============================================
-const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key from https://console.anthropic.com/
+const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key from https://console.anthropic.com/
 const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
 const CLAUDE_MODEL = 'claude-sonnet-4.5-20250929';
 
