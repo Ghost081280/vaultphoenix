@@ -3,6 +3,7 @@
 /* FIXED: Prevent black/white flash during page load */
 /* FIXED: Phone gallery for perfect app screenshot fit - NO BLACK BARS - SMALLER FRAME */
 /* FIXED: Laptop gallery for proper screenshot display - NO BLACK SPACE ABOVE/BELOW */
+/* NEW: Premium hero section with 3-step process and dual-path CTAs */
 
 * {
     margin: 0;
@@ -42,7 +43,7 @@ body.loaded {
     text-shadow: 0 1px 4px rgba(240, 165, 0, 0.2);
 }
 
-/* Hero Section */
+/* Hero Section - PREMIUM REDESIGN */
 .hero {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
@@ -52,6 +53,7 @@ body.loaded {
     justify-content: center;
     overflow: hidden;
     padding-top: 140px;
+    padding-bottom: 80px;
 }
 
 .hero::before {
@@ -73,6 +75,381 @@ body.loaded {
     0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
     33% { transform: translateY(-15px) scale(1.02) rotate(1deg); }
     66% { transform: translateY(8px) scale(0.98) rotate(-1deg); }
+}
+
+/* Hero Content Container */
+.hero-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    text-align: center;
+    color: white;
+    z-index: 10;
+    position: relative;
+}
+
+/* Hero Header */
+.hero-header {
+    margin-bottom: 60px;
+}
+
+.hero-title-new {
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 900;
+    margin-bottom: 25px;
+    color: #ffffff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle-new {
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 1000px;
+    margin: 0 auto;
+    font-weight: 500;
+    line-height: 1.5;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Premium 3-Step Process */
+.hero-steps-premium {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 60px 0;
+    flex-wrap: wrap;
+}
+
+.step-premium {
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.15), rgba(251, 146, 60, 0.1));
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 20px;
+    padding: 30px 25px;
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    position: relative;
+    overflow: hidden;
+}
+
+.step-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
+}
+
+.step-premium:hover {
+    transform: translateY(-8px);
+    border-color: rgba(215, 51, 39, 0.6);
+    box-shadow: 0 20px 50px rgba(215, 51, 39, 0.3);
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.2), rgba(251, 146, 60, 0.15));
+}
+
+.step-visual {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.4));
+    transition: all 0.3s ease;
+}
+
+.step-premium:hover .step-image {
+    transform: scale(1.1);
+    filter: drop-shadow(0 6px 20px rgba(240, 165, 0, 0.6));
+}
+
+.step-number-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: white;
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.step-content {
+    text-align: center;
+}
+
+.step-title-premium {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.step-description-premium {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+.step-arrow {
+    font-size: 2.5rem;
+    color: #f0a500;
+    font-weight: 900;
+    align-self: center;
+    flex-shrink: 0;
+    text-shadow: 0 2px 8px rgba(240, 165, 0, 0.4);
+    animation: arrowPulse 2s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* Dual Path CTAs */
+.hero-dual-ctas {
+    margin: 70px 0 50px;
+}
+
+.cta-path-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto 30px;
+}
+
+.cta-path {
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.12), rgba(251, 146, 60, 0.08));
+    border: 3px solid rgba(215, 51, 39, 0.3);
+    border-radius: 25px;
+    padding: 35px 30px;
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-path::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #d73327, #fb923c);
+}
+
+.cta-path.developer-path::before {
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+}
+
+.cta-path:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 60px rgba(215, 51, 39, 0.3);
+    border-color: rgba(215, 51, 39, 0.5);
+}
+
+.cta-path.developer-path {
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.cta-path.developer-path:hover {
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 25px 60px rgba(99, 102, 241, 0.3);
+}
+
+.path-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3);
+}
+
+.developer-path .path-badge {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.path-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.path-description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.cta-path-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    color: white;
+    padding: 16px 30px;
+    border-radius: 16px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(215, 51, 39, 0.4);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-path-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.cta-path-button:hover::before {
+    left: 100%;
+}
+
+.cta-path-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
+}
+
+.developer-button {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+.developer-button:hover {
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+}
+
+.cta-path-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.cta-github-icon-inline {
+    flex-shrink: 0;
+}
+
+/* Secondary CTA */
+.hero-secondary-cta {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.secondary-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 25px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.secondary-cta-link:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.secondary-cta-link svg {
+    transition: transform 0.3s ease;
+}
+
+.secondary-cta-link:hover svg {
+    transform: translateX(3px);
+}
+
+/* Hero Benefits Row */
+.hero-benefits-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    padding: 30px 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+}
+
+.hero-benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    transition: all 0.3s ease;
+}
+
+.hero-benefit-item:hover {
+    transform: translateY(-2px);
+    color: #f0a500;
+}
+
+.benefit-icon-small {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+    transition: all 0.3s ease;
+}
+
+.hero-benefit-item:hover .benefit-icon-small {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.6));
 }
 
 /* Navigation */
@@ -1266,111 +1643,6 @@ body.loaded {
     font-weight: 500;
     position: relative;
     z-index: 10;
-}
-
-/* Hero Content */
-.hero-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 40px;
-    text-align: center;
-    color: white;
-    z-index: 10;
-    position: relative;
-}
-
-.hero-title {
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 900;
-    margin-bottom: 30px;
-    color: #ffffff;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-subtitle {
-    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-    margin-bottom: 50px;
-    color: rgba(255, 255, 255, 0.95);
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: 500;
-    line-height: 1.4;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.hero-process {
-    margin: 50px 0;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.process-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.process-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-}
-
-.step {
-    background: rgba(215, 51, 39, 0.15);
-    padding: 25px;
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-align: center;
-}
-
-.step:hover {
-    transform: translateY(-5px);
-    background: rgba(215, 51, 39, 0.25);
-    box-shadow: 0 20px 40px rgba(215, 51, 39, 0.2);
-}
-
-.step-number {
-    font-size: 2rem;
-    font-weight: 900;
-    display: block;
-    margin-bottom: 8px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.step-label {
-    font-size: 1rem;
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.hero-cta {
-    margin-top: 60px;
-    margin-bottom: 40px;
-}
-
-.hero-cta .cta-button {
-    font-size: 1.3rem;
-    padding: 20px 45px;
-    margin: 0 15px 15px 0;
-    display: inline-block;
-}
-
-.hero-cta .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
 }
 
 /* Enhanced CTA Button */
@@ -3111,505 +3383,6 @@ html {
     color: #ffffff;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .mobile-menu-btn {
-        display: block !important;
-    }
-    
-    .nav-links {
-        display: none !important;
-    }
-
-    .nav-links.mobile-active {
-        display: flex !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        background: #0f0f0f !important;
-        z-index: 9998 !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 30px !important;
-        padding: 40px 20px !important;
-        margin: 0 !important;
-        list-style: none !important;
-    }
-
-    .nav-links.mobile-active li {
-        display: block !important;
-        width: 100% !important;
-        max-width: 300px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .nav-links.mobile-active a {
-        display: block !important;
-        width: 100% !important;
-        padding: 20px 30px !important;
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        color: #ffffff !important;
-        background: rgba(215, 51, 39, 0.9) !important;
-        border: 3px solid #d73327 !important;
-        border-radius: 12px !important;
-        text-align: center !important;
-        text-decoration: none !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
-        margin: 0 !important;
-    }
-
-    .nav-links.mobile-active a:hover,
-    .nav-links.mobile-active a:active {
-        background: #d73327 !important;
-        border-color: #fb923c !important;
-        transform: scale(1.05) !important;
-        box-shadow: 0 12px 30px rgba(215, 51, 39, 0.6) !important;
-        color: #ffffff !important;
-    }
-
-    .nav-links.mobile-active a::after {
-        display: none !important;
-    }
-
-    .ember-token-grid-redesigned {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
-    
-    .ember-token-right-redesigned {
-        order: -1;
-    }
-    
-    .phoenix-holding-coin-redesigned {
-        width: 320px;
-        height: 320px;
-    }
-    
-    .ember-glow-redesigned {
-        width: 400px;
-        height: 400px;
-    }
-    
-    .crypto-content {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
-    
-    .crypto-image {
-        order: -1;
-    }
-
-    .showcase-content {
-        grid-template-columns: 1fr;
-        gap: 60px;
-    }
-
-    .system-benefits {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .pricing-two-column {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .sdk-pricing-tiers {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .revenue-examples-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .benefits-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .journey-paths {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-
-    .use-case-icon-container-large {
-        width: 90px;
-        height: 90px;
-    }
-
-    .web-benefits-compact {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .ember-countdown-timer-redesigned {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .presale-stats-redesigned {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .stat-divider-redesigned {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero {
-        padding: 140px 0 60px;
-    }
-
-    .features, .app-showcase, .use-cases, .pricing, .final-cta {
-        padding: 60px 20px;
-    }
-
-    .ember-token-section-redesigned {
-        padding: 60px 20px;
-    }
-
-    .section-title {
-        font-size: clamp(1.8rem, 6vw, 2.5rem);
-    }
-
-    .features-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    /* FIXED: Smaller phone for tablets */
-    .phone-frame {
-        width: 260px;
-        height: 540px;
-        padding: 11px;
-        border-radius: 38px;
-    }
-
-    .phone-frame::before {
-        top: 18px;
-        width: 75px;
-        height: 23px;
-        border-radius: 0 0 14px 14px;
-    }
-
-    .phone-screen {
-        border-radius: 27px;
-    }
-
-    .thumbnail-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        max-width: 260px;
-    }
-
-    .simple-thumb {
-        width: 75px;
-        height: 135px;
-    }
-
-    .laptop-mockup {
-        max-width: 500px;
-    }
-
-    .thumbnail-grid-laptop {
-        max-width: 500px;
-    }
-
-    .phoenix-safe-image {
-        width: 260px;
-        height: 260px;
-    }
-
-    .phoenix-safe-glow {
-        width: 320px;
-        height: 320px;
-    }
-
-    .demo-icon-standalone {
-        width: 70px;
-        height: 70px;
-    }
-
-    .benefit-header-icon {
-        width: 90px;
-        height: 90px;
-    }
-
-    .use-case-icon-container-large {
-        width: 85px;
-        height: 85px;
-        top: 12px;
-        right: 12px;
-    }
-
-    .use-case-title {
-        padding-right: 95px;
-    }
-
-    .development-story-icon {
-        width: 110px;
-        height: 110px;
-    }
-
-    .revenue-header-icon {
-        width: 130px;
-        height: 130px;
-    }
-
-    .cta-icon-image-enhanced {
-        width: 42px !important;
-        height: 42px !important;
-    }
-
-    .compliance-icon-redesigned {
-        width: 45px;
-        height: 45px;
-    }
-
-    .journey-icon-large {
-        width: 55px;
-        height: 55px;
-    }
-
-    .path-icon-enhanced {
-        width: 90px;
-        height: 90px;
-    }
-
-    .path-header-enhanced {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .path-icon-enhanced {
-        margin-top: 0;
-    }
-
-    .solution-highlight-icon {
-        width: 70px;
-        height: 70px;
-    }
-
-    .ember-countdown-timer-redesigned {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .ember-time-value-redesigned {
-        font-size: 1.4rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding: 120px 0 40px;
-    }
-
-    .features, .app-showcase, .use-cases, .pricing, .final-cta {
-        padding: 40px 15px;
-    }
-
-    .ember-token-section-redesigned {
-        padding: 40px 15px;
-    }
-
-    .section-title {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-    }
-
-    /* FIXED: Even smaller phone for mobile */
-    .phone-frame {
-        width: 240px;
-        height: 500px;
-        padding: 10px;
-        border-radius: 36px;
-    }
-
-    .phone-frame::before {
-        top: 16px;
-        width: 70px;
-        height: 22px;
-        border-radius: 0 0 12px 12px;
-    }
-
-    .phone-screen {
-        border-radius: 26px;
-    }
-
-    .thumbnail-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-        max-width: 240px;
-    }
-
-    .simple-thumb {
-        width: 70px;
-        height: 125px;
-    }
-
-    .laptop-mockup {
-        max-width: 400px;
-    }
-
-    .thumbnail-grid-laptop {
-        max-width: 400px;
-    }
-
-    .phoenix-safe-image {
-        width: 220px;
-        height: 220px;
-    }
-
-    .phoenix-safe-glow {
-        width: 280px;
-        height: 280px;
-    }
-
-    .demo-button-row {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .demo-icon-standalone {
-        width: 60px;
-        height: 60px;
-    }
-
-    .demo-button-enhanced {
-        width: 100%;
-    }
-
-    .benefit-header-icon {
-        width: 80px;
-        height: 80px;
-    }
-
-    .use-case-icon-container-large {
-        width: 75px;
-        height: 75px;
-        top: 10px;
-        right: 10px;
-    }
-
-    .use-case-title {
-        padding-right: 85px;
-        font-size: 1.2rem;
-    }
-
-    .development-story-icon {
-        width: 90px;
-        height: 90px;
-    }
-
-    .revenue-header-icon {
-        width: 110px;
-        height: 110px;
-    }
-
-    .cta-icon-image-enhanced {
-        width: 36px !important;
-        height: 36px !important;
-    }
-
-    .compliance-icon-redesigned {
-        width: 40px;
-        height: 40px;
-    }
-
-    .journey-section {
-        padding: 30px 20px;
-    }
-
-    .journey-icon-large {
-        width: 45px;
-        height: 45px;
-    }
-
-    .path-icon-enhanced {
-        width: 70px;
-        height: 70px;
-    }
-
-    .path-badge {
-        position: static;
-        display: inline-block;
-        margin-top: 10px;
-    }
-
-    .github-link-card-inline {
-        flex-direction: column;
-        padding: 15px 20px;
-        text-align: center;
-    }
-
-    .github-icon-inline {
-        width: 40px;
-        height: 40px;
-    }
-
-    .solution-highlight-icon {
-        width: 60px;
-        height: 60px;
-    }
-
-    .ember-countdown-timer-redesigned {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-
-    .ember-time-unit-redesigned {
-        padding: 14px 10px;
-    }
-
-    .ember-time-value-redesigned {
-        font-size: 1.3rem;
-    }
-
-    .ember-countdown-widget-redesigned {
-        padding: 22px;
-    }
-
-    .countdown-header-redesigned {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-    }
-
-    .countdown-icon-redesigned {
-        width: 50px;
-        height: 50px;
-    }
-
-    .ember-countdown-icon-redesigned {
-        width: 40px;
-        height: 40px;
-    }
-
-    .phoenix-holding-coin-redesigned {
-        width: 260px;
-        height: 260px;
-    }
-
-    .ember-glow-redesigned {
-        width: 320px;
-        height: 320px;
-    }
-}
-
 /* ============================================
    NEW STYLES FOR GPS & BEACON TECHNOLOGY MODULES
    Professional, Marketing-Focused Design
@@ -4056,8 +3829,199 @@ html {
     margin: 0;
 }
 
-/* Responsive Design for Technology Modules */
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .hero-steps-premium {
+        gap: 20px;
+    }
+    
+    .step-premium {
+        min-width: 250px;
+    }
+    
+    .cta-path-container {
+        gap: 30px;
+    }
+}
+
 @media (max-width: 1024px) {
+    .mobile-menu-btn {
+        display: block !important;
+    }
+    
+    .nav-links {
+        display: none !important;
+    }
+
+    .nav-links.mobile-active {
+        display: flex !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #0f0f0f !important;
+        z-index: 9998 !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 30px !important;
+        padding: 40px 20px !important;
+        margin: 0 !important;
+        list-style: none !important;
+    }
+
+    .nav-links.mobile-active li {
+        display: block !important;
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .nav-links.mobile-active a {
+        display: block !important;
+        width: 100% !important;
+        padding: 20px 30px !important;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        background: rgba(215, 51, 39, 0.9) !important;
+        border: 3px solid #d73327 !important;
+        border-radius: 12px !important;
+        text-align: center !important;
+        text-decoration: none !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
+        margin: 0 !important;
+    }
+
+    .nav-links.mobile-active a:hover,
+    .nav-links.mobile-active a:active {
+        background: #d73327 !important;
+        border-color: #fb923c !important;
+        transform: scale(1.05) !important;
+        box-shadow: 0 12px 30px rgba(215, 51, 39, 0.6) !important;
+        color: #ffffff !important;
+    }
+
+    .nav-links.mobile-active a::after {
+        display: none !important;
+    }
+
+    .hero-steps-premium {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .step-arrow {
+        transform: rotate(90deg);
+        margin: 15px 0;
+    }
+    
+    .step-premium {
+        max-width: 100%;
+    }
+    
+    .cta-path-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .hero-benefits-row {
+        gap: 25px;
+        padding: 25px 30px;
+    }
+    
+    .ember-token-grid-redesigned {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .ember-token-right-redesigned {
+        order: -1;
+    }
+    
+    .phoenix-holding-coin-redesigned {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .ember-glow-redesigned {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .crypto-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .crypto-image {
+        order: -1;
+    }
+
+    .showcase-content {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .system-benefits {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .pricing-two-column {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .sdk-pricing-tiers {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .revenue-examples-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .journey-paths {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .use-case-icon-container-large {
+        width: 90px;
+        height: 90px;
+    }
+
+    .web-benefits-compact {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .ember-countdown-timer-redesigned {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .presale-stats-redesigned {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .stat-divider-redesigned {
+        display: none;
+    }
+    
     .technology-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -4075,6 +4039,162 @@ html {
 }
 
 @media (max-width: 768px) {
+    .hero {
+        padding: 120px 0 60px;
+        min-height: auto;
+    }
+
+    .features, .app-showcase, .use-cases, .pricing, .final-cta {
+        padding: 60px 20px;
+    }
+
+    .ember-token-section-redesigned {
+        padding: 60px 20px;
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .hero-benefits-row {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 25px;
+    }
+    
+    .hero-benefit-item {
+        justify-content: center;
+    }
+
+    /* FIXED: Smaller phone for tablets */
+    .phone-frame {
+        width: 260px;
+        height: 540px;
+        padding: 11px;
+        border-radius: 38px;
+    }
+
+    .phone-frame::before {
+        top: 18px;
+        width: 75px;
+        height: 23px;
+        border-radius: 0 0 14px 14px;
+    }
+
+    .phone-screen {
+        border-radius: 27px;
+    }
+
+    .thumbnail-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        max-width: 260px;
+    }
+
+    .simple-thumb {
+        width: 75px;
+        height: 135px;
+    }
+
+    .laptop-mockup {
+        max-width: 500px;
+    }
+
+    .thumbnail-grid-laptop {
+        max-width: 500px;
+    }
+
+    .phoenix-safe-image {
+        width: 260px;
+        height: 260px;
+    }
+
+    .phoenix-safe-glow {
+        width: 320px;
+        height: 320px;
+    }
+
+    .demo-icon-standalone {
+        width: 70px;
+        height: 70px;
+    }
+
+    .benefit-header-icon {
+        width: 90px;
+        height: 90px;
+    }
+
+    .use-case-icon-container-large {
+        width: 85px;
+        height: 85px;
+        top: 12px;
+        right: 12px;
+    }
+
+    .use-case-title {
+        padding-right: 95px;
+    }
+
+    .development-story-icon {
+        width: 110px;
+        height: 110px;
+    }
+
+    .revenue-header-icon {
+        width: 130px;
+        height: 130px;
+    }
+
+    .cta-icon-image-enhanced {
+        width: 42px !important;
+        height: 42px !important;
+    }
+
+    .compliance-icon-redesigned {
+        width: 45px;
+        height: 45px;
+    }
+
+    .journey-icon-large {
+        width: 55px;
+        height: 55px;
+    }
+
+    .path-icon-enhanced {
+        width: 90px;
+        height: 90px;
+    }
+
+    .path-header-enhanced {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .path-icon-enhanced {
+        margin-top: 0;
+    }
+
+    .solution-highlight-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .ember-countdown-timer-redesigned {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .ember-time-value-redesigned {
+        font-size: 1.4rem;
+    }
+    
     .technology-modules {
         padding: 40px 30px;
     }
@@ -4139,6 +4259,220 @@ html {
 }
 
 @media (max-width: 480px) {
+    .hero {
+        padding: 100px 0 40px;
+    }
+
+    .features, .app-showcase, .use-cases, .pricing, .final-cta {
+        padding: 40px 15px;
+    }
+
+    .ember-token-section-redesigned {
+        padding: 40px 15px;
+    }
+
+    .section-title {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+    
+    .step-visual {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .step-number-badge {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+    
+    .hero-benefits-row {
+        padding: 15px 20px;
+    }
+    
+    .benefit-icon-small {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* FIXED: Even smaller phone for mobile */
+    .phone-frame {
+        width: 240px;
+        height: 500px;
+        padding: 10px;
+        border-radius: 36px;
+    }
+
+    .phone-frame::before {
+        top: 16px;
+        width: 70px;
+        height: 22px;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .phone-screen {
+        border-radius: 26px;
+    }
+
+    .thumbnail-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        max-width: 240px;
+    }
+
+    .simple-thumb {
+        width: 70px;
+        height: 125px;
+    }
+
+    .laptop-mockup {
+        max-width: 400px;
+    }
+
+    .thumbnail-grid-laptop {
+        max-width: 400px;
+    }
+
+    .phoenix-safe-image {
+        width: 220px;
+        height: 220px;
+    }
+
+    .phoenix-safe-glow {
+        width: 280px;
+        height: 280px;
+    }
+
+    .demo-button-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .demo-icon-standalone {
+        width: 60px;
+        height: 60px;
+    }
+
+    .demo-button-enhanced {
+        width: 100%;
+    }
+
+    .benefit-header-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .use-case-icon-container-large {
+        width: 75px;
+        height: 75px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .use-case-title {
+        padding-right: 85px;
+        font-size: 1.2rem;
+    }
+
+    .development-story-icon {
+        width: 90px;
+        height: 90px;
+    }
+
+    .revenue-header-icon {
+        width: 110px;
+        height: 110px;
+    }
+
+    .cta-icon-image-enhanced {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .compliance-icon-redesigned {
+        width: 40px;
+        height: 40px;
+    }
+
+    .journey-section {
+        padding: 30px 20px;
+    }
+
+    .journey-icon-large {
+        width: 45px;
+        height: 45px;
+    }
+
+    .path-icon-enhanced {
+        width: 70px;
+        height: 70px;
+    }
+
+    .path-badge {
+        position: static;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .github-link-card-inline {
+        flex-direction: column;
+        padding: 15px 20px;
+        text-align: center;
+    }
+
+    .github-icon-inline {
+        width: 40px;
+        height: 40px;
+    }
+
+    .solution-highlight-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .ember-countdown-timer-redesigned {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .ember-time-unit-redesigned {
+        padding: 14px 10px;
+    }
+
+    .ember-time-value-redesigned {
+        font-size: 1.3rem;
+    }
+
+    .ember-countdown-widget-redesigned {
+        padding: 22px;
+    }
+
+    .countdown-header-redesigned {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .countdown-icon-redesigned {
+        width: 50px;
+        height: 50px;
+    }
+
+    .ember-countdown-icon-redesigned {
+        width: 40px;
+        height: 40px;
+    }
+
+    .phoenix-holding-coin-redesigned {
+        width: 260px;
+        height: 260px;
+    }
+
+    .ember-glow-redesigned {
+        width: 320px;
+        height: 320px;
+    }
+    
     .technology-modules {
         padding: 30px 20px;
     }
