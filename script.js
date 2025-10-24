@@ -3,6 +3,444 @@
 // UPDATED: Now works with NEW app screenshots from images/ folder
 // FIXED: Optimized for seamless transition from loading page
 // ADDED: Laptop gallery auto-rotation with 6 management screenshots
+// ADDED: Claude API Integration for Intelligent Chatbot
+
+// ============================================
+// CLAUDE API CONFIGURATION
+// ============================================
+const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key from https://console.anthropic.com/
+const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
+const CLAUDE_MODEL = 'claude-sonnet-4.5-20250929';
+
+// Chat state
+let conversationHistory = [];
+let isTyping = false;
+
+// System prompt for Vault Phoenix context
+const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix, a revolutionary AR crypto gaming platform that combines GPS & Beacon location technology with blockchain rewards for location-based marketing campaigns.
+
+Key Information about Vault Phoenix:
+- White-label AR crypto gaming platform launching campaigns in 24 hours
+- Uses GPS (outdoor) and Beacon (indoor) technology for precise location targeting
+- Offers $100 FREE $Ember tokens with every service activation
+- Two main solutions:
+  1. White-Label Solution: Starting at $499 setup + $149/mo hosting
+  2. SDK Integration: Free SDK, management from $49/mo (available early 2026)
+- Battle-tested: 6+ years development, 12+ successful AR games
+- Industries served: Sports, Radio, Tourism, Retail, Entertainment, Culinary, Healthcare, Education, Automotive
+- Revenue generation: $10K-$75K per month through premium location placements
+- $Ember Token presale launching November 1, 2025 (166.7M tokens, $0.003 price)
+
+Your role is to:
+- Answer questions about Vault Phoenix services, pricing, and technology
+- Explain how AR crypto gaming works with GPS & Beacon technology
+- Provide information about the $Ember token and presale
+- Help users understand ROI and revenue opportunities
+- Guide users toward contacting contact@vaultphoenix.com for setup
+- Be enthusiastic, professional, and helpful
+- Keep responses concise but informative
+
+Always maintain a professional yet friendly tone. If asked about technical implementation details beyond your knowledge, recommend contacting the team directly.`;
+
+// ============================================
+// INITIALIZE CHATBOT
+// ============================================
+function initializeChatbot() {
+    console.log('🤖 Initializing Claude API Chatbot...');
+    
+    const chatbotButton = document.querySelector('.chatbot-button-container');
+    const chatbotWindow = document.querySelector('.chatbot-window');
+    const chatbotClose = document.querySelector('.chatbot-close');
+    const chatbotInput = document.querySelector('.chatbot-input');
+    const chatbotSend = document.querySelector('.chatbot-send');
+    const chatbotBody = document.querySelector('.chatbot-body');
+    
+    if (!chatbotButton || !chatbotWindow) {
+        console.warn('🤖 Chatbot elements not found');
+        return;
+    }
+    
+    // Toggle chatbot window
+    chatbotButton.addEventListener('click', () => {
+        chatbotWindow.classList.toggle('active');
+        if (chatbotWindow.classList.contains('active')) {
+            chatbotInput.focus();
+            // Add welcome message if first time opening
+            if (chatbotBody.children.length === 0) {
+                addWelcomeMessage();
+            }
+        }
+    });
+    
+    // Close chatbot
+    if (chatbotClose) {
+        chatbotClose.addEventListener('click', () => {
+            chatbotWindow.classList.remove('active');
+        });
+    }
+    
+    // Send message on button click
+    if (chatbotSend) {
+        chatbotSend.addEventListener('click', sendMessage);
+    }
+    
+    // Send message on Enter key
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    }
+    
+    console.log('🤖 Chatbot initialized successfully!');
+}
+
+// ============================================
+// WELCOME MESSAGE
+// ============================================
+function addWelcomeMessage() {
+    const welcomeMsg = `
+        <div class="chat-message assistant-message">
+            <div class="message-content">
+                <div class="message-avatar">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <div class="message-text">
+                    <strong>Welcome to Vault Phoenix! 🔥🪙</strong><br><br>
+                    I'm here to help you learn about our revolutionary AR crypto gaming platform. Ask me about:
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>White-label AR crypto gaming solutions</li>
+                        <li>GPS & Beacon location technology</li>
+                        <li>$Ember token presale details</li>
+                        <li>Pricing and ROI opportunities</li>
+                        <li>Industry-specific use cases</li>
+                    </ul>
+                    What would you like to know?
+                </div>
+            </div>
+        </div>
+    `;
+    
+    const chatbotBody = document.querySelector('.chatbot-body');
+    if (chatbotBody) {
+        chatbotBody.innerHTML = welcomeMsg;
+    }
+}
+
+// ============================================
+// SEND MESSAGE TO CLAUDE API
+// ============================================
+async function sendMessage() {
+    const chatbotInput = document.querySelector('.chatbot-input');
+    const chatbotBody = document.querySelector('.chatbot-body');
+    const chatbotSend = document.querySelector('.chatbot-send');
+    
+    if (!chatbotInput || !chatbotBody || !chatbotSend) return;
+    
+    const message = chatbotInput.value.trim();
+    
+    if (!message || isTyping) return;
+    
+    // Check if API key is configured
+    if (CLAUDE_API_KEY === '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') {
+        addMessage('user', message);
+        addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
+        chatbotInput.value = '';
+        return;
+    }
+    
+    // Add user message to chat
+    addMessage('user', message);
+    chatbotInput.value = '';
+    chatbotInput.disabled = true;
+    chatbotSend.disabled = true;
+    isTyping = true;
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    try {
+        // Prepare messages for API
+        const messages = [
+            ...conversationHistory,
+            { role: 'user', content: message }
+        ];
+        
+        // Call Claude API
+        const response = await fetch(CLAUDE_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': CLAUDE_API_KEY,
+                'anthropic-version': '2023-06-01'
+            },
+            body: JSON.stringify({
+                model: CLAUDE_MODEL,
+                max_tokens: 1024,
+                system: SYSTEM_PROMPT,
+                messages: messages
+            })
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error?.message || `API Error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Remove typing indicator
+        removeTypingIndicator();
+        
+        // Extract assistant's response
+        const assistantMessage = data.content[0].text;
+        
+        // Add to conversation history
+        conversationHistory.push(
+            { role: 'user', content: message },
+            { role: 'assistant', content: assistantMessage }
+        );
+        
+        // Add assistant message to chat
+        addMessage('assistant', assistantMessage);
+        
+    } catch (error) {
+        console.error('🤖 Chat Error:', error);
+        removeTypingIndicator();
+        
+        let errorMessage = '❌ Sorry, I encountered an error. ';
+        
+        if (error.message.includes('401')) {
+            errorMessage += 'Invalid API key. Please check your configuration.';
+        } else if (error.message.includes('429')) {
+            errorMessage += 'Rate limit exceeded. Please try again in a moment.';
+        } else if (error.message.includes('500') || error.message.includes('529')) {
+            errorMessage += 'Claude API is temporarily unavailable. Please try again.';
+        } else {
+            errorMessage += 'Please try again or contact us at contact@vaultphoenix.com';
+        }
+        
+        addMessage('assistant', errorMessage);
+    } finally {
+        chatbotInput.disabled = false;
+        chatbotSend.disabled = false;
+        isTyping = false;
+        chatbotInput.focus();
+    }
+}
+
+// ============================================
+// ADD MESSAGE TO CHAT
+// ============================================
+function addMessage(role, content) {
+    const chatbotBody = document.querySelector('.chatbot-body');
+    if (!chatbotBody) return;
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${role}-message`;
+    
+    if (role === 'user') {
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <div class="message-text">${escapeHtml(content)}</div>
+                <div class="message-avatar">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #d73327, #fb923c); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.2rem;">U</div>
+                </div>
+            </div>
+        `;
+    } else {
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <div class="message-avatar">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <div class="message-text">${formatMessage(content)}</div>
+            </div>
+        `;
+    }
+    
+    chatbotBody.appendChild(messageDiv);
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    
+    // Add CSS for messages if not already added
+    addMessageStyles();
+}
+
+// ============================================
+// TYPING INDICATOR
+// ============================================
+function showTypingIndicator() {
+    const chatbotBody = document.querySelector('.chatbot-body');
+    if (!chatbotBody) return;
+    
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'chat-message assistant-message typing-indicator';
+    typingDiv.innerHTML = `
+        <div class="message-content">
+            <div class="message-avatar">
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div class="message-text">
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    chatbotBody.appendChild(typingDiv);
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const typingIndicator = document.querySelector('.typing-indicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
+// ============================================
+// MESSAGE FORMATTING
+// ============================================
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function formatMessage(text) {
+    // Convert markdown-style formatting to HTML
+    let formatted = escapeHtml(text);
+    
+    // Bold text
+    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    
+    // Bullet points
+    formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
+    formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    
+    // Line breaks
+    formatted = formatted.replace(/\n/g, '<br>');
+    
+    return formatted;
+}
+
+// ============================================
+// ADD MESSAGE STYLES
+// ============================================
+let stylesAdded = false;
+function addMessageStyles() {
+    if (stylesAdded) return;
+    stylesAdded = true;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        .chat-message {
+            margin-bottom: 20px;
+            animation: messageSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message-content {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .user-message .message-content {
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .message-text {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 16px;
+            border-radius: 16px;
+            color: white;
+            line-height: 1.5;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .user-message .message-text {
+            background: linear-gradient(135deg, #d73327, #fb923c);
+            border-radius: 16px 16px 4px 16px;
+        }
+        
+        .assistant-message .message-text {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(215, 51, 39, 0.3);
+            border-radius: 16px 16px 16px 4px;
+        }
+        
+        .message-text ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        
+        .message-text li {
+            margin: 4px 0;
+        }
+        
+        .message-text strong {
+            color: #f0a500;
+        }
+        
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            padding: 8px 0;
+        }
+        
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #f0a500;
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite;
+        }
+        
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typingBounce {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
 
 // FIXED: Immediately prevent flash by setting dark background - FASTER RESPONSE
 (function() {
@@ -28,11 +466,13 @@ document.addEventListener('DOMContentLoaded', function() {
     preloadPhoenixCryptoImages();
     initializeCryptoCoinImage();
     initializeEmberCoinImageV3();
+    initializeChatbot(); // Initialize Claude API chatbot
     
     // FIXED: Create floating coins immediately without delay
     createPhoenixCryptoParticles();
     
     console.log('🔥🪙 Main page loaded seamlessly from loading screen!');
+    console.log('🤖 Claude API Chatbot ready!');
 });
 
 // UPDATED: Enhanced gallery function with NEW app screenshots
@@ -415,7 +855,9 @@ function initializeMainCountdown() {
     // Update every second
     updateMainCountdown();
     setInterval(updateMainCountdown, 1000);
-}// Enhanced form validation and UX with phoenix crypto theme
+}
+
+// Enhanced form validation and UX with phoenix crypto theme
 document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
     link.addEventListener('click', (e) => {
         console.log('🔥🪙 Phoenix crypto email CTA ignited:', link.href);
