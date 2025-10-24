@@ -4,6 +4,8 @@
 // FIXED: Optimized for seamless transition from loading page
 // ADDED: Laptop gallery auto-rotation with 6 management screenshots
 // ADDED: Claude API Integration for Intelligent Chatbot
+// UPDATED: Replaced emojis with VPEmberFlame.svg and VPEmberCoin.PNG
+// UPDATED: Added favicon to chat header
 
 // ============================================
 // CLAUDE API CONFIGURATION
@@ -102,7 +104,7 @@ function initializeChatbot() {
 }
 
 // ============================================
-// WELCOME MESSAGE
+// WELCOME MESSAGE - UPDATED WITH IMAGES
 // ============================================
 function addWelcomeMessage() {
     const welcomeMsg = `
@@ -112,7 +114,7 @@ function addWelcomeMessage() {
                     <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
                 <div class="message-text">
-                    <strong>Welcome to Vault Phoenix! 🔥🪙</strong><br><br>
+                    <strong>Welcome to Vault Phoenix! <img src="images/VPEmberFlame.svg" alt="Flame" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle;"><img src="images/VPEmberCoin.PNG" alt="Coin" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle;"></strong><br><br>
                     I'm here to help you learn about our revolutionary AR crypto gaming platform. Ask me about:
                     <ul style="margin: 10px 0; padding-left: 20px;">
                         <li>White-label AR crypto gaming solutions</li>
@@ -873,7 +875,8 @@ function preloadPhoenixCryptoImages() {
         'images/VPEmberCoin.PNG',
         'images/PhoenixHoldingCoin.PNG',
         'images/VPLogoNoText.PNG',
-        'images/PhoenixBot.PNG' // Chatbot image
+        'images/PhoenixBot.PNG', // Chatbot image
+        'images/VPEmberFlame.svg' // Ember flame SVG
     ];
     
     criticalImages.forEach(src => {
