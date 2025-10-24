@@ -1,6 +1,8 @@
 /* Ember Token Page Stylesheet - Updated for $500K Hard Cap */
 /* Phoenix Rising from Digital Ashes - $Ember Token Edition */
 /* COMPREHENSIVE CSS for the complete ember.html structure */
+/* UPDATED: Consistent icon sizing to match main.html standards */
+/* FIXED: Compliance grid layout for 4 items */
 
 /* EXACT COPY FROM WORKING MAIN.HTML - Navigation system */
 .navbar {
@@ -458,6 +460,7 @@ body {
     opacity: 1;
 }
 
+/* UPDATED: Stat icon sizing to match main.html (70-90px range) */
 .stat-icon {
     font-size: 2.5rem;
     filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
@@ -467,10 +470,9 @@ body {
     justify-content: center;
 }
 
-/* NEW: Image icon styling within stat cards */
 .stat-icon img {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
 }
@@ -617,6 +619,7 @@ body {
     border-color: rgba(34, 197, 94, 0.6);
 }
 
+/* UPDATED: Stakeholder icon sizing to match main.html (110px standard) */
 .stakeholder-icon {
     font-size: 4rem;
     margin-bottom: 20px;
@@ -626,10 +629,9 @@ body {
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
-/* NEW: Image icon styling within stakeholder cards */
 .stakeholder-icon img {
-    width: 4rem;
-    height: 4rem;
+    width: 110px;
+    height: 110px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
@@ -711,10 +713,9 @@ body {
     justify-content: center;
 }
 
-/* NEW: Image icon styling within path options */
 .path-icon img {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
 }
 
@@ -814,10 +815,18 @@ body {
     transform: translateY(-5px);
 }
 
+/* UPDATED: Utility icon sizing to match main.html (70px) */
 .utility-icon {
     font-size: 2.5rem;
     margin-bottom: 15px;
     display: block;
+}
+
+.utility-icon img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
 }
 
 .utility-item-enhanced h4 {
@@ -859,6 +868,7 @@ body {
     margin-bottom: 80px;
 }
 
+/* UPDATED: Section icon sizing to match main.html (110px) */
 .ember-section-icon {
     font-size: 4rem;
     margin-bottom: 25px;
@@ -868,10 +878,9 @@ body {
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
 }
 
-/* NEW: Image icon styling within section headers */
 .ember-section-icon img {
-    width: 4rem;
-    height: 4rem;
+    width: 110px;
+    height: 110px;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
 }
@@ -953,6 +962,14 @@ body {
     margin-bottom: 15px;
 }
 
+.whitepaper-section h4 img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
 .whitepaper-section p {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
@@ -995,6 +1012,14 @@ body {
 .download-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 15px 40px rgba(240, 165, 0, 0.5);
+}
+
+.download-button img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
 }
 
 /* Roadmap Section */
@@ -1054,6 +1079,14 @@ body {
     font-weight: 800;
     color: white;
     margin-bottom: 10px;
+}
+
+.roadmap-title img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
 }
 
 .roadmap-status {
@@ -1134,10 +1167,18 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
+/* UPDATED: Trust icon sizing to match main.html (90px) */
 .trust-icon {
     font-size: 3rem;
     margin-bottom: 20px;
     display: block;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+}
+
+.trust-icon img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
@@ -1374,11 +1415,19 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
+/* UPDATED: Incentive icon sizing to match main.html (90px) */
 .incentive-icon {
     font-size: 3rem;
     margin-bottom: 20px;
     display: block;
     text-align: center;
+}
+
+.incentive-icon img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
 .incentive-card h4 {
@@ -1590,6 +1639,13 @@ body {
     display: block;
 }
 
+.trust-feature .trust-icon img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+}
+
 .trust-feature h4 {
     font-size: 1.3rem;
     font-weight: 800;
@@ -1650,10 +1706,18 @@ body {
     transform: translateY(-3px);
 }
 
+/* UPDATED: Metric icon sizing (50px for compact display) */
 .metric-icon {
     font-size: 2rem;
     margin-bottom: 10px;
     display: block;
+}
+
+.metric-icon img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
 }
 
 .metric-value {
@@ -2313,6 +2377,13 @@ body {
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
+.benefit-icon img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+}
+
 .benefit-item h4 {
     font-size: 1.3rem;
     font-weight: 800;
@@ -2776,6 +2847,14 @@ body {
     text-align: center;
 }
 
+.legal-disclaimer h3 img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
 .disclaimer-content {
     font-size: 0.9rem;
     line-height: 1.6;
@@ -2790,10 +2869,10 @@ body {
     margin-bottom: 0;
 }
 
-/* Compliance Grid Styles - Updated */
+/* FIXED: Compliance Grid - 4 items in 2x2 layout on desktop */
 .compliance-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 40px;
     margin-bottom: 60px;
 }
@@ -2821,6 +2900,14 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+/* UPDATED: Compliance card icon sizing to match main.html (40px for inline icons) */
+.compliance-card h3 img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    vertical-align: middle;
 }
 
 .compliance-card p {
@@ -2940,7 +3027,6 @@ body {
 
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
-    /* Mobile hero adjustments */
     .ember-hero {
         padding: 120px 0 60px;
         min-height: auto;
@@ -2970,7 +3056,6 @@ body {
         margin-bottom: 40px;
     }
 
-    /* Mobile stats grid - centered 3 columns to single column on mobile */
     .ember-stats-three-col {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -2982,6 +3067,11 @@ body {
         flex-direction: column;
         text-align: center;
         gap: 15px;
+    }
+
+    .stat-icon img {
+        width: 60px;
+        height: 60px;
     }
 
     .stat-content {
@@ -3007,7 +3097,6 @@ body {
         font-size: 1.1rem;
     }
 
-    /* Mobile floating coins */
     .hero-crypto-coin-icon {
         width: clamp(25px, 4vw, 35px) !important;
         height: clamp(25px, 4vw, 35px) !important;
@@ -3026,6 +3115,11 @@ body {
     .how-it-works-grid {
         grid-template-columns: 1fr;
         gap: 30px;
+    }
+
+    .stakeholder-icon img {
+        width: 90px;
+        height: 90px;
     }
 
     .distribution-visual {
@@ -3073,10 +3167,34 @@ body {
         grid-template-columns: 1fr;
         gap: 30px;
     }
+
+    .ember-section-icon img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .utility-icon img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .trust-icon img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .incentive-icon img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .benefit-icon img {
+        width: 75px;
+        height: 75px;
+    }
 }
 
 @media (max-width: 480px) {
-    /* Mobile floating coins - smaller */
     .hero-crypto-coin-icon {
         width: clamp(20px, 3vw, 30px) !important;
         height: clamp(20px, 3vw, 30px) !important;
@@ -3086,6 +3204,51 @@ body {
     .ember-token-icon-image {
         width: clamp(80px, 25vw, 120px);
         height: clamp(80px, 25vw, 120px);
+    }
+
+    .stat-icon img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .stakeholder-icon img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .ember-section-icon img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .utility-icon img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .path-icon img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .trust-icon img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .incentive-icon img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .metric-icon img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .benefit-icon img {
+        width: 70px;
+        height: 70px;
     }
 
     .table-container {
@@ -3108,6 +3271,11 @@ body {
 
     .tpa-modal-body {
         padding: 20px;
+    }
+
+    .compliance-card h3 img {
+        width: 35px;
+        height: 35px;
     }
 }
 
