@@ -6,6 +6,8 @@
 /* NEW: Premium hero section with 3-step process and dual-path CTAs */
 /* UPDATED: Step number badges repositioned to top right corner */
 /* OPTIMIZED: Compact Social Sharing Section with Theme-Matching Colors */
+/* UPDATED: GPS Technology (Orange) and Beacon Technology (Purple) color swap */
+/* NEW: Floating AI Chatbot Button with pulsing glow animation */
 
 * {
     margin: 0;
@@ -43,6 +45,308 @@ body.loaded {
     color: #f0a500;
     font-weight: 700;
     text-shadow: 0 1px 4px rgba(240, 165, 0, 0.2);
+}
+
+/* ============================================
+   NEW: FLOATING AI CHATBOT BUTTON
+   Bottom right corner with pulsing glow
+   ============================================ */
+
+.chatbot-button-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9997;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chatbot-button-container:hover {
+    transform: scale(1.05) translateY(-3px);
+}
+
+.chatbot-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(215, 51, 39, 0.4) 30%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: chatbotGlowPulse 2.5s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes chatbotGlowPulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1); 
+        opacity: 0.7; 
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.2); 
+        opacity: 1; 
+    }
+}
+
+.chatbot-button {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(215, 51, 39, 0.5);
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+.chatbot-button:hover {
+    background: linear-gradient(135deg, #fb923c, #f0a500);
+    box-shadow: 0 15px 40px rgba(240, 165, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.chatbot-icon {
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.chatbot-button:hover .chatbot-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.chatbot-tooltip {
+    position: absolute;
+    right: 110px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(240, 165, 0, 0.5);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.chatbot-button-container:hover .chatbot-tooltip {
+    opacity: 1;
+    right: 115px;
+}
+
+.chatbot-tooltip::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 10px solid rgba(0, 0, 0, 0.9);
+}
+
+/* Chatbot Window Styling */
+.chatbot-window {
+    position: fixed;
+    bottom: 140px;
+    right: 30px;
+    width: 400px;
+    height: 600px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #451a03 100%);
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 3px solid rgba(215, 51, 39, 0.4);
+    z-index: 9996;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chatbot-window.active {
+    display: flex;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.chatbot-header {
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.chatbot-header-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chatbot-header-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+.chatbot-header-text h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+}
+
+.chatbot-header-text p {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.chatbot-close {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.chatbot-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.chatbot-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.chatbot-footer {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 2px solid rgba(215, 51, 39, 0.2);
+}
+
+.chatbot-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.chatbot-input {
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 15px;
+    color: white;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.chatbot-input:focus {
+    outline: none;
+    border-color: rgba(240, 165, 0, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.chatbot-send {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+}
+
+.chatbot-send:hover {
+    background: linear-gradient(135deg, #fb923c, #f0a500);
+    box-shadow: 0 6px 20px rgba(240, 165, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Mobile Chatbot Responsive */
+@media (max-width: 768px) {
+    .chatbot-button-container {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .chatbot-button {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .chatbot-glow {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .chatbot-tooltip {
+        display: none;
+    }
+    
+    .chatbot-window {
+        bottom: 110px;
+        right: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        height: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chatbot-button {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .chatbot-glow {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .chatbot-window {
+        bottom: 90px;
+        height: 450px;
+    }
 }
 
 /* ============================================
@@ -3571,8 +3875,8 @@ html {
 }
 
 /* ============================================
-   NEW STYLES FOR GPS & BEACON TECHNOLOGY MODULES
-   Professional, Marketing-Focused Design
+   GPS & BEACON TECHNOLOGY MODULES
+   UPDATED: Swapped Colors
    ============================================ */
 
 /* Technology Modules Container */
@@ -3631,7 +3935,7 @@ html {
     margin-bottom: 60px;
 }
 
-/* Individual Technology Cards */
+/* UPDATED: Individual Technology Cards - Swapped Colors */
 .technology-card {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
     border-radius: 25px;
@@ -3643,12 +3947,14 @@ html {
     overflow: hidden;
 }
 
+/* GPS Card - Now Orange */
 .technology-card.gps-card {
-    border-color: rgba(99, 102, 241, 0.4);
+    border-color: rgba(240, 165, 0, 0.4);
 }
 
+/* Beacon Card - Now Purple */
 .technology-card.beacon-card {
-    border-color: rgba(240, 165, 0, 0.4);
+    border-color: rgba(99, 102, 241, 0.4);
 }
 
 .technology-card:hover {
@@ -3656,14 +3962,16 @@ html {
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
 }
 
+/* GPS Card Hover - Orange glow */
 .technology-card.gps-card:hover {
-    border-color: rgba(99, 102, 241, 0.7);
-    box-shadow: 0 25px 60px rgba(99, 102, 241, 0.3);
-}
-
-.technology-card.beacon-card:hover {
     border-color: rgba(240, 165, 0, 0.7);
     box-shadow: 0 25px 60px rgba(240, 165, 0, 0.3);
+}
+
+/* Beacon Card Hover - Purple glow */
+.technology-card.beacon-card:hover {
+    border-color: rgba(99, 102, 241, 0.7);
+    box-shadow: 0 25px 60px rgba(99, 102, 241, 0.3);
 }
 
 /* Technology Header Section */
@@ -3674,22 +3982,24 @@ html {
     margin-bottom: 25px;
 }
 
+/* UPDATED: GPS Icon Container - Orange */
 .technology-icon-container {
     width: 90px;
     height: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(251, 146, 60, 0.2));
     border-radius: 20px;
-    border: 3px solid rgba(99, 102, 241, 0.4);
+    border: 3px solid rgba(240, 165, 0, 0.4);
     flex-shrink: 0;
     transition: all 0.3s ease;
 }
 
+/* UPDATED: Beacon Icon Container - Purple */
 .technology-card.beacon-card .technology-icon-container {
-    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(251, 146, 60, 0.2));
-    border-color: rgba(240, 165, 0, 0.4);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+    border-color: rgba(99, 102, 241, 0.4);
 }
 
 .technology-icon {
@@ -3708,9 +4018,10 @@ html {
     flex: 1;
 }
 
+/* UPDATED: GPS Badge - Orange */
 .technology-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background: linear-gradient(135deg, #f0a500, #fb923c);
     color: white;
     padding: 6px 16px;
     border-radius: 15px;
@@ -3719,20 +4030,21 @@ html {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 10px;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-}
-
-.technology-card.beacon-card .technology-badge {
-    background: linear-gradient(135deg, #f0a500, #fb923c);
     box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4);
 }
 
+/* UPDATED: Beacon Badge - Purple */
+.technology-card.beacon-card .technology-badge {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
 .indoor-badge {
-    background: linear-gradient(135deg, #f0a500, #fb923c);
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
 }
 
 .outdoor-badge {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background: linear-gradient(135deg, #f0a500, #fb923c);
 }
 
 .technology-title {
@@ -3755,15 +4067,17 @@ html {
     margin-bottom: 30px;
 }
 
+/* UPDATED: GPS Features - Orange */
 .technology-features h5 {
     font-size: 1.1rem;
     font-weight: 800;
-    color: #a78bfa;
+    color: #f0a500;
     margin-bottom: 15px;
 }
 
+/* UPDATED: Beacon Features - Purple */
 .technology-card.beacon-card .technology-features h5 {
-    color: #f0a500;
+    color: #a78bfa;
 }
 
 .technology-features ul {
@@ -3780,12 +4094,13 @@ html {
     line-height: 1.6;
 }
 
+/* UPDATED: GPS Checkmarks - Orange */
 .technology-features ul li::before {
     content: '✓';
     position: absolute;
     left: 0;
     top: 10px;
-    color: #6366f1;
+    color: #f0a500;
     font-weight: 900;
     font-size: 1.1rem;
     width: 22px;
@@ -3793,15 +4108,16 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(99, 102, 241, 0.15);
+    background: rgba(240, 165, 0, 0.15);
     border-radius: 50%;
-    border: 2px solid rgba(99, 102, 241, 0.3);
+    border: 2px solid rgba(240, 165, 0, 0.3);
 }
 
+/* UPDATED: Beacon Checkmarks - Purple */
 .technology-card.beacon-card .technology-features ul li::before {
-    color: #f0a500;
-    background: rgba(240, 165, 0, 0.15);
-    border-color: rgba(240, 165, 0, 0.3);
+    color: #6366f1;
+    background: rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.3);
 }
 
 /* Technology Stats */
@@ -3812,40 +4128,44 @@ html {
     margin-bottom: 30px;
 }
 
+/* UPDATED: GPS Stats - Orange */
 .tech-stat {
     background: rgba(0, 0, 0, 0.3);
     padding: 25px 15px;
     border-radius: 15px;
     text-align: center;
-    border: 2px solid rgba(99, 102, 241, 0.2);
+    border: 2px solid rgba(240, 165, 0, 0.2);
     transition: all 0.3s ease;
 }
 
+/* UPDATED: Beacon Stats - Purple */
 .technology-card.beacon-card .tech-stat {
-    border-color: rgba(240, 165, 0, 0.2);
+    border-color: rgba(99, 102, 241, 0.2);
 }
 
 .tech-stat:hover {
     transform: translateY(-3px);
-    border-color: rgba(99, 102, 241, 0.4);
+    border-color: rgba(240, 165, 0, 0.4);
     background: rgba(0, 0, 0, 0.4);
 }
 
 .technology-card.beacon-card .tech-stat:hover {
-    border-color: rgba(240, 165, 0, 0.4);
+    border-color: rgba(99, 102, 241, 0.4);
 }
 
+/* UPDATED: GPS Stat Number - Orange */
 .tech-stat-number {
     font-size: 1.8rem;
     font-weight: 900;
-    color: #a78bfa;
+    color: #f0a500;
     display: block;
     margin-bottom: 8px;
     line-height: 1;
 }
 
+/* UPDATED: Beacon Stat Number - Purple */
 .technology-card.beacon-card .tech-stat-number {
-    color: #f0a500;
+    color: #a78bfa;
 }
 
 .tech-stat-label {
@@ -3856,9 +4176,10 @@ html {
 }
 
 /* Technology Highlight Box */
+/* UPDATED: GPS Highlight - Orange */
 .technology-highlight {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1));
-    border: 2px solid rgba(99, 102, 241, 0.3);
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.15), rgba(251, 146, 60, 0.1));
+    border: 2px solid rgba(240, 165, 0, 0.3);
     border-radius: 18px;
     padding: 25px;
     display: flex;
@@ -3867,19 +4188,20 @@ html {
     transition: all 0.3s ease;
 }
 
+/* UPDATED: Beacon Highlight - Purple */
 .technology-card.beacon-card .technology-highlight {
-    background: linear-gradient(135deg, rgba(240, 165, 0, 0.15), rgba(251, 146, 60, 0.1));
-    border-color: rgba(240, 165, 0, 0.3);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1));
+    border-color: rgba(99, 102, 241, 0.3);
 }
 
 .technology-highlight:hover {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.15));
-    border-color: rgba(99, 102, 241, 0.5);
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(251, 146, 60, 0.15));
+    border-color: rgba(240, 165, 0, 0.5);
 }
 
 .technology-card.beacon-card .technology-highlight:hover {
-    background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(251, 146, 60, 0.15));
-    border-color: rgba(240, 165, 0, 0.5);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.15));
+    border-color: rgba(99, 102, 241, 0.5);
 }
 
 .tech-highlight-icon {
