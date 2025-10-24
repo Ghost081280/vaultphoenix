@@ -3,6 +3,7 @@
 /* COMPREHENSIVE CSS for the complete ember.html structure */
 /* UPDATED: Consistent icon sizing to match main.html standards */
 /* FIXED: Compliance grid layout for 4 items */
+/* UPDATED: Larger team section icon, advisors section styling */
 
 /* EXACT COPY FROM WORKING MAIN.HTML - Navigation system */
 .navbar {
@@ -885,6 +886,13 @@ body {
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
 }
 
+/* NEW: Larger team section icon */
+.team-icon-large img {
+    width: 150px !important;
+    height: 150px !important;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.5)) !important;
+}
+
 .ember-section-title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 900;
@@ -1317,12 +1325,15 @@ body {
     height: 20px;
 }
 
+/* NEW: Advisors Section Styling */
 .advisors-section {
     text-align: center;
     background: rgba(0, 0, 0, 0.3);
     padding: 40px;
     border-radius: 20px;
     border: 1px solid rgba(215, 51, 39, 0.2);
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
 .advisors-section h3 {
@@ -3173,6 +3184,11 @@ body {
         height: 90px;
     }
 
+    .team-icon-large img {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
     .utility-icon img {
         width: 60px;
         height: 60px;
@@ -3219,6 +3235,11 @@ body {
     .ember-section-icon img {
         width: 80px;
         height: 80px;
+    }
+
+    .team-icon-large img {
+        width: 100px !important;
+        height: 100px !important;
     }
 
     .utility-icon img {
