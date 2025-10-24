@@ -4,6 +4,7 @@
 /* UPDATED: Consistent icon sizing to match main.html standards */
 /* FIXED: Compliance grid layout for 4 items */
 /* UPDATED: Larger team section icon, advisors section styling */
+/* FIXED: Christopher advisor card size to match team members */
 
 /* EXACT COPY FROM WORKING MAIN.HTML - Navigation system */
 .navbar {
@@ -1208,6 +1209,17 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
     margin-bottom: 60px;
+}
+
+/* FIXED: Force 3-column layout for advisors section to match team member card sizes */
+.team-grid-advisors {
+    grid-template-columns: repeat(3, 1fr) !important;
+}
+
+/* Hide placeholder cards but maintain grid layout */
+.team-member-placeholder {
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .team-member {
@@ -3207,6 +3219,15 @@ body {
     .benefit-icon img {
         width: 75px;
         height: 75px;
+    }
+
+    /* Advisor grid mobile responsive */
+    .team-grid-advisors {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .team-member-placeholder {
+        display: none !important;
     }
 }
 
