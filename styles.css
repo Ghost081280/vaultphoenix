@@ -261,6 +261,41 @@ body.loaded {
     background: rgba(0, 0, 0, 0.3);
 }
 
+/* Chatbot Message Styling */
+.chatbot-message {
+    margin-bottom: 15px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    line-height: 1.6;
+}
+
+.bot-message {
+    background: rgba(215, 51, 39, 0.15);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.user-message {
+    background: rgba(240, 165, 0, 0.2);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    color: rgba(255, 255, 255, 0.95);
+    margin-left: auto;
+    max-width: 80%;
+}
+
+/* Welcome Image in Chatbot */
+.chatbot-body img {
+    max-width: 180px;
+    max-height: 180px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 15px auto;
+    object-fit: contain;
+    border-radius: 12px;
+    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.4));
+}
+
 .chatbot-footer {
     padding: 20px;
     background: rgba(0, 0, 0, 0.4);
