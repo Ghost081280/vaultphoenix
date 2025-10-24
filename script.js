@@ -10,7 +10,7 @@
 // ============================================
 const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key from https://console.anthropic.com/
 const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
-const CLAUDE_MODEL = 'claude-sonnet-4.5-20250929';
+const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 
 // Chat state
 let conversationHistory = [];
@@ -60,8 +60,11 @@ function initializeChatbot() {
         return;
     }
     
+    console.log('🤖 Chatbot elements found successfully');
+    
     // Toggle chatbot window
     chatbotButton.addEventListener('click', () => {
+        console.log('🤖 Chatbot button clicked');
         chatbotWindow.classList.toggle('active');
         if (chatbotWindow.classList.contains('active')) {
             chatbotInput.focus();
@@ -75,6 +78,7 @@ function initializeChatbot() {
     // Close chatbot
     if (chatbotClose) {
         chatbotClose.addEventListener('click', () => {
+            console.log('🤖 Chatbot closed');
             chatbotWindow.classList.remove('active');
         });
     }
@@ -144,12 +148,12 @@ async function sendMessage() {
     if (!message || isTyping) return;
     
     // Check if API key is configured
-    // if (CLAUDE_API_KEY === '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') {
-        // addMessage('user', message);
-        // addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
-        // chatbotInput.value = '';
-        // return;
-    // }
+    if (CLAUDE_API_KEY === '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') {
+        addMessage('user', message);
+        addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
+        chatbotInput.value = '';
+        return;
+    }
     
     // Add user message to chat
     addMessage('user', message);
@@ -167,6 +171,8 @@ async function sendMessage() {
             ...conversationHistory,
             { role: 'user', content: message }
         ];
+        
+        console.log('🤖 Sending message to Claude API...');
         
         // Call Claude API
         const response = await fetch(CLAUDE_API_URL, {
@@ -190,6 +196,8 @@ async function sendMessage() {
         }
         
         const data = await response.json();
+        
+        console.log('🤖 Received response from Claude API');
         
         // Remove typing indicator
         removeTypingIndicator();
@@ -263,9 +271,6 @@ function addMessage(role, content) {
     
     chatbotBody.appendChild(messageDiv);
     chatbotBody.scrollTop = chatbotBody.scrollHeight;
-    
-    // Add CSS for messages if not already added
-    addMessageStyles();
 }
 
 // ============================================
@@ -325,121 +330,6 @@ function formatMessage(text) {
     formatted = formatted.replace(/\n/g, '<br>');
     
     return formatted;
-}
-
-// ============================================
-// ADD MESSAGE STYLES
-// ============================================
-let stylesAdded = false;
-function addMessageStyles() {
-    if (stylesAdded) return;
-    stylesAdded = true;
-    
-    const style = document.createElement('style');
-    style.textContent = `
-        .chat-message {
-            margin-bottom: 20px;
-            animation: messageSlideIn 0.3s ease-out;
-        }
-        
-        @keyframes messageSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .message-content {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-        
-        .user-message .message-content {
-            flex-direction: row-reverse;
-        }
-        
-        .message-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        .message-text {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 12px 16px;
-            border-radius: 16px;
-            color: white;
-            line-height: 1.5;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-        
-        .user-message .message-text {
-            background: linear-gradient(135deg, #d73327, #fb923c);
-            border-radius: 16px 16px 4px 16px;
-        }
-        
-        .assistant-message .message-text {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(215, 51, 39, 0.3);
-            border-radius: 16px 16px 16px 4px;
-        }
-        
-        .message-text ul {
-            margin: 8px 0;
-            padding-left: 20px;
-        }
-        
-        .message-text li {
-            margin: 4px 0;
-        }
-        
-        .message-text strong {
-            color: #f0a500;
-        }
-        
-        .typing-dots {
-            display: flex;
-            gap: 4px;
-            padding: 8px 0;
-        }
-        
-        .typing-dots span {
-            width: 8px;
-            height: 8px;
-            background: #f0a500;
-            border-radius: 50%;
-            animation: typingBounce 1.4s infinite;
-        }
-        
-        .typing-dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .typing-dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes typingBounce {
-            0%, 60%, 100% {
-                transform: translateY(0);
-                opacity: 0.7;
-            }
-            30% {
-                transform: translateY(-10px);
-                opacity: 1;
-            }
-        }
-    `;
-    document.head.appendChild(style);
 }
 
 // FIXED: Immediately prevent flash by setting dark background - FASTER RESPONSE
@@ -982,7 +872,8 @@ function preloadPhoenixCryptoImages() {
         // Other Critical Images
         'images/VPEmberCoin.PNG',
         'images/PhoenixHoldingCoin.PNG',
-        'images/VPLogoNoText.PNG'
+        'images/VPLogoNoText.PNG',
+        'images/PhoenixBot.PNG' // Chatbot image
     ];
     
     criticalImages.forEach(src => {
