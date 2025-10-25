@@ -1003,12 +1003,7 @@ body.loaded {
     filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.6));
 }
 
-/* ============================================
-   NAVIGATION - EXACT MATCH TO EMBER-STYLES.CSS
-   Fixed mobile layout with proper grid spacing
-   ============================================ */
-
-/* Navigation - Base Styles */
+/* Navigation - FIXED: Button sizing to match ember-styles.css */
 .navbar {
     position: fixed;
     top: 0;
@@ -1070,10 +1065,6 @@ body.loaded {
     list-style: none;
 }
 
-.nav-links li {
-    display: inline-block;
-}
-
 .nav-links a {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
@@ -1114,26 +1105,24 @@ body.loaded {
     width: 0;
 }
 
-/* FIXED: Ember Link Button - EXACT MATCH to ember-styles.css */
+/* FIXED: Ember Link Button - Matched to ember-styles.css */
 .ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
-    padding: 14px 28px !important;
-    border-radius: 30px !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
     font-weight: 700 !important;
-    font-size: 15px !important;
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
-    border: none !important;
-    display: inline-flex !important;
+    font-size: 14px !important;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
-    text-decoration: none !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    gap: 6px !important;
 }
 
 .ember-link:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.5) !important;
     color: white !important;
 }
 
@@ -1142,10 +1131,10 @@ body.loaded {
 }
 
 .nav-ember-coin {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
 }
 
@@ -1153,453 +1142,38 @@ body.loaded {
     transform: scale(1.1) rotate(10deg);
 }
 
-/* Mobile Menu Button */
-.mobile-menu-btn {
-    display: none;
-    background: rgba(215, 51, 39, 0.9);
-    color: white;
-    border: none;
-    padding: 12px 16px;
-    font-size: 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 1001;
-}
-
-.mobile-menu-btn:hover {
-    background: #d73327;
-    transform: scale(1.05);
-}
-
-/* ============================================
-   MOBILE NAVIGATION - EXACT MATCH TO EMBER
-   Grid layout with proper centering
-   ============================================ */
-
-/* FIXED: Mobile navbar layout - EXACT MATCH to ember-styles.css */
-@media (max-width: 1024px) {
-    .nav-content {
-        display: grid;
-        grid-template-columns: auto 1.5fr auto;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .logo {
-        grid-column: 1;
-        justify-self: start;
-    }
-    
-    /* FIXED: Ember button centered between logo and hamburger */
-    .ember-link {
-        grid-column: 2;
-        justify-self: start;
-        margin-left: 15px;
-        padding: 10px 20px !important;
-        font-size: 13px !important;
-        white-space: nowrap;
-    }
-    
-    .mobile-menu-btn {
-        display: block !important;
-        grid-column: 3;
-        justify-self: end;
-        padding: 10px 14px;
-        font-size: 18px;
-    }
-    
-    .nav-links {
-        display: none !important;
-    }
-
-    /* Mobile menu active state */
-    .nav-links.mobile-active {
-        display: flex !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        background: #0f0f0f !important;
-        z-index: 9998 !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 30px !important;
-        padding: 40px 20px !important;
-        margin: 0 !important;
-        list-style: none !important;
-    }
-
-    .nav-links.mobile-active li {
-        display: block !important;
-        width: 100% !important;
-        max-width: 300px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .nav-links.mobile-active a {
-        display: block !important;
-        width: 100% !important;
-        padding: 20px 30px !important;
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        color: #ffffff !important;
-        background: rgba(215, 51, 39, 0.9) !important;
-        border: 3px solid #d73327 !important;
-        border-radius: 12px !important;
-        text-align: center !important;
-        text-decoration: none !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
-        margin: 0 !important;
-    }
-
-    .nav-links.mobile-active a:hover,
-    .nav-links.mobile-active a:active {
-        background: #d73327 !important;
-        border-color: #fb923c !important;
-        transform: scale(1.05) !important;
-        box-shadow: 0 12px 30px rgba(215, 51, 39, 0.6) !important;
-        color: #ffffff !important;
-    }
-
-    .nav-links.mobile-active a::after {
-        display: none !important;
-    }
-    
-    /* FIXED: Logo size on mobile */
-    .logo-image {
-        height: 60px;
-    }
-}
-
-/* Extra small mobile - even tighter spacing */
-@media (max-width: 480px) {
-    .nav-content {
-        gap: 10px;
-    }
-    
-    .ember-link {
-        padding: 8px 16px !important;
-        font-size: 12px !important;
-        margin-left: 10px;
-    }
-    
-    .mobile-menu-btn {
-        padding: 10px 14px;
-        font-size: 18px;
-    }
-    
-    /* FIXED: Extra small mobile logo */
-    .logo-image {
-        height: 50px;
-    }
-}/* ============================================
-   FOOTER EMBER LINK - EXACT MATCH TO EMBER-STYLES.CSS
-   ============================================ */
-
 .footer-ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
-    padding: 14px 28px !important;
-    border-radius: 30px !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
     font-weight: 700 !important;
-    font-size: 15px !important;
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
-    border: none !important;
+    font-size: 14px !important;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
     text-decoration: none !important;
     display: inline-flex !important;
     align-items: center !important;
-    gap: 8px !important;
+    gap: 6px !important;
     transition: all 0.3s ease !important;
 }
 
 .footer-ember-link:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5) !important;
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.5) !important;
     color: white !important;
 }
 
 .footer-ember-coin {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
 }
 
 .footer-ember-link:hover .footer-ember-coin {
     transform: scale(1.1) rotate(10deg);
-}
-
-/* ============================================
-   MOBILE OPTIMIZATION - HERO SECTION
-   Proper top padding to prevent navbar overlap
-   ============================================ */
-
-/* Hero Section - FIXED: Added proper spacing */
-.hero {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding-top: 160px;
-    padding-bottom: 80px;
-}
-
-/* Mobile Hero Adjustments */
-@media (max-width: 768px) {
-    .hero {
-        padding-top: 140px !important;
-        padding-bottom: 60px;
-        min-height: auto;
-    }
-    
-    .hero-content {
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding-top: 130px !important;
-    }
-}
-
-/* ============================================
-   MOBILE RESPONSIVE - COMPLETE NAVIGATION
-   All breakpoints properly handled
-   ============================================ */
-
-@media (max-width: 1200px) {
-    .nav-links {
-        gap: 30px;
-    }
-}
-
-@media (max-width: 1024px) {
-    /* Navigation becomes mobile layout */
-    .navbar {
-        padding: 15px 20px;
-    }
-    
-    .nav-content {
-        display: grid !important;
-        grid-template-columns: auto 1.5fr auto !important;
-        align-items: center !important;
-        gap: 10px !important;
-    }
-    
-    .logo {
-        grid-column: 1 !important;
-        justify-self: start !important;
-    }
-    
-    .logo-image {
-        height: 60px;
-    }
-    
-    /* Ember button in middle */
-    .ember-link {
-        grid-column: 2 !important;
-        justify-self: start !important;
-        margin-left: 15px !important;
-        padding: 10px 20px !important;
-        font-size: 13px !important;
-        white-space: nowrap !important;
-    }
-    
-    /* Hamburger on right */
-    .mobile-menu-btn {
-        display: block !important;
-        grid-column: 3 !important;
-        justify-self: end !important;
-        padding: 10px 14px !important;
-        font-size: 18px !important;
-    }
-    
-    /* Hide desktop nav links */
-    .nav-links {
-        display: none !important;
-    }
-    
-    /* Mobile menu overlay */
-    .nav-links.mobile-active {
-        display: flex !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        background: #0f0f0f !important;
-        z-index: 9998 !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 30px !important;
-        padding: 40px 20px !important;
-        margin: 0 !important;
-        list-style: none !important;
-    }
-
-    .nav-links.mobile-active li {
-        display: block !important;
-        width: 100% !important;
-        max-width: 300px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .nav-links.mobile-active a {
-        display: block !important;
-        width: 100% !important;
-        padding: 20px 30px !important;
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        color: #ffffff !important;
-        background: rgba(215, 51, 39, 0.9) !important;
-        border: 3px solid #d73327 !important;
-        border-radius: 12px !important;
-        text-align: center !important;
-        text-decoration: none !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
-        margin: 0 !important;
-    }
-
-    .nav-links.mobile-active a:hover,
-    .nav-links.mobile-active a:active {
-        background: #d73327 !important;
-        border-color: #fb923c !important;
-        transform: scale(1.05) !important;
-        box-shadow: 0 12px 30px rgba(215, 51, 39, 0.6) !important;
-        color: #ffffff !important;
-    }
-
-    .nav-links.mobile-active a::after {
-        display: none !important;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar {
-        padding: 12px 15px;
-    }
-    
-    .logo-image {
-        height: 55px;
-    }
-    
-    .ember-link {
-        padding: 9px 18px !important;
-        font-size: 12.5px !important;
-        margin-left: 12px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-content {
-        gap: 8px !important;
-    }
-    
-    .logo-image {
-        height: 50px;
-    }
-    
-    .ember-link {
-        padding: 8px 16px !important;
-        font-size: 12px !important;
-        margin-left: 10px !important;
-    }
-    
-    .mobile-menu-btn {
-        padding: 10px 14px !important;
-        font-size: 18px !important;
-    }
-}
-
-/* ============================================
-   UTILITY CLASSES FOR NAVIGATION
-   ============================================ */
-
-/* Ensure mobile menu closes properly */
-.nav-links:not(.mobile-active) {
-    display: flex;
-}
-
-@media (max-width: 1024px) {
-    .nav-links:not(.mobile-active) {
-        display: none !important;
-    }
-}
-
-/* Mobile menu toggle button active state */
-.mobile-menu-btn.active {
-    background: #fb923c;
-}
-
-/* Prevent body scroll when mobile menu is open */
-body.mobile-menu-open {
-    overflow: hidden;
-}
-
-/* ============================================
-   ACCESSIBILITY IMPROVEMENTS
-   ============================================ */
-
-/* Focus states for keyboard navigation */
-.nav-links a:focus-visible {
-    outline: 2px solid #f0a500;
-    outline-offset: 4px;
-}
-
-.ember-link:focus-visible {
-    outline: 2px solid #f0a500 !important;
-    outline-offset: 4px !important;
-}
-
-.mobile-menu-btn:focus-visible {
-    outline: 2px solid #f0a500;
-    outline-offset: 4px;
-}
-
-/* ============================================
-   SMOOTH TRANSITIONS
-   ============================================ */
-
-/* Smooth navbar shrink on scroll */
-.navbar {
-    transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.logo-image {
-    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Mobile menu slide-in animation */
-@keyframes slideInMenu {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.nav-links.mobile-active {
-    animation: slideInMenu 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* REDESIGNED: Phoenix Token Evolution Section - More Compact & Professional */
