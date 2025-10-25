@@ -46,7 +46,7 @@ Your role is to:
 Always maintain a professional yet friendly tone. If asked about technical implementation details beyond your knowledge, recommend contacting the team directly.`;
 
 // ============================================
-// INITIALIZE CHATBOT
+// INITIALIZE CHATBOT - FIXED FOR MOBILE
 // ============================================
 function initializeChatbot() {
     console.log('🤖 Initializing Claude API Chatbot...');
@@ -65,30 +65,64 @@ function initializeChatbot() {
     
     console.log('🤖 Chatbot elements found successfully');
     
-    // Toggle chatbot window
-    chatbotButton.addEventListener('click', () => {
+    // FIXED: Toggle chatbot window with proper mobile handling
+    chatbotButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         console.log('🤖 Chatbot button clicked');
-        chatbotWindow.classList.toggle('active');
-        if (chatbotWindow.classList.contains('active')) {
-            chatbotInput.focus();
-            // Add welcome message if first time opening
-            if (chatbotBody.children.length === 0) {
-                addWelcomeMessage();
-            }
+        
+        const isActive = chatbotWindow.classList.contains('active');
+        
+        if (isActive) {
+            // Close chatbot
+            closeChatbot();
+        } else {
+            // Open chatbot
+            openChatbot();
         }
     });
     
-    // Close chatbot
+    // Close chatbot function
+    function closeChatbot() {
+        chatbotWindow.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+        console.log('🤖 Chatbot closed');
+    }
+    
+    // Open chatbot function
+    function openChatbot() {
+        chatbotWindow.classList.add('active');
+        
+        // FIXED: Prevent body scroll on mobile when chat is open
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = 'hidden';
+        }
+        
+        chatbotInput.focus();
+        
+        // Add welcome message if first time opening
+        if (chatbotBody.children.length === 0) {
+            addWelcomeMessage();
+        }
+        
+        console.log('🤖 Chatbot opened');
+    }
+    
+    // Close chatbot button
     if (chatbotClose) {
-        chatbotClose.addEventListener('click', () => {
-            console.log('🤖 Chatbot closed');
-            chatbotWindow.classList.remove('active');
+        chatbotClose.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeChatbot();
         });
     }
     
     // Send message on button click
     if (chatbotSend) {
-        chatbotSend.addEventListener('click', sendMessage);
+        chatbotSend.addEventListener('click', (e) => {
+            e.preventDefault();
+            sendMessage();
+        });
     }
     
     // Send message on Enter key
@@ -99,7 +133,24 @@ function initializeChatbot() {
                 sendMessage();
             }
         });
+        
+        // FIXED: Prevent zoom on focus (iOS)
+        chatbotInput.addEventListener('focus', () => {
+            // Scroll to input on mobile to ensure visibility
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    chatbotInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            }
+        });
     }
+    
+    // FIXED: Close on back button (mobile)
+    window.addEventListener('popstate', () => {
+        if (chatbotWindow.classList.contains('active')) {
+            closeChatbot();
+        }
+    });
     
     console.log('🤖 Chatbot initialized successfully!');
 }
@@ -133,6 +184,7 @@ function addWelcomeMessage() {
     const chatbotBody = document.querySelector('.chatbot-body');
     if (chatbotBody) {
         chatbotBody.innerHTML = welcomeMsg;
+        scrollToBottom();
     }
 }
 
@@ -243,7 +295,7 @@ async function sendMessage() {
 }
 
 // ============================================
-// ADD MESSAGE TO CHAT
+// ADD MESSAGE TO CHAT - FIXED DESIGN
 // ============================================
 function addMessage(role, content) {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -253,19 +305,18 @@ function addMessage(role, content) {
     messageDiv.className = `chat-message ${role}-message`;
     
     if (role === 'user') {
+        // FIXED: User message - text only on right, no avatar
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-text">${escapeHtml(content)}</div>
-                <div class="message-avatar">
-                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #d73327, #fb923c); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.2rem;">U</div>
-                </div>
             </div>
         `;
     } else {
+        // Assistant message - avatar on left, message on right
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-avatar">
-                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
                 </div>
                 <div class="message-text">${formatMessage(content)}</div>
             </div>
@@ -273,7 +324,19 @@ function addMessage(role, content) {
     }
     
     chatbotBody.appendChild(messageDiv);
-    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    scrollToBottom();
+}
+
+// ============================================
+// SCROLL TO BOTTOM - SMOOTH
+// ============================================
+function scrollToBottom() {
+    const chatbotBody = document.querySelector('.chatbot-body');
+    if (chatbotBody) {
+        setTimeout(() => {
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }, 100);
+    }
 }
 
 // ============================================
@@ -288,7 +351,7 @@ function showTypingIndicator() {
     typingDiv.innerHTML = `
         <div class="message-content">
             <div class="message-avatar">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
             </div>
             <div class="message-text">
                 <div class="typing-dots">
@@ -299,7 +362,7 @@ function showTypingIndicator() {
     `;
     
     chatbotBody.appendChild(typingDiv);
-    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    scrollToBottom();
 }
 
 function removeTypingIndicator() {
