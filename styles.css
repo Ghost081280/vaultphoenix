@@ -10,7 +10,7 @@
 /* NEW: Floating AI Chatbot Button with pulsing glow animation */
 /* UPDATED: Bigger chatbot button (110px), fixed chat window positioning, proper overflow */
 /* MOBILE OPTIMIZED: Comprehensive mobile responsiveness with proper scaling and touch targets */
-/* FIXED: Top nav button sizing to match ember-styles.css */
+/* FIXED: Top nav ember button PERFECTLY MATCHED to ember-styles.css specifications */
 /* FIXED: Hero section spacing to prevent title from hiding behind nav */
 
 * {
@@ -1003,7 +1003,7 @@ body.loaded {
     filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.6));
 }
 
-/* Navigation - FIXED: Button sizing to match ember-styles.css */
+/* Navigation - FIXED: Button sizing PERFECTLY MATCHED to ember-styles.css */
 .navbar {
     position: fixed;
     top: 0;
@@ -1105,24 +1105,43 @@ body.loaded {
     width: 0;
 }
 
-/* FIXED: Ember Link Button - Matched to ember-styles.css */
+/* FIXED: Ember Link Button - PERFECTLY MATCHED to ember-styles.css .cta-button specifications */
 .ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
-    padding: 8px 16px !important;
-    border-radius: 20px !important;
+    padding: 14px 28px !important;
+    border: none !important;
+    border-radius: 30px !important;
     font-weight: 700 !important;
-    font-size: 14px !important;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    display: flex !important;
+    font-size: 15px !important;
+    text-decoration: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
+    display: inline-flex !important;
     align-items: center !important;
-    gap: 6px !important;
+    gap: 8px !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.ember-link::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+    transition: left 0.5s ease !important;
+}
+
+.ember-link:hover::before {
+    left: 100% !important;
 }
 
 .ember-link:hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.5) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5) !important;
     color: white !important;
 }
 
@@ -1131,10 +1150,10 @@ body.loaded {
 }
 
 .nav-ember-coin {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
 }
 
@@ -1145,30 +1164,47 @@ body.loaded {
 .footer-ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
-    padding: 8px 16px !important;
-    border-radius: 20px !important;
+    padding: 14px 28px !important;
+    border: none !important;
+    border-radius: 30px !important;
     font-weight: 700 !important;
-    font-size: 14px !important;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    font-size: 15px !important;
     text-decoration: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
     display: inline-flex !important;
     align-items: center !important;
-    gap: 6px !important;
-    transition: all 0.3s ease !important;
+    gap: 8px !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.footer-ember-link::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+    transition: left 0.5s ease !important;
+}
+
+.footer-ember-link:hover::before {
+    left: 100% !important;
 }
 
 .footer-ember-link:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.5) !important;
+    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5) !important;
     color: white !important;
 }
 
 .footer-ember-coin {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
 }
 
@@ -4502,13 +4538,13 @@ html {
     }
     
     .ember-link {
-        padding: 6px 12px !important;
-        font-size: 12px !important;
+        padding: 12px 24px !important;
+        font-size: 13px !important;
     }
     
     .nav-ember-coin {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
     }
 
     .hero-steps-premium {
@@ -4688,13 +4724,13 @@ html {
     }
     
     .ember-link {
-        padding: 5px 10px !important;
-        font-size: 11px !important;
+        padding: 10px 20px !important;
+        font-size: 12px !important;
     }
     
     .nav-ember-coin {
-        width: 16px;
-        height: 16px;
+        width: 18px;
+        height: 18px;
     }
 
     .section-title {
@@ -5103,14 +5139,14 @@ html {
     }
     
     .ember-link {
-        padding: 4px 8px !important;
-        font-size: 10px !important;
-        gap: 4px !important;
+        padding: 8px 16px !important;
+        font-size: 11px !important;
+        gap: 6px !important;
     }
     
     .nav-ember-coin {
-        width: 14px;
-        height: 14px;
+        width: 16px;
+        height: 16px;
     }
 
     .section-title {
