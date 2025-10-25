@@ -1,5 +1,6 @@
 // Vault Phoenix - $Ember Token Page Interactive JavaScript
 // UPDATED: Fixed chatbot with proper message alignment and scroll prevention
+// FIXED: Removed auto-focus to prevent keyboard popup on mobile
 // User messages: NO avatar, pushed to far right
 // Claude messages: VP logo avatar on left
 // Background scroll prevented with overscroll-behavior
@@ -58,7 +59,7 @@ Your role is to:
 Always maintain a professional yet friendly tone. Emphasize the legitimate utility and value proposition. If asked about financial advice, remind users to do their own research and consult financial advisors.`;
 
 // ============================================
-// INITIALIZE CHATBOT
+// INITIALIZE CHATBOT - FIXED: No Auto-Focus
 // ============================================
 function initializeChatbot() {
     console.log('🤖 Initializing $Ember Token Chatbot...');
@@ -82,7 +83,7 @@ function initializeChatbot() {
         console.log('🤖 Chatbot button clicked');
         chatbotWindow.classList.toggle('active');
         if (chatbotWindow.classList.contains('active')) {
-            chatbotInput.focus();
+            // FIXED: Removed chatbotInput.focus() to prevent keyboard popup on mobile
             // Add welcome message if first time opening
             if (chatbotBody.children.length === 0) {
                 addWelcomeMessage();
@@ -149,7 +150,7 @@ function addWelcomeMessage() {
 }
 
 // ============================================
-// SEND MESSAGE TO CLAUDE API
+// SEND MESSAGE TO CLAUDE API - FIXED: No Auto-Focus
 // ============================================
 async function sendMessage() {
     const chatbotInput = document.querySelector('.chatbot-input');
@@ -250,7 +251,7 @@ async function sendMessage() {
         chatbotInput.disabled = false;
         chatbotSend.disabled = false;
         isTyping = false;
-        chatbotInput.focus();
+        // FIXED: Removed chatbotInput.focus() - let user tap input manually on mobile
     }
 }
 
