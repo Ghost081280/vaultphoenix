@@ -4,7 +4,7 @@
 // UPDATED: Calculator starts at $10 minimum investment
 // UPDATED: Development Fund Tracker with real-time updates
 // UPDATED: Claude API Integration for Intelligent Chatbot
-// NEW: Mobile-optimized allocation cards for better presentation
+// FIXED: Mobile allocation cards now match desktop tokenomics data
 
 // ============================================
 // CLAUDE API CONFIGURATION
@@ -22,7 +22,7 @@ const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token 
 
 Key Information about $Ember Token:
 - Presale Launch: November 1, 2025 at 12:00 PM UTC
-- Total Supply: 166.7M tokens
+- Total Supply: 1B tokens
 - Presale Price: $0.003 per token
 - Minimum Investment: $10 (3,333 tokens)
 - Maximum Investment: $50,000 (16.67M tokens)
@@ -31,11 +31,12 @@ Key Information about $Ember Token:
 - Token Utility: In-game purchases, premium locations, staking rewards, governance
 
 Token Distribution:
-- 50% Public Presale (83.35M tokens)
-- 20% Ecosystem Development (33.34M tokens)
-- 15% Team & Advisors (25M tokens, 12-month vesting)
-- 10% Marketing & Partnerships (16.67M tokens)
-- 5% Liquidity Pool (8.34M tokens)
+- 35% Campaign Token Pool (350M tokens)
+- 30% Platform Operator & SDK Incentives (300M tokens)
+- 16.67% Presale (166.7M tokens)
+- 10% Team & Development (100M tokens)
+- 5% Treasury / Growth Fund (50M tokens)
+- 3.33% Reserve / Burn (33.3M tokens)
 
 Platform Benefits:
 - Powers location-based AR crypto gaming
@@ -658,7 +659,7 @@ function initializeDevelopmentFundTracker() {
     console.log('💡 Call window.updateDevFundTracker(amount, timestamp) to update the tracker');
 }
 
-// NEW: Mobile Allocation Cards - Better presentation on mobile
+// FIXED: Mobile Allocation Cards - Now matches desktop tokenomics data
 function initializeMobileAllocationCards() {
     // Check if we're on mobile
     if (window.innerWidth > 768) {
@@ -672,47 +673,49 @@ function initializeMobileAllocationCards() {
         return;
     }
     
-    // Token allocation data
+    // FIXED: Token allocation data - NOW MATCHES DESKTOP VERSION EXACTLY
     const allocations = [
         {
-            category: 'Public Presale',
-            percentage: '50%',
-            tokens: '83.35M',
-            price: '$0.003',
-            vesting: 'No lock-up',
-            note: 'Available to all investors during presale'
+            category: 'Presale',
+            percentage: '16.67%',
+            tokens: '166.7M',
+            purpose: 'Raise $500K: 40% for DEX liquidity pool, 35% GPS & Beacon development, 15% legal/compliance, 10% marketing',
+            vesting: '10% at TGE, 3-month linear vest'
         },
         {
-            category: 'Ecosystem Development',
-            percentage: '20%',
-            tokens: '33.34M',
-            price: 'Reserved',
-            vesting: '24 months',
-            note: 'Platform growth, partnerships, integrations'
+            category: 'Campaign Token Pool',
+            percentage: '35%',
+            tokens: '350M',
+            purpose: 'Sold to Platform Operators and Advertisers through management system for GPS & Beacon campaigns',
+            vesting: 'Released based on demand'
         },
         {
-            category: 'Team & Advisors',
-            percentage: '15%',
-            tokens: '25M',
-            price: 'Reserved',
-            vesting: '12 months',
-            note: '6-month cliff, 18-month linear vesting'
+            category: 'Platform Operator & SDK Incentives',
+            percentage: '30%',
+            tokens: '300M',
+            purpose: 'Customer onboarding bonuses: $100 in EMBER tokens pre-loaded for each white-label app or SDK purchase to jumpstart first campaigns',
+            vesting: 'Released on demand per customer'
         },
         {
-            category: 'Marketing & Partnerships',
+            category: 'Team & Development',
             percentage: '10%',
-            tokens: '16.67M',
-            price: 'Reserved',
-            vesting: '18 months',
-            note: 'Brand awareness, strategic partnerships'
+            tokens: '100M',
+            purpose: 'Core team compensation and ongoing GPS & Beacon technology development',
+            vesting: '1-year cliff, 3-year linear vesting'
         },
         {
-            category: 'Liquidity Pool',
+            category: 'Treasury / Growth Fund',
             percentage: '5%',
-            tokens: '8.34M',
-            price: 'Reserved',
-            vesting: '3 months',
-            note: 'DEX liquidity, locked for 3 months post-presale'
+            tokens: '50M',
+            purpose: 'Future expansion, partnerships, strategic initiatives',
+            vesting: 'Governed by community voting'
+        },
+        {
+            category: 'Reserve / Burn',
+            percentage: '3.33%',
+            tokens: '33.3M',
+            purpose: 'Deflationary mechanisms, token sinks, buybacks',
+            vesting: 'Protocol-controlled'
         }
     ];
     
@@ -736,15 +739,11 @@ function initializeMobileAllocationCards() {
                     <div class="allocation-detail-value">${allocation.tokens}</div>
                 </div>
                 <div class="allocation-detail-item">
-                    <div class="allocation-detail-label">Price</div>
-                    <div class="allocation-detail-value">${allocation.price}</div>
-                </div>
-                <div class="allocation-detail-item">
                     <div class="allocation-detail-label">Vesting</div>
                     <div class="allocation-detail-value">${allocation.vesting}</div>
                 </div>
             </div>
-            <div class="allocation-card-note">${allocation.note}</div>
+            <div class="allocation-card-note">${allocation.purpose}</div>
         `;
         
         mobileContainer.appendChild(card);
@@ -753,7 +752,7 @@ function initializeMobileAllocationCards() {
     // Insert after table container
     tableContainer.parentNode.insertBefore(mobileContainer, tableContainer.nextSibling);
     
-    console.log('📱 Mobile allocation cards initialized successfully!');
+    console.log('📱 Mobile allocation cards initialized successfully - NOW MATCHES DESKTOP DATA!');
 }
 
 // Enhanced button interactions with ember effects
@@ -1126,7 +1125,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeRoadmapAnimation();
     initializeFormValidation();
     initializeTokenSaleHandler();
-    initializeMobileAllocationCards(); // NEW: Initialize mobile allocation cards
+    initializeMobileAllocationCards(); // FIXED: Now matches desktop data
     
     // Trigger stats animation when visible
     const heroObserver = new IntersectionObserver((entries) => {
@@ -1148,7 +1147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥🪙 Calculator starts at $10 minimum investment!');
     console.log('🔥💰 Development Fund Tracker initialized!');
     console.log('🤖 Claude API Chatbot initialized for $Ember Token!');
-    console.log('📱 Mobile allocation cards initialized!');
+    console.log('📱 Mobile allocation cards initialized - DATA NOW MATCHES DESKTOP!');
 });
 
 // Console welcome message
