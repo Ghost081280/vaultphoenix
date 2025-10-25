@@ -3058,26 +3058,36 @@ body {
     display: block;
 }
 
-/* NEW: EmberTokenPresale.PNG Promotional Image - Below Calculator */
+/* ===========================================
+   FIXED: EmberTokenPresale.PNG Image
+   Standalone image with hover glow effect
+   No module/container wrapper needed
+   Positioned below the presale calculator
+   =========================================== */
+
 .presale-promo-image {
+    width: 100%;
     text-align: center;
-    margin-top: 50px;
-    margin-bottom: 40px;
-    transition: all 0.3s ease;
+    margin-top: 40px;
+    padding: 0;
+    background: transparent;
+    border: none;
 }
 
 .presale-promo-image img {
     max-width: 100%;
+    width: auto;
     height: auto;
-    width: clamp(400px, 60vw, 800px);
+    max-height: 600px;
+    display: inline-block;
     border-radius: 20px;
-    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
     border: 2px solid rgba(240, 165, 0, 0.2);
 }
 
 .presale-promo-image:hover img {
-    filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.8));
+    filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.8)) drop-shadow(0 0 80px rgba(240, 165, 0, 0.5));
     transform: translateY(-5px) scale(1.02);
     border-color: rgba(240, 165, 0, 0.6);
 }
@@ -3085,23 +3095,30 @@ body {
 /* Mobile responsive for promo image */
 @media (max-width: 768px) {
     .presale-promo-image {
-        margin-top: 40px;
-        margin-bottom: 30px;
+        margin-top: 30px;
     }
     
     .presale-promo-image img {
         width: 100%;
         max-width: 100%;
-        min-width: unset;
+        max-height: 400px;
     }
 }
 
 @media (max-width: 480px) {
     .presale-promo-image {
-        margin-top: 30px;
-        margin-bottom: 20px;
+        margin-top: 25px;
+    }
+    
+    .presale-promo-image img {
+        max-height: 300px;
+        border-radius: 15px;
     }
 }
+
+/* ===========================================
+   END: Fixed Presale Promo Image Section
+   =========================================== */
 
 /* Token Purchase Agreement Section */
 .tpa-section {
