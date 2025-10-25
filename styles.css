@@ -2197,7 +2197,7 @@ body.loaded {
     z-index: 10;
 }
 
-@media (max-width: 480px) {
+@media (min-width: 480px) {
 
 /* Enhanced CTA Button */
 .cta-button {
