@@ -50,6 +50,16 @@ body.loaded {
     font-weight: 700;
     text-shadow: 0 1px 4px rgba(240, 165, 0, 0.2);
 }
+/* ============================================
+   COMBINED BENEFIT ICON STYLING
+   ============================================ */
+
+/* Add specific styling for combined benefit icons */
+.combined-benefit-icon img {
+    width: 2.5em;
+    height: 2.5em;
+    object-fit: contain;
+}
 
 /* ============================================
    UPDATED: FLOATING AI CHATBOT BUTTON - BIGGER
