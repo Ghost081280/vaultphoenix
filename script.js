@@ -295,7 +295,7 @@ async function sendMessage() {
 }
 
 // ============================================
-// ADD MESSAGE TO CHAT - FIXED DESIGN
+// ADD MESSAGE TO CHAT - WITH U BADGE
 // ============================================
 function addMessage(role, content) {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -305,18 +305,19 @@ function addMessage(role, content) {
     messageDiv.className = `chat-message ${role}-message`;
     
     if (role === 'user') {
-        // FIXED: User message - text only on right, no avatar
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-text">${escapeHtml(content)}</div>
+                <div class="message-avatar">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #d73327, #fb923c); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.2rem;">U</div>
+                </div>
             </div>
         `;
     } else {
-        // Assistant message - avatar on left, message on right
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-avatar">
-                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
                 <div class="message-text">${formatMessage(content)}</div>
             </div>
@@ -324,23 +325,11 @@ function addMessage(role, content) {
     }
     
     chatbotBody.appendChild(messageDiv);
-    scrollToBottom();
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
 }
 
 // ============================================
-// SCROLL TO BOTTOM - SMOOTH
-// ============================================
-function scrollToBottom() {
-    const chatbotBody = document.querySelector('.chatbot-body');
-    if (chatbotBody) {
-        setTimeout(() => {
-            chatbotBody.scrollTop = chatbotBody.scrollHeight;
-        }, 100);
-    }
-}
-
-// ============================================
-// TYPING INDICATOR
+// TYPING INDICATOR - UPDATED
 // ============================================
 function showTypingIndicator() {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -351,7 +340,7 @@ function showTypingIndicator() {
     typingDiv.innerHTML = `
         <div class="message-content">
             <div class="message-avatar">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div class="message-text">
                 <div class="typing-dots">
@@ -362,7 +351,7 @@ function showTypingIndicator() {
     `;
     
     chatbotBody.appendChild(typingDiv);
-    scrollToBottom();
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
 }
 
 function removeTypingIndicator() {
@@ -373,7 +362,7 @@ function removeTypingIndicator() {
 }
 
 // ============================================
-// MESSAGE FORMATTING
+// MESSAGE FORMATTING - UPDATED
 // ============================================
 function escapeHtml(text) {
     const div = document.createElement('div');
@@ -388,9 +377,12 @@ function formatMessage(text) {
     // Bold text
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
-    // Bullet points
+    // Bullet points - handle both styles
     formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
-    formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    formatted = formatted.replace(/^• (.+)$/gm, '<li>$1</li>');
+    
+    // Wrap consecutive list items in ul tags
+    formatted = formatted.replace(/(<li>.*?<\/li>\s*)+/gs, match => `<ul>${match}</ul>`);
     
     // Line breaks
     formatted = formatted.replace(/\n/g, '<br>');
