@@ -61,11 +61,9 @@ body.loaded {
     object-fit: contain;
 }
 
-/* ============================================
-   UPDATED: FLOATING AI CHATBOT BUTTON - MOBILE OPTIMIZED
+* ============================================
+   FLOATING AI CHATBOT BUTTON
    Bottom right corner with pulsing glow
-   Button: 110px, Glow: 180px
-   FIXED: Prevent zoom on mobile, proper positioning, smooth close
    ============================================ */
 
 .chatbot-button-container {
@@ -176,13 +174,12 @@ body.loaded {
     border-left: 10px solid rgba(0, 0, 0, 0.9);
 }
 
-/* FIXED: Chatbot Window - Proper Mobile Positioning & Prevent Zoom */
+/* Chatbot Window - FIXED: Contained size like Ember */
 .chatbot-window {
     position: fixed;
     bottom: 160px;
     right: 30px;
     width: 400px;
-    max-width: calc(100vw - 60px);
     max-height: calc(100vh - 200px);
     background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #451a03 100%);
     border-radius: 25px;
@@ -260,7 +257,6 @@ body.loaded {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    flex-shrink: 0;
 }
 
 .chatbot-close:hover {
@@ -273,21 +269,33 @@ body.loaded {
     min-height: 0;
     padding: 20px;
     overflow-y: auto;
-    overflow-x: hidden;
     background: rgba(0, 0, 0, 0.3);
+    /* CRITICAL: Prevent background scroll when scrolling chat */
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
 }
 
 /* ============================================
-   CHAT MESSAGE STYLING - UPDATED TO MATCH EMBER
-   User messages pushed FAR RIGHT, Claude on LEFT
-   Better contained window design
+   CHAT MESSAGE STYLING - MATCHING EMBER
+   User messages pushed to FAR RIGHT, Claude on FAR LEFT
+   With U badge for user
    ============================================ */
 
 .chat-message {
     margin-bottom: 20px;
     animation: messageSlideIn 0.3s ease-out;
     width: 100%;
+    display: flex;
+}
+
+/* Claude messages on FAR LEFT */
+.assistant-message {
+    justify-content: flex-start;
+}
+
+/* User messages pushed to FAR RIGHT */
+.user-message {
+    justify-content: flex-end;
 }
 
 @keyframes messageSlideIn {
@@ -305,19 +313,17 @@ body.loaded {
     display: flex;
     gap: 12px;
     align-items: flex-start;
-    width: 100%;
+    max-width: 85%;
 }
 
-/* Claude messages on LEFT */
+/* Claude messages - avatar on left, text on right */
 .assistant-message .message-content {
     flex-direction: row;
-    justify-content: flex-start;
 }
 
-/* User messages pushed to FAR RIGHT */
+/* User messages - avatar on right, text on left */
 .user-message .message-content {
     flex-direction: row-reverse;
-    justify-content: flex-end;
 }
 
 .message-avatar {
@@ -338,8 +344,8 @@ body.loaded {
     border-radius: 12px;
     line-height: 1.6;
     word-wrap: break-word;
-    max-width: 75%;
     width: fit-content;
+    max-width: 100%;
 }
 
 .assistant-message .message-text {
@@ -394,7 +400,7 @@ body.loaded {
 }
 
 /* ============================================
-   TYPING INDICATOR - UPDATED
+   TYPING INDICATOR
    ============================================ */
 
 .typing-indicator {
@@ -438,39 +444,17 @@ body.loaded {
     }
 }
 
-/* Mobile responsive updates */
-@media (max-width: 768px) {
-    .message-text {
-        max-width: 90%;
-        font-size: 0.9rem;
-    }
-    
-    .message-avatar {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .chat-message {
-        margin-bottom: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .message-text {
-        max-width: 95%;
-        font-size: 0.85rem;
-        padding: 10px 14px;
-    }
-    
-    .message-avatar {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .typing-dots span {
-        width: 6px;
-        height: 6px;
-    }
+/* Welcome Image in Chatbot */
+.chatbot-body img {
+    max-width: 180px;
+    max-height: 180px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 15px auto;
+    object-fit: contain;
+    border-radius: 12px;
+    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.4));
 }
 
 .chatbot-footer {
@@ -483,10 +467,8 @@ body.loaded {
 .chatbot-input-container {
     display: flex;
     gap: 10px;
-    align-items: center;
 }
 
-/* FIXED: Input - Prevent Mobile Zoom */
 .chatbot-input {
     flex: 1;
     padding: 12px 16px;
@@ -494,14 +476,13 @@ body.loaded {
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: 15px;
     color: white;
-    font-size: 16px; /* CRITICAL: 16px prevents iOS zoom */
+    /* CRITICAL: Prevent zoom on mobile */
+    font-size: 16px;
     transition: all 0.3s ease;
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
 }
 
 .chatbot-input:focus {
+    outline: none;
     border-color: rgba(240, 165, 0, 0.6);
     background: rgba(255, 255, 255, 0.15);
 }
@@ -516,8 +497,6 @@ body.loaded {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
-    flex-shrink: 0;
-    font-size: 0.9rem;
 }
 
 .chatbot-send:hover {
@@ -526,11 +505,7 @@ body.loaded {
     transform: translateY(-2px);
 }
 
-.chatbot-send:active {
-    transform: translateY(0);
-}
-
-/* Mobile Chatbot Responsive - FIXED */
+/* Mobile Chatbot Responsive */
 @media (max-width: 768px) {
     .chatbot-button-container {
         bottom: 20px;
@@ -551,63 +526,22 @@ body.loaded {
         display: none;
     }
     
-    /* FIXED: Full-screen mobile chatbot */
     .chatbot-window {
-        bottom: 0;
-        right: 0;
-        left: 0;
-        top: 0;
-        width: 100%;
-        max-width: 100%;
-        height: 100%;
-        max-height: 100%;
-        border-radius: 0;
-        border: none;
-    }
-    
-    .chatbot-window.active {
-        position: fixed;
-        z-index: 9999;
+        bottom: 120px;
+        right: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        max-height: calc(100vh - 240px);
+        position: fixed !important;
     }
     
     .chatbot-header {
         padding: 15px;
-        border-radius: 0;
-    }
-    
-    .chatbot-header-icon {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .chatbot-header-text h3 {
-        font-size: 1rem;
-    }
-    
-    .chatbot-header-text p {
-        font-size: 0.7rem;
-    }
-    
-    .chatbot-close {
-        width: 36px;
-        height: 36px;
-        font-size: 1.4rem;
     }
     
     .chatbot-body {
         padding: 15px;
-        flex: 1;
-        overflow-y: auto;
-    }
-    
-    .message-text {
-        max-width: 85% !important;
-        font-size: 0.95rem;
-    }
-    
-    .assistant-message .message-avatar {
-        width: 32px;
-        height: 32px;
+        max-height: calc(100vh - 380px);
     }
     
     .chatbot-footer {
@@ -615,15 +549,21 @@ body.loaded {
     }
     
     .chatbot-input {
-        padding: 12px 14px;
-        font-size: 16px; /* CRITICAL: Prevents zoom */
-        border-radius: 12px;
+        font-size: 16px !important;
     }
     
-    .chatbot-send {
-        padding: 12px 18px;
-        font-size: 0.85rem;
-        border-radius: 12px;
+    .message-text {
+        max-width: 90%;
+        font-size: 0.9rem;
+    }
+    
+    .message-avatar {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .chat-message {
+        margin-bottom: 15px;
     }
 }
 
@@ -638,51 +578,34 @@ body.loaded {
         height: 110px;
     }
     
-    .chatbot-header {
-        padding: 12px;
-    }
-    
-    .chatbot-header-icon {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .chatbot-header-text h3 {
-        font-size: 0.95rem;
-    }
-    
-    .chatbot-close {
-        width: 32px;
-        height: 32px;
-        font-size: 1.3rem;
+    .chatbot-window {
+        bottom: 100px;
+        max-height: calc(100vh - 220px);
     }
     
     .chatbot-body {
-        padding: 12px;
+        max-height: calc(100vh - 360px);
     }
     
     .message-text {
-        font-size: 0.9rem;
+        max-width: 95%;
+        font-size: 0.85rem;
         padding: 10px 14px;
     }
     
-    .assistant-message .message-avatar {
-        width: 30px;
-        height: 30px;
+    .message-avatar {
+        width: 28px;
+        height: 28px;
     }
     
-    .chatbot-footer {
-        padding: 12px;
+    .typing-dots span {
+        width: 6px;
+        height: 6px;
     }
     
     .chatbot-input {
-        padding: 10px 12px;
-        font-size: 16px; /* CRITICAL: Prevents zoom */
-    }
-    
-    .chatbot-send {
-        padding: 10px 16px;
-        font-size: 0.8rem;
+        font-size: 16px !important;
+        padding: 10px 14px;
     }
 }
 
