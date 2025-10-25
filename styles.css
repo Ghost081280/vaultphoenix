@@ -10,8 +10,8 @@
 /* NEW: Floating AI Chatbot Button with pulsing glow animation */
 /* UPDATED: Bigger chatbot button (110px), fixed chat window positioning, proper overflow */
 /* MOBILE OPTIMIZED: Comprehensive mobile responsiveness with proper scaling and touch targets */
-/* FIXED: Top nav button sizing to match ember-styles.css */
-/* FIXED: Hero section spacing to prevent title from hiding behind nav */
+/* REFACTORED: Removed duplicate navbar CSS - now using shared-styles.css */
+/* REFACTORED: Standardized button classes and utilizing CSS variables */
 
 * {
     margin: 0;
@@ -830,7 +830,7 @@ body.loaded {
 .hero-content {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 var(--container-padding);
     text-align: center;
     color: white;
     z-index: 10;
@@ -1203,50 +1203,7 @@ body.loaded {
     filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.6));
 }
 
-/* Navigation - FIXED: Button sizing to match ember-styles.css */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    background: rgba(15, 15, 15, 0.95);
-    backdrop-filter: blur(20px);
-    z-index: 1000;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-bottom: 1px solid rgba(215, 51, 39, 0.2);
-}
-
-.navbar.scrolled {
-    padding: 15px 20px;
-    background: rgba(15, 15, 15, 0.98);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-}
-
-.nav-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 26px;
-    font-weight: 900;
-    color: white;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.logo:hover {
-    transform: scale(1.05);
-}
-
+/* Logo and Ember Link Styles - Using shared-styles.css navbar */
 .logo-image {
     height: 80px;
     width: auto;
@@ -1259,53 +1216,7 @@ body.loaded {
     transform: scale(1.05);
 }
 
-.nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-}
-
-.nav-links a {
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    padding: 10px 0;
-    display: inline-block;
-}
-
-.nav-links a:hover {
-    color: #fb923c;
-    transform: translateY(-2px);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #d73327, #fb923c);
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 2px;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-.nav-links a:focus {
-    outline: none;
-}
-
-.nav-links a:active::after {
-    width: 0;
-}
-
-/* FIXED: Ember Link Button - Matched to ember-styles.css */
+/* Ember Link Button - Matched to shared-styles.css and ember-styles.css */
 .ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
@@ -1378,7 +1289,7 @@ body.loaded {
 
 /* REDESIGNED: Phoenix Token Evolution Section - More Compact & Professional */
 .ember-token-section-redesigned {
-    padding: 80px 40px;
+    padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
     color: white;
     position: relative;
@@ -1403,11 +1314,6 @@ body.loaded {
     0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
     33% { transform: translateY(-20px) scale(1.03) rotate(1deg); }
     66% { transform: translateY(10px) scale(0.97) rotate(-1deg); }
-}
-
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
 }
 
 .ember-token-grid-redesigned {
@@ -1883,7 +1789,7 @@ body.loaded {
 
 /* App Showcase Section */
 .app-showcase {
-    padding: 120px 40px;
+    padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
     color: white;
     position: relative;
@@ -2397,38 +2303,25 @@ body.loaded {
     z-index: 10;
 }
 
-@media (max-width: 480px) {
+/* REFACTORED: Standardized Button Classes - Using shared-styles.css variables */
 .cta-button {
-    color: orange;
-}
-}
-
-@media (max-width:320px) {
-.cta-button {
-    color: orange;
-}
-    
-}
-
-@media (max-width:1025px) {
-    /* Enhanced CTA Button */
-.cta-button {
- background: linear-gradient(135deg, #d73327, #fb923c);
+    padding: clamp(16px, 4vw, 20px) clamp(30px, 8vw, 45px);
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    background: linear-gradient(135deg, var(--ember-orange), #f39c12);
     color: white;
-    padding: 14px 28px;
     border: none;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 15px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
     text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
     position: relative;
     overflow: hidden;
-    display: inline-block;
 }
 
-}
 .cta-button::before {
     content: '';
     position: absolute;
@@ -2445,13 +2338,13 @@ body.loaded {
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(255, 107, 53, 0.5);
+    background: linear-gradient(135deg, #f39c12, var(--ember-orange));
 }
 
 .cta-button:active {
-    transform: translateY(0);
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+    transform: translateY(-1px);
 }
 
 .secondary-button {
@@ -2527,7 +2420,7 @@ body.loaded {
 
 /* Crypto Coin Section */
 .crypto-coin-section {
-    padding: 120px 40px;
+    padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
     color: white;
     position: relative;
@@ -2706,7 +2599,7 @@ body.loaded {
 
 /* Features Section */
 .features {
-    padding: 120px 40px;
+    padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
     color: white;
     position: relative;
@@ -2837,8 +2730,8 @@ body.loaded {
 .feature-crypto-gaming-icon,
 .feature-phoenix-brand-icon,
 .feature-analytics-icon {
-    width: 110px;
-    height: 110px;
+    width: var(--icon-section);
+    height: var(--icon-section);
     object-fit: contain;
     filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
     transition: all 0.3s ease;
@@ -2878,7 +2771,7 @@ body.loaded {
 
 /* Use Cases Section */
 .use-cases {
-    padding: 120px 40px;
+    padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, #7c2d12 0%, #dc2626 25%, #ea580c 50%, #f59e0b 75%, #eab308 100%);
     color: white;
     position: relative;
@@ -2932,8 +2825,8 @@ body.loaded {
     position: absolute;
     top: 15px;
     right: 15px;
-    width: 110px;
-    height: 110px;
+    width: var(--icon-section);
+    height: var(--icon-section);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2976,7 +2869,7 @@ body.loaded {
 
 /* Pricing Section */
 .pricing {
-    padding: 120px 40px;
+    padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
     color: white;
     position: relative;
@@ -3730,7 +3623,7 @@ body.loaded {
 
 /* Final CTA Section */
 .final-cta {
-    padding: 120px 40px;
+    padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
     text-align: center;
@@ -3866,8 +3759,8 @@ body.loaded {
 }
 
 .path-icon-enhanced {
-    width: 120px;
-    height: 120px;
+    width: var(--icon-section);
+    height: var(--icon-section);
     object-fit: contain;
     filter: drop-shadow(0 3px 6px rgba(240, 165, 0, 0.4));
     flex-shrink: 0;
@@ -3955,7 +3848,7 @@ body.loaded {
     font-weight: 700;
 }
 
-/* Mobile Menu */
+/* Mobile Menu - Matching shared-styles.css approach */
 .mobile-menu-btn {
     display: none;
     position: relative;
@@ -3980,7 +3873,7 @@ body.loaded {
 .footer {
     background: #0f0f0f;
     color: white;
-    padding: 60px 40px;
+    padding: 60px var(--container-padding);
     text-align: center;
 }
 
@@ -4117,10 +4010,6 @@ html {
 .mobile-menu-btn:focus {
     outline: 3px solid #d73327;
     outline-offset: 2px;
-}
-
-.nav-links a:focus {
-    outline: none;
 }
 
 ::-webkit-scrollbar {
@@ -4624,7 +4513,7 @@ html {
 
 /* ============================================
    MOBILE OPTIMIZATION - COMPREHENSIVE
-   Matching ember-styles.css mobile breakpoints
+   Matching shared-styles.css and ember-styles.css mobile breakpoints
    ============================================ */
 
 /* Responsive Design - Tablet */
@@ -4642,88 +4531,12 @@ html {
     }
 }
 
-/* FIXED: Mobile Navigation - Matched to ember-styles.css */
+/* Mobile Navigation - Matched to shared-styles.css */
 @media (max-width: 1024px) {
     .mobile-menu-btn {
         display: block !important;
         padding: 10px 14px;
         font-size: 18px;
-    }
-    
-    .nav-links {
-        display: none !important;
-    }
-
-    .nav-links.mobile-active {
-        display: flex !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        background: #0f0f0f !important;
-        z-index: 9998 !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 30px !important;
-        padding: 40px 20px !important;
-        margin: 0 !important;
-        list-style: none !important;
-    }
-
-    .nav-links.mobile-active li {
-        display: block !important;
-        width: 100% !important;
-        max-width: 300px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .nav-links.mobile-active a {
-        display: block !important;
-        width: 100% !important;
-        padding: 20px 30px !important;
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        color: #ffffff !important;
-        background: rgba(215, 51, 39, 0.9) !important;
-        border: 3px solid #d73327 !important;
-        border-radius: 12px !important;
-        text-align: center !important;
-        text-decoration: none !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
-        margin: 0 !important;
-    }
-
-    .nav-links.mobile-active a:hover,
-    .nav-links.mobile-active a:active {
-        background: #d73327 !important;
-        border-color: #fb923c !important;
-        transform: scale(1.05) !important;
-        box-shadow: 0 12px 30px rgba(215, 51, 39, 0.6) !important;
-        color: #ffffff !important;
-    }
-
-    .nav-links.mobile-active a::after {
-        display: none !important;
-    }
-    
-    .logo-image {
-        height: 60px;
-    }
-    
-    .ember-link {
-        padding: 6px 12px !important;
-        font-size: 12px !important;
-    }
-    
-    .nav-ember-coin {
-        width: 18px;
-        height: 18px;
     }
 
     .hero-steps-premium {
@@ -4870,7 +4683,7 @@ html {
     }
 }
 
-/* Mobile - Phone Size - MATCHED TO EMBER-STYLES.CSS */
+/* Mobile - Phone Size - MATCHED TO shared-styles.css AND ember-styles.css */
 @media (max-width: 768px) {
     /* FIXED: Hero spacing to prevent title hiding */
     .hero {
@@ -4888,28 +4701,6 @@ html {
 
     .social-sharing-section-compact {
         padding: 40px 20px;
-    }
-    
-    .navbar {
-        padding: 12px 15px;
-    }
-    
-    .navbar.scrolled {
-        padding: 10px 15px;
-    }
-    
-    .logo-image {
-        height: 50px;
-    }
-    
-    .ember-link {
-        padding: 5px 10px !important;
-        font-size: 11px !important;
-    }
-    
-    .nav-ember-coin {
-        width: 16px;
-        height: 16px;
     }
 
     .section-title {
@@ -5295,7 +5086,7 @@ html {
     }
 }
 
-/* Mobile - Small Phone Size - MATCHED TO EMBER-STYLES.CSS */
+/* Mobile - Small Phone Size - MATCHED TO shared-styles.css AND ember-styles.css */
 @media (max-width: 480px) {
     .hero {
         padding: 120px 0 40px;
@@ -5311,21 +5102,6 @@ html {
 
     .social-sharing-section-compact {
         padding: 35px 15px;
-    }
-    
-    .logo-image {
-        height: 45px;
-    }
-    
-    .ember-link {
-        padding: 4px 8px !important;
-        font-size: 10px !important;
-        gap: 4px !important;
-    }
-    
-    .nav-ember-coin {
-        width: 14px;
-        height: 14px;
     }
 
     .section-title {
