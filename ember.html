@@ -505,10 +505,10 @@
                 <div class="download-section">
                     <h3>Full Technical Documentation</h3>
                     <p>Complete tokenomics, GPS & Beacon integration, business model, technical architecture, and compliance framework.</p>
-                    <a href="#" class="download-button">
+                    <button class="download-button" onclick="window.showWhitepaperModal()">
                         <img src="images/PhoenixWhitepaper.PNG" alt="Whitepaper">
-                        Download Whitepaper (Coming Soon)
-                    </a>
+                        Download Whitepaper
+                    </button>
                 </div>
             </div>
         </div>
@@ -1651,6 +1651,47 @@
         </div>
     </div>
 
+    <!-- Whitepaper Modal -->
+    <div id="whitepaperModal" class="tpa-modal" style="display: none;">
+        <div class="tpa-modal-overlay" onclick="window.closeWhitepaperModal()"></div>
+        <div class="tpa-modal-content">
+            <div class="tpa-modal-header">
+                <h3>📚 Vault Phoenix Whitepaper 2025</h3>
+                <button class="tpa-modal-close" onclick="window.closeWhitepaperModal()">×</button>
+            </div>
+            <div class="tpa-modal-body">
+                <div class="tpa-preview">
+                    <h4>📖 Comprehensive Technical Documentation</h4>
+                    <p style="margin-bottom: 25px;">Our complete whitepaper provides in-depth technical analysis, business model documentation, and strategic roadmap for the Vault Phoenix AR crypto gaming platform.</p>
+                    
+                    <div style="background: rgba(240, 165, 0, 0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(240, 165, 0, 0.3); margin-bottom: 25px;">
+                        <h4 style="color: #f0a500; margin-bottom: 15px;">📄 What's Inside the Whitepaper:</h4>
+                        <ul style="margin-left: 20px; margin-bottom: 0; line-height: 1.8;">
+                            <li><strong>Token Economics:</strong> Complete $Ember tokenomics including allocation, vesting schedules, and utility mechanics</li>
+                            <li><strong>GPS & Beacon Technology:</strong> Comprehensive integration guide for outdoor (GPS) and indoor (Beacon) location tracking</li>
+                            <li><strong>Business Model:</strong> Three-stakeholder ecosystem (Platform Operators, Players, Advertisers) revenue flows</li>
+                            <li><strong>Technical Architecture:</strong> Smart contract design, management system infrastructure, SDK documentation</li>
+                            <li><strong>White-Label Platform:</strong> Deployment guide for white-label AR gaming applications</li>
+                            <li><strong>Market Analysis:</strong> Industry research, competitive landscape, growth projections</li>
+                            <li><strong>Legal & Compliance:</strong> Regulatory framework, KYC/AML procedures, security measures</li>
+                            <li><strong>Development Roadmap:</strong> Detailed quarter-by-quarter execution plan through 2026+</li>
+                            <li><strong>Security Protocols:</strong> Smart contract audits, multi-sig wallet security, risk mitigation</li>
+                            <li><strong>Case Studies:</strong> Example use cases and deployment scenarios</li>
+                        </ul>
+                    </div>
+
+                    <p style="font-weight: 600; color: #f0a500; margin-bottom: 20px; text-align: center;">📄 78-page comprehensive guide to the future of location-based AR crypto gaming</p>
+                </div>
+                
+                <div class="tpa-modal-actions">
+                    <a href="docs/Vault_Phoenix_Whitepaper_2025.pdf" target="_blank" class="tpa-download-btn" download>
+                        📥 Download Whitepaper (PDF)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ============================================
          FLOATING AI CHATBOT
          ============================================ -->
@@ -1724,10 +1765,22 @@
         alert('✅ Thank you for reviewing and agreeing to the Token Presale Agreement and Token Disclosures. You can now proceed with your investment.');
     };
 
-    // Close modal on escape key
+    // Whitepaper Modal Functions - Global scope
+    window.showWhitepaperModal = function() {
+        document.getElementById('whitepaperModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeWhitepaperModal = function() {
+        document.getElementById('whitepaperModal').style.display = 'none';
+        document.body.style.overflow = '';
+    };
+
+    // Close modals on escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             window.closeTpaModal();
+            window.closeWhitepaperModal();
         }
     });
     </script>
