@@ -3058,6 +3058,51 @@ body {
     display: block;
 }
 
+/* NEW: EmberTokenPresale.PNG Promotional Image - Below Calculator */
+.presale-promo-image {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+}
+
+.presale-promo-image img {
+    max-width: 100%;
+    height: auto;
+    width: clamp(400px, 60vw, 800px);
+    border-radius: 20px;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(240, 165, 0, 0.2);
+}
+
+.presale-promo-image:hover img {
+    filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.8));
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(240, 165, 0, 0.6);
+}
+
+/* Mobile responsive for promo image */
+@media (max-width: 768px) {
+    .presale-promo-image {
+        margin-top: 40px;
+        margin-bottom: 30px;
+    }
+    
+    .presale-promo-image img {
+        width: 100%;
+        max-width: 100%;
+        min-width: unset;
+    }
+}
+
+@media (max-width: 480px) {
+    .presale-promo-image {
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+}
+
 /* Token Purchase Agreement Section */
 .tpa-section {
     margin-bottom: 25px;
