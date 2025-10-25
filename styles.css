@@ -2205,6 +2205,15 @@ body.loaded {
     color: orange;
 }
 }
+
+@media (min-width:320px) {
+.cta-button {
+    
+    color: orange;
+}
+    
+}
+
 @media (min-width:1025px) {
     /* Enhanced CTA Button */
 .cta-button {
