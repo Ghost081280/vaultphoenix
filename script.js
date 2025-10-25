@@ -1,17 +1,14 @@
 // Vault Phoenix - Interactive JavaScript
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
-// UPDATED: Now works with NEW app screenshots from images/ folder
-// FIXED: Optimized for seamless transition from loading page
-// ADDED: Laptop gallery auto-rotation with 6 management screenshots
-// ADDED: Claude API Integration for Intelligent Chatbot
-// UPDATED: Replaced emojis with VPEmberFlame.svg and VPEmberCoin.PNG
-// UPDATED: Added favicon to chat header
-// NEW: Mobile-optimized allocation cards for better presentation
+// UPDATED: Fixed chatbot with proper message alignment and scroll prevention
+// User messages: NO avatar, pushed to far right
+// Claude messages: VP logo avatar on left
+// Background scroll prevented with overscroll-behavior
 
 // ============================================
 // CLAUDE API CONFIGURATION
 // ============================================
-const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key from https://console.anthropic.com/
+const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key
 const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
 const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 
@@ -105,17 +102,17 @@ function initializeChatbot() {
 }
 
 // ============================================
-// WELCOME MESSAGE - UPDATED WITH IMAGES
+// WELCOME MESSAGE - UPDATED WITH PROPER ALIGNMENT
 // ============================================
 function addWelcomeMessage() {
     const welcomeMsg = `
         <div class="chat-message assistant-message">
             <div class="message-content">
                 <div class="message-avatar">
-                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
                 </div>
                 <div class="message-text">
-                    <strong>Welcome to Vault Phoenix! <img src="images/VPEmberFlame.svg" alt="Flame" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle;"><img src="images/VPEmberCoin.PNG" alt="Coin" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle;"></strong><br><br>
+                    <strong>Welcome to Vault Phoenix!</strong><br><br>
                     I'm here to help you learn about our revolutionary AR crypto gaming platform. Ask me about:
                     <ul style="margin: 10px 0; padding-left: 20px;">
                         <li>White-label AR crypto gaming solutions</li>
@@ -243,7 +240,7 @@ async function sendMessage() {
 }
 
 // ============================================
-// ADD MESSAGE TO CHAT
+// ADD MESSAGE TO CHAT - FIXED ALIGNMENT
 // ============================================
 function addMessage(role, content) {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -253,19 +250,18 @@ function addMessage(role, content) {
     messageDiv.className = `chat-message ${role}-message`;
     
     if (role === 'user') {
+        // FIXED: User messages - NO avatar, just bubble on far right
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-text">${escapeHtml(content)}</div>
-                <div class="message-avatar">
-                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #d73327, #fb923c); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.2rem;">U</div>
-                </div>
             </div>
         `;
     } else {
+        // FIXED: Claude messages - Avatar on left, bubble next to it
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-avatar">
-                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
                 </div>
                 <div class="message-text">${formatMessage(content)}</div>
             </div>
@@ -277,7 +273,7 @@ function addMessage(role, content) {
 }
 
 // ============================================
-// TYPING INDICATOR
+// TYPING INDICATOR - FIXED DESIGN
 // ============================================
 function showTypingIndicator() {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -288,12 +284,10 @@ function showTypingIndicator() {
     typingDiv.innerHTML = `
         <div class="message-content">
             <div class="message-avatar">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
             </div>
-            <div class="message-text">
-                <div class="typing-dots">
-                    <span></span><span></span><span></span>
-                </div>
+            <div class="typing-dots">
+                <span></span><span></span><span></span>
             </div>
         </div>
     `;
@@ -334,6 +328,10 @@ function formatMessage(text) {
     
     return formatted;
 }
+
+// ============================================
+// REST OF THE SCRIPT.JS FILE CONTINUES...
+// ============================================
 
 // NEW: Mobile Allocation Cards - Better presentation on mobile
 function initializeMobileAllocationCards() {
