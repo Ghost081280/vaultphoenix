@@ -9,6 +9,7 @@
 /* UPDATED: GPS Technology (Orange) and Beacon Technology (Purple) color swap */
 /* NEW: Floating AI Chatbot Button with pulsing glow animation */
 /* UPDATED: Bigger chatbot button (110px), fixed chat window positioning, proper overflow */
+/* MOBILE OPTIMIZED: Comprehensive mobile responsiveness with proper scaling and touch targets */
 
 * {
     margin: 0;
@@ -351,30 +352,6 @@ body.loaded {
     }
     
     .chatbot-button {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .chatbot-glow {
-        width: 130px;
-        height: 130px;
-    }
-    
-    .chatbot-tooltip {
-        display: none;
-    }
-    
-    .chatbot-window {
-        bottom: 120px;
-        right: 20px;
-        left: 20px;
-        width: calc(100% - 40px);
-        max-height: calc(100vh - 170px);
-    }
-}
-
-@media (max-width: 480px) {
-    .chatbot-button {
         width: 70px;
         height: 70px;
     }
@@ -384,9 +361,33 @@ body.loaded {
         height: 110px;
     }
     
+    .chatbot-tooltip {
+        display: none;
+    }
+    
     .chatbot-window {
-        bottom: 100px;
-        max-height: calc(100vh - 140px);
+        bottom: 110px;
+        right: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        max-height: calc(100vh - 150px);
+    }
+}
+
+@media (max-width: 480px) {
+    .chatbot-button {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .chatbot-glow {
+        width: 95px;
+        height: 95px;
+    }
+    
+    .chatbot-window {
+        bottom: 90px;
+        max-height: calc(100vh - 120px);
     }
 }
 
@@ -4387,7 +4388,11 @@ html {
     margin: 0;
 }
 
-/* Responsive Design */
+/* ============================================
+   MOBILE OPTIMIZATION - COMPREHENSIVE
+   ============================================ */
+
+/* Responsive Design - Tablet */
 @media (max-width: 1200px) {
     .hero-steps-premium {
         gap: 20px;
@@ -4403,8 +4408,11 @@ html {
 }
 
 @media (max-width: 1024px) {
+    /* MOBILE NAVIGATION - OPTIMIZED */
     .mobile-menu-btn {
         display: block !important;
+        padding: 10px 14px;
+        font-size: 18px;
     }
     
     .nav-links {
@@ -4425,8 +4433,8 @@ html {
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-        gap: 30px !important;
-        padding: 40px 20px !important;
+        gap: 20px !important;
+        padding: 30px 20px !important;
         margin: 0 !important;
         list-style: none !important;
     }
@@ -4434,7 +4442,7 @@ html {
     .nav-links.mobile-active li {
         display: block !important;
         width: 100% !important;
-        max-width: 300px !important;
+        max-width: 280px !important;
         margin: 0 !important;
         padding: 0 !important;
     }
@@ -4442,17 +4450,17 @@ html {
     .nav-links.mobile-active a {
         display: block !important;
         width: 100% !important;
-        padding: 20px 30px !important;
-        font-size: 20px !important;
+        padding: 16px 24px !important;
+        font-size: 17px !important;
         font-weight: 700 !important;
         color: #ffffff !important;
         background: rgba(215, 51, 39, 0.9) !important;
-        border: 3px solid #d73327 !important;
+        border: 2px solid #d73327 !important;
         border-radius: 12px !important;
         text-align: center !important;
         text-decoration: none !important;
         transition: all 0.3s ease !important;
-        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
+        box-shadow: 0 6px 20px rgba(215, 51, 39, 0.4) !important;
         margin: 0 !important;
     }
 
@@ -4460,13 +4468,29 @@ html {
     .nav-links.mobile-active a:active {
         background: #d73327 !important;
         border-color: #fb923c !important;
-        transform: scale(1.05) !important;
-        box-shadow: 0 12px 30px rgba(215, 51, 39, 0.6) !important;
+        transform: scale(1.03) !important;
+        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.6) !important;
         color: #ffffff !important;
     }
 
     .nav-links.mobile-active a::after {
         display: none !important;
+    }
+    
+    /* MOBILE LOGO OPTIMIZATION */
+    .logo-image {
+        height: 60px;
+    }
+    
+    /* MOBILE "GET STARTED" BUTTON - SMALLER */
+    .ember-link {
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+    }
+    
+    .nav-ember-coin {
+        width: 18px;
+        height: 18px;
     }
 
     .hero-steps-premium {
@@ -4476,7 +4500,8 @@ html {
     
     .step-arrow {
         transform: rotate(90deg);
-        margin: 15px 0;
+        margin: 10px 0;
+        font-size: 2rem;
     }
     
     .step-premium {
@@ -4489,13 +4514,13 @@ html {
     }
     
     .hero-benefits-row {
-        gap: 25px;
-        padding: 25px 30px;
+        gap: 20px;
+        padding: 20px 25px;
     }
     
     .ember-token-grid-redesigned {
         grid-template-columns: 1fr;
-        gap: 50px;
+        gap: 40px;
     }
     
     .ember-token-right-redesigned {
@@ -4503,18 +4528,18 @@ html {
     }
     
     .phoenix-holding-coin-redesigned {
-        width: 320px;
-        height: 320px;
+        width: 280px;
+        height: 280px;
     }
     
     .ember-glow-redesigned {
-        width: 400px;
-        height: 400px;
+        width: 360px;
+        height: 360px;
     }
     
     .crypto-content {
         grid-template-columns: 1fr;
-        gap: 50px;
+        gap: 40px;
     }
     
     .crypto-image {
@@ -4523,57 +4548,57 @@ html {
 
     .showcase-content {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 50px;
     }
 
     .system-benefits {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 25px;
     }
 
     .pricing-two-column {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 35px;
     }
 
     .sdk-pricing-tiers {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 15px;
     }
 
     .revenue-examples-grid {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 25px;
     }
 
     .benefits-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 18px;
     }
 
     .journey-paths {
         grid-template-columns: 1fr;
-        gap: 25px;
+        gap: 20px;
     }
 
     .use-case-icon-container-large {
-        width: 90px;
-        height: 90px;
+        width: 85px;
+        height: 85px;
     }
 
     .web-benefits-compact {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 8px;
     }
 
     .ember-countdown-timer-redesigned {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 10px;
     }
 
     .presale-stats-redesigned {
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
     }
 
     .stat-divider-redesigned {
@@ -4582,29 +4607,29 @@ html {
     
     .technology-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 35px;
     }
     
     .technology-stats {
         grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
+        gap: 12px;
     }
     
     .combined-power-benefits {
         grid-template-columns: 1fr;
-        gap: 25px;
+        gap: 20px;
     }
     
     /* Social Sharing Responsive */
     .social-sharing-header-compact {
         flex-direction: column;
         text-align: center;
-        gap: 15px;
+        gap: 12px;
     }
     
     .social-sharing-buttons-compact {
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
     }
     
     .social-share-button-compact {
@@ -4613,283 +4638,88 @@ html {
     }
 }
 
+/* Mobile - Phone Size */
 @media (max-width: 768px) {
+    /* MOBILE SECTIONS - REDUCED PADDING */
     .hero {
-        padding: 120px 0 60px;
+        padding: 100px 0 50px;
         min-height: auto;
     }
 
     .features, .app-showcase, .use-cases, .pricing, .final-cta {
-        padding: 60px 20px;
-    }
-
-    .ember-token-section-redesigned {
-        padding: 60px 20px;
-    }
-
-    .social-sharing-section-compact {
         padding: 50px 20px;
     }
 
-    .section-title {
-        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    .ember-token-section-redesigned {
+        padding: 50px 20px;
     }
 
-    .features-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+    .social-sharing-section-compact {
+        padding: 40px 20px;
     }
     
+    /* MOBILE HEADER NAVIGATION */
+    .navbar {
+        padding: 12px 15px;
+    }
+    
+    .navbar.scrolled {
+        padding: 10px 15px;
+    }
+    
+    .logo-image {
+        height: 50px;
+    }
+    
+    .ember-link {
+        padding: 5px 10px !important;
+        font-size: 11px !important;
+    }
+    
+    .nav-ember-coin {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* MOBILE SECTION TITLES */
+    .section-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        margin-bottom: 18px;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 50px;
+    }
+
+    /* MOBILE FEATURES GRID */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .feature-card {
+        padding: 30px 25px;
+    }
+    
+    /* MOBILE HERO BENEFITS */
     .hero-benefits-row {
         flex-direction: column;
-        gap: 20px;
-        padding: 20px 25px;
+        gap: 15px;
+        padding: 18px 20px;
     }
     
     .hero-benefit-item {
         justify-content: center;
-    }
-
-    .phone-frame {
-        width: 260px;
-        height: 540px;
-        padding: 11px;
-        border-radius: 38px;
-    }
-
-    .phone-frame::before {
-        top: 18px;
-        width: 75px;
-        height: 23px;
-        border-radius: 0 0 14px 14px;
-    }
-
-    .phone-screen {
-        border-radius: 27px;
-    }
-
-    .thumbnail-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        max-width: 260px;
-    }
-
-    .simple-thumb {
-        width: 75px;
-        height: 135px;
-    }
-
-    .laptop-mockup {
-        max-width: 500px;
-    }
-
-    .thumbnail-grid-laptop {
-        max-width: 500px;
-    }
-
-    .phoenix-safe-image {
-        width: 260px;
-        height: 260px;
-    }
-
-    .phoenix-safe-glow {
-        width: 320px;
-        height: 320px;
-    }
-
-    .demo-icon-standalone {
-        width: 70px;
-        height: 70px;
-    }
-
-    .benefit-header-icon {
-        width: 90px;
-        height: 90px;
-    }
-
-    .use-case-icon-container-large {
-        width: 85px;
-        height: 85px;
-        top: 12px;
-        right: 12px;
-    }
-
-    .use-case-title {
-        padding-right: 95px;
-    }
-
-    .development-story-icon {
-        width: 110px;
-        height: 110px;
-    }
-
-    .revenue-header-icon {
-        width: 130px;
-        height: 130px;
-    }
-
-    .cta-icon-image-enhanced {
-        width: 42px !important;
-        height: 42px !important;
-    }
-
-    .compliance-icon-redesigned {
-        width: 45px;
-        height: 45px;
-    }
-
-    .journey-icon-large {
-        width: 55px;
-        height: 55px;
-    }
-
-    .path-icon-enhanced {
-        width: 90px;
-        height: 90px;
-    }
-
-    .path-header-enhanced {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .path-icon-enhanced {
-        margin-top: 0;
-    }
-
-    .solution-highlight-icon {
-        width: 70px;
-        height: 70px;
-    }
-
-    .ember-countdown-timer-redesigned {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .ember-time-value-redesigned {
-        font-size: 1.4rem;
-    }
-    
-    .technology-modules {
-        padding: 40px 30px;
-    }
-    
-    .technology-modules-title {
-        font-size: 2rem;
-    }
-    
-    .technology-modules-subtitle {
-        font-size: 1.05rem;
-        margin-bottom: 40px;
-    }
-    
-    .technology-card {
-        padding: 35px 30px;
-    }
-    
-    .technology-title {
-        font-size: 1.6rem;
-    }
-    
-    .technology-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    
-    .technology-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-    
-    .tech-stat {
-        padding: 20px 12px;
-    }
-    
-    .tech-stat-number {
-        font-size: 1.5rem;
-    }
-    
-    .combined-technology-power {
-        padding: 35px 30px;
-    }
-    
-    .combined-power-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .combined-power-icon {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .combined-power-header h4 {
-        font-size: 1.8rem;
-    }
-    
-    .combined-power-description {
-        font-size: 1.05rem;
-    }
-    
-    .social-sharing-content-compact {
-        padding: 35px 25px;
-    }
-    
-    .social-sharing-icon-compact {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .social-sharing-title-compact {
-        font-size: 1.6rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding: 100px 0 40px;
-    }
-
-    .features, .app-showcase, .use-cases, .pricing, .final-cta {
-        padding: 40px 15px;
-    }
-
-    .ember-token-section-redesigned {
-        padding: 40px 15px;
-    }
-
-    .social-sharing-section-compact {
-        padding: 40px 15px;
-    }
-
-    .section-title {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-    }
-    
-    .step-visual {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .step-number-badge {
-        width: 35px;
-        height: 35px;
-        font-size: 1.1rem;
-    }
-    
-    .hero-benefits-row {
-        padding: 15px 20px;
+        font-size: 0.9rem;
     }
     
     .benefit-icon-small {
-        width: 35px;
-        height: 35px;
+        width: 32px;
+        height: 32px;
     }
 
+    /* MOBILE PHONE GALLERY - SMALLER */
     .phone-frame {
         width: 240px;
         height: 500px;
@@ -4909,7 +4739,7 @@ html {
     }
 
     .thumbnail-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 8px;
         max-width: 240px;
     }
@@ -4918,15 +4748,23 @@ html {
         width: 70px;
         height: 125px;
     }
+    
+    .thumb-label {
+        font-size: 8px;
+        padding: 6px 2px;
+    }
 
+    /* MOBILE LAPTOP GALLERY */
     .laptop-mockup {
-        max-width: 400px;
+        max-width: 450px;
     }
 
     .thumbnail-grid-laptop {
-        max-width: 400px;
+        max-width: 450px;
+        gap: 10px;
     }
 
+    /* MOBILE ICONS - REDUCED SIZE */
     .phoenix-safe-image {
         width: 220px;
         height: 220px;
@@ -4937,50 +4775,65 @@ html {
         height: 280px;
     }
 
+    .demo-icon-standalone {
+        width: 65px;
+        height: 65px;
+    }
+    
     .demo-button-row {
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
     }
-
-    .demo-icon-standalone {
-        width: 60px;
-        height: 60px;
-    }
-
+    
     .demo-button-enhanced {
         width: 100%;
+        padding: 12px 22px;
+        font-size: 0.95rem;
     }
 
     .benefit-header-icon {
-        width: 80px;
-        height: 80px;
+        width: 85px;
+        height: 85px;
     }
 
     .use-case-icon-container-large {
-        width: 75px;
-        height: 75px;
+        width: 70px;
+        height: 70px;
         top: 10px;
         right: 10px;
     }
 
     .use-case-title {
-        padding-right: 85px;
-        font-size: 1.2rem;
+        padding-right: 80px;
+        font-size: 1.25rem;
+    }
+    
+    .use-case-card {
+        padding: 28px 20px;
     }
 
     .development-story-icon {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
+    }
+    
+    .development-story-card {
+        padding: 25px;
+        gap: 18px;
     }
 
     .revenue-header-icon {
         width: 110px;
         height: 110px;
     }
+    
+    .revenue-examples-section {
+        padding: 35px 25px;
+    }
 
     .cta-icon-image-enhanced {
-        width: 36px !important;
-        height: 36px !important;
+        width: 38px !important;
+        height: 38px !important;
     }
 
     .compliance-icon-redesigned {
@@ -4993,37 +4846,37 @@ html {
     }
 
     .journey-icon-large {
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
     }
 
     .path-icon-enhanced {
-        width: 70px;
-        height: 70px;
+        width: 85px;
+        height: 85px;
     }
 
-    .path-badge {
-        position: static;
-        display: inline-block;
-        margin-top: 10px;
-    }
-
-    .github-link-card-inline {
+    .path-header-enhanced {
         flex-direction: column;
-        padding: 15px 20px;
+        align-items: center;
         text-align: center;
+        gap: 12px;
     }
 
-    .github-icon-inline {
-        width: 40px;
-        height: 40px;
+    .path-icon-enhanced {
+        margin-top: 0;
     }
 
     .solution-highlight-icon {
-        width: 60px;
-        height: 60px;
+        width: 65px;
+        height: 65px;
+    }
+    
+    .solution-highlight-box {
+        padding: 18px;
+        gap: 15px;
     }
 
+    /* MOBILE COUNTDOWN - 2 COLUMN LAYOUT */
     .ember-countdown-timer-redesigned {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
@@ -5034,49 +4887,78 @@ html {
     }
 
     .ember-time-value-redesigned {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
-
+    
+    .ember-time-label-redesigned {
+        font-size: 0.7rem;
+    }
+    
+    /* MOBILE COUNTDOWN WIDGET */
     .ember-countdown-widget-redesigned {
-        padding: 22px;
+        padding: 20px;
+        margin-bottom: 22px;
     }
-
+    
     .countdown-header-redesigned {
         flex-direction: column;
         text-align: center;
         gap: 12px;
     }
-
+    
     .countdown-icon-redesigned {
         width: 50px;
         height: 50px;
     }
-
+    
     .ember-countdown-icon-redesigned {
         width: 40px;
         height: 40px;
     }
+    
+    .countdown-text-redesigned h3 {
+        font-size: 1.15rem;
+    }
+    
+    .countdown-text-redesigned p {
+        font-size: 0.85rem;
+    }
 
+    /* MOBILE PHOENIX COIN */
     .phoenix-holding-coin-redesigned {
-        width: 260px;
-        height: 260px;
+        width: 240px;
+        height: 240px;
     }
 
     .ember-glow-redesigned {
-        width: 320px;
-        height: 320px;
+        width: 300px;
+        height: 300px;
     }
     
+    /* MOBILE TECHNOLOGY MODULES */
     .technology-modules {
-        padding: 30px 20px;
+        padding: 35px 25px;
+        margin-top: 60px;
     }
     
     .technology-modules-title {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .technology-modules-subtitle {
+        font-size: 1rem;
+        margin-bottom: 35px;
     }
     
     .technology-card {
-        padding: 25px 20px;
+        padding: 28px 22px;
+    }
+    
+    .technology-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
     }
     
     .technology-icon-container {
@@ -5085,17 +4967,12 @@ html {
     }
     
     .technology-icon {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .technology-badge {
-        padding: 8px 18px;
-        font-size: 0.8rem;
+        width: 55px;
+        height: 55px;
     }
     
     .technology-title {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
     }
     
     .technology-description {
@@ -5103,18 +4980,476 @@ html {
     }
     
     .technology-stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+    }
+    
+    .tech-stat {
+        padding: 18px 10px;
+    }
+    
+    .tech-stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .tech-stat-label {
+        font-size: 0.75rem;
     }
     
     .technology-highlight {
         flex-direction: column;
         padding: 20px;
+        text-align: center;
     }
     
     .tech-highlight-icon {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .combined-technology-power {
+        padding: 30px 25px;
+        margin-top: 50px;
+    }
+    
+    .combined-power-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .combined-power-icon {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .combined-power-header h4 {
+        font-size: 1.65rem;
+    }
+    
+    .combined-power-description {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+    
+    .combined-benefit {
+        padding: 20px;
+        gap: 15px;
+    }
+    
+    .combined-benefit-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 2.2rem;
+    }
+    
+    .combined-benefit-text strong {
+        font-size: 1.15rem;
+    }
+    
+    .combined-benefit-text p {
+        font-size: 0.95rem;
+    }
+    
+    /* MOBILE SOCIAL SHARING */
+    .social-sharing-content-compact {
+        padding: 28px 22px;
+    }
+    
+    .social-sharing-icon-compact {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .social-sharing-title-compact {
+        font-size: 1.5rem;
+    }
+    
+    .social-sharing-subtitle-compact {
+        font-size: 0.95rem;
+    }
+    
+    .social-share-button-compact {
+        padding: 12px 22px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile - Small Phone Size */
+@media (max-width: 480px) {
+    /* EXTRA SMALL MOBILE OPTIMIZATIONS */
+    .hero {
+        padding: 90px 0 40px;
+    }
+
+    .features, .app-showcase, .use-cases, .pricing, .final-cta {
+        padding: 40px 15px;
+    }
+
+    .ember-token-section-redesigned {
+        padding: 40px 15px;
+    }
+
+    .social-sharing-section-compact {
+        padding: 35px 15px;
+    }
+    
+    /* EXTRA SMALL MOBILE HEADER */
+    .logo-image {
+        height: 45px;
+    }
+    
+    .ember-link {
+        padding: 4px 8px !important;
+        font-size: 10px !important;
+        gap: 4px !important;
+    }
+    
+    .nav-ember-coin {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* EXTRA SMALL MOBILE SECTIONS */
+    .section-title {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        margin-bottom: 15px;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 40px;
+    }
+    
+    .feature-card {
+        padding: 25px 20px;
+    }
+    
+    /* EXTRA SMALL MOBILE STEPS */
+    .step-visual {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .step-number-badge {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .step-title-premium {
+        font-size: 1.2rem;
+    }
+    
+    .step-description-premium {
+        font-size: 0.9rem;
+    }
+    
+    /* EXTRA SMALL MOBILE BENEFITS */
+    .hero-benefits-row {
+        padding: 15px 18px;
+    }
+    
+    .benefit-icon-small {
+        width: 28px;
+        height: 28px;
+    }
+
+    /* EXTRA SMALL MOBILE PHONE */
+    .phone-frame {
+        width: 220px;
+        height: 460px;
+        padding: 9px;
+        border-radius: 34px;
+    }
+
+    .phone-frame::before {
+        top: 14px;
+        width: 65px;
+        height: 20px;
+    }
+
+    .phone-screen {
+        border-radius: 25px;
+    }
+
+    .thumbnail-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        max-width: 220px;
+    }
+
+    .simple-thumb {
+        width: 65px;
+        height: 115px;
+    }
+    
+    .thumb-label {
+        font-size: 7px;
+        padding: 5px 2px;
+    }
+
+    /* EXTRA SMALL MOBILE LAPTOP */
+    .laptop-mockup {
+        max-width: 380px;
+    }
+
+    .thumbnail-grid-laptop {
+        max-width: 380px;
+        gap: 8px;
+    }
+
+    /* EXTRA SMALL MOBILE ICONS */
+    .phoenix-safe-image {
+        width: 190px;
+        height: 190px;
+    }
+
+    .phoenix-safe-glow {
+        width: 250px;
+        height: 250px;
+    }
+
+    .demo-icon-standalone {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .demo-button-enhanced {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
+
+    .benefit-header-icon {
+        width: 75px;
+        height: 75px;
+    }
+
+    .use-case-icon-container-large {
         width: 60px;
         height: 60px;
+    }
+
+    .use-case-title {
+        padding-right: 70px;
+        font-size: 1.15rem;
+    }
+    
+    .use-case-card {
+        padding: 22px 18px;
+    }
+
+    .development-story-icon {
+        width: 85px;
+        height: 85px;
+    }
+    
+    .development-story-card {
+        padding: 20px;
+        gap: 15px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .revenue-header-icon {
+        width: 95px;
+        height: 95px;
+    }
+    
+    .revenue-examples-section {
+        padding: 28px 20px;
+    }
+    
+    .revenue-examples-header h3 {
+        font-size: 1.8rem;
+    }
+    
+    .revenue-examples-header p {
+        font-size: 1rem;
+    }
+
+    .cta-icon-image-enhanced {
+        width: 34px !important;
+        height: 34px !important;
+    }
+
+    .compliance-icon-redesigned {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .compliance-disclaimer-redesigned {
+        padding: 20px;
+    }
+    
+    .compliance-disclaimer-redesigned h4 {
+        font-size: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .journey-section {
+        padding: 25px 18px;
+    }
+
+    .journey-icon-large {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .journey-title {
+        font-size: 1.4rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .path-icon-enhanced {
+        width: 70px;
+        height: 70px;
+    }
+
+    .path-badge {
+        position: static;
+        display: inline-block;
+        margin-top: 8px;
+    }
+    
+    .path-title {
+        font-size: 1.15rem;
+    }
+    
+    .path-description {
+        font-size: 0.9rem;
+    }
+
+    .github-link-card-inline {
+        flex-direction: column;
+        padding: 12px 18px;
+        text-align: center;
+    }
+
+    .github-icon-inline {
+        width: 35px;
+        height: 35px;
+    }
+
+    .solution-highlight-icon {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .solution-highlight-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .solution-highlight-content h5 {
+        font-size: 1rem;
+    }
+    
+    .solution-highlight-content p {
+        font-size: 0.9rem;
+    }
+
+    /* EXTRA SMALL MOBILE COUNTDOWN */
+    .ember-countdown-timer-redesigned {
+        gap: 8px;
+    }
+    
+    .ember-time-unit-redesigned {
+        padding: 12px 8px;
+    }
+
+    .ember-time-value-redesigned {
+        font-size: 1.25rem;
+    }
+    
+    .ember-time-label-redesigned {
+        font-size: 0.65rem;
+    }
+
+    .ember-countdown-widget-redesigned {
+        padding: 18px;
+    }
+
+    .phoenix-holding-coin-redesigned {
+        width: 210px;
+        height: 210px;
+    }
+
+    .ember-glow-redesigned {
+        width: 270px;
+        height: 270px;
+    }
+    
+    /* EXTRA SMALL MOBILE TECHNOLOGY */
+    .technology-modules {
+        padding: 28px 20px;
+    }
+    
+    .technology-modules-title {
+        font-size: 1.5rem;
+    }
+    
+    .technology-modules-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .technology-card {
+        padding: 22px 18px;
+    }
+    
+    .technology-icon-container {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .technology-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .technology-badge {
+        padding: 5px 12px;
+        font-size: 0.7rem;
+    }
+    
+    .technology-title {
+        font-size: 1.3rem;
+    }
+    
+    .technology-description {
+        font-size: 0.95rem;
+    }
+    
+    .technology-stats {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .tech-stat {
+        padding: 15px 10px;
+    }
+    
+    .tech-stat-number {
+        font-size: 1.35rem;
+    }
+    
+    .technology-highlight {
+        padding: 18px;
+    }
+    
+    .tech-highlight-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .tech-highlight-content strong {
+        font-size: 1rem;
     }
     
     .combined-technology-power {
@@ -5122,38 +5457,70 @@ html {
     }
     
     .combined-power-icon {
-        width: 70px;
-        height: 70px;
+        width: 65px;
+        height: 65px;
     }
     
     .combined-power-header h4 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+    }
+    
+    .combined-power-description {
+        font-size: 0.95rem;
     }
     
     .combined-benefit {
-        padding: 20px;
+        padding: 18px;
+        flex-direction: column;
+        text-align: center;
     }
     
     .combined-benefit-icon {
-        font-size: 2.5rem;
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
     }
     
+    .combined-benefit-text strong {
+        font-size: 1.05rem;
+    }
+    
+    .combined-benefit-text p {
+        font-size: 0.9rem;
+    }
+    
+    /* EXTRA SMALL MOBILE SOCIAL SHARING */
     .social-sharing-content-compact {
-        padding: 25px 20px;
+        padding: 22px 18px;
     }
     
     .social-sharing-icon-compact {
-        width: 50px;
-        height: 50px;
+        width: 48px;
+        height: 48px;
     }
     
     .social-sharing-title-compact {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
     
     .social-sharing-subtitle-compact {
         font-size: 0.9rem;
+    }
+    
+    .social-share-button-compact {
+        padding: 10px 18px;
+        font-size: 0.85rem;
+    }
+    
+    /* EXTRA SMALL MOBILE CTA BUTTONS */
+    .cta-path-button,
+    .cta-primary-large {
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+    
+    .cta-path-icon {
+        width: 22px;
+        height: 22px;
     }
 }
