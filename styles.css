@@ -2197,13 +2197,13 @@ body.loaded {
     z-index: 10;
 }
 
-@media only screen and (min-device-width: 480px){
+@media (max-width: 480px) {
 
 /* Enhanced CTA Button */
 .cta-button {
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
-    padding: 0px 28px;
+    padding: 5px 28px;
     border: none;
     border-radius: 30px;
     font-weight: 700;
