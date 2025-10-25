@@ -6,6 +6,7 @@
 // ADDED: Claude API Integration for Intelligent Chatbot
 // UPDATED: Replaced emojis with VPEmberFlame.svg and VPEmberCoin.PNG
 // UPDATED: Added favicon to chat header
+// NEW: Mobile-optimized allocation cards for better presentation
 
 // ============================================
 // CLAUDE API CONFIGURATION
@@ -334,6 +335,104 @@ function formatMessage(text) {
     return formatted;
 }
 
+// NEW: Mobile Allocation Cards - Better presentation on mobile
+function initializeMobileAllocationCards() {
+    // Check if we're on mobile
+    if (window.innerWidth > 768) {
+        console.log('📱 Desktop detected - skipping mobile allocation cards');
+        return;
+    }
+    
+    const tableContainer = document.querySelector('.allocation-table .table-container');
+    if (!tableContainer) {
+        console.log('📱 Table container not found - skipping mobile allocation cards');
+        return;
+    }
+    
+    // Token allocation data (if applicable to main page - adjust as needed)
+    const allocations = [
+        {
+            category: 'Public Presale',
+            percentage: '50%',
+            tokens: '83.35M',
+            price: '$0.003',
+            vesting: 'No lock-up',
+            note: 'Available to all investors during presale'
+        },
+        {
+            category: 'Ecosystem Development',
+            percentage: '20%',
+            tokens: '33.34M',
+            price: 'Reserved',
+            vesting: '24 months',
+            note: 'Platform growth, partnerships, integrations'
+        },
+        {
+            category: 'Team & Advisors',
+            percentage: '15%',
+            tokens: '25M',
+            price: 'Reserved',
+            vesting: '12 months',
+            note: '6-month cliff, 18-month linear vesting'
+        },
+        {
+            category: 'Marketing & Partnerships',
+            percentage: '10%',
+            tokens: '16.67M',
+            price: 'Reserved',
+            vesting: '18 months',
+            note: 'Brand awareness, strategic partnerships'
+        },
+        {
+            category: 'Liquidity Pool',
+            percentage: '5%',
+            tokens: '8.34M',
+            price: 'Reserved',
+            vesting: '3 months',
+            note: 'DEX liquidity, locked for 3 months post-presale'
+        }
+    ];
+    
+    // Create mobile cards container
+    const mobileContainer = document.createElement('div');
+    mobileContainer.className = 'allocation-cards-mobile';
+    
+    // Generate cards
+    allocations.forEach(allocation => {
+        const card = document.createElement('div');
+        card.className = 'allocation-card-mobile';
+        
+        card.innerHTML = `
+            <div class="allocation-card-header">
+                <div class="allocation-card-category">${allocation.category}</div>
+                <div class="allocation-card-percentage">${allocation.percentage}</div>
+            </div>
+            <div class="allocation-card-details">
+                <div class="allocation-detail-item">
+                    <div class="allocation-detail-label">Tokens</div>
+                    <div class="allocation-detail-value">${allocation.tokens}</div>
+                </div>
+                <div class="allocation-detail-item">
+                    <div class="allocation-detail-label">Price</div>
+                    <div class="allocation-detail-value">${allocation.price}</div>
+                </div>
+                <div class="allocation-detail-item">
+                    <div class="allocation-detail-label">Vesting</div>
+                    <div class="allocation-detail-value">${allocation.vesting}</div>
+                </div>
+            </div>
+            <div class="allocation-card-note">${allocation.note}</div>
+        `;
+        
+        mobileContainer.appendChild(card);
+    });
+    
+    // Insert after table container
+    tableContainer.parentNode.insertBefore(mobileContainer, tableContainer.nextSibling);
+    
+    console.log('📱 Mobile allocation cards initialized successfully!');
+}
+
 // FIXED: Immediately prevent flash by setting dark background - FASTER RESPONSE
 (function() {
     // Set background immediately before DOM loads
@@ -359,12 +458,14 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCryptoCoinImage();
     initializeEmberCoinImageV3();
     initializeChatbot(); // Initialize Claude API chatbot
+    initializeMobileAllocationCards(); // NEW: Initialize mobile allocation cards
     
     // FIXED: Create floating coins immediately without delay
     createPhoenixCryptoParticles();
     
     console.log('🔥🪙 Main page loaded seamlessly from loading screen!');
     console.log('🤖 Claude API Chatbot ready!');
+    console.log('📱 Mobile allocation cards initialized!');
 });
 
 // UPDATED: Enhanced gallery function with NEW app screenshots
