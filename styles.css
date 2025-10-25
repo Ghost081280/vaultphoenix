@@ -2202,18 +2202,7 @@ body.loaded {
 /* Enhanced CTA Button */
 .cta-button {
     background: linear-gradient(135deg, #d73327, #fb923c);
-    color: white;
-    padding: 6px 28px;
-    border: none;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 15px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
+    color: orange;
 }
 }
 @media (min-width:1025px) {
