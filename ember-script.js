@@ -257,8 +257,8 @@ async function sendMessage() {
     }
 }
 
-/ ============================================
-// ADD MESSAGE TO CHAT - UPDATED
+// ============================================
+// ADD MESSAGE TO CHAT
 // ============================================
 function addMessage(role, content) {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -271,6 +271,9 @@ function addMessage(role, content) {
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-text">${escapeHtml(content)}</div>
+                <div class="message-avatar">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #d73327, #fb923c); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.2rem;">U</div>
+                </div>
             </div>
         `;
     } else {
@@ -289,7 +292,7 @@ function addMessage(role, content) {
 }
 
 // ============================================
-// TYPING INDICATOR - UPDATED
+// TYPING INDICATOR
 // ============================================
 function showTypingIndicator() {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -322,7 +325,7 @@ function removeTypingIndicator() {
 }
 
 // ============================================
-// MESSAGE FORMATTING - UPDATED
+// MESSAGE FORMATTING
 // ============================================
 function escapeHtml(text) {
     const div = document.createElement('div');
@@ -337,12 +340,9 @@ function formatMessage(text) {
     // Bold text
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
-    // Bullet points - handle both styles
+    // Bullet points
     formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
-    formatted = formatted.replace(/^• (.+)$/gm, '<li>$1</li>');
-    
-    // Wrap consecutive list items in ul tags
-    formatted = formatted.replace(/(<li>.*?<\/li>\s*)+/gs, match => `<ul>${match}</ul>`);
+    formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
     
     // Line breaks
     formatted = formatted.replace(/\n/g, '<br>');

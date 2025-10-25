@@ -61,10 +61,49 @@ body.loaded {
     object-fit: contain;
 }
 
-* ============================================
-   FLOATING AI CHATBOT BUTTON
+/* ============================================
+   UPDATED: FLOATING AI CHATBOT BUTTON - BIGGER
    Bottom right corner with pulsing glow
+   Button: 110px, Glow: 180px
    ============================================ */
+
+.chatbot-button-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9997;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chatbot-button-container:hover {
+    transform: scale(1.05) translateY(-3px);
+}
+
+.chatbot-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(215, 51, 39, 0.4) 30%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: chatbotGlowPulse 2.5s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes chatbotGlowPulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1); 
+        opacity: 0.7; 
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.2); 
+        opacity: 1; 
+    }
+}
 
 .chatbot-button {
     position: relative;
@@ -136,7 +175,7 @@ body.loaded {
     border-left: 10px solid rgba(0, 0, 0, 0.9);
 }
 
-/* Chatbot Window - FIXED: Contained size like Ember */
+/* UPDATED: Chatbot Window - Fixed Positioning & Overflow */
 .chatbot-window {
     position: fixed;
     bottom: 160px;
@@ -232,178 +271,28 @@ body.loaded {
     padding: 20px;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.3);
-    /* CRITICAL: Prevent background scroll when scrolling chat */
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
 }
 
-/* ============================================
-   CHAT MESSAGE STYLING - MATCHING EMBER
-   User messages pushed to FAR RIGHT, Claude on FAR LEFT
-   With U badge for user
-   ============================================ */
-
-.chat-message {
-    margin-bottom: 20px;
-    animation: messageSlideIn 0.3s ease-out;
-    width: 100%;
-    display: flex;
-}
-
-/* Claude messages on FAR LEFT */
-.assistant-message {
-    justify-content: flex-start;
-}
-
-/* User messages pushed to FAR RIGHT */
-.user-message {
-    justify-content: flex-end;
-}
-
-@keyframes messageSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.message-content {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    max-width: 85%;
-}
-
-/* Claude messages - avatar on left, text on right */
-.assistant-message .message-content {
-    flex-direction: row;
-}
-
-/* User messages - avatar on right, text on left */
-.user-message .message-content {
-    flex-direction: row-reverse;
-}
-
-.message-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: rgba(215, 51, 39, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-}
-
-.message-text {
+/* Chatbot Message Styling */
+.chatbot-message {
+    margin-bottom: 15px;
     padding: 12px 16px;
     border-radius: 12px;
     line-height: 1.6;
-    word-wrap: break-word;
-    width: fit-content;
-    max-width: 100%;
 }
 
-.assistant-message .message-text {
+.bot-message {
     background: rgba(215, 51, 39, 0.15);
     border: 1px solid rgba(215, 51, 39, 0.3);
     color: rgba(255, 255, 255, 0.95);
-    border-radius: 12px 12px 12px 4px;
 }
 
-.user-message .message-text {
+.user-message {
     background: rgba(240, 165, 0, 0.2);
     border: 1px solid rgba(240, 165, 0, 0.3);
     color: rgba(255, 255, 255, 0.95);
-    border-radius: 12px 12px 4px 12px;
-}
-
-/* Message text formatting */
-.message-text strong {
-    color: #f0a500;
-    font-weight: 700;
-}
-
-.message-text ul {
-    margin: 10px 0;
-    padding-left: 20px;
-    list-style-type: none;
-}
-
-.message-text li {
-    position: relative;
-    padding-left: 0;
-    margin-bottom: 8px;
-    line-height: 1.5;
-}
-
-.message-text li::before {
-    content: '•';
-    color: #f0a500;
-    font-weight: bold;
-    position: absolute;
-    left: -15px;
-}
-
-.message-text a {
-    color: #f0a500;
-    text-decoration: underline;
-    transition: color 0.3s ease;
-}
-
-.message-text a:hover {
-    color: #fb923c;
-}
-
-/* ============================================
-   TYPING INDICATOR
-   ============================================ */
-
-.typing-indicator {
-    animation: messageSlideIn 0.3s ease-out;
-}
-
-.typing-dots {
-    display: flex;
-    gap: 4px;
-    padding: 8px 12px;
-}
-
-.typing-dots span {
-    width: 8px;
-    height: 8px;
-    background: #f0a500;
-    border-radius: 50%;
-    animation: typingBounce 1.4s infinite ease-in-out;
-}
-
-.typing-dots span:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.typing-dots span:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.typing-dots span:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes typingBounce {
-    0%, 60%, 100% {
-        transform: translateY(0);
-        opacity: 0.7;
-    }
-    30% {
-        transform: translateY(-10px);
-        opacity: 1;
-    }
+    margin-left: auto;
+    max-width: 80%;
 }
 
 /* Welcome Image in Chatbot */
@@ -438,8 +327,7 @@ body.loaded {
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: 15px;
     color: white;
-    /* CRITICAL: Prevent zoom on mobile */
-    font-size: 16px;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
 }
 
@@ -467,7 +355,7 @@ body.loaded {
     transform: translateY(-2px);
 }
 
-/* Mobile Chatbot Responsive */
+/* Mobile Chatbot Responsive - MATCHED TO EMBER-STYLES.CSS */
 @media (max-width: 768px) {
     .chatbot-button-container {
         bottom: 20px;
@@ -494,7 +382,6 @@ body.loaded {
         left: 20px;
         width: calc(100% - 40px);
         max-height: calc(100vh - 240px);
-        position: fixed !important;
     }
     
     .chatbot-header {
@@ -508,24 +395,6 @@ body.loaded {
     
     .chatbot-footer {
         padding: 15px;
-    }
-    
-    .chatbot-input {
-        font-size: 16px !important;
-    }
-    
-    .message-text {
-        max-width: 90%;
-        font-size: 0.9rem;
-    }
-    
-    .message-avatar {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .chat-message {
-        margin-bottom: 15px;
     }
 }
 
@@ -547,27 +416,6 @@ body.loaded {
     
     .chatbot-body {
         max-height: calc(100vh - 360px);
-    }
-    
-    .message-text {
-        max-width: 95%;
-        font-size: 0.85rem;
-        padding: 10px 14px;
-    }
-    
-    .message-avatar {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .typing-dots span {
-        width: 6px;
-        height: 6px;
-    }
-    
-    .chatbot-input {
-        font-size: 16px !important;
-        padding: 10px 14px;
     }
 }
 
