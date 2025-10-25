@@ -10,6 +10,8 @@
 /* NEW: Floating AI Chatbot Button with pulsing glow animation */
 /* UPDATED: Bigger chatbot button (110px), fixed chat window positioning, proper overflow */
 /* MOBILE OPTIMIZED: Comprehensive mobile responsiveness with proper scaling and touch targets */
+/* FIXED: Top nav button sizing to match ember-styles.css */
+/* FIXED: Hero section spacing to prevent title from hiding behind nav */
 
 * {
     margin: 0;
@@ -52,8 +54,7 @@ body.loaded {
 /* ============================================
    UPDATED: FLOATING AI CHATBOT BUTTON - BIGGER
    Bottom right corner with pulsing glow
-   Button: 110px (was 90px)
-   Glow: 180px (was 140px)
+   Button: 110px, Glow: 180px
    ============================================ */
 
 .chatbot-button-container {
@@ -344,13 +345,50 @@ body.loaded {
     transform: translateY(-2px);
 }
 
-/* Mobile Chatbot Responsive */
+/* Mobile Chatbot Responsive - MATCHED TO EMBER-STYLES.CSS */
 @media (max-width: 768px) {
     .chatbot-button-container {
         bottom: 20px;
         right: 20px;
     }
     
+    .chatbot-button {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .chatbot-glow {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .chatbot-tooltip {
+        display: none;
+    }
+    
+    .chatbot-window {
+        bottom: 120px;
+        right: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        max-height: calc(100vh - 240px);
+    }
+    
+    .chatbot-header {
+        padding: 15px;
+    }
+    
+    .chatbot-body {
+        padding: 15px;
+        max-height: calc(100vh - 380px);
+    }
+    
+    .chatbot-footer {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
     .chatbot-button {
         width: 70px;
         height: 70px;
@@ -361,33 +399,13 @@ body.loaded {
         height: 110px;
     }
     
-    .chatbot-tooltip {
-        display: none;
-    }
-    
     .chatbot-window {
-        bottom: 110px;
-        right: 20px;
-        left: 20px;
-        width: calc(100% - 40px);
-        max-height: calc(100vh - 150px);
-    }
-}
-
-@media (max-width: 480px) {
-    .chatbot-button {
-        width: 60px;
-        height: 60px;
+        bottom: 100px;
+        max-height: calc(100vh - 220px);
     }
     
-    .chatbot-glow {
-        width: 95px;
-        height: 95px;
-    }
-    
-    .chatbot-window {
-        bottom: 90px;
-        max-height: calc(100vh - 120px);
+    .chatbot-body {
+        max-height: calc(100vh - 360px);
     }
 }
 
@@ -574,7 +592,7 @@ body.loaded {
     letter-spacing: 0.3px;
 }
 
-/* Hero Section - PREMIUM REDESIGN */
+/* Hero Section - PREMIUM REDESIGN - FIXED: Added proper spacing */
 .hero {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
@@ -583,7 +601,7 @@ body.loaded {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding-top: 140px;
+    padding-top: 160px;
     padding-bottom: 80px;
 }
 
@@ -985,7 +1003,7 @@ body.loaded {
     filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.6));
 }
 
-/* Navigation */
+/* Navigation - FIXED: Button sizing to match ember-styles.css */
 .navbar {
     position: fixed;
     top: 0;
@@ -1087,6 +1105,7 @@ body.loaded {
     width: 0;
 }
 
+/* FIXED: Ember Link Button - Matched to ember-styles.css */
 .ember-link {
     background: linear-gradient(135deg, #d73327, #fb923c) !important;
     color: white !important;
@@ -4390,6 +4409,7 @@ html {
 
 /* ============================================
    MOBILE OPTIMIZATION - COMPREHENSIVE
+   Matching ember-styles.css mobile breakpoints
    ============================================ */
 
 /* Responsive Design - Tablet */
@@ -4407,8 +4427,8 @@ html {
     }
 }
 
+/* FIXED: Mobile Navigation - Matched to ember-styles.css */
 @media (max-width: 1024px) {
-    /* MOBILE NAVIGATION - OPTIMIZED */
     .mobile-menu-btn {
         display: block !important;
         padding: 10px 14px;
@@ -4433,8 +4453,8 @@ html {
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-        gap: 20px !important;
-        padding: 30px 20px !important;
+        gap: 30px !important;
+        padding: 40px 20px !important;
         margin: 0 !important;
         list-style: none !important;
     }
@@ -4442,7 +4462,7 @@ html {
     .nav-links.mobile-active li {
         display: block !important;
         width: 100% !important;
-        max-width: 280px !important;
+        max-width: 300px !important;
         margin: 0 !important;
         padding: 0 !important;
     }
@@ -4450,17 +4470,17 @@ html {
     .nav-links.mobile-active a {
         display: block !important;
         width: 100% !important;
-        padding: 16px 24px !important;
-        font-size: 17px !important;
+        padding: 20px 30px !important;
+        font-size: 20px !important;
         font-weight: 700 !important;
         color: #ffffff !important;
         background: rgba(215, 51, 39, 0.9) !important;
-        border: 2px solid #d73327 !important;
+        border: 3px solid #d73327 !important;
         border-radius: 12px !important;
         text-align: center !important;
         text-decoration: none !important;
         transition: all 0.3s ease !important;
-        box-shadow: 0 6px 20px rgba(215, 51, 39, 0.4) !important;
+        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4) !important;
         margin: 0 !important;
     }
 
@@ -4468,8 +4488,8 @@ html {
     .nav-links.mobile-active a:active {
         background: #d73327 !important;
         border-color: #fb923c !important;
-        transform: scale(1.03) !important;
-        box-shadow: 0 8px 25px rgba(215, 51, 39, 0.6) !important;
+        transform: scale(1.05) !important;
+        box-shadow: 0 12px 30px rgba(215, 51, 39, 0.6) !important;
         color: #ffffff !important;
     }
 
@@ -4477,12 +4497,10 @@ html {
         display: none !important;
     }
     
-    /* MOBILE LOGO OPTIMIZATION */
     .logo-image {
         height: 60px;
     }
     
-    /* MOBILE "GET STARTED" BUTTON - SMALLER */
     .ember-link {
         padding: 6px 12px !important;
         font-size: 12px !important;
@@ -4620,7 +4638,6 @@ html {
         gap: 20px;
     }
     
-    /* Social Sharing Responsive */
     .social-sharing-header-compact {
         flex-direction: column;
         text-align: center;
@@ -4638,11 +4655,11 @@ html {
     }
 }
 
-/* Mobile - Phone Size */
+/* Mobile - Phone Size - MATCHED TO EMBER-STYLES.CSS */
 @media (max-width: 768px) {
-    /* MOBILE SECTIONS - REDUCED PADDING */
+    /* FIXED: Hero spacing to prevent title hiding */
     .hero {
-        padding: 100px 0 50px;
+        padding: 140px 0 50px;
         min-height: auto;
     }
 
@@ -4658,7 +4675,6 @@ html {
         padding: 40px 20px;
     }
     
-    /* MOBILE HEADER NAVIGATION */
     .navbar {
         padding: 12px 15px;
     }
@@ -4681,7 +4697,6 @@ html {
         height: 16px;
     }
 
-    /* MOBILE SECTION TITLES */
     .section-title {
         font-size: clamp(1.8rem, 6vw, 2.5rem);
         margin-bottom: 18px;
@@ -4692,7 +4707,6 @@ html {
         margin-bottom: 50px;
     }
 
-    /* MOBILE FEATURES GRID */
     .features-grid {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -4702,7 +4716,6 @@ html {
         padding: 30px 25px;
     }
     
-    /* MOBILE HERO BENEFITS */
     .hero-benefits-row {
         flex-direction: column;
         gap: 15px;
@@ -4719,7 +4732,6 @@ html {
         height: 32px;
     }
 
-    /* MOBILE PHONE GALLERY - SMALLER */
     .phone-frame {
         width: 240px;
         height: 500px;
@@ -4754,7 +4766,6 @@ html {
         padding: 6px 2px;
     }
 
-    /* MOBILE LAPTOP GALLERY */
     .laptop-mockup {
         max-width: 450px;
     }
@@ -4764,7 +4775,6 @@ html {
         gap: 10px;
     }
 
-    /* MOBILE ICONS - REDUCED SIZE */
     .phoenix-safe-image {
         width: 220px;
         height: 220px;
@@ -4876,7 +4886,6 @@ html {
         gap: 15px;
     }
 
-    /* MOBILE COUNTDOWN - 2 COLUMN LAYOUT */
     .ember-countdown-timer-redesigned {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
@@ -4894,7 +4903,6 @@ html {
         font-size: 0.7rem;
     }
     
-    /* MOBILE COUNTDOWN WIDGET */
     .ember-countdown-widget-redesigned {
         padding: 20px;
         margin-bottom: 22px;
@@ -4924,7 +4932,6 @@ html {
         font-size: 0.85rem;
     }
 
-    /* MOBILE PHOENIX COIN */
     .phoenix-holding-coin-redesigned {
         width: 240px;
         height: 240px;
@@ -4935,7 +4942,6 @@ html {
         height: 300px;
     }
     
-    /* MOBILE TECHNOLOGY MODULES */
     .technology-modules {
         padding: 35px 25px;
         margin-top: 60px;
@@ -5051,7 +5057,6 @@ html {
         font-size: 0.95rem;
     }
     
-    /* MOBILE SOCIAL SHARING */
     .social-sharing-content-compact {
         padding: 28px 22px;
     }
@@ -5075,11 +5080,10 @@ html {
     }
 }
 
-/* Mobile - Small Phone Size */
+/* Mobile - Small Phone Size - MATCHED TO EMBER-STYLES.CSS */
 @media (max-width: 480px) {
-    /* EXTRA SMALL MOBILE OPTIMIZATIONS */
     .hero {
-        padding: 90px 0 40px;
+        padding: 120px 0 40px;
     }
 
     .features, .app-showcase, .use-cases, .pricing, .final-cta {
@@ -5094,7 +5098,6 @@ html {
         padding: 35px 15px;
     }
     
-    /* EXTRA SMALL MOBILE HEADER */
     .logo-image {
         height: 45px;
     }
@@ -5110,7 +5113,6 @@ html {
         height: 14px;
     }
 
-    /* EXTRA SMALL MOBILE SECTIONS */
     .section-title {
         font-size: clamp(1.5rem, 6vw, 2rem);
         margin-bottom: 15px;
@@ -5125,7 +5127,6 @@ html {
         padding: 25px 20px;
     }
     
-    /* EXTRA SMALL MOBILE STEPS */
     .step-visual {
         width: 90px;
         height: 90px;
@@ -5147,7 +5148,6 @@ html {
         font-size: 0.9rem;
     }
     
-    /* EXTRA SMALL MOBILE BENEFITS */
     .hero-benefits-row {
         padding: 15px 18px;
     }
@@ -5157,7 +5157,6 @@ html {
         height: 28px;
     }
 
-    /* EXTRA SMALL MOBILE PHONE */
     .phone-frame {
         width: 220px;
         height: 460px;
@@ -5191,7 +5190,6 @@ html {
         padding: 5px 2px;
     }
 
-    /* EXTRA SMALL MOBILE LAPTOP */
     .laptop-mockup {
         max-width: 380px;
     }
@@ -5201,7 +5199,6 @@ html {
         gap: 8px;
     }
 
-    /* EXTRA SMALL MOBILE ICONS */
     .phoenix-safe-image {
         width: 190px;
         height: 190px;
@@ -5355,7 +5352,6 @@ html {
         font-size: 0.9rem;
     }
 
-    /* EXTRA SMALL MOBILE COUNTDOWN */
     .ember-countdown-timer-redesigned {
         gap: 8px;
     }
@@ -5386,7 +5382,6 @@ html {
         height: 270px;
     }
     
-    /* EXTRA SMALL MOBILE TECHNOLOGY */
     .technology-modules {
         padding: 28px 20px;
     }
@@ -5489,7 +5484,6 @@ html {
         font-size: 0.9rem;
     }
     
-    /* EXTRA SMALL MOBILE SOCIAL SHARING */
     .social-sharing-content-compact {
         padding: 22px 18px;
     }
@@ -5512,7 +5506,6 @@ html {
         font-size: 0.85rem;
     }
     
-    /* EXTRA SMALL MOBILE CTA BUTTONS */
     .cta-path-button,
     .cta-primary-large {
         padding: 14px 24px;
