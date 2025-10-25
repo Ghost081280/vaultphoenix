@@ -2197,6 +2197,71 @@ body.loaded {
     z-index: 10;
 }
 
+@media only screen and (min-device-width: 480px) {
+
+/* Enhanced CTA Button */
+.cta-button {
+    background: linear-gradient(135deg, #d73327, #fb923c);
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5);
+}
+
+.cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+}
+
+.secondary-button {
+    background: transparent !important;
+    border: 3px solid white !important;
+    color: white !important;
+}
+
+.secondary-button:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: white !important;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+}
+}
+
 /* Enhanced CTA Button */
 .cta-button {
     background: linear-gradient(135deg, #d73327, #fb923c);
