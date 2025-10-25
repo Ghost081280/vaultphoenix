@@ -49,6 +49,10 @@
     
     <link rel="icon" href="images/PhoenixBullseye.PNG" type="image/png">
     <link rel="apple-touch-icon" href="images/PhoenixBullseye.PNG">
+    
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="shared-styles.css">
+    <!-- Page-specific Styles -->
     <link rel="stylesheet" href="styles.css">
     
     <!-- Structured Data (JSON-LD) - Organization -->
@@ -225,7 +229,7 @@
                     $Ember Token
                 </a></li>
             </ul>
-           <button class="mobile-menu-btn">☰</button>
+           <button class="mobile-menu-btn" aria-label="Toggle mobile navigation menu">☰</button>
         </div>
     </nav>
 
@@ -283,9 +287,9 @@
                 <div class="cta-path-container">
                     <div class="cta-path whitelabel-path">
                         <div class="path-badge">For Marketers & Agencies</div>
-                        <h4 class="path-title">No-Code App Builder</h4>
+                        <h3 class="path-title">No-Code App Builder</h3>
                         <p class="path-description">Launch fully-branded AR crypto campaigns instantly—no technical skills required.</p>
-                        <a href="mailto:contact@vaultphoenix.com?subject=White-Label App Builder&body=I'm interested in the no-code white-label app builder. Please send me details about getting started." class="cta-path-button whitelabel-button">
+                        <a href="mailto:contact@vaultphoenix.com?subject=White-Label App Builder&body=I'm interested in the no-code white-label app builder. Please send me details about getting started." class="cta-path-button whitelabel-button" aria-label="Contact us about white-label app builder">
                             <img src="images/VPLogoNoText.PNG" alt="White-Label" class="cta-path-icon">
                             <span>Launch White-Label App</span>
                         </a>
@@ -293,9 +297,9 @@
                     
                     <div class="cta-path developer-path">
                         <div class="path-badge">For Developers & Tech Teams</div>
-                        <h4 class="path-title">SDK Integration</h4>
+                        <h3 class="path-title">SDK Integration</h3>
                         <p class="path-description">Integrate our AR crypto gaming engine into your existing platform with full API control.</p>
-                        <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" class="cta-path-button developer-button">
+                        <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" rel="noopener noreferrer" class="cta-path-button developer-button" aria-label="View SDK documentation on GitHub">
                             <svg class="cta-github-icon-inline" height="24" viewBox="0 0 16 16" width="24" fill="currentColor">
                                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                             </svg>
@@ -306,7 +310,7 @@
                 
                 <!-- Secondary CTA -->
                 <div class="hero-secondary-cta fade-in stagger-3">
-                    <a href="#showcase" class="secondary-cta-link">
+                    <a href="#showcase" class="secondary-cta-link" aria-label="Scroll to see how the platform works">
                         <span>See How It Works</span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -400,7 +404,7 @@
 
                         <!-- Join Presale CTA Button -->
                         <div class="presale-cta-redesigned">
-                            <a href="ember.html#presale" class="join-presale-button-redesigned">
+                            <a href="ember.html#presale" class="join-presale-button-redesigned" aria-label="Learn more about $Ember Token presale">
                                 <img src="images/VPEmberFlame.svg" alt="Ember Flame" class="cta-icon-image-redesigned">
                                 <span class="cta-text-redesigned">$Ember Token</span>
                             </a>
@@ -409,21 +413,21 @@
 
                     <!-- Enhanced Highlights -->
                     <div class="ember-highlights-redesigned scroll-reveal stagger-4">
-                        <a href="ember.html#whitepaper" class="ember-highlight-redesigned">
+                        <a href="ember.html#whitepaper" class="ember-highlight-redesigned" aria-label="View technical documentation">
                             <span class="highlight-emoji-redesigned">
                                 <img src="images/PhoenixWhitepaper.PNG" alt="Whitepaper" class="highlight-icon-image-redesigned">
                             </span>
                             <span class="highlight-text-redesigned">Technical Documentation</span>
                             <span class="highlight-arrow-redesigned">→</span>
                         </a>
-                        <a href="ember.html#roadmap" class="ember-highlight-redesigned">
+                        <a href="ember.html#roadmap" class="ember-highlight-redesigned" aria-label="View development roadmap">
                             <span class="highlight-emoji-redesigned">
                                 <img src="images/EmberRoadmap.PNG" alt="Roadmap" class="highlight-icon-image-redesigned">
                             </span>
                             <span class="highlight-text-redesigned">Development Roadmap</span>
                             <span class="highlight-arrow-redesigned">→</span>
                         </a>
-                        <a href="ember.html#team" class="ember-highlight-redesigned">
+                        <a href="ember.html#team" class="ember-highlight-redesigned" aria-label="Meet the Phoenix Builders team">
                             <span class="highlight-emoji-redesigned">
                                 <img src="images/PhoenixGoldTrophy.PNG" alt="Phoenix Builders" class="highlight-icon-image-redesigned">
                             </span>
@@ -443,14 +447,14 @@
                     
                     <!-- UPDATED: Professional Legal & Financial Oversight -->
                     <div class="compliance-disclaimer-redesigned scroll-reveal stagger-4">
-                        <h4>
+                        <h3>
                             <img src="images/EmberCoinLock.PNG" alt="Security" class="compliance-icon-redesigned">
                             Regulatory Compliance
-                        </h4>
+                        </h3>
                         <p>Vault Phoenix operates under comprehensive regulatory oversight with institutional-grade compliance procedures, multi-signature treasury management, and professional legal frameworks ensuring maximum security and transparency.</p>
                         
                         <div class="compliance-cta">
-                            <a href="ember.html#legal-compliance-section" class="compliance-button" target="_blank">
+                            <a href="ember.html#legal-compliance-section" class="compliance-button" target="_blank" rel="noopener noreferrer" aria-label="View compliance details">
                                 View Compliance Details
                             </a>
                         </div>
@@ -473,21 +477,21 @@
                 </div>
                 
                 <div class="social-sharing-buttons-compact">
-                    <a href="https://twitter.com/intent/tweet?text=%F0%9F%94%A5%20Check%20out%20Vault%20Phoenix%20-%20Revolutionary%20AR%20crypto%20gaming%20platform!%20Launch%20white-label%20campaigns%20in%2024hrs%20with%20GPS%20%26%20Beacon%20tech.%20%24100%20FREE%20tokens!%20%F0%9F%9A%80%20%23ARGaming%20%23CryptoMarketing%20%23VaultPhoenix&url=https%3A%2F%2Fvaultphoenix.com%2Fmain.html" target="_blank" class="social-share-button-compact" aria-label="Share on X (Twitter)">
+                    <a href="https://twitter.com/intent/tweet?text=%F0%9F%94%A5%20Check%20out%20Vault%20Phoenix%20-%20Revolutionary%20AR%20crypto%20gaming%20platform!%20Launch%20white-label%20campaigns%20in%2024hrs%20with%20GPS%20%26%20Beacon%20tech.%20%24100%20FREE%20tokens!%20%F0%9F%9A%80%20%23ARGaming%20%23CryptoMarketing%20%23VaultPhoenix&url=https%3A%2F%2Fvaultphoenix.com%2Fmain.html" target="_blank" rel="noopener noreferrer" class="social-share-button-compact" aria-label="Share Vault Phoenix on X (Twitter)">
                         <svg class="social-share-icon-compact" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                         </svg>
                         <span class="social-share-text-compact">Share on X</span>
                     </a>
                     
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fvaultphoenix.com%2Fmain.html" target="_blank" class="social-share-button-compact" aria-label="Share on Facebook">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fvaultphoenix.com%2Fmain.html" target="_blank" rel="noopener noreferrer" class="social-share-button-compact" aria-label="Share Vault Phoenix on Facebook">
                         <svg class="social-share-icon-compact" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
                         <span class="social-share-text-compact">Share on Facebook</span>
                     </a>
                     
-                    <a href="https://t.me/share/url?url=https%3A%2F%2Fvaultphoenix.com%2Fmain.html&text=%F0%9F%94%A5%20Vault%20Phoenix%20-%20Revolutionary%20AR%20crypto%20gaming%20platform!%20Launch%20campaigns%20in%2024hrs%20with%20GPS%20%26%20Beacon%20technology" target="_blank" class="social-share-button-compact" aria-label="Share on Telegram">
+                    <a href="https://t.me/share/url?url=https%3A%2F%2Fvaultphoenix.com%2Fmain.html&text=%F0%9F%94%A5%20Vault%20Phoenix%20-%20Revolutionary%20AR%20crypto%20gaming%20platform!%20Launch%20campaigns%20in%2024hrs%20with%20GPS%20%26%20Beacon%20technology" target="_blank" rel="noopener noreferrer" class="social-share-button-compact" aria-label="Share Vault Phoenix on Telegram">
                         <svg class="social-share-icon-compact" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                             <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                         </svg>
@@ -517,7 +521,7 @@
                                 <img src="images/VPEmberCoin.PNG" alt="Crypto Coin" class="custom-coin-icon-large">
                             </span>
                             <div class="benefit-content">
-                                <h4>Collectible Crypto Coins</h4>
+                                <h3>Collectible Crypto Coins</h3>
                                 <p>Players hunt for <span class="golden-highlight">rare crypto coins</span> at partner locations, creating addiction-level engagement</p>
                             </div>
                         </div>
@@ -526,7 +530,7 @@
                                 <img src="images/PhoenixBullseye.PNG" alt="Strategic Placement" class="custom-placement-icon-large">
                             </span>
                             <div class="benefit-content">
-                                <h4>Strategic Placement</h4>
+                                <h3>Strategic Placement</h3>
                                 <p>Coins placed at <span class="golden-highlight">high-value business locations</span> drive guaranteed foot traffic and sales</p>
                             </div>
                         </div>
@@ -535,7 +539,7 @@
                                 <img src="images/EmberCoinMoneyBag.PNG" alt="Revenue Generation" class="custom-revenue-icon-extra-large">
                             </span>
                             <div class="benefit-content">
-                                <h4>Revenue Generation</h4>
+                                <h3>Revenue Generation</h3>
                                 <p>Location partners pay <span class="golden-highlight">premium rates</span> for crypto coin placement and customer attraction</p>
                             </div>
                         </div>
@@ -557,13 +561,13 @@
                             </div>
                             <div class="technology-badge outdoor-badge">Outdoor Locations</div>
                         </div>
-                        <h4 class="technology-title">GPS Technology</h4>
+                        <h3 class="technology-title">GPS Technology</h3>
                         <p class="technology-description">
                             Precision GPS tracking places $Ember coins at exact outdoor coordinates with <span class="golden-highlight">meter-level accuracy</span>. Players navigate city streets, parks, shopping districts, and outdoor venues collecting coins at your exact sponsored locations.
                         </p>
                         
                         <div class="technology-features">
-                            <h5>Perfect For:</h5>
+                            <h4>Perfect For:</h4>
                             <ul>
                                 <li><strong>Street-Level Marketing:</strong> Storefronts, restaurants, cafes</li>
                                 <li><strong>Outdoor Venues:</strong> Stadiums, parks, festival grounds</li>
@@ -604,13 +608,13 @@
                             </div>
                             <div class="technology-badge indoor-badge">Indoor Locations</div>
                         </div>
-                        <h4 class="technology-title">Beacon Technology</h4>
+                        <h3 class="technology-title">Beacon Technology</h3>
                         <p class="technology-description">
                             Revolutionary Bluetooth Low Energy (BLE) beacons enable <span class="golden-highlight">indoor coin placement</span> with centimeter-level precision. Deploy $Ember coins anywhere inside buildings - from specific aisles to exact product displays, creating unprecedented indoor engagement opportunities.
                         </p>
                         
                         <div class="technology-features">
-                            <h5>Perfect For:</h5>
+                            <h4>Perfect For:</h4>
                             <ul>
                                 <li><strong>Retail Stores:</strong> Specific aisles, product displays, checkout areas</li>
                                 <li><strong>Shopping Malls:</strong> Individual stores, food courts, anchor locations</li>
@@ -648,7 +652,7 @@
                 <div class="combined-technology-power scroll-reveal">
                     <div class="combined-power-header">
                         <img src="images/PhoenixGoldTrophy.PNG" alt="Combined Power" class="combined-power-icon">
-                        <h4>The Power of Combined Coverage</h4>
+                        <h3>The Power of Combined Coverage</h3>
                     </div>
                     <p class="combined-power-description">
                         By integrating both GPS and Beacon technology, Vault Phoenix delivers <span class="golden-highlight">100% location coverage</span> for your campaigns. Guide players from outdoor discovery to indoor conversion - track them from the parking lot GPS coordinate, through the store entrance beacon, to the specific product display beacon, creating a complete customer journey with measurable ROI at every touchpoint.
@@ -708,7 +712,7 @@
                         <img src="images/PhoenixGoldTrophy.PNG" alt="Battle-Forged Framework" class="custom-badge-icon">
                     </span>
                     <div class="badge-content">
-                        <h4>Battle-Tested Technology System</h4>
+                        <h3>Battle-Tested Technology System</h3>
                         <p><span class="golden-highlight">6+ years</span> of development and <span class="golden-highlight">over 12+ successful location-based AR games</span> have refined our marketing platform. Now we're breaking new ground by adding crypto tokens for in-game rewards - same proven GPS & Beacon framework, enhanced with cryptocurrency incentives.</p>
                     </div>
                 </div>
@@ -816,7 +820,7 @@
                             <p class="demo-card-instruction">Open with your mobile device</p>
                             <div class="demo-button-row">
                                 <img src="images/VPLogoNoText.PNG" alt="Phoenix Logo" class="demo-icon-standalone">
-                                <a href="crypto-game/" target="_blank" class="demo-button-enhanced">
+                                <a href="crypto-game/" target="_blank" rel="noopener noreferrer" class="demo-button-enhanced" aria-label="Try the mobile AR crypto game demo">
                                     <span class="demo-text-enhanced">Try it out</span>
                                 </a>
                             </div>
@@ -867,7 +871,7 @@
                             <p class="demo-card-instruction">Open with your desktop computer</p>
                             <div class="demo-button-row">
                                 <img src="images/EmberAnalytics.PNG" alt="Management System" class="demo-icon-standalone">
-                                <a href="https://ghost081280.github.io/vaultphoenix/management-system/index.html" target="_blank" class="demo-button-enhanced management-button-enhanced">
+                                <a href="https://ghost081280.github.io/vaultphoenix/management-system/index.html" target="_blank" rel="noopener noreferrer" class="demo-button-enhanced management-button-enhanced" aria-label="Try the management system demo">
                                     <span class="demo-text-enhanced">Try it out</span>
                                 </a>
                             </div>
@@ -897,7 +901,7 @@
                     <div class="benefit-column">
                         <div class="benefit-header">
                             <img src="images/IphoneVPLogo.PNG" alt="Mobile App" class="benefit-header-icon">
-                            <h4>Player Experience</h4>
+                            <h3>Player Experience</h3>
                         </div>
                         <ul class="benefit-list">
                             <li>White-labeled with your brand identity</li>
@@ -911,7 +915,7 @@
                     <div class="benefit-column">
                         <div class="benefit-header">
                             <img src="images/EmberAnalytics.PNG" alt="Management System" class="benefit-header-icon">
-                            <h4>Marketer Control</h4>
+                            <h3>Marketer Control</h3>
                         </div>
                         <ul class="benefit-list">
                             <li>Control all GPS & Beacon coin placements</li>
@@ -1063,7 +1067,7 @@
                     </ul>
 
                     <div class="web-app-benefits">
-                        <h4>The Competitive Edge of Web-Based AR</h4>
+                        <h3>The Competitive Edge of Web-Based AR</h3>
                         <div class="web-benefits-compact">
                             <div class="web-benefit-compact">
                                 <span class="web-benefit-icon-small">📱</span>
@@ -1087,7 +1091,7 @@
                     <div class="solution-highlight-box">
                         <img src="images/VPEmberCoin.PNG" alt="Token Rewards" class="solution-highlight-icon">
                         <div class="solution-highlight-content">
-                            <h5>FREE $Ember Tokens Included</h5>
+                            <h4>FREE $Ember Tokens Included</h4>
                             <p>Get <span class="golden-highlight">$100 worth of $Ember tokens</span> loaded into your management system when service is activated</p>
                         </div>
                     </div>
@@ -1095,13 +1099,13 @@
                     <div class="solution-highlight-box additional-benefit">
                         <img src="images/PhoenixDesign.PNG" alt="Support" class="solution-highlight-icon">
                         <div class="solution-highlight-content">
-                            <h5>Complete Launch Support</h5>
+                            <h4>Complete Launch Support</h4>
                             <p>Expert onboarding, marketing materials, comprehensive training, and <span class="golden-highlight">ongoing technical support</span> to ensure campaign success and maximize ROI</p>
                         </div>
                     </div>
 
                     <div class="solution-cta">
-                        <a href="mailto:contact@vaultphoenix.com?subject=White-Label AR Crypto Solution&body=I'm interested in the White-Label AR crypto gaming solution starting at $499. Please send detailed information about the complete package including management and hosting." class="cta-primary-large">Launch Your Crypto Campaign</a>
+                        <a href="mailto:contact@vaultphoenix.com?subject=White-Label AR Crypto Solution&body=I'm interested in the White-Label AR crypto gaming solution starting at $499. Please send detailed information about the complete package including management and hosting." class="cta-primary-large" aria-label="Contact us about white-label AR crypto solution">Launch Your Crypto Campaign</a>
                         <p class="cta-footnote">Full deployment within 24 hours</p>
                     </div>
                 </div>
@@ -1125,7 +1129,7 @@
                     </div>
 
                     <div class="github-hero-inline">
-                        <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" class="github-link-card-inline">
+                        <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" rel="noopener noreferrer" class="github-link-card-inline" aria-label="View Vault Phoenix SDK on GitHub">
                             <svg class="github-icon-inline" height="32" viewBox="0 0 16 16" width="32" fill="currentColor">
                                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                             </svg>
@@ -1155,7 +1159,7 @@
                     </div>
 
                     <div class="sdk-features-preview">
-                        <h5>What's Included:</h5>
+                        <h4>What's Included:</h4>
                         <ul>
                             <li>Complete AR crypto gaming engine</li>
                             <li>GPS & Beacon location technology integration</li>
@@ -1176,7 +1180,7 @@
                     <div class="solution-highlight-box">
                         <img src="images/IphoneVPLogo.PNG" alt="Development" class="solution-highlight-icon">
                         <div class="solution-highlight-content">
-                            <h5>Built for Developers</h5>
+                            <h4>Built for Developers</h4>
                             <p>Open-source code with <span class="golden-highlight">managed infrastructure</span> - rapid deployment at developer-friendly prices</p>
                         </div>
                     </div>
@@ -1184,13 +1188,13 @@
                     <div class="solution-highlight-box additional-benefit">
                         <img src="images/VPEmberCoin.PNG" alt="Token Rewards" class="solution-highlight-icon">
                         <div class="solution-highlight-content">
-                            <h5>FREE $Ember Tokens Included</h5>
+                            <h4>FREE $Ember Tokens Included</h4>
                             <p>Get <span class="golden-highlight">$100 worth of $Ember tokens</span> loaded into your management system when service is activated</p>
                         </div>
                     </div>
 
                     <div class="solution-cta">
-                        <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" class="cta-secondary-large">
+                        <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" rel="noopener noreferrer" class="cta-secondary-large" aria-label="Download Vault Phoenix SDK from GitHub">
                             <svg class="cta-github-icon" height="20" viewBox="0 0 16 16" width="20" fill="currentColor">
                                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                             </svg>
@@ -1215,7 +1219,7 @@
                             <img src="images/PhoenixAthletics.PNG" alt="Sports" class="revenue-industry-icon">
                             <div class="example-industry">Sports & Entertainment</div>
                         </div>
-                        <h4 class="example-title">Stadium Crypto Hunt</h4>
+                        <h3 class="example-title">Stadium Crypto Hunt</h3>
                         <p class="example-scenario">Major league stadium with 50,000 fans per game, 10 home games per month</p>
                         <div class="example-breakdown">
                             <div class="breakdown-item">
@@ -1238,7 +1242,7 @@
                             <img src="images/PhoenixRadio.PNG" alt="Radio" class="revenue-industry-icon">
                             <div class="example-industry">Radio & Media</div>
                         </div>
-                        <h4 class="example-title">Morning Show Treasure Hunt</h4>
+                        <h3 class="example-title">Morning Show Treasure Hunt</h3>
                         <p class="example-scenario">Regional radio station with 150K daily listeners across metro area</p>
                         <div class="example-breakdown">
                             <div class="breakdown-item">
@@ -1261,7 +1265,7 @@
                             <img src="images/VPTravelPhoenix.PNG" alt="Tourism" class="revenue-industry-icon">
                             <div class="example-industry">Tourism & Hospitality</div>
                         </div>
-                        <h4 class="example-title">Historic Downtown Quest</h4>
+                        <h3 class="example-title">Historic Downtown Quest</h3>
                         <p class="example-scenario">Tourist district campaign for hotels, restaurants, and attractions</p>
                         <div class="example-breakdown">
                             <div class="breakdown-item">
@@ -1284,7 +1288,7 @@
                             <img src="images/PhoenixRetail.PNG" alt="Retail" class="revenue-industry-icon">
                             <div class="example-industry">Retail & Shopping</div>
                         </div>
-                        <h4 class="example-title">Mall District Challenge</h4>
+                        <h3 class="example-title">Mall District Challenge</h3>
                         <p class="example-scenario">Shopping district with 40+ retailers across 5 blocks</p>
                         <div class="example-breakdown">
                             <div class="breakdown-item">
@@ -1304,7 +1308,7 @@
                 </div>
 
                 <div class="revenue-model-benefits">
-                    <h4>Why Location Partners Pay Premium Rates</h4>
+                    <h3>Why Location Partners Pay Premium Rates</h3>
                     <div class="benefits-grid">
                         <div class="benefit-box">
                             <div class="benefit-icon-small">
@@ -1351,7 +1355,7 @@
                 <div class="development-story-card">
                     <img src="images/IphoneVPLogo.PNG" alt="Proven Development" class="development-story-icon">
                     <div class="development-story-content">
-                        <h4>Battle-Tested Technology</h4>
+                        <h3>Battle-Tested Technology</h3>
                         <p>Over <span class="golden-highlight">6+ years</span> of development and <span class="golden-highlight">over 12+ successful location-based AR games</span> have refined our marketing platform through deployments with radio stations, sports teams, tourism boards, and retail chains. Now we're breaking new ground by adding crypto tokens for in-game rewards, powered by proven GPS & Beacon technology.</p>
                     </div>
                 </div>
@@ -1367,11 +1371,11 @@
             <p class="final-cta-subtitle scroll-reveal">Join the AR crypto gaming revolution and transform your marketing results. Your competitors don't know this GPS & Beacon technology exists yet - but they will soon. Be first to market with crypto-powered campaigns that deliver measurable ROI.</p>
             
             <div class="cta-buttons scroll-reveal">
-                <a href="mailto:contact@vaultphoenix.com?subject=Phoenix Crypto Gaming Development Inquiry&body=I'm interested in developing a custom AR crypto gaming phoenix for my clients. Please send me detailed information about the development process, timeline, and how we can get started." class="cta-primary-enhanced cta-with-icon-enhanced">
+                <a href="mailto:contact@vaultphoenix.com?subject=Phoenix Crypto Gaming Development Inquiry&body=I'm interested in developing a custom AR crypto gaming phoenix for my clients. Please send me detailed information about the development process, timeline, and how we can get started." class="cta-primary-enhanced cta-with-icon-enhanced" aria-label="Contact us to start your crypto gaming campaign">
                     <img src="images/EmberRepeatArrows.PNG" alt="Awaken" class="cta-icon-image-enhanced">
                     <span>Start Your Campaign</span>
                 </a>
-                <a href="https://www.facebook.com/share/1BH4Hd6iDa/?mibextid=wwXIfr" class="cta-secondary cta-with-icon-enhanced" target="_blank">
+                <a href="https://www.facebook.com/share/1BH4Hd6iDa/?mibextid=wwXIfr" class="cta-secondary cta-with-icon-enhanced" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on Facebook">
                     <img src="images/EmberCoinChatWithUs.PNG" alt="Chat" class="cta-icon-image-enhanced">
                     <span>Chat with Us</span>
                 </a>
@@ -1379,10 +1383,10 @@
             
             <!-- ENHANCED Journey Section -->
             <div class="journey-section">
-                <h4 class="journey-title">
+                <h3 class="journey-title">
                     <img src="images/EmberCoinRocket.PNG" alt="Journey" class="journey-icon-large">
                     What Happens Next in Your Journey:
-                </h4>
+                </h3>
                 
                 <div class="journey-paths">
                     <div class="journey-path">
@@ -1390,7 +1394,7 @@
                             <img src="images/EmberCoinMoneyBag.PNG" alt="White-Label" class="path-icon-enhanced">
                             <div class="path-header-text">
                                 <div class="path-category">Complete Branded AR Crypto Web Apps</div>
-                                <h5 class="path-title">Turnkey White-Label Solution</h5>
+                                <h4 class="path-title">Turnkey White-Label Solution</h4>
                                 <span class="path-badge">Available Now</span>
                             </div>
                         </div>
@@ -1408,7 +1412,7 @@
                             <img src="images/IphoneVPLogo.PNG" alt="SDK" class="path-icon-enhanced">
                             <div class="path-header-text">
                                 <div class="path-category">Vault Phoenix SDK on GitHub</div>
-                                <h5 class="path-title">Developer Integration Platform</h5>
+                                <h4 class="path-title">Developer Integration Platform</h4>
                                 <span class="path-badge sdk-badge-alt">Early 2026</span>
                             </div>
                         </div>
@@ -1436,22 +1440,22 @@
             
             <!-- Social Media Icons -->
             <div class="social-media">
-                <a href="https://x.com/vaultphoenix?s=21" class="social-link" aria-label="Follow us on X (Twitter)" target="_blank">
+                <a href="https://x.com/vaultphoenix?s=21" class="social-link" aria-label="Follow us on X (Twitter)" target="_blank" rel="noopener noreferrer">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                 </a>
-                <a href="https://www.facebook.com/share/1BH4Hd6iDa/?mibextid=wwXIfr" class="social-link" aria-label="Follow us on Facebook" target="_blank">
+                <a href="https://www.facebook.com/share/1BH4Hd6iDa/?mibextid=wwXIfr" class="social-link" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                 </a>
-                <a href="https://www.linkedin.com/company/vaultphoenix/" class="social-link" aria-label="Follow us on LinkedIn" target="_blank">
+                <a href="https://www.linkedin.com/company/vaultphoenix/" class="social-link" aria-label="Follow us on LinkedIn" target="_blank" rel="noopener noreferrer">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                     </svg>
                 </a>
-                <a href="https://t.me/+Mq36mmN-9o8wMTJh" class="social-link" aria-label="Join us on Telegram" target="_blank">
+                <a href="https://t.me/+Mq36mmN-9o8wMTJh" class="social-link" aria-label="Join us on Telegram" target="_blank" rel="noopener noreferrer">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                     </svg>
@@ -1472,7 +1476,11 @@
         </div>
     </footer>
 
+    <!-- Shared Scripts -->
+    <script src="shared-script.js"></script>
+    <!-- Page-specific Scripts -->
     <script src="script.js"></script>
+    
     <!-- ============================================
          FLOATING AI CHATBOT - Add before </body>
          ============================================ -->
@@ -1496,7 +1504,7 @@
                     <p>Powered by Vault Phoenix</p>
                 </div>
             </div>
-            <button class="chatbot-close">×</button>
+            <button class="chatbot-close" aria-label="Close chat window">×</button>
         </div>
         
         <div class="chatbot-body">
@@ -1510,12 +1518,11 @@
                     class="chatbot-input" 
                     placeholder="Ask about Vault Phoenix..." 
                     maxlength="500"
+                    aria-label="Chat message input"
                 >
-                <button class="chatbot-send">Send</button>
+                <button class="chatbot-send" aria-label="Send message">Send</button>
             </div>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
