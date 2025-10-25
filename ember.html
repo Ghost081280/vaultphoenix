@@ -19,12 +19,8 @@
     <meta property="og:title" content="$Ember Token Presale - Revolutionary AR Crypto Gaming at $0.003">
     <meta property="og:description" content="Join the $Ember Token presale NOW! 166.7M tokens at $0.003 each. Revolutionary location-based AR gaming with GPS & Beacon technology. $500K hard cap - secure your tokens before Platform Operators create demand!">
     <meta property="og:image" content="https://vaultphoenix.com/images/VPEmberCoin.PNG">
-    <meta property="og:image:secure_url" content="https://vaultphoenix.com/images/VPEmberCoin.PNG">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="$Ember Token - Powering AR Crypto Gaming Revolution">
     <meta property="og:site_name" content="Vault Phoenix">
-    <meta property="og:locale" content="en_US">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -49,6 +45,7 @@
     
     <link rel="icon" href="images/VPEmberCoin.PNG" type="image/png">
     <link rel="apple-touch-icon" href="images/VPEmberCoin.PNG">
+    <link rel="stylesheet" href="shared-styles.css">
     <link rel="stylesheet" href="ember-styles.css">
     
     <!-- Structured Data (JSON-LD) -->
@@ -139,7 +136,7 @@
                 <li><a href="#presale">Presale</a></li>
             </ul>
            
-            <button class="mobile-menu-btn">☰</button>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu">☰</button>
         </div>
     </nav>
 
@@ -207,11 +204,11 @@
             </div>
             
             <div class="ember-hero-cta">
-                <a href="#presale" class="ember-cta-primary">
+                <a href="#presale" class="ember-cta-primary" aria-label="Join the $Ember Token presale">
                     <img src="images/VPEmberFlame.svg" alt="Flame" style="width: 1.3rem; height: 1.3rem; margin-right: 8px; display: inline-block; vertical-align: middle;">
                     Join $Ember Presale
                 </a>
-                <a href="#whitepaper" class="ember-cta-secondary">
+                <a href="#whitepaper" class="ember-cta-secondary" aria-label="Learn more about $Ember Token">
                     <img src="images/TechnicalFoundation.PNG" alt="Document" style="width: 1.3rem; height: 1.3rem; margin-right: 8px; display: inline-block; vertical-align: middle; filter: brightness(0) invert(1);">
                     Learn More
                 </a>
@@ -236,7 +233,7 @@
                        target="_blank" 
                        rel="noopener noreferrer" 
                        class="social-share-button-compact twitter-share-compact" 
-                       aria-label="Share on X (Twitter)">
+                       aria-label="Share $Ember Token on X (Twitter)">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                         </svg>
@@ -247,7 +244,7 @@
                        target="_blank" 
                        rel="noopener noreferrer" 
                        class="social-share-button-compact facebook-share-compact" 
-                       aria-label="Share on Facebook">
+                       aria-label="Share $Ember Token on Facebook">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
@@ -258,7 +255,7 @@
                        target="_blank" 
                        rel="noopener noreferrer" 
                        class="social-share-button-compact telegram-share-compact" 
-                       aria-label="Share on Telegram">
+                       aria-label="Share $Ember Token on Telegram">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                             <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                         </svg>
@@ -268,7 +265,6 @@
             </div>
         </div>
     </section>
-<!-- Part 2: How It Works through Roadmap Sections -->
 
 <!-- How It Works Section -->
     <section class="ember-section how-it-works-section" id="how-it-works">
@@ -506,7 +502,7 @@
                 <div class="download-section">
                     <h3>Full Technical Documentation</h3>
                     <p>Complete tokenomics, GPS & Beacon integration, business model, technical architecture, and compliance framework.</p>
-                    <button class="download-button" onclick="window.showWhitepaperModal()">
+                    <button class="download-button" onclick="window.showWhitepaperModal()" aria-label="Download the $Ember Token whitepaper">
                         <img src="images/PhoenixWhitepaper.PNG" alt="Whitepaper">
                         Download Whitepaper
                     </button>
@@ -618,7 +614,6 @@
             </div>
         </div>
     </section>
-<!-- Part 3: Team Section -->
 
     <!-- Team Section -->
     <section class="ember-section" id="team">
@@ -636,7 +631,7 @@
                     <div class="member-avatar">
                         <img src="images/Melinda.PNG" alt="Melinda Artzer" class="member-photo">
                     </div>
-                    <h4 class="member-name">Melinda Artzer</h4>
+                    <h3 class="member-name">Melinda Artzer</h3>
                     <p class="member-role">CEO & Visionary</p>
                     <p class="member-bio">Melinda brings together military law, design, marketing and operations expertise. She excels at building systems that empower people, strengthen brands, mitigate risk, and drive innovation while keeping integrity and measurable impact at the center of her work.</p>
                     <div class="member-skills">
@@ -645,17 +640,17 @@
                         <span class="skill-tag">Operations</span>
                     </div>
                     <div class="member-socials">
-                        <a href="https://x.com/Kyota0330" class="social-link-team" aria-label="X (Twitter)" target="_blank">
+                        <a href="https://x.com/Kyota0330" class="social-link-team" aria-label="Melinda Artzer on X (Twitter)" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                             </svg>
                         </a>
-                        <a href="https://www.linkedin.com/in/melinda-artzer-a9b390178/" class="social-link-team" aria-label="LinkedIn" target="_blank">
+                        <a href="https://www.linkedin.com/in/melinda-artzer-a9b390178/" class="social-link-team" aria-label="Melinda Artzer on LinkedIn" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                         </a>
-                        <a href="https://github.com/ArtzerMelinda" class="social-link-team" aria-label="GitHub" target="_blank">
+                        <a href="https://github.com/ArtzerMelinda" class="social-link-team" aria-label="Melinda Artzer on GitHub" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                             </svg>
@@ -667,7 +662,7 @@
                     <div class="member-avatar">
                         <img src="images/Andrew.PNG" alt="Andrew Couch" class="member-photo">
                     </div>
-                    <h4 class="member-name">Andrew Couch</h4>
+                    <h3 class="member-name">Andrew Couch</h3>
                     <p class="member-role">CTO & Development</p>
                     <p class="member-bio">Experienced in location-based marketing, augmented reality, and web development-creating immersive digital experiences that drive engagement, connect physical and digital worlds, and help businesses grow through innovative, scalable technology.</p>
                     <div class="member-skills">
@@ -676,17 +671,17 @@
                         <span class="skill-tag">Security</span>
                     </div>
                     <div class="member-socials">
-                        <a href="https://x.com/Ghost081280" class="social-link-team" aria-label="X (Twitter)" target="_blank">
+                        <a href="https://x.com/Ghost081280" class="social-link-team" aria-label="Andrew Couch on X (Twitter)" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                             </svg>
                         </a>
-                        <a href="https://www.linkedin.com/in/andrewcouch" class="social-link-team" aria-label="LinkedIn" target="_blank">
+                        <a href="https://www.linkedin.com/in/andrewcouch" class="social-link-team" aria-label="Andrew Couch on LinkedIn" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                         </a>
-                        <a href="https://github.com/Ghost081280" class="social-link-team" aria-label="GitHub" target="_blank">
+                        <a href="https://github.com/Ghost081280" class="social-link-team" aria-label="Andrew Couch on GitHub" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                             </svg>
@@ -698,7 +693,7 @@
                     <div class="member-avatar">
                         <img src="images/Muhammad.PNG" alt="Muhammad Inayat" class="member-photo">
                     </div>
-                    <h4 class="member-name">Muhammad Inayat</h4>
+                    <h3 class="member-name">Muhammad Inayat</h3>
                     <p class="member-role">Systems Architect</p>
                     <p class="member-bio">Experienced in designing and implementing secure, scalable system architectures that foster business growth, enable digital transformation, and build trust in distributed systems. Skilled in optimizing performance and integrating emerging technologies.</p>
                     <div class="member-skills">
@@ -707,17 +702,17 @@
                         <span class="skill-tag">Business Psychology</span>
                     </div>
                     <div class="member-socials">
-                        <a href="https://x.com/muhammadinayatx" class="social-link-team" aria-label="X (Twitter)" target="_blank">
+                        <a href="https://x.com/muhammadinayatx" class="social-link-team" aria-label="Muhammad Inayat on X (Twitter)" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                             </svg>
                         </a>
-                        <a href="https://www.linkedin.com/in/muhammad-inayat" class="social-link-team" aria-label="LinkedIn" target="_blank">
+                        <a href="https://www.linkedin.com/in/muhammad-inayat" class="social-link-team" aria-label="Muhammad Inayat on LinkedIn" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                         </a>
-                        <a href="https://github.com/MInayatUllah" class="social-link-team" aria-label="GitHub" target="_blank">
+                        <a href="https://github.com/MInayatUllah" class="social-link-team" aria-label="Muhammad Inayat on GitHub" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                             </svg>
@@ -737,7 +732,7 @@
                     <div class="member-avatar">
                         <img src="images/Christopher.PNG" alt="Christopher Sorge" class="member-photo">
                     </div>
-                    <h4 class="member-name">Christopher Sorge</h4>
+                    <h3 class="member-name">Christopher Sorge</h3>
                     <p class="member-role">Finance Advisor & Compliance</p>
                     <p class="member-bio">Provides expert guidance in finance, operations, and cybersecurity, with extensive experience in OpSec, regulatory compliance, and strategic planning. Holds multiple degrees, CNSS 4011, and Certified Ethical Hacker certifications, with prior service as a Finance Officer in the Pennsylvania Army National Guard and experience across financial institutions. Actively contributes to community education and development.</p>
                     <div class="member-skills">
@@ -746,12 +741,12 @@
                         <span class="skill-tag">Risk Management</span>
                     </div>
                     <div class="member-socials">
-                        <a href="https://x.com/Chrisw6rx" class="social-link-team" aria-label="X (Twitter)" target="_blank">
+                        <a href="https://x.com/Chrisw6rx" class="social-link-team" aria-label="Christopher Sorge on X (Twitter)" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                             </svg>
                         </a>
-                        <a href="https://www.linkedin.com/in/christophersorge/" class="social-link-team" aria-label="LinkedIn" target="_blank">
+                        <a href="https://www.linkedin.com/in/christophersorge/" class="social-link-team" aria-label="Christopher Sorge on LinkedIn" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
@@ -764,7 +759,6 @@
             </div>
         </div>
     </section>
-<!-- Part 4: Tokenomics Section -->
 
     <!-- Updated Professional Tokenomics Section -->
     <section class="ember-section tokenomics-section" id="tokenomics">
@@ -986,7 +980,6 @@
             </div>
         </div>
     </section>
-<!-- Part 5: Presale Section WITH NEW IMAGE -->
 
     <!-- Updated Presale Section -->
     <section class="ember-section presale-section" id="presale">
@@ -1223,7 +1216,7 @@
                         <div class="tpa-section">
                             <h4>📄 Required Legal Documents</h4>
                             <p class="tpa-instruction">Review both the Token Presale Agreement and Token Disclosures before proceeding with your investment.</p>
-                            <button class="tpa-download-button" onclick="window.showTpaModal()">
+                            <button class="tpa-download-button" onclick="window.showTpaModal()" aria-label="Review legal documents for $Ember Token presale">
                                 📄 Review Legal Documents
                             </button>
                         </div>
@@ -1240,7 +1233,7 @@
                             </div>
                         </div>
                         
-                        <button class="presale-button" id="presale-buy-button" disabled>
+                        <button class="presale-button" id="presale-buy-button" disabled aria-label="Join $Ember Token presale">
                             🔥 Join Presale (Coming Soon)
                         </button>
                         
@@ -1294,7 +1287,6 @@
             </div>
         </div>
     </section>
-<!-- Part 6 (FINAL): Enhanced CTA, Legal, Footer, Modals, Chatbot, Scripts -->
 
     <!-- Enhanced Join Presale CTA Section -->
     <section class="ember-section cta-presale-section-enhanced">
@@ -1328,7 +1320,7 @@
                                     <img src="images/EmberCoinRocket.PNG" alt="Early Access" class="prop-icon-image">
                                 </div>
                                 <div class="prop-text">
-                                    <h4>First-Mover Advantage</h4>
+                                    <h3>First-Mover Advantage</h3>
                                     <p>Get tokens at $0.003 before Platform Operators create demand with GPS & Beacon campaigns</p>
                                 </div>
                             </div>
@@ -1337,7 +1329,7 @@
                                     <img src="images/EmberCoinMoneyBag.PNG" alt="Built-in Demand" class="prop-icon-image">
                                 </div>
                                 <div class="prop-text">
-                                    <h4>Built-In Token Demand</h4>
+                                    <h3>Built-In Token Demand</h3>
                                     <p>Every GPS & Beacon campaign requires token purchases through our system</p>
                                 </div>
                             </div>
@@ -1348,7 +1340,7 @@
                                     <img src="images/EmberCoinLock.PNG" alt="Security" class="prop-icon-image">
                                 </div>
                                 <div class="prop-text">
-                                    <h4>Professional Oversight</h4>
+                                    <h3>Professional Oversight</h3>
                                     <p>Legal and financial oversight ensuring full compliance</p>
                                 </div>
                             </div>
@@ -1357,7 +1349,7 @@
                                     <img src="images/EmberAnalytics.PNG" alt="Utility" class="prop-icon-image">
                                 </div>
                                 <div class="prop-text">
-                                    <h4>Real Platform Utility</h4>
+                                    <h3>Real Platform Utility</h3>
                                     <p>Essential for white-label apps with GPS & Beacon, SDK, and management system</p>
                                 </div>
                             </div>
@@ -1382,14 +1374,14 @@
                     </div>
                     
                     <div class="cta-presale-buttons-enhanced">
-                        <a href="#presale" class="cta-presale-primary-enhanced">
+                        <a href="#presale" class="cta-presale-primary-enhanced" aria-label="Join $Ember Token presale now">
                             <span class="button-icon">🔥</span>
                             <div class="button-content">
                                 <span class="button-main-text">Join Presale Now</span>
                                 <span class="button-sub-text">Secure Your Tokens</span>
                             </div>
                         </a>
-                        <a href="#whitepaper" class="cta-presale-secondary-enhanced">
+                        <a href="#whitepaper" class="cta-presale-secondary-enhanced" aria-label="Read $Ember Token whitepaper">
                             <span class="button-icon">📄</span>
                             <div class="button-content">
                                 <span class="button-main-text">Read Whitepaper</span>
@@ -1563,22 +1555,22 @@
             
             <!-- Social Media Icons -->
             <div class="social-media">
-                <a href="https://x.com/vaultphoenix?s=21" class="social-link" aria-label="Follow us on X (Twitter)" target="_blank">
+                <a href="https://x.com/vaultphoenix?s=21" class="social-link" aria-label="Follow us on X (Twitter)" target="_blank" rel="noopener noreferrer">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                 </a>
-                <a href="https://www.facebook.com/share/1BH4Hd6iDa/?mibextid=wwXIfr" class="social-link" aria-label="Follow us on Facebook" target="_blank">
+                <a href="https://www.facebook.com/share/1BH4Hd6iDa/?mibextid=wwXIfr" class="social-link" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                 </a>
-                <a href="https://www.linkedin.com/company/vaultphoenix/" class="social-link" aria-label="Follow us on LinkedIn" target="_blank">
+                <a href="https://www.linkedin.com/company/vaultphoenix/" class="social-link" aria-label="Follow us on LinkedIn" target="_blank" rel="noopener noreferrer">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                     </svg>
                 </a>
-                <a href="https://t.me/+Mq36mmN-9o8wMTJh" class="social-link" aria-label="Join us on Telegram" target="_blank">
+                <a href="https://t.me/+Mq36mmN-9o8wMTJh" class="social-link" aria-label="Join us on Telegram" target="_blank" rel="noopener noreferrer">
                     <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                     </svg>
@@ -1604,7 +1596,7 @@
         <div class="tpa-modal-content">
             <div class="tpa-modal-header">
                 <h3>📄 Token Presale Legal Documents</h3>
-                <button class="tpa-modal-close" onclick="window.closeTpaModal()">×</button>
+                <button class="tpa-modal-close" onclick="window.closeTpaModal()" aria-label="Close legal documents modal">×</button>
             </div>
             <div class="tpa-modal-body">
                 <div class="tpa-preview">
@@ -1642,13 +1634,13 @@
                 </div>
                 
                 <div class="tpa-modal-actions">
-                    <a href="docs/Token_Presale_Agreement_Utility_Token.pdf" target="_blank" class="tpa-download-btn" style="margin-bottom: 10px;">
+                    <a href="docs/Token_Presale_Agreement_Utility_Token.pdf" target="_blank" rel="noopener noreferrer" class="tpa-download-btn" style="margin-bottom: 10px;" aria-label="Download Token Presale Agreement PDF">
                         📄 Download Token Presale Agreement (PDF)
                     </a>
-                    <a href="docs/Ember_Token_Disclosures.pdf" target="_blank" class="tpa-download-btn" style="margin-bottom: 20px;">
+                    <a href="docs/Ember_Token_Disclosures.pdf" target="_blank" rel="noopener noreferrer" class="tpa-download-btn" style="margin-bottom: 20px;" aria-label="Download Token Disclosures PDF">
                         ⚠️ Download Token Disclosures (PDF)
                     </a>
-                    <button class="tpa-agree-btn" onclick="window.agreeTpa()">
+                    <button class="tpa-agree-btn" onclick="window.agreeTpa()" aria-label="Agree to Token Presale terms and disclosures">
                         ✓ I Have Read Both Documents and Agree to Terms
                     </button>
                 </div>
@@ -1662,7 +1654,7 @@
         <div class="tpa-modal-content">
             <div class="tpa-modal-header">
                 <h3>📚 Vault Phoenix Whitepaper 2025</h3>
-                <button class="tpa-modal-close" onclick="window.closeWhitepaperModal()">×</button>
+                <button class="tpa-modal-close" onclick="window.closeWhitepaperModal()" aria-label="Close whitepaper modal">×</button>
             </div>
             <div class="tpa-modal-body">
                 <div class="tpa-preview">
@@ -1689,7 +1681,7 @@
                 </div>
                 
                 <div class="tpa-modal-actions">
-                    <a href="docs/Vault_Phoenix_Whitepaper_2025.pdf" target="_blank" class="tpa-download-btn" download>
+                    <a href="docs/Vault_Phoenix_Whitepaper_2025.pdf" target="_blank" rel="noopener noreferrer" class="tpa-download-btn" download aria-label="Download Vault Phoenix Whitepaper PDF">
                         📥 Download Whitepaper (PDF)
                     </a>
                 </div>
@@ -1697,20 +1689,15 @@
         </div>
     </div>
 
-    <!-- ============================================
-         FLOATING AI CHATBOT
-         ============================================ -->
-    
-    <!-- Floating Chatbot Button -->
+    <!-- Floating AI Chatbot -->
     <div class="chatbot-button-container">
         <div class="chatbot-glow"></div>
-        <div class="chatbot-button">
+        <div class="chatbot-button" aria-label="Open Phoenix AI chat assistant">
             <img src="images/PhoenixBot.PNG" alt="Phoenix AI Assistant" class="chatbot-icon">
         </div>
         <div class="chatbot-tooltip">Chat with Phoenix AI</div>
     </div>
     
-    <!-- Chatbot Window -->
     <div class="chatbot-window">
         <div class="chatbot-header">
             <div class="chatbot-header-content">
@@ -1720,7 +1707,7 @@
                     <p>Powered by Vault Phoenix</p>
                 </div>
             </div>
-            <button class="chatbot-close">×</button>
+            <button class="chatbot-close" aria-label="Close chat window">×</button>
         </div>
         
         <div class="chatbot-body">
@@ -1734,12 +1721,14 @@
                     class="chatbot-input" 
                     placeholder="Ask about $Ember Token..." 
                     maxlength="500"
+                    aria-label="Type your message to Phoenix AI"
                 >
-                <button class="chatbot-send">Send</button>
+                <button class="chatbot-send" aria-label="Send message">Send</button>
             </div>
         </div>
     </div>
 
+    <script src="shared-script.js"></script>
     <script src="ember-script.js"></script>
 
     <script>
