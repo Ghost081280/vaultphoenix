@@ -2203,7 +2203,7 @@ body.loaded {
 .cta-button {
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
-    padding: 14px 28px;
+    padding: -1px 28px;
     border: none;
     border-radius: 30px;
     font-weight: 700;
