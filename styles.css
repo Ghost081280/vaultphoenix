@@ -2217,6 +2217,8 @@ body.loaded {
 }
 }
 @media (min-width:1025px) {
+    /* Enhanced CTA Button */
+.cta-button {
  background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
     padding: 14px 28px;
