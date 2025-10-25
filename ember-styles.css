@@ -153,9 +153,9 @@ body {
 @media (max-width: 1024px) {
     .nav-content {
         display: grid;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: auto 1.5fr auto;
         align-items: center;
-        gap: 15px;
+        gap: 10px;
     }
     
     .logo {
@@ -165,7 +165,8 @@ body {
     
     .cta-button {
         grid-column: 2;
-        justify-self: center;
+        justify-self: start;
+        margin-left: 15px;
         padding: 10px 20px !important;
         font-size: 13px !important;
         white-space: nowrap;
@@ -551,7 +552,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Mobile Chatbot Responsive */
+/* Mobile Chatbot Responsive - FIXED: Perfect fit on mobile */
 @media (max-width: 768px) {
     .chatbot-button-container {
         bottom: 20px;
@@ -577,7 +578,20 @@ body {
         right: 20px;
         left: 20px;
         width: calc(100% - 40px);
-        max-height: calc(100vh - 170px);
+        max-height: calc(100vh - 240px);
+    }
+    
+    .chatbot-header {
+        padding: 15px;
+    }
+    
+    .chatbot-body {
+        padding: 15px;
+        max-height: calc(100vh - 380px);
+    }
+    
+    .chatbot-footer {
+        padding: 15px;
     }
 }
 
@@ -594,7 +608,11 @@ body {
     
     .chatbot-window {
         bottom: 100px;
-        max-height: calc(100vh - 140px);
+        max-height: calc(100vh - 220px);
+    }
+    
+    .chatbot-body {
+        max-height: calc(100vh - 360px);
     }
 }
 
@@ -2060,6 +2078,101 @@ body {
 
 .tokenomics-table tbody tr:last-child td {
     border-bottom: none;
+}
+
+/* ADDED: Mobile-optimized allocation cards */
+@media (max-width: 768px) {
+    .table-container {
+        background: transparent;
+        border: none;
+        overflow-x: visible;
+    }
+    
+    .tokenomics-table {
+        display: none;
+    }
+    
+    .allocation-table::after {
+        content: '';
+        display: block;
+    }
+}
+
+/* Mobile Allocation Cards */
+.allocation-cards-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .allocation-cards-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .allocation-card-mobile {
+        background: rgba(215, 51, 39, 0.1);
+        border: 1px solid rgba(215, 51, 39, 0.3);
+        border-radius: 15px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .allocation-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(240, 165, 0, 0.3);
+    }
+    
+    .allocation-card-category {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #f0a500;
+    }
+    
+    .allocation-card-percentage {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: #fb923c;
+    }
+    
+    .allocation-card-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+    
+    .allocation-detail-item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .allocation-detail-label {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+    
+    .allocation-detail-value {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 700;
+    }
+    
+    .allocation-card-note {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(240, 165, 0, 0.2);
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.4;
+    }
 }
 
 /* Trust & Security Features */
@@ -4108,28 +4221,6 @@ body {
     .benefit-icon img {
         width: 70px;
         height: 70px;
-    }
-
-    .table-container {
-        font-size: 0.8rem;
-    }
-
-    .tokenomics-table th,
-    .tokenomics-table td {
-        padding: 10px 8px;
-    }
-
-    .tpa-modal-content {
-        width: 95%;
-        margin: 20px;
-    }
-
-    .tpa-modal-header {
-        padding: 20px;
-    }
-
-    .tpa-modal-body {
-        padding: 20px;
     }
 
     .compliance-card h3 img {
