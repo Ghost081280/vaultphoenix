@@ -1,6 +1,5 @@
 // Vault Phoenix - $Ember Token Page Interactive JavaScript
-// UPDATED: Fixed chatbot with proper message alignment and scroll prevention
-// FIXED: Removed auto-focus to prevent keyboard popup on mobile
+// Production Version - Optimized & Secured
 // User messages: NO avatar, pushed to far right
 // Claude messages: VP logo avatar on left
 // Background scroll prevented with overscroll-behavior
@@ -8,7 +7,7 @@
 // ============================================
 // CLAUDE API CONFIGURATION
 // ============================================
-const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key
+const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE'; // ← Replace with your actual API key from console.anthropic.com
 const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
 const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 
@@ -59,11 +58,9 @@ Your role is to:
 Always maintain a professional yet friendly tone. Emphasize the legitimate utility and value proposition. If asked about financial advice, remind users to do their own research and consult financial advisors.`;
 
 // ============================================
-// INITIALIZE CHATBOT - FIXED: No Auto-Focus
+// INITIALIZE CHATBOT - NO AUTO-FOCUS
 // ============================================
 function initializeChatbot() {
-    console.log('🤖 Initializing $Ember Token Chatbot...');
-    
     const chatbotButton = document.querySelector('.chatbot-button-container');
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotClose = document.querySelector('.chatbot-close');
@@ -72,18 +69,14 @@ function initializeChatbot() {
     const chatbotBody = document.querySelector('.chatbot-body');
     
     if (!chatbotButton || !chatbotWindow) {
-        console.warn('🤖 Chatbot elements not found');
         return;
     }
     
-    console.log('🤖 Chatbot elements found successfully');
-    
     // Toggle chatbot window
     chatbotButton.addEventListener('click', () => {
-        console.log('🤖 Chatbot button clicked');
         chatbotWindow.classList.toggle('active');
         if (chatbotWindow.classList.contains('active')) {
-            // FIXED: Removed chatbotInput.focus() to prevent keyboard popup on mobile
+            // NO auto-focus to prevent mobile keyboard popup
             // Add welcome message if first time opening
             if (chatbotBody.children.length === 0) {
                 addWelcomeMessage();
@@ -94,7 +87,6 @@ function initializeChatbot() {
     // Close chatbot
     if (chatbotClose) {
         chatbotClose.addEventListener('click', () => {
-            console.log('🤖 Chatbot closed');
             chatbotWindow.classList.remove('active');
         });
     }
@@ -113,12 +105,10 @@ function initializeChatbot() {
             }
         });
     }
-    
-    console.log('🤖 $Ember Token Chatbot initialized successfully!');
 }
 
 // ============================================
-// WELCOME MESSAGE - UPDATED WITH PROPER ALIGNMENT
+// WELCOME MESSAGE
 // ============================================
 function addWelcomeMessage() {
     const welcomeMsg = `
@@ -150,7 +140,7 @@ function addWelcomeMessage() {
 }
 
 // ============================================
-// SEND MESSAGE TO CLAUDE API - FIXED: No Auto-Focus
+// SEND MESSAGE TO CLAUDE API - NO AUTO-FOCUS
 // ============================================
 async function sendMessage() {
     const chatbotInput = document.querySelector('.chatbot-input');
@@ -164,7 +154,7 @@ async function sendMessage() {
     if (!message || isTyping) return;
     
     // Check if API key is configured
-    if (CLAUDE_API_KEY === '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') {
+    if (CLAUDE_API_KEY === 'YOUR_CLAUDE_API_KEY_HERE') {
         addMessage('user', message);
         addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
         chatbotInput.value = '';
@@ -187,8 +177,6 @@ async function sendMessage() {
             ...conversationHistory,
             { role: 'user', content: message }
         ];
-        
-        console.log('🤖 Sending message to Claude API...');
         
         // Call Claude API
         const response = await fetch(CLAUDE_API_URL, {
@@ -213,8 +201,6 @@ async function sendMessage() {
         
         const data = await response.json();
         
-        console.log('🤖 Received response from Claude API');
-        
         // Remove typing indicator
         removeTypingIndicator();
         
@@ -231,7 +217,6 @@ async function sendMessage() {
         addMessage('assistant', assistantMessage);
         
     } catch (error) {
-        console.error('🤖 Chat Error:', error);
         removeTypingIndicator();
         
         let errorMessage = '❌ Sorry, I encountered an error. ';
@@ -251,12 +236,12 @@ async function sendMessage() {
         chatbotInput.disabled = false;
         chatbotSend.disabled = false;
         isTyping = false;
-        // FIXED: Removed chatbotInput.focus() - let user tap input manually on mobile
+        // NO auto-focus - let user tap input manually on mobile
     }
 }
 
 // ============================================
-// ADD MESSAGE TO CHAT - FIXED ALIGNMENT
+// ADD MESSAGE TO CHAT
 // ============================================
 function addMessage(role, content) {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -266,14 +251,14 @@ function addMessage(role, content) {
     messageDiv.className = `chat-message ${role}-message`;
     
     if (role === 'user') {
-        // FIXED: User messages - NO avatar, just bubble on far right
+        // User messages - NO avatar, just bubble on far right
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-text">${escapeHtml(content)}</div>
             </div>
         `;
     } else {
-        // FIXED: Claude messages - Avatar on left, bubble next to it
+        // Claude messages - Avatar on left, bubble next to it
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-avatar">
@@ -289,7 +274,7 @@ function addMessage(role, content) {
 }
 
 // ============================================
-// TYPING INDICATOR - FIXED DESIGN
+// TYPING INDICATOR
 // ============================================
 function showTypingIndicator() {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -346,10 +331,23 @@ function formatMessage(text) {
 }
 
 // ============================================
-// REST OF THE EMBER-SCRIPT.JS FILE CONTINUES...
+// DEBOUNCE UTILITY
 // ============================================
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 
-// FIXED: Immediately prevent flash by setting dark background
+// ============================================
+// IMMEDIATE BACKGROUND FIX
+// ============================================
 (function() {
     document.documentElement.style.background = '#0f0f0f';
     if (document.body) {
@@ -358,10 +356,10 @@ function formatMessage(text) {
     }
 })();
 
-// DOM Content Loaded - Initialize Everything
+// ============================================
+// DOM CONTENT LOADED - INITIALIZE EVERYTHING
+// ============================================
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥🪙 $Ember Token Page Loading...');
-    
     // Set dark background immediately
     document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
     document.body.style.opacity = '1';
@@ -370,10 +368,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all features
     initializePresaleCountdown();
     initializePresaleCalculator();
-    initializeChatbot(); // Initialize chatbot
-    
-    console.log('🔥🪙 $Ember Token Page loaded successfully!');
-    console.log('🤖 $Ember Token Chatbot ready!');
+    initializeChatbot();
 });
 
 // ============================================
@@ -417,7 +412,7 @@ function initializePresaleCountdown() {
 }
 
 // ============================================
-// PRESALE CALCULATOR
+// PRESALE CALCULATOR - WITH DEBOUNCED INPUT
 // ============================================
 function initializePresaleCalculator() {
     const investmentInput = document.getElementById('investment-amount');
@@ -482,14 +477,17 @@ function initializePresaleCalculator() {
         });
     }
     
-    // Add input event listener
-    investmentInput.addEventListener('input', calculateTokens);
+    // Add debounced input event listener (150ms delay)
+    const debouncedCalculate = debounce(calculateTokens, 150);
+    investmentInput.addEventListener('input', debouncedCalculate);
     
     // Initial calculation
     calculateTokens();
 }
 
-// Enhanced navbar scroll effect
+// ============================================
+// NAVBAR SCROLL EFFECT
+// ============================================
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -501,7 +499,9 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Smooth scrolling for anchor links
+// ============================================
+// SMOOTH SCROLLING FOR ANCHOR LINKS
+// ============================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -516,7 +516,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Enhanced scroll reveal animation
+// ============================================
+// SCROLL REVEAL ANIMATION
+// ============================================
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -80px 0px'
@@ -536,7 +538,9 @@ document.querySelectorAll('.scroll-reveal').forEach(el => {
     observer.observe(el);
 });
 
-// Mobile Menu System
+// ============================================
+// MOBILE MENU SYSTEM
+// ============================================
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
@@ -589,7 +593,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Enhanced interactive feedback for CTA buttons
+// ============================================
+// INTERACTIVE FEEDBACK FOR CTA BUTTONS
+// ============================================
 document.querySelectorAll('.cta-button, .presale-cta-button, .join-waitlist-btn').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
@@ -608,7 +614,9 @@ document.querySelectorAll('.cta-button, .presale-cta-button, .join-waitlist-btn'
     });
 });
 
-// Scroll progress indicator
+// ============================================
+// SCROLL PROGRESS INDICATOR
+// ============================================
 function createScrollIndicator() {
     const indicator = document.createElement('div');
     indicator.style.cssText = `
@@ -634,10 +642,11 @@ function createScrollIndicator() {
 
 createScrollIndicator();
 
-// Image error handling
+// ============================================
+// IMAGE ERROR HANDLING
+// ============================================
 document.querySelectorAll('img').forEach(img => {
     img.addEventListener('error', function() {
-        console.warn('🔥🪙 Image failed to load:', this.src);
         this.style.opacity = '0.5';
         this.alt = 'Image loading...';
     });
@@ -647,38 +656,13 @@ document.querySelectorAll('img').forEach(img => {
     });
 });
 
-// Enhanced page load handling
+// ============================================
+// ENHANCED PAGE LOAD HANDLING
+// ============================================
 window.addEventListener('load', () => {
-    console.log('🔥🪙 $Ember Token page fully loaded!');
-    
     // Add glow effect to logo
     const logoIcon = document.querySelector('.logo-icon');
     if (logoIcon) {
         logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
     }
-    
-    // Performance check
-    setTimeout(() => {
-        const countdownDays = document.getElementById('countdown-days');
-        if (countdownDays && countdownDays.textContent !== '--') {
-            console.log('🔥🪙 SUCCESS: Presale countdown is active!');
-        }
-        
-        const tokensDisplay = document.getElementById('tokens-received');
-        if (tokensDisplay) {
-            console.log('🔥🪙 SUCCESS: Presale calculator is active!');
-        }
-    }, 500);
-});
-
-// Console welcome message
-console.log('%c🔥🪙 $EMBER TOKEN - PRESALE LAUNCHING SOON', 'color: #f0a500; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 Powering AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 14px; font-weight: bold;');
-console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
-console.log('%c🔥🪙 Join the presale November 1, 2025 at $0.003 per token!', 'color: #d73327; font-size: 12px; font-style: italic;');
-
-// Performance monitoring
-window.addEventListener('load', () => {
-    const loadTime = performance.now();
-    console.log(`%c🔥🪙 $Ember page loaded in ${Math.round(loadTime)}ms - Ready for presale!`, 'color: #22c55e; font-weight: bold;');
 });
