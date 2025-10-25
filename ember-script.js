@@ -257,11 +257,9 @@ async function sendMessage() {
     }
 }
 
+/ ============================================
+// ADD MESSAGE TO CHAT - UPDATED
 // ============================================
-// CHAT MESSAGE COMPONENTS - UPDATED
-// ============================================
-
-// Add message to chat with proper formatting
 function addMessage(role, content) {
     const chatbotBody = document.querySelector('.chatbot-body');
     if (!chatbotBody) return;
@@ -273,9 +271,6 @@ function addMessage(role, content) {
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-text">${escapeHtml(content)}</div>
-                <div class="message-avatar">
-                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #d73327, #fb923c); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.2rem;">U</div>
-                </div>
             </div>
         `;
     } else {
