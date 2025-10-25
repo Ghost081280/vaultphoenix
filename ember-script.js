@@ -3,6 +3,350 @@
 // UPDATED: Presale countdown to November 1, 2025
 // UPDATED: Calculator starts at $10 minimum investment
 // UPDATED: Development Fund Tracker with real-time updates
+// UPDATED: Claude API Integration for Intelligent Chatbot
+
+// ============================================
+// CLAUDE API CONFIGURATION
+// ============================================
+const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key from https://console.anthropic.com/
+const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
+const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
+
+// Chat state
+let conversationHistory = [];
+let isTyping = false;
+
+// System prompt for Vault Phoenix $Ember Token context
+const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token presale, a revolutionary cryptocurrency powering the AR crypto gaming platform.
+
+Key Information about $Ember Token:
+- Presale Launch: November 1, 2025 at 12:00 PM UTC
+- Total Supply: 166.7M tokens
+- Presale Price: $0.003 per token
+- Minimum Investment: $10 (3,333 tokens)
+- Maximum Investment: $50,000 (16.67M tokens)
+- Development Fund: $30,000 (transparently tracked)
+- Liquidity Lock: 3 months after presale ends
+- Token Utility: In-game purchases, premium locations, staking rewards, governance
+
+Token Distribution:
+- 50% Public Presale (83.35M tokens)
+- 20% Ecosystem Development (33.34M tokens)
+- 15% Team & Advisors (25M tokens, 12-month vesting)
+- 10% Marketing & Partnerships (16.67M tokens)
+- 5% Liquidity Pool (8.34M tokens)
+
+Platform Benefits:
+- Powers location-based AR crypto gaming
+- Used for premium location placements ($50-$200/location)
+- Staking rewards for token holders
+- Governance rights for platform decisions
+- Early access to new features and campaigns
+
+Your role is to:
+- Answer questions about $Ember token presale, tokenomics, and utility
+- Explain investment opportunities and ROI potential
+- Provide information about the Vault Phoenix AR gaming platform
+- Guide users on how to participate in the presale
+- Be enthusiastic about the crypto gaming revolution
+- Keep responses concise but informative
+
+Payment Methods Accepted:
+- Credit/Debit Cards (Visa, Mastercard, Amex)
+- Cryptocurrency (ETH, BTC, USDT)
+- Bank Transfer (Wire Transfer)
+
+Always maintain a professional yet friendly tone. If asked about technical implementation details beyond your knowledge, recommend contacting the team at contact@vaultphoenix.com.`;
+
+// ============================================
+// INITIALIZE CHATBOT
+// ============================================
+function initializeChatbot() {
+    console.log('🤖 Initializing Claude API Chatbot for $Ember Token...');
+    
+    const chatbotButton = document.querySelector('.chatbot-button-container');
+    const chatbotWindow = document.querySelector('.chatbot-window');
+    const chatbotClose = document.querySelector('.chatbot-close');
+    const chatbotInput = document.querySelector('.chatbot-input');
+    const chatbotSend = document.querySelector('.chatbot-send');
+    const chatbotBody = document.querySelector('.chatbot-body');
+    
+    if (!chatbotButton || !chatbotWindow) {
+        console.warn('🤖 Chatbot elements not found');
+        return;
+    }
+    
+    console.log('🤖 Chatbot elements found successfully');
+    
+    // Toggle chatbot window
+    chatbotButton.addEventListener('click', () => {
+        console.log('🤖 Chatbot button clicked');
+        chatbotWindow.classList.toggle('active');
+        if (chatbotWindow.classList.contains('active')) {
+            chatbotInput.focus();
+            // Add welcome message if first time opening
+            if (chatbotBody.children.length === 0) {
+                addWelcomeMessage();
+            }
+        }
+    });
+    
+    // Close chatbot
+    if (chatbotClose) {
+        chatbotClose.addEventListener('click', () => {
+            console.log('🤖 Chatbot closed');
+            chatbotWindow.classList.remove('active');
+        });
+    }
+    
+    // Send message on button click
+    if (chatbotSend) {
+        chatbotSend.addEventListener('click', sendMessage);
+    }
+    
+    // Send message on Enter key
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    }
+    
+    console.log('🤖 $Ember Token Chatbot initialized successfully!');
+}
+
+// ============================================
+// WELCOME MESSAGE - UPDATED FOR $EMBER TOKEN
+// ============================================
+function addWelcomeMessage() {
+    const welcomeMsg = `
+        <div class="chat-message assistant-message">
+            <div class="message-content">
+                <div class="message-avatar">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <div class="message-text">
+                    <strong>Welcome to $Ember Token Presale! <img src="images/VPEmberFlame.svg" alt="Flame" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle;"><img src="images/VPEmberCoin.PNG" alt="Coin" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle;"></strong><br><br>
+                    I'm here to help you learn about our revolutionary $Ember token presale launching November 1, 2025. Ask me about:
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>$Ember token presale details and pricing</li>
+                        <li>Tokenomics and distribution</li>
+                        <li>Investment opportunities and ROI</li>
+                        <li>Token utility in AR crypto gaming</li>
+                        <li>How to participate in the presale</li>
+                    </ul>
+                    What would you like to know about $Ember?
+                </div>
+            </div>
+        </div>
+    `;
+    
+    const chatbotBody = document.querySelector('.chatbot-body');
+    if (chatbotBody) {
+        chatbotBody.innerHTML = welcomeMsg;
+    }
+}
+
+// ============================================
+// SEND MESSAGE TO CLAUDE API
+// ============================================
+async function sendMessage() {
+    const chatbotInput = document.querySelector('.chatbot-input');
+    const chatbotBody = document.querySelector('.chatbot-body');
+    const chatbotSend = document.querySelector('.chatbot-send');
+    
+    if (!chatbotInput || !chatbotBody || !chatbotSend) return;
+    
+    const message = chatbotInput.value.trim();
+    
+    if (!message || isTyping) return;
+    
+    // Check if API key is configured
+    if (CLAUDE_API_KEY === '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') {
+        addMessage('user', message);
+        addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
+        chatbotInput.value = '';
+        return;
+    }
+    
+    // Add user message to chat
+    addMessage('user', message);
+    chatbotInput.value = '';
+    chatbotInput.disabled = true;
+    chatbotSend.disabled = true;
+    isTyping = true;
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    try {
+        // Prepare messages for API
+        const messages = [
+            ...conversationHistory,
+            { role: 'user', content: message }
+        ];
+        
+        console.log('🤖 Sending message to Claude API...');
+        
+        // Call Claude API
+        const response = await fetch(CLAUDE_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': CLAUDE_API_KEY,
+                'anthropic-version': '2023-06-01'
+            },
+            body: JSON.stringify({
+                model: CLAUDE_MODEL,
+                max_tokens: 1024,
+                system: SYSTEM_PROMPT,
+                messages: messages
+            })
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error?.message || `API Error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        console.log('🤖 Received response from Claude API');
+        
+        // Remove typing indicator
+        removeTypingIndicator();
+        
+        // Extract assistant's response
+        const assistantMessage = data.content[0].text;
+        
+        // Add to conversation history
+        conversationHistory.push(
+            { role: 'user', content: message },
+            { role: 'assistant', content: assistantMessage }
+        );
+        
+        // Add assistant message to chat
+        addMessage('assistant', assistantMessage);
+        
+    } catch (error) {
+        console.error('🤖 Chat Error:', error);
+        removeTypingIndicator();
+        
+        let errorMessage = '❌ Sorry, I encountered an error. ';
+        
+        if (error.message.includes('401')) {
+            errorMessage += 'Invalid API key. Please check your configuration.';
+        } else if (error.message.includes('429')) {
+            errorMessage += 'Rate limit exceeded. Please try again in a moment.';
+        } else if (error.message.includes('500') || error.message.includes('529')) {
+            errorMessage += 'Claude API is temporarily unavailable. Please try again.';
+        } else {
+            errorMessage += 'Please try again or contact us at contact@vaultphoenix.com';
+        }
+        
+        addMessage('assistant', errorMessage);
+    } finally {
+        chatbotInput.disabled = false;
+        chatbotSend.disabled = false;
+        isTyping = false;
+        chatbotInput.focus();
+    }
+}
+
+// ============================================
+// ADD MESSAGE TO CHAT
+// ============================================
+function addMessage(role, content) {
+    const chatbotBody = document.querySelector('.chatbot-body');
+    if (!chatbotBody) return;
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${role}-message`;
+    
+    if (role === 'user') {
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <div class="message-text">${escapeHtml(content)}</div>
+                <div class="message-avatar">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #d73327, #fb923c); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.2rem;">U</div>
+                </div>
+            </div>
+        `;
+    } else {
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <div class="message-avatar">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <div class="message-text">${formatMessage(content)}</div>
+            </div>
+        `;
+    }
+    
+    chatbotBody.appendChild(messageDiv);
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+}
+
+// ============================================
+// TYPING INDICATOR
+// ============================================
+function showTypingIndicator() {
+    const chatbotBody = document.querySelector('.chatbot-body');
+    if (!chatbotBody) return;
+    
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'chat-message assistant-message typing-indicator';
+    typingDiv.innerHTML = `
+        <div class="message-content">
+            <div class="message-avatar">
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div class="message-text">
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    chatbotBody.appendChild(typingDiv);
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const typingIndicator = document.querySelector('.typing-indicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
+// ============================================
+// MESSAGE FORMATTING
+// ============================================
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function formatMessage(text) {
+    // Convert markdown-style formatting to HTML
+    let formatted = escapeHtml(text);
+    
+    // Bold text
+    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    
+    // Bullet points
+    formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
+    formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    
+    // Line breaks
+    formatted = formatted.replace(/\n/g, '<br>');
+    
+    return formatted;
+}
 
 // EXACT COPY FROM MAIN.HTML: Enhanced navbar scroll effect
 window.addEventListener('scroll', () => {
@@ -674,6 +1018,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCountdown();
     initializeCalculator();
     initializeDevelopmentFundTracker(); // NEW: Initialize Development Fund Tracker
+    initializeChatbot(); // NEW: Initialize Claude API Chatbot
     initializeButtonEffects();
     animateProgressBar();
     initializeChartAnimation();
@@ -702,11 +1047,13 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥🪙 Scroll progress indicator active!');
     console.log('🔥🪙 Calculator starts at $10 minimum investment!');
     console.log('🔥💰 Development Fund Tracker initialized!');
+    console.log('🤖 Claude API Chatbot initialized for $Ember Token!');
 });
 
 // Console welcome message
 console.log('%c🔥🪙 $EMBER TOKEN - THE FUTURE OF AR CRYPTO GAMING', 'color: #f0a500; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
 console.log('%c🚀 Presale launches November 1, 2025 - Join the Revolution!', 'color: #fb923c; font-size: 14px; font-weight: bold;');
+console.log('%c🤖 AI-Powered Chat Assistant Ready!', 'color: #22c55e; font-size: 14px; font-weight: bold;');
 
 // Performance monitoring
 window.addEventListener('load', () => {
