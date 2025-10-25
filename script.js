@@ -1436,4 +1436,79 @@ console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise!
 window.addEventListener('load', () => {
     const loadTime = performance.now();
     console.log(`%c🔥🪙 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect VPEmberCoins!`, 'color: #22c55e; font-weight: bold;');
+});/* ============================================
+   MOBILE MENU JAVASCRIPT
+   Add this to your main JavaScript file or in a <script> tag
+   ============================================ */
+
+// Mobile Menu Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+    
+    if (mobileMenuBtn && navLinks) {
+        // Toggle mobile menu
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('mobile-active');
+            mobileMenuBtn.classList.toggle('active');
+            body.classList.toggle('mobile-menu-open');
+            
+            // Update button icon
+            if (navLinks.classList.contains('mobile-active')) {
+                mobileMenuBtn.innerHTML = '✕';
+            } else {
+                mobileMenuBtn.innerHTML = '☰';
+            }
+        });
+        
+        // Close menu when clicking on a link
+        const navLinksItems = navLinks.querySelectorAll('a');
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 1024) {
+                    navLinks.classList.remove('mobile-active');
+                    mobileMenuBtn.classList.remove('active');
+                    body.classList.remove('mobile-menu-open');
+                    mobileMenuBtn.innerHTML = '☰';
+                }
+            });
+        });
+        
+        // Close menu on window resize to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1024) {
+                navLinks.classList.remove('mobile-active');
+                mobileMenuBtn.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+                mobileMenuBtn.innerHTML = '☰';
+            }
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navLinks.classList.contains('mobile-active')) {
+                navLinks.classList.remove('mobile-active');
+                mobileMenuBtn.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+                mobileMenuBtn.innerHTML = '☰';
+            }
+        });
+    }
+    
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+});
+
+// Page load animation
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
 });
