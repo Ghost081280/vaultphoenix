@@ -9,6 +9,9 @@
 /* NEW: Floating AI Chatbot Button with pulsing glow animation */
 /* UPDATED: Bigger chatbot button (110px), fixed chat window positioning, proper overflow */
 /* FIXED: Mobile horizontal scrolling, navbar spacing, and button sizing */
+/* FIXED: Navbar button positioning - centered between logo and hamburger */
+/* FIXED: Presale section mobile optimization - no overflow */
+/* FIXED: Restored glow effects on mobile, removed background boxes from images */
 
 /* CRITICAL: Prevent horizontal scroll on mobile */
 html {
@@ -143,11 +146,35 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    z-index: 1001;
 }
 
+/* FIXED: Mobile navbar layout - proper spacing between elements */
 @media (max-width: 1024px) {
+    .nav-content {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .logo {
+        grid-column: 1;
+        justify-self: start;
+    }
+    
+    .cta-button {
+        grid-column: 2;
+        justify-self: center;
+        padding: 10px 20px !important;
+        font-size: 13px !important;
+        white-space: nowrap;
+    }
+    
     .mobile-menu-btn {
         display: block !important;
+        grid-column: 3;
+        justify-self: end;
     }
     
     .nav-links {
@@ -210,6 +237,23 @@ body {
 
     .nav-links.mobile-active a::after {
         display: none !important;
+    }
+}
+
+/* Extra small mobile - even tighter spacing */
+@media (max-width: 480px) {
+    .nav-content {
+        gap: 10px;
+    }
+    
+    .cta-button {
+        padding: 8px 16px !important;
+        font-size: 12px !important;
+    }
+    
+    .mobile-menu-btn {
+        padding: 10px 14px;
+        font-size: 18px;
     }
 }
 
@@ -625,6 +669,7 @@ body {
     animation: heroCoinFloat 6s ease-in-out infinite !important;
 }
 
+/* FIXED: Removed background box, restored glow effect on mobile */
 .hero-crypto-coin-icon {
     width: clamp(35px, 5vw, 50px) !important;
     height: clamp(35px, 5vw, 50px) !important;
@@ -632,7 +677,7 @@ body {
     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6)) !important;
     transition: all 0.3s ease !important;
     opacity: 0.6 !important;
-    border-radius: 50% !important;
+    background: transparent !important;
     z-index: 1 !important;
     pointer-events: none !important;
 }
@@ -724,7 +769,7 @@ body {
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6));
     animation: emberPulse 3s ease-in-out infinite;
-    border-radius: 50%;
+    background: transparent;
     transition: all 0.3s ease;
 }
 
@@ -836,11 +881,13 @@ body {
     justify-content: center;
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .stat-icon img {
     width: 70px;
     height: 70px;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .stat-content {
@@ -999,11 +1046,13 @@ body {
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .stakeholder-icon img {
     width: 110px;
     height: 110px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .stakeholder-title {
@@ -1087,6 +1136,7 @@ body {
     width: 50px;
     height: 50px;
     object-fit: contain;
+    background: transparent;
 }
 
 .path-text {
@@ -1192,11 +1242,13 @@ body {
     display: block;
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .utility-icon img {
     width: 70px;
     height: 70px;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .utility-item-enhanced h4 {
@@ -1253,11 +1305,13 @@ body {
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .ember-section-icon img {
     width: 110px;
     height: 110px;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
+    background: transparent;
 }
 
 /* NEW: Larger team section icon */
@@ -1352,6 +1406,7 @@ body {
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
+    background: transparent;
 }
 
 .whitepaper-section p {
@@ -1404,6 +1459,7 @@ body {
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
+    background: transparent;
 }
 
 /* Roadmap Section */
@@ -1472,6 +1528,7 @@ body {
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
+    background: transparent;
 }
 
 .roadmap-status {
@@ -1560,11 +1617,13 @@ body {
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .trust-icon img {
     width: 90px;
     height: 90px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .trust-item h4 {
@@ -1823,11 +1882,13 @@ body {
     text-align: center;
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .incentive-icon img {
     width: 90px;
     height: 90px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .incentive-card h4 {
@@ -2044,6 +2105,7 @@ body {
     height: 90px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .trust-feature h4 {
@@ -2058,9 +2120,10 @@ body {
     line-height: 1.6;
 }
 
-/* Updated Professional Presale Section */
+/* Updated Professional Presale Section - FIXED: Mobile Optimization */
 .presale-section {
     background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
+    overflow-x: hidden;
 }
 
 .presale-content {
@@ -2069,12 +2132,17 @@ body {
     gap: 60px;
     align-items: start;
     margin-bottom: 80px;
+    width: 100%;
+    max-width: 100%;
 }
 
 .presale-main {
     display: flex;
     flex-direction: column;
     gap: 40px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 /* Presale Key Metrics */
@@ -2090,6 +2158,7 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    width: 100%;
 }
 
 .metric-card {
@@ -2099,6 +2168,7 @@ body {
     text-align: center;
     border: 1px solid rgba(215, 51, 39, 0.3);
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 .metric-card:hover {
@@ -2113,11 +2183,13 @@ body {
     display: block;
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .metric-icon img {
     width: 50px;
     height: 50px;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .metric-value {
@@ -2146,6 +2218,8 @@ body {
     border-radius: 20px;
     border: 1px solid rgba(215, 51, 39, 0.3);
     text-align: center;
+    width: 100%;
+    overflow: hidden;
 }
 
 .presale-timer h3 {
@@ -2159,6 +2233,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
+    width: 100%;
 }
 
 .time-unit {
@@ -2166,6 +2241,7 @@ body {
     padding: 20px;
     border-radius: 15px;
     text-align: center;
+    width: 100%;
 }
 
 .time-value {
@@ -2187,6 +2263,8 @@ body {
     padding: 30px;
     border-radius: 20px;
     border: 1px solid rgba(215, 51, 39, 0.3);
+    width: 100%;
+    overflow: hidden;
 }
 
 .presale-progress h3 {
@@ -2203,6 +2281,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 15px;
+    width: 100%;
 }
 
 .progress-fill {
@@ -2217,6 +2296,8 @@ body {
     justify-content: space-between;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 /* NEW: Development Fund Tracker Section */
@@ -2226,6 +2307,8 @@ body {
     border-radius: 20px;
     border: 1px solid rgba(240, 165, 0, 0.3);
     margin-top: 40px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .development-fund-tracker h3 {
@@ -2255,6 +2338,7 @@ body {
     overflow: hidden;
     margin-bottom: 12px;
     border: 1px solid rgba(240, 165, 0, 0.2);
+    width: 100%;
 }
 
 .tracker-fill {
@@ -2273,6 +2357,7 @@ body {
     font-weight: 700;
     font-size: 1.1rem;
     margin-bottom: 8px;
+    flex-wrap: wrap;
 }
 
 .tracker-stats #dev-fund-withdrawn {
@@ -2333,6 +2418,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .breakdown-title {
@@ -2376,6 +2463,8 @@ body {
     padding: 30px;
     border-radius: 20px;
     border: 1px solid rgba(240, 165, 0, 0.3);
+    width: 100%;
+    overflow: hidden;
 }
 
 .fund-usage h3 {
@@ -2399,6 +2488,7 @@ body {
     padding: 15px;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+    flex-wrap: wrap;
 }
 
 .usage-percentage {
@@ -2411,6 +2501,7 @@ body {
 
 .usage-details {
     flex: 1;
+    min-width: 200px;
 }
 
 .usage-title {
@@ -2429,6 +2520,7 @@ body {
 .presale-form {
     position: sticky;
     top: 140px;
+    width: 100%;
 }
 
 .presale-card {
@@ -2437,6 +2529,7 @@ body {
     border-radius: 20px;
     border: 1px solid rgba(215, 51, 39, 0.3);
     backdrop-filter: blur(10px);
+    width: 100%;
 }
 
 .presale-card h3 {
@@ -2524,6 +2617,8 @@ body {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     border: 1px solid rgba(240, 165, 0, 0.2);
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .vesting-percentage {
@@ -2533,7 +2628,7 @@ body {
 
 .vesting-time {
     font-size: 0.9rem;
-    color:rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Payment Methods */
@@ -2777,11 +2872,13 @@ body {
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .benefit-icon img {
     width: 90px;
     height: 90px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .benefit-item h4 {
@@ -2849,6 +2946,7 @@ body {
     height: 60px;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
     opacity: 0.4;
+    background: transparent;
 }
 
 @keyframes floatingCoinMove {
@@ -2877,6 +2975,7 @@ body {
     height: 120px;
     filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8));
     animation: ctaIconFloat 4s ease-in-out infinite;
+    background: transparent;
 }
 
 .icon-glow {
@@ -2958,6 +3057,7 @@ body {
     width: 50px;
     height: 50px;
     filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.6));
+    background: transparent;
 }
 
 .prop-text h4 {
@@ -3253,6 +3353,7 @@ body {
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
+    background: transparent;
 }
 
 .disclaimer-content {
@@ -3308,6 +3409,7 @@ body {
     height: 40px;
     object-fit: contain;
     vertical-align: middle;
+    background: transparent;
 }
 
 .compliance-card p {
@@ -3408,6 +3510,7 @@ body {
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
     animation: iconPulse 2s ease-in-out infinite;
+    background: transparent;
 }
 
 @keyframes iconPulse {
@@ -3717,12 +3820,6 @@ body {
         height: 60px;
     }
     
-    /* FIXED: Mobile Get Started Button - Smaller Size */
-    .cta-button {
-        padding: 10px 18px !important;
-        font-size: 13px !important;
-    }
-    
     /* FIXED: Hero Section - Proper Top Padding */
     .ember-hero {
         padding: 140px 20px 60px !important;
@@ -3800,13 +3897,47 @@ body {
         opacity: 0.5 !important;
     }
 
+    /* FIXED: Presale Section Mobile Optimization */
     .presale-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 40px;
     }
     
     .presale-form {
         position: static;
+    }
+    
+    .presale-main {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .presale-metrics,
+    .presale-timer,
+    .presale-progress,
+    .development-fund-tracker,
+    .fund-usage {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .metrics-grid-presale {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+    
+    .countdown-timer {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px;
+    }
+    
+    .time-unit {
+        padding: 15px;
+    }
+    
+    .time-value {
+        font-size: 1.5rem;
     }
 
     .how-it-works-grid {
@@ -3827,11 +3958,6 @@ body {
     .pie-chart {
         width: 250px;
         height: 250px;
-    }
-
-    .metrics-grid-presale {
-        grid-template-columns: 1fr;
-        gap: 15px;
     }
 
     .value-prop-row {
@@ -3913,6 +4039,12 @@ body {
     .whitepaper-sections {
         grid-template-columns: 1fr;
         gap: 25px;
+    }
+    
+    /* Payment options mobile */
+    .payment-options {
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 }
 
@@ -4010,10 +4142,9 @@ body {
         height: 50px;
     }
     
-    /* FIXED: Extra Small Mobile Get Started Button */
-    .cta-button {
-        padding: 8px 15px !important;
-        font-size: 12px !important;
+    /* Extra small mobile - countdown timer stacked */
+    .countdown-timer {
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
