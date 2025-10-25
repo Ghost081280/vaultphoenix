@@ -1,15 +1,13 @@
-// Ember Token Page JavaScript
-// Phoenix Rising from Digital Ashes - $Ember Token Edition
-// UPDATED: Presale countdown to November 1, 2025
-// UPDATED: Calculator starts at $10 minimum investment
-// UPDATED: Development Fund Tracker with real-time updates
-// UPDATED: Claude API Integration for Intelligent Chatbot
-// FIXED: Mobile allocation cards now match desktop tokenomics data
+// Vault Phoenix - $Ember Token Page Interactive JavaScript
+// UPDATED: Fixed chatbot with proper message alignment and scroll prevention
+// User messages: NO avatar, pushed to far right
+// Claude messages: VP logo avatar on left
+// Background scroll prevented with overscroll-behavior
 
 // ============================================
 // CLAUDE API CONFIGURATION
 // ============================================
-const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key from https://console.anthropic.com/
+const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key
 const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
 const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 
@@ -17,54 +15,53 @@ const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 let conversationHistory = [];
 let isTyping = false;
 
-// System prompt for Vault Phoenix $Ember Token context
-const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token presale, a revolutionary cryptocurrency powering the AR crypto gaming platform.
+// System prompt for $Ember Token context
+const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token presale, a revolutionary crypto token that powers AR gaming rewards and location-based marketing campaigns.
 
 Key Information about $Ember Token:
-- Presale Launch: November 1, 2025 at 12:00 PM UTC
-- Total Supply: 1B tokens
+- Token Symbol: $EMBER
+- Presale Launch: November 1, 2025
 - Presale Price: $0.003 per token
-- Minimum Investment: $10 (3,333 tokens)
-- Maximum Investment: $50,000 (16.67M tokens)
-- Development Fund: $30,000 (transparently tracked)
-- Liquidity Lock: 3 months after presale ends
-- Token Utility: In-game purchases, premium locations, staking rewards, governance
+- Total Supply: 166.7M tokens
+- Presale Allocation: 50% (83.35M tokens) - No lock-up period
+- Platform: Ethereum blockchain (ERC-20)
+- Use Cases: In-game rewards, premium placements, staking, governance
 
-Token Distribution:
-- 35% Campaign Token Pool (350M tokens)
-- 30% Platform Operator & SDK Incentives (300M tokens)
-- 16.67% Presale (166.7M tokens)
-- 10% Team & Development (100M tokens)
-- 5% Treasury / Growth Fund (50M tokens)
-- 3.33% Reserve / Burn (33.3M tokens)
+Token Allocation Breakdown:
+- Public Presale: 50% (83.35M) - $0.003, No lock-up
+- Ecosystem Development: 20% (33.34M) - 24 months vesting
+- Team & Advisors: 15% (25M) - 12 months cliff, 18 months vesting
+- Marketing & Partnerships: 10% (16.67M) - 18 months vesting
+- Liquidity Pool: 5% (8.34M) - 3 months lock after presale
 
-Platform Benefits:
-- Powers location-based AR crypto gaming
-- Used for premium location placements ($50-$200/location)
-- Staking rewards for token holders
-- Governance rights for platform decisions
-- Early access to new features and campaigns
+Key Benefits:
+- Early investor advantage at $0.003 presale price
+- $100 FREE tokens with every Vault Phoenix service activation
+- Staking rewards and governance rights
+- Direct utility in AR gaming ecosystem
+- Limited supply with deflationary mechanisms
+
+Vault Phoenix Platform:
+- White-label AR crypto gaming with GPS & Beacon technology
+- 6+ years development, 12+ successful games
+- Revenue potential: $10K-$75K/month for advertisers
+- Industries: Sports, Tourism, Retail, Entertainment, Healthcare, Education
 
 Your role is to:
 - Answer questions about $Ember token presale, tokenomics, and utility
-- Explain investment opportunities and ROI potential
-- Provide information about the Vault Phoenix AR gaming platform
-- Guide users on how to participate in the presale
-- Be enthusiastic about the crypto gaming revolution
+- Explain investment opportunities and benefits
+- Provide information about the Vault Phoenix ecosystem
+- Guide users toward participating in the presale
+- Be enthusiastic, professional, and helpful about crypto investing
 - Keep responses concise but informative
 
-Payment Methods Accepted:
-- Credit/Debit Cards (Visa, Mastercard, Amex)
-- Cryptocurrency (ETH, BTC, USDT)
-- Bank Transfer (Wire Transfer)
-
-Always maintain a professional yet friendly tone. If asked about technical implementation details beyond your knowledge, recommend contacting the team at contact@vaultphoenix.com.`;
+Always maintain a professional yet friendly tone. Emphasize the legitimate utility and value proposition. If asked about financial advice, remind users to do their own research and consult financial advisors.`;
 
 // ============================================
 // INITIALIZE CHATBOT
 // ============================================
 function initializeChatbot() {
-    console.log('🤖 Initializing Claude API Chatbot for $Ember Token...');
+    console.log('🤖 Initializing $Ember Token Chatbot...');
     
     const chatbotButton = document.querySelector('.chatbot-button-container');
     const chatbotWindow = document.querySelector('.chatbot-window');
@@ -120,26 +117,26 @@ function initializeChatbot() {
 }
 
 // ============================================
-// WELCOME MESSAGE - UPDATED FOR $EMBER TOKEN
+// WELCOME MESSAGE - UPDATED WITH PROPER ALIGNMENT
 // ============================================
 function addWelcomeMessage() {
     const welcomeMsg = `
         <div class="chat-message assistant-message">
             <div class="message-content">
                 <div class="message-avatar">
-                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
                 </div>
                 <div class="message-text">
-                    <strong>Welcome to $Ember Token Presale! <img src="images/VPEmberFlame.svg" alt="Flame" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle;"><img src="images/VPEmberCoin.PNG" alt="Coin" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle;"></strong><br><br>
-                    I'm here to help you learn about our revolutionary $Ember token presale launching November 1, 2025. Ask me about:
+                    <strong>Welcome to $Ember Token Presale!</strong><br><br>
+                    I'm here to help you learn about our revolutionary crypto token powering AR gaming rewards. Ask me about:
                     <ul style="margin: 10px 0; padding-left: 20px;">
-                        <li>$Ember token presale details and pricing</li>
-                        <li>Tokenomics and distribution</li>
-                        <li>Investment opportunities and ROI</li>
-                        <li>Token utility in AR crypto gaming</li>
+                        <li>$Ember token presale details & pricing</li>
+                        <li>Token allocation & vesting schedules</li>
+                        <li>Investment benefits & ROI potential</li>
+                        <li>Staking rewards & governance rights</li>
                         <li>How to participate in the presale</li>
                     </ul>
-                    What would you like to know about $Ember?
+                    What would you like to know?
                 </div>
             </div>
         </div>
@@ -258,7 +255,7 @@ async function sendMessage() {
 }
 
 // ============================================
-// ADD MESSAGE TO CHAT
+// ADD MESSAGE TO CHAT - FIXED ALIGNMENT
 // ============================================
 function addMessage(role, content) {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -268,19 +265,18 @@ function addMessage(role, content) {
     messageDiv.className = `chat-message ${role}-message`;
     
     if (role === 'user') {
+        // FIXED: User messages - NO avatar, just bubble on far right
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-text">${escapeHtml(content)}</div>
-                <div class="message-avatar">
-                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #d73327, #fb923c); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.2rem;">U</div>
-                </div>
             </div>
         `;
     } else {
+        // FIXED: Claude messages - Avatar on left, bubble next to it
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-avatar">
-                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
                 </div>
                 <div class="message-text">${formatMessage(content)}</div>
             </div>
@@ -292,7 +288,7 @@ function addMessage(role, content) {
 }
 
 // ============================================
-// TYPING INDICATOR
+// TYPING INDICATOR - FIXED DESIGN
 // ============================================
 function showTypingIndicator() {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -303,12 +299,10 @@ function showTypingIndicator() {
     typingDiv.innerHTML = `
         <div class="message-content">
             <div class="message-avatar">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 100%; height: 100%; object-fit: contain;">
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
             </div>
-            <div class="message-text">
-                <div class="typing-dots">
-                    <span></span><span></span><span></span>
-                </div>
+            <div class="typing-dots">
+                <span></span><span></span><span></span>
             </div>
         </div>
     `;
@@ -350,7 +344,151 @@ function formatMessage(text) {
     return formatted;
 }
 
-// EXACT COPY FROM MAIN.HTML: Enhanced navbar scroll effect
+// ============================================
+// REST OF THE EMBER-SCRIPT.JS FILE CONTINUES...
+// ============================================
+
+// FIXED: Immediately prevent flash by setting dark background
+(function() {
+    document.documentElement.style.background = '#0f0f0f';
+    if (document.body) {
+        document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
+        document.body.style.opacity = '1';
+    }
+})();
+
+// DOM Content Loaded - Initialize Everything
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔥🪙 $Ember Token Page Loading...');
+    
+    // Set dark background immediately
+    document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
+    document.body.style.opacity = '1';
+    document.body.classList.add('loaded');
+    
+    // Initialize all features
+    initializePresaleCountdown();
+    initializePresaleCalculator();
+    initializeChatbot(); // Initialize chatbot
+    
+    console.log('🔥🪙 $Ember Token Page loaded successfully!');
+    console.log('🤖 $Ember Token Chatbot ready!');
+});
+
+// ============================================
+// PRESALE COUNTDOWN TIMER
+// ============================================
+function initializePresaleCountdown() {
+    const targetDate = new Date('November 1, 2025 00:00:00 UTC');
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate.getTime() - now;
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Update display elements
+        const daysEl = document.getElementById('countdown-days');
+        const hoursEl = document.getElementById('countdown-hours');
+        const minutesEl = document.getElementById('countdown-minutes');
+        const secondsEl = document.getElementById('countdown-seconds');
+        
+        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        
+        // If countdown is finished
+        if (distance < 0) {
+            if (daysEl) daysEl.textContent = '00';
+            if (hoursEl) hoursEl.textContent = '00';
+            if (minutesEl) minutesEl.textContent = '00';
+            if (secondsEl) secondsEl.textContent = '00';
+        }
+    }
+    
+    // Update every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+}
+
+// ============================================
+// PRESALE CALCULATOR
+// ============================================
+function initializePresaleCalculator() {
+    const investmentInput = document.getElementById('investment-amount');
+    const tokensDisplay = document.getElementById('tokens-received');
+    const valueDisplay = document.getElementById('future-value');
+    const roiDisplay = document.getElementById('roi-percentage');
+    
+    if (!investmentInput) return;
+    
+    const TOKEN_PRICE = 0.003; // $0.003 per token
+    const PRICE_MULTIPLIERS = [2, 5, 10]; // 2x, 5x, 10x scenarios
+    
+    function calculateTokens() {
+        const investment = parseFloat(investmentInput.value) || 0;
+        const tokens = investment / TOKEN_PRICE;
+        
+        // Update tokens received
+        if (tokensDisplay) {
+            tokensDisplay.textContent = tokens.toLocaleString('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+        }
+        
+        // Calculate potential values (using middle scenario - 5x)
+        const futureValue = investment * PRICE_MULTIPLIERS[1]; // 5x
+        const roi = ((futureValue - investment) / investment) * 100;
+        
+        if (valueDisplay) {
+            valueDisplay.textContent = `$${futureValue.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            })}`;
+        }
+        
+        if (roiDisplay) {
+            roiDisplay.textContent = `${roi.toFixed(0)}%`;
+        }
+        
+        // Update scenario cards
+        updateScenarioCards(investment, tokens);
+    }
+    
+    function updateScenarioCards(investment, tokens) {
+        PRICE_MULTIPLIERS.forEach((multiplier, index) => {
+            const priceEl = document.getElementById(`scenario-${index + 1}-price`);
+            const valueEl = document.getElementById(`scenario-${index + 1}-value`);
+            const roiEl = document.getElementById(`scenario-${index + 1}-roi`);
+            
+            if (priceEl && valueEl && roiEl) {
+                const newPrice = TOKEN_PRICE * multiplier;
+                const futureValue = investment * multiplier;
+                const roi = ((futureValue - investment) / investment) * 100;
+                
+                priceEl.textContent = `$${newPrice.toFixed(3)}`;
+                valueEl.textContent = `$${futureValue.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })}`;
+                roiEl.textContent = `+${roi.toFixed(0)}%`;
+            }
+        });
+    }
+    
+    // Add input event listener
+    investmentInput.addEventListener('input', calculateTokens);
+    
+    // Initial calculation
+    calculateTokens();
+}
+
+// Enhanced navbar scroll effect
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -362,8 +500,115 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ADDED: Phoenix crypto-themed scroll progress indicator (copied from main.html)
-function createPhoenixCryptoScrollIndicator() {
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offsetTop = target.offsetTop - 100;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Enhanced scroll reveal animation
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -80px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('revealed');
+            }, index * 100);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.scroll-reveal').forEach(el => {
+    observer.observe(el);
+});
+
+// Mobile Menu System
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (navLinks.classList.contains('mobile-active')) {
+                navLinks.classList.remove('mobile-active');
+                mobileMenuBtn.innerHTML = '☰';
+                document.body.style.overflow = '';
+            } else {
+                navLinks.classList.add('mobile-active');
+                mobileMenuBtn.innerHTML = '✕';
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        // Close menu when clicking nav links
+        const navLinksArray = navLinks.querySelectorAll('a');
+        navLinksArray.forEach((link) => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('mobile-active');
+                mobileMenuBtn.innerHTML = '☰';
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navLinks.classList.contains('mobile-active')) {
+                navLinks.classList.remove('mobile-active');
+                mobileMenuBtn.innerHTML = '☰';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', function(e) {
+            if (navLinks.classList.contains('mobile-active') && 
+                !navLinks.contains(e.target) && 
+                !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('mobile-active');
+                mobileMenuBtn.innerHTML = '☰';
+                document.body.style.overflow = '';
+            }
+        });
+    }
+});
+
+// Enhanced interactive feedback for CTA buttons
+document.querySelectorAll('.cta-button, .presale-cta-button, .join-waitlist-btn').forEach(button => {
+    button.addEventListener('mouseenter', function() {
+        this.style.filter = 'brightness(1.1) saturate(1.2)';
+    });
+    
+    button.addEventListener('mouseleave', function() {
+        this.style.filter = '';
+    });
+    
+    button.addEventListener('mousedown', function() {
+        this.style.transform = 'scale(0.95)';
+    });
+    
+    button.addEventListener('mouseup', function() {
+        this.style.transform = '';
+    });
+});
+
+// Scroll progress indicator
+function createScrollIndicator() {
     const indicator = document.createElement('div');
     indicator.style.cssText = `
         position: fixed;
@@ -386,782 +631,53 @@ function createPhoenixCryptoScrollIndicator() {
     });
 }
 
-// EXACT COPY FROM MAIN.HTML: Enhanced scroll reveal animation
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -80px 0px'
-};
+createScrollIndicator();
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.classList.add('revealed');
-            }, index * 100);
-        }
+// Image error handling
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', function() {
+        console.warn('🔥🪙 Image failed to load:', this.src);
+        this.style.opacity = '0.5';
+        this.alt = 'Image loading...';
     });
-}, observerOptions);
-
-document.querySelectorAll('.scroll-reveal').forEach(el => {
-    observer.observe(el);
-});
-
-// EXACT COPY FROM MAIN.HTML: Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offsetTop = target.offsetTop - 100;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
+    
+    img.addEventListener('load', function() {
+        this.style.opacity = '1';
     });
 });
 
-// EXACT COPY FROM MAIN.HTML: PHOENIX CRYPTO MOBILE MENU SYSTEM - BULLETPROOF VERSION
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥🪙 Phoenix Crypto Rising - DOM loaded, initializing mobile menu...');
+// Enhanced page load handling
+window.addEventListener('load', () => {
+    console.log('🔥🪙 $Ember Token page fully loaded!');
     
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    
-    console.log('Found phoenix crypto elements:', { 
-        mobileMenuBtn: !!mobileMenuBtn, 
-        navLinks: !!navLinks 
-    });
-
-    if (mobileMenuBtn && navLinks) {
-        // Add click handler to mobile menu button
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            console.log('🔥🪙 Phoenix crypto menu button ignited!');
-            console.log('Current classes:', navLinks.className);
-            
-            // Toggle the mobile-active class
-            if (navLinks.classList.contains('mobile-active')) {
-                // Close menu
-                navLinks.classList.remove('mobile-active');
-                mobileMenuBtn.innerHTML = '☰';
-                document.body.style.overflow = '';
-                console.log('Phoenix crypto menu extinguished');
-            } else {
-                // Open menu
-                navLinks.classList.add('mobile-active');
-                mobileMenuBtn.innerHTML = '✕';
-                document.body.style.overflow = 'hidden';
-                console.log('Phoenix crypto menu blazing!');
-                console.log('New classes:', navLinks.className);
-            }
-        });
-
-        // Close menu when clicking nav links
-        const navLinksArray = navLinks.querySelectorAll('a');
-        console.log('Found phoenix crypto nav links:', navLinksArray.length);
-        
-        navLinksArray.forEach((link, index) => {
-            link.addEventListener('click', function() {
-                console.log('Phoenix crypto nav link activated:', index);
-                navLinks.classList.remove('mobile-active');
-                mobileMenuBtn.innerHTML = '☰';
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Close on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && navLinks.classList.contains('mobile-active')) {
-                navLinks.classList.remove('mobile-active');
-                mobileMenuBtn.innerHTML = '☰';
-                document.body.style.overflow = '';
-                console.log('Phoenix crypto menu closed via escape');
-            }
-        });
-
-        // Close when clicking outside
-        document.addEventListener('click', function(e) {
-            if (navLinks.classList.contains('mobile-active') && 
-                !navLinks.contains(e.target) && 
-                !mobileMenuBtn.contains(e.target)) {
-                navLinks.classList.remove('mobile-active');
-                mobileMenuBtn.innerHTML = '☰';
-                document.body.style.overflow = '';
-                console.log('Phoenix crypto menu closed via outside click');
-            }
-        });
-
-    } else {
-        console.error('🔥🪙 Phoenix crypto menu elements not found!');
-    }
-});
-
-// UPDATED: Token sale countdown timer - November 1, 2025 Launch
-function initializeCountdown() {
-    // Set the target date to November 1, 2025 at 12:00 PM UTC
-    const targetDate = new Date('2025-11-01T12:00:00Z');
-    
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = targetDate.getTime() - now;
-        
-        // If countdown has finished
-        if (distance < 0) {
-            const daysEl = document.getElementById('days');
-            const hoursEl = document.getElementById('hours');
-            const minutesEl = document.getElementById('minutes');
-            const secondsEl = document.getElementById('seconds');
-            
-            if (daysEl) daysEl.textContent = '00';
-            if (hoursEl) hoursEl.textContent = '00';
-            if (minutesEl) minutesEl.textContent = '00';
-            if (secondsEl) secondsEl.textContent = '00';
-            
-            // Update timer title to show presale is live
-            const timerTitle = document.querySelector('.presale-timer h3');
-            if (timerTitle) {
-                timerTitle.textContent = '🔥 Presale is LIVE!';
-                timerTitle.style.color = '#4ade80';
-            }
-            return;
-        }
-        
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        // Update display
-        const daysEl = document.getElementById('days');
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
-        
-        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
-        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
-        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
-        if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+    // Add glow effect to logo
+    const logoIcon = document.querySelector('.logo-icon');
+    if (logoIcon) {
+        logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
     }
     
-    // Update every second
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-    
-    console.log('🔥🪙 Countdown initialized for November 1, 2025 presale launch!');
-}
-
-// UPDATED: Investment calculator for $0.003 price - STARTS AT $10
-function initializeCalculator() {
-    const investmentInput = document.getElementById('investment-amount');
-    const emberTokensEl = document.getElementById('ember-tokens');
-    const totalInvestmentEl = document.getElementById('total-investment');
-    
-    if (!investmentInput || !emberTokensEl || !totalInvestmentEl) return;
-    
-    function calculateTokens() {
-        const inputValue = investmentInput.value;
-        const investment = parseFloat(inputValue);
-        const tokenPrice = 0.003; // $0.003 per token
-        
-        // If empty or invalid, use minimum for display but don't force it into the input
-        if (!inputValue || isNaN(investment)) {
-            emberTokensEl.textContent = '3,333';
-            totalInvestmentEl.textContent = '$10';
-            return;
-        }
-        
-        // Calculate tokens based on actual input (even if out of range)
-        // This allows user to type freely
-        const displayInvestment = Math.max(10, Math.min(50000, investment));
-        const totalTokens = Math.floor(displayInvestment / tokenPrice);
-        
-        // Format numbers with commas
-        emberTokensEl.textContent = totalTokens.toLocaleString();
-        totalInvestmentEl.textContent = `${displayInvestment}`;
-    }
-    
-    // Calculate on input change - allows free typing
-    investmentInput.addEventListener('input', calculateTokens);
-    
-    // Validate on blur (when user clicks away) to enforce limits
-    investmentInput.addEventListener('blur', function() {
-        const investment = parseFloat(investmentInput.value);
-        
-        if (isNaN(investment) || investment < 10) {
-            investmentInput.value = 10;
-        } else if (investment > 50000) {
-            investmentInput.value = 50000;
-        }
-        
-        calculateTokens();
-    });
-    
-    // Initial calculation with $10
-    calculateTokens();
-    
-    console.log('🔥🪙 Investment calculator initialized - $0.003 per EMBER token, starting at $10');
-}
-
-// NEW: Development Fund Tracker Functionality
-function initializeDevelopmentFundTracker() {
-    const devFundWithdrawn = document.getElementById('dev-fund-withdrawn');
-    const devFundFill = document.getElementById('dev-fund-fill');
-    const devFundTimestamp = document.getElementById('dev-fund-timestamp');
-    
-    if (!devFundWithdrawn || !devFundFill || !devFundTimestamp) {
-        console.log('🔥 Development Fund Tracker elements not found - skipping initialization');
-        return;
-    }
-    
-    // In a production environment, this would fetch from an API
-    // For now, we'll set up the structure for manual updates
-    
-    const TOTAL_DEV_FUND = 30000; // $30,000 total
-    
-    // Function to update the tracker (call this when funds are withdrawn)
-    window.updateDevFundTracker = function(amountWithdrawn, timestamp) {
-        const percentage = (amountWithdrawn / TOTAL_DEV_FUND) * 100;
-        
-        // Update withdrawn amount
-        devFundWithdrawn.textContent = `$${amountWithdrawn.toLocaleString()}`;
-        
-        // Update progress bar
-        devFundFill.style.width = `${percentage}%`;
-        
-        // Update timestamp
-        if (timestamp) {
-            const date = new Date(timestamp);
-            const formattedDate = date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            devFundTimestamp.textContent = formattedDate;
-        }
-        
-        console.log(`🔥💰 Development Fund updated: $${amountWithdrawn} withdrawn (${percentage.toFixed(1)}%)`);
-    };
-    
-    // Initialize with $0
-    window.updateDevFundTracker(0, null);
-    
-    // Example usage (commented out - uncomment to test):
-    // setTimeout(() => {
-    //     window.updateDevFundTracker(5000, new Date()); // $5,000 withdrawn
-    // }, 5000);
-    
-    console.log('🔥💰 Development Fund Tracker initialized - ready for updates');
-    console.log('💡 Call window.updateDevFundTracker(amount, timestamp) to update the tracker');
-}
-
-// FIXED: Mobile Allocation Cards - Now matches desktop tokenomics data
-function initializeMobileAllocationCards() {
-    // Check if we're on mobile
-    if (window.innerWidth > 768) {
-        console.log('📱 Desktop detected - skipping mobile allocation cards');
-        return;
-    }
-    
-    const tableContainer = document.querySelector('.allocation-table .table-container');
-    if (!tableContainer) {
-        console.log('📱 Table container not found - skipping mobile allocation cards');
-        return;
-    }
-    
-    // FIXED: Token allocation data - NOW MATCHES DESKTOP VERSION EXACTLY
-    const allocations = [
-        {
-            category: 'Presale',
-            percentage: '16.67%',
-            tokens: '166.7M',
-            purpose: 'Raise $500K: 40% for DEX liquidity pool, 35% GPS & Beacon development, 15% legal/compliance, 10% marketing',
-            vesting: '10% at TGE, 3-month linear vest'
-        },
-        {
-            category: 'Campaign Token Pool',
-            percentage: '35%',
-            tokens: '350M',
-            purpose: 'Sold to Platform Operators and Advertisers through management system for GPS & Beacon campaigns',
-            vesting: 'Released based on demand'
-        },
-        {
-            category: 'Platform Operator & SDK Incentives',
-            percentage: '30%',
-            tokens: '300M',
-            purpose: 'Customer onboarding bonuses: $100 in EMBER tokens pre-loaded for each white-label app or SDK purchase to jumpstart first campaigns',
-            vesting: 'Released on demand per customer'
-        },
-        {
-            category: 'Team & Development',
-            percentage: '10%',
-            tokens: '100M',
-            purpose: 'Core team compensation and ongoing GPS & Beacon technology development',
-            vesting: '1-year cliff, 3-year linear vesting'
-        },
-        {
-            category: 'Treasury / Growth Fund',
-            percentage: '5%',
-            tokens: '50M',
-            purpose: 'Future expansion, partnerships, strategic initiatives',
-            vesting: 'Governed by community voting'
-        },
-        {
-            category: 'Reserve / Burn',
-            percentage: '3.33%',
-            tokens: '33.3M',
-            purpose: 'Deflationary mechanisms, token sinks, buybacks',
-            vesting: 'Protocol-controlled'
-        }
-    ];
-    
-    // Create mobile cards container
-    const mobileContainer = document.createElement('div');
-    mobileContainer.className = 'allocation-cards-mobile';
-    
-    // Generate cards
-    allocations.forEach(allocation => {
-        const card = document.createElement('div');
-        card.className = 'allocation-card-mobile';
-        
-        card.innerHTML = `
-            <div class="allocation-card-header">
-                <div class="allocation-card-category">${allocation.category}</div>
-                <div class="allocation-card-percentage">${allocation.percentage}</div>
-            </div>
-            <div class="allocation-card-details">
-                <div class="allocation-detail-item">
-                    <div class="allocation-detail-label">Tokens</div>
-                    <div class="allocation-detail-value">${allocation.tokens}</div>
-                </div>
-                <div class="allocation-detail-item">
-                    <div class="allocation-detail-label">Vesting</div>
-                    <div class="allocation-detail-value">${allocation.vesting}</div>
-                </div>
-            </div>
-            <div class="allocation-card-note">${allocation.purpose}</div>
-        `;
-        
-        mobileContainer.appendChild(card);
-    });
-    
-    // Insert after table container
-    tableContainer.parentNode.insertBefore(mobileContainer, tableContainer.nextSibling);
-    
-    console.log('📱 Mobile allocation cards initialized successfully - NOW MATCHES DESKTOP DATA!');
-}
-
-// Enhanced button interactions with ember effects
-function initializeButtonEffects() {
-    const buttons = document.querySelectorAll('.ember-cta-primary, .ember-cta-secondary, .presale-button, .download-button');
-    
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            this.style.filter = 'brightness(1.1) saturate(1.2)';
-            
-            // Add subtle ember glow effect
-            if (Math.random() > 0.85) {
-                createEmberGlow(this);
-            }
-        });
-        
-        button.addEventListener('mouseleave', function() {
-            this.style.filter = '';
-        });
-        
-        button.addEventListener('mousedown', function() {
-            this.style.transform = 'scale(0.95)';
-        });
-        
-        button.addEventListener('mouseup', function() {
-            this.style.transform = '';
-        });
-    });
-}
-
-// Create subtle ember glow effect
-function createEmberGlow(element) {
-    const glow = document.createElement('div');
-    glow.innerHTML = '✨';
-    glow.style.cssText = `
-        position: absolute;
-        pointer-events: none;
-        font-size: 10px;
-        animation: emberGlowFloat 1s ease-out forwards;
-        top: ${Math.random() * 15 - 7}px;
-        left: ${Math.random() * 15 - 7}px;
-        z-index: 10000;
-        filter: drop-shadow(0 0 5px rgba(240, 165, 0, 0.8));
-    `;
-    
-    element.style.position = 'relative';
-    element.appendChild(glow);
-    
-    setTimeout(() => glow.remove(), 1000);
-}
-
-// Add ember glow animation
-const emberGlowStyle = document.createElement('style');
-emberGlowStyle.textContent = `
-    @keyframes emberGlowFloat {
-        0% { 
-            transform: translateY(0) scale(1); 
-            opacity: 1; 
-        }
-        100% { 
-            transform: translateY(-20px) scale(0); 
-            opacity: 0; 
-        }
-    }
-`;
-document.head.appendChild(emberGlowStyle);
-
-// Progress bar animation
-function animateProgressBar() {
-    const progressFill = document.querySelector('.progress-fill');
-    if (!progressFill) return;
-    
-    const targetWidth = progressFill.style.width;
-    progressFill.style.width = '0%';
-    
+    // Performance check
     setTimeout(() => {
-        progressFill.style.transition = 'width 2s ease-out';
-        progressFill.style.width = targetWidth;
+        const countdownDays = document.getElementById('countdown-days');
+        if (countdownDays && countdownDays.textContent !== '--') {
+            console.log('🔥🪙 SUCCESS: Presale countdown is active!');
+        }
+        
+        const tokensDisplay = document.getElementById('tokens-received');
+        if (tokensDisplay) {
+            console.log('🔥🪙 SUCCESS: Presale calculator is active!');
+        }
     }, 500);
-}
-
-// Interactive chart bars
-function initializeChartAnimation() {
-    const chartBars = document.querySelectorAll('.chart-bar');
-    
-    const chartObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                const bar = entry.target;
-                const targetWidth = bar.style.width;
-                bar.style.width = '0%';
-                
-                setTimeout(() => {
-                    bar.style.transition = 'width 1.5s ease-out';
-                    bar.style.width = targetWidth;
-                }, index * 200);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    chartBars.forEach(bar => {
-        chartObserver.observe(bar);
-    });
-}
-
-// Stats counter animation
-function animateStats() {
-    const statNumbers = document.querySelectorAll('.stat-number, .metric-value, .time-value');
-    
-    statNumbers.forEach(stat => {
-        const finalValue = stat.textContent;
-        const numericValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
-        
-        if (numericValue && numericValue > 0) {
-            let currentValue = 0;
-            const duration = 2000;
-            const increment = numericValue / (duration / 50);
-            
-            const timer = setInterval(() => {
-                currentValue += increment;
-                if (currentValue >= numericValue) {
-                    stat.textContent = finalValue;
-                    clearInterval(timer);
-                } else {
-                    const displayValue = Math.floor(currentValue * 10) / 10;
-                    const suffix = finalValue.replace(/[\d.,]/g, '');
-                    
-                    if (finalValue.includes('.')) {
-                        stat.textContent = displayValue.toFixed(3) + suffix;
-                    } else {
-                        stat.textContent = Math.floor(displayValue).toLocaleString() + suffix;
-                    }
-                }
-            }, 50);
-        }
-    });
-}
-
-// Payment option selection
-function initializePaymentOptions() {
-    const paymentOptions = document.querySelectorAll('.payment-option');
-    
-    paymentOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            // Remove active class from all options
-            paymentOptions.forEach(opt => opt.classList.remove('active'));
-            
-            // Add active class to clicked option
-            this.classList.add('active');
-            
-            // Add visual feedback
-            this.style.background = 'rgba(240, 165, 0, 0.2)';
-            this.style.borderColor = '#f0a500';
-            
-            setTimeout(() => {
-                if (!this.classList.contains('active')) {
-                    this.style.background = '';
-                    this.style.borderColor = '';
-                }
-            }, 3000);
-        });
-    });
-}
-
-// Enhanced team member hover effects
-function initializeTeamEffects() {
-    const teamMembers = document.querySelectorAll('.team-member');
-    
-    teamMembers.forEach(member => {
-        member.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
-            this.style.boxShadow = '0 30px 60px rgba(215, 51, 39, 0.3)';
-            
-            const avatar = this.querySelector('.member-avatar');
-            if (avatar) {
-                avatar.style.transform = 'scale(1.2) rotate(10deg)';
-                avatar.style.filter = 'drop-shadow(0 0 25px rgba(240, 165, 0, 0.8))';
-            }
-        });
-        
-        member.addEventListener('mouseleave', function() {
-            this.style.transform = '';
-            this.style.boxShadow = '';
-            
-            const avatar = this.querySelector('.member-avatar');
-            if (avatar) {
-                avatar.style.transform = '';
-                avatar.style.filter = '';
-            }
-        });
-    });
-}
-
-// Roadmap item progression animation
-function initializeRoadmapAnimation() {
-    const roadmapItems = document.querySelectorAll('.roadmap-item');
-    
-    const roadmapObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    
-                    // Add completion animation for active items
-                    if (entry.target.classList.contains('active')) {
-                        entry.target.style.boxShadow = '0 0 50px rgba(240, 165, 0, 0.4)';
-                    }
-                }, index * 300);
-            }
-        });
-    }, { threshold: 0.3 });
-    
-    roadmapItems.forEach(item => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(50px)';
-        item.style.transition = 'all 0.8s ease';
-        roadmapObserver.observe(item);
-    });
-}
-
-// UPDATED: Form validation for token sale - enforces $10 minimum
-function initializeFormValidation() {
-    const investmentInput = document.getElementById('investment-amount');
-    const presaleButton = document.querySelector('.presale-button');
-    const tpaCheckbox = document.getElementById('tpa-agree-checkbox');
-    
-    if (!investmentInput || !presaleButton) return;
-    
-    function validateInput() {
-        const value = parseFloat(investmentInput.value);
-        // Allow empty or invalid during typing, but validate actual numbers
-        const isValidAmount = !isNaN(value) && value >= 10 && value <= 50000;
-        const hasAgreedTPA = tpaCheckbox ? tpaCheckbox.checked : true;
-        const isValid = isValidAmount && hasAgreedTPA;
-        
-        if (isNaN(value) || investmentInput.value === '') {
-            // Neutral state while typing
-            investmentInput.style.borderColor = 'rgba(215, 51, 39, 0.3)';
-        } else if (isValidAmount) {
-            investmentInput.style.borderColor = 'rgba(64, 224, 64, 0.5)';
-        } else {
-            investmentInput.style.borderColor = 'rgba(255, 0, 0, 0.5)';
-        }
-        
-        if (presaleButton) {
-            presaleButton.disabled = !isValid;
-            presaleButton.style.opacity = isValid ? '1' : '0.6';
-        }
-    }
-    
-    investmentInput.addEventListener('input', validateInput);
-    if (tpaCheckbox) {
-        tpaCheckbox.addEventListener('change', validateInput);
-    }
-    
-    validateInput(); // Initial validation
-}
-
-// Token sale button click handler
-function initializeTokenSaleHandler() {
-    const presaleButton = document.querySelector('.presale-button');
-    
-    if (presaleButton) {
-        presaleButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Create celebration effect
-            createCelebrationEffect();
-            
-            // Show success message (replace with actual token sale logic)
-            showTokenSaleModal();
-        });
-    }
-}
-
-// Create celebration effect
-function createCelebrationEffect() {
-    for (let i = 0; i < 12; i++) {
-        setTimeout(() => {
-            const ember = document.createElement('div');
-            ember.innerHTML = '🔥';
-            ember.style.cssText = `
-                position: fixed;
-                pointer-events: none;
-                font-size: ${Math.random() * 15 + 12}px;
-                left: ${Math.random() * 100}vw;
-                top: -50px;
-                z-index: 10000;
-                animation: celebrationFall ${Math.random() * 2 + 1.5}s linear forwards;
-                filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.8));
-            `;
-            document.body.appendChild(ember);
-            
-            setTimeout(() => ember.remove(), 4000);
-        }, i * 100);
-    }
-}
-
-// Add celebration animation
-const celebrationStyle = document.createElement('style');
-celebrationStyle.textContent = `
-    @keyframes celebrationFall {
-        to { 
-            transform: translateY(calc(100vh + 100px)) rotate(720deg); 
-            opacity: 0; 
-        }
-    }
-`;
-document.head.appendChild(celebrationStyle);
-
-// Show token sale modal (placeholder)
-function showTokenSaleModal() {
-    const modal = document.createElement('div');
-    modal.innerHTML = `
-        <div style="
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-        ">
-            <div style="
-                background: linear-gradient(135deg, #0f0f0f, #2d1810);
-                padding: 40px;
-                border-radius: 20px;
-                text-align: center;
-                color: white;
-                border: 2px solid #f0a500;
-                max-width: 500px;
-                margin: 20px;
-            ">
-                <div style="font-size: 4rem; margin-bottom: 20px;">🔥</div>
-                <h2 style="color: #f0a500; margin-bottom: 15px;">$Ember Token Presale - November 1, 2025!</h2>
-                <p style="margin-bottom: 25px;">Thank you for your interest in $Ember Token. Our presale launches November 1, 2025 at 12:00 PM UTC. Join our community for updates!</p>
-                <button onclick="this.parentElement.parentElement.remove()" style="
-                    background: linear-gradient(135deg, #d73327, #fb923c);
-                    color: white;
-                    padding: 12px 30px;
-                    border: none;
-                    border-radius: 15px;
-                    font-weight: 700;
-                    cursor: pointer;
-                ">Close</button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
-
-// Initialize everything when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-    // ADDED: Initialize scroll progress indicator first
-    createPhoenixCryptoScrollIndicator();
-    
-    initializeCountdown();
-    initializeCalculator();
-    initializeDevelopmentFundTracker(); // NEW: Initialize Development Fund Tracker
-    initializeChatbot(); // NEW: Initialize Claude API Chatbot
-    initializeButtonEffects();
-    animateProgressBar();
-    initializeChartAnimation();
-    initializePaymentOptions();
-    initializeTeamEffects();
-    initializeRoadmapAnimation();
-    initializeFormValidation();
-    initializeTokenSaleHandler();
-    initializeMobileAllocationCards(); // FIXED: Now matches desktop data
-    
-    // Trigger stats animation when visible
-    const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                setTimeout(animateStats, 500);
-                heroObserver.disconnect();
-            }
-        });
-    });
-    
-    const heroSection = document.querySelector('.ember-hero');
-    if (heroSection) {
-        heroObserver.observe(heroSection);
-    }
-    
-    console.log('🔥🪙 $Ember Token page loaded successfully - November 1, 2025 presale ready!');
-    console.log('🔥🪙 Scroll progress indicator active!');
-    console.log('🔥🪙 Calculator starts at $10 minimum investment!');
-    console.log('🔥💰 Development Fund Tracker initialized!');
-    console.log('🤖 Claude API Chatbot initialized for $Ember Token!');
-    console.log('📱 Mobile allocation cards initialized - DATA NOW MATCHES DESKTOP!');
 });
 
 // Console welcome message
-console.log('%c🔥🪙 $EMBER TOKEN - THE FUTURE OF AR CRYPTO GAMING', 'color: #f0a500; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 Presale launches November 1, 2025 - Join the Revolution!', 'color: #fb923c; font-size: 14px; font-weight: bold;');
-console.log('%c🤖 AI-Powered Chat Assistant Ready!', 'color: #22c55e; font-size: 14px; font-weight: bold;');
+console.log('%c🔥🪙 $EMBER TOKEN - PRESALE LAUNCHING SOON', 'color: #f0a500; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
+console.log('%c🚀 Powering AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 14px; font-weight: bold;');
+console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
+console.log('%c🔥🪙 Join the presale November 1, 2025 at $0.003 per token!', 'color: #d73327; font-size: 12px; font-style: italic;');
 
 // Performance monitoring
 window.addEventListener('load', () => {
     const loadTime = performance.now();
-    console.log(`%c🔥🪙 $Ember Token page loaded in ${Math.round(loadTime)}ms - Ready to revolutionize!`, 'color: #22c55e; font-weight: bold;');
-});
-
-// Error handling
-window.addEventListener('error', (event) => {
-    console.error('🔥🪙 $Ember Token page error:', event.error);
+    console.log(`%c🔥🪙 $Ember page loaded in ${Math.round(loadTime)}ms - Ready for presale!`, 'color: #22c55e; font-weight: bold;');
 });
