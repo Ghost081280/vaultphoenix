@@ -66,44 +66,6 @@ body.loaded {
    Bottom right corner with pulsing glow
    ============================================ */
 
-.chatbot-button-container {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9997;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.chatbot-button-container:hover {
-    transform: scale(1.05) translateY(-3px);
-}
-
-.chatbot-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 180px;
-    height: 180px;
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(215, 51, 39, 0.4) 30%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: chatbotGlowPulse 2.5s ease-in-out infinite;
-    z-index: 1;
-}
-
-@keyframes chatbotGlowPulse {
-    0%, 100% { 
-        transform: translate(-50%, -50%) scale(1); 
-        opacity: 0.7; 
-    }
-    50% { 
-        transform: translate(-50%, -50%) scale(1.2); 
-        opacity: 1; 
-    }
-}
-
 .chatbot-button {
     position: relative;
     width: 110px;
