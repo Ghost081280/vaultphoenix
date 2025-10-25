@@ -470,18 +470,31 @@ body {
     padding: 20px;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.3);
+    /* CRITICAL: Prevent background scroll when scrolling chat */
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* ============================================
-   CHAT MESSAGE STYLING - UPDATED TO MATCH EMBER
-   User messages pushed FAR RIGHT, Claude on LEFT
-   Better contained window design
+   CHAT MESSAGE STYLING - UPDATED
+   User messages pushed to FAR RIGHT, Claude on FAR LEFT
    ============================================ */
 
 .chat-message {
     margin-bottom: 20px;
     animation: messageSlideIn 0.3s ease-out;
     width: 100%;
+    display: flex;
+}
+
+/* Claude messages on FAR LEFT */
+.assistant-message {
+    justify-content: flex-start;
+}
+
+/* User messages pushed to FAR RIGHT */
+.user-message {
+    justify-content: flex-end;
 }
 
 @keyframes messageSlideIn {
@@ -499,19 +512,17 @@ body {
     display: flex;
     gap: 12px;
     align-items: flex-start;
-    width: 100%;
+    max-width: 85%;
 }
 
-/* Claude messages on LEFT */
+/* Claude messages - avatar on left, text on right */
 .assistant-message .message-content {
     flex-direction: row;
-    justify-content: flex-start;
 }
 
-/* User messages pushed to FAR RIGHT */
+/* User messages - avatar on right, text on left */
 .user-message .message-content {
     flex-direction: row-reverse;
-    justify-content: flex-end;
 }
 
 .message-avatar {
@@ -532,8 +543,8 @@ body {
     border-radius: 12px;
     line-height: 1.6;
     word-wrap: break-word;
-    max-width: 75%;
     width: fit-content;
+    max-width: 100%;
 }
 
 .assistant-message .message-text {
@@ -629,41 +640,6 @@ body {
     30% {
         transform: translateY(-10px);
         opacity: 1;
-    }
-}
-
-/* Mobile responsive updates */
-@media (max-width: 768px) {
-    .message-text {
-        max-width: 90%;
-        font-size: 0.9rem;
-    }
-    
-    .message-avatar {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .chat-message {
-        margin-bottom: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .message-text {
-        max-width: 95%;
-        font-size: 0.85rem;
-        padding: 10px 14px;
-    }
-    
-    .message-avatar {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .typing-dots span {
-        width: 6px;
-        height: 6px;
     }
 }
 
