@@ -258,8 +258,10 @@ async function sendMessage() {
 }
 
 // ============================================
-// ADD MESSAGE TO CHAT
+// CHAT MESSAGE COMPONENTS - UPDATED
 // ============================================
+
+// Add message to chat with proper formatting
 function addMessage(role, content) {
     const chatbotBody = document.querySelector('.chatbot-body');
     if (!chatbotBody) return;
@@ -292,7 +294,7 @@ function addMessage(role, content) {
 }
 
 // ============================================
-// TYPING INDICATOR
+// TYPING INDICATOR - UPDATED
 // ============================================
 function showTypingIndicator() {
     const chatbotBody = document.querySelector('.chatbot-body');
@@ -325,7 +327,7 @@ function removeTypingIndicator() {
 }
 
 // ============================================
-// MESSAGE FORMATTING
+// MESSAGE FORMATTING - UPDATED
 // ============================================
 function escapeHtml(text) {
     const div = document.createElement('div');
@@ -340,9 +342,12 @@ function formatMessage(text) {
     // Bold text
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
-    // Bullet points
+    // Bullet points - handle both styles
     formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
-    formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    formatted = formatted.replace(/^• (.+)$/gm, '<li>$1</li>');
+    
+    // Wrap consecutive list items in ul tags
+    formatted = formatted.replace(/(<li>.*?<\/li>\s*)+/gs, match => `<ul>${match}</ul>`);
     
     // Line breaks
     formatted = formatted.replace(/\n/g, '<br>');
