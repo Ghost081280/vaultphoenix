@@ -743,36 +743,36 @@ button:focus-visible {
     
     /* Hide desktop nav and prepare for mobile slide-in */
     .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%; /* Hidden off-screen */
-        height: 100vh;
-        width: 70%;
-        max-width: 400px;
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important; /* Hidden off-screen */
+        height: 100vh !important;
+        width: 70% !important;
+        max-width: 400px !important;
         /* Brighter ember gradient for visibility */
         background: linear-gradient(135deg, 
             rgba(45, 24, 16, 0.98) 0%,
             rgba(69, 26, 3, 0.96) 30%,
             rgba(124, 45, 18, 0.98) 60%,
             rgba(215, 51, 39, 0.95) 100%
-        );
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-        gap: 0;
-        padding: 0;
-        padding-top: 100px; /* Space from top */
-        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        box-shadow: -5px 0 25px rgba(0,0,0,0.6);
-        backdrop-filter: blur(20px);
-        border-left: 3px solid rgba(240, 165, 0, 0.6);
-        z-index: 1002; /* Below button, above overlay */
-        overflow-y: auto;
+        ) !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        padding-top: 100px !important; /* Space from top */
+        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+        box-shadow: -5px 0 25px rgba(0,0,0,0.6) !important;
+        backdrop-filter: blur(20px) !important;
+        border-left: 3px solid rgba(240, 165, 0, 0.6) !important;
+        z-index: 1002 !important; /* Below button, above overlay */
+        overflow-y: auto !important;
     }
     
     /* Active state - slide in */
     .nav-links.active {
-        right: 0;
+        right: 0 !important;
     }
     
     /* Style list items */
@@ -864,8 +864,8 @@ button:focus-visible {
     }
     
     .nav-links {
-        width: 85%;
-        padding-top: 90px;
+        width: 85% !important;
+        padding-top: 90px !important;
     }
     
     .nav-links a {
