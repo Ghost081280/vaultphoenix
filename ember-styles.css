@@ -1,4 +1,4 @@
-/* Vault Phoenix - Enhanced Stylesheet */
+/* Vault Phoenix - Enhanced Stylesheet - EMBER TOKEN PAGE */
 /* Complete redesign with improved buttons, icons, and journey section */
 /* FIXED: Prevent black/white flash during page load */
 /* FIXED: Phone gallery for perfect app screenshot fit - NO BLACK BARS - SMALLER FRAME */
@@ -14,6 +14,9 @@
 /* FIXED: Hero section spacing to prevent title from hiding behind nav */
 /* CRITICAL FIX: Mobile glow effects - backface-visibility solution applied to all icons */
 /* NAVBAR REMOVED: All navbar/navigation styles moved to shared-styles.css */
+/* REFACTORED: Now properly uses shared-styles.css for navigation and common components */
+/* FIXED: Media query syntax errors and missing closing braces */
+/* FIXED: Button standardization using shared-styles.css variables */
 
 * {
     margin: 0;
@@ -52,6 +55,7 @@ body.loaded {
     font-weight: 700;
     text-shadow: 0 1px 4px rgba(240, 165, 0, 0.2);
 }
+
 /* ============================================
    COMBINED BENEFIT ICON STYLING
    ============================================ */
@@ -529,106 +533,6 @@ body.loaded {
 .chatbot-send:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-}
-
-/* Mobile Chatbot Responsive */
-@media (max-width: 768px) {
-    .chatbot-button-container {
-        bottom: 20px;
-        right: 20px;
-    }
-    
-    .chatbot-button {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .chatbot-glow {
-        width: 130px;
-        height: 130px;
-    }
-    
-    .chatbot-tooltip {
-        display: none;
-    }
-    
-    .chatbot-window {
-        bottom: 120px;
-        right: 20px;
-        left: 20px;
-        width: calc(100% - 40px);
-        max-height: calc(100vh - 240px);
-    }
-    
-    .chatbot-header {
-        padding: 15px;
-    }
-    
-    .chatbot-body {
-        padding: 15px;
-    }
-    
-    .chatbot-footer {
-        padding: 15px;
-    }
-    
-    .chat-message.assistant-message .message-content,
-    .chat-message.user-message .message-content {
-        max-width: 90%;
-    }
-    
-    .chatbot-input,
-    .chatbot-send {
-        font-size: 16px; /* Critical for preventing zoom */
-    }
-}
-
-@media (max-width: 480px) {
-    .chatbot-button {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .chatbot-glow {
-        width: 110px;
-        height: 110px;
-    }
-    
-    .chatbot-window {
-        bottom: 100px;
-        max-height: calc(100vh - 220px);
-    }
-    
-    .chatbot-header {
-        padding: 12px;
-    }
-    
-    .chatbot-header-icon {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .chatbot-header-text h3 {
-        font-size: 1rem;
-    }
-    
-    .chatbot-body {
-        padding: 12px;
-    }
-    
-    .chatbot-footer {
-        padding: 12px;
-    }
-    
-    .chat-message.assistant-message .message-avatar {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .message-text {
-        font-size: 0.9rem;
-        padding: 10px 14px;
-    }
 }
 
 /* ============================================
@@ -2320,24 +2224,9 @@ body.loaded {
     z-index: 10;
 }
 
-
-@media (max-width: 480px) {
+/* FIXED: Enhanced CTA Button - Matching styles.css and using shared-styles.css approach */
 .cta-button {
-    color: orange;
-}
-}
-
-@media (max-width:320px) {
-.cta-button {
-    color: orange;
-}
-    
-}
-
-@media (max-width:1025px) {
-    /* Enhanced CTA Button */
-.cta-button {
- background: linear-gradient(135deg, #d73327, #fb923c);
+    background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
     padding: 14px 28px;
     border: none;
@@ -2352,7 +2241,6 @@ body.loaded {
     display: inline-block;
 }
 
-}
 .cta-button::before {
     content: '';
     position: absolute;
@@ -4822,6 +4710,56 @@ html {
 
 /* Mobile - Phone Size - MATCHED TO EMBER-STYLES.CSS */
 @media (max-width: 768px) {
+    /* Mobile Chatbot Responsive */
+    .chatbot-button-container {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .chatbot-button {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .chatbot-glow {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .chatbot-tooltip {
+        display: none;
+    }
+    
+    .chatbot-window {
+        bottom: 120px;
+        right: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        max-height: calc(100vh - 240px);
+    }
+    
+    .chatbot-header {
+        padding: 15px;
+    }
+    
+    .chatbot-body {
+        padding: 15px;
+    }
+    
+    .chatbot-footer {
+        padding: 15px;
+    }
+    
+    .chat-message.assistant-message .message-content,
+    .chat-message.user-message .message-content {
+        max-width: 90%;
+    }
+    
+    .chatbot-input,
+    .chatbot-send {
+        font-size: 16px; /* Critical for preventing zoom */
+    }
+
     /* FIXED: Hero spacing to prevent title hiding */
     .hero {
         padding: 140px 0 50px;
@@ -5225,6 +5163,52 @@ html {
 
 /* Mobile - Small Phone Size - MATCHED TO EMBER-STYLES.CSS */
 @media (max-width: 480px) {
+    .chatbot-button {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .chatbot-glow {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .chatbot-window {
+        bottom: 100px;
+        max-height: calc(100vh - 220px);
+    }
+    
+    .chatbot-header {
+        padding: 12px;
+    }
+    
+    .chatbot-header-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .chatbot-header-text h3 {
+        font-size: 1rem;
+    }
+    
+    .chatbot-body {
+        padding: 12px;
+    }
+    
+    .chatbot-footer {
+        padding: 12px;
+    }
+    
+    .chat-message.assistant-message .message-avatar {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .message-text {
+        font-size: 0.9rem;
+        padding: 10px 14px;
+    }
+
     .hero {
         padding: 120px 0 40px;
     }
