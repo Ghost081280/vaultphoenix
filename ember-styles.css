@@ -3583,7 +3583,7 @@ body {
     margin-bottom: 0;
 }
 
-/* FIXED: Compliance Grid - 4 items in 2x2 layout on desktop */
+/* FIXED: Compliance Grid - 2x2 square layout on desktop */
 .compliance-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -3598,6 +3598,10 @@ body {
     border: 1px solid rgba(240, 165, 0, 0.3);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .compliance-card:hover {
@@ -3647,6 +3651,18 @@ body {
     position: absolute;
     left: 0;
     color: #f0a500;
+}
+
+/* Mobile Responsive - Stack vertically */
+@media (max-width: 768px) {
+    .compliance-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .compliance-card {
+        aspect-ratio: auto;
+    }
 }
 
 /* ==================================================================
