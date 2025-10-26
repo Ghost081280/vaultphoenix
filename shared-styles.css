@@ -749,7 +749,13 @@ button:focus-visible {
         height: 100vh;
         width: 70%;
         max-width: 400px;
-        background: linear-gradient(135deg, rgba(15, 15, 15, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
+        /* Brighter ember gradient for visibility */
+        background: linear-gradient(135deg, 
+            rgba(45, 24, 16, 0.98) 0%,
+            rgba(69, 26, 3, 0.96) 30%,
+            rgba(124, 45, 18, 0.98) 60%,
+            rgba(215, 51, 39, 0.95) 100%
+        );
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
@@ -759,7 +765,7 @@ button:focus-visible {
         transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         box-shadow: -5px 0 25px rgba(0,0,0,0.6);
         backdrop-filter: blur(20px);
-        border-left: 3px solid rgba(215, 51, 39, 0.4);
+        border-left: 3px solid rgba(240, 165, 0, 0.6);
         z-index: 1002; /* Below button, above overlay */
         overflow-y: auto;
     }
@@ -772,10 +778,10 @@ button:focus-visible {
     /* Style list items */
     .nav-links li {
         width: 100%;
-        border-bottom: 1px solid rgba(215, 51, 39, 0.2);
+        border-bottom: 1px solid rgba(240, 165, 0, 0.3);
     }
     
-    /* Style links for mobile */
+    /* Style links for mobile - BRIGHTER & MORE VISIBLE */
     .nav-links a {
         font-size: 1.3rem;
         width: 100%;
@@ -787,12 +793,15 @@ button:focus-visible {
         border-radius: 0;
         transition: all 0.3s ease;
         background: transparent;
+        color: rgba(255, 255, 255, 0.95); /* Brighter text */
+        font-weight: 600;
     }
     
     .nav-links a:hover {
-        background: rgba(215, 51, 39, 0.2);
+        background: rgba(240, 165, 0, 0.3); /* Golden hover */
         transform: translateX(10px);
         padding-left: 2.5rem;
+        color: #ffffff; /* Pure white on hover */
     }
     
     .nav-links a::after {
@@ -806,8 +815,15 @@ button:focus-visible {
         padding: 1.2rem 2rem !important;
         border-radius: 0 !important;
         border: none !important;
-        border-bottom: 1px solid rgba(215, 51, 39, 0.2) !important;
+        border-bottom: 1px solid rgba(240, 165, 0, 0.3) !important;
         background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
+        color: white !important;
+    }
+    
+    .ember-link:hover {
+        background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold)) !important;
+        transform: translateX(10px) !important;
+        padding-left: 2.5rem !important;
     }
     
     .presale-link {
@@ -816,8 +832,15 @@ button:focus-visible {
         padding: 1.2rem 2rem !important;
         border-radius: 0 !important;
         border: none !important;
-        border-bottom: 1px solid rgba(215, 51, 39, 0.2) !important;
+        border-bottom: 1px solid rgba(240, 165, 0, 0.3) !important;
         background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange)) !important;
+        color: white !important;
+    }
+    
+    .presale-link:hover {
+        background: linear-gradient(135deg, var(--ember-orange), var(--ember-dark-red)) !important;
+        transform: translateX(10px) !important;
+        padding-left: 2.5rem !important;
     }
 }
 
