@@ -15,11 +15,13 @@ body {
 }
 
 /* Mobile menu open state - prevent background scroll */
-body.mobile-menu-open {
-    overflow: hidden;
-}
-
 @media (max-width: 1024px) {
+    body.mobile-menu-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+    
     body.mobile-menu-open .nav-links {
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
