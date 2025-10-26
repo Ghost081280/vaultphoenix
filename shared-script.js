@@ -63,36 +63,99 @@
     });
 
     // ============================================
-    // NAVBAR SCROLL EFFECT
+    // NAVBAR SMOOTH SCROLL TRANSITION
+    // Gradually changes navbar from ember gradient to black
     // ============================================
     
     const navbar = document.querySelector('.navbar');
     let lastScrollTop = 0;
     let scrollTimeout;
+    const transitionDistance = 400; // Pixels over which transition happens
 
     function handleNavbarScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
         if (navbar) {
-            // Add/remove scrolled class
-            if (scrollTop > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-
-            // Optional: Hide navbar on scroll down, show on scroll up
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = 'translateY(0)';
-            }
+            // Calculate progress (0 to 1) over the transition distance
+            const progress = Math.min(scrollTop / transitionDistance, 1);
+            
+            // Interpolate between ember colors and black
+            // Start: ember gradient colors
+            const emberBrown = { r: 45, g: 24, b: 16, a: 0.95 };
+            const emberDeep = { r: 69, g: 26, b: 3, a: 0.92 };
+            const emberRust = { r: 124, g: 45, b: 18, a: 0.90 };
+            const emberRed = { r: 215, g: 51, b: 39, a: 0.85 };
+            
+            // End: black gradient colors
+            const black1 = { r: 15, g: 15, b: 15, a: 0.98 };
+            const black2 = { r: 20, g: 20, b: 20, a: 0.98 };
+            const black3 = { r: 23, g: 23, b: 23, a: 0.98 };
+            const black4 = { r: 26, g: 26, b: 26, a: 0.98 };
+            
+            // Interpolate each color stop
+            const c1 = {
+                r: Math.round(emberBrown.r + (black1.r - emberBrown.r) * progress),
+                g: Math.round(emberBrown.g + (black1.g - emberBrown.g) * progress),
+                b: Math.round(emberBrown.b + (black1.b - emberBrown.b) * progress),
+                a: emberBrown.a + (black1.a - emberBrown.a) * progress
+            };
+            const c2 = {
+                r: Math.round(emberDeep.r + (black2.r - emberDeep.r) * progress),
+                g: Math.round(emberDeep.g + (black2.g - emberDeep.g) * progress),
+                b: Math.round(emberDeep.b + (black2.b - emberDeep.b) * progress),
+                a: emberDeep.a + (black2.a - emberDeep.a) * progress
+            };
+            const c3 = {
+                r: Math.round(emberRust.r + (black3.r - emberRust.r) * progress),
+                g: Math.round(emberRust.g + (black3.g - emberRust.g) * progress),
+                b: Math.round(emberRust.b + (black3.b - emberRust.b) * progress),
+                a: emberRust.a + (black3.a - emberRust.a) * progress
+            };
+            const c4 = {
+                r: Math.round(emberRed.r + (black4.r - emberRed.r) * progress),
+                g: Math.round(emberRed.g + (black4.g - emberRed.g) * progress),
+                b: Math.round(emberRed.b + (black4.b - emberRed.b) * progress),
+                a: emberRed.a + (black4.a - emberRed.a) * progress
+            };
+            
+            // Create smooth gradient
+            const gradient = `linear-gradient(135deg, 
+                rgba(${c1.r}, ${c1.g}, ${c1.b}, ${c1.a}) 0%, 
+                rgba(${c2.r}, ${c2.g}, ${c2.b}, ${c2.a}) 30%, 
+                rgba(${c3.r}, ${c3.g}, ${c3.b}, ${c3.a}) 60%, 
+                rgba(${c4.r}, ${c4.g}, ${c4.b}, ${c4.a}) 100%)`;
+            
+            navbar.style.background = gradient;
+            
+            // Interpolate border color (golden to red)
+            const borderStart = { r: 240, g: 165, b: 0, a: 0.4 };
+            const borderEnd = { r: 215, g: 51, b: 39, a: 0.3 };
+            const borderColor = {
+                r: Math.round(borderStart.r + (borderEnd.r - borderStart.r) * progress),
+                g: Math.round(borderStart.g + (borderEnd.g - borderStart.g) * progress),
+                b: Math.round(borderStart.b + (borderEnd.b - borderStart.b) * progress),
+                a: borderStart.a + (borderEnd.a - borderStart.a) * progress
+            };
+            navbar.style.borderBottom = `2px solid rgba(${borderColor.r}, ${borderColor.g}, ${borderColor.b}, ${borderColor.a})`;
+            
+            // Interpolate shadow
+            const shadowStart = { r: 215, g: 51, b: 39, a: 0.3 };
+            const shadowEnd = { r: 0, g: 0, b: 0, a: 0.6 };
+            const shadowColor = {
+                r: Math.round(shadowStart.r + (shadowEnd.r - shadowStart.r) * progress),
+                g: Math.round(shadowStart.g + (shadowEnd.g - shadowStart.g) * progress),
+                b: Math.round(shadowStart.b + (shadowEnd.b - shadowStart.b) * progress),
+                a: shadowStart.a + (shadowEnd.a - shadowStart.a) * progress
+            };
+            const shadowBlur = 4 + (progress * 2); // 4px to 6px
+            const shadowSpread = 20 + (progress * 10); // 20px to 30px
+            navbar.style.boxShadow = `0 ${shadowBlur}px ${shadowSpread}px rgba(${shadowColor.r}, ${shadowColor.g}, ${shadowColor.b}, ${shadowColor.a})`;
         }
         
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }
 
-    // Throttle scroll events for better performance
+    // Use requestAnimationFrame for smooth 60fps transitions
     window.addEventListener('scroll', function() {
         if (scrollTimeout) {
             window.cancelAnimationFrame(scrollTimeout);
