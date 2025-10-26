@@ -456,7 +456,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('loaded');
     
     // FIXED: Initialize main page features immediately
-    initializeMainCountdown();
     preloadPhoenixCryptoImages();
     initializeCryptoCoinImage();
     initializeEmberCoinImageV3();
