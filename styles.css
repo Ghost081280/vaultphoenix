@@ -3565,15 +3565,16 @@ body.loaded {
     border-radius: 18px;
     padding: 35px;
     border: 1px solid rgba(215, 51, 39, 0.2);
-    margin-top: 0; /* FIXED: Grid margin-bottom handles spacing */
+    margin-top: 60px !important; /* FIXED: Add significant top margin */
 }
 
 .revenue-model-benefits h4 {
     font-size: 1.6rem;
     font-weight: 800;
     color: #f0a500;
-    margin-bottom: 50px; /* ← THIS IS THE FIX */
+    margin-bottom: 50px;
     text-align: center;
+    margin-top: 0; /* Ensure no extra top margin on the heading itself */
 }
 
 .benefits-grid {
