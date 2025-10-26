@@ -1,11 +1,11 @@
-/* Ember Token Page Stylesheet - Final Production Version */
-/* Senior Developer: Clean, optimized, no flickering, proper glows */
+/* Ember Token Page Stylesheet - Complete From Backup */
+/* Navigation & Footer inherited from shared-styles.css */
+/* All other styles preserved exactly as they were */
 
 /* CRITICAL: Prevent horizontal scroll on mobile */
 html {
     overflow-x: hidden;
     width: 100%;
-    scroll-behavior: smooth;
 }
 
 body {
@@ -13,9 +13,12 @@ body {
     width: 100%;
     max-width: 100vw;
 }
-
 /* ============================================
-   FLOATING AI CHATBOT BUTTON
+   FLOATING AI CHATBOT BUTTON - BIGGER & BETTER
+   Bottom right corner with pulsing glow
+   Button: 110px, Glow: 180px
+   FIXED: Proper positioning that respects navigation
+   PROFESSIONAL UI/UX DESIGN
    ============================================ */
 
 .chatbot-button-container {
@@ -126,14 +129,16 @@ body {
     border-left: 10px solid rgba(0, 0, 0, 0.9);
 }
 
+/* PROFESSIONAL: Chatbot Window - Smart Height that Respects Navigation */
 .chatbot-window {
     position: fixed;
     bottom: 160px;
     right: 30px;
     width: 400px;
+    /* Smart height: 100vh - nav (120px) - button (110px) - spacing (80px) = safe zone */
     height: calc(100vh - 310px);
-    max-height: 550px;
-    min-height: 400px;
+    max-height: 550px; /* Cap at comfortable reading height */
+    min-height: 400px; /* Minimum usable height */
     background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #451a03 100%);
     border-radius: 25px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -218,6 +223,7 @@ body {
     transform: scale(1.1);
 }
 
+/* PROFESSIONAL: Chat Body - Flexible scroll area */
 .chatbot-body {
     flex: 1;
     min-height: 0;
@@ -230,6 +236,7 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
+/* Message Container Styling */
 .chat-message {
     margin-bottom: 15px;
     display: flex;
@@ -249,6 +256,7 @@ body {
     }
 }
 
+/* Claude Messages - Left Aligned with Avatar */
 .chat-message.assistant-message {
     flex-direction: row;
     justify-content: flex-start;
@@ -288,6 +296,7 @@ body {
     word-wrap: break-word;
 }
 
+/* User Messages - Right Aligned, NO Avatar */
 .chat-message.user-message {
     flex-direction: row-reverse;
     justify-content: flex-start;
@@ -311,6 +320,7 @@ body {
     word-wrap: break-word;
 }
 
+/* Message Text Formatting */
 .message-text strong {
     color: #f0a500;
     font-weight: 700;
@@ -331,6 +341,7 @@ body {
     margin: 5px 0;
 }
 
+/* Typing Indicator */
 .typing-indicator {
     margin-bottom: 15px;
 }
@@ -398,6 +409,7 @@ body {
     }
 }
 
+/* Chat Footer - Fixed Height */
 .chatbot-footer {
     padding: 20px;
     background: rgba(0, 0, 0, 0.4);
@@ -411,6 +423,7 @@ body {
     gap: 10px;
 }
 
+/* Input - Prevent expansion and mobile zoom */
 .chatbot-input {
     flex: 1;
     padding: 12px 16px;
@@ -460,8 +473,10 @@ body {
     cursor: not-allowed;
 }
 
+/* PROFESSIONAL: Responsive Design - Tablet & Mobile */
 @media (max-width: 1024px) {
     .chatbot-window {
+        /* Tablet: slightly smaller but still comfortable */
         height: calc(100vh - 280px);
         max-height: 500px;
         min-height: 380px;
@@ -493,6 +508,7 @@ body {
         right: 20px;
         left: 20px;
         width: calc(100% - 40px);
+        /* Mobile: Account for mobile nav height */
         height: calc(100vh - 240px);
         max-height: calc(100vh - 240px);
         min-height: 350px;
@@ -541,6 +557,7 @@ body {
     
     .chatbot-window {
         bottom: 100px;
+        /* Small mobile: tighter spacing */
         height: calc(100vh - 220px);
         max-height: calc(100vh - 220px);
         min-height: 320px;
@@ -587,11 +604,7 @@ body {
         height: 45px;
     }
 }
-
-/* ============================================
-   BASE STYLES
-   ============================================ */
-
+/* RESET AND BASE STYLES */
 * {
     margin: 0;
     padding: 0;
@@ -608,15 +621,13 @@ body {
     width: 100%;
 }
 
+/* Highlight text styling - Yellow/Gold emphasis */
 .highlight-text {
     color: #f0a500;
     font-weight: 700;
 }
 
-/* ============================================
-   EMBER HERO SECTION
-   ============================================ */
-
+/* EMBER HERO SECTION */
 .ember-hero {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
@@ -651,7 +662,7 @@ body {
     66% { transform: translateY(8px) scale(0.98) rotate(-1deg); }
 }
 
-/* FLOATING COINS - CLEAN GLOW, NO FLICKER */
+/* FLOATING COINS */
 .hero-floating-coins {
     position: absolute !important;
     top: 0 !important;
@@ -668,19 +679,19 @@ body {
     z-index: 1 !important;
     pointer-events: none !important;
     animation: heroCoinFloat 6s ease-in-out infinite !important;
-    will-change: transform, opacity;
 }
 
-/* FIXED: Pure glow effect - no flickering */
+/* FIXED: Removed background box, restored glow effect on mobile */
 .hero-crypto-coin-icon {
-    display: block;
     width: clamp(35px, 5vw, 50px) !important;
     height: clamp(35px, 5vw, 50px) !important;
     object-fit: contain !important;
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6)) !important;
+    transition: all 0.3s ease !important;
     opacity: 0.6 !important;
-    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.7)) !important;
-    transition: none !important;
-    will-change: transform, opacity;
+    background: transparent !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
 }
 
 .hero-coin-1 {
@@ -744,6 +755,7 @@ body {
     }
 }
 
+/* HERO CONTENT */
 .ember-hero-content {
     max-width: 1400px;
     margin: 0 auto;
@@ -764,12 +776,13 @@ body {
 }
 
 .ember-token-icon-image {
-    display: block;
     width: clamp(120px, 15vw, 160px);
     height: clamp(120px, 15vw, 160px);
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6));
     animation: emberPulse 3s ease-in-out infinite;
+    background: transparent;
+    transition: all 0.3s ease;
 }
 
 @keyframes emberPulse {
@@ -814,7 +827,7 @@ body {
     line-height: 1.4;
 }
 
-/* STATS GRID */
+/* ENHANCED STATS GRID - Updated for 3 columns */
 .ember-stats-grid-enhanced {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -826,6 +839,7 @@ body {
     width: 100%;
 }
 
+/* NEW: 3-column centered layout for hero stats */
 .ember-stats-three-col {
     grid-template-columns: repeat(3, 1fr);
     max-width: 800px;
@@ -869,21 +883,23 @@ body {
     opacity: 1;
 }
 
-/* FIXED: Desktop icons - larger and cleaner glow */
+/* UPDATED: Stat icon sizing to match main.html (70-90px range) */
 .stat-icon {
     font-size: 2.5rem;
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .stat-icon img {
-    display: block;
-    width: 90px;
-    height: 90px;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .stat-content {
@@ -958,11 +974,7 @@ body {
     border-color: white;
     transform: translateY(-3px);
 }
-
-/* ============================================
-   SECTIONS
-   ============================================ */
-
+/* Ember Sections */
 .ember-section {
     padding: 120px 40px;
     position: relative;
@@ -993,34 +1005,38 @@ body {
     margin-bottom: 80px;
 }
 
-/* FIXED: Section icons - larger with clean glow */
+/* UPDATED: Larger section header icons matching main.html CTA section (140px) */
 .ember-section-icon {
     font-size: 4rem;
     margin-bottom: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .ember-section-icon img {
-    display: block;
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     object-fit: contain;
-    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
+    background: transparent;
 }
 
+/* NEW: Larger section header icons matching main.html CTA section (140px) */
 .ember-section-icon-large {
     font-size: 5rem;
     margin-bottom: 30px;
 }
 
 .ember-section-icon-large img {
-    width: 180px !important;
-    height: 180px !important;
-    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6)) !important;
+    width: 140px !important;
+    height: 140px !important;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.5)) !important;
 }
 
+/* NEW: Extra large team section icon - 240px */
 .team-section-icon-xlarge {
     font-size: 8rem;
     margin-bottom: 40px;
@@ -1051,7 +1067,7 @@ body {
     font-weight: 500;
 }
 
-/* HOW IT WORKS SECTION */
+/* How It Works Section */
 .how-it-works-section {
     background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
     width: 100%;
@@ -1124,21 +1140,23 @@ body {
     border-color: rgba(34, 197, 94, 0.6);
 }
 
-/* FIXED: Stakeholder icons - larger with clean glow */
+/* UPDATED: Stakeholder icon sizing to match section headers (140px) */
 .stakeholder-icon {
     font-size: 4rem;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .stakeholder-icon img {
-    display: block;
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     object-fit: contain;
-    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .stakeholder-title {
@@ -1219,11 +1237,10 @@ body {
 }
 
 .path-icon img {
-    display: block;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .path-text {
@@ -1268,7 +1285,7 @@ body {
     font-weight: 800;
 }
 
-/* VALUE PROPOSITION */
+/* Value Proposition Enhanced */
 .value-proposition-enhanced {
     background: rgba(240, 165, 0, 0.1);
     padding: 40px;
@@ -1322,19 +1339,20 @@ body {
     transform: translateY(-5px);
 }
 
-/* FIXED: Utility icons - larger with clean glow */
+/* UPDATED: Utility icon sizing to match main.html (70px) */
 .utility-icon {
     font-size: 2.5rem;
     margin-bottom: 15px;
     display: block;
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .utility-icon img {
-    display: block;
-    width: 90px;
-    height: 90px;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .utility-item-enhanced h4 {
@@ -1350,7 +1368,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* WHITE PAPER SECTION */
+/* White Paper Section */
 .whitepaper-content {
     max-width: 1000px;
     margin: 0 auto;
@@ -1411,13 +1429,12 @@ body {
 }
 
 .whitepaper-section h4 img {
-    display: block;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .whitepaper-section p {
@@ -1465,16 +1482,15 @@ body {
 }
 
 .download-button img {
-    display: block;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    background: transparent;
 }
 
-/* ROADMAP SECTION */
+/* Roadmap Section */
 .roadmap-section {
     background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
 }
@@ -1535,13 +1551,12 @@ body {
 }
 
 .roadmap-title img {
-    display: block;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .roadmap-status {
@@ -1622,19 +1637,21 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
-/* FIXED: Trust icons - larger with clean glow */
+/* UPDATED: Trust icon sizing to match main.html (90px) */
 .trust-icon {
     font-size: 3rem;
     margin-bottom: 20px;
     display: block;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .trust-icon img {
-    display: block;
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
-    filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .trust-item h4 {
@@ -1649,7 +1666,7 @@ body {
     line-height: 1.6;
 }
 
-/* TEAM SECTION */
+/* Team Section */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1657,10 +1674,12 @@ body {
     margin-bottom: 60px;
 }
 
+/* FIXED: Force 3-column layout for advisors section to match team member card sizes */
 .team-grid-advisors {
     grid-template-columns: repeat(3, 1fr) !important;
 }
 
+/* Hide placeholder cards but maintain grid layout */
 .team-member-placeholder {
     visibility: hidden;
     pointer-events: none;
@@ -1781,6 +1800,7 @@ body {
     height: 20px;
 }
 
+/* NEW: Advisors Section Styling */
 .advisors-section {
     text-align: center;
     background: rgba(0, 0, 0, 0.3);
@@ -1804,7 +1824,7 @@ body {
     line-height: 1.6;
 }
 
-/* TOKENOMICS SECTION */
+/* Updated Professional Tokenomics Section */
 .tokenomics-section {
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
 }
@@ -1815,6 +1835,7 @@ body {
     width: 100%;
 }
 
+/* Token Overview Stats */
 .token-overview {
     margin-bottom: 60px;
 }
@@ -1847,6 +1868,7 @@ body {
     font-size: 0.9rem;
 }
 
+/* Investor Incentive Section */
 .investor-incentive-section {
     margin-bottom: 60px;
 }
@@ -1880,7 +1902,7 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
-/* FIXED: Incentive icons - larger with clean glow */
+/* UPDATED: Incentive icon sizing to match main.html (90px) */
 .incentive-icon {
     font-size: 3rem;
     margin-bottom: 20px;
@@ -1888,12 +1910,13 @@ body {
     text-align: center;
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .incentive-icon img {
-    display: block;
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
-    filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .incentive-card h4 {
@@ -1910,6 +1933,7 @@ body {
     text-align: center;
 }
 
+/* Token Distribution with Visual Chart */
 .token-distribution {
     margin-bottom: 60px;
 }
@@ -2012,6 +2036,7 @@ body {
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* Professional Allocation Table */
 .allocation-table {
     margin-bottom: 60px;
 }
@@ -2065,6 +2090,7 @@ body {
     border-bottom: none;
 }
 
+/* ADDED: Mobile-optimized allocation cards */
 @media (max-width: 768px) {
     .table-container {
         background: transparent;
@@ -2082,6 +2108,7 @@ body {
     }
 }
 
+/* Mobile Allocation Cards */
 .allocation-cards-mobile {
     display: none;
 }
@@ -2092,10 +2119,10 @@ body {
         border: none;
         overflow-x: visible;
     }
-    
-    .allocation-cards-mobile {
-        margin-bottom: 60px;
-    }
+    /* Spacing after mobile allocation cards */
+.allocation-cards-mobile {
+    margin-bottom: 60px;
+}
     
     .tokenomics-table {
         display: none;
@@ -2172,6 +2199,7 @@ body {
     }
 }
 
+/* Trust & Security Features */
 .trust-features {
     text-align: center;
 }
@@ -2210,11 +2238,11 @@ body {
 }
 
 .trust-feature .trust-icon img {
-    display: block;
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
-    filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .trust-feature h4 {
@@ -2229,10 +2257,7 @@ body {
     line-height: 1.6;
 }
 
-/* ============================================
-   PRESALE SECTION - RESET FUNDING TO $0
-   ============================================ */
-
+/* Updated Professional Presale Section - FIXED: Mobile Optimization */
 .presale-section {
     background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
     overflow-x: hidden;
@@ -2257,6 +2282,7 @@ body {
     overflow: hidden;
 }
 
+/* Presale Key Metrics */
 .presale-metrics h3 {
     font-size: 1.8rem;
     font-weight: 800;
@@ -2287,19 +2313,20 @@ body {
     transform: translateY(-3px);
 }
 
-/* FIXED: Metric icons - larger with clean glow */
+/* UPDATED: Metric icon sizing (50px for compact display) */
 .metric-icon {
     font-size: 2rem;
     margin-bottom: 10px;
     display: block;
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .metric-icon img {
-    display: block;
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
-    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .metric-value {
@@ -2321,6 +2348,7 @@ body {
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* Countdown Timer */
 .presale-timer {
     background: rgba(215, 51, 39, 0.1);
     padding: 30px;
@@ -2366,6 +2394,7 @@ body {
     font-weight: 600;
 }
 
+/* Progress Bar */
 .presale-progress {
     background: rgba(215, 51, 39, 0.1);
     padding: 30px;
@@ -2397,7 +2426,6 @@ body {
     background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
     border-radius: 10px;
     transition: width 0.3s ease;
-    width: 0%;
 }
 
 .progress-stats {
@@ -2409,7 +2437,7 @@ body {
     gap: 10px;
 }
 
-/* RESET: Development Fund Tracker - Back to $0 */
+/* NEW: Development Fund Tracker Section */
 .development-fund-tracker {
     background: rgba(240, 165, 0, 0.1);
     padding: 35px;
@@ -2456,7 +2484,6 @@ body {
     border-radius: 12px;
     transition: width 0.5s ease;
     box-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
-    width: 0%;
 }
 
 .tracker-stats {
@@ -2520,6 +2547,7 @@ body {
 .breakdown-icon {
     font-size: 1.8rem;
     flex-shrink: 0;
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
 }
 
 .breakdown-details {
@@ -2566,6 +2594,7 @@ body {
     font-weight: 800;
 }
 
+/* Fund Usage Breakdown */
 .fund-usage {
     background: rgba(240, 165, 0, 0.1);
     padding: 30px;
@@ -2624,6 +2653,7 @@ body {
     line-height: 1.4;
 }
 
+/* Presale Form/Calculator */
 .presale-form {
     position: sticky;
     top: 140px;
@@ -2699,6 +2729,7 @@ body {
     border-top: 2px solid rgba(240, 165, 0, 0.5);
 }
 
+/* Vesting Information */
 .vesting-info {
     margin-bottom: 30px;
 }
@@ -2737,6 +2768,7 @@ body {
     color: rgba(255, 255, 255, 0.8);
 }
 
+/* Payment Methods */
 .payment-methods {
     margin-bottom: 30px;
 }
@@ -2774,24 +2806,34 @@ body {
     display: block;
 }
 
-/* FIXED: Presale Promo Image - Perfect Mobile Display */
+/* ===========================================
+   FIXED: EmberTokenPresale.PNG Image
+   COMPLETELY standalone - NO module wrapper
+   Pure image with glow effect only
+   =========================================== */
+
 .presale-promo-image {
     width: 100%;
     text-align: center;
     margin-top: 40px;
     padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
 }
 
 .presale-promo-image img {
-    display: block;
     max-width: 100%;
     width: auto;
     height: auto;
     max-height: 600px;
-    margin: 0 auto;
+    display: inline-block;
     border-radius: 20px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
+    border: none;
+    background: transparent;
+    box-shadow: none;
 }
 
 .presale-promo-image:hover img {
@@ -2799,6 +2841,35 @@ body {
     transform: translateY(-5px) scale(1.02);
 }
 
+/* Mobile responsive for promo image */
+@media (max-width: 768px) {
+    .presale-promo-image {
+        margin-top: 30px;
+    }
+    
+    .presale-promo-image img {
+        width: 100%;
+        max-width: 100%;
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .presale-promo-image {
+        margin-top: 25px;
+    }
+    
+    .presale-promo-image img {
+        max-height: 300px;
+        border-radius: 15px;
+    }
+}
+
+/* ===========================================
+   END: Fixed Presale Promo Image Section
+   =========================================== */
+
+/* Token Purchase Agreement Section */
 .tpa-section {
     margin-bottom: 25px;
     padding: 20px;
@@ -2841,6 +2912,7 @@ body {
     background: linear-gradient(135deg, #fb923c, #f0a500);
 }
 
+/* TPA Compliance Checkbox */
 .tpa-compliance {
     margin-bottom: 20px;
     padding: 15px;
@@ -2958,6 +3030,7 @@ body {
     margin-bottom: 5px;
 }
 
+/* Presale Benefits */
 .presale-benefits {
     margin-top: 80px;
 }
@@ -2992,19 +3065,20 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
-/* FIXED: Benefit icons - larger with clean glow */
 .benefit-icon {
     font-size: 3rem;
     margin-bottom: 20px;
     display: block;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
+/* FIXED: Removed background box, restored glow effect */
 .benefit-icon img {
-    display: block;
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
-    filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .benefit-item h4 {
@@ -3019,7 +3093,7 @@ body {
     line-height: 1.6;
 }
 
-/* ENHANCED CTA PRESALE SECTION */
+/* Enhanced CTA Presale Section */
 .cta-presale-section-enhanced {
     background: linear-gradient(135deg, #0f0f0f 0%, #2d1810 50%, #451a03 100%);
     position: relative;
@@ -3068,11 +3142,11 @@ body {
 }
 
 .floating-coin-image {
-    display: block;
     width: 60px;
     height: 60px;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
     opacity: 0.4;
+    background: transparent;
 }
 
 @keyframes floatingCoinMove {
@@ -3097,11 +3171,11 @@ body {
 }
 
 .cta-main-icon {
-    display: block;
     width: 120px;
     height: 120px;
     filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8));
     animation: ctaIconFloat 4s ease-in-out infinite;
+    background: transparent;
 }
 
 .icon-glow {
@@ -3180,10 +3254,10 @@ body {
 }
 
 .prop-icon-image {
-    display: block;
-    width: 60px;
-    height: 60px;
-    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6));
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.6));
+    background: transparent;
 }
 
 .prop-text h4 {
@@ -3304,7 +3378,7 @@ body {
     font-weight: 500;
 }
 
-/* TPA MODAL STYLES */
+/* TPA Modal Styles */
 .tpa-modal {
     position: fixed;
     top: 0;
@@ -3452,7 +3526,7 @@ body {
     box-shadow: 0 15px 35px rgba(74, 222, 128, 0.5);
 }
 
-/* LEGAL & REGULATORY COMPLIANCE SECTION */
+/* Legal & Regulatory Compliance Section */
 .legal-compliance-section {
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
 }
@@ -3474,13 +3548,12 @@ body {
 }
 
 .legal-disclaimer h3 img {
-    display: block;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .disclaimer-content {
@@ -3497,6 +3570,7 @@ body {
     margin-bottom: 0;
 }
 
+/* FIXED: Compliance Grid - 4 items in 2x2 layout on desktop */
 .compliance-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -3529,13 +3603,13 @@ body {
     gap: 10px;
 }
 
+/* UPDATED: Compliance card icon sizing to match main.html (40px for inline icons) */
 .compliance-card h3 img {
-    display: block;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     vertical-align: middle;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+    background: transparent;
 }
 
 .compliance-card p {
@@ -3561,7 +3635,12 @@ body {
     color: #f0a500;
 }
 
-/* PROFESSIONAL COMPACT SOCIAL SHARING SECTION */
+/* ==================================================================
+   VAULT PHOENIX - PROFESSIONAL COMPACT SOCIAL SHARING SECTION
+   Matching main.html "Spread the Phoenix Fire" design
+   Theme Colors: #d73327 (Phoenix Red), #f0a500 (Ember Orange)
+   ================================================================== */
+
 .social-sharing-section-compact {
     padding: 80px 40px;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d1810 100%);
@@ -3626,17 +3705,17 @@ body {
 }
 
 .share-icon-compact {
-    display: block;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
-    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
     animation: iconPulse 2s ease-in-out infinite;
+    background: transparent;
 }
 
 @keyframes iconPulse {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6)); }
-    50% { transform: scale(1.1); filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.8)); }
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6)); }
+    50% { transform: scale(1.1); filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8)); }
 }
 
 .share-text-compact {
@@ -3720,6 +3799,12 @@ body {
     letter-spacing: 0.3px;
 }
 
+/* ==================================================================
+   VAULT PHOENIX THEMED SOCIAL SHARE BUTTONS
+   Using brand colors: #d73327, #f0a500, #fb923c and complementary gradients
+   ================================================================== */
+
+/* Twitter/X Share Button - Phoenix Red to Ember Orange Theme */
 .twitter-share-compact {
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
@@ -3731,6 +3816,7 @@ body {
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
 }
 
+/* Facebook Share Button - Ember Orange to Gold Theme */
 .facebook-share-compact {
     background: linear-gradient(135deg, #f0a500, #fb923c);
     color: white;
@@ -3742,6 +3828,7 @@ body {
     box-shadow: 0 15px 40px rgba(240, 165, 0, 0.5);
 }
 
+/* Telegram Share Button - Phoenix/Ember Gradient Theme */
 .telegram-share-compact {
     background: linear-gradient(135deg, #fb923c, #d73327);
     color: white;
@@ -3753,7 +3840,81 @@ body {
     box-shadow: 0 15px 40px rgba(251, 146, 60, 0.5);
 }
 
-/* FOOTER */
+/* Mobile Responsive - Social Sharing Section */
+@media (max-width: 768px) {
+    .social-sharing-section-compact {
+        padding: 60px 20px;
+    }
+    
+    .social-sharing-content-compact {
+        padding: 40px 25px;
+        border-radius: 20px;
+    }
+    
+    .social-sharing-header-compact {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .share-icon-compact {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .share-text-compact h3 {
+        font-size: 1.6rem;
+    }
+    
+    .share-text-compact p {
+        font-size: 1rem;
+    }
+    
+    .social-sharing-buttons-compact {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .social-share-button-compact {
+        padding: 16px 24px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-sharing-section-compact {
+        padding: 50px 15px;
+    }
+    
+    .social-sharing-content-compact {
+        padding: 30px 20px;
+    }
+    
+    .share-icon-compact {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .share-text-compact h3 {
+        font-size: 1.4rem;
+    }
+    
+    .share-text-compact p {
+        font-size: 0.95rem;
+    }
+    
+    .social-share-button-compact {
+        padding: 14px 20px;
+        font-size: 0.9rem;
+        gap: 10px;
+    }
+}
+
+/* ==================================================================
+   END: PROFESSIONAL COMPACT SOCIAL SHARING SECTION
+   ================================================================== */
+
+/* Footer */
 .footer {
     background: #0f0f0f;
     color: white;
@@ -3791,6 +3952,7 @@ body {
     margin-right: auto;
 }
 
+/* Social Media Icons */
 .social-media {
     display: flex;
     justify-content: center;
@@ -3844,21 +4006,21 @@ body {
     transform: translateY(-2px);
 }
 
-/* ============================================
-   MOBILE RESPONSIVE - COMPREHENSIVE FIXES
-   ============================================ */
-
+/* Mobile Responsive Design - COMPREHENSIVE FIXES */
 @media (max-width: 768px) {
+    /* CRITICAL: Prevent horizontal scroll */
     html, body {
         overflow-x: hidden !important;
         width: 100% !important;
         max-width: 100vw !important;
     }
     
+    /* FIXED: Mobile Logo Size */
     .logo-image {
         height: 60px;
     }
     
+    /* FIXED: Hero Section - Proper Top Padding */
     .ember-hero {
         padding: 140px 20px 60px !important;
         min-height: auto;
@@ -3901,10 +4063,9 @@ body {
         gap: 15px;
     }
 
-    /* FIXED: Mobile icon sizes - larger and cleaner */
     .stat-icon img {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
     }
 
     .stat-content {
@@ -3930,14 +4091,13 @@ body {
         font-size: 1.1rem;
     }
 
-    /* FIXED: Mobile floating coins - no flicker */
     .hero-crypto-coin-icon {
-        width: clamp(30px, 4vw, 40px) !important;
-        height: clamp(30px, 4vw, 40px) !important;
+        width: clamp(25px, 4vw, 35px) !important;
+        height: clamp(25px, 4vw, 35px) !important;
         opacity: 0.5 !important;
-        filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.6)) !important;
     }
 
+    /* FIXED: Presale Section Mobile Optimization */
     .presale-content {
         grid-template-columns: 1fr !important;
         gap: 40px;
@@ -3980,28 +4140,14 @@ body {
         font-size: 1.5rem;
     }
 
-    /* FIXED: Mobile presale image */
-    .presale-promo-image {
-        margin-top: 30px;
-    }
-    
-    .presale-promo-image img {
-        width: 100%;
-        max-width: 100%;
-        max-height: none;
-        height: auto;
-        border-radius: 15px;
-    }
-
     .how-it-works-grid {
         grid-template-columns: 1fr;
         gap: 30px;
     }
 
-    /* FIXED: Mobile section icons - larger */
     .stakeholder-icon img {
-        width: 120px;
-        height: 120px;
+        width: 90px;
+        height: 90px;
     }
 
     .distribution-visual {
@@ -4045,47 +4191,37 @@ body {
         gap: 30px;
     }
 
-    /* FIXED: All mobile icons - larger sizes */
     .ember-section-icon img {
-        width: 120px;
-        height: 120px;
+        width: 90px;
+        height: 90px;
+    }
+
+    .team-icon-large img {
+        width: 120px !important;
+        height: 120px !important;
     }
 
     .utility-icon img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .path-icon img {
         width: 60px;
         height: 60px;
     }
 
     .trust-icon img {
-        width: 90px;
-        height: 90px;
+        width: 75px;
+        height: 75px;
     }
 
     .incentive-icon img {
-        width: 90px;
-        height: 90px;
-    }
-
-    .metric-icon img {
-        width: 60px;
-        height: 60px;
+        width: 75px;
+        height: 75px;
     }
 
     .benefit-icon img {
-        width: 90px;
-        height: 90px;
+        width: 75px;
+        height: 75px;
     }
 
-    .compliance-card h3 img {
-        width: 45px;
-        height: 45px;
-    }
-    
+    /* Advisor grid mobile responsive */
     .team-grid-advisors {
         grid-template-columns: 1fr !important;
     }
@@ -4094,64 +4230,28 @@ body {
         display: none !important;
     }
     
+    /* FIXED: Sections Padding */
     .ember-section {
         padding: 60px 20px;
     }
     
+    /* Whitepaper sections mobile */
     .whitepaper-sections {
         grid-template-columns: 1fr;
         gap: 25px;
     }
     
+    /* Payment options mobile */
     .payment-options {
         grid-template-columns: 1fr;
         gap: 10px;
     }
-    
-    .social-sharing-section-compact {
-        padding: 60px 20px;
-    }
-    
-    .social-sharing-content-compact {
-        padding: 40px 25px;
-        border-radius: 20px;
-    }
-    
-    .social-sharing-header-compact {
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 30px;
-    }
-    
-    .share-icon-compact {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .share-text-compact h3 {
-        font-size: 1.6rem;
-    }
-    
-    .share-text-compact p {
-        font-size: 1rem;
-    }
-    
-    .social-sharing-buttons-compact {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .social-share-button-compact {
-        padding: 16px 24px;
-        font-size: 0.95rem;
-    }
 }
 
 @media (max-width: 480px) {
-    /* FIXED: Extra small mobile icons */
     .hero-crypto-coin-icon {
-        width: clamp(25px, 3vw, 35px) !important;
-        height: clamp(25px, 3vw, 35px) !important;
+        width: clamp(20px, 3vw, 30px) !important;
+        height: clamp(20px, 3vw, 30px) !important;
         opacity: 0.4 !important;
     }
 
@@ -4161,96 +4261,72 @@ body {
     }
 
     .stat-icon img {
-        width: 70px;
-        height: 70px;
-    }
-
-    .stakeholder-icon img {
-        width: 100px;
-        height: 100px;
-    }
-
-    .ember-section-icon img {
-        width: 100px;
-        height: 100px;
-    }
-
-    .utility-icon img {
-        width: 70px;
-        height: 70px;
-    }
-
-    .path-icon img {
-        width: 50px;
-        height: 50px;
-    }
-
-    .trust-icon img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .incentive-icon img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .metric-icon img {
         width: 55px;
         height: 55px;
     }
 
-    .benefit-icon img {
+    .stakeholder-icon img {
         width: 80px;
         height: 80px;
     }
 
-    .compliance-card h3 img {
+    .ember-section-icon img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .team-icon-large img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    .utility-icon img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .path-icon img {
         width: 40px;
         height: 40px;
     }
+
+    .trust-icon img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .incentive-icon img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .metric-icon img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .benefit-icon img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .compliance-card h3 img {
+        width: 35px;
+        height: 35px;
+    }
     
+    /* FIXED: Extra Small Mobile Logo */
     .logo-image {
         height: 50px;
     }
     
+    /* Extra small mobile - countdown timer stacked */
     .countdown-timer {
         grid-template-columns: repeat(2, 1fr) !important;
     }
-    
-    .social-sharing-section-compact {
-        padding: 50px 15px;
-    }
-    
-    .social-sharing-content-compact {
-        padding: 30px 20px;
-    }
-    
-    .share-icon-compact {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .share-text-compact h3 {
-        font-size: 1.4rem;
-    }
-    
-    .share-text-compact p {
-        font-size: 0.95rem;
-    }
-    
-    .social-share-button-compact {
-        padding: 14px 20px;
-        font-size: 0.9rem;
-        gap: 10px;
-    }
-    
-    .presale-promo-image img {
-        border-radius: 12px;
-    }
 }
 
-/* SCROLL ANIMATIONS */
+/* Scroll Animations */
 .scroll-reveal {
     opacity: 0;
     transform: translateY(60px);
@@ -4262,7 +4338,12 @@ body {
     transform: translateY(0);
 }
 
-/* HIGH CONTRAST MODE */
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* High contrast mode support */
 @media (prefers-contrast: high) {
     .ember-hero-title,
     .ember-section-title {
@@ -4272,7 +4353,7 @@ body {
     }
 }
 
-/* REDUCE MOTION */
+/* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
@@ -4294,7 +4375,7 @@ body {
     }
 }
 
-/* CUSTOM SCROLLBAR */
+/* Custom scrollbar styling */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -4312,7 +4393,7 @@ body {
     background: linear-gradient(180deg, #fb923c, #f0a500);
 }
 
-/* SELECTION STYLING */
+/* Selection styling */
 ::selection {
     background: rgba(240, 165, 0, 0.3);
     color: #ffffff;
