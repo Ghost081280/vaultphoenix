@@ -735,6 +735,8 @@ button:focus-visible {
     
     .mobile-menu-btn {
         display: block;
+        position: relative;
+        z-index: 1002;
     }
     
     .nav-links {
@@ -746,32 +748,45 @@ button:focus-visible {
         max-width: 400px;
         background: linear-gradient(135deg, rgba(15, 15, 15, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
         flex-direction: column;
-        justify-content: center;
-        gap: 2rem;
-        padding: 2rem;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 0;
+        padding: 0;
+        padding-top: 100px; /* Space for close area */
         transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         box-shadow: -5px 0 25px rgba(0,0,0,0.6);
         backdrop-filter: blur(20px);
         border-left: 3px solid rgba(215, 51, 39, 0.4);
+        z-index: 1001;
+        overflow-y: auto;
     }
     
     .nav-links.active {
         right: 0;
     }
     
-    .nav-links a {
-        font-size: 1.4rem;
+    .nav-links li {
         width: 100%;
-        padding: 1rem;
-        text-align: center;
-        border-radius: 12px;
+        border-bottom: 1px solid rgba(215, 51, 39, 0.2);
+    }
+    
+    .nav-links a {
+        font-size: 1.3rem;
+        width: 100%;
+        padding: 1.2rem 2rem;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 0;
         transition: all 0.3s ease;
-        background: rgba(215, 51, 39, 0.05);
+        background: transparent;
     }
     
     .nav-links a:hover {
         background: rgba(215, 51, 39, 0.2);
-        transform: translateX(-10px);
+        transform: translateX(10px);
+        padding-left: 2.5rem;
     }
     
     .nav-links a::after {
@@ -779,15 +794,23 @@ button:focus-visible {
     }
     
     .ember-link {
-        justify-content: center !important;
+        justify-content: flex-start !important;
         width: 100% !important;
-        padding: 14px 24px !important;
+        padding: 1.2rem 2rem !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-bottom: 1px solid rgba(215, 51, 39, 0.2) !important;
+        background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
     }
     
     .presale-link {
-        justify-content: center !important;
+        justify-content: flex-start !important;
         width: 100% !important;
-        padding: 14px 24px !important;
+        padding: 1.2rem 2rem !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-bottom: 1px solid rgba(215, 51, 39, 0.2) !important;
+        background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange)) !important;
     }
 }
 
@@ -816,22 +839,22 @@ button:focus-visible {
     
     .nav-links {
         width: 85%;
-        padding: 1.5rem;
+        padding-top: 90px;
     }
     
     .nav-links a {
         font-size: 1.2rem;
-        padding: 0.8rem;
+        padding: 1rem 1.5rem;
     }
     
     .ember-link {
-        padding: 12px 20px !important;
-        font-size: 1rem !important;
+        padding: 1rem 1.5rem !important;
+        font-size: 1.2rem !important;
     }
     
     .presale-link {
-        padding: 12px 20px !important;
-        font-size: 1rem !important;
+        padding: 1rem 1.5rem !important;
+        font-size: 1.2rem !important;
     }
     
     .nav-ember-coin {
