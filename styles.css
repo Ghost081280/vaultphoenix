@@ -64,9 +64,10 @@ body.loaded {
 }
 
 /* ============================================
-   UPDATED: FLOATING AI CHATBOT BUTTON - BIGGER
+   FLOATING AI CHATBOT BUTTON - BIGGER & BETTER
    Bottom right corner with pulsing glow
    Button: 110px, Glow: 180px
+   FIXED: Proper message alignment and scroll prevention
    ============================================ */
 
 .chatbot-button-container {
