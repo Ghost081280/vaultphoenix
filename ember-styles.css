@@ -987,11 +987,16 @@ body {
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.5)) !important;
 }
 
-/* NEW: Larger team section icon */
-.team-icon-large img {
-    width: 150px !important;
-    height: 150px !important;
-    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.5)) !important;
+/* NEW: Extra large team section icon - 180px */
+.team-section-icon-xlarge {
+    font-size: 6rem;
+    margin-bottom: 35px;
+}
+
+.team-section-icon-xlarge img {
+    width: 180px !important;
+    height: 180px !important;
+    filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.6)) !important;
 }
 
 .ember-section-title {
