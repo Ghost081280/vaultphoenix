@@ -12,6 +12,7 @@
 /* MOBILE OPTIMIZED: Comprehensive mobile responsiveness with proper scaling and touch targets */
 /* REFACTORED: Removed duplicate navbar CSS - now using shared-styles.css */
 /* REFACTORED: Standardized button classes and utilizing CSS variables */
+/* FIXED: Removed navigation overrides to ensure consistency across pages */
 
 * {
     margin: 0;
@@ -1201,90 +1202,6 @@ body.loaded {
 .hero-benefit-item:hover .benefit-icon-small {
     transform: scale(1.1) rotate(5deg);
     filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.6));
-}
-
-/* Logo and Ember Link Styles - Using shared-styles.css navbar */
-.logo-image {
-    height: 80px;
-    width: auto;
-    transition: all 0.3s ease;
-    filter: drop-shadow(0 0 8px rgba(215, 51, 39, 0.3));
-}
-
-.logo-image:hover {
-    filter: drop-shadow(0 0 12px rgba(215, 51, 39, 0.6));
-    transform: scale(1.05);
-}
-
-/* Ember Link Button - Matched to shared-styles.css and ember-styles.css */
-.ember-link {
-    background: linear-gradient(135deg, #d73327, #fb923c) !important;
-    color: white !important;
-    padding: 8px 16px !important;
-    border-radius: 20px !important;
-    font-weight: 700 !important;
-    font-size: 14px !important;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-}
-
-.ember-link:hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.5) !important;
-    color: white !important;
-}
-
-.ember-link::after {
-    display: none !important;
-}
-
-.nav-ember-coin {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-    transition: all 0.3s ease;
-}
-
-.ember-link:hover .nav-ember-coin {
-    transform: scale(1.1) rotate(10deg);
-}
-
-.footer-ember-link {
-    background: linear-gradient(135deg, #d73327, #fb923c) !important;
-    color: white !important;
-    padding: 8px 16px !important;
-    border-radius: 20px !important;
-    font-weight: 700 !important;
-    font-size: 14px !important;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    text-decoration: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    transition: all 0.3s ease !important;
-}
-
-.footer-ember-link:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.5) !important;
-    color: white !important;
-}
-
-.footer-ember-coin {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-    transition: all 0.3s ease;
-}
-
-.footer-ember-link:hover .footer-ember-coin {
-    transform: scale(1.1) rotate(10deg);
 }
 
 /* REDESIGNED: Phoenix Token Evolution Section - More Compact & Professional */
