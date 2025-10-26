@@ -3558,7 +3558,6 @@ body {
     text-align: center;
 }
 
-/* FIXED: Increased inline legal disclaimer icon to 50px */
 .legal-disclaimer h3 img {
     width: 50px;
     height: 50px;
@@ -3583,16 +3582,15 @@ body {
     margin-bottom: 0;
 }
 
-/* FIXED: Compliance Grid - Perfect 2x2 square layout on desktop */
+/* COMPLIANCE GRID - 2x2 SQUARE LAYOUT */
 .compliance-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 40px;
-    margin-bottom: 60px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 40px !important;
+    margin-bottom: 60px !important;
+    max-width: 1000px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .compliance-card {
@@ -3602,9 +3600,7 @@ body {
     border: 1px solid rgba(240, 165, 0, 0.3);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
+    min-height: 450px;
 }
 
 .compliance-card:hover {
@@ -3623,7 +3619,6 @@ body {
     gap: 10px;
 }
 
-/* FIXED: Increased compliance card inline icon to 50px */
 .compliance-card h3 img {
     width: 50px;
     height: 50px;
@@ -3637,12 +3632,12 @@ body {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
     margin-bottom: 15px;
-    flex-grow: 1;
 }
 
 .compliance-card ul {
     list-style: none;
     color: rgba(255, 255, 255, 0.9);
+    margin-top: 15px;
 }
 
 .compliance-card li {
@@ -3657,12 +3652,11 @@ body {
     color: #f0a500;
 }
 
-/* Mobile Responsive - Stack vertically */
-@media (max-width: 768px) {
+/* Tablet and Mobile */
+@media (max-width: 968px) {
     .compliance-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 30px;
+        grid-template-columns: 1fr !important;
+        max-width: 100% !important;
     }
     
     .compliance-card {
