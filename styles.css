@@ -3765,25 +3765,25 @@ body.loaded {
     font-weight: 700;
 }
 
-/* Mobile Menu - Matching shared-styles.css approach */
+/* Mobile Menu - MATCHED TO shared-styles.css */
 .mobile-menu-btn {
     display: none;
-    position: relative;
-    z-index: 9999;
-    background: rgba(215, 51, 39, 0.9);
+    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
-    border: none;
-    padding: 12px 16px;
-    font-size: 20px;
-    border-radius: 8px;
+    font-size: 1.8rem;
     cursor: pointer;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    z-index: 1001;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
 }
 
 .mobile-menu-btn:hover {
-    background: #d73327;
     transform: scale(1.05);
+    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
+    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.6);
 }
 
 /* Footer */
