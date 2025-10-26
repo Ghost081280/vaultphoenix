@@ -363,78 +363,62 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================
-// PRESALE CALCULATOR - WITH DEBOUNCED INPUT
+// PRESALE CALCULATOR - WITH DEBOUNCED INPUT & VALIDATION
 // ============================================
 function initializePresaleCalculator() {
     const investmentInput = document.getElementById('investment-amount');
-    const tokensDisplay = document.getElementById('tokens-received');
-    const valueDisplay = document.getElementById('future-value');
-    const roiDisplay = document.getElementById('roi-percentage');
+    const emberTokensDisplay = document.getElementById('ember-tokens');
+    const totalInvestmentDisplay = document.getElementById('total-investment');
     
     if (!investmentInput) return;
     
     const TOKEN_PRICE = 0.003; // $0.003 per token
-    const PRICE_MULTIPLIERS = [2, 5, 10]; // 2x, 5x, 10x scenarios
+    const MIN_INVESTMENT = 10;
+    const MAX_INVESTMENT = 50000;
     
-    function calculateTokens() {
+    function validateAndCalculate() {
         const investment = parseFloat(investmentInput.value) || 0;
+        
+        // Validation with color feedback
+        if (investment < MIN_INVESTMENT) {
+            investmentInput.style.borderColor = '#ef4444';
+            investmentInput.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+        } else if (investment > MAX_INVESTMENT) {
+            investmentInput.style.borderColor = '#ef4444';
+            investmentInput.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+        } else {
+            investmentInput.style.borderColor = '#4ade80';
+            investmentInput.style.backgroundColor = 'rgba(74, 222, 128, 0.1)';
+        }
+        
+        // Calculate tokens
         const tokens = investment / TOKEN_PRICE;
         
-        // Update tokens received
-        if (tokensDisplay) {
-            tokensDisplay.textContent = tokens.toLocaleString('en-US', {
+        // Update displays
+        if (emberTokensDisplay) {
+            emberTokensDisplay.textContent = tokens.toLocaleString('en-US', {
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 0
             });
         }
         
-        // Calculate potential values (using middle scenario - 5x)
-        const futureValue = investment * PRICE_MULTIPLIERS[1]; // 5x
-        const roi = ((futureValue - investment) / investment) * 100;
-        
-        if (valueDisplay) {
-            valueDisplay.textContent = `$${futureValue.toLocaleString('en-US', {
+        if (totalInvestmentDisplay) {
+            totalInvestmentDisplay.textContent = `$${investment.toLocaleString('en-US', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             })}`;
         }
-        
-        if (roiDisplay) {
-            roiDisplay.textContent = `${roi.toFixed(0)}%`;
-        }
-        
-        // Update scenario cards
-        updateScenarioCards(investment, tokens);
-    }
-    
-    function updateScenarioCards(investment, tokens) {
-        PRICE_MULTIPLIERS.forEach((multiplier, index) => {
-            const priceEl = document.getElementById(`scenario-${index + 1}-price`);
-            const valueEl = document.getElementById(`scenario-${index + 1}-value`);
-            const roiEl = document.getElementById(`scenario-${index + 1}-roi`);
-            
-            if (priceEl && valueEl && roiEl) {
-                const newPrice = TOKEN_PRICE * multiplier;
-                const futureValue = investment * multiplier;
-                const roi = ((futureValue - investment) / investment) * 100;
-                
-                priceEl.textContent = `$${newPrice.toFixed(3)}`;
-                valueEl.textContent = `$${futureValue.toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                })}`;
-                roiEl.textContent = `+${roi.toFixed(0)}%`;
-            }
-        });
     }
     
     // Add debounced input event listener (150ms delay)
-    // Use debounce function from shared-script.js
-    const debouncedCalculate = window.debounce ? window.debounce(calculateTokens, 150) : calculateTokens;
+    const debouncedCalculate = window.debounce ? window.debounce(validateAndCalculate, 150) : validateAndCalculate;
     investmentInput.addEventListener('input', debouncedCalculate);
     
+    // Also validate on blur (when user clicks away)
+    investmentInput.addEventListener('blur', validateAndCalculate);
+    
     // Initial calculation
-    calculateTokens();
+    validateAndCalculate();
 }
 
 // ============================================
