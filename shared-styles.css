@@ -264,9 +264,10 @@ body {
     cursor: pointer;
     padding: 0.6rem 1rem;
     border-radius: 12px;
-    z-index: 1001;
+    z-index: 1003; /* HIGHER than nav-links when open */
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+    position: relative; /* Important for z-index */
 }
 
 .mobile-menu-btn:hover {
@@ -716,13 +717,13 @@ button:focus-visible {
 }
 
 /* ===================================
-   RESPONSIVE NAVIGATION - TABLET
+   RESPONSIVE NAVIGATION - TABLET & MOBILE
    =================================== */
 
 @media (max-width: 1024px) {
     .navbar {
         padding: 1rem 1.5rem;
-        height: 90px; /* Fixed height for tablet */
+        height: 90px;
     }
     
     .logo-image {
@@ -733,16 +734,18 @@ button:focus-visible {
         font-size: 1.5rem;
     }
     
+    /* Show mobile menu button */
     .mobile-menu-btn {
         display: block;
         position: relative;
-        z-index: 1002;
+        z-index: 1003; /* Above everything */
     }
     
+    /* Hide desktop nav and prepare for mobile slide-in */
     .nav-links {
         position: fixed;
         top: 0;
-        right: -100%;
+        right: -100%; /* Hidden off-screen */
         height: 100vh;
         width: 70%;
         max-width: 400px;
@@ -752,24 +755,27 @@ button:focus-visible {
         align-items: stretch;
         gap: 0;
         padding: 0;
-        padding-top: 100px; /* Space for close area */
+        padding-top: 100px; /* Space from top */
         transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         box-shadow: -5px 0 25px rgba(0,0,0,0.6);
         backdrop-filter: blur(20px);
         border-left: 3px solid rgba(215, 51, 39, 0.4);
-        z-index: 1001;
+        z-index: 1002; /* Below button, above overlay */
         overflow-y: auto;
     }
     
+    /* Active state - slide in */
     .nav-links.active {
         right: 0;
     }
     
+    /* Style list items */
     .nav-links li {
         width: 100%;
         border-bottom: 1px solid rgba(215, 51, 39, 0.2);
     }
     
+    /* Style links for mobile */
     .nav-links a {
         font-size: 1.3rem;
         width: 100%;
@@ -793,6 +799,7 @@ button:focus-visible {
         display: none;
     }
     
+    /* Mobile-specific button styles */
     .ember-link {
         justify-content: flex-start !important;
         width: 100% !important;
@@ -814,14 +821,10 @@ button:focus-visible {
     }
 }
 
-/* ===================================
-   RESPONSIVE NAVIGATION - MOBILE
-   =================================== */
-
 @media (max-width: 480px) {
     .navbar {
         padding: 0.8rem 1rem;
-        height: 75px; /* Fixed height for mobile */
+        height: 75px;
     }
     
     .logo-image {
@@ -857,11 +860,7 @@ button:focus-visible {
         font-size: 1.2rem !important;
     }
     
-    .nav-ember-coin {
-        width: 20px;
-        height: 20px;
-    }
-    
+    .nav-ember-coin,
     .nav-presale-icon {
         width: 20px;
         height: 20px;
@@ -880,14 +879,16 @@ button:focus-visible {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 999;
+    z-index: 1001; /* Above content, below menu and button */
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
 .nav-overlay.active {
     display: block;
     opacity: 1;
+    pointer-events: auto;
 }
 
 @media (max-width: 1024px) {
