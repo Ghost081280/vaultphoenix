@@ -50,15 +50,15 @@ body {
     line-height: 1.6;
     color: #ffffff;
     overflow-x: hidden;
-    background: linear-gradient(135deg, var(--ember-dark) 0%, var(--ember-charcoal) 25%, var(--ember-brown) 50%, var(--ember-deep-brown) 75%, var(--ember-rust) 100%);
+    /* Individual pages will set their own body backgrounds */
 }
 
 /* ===================================
-   NAVIGATION BAR - BEAUTIFUL DESIGN
+   NAVIGATION BAR - EMBER-THEMED DESIGN
    =================================== */
 
 .navbar {
-    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
     padding: 1.2rem 2.5rem;
     position: fixed;
     width: 100%;
