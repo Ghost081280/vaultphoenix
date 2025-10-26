@@ -13,6 +13,7 @@
 /* REFACTORED: Removed duplicate navbar CSS - now using shared-styles.css */
 /* REFACTORED: Standardized button classes and utilizing CSS variables */
 /* FIXED: Removed navigation overrides to ensure consistency across pages */
+/* PRODUCTION READY: Fixed mobile revenue examples centering, phone screenshots centering, CTA background scaling, icon glows, faster scroll timing */
 
 * {
     margin: 0;
@@ -672,7 +673,7 @@ body.loaded {
     width: 70px;
     height: 70px;
     object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
     animation: coinPulse 3s ease-in-out infinite;
     flex-shrink: 0;
 }
@@ -918,13 +919,13 @@ body.loaded {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.4)) drop-shadow(0 0 25px rgba(240, 165, 0, 0.25));
     transition: all 0.3s ease;
 }
 
 .step-premium:hover .step-image {
     transform: scale(1.1);
-    filter: drop-shadow(0 6px 20px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 6px 20px rgba(240, 165, 0, 0.6)) drop-shadow(0 0 35px rgba(240, 165, 0, 0.35));
 }
 
 /* UPDATED: Step Number Badge - Positioned at Top Right Corner */
@@ -1202,14 +1203,14 @@ body.loaded {
     width: 40px;
     height: 40px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4)) drop-shadow(0 0 15px rgba(240, 165, 0, 0.2));
     transition: all 0.3s ease;
     flex-shrink: 0;
 }
 
 .hero-benefit-item:hover .benefit-icon-small {
     transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.6)) drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
 }
 
 /* Mobile: Horizontal Scrollable Row */
@@ -1390,7 +1391,7 @@ body.loaded {
     width: 50px;
     height: 50px;
     object-fit: contain;
-    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.8));
+    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.8)) drop-shadow(0 0 25px rgba(240, 165, 0, 0.4));
     transition: all 0.4s ease;
     animation: coinPulse 2s ease-in-out infinite;
 }
@@ -1631,13 +1632,13 @@ body.loaded {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.5)) drop-shadow(0 0 12px rgba(240, 165, 0, 0.2));
     transition: all 0.3s ease;
 }
 
 .ember-highlight-redesigned:hover .highlight-icon-image-redesigned {
     transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.7));
+    filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.7)) drop-shadow(0 0 18px rgba(240, 165, 0, 0.3));
 }
 
 .highlight-text-redesigned {
@@ -1676,7 +1677,7 @@ body.loaded {
     width: 380px;
     height: 380px;
     object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.7));
+    filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.7)) drop-shadow(0 0 50px rgba(215, 51, 39, 0.4));
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     position: relative;
@@ -1691,7 +1692,7 @@ body.loaded {
 
 .phoenix-holding-coin-redesigned:hover {
     transform: scale(1.08) translateY(-8px);
-    filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.9));
+    filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.9)) drop-shadow(0 0 80px rgba(240, 165, 0, 0.5));
 }
 
 .ember-glow-redesigned {
@@ -1739,7 +1740,7 @@ body.loaded {
     width: 50px;
     height: 50px;
     object-fit: contain;
-    filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.5)) drop-shadow(0 0 15px rgba(240, 165, 0, 0.25));
 }
 
 .compliance-disclaimer-redesigned p {
@@ -1819,10 +1820,13 @@ body.loaded {
 }
 
 /* ============================================
-   FIXED: Phone Gallery - Smaller with Perfect Fit
+   FIXED: Phone Gallery - Smaller with Perfect Fit & CENTERED
    ============================================ */
 .phone-gallery {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .phone-mockup {
@@ -1879,13 +1883,14 @@ body.loaded {
     background: #000;
 }
 
-/* Thumbnail Grid - Updated for smaller size */
+/* FIXED: Centered thumbnail grid */
 .thumbnail-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     max-width: 280px;
     margin: 0 auto 25px;
+    justify-items: center;
 }
 
 .simple-thumb {
@@ -1934,6 +1939,9 @@ body.loaded {
 .laptop-gallery {
     text-align: center;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .laptop-mockup {
@@ -1990,13 +1998,14 @@ body.loaded {
     z-index: 10;
 }
 
-/* Laptop thumbnail grid */
+/* FIXED: Centered laptop thumbnail grid */
 .thumbnail-grid-laptop {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     max-width: 650px;
     margin: 0 auto 25px;
+    justify-items: center;
 }
 
 .simple-thumb-laptop {
@@ -2047,6 +2056,7 @@ body.loaded {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    width: 100%;
 }
 
 .demo-card-enhanced {
@@ -2078,7 +2088,7 @@ body.loaded {
     width: 90px;
     height: 90px;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4)) drop-shadow(0 0 20px rgba(240, 165, 0, 0.25));
     flex-shrink: 0;
 }
 
@@ -2131,7 +2141,7 @@ body.loaded {
     width: 320px;
     height: 320px;
     object-fit: contain;
-    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5)) drop-shadow(0 0 35px rgba(240, 165, 0, 0.25));
     transition: all 0.4s ease;
     cursor: pointer;
     position: relative;
@@ -2140,7 +2150,7 @@ body.loaded {
 
 .phoenix-safe-image:hover {
     transform: scale(1.08);
-    filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.7));
+    filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.7)) drop-shadow(0 0 50px rgba(240, 165, 0, 0.35));
 }
 
 .phoenix-safe-glow {
@@ -2201,7 +2211,7 @@ body.loaded {
     width: 32px;
     height: 32px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 2px 4px rgba(240, 165, 0, 0.4)) drop-shadow(0 0 10px rgba(240, 165, 0, 0.2));
 }
 
 /* System Benefits */
@@ -2233,7 +2243,7 @@ body.loaded {
     width: 110px;
     height: 110px;
     object-fit: contain;
-    filter: drop-shadow(0 3px 6px rgba(215, 51, 39, 0.3));
+    filter: drop-shadow(0 3px 6px rgba(215, 51, 39, 0.3)) drop-shadow(0 0 15px rgba(215, 51, 39, 0.15));
 }
 
 .benefit-header h4 {
@@ -2448,11 +2458,13 @@ body.loaded {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     z-index: 2;
+    filter: drop-shadow(0 10px 30px rgba(215, 51, 39, 0.4));
 }
 
 .phoenix-coin-image:hover {
     transform: translateY(-10px) scale(1.05);
     box-shadow: 0 40px 100px rgba(215, 51, 39, 0.4);
+    filter: drop-shadow(0 15px 40px rgba(215, 51, 39, 0.6));
 }
 
 .crypto-image-glow {
@@ -2547,7 +2559,7 @@ body.loaded {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 12px rgba(240, 165, 0, 0.15));
     transition: all 0.3s ease;
 }
 
@@ -2555,7 +2567,7 @@ body.loaded {
     width: 130%;
     height: 130%;
     object-fit: contain;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 15px rgba(240, 165, 0, 0.2));
     transition: all 0.3s ease;
 }
 
@@ -2563,12 +2575,12 @@ body.loaded {
 .crypto-benefit:hover .custom-placement-icon-large,
 .crypto-benefit:hover .custom-revenue-icon-large {
     transform: scale(1.1);
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)) brightness(1.1);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4)) brightness(1.1) drop-shadow(0 0 18px rgba(240, 165, 0, 0.25));
 }
 
 .crypto-benefit:hover .custom-revenue-icon-extra-large {
     transform: scale(1.15);
-    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5)) brightness(1.15);
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5)) brightness(1.15) drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
 }
 
 .benefit-content h4 {
@@ -2640,7 +2652,7 @@ body.loaded {
     width: 75px;
     height: 75px;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
+    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3)) drop-shadow(0 0 15px rgba(215, 51, 39, 0.15));
     transition: all 0.3s ease;
 }
 
@@ -2720,7 +2732,7 @@ body.loaded {
     width: var(--icon-section);
     height: var(--icon-section);
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
+    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3)) drop-shadow(0 0 15px rgba(215, 51, 39, 0.15));
     transition: all 0.3s ease;
 }
 
@@ -2728,7 +2740,7 @@ body.loaded {
     width: 140px;
     height: 140px;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3));
+    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.3)) drop-shadow(0 0 15px rgba(215, 51, 39, 0.15));
     transition: all 0.3s ease;
 }
 
@@ -2739,7 +2751,7 @@ body.loaded {
 .feature-card:hover .feature-phoenix-brand-icon,
 .feature-card:hover .feature-analytics-icon {
     transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 6px 12px rgba(215, 51, 39, 0.4)) brightness(1.1);
+    filter: drop-shadow(0 6px 12px rgba(215, 51, 39, 0.4)) brightness(1.1) drop-shadow(0 0 20px rgba(215, 51, 39, 0.25));
 }
 
 .feature-title {
@@ -2823,13 +2835,13 @@ body.loaded {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 15px rgba(240, 165, 0, 0.15));
     transition: all 0.3s ease;
 }
 
 .use-case-card:hover .use-case-icon-image-large {
     transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 20px rgba(240, 165, 0, 0.25));
 }
 
 .use-case-title {
@@ -3327,7 +3339,7 @@ body.loaded {
     height: 85px;
     object-fit: contain;
     flex-shrink: 0;
-    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4)) drop-shadow(0 0 12px rgba(240, 165, 0, 0.2));
 }
 
 .solution-highlight-content h5 {
@@ -3368,7 +3380,7 @@ body.loaded {
     height: 140px;
     object-fit: contain;
     flex-shrink: 0;
-    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.4)) drop-shadow(0 0 15px rgba(240, 165, 0, 0.2));
 }
 
 .development-story-content h4 {
@@ -3385,7 +3397,7 @@ body.loaded {
     margin: 0;
 }
 
-/* Revenue Examples - Condensed */
+/* PRODUCTION READY: Revenue Examples - FIXED Mobile Centering */
 .revenue-examples-section {
     margin-top: 70px;
     padding: 50px;
@@ -3409,7 +3421,7 @@ body.loaded {
     width: 160px;
     height: 160px;
     object-fit: contain;
-    filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5)) drop-shadow(0 0 20px rgba(240, 165, 0, 0.25));
 }
 
 .revenue-examples-header h3 {
@@ -3461,7 +3473,7 @@ body.loaded {
     width: 60px;
     height: 60px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2)) drop-shadow(0 0 12px rgba(240, 165, 0, 0.15));
     flex-shrink: 0;
 }
 
@@ -3590,7 +3602,7 @@ body.loaded {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 12px rgba(240, 165, 0, 0.15));
 }
 
 .benefit-text strong {
@@ -3608,7 +3620,7 @@ body.loaded {
     margin: 0;
 }
 
-/* Final CTA Section */
+/* PRODUCTION READY: Final CTA Section - FIXED Mobile Background Scaling */
 .final-cta {
     padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, #d73327, #fb923c);
@@ -3630,6 +3642,15 @@ body.loaded {
     background-repeat: no-repeat;
     opacity: 0.15;
     z-index: 0;
+}
+
+/* PRODUCTION READY: Mobile background scaling fix */
+@media (max-width: 768px) {
+    .final-cta-background {
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
 }
 
 .final-cta::before {
@@ -3714,7 +3735,7 @@ body.loaded {
     width: 70px;
     height: 70px;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 4px 8px rgba(240, 165, 0, 0.5)) drop-shadow(0 0 15px rgba(240, 165, 0, 0.25));
 }
 
 .journey-paths {
@@ -3749,7 +3770,7 @@ body.loaded {
     width: var(--icon-section);
     height: var(--icon-section);
     object-fit: contain;
-    filter: drop-shadow(0 3px 6px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 3px 6px rgba(240, 165, 0, 0.4)) drop-shadow(0 0 12px rgba(240, 165, 0, 0.2));
     flex-shrink: 0;
     margin-top: 5px;
 }
@@ -3949,7 +3970,7 @@ body.loaded {
     transform: translateY(-2px);
 }
 
-/* Animations */
+/* PRODUCTION READY: Animations - FASTER Scroll Timing */
 .fade-in {
     opacity: 0;
     transform: translateY(40px);
@@ -3963,15 +3984,16 @@ body.loaded {
     }
 }
 
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
 
+/* PRODUCTION READY: Faster scroll reveal timing */
 .scroll-reveal {
     opacity: 0;
-    transform: translateY(60px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(40px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .scroll-reveal.revealed {
@@ -4158,12 +4180,13 @@ html {
     width: 70px;
     height: 70px;
     object-fit: contain;
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 15px rgba(240, 165, 0, 0.2));
     transition: all 0.3s ease;
 }
 
 .technology-card:hover .technology-icon {
     transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
 }
 
 .technology-header-text {
@@ -4361,7 +4384,7 @@ html {
     height: 70px;
     object-fit: contain;
     flex-shrink: 0;
-    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 12px rgba(240, 165, 0, 0.2));
 }
 
 .tech-highlight-content strong {
@@ -4416,7 +4439,7 @@ html {
     width: 100px;
     height: 100px;
     object-fit: contain;
-    filter: drop-shadow(0 5px 15px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 5px 15px rgba(240, 165, 0, 0.6)) drop-shadow(0 0 25px rgba(240, 165, 0, 0.3));
     animation: coinPulse 3s ease-in-out infinite;
 }
 
@@ -4481,6 +4504,13 @@ html {
 .combined-benefit:hover .combined-benefit-icon {
     transform: scale(1.1) rotate(5deg);
     border-color: rgba(240, 165, 0, 0.7);
+}
+
+.combined-benefit-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 10px rgba(240, 165, 0, 0.2));
 }
 
 .combined-benefit-text strong {
@@ -4599,6 +4629,7 @@ html {
         gap: 15px;
     }
 
+    /* PRODUCTION READY: Revenue examples mobile fix */
     .revenue-examples-grid {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -4725,11 +4756,20 @@ html {
         height: 32px;
     }
 
+    /* PRODUCTION READY: Phone gallery centering */
+    .phone-gallery {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .phone-frame {
         width: 240px;
         height: 500px;
         padding: 10px;
         border-radius: 36px;
+        margin: 0 auto;
     }
 
     .phone-frame::before {
@@ -4747,6 +4787,8 @@ html {
         grid-template-columns: repeat(3, 1fr);
         gap: 8px;
         max-width: 240px;
+        margin: 0 auto 25px;
+        justify-items: center;
     }
 
     .simple-thumb {
@@ -4761,11 +4803,14 @@ html {
 
     .laptop-mockup {
         max-width: 450px;
+        margin: 0 auto;
     }
 
     .thumbnail-grid-laptop {
         max-width: 450px;
         gap: 10px;
+        margin: 0 auto 25px;
+        justify-items: center;
     }
 
     .phoenix-safe-image {
@@ -4825,13 +4870,36 @@ html {
         gap: 18px;
     }
 
+    /* PRODUCTION READY: Revenue section mobile centering */
+    .revenue-examples-section {
+        padding: 35px 25px;
+        text-align: center;
+    }
+
     .revenue-header-icon {
         width: 110px;
         height: 110px;
+        margin: 0 auto;
     }
-    
-    .revenue-examples-section {
-        padding: 35px 25px;
+
+    .revenue-examples-header {
+        align-items: center;
+    }
+
+    .revenue-example-card {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    .revenue-card-header {
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+    }
+
+    .example-industry {
+        text-align: center;
+        width: 100%;
     }
 
     .cta-icon-image-enhanced {
@@ -5228,13 +5296,13 @@ html {
         text-align: center;
     }
 
+    .revenue-examples-section {
+        padding: 28px 20px;
+    }
+
     .revenue-header-icon {
         width: 95px;
         height: 95px;
-    }
-    
-    .revenue-examples-section {
-        padding: 28px 20px;
     }
     
     .revenue-examples-header h3 {
