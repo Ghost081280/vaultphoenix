@@ -13,6 +13,7 @@
     
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
     const navLinks = document.querySelectorAll('.nav-links a');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
 
@@ -23,6 +24,17 @@
             this.setAttribute('aria-expanded', !isExpanded);
             mobileMenu.classList.toggle('active');
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+
+    // Close mobile menu when clicking close button
+    if (mobileMenuClose && mobileMenu) {
+        mobileMenuClose.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+            document.body.style.overflow = '';
         });
     }
 
