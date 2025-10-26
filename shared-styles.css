@@ -1,10 +1,11 @@
 /* ===================================
    SHARED STYLES - VAULT PHOENIX
    Consolidated styles used across multiple pages
+   Complete branding, colors, fonts, and navigation
    =================================== */
 
 /* ===================================
-   CSS VARIABLES - RESPONSIVE SIZING
+   CSS VARIABLES - RESPONSIVE SIZING & BRANDING
    =================================== */
 
 :root {
@@ -14,10 +15,15 @@
     --icon-card: clamp(60px, 8vw, 80px);
     --icon-inline: clamp(35px, 5vw, 50px);
     
-    /* Brand colors */
-    --ember-orange: #FF6B35;
-    --ember-dark: #1a1a2e;
-    --ember-light: #f5f5f5;
+    /* Brand colors - Vault Phoenix Theme */
+    --ember-dark-red: #d73327;
+    --ember-orange: #fb923c;
+    --ember-gold: #f0a500;
+    --ember-dark: #0f0f0f;
+    --ember-charcoal: #1a1a1a;
+    --ember-brown: #2d1810;
+    --ember-deep-brown: #451a03;
+    --ember-rust: #7c2d12;
     
     /* Spacing variables */
     --section-padding: clamp(60px, 10vw, 120px);
@@ -25,18 +31,49 @@
 }
 
 /* ===================================
-   NAVIGATION BAR
+   GLOBAL RESET & BASE STYLES
+   =================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background: var(--ember-dark);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #ffffff;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, var(--ember-dark) 0%, var(--ember-charcoal) 25%, var(--ember-brown) 50%, var(--ember-deep-brown) 75%, var(--ember-rust) 100%);
+}
+
+/* ===================================
+   NAVIGATION BAR - BEAUTIFUL DESIGN
    =================================== */
 
 .navbar {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    padding: 1rem 2rem;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+    padding: 1.2rem 2.5rem;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    border-bottom: 2px solid rgba(215, 51, 39, 0.3);
     transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    padding: 0.8rem 2.5rem;
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
 }
 
 .nav-content {
@@ -56,21 +93,30 @@
 }
 
 .logo:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
-.logo img {
-    height: 50px;
+.logo-image {
+    height: 70px;
     width: auto;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(215, 51, 39, 0.4));
 }
 
-.logo-text {
+.logo:hover .logo-image {
+    filter: drop-shadow(0 0 15px rgba(215, 51, 39, 0.6));
+    transform: scale(1.05);
+}
+
+.logo span {
     font-size: 1.8rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #FF6B35, #f39c12);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 10px rgba(215, 51, 39, 0.3);
 }
 
 .nav-links {
@@ -83,23 +129,26 @@
 }
 
 .nav-links a {
-    color: white;
+    color: rgba(255, 255, 255, 0.95);
     text-decoration: none;
-    font-weight: 500;
-    font-size: 1.1rem;
+    font-weight: 600;
+    font-size: 1.05rem;
     transition: all 0.3s ease;
     position: relative;
+    padding: 0.5rem 0;
 }
 
+/* Beautiful hover effect with gradient underline */
 .nav-links a::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: 0;
     left: 0;
     width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #FF6B35, #f39c12);
-    transition: width 0.3s ease;
+    height: 3px;
+    background: linear-gradient(90deg, var(--ember-dark-red), var(--ember-orange), var(--ember-gold));
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
 }
 
 .nav-links a:hover::after {
@@ -107,25 +156,78 @@
 }
 
 .nav-links a:hover {
-    color: #FF6B35;
+    color: var(--ember-gold);
     transform: translateY(-2px);
 }
 
+/* Remove the box/outline that was showing up */
+.nav-links a:focus {
+    outline: none;
+}
+
+/* Ember Link Button in Navigation */
+.ember-link {
+    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    font-weight: 700 !important;
+    font-size: 1.05rem !important;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.ember-link::after {
+    display: none !important;
+}
+
+.ember-link:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 25px rgba(215, 51, 39, 0.6) !important;
+    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold)) !important;
+    color: white !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.nav-ember-coin {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.ember-link:hover .nav-ember-coin {
+    transform: scale(1.15) rotate(10deg);
+}
+
+/* Mobile Menu Button */
 .mobile-menu-btn {
     display: none;
-    background: none;
-    border: none;
+    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
     font-size: 1.8rem;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
     z-index: 1001;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
 }
 
 .mobile-menu-btn:hover {
-    transform: scale(1.1);
-    color: #FF6B35;
+    transform: scale(1.05);
+    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
+    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.6);
+}
+
+.mobile-menu-btn:focus {
+    outline: none;
 }
 
 /* ===================================
@@ -136,24 +238,43 @@
 .ember-cta-primary {
     padding: clamp(16px, 4vw, 20px) clamp(30px, 8vw, 45px);
     font-size: clamp(1.1rem, 3vw, 1.3rem);
-    background: linear-gradient(135deg, #FF6B35, #f39c12);
+    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
     color: white;
     border: none;
     border-radius: 50px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     display: inline-block;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before,
+.ember-cta-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.cta-button:hover::before,
+.ember-cta-primary:hover::before {
+    left: 100%;
 }
 
 .cta-button:hover,
 .ember-cta-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(255, 107, 53, 0.5);
-    background: linear-gradient(135deg, #f39c12, #FF6B35);
+    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.6);
+    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
 }
 
 .cta-button:active,
@@ -167,115 +288,24 @@
     padding: clamp(16px, 4vw, 20px) clamp(30px, 8vw, 45px);
     font-size: clamp(1.1rem, 3vw, 1.3rem);
     background: transparent;
-    color: #FF6B35;
-    border: 2px solid #FF6B35;
+    color: var(--ember-gold);
+    border: 3px solid var(--ember-gold);
     border-radius: 50px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     display: inline-block;
     text-align: center;
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.3);
 }
 
 .cta-button-secondary:hover,
 .ember-cta-secondary:hover {
-    background: #FF6B35;
+    background: var(--ember-gold);
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(255, 107, 53, 0.3);
-}
-
-/* ===================================
-   RESPONSIVE NAVIGATION - TABLET
-   =================================== */
-
-@media (max-width: 1024px) {
-    .navbar {
-        padding: 1rem 1.5rem;
-    }
-    
-    .mobile-menu-btn {
-        display: block;
-    }
-    
-    .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: 70%;
-        max-width: 400px;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        flex-direction: column;
-        justify-content: center;
-        gap: 2rem;
-        padding: 2rem;
-        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        box-shadow: -5px 0 25px rgba(0,0,0,0.5);
-    }
-    
-    .nav-links.active {
-        right: 0;
-    }
-    
-    .nav-links a {
-        font-size: 1.5rem;
-        width: 100%;
-        padding: 1rem;
-        text-align: center;
-        border-radius: 10px;
-        transition: all 0.3s ease;
-    }
-    
-    .nav-links a:hover {
-        background: rgba(255, 107, 53, 0.1);
-        transform: translateX(-10px);
-    }
-    
-    .nav-links a::after {
-        display: none;
-    }
-    
-    .logo-text {
-        font-size: 1.5rem;
-    }
-    
-    .logo img {
-        height: 40px;
-    }
-}
-
-/* ===================================
-   RESPONSIVE NAVIGATION - MOBILE
-   =================================== */
-
-@media (max-width: 480px) {
-    .navbar {
-        padding: 0.75rem 1rem;
-    }
-    
-    .logo-text {
-        font-size: 1.2rem;
-    }
-    
-    .logo img {
-        height: 35px;
-    }
-    
-    .mobile-menu-btn {
-        font-size: 1.5rem;
-    }
-    
-    .nav-links {
-        width: 85%;
-        padding: 1.5rem;
-    }
-    
-    .nav-links a {
-        font-size: 1.3rem;
-        padding: 0.75rem;
-    }
+    box-shadow: 0 12px 35px rgba(240, 165, 0, 0.5);
 }
 
 /* ===================================
@@ -296,10 +326,21 @@
 
 /* Text utilities */
 .gradient-text {
-    background: linear-gradient(135deg, #FF6B35, #f39c12);
+    background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange), var(--ember-dark-red));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.golden-text {
+    color: var(--ember-gold) !important;
+    text-shadow: 0 2px 8px rgba(240, 165, 0, 0.3);
+}
+
+.golden-highlight {
+    color: var(--ember-gold);
+    font-weight: 700;
+    text-shadow: 0 1px 4px rgba(240, 165, 0, 0.2);
 }
 
 /* Icon sizing utilities */
@@ -323,16 +364,418 @@
     height: var(--icon-inline);
 }
 
-/* Smooth scrolling for anchor links */
-html {
-    scroll-behavior: smooth;
+/* ===================================
+   SECTION TITLES & SUBTITLES
+   =================================== */
+
+.section-title {
+    text-align: center;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    margin-bottom: 25px;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, var(--ember-orange) 50%, var(--ember-dark-red) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(215, 51, 39, 0.3);
 }
 
-/* Focus styles for accessibility */
+.section-subtitle {
+    text-align: center;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 80px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* ===================================
+   FOOTER STYLES
+   =================================== */
+
+.footer {
+    background: linear-gradient(135deg, var(--ember-dark) 0%, var(--ember-charcoal) 100%);
+    color: white;
+    padding: 60px var(--container-padding);
+    text-align: center;
+    border-top: 3px solid rgba(215, 51, 39, 0.3);
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.footer-logo-image {
+    height: 60px;
+    width: auto;
+    filter: drop-shadow(0 0 8px rgba(215, 51, 39, 0.4));
+    transition: all 0.3s ease;
+}
+
+.footer-logo:hover .footer-logo-image {
+    filter: drop-shadow(0 0 12px rgba(215, 51, 39, 0.6));
+    transform: scale(1.05);
+}
+
+.footer-text {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 30px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--ember-dark-red), var(--ember-orange), var(--ember-gold));
+    transition: width 0.3s ease;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+.footer-links a:hover {
+    color: var(--ember-gold);
+    transform: translateY(-2px);
+}
+
+/* Footer Ember Link */
+.footer-ember-link {
+    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    font-weight: 700 !important;
+    font-size: 1.05rem !important;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.footer-ember-link::after {
+    display: none !important;
+}
+
+.footer-ember-link:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 25px rgba(215, 51, 39, 0.6) !important;
+    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold)) !important;
+    color: white !important;
+}
+
+.footer-ember-coin {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.footer-ember-link:hover .footer-ember-coin {
+    transform: scale(1.15) rotate(10deg);
+}
+
+/* Social Media Links */
+.social-media {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.3);
+}
+
+.social-link:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5);
+    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+    transform: scale(1.1);
+}
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes phoenixFloat {
+    0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
+    33% { transform: translateY(-15px) scale(1.02) rotate(1deg); }
+    66% { transform: translateY(8px) scale(0.98) rotate(-1deg); }
+}
+
+@keyframes coinPulse {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUp 1s ease forwards;
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+/* ===================================
+   ACCESSIBILITY & FOCUS STYLES
+   =================================== */
+
 a:focus,
 button:focus {
-    outline: 2px solid #FF6B35;
-    outline-offset: 2px;
+    outline: 3px solid var(--ember-gold);
+    outline-offset: 3px;
+}
+
+/* Remove outline for mouse users, keep for keyboard users */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--ember-gold);
+    outline-offset: 3px;
+}
+
+/* ===================================
+   SCROLLBAR STYLING
+   =================================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--ember-charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--ember-dark-red), var(--ember-orange), var(--ember-gold));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--ember-gold), var(--ember-orange), var(--ember-dark-red));
+}
+
+/* ===================================
+   TEXT SELECTION
+   =================================== */
+
+::selection {
+    background: rgba(215, 51, 39, 0.4);
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: rgba(215, 51, 39, 0.4);
+    color: #ffffff;
+}
+
+/* ===================================
+   RESPONSIVE NAVIGATION - TABLET
+   =================================== */
+
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+    
+    .logo-image {
+        height: 55px;
+    }
+    
+    .logo span {
+        font-size: 1.5rem;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        max-width: 400px;
+        background: linear-gradient(135deg, rgba(15, 15, 15, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem;
+        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        box-shadow: -5px 0 25px rgba(0,0,0,0.6);
+        backdrop-filter: blur(20px);
+        border-left: 3px solid rgba(215, 51, 39, 0.4);
+    }
+    
+    .nav-links.active {
+        right: 0;
+    }
+    
+    .nav-links a {
+        font-size: 1.4rem;
+        width: 100%;
+        padding: 1rem;
+        text-align: center;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        background: rgba(215, 51, 39, 0.05);
+    }
+    
+    .nav-links a:hover {
+        background: rgba(215, 51, 39, 0.2);
+        transform: translateX(-10px);
+    }
+    
+    .nav-links a::after {
+        display: none;
+    }
+    
+    .ember-link {
+        justify-content: center !important;
+        width: 100% !important;
+        padding: 14px 24px !important;
+    }
+}
+
+/* ===================================
+   RESPONSIVE NAVIGATION - MOBILE
+   =================================== */
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+    
+    .logo-image {
+        height: 45px;
+    }
+    
+    .logo span {
+        font-size: 1.3rem;
+    }
+    
+    .mobile-menu-btn {
+        font-size: 1.5rem;
+        padding: 0.5rem 0.8rem;
+    }
+    
+    .nav-links {
+        width: 85%;
+        padding: 1.5rem;
+    }
+    
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 0.8rem;
+    }
+    
+    .ember-link {
+        padding: 12px 20px !important;
+        font-size: 1rem !important;
+    }
+    
+    .nav-ember-coin {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 /* ===================================
@@ -346,7 +789,7 @@ button:focus {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 999;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -360,5 +803,20 @@ button:focus {
 @media (max-width: 1024px) {
     .nav-overlay {
         display: block;
+    }
+}
+
+/* ===================================
+   REDUCED MOTION PREFERENCE
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
