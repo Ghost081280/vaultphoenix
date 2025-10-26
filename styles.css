@@ -3572,7 +3572,7 @@ body.loaded {
     font-size: 1.6rem;
     font-weight: 800;
     color: #f0a500;
-    margin-bottom: 30px; /* FIXED: Increased from 25px */
+    margin-bottom: 40px; /* FIXED: Increased spacing before benefit cards */
     text-align: center;
 }
 
@@ -3628,6 +3628,125 @@ body.loaded {
     color: rgba(255, 255, 255, 0.85);
     line-height: 1.5;
     margin: 0;
+}
+
+/* ============================================
+   MOBILE OPTIMIZATION - Revenue Section
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .revenue-examples-section {
+        padding: 45px 30px;
+    }
+    
+    .revenue-examples-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .revenue-examples-section {
+        padding: 35px 20px; /* FIXED: More padding on mobile */
+        text-align: center;
+    }
+
+    .revenue-header-icon {
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+    }
+
+    .revenue-examples-header {
+        align-items: center;
+    }
+    
+    .revenue-examples-grid {
+        gap: 20px;
+        margin-bottom: 45px;
+    }
+
+    .revenue-example-card {
+        margin: 0 auto;
+        max-width: 100%;
+        padding: 22px 18px;
+    }
+
+    .revenue-card-header {
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .example-industry {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .example-title {
+        font-size: 1.3rem;
+    }
+    
+    .revenue-model-benefits {
+        padding: 28px 20px;
+    }
+    
+    .revenue-model-benefits h4 {
+        font-size: 1.5rem;
+        margin-bottom: 35px; /* FIXED: Increased mobile spacing */
+    }
+}
+
+@media (max-width: 480px) {
+    .revenue-examples-section {
+        padding: 28px 15px; /* FIXED: Even more padding on small mobile */
+    }
+
+    .revenue-header-icon {
+        width: 95px;
+        height: 95px;
+    }
+    
+    .revenue-examples-header h3 {
+        font-size: 1.8rem;
+    }
+    
+    .revenue-examples-header p {
+        font-size: 1rem;
+    }
+    
+    .revenue-examples-grid {
+        gap: 18px;
+        margin-bottom: 40px;
+    }
+    
+    .revenue-example-card {
+        padding: 20px 15px;
+    }
+    
+    .example-title {
+        font-size: 1.2rem;
+    }
+    
+    .example-scenario {
+        font-size: 0.85rem;
+    }
+    
+    .revenue-model-benefits {
+        padding: 22px 15px;
+    }
+    
+    .revenue-model-benefits h4 {
+        font-size: 1.4rem;
+        margin-bottom: 30px; /* FIXED: Increased small mobile spacing */
+    }
 }
 
 /* ============================================
