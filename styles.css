@@ -3572,7 +3572,7 @@ body.loaded {
     font-size: 1.6rem;
     font-weight: 800;
     color: #f0a500;
-    margin-bottom: 40px; /* FIXED: Increased spacing before benefit cards */
+    margin-bottom: 50px; /* ← THIS IS THE FIX */
     text-align: center;
 }
 
