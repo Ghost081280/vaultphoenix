@@ -352,9 +352,24 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('loaded');
     
     // Initialize $Ember-specific features
-    // NOTE: Countdown is now handled by shared-script.js
+    // NOTE: Countdown is handled by shared-script.js, but we'll verify it's working
     initializePresaleCalculator();
     initializeChatbot();
+    
+    // FALLBACK: If countdown isn't running after 1 second, manually initialize it
+    setTimeout(() => {
+        const countdownDays = document.getElementById('countdown-days');
+        if (countdownDays && (countdownDays.textContent === '--' || countdownDays.textContent === '')) {
+            console.warn('🔥 Countdown not initialized by shared-script.js, initializing manually...');
+            if (window.initializeUniversalCountdown) {
+                window.initializeUniversalCountdown();
+            } else {
+                console.error('🔥 ERROR: Universal countdown function not found!');
+            }
+        } else {
+            console.log('🔥 SUCCESS: Countdown is already running from shared-script.js');
+        }
+    }, 1000);
 });
 
 // ============================================
