@@ -210,6 +210,46 @@ body {
     transform: scale(1.15) rotate(10deg);
 }
 
+/* Presale Link Button in Navigation - Matches Ember Link Style */
+.presale-link {
+    background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange)) !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    font-weight: 700 !important;
+    font-size: 1.05rem !important;
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.presale-link::after {
+    display: none !important;
+}
+
+.presale-link:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 25px rgba(240, 165, 0, 0.6) !important;
+    background: linear-gradient(135deg, var(--ember-orange), var(--ember-dark-red)) !important;
+    color: white !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.nav-presale-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.presale-link:hover .nav-presale-icon {
+    transform: scale(1.15) rotate(10deg);
+}
+
 /* Mobile Menu Button */
 .mobile-menu-btn {
     display: none;
@@ -738,6 +778,12 @@ button:focus-visible {
         width: 100% !important;
         padding: 14px 24px !important;
     }
+    
+    .presale-link {
+        justify-content: center !important;
+        width: 100% !important;
+        padding: 14px 24px !important;
+    }
 }
 
 /* ===================================
@@ -777,7 +823,17 @@ button:focus-visible {
         font-size: 1rem !important;
     }
     
+    .presale-link {
+        padding: 12px 20px !important;
+        font-size: 1rem !important;
+    }
+    
     .nav-ember-coin {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .nav-presale-icon {
         width: 20px;
         height: 20px;
     }
