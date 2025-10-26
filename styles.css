@@ -3397,7 +3397,6 @@ body.loaded {
     margin: 0;
 }
 
-/* PRODUCTION READY: Revenue Examples - FIXED Mobile Centering */
 .revenue-examples-section {
     margin-top: 70px;
     padding: 50px;
@@ -3439,11 +3438,15 @@ body.loaded {
     margin: 0;
 }
 
+/* FIXED: Grid now properly contained and centered */
 .revenue-examples-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 35px;
     margin-bottom: 50px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .revenue-example-card {
@@ -3551,11 +3554,13 @@ body.loaded {
     font-weight: 900;
 }
 
+/* FIXED: Added proper spacing above "Why Location Partners Pay Premium Rates" */
 .revenue-model-benefits {
     background: rgba(0, 0, 0, 0.25);
     border-radius: 18px;
     padding: 35px;
     border: 1px solid rgba(215, 51, 39, 0.2);
+    margin-top: 60px; /* FIXED: Added margin-top for spacing */
 }
 
 .revenue-model-benefits h4 {
@@ -3618,6 +3623,88 @@ body.loaded {
     color: rgba(255, 255, 255, 0.85);
     line-height: 1.5;
     margin: 0;
+}
+
+/* ============================================
+   MOBILE OPTIMIZATION - Revenue Section
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .revenue-examples-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .revenue-examples-section {
+        padding: 35px 25px;
+        text-align: center;
+    }
+
+    .revenue-header-icon {
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+    }
+
+    .revenue-examples-header {
+        align-items: center;
+    }
+
+    .revenue-example-card {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    .revenue-card-header {
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+    }
+
+    .example-industry {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .revenue-model-benefits {
+        margin-top: 50px; /* Slightly reduced for mobile */
+        padding: 28px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .revenue-examples-section {
+        padding: 28px 20px;
+    }
+
+    .revenue-header-icon {
+        width: 95px;
+        height: 95px;
+    }
+    
+    .revenue-examples-header h3 {
+        font-size: 1.8rem;
+    }
+    
+    .revenue-examples-header p {
+        font-size: 1rem;
+    }
+    
+    .revenue-model-benefits {
+        margin-top: 40px; /* Further reduced for small mobile */
+        padding: 22px 18px;
+    }
+    
+    .revenue-model-benefits h4 {
+        font-size: 1.4rem;
+    }
 }
 
 /* PRODUCTION READY: Final CTA Section - FIXED Mobile Background Scaling */
