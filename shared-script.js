@@ -31,6 +31,7 @@
             // Close menu
             navLinks.classList.remove('active');
             overlay.classList.remove('active');
+            body.classList.remove('mobile-menu-open'); // ADDED THIS LINE
             body.style.overflow = '';
             if (mobileMenuBtn) {
                 mobileMenuBtn.setAttribute('aria-expanded', 'false');
@@ -39,6 +40,7 @@
             // Open menu
             navLinks.classList.add('active');
             overlay.classList.add('active');
+            body.classList.add('mobile-menu-open'); // ADDED THIS LINE
             body.style.overflow = 'hidden';
             if (mobileMenuBtn) {
                 mobileMenuBtn.setAttribute('aria-expanded', 'true');
@@ -50,6 +52,7 @@
     function closeMobileMenu() {
         navLinks.classList.remove('active');
         overlay.classList.remove('active');
+        body.classList.remove('mobile-menu-open'); // ADDED THIS LINE
         body.style.overflow = '';
         if (mobileMenuBtn) {
             mobileMenuBtn.setAttribute('aria-expanded', 'false');
