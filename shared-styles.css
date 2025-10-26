@@ -921,7 +921,7 @@ button:focus-visible {
     display: flex;
     align-items: center;
     gap: 10px;
-    z-index: 1000;
+    z-index: 999;
 }
 
 .mobile-menu-coin,
@@ -966,7 +966,7 @@ button:focus-visible {
     justify-content: center;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .mobile-menu-close:hover {
