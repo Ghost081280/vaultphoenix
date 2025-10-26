@@ -3,6 +3,7 @@
 // User messages: NO avatar, pushed to far right
 // Claude messages: VP logo avatar on left
 // Background scroll prevented with overscroll-behavior
+// COUNTDOWN: Now handled by shared-script.js universal timer
 
 // ============================================
 // CLAUDE API CONFIGURATION
@@ -351,50 +352,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('loaded');
     
     // Initialize $Ember-specific features
-    initializePresaleCountdown();
+    // NOTE: Countdown is now handled by shared-script.js
     initializePresaleCalculator();
     initializeChatbot();
 });
-
-// ============================================
-// PRESALE COUNTDOWN TIMER
-// ============================================
-function initializePresaleCountdown() {
-    const targetDate = new Date('November 1, 2025 00:00:00 UTC');
-    
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = targetDate.getTime() - now;
-        
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        // Update display elements
-        const daysEl = document.getElementById('countdown-days');
-        const hoursEl = document.getElementById('countdown-hours');
-        const minutesEl = document.getElementById('countdown-minutes');
-        const secondsEl = document.getElementById('countdown-seconds');
-        
-        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
-        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
-        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
-        if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
-        
-        // If countdown is finished
-        if (distance < 0) {
-            if (daysEl) daysEl.textContent = '00';
-            if (hoursEl) hoursEl.textContent = '00';
-            if (minutesEl) minutesEl.textContent = '00';
-            if (secondsEl) secondsEl.textContent = '00';
-        }
-    }
-    
-    // Update every second
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-}
 
 // ============================================
 // PRESALE CALCULATOR - WITH DEBOUNCED INPUT
@@ -543,4 +504,14 @@ window.addEventListener('load', () => {
     if (logoIcon) {
         logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
     }
+    
+    // Check if countdown is working
+    setTimeout(() => {
+        const countdownDays = document.getElementById('countdown-days');
+        if (countdownDays && countdownDays.textContent !== '--') {
+            console.log('🔥 SUCCESS: $Ember page countdown to Nov 1, 2025 is active (via shared-script.js)!');
+        } else {
+            console.warn('🔥 WARNING: $Ember page countdown not working!');
+        }
+    }, 400);
 });
