@@ -913,6 +913,41 @@ button:focus-visible {
     right: 0;
 }
 
+/* Mobile Menu Branding Icons - Top Left */
+.mobile-menu-branding {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.mobile-menu-coin,
+.mobile-menu-flame {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.4));
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-flame {
+    animation: flameFlicker 2s ease-in-out infinite;
+}
+
+@keyframes flameFlicker {
+    0%, 100% { 
+        filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.4));
+        transform: scale(1);
+    }
+    50% { 
+        filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.6));
+        transform: scale(1.05);
+    }
+}
+
 /* Mobile Menu Close Button */
 .mobile-menu-close {
     position: absolute;
@@ -1073,6 +1108,18 @@ button:focus-visible {
         top: 90px;
         height: calc(100vh - 180px);
         border-radius: 20px 0 0 20px;
+    }
+    
+    .mobile-menu-branding {
+        top: 12px;
+        left: 12px;
+        gap: 8px;
+    }
+    
+    .mobile-menu-coin,
+    .mobile-menu-flame {
+        width: 40px;
+        height: 40px;
     }
     
     .mobile-menu-close {
