@@ -2,7 +2,7 @@
 // SHARED JAVASCRIPT FOR VAULT PHOENIX
 // ============================================
 // This file contains shared functionality used across multiple pages
-// including mobile navigation, scroll effects, and animations
+// including mobile navigation, scroll effects, animations, and countdown timer
 
 (function() {
     'use strict';
@@ -190,6 +190,74 @@
     }, { passive: true });
 
     // ============================================
+    // UNIVERSAL COUNTDOWN TIMER
+    // Works for both main page and ember token page
+    // ============================================
+    
+    function initializeUniversalCountdown() {
+        // Target date: November 1, 2025
+        const targetDate = new Date('November 1, 2025 00:00:00 UTC');
+        
+        // Check which page we're on and get appropriate elements
+        const mainDays = document.getElementById('main-days');
+        const mainHours = document.getElementById('main-hours');
+        const mainMinutes = document.getElementById('main-minutes');
+        const mainSeconds = document.getElementById('main-seconds');
+        
+        const emberDays = document.getElementById('countdown-days');
+        const emberHours = document.getElementById('countdown-hours');
+        const emberMinutes = document.getElementById('countdown-minutes');
+        const emberSeconds = document.getElementById('countdown-seconds');
+        
+        // Only initialize if countdown elements exist on this page
+        const hasMainCountdown = mainDays || mainHours || mainMinutes || mainSeconds;
+        const hasEmberCountdown = emberDays || emberHours || emberMinutes || emberSeconds;
+        
+        if (!hasMainCountdown && !hasEmberCountdown) {
+            return; // No countdown elements found, skip initialization
+        }
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+            
+            // Calculate time components
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Format with leading zeros
+            const formattedDays = days.toString().padStart(2, '0');
+            const formattedHours = hours.toString().padStart(2, '0');
+            const formattedMinutes = minutes.toString().padStart(2, '0');
+            const formattedSeconds = seconds.toString().padStart(2, '0');
+            
+            // Update main page countdown if elements exist
+            if (hasMainCountdown) {
+                if (mainDays) mainDays.textContent = distance < 0 ? '00' : formattedDays;
+                if (mainHours) mainHours.textContent = distance < 0 ? '00' : formattedHours;
+                if (mainMinutes) mainMinutes.textContent = distance < 0 ? '00' : formattedMinutes;
+                if (mainSeconds) mainSeconds.textContent = distance < 0 ? '00' : formattedSeconds;
+            }
+            
+            // Update ember page countdown if elements exist
+            if (hasEmberCountdown) {
+                if (emberDays) emberDays.textContent = distance < 0 ? '00' : formattedDays;
+                if (emberHours) emberHours.textContent = distance < 0 ? '00' : formattedHours;
+                if (emberMinutes) emberMinutes.textContent = distance < 0 ? '00' : formattedMinutes;
+                if (emberSeconds) emberSeconds.textContent = distance < 0 ? '00' : formattedSeconds;
+            }
+        }
+        
+        // Update immediately and then every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        console.log('🔥 Universal countdown timer initialized for November 1, 2025');
+    }
+
+    // ============================================
     // SMOOTH SCROLLING FOR ANCHOR LINKS
     // ============================================
     
@@ -329,6 +397,9 @@
         
         // Initial navbar state
         handleNavbarScroll();
+        
+        // Initialize universal countdown timer
+        initializeUniversalCountdown();
         
         // Add loaded class to body for CSS transitions
         document.body.classList.add('loaded');
