@@ -331,21 +331,6 @@ function formatMessage(text) {
 }
 
 // ============================================
-// DEBOUNCE UTILITY
-// ============================================
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// ============================================
 // IMMEDIATE BACKGROUND FIX
 // ============================================
 (function() {
@@ -365,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.opacity = '1';
     document.body.classList.add('loaded');
     
-    // Initialize all features
+    // Initialize $Ember-specific features
     initializePresaleCountdown();
     initializePresaleCalculator();
     initializeChatbot();
@@ -478,120 +463,13 @@ function initializePresaleCalculator() {
     }
     
     // Add debounced input event listener (150ms delay)
-    const debouncedCalculate = debounce(calculateTokens, 150);
+    // Use debounce function from shared-script.js
+    const debouncedCalculate = window.debounce(calculateTokens, 150);
     investmentInput.addEventListener('input', debouncedCalculate);
     
     // Initial calculation
     calculateTokens();
 }
-
-// ============================================
-// NAVBAR SCROLL EFFECT
-// ============================================
-window.addEventListener('scroll', () => {
-    const navbar = document.getElementById('navbar');
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (scrollTop > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// ============================================
-// SMOOTH SCROLLING FOR ANCHOR LINKS
-// ============================================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offsetTop = target.offsetTop - 100;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// ============================================
-// SCROLL REVEAL ANIMATION
-// ============================================
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -80px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.classList.add('revealed');
-            }, index * 100);
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.scroll-reveal').forEach(el => {
-    observer.observe(el);
-});
-
-// ============================================
-// MOBILE MENU SYSTEM
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (mobileMenuBtn && navLinks) {
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            if (navLinks.classList.contains('mobile-active')) {
-                navLinks.classList.remove('mobile-active');
-                mobileMenuBtn.innerHTML = '☰';
-                document.body.style.overflow = '';
-            } else {
-                navLinks.classList.add('mobile-active');
-                mobileMenuBtn.innerHTML = '✕';
-                document.body.style.overflow = 'hidden';
-            }
-        });
-
-        // Close menu when clicking nav links
-        const navLinksArray = navLinks.querySelectorAll('a');
-        navLinksArray.forEach((link) => {
-            link.addEventListener('click', function() {
-                navLinks.classList.remove('mobile-active');
-                mobileMenuBtn.innerHTML = '☰';
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Close on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && navLinks.classList.contains('mobile-active')) {
-                navLinks.classList.remove('mobile-active');
-                mobileMenuBtn.innerHTML = '☰';
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Close when clicking outside
-        document.addEventListener('click', function(e) {
-            if (navLinks.classList.contains('mobile-active') && 
-                !navLinks.contains(e.target) && 
-                !mobileMenuBtn.contains(e.target)) {
-                navLinks.classList.remove('mobile-active');
-                mobileMenuBtn.innerHTML = '☰';
-                document.body.style.overflow = '';
-            }
-        });
-    }
-});
 
 // ============================================
 // INTERACTIVE FEEDBACK FOR CTA BUTTONS
