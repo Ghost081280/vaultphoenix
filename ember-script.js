@@ -1,13 +1,10 @@
 // Vault Phoenix - $Ember Token Page Interactive JavaScript
 // Production Version - Optimized & Secured
-// User messages: NO avatar, pushed to far right
-// Claude messages: VP logo avatar on left
-// Background scroll prevented with overscroll-behavior
 
 // ============================================
 // CLAUDE API CONFIGURATION
 // ============================================
-const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE'; // ← Replace with your actual API key from console.anthropic.com
+const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE';
 const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
 const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 
@@ -58,7 +55,7 @@ Your role is to:
 Always maintain a professional yet friendly tone. Emphasize the legitimate utility and value proposition. If asked about financial advice, remind users to do their own research and consult financial advisors.`;
 
 // ============================================
-// INITIALIZE CHATBOT - NO AUTO-FOCUS
+// INITIALIZE CHATBOT
 // ============================================
 function initializeChatbot() {
     const chatbotButton = document.querySelector('.chatbot-button-container');
@@ -76,7 +73,6 @@ function initializeChatbot() {
     chatbotButton.addEventListener('click', () => {
         chatbotWindow.classList.toggle('active');
         if (chatbotWindow.classList.contains('active')) {
-            // NO auto-focus to prevent mobile keyboard popup
             // Add welcome message if first time opening
             if (chatbotBody.children.length === 0) {
                 addWelcomeMessage();
@@ -140,7 +136,7 @@ function addWelcomeMessage() {
 }
 
 // ============================================
-// SEND MESSAGE TO CLAUDE API - NO AUTO-FOCUS
+// SEND MESSAGE TO CLAUDE API
 // ============================================
 async function sendMessage() {
     const chatbotInput = document.querySelector('.chatbot-input');
@@ -236,7 +232,6 @@ async function sendMessage() {
         chatbotInput.disabled = false;
         chatbotSend.disabled = false;
         isTyping = false;
-        // NO auto-focus - let user tap input manually on mobile
     }
 }
 
@@ -407,8 +402,8 @@ function initializePresaleCalculator() {
     
     if (!investmentInput) return;
     
-    const TOKEN_PRICE = 0.003; // $0.003 per token
-    const PRICE_MULTIPLIERS = [2, 5, 10]; // 2x, 5x, 10x scenarios
+    const TOKEN_PRICE = 0.003;
+    const PRICE_MULTIPLIERS = [2, 5, 10];
     
     function calculateTokens() {
         const investment = parseFloat(investmentInput.value) || 0;
@@ -423,7 +418,7 @@ function initializePresaleCalculator() {
         }
         
         // Calculate potential values (using middle scenario - 5x)
-        const futureValue = investment * PRICE_MULTIPLIERS[1]; // 5x
+        const futureValue = investment * PRICE_MULTIPLIERS[1];
         const roi = ((futureValue - investment) / investment) * 100;
         
         if (valueDisplay) {
@@ -462,9 +457,21 @@ function initializePresaleCalculator() {
         });
     }
     
+    // Debounce function
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
     // Add debounced input event listener (150ms delay)
-    // Use debounce function from shared-script.js
-    const debouncedCalculate = window.debounce(calculateTokens, 150);
+    const debouncedCalculate = debounce(calculateTokens, 150);
     investmentInput.addEventListener('input', debouncedCalculate);
     
     // Initial calculation
