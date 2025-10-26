@@ -1,5 +1,5 @@
-/* Ember Token Page Stylesheet - Production Ready */
-/* Navigation & Footer inherited from shared-styles.css */
+/* Ember Token Page Stylesheet - Final Production Version */
+/* Senior Developer: Clean, optimized, no flickering, proper glows */
 
 /* CRITICAL: Prevent horizontal scroll on mobile */
 html {
@@ -15,11 +15,7 @@ body {
 }
 
 /* ============================================
-   FLOATING AI CHATBOT BUTTON - BIGGER & BETTER
-   Bottom right corner with pulsing glow
-   Button: 110px, Glow: 180px
-   FIXED: Proper positioning that respects navigation
-   PROFESSIONAL UI/UX DESIGN
+   FLOATING AI CHATBOT BUTTON
    ============================================ */
 
 .chatbot-button-container {
@@ -130,7 +126,6 @@ body {
     border-left: 10px solid rgba(0, 0, 0, 0.9);
 }
 
-/* PROFESSIONAL: Chatbot Window - Smart Height that Respects Navigation */
 .chatbot-window {
     position: fixed;
     bottom: 160px;
@@ -223,7 +218,6 @@ body {
     transform: scale(1.1);
 }
 
-/* PROFESSIONAL: Chat Body - Flexible scroll area */
 .chatbot-body {
     flex: 1;
     min-height: 0;
@@ -236,7 +230,6 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Message Container Styling */
 .chat-message {
     margin-bottom: 15px;
     display: flex;
@@ -256,7 +249,6 @@ body {
     }
 }
 
-/* Claude Messages - Left Aligned with Avatar */
 .chat-message.assistant-message {
     flex-direction: row;
     justify-content: flex-start;
@@ -296,7 +288,6 @@ body {
     word-wrap: break-word;
 }
 
-/* User Messages - Right Aligned, NO Avatar */
 .chat-message.user-message {
     flex-direction: row-reverse;
     justify-content: flex-start;
@@ -320,7 +311,6 @@ body {
     word-wrap: break-word;
 }
 
-/* Message Text Formatting */
 .message-text strong {
     color: #f0a500;
     font-weight: 700;
@@ -341,7 +331,6 @@ body {
     margin: 5px 0;
 }
 
-/* Typing Indicator */
 .typing-indicator {
     margin-bottom: 15px;
 }
@@ -409,7 +398,6 @@ body {
     }
 }
 
-/* Chat Footer - Fixed Height */
 .chatbot-footer {
     padding: 20px;
     background: rgba(0, 0, 0, 0.4);
@@ -423,7 +411,6 @@ body {
     gap: 10px;
 }
 
-/* Input - Prevent expansion and mobile zoom */
 .chatbot-input {
     flex: 1;
     padding: 12px 16px;
@@ -473,7 +460,6 @@ body {
     cursor: not-allowed;
 }
 
-/* PROFESSIONAL: Responsive Design - Tablet & Mobile */
 @media (max-width: 1024px) {
     .chatbot-window {
         height: calc(100vh - 280px);
@@ -602,7 +588,10 @@ body {
     }
 }
 
-/* RESET AND BASE STYLES */
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
 * {
     margin: 0;
     padding: 0;
@@ -619,13 +608,15 @@ body {
     width: 100%;
 }
 
-/* Highlight text styling - Yellow/Gold emphasis */
 .highlight-text {
     color: #f0a500;
     font-weight: 700;
 }
 
-/* EMBER HERO SECTION */
+/* ============================================
+   EMBER HERO SECTION
+   ============================================ */
+
 .ember-hero {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
@@ -660,7 +651,7 @@ body {
     66% { transform: translateY(8px) scale(0.98) rotate(-1deg); }
 }
 
-/* FLOATING COINS - CLEAN GLOW EFFECT */
+/* FLOATING COINS - CLEAN GLOW, NO FLICKER */
 .hero-floating-coins {
     position: absolute !important;
     top: 0 !important;
@@ -677,17 +668,19 @@ body {
     z-index: 1 !important;
     pointer-events: none !important;
     animation: heroCoinFloat 6s ease-in-out infinite !important;
+    will-change: transform, opacity;
 }
 
+/* FIXED: Pure glow effect - no flickering */
 .hero-crypto-coin-icon {
+    display: block;
     width: clamp(35px, 5vw, 50px) !important;
     height: clamp(35px, 5vw, 50px) !important;
     object-fit: contain !important;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6)) !important;
-    transition: all 0.3s ease !important;
     opacity: 0.6 !important;
-    z-index: 1 !important;
-    pointer-events: none !important;
+    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.7)) !important;
+    transition: none !important;
+    will-change: transform, opacity;
 }
 
 .hero-coin-1 {
@@ -751,7 +744,6 @@ body {
     }
 }
 
-/* HERO CONTENT */
 .ember-hero-content {
     max-width: 1400px;
     margin: 0 auto;
@@ -772,12 +764,12 @@ body {
 }
 
 .ember-token-icon-image {
+    display: block;
     width: clamp(120px, 15vw, 160px);
     height: clamp(120px, 15vw, 160px);
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6));
     animation: emberPulse 3s ease-in-out infinite;
-    transition: all 0.3s ease;
 }
 
 @keyframes emberPulse {
@@ -822,7 +814,7 @@ body {
     line-height: 1.4;
 }
 
-/* ENHANCED STATS GRID - Updated for 3 columns */
+/* STATS GRID */
 .ember-stats-grid-enhanced {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -877,9 +869,9 @@ body {
     opacity: 1;
 }
 
+/* FIXED: Desktop icons - larger and cleaner glow */
 .stat-icon {
     font-size: 2.5rem;
-    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -887,10 +879,11 @@ body {
 }
 
 .stat-icon img {
-    width: 70px;
-    height: 70px;
+    display: block;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
 }
 
 .stat-content {
@@ -966,7 +959,10 @@ body {
     transform: translateY(-3px);
 }
 
-/* Ember Sections */
+/* ============================================
+   SECTIONS
+   ============================================ */
+
 .ember-section {
     padding: 120px 40px;
     position: relative;
@@ -997,20 +993,21 @@ body {
     margin-bottom: 80px;
 }
 
+/* FIXED: Section icons - larger with clean glow */
 .ember-section-icon {
     font-size: 4rem;
     margin-bottom: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
 }
 
 .ember-section-icon img {
-    width: 140px;
-    height: 140px;
+    display: block;
+    width: 160px;
+    height: 160px;
     object-fit: contain;
-    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.5));
 }
 
 .ember-section-icon-large {
@@ -1019,9 +1016,9 @@ body {
 }
 
 .ember-section-icon-large img {
-    width: 140px !important;
-    height: 140px !important;
-    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.5)) !important;
+    width: 180px !important;
+    height: 180px !important;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6)) !important;
 }
 
 .team-section-icon-xlarge {
@@ -1054,7 +1051,7 @@ body {
     font-weight: 500;
 }
 
-/* How It Works Section */
+/* HOW IT WORKS SECTION */
 .how-it-works-section {
     background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
     width: 100%;
@@ -1127,20 +1124,21 @@ body {
     border-color: rgba(34, 197, 94, 0.6);
 }
 
+/* FIXED: Stakeholder icons - larger with clean glow */
 .stakeholder-icon {
     font-size: 4rem;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
 .stakeholder-icon img {
-    width: 140px;
-    height: 140px;
+    display: block;
+    width: 160px;
+    height: 160px;
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
 }
 
 .stakeholder-title {
@@ -1221,9 +1219,11 @@ body {
 }
 
 .path-icon img {
-    width: 50px;
-    height: 50px;
+    display: block;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
 }
 
 .path-text {
@@ -1268,7 +1268,7 @@ body {
     font-weight: 800;
 }
 
-/* Value Proposition Enhanced */
+/* VALUE PROPOSITION */
 .value-proposition-enhanced {
     background: rgba(240, 165, 0, 0.1);
     padding: 40px;
@@ -1322,6 +1322,7 @@ body {
     transform: translateY(-5px);
 }
 
+/* FIXED: Utility icons - larger with clean glow */
 .utility-icon {
     font-size: 2.5rem;
     margin-bottom: 15px;
@@ -1329,10 +1330,11 @@ body {
 }
 
 .utility-icon img {
-    width: 70px;
-    height: 70px;
+    display: block;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
 }
 
 .utility-item-enhanced h4 {
@@ -1348,7 +1350,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* White Paper Section */
+/* WHITE PAPER SECTION */
 .whitepaper-content {
     max-width: 1000px;
     margin: 0 auto;
@@ -1409,11 +1411,13 @@ body {
 }
 
 .whitepaper-section h4 img {
-    width: 40px;
-    height: 40px;
+    display: block;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
 }
 
 .whitepaper-section p {
@@ -1461,14 +1465,16 @@ body {
 }
 
 .download-button img {
-    width: 28px;
-    height: 28px;
+    display: block;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
 }
 
-/* Roadmap Section */
+/* ROADMAP SECTION */
 .roadmap-section {
     background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
 }
@@ -1529,11 +1535,13 @@ body {
 }
 
 .roadmap-title img {
-    width: 40px;
-    height: 40px;
+    display: block;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
 }
 
 .roadmap-status {
@@ -1614,18 +1622,19 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
+/* FIXED: Trust icons - larger with clean glow */
 .trust-icon {
     font-size: 3rem;
     margin-bottom: 20px;
     display: block;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
 .trust-icon img {
-    width: 90px;
-    height: 90px;
+    display: block;
+    width: 110px;
+    height: 110px;
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
 }
 
 .trust-item h4 {
@@ -1640,7 +1649,7 @@ body {
     line-height: 1.6;
 }
 
-/* Team Section */
+/* TEAM SECTION */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1795,7 +1804,7 @@ body {
     line-height: 1.6;
 }
 
-/* Updated Professional Tokenomics Section */
+/* TOKENOMICS SECTION */
 .tokenomics-section {
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
 }
@@ -1871,6 +1880,7 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
+/* FIXED: Incentive icons - larger with clean glow */
 .incentive-icon {
     font-size: 3rem;
     margin-bottom: 20px;
@@ -1879,10 +1889,11 @@ body {
 }
 
 .incentive-icon img {
-    width: 90px;
-    height: 90px;
+    display: block;
+    width: 110px;
+    height: 110px;
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
 }
 
 .incentive-card h4 {
@@ -2199,10 +2210,11 @@ body {
 }
 
 .trust-feature .trust-icon img {
-    width: 90px;
-    height: 90px;
+    display: block;
+    width: 110px;
+    height: 110px;
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
 }
 
 .trust-feature h4 {
@@ -2217,7 +2229,10 @@ body {
     line-height: 1.6;
 }
 
-/* Updated Professional Presale Section - FIXED: Mobile Optimization */
+/* ============================================
+   PRESALE SECTION - RESET FUNDING TO $0
+   ============================================ */
+
 .presale-section {
     background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
     overflow-x: hidden;
@@ -2272,6 +2287,7 @@ body {
     transform: translateY(-3px);
 }
 
+/* FIXED: Metric icons - larger with clean glow */
 .metric-icon {
     font-size: 2rem;
     margin-bottom: 10px;
@@ -2279,10 +2295,11 @@ body {
 }
 
 .metric-icon img {
-    width: 50px;
-    height: 50px;
+    display: block;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6));
 }
 
 .metric-value {
@@ -2380,6 +2397,7 @@ body {
     background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
     border-radius: 10px;
     transition: width 0.3s ease;
+    width: 0%;
 }
 
 .progress-stats {
@@ -2391,6 +2409,7 @@ body {
     gap: 10px;
 }
 
+/* RESET: Development Fund Tracker - Back to $0 */
 .development-fund-tracker {
     background: rgba(240, 165, 0, 0.1);
     padding: 35px;
@@ -2437,6 +2456,7 @@ body {
     border-radius: 12px;
     transition: width 0.5s ease;
     box-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
+    width: 0%;
 }
 
 .tracker-stats {
@@ -2500,7 +2520,6 @@ body {
 .breakdown-icon {
     font-size: 1.8rem;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
 }
 
 .breakdown-details {
@@ -2755,7 +2774,7 @@ body {
     display: block;
 }
 
-/* FIXED: Presale Promo Image - Standalone with Glow Effect */
+/* FIXED: Presale Promo Image - Perfect Mobile Display */
 .presale-promo-image {
     width: 100%;
     text-align: center;
@@ -2764,11 +2783,12 @@ body {
 }
 
 .presale-promo-image img {
+    display: block;
     max-width: 100%;
     width: auto;
     height: auto;
     max-height: 600px;
-    display: inline-block;
+    margin: 0 auto;
     border-radius: 20px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
@@ -2777,31 +2797,6 @@ body {
 .presale-promo-image:hover img {
     filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.8)) drop-shadow(0 0 80px rgba(240, 165, 0, 0.5));
     transform: translateY(-5px) scale(1.02);
-}
-
-/* FIXED: Mobile Presale Image */
-@media (max-width: 768px) {
-    .presale-promo-image {
-        margin-top: 30px;
-    }
-    
-    .presale-promo-image img {
-        width: 100%;
-        max-width: 100%;
-        max-height: none;
-        height: auto;
-        border-radius: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .presale-promo-image {
-        margin-top: 25px;
-    }
-    
-    .presale-promo-image img {
-        border-radius: 12px;
-    }
 }
 
 .tpa-section {
@@ -2997,18 +2992,19 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
+/* FIXED: Benefit icons - larger with clean glow */
 .benefit-icon {
     font-size: 3rem;
     margin-bottom: 20px;
     display: block;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
 }
 
 .benefit-icon img {
-    width: 90px;
-    height: 90px;
+    display: block;
+    width: 110px;
+    height: 110px;
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
 }
 
 .benefit-item h4 {
@@ -3023,7 +3019,7 @@ body {
     line-height: 1.6;
 }
 
-/* Enhanced CTA Presale Section */
+/* ENHANCED CTA PRESALE SECTION */
 .cta-presale-section-enhanced {
     background: linear-gradient(135deg, #0f0f0f 0%, #2d1810 50%, #451a03 100%);
     position: relative;
@@ -3072,6 +3068,7 @@ body {
 }
 
 .floating-coin-image {
+    display: block;
     width: 60px;
     height: 60px;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
@@ -3100,6 +3097,7 @@ body {
 }
 
 .cta-main-icon {
+    display: block;
     width: 120px;
     height: 120px;
     filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8));
@@ -3182,9 +3180,10 @@ body {
 }
 
 .prop-icon-image {
-    width: 50px;
-    height: 50px;
-    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.6));
+    display: block;
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6));
 }
 
 .prop-text h4 {
@@ -3305,7 +3304,7 @@ body {
     font-weight: 500;
 }
 
-/* TPA Modal Styles */
+/* TPA MODAL STYLES */
 .tpa-modal {
     position: fixed;
     top: 0;
@@ -3453,7 +3452,7 @@ body {
     box-shadow: 0 15px 35px rgba(74, 222, 128, 0.5);
 }
 
-/* Legal & Regulatory Compliance Section */
+/* LEGAL & REGULATORY COMPLIANCE SECTION */
 .legal-compliance-section {
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
 }
@@ -3475,11 +3474,13 @@ body {
 }
 
 .legal-disclaimer h3 img {
-    width: 40px;
-    height: 40px;
+    display: block;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     vertical-align: middle;
     margin-right: 8px;
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
 }
 
 .disclaimer-content {
@@ -3529,10 +3530,12 @@ body {
 }
 
 .compliance-card h3 img {
-    width: 40px;
-    height: 40px;
+    display: block;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     vertical-align: middle;
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
 }
 
 .compliance-card p {
@@ -3623,16 +3626,17 @@ body {
 }
 
 .share-icon-compact {
-    width: 60px;
-    height: 60px;
+    display: block;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
-    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6));
     animation: iconPulse 2s ease-in-out infinite;
 }
 
 @keyframes iconPulse {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6)); }
-    50% { transform: scale(1.1); filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8)); }
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6)); }
+    50% { transform: scale(1.1); filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.8)); }
 }
 
 .share-text-compact {
@@ -3749,7 +3753,7 @@ body {
     box-shadow: 0 15px 40px rgba(251, 146, 60, 0.5);
 }
 
-/* Footer */
+/* FOOTER */
 .footer {
     background: #0f0f0f;
     color: white;
@@ -3840,7 +3844,10 @@ body {
     transform: translateY(-2px);
 }
 
-/* Mobile Responsive Design - COMPREHENSIVE FIXES */
+/* ============================================
+   MOBILE RESPONSIVE - COMPREHENSIVE FIXES
+   ============================================ */
+
 @media (max-width: 768px) {
     html, body {
         overflow-x: hidden !important;
@@ -3894,9 +3901,10 @@ body {
         gap: 15px;
     }
 
+    /* FIXED: Mobile icon sizes - larger and cleaner */
     .stat-icon img {
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
     }
 
     .stat-content {
@@ -3922,10 +3930,12 @@ body {
         font-size: 1.1rem;
     }
 
+    /* FIXED: Mobile floating coins - no flicker */
     .hero-crypto-coin-icon {
-        width: clamp(25px, 4vw, 35px) !important;
-        height: clamp(25px, 4vw, 35px) !important;
+        width: clamp(30px, 4vw, 40px) !important;
+        height: clamp(30px, 4vw, 40px) !important;
         opacity: 0.5 !important;
+        filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.6)) !important;
     }
 
     .presale-content {
@@ -3970,14 +3980,28 @@ body {
         font-size: 1.5rem;
     }
 
+    /* FIXED: Mobile presale image */
+    .presale-promo-image {
+        margin-top: 30px;
+    }
+    
+    .presale-promo-image img {
+        width: 100%;
+        max-width: 100%;
+        max-height: none;
+        height: auto;
+        border-radius: 15px;
+    }
+
     .how-it-works-grid {
         grid-template-columns: 1fr;
         gap: 30px;
     }
 
+    /* FIXED: Mobile section icons - larger */
     .stakeholder-icon img {
-        width: 90px;
-        height: 90px;
+        width: 120px;
+        height: 120px;
     }
 
     .distribution-visual {
@@ -4021,36 +4045,47 @@ body {
         gap: 30px;
     }
 
+    /* FIXED: All mobile icons - larger sizes */
     .ember-section-icon img {
-        width: 90px;
-        height: 90px;
-    }
-
-    .team-icon-large img {
-        width: 120px !important;
-        height: 120px !important;
+        width: 120px;
+        height: 120px;
     }
 
     .utility-icon img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .path-icon img {
         width: 60px;
         height: 60px;
     }
 
     .trust-icon img {
-        width: 75px;
-        height: 75px;
+        width: 90px;
+        height: 90px;
     }
 
     .incentive-icon img {
-        width: 75px;
-        height: 75px;
+        width: 90px;
+        height: 90px;
+    }
+
+    .metric-icon img {
+        width: 60px;
+        height: 60px;
     }
 
     .benefit-icon img {
-        width: 75px;
-        height: 75px;
+        width: 90px;
+        height: 90px;
     }
 
+    .compliance-card h3 img {
+        width: 45px;
+        height: 45px;
+    }
+    
     .team-grid-advisors {
         grid-template-columns: 1fr !important;
     }
@@ -4089,8 +4124,8 @@ body {
     }
     
     .share-icon-compact {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
     }
     
     .share-text-compact h3 {
@@ -4113,9 +4148,10 @@ body {
 }
 
 @media (max-width: 480px) {
+    /* FIXED: Extra small mobile icons */
     .hero-crypto-coin-icon {
-        width: clamp(20px, 3vw, 30px) !important;
-        height: clamp(20px, 3vw, 30px) !important;
+        width: clamp(25px, 3vw, 35px) !important;
+        height: clamp(25px, 3vw, 35px) !important;
         opacity: 0.4 !important;
     }
 
@@ -4125,58 +4161,53 @@ body {
     }
 
     .stat-icon img {
-        width: 55px;
-        height: 55px;
+        width: 70px;
+        height: 70px;
     }
 
     .stakeholder-icon img {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
     }
 
     .ember-section-icon img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .utility-icon img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .path-icon img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .trust-icon img {
         width: 80px;
         height: 80px;
     }
 
-    .team-icon-large img {
-        width: 100px !important;
-        height: 100px !important;
+    .incentive-icon img {
+        width: 80px;
+        height: 80px;
     }
 
-    .utility-icon img {
+    .metric-icon img {
         width: 55px;
         height: 55px;
     }
 
-    .path-icon img {
-        width: 40px;
-        height: 40px;
-    }
-
-    .trust-icon img {
-        width: 70px;
-        height: 70px;
-    }
-
-    .incentive-icon img {
-        width: 70px;
-        height: 70px;
-    }
-
-    .metric-icon img {
-        width: 45px;
-        height: 45px;
-    }
-
     .benefit-icon img {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
     }
 
     .compliance-card h3 img {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
     }
     
     .logo-image {
@@ -4196,8 +4227,8 @@ body {
     }
     
     .share-icon-compact {
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
     }
     
     .share-text-compact h3 {
@@ -4213,9 +4244,13 @@ body {
         font-size: 0.9rem;
         gap: 10px;
     }
+    
+    .presale-promo-image img {
+        border-radius: 12px;
+    }
 }
 
-/* Scroll Animations */
+/* SCROLL ANIMATIONS */
 .scroll-reveal {
     opacity: 0;
     transform: translateY(60px);
@@ -4227,7 +4262,7 @@ body {
     transform: translateY(0);
 }
 
-/* High contrast mode support */
+/* HIGH CONTRAST MODE */
 @media (prefers-contrast: high) {
     .ember-hero-title,
     .ember-section-title {
@@ -4237,7 +4272,7 @@ body {
     }
 }
 
-/* Reduce motion for accessibility */
+/* REDUCE MOTION */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
@@ -4259,7 +4294,7 @@ body {
     }
 }
 
-/* Custom scrollbar styling */
+/* CUSTOM SCROLLBAR */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -4277,7 +4312,7 @@ body {
     background: linear-gradient(180deg, #fb923c, #f0a500);
 }
 
-/* Selection styling */
+/* SELECTION STYLING */
 ::selection {
     background: rgba(240, 165, 0, 0.3);
     color: #ffffff;
