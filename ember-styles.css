@@ -2071,6 +2071,16 @@ body {
 }
 
 @media (max-width: 768px) {
+    .table-container {
+        background: transparent;
+        border: none;
+        overflow-x: visible;
+    }
+    
+    .tokenomics-table {
+        display: none;
+    }
+    
     .allocation-cards-mobile {
         display: flex;
         flex-direction: column;
@@ -2110,6 +2120,7 @@ body {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 15px;
+        margin-bottom: 15px;
     }
     
     .allocation-detail-item {
@@ -2133,7 +2144,6 @@ body {
     }
     
     .allocation-card-note {
-        margin-top: 15px;
         padding-top: 15px;
         border-top: 1px solid rgba(240, 165, 0, 0.2);
         font-size: 0.85rem;
