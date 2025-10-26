@@ -3765,27 +3765,6 @@ body.loaded {
     font-weight: 700;
 }
 
-/* Mobile Menu - Matching shared-styles.css approach */
-.mobile-menu-btn {
-    display: none;
-    position: relative;
-    z-index: 9999;
-    background: rgba(215, 51, 39, 0.9);
-    color: white;
-    border: none;
-    padding: 12px 16px;
-    font-size: 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.mobile-menu-btn:hover {
-    background: #d73327;
-    transform: scale(1.05);
-}
-
 /* Footer */
 .footer {
     background: #0f0f0f;
