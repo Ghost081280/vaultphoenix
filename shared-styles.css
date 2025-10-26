@@ -58,11 +58,12 @@ body {
    =================================== */
 
 .navbar {
+    /* Initial ember gradient - JavaScript will smoothly transition this */
     background: linear-gradient(135deg, 
-        rgba(45, 24, 16, 0.95) 0%,      /* ember-brown with transparency */
-        rgba(69, 26, 3, 0.92) 30%,      /* ember-deep-brown */
-        rgba(124, 45, 18, 0.90) 60%,    /* ember-rust */
-        rgba(215, 51, 39, 0.85) 100%    /* ember-dark-red */
+        rgba(45, 24, 16, 0.95) 0%,
+        rgba(69, 26, 3, 0.92) 30%,
+        rgba(124, 45, 18, 0.90) 60%,
+        rgba(215, 51, 39, 0.85) 100%
     );
     padding: 1.2rem 2.5rem;
     position: fixed;
@@ -72,16 +73,11 @@ body {
     box-shadow: 0 4px 20px rgba(215, 51, 39, 0.3);
     backdrop-filter: blur(20px);
     border-bottom: 2px solid rgba(240, 165, 0, 0.4);
-    transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                border-bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    /* No transition here - JavaScript handles smooth interpolation */
 }
 
 .navbar.scrolled {
-    padding: 1.2rem 2.5rem;
-    background: linear-gradient(135deg, rgba(15, 15, 15, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
-    border-bottom: 2px solid rgba(215, 51, 39, 0.3);
+    /* This class is not used anymore - JavaScript handles everything */
 }
 
 .nav-content {
