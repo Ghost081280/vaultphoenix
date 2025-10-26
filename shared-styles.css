@@ -73,6 +73,9 @@ body {
     box-shadow: 0 4px 20px rgba(215, 51, 39, 0.3);
     backdrop-filter: blur(20px);
     border-bottom: 2px solid rgba(240, 165, 0, 0.4);
+    height: 110px; /* Fixed height to ensure consistency */
+    display: flex;
+    align-items: center;
     /* No transition here - JavaScript handles smooth interpolation */
 }
 
@@ -86,7 +89,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 70px; /* Ensures consistent navbar height across all pages */
+    width: 100%;
+    height: 100%;
 }
 
 .logo {
@@ -718,6 +722,7 @@ button:focus-visible {
 @media (max-width: 1024px) {
     .navbar {
         padding: 1rem 1.5rem;
+        height: 90px; /* Fixed height for tablet */
     }
     
     .logo-image {
@@ -793,6 +798,7 @@ button:focus-visible {
 @media (max-width: 480px) {
     .navbar {
         padding: 0.8rem 1rem;
+        height: 75px; /* Fixed height for mobile */
     }
     
     .logo-image {
