@@ -13,20 +13,6 @@ body {
     width: 100%;
     max-width: 100vw;
 }
-
-/* Mobile menu open state - prevent background scroll */
-@media (max-width: 1024px) {
-    body.mobile-menu-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-    }
-    
-    body.mobile-menu-open .nav-links {
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-}
 /* ============================================
    FLOATING AI CHATBOT BUTTON - BIGGER & BETTER
    Bottom right corner with pulsing glow
@@ -38,7 +24,7 @@ body {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 998;
+    z-index: 9997;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -153,7 +139,7 @@ body {
     border-radius: 25px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     border: 3px solid rgba(215, 51, 39, 0.4);
-    z-index: 997;
+    z-index: 9996;
     display: none;
     flex-direction: column;
     overflow: hidden;
@@ -3977,16 +3963,13 @@ body {
     transform: translateY(-2px);
 }
 
+/* Mobile Responsive Design - COMPREHENSIVE FIXES */
 @media (max-width: 768px) {
-    /* Allow vertical scrolling for mobile nav */
-    html {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-    
-    body {
-        overflow-x: hidden;
-        overflow-y: auto;
+    /* CRITICAL: Prevent horizontal scroll */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
     }
     
     /* FIXED: Mobile Logo Size */

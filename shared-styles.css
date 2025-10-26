@@ -264,10 +264,9 @@ body {
     cursor: pointer;
     padding: 0.6rem 1rem;
     border-radius: 12px;
-    z-index: 1003; /* HIGHER than nav-links when open */
+    z-index: 1001;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
-    position: relative; /* Important for z-index */
 }
 
 .mobile-menu-btn:hover {
@@ -717,13 +716,13 @@ button:focus-visible {
 }
 
 /* ===================================
-   RESPONSIVE NAVIGATION - TABLET & MOBILE
+   RESPONSIVE NAVIGATION - TABLET
    =================================== */
 
 @media (max-width: 1024px) {
     .navbar {
         padding: 1rem 1.5rem;
-        height: 90px;
+        height: 90px; /* Fixed height for tablet */
     }
     
     .logo-image {
@@ -734,120 +733,72 @@ button:focus-visible {
         font-size: 1.5rem;
     }
     
-    /* Show mobile menu button */
     .mobile-menu-btn {
         display: block;
-        position: relative;
-        z-index: 1003; /* Above everything */
     }
     
-    /* Hide desktop nav and prepare for mobile slide-in */
     .nav-links {
-        position: fixed !important;
-        top: 0 !important;
-        right: -100% !important; /* Hidden off-screen */
-        height: 100vh !important;
-        width: 70% !important;
-        max-width: 400px !important;
-        /* Brighter ember gradient for visibility */
-        background: linear-gradient(135deg, 
-            rgba(45, 24, 16, 0.98) 0%,
-            rgba(69, 26, 3, 0.96) 30%,
-            rgba(124, 45, 18, 0.98) 60%,
-            rgba(215, 51, 39, 0.95) 100%
-        ) !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        align-items: stretch !important;
-        gap: 0 !important;
-        padding: 0 !important;
-        padding-top: 100px !important; /* Space from top */
-        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
-        box-shadow: -5px 0 25px rgba(0,0,0,0.6) !important;
-        backdrop-filter: blur(20px) !important;
-        border-left: 3px solid rgba(240, 165, 0, 0.6) !important;
-        z-index: 1002 !important; /* Below button, above overlay */
-        overflow-y: auto !important;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        max-width: 400px;
+        background: linear-gradient(135deg, rgba(15, 15, 15, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem;
+        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        box-shadow: -5px 0 25px rgba(0,0,0,0.6);
+        backdrop-filter: blur(20px);
+        border-left: 3px solid rgba(215, 51, 39, 0.4);
     }
     
-    /* Active state - slide in */
     .nav-links.active {
-        right: 0 !important;
+        right: 0;
     }
     
-    /* Style list items */
-    .nav-links li {
-        width: 100%;
-        border-bottom: 1px solid rgba(240, 165, 0, 0.3);
-    }
-    
-    /* Style links for mobile - BRIGHTER & MORE VISIBLE */
     .nav-links a {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         width: 100%;
-        padding: 1.2rem 2rem;
-        text-align: left;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        border-radius: 0;
+        padding: 1rem;
+        text-align: center;
+        border-radius: 12px;
         transition: all 0.3s ease;
-        background: transparent;
-        color: rgba(255, 255, 255, 0.95); /* Brighter text */
-        font-weight: 600;
+        background: rgba(215, 51, 39, 0.05);
     }
     
     .nav-links a:hover {
-        background: rgba(240, 165, 0, 0.3); /* Golden hover */
-        transform: translateX(10px);
-        padding-left: 2.5rem;
-        color: #ffffff; /* Pure white on hover */
+        background: rgba(215, 51, 39, 0.2);
+        transform: translateX(-10px);
     }
     
     .nav-links a::after {
         display: none;
     }
     
-    /* Mobile-specific button styles */
     .ember-link {
-        justify-content: flex-start !important;
+        justify-content: center !important;
         width: 100% !important;
-        padding: 1.2rem 2rem !important;
-        border-radius: 0 !important;
-        border: none !important;
-        border-bottom: 1px solid rgba(240, 165, 0, 0.3) !important;
-        background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
-        color: white !important;
-    }
-    
-    .ember-link:hover {
-        background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold)) !important;
-        transform: translateX(10px) !important;
-        padding-left: 2.5rem !important;
+        padding: 14px 24px !important;
     }
     
     .presale-link {
-        justify-content: flex-start !important;
+        justify-content: center !important;
         width: 100% !important;
-        padding: 1.2rem 2rem !important;
-        border-radius: 0 !important;
-        border: none !important;
-        border-bottom: 1px solid rgba(240, 165, 0, 0.3) !important;
-        background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange)) !important;
-        color: white !important;
-    }
-    
-    .presale-link:hover {
-        background: linear-gradient(135deg, var(--ember-orange), var(--ember-dark-red)) !important;
-        transform: translateX(10px) !important;
-        padding-left: 2.5rem !important;
+        padding: 14px 24px !important;
     }
 }
+
+/* ===================================
+   RESPONSIVE NAVIGATION - MOBILE
+   =================================== */
 
 @media (max-width: 480px) {
     .navbar {
         padding: 0.8rem 1rem;
-        height: 75px;
+        height: 75px; /* Fixed height for mobile */
     }
     
     .logo-image {
@@ -864,26 +815,30 @@ button:focus-visible {
     }
     
     .nav-links {
-        width: 85% !important;
-        padding-top: 90px !important;
+        width: 85%;
+        padding: 1.5rem;
     }
     
     .nav-links a {
         font-size: 1.2rem;
-        padding: 1rem 1.5rem;
+        padding: 0.8rem;
     }
     
     .ember-link {
-        padding: 1rem 1.5rem !important;
-        font-size: 1.2rem !important;
+        padding: 12px 20px !important;
+        font-size: 1rem !important;
     }
     
     .presale-link {
-        padding: 1rem 1.5rem !important;
-        font-size: 1.2rem !important;
+        padding: 12px 20px !important;
+        font-size: 1rem !important;
     }
     
-    .nav-ember-coin,
+    .nav-ember-coin {
+        width: 20px;
+        height: 20px;
+    }
+    
     .nav-presale-icon {
         width: 20px;
         height: 20px;
@@ -902,16 +857,14 @@ button:focus-visible {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 1001; /* Above content, below menu and button */
+    z-index: 999;
     opacity: 0;
     transition: opacity 0.3s ease;
-    pointer-events: none;
 }
 
 .nav-overlay.active {
     display: block;
     opacity: 1;
-    pointer-events: auto;
 }
 
 @media (max-width: 1024px) {
