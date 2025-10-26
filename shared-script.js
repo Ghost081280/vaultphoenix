@@ -198,64 +198,100 @@
         // Target date: November 1, 2025
         const targetDate = new Date('November 1, 2025 00:00:00 UTC');
         
-        // Check which page we're on and get appropriate elements
-        const mainDays = document.getElementById('main-days');
-        const mainHours = document.getElementById('main-hours');
-        const mainMinutes = document.getElementById('main-minutes');
-        const mainSeconds = document.getElementById('main-seconds');
-        
-        const emberDays = document.getElementById('countdown-days');
-        const emberHours = document.getElementById('countdown-hours');
-        const emberMinutes = document.getElementById('countdown-minutes');
-        const emberSeconds = document.getElementById('countdown-seconds');
-        
-        // Only initialize if countdown elements exist on this page
-        const hasMainCountdown = mainDays || mainHours || mainMinutes || mainSeconds;
-        const hasEmberCountdown = emberDays || emberHours || emberMinutes || emberSeconds;
-        
-        if (!hasMainCountdown && !hasEmberCountdown) {
-            return; // No countdown elements found, skip initialization
-        }
-        
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate.getTime() - now;
+        function setupCountdown() {
+            // Check which page we're on and get appropriate elements
+            const mainDays = document.getElementById('main-days');
+            const mainHours = document.getElementById('main-hours');
+            const mainMinutes = document.getElementById('main-minutes');
+            const mainSeconds = document.getElementById('main-seconds');
             
-            // Calculate time components
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const emberDays = document.getElementById('countdown-days');
+            const emberHours = document.getElementById('countdown-hours');
+            const emberMinutes = document.getElementById('countdown-minutes');
+            const emberSeconds = document.getElementById('countdown-seconds');
             
-            // Format with leading zeros
-            const formattedDays = days.toString().padStart(2, '0');
-            const formattedHours = hours.toString().padStart(2, '0');
-            const formattedMinutes = minutes.toString().padStart(2, '0');
-            const formattedSeconds = seconds.toString().padStart(2, '0');
+            // Only initialize if countdown elements exist on this page
+            const hasMainCountdown = mainDays || mainHours || mainMinutes || mainSeconds;
+            const hasEmberCountdown = emberDays || emberHours || emberMinutes || emberSeconds;
             
-            // Update main page countdown if elements exist
+            if (!hasMainCountdown && !hasEmberCountdown) {
+                console.log('🔥 No countdown elements found on this page');
+                return false; // No countdown elements found
+            }
+            
             if (hasMainCountdown) {
-                if (mainDays) mainDays.textContent = distance < 0 ? '00' : formattedDays;
-                if (mainHours) mainHours.textContent = distance < 0 ? '00' : formattedHours;
-                if (mainMinutes) mainMinutes.textContent = distance < 0 ? '00' : formattedMinutes;
-                if (mainSeconds) mainSeconds.textContent = distance < 0 ? '00' : formattedSeconds;
+                console.log('🔥 Main page countdown elements detected:', {
+                    days: !!mainDays,
+                    hours: !!mainHours,
+                    minutes: !!mainMinutes,
+                    seconds: !!mainSeconds
+                });
             }
             
-            // Update ember page countdown if elements exist
             if (hasEmberCountdown) {
-                if (emberDays) emberDays.textContent = distance < 0 ? '00' : formattedDays;
-                if (emberHours) emberHours.textContent = distance < 0 ? '00' : formattedHours;
-                if (emberMinutes) emberMinutes.textContent = distance < 0 ? '00' : formattedMinutes;
-                if (emberSeconds) emberSeconds.textContent = distance < 0 ? '00' : formattedSeconds;
+                console.log('🔥 Ember page countdown elements detected:', {
+                    days: !!emberDays,
+                    hours: !!emberHours,
+                    minutes: !!emberMinutes,
+                    seconds: !!emberSeconds
+                });
             }
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate.getTime() - now;
+                
+                // Calculate time components
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // Format with leading zeros
+                const formattedDays = days.toString().padStart(2, '0');
+                const formattedHours = hours.toString().padStart(2, '0');
+                const formattedMinutes = minutes.toString().padStart(2, '0');
+                const formattedSeconds = seconds.toString().padStart(2, '0');
+                
+                // Update main page countdown if elements exist
+                if (hasMainCountdown) {
+                    if (mainDays) mainDays.textContent = distance < 0 ? '00' : formattedDays;
+                    if (mainHours) mainHours.textContent = distance < 0 ? '00' : formattedHours;
+                    if (mainMinutes) mainMinutes.textContent = distance < 0 ? '00' : formattedMinutes;
+                    if (mainSeconds) mainSeconds.textContent = distance < 0 ? '00' : formattedSeconds;
+                }
+                
+                // Update ember page countdown if elements exist
+                if (hasEmberCountdown) {
+                    if (emberDays) emberDays.textContent = distance < 0 ? '00' : formattedDays;
+                    if (emberHours) emberHours.textContent = distance < 0 ? '00' : formattedHours;
+                    if (emberMinutes) emberMinutes.textContent = distance < 0 ? '00' : formattedMinutes;
+                    if (emberSeconds) emberSeconds.textContent = distance < 0 ? '00' : formattedSeconds;
+                }
+            }
+            
+            // Update immediately and then every second
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            console.log('🔥 Universal countdown timer initialized for November 1, 2025');
+            return true;
         }
         
-        // Update immediately and then every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+        // Try to setup countdown immediately
+        const success = setupCountdown();
         
-        console.log('🔥 Universal countdown timer initialized for November 1, 2025');
+        // If it fails, try again after a short delay (for dynamic content)
+        if (!success) {
+            console.log('🔥 Retrying countdown initialization after delay...');
+            setTimeout(() => {
+                setupCountdown();
+            }, 500);
+        }
     }
+    
+    // Also expose the countdown function globally for manual initialization if needed
+    window.initializeUniversalCountdown = initializeUniversalCountdown;
 
     // ============================================
     // SMOOTH SCROLLING FOR ANCHOR LINKS
