@@ -2076,6 +2076,10 @@ body {
         border: none;
         overflow-x: visible;
     }
+    /* Spacing after mobile allocation cards */
+.allocation-cards-mobile {
+    margin-bottom: 60px;
+}
     
     .tokenomics-table {
         display: none;
