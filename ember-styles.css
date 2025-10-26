@@ -462,7 +462,9 @@ body {
     cursor: not-allowed;
 }
 
-/* Mobile Chatbot Responsive - MATCHED TO MAIN PAGE */
+/* Mobile Chatbot Responsive - CORRECTED FIX */
+/* The window needs to be SHORTER so it doesn't extend above the nav */
+
 @media (max-width: 768px) {
     .chatbot-button-container {
         bottom: 20px;
@@ -488,7 +490,7 @@ body {
         right: 20px;
         left: 20px;
         width: calc(100% - 40px);
-        max-height: calc(100vh - 180px);
+        max-height: calc(100vh - 300px); /* INCREASED from 240px to make window SHORTER */
     }
     
     .chatbot-header {
@@ -527,7 +529,7 @@ body {
     
     .chatbot-window {
         bottom: 100px;
-        max-height: calc(100vh - 160px);
+        max-height: calc(100vh - 260px); /* INCREASED from 220px to make window SHORTER */
     }
     
     .chatbot-header {
