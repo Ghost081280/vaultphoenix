@@ -3,7 +3,7 @@
 // User messages: NO avatar, pushed to far right
 // Claude messages: VP logo avatar on left
 // Background scroll prevented with overscroll-behavior
-// COUNTDOWN: Now handled by shared-script.js universal timer
+// COUNTDOWN: Now handled ONLY by shared-script.js universal timer
 
 // ============================================
 // CLAUDE API CONFIGURATION
@@ -346,30 +346,20 @@ function formatMessage(text) {
 // DOM CONTENT LOADED - INITIALIZE EVERYTHING
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔥🪙 $Ember Token page loading...');
+    
     // Set dark background immediately
     document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
     document.body.style.opacity = '1';
     document.body.classList.add('loaded');
     
     // Initialize $Ember-specific features
-    // NOTE: Countdown is handled by shared-script.js, but we'll verify it's working
+    // NOTE: Countdown is ONLY handled by shared-script.js now
     initializePresaleCalculator();
     initializeChatbot();
     
-    // FALLBACK: If countdown isn't running after 1 second, manually initialize it
-    setTimeout(() => {
-        const countdownDays = document.getElementById('countdown-days');
-        if (countdownDays && (countdownDays.textContent === '--' || countdownDays.textContent === '')) {
-            console.warn('🔥 Countdown not initialized by shared-script.js, initializing manually...');
-            if (window.initializeUniversalCountdown) {
-                window.initializeUniversalCountdown();
-            } else {
-                console.error('🔥 ERROR: Universal countdown function not found!');
-            }
-        } else {
-            console.log('🔥 SUCCESS: Countdown is already running from shared-script.js');
-        }
-    }, 1000);
+    console.log('🔥🪙 $Ember page features initialized');
+    console.log('🔥🪙 Countdown timer is managed by shared-script.js');
 });
 
 // ============================================
@@ -440,7 +430,7 @@ function initializePresaleCalculator() {
     
     // Add debounced input event listener (150ms delay)
     // Use debounce function from shared-script.js
-    const debouncedCalculate = window.debounce(calculateTokens, 150);
+    const debouncedCalculate = window.debounce ? window.debounce(calculateTokens, 150) : calculateTokens;
     investmentInput.addEventListener('input', debouncedCalculate);
     
     // Initial calculation
@@ -520,13 +510,5 @@ window.addEventListener('load', () => {
         logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
     }
     
-    // Check if countdown is working
-    setTimeout(() => {
-        const countdownDays = document.getElementById('countdown-days');
-        if (countdownDays && countdownDays.textContent !== '--') {
-            console.log('🔥 SUCCESS: $Ember page countdown to Nov 1, 2025 is active (via shared-script.js)!');
-        } else {
-            console.warn('🔥 WARNING: $Ember page countdown not working!');
-        }
-    }, 400);
+    console.log('🔥🪙 $Ember Token page fully loaded!');
 });
