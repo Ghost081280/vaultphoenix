@@ -1,10 +1,13 @@
 // Vault Phoenix - $Ember Token Page Interactive JavaScript
 // Production Version - Optimized & Secured
+// User messages: NO avatar, pushed to far right
+// Claude messages: VP logo avatar on left
+// Background scroll prevented with overscroll-behavior
 
 // ============================================
 // CLAUDE API CONFIGURATION
 // ============================================
-const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE';
+const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE'; // ← Replace with your actual API key from console.anthropic.com
 const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
 const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 
@@ -55,7 +58,7 @@ Your role is to:
 Always maintain a professional yet friendly tone. Emphasize the legitimate utility and value proposition. If asked about financial advice, remind users to do their own research and consult financial advisors.`;
 
 // ============================================
-// INITIALIZE CHATBOT
+// INITIALIZE CHATBOT - NO AUTO-FOCUS
 // ============================================
 function initializeChatbot() {
     const chatbotButton = document.querySelector('.chatbot-button-container');
@@ -73,6 +76,7 @@ function initializeChatbot() {
     chatbotButton.addEventListener('click', () => {
         chatbotWindow.classList.toggle('active');
         if (chatbotWindow.classList.contains('active')) {
+            // NO auto-focus to prevent mobile keyboard popup
             // Add welcome message if first time opening
             if (chatbotBody.children.length === 0) {
                 addWelcomeMessage();
@@ -136,7 +140,7 @@ function addWelcomeMessage() {
 }
 
 // ============================================
-// SEND MESSAGE TO CLAUDE API
+// SEND MESSAGE TO CLAUDE API - NO AUTO-FOCUS
 // ============================================
 async function sendMessage() {
     const chatbotInput = document.querySelector('.chatbot-input');
@@ -232,6 +236,7 @@ async function sendMessage() {
         chatbotInput.disabled = false;
         chatbotSend.disabled = false;
         isTyping = false;
+        // NO auto-focus - let user tap input manually on mobile
     }
 }
 
@@ -346,9 +351,50 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('loaded');
     
     // Initialize $Ember-specific features
+    initializePresaleCountdown();
     initializePresaleCalculator();
     initializeChatbot();
 });
+
+// ============================================
+// PRESALE COUNTDOWN TIMER
+// ============================================
+function initializePresaleCountdown() {
+    const targetDate = new Date('November 1, 2025 00:00:00 UTC');
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate.getTime() - now;
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Update display elements
+        const daysEl = document.getElementById('countdown-days');
+        const hoursEl = document.getElementById('countdown-hours');
+        const minutesEl = document.getElementById('countdown-minutes');
+        const secondsEl = document.getElementById('countdown-seconds');
+        
+        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        
+        // If countdown is finished
+        if (distance < 0) {
+            if (daysEl) daysEl.textContent = '00';
+            if (hoursEl) hoursEl.textContent = '00';
+            if (minutesEl) minutesEl.textContent = '00';
+            if (secondsEl) secondsEl.textContent = '00';
+        }
+    }
+    
+    // Update every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+}
 
 // ============================================
 // PRESALE CALCULATOR - WITH DEBOUNCED INPUT
@@ -361,8 +407,8 @@ function initializePresaleCalculator() {
     
     if (!investmentInput) return;
     
-    const TOKEN_PRICE = 0.003;
-    const PRICE_MULTIPLIERS = [2, 5, 10];
+    const TOKEN_PRICE = 0.003; // $0.003 per token
+    const PRICE_MULTIPLIERS = [2, 5, 10]; // 2x, 5x, 10x scenarios
     
     function calculateTokens() {
         const investment = parseFloat(investmentInput.value) || 0;
@@ -377,7 +423,7 @@ function initializePresaleCalculator() {
         }
         
         // Calculate potential values (using middle scenario - 5x)
-        const futureValue = investment * PRICE_MULTIPLIERS[1];
+        const futureValue = investment * PRICE_MULTIPLIERS[1]; // 5x
         const roi = ((futureValue - investment) / investment) * 100;
         
         if (valueDisplay) {
@@ -416,21 +462,9 @@ function initializePresaleCalculator() {
         });
     }
     
-    // Debounce function
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-    
     // Add debounced input event listener (150ms delay)
-    const debouncedCalculate = debounce(calculateTokens, 150);
+    // Use debounce function from shared-script.js
+    const debouncedCalculate = window.debounce(calculateTokens, 150);
     investmentInput.addEventListener('input', debouncedCalculate);
     
     // Initial calculation

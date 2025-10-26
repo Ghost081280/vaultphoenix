@@ -2,7 +2,7 @@
 // SHARED JAVASCRIPT FOR VAULT PHOENIX
 // ============================================
 // This file contains shared functionality used across multiple pages
-// including mobile navigation, scroll effects, animations, and countdown timer
+// including mobile navigation, scroll effects, and animations
 
 (function() {
     'use strict';
@@ -261,58 +261,6 @@
     });
 
     // ============================================
-    // UNIVERSAL COUNTDOWN TIMER
-    // ============================================
-    
-    function initializeCountdown() {
-        // Set the target date to November 1, 2025
-        const targetDate = new Date('November 1, 2025 00:00:00 UTC');
-        
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate.getTime() - now;
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            // Update all possible countdown element IDs (works for both pages)
-            const elementIds = [
-                // Main page countdown
-                { days: 'main-days', hours: 'main-hours', minutes: 'main-minutes', seconds: 'main-seconds' },
-                // Ember token page countdown
-                { days: 'countdown-days', hours: 'countdown-hours', minutes: 'countdown-minutes', seconds: 'countdown-seconds' }
-            ];
-            
-            elementIds.forEach(ids => {
-                const daysEl = document.getElementById(ids.days);
-                const hoursEl = document.getElementById(ids.hours);
-                const minutesEl = document.getElementById(ids.minutes);
-                const secondsEl = document.getElementById(ids.seconds);
-                
-                if (distance < 0) {
-                    // Countdown finished
-                    if (daysEl) daysEl.textContent = '00';
-                    if (hoursEl) hoursEl.textContent = '00';
-                    if (minutesEl) minutesEl.textContent = '00';
-                    if (secondsEl) secondsEl.textContent = '00';
-                } else {
-                    // Update countdown
-                    if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
-                    if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
-                    if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
-                    if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
-                }
-            });
-        }
-        
-        // Update immediately and then every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    }
-
-    // ============================================
     // UTILITY FUNCTIONS
     // ============================================
     
@@ -381,9 +329,6 @@
         
         // Initial navbar state
         handleNavbarScroll();
-        
-        // Initialize universal countdown timer
-        initializeCountdown();
         
         // Add loaded class to body for CSS transitions
         document.body.classList.add('loaded');

@@ -456,6 +456,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('loaded');
     
     // FIXED: Initialize main page features immediately
+    initializeMainCountdown();
     preloadPhoenixCryptoImages();
     initializeCryptoCoinImage();
     initializeEmberCoinImageV3();
@@ -730,6 +731,49 @@ document.querySelectorAll('.simple-thumb-laptop').forEach(thumb => {
         }, 15000); // Resume after 15 seconds
     });
 });
+
+// ============================================
+// COUNTDOWN TIMER
+// ============================================
+
+// UPDATED: Main Page Countdown Timer Integration for November 1, 2025
+function initializeMainCountdown() {
+    // Set the target date to November 1, 2025
+    const targetDate = new Date('November 1, 2025 00:00:00 UTC');
+    
+    function updateMainCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate.getTime() - now;
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Update display elements (main page countdown)
+        const daysEl = document.getElementById('main-days');
+        const hoursEl = document.getElementById('main-hours');
+        const minutesEl = document.getElementById('main-minutes');
+        const secondsEl = document.getElementById('main-seconds');
+        
+        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        
+        // If countdown is finished
+        if (distance < 0) {
+            if (daysEl) daysEl.textContent = '00';
+            if (hoursEl) hoursEl.textContent = '00';
+            if (minutesEl) minutesEl.textContent = '00';
+            if (secondsEl) secondsEl.textContent = '00';
+        }
+    }
+    
+    // Update every second
+    updateMainCountdown();
+    setInterval(updateMainCountdown, 1000);
+}
 
 // ============================================
 // CTA BUTTON FEEDBACK
