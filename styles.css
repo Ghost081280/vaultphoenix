@@ -1167,23 +1167,30 @@ body.loaded {
     align-items: center;
     justify-content: center;
     gap: 40px;
-    flex-wrap: wrap;
     margin-top: 60px;
     padding: 30px 40px;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     backdrop-filter: blur(20px);
     border: 1px solid rgba(215, 51, 39, 0.2);
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
 }
 
 .hero-benefit-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     font-size: 1rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.95);
     transition: all 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+    min-width: 140px;
+    flex-shrink: 0;
 }
 
 .hero-benefit-item:hover {
@@ -1197,11 +1204,74 @@ body.loaded {
     object-fit: contain;
     filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .hero-benefit-item:hover .benefit-icon-small {
     transform: scale(1.1) rotate(5deg);
     filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.6));
+}
+
+/* Mobile: Horizontal Scrollable Row */
+@media (max-width: 768px) {
+    .hero-benefits-row {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 20px;
+        gap: 20px;
+        
+        /* Hide scrollbar but keep functionality */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+    
+    .hero-benefits-row::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+    
+    .hero-benefits-row::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 40px;
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5));
+        pointer-events: none;
+        border-radius: 0 20px 20px 0;
+    }
+    
+    .hero-benefit-item {
+        scroll-snap-align: center;
+        min-width: 120px;
+        gap: 8px;
+        font-size: 0.9rem;
+    }
+    
+    .benefit-icon-small {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-benefits-row {
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .hero-benefit-item {
+        min-width: 110px;
+        font-size: 0.85rem;
+    }
+    
+    .benefit-icon-small {
+        width: 32px;
+        height: 32px;
+    }
 }
 
 /* REDESIGNED: Phoenix Token Evolution Section - More Compact & Professional */
