@@ -6,6 +6,7 @@
 // User messages: NO avatar, pushed to far right
 // Claude messages: VP logo avatar on left
 // Background scroll prevented with overscroll-behavior
+// PRODUCTION READY: Faster scroll timing for smoother animations
 
 // ============================================
 // CLAUDE API CONFIGURATION
@@ -537,10 +538,10 @@ function changeLaptopImage(imageSrc, title) {
 // SCROLL REVEAL OBSERVER (Page-Specific)
 // ============================================
 
-// Enhanced scroll reveal animation with phoenix crypto timing
+// PRODUCTION READY: Enhanced scroll reveal animation with FASTER timing
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -80px 0px'
+    threshold: 0.05, // Reduced from 0.1 for earlier trigger
+    rootMargin: '0px 0px -50px 0px' // Reduced from -80px for earlier trigger
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -548,7 +549,7 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             setTimeout(() => {
                 entry.target.classList.add('revealed');
-            }, index * 100);
+            }, index * 50); // Reduced from 100ms to 50ms for faster stagger
         }
     });
 }, observerOptions);
