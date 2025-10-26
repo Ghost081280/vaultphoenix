@@ -72,7 +72,9 @@ body {
     box-shadow: 0 4px 20px rgba(215, 51, 39, 0.3);
     backdrop-filter: blur(20px);
     border-bottom: 2px solid rgba(240, 165, 0, 0.4);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                border-bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar.scrolled {
