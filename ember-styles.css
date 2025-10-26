@@ -681,17 +681,20 @@ body {
     animation: heroCoinFloat 6s ease-in-out infinite !important;
 }
 
-/* FIXED: Restored glow effect on all screen sizes */
+/* FIXED: Consistent glow effect on all screen sizes - no flicker */
 .hero-crypto-coin-icon {
     width: clamp(35px, 5vw, 50px) !important;
     height: clamp(35px, 5vw, 50px) !important;
     object-fit: contain !important;
     filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.7)) !important;
-    transition: all 0.3s ease !important;
+    transition: none !important;
     opacity: 0.6 !important;
     background: transparent !important;
     z-index: 1 !important;
     pointer-events: none !important;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .hero-coin-1 {
@@ -782,7 +785,10 @@ body {
     filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.7));
     animation: emberPulse 3s ease-in-out infinite;
     background: transparent;
-    transition: all 0.3s ease;
+    transition: none;
+    will-change: transform, filter;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 @keyframes emberPulse {
@@ -883,7 +889,7 @@ body {
     opacity: 1;
 }
 
-/* FIXED: Increased stat icon sizing - now 85px for better visibility */
+/* FIXED: Increased stat icon sizing - consistent glow */
 .stat-icon {
     font-size: 2.8rem;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
@@ -893,13 +899,17 @@ body {
     justify-content: center;
 }
 
-/* FIXED: Restored glow effect, removed boxes */
+/* FIXED: Consistent glow effect - no boxes, no flicker */
 .stat-icon img {
     width: 85px;
     height: 85px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
     background: transparent;
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .stat-content {
@@ -1005,7 +1015,7 @@ body {
     margin-bottom: 80px;
 }
 
-/* FIXED: Increased section header icons - now 160px for better visibility */
+/* FIXED: All section header icons - consistent glow, no flicker */
 .ember-section-icon {
     font-size: 4.5rem;
     margin-bottom: 25px;
@@ -1015,13 +1025,16 @@ body {
     filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.5));
 }
 
-/* FIXED: Restored glow effect, removed boxes */
 .ember-section-icon img {
     width: 160px;
     height: 160px;
     object-fit: contain;
     filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.5));
     background: transparent;
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* NEW: Larger section header icons matching main.html CTA section (160px) */
@@ -1034,9 +1047,14 @@ body {
     width: 160px !important;
     height: 160px !important;
     filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.6)) !important;
+    background: transparent !important;
+    transition: none !important;
+    will-change: auto !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
 }
 
-/* NEW: Extra large team section icon - 260px for better visibility */
+/* NEW: Extra large team section icon - 260px */
 .team-section-icon-xlarge {
     font-size: 9rem;
     margin-bottom: 40px;
@@ -1046,6 +1064,11 @@ body {
     width: 260px !important;
     height: 260px !important;
     filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.8)) !important;
+    background: transparent !important;
+    transition: none !important;
+    will-change: auto !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
 }
 
 .ember-section-title {
@@ -1140,7 +1163,7 @@ body {
     border-color: rgba(34, 197, 94, 0.6);
 }
 
-/* FIXED: Increased stakeholder icon sizing - now 160px */
+/* FIXED: Stakeholder icons - consistent glow */
 .stakeholder-icon {
     font-size: 4.5rem;
     margin-bottom: 20px;
@@ -1150,13 +1173,16 @@ body {
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
 }
 
-/* FIXED: Restored glow effect, removed boxes */
 .stakeholder-icon img {
     width: 160px;
     height: 160px;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
     background: transparent;
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .stakeholder-title {
@@ -1236,13 +1262,17 @@ body {
     justify-content: center;
 }
 
-/* FIXED: Increased path icon size to 65px */
+/* FIXED: Path icon - consistent glow */
 .path-icon img {
     width: 65px;
     height: 65px;
     object-fit: contain;
     background: transparent;
     filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .path-text {
@@ -1341,20 +1371,23 @@ body {
     transform: translateY(-5px);
 }
 
-/* FIXED: Increased utility icon sizing - now 85px */
+/* FIXED: Utility icon - consistent glow */
 .utility-icon {
     font-size: 2.8rem;
     margin-bottom: 15px;
     display: block;
 }
 
-/* FIXED: Restored glow effect, removed boxes */
 .utility-icon img {
     width: 85px;
     height: 85px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
     background: transparent;
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .utility-item-enhanced h4 {
@@ -1430,7 +1463,7 @@ body {
     margin-bottom: 15px;
 }
 
-/* FIXED: Increased inline icon size to 50px */
+/* FIXED: Inline icon - consistent glow */
 .whitepaper-section h4 img {
     width: 50px;
     height: 50px;
@@ -1439,6 +1472,10 @@ body {
     margin-right: 8px;
     background: transparent;
     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .whitepaper-section p {
@@ -1485,7 +1522,7 @@ body {
     box-shadow: 0 15px 40px rgba(240, 165, 0, 0.5);
 }
 
-/* FIXED: Increased inline button icon to 35px */
+/* FIXED: Inline button icon - consistent glow */
 .download-button img {
     width: 35px;
     height: 35px;
@@ -1494,6 +1531,10 @@ body {
     margin-right: 8px;
     background: transparent;
     filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.3));
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* Roadmap Section */
@@ -1556,7 +1597,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* FIXED: Increased inline roadmap icon to 50px */
+/* FIXED: Inline roadmap icon - consistent glow */
 .roadmap-title img {
     width: 50px;
     height: 50px;
@@ -1565,6 +1606,10 @@ body {
     margin-right: 8px;
     background: transparent;
     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .roadmap-status {
@@ -1625,7 +1670,7 @@ body {
 
 .trust-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmin(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
 }
 
@@ -1645,7 +1690,7 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
-/* FIXED: Increased trust icon sizing - now 110px */
+/* FIXED: Trust icon - consistent glow */
 .trust-icon {
     font-size: 3.5rem;
     margin-bottom: 20px;
@@ -1653,13 +1698,16 @@ body {
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
 }
 
-/* FIXED: Restored glow effect, removed boxes */
 .trust-icon img {
     width: 110px;
     height: 110px;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
     background: transparent;
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .trust-item h4 {
@@ -1910,7 +1958,7 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
-/* FIXED: Increased incentive icon sizing - now 110px */
+/* FIXED: Incentive icon - consistent glow */
 .incentive-icon {
     font-size: 3.5rem;
     margin-bottom: 20px;
@@ -1918,13 +1966,16 @@ body {
     text-align: center;
 }
 
-/* FIXED: Restored glow effect, removed boxes */
 .incentive-icon img {
     width: 110px;
     height: 110px;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
     background: transparent;
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .incentive-card h4 {
@@ -2252,6 +2303,10 @@ body {
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
     background: transparent;
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .trust-feature h4 {
@@ -2322,20 +2377,23 @@ body {
     transform: translateY(-3px);
 }
 
-/* FIXED: Increased metric icon sizing - now 65px */
+/* FIXED: Metric icon - consistent glow */
 .metric-icon {
     font-size: 2.3rem;
     margin-bottom: 10px;
     display: block;
 }
 
-/* FIXED: Restored glow effect, removed boxes */
 .metric-icon img {
     width: 65px;
     height: 65px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
     background: transparent;
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .metric-value {
@@ -2844,6 +2902,9 @@ body {
     background: transparent;
     box-shadow: none;
     object-fit: contain;
+    will-change: transform, filter;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .presale-promo-image:hover img {
@@ -3073,7 +3134,7 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
-/* FIXED: Increased benefit icon sizing - now 110px */
+/* FIXED: Benefit icon - consistent glow */
 .benefit-icon {
     font-size: 3.5rem;
     margin-bottom: 20px;
@@ -3081,13 +3142,16 @@ body {
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
 }
 
-/* FIXED: Restored glow effect, removed boxes */
 .benefit-icon img {
     width: 110px;
     height: 110px;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
     background: transparent;
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .benefit-item h4 {
@@ -3150,13 +3214,17 @@ body {
     animation-delay: 4s;
 }
 
-/* FIXED: Floating coin images with proper glow */
+/* FIXED: Floating coin images with proper glow - no flicker */
 .floating-coin-image {
     width: 60px;
     height: 60px;
     filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.7));
     opacity: 0.4;
     background: transparent;
+    transition: none;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 @keyframes floatingCoinMove {
@@ -3186,6 +3254,9 @@ body {
     filter: drop-shadow(0 0 45px rgba(240, 165, 0, 0.9));
     animation: ctaIconFloat 4s ease-in-out infinite;
     background: transparent;
+    will-change: transform, filter;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .icon-glow {
@@ -3263,12 +3334,16 @@ body {
     flex-shrink: 0;
 }
 
-/* FIXED: Increased prop icon to 65px with proper glow */
+/* FIXED: Prop icon - consistent glow, no flicker */
 .prop-icon-image {
     width: 65px;
     height: 65px;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.7));
     background: transparent;
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .prop-text h4 {
@@ -3566,6 +3641,10 @@ body {
     margin-right: 8px;
     background: transparent;
     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .disclaimer-content {
@@ -3626,6 +3705,10 @@ body {
     vertical-align: middle;
     background: transparent;
     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+    transition: none;
+    will-change: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .compliance-card p {
@@ -3733,7 +3816,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* FIXED: Increased share icon to 75px with proper glow */
+/* FIXED: Share icon - consistent glow, no flicker */
 .share-icon-compact {
     width: 75px;
     height: 75px;
@@ -3741,6 +3824,9 @@ body {
     filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.7));
     animation: iconPulse 2s ease-in-out infinite;
     background: transparent;
+    will-change: transform, filter;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 @keyframes iconPulse {
@@ -4121,7 +4207,7 @@ body {
         font-size: 1.1rem;
     }
 
-    /* FIXED: Hero floating coins on mobile with proper glow */
+    /* FIXED: Hero floating coins on mobile with proper glow - NO FLICKER */
     .hero-crypto-coin-icon {
         width: clamp(25px, 4vw, 35px) !important;
         height: clamp(25px, 4vw, 35px) !important;
