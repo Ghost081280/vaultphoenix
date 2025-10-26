@@ -69,12 +69,42 @@
         overlay.addEventListener('click', closeMobileMenu);
     }
 
-    // Close mobile menu when clicking nav links
+    // FIXED: Close mobile menu when clicking nav links - with proper anchor handling
     const navLinkItems = document.querySelectorAll('.nav-links a');
     navLinkItems.forEach(link => {
-        link.addEventListener('click', function() {
-            // Small delay to allow smooth scrolling to work
-            setTimeout(closeMobileMenu, 300);
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Check if it's an anchor link (starts with #)
+            if (href && href.startsWith('#')) {
+                e.preventDefault(); // Prevent default to handle manually
+                
+                const targetId = href.substring(1); // Remove the #
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // Close the menu first
+                    closeMobileMenu();
+                    
+                    // Then scroll to the target after a short delay
+                    setTimeout(function() {
+                        const navbar = document.querySelector('.navbar');
+                        const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 300);
+                } else {
+                    // If target doesn't exist, just close menu
+                    closeMobileMenu();
+                }
+            } else {
+                // For external links or non-anchor links, just close the menu
+                setTimeout(closeMobileMenu, 100);
+            }
         });
     });
 
