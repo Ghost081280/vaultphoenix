@@ -376,16 +376,15 @@ body.loaded {
     border-left: 10px solid rgba(0, 0, 0, 0.9);
 }
 
-/* PROFESSIONAL: Chatbot Window - Smart Height that Respects Navigation */
+/* PROFESSIONAL: Chatbot Window - Wider on Desktop for Better Conversations */
 .chatbot-window {
     position: fixed;
     bottom: 160px;
     right: 30px;
-    width: 400px;
-    /* Smart height: 100vh - nav (120px) - button (110px) - spacing (80px) = safe zone */
+    width: 550px; /* UPDATED: Wider from 400px to 550px for better desktop experience */
     height: calc(100vh - 310px);
-    max-height: 550px; /* Cap at comfortable reading height */
-    min-height: 400px; /* Minimum usable height */
+    max-height: 550px;
+    min-height: 400px;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #451a03 100%);
     border-radius: 25px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -470,7 +469,7 @@ body.loaded {
     transform: scale(1.1);
 }
 
-/* PROFESSIONAL: Chat Body - Flexible scroll area */
+/* PROFESSIONAL: Chat Body - Flexible scroll area with proper width for longer messages */
 .chatbot-body {
     flex: 1;
     min-height: 0;
@@ -481,7 +480,9 @@ body.loaded {
     background: rgba(0, 0, 0, 0.3);
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
-}/* Message Container Styling */
+}
+
+/* Message Container Styling - Better spacing for wider window */
 .chat-message {
     margin-bottom: 15px;
     display: flex;
@@ -511,7 +512,7 @@ body.loaded {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    max-width: 85%;
+    max-width: 85%; /* Wider messages fit better now */
 }
 
 .chat-message.assistant-message .message-avatar {
@@ -668,7 +669,7 @@ body.loaded {
     gap: 10px;
 }
 
-/* Input - Prevent expansion and mobile zoom */
+/* Input - Prevent expansion and mobile zoom - Better width for conversations */
 .chatbot-input {
     flex: 1;
     padding: 12px 16px;
@@ -722,6 +723,7 @@ body.loaded {
 @media (max-width: 1024px) {
     .chatbot-window {
         /* Tablet: slightly smaller but still comfortable */
+        width: 500px;
         height: calc(100vh - 280px);
         max-height: 500px;
         min-height: 380px;
@@ -748,12 +750,12 @@ body.loaded {
         display: none;
     }
     
+    /* Mobile: Perfect as is - full width minus margins */
     .chatbot-window {
         bottom: 120px;
         right: 20px;
         left: 20px;
         width: calc(100% - 40px);
-        /* Mobile: Account for mobile nav height */
         height: calc(100vh - 240px);
         max-height: calc(100vh - 240px);
         min-height: 350px;
@@ -802,7 +804,6 @@ body.loaded {
     
     .chatbot-window {
         bottom: 100px;
-        /* Small mobile: tighter spacing */
         height: calc(100vh - 220px);
         max-height: calc(100vh - 220px);
         min-height: 320px;
