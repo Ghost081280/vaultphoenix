@@ -1737,12 +1737,13 @@
         </div>
     </footer>
 
-    <!-- ============================================ -->
-    <!-- PHOENIX AI CHATBOT - COPY THIS TO ALL PAGES -->
-    <!-- Add before </body> tag, after footer -->
-    <!-- ============================================ -->
+ <!-- =================================================================
+     PHOENIX AI CHATBOT - CORRECTED VERSION FOR EMBER.HTML
+     Replace BOTH existing chatbot sections (around lines 2670 and 2780)
+     with this SINGLE clean version
+     ================================================================= -->
 
-    <!-- Floating Chatbot Button -->
+    <!-- Floating AI Chatbot Button -->
     <div class="chatbot-button-container">
         <div class="chatbot-glow"></div>
         <div class="chatbot-button" aria-label="Open Phoenix AI chat assistant">
@@ -1750,7 +1751,7 @@
         </div>
         <div class="chatbot-tooltip">Chat with Phoenix AI</div>
     </div>
-
+    
     <!-- Chatbot Window -->
     <div class="chatbot-window">
         <div class="chatbot-header">
@@ -1785,11 +1786,67 @@
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- THAT'S IT! Styling and functionality come from shared files -->
-    <!-- shared-styles.css = All chatbot CSS -->
-    <!-- shared-script.js = All chatbot JavaScript -->
-    <!-- ============================================ -->
+    <!-- =================================================================
+         SCRIPTS - LOAD IN CORRECT ORDER
+         ================================================================= -->
+    
+    <!-- 1. Shared functionality first (includes chatbot JS) -->
+    <script src="shared-script.js"></script>
+    
+    <!-- 2. Page-specific scripts second -->
+    <script src="ember-script.js"></script>
+
+    <!-- 3. Legal Documents Modal Functions -->
+    <script>
+    // Combined Legal Documents Modal Functions - Global scope
+    window.showTpaModal = function() {
+        document.getElementById('tpaModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeTpaModal = function() {
+        document.getElementById('tpaModal').style.display = 'none';
+        document.body.style.overflow = '';
+    };
+
+    window.agreeTpa = function() {
+        const checkbox = document.getElementById('tpa-agree-checkbox');
+        const presaleButton = document.getElementById('presale-buy-button');
+        
+        if (checkbox && presaleButton) {
+            checkbox.checked = true;
+            presaleButton.disabled = false;
+            presaleButton.style.opacity = '1';
+        }
+        
+        window.closeTpaModal();
+        
+        // Show confirmation
+        alert('✅ Thank you for reviewing and agreeing to the Token Presale Agreement and Token Disclosures. You can now proceed with your investment.');
+    };
+
+    // Whitepaper Modal Functions - Global scope
+    window.showWhitepaperModal = function() {
+        document.getElementById('whitepaperModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeWhitepaperModal = function() {
+        document.getElementById('whitepaperModal').style.display = 'none';
+        document.body.style.overflow = '';
+    };
+
+    // Close modals on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            window.closeTpaModal();
+            window.closeWhitepaperModal();
+        }
+    });
+    </script>
+
+</body>
+</html>
 
    <!-- Combined Legal Documents Modal -->
     <div id="tpaModal" class="tpa-modal" style="display: none;">
