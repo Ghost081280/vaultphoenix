@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vaultphoenix.com/main.html">
     <meta property="og:title" content="Vault Phoenix - Launch AR Crypto Campaigns in 24 Hours | GPS & Beacon Technology">
-    <meta property="og:description" content="🚀 Revolutionary AR crypto gaming platform! Launch white-label campaigns instantly with GPS & Beacon precision. Drive guaranteed foot traffic. $100 FREE $Ember tokens. Starting $499 setup + $149/mo hosting. No-code simplicity OR full SDK integration.">
+    <meta property="og:description" content="Revolutionary AR crypto gaming platform! Launch white-label campaigns instantly with GPS & Beacon precision. Drive guaranteed foot traffic. $100 FREE $Ember tokens. Starting $499 setup + $149/mo hosting. No-code simplicity OR full SDK integration.">
     <meta property="og:image" content="https://vaultphoenix.com/images/PhoenixHoldingCoin.PNG">
     <meta property="og:image:secure_url" content="https://vaultphoenix.com/images/PhoenixHoldingCoin.PNG">
     <meta property="og:image:width" content="1200">
@@ -30,7 +30,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://vaultphoenix.com/main.html">
     <meta name="twitter:title" content="Vault Phoenix - AR Crypto Gaming Platform | 24hr Launch">
-    <meta name="twitter:description" content="🎯 Launch AR crypto campaigns instantly! GPS & Beacon precision drives guaranteed foot traffic. $100 FREE tokens. White-label apps OR SDK integration. Transform marketing with crypto rewards! #ARGaming #CryptoMarketing #LocationTech">
+    <meta name="twitter:description" content="Launch AR crypto campaigns instantly! GPS & Beacon precision drives guaranteed foot traffic. $100 FREE tokens. White-label apps OR SDK integration. Transform marketing with crypto rewards! #ARGaming #CryptoMarketing #LocationTech">
     <meta name="twitter:image" content="https://vaultphoenix.com/images/PhoenixHoldingCoin.PNG">
     <meta name="twitter:image:alt" content="Vault Phoenix AR Crypto Gaming Platform">
     <meta name="twitter:site" content="@vaultphoenix">
@@ -54,6 +54,178 @@
     <link rel="stylesheet" href="shared-styles.css">
     <!-- Page-specific Styles -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Enhanced Glow Effects -->
+    <style>
+        /* Enhanced glow effects for better visibility */
+        .ember-glow-redesigned,
+        .crypto-image-glow,
+        .phoenix-safe-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(240, 165, 0, 0.4) 0%, rgba(240, 165, 0, 0.2) 40%, transparent 70%);
+            filter: blur(30px);
+            animation: pulse-glow 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+        
+        /* Chatbot glow enhancement */
+        .chatbot-glow {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(240, 165, 0, 0.5) 0%, rgba(240, 165, 0, 0.3) 50%, transparent 70%);
+            filter: blur(20px);
+            animation: pulse-glow 2s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Enhanced icon sizing for better mobile visibility */
+        .feature-coin-icon,
+        .feature-ar-discovery-icon,
+        .feature-crypto-gaming-icon,
+        .feature-revenue-icon,
+        .feature-phoenix-brand-icon,
+        .feature-analytics-icon {
+            width: 80px !important;
+            height: 80px !important;
+            min-width: 80px !important;
+            min-height: 80px !important;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-coin-icon,
+            .feature-ar-discovery-icon,
+            .feature-crypto-gaming-icon,
+            .feature-revenue-icon,
+            .feature-phoenix-brand-icon,
+            .feature-analytics-icon {
+                width: 70px !important;
+                height: 70px !important;
+                min-width: 70px !important;
+                min-height: 70px !important;
+            }
+        }
+        
+        /* Benefit icon sizing improvements */
+        .benefit-icon-small {
+            width: 48px !important;
+            height: 48px !important;
+            min-width: 48px !important;
+            min-height: 48px !important;
+        }
+        
+        .custom-coin-icon-large,
+        .custom-placement-icon-large {
+            width: 64px !important;
+            height: 64px !important;
+            min-width: 64px !important;
+            min-height: 64px !important;
+        }
+        
+        .custom-revenue-icon-extra-large {
+            width: 72px !important;
+            height: 72px !important;
+            min-width: 72px !important;
+            min-height: 72px !important;
+        }
+        
+        /* Technology icons */
+        .technology-icon {
+            width: 64px !important;
+            height: 64px !important;
+            min-width: 64px !important;
+            min-height: 64px !important;
+        }
+        
+        /* Additional spacing after "Why Location Partners Pay Premium Rates" */
+        .revenue-model-benefits {
+            margin-top: 60px;
+            padding-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .revenue-model-benefits {
+                margin-top: 50px;
+                padding-top: 30px;
+            }
+        }
+        
+        /* Use case icon improvements */
+        .use-case-icon-image-large {
+            width: 80px !important;
+            height: 80px !important;
+            min-width: 80px !important;
+            min-height: 80px !important;
+        }
+        
+        @media (max-width: 768px) {
+            .use-case-icon-image-large {
+                width: 70px !important;
+                height: 70px !important;
+                min-width: 70px !important;
+                min-height: 70px !important;
+            }
+        }
+        
+        /* Revenue industry icons */
+        .revenue-industry-icon {
+            width: 56px !important;
+            height: 56px !important;
+            min-width: 56px !important;
+            min-height: 56px !important;
+        }
+        
+        /* Social share icons visibility */
+        .social-sharing-icon-compact {
+            width: 56px !important;
+            height: 56px !important;
+            min-width: 56px !important;
+            min-height: 56px !important;
+        }
+        
+        @media (max-width: 768px) {
+            .social-sharing-icon-compact {
+                width: 48px !important;
+                height: 48px !important;
+                min-width: 48px !important;
+                min-height: 48px !important;
+            }
+        }
+        
+        /* Hero benefits icons */
+        .benefit-icon-small {
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+            min-height: 40px !important;
+        }
+        
+        @media (max-width: 768px) {
+            .benefit-icon-small {
+                width: 36px !important;
+                height: 36px !important;
+                min-width: 36px !important;
+                min-height: 36px !important;
+            }
+        }
+    </style>
     
     <!-- Structured Data (JSON-LD) - Organization -->
     <script type="application/ld+json">
@@ -229,12 +401,11 @@
                     $Ember Token
                 </a></li>
             </ul>
-           <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile navigation menu">☰</button>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile navigation menu">☰</button>
         </div>
     </nav>
-    </nav>
 
-   <!-- Mobile Menu Overlay & Panel -->
+    <!-- Mobile Menu Overlay & Panel -->
     <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
     <div class="mobile-menu-panel" id="mobile-menu">
         <div class="mobile-menu-branding">
@@ -254,9 +425,7 @@
         </ul>
     </div>
 
-    <!-- REDESIGNED Hero Section -->
-
-    <!-- REDESIGNED Hero Section -->
+    <!-- Hero Section -->
     <section class="hero" id="hero-section">        
         <div class="hero-content">
             <!-- Main Value Proposition -->
@@ -364,7 +533,7 @@
         </div>
     </section>
 
-    <!-- REDESIGNED: Phoenix Token Evolution Section - Compact & Professional -->
+    <!-- Phoenix Token Evolution Section -->
     <section class="ember-token-section-redesigned" id="ember-token">
         <div class="container">
             <div class="ember-token-grid-redesigned">
@@ -375,7 +544,7 @@
                         Vault Phoenix operates with <span class="golden-highlight">institutional-grade $Ember Token infrastructure</span> powering the next generation of location-based AR gaming. Our enterprise blockchain technology drives measurable ROI for marketing campaigns worldwide through proven monetization strategies.
                     </p>
                     
-                    <!-- UPDATED: $Ember Presale Countdown -->
+                    <!-- $Ember Presale Countdown -->
                     <div class="ember-countdown-widget-redesigned scroll-reveal stagger-2">
                         <div class="countdown-header-redesigned">
                             <div class="countdown-icon-redesigned">
@@ -468,7 +637,7 @@
                         <div class="ember-glow-redesigned"></div>
                     </div>
                     
-                    <!-- UPDATED: Professional Legal & Financial Oversight -->
+                    <!-- Professional Legal & Financial Oversight -->
                     <div class="compliance-disclaimer-redesigned scroll-reveal stagger-4">
                         <h3>
                             <img src="images/EmberCoinLock.PNG" alt="Security" class="compliance-icon-redesigned">
@@ -487,7 +656,7 @@
         </div>
     </section>
 
-    <!-- OPTIMIZED: Compact Social Sharing Section with Theme Colors -->
+    <!-- Compact Social Sharing Section -->
     <section class="social-sharing-section-compact" id="share-vault-phoenix">
         <div class="container">
             <div class="social-sharing-content-compact scroll-reveal">
@@ -570,7 +739,7 @@
                 </div>
             </div>
             
-            <!-- NEW: GPS & Beacon Technology Modules -->
+            <!-- GPS & Beacon Technology Modules -->
             <div class="technology-modules scroll-reveal">
                 <h3 class="technology-modules-title">Complete Location Coverage: Outdoor & Indoor Precision</h3>
                 <p class="technology-modules-subtitle">Vault Phoenix uses industry-leading location technology to deliver <span class="golden-highlight">pinpoint accuracy</span> anywhere your campaign needs it - from city streets to inside buildings.</p>
@@ -723,7 +892,7 @@
         </div>
     </section>
 
-<!-- Features Section -->
+    <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
             <h2 class="section-title scroll-reveal">Why AR Crypto Gaming Transforms Marketing</h2>
@@ -793,14 +962,14 @@
         </div>
     </section>
 
-    <!-- App Showcase Section - UPDATED WITH NEW SCREENSHOTS -->
+    <!-- App Showcase Section -->
     <section class="app-showcase" id="showcase">
         <div class="container">
             <h2 class="section-title scroll-reveal">See the App & Management System In Action</h2>
             <p class="section-subtitle scroll-reveal">Experience how marketers control their white-labeled AR crypto gaming campaigns through our integrated platform. The player app and management system work together to deliver measurable results and ROI.</p>
             
             <div class="showcase-content">
-                <!-- Mobile App Column - UPDATED WITH NEW SCREENSHOTS -->
+                <!-- Mobile App Column -->
                 <div class="phone-gallery">
                     <h3 class="device-title">Player-Facing Mobile App</h3>
                     <div class="phone-mockup">
@@ -953,7 +1122,7 @@
         </div>
     </section>
 
-<!-- Use Cases Section -->
+    <!-- Use Cases Section -->
     <section class="use-cases" id="use-cases">
         <div class="container">
             <h2 class="section-title scroll-reveal">Crypto Gaming Across Industries</h2>
@@ -1093,19 +1262,27 @@
                         <h3>The Competitive Edge of Web-Based AR</h3>
                         <div class="web-benefits-compact">
                             <div class="web-benefit-compact">
-                                <span class="web-benefit-icon-small">📱</span>
+                                <span class="web-benefit-icon-small">
+                                    <img src="images/IphoneVPLogo.PNG" alt="No App Store" style="width: 24px; height: 24px;">
+                                </span>
                                 <span class="web-benefit-text">No App Store Required</span>
                             </div>
                             <div class="web-benefit-compact">
-                                <span class="web-benefit-icon-small">🚀</span>
+                                <span class="web-benefit-icon-small">
+                                    <img src="images/EmberCoinRocket.PNG" alt="Instant Updates" style="width: 24px; height: 24px;">
+                                </span>
                                 <span class="web-benefit-text">Instant Updates</span>
                             </div>
                             <div class="web-benefit-compact">
-                                <span class="web-benefit-icon-small">🌐</span>
+                                <span class="web-benefit-icon-small">
+                                    <img src="images/PhoenixCrossRealm.PNG" alt="Universal Access" style="width: 24px; height: 24px;">
+                                </span>
                                 <span class="web-benefit-text">Universal Access</span>
                             </div>
                             <div class="web-benefit-compact">
-                                <span class="web-benefit-icon-small">💰</span>
+                                <span class="web-benefit-icon-small">
+                                    <img src="images/EmberCoinMoneyBag.PNG" alt="No Platform Fees" style="width: 24px; height: 24px;">
+                                </span>
                                 <span class="web-benefit-text">No Platform Fees</span>
                             </div>
                         </div>
@@ -1404,7 +1581,7 @@
                 </a>
             </div>
             
-            <!-- ENHANCED Journey Section -->
+            <!-- Journey Section -->
             <div class="journey-section">
                 <h3 class="journey-title">
                     <img src="images/EmberCoinRocket.PNG" alt="Journey" class="journey-icon-large">
@@ -1504,11 +1681,7 @@
     <!-- Page-specific Scripts -->
     <script src="script.js"></script>
     
-    <!-- ============================================
-         FLOATING AI CHATBOT - Add before </body>
-         ============================================ -->
-    
-    <!-- Floating Chatbot Button -->
+    <!-- Floating AI Chatbot -->
     <div class="chatbot-button-container">
         <div class="chatbot-glow"></div>
         <div class="chatbot-button">
@@ -1521,15 +1694,15 @@
     <div class="chatbot-window">
         <div class="chatbot-header">
             <div class="chatbot-header-content">
-    <div class="chatbot-header-icons">
-        <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="chatbot-header-icon">
-        <img src="images/VPEmberFlame.svg" alt="Ember Flame" class="chatbot-header-icon">
-    </div>
-    <div class="chatbot-header-text">
-        <h3>Phoenix AI Assistant</h3>
-        <p>Powered by Vault Phoenix</p>
-    </div>
-</div>
+                <div class="chatbot-header-icons">
+                    <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="chatbot-header-icon">
+                    <img src="images/VPEmberFlame.svg" alt="Ember Flame" class="chatbot-header-icon">
+                </div>
+                <div class="chatbot-header-text">
+                    <h3>Phoenix AI Assistant</h3>
+                    <p>Powered by Vault Phoenix</p>
+                </div>
+            </div>
             <button class="chatbot-close" aria-label="Close chat window">×</button>
         </div>
         
