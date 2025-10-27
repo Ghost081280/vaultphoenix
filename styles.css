@@ -1,24 +1,24 @@
 /* ============================================
    VAULT PHOENIX - OPTIMIZED STYLESHEET
    Senior CSS Engineering - Production Ready
-   Version: 2.0 - Mobile-First with Professional Chatbot
+   Version: 2.1 - COMPREHENSIVE FIXES APPLIED
    ============================================ */
 
 /* TABLE OF CONTENTS:
    1. Base & Reset
-   2. Universal Image Glow System (FIXED)
+   2. Universal Image Glow System (CONSOLIDATED)
    3. Icon Sizes & Styling
-   4. AI Chatbot System (NEW PROFESSIONAL 550px)
+   4. AI Chatbot System (PROFESSIONAL 550px)
    5. Navigation (from shared-styles.css)
-   6. Hero Section
+   6. Hero Section (MOBILE CENTERING FIXED)
    7. Token Evolution Section
-   8. App Showcase
-   9. Features & Benefits
+   8. App Showcase (DEVICE SPACING FIXED)
+   9. Features & Benefits (BATTLE TESTED OPTIMIZED)
    10. Technology Modules
    11. Pricing & Revenue
    12. Use Cases
    13. Social Sharing
-   14. Final CTA
+   14. Final CTA (JOURNEY PATHS CENTERED)
    15. Footer
    16. Mobile Optimizations (COMPREHENSIVE)
    17. Animations & Utilities
@@ -66,14 +66,14 @@ body.loaded {
 }
 
 /* ============================================
-   2. UNIVERSAL IMAGE GLOW SYSTEM (FIXED)
-   Consistent glow effects for all images
+   2. UNIVERSAL IMAGE GLOW SYSTEM (CONSOLIDATED)
+   Single source of truth for all glow effects
    ============================================ */
 
 .image-with-glow {
     position: relative;
     display: inline-block;
-    line-height: 0; /* Prevents spacing issues */
+    line-height: 0;
 }
 
 .image-with-glow::before {
@@ -223,7 +223,7 @@ body.loaded {
 }
 
 /* ============================================
-   4. AI CHATBOT SYSTEM (NEW PROFESSIONAL 550px)
+   4. AI CHATBOT SYSTEM (PROFESSIONAL 550px)
    Professional UI/UX with proper overflow handling
    ============================================ */
 
@@ -349,7 +349,7 @@ body.loaded {
     position: fixed;
     bottom: 160px;
     right: 30px;
-    width: 550px; /* PROFESSIONAL: Wider from 400px to 550px */
+    width: 550px;
     height: calc(100vh - 310px);
     max-height: 550px;
     min-height: 400px;
@@ -485,7 +485,7 @@ body.loaded {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    max-width: 85%; /* Wider messages fit better now */
+    max-width: 85%;
 }
 
 .chat-message.assistant-message .message-avatar {
@@ -688,8 +688,8 @@ body.loaded {
 }
 
 /* ============================================
-   5. HERO SECTION
-   Premium redesign with 3-step process
+   6. HERO SECTION (MOBILE CENTERING FIXED)
+   Premium redesign with improved mobile layout
    ============================================ */
 
 .hero {
@@ -764,7 +764,7 @@ body.loaded {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* 3-Step Process */
+/* 3-Step Process - MOBILE CENTERING FIXED */
 .hero-steps-premium {
     display: flex;
     align-items: center;
@@ -887,7 +887,7 @@ body.loaded {
     }
 }
 
-/* Dual Path CTAs */
+/* Dual Path CTAs - MOBILE CENTERING FIXED */
 .hero-dual-ctas {
     margin: 70px 0 50px;
 }
@@ -1034,7 +1034,7 @@ body.loaded {
     flex-shrink: 0;
 }
 
-/* Hero Benefits Row */
+/* Hero Benefits Row - MOBILE SCROLL OPTIMIZED */
 .hero-benefits-row {
     display: flex;
     align-items: center;
@@ -1099,7 +1099,7 @@ body.loaded {
 }
 
 /* ============================================
-   6. TOKEN EVOLUTION SECTION
+   7. TOKEN EVOLUTION SECTION
    Compact & professional design
    ============================================ */
 
@@ -1501,7 +1501,7 @@ body.loaded {
     color: #ffffff;
 }
 
-/* Token Right Section */
+/* Token Right Section - GLOW CONSOLIDATED */
 .ember-token-right-redesigned {
     display: flex;
     flex-direction: column;
@@ -1542,28 +1542,6 @@ body.loaded {
     transform: scale(1.08) translateY(-8px);
     filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.9)) 
             drop-shadow(0 0 80px rgba(240, 165, 0, 0.5));
-}
-
-.ember-glow-redesigned {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 470px;
-    height: 470px;
-    background: radial-gradient(
-        circle, 
-        rgba(215, 51, 39, 0.3) 0%, 
-        rgba(251, 146, 60, 0.2) 30%, 
-        rgba(240, 165, 0, 0.1) 50%, 
-        transparent 70%
-    );
-    border-radius: 50%;
-    pointer-events: none;
-    transition: all 0.5s ease;
-    z-index: 1;
-    opacity: 0.8;
-    animation: glowPulse 3s ease-in-out infinite;
 }
 
 /* Compliance Disclaimer */
@@ -1620,7 +1598,7 @@ body.loaded {
 }
 
 /* ============================================
-   7. CRYPTO COIN SECTION
+   8. CRYPTO COIN SECTION
    ============================================ */
 
 .crypto-coin-section {
@@ -1672,28 +1650,6 @@ body.loaded {
     transform: translateY(-10px) scale(1.05);
     box-shadow: 0 40px 100px rgba(215, 51, 39, 0.4);
     filter: drop-shadow(0 15px 40px rgba(215, 51, 39, 0.6));
-}
-
-.crypto-image-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, rgba(215, 51, 39, 0.3) 0%, rgba(251, 146, 60, 0.2) 30%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    transition: all 0.5s ease;
-    z-index: 1;
-    opacity: 0.6;
-}
-
-.phoenix-coin-image:hover + .crypto-image-glow {
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(251, 146, 60, 0.4) 30%, rgba(215, 51, 39, 0.3) 50%, transparent 70%);
-    transform: translate(-50%, -50%) scale(1.3);
-    opacity: 1;
-    box-shadow: 0 0 100px rgba(240, 165, 0, 0.5);
 }
 
 .crypto-text {
@@ -2379,7 +2335,7 @@ body.loaded {
 }
 
 /* ============================================
-   8. APP SHOWCASE SECTION
+   9. APP SHOWCASE SECTION (DEVICE SPACING FIXED)
    Device galleries with proper centering
    ============================================ */
 
@@ -2445,7 +2401,7 @@ body.loaded {
     color: #f0a500;
 }
 
-/* Phone Gallery - Centered & Optimized */
+/* Phone Gallery - Centered & Optimized - SPACING FIXED */
 .phone-gallery {
     text-align: center;
     display: flex;
@@ -2456,7 +2412,7 @@ body.loaded {
 .phone-mockup {
     display: inline-block;
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 30px; /* INCREASED from default for consistency */
 }
 
 .phone-frame {
@@ -2555,7 +2511,7 @@ body.loaded {
     padding: 8px 2px;
 }
 
-/* Laptop Gallery - Optimized Display */
+/* Laptop Gallery - Optimized Display - SPACING FIXED */
 .laptop-gallery {
     text-align: center;
     position: relative;
@@ -2568,7 +2524,7 @@ body.loaded {
     position: relative;
     width: 100%;
     max-width: 650px;
-    margin: 0 auto 25px;
+    margin: 0 auto 30px; /* INCREASED from 25px for consistency with phone-mockup */
 }
 
 .laptop-screen {
@@ -2747,7 +2703,7 @@ body.loaded {
     flex-shrink: 0;
 }
 
-/* Phoenix Safe */
+/* Phoenix Safe - GLOW CONSOLIDATED */
 .phoenix-safe-container {
     position: relative;
     display: flex;
@@ -2772,27 +2728,6 @@ body.loaded {
     transform: scale(1.08);
     filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.7)) 
             drop-shadow(0 0 50px rgba(240, 165, 0, 0.35));
-}
-
-.phoenix-safe-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.3) 0%, rgba(251, 146, 60, 0.15) 30%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    transition: all 0.4s ease;
-    z-index: 1;
-    opacity: 0.8;
-}
-
-.phoenix-safe-image:hover + .phoenix-safe-glow {
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.6) 0%, rgba(251, 146, 60, 0.4) 30%, transparent 70%);
-    transform: translate(-50%, -50%) scale(1.3);
-    opacity: 1;
 }
 
 /* System Connection */
@@ -2908,7 +2843,7 @@ body.loaded {
 }
 
 /* ============================================
-   9. FEATURES & BENEFITS SECTION
+   10. FEATURES & BENEFITS SECTION (BATTLE TESTED OPTIMIZED)
    ============================================ */
 
 .features {
@@ -2930,7 +2865,7 @@ body.loaded {
         radial-gradient(circle at 80% 80%, rgba(251, 146, 60, 0.1) 0%, transparent 50%);
 }
 
-/* Proven Model Badge */
+/* Proven Model Badge - MOBILE OPTIMIZED */
 .proven-model {
     margin-bottom: 60px;
     position: relative;
@@ -3125,7 +3060,7 @@ body.loaded {
 }
 
 /* ============================================
-   10. PRICING & REVENUE SECTION
+   11. PRICING & REVENUE SECTION
    ============================================ */
 
 .pricing {
@@ -4015,7 +3950,7 @@ body.loaded {
 }
 
 /* ============================================
-   11. USE CASES SECTION
+   12. USE CASES SECTION
    ============================================ */
 
 .use-cases {
@@ -4127,7 +4062,7 @@ body.loaded {
 }
 
 /* ============================================
-   12. SOCIAL SHARING SECTION
+   13. SOCIAL SHARING SECTION
    Theme-matching colors
    ============================================ */
 
@@ -4303,7 +4238,7 @@ body.loaded {
 }
 
 /* ============================================
-   13. FINAL CTA SECTION
+   14. FINAL CTA SECTION (JOURNEY PATHS CENTERED)
    Background image optimization
    ============================================ */
 
@@ -4433,7 +4368,7 @@ body.loaded {
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
 }
 
-/* Journey Section */
+/* Journey Section - CENTERED FIX */
 .journey-section {
     margin-top: 50px;
     padding: 45px;
@@ -4470,10 +4405,13 @@ body.loaded {
     animation: glowPulse 3s ease-in-out infinite;
 }
 
+/* JOURNEY PATHS CENTERING FIX */
 .journey-paths {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex; /* Changed from grid to flex for better centering */
+    justify-content: center;
+    align-items: stretch;
     gap: 35px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .journey-path {
@@ -4483,6 +4421,9 @@ body.loaded {
     padding: 30px;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    flex: 1 1 calc(50% - 20px); /* Flexible width with minimum */
+    max-width: 550px; /* Maximum width for readability */
+    min-width: 320px; /* Minimum width to prevent too narrow */
 }
 
 .journey-path:hover {
@@ -4606,7 +4547,7 @@ body.loaded {
 }
 
 /* ============================================
-   14. FOOTER
+   15. FOOTER
    ============================================ */
 
 .footer {
@@ -4749,7 +4690,7 @@ body.loaded {
 }
 
 /* ============================================
-   15. MOBILE OPTIMIZATIONS (COMPREHENSIVE)
+   16. MOBILE OPTIMIZATIONS (COMPREHENSIVE)
    ============================================ */
 
 /* Tablet Optimizations */
@@ -4762,7 +4703,7 @@ body.loaded {
         min-height: 380px;
     }
     
-    /* Hero Section Tablet */
+    /* Hero Section Tablet - MOBILE CENTERING */
     .hero-steps-premium {
         flex-direction: column;
         align-items: stretch;
@@ -4809,11 +4750,6 @@ body.loaded {
         height: 280px;
     }
     
-    .ember-glow-redesigned {
-        width: 360px;
-        height: 360px;
-    }
-    
     /* Crypto Section Tablet */
     .crypto-content {
         grid-template-columns: 1fr;
@@ -4841,10 +4777,15 @@ body.loaded {
         gap: 35px;
     }
     
-    /* Journey Tablet */
+    /* Journey Tablet - CENTERING MAINTAINED */
     .journey-paths {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: 20px;
+    }
+    
+    .journey-path {
+        flex: 1 1 100%;
+        max-width: 100%;
     }
     
     /* Technology Tablet */
@@ -4946,7 +4887,7 @@ body.loaded {
         height: 50px;
     }
     
-    /* Hero Mobile */
+    /* Hero Mobile - MOBILE CENTERING */
     .hero {
         padding: 140px 20px 50px;
         min-height: auto;
@@ -5014,7 +4955,7 @@ body.loaded {
         margin-bottom: 50px;
     }
     
-    /* Phone Gallery Mobile */
+    /* Phone Gallery Mobile - SPACING MAINTAINED */
     .phone-gallery {
         width: 100%;
         display: flex;
@@ -5059,10 +5000,10 @@ body.loaded {
         padding: 6px 2px;
     }
     
-    /* Laptop Gallery Mobile */
+    /* Laptop Gallery Mobile - SPACING MAINTAINED */
     .laptop-mockup {
         max-width: 450px;
-        margin: 0 auto;
+        margin: 0 auto 30px; /* SPACING MAINTAINED */
     }
     
     .thumbnail-grid-laptop {
@@ -5080,6 +5021,33 @@ body.loaded {
     
     .feature-card {
         padding: 30px 25px;
+    }
+    
+    /* Battle Tested Mobile - OPTIMIZED */
+    .proven-badge {
+        padding: 25px 20px;
+        gap: 15px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .badge-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+    }
+    
+    .custom-badge-icon {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    
+    .badge-content h4 {
+        font-size: 1.15rem;
+    }
+    
+    .badge-content p {
+        font-size: 0.95rem;
     }
     
     /* Revenue Mobile */
@@ -5478,6 +5446,29 @@ body.loaded {
         gap: 8px;
     }
     
+    /* Battle Tested Extra Small */
+    .proven-badge {
+        padding: 20px 15px;
+    }
+    
+    .badge-icon {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .custom-badge-icon {
+        width: 70px !important;
+        height: 70px !important;
+    }
+    
+    .badge-content h4 {
+        font-size: 1.05rem;
+    }
+    
+    .badge-content p {
+        font-size: 0.9rem;
+    }
+    
     /* Revenue Extra Small */
     .revenue-examples-section {
         padding: 28px 15px;
@@ -5674,7 +5665,7 @@ body.loaded {
 }
 
 /* ============================================
-   16. ANIMATIONS & UTILITIES
+   17. ANIMATIONS & UTILITIES
    ============================================ */
 
 .fade-in {
