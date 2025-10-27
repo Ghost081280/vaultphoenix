@@ -1092,13 +1092,9 @@ body {
     font-weight: 500;
 }
 
-/* How It Works Section */
-.how-it-works-section {
-    background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
-}
+/* ============================================
+   HOW IT WORKS SECTION - MOBILE FIXED WITH GLOWS
+   ============================================ */
 
 .how-it-works-grid {
     display: grid;
@@ -1117,6 +1113,8 @@ body {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .stakeholder-card::before {
@@ -1141,30 +1139,6 @@ body {
     opacity: 1;
 }
 
-.platform-operator-card {
-    border-color: rgba(251, 146, 60, 0.3);
-}
-
-.platform-operator-card:hover {
-    border-color: rgba(251, 146, 60, 0.6);
-}
-
-.player-card {
-    border-color: rgba(59, 130, 246, 0.3);
-}
-
-.player-card:hover {
-    border-color: rgba(59, 130, 246, 0.6);
-}
-
-.merchant-card {
-    border-color: rgba(34, 197, 94, 0.3);
-}
-
-.merchant-card:hover {
-    border-color: rgba(34, 197, 94, 0.6);
-}
-
 /* RESTORED: Stakeholder icons with enhanced glow */
 .stakeholder-icon {
     font-size: 5rem;
@@ -1185,15 +1159,22 @@ body {
     animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
-.stakeholder-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 25px;
+@keyframes iconGlowPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
+    }
+    50% {
+        filter: drop-shadow(0 0 50px rgba(240, 165, 0, 1));
+    }
+}
+
+.stakeholder-card:hover .stakeholder-icon img {
+    filter: drop-shadow(0 0 50px rgba(240, 165, 0, 1));
 }
 
 .stakeholder-flow {
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .flow-step {
@@ -1206,36 +1187,20 @@ body {
     border-radius: 10px;
     border: 1px solid rgba(240, 165, 0, 0.2);
     transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .flow-step:hover {
     background: rgba(240, 165, 0, 0.1);
     border-color: rgba(240, 165, 0, 0.4);
-}
-
-.step-number {
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 0.9rem;
-    flex-shrink: 0;
-}
-
-.step-text {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
-    line-height: 1.4;
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.2);
 }
 
 .dual-path {
     flex-direction: column;
     gap: 10px;
+    padding: 10px;
 }
 
 .path-option {
@@ -1247,12 +1212,15 @@ body {
     border-radius: 10px;
     border: 1px solid rgba(240, 165, 0, 0.3);
     transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .path-option:hover {
     background: rgba(240, 165, 0, 0.2);
     border-color: rgba(240, 165, 0, 0.5);
     transform: translateX(5px);
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.3);
 }
 
 .path-icon {
@@ -1260,9 +1228,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 75px;
+    min-width: 75px;
 }
 
-/* RESTORED: Path icon with glow */
+/* RESTORED: Path icon with enhanced glow */
 .path-icon img {
     width: 75px;
     height: 75px;
@@ -1273,49 +1243,22 @@ body {
     animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
+.path-option:hover .path-icon img {
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 1));
+}
+
 .path-text {
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.95rem;
     font-weight: 500;
+    line-height: 1.5;
+    flex: 1;
 }
 
-.path-divider {
-    text-align: center;
-    color: #f0a500;
-    font-weight: 800;
-    padding: 10px 0;
-    font-size: 1.1rem;
-}
+/* ============================================
+   VALUE PROPOSITION - PERFECTLY CENTERED WITH GLOWS
+   ============================================ */
 
-.stakeholder-benefits h4 {
-    color: white;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    font-weight: 700;
-}
-
-.stakeholder-benefits ul {
-    list-style: none;
-    padding: 0;
-}
-
-.stakeholder-benefits li {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 8px;
-    padding-left: 20px;
-    position: relative;
-    font-size: 0.95rem;
-}
-
-.stakeholder-benefits li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: #f0a500;
-    font-weight: 800;
-}
-
-/* RESTORED: Value Proposition Enhanced with Beautiful Modules */
 .value-proposition-enhanced {
     background: rgba(240, 165, 0, 0.1);
     padding: 50px;
@@ -1325,6 +1268,8 @@ body {
     position: relative;
     overflow: hidden;
     box-shadow: 0 15px 40px rgba(240, 165, 0, 0.15);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .value-proposition-enhanced::before {
@@ -1354,6 +1299,9 @@ body {
     gap: 30px;
     position: relative;
     z-index: 1;
+    width: 100%;
+    justify-items: center;
+    align-items: stretch;
 }
 
 .utility-item-enhanced {
@@ -1366,6 +1314,13 @@ body {
     position: relative;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .utility-item-enhanced::before {
@@ -1391,13 +1346,17 @@ body {
     opacity: 1;
 }
 
-/* RESTORED: Utility icon with enhanced glow */
+/* RESTORED: Utility icon with enhanced glow and pulsing */
 .utility-icon {
     font-size: 3.2rem;
     margin-bottom: 20px;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     z-index: 1;
+    width: 100%;
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.8));
 }
 
 .utility-icon img {
@@ -1410,6 +1369,15 @@ body {
     animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
+.utility-item-enhanced:hover .utility-icon {
+    filter: drop-shadow(0 0 40px rgba(240, 165, 0, 1));
+}
+
+.utility-item-enhanced:hover .utility-icon img {
+    filter: drop-shadow(0 0 40px rgba(240, 165, 0, 1));
+    transform: scale(1.1);
+}
+
 .utility-item-enhanced h4 {
     color: white;
     margin-bottom: 15px;
@@ -1417,6 +1385,7 @@ body {
     font-weight: 700;
     position: relative;
     z-index: 1;
+    width: 100%;
 }
 
 .utility-item-enhanced p {
@@ -1425,6 +1394,251 @@ body {
     font-size: 0.95rem;
     position: relative;
     z-index: 1;
+    width: 100%;
+    margin: 0;
+}
+
+.utility-item-enhanced p strong {
+    color: #f0a500;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(240, 165, 0, 0.5);
+}
+
+/* ============================================
+   MOBILE RESPONSIVE - BOTH SECTIONS WITH GLOWS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .how-it-works-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0;
+    }
+
+    .stakeholder-card {
+        padding: 25px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .stakeholder-icon {
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.7));
+    }
+
+    .stakeholder-icon img {
+        width: 120px;
+        height: 120px;
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.7));
+    }
+
+    @keyframes iconGlowPulse {
+        0%, 100% {
+            filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.7));
+        }
+        50% {
+            filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.9));
+        }
+    }
+
+    .flow-step {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .step-number {
+        min-width: 28px;
+        width: 28px;
+        height: 28px;
+        font-size: 0.85rem;
+    }
+
+    .step-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .dual-path {
+        padding: 8px;
+    }
+
+    .path-option {
+        padding: 12px;
+        gap: 12px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .path-icon {
+        width: 60px;
+        min-width: 60px;
+    }
+
+    .path-icon img {
+        width: 60px;
+        height: 60px;
+        filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
+    }
+
+    .path-option:hover .path-icon img {
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.9));
+    }
+
+    .path-text {
+        font-size: 0.9rem;
+    }
+
+    .value-proposition-enhanced {
+        padding: 30px 20px;
+    }
+
+    .value-proposition-enhanced h3 {
+        font-size: 1.6rem;
+        margin-bottom: 30px;
+    }
+
+    .utility-grid-enhanced {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0;
+    }
+
+    .utility-item-enhanced {
+        padding: 25px 20px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .utility-icon {
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.7));
+    }
+
+    .utility-icon img {
+        width: 75px;
+        height: 75px;
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.7));
+    }
+
+    .utility-item-enhanced:hover .utility-icon {
+        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.9));
+    }
+
+    .utility-item-enhanced:hover .utility-icon img {
+        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.9));
+    }
+
+    .utility-item-enhanced h4 {
+        font-size: 1.15rem;
+    }
+
+    .utility-item-enhanced p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stakeholder-card {
+        padding: 20px 15px;
+    }
+
+    .stakeholder-icon {
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+    }
+
+    .stakeholder-icon img {
+        width: 100px;
+        height: 100px;
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+    }
+
+    @keyframes iconGlowPulse {
+        0%, 100% {
+            filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+        }
+        50% {
+            filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.85));
+        }
+    }
+
+    .stakeholder-title {
+        font-size: 1.4rem;
+    }
+
+    .flow-step {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .step-number {
+        min-width: 26px;
+        width: 26px;
+        height: 26px;
+        font-size: 0.8rem;
+    }
+
+    .step-text {
+        font-size: 0.85rem;
+    }
+
+    .path-option {
+        padding: 10px;
+    }
+
+    .path-icon {
+        width: 50px;
+        min-width: 50px;
+    }
+
+    .path-icon img {
+        width: 50px;
+        height: 50px;
+        filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6));
+    }
+
+    .path-option:hover .path-icon img {
+        filter: drop-shadow(0 0 22px rgba(240, 165, 0, 0.85));
+    }
+
+    .path-text {
+        font-size: 0.85rem;
+    }
+
+    .value-proposition-enhanced {
+        padding: 25px 15px;
+    }
+
+    .value-proposition-enhanced h3 {
+        font-size: 1.4rem;
+    }
+
+    .utility-item-enhanced {
+        padding: 20px 15px;
+    }
+
+    .utility-icon {
+        filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
+    }
+
+    .utility-icon img {
+        width: 65px;
+        height: 65px;
+        filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
+    }
+
+    .utility-item-enhanced:hover .utility-icon {
+        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.85));
+    }
+
+    .utility-item-enhanced:hover .utility-icon img {
+        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.85));
+    }
+
+    .utility-item-enhanced h4 {
+        font-size: 1.1rem;
+    }
+
+    .utility-item-enhanced p {
+        font-size: 0.85rem;
+    }
 }
 
 /* RESTORED: White Paper Section with Beautiful Overview Module */
