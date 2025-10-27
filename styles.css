@@ -1,27 +1,24 @@
 /* ============================================
    VAULT PHOENIX - OPTIMIZED STYLESHEET
    Senior CSS Engineering - Production Ready
-   Version: 2.4 - COMPLETE MOBILE CENTERING + ALL BREAKPOINTS
+   Version: 2.5 - DUPLICATES REMOVED (All shared code in shared-styles.css)
    ============================================ */
 
 /* TABLE OF CONTENTS:
    1. Base & Reset (SCROLL OPTIMIZED)
    2. Universal Image Glow System (SINGLE SOURCE - NO DUPLICATES)
    3. Icon Sizes & Styling (SCALED TO 60px MINIMUM)
-   4. AI Chatbot System (PROFESSIONAL 550px)
-   5. Navigation (NO GLOW - HANDLED BY SHARED-STYLES.CSS)
-   6. Hero Section (✅ COMPLETE MOBILE CENTERING + ARROW ROTATION)
-   7. Token Evolution Section
-   8. App Showcase (✅ DEVICE SPACING STANDARDIZED 30px)
-   9. Features & Benefits (✅ BATTLE TESTED MOBILE OPTIMIZED)
-   10. Technology Modules (GPS ORANGE + BEACON PURPLE)
-   11. Pricing & Revenue (✅ CENTERED CARDS + REBALANCED)
-   12. Use Cases
-   13. Social Sharing
-   14. Final CTA (✅ JOURNEY PATHS PERFECTLY CENTERED)
-   15. Footer
-   16. Mobile Optimizations (✅ ALL BREAKPOINTS: 375px, 428px, 768px, 1024px, 1366px)
-   17. Animations & Utilities (PERFORMANCE OPTIMIZED)
+   4. Hero Section (✅ COMPLETE MOBILE CENTERING + ARROW ROTATION)
+   5. Token Evolution Section
+   6. App Showcase (✅ DEVICE SPACING STANDARDIZED 30px)
+   7. Features & Benefits (✅ BATTLE TESTED MOBILE OPTIMIZED)
+   8. Technology Modules (GPS ORANGE + BEACON PURPLE)
+   9. Pricing & Revenue (✅ CENTERED CARDS + REBALANCED)
+   10. Use Cases
+   11. Social Sharing
+   12. Final CTA (✅ JOURNEY PATHS PERFECTLY CENTERED)
+   13. Mobile Optimizations (✅ ALL BREAKPOINTS: 375px, 428px, 768px, 1024px, 1366px)
+   14. Animations & Utilities (PERFORMANCE OPTIMIZED)
 */
 
 /* ============================================
@@ -55,18 +52,6 @@ body {
 
 body.loaded {
     opacity: 1;
-}
-
-/* Golden Accent Utilities */
-.golden-text {
-    color: #f0a500 !important;
-    text-shadow: 0 2px 8px rgba(240, 165, 0, 0.3);
-}
-
-.golden-highlight {
-    color: #f0a500;
-    font-weight: 700;
-    text-shadow: 0 1px 4px rgba(240, 165, 0, 0.2);
 }
 
 /* ============================================
@@ -232,473 +217,7 @@ body.loaded {
 }
 
 /* ============================================
-   4. AI CHATBOT SYSTEM (PROFESSIONAL 550px)
-   Professional UI/UX with proper overflow handling
-   ============================================ */
-
-/* Chatbot Button Container */
-.chatbot-button-container {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9997;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.chatbot-button-container:hover {
-    transform: scale(1.05) translateY(-3px);
-}
-
-/* Chatbot Glow Effect */
-.chatbot-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 180px;
-    height: 180px;
-    background: radial-gradient(
-        circle, 
-        rgba(240, 165, 0, 0.6) 0%, 
-        rgba(215, 51, 39, 0.4) 30%, 
-        transparent 70%
-    );
-    border-radius: 50%;
-    pointer-events: none;
-    animation: chatbotGlowPulse 2.5s ease-in-out infinite;
-    z-index: 1;
-    will-change: transform, opacity;
-}
-
-@keyframes chatbotGlowPulse {
-    0%, 100% { 
-        transform: translate(-50%, -50%) scale(1); 
-        opacity: 0.7; 
-    }
-    50% { 
-        transform: translate(-50%, -50%) scale(1.2); 
-        opacity: 1; 
-    }
-}
-
-/* Chatbot Button */
-.chatbot-button {
-    position: relative;
-    width: 110px;
-    height: 110px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 30px rgba(215, 51, 39, 0.5);
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2;
-}
-
-.chatbot-button:hover {
-    background: linear-gradient(135deg, #fb923c, #f0a500);
-    box-shadow: 0 15px 40px rgba(240, 165, 0, 0.6);
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-.chatbot-icon {
-    width: 75%;
-    height: 75%;
-    object-fit: contain;
-    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3));
-    transition: all 0.3s ease;
-}
-
-.chatbot-button:hover .chatbot-icon {
-    transform: scale(1.1) rotate(5deg);
-}
-
-/* Chatbot Tooltip */
-.chatbot-tooltip {
-    position: absolute;
-    right: 130px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(240, 165, 0, 0.5);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-}
-
-.chatbot-button-container:hover .chatbot-tooltip {
-    opacity: 1;
-    right: 135px;
-}
-
-.chatbot-tooltip::after {
-    content: '';
-    position: absolute;
-    right: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-left: 10px solid rgba(0, 0, 0, 0.9);
-}
-
-/* PROFESSIONAL: Chatbot Window - Wider on Desktop for Better Conversations */
-.chatbot-window {
-    position: fixed;
-    bottom: 160px;
-    right: 30px;
-    width: 550px;
-    height: calc(100vh - 310px);
-    max-height: 550px;
-    min-height: 400px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #451a03 100%);
-    border-radius: 25px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    border: 3px solid rgba(215, 51, 39, 0.4);
-    z-index: 9996;
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-    backdrop-filter: blur(20px);
-    animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.chatbot-window.active {
-    display: flex;
-}
-
-@keyframes slideInUp {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Chatbot Header */
-.chatbot-header {
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
-    height: 80px;
-}
-
-.chatbot-header-content {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.chatbot-header-icons {
-    display: flex;
-    gap: 8px;
-}
-
-.chatbot-header-icon {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
-}
-
-.chatbot-header-text h3 {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: white;
-    margin: 0;
-}
-
-.chatbot-header-text p {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0;
-}
-
-.chatbot-close {
-    width: 32px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    border-radius: 50%;
-    color: white;
-    font-size: 1.3rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.chatbot-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
-}
-
-/* PROFESSIONAL: Chat Body - Flexible scroll area with proper width for longer messages */
-.chatbot-body {
-    flex: 1;
-    min-height: 0;
-    padding: 20px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background: rgba(0, 0, 0, 0.3);
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Message Container Styling - Better spacing for wider window */
-.chat-message {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    animation: messageSlideIn 0.3s ease;
-}
-
-@keyframes messageSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Claude Messages - Left Aligned with Avatar */
-.chat-message.assistant-message {
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.chat-message.assistant-message .message-content {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    max-width: 85%;
-}
-
-.chat-message.assistant-message .message-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-}
-
-.chat-message.assistant-message .message-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.chat-message.assistant-message .message-text {
-    background: rgba(215, 51, 39, 0.15);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    color: rgba(255, 255, 255, 0.95);
-    padding: 12px 16px;
-    border-radius: 12px 12px 12px 4px;
-    line-height: 1.6;
-    font-size: 0.95rem;
-    word-wrap: break-word;
-}
-
-/* User Messages - Right Aligned, NO Avatar */
-.chat-message.user-message {
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-}
-
-.chat-message.user-message .message-content {
-    display: flex;
-    justify-content: flex-end;
-    max-width: 85%;
-    margin-left: auto;
-}
-
-.chat-message.user-message .message-text {
-    background: rgba(240, 165, 0, 0.2);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    color: rgba(255, 255, 255, 0.95);
-    padding: 12px 16px;
-    border-radius: 12px 12px 4px 12px;
-    line-height: 1.6;
-    font-size: 0.95rem;
-    word-wrap: break-word;
-}
-
-/* Message Text Formatting */
-.message-text strong {
-    color: #f0a500;
-    font-weight: 700;
-}
-
-.message-text ul {
-    margin: 10px 0;
-    padding-left: 20px;
-}
-
-.message-text li {
-    margin: 5px 0;
-}
-
-.message-text br {
-    display: block;
-    content: "";
-    margin: 5px 0;
-}
-
-/* Typing Indicator */
-.typing-indicator {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.typing-indicator .message-content {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.typing-indicator .message-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-}
-
-.typing-indicator .message-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.typing-dots {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 12px 16px;
-    background: rgba(215, 51, 39, 0.15);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: 12px 12px 12px 4px;
-}
-
-.typing-dots span {
-    width: 8px;
-    height: 8px;
-    background: #f0a500;
-    border-radius: 50%;
-    animation: typingBounce 1.4s infinite ease-in-out;
-}
-
-.typing-dots span:nth-child(1) { animation-delay: 0s; }
-.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes typingBounce {
-    0%, 60%, 100% {
-        transform: translateY(0);
-        opacity: 0.7;
-    }
-    30% {
-        transform: translateY(-10px);
-        opacity: 1;
-    }
-}
-
-/* Chat Footer - Fixed Height */
-.chatbot-footer {
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.4);
-    border-top: 2px solid rgba(215, 51, 39, 0.2);
-    flex-shrink: 0;
-    height: 100px;
-}
-
-.chatbot-input-container {
-    display: flex;
-    gap: 10px;
-}
-
-/* Input - Prevent expansion and mobile zoom - Better width for conversations */
-.chatbot-input {
-    flex: 1;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: 15px;
-    color: white;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    resize: none;
-    max-height: 60px;
-    overflow-y: auto;
-}
-
-.chatbot-input:focus {
-    outline: none;
-    border-color: rgba(240, 165, 0, 0.6);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.chatbot-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.chatbot-send {
-    padding: 12px 20px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    border: none;
-    border-radius: 15px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
-    font-size: 16px;
-    height: 60px;
-}
-
-.chatbot-send:hover:not(:disabled) {
-    background: linear-gradient(135deg, #fb923c, #f0a500);
-    box-shadow: 0 6px 20px rgba(240, 165, 0, 0.5);
-    transform: translateY(-2px);
-}
-
-.chatbot-send:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* ============================================
-   6. HERO SECTION (✅ COMPLETE MOBILE CENTERING)
+   4. HERO SECTION (✅ COMPLETE MOBILE CENTERING)
    ✅ Premium redesign with perfect mobile layout
    ✅ Step arrows rotate 90° on mobile
    ✅ Hero benefits with scroll snap
@@ -1146,7 +665,7 @@ body.loaded {
 }
 
 /* ============================================
-   7. TOKEN EVOLUTION SECTION
+   5. TOKEN EVOLUTION SECTION
    Compact & professional design
    ============================================ */
 
@@ -1645,7 +1164,7 @@ body.loaded {
 }
 
 /* ============================================
-   8. CRYPTO COIN SECTION (✅ MOBILE REBALANCED)
+   6. CRYPTO COIN SECTION (✅ MOBILE REBALANCED)
    ============================================ */
 
 .crypto-coin-section {
@@ -2385,7 +1904,7 @@ body.loaded {
 }
 
 /* ============================================
-   9. APP SHOWCASE SECTION (✅ DEVICE SPACING STANDARDIZED 30px)
+   7. APP SHOWCASE SECTION (✅ DEVICE SPACING STANDARDIZED 30px)
    Device galleries with proper centering
    ============================================ */
 
@@ -2407,30 +1926,6 @@ body.loaded {
     background: 
         radial-gradient(circle at 20% 20%, rgba(215, 51, 39, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(251, 146, 60, 0.1) 0%, transparent 50%);
-}
-
-.section-title {
-    text-align: center;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    margin-bottom: 25px;
-    color: #ffffff;
-    letter-spacing: -0.02em;
-    position: relative;
-    z-index: 10;
-}
-
-.section-subtitle {
-    text-align: center;
-    font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 80px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: 500;
-    position: relative;
-    z-index: 10;
 }
 
 .showcase-content {
@@ -2899,7 +2394,7 @@ body.loaded {
 }
 
 /* ============================================
-   10. FEATURES & BENEFITS SECTION (✅ BATTLE TESTED MOBILE OPTIMIZED)
+   8. FEATURES & BENEFITS SECTION (✅ BATTLE TESTED MOBILE OPTIMIZED)
    ============================================ */
 
 .features {
@@ -3116,7 +2611,7 @@ body.loaded {
 }
 
 /* ============================================
-   11. PRICING & REVENUE SECTION (✅ CENTERED CARDS + REBALANCED)
+   9. PRICING & REVENUE SECTION (✅ CENTERED CARDS + REBALANCED)
    ============================================ */
 
 .pricing {
@@ -4006,7 +3501,7 @@ body.loaded {
 }
 
 /* ============================================
-   12. USE CASES SECTION
+   10. USE CASES SECTION
    ============================================ */
 
 .use-cases {
@@ -4118,7 +3613,7 @@ body.loaded {
 }
 
 /* ============================================
-   13. SOCIAL SHARING SECTION
+   11. SOCIAL SHARING SECTION
    Theme-matching colors
    ============================================ */
 
@@ -4294,7 +3789,7 @@ body.loaded {
 }
 
 /* ============================================
-   14. FINAL CTA SECTION (✅ JOURNEY PATHS PERFECTLY CENTERED)
+   12. FINAL CTA SECTION (✅ JOURNEY PATHS PERFECTLY CENTERED)
    Background image optimization
    ============================================ */
 
@@ -4332,11 +3827,6 @@ body.loaded {
         radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.1) 0%, transparent 50%);
     z-index: 1;
-}
-
-.final-cta .container {
-    position: relative;
-    z-index: 10;
 }
 
 .final-cta-title {
@@ -4544,17 +4034,6 @@ body.loaded {
     line-height: 1.2;
 }
 
-.path-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    box-shadow: 0 3px 10px rgba(215, 51, 39, 0.4);
-}
-
 .sdk-badge-alt {
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
     box-shadow: 0 3px 10px rgba(99, 102, 241, 0.4);
@@ -4603,159 +4082,11 @@ body.loaded {
 }
 
 /* ============================================
-   15. FOOTER
-   ============================================ */
-
-.footer {
-    background: #0f0f0f;
-    color: white;
-    padding: 60px 40px;
-    text-align: center;
-}
-
-.footer-content {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.footer-logo {
-    font-size: 1.8rem;
-    font-weight: 900;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    position: relative;
-}
-
-.footer-logo::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(circle, rgba(215, 51, 39, 0.3) 0%, rgba(251, 146, 60, 0.15) 40%, transparent 70%);
-    border-radius: 50%;
-    z-index: -1;
-    animation: glowPulse 3s ease-in-out infinite;
-}
-
-.footer-logo-image {
-    height: 60px;
-    width: auto;
-    filter: drop-shadow(0 0 8px rgba(215, 51, 39, 0.4));
-}
-
-.footer-text {
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 25px;
-    font-size: 1.1rem;
-}
-
-.social-media {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin: 30px 0;
-}
-
-.social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    border-radius: 50%;
-    color: white;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.3);
-    position: relative;
-}
-
-.social-link::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 150%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(215, 51, 39, 0.4) 0%, rgba(251, 146, 60, 0.2) 40%, transparent 70%);
-    border-radius: 50%;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.social-link:hover::before {
-    opacity: 1;
-}
-
-.social-link:hover {
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
-    background: linear-gradient(135deg, #fb923c, #d73327);
-}
-
-.social-icon {
-    width: 28px;
-    height: 28px;
-    transition: all 0.3s ease;
-}
-
-.social-link:hover .social-icon {
-    transform: scale(1.1);
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: #d73327;
-    transform: translateY(-2px);
-}
-
-.footer-ember-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.footer-ember-coin {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-}
-
-/* ============================================
-   16. MOBILE OPTIMIZATIONS (✅ ALL BREAKPOINTS: 375px, 428px, 768px, 1024px, 1366px)
+   13. MOBILE OPTIMIZATIONS (✅ ALL BREAKPOINTS: 375px, 428px, 768px, 1024px, 1366px)
    ============================================ */
 
 /* ✅ 1366px Standard Laptops */
 @media (min-width: 1025px) and (max-width: 1366px) {
-    .container {
-        max-width: 1200px;
-        padding: 0 30px;
-    }
-    
     .hero-steps-premium {
         gap: 20px;
     }
@@ -4763,14 +4094,6 @@ body.loaded {
 
 /* Tablet Optimizations (1024px) */
 @media (max-width: 1024px) {
-    /* Chatbot Tablet */
-    .chatbot-window {
-        width: 500px;
-        height: calc(100vh - 280px);
-        max-height: 500px;
-        min-height: 380px;
-    }
-    
     /* ✅ Hero Section Tablet - MOBILE CENTERING */
     .hero-steps-premium {
         flex-direction: column;
@@ -4917,65 +4240,6 @@ body.loaded {
 
 /* Mobile Phone Optimizations (768px) */
 @media (max-width: 768px) {
-    /* Chatbot Mobile */
-    .chatbot-button-container {
-        bottom: 20px;
-        right: 20px;
-    }
-    
-    .chatbot-button {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .chatbot-glow {
-        width: 130px;
-        height: 130px;
-    }
-    
-    .chatbot-tooltip {
-        display: none;
-    }
-    
-    .chatbot-window {
-        bottom: 120px;
-        right: 20px;
-        left: 20px;
-        width: calc(100% - 40px);
-        height: calc(100vh - 240px);
-        max-height: calc(100vh - 240px);
-        min-height: 350px;
-    }
-    
-    .chatbot-header {
-        padding: 15px;
-        height: 70px;
-    }
-    
-    .chatbot-body {
-        padding: 15px;
-    }
-    
-    .chatbot-footer {
-        padding: 15px;
-        height: 90px;
-    }
-    
-    .chat-message.assistant-message .message-content,
-    .chat-message.user-message .message-content {
-        max-width: 90%;
-    }
-    
-    .chatbot-input {
-        font-size: 16px;
-        max-height: 50px;
-    }
-    
-    .chatbot-send {
-        font-size: 16px;
-        height: 50px;
-    }
-    
     /* ✅ Hero Mobile - MOBILE CENTERING */
     .hero {
         padding: 140px 20px 50px;
@@ -5028,16 +4292,6 @@ body.loaded {
     .social-sharing-section-compact,
     .crypto-coin-section {
         padding: 50px 20px;
-    }
-    
-    .section-title {
-        font-size: clamp(1.8rem, 6vw, 2.5rem);
-        margin-bottom: 18px;
-    }
-    
-    .section-subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 50px;
     }
     
     /* ✅ Phone Gallery Mobile - SPACING MAINTAINED 30px */
@@ -5416,65 +4670,6 @@ body.loaded {
 
 /* ✅ 375px iPhone SE / Small Phones + Extra Small Mobile */
 @media (max-width: 480px) {
-    /* Chatbot Extra Small */
-    .chatbot-button {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .chatbot-glow {
-        width: 110px;
-        height: 110px;
-    }
-    
-    .chatbot-window {
-        bottom: 100px;
-        height: calc(100vh - 220px);
-        max-height: calc(100vh - 220px);
-        min-height: 320px;
-    }
-    
-    .chatbot-header {
-        padding: 12px;
-        height: 65px;
-    }
-    
-    .chatbot-header-icon {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .chatbot-header-text h3 {
-        font-size: 1rem;
-    }
-    
-    .chatbot-body {
-        padding: 12px;
-    }
-    
-    .chatbot-footer {
-        padding: 12px;
-        height: 85px;
-    }
-    
-    .chat-message.assistant-message .message-avatar {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .message-text {
-        font-size: 0.9rem;
-        padding: 10px 14px;
-    }
-    
-    .chatbot-input {
-        max-height: 45px;
-    }
-    
-    .chatbot-send {
-        height: 45px;
-    }
-    
     /* Hero Extra Small */
     .hero {
         padding: 120px 15px 40px;
@@ -5548,16 +4743,6 @@ body.loaded {
     .social-sharing-section-compact,
     .crypto-coin-section {
         padding: 40px 15px;
-    }
-    
-    .section-title {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-        margin-bottom: 15px;
-    }
-    
-    .section-subtitle {
-        font-size: 1rem;
-        margin-bottom: 40px;
     }
     
     .feature-card {
@@ -5840,21 +5025,10 @@ body.loaded {
         grid-template-columns: 1fr;
         gap: 10px;
     }
-    
-    /* Footer Extra Small */
-    .social-link {
-        width: 55px;
-        height: 55px;
-    }
-    
-    .social-icon {
-        width: 26px;
-        height: 26px;
-    }
 }
 
 /* ============================================
-   17. ANIMATIONS & UTILITIES (PERFORMANCE OPTIMIZED)
+   14. ANIMATIONS & UTILITIES (PERFORMANCE OPTIMIZED)
    ============================================ */
 
 .fade-in {
@@ -5900,86 +5074,7 @@ body.loaded {
 }
 
 .cta-button:focus,
-.demo-button:focus,
-.social-link:focus,
-.mobile-menu-btn:focus {
+.demo-button:focus {
     outline: 3px solid #d73327;
     outline-offset: 2px;
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #1a1a1a;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #d73327, #fb923c);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #fb923c, #d73327);
-}
-
-/* Selection Styling */
-::selection {
-    background: rgba(215, 51, 39, 0.3);
-    color: #ffffff;
-}
-
-::-moz-selection {
-    background: rgba(215, 51, 39, 0.3);
-    color: #ffffff;
-}
-
-/* Mobile Menu Button */
-.mobile-menu-btn {
-    display: none;
-    background: linear-gradient(135deg, #d73327, #fb923c);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    font-size: 1.8rem;
-    cursor: pointer;
-    padding: 0.6rem 1rem;
-    border-radius: 12px;
-    z-index: 1001;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
-}
-
-.mobile-menu-btn:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, #fb923c, #f0a500);
-    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.6);
-}
-
-@media (max-width: 1024px) {
-    .mobile-menu-btn {
-        display: block !important;
-        padding: 10px 14px;
-        font-size: 18px;
-    }
-}
-
-/* Container Utility */
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 40px;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
 }
