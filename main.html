@@ -12,14 +12,6 @@
     <meta name="author" content="Vault Phoenix LLC">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://vaultphoenix.com/main.html">
-
-    <!-- ⭐ 3-TIER AI CHATBOT - WebLLM Library ⭐ -->
-    <script type="module">
-        import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
-        window.CreateMLCEngine = CreateMLCEngine;
-        console.log('✅ WebLLM loaded - 3-Tier AI Chatbot ready');
-    </script>
-    <!-- ⭐ END OF ADDITION ⭐ -->
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -54,10 +46,6 @@
     <!-- Geo Tags -->
     <meta name="geo.region" content="US">
     <meta name="geo.placename" content="United States">
-    
-    <!-- Performance Optimization -->
-    <link rel="preconnect" href="https://esm.run">
-    <link rel="dns-prefetch" href="https://esm.run">
     
     <link rel="icon" href="images/PhoenixBullseye.PNG" type="image/png">
     <link rel="apple-touch-icon" href="images/PhoenixBullseye.PNG">
@@ -252,7 +240,7 @@
     <!-- Mobile Menu - Required structure for shared-script.js -->
     <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
     <div class="mobile-menu-panel" id="mobile-menu">
-        <!-- Branding icons at top-left -->
+        <!-- ✅ Branding icons at top-left: NO nested glow wrappers - single wrapper only -->
         <div class="mobile-menu-branding">
             <div class="image-with-glow">
                 <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="mobile-menu-coin">
@@ -361,7 +349,7 @@
                     </div>
                 </div>
                 
-                <!-- Secondary CTA -->
+                <!-- ✅ Secondary CTA: Added class="secondary-cta-link" for styling hook -->
                 <div class="hero-secondary-cta fade-in stagger-3">
                     <a href="#showcase" class="secondary-cta-link" aria-label="Scroll to see how the platform works">
                         <span>See How It Works</span>
@@ -527,7 +515,7 @@
                         </h4>
                         <p>Vault Phoenix operates under comprehensive regulatory oversight with institutional-grade compliance procedures, multi-signature treasury management, and professional legal frameworks ensuring maximum security and transparency.</p>
                         
-                        <!-- ✅ FIX: Uses smooth scroll instead of opening new window -->
+                        <!-- ✅ FIX: Removed target="_blank" for smooth scroll instead of opening new window -->
                         <div class="compliance-cta">
                             <a href="ember.html#legal-compliance-section" class="compliance-button" aria-label="View compliance details">
                                 View Compliance Details
@@ -1627,10 +1615,9 @@
     <!-- Footer - Styled by shared-styles.css -->
     <footer class="footer">
         <div class="footer-content">
+            <!-- ✅ Footer logo: NO glow wrapper - styled by shared-styles.css only -->
             <div class="footer-logo">
-                <div class="image-with-glow">
-                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="footer-logo-image" loading="lazy">
-                </div>
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="footer-logo-image" loading="lazy">
                 <span>Vault Phoenix - AR Crypto Gaming Solutions</span>
             </div>
             <p class="footer-text">Transforming marketing campaigns into legendary crypto gaming experiences that drive real business results and create lasting customer loyalty through strategic GPS & Beacon location-based advertising.</p>
