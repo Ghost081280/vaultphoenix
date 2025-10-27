@@ -940,7 +940,7 @@ tierBadgeStyle.textContent = `
 document.head.appendChild(tierBadgeStyle);
 
 // ============================================
-// PAGE INITIALIZATION
+// PAGE INITIALIZATION - CRITICAL FIX
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥🪙 Vault Phoenix Enhanced Chatbot Initializing...');
