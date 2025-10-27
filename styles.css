@@ -14,6 +14,7 @@
 /* REFACTORED: Standardized button classes and utilizing CSS variables */
 /* FIXED: Removed navigation overrides to ensure consistency across pages */
 /* PRODUCTION READY: Fixed mobile revenue examples centering, phone screenshots centering, CTA background scaling, icon glows, faster scroll timing */
+/* UPDATED: Restored glow effects, fixed revenue section spacing, responsive SDK tiers, bigger step badges (50px) */
 
 * {
     margin: 0;
@@ -972,23 +973,23 @@ body.loaded {
     filter: drop-shadow(0 6px 20px rgba(240, 165, 0, 0.6)) drop-shadow(0 0 35px rgba(240, 165, 0, 0.35));
 }
 
-/* UPDATED: Step Number Badge - Positioned at Top Right Corner */
+/* UPDATED: Step Number Badge - BIGGER (50px) & Top Right Corner */
 .step-number-badge {
     position: absolute;
     top: 12px;
     right: 12px;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: linear-gradient(135deg, #f0a500, #fb923c);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 900;
     color: white;
-    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4);
-    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.4);
     z-index: 10;
 }
 
@@ -1717,6 +1718,7 @@ body.loaded {
     align-items: center;
 }
 
+/* RESTORED: Phoenix image with glow effect */
 .phoenix-holding-coin-redesigned {
     width: 380px;
     height: 380px;
@@ -1739,6 +1741,7 @@ body.loaded {
     filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.9)) drop-shadow(0 0 80px rgba(240, 165, 0, 0.5));
 }
 
+/* RESTORED: Glow effect behind phoenix */
 .ember-glow-redesigned {
     position: absolute;
     top: 50%;
@@ -2172,7 +2175,7 @@ body.loaded {
     font-weight: 800;
 }
 
-/* Phoenix Safe Container */
+/* RESTORED: Phoenix Safe Container with glow */
 .phoenix-safe-container {
     position: relative;
     display: flex;
@@ -2197,6 +2200,7 @@ body.loaded {
     filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.7)) drop-shadow(0 0 50px rgba(240, 165, 0, 0.35));
 }
 
+/* RESTORED: Glow effect behind safe */
 .phoenix-safe-glow {
     position: absolute;
     top: 50%;
@@ -3255,9 +3259,10 @@ body.loaded {
     font-family: monospace;
 }
 
+/* FIXED: Responsive SDK Pricing Tiers - Always Fit in Container */
 .sdk-pricing-tiers {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 15px;
     margin: 25px 0;
 }
@@ -3270,6 +3275,8 @@ body.loaded {
     text-align: center;
     transition: all 0.3s ease;
     position: relative;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .sdk-tier:hover {
@@ -3441,15 +3448,17 @@ body.loaded {
     margin: 0;
 }
 
+/* FIXED: Added proper spacing below "Why Location Partners Pay Premium Rates" */
 .revenue-examples-section {
     margin-top: 70px;
-    padding: 50px 40px; /* FIXED: Reduced horizontal padding to give cards room */
+    margin-bottom: 80px;
+    padding: 50px 40px;
     background: rgba(215, 51, 39, 0.08);
     border-radius: 25px;
     border: 2px solid rgba(215, 51, 39, 0.25);
     position: relative;
     z-index: 10;
-    overflow: hidden; /* FIXED: Prevent overflow */
+    overflow: hidden;
 }
 
 .revenue-examples-header {
@@ -3483,25 +3492,24 @@ body.loaded {
     margin: 0;
 }
 
-/* FIXED: Grid properly contained with reduced gap */
 .revenue-examples-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 25px; /* FIXED: Reduced from 35px */
-    margin-bottom: 60px; /* FIXED: Increased from 50px for spacing */
+    gap: 25px;
+    margin-bottom: 60px;
     max-width: 100%;
-    padding: 0; /* FIXED: Remove any padding */
+    padding: 0;
 }
 
 .revenue-example-card {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: 18px;
-    padding: 25px 20px; /* FIXED: Reduced padding to prevent overflow */
+    padding: 25px 20px;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    width: 100%; /* FIXED: Ensure cards stay within bounds */
-    box-sizing: border-box; /* FIXED: Include padding in width calculation */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .revenue-example-card:hover {
@@ -3514,13 +3522,13 @@ body.loaded {
 .revenue-card-header {
     display: flex;
     align-items: center;
-    gap: 12px; /* FIXED: Reduced from 15px */
+    gap: 12px;
     margin-bottom: 15px;
-    flex-wrap: wrap; /* FIXED: Allow wrapping on smaller screens */
+    flex-wrap: wrap;
 }
 
 .revenue-industry-icon {
-    width: 55px; /* FIXED: Slightly smaller to fit better */
+    width: 55px;
     height: 55px;
     object-fit: contain;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2)) drop-shadow(0 0 12px rgba(240, 165, 0, 0.15));
@@ -3531,33 +3539,33 @@ body.loaded {
     display: inline-block;
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
-    padding: 6px 14px; /* FIXED: Slightly reduced padding */
+    padding: 6px 14px;
     border-radius: 20px;
-    font-size: 0.8rem; /* FIXED: Slightly smaller font */
+    font-size: 0.8rem;
     font-weight: 700;
     flex: 1;
-    min-width: 0; /* FIXED: Allow text truncation if needed */
+    min-width: 0;
 }
 
 .example-title {
-    font-size: 1.4rem; /* FIXED: Reduced from 1.5rem */
+    font-size: 1.4rem;
     font-weight: 800;
     color: #ffffff;
     margin-bottom: 12px;
-    line-height: 1.2; /* FIXED: Tighter line height */
+    line-height: 1.2;
 }
 
 .example-scenario {
-    font-size: 0.9rem; /* FIXED: Reduced from 0.95rem */
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 18px; /* FIXED: Reduced from 20px */
+    margin-bottom: 18px;
     line-height: 1.4;
 }
 
 .example-breakdown {
     background: rgba(215, 51, 39, 0.1);
     border-radius: 12px;
-    padding: 18px; /* FIXED: Reduced from 20px */
+    padding: 18px;
     border: 1px solid rgba(215, 51, 39, 0.2);
 }
 
@@ -3565,7 +3573,7 @@ body.loaded {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0; /* FIXED: Reduced from 12px */
+    padding: 10px 0;
     border-bottom: 1px solid rgba(215, 51, 39, 0.15);
 }
 
@@ -3580,26 +3588,26 @@ body.loaded {
 }
 
 .breakdown-label {
-    font-size: 0.9rem; /* FIXED: Slightly smaller */
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.85);
     font-weight: 600;
 }
 
 .breakdown-value {
-    font-size: 0.95rem; /* FIXED: Slightly smaller */
+    font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.95);
     font-weight: 700;
     text-align: right;
 }
 
 .breakdown-item.total .breakdown-label {
-    font-size: 1.05rem; /* FIXED: Slightly smaller */
+    font-size: 1.05rem;
     font-weight: 800;
     color: #ffffff;
 }
 
 .breakdown-item.total .breakdown-value {
-    font-size: 1.3rem; /* FIXED: Slightly smaller */
+    font-size: 1.3rem;
     font-weight: 900;
 }
 
@@ -3609,7 +3617,7 @@ body.loaded {
     border-radius: 18px;
     padding: 35px;
     border: 1px solid rgba(215, 51, 39, 0.2);
-    margin-top: 60px !important; /* FIXED: Add significant top margin */
+    margin-top: 80px !important;
 }
 
 .revenue-model-benefits h4 {
@@ -3618,7 +3626,7 @@ body.loaded {
     color: #f0a500;
     margin-bottom: 50px;
     text-align: center;
-    margin-top: 0; /* Ensure no extra top margin on the heading itself */
+    margin-top: 0;
 }
 
 .benefits-grid {
@@ -3682,6 +3690,7 @@ body.loaded {
 @media (max-width: 1024px) {
     .revenue-examples-section {
         padding: 45px 30px;
+        margin-bottom: 60px;
     }
     
     .revenue-examples-grid {
@@ -3694,11 +3703,21 @@ body.loaded {
         grid-template-columns: 1fr;
         gap: 18px;
     }
+    
+    .revenue-model-benefits {
+        margin-top: 60px !important;
+    }
+    
+    .sdk-pricing-tiers {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
 }
 
 @media (max-width: 768px) {
     .revenue-examples-section {
-        padding: 35px 20px; /* FIXED: More padding on mobile */
+        padding: 35px 20px;
+        margin-bottom: 50px;
         text-align: center;
     }
 
@@ -3741,17 +3760,19 @@ body.loaded {
     
     .revenue-model-benefits {
         padding: 28px 20px;
+        margin-top: 50px !important;
     }
     
     .revenue-model-benefits h4 {
         font-size: 1.5rem;
-        margin-bottom: 35px; /* FIXED: Increased mobile spacing */
+        margin-bottom: 35px;
     }
 }
 
 @media (max-width: 480px) {
     .revenue-examples-section {
-        padding: 28px 15px; /* FIXED: Even more padding on small mobile */
+        padding: 28px 15px;
+        margin-bottom: 40px;
     }
 
     .revenue-header-icon {
@@ -3786,196 +3807,12 @@ body.loaded {
     
     .revenue-model-benefits {
         padding: 22px 15px;
+        margin-top: 40px !important;
     }
     
     .revenue-model-benefits h4 {
         font-size: 1.4rem;
-        margin-bottom: 30px; /* FIXED: Increased small mobile spacing */
-    }
-}
-
-/* ============================================
-   MOBILE OPTIMIZATION - Revenue Section
-   ============================================ */
-
-@media (max-width: 1024px) {
-    .revenue-examples-section {
-        padding: 45px 30px;
-    }
-    
-    .revenue-examples-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        margin-bottom: 50px;
-    }
-    
-    .benefits-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-}
-
-@media (max-width: 768px) {
-    .revenue-examples-section {
-        padding: 35px 20px; /* FIXED: More padding on mobile */
-        text-align: center;
-    }
-
-    .revenue-header-icon {
-        width: 110px;
-        height: 110px;
-        margin: 0 auto;
-    }
-
-    .revenue-examples-header {
-        align-items: center;
-    }
-    
-    .revenue-examples-grid {
-        gap: 20px;
-        margin-bottom: 45px;
-    }
-
-    .revenue-example-card {
-        margin: 0 auto;
-        max-width: 100%;
-        padding: 22px 18px;
-    }
-
-    .revenue-card-header {
-        justify-content: center;
-        text-align: center;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .example-industry {
-        text-align: center;
-        width: 100%;
-    }
-    
-    .example-title {
-        font-size: 1.3rem;
-    }
-    
-    .revenue-model-benefits {
-        padding: 28px 20px;
-    }
-    
-    .revenue-model-benefits h4 {
-        font-size: 1.5rem;
-        margin-bottom: 25px;
-    }
-}
-
-@media (max-width: 480px) {
-    .revenue-examples-section {
-        padding: 28px 15px; /* FIXED: Even more padding on small mobile */
-    }
-
-    .revenue-header-icon {
-        width: 95px;
-        height: 95px;
-    }
-    
-    .revenue-examples-header h3 {
-        font-size: 1.8rem;
-    }
-    
-    .revenue-examples-header p {
-        font-size: 1rem;
-    }
-    
-    .revenue-examples-grid {
-        gap: 18px;
-        margin-bottom: 40px;
-    }
-    
-    .revenue-example-card {
-        padding: 20px 15px;
-    }
-    
-    .example-title {
-        font-size: 1.2rem;
-    }
-    
-    .example-scenario {
-        font-size: 0.85rem;
-    }
-    
-    .revenue-model-benefits {
-        padding: 22px 15px;
-    }
-    
-    .revenue-model-benefits h4 {
-        font-size: 1.4rem;
-        margin-bottom: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .revenue-examples-section {
-        padding: 35px 25px;
-        text-align: center;
-    }
-
-    .revenue-header-icon {
-        width: 110px;
-        height: 110px;
-        margin: 0 auto;
-    }
-
-    .revenue-examples-header {
-        align-items: center;
-    }
-
-    .revenue-example-card {
-        margin: 0 auto;
-        max-width: 100%;
-    }
-
-    .revenue-card-header {
-        justify-content: center;
-        text-align: center;
-        flex-wrap: wrap;
-    }
-
-    .example-industry {
-        text-align: center;
-        width: 100%;
-    }
-    
-    .revenue-model-benefits {
-        margin-top: 50px; /* Slightly reduced for mobile */
-        padding: 28px 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .revenue-examples-section {
-        padding: 28px 20px;
-    }
-
-    .revenue-header-icon {
-        width: 95px;
-        height: 95px;
-    }
-    
-    .revenue-examples-header h3 {
-        font-size: 1.8rem;
-    }
-    
-    .revenue-examples-header p {
-        font-size: 1rem;
-    }
-    
-    .revenue-model-benefits {
-        margin-top: 40px; /* Further reduced for small mobile */
-        padding: 22px 18px;
-    }
-    
-    .revenue-model-benefits h4 {
-        font-size: 1.4rem;
+        margin-bottom: 30px;
     }
 }
 
@@ -4930,6 +4767,13 @@ html {
         max-width: 100%;
     }
     
+    /* MOBILE: Bigger step badges still in upper right */
+    .step-number-badge {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    
     .cta-path-container {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -4984,19 +4828,8 @@ html {
     }
 
     .sdk-pricing-tiers {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    /* PRODUCTION READY: Revenue examples mobile fix */
-    .revenue-examples-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-
-    .benefits-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
     }
 
     .journey-paths {
@@ -5097,6 +4930,13 @@ html {
     
     .feature-card {
         padding: 30px 25px;
+    }
+    
+    /* MOBILE: Step badges still bigger */
+    .step-number-badge {
+        width: 42px;
+        height: 42px;
+        font-size: 1.25rem;
     }
     
     .hero-benefits-row {
@@ -5227,38 +5067,6 @@ html {
     .development-story-card {
         padding: 25px;
         gap: 18px;
-    }
-
-    /* PRODUCTION READY: Revenue section mobile centering */
-    .revenue-examples-section {
-        padding: 35px 25px;
-        text-align: center;
-    }
-
-    .revenue-header-icon {
-        width: 110px;
-        height: 110px;
-        margin: 0 auto;
-    }
-
-    .revenue-examples-header {
-        align-items: center;
-    }
-
-    .revenue-example-card {
-        margin: 0 auto;
-        max-width: 100%;
-    }
-
-    .revenue-card-header {
-        justify-content: center;
-        text-align: center;
-        flex-wrap: wrap;
-    }
-
-    .example-industry {
-        text-align: center;
-        width: 100%;
     }
 
     .cta-icon-image-enhanced {
@@ -5537,12 +5345,13 @@ html {
         height: 90px;
     }
     
+    /* MOBILE: Step badges bigger on small phones too */
     .step-number-badge {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
-        top: 10px;
-        right: 10px;
+        width: 38px;
+        height: 38px;
+        font-size: 1.15rem;
+        top: 8px;
+        right: 8px;
     }
     
     .step-title-premium {
@@ -5653,23 +5462,6 @@ html {
         gap: 15px;
         flex-direction: column;
         text-align: center;
-    }
-
-    .revenue-examples-section {
-        padding: 28px 20px;
-    }
-
-    .revenue-header-icon {
-        width: 95px;
-        height: 95px;
-    }
-    
-    .revenue-examples-header h3 {
-        font-size: 1.8rem;
-    }
-    
-    .revenue-examples-header p {
-        font-size: 1rem;
     }
 
     .cta-icon-image-enhanced {
@@ -5920,5 +5712,9 @@ html {
     .cta-path-icon {
         width: 22px;
         height: 22px;
+    }
+    
+    .sdk-pricing-tiers {
+        grid-template-columns: 1fr;
     }
 }
