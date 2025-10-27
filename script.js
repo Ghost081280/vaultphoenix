@@ -1,6 +1,8 @@
 // Vault Phoenix - Interactive JavaScript
+// HYBRID CHATBOT: Offline pre-written responses + Live AI fallback
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // UPDATED: Enhanced AI Agent with Location-Based AR + $Ember Token Focus
+// HYBRID MODE: Fast offline responses for common questions, AI for everything else
 // FIXED: Chatbot with proper message alignment and scroll prevention
 // FIXED: Removed auto-focus to prevent keyboard popup on mobile
 // CLEANED: Removed duplicate code now in shared-script.js
@@ -20,6 +22,194 @@ const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 // Chat state
 let conversationHistory = [];
 let isTyping = false;
+
+// ============================================
+// OFFLINE KNOWLEDGE BASE - PRE-WRITTEN RESPONSES
+// ============================================
+const offlineResponses = {
+    // Pricing questions
+    'pricing': {
+        keywords: ['price', 'cost', 'how much', 'pricing', 'payment', 'pay', 'expensive'],
+        response: `<strong>Vault Phoenix Pricing</strong><br><br>
+            <strong>White-Label Solution:</strong><br>
+            • $499 one-time setup fee<br>
+            • $149/month managed hosting<br>
+            • Includes $100 FREE $Ember tokens<br>
+            • 24-hour deployment<br>
+            • Complete management system<br><br>
+            
+            <strong>SDK Integration:</strong><br>
+            • FREE open-source SDK on GitHub<br>
+            • Management System Pricing:<br>
+            &nbsp;&nbsp;- Starter: $49/month<br>
+            &nbsp;&nbsp;- Growth: $149/month<br>
+            &nbsp;&nbsp;- Enterprise: $399/month<br>
+            • Includes $100 FREE $Ember tokens<br>
+            • Available early 2026<br><br>
+            
+            📧 <a href="mailto:contact@vaultphoenix.com?subject=Pricing Inquiry" style="color: #f0a500;">Get a custom quote: contact@vaultphoenix.com</a>`
+    },
+    
+    // Token presale questions
+    'presale': {
+        keywords: ['presale', 'token sale', 'buy tokens', 'ember token', '$ember', 'ico', 'token launch'],
+        response: `<strong>$Ember Token Presale</strong><br><br>
+            <strong>Launch Date:</strong> November 1, 2025<br>
+            <strong>Token Price:</strong> $0.003 per token<br>
+            <strong>Available Tokens:</strong> 166.7M tokens<br>
+            <strong>Hard Cap:</strong> $500,000<br><br>
+            
+            <strong>Token Allocation:</strong><br>
+            • 50% Public Presale (83.35M tokens)<br>
+            • 20% Ecosystem Development (33.34M tokens)<br>
+            • 15% Team & Advisors (25M tokens)<br>
+            • 10% Marketing (16.67M tokens)<br>
+            • 5% Liquidity Pool (8.34M tokens)<br><br>
+            
+            <strong>Benefits:</strong> No lock-up period for presale participants!<br><br>
+            
+            📧 <a href="mailto:contact@vaultphoenix.com?subject=Token Presale Inquiry" style="color: #f0a500;">Join the presale: contact@vaultphoenix.com</a>`
+    },
+    
+    // Technology questions
+    'technology': {
+        keywords: ['how does it work', 'technology', 'gps', 'beacon', 'ar', 'augmented reality', 'tech stack'],
+        response: `<strong>Vault Phoenix Technology</strong><br><br>
+            <strong>Location Technology:</strong><br>
+            • <strong>GPS:</strong> Outdoor precision (5-10m radius)<br>
+            • <strong>Beacons:</strong> Indoor precision (1-5m radius, centimeter-level accuracy)<br>
+            • Combined coverage = 100% indoor + outdoor accuracy<br><br>
+            
+            <strong>Platform Features:</strong><br>
+            • Web-based AR (no app store needed)<br>
+            • Cross-platform (iOS, Android, Desktop)<br>
+            • Real-time analytics dashboard<br>
+            • Crypto wallet integration<br>
+            • $Ember token rewards system<br><br>
+            
+            <strong>Battle-Tested:</strong><br>
+            • 6+ years of development<br>
+            • 12+ successful location-based AR games deployed<br>
+            • Now enhanced with cryptocurrency rewards<br><br>
+            
+            Want technical details? <a href="mailto:contact@vaultphoenix.com?subject=Technical Inquiry" style="color: #f0a500;">Contact our team</a>`
+    },
+    
+    // Revenue/ROI questions
+    'revenue': {
+        keywords: ['revenue', 'roi', 'return', 'profit', 'earn', 'make money', 'income'],
+        response: `<strong>Revenue Opportunities</strong><br><br>
+            <strong>Location Partner Revenue:</strong><br>
+            • Premium rates: <span class="golden-highlight">$10K-$75K per month</span><br>
+            • Revenue depends on industry and scale<br>
+            • Location partners pay for crypto coin placement<br><br>
+            
+            <strong>Proven Results:</strong><br>
+            • 3-5x increase in foot traffic during campaigns<br>
+            • GPS-verified visits for measurable ROI<br>
+            • Real-time analytics and engagement tracking<br><br>
+            
+            <strong>Industries Served:</strong><br>
+            • Sports venues & stadiums<br>
+            • Radio stations & media<br>
+            • Tourism & attractions<br>
+            • Retail & entertainment<br>
+            • Restaurants & culinary<br>
+            • Healthcare & education<br><br>
+            
+            📧 <a href="mailto:contact@vaultphoenix.com?subject=Revenue Inquiry" style="color: #f0a500;">Discuss your revenue potential: contact@vaultphoenix.com</a>`
+    },
+    
+    // Use case questions
+    'use-cases': {
+        keywords: ['use case', 'example', 'industry', 'application', 'what can', 'stadium', 'restaurant', 'retail'],
+        response: `<strong>Location-Based AR Use Cases</strong><br><br>
+            <strong>🏟️ Stadium Crypto Hunt</strong><br>
+            GPS for parking lots + Beacons for concession stands<br><br>
+            
+            <strong>📻 Morning Show Treasure Hunt</strong><br>
+            City-wide campaigns driving listeners to sponsor locations<br><br>
+            
+            <strong>🏛️ Historic Downtown Quest</strong><br>
+            Tourism with $Ember token rewards at landmarks<br><br>
+            
+            <strong>🛍️ Mall District Challenge</strong><br>
+            Retail foot traffic with beacon-enabled stores<br><br>
+            
+            <strong>🎵 Concert Crypto Series</strong><br>
+            Venue + surrounding businesses engagement<br><br>
+            
+            <strong>🍕 Foodie Crypto Trail</strong><br>
+            Restaurant discovery with token collection<br><br>
+            
+            Want a custom use case for your industry?<br>
+            📧 <a href="mailto:contact@vaultphoenix.com?subject=Use Case Inquiry" style="color: #f0a500;">Contact us: contact@vaultphoenix.com</a>`
+    },
+    
+    // Contact/demo questions
+    'contact': {
+        keywords: ['contact', 'demo', 'call', 'meeting', 'schedule', 'talk', 'speak', 'reach'],
+        response: `<strong>Get In Touch With Vault Phoenix</strong><br><br>
+            We'd love to show you how Location-Based AR with $Ember tokens can transform your business!<br><br>
+            
+            <strong>Contact Information:</strong><br>
+            📧 Email: <a href="mailto:contact@vaultphoenix.com" style="color: #f0a500; font-weight: bold;">contact@vaultphoenix.com</a><br><br>
+            
+            <strong>What to expect:</strong><br>
+            • Free consultation<br>
+            • Custom demo for your industry<br>
+            • ROI analysis<br>
+            • Technical implementation discussion<br><br>
+            
+            <strong>Response time:</strong> Within 24 hours<br><br>
+            
+            Ready to revolutionize your marketing?<br>
+            <a href="mailto:contact@vaultphoenix.com?subject=Demo Request&body=I'm interested in learning more about Vault Phoenix Location-Based AR with $Ember tokens." style="color: #f0a500; font-weight: bold;">Request a demo now!</a>`
+    },
+    
+    // Greeting responses
+    'greeting': {
+        keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings'],
+        response: `<strong>Welcome to Vault Phoenix!</strong><br><br>
+            I'm here to help you revolutionize your marketing with Location-Based AR and $Ember tokens!<br><br>
+            
+            <strong>Quick questions I can answer:</strong><br>
+            • Pricing and packages<br>
+            • $Ember token presale details<br>
+            • How the technology works<br>
+            • Revenue opportunities<br>
+            • Industry-specific use cases<br>
+            • Getting started / demos<br><br>
+            
+            What would you like to know? 🚀`
+    }
+};
+
+// ============================================
+// SMART KEYWORD MATCHING
+// ============================================
+function findOfflineResponse(userMessage) {
+    const messageLower = userMessage.toLowerCase();
+    
+    // Check each category for keyword matches
+    for (const [category, data] of Object.entries(offlineResponses)) {
+        const matchCount = data.keywords.filter(keyword => 
+            messageLower.includes(keyword.toLowerCase())
+        ).length;
+        
+        // If we find 1 or more matching keywords, return this response
+        if (matchCount > 0) {
+            console.log(`🔥 OFFLINE MATCH: Found "${category}" response (${matchCount} keywords matched)`);
+            return {
+                found: true,
+                category: category,
+                response: data.response
+            };
+        }
+    }
+    
+    return { found: false };
+}
 
 // Enhanced System Prompt for Vault Phoenix - UPDATED WITH ACCURATE INFO
 const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix, a revolutionary AR crypto gaming platform that combines GPS & Beacon location technology with blockchain rewards for location-based marketing campaigns.
@@ -97,7 +287,7 @@ Keep responses professional, enthusiastic, and focused on business value. Use sp
 // INITIALIZE CHATBOT - FIXED: No Auto-Focus
 // ============================================
 function initializeChatbot() {
-    console.log('🤖 Initializing Claude API Chatbot...');
+    console.log('🤖 Initializing HYBRID Chatbot (Offline + AI)...');
     
     const chatbotButton = document.querySelector('.chatbot-button-container');
     const chatbotWindow = document.querySelector('.chatbot-window');
@@ -149,7 +339,9 @@ function initializeChatbot() {
         });
     }
     
-    console.log('🤖 Chatbot initialized successfully!');
+    console.log('🤖 HYBRID Chatbot initialized successfully!');
+    console.log('⚡ Offline responses available for common questions');
+    console.log('🌐 AI fallback ready for complex queries');
 }
 
 // ============================================
@@ -185,6 +377,9 @@ function addWelcomeMessage() {
                             <li>Revenue opportunities ($10K-$75K/month)</li>
                             <li>Industry-specific use cases and ROI examples</li>
                         </ul>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(240, 165, 0, 0.1); border-left: 3px solid #f0a500; border-radius: 5px; font-size: 0.9rem;">
+                        ⚡ <strong>Hybrid Mode:</strong> Common questions get instant responses (offline). Complex questions use AI (online).
                     </div>
                 </div>
             </div>
@@ -277,7 +472,7 @@ window.handleFeaturedQuestion = function() {
 };
 
 // ============================================
-// SEND MESSAGE TO CLAUDE API - FIXED: No Auto-Focus
+// SEND MESSAGE - HYBRID MODE (OFFLINE FIRST, THEN AI)
 // ============================================
 async function sendMessage() {
     const chatbotInput = document.querySelector('.chatbot-input');
@@ -290,14 +485,6 @@ async function sendMessage() {
     
     if (!message || isTyping) return;
     
-    // Check if API key is configured
-    if (CLAUDE_API_KEY === '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') {
-        addMessage('user', message);
-        addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
-        chatbotInput.value = '';
-        return;
-    }
-    
     // Add user message to chat
     addMessage('user', message);
     chatbotInput.value = '';
@@ -307,6 +494,54 @@ async function sendMessage() {
     
     // Show typing indicator
     showTypingIndicator();
+    
+    // STEP 1: Check for offline response first
+    const offlineMatch = findOfflineResponse(message);
+    
+    if (offlineMatch.found) {
+        // OFFLINE RESPONSE FOUND - Use it instantly!
+        console.log('⚡ Using OFFLINE response - instant, no API cost!');
+        
+        // Simulate a brief "thinking" time for natural feel (shorter than AI)
+        setTimeout(() => {
+            removeTypingIndicator();
+            
+            // Add offline response badge
+            const responseWithBadge = `
+                <div style="display: inline-block; background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; margin-bottom: 8px; font-weight: 600;">
+                    ⚡ INSTANT RESPONSE
+                </div><br>
+                ${offlineMatch.response}
+            `;
+            
+            addMessage('assistant', responseWithBadge);
+            
+            // Add to conversation history
+            conversationHistory.push(
+                { role: 'user', content: message },
+                { role: 'assistant', content: offlineMatch.response.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ') }
+            );
+            
+            chatbotInput.disabled = false;
+            chatbotSend.disabled = false;
+            isTyping = false;
+        }, 600); // Faster than AI response
+        
+        return; // Exit - we're done!
+    }
+    
+    // STEP 2: No offline match - Use AI (requires internet + API key)
+    console.log('🌐 No offline match found - using AI for complex response...');
+    
+    // Check if API key is configured
+    if (CLAUDE_API_KEY === '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') {
+        removeTypingIndicator();
+        addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable AI responses. Get your key at: https://console.anthropic.com/');
+        chatbotInput.disabled = false;
+        chatbotSend.disabled = false;
+        isTyping = false;
+        return;
+    }
     
     try {
         // Prepare messages for API
@@ -348,6 +583,14 @@ async function sendMessage() {
         // Extract assistant's response
         const assistantMessage = data.content[0].text;
         
+        // Add AI response badge
+        const responseWithBadge = `
+            <div style="display: inline-block; background: rgba(139, 92, 246, 0.15); color: #a78bfa; padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; margin-bottom: 8px; font-weight: 600;">
+                🤖 AI RESPONSE
+            </div><br>
+            ${assistantMessage}
+        `;
+        
         // Add to conversation history
         conversationHistory.push(
             { role: 'user', content: message },
@@ -355,13 +598,13 @@ async function sendMessage() {
         );
         
         // Add assistant message to chat
-        addMessage('assistant', assistantMessage);
+        addMessage('assistant', responseWithBadge);
         
     } catch (error) {
         console.error('🤖 Chat Error:', error);
         removeTypingIndicator();
         
-        let errorMessage = '❌ Sorry, I encountered an error. ';
+        let errorMessage = '❌ Sorry, I encountered an error with the AI. ';
         
         if (error.message.includes('401')) {
             errorMessage += 'Invalid API key. Please check your configuration.';
@@ -369,6 +612,12 @@ async function sendMessage() {
             errorMessage += 'Rate limit exceeded. Please try again in a moment.';
         } else if (error.message.includes('500') || error.message.includes('529')) {
             errorMessage += 'Claude API is temporarily unavailable. Please try again.';
+        } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+            errorMessage += 'No internet connection. Try one of these common questions:<br><br>';
+            errorMessage += '• "What is the pricing?"<br>';
+            errorMessage += '• "Tell me about the presale"<br>';
+            errorMessage += '• "How does the technology work?"<br>';
+            errorMessage += '• "Show me use cases"';
         } else {
             errorMessage += 'Please try again or contact us at contact@vaultphoenix.com';
         }
@@ -378,7 +627,6 @@ async function sendMessage() {
         chatbotInput.disabled = false;
         chatbotSend.disabled = false;
         isTyping = false;
-        // FIXED: Removed chatbotInput.focus() - let user tap input manually on mobile
     }
 }
 
@@ -457,17 +705,26 @@ function escapeHtml(text) {
 
 function formatMessage(text) {
     // Convert markdown-style formatting to HTML
-    let formatted = escapeHtml(text);
+    let formatted = text;
+    
+    // Don't escape HTML if it already contains tags (for our pre-written responses)
+    if (!text.includes('<')) {
+        formatted = escapeHtml(text);
+    }
     
     // Bold text
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
-    // Bullet points
-    formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
-    formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    // Bullet points (only if not already formatted)
+    if (!text.includes('<ul>') && !text.includes('<li>')) {
+        formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
+        formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    }
     
-    // Line breaks
-    formatted = formatted.replace(/\n/g, '<br>');
+    // Line breaks (only if not already formatted)
+    if (!text.includes('<br>')) {
+        formatted = formatted.replace(/\n/g, '<br>');
+    }
     
     return formatted;
 }
@@ -600,7 +857,7 @@ document.addEventListener('DOMContentLoaded', function() {
     preloadPhoenixCryptoImages();
     initializeCryptoCoinImage();
     initializeEmberCoinImageV3();
-    initializeChatbot(); // Initialize Claude API chatbot
+    initializeChatbot(); // Initialize HYBRID chatbot
     initializeMobileAllocationCards(); // Initialize mobile allocation cards
     initializeCryptoBenefits();
     initializeEmberHighlightsV3();
@@ -610,9 +867,12 @@ document.addEventListener('DOMContentLoaded', function() {
     createPhoenixCryptoParticles();
     
     console.log('🔥🪙 Main page loaded seamlessly from loading screen!');
-    console.log('🤖 Claude API Chatbot ready with enhanced AI agent!');
+    console.log('🤖⚡ HYBRID Chatbot ready - Offline + AI!');
     console.log('📱 Mobile allocation cards initialized!');
 });
+
+// [REST OF THE CODE REMAINS EXACTLY THE SAME - All the gallery, animations, particles, etc.]
+// Continuing from line 800+...
 
 // ============================================
 // GALLERY FUNCTIONS
@@ -680,8 +940,8 @@ function changeLaptopImage(imageSrc, title) {
 
 // PRODUCTION READY: Enhanced scroll reveal animation with FASTER timing
 const observerOptions = {
-    threshold: 0.05, // Reduced from 0.1 for earlier trigger
-    rootMargin: '0px 0px -50px 0px' // Reduced from -80px for earlier trigger
+    threshold: 0.05,
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -689,7 +949,7 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             setTimeout(() => {
                 entry.target.classList.add('revealed');
-            }, index * 50); // Reduced from 100ms to 50ms for faster stagger
+            }, index * 50);
         }
     });
 }, observerOptions);
@@ -702,7 +962,6 @@ document.querySelectorAll('.scroll-reveal').forEach(el => {
 // INTERACTIVE CARD EFFECTS
 // ============================================
 
-// Enhanced interactive card effects with phoenix crypto animation
 document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .simple-thumb-laptop, .crypto-benefit, .ember-highlight-redesigned').forEach(card => {
     card.addEventListener('mouseenter', function() {
         if (this.classList.contains('simple-thumb') || this.classList.contains('simple-thumb-laptop')) {
@@ -715,7 +974,6 @@ document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .simple
             this.style.transform = 'translateY(-10px) scale(1.02)';
         }
         
-        // Add subtle phoenix glow effect
         if (this.classList.contains('feature-card') || this.classList.contains('use-case-card')) {
             this.style.boxShadow = '0 30px 80px rgba(215, 51, 39, 0.2)';
         }
@@ -739,7 +997,6 @@ document.querySelectorAll('.feature-card, .use-case-card, .simple-thumb, .simple
 // STATS ANIMATION
 // ============================================
 
-// Enhanced stats animation with realistic counting and phoenix crypto theme
 function animateStats() {
     const stats = document.querySelectorAll('.stat-number, .revenue-number');
     stats.forEach(stat => {
@@ -748,7 +1005,7 @@ function animateStats() {
         
         if (numericValue && numericValue > 0) {
             let currentValue = 0;
-            const duration = 2500; // Slightly longer for dramatic effect
+            const duration = 2500;
             const increment = numericValue / (duration / 50);
             
             const timer = setInterval(() => {
@@ -770,7 +1027,6 @@ function animateStats() {
     });
 }
 
-// Trigger stats animation when visible
 const heroObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -789,7 +1045,6 @@ if (heroSection) {
 // AUTO-ROTATE GALLERY
 // ============================================
 
-// UPDATED: Auto-rotate gallery showcase with NEW app screenshots
 let currentImageIndex = 0;
 const imageRotation = [
     { src: 'images/ARView.jpg', title: 'AR View' },
@@ -814,7 +1069,6 @@ function autoRotateGallery() {
     }
 }
 
-// Auto-rotate laptop gallery with management system screenshots
 let currentLaptopImageIndex = 0;
 const laptopImageRotation = [
     { src: 'images/CampaignControl.PNG', title: 'Campaign Control' },
@@ -839,16 +1093,14 @@ function autoRotateLaptopGallery() {
     }
 }
 
-// Start auto-rotation after page load
 let autoRotateInterval;
 let autoRotateLaptopInterval;
 
 setTimeout(() => {
-    autoRotateInterval = setInterval(autoRotateGallery, 4500); // Slightly slower for better UX
-    autoRotateLaptopInterval = setInterval(autoRotateLaptopGallery, 4500); // Same timing for laptop
+    autoRotateInterval = setInterval(autoRotateGallery, 4500);
+    autoRotateLaptopInterval = setInterval(autoRotateLaptopGallery, 4500);
 }, 3000);
 
-// Pause auto-rotation when user interacts with thumbnails
 document.querySelectorAll('.simple-thumb').forEach(thumb => {
     thumb.addEventListener('click', () => {
         if (autoRotateInterval) {
@@ -856,11 +1108,10 @@ document.querySelectorAll('.simple-thumb').forEach(thumb => {
         }
         setTimeout(() => {
             autoRotateInterval = setInterval(autoRotateGallery, 4500);
-        }, 15000); // Resume after 15 seconds
+        }, 15000);
     });
 });
 
-// Pause laptop auto-rotation when user interacts with laptop thumbnails
 document.querySelectorAll('.simple-thumb-laptop').forEach(thumb => {
     thumb.addEventListener('click', () => {
         if (autoRotateLaptopInterval) {
@@ -868,7 +1119,7 @@ document.querySelectorAll('.simple-thumb-laptop').forEach(thumb => {
         }
         setTimeout(() => {
             autoRotateLaptopInterval = setInterval(autoRotateLaptopGallery, 4500);
-        }, 15000); // Resume after 15 seconds
+        }, 15000);
     });
 });
 
@@ -876,12 +1127,9 @@ document.querySelectorAll('.simple-thumb-laptop').forEach(thumb => {
 // CTA BUTTON FEEDBACK
 // ============================================
 
-// Enhanced form validation and UX with phoenix crypto theme
 document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
     link.addEventListener('click', (e) => {
         console.log('🔥🪙 Phoenix crypto email CTA ignited:', link.href);
-        
-        // Add subtle animation feedback
         link.style.transform = 'scale(0.95)';
         setTimeout(() => {
             link.style.transform = '';
@@ -892,8 +1140,6 @@ document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
 document.querySelectorAll('a[href^="sms:"]').forEach(link => {
     link.addEventListener('click', (e) => {
         console.log('🔥🪙 Phoenix crypto SMS CTA ignited:', link.href);
-        
-        // Add subtle animation feedback
         link.style.transform = 'scale(0.95)';
         setTimeout(() => {
             link.style.transform = '';
@@ -905,18 +1151,14 @@ document.querySelectorAll('a[href^="sms:"]').forEach(link => {
 // PAGE LOAD HANDLING
 // ============================================
 
-// FIXED: Enhanced page load handling for seamless transition
 window.addEventListener('load', () => {
-    // FIXED: Page is already fully loaded and visible - no additional fade-in needed
     console.log('🔥🪙 Main page fully loaded and ready!');
     
-    // Optional: Add phoenix flame effect to logo after load
     const logoIcon = document.querySelector('.logo-icon');
     if (logoIcon) {
         logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
     }
     
-    // FIXED: Performance monitoring and status checks
     setTimeout(() => {
         const floatingCoins = document.querySelector('.hero-floating-coins');
         if (floatingCoins) {
@@ -926,7 +1168,6 @@ window.addEventListener('load', () => {
         }
     }, 500);
     
-    // Check if NEW app gallery is working
     setTimeout(() => {
         const mainScreenshot = document.getElementById('mainScreenshot');
         if (mainScreenshot && (mainScreenshot.src.includes('ARView') || mainScreenshot.src.includes('Ember'))) {
@@ -936,7 +1177,6 @@ window.addEventListener('load', () => {
         }
     }, 300);
     
-    // Check if management system laptop gallery is working
     setTimeout(() => {
         const mainLaptopScreenshot = document.getElementById('mainLaptopScreenshot');
         if (mainLaptopScreenshot && mainLaptopScreenshot.src.includes('.PNG')) {
@@ -946,7 +1186,6 @@ window.addEventListener('load', () => {
         }
     }, 400);
     
-    // Check if countdown is working
     setTimeout(() => {
         const mainDays = document.getElementById('main-days');
         if (mainDays && mainDays.textContent !== '--') {
@@ -961,7 +1200,6 @@ window.addEventListener('load', () => {
 // IMAGE ERROR HANDLING
 // ============================================
 
-// Add error handling for images with phoenix crypto fallback
 document.querySelectorAll('img').forEach(img => {
     img.addEventListener('error', function() {
         console.warn('🔥🪙 Phoenix crypto image failed to load:', this.src);
@@ -978,29 +1216,25 @@ document.querySelectorAll('img').forEach(img => {
 // IMAGE PRELOADING
 // ============================================
 
-// UPDATED: Preload critical phoenix crypto images including NEW app screenshots
 function preloadPhoenixCryptoImages() {
     const criticalImages = [
-        // NEW App Screenshots
         'images/ARView.jpg',
         'images/EmberAirdrop.jpg',
         'images/EmberCollected.jpg',
         'images/EmberNearby.jpg',
         'images/EmberVault.jpg',
         'images/HuntMap.jpg',
-        // Management System Screenshots
         'images/CampaignControl.PNG',
         'images/DashboardOverview.PNG',
         'images/AdvertiserManagement.PNG',
         'images/AirdropCenter.PNG',
         'images/Walletandfunding.PNG',
         'images/AppbuilderSDK.PNG',
-        // Other Critical Images
         'images/VPEmberCoin.PNG',
         'images/PhoenixHoldingCoin.PNG',
         'images/VPLogoNoText.PNG',
-        'images/PhoenixBot.PNG', // Chatbot image
-        'images/VPEmberFlame.svg' // Ember flame SVG
+        'images/PhoenixBot.PNG',
+        'images/VPEmberFlame.svg'
     ];
     
     criticalImages.forEach(src => {
@@ -1015,7 +1249,6 @@ function preloadPhoenixCryptoImages() {
 // FLOATING CRYPTO PARTICLES
 // ============================================
 
-// FIXED: Phoenix crypto coin floating effect - NOW USES CORRECT VPEmberCoin.PNG
 function createPhoenixCryptoParticles() {
     const hero = document.querySelector('.hero');
     if (!hero) {
@@ -1025,7 +1258,6 @@ function createPhoenixCryptoParticles() {
     
     console.log('🔥🪙 Creating floating crypto coins with VPEmberCoin.PNG...');
     
-    // Create floating coins container that stays strictly in background
     const floatingCoins = document.createElement('div');
     floatingCoins.className = 'hero-floating-coins';
     floatingCoins.style.cssText = `
@@ -1039,7 +1271,6 @@ function createPhoenixCryptoParticles() {
         overflow: hidden;
     `;
     
-    // FIXED: Coin positions with better spacing and visibility
     const coinPositions = [
         { top: '15%', left: '10%', delay: '0s', duration: '6s' },
         { top: '70%', left: '8%', delay: '1s', duration: '7s' },
@@ -1053,9 +1284,8 @@ function createPhoenixCryptoParticles() {
         const coin = document.createElement('div');
         coin.className = `hero-coin hero-coin-${index + 1}`;
         
-        // FIXED: Create proper image element for VPEmberCoin.PNG
         const coinImg = document.createElement('img');
-        coinImg.src = 'images/VPEmberCoin.PNG'; // CORRECT EMBER COIN IMAGE
+        coinImg.src = 'images/VPEmberCoin.PNG';
         coinImg.alt = 'VP Ember Coin';
         coinImg.className = 'hero-crypto-coin-icon';
         coinImg.style.cssText = `
@@ -1068,14 +1298,12 @@ function createPhoenixCryptoParticles() {
             border-radius: 50%;
         `;
         
-        // Handle image load success/failure
         coinImg.onload = function() {
             console.log(`🔥🪙 VPEmberCoin.PNG loaded successfully for coin ${index + 1}`);
         };
         
         coinImg.onerror = function() {
             console.warn(`🔥🪙 VPEmberCoin.PNG failed to load for coin ${index + 1}, using emoji fallback`);
-            // Replace with emoji fallback if image fails
             coinImg.style.display = 'none';
             const fallback = document.createElement('div');
             fallback.innerHTML = '🪙';
@@ -1093,7 +1321,6 @@ function createPhoenixCryptoParticles() {
         
         coin.appendChild(coinImg);
         
-        // Apply positioning with proper z-index
         coin.style.cssText = `
             position: absolute;
             animation: heroCoinFloat ${pos.duration} ease-in-out infinite;
@@ -1110,11 +1337,9 @@ function createPhoenixCryptoParticles() {
         console.log(`🔥🪙 Created floating VPEmberCoin ${index + 1} at position:`, pos);
     });
     
-    // Insert at the very beginning of hero section to ensure background positioning
     hero.insertBefore(floatingCoins, hero.firstChild);
     console.log('🔥🪙 Floating VPEmberCoin coins container added to hero');
     
-    // FIXED: Add working CSS animation
     const style = document.createElement('style');
     style.textContent = `
         @keyframes heroCoinFloat {
@@ -1136,7 +1361,6 @@ function createPhoenixCryptoParticles() {
             }
         }
         
-        /* Ensure coins stay in background but are visible */
         .hero-floating-coins,
         .hero-coin {
             z-index: 1 !important;
@@ -1148,7 +1372,6 @@ function createPhoenixCryptoParticles() {
             pointer-events: none !important;
         }
         
-        /* Mobile responsive sizing */
         @media (max-width: 768px) {
             .hero-crypto-coin-icon {
                 width: clamp(25px, 4vw, 35px) !important;
@@ -1173,12 +1396,10 @@ function createPhoenixCryptoParticles() {
 // COIN IMAGE INTERACTIONS
 // ============================================
 
-// Enhanced crypto coin image interaction
 function initializeCryptoCoinImage() {
     const cryptoImage = document.querySelector('.phoenix-coin-image');
     if (!cryptoImage) return;
     
-    // Add special crypto coin glow effect on hover
     cryptoImage.addEventListener('mouseenter', function() {
         this.style.filter = 'drop-shadow(0 0 30px rgba(251, 146, 60, 0.8)) brightness(1.1)';
     });
@@ -1187,22 +1408,19 @@ function initializeCryptoCoinImage() {
         this.style.filter = '';
     });
     
-    // Add subtle side-to-side floating animation
     let time = 0;
     setInterval(() => {
         time += 0.02;
-        const sideMovement = Math.sin(time) * 8; // Move 8px side to side
-        const upDownMovement = Math.cos(time * 0.8) * 3; // Subtle up/down movement
+        const sideMovement = Math.sin(time) * 8;
+        const upDownMovement = Math.cos(time * 0.8) * 3;
         cryptoImage.style.transform = `translateX(${sideMovement}px) translateY(${upDownMovement}px)`;
     }, 50);
 }
 
-// Enhanced: V3 Ember coin image interaction for the new enhanced section
 function initializeEmberCoinImageV3() {
     const emberCoinImage = document.querySelector('.phoenix-holding-coin-redesigned');
     if (!emberCoinImage) return;
     
-    // Add special ember coin glow effect on hover
     emberCoinImage.addEventListener('mouseenter', function() {
         this.style.filter = 'drop-shadow(0 0 50px rgba(240, 165, 0, 0.9)) brightness(1.2)';
         this.style.transform = 'scale(1.1) translateY(-10px)';
@@ -1218,7 +1436,6 @@ function initializeEmberCoinImageV3() {
 // CRYPTO BENEFITS ANIMATIONS
 // ============================================
 
-// Crypto benefits animation on scroll
 function initializeCryptoBenefits() {
     const benefits = document.querySelectorAll('.crypto-benefit');
     if (!benefits.length) return;
@@ -1230,7 +1447,6 @@ function initializeCryptoBenefits() {
                     entry.target.style.transform = 'translateX(0)';
                     entry.target.style.opacity = '1';
                     
-                    // Add a subtle coin bounce effect
                     const icon = entry.target.querySelector('.benefit-icon');
                     if (icon) {
                         icon.style.animation = 'coinBounce 0.6s ease-out';
@@ -1246,7 +1462,6 @@ function initializeCryptoBenefits() {
         benefitsObserver.observe(benefit);
     });
     
-    // Add coin bounce animation
     const coinBounceStyle = document.createElement('style');
     coinBounceStyle.textContent = `
         @keyframes coinBounce {
@@ -1258,7 +1473,6 @@ function initializeCryptoBenefits() {
     document.head.appendChild(coinBounceStyle);
 }
 
-// Enhanced: Ember highlights animation on scroll for the redesigned section
 function initializeEmberHighlightsV3() {
     const highlights = document.querySelectorAll('.ember-highlight-redesigned');
     if (!highlights.length) return;
@@ -1270,7 +1484,6 @@ function initializeEmberHighlightsV3() {
                     entry.target.style.transform = 'translateX(0)';
                     entry.target.style.opacity = '1';
                     
-                    // Add ember flame flicker effect
                     const emoji = entry.target.querySelector('.highlight-emoji-redesigned');
                     if (emoji) {
                         emoji.style.animation = 'emberFlickerV3 1s ease-in-out';
@@ -1286,7 +1499,6 @@ function initializeEmberHighlightsV3() {
         highlightsObserver.observe(highlight);
     });
     
-    // Add ember flicker animation V3
     const emberFlickerStyleV3 = document.createElement('style');
     emberFlickerStyleV3.textContent = `
         @keyframes emberFlickerV3 {
@@ -1303,14 +1515,12 @@ function initializeEmberHighlightsV3() {
 // CTA BUTTON ENHANCEMENTS
 // ============================================
 
-// Enhanced interactive feedback for all CTA buttons with crypto theme
 document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .join-presale-button-redesigned, .demo-button-enhanced').forEach(button => {
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
-        // Add subtle coin sparkle effect using VPEmberCoin image
         if (Math.random() > 0.7) {
             const sparkle = document.createElement('img');
-            sparkle.src = 'images/VPEmberCoin.PNG'; // CORRECT COIN IMAGE
+            sparkle.src = 'images/VPEmberCoin.PNG';
             sparkle.alt = 'VP Ember Coin Sparkle';
             sparkle.style.cssText = `
                 position: absolute;
@@ -1325,7 +1535,6 @@ document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-butt
                 border-radius: 50%;
             `;
             
-            // Fallback to emoji if image fails
             sparkle.onerror = function() {
                 this.style.display = 'none';
                 const fallback = document.createElement('div');
@@ -1355,7 +1564,6 @@ document.querySelectorAll('.cta-button, .cta-primary, .cta-secondary, .demo-butt
     });
 });
 
-// Add sparkle animation CSS
 const sparkleStyle = document.createElement('style');
 sparkleStyle.textContent = `
     @keyframes sparkle {
@@ -1369,7 +1577,6 @@ document.head.appendChild(sparkleStyle);
 // SCROLL PROGRESS INDICATOR
 // ============================================
 
-// Phoenix crypto-themed scroll progress indicator
 function createPhoenixCryptoScrollIndicator() {
     const indicator = document.createElement('div');
     indicator.style.cssText = `
@@ -1397,7 +1604,6 @@ function createPhoenixCryptoScrollIndicator() {
 // EASTER EGG: KONAMI CODE
 // ============================================
 
-// Easter egg: Konami code for bonus crypto coins - UPDATED WITH VPEmberCoin.PNG
 let konamiCode = [];
 const konamiSequence = [
     'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
@@ -1412,12 +1618,11 @@ document.addEventListener('keydown', (e) => {
     }
     
     if (konamiCode.join(',') === konamiSequence.join(',')) {
-        // Trigger bonus crypto coin rain with VPEmberCoin.PNG
         console.log('🔥🪙 BONUS CRYPTO ACTIVATED! 🪙🔥');
         for (let i = 0; i < 30; i++) {
             setTimeout(() => {
                 const coin = document.createElement('img');
-                coin.src = 'images/VPEmberCoin.PNG'; // CORRECT COIN IMAGE
+                coin.src = 'images/VPEmberCoin.PNG';
                 coin.alt = 'VP Ember Bonus Coin';
                 coin.style.cssText = `
                     position: fixed;
@@ -1432,7 +1637,6 @@ document.addEventListener('keydown', (e) => {
                     border-radius: 50%;
                 `;
                 
-                // Fallback to emoji if image fails
                 coin.onerror = function() {
                     this.style.display = 'none';
                     const fallback = document.createElement('div');
@@ -1449,7 +1653,6 @@ document.addEventListener('keydown', (e) => {
             }, i * 150);
         }
         
-        // Add coin fall animation
         const coinFallStyle = document.createElement('style');
         coinFallStyle.textContent = `
             @keyframes coinFall {
@@ -1461,7 +1664,7 @@ document.addEventListener('keydown', (e) => {
         `;
         document.head.appendChild(coinFallStyle);
         
-        konamiCode = []; // Reset
+        konamiCode = [];
     }
 });
 
@@ -1469,15 +1672,13 @@ document.addEventListener('keydown', (e) => {
 // CONSOLE MESSAGES
 // ============================================
 
-// Console welcome message with phoenix crypto theme
 console.log('%c🔥🪙 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
 console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
 console.log('%c📧 Contact: contact@vaultphoenix.com', 'color: #374151; font-size: 14px;');
 console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with NEW app screenshots!', 'color: #d73327; font-size: 12px; font-style: italic;');
 console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
-console.log('🤖 Enhanced AI Agent: Ask about Location-Based AR with $Ember tokens!');
+console.log('🤖⚡ HYBRID Chatbot: Instant offline responses + AI for complex questions!');
 
-// Performance monitoring with phoenix crypto theme
 window.addEventListener('load', () => {
     const loadTime = performance.now();
     console.log(`%c🔥🪙 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect VPEmberCoins!`, 'color: #22c55e; font-weight: bold;');
