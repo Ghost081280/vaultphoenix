@@ -263,8 +263,7 @@ window.handleFeaturedQuestion = function() {
             <strong style="font-size: 1.1rem; color: #f0a500;">Ready to Deploy?</strong><br>
             Launch AR campaigns anywhere — indoors or outdoors — powered by GPS and beacons. Drive real-world engagement with $Ember token rewards!<br><br>
             
-            📧 <a href="mailto:contact@vaultphoenix.com?subject=Location-Based AR Inquiry&body=I'm interested in learning more about Vault Phoenix Location-Based AR with $Ember tokens." style="color: #f0a500; font-weight: bold; text-decoration: underline;">Contact us today: contact@vaultphoenix.com</a><br>
-            📱 Call: (949) 357-4416
+            📧 <a href="mailto:contact@vaultphoenix.com?subject=Location-Based AR Inquiry&body=I'm interested in learning more about Vault Phoenix Location-Based AR with $Ember tokens." style="color: #f0a500; font-weight: bold; text-decoration: underline;">Contact us today: contact@vaultphoenix.com</a>
         `;
         
         addMessage('assistant', arContent);
@@ -1473,7 +1472,7 @@ document.addEventListener('keydown', (e) => {
 // Console welcome message with phoenix crypto theme
 console.log('%c🔥🪙 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
 console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
-console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
+console.log('%c📧 Contact: contact@vaultphoenix.com', 'color: #374151; font-size: 14px;');
 console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with NEW app screenshots!', 'color: #d73327; font-size: 12px; font-style: italic;');
 console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
 console.log('🤖 Enhanced AI Agent: Ask about Location-Based AR with $Ember tokens!');
