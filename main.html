@@ -63,178 +63,6 @@
     <!-- Page-specific Styles -->
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Enhanced Glow Effects -->
-    <style>
-        /* Enhanced glow effects for better visibility */
-        .ember-glow-redesigned,
-        .crypto-image-glow,
-        .phoenix-safe-glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(240, 165, 0, 0.4) 0%, rgba(240, 165, 0, 0.2) 40%, transparent 70%);
-            filter: blur(30px);
-            animation: pulse-glow 3s ease-in-out infinite;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        @keyframes pulse-glow {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-        }
-        
-        /* Chatbot glow enhancement */
-        .chatbot-glow {
-            position: absolute;
-            width: 120%;
-            height: 120%;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(240, 165, 0, 0.5) 0%, rgba(240, 165, 0, 0.3) 50%, transparent 70%);
-            filter: blur(20px);
-            animation: pulse-glow 2s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        /* Enhanced icon sizing for better mobile visibility */
-        .feature-coin-icon,
-        .feature-ar-discovery-icon,
-        .feature-crypto-gaming-icon,
-        .feature-revenue-icon,
-        .feature-phoenix-brand-icon,
-        .feature-analytics-icon {
-            width: 80px !important;
-            height: 80px !important;
-            min-width: 80px !important;
-            min-height: 80px !important;
-        }
-        
-        @media (max-width: 768px) {
-            .feature-coin-icon,
-            .feature-ar-discovery-icon,
-            .feature-crypto-gaming-icon,
-            .feature-revenue-icon,
-            .feature-phoenix-brand-icon,
-            .feature-analytics-icon {
-                width: 70px !important;
-                height: 70px !important;
-                min-width: 70px !important;
-                min-height: 70px !important;
-            }
-        }
-        
-        /* Benefit icon sizing improvements */
-        .benefit-icon-small {
-            width: 48px !important;
-            height: 48px !important;
-            min-width: 48px !important;
-            min-height: 48px !important;
-        }
-        
-        .custom-coin-icon-large,
-        .custom-placement-icon-large {
-            width: 64px !important;
-            height: 64px !important;
-            min-width: 64px !important;
-            min-height: 64px !important;
-        }
-        
-        .custom-revenue-icon-extra-large {
-            width: 72px !important;
-            height: 72px !important;
-            min-width: 72px !important;
-            min-height: 72px !important;
-        }
-        
-        /* Technology icons */
-        .technology-icon {
-            width: 64px !important;
-            height: 64px !important;
-            min-width: 64px !important;
-            min-height: 64px !important;
-        }
-        
-        /* Additional spacing after "Why Location Partners Pay Premium Rates" */
-        .revenue-model-benefits {
-            margin-top: 60px;
-            padding-top: 40px;
-        }
-        
-        @media (max-width: 768px) {
-            .revenue-model-benefits {
-                margin-top: 50px;
-                padding-top: 30px;
-            }
-        }
-        
-        /* Use case icon improvements */
-        .use-case-icon-image-large {
-            width: 80px !important;
-            height: 80px !important;
-            min-width: 80px !important;
-            min-height: 80px !important;
-        }
-        
-        @media (max-width: 768px) {
-            .use-case-icon-image-large {
-                width: 70px !important;
-                height: 70px !important;
-                min-width: 70px !important;
-                min-height: 70px !important;
-            }
-        }
-        
-        /* Revenue industry icons */
-        .revenue-industry-icon {
-            width: 56px !important;
-            height: 56px !important;
-            min-width: 56px !important;
-            min-height: 56px !important;
-        }
-        
-        /* Social share icons visibility */
-        .social-sharing-icon-compact {
-            width: 56px !important;
-            height: 56px !important;
-            min-width: 56px !important;
-            min-height: 56px !important;
-        }
-        
-        @media (max-width: 768px) {
-            .social-sharing-icon-compact {
-                width: 48px !important;
-                height: 48px !important;
-                min-width: 48px !important;
-                min-height: 48px !important;
-            }
-        }
-        
-        /* Hero benefits icons */
-        .benefit-icon-small {
-            width: 40px !important;
-            height: 40px !important;
-            min-width: 40px !important;
-            min-height: 40px !important;
-        }
-        
-        @media (max-width: 768px) {
-            .benefit-icon-small {
-                width: 36px !important;
-                height: 36px !important;
-                min-width: 36px !important;
-                min-height: 36px !important;
-            }
-        }
-    </style>
-    
     <!-- Structured Data (JSON-LD) - Organization -->
     <script type="application/ld+json">
     {
@@ -447,7 +275,9 @@
                 <div class="step-premium">
                     <div class="step-number-badge">1</div>
                     <div class="step-visual">
-                        <img src="images/EmberAnalytics.PNG" alt="Dashboard" class="step-image">
+                        <div class="image-with-glow">
+                            <img src="images/EmberAnalytics.PNG" alt="Dashboard" class="step-image">
+                        </div>
                     </div>
                     <div class="step-content">
                         <h3 class="step-title-premium">Sign In</h3>
@@ -460,7 +290,9 @@
                 <div class="step-premium">
                     <div class="step-number-badge">2</div>
                     <div class="step-visual">
-                        <img src="images/PhoenixDesign.PNG" alt="Customize" class="step-image">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixDesign.PNG" alt="Customize" class="step-image">
+                        </div>
                     </div>
                     <div class="step-content">
                         <h3 class="step-title-premium">Configure & Brand</h3>
@@ -473,7 +305,9 @@
                 <div class="step-premium">
                     <div class="step-number-badge">3</div>
                     <div class="step-visual">
-                        <img src="images/EmberCoinRocket.PNG" alt="Launch" class="step-image">
+                        <div class="image-with-glow">
+                            <img src="images/EmberCoinRocket.PNG" alt="Launch" class="step-image">
+                        </div>
                     </div>
                     <div class="step-content">
                         <h3 class="step-title-premium">Launch & Earn</h3>
@@ -490,7 +324,9 @@
                         <h3 class="path-title">No-Code App Builder</h3>
                         <p class="path-description">Launch fully-branded AR crypto campaigns instantly—no technical skills required.</p>
                         <a href="mailto:contact@vaultphoenix.com?subject=White-Label App Builder&body=I'm interested in the no-code white-label app builder. Please send me details about getting started." class="cta-path-button whitelabel-button" aria-label="Contact us about white-label app builder">
-                            <img src="images/VPLogoNoText.PNG" alt="White-Label" class="cta-path-icon">
+                            <div class="image-with-glow">
+                                <img src="images/VPLogoNoText.PNG" alt="White-Label" class="cta-path-icon">
+                            </div>
                             <span>Launch White-Label App</span>
                         </a>
                     </div>
@@ -522,19 +358,27 @@
             <!-- Key Benefits Row -->
             <div class="hero-benefits-row fade-in stagger-3">
                 <div class="hero-benefit-item">
-                    <img src="images/PhoenixBullseye.PNG" alt="Precise Targeting" class="benefit-icon-small">
+                    <div class="image-with-glow">
+                        <img src="images/PhoenixBullseye.PNG" alt="Precise Targeting" class="benefit-icon-small">
+                    </div>
                     <span>GPS & Beacon Precision</span>
                 </div>
                 <div class="hero-benefit-item">
-                    <img src="images/VPEmberCoin.PNG" alt="Crypto Rewards" class="benefit-icon-small">
+                    <div class="image-with-glow">
+                        <img src="images/VPEmberCoin.PNG" alt="Crypto Rewards" class="benefit-icon-small">
+                    </div>
                     <span>Real Crypto Rewards</span>
                 </div>
                 <div class="hero-benefit-item">
-                    <img src="images/EmberAnalytics.PNG" alt="Analytics" class="benefit-icon-small">
+                    <div class="image-with-glow">
+                        <img src="images/EmberAnalytics.PNG" alt="Analytics" class="benefit-icon-small">
+                    </div>
                     <span>Real-Time Analytics</span>
                 </div>
                 <div class="hero-benefit-item">
-                    <img src="images/EmberRepeatArrows.PNG" alt="Easy Integration" class="benefit-icon-small">
+                    <div class="image-with-glow">
+                        <img src="images/EmberRepeatArrows.PNG" alt="Easy Integration" class="benefit-icon-small">
+                    </div>
                     <span>24hr Deployment</span>
                 </div>
             </div>
@@ -556,7 +400,9 @@
                     <div class="ember-countdown-widget-redesigned scroll-reveal stagger-2">
                         <div class="countdown-header-redesigned">
                             <div class="countdown-icon-redesigned">
-                                <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-countdown-icon-redesigned">
+                                <div class="image-with-glow">
+                                    <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="ember-countdown-icon-redesigned">
+                                </div>
                             </div>
                             <div class="countdown-text-redesigned">
                                 <h3>$Ember Presale Launch</h3>
@@ -605,7 +451,9 @@
                         <!-- Join Presale CTA Button -->
                         <div class="presale-cta-redesigned">
                             <a href="ember.html#presale" class="join-presale-button-redesigned" aria-label="Learn more about $Ember Token presale">
-                                <img src="images/VPEmberFlame.svg" alt="Ember Flame" class="cta-icon-image-redesigned">
+                                <div class="image-with-glow">
+                                    <img src="images/VPEmberFlame.svg" alt="Ember Flame" class="cta-icon-image-redesigned">
+                                </div>
                                 <span class="cta-text-redesigned">$Ember Token</span>
                             </a>
                         </div>
@@ -615,21 +463,27 @@
                     <div class="ember-highlights-redesigned scroll-reveal stagger-4">
                         <a href="ember.html#whitepaper" class="ember-highlight-redesigned" aria-label="View technical documentation">
                             <span class="highlight-emoji-redesigned">
-                                <img src="images/PhoenixWhitepaper.PNG" alt="Whitepaper" class="highlight-icon-image-redesigned">
+                                <div class="image-with-glow">
+                                    <img src="images/PhoenixWhitepaper.PNG" alt="Whitepaper" class="highlight-icon-image-redesigned">
+                                </div>
                             </span>
                             <span class="highlight-text-redesigned">Technical Documentation</span>
                             <span class="highlight-arrow-redesigned">→</span>
                         </a>
                         <a href="ember.html#roadmap" class="ember-highlight-redesigned" aria-label="View development roadmap">
                             <span class="highlight-emoji-redesigned">
-                                <img src="images/EmberRoadmap.PNG" alt="Roadmap" class="highlight-icon-image-redesigned">
+                                <div class="image-with-glow">
+                                    <img src="images/EmberRoadmap.PNG" alt="Roadmap" class="highlight-icon-image-redesigned">
+                                </div>
                             </span>
                             <span class="highlight-text-redesigned">Development Roadmap</span>
                             <span class="highlight-arrow-redesigned">→</span>
                         </a>
                         <a href="ember.html#team" class="ember-highlight-redesigned" aria-label="Meet the Phoenix Builders team">
                             <span class="highlight-emoji-redesigned">
-                                <img src="images/PhoenixGoldTrophy.PNG" alt="Phoenix Builders" class="highlight-icon-image-redesigned">
+                                <div class="image-with-glow">
+                                    <img src="images/PhoenixGoldTrophy.PNG" alt="Phoenix Builders" class="highlight-icon-image-redesigned">
+                                </div>
                             </span>
                             <span class="highlight-text-redesigned">Phoenix Builders</span>
                             <span class="highlight-arrow-redesigned">→</span>
@@ -641,16 +495,19 @@
                 <div class="ember-token-right-redesigned">
                     <!-- Phoenix Holding Coin -->
                     <div class="ember-phoenix-container-redesigned scroll-reveal">
-                        <img src="images/PhoenixHoldingCoin.PNG" alt="Phoenix Holding Crypto Coin" class="phoenix-holding-coin-redesigned">
-                        <div class="ember-glow-redesigned"></div>
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixHoldingCoin.PNG" alt="Phoenix Holding Crypto Coin" class="phoenix-holding-coin-redesigned">
+                        </div>
                     </div>
                     
                     <!-- Professional Legal & Financial Oversight -->
                     <div class="compliance-disclaimer-redesigned scroll-reveal stagger-4">
-                        <h3>
-                            <img src="images/EmberCoinLock.PNG" alt="Security" class="compliance-icon-redesigned">
+                        <h4>
+                            <div class="image-with-glow">
+                                <img src="images/EmberCoinLock.PNG" alt="Security" class="compliance-icon-redesigned">
+                            </div>
                             Regulatory Compliance
-                        </h3>
+                        </h4>
                         <p>Vault Phoenix operates under comprehensive regulatory oversight with institutional-grade compliance procedures, multi-signature treasury management, and professional legal frameworks ensuring maximum security and transparency.</p>
                         
                         <div class="compliance-cta">
@@ -669,7 +526,9 @@
         <div class="container">
             <div class="social-sharing-content-compact scroll-reveal">
                 <div class="social-sharing-header-compact">
-                    <img src="images/EmberRepeatArrows.PNG" alt="Share Icon" class="social-sharing-icon-compact">
+                    <div class="image-with-glow">
+                        <img src="images/EmberRepeatArrows.PNG" alt="Share Icon" class="social-sharing-icon-compact">
+                    </div>
                     <div class="social-sharing-text-compact">
                         <h2 class="social-sharing-title-compact">Spread the Phoenix Fire</h2>
                         <p class="social-sharing-subtitle-compact">Share Vault Phoenix with your network and be part of the AR crypto gaming revolution!</p>
@@ -707,8 +566,9 @@
         <div class="container">
             <div class="crypto-content">
                 <div class="crypto-image">
-                    <img src="images/EmberCoinStorefront.PNG" alt="Ember Coin at Storefront" class="phoenix-coin-image scroll-reveal">
-                    <div class="crypto-image-glow"></div>
+                    <div class="image-with-glow">
+                        <img src="images/EmberCoinStorefront.PNG" alt="Ember Coin at Storefront" class="phoenix-coin-image scroll-reveal">
+                    </div>
                 </div>
                 <div class="crypto-text">
                     <h2 class="crypto-title scroll-reveal">Deploy Crypto Coins Anywhere</h2>
@@ -718,7 +578,9 @@
                     <div class="crypto-benefits scroll-reveal stagger-2">
                         <div class="crypto-benefit">
                             <span class="benefit-icon coin-image">
-                                <img src="images/VPEmberCoin.PNG" alt="Crypto Coin" class="custom-coin-icon-large">
+                                <div class="image-with-glow">
+                                    <img src="images/VPEmberCoin.PNG" alt="Crypto Coin" class="custom-coin-icon-large">
+                                </div>
                             </span>
                             <div class="benefit-content">
                                 <h3>Collectible Crypto Coins</h3>
@@ -727,7 +589,9 @@
                         </div>
                         <div class="crypto-benefit">
                             <span class="benefit-icon placement-image">
-                                <img src="images/PhoenixBullseye.PNG" alt="Strategic Placement" class="custom-placement-icon-large">
+                                <div class="image-with-glow">
+                                    <img src="images/PhoenixBullseye.PNG" alt="Strategic Placement" class="custom-placement-icon-large">
+                                </div>
                             </span>
                             <div class="benefit-content">
                                 <h3>Strategic Placement</h3>
@@ -736,7 +600,9 @@
                         </div>
                         <div class="crypto-benefit">
                             <span class="benefit-icon revenue-image">
-                                <img src="images/EmberCoinMoneyBag.PNG" alt="Revenue Generation" class="custom-revenue-icon-extra-large">
+                                <div class="image-with-glow">
+                                    <img src="images/EmberCoinMoneyBag.PNG" alt="Revenue Generation" class="custom-revenue-icon-extra-large">
+                                </div>
                             </span>
                             <div class="benefit-content">
                                 <h3>Revenue Generation</h3>
@@ -757,7 +623,9 @@
                     <div class="technology-card gps-card">
                         <div class="technology-header">
                             <div class="technology-icon-container">
-                                <img src="images/PhoenixBullseye.PNG" alt="GPS Technology" class="technology-icon">
+                                <div class="image-with-glow orange-glow">
+                                    <img src="images/PhoenixBullseye.PNG" alt="GPS Technology" class="technology-icon">
+                                </div>
                             </div>
                             <div class="technology-badge outdoor-badge">Outdoor Locations</div>
                         </div>
@@ -767,7 +635,7 @@
                         </p>
                         
                         <div class="technology-features">
-                            <h4>Perfect For:</h4>
+                            <h5>Perfect For:</h5>
                             <ul>
                                 <li><strong>Street-Level Marketing:</strong> Storefronts, restaurants, cafes</li>
                                 <li><strong>Outdoor Venues:</strong> Stadiums, parks, festival grounds</li>
@@ -792,7 +660,9 @@
                         </div>
                         
                         <div class="technology-highlight">
-                            <img src="images/EmberAnalytics.PNG" alt="Analytics" class="tech-highlight-icon">
+                            <div class="image-with-glow">
+                                <img src="images/EmberAnalytics.PNG" alt="Analytics" class="tech-highlight-icon">
+                            </div>
                             <div class="tech-highlight-content">
                                 <strong>GPS-Verified Visits</strong>
                                 <p>Every coin collection is GPS-verified with exact coordinates, timestamps, and player path analytics</p>
@@ -804,7 +674,9 @@
                     <div class="technology-card beacon-card">
                         <div class="technology-header">
                             <div class="technology-icon-container">
-                                <img src="images/EmberRepeatArrows.PNG" alt="Beacon Technology" class="technology-icon">
+                                <div class="image-with-glow purple-glow">
+                                    <img src="images/EmberRepeatArrows.PNG" alt="Beacon Technology" class="technology-icon">
+                                </div>
                             </div>
                             <div class="technology-badge indoor-badge">Indoor Locations</div>
                         </div>
@@ -814,7 +686,7 @@
                         </p>
                         
                         <div class="technology-features">
-                            <h4>Perfect For:</h4>
+                            <h5>Perfect For:</h5>
                             <ul>
                                 <li><strong>Retail Stores:</strong> Specific aisles, product displays, checkout areas</li>
                                 <li><strong>Shopping Malls:</strong> Individual stores, food courts, anchor locations</li>
@@ -839,7 +711,9 @@
                         </div>
                         
                         <div class="technology-highlight">
-                            <img src="images/EmberCoinLock.PNG" alt="Security" class="tech-highlight-icon">
+                            <div class="image-with-glow">
+                                <img src="images/EmberCoinLock.PNG" alt="Security" class="tech-highlight-icon">
+                            </div>
                             <div class="tech-highlight-content">
                                 <strong>Enterprise-Grade Beacons</strong>
                                 <p>Professional Estimote beacons with 2+ year battery life, encrypted signals, and cloud-based management</p>
@@ -851,8 +725,10 @@
                 <!-- Combined Power Section -->
                 <div class="combined-technology-power scroll-reveal">
                     <div class="combined-power-header">
-                        <img src="images/PhoenixGoldTrophy.PNG" alt="Combined Power" class="combined-power-icon">
-                        <h3>The Power of Combined Coverage</h3>
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixGoldTrophy.PNG" alt="Combined Power" class="combined-power-icon">
+                        </div>
+                        <h4>The Power of Combined Coverage</h4>
                     </div>
                     <p class="combined-power-description">
                         By integrating both GPS and Beacon technology, Vault Phoenix delivers <span class="golden-highlight">100% location coverage</span> for your campaigns. Guide players from outdoor discovery to indoor conversion - track them from the parking lot GPS coordinate, through the store entrance beacon, to the specific product display beacon, creating a complete customer journey with measurable ROI at every touchpoint.
@@ -860,7 +736,9 @@
                     <div class="combined-power-benefits">
                         <div class="combined-benefit">
                             <span class="combined-benefit-icon">
-                                <img src="images/PhoenixBullseye.PNG" alt="Seamless Transitions">
+                                <div class="image-with-glow">
+                                    <img src="images/PhoenixBullseye.PNG" alt="Seamless Transitions">
+                                </div>
                             </span>
                             <div class="combined-benefit-text">
                                 <strong>Seamless Transitions</strong>
@@ -869,7 +747,9 @@
                         </div>
                         <div class="combined-benefit">
                             <span class="combined-benefit-icon">
-                                <img src="images/EmberCoinROI.PNG" alt="Complete Analytics">
+                                <div class="image-with-glow">
+                                    <img src="images/EmberCoinROI.PNG" alt="Complete Analytics">
+                                </div>
                             </span>
                             <div class="combined-benefit-text">
                                 <strong>Complete Analytics</strong>
@@ -878,7 +758,9 @@
                         </div>
                         <div class="combined-benefit">
                             <span class="combined-benefit-icon">
-                                <img src="images/EmberCoinMoneyBag.PNG" alt="Maximum Revenue">
+                                <div class="image-with-glow">
+                                    <img src="images/EmberCoinMoneyBag.PNG" alt="Maximum Revenue">
+                                </div>
                             </span>
                             <div class="combined-benefit-text">
                                 <strong>Maximum Revenue</strong>
@@ -887,7 +769,9 @@
                         </div>
                         <div class="combined-benefit">
                             <span class="combined-benefit-icon">
-                                <img src="images/EmberCoinRocket.PNG" alt="Unlimited Possibilities">
+                                <div class="image-with-glow">
+                                    <img src="images/EmberCoinRocket.PNG" alt="Unlimited Possibilities">
+                                </div>
                             </span>
                             <div class="combined-benefit-text">
                                 <strong>Unlimited Possibilities</strong>
@@ -909,10 +793,12 @@
             <div class="proven-model scroll-reveal">
                 <div class="proven-badge">
                     <span class="badge-icon">
-                        <img src="images/PhoenixGoldTrophy.PNG" alt="Battle-Forged Framework" class="custom-badge-icon">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixGoldTrophy.PNG" alt="Battle-Forged Framework" class="custom-badge-icon">
+                        </div>
                     </span>
                     <div class="badge-content">
-                        <h3>Battle-Tested Technology System</h3>
+                        <h4>Battle-Tested Technology System</h4>
                         <p><span class="golden-highlight">6+ years</span> of development and <span class="golden-highlight">over 12+ successful location-based AR games</span> have refined our marketing platform. Now we're breaking new ground by adding crypto tokens for in-game rewards - same proven GPS & Beacon framework, enhanced with cryptocurrency incentives.</p>
                     </div>
                 </div>
@@ -921,7 +807,9 @@
             <div class="features-grid">
                 <div class="feature-card scroll-reveal stagger-1">
                     <span class="feature-icon">
-                        <img src="images/VPEmberCoin.PNG" alt="Crypto Coin" class="feature-coin-icon">
+                        <div class="image-with-glow">
+                            <img src="images/VPEmberCoin.PNG" alt="Crypto Coin" class="feature-coin-icon">
+                        </div>
                     </span>
                     <h3 class="feature-title">Crypto Coin Collection Engine</h3>
                     <p class="feature-description">Players collect <span class="golden-highlight">valuable crypto coins</span> at precise GPS (Outdoors) and Beacon (Indoors) locations. Each coin represents real value and creates powerful addiction mechanics that keep players hunting for more rewards.</p>
@@ -929,7 +817,9 @@
                 
                 <div class="feature-card scroll-reveal stagger-2">
                     <span class="feature-icon">
-                        <img src="images/IphoneVPLogo.PNG" alt="AR Phoenix Discovery" class="feature-ar-discovery-icon">
+                        <div class="image-with-glow">
+                            <img src="images/IphoneVPLogo.PNG" alt="AR Phoenix Discovery" class="feature-ar-discovery-icon">
+                        </div>
                     </span>
                     <h3 class="feature-title">AR Discovery System</h3>
                     <p class="feature-description">Customers use their camera to discover and collect crypto coins at your partner locations. Creates powerful engagement loops and encourages <span class="golden-highlight">viral social media sharing</span> of rare finds.</p>
@@ -937,7 +827,9 @@
                 
                 <div class="feature-card scroll-reveal stagger-3">
                     <span class="feature-icon">
-                        <img src="images/EmberGameController.PNG" alt="Legendary Crypto Gaming" class="feature-crypto-gaming-icon">
+                        <div class="image-with-glow">
+                            <img src="images/EmberGameController.PNG" alt="Legendary Crypto Gaming" class="feature-crypto-gaming-icon">
+                        </div>
                     </span>
                     <h3 class="feature-title">Legendary Gaming Experience</h3>
                     <p class="feature-description">Complete epic crypto quests, collect <span class="golden-highlight">rare coins</span>, unlock legendary achievements, and climb wealth leaderboards. Advanced gaming psychology keeps customers engaged for weeks, creating lasting brand loyalty.</p>
@@ -945,7 +837,9 @@
                 
                 <div class="feature-card scroll-reveal stagger-4">
                     <span class="feature-icon">
-                        <img src="images/PhoenixBullseye.PNG" alt="Premium Location Advertising" class="feature-revenue-icon">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixBullseye.PNG" alt="Premium Location Advertising" class="feature-revenue-icon">
+                        </div>
                     </span>
                     <h3 class="feature-title">Premium Location Advertising</h3>
                     <p class="feature-description">Each crypto coin location becomes <span class="golden-highlight">premium sponsored territory</span>. Local businesses pay top rates for guaranteed foot traffic and customer engagement through our strategic GPS & Beacon placement system with proven ROI metrics.</p>
@@ -953,7 +847,9 @@
                 
                 <div class="feature-card scroll-reveal stagger-1">
                     <span class="feature-icon">
-                        <img src="images/PhoenixDesign.PNG" alt="Phoenix Brand Transformation" class="feature-phoenix-brand-icon">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixDesign.PNG" alt="Phoenix Brand Transformation" class="feature-phoenix-brand-icon">
+                        </div>
                     </span>
                     <h3 class="feature-title">Complete Brand Transformation</h3>
                     <p class="feature-description">Every pixel, sound, and crypto coin blazes with your client's brand identity. Create <span class="golden-highlight">immersive brand experiences</span> that build unbreakable customer loyalty and instant recognition.</p>
@@ -961,7 +857,9 @@
                 
                 <div class="feature-card scroll-reveal stagger-2">
                     <span class="feature-icon">
-                        <img src="images/EmberAnalytics.PNG" alt="Crypto Analytics Dashboard" class="feature-analytics-icon">
+                        <div class="image-with-glow">
+                            <img src="images/EmberAnalytics.PNG" alt="Crypto Analytics Dashboard" class="feature-analytics-icon">
+                        </div>
                     </span>
                     <h3 class="feature-title">Real-Time Analytics Dashboard</h3>
                     <p class="feature-description">Track coin collections, GPS & Beacon location visits, player journeys, and <span class="golden-highlight">ROI metrics</span> in real-time. Prove campaign success with concrete data showing exact foot traffic and engagement generated.</p>
@@ -1019,7 +917,9 @@
                         <div class="demo-card-enhanced">
                             <p class="demo-card-instruction">Open with your mobile device</p>
                             <div class="demo-button-row">
-                                <img src="images/VPLogoNoText.PNG" alt="Phoenix Logo" class="demo-icon-standalone">
+                                <div class="image-with-glow">
+                                    <img src="images/VPLogoNoText.PNG" alt="Phoenix Logo" class="demo-icon-standalone">
+                                </div>
                                 <a href="crypto-game/" target="_blank" rel="noopener noreferrer" class="demo-button-enhanced" aria-label="Try the mobile AR crypto game demo">
                                     <span class="demo-text-enhanced">Try it out</span>
                                 </a>
@@ -1070,7 +970,9 @@
                         <div class="demo-card-enhanced">
                             <p class="demo-card-instruction">Open with your desktop computer</p>
                             <div class="demo-button-row">
-                                <img src="images/EmberAnalytics.PNG" alt="Management System" class="demo-icon-standalone">
+                                <div class="image-with-glow">
+                                    <img src="images/EmberAnalytics.PNG" alt="Management System" class="demo-icon-standalone">
+                                </div>
                                 <a href="https://ghost081280.github.io/vaultphoenix/management-system/index.html" target="_blank" rel="noopener noreferrer" class="demo-button-enhanced management-button-enhanced" aria-label="Try the management system demo">
                                     <span class="demo-text-enhanced">Try it out</span>
                                 </a>
@@ -1080,8 +982,9 @@
                     
                     <!-- Phoenix Ember Safe Image -->
                     <div class="phoenix-safe-container">
-                        <img src="images/PhoenixEmberSafe.PNG" alt="Phoenix Ember Safe" class="phoenix-safe-image">
-                        <div class="phoenix-safe-glow"></div>
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixEmberSafe.PNG" alt="Phoenix Ember Safe" class="phoenix-safe-image">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1091,7 +994,9 @@
                 <div class="connection-header">
                     <div class="connection-line"></div>
                     <div class="connection-badge">
-                        <img src="images/EmberRepeatArrows.PNG" alt="Connected" class="connection-icon">
+                        <div class="image-with-glow">
+                            <img src="images/EmberRepeatArrows.PNG" alt="Connected" class="connection-icon">
+                        </div>
                         <span>Seamlessly Connected</span>
                     </div>
                     <div class="connection-line"></div>
@@ -1100,8 +1005,10 @@
                 <div class="system-benefits">
                     <div class="benefit-column">
                         <div class="benefit-header">
-                            <img src="images/IphoneVPLogo.PNG" alt="Mobile App" class="benefit-header-icon">
-                            <h3>Player Experience</h3>
+                            <div class="image-with-glow">
+                                <img src="images/IphoneVPLogo.PNG" alt="Mobile App" class="benefit-header-icon">
+                            </div>
+                            <h4>Player Experience</h4>
                         </div>
                         <ul class="benefit-list">
                             <li>White-labeled with your brand identity</li>
@@ -1114,8 +1021,10 @@
                     
                     <div class="benefit-column">
                         <div class="benefit-header">
-                            <img src="images/EmberAnalytics.PNG" alt="Management System" class="benefit-header-icon">
-                            <h3>Marketer Control</h3>
+                            <div class="image-with-glow">
+                                <img src="images/EmberAnalytics.PNG" alt="Management System" class="benefit-header-icon">
+                            </div>
+                            <h4>Marketer Control</h4>
                         </div>
                         <ul class="benefit-list">
                             <li>Control all GPS & Beacon coin placements</li>
@@ -1139,7 +1048,9 @@
             <div class="use-cases-grid">
                 <div class="use-case-card scroll-reveal stagger-1">
                     <div class="use-case-icon-container-large">
-                        <img src="images/PhoenixAthletics.PNG" alt="Sports" class="use-case-icon-image-large">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixAthletics.PNG" alt="Sports" class="use-case-icon-image-large">
+                        </div>
                     </div>
                     <h3 class="use-case-title">Sports Crypto Revolution</h3>
                     <p class="use-case-example">"Stadium Crypto Hunt" - Collect <span class="golden-highlight">rare crypto coins</span> using GPS (parking lots, gates) and Beacons (concession stands, team stores, sponsor locations) throughout the venue</p>
@@ -1148,7 +1059,9 @@
                 
                 <div class="use-case-card scroll-reveal stagger-2">
                     <div class="use-case-icon-container-large">
-                        <img src="images/PhoenixRadio.PNG" alt="Radio" class="use-case-icon-image-large">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixRadio.PNG" alt="Radio" class="use-case-icon-image-large">
+                        </div>
                     </div>
                     <h3 class="use-case-title">Radio Crypto Amplifier</h3>
                     <p class="use-case-example">"Morning Show Crypto Quest" - Discover <span class="golden-highlight">legendary crypto coins</span> and exclusive content at sponsor locations using GPS (Outdoors) and Beacons (Indoors) across the city</p>
@@ -1157,7 +1070,9 @@
                 
                 <div class="use-case-card scroll-reveal stagger-3">
                     <div class="use-case-icon-container-large">
-                        <img src="images/VPTravelPhoenix.PNG" alt="Tourism" class="use-case-icon-image-large">
+                        <div class="image-with-glow">
+                            <img src="images/VPTravelPhoenix.PNG" alt="Tourism" class="use-case-icon-image-large">
+                        </div>
                     </div>
                     <h3 class="use-case-title">Tourism Crypto Engine</h3>
                     <p class="use-case-example">"Historic Crypto Rising" - Uncover <span class="golden-highlight">legendary crypto treasures</span> using GPS (landmarks, monuments) and Beacons (inside museums, restaurants, attractions) with exclusive deals</p>
@@ -1166,7 +1081,9 @@
                 
                 <div class="use-case-card scroll-reveal stagger-4">
                     <div class="use-case-icon-container-large">
-                        <img src="images/PhoenixRetail.PNG" alt="Retail" class="use-case-icon-image-large">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixRetail.PNG" alt="Retail" class="use-case-icon-image-large">
+                        </div>
                     </div>
                     <h3 class="use-case-title">Retail Crypto Generator</h3>
                     <p class="use-case-example">"Fashion Crypto Week" - Hunt for <span class="golden-highlight">exclusive crypto coins</span> using GPS (street locations) and Beacons (inside stores, specific product displays) at participating boutiques</p>
@@ -1175,7 +1092,9 @@
                 
                 <div class="use-case-card scroll-reveal stagger-1">
                     <div class="use-case-icon-container-large">
-                        <img src="images/PhoenixEntertainment.PNG" alt="Entertainment" class="use-case-icon-image-large">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixEntertainment.PNG" alt="Entertainment" class="use-case-icon-image-large">
+                        </div>
                     </div>
                     <h3 class="use-case-title">Entertainment Crypto Ecosystem</h3>
                     <p class="use-case-example">"Concert Crypto Series" - Collect <span class="golden-highlight">rare crypto coins</span> using GPS (outdoor venues) and Beacons (bars, music stores, VIP areas) with exclusive experiences</p>
@@ -1184,7 +1103,9 @@
                 
                 <div class="use-case-card scroll-reveal stagger-2">
                     <div class="use-case-icon-container-large">
-                        <img src="images/PhoenixCulinary.PNG" alt="Culinary" class="use-case-icon-image-large">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixCulinary.PNG" alt="Culinary" class="use-case-icon-image-large">
+                        </div>
                     </div>
                     <h3 class="use-case-title">Culinary Crypto Adventure</h3>
                     <p class="use-case-example">"Foodie Crypto Trail" - Discover <span class="golden-highlight">rare crypto coins</span> using GPS (restaurant locations) and Beacons (specific tables, bar areas) with exclusive tastings at local markets</p>
@@ -1193,7 +1114,9 @@
 
                 <div class="use-case-card scroll-reveal stagger-3">
                     <div class="use-case-icon-container-large">
-                        <img src="images/PhoenixHealth.svg.svg" alt="Healthcare" class="use-case-icon-image-large">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixHealth.svg.svg" alt="Healthcare" class="use-case-icon-image-large">
+                        </div>
                     </div>
                     <h3 class="use-case-title">Healthcare Crypto Wellness</h3>
                     <p class="use-case-example">"Wellness Crypto Journey" - Collect <span class="golden-highlight">health crypto coins</span> using GPS (outdoor fitness stations) and Beacons (inside gyms, health stores, medical centers) with wellness rewards</p>
@@ -1202,7 +1125,9 @@
 
                 <div class="use-case-card scroll-reveal stagger-4">
                     <div class="use-case-icon-container-large">
-                        <img src="images/PhoenixEducation.svg.svg" alt="Education" class="use-case-icon-image-large">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixEducation.svg.svg" alt="Education" class="use-case-icon-image-large">
+                        </div>
                     </div>
                     <h3 class="use-case-title">Educational Crypto Discovery</h3>
                     <p class="use-case-example">"Campus Crypto Challenge" - Find <span class="golden-highlight">legendary crypto coins</span> using GPS (campus locations) and Beacons (inside buildings, classrooms, labs) with scholarship opportunities</p>
@@ -1211,7 +1136,9 @@
 
                 <div class="use-case-card scroll-reveal stagger-1">
                     <div class="use-case-icon-container-large">
-                        <img src="images/PhoenixAutomotive.PNG" alt="Automotive" class="use-case-icon-image-large">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixAutomotive.PNG" alt="Automotive" class="use-case-icon-image-large">
+                        </div>
                     </div>
                     <h3 class="use-case-title">Automotive Crypto Tours</h3>
                     <p class="use-case-example">"Drive Crypto Rally" - Collect <span class="golden-highlight">legendary crypto coins</span> using GPS (dealership lots) and Beacons (inside showrooms, service areas) with exclusive deals at automotive retailers</p>
@@ -1297,17 +1224,21 @@
                     </div>
 
                     <div class="solution-highlight-box">
-                        <img src="images/VPEmberCoin.PNG" alt="Token Rewards" class="solution-highlight-icon">
+                        <div class="image-with-glow">
+                            <img src="images/VPEmberCoin.PNG" alt="Token Rewards" class="solution-highlight-icon">
+                        </div>
                         <div class="solution-highlight-content">
-                            <h4>FREE $Ember Tokens Included</h4>
+                            <h5>FREE $Ember Tokens Included</h5>
                             <p>Get <span class="golden-highlight">$100 worth of $Ember tokens</span> loaded into your management system when service is activated</p>
                         </div>
                     </div>
 
                     <div class="solution-highlight-box additional-benefit">
-                        <img src="images/PhoenixDesign.PNG" alt="Support" class="solution-highlight-icon">
+                        <div class="image-with-glow">
+                            <img src="images/PhoenixDesign.PNG" alt="Support" class="solution-highlight-icon">
+                        </div>
                         <div class="solution-highlight-content">
-                            <h4>Complete Launch Support</h4>
+                            <h5>Complete Launch Support</h5>
                             <p>Expert onboarding, marketing materials, comprehensive training, and <span class="golden-highlight">ongoing technical support</span> to ensure campaign success and maximize ROI</p>
                         </div>
                     </div>
@@ -1386,17 +1317,21 @@
                     </div>
 
                     <div class="solution-highlight-box">
-                        <img src="images/IphoneVPLogo.PNG" alt="Development" class="solution-highlight-icon">
+                        <div class="image-with-glow">
+                            <img src="images/IphoneVPLogo.PNG" alt="Development" class="solution-highlight-icon">
+                        </div>
                         <div class="solution-highlight-content">
-                            <h4>Built for Developers</h4>
+                            <h5>Built for Developers</h5>
                             <p>Open-source code with <span class="golden-highlight">managed infrastructure</span> - rapid deployment at developer-friendly prices</p>
                         </div>
                     </div>
 
                     <div class="solution-highlight-box additional-benefit">
-                        <img src="images/VPEmberCoin.PNG" alt="Token Rewards" class="solution-highlight-icon">
+                        <div class="image-with-glow">
+                            <img src="images/VPEmberCoin.PNG" alt="Token Rewards" class="solution-highlight-icon">
+                        </div>
                         <div class="solution-highlight-content">
-                            <h4>FREE $Ember Tokens Included</h4>
+                            <h5>FREE $Ember Tokens Included</h5>
                             <p>Get <span class="golden-highlight">$100 worth of $Ember tokens</span> loaded into your management system when service is activated</p>
                         </div>
                     </div>
@@ -1416,7 +1351,9 @@
             <!-- Revenue Examples Section -->
             <div class="revenue-examples-section scroll-reveal">
                 <div class="revenue-examples-header">
-                    <img src="images/EmberCoinMoneyBag.PNG" alt="Revenue" class="revenue-header-icon">
+                    <div class="image-with-glow">
+                        <img src="images/EmberCoinMoneyBag.PNG" alt="Revenue" class="revenue-header-icon">
+                    </div>
                     <h3>Real-World Revenue Opportunities</h3>
                     <p>See how agencies and marketers are generating <span class="golden-highlight">$10K-$75K per month</span> with GPS & Beacon location-based crypto coin placements</p>
                 </div>
@@ -1424,7 +1361,9 @@
                 <div class="revenue-examples-grid">
                     <div class="revenue-example-card">
                         <div class="revenue-card-header">
-                            <img src="images/PhoenixAthletics.PNG" alt="Sports" class="revenue-industry-icon">
+                            <div class="image-with-glow">
+                                <img src="images/PhoenixAthletics.PNG" alt="Sports" class="revenue-industry-icon">
+                            </div>
                             <div class="example-industry">Sports & Entertainment</div>
                         </div>
                         <h3 class="example-title">Stadium Crypto Hunt</h3>
@@ -1447,7 +1386,9 @@
 
                     <div class="revenue-example-card">
                         <div class="revenue-card-header">
-                            <img src="images/PhoenixRadio.PNG" alt="Radio" class="revenue-industry-icon">
+                            <div class="image-with-glow">
+                                <img src="images/PhoenixRadio.PNG" alt="Radio" class="revenue-industry-icon">
+                            </div>
                             <div class="example-industry">Radio & Media</div>
                         </div>
                         <h3 class="example-title">Morning Show Treasure Hunt</h3>
@@ -1470,7 +1411,9 @@
 
                     <div class="revenue-example-card">
                         <div class="revenue-card-header">
-                            <img src="images/VPTravelPhoenix.PNG" alt="Tourism" class="revenue-industry-icon">
+                            <div class="image-with-glow">
+                                <img src="images/VPTravelPhoenix.PNG" alt="Tourism" class="revenue-industry-icon">
+                            </div>
                             <div class="example-industry">Tourism & Hospitality</div>
                         </div>
                         <h3 class="example-title">Historic Downtown Quest</h3>
@@ -1493,7 +1436,9 @@
 
                     <div class="revenue-example-card">
                         <div class="revenue-card-header">
-                            <img src="images/PhoenixRetail.PNG" alt="Retail" class="revenue-industry-icon">
+                            <div class="image-with-glow">
+                                <img src="images/PhoenixRetail.PNG" alt="Retail" class="revenue-industry-icon">
+                            </div>
                             <div class="example-industry">Retail & Shopping</div>
                         </div>
                         <h3 class="example-title">Mall District Challenge</h3>
@@ -1516,11 +1461,13 @@
                 </div>
 
                 <div class="revenue-model-benefits">
-                    <h3>Why Location Partners Pay Premium Rates</h3>
+                    <h4>Why Location Partners Pay Premium Rates</h4>
                     <div class="benefits-grid">
                         <div class="benefit-box">
                             <div class="benefit-icon-small">
-                                <img src="images/PhoenixRetail.PNG" alt="Foot Traffic" class="benefit-icon-img">
+                                <div class="image-with-glow">
+                                    <img src="images/PhoenixRetail.PNG" alt="Foot Traffic" class="benefit-icon-img">
+                                </div>
                             </div>
                             <div class="benefit-text">
                                 <strong>Guaranteed Foot Traffic</strong>
@@ -1529,7 +1476,9 @@
                         </div>
                         <div class="benefit-box">
                             <div class="benefit-icon-small">
-                                <img src="images/EmberAnalytics.PNG" alt="ROI" class="benefit-icon-img">
+                                <div class="image-with-glow">
+                                    <img src="images/EmberAnalytics.PNG" alt="ROI" class="benefit-icon-img">
+                                </div>
                             </div>
                             <div class="benefit-text">
                                 <strong>Measurable ROI</strong>
@@ -1538,7 +1487,9 @@
                         </div>
                         <div class="benefit-box">
                             <div class="benefit-icon-small">
-                                <img src="images/PhoenixBullseye.PNG" alt="Engagement" class="benefit-icon-img">
+                                <div class="image-with-glow">
+                                    <img src="images/PhoenixBullseye.PNG" alt="Engagement" class="benefit-icon-img">
+                                </div>
                             </div>
                             <div class="benefit-text">
                                 <strong>Targeted Engagement</strong>
@@ -1547,7 +1498,9 @@
                         </div>
                         <div class="benefit-box">
                             <div class="benefit-icon-small">
-                                <img src="images/EmberRepeatArrows.PNG" alt="Repeat Visits" class="benefit-icon-img">
+                                <div class="image-with-glow">
+                                    <img src="images/EmberRepeatArrows.PNG" alt="Repeat Visits" class="benefit-icon-img">
+                                </div>
                             </div>
                             <div class="benefit-text">
                                 <strong>Repeat Visits</strong>
@@ -1561,9 +1514,11 @@
             <!-- Development Story -->
             <div class="development-story-section scroll-reveal">
                 <div class="development-story-card">
-                    <img src="images/IphoneVPLogo.PNG" alt="Proven Development" class="development-story-icon">
+                    <div class="image-with-glow">
+                        <img src="images/IphoneVPLogo.PNG" alt="Proven Development" class="development-story-icon">
+                    </div>
                     <div class="development-story-content">
-                        <h3>Battle-Tested Technology</h3>
+                        <h4>Battle-Tested Technology</h4>
                         <p>Over <span class="golden-highlight">6+ years</span> of development and <span class="golden-highlight">over 12+ successful location-based AR games</span> have refined our marketing platform through deployments with radio stations, sports teams, tourism boards, and retail chains. Now we're breaking new ground by adding crypto tokens for in-game rewards, powered by proven GPS & Beacon technology.</p>
                     </div>
                 </div>
@@ -1580,11 +1535,15 @@
             
             <div class="cta-buttons scroll-reveal">
                 <a href="mailto:contact@vaultphoenix.com?subject=Phoenix Crypto Gaming Development Inquiry&body=I'm interested in developing a custom AR crypto gaming phoenix for my clients. Please send me detailed information about the development process, timeline, and how we can get started." class="cta-primary-enhanced cta-with-icon-enhanced" aria-label="Contact us to start your crypto gaming campaign">
-                    <img src="images/EmberRepeatArrows.PNG" alt="Awaken" class="cta-icon-image-enhanced">
+                    <div class="image-with-glow">
+                        <img src="images/EmberRepeatArrows.PNG" alt="Awaken" class="cta-icon-image-enhanced">
+                    </div>
                     <span>Start Your Campaign</span>
                 </a>
                 <a href="https://www.facebook.com/share/1BH4Hd6iDa/?mibextid=wwXIfr" class="cta-secondary cta-with-icon-enhanced" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on Facebook">
-                    <img src="images/EmberCoinChatWithUs.PNG" alt="Chat" class="cta-icon-image-enhanced">
+                    <div class="image-with-glow">
+                        <img src="images/EmberCoinChatWithUs.PNG" alt="Chat" class="cta-icon-image-enhanced">
+                    </div>
                     <span>Chat with Us</span>
                 </a>
             </div>
@@ -1592,14 +1551,18 @@
             <!-- Journey Section -->
             <div class="journey-section">
                 <h3 class="journey-title">
-                    <img src="images/EmberCoinRocket.PNG" alt="Journey" class="journey-icon-large">
+                    <div class="image-with-glow">
+                        <img src="images/EmberCoinRocket.PNG" alt="Journey" class="journey-icon-large">
+                    </div>
                     What Happens Next in Your Journey:
                 </h3>
                 
                 <div class="journey-paths">
                     <div class="journey-path">
                         <div class="path-header-enhanced">
-                            <img src="images/EmberCoinMoneyBag.PNG" alt="White-Label" class="path-icon-enhanced">
+                            <div class="image-with-glow">
+                                <img src="images/EmberCoinMoneyBag.PNG" alt="White-Label" class="path-icon-enhanced">
+                            </div>
                             <div class="path-header-text">
                                 <div class="path-category">Complete Branded AR Crypto Web Apps</div>
                                 <h4 class="path-title">Turnkey White-Label Solution</h4>
@@ -1617,7 +1580,9 @@
                     
                     <div class="journey-path">
                         <div class="path-header-enhanced">
-                            <img src="images/IphoneVPLogo.PNG" alt="SDK" class="path-icon-enhanced">
+                            <div class="image-with-glow">
+                                <img src="images/IphoneVPLogo.PNG" alt="SDK" class="path-icon-enhanced">
+                            </div>
                             <div class="path-header-text">
                                 <div class="path-category">Vault Phoenix SDK on GitHub</div>
                                 <h4 class="path-title">Developer Integration Platform</h4>
@@ -1641,7 +1606,9 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="footer-logo-image">
+                <div class="image-with-glow">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="footer-logo-image">
+                </div>
                 <span>Vault Phoenix - AR Crypto Gaming Solutions</span>
             </div>
             <p class="footer-text">Transforming marketing campaigns into legendary crypto gaming experiences that drive real business results and create lasting customer loyalty through strategic GPS & Beacon location-based advertising.</p>
