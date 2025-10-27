@@ -2,35 +2,37 @@
 // SHARED JAVASCRIPT FOR VAULT PHOENIX
 // ============================================
 // This file contains shared functionality used across multiple pages
-// including mobile navigation, scroll effects, animations, and countdown timer
+// including mobile navigation, scroll effects, animations, countdown timer, and cookie consent
 
 (function() {
     'use strict';
 
     // ============================================
-    // MOBILE MENU SYSTEM
+    // MOBILE MENU SYSTEM - FIXED FOR NEW HTML STRUCTURE
     // ============================================
     
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
     const mobileMenuClose = document.getElementById('mobile-menu-close');
-    const navLinks = document.querySelectorAll('.nav-links a');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
 
     // Toggle mobile menu
-    if (mobileMenuBtn && mobileMenu) {
+    if (mobileMenuBtn && mobileMenu && mobileMenuOverlay) {
         mobileMenuBtn.addEventListener('click', function() {
             const isExpanded = this.getAttribute('aria-expanded') === 'true';
             this.setAttribute('aria-expanded', !isExpanded);
             mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         });
     }
 
     // Close mobile menu when clicking close button
-    if (mobileMenuClose && mobileMenu) {
+    if (mobileMenuClose && mobileMenu && mobileMenuOverlay) {
         mobileMenuClose.addEventListener('click', function() {
             mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
             if (mobileMenuBtn) {
                 mobileMenuBtn.setAttribute('aria-expanded', 'false');
             }
@@ -38,24 +40,26 @@
         });
     }
 
-    // Close mobile menu when clicking nav links (desktop)
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (mobileMenu && mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-                if (mobileMenuBtn) {
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
-                document.body.style.overflow = '';
+    // Close mobile menu when clicking overlay
+    if (mobileMenuOverlay && mobileMenu) {
+        mobileMenuOverlay.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
             }
+            document.body.style.overflow = '';
         });
-    });
+    }
 
     // Close mobile menu when clicking mobile nav links
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (mobileMenu && mobileMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
+                if (mobileMenuOverlay) {
+                    mobileMenuOverlay.classList.remove('active');
+                }
                 if (mobileMenuBtn) {
                     mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 }
@@ -68,23 +72,13 @@
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
             mobileMenu.classList.remove('active');
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('active');
+            }
             if (mobileMenuBtn) {
                 mobileMenuBtn.setAttribute('aria-expanded', 'false');
             }
             document.body.style.overflow = '';
-        }
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (mobileMenu && mobileMenu.classList.contains('active')) {
-            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-                if (mobileMenuBtn) {
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
-                document.body.style.overflow = '';
-            }
         }
     });
 
@@ -106,13 +100,11 @@
             const progress = Math.min(scrollTop / transitionDistance, 1);
             
             // Interpolate between ember colors and black
-            // Start: ember gradient colors
             const emberBrown = { r: 45, g: 24, b: 16, a: 0.95 };
             const emberDeep = { r: 69, g: 26, b: 3, a: 0.92 };
             const emberRust = { r: 124, g: 45, b: 18, a: 0.90 };
             const emberRed = { r: 215, g: 51, b: 39, a: 0.85 };
             
-            // End: black gradient colors
             const black1 = { r: 15, g: 15, b: 15, a: 0.98 };
             const black2 = { r: 20, g: 20, b: 20, a: 0.98 };
             const black3 = { r: 23, g: 23, b: 23, a: 0.98 };
@@ -153,7 +145,7 @@
             
             navbar.style.background = gradient;
             
-            // Interpolate border color (golden to red)
+            // Interpolate border color
             const borderStart = { r: 240, g: 165, b: 0, a: 0.4 };
             const borderEnd = { r: 215, g: 51, b: 39, a: 0.3 };
             const borderColor = {
@@ -173,8 +165,8 @@
                 b: Math.round(shadowStart.b + (shadowEnd.b - shadowStart.b) * progress),
                 a: shadowStart.a + (shadowEnd.a - shadowStart.a) * progress
             };
-            const shadowBlur = 4 + (progress * 2); // 4px to 6px
-            const shadowSpread = 20 + (progress * 10); // 20px to 30px
+            const shadowBlur = 4 + (progress * 2);
+            const shadowSpread = 20 + (progress * 10);
             navbar.style.boxShadow = `0 ${shadowBlur}px ${shadowSpread}px rgba(${shadowColor.r}, ${shadowColor.g}, ${shadowColor.b}, ${shadowColor.a})`;
         }
         
@@ -190,7 +182,7 @@
     }, { passive: true });
 
     // ============================================
-    // UNIVERSAL COUNTDOWN TIMER - FIXED VERSION
+    // UNIVERSAL COUNTDOWN TIMER
     // Works for both main page and ember token page
     // ============================================
     
@@ -209,13 +201,13 @@
             mainMinutes: document.getElementById('main-minutes'),
             mainSeconds: document.getElementById('main-seconds'),
             
-            // Ember page countdown (in presale section) - using 'days', 'hours', etc.
+            // Ember page countdown (in presale section)
             emberDays: document.getElementById('days'),
             emberHours: document.getElementById('hours'),
             emberMinutes: document.getElementById('minutes'),
             emberSeconds: document.getElementById('seconds'),
             
-            // Ember page countdown (alternative naming) - using 'countdown-days', etc.
+            // Ember page countdown (alternative naming)
             countdownDays: document.getElementById('countdown-days'),
             countdownHours: document.getElementById('countdown-hours'),
             countdownMinutes: document.getElementById('countdown-minutes'),
@@ -271,7 +263,6 @@
             
             // Handle countdown expiration
             if (distance < 0) {
-                // Update ALL elements to show 00
                 Object.entries(countdownElements).forEach(([key, element]) => {
                     if (element) {
                         element.textContent = '00';
@@ -281,19 +272,17 @@
                 return;
             }
             
-            // Update main page countdown elements (main-days, main-hours, etc.)
+            // Update all countdown elements
             if (countdownElements.mainDays) countdownElements.mainDays.textContent = formattedDays;
             if (countdownElements.mainHours) countdownElements.mainHours.textContent = formattedHours;
             if (countdownElements.mainMinutes) countdownElements.mainMinutes.textContent = formattedMinutes;
             if (countdownElements.mainSeconds) countdownElements.mainSeconds.textContent = formattedSeconds;
             
-            // Update ember page countdown elements (days, hours, etc.)
             if (countdownElements.emberDays) countdownElements.emberDays.textContent = formattedDays;
             if (countdownElements.emberHours) countdownElements.emberHours.textContent = formattedHours;
             if (countdownElements.emberMinutes) countdownElements.emberMinutes.textContent = formattedMinutes;
             if (countdownElements.emberSeconds) countdownElements.emberSeconds.textContent = formattedSeconds;
             
-            // Update ember page countdown elements (countdown-days, countdown-hours, etc.)
             if (countdownElements.countdownDays) countdownElements.countdownDays.textContent = formattedDays;
             if (countdownElements.countdownHours) countdownElements.countdownHours.textContent = formattedHours;
             if (countdownElements.countdownMinutes) countdownElements.countdownMinutes.textContent = formattedMinutes;
@@ -308,7 +297,7 @@
         const countdownInterval = setInterval(updateCountdown, 1000);
         console.log('🔥 COUNTDOWN: Update interval set (every 1 second)');
         
-        // Store interval ID globally in case we need to clear it
+        // Store interval ID globally
         window.countdownInterval = countdownInterval;
         
         console.log('🔥 COUNTDOWN: ✅ Universal countdown successfully initialized!');
@@ -317,6 +306,81 @@
     
     // Expose the countdown function globally
     window.initializeUniversalCountdown = initializeUniversalCountdown;
+
+    // ============================================
+    // COOKIE CONSENT BANNER - GDPR COMPLIANT
+    // ============================================
+    
+    function initializeCookieConsent() {
+        // Check if user has already made a choice
+        const cookieConsent = localStorage.getItem('vaultphoenix_cookie_consent');
+        
+        if (cookieConsent !== null) {
+            console.log('🍪 Cookie consent already recorded:', cookieConsent);
+            return; // User has already accepted or declined
+        }
+        
+        // Create cookie consent banner
+        const consentBanner = document.createElement('div');
+        consentBanner.className = 'cookie-consent-banner';
+        consentBanner.setAttribute('role', 'dialog');
+        consentBanner.setAttribute('aria-label', 'Cookie consent banner');
+        consentBanner.setAttribute('aria-live', 'polite');
+        
+        consentBanner.innerHTML = `
+            <div class="cookie-consent-content">
+                <div class="cookie-consent-icon">
+                    🍪
+                </div>
+                <div class="cookie-consent-text">
+                    <h4>We Value Your Privacy</h4>
+                    <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. By clicking "Accept", you consent to our use of cookies.</p>
+                </div>
+                <div class="cookie-consent-buttons">
+                    <button class="cookie-btn cookie-accept" aria-label="Accept cookies">
+                        Accept
+                    </button>
+                    <button class="cookie-btn cookie-decline" aria-label="Decline cookies">
+                        Decline
+                    </button>
+                    <a href="#privacy-policy" class="cookie-privacy-link" aria-label="View privacy policy">
+                        Privacy Policy
+                    </a>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(consentBanner);
+        
+        // Show banner with animation
+        setTimeout(() => {
+            consentBanner.classList.add('show');
+        }, 500);
+        
+        // Handle Accept button
+        const acceptBtn = consentBanner.querySelector('.cookie-accept');
+        acceptBtn.addEventListener('click', function() {
+            localStorage.setItem('vaultphoenix_cookie_consent', 'accepted');
+            console.log('🍪 Cookies accepted by user');
+            consentBanner.classList.remove('show');
+            setTimeout(() => {
+                consentBanner.remove();
+            }, 400);
+        });
+        
+        // Handle Decline button
+        const declineBtn = consentBanner.querySelector('.cookie-decline');
+        declineBtn.addEventListener('click', function() {
+            localStorage.setItem('vaultphoenix_cookie_consent', 'declined');
+            console.log('🍪 Cookies declined by user');
+            consentBanner.classList.remove('show');
+            setTimeout(() => {
+                consentBanner.remove();
+            }, 400);
+        });
+        
+        console.log('🍪 Cookie consent banner initialized');
+    }
 
     // ============================================
     // SMOOTH SCROLLING FOR ANCHOR LINKS
@@ -355,7 +419,6 @@
     // SCROLL REVEAL ANIMATIONS
     // ============================================
     
-    // Create intersection observer for scroll animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -365,8 +428,6 @@
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Optional: Stop observing after animation
-                // observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -393,7 +454,7 @@
     // UTILITY FUNCTIONS
     // ============================================
     
-    // Debounce function for performance optimization
+    // Debounce function
     window.debounce = function(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -406,7 +467,7 @@
         };
     };
 
-    // Throttle function for performance optimization
+    // Throttle function
     window.throttle = function(func, limit) {
         let inThrottle;
         return function(...args) {
@@ -438,8 +499,11 @@
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(function() {
             // Close mobile menu on desktop resize
-            if (window.innerWidth > 768 && mobileMenu && mobileMenu.classList.contains('active')) {
+            if (window.innerWidth > 1024 && mobileMenu && mobileMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
+                if (mobileMenuOverlay) {
+                    mobileMenuOverlay.classList.remove('active');
+                }
                 if (mobileMenuBtn) {
                     mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 }
@@ -452,34 +516,33 @@
     // INITIALIZATION
     // ============================================
     
-    // Run on DOM content loaded
     function init() {
         console.log('🔥 Vault Phoenix Shared Scripts Initialized');
         
         // Initial navbar state
         handleNavbarScroll();
         
-        // Initialize universal countdown timer with multiple retry attempts
-        console.log('🔥 Attempting countdown initialization (attempt 1)...');
+        // Initialize cookie consent banner
+        initializeCookieConsent();
+        
+        // Initialize countdown timer with retries
+        console.log('🔥 Attempting countdown initialization...');
         const success1 = initializeUniversalCountdown();
         
         if (!success1) {
-            console.log('🔥 First attempt failed, trying again after 100ms...');
+            console.log('🔥 First attempt failed, retrying after 100ms...');
             setTimeout(() => {
                 const success2 = initializeUniversalCountdown();
                 if (!success2) {
-                    console.log('🔥 Second attempt failed, trying again after 500ms...');
+                    console.log('🔥 Second attempt failed, retrying after 500ms...');
                     setTimeout(() => {
-                        const success3 = initializeUniversalCountdown();
-                        if (!success3) {
-                            console.warn('🔥 All countdown initialization attempts failed');
-                        }
+                        initializeUniversalCountdown();
                     }, 500);
                 }
             }, 100);
         }
         
-        // Add loaded class to body for CSS transitions
+        // Add loaded class to body
         document.body.classList.add('loaded');
     }
 
