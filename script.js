@@ -1,18 +1,22 @@
-// Vault Phoenix - Interactive JavaScript
+// ============================================
+// VAULT PHOENIX - INTERACTIVE JAVASCRIPT
+// ============================================
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
-// SENIOR JS ENGINEERING: Optimized for CSS alignment and performance
-// UPDATED: Perfect integration with new CSS glow system
-// ENHANCED: Chatbot with proper message alignment and mobile optimization
+// SENIOR JS ENGINEERING: Mobile-First, Performance-Optimized
 // PRODUCTION READY: Clean, maintainable, and scalable code
+// VERSION: 2.0 - Complete Mobile Optimization
+// ============================================
+
+'use strict';
 
 // ============================================
 // CLAUDE API CONFIGURATION
 // ============================================
-const CLAUDE_API_KEY = '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'; // ← Replace with your actual API key
+const CLAUDE_API_KEY = 'YOUR_API_KEY_HERE'; // ← Replace with your actual API key from console.anthropic.com
 const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
 const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 
-// Chat state
+// Chat state management
 let conversationHistory = [];
 let isTyping = false;
 
@@ -43,11 +47,51 @@ Your role is to:
 Always maintain a professional yet friendly tone. If asked about technical implementation details beyond your knowledge, recommend contacting the team directly.`;
 
 // ============================================
+// DEVICE DETECTION & PERFORMANCE
+// ============================================
+
+/**
+ * Detect device capabilities and set performance flags
+ */
+const DeviceInfo = {
+    isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+    isIOS: /iPhone|iPad|iPod/i.test(navigator.userAgent),
+    isAndroid: /Android/i.test(navigator.userAgent),
+    isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
+    supportsTouch: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
+    screenWidth: window.innerWidth,
+    screenHeight: window.innerHeight,
+    pixelRatio: window.devicePixelRatio || 1,
+    prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    
+    /**
+     * Check if device is low-end for performance optimization
+     */
+    isLowEndDevice() {
+        const memory = navigator.deviceMemory || 4;
+        const cores = navigator.hardwareConcurrency || 2;
+        return memory < 4 || cores < 4 || this.isMobile;
+    },
+    
+    /**
+     * Get optimal particle count based on device
+     */
+    getOptimalParticleCount() {
+        if (this.prefersReducedMotion) return 0;
+        if (this.screenWidth < 480) return 3;
+        if (this.screenWidth < 768) return 4;
+        if (this.isLowEndDevice()) return 4;
+        return 6;
+    }
+};
+
+// ============================================
 // UTILITY FUNCTIONS
 // ============================================
 
 /**
  * Debounce function for performance optimization
+ * Prevents excessive function calls during rapid events
  */
 function debounce(func, wait) {
     let timeout;
@@ -62,20 +106,40 @@ function debounce(func, wait) {
 }
 
 /**
- * Check if element is in viewport
+ * Throttle function for scroll/resize events
+ * Ensures function runs at most once per interval
  */
-function isInViewport(element) {
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+/**
+ * Check if element is in viewport
+ * Used for lazy loading and scroll animations
+ */
+function isInViewport(element, threshold = 0) {
+    if (!element) return false;
     const rect = element.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+    
     return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        rect.top >= -threshold &&
+        rect.left >= -threshold &&
+        rect.bottom <= windowHeight + threshold &&
+        rect.right <= windowWidth + threshold
     );
 }
 
 /**
- * Safely query DOM element
+ * Safely query DOM element with error handling
  */
 function safeQuery(selector, context = document) {
     try {
@@ -87,22 +151,63 @@ function safeQuery(selector, context = document) {
 }
 
 /**
- * Safely query all DOM elements
+ * Safely query all DOM elements with error handling
  */
 function safeQueryAll(selector, context = document) {
     try {
-        return context.querySelectorAll(selector);
+        return Array.from(context.querySelectorAll(selector));
     } catch (error) {
         console.warn(`Failed to query selector: ${selector}`, error);
         return [];
     }
 }
 
+/**
+ * Request animation frame with fallback
+ */
+const requestAnimFrame = window.requestAnimationFrame || 
+                         window.webkitRequestAnimationFrame || 
+                         window.mozRequestAnimationFrame || 
+                         function(callback) { setTimeout(callback, 1000 / 60); };
+
+/**
+ * Mobile-friendly smooth scroll
+ */
+function smoothScrollTo(element, duration = 300) {
+    if (!element) return;
+    
+    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+    
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = ease(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimFrame(animation);
+    }
+    
+    function ease(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t + b;
+        t--;
+        return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+    
+    requestAnimFrame(animation);
+}
+
 // ============================================
-// CHATBOT INITIALIZATION - CSS ALIGNED
+// CHATBOT INITIALIZATION - MOBILE OPTIMIZED
 // ============================================
+
+/**
+ * Initialize Claude API Chatbot with mobile-first design
+ */
 function initializeChatbot() {
-    console.log('🤖 Initializing Claude API Chatbot with CSS alignment...');
+    console.log('🤖 Initializing Claude API Chatbot (Mobile-First)...');
     
     const chatbotButton = safeQuery('.chatbot-button-container');
     const chatbotWindow = safeQuery('.chatbot-window');
@@ -118,36 +223,61 @@ function initializeChatbot() {
     
     console.log('🤖 Chatbot elements found successfully');
     
-    // Toggle chatbot window with smooth animation
-    chatbotButton.addEventListener('click', () => {
+    // Toggle chatbot window
+    chatbotButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         console.log('🤖 Chatbot button clicked');
+        
         const isActive = chatbotWindow.classList.contains('active');
         
         if (!isActive) {
             chatbotWindow.classList.add('active');
+            
             // Add welcome message if first time opening
             if (chatbotBody && chatbotBody.children.length === 0) {
                 addWelcomeMessage();
             }
+            
+            // Focus input on desktop, but not on mobile to prevent keyboard issues
+            if (!DeviceInfo.isMobile && chatbotInput) {
+                setTimeout(() => chatbotInput.focus(), 300);
+            }
+            
+            // Prevent body scroll on mobile when chatbot is open
+            if (DeviceInfo.isMobile) {
+                document.body.style.overflow = 'hidden';
+            }
         } else {
-            chatbotWindow.classList.remove('active');
+            closeChatbot();
         }
     });
     
     // Close chatbot
     if (chatbotClose) {
-        chatbotClose.addEventListener('click', () => {
-            console.log('🤖 Chatbot closed');
-            chatbotWindow.classList.remove('active');
+        chatbotClose.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeChatbot();
         });
     }
     
+    // Close on backdrop click (mobile UX)
+    chatbotWindow.addEventListener('click', (e) => {
+        if (e.target === chatbotWindow) {
+            closeChatbot();
+        }
+    });
+    
     // Send message on button click
     if (chatbotSend) {
-        chatbotSend.addEventListener('click', sendMessage);
+        chatbotSend.addEventListener('click', (e) => {
+            e.preventDefault();
+            sendMessage();
+        });
     }
     
-    // Send message on Enter key (but allow Shift+Enter for new lines)
+    // Send message on Enter key (Shift+Enter for new lines)
     if (chatbotInput) {
         chatbotInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
@@ -156,18 +286,67 @@ function initializeChatbot() {
             }
         });
         
-        // Prevent iOS zoom on focus by ensuring 16px font size
-        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        // iOS-specific: Prevent zoom on focus
+        if (DeviceInfo.isIOS) {
             chatbotInput.style.fontSize = '16px';
+            chatbotInput.setAttribute('autocomplete', 'off');
+            chatbotInput.setAttribute('autocorrect', 'off');
+            chatbotInput.setAttribute('autocapitalize', 'off');
+        }
+        
+        // Auto-resize textarea on mobile
+        if (DeviceInfo.isMobile) {
+            chatbotInput.addEventListener('input', autoResizeTextarea);
         }
     }
     
-    console.log('🤖 Chatbot initialized successfully with CSS-aligned classes!');
+    // Handle orientation changes on mobile
+    if (DeviceInfo.isMobile) {
+        window.addEventListener('orientationchange', () => {
+            if (chatbotWindow.classList.contains('active')) {
+                setTimeout(() => {
+                    if (chatbotBody) {
+                        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+                    }
+                }, 300);
+            }
+        });
+    }
+    
+    console.log('🤖 Chatbot initialized successfully!');
+}
+
+/**
+ * Close chatbot window
+ */
+function closeChatbot() {
+    const chatbotWindow = safeQuery('.chatbot-window');
+    if (!chatbotWindow) return;
+    
+    console.log('🤖 Chatbot closed');
+    chatbotWindow.classList.remove('active');
+    
+    // Restore body scroll on mobile
+    if (DeviceInfo.isMobile) {
+        document.body.style.overflow = '';
+    }
+}
+
+/**
+ * Auto-resize textarea for mobile input
+ */
+function autoResizeTextarea() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
 }
 
 // ============================================
-// WELCOME MESSAGE - CSS ALIGNED
+// WELCOME MESSAGE
 // ============================================
+
+/**
+ * Add welcome message to chatbot
+ */
 function addWelcomeMessage() {
     const chatbotBody = safeQuery('.chatbot-body');
     if (!chatbotBody) return;
@@ -199,14 +378,18 @@ function addWelcomeMessage() {
     chatbotBody.appendChild(welcomeMsg);
     
     // Smooth scroll to bottom
-    requestAnimationFrame(() => {
+    requestAnimFrame(() => {
         chatbotBody.scrollTop = chatbotBody.scrollHeight;
     });
 }
 
 // ============================================
-// SEND MESSAGE TO CLAUDE API - ENHANCED
+// SEND MESSAGE TO CLAUDE API
 // ============================================
+
+/**
+ * Send message to Claude API with error handling
+ */
 async function sendMessage() {
     const chatbotInput = safeQuery('.chatbot-input');
     const chatbotBody = safeQuery('.chatbot-body');
@@ -225,16 +408,18 @@ async function sendMessage() {
     }
     
     // Check if API key is configured
-    if (CLAUDE_API_KEY === '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') {
+    if (!CLAUDE_API_KEY || CLAUDE_API_KEY === 'YOUR_API_KEY_HERE') {
         addMessage('user', message);
         addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
         chatbotInput.value = '';
+        chatbotInput.style.height = 'auto';
         return;
     }
     
     // Add user message to chat
     addMessage('user', message);
     chatbotInput.value = '';
+    chatbotInput.style.height = 'auto';
     chatbotInput.disabled = true;
     chatbotSend.disabled = true;
     isTyping = true;
@@ -321,15 +506,19 @@ async function sendMessage() {
         isTyping = false;
         
         // Focus input for better UX (desktop only)
-        if (window.innerWidth > 768) {
+        if (!DeviceInfo.isMobile && window.innerWidth > 768) {
             chatbotInput.focus();
         }
     }
 }
 
 // ============================================
-// ADD MESSAGE TO CHAT - CSS ALIGNED
+// ADD MESSAGE TO CHAT
 // ============================================
+
+/**
+ * Add message to chat window
+ */
 function addMessage(role, content) {
     const chatbotBody = safeQuery('.chatbot-body');
     if (!chatbotBody) {
@@ -341,14 +530,14 @@ function addMessage(role, content) {
     messageDiv.className = `chat-message ${role}-message`;
     
     if (role === 'user') {
-        // User messages - NO avatar, just bubble on far right
+        // User messages - bubble on right, no avatar
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-text">${escapeHtml(content)}</div>
             </div>
         `;
     } else {
-        // Assistant messages - Avatar on left, bubble next to it
+        // Assistant messages - avatar on left, bubble next to it
         messageDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-avatar">
@@ -362,14 +551,18 @@ function addMessage(role, content) {
     chatbotBody.appendChild(messageDiv);
     
     // Smooth scroll to bottom with animation frame
-    requestAnimationFrame(() => {
+    requestAnimFrame(() => {
         chatbotBody.scrollTop = chatbotBody.scrollHeight;
     });
 }
 
 // ============================================
-// TYPING INDICATOR - CSS ALIGNED
+// TYPING INDICATOR
 // ============================================
+
+/**
+ * Show typing indicator
+ */
 function showTypingIndicator() {
     const chatbotBody = safeQuery('.chatbot-body');
     if (!chatbotBody) return;
@@ -390,11 +583,14 @@ function showTypingIndicator() {
     chatbotBody.appendChild(typingDiv);
     
     // Smooth scroll to bottom
-    requestAnimationFrame(() => {
+    requestAnimFrame(() => {
         chatbotBody.scrollTop = chatbotBody.scrollHeight;
     });
 }
 
+/**
+ * Remove typing indicator
+ */
 function removeTypingIndicator() {
     const typingIndicator = safeQuery('.typing-indicator');
     if (typingIndicator) {
@@ -403,22 +599,28 @@ function removeTypingIndicator() {
 }
 
 // ============================================
-// MESSAGE FORMATTING - ENHANCED
+// MESSAGE FORMATTING
 // ============================================
+
+/**
+ * Escape HTML to prevent XSS
+ */
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
 
+/**
+ * Format message with markdown-style formatting
+ */
 function formatMessage(text) {
-    // Convert markdown-style formatting to HTML
     let formatted = escapeHtml(text);
     
     // Bold text
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
-    // Bullet points (more robust)
+    // Bullet points
     const lines = formatted.split('\n');
     let inList = false;
     let result = [];
@@ -458,8 +660,12 @@ function formatMessage(text) {
 // ============================================
 // MOBILE ALLOCATION CARDS
 // ============================================
+
+/**
+ * Initialize mobile-friendly allocation cards
+ */
 function initializeMobileAllocationCards() {
-    // Check if we're on mobile
+    // Only on mobile devices
     if (window.innerWidth > 768) {
         console.log('📱 Desktop detected - skipping mobile allocation cards');
         return;
@@ -556,7 +762,7 @@ function initializeMobileAllocationCards() {
 }
 
 // ============================================
-// PAGE INITIALIZATION - OPTIMIZED
+// PAGE INITIALIZATION
 // ============================================
 
 // Immediately prevent flash by setting dark background
@@ -568,50 +774,57 @@ function initializeMobileAllocationCards() {
     }
 })();
 
-// DOM Content Loaded - Initialize all features
+/**
+ * DOM Content Loaded - Initialize all features
+ */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥🪙 Main page loading - optimized initialization...');
+    console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized)...');
     
-    // Ensure dark background and full opacity
+    // Ensure dark background
     document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
     document.body.style.opacity = '1';
     document.body.classList.add('loaded');
     
-    // Initialize all features
+    // Log device info
+    console.log('📱 Device:', {
+        mobile: DeviceInfo.isMobile,
+        width: DeviceInfo.screenWidth,
+        touch: DeviceInfo.supportsTouch,
+        reducedMotion: DeviceInfo.prefersReducedMotion
+    });
+    
+    // Initialize features
     initializeChatbot();
     initializeMobileAllocationCards();
-    preloadPhoenixCryptoImages();
+    preloadCriticalImages();
     initializeCryptoCoinImage();
-    initializeEmberCoinImageV3();
+    initializeEmberCoinImage();
     initializeCryptoBenefits();
-    initializeEmberHighlightsV3();
-    createPhoenixCryptoScrollIndicator();
+    initializeEmberHighlights();
+    createScrollProgressIndicator();
     
-    // Create floating coins immediately without delay
-    createPhoenixCryptoParticles();
+    // Create floating particles (optimized for device)
+    createFloatingParticles();
     
-    // Initialize scroll reveal observer
+    // Initialize observers
     initializeScrollRevealObserver();
+    initializeStatsAnimationObserver();
     
-    // Initialize interactive card effects
+    // Initialize interactions
     initializeCardEffects();
-    
-    // Initialize stats animation observer
-    initializeStatsAnimation();
-    
-    // Initialize gallery auto-rotation
     initializeGalleryAutoRotation();
-    
-    // Initialize CTA button feedback
     initializeCTAFeedback();
     
-    console.log('🔥🪙 Main page initialized successfully!');
-    console.log('🤖 Claude API Chatbot ready with CSS-aligned classes!');
-    console.log('📱 Mobile allocation cards ready!');
+    // Mobile-specific optimizations
+    if (DeviceInfo.isMobile) {
+        optimizeMobilePerformance();
+    }
+    
+    console.log('🔥🪙 Vault Phoenix initialized successfully!');
 });
 
 // ============================================
-// GALLERY FUNCTIONS - ENHANCED
+// GALLERY FUNCTIONS
 // ============================================
 
 /**
@@ -669,9 +882,12 @@ function changeLaptopImage(imageSrc, title) {
 }
 
 // ============================================
-// SCROLL REVEAL OBSERVER - OPTIMIZED
+// SCROLL REVEAL OBSERVER
 // ============================================
 
+/**
+ * Initialize intersection observer for scroll reveals
+ */
 function initializeScrollRevealObserver() {
     const observerOptions = {
         threshold: 0.05,
@@ -681,6 +897,7 @@ function initializeScrollRevealObserver() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
+                // Stagger animations for better visual effect
                 setTimeout(() => {
                     entry.target.classList.add('revealed');
                 }, index * 50);
@@ -696,10 +913,19 @@ function initializeScrollRevealObserver() {
 }
 
 // ============================================
-// INTERACTIVE CARD EFFECTS - CSS ALIGNED
+// INTERACTIVE CARD EFFECTS
 // ============================================
 
+/**
+ * Initialize hover effects for interactive cards
+ */
 function initializeCardEffects() {
+    // Skip hover effects on touch devices
+    if (DeviceInfo.supportsTouch && DeviceInfo.isMobile) {
+        console.log('🎴 Skipping hover effects for touch device');
+        return;
+    }
+    
     const cards = safeQueryAll('.feature-card, .use-case-card, .simple-thumb, .simple-thumb-laptop, .crypto-benefit, .ember-highlight-redesigned');
     
     cards.forEach(card => {
@@ -714,7 +940,7 @@ function initializeCardEffects() {
                 this.style.transform = 'translateY(-10px) scale(1.02)';
             }
             
-            // Add glow effect for feature and use case cards
+            // Add glow effect
             if (this.classList.contains('feature-card') || this.classList.contains('use-case-card')) {
                 this.style.boxShadow = '0 30px 80px rgba(215, 51, 39, 0.2)';
             }
@@ -735,10 +961,13 @@ function initializeCardEffects() {
 }
 
 // ============================================
-// STATS ANIMATION - OPTIMIZED
+// STATS ANIMATION
 // ============================================
 
-function initializeStatsAnimation() {
+/**
+ * Initialize stats animation observer
+ */
+function initializeStatsAnimationObserver() {
     const heroSection = safeQuery('.hero');
     if (!heroSection) return;
     
@@ -756,6 +985,9 @@ function initializeStatsAnimation() {
     console.log('📊 Stats animation observer initialized');
 }
 
+/**
+ * Animate stats with counting effect
+ */
 function animateStats() {
     const stats = safeQueryAll('.stat-number, .revenue-number');
     
@@ -788,7 +1020,7 @@ function animateStats() {
 }
 
 // ============================================
-// AUTO-ROTATE GALLERY - OPTIMIZED
+// AUTO-ROTATE GALLERY
 // ============================================
 
 let currentImageIndex = 0;
@@ -811,6 +1043,9 @@ const laptopImageRotation = [
     { src: 'images/AppbuilderSDK.PNG', title: 'App Builder SDK' }
 ];
 
+/**
+ * Initialize gallery auto-rotation
+ */
 function initializeGalleryAutoRotation() {
     let autoRotateInterval;
     let autoRotateLaptopInterval;
@@ -849,7 +1084,7 @@ function initializeGalleryAutoRotation() {
         autoRotateLaptopInterval = setInterval(autoRotateLaptopGallery, 4500);
     }, 3000);
     
-    // Pause auto-rotation when user interacts with thumbnails
+    // Pause auto-rotation when user interacts
     safeQueryAll('.simple-thumb').forEach(thumb => {
         thumb.addEventListener('click', () => {
             if (autoRotateInterval) {
@@ -879,11 +1114,14 @@ function initializeGalleryAutoRotation() {
 // CTA BUTTON FEEDBACK
 // ============================================
 
+/**
+ * Initialize CTA button feedback
+ */
 function initializeCTAFeedback() {
     // Email CTAs
     safeQueryAll('a[href^="mailto:"]').forEach(link => {
         link.addEventListener('click', (e) => {
-            console.log('🔥🪙 Phoenix crypto email CTA ignited:', link.href);
+            console.log('📧 Email CTA clicked:', link.href);
             link.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 link.style.transform = '';
@@ -894,7 +1132,7 @@ function initializeCTAFeedback() {
     // SMS CTAs
     safeQueryAll('a[href^="sms:"]').forEach(link => {
         link.addEventListener('click', (e) => {
-            console.log('🔥🪙 Phoenix crypto SMS CTA ignited:', link.href);
+            console.log('📱 SMS CTA clicked:', link.href);
             link.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 link.style.transform = '';
@@ -906,11 +1144,14 @@ function initializeCTAFeedback() {
 }
 
 // ============================================
-// PAGE LOAD HANDLING - ENHANCED
+// PAGE LOAD HANDLING
 // ============================================
 
+/**
+ * Window load event - final optimizations
+ */
 window.addEventListener('load', () => {
-    console.log('🔥🪙 Main page fully loaded and ready!');
+    console.log('🔥🪙 Vault Phoenix fully loaded!');
     
     // Add phoenix flame effect to logo
     const logoIcon = safeQuery('.logo-icon');
@@ -922,36 +1163,32 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         const floatingCoins = safeQuery('.hero-floating-coins');
         if (floatingCoins) {
-            console.log('🔥🪙 SUCCESS: Floating VPEmberCoin.PNG coins are active!');
-        } else {
-            console.warn('🔥🪙 WARNING: Floating coins not found!');
+            console.log('✅ Floating coins active');
         }
         
         const mainScreenshot = safeQuery('#mainScreenshot');
-        if (mainScreenshot && (mainScreenshot.src.includes('ARView') || mainScreenshot.src.includes('Ember'))) {
-            console.log('🔥🪙 SUCCESS: App screenshots loaded in gallery!');
-        }
-        
-        const mainLaptopScreenshot = safeQuery('#mainLaptopScreenshot');
-        if (mainLaptopScreenshot && mainLaptopScreenshot.src.includes('.PNG')) {
-            console.log('🔥🪙 SUCCESS: Management system screenshots loaded!');
+        if (mainScreenshot && mainScreenshot.src.includes('images/')) {
+            console.log('✅ Gallery images loaded');
         }
     }, 500);
     
     // Performance timing
     const loadTime = performance.now();
-    console.log(`%c🔥🪙 Phoenix crypto arose in ${Math.round(loadTime)}ms - Ready to collect VPEmberCoins!`, 'color: #22c55e; font-weight: bold;');
+    console.log(`%c🔥 Page loaded in ${Math.round(loadTime)}ms`, 'color: #22c55e; font-weight: bold;');
 });
 
 // ============================================
-// IMAGE ERROR HANDLING - ENHANCED
+// IMAGE ERROR HANDLING
 // ============================================
 
+/**
+ * Handle image loading errors
+ */
 safeQueryAll('img').forEach(img => {
     img.addEventListener('error', function() {
-        console.warn('🔥🪙 Image failed to load:', this.src);
+        console.warn('⚠️ Image failed to load:', this.src);
         this.style.opacity = '0.5';
-        this.alt = 'Phoenix crypto image rising...';
+        this.alt = 'Image loading...';
     });
     
     img.addEventListener('load', function() {
@@ -960,10 +1197,13 @@ safeQueryAll('img').forEach(img => {
 });
 
 // ============================================
-// IMAGE PRELOADING - OPTIMIZED
+// IMAGE PRELOADING
 // ============================================
 
-function preloadPhoenixCryptoImages() {
+/**
+ * Preload critical images
+ */
+function preloadCriticalImages() {
     const criticalImages = [
         // App Screenshots
         'images/ARView.jpg',
@@ -972,7 +1212,7 @@ function preloadPhoenixCryptoImages() {
         'images/EmberNearby.jpg',
         'images/EmberVault.jpg',
         'images/HuntMap.jpg',
-        // Management System Screenshots
+        // Management System
         'images/CampaignControl.PNG',
         'images/DashboardOverview.PNG',
         'images/AdvertiserManagement.PNG',
@@ -982,35 +1222,40 @@ function preloadPhoenixCryptoImages() {
         // Core Images
         'images/VPEmberCoin.PNG',
         'images/PhoenixHoldingCoin.PNG',
-        'images/VPLogoNoText.PNG',
-        'images/PhoenixBot.PNG',
-        'images/VPEmberFlame.svg'
+        'images/VPLogoNoText.PNG'
     ];
     
     criticalImages.forEach(src => {
         const img = new Image();
         img.src = src;
-        img.onload = () => console.log('🔥🪙 Preloaded:', src);
-        img.onerror = () => console.warn('🔥🪙 Preload failed:', src);
     });
     
     console.log('🖼️ Image preloading initiated');
 }
 
 // ============================================
-// FLOATING CRYPTO PARTICLES - CSS ALIGNED
+// FLOATING PARTICLES - MOBILE OPTIMIZED
 // ============================================
 
-function createPhoenixCryptoParticles() {
+/**
+ * Create floating crypto particles (optimized for performance)
+ */
+function createFloatingParticles() {
     const hero = safeQuery('.hero');
     if (!hero) {
-        console.warn('🔥🪙 Hero section not found for floating coins');
+        console.warn('⚠️ Hero section not found');
         return;
     }
     
-    console.log('🔥🪙 Creating floating crypto coins with VPEmberCoin.PNG...');
+    // Skip particles if user prefers reduced motion
+    if (DeviceInfo.prefersReducedMotion) {
+        console.log('⚠️ Reduced motion enabled - skipping particles');
+        return;
+    }
     
-    // Create floating coins container with proper CSS classes
+    console.log('🪙 Creating floating particles...');
+    
+    // Create container
     const floatingCoins = document.createElement('div');
     floatingCoins.className = 'hero-floating-coins';
     floatingCoins.style.cssText = `
@@ -1024,7 +1269,10 @@ function createPhoenixCryptoParticles() {
         overflow: hidden;
     `;
     
-    // Optimized coin positions
+    // Get optimal particle count
+    const particleCount = DeviceInfo.getOptimalParticleCount();
+    
+    // Optimized positions
     const coinPositions = [
         { top: '15%', left: '10%', delay: '0s', duration: '6s' },
         { top: '70%', left: '8%', delay: '1s', duration: '7s' },
@@ -1032,53 +1280,45 @@ function createPhoenixCryptoParticles() {
         { top: '65%', right: '10%', delay: '3s', duration: '6s' },
         { top: '10%', left: '80%', delay: '4s', duration: '7s' },
         { bottom: '20%', right: '85%', delay: '5s', duration: '9s' }
-    ];
+    ].slice(0, particleCount);
     
     coinPositions.forEach((pos, index) => {
         const coin = document.createElement('div');
         coin.className = `hero-coin hero-coin-${index + 1}`;
         
-        // Create image element with CSS-aligned classes
         const coinImg = document.createElement('img');
         coinImg.src = 'images/VPEmberCoin.PNG';
         coinImg.alt = 'VP Ember Coin';
         coinImg.className = 'hero-crypto-coin-icon';
         coinImg.loading = 'lazy';
+        
+        // Mobile-optimized sizing
+        const size = DeviceInfo.isMobile ? 'clamp(20px, 4vw, 35px)' : 'clamp(35px, 5vw, 50px)';
+        const opacity = DeviceInfo.isMobile ? '0.5' : '0.7';
+        
         coinImg.style.cssText = `
-            width: clamp(35px, 5vw, 50px);
-            height: clamp(35px, 5vw, 50px);
+            width: ${size};
+            height: ${size};
             object-fit: contain;
             filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
-            transition: all 0.3s ease;
-            opacity: 0.7;
+            opacity: ${opacity};
             border-radius: 50%;
+            will-change: transform;
         `;
         
-        // Handle image load
-        coinImg.onload = () => {
-            console.log(`🔥🪙 VPEmberCoin.PNG loaded for coin ${index + 1}`);
-        };
-        
-        coinImg.onerror = () => {
-            console.warn(`🔥🪙 VPEmberCoin.PNG failed for coin ${index + 1}, using fallback`);
-            coinImg.style.display = 'none';
+        coinImg.onerror = function() {
+            console.warn('⚠️ Coin image failed, using emoji fallback');
             const fallback = document.createElement('div');
             fallback.innerHTML = '🪙';
             fallback.style.cssText = `
-                font-size: clamp(35px, 5vw, 50px);
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                font-size: ${size};
                 filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
-                color: #f0a500;
-                text-shadow: 0 0 10px rgba(240, 165, 0, 0.5);
             `;
             coin.appendChild(fallback);
         };
         
         coin.appendChild(coinImg);
         
-        // Apply positioning
         coin.style.cssText = `
             position: absolute;
             animation: heroCoinFloat ${pos.duration} ease-in-out infinite;
@@ -1092,14 +1332,11 @@ function createPhoenixCryptoParticles() {
         `;
         
         floatingCoins.appendChild(coin);
-        console.log(`🔥🪙 Created floating VPEmberCoin ${index + 1}`);
     });
     
-    // Insert at beginning of hero section
     hero.insertBefore(floatingCoins, hero.firstChild);
-    console.log('🔥🪙 Floating VPEmberCoin coins container added to hero');
     
-    // Add CSS animation if not already present
+    // Add animation CSS if not present
     if (!document.querySelector('#heroCoinFloatAnimation')) {
         const style = document.createElement('style');
         style.id = 'heroCoinFloatAnimation';
@@ -1107,61 +1344,43 @@ function createPhoenixCryptoParticles() {
             @keyframes heroCoinFloat {
                 0%, 100% { 
                     transform: translateY(0px) rotate(0deg) scale(1); 
-                    opacity: 0.7; 
                 }
                 25% { 
                     transform: translateY(-20px) rotate(90deg) scale(1.1); 
-                    opacity: 0.9; 
                 }
                 50% { 
                     transform: translateY(-10px) rotate(180deg) scale(0.9); 
-                    opacity: 0.8; 
                 }
                 75% { 
                     transform: translateY(-25px) rotate(270deg) scale(1.15); 
-                    opacity: 0.85; 
                 }
             }
             
-            .hero-floating-coins,
-            .hero-coin {
-                z-index: 1 !important;
-                pointer-events: none !important;
-            }
-            
-            .hero-crypto-coin-icon {
-                z-index: 1 !important;
-                pointer-events: none !important;
-            }
-            
-            @media (max-width: 768px) {
-                .hero-crypto-coin-icon {
-                    width: clamp(25px, 4vw, 35px) !important;
-                    height: clamp(25px, 4vw, 35px) !important;
-                    opacity: 0.6 !important;
-                }
-            }
-            
-            @media (max-width: 480px) {
-                .hero-crypto-coin-icon {
-                    width: clamp(20px, 4vw, 30px) !important;
-                    height: clamp(20px, 4vw, 30px) !important;
-                    opacity: 0.5 !important;
+            @media (prefers-reduced-motion: reduce) {
+                .hero-coin {
+                    animation: none !important;
                 }
             }
         `;
         document.head.appendChild(style);
-        console.log('🔥🪙 Floating VPEmberCoin animations added');
     }
+    
+    console.log(`🪙 ${particleCount} floating particles created`);
 }
 
 // ============================================
-// COIN IMAGE INTERACTIONS - ENHANCED
+// COIN IMAGE INTERACTIONS
 // ============================================
 
+/**
+ * Initialize crypto coin image interactions
+ */
 function initializeCryptoCoinImage() {
     const cryptoImage = safeQuery('.phoenix-coin-image');
     if (!cryptoImage) return;
+    
+    // Skip hover effects on mobile
+    if (DeviceInfo.isMobile) return;
     
     cryptoImage.addEventListener('mouseenter', function() {
         this.style.filter = 'drop-shadow(0 0 30px rgba(251, 146, 60, 0.8)) brightness(1.1)';
@@ -1171,25 +1390,18 @@ function initializeCryptoCoinImage() {
         this.style.filter = '';
     });
     
-    // Subtle floating animation
-    let time = 0;
-    const animateFloat = () => {
-        time += 0.02;
-        const sideMovement = Math.sin(time) * 8;
-        const upDownMovement = Math.cos(time * 0.8) * 3;
-        if (cryptoImage && cryptoImage.isConnected) {
-            cryptoImage.style.transform = `translateX(${sideMovement}px) translateY(${upDownMovement}px)`;
-        }
-    };
-    
-    setInterval(animateFloat, 50);
-    
-    console.log('🪙 Crypto coin image interactions initialized');
+    console.log('🪙 Crypto coin interactions initialized');
 }
 
-function initializeEmberCoinImageV3() {
+/**
+ * Initialize ember coin image interactions
+ */
+function initializeEmberCoinImage() {
     const emberCoinImage = safeQuery('.phoenix-holding-coin-redesigned');
     if (!emberCoinImage) return;
+    
+    // Skip hover effects on mobile
+    if (DeviceInfo.isMobile) return;
     
     emberCoinImage.addEventListener('mouseenter', function() {
         this.style.filter = 'drop-shadow(0 0 50px rgba(240, 165, 0, 0.9)) brightness(1.2)';
@@ -1201,13 +1413,16 @@ function initializeEmberCoinImageV3() {
         this.style.transform = '';
     });
     
-    console.log('🪙 Ember coin V3 image interactions initialized');
+    console.log('🪙 Ember coin interactions initialized');
 }
 
 // ============================================
-// CRYPTO BENEFITS ANIMATIONS - CSS ALIGNED
+// CRYPTO BENEFITS ANIMATIONS
 // ============================================
 
+/**
+ * Initialize crypto benefits animations
+ */
 function initializeCryptoBenefits() {
     const benefits = safeQueryAll('.crypto-benefit');
     if (!benefits.length) return;
@@ -1220,21 +1435,19 @@ function initializeCryptoBenefits() {
                     entry.target.style.opacity = '1';
                     
                     const icon = entry.target.querySelector('.benefit-icon');
-                    if (icon && !document.querySelector('#coinBounceAnimation')) {
-                        const style = document.createElement('style');
-                        style.id = 'coinBounceAnimation';
-                        style.textContent = `
-                            @keyframes coinBounce {
-                                0% { transform: scale(1) rotateY(0deg); }
-                                50% { transform: scale(1.2) rotateY(180deg); }
-                                100% { transform: scale(1) rotateY(360deg); }
-                            }
-                        `;
-                        document.head.appendChild(style);
-                    }
-                    
-                    const icon = entry.target.querySelector('.benefit-icon');
-                    if (icon) {
+                    if (icon && !DeviceInfo.prefersReducedMotion) {
+                        if (!document.querySelector('#coinBounceAnimation')) {
+                            const style = document.createElement('style');
+                            style.id = 'coinBounceAnimation';
+                            style.textContent = `
+                                @keyframes coinBounce {
+                                    0% { transform: scale(1) rotateY(0deg); }
+                                    50% { transform: scale(1.2) rotateY(180deg); }
+                                    100% { transform: scale(1) rotateY(360deg); }
+                                }
+                            `;
+                            document.head.appendChild(style);
+                        }
                         icon.style.animation = 'coinBounce 0.6s ease-out';
                     }
                 }, index * 200);
@@ -1251,7 +1464,10 @@ function initializeCryptoBenefits() {
     console.log('💰 Crypto benefits animations initialized');
 }
 
-function initializeEmberHighlightsV3() {
+/**
+ * Initialize ember highlights animations
+ */
+function initializeEmberHighlights() {
     const highlights = safeQueryAll('.ember-highlight-redesigned');
     if (!highlights.length) return;
     
@@ -1263,23 +1479,21 @@ function initializeEmberHighlightsV3() {
                     entry.target.style.opacity = '1';
                     
                     const emoji = entry.target.querySelector('.highlight-emoji-redesigned');
-                    if (emoji && !document.querySelector('#emberFlickerV3Animation')) {
-                        const style = document.createElement('style');
-                        style.id = 'emberFlickerV3Animation';
-                        style.textContent = `
-                            @keyframes emberFlickerV3 {
-                                0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(240, 165, 0, 0.6)); }
-                                25% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.8)); }
-                                50% { transform: scale(0.95); filter: drop-shadow(0 0 3px rgba(240, 165, 0, 0.5)); }
-                                75% { transform: scale(1.05); filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.7)); }
-                            }
-                        `;
-                        document.head.appendChild(style);
-                    }
-                    
-                    const emoji = entry.target.querySelector('.highlight-emoji-redesigned');
-                    if (emoji) {
-                        emoji.style.animation = 'emberFlickerV3 1s ease-in-out';
+                    if (emoji && !DeviceInfo.prefersReducedMotion) {
+                        if (!document.querySelector('#emberFlickerAnimation')) {
+                            const style = document.createElement('style');
+                            style.id = 'emberFlickerAnimation';
+                            style.textContent = `
+                                @keyframes emberFlicker {
+                                    0%, 100% { transform: scale(1); }
+                                    25% { transform: scale(1.1); }
+                                    50% { transform: scale(0.95); }
+                                    75% { transform: scale(1.05); }
+                                }
+                            `;
+                            document.head.appendChild(style);
+                        }
+                        emoji.style.animation = 'emberFlicker 1s ease-in-out';
                     }
                 }, index * 150);
             }
@@ -1292,50 +1506,22 @@ function initializeEmberHighlightsV3() {
         highlightsObserver.observe(highlight);
     });
     
-    console.log('🔥 Ember highlights V3 animations initialized');
+    console.log('🔥 Ember highlights animations initialized');
 }
 
 // ============================================
-// CTA BUTTON ENHANCEMENTS - CSS ALIGNED
+// CTA BUTTON ENHANCEMENTS
 // ============================================
 
+/**
+ * Enhance CTA buttons with effects
+ */
 safeQueryAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .join-presale-button-redesigned, .demo-button-enhanced').forEach(button => {
+    // Skip effects on mobile or reduced motion
+    if (DeviceInfo.isMobile || DeviceInfo.prefersReducedMotion) return;
+    
     button.addEventListener('mouseenter', function() {
         this.style.filter = 'brightness(1.1) saturate(1.2)';
-        
-        // Add sparkle effect
-        if (Math.random() > 0.7) {
-            const sparkle = document.createElement('img');
-            sparkle.src = 'images/VPEmberCoin.PNG';
-            sparkle.alt = 'VP Ember Coin Sparkle';
-            sparkle.className = 'cta-sparkle-effect';
-            sparkle.style.cssText = `
-                position: absolute;
-                width: 12px;
-                height: 12px;
-                animation: sparkle 0.8s ease-out forwards;
-                pointer-events: none;
-                top: ${Math.random() * 20 - 10}px;
-                left: ${Math.random() * 20 - 10}px;
-                filter: drop-shadow(0 0 4px rgba(240, 165, 0, 0.8));
-                z-index: 10;
-                border-radius: 50%;
-            `;
-            
-            sparkle.onerror = function() {
-                this.style.display = 'none';
-                const fallback = document.createElement('div');
-                fallback.innerHTML = '✨';
-                fallback.style.cssText = this.style.cssText;
-                fallback.style.fontSize = '12px';
-                this.parentNode.appendChild(fallback);
-            };
-            
-            this.style.position = 'relative';
-            this.appendChild(sparkle);
-            
-            setTimeout(() => sparkle.remove(), 800);
-        }
     });
     
     button.addEventListener('mouseleave', function() {
@@ -1351,55 +1537,95 @@ safeQueryAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .join-pre
     });
 });
 
-// Add sparkle animation if not present
-if (!document.querySelector('#sparkleAnimation')) {
-    const style = document.createElement('style');
-    style.id = 'sparkleAnimation';
-    style.textContent = `
-        @keyframes sparkle {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-20px) scale(0); opacity: 0; }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-console.log('✨ CTA button enhancements initialized');
+console.log('✨ CTA enhancements initialized');
 
 // ============================================
-// SCROLL PROGRESS INDICATOR - CSS ALIGNED
+// SCROLL PROGRESS INDICATOR
 // ============================================
 
-function createPhoenixCryptoScrollIndicator() {
+/**
+ * Create scroll progress indicator
+ */
+function createScrollProgressIndicator() {
     const indicator = document.createElement('div');
-    indicator.className = 'phoenix-scroll-progress-indicator';
+    indicator.className = 'phoenix-scroll-progress';
     indicator.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
-        height: 4px;
+        height: 3px;
         background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
         z-index: 9999;
-        transition: width 0.3s ease;
         width: 0%;
-        box-shadow: 0 2px 10px rgba(215, 51, 39, 0.3);
+        transition: width 0.1s ease;
+        box-shadow: 0 2px 5px rgba(215, 51, 39, 0.3);
     `;
     document.body.appendChild(indicator);
     
-    const updateProgress = debounce(() => {
+    const updateProgress = throttle(() => {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
         indicator.style.width = scrolled + '%';
-    }, 10);
+    }, 50);
     
-    window.addEventListener('scroll', updateProgress);
+    window.addEventListener('scroll', updateProgress, { passive: true });
     
     console.log('📊 Scroll progress indicator initialized');
 }
 
 // ============================================
-// EASTER EGG: KONAMI CODE - CSS ALIGNED
+// MOBILE PERFORMANCE OPTIMIZATIONS
+// ============================================
+
+/**
+ * Apply mobile-specific performance optimizations
+ */
+function optimizeMobilePerformance() {
+    console.log('📱 Applying mobile optimizations...');
+    
+    // Disable hover effects on touch devices
+    document.body.classList.add('touch-device');
+    
+    // Optimize scroll performance
+    const scrollElements = safeQueryAll('.chatbot-body, .allocation-cards-mobile');
+    scrollElements.forEach(el => {
+        el.style.webkitOverflowScrolling = 'touch';
+        el.style.overscrollBehavior = 'contain';
+    });
+    
+    // Reduce animation complexity
+    if (DeviceInfo.isLowEndDevice()) {
+        document.body.classList.add('low-end-device');
+        console.log('📱 Low-end device optimizations applied');
+    }
+    
+    // Handle orientation changes
+    window.addEventListener('orientationchange', debounce(() => {
+        console.log('📱 Orientation changed');
+        DeviceInfo.screenWidth = window.innerWidth;
+        DeviceInfo.screenHeight = window.innerHeight;
+    }, 300));
+    
+    console.log('📱 Mobile optimizations complete');
+}
+
+// ============================================
+// RESIZE HANDLER - MOBILE OPTIMIZED
+// ============================================
+
+/**
+ * Handle window resize events
+ */
+window.addEventListener('resize', debounce(() => {
+    DeviceInfo.screenWidth = window.innerWidth;
+    DeviceInfo.screenHeight = window.innerHeight;
+    
+    console.log('📐 Window resized:', DeviceInfo.screenWidth, 'x', DeviceInfo.screenHeight);
+}, 250));
+
+// ============================================
+// EASTER EGG: KONAMI CODE
 // ============================================
 
 let konamiCode = [];
@@ -1416,9 +1642,31 @@ document.addEventListener('keydown', (e) => {
     }
     
     if (konamiCode.join(',') === konamiSequence.join(',')) {
-        console.log('🔥🪙 BONUS CRYPTO ACTIVATED! 🪙🔥');
+        console.log('🔥🪙 BONUS ACTIVATED!');
         
-        // Coin rain animation
+        // Create coin rain (reduced on mobile)
+        const coinCount = DeviceInfo.isMobile ? 15 : 30;
+        
+        for (let i = 0; i < coinCount; i++) {
+            setTimeout(() => {
+                const coin = document.createElement('div');
+                coin.innerHTML = '🪙';
+                coin.style.cssText = `
+                    position: fixed;
+                    font-size: ${Math.random() * 20 + 25}px;
+                    left: ${Math.random() * 100}vw;
+                    top: -50px;
+                    z-index: 10000;
+                    pointer-events: none;
+                    animation: coinFall ${Math.random() * 2 + 2}s linear forwards;
+                `;
+                
+                document.body.appendChild(coin);
+                setTimeout(() => coin.remove(), 4000);
+            }, i * 100);
+        }
+        
+        // Add animation if not present
         if (!document.querySelector('#coinFallAnimation')) {
             const style = document.createElement('style');
             style.id = 'coinFallAnimation';
@@ -1433,52 +1681,16 @@ document.addEventListener('keydown', (e) => {
             document.head.appendChild(style);
         }
         
-        for (let i = 0; i < 30; i++) {
-            setTimeout(() => {
-                const coin = document.createElement('img');
-                coin.src = 'images/VPEmberCoin.PNG';
-                coin.alt = 'VP Ember Bonus Coin';
-                coin.className = 'bonus-coin-fall';
-                coin.style.cssText = `
-                    position: fixed;
-                    width: ${Math.random() * 20 + 25}px;
-                    height: ${Math.random() * 20 + 25}px;
-                    left: ${Math.random() * 100}vw;
-                    top: -50px;
-                    z-index: 10000;
-                    pointer-events: none;
-                    animation: coinFall ${Math.random() * 3 + 2}s linear forwards;
-                    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.8));
-                    border-radius: 50%;
-                `;
-                
-                coin.onerror = function() {
-                    this.style.display = 'none';
-                    const fallback = document.createElement('div');
-                    fallback.innerHTML = '🪙';
-                    fallback.style.cssText = this.style.cssText;
-                    fallback.style.fontSize = this.style.width;
-                    fallback.style.color = '#f0a500';
-                    document.body.appendChild(fallback);
-                    setTimeout(() => fallback.remove(), 5000);
-                };
-                
-                document.body.appendChild(coin);
-                setTimeout(() => coin.remove(), 5000);
-            }, i * 150);
-        }
-        
         konamiCode = [];
     }
 });
 
 // ============================================
-// CONSOLE MESSAGES - ENHANCED
+// CONSOLE MESSAGES
 // ============================================
 
-console.log('%c🔥🪙 VAULT PHOENIX - AR CRYPTO GAMING REVOLUTION', 'color: #d73327; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);');
-console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solutions', 'color: #fb923c; font-size: 14px; font-weight: bold;');
-console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
-console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising!', 'color: #d73327; font-size: 12px; font-style: italic;');
-console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
-console.log('%c💡 CSS-Aligned JavaScript - Senior Engineering Standards', 'color: #22c55e; font-size: 12px; font-weight: bold;');
+console.log('%c🔥🪙 VAULT PHOENIX', 'color: #d73327; font-size: 24px; font-weight: bold;');
+console.log('%c🚀 AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 16px; font-weight: bold;');
+console.log('%c📧 contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 12px;');
+console.log('%c💡 Senior Engineering - Mobile-First Architecture', 'color: #22c55e; font-size: 12px; font-weight: bold;');
+console.log('Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
