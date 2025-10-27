@@ -1,6 +1,7 @@
 // Vault Phoenix - Complete Interactive JavaScript
 // 3-TIER HYBRID CHATBOT: Pre-written → Browser AI (WebLLM) → Cloud AI (Claude)
 // UPDATED: Beautiful welcome message, no ugly status boxes, properly sized images
+// FIXED: Removed inline style manipulation that was overriding CSS
 
 // ============================================
 // CONFIGURATION
@@ -424,19 +425,13 @@ tierBadgeStyle.textContent = `
 document.head.appendChild(tierBadgeStyle);
 
 // ============================================
-// PAGE INITIALIZATION
+// PAGE INITIALIZATION - FIXED
+// Let CSS handle all styling via the .loaded class
 // ============================================
-(function() {
-    document.documentElement.style.background = '#0f0f0f';
-    if (document.body) {
-        document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
-        document.body.style.opacity = '1';
-    }
-})();
-
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥🪙 Vault Phoenix loading...');
-    document.body.style.opacity = '1';
+    
+    // Just add the class - CSS handles opacity transition
     document.body.classList.add('loaded');
     
     initializeChatbot(); // 3-TIER chatbot
