@@ -704,7 +704,12 @@
     });
 
     // ============================================
-    // PHOENIX AI CHATBOT SYSTEM
+// CHATBOT INITIALIZATION FIX
+// ============================================
+// Add this at the END of shared-script.js, replacing the existing chatbot section
+
+    // ============================================
+    // PHOENIX AI CHATBOT SYSTEM - IMPROVED INITIALIZATION
     // ============================================
     
     // Chatbot configuration
@@ -758,8 +763,10 @@ Your role:
 
 If asked about financial advice, remind users to do their own research and consult professionals.`;
 
-    // Initialize chatbot
+    // Initialize chatbot - IMPROVED VERSION WITH RETRY LOGIC
     function initializeChatbot() {
+        console.log('🤖 CHATBOT: Starting initialization...');
+        
         const chatbotButton = document.querySelector('.chatbot-button-container');
         const chatbotWindow = document.querySelector('.chatbot-window');
         const chatbotClose = document.querySelector('.chatbot-close');
@@ -767,30 +774,58 @@ If asked about financial advice, remind users to do their own research and consu
         const chatbotSend = document.querySelector('.chatbot-send');
         const chatbotBody = document.querySelector('.chatbot-body');
         
+        console.log('🤖 CHATBOT: Element check:', {
+            button: !!chatbotButton,
+            window: !!chatbotWindow,
+            close: !!chatbotClose,
+            input: !!chatbotInput,
+            send: !!chatbotSend,
+            body: !!chatbotBody
+        });
+        
         if (!chatbotButton || !chatbotWindow) {
-            return;
+            console.error('❌ CHATBOT: Required elements not found!');
+            return false;
         }
         
+        // Remove any existing event listeners (prevents duplicates)
+        const newChatbotButton = chatbotButton.cloneNode(true);
+        chatbotButton.parentNode.replaceChild(newChatbotButton, chatbotButton);
+        
         // Toggle chatbot window
-        chatbotButton.addEventListener('click', () => {
+        newChatbotButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('🤖 CHATBOT: Button clicked!');
             chatbotWindow.classList.toggle('active');
             if (chatbotWindow.classList.contains('active')) {
-                if (chatbotBody.children.length === 0) {
+                console.log('🤖 CHATBOT: Window opened');
+                if (chatbotBody && chatbotBody.children.length === 0) {
                     addWelcomeMessage();
                 }
+            } else {
+                console.log('🤖 CHATBOT: Window closed');
             }
         });
         
+        console.log('🤖 CHATBOT: Button click listener attached');
+        
         // Close chatbot
         if (chatbotClose) {
-            chatbotClose.addEventListener('click', () => {
+            chatbotClose.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('🤖 CHATBOT: Close button clicked');
                 chatbotWindow.classList.remove('active');
             });
         }
         
         // Send message on button click
         if (chatbotSend) {
-            chatbotSend.addEventListener('click', sendMessage);
+            chatbotSend.addEventListener('click', function(e) {
+                e.preventDefault();
+                sendMessage();
+            });
         }
         
         // Send message on Enter key
@@ -803,7 +838,8 @@ If asked about financial advice, remind users to do their own research and consu
             });
         }
         
-        console.log('🤖 Phoenix AI Chatbot initialized');
+        console.log('✅ CHATBOT: Initialization complete!');
+        return true;
     }
     
     // Welcome message
@@ -1005,7 +1041,7 @@ If asked about financial advice, remind users to do their own research and consu
     window.initializePhoenixChatbot = initializeChatbot;
 
     // ============================================
-    // INITIALIZATION
+    // INITIALIZATION - UPDATED WITH RETRY LOGIC
     // ============================================
     
     function init() {
@@ -1020,8 +1056,25 @@ If asked about financial advice, remind users to do their own research and consu
         // Initialize privacy policy modal
         initializePrivacyPolicyModal();
         
-        // Initialize Phoenix AI Chatbot
-        initializeChatbot();
+        // Initialize Phoenix AI Chatbot with retry logic
+        console.log('🤖 Attempting chatbot initialization...');
+        let chatbotInitialized = initializeChatbot();
+        
+        if (!chatbotInitialized) {
+            console.log('🤖 First attempt failed, retrying after 100ms...');
+            setTimeout(() => {
+                chatbotInitialized = initializeChatbot();
+                if (!chatbotInitialized) {
+                    console.log('🤖 Second attempt failed, retrying after 500ms...');
+                    setTimeout(() => {
+                        chatbotInitialized = initializeChatbot();
+                        if (!chatbotInitialized) {
+                            console.error('❌ CHATBOT: Failed to initialize after 3 attempts');
+                        }
+                    }, 500);
+                }
+            }, 100);
+        }
         
         // Initialize countdown timer with retries
         console.log('🔥 Attempting countdown initialization...');
