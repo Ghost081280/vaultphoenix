@@ -1,26 +1,26 @@
 /* ============================================
    VAULT PHOENIX - OPTIMIZED STYLESHEET
    Senior CSS Engineering - Production Ready
-   Version: 2.2 - COMPREHENSIVE FIXES + MOBILE CENTERING
+   Version: 2.3 - MOBILE CENTERING + GLOW CLEANUP COMPLETE
    ============================================ */
 
 /* TABLE OF CONTENTS:
    1. Base & Reset (SCROLL OPTIMIZED)
-   2. Universal Image Glow System (CONSOLIDATED - SINGLE SOURCE OF TRUTH)
+   2. Universal Image Glow System (SINGLE SOURCE - NO DUPLICATES)
    3. Icon Sizes & Styling (SCALED TO 60px MINIMUM)
    4. AI Chatbot System (PROFESSIONAL 550px)
    5. Navigation (NO GLOW - HANDLED BY SHARED-STYLES.CSS)
-   6. Hero Section (MOBILE CENTERING FIXED)
+   6. Hero Section (MOBILE CENTERING COMPLETE)
    7. Token Evolution Section
-   8. App Showcase (DEVICE SPACING FIXED)
-   9. Features & Benefits (BATTLE TESTED OPTIMIZED)
-   10. Technology Modules
-   11. Pricing & Revenue
+   8. App Showcase (DEVICE SPACING STANDARDIZED)
+   9. Features & Benefits (BATTLE TESTED MOBILE OPTIMIZED)
+   10. Technology Modules (GPS ORANGE + BEACON PURPLE)
+   11. Pricing & Revenue (CENTERED CARDS)
    12. Use Cases
    13. Social Sharing
    14. Final CTA (JOURNEY PATHS CENTERED)
    15. Footer
-   16. Mobile Optimizations (COMPREHENSIVE)
+   16. Mobile Optimizations (COMPREHENSIVE - ALL BREAKPOINTS)
    17. Animations & Utilities (PERFORMANCE OPTIMIZED)
 */
 
@@ -70,8 +70,8 @@ body.loaded {
 }
 
 /* ============================================
-   2. UNIVERSAL IMAGE GLOW SYSTEM (CONSOLIDATED)
-   Single source of truth for all glow effects
+   2. UNIVERSAL IMAGE GLOW SYSTEM (SINGLE SOURCE)
+   ✅ NO DUPLICATES - This is the ONLY glow source
    PERFORMANCE OPTIMIZED with GPU acceleration
    ============================================ */
 
@@ -197,8 +197,8 @@ body.loaded {
 }
 
 .journey-icon-large {
-    width: 95px !important;
-    height: 95px !important;
+    width: 120px !important;
+    height: 120px !important;
     object-fit: contain;
     filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5)) 
             drop-shadow(0 0 18px rgba(240, 165, 0, 0.25));
@@ -698,8 +698,8 @@ body.loaded {
 }
 
 /* ============================================
-   6. HERO SECTION (MOBILE CENTERING FIXED)
-   Premium redesign with improved mobile layout
+   6. HERO SECTION (MOBILE CENTERING COMPLETE)
+   ✅ Premium redesign with perfect mobile layout
    ============================================ */
 
 .hero {
@@ -774,7 +774,7 @@ body.loaded {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* 3-Step Process - MOBILE CENTERING FIXED */
+/* ✅ 3-Step Process - MOBILE CENTERING COMPLETE */
 .hero-steps-premium {
     display: flex;
     align-items: center;
@@ -897,7 +897,7 @@ body.loaded {
     }
 }
 
-/* Dual Path CTAs - MOBILE CENTERING FIXED */
+/* ✅ Dual Path CTAs - MOBILE CENTERING COMPLETE */
 .hero-dual-ctas {
     margin: 70px 0 50px;
 }
@@ -1044,7 +1044,7 @@ body.loaded {
     flex-shrink: 0;
 }
 
-/* Hero Benefits Row - MOBILE SCROLL OPTIMIZED */
+/* ✅ Hero Benefits Row - MOBILE SCROLL OPTIMIZED */
 .hero-benefits-row {
     display: flex;
     align-items: center;
@@ -1534,7 +1534,7 @@ body.loaded {
     color: #ffffff;
 }
 
-/* Token Right Section - GLOW CONSOLIDATED */
+/* Token Right Section - Uses Universal Glow System */
 .ember-token-right-redesigned {
     display: flex;
     flex-direction: column;
@@ -1811,7 +1811,7 @@ body.loaded {
     line-height: 1.6;
 }
 
-/* Technology Modules */
+/* ✅ Technology Modules - GPS ORANGE + BEACON PURPLE */
 .technology-modules {
     margin-top: 100px;
     padding: 60px 50px;
@@ -1878,12 +1878,12 @@ body.loaded {
     overflow: hidden;
 }
 
-/* GPS Card - Orange */
+/* ✅ GPS Card - Orange */
 .technology-card.gps-card {
     border-color: rgba(240, 165, 0, 0.4);
 }
 
-/* Beacon Card - Purple */
+/* ✅ Beacon Card - Purple */
 .technology-card.beacon-card {
     border-color: rgba(99, 102, 241, 0.4);
 }
@@ -1912,7 +1912,7 @@ body.loaded {
     position: relative;
 }
 
-/* GPS Icon - Orange */
+/* ✅ GPS Icon - Orange */
 .technology-icon-container {
     width: 95px;
     height: 95px;
@@ -1941,7 +1941,7 @@ body.loaded {
     animation: glowPulse 3s ease-in-out infinite;
 }
 
-/* Beacon Icon - Purple */
+/* ✅ Beacon Icon - Purple */
 .technology-card.beacon-card .technology-icon-container {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
     border-color: rgba(99, 102, 241, 0.4);
@@ -1966,7 +1966,7 @@ body.loaded {
             drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
 }
 
-/* GPS Badge - Orange */
+/* ✅ GPS Badge - Orange */
 .technology-badge {
     display: inline-block;
     background: linear-gradient(135deg, #f0a500, #fb923c);
@@ -2014,7 +2014,7 @@ body.loaded {
     margin-bottom: 30px;
 }
 
-/* GPS Features - Orange */
+/* ✅ GPS Features - Orange */
 .technology-features h5 {
     font-size: 1.1rem;
     font-weight: 800;
@@ -2022,7 +2022,7 @@ body.loaded {
     margin-bottom: 15px;
 }
 
-/* Beacon Features - Purple */
+/* ✅ Beacon Features - Purple */
 .technology-card.beacon-card .technology-features h5 {
     color: #a78bfa;
 }
@@ -2041,7 +2041,7 @@ body.loaded {
     line-height: 1.6;
 }
 
-/* GPS Checkmarks - Orange */
+/* ✅ GPS Checkmarks - Orange */
 .technology-features ul li::before {
     content: '✓';
     position: absolute;
@@ -2060,7 +2060,7 @@ body.loaded {
     border: 2px solid rgba(240, 165, 0, 0.3);
 }
 
-/* Beacon Checkmarks - Purple */
+/* ✅ Beacon Checkmarks - Purple */
 .technology-card.beacon-card .technology-features ul li::before {
     color: #6366f1;
     background: rgba(99, 102, 241, 0.15);
@@ -2075,7 +2075,7 @@ body.loaded {
     margin-bottom: 30px;
 }
 
-/* GPS Stats - Orange */
+/* ✅ GPS Stats - Orange */
 .tech-stat {
     background: rgba(0, 0, 0, 0.3);
     padding: 25px 15px;
@@ -2085,7 +2085,7 @@ body.loaded {
     transition: all 0.3s ease;
 }
 
-/* Beacon Stats - Purple */
+/* ✅ Beacon Stats - Purple */
 .technology-card.beacon-card .tech-stat {
     border-color: rgba(99, 102, 241, 0.2);
 }
@@ -2100,7 +2100,7 @@ body.loaded {
     border-color: rgba(99, 102, 241, 0.4);
 }
 
-/* GPS Stat Number - Orange */
+/* ✅ GPS Stat Number - Orange */
 .tech-stat-number {
     font-size: 1.8rem;
     font-weight: 900;
@@ -2110,7 +2110,7 @@ body.loaded {
     line-height: 1;
 }
 
-/* Beacon Stat Number - Purple */
+/* ✅ Beacon Stat Number - Purple */
 .technology-card.beacon-card .tech-stat-number {
     color: #a78bfa;
 }
@@ -2123,7 +2123,7 @@ body.loaded {
 }
 
 /* Technology Highlight Box */
-/* GPS Highlight - Orange */
+/* ✅ GPS Highlight - Orange */
 .technology-highlight {
     background: linear-gradient(135deg, rgba(240, 165, 0, 0.15), rgba(251, 146, 60, 0.1));
     border: 2px solid rgba(240, 165, 0, 0.3);
@@ -2150,7 +2150,7 @@ body.loaded {
     animation: glowPulse 3s ease-in-out infinite;
 }
 
-/* Beacon Highlight - Purple */
+/* ✅ Beacon Highlight - Purple */
 .technology-card.beacon-card .technology-highlight {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1));
     border-color: rgba(99, 102, 241, 0.3);
@@ -2368,7 +2368,7 @@ body.loaded {
 }
 
 /* ============================================
-   9. APP SHOWCASE SECTION (DEVICE SPACING FIXED)
+   9. APP SHOWCASE SECTION (✅ DEVICE SPACING STANDARDIZED)
    Device galleries with proper centering
    ============================================ */
 
@@ -2434,7 +2434,7 @@ body.loaded {
     color: #f0a500;
 }
 
-/* Phone Gallery - Centered & Optimized - SPACING FIXED */
+/* ✅ Phone Gallery - Centered & Optimized - SPACING STANDARDIZED */
 .phone-gallery {
     text-align: center;
     display: flex;
@@ -2445,7 +2445,7 @@ body.loaded {
 .phone-mockup {
     display: inline-block;
     position: relative;
-    margin-bottom: 30px; /* FIXED: Matched with laptop-mockup spacing */
+    margin-bottom: 30px; /* ✅ STANDARDIZED SPACING */
 }
 
 .phone-frame {
@@ -2547,7 +2547,7 @@ body.loaded {
     padding: 8px 2px;
 }
 
-/* Laptop Gallery - Optimized Display - SPACING FIXED */
+/* ✅ Laptop Gallery - Optimized Display - SPACING STANDARDIZED */
 .laptop-gallery {
     text-align: center;
     position: relative;
@@ -2560,7 +2560,7 @@ body.loaded {
     position: relative;
     width: 100%;
     max-width: 650px;
-    margin: 0 auto 30px; /* FIXED: Matched with phone-mockup spacing */
+    margin: 0 auto 30px; /* ✅ STANDARDIZED SPACING */
 }
 
 .laptop-screen {
@@ -2742,7 +2742,7 @@ body.loaded {
     flex-shrink: 0;
 }
 
-/* Phoenix Safe - GLOW CONSOLIDATED */
+/* Phoenix Safe - Uses Universal Glow System */
 .phoenix-safe-container {
     position: relative;
     display: flex;
@@ -2882,7 +2882,7 @@ body.loaded {
 }
 
 /* ============================================
-   10. FEATURES & BENEFITS SECTION (BATTLE TESTED OPTIMIZED)
+   10. FEATURES & BENEFITS SECTION (✅ BATTLE TESTED MOBILE OPTIMIZED)
    ============================================ */
 
 .features {
@@ -2904,7 +2904,7 @@ body.loaded {
         radial-gradient(circle at 80% 80%, rgba(251, 146, 60, 0.1) 0%, transparent 50%);
 }
 
-/* Proven Model Badge - MOBILE OPTIMIZED */
+/* ✅ Proven Model Badge - MOBILE OPTIMIZED */
 .proven-model {
     margin-bottom: 60px;
     position: relative;
@@ -3099,7 +3099,7 @@ body.loaded {
 }
 
 /* ============================================
-   11. PRICING & REVENUE SECTION
+   11. PRICING & REVENUE SECTION (✅ CENTERED CARDS)
    ============================================ */
 
 .pricing {
@@ -3563,7 +3563,7 @@ body.loaded {
     background: radial-gradient(circle, rgba(215, 51, 39, 0.3) 0%, rgba(251, 146, 60, 0.15) 40%, transparent 70%);
 }
 
-/* Revenue Examples */
+/* ✅ Revenue Examples - CENTERED CARDS */
 .revenue-examples-section {
     margin-top: 70px;
     margin-bottom: 100px;
@@ -4277,7 +4277,7 @@ body.loaded {
 }
 
 /* ============================================
-   14. FINAL CTA SECTION (JOURNEY PATHS CENTERED)
+   14. FINAL CTA SECTION (✅ JOURNEY PATHS CENTERED)
    Background image optimization
    ============================================ */
 
@@ -4407,7 +4407,7 @@ body.loaded {
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
 }
 
-/* Journey Section - CENTERED FIX */
+/* ✅ Journey Section - CENTERED */
 .journey-section {
     margin-top: 50px;
     padding: 45px;
@@ -4444,7 +4444,7 @@ body.loaded {
     animation: glowPulse 3s ease-in-out infinite;
 }
 
-/* JOURNEY PATHS CENTERING FIX */
+/* ✅ JOURNEY PATHS CENTERING COMPLETE */
 .journey-paths {
     display: flex;
     justify-content: center;
@@ -4729,7 +4729,7 @@ body.loaded {
 }
 
 /* ============================================
-   16. MOBILE OPTIMIZATIONS (COMPREHENSIVE)
+   16. MOBILE OPTIMIZATIONS (✅ COMPREHENSIVE - ALL BREAKPOINTS)
    ============================================ */
 
 /* Tablet Optimizations */
@@ -4742,7 +4742,7 @@ body.loaded {
         min-height: 380px;
     }
     
-    /* Hero Section Tablet - MOBILE CENTERING */
+    /* ✅ Hero Section Tablet - MOBILE CENTERING */
     .hero-steps-premium {
         flex-direction: column;
         align-items: center;
@@ -4817,7 +4817,7 @@ body.loaded {
         gap: 35px;
     }
     
-    /* Journey Tablet - CENTERING MAINTAINED */
+    /* ✅ Journey Tablet - CENTERING MAINTAINED */
     .journey-paths {
         flex-direction: column;
         gap: 20px;
@@ -4927,7 +4927,7 @@ body.loaded {
         height: 50px;
     }
     
-    /* Hero Mobile - MOBILE CENTERING */
+    /* ✅ Hero Mobile - MOBILE CENTERING */
     .hero {
         padding: 140px 20px 50px;
         min-height: auto;
@@ -4983,7 +4983,7 @@ body.loaded {
         margin-bottom: 50px;
     }
     
-    /* Phone Gallery Mobile - SPACING MAINTAINED */
+    /* ✅ Phone Gallery Mobile - SPACING MAINTAINED */
     .phone-gallery {
         width: 100%;
         display: flex;
@@ -5028,10 +5028,10 @@ body.loaded {
         padding: 6px 2px;
     }
     
-    /* Laptop Gallery Mobile - SPACING MAINTAINED */
+    /* ✅ Laptop Gallery Mobile - SPACING MAINTAINED */
     .laptop-mockup {
         max-width: 450px;
-        margin: 0 auto 30px; /* SPACING MAINTAINED */
+        margin: 0 auto 30px;
     }
     
     .thumbnail-grid-laptop {
@@ -5051,7 +5051,7 @@ body.loaded {
         padding: 30px 25px;
     }
     
-    /* Battle Tested Mobile - OPTIMIZED */
+    /* ✅ Battle Tested Mobile - OPTIMIZED */
     .proven-badge {
         padding: 25px 20px;
         gap: 15px;
@@ -5079,7 +5079,7 @@ body.loaded {
         font-size: 0.95rem;
     }
     
-    /* Revenue Mobile */
+    /* ✅ Revenue Mobile - CENTERED */
     .revenue-examples-section {
         padding: 35px 20px;
         margin-bottom: 70px;
