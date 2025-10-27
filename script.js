@@ -4,7 +4,7 @@
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // SENIOR JS ENGINEERING: Mobile-First, Performance-Optimized
 // PRODUCTION READY: Clean, maintainable, and scalable code
-// VERSION: 2.0 - Complete Mobile Optimization
+// VERSION: 2.1 - Enhanced Mobile Optimization & Stability
 // ============================================
 
 'use strict';
@@ -171,11 +171,18 @@ const requestAnimFrame = window.requestAnimationFrame ||
                          function(callback) { setTimeout(callback, 1000 / 60); };
 
 /**
- * Mobile-friendly smooth scroll
+ * Mobile-friendly smooth scroll - UPDATED to handle CSS conflicts
  */
 function smoothScrollTo(element, duration = 300) {
     if (!element) return;
     
+    // Use native smooth scroll if available and no custom duration needed
+    if (duration === 300 && 'scrollBehavior' in document.documentElement.style) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+    }
+    
+    // Custom smooth scroll implementation
     const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
@@ -197,6 +204,64 @@ function smoothScrollTo(element, duration = 300) {
     }
     
     requestAnimFrame(animation);
+}
+
+// ============================================
+// VIEWPORT & ZOOM STABILITY
+// ============================================
+
+/**
+ * Prevent page reload on zoom - throttle resize events
+ */
+let lastWidth = window.innerWidth;
+let lastHeight = window.innerHeight;
+let resizeTimer = null;
+
+const handleResize = throttle(() => {
+    const newWidth = window.innerWidth;
+    const newHeight = window.innerHeight;
+    
+    // Check if this is a zoom event (viewport doesn't change proportionally)
+    const isZoom = Math.abs(newWidth - lastWidth) < 5 && Math.abs(newHeight - lastHeight) < 5;
+    
+    if (!isZoom) {
+        DeviceInfo.screenWidth = newWidth;
+        DeviceInfo.screenHeight = newHeight;
+        console.log('📐 Window resized:', DeviceInfo.screenWidth, 'x', DeviceInfo.screenHeight);
+    }
+    
+    lastWidth = newWidth;
+    lastHeight = newHeight;
+}, 250);
+
+window.addEventListener('resize', handleResize);
+
+/**
+ * Detect and handle zoom events specifically
+ */
+let lastZoom = window.devicePixelRatio;
+
+const handleZoom = throttle(() => {
+    const currentZoom = window.devicePixelRatio;
+    
+    if (Math.abs(currentZoom - lastZoom) > 0.1) {
+        console.log('🔍 Zoom detected:', currentZoom);
+        
+        // Stabilize layout during zoom
+        document.body.style.transition = 'none';
+        requestAnimFrame(() => {
+            document.body.style.transition = '';
+        });
+    }
+    
+    lastZoom = currentZoom;
+}, 100);
+
+// Monitor zoom via visualViewport if available
+if ('visualViewport' in window) {
+    window.visualViewport.addEventListener('resize', handleZoom);
+} else {
+    window.addEventListener('resize', handleZoom);
 }
 
 // ============================================
@@ -778,7 +843,7 @@ function initializeMobileAllocationCards() {
  * DOM Content Loaded - Initialize all features
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized)...');
+    console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v2.1)...');
     
     // Ensure dark background
     document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
@@ -882,25 +947,37 @@ function changeLaptopImage(imageSrc, title) {
 }
 
 // ============================================
-// SCROLL REVEAL OBSERVER
+// SCROLL REVEAL OBSERVER - OPTIMIZED
 // ============================================
 
 /**
  * Initialize intersection observer for scroll reveals
+ * UPDATED: Optimized thresholds and will-change for performance
  */
 function initializeScrollRevealObserver() {
     const observerOptions = {
-        threshold: 0.05,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.1, // Increased from 0.05 for better performance
+        rootMargin: '0px 0px -30px 0px' // Adjusted for earlier triggering
     };
     
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // Stagger animations for better visual effect
-                setTimeout(() => {
+                // Add will-change before animation
+                entry.target.style.willChange = 'opacity, transform';
+                
+                // Trigger reveal
+                requestAnimFrame(() => {
                     entry.target.classList.add('revealed');
-                }, index * 50);
+                    
+                    // Remove will-change after animation completes
+                    setTimeout(() => {
+                        entry.target.style.willChange = 'auto';
+                    }, 600);
+                });
+                
+                // Unobserve after revealing (performance optimization)
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -909,7 +986,50 @@ function initializeScrollRevealObserver() {
         observer.observe(el);
     });
     
-    console.log('👁️ Scroll reveal observer initialized');
+    console.log('👁️ Scroll reveal observer initialized (optimized)');
+}
+
+// ============================================
+// IMAGE FADE-IN OPTIMIZATION
+// ============================================
+
+/**
+ * Optimize image loading to prevent blinking
+ * UPDATED: Add will-change and proper loading states
+ */
+function optimizeImageLoading() {
+    safeQueryAll('img').forEach(img => {
+        // Add will-change for images that will animate
+        if (img.closest('.scroll-reveal') || img.closest('.image-with-glow')) {
+            img.style.willChange = 'opacity';
+        }
+        
+        // Handle image loading
+        if (!img.complete) {
+            img.style.opacity = '0';
+            
+            img.addEventListener('load', function() {
+                requestAnimFrame(() => {
+                    this.style.transition = 'opacity 0.3s ease-in-out';
+                    this.style.opacity = '1';
+                    
+                    // Remove will-change after load
+                    setTimeout(() => {
+                        this.style.willChange = 'auto';
+                    }, 300);
+                });
+            }, { once: true });
+        }
+        
+        // Handle errors
+        img.addEventListener('error', function() {
+            console.warn('⚠️ Image failed to load:', this.src);
+            this.style.opacity = '0.5';
+            this.alt = 'Image loading...';
+        }, { once: true });
+    });
+    
+    console.log('🖼️ Image loading optimized');
 }
 
 // ============================================
@@ -1153,6 +1273,9 @@ function initializeCTAFeedback() {
 window.addEventListener('load', () => {
     console.log('🔥🪙 Vault Phoenix fully loaded!');
     
+    // Optimize image loading after page load
+    optimizeImageLoading();
+    
     // Add phoenix flame effect to logo
     const logoIcon = safeQuery('.logo-icon');
     if (logoIcon) {
@@ -1175,25 +1298,6 @@ window.addEventListener('load', () => {
     // Performance timing
     const loadTime = performance.now();
     console.log(`%c🔥 Page loaded in ${Math.round(loadTime)}ms`, 'color: #22c55e; font-weight: bold;');
-});
-
-// ============================================
-// IMAGE ERROR HANDLING
-// ============================================
-
-/**
- * Handle image loading errors
- */
-safeQueryAll('img').forEach(img => {
-    img.addEventListener('error', function() {
-        console.warn('⚠️ Image failed to load:', this.src);
-        this.style.opacity = '0.5';
-        this.alt = 'Image loading...';
-    });
-    
-    img.addEventListener('load', function() {
-        this.style.opacity = '1';
-    });
 });
 
 // ============================================
@@ -1611,20 +1715,6 @@ function optimizeMobilePerformance() {
 }
 
 // ============================================
-// RESIZE HANDLER - MOBILE OPTIMIZED
-// ============================================
-
-/**
- * Handle window resize events
- */
-window.addEventListener('resize', debounce(() => {
-    DeviceInfo.screenWidth = window.innerWidth;
-    DeviceInfo.screenHeight = window.innerHeight;
-    
-    console.log('📐 Window resized:', DeviceInfo.screenWidth, 'x', DeviceInfo.screenHeight);
-}, 250));
-
-// ============================================
 // EASTER EGG: KONAMI CODE
 // ============================================
 
@@ -1692,5 +1782,5 @@ document.addEventListener('keydown', (e) => {
 console.log('%c🔥🪙 VAULT PHOENIX', 'color: #d73327; font-size: 24px; font-weight: bold;');
 console.log('%c🚀 AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 16px; font-weight: bold;');
 console.log('%c📧 contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 12px;');
-console.log('%c💡 Senior Engineering - Mobile-First Architecture', 'color: #22c55e; font-size: 12px; font-weight: bold;');
+console.log('%c💡 Senior Engineering - Mobile-First Architecture v2.1', 'color: #22c55e; font-size: 12px; font-weight: bold;');
 console.log('Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
