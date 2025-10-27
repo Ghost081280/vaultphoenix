@@ -4,7 +4,7 @@
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // SENIOR JS ENGINEERING: Mobile-First, Performance-Optimized
 // PRODUCTION READY: Clean, maintainable, and scalable code
-// VERSION: 2.2 - Shared Script Integration & Mobile Enhancement
+// VERSION: 2.3 - Verified Clean (No Duplicates)
 // ============================================
 
 'use strict';
@@ -862,7 +862,7 @@ function initializeMobileAllocationCards() {
  * DOM Content Loaded - Initialize all features
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v2.2)...');
+    console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v2.3 - Clean)...');
     
     // Ensure dark background
     document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
@@ -909,11 +909,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================
-// GALLERY FUNCTIONS
+// GALLERY FUNCTIONS (PAGE-SPECIFIC - KEEP)
 // ============================================
 
 /**
- * Change main phone gallery image
+ * ✅ KEEP - Change main phone gallery image
  */
 function changeImage(imageSrc, title) {
     const mainImg = safeQuery('#mainScreenshot');
@@ -947,7 +947,7 @@ function changeImage(imageSrc, title) {
 }
 
 /**
- * Change main laptop gallery image
+ * ✅ KEEP - Change main laptop gallery image
  */
 function changeLaptopImage(imageSrc, title) {
     const mainImg = safeQuery('#mainLaptopScreenshot');
@@ -1024,11 +1024,11 @@ function initializeScrollRevealObserver() {
 }
 
 // ============================================
-// IMAGE FADE-IN OPTIMIZATION
+// IMAGE FADE-IN OPTIMIZATION (✅ VERIFIED)
 // ============================================
 
 /**
- * Optimize image loading to prevent blinking
+ * ✅ KEEP - Optimize image loading to prevent blinking
  * UPDATED: Add will-change and proper loading states
  */
 function optimizeImageLoading() {
@@ -1877,6 +1877,6 @@ document.addEventListener('keydown', (e) => {
 console.log('%c🔥🪙 VAULT PHOENIX', 'color: #d73327; font-size: 24px; font-weight: bold;');
 console.log('%c🚀 AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 16px; font-weight: bold;');
 console.log('%c📧 contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 12px;');
-console.log('%c💡 Senior Engineering - Mobile-First Architecture v2.2', 'color: #22c55e; font-size: 12px; font-weight: bold;');
+console.log('%c💡 Senior Engineering - Mobile-First Architecture v2.3', 'color: #22c55e; font-size: 12px; font-weight: bold;');
 console.log('%c✅ Integrated with shared-script.js (smooth scroll, countdown, mobile menu)', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
 console.log('Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
