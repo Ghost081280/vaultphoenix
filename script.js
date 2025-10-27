@@ -4,7 +4,7 @@
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // SENIOR JS ENGINEERING: Mobile-First, Performance-Optimized
 // PRODUCTION READY: Clean, maintainable, and scalable code
-// VERSION: 2.1 - Enhanced Mobile Optimization & Stability
+// VERSION: 2.2 - Shared Script Integration & Mobile Enhancement
 // ============================================
 
 'use strict';
@@ -170,42 +170,6 @@ const requestAnimFrame = window.requestAnimationFrame ||
                          window.mozRequestAnimationFrame || 
                          function(callback) { setTimeout(callback, 1000 / 60); };
 
-/**
- * Mobile-friendly smooth scroll - UPDATED to handle CSS conflicts
- */
-function smoothScrollTo(element, duration = 300) {
-    if (!element) return;
-    
-    // Use native smooth scroll if available and no custom duration needed
-    if (duration === 300 && 'scrollBehavior' in document.documentElement.style) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-    }
-    
-    // Custom smooth scroll implementation
-    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
-    const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    let startTime = null;
-    
-    function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const run = ease(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimFrame(animation);
-    }
-    
-    function ease(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
-    }
-    
-    requestAnimFrame(animation);
-}
-
 // ============================================
 // VIEWPORT & ZOOM STABILITY
 // ============================================
@@ -312,6 +276,12 @@ function initializeChatbot() {
             // Prevent body scroll on mobile when chatbot is open
             if (DeviceInfo.isMobile) {
                 document.body.style.overflow = 'hidden';
+                
+                // Enhanced mobile keyboard handling to prevent layout breaks
+                if (chatbotInput) {
+                    chatbotInput.addEventListener('focus', handleMobileKeyboardOpen);
+                    chatbotInput.addEventListener('blur', handleMobileKeyboardClose);
+                }
             }
         } else {
             closeChatbot();
@@ -382,14 +352,63 @@ function initializeChatbot() {
 }
 
 /**
+ * Handle mobile keyboard opening - prevent layout breaks
+ */
+function handleMobileKeyboardOpen() {
+    const chatbotWindow = safeQuery('.chatbot-window');
+    const chatbotContainer = safeQuery('.chatbot-container');
+    
+    if (chatbotWindow && chatbotContainer) {
+        // Store original styles
+        chatbotWindow.dataset.originalHeight = chatbotWindow.style.height || '';
+        
+        // Adjust chatbot height for keyboard
+        requestAnimFrame(() => {
+            chatbotWindow.style.height = '60vh';
+            chatbotContainer.style.maxHeight = '55vh';
+            
+            // Scroll to input field
+            const chatbotInput = safeQuery('.chatbot-input');
+            if (chatbotInput) {
+                chatbotInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    }
+}
+
+/**
+ * Handle mobile keyboard closing - restore layout
+ */
+function handleMobileKeyboardClose() {
+    const chatbotWindow = safeQuery('.chatbot-window');
+    const chatbotContainer = safeQuery('.chatbot-container');
+    
+    if (chatbotWindow && chatbotContainer) {
+        requestAnimFrame(() => {
+            // Restore original height
+            chatbotWindow.style.height = chatbotWindow.dataset.originalHeight || '';
+            chatbotContainer.style.maxHeight = '';
+        });
+    }
+}
+
+/**
  * Close chatbot window
  */
 function closeChatbot() {
     const chatbotWindow = safeQuery('.chatbot-window');
+    const chatbotInput = safeQuery('.chatbot-input');
+    
     if (!chatbotWindow) return;
     
     console.log('🤖 Chatbot closed');
     chatbotWindow.classList.remove('active');
+    
+    // Remove mobile keyboard handlers
+    if (DeviceInfo.isMobile && chatbotInput) {
+        chatbotInput.removeEventListener('focus', handleMobileKeyboardOpen);
+        chatbotInput.removeEventListener('blur', handleMobileKeyboardClose);
+    }
     
     // Restore body scroll on mobile
     if (DeviceInfo.isMobile) {
@@ -843,7 +862,7 @@ function initializeMobileAllocationCards() {
  * DOM Content Loaded - Initialize all features
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v2.1)...');
+    console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v2.2)...');
     
     // Ensure dark background
     document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
@@ -886,6 +905,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     console.log('🔥🪙 Vault Phoenix initialized successfully!');
+    console.log('✅ Using shared-script.js for: smooth scrolling, countdown timer, mobile menu, navbar transitions');
 });
 
 // ============================================
@@ -901,12 +921,19 @@ function changeImage(imageSrc, title) {
     
     if (!mainImg) return;
     
+    // Add will-change before transition
+    mainImg.style.willChange = 'opacity';
     mainImg.style.opacity = '0.7';
     
     setTimeout(() => {
         mainImg.src = imageSrc;
         mainImg.alt = title;
         mainImg.style.opacity = '1';
+        
+        // Remove will-change after transition
+        setTimeout(() => {
+            mainImg.style.willChange = 'auto';
+        }, 300);
     }, 150);
     
     // Update active states
@@ -928,12 +955,19 @@ function changeLaptopImage(imageSrc, title) {
     
     if (!mainImg) return;
     
+    // Add will-change before transition
+    mainImg.style.willChange = 'opacity';
     mainImg.style.opacity = '0.7';
     
     setTimeout(() => {
         mainImg.src = imageSrc;
         mainImg.alt = title;
         mainImg.style.opacity = '1';
+        
+        // Remove will-change after transition
+        setTimeout(() => {
+            mainImg.style.willChange = 'auto';
+        }, 300);
     }, 150);
     
     // Update active states
@@ -956,8 +990,8 @@ function changeLaptopImage(imageSrc, title) {
  */
 function initializeScrollRevealObserver() {
     const observerOptions = {
-        threshold: 0.1, // Increased from 0.05 for better performance
-        rootMargin: '0px 0px -30px 0px' // Adjusted for earlier triggering
+        threshold: 0.1,
+        rootMargin: '0px 0px -30px 0px'
     };
     
     const observer = new IntersectionObserver((entries) => {
@@ -986,7 +1020,7 @@ function initializeScrollRevealObserver() {
         observer.observe(el);
     });
     
-    console.log('👁️ Scroll reveal observer initialized (optimized)');
+    console.log('👁️ Scroll reveal observer initialized (optimized with will-change)');
 }
 
 // ============================================
@@ -1029,7 +1063,7 @@ function optimizeImageLoading() {
         }, { once: true });
     });
     
-    console.log('🖼️ Image loading optimized');
+    console.log('🖼️ Image loading optimized with fade-in prevention');
 }
 
 // ============================================
@@ -1050,6 +1084,9 @@ function initializeCardEffects() {
     
     cards.forEach(card => {
         card.addEventListener('mouseenter', function() {
+            // Add will-change before transform
+            this.style.willChange = 'transform, box-shadow';
+            
             if (this.classList.contains('simple-thumb') || this.classList.contains('simple-thumb-laptop')) {
                 this.style.transform = 'translateY(-5px) scale(1.05)';
             } else if (this.classList.contains('crypto-benefit')) {
@@ -1074,10 +1111,15 @@ function initializeCardEffects() {
                 }
                 this.style.boxShadow = '';
             }
+            
+            // Remove will-change after animation
+            setTimeout(() => {
+                this.style.willChange = 'auto';
+            }, 300);
         });
     });
     
-    console.log('🎴 Interactive card effects initialized');
+    console.log('🎴 Interactive card effects initialized with will-change optimization');
 }
 
 // ============================================
@@ -1242,9 +1284,11 @@ function initializeCTAFeedback() {
     safeQueryAll('a[href^="mailto:"]').forEach(link => {
         link.addEventListener('click', (e) => {
             console.log('📧 Email CTA clicked:', link.href);
+            link.style.willChange = 'transform';
             link.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 link.style.transform = '';
+                link.style.willChange = 'auto';
             }, 150);
         });
     });
@@ -1253,14 +1297,16 @@ function initializeCTAFeedback() {
     safeQueryAll('a[href^="sms:"]').forEach(link => {
         link.addEventListener('click', (e) => {
             console.log('📱 SMS CTA clicked:', link.href);
+            link.style.willChange = 'transform';
             link.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 link.style.transform = '';
+                link.style.willChange = 'auto';
             }, 150);
         });
     });
     
-    console.log('📲 CTA button feedback initialized');
+    console.log('📲 CTA button feedback initialized with will-change');
 }
 
 // ============================================
@@ -1469,7 +1515,7 @@ function createFloatingParticles() {
         document.head.appendChild(style);
     }
     
-    console.log(`🪙 ${particleCount} floating particles created`);
+    console.log(`🪙 ${particleCount} floating particles created with will-change optimization`);
 }
 
 // ============================================
@@ -1487,14 +1533,18 @@ function initializeCryptoCoinImage() {
     if (DeviceInfo.isMobile) return;
     
     cryptoImage.addEventListener('mouseenter', function() {
+        this.style.willChange = 'filter';
         this.style.filter = 'drop-shadow(0 0 30px rgba(251, 146, 60, 0.8)) brightness(1.1)';
     });
     
     cryptoImage.addEventListener('mouseleave', function() {
         this.style.filter = '';
+        setTimeout(() => {
+            this.style.willChange = 'auto';
+        }, 300);
     });
     
-    console.log('🪙 Crypto coin interactions initialized');
+    console.log('🪙 Crypto coin interactions initialized with will-change');
 }
 
 /**
@@ -1508,6 +1558,7 @@ function initializeEmberCoinImage() {
     if (DeviceInfo.isMobile) return;
     
     emberCoinImage.addEventListener('mouseenter', function() {
+        this.style.willChange = 'filter, transform';
         this.style.filter = 'drop-shadow(0 0 50px rgba(240, 165, 0, 0.9)) brightness(1.2)';
         this.style.transform = 'scale(1.1) translateY(-10px)';
     });
@@ -1515,9 +1566,12 @@ function initializeEmberCoinImage() {
     emberCoinImage.addEventListener('mouseleave', function() {
         this.style.filter = '';
         this.style.transform = '';
+        setTimeout(() => {
+            this.style.willChange = 'auto';
+        }, 300);
     });
     
-    console.log('🪙 Ember coin interactions initialized');
+    console.log('🪙 Ember coin interactions initialized with will-change');
 }
 
 // ============================================
@@ -1535,8 +1589,14 @@ function initializeCryptoBenefits() {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
                 setTimeout(() => {
+                    entry.target.style.willChange = 'transform, opacity';
                     entry.target.style.transform = 'translateX(0)';
                     entry.target.style.opacity = '1';
+                    
+                    // Remove will-change after animation
+                    setTimeout(() => {
+                        entry.target.style.willChange = 'auto';
+                    }, 600);
                     
                     const icon = entry.target.querySelector('.benefit-icon');
                     if (icon && !DeviceInfo.prefersReducedMotion) {
@@ -1552,7 +1612,11 @@ function initializeCryptoBenefits() {
                             `;
                             document.head.appendChild(style);
                         }
+                        icon.style.willChange = 'transform';
                         icon.style.animation = 'coinBounce 0.6s ease-out';
+                        setTimeout(() => {
+                            icon.style.willChange = 'auto';
+                        }, 600);
                     }
                 }, index * 200);
             }
@@ -1565,7 +1629,7 @@ function initializeCryptoBenefits() {
         benefitsObserver.observe(benefit);
     });
     
-    console.log('💰 Crypto benefits animations initialized');
+    console.log('💰 Crypto benefits animations initialized with will-change');
 }
 
 /**
@@ -1579,8 +1643,14 @@ function initializeEmberHighlights() {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
                 setTimeout(() => {
+                    entry.target.style.willChange = 'transform, opacity';
                     entry.target.style.transform = 'translateX(0)';
                     entry.target.style.opacity = '1';
+                    
+                    // Remove will-change after animation
+                    setTimeout(() => {
+                        entry.target.style.willChange = 'auto';
+                    }, 600);
                     
                     const emoji = entry.target.querySelector('.highlight-emoji-redesigned');
                     if (emoji && !DeviceInfo.prefersReducedMotion) {
@@ -1597,7 +1667,11 @@ function initializeEmberHighlights() {
                             `;
                             document.head.appendChild(style);
                         }
+                        emoji.style.willChange = 'transform';
                         emoji.style.animation = 'emberFlicker 1s ease-in-out';
+                        setTimeout(() => {
+                            emoji.style.willChange = 'auto';
+                        }, 1000);
                     }
                 }, index * 150);
             }
@@ -1610,7 +1684,7 @@ function initializeEmberHighlights() {
         highlightsObserver.observe(highlight);
     });
     
-    console.log('🔥 Ember highlights animations initialized');
+    console.log('🔥 Ember highlights animations initialized with will-change');
 }
 
 // ============================================
@@ -1625,23 +1699,31 @@ safeQueryAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .join-pre
     if (DeviceInfo.isMobile || DeviceInfo.prefersReducedMotion) return;
     
     button.addEventListener('mouseenter', function() {
+        this.style.willChange = 'filter';
         this.style.filter = 'brightness(1.1) saturate(1.2)';
     });
     
     button.addEventListener('mouseleave', function() {
         this.style.filter = '';
+        setTimeout(() => {
+            this.style.willChange = 'auto';
+        }, 300);
     });
     
     button.addEventListener('mousedown', function() {
+        this.style.willChange = 'transform';
         this.style.transform = 'scale(0.95)';
     });
     
     button.addEventListener('mouseup', function() {
         this.style.transform = '';
+        setTimeout(() => {
+            this.style.willChange = 'auto';
+        }, 150);
     });
 });
 
-console.log('✨ CTA enhancements initialized');
+console.log('✨ CTA enhancements initialized with will-change');
 
 // ============================================
 // SCROLL PROGRESS INDICATOR
@@ -1663,6 +1745,7 @@ function createScrollProgressIndicator() {
         width: 0%;
         transition: width 0.1s ease;
         box-shadow: 0 2px 5px rgba(215, 51, 39, 0.3);
+        will-change: width;
     `;
     document.body.appendChild(indicator);
     
@@ -1675,7 +1758,7 @@ function createScrollProgressIndicator() {
     
     window.addEventListener('scroll', updateProgress, { passive: true });
     
-    console.log('📊 Scroll progress indicator initialized');
+    console.log('📊 Scroll progress indicator initialized with will-change');
 }
 
 // ============================================
@@ -1709,6 +1792,17 @@ function optimizeMobilePerformance() {
         console.log('📱 Orientation changed');
         DeviceInfo.screenWidth = window.innerWidth;
         DeviceInfo.screenHeight = window.innerHeight;
+        
+        // Re-optimize chatbot if open
+        const chatbotWindow = safeQuery('.chatbot-window');
+        if (chatbotWindow && chatbotWindow.classList.contains('active')) {
+            setTimeout(() => {
+                const chatbotBody = safeQuery('.chatbot-body');
+                if (chatbotBody) {
+                    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+                }
+            }, 300);
+        }
     }, 300));
     
     console.log('📱 Mobile optimizations complete');
@@ -1749,6 +1843,7 @@ document.addEventListener('keydown', (e) => {
                     z-index: 10000;
                     pointer-events: none;
                     animation: coinFall ${Math.random() * 2 + 2}s linear forwards;
+                    will-change: transform, opacity;
                 `;
                 
                 document.body.appendChild(coin);
@@ -1782,5 +1877,6 @@ document.addEventListener('keydown', (e) => {
 console.log('%c🔥🪙 VAULT PHOENIX', 'color: #d73327; font-size: 24px; font-weight: bold;');
 console.log('%c🚀 AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 16px; font-weight: bold;');
 console.log('%c📧 contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 12px;');
-console.log('%c💡 Senior Engineering - Mobile-First Architecture v2.1', 'color: #22c55e; font-size: 12px; font-weight: bold;');
+console.log('%c💡 Senior Engineering - Mobile-First Architecture v2.2', 'color: #22c55e; font-size: 12px; font-weight: bold;');
+console.log('%c✅ Integrated with shared-script.js (smooth scroll, countdown, mobile menu)', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
 console.log('Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
