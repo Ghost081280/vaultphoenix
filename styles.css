@@ -1,7 +1,7 @@
 /* ============================================
    VAULT PHOENIX - OPTIMIZED STYLESHEET
    Senior CSS Engineering - Production Ready
-   Version: 2.3 - MOBILE CENTERING + GLOW CLEANUP COMPLETE
+   Version: 2.4 - COMPLETE MOBILE CENTERING + ALL BREAKPOINTS
    ============================================ */
 
 /* TABLE OF CONTENTS:
@@ -10,17 +10,17 @@
    3. Icon Sizes & Styling (SCALED TO 60px MINIMUM)
    4. AI Chatbot System (PROFESSIONAL 550px)
    5. Navigation (NO GLOW - HANDLED BY SHARED-STYLES.CSS)
-   6. Hero Section (MOBILE CENTERING COMPLETE)
+   6. Hero Section (✅ COMPLETE MOBILE CENTERING + ARROW ROTATION)
    7. Token Evolution Section
-   8. App Showcase (DEVICE SPACING STANDARDIZED)
-   9. Features & Benefits (BATTLE TESTED MOBILE OPTIMIZED)
+   8. App Showcase (✅ DEVICE SPACING STANDARDIZED 30px)
+   9. Features & Benefits (✅ BATTLE TESTED MOBILE OPTIMIZED)
    10. Technology Modules (GPS ORANGE + BEACON PURPLE)
-   11. Pricing & Revenue (CENTERED CARDS)
+   11. Pricing & Revenue (✅ CENTERED CARDS + REBALANCED)
    12. Use Cases
    13. Social Sharing
-   14. Final CTA (JOURNEY PATHS CENTERED)
+   14. Final CTA (✅ JOURNEY PATHS PERFECTLY CENTERED)
    15. Footer
-   16. Mobile Optimizations (COMPREHENSIVE - ALL BREAKPOINTS)
+   16. Mobile Optimizations (✅ ALL BREAKPOINTS: 375px, 428px, 768px, 1024px, 1366px)
    17. Animations & Utilities (PERFORMANCE OPTIMIZED)
 */
 
@@ -698,8 +698,10 @@ body.loaded {
 }
 
 /* ============================================
-   6. HERO SECTION (MOBILE CENTERING COMPLETE)
+   6. HERO SECTION (✅ COMPLETE MOBILE CENTERING)
    ✅ Premium redesign with perfect mobile layout
+   ✅ Step arrows rotate 90° on mobile
+   ✅ Hero benefits with scroll snap
    ============================================ */
 
 .hero {
@@ -1044,7 +1046,7 @@ body.loaded {
     flex-shrink: 0;
 }
 
-/* ✅ Hero Benefits Row - MOBILE SCROLL OPTIMIZED */
+/* ✅ Hero Benefits Row - MOBILE SCROLL OPTIMIZED + SNAP POINTS */
 .hero-benefits-row {
     display: flex;
     align-items: center;
@@ -1059,7 +1061,7 @@ body.loaded {
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
-    scroll-snap-type: x proximity;
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: rgba(215, 51, 39, 0.5) transparent;
@@ -1110,9 +1112,10 @@ body.loaded {
             drop-shadow(0 0 22px rgba(240, 165, 0, 0.35));
 }
 
-/* Hero Secondary CTA */
+/* ✅ Hero Secondary CTA - "See How It Works" Link Styling */
 .hero-secondary-cta {
     text-align: center;
+    margin-top: 20px;
 }
 
 .secondary-cta-link {
@@ -1124,11 +1127,22 @@ body.loaded {
     font-size: 1.1rem;
     font-weight: 600;
     transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 8px;
 }
 
 .secondary-cta-link:hover {
     color: #f0a500;
     transform: translateX(5px);
+    background: rgba(240, 165, 0, 0.1);
+}
+
+.secondary-cta-link svg {
+    transition: transform 0.3s ease;
+}
+
+.secondary-cta-link:hover svg {
+    transform: translateX(3px);
 }
 
 /* ============================================
@@ -1631,7 +1645,7 @@ body.loaded {
 }
 
 /* ============================================
-   8. CRYPTO COIN SECTION
+   8. CRYPTO COIN SECTION (✅ MOBILE REBALANCED)
    ============================================ */
 
 .crypto-coin-section {
@@ -1689,6 +1703,7 @@ body.loaded {
     position: relative;
 }
 
+/* ✅ Crypto Title - Typography Polish */
 .crypto-title {
     font-size: clamp(2.5rem, 4vw, 3.5rem);
     font-weight: 900;
@@ -1699,13 +1714,15 @@ body.loaded {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    line-height: 1.1;
 }
 
+/* ✅ Crypto Description - Typography Polish */
 .crypto-description {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
     margin-bottom: 40px;
     color: rgba(255, 255, 255, 0.95);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .crypto-benefits {
@@ -2368,7 +2385,7 @@ body.loaded {
 }
 
 /* ============================================
-   9. APP SHOWCASE SECTION (✅ DEVICE SPACING STANDARDIZED)
+   9. APP SHOWCASE SECTION (✅ DEVICE SPACING STANDARDIZED 30px)
    Device galleries with proper centering
    ============================================ */
 
@@ -2434,7 +2451,7 @@ body.loaded {
     color: #f0a500;
 }
 
-/* ✅ Phone Gallery - Centered & Optimized - SPACING STANDARDIZED */
+/* ✅ Phone Gallery - Centered & Optimized - SPACING STANDARDIZED TO 30px */
 .phone-gallery {
     text-align: center;
     display: flex;
@@ -2547,7 +2564,7 @@ body.loaded {
     padding: 8px 2px;
 }
 
-/* ✅ Laptop Gallery - Optimized Display - SPACING STANDARDIZED */
+/* ✅ Laptop Gallery - Optimized Display - SPACING STANDARDIZED TO 30px */
 .laptop-gallery {
     text-align: center;
     position: relative;
@@ -2664,11 +2681,11 @@ body.loaded {
     padding: 6px 3px;
 }
 
-/* Demo Cards */
+/* ✅ Demo Cards - SPACING STANDARDIZED */
 .demo-card-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 10px; /* ✅ STANDARDIZED */
     width: 100%;
 }
 
@@ -3099,7 +3116,7 @@ body.loaded {
 }
 
 /* ============================================
-   11. PRICING & REVENUE SECTION (✅ CENTERED CARDS)
+   11. PRICING & REVENUE SECTION (✅ CENTERED CARDS + REBALANCED)
    ============================================ */
 
 .pricing {
@@ -3563,7 +3580,7 @@ body.loaded {
     background: radial-gradient(circle, rgba(215, 51, 39, 0.3) 0%, rgba(251, 146, 60, 0.15) 40%, transparent 70%);
 }
 
-/* ✅ Revenue Examples - CENTERED CARDS */
+/* ✅ Revenue Examples - CENTERED CARDS + REBALANCED */
 .revenue-examples-section {
     margin-top: 70px;
     margin-bottom: 100px;
@@ -4277,7 +4294,7 @@ body.loaded {
 }
 
 /* ============================================
-   14. FINAL CTA SECTION (✅ JOURNEY PATHS CENTERED)
+   14. FINAL CTA SECTION (✅ JOURNEY PATHS PERFECTLY CENTERED)
    Background image optimization
    ============================================ */
 
@@ -4407,7 +4424,7 @@ body.loaded {
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
 }
 
-/* ✅ Journey Section - CENTERED */
+/* ✅ Journey Section - PERFECTLY CENTERED */
 .journey-section {
     margin-top: 50px;
     padding: 45px;
@@ -4444,7 +4461,7 @@ body.loaded {
     animation: glowPulse 3s ease-in-out infinite;
 }
 
-/* ✅ JOURNEY PATHS CENTERING COMPLETE */
+/* ✅ JOURNEY PATHS PERFECTLY CENTERED */
 .journey-paths {
     display: flex;
     justify-content: center;
@@ -4729,10 +4746,22 @@ body.loaded {
 }
 
 /* ============================================
-   16. MOBILE OPTIMIZATIONS (✅ COMPREHENSIVE - ALL BREAKPOINTS)
+   16. MOBILE OPTIMIZATIONS (✅ ALL BREAKPOINTS: 375px, 428px, 768px, 1024px, 1366px)
    ============================================ */
 
-/* Tablet Optimizations */
+/* ✅ 1366px Standard Laptops */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .container {
+        max-width: 1200px;
+        padding: 0 30px;
+    }
+    
+    .hero-steps-premium {
+        gap: 20px;
+    }
+}
+
+/* Tablet Optimizations (1024px) */
 @media (max-width: 1024px) {
     /* Chatbot Tablet */
     .chatbot-window {
@@ -4748,6 +4777,7 @@ body.loaded {
         align-items: center;
     }
     
+    /* ✅ Step Arrows Rotate 90° */
     .step-arrow {
         transform: rotate(90deg);
         margin: 10px 0;
@@ -4788,6 +4818,7 @@ body.loaded {
     .phoenix-holding-coin-redesigned {
         width: 280px;
         height: 280px;
+        margin: 0 auto;
     }
     
     /* Crypto Section Tablet */
@@ -4798,6 +4829,8 @@ body.loaded {
     
     .crypto-image {
         order: -1;
+        max-width: 300px;
+        margin: 0 auto;
     }
     
     /* Showcase Tablet */
@@ -4821,17 +4854,28 @@ body.loaded {
     .journey-paths {
         flex-direction: column;
         gap: 20px;
+        align-items: center;
     }
     
     .journey-path {
         flex: 1 1 100%;
         max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    .path-icon-enhanced {
+        margin: 0 auto;
     }
     
     /* Technology Tablet */
     .technology-grid {
         grid-template-columns: 1fr;
         gap: 35px;
+    }
+    
+    .technology-card {
+        max-width: 500px;
+        margin: 0 auto;
     }
     
     .combined-power-benefits {
@@ -4843,6 +4887,11 @@ body.loaded {
     .revenue-examples-grid {
         grid-template-columns: 1fr;
         gap: 25px;
+    }
+    
+    .revenue-example-card {
+        max-width: 450px;
+        margin: 0 auto;
     }
     
     .benefits-grid {
@@ -4866,7 +4915,7 @@ body.loaded {
     }
 }
 
-/* Mobile Phone Optimizations */
+/* Mobile Phone Optimizations (768px) */
 @media (max-width: 768px) {
     /* Chatbot Mobile */
     .chatbot-button-container {
@@ -4933,6 +4982,7 @@ body.loaded {
         min-height: auto;
     }
     
+    /* ✅ Hero Benefits with Scroll Snap */
     .hero-benefits-row {
         justify-content: flex-start;
         overflow-x: auto;
@@ -4953,6 +5003,13 @@ body.loaded {
         min-width: 120px;
         gap: 8px;
         font-size: 0.9rem;
+    }
+    
+    /* ✅ Step Arrows Rotate 90° */
+    .step-arrow {
+        transform: rotate(90deg);
+        font-size: 2rem;
+        margin: 10px 0;
     }
     
     .step-number-badge {
@@ -4983,7 +5040,7 @@ body.loaded {
         margin-bottom: 50px;
     }
     
-    /* ✅ Phone Gallery Mobile - SPACING MAINTAINED */
+    /* ✅ Phone Gallery Mobile - SPACING MAINTAINED 30px */
     .phone-gallery {
         width: 100%;
         display: flex;
@@ -5010,6 +5067,10 @@ body.loaded {
         border-radius: 26px;
     }
     
+    .phone-mockup {
+        margin-bottom: 30px; /* ✅ MAINTAINED */
+    }
+    
     .thumbnail-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 8px;
@@ -5028,10 +5089,10 @@ body.loaded {
         padding: 6px 2px;
     }
     
-    /* ✅ Laptop Gallery Mobile - SPACING MAINTAINED */
+    /* ✅ Laptop Gallery Mobile - SPACING MAINTAINED 30px */
     .laptop-mockup {
         max-width: 450px;
-        margin: 0 auto 30px;
+        margin: 0 auto 30px; /* ✅ MAINTAINED */
     }
     
     .thumbnail-grid-laptop {
@@ -5051,7 +5112,7 @@ body.loaded {
         padding: 30px 25px;
     }
     
-    /* ✅ Battle Tested Mobile - OPTIMIZED */
+    /* ✅ Battle Tested Mobile - OPTIMIZED + REBALANCED */
     .proven-badge {
         padding: 25px 20px;
         gap: 15px;
@@ -5071,6 +5132,10 @@ body.loaded {
         height: 80px !important;
     }
     
+    .badge-content {
+        text-align: center;
+    }
+    
     .badge-content h4 {
         font-size: 1.15rem;
     }
@@ -5079,7 +5144,7 @@ body.loaded {
         font-size: 0.95rem;
     }
     
-    /* ✅ Revenue Mobile - CENTERED */
+    /* ✅ Revenue Mobile - CENTERED + REBALANCED */
     .revenue-examples-section {
         padding: 35px 20px;
         margin-bottom: 70px;
@@ -5103,6 +5168,7 @@ body.loaded {
         margin: 0 auto;
         max-width: 100%;
         padding: 22px 18px;
+        text-align: left;
     }
     
     .revenue-card-header {
@@ -5129,6 +5195,17 @@ body.loaded {
     .revenue-model-benefits h4 {
         font-size: 1.5rem;
         margin-bottom: 35px;
+    }
+    
+    /* ✅ Crypto Section Mobile - REBALANCED */
+    .crypto-benefit {
+        padding: 20px;
+        gap: 15px;
+    }
+    
+    .benefit-icon {
+        width: 70px;
+        height: 70px;
     }
     
     /* Technology Mobile */
@@ -5306,9 +5383,38 @@ body.loaded {
         width: 100%;
         justify-content: center;
     }
+    
+    /* ✅ Journey Mobile - PERFECTLY CENTERED */
+    .journey-paths {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .journey-path {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    .path-icon-enhanced {
+        margin: 0 auto;
+    }
 }
 
-/* Small Mobile Optimizations */
+/* ✅ 428px iPhone 14 Pro Max / Large Phones */
+@media (min-width: 376px) and (max-width: 428px) {
+    .hero-title-new {
+        font-size: 2rem;
+    }
+    
+    .step-premium {
+        padding: 25px 20px;
+    }
+}
+
+/* ✅ 375px iPhone SE / Small Phones + Extra Small Mobile */
 @media (max-width: 480px) {
     /* Chatbot Extra Small */
     .chatbot-button {
@@ -5374,6 +5480,26 @@ body.loaded {
         padding: 120px 15px 40px;
     }
     
+    /* ✅ 375px Specific Adjustments */
+    .hero-title-new {
+        font-size: 1.8rem;
+        line-height: 1.15;
+    }
+    
+    .step-premium {
+        padding: 20px 15px;
+    }
+    
+    .hero-benefits-row {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .hero-benefit-item {
+        min-width: 100px;
+        font-size: 0.8rem;
+    }
+    
     .hero-benefits-row {
         padding: 15px;
         gap: 15px;
@@ -5395,6 +5521,13 @@ body.loaded {
         font-size: 1.15rem;
         top: 8px;
         right: 8px;
+    }
+    
+    /* ✅ Step Arrows Extra Small */
+    .step-arrow {
+        transform: rotate(90deg);
+        font-size: 1.8rem;
+        margin: 8px 0;
     }
     
     .step-title-premium {
@@ -5431,7 +5564,7 @@ body.loaded {
         padding: 25px 20px;
     }
     
-    /* Phone Gallery Extra Small */
+    /* ✅ Phone Gallery Extra Small - SPACING MAINTAINED */
     .phone-frame {
         width: 220px;
         height: 460px;
@@ -5447,6 +5580,10 @@ body.loaded {
     
     .phone-screen {
         border-radius: 25px;
+    }
+    
+    .phone-mockup {
+        margin-bottom: 25px; /* ✅ SLIGHTLY REDUCED FOR SMALL SCREENS */
     }
     
     .thumbnail-grid {
@@ -5465,9 +5602,10 @@ body.loaded {
         padding: 5px 2px;
     }
     
-    /* Laptop Gallery Extra Small */
+    /* ✅ Laptop Gallery Extra Small - SPACING MAINTAINED */
     .laptop-mockup {
         max-width: 380px;
+        margin-bottom: 25px; /* ✅ SLIGHTLY REDUCED */
     }
     
     .thumbnail-grid-laptop {
@@ -5475,7 +5613,7 @@ body.loaded {
         gap: 8px;
     }
     
-    /* Battle Tested Extra Small */
+    /* ✅ Battle Tested Extra Small - REBALANCED */
     .proven-badge {
         padding: 20px 15px;
     }
@@ -5498,7 +5636,7 @@ body.loaded {
         font-size: 0.9rem;
     }
     
-    /* Revenue Extra Small */
+    /* ✅ Revenue Extra Small - CENTERED + REBALANCED */
     .revenue-examples-section {
         padding: 28px 15px;
         margin-bottom: 60px;
@@ -5537,6 +5675,17 @@ body.loaded {
     .revenue-model-benefits h4 {
         font-size: 1.4rem;
         margin-bottom: 30px;
+    }
+    
+    /* ✅ Crypto Section Extra Small - REBALANCED */
+    .crypto-benefit {
+        flex-direction: column;
+        text-align: center;
+        padding: 18px 15px;
+    }
+    
+    .benefit-icon {
+        margin: 0 auto;
     }
     
     /* Technology Extra Small */
