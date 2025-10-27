@@ -1,11 +1,6 @@
 // Vault Phoenix - Complete Interactive JavaScript
 // 3-TIER HYBRID CHATBOT: Pre-written → Browser AI (WebLLM) → Cloud AI (Claude)
-// Phoenix Rising from Digital Ashes - Crypto Gaming Edition
-// 
-// IMPORTANT: This script requires WebLLM library. See HTML integration guide below.
-//
-// NOTE: Due to character limit, this is a condensed version. The full version
-// has been created. For complete integration instructions, see the HTML guide.
+// UPDATED: Beautiful welcome message, no ugly status boxes, properly sized images
 
 // ============================================
 // CONFIGURATION
@@ -66,7 +61,7 @@ PRESALE: Nov 1, 2025 | 166.7M @ $0.003 | $500K cap
 Keep responses concise (2-3 paragraphs), professional, business-focused.`;
 
 // ============================================
-// WEBLLM INITIALIZATION (TIER 2)
+// WEBLLM INITIALIZATION (TIER 2) - SILENT
 // ============================================
 async function initializeWebLLM() {
     if (isWebLLMLoaded || isWebLLMLoading) return;
@@ -77,66 +72,21 @@ async function initializeWebLLM() {
     
     isWebLLMLoading = true;
     console.log('🧠 Loading Browser AI (~2GB)...');
-    showAILoadingIndicator();
     
     try {
         webLLMEngine = await window.CreateMLCEngine(WEBLLM_MODEL, {
             initProgressCallback: (progress) => {
-                updateAILoadingIndicator(Math.round(progress.progress * 100), progress.text);
+                console.log(`Loading: ${Math.round(progress.progress * 100)}%`);
             }
         });
         
         isWebLLMLoaded = true;
         isWebLLMLoading = false;
-        hideAILoadingIndicator();
-        showNotification('🧠 Browser AI Ready!', 'success');
         console.log('✅ Browser AI loaded!');
     } catch (error) {
         console.error('❌ Browser AI failed:', error);
         isWebLLMLoading = false;
-        hideAILoadingIndicator();
     }
-}
-
-function showAILoadingIndicator() {
-    const indicator = document.createElement('div');
-    indicator.id = 'ai-loading-indicator';
-    indicator.style.cssText = `position: fixed; bottom: 80px; right: 20px; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 15px 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); z-index: 9998; font-size: 0.9rem; max-width: 300px;`;
-    indicator.innerHTML = `
-        <div style="font-weight: bold; margin-bottom: 5px;">🧠 Loading Browser AI...</div>
-        <div id="ai-loading-text">Initializing...</div>
-        <div style="background: rgba(255,255,255,0.2); height: 4px; border-radius: 2px; margin-top: 8px; overflow: hidden;">
-            <div id="ai-loading-bar" style="background: white; height: 100%; width: 0%; transition: width 0.3s;"></div>
-        </div>
-    `;
-    document.body.appendChild(indicator);
-}
-
-function updateAILoadingIndicator(percent, text) {
-    const textEl = document.getElementById('ai-loading-text');
-    const barEl = document.getElementById('ai-loading-bar');
-    if (textEl && barEl) {
-        textEl.textContent = `${text} (${percent}%)`;
-        barEl.style.width = `${percent}%`;
-    }
-}
-
-function hideAILoadingIndicator() {
-    const indicator = document.getElementById('ai-loading-indicator');
-    if (indicator) indicator.remove();
-}
-
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    const colors = {
-        success: 'linear-gradient(135deg, #22c55e, #16a34a)',
-        error: 'linear-gradient(135deg, #ef4444, #dc2626)',
-        info: 'linear-gradient(135deg, #3b82f6, #2563eb)'
-    };
-    notification.style.cssText = `position: fixed; bottom: 20px; right: 20px; padding: 12px 18px; border-radius: 8px; color: white; font-size: 0.9rem; z-index: 9999; background: ${colors[type]};`;
-    notification.textContent = message;
-    document.body.appendChild(notification);
-    setTimeout(() => notification.remove(), 4000);
 }
 
 // ============================================
@@ -204,13 +154,9 @@ function initializeChatbot() {
 }
 
 // ============================================
-// WELCOME MESSAGE
+// BEAUTIFUL WELCOME MESSAGE - NO STATUS BOX
 // ============================================
 function addWelcomeMessage() {
-    const aiStatus = isWebLLMLoaded ? '🧠 Browser AI: <span style="color: #22c55e;">Ready</span>' : 
-                     isWebLLMLoading ? '🧠 Browser AI: <span style="color: #f59e0b;">Loading...</span>' :
-                     '🧠 Browser AI: <span style="color: #6b7280;">Not loaded</span>';
-    
     const welcomeMsg = `
         <div class="chat-message assistant-message">
             <div class="message-content">
@@ -218,34 +164,32 @@ function addWelcomeMessage() {
                     <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
                 </div>
                 <div class="message-text">
-                    <strong>Welcome to Vault Phoenix!</strong><br><br>
-                    I'm here to help you revolutionize your marketing with AR crypto gaming.
+                    <strong style="font-size: 1.15rem; color: #f0a500;">Welcome to Vault Phoenix! 🔥</strong><br><br>
+                    I'm Phoenix AI, your guide to revolutionizing marketing with AR crypto gaming.<br><br>
                     
-                    <div class="ai-featured-question">
-                        <div class="featured-badge">
-                            <img src="images/VPEmberCoin.PNG" alt="Featured" class="featured-badge-icon">
-                            <span>Featured</span>
+                    <div style="background: linear-gradient(135deg, rgba(215, 51, 39, 0.15), rgba(251, 146, 60, 0.1)); border: 2px solid rgba(215, 51, 39, 0.3); border-radius: 15px; padding: 18px; margin: 15px 0;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                            <img src="images/VPEmberCoin.PNG" alt="Featured" style="width: 32px; height: 32px; filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));">
+                            <strong style="color: #f0a500; font-size: 1.05rem;">Featured Question</strong>
                         </div>
-                        <button class="featured-question-btn" onclick="handleFeaturedQuestion()">
-                            Learn how Location-Based AR with $Ember tokens can transform your business
+                        <button class="featured-question-btn" onclick="handleFeaturedQuestion()" style="width: 100%; background: linear-gradient(135deg, rgba(215, 51, 39, 0.2), rgba(251, 146, 60, 0.15)); border: 2px solid rgba(215, 51, 39, 0.4); border-radius: 12px; padding: 14px; color: rgba(255, 255, 255, 0.95); font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease; text-align: left; line-height: 1.5;">
+                            How can Location-Based AR with $Ember tokens transform my business? 🚀
                         </button>
                     </div>
                     
-                    <div class="ai-other-questions">
-                        <p><strong>Quick topics:</strong></p>
-                        <ul>
-                            <li>Pricing ($499 + $149/mo)</li>
-                            <li>$Ember presale (Nov 1)</li>
-                            <li>GPS & Beacon tech</li>
-                            <li>Revenue ($10K-$75K/mo)</li>
-                        </ul>
+                    <div style="margin-top: 18px;">
+                        <p style="margin-bottom: 10px;"><strong style="color: #f0a500;">Popular Topics:</strong></p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.9rem;">
+                            <div style="background: rgba(0, 0, 0, 0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(240, 165, 0, 0.2);">💰 Pricing</div>
+                            <div style="background: rgba(0, 0, 0, 0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(240, 165, 0, 0.2);">🪙 $Ember Presale</div>
+                            <div style="background: rgba(0, 0, 0, 0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(240, 165, 0, 0.2);">📍 GPS & Beacons</div>
+                            <div style="background: rgba(0, 0, 0, 0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(240, 165, 0, 0.2);">📈 Revenue</div>
+                        </div>
                     </div>
                     
-                    <div style="margin-top: 15px; padding: 10px; background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6; border-radius: 5px; font-size: 0.85rem;">
-                        <strong>🎯 3-Tier Smart System:</strong><br>
-                        ⚡ Common = Instant<br>
-                        ${aiStatus}<br>
-                        ☁️ Cloud AI: Available
+                    <div style="margin-top: 18px; padding: 12px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; font-size: 0.85rem; text-align: center; color: rgba(255, 255, 255, 0.8);">
+                        <strong style="color: #f0a500;">💬 Ask me anything!</strong><br>
+                        I'm powered by smart AI to help you succeed.
                     </div>
                 </div>
             </div>
@@ -337,7 +281,7 @@ async function sendMessage() {
             
             removeTypingIndicator();
             const aiResponse = response.choices[0].message.content;
-            addMessage('assistant', `<div class="response-badge tier-2">🧠 BROWSER AI</div>` + aiResponse);
+            addMessage('assistant', `<div class="response-badge tier-2">🧠 SMART AI</div>` + aiResponse);
             conversationHistory.push(
                 { role: 'user', content: message },
                 { role: 'assistant', content: aiResponse }
@@ -470,65 +414,18 @@ tierBadgeStyle.textContent = `
     .tier-1 { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
     .tier-2 { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
     .tier-3 { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
+    .featured-question-btn:hover {
+        background: linear-gradient(135deg, rgba(215, 51, 39, 0.3), rgba(251, 146, 60, 0.2)) !important;
+        border-color: rgba(215, 51, 39, 0.6) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(215, 51, 39, 0.3);
+    }
 `;
 document.head.appendChild(tierBadgeStyle);
 
 // ============================================
-// [ALL YOUR OTHER ORIGINAL FUNCTIONS CONTINUE HERE]
-// Gallery, animations, stats, floating coins, etc.
-// Due to character limits, these are the same as your original file
-// ============================================
-
-function initializeMobileAllocationCards() {
-    if (window.innerWidth > 768) return;
-    const tableContainer = document.querySelector('.allocation-table .table-container');
-    if (!tableContainer) return;
-    
-    const allocations = [
-        { category: 'Public Presale', percentage: '50%', tokens: '83.35M', price: '$0.003', vesting: 'No lock-up', note: 'Available to all investors' },
-        { category: 'Ecosystem', percentage: '20%', tokens: '33.34M', price: 'Reserved', vesting: '24 months', note: 'Platform growth' },
-        { category: 'Team', percentage: '15%', tokens: '25M', price: 'Reserved', vesting: '12 months', note: '6-month cliff' },
-        { category: 'Marketing', percentage: '10%', tokens: '16.67M', price: 'Reserved', vesting: '18 months', note: 'Brand awareness' },
-        { category: 'Liquidity', percentage: '5%', tokens: '8.34M', price: 'Reserved', vesting: '3 months', note: 'DEX liquidity' }
-    ];
-    
-    const mobileContainer = document.createElement('div');
-    mobileContainer.className = 'allocation-cards-mobile';
-    
-    allocations.forEach(a => {
-        const card = document.createElement('div');
-        card.className = 'allocation-card-mobile';
-        card.innerHTML = `
-            <div class="allocation-card-header">
-                <div class="allocation-card-category">${a.category}</div>
-                <div class="allocation-card-percentage">${a.percentage}</div>
-            </div>
-            <div class="allocation-card-details">
-                <div class="allocation-detail-item">
-                    <div class="allocation-detail-label">Tokens</div>
-                    <div class="allocation-detail-value">${a.tokens}</div>
-                </div>
-                <div class="allocation-detail-item">
-                    <div class="allocation-detail-label">Price</div>
-                    <div class="allocation-detail-value">${a.price}</div>
-                </div>
-                <div class="allocation-detail-item">
-                    <div class="allocation-detail-label">Vesting</div>
-                    <div class="allocation-detail-value">${a.vesting}</div>
-                </div>
-            </div>
-            <div class="allocation-card-note">${a.note}</div>`;
-        mobileContainer.appendChild(card);
-    });
-    
-    tableContainer.parentNode.insertBefore(mobileContainer, tableContainer.nextSibling);
-}
-
-// [Insert all your other original functions here: changeImage, changeLaptopImage,
-// observer, animations, stats, gallery rotation, particles, benefits, etc.]
-// They remain exactly the same as your original file.
-
 // PAGE INITIALIZATION
+// ============================================
 (function() {
     document.documentElement.style.background = '#0f0f0f';
     if (document.body) {
@@ -543,8 +440,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('loaded');
     
     initializeChatbot(); // 3-TIER chatbot
-    initializeMobileAllocationCards();
-    // [Call all your other init functions]
     
     console.log('🤖⚡🧠 3-TIER Chatbot ready!');
 });
