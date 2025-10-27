@@ -217,10 +217,9 @@ body.loaded {
 }
 
 /* ============================================
-   4. HERO SECTION (✅ COMPLETE MOBILE CENTERING)
-   ✅ Premium redesign with perfect mobile layout
-   ✅ Step arrows rotate 90° on mobile
-   ✅ Hero benefits with scroll snap
+   4. HERO SECTION - COMPLETE MOBILE REBUILD
+   Desktop: Premium 3-column layout with horizontal arrows
+   Mobile: Vertical stack with rotated arrows + smooth scroll benefits
    ============================================ */
 
 .hero {
@@ -264,7 +263,7 @@ body.loaded {
 .hero-content {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 40px;
+    width: 100%;
     text-align: center;
     color: white;
     z-index: 10;
@@ -295,14 +294,16 @@ body.loaded {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ✅ 3-Step Process - MOBILE CENTERING COMPLETE */
+/* ============================================
+   3-STEP PROCESS - DESKTOP HORIZONTAL
+   ============================================ */
 .hero-steps-premium {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 30px;
     margin: 60px 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .step-premium {
@@ -397,6 +398,7 @@ body.loaded {
     line-height: 1.6;
 }
 
+/* DESKTOP HORIZONTAL ARROWS */
 .step-arrow {
     font-size: 2.5rem;
     color: #f0a500;
@@ -405,20 +407,24 @@ body.loaded {
     flex-shrink: 0;
     text-shadow: 0 2px 8px rgba(240, 165, 0, 0.4);
     animation: arrowPulse 2s ease-in-out infinite;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
 }
 
 @keyframes arrowPulse {
     0%, 100% { 
-        transform: scale(1); 
+        transform: scale(1) rotate(0deg); 
         opacity: 0.8; 
     }
     50% { 
-        transform: scale(1.2); 
+        transform: scale(1.2) rotate(0deg); 
         opacity: 1; 
     }
 }
 
-/* ✅ Dual Path CTAs - MOBILE CENTERING COMPLETE */
+/* ============================================
+   DUAL PATH CTAs
+   ============================================ */
 .hero-dual-ctas {
     margin: 70px 0 50px;
 }
@@ -565,7 +571,42 @@ body.loaded {
     flex-shrink: 0;
 }
 
-/* ✅ Hero Benefits Row - MOBILE SCROLL OPTIMIZED + SNAP POINTS */
+/* Secondary CTA Link */
+.hero-secondary-cta {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.secondary-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.secondary-cta-link:hover {
+    color: #f0a500;
+    transform: translateX(5px);
+    background: rgba(240, 165, 0, 0.1);
+}
+
+.secondary-cta-link svg {
+    transition: transform 0.3s ease;
+}
+
+.secondary-cta-link:hover svg {
+    transform: translateX(3px);
+}
+
+/* ============================================
+   HERO BENEFITS ROW - SMOOTH SCROLL
+   ============================================ */
 .hero-benefits-row {
     display: flex;
     align-items: center;
@@ -579,7 +620,6 @@ body.loaded {
     border: 1px solid rgba(215, 51, 39, 0.2);
     overflow-x: auto;
     overflow-y: hidden;
-    position: relative;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
@@ -631,37 +671,338 @@ body.loaded {
             drop-shadow(0 0 22px rgba(240, 165, 0, 0.35));
 }
 
-/* ✅ Hero Secondary CTA - "See How It Works" Link Styling */
-.hero-secondary-cta {
-    text-align: center;
-    margin-top: 20px;
+/* ============================================
+   MOBILE OPTIMIZATIONS - COMPLETE REBUILD
+   ============================================ */
+
+/* Tablet (1024px) */
+@media (max-width: 1024px) {
+    .hero {
+        padding: 140px 30px 60px;
+    }
+    
+    /* MOBILE VERTICAL LAYOUT */
+    .hero-steps-premium {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    /* ARROWS ROTATE 90 DEGREES */
+    .step-arrow {
+        transform: rotate(90deg);
+        margin: 15px 0;
+        font-size: 2.2rem;
+    }
+    
+    @keyframes arrowPulse {
+        0%, 100% { 
+            transform: scale(1) rotate(90deg); 
+            opacity: 0.8; 
+        }
+        50% { 
+            transform: scale(1.2) rotate(90deg); 
+            opacity: 1; 
+        }
+    }
+    
+    .step-premium {
+        max-width: 100%;
+        width: 100%;
+        flex: 1 1 100%;
+    }
+    
+    /* CTA PATHS STACK */
+    .cta-path-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    /* BENEFITS ROW SCROLL */
+    .hero-benefits-row {
+        gap: 25px;
+        padding: 25px 30px;
+        justify-content: flex-start;
+    }
 }
 
-.secondary-cta-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    padding: 8px 16px;
-    border-radius: 8px;
+/* Mobile Phone (768px) */
+@media (max-width: 768px) {
+    .hero {
+        padding: 130px 20px 50px;
+        min-height: auto;
+    }
+    
+    .hero-header {
+        margin-bottom: 40px;
+    }
+    
+    .hero-title-new {
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        margin-bottom: 20px;
+    }
+    
+    .hero-subtitle-new {
+        font-size: clamp(1rem, 2.5vw, 1.15rem);
+    }
+    
+    /* STEPS MOBILE */
+    .hero-steps-premium {
+        margin: 40px 0;
+        gap: 15px;
+    }
+    
+    .step-premium {
+        padding: 25px 20px;
+    }
+    
+    .step-visual {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .step-number-badge {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .step-arrow {
+        font-size: 2rem;
+        margin: 12px 0;
+    }
+    
+    .step-title-premium {
+        font-size: 1.3rem;
+    }
+    
+    .step-description-premium {
+        font-size: 0.95rem;
+    }
+    
+    /* CTA PATHS MOBILE */
+    .hero-dual-ctas {
+        margin: 50px 0 40px;
+    }
+    
+    .cta-path {
+        padding: 28px 22px;
+    }
+    
+    .path-title {
+        font-size: 1.4rem;
+    }
+    
+    .path-description {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+    
+    .cta-path-button {
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+    
+    .cta-path-icon {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    /* BENEFITS MOBILE SCROLL */
+    .hero-benefits-row {
+        gap: 20px;
+        padding: 20px;
+        margin-top: 40px;
+        justify-content: flex-start;
+    }
+    
+    .hero-benefit-item {
+        min-width: 120px;
+        gap: 8px;
+        font-size: 0.9rem;
+    }
+    
+    .benefit-icon-small {
+        width: 60px !important;
+        height: 60px !important;
+    }
 }
 
-.secondary-cta-link:hover {
-    color: #f0a500;
-    transform: translateX(5px);
-    background: rgba(240, 165, 0, 0.1);
+/* Small Mobile (480px) */
+@media (max-width: 480px) {
+    .hero {
+        padding: 120px 15px 40px;
+    }
+    
+    .hero-header {
+        margin-bottom: 35px;
+    }
+    
+    .hero-title-new {
+        font-size: 1.8rem;
+        line-height: 1.15;
+        margin-bottom: 18px;
+    }
+    
+    .hero-subtitle-new {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+    
+    /* STEPS EXTRA SMALL */
+    .hero-steps-premium {
+        margin: 35px 0;
+        gap: 12px;
+    }
+    
+    .step-premium {
+        padding: 20px 15px;
+    }
+    
+    .step-visual {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 15px;
+    }
+    
+    .step-number-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        top: 8px;
+        right: 8px;
+    }
+    
+    .step-arrow {
+        font-size: 1.8rem;
+        margin: 10px 0;
+    }
+    
+    .step-title-premium {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .step-description-premium {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    /* CTA PATHS EXTRA SMALL */
+    .hero-dual-ctas {
+        margin: 40px 0 30px;
+    }
+    
+    .cta-path {
+        padding: 22px 18px;
+    }
+    
+    .path-badge {
+        padding: 5px 12px;
+        font-size: 0.7rem;
+        margin-bottom: 12px;
+    }
+    
+    .path-title {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+    }
+    
+    .path-description {
+        font-size: 0.9rem;
+        margin-bottom: 18px;
+        line-height: 1.5;
+    }
+    
+    .cta-path-button {
+        padding: 13px 20px;
+        font-size: 0.95rem;
+        gap: 10px;
+    }
+    
+    .cta-path-icon {
+        width: 28px !important;
+        height: 28px !important;
+    }
+    
+    /* SECONDARY CTA EXTRA SMALL */
+    .hero-secondary-cta {
+        margin-top: 15px;
+    }
+    
+    .secondary-cta-link {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+    
+    /* BENEFITS EXTRA SMALL SCROLL */
+    .hero-benefits-row {
+        gap: 15px;
+        padding: 15px;
+        margin-top: 35px;
+    }
+    
+    .hero-benefit-item {
+        min-width: 105px;
+        gap: 6px;
+        font-size: 0.85rem;
+    }
+    
+    .benefit-icon-small {
+        width: 52px !important;
+        height: 52px !important;
+    }
 }
 
-.secondary-cta-link svg {
-    transition: transform 0.3s ease;
-}
-
-.secondary-cta-link:hover svg {
-    transform: translateX(3px);
+/* Extra Small (375px - iPhone SE) */
+@media (max-width: 375px) {
+    .hero-title-new {
+        font-size: 1.65rem;
+    }
+    
+    .step-visual {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .step-number-badge {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
+    
+    .step-arrow {
+        font-size: 1.6rem;
+    }
+    
+    .step-title-premium {
+        font-size: 1.1rem;
+    }
+    
+    .step-description-premium {
+        font-size: 0.85rem;
+    }
+    
+    .path-title {
+        font-size: 1.15rem;
+    }
+    
+    .cta-path-button {
+        padding: 12px 18px;
+        font-size: 0.9rem;
+    }
+    
+    .hero-benefit-item {
+        min-width: 95px;
+        font-size: 0.8rem;
+    }
+    
+    .benefit-icon-small {
+        width: 48px !important;
+        height: 48px !important;
+    }
 }
 
 /* ============================================
