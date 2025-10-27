@@ -642,74 +642,7 @@
     });
 
     // ============================================
-    // UTILITY FUNCTIONS
-    // ============================================
-    
-    // Debounce function
-    window.debounce = function(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    };
-
-    // Throttle function
-    window.throttle = function(func, limit) {
-        let inThrottle;
-        return function(...args) {
-            if (!inThrottle) {
-                func.apply(this, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    };
-
-    // Check if element is in viewport
-    window.isInViewport = function(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    };
-
-    // ============================================
-    // RESPONSIVE HANDLING
-    // ============================================
-    
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
-            // Close mobile menu on desktop resize
-            if (window.innerWidth > 1024 && mobileMenu && mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-                if (mobileMenuOverlay) {
-                    mobileMenuOverlay.classList.remove('active');
-                }
-                if (mobileMenuBtn) {
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
-                document.body.style.overflow = '';
-            }
-        }, 250);
-    });
-
-    // ============================================
-// CHATBOT INITIALIZATION FIX
-// ============================================
-// Add this at the END of shared-script.js, replacing the existing chatbot section
-
-    // ============================================
-    // PHOENIX AI CHATBOT SYSTEM - IMPROVED INITIALIZATION
+    // PHOENIX AI CHATBOT SYSTEM
     // ============================================
     
     // Chatbot configuration
@@ -763,7 +696,7 @@ Your role:
 
 If asked about financial advice, remind users to do their own research and consult professionals.`;
 
-    // Initialize chatbot - IMPROVED VERSION WITH RETRY LOGIC
+    // Initialize chatbot
     function initializeChatbot() {
         console.log('🤖 CHATBOT: Starting initialization...');
         
@@ -1041,7 +974,69 @@ If asked about financial advice, remind users to do their own research and consu
     window.initializePhoenixChatbot = initializeChatbot;
 
     // ============================================
-    // INITIALIZATION - UPDATED WITH RETRY LOGIC
+    // UTILITY FUNCTIONS
+    // ============================================
+    
+    // Debounce function
+    window.debounce = function(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    };
+
+    // Throttle function
+    window.throttle = function(func, limit) {
+        let inThrottle;
+        return function(...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    };
+
+    // Check if element is in viewport
+    window.isInViewport = function(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    };
+
+    // ============================================
+    // RESPONSIVE HANDLING
+    // ============================================
+    
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            // Close mobile menu on desktop resize
+            if (window.innerWidth > 1024 && mobileMenu && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                if (mobileMenuOverlay) {
+                    mobileMenuOverlay.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+                document.body.style.overflow = '';
+            }
+        }, 250);
+    });
+
+    // ============================================
+    // INITIALIZATION
     // ============================================
     
     function init() {
