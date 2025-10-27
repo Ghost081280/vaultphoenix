@@ -1,15 +1,15 @@
 /* ============================================
    VAULT PHOENIX - OPTIMIZED STYLESHEET
    Senior CSS Engineering - Production Ready
-   Version: 2.1 - COMPREHENSIVE FIXES APPLIED
+   Version: 2.2 - COMPREHENSIVE FIXES + MOBILE CENTERING
    ============================================ */
 
 /* TABLE OF CONTENTS:
-   1. Base & Reset
-   2. Universal Image Glow System (CONSOLIDATED)
-   3. Icon Sizes & Styling
+   1. Base & Reset (SCROLL OPTIMIZED)
+   2. Universal Image Glow System (CONSOLIDATED - SINGLE SOURCE OF TRUTH)
+   3. Icon Sizes & Styling (SCALED TO 60px MINIMUM)
    4. AI Chatbot System (PROFESSIONAL 550px)
-   5. Navigation (from shared-styles.css)
+   5. Navigation (NO GLOW - HANDLED BY SHARED-STYLES.CSS)
    6. Hero Section (MOBILE CENTERING FIXED)
    7. Token Evolution Section
    8. App Showcase (DEVICE SPACING FIXED)
@@ -21,11 +21,11 @@
    14. Final CTA (JOURNEY PATHS CENTERED)
    15. Footer
    16. Mobile Optimizations (COMPREHENSIVE)
-   17. Animations & Utilities
+   17. Animations & Utilities (PERFORMANCE OPTIMIZED)
 */
 
 /* ============================================
-   1. BASE & RESET
+   1. BASE & RESET (SCROLL OPTIMIZED)
    ============================================ */
 
 * {
@@ -36,7 +36,11 @@
 
 html {
     background: #0f0f0f;
-    scroll-behavior: smooth;
+    /* Removed scroll-behavior: smooth - let JS handle it for better control */
+    /* Viewport stabilization for zoom */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
@@ -68,6 +72,7 @@ body.loaded {
 /* ============================================
    2. UNIVERSAL IMAGE GLOW SYSTEM (CONSOLIDATED)
    Single source of truth for all glow effects
+   PERFORMANCE OPTIMIZED with GPU acceleration
    ============================================ */
 
 .image-with-glow {
@@ -96,6 +101,10 @@ body.loaded {
     z-index: -1;
     opacity: 0.8;
     animation: glowPulse 3s ease-in-out infinite;
+    /* GPU acceleration for smooth animation */
+    will-change: transform, opacity;
+    transform-origin: center;
+    backface-visibility: hidden;
 }
 
 /* Specialized Glow Colors */
@@ -139,12 +148,12 @@ body.loaded {
 
 /* ============================================
    3. ICON SIZES & STYLING
-   Centralized icon management
+   Centralized icon management - SCALED TO 60px MINIMUM
    ============================================ */
 
 .benefit-icon-small {
-    width: 65px !important;
-    height: 65px !important;
+    width: 68px !important;
+    height: 68px !important;
     object-fit: contain;
     filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.5)) 
             drop-shadow(0 0 18px rgba(240, 165, 0, 0.3));
@@ -153,16 +162,16 @@ body.loaded {
 }
 
 .connection-icon {
-    width: 50px !important;
-    height: 50px !important;
+    width: 60px !important;
+    height: 60px !important;
     object-fit: contain;
     filter: drop-shadow(0 3px 6px rgba(240, 165, 0, 0.5)) 
             drop-shadow(0 0 15px rgba(240, 165, 0, 0.25));
 }
 
 .social-sharing-icon-compact {
-    width: 90px !important;
-    height: 90px !important;
+    width: 95px !important;
+    height: 95px !important;
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) 
             drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
@@ -179,8 +188,8 @@ body.loaded {
 }
 
 .revenue-industry-icon {
-    width: 75px !important;
-    height: 75px !important;
+    width: 78px !important;
+    height: 78px !important;
     object-fit: contain;
     filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3)) 
             drop-shadow(0 0 15px rgba(240, 165, 0, 0.2));
@@ -188,16 +197,16 @@ body.loaded {
 }
 
 .journey-icon-large {
-    width: 90px !important;
-    height: 90px !important;
+    width: 95px !important;
+    height: 95px !important;
     object-fit: contain;
     filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5)) 
             drop-shadow(0 0 18px rgba(240, 165, 0, 0.25));
 }
 
 .ember-countdown-icon-redesigned {
-    width: 65px !important;
-    height: 65px !important;
+    width: 68px !important;
+    height: 68px !important;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.8)) 
             drop-shadow(0 0 30px rgba(240, 165, 0, 0.4));
@@ -206,8 +215,8 @@ body.loaded {
 }
 
 .compliance-icon-redesigned {
-    width: 65px !important;
-    height: 65px !important;
+    width: 68px !important;
+    height: 68px !important;
     object-fit: contain;
     filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5)) 
             drop-shadow(0 0 18px rgba(240, 165, 0, 0.25));
@@ -259,6 +268,7 @@ body.loaded {
     pointer-events: none;
     animation: chatbotGlowPulse 2.5s ease-in-out infinite;
     z-index: 1;
+    will-change: transform, opacity;
 }
 
 @keyframes chatbotGlowPulse {
@@ -781,7 +791,7 @@ body.loaded {
     padding: 30px 25px;
     backdrop-filter: blur(20px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    flex: 1;
+    flex: 1 1 280px;
     min-width: 280px;
     max-width: 350px;
     position: relative;
@@ -1049,6 +1059,28 @@ body.loaded {
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(215, 51, 39, 0.5) transparent;
+}
+
+.hero-benefits-row::-webkit-scrollbar {
+    height: 6px;
+}
+
+.hero-benefits-row::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.hero-benefits-row::-webkit-scrollbar-thumb {
+    background: rgba(215, 51, 39, 0.5);
+    border-radius: 10px;
+}
+
+.hero-benefits-row::-webkit-scrollbar-thumb:hover {
+    background: rgba(215, 51, 39, 0.7);
 }
 
 .hero-benefit-item {
@@ -1064,6 +1096,7 @@ body.loaded {
     white-space: nowrap;
     min-width: 140px;
     flex-shrink: 0;
+    scroll-snap-align: center;
 }
 
 .hero-benefit-item:hover {
@@ -1214,8 +1247,8 @@ body.loaded {
 }
 
 .countdown-icon-redesigned {
-    width: 65px;
-    height: 65px;
+    width: 68px;
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1398,8 +1431,8 @@ body.loaded {
 }
 
 .cta-icon-image-redesigned {
-    width: 65px !important;
-    height: 65px !important;
+    width: 68px !important;
+    height: 68px !important;
     object-fit: contain;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
@@ -2412,7 +2445,7 @@ body.loaded {
 .phone-mockup {
     display: inline-block;
     position: relative;
-    margin-bottom: 30px; /* INCREASED from default for consistency */
+    margin-bottom: 30px; /* FIXED: Matched with laptop-mockup spacing */
 }
 
 .phone-frame {
@@ -2458,6 +2491,9 @@ body.loaded {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
     background: #000;
+    /* PERFORMANCE: Prevent blinking */
+    will-change: opacity;
+    backface-visibility: hidden;
 }
 
 .thumbnail-grid {
@@ -2524,7 +2560,7 @@ body.loaded {
     position: relative;
     width: 100%;
     max-width: 650px;
-    margin: 0 auto 30px; /* INCREASED from 25px for consistency with phone-mockup */
+    margin: 0 auto 30px; /* FIXED: Matched with phone-mockup spacing */
 }
 
 .laptop-screen {
@@ -2547,6 +2583,9 @@ body.loaded {
     object-fit: contain;
     transition: opacity 0.5s ease;
     background: #000;
+    /* PERFORMANCE: Prevent blinking */
+    will-change: opacity;
+    backface-visibility: hidden;
 }
 
 .laptop-base {
@@ -4407,11 +4446,11 @@ body.loaded {
 
 /* JOURNEY PATHS CENTERING FIX */
 .journey-paths {
-    display: flex; /* Changed from grid to flex for better centering */
+    display: flex;
     justify-content: center;
     align-items: stretch;
     gap: 35px;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    flex-wrap: wrap;
 }
 
 .journey-path {
@@ -4421,9 +4460,9 @@ body.loaded {
     padding: 30px;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    flex: 1 1 calc(50% - 20px); /* Flexible width with minimum */
-    max-width: 550px; /* Maximum width for readability */
-    min-width: 320px; /* Minimum width to prevent too narrow */
+    flex: 1 1 calc(50% - 20px);
+    max-width: 550px;
+    min-width: 320px;
 }
 
 .journey-path:hover {
@@ -4610,8 +4649,8 @@ body.loaded {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background: linear-gradient(135deg, #d73327, #fb923c);
     border-radius: 50%;
     color: white;
@@ -4647,8 +4686,8 @@ body.loaded {
 }
 
 .social-icon {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     transition: all 0.3s ease;
 }
 
@@ -4684,8 +4723,8 @@ body.loaded {
 }
 
 .footer-ember-coin {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
 }
 
@@ -4706,7 +4745,7 @@ body.loaded {
     /* Hero Section Tablet - MOBILE CENTERING */
     .hero-steps-premium {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
     }
     
     .step-arrow {
@@ -4717,6 +4756,7 @@ body.loaded {
     
     .step-premium {
         max-width: 100%;
+        flex: 1 1 100%;
     }
     
     .step-number-badge {
@@ -4900,24 +4940,12 @@ body.loaded {
         -webkit-overflow-scrolling: touch;
         padding: 20px;
         gap: 20px;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+        scrollbar-width: thin;
+        -ms-overflow-style: auto;
     }
     
     .hero-benefits-row::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .hero-benefits-row::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: 40px;
-        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5));
-        pointer-events: none;
-        border-radius: 0 20px 20px 0;
+        height: 6px;
     }
     
     .hero-benefit-item {
@@ -5029,6 +5057,7 @@ body.loaded {
         gap: 15px;
         flex-direction: column;
         text-align: center;
+        max-height: none;
     }
     
     .badge-icon {
@@ -5225,8 +5254,8 @@ body.loaded {
     }
     
     .social-sharing-icon-compact {
-        width: 70px !important;
-        height: 70px !important;
+        width: 75px !important;
+        height: 75px !important;
     }
     
     .social-sharing-title-compact {
@@ -5620,8 +5649,8 @@ body.loaded {
     }
     
     .social-sharing-icon-compact {
-        width: 60px !important;
-        height: 60px !important;
+        width: 65px !important;
+        height: 65px !important;
     }
     
     .social-sharing-title-compact {
@@ -5662,16 +5691,29 @@ body.loaded {
         grid-template-columns: 1fr;
         gap: 10px;
     }
+    
+    /* Footer Extra Small */
+    .social-link {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .social-icon {
+        width: 26px;
+        height: 26px;
+    }
 }
 
 /* ============================================
-   17. ANIMATIONS & UTILITIES
+   17. ANIMATIONS & UTILITIES (PERFORMANCE OPTIMIZED)
    ============================================ */
 
 .fade-in {
     opacity: 0;
     transform: translateY(40px);
     animation: fadeInUp 1s ease forwards;
+    /* Performance optimization */
+    will-change: opacity, transform;
 }
 
 @keyframes fadeInUp {
@@ -5690,6 +5732,8 @@ body.loaded {
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Performance optimization */
+    will-change: opacity, transform;
 }
 
 .scroll-reveal.revealed {
