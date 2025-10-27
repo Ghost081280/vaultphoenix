@@ -1,6 +1,7 @@
 // Vault Phoenix - Interactive JavaScript
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
-// UPDATED: Fixed chatbot with proper message alignment and scroll prevention
+// UPDATED: Enhanced AI Agent with Location-Based AR + $Ember Token Focus
+// FIXED: Chatbot with proper message alignment and scroll prevention
 // FIXED: Removed auto-focus to prevent keyboard popup on mobile
 // CLEANED: Removed duplicate code now in shared-script.js
 // User messages: NO avatar, pushed to far right
@@ -20,31 +21,77 @@ const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 let conversationHistory = [];
 let isTyping = false;
 
-// System prompt for Vault Phoenix context
+// Enhanced System Prompt for Vault Phoenix - UPDATED WITH ACCURATE INFO
 const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix, a revolutionary AR crypto gaming platform that combines GPS & Beacon location technology with blockchain rewards for location-based marketing campaigns.
 
 Key Information about Vault Phoenix:
-- White-label AR crypto gaming platform launching campaigns in 24 hours
-- Uses GPS (outdoor) and Beacon (indoor) technology for precise location targeting
-- Offers $100 FREE $Ember tokens with every service activation
-- Two main solutions:
-  1. White-Label Solution: Starting at $499 setup + $149/mo hosting
-  2. SDK Integration: Free SDK, management from $49/mo (available early 2026)
-- Battle-tested: 6+ years development, 12+ successful AR games
-- Industries served: Sports, Radio, Tourism, Retail, Entertainment, Culinary, Healthcare, Education, Automotive
-- Revenue generation: $10K-$75K per month through premium location placements
-- $Ember Token presale launching November 1, 2025 (166.7M tokens, $0.003 price)
+
+CORE OFFERING:
+- Location-Based AR platform that overlays $Ember tokens onto real-world locations
+- GPS technology for outdoor precision (5-10m radius)
+- Beacon technology for indoor precision (1-5m radius, centimeter-level accuracy)
+- Players collect $Ember tokens at sponsored business locations
+- Creates guaranteed foot traffic and measurable ROI
+
+TWO MAIN SOLUTIONS:
+1. White-Label Web App Solution:
+   - Starting at $499 one-time setup + $149/mo managed hosting
+   - Fully branded AR crypto gaming web application
+   - Includes $100 FREE $Ember tokens when service activated
+   - Complete management system with coin control
+   - 24-hour deployment
+   - No app store required - runs in mobile browsers
+   - Cross-platform (iOS, Android, Desktop)
+
+2. SDK Integration Platform:
+   - Free open-source SDK on GitHub
+   - Management system from $49/mo (Starter), $149/mo (Growth), $399/mo (Enterprise)
+   - Available early 2026
+   - Includes $100 FREE $Ember tokens when service activated
+   - For developers who want to integrate AR crypto gaming into existing apps
+
+TECHNOLOGY:
+- GPS + Beacon combined coverage = 100% location accuracy indoor & outdoor
+- Web-based AR (no app store needed, instant updates, universal access)
+- Real-time analytics dashboard
+- Crypto wallet integration
+- $Ember token rewards system
+
+REVENUE MODEL:
+- Location partners pay premium rates for crypto coin placement
+- Proven revenue: $10K-$75K per month depending on industry and scale
+- Industries: Sports venues, radio stations, tourism, retail, entertainment, culinary, healthcare, education, automotive
+
+BATTLE-TESTED:
+- 6+ years of development
+- 12+ successful location-based AR games deployed
+- Now enhanced with cryptocurrency rewards
+
+$EMBER TOKEN PRESALE:
+- Launching November 1, 2025
+- 166.7M tokens available at $0.003
+- $500K hard cap
+- 50% public presale, 20% ecosystem, 15% team, 10% marketing, 5% liquidity
+
+USE CASES:
+- Stadium Crypto Hunt (GPS parking + Beacon concessions)
+- Morning Show Treasure Hunt (city-wide sponsor locations)
+- Historic Downtown Quest (tourism with token rewards)
+- Mall District Challenge (retail foot traffic)
+- Concert Crypto Series (venue + surrounding businesses)
+- Foodie Crypto Trail (restaurant discovery)
 
 Your role is to:
-- Answer questions about Vault Phoenix services, pricing, and technology
-- Explain how AR crypto gaming works with GPS & Beacon technology
-- Provide information about the $Ember token and presale
-- Help users understand ROI and revenue opportunities
-- Guide users toward contacting contact@vaultphoenix.com for setup
-- Be enthusiastic, professional, and helpful
-- Keep responses concise but informative
+- Explain how Location-Based AR with $Ember tokens drives business results
+- Provide specific examples of GPS + Beacon implementation
+- Discuss revenue opportunities and ROI
+- Guide users toward appropriate solution (White-Label or SDK)
+- Answer questions about $Ember token presale
+- Emphasize the battle-tested technology (6+ years, 12+ games)
+- Highlight the no-app-store advantage of web-based AR
+- Always mention $100 FREE $Ember tokens included with service activation
 
-Always maintain a professional yet friendly tone. If asked about technical implementation details beyond your knowledge, recommend contacting the team directly.`;
+Keep responses professional, enthusiastic, and focused on business value. Use specific numbers and examples. If asked about implementation details beyond your knowledge, recommend contacting contact@vaultphoenix.com for technical consultation.`;
 
 // ============================================
 // INITIALIZE CHATBOT - FIXED: No Auto-Focus
@@ -106,7 +153,7 @@ function initializeChatbot() {
 }
 
 // ============================================
-// WELCOME MESSAGE - UPDATED WITH PROPER ALIGNMENT
+// WELCOME MESSAGE - ENHANCED WITH FEATURED AR QUESTION
 // ============================================
 function addWelcomeMessage() {
     const welcomeMsg = `
@@ -117,15 +164,28 @@ function addWelcomeMessage() {
                 </div>
                 <div class="message-text">
                     <strong>Welcome to Vault Phoenix!</strong><br><br>
-                    I'm here to help you learn about our revolutionary AR crypto gaming platform. Ask me about:
-                    <ul style="margin: 10px 0; padding-left: 20px;">
-                        <li>White-label AR crypto gaming solutions</li>
-                        <li>GPS & Beacon location technology</li>
-                        <li>$Ember token presale details</li>
-                        <li>Pricing and ROI opportunities</li>
-                        <li>Industry-specific use cases</li>
-                    </ul>
-                    What would you like to know?
+                    I'm here to help you revolutionize your marketing with AR crypto gaming.
+                    
+                    <div class="ai-featured-question">
+                        <div class="featured-badge">
+                            <img src="images/VPEmberCoin.PNG" alt="Featured" class="featured-badge-icon">
+                            <span>Featured</span>
+                        </div>
+                        <button class="featured-question-btn" onclick="handleFeaturedQuestion()">
+                            Do you want to learn how Location-Based Augmented Reality with $Ember tokens can transform your business?
+                        </button>
+                    </div>
+                    
+                    <div class="ai-other-questions">
+                        <p><strong>Or ask me about:</strong></p>
+                        <ul>
+                            <li>White-label AR crypto gaming solutions ($499 + $149/mo)</li>
+                            <li>GPS & Beacon location technology (indoor + outdoor)</li>
+                            <li>$Ember token presale (Nov 1, 2025 launch)</li>
+                            <li>Revenue opportunities ($10K-$75K/month)</li>
+                            <li>Industry-specific use cases and ROI examples</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -136,6 +196,86 @@ function addWelcomeMessage() {
         chatbotBody.innerHTML = welcomeMsg;
     }
 }
+
+// ============================================
+// HANDLE FEATURED QUESTION - COMPREHENSIVE AR CONTENT
+// ============================================
+window.handleFeaturedQuestion = function() {
+    const userMessage = "Tell me about Location-Based AR with $Ember tokens for my business";
+    
+    // Add user message
+    addMessage('user', userMessage);
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    // Simulate processing time for better UX
+    setTimeout(() => {
+        removeTypingIndicator();
+        
+        // Add comprehensive AR content
+        const arContent = `
+            <strong style="font-size: 1.15rem; color: #f0a500;">Location-Based AR — $Ember Token Rewards in the Real World</strong><br><br>
+            
+            <strong>What is Location-Based AR?</strong><br>
+            Vault Phoenix Location-Based AR overlays <span class="golden-highlight">$Ember tokens</span> onto real-world locations through a web app or SDK for phones. Using <strong>GPS outdoors</strong> and <span class="golden-highlight">beacon technology indoors</span>, our platform delivers immersive experiences that encourage players to visit specific locations to collect $Ember tokens.<br><br>
+            
+            <strong>How It Works</strong><br>
+            <ul style="margin: 10px 0; padding-left: 20px; line-height: 1.6;">
+                <li><strong>Precise Location Detection:</strong> GPS outdoors (5-10m radius) or beacons indoors (1-5m precision) for centimeter-level accuracy.</li>
+                <li><strong>$Ember Token Placement:</strong> Players see $Ember tokens overlaid at real-world points of interest and can interact with them directly in the app or via SDK integration.</li>
+                <li><strong>Contextual Interaction:</strong> Users tap or swipe to collect $Ember tokens, unlock rewards, and engage with branded experiences.</li>
+            </ul><br>
+            
+            <strong>Why Beacons Matter</strong><br>
+            Beacons enhance indoor experiences by sending precise signals so AR content and $Ember tokens appear exactly where intended — in stores, museums, malls, or event venues. Combined with GPS, this provides <span class="golden-highlight">full indoor + outdoor coverage</span> for token collection. No GPS signal inside? No problem — beacons work perfectly indoors!<br><br>
+            
+            <strong>Applications That Drive Engagement</strong><br>
+            <ul style="margin: 10px 0; padding-left: 20px; line-height: 1.6;">
+                <li><strong>Gaming & Entertainment:</strong> Scavenger hunts and challenges that reward $Ember token collection.</li>
+                <li><strong>Retail & Marketing:</strong> Attract foot traffic with token-based promotions and interactive experiences.</li>
+                <li><strong>Tourism & Sightseeing:</strong> Encourage exploration of landmarks and points of interest with token rewards.</li>
+                <li><strong>Sports & Venues:</strong> Stadium experiences with GPS parking lots and beacon-enabled concession stands.</li>
+                <li><strong>Radio & Media:</strong> City-wide treasure hunts driving listeners to sponsor locations.</li>
+                <li><strong>Restaurants & Culinary:</strong> Foodie trails with tokens at participating restaurants.</li>
+            </ul><br>
+            
+            <strong>Benefits for Your Business</strong><br>
+            <ul style="margin: 10px 0; padding-left: 20px; line-height: 1.6;">
+                <li><strong>Enhanced Engagement:</strong> Users actively seek out $Ember tokens, increasing foot traffic by 3-5x during campaigns.</li>
+                <li><strong>Measurable ROI:</strong> Track interactions, token collection, and engagement in real time with GPS-verified visits.</li>
+                <li><strong>Seamless Integration:</strong> Deploy via <span class="golden-highlight">no-code web app builder</span> (24hr launch) or embed the <span class="golden-highlight">SDK</span> in your app.</li>
+                <li><strong>Indoor + Outdoor Coverage:</strong> GPS + beacons for end-to-end token experiences — no coverage gaps.</li>
+                <li><strong>Revenue Generation:</strong> Location partners pay premium rates (<span class="golden-highlight">$10K-$75K/month</span>) for crypto coin placement.</li>
+            </ul><br>
+            
+            <strong>Why Choose Vault Phoenix</strong><br>
+            Transform ordinary locations into <span class="golden-highlight">interactive $Ember token destinations</span>. Vault Phoenix enables AR campaigns that drive engagement, loyalty, and revenue, while providing actionable insights and seamless integration into web or native apps.<br><br>
+            
+            <strong style="color: #f0a500;">Battle-Tested Technology:</strong> <span class="golden-highlight">6+ years</span> of development and <span class="golden-highlight">12+ successful location-based AR games</span> have refined our platform. Now enhanced with cryptocurrency rewards for unprecedented engagement.<br><br>
+            
+            <strong>Get Started Today</strong><br>
+            <ul style="margin: 10px 0; padding-left: 20px; line-height: 1.6;">
+                <li><strong>White-Label Solution:</strong> $499 setup + $149/mo hosting • 24hr deployment • Web-based (no app store) • <span class="golden-highlight">$100 FREE $Ember tokens included</span></li>
+                <li><strong>SDK Integration:</strong> Free SDK on GitHub • Management from $49/mo • Available early 2026 • <span class="golden-highlight">$100 FREE $Ember tokens included</span></li>
+            </ul><br>
+            
+            <strong style="font-size: 1.1rem; color: #f0a500;">Ready to Deploy?</strong><br>
+            Launch AR campaigns anywhere — indoors or outdoors — powered by GPS and beacons. Drive real-world engagement with $Ember token rewards!<br><br>
+            
+            📧 <a href="mailto:contact@vaultphoenix.com?subject=Location-Based AR Inquiry&body=I'm interested in learning more about Vault Phoenix Location-Based AR with $Ember tokens." style="color: #f0a500; font-weight: bold; text-decoration: underline;">Contact us today: contact@vaultphoenix.com</a><br>
+            📱 Call: (949) 357-4416
+        `;
+        
+        addMessage('assistant', arContent);
+        
+        // Update conversation history for continuity
+        conversationHistory.push(
+            { role: 'user', content: userMessage },
+            { role: 'assistant', content: arContent.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ') } // Strip HTML for API
+        );
+    }, 1500);
+};
 
 // ============================================
 // SEND MESSAGE TO CLAUDE API - FIXED: No Auto-Focus
@@ -471,7 +611,7 @@ document.addEventListener('DOMContentLoaded', function() {
     createPhoenixCryptoParticles();
     
     console.log('🔥🪙 Main page loaded seamlessly from loading screen!');
-    console.log('🤖 Claude API Chatbot ready!');
+    console.log('🤖 Claude API Chatbot ready with enhanced AI agent!');
     console.log('📱 Mobile allocation cards initialized!');
 });
 
@@ -1336,6 +1476,7 @@ console.log('%c🚀 Built by Phoenix Crypto Developers - Premium AR Gaming Solut
 console.log('%c📧 Contact: contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 14px;');
 console.log('%c🔥🪙 From ashes to crypto greatness - Phoenix Rising with NEW app screenshots!', 'color: #d73327; font-size: 12px; font-style: italic;');
 console.log('🔥🪙 Crypto Phoenix Ready - Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
+console.log('🤖 Enhanced AI Agent: Ask about Location-Based AR with $Ember tokens!');
 
 // Performance monitoring with phoenix crypto theme
 window.addEventListener('load', () => {
