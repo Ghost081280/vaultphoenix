@@ -393,16 +393,15 @@ body.loaded {
     border-left: 10px solid rgba(0, 0, 0, 0.9);
 }
 
-/* PROFESSIONAL: Chatbot Window - Smart Height that Respects Navigation */
+/* PROFESSIONAL: Chatbot Window - Wider on Desktop for Better Conversations */
 .chatbot-window {
     position: fixed;
     bottom: 160px;
     right: 30px;
-    width: 400px;
-    /* Smart height: 100vh - nav (120px) - button (110px) - spacing (80px) = safe zone */
+    width: 550px; /* UPDATED: Wider from 400px to 550px for better desktop experience */
     height: calc(100vh - 310px);
-    max-height: 550px; /* Cap at comfortable reading height */
-    min-height: 400px; /* Minimum usable height */
+    max-height: 550px;
+    min-height: 400px;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #451a03 100%);
     border-radius: 25px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -487,7 +486,7 @@ body.loaded {
     transform: scale(1.1);
 }
 
-/* PROFESSIONAL: Chat Body - Flexible scroll area */
+/* PROFESSIONAL: Chat Body - Flexible scroll area with proper width for longer messages */
 .chatbot-body {
     flex: 1;
     min-height: 0;
@@ -498,7 +497,9 @@ body.loaded {
     background: rgba(0, 0, 0, 0.3);
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
-}/* Message Container Styling */
+}
+
+/* Message Container Styling - Better spacing for wider window */
 .chat-message {
     margin-bottom: 15px;
     display: flex;
@@ -528,7 +529,7 @@ body.loaded {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    max-width: 85%;
+    max-width: 85%; /* Wider messages fit better now */
 }
 
 .chat-message.assistant-message .message-avatar {
@@ -685,7 +686,7 @@ body.loaded {
     gap: 10px;
 }
 
-/* Input - Prevent expansion and mobile zoom */
+/* Input - Prevent expansion and mobile zoom - Better width for conversations */
 .chatbot-input {
     flex: 1;
     padding: 12px 16px;
@@ -739,87 +740,14 @@ body.loaded {
 @media (max-width: 1024px) {
     .chatbot-window {
         /* Tablet: slightly smaller but still comfortable */
+        width: 500px;
         height: calc(100vh - 280px);
         max-height: 500px;
         min-height: 380px;
-        .hero {
-        padding: 160px 20px 60px;
     }
-}
 }
 
 @media (max-width: 768px) {
-    .hero {
-        padding: 140px 15px 50px;
-        min-height: auto;
-    }
-
-    .hero-content {
-        padding: 0 15px;
-    }
-
-    .hero-title-new {
-        font-size: clamp(1.8rem, 7vw, 2.5rem);
-        margin-bottom: 20px;
-    }
-
-    .hero-subtitle-new {
-        font-size: clamp(0.95rem, 3vw, 1.2rem);
-        margin-bottom: 40px;
-    }
-
-    .hero-steps-premium {
-        gap: 20px;
-        margin: 40px 0;
-    }
-
-    .step-premium {
-        padding: 25px 20px;
-        min-width: 100%;
-    }
-
-    .step-visual {
-        width: 100px;
-        height: 100px;
-    }
-
-    .step-number-badge {
-        width: 42px;
-        height: 42px;
-        font-size: 1.25rem;
-        top: 10px;
-        right: 10px;
-    }
-
-    .step-title-premium {
-        font-size: 1.3rem;
-    }
-
-    .step-description-premium {
-        font-size: 0.95rem;
-    }
-
-    .hero-dual-ctas {
-        margin: 50px 0 40px;
-    }
-
-    .cta-path {
-        padding: 28px 22px;
-    }
-
-    .path-title {
-        font-size: 1.4rem;
-    }
-
-    .path-description {
-        font-size: 0.95rem;
-    }
-
-    .cta-path-button {
-        padding: 14px 24px;
-        font-size: 1rem;
-    }
-
     .chatbot-button-container {
         bottom: 20px;
         right: 20px;
@@ -839,12 +767,12 @@ body.loaded {
         display: none;
     }
     
+    /* Mobile: Perfect as is - full width minus margins */
     .chatbot-window {
         bottom: 120px;
         right: 20px;
         left: 20px;
         width: calc(100% - 40px);
-        /* Mobile: Account for mobile nav height */
         height: calc(100vh - 240px);
         max-height: calc(100vh - 240px);
         min-height: 350px;
@@ -881,74 +809,6 @@ body.loaded {
 }
 
 @media (max-width: 480px) {
-    .hero {
-        padding: 120px 10px 40px;
-    }
-
-    .hero-content {
-        padding: 0 10px;
-    }
-
-    .hero-title-new {
-        font-size: clamp(1.5rem, 8vw, 2rem);
-    }
-
-    .hero-subtitle-new {
-        font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-    }
-
-    .hero-steps-premium {
-        gap: 18px;
-        margin: 35px 0;
-    }
-
-    .step-premium {
-        padding: 22px 18px;
-    }
-
-    .step-visual {
-        width: 90px;
-        height: 90px;
-    }
-    
-    .step-number-badge {
-        width: 38px;
-        height: 38px;
-        font-size: 1.15rem;
-        top: 8px;
-        right: 8px;
-    }
-    
-    .step-title-premium {
-        font-size: 1.2rem;
-    }
-    
-    .step-description-premium {
-        font-size: 0.9rem;
-    }
-
-    .cta-path {
-        padding: 25px 20px;
-    }
-
-    .path-title {
-        font-size: 1.3rem;
-    }
-
-    .path-description {
-        font-size: 0.9rem;
-    }
-
-    .cta-path-button {
-        padding: 12px 20px;
-        font-size: 0.95rem;
-    }
-
-    .cta-path-icon {
-        width: 28px;
-        height: 28px;
-    }
-
     .chatbot-button {
         width: 70px;
         height: 70px;
@@ -961,7 +821,6 @@ body.loaded {
     
     .chatbot-window {
         bottom: 100px;
-        /* Small mobile: tighter spacing */
         height: calc(100vh - 220px);
         max-height: calc(100vh - 220px);
         min-height: 320px;
