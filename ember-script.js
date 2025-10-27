@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // NOTE: Countdown is handled by shared-script.js
     // NOTE: Chatbot is handled by shared-script.js
     initializePresaleCalculator();
+    initializeLegalModals();
     
     console.log('🔥🪙 $Ember page features initialized');
     console.log('🔥🪙 Countdown timer is managed by shared-script.js');
@@ -98,50 +99,75 @@ function initializePresaleCalculator() {
 // ============================================
 // LEGAL DOCUMENTS MODAL FUNCTIONS
 // ============================================
+function initializeLegalModals() {
+    // Token Presale Agreement (TPA) Modal Functions
+    window.showTpaModal = function() {
+        const modal = document.getElementById('tpaModal');
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    };
 
-// Token Presale Agreement (TPA) Modal Functions
-window.showTpaModal = function() {
-    document.getElementById('tpaModal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-};
+    window.closeTpaModal = function() {
+        const modal = document.getElementById('tpaModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    };
 
-window.closeTpaModal = function() {
-    document.getElementById('tpaModal').style.display = 'none';
-    document.body.style.overflow = '';
-};
-
-window.agreeTpa = function() {
-    const checkbox = document.getElementById('tpa-agree-checkbox');
-    const presaleButton = document.getElementById('presale-buy-button');
-    
-    if (checkbox && presaleButton) {
-        checkbox.checked = true;
-        presaleButton.disabled = false;
-        presaleButton.style.opacity = '1';
-    }
-    
-    window.closeTpaModal();
-    alert('✅ Thank you for reviewing and agreeing to the Token Presale Agreement and Token Disclosures.');
-};
-
-// Whitepaper Modal Functions
-window.showWhitepaperModal = function() {
-    document.getElementById('whitepaperModal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-};
-
-window.closeWhitepaperModal = function() {
-    document.getElementById('whitepaperModal').style.display = 'none';
-    document.body.style.overflow = '';
-};
-
-// Close modals on escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
+    window.agreeTpa = function() {
+        const checkbox = document.getElementById('tpa-agree-checkbox');
+        const presaleButton = document.getElementById('presale-buy-button');
+        
+        if (checkbox && presaleButton) {
+            checkbox.checked = true;
+            presaleButton.disabled = false;
+            presaleButton.style.opacity = '1';
+        }
+        
         window.closeTpaModal();
-        window.closeWhitepaperModal();
-    }
-});
+        alert('✅ Thank you for reviewing and agreeing to the Token Presale Agreement and Token Disclosures.');
+    };
+
+    // Whitepaper Modal Functions
+    window.showWhitepaperModal = function() {
+        const modal = document.getElementById('whitepaperModal');
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    window.closeWhitepaperModal = function() {
+        const modal = document.getElementById('whitepaperModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    };
+
+    // Escape key handler for legal modals
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const tpaModal = document.getElementById('tpaModal');
+            const whitepaperModal = document.getElementById('whitepaperModal');
+            
+            // Close TPA modal if open
+            if (tpaModal && tpaModal.style.display === 'flex') {
+                window.closeTpaModal();
+            }
+            
+            // Close Whitepaper modal if open
+            if (whitepaperModal && whitepaperModal.style.display === 'flex') {
+                window.closeWhitepaperModal();
+            }
+        }
+    });
+    
+    console.log('📄 Legal document modals initialized');
+}
 
 // ============================================
 // INTERACTIVE FEEDBACK FOR CTA BUTTONS
