@@ -343,7 +343,7 @@
                     <button class="cookie-btn cookie-decline" aria-label="Decline cookies">
                         Decline
                     </button>
-                    <a href="#privacy-policy" class="cookie-privacy-link" aria-label="View privacy policy">
+                    <a href="#" class="cookie-privacy-link" id="cookie-privacy-link" aria-label="View privacy policy">
                         Privacy Policy
                     </a>
                 </div>
@@ -380,6 +380,197 @@
         });
         
         console.log('🍪 Cookie consent banner initialized');
+    }
+
+    // ============================================
+    // PRIVACY POLICY MODAL SYSTEM
+    // ============================================
+    
+    function initializePrivacyPolicyModal() {
+        console.log('🔒 Initializing Privacy Policy Modal...');
+        
+        // Create modal overlay and content
+        const modalHTML = `
+            <div class="privacy-modal-overlay" id="privacy-modal-overlay" role="dialog" aria-labelledby="privacy-modal-title" aria-modal="true">
+                <div class="privacy-modal">
+                    <div class="privacy-modal-header">
+                        <h2 id="privacy-modal-title">
+                            <span class="privacy-modal-icon">🔒</span>
+                            Privacy Policy
+                        </h2>
+                        <button class="privacy-modal-close" id="privacy-modal-close" aria-label="Close privacy policy">
+                            ×
+                        </button>
+                    </div>
+                    
+                    <div class="privacy-modal-body">
+                        <div class="privacy-modal-date">
+                            Effective Date: October 27, 2025 | Last Updated: October 27, 2025
+                        </div>
+                        
+                        <div class="privacy-modal-intro">
+                            Welcome to Vault Phoenix LLC. We value your privacy and are committed to protecting your personal information. This policy explains how we collect, use, and protect data when you use our AR-based campaigns, token programs, and services.
+                        </div>
+                        
+                        <div class="privacy-key-points">
+                            <h3>Key Privacy Highlights</h3>
+                            <div class="privacy-points-grid">
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">📧</span>
+                                        <h4>Information We Collect</h4>
+                                    </div>
+                                    <p>We collect email addresses, wallet addresses, device information, and geolocation data (only with your consent for AR campaigns). All data collection is transparent and purposeful.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">🎯</span>
+                                        <h4>How We Use Your Data</h4>
+                                    </div>
+                                    <p>Your information helps us operate and improve our services, enable AR campaigns, process token transactions, and communicate important updates. We ensure compliance with all legal and regulatory requirements.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">🤝</span>
+                                        <h4>Information Sharing</h4>
+                                    </div>
+                                    <p>We only share limited data with service providers, compliance partners for KYC/AML verification, and legal authorities when required. We never sell or rent your personal information to third parties.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">🍪</span>
+                                        <h4>Cookies & Tracking</h4>
+                                    </div>
+                                    <p>We use cookies and local storage to enhance your experience, measure engagement, and manage AR campaign performance. You can manage cookie preferences in your browser settings.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">🔐</span>
+                                        <h4>Data Security</h4>
+                                    </div>
+                                    <p>We employ industry-standard encryption, secure hosting, and strict access controls to protect your personal data. While no system is 100% secure, we continuously monitor and improve our security measures.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">⚖️</span>
+                                        <h4>Your Rights</h4>
+                                    </div>
+                                    <p>You have the right to access, correct, or delete your personal information, request limits on processing, and withdraw consent for geolocation or marketing communications at any time.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">👶</span>
+                                        <h4>Children's Privacy</h4>
+                                    </div>
+                                    <p>Our platform is not intended for children under 13 (or under 16 in certain jurisdictions). We do not knowingly collect personal information from minors.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">🌍</span>
+                                        <h4>International Transfers</h4>
+                                    </div>
+                                    <p>If you're outside the United States, your data may be transferred and processed in the U.S. or other locations where Vault Phoenix operates, in compliance with international data protection standards.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="privacy-contact-section">
+                            <h4>Contact Us About Privacy</h4>
+                            <div class="privacy-contact-info">
+                                <div class="privacy-contact-item">
+                                    <span>📧</span>
+                                    <span>Email: <a href="mailto:contact@vaultphoenix.com">contact@vaultphoenix.com</a></span>
+                                </div>
+                                <div class="privacy-contact-item">
+                                    <span>🌐</span>
+                                    <span>Website: <a href="https://www.vaultphoenix.com" target="_blank" rel="noopener">www.vaultphoenix.com</a></span>
+                                </div>
+                                <div class="privacy-contact-item">
+                                    <span>🏢</span>
+                                    <span>Vault Phoenix LLC</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="privacy-modal-footer">
+                        <a href="docs/PRIVACY_POLICY.pdf" download class="privacy-download-btn">
+                            <span class="privacy-download-icon">📥</span>
+                            Download Full Policy (PDF)
+                        </a>
+                        <button class="privacy-close-btn" id="privacy-modal-close-btn">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add modal to body
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        
+        // Get modal elements
+        const modalOverlay = document.getElementById('privacy-modal-overlay');
+        const modalClose = document.getElementById('privacy-modal-close');
+        const modalCloseBtn = document.getElementById('privacy-modal-close-btn');
+        
+        // Function to open modal
+        function openPrivacyModal(e) {
+            if (e) e.preventDefault();
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            console.log('🔒 Privacy Policy Modal opened');
+        }
+        
+        // Function to close modal
+        function closePrivacyModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            console.log('🔒 Privacy Policy Modal closed');
+        }
+        
+        // Event listeners for privacy policy links
+        const privacyLinks = document.querySelectorAll('[href="#privacy-policy"], #cookie-privacy-link, .cookie-privacy-link');
+        privacyLinks.forEach(link => {
+            link.addEventListener('click', openPrivacyModal);
+        });
+        
+        // Close modal handlers
+        if (modalClose) {
+            modalClose.addEventListener('click', closePrivacyModal);
+        }
+        
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closePrivacyModal);
+        }
+        
+        // Close on overlay click
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closePrivacyModal();
+                }
+            });
+        }
+        
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closePrivacyModal();
+            }
+        });
+        
+        // Expose function globally for external use
+        window.openPrivacyPolicyModal = openPrivacyModal;
+        
+        console.log('🔒 Privacy Policy Modal initialized successfully');
     }
 
     // ============================================
@@ -825,6 +1016,9 @@ If asked about financial advice, remind users to do their own research and consu
         
         // Initialize cookie consent banner
         initializeCookieConsent();
+        
+        // Initialize privacy policy modal
+        initializePrivacyPolicyModal();
         
         // Initialize Phoenix AI Chatbot
         initializeChatbot();
