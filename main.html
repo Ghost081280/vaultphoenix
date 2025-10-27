@@ -1662,37 +1662,38 @@
         </div>
     </footer>
 
-    <!-- Professional AI Chatbot - DO NOT MODIFY -->
+    <!-- ============================================ -->
+    <!-- PHOENIX AI CHATBOT - COPY THIS TO ALL PAGES -->
+    <!-- Add before </body> tag, after footer -->
+    <!-- ============================================ -->
+
+    <!-- Floating Chatbot Button -->
     <div class="chatbot-button-container">
         <div class="chatbot-glow"></div>
-        <button class="chatbot-button" aria-label="Open AI chat assistant">
+        <div class="chatbot-button" aria-label="Open Phoenix AI chat assistant">
             <img src="images/PhoenixBot.PNG" alt="Phoenix AI Assistant" class="chatbot-icon">
-        </button>
+        </div>
         <div class="chatbot-tooltip">Chat with Phoenix AI</div>
     </div>
-    
-    <!-- Chatbot Window - DO NOT MODIFY -->
-    <div class="chatbot-window" role="dialog" aria-labelledby="chatbot-title" aria-modal="true">
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window">
         <div class="chatbot-header">
             <div class="chatbot-header-content">
                 <div class="chatbot-header-icons">
-                    <div class="image-with-glow">
-                        <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="chatbot-header-icon">
-                    </div>
-                    <div class="image-with-glow">
-                        <img src="images/VPEmberFlame.svg" alt="Ember Flame" class="chatbot-header-icon">
-                    </div>
+                    <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="chatbot-header-icon">
+                    <img src="images/VPEmberFlame.svg" alt="Ember Flame" class="chatbot-header-icon">
                 </div>
                 <div class="chatbot-header-text">
-                    <h3 id="chatbot-title">Phoenix AI Assistant</h3>
+                    <h3>Phoenix AI Assistant</h3>
                     <p>Powered by Vault Phoenix</p>
                 </div>
             </div>
             <button class="chatbot-close" aria-label="Close chat window">×</button>
         </div>
         
-        <div class="chatbot-body" role="log" aria-live="polite" aria-atomic="false">
-            <!-- Messages will be dynamically added here -->
+        <div class="chatbot-body">
+            <!-- Messages will be dynamically added here by JavaScript -->
         </div>
         
         <div class="chatbot-footer">
@@ -1702,13 +1703,18 @@
                     class="chatbot-input" 
                     placeholder="Ask about Vault Phoenix..." 
                     maxlength="500"
-                    aria-label="Chat message input"
-                    autocomplete="off"
+                    aria-label="Type your message to Phoenix AI"
                 >
                 <button class="chatbot-send" aria-label="Send message">Send</button>
             </div>
         </div>
     </div>
+
+    <!-- ============================================ -->
+    <!-- THAT'S IT! Styling and functionality come from shared files -->
+    <!-- shared-styles.css = All chatbot CSS -->
+    <!-- shared-script.js = All chatbot JavaScript -->
+    <!-- ============================================ -->
 
     <!-- Shared Scripts - Handles smooth scrolling, mobile menu, countdown, navbar transitions -->
     <script src="shared-script.js"></script>
