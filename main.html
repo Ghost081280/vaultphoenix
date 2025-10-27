@@ -224,13 +224,12 @@
     </script>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation - Styled exclusively by shared-styles.css -->
     <nav class="navbar" id="navbar">
         <div class="nav-content">
+            <!-- ✅ Navigation logo: NO glow wrapper - styled by shared-styles.css only -->
             <a href="#" class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
-                <div class="image-with-glow">
-                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="logo-image">
-                </div>
+                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="logo-image">
                 <span>Vault Phoenix</span>
             </a>
             <ul class="nav-links">
@@ -245,13 +244,15 @@
                     $Ember Token
                 </a></li>
             </ul>
-            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile navigation menu">☰</button>
+            <!-- ✅ Mobile menu button with correct ID for shared-script.js -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile navigation menu" aria-expanded="false">☰</button>
         </div>
     </nav>
 
-    <!-- Mobile Menu Overlay & Panel -->
+    <!-- Mobile Menu - Required structure for shared-script.js -->
     <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
     <div class="mobile-menu-panel" id="mobile-menu">
+        <!-- Branding icons at top-left -->
         <div class="mobile-menu-branding">
             <div class="image-with-glow">
                 <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="mobile-menu-coin">
@@ -260,7 +261,9 @@
                 <img src="images/VPEmberFlame.svg" alt="Ember Flame" class="mobile-menu-flame">
             </div>
         </div>
+        <!-- Close button at top-right -->
         <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close mobile menu">×</button>
+        <!-- Navigation links -->
         <ul class="mobile-nav-links">
             <li><a href="#features">Features</a></li>
             <li><a href="#showcase">Live Demo</a></li>
@@ -424,7 +427,7 @@
                             </div>
                         </div>
                         
-                        <!-- Countdown Timer -->
+                        <!-- ✅ Countdown Timer - Uses correct IDs for shared-script.js -->
                         <div class="ember-countdown-timer-redesigned" role="timer" aria-label="Presale countdown timer">
                             <div class="ember-time-unit-redesigned">
                                 <span class="ember-time-value-redesigned" id="main-days" aria-label="Days remaining">--</span>
@@ -524,8 +527,9 @@
                         </h4>
                         <p>Vault Phoenix operates under comprehensive regulatory oversight with institutional-grade compliance procedures, multi-signature treasury management, and professional legal frameworks ensuring maximum security and transparency.</p>
                         
+                        <!-- ✅ FIX: Uses smooth scroll instead of opening new window -->
                         <div class="compliance-cta">
-                            <a href="ember.html#legal-compliance-section" class="compliance-button" target="_blank" rel="noopener noreferrer" aria-label="View compliance details">
+                            <a href="ember.html#legal-compliance-section" class="compliance-button" aria-label="View compliance details">
                                 View Compliance Details
                             </a>
                         </div>
@@ -1620,7 +1624,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer - Styled by shared-styles.css -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">
@@ -1671,7 +1675,7 @@
         </div>
     </footer>
 
-    <!-- Professional AI Chatbot -->
+    <!-- Professional AI Chatbot - DO NOT MODIFY -->
     <div class="chatbot-button-container">
         <div class="chatbot-glow"></div>
         <button class="chatbot-button" aria-label="Open AI chat assistant">
@@ -1680,7 +1684,7 @@
         <div class="chatbot-tooltip">Chat with Phoenix AI</div>
     </div>
     
-    <!-- Chatbot Window -->
+    <!-- Chatbot Window - DO NOT MODIFY -->
     <div class="chatbot-window" role="dialog" aria-labelledby="chatbot-title" aria-modal="true">
         <div class="chatbot-header">
             <div class="chatbot-header-content">
@@ -1719,9 +1723,9 @@
         </div>
     </div>
 
-    <!-- Shared Scripts -->
+    <!-- Shared Scripts - Handles smooth scrolling, mobile menu, countdown, navbar transitions -->
     <script src="shared-script.js"></script>
-    <!-- Page-specific Scripts -->
+    <!-- Page-specific Scripts - Only page-specific functionality -->
     <script src="script.js"></script>
 </body>
 </html>
