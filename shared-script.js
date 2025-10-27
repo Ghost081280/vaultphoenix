@@ -513,6 +513,307 @@
     });
 
     // ============================================
+    // PHOENIX AI CHATBOT SYSTEM
+    // ============================================
+    
+    // Chatbot configuration
+    const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE'; // Replace with actual API key
+    const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
+    const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
+    
+    let conversationHistory = [];
+    let isTyping = false;
+    
+    // System prompt for Vault Phoenix context
+    const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token presale, a revolutionary crypto token that powers AR gaming rewards and location-based marketing campaigns.
+
+Key Information about $Ember Token:
+- Token Symbol: $EMBER
+- Presale Launch: November 1, 2025
+- Presale Price: $0.003 per token
+- Total Supply: 166.7M tokens available in presale
+- Hard Cap: $500K
+- Platform: Polygon blockchain (ERC-20)
+- Use Cases: Platform currency for GPS & Beacon campaigns, SDK integration, local redemption network
+
+Token Allocation:
+- Campaign Token Pool: 35% - Sold to Platform Operators through management system
+- Platform Operator & SDK Incentives: 30% - Customer onboarding bonuses
+- Presale: 16.67% - Early investors at $0.003
+- Team & Development: 10% - 1-year cliff, 3-year vesting
+- Treasury/Growth: 5% - Community governed
+- Reserve/Burn: 3.33% - Deflationary mechanisms
+
+Key Benefits:
+- First-mover advantage at $0.003 presale price
+- Built-in demand from Platform Operators and Advertisers
+- GPS & Beacon technology for complete location coverage
+- Dual redemption: local businesses OR Coinbase cash-out
+- $200K liquidity guarantee (40% of presale)
+- Professional legal and financial oversight
+
+Vault Phoenix Platform:
+- White-label AR crypto gaming with GPS (Outdoors) & Beacon (Indoors)
+- Management system for campaign deployment
+- SDK for developers
+- Three-stakeholder ecosystem: Platform Operators, Players, Advertisers
+
+Your role:
+- Answer questions about $Ember token, presale, and ecosystem
+- Explain investment opportunities professionally
+- Guide users toward participating in presale
+- Be enthusiastic yet professional about crypto
+- Keep responses concise but informative
+
+If asked about financial advice, remind users to do their own research and consult professionals.`;
+
+    // Initialize chatbot
+    function initializeChatbot() {
+        const chatbotButton = document.querySelector('.chatbot-button-container');
+        const chatbotWindow = document.querySelector('.chatbot-window');
+        const chatbotClose = document.querySelector('.chatbot-close');
+        const chatbotInput = document.querySelector('.chatbot-input');
+        const chatbotSend = document.querySelector('.chatbot-send');
+        const chatbotBody = document.querySelector('.chatbot-body');
+        
+        if (!chatbotButton || !chatbotWindow) {
+            return;
+        }
+        
+        // Toggle chatbot window
+        chatbotButton.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('active');
+            if (chatbotWindow.classList.contains('active')) {
+                if (chatbotBody.children.length === 0) {
+                    addWelcomeMessage();
+                }
+            }
+        });
+        
+        // Close chatbot
+        if (chatbotClose) {
+            chatbotClose.addEventListener('click', () => {
+                chatbotWindow.classList.remove('active');
+            });
+        }
+        
+        // Send message on button click
+        if (chatbotSend) {
+            chatbotSend.addEventListener('click', sendMessage);
+        }
+        
+        // Send message on Enter key
+        if (chatbotInput) {
+            chatbotInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        }
+        
+        console.log('🤖 Phoenix AI Chatbot initialized');
+    }
+    
+    // Welcome message
+    function addWelcomeMessage() {
+        const welcomeMsg = `
+            <div class="chat-message assistant-message">
+                <div class="message-content">
+                    <div class="message-avatar">
+                        <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                    </div>
+                    <div class="message-text">
+                        <strong>Welcome to Vault Phoenix!</strong><br><br>
+                        I'm your AI assistant for $Ember Token and our AR crypto gaming platform. Ask me about:
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>$Ember token presale details & pricing</li>
+                            <li>GPS & Beacon technology integration</li>
+                            <li>White-label app deployment</li>
+                            <li>Platform Operator opportunities</li>
+                            <li>How to participate in presale</li>
+                        </ul>
+                        What would you like to know?
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const chatbotBody = document.querySelector('.chatbot-body');
+        if (chatbotBody) {
+            chatbotBody.innerHTML = welcomeMsg;
+        }
+    }
+    
+    // Send message to Claude API
+    async function sendMessage() {
+        const chatbotInput = document.querySelector('.chatbot-input');
+        const chatbotBody = document.querySelector('.chatbot-body');
+        const chatbotSend = document.querySelector('.chatbot-send');
+        
+        if (!chatbotInput || !chatbotBody || !chatbotSend) return;
+        
+        const message = chatbotInput.value.trim();
+        
+        if (!message || isTyping) return;
+        
+        // Check API key
+        if (CLAUDE_API_KEY === 'YOUR_CLAUDE_API_KEY_HERE') {
+            addChatMessage('user', message);
+            addChatMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
+            chatbotInput.value = '';
+            return;
+        }
+        
+        // Add user message
+        addChatMessage('user', message);
+        chatbotInput.value = '';
+        chatbotInput.disabled = true;
+        chatbotSend.disabled = true;
+        isTyping = true;
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        try {
+            const messages = [
+                ...conversationHistory,
+                { role: 'user', content: message }
+            ];
+            
+            const response = await fetch(CLAUDE_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': CLAUDE_API_KEY,
+                    'anthropic-version': '2023-06-01'
+                },
+                body: JSON.stringify({
+                    model: CLAUDE_MODEL,
+                    max_tokens: 1024,
+                    system: SYSTEM_PROMPT,
+                    messages: messages
+                })
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.error?.message || `API Error: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            removeTypingIndicator();
+            
+            const assistantMessage = data.content[0].text;
+            
+            conversationHistory.push(
+                { role: 'user', content: message },
+                { role: 'assistant', content: assistantMessage }
+            );
+            
+            addChatMessage('assistant', assistantMessage);
+            
+        } catch (error) {
+            removeTypingIndicator();
+            
+            let errorMessage = '❌ Sorry, I encountered an error. ';
+            
+            if (error.message.includes('401')) {
+                errorMessage += 'Invalid API key. Please check your configuration.';
+            } else if (error.message.includes('429')) {
+                errorMessage += 'Rate limit exceeded. Please try again in a moment.';
+            } else if (error.message.includes('500') || error.message.includes('529')) {
+                errorMessage += 'Claude API is temporarily unavailable. Please try again.';
+            } else {
+                errorMessage += 'Please try again or contact us at contact@vaultphoenix.com';
+            }
+            
+            addChatMessage('assistant', errorMessage);
+        } finally {
+            chatbotInput.disabled = false;
+            chatbotSend.disabled = false;
+            isTyping = false;
+        }
+    }
+    
+    // Add message to chat
+    function addChatMessage(role, content) {
+        const chatbotBody = document.querySelector('.chatbot-body');
+        if (!chatbotBody) return;
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${role}-message`;
+        
+        if (role === 'user') {
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="message-text">${escapeHtml(content)}</div>
+                </div>
+            `;
+        } else {
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="message-avatar">
+                        <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                    </div>
+                    <div class="message-text">${formatChatMessage(content)}</div>
+                </div>
+            `;
+        }
+        
+        chatbotBody.appendChild(messageDiv);
+        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    }
+    
+    // Typing indicator
+    function showTypingIndicator() {
+        const chatbotBody = document.querySelector('.chatbot-body');
+        if (!chatbotBody) return;
+        
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chat-message assistant-message typing-indicator';
+        typingDiv.innerHTML = `
+            <div class="message-content">
+                <div class="message-avatar">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                </div>
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        `;
+        
+        chatbotBody.appendChild(typingDiv);
+        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    }
+    
+    function removeTypingIndicator() {
+        const typingIndicator = document.querySelector('.typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+    
+    // Message formatting
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    function formatChatMessage(text) {
+        let formatted = escapeHtml(text);
+        formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
+        formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+        formatted = formatted.replace(/\n/g, '<br>');
+        return formatted;
+    }
+    
+    // Expose chatbot initialization globally
+    window.initializePhoenixChatbot = initializeChatbot;
+
+    // ============================================
     // INITIALIZATION
     // ============================================
     
@@ -524,6 +825,9 @@
         
         // Initialize cookie consent banner
         initializeCookieConsent();
+        
+        // Initialize Phoenix AI Chatbot
+        initializeChatbot();
         
         // Initialize countdown timer with retries
         console.log('🔥 Attempting countdown initialization...');
