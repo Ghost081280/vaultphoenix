@@ -96,6 +96,54 @@ function initializePresaleCalculator() {
 }
 
 // ============================================
+// LEGAL DOCUMENTS MODAL FUNCTIONS
+// ============================================
+
+// Token Presale Agreement (TPA) Modal Functions
+window.showTpaModal = function() {
+    document.getElementById('tpaModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+};
+
+window.closeTpaModal = function() {
+    document.getElementById('tpaModal').style.display = 'none';
+    document.body.style.overflow = '';
+};
+
+window.agreeTpa = function() {
+    const checkbox = document.getElementById('tpa-agree-checkbox');
+    const presaleButton = document.getElementById('presale-buy-button');
+    
+    if (checkbox && presaleButton) {
+        checkbox.checked = true;
+        presaleButton.disabled = false;
+        presaleButton.style.opacity = '1';
+    }
+    
+    window.closeTpaModal();
+    alert('✅ Thank you for reviewing and agreeing to the Token Presale Agreement and Token Disclosures.');
+};
+
+// Whitepaper Modal Functions
+window.showWhitepaperModal = function() {
+    document.getElementById('whitepaperModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+};
+
+window.closeWhitepaperModal = function() {
+    document.getElementById('whitepaperModal').style.display = 'none';
+    document.body.style.overflow = '';
+};
+
+// Close modals on escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        window.closeTpaModal();
+        window.closeWhitepaperModal();
+    }
+});
+
+// ============================================
 // INTERACTIVE FEEDBACK FOR CTA BUTTONS
 // ============================================
 document.querySelectorAll('.cta-button, .presale-cta-button, .join-waitlist-btn').forEach(button => {
