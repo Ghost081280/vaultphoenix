@@ -4,47 +4,10 @@
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // SENIOR JS ENGINEERING: Mobile-First, Performance-Optimized
 // PRODUCTION READY: Clean, maintainable, and scalable code
-// VERSION: 2.4 - Cleaned (Removed Duplicates from shared-script.js)
+// VERSION: 3.0 - Cleaned (Chatbot & duplicates removed - handled by shared-script.js)
 // ============================================
 
 'use strict';
-
-// ============================================
-// CLAUDE API CONFIGURATION
-// ============================================
-const CLAUDE_API_KEY = 'YOUR_API_KEY_HERE'; // ← Replace with your actual API key from console.anthropic.com
-const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
-const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
-
-// Chat state management
-let conversationHistory = [];
-let isTyping = false;
-
-// System prompt for Vault Phoenix context
-const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix, a revolutionary AR crypto gaming platform that combines GPS & Beacon location technology with blockchain rewards for location-based marketing campaigns.
-
-Key Information about Vault Phoenix:
-- White-label AR crypto gaming platform launching campaigns in 24 hours
-- Uses GPS (outdoor) and Beacon (indoor) technology for precise location targeting
-- Offers $100 FREE $Ember tokens with every service activation
-- Two main solutions:
-  1. White-Label Solution: Starting at $499 setup + $149/mo hosting
-  2. SDK Integration: Free SDK, management from $49/mo (available early 2026)
-- Battle-tested: 6+ years development, 12+ successful AR games
-- Industries served: Sports, Radio, Tourism, Retail, Entertainment, Culinary, Healthcare, Education, Automotive
-- Revenue generation: $10K-$75K per month through premium location placements
-- $Ember Token presale launching November 1, 2025 (166.7M tokens, $0.003 price)
-
-Your role is to:
-- Answer questions about Vault Phoenix services, pricing, and technology
-- Explain how AR crypto gaming works with GPS & Beacon technology
-- Provide information about the $Ember token and presale
-- Help users understand ROI and revenue opportunities
-- Guide users toward contacting contact@vaultphoenix.com for setup
-- Be enthusiastic, professional, and helpful
-- Keep responses concise but informative
-
-Always maintain a professional yet friendly tone. If asked about technical implementation details beyond your knowledge, recommend contacting the team directly.`;
 
 // ============================================
 // DEVICE DETECTION & PERFORMANCE
@@ -90,55 +53,6 @@ const DeviceInfo = {
 // ============================================
 
 /**
- * Debounce function for performance optimization
- * Prevents excessive function calls during rapid events
- */
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-/**
- * Throttle function for scroll/resize events
- * Ensures function runs at most once per interval
- */
-function throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
-}
-
-/**
- * Check if element is in viewport
- * Used for lazy loading and scroll animations
- */
-function isInViewport(element, threshold = 0) {
-    if (!element) return false;
-    const rect = element.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-    
-    return (
-        rect.top >= -threshold &&
-        rect.left >= -threshold &&
-        rect.bottom <= windowHeight + threshold &&
-        rect.right <= windowWidth + threshold
-    );
-}
-
-/**
  * Safely query DOM element with error handling
  */
 function safeQuery(selector, context = document) {
@@ -179,9 +93,8 @@ const requestAnimFrame = window.requestAnimationFrame ||
  */
 let lastWidth = window.innerWidth;
 let lastHeight = window.innerHeight;
-let resizeTimer = null;
 
-const handleResize = throttle(() => {
+const handleResize = window.throttle(() => {
     const newWidth = window.innerWidth;
     const newHeight = window.innerHeight;
     
@@ -205,7 +118,7 @@ window.addEventListener('resize', handleResize);
  */
 let lastZoom = window.devicePixelRatio;
 
-const handleZoom = throttle(() => {
+const handleZoom = window.throttle(() => {
     const currentZoom = window.devicePixelRatio;
     
     if (Math.abs(currentZoom - lastZoom) > 0.1) {
@@ -226,519 +139,6 @@ if ('visualViewport' in window) {
     window.visualViewport.addEventListener('resize', handleZoom);
 } else {
     window.addEventListener('resize', handleZoom);
-}
-
-// ============================================
-// CHATBOT INITIALIZATION - MOBILE OPTIMIZED
-// ============================================
-
-/**
- * Initialize Claude API Chatbot with mobile-first design
- */
-function initializeChatbot() {
-    console.log('🤖 Initializing Claude API Chatbot (Mobile-First)...');
-    
-    const chatbotButton = safeQuery('.chatbot-button-container');
-    const chatbotWindow = safeQuery('.chatbot-window');
-    const chatbotClose = safeQuery('.chatbot-close');
-    const chatbotInput = safeQuery('.chatbot-input');
-    const chatbotSend = safeQuery('.chatbot-send');
-    const chatbotBody = safeQuery('.chatbot-body');
-    
-    if (!chatbotButton || !chatbotWindow) {
-        console.warn('🤖 Chatbot elements not found - skipping initialization');
-        return;
-    }
-    
-    console.log('🤖 Chatbot elements found successfully');
-    
-    // Toggle chatbot window
-    chatbotButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('🤖 Chatbot button clicked');
-        
-        const isActive = chatbotWindow.classList.contains('active');
-        
-        if (!isActive) {
-            chatbotWindow.classList.add('active');
-            
-            // Add welcome message if first time opening
-            if (chatbotBody && chatbotBody.children.length === 0) {
-                addWelcomeMessage();
-            }
-            
-            // Focus input on desktop, but not on mobile to prevent keyboard issues
-            if (!DeviceInfo.isMobile && chatbotInput) {
-                setTimeout(() => chatbotInput.focus(), 300);
-            }
-            
-            // Prevent body scroll on mobile when chatbot is open
-            if (DeviceInfo.isMobile) {
-                document.body.style.overflow = 'hidden';
-                
-                // Enhanced mobile keyboard handling to prevent layout breaks
-                if (chatbotInput) {
-                    chatbotInput.addEventListener('focus', handleMobileKeyboardOpen);
-                    chatbotInput.addEventListener('blur', handleMobileKeyboardClose);
-                }
-            }
-        } else {
-            closeChatbot();
-        }
-    });
-    
-    // Close chatbot
-    if (chatbotClose) {
-        chatbotClose.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            closeChatbot();
-        });
-    }
-    
-    // Close on backdrop click (mobile UX)
-    chatbotWindow.addEventListener('click', (e) => {
-        if (e.target === chatbotWindow) {
-            closeChatbot();
-        }
-    });
-    
-    // Send message on button click
-    if (chatbotSend) {
-        chatbotSend.addEventListener('click', (e) => {
-            e.preventDefault();
-            sendMessage();
-        });
-    }
-    
-    // Send message on Enter key (Shift+Enter for new lines)
-    if (chatbotInput) {
-        chatbotInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
-        
-        // iOS-specific: Prevent zoom on focus
-        if (DeviceInfo.isIOS) {
-            chatbotInput.style.fontSize = '16px';
-            chatbotInput.setAttribute('autocomplete', 'off');
-            chatbotInput.setAttribute('autocorrect', 'off');
-            chatbotInput.setAttribute('autocapitalize', 'off');
-        }
-        
-        // Auto-resize textarea on mobile
-        if (DeviceInfo.isMobile) {
-            chatbotInput.addEventListener('input', autoResizeTextarea);
-        }
-    }
-    
-    // Handle orientation changes on mobile
-    if (DeviceInfo.isMobile) {
-        window.addEventListener('orientationchange', () => {
-            if (chatbotWindow.classList.contains('active')) {
-                setTimeout(() => {
-                    if (chatbotBody) {
-                        chatbotBody.scrollTop = chatbotBody.scrollHeight;
-                    }
-                }, 300);
-            }
-        });
-    }
-    
-    console.log('🤖 Chatbot initialized successfully!');
-}
-
-/**
- * Handle mobile keyboard opening - prevent layout breaks
- */
-function handleMobileKeyboardOpen() {
-    const chatbotWindow = safeQuery('.chatbot-window');
-    const chatbotContainer = safeQuery('.chatbot-container');
-    
-    if (chatbotWindow && chatbotContainer) {
-        // Store original styles
-        chatbotWindow.dataset.originalHeight = chatbotWindow.style.height || '';
-        
-        // Adjust chatbot height for keyboard
-        requestAnimFrame(() => {
-            chatbotWindow.style.height = '60vh';
-            chatbotContainer.style.maxHeight = '55vh';
-            
-            // Scroll to input field
-            const chatbotInput = safeQuery('.chatbot-input');
-            if (chatbotInput) {
-                chatbotInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        });
-    }
-}
-
-/**
- * Handle mobile keyboard closing - restore layout
- */
-function handleMobileKeyboardClose() {
-    const chatbotWindow = safeQuery('.chatbot-window');
-    const chatbotContainer = safeQuery('.chatbot-container');
-    
-    if (chatbotWindow && chatbotContainer) {
-        requestAnimFrame(() => {
-            // Restore original height
-            chatbotWindow.style.height = chatbotWindow.dataset.originalHeight || '';
-            chatbotContainer.style.maxHeight = '';
-        });
-    }
-}
-
-/**
- * Close chatbot window
- */
-function closeChatbot() {
-    const chatbotWindow = safeQuery('.chatbot-window');
-    const chatbotInput = safeQuery('.chatbot-input');
-    
-    if (!chatbotWindow) return;
-    
-    console.log('🤖 Chatbot closed');
-    chatbotWindow.classList.remove('active');
-    
-    // Remove mobile keyboard handlers
-    if (DeviceInfo.isMobile && chatbotInput) {
-        chatbotInput.removeEventListener('focus', handleMobileKeyboardOpen);
-        chatbotInput.removeEventListener('blur', handleMobileKeyboardClose);
-    }
-    
-    // Restore body scroll on mobile
-    if (DeviceInfo.isMobile) {
-        document.body.style.overflow = '';
-    }
-}
-
-/**
- * Auto-resize textarea for mobile input
- */
-function autoResizeTextarea() {
-    this.style.height = 'auto';
-    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-}
-
-// ============================================
-// WELCOME MESSAGE
-// ============================================
-
-/**
- * Add welcome message to chatbot
- */
-function addWelcomeMessage() {
-    const chatbotBody = safeQuery('.chatbot-body');
-    if (!chatbotBody) return;
-    
-    const welcomeMsg = document.createElement('div');
-    welcomeMsg.className = 'chat-message assistant-message';
-    
-    welcomeMsg.innerHTML = `
-        <div class="message-content">
-            <div class="message-avatar">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" loading="lazy">
-            </div>
-            <div class="message-text">
-                <strong>Welcome to Vault Phoenix!</strong><br><br>
-                I'm here to help you learn about our revolutionary AR crypto gaming platform. Ask me about:
-                <ul style="margin: 10px 0; padding-left: 20px;">
-                    <li>White-label AR crypto gaming solutions</li>
-                    <li>GPS & Beacon location technology</li>
-                    <li>$Ember token presale details</li>
-                    <li>Pricing and ROI opportunities</li>
-                    <li>Industry-specific use cases</li>
-                </ul>
-                What would you like to know?
-            </div>
-        </div>
-    `;
-    
-    chatbotBody.innerHTML = '';
-    chatbotBody.appendChild(welcomeMsg);
-    
-    // Smooth scroll to bottom
-    requestAnimFrame(() => {
-        chatbotBody.scrollTop = chatbotBody.scrollHeight;
-    });
-}
-
-// ============================================
-// SEND MESSAGE TO CLAUDE API
-// ============================================
-
-/**
- * Send message to Claude API with error handling
- */
-async function sendMessage() {
-    const chatbotInput = safeQuery('.chatbot-input');
-    const chatbotBody = safeQuery('.chatbot-body');
-    const chatbotSend = safeQuery('.chatbot-send');
-    
-    if (!chatbotInput || !chatbotBody || !chatbotSend) {
-        console.error('🤖 Required chatbot elements not found');
-        return;
-    }
-    
-    const message = chatbotInput.value.trim();
-    
-    if (!message || isTyping) {
-        console.log('🤖 Empty message or already typing - ignoring');
-        return;
-    }
-    
-    // Check if API key is configured
-    if (!CLAUDE_API_KEY || CLAUDE_API_KEY === 'YOUR_API_KEY_HERE') {
-        addMessage('user', message);
-        addMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
-        chatbotInput.value = '';
-        chatbotInput.style.height = 'auto';
-        return;
-    }
-    
-    // Add user message to chat
-    addMessage('user', message);
-    chatbotInput.value = '';
-    chatbotInput.style.height = 'auto';
-    chatbotInput.disabled = true;
-    chatbotSend.disabled = true;
-    isTyping = true;
-    
-    // Show typing indicator
-    showTypingIndicator();
-    
-    try {
-        // Prepare messages for API
-        const messages = [
-            ...conversationHistory,
-            { role: 'user', content: message }
-        ];
-        
-        console.log('🤖 Sending message to Claude API...');
-        
-        // Call Claude API
-        const response = await fetch(CLAUDE_API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': CLAUDE_API_KEY,
-                'anthropic-version': '2023-06-01'
-            },
-            body: JSON.stringify({
-                model: CLAUDE_MODEL,
-                max_tokens: 1024,
-                system: SYSTEM_PROMPT,
-                messages: messages
-            })
-        });
-        
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.error?.message || `API Error: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        
-        console.log('🤖 Received response from Claude API');
-        
-        // Remove typing indicator
-        removeTypingIndicator();
-        
-        // Extract assistant's response
-        const assistantMessage = data.content[0].text;
-        
-        // Add to conversation history
-        conversationHistory.push(
-            { role: 'user', content: message },
-            { role: 'assistant', content: assistantMessage }
-        );
-        
-        // Keep conversation history manageable (last 10 exchanges)
-        if (conversationHistory.length > 20) {
-            conversationHistory = conversationHistory.slice(-20);
-        }
-        
-        // Add assistant message to chat
-        addMessage('assistant', assistantMessage);
-        
-    } catch (error) {
-        console.error('🤖 Chat Error:', error);
-        removeTypingIndicator();
-        
-        let errorMessage = '❌ Sorry, I encountered an error. ';
-        
-        if (error.message.includes('401')) {
-            errorMessage += 'Invalid API key. Please check your configuration.';
-        } else if (error.message.includes('429')) {
-            errorMessage += 'Rate limit exceeded. Please try again in a moment.';
-        } else if (error.message.includes('500') || error.message.includes('529')) {
-            errorMessage += 'Claude API is temporarily unavailable. Please try again.';
-        } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-            errorMessage += 'Network connection issue. Please check your internet connection.';
-        } else {
-            errorMessage += 'Please try again or contact us at contact@vaultphoenix.com';
-        }
-        
-        addMessage('assistant', errorMessage);
-    } finally {
-        chatbotInput.disabled = false;
-        chatbotSend.disabled = false;
-        isTyping = false;
-        
-        // Focus input for better UX (desktop only)
-        if (!DeviceInfo.isMobile && window.innerWidth > 768) {
-            chatbotInput.focus();
-        }
-    }
-}
-
-// ============================================
-// ADD MESSAGE TO CHAT
-// ============================================
-
-/**
- * Add message to chat window
- */
-function addMessage(role, content) {
-    const chatbotBody = safeQuery('.chatbot-body');
-    if (!chatbotBody) {
-        console.error('🤖 Chatbot body not found');
-        return;
-    }
-    
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `chat-message ${role}-message`;
-    
-    if (role === 'user') {
-        // User messages - bubble on right, no avatar
-        messageDiv.innerHTML = `
-            <div class="message-content">
-                <div class="message-text">${escapeHtml(content)}</div>
-            </div>
-        `;
-    } else {
-        // Assistant messages - avatar on left, bubble next to it
-        messageDiv.innerHTML = `
-            <div class="message-content">
-                <div class="message-avatar">
-                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" loading="lazy">
-                </div>
-                <div class="message-text">${formatMessage(content)}</div>
-            </div>
-        `;
-    }
-    
-    chatbotBody.appendChild(messageDiv);
-    
-    // Smooth scroll to bottom with animation frame
-    requestAnimFrame(() => {
-        chatbotBody.scrollTop = chatbotBody.scrollHeight;
-    });
-}
-
-// ============================================
-// TYPING INDICATOR
-// ============================================
-
-/**
- * Show typing indicator
- */
-function showTypingIndicator() {
-    const chatbotBody = safeQuery('.chatbot-body');
-    if (!chatbotBody) return;
-    
-    const typingDiv = document.createElement('div');
-    typingDiv.className = 'chat-message assistant-message typing-indicator';
-    typingDiv.innerHTML = `
-        <div class="message-content">
-            <div class="message-avatar">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" loading="lazy">
-            </div>
-            <div class="typing-dots">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    `;
-    
-    chatbotBody.appendChild(typingDiv);
-    
-    // Smooth scroll to bottom
-    requestAnimFrame(() => {
-        chatbotBody.scrollTop = chatbotBody.scrollHeight;
-    });
-}
-
-/**
- * Remove typing indicator
- */
-function removeTypingIndicator() {
-    const typingIndicator = safeQuery('.typing-indicator');
-    if (typingIndicator) {
-        typingIndicator.remove();
-    }
-}
-
-// ============================================
-// MESSAGE FORMATTING
-// ============================================
-
-/**
- * Escape HTML to prevent XSS
- */
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-/**
- * Format message with markdown-style formatting
- */
-function formatMessage(text) {
-    let formatted = escapeHtml(text);
-    
-    // Bold text
-    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    
-    // Bullet points
-    const lines = formatted.split('\n');
-    let inList = false;
-    let result = [];
-    
-    for (let line of lines) {
-        const trimmed = line.trim();
-        if (trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
-            if (!inList) {
-                result.push('<ul style="margin: 10px 0; padding-left: 20px;">');
-                inList = true;
-            }
-            result.push(`<li>${trimmed.substring(2)}</li>`);
-        } else {
-            if (inList) {
-                result.push('</ul>');
-                inList = false;
-            }
-            if (trimmed) {
-                result.push(trimmed + '<br>');
-            }
-        }
-    }
-    
-    if (inList) {
-        result.push('</ul>');
-    }
-    
-    formatted = result.join('');
-    
-    // Clean up extra breaks
-    formatted = formatted.replace(/(<br>)+/g, '<br>');
-    formatted = formatted.replace(/^<br>|<br>$/g, '');
-    
-    return formatted;
 }
 
 // ============================================
@@ -862,7 +262,7 @@ function initializeMobileAllocationCards() {
  * DOM Content Loaded - Initialize all features
  */
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v2.4 - Cleaned)...');
+    console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v3.0 - Cleaned)...');
     
     // Ensure dark background
     document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
@@ -878,7 +278,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Initialize features
-    initializeChatbot();
     initializeMobileAllocationCards();
     preloadCriticalImages();
     initializeCryptoCoinImage();
@@ -905,15 +304,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     console.log('🔥🪙 Vault Phoenix initialized successfully!');
-    console.log('✅ Using shared-script.js for: smooth scrolling, countdown timer, mobile menu, navbar transitions');
+    console.log('✅ Using shared-script.js for: smooth scrolling, countdown timer, mobile menu, navbar transitions, chatbot');
 });
 
 // ============================================
-// GALLERY FUNCTIONS (PAGE-SPECIFIC - KEEP)
+// GALLERY FUNCTIONS (PAGE-SPECIFIC)
 // ============================================
 
 /**
- * ✅ KEEP - Change main phone gallery image
+ * Change main phone gallery image
  */
 function changeImage(imageSrc, title) {
     const mainImg = safeQuery('#mainScreenshot');
@@ -947,7 +346,7 @@ function changeImage(imageSrc, title) {
 }
 
 /**
- * ✅ KEEP - Change main laptop gallery image
+ * Change main laptop gallery image
  */
 function changeLaptopImage(imageSrc, title) {
     const mainImg = safeQuery('#mainLaptopScreenshot');
@@ -986,7 +385,6 @@ function changeLaptopImage(imageSrc, title) {
 
 /**
  * Initialize intersection observer for scroll reveals
- * UPDATED: Optimized thresholds and will-change for performance
  */
 function initializeScrollRevealObserver() {
     const observerOptions = {
@@ -1024,12 +422,11 @@ function initializeScrollRevealObserver() {
 }
 
 // ============================================
-// IMAGE FADE-IN OPTIMIZATION (✅ VERIFIED)
+// IMAGE FADE-IN OPTIMIZATION
 // ============================================
 
 /**
- * ✅ KEEP - Optimize image loading to prevent blinking
- * UPDATED: Add will-change and proper loading states
+ * Optimize image loading to prevent blinking
  */
 function optimizeImageLoading() {
     safeQueryAll('img').forEach(img => {
@@ -1749,7 +1146,7 @@ function createScrollProgressIndicator() {
     `;
     document.body.appendChild(indicator);
     
-    const updateProgress = throttle(() => {
+    const updateProgress = window.throttle(() => {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
@@ -1775,7 +1172,7 @@ function optimizeMobilePerformance() {
     document.body.classList.add('touch-device');
     
     // Optimize scroll performance
-    const scrollElements = safeQueryAll('.chatbot-body, .allocation-cards-mobile');
+    const scrollElements = safeQueryAll('.allocation-cards-mobile');
     scrollElements.forEach(el => {
         el.style.webkitOverflowScrolling = 'touch';
         el.style.overscrollBehavior = 'contain';
@@ -1788,21 +1185,10 @@ function optimizeMobilePerformance() {
     }
     
     // Handle orientation changes
-    window.addEventListener('orientationchange', debounce(() => {
+    window.addEventListener('orientationchange', window.debounce(() => {
         console.log('📱 Orientation changed');
         DeviceInfo.screenWidth = window.innerWidth;
         DeviceInfo.screenHeight = window.innerHeight;
-        
-        // Re-optimize chatbot if open
-        const chatbotWindow = safeQuery('.chatbot-window');
-        if (chatbotWindow && chatbotWindow.classList.contains('active')) {
-            setTimeout(() => {
-                const chatbotBody = safeQuery('.chatbot-body');
-                if (chatbotBody) {
-                    chatbotBody.scrollTop = chatbotBody.scrollHeight;
-                }
-            }, 300);
-        }
     }, 300));
     
     console.log('📱 Mobile optimizations complete');
@@ -1876,7 +1262,7 @@ document.addEventListener('keydown', (e) => {
 
 console.log('%c🔥🪙 VAULT PHOENIX', 'color: #d73327; font-size: 24px; font-weight: bold;');
 console.log('%c🚀 AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 16px; font-weight: bold;');
-console.log('%c📧 contact@vaultphoenix.com | 📱 (949) 357-4416', 'color: #374151; font-size: 12px;');
-console.log('%c💡 Senior Engineering - Mobile-First Architecture v2.4', 'color: #22c55e; font-size: 12px; font-weight: bold;');
-console.log('%c✅ Integrated with shared-script.js (smooth scroll, countdown, mobile menu)', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
+console.log('%c📧 contact@vaultphoenix.com', 'color: #374151; font-size: 12px;');
+console.log('%c💡 Senior Engineering - Mobile-First Architecture v3.0', 'color: #22c55e; font-size: 12px; font-weight: bold;');
+console.log('%c✅ Integrated with shared-script.js (smooth scroll, countdown, mobile menu, navbar, chatbot)', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
 console.log('Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
