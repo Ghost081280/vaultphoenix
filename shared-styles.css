@@ -1980,6 +1980,12 @@ button:focus-visible {
     box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.3), 0 0 20px rgba(240, 165, 0, 0.4) !important;
 }
 
+/* ✅ FIX: Override global focus-visible for chatbot input to prevent double yellow border */
+.chatbot-input:focus-visible {
+    outline: none;
+    outline-offset: 0;
+}
+
 .chatbot-input::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
