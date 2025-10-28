@@ -726,7 +726,1195 @@ body.main-page .main-hero-benefit-item:hover .main-benefit-icon-small {
             drop-shadow(0 0 22px rgba(240, 165, 0, 0.35));
 }
 
-/* Continue with remaining sections in next message due to length... */
+/* ============================================
+   6. TOKEN EVOLUTION SECTION
+   ============================================ */
+
+body.main-page .main-ember-token-section {
+    padding: 100px var(--ember-spacing-xl);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+body.main-page .main-ember-token-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(240, 165, 0, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+body.main-page .main-ember-token-header {
+    text-align: center;
+    margin-bottom: var(--ember-spacing-2xl);
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-ember-token-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+    text-shadow: 0 4px 20px rgba(240, 165, 0, 0.3);
+}
+
+body.main-page .main-ember-token-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+body.main-page .main-ember-token-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--ember-spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-ember-token-card {
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.1), rgba(251, 146, 60, 0.05));
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 20px;
+    padding: var(--ember-spacing-lg);
+    backdrop-filter: blur(20px);
+    transition: all var(--ember-transition-slow);
+    position: relative;
+    overflow: hidden;
+}
+
+body.main-page .main-ember-token-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--ember-gradient-primary);
+}
+
+body.main-page .main-ember-token-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(215, 51, 39, 0.6);
+    box-shadow: var(--ember-shadow-md);
+}
+
+body.main-page .main-ember-token-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--ember-spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.main-page .main-ember-token-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 25px rgba(240, 165, 0, 0.3));
+    transition: transform var(--ember-transition-base);
+}
+
+body.main-page .main-ember-token-card:hover .main-ember-token-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+body.main-page .main-ember-token-card-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-sm);
+    text-align: center;
+}
+
+body.main-page .main-ember-token-card-description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* ============================================
+   7. CRYPTO COIN SECTION
+   ============================================ */
+
+body.main-page .main-crypto-coin-section {
+    padding: 100px var(--ember-spacing-xl);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+body.main-page .main-crypto-coin-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(215, 51, 39, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+body.main-page .main-crypto-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ember-spacing-2xl);
+    align-items: center;
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-crypto-text {
+    padding: var(--ember-spacing-lg);
+}
+
+body.main-page .main-crypto-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+    line-height: 1.2;
+}
+
+body.main-page .main-crypto-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--ember-spacing-lg);
+    line-height: 1.6;
+}
+
+body.main-page .main-crypto-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ember-spacing-md);
+}
+
+body.main-page .main-crypto-feature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(215, 51, 39, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    transition: all var(--ember-transition-base);
+}
+
+body.main-page .main-crypto-feature:hover {
+    background: rgba(215, 51, 39, 0.15);
+    border-color: rgba(215, 51, 39, 0.5);
+    transform: translateX(5px);
+}
+
+body.main-page .main-crypto-feature-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.4));
+    flex-shrink: 0;
+}
+
+body.main-page .main-crypto-feature-text {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+}
+
+body.main-page .main-phoenix-coin-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.main-page .main-phoenix-coin-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 40px rgba(240, 165, 0, 0.6)) 
+            drop-shadow(0 0 60px rgba(240, 165, 0, 0.4));
+    animation: ember-coinFloat 4s ease-in-out infinite;
+}
+
+@keyframes ember-coinFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    50% { 
+        transform: translateY(-20px) rotate(5deg); 
+    }
+}
+
+/* ============================================
+   8. TECHNOLOGY MODULES
+   ============================================ */
+
+body.main-page .main-technology-modules {
+    padding: 100px var(--ember-spacing-xl);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+    position: relative;
+}
+
+body.main-page .main-technology-header {
+    text-align: center;
+    margin-bottom: var(--ember-spacing-2xl);
+}
+
+body.main-page .main-technology-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+}
+
+body.main-page .main-technology-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+body.main-page .main-technology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--ember-spacing-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+body.main-page .main-technology-card {
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.1), rgba(251, 146, 60, 0.05));
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 20px;
+    padding: var(--ember-spacing-xl);
+    backdrop-filter: blur(20px);
+    transition: all var(--ember-transition-slow);
+    position: relative;
+    overflow: hidden;
+}
+
+body.main-page .main-technology-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--ember-gradient-primary);
+}
+
+body.main-page .main-technology-card.main-gps-tech::before {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+body.main-page .main-technology-card.main-beacon-tech::before {
+    background: var(--ember-gradient-secondary);
+}
+
+body.main-page .main-technology-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(215, 51, 39, 0.6);
+    box-shadow: var(--ember-shadow-lg);
+}
+
+body.main-page .main-tech-icon-wrapper {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto var(--ember-spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.main-page .main-tech-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 20px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 30px rgba(240, 165, 0, 0.3));
+    transition: transform var(--ember-transition-base);
+}
+
+body.main-page .main-technology-card:hover .main-tech-icon {
+    transform: scale(1.15) rotate(8deg);
+}
+
+body.main-page .main-tech-card-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+    text-align: center;
+}
+
+body.main-page .main-tech-card-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    text-align: center;
+    margin-bottom: var(--ember-spacing-lg);
+}
+
+body.main-page .main-tech-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ember-spacing-sm);
+}
+
+body.main-page .main-tech-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+body.main-page .main-tech-feature-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--ember-yellow);
+    flex-shrink: 0;
+}
+
+/* ============================================
+   9. APP SHOWCASE
+   ============================================ */
+
+body.main-page .main-app-showcase {
+    padding: 100px var(--ember-spacing-xl);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+body.main-page .main-app-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+body.main-page .main-showcase-header {
+    text-align: center;
+    margin-bottom: var(--ember-spacing-2xl);
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-showcase-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+}
+
+body.main-page .main-showcase-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+body.main-page .main-phone-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--ember-spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto var(--ember-spacing-2xl);
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-phone-screen {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(215, 51, 39, 0.3);
+    transition: all var(--ember-transition-slow);
+    cursor: pointer;
+}
+
+body.main-page .main-phone-screen:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(215, 51, 39, 0.6);
+    box-shadow: var(--ember-shadow-lg);
+}
+
+body.main-page .main-phone-screen-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+body.main-page .main-phone-screen-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: var(--ember-spacing-md);
+    opacity: 0;
+    transition: opacity var(--ember-transition-base);
+}
+
+body.main-page .main-phone-screen:hover .main-phone-screen-overlay {
+    opacity: 1;
+}
+
+body.main-page .main-phone-screen-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+body.main-page .main-laptop-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--ember-spacing-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-laptop-screen {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(99, 102, 241, 0.3);
+    transition: all var(--ember-transition-slow);
+    cursor: pointer;
+}
+
+body.main-page .main-laptop-screen:hover {
+    transform: translateY(-8px);
+    border-color: rgba(99, 102, 241, 0.6);
+    box-shadow: 0 25px 60px rgba(99, 102, 241, 0.3);
+}
+
+body.main-page .main-laptop-screen-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+body.main-page .main-laptop-screen-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    padding: var(--ember-spacing-lg);
+    opacity: 0;
+    transition: opacity var(--ember-transition-base);
+}
+
+body.main-page .main-laptop-screen:hover .main-laptop-screen-overlay {
+    opacity: 1;
+}
+
+body.main-page .main-laptop-screen-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+/* ============================================
+   10. FEATURES & BENEFITS
+   ============================================ */
+
+body.main-page .main-features {
+    padding: 100px var(--ember-spacing-xl);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+    position: relative;
+}
+
+body.main-page .main-features-header {
+    text-align: center;
+    margin-bottom: var(--ember-spacing-2xl);
+}
+
+body.main-page .main-features-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+}
+
+body.main-page .main-features-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+body.main-page .main-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--ember-spacing-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+body.main-page .main-feature-card {
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.08), rgba(251, 146, 60, 0.04));
+    border: 2px solid rgba(215, 51, 39, 0.25);
+    border-radius: 20px;
+    padding: var(--ember-spacing-xl);
+    backdrop-filter: blur(20px);
+    transition: all var(--ember-transition-slow);
+    text-align: center;
+}
+
+body.main-page .main-feature-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(215, 51, 39, 0.5);
+    box-shadow: var(--ember-shadow-md);
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.12), rgba(251, 146, 60, 0.06));
+}
+
+body.main-page .main-feature-icon-wrapper {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto var(--ember-spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.main-page .main-feature-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 25px rgba(240, 165, 0, 0.3));
+    transition: transform var(--ember-transition-base);
+}
+
+body.main-page .main-feature-card:hover .main-feature-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+body.main-page .main-feature-card-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+}
+
+body.main-page .main-feature-card-description {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
+
+/* ============================================
+   11. PRICING & REVENUE
+   ============================================ */
+
+body.main-page .main-pricing {
+    padding: 100px var(--ember-spacing-xl);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+body.main-page .main-pricing::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(215, 51, 39, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+body.main-page .main-pricing-header {
+    text-align: center;
+    margin-bottom: var(--ember-spacing-2xl);
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-pricing-icon-wrapper {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto var(--ember-spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.main-page .main-pricing-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+}
+
+body.main-page .main-pricing-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+body.main-page .main-pricing-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ember-spacing-2xl);
+    max-width: 1200px;
+    margin: 0 auto var(--ember-spacing-2xl);
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-pricing-column {
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.1), rgba(251, 146, 60, 0.05));
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 25px;
+    padding: var(--ember-spacing-xl);
+    backdrop-filter: blur(20px);
+    transition: all var(--ember-transition-slow);
+}
+
+body.main-page .main-pricing-column:hover {
+    transform: translateY(-8px);
+    border-color: rgba(215, 51, 39, 0.5);
+    box-shadow: var(--ember-shadow-md);
+}
+
+body.main-page .main-pricing-column-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-lg);
+    text-align: center;
+}
+
+body.main-page .main-pricing-tier {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: 15px;
+    padding: var(--ember-spacing-lg);
+    margin-bottom: var(--ember-spacing-md);
+}
+
+body.main-page .main-pricing-tier-name {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--ember-yellow);
+    margin-bottom: var(--ember-spacing-sm);
+}
+
+body.main-page .main-pricing-tier-price {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: var(--ember-spacing-sm);
+}
+
+body.main-page .main-pricing-tier-description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
+body.main-page .main-revenue-examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--ember-spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-revenue-example-card {
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.08), rgba(251, 146, 60, 0.04));
+    border: 2px solid rgba(215, 51, 39, 0.25);
+    border-radius: 20px;
+    padding: var(--ember-spacing-lg);
+    backdrop-filter: blur(20px);
+    transition: all var(--ember-transition-slow);
+    text-align: center;
+}
+
+body.main-page .main-revenue-example-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(215, 51, 39, 0.4);
+    box-shadow: var(--ember-shadow-sm);
+}
+
+body.main-page .main-revenue-icon-wrapper {
+    width: 78px;
+    height: 78px;
+    margin: 0 auto var(--ember-spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.main-page .main-revenue-example-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-sm);
+}
+
+body.main-page .main-revenue-example-description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
+/* ============================================
+   12. USE CASES
+   ============================================ */
+
+body.main-page .main-use-cases {
+    padding: 100px var(--ember-spacing-xl);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+    position: relative;
+}
+
+body.main-page .main-use-cases-header {
+    text-align: center;
+    margin-bottom: var(--ember-spacing-2xl);
+}
+
+body.main-page .main-use-cases-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+}
+
+body.main-page .main-use-cases-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+body.main-page .main-use-cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--ember-spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+body.main-page .main-use-case-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.1), rgba(251, 146, 60, 0.05));
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 20px;
+    padding: var(--ember-spacing-xl);
+    backdrop-filter: blur(20px);
+    transition: all var(--ember-transition-slow);
+    overflow: hidden;
+}
+
+body.main-page .main-use-case-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--ember-gradient-primary);
+}
+
+body.main-page .main-use-case-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(215, 51, 39, 0.6);
+    box-shadow: var(--ember-shadow-md);
+}
+
+body.main-page .main-use-case-icon-wrapper {
+    width: 85px;
+    height: 85px;
+    margin: 0 auto var(--ember-spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.main-page .main-use-case-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 25px rgba(240, 165, 0, 0.3));
+    transition: transform var(--ember-transition-base);
+}
+
+body.main-page .main-use-case-card:hover .main-use-case-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+body.main-page .main-use-case-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+    text-align: center;
+}
+
+body.main-page .main-use-case-description {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    text-align: center;
+}
+
+/* ============================================
+   13. SOCIAL SHARING
+   ============================================ */
+
+body.main-page .main-social-sharing-section {
+    padding: 100px var(--ember-spacing-xl);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+body.main-page .main-social-sharing-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(240, 165, 0, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+body.main-page .main-social-sharing-header {
+    text-align: center;
+    margin-bottom: var(--ember-spacing-2xl);
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-social-icon-wrapper {
+    width: 95px;
+    height: 95px;
+    margin: 0 auto var(--ember-spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.main-page .main-social-sharing-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+}
+
+body.main-page .main-social-sharing-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+body.main-page .main-social-sharing-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ember-spacing-md);
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-social-share-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 25px;
+    background: var(--ember-gradient-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all var(--ember-transition-slow);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+}
+
+body.main-page .main-social-share-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5);
+    border-color: rgba(215, 51, 39, 0.6);
+}
+
+body.main-page .main-social-share-button.main-twitter {
+    background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+    box-shadow: 0 8px 25px rgba(29, 161, 242, 0.4);
+}
+
+body.main-page .main-social-share-button.main-twitter:hover {
+    box-shadow: 0 12px 35px rgba(29, 161, 242, 0.5);
+}
+
+body.main-page .main-social-share-button.main-facebook {
+    background: linear-gradient(135deg, #1877f2, #0d65d9);
+    box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
+}
+
+body.main-page .main-social-share-button.main-facebook:hover {
+    box-shadow: 0 12px 35px rgba(24, 119, 242, 0.5);
+}
+
+body.main-page .main-social-share-button.main-linkedin {
+    background: linear-gradient(135deg, #0077b5, #00659c);
+    box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+}
+
+body.main-page .main-social-share-button.main-linkedin:hover {
+    box-shadow: 0 12px 35px rgba(0, 119, 181, 0.5);
+}
+
+body.main-page .main-social-share-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   14. FINAL CTA
+   ============================================ */
+
+body.main-page .main-final-cta {
+    padding: 100px var(--ember-spacing-xl);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.98) 0%, rgba(26, 26, 26, 0.95) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+body.main-page .main-final-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(215, 51, 39, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+body.main-page .main-final-cta-header {
+    text-align: center;
+    margin-bottom: var(--ember-spacing-2xl);
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-final-cta-title {
+    font-size: clamp(2.8rem, 6vw, 4rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+    line-height: 1.2;
+    text-shadow: 0 4px 20px rgba(240, 165, 0, 0.3);
+}
+
+body.main-page .main-final-cta-subtitle {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+body.main-page .main-journey-paths-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ember-spacing-2xl);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: var(--ember-z-content);
+}
+
+body.main-page .main-journey-path-module {
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.12), rgba(251, 146, 60, 0.08));
+    border: 3px solid rgba(215, 51, 39, 0.35);
+    border-radius: 30px;
+    padding: var(--ember-spacing-2xl) var(--ember-spacing-xl);
+    backdrop-filter: blur(20px);
+    transition: all var(--ember-transition-slow);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+body.main-page .main-journey-path-module::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--ember-gradient-primary);
+}
+
+body.main-page .main-journey-path-module.main-developer-journey::before {
+    background: var(--ember-gradient-secondary);
+}
+
+body.main-page .main-journey-path-module:hover {
+    transform: translateY(-10px);
+    border-color: rgba(215, 51, 39, 0.6);
+    box-shadow: var(--ember-shadow-lg);
+}
+
+body.main-page .main-journey-path-module.main-developer-journey {
+    border-color: rgba(99, 102, 241, 0.35);
+}
+
+body.main-page .main-journey-path-module.main-developer-journey:hover {
+    border-color: rgba(99, 102, 241, 0.6);
+    box-shadow: 0 30px 80px rgba(99, 102, 241, 0.35);
+}
+
+body.main-page .main-journey-icon-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--ember-spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.main-page .main-journey-path-badge {
+    display: inline-block;
+    background: var(--ember-gradient-primary);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--ember-spacing-md);
+    box-shadow: var(--ember-shadow-sm);
+}
+
+body.main-page .main-developer-journey .main-journey-path-badge {
+    background: var(--ember-gradient-secondary);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+body.main-page .main-journey-path-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--ember-spacing-md);
+}
+
+body.main-page .main-journey-path-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: var(--ember-spacing-xl);
+    line-height: 1.7;
+}
+
+body.main-page .main-journey-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ember-spacing-sm);
+    padding: 18px 35px;
+    background: var(--ember-gradient-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    transition: all var(--ember-transition-slow);
+    box-shadow: 0 10px 30px rgba(215, 51, 39, 0.5);
+    border: 2px solid rgba(215, 51, 39, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+body.main-page .main-journey-cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+body.main-page .main-journey-cta-button:hover::before {
+    left: 100%;
+}
+
+body.main-page .main-journey-cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.6);
+}
+
+body.main-page .main-developer-journey .main-journey-cta-button {
+    background: var(--ember-gradient-secondary);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+body.main-page .main-developer-journey .main-journey-cta-button:hover {
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+}
+
+body.main-page .main-journey-cta-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
 
 /* ============================================
    15. MOBILE OPTIMIZATIONS - ALL BREAKPOINTS
@@ -751,6 +1939,18 @@ body.main-page .main-hero-benefit-item:hover .main-benefit-icon-small {
     
     body.main-page .main-cta-path-container {
         gap: var(--ember-spacing-lg);
+    }
+    
+    body.main-page .main-crypto-content {
+        gap: var(--ember-spacing-xl);
+    }
+    
+    body.main-page .main-pricing-two-column {
+        gap: var(--ember-spacing-xl);
+    }
+    
+    body.main-page .main-journey-paths-container {
+        gap: var(--ember-spacing-xl);
     }
 }
 
@@ -801,6 +2001,29 @@ body.main-page .main-hero-benefit-item:hover .main-benefit-icon-small {
         gap: 25px;
         max-width: 500px;
     }
+    
+    /* CRYPTO SECTION - VERTICAL STACK */
+    body.main-page .main-crypto-content {
+        grid-template-columns: 1fr;
+        gap: var(--ember-spacing-2xl);
+    }
+    
+    /* PRICING - VERTICAL STACK */
+    body.main-page .main-pricing-two-column {
+        grid-template-columns: 1fr;
+        gap: var(--ember-spacing-lg);
+    }
+    
+    /* FINAL CTA - VERTICAL STACK */
+    body.main-page .main-journey-paths-container {
+        grid-template-columns: 1fr;
+        gap: var(--ember-spacing-lg);
+    }
+    
+    /* APP SHOWCASE - ADJUST GRID */
+    body.main-page .main-laptop-gallery {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* TABLET & LARGE MOBILE (768px) */
@@ -827,6 +2050,34 @@ body.main-page .main-hero-benefit-item:hover .main-benefit-icon-small {
     /* CTA PATHS - OPTIMIZED PADDING */
     body.main-page .main-cta-path {
         padding: var(--ember-spacing-lg) 25px;
+    }
+    
+    /* SECTION PADDING REDUCTION */
+    body.main-page .main-ember-token-section,
+    body.main-page .main-crypto-coin-section,
+    body.main-page .main-technology-modules,
+    body.main-page .main-app-showcase,
+    body.main-page .main-features,
+    body.main-page .main-pricing,
+    body.main-page .main-use-cases,
+    body.main-page .main-social-sharing-section,
+    body.main-page .main-final-cta {
+        padding: 70px 25px;
+    }
+    
+    /* GRID ADJUSTMENTS */
+    body.main-page .main-ember-token-grid,
+    body.main-page .main-technology-grid,
+    body.main-page .main-features-grid,
+    body.main-page .main-use-cases-grid,
+    body.main-page .main-revenue-examples-grid {
+        grid-template-columns: 1fr;
+        gap: var(--ember-spacing-md);
+    }
+    
+    body.main-page .main-phone-gallery {
+        grid-template-columns: 1fr;
+        gap: var(--ember-spacing-md);
     }
 }
 
@@ -880,6 +2131,30 @@ body.main-page .main-hero-benefit-item:hover .main-benefit-icon-small {
         width: 35px !important;
         height: 35px !important;
     }
+    
+    /* SECTION PADDING - MORE COMPACT */
+    body.main-page .main-ember-token-section,
+    body.main-page .main-crypto-coin-section,
+    body.main-page .main-technology-modules,
+    body.main-page .main-app-showcase,
+    body.main-page .main-features,
+    body.main-page .main-pricing,
+    body.main-page .main-use-cases,
+    body.main-page .main-social-sharing-section,
+    body.main-page .main-final-cta {
+        padding: 60px var(--ember-spacing-md);
+    }
+    
+    /* ICON SIZING */
+    body.main-page .main-revenue-industry-icon {
+        width: 65px !important;
+        height: 65px !important;
+    }
+    
+    body.main-page .main-journey-icon-large {
+        width: 100px !important;
+        height: 100px !important;
+    }
 }
 
 /* EXTRA SMALL MOBILE (375px) - iPhone SE, 12 Mini */
@@ -908,6 +2183,31 @@ body.main-page .main-hero-benefit-item:hover .main-benefit-icon-small {
     
     body.main-page .main-cta-path {
         padding: 22px 18px;
+    }
+    
+    /* SECTION PADDING - MINIMUM */
+    body.main-page .main-ember-token-section,
+    body.main-page .main-crypto-coin-section,
+    body.main-page .main-technology-modules,
+    body.main-page .main-app-showcase,
+    body.main-page .main-features,
+    body.main-page .main-pricing,
+    body.main-page .main-use-cases,
+    body.main-page .main-social-sharing-section,
+    body.main-page .main-final-cta {
+        padding: 50px 15px;
+    }
+    
+    /* CARD PADDING REDUCTION */
+    body.main-page .main-ember-token-card,
+    body.main-page .main-technology-card,
+    body.main-page .main-feature-card,
+    body.main-page .main-use-case-card {
+        padding: var(--ember-spacing-md);
+    }
+    
+    body.main-page .main-journey-path-module {
+        padding: var(--ember-spacing-lg) var(--ember-spacing-md);
     }
 }
 
@@ -1089,4 +2389,5 @@ body.main-page .main-skip-to-content:focus {
    - WCAG AAA focus outlines
    - Full mobile responsiveness (375px - 1366px)
    - Reduced motion support
+   - All 14 sections complete with transformations
    ============================================ */
