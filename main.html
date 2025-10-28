@@ -290,9 +290,10 @@
                     </div>
                 </div>
                 
+                <!-- ✅ FIX 1: Arrow wrapped in step-arrow-wrapper for mobile rotation -->
                 <div class="step-arrow-wrapper">
-    <div class="step-arrow" aria-hidden="true">→</div>
-</div>
+                    <div class="step-arrow" aria-hidden="true">→</div>
+                </div>
                 
                 <div class="step-premium">
                     <div class="step-number-badge">2</div>
@@ -307,7 +308,10 @@
                     </div>
                 </div>
                 
-                <div class="step-arrow" aria-hidden="true">→</div>
+                <!-- ✅ FIX 1: Arrow wrapped in step-arrow-wrapper for mobile rotation -->
+                <div class="step-arrow-wrapper">
+                    <div class="step-arrow" aria-hidden="true">→</div>
+                </div>
                 
                 <div class="step-premium">
                     <div class="step-number-badge">3</div>
@@ -517,7 +521,7 @@
                         </h4>
                         <p>Vault Phoenix operates under comprehensive regulatory oversight with institutional-grade compliance procedures, multi-signature treasury management, and professional legal frameworks ensuring maximum security and transparency.</p>
                         
-                        <!-- ✅ FIX: Removed target="_blank" for smooth scroll instead of opening new window -->
+                        <!-- ✅ FIX 2: Removed target="_blank" for smooth scroll instead of opening new window -->
                         <div class="compliance-cta">
                             <a href="ember.html#legal-compliance-section" class="compliance-button" aria-label="View compliance details">
                                 View Compliance Details
@@ -627,7 +631,7 @@
                 <p class="technology-modules-subtitle">Vault Phoenix uses industry-leading location technology to deliver <span class="golden-highlight">pinpoint accuracy</span> anywhere your campaign needs it - from city streets to inside buildings.</p>
                 
                 <div class="technology-grid">
-                    <!-- GPS Module -->
+                    <!-- ✅ FIX 4: GPS Module with explicit .gps-card class for orange styling -->
                     <div class="technology-card gps-card">
                         <div class="technology-header">
                             <div class="technology-icon-container">
@@ -680,7 +684,7 @@
                         </div>
                     </div>
                     
-                    <!-- Beacon Module -->
+                    <!-- ✅ FIX 4: Beacon Module with explicit .beacon-card class for purple styling -->
                     <div class="technology-card beacon-card">
                         <div class="technology-header">
                             <div class="technology-icon-container">
@@ -800,7 +804,14 @@
     <section class="features" id="features">
         <div class="container">
             <h2 class="section-title scroll-reveal">Why AR Crypto Gaming Transforms Marketing</h2>
-            <p class="section-subtitle scroll-reveal">Transform traditional marketing campaigns into legendary crypto gaming experiences that customers can't resist and never forget. Drive measurable results with proven engagement strategies.</p>
+            <p class="section-subtitle scroll-reveal">Transform traditional marketing campaigns into legendary crypto gaming experiences that customers can't resist and never forget. Drive<!-- ============================================
+     MAIN.HTML - PART 2 
+     Continue from line 807 of Part 1
+     This section includes: Features, App Showcase, Use Cases, 
+     Pricing, Final CTA (RESTRUCTURED), and Footer
+     ============================================ -->
+
+measurable results with proven engagement strategies.</p>
             
             <div class="proven-model scroll-reveal">
                 <div class="proven-badge">
@@ -1538,76 +1549,117 @@
         </div>
     </section>
 
-    <!-- Final CTA Section -->
+    <!-- ✅ FIX 3: FINAL CTA SECTION - COMPLETE RESTRUCTURE WITH CENTERED JOURNEY PATHS -->
     <section class="final-cta" id="contact">
         <div class="final-cta-background"></div>
         <div class="container">
-            <h2 class="final-cta-title scroll-reveal">Ready to Transform Your Marketing with Crypto Gaming?</h2>
-            <p class="final-cta-subtitle scroll-reveal">Join the AR crypto gaming revolution and transform your marketing results. Your competitors don't know this GPS & Beacon technology exists yet - but they will soon. Be first to market with crypto-powered campaigns that deliver measurable ROI.</p>
-            
-            <div class="cta-buttons scroll-reveal">
-                <a href="mailto:contact@vaultphoenix.com?subject=Phoenix Crypto Gaming Development Inquiry&body=I'm interested in developing a custom AR crypto gaming phoenix for my clients. Please send me detailed information about the development process, timeline, and how we can get started." class="cta-primary-enhanced cta-with-icon-enhanced" aria-label="Contact us to start your crypto gaming campaign">
-                    <div class="image-with-glow">
-                        <img src="images/EmberRepeatArrows.PNG" alt="Awaken" class="cta-icon-image-enhanced" loading="lazy">
-                    </div>
-                    <span>Start Your Campaign</span>
-                </a>
-                <a href="https://www.facebook.com/share/1BH4Hd6iDa/?mibextid=wwXIfr" class="cta-secondary cta-with-icon-enhanced" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on Facebook">
-                    <div class="image-with-glow">
-                        <img src="images/EmberCoinChatWithUs.PNG" alt="Chat" class="cta-icon-image-enhanced" loading="lazy">
-                    </div>
-                    <span>Chat with Us</span>
-                </a>
-            </div>
-            
-            <!-- Journey Section -->
-            <div class="journey-section">
-                <h3 class="journey-title">
-                    <div class="image-with-glow">
-                        <img src="images/EmberCoinRocket.PNG" alt="Journey" class="journey-icon-large" loading="lazy">
-                    </div>
-                    What Happens Next in Your Journey:
-                </h3>
+            <div class="final-cta-content">
+                <div class="final-cta-header">
+                    <h2 class="final-cta-title scroll-reveal">What Happens Next in Your Journey?</h2>
+                    <p class="final-cta-subtitle scroll-reveal">Choose your path and start building the future of location-based crypto marketing</p>
+                </div>
                 
-                <div class="journey-paths">
-                    <div class="journey-path">
-                        <div class="path-header-enhanced">
-                            <div class="image-with-glow">
-                                <img src="images/EmberCoinMoneyBag.PNG" alt="White-Label" class="path-icon-enhanced" loading="lazy">
+                <div class="journey-paths-container">
+                    <!-- Business Path -->
+                    <div class="journey-path-module business-path">
+                        <div class="journey-path-header">
+                            <div class="journey-icon-container">
+                                <div class="image-with-glow">
+                                    <img src="images/EmberCoinMoneyBag.PNG" alt="Business" class="journey-icon-large" loading="lazy">
+                                </div>
                             </div>
-                            <div class="path-header-text">
-                                <div class="path-category">Complete Branded AR Crypto Web Apps</div>
-                                <h4 class="path-title">Turnkey White-Label Solution</h4>
-                                <span class="path-badge">Coming Soon!</span>
+                            <h3 class="journey-path-title">For Businesses</h3>
+                            <p class="journey-path-subtitle">Launch your location-based crypto marketing campaign</p>
+                        </div>
+                        
+                        <div class="journey-steps">
+                            <div class="journey-step">
+                                <div class="journey-step-number">1</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Schedule Your Demo</h4>
+                                    <p class="journey-step-description">See the platform in action with a personalized walkthrough</p>
+                                </div>
+                            </div>
+                            
+                            <div class="journey-step">
+                                <div class="journey-step-number">2</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Design Your Campaign</h4>
+                                    <p class="journey-step-description">Work with our team to create your custom token hunt experience</p>
+                                </div>
+                            </div>
+                            
+                            <div class="journey-step">
+                                <div class="journey-step-number">3</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Launch & Track Results</h4>
+                                    <p class="journey-step-description">Go live and watch real-time analytics as customers engage</p>
+                                </div>
                             </div>
                         </div>
-                        <ul class="path-steps-enhanced">
-                            <li><strong>Strategy Session:</strong> We analyze your client's brand, target audience, and campaign goals with dedicated consultation</li>
-                            <li><strong>Development & Setup:</strong> Complete platform deployment with GPS & Beacon technology and managed infrastructure within <span class="golden-highlight">24 hours</span></li>
-                            <li><strong>FREE Tokens:</strong> $100 worth of $Ember tokens loaded into your management system when service is activated</li>
-                            <li><strong>Launch Support:</strong> Full deployment with marketing materials, client training, and ongoing technical assistance</li>
-                            <li><strong>Revenue Generation:</strong> Start selling <span class="golden-highlight">premium GPS & Beacon crypto coin placements</span> and generating ROI immediately with our proven system</li>
-                        </ul>
+                        
+                        <div class="journey-cta">
+                            <a href="mailto:contact@vaultphoenix.com?subject=White-Label AR Crypto Solution&body=I'm interested in launching a location-based crypto marketing campaign. Please send me details about getting started." class="journey-cta-button" aria-label="Contact us to start your campaign">
+                                <div class="image-with-glow">
+                                    <img src="images/EmberCoin.png" alt="Start Campaign" class="journey-cta-icon-large" loading="lazy">
+                                </div>
+                                <span class="journey-cta-text">Book Your Demo</span>
+                            </a>
+                            <a href="#pricing" class="journey-secondary-link">
+                                View Pricing <span>→</span>
+                            </a>
+                        </div>
                     </div>
                     
-                    <div class="journey-path">
-                        <div class="path-header-enhanced">
-                            <div class="image-with-glow">
-                                <img src="images/IphoneVPLogo.PNG" alt="SDK" class="path-icon-enhanced" loading="lazy">
+                    <!-- Developer Path -->
+                    <div class="journey-path-module developer-path">
+                        <div class="journey-path-header">
+                            <div class="journey-icon-container">
+                                <div class="image-with-glow">
+                                    <img src="images/IphoneVPLogo.PNG" alt="Developer" class="journey-icon-large" loading="lazy">
+                                </div>
                             </div>
-                            <div class="path-header-text">
-                                <div class="path-category">Vault Phoenix SDK on GitHub</div>
-                                <h4 class="path-title">Developer Integration Platform</h4>
-                                <span class="path-badge sdk-badge-alt">Early 2026</span>
+                            <h3 class="journey-path-title">For Developers</h3>
+                            <p class="journey-path-subtitle">Build your own location-based crypto app with our SDK</p>
+                        </div>
+                        
+                        <div class="journey-steps">
+                            <div class="journey-step">
+                                <div class="journey-step-number">1</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Explore the SDK</h4>
+                                    <p class="journey-step-description">Browse documentation and code examples on GitHub</p>
+                                </div>
+                            </div>
+                            
+                            <div class="journey-step">
+                                <div class="journey-step-number">2</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Start Building</h4>
+                                    <p class="journey-step-description">Use our free tier to prototype and test your ideas</p>
+                                </div>
+                            </div>
+                            
+                            <div class="journey-step">
+                                <div class="journey-step-number">3</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Scale Your App</h4>
+                                    <p class="journey-step-description">Upgrade as you grow with flexible pricing tiers</p>
+                                </div>
                             </div>
                         </div>
-                        <ul class="path-steps-enhanced">
-                            <li><strong>SDK Download:</strong> Access our open-source SDK with GPS & Beacon integration from GitHub with comprehensive documentation</li>
-                            <li><strong>Integration:</strong> Integrate AR crypto gaming into your existing applications with developer-friendly tools</li>
-                            <li><strong>Management System:</strong> Connect to our managed infrastructure and analytics platform starting at <span class="golden-highlight">$49/month</span></li>
-                            <li><strong>FREE Tokens:</strong> $100 worth of $Ember tokens loaded into your management system when service is activated</li>
-                            <li><strong>Scale & Profit:</strong> Launch campaigns immediately with included tokens and grow your user base with proven monetization strategies</li>
-                        </ul>
+                        
+                        <div class="journey-cta">
+                            <a href="https://github.com/Vault-Phoenix-SDK" class="journey-cta-button" target="_blank" rel="noopener" aria-label="View SDK on GitHub">
+                                <svg width="45" height="45" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                </svg>
+                                <span class="journey-cta-text">View on GitHub</span>
+                            </a>
+                            <a href="#pricing" class="journey-secondary-link">
+                                See SDK Pricing <span>→</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
