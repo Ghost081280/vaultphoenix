@@ -703,6 +703,13 @@ body.main-page .main-cta-path-button {
     margin-top: auto;
 }
 
+@media (max-width: 768px) {
+    body.main-page .main-cta-path-button {
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+}
+
 @media (max-width: 768px) and (orientation: portrait) {
     body.main-page .main-cta-path-button {
         padding: 12px 20px !important;
@@ -712,6 +719,14 @@ body.main-page .main-cta-path-button {
     body.main-page .main-cta-path-button span {
         white-space: normal !important;
         line-height: 1.2 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-cta-path-button {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        white-space: normal;
     }
 }
 
@@ -744,127 +759,56 @@ body.main-page .main-developer-button:hover {
     box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
 }
 
-/* ✅ FIX #1: Hero Benefits Row - NO BORDER (yellow line removed) */
-body.main-page .main-hero-benefits-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xl);
-    margin-top: var(--space-2xl);
-    padding: var(--space-lg) var(--space-xl);
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: var(--radius-xl);
-    backdrop-filter: blur(20px);
-    border: none; /* ✅ FIX #1: REMOVED - this was the yellow line */
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(215, 51, 39, 0.5) transparent;
-}
-
-body.main-page .main-hero-benefits-row::-webkit-scrollbar {
-    height: 6px;
-}
-
-body.main-page .main-hero-benefits-row::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-}
-
-body.main-page .main-hero-benefits-row::-webkit-scrollbar-thumb {
-    background: rgba(215, 51, 39, 0.5);
-    border-radius: 10px;
-}
-
-body.main-page .main-hero-benefits-row::-webkit-scrollbar-thumb:hover {
-    background: rgba(215, 51, 39, 0.7);
-}
-
-body.main-page .main-hero-benefit-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.95);
-    transition: all var(--transition-base);
-    text-align: center;
-    white-space: nowrap;
-    min-width: 140px;
+body.main-page .main-cta-path-icon {
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
     flex-shrink: 0;
-    scroll-snap-align: center;
 }
 
-@media (max-width: 768px) and (orientation: portrait) {
-    body.main-page .main-hero-benefits-row {
-        padding: var(--space-sm) var(--space-md) !important;
-        gap: var(--space-md) !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        overflow-x: visible !important;
-    }
-    
-    body.main-page .main-hero-benefit-item {
-        flex: 0 1 calc(50% - 10px) !important;
-        min-width: 120px !important;
-        gap: 6px !important;
-        font-size: 0.8rem !important;
-    }
-    
-    body.main-page .main-benefit-icon-small {
-        width: 45px !important;
-        height: 45px !important;
+@media (max-width: 480px) {
+    body.main-page .main-cta-path-icon {
+        width: 32px !important;
+        height: 32px !important;
     }
 }
 
-body.main-page .main-hero-benefit-item:hover {
-    transform: translateY(-2px);
+body.main-page .main-cta-github-icon-inline {
+    flex-shrink: 0;
+}
+
+/* Secondary CTA */
+body.main-page .main-hero-secondary-cta {
+    text-align: center;
+    margin-top: var(--space-md);
+}
+
+body.main-page .main-secondary-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all var(--transition-base);
+    padding: var(--space-xs) 16px;
+    border-radius: var(--radius-sm);
+}
+
+body.main-page .main-secondary-cta-link:hover {
     color: var(--ember-yellow);
+    transform: translateX(5px);
+    background: rgba(240, 165, 0, 0.1);
 }
 
-body.main-page .main-hero-benefit-item:hover .main-benefit-icon-small {
-    transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.6)) 
-            drop-shadow(0 0 22px rgba(240, 165, 0, 0.35));
+body.main-page .main-secondary-cta-link svg {
+    transition: transform var(--transition-base);
 }
 
-/* Fade In Stagger Utility */
-body.main-page .main-fade-in {
-    animation: ember-fadeIn 0.6s ease-out forwards;
-}
-
-body.main-page .main-fade-in.stagger-1 {
-    animation-delay: 0.1s;
-    opacity: 0;
-}
-
-body.main-page .main-fade-in.stagger-2 {
-    animation-delay: 0.2s;
-    opacity: 0;
-}
-
-body.main-page .main-fade-in.stagger-3 {
-    animation-delay: 0.3s;
-    opacity: 0;
-}
-
-body.main-page .main-fade-in.stagger-4 {
-    animation-delay: 0.4s;
-    opacity: 0;
-}
-
-@keyframes ember-fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+body.main-page .main-secondary-cta-link:hover svg {
+    transform: translateX(3px);
 }
 
 /* ============================================
