@@ -100,7 +100,7 @@ body.main-page {
     transition: opacity var(--ember-transition-slow);
 }
 
-body.main-page.loaded {
+body.main-page.main-loaded {
     opacity: 1;
 }
 
