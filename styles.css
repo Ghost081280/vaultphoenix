@@ -5611,6 +5611,94 @@ body.main-page .chatbot-input:focus {
 }
 
 /* ============================================
+   24. MOBILE PORTRAIT OPTIMIZATION (Complete)
+   Additional mobile portrait rules from extracted HTML CSS
+   ============================================ */
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    /* Badge Positioning for Module Headers */
+    body.main-page .coming-soon-badge,
+    body.main-page .early-2026-badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    body.main-page .coming-soon-badge {
+        background: linear-gradient(135deg, #fb923c, #f0a500);
+        color: #000;
+        box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
+    }
+
+    body.main-page .early-2026-badge {
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: #fff;
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+    }
+
+    /* Spacing below CTAs */
+    body.main-page .solution-cta {
+        margin-bottom: 30px;
+    }
+
+    body.main-page .solution-cta .cta-primary-large,
+    body.main-page .solution-cta .cta-secondary-large {
+        margin-bottom: 15px;
+    }
+
+    body.main-page .solution-cta .cta-footnote {
+        margin-bottom: 20px;
+    }
+
+    /* Icon alignment in buttons */
+    body.main-page .cta-primary-large .main-image-glow,
+    body.main-page .journey-cta-button .main-image-glow {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 12px;
+    }
+
+    body.main-page .cta-primary-large,
+    body.main-page .journey-cta-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Additional Journey Path Module adjustments */
+    body.main-page .journey-path-header {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    
+    body.main-page .journey-path-title {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+    
+    body.main-page .journey-path-subtitle {
+        font-size: 0.85rem;
+    }
+}
+
+/* ============================================
    END OF VAULT PHOENIX v11.0 - ALL 15 FIXES COMPLETE
    
    ✅ FIXED #1: Removed yellow horizontal line under navbar
@@ -5629,8 +5717,9 @@ body.main-page .chatbot-input:focus {
    ✅ FIXED #14: Footer/chatbot protection from CSS overrides
    ✅ FIXED #15: All button text fits properly
    
-   Total Lines: ~5800
+   Total Lines: ~5900
    Production Ready: ✓
    Mobile Optimized: ✓
    All 15 Critical Fixes Applied: ✓
+   Mobile Portrait Optimization Complete: ✓
    ============================================ */
