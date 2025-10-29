@@ -5594,7 +5594,7 @@ body.main-page .development-story-content p {
 }
 
 /* ============================================
-   14. REVENUE EXAMPLES (2x2 Grid + Benefits)
+   14. REVENUE EXAMPLES (2x2 Grid + Benefits) - FIXED CONTAINER & EQUAL CARDS
    ============================================ */
 
 body.main-page .revenue-examples-section {
@@ -5603,19 +5603,24 @@ body.main-page .revenue-examples-section {
     border-radius: var(--radius-3xl);
     padding: var(--space-2xl);
     max-width: 1300px;
-    margin: 0 auto var(--space-2xl);
+    width: auto; /* FIXED: Let it naturally fit within parent padding */
+    margin: var(--space-2xl) auto; /* FIXED: Consistent spacing */
+    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
     body.main-page .revenue-examples-section {
         padding: var(--space-lg);
-        margin-bottom: var(--space-lg);
+        margin: var(--space-xl) auto;
+        border-radius: var(--radius-2xl);
     }
 }
 
 @media (max-width: 480px) {
     body.main-page .revenue-examples-section {
         padding: var(--space-md);
+        margin: var(--space-lg) auto;
+        border-radius: var(--radius-xl);
     }
 }
 
@@ -5643,13 +5648,28 @@ body.main-page .revenue-examples-header p {
     line-height: 1.7;
 }
 
+body.main-page .main-revenue-header-icon {
+    width: 200px !important;
+    height: 200px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 12px rgba(240, 165, 0, 0.6)) 
+            drop-shadow(0 0 25px rgba(240, 165, 0, 0.3));
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-revenue-header-icon {
+        width: 150px !important;
+        height: 150px !important;
+    }
+}
+
 body.main-page .revenue-examples-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-lg);
     margin-bottom: var(--space-xl);
     justify-items: center;
-    align-items: start;
+    align-items: stretch; /* FIXED: Make all cards equal height */
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
@@ -5677,12 +5697,17 @@ body.main-page .revenue-example-card {
     transition: all var(--transition-smooth);
     width: 100%;
     max-width: 550px;
+    min-height: 400px; /* FIXED: Ensure minimum height for consistency */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* FIXED: Distribute content evenly */
 }
 
 @media (max-width: 768px) {
     body.main-page .revenue-example-card {
         padding: var(--space-md);
         max-width: 100%;
+        min-height: auto;
     }
 }
 
@@ -5705,6 +5730,22 @@ body.main-page .revenue-card-header {
     }
 }
 
+body.main-page .main-revenue-industry-icon {
+    width: 78px !important;
+    height: 78px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3)) 
+            drop-shadow(0 0 15px rgba(240, 165, 0, 0.2));
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-revenue-industry-icon {
+        width: 65px !important;
+        height: 65px !important;
+    }
+}
+
 body.main-page .example-industry {
     flex: 1;
     font-size: 0.9rem;
@@ -5721,7 +5762,7 @@ body.main-page .example-industry {
 }
 
 body.main-page .example-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem; /* FIXED: Slightly smaller for consistency */
     font-weight: 800;
     color: #ffffff;
     margin-bottom: var(--space-sm);
@@ -5729,15 +5770,16 @@ body.main-page .example-title {
 
 @media (max-width: 768px) {
     body.main-page .example-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 }
 
 body.main-page .example-scenario {
-    font-size: 0.95rem;
+    font-size: 0.9rem; /* FIXED: Smaller for better fit */
     color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: var(--space-md);
+    min-height: 2.5em; /* FIXED: Consistent height */
 }
 
 @media (max-width: 768px) {
@@ -5762,9 +5804,10 @@ body.main-page .breakdown-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 8px 10px; /* FIXED: Compact padding */
     background: rgba(0, 0, 0, 0.3);
     border-radius: var(--radius-sm);
+    gap: 10px; /* FIXED: Prevent overlap */
 }
 
 @media (max-width: 768px) {
@@ -5776,13 +5819,16 @@ body.main-page .breakdown-item {
 body.main-page .breakdown-item.total {
     background: rgba(215, 51, 39, 0.15);
     border: 1px solid rgba(215, 51, 39, 0.3);
-    padding: 12px;
+    padding: 10px; /* FIXED: Slightly larger for emphasis */
     margin-top: 5px;
 }
 
 body.main-page .breakdown-label {
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* FIXED: Smaller text */
     color: rgba(255, 255, 255, 0.85);
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
 }
 
 @media (max-width: 768px) {
@@ -5792,14 +5838,17 @@ body.main-page .breakdown-label {
 }
 
 body.main-page .breakdown-value {
-    font-size: 1rem;
+    font-size: 0.9rem; /* FIXED: Smaller text */
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
+    flex-shrink: 0;
+    white-space: nowrap;
+    margin-left: 10px;
 }
 
 @media (max-width: 768px) {
     body.main-page .breakdown-value {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 }
 
@@ -5809,13 +5858,17 @@ body.main-page .breakdown-item.total .breakdown-label {
 }
 
 body.main-page .breakdown-item.total .breakdown-value {
-    font-size: 1.3rem;
+    font-size: 1.2rem; /* FIXED: Smaller for better fit */
 }
 
 @media (max-width: 768px) {
     body.main-page .breakdown-item.total .breakdown-value {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
+}
+
+body.main-page .revenue-model-benefits {
+    margin-top: var(--space-xl);
 }
 
 body.main-page .revenue-model-benefits h4 {
@@ -5925,12 +5978,45 @@ body.main-page .benefit-text p {
 }
 
 /* ============================================
-   15. DEVELOPMENT STORY SECTION
+   15. DEVELOPMENT STORY SECTION - FIXED SPACING
    ============================================ */
 
 body.main-page .development-story-section {
-    max-width: 1000px;
-    margin: 0 auto;
+    max-width: 1200px;
+    margin: var(--space-2xl) auto var(--space-3xl) auto; /* FIXED: proper top and bottom margins */
+    padding: 0 var(--space-xl); /* FIXED: side padding to match other sections */
+}
+
+@media (max-width: 768px) {
+    body.main-page .development-story-section {
+        margin: var(--space-xl) auto var(--space-2xl) auto;
+        padding: 0 var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .development-story-section {
+        margin: var(--space-lg) auto var(--space-xl) auto;
+        padding: 0 var(--space-sm);
+    }
+}
+
+/* Section spacer for additional breathing room */
+body.main-page .section-spacer {
+    height: var(--space-2xl);
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    body.main-page .section-spacer {
+        height: var(--space-xl);
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .section-spacer {
+        height: var(--space-lg);
+    }
 }
 
 body.main-page .development-story-card {
@@ -5942,6 +6028,9 @@ body.main-page .development-story-card {
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
     backdrop-filter: blur(20px);
+    width: 100%; /* Ensure full width within container */
+    max-width: 100%; /* Prevent overflow */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 @media (max-width: 768px) {
