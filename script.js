@@ -403,62 +403,81 @@ const VaultPhoenix = (function() {
      * @param {string} imageSrc - Image source URL
      * @param {string} title - Image title/alt text
      */
-    function changePhoneImage(imageSrc, title) {
-        const mainImg = DOMCache.mainScreenshot;
-        const thumbs = safeQueryAll('.simple-thumb');
-        
-        if (!mainImg) return;
-        
-        // Optimize animation
-        optimizeAnimation(mainImg, 'opacity', 300);
-        mainImg.style.opacity = '0.7';
-        
-        setTimeout(() => {
-            mainImg.src = imageSrc;
-            mainImg.alt = title;
-            mainImg.style.opacity = '1';
-        }, 150);
-        
-        // Update active states
-        thumbs.forEach(thumb => {
-            thumb.classList.remove('active');
-            const thumbImg = thumb.querySelector('img');
-            if (thumbImg && thumbImg.src.includes(imageSrc.split('/').pop())) {
-                thumb.classList.add('active');
-            }
-        });
-    }
+    // Replace the changePhoneImage function (around line 380)
+function changePhoneImage(imageSrc, title) {
+    const mainImg = DOMCache.mainScreenshot || safeQuery('#mainScreenshot');
+    const thumbs = safeQueryAll('.simple-thumb');
     
-    /**
-     * Change main laptop gallery image
-     * @param {string} imageSrc - Image source URL
-     * @param {string} title - Image title/alt text
-     */
-    function changeLaptopImage(imageSrc, title) {
-        const mainImg = DOMCache.mainLaptopScreenshot;
-        const thumbs = safeQueryAll('.simple-thumb-laptop');
-        
-        if (!mainImg) return;
-        
-        // Optimize animation
-        optimizeAnimation(mainImg, 'opacity', 300);
-        mainImg.style.opacity = '0.7';
-        
-        setTimeout(() => {
-            mainImg.src = imageSrc;
-            mainImg.alt = title;
-            mainImg.style.opacity = '1';
-        }, 150);
-        
-        // Update active states
-        thumbs.forEach(thumb => {
-            thumb.classList.remove('active');
-            const thumbImg = thumb.querySelector('img');
-            if (thumbImg && thumbImg.src.includes(imageSrc.split('/').pop())) {
-                thumb.classList.add('active');
-            }
-        });
-    }
+    if (!mainImg) return;
+    
+    // Ensure proper sizing before transition
+    mainImg.style.width = '100%';
+    mainImg.style.height = '100%';
+    mainImg.style.objectFit = 'cover';
+    mainImg.style.objectPosition = 'center top';
+    
+    // Optimize animation
+    optimizeAnimation(mainImg, 'opacity', 300);
+    mainImg.style.opacity = '0.7';
+    
+    setTimeout(() => {
+        mainImg.src = imageSrc;
+        mainImg.alt = title;
+        mainImg.style.opacity = '1';
+        // Ensure sizing persists after image change
+        mainImg.style.width = '100%';
+        mainImg.style.height = '100%';
+        mainImg.style.objectFit = 'cover';
+        mainImg.style.objectPosition = 'center top';
+    }, 150);
+    
+    // Update active states
+    thumbs.forEach(thumb => {
+        thumb.classList.remove('active');
+        const thumbImg = thumb.querySelector('img');
+        if (thumbImg && thumbImg.src.includes(imageSrc.split('/').pop())) {
+            thumb.classList.add('active');
+        }
+    });
+}
+
+// Replace the changeLaptopImage function (around line 420)
+function changeLaptopImage(imageSrc, title) {
+    const mainImg = DOMCache.mainLaptopScreenshot || safeQuery('#mainLaptopScreenshot');
+    const thumbs = safeQueryAll('.simple-thumb-laptop');
+    
+    if (!mainImg) return;
+    
+    // Ensure proper sizing before transition
+    mainImg.style.width = '100%';
+    mainImg.style.height = '100%';
+    mainImg.style.objectFit = 'cover';
+    mainImg.style.objectPosition = 'center top';
+    
+    // Optimize animation
+    optimizeAnimation(mainImg, 'opacity', 300);
+    mainImg.style.opacity = '0.7';
+    
+    setTimeout(() => {
+        mainImg.src = imageSrc;
+        mainImg.alt = title;
+        mainImg.style.opacity = '1';
+        // Ensure sizing persists after image change
+        mainImg.style.width = '100%';
+        mainImg.style.height = '100%';
+        mainImg.style.objectFit = 'cover';
+        mainImg.style.objectPosition = 'center top';
+    }, 150);
+    
+    // Update active states
+    thumbs.forEach(thumb => {
+        thumb.classList.remove('active');
+        const thumbImg = thumb.querySelector('img');
+        if (thumbImg && thumbImg.src.includes(imageSrc.split('/').pop())) {
+            thumb.classList.add('active');
+        }
+    });
+}
     
     /**
      * Auto-rotate phone gallery
