@@ -1,9 +1,18 @@
 /* ============================================
-   VAULT PHOENIX - MAIN PAGE STYLESHEET v14.1
-   YELLOW LINE FIX - COMPLETE SECTION
+   VAULT PHOENIX - MAIN PAGE STYLESHEET v14.0
+   ALL 10 CRITICAL BUG FIXES PROPERLY APPLIED
    
-   This section removes ALL potential yellow/golden lines
-   Lines 260 - 1150 (Complete from body base through benefits row)
+   CHANGELOG v14.0:
+   ✅ FIX #1: Yellow horizontal line REMOVED (.main-hero-benefits-row border removed)
+   ✅ FIX #2: Pricing modules (whitelabel-solution & sdk-solution) COMPACT on mobile portrait
+   ✅ FIX #3: Phone frame VISIBLE on mobile + GLOW on frame + ANIMATION on frame
+   ✅ FIX #4: Phone screenshots fit perfectly (object-fit: cover)
+   ✅ FIX #5: Laptop FULL FRAME with keyboard base + images fit perfectly
+   ✅ FIX #6: Popular badge floats ABOVE Growth tier (z-index: 100, overflow: visible)
+   ✅ FIX #7: Chatbot input glow RESTORED (no overrides to shared-styles.css)
+   ✅ FIX #8: Player-facing phone frame SMALLER (320px desktop, 260px mobile)
+   ✅ FIX #9: Management laptop frame SMALLER (600px desktop, 450px mobile)
+   ✅ FIX #10: All sizing optimizations applied
    ============================================ */
 
 /* ============================================
@@ -96,42 +105,10 @@ body.main-page {
     transition: opacity var(--transition-smooth);
     min-height: 100vh;
     position: relative;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
 }
 
 body.main-page.loaded {
     opacity: 1;
-}
-
-/* ✅ CRITICAL FIX - Remove ALL potential yellow/golden borders */
-body.main-page *,
-body.main-page *::before,
-body.main-page *::after {
-    box-sizing: border-box;
-}
-
-/* Remove any accidental golden borders globally */
-body.main-page * {
-    border-color: transparent;
-}
-
-/* Restore intentional borders only where explicitly needed */
-body.main-page .feature-card,
-body.main-page .use-case-card,
-body.main-page .technology-card,
-body.main-page .pricing-solution,
-body.main-page .revenue-example-card,
-body.main-page .main-cta-path,
-body.main-page .main-step-premium {
-    border-color: rgba(215, 51, 39, 0.3);
-}
-
-body.main-page .sdk-solution,
-body.main-page .technology-card.beacon-card,
-body.main-page .main-cta-path.main-developer-path {
-    border-color: rgba(99, 102, 241, 0.3);
 }
 
 /* ============================================
@@ -266,7 +243,20 @@ body.main-page .module-content {
 }
 
 /* ============================================
-   5. HERO SECTION - REBUILT WITH NO YELLOW LINES
+   VAULT PHOENIX - HERO SECTION REBUILD v15.0
+   MOBILE-FIRST RESPONSIVE DESIGN
+   
+   FIXES:
+   - Proper mobile stacking (no overflow)
+   - CSS Grid for better control
+   - Responsive 3-step cards
+   - Compact dual CTA paths
+   - Benefits row mobile optimization
+   - Coming Soon/Early 2026 modules proper spacing
+   ============================================ */
+
+/* ============================================
+   5. HERO SECTION - REBUILT
    ============================================ */
 
 body.main-page .main-hero {
@@ -278,9 +268,6 @@ body.main-page .main-hero {
     justify-content: center;
     overflow: hidden;
     padding: 160px 20px 80px;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
 }
 
 @media (max-width: 768px) {
@@ -331,8 +318,6 @@ body.main-page .main-hero-content {
     color: white;
     z-index: var(--z-content);
     position: relative;
-    border: none !important;
-    outline: none !important;
 }
 
 /* ============================================
@@ -341,8 +326,6 @@ body.main-page .main-hero-content {
 
 body.main-page .main-hero-header {
     margin-bottom: 50px;
-    border: none !important;
-    outline: none !important;
 }
 
 @media (max-width: 768px) {
@@ -412,7 +395,682 @@ body.main-page .golden-highlight {
 }
 
 /* ============================================
-   BENEFITS ROW - NO YELLOW LINE FIX
+   3-STEP PROCESS - REBUILT WITH CSS GRID
+   ============================================ */
+
+body.main-page .main-hero-steps-premium {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    justify-items: center;
+    margin: 50px auto;
+    max-width: 1200px;
+}
+
+/* TABLET: Stack with arrows between */
+@media (max-width: 1024px) {
+    body.main-page .main-hero-steps-premium {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto;
+        gap: 20px;
+        max-width: 500px;
+    }
+}
+
+/* MOBILE: Tighter spacing */
+@media (max-width: 768px) {
+    body.main-page .main-hero-steps-premium {
+        gap: 15px;
+        margin: 35px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-hero-steps-premium {
+        gap: 12px;
+        margin: 25px auto;
+    }
+}
+
+/* Step Cards */
+body.main-page .main-step-premium {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: 30px 20px;
+    backdrop-filter: blur(20px);
+    transition: all var(--transition-smooth);
+    width: 100%;
+    max-width: 350px;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-step-premium {
+        padding: 25px 18px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-step-premium {
+        padding: 20px 15px;
+    }
+}
+
+body.main-page .main-step-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--ember-gradient-primary);
+}
+
+body.main-page .main-step-premium:hover {
+    transform: translateY(-8px);
+    border-color: rgba(215, 51, 39, 0.6);
+    box-shadow: var(--ember-shadow-md);
+    background: var(--ember-gradient-card-hover);
+}
+
+@media (max-width: 1024px) {
+    body.main-page .main-step-premium:hover {
+        transform: translateY(-5px);
+    }
+}
+
+body.main-page .main-step-visual {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-step-visual {
+        width: 95px;
+        height: 95px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-step-visual {
+        width: 85px;
+        height: 85px;
+        margin-bottom: 12px;
+    }
+}
+
+body.main-page .main-step-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.4)) 
+            drop-shadow(0 0 25px rgba(240, 165, 0, 0.25));
+    transition: all var(--transition-base);
+}
+
+body.main-page .main-step-premium:hover .main-step-image {
+    transform: scale(1.1);
+    filter: drop-shadow(0 6px 20px rgba(240, 165, 0, 0.6)) 
+            drop-shadow(0 0 35px rgba(240, 165, 0, 0.35));
+}
+
+body.main-page .main-step-number-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 48px;
+    height: 48px;
+    background: var(--ember-gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: white;
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    z-index: var(--z-content);
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-step-number-badge {
+        width: 42px;
+        height: 42px;
+        font-size: 1.15rem;
+        top: 6px;
+        right: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-step-number-badge {
+        width: 38px;
+        height: 38px;
+        font-size: 1.05rem;
+    }
+}
+
+body.main-page .main-step-content {
+    text-align: center;
+}
+
+body.main-page .main-step-title-premium {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-step-title-premium {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-step-title-premium {
+        font-size: 1.1rem;
+    }
+}
+
+body.main-page .main-step-description-premium {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-step-description-premium {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-step-description-premium {
+        font-size: 0.85rem;
+    }
+}
+
+/* Arrow Wrapper - Responsive */
+body.main-page .main-step-arrow-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* DESKTOP: Horizontal arrows */
+@media (min-width: 1025px) {
+    body.main-page .main-step-arrow-wrapper {
+        width: 60px;
+    }
+}
+
+/* TABLET/MOBILE: Vertical arrows (rotated) */
+@media (max-width: 1024px) {
+    body.main-page .main-step-arrow-wrapper {
+        height: 40px;
+        width: 100%;
+    }
+}
+
+body.main-page .main-step-arrow {
+    font-size: 2.2rem;
+    color: var(--ember-yellow);
+    font-weight: 900;
+    text-shadow: 0 2px 8px rgba(240, 165, 0, 0.4);
+    animation: ember-arrowPulse 2s ease-in-out infinite;
+    transition: transform var(--transition-base);
+}
+
+@media (max-width: 1024px) {
+    body.main-page .main-step-arrow {
+        transform: rotate(90deg);
+    }
+    
+    @keyframes ember-arrowPulse {
+        0%, 100% { 
+            transform: scale(1) rotate(90deg); 
+            opacity: 0.8; 
+        }
+        50% { 
+            transform: scale(1.2) rotate(90deg); 
+            opacity: 1; 
+        }
+    }
+}
+
+@media (min-width: 1025px) {
+    @keyframes ember-arrowPulse {
+        0%, 100% { 
+            transform: scale(1); 
+            opacity: 0.8; 
+        }
+        50% { 
+            transform: scale(1.2); 
+            opacity: 1; 
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-step-arrow {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-step-arrow {
+        font-size: 1.7rem;
+    }
+}
+
+/* ============================================
+   DUAL PATH CTAs - REBUILT
+   ============================================ */
+
+body.main-page .main-hero-dual-ctas {
+    margin: 60px 0 50px;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-hero-dual-ctas {
+        margin: 40px 0 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-hero-dual-ctas {
+        margin: 30px 0 25px;
+    }
+}
+
+body.main-page .main-cta-path-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto 20px;
+}
+
+@media (max-width: 1024px) {
+    body.main-page .main-cta-path-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-cta-path-container {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-cta-path-container {
+        gap: 15px;
+    }
+}
+
+body.main-page .main-cta-path {
+    background: var(--ember-gradient-card);
+    border: 3px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: 30px 25px;
+    backdrop-filter: blur(20px);
+    transition: all var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-cta-path {
+        padding: 25px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-cta-path {
+        padding: 20px 15px;
+    }
+}
+
+body.main-page .main-cta-path::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--ember-gradient-primary);
+}
+
+body.main-page .main-cta-path.main-developer-path::before {
+    background: var(--ember-gradient-secondary);
+}
+
+body.main-page .main-cta-path:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--ember-shadow-md);
+    border-color: rgba(215, 51, 39, 0.5);
+}
+
+body.main-page .main-cta-path.main-developer-path {
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+body.main-page .main-cta-path.main-developer-path:hover {
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 25px 60px rgba(99, 102, 241, 0.3);
+}
+
+body.main-page .main-path-badge {
+    display: inline-block;
+    background: var(--ember-gradient-primary);
+    color: white;
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    box-shadow: var(--ember-shadow-sm);
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-path-badge {
+        font-size: 0.65rem;
+        padding: 4px 12px;
+        margin-bottom: 10px;
+    }
+}
+
+body.main-page .main-developer-path .main-path-badge {
+    background: var(--ember-gradient-secondary);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+/* COMPACT LAYOUT - Always vertical on mobile */
+body.main-page .main-cta-compact-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-cta-compact-layout {
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-cta-compact-layout {
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+}
+
+body.main-page .main-cta-image-wrapper {
+    flex-shrink: 0;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-cta-image-wrapper {
+        width: 65px;
+        height: 65px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-cta-image-wrapper {
+        width: 55px;
+        height: 55px;
+    }
+}
+
+body.main-page .main-cta-path-icon-compact {
+    width: 75px !important;
+    height: 75px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-cta-path-icon-compact {
+        width: 65px !important;
+        height: 65px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-cta-path-icon-compact {
+        width: 55px !important;
+        height: 55px !important;
+    }
+}
+
+body.main-page .main-cta-github-icon-compact {
+    width: 75px;
+    height: 75px;
+    color: rgba(255, 255, 255, 0.9);
+    filter: drop-shadow(0 3px 6px rgba(99, 102, 241, 0.3));
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-cta-github-icon-compact {
+        width: 65px;
+        height: 65px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-cta-github-icon-compact {
+        width: 55px;
+        height: 55px;
+    }
+}
+
+body.main-page .main-cta-text-content {
+    flex: 1;
+    min-width: 0;
+}
+
+body.main-page .main-path-title-compact {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-path-title-compact {
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-path-title-compact {
+        font-size: 1.1rem;
+    }
+}
+
+body.main-page .main-path-description-compact {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-path-description-compact {
+        font-size: 0.85rem;
+        line-height: 1.45;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-path-description-compact {
+        font-size: 0.8rem;
+    }
+}
+
+body.main-page .main-cta-path-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: var(--ember-gradient-primary);
+    color: white;
+    padding: 15px 24px;
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all var(--transition-smooth);
+    box-shadow: 0 10px 30px rgba(215, 51, 39, 0.4);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-cta-path-button {
+        padding: 13px 20px;
+        font-size: 0.95rem;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-cta-path-button {
+        padding: 11px 18px;
+        font-size: 0.9rem;
+    }
+}
+
+body.main-page .main-cta-path-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+body.main-page .main-cta-path-button:hover::before {
+    left: 100%;
+}
+
+body.main-page .main-cta-path-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
+}
+
+body.main-page .main-developer-button {
+    background: var(--ember-gradient-secondary);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+body.main-page .main-developer-button:hover {
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+}
+
+body.main-page .main-cta-path-icon {
+    width: 28px !important;
+    height: 28px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-cta-path-icon {
+        width: 24px !important;
+        height: 24px !important;
+    }
+}
+
+body.main-page .main-cta-github-icon-inline {
+    flex-shrink: 0;
+}
+
+/* Secondary CTA */
+body.main-page .main-hero-secondary-cta {
+    text-align: center;
+    margin-top: 15px;
+}
+
+body.main-page .main-secondary-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    transition: all var(--transition-base);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-secondary-cta-link {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .main-secondary-cta-link {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+}
+
+body.main-page .main-secondary-cta-link:hover {
+    color: var(--ember-yellow);
+    transform: translateX(5px);
+    background: rgba(240, 165, 0, 0.1);
+}
+
+body.main-page .main-secondary-cta-link svg {
+    transition: transform var(--transition-base);
+}
+
+body.main-page .main-secondary-cta-link:hover svg {
+    transform: translateX(3px);
+}
+
+/* ============================================
+   BENEFITS ROW - REBUILT FOR MOBILE
    ============================================ */
 
 body.main-page .main-hero-benefits-row {
@@ -424,9 +1082,7 @@ body.main-page .main-hero-benefits-row {
     background: rgba(0, 0, 0, 0.3);
     border-radius: var(--radius-xl);
     backdrop-filter: blur(20px);
-    border: none !important; /* ✅ CRITICAL - NO BORDER */
-    outline: none !important;
-    box-shadow: none !important;
+    border: none;
     max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
@@ -470,7 +1126,6 @@ body.main-page .main-hero-benefit-item {
     transition: all var(--transition-base);
     text-align: center;
     padding: 8px;
-    border: none !important; /* ✅ NO BORDER */
 }
 
 @media (max-width: 768px) {
@@ -1317,7 +1972,8 @@ body.main-page .social-share-text-compact {
 
 /* ============================================
    8. CRYPTO COIN SECTION (GPS & Beacon)
-   ✅ GLOW EFFECT FIXED: Works on desktop AND mobile
+   ✅ FIX #3: Phone frame visible on mobile + glow + animation
+   ✅ FIX #4: Phone screenshots fit perfectly
    ============================================ */
 
 body.main-page .crypto-coin-section {
@@ -1329,13 +1985,13 @@ body.main-page .crypto-coin-section {
 
 @media (max-width: 768px) {
     body.main-page .crypto-coin-section {
-        padding: 60px 20px;
+        padding: 60px 10px;
     }
 }
 
 @media (max-width: 480px) {
     body.main-page .crypto-coin-section {
-        padding: 50px 15px;
+        padding: 50px 10px;
     }
 }
 
@@ -1350,7 +2006,6 @@ body.main-page .crypto-coin-section::before {
         radial-gradient(circle at 30% 30%, rgba(215, 51, 39, 0.2) 0%, transparent 50%),
         radial-gradient(circle at 70% 70%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
     pointer-events: none;
-    z-index: 0;
 }
 
 body.main-page .crypto-content {
@@ -1361,7 +2016,7 @@ body.main-page .crypto-content {
     gap: var(--space-2xl);
     align-items: center;
     position: relative;
-    z-index: 1;
+    z-index: var(--z-content);
 }
 
 @media (max-width: 1024px) {
@@ -1371,49 +2026,14 @@ body.main-page .crypto-content {
     }
 }
 
-/* ✅ CRITICAL: Force image column to show on mobile with proper stacking */
 body.main-page .crypto-image {
-    display: flex !important;
+    display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    min-height: 200px;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: relative;
-    z-index: 2;
-    isolation: isolate;
 }
 
-/* ✅ On mobile, show image FIRST (before text) */
-@media (max-width: 1024px) {
-    body.main-page .crypto-image {
-        order: -1;
-        margin-bottom: 40px;
-    }
-    
-    body.main-page .crypto-text {
-        order: 1;
-    }
-}
-
-@media (max-width: 768px) {
-    body.main-page .crypto-image {
-        margin-bottom: 30px;
-        min-height: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    body.main-page .crypto-image {
-        margin-bottom: 25px;
-        min-height: 250px;
-    }
-}
-
-/* ✅ Phone frame styling with proper visibility */
+/* ✅ FIX #3: Phone frame - GLOW on frame, ANIMATION on frame, visible on mobile */
 body.main-page .crypto-coin-phone-frame {
-    width: 100%;
     max-width: 380px;
     margin: 0 auto;
     padding: 12px;
@@ -1423,15 +2043,15 @@ body.main-page .crypto-coin-phone-frame {
         0 20px 60px rgba(0, 0, 0, 0.5),
         0 0 0 3px rgba(215, 51, 39, 0.3);
     position: relative;
-    animation: ember-coinFloat 4s ease-in-out infinite;
     display: block !important;
     visibility: visible !important;
-    opacity: 1 !important;
-    z-index: 2;
-    isolation: isolate;
+    /* ✅ Animation on FRAME */
+    animation: ember-coinFloat 4s ease-in-out infinite;
+    /* ✅ Glow on FRAME */
+    filter: drop-shadow(0 10px 40px rgba(240, 165, 0, 0.6)) 
+            drop-shadow(0 0 60px rgba(240, 165, 0, 0.4));
 }
 
-/* ✅ NOTCH at top of phone */
 body.main-page .crypto-coin-phone-frame::before {
     content: '';
     position: absolute;
@@ -1442,135 +2062,56 @@ body.main-page .crypto-coin-phone-frame::before {
     height: 4px;
     background: #333;
     border-radius: 2px;
-    z-index: 10;
 }
 
-/* ✅ GLOW EFFECT - This is the key fix */
-body.main-page .crypto-coin-phone-frame::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(240, 165, 0, 0.7) 0%, 
-        rgba(251, 146, 60, 0.5) 15%, 
-        rgba(215, 51, 39, 0.3) 30%,
-        transparent 60%
-    );
-    border-radius: 50%;
-    z-index: -1;
-    filter: blur(30px);
-    opacity: 0.9;
-    pointer-events: none;
-    animation: ember-glowPulse 3s ease-in-out infinite;
-    will-change: opacity, transform;
-}
-
-/* ✅ Pulsing animation for glow */
-@keyframes ember-glowPulse {
-    0%, 100% {
-        opacity: 0.9;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.08);
-    }
-}
-
-/* ✅ Responsive phone frame sizing */
-@media (max-width: 768px) {
-    body.main-page .crypto-coin-phone-frame {
-        max-width: 320px;
-        padding: 10px;
-        border-radius: 32px;
-    }
-    
-    body.main-page .crypto-coin-phone-frame::after {
-        width: 125%;
-        height: 125%;
-        filter: blur(25px);
-        opacity: 0.95;
-    }
-}
-
-@media (max-width: 480px) {
-    body.main-page .crypto-coin-phone-frame {
-        max-width: 280px;
-        padding: 8px;
-        border-radius: 30px;
-    }
-    
-    body.main-page .crypto-coin-phone-frame::after {
-        width: 130%;
-        height: 130%;
-        filter: blur(22px);
-        opacity: 1;
-    }
-}
-
-/* ✅ Screen wrapper */
 body.main-page .crypto-coin-screen-wrapper {
     border-radius: 25px;
     overflow: hidden;
     background: #000;
     aspect-ratio: 9 / 16;
     position: relative;
-    width: 100%;
-    display: block !important;
-    visibility: visible !important;
-    z-index: 1;
 }
 
 @media (max-width: 768px) {
-    body.main-page .crypto-coin-screen-wrapper {
-        border-radius: 22px;
+    body.main-page .crypto-coin-phone-frame {
+        max-width: 280px !important;
+        padding: 10px !important;
+        border-radius: 30px;
+        display: block !important; /* ✅ FORCE VISIBLE */
+        visibility: visible !important;
+        opacity: 1 !important;
     }
-}
-
-@media (max-width: 480px) {
+    
     body.main-page .crypto-coin-screen-wrapper {
         border-radius: 20px;
     }
+    
+    body.main-page .crypto-image {
+        display: flex !important;
+        justify-content: center !important;
+    }
 }
 
-/* ✅ Image inside phone with perfect fit */
+/* ✅ FIX #4: Image fits perfectly - NO animation, NO glow on image */
 body.main-page .phoenix-coin-image {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center top !important;
-    display: block !important;
-    transform: scale(1.02);
-    visibility: visible !important;
-    opacity: 1 !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ✅ FIX #4: CHANGED from contain */
+    object-position: center top; /* ✅ FIX #4: ADDED */
+    display: block;
+    /* ✅ Perfect fit */
+    transform: scale(1.02); /* ✅ FIX #4: ADJUSTED for perfect fit */
+    /* ✅ NO animation on image */
+    /* ✅ NO filter/glow on image */
 }
 
-/* ✅ Float animation for phone */
-@keyframes ember-coinFloat {
-    0%, 100% { 
-        transform: translateY(0px) rotate(0deg); 
-    }
-    50% { 
-        transform: translateY(-15px) rotate(1deg); 
-    }
-}
-
-/* Text column */
 body.main-page .crypto-text {
     padding: var(--space-lg);
-    position: relative;
-    z-index: 1;
 }
 
 @media (max-width: 768px) {
     body.main-page .crypto-text {
-        padding: 0;
-        text-align: center;
+        padding: var(--space-md);
     }
 }
 
@@ -1611,12 +2152,6 @@ body.main-page .crypto-benefit {
     display: flex;
     align-items: flex-start;
     gap: var(--space-md);
-}
-
-@media (max-width: 768px) {
-    body.main-page .crypto-benefit {
-        text-align: left;
-    }
 }
 
 body.main-page .benefit-icon {
