@@ -4,7 +4,7 @@
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // SENIOR JS ENGINEERING: Mobile-First, Performance-Optimized
 // PRODUCTION READY: Clean, maintainable, and scalable code
-// VERSION: 5.0 - VP-Showcase Integration
+// VERSION: 5.1 - VP-Showcase Global Functions Fixed
 // ============================================
 
 'use strict';
@@ -1549,7 +1549,7 @@ const VaultPhoenix = (function() {
      * DOM Content Loaded - Initialize all features
      */
     function initializePage() {
-        console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v5.0)...');
+        console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v5.1)...');
         
         // Ensure dark background
         document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
@@ -1710,11 +1710,11 @@ const VaultPhoenix = (function() {
 // GLOBAL FUNCTION ALIASES (Backward Compatibility)
 // ============================================
 
-// Expose gallery functions globally for onclick handlers (legacy)
+// Expose legacy gallery functions globally for onclick handlers
 window.changeImage = VaultPhoenix.changePhoneImage;
 window.changeLaptopImage = VaultPhoenix.changeLaptopImage;
 
-// Expose VP-Showcase functions globally for onclick handlers
+// ✅ FIX: Expose VP-Showcase functions globally for onclick handlers
 window.vpChangePhoneImage = VaultPhoenix.vpChangePhoneImage;
 window.vpChangeLaptopImage = VaultPhoenix.vpChangeLaptopImage;
 
@@ -1725,7 +1725,7 @@ window.vpChangeLaptopImage = VaultPhoenix.vpChangeLaptopImage;
 console.log('%c🔥🪙 VAULT PHOENIX', 'color: #d73327; font-size: 24px; font-weight: bold;');
 console.log('%c🚀 AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 16px; font-weight: bold;');
 console.log('%c📧 contact@vaultphoenix.com', 'color: #374151; font-size: 12px;');
-console.log('%c💡 Senior Engineering - Mobile-First Architecture v5.0', 'color: #22c55e; font-size: 12px; font-weight: bold;');
-console.log('%c✅ VP-Showcase Integration Complete', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
+console.log('%c💡 Senior Engineering - Mobile-First Architecture v5.1', 'color: #22c55e; font-size: 12px; font-weight: bold;');
+console.log('%c✅ VP-Showcase Global Functions Fixed', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
 console.log('%c✅ Namespace protected, event delegation optimized, memory managed', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
 console.log('Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
