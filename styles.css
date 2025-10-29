@@ -3071,13 +3071,22 @@ body.main-page .feature-description {
 }
 
 /* ============================================
-   11. APP SHOWCASE (Laptop + Phone Mockups)
-   ✅ FIX #5: Laptop full frame + keyboard + images fit
-   ✅ FIX #8: Player-facing phone SMALLER (320px desktop, 260px mobile)
-   ✅ FIX #9: Management laptop SMALLER (600px desktop, 450px mobile)
+   VP-SHOWCASE SECTION - COMPLETE CSS
+   
+   ADD THIS TO YOUR styles.css FILE:
+   - Either REPLACE the old App Showcase CSS (lines 2373-3128)
+   - OR ADD this after line 3128 as a new section
+   
+   This CSS matches the new HTML with vp-showcase- prefixed classes
    ============================================ */
 
-body.main-page .app-showcase {
+/* =====================================================
+   VP-SHOWCASE SECTION - COMPLETE STYLES
+   All classes prefixed with vp-showcase- to avoid conflicts
+   ===================================================== */
+
+/* Section Container */
+body.main-page .vp-showcase-section {
     padding: var(--space-4xl) var(--space-xl);
     background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
     position: relative;
@@ -3085,18 +3094,18 @@ body.main-page .app-showcase {
 }
 
 @media (max-width: 768px) {
-    body.main-page .app-showcase {
+    body.main-page .vp-showcase-section {
         padding: 60px 10px;
     }
 }
 
 @media (max-width: 480px) {
-    body.main-page .app-showcase {
+    body.main-page .vp-showcase-section {
         padding: 50px 10px;
     }
 }
 
-body.main-page .app-showcase::before {
+body.main-page .vp-showcase-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -3107,274 +3116,318 @@ body.main-page .app-showcase::before {
     pointer-events: none;
 }
 
-body.main-page .showcase-content {
+body.main-page .vp-showcase-container {
     max-width: 1400px;
     margin: 0 auto;
+}
+
+/* Section Headers */
+body.main-page .vp-showcase-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+}
+
+body.main-page .vp-showcase-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 900px;
+    margin: 0 auto var(--space-2xl);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    body.main-page .vp-showcase-subtitle {
+        margin-bottom: var(--space-lg);
+    }
+}
+
+/* Device Grid Container */
+body.main-page .vp-showcase-devices {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
     align-items: start;
 }
 
 @media (max-width: 1024px) {
-    body.main-page .showcase-content {
+    body.main-page .vp-showcase-devices {
         grid-template-columns: 1fr;
         gap: var(--space-2xl);
     }
 }
 
 @media (max-width: 768px) {
-    body.main-page .showcase-content {
+    body.main-page .vp-showcase-devices {
         gap: var(--space-xl);
+        margin-bottom: var(--space-xl);
     }
 }
 
-body.main-page .phone-gallery,
-body.main-page .laptop-gallery {
+/* Device Columns */
+body.main-page .vp-showcase-phone-column,
+body.main-page .vp-showcase-laptop-column {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: var(--space-lg);
 }
 
 @media (max-width: 768px) {
-    body.main-page .phone-gallery,
-    body.main-page .laptop-gallery {
+    body.main-page .vp-showcase-phone-column,
+    body.main-page .vp-showcase-laptop-column {
         gap: var(--space-md);
     }
 }
 
-body.main-page .device-title {
+/* Device Titles */
+body.main-page .vp-showcase-device-title {
     font-size: 1.8rem;
     font-weight: 800;
     color: #ffffff;
     text-align: center;
-    margin-bottom: var(--space-md);
+    margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
-    body.main-page .device-title {
+    body.main-page .vp-showcase-device-title {
         font-size: 1.5rem;
     }
 }
 
-/* ✅ FIX #8: Phone Mockup SMALLER */
-body.main-page .phone-mockup {
-    max-width: 320px; /* ✅ FIX #8: REDUCED from 400px */
-    margin: 0 auto;
+/* ===== PHONE MOCKUP STYLES ===== */
+body.main-page .vp-showcase-phone-mockup {
+    position: relative;
+    max-width: 320px;
+    width: 100%;
 }
 
 @media (max-width: 768px) {
-    body.main-page .phone-mockup {
-        max-width: 260px !important; /* ✅ FIX #8: REDUCED from 280px */
-    }
-}
-
-body.main-page .phone-frame {
-    background: #1a1a1a;
-    border-radius: 40px;
-    padding: 15px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    border: 3px solid rgba(215, 51, 39, 0.3);
-}
-
-@media (max-width: 768px) {
-    body.main-page .phone-frame {
-        border-radius: 35px;
-        padding: 10px !important; /* ✅ FIX #8: REDUCED from 12px */
-        border-radius: 32px !important;
+    body.main-page .vp-showcase-phone-mockup {
+        max-width: 260px;
     }
 }
 
 @media (max-width: 480px) {
-    body.main-page .phone-mockup {
-        max-width: 240px !important;
+    body.main-page .vp-showcase-phone-mockup {
+        max-width: 240px;
     }
 }
 
-body.main-page .phone-screen {
-    border-radius: 30px;
-    overflow: hidden;
-    background: #000;
-    aspect-ratio: 9 / 19.5;
+/* Phone Frame - Realistic iPhone-like design */
+body.main-page .vp-showcase-phone-frame {
+    background: #1a1a1a;
+    border-radius: 40px;
+    padding: 15px;
+    box-shadow: 
+        0 0 0 3px rgba(215, 51, 39, 0.3),
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
     position: relative;
 }
 
 @media (max-width: 768px) {
-    body.main-page .phone-screen {
+    body.main-page .vp-showcase-phone-frame {
+        border-radius: 35px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .vp-showcase-phone-frame {
+        border-radius: 32px;
+        padding: 8px;
+    }
+}
+
+/* Phone Screen Area */
+body.main-page .vp-showcase-phone-screen {
+    background: #000000;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 9/19.5;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    body.main-page .vp-showcase-phone-screen {
         border-radius: 25px;
     }
 }
 
-body.main-page .phone-screen img {
+/* Phone Image */
+body.main-page .vp-showcase-phone-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
     display: block;
+    transition: opacity 0.3s ease;
 }
 
-/* ✅ FIX #9: Laptop Mockup SMALLER */
-body.main-page .laptop-mockup {
+/* ===== LAPTOP MOCKUP STYLES ===== */
+body.main-page .vp-showcase-laptop-mockup {
     position: relative;
-    max-width: 600px; /* ✅ FIX #9: REDUCED from 700px */
-    margin: 0 auto;
-    padding-bottom: 30px;
+    max-width: 600px;
+    width: 100%;
 }
 
 @media (max-width: 768px) {
-    body.main-page .laptop-mockup {
-        max-width: 450px !important; /* ✅ FIX #9: REDUCED from 500px */
-        padding-bottom: 18px !important;
+    body.main-page .vp-showcase-laptop-mockup {
+        max-width: 450px;
     }
 }
 
 @media (max-width: 480px) {
-    body.main-page .laptop-mockup {
-        max-width: 380px !important;
+    body.main-page .vp-showcase-laptop-mockup {
+        max-width: 380px;
     }
 }
 
-body.main-page .laptop-frame {
-    position: relative;
-}
-
-body.main-page .laptop-screen {
-    aspect-ratio: 16/10;
-    background: #000;
-    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-    border: 10px solid #2a2a2a;
-    border-bottom: 0;
-    overflow: hidden;
+/* Laptop Frame - Screen bezel */
+body.main-page .vp-showcase-laptop-frame {
+    background: #2a2a2a;
+    border-radius: 8px 8px 0 0;
+    padding: 10px;
     box-shadow: 
-        0 0 0 2px rgba(255, 255, 255, 0.1),
-        0 20px 60px rgba(0, 0, 0, 0.6),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        0 -5px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     position: relative;
 }
 
 @media (max-width: 768px) {
-    body.main-page .laptop-screen {
-        border-width: 8px;
+    body.main-page .vp-showcase-laptop-frame {
+        padding: 8px;
     }
 }
 
-body.main-page .laptop-screen::before {
-    content: '';
+/* Laptop Screen Area */
+body.main-page .vp-showcase-laptop-screen {
+    background: #000000;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16/10;
+    width: 100%;
+}
+
+/* Laptop Image */
+body.main-page .vp-showcase-laptop-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+/* Laptop Screen Gloss Effect */
+body.main-page .vp-showcase-laptop-gloss {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.1) 0%,
         transparent 50%
     );
     pointer-events: none;
-    z-index: 10;
+    border-radius: 4px;
 }
 
-/* ✅ FIX #5: Laptop screenshots FIT PERFECTLY */
-body.main-page .laptop-screen img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* ✅ FIX #5: CHANGED from contain */
-    object-position: center top; /* ✅ FIX #5: ADDED */
-    display: block;
-}
-
-/* ✅ FIX #5: KEYBOARD RESTORED with visible line */
-body.main-page .laptop-base {
+/* Laptop Base/Keyboard */
+body.main-page .vp-showcase-laptop-base {
     height: 30px;
-    background: linear-gradient(
-        to bottom, 
-        #2a2a2a 0%, 
-        #1a1a1a 50%,
-        #0a0a0a 100%
-    );
+    background: linear-gradient(to bottom, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%);
     border-radius: 0 0 12px 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 
+        0 5px 20px rgba(0, 0, 0, 0.4),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05);
     position: relative;
-    display: block !important; /* ✅ CRITICAL */
-    visibility: visible !important;
 }
 
-/* ✅ FIX #5: Add keyboard line detail */
-body.main-page .laptop-base::before {
-    content: '';
+@media (max-width: 768px) {
+    body.main-page .vp-showcase-laptop-base {
+        height: 20px;
+    }
+}
+
+/* Laptop Notch/Hinge */
+body.main-page .vp-showcase-laptop-notch {
     position: absolute;
-    bottom: 5px;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background: linear-gradient(
-        90deg, 
-        transparent, 
-        rgba(255,255,255,0.15), 
-        transparent
-    );
-    border-radius: 2px;
-}
-
-@media (max-width: 768px) {
-    body.main-page .laptop-base {
-        height: 20px !important;
-        display: block !important;
-    }
-}
-
-body.main-page .laptop-notch {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
     width: 80px;
-    height: 10px;
-    background: #222;
-    border-radius: 0 0 8px 8px;
-    margin: 0 auto;
-    position: relative;
-    top: -10px;
-    display: block !important; /* ✅ CRITICAL */
-    visibility: visible !important;
+    height: 5px;
+    background: #1a1a1a;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 768px) {
-    body.main-page .laptop-notch {
-        width: 50px !important;
-        height: 6px !important;
-        top: -6px !important;
-        display: block !important;
+    body.main-page .vp-showcase-laptop-notch {
+        width: 60px;
+        height: 4px;
     }
 }
 
-/* Thumbnail grids */
-body.main-page .thumbnail-grid,
-body.main-page .thumbnail-grid-laptop {
+/* Laptop Keyboard Detail */
+body.main-page .vp-showcase-laptop-keyboard {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 20%,
+        rgba(255, 255, 255, 0.05) 80%,
+        transparent 100%
+    );
+}
+
+/* ===== THUMBNAIL STYLES ===== */
+body.main-page .vp-showcase-phone-thumbs,
+body.main-page .vp-showcase-laptop-thumbs {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    max-width: 320px; /* ✅ Match phone width */
-    margin: 0 auto;
+    width: 100%;
+    max-width: 320px;
+}
+
+body.main-page .vp-showcase-laptop-thumbs {
+    max-width: 600px;
 }
 
 @media (max-width: 768px) {
-    body.main-page .thumbnail-grid,
-    body.main-page .thumbnail-grid-laptop {
+    body.main-page .vp-showcase-phone-thumbs,
+    body.main-page .vp-showcase-laptop-thumbs {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        max-width: 260px; /* ✅ Match phone width */
+    }
+    
+    body.main-page .vp-showcase-phone-thumbs {
+        max-width: 260px;
+    }
+    
+    body.main-page .vp-showcase-laptop-thumbs {
+        max-width: 450px;
     }
 }
 
-body.main-page .thumbnail-grid-laptop {
-    max-width: 600px; /* ✅ Match laptop width */
-}
-
-@media (max-width: 768px) {
-    body.main-page .thumbnail-grid-laptop {
-        max-width: 450px; /* ✅ Match laptop width */
-    }
-}
-
-body.main-page .simple-thumb,
-body.main-page .simple-thumb-laptop {
+body.main-page .vp-showcase-thumb-btn {
     background: rgba(0, 0, 0, 0.4);
     border: 2px solid rgba(215, 51, 39, 0.2);
     border-radius: var(--radius-md);
@@ -3382,171 +3435,113 @@ body.main-page .simple-thumb-laptop {
     cursor: pointer;
     transition: all var(--transition-base);
     overflow: hidden;
+    position: relative;
 }
 
 @media (max-width: 768px) {
-    body.main-page .simple-thumb,
-    body.main-page .simple-thumb-laptop {
+    body.main-page .vp-showcase-thumb-btn {
         padding: 6px;
     }
 }
 
-body.main-page .simple-thumb:hover,
-body.main-page .simple-thumb-laptop:hover {
-    border-color: rgba(215, 51, 39, 0.5);
+body.main-page .vp-showcase-thumb-btn:hover {
     transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(215, 51, 39, 0.3);
+    border-color: rgba(215, 51, 39, 0.5);
 }
 
-body.main-page .simple-thumb.active,
-body.main-page .simple-thumb-laptop.active {
+body.main-page .vp-showcase-thumb-btn.vp-showcase-thumb-active {
     border-color: rgba(215, 51, 39, 0.8);
     background: rgba(215, 51, 39, 0.15);
+    box-shadow: 0 0 20px rgba(215, 51, 39, 0.3);
 }
 
-body.main-page .simple-thumb-laptop {
-    border-color: rgba(99, 102, 241, 0.2);
-}
-
-body.main-page .simple-thumb-laptop:hover {
-    border-color: rgba(99, 102, 241, 0.5);
-}
-
-body.main-page .simple-thumb-laptop.active {
-    border-color: rgba(99, 102, 241, 0.8);
-    background: rgba(99, 102, 241, 0.15);
-}
-
-body.main-page .simple-thumb img,
-body.main-page .simple-thumb-laptop img {
+body.main-page .vp-showcase-thumb-btn img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: var(--radius-sm);
+    border-radius: 4px;
 }
 
-body.main-page .thumb-label {
-    font-size: var(--font-xs);
+body.main-page .vp-showcase-thumb-label {
+    display: block;
     color: rgba(255, 255, 255, 0.8);
+    font-size: 0.75rem;
+    margin-top: 6px;
     text-align: center;
-    margin-top: 5px;
     font-weight: 600;
 }
 
 @media (max-width: 768px) {
-    body.main-page .thumb-label {
+    body.main-page .vp-showcase-thumb-label {
         font-size: 0.7rem;
     }
 }
 
-/* BADGES RESTORED: Coming Soon & Early 2026 */
-body.main-page .coming-soon-badge,
-body.main-page .early-2026-badge {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-body.main-page .coming-soon-badge {
-    background: linear-gradient(135deg, #fb923c, #f0a500);
-    color: #000;
-    box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
-}
-
-body.main-page .early-2026-badge {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: #fff;
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.05);
-        opacity: 0.9;
-    }
-}
-
-/* Demo cards completely rebuilt with proper sizing */
-body.main-page .demo-card-wrapper {
-    max-width: 320px; /* ✅ Match phone width */
-    margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-    body.main-page .demo-card-wrapper {
-        max-width: 260px; /* ✅ Match phone width */
-    }
-}
-
-body.main-page .demo-card-enhanced {
+/* ===== DEMO CARDS ===== */
+body.main-page .vp-showcase-demo-card {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
     padding: var(--space-lg);
-    text-align: center;
     backdrop-filter: blur(20px);
-    max-width: 100%;
-    overflow: hidden;
+    width: 100%;
+    max-width: 320px;
+}
+
+body.main-page .vp-showcase-laptop-column .vp-showcase-demo-card {
+    max-width: 600px;
 }
 
 @media (max-width: 768px) {
-    body.main-page .demo-card-enhanced {
+    body.main-page .vp-showcase-demo-card {
         padding: var(--space-md);
+        max-width: 260px;
+    }
+    
+    body.main-page .vp-showcase-laptop-column .vp-showcase-demo-card {
+        max-width: 450px;
     }
 }
 
-body.main-page .demo-card-instruction {
-    font-size: 0.95rem;
+body.main-page .vp-showcase-demo-instruction {
     color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
     margin-bottom: var(--space-md);
     text-align: center;
     font-weight: 600;
 }
 
 @media (max-width: 768px) {
-    body.main-page .demo-card-instruction {
+    body.main-page .vp-showcase-demo-instruction {
         font-size: 0.85rem;
         margin-bottom: var(--space-sm);
     }
 }
 
-body.main-page .demo-button-row {
+body.main-page .vp-showcase-demo-row {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    flex-wrap: wrap;
 }
 
-body.main-page .demo-icon-standalone {
+body.main-page .vp-showcase-demo-icon {
     width: 45px !important;
     height: 45px !important;
     object-fit: contain;
-    flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
-    body.main-page .demo-icon-standalone {
+    body.main-page .vp-showcase-demo-icon {
         width: 36px !important;
         height: 36px !important;
     }
 }
 
-body.main-page .demo-button-enhanced {
-    width: auto;
-    display: flex;
+body.main-page .vp-showcase-demo-button {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
     padding: 14px 24px;
     background: var(--ember-gradient-primary);
     color: white;
@@ -3559,26 +3554,16 @@ body.main-page .demo-button-enhanced {
     border: 2px solid rgba(215, 51, 39, 0.3);
     position: relative;
     overflow: hidden;
-    white-space: nowrap;
 }
 
 @media (max-width: 768px) {
-    body.main-page .demo-button-enhanced {
+    body.main-page .vp-showcase-demo-button {
         padding: 12px 18px;
         font-size: 0.95rem;
-        gap: 10px;
     }
 }
 
-@media (max-width: 480px) {
-    body.main-page .demo-button-enhanced {
-        font-size: 0.85rem;
-        white-space: normal;
-        line-height: 1.2;
-    }
-}
-
-body.main-page .demo-button-enhanced::before {
+body.main-page .vp-showcase-demo-button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -3589,75 +3574,39 @@ body.main-page .demo-button-enhanced::before {
     transition: left 0.6s ease;
 }
 
-body.main-page .demo-button-enhanced:hover::before {
+body.main-page .vp-showcase-demo-button:hover::before {
     left: 100%;
 }
 
-body.main-page .demo-button-enhanced:hover {
+body.main-page .vp-showcase-demo-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
-    border-color: rgba(215, 51, 39, 0.5);
 }
 
-body.main-page .management-button-enhanced {
+body.main-page .vp-showcase-management-button {
     background: var(--ember-gradient-secondary);
     box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
     border-color: rgba(99, 102, 241, 0.3);
 }
 
-body.main-page .management-button-enhanced:hover {
+body.main-page .vp-showcase-management-button:hover {
     box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
-    border-color: rgba(99, 102, 241, 0.5);
 }
 
-body.main-page .button-emoji {
-    font-size: 1.4rem;
-    flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-    body.main-page .button-emoji {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    body.main-page .button-emoji {
-        font-size: 1.1rem;
-    }
-}
-
-body.main-page .demo-text-enhanced {
-    font-size: 1.05rem;
-    font-weight: 800;
-}
-
-@media (max-width: 768px) {
-    body.main-page .demo-text-enhanced {
-        font-size: 0.95rem;
-    }
-}
-
-@media (max-width: 480px) {
-    body.main-page .demo-text-enhanced {
-        font-size: 0.9rem;
-    }
-}
-
-body.main-page .phoenix-safe-container {
+/* Phoenix Safe Image */
+body.main-page .vp-showcase-safe-image {
     max-width: 400px;
-    margin: var(--space-xl) auto 0;
+    width: 100%;
     text-align: center;
 }
 
 @media (max-width: 768px) {
-    body.main-page .phoenix-safe-container {
+    body.main-page .vp-showcase-safe-image {
         max-width: 280px;
-        margin-top: var(--space-lg);
     }
 }
 
-body.main-page .phoenix-safe-image {
+body.main-page .vp-showcase-safe-img {
     width: 100%;
     max-width: 350px;
     height: auto;
@@ -3667,63 +3616,82 @@ body.main-page .phoenix-safe-image {
 }
 
 @media (max-width: 768px) {
-    body.main-page .phoenix-safe-image {
+    body.main-page .vp-showcase-safe-img {
         max-width: 250px;
     }
 }
 
-/* System connection */
-body.main-page .system-connection {
+/* ===== CONNECTION SECTION ===== */
+body.main-page .vp-showcase-connection {
     margin-top: var(--space-2xl);
 }
 
 @media (max-width: 768px) {
-    body.main-page .system-connection {
+    body.main-page .vp-showcase-connection {
         margin-top: var(--space-lg);
     }
 }
 
-body.main-page .connection-header {
+body.main-page .vp-showcase-connection-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-md);
     margin-bottom: var(--space-xl);
 }
 
 @media (max-width: 768px) {
-    body.main-page .connection-header {
+    body.main-page .vp-showcase-connection-header {
         margin-bottom: var(--space-lg);
     }
 }
 
-body.main-page .connection-line {
-    flex: 1;
+body.main-page .vp-showcase-connection-line {
     height: 2px;
-    background: linear-gradient(to right, transparent, rgba(215, 51, 39, 0.3), transparent);
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(215, 51, 39, 0.5) 100%
+    );
+    flex: 1;
+    max-width: 200px;
 }
 
-body.main-page .connection-badge {
+body.main-page .vp-showcase-connection-line:last-child {
+    background: linear-gradient(
+        to right,
+        rgba(215, 51, 39, 0.5) 0%,
+        transparent 100%
+    );
+}
+
+body.main-page .vp-showcase-connection-badge {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 24px;
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-full);
-    font-weight: 700;
+    padding: 12px 24px;
     color: #ffffff;
+    font-weight: 700;
 }
 
 @media (max-width: 768px) {
-    body.main-page .connection-badge {
+    body.main-page .vp-showcase-connection-badge {
         padding: 10px 18px;
         gap: 10px;
         font-size: 0.9rem;
     }
 }
 
-body.main-page .system-benefits {
+body.main-page .vp-showcase-connection-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Benefits Grid */
+body.main-page .vp-showcase-benefits {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-xl);
@@ -3732,13 +3700,13 @@ body.main-page .system-benefits {
 }
 
 @media (max-width: 1024px) {
-    body.main-page .system-benefits {
+    body.main-page .vp-showcase-benefits {
         grid-template-columns: 1fr;
         gap: var(--space-lg);
     }
 }
 
-body.main-page .benefit-column {
+body.main-page .vp-showcase-benefit-column {
     background: linear-gradient(135deg, rgba(215, 51, 39, 0.08), rgba(251, 146, 60, 0.04));
     border: 2px solid rgba(215, 51, 39, 0.25);
     border-radius: var(--radius-xl);
@@ -3746,18 +3714,18 @@ body.main-page .benefit-column {
 }
 
 @media (max-width: 768px) {
-    body.main-page .benefit-column {
+    body.main-page .vp-showcase-benefit-column {
         padding: var(--space-lg);
     }
 }
 
 @media (max-width: 480px) {
-    body.main-page .benefit-column {
+    body.main-page .vp-showcase-benefit-column {
         padding: var(--space-md);
     }
 }
 
-body.main-page .benefit-header {
+body.main-page .vp-showcase-benefit-header {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -3765,12 +3733,25 @@ body.main-page .benefit-header {
 }
 
 @media (max-width: 768px) {
-    body.main-page .benefit-header {
+    body.main-page .vp-showcase-benefit-header {
         margin-bottom: var(--space-md);
     }
 }
 
-body.main-page .benefit-header-icon {
+body.main-page .vp-showcase-benefit-header h4 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    body.main-page .vp-showcase-benefit-header h4 {
+        font-size: 1.3rem;
+    }
+}
+
+body.main-page .vp-showcase-benefit-icon {
     width: 50px;
     height: 50px;
     object-fit: contain;
@@ -3778,31 +3759,19 @@ body.main-page .benefit-header-icon {
 }
 
 @media (max-width: 768px) {
-    body.main-page .benefit-header-icon {
+    body.main-page .vp-showcase-benefit-icon {
         width: 42px;
         height: 42px;
     }
 }
 
-body.main-page .benefit-header h4 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #ffffff;
-}
-
-@media (max-width: 768px) {
-    body.main-page .benefit-header h4 {
-        font-size: 1.3rem;
-    }
-}
-
-body.main-page .benefit-list {
+body.main-page .vp-showcase-benefit-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-body.main-page .benefit-list li {
+body.main-page .vp-showcase-benefit-list li {
     font-size: 1.05rem;
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.8;
@@ -3812,14 +3781,14 @@ body.main-page .benefit-list li {
 }
 
 @media (max-width: 768px) {
-    body.main-page .benefit-list li {
+    body.main-page .vp-showcase-benefit-list li {
         font-size: 0.95rem;
         line-height: 1.6;
         margin-bottom: 10px;
     }
 }
 
-body.main-page .benefit-list li::before {
+body.main-page .vp-showcase-benefit-list li::before {
     content: '✓';
     position: absolute;
     left: 0;
@@ -3827,6 +3796,42 @@ body.main-page .benefit-list li::before {
     font-weight: 900;
     font-size: 1.2rem;
 }
+
+/* ===== ANIMATION CLASSES ===== */
+body.main-page .vp-showcase-phone-img.vp-fading,
+body.main-page .vp-showcase-laptop-img.vp-fading {
+    opacity: 0;
+}
+
+/* Auto-rotation indicator */
+body.main-page .vp-showcase-thumb-btn.vp-auto-rotating {
+    animation: vp-pulse 2s ease-in-out infinite;
+}
+
+@keyframes vp-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(215, 51, 39, 0);
+    }
+    50% {
+        box-shadow: 0 0 20px 5px rgba(215, 51, 39, 0.3);
+    }
+}
+
+/* Smooth scroll reveal animations */
+body.main-page .vp-showcase-section .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+body.main-page .vp-showcase-section .scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   END OF VP-SHOWCASE CSS
+   ============================================ */
 
 /* ============================================
    12. USE CASES (Complete Industry Grid)
