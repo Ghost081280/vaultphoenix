@@ -4002,6 +4002,7 @@ body.main-page .use-case-description {
    13. PRICING SECTION (Complete 2-Column Layout)
    ✅ FIX #2: Pricing modules compact on mobile portrait
    ✅ FIX #6: Popular badge floats ABOVE Growth tier
+   ✅ FIXED: SDK tiers now properly contained in module
    ============================================ */
 
 body.main-page .pricing {
@@ -4080,7 +4081,7 @@ body.main-page .sdk-solution {
     backdrop-filter: blur(20px);
     transition: all var(--transition-smooth);
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* CHANGED: Allow Popular badge to show outside */
     display: flex;
     flex-direction: column;
 }
@@ -4605,33 +4606,24 @@ body.main-page .github-title-inline {
     }
 }
 
-/* SDK Pricing Tiers - Enterprise contained within module */
+/* SDK Pricing Tiers - FIXED to be contained within module */
 body.main-page .sdk-pricing-tiers {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-md);
+    display: flex; /* Changed from grid to flex for better control */
+    flex-direction: row; /* Horizontal by default */
+    justify-content: space-between;
+    align-items: stretch; /* Make all tiers same height */
+    gap: 15px;
     margin-bottom: var(--space-lg);
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: visible; /* Allow Popular badge to float outside */
 }
 
-@media (max-width: 1024px) {
-    body.main-page .sdk-pricing-tiers {
-        grid-template-columns: 1fr;
-        gap: var(--space-sm);
-    }
-}
-
-@media (max-width: 768px) {
-    body.main-page .sdk-pricing-tiers {
-        gap: var(--space-sm);
-        margin-bottom: var(--space-md);
-    }
-}
-
+/* Each tier takes equal width on desktop */
 body.main-page .sdk-tier {
+    flex: 1;
+    min-width: 0; /* Prevent flex items from overflowing */
     background: rgba(0, 0, 0, 0.4);
     border: 2px solid rgba(99, 102, 241, 0.2);
     border-radius: var(--radius-md);
@@ -4639,10 +4631,10 @@ body.main-page .sdk-tier {
     text-align: center;
     transition: all var(--transition-base);
     position: relative;
-    width: 100%;
-    max-width: 100%;
     box-sizing: border-box;
-    overflow: visible; /* ✅ ALLOW badge to show */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 @media (max-width: 768px) {
@@ -4654,25 +4646,27 @@ body.main-page .sdk-tier {
 body.main-page .sdk-tier:hover {
     border-color: rgba(99, 102, 241, 0.4);
     transform: translateY(-3px);
+    z-index: 2;
 }
 
+/* Featured tier with Popular badge */
 body.main-page .sdk-tier.featured {
     border-color: rgba(99, 102, 241, 0.5);
     background: rgba(99, 102, 241, 0.1);
-    padding-top: 20px !important; /* ✅ Add space for badge */
-    overflow: visible !important; /* ✅ CRITICAL - was hidden */
+    transform: translateY(-5px); /* Slightly elevated on desktop */
+    overflow: visible !important; /* Critical for badge visibility */
 }
 
 @media (max-width: 1024px) {
     body.main-page .sdk-tier.featured {
-        transform: translateY(0);
+        transform: translateY(-3px); /* Less elevation on tablet */
     }
 }
 
-/* ✅ FIX #6: Popular badge FLOATS ABOVE module */
+/* ✅ FIX #6: Popular badge FLOATS OUTSIDE and ABOVE the module */
 body.main-page .tier-badge {
     position: absolute;
-    top: -14px; /* ✅ MOVED UP from -12px */
+    top: -16px; /* Position above the module */
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
@@ -4683,8 +4677,9 @@ body.main-page .tier-badge {
     font-weight: 700;
     text-transform: uppercase;
     white-space: nowrap;
-    z-index: 100; /* ✅ INCREASED from 10 */
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5); /* ✅ ADDED */
+    z-index: 10; /* Ensure it's above other elements */
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5);
+    letter-spacing: 0.5px;
 }
 
 @media (max-width: 768px) and (orientation: portrait) {
@@ -4706,6 +4701,7 @@ body.main-page .tier-name {
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 8px;
+    margin-top: 5px; /* Add top margin to compensate for badge space */
 }
 
 @media (max-width: 768px) {
@@ -4720,6 +4716,7 @@ body.main-page .tier-price {
     font-weight: 900;
     color: var(--ember-yellow);
     margin-bottom: 5px;
+    line-height: 1;
 }
 
 @media (max-width: 768px) {
@@ -4743,11 +4740,140 @@ body.main-page .tier-price span {
 body.main-page .tier-info {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    margin-top: auto; /* Push to bottom for alignment */
 }
 
 @media (max-width: 768px) {
     body.main-page .tier-info {
         font-size: 0.75rem;
+    }
+}
+
+/* TABLET RESPONSIVE - SDK Tiers */
+@media (max-width: 1024px) {
+    body.main-page .sdk-pricing-tiers {
+        flex-direction: row; /* Still horizontal on tablets */
+        gap: 12px;
+    }
+    
+    body.main-page .sdk-tier {
+        padding: 15px;
+    }
+    
+    body.main-page .tier-price {
+        font-size: 1.8rem;
+    }
+    
+    body.main-page .tier-price span {
+        font-size: 0.9rem;
+    }
+}
+
+/* MOBILE RESPONSIVE - SDK Tiers Stack Vertically */
+@media (max-width: 768px) {
+    body.main-page .sdk-pricing-tiers {
+        flex-direction: column; /* Stack vertically on mobile */
+        gap: 15px;
+    }
+    
+    body.main-page .sdk-tier {
+        width: 100%;
+        max-width: none;
+        padding: var(--space-md);
+        margin-bottom: 0;
+    }
+    
+    body.main-page .sdk-tier.featured {
+        transform: translateY(0); /* No elevation on mobile */
+        margin-top: 10px; /* Add space for badge */
+    }
+    
+    body.main-page .tier-badge {
+        top: -14px; /* Slightly closer on mobile */
+        font-size: 0.65rem;
+        padding: 4px 12px;
+    }
+    
+    body.main-page .tier-name {
+        font-size: 1.05rem;
+        margin-top: 8px;
+    }
+    
+    body.main-page .tier-price {
+        font-size: 1.7rem;
+    }
+    
+    body.main-page .tier-price span {
+        font-size: 0.85rem;
+    }
+    
+    body.main-page .tier-info {
+        font-size: 0.8rem;
+    }
+}
+
+/* SMALL MOBILE - SDK Tiers */
+@media (max-width: 480px) {
+    body.main-page .sdk-pricing-tiers {
+        gap: 12px;
+    }
+    
+    body.main-page .sdk-tier {
+        padding: 15px;
+    }
+    
+    body.main-page .tier-badge {
+        font-size: 0.6rem;
+        padding: 3px 10px;
+        top: -12px;
+    }
+    
+    body.main-page .tier-name {
+        font-size: 1rem;
+        margin-top: 6px;
+    }
+    
+    body.main-page .tier-price {
+        font-size: 1.5rem;
+    }
+    
+    body.main-page .tier-price span {
+        font-size: 0.8rem;
+    }
+    
+    body.main-page .tier-info {
+        font-size: 0.75rem;
+    }
+}
+
+/* LANDSCAPE MOBILE & SMALL TABLETS */
+@media (min-width: 481px) and (max-width: 768px) and (orientation: landscape) {
+    body.main-page .sdk-pricing-tiers {
+        flex-direction: row; /* Keep horizontal on landscape */
+        gap: 10px;
+    }
+    
+    body.main-page .sdk-tier {
+        flex: 1;
+        padding: 12px;
+    }
+    
+    body.main-page .tier-price {
+        font-size: 1.4rem;
+    }
+    
+    body.main-page .tier-info {
+        font-size: 0.7rem;
+    }
+}
+
+/* ULTRA-WIDE SCREENS */
+@media (min-width: 1920px) {
+    body.main-page .sdk-pricing-tiers {
+        max-width: 900px; /* Prevent tiers from getting too wide */
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -4813,6 +4939,11 @@ body.main-page .solution-highlight-box {
         gap: 12px;
         margin-bottom: var(--space-sm);
     }
+}
+
+/* Ensure proper spacing for the new Developer Support module */
+body.main-page .solution-highlight-box.additional-benefit:last-child {
+    margin-bottom: var(--space-md);
 }
 
 body.main-page .solution-highlight-icon {
@@ -4960,7 +5091,26 @@ body.main-page .cta-footnote {
     }
 }
 
-/* Continuing in next message due to length... This is about 50% of the complete file */
+body.main-page .journey-secondary-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color var(--transition-base);
+}
+
+body.main-page .journey-secondary-link:hover {
+    color: var(--ember-yellow);
+}
+
+body.main-page .journey-secondary-link span {
+    margin-left: 5px;
+    transition: transform var(--transition-base);
+    display: inline-block;
+}
+
+body.main-page .journey-secondary-link:hover span {
+    transform: translateX(5px);
+}
 
 /* ============================================
    14. REVENUE EXAMPLES (2x2 Grid + Benefits)
