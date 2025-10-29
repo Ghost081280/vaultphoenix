@@ -2005,6 +2005,7 @@ body.main-page .crypto-coin-section::before {
         radial-gradient(circle at 30% 30%, rgba(215, 51, 39, 0.2) 0%, transparent 50%),
         radial-gradient(circle at 70% 70%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
     pointer-events: none;
+    z-index: 0;
 }
 
 body.main-page .crypto-content {
@@ -2025,16 +2026,18 @@ body.main-page .crypto-content {
     }
 }
 
-/* CRITICAL: Force image column to show on mobile */
+/* ✅ CRITICAL: Force image column to show on mobile */
 body.main-page .crypto-image {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     width: 100%;
     min-height: 200px;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-/* On mobile, show image FIRST (before text) */
+/* ✅ On mobile, show image FIRST (before text) */
 @media (max-width: 1024px) {
     body.main-page .crypto-image {
         order: -1;
@@ -2046,7 +2049,21 @@ body.main-page .crypto-image {
     }
 }
 
-/* Phone frame styling */
+@media (max-width: 768px) {
+    body.main-page .crypto-image {
+        margin-bottom: 30px;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .crypto-image {
+        margin-bottom: 25px;
+        min-height: 250px;
+    }
+}
+
+/* ✅ Phone frame styling with proper visibility */
 body.main-page .crypto-coin-phone-frame {
     width: 100%;
     max-width: 380px;
@@ -2059,8 +2076,30 @@ body.main-page .crypto-coin-phone-frame {
         0 0 0 3px rgba(215, 51, 39, 0.3);
     position: relative;
     animation: ember-coinFloat 4s ease-in-out infinite;
-    filter: drop-shadow(0 10px 40px rgba(240, 165, 0, 0.6)) 
-            drop-shadow(0 0 60px rgba(240, 165, 0, 0.4));
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* ✅ Add glow effect */
+body.main-page .crypto-coin-phone-frame::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(
+        circle at center,
+        rgba(240, 165, 0, 0.4) 0%, 
+        rgba(251, 146, 60, 0.2) 30%, 
+        transparent 70%
+    );
+    border-radius: 45px;
+    z-index: -1;
+    filter: blur(20px);
+    opacity: 0.6;
+    pointer-events: none;
 }
 
 body.main-page .crypto-coin-phone-frame::before {
@@ -2073,6 +2112,41 @@ body.main-page .crypto-coin-phone-frame::before {
     height: 4px;
     background: #333;
     border-radius: 2px;
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    body.main-page .crypto-coin-phone-frame {
+        max-width: 320px;
+        padding: 10px;
+        border-radius: 32px;
+    }
+    
+    body.main-page .crypto-coin-phone-frame::after {
+        top: -8px;
+        left: -8px;
+        right: -8px;
+        bottom: -8px;
+        border-radius: 40px;
+        filter: blur(16px);
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .crypto-coin-phone-frame {
+        max-width: 280px;
+        padding: 8px;
+        border-radius: 30px;
+    }
+    
+    body.main-page .crypto-coin-phone-frame::after {
+        top: -6px;
+        left: -6px;
+        right: -6px;
+        bottom: -6px;
+        border-radius: 36px;
+        filter: blur(14px);
+    }
 }
 
 body.main-page .crypto-coin-screen-wrapper {
@@ -2082,41 +2156,49 @@ body.main-page .crypto-coin-screen-wrapper {
     aspect-ratio: 9 / 16;
     position: relative;
     width: 100%;
+    display: block !important;
+    visibility: visible !important;
 }
 
-/* Mobile sizing */
 @media (max-width: 768px) {
-    body.main-page .crypto-coin-phone-frame {
-        max-width: 300px;
-        padding: 10px;
-        border-radius: 30px;
+    body.main-page .crypto-coin-screen-wrapper {
+        border-radius: 22px;
     }
-    
+}
+
+@media (max-width: 480px) {
     body.main-page .crypto-coin-screen-wrapper {
         border-radius: 20px;
     }
 }
 
-@media (max-width: 480px) {
-    body.main-page .crypto-coin-phone-frame {
-        max-width: 260px;
-        padding: 8px;
-    }
+/* ✅ Image inside phone with proper fit */
+body.main-page .phoenix-coin-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    display: block !important;
+    transform: scale(1.02);
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-/* Image inside phone */
-body.main-page .phoenix-coin-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    transform: scale(1.02);
+/* ✅ Float animation for phone */
+@keyframes ember-coinFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    50% { 
+        transform: translateY(-15px) rotate(1deg); 
+    }
 }
 
 /* Text column */
 body.main-page .crypto-text {
     padding: var(--space-lg);
+    position: relative;
+    z-index: 1;
 }
 
 @media (max-width: 768px) {
