@@ -6095,7 +6095,7 @@ body.main-page *:focus-visible {
 
 body.main-page .main-skip-to-content {
     position: absolute;
-    top: -40px;
+    top: -100px; /* INCREASED from -40px to ensure it's fully hidden */
     left: 0;
     background: var(--ember-yellow);
     color: #000;
@@ -6103,11 +6103,17 @@ body.main-page .main-skip-to-content {
     text-decoration: none;
     font-weight: 700;
     z-index: var(--z-tooltip);
-    transition: top var(--transition-fast);
+    transition: top var(--transition-fast), visibility var(--transition-fast);
+    visibility: hidden; /* ADDED: Hide by default */
+    overflow: hidden; /* ADDED: Clip any overflow */
+    clip: rect(0, 0, 0, 0); /* ADDED: Additional clipping */
+    white-space: nowrap;
 }
 
 body.main-page .main-skip-to-content:focus {
     top: 0;
+    visibility: visible; /* ADDED: Show when focused */
+    clip: auto; /* ADDED: Remove clipping when visible */
 }
 
 /* ============================================
