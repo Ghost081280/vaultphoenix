@@ -1972,8 +1972,10 @@ body.main-page .social-share-text-compact {
 
 /* ============================================
    8. CRYPTO COIN SECTION (GPS & Beacon)
-   ✅ FIX #3: Phone frame visible on mobile + glow + animation
-   ✅ FIX #4: Phone screenshots fit perfectly
+   ✅ FIXED: Phone frame visible on ALL devices
+   ✅ FIXED: Glow effect on frame (not image)
+   ✅ FIXED: Animation on frame (not image)
+   ✅ FIXED: Image fits perfectly inside frame
    ============================================ */
 
 body.main-page .crypto-coin-section {
@@ -2026,15 +2028,20 @@ body.main-page .crypto-content {
     }
 }
 
+/* ✅ CRITICAL: Force image column to display on mobile */
 body.main-page .crypto-image {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-/* ✅ FIX #3: Phone frame - GLOW on frame, ANIMATION on frame, visible on mobile */
+/* ✅ FIXED: Phone frame with glow and animation */
 body.main-page .crypto-coin-phone-frame {
     max-width: 380px;
+    width: 100%;
     margin: 0 auto;
     padding: 12px;
     background: #1a1a1a;
@@ -2043,8 +2050,10 @@ body.main-page .crypto-coin-phone-frame {
         0 20px 60px rgba(0, 0, 0, 0.5),
         0 0 0 3px rgba(215, 51, 39, 0.3);
     position: relative;
+    /* ✅ CRITICAL: Force display on ALL devices */
     display: block !important;
     visibility: visible !important;
+    opacity: 1 !important;
     /* ✅ Animation on FRAME */
     animation: ember-coinFloat 4s ease-in-out infinite;
     /* ✅ Glow on FRAME */
@@ -2052,6 +2061,26 @@ body.main-page .crypto-coin-phone-frame {
             drop-shadow(0 0 60px rgba(240, 165, 0, 0.4));
 }
 
+@media (max-width: 768px) {
+    body.main-page .crypto-coin-phone-frame {
+        max-width: 320px !important;
+        padding: 10px !important;
+        border-radius: 32px;
+        /* ✅ CRITICAL: Maintain display on mobile */
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .crypto-coin-phone-frame {
+        max-width: 280px !important;
+        padding: 8px !important;
+    }
+}
+
+/* Notch at top of phone */
 body.main-page .crypto-coin-phone-frame::before {
     content: '';
     position: absolute;
@@ -2064,45 +2093,51 @@ body.main-page .crypto-coin-phone-frame::before {
     border-radius: 2px;
 }
 
+@media (max-width: 768px) {
+    body.main-page .crypto-coin-phone-frame::before {
+        width: 60px;
+        height: 3px;
+    }
+}
+
 body.main-page .crypto-coin-screen-wrapper {
     border-radius: 25px;
     overflow: hidden;
     background: #000;
     aspect-ratio: 9 / 16;
     position: relative;
+    width: 100%;
 }
 
 @media (max-width: 768px) {
-    body.main-page .crypto-coin-phone-frame {
-        max-width: 280px !important;
-        padding: 10px !important;
-        border-radius: 30px;
-        display: block !important; /* ✅ FORCE VISIBLE */
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-    
     body.main-page .crypto-coin-screen-wrapper {
-        border-radius: 20px;
-    }
-    
-    body.main-page .crypto-image {
-        display: flex !important;
-        justify-content: center !important;
+        border-radius: 22px;
     }
 }
 
-/* ✅ FIX #4: Image fits perfectly - NO animation, NO glow on image */
+/* ✅ FIXED: Image fits perfectly - NO animation, NO glow */
 body.main-page .phoenix-coin-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* ✅ FIX #4: CHANGED from contain */
-    object-position: center top; /* ✅ FIX #4: ADDED */
+    object-fit: cover;
+    object-position: center top;
     display: block;
-    /* ✅ Perfect fit */
-    transform: scale(1.02); /* ✅ FIX #4: ADJUSTED for perfect fit */
+    /* ✅ Perfect fit adjustment */
+    transform: scale(1.02);
     /* ✅ NO animation on image */
-    /* ✅ NO filter/glow on image */
+    animation: none !important;
+    /* ✅ NO glow on image (glow is on frame) */
+    filter: none !important;
+}
+
+/* ✅ Float animation (only on frame, not image) */
+@keyframes ember-coinFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    50% { 
+        transform: translateY(-15px) rotate(3deg); 
+    }
 }
 
 body.main-page .crypto-text {
@@ -2112,6 +2147,7 @@ body.main-page .crypto-text {
 @media (max-width: 768px) {
     body.main-page .crypto-text {
         padding: var(--space-md);
+        text-align: center;
     }
 }
 
@@ -2152,6 +2188,14 @@ body.main-page .crypto-benefit {
     display: flex;
     align-items: flex-start;
     gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+    body.main-page .crypto-benefit {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 }
 
 body.main-page .benefit-icon {
