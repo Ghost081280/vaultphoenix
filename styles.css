@@ -4004,6 +4004,8 @@ body.main-page .use-case-description {
    ✅ FIX #6: Popular badge floats ABOVE Growth tier
    ✅ FIXED: SDK tiers now properly contained in module
    ✅ FIXED: Both modules same width on desktop
+   ✅ FIXED: Text overlap in SDK tiers resolved
+   ✅ FIXED: Both pricing modules equal height
    ============================================ */
 
 body.main-page .pricing {
@@ -4055,7 +4057,7 @@ body.main-page .pricing-two-column {
     gap: var(--space-2xl);
     max-width: 1300px;
     margin: 0 auto var(--space-2xl);
-    align-items: start;
+    align-items: stretch; /* Ensure equal height */
 }
 
 @media (max-width: 1024px) {
@@ -4072,7 +4074,7 @@ body.main-page .pricing-two-column {
     }
 }
 
-/* ✅ FIX #2: COMPACT mobile portrait for pricing modules */
+/* ✅ FIXED: Equal height modules with proper content spacing */
 body.main-page .pricing-solution,
 body.main-page .whitelabel-solution,
 body.main-page .sdk-solution {
@@ -4089,6 +4091,7 @@ body.main-page .sdk-solution {
     min-width: 0;
     width: 100%;
     max-width: 100%;
+    height: 100%; /* Equal height */
 }
 
 @media (max-width: 768px) {
@@ -4116,6 +4119,7 @@ body.main-page .sdk-solution {
         display: flex !important;
         flex-direction: column !important;
         gap: 12px !important;
+        height: auto !important;
     }
     
     body.main-page .solution-header {
@@ -4611,41 +4615,44 @@ body.main-page .github-title-inline {
     }
 }
 
-/* SDK Pricing Tiers - FIXED LAYOUT WITH CONSTRAINED WIDTH */
+/* ✅ FIXED: SDK Pricing Tiers with better spacing to prevent text overlap */
 body.main-page .sdk-pricing-tiers {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: stretch;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: var(--space-lg);
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     overflow: visible;
+    padding: 0 10px;
 }
 
-/* Each tier with controlled width to prevent module expansion */
+/* ✅ FIXED: Each tier with better internal spacing */
 body.main-page .sdk-tier {
-    flex: 1 1 30%;
+    flex: 1 1 32%;
     min-width: 0;
-    max-width: 200px;
+    max-width: 165px;
     background: rgba(0, 0, 0, 0.4);
     border: 2px solid rgba(99, 102, 241, 0.2);
     border-radius: var(--radius-md);
-    padding: 15px 10px;
+    padding: 20px 8px;
     text-align: center;
     transition: all var(--transition-base);
     position: relative;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    min-height: 140px;
 }
 
 @media (max-width: 768px) {
     body.main-page .sdk-tier {
         padding: var(--space-sm);
+        min-height: auto;
     }
 }
 
@@ -4660,6 +4667,7 @@ body.main-page .sdk-tier.featured {
     background: rgba(99, 102, 241, 0.1);
     transform: translateY(-5px);
     overflow: visible !important;
+    padding-top: 25px;
 }
 
 @media (max-width: 1024px) {
@@ -4671,19 +4679,19 @@ body.main-page .sdk-tier.featured {
 /* ✅ FIX #6: Popular badge FLOATS ABOVE the module */
 body.main-page .tier-badge {
     position: absolute;
-    top: -16px;
+    top: -14px;
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
     color: white;
-    padding: 5px 12px;
-    border-radius: 12px;
-    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 0.6rem;
     font-weight: 700;
     text-transform: uppercase;
     white-space: nowrap;
     z-index: 10;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5);
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.5);
     letter-spacing: 0.3px;
 }
 
@@ -4701,12 +4709,14 @@ body.main-page .tier-badge {
     }
 }
 
+/* ✅ FIXED: Adjusted text sizes to prevent overlap */
 body.main-page .tier-name {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: #ffffff;
-    margin-bottom: 6px;
-    margin-top: 5px;
+    margin-bottom: 8px;
+    margin-top: 0;
+    line-height: 1.2;
 }
 
 @media (max-width: 768px) {
@@ -4717,11 +4727,15 @@ body.main-page .tier-name {
 }
 
 body.main-page .tier-price {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 900;
     color: var(--ember-yellow);
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     line-height: 1;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 2px;
 }
 
 @media (max-width: 768px) {
@@ -4731,9 +4745,10 @@ body.main-page .tier-price {
 }
 
 body.main-page .tier-price span {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);
+    margin-left: 2px;
 }
 
 @media (max-width: 768px) {
@@ -4742,12 +4757,16 @@ body.main-page .tier-price span {
     }
 }
 
+/* ✅ FIXED: Two-line layout for tier info */
 body.main-page .tier-info {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.8);
-    line-height: 1.3;
+    line-height: 1.4;
     margin-top: auto;
-    word-break: break-word;
+    word-break: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 @media (max-width: 768px) {
@@ -4756,10 +4775,23 @@ body.main-page .tier-info {
     }
 }
 
-/* Large desktop - prevent excessive width */
+/* Large desktop - adjust for bigger screens */
 @media (min-width: 1400px) {
     body.main-page .sdk-tier {
-        max-width: 180px;
+        max-width: 170px;
+        padding: 22px 10px;
+    }
+    
+    body.main-page .tier-name {
+        font-size: 1rem;
+    }
+    
+    body.main-page .tier-price {
+        font-size: 1.7rem;
+    }
+    
+    body.main-page .tier-info {
+        font-size: 0.75rem;
     }
 }
 
@@ -4768,6 +4800,7 @@ body.main-page .tier-info {
     body.main-page .sdk-pricing-tiers {
         flex-direction: row;
         gap: 12px;
+        padding: 0;
     }
     
     body.main-page .sdk-tier {
@@ -4797,6 +4830,7 @@ body.main-page .tier-info {
     body.main-page .sdk-pricing-tiers {
         flex-direction: column;
         gap: 15px;
+        padding: 0;
     }
     
     body.main-page .sdk-tier {
@@ -4833,6 +4867,9 @@ body.main-page .tier-info {
     
     body.main-page .tier-info {
         font-size: 0.8rem;
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
     }
 }
 
