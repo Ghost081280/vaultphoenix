@@ -151,6 +151,8 @@ body.main-page .main-image-glow::before {
     transition: all var(--transition-smooth);
     will-change: opacity, transform;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    contain: layout style paint;
 }
 
 body.main-page .main-image-glow:hover::before {
@@ -202,6 +204,59 @@ body.main-page .main-image-glow.main-red-glow::before {
 
 body.main-page .main-image-glow.rectangular-glow::before {
     border-radius: 20%;
+}
+
+/* ============================================
+   3.5 MOBILE MENU GLOW FIX - PREVENT BLEED
+   ============================================ */
+
+/* Hide mobile menu completely when closed */
+body.main-page .mobile-menu-panel {
+    transform: translateX(100%);
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
+}
+
+body.main-page .mobile-menu-panel.active {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Disable glow bleed on mobile menu when closed */
+body.main-page .mobile-menu-panel:not(.active) .main-image-glow.mobile-menu-glow-fix::before {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Contain glow effects within mobile menu only when active */
+body.main-page .mobile-menu-panel.active .main-image-glow.mobile-menu-glow-fix::before {
+    display: block;
+    opacity: 0.6;
+    visibility: visible;
+}
+
+/* Ensure overlay is hidden by default */
+body.main-page .mobile-menu-overlay {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+body.main-page .mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Prevent any potential bleed from navigation glow effects */
+body.main-page .navbar .main-image-glow::before {
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
 }
 
 /* ============================================
