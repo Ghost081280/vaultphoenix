@@ -399,22 +399,15 @@ const VaultPhoenix = (function() {
     };
     
     /**
-     * Change main phone gallery image
-     * @param {string} imageSrc - Image source URL
-     * @param {string} title - Image title/alt text
-     */
-    // Replace the changePhoneImage function (around line 380)
+ * Change main phone gallery image
+ * @param {string} imageSrc - Image source URL
+ * @param {string} title - Image title/alt text
+ */
 function changePhoneImage(imageSrc, title) {
     const mainImg = DOMCache.mainScreenshot || safeQuery('#mainScreenshot');
     const thumbs = safeQueryAll('.simple-thumb');
     
     if (!mainImg) return;
-    
-    // Ensure proper sizing before transition
-    mainImg.style.width = '100%';
-    mainImg.style.height = '100%';
-    mainImg.style.objectFit = 'cover';
-    mainImg.style.objectPosition = 'center top';
     
     // Optimize animation
     optimizeAnimation(mainImg, 'opacity', 300);
@@ -424,11 +417,6 @@ function changePhoneImage(imageSrc, title) {
         mainImg.src = imageSrc;
         mainImg.alt = title;
         mainImg.style.opacity = '1';
-        // Ensure sizing persists after image change
-        mainImg.style.width = '100%';
-        mainImg.style.height = '100%';
-        mainImg.style.objectFit = 'cover';
-        mainImg.style.objectPosition = 'center top';
     }, 150);
     
     // Update active states
@@ -441,18 +429,16 @@ function changePhoneImage(imageSrc, title) {
     });
 }
 
-// Replace the changeLaptopImage function (around line 420)
+/**
+ * Change main laptop gallery image
+ * @param {string} imageSrc - Image source URL
+ * @param {string} title - Image title/alt text
+ */
 function changeLaptopImage(imageSrc, title) {
     const mainImg = DOMCache.mainLaptopScreenshot || safeQuery('#mainLaptopScreenshot');
     const thumbs = safeQueryAll('.simple-thumb-laptop');
     
     if (!mainImg) return;
-    
-    // Ensure proper sizing before transition
-    mainImg.style.width = '100%';
-    mainImg.style.height = '100%';
-    mainImg.style.objectFit = 'cover';
-    mainImg.style.objectPosition = 'center top';
     
     // Optimize animation
     optimizeAnimation(mainImg, 'opacity', 300);
@@ -462,11 +448,6 @@ function changeLaptopImage(imageSrc, title) {
         mainImg.src = imageSrc;
         mainImg.alt = title;
         mainImg.style.opacity = '1';
-        // Ensure sizing persists after image change
-        mainImg.style.width = '100%';
-        mainImg.style.height = '100%';
-        mainImg.style.objectFit = 'cover';
-        mainImg.style.objectPosition = 'center top';
     }, 150);
     
     // Update active states
