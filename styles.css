@@ -2038,7 +2038,7 @@ body.main-page .crypto-image {
     opacity: 1 !important;
 }
 
-/* ✅ FIXED: Phone frame with glow and animation */
+/* ✅ FIXED: Phone frame with smooth glow (no lines on mobile) */
 body.main-page .crypto-coin-phone-frame {
     max-width: 380px;
     width: 100%;
@@ -2056,9 +2056,9 @@ body.main-page .crypto-coin-phone-frame {
     opacity: 1 !important;
     /* ✅ Animation on FRAME */
     animation: ember-coinFloat 4s ease-in-out infinite;
-    /* ✅ Glow on FRAME */
-    filter: drop-shadow(0 10px 40px rgba(240, 165, 0, 0.6)) 
-            drop-shadow(0 0 60px rgba(240, 165, 0, 0.4));
+    /* ✅ SMOOTH glow - no harsh lines */
+    filter: drop-shadow(0 8px 30px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 50px rgba(240, 165, 0, 0.3));
 }
 
 @media (max-width: 768px) {
@@ -2070,6 +2070,9 @@ body.main-page .crypto-coin-phone-frame {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        /* ✅ SOFTER glow on mobile - eliminates lines */
+        filter: drop-shadow(0 6px 25px rgba(240, 165, 0, 0.4)) 
+                drop-shadow(0 0 40px rgba(240, 165, 0, 0.25));
     }
 }
 
@@ -2077,41 +2080,9 @@ body.main-page .crypto-coin-phone-frame {
     body.main-page .crypto-coin-phone-frame {
         max-width: 280px !important;
         padding: 8px !important;
-    }
-}
-
-/* Notch at top of phone */
-body.main-page .crypto-coin-phone-frame::before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: #333;
-    border-radius: 2px;
-}
-
-@media (max-width: 768px) {
-    body.main-page .crypto-coin-phone-frame::before {
-        width: 60px;
-        height: 3px;
-    }
-}
-
-body.main-page .crypto-coin-screen-wrapper {
-    border-radius: 25px;
-    overflow: hidden;
-    background: #000;
-    aspect-ratio: 9 / 16;
-    position: relative;
-    width: 100%;
-}
-
-@media (max-width: 768px) {
-    body.main-page .crypto-coin-screen-wrapper {
-        border-radius: 22px;
+        /* ✅ EVEN SOFTER glow on small mobile */
+        filter: drop-shadow(0 5px 20px rgba(240, 165, 0, 0.35)) 
+                drop-shadow(0 0 35px rgba(240, 165, 0, 0.2));
     }
 }
 
