@@ -1,15 +1,8 @@
 /* ============================================
-   VAULT PHOENIX - MAIN PAGE STYLESHEET v15.0
-   ALL 10 CRITICAL BUG FIXES + NEW BADGE SYSTEM
+   VAULT PHOENIX - MAIN PAGE STYLESHEET v14.0
+   ALL 10 CRITICAL BUG FIXES PROPERLY APPLIED
    
-   CHANGELOG v15.0:
-   ✅ NEW: Coming Soon & Early 2026 badges restored (upper-left placement)
-   ✅ NEW: Badge colors match module colors (orange/purple)
-   ✅ NEW: Demo cards equal size (no images, text + button only)
-   ✅ NEW: Small inner module icons enlarged for visibility
-   ✅ MAINTAINED: All v14.0 fixes (yellow line removed, mobile compact, etc.)
-   
-   PREVIOUS v14.0 FIXES:
+   CHANGELOG v14.0:
    ✅ FIX #1: Yellow horizontal line REMOVED (.main-hero-benefits-row border removed)
    ✅ FIX #2: Pricing modules (whitelabel-solution & sdk-solution) COMPACT on mobile portrait
    ✅ FIX #3: Phone frame VISIBLE on mobile + GLOW on frame + ANIMATION on frame
@@ -42,10 +35,6 @@
     --ember-gradient-background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
     --ember-gradient-card: linear-gradient(135deg, rgba(215, 51, 39, 0.15), rgba(251, 146, 60, 0.1));
     --ember-gradient-card-hover: linear-gradient(135deg, rgba(215, 51, 39, 0.2), rgba(251, 146, 60, 0.15));
-    
-    /* Badge Gradients */
-    --badge-gradient-orange: linear-gradient(135deg, #fb923c, #f0a500);
-    --badge-gradient-purple: linear-gradient(135deg, #6366f1, #8b5cf6);
     
     /* Shadows */
     --ember-shadow-xs: 0 3px 10px rgba(215, 51, 39, 0.1);
@@ -306,7 +295,7 @@ body.main-page .main-hero {
     justify-content: center;
     overflow: hidden;
     padding: 160px 20px 80px;
-    isolation: isolate;
+    isolation: isolate; /* ✅ ADDED: Create stacking context */
 }
 
 @media (max-width: 768px) {
@@ -359,7 +348,7 @@ body.main-page .main-hero-content {
     color: white;
     z-index: var(--z-content);
     position: relative;
-    overflow: visible;
+    overflow: visible; /* ✅ ADDED: Allow content to show */
 }
 
 /* ============================================
@@ -448,7 +437,7 @@ body.main-page .main-hero-steps-premium {
     justify-items: center;
     margin: 50px auto;
     max-width: 1200px;
-    overflow: visible;
+    overflow: visible; /* ✅ ADDED: Ensure steps are visible */
 }
 
 /* TABLET: Stack with arrows between */
@@ -488,7 +477,7 @@ body.main-page .main-step-premium {
     max-width: 350px;
     position: relative;
     overflow: hidden;
-    isolation: isolate;
+    isolation: isolate; /* ✅ ADDED: Create stacking context */
 }
 
 @media (max-width: 768px) {
@@ -512,7 +501,7 @@ body.main-page .main-step-premium::before {
     right: 0;
     height: 3px;
     background: var(--ember-gradient-primary);
-    z-index: 1;
+    z-index: 1; /* ✅ ADDED: Ensure it stays inside card */
 }
 
 body.main-page .main-step-premium:hover {
@@ -779,7 +768,7 @@ body.main-page .main-cta-path {
     backdrop-filter: blur(20px);
     transition: all var(--transition-smooth);
     position: relative;
-    overflow: visible; /* ✅ NEW: Allow badges to display above */
+    overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -823,55 +812,31 @@ body.main-page .main-cta-path.main-developer-path:hover {
     box-shadow: 0 25px 60px rgba(99, 102, 241, 0.3);
 }
 
-/* ============================================
-   ✅ NEW v15.0: COMING SOON & EARLY 2026 BADGES
-   Upper-left placement, color-matched to modules
-   ============================================ */
-
-body.main-page .module-status-badge {
-    position: absolute;
-    top: -14px;
-    left: 20px;
-    padding: 6px 16px;
-    border-radius: 20px;
+body.main-page .main-path-badge {
+    display: inline-block;
+    background: var(--ember-gradient-primary);
+    color: white;
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    white-space: nowrap;
-    z-index: 100;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    color: white;
-}
-
-/* Orange gradient for "Coming Soon" badges (matches orange modules) */
-body.main-page .module-status-badge.coming-soon-badge {
-    background: var(--badge-gradient-orange);
-    box-shadow: 0 4px 12px rgba(251, 146, 60, 0.5);
-}
-
-/* Purple gradient for "Early 2026" badges (matches purple modules) */
-body.main-page .module-status-badge.early-2026-badge {
-    background: var(--badge-gradient-purple);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5);
-}
-
-@media (max-width: 768px) {
-    body.main-page .module-status-badge {
-        top: -12px;
-        left: 15px;
-        padding: 5px 12px;
-        font-size: 0.65rem;
-    }
+    margin-bottom: 12px;
+    box-shadow: var(--ember-shadow-sm);
 }
 
 @media (max-width: 480px) {
-    body.main-page .module-status-badge {
-        top: -10px;
-        left: 12px;
-        padding: 4px 10px;
-        font-size: 0.6rem;
+    body.main-page .main-path-badge {
+        font-size: 0.65rem;
+        padding: 4px 12px;
+        margin-bottom: 10px;
     }
+}
+
+body.main-page .main-developer-path .main-path-badge {
+    background: var(--ember-gradient-secondary);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
 
 /* COMPACT LAYOUT - Always vertical on mobile */
@@ -1224,10 +1189,9 @@ body.main-page .main-hero-benefit-item:hover .main-benefit-icon-small {
             drop-shadow(0 0 22px rgba(240, 165, 0, 0.35));
 }
 
-/* ✅ ENLARGED v15.0: Increased from 55px/45px/38px */
 body.main-page .main-benefit-icon-small {
-    width: 68px !important;
-    height: 68px !important;
+    width: 55px !important;
+    height: 55px !important;
     object-fit: contain;
     filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.5)) 
             drop-shadow(0 0 18px rgba(240, 165, 0, 0.3));
@@ -1238,15 +1202,15 @@ body.main-page .main-benefit-icon-small {
 
 @media (max-width: 768px) {
     body.main-page .main-benefit-icon-small {
-        width: 55px !important;
-        height: 55px !important;
+        width: 45px !important;
+        height: 45px !important;
     }
 }
 
 @media (max-width: 480px) {
     body.main-page .main-benefit-icon-small {
-        width: 48px !important;
-        height: 48px !important;
+        width: 38px !important;
+        height: 38px !important;
     }
 }
 
@@ -1415,24 +1379,6 @@ body.main-page .countdown-header-redesigned {
 
 body.main-page .countdown-icon-redesigned {
     flex-shrink: 0;
-}
-
-/* ✅ ENLARGED v15.0: Increased from 55px */
-body.main-page .main-ember-countdown-icon-redesigned {
-    width: 75px !important;
-    height: 75px !important;
-    object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.8)) 
-            drop-shadow(0 0 30px rgba(240, 165, 0, 0.4));
-    transition: transform var(--transition-smooth);
-    animation: ember-coinPulse 2s ease-in-out infinite;
-}
-
-@media (max-width: 768px) {
-    body.main-page .main-ember-countdown-icon-redesigned {
-        width: 60px !important;
-        height: 60px !important;
-    }
 }
 
 body.main-page .countdown-text-redesigned h3 {
@@ -1651,18 +1597,17 @@ body.main-page .join-presale-button-redesigned:hover {
     box-shadow: 0 12px 35px rgba(215, 51, 39, 0.6);
 }
 
-/* ✅ ENLARGED v15.0: Increased from 24px */
 body.main-page .cta-icon-image-redesigned {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
 
 @media (max-width: 480px) {
     body.main-page .cta-icon-image-redesigned {
-        width: 30px;
-        height: 30px;
+        width: 24px;
+        height: 24px;
     }
 }
 
@@ -1713,18 +1658,17 @@ body.main-page .highlight-emoji-redesigned {
     flex-shrink: 0;
 }
 
-/* ✅ ENLARGED v15.0: Increased from 24px */
 body.main-page .highlight-icon-image-redesigned {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
 }
 
 @media (max-width: 768px) {
     body.main-page .highlight-icon-image-redesigned {
-        width: 30px;
-        height: 30px;
+        width: 24px;
+        height: 24px;
     }
 }
 
@@ -1824,22 +1768,6 @@ body.main-page .compliance-disclaimer-redesigned h4 {
     body.main-page .compliance-disclaimer-redesigned h4 {
         font-size: 1.05rem;
         gap: 8px;
-    }
-}
-
-/* ✅ ENLARGED v15.0: Increased from 55px */
-body.main-page .main-compliance-icon-redesigned {
-    width: 75px !important;
-    height: 75px !important;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5)) 
-            drop-shadow(0 0 18px rgba(240, 165, 0, 0.25));
-}
-
-@media (max-width: 768px) {
-    body.main-page .main-compliance-icon-redesigned {
-        width: 60px !important;
-        height: 60px !important;
     }
 }
 
@@ -1987,24 +1915,6 @@ body.main-page .social-sharing-subtitle-compact {
     font-size: clamp(1rem, 2vw, 1.2rem);
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
-}
-
-/* ✅ ENLARGED v15.0: Increased from 75px */
-body.main-page .main-social-sharing-icon-compact {
-    width: 95px !important;
-    height: 95px !important;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) 
-            drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
-    animation: ember-coinPulse 3s ease-in-out infinite;
-    flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-    body.main-page .main-social-sharing-icon-compact {
-        width: 80px !important;
-        height: 80px !important;
-    }
 }
 
 body.main-page .social-sharing-buttons-compact {
@@ -2300,7 +2210,7 @@ body.main-page .benefit-icon {
 body.main-page .benefit-icon.coin-image,
 body.main-page .benefit-icon.placement-image,
 body.main-page .benefit-icon.revenue-image {
-    width: 90px;
+    width: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2310,14 +2220,13 @@ body.main-page .benefit-icon.revenue-image {
     body.main-page .benefit-icon.coin-image,
     body.main-page .benefit-icon.placement-image,
     body.main-page .benefit-icon.revenue-image {
-        width: 70px;
+        width: 55px;
     }
 }
 
-/* ✅ ENLARGED v15.0: Increased from 70px/55px */
 body.main-page .custom-coin-icon-large {
-    width: 85px !important;
-    height: 85px !important;
+    width: 70px !important;
+    height: 70px !important;
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) 
             drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
@@ -2325,13 +2234,27 @@ body.main-page .custom-coin-icon-large {
 
 @media (max-width: 768px) {
     body.main-page .custom-coin-icon-large {
-        width: 70px !important;
-        height: 70px !important;
+        width: 55px !important;
+        height: 55px !important;
     }
 }
 
-/* ✅ ENLARGED v15.0: Increased from 70px/55px */
 body.main-page .custom-placement-icon-large {
+    width: 70px !important;
+    height: 70px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
+}
+
+@media (max-width: 768px) {
+    body.main-page .custom-placement-icon-large {
+        width: 55px !important;
+        height: 55px !important;
+    }
+}
+
+body.main-page .custom-revenue-icon-extra-large {
     width: 85px !important;
     height: 85px !important;
     object-fit: contain;
@@ -2340,25 +2263,9 @@ body.main-page .custom-placement-icon-large {
 }
 
 @media (max-width: 768px) {
-    body.main-page .custom-placement-icon-large {
-        width: 70px !important;
-        height: 70px !important;
-    }
-}
-
-/* ✅ ENLARGED v15.0: Increased from 85px/65px */
-body.main-page .custom-revenue-icon-extra-large {
-    width: 100px !important;
-    height: 100px !important;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) 
-            drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
-}
-
-@media (max-width: 768px) {
     body.main-page .custom-revenue-icon-extra-large {
-        width: 80px !important;
-        height: 80px !important;
+        width: 65px !important;
+        height: 65px !important;
     }
 }
 
@@ -2704,19 +2611,18 @@ body.main-page .technology-highlight {
     }
 }
 
-/* ✅ ENLARGED v15.0: Increased from 40px/32px */
-body.main-page .tech-highlight-icon-enlarged {
-    width: 55px;
-    height: 55px;
+body.main-page .tech-highlight-icon {
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
     flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
-    body.main-page .tech-highlight-icon-enlarged {
-        width: 45px;
-        height: 45px;
+    body.main-page .tech-highlight-icon {
+        width: 32px;
+        height: 32px;
     }
 }
 
@@ -2865,7 +2771,7 @@ body.main-page .combined-benefit:hover {
 
 body.main-page .combined-benefit-icon {
     flex-shrink: 0;
-    width: 65px;
+    width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2873,22 +2779,21 @@ body.main-page .combined-benefit-icon {
 
 @media (max-width: 768px) {
     body.main-page .combined-benefit-icon {
-        width: 55px;
+        width: 42px;
     }
 }
 
-/* ✅ ENLARGED v15.0: Increased from 50px/42px */
-body.main-page .combined-benefit-icon-enlarged img {
-    width: 65px;
-    height: 65px;
+body.main-page .combined-benefit-icon img {
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.4));
 }
 
 @media (max-width: 768px) {
-    body.main-page .combined-benefit-icon-enlarged img {
-        width: 55px;
-        height: 55px;
+    body.main-page .combined-benefit-icon img {
+        width: 42px;
+        height: 42px;
     }
 }
 
@@ -3166,9 +3071,19 @@ body.main-page .feature-description {
 }
 
 /* ============================================
-   ✅ NEW v15.0: VP-SHOWCASE SECTION
-   Equal-sized demo cards (text + button only, no images)
+   VP-SHOWCASE SECTION - COMPLETE CSS
+   
+   ADD THIS TO YOUR styles.css FILE:
+   - Either REPLACE the old App Showcase CSS (lines 2373-3128)
+   - OR ADD this after line 3128 as a new section
+   
+   This CSS matches the new HTML with vp-showcase- prefixed classes
    ============================================ */
+
+/* =====================================================
+   VP-SHOWCASE SECTION - COMPLETE STYLES
+   All classes prefixed with vp-showcase- to avoid conflicts
+   ===================================================== */
 
 /* Section Container */
 body.main-page .vp-showcase-section {
@@ -3563,7 +3478,7 @@ body.main-page .vp-showcase-thumb-label {
     }
 }
 
-/* ✅ NEW v15.0: EQUAL-SIZED DEMO CARDS (Text + Button ONLY, NO Images) */
+/* ===== DEMO CARDS ===== */
 body.main-page .vp-showcase-demo-card {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -3571,42 +3486,56 @@ body.main-page .vp-showcase-demo-card {
     padding: var(--space-lg);
     backdrop-filter: blur(20px);
     width: 100%;
-    max-width: 320px; /* ✅ EQUAL SIZE for both */
-    min-height: 120px; /* ✅ EQUAL HEIGHT for consistency */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--space-md);
+    max-width: 320px;
 }
 
 body.main-page .vp-showcase-laptop-column .vp-showcase-demo-card {
-    max-width: 320px; /* ✅ SAME as phone card */
+    max-width: 600px;
 }
 
 @media (max-width: 768px) {
     body.main-page .vp-showcase-demo-card {
         padding: var(--space-md);
         max-width: 260px;
-        min-height: 100px;
     }
     
     body.main-page .vp-showcase-laptop-column .vp-showcase-demo-card {
-        max-width: 260px;
+        max-width: 450px;
     }
 }
 
 body.main-page .vp-showcase-demo-instruction {
     color: rgba(255, 255, 255, 0.8);
     font-size: 0.95rem;
+    margin-bottom: var(--space-md);
     text-align: center;
     font-weight: 600;
-    margin: 0;
 }
 
 @media (max-width: 768px) {
     body.main-page .vp-showcase-demo-instruction {
         font-size: 0.85rem;
+        margin-bottom: var(--space-sm);
+    }
+}
+
+body.main-page .vp-showcase-demo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+body.main-page .vp-showcase-demo-icon {
+    width: 45px !important;
+    height: 45px !important;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    body.main-page .vp-showcase-demo-icon {
+        width: 36px !important;
+        height: 36px !important;
     }
 }
 
@@ -3625,7 +3554,6 @@ body.main-page .vp-showcase-demo-button {
     border: 2px solid rgba(215, 51, 39, 0.3);
     position: relative;
     overflow: hidden;
-    white-space: nowrap;
 }
 
 @media (max-width: 768px) {
@@ -3734,22 +3662,6 @@ body.main-page .vp-showcase-connection-line:last-child {
         rgba(215, 51, 39, 0.5) 0%,
         transparent 100%
     );
-}
-
-/* ✅ ENLARGED v15.0: Increased from 50px */
-body.main-page .main-connection-icon {
-    width: 70px !important;
-    height: 70px !important;
-    object-fit: contain;
-    filter: drop-shadow(0 3px 6px rgba(240, 165, 0, 0.5)) 
-            drop-shadow(0 0 15px rgba(240, 165, 0, 0.25));
-}
-
-@media (max-width: 768px) {
-    body.main-page .main-connection-icon {
-        width: 55px !important;
-        height: 55px !important;
-    }
 }
 
 body.main-page .vp-showcase-connection-badge {
@@ -4147,7 +4059,7 @@ body.main-page .pricing-two-column {
     gap: var(--space-2xl);
     max-width: 1300px;
     margin: 0 auto var(--space-2xl);
-    align-items: stretch;
+    align-items: stretch; /* Ensure equal height */
 }
 
 @media (max-width: 1024px) {
@@ -4164,7 +4076,7 @@ body.main-page .pricing-two-column {
     }
 }
 
-/* ✅ FIXED: Equal height modules with proper content spacing + overflow: visible for badges */
+/* ✅ FIXED: Equal height modules with proper content spacing */
 body.main-page .pricing-solution,
 body.main-page .whitelabel-solution,
 body.main-page .sdk-solution {
@@ -4175,13 +4087,13 @@ body.main-page .sdk-solution {
     backdrop-filter: blur(20px);
     transition: all var(--transition-smooth);
     position: relative;
-    overflow: visible; /* ✅ NEW: Allow badges to display above */
+    overflow: visible;
     display: flex;
     flex-direction: column;
     min-width: 0;
     width: 100%;
     max-width: 100%;
-    height: 100%;
+    height: 100%; /* Equal height */
 }
 
 @media (max-width: 768px) {
@@ -4261,9 +4173,9 @@ body.main-page .sdk-solution {
         gap: 10px !important;
     }
     
-    body.main-page .solution-highlight-icon-enlarged {
-        width: 45px !important;
-        height: 45px !important;
+    body.main-page .solution-highlight-icon {
+        width: 35px !important;
+        height: 35px !important;
     }
     
     body.main-page .solution-highlight-content h5 {
@@ -5116,19 +5028,18 @@ body.main-page .solution-highlight-box.additional-benefit:last-child {
     margin-bottom: var(--space-md);
 }
 
-/* ✅ ENLARGED v15.0: Increased from 50px/42px */
-body.main-page .solution-highlight-icon-enlarged {
-    width: 60px;
-    height: 60px;
+body.main-page .solution-highlight-icon {
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.5));
     flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
-    body.main-page .solution-highlight-icon-enlarged {
-        width: 50px;
-        height: 50px;
+    body.main-page .solution-highlight-icon {
+        width: 42px;
+        height: 42px;
     }
 }
 
@@ -5290,8 +5201,412 @@ body.main-page .revenue-examples-section {
     border-radius: var(--radius-3xl);
     padding: var(--space-2xl);
     max-width: 1300px;
-    width: auto;
-    margin: var(--space-2xl) auto;
+    margin: 0 auto var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+    body.main-page .revenue-examples-section {
+        padding: var(--space-lg);
+        margin-bottom: var(--space-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .revenue-examples-section {
+        padding: var(--space-md);
+    }
+}
+
+body.main-page .revenue-examples-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+    body.main-page .revenue-examples-header {
+        margin-bottom: var(--space-lg);
+    }
+}
+
+body.main-page .revenue-examples-header h3 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin: var(--space-md) 0;
+}
+
+body.main-page .revenue-examples-header p {
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
+
+body.main-page .revenue-examples-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    justify-items: center;
+    align-items: start;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 1024px) {
+    body.main-page .revenue-examples-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        margin-bottom: var(--space-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    body.main-page .revenue-examples-grid {
+        gap: var(--space-sm);
+    }
+}
+
+body.main-page .revenue-example-card {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+    border: 2px solid rgba(215, 51, 39, 0.25);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    transition: all var(--transition-smooth);
+    width: 100%;
+    max-width: 550px;
+}
+
+@media (max-width: 768px) {
+    body.main-page .revenue-example-card {
+        padding: var(--space-md);
+        max-width: 100%;
+    }
+}
+
+body.main-page .revenue-example-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(215, 51, 39, 0.4);
+    box-shadow: var(--ember-shadow-sm);
+}
+
+body.main-page .revenue-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: var(--space-md);
+}
+
+@media (max-width: 768px) {
+    body.main-page .revenue-card-header {
+        gap: 12px;
+    }
+}
+
+body.main-page .example-industry {
+    flex: 1;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    body.main-page .example-industry {
+        font-size: 0.8rem;
+    }
+}
+
+body.main-page .example-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+    body.main-page .example-title {
+        font-size: 1.3rem;
+    }
+}
+
+body.main-page .example-scenario {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+}
+
+@media (max-width: 768px) {
+    body.main-page .example-scenario {
+        font-size: 0.85rem;
+    }
+}
+
+body.main-page .example-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    body.main-page .example-breakdown {
+        gap: 8px;
+    }
+}
+
+body.main-page .breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-sm);
+}
+
+@media (max-width: 768px) {
+    body.main-page .breakdown-item {
+        padding: 8px;
+    }
+}
+
+body.main-page .breakdown-item.total {
+    background: rgba(215, 51, 39, 0.15);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    padding: 12px;
+    margin-top: 5px;
+}
+
+body.main-page .breakdown-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 768px) {
+    body.main-page .breakdown-label {
+        font-size: 0.8rem;
+    }
+}
+
+body.main-page .breakdown-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+@media (max-width: 768px) {
+    body.main-page .breakdown-value {
+        font-size: 0.9rem;
+    }
+}
+
+body.main-page .breakdown-item.total .breakdown-label {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+body.main-page .breakdown-item.total .breakdown-value {
+    font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+    body.main-page .breakdown-item.total .breakdown-value {
+        font-size: 1.1rem;
+    }
+}
+
+body.main-page .revenue-model-benefits h4 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+    body.main-page .revenue-model-benefits h4 {
+        font-size: 1.3rem;
+        margin-bottom: var(--space-md);
+    }
+}
+
+body.main-page .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+@media (max-width: 1024px) {
+    body.main-page .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    body.main-page .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+body.main-page .benefit-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-md);
+}
+
+@media (max-width: 768px) {
+    body.main-page .benefit-box {
+        padding: var(--space-sm);
+        gap: 10px;
+    }
+}
+
+body.main-page .benefit-icon-small {
+    flex-shrink: 0;
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    body.main-page .benefit-icon-small {
+        width: 38px;
+    }
+}
+
+body.main-page .benefit-icon-img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+}
+
+@media (max-width: 768px) {
+    body.main-page .benefit-icon-img {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+body.main-page .benefit-text strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    body.main-page .benefit-text strong {
+        font-size: 0.9rem;
+    }
+}
+
+body.main-page .benefit-text p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    body.main-page .benefit-text p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Development Story Section */
+body.main-page .development-story-section {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+body.main-page .development-story-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.12), rgba(251, 146, 60, 0.08));
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    backdrop-filter: blur(20px);
+}
+
+@media (max-width: 768px) {
+    body.main-page .development-story-card {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--space-lg);
+        gap: var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .development-story-card {
+        padding: var(--space-md);
+    }
+}
+
+body.main-page .development-story-icon {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 25px rgba(240, 165, 0, 0.3));
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    body.main-page .development-story-icon {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+body.main-page .development-story-content h4 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+    body.main-page .development-story-content h4 {
+        font-size: 1.5rem;
+    }
+}
+
+body.main-page .development-story-content p {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    body.main-page .development-story-content p {
+        font-size: 0.95rem;
+    }
+}
+
+/* ============================================
+   14. REVENUE EXAMPLES (2x2 Grid + Benefits) - FIXED CONTAINER & EQUAL CARDS
+   ============================================ */
+
+body.main-page .revenue-examples-section {
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.08), rgba(251, 146, 60, 0.04));
+    border: 2px solid rgba(215, 51, 39, 0.25);
+    border-radius: var(--radius-3xl);
+    padding: var(--space-2xl);
+    max-width: 1300px;
+    width: auto; /* FIXED: Let it naturally fit within parent padding */
+    margin: var(--space-2xl) auto; /* FIXED: Consistent spacing */
     box-sizing: border-box;
 }
 
@@ -5335,7 +5650,6 @@ body.main-page .revenue-examples-header p {
     line-height: 1.7;
 }
 
-/* ✅ ENLARGED v15.0: Increased from 150px */
 body.main-page .main-revenue-header-icon {
     width: 200px !important;
     height: 200px !important;
@@ -5346,8 +5660,8 @@ body.main-page .main-revenue-header-icon {
 
 @media (max-width: 768px) {
     body.main-page .main-revenue-header-icon {
-        width: 160px !important;
-        height: 160px !important;
+        width: 150px !important;
+        height: 150px !important;
     }
 }
 
@@ -5357,7 +5671,7 @@ body.main-page .revenue-examples-grid {
     gap: var(--space-lg);
     margin-bottom: var(--space-xl);
     justify-items: center;
-    align-items: stretch;
+    align-items: stretch; /* FIXED: Make all cards equal height */
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
@@ -5385,10 +5699,10 @@ body.main-page .revenue-example-card {
     transition: all var(--transition-smooth);
     width: 100%;
     max-width: 550px;
-    min-height: 400px;
+    min-height: 400px; /* FIXED: Ensure minimum height for consistency */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between; /* FIXED: Distribute content evenly */
 }
 
 @media (max-width: 768px) {
@@ -5418,10 +5732,9 @@ body.main-page .revenue-card-header {
     }
 }
 
-/* ✅ ENLARGED v15.0: Increased from 65px */
 body.main-page .main-revenue-industry-icon {
-    width: 85px !important;
-    height: 85px !important;
+    width: 78px !important;
+    height: 78px !important;
     object-fit: contain;
     filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3)) 
             drop-shadow(0 0 15px rgba(240, 165, 0, 0.2));
@@ -5430,8 +5743,8 @@ body.main-page .main-revenue-industry-icon {
 
 @media (max-width: 768px) {
     body.main-page .main-revenue-industry-icon {
-        width: 70px !important;
-        height: 70px !important;
+        width: 65px !important;
+        height: 65px !important;
     }
 }
 
@@ -5451,7 +5764,7 @@ body.main-page .example-industry {
 }
 
 body.main-page .example-title {
-    font-size: 1.4rem;
+    font-size: 1.4rem; /* FIXED: Slightly smaller for consistency */
     font-weight: 800;
     color: #ffffff;
     margin-bottom: var(--space-sm);
@@ -5464,11 +5777,11 @@ body.main-page .example-title {
 }
 
 body.main-page .example-scenario {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* FIXED: Smaller for better fit */
     color: rgba(255, 255, 255, 0.8);
     line-height: 1.5;
     margin-bottom: var(--space-md);
-    min-height: 2.5em;
+    min-height: 2.5em; /* FIXED: Consistent height */
 }
 
 @media (max-width: 768px) {
@@ -5493,10 +5806,10 @@ body.main-page .breakdown-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 10px;
+    padding: 8px 10px; /* FIXED: Compact padding */
     background: rgba(0, 0, 0, 0.3);
     border-radius: var(--radius-sm);
-    gap: 10px;
+    gap: 10px; /* FIXED: Prevent overlap */
 }
 
 @media (max-width: 768px) {
@@ -5508,12 +5821,12 @@ body.main-page .breakdown-item {
 body.main-page .breakdown-item.total {
     background: rgba(215, 51, 39, 0.15);
     border: 1px solid rgba(215, 51, 39, 0.3);
-    padding: 10px;
+    padding: 10px; /* FIXED: Slightly larger for emphasis */
     margin-top: 5px;
 }
 
 body.main-page .breakdown-label {
-    font-size: 0.85rem;
+    font-size: 0.85rem; /* FIXED: Smaller text */
     color: rgba(255, 255, 255, 0.85);
     flex: 1;
     min-width: 0;
@@ -5527,7 +5840,7 @@ body.main-page .breakdown-label {
 }
 
 body.main-page .breakdown-value {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* FIXED: Smaller text */
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
     flex-shrink: 0;
@@ -5547,7 +5860,7 @@ body.main-page .breakdown-item.total .breakdown-label {
 }
 
 body.main-page .breakdown-item.total .breakdown-value {
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* FIXED: Smaller for better fit */
 }
 
 @media (max-width: 768px) {
@@ -5672,8 +5985,8 @@ body.main-page .benefit-text p {
 
 body.main-page .development-story-section {
     max-width: 1200px;
-    margin: var(--space-2xl) auto var(--space-3xl) auto;
-    padding: 0 var(--space-xl);
+    margin: var(--space-2xl) auto var(--space-3xl) auto; /* FIXED: proper top and bottom margins */
+    padding: 0 var(--space-xl); /* FIXED: side padding to match other sections */
 }
 
 @media (max-width: 768px) {
@@ -5717,9 +6030,9 @@ body.main-page .development-story-card {
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
     backdrop-filter: blur(20px);
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+    width: 100%; /* Ensure full width within container */
+    max-width: 100%; /* Prevent overflow */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 @media (max-width: 768px) {
@@ -5879,7 +6192,7 @@ body.main-page .journey-path-module {
     backdrop-filter: blur(20px);
     transition: all var(--transition-smooth);
     position: relative;
-    overflow: visible; /* ✅ NEW: Allow badges to display above */
+    overflow: hidden;
     text-align: center;
 }
 
@@ -5931,22 +6244,6 @@ body.main-page .journey-path-header {
 @media (max-width: 768px) {
     body.main-page .journey-path-header {
         margin-bottom: var(--space-lg);
-    }
-}
-
-/* ✅ ENLARGED v15.0: Increased from 100px */
-body.main-page .main-journey-icon-large {
-    width: 120px !important;
-    height: 120px !important;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5)) 
-            drop-shadow(0 0 18px rgba(240, 165, 0, 0.25));
-}
-
-@media (max-width: 768px) {
-    body.main-page .main-journey-icon-large {
-        width: 100px !important;
-        height: 100px !important;
     }
 }
 
@@ -6176,10 +6473,130 @@ body.main-page .journey-secondary-link:hover span {
 }
 
 /* ============================================
-   17. ICON SIZING SYSTEM (Complete) - ALL ENLARGED
+   17. ICON SIZING SYSTEM (Complete)
    ============================================ */
 
-/* Coin pulse animation */
+body.main-page .main-benefit-icon-small {
+    width: 68px !important;
+    height: 68px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 8px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 18px rgba(240, 165, 0, 0.3));
+    transition: transform var(--transition-base), 
+                filter var(--transition-base);
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-benefit-icon-small {
+        width: 55px !important;
+        height: 55px !important;
+    }
+}
+
+body.main-page .main-connection-icon {
+    width: 60px !important;
+    height: 60px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 15px rgba(240, 165, 0, 0.25));
+}
+
+body.main-page .main-social-sharing-icon-compact {
+    width: 95px !important;
+    height: 95px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
+    animation: ember-coinPulse 3s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-social-sharing-icon-compact {
+        width: 75px !important;
+        height: 75px !important;
+    }
+}
+
+body.main-page .main-revenue-header-icon {
+    width: 200px !important;
+    height: 200px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 12px rgba(240, 165, 0, 0.6)) 
+            drop-shadow(0 0 25px rgba(240, 165, 0, 0.3));
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-revenue-header-icon {
+        width: 150px !important;
+        height: 150px !important;
+    }
+}
+
+body.main-page .main-revenue-industry-icon {
+    width: 78px !important;
+    height: 78px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3)) 
+            drop-shadow(0 0 15px rgba(240, 165, 0, 0.2));
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-revenue-industry-icon {
+        width: 65px !important;
+        height: 65px !important;
+    }
+}
+
+body.main-page .main-journey-icon-large {
+    width: 120px !important;
+    height: 120px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 18px rgba(240, 165, 0, 0.25));
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-journey-icon-large {
+        width: 100px !important;
+        height: 100px !important;
+    }
+}
+
+body.main-page .main-ember-countdown-icon-redesigned {
+    width: 68px !important;
+    height: 68px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.8)) 
+            drop-shadow(0 0 30px rgba(240, 165, 0, 0.4));
+    transition: transform var(--transition-smooth);
+    animation: ember-coinPulse 2s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-ember-countdown-icon-redesigned {
+        width: 55px !important;
+        height: 55px !important;
+    }
+}
+
+body.main-page .main-compliance-icon-redesigned {
+    width: 68px !important;
+    height: 68px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 18px rgba(240, 165, 0, 0.25));
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-compliance-icon-redesigned {
+        width: 55px !important;
+        height: 55px !important;
+    }
+}
+
 @keyframes ember-coinPulse {
     0%, 100% { 
         transform: scale(1) rotate(0deg); 
@@ -6372,7 +6789,7 @@ body.main-page *:focus-visible {
 
 body.main-page .main-skip-to-content {
     position: absolute;
-    top: -100px;
+    top: -100px; /* INCREASED from -40px to ensure it's fully hidden */
     left: 0;
     background: var(--ember-yellow);
     color: #000;
@@ -6381,16 +6798,16 @@ body.main-page .main-skip-to-content {
     font-weight: 700;
     z-index: var(--z-tooltip);
     transition: top var(--transition-fast), visibility var(--transition-fast);
-    visibility: hidden;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    visibility: hidden; /* ADDED: Hide by default */
+    overflow: hidden; /* ADDED: Clip any overflow */
+    clip: rect(0, 0, 0, 0); /* ADDED: Additional clipping */
     white-space: nowrap;
 }
 
 body.main-page .main-skip-to-content:focus {
     top: 0;
-    visibility: visible;
-    clip: auto;
+    visibility: visible; /* ADDED: Show when focused */
+    clip: auto; /* ADDED: Remove clipping when visible */
 }
 
 /* ============================================
@@ -6459,17 +6876,8 @@ body.main-page .footer {
 /* DO NOT add any .footer .social-media overrides */
 
 /* ============================================
-   END OF VAULT PHOENIX v15.0 - ALL FIXES COMPLETE + NEW BADGE SYSTEM
+   END OF VAULT PHOENIX v14.0 - ALL FIXES COMPLETE
    
-   NEW v15.0 FEATURES:
-   ✅ Coming Soon & Early 2026 badges restored
-   ✅ Badge colors match module colors (orange/purple)
-   ✅ Badges positioned upper-left corner
-   ✅ Demo cards equal size (320px max-width, 120px min-height)
-   ✅ Demo cards text + button only (no images)
-   ✅ All small inner module icons enlarged
-   
-   MAINTAINED v14.0 FIXES:
    ✅ FIX #1: Yellow horizontal line REMOVED
    ✅ FIX #2: Pricing modules compact on mobile portrait
    ✅ FIX #3: Phone frame visible on mobile + glow + animation
@@ -6481,9 +6889,8 @@ body.main-page .footer {
    ✅ FIX #9: Management laptop SMALLER (600px/450px)
    ✅ FIX #10: All sizing optimizations applied
    
-   Total Lines: ~7200
+   Total Lines: ~6800
    Production Ready: ✓
    Mobile Optimized: ✓
-   All v15.0 Features Applied: ✓
-   All v14.0 Fixes Maintained: ✓
+   All Fixes Applied: ✓
    ============================================ */
