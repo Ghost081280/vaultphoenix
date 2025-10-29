@@ -1972,7 +1972,7 @@ body.main-page .social-share-text-compact {
 
 /* ============================================
    8. CRYPTO COIN SECTION (GPS & Beacon)
-   ✅ FIXED: Phone frame visible on mobile
+   ✅ MOBILE FIXED: Phone visible on all devices
    ============================================ */
 
 body.main-page .crypto-coin-section {
@@ -1984,13 +1984,13 @@ body.main-page .crypto-coin-section {
 
 @media (max-width: 768px) {
     body.main-page .crypto-coin-section {
-        padding: 60px 10px;
+        padding: 60px 20px;
     }
 }
 
 @media (max-width: 480px) {
     body.main-page .crypto-coin-section {
-        padding: 50px 10px;
+        padding: 50px 15px;
     }
 }
 
@@ -2025,25 +2025,30 @@ body.main-page .crypto-content {
     }
 }
 
+/* CRITICAL: Force image column to show on mobile */
 body.main-page .crypto-image {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    min-height: 200px;
 }
 
+/* On mobile, show image FIRST (before text) */
 @media (max-width: 1024px) {
-    body.main-page .crypto-content {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Ensure image comes first on mobile */
     body.main-page .crypto-image {
         order: -1;
+        margin-bottom: 40px;
+    }
+    
+    body.main-page .crypto-text {
+        order: 1;
     }
 }
 
-/* Phone frame - visible on all devices */
+/* Phone frame styling */
 body.main-page .crypto-coin-phone-frame {
+    width: 100%;
     max-width: 380px;
     margin: 0 auto;
     padding: 12px;
@@ -2076,11 +2081,13 @@ body.main-page .crypto-coin-screen-wrapper {
     background: #000;
     aspect-ratio: 9 / 16;
     position: relative;
+    width: 100%;
 }
 
+/* Mobile sizing */
 @media (max-width: 768px) {
     body.main-page .crypto-coin-phone-frame {
-        max-width: 280px;
+        max-width: 300px;
         padding: 10px;
         border-radius: 30px;
     }
@@ -2088,19 +2095,16 @@ body.main-page .crypto-coin-screen-wrapper {
     body.main-page .crypto-coin-screen-wrapper {
         border-radius: 20px;
     }
-    
-    body.main-page .crypto-image {
-        margin-bottom: 30px;
-    }
 }
 
 @media (max-width: 480px) {
     body.main-page .crypto-coin-phone-frame {
-        max-width: 240px;
+        max-width: 260px;
+        padding: 8px;
     }
 }
 
-/* Image fits perfectly */
+/* Image inside phone */
 body.main-page .phoenix-coin-image {
     width: 100%;
     height: 100%;
@@ -2110,13 +2114,15 @@ body.main-page .phoenix-coin-image {
     transform: scale(1.02);
 }
 
+/* Text column */
 body.main-page .crypto-text {
     padding: var(--space-lg);
 }
 
 @media (max-width: 768px) {
     body.main-page .crypto-text {
-        padding: var(--space-md);
+        padding: 0;
+        text-align: center;
     }
 }
 
@@ -2157,6 +2163,12 @@ body.main-page .crypto-benefit {
     display: flex;
     align-items: flex-start;
     gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+    body.main-page .crypto-benefit {
+        text-align: left;
+    }
 }
 
 body.main-page .benefit-icon {
