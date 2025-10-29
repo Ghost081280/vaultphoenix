@@ -1972,8 +1972,7 @@ body.main-page .social-share-text-compact {
 
 /* ============================================
    8. CRYPTO COIN SECTION (GPS & Beacon)
-   ✅ FIX #3: Phone frame visible on mobile + glow + animation
-   ✅ FIX #4: Phone screenshots fit perfectly
+   ✅ FIXED: Phone frame visible on mobile + glow + animation
    ============================================ */
 
 body.main-page .crypto-coin-section {
@@ -2026,13 +2025,17 @@ body.main-page .crypto-content {
     }
 }
 
+/* ✅ CRITICAL FIX: Force image to display on mobile */
 body.main-page .crypto-image {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-/* ✅ FIX #3: Phone frame - GLOW on frame, ANIMATION on frame, visible on mobile */
+/* ✅ Phone frame - visible on ALL devices */
 body.main-page .crypto-coin-phone-frame {
     max-width: 380px;
     margin: 0 auto;
@@ -2045,9 +2048,8 @@ body.main-page .crypto-coin-phone-frame {
     position: relative;
     display: block !important;
     visibility: visible !important;
-    /* ✅ Animation on FRAME */
+    opacity: 1 !important;
     animation: ember-coinFloat 4s ease-in-out infinite;
-    /* ✅ Glow on FRAME */
     filter: drop-shadow(0 10px 40px rgba(240, 165, 0, 0.6)) 
             drop-shadow(0 0 60px rgba(240, 165, 0, 0.4));
 }
@@ -2070,39 +2072,53 @@ body.main-page .crypto-coin-screen-wrapper {
     background: #000;
     aspect-ratio: 9 / 16;
     position: relative;
+    display: block !important;
+    visibility: visible !important;
 }
 
+/* ✅ MOBILE: Smaller but VISIBLE */
 @media (max-width: 768px) {
     body.main-page .crypto-coin-phone-frame {
         max-width: 280px !important;
         padding: 10px !important;
         border-radius: 30px;
-        display: block !important; /* ✅ FORCE VISIBLE */
+        display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
     }
     
     body.main-page .crypto-coin-screen-wrapper {
         border-radius: 20px;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     body.main-page .crypto-image {
         display: flex !important;
         justify-content: center !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-bottom: 30px;
     }
 }
 
-/* ✅ FIX #4: Image fits perfectly - NO animation, NO glow on image */
+@media (max-width: 480px) {
+    body.main-page .crypto-coin-phone-frame {
+        max-width: 240px !important;
+    }
+}
+
+/* ✅ Image fits perfectly */
 body.main-page .phoenix-coin-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* ✅ FIX #4: CHANGED from contain */
-    object-position: center top; /* ✅ FIX #4: ADDED */
-    display: block;
-    /* ✅ Perfect fit */
-    transform: scale(1.02); /* ✅ FIX #4: ADJUSTED for perfect fit */
-    /* ✅ NO animation on image */
-    /* ✅ NO filter/glow on image */
+    object-fit: cover;
+    object-position: center top;
+    display: block !important;
+    transform: scale(1.02);
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 body.main-page .crypto-text {
@@ -2112,137 +2128,7 @@ body.main-page .crypto-text {
 @media (max-width: 768px) {
     body.main-page .crypto-text {
         padding: var(--space-md);
-    }
-}
-
-body.main-page .crypto-title {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 900;
-    color: #ffffff;
-    margin-bottom: var(--space-md);
-    line-height: 1.2;
-}
-
-body.main-page .crypto-description {
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: var(--space-lg);
-    line-height: 1.7;
-}
-
-@media (max-width: 768px) {
-    body.main-page .crypto-description {
-        margin-bottom: var(--space-md);
-    }
-}
-
-body.main-page .crypto-benefits {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-}
-
-@media (max-width: 768px) {
-    body.main-page .crypto-benefits {
-        gap: var(--space-md);
-    }
-}
-
-body.main-page .crypto-benefit {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-md);
-}
-
-body.main-page .benefit-icon {
-    flex-shrink: 0;
-}
-
-body.main-page .benefit-icon.coin-image,
-body.main-page .benefit-icon.placement-image,
-body.main-page .benefit-icon.revenue-image {
-    width: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-@media (max-width: 768px) {
-    body.main-page .benefit-icon.coin-image,
-    body.main-page .benefit-icon.placement-image,
-    body.main-page .benefit-icon.revenue-image {
-        width: 55px;
-    }
-}
-
-body.main-page .custom-coin-icon-large {
-    width: 70px !important;
-    height: 70px !important;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) 
-            drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
-}
-
-@media (max-width: 768px) {
-    body.main-page .custom-coin-icon-large {
-        width: 55px !important;
-        height: 55px !important;
-    }
-}
-
-body.main-page .custom-placement-icon-large {
-    width: 70px !important;
-    height: 70px !important;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) 
-            drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
-}
-
-@media (max-width: 768px) {
-    body.main-page .custom-placement-icon-large {
-        width: 55px !important;
-        height: 55px !important;
-    }
-}
-
-body.main-page .custom-revenue-icon-extra-large {
-    width: 85px !important;
-    height: 85px !important;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) 
-            drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
-}
-
-@media (max-width: 768px) {
-    body.main-page .custom-revenue-icon-extra-large {
-        width: 65px !important;
-        height: 65px !important;
-    }
-}
-
-body.main-page .benefit-content h3 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: var(--space-xs);
-}
-
-@media (max-width: 768px) {
-    body.main-page .benefit-content h3 {
-        font-size: 1.3rem;
-    }
-}
-
-body.main-page .benefit-content p {
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.7;
-}
-
-@media (max-width: 768px) {
-    body.main-page .benefit-content p {
-        font-size: 0.95rem;
-        line-height: 1.6;
+        text-align: center;
     }
 }
 
