@@ -207,10 +207,10 @@ body.main-page .main-image-glow.rectangular-glow::before {
 }
 
 /* ============================================
-   3.5 MOBILE MENU GLOW FIX - PREVENT BLEED
+   3.5 MOBILE MENU GLOW FIX - PROPER SOLUTION
    ============================================ */
 
-/* Mobile menu panel - HIDDEN BY DEFAULT */
+/* Create a clipping container for the mobile menu */
 body.main-page .mobile-menu-panel {
     position: fixed;
     top: 0;
@@ -221,42 +221,71 @@ body.main-page .mobile-menu-panel {
     z-index: 9999;
     padding: 20px;
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-    
-    /* CRITICAL: Start completely hidden */
-    display: none !important;
     transform: translateX(100%);
     visibility: hidden;
     opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
     
-    /* Transitions for smooth animation when shown */
-    transition: none; /* No transition when hidden */
+    /* PROPER FIX: Clip any content that extends beyond boundaries */
+    overflow: hidden !important;
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
 }
 
-/* Mobile menu panel - ACTIVE STATE */
 body.main-page .mobile-menu-panel.active {
-    /* CRITICAL: Must be display block when active */
-    display: block !important;
+    transform: translateX(0);
     visibility: visible;
     opacity: 1;
-    transform: translateX(0);
-    
-    /* Enable transitions only when active */
-    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Ensure glow effects are contained */
+/* Fix the glow elements to not extend beyond their containers */
 body.main-page .mobile-menu-panel .main-image-glow {
     position: relative;
     display: inline-block;
+    line-height: 0;
+    isolation: isolate;
     max-width: 100%;
-    contain: layout style paint;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
-/* Disable glow when menu is not active */
-body.main-page .mobile-menu-panel:not(.active) .main-image-glow::before {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
+/* Constrain the glow effect properly */
+body.main-page .mobile-menu-panel .main-image-glow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        rgba(240, 165, 0, 0.6) 0%, 
+        rgba(251, 146, 60, 0.4) 30%, 
+        rgba(215, 51, 39, 0.2) 50%, 
+        transparent 70%
+    );
+    border-radius: 50%;
+    filter: blur(15px); /* Reduced blur to stay within bounds */
+    opacity: 0.6;
+    z-index: 1;
+    pointer-events: none;
+    
+    /* Ensure the glow doesn't extend beyond container */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+/* Ensure the mobile menu container clips all content */
+body.main-page .mobile-menu-branding {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    overflow: hidden; /* Clip any overflow from children */
+    position: relative;
+    z-index: 1;
 }
 
 /* Mobile menu overlay */
@@ -268,58 +297,50 @@ body.main-page .mobile-menu-overlay {
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
     z-index: 9998;
-    
-    /* Hidden by default */
-    display: none;
     opacity: 0;
     visibility: hidden;
-    
-    /* No transition when hidden */
-    transition: none;
-}
-
-/* Mobile menu overlay - ACTIVE STATE */
-body.main-page .mobile-menu-overlay.active {
-    display: block;
-    opacity: 1;
-    visibility: visible;
+    pointer-events: none;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Prevent any overflow from the hero section */
+body.main-page .mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Hero section overflow containment */
 body.main-page .main-hero {
-    overflow: hidden !important;
     position: relative;
+    overflow: hidden;
     isolation: isolate;
 }
 
-/* Ensure body doesn't show horizontal scrollbar */
+/* Viewport overflow prevention */
 body.main-page {
-    overflow-x: hidden !important;
-    max-width: 100vw !important;
-    position: relative;
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
-/* Additional containment for mobile menu branding */
-body.main-page .mobile-menu-branding {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    contain: layout style paint;
-}
-
-/* Prevent any potential bleed from navigation glow effects */
-body.main-page .navbar .main-image-glow::before {
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-}
-
-/* Ensure no elements can overflow viewport */
-html {
-    overflow-x: hidden !important;
-    max-width: 100vw !important;
+/* Alternative approach: Use a mask instead of blur for mobile menu glows */
+@supports (mask-image: radial-gradient(circle, black, transparent)) {
+    body.main-page .mobile-menu-panel .main-image-glow::before {
+        filter: blur(10px); /* Even smaller blur */
+        mask-image: radial-gradient(
+            circle at center,
+            black 0%,
+            rgba(0, 0, 0, 0.8) 30%,
+            rgba(0, 0, 0, 0.3) 50%,
+            transparent 65%
+        );
+        -webkit-mask-image: radial-gradient(
+            circle at center,
+            black 0%,
+            rgba(0, 0, 0, 0.8) 30%,
+            rgba(0, 0, 0, 0.3) 50%,
+            transparent 65%
+        );
+    }
 }
 
 /* ============================================
