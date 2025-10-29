@@ -207,10 +207,10 @@ body.main-page .main-image-glow.rectangular-glow::before {
 }
 
 /* ============================================
-   3.5 MOBILE MENU GLOW FIX - PROPER SOLUTION
+   3.5 MOBILE MENU GLOW FIX - PREVENT BLEED
    ============================================ */
 
-/* Create a clipping container for the mobile menu */
+/* Hide mobile menu completely when closed */
 body.main-page .mobile-menu-panel {
     position: fixed;
     top: 0;
@@ -224,12 +224,7 @@ body.main-page .mobile-menu-panel {
     transform: translateX(100%);
     visibility: hidden;
     opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-    
-    /* PROPER FIX: Clip any content that extends beyond boundaries */
-    overflow: hidden !important;
-    clip-path: inset(0 0 0 0);
-    -webkit-clip-path: inset(0 0 0 0);
+    transition: transform 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
 }
 
 body.main-page .mobile-menu-panel.active {
@@ -238,57 +233,27 @@ body.main-page .mobile-menu-panel.active {
     opacity: 1;
 }
 
-/* Fix the glow elements to not extend beyond their containers */
-body.main-page .mobile-menu-panel .main-image-glow {
-    position: relative;
-    display: inline-block;
-    line-height: 0;
-    isolation: isolate;
-    max-width: 100%;
-    overflow: hidden;
-    border-radius: 50%;
+/* CRITICAL FIX: Remove ALL glow effects from mobile menu on main page */
+body.main-page .mobile-menu-panel .main-image-glow::before,
+body.main-page .mobile-menu-panel .mobile-menu-glow-fix::before {
+    display: none !important;
+    content: none !important;
 }
 
-/* Constrain the glow effect properly */
-body.main-page .mobile-menu-panel .main-image-glow::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle at center,
-        rgba(240, 165, 0, 0.6) 0%, 
-        rgba(251, 146, 60, 0.4) 30%, 
-        rgba(215, 51, 39, 0.2) 50%, 
-        transparent 70%
-    );
-    border-radius: 50%;
-    filter: blur(15px); /* Reduced blur to stay within bounds */
-    opacity: 0.6;
-    z-index: 1;
-    pointer-events: none;
-    
-    /* Ensure the glow doesn't extend beyond container */
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
+/* Alternative: Just show the images without glow in mobile menu */
+body.main-page .mobile-menu-panel .main-image-glow,
+body.main-page .mobile-menu-panel .mobile-menu-glow-fix {
+    filter: none !important;
+    box-shadow: none !important;
 }
 
-/* Ensure the mobile menu container clips all content */
-body.main-page .mobile-menu-branding {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    overflow: hidden; /* Clip any overflow from children */
-    position: relative;
-    z-index: 1;
+body.main-page .mobile-menu-panel .main-image-glow img,
+body.main-page .mobile-menu-panel .mobile-menu-glow-fix img {
+    filter: none !important;
+    box-shadow: none !important;
 }
 
-/* Mobile menu overlay */
+/* Ensure overlay is hidden by default */
 body.main-page .mobile-menu-overlay {
     position: fixed;
     top: 0;
@@ -309,38 +274,42 @@ body.main-page .mobile-menu-overlay.active {
     pointer-events: auto;
 }
 
-/* Hero section overflow containment */
-body.main-page .main-hero {
-    position: relative;
+/* Mobile menu branding - remove glow container issues */
+body.main-page .mobile-menu-branding {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Clean up the ember coin in nav */
+body.main-page .nav-ember-coin,
+body.main-page .mobile-menu-coin,
+body.main-page .mobile-menu-flame {
+    width: 24px !important;
+    height: 24px !important;
+    object-fit: contain;
+    filter: none !important;
+}
+
+/* Prevent any potential bleed from navigation glow effects */
+body.main-page .navbar .main-image-glow::before {
+    max-width: 100%;
+    max-height: 100%;
     overflow: hidden;
+}
+
+/* Ensure hero section clips any overflow on its right edge */
+body.main-page .main-hero {
+    overflow: hidden !important;
+    position: relative;
     isolation: isolate;
 }
 
-/* Viewport overflow prevention */
+/* Additional safety: Hide any content that extends beyond viewport */
 body.main-page {
-    overflow-x: hidden;
-    max-width: 100vw;
-}
-
-/* Alternative approach: Use a mask instead of blur for mobile menu glows */
-@supports (mask-image: radial-gradient(circle, black, transparent)) {
-    body.main-page .mobile-menu-panel .main-image-glow::before {
-        filter: blur(10px); /* Even smaller blur */
-        mask-image: radial-gradient(
-            circle at center,
-            black 0%,
-            rgba(0, 0, 0, 0.8) 30%,
-            rgba(0, 0, 0, 0.3) 50%,
-            transparent 65%
-        );
-        -webkit-mask-image: radial-gradient(
-            circle at center,
-            black 0%,
-            rgba(0, 0, 0, 0.8) 30%,
-            rgba(0, 0, 0, 0.3) 50%,
-            transparent 65%
-        );
-    }
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
 }
 
 /* ============================================
