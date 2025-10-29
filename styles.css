@@ -311,7 +311,7 @@ body.main-page .module-content {
    ============================================ */
 
 /* ============================================
-   5. HERO SECTION - REBUILT
+   5. HERO SECTION - REBUILT (OVERFLOW FIXED)
    ============================================ */
 
 body.main-page .main-hero {
@@ -323,6 +323,7 @@ body.main-page .main-hero {
     justify-content: center;
     overflow: hidden;
     padding: 160px 20px 80px;
+    isolation: isolate; /* ✅ ADDED: Create stacking context */
 }
 
 @media (max-width: 768px) {
@@ -351,6 +352,8 @@ body.main-page .main-hero::before {
         radial-gradient(circle at 40% 80%, rgba(217, 70, 239, 0.15) 0%, transparent 50%);
     animation: ember-phoenixFloat 20s ease-in-out infinite;
     z-index: var(--z-background);
+    pointer-events: none;
+    will-change: transform;
 }
 
 @keyframes ember-phoenixFloat {
@@ -373,6 +376,7 @@ body.main-page .main-hero-content {
     color: white;
     z-index: var(--z-content);
     position: relative;
+    overflow: visible; /* ✅ ADDED: Allow content to show */
 }
 
 /* ============================================
@@ -461,6 +465,7 @@ body.main-page .main-hero-steps-premium {
     justify-items: center;
     margin: 50px auto;
     max-width: 1200px;
+    overflow: visible; /* ✅ ADDED: Ensure steps are visible */
 }
 
 /* TABLET: Stack with arrows between */
@@ -500,6 +505,7 @@ body.main-page .main-step-premium {
     max-width: 350px;
     position: relative;
     overflow: hidden;
+    isolation: isolate; /* ✅ ADDED: Create stacking context */
 }
 
 @media (max-width: 768px) {
@@ -523,6 +529,7 @@ body.main-page .main-step-premium::before {
     right: 0;
     height: 3px;
     background: var(--ember-gradient-primary);
+    z-index: 1; /* ✅ ADDED: Ensure it stays inside card */
 }
 
 body.main-page .main-step-premium:hover {
