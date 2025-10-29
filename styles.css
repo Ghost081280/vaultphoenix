@@ -1972,7 +1972,7 @@ body.main-page .social-share-text-compact {
 
 /* ============================================
    8. CRYPTO COIN SECTION (GPS & Beacon)
-   ✅ MOBILE FIXED: Phone visible on all devices
+   ✅ MOBILE FIXED: Phone visible on all devices with glow
    ============================================ */
 
 body.main-page .crypto-coin-section {
@@ -2035,6 +2035,8 @@ body.main-page .crypto-image {
     min-height: 200px;
     visibility: visible !important;
     opacity: 1 !important;
+    position: relative;
+    z-index: 1;
 }
 
 /* ✅ On mobile, show image FIRST (before text) */
@@ -2063,7 +2065,7 @@ body.main-page .crypto-image {
     }
 }
 
-/* ✅ Phone frame styling with proper visibility */
+/* ✅ Phone frame styling with proper visibility and glow */
 body.main-page .crypto-coin-phone-frame {
     width: 100%;
     max-width: 380px;
@@ -2079,27 +2081,42 @@ body.main-page .crypto-coin-phone-frame {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    z-index: 2;
 }
 
-/* ✅ Add glow effect */
+/* ✅ Enhanced glow effect - now properly visible */
 body.main-page .crypto-coin-phone-frame::after {
     content: '';
     position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
     background: radial-gradient(
-        circle at center,
-        rgba(240, 165, 0, 0.4) 0%, 
-        rgba(251, 146, 60, 0.2) 30%, 
+        ellipse at center,
+        rgba(240, 165, 0, 0.6) 0%, 
+        rgba(251, 146, 60, 0.4) 20%, 
+        rgba(215, 51, 39, 0.3) 40%,
         transparent 70%
     );
-    border-radius: 45px;
+    border-radius: 50px;
     z-index: -1;
-    filter: blur(20px);
-    opacity: 0.6;
+    filter: blur(25px);
+    opacity: 0.8;
     pointer-events: none;
+    animation: ember-glowPulse 3s ease-in-out infinite;
+}
+
+/* ✅ Add pulsing animation to glow */
+@keyframes ember-glowPulse {
+    0%, 100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
 }
 
 body.main-page .crypto-coin-phone-frame::before {
@@ -2123,12 +2140,13 @@ body.main-page .crypto-coin-phone-frame::before {
     }
     
     body.main-page .crypto-coin-phone-frame::after {
-        top: -8px;
-        left: -8px;
-        right: -8px;
-        bottom: -8px;
-        border-radius: 40px;
-        filter: blur(16px);
+        top: -12px;
+        left: -12px;
+        right: -12px;
+        bottom: -12px;
+        border-radius: 45px;
+        filter: blur(20px);
+        opacity: 0.85;
     }
 }
 
@@ -2140,12 +2158,13 @@ body.main-page .crypto-coin-phone-frame::before {
     }
     
     body.main-page .crypto-coin-phone-frame::after {
-        top: -6px;
-        left: -6px;
-        right: -6px;
-        bottom: -6px;
-        border-radius: 36px;
-        filter: blur(14px);
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border-radius: 40px;
+        filter: blur(18px);
+        opacity: 0.9;
     }
 }
 
