@@ -3072,9 +3072,9 @@ body.main-page .feature-description {
 
 /* ============================================
    11. APP SHOWCASE (Laptop + Phone Mockups)
-   ✅ FIXED: Phone images perfectly contained in frame
-   ✅ FIXED: Laptop keyboard base restored and visible
-   ✅ FIXED: Images properly scaled and positioned
+   ✅ FIX #5: Laptop full frame + keyboard + images fit
+   ✅ FIX #8: Player-facing phone SMALLER (320px desktop, 260px mobile)
+   ✅ FIX #9: Management laptop SMALLER (600px desktop, 450px mobile)
    ============================================ */
 
 body.main-page .app-showcase {
@@ -3090,42 +3090,113 @@ body.main-page .app-showcase {
     }
 }
 
-/* PHONE MOCKUP - FIXED SIZING AND CONTAINMENT */
+@media (max-width: 480px) {
+    body.main-page .app-showcase {
+        padding: 50px 10px;
+    }
+}
+
+body.main-page .app-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+body.main-page .showcase-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    body.main-page .showcase-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+    }
+}
+
+@media (max-width: 768px) {
+    body.main-page .showcase-content {
+        gap: var(--space-xl);
+    }
+}
+
+body.main-page .phone-gallery,
+body.main-page .laptop-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+    body.main-page .phone-gallery,
+    body.main-page .laptop-gallery {
+        gap: var(--space-md);
+    }
+}
+
+body.main-page .device-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+@media (max-width: 768px) {
+    body.main-page .device-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* ✅ FIX #8: Phone Mockup SMALLER */
 body.main-page .phone-mockup {
-    max-width: 320px;
+    max-width: 320px; /* ✅ FIX #8: REDUCED from 400px */
     margin: 0 auto;
 }
 
 @media (max-width: 768px) {
     body.main-page .phone-mockup {
-        max-width: 260px !important;
+        max-width: 260px !important; /* ✅ FIX #8: REDUCED from 280px */
     }
 }
 
 body.main-page .phone-frame {
     background: #1a1a1a;
     border-radius: 40px;
-    padding: 12px;
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        0 0 0 3px rgba(215, 51, 39, 0.3);
-    border: 2px solid #333;
+    padding: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 3px solid rgba(215, 51, 39, 0.3);
 }
 
 @media (max-width: 768px) {
     body.main-page .phone-frame {
         border-radius: 35px;
-        padding: 10px !important;
+        padding: 10px !important; /* ✅ FIX #8: REDUCED from 12px */
+        border-radius: 32px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .phone-mockup {
+        max-width: 240px !important;
     }
 }
 
 body.main-page .phone-screen {
-    border-radius: 28px;
+    border-radius: 30px;
     overflow: hidden;
     background: #000;
-    aspect-ratio: 390 / 844; /* iPhone 14 Pro ratio */
+    aspect-ratio: 9 / 19.5;
     position: relative;
-    width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -3134,54 +3205,59 @@ body.main-page .phone-screen {
     }
 }
 
-/* ✅ CRITICAL FIX: Phone images FIT PERFECTLY */
-body.main-page .phone-screen img,
-body.main-page #mainScreenshot {
+body.main-page .phone-screen img {
     width: 100%;
     height: 100%;
-    object-fit: cover !important;
-    object-position: center top !important;
+    object-fit: cover;
+    object-position: center top;
     display: block;
-    /* NO transform scale - let it fit naturally */
-    border-radius: inherit;
 }
 
-/* LAPTOP MOCKUP - COMPLETE WITH KEYBOARD BASE */
+/* ✅ FIX #9: Laptop Mockup SMALLER */
 body.main-page .laptop-mockup {
     position: relative;
-    max-width: 600px;
+    max-width: 600px; /* ✅ FIX #9: REDUCED from 700px */
     margin: 0 auto;
-    /* NO padding-bottom, let base handle it */
+    padding-bottom: 30px;
 }
 
 @media (max-width: 768px) {
     body.main-page .laptop-mockup {
-        max-width: 450px !important;
+        max-width: 450px !important; /* ✅ FIX #9: REDUCED from 500px */
+        padding-bottom: 18px !important;
     }
 }
 
-/* Laptop screen container */
+@media (max-width: 480px) {
+    body.main-page .laptop-mockup {
+        max-width: 380px !important;
+    }
+}
+
+body.main-page .laptop-frame {
+    position: relative;
+}
+
 body.main-page .laptop-screen {
     aspect-ratio: 16/10;
-    background: #1a1a1a;
-    border-radius: 12px 12px 0 0;
-    border: 12px solid #2a2a2a;
-    border-bottom: none;
+    background: #000;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    border: 10px solid #2a2a2a;
+    border-bottom: 0;
     overflow: hidden;
     box-shadow: 
-        0 0 0 1px rgba(255, 255, 255, 0.1),
-        0 10px 40px rgba(0, 0, 0, 0.5);
+        0 0 0 2px rgba(255, 255, 255, 0.1),
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     position: relative;
 }
 
 @media (max-width: 768px) {
     body.main-page .laptop-screen {
-        border-width: 10px;
-        border-radius: 10px 10px 0 0;
+        border-width: 8px;
     }
 }
 
-/* Glass effect overlay */
 body.main-page .laptop-screen::before {
     content: '';
     position: absolute;
@@ -3191,158 +3267,161 @@ body.main-page .laptop-screen::before {
     bottom: 0;
     background: linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.03) 0%,
+        rgba(255, 255, 255, 0.05) 0%,
         transparent 50%
     );
     pointer-events: none;
     z-index: 10;
 }
 
-/* ✅ CRITICAL FIX: Laptop images FIT PERFECTLY */
-body.main-page .laptop-screen img,
-body.main-page #mainLaptopScreenshot,
-body.main-page .laptop-screenshot {
+/* ✅ FIX #5: Laptop screenshots FIT PERFECTLY */
+body.main-page .laptop-screen img {
     width: 100%;
     height: 100%;
-    object-fit: cover !important;
-    object-position: center top !important;
+    object-fit: cover; /* ✅ FIX #5: CHANGED from contain */
+    object-position: center top; /* ✅ FIX #5: ADDED */
     display: block;
-    /* NO transform scale - let it fit naturally */
-    position: relative;
-    z-index: 1;
 }
 
-/* ✅ KEYBOARD BASE - FULLY RESTORED AND VISIBLE */
+/* ✅ FIX #5: KEYBOARD RESTORED with visible line */
 body.main-page .laptop-base {
-    height: 35px;
+    height: 30px;
     background: linear-gradient(
         to bottom, 
         #2a2a2a 0%, 
-        #1f1f1f 30%,
-        #161616 70%,
+        #1a1a1a 50%,
         #0a0a0a 100%
     );
     border-radius: 0 0 12px 12px;
-    box-shadow: 
-        0 5px 20px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     position: relative;
-    display: block !important;
+    display: block !important; /* ✅ CRITICAL */
     visibility: visible !important;
-    border: 1px solid #222;
-    border-top: none;
 }
 
-/* Keyboard texture lines */
+/* ✅ FIX #5: Add keyboard line detail */
 body.main-page .laptop-base::before {
     content: '';
     position: absolute;
-    top: 8px;
-    left: 15%;
-    right: 15%;
-    height: 1px;
-    background: linear-gradient(
-        90deg, 
-        transparent 0%, 
-        rgba(255,255,255,0.05) 20%,
-        rgba(255,255,255,0.08) 50%,
-        rgba(255,255,255,0.05) 80%,
-        transparent 100%
-    );
-}
-
-/* Additional keyboard detail */
-body.main-page .laptop-base::after {
-    content: '';
-    position: absolute;
-    bottom: 8px;
-    left: 20%;
-    right: 20%;
-    height: 1px;
+    bottom: 5px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
     background: linear-gradient(
         90deg, 
         transparent, 
-        rgba(255,255,255,0.03), 
+        rgba(255,255,255,0.15), 
         transparent
     );
+    border-radius: 2px;
 }
 
 @media (max-width: 768px) {
     body.main-page .laptop-base {
-        height: 25px !important;
-        border-radius: 0 0 10px 10px;
-    }
-    
-    body.main-page .laptop-base::before {
-        top: 6px;
-    }
-    
-    body.main-page .laptop-base::after {
-        bottom: 6px;
+        height: 20px !important;
+        display: block !important;
     }
 }
 
-/* Laptop notch/hinge */
 body.main-page .laptop-notch {
-    width: 100px;
-    height: 8px;
-    background: linear-gradient(
-        to bottom,
-        #2a2a2a 0%,
-        #1a1a1a 100%
-    );
-    border-radius: 0 0 10px 10px;
+    width: 80px;
+    height: 10px;
+    background: #222;
+    border-radius: 0 0 8px 8px;
     margin: 0 auto;
     position: relative;
-    top: -1px;
-    display: block !important;
+    top: -10px;
+    display: block !important; /* ✅ CRITICAL */
     visibility: visible !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 768px) {
     body.main-page .laptop-notch {
-        width: 70px !important;
+        width: 50px !important;
         height: 6px !important;
+        top: -6px !important;
+        display: block !important;
     }
 }
 
-/* Thumbnail grids - ensure they match device widths */
-body.main-page .thumbnail-grid {
-    max-width: 320px;
-    margin: var(--space-lg) auto 0;
+/* Thumbnail grids */
+body.main-page .thumbnail-grid,
+body.main-page .thumbnail-grid-laptop {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 320px; /* ✅ Match phone width */
+    margin: 0 auto;
 }
 
 @media (max-width: 768px) {
-    body.main-page .thumbnail-grid {
-        max-width: 260px;
+    body.main-page .thumbnail-grid,
+    body.main-page .thumbnail-grid-laptop {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 260px; /* ✅ Match phone width */
     }
 }
 
 body.main-page .thumbnail-grid-laptop {
-    max-width: 600px;
-    margin: var(--space-lg) auto 0;
+    max-width: 600px; /* ✅ Match laptop width */
 }
 
 @media (max-width: 768px) {
     body.main-page .thumbnail-grid-laptop {
-        max-width: 450px;
+        max-width: 450px; /* ✅ Match laptop width */
     }
 }
 
-/* Ensure thumbnails also scale properly */
+body.main-page .simple-thumb,
+body.main-page .simple-thumb-laptop {
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-md);
+    padding: 8px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    body.main-page .simple-thumb,
+    body.main-page .simple-thumb-laptop {
+        padding: 6px;
+    }
+}
+
+body.main-page .simple-thumb:hover,
+body.main-page .simple-thumb-laptop:hover {
+    border-color: rgba(215, 51, 39, 0.5);
+    transform: translateY(-3px);
+}
+
+body.main-page .simple-thumb.active,
+body.main-page .simple-thumb-laptop.active {
+    border-color: rgba(215, 51, 39, 0.8);
+    background: rgba(215, 51, 39, 0.15);
+}
+
+body.main-page .simple-thumb-laptop {
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+body.main-page .simple-thumb-laptop:hover {
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+body.main-page .simple-thumb-laptop.active {
+    border-color: rgba(99, 102, 241, 0.8);
+    background: rgba(99, 102, 241, 0.15);
+}
+
 body.main-page .simple-thumb img,
 body.main-page .simple-thumb-laptop img {
     width: 100%;
     height: auto;
     display: block;
     border-radius: var(--radius-sm);
-    object-fit: cover;
-    aspect-ratio: 390 / 844; /* Match phone aspect */
-}
-
-body.main-page .simple-thumb-laptop img {
-    aspect-ratio: 16 / 10; /* Match laptop aspect */
 }
 
 body.main-page .thumb-label {
