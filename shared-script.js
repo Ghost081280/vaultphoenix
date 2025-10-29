@@ -7,7 +7,7 @@
 (function() {
     'use strict';
 
-    // ============================================
+ // ============================================
 // MOBILE MENU SYSTEM - FIXED FOR NEW HTML STRUCTURE
 // ============================================
 
@@ -17,48 +17,14 @@ const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
 const mobileMenuClose = document.getElementById('mobile-menu-close');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
 
-// Ensure menu is hidden on page load
-if (mobileMenu) {
-    mobileMenu.style.display = 'none';
-    mobileMenu.classList.remove('active');
-}
-if (mobileMenuOverlay) {
-    mobileMenuOverlay.style.display = 'none';
-    mobileMenuOverlay.classList.remove('active');
-}
-
 // Toggle mobile menu
 if (mobileMenuBtn && mobileMenu && mobileMenuOverlay) {
     mobileMenuBtn.addEventListener('click', function() {
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        
-        if (!isExpanded) {
-            // Opening menu
-            mobileMenu.style.display = 'block';
-            mobileMenuOverlay.style.display = 'block';
-            
-            // Force reflow before adding active class
-            mobileMenu.offsetHeight;
-            
-            requestAnimationFrame(() => {
-                mobileMenu.classList.add('active');
-                mobileMenuOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        } else {
-            // Closing menu
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-            
-            // Hide after transition completes
-            setTimeout(() => {
-                mobileMenu.style.display = 'none';
-                mobileMenuOverlay.style.display = 'none';
-            }, 300);
-        }
-        
         this.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('active');
+        mobileMenuOverlay.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     });
 }
 
@@ -71,12 +37,6 @@ if (mobileMenuClose && mobileMenu && mobileMenuOverlay) {
             mobileMenuBtn.setAttribute('aria-expanded', 'false');
         }
         document.body.style.overflow = '';
-        
-        // Hide after transition completes
-        setTimeout(() => {
-            mobileMenu.style.display = 'none';
-            mobileMenuOverlay.style.display = 'none';
-        }, 300);
     });
 }
 
@@ -89,12 +49,6 @@ if (mobileMenuOverlay && mobileMenu) {
             mobileMenuBtn.setAttribute('aria-expanded', 'false');
         }
         document.body.style.overflow = '';
-        
-        // Hide after transition completes
-        setTimeout(() => {
-            mobileMenu.style.display = 'none';
-            mobileMenuOverlay.style.display = 'none';
-        }, 300);
     });
 }
 
@@ -110,12 +64,6 @@ mobileNavLinks.forEach(link => {
                 mobileMenuBtn.setAttribute('aria-expanded', 'false');
             }
             document.body.style.overflow = '';
-            
-            // Hide after transition completes
-            setTimeout(() => {
-                mobileMenu.style.display = 'none';
-                mobileMenuOverlay.style.display = 'none';
-            }, 300);
         }
     });
 });
@@ -131,12 +79,6 @@ document.addEventListener('keydown', (e) => {
             mobileMenuBtn.setAttribute('aria-expanded', 'false');
         }
         document.body.style.overflow = '';
-        
-        // Hide after transition completes
-        setTimeout(() => {
-            mobileMenu.style.display = 'none';
-            mobileMenuOverlay.style.display = 'none';
-        }, 300);
     }
 });
 
