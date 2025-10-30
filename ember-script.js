@@ -1,14 +1,27 @@
 // ============================================================================
-// EMBER PAGE JAVASCRIPT - PRODUCTION FIX V3 - CONFLICT RESOLUTION
-// Handles all ember.html specific functionality
-// Countdown timer and smooth scrolling now handled by shared-script.js
+// EMBER PAGE JAVASCRIPT - PRODUCTION V4 - SHARED SCRIPT PRIORITY
+// Waits for shared-script.js to initialize first, then adds ember-specific features
 // ============================================================================
 
 // ============================================================================
 // GLOBAL STATE
 // ============================================================================
 let tpaAgreed = false;
-let emberPageInitialized = false; // Prevent double initialization
+let emberPageInitialized = false;
+
+// ============================================================================
+// WAIT FOR SHARED SCRIPT - CRITICAL CHECK
+// ============================================================================
+function waitForSharedScript(callback) {
+    // Check if shared script is ready
+    if (typeof window.sharedScriptReady !== 'undefined' && window.sharedScriptReady === true) {
+        console.log('✓ Shared script detected, proceeding with ember initialization');
+        callback();
+    } else {
+        console.log('⏳ Waiting for shared-script.js...');
+        setTimeout(() => waitForSharedScript(callback), 50);
+    }
+}
 
 // ============================================================================
 // MODAL FUNCTIONS - TPA (Token Presale Agreement)
@@ -22,7 +35,6 @@ window.showTpaModal = function() {
     if (modal) {
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        // Ensure modal is above everything
         modal.style.zIndex = '10000';
     }
 };
@@ -213,18 +225,12 @@ function updatePresaleProgress() {
 }
 
 // ============================================================================
-// COUNTDOWN TIMER - REMOVED (Now handled by shared-script.js)
-// ============================================================================
-// Note: The universal countdown timer in shared-script.js handles all countdown
-// elements across both main.html and ember.html automatically.
-// No ember-specific countdown code needed here.
-
-// ============================================================================
-// SCROLL ANIMATIONS
+// SCROLL ANIMATIONS - EMBER SPECIFIC
 // ============================================================================
 
 /**
  * Initialize scroll reveal animations for sections
+ * Note: Respects shared script's smooth scrolling configuration
  */
 function initializeScrollAnimations() {
     const revealElements = document.querySelectorAll('.scroll-reveal');
@@ -248,12 +254,6 @@ function initializeScrollAnimations() {
         revealOnScroll.observe(element);
     });
 }
-
-// ============================================================================
-// SMOOTH SCROLLING - REMOVED (Now handled by shared-script.js)
-// ============================================================================
-// Note: Smooth scrolling for anchor links is now handled globally by
-// shared-script.js for consistency across all pages.
 
 // ============================================================================
 // MODAL CLICK OUTSIDE TO CLOSE
@@ -310,11 +310,11 @@ function initializeKeyboardAccessibility() {
 }
 
 // ============================================================================
-// EVENT LISTENERS
+// EVENT LISTENERS - EMBER SPECIFIC
 // ============================================================================
 
 /**
- * Initialize all event listeners after DOM is loaded
+ * Initialize all ember-specific event listeners after DOM is loaded
  */
 function initializeEventListeners() {
     // Investment Calculator Input
@@ -348,11 +348,11 @@ function initializeEventListeners() {
 }
 
 // ============================================================================
-// INITIALIZATION
+// EMBER PAGE INITIALIZATION
 // ============================================================================
 
 /**
- * Main initialization function - called when DOM is ready
+ * Main initialization function - called AFTER shared script is ready
  */
 function initializeEmberPage() {
     // Prevent double initialization
@@ -364,15 +364,12 @@ function initializeEmberPage() {
     console.log('🔥 Initializing Ember Token Page...');
     
     // Initialize ember-specific components only
+    // (Countdown timer and smooth scrolling handled by shared-script.js)
     initializeEventListeners();
     updateInvestmentCalculator(); // Set initial values
     updatePresaleButtonState(); // Set initial button state
     updateDevFundTracker();
     updatePresaleProgress();
-    
-    // Note: Countdown timer handled by shared-script.js
-    // Note: Smooth scrolling handled by shared-script.js
-    
     initializeScrollAnimations(); // Ember-specific reveal animations
     initializeModalCloseOnClickOutside(); // TPA/Whitepaper modals
     initializeKeyboardAccessibility(); // ESC key for ember modals
@@ -381,25 +378,34 @@ function initializeEmberPage() {
     console.log('✓ Ember Token Page initialized successfully');
     console.log('✓ Countdown timer managed by shared-script.js');
     console.log('✓ Smooth scrolling managed by shared-script.js');
+    console.log('✓ Mobile menu managed by shared-script.js');
+    console.log('✓ Chatbot managed by shared-script.js');
 }
 
 // ============================================================================
-// DOM READY - START INITIALIZATION
+// START INITIALIZATION - WAIT FOR BOTH DOM AND SHARED SCRIPT
 // ============================================================================
 
-// Clean up any existing intervals on page unload
-window.addEventListener('beforeunload', function() {
-    // Note: Countdown interval is managed by shared-script.js
-    console.log('🔥 Ember page unloading');
-});
-
-// Wait for DOM to be fully loaded
+// Wait for DOM first, then wait for shared script
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeEmberPage);
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🔥 Ember DOM loaded, waiting for shared script...');
+        waitForSharedScript(initializeEmberPage);
+    });
 } else {
-    // DOM is already loaded
-    initializeEmberPage();
+    // DOM already loaded
+    console.log('🔥 Ember DOM already loaded, waiting for shared script...');
+    waitForSharedScript(initializeEmberPage);
 }
+
+// ============================================================================
+// CLEANUP ON PAGE UNLOAD
+// ============================================================================
+
+window.addEventListener('beforeunload', function() {
+    console.log('🔥 Ember page unloading');
+    // Countdown interval is managed by shared-script.js
+});
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -440,4 +446,4 @@ window.emberPage = {
     initialized: function() { return emberPageInitialized; }
 };
 
-console.log('✓ ember-script.js loaded successfully (V3 - Conflict Resolution Complete)');
+console.log('✓ ember-script.js loaded (V4 - Shared Script Priority)');
