@@ -1,4 +1,4 @@
-/* Ember Token Page Stylesheet - FINAL VERSION WITH PERFECT GLOWS */
+/* Ember Token Page Stylesheet - CLEANED VERSION */
 /* Navigation & Footer inherited from shared-styles.css */
 /* Chatbot styles moved to shared-styles.css */
 
@@ -21,122 +21,14 @@ body {
     box-sizing: border-box;
 }
 
-body.ember-page {
+body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #ffffff;
     overflow-x: hidden;
-    background: linear-gradient(135deg, 
-        #0f0f0f 0%, 
-        #1a1a1a 25%, 
-        #2d1810 50%, 
-        #451a03 75%, 
-        #7c2d12 100%
-    );
-    background-attachment: fixed;
+    background: #0f0f0f;
     max-width: 100vw;
     width: 100%;
-}
-
-/* ============================================
-   CSS VARIABLES - DESIGN SYSTEM
-   ============================================ */
-:root {
-    /* Spacing Scale */
-    --space-xs: 0.5rem;    /* 8px */
-    --space-sm: 0.75rem;   /* 12px */
-    --space-md: 1rem;      /* 16px */
-    --space-lg: 1.5rem;    /* 24px */
-    --space-xl: 2rem;      /* 32px */
-    --space-2xl: 3rem;     /* 48px */
-    --space-3xl: 4rem;     /* 64px */
-    --space-4xl: 6rem;     /* 96px */
-    
-    /* Shadow System */
-    --ember-shadow-xs: 0 2px 4px rgba(215, 51, 39, 0.1);
-    --ember-shadow-sm: 0 4px 8px rgba(215, 51, 39, 0.15);
-    --ember-shadow-md: 0 8px 16px rgba(215, 51, 39, 0.2);
-    --ember-shadow-lg: 0 12px 24px rgba(215, 51, 39, 0.25);
-    --ember-shadow-xl: 0 20px 40px rgba(215, 51, 39, 0.3);
-}
-
-/* ============================================
-   PERFECT CIRCLE GLOW SYSTEM - MOBILE PROOF
-   ============================================ */
-
-body.ember-page .main-image-glow {
-    position: relative;
-    display: inline-block;
-    line-height: 0;
-    isolation: isolate;
-}
-
-body.ember-page .main-image-glow img {
-    position: relative;
-    z-index: 2;
-    display: block;
-}
-
-body.ember-page .main-image-glow::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle at center,
-        rgba(240, 165, 0, 0.6) 0%, 
-        rgba(251, 146, 60, 0.4) 30%, 
-        rgba(215, 51, 39, 0.2) 50%, 
-        transparent 70%
-    );
-    border-radius: 50%;
-    filter: blur(20px);
-    opacity: 0.6;
-    z-index: 1;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: opacity, transform;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    contain: layout style paint;
-}
-
-body.ember-page .main-image-glow:hover::before {
-    opacity: 0.85;
-    transform: translate(-50%, -50%) scale(1.08);
-    filter: blur(25px);
-}
-
-/* Mobile optimization - CRITICAL FOR PERFECT CIRCLES */
-@media (max-width: 768px) {
-    body.ember-page .main-image-glow::before {
-        max-width: 100%;
-        max-height: 100%;
-        transform: translate(-50%, -50%) scale(1.0);
-        filter: blur(18px);
-    }
-    
-    body.ember-page .main-image-glow:hover::before {
-        transform: translate(-50%, -50%) scale(1.05);
-        filter: blur(20px);
-    }
-}
-
-/* Module Icons with Glow */
-.module-icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-}
-
-@media (max-width: 768px) {
-    .module-icon {
-        width: 45px;
-        height: 45px;
-    }
 }
 
 /* Highlight text styling - Yellow/Gold emphasis */
@@ -181,8 +73,7 @@ body.ember-page .main-image-glow:hover::before {
 }
 
 /* FLOATING COINS - ALWAYS BEHIND CONTENT - CRITICAL FIX */
-.hero-floating-coins,
-.floating-coins-container {
+.hero-floating-coins {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
@@ -193,34 +84,34 @@ body.ember-page .main-image-glow:hover::before {
     overflow: hidden !important;
 }
 
-.hero-coin,
-.floating-coin {
+.hero-coin {
     position: absolute !important;
     z-index: 0 !important;
     pointer-events: none !important;
     animation: heroCoinFloat 6s ease-in-out infinite !important;
 }
 
-/* Floating coin image with perfect circle glow */
-.hero-crypto-coin-icon,
-.floating-coin-img {
+/* RESTORED: Consistent glow effect with pulsing animation */
+.hero-crypto-coin-icon {
     width: clamp(35px, 5vw, 50px) !important;
     height: clamp(35px, 5vw, 50px) !important;
     object-fit: contain !important;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.8)) !important;
+    transition: filter 0.3s ease !important;
     opacity: 0.6 !important;
     background: transparent !important;
     z-index: 0 !important;
     pointer-events: none !important;
-    position: relative;
-    display: inline-block;
+    animation: coinGlowPulse 3s ease-in-out infinite !important;
 }
 
-/* Perfect circle glow for floating coins */
-.hero-coin .main-image-glow,
-.floating-coin .main-image-glow {
-    display: inline-block;
-    line-height: 0;
-    isolation: isolate;
+@keyframes coinGlowPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.8));
+    }
+    50% {
+        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 1));
+    }
 }
 
 .hero-coin-1 {
@@ -304,21 +195,25 @@ body.ember-page .main-image-glow:hover::before {
     align-items: center;
 }
 
-/* Hero icon with perfect glow */
+/* RESTORED: Enhanced glow with pulsing animation */
 .ember-token-icon-image {
     width: clamp(120px, 15vw, 160px);
     height: clamp(120px, 15vw, 160px);
     object-fit: contain;
+    filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.9));
     animation: emberPulse 3s ease-in-out infinite;
     background: transparent;
+    transition: filter 0.3s ease;
 }
 
 @keyframes emberPulse {
     0%, 100% { 
         transform: scale(1); 
+        filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.9)); 
     }
     50% { 
         transform: scale(1.1); 
+        filter: drop-shadow(0 0 60px rgba(240, 165, 0, 1)); 
     }
 }
 
@@ -409,8 +304,10 @@ body.ember-page .main-image-glow:hover::before {
     opacity: 1;
 }
 
+/* RESTORED: Enhanced glow for stat icons */
 .stat-icon {
     font-size: 3.2rem;
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.8));
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -421,7 +318,19 @@ body.ember-page .main-image-glow:hover::before {
     width: 95px;
     height: 95px;
     object-fit: contain;
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.8));
     background: transparent;
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
+}
+
+@keyframes iconGlowPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.8));
+    }
+    50% {
+        filter: drop-shadow(0 0 40px rgba(240, 165, 0, 1));
+    }
 }
 
 .stat-content {
@@ -499,7 +408,7 @@ body.ember-page .main-image-glow:hover::before {
 
 /* Ember Sections */
 .ember-section {
-    padding: var(--space-4xl) var(--space-xl);
+    padding: 120px 40px;
     position: relative;
     width: 100%;
     max-width: 100vw;
@@ -528,19 +437,24 @@ body.ember-page .main-image-glow:hover::before {
     margin-bottom: 80px;
 }
 
+/* RESTORED: All section header icons with enhanced glow */
 .ember-section-icon {
     font-size: 4.5rem;
     margin-bottom: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.7));
 }
 
 .ember-section-icon img {
     width: 180px;
     height: 180px;
     object-fit: contain;
+    filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.7));
     background: transparent;
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .ember-section-icon-large {
@@ -551,7 +465,10 @@ body.ember-page .main-image-glow:hover::before {
 .ember-section-icon-large img {
     width: 180px !important;
     height: 180px !important;
+    filter: drop-shadow(0 0 45px rgba(240, 165, 0, 0.8)) !important;
     background: transparent !important;
+    transition: filter 0.3s ease !important;
+    animation: iconGlowPulse 4s ease-in-out infinite !important;
 }
 
 .team-section-icon-xlarge {
@@ -562,7 +479,10 @@ body.ember-page .main-image-glow:hover::before {
 .team-section-icon-xlarge img {
     width: 280px !important;
     height: 280px !important;
+    filter: drop-shadow(0 0 65px rgba(240, 165, 0, 1)) !important;
     background: transparent !important;
+    transition: filter 0.3s ease !important;
+    animation: iconGlowPulse 4s ease-in-out infinite !important;
 }
 
 .ember-section-title {
@@ -585,7 +505,7 @@ body.ember-page .main-image-glow:hover::before {
 }
 
 /* ============================================
-   HOW IT WORKS SECTION - COMPLETE BEAUTIFUL STYLES
+   HOW IT WORKS SECTION - COMPLETE BEAUTIFUL STYLES + ALL GLOWS
    ============================================ */
 
 .how-it-works-section {
@@ -665,19 +585,57 @@ body.ember-page .main-image-glow:hover::before {
     box-shadow: 0 30px 60px rgba(34, 197, 94, 0.3);
 }
 
+/* COMPLETE GLOW: Stakeholder icons with double glow layer + beautiful styling */
 .stakeholder-icon {
     font-size: 5rem;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
+    position: relative;
+}
+
+.stakeholder-icon::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: iconGlowPulseOuter 4s ease-in-out infinite;
+}
+
+@keyframes iconGlowPulseOuter {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+    }
 }
 
 .stakeholder-icon img {
     width: 180px;
     height: 180px;
     object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
     background: transparent;
+    transition: all 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+.stakeholder-card:hover .stakeholder-icon {
+    filter: drop-shadow(0 0 50px rgba(240, 165, 0, 1));
+}
+
+.stakeholder-card:hover .stakeholder-icon img {
+    filter: drop-shadow(0 0 60px rgba(240, 165, 0, 1));
+    transform: scale(1.1);
 }
 
 .stakeholder-title {
@@ -795,13 +753,46 @@ body.ember-page .main-image-glow:hover::before {
     justify-content: center;
     width: 75px;
     min-width: 75px;
+    position: relative;
 }
 
+.path-icon::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.3) 0%, transparent 60%);
+    border-radius: 50%;
+    animation: pathIconGlow 3s ease-in-out infinite;
+}
+
+@keyframes pathIconGlow {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.3);
+    }
+}
+
+/* COMPLETE GLOW: Path icon with double glow layer + beautiful styling */
 .path-icon img {
     width: 75px;
     height: 75px;
     object-fit: contain;
     background: transparent;
+    filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.7));
+    transition: all 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+.path-option:hover .path-icon img {
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 1));
+    transform: scale(1.15) rotate(5deg);
 }
 
 .path-text {
@@ -860,10 +851,22 @@ body.ember-page .main-image-glow:hover::before {
     font-weight: 800;
     text-shadow: 0 0 10px rgba(240, 165, 0, 0.8),
                  0 0 20px rgba(240, 165, 0, 0.4);
+    animation: checkmarkGlow 2s ease-in-out infinite;
+}
+
+@keyframes checkmarkGlow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(240, 165, 0, 0.8),
+                     0 0 20px rgba(240, 165, 0, 0.4);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(240, 165, 0, 1),
+                     0 0 30px rgba(240, 165, 0, 0.6);
+    }
 }
 
 /* ============================================
-   VALUE PROPOSITION - PERFECTLY CENTERED
+   VALUE PROPOSITION - PERFECTLY CENTERED WITH GLOWS + BEAUTIFUL STYLES
    ============================================ */
 
 .value-proposition-enhanced {
@@ -953,6 +956,7 @@ body.ember-page .main-image-glow:hover::before {
     opacity: 1;
 }
 
+/* COMPLETE GLOW: Utility icon with enhanced glow and pulsing */
 .utility-icon {
     font-size: 3.2rem;
     margin-bottom: 20px;
@@ -962,13 +966,49 @@ body.ember-page .main-image-glow:hover::before {
     position: relative;
     z-index: 1;
     width: 100%;
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.8));
+}
+
+.utility-icon::before {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: utilityIconGlowOuter 3s ease-in-out infinite;
+}
+
+@keyframes utilityIconGlowOuter {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.15);
+    }
 }
 
 .utility-icon img {
     width: 95px;
     height: 95px;
     object-fit: contain;
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.8));
     background: transparent;
+    transition: all 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+.utility-item-enhanced:hover .utility-icon {
+    filter: drop-shadow(0 0 40px rgba(240, 165, 0, 1));
+}
+
+.utility-item-enhanced:hover .utility-icon img {
+    filter: drop-shadow(0 0 45px rgba(240, 165, 0, 1));
+    transform: scale(1.15) rotate(5deg);
 }
 
 .utility-item-enhanced h4 {
@@ -998,7 +1038,291 @@ body.ember-page .main-image-glow:hover::before {
     text-shadow: 0 0 10px rgba(240, 165, 0, 0.5);
 }
 
-/* White Paper Section */
+/* ============================================
+   MOBILE RESPONSIVE - BOTH SECTIONS WITH GLOWS
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* How It Works Section - Mobile */
+    .how-it-works-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0;
+    }
+
+    .stakeholder-card {
+        padding: 30px 25px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .stakeholder-icon {
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.7));
+        margin-bottom: 18px;
+    }
+
+    .stakeholder-icon img {
+        width: 140px;
+        height: 140px;
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.7));
+    }
+
+    .stakeholder-card:hover .stakeholder-icon {
+        filter: drop-shadow(0 0 45px rgba(240, 165, 0, 0.95));
+    }
+
+    .stakeholder-card:hover .stakeholder-icon img {
+        filter: drop-shadow(0 0 50px rgba(240, 165, 0, 1));
+    }
+
+    .stakeholder-title {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .flow-step {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .step-number {
+        min-width: 28px;
+        width: 28px;
+        height: 28px;
+        font-size: 0.85rem;
+    }
+
+    .step-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .dual-path {
+        padding: 8px;
+    }
+
+    .path-option {
+        padding: 14px 12px;
+        gap: 12px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .path-icon {
+        width: 65px;
+        min-width: 65px;
+    }
+
+    .path-icon img {
+        width: 65px;
+        height: 65px;
+        filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
+    }
+
+    .path-option:hover .path-icon img {
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.9));
+    }
+
+    .path-text {
+        font-size: 0.9rem;
+    }
+
+    .path-divider {
+        font-size: 1rem;
+        padding: 8px 0;
+    }
+
+    .stakeholder-benefits {
+        padding: 18px;
+    }
+
+    .stakeholder-benefits h4 {
+        font-size: 1.05rem;
+    }
+
+    .stakeholder-benefits li {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    /* Value Proposition Section - Mobile */
+    .value-proposition-enhanced {
+        padding: 30px 20px;
+    }
+
+    .value-proposition-enhanced h3 {
+        font-size: 1.6rem;
+        margin-bottom: 30px;
+    }
+
+    .utility-grid-enhanced {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0;
+    }
+
+    .utility-item-enhanced {
+        padding: 25px 20px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .utility-icon {
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.7));
+    }
+
+    .utility-icon img {
+        width: 75px;
+        height: 75px;
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.7));
+    }
+
+    .utility-item-enhanced:hover .utility-icon {
+        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.9));
+    }
+
+    .utility-item-enhanced:hover .utility-icon img {
+        filter: drop-shadow(0 0 40px rgba(240, 165, 0, 1));
+    }
+
+    .utility-item-enhanced h4 {
+        font-size: 1.15rem;
+    }
+
+    .utility-item-enhanced p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* How It Works Section - Small Mobile */
+    .stakeholder-card {
+        padding: 25px 20px;
+    }
+
+    .stakeholder-icon {
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+        margin-bottom: 15px;
+    }
+
+    .stakeholder-icon img {
+        width: 120px;
+        height: 120px;
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+    }
+
+    .stakeholder-card:hover .stakeholder-icon {
+        filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.9));
+    }
+
+    .stakeholder-card:hover .stakeholder-icon img {
+        filter: drop-shadow(0 0 45px rgba(240, 165, 0, 1));
+    }
+
+    .stakeholder-title {
+        font-size: 1.5rem;
+        margin-bottom: 18px;
+    }
+
+    .flow-step {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .step-number {
+        min-width: 26px;
+        width: 26px;
+        height: 26px;
+        font-size: 0.8rem;
+    }
+
+    .step-text {
+        font-size: 0.85rem;
+    }
+
+    .path-option {
+        padding: 12px 10px;
+    }
+
+    .path-icon {
+        width: 55px;
+        min-width: 55px;
+    }
+
+    .path-icon img {
+        width: 55px;
+        height: 55px;
+        filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6));
+    }
+
+    .path-option:hover .path-icon img {
+        filter: drop-shadow(0 0 22px rgba(240, 165, 0, 0.85));
+    }
+
+    .path-text {
+        font-size: 0.85rem;
+    }
+
+    .path-divider {
+        font-size: 0.95rem;
+    }
+
+    .stakeholder-benefits {
+        padding: 15px;
+    }
+
+    .stakeholder-benefits h4 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .stakeholder-benefits li {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+        padding-left: 18px;
+    }
+
+    /* Value Proposition Section - Small Mobile */
+    .value-proposition-enhanced {
+        padding: 25px 15px;
+    }
+
+    .value-proposition-enhanced h3 {
+        font-size: 1.4rem;
+    }
+
+    .utility-item-enhanced {
+        padding: 20px 15px;
+    }
+
+    .utility-icon {
+        filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
+    }
+
+    .utility-icon img {
+        width: 65px;
+        height: 65px;
+        filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
+    }
+
+    .utility-item-enhanced:hover .utility-icon {
+        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.85));
+    }
+
+    .utility-item-enhanced:hover .utility-icon img {
+        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 1));
+    }
+
+    .utility-item-enhanced h4 {
+        font-size: 1.1rem;
+    }
+
+    .utility-item-enhanced p {
+        font-size: 0.85rem;
+    }
+}
+
+/* RESTORED: White Paper Section with Beautiful Overview Module */
 .whitepaper-content {
     max-width: 1000px;
     margin: 0 auto;
@@ -1085,17 +1409,19 @@ body.ember-page .main-image-glow:hover::before {
     font-weight: 800;
     color: #fb923c;
     margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
+/* RESTORED: Inline icon with glow */
 .whitepaper-section h4 img {
     width: 60px;
     height: 60px;
     object-fit: contain;
     vertical-align: middle;
+    margin-right: 8px;
     background: transparent;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.7));
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .whitepaper-section p {
@@ -1136,9 +1462,6 @@ body.ember-page .main-image-glow:hover::before {
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(240, 165, 0, 0.4);
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
 }
 
 .download-button:hover {
@@ -1146,12 +1469,16 @@ body.ember-page .main-image-glow:hover::before {
     box-shadow: 0 15px 40px rgba(240, 165, 0, 0.5);
 }
 
+/* RESTORED: Inline button icon with glow */
 .download-button img {
     width: 40px;
     height: 40px;
     object-fit: contain;
     vertical-align: middle;
+    margin-right: 8px;
     background: transparent;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+    transition: filter 0.3s ease;
 }
 
 /* Roadmap Section */
@@ -1212,17 +1539,19 @@ body.ember-page .main-image-glow:hover::before {
     font-weight: 800;
     color: white;
     margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
+/* RESTORED: Inline roadmap icon with glow */
 .roadmap-title img {
     width: 60px;
     height: 60px;
     object-fit: contain;
     vertical-align: middle;
+    margin-right: 8px;
     background: transparent;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.7));
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .roadmap-status {
@@ -1311,17 +1640,22 @@ body.ember-page .main-image-glow:hover::before {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
+/* RESTORED: Trust icon with enhanced glow */
 .trust-icon {
     font-size: 4rem;
     margin-bottom: 20px;
     display: block;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
 }
 
 .trust-icon img {
     width: 125px;
     height: 125px;
     object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
     background: transparent;
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .trust-item h4 {
@@ -1567,6 +1901,7 @@ body.ember-page .main-image-glow:hover::before {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
+/* RESTORED: Incentive icon with enhanced glow */
 .incentive-icon {
     font-size: 4rem;
     margin-bottom: 20px;
@@ -1578,7 +1913,10 @@ body.ember-page .main-image-glow:hover::before {
     width: 125px;
     height: 125px;
     object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
     background: transparent;
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .incentive-card h4 {
@@ -1750,7 +2088,23 @@ body.ember-page .main-image-glow:hover::before {
     border-bottom: none;
 }
 
-/* Mobile allocation cards */
+@media (max-width: 768px) {
+    .table-container {
+        background: transparent;
+        border: none;
+        overflow-x: visible;
+    }
+    
+    .tokenomics-table {
+        display: none;
+    }
+    
+    .allocation-table::after {
+        content: '';
+        display: block;
+    }
+}
+
 .allocation-cards-mobile {
     display: none;
 }
@@ -1774,11 +2128,6 @@ body.ember-page .main-image-glow:hover::before {
         display: flex;
         flex-direction: column;
         gap: 20px;
-    }
-    
-    /* Hide specific modules on mobile */
-    .allocation-card-mobile.mobile-hidden {
-        display: none !important;
     }
     
     .allocation-card-mobile {
@@ -1844,29 +2193,6 @@ body.ember-page .main-image-glow:hover::before {
         color: rgba(255, 255, 255, 0.8);
         line-height: 1.4;
     }
-    
-    /* Show mobile note for hidden modules */
-    .mobile-allocation-note {
-        background: rgba(240, 165, 0, 0.15);
-        border: 1px solid rgba(240, 165, 0, 0.3);
-        border-radius: 12px;
-        padding: 20px;
-        margin-top: 20px;
-        text-align: center;
-    }
-    
-    .mobile-allocation-note p {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 0.9rem;
-        line-height: 1.5;
-        margin-bottom: 10px;
-    }
-    
-    .mobile-allocation-note p:last-child {
-        margin-bottom: 0;
-        font-size: 0.85rem;
-        color: rgba(255, 255, 255, 0.75);
-    }
 }
 
 .trust-features {
@@ -1911,7 +2237,10 @@ body.ember-page .main-image-glow:hover::before {
     width: 125px;
     height: 125px;
     object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
     background: transparent;
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .trust-feature h4 {
@@ -1981,6 +2310,7 @@ body.ember-page .main-image-glow:hover::before {
     transform: translateY(-3px);
 }
 
+/* RESTORED: Metric icon with enhanced glow */
 .metric-icon {
     font-size: 2.8rem;
     margin-bottom: 10px;
@@ -1991,7 +2321,10 @@ body.ember-page .main-image-glow:hover::before {
     width: 75px;
     height: 75px;
     object-fit: contain;
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.8));
     background: transparent;
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .metric-value {
@@ -2116,10 +2449,6 @@ body.ember-page .main-image-glow:hover::before {
     color: #f0a500;
     margin-bottom: 15px;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
 }
 
 .development-fund-tracker h3 img {
@@ -2127,6 +2456,7 @@ body.ember-page .main-image-glow:hover::before {
     height: 32px;
     display: inline-block;
     vertical-align: middle;
+    margin-right: 8px;
 }
 
 .tracker-description {
@@ -2220,6 +2550,7 @@ body.ember-page .main-image-glow:hover::before {
 .breakdown-icon {
     font-size: 2rem;
     flex-shrink: 0;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.7));
 }
 
 .breakdown-icon img {
@@ -2492,7 +2823,7 @@ body.ember-page .main-image-glow:hover::before {
     height: 24px;
 }
 
-/* EmberTokenPresale.PNG Image with Enhanced Glow */
+/* RESTORED: EmberTokenPresale.PNG Image with Enhanced Glow */
 .presale-promo-image {
     width: 100%;
     text-align: center;
@@ -2510,10 +2841,37 @@ body.ember-page .main-image-glow:hover::before {
     display: block;
     border-radius: 20px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6));
     border: none;
     background: transparent;
     box-shadow: none;
     object-fit: contain;
+}
+
+.presale-promo-image:hover img {
+    filter: drop-shadow(0 0 70px rgba(240, 165, 0, 1)) drop-shadow(0 0 100px rgba(240, 165, 0, 0.7));
+    transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+    .presale-promo-image {
+        margin-top: 30px;
+    }
+    
+    .presale-promo-image img {
+        width: 100%;
+        border-radius: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .presale-promo-image {
+        margin-top: 25px;
+    }
+    
+    .presale-promo-image img {
+        border-radius: 12px;
+    }
 }
 
 .tpa-section {
@@ -2529,9 +2887,6 @@ body.ember-page .main-image-glow:hover::before {
     margin-bottom: 15px;
     font-weight: 700;
     font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
 .tpa-section h4 img {
@@ -2539,6 +2894,7 @@ body.ember-page .main-image-glow:hover::before {
     height: 26px;
     display: inline-block;
     vertical-align: middle;
+    margin-right: 8px;
 }
 
 .tpa-instruction {
@@ -2549,9 +2905,7 @@ body.ember-page .main-image-glow:hover::before {
 }
 
 .tpa-download-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    display: inline-block;
     background: linear-gradient(135deg, #f0a500, #fb923c);
     color: white;
     padding: 12px 20px;
@@ -2569,6 +2923,7 @@ body.ember-page .main-image-glow:hover::before {
     height: 22px;
     display: inline-block;
     vertical-align: middle;
+    margin-right: 8px;
 }
 
 .tpa-download-button:hover {
@@ -2673,10 +3028,6 @@ body.ember-page .main-image-glow:hover::before {
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(215, 51, 39, 0.4);
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
 }
 
 .presale-button img {
@@ -2684,6 +3035,7 @@ body.ember-page .main-image-glow:hover::before {
     height: 24px;
     display: inline-block;
     vertical-align: middle;
+    margin-right: 8px;
 }
 
 .presale-button:hover:not(:disabled) {
@@ -2755,17 +3107,22 @@ body.ember-page .main-image-glow:hover::before {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
+/* RESTORED: Benefit icon with enhanced glow */
 .benefit-icon {
     font-size: 4rem;
     margin-bottom: 20px;
     display: block;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
 }
 
 .benefit-icon img {
     width: 125px;
     height: 125px;
     object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
     background: transparent;
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .benefit-item h4 {
@@ -2829,11 +3186,15 @@ body.ember-page .main-image-glow:hover::before {
     animation-delay: 4s;
 }
 
+/* RESTORED: Floating coin images with enhanced glow */
 .floating-coin-image {
     width: 60px;
     height: 60px;
+    filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.9));
     opacity: 0.4;
     background: transparent;
+    transition: filter 0.3s ease;
+    animation: coinGlowPulse 3s ease-in-out infinite;
 }
 
 @keyframes floatingCoinMove {
@@ -2860,6 +3221,7 @@ body.ember-page .main-image-glow:hover::before {
 .cta-main-icon {
     width: 120px;
     height: 120px;
+    filter: drop-shadow(0 0 60px rgba(240, 165, 0, 1));
     animation: ctaIconFloat 4s ease-in-out infinite;
     background: transparent;
 }
@@ -2939,10 +3301,14 @@ body.ember-page .main-image-glow:hover::before {
     flex-shrink: 0;
 }
 
+/* RESTORED: Prop icon with enhanced glow */
 .prop-icon-image {
     width: 75px;
     height: 75px;
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.9));
     background: transparent;
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .prop-text h4 {
@@ -3124,9 +3490,6 @@ body.ember-page .main-image-glow:hover::before {
     font-size: 1.5rem;
     font-weight: 800;
     margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 .tpa-modal-header h3 img {
@@ -3134,6 +3497,7 @@ body.ember-page .main-image-glow:hover::before {
     height: 28px;
     display: inline-block;
     vertical-align: middle;
+    margin-right: 10px;
 }
 
 .tpa-modal-close {
@@ -3172,9 +3536,6 @@ body.ember-page .main-image-glow:hover::before {
     font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
 .tpa-preview h4 img {
@@ -3182,6 +3543,7 @@ body.ember-page .main-image-glow:hover::before {
     height: 26px;
     display: inline-block;
     vertical-align: middle;
+    margin-right: 8px;
 }
 
 .tpa-preview p {
@@ -3202,7 +3564,7 @@ body.ember-page .main-image-glow:hover::before {
 }
 
 .tpa-preview p img,
-.tpa-preview li img {
+.tpa-preview li strong::before img {
     width: 22px;
     height: 22px;
     display: inline-block;
@@ -3218,10 +3580,7 @@ body.ember-page .main-image-glow:hover::before {
 
 .tpa-download-btn,
 .tpa-agree-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    display: block;
     width: 100%;
     padding: 15px 25px;
     border: none;
@@ -3240,6 +3599,7 @@ body.ember-page .main-image-glow:hover::before {
     height: 22px;
     display: inline-block;
     vertical-align: middle;
+    margin-right: 8px;
 }
 
 .tpa-download-btn {
@@ -3283,10 +3643,6 @@ body.ember-page .main-image-glow:hover::before {
     font-weight: 800;
     margin-bottom: 20px;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
 }
 
 .legal-disclaimer h3 img {
@@ -3294,7 +3650,11 @@ body.ember-page .main-image-glow:hover::before {
     height: 60px;
     object-fit: contain;
     vertical-align: middle;
+    margin-right: 8px;
     background: transparent;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.7));
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .disclaimer-content {
@@ -3354,6 +3714,9 @@ body.ember-page .main-image-glow:hover::before {
     object-fit: contain;
     vertical-align: middle;
     background: transparent;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.7));
+    transition: filter 0.3s ease;
+    animation: iconGlowPulse 4s ease-in-out infinite;
 }
 
 .compliance-card p {
@@ -3378,6 +3741,17 @@ body.ember-page .main-image-glow:hover::before {
     position: absolute;
     left: 0;
     color: #f0a500;
+}
+
+@media (max-width: 968px) {
+    .compliance-grid {
+        grid-template-columns: 1fr !important;
+        max-width: 100% !important;
+    }
+    
+    .compliance-card {
+        min-height: auto;
+    }
 }
 
 /* ==================================================================
@@ -3449,17 +3823,19 @@ body.ember-page .main-image-glow:hover::before {
     flex-wrap: wrap;
 }
 
+/* RESTORED: Share icon with enhanced glow */
 .share-icon-compact {
     width: 85px;
     height: 85px;
     object-fit: contain;
+    filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.9));
     animation: iconPulse 2s ease-in-out infinite;
     background: transparent;
 }
 
 @keyframes iconPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.9)); }
+    50% { transform: scale(1.1); filter: drop-shadow(0 0 50px rgba(240, 165, 0, 1)); }
 }
 
 .share-text-compact {
@@ -3576,21 +3952,81 @@ body.ember-page .main-image-glow:hover::before {
     box-shadow: 0 15px 40px rgba(251, 146, 60, 0.5);
 }
 
+@media (max-width: 768px) {
+    .social-sharing-section-compact {
+        padding: 60px 20px;
+    }
+    
+    .social-sharing-content-compact {
+        padding: 40px 25px;
+        border-radius: 20px;
+    }
+    
+    .social-sharing-header-compact {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .share-icon-compact {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .share-text-compact h3 {
+        font-size: 1.6rem;
+    }
+    
+    .share-text-compact p {
+        font-size: 1rem;
+    }
+    
+    .social-sharing-buttons-compact {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .social-share-button-compact {
+        padding: 16px 24px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-sharing-section-compact {
+        padding: 50px 15px;
+    }
+    
+    .social-sharing-content-compact {
+        padding: 30px 20px;
+    }
+    
+    .share-icon-compact {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .share-text-compact h3 {
+        font-size: 1.4rem;
+    }
+    
+    .share-text-compact p {
+        font-size: 0.95rem;
+    }
+    
+    .social-share-button-compact {
+        padding: 14px 20px;
+        font-size: 0.9rem;
+        gap: 10px;
+    }
+}
+
 /* Mobile Responsive Design - COMPREHENSIVE FIXES */
 @media (max-width: 768px) {
     html, body {
         overflow-x: hidden !important;
         width: 100% !important;
         max-width: 100vw !important;
-    }
-    
-    /* Reduce section padding significantly on mobile */
-    .ember-section {
-        padding: 50px 10px !important;
-    }
-    
-    .container {
-        padding: 0 10px;
     }
     
     .logo-image {
@@ -3667,11 +4103,11 @@ body.ember-page .main-image-glow:hover::before {
         font-size: 1.1rem;
     }
 
-    .hero-crypto-coin-icon,
-    .floating-coin-img {
+    .hero-crypto-coin-icon {
         width: clamp(25px, 4vw, 35px) !important;
         height: clamp(25px, 4vw, 35px) !important;
         opacity: 0.5 !important;
+        filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.7)) !important;
     }
 
     .presale-content {
@@ -3768,8 +4204,8 @@ body.ember-page .main-image-glow:hover::before {
     }
 
     .compliance-grid {
-        grid-template-columns: 1fr !important;
-        gap: 30px !important;
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
 
     .ember-section-icon img {
@@ -3825,6 +4261,10 @@ body.ember-page .main-image-glow:hover::before {
         display: none !important;
     }
     
+    .ember-section {
+        padding: 60px 20px;
+    }
+    
     .whitepaper-sections {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -3834,52 +4274,14 @@ body.ember-page .main-image-glow:hover::before {
         grid-template-columns: 1fr;
         gap: 10px;
     }
-    
-    .social-sharing-section-compact {
-        padding: 60px 20px;
-    }
-    
-    .social-sharing-content-compact {
-        padding: 40px 25px;
-        border-radius: 20px;
-    }
-    
-    .social-sharing-header-compact {
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 30px;
-    }
-    
-    .share-icon-compact {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .share-text-compact h3 {
-        font-size: 1.6rem;
-    }
-    
-    .share-text-compact p {
-        font-size: 1rem;
-    }
-    
-    .social-sharing-buttons-compact {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .social-share-button-compact {
-        padding: 16px 24px;
-        font-size: 0.95rem;
-    }
 }
 
 @media (max-width: 480px) {
-    .hero-crypto-coin-icon,
-    .floating-coin-img {
+    .hero-crypto-coin-icon {
         width: clamp(20px, 3vw, 30px) !important;
         height: clamp(20px, 3vw, 30px) !important;
         opacity: 0.4 !important;
+        filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6)) !important;
     }
 
     .ember-token-icon-image {
@@ -3959,33 +4361,6 @@ body.ember-page .main-image-glow:hover::before {
     .countdown-timer {
         grid-template-columns: repeat(2, 1fr) !important;
     }
-    
-    .social-sharing-section-compact {
-        padding: 50px 15px;
-    }
-    
-    .social-sharing-content-compact {
-        padding: 30px 20px;
-    }
-    
-    .share-icon-compact {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .share-text-compact h3 {
-        font-size: 1.4rem;
-    }
-    
-    .share-text-compact p {
-        font-size: 0.95rem;
-    }
-    
-    .social-share-button-compact {
-        padding: 14px 20px;
-        font-size: 0.9rem;
-        gap: 10px;
-    }
 }
 
 /* Scroll Animations */
@@ -4026,7 +4401,6 @@ html {
     }
 
     .hero-crypto-coin-icon,
-    .floating-coin-img,
     .ember-token-icon-image {
         animation: none !important;
     }
