@@ -1,5 +1,5 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V2 WITH READY SIGNAL
 // ============================================
 // This file contains shared functionality used across multiple pages
 // including mobile navigation, scroll effects, animations, countdown timer, and cookie consent
@@ -1087,7 +1087,7 @@ If asked about financial advice, remind users to do their own research and consu
     // ============================================
     
     function init() {
-        console.log('🔥 Vault Phoenix Shared Scripts Initialized');
+        console.log('🔥 Vault Phoenix Shared Scripts Initializing...');
         
         // Initial navbar state
         handleNavbarScroll();
@@ -1140,6 +1140,8 @@ If asked about financial advice, remind users to do their own research and consu
         
         // Add loaded class to body
         document.body.classList.add('loaded');
+        
+        console.log('✅ Vault Phoenix Shared Scripts Initialization Complete');
     }
 
     // Initialize when DOM is ready
@@ -1148,5 +1150,14 @@ If asked about financial advice, remind users to do their own research and consu
     } else {
         init();
     }
+
+    // ============================================
+    // SIGNAL SCRIPT READY TO OTHER SCRIPTS
+    // ============================================
+    
+    // Signal that shared script is fully loaded and ready
+    // This must be OUTSIDE the init() function so it executes immediately
+    window.sharedScriptReady = true;
+    console.log('✅ shared-script.js fully loaded and ready - signaling to other scripts');
 
 })();
