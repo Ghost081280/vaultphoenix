@@ -4,7 +4,7 @@
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // SENIOR JS ENGINEERING: Mobile-First, Performance-Optimized
 // PRODUCTION READY: Clean, maintainable, and scalable code
-// VERSION: 6.0 - Cleaned Architecture (Removed Duplicate Scroll Progress)
+// VERSION: 6.1 - Fixed Initialization Sequence (Waits for Shared Script)
 // ============================================
 
 'use strict';
@@ -1504,7 +1504,7 @@ const VaultPhoenix = (function() {
      * DOM Content Loaded - Initialize all features
      */
     function initializePage() {
-        console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v6.0 - Clean Architecture)...');
+        console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v6.1 - Fixed Initialization)...');
         
         // Ensure dark background
         document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
@@ -1629,11 +1629,25 @@ const VaultPhoenix = (function() {
     // EVENT LISTENERS - Initialization
     // ============================================
     
-    // Initialize on DOM ready
+    // ============================================
+    // WAIT FOR SHARED SCRIPT - Critical for proper initialization
+    // ============================================
+    
+    function waitForSharedScript() {
+        if (window.sharedScriptReady) {
+            console.log('✅ Shared script ready - initializing page scripts');
+            initializePage();
+        } else {
+            console.log('⏳ Waiting for shared-script.js to initialize...');
+            setTimeout(waitForSharedScript, 50);
+        }
+    }
+    
+    // Initialize on DOM ready (but wait for shared script)
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializePage);
+        document.addEventListener('DOMContentLoaded', waitForSharedScript);
     } else {
-        initializePage();
+        waitForSharedScript();
     }
     
     // Final optimizations on window load
@@ -1682,7 +1696,7 @@ window.vpChangeLaptopImage = VaultPhoenix.vpChangeLaptopImage;
 console.log('%c🔥🪙 VAULT PHOENIX', 'color: #d73327; font-size: 24px; font-weight: bold;');
 console.log('%c🚀 AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 16px; font-weight: bold;');
 console.log('%c📧 contact@vaultphoenix.com', 'color: #374151; font-size: 12px;');
-console.log('%c💡 Senior Engineering - Clean Architecture v6.0', 'color: #22c55e; font-size: 12px; font-weight: bold;');
-console.log('%c✅ Removed Duplicate Scroll Progress - Using Shared Implementation', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
+console.log('%c💡 Senior Engineering - Clean Architecture v6.1', 'color: #22c55e; font-size: 12px; font-weight: bold;');
+console.log('%c✅ Fixed Initialization Sequence - Waits for Shared Script', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
 console.log('%c✅ Namespace protected, event delegation optimized, memory managed', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
 console.log('Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
