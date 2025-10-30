@@ -157,54 +157,66 @@
             margin-bottom: var(--space-lg);
         }
         
-        .main-step-image {
-            width: 100%;
-            height: auto;
-            border-radius: var(--radius-md);
+        .main-step-coin-stack {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
         }
         
-        .main-step-title-premium {
+        .main-step-title {
             font-size: var(--font-xl);
             font-weight: 700;
             margin-bottom: var(--space-sm);
-            color: var(--ember-gold);
+            color: #ffffff;
         }
         
-        .main-step-description-premium {
-            font-size: var(--font-base);
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.85);
+        .main-step-description {
+            font-size: var(--font-sm);
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
         }
         
         .main-step-arrow-wrapper {
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
         
         .main-step-arrow {
             font-size: 2.5rem;
             color: var(--ember-orange);
-            font-weight: bold;
+            font-weight: 700;
+            animation: arrowPulse 2s ease-in-out infinite;
         }
         
-        /* Dual Path CTAs */
+        @keyframes arrowPulse {
+            0%, 100% { 
+                transform: scale(1); 
+                opacity: 0.8; 
+            }
+            50% { 
+                transform: scale(1.2); 
+                opacity: 1; 
+            }
+        }
+        
+        /* Dual CTAs */
         .main-hero-dual-ctas {
-            margin: var(--space-4xl) 0;
-        }
-        
-        .main-cta-path-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: var(--space-xl);
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
         .main-cta-path {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
             background: var(--ember-gradient-card);
             border: 2px solid rgba(215, 51, 39, 0.3);
             border-radius: var(--radius-xl);
             padding: var(--space-xl);
-            position: relative;
+            text-align: center;
             transition: all var(--transition-base);
         }
         
@@ -214,62 +226,42 @@
             border-color: var(--ember-orange);
         }
         
-        .coming-soon-badge, .early-2026-badge {
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            background: var(--ember-gradient-primary);
-            color: white;
-            padding: 6px 16px;
-            border-radius: var(--radius-full);
-            font-size: var(--font-sm);
+        .main-cta-path-icon-container {
+            margin-bottom: var(--space-md);
+        }
+        
+        .main-cta-path-title {
+            font-size: var(--font-2xl);
             font-weight: 700;
-            z-index: 10;
-            box-shadow: var(--ember-shadow-sm);
-        }
-        
-        .early-2026-badge {
-            background: var(--ember-gradient-secondary);
-        }
-        
-        .main-path-badge {
-            background: rgba(215, 51, 39, 0.2);
-            color: var(--ember-orange);
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--radius-md);
-            font-size: var(--font-sm);
-            font-weight: 600;
-            margin-bottom: var(--space-lg);
-            display: inline-block;
-        }
-        
-        .main-cta-compact-layout {
-            display: flex;
-            gap: var(--space-lg);
-            align-items: flex-start;
-            margin-bottom: var(--space-lg);
-        }
-        
-        .main-cta-image-wrapper {
-            flex-shrink: 0;
-        }
-        
-        .main-cta-path-icon-compact, .main-cta-github-icon-compact {
-            width: 70px;
-            height: 70px;
-        }
-        
-        .main-path-title-compact {
-            font-size: var(--font-xl);
-            font-weight: 700;
-            color: var(--ember-gold);
             margin-bottom: var(--space-sm);
+            color: #ffffff;
         }
         
-        .main-path-description-compact {
+        .main-cta-path-description {
             font-size: var(--font-base);
+            margin-bottom: var(--space-lg);
+            color: rgba(255, 255, 255, 0.8);
             line-height: 1.6;
-            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .main-cta-path-highlights {
+            margin-bottom: var(--space-lg);
+            text-align: left;
+        }
+        
+        .main-cta-highlight-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+            font-size: var(--font-sm);
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .main-checkmark-icon {
+            color: var(--ember-gold);
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
         
         .main-cta-path-button {
@@ -333,74 +325,476 @@
         }
         
         @keyframes pulse {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 0.9; transform: scale(1.05); }
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
         }
         
-        /* Secondary CTA */
-        .main-hero-secondary-cta {
+        /* Scroll Indicator */
+        .main-hero-scroll-indicator {
             text-align: center;
             margin-top: var(--space-3xl);
         }
         
-        .main-secondary-cta-text {
-            font-size: var(--font-xl);
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: var(--space-lg);
-        }
-        
-        .main-secondary-cta-button {
+        .main-hero-secondary-cta {
             display: inline-flex;
             align-items: center;
             gap: var(--space-sm);
-            padding: var(--space-md) var(--space-2xl);
-            background: transparent;
-            border: 2px solid var(--ember-gold);
             color: var(--ember-gold);
-            border-radius: var(--radius-lg);
-            font-size: var(--font-lg);
-            font-weight: 700;
             text-decoration: none;
+            font-size: var(--font-lg);
+            font-weight: 600;
+            transition: all var(--transition-base);
+            padding: var(--space-md) var(--space-xl);
+            border: 2px solid rgba(240, 165, 0, 0.3);
+            border-radius: var(--radius-lg);
+        }
+        
+        .main-hero-secondary-cta:hover {
+            transform: translateY(-3px);
+            border-color: var(--ember-gold);
+            box-shadow: 0 4px 15px rgba(240, 165, 0, 0.3);
+        }
+        
+        /* ===================================
+           ENTERPRISE TOKEN INFRASTRUCTURE
+           Added after hero section
+           NOTE: This section connects to countdown timer in shared.js
+           Element IDs: main-days, main-hours, main-minutes, main-seconds
+           =================================== */
+        
+        .ember-token-section-redesigned {
+            padding: 70px var(--container-padding);
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ember-token-section-redesigned::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(240, 165, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .ember-token-grid-redesigned {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: var(--space-3xl);
+            max-width: 1300px;
+            margin: 0 auto;
+            align-items: start;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ember-token-left-redesigned {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xl);
+        }
+        
+        .ember-token-title-redesigned {
+            font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: var(--space-sm);
+            line-height: 1.2;
+        }
+        
+        .ember-token-description-redesigned {
+            font-size: clamp(1rem, 2.2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+        
+        /* Countdown Widget */
+        .ember-countdown-widget-redesigned {
+            background: var(--ember-gradient-card);
+            border: 2px solid rgba(215, 51, 39, 0.3);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ember-countdown-widget-redesigned::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--ember-gradient-primary);
+        }
+        
+        .countdown-header-redesigned {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .countdown-icon-redesigned {
+            flex-shrink: 0;
+        }
+        
+        /* NOTE: Icon size uses !important to override shared.css if needed */
+        .main-ember-countdown-icon-redesigned {
+            width: 68px !important;
+            height: 68px !important;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.8)) 
+                    drop-shadow(0 0 30px rgba(240, 165, 0, 0.4));
+            transition: transform var(--transition-smooth);
+            animation: ember-coinPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes ember-coinPulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg); 
+            }
+            50% { 
+                transform: scale(1.1) rotate(5deg); 
+            }
+        }
+        
+        .countdown-text-redesigned h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 3px;
+        }
+        
+        .countdown-text-redesigned p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* 
+           CRITICAL: Countdown Timer Element IDs
+           These IDs must match what shared.js expects:
+           - main-days
+           - main-hours
+           - main-minutes
+           - main-seconds
+           
+           If countdown doesn't work, verify:
+           1. shared.js has updateCountdown function
+           2. Target date is set correctly in shared.js
+           3. Function is called on page load
+        */
+        .ember-countdown-timer-redesigned {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .ember-time-unit-redesigned {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(215, 51, 39, 0.3);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-align: center;
             transition: all var(--transition-base);
         }
         
-        .main-secondary-cta-button:hover {
-            background: var(--ember-gold);
-            color: var(--ember-dark);
-            transform: scale(1.05);
+        .ember-time-unit-redesigned:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: rgba(215, 51, 39, 0.5);
+            transform: translateY(-2px);
         }
         
-        /* Container */
-        .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 var(--container-padding);
-        }
-        
-        /* Section Titles */
-        .main-section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: var(--space-md);
+        .ember-time-value-redesigned {
+            display: block;
+            font-size: 2rem;
+            font-weight: 900;
             color: var(--ember-gold);
+            margin-bottom: 3px;
+            text-shadow: 0 0 15px rgba(240, 165, 0, 0.4);
         }
         
-        .main-section-subtitle {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-            color: rgba(255, 255, 255, 0.85);
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
+        .ember-time-label-redesigned {
+            display: block;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+        
+        /* Presale Stats */
+        .presale-stats-redesigned {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: var(--space-md) 0;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .stat-item-redesigned {
+            text-align: center;
+        }
+        
+        .stat-number-redesigned {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--ember-gold);
+            margin-bottom: 3px;
+        }
+        
+        .stat-label-redesigned {
+            display: block;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+        }
+        
+        .stat-divider-redesigned {
+            color: rgba(215, 51, 39, 0.3);
+            font-size: 1.3rem;
+        }
+        
+        /* Presale CTA */
+        .presale-cta-redesigned {
+            margin-top: var(--space-md);
+        }
+        
+        .join-presale-button-redesigned {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            width: 100%;
+            background: var(--ember-gradient-primary);
+            color: white;
+            padding: 15px var(--space-xl);
+            border-radius: var(--radius-lg);
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all var(--transition-smooth);
+            box-shadow: 0 8px 25px rgba(215, 51, 39, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .join-presale-button-redesigned::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .join-presale-button-redesigned:hover::before {
+            left: 100%;
+        }
+        
+        .join-presale-button-redesigned:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(215, 51, 39, 0.6);
+        }
+        
+        .cta-icon-image-redesigned {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+        
+        .cta-text-redesigned {
+            font-size: 1.1rem;
+        }
+        
+        /* Enhanced Highlights */
+        .ember-highlights-redesigned {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .ember-highlight-redesigned {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(215, 51, 39, 0.2);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.95);
+            transition: all var(--transition-base);
+        }
+        
+        .ember-highlight-redesigned:hover {
+            background: rgba(215, 51, 39, 0.1);
+            border-color: rgba(215, 51, 39, 0.4);
+            transform: translateX(3px);
+        }
+        
+        .highlight-emoji-redesigned {
+            flex-shrink: 0;
+        }
+        
+        .highlight-icon-image-redesigned {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+        }
+        
+        .highlight-text-redesigned {
+            flex: 1;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .highlight-arrow-redesigned {
+            color: var(--ember-gold);
+            font-weight: 900;
+            font-size: 1.1rem;
+            transition: transform var(--transition-base);
+        }
+        
+        .ember-highlight-redesigned:hover .highlight-arrow-redesigned {
+            transform: translateX(3px);
+        }
+        
+        /* Right Column */
+        .ember-token-right-redesigned {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xl);
+            position: sticky;
+            top: 120px;
+        }
+        
+        .ember-phoenix-container-redesigned {
+            text-align: center;
+        }
+        
+        .phoenix-holding-coin-redesigned {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 30px rgba(240, 165, 0, 0.6)) 
+                    drop-shadow(0 0 50px rgba(240, 165, 0, 0.4));
+            animation: ember-coinFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes ember-coinFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+            }
+            50% { 
+                transform: translateY(-15px) rotate(3deg); 
+            }
+        }
+        
+        /* Compliance Disclaimer */
+        .compliance-disclaimer-redesigned {
+            background: linear-gradient(135deg, rgba(215, 51, 39, 0.08), rgba(251, 146, 60, 0.04));
+            border: 2px solid rgba(215, 51, 39, 0.25);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+            backdrop-filter: blur(20px);
+        }
+        
+        .compliance-disclaimer-redesigned h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: var(--space-md);
+        }
+        
+        .main-compliance-icon-redesigned {
+            width: 68px !important;
+            height: 68px !important;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.5)) 
+                    drop-shadow(0 0 18px rgba(240, 165, 0, 0.25));
+        }
+        
+        .compliance-disclaimer-redesigned p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+        
+        .compliance-cta {
+            text-align: center;
+        }
+        
+        .compliance-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(215, 51, 39, 0.15);
+            border: 2px solid rgba(215, 51, 39, 0.3);
+            border-radius: var(--radius-md);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all var(--transition-base);
+        }
+        
+        .compliance-button:hover {
+            background: rgba(215, 51, 39, 0.25);
+            border-color: rgba(215, 51, 39, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        /* Scroll Reveal Animation - Works with existing JS observer */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-reveal.stagger-1 {
+            transition-delay: 0.1s;
+        }
+        
+        .scroll-reveal.stagger-2 {
+            transition-delay: 0.2s;
+        }
+        
+        .scroll-reveal.stagger-3 {
+            transition-delay: 0.3s;
+        }
+        
+        .scroll-reveal.stagger-4 {
+            transition-delay: 0.4s;
+        }
+        
+        /* ===================================
+           END ENTERPRISE TOKEN INFRASTRUCTURE
+           =================================== */
         
         /* Social Sharing Section */
         .social-sharing-section-compact {
-            padding: var(--section-padding) 0;
-            background: var(--ember-charcoal);
+            padding: var(--section-padding) var(--container-padding);
+            background: var(--ember-gradient-background);
         }
         
         .social-sharing-content-compact {
@@ -418,25 +812,27 @@
         }
         
         .main-social-sharing-icon-compact {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
+            filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5));
         }
         
         .social-sharing-title-compact {
-            font-size: var(--font-3xl);
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
-            color: var(--ember-gold);
+            color: #ffffff;
             margin-bottom: var(--space-sm);
         }
         
         .social-sharing-subtitle-compact {
-            font-size: var(--font-lg);
-            color: rgba(255, 255, 255, 0.85);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
         }
         
         .social-sharing-buttons-compact {
             display: flex;
-            gap: var(--space-lg);
+            gap: var(--space-md);
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -446,618 +842,150 @@
             align-items: center;
             gap: var(--space-sm);
             padding: var(--space-md) var(--space-xl);
-            background: var(--ember-gradient-primary);
-            color: white;
-            border: none;
+            background: var(--ember-gradient-card);
+            border: 2px solid rgba(215, 51, 39, 0.3);
             border-radius: var(--radius-lg);
-            font-size: var(--font-base);
-            font-weight: 600;
+            color: #ffffff;
             text-decoration: none;
+            font-weight: 600;
             transition: all var(--transition-base);
         }
         
         .social-share-button-compact:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
             box-shadow: var(--ember-shadow-md);
+            border-color: var(--ember-orange);
         }
         
         .social-share-icon-compact {
-            width: 20px;
-            height: 20px;
+            flex-shrink: 0;
         }
         
         /* Crypto Coin Section */
         .crypto-coin-section {
-            padding: var(--section-padding) 0;
-            background: var(--ember-dark);
+            padding: var(--section-padding) var(--container-padding);
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.95), rgba(26, 26, 26, 0.9));
         }
         
         .crypto-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--space-3xl);
+            gap: var(--space-4xl);
+            max-width: 1300px;
+            margin: 0 auto;
             align-items: center;
-            margin-bottom: var(--space-4xl);
+        }
+        
+        .crypto-image {
+            position: relative;
         }
         
         .crypto-coin-phone-frame {
-            position: relative;
-            max-width: 400px;
+            max-width: 500px;
             margin: 0 auto;
         }
         
-        .phoenix-coin-image {
+        .crypto-coin-screen-wrapper img {
             width: 100%;
             height: auto;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--ember-shadow-lg);
-        }
-        
-        .crypto-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            margin-bottom: var(--space-lg);
-            color: var(--ember-gold);
-        }
-        
-        .crypto-description {
-            font-size: var(--font-lg);
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: var(--space-2xl);
-        }
-        
-        .crypto-benefits {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-xl);
-        }
-        
-        .crypto-benefit {
-            display: flex;
-            gap: var(--space-lg);
-            align-items: flex-start;
-        }
-        
-        .custom-coin-icon-large, .custom-placement-icon-large, .custom-revenue-icon-extra-large {
-            width: 60px;
-            height: 60px;
-        }
-        
-        .benefit-content h3 {
-            font-size: var(--font-xl);
-            font-weight: 700;
-            color: var(--ember-gold);
-            margin-bottom: var(--space-sm);
-        }
-        
-        .benefit-content p {
-            font-size: var(--font-base);
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-        }
-        
-        /* Technology Modules */
-        .technology-modules {
-            margin-top: var(--space-4xl);
-        }
-        
-        .technology-modules-title {
-            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: var(--space-md);
-            color: var(--ember-gold);
-        }
-        
-        .technology-modules-subtitle {
-            font-size: var(--font-lg);
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-            color: rgba(255, 255, 255, 0.85);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-        
-        .technology-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: var(--space-2xl);
-        }
-        
-        .technology-card {
-            background: var(--ember-gradient-card);
-            border: 2px solid rgba(215, 51, 39, 0.3);
-            border-radius: var(--radius-xl);
-            padding: var(--space-2xl);
-            transition: all var(--transition-base);
-        }
-        
-        .technology-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--ember-shadow-lg);
-            border-color: var(--ember-orange);
-        }
-        
-        .technology-header {
-            display: flex;
-            gap: var(--space-lg);
-            align-items: center;
-            margin-bottom: var(--space-lg);
-        }
-        
-        .technology-icon {
-            width: 80px;
-            height: 80px;
-        }
-        
-        .technology-badge {
-            display: inline-block;
-            padding: var(--space-xs) var(--space-md);
-            border-radius: var(--radius-full);
-            font-size: var(--font-sm);
-            font-weight: 700;
-            margin-bottom: var(--space-sm);
-        }
-        
-        .outdoor-badge {
-            background: rgba(251, 146, 60, 0.2);
-            color: var(--ember-orange);
-        }
-        
-        .indoor-badge {
-            background: rgba(139, 92, 246, 0.2);
-            color: var(--ember-purple);
-        }
-        
-        .technology-title {
-            font-size: var(--font-2xl);
-            font-weight: 800;
-            color: var(--ember-gold);
-        }
-        
-        .technology-description {
-            font-size: var(--font-base);
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: var(--space-xl);
-        }
-        
-        .technology-features h5 {
-            font-size: var(--font-lg);
-            font-weight: 700;
-            color: var(--ember-orange);
-            margin-bottom: var(--space-md);
-        }
-        
-        .technology-features ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .technology-features li {
-            padding: var(--space-sm) 0;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: var(--font-base);
-        }
-        
-        .technology-features li strong {
-            color: var(--ember-gold);
-        }
-        
-        .technology-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-lg);
-            margin: var(--space-xl) 0;
-            padding: var(--space-lg) 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .tech-stat {
-            text-align: center;
-        }
-        
-        .tech-stat-number {
-            display: block;
-            font-size: var(--font-2xl);
-            font-weight: 800;
-            color: var(--ember-gold);
-            margin-bottom: var(--space-xs);
-        }
-        
-        .tech-stat-label {
-            font-size: var(--font-sm);
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .technology-highlight {
-            display: flex;
-            gap: var(--space-lg);
-            align-items: center;
-            background: rgba(215, 51, 39, 0.1);
-            padding: var(--space-lg);
-            border-radius: var(--radius-md);
-            margin-top: var(--space-lg);
-        }
-        
-        .tech-highlight-icon {
-            width: 50px;
-            height: 50px;
-        }
-        
-        .tech-highlight-content strong {
-            display: block;
-            color: var(--ember-gold);
-            font-size: var(--font-lg);
-            margin-bottom: var(--space-xs);
-        }
-        
-        .tech-highlight-content p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: var(--font-sm);
-            line-height: 1.5;
-        }
-        
-        /* Combined Technology Power */
-        .combined-technology-power {
-            margin-top: var(--space-4xl);
-            padding: var(--space-3xl);
-            background: var(--ember-gradient-card);
-            border: 2px solid rgba(215, 51, 39, 0.3);
             border-radius: var(--radius-2xl);
-        }
-        
-        .combined-power-header {
-            text-align: center;
-            margin-bottom: var(--space-2xl);
-        }
-        
-        .combined-power-title {
-            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-            font-weight: 800;
-            color: var(--ember-gold);
-            margin-bottom: var(--space-md);
-        }
-        
-        .combined-power-description {
-            font-size: var(--font-lg);
-            color: rgba(255, 255, 255, 0.85);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        /* Live Demo Section */
-        .live-demo-section {
-            padding: var(--section-padding) 0;
-            background: var(--ember-charcoal);
-        }
-        
-        .demo-systems-container {
-            margin-top: var(--space-4xl);
-        }
-        
-        .demo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-3xl);
-        }
-        
-        .device-title {
-            font-size: var(--font-2xl);
-            font-weight: 700;
-            color: var(--ember-gold);
-            text-align: center;
-            margin-bottom: var(--space-xl);
-        }
-        
-        /* Phone Mockup */
-        .phone-mockup {
-            position: relative;
-            max-width: 350px;
-            margin: 0 auto;
-            background: #1a1a1a;
-            border-radius: 40px;
-            padding: 15px;
             box-shadow: var(--ember-shadow-xl);
         }
         
-        .phone-screen {
-            border-radius: 30px;
-            overflow: hidden;
-            background: #000;
-            aspect-ratio: 9/19.5;
+        .crypto-text h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            color: #ffffff;
         }
         
-        .phone-screenshot {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .phone-notch {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 25px;
-            background: #000;
-            border-radius: 0 0 20px 20px;
-            z-index: 10;
-        }
-        
-        /* Laptop Mockup */
-        .laptop-mockup {
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .laptop-screen {
-            background: #000;
-            border-radius: 10px 10px 0 0;
-            border: 8px solid #2a2a2a;
-            overflow: hidden;
-            box-shadow: var(--ember-shadow-lg);
-        }
-        
-        .laptop-screenshot {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .laptop-base {
-            height: 20px;
-            background: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
-            border-radius: 0 0 20px 20px;
-            position: relative;
-        }
-        
-        .laptop-base::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 8px;
-            background: #1a1a1a;
-            border-radius: 0 0 10px 10px;
-        }
-        
-        .laptop-notch {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 6px;
-            background: #1a1a1a;
-            border-radius: 6px 6px 0 0;
-        }
-        
-        /* Thumbnail Grids */
-        .thumbnail-grid-phone, .thumbnail-grid-laptop {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
-        }
-        
-        .simple-thumb, .simple-thumb-laptop {
-            background: var(--ember-gradient-card);
-            border: 2px solid rgba(215, 51, 39, 0.3);
-            border-radius: var(--radius-md);
-            padding: var(--space-sm);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .simple-thumb:hover, .simple-thumb-laptop:hover {
-            border-color: var(--ember-orange);
-            transform: scale(1.05);
-        }
-        
-        .simple-thumb.active, .simple-thumb-laptop.active {
-            border-color: var(--ember-gold);
-            box-shadow: var(--ember-shadow-md);
-        }
-        
-        .simple-thumb img, .simple-thumb-laptop img {
-            width: 100%;
-            height: auto;
-            border-radius: var(--radius-sm);
-        }
-        
-        .thumb-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: var(--space-xs);
-            font-size: var(--font-xs);
-            text-align: center;
-            font-weight: 600;
-        }
-        
-        /* Demo Cards */
-        .demo-card-wrapper {
-            margin-top: var(--space-xl);
-        }
-        
-        .demo-card-enhanced {
-            background: var(--ember-gradient-card);
-            border: 2px solid rgba(215, 51, 39, 0.3);
-            border-radius: var(--radius-xl);
-            padding: var(--space-lg);
-            text-align: center;
-        }
-        
-        .demo-card-instruction {
-            font-size: var(--font-sm);
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: var(--space-md);
-        }
-        
-        .demo-button-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-lg);
-        }
-        
-        .demo-icon-standalone {
-            width: 50px;
-            height: 50px;
-        }
-        
-        .demo-button-enhanced {
-            padding: var(--space-md) var(--space-2xl);
-            background: var(--ember-gradient-primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius-lg);
-            font-size: var(--font-lg);
-            font-weight: 700;
-            text-decoration: none;
-            transition: all var(--transition-base);
-            display: inline-block;
-        }
-        
-        .demo-button-enhanced:hover {
-            transform: scale(1.05);
-            box-shadow: var(--ember-shadow-md);
-        }
-        
-        .management-button-enhanced {
-            background: var(--ember-gradient-secondary);
-        }
-        
-        /* Phoenix Safe Image */
-        .phoenix-safe-container {
-            margin-top: var(--space-2xl);
-            text-align: center;
-        }
-        
-        .phoenix-safe-image {
-            max-width: 300px;
-            height: auto;
-        }
-        
-        /* System Connection */
-        .system-connection {
-            margin-top: var(--space-4xl);
-            padding: var(--space-3xl);
-            background: var(--ember-gradient-card);
-            border-radius: var(--radius-2xl);
-        }
-        
-        .connection-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-lg);
-            margin-bottom: var(--space-2xl);
-        }
-        
-        .connection-line {
-            flex: 1;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--ember-orange), transparent);
-        }
-        
-        .connection-badge {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            padding: var(--space-md) var(--space-xl);
-            background: var(--ember-gradient-primary);
-            color: white;
-            border-radius: var(--radius-full);
-            font-weight: 700;
-            font-size: var(--font-lg);
-        }
-        
-        .main-connection-icon {
-            width: 35px;
-            height: 35px;
-        }
-        
-        .system-benefits {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-2xl);
-        }
-        
-        .benefit-column {
-            background: rgba(0, 0, 0, 0.3);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-        }
-        
-        .benefit-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
+        .crypto-text p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: var(--space-lg);
         }
         
-        .benefit-header-icon {
+        .crypto-features {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-top: var(--space-2xl);
+        }
+        
+        .crypto-feature-item {
+            display: flex;
+            align-items: start;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            background: var(--ember-gradient-card);
+            border: 1px solid rgba(215, 51, 39, 0.2);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-base);
+        }
+        
+        .crypto-feature-item:hover {
+            transform: translateX(5px);
+            border-color: rgba(215, 51, 39, 0.4);
+        }
+        
+        .crypto-feature-icon {
+            flex-shrink: 0;
             width: 50px;
             height: 50px;
+            filter: drop-shadow(0 4px 10px rgba(240, 165, 0, 0.4));
         }
         
-        .benefit-header h4 {
+        .crypto-feature-text h3 {
             font-size: var(--font-xl);
             font-weight: 700;
-            color: var(--ember-gold);
+            margin-bottom: var(--space-xs);
+            color: #ffffff;
         }
         
-        .benefit-list {
-            list-style: none;
-            padding: 0;
+        .crypto-feature-text p {
+            font-size: var(--font-sm);
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
         }
         
-        .benefit-list li {
-            padding: var(--space-sm) 0;
-            color: rgba(255, 255, 255, 0.85);
-            font-size: var(--font-base);
-            line-height: 1.5;
+        /* Real-World Use Cases Section */
+        .use-cases-section {
+            padding: var(--section-padding) var(--container-padding);
+            background: var(--ember-gradient-background);
         }
         
-        .benefit-list li:before {
-            content: "✓ ";
-            color: var(--ember-green);
-            font-weight: bold;
-            margin-right: var(--space-xs);
+        .use-cases-header {
+            text-align: center;
+            margin-bottom: var(--space-4xl);
         }
         
-        /* Use Cases Section */
-        .use-cases {
-            padding: var(--section-padding) 0;
-            background: var(--ember-dark);
+        .use-cases-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            color: #ffffff;
+        }
+        
+        .use-cases-header p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .use-cases-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: var(--space-2xl);
-            margin-top: var(--space-3xl);
+            max-width: 1300px;
+            margin: 0 auto;
         }
         
         .use-case-card {
             background: var(--ember-gradient-card);
-            border: 2px solid rgba(215, 51, 39, 0.3);
+            border: 2px solid rgba(215, 51, 39, 0.25);
             border-radius: var(--radius-xl);
             padding: var(--space-2xl);
             transition: all var(--transition-base);
@@ -1069,388 +997,337 @@
             border-color: var(--ember-orange);
         }
         
-        .use-case-icon-container-large {
-            text-align: center;
+        .use-case-icon-container {
             margin-bottom: var(--space-lg);
         }
         
-        .use-case-icon-image-large {
-            width: 100px;
-            height: 100px;
+        .use-case-icon {
+            width: 60px;
+            height: 60px;
+            filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5));
         }
         
-        .use-case-title {
+        .use-case-card h3 {
             font-size: var(--font-2xl);
-            font-weight: 800;
-            color: var(--ember-gold);
-            margin-bottom: var(--space-md);
-            text-align: center;
-        }
-        
-        .use-case-example {
-            font-size: var(--font-lg);
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: var(--space-md);
-            font-style: italic;
-            line-height: 1.6;
-        }
-        
-        .use-case-description {
-            font-size: var(--font-base);
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-        }
-        
-        /* Pricing/SDK Section */
-        .pricing-sdk-section {
-            padding: var(--section-padding) 0;
-            background: var(--ember-charcoal);
-        }
-        
-        .sdk-overview-container {
-            max-width: 1000px;
-            margin: 0 auto var(--space-4xl);
-            text-align: center;
-        }
-        
-        .sdk-pricing-badge {
-            display: inline-block;
-            padding: var(--space-sm) var(--space-xl);
-            background: var(--ember-gradient-secondary);
-            color: white;
-            border-radius: var(--radius-full);
-            font-size: var(--font-lg);
             font-weight: 700;
+            margin-bottom: var(--space-md);
+            color: #ffffff;
+        }
+        
+        .use-case-card p {
+            font-size: var(--font-base);
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
             margin-bottom: var(--space-lg);
         }
         
-        .sdk-intro-text {
-            font-size: var(--font-lg);
-            color: rgba(255, 255, 255, 0.85);
+        .use-case-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .use-case-highlight {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: var(--font-sm);
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .use-case-check {
+            color: var(--ember-gold);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        
+        /* Pricing Section */
+        .pricing-section {
+            padding: var(--section-padding) var(--container-padding);
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.95), rgba(26, 26, 26, 0.9));
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: var(--space-4xl);
+        }
+        
+        .pricing-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            color: #ffffff;
+        }
+        
+        .pricing-header p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.7;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-2xl);
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: var(--ember-gradient-card);
+            border: 2px solid rgba(215, 51, 39, 0.25);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            transition: all var(--transition-base);
+            position: relative;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--ember-orange);
+            box-shadow: var(--ember-shadow-lg);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--ember-shadow-xl);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--ember-gradient-primary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: var(--font-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .pricing-card h3 {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: #ffffff;
+        }
+        
+        .pricing-card .price {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: var(--ember-gold);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .pricing-card .price-period {
+            font-size: var(--font-base);
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: var(--space-xl);
         }
         
-        .sdk-features-preview {
-            background: var(--ember-gradient-card);
-            border: 2px solid rgba(215, 51, 39, 0.3);
-            border-radius: var(--radius-xl);
-            padding: var(--space-2xl);
-            text-align: left;
-            margin: var(--space-3xl) 0;
-        }
-        
-        .sdk-features-preview h4 {
-            font-size: var(--font-xl);
-            font-weight: 700;
-            color: var(--ember-gold);
-            margin-bottom: var(--space-lg);
-        }
-        
-        .sdk-features-preview ul {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-md);
-        }
-        
-        .sdk-features-preview li {
-            padding: var(--space-sm);
-            color: rgba(255, 255, 255, 0.85);
-            font-size: var(--font-base);
-        }
-        
-        .sdk-features-preview li:before {
-            content: "✓ ";
-            color: var(--ember-green);
-            font-weight: bold;
-            margin-right: var(--space-xs);
-        }
-        
-        .solution-highlight-box {
-            background: rgba(215, 51, 39, 0.1);
-            border: 1px solid rgba(215, 51, 39, 0.3);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            margin: var(--space-xl) 0;
+        .pricing-features {
             display: flex;
-            gap: var(--space-lg);
-            align-items: center;
-        }
-        
-        .solution-highlight-icon {
-            width: 60px;
-            height: 60px;
-        }
-        
-        .solution-highlight-content h5 {
-            font-size: var(--font-xl);
-            font-weight: 700;
-            color: var(--ember-gold);
-            margin-bottom: var(--space-sm);
-        }
-        
-        .solution-highlight-content p {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: var(--font-base);
-            line-height: 1.6;
-        }
-        
-        .solution-cta {
-            text-align: center;
-            margin-top: var(--space-3xl);
-        }
-        
-        .cta-secondary-large {
-            display: inline-flex;
-            align-items: center;
+            flex-direction: column;
             gap: var(--space-md);
-            padding: var(--space-lg) var(--space-2xl);
-            background: var(--ember-gradient-secondary);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .pricing-feature {
+            display: flex;
+            align-items: start;
+            gap: var(--space-sm);
+            font-size: var(--font-sm);
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .pricing-check {
+            color: var(--ember-gold);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .pricing-button {
+            display: block;
+            width: 100%;
+            padding: var(--space-md) var(--space-xl);
+            background: var(--ember-gradient-primary);
             color: white;
             border: none;
             border-radius: var(--radius-lg);
             font-size: var(--font-lg);
             font-weight: 700;
             text-decoration: none;
+            text-align: center;
             transition: all var(--transition-base);
         }
         
-        .cta-secondary-large:hover {
+        .pricing-button:hover {
             transform: scale(1.05);
             box-shadow: var(--ember-shadow-md);
         }
         
-        .cta-github-icon {
-            width: 24px;
-            height: 24px;
+        .pricing-button.secondary {
+            background: var(--ember-gradient-secondary);
         }
         
-        .cta-footnote {
-            margin-top: var(--space-md);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: var(--font-sm);
+        /* Live Demo Section */
+        .live-demo-section {
+            padding: var(--section-padding) var(--container-padding);
+            background: var(--ember-gradient-background);
         }
         
-        .journey-secondary-link {
-            display: inline-block;
-            margin-top: var(--space-lg);
-            color: var(--ember-gold);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: var(--font-lg);
-            transition: all var(--transition-fast);
-        }
-        
-        .journey-secondary-link:hover {
-            color: var(--ember-orange);
-            transform: translateX(5px);
-        }
-        
-        /* Revenue Examples Section */
-        .revenue-examples-section {
-            margin-top: var(--space-4xl);
-            padding: var(--space-3xl);
-            background: var(--ember-gradient-card);
-            border-radius: var(--radius-2xl);
-        }
-        
-        .revenue-examples-header {
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-        }
-        
-        .main-revenue-header-icon {
-            width: 100px;
-            height: 100px;
-            margin-bottom: var(--space-lg);
-        }
-        
-        .revenue-examples-header h3 {
-            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-            font-weight: 800;
-            color: var(--ember-gold);
-            margin-bottom: var(--space-md);
-        }
-        
-        .revenue-examples-header p {
-            font-size: var(--font-lg);
-            color: rgba(255, 255, 255, 0.85);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        .revenue-examples-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--space-2xl);
-        }
-        
-        .revenue-example-card {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(215, 51, 39, 0.3);
-            border-radius: var(--radius-xl);
-            padding: var(--space-xl);
-        }
-        
-        .revenue-card-header {
-            display: flex;
-            gap: var(--space-md);
-            align-items: center;
-            margin-bottom: var(--space-lg);
-        }
-        
-        .main-revenue-industry-icon {
-            width: 50px;
-            height: 50px;
-        }
-        
-        .example-industry {
-            font-size: var(--font-sm);
-            font-weight: 600;
-            color: var(--ember-orange);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .example-title {
-            font-size: var(--font-xl);
-            font-weight: 700;
-            color: var(--ember-gold);
-            margin-bottom: var(--space-md);
-        }
-        
-        .example-scenario {
-            font-size: var(--font-base);
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: var(--space-lg);
-            line-height: 1.5;
-        }
-        
-        .example-breakdown {
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: var(--space-lg);
-        }
-        
-        .breakdown-item {
-            display: flex;
-            justify-content: space-between;
-            padding: var(--space-sm) 0;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: var(--font-sm);
-        }
-        
-        .breakdown-item.total {
-            border-top: 2px solid var(--ember-gold);
-            margin-top: var(--space-md);
-            padding-top: var(--space-md);
-            font-weight: 700;
-        }
-        
-        .golden-text {
-            color: var(--ember-gold);
-            font-size: var(--font-xl);
-        }
-        
-        /* Revenue Model Benefits */
-        .revenue-model-benefits {
-            margin-top: var(--space-4xl);
-            padding-top: var(--space-3xl);
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .revenue-model-benefits h4 {
-            font-size: var(--font-2xl);
-            font-weight: 800;
-            color: var(--ember-gold);
-            text-align: center;
-            margin-bottom: var(--space-2xl);
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-xl);
-        }
-        
-        .benefit-box {
-            display: flex;
-            gap: var(--space-md);
-            align-items: flex-start;
-            background: rgba(0, 0, 0, 0.2);
-            padding: var(--space-lg);
-            border-radius: var(--radius-lg);
-        }
-        
-        .benefit-icon-img {
-            width: 40px;
-            height: 40px;
-        }
-        
-        .benefit-text strong {
-            display: block;
-            color: var(--ember-gold);
-            font-size: var(--font-lg);
-            margin-bottom: var(--space-xs);
-        }
-        
-        .benefit-text p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: var(--font-sm);
-            line-height: 1.5;
-        }
-        
-        /* Final CTA Section */
-        .final-cta-section {
-            padding: var(--section-padding) 0;
-            background: var(--ember-dark);
-        }
-        
-        .final-cta-header {
+        .live-demo-header {
             text-align: center;
             margin-bottom: var(--space-4xl);
         }
         
-        .final-cta-title {
+        .live-demo-header h2 {
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
-            color: var(--ember-gold);
-            margin-bottom: var(--space-md);
+            margin-bottom: var(--space-lg);
+            color: #ffffff;
         }
         
-        .final-cta-subtitle {
-            font-size: var(--font-xl);
-            color: rgba(255, 255, 255, 0.85);
-            max-width: 700px;
+        .live-demo-header p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            max-width: 900px;
             margin: 0 auto;
         }
         
-        .journey-paths-container {
+        .demo-showcase {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: var(--space-2xl);
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4xl);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .demo-device {
+            position: relative;
+        }
+        
+        .demo-device-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .demo-device-header h3 {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .demo-device-header p {
+            font-size: var(--font-base);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .phone-mockup, .laptop-mockup {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .main-phone-image, .main-laptop-image {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--ember-shadow-xl);
+        }
+        
+        .simple-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+        
+        .simple-thumb, .simple-thumb-laptop {
+            cursor: pointer;
+            border: 2px solid rgba(215, 51, 39, 0.3);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: all var(--transition-base);
+        }
+        
+        .simple-thumb:hover, .simple-thumb-laptop:hover,
+        .simple-thumb.active, .simple-thumb-laptop.active {
+            border-color: var(--ember-orange);
+            transform: scale(1.05);
+            box-shadow: var(--ember-shadow-sm);
+        }
+        
+        .simple-thumb img, .simple-thumb-laptop img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Journey Section */
+        .journey-section {
+            padding: var(--section-padding) var(--container-padding);
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.95), rgba(26, 26, 26, 0.9));
+        }
+        
+        .journey-header {
+            text-align: center;
+            margin-bottom: var(--space-4xl);
+        }
+        
+        .journey-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            color: #ffffff;
+        }
+        
+        .journey-header p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+        
+        .journey-paths {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         .journey-path-module {
             background: var(--ember-gradient-card);
             border: 2px solid rgba(215, 51, 39, 0.3);
-            border-radius: var(--radius-2xl);
+            border-radius: var(--radius-xl);
             padding: var(--space-2xl);
-            position: relative;
             transition: all var(--transition-base);
         }
         
         .journey-path-module:hover {
             transform: translateY(-5px);
-            box-shadow: var(--ember-shadow-xl);
+            box-shadow: var(--ember-shadow-lg);
             border-color: var(--ember-orange);
         }
         
         .journey-path-header {
             text-align: center;
-            margin-bottom: var(--space-2xl);
+            margin-bottom: var(--space-xl);
+            position: relative;
+        }
+        
+        .early-2026-badge {
+            display: inline-block;
+            background: var(--ember-gradient-secondary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: var(--font-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
         }
         
         .journey-icon-container {
@@ -1458,34 +1335,34 @@
         }
         
         .main-journey-icon-large {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 6px 15px rgba(240, 165, 0, 0.5));
         }
         
         .journey-path-title {
             font-size: var(--font-3xl);
             font-weight: 800;
-            color: var(--ember-gold);
             margin-bottom: var(--space-sm);
+            color: #ffffff;
         }
         
         .journey-path-subtitle {
-            font-size: var(--font-lg);
-            color: rgba(255, 255, 255, 0.85);
+            font-size: var(--font-base);
+            color: rgba(255, 255, 255, 0.8);
         }
         
         .journey-steps {
-            margin-bottom: var(--space-2xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
         }
         
         .journey-step {
             display: flex;
-            gap: var(--space-lg);
-            align-items: flex-start;
-            padding: var(--space-lg);
-            margin-bottom: var(--space-md);
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: var(--radius-lg);
+            gap: var(--space-md);
+            align-items: start;
         }
         
         .journey-step-number {
@@ -1493,37 +1370,40 @@
             width: 40px;
             height: 40px;
             background: var(--ember-gradient-primary);
-            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: var(--font-lg);
+            font-size: 1.2rem;
+            color: white;
         }
         
-        .journey-step-title {
+        .journey-step-content h4 {
             font-size: var(--font-lg);
             font-weight: 700;
-            color: var(--ember-gold);
             margin-bottom: var(--space-xs);
+            color: #ffffff;
         }
         
         .journey-step-description {
-            font-size: var(--font-base);
+            font-size: var(--font-sm);
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.5;
         }
         
         .journey-cta {
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
         }
         
         .journey-cta-button {
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: var(--space-md);
-            padding: var(--space-lg) var(--space-2xl);
+            padding: var(--space-md) var(--space-xl);
             background: var(--ember-gradient-primary);
             color: white;
             border: none;
@@ -1544,157 +1424,249 @@
             height: 30px;
         }
         
-        /* Animations */
-        .main-fade-in {
-            animation: fadeInUp 0.8s ease-out forwards;
-            opacity: 0;
+        .journey-secondary-link {
+            text-align: center;
+            color: var(--ember-gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--font-base);
+            transition: all var(--transition-base);
         }
         
-        .stagger-1 { animation-delay: 0.2s; }
-        .stagger-2 { animation-delay: 0.4s; }
-        .stagger-3 { animation-delay: 0.6s; }
-        .stagger-4 { animation-delay: 0.8s; }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .journey-secondary-link:hover {
+            transform: translateX(3px);
         }
         
-        /* Scroll Reveal */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
+        /* ===================================
+           RESPONSIVE BREAKPOINTS
+           =================================== */
         
-        .scroll-reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 1200px) {
+        @media (max-width: 1024px) {
+            /* Enterprise Token Section - Switch to single column */
+            .ember-token-grid-redesigned {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+            
+            .ember-token-right-redesigned {
+                position: static;
+            }
+            
+            /* Other sections */
             .main-hero-steps-premium {
                 grid-template-columns: 1fr;
             }
             
             .main-step-arrow-wrapper {
-                display: none;
+                margin: var(--space-lg) 0;
             }
             
-            .technology-grid {
-                grid-template-columns: 1fr;
+            .main-step-arrow {
+                transform: rotate(90deg);
+                font-size: 2.2rem;
             }
-        }
-        
-        @media (max-width: 1024px) {
-            .main-cta-path-container {
-                grid-template-columns: 1fr;
+            
+            @keyframes arrowPulse {
+                0%, 100% { 
+                    transform: scale(1) rotate(90deg); 
+                    opacity: 0.8; 
+                }
+                50% { 
+                    transform: scale(1.2) rotate(90deg); 
+                    opacity: 1; 
+                }
             }
             
             .crypto-content {
                 grid-template-columns: 1fr;
             }
             
-            .demo-grid {
+            .demo-showcase {
                 grid-template-columns: 1fr;
             }
             
-            .system-benefits {
-                grid-template-columns: 1fr;
-            }
-            
-            .journey-paths-container {
+            .journey-paths {
                 grid-template-columns: 1fr;
             }
         }
         
         @media (max-width: 768px) {
-            .main-hero {
-                min-height: auto;
-                padding: 100px var(--container-padding) var(--section-padding);
+            /* Enterprise Token Section - Mobile optimizations */
+            .ember-token-section-redesigned {
+                padding: 50px 10px;
             }
             
-            .main-cta-compact-layout {
+            .ember-token-left-redesigned {
+                gap: var(--space-lg);
+            }
+            
+            .ember-countdown-widget-redesigned {
+                padding: var(--space-lg);
+            }
+            
+            .countdown-header-redesigned {
+                margin-bottom: var(--space-md);
+            }
+            
+            .main-ember-countdown-icon-redesigned {
+                width: 55px !important;
+                height: 55px !important;
+            }
+            
+            .countdown-text-redesigned h3 {
+                font-size: 1.2rem;
+            }
+            
+            .countdown-text-redesigned p {
+                font-size: 0.8rem;
+            }
+            
+            .ember-countdown-timer-redesigned {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-sm);
+                margin-bottom: var(--space-md);
+            }
+            
+            .ember-time-unit-redesigned {
+                padding: var(--space-sm);
+            }
+            
+            .ember-time-value-redesigned {
+                font-size: 1.6rem;
+            }
+            
+            .ember-time-label-redesigned {
+                font-size: 0.7rem;
+            }
+            
+            /* Presale stats stay horizontal on mobile */
+            .presale-stats-redesigned {
+                flex-direction: row !important;
+                justify-content: space-around !important;
+                gap: 8px !important;
+                padding: 10px 0 !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .stat-item-redesigned {
+                flex: 1 !important;
+            }
+            
+            .stat-number-redesigned {
+                font-size: 1rem !important;
+                white-space: nowrap !important;
+            }
+            
+            .stat-label-redesigned {
+                font-size: 0.65rem !important;
+                white-space: nowrap !important;
+            }
+            
+            .stat-divider-redesigned {
+                display: inline-block !important;
+                font-size: 1.2rem !important;
+            }
+            
+            .join-presale-button-redesigned {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            
+            .ember-highlight-redesigned {
+                padding: 10px 12px;
+                gap: 10px;
+            }
+            
+            .highlight-icon-image-redesigned {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .highlight-text-redesigned {
+                font-size: 0.9rem;
+            }
+            
+            .ember-token-right-redesigned {
+                gap: var(--space-lg);
+            }
+            
+            .phoenix-holding-coin-redesigned {
+                max-width: 300px;
+            }
+            
+            .compliance-disclaimer-redesigned {
+                padding: var(--space-md);
+            }
+            
+            .compliance-disclaimer-redesigned h4 {
+                font-size: 1.05rem;
+                gap: 8px;
+            }
+            
+            .main-compliance-icon-redesigned {
+                width: 55px !important;
+                height: 55px !important;
+            }
+            
+            .compliance-disclaimer-redesigned p {
+                font-size: 0.8rem;
+                line-height: 1.5;
+            }
+            
+            .compliance-button {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+            
+            /* Other sections */
+            .main-hero-dual-ctas {
                 flex-direction: column;
-                text-align: center;
             }
             
-            .technology-stats {
-                grid-template-columns: 1fr;
+            .main-cta-path {
+                min-width: 100%;
             }
             
-            .thumbnail-grid-phone,
-            .thumbnail-grid-laptop {
+            .simple-gallery {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .use-cases-grid {
-                grid-template-columns: 1fr;
+        }
+        
+        @media (max-width: 480px) {
+            /* Enterprise Token Section - Extra small screens */
+            .ember-token-section-redesigned {
+                padding: 40px 10px;
             }
             
-            .sdk-features-preview ul {
-                grid-template-columns: 1fr;
+            .ember-countdown-widget-redesigned {
+                padding: var(--space-md);
             }
             
-            .revenue-examples-grid {
-                grid-template-columns: 1fr;
+            .join-presale-button-redesigned {
+                padding: 10px 18px;
+                font-size: 0.95rem;
+                white-space: normal;
             }
             
-            .benefits-grid {
-                grid-template-columns: 1fr;
+            .cta-icon-image-redesigned {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .cta-text-redesigned {
+                font-size: 0.95rem;
             }
         }
     </style>
 </head>
-<body>
-    <!-- Skip to Content Link -->
-    <a href="#main-content" class="skip-to-content">Skip to main content</a>
-
-    <!-- Navigation (from shared system) -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-content">
-            <a href="index.html" class="logo">
-                <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="logo-image">
-                <span>Vault Phoenix</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#showcase">Live Demo</a></li>
-                <li><a href="#use-cases">Get Ideas</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="ember-presale.html" class="ember-link">
-                    <img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">
-                    $Ember Token
-                </a></li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu (from shared system) -->
-    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
-    <div class="mobile-menu-panel" id="mobile-menu">
-        <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">×</button>
-        <div class="mobile-menu-branding">
-            <img src="images/VPEmberCoin.PNG" alt="Ember Coin" class="mobile-menu-coin">
-            <img src="images/VPEmberFlame.svg" alt="Ember Flame" class="mobile-menu-flame">
-        </div>
-        <ul class="mobile-nav-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#showcase">Live Demo</a></li>
-            <li><a href="#use-cases">Get Ideas</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="ember-presale.html" class="ember-link">
-                <img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">
-                $Ember Token
-            </a></li>
-        </ul>
+<body class="main-page">
+    <!-- Skip to Content Link - Accessibility -->
+    <div style="position: absolute; top: 0; left: 0; overflow: hidden; clip: rect(0, 0, 0, 0); height: 1px; width: 1px;">
+        <a href="#main-content" class="main-skip-to-content">Skip to main content</a>
     </div>
+
+    <!-- Navigation - Loaded from shared.html -->
+    <div id="nav-placeholder"></div>
 
     <!-- Main Content -->
     <main id="main-content">
@@ -1702,121 +1674,129 @@
         <section class="main-hero" id="hero-section">        
             <div class="main-hero-content">
                 <!-- Main Value Proposition -->
-                <div class="main-hero-header main-fade-in">
+                <div class="main-hero-header">
                     <h1 class="main-hero-title-new">Turn Real-World Engagement Into Real Revenue in <span class="golden-highlight">3 Easy Steps</span></h1>
                     <p class="main-hero-subtitle-new">No coding required—but full SDK access if you want it. Our platform lets marketers build fully-branded white-label web apps at <span class="golden-highlight">yourdomain.com/game-name</span>, and developers integrate AR crypto gaming into their existing web or native mobile apps without changing their app name or URL. Place crypto coins anywhere with GPS & Beacons, configure rewards, and launch campaigns in hours—not months.</p>
                     <p class="main-hero-tagline"><span class="golden-highlight">You build it. We support you.</span></p>
                 </div>
                 
                 <!-- 3-Step Process - Grid Layout -->
-                <div class="main-hero-steps-premium main-fade-in stagger-1">
-                    <!-- Step 1 -->
+                <div class="main-hero-steps-premium">
                     <div class="main-step-premium">
                         <div class="main-step-number-badge">1</div>
                         <div class="main-step-visual">
                             <div class="main-image-glow">
-                                <img src="images/EmberAnalytics.PNG" alt="Dashboard Analytics Interface" class="main-step-image" loading="lazy">
+                                <img src="images/VPMapPin.PNG" alt="Place Coins" class="main-step-coin-stack" loading="lazy">
                             </div>
                         </div>
-                        <div class="main-step-content">
-                            <h3 class="main-step-title-premium">Log In & Customize</h3>
-                            <p class="main-step-description-premium">Access platform, connect wallet/API, upload logo, set colors, choose domain, start building.</p>
-                        </div>
+                        <h3 class="main-step-title">Place Coins</h3>
+                        <p class="main-step-description">Drop crypto rewards anywhere using GPS (outdoor locations) or Beacons (indoor venues like malls & stadiums)</p>
                     </div>
                     
-                    <!-- Arrow 1 -->
-                    <div class="main-step-arrow-wrapper" aria-hidden="true">
-                        <div class="main-step-arrow">→</div>
+                    <div class="main-step-arrow-wrapper">
+                        <span class="main-step-arrow">→</span>
                     </div>
                     
-                    <!-- Step 2 -->
                     <div class="main-step-premium">
                         <div class="main-step-number-badge">2</div>
                         <div class="main-step-visual">
                             <div class="main-image-glow">
-                                <img src="images/PhoenixDesign.PNG" alt="Campaign Design Interface" class="main-step-image" loading="lazy">
+                                <img src="images/PhoenixCrosshairs.PNG" alt="Customers Find" class="main-step-coin-stack" loading="lazy">
                             </div>
                         </div>
-                        <div class="main-step-content">
-                            <h3 class="main-step-title-premium">Place Coins & Configure</h3>
-                            <p class="main-step-description-premium">Drop crypto coins with GPS & Beacons, set rewards, design with real-time tracking.</p>
-                        </div>
+                        <h3 class="main-step-title">Customers Find</h3>
+                        <p class="main-step-description">Players discover coins through your branded app using GPS tracking or by scanning Beacons</p>
                     </div>
                     
-                    <!-- Arrow 2 -->
-                    <div class="main-step-arrow-wrapper" aria-hidden="true">
-                        <div class="main-step-arrow">→</div>
+                    <div class="main-step-arrow-wrapper">
+                        <span class="main-step-arrow">→</span>
                     </div>
                     
-                    <!-- Step 3 -->
                     <div class="main-step-premium">
                         <div class="main-step-number-badge">3</div>
                         <div class="main-step-visual">
                             <div class="main-image-glow">
-                                <img src="images/EmberCoinRocket.PNG" alt="Campaign Launch Rocket" class="main-step-image" loading="lazy">
+                                <img src="images/EmberGoldTrophy.PNG" alt="You Measure Results" class="main-step-coin-stack" loading="lazy">
                             </div>
                         </div>
-                        <div class="main-step-content">
-                            <h3 class="main-step-title-premium">Launch & Track Revenue</h3>
-                            <p class="main-step-description-premium">Go live on web/mobile, monitor engagement, measure ROI. Repeat in hours.</p>
-                        </div>
+                        <h3 class="main-step-title">You Measure Results</h3>
+                        <p class="main-step-description">Track engagement metrics, foot traffic patterns, and campaign ROI through your analytics dashboard</p>
                     </div>
                 </div>
                 
                 <!-- Dual Path CTAs -->
-                <div class="main-hero-dual-ctas main-fade-in stagger-2">
-                    <div class="main-cta-path-container">
-                        <!-- White-Label Path -->
-                        <div class="main-cta-path whitelabel-path">
-                            <span class="coming-soon-badge">Coming Soon!</span>
-                            <div class="main-path-badge">For Marketers & Agencies</div>
-                            <div class="main-cta-compact-layout">
-                                <div class="main-cta-image-wrapper">
-                                    <div class="main-image-glow">
-                                        <img src="images/VPLogoNoText.PNG" alt="White-Label Solution Icon" class="main-cta-path-icon-compact" loading="lazy">
-                                    </div>
-                                </div>
-                                <div class="main-cta-text-content">
-                                    <h3 class="main-path-title-compact">Build Your White-Label Web App (No Code)</h3>
-                                    <p class="main-path-description-compact">Log in, customize branding, place coins, configure rewards, and deploy at <span class="golden-highlight">yourdomain.com/app-name</span> in under 24 hours. Perfect for running campaigns or selling coin placements.</p>
-                                </div>
+                <div class="main-hero-dual-ctas">
+                    <!-- Marketer Path -->
+                    <div class="main-cta-path">
+                        <div class="main-cta-path-icon-container">
+                            <div class="main-image-glow">
+                                <img src="images/VPEmberFlame.svg" alt="For Marketers" class="main-cta-path-icon" loading="lazy">
                             </div>
-                            <a href="mailto:contact@vaultphoenix.com?subject=White-Label App Builder&body=I'm interested in the no-code white-label app builder. Please send me details about getting started." class="main-cta-path-button whitelabel-button" aria-label="Contact us about white-label app builder">
-                                <div class="main-image-glow">
-                                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Icon" class="main-cta-path-icon" loading="lazy">
-                                </div>
-                                <span>Start Building Your App</span>
-                            </a>
                         </div>
-                        
-                        <!-- Developer Path -->
-                        <div class="main-cta-path main-developer-path">
-                            <span class="early-2026-badge">Early 2026</span>
-                            <div class="main-path-badge">For Developers & Tech Teams</div>
-                            <div class="main-cta-compact-layout">
-                                <div class="main-cta-image-wrapper">
-                                    <svg class="main-cta-github-icon-compact" height="70" viewBox="0 0 16 16" width="70" fill="currentColor" aria-hidden="true">
-                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                                    </svg>
-                                </div>
-                                <div class="main-cta-text-content">
-                                    <h3 class="main-path-title-compact">Integrate Our AR Engine into Web or Native Apps</h3>
-                                    <p class="main-path-description-compact">Add location-based AR crypto gaming in 1-2 weeks. Our SDK gives full API control over coin placement, rewards, analytics, and user tracking. Keep your users, retain your brand.</p>
-                                </div>
+                        <h3 class="main-cta-path-title">For Marketers</h3>
+                        <p class="main-cta-path-description">Launch your branded AR crypto campaign with zero coding required</p>
+                        <div class="main-cta-path-highlights">
+                            <div class="main-cta-highlight-item">
+                                <span class="main-checkmark-icon">✓</span>
+                                <span>White-label at yourdomain.com</span>
                             </div>
-                            <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" rel="noopener noreferrer" class="main-cta-path-button main-developer-button" aria-label="View SDK documentation on GitHub">
-                                <svg class="main-cta-github-icon-inline" height="24" viewBox="0 0 16 16" width="24" fill="currentColor" aria-hidden="true">
-                                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                                </svg>
-                                <span>Explore SDK Documentation</span>
-                            </a>
+                            <div class="main-cta-highlight-item">
+                                <span class="main-checkmark-icon">✓</span>
+                                <span>Launch in 24 hours</span>
+                            </div>
+                            <div class="main-cta-highlight-item">
+                                <span class="main-checkmark-icon">✓</span>
+                                <span>No technical skills needed</span>
+                            </div>
                         </div>
+                        <a href="mailto:contact@vaultphoenix.com?subject=White-Label AR Crypto Solution&body=I'm interested in launching a location-based crypto marketing campaign. Please send me details about getting started." class="main-cta-path-button">
+                            <div class="main-image-glow">
+                                <img src="images/VPEmberFlame.svg" alt="Flame Icon" class="main-cta-path-icon" loading="lazy">
+                            </div>
+                            <span>Get Started Now</span>
+                        </a>
                     </div>
                     
-                    <!-- Secondary CTA -->
-                    <div class="main-hero-secondary-cta main-fade-in stagger-3">
-                        <p class="main-secondary-cta-text">Ready to see it in action?</p>
-                        <a href="#showcase" class="main-secondary-cta-button">
+                    <!-- Developer Path -->
+                    <div class="main-cta-path">
+                        <div class="main-cta-path-icon-container">
+                            <div class="main-image-glow main-purple-glow">
+                                <img src="images/IphoneVPLogo.PNG" alt="For Developers" class="main-cta-path-icon" loading="lazy">
+                            </div>
+                        </div>
+                        <h3 class="main-cta-path-title">For Developers</h3>
+                        <p class="main-cta-path-description">Integrate AR crypto gaming into your existing app with our powerful SDK</p>
+                        <div class="main-cta-path-highlights">
+                            <div class="main-cta-highlight-item">
+                                <span class="main-checkmark-icon">✓</span>
+                                <span>Keep your app name & URL</span>
+                            </div>
+                            <div class="main-cta-highlight-item">
+                                <span class="main-checkmark-icon">✓</span>
+                                <span>Integrate in 1-2 weeks</span>
+                            </div>
+                            <div class="main-cta-highlight-item">
+                                <span class="main-checkmark-icon">✓</span>
+                                <span>Full API access & control</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/Vault-Phoenix-SDK" class="main-cta-path-button main-developer-button" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="main-cta-github-icon-inline">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                            <span>View SDK on GitHub</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Scroll Indicator -->
+                <div class="main-hero-scroll-indicator">
+                    <div class="main-hero-dual-ctas">
+                        <a href="#ember-token" class="main-hero-secondary-cta">
+                            <span>Learn About $Ember Token</span>
+                            <span>↓</span>
+                        </a>
+                        <a href="#share-vault-phoenix" class="main-hero-secondary-cta">
                             <span>View Live Demos</span>
                             <span>↓</span>
                         </a>
@@ -1824,6 +1804,186 @@
                 </div>
             </div>
         </section>
+
+        <!-- ===================================
+             ENTERPRISE TOKEN INFRASTRUCTURE SECTION
+             Inserted after hero section
+             
+             TROUBLESHOOTING NOTES:
+             1. COUNTDOWN TIMER: Element IDs must match shared.js:
+                - main-days
+                - main-hours
+                - main-minutes
+                - main-seconds
+                
+             2. If countdown doesn't work:
+                - Check shared.js has updateCountdown() function
+                - Verify presale date is set correctly
+                - Check console for JavaScript errors
+                - Ensure shared.js is loading before this HTML
+                
+             3. SCROLL REVEAL: Uses IntersectionObserver at bottom of page
+                - Elements with .scroll-reveal class will fade in
+                - Stagger delays: .stagger-1 through .stagger-4
+                
+             4. RESPONSIVE: Grid switches to single column at 1024px
+                - Sticky positioning removed on mobile
+                - Countdown timer becomes 2x2 grid on mobile
+                - Stats stay horizontal on all screen sizes
+                
+             5. IMAGES REQUIRED:
+                - images/VPEmberCoin.PNG (countdown icon)
+                - images/VPEmberFlame.svg (CTA button)
+                - images/PhoenixWhitepaper.PNG (highlight link)
+                - images/EmberRoadmap.PNG (highlight link)
+                - images/PhoenixGoldTrophy.PNG (highlight link)
+                - images/PhoenixHoldingCoin.PNG (large phoenix image)
+                - images/EmberCoinLock.PNG (compliance icon)
+                
+             6. CSS VARIABLES from shared.css:
+                - --container-padding
+                - --space-xl, --space-lg, --space-md, --space-sm
+                - --radius-xl, --radius-lg, --radius-md
+                - --ember-gradient-card, --ember-gradient-primary
+                - --ember-gold
+                - --transition-base, --transition-smooth
+                
+             =================================== -->
+        <section class="ember-token-section-redesigned" id="ember-token">
+            <div class="main-container">
+                <div class="ember-token-grid-redesigned">
+                    <!-- Left Column: Main Content -->
+                    <div class="ember-token-left-redesigned">
+                        <h2 class="ember-token-title-redesigned scroll-reveal">Enterprise Token Infrastructure</h2>
+                        <p class="ember-token-description-redesigned scroll-reveal stagger-1">
+                            Vault Phoenix operates with <span class="golden-highlight">institutional-grade $Ember Token infrastructure</span> powering the next generation of location-based AR gaming. Our enterprise blockchain technology drives measurable ROI for marketing campaigns worldwide through proven monetization strategies.
+                        </p>
+                        
+                        <!-- $Ember Presale Countdown -->
+                        <div class="ember-countdown-widget-redesigned scroll-reveal stagger-2">
+                            <div class="countdown-header-redesigned">
+                                <div class="countdown-icon-redesigned">
+                                    <div class="main-image-glow">
+                                        <img src="images/VPEmberCoin.PNG" alt="Ember Coin Presale Token" class="main-ember-countdown-icon-redesigned" loading="lazy">
+                                    </div>
+                                </div>
+                                <div class="countdown-text-redesigned">
+                                    <h3>$Ember Presale Launch</h3>
+                                    <p>166.7M tokens available</p>
+                                </div>
+                            </div>
+                            
+                            <!-- CRITICAL: These IDs must match shared.js countdown function -->
+                            <div class="ember-countdown-timer-redesigned" role="timer" aria-live="polite" aria-label="Presale countdown timer">
+                                <div class="ember-time-unit-redesigned">
+                                    <span class="ember-time-value-redesigned" id="main-days" aria-label="Days remaining">--</span>
+                                    <span class="ember-time-label-redesigned">Days</span>
+                                </div>
+                                <div class="ember-time-unit-redesigned">
+                                    <span class="ember-time-value-redesigned" id="main-hours" aria-label="Hours remaining">--</span>
+                                    <span class="ember-time-label-redesigned">Hours</span>
+                                </div>
+                                <div class="ember-time-unit-redesigned">
+                                    <span class="ember-time-value-redesigned" id="main-minutes" aria-label="Minutes remaining">--</span>
+                                    <span class="ember-time-label-redesigned">Min</span>
+                                </div>
+                                <div class="ember-time-unit-redesigned">
+                                    <span class="ember-time-value-redesigned" id="main-seconds" aria-label="Seconds remaining">--</span>
+                                    <span class="ember-time-label-redesigned">Sec</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Presale Stats -->
+                            <div class="presale-stats-redesigned">
+                                <div class="stat-item-redesigned">
+                                    <span class="stat-number-redesigned">$0.003</span>
+                                    <span class="stat-label-redesigned">Launch Price</span>
+                                </div>
+                                <div class="stat-divider-redesigned" aria-hidden="true">|</div>
+                                <div class="stat-item-redesigned">
+                                    <span class="stat-number-redesigned">166.7M</span>
+                                    <span class="stat-label-redesigned">Available</span>
+                                </div>
+                                <div class="stat-divider-redesigned" aria-hidden="true">|</div>
+                                <div class="stat-item-redesigned">
+                                    <span class="stat-number-redesigned">$500K</span>
+                                    <span class="stat-label-redesigned">Cap</span>
+                                </div>
+                            </div>
+
+                            <!-- Join Presale CTA Button -->
+                            <div class="presale-cta-redesigned">
+                                <a href="ember.html#presale" class="join-presale-button-redesigned" aria-label="Learn more about $Ember Token presale">
+                                    <div class="main-image-glow">
+                                        <img src="images/VPEmberFlame.svg" alt="Ember Flame Icon" class="cta-icon-image-redesigned" loading="lazy">
+                                    </div>
+                                    <span class="cta-text-redesigned">$Ember Token</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Highlights -->
+                        <div class="ember-highlights-redesigned scroll-reveal stagger-4">
+                            <a href="ember.html#whitepaper" class="ember-highlight-redesigned" aria-label="View technical documentation">
+                                <span class="highlight-emoji-redesigned">
+                                    <div class="main-image-glow">
+                                        <img src="images/PhoenixWhitepaper.PNG" alt="Technical Whitepaper Icon" class="highlight-icon-image-redesigned" loading="lazy">
+                                    </div>
+                                </span>
+                                <span class="highlight-text-redesigned">Technical Documentation</span>
+                                <span class="highlight-arrow-redesigned" aria-hidden="true">→</span>
+                            </a>
+                            <a href="ember.html#roadmap" class="ember-highlight-redesigned" aria-label="View development roadmap">
+                                <span class="highlight-emoji-redesigned">
+                                    <div class="main-image-glow">
+                                        <img src="images/EmberRoadmap.PNG" alt="Development Roadmap Icon" class="highlight-icon-image-redesigned" loading="lazy">
+                                    </div>
+                                </span>
+                                <span class="highlight-text-redesigned">Development Roadmap</span>
+                                <span class="highlight-arrow-redesigned" aria-hidden="true">→</span>
+                            </a>
+                            <a href="ember.html#team" class="ember-highlight-redesigned" aria-label="Meet the Phoenix Builders team">
+                                <span class="highlight-emoji-redesigned">
+                                    <div class="main-image-glow">
+                                        <img src="images/PhoenixGoldTrophy.PNG" alt="Phoenix Builders Team Trophy" class="highlight-icon-image-redesigned" loading="lazy">
+                                    </div>
+                                </span>
+                                <span class="highlight-text-redesigned">Phoenix Builders</span>
+                                <span class="highlight-arrow-redesigned" aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Phoenix Image + Compliance -->
+                    <div class="ember-token-right-redesigned">
+                        <!-- Phoenix Holding Coin -->
+                        <div class="ember-phoenix-container-redesigned scroll-reveal">
+                            <div class="main-image-glow">
+                                <img src="images/PhoenixHoldingCoin.PNG" alt="Phoenix Holding Crypto Coin" class="phoenix-holding-coin-redesigned" loading="lazy">
+                            </div>
+                        </div>
+                        
+                        <!-- Professional Legal & Financial Oversight -->
+                        <div class="compliance-disclaimer-redesigned scroll-reveal stagger-4">
+                            <h4>
+                                <div class="main-image-glow">
+                                    <img src="images/EmberCoinLock.PNG" alt="Security and Compliance Icon" class="main-compliance-icon-redesigned" loading="lazy">
+                                </div>
+                                Regulatory Compliance
+                            </h4>
+                            <p>Vault Phoenix operates under comprehensive regulatory oversight with institutional-grade compliance procedures, multi-signature treasury management, and professional legal frameworks ensuring maximum security and transparency.</p>
+                            
+                            <div class="compliance-cta">
+                                <a href="ember.html#legal-compliance-section" class="compliance-button" aria-label="View compliance details">
+                                    View Compliance Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END ENTERPRISE TOKEN INFRASTRUCTURE SECTION -->
 
         <!-- Social Sharing Section -->
         <section class="social-sharing-section-compact" id="share-vault-phoenix">
@@ -1873,178 +2033,311 @@
                         <div class="crypto-coin-phone-frame">
                             <div class="crypto-coin-screen-wrapper">
                                 <div class="main-image-glow">
-                                    <img src="images/EmberCoinStorefront.PNG" alt="Ember Coin at Storefront Location" class="phoenix-coin-image scroll-reveal" loading="lazy">
+                                    <img src="images/Phone10.PNG" alt="Vault Phoenix mobile app showing crypto coin placement with GPS and Beacon technology" class="main-phone-image" loading="lazy">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="crypto-text">
-                        <h2 class="crypto-title scroll-reveal">Deploy Crypto Coins Anywhere</h2>
-                        <p class="crypto-description scroll-reveal stagger-1">
-                            Players explore your branded AR world, collecting valuable crypto coins at strategic locations using <span class="golden-highlight">GPS (Outdoors)</span> and <span class="golden-highlight">Beacon (Indoors)</span> technology. Each collection creates measurable foot traffic and <span class="golden-highlight">guaranteed revenue</span>.
-                        </p>
-                        <div class="crypto-benefits scroll-reveal stagger-2">
-                            <div class="crypto-benefit">
-                                <span class="benefit-icon coin-image">
-                                    <div class="main-image-glow">
-                                        <img src="images/VPEmberCoin.PNG" alt="Collectible Crypto Coin" class="custom-coin-icon-large" loading="lazy">
-                                    </div>
-                                </span>
-                                <div class="benefit-content">
-                                    <h3>Collectible Coins</h3>
-                                    <p>Hunt <span class="golden-highlight">rare crypto coins</span> at partner locations</p>
+                        <h2><span class="golden-highlight">Dual Placement Technology:</span> GPS & Beacons</h2>
+                        <p>Our revolutionary platform supports both <span class="golden-highlight">GPS outdoor placement</span> and <span class="golden-highlight">Beacon indoor placement</span>, giving you unprecedented flexibility in location-based marketing campaigns. Whether your customers are exploring city streets or navigating shopping malls, they can discover your crypto rewards anywhere.</p>
+                        
+                        <div class="crypto-features">
+                            <div class="crypto-feature-item scroll-reveal">
+                                <div class="main-image-glow">
+                                    <img src="images/PhoenixGPSBeacon.PNG" alt="GPS Outdoor Icon" class="crypto-feature-icon" loading="lazy">
+                                </div>
+                                <div class="crypto-feature-text">
+                                    <h3>GPS Outdoor Placement</h3>
+                                    <p>Perfect for tourism, retail storefronts, event venues, and citywide campaigns. Drop coins at specific GPS coordinates and watch foot traffic soar as customers hunt for rewards.</p>
                                 </div>
                             </div>
-                            <div class="crypto-benefit">
-                                <span class="benefit-icon placement-image">
-                                    <div class="main-image-glow">
-                                        <img src="images/PhoenixBullseye.PNG" alt="Strategic Location Placement" class="custom-placement-icon-large" loading="lazy">
-                                    </div>
-                                </span>
-                                <div class="benefit-content">
-                                    <h3>Strategic Placement</h3>
-                                    <p><span class="golden-highlight">High-value locations</span> drive guaranteed traffic</p>
+                            
+                            <div class="crypto-feature-item scroll-reveal stagger-1">
+                                <div class="main-image-glow">
+                                    <img src="images/VPBeacon.PNG" alt="Beacon Indoor Icon" class="crypto-feature-icon" loading="lazy">
+                                </div>
+                                <div class="crypto-feature-text">
+                                    <h3>Beacon Indoor Placement</h3>
+                                    <p>Ideal for shopping malls, stadiums, airports, and large indoor venues. Place physical Beacon devices and customers collect coins by scanning them with their phones—GPS not required!</p>
                                 </div>
                             </div>
-                            <div class="crypto-benefit">
-                                <span class="benefit-icon revenue-image">
-                                    <div class="main-image-glow">
-                                        <img src="images/EmberCoinMoneyBag.PNG" alt="Revenue Generation" class="custom-revenue-icon-extra-large" loading="lazy">
-                                    </div>
-                                </span>
-                                <div class="benefit-content">
-                                    <h3>Revenue Generation</h3>
-                                    <p>Partners pay <span class="golden-highlight">premium rates</span> for coin placement</p>
+                            
+                            <div class="crypto-feature-item scroll-reveal stagger-2">
+                                <div class="main-image-glow">
+                                    <img src="images/PhoenixTargetArrow.PNG" alt="Campaign Flexibility Icon" class="crypto-feature-icon" loading="lazy">
+                                </div>
+                                <div class="crypto-feature-text">
+                                    <h3>Mix & Match for Maximum Impact</h3>
+                                    <p>Combine GPS and Beacon placement in a single campaign. Lead customers from outdoor GPS locations to indoor Beacon checkpoints, creating immersive treasure hunt experiences that drive unprecedented engagement.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Real-World Use Cases Section -->
+        <section class="use-cases-section" id="use-cases">
+            <div class="main-container">
+                <div class="use-cases-header scroll-reveal">
+                    <h2>Proven Success Across <span class="golden-highlight">Every Industry</span></h2>
+                    <p>From retail to tourism, sports to entertainment—our AR crypto gaming platform transforms marketing campaigns into legendary customer experiences that deliver measurable ROI.</p>
+                </div>
                 
-                <!-- GPS & Beacon Technology Modules -->
-                <div class="technology-modules scroll-reveal">
-                    <h3 class="technology-modules-title">Complete Location Coverage: Outdoor & Indoor Precision</h3>
-                    <p class="technology-modules-subtitle">Vault Phoenix uses industry-leading location technology to deliver <span class="golden-highlight">pinpoint accuracy</span> anywhere your campaign needs it - from city streets to inside buildings.</p>
-                    
-                    <div class="technology-grid">
-                        <!-- GPS Module -->
-                        <div class="technology-card gps-card">
-                            <div class="technology-header">
-                                <div class="technology-icon-container">
-                                    <div class="main-image-glow main-orange-glow">
-                                        <img src="images/PhoenixBullseye.PNG" alt="GPS Technology Icon" class="technology-icon" loading="lazy">
-                                    </div>
-                                </div>
-                                <div class="technology-header-text">
-                                    <div class="technology-badge outdoor-badge">Outdoor Locations</div>
-                                    <h3 class="technology-title">GPS Technology</h3>
-                                </div>
-                            </div>
-                            <p class="technology-description">
-                                Precision GPS tracking places $Ember coins at exact outdoor coordinates with <span class="golden-highlight">meter-level accuracy</span>. Players navigate city streets, parks, shopping districts, and outdoor venues collecting coins at your exact sponsored locations.
-                            </p>
-                            
-                            <div class="technology-features">
-                                <h5>Perfect For:</h5>
-                                <ul>
-                                    <li><strong>Street-Level Marketing:</strong> Storefronts, restaurants, cafes</li>
-                                    <li><strong>Outdoor Venues:</strong> Stadiums, parks, festival grounds</li>
-                                    <li><strong>City-Wide Campaigns:</strong> Downtown districts, tourism trails</li>
-                                    <li><strong>Drive-By Locations:</strong> Gas stations, drive-thrus, parking lots</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="technology-stats">
-                                <div class="tech-stat">
-                                    <span class="tech-stat-number">5-10m</span>
-                                    <span class="tech-stat-label">Precision Radius</span>
-                                </div>
-                                <div class="tech-stat">
-                                    <span class="tech-stat-number">Unlimited</span>
-                                    <span class="tech-stat-label">Coverage Area</span>
-                                </div>
-                                <div class="tech-stat">
-                                    <span class="tech-stat-number">Real-Time</span>
-                                    <span class="tech-stat-label">Location Tracking</span>
-                                </div>
-                            </div>
-                            
-                            <div class="technology-highlight">
-                                <div class="main-image-glow">
-                                    <img src="images/EmberAnalytics.PNG" alt="GPS Analytics" class="tech-highlight-icon" loading="lazy">
-                                </div>
-                                <div class="tech-highlight-content">
-                                    <strong>GPS-Verified Visits</strong>
-                                    <p>Every coin collection is GPS-verified with exact coordinates, timestamps, and player path analytics</p>
-                                </div>
+                <div class="use-cases-grid">
+                    <div class="use-case-card scroll-reveal">
+                        <div class="use-case-icon-container">
+                            <div class="main-image-glow">
+                                <img src="images/PhoenixStore.PNG" alt="Retail Icon" class="use-case-icon" loading="lazy">
                             </div>
                         </div>
-                        
-                        <!-- Beacon Module -->
-                        <div class="technology-card beacon-card">
-                            <div class="technology-header">
-                                <div class="technology-icon-container">
-                                    <div class="main-image-glow main-purple-glow">
-                                        <img src="images/EmberRepeatArrows.PNG" alt="Beacon Technology Icon" class="technology-icon" loading="lazy">
-                                    </div>
-                                </div>
-                                <div class="technology-header-text">
-                                    <div class="technology-badge indoor-badge">Indoor Locations</div>
-                                    <h3 class="technology-title">Beacon Technology</h3>
-                                </div>
+                        <h3>Retail & Shopping</h3>
+                        <p>Drive foot traffic to brick-and-mortar locations with GPS coin placement outside stores and Beacon scanning inside. Transform window shoppers into loyal customers.</p>
+                        <div class="use-case-highlights">
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Increase store visits by 300%+</span>
                             </div>
-                            <p class="technology-description">
-                                Revolutionary Bluetooth Low Energy (BLE) beacons enable <span class="golden-highlight">indoor coin placement</span> with centimeter-level precision. Deploy $Ember coins anywhere inside buildings - from specific aisles to exact product displays, creating unprecedented indoor engagement opportunities.
-                            </p>
-                            
-                            <div class="technology-features">
-                                <h5>Perfect For:</h5>
-                                <ul>
-                                    <li><strong>Retail Stores:</strong> Specific aisles, product displays, checkout areas</li>
-                                    <li><strong>Shopping Malls:</strong> Individual stores, food courts, anchor locations</li>
-                                    <li><strong>Restaurants & Bars:</strong> Tables, bars, specific dining areas</li>
-                                    <li><strong>Event Venues:</strong> Convention centers, concert halls, expo booths</li>
-                                </ul>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Turn first-time visitors into repeat customers</span>
                             </div>
-                            
-                            <div class="technology-stats">
-                                <div class="tech-stat">
-                                    <span class="tech-stat-number">1-5m</span>
-                                    <span class="tech-stat-label">Precision Radius</span>
-                                </div>
-                                <div class="tech-stat">
-                                    <span class="tech-stat-number">100+ Floors</span>
-                                    <span class="tech-stat-label">Multi-Level Support</span>
-                                </div>
-                                <div class="tech-stat">
-                                    <span class="tech-stat-number">No GPS</span>
-                                    <span class="tech-stat-label">Signal Needed</span>
-                                </div>
-                            </div>
-                            
-                            <div class="technology-highlight">
-                                <div class="main-image-glow">
-                                    <img src="images/EmberCoinLock.PNG" alt="Beacon Security" class="tech-highlight-icon" loading="lazy">
-                                </div>
-                                <div class="tech-highlight-content">
-                                    <strong>Enterprise-Grade Beacons</strong>
-                                    <p>Professional Estimote beacons with 2+ year battery life, encrypted signals, and cloud-based management</p>
-                                </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Track conversion from crypto reward to sale</span>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Combined Power Section -->
-                    <div class="combined-technology-power scroll-reveal">
-                        <div class="combined-power-header">
+                    <div class="use-case-card scroll-reveal stagger-1">
+                        <div class="use-case-icon-container">
                             <div class="main-image-glow">
-                                <img src="images/VPEmberFlame.svg" alt="Combined Technology Power" style="width: 80px; height: 80px;" loading="lazy">
+                                <img src="images/PhoenixCompass.PNG" alt="Tourism Icon" class="use-case-icon" loading="lazy">
                             </div>
-                            <h4 class="combined-power-title">The Power of GPS + Beacon Integration</h4>
-                            <p class="combined-power-description">
-                                By combining GPS (outdoor) and Beacon (indoor) technologies, Vault Phoenix delivers <span class="golden-highlight">complete coverage</span> for any location-based marketing campaign. Seamlessly transition from outdoor GPS tracking to indoor beacon precision - all in one unified platform.
-                            </p>
                         </div>
+                        <h3>Tourism & Attractions</h3>
+                        <p>Create city-wide treasure hunts that guide tourists to landmarks, restaurants, and hidden gems. Partner with local businesses for authentic experiences.</p>
+                        <div class="use-case-highlights">
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Extend visitor engagement beyond main attractions</span>
+                            </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Monetize through business partnerships</span>
+                            </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Collect data on visitor behavior patterns</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-card scroll-reveal stagger-2">
+                        <div class="use-case-icon-container">
+                            <div class="main-image-glow">
+                                <img src="images/PhoenixStadiumSeats.PNG" alt="Sports & Events Icon" class="use-case-icon" loading="lazy">
+                            </div>
+                        </div>
+                        <h3>Sports & Events</h3>
+                        <p>Engage fans before, during, and after games with GPS coins outside the venue and Beacon scanning inside. Drive merchandise sales and concession revenue.</p>
+                        <div class="use-case-highlights">
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Create pre-game arrival excitement</span>
+                            </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Incentivize early stadium arrival</span>
+                            </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Boost concession and merchandise sales</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-card scroll-reveal stagger-3">
+                        <div class="use-case-icon-container">
+                            <div class="main-image-glow">
+                                <img src="images/EmberRadioWaves.PNG" alt="Radio & Media Icon" class="use-case-icon" loading="lazy">
+                            </div>
+                        </div>
+                        <h3>Radio & Media</h3>
+                        <p>Convert broadcast listeners into active participants. Drop coins at sponsor locations and watch engagement soar as listeners become treasure hunters.</p>
+                        <div class="use-case-highlights">
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Prove ROI to advertising partners</span>
+                            </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Drive traffic to sponsor locations</span>
+                            </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Build loyal listener community</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-card scroll-reveal stagger-4">
+                        <div class="use-case-icon-container">
+                            <div class="main-image-glow">
+                                <img src="images/EmberMallBuilding.PNG" alt="Shopping Malls Icon" class="use-case-icon" loading="lazy">
+                            </div>
+                        </div>
+                        <h3>Shopping Malls</h3>
+                        <p>Perfect for Beacon technology! Place devices at anchor stores and watch shoppers explore your entire mall. No GPS signal needed—works perfectly indoors.</p>
+                        <div class="use-case-highlights">
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Increase dwell time and mall visits</span>
+                            </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Drive traffic to less-visited stores</span>
+                            </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Create mall-wide treasure hunt events</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-card scroll-reveal stagger-5">
+                        <div class="use-case-icon-container">
+                            <div class="main-image-glow">
+                                <img src="images/PhoenixCustomIdea.PNG" alt="Custom Solutions Icon" class="use-case-icon" loading="lazy">
+                            </div>
+                        </div>
+                        <h3>Your Custom Vision</h3>
+                        <p>Got a unique use case? Our platform adapts to any industry or campaign goal. From real estate open houses to political campaigns—we make it happen.</p>
+                        <div class="use-case-highlights">
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Fully customizable branding & rewards</span>
+                            </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Flexible campaign structure</span>
+                            </div>
+                            <div class="use-case-highlight">
+                                <span class="use-case-check">✓</span>
+                                <span>Expert consultation included</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section" id="pricing">
+            <div class="main-container">
+                <div class="pricing-header scroll-reveal">
+                    <h2>Simple, Transparent <span class="golden-highlight">Pricing</span></h2>
+                    <p>Choose the plan that fits your marketing goals. All plans include GPS & Beacon placement, real-time analytics, and white-label customization.</p>
+                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card scroll-reveal">
+                        <h3>Starter</h3>
+                        <div class="price">$149</div>
+                        <div class="price-period">per month</div>
+                        <div class="pricing-features">
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Up to 100 active players</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>50 coin placements (GPS or Beacon)</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Basic analytics dashboard</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>White-label at yourdomain.com</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Email support</span>
+                            </div>
+                        </div>
+                        <a href="mailto:contact@vaultphoenix.com?subject=Starter Plan Inquiry&body=I'm interested in the Starter plan ($149/mo). Please send me details about getting started." class="pricing-button">Get Started</a>
+                    </div>
+                    
+                    <div class="pricing-card featured scroll-reveal stagger-1">
+                        <div class="pricing-badge">Most Popular</div>
+                        <h3>Professional</h3>
+                        <div class="price">$349</div>
+                        <div class="price-period">per month</div>
+                        <div class="pricing-features">
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Up to 500 active players</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>200 coin placements (GPS or Beacon)</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Advanced analytics & heat maps</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Priority support</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Custom branding & rewards</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>API access for integrations</span>
+                            </div>
+                        </div>
+                        <a href="mailto:contact@vaultphoenix.com?subject=Professional Plan Inquiry&body=I'm interested in the Professional plan ($349/mo). Please send me details about getting started." class="pricing-button">Get Started</a>
+                    </div>
+                    
+                    <div class="pricing-card scroll-reveal stagger-2">
+                        <h3>Enterprise</h3>
+                        <div class="price">Custom</div>
+                        <div class="price-period">contact us</div>
+                        <div class="pricing-features">
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Unlimited active players</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Unlimited coin placements</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>White-glove onboarding</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Dedicated account manager</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>Custom feature development</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <span class="pricing-check">✓</span>
+                                <span>SLA & 24/7 support</span>
+                            </div>
+                        </div>
+                        <a href="mailto:contact@vaultphoenix.com?subject=Enterprise Plan Inquiry&body=I'm interested in the Enterprise plan. Please contact me to discuss custom pricing and features." class="pricing-button secondary">Contact Sales</a>
                     </div>
                 </div>
             </div>
@@ -2053,168 +2346,74 @@
         <!-- Live Demo Section -->
         <section class="live-demo-section" id="showcase">
             <div class="main-container">
-                <h2 class="main-section-title scroll-reveal">Experience Both Systems Live</h2>
-                <p class="main-section-subtitle scroll-reveal">Try our interactive demos on mobile and desktop to see the complete platform in action</p>
+                <div class="live-demo-header scroll-reveal">
+                    <h2>See Vault Phoenix in <span class="golden-highlight">Action</span></h2>
+                    <p>Explore real campaign dashboards and mobile experiences. Click any thumbnail to see how GPS coin placement, Beacon scanning, and player engagement work in practice.</p>
+                </div>
                 
-                <div class="demo-systems-container">
-                    <div class="demo-grid">
-                        <!-- Mobile App Gallery -->
-                        <div class="phone-gallery">
-                            <h3 class="device-title">Mobile AR Crypto Game</h3>
-                            <div class="phone-mockup">
-                                <div class="phone-notch"></div>
-                                <div class="phone-screen" aria-live="polite" aria-atomic="true">
-                                    <img id="mainPhoneScreenshot" src="images/EmberHome.jpg" alt="Ember Home screen showing main interface" class="phone-screenshot" loading="lazy">
-                                </div>
-                            </div>
-                            
-                            <div class="thumbnail-grid-phone">
-                                <button class="simple-thumb active" onclick="changeImage('images/EmberHome.jpg', 'Ember Home screen showing main interface')" aria-label="View Ember Home screenshot - Image 1 of 6">
-                                    <img src="images/EmberHome.jpg" alt="Ember Home thumbnail" loading="lazy">
-                                    <div class="thumb-label">Home</div>
-                                </button>
-                                <button class="simple-thumb" onclick="changeImage('images/EmberMap.jpg', 'Ember Map screen showing coin locations')" aria-label="View Ember Map screenshot - Image 2 of 6">
-                                    <img src="images/EmberMap.jpg" alt="Ember Map thumbnail" loading="lazy">
-                                    <div class="thumb-label">Map</div>
-                                </button>
-                                <button class="simple-thumb" onclick="changeImage('images/EmberHunt.jpg', 'Ember Hunt screen showing AR camera view')" aria-label="View Ember Hunt screenshot - Image 3 of 6">
-                                    <img src="images/EmberHunt.jpg" alt="Ember Hunt thumbnail" loading="lazy">
-                                    <div class="thumb-label">Hunt</div>
-                                </button>
-                                <button class="simple-thumb" onclick="changeImage('images/EmberNearby.jpg', 'Ember Nearby screen showing nearby coins')" aria-label="View Ember Nearby screenshot - Image 4 of 6">
-                                    <img src="images/EmberNearby.jpg" alt="Ember Nearby thumbnail" loading="lazy">
-                                    <div class="thumb-label">Nearby</div>
-                                </button>
-                                <button class="simple-thumb" onclick="changeImage('images/EmberVault.jpg', 'Ember Vault screenshot showing player wallet')" aria-label="View Ember Vault screenshot - Image 5 of 6">
-                                    <img src="images/EmberVault.jpg" alt="Ember Vault thumbnail" loading="lazy">
-                                    <div class="thumb-label">Vault</div>
-                                </button>
-                                <button class="simple-thumb" onclick="changeImage('images/HuntMap.jpg', 'Hunt Map screenshot showing coin locations on map')" aria-label="View Hunt Map screenshot - Image 6 of 6">
-                                    <img src="images/HuntMap.jpg" alt="Hunt Map thumbnail" loading="lazy">
-                                    <div class="thumb-label">Hunt Map</div>
-                                </button>
-                            </div>
-                            
-                            <div class="demo-card-wrapper">
-                                <div class="demo-card-enhanced">
-                                    <p class="demo-card-instruction">Open with your mobile device</p>
-                                    <div class="demo-button-row">
-                                        <div class="main-image-glow">
-                                            <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="demo-icon-standalone" loading="lazy">
-                                        </div>
-                                        <a href="crypto-game/" target="_blank" rel="noopener noreferrer" class="demo-button-enhanced" aria-label="Try the mobile AR crypto game demo">
-                                            <span class="demo-text-enhanced">Try it out</span>
-                                        </a>
-                                    </div>
-                                </div>
+                <div class="demo-showcase">
+                    <!-- Phone Demo -->
+                    <div class="demo-device">
+                        <div class="demo-device-header scroll-reveal">
+                            <h3>Mobile Player Experience</h3>
+                            <p>What your customers see when hunting for crypto coins</p>
+                        </div>
+                        <div class="phone-mockup">
+                            <div class="main-image-glow">
+                                <img src="images/Phone1.PNG" alt="Vault Phoenix mobile app screenshot" id="mainPhoneScreenshot" class="main-phone-image" loading="lazy">
                             </div>
                         </div>
-                        
-                        <!-- Management System Column -->
-                        <div class="laptop-gallery">
-                            <h3 class="device-title">Management System Dashboard</h3>
-                            <div class="laptop-mockup">
-                                <div class="laptop-screen" aria-live="polite" aria-atomic="true">
-                                    <img id="mainLaptopScreenshot" src="images/CampaignControl.PNG" alt="Campaign Control dashboard showing campaign management interface" class="laptop-screenshot" loading="lazy">
-                                </div>
-                                <div class="laptop-base"></div>
-                                <div class="laptop-notch"></div>
+                        <div class="simple-gallery">
+                            <div class="simple-thumb active" onclick="changeImage('images/Phone1.PNG', 'Mobile app home screen')">
+                                <img src="images/Phone1.PNG" alt="Thumbnail 1" loading="lazy">
                             </div>
-                            
-                            <div class="thumbnail-grid-laptop">
-                                <button class="simple-thumb-laptop active" onclick="changeLaptopImage('images/CampaignControl.PNG', 'Campaign Control dashboard showing campaign management interface')" aria-label="View Campaign Control screenshot - Image 1 of 6">
-                                    <img src="images/CampaignControl.PNG" alt="Campaign Control thumbnail" loading="lazy">
-                                    <div class="thumb-label">Campaigns</div>
-                                </button>
-                                <button class="simple-thumb-laptop" onclick="changeLaptopImage('images/DashboardOverview.PNG', 'Dashboard Overview showing analytics and metrics')" aria-label="View Dashboard Overview screenshot - Image 2 of 6">
-                                    <img src="images/DashboardOverview.PNG" alt="Dashboard Overview thumbnail" loading="lazy">
-                                    <div class="thumb-label">Dashboard</div>
-                                </button>
-                                <button class="simple-thumb-laptop" onclick="changeLaptopImage('images/AdvertiserManagement.PNG', 'Advertiser Management showing sponsor controls')" aria-label="View Advertiser Management screenshot - Image 3 of 6">
-                                    <img src="images/AdvertiserManagement.PNG" alt="Advertiser Management thumbnail" loading="lazy">
-                                    <div class="thumb-label">Advertisers</div>
-                                </button>
-                                <button class="simple-thumb-laptop" onclick="changeLaptopImage('images/AirdropCenter.PNG', 'Airdrop Center showing token distribution system')" aria-label="View Airdrop Center screenshot - Image 4 of 6">
-                                    <img src="images/AirdropCenter.PNG" alt="Airdrop Center thumbnail" loading="lazy">
-                                    <div class="thumb-label">Airdrops</div>
-                                </button>
-                                <button class="simple-thumb-laptop" onclick="changeLaptopImage('images/Walletandfunding.PNG', 'Wallet and Funding showing financial management')" aria-label="View Wallet and Funding screenshot - Image 5 of 6">
-                                    <img src="images/Walletandfunding.PNG" alt="Wallet and Funding thumbnail" loading="lazy">
-                                    <div class="thumb-label">Wallet</div>
-                                </button>
-                                <button class="simple-thumb-laptop" onclick="changeLaptopImage('images/AppbuilderSDK.PNG', 'App Builder SDK showing developer integration interface')" aria-label="View App Builder SDK screenshot - Image 6 of 6">
-                                    <img src="images/AppbuilderSDK.PNG" alt="App Builder SDK thumbnail" loading="lazy">
-                                    <div class="thumb-label">SDK</div>
-                                </button>
+                            <div class="simple-thumb" onclick="changeImage('images/Phone2.PNG', 'GPS coin map view')">
+                                <img src="images/Phone2.PNG" alt="Thumbnail 2" loading="lazy">
                             </div>
-                            
-                            <div class="demo-card-wrapper">
-                                <div class="demo-card-enhanced">
-                                    <p class="demo-card-instruction">Open with your desktop computer</p>
-                                    <div class="demo-button-row">
-                                        <div class="main-image-glow">
-                                            <img src="images/EmberAnalytics.PNG" alt="Management System Icon" class="demo-icon-standalone" loading="lazy">
-                                        </div>
-                                        <a href="https://ghost081280.github.io/vaultphoenix/management-system/index.html" target="_blank" rel="noopener noreferrer" class="demo-button-enhanced management-button-enhanced" aria-label="Try the management system demo">
-                                            <span class="demo-text-enhanced">Try it out</span>
-                                        </a>
-                                    </div>
-                                </div>
+                            <div class="simple-thumb" onclick="changeImage('images/Phone3.PNG', 'Beacon scanning interface')">
+                                <img src="images/Phone3.PNG" alt="Thumbnail 3" loading="lazy">
                             </div>
-                            
-                            <!-- Phoenix Ember Safe Image -->
-                            <div class="phoenix-safe-container">
-                                <div class="main-image-glow">
-                                    <img src="images/PhoenixEmberSafe.PNG" alt="Phoenix Ember Safe showing secure token storage" class="phoenix-safe-image" loading="lazy">
-                                </div>
+                            <div class="simple-thumb" onclick="changeImage('images/Phone4.PNG', 'Collected rewards screen')">
+                                <img src="images/Phone4.PNG" alt="Thumbnail 4" loading="lazy">
+                            </div>
+                            <div class="simple-thumb" onclick="changeImage('images/Phone5.PNG', 'Player leaderboard')">
+                                <img src="images/Phone5.PNG" alt="Thumbnail 5" loading="lazy">
+                            </div>
+                            <div class="simple-thumb" onclick="changeImage('images/Phone6.PNG', 'Profile and achievements')">
+                                <img src="images/Phone6.PNG" alt="Thumbnail 6" loading="lazy">
                             </div>
                         </div>
                     </div>
                     
-                    <!-- System Connection Benefits -->
-                    <div class="system-connection">
-                        <div class="connection-header">
-                            <div class="connection-line" aria-hidden="true"></div>
-                            <div class="connection-badge">
-                                <div class="main-image-glow">
-                                    <img src="images/EmberRepeatArrows.PNG" alt="Connected Systems Icon" class="main-connection-icon" loading="lazy">
-                                </div>
-                                <span>Seamlessly Connected</span>
-                            </div>
-                            <div class="connection-line" aria-hidden="true"></div>
+                    <!-- Laptop Demo -->
+                    <div class="demo-device">
+                        <div class="demo-device-header scroll-reveal">
+                            <h3>Campaign Manager Dashboard</h3>
+                            <p>Your control center for placing coins, tracking analytics, and managing campaigns</p>
                         </div>
-                        
-                        <div class="system-benefits">
-                            <div class="benefit-column">
-                                <div class="benefit-header">
-                                    <div class="main-image-glow">
-                                        <img src="images/IphoneVPLogo.PNG" alt="Mobile App Icon" class="benefit-header-icon" loading="lazy">
-                                    </div>
-                                    <h4>Player Experience</h4>
-                                </div>
-                                <ul class="benefit-list">
-                                    <li>White-labeled with your brand identity</li>
-                                    <li>AR crypto coin discovery & collection</li>
-                                    <li>GPS (Outdoors) & Beacon (Indoors) navigation</li>
-                                    <li>Real-time rewards & achievements</li>
-                                    <li>Works seamlessly on iOS & Android</li>
-                                </ul>
+                        <div class="laptop-mockup">
+                            <div class="main-image-glow">
+                                <img src="images/Laptop1.PNG" alt="Vault Phoenix campaign dashboard" id="mainLaptopScreenshot" class="main-laptop-image" loading="lazy">
                             </div>
-                            
-                            <div class="benefit-column">
-                                <div class="benefit-header">
-                                    <div class="main-image-glow">
-                                        <img src="images/EmberAnalytics.PNG" alt="Management System Icon" class="benefit-header-icon" loading="lazy">
-                                    </div>
-                                    <h4>Marketer Control</h4>
-                                </div>
-                                <ul class="benefit-list">
-                                    <li>Control all GPS & Beacon coin placements</li>
-                                    <li>Real-time analytics & player tracking</li>
-                                    <li>Revenue reporting & ROI metrics</li>
-                                    <li>Campaign management & optimization</li>
-                                    <li>Partner & sponsor administration</li>
-                                </ul>
+                        </div>
+                        <div class="simple-gallery">
+                            <div class="simple-thumb-laptop active" onclick="changeLaptopImage('images/Laptop1.PNG', 'Dashboard overview')">
+                                <img src="images/Laptop1.PNG" alt="Laptop Thumbnail 1" loading="lazy">
+                            </div>
+                            <div class="simple-thumb-laptop" onclick="changeLaptopImage('images/Laptop2.PNG', 'GPS coin placement map')">
+                                <img src="images/Laptop2.PNG" alt="Laptop Thumbnail 2" loading="lazy">
+                            </div>
+                            <div class="simple-thumb-laptop" onclick="changeLaptopImage('images/Laptop3.PNG', 'Analytics and engagement metrics')">
+                                <img src="images/Laptop3.PNG" alt="Laptop Thumbnail 3" loading="lazy">
+                            </div>
+                            <div class="simple-thumb-laptop" onclick="changeLaptopImage('images/Laptop4.PNG', 'Beacon management interface')">
+                                <img src="images/Laptop4.PNG" alt="Laptop Thumbnail 4" loading="lazy">
+                            </div>
+                            <div class="simple-thumb-laptop" onclick="changeLaptopImage('images/Laptop5.PNG', 'Player activity heatmap')">
+                                <img src="images/Laptop5.PNG" alt="Laptop Thumbnail 5" loading="lazy">
+                            </div>
+                            <div class="simple-thumb-laptop" onclick="changeLaptopImage('images/Laptop6.PNG', 'Campaign settings and configuration')">
+                                <img src="images/Laptop6.PNG" alt="Laptop Thumbnail 6" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -2222,435 +2421,115 @@
             </div>
         </section>
 
-        <!-- Use Cases Section -->
-        <section class="use-cases" id="use-cases">
+        <!-- Journey Section -->
+        <section class="journey-section" id="journey">
             <div class="main-container">
-                <h2 class="main-section-title scroll-reveal">Crypto Gaming Across Industries</h2>
-                <p class="main-section-subtitle scroll-reveal">See how different industries are using Vault Phoenix AR crypto gaming with GPS & Beacon technology to revolutionize customer engagement and generate legendary location-based advertising ROI with proven strategies across multiple verticals.</p>
+                <div class="journey-header scroll-reveal">
+                    <h2>Choose Your <span class="golden-highlight">Path</span></h2>
+                    <p>Whether you're a marketer looking for a turnkey solution or a developer wanting full control, we've got you covered.</p>
+                </div>
                 
-                <div class="use-cases-grid">
-                    <div class="use-case-card scroll-reveal stagger-1">
-                        <div class="use-case-icon-container-large">
-                            <div class="main-image-glow">
-                                <img src="images/PhoenixAthletics.PNG" alt="Sports Industry Icon" class="use-case-icon-image-large" loading="lazy">
-                            </div>
-                        </div>
-                        <h3 class="use-case-title">Sports Crypto Revolution</h3>
-                        <p class="use-case-example">"Stadium Crypto Hunt" - Collect <span class="golden-highlight">rare crypto coins</span> using GPS (parking lots, gates) and Beacons (concession stands, team stores, sponsor locations) throughout the venue</p>
-                        <p class="use-case-description">Drive fans to specific venue areas while they hunt valuable crypto coins. Increase concession sales and create unforgettable stadium experiences with crypto rewards that have real value.</p>
-                    </div>
-                    
-                    <div class="use-case-card scroll-reveal stagger-2">
-                        <div class="use-case-icon-container-large">
-                            <div class="main-image-glow">
-                                <img src="images/PhoenixRadio.PNG" alt="Radio Broadcasting Icon" class="use-case-icon-image-large" loading="lazy">
-                            </div>
-                        </div>
-                        <h3 class="use-case-title">Radio Crypto Amplifier</h3>
-                        <p class="use-case-example">"Morning Show Crypto Quest" - Discover <span class="golden-highlight">legendary crypto coins</span> and exclusive content at sponsor locations using GPS (Outdoors) and Beacons (Indoors) across the city</p>
-                        <p class="use-case-description">Transform radio reach into physical crypto hunting adventures. Listeners become active treasure hunters, visiting sponsor locations to collect valuable crypto coins and creating measurable foot traffic.</p>
-                    </div>
-                    
-                    <div class="use-case-card scroll-reveal stagger-3">
-                        <div class="use-case-icon-container-large">
-                            <div class="main-image-glow">
-                                <img src="images/VPTravelPhoenix.PNG" alt="Tourism Industry Icon" class="use-case-icon-image-large" loading="lazy">
-                            </div>
-                        </div>
-                        <h3 class="use-case-title">Tourism Crypto Engine</h3>
-                        <p class="use-case-example">"Historic Crypto Rising" - Uncover <span class="golden-highlight">legendary crypto treasures</span> using GPS (landmarks, monuments) and Beacons (inside museums, restaurants, attractions) with exclusive deals</p>
-                        <p class="use-case-description">Transform city exploration into epic crypto treasure hunts. Tourists spend more time discovering while collecting valuable crypto coins at local businesses, generating guaranteed revenue.</p>
-                    </div>
-                    
-                    <div class="use-case-card scroll-reveal stagger-4">
-                        <div class="use-case-icon-container-large">
-                            <div class="main-image-glow">
-                                <img src="images/PhoenixRetail.PNG" alt="Retail Industry Icon" class="use-case-icon-image-large" loading="lazy">
-                            </div>
-                        </div>
-                        <h3 class="use-case-title">Retail Crypto Generator</h3>
-                        <p class="use-case-example">"Fashion Crypto Week" - Hunt for <span class="golden-highlight">exclusive crypto coins</span> using GPS (street locations) and Beacons (inside stores, specific product displays) at participating boutiques</p>
-                        <p class="use-case-description">Create shopping district-wide crypto events that drive traffic to multiple stores simultaneously. Customers discover new retailers while hunting for valuable crypto coins and real-world promotions.</p>
-                    </div>
-                    
-                    <div class="use-case-card scroll-reveal stagger-1">
-                        <div class="use-case-icon-container-large">
-                            <div class="main-image-glow">
-                                <img src="images/PhoenixEntertainment.PNG" alt="Entertainment Industry Icon" class="use-case-icon-image-large" loading="lazy">
-                            </div>
-                        </div>
-                        <h3 class="use-case-title">Entertainment Crypto Ecosystem</h3>
-                        <p class="use-case-example">"Concert Crypto Series" - Collect <span class="golden-highlight">rare crypto coins</span> using GPS (outdoor venues) and Beacons (bars, music stores, VIP areas) with exclusive experiences</p>
-                        <p class="use-case-description">Build massive excitement before events while supporting the entire local music ecosystem through crypto hunting. Fans visit sponsor locations collecting valuable crypto rewards.</p>
-                    </div>
-                    
-                    <div class="use-case-card scroll-reveal stagger-2">
-                        <div class="use-case-icon-container-large">
-                            <div class="main-image-glow">
-                                <img src="images/PhoenixCulinary.PNG" alt="Culinary Industry Icon" class="use-case-icon-image-large" loading="lazy">
-                            </div>
-                        </div>
-                        <h3 class="use-case-title">Culinary Crypto Adventure</h3>
-                        <p class="use-case-example">"Foodie Crypto Trail" - Discover <span class="golden-highlight">rare crypto coins</span> using GPS (restaurant locations) and Beacons (specific tables, bar areas) with exclusive tastings at local markets</p>
-                        <p class="use-case-description">Create food trail crypto experiences that introduce customers to new restaurants. Each location offers unique crypto coins, special menu items, and dining promotions that drive repeat visits.</p>
-                    </div>
-
-                    <div class="use-case-card scroll-reveal stagger-3">
-                        <div class="use-case-icon-container-large">
-                            <div class="main-image-glow">
-                                <img src="images/PhoenixHealth.svg.svg" alt="Healthcare Industry Icon" class="use-case-icon-image-large" loading="lazy">
-                            </div>
-                        </div>
-                        <h3 class="use-case-title">Healthcare Crypto Wellness</h3>
-                        <p class="use-case-example">"Wellness Crypto Challenge" - Earn <span class="golden-highlight">health crypto coins</span> using GPS (walking paths, gyms) and Beacons (inside fitness centers, wellness clinics) for achieving wellness goals</p>
-                        <p class="use-case-description">Gamify health and wellness initiatives with crypto rewards. Users earn valuable coins for visiting health-focused locations and meeting fitness milestones, creating sustainable healthy habits.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pricing/SDK Section -->
-        <section class="pricing-sdk-section" id="pricing">
-            <div class="main-container">
-                <h2 class="main-section-title scroll-reveal">Developer SDK & Platform Pricing</h2>
-                <p class="main-section-subtitle scroll-reveal">Build location-based AR crypto campaigns with our comprehensive platform and SDK</p>
-                
-                <div class="sdk-overview-container">
-                    <div class="sdk-pricing-badge">Available Early 2026</div>
-                    <p class="sdk-intro-text">
-                        Whether you're a marketer launching campaigns or a developer integrating our SDK, Vault Phoenix provides the complete infrastructure for GPS & Beacon-based AR crypto gaming. No need to build location systems, crypto wallets, or analytics dashboards - we handle it all.
-                    </p>
-                </div>
-
-                <div class="sdk-features-preview">
-                    <h4>What's Included:</h4>
-                    <ul>
-                        <li>Complete AR crypto gaming engine</li>
-                        <li>GPS & Beacon location technology integration</li>
-                        <li>Cloud-based coin placement & management system</li>
-                        <li>Real-time analytics dashboard hosting</li>
-                        <li>Crypto wallet integration & transaction processing</li>
-                        <li>RESTful API & WebSocket support</li>
-                        <li>SDKs for JavaScript, Python, Unity</li>
-                        <li>Campaign deployment & management tools</li>
-                        <li>Location partner portal hosting</li>
-                        <li>Priority support (Growth+)</li>
-                        <li>Custom integration assistance (Growth+)</li>
-                        <li>Developer documentation & tutorials</li>
-                        <li>Community support forum access</li>
-                    </ul>
-                </div>
-
-                <div class="solution-highlight-box">
-                    <div class="main-image-glow">
-                        <img src="images/IphoneVPLogo.PNG" alt="Developer Tools" class="solution-highlight-icon" loading="lazy">
-                    </div>
-                    <div class="solution-highlight-content">
-                        <h5>Built for Developers</h5>
-                        <p>Open-source code with <span class="golden-highlight">managed infrastructure</span> - rapid deployment at developer-friendly prices</p>
-                    </div>
-                </div>
-
-                <div class="solution-highlight-box additional-benefit">
-                    <div class="main-image-glow">
-                        <img src="images/VPEmberCoin.PNG" alt="Free Token Rewards" class="solution-highlight-icon" loading="lazy">
-                    </div>
-                    <div class="solution-highlight-content">
-                        <h5>FREE $Ember Tokens Included</h5>
-                        <p>Get <span class="golden-highlight">$100 worth of $Ember tokens</span> loaded into your management system when service is activated</p>
-                    </div>
-                </div>
-
-                <div class="solution-highlight-box additional-benefit">
-                    <div class="main-image-glow">
-                        <img src="images/PhoenixDesign.PNG" alt="Developer Support" class="solution-highlight-icon" loading="lazy">
-                    </div>
-                    <div class="solution-highlight-content">
-                        <h5>Developer Launch Support</h5>
-                        <p>Expert API onboarding, SDK documentation, code samples, integration guides, and <span class="golden-highlight">dedicated developer support</span> to ensure smooth implementation and optimize performance</p>
-                    </div>
-                </div>
-
-                <div class="solution-cta">
-                    <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" rel="noopener noreferrer" class="cta-secondary-large" aria-label="Download Vault Phoenix SDK from GitHub">
-                        <svg class="cta-github-icon" height="20" viewBox="0 0 16 16" width="20" fill="currentColor" aria-hidden="true">
-                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                        </svg>
-                        Explore SDK Documentation
-                    </a>
-                    <p class="cta-footnote">Available early 2026</p>
-                    <br>
-                    <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" rel="noopener noreferrer" class="journey-secondary-link">
-                        View SDK on GitHub <span>→</span>
-                    </a>
-                </div>
-
-                <!-- Revenue Examples Section -->
-                <div class="revenue-examples-section scroll-reveal">
-                    <div class="revenue-examples-header">
-                        <div class="main-image-glow">
-                            <img src="images/EmberCoinMoneyBag.PNG" alt="Revenue Generation Icon" class="main-revenue-header-icon" loading="lazy">
-                        </div>
-                        <h3>Potential Revenue Opportunities</h3>
-                        <p>Based on previous campaign experience, agencies, marketers, and developers can generate <span class="golden-highlight">$10K-$75K/month</span> with strategic GPS & Beacon coin placements once the platform is live.</p>
-                    </div>
-
-                    <div class="revenue-examples-grid">
-                        <div class="revenue-example-card">
-                            <div class="revenue-card-header">
+                <div class="journey-paths">
+                    <!-- Marketer Path -->
+                    <div class="journey-path-module marketer-path">
+                        <div class="journey-path-header">
+                            <div class="journey-icon-container">
                                 <div class="main-image-glow">
-                                    <img src="images/PhoenixAthletics.PNG" alt="Sports Revenue Example" class="main-revenue-industry-icon" loading="lazy">
-                                </div>
-                                <div class="example-industry">Sports & Entertainment</div>
-                            </div>
-                            <h3 class="example-title">Stadium Crypto Hunt</h3>
-                            <p class="example-scenario">Major league stadium with 50,000 fans per game, 10 home games per month</p>
-                            <div class="example-breakdown">
-                                <div class="breakdown-item">
-                                    <span class="breakdown-label">Premium Sponsor Zones (GPS & Beacons)</span>
-                                    <span class="breakdown-value">8 locations × $2,500/game</span>
-                                </div>
-                                <div class="breakdown-item">
-                                    <span class="breakdown-label">Standard Coin Placements</span>
-                                    <span class="breakdown-value">15 locations × $800/game</span>
-                                </div>
-                                <div class="breakdown-item total">
-                                    <span class="breakdown-label">Monthly Revenue</span>
-                                    <span class="breakdown-value golden-text">$32,000/month</span>
+                                    <img src="images/VPEmberFlame.svg" alt="Marketer Path Icon" class="main-journey-icon-large" loading="lazy">
                                 </div>
                             </div>
+                            <h3 class="journey-path-title">For Marketers</h3>
+                            <p class="journey-path-subtitle">Launch your white-label campaign in 24 hours—no code required</p>
                         </div>
-
-                        <div class="revenue-example-card">
-                            <div class="revenue-card-header">
-                                <div class="main-image-glow">
-                                    <img src="images/PhoenixRadio.PNG" alt="Radio Revenue Example" class="main-revenue-industry-icon" loading="lazy">
-                                </div>
-                                <div class="example-industry">Radio & Media</div>
-                            </div>
-                            <h3 class="example-title">Morning Show Treasure Hunt</h3>
-                            <p class="example-scenario">Regional radio station with 150K daily listeners across metro area</p>
-                            <div class="example-breakdown">
-                                <div class="breakdown-item">
-                                    <span class="breakdown-label">Featured Sponsor Locations (GPS/Beacon)</span>
-                                    <span class="breakdown-value">12 locations × $3,000/month</span>
-                                </div>
-                                <div class="breakdown-item">
-                                    <span class="breakdown-label">Supporting Locations</span>
-                                    <span class="breakdown-value">25 locations × $1,200/month</span>
-                                </div>
-                                <div class="breakdown-item total">
-                                    <span class="breakdown-label">Monthly Revenue</span>
-                                    <span class="breakdown-value golden-text">$66,000/month</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="revenue-example-card">
-                            <div class="revenue-card-header">
-                                <div class="main-image-glow">
-                                    <img src="images/VPTravelPhoenix.PNG" alt="Tourism Revenue Example" class="main-revenue-industry-icon" loading="lazy">
-                                </div>
-                                <div class="example-industry">Tourism & Hospitality</div>
-                            </div>
-                            <h3 class="example-title">Historic Downtown Quest</h3>
-                            <p class="example-scenario">Tourist district campaign for hotels, restaurants, and attractions</p>
-                            <div class="example-breakdown">
-                                <div class="breakdown-item">
-                                    <span class="breakdown-label">Anchor Locations (GPS & Beacons)</span>
-                                    <span class="breakdown-value">5 locations × $4,000/month</span>
-                                </div>
-                                <div class="breakdown-item">
-                                    <span class="breakdown-label">Restaurant & Shops</span>
-                                    <span class="breakdown-value">30 locations × $1,500/month</span>
-                                </div>
-                                <div class="breakdown-item total">
-                                    <span class="breakdown-label">Monthly Revenue</span>
-                                    <span class="breakdown-value golden-text">$65,000/month</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="revenue-example-card">
-                            <div class="revenue-card-header">
-                                <div class="main-image-glow">
-                                    <img src="images/PhoenixRetail.PNG" alt="Retail Revenue Example" class="main-revenue-industry-icon" loading="lazy">
-                                </div>
-                                <div class="example-industry">Retail & Shopping</div>
-                            </div>
-                            <h3 class="example-title">Mall District Challenge</h3>
-                            <p class="example-scenario">Shopping district with 40+ retailers across 5 blocks</p>
-                            <div class="example-breakdown">
-                                <div class="breakdown-item">
-                                    <span class="breakdown-label">Flagship Stores (GPS Outside/Beacons Inside)</span>
-                                    <span class="breakdown-value">6 locations × $2,800/month</span>
-                                </div>
-                                <div class="breakdown-item">
-                                    <span class="breakdown-label">Boutiques & Cafes</span>
-                                    <span class="breakdown-value">22 locations × $900/month</span>
-                                </div>
-                                <div class="breakdown-item total">
-                                    <span class="breakdown-label">Monthly Revenue</span>
-                                    <span class="breakdown-value golden-text">$36,600/month</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="revenue-model-benefits">
-                        <h4>Why Location Partners Pay Premium Rates</h4>
-                        <div class="benefits-grid">
-                            <div class="benefit-box">
-                                <div class="benefit-icon-small">
-                                    <div class="main-image-glow">
-                                        <img src="images/PhoenixRetail.PNG" alt="Guaranteed Foot Traffic" class="benefit-icon-img" loading="lazy">
-                                    </div>
-                                </div>
-                                <div class="benefit-text">
-                                    <strong>Guaranteed Foot Traffic</strong>
-                                    <p>GPS & Beacon-verified visits with real-time analytics proving customer arrivals</p>
-                                </div>
-                            </div>
-                            <div class="benefit-box">
-                                <div class="benefit-icon-small">
-                                    <div class="main-image-glow">
-                                        <img src="images/EmberAnalytics.PNG" alt="Measurable ROI" class="benefit-icon-img" loading="lazy">
-                                    </div>
-                                </div>
-                                <div class="benefit-text">
-                                    <strong>Measurable ROI</strong>
-                                    <p>Track exact visitor counts, dwell time, and conversion metrics per location</p>
-                                </div>
-                            </div>
-                            <div class="benefit-box">
-                                <div class="benefit-icon-small">
-                                    <div class="main-image-glow">
-                                        <img src="images/PhoenixBullseye.PNG" alt="Targeted Engagement" class="benefit-icon-img" loading="lazy">
-                                    </div>
-                                </div>
-                                <div class="benefit-text">
-                                    <strong>Targeted Engagement</strong>
-                                    <p>Reach specific demographics actively seeking rewards at their location</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA Section -->
-        <section class="final-cta-section">
-            <div class="main-container">
-                <div class="final-cta-content">
-                    <div class="final-cta-header">
-                        <h2 class="final-cta-title scroll-reveal">What Happens Next in Your Journey?</h2>
-                        <p class="final-cta-subtitle scroll-reveal">Choose your path and start building the future of location-based crypto marketing</p>
-                    </div>
-                    
-                    <div class="journey-paths-container">
-                        <!-- Business Path -->
-                        <div class="journey-path-module business-path">
-                            <div class="journey-path-header">
-                                <span class="coming-soon-badge">Coming Soon!</span>
-                                <div class="journey-icon-container">
-                                    <div class="main-image-glow">
-                                        <img src="images/EmberCoinMoneyBag.PNG" alt="Business Path Icon" class="main-journey-icon-large" loading="lazy">
-                                    </div>
-                                </div>
-                                <h3 class="journey-path-title">For Businesses</h3>
-                                <p class="journey-path-subtitle">Launch your location-based crypto marketing campaign</p>
-                            </div>
-                            
-                            <div class="journey-steps">
-                                <div class="journey-step">
-                                    <div class="journey-step-number">1</div>
-                                    <div class="journey-step-content">
-                                        <h4 class="journey-step-title">Schedule Your Demo</h4>
-                                        <p class="journey-step-description">See the platform in action with a personalized walkthrough</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="journey-step">
-                                    <div class="journey-step-number">2</div>
-                                    <div class="journey-step-content">
-                                        <h4 class="journey-step-title">Design Your Campaign</h4>
-                                        <p class="journey-step-description">Work with our team to create your custom token hunt experience</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="journey-step">
-                                    <div class="journey-step-number">3</div>
-                                    <div class="journey-step-content">
-                                        <h4 class="journey-step-title">Launch & Track Results</h4>
-                                        <p class="journey-step-description">Go live and watch real-time analytics as customers engage</p>
-                                    </div>
+                        
+                        <div class="journey-steps">
+                            <div class="journey-step">
+                                <div class="journey-step-number">1</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Book a Demo</h4>
+                                    <p class="journey-step-description">Schedule a call to discuss your campaign goals</p>
                                 </div>
                             </div>
                             
-                            <div class="journey-cta">
-                                <a href="mailto:contact@vaultphoenix.com?subject=White-Label AR Crypto Solution&body=I'm interested in launching a location-based crypto marketing campaign. Please send me details about getting started." class="journey-cta-button" aria-label="Contact us to start your campaign">
-                                    <div class="main-image-glow">
-                                        <img src="images/VPEmberFlame.svg" alt="Phoenix Flame Icon" class="journey-cta-icon-large" loading="lazy">
-                                    </div>
-                                    <span class="journey-cta-text">Book Your Demo</span>
-                                </a>
-                                <a href="#pricing" class="journey-secondary-link">
-                                    View Pricing <span>→</span>
-                                </a>
+                            <div class="journey-step">
+                                <div class="journey-step-number">2</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">We Build Your App</h4>
+                                    <p class="journey-step-description">Your branded web app at yourdomain.com/game-name goes live in 24 hours</p>
+                                </div>
+                            </div>
+                            
+                            <div class="journey-step">
+                                <div class="journey-step-number">3</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Launch & Track Results</h4>
+                                    <p class="journey-step-description">Go live and watch real-time analytics as customers engage</p>
+                                </div>
                             </div>
                         </div>
                         
-                        <!-- Developer Path -->
-                        <div class="journey-path-module developer-path">
-                            <div class="journey-path-header">
-                                <span class="early-2026-badge">Early 2026</span>
-                                <div class="journey-icon-container">
-                                    <div class="main-image-glow">
-                                        <img src="images/IphoneVPLogo.PNG" alt="Developer Path Icon" class="main-journey-icon-large" loading="lazy">
-                                    </div>
+                        <div class="journey-cta">
+                            <a href="mailto:contact@vaultphoenix.com?subject=White-Label AR Crypto Solution&body=I'm interested in launching a location-based crypto marketing campaign. Please send me details about getting started." class="journey-cta-button" aria-label="Contact us to start your campaign">
+                                <div class="main-image-glow">
+                                    <img src="images/VPEmberFlame.svg" alt="Phoenix Flame Icon" class="journey-cta-icon-large" loading="lazy">
                                 </div>
-                                <h3 class="journey-path-title">For Developers</h3>
-                                <p class="journey-path-subtitle">Build your own location-based crypto app with our SDK</p>
+                                <span class="journey-cta-text">Book Your Demo</span>
+                            </a>
+                            <a href="#pricing" class="journey-secondary-link">
+                                View Pricing <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Developer Path -->
+                    <div class="journey-path-module developer-path">
+                        <div class="journey-path-header">
+                            <span class="early-2026-badge">Early 2026</span>
+                            <div class="journey-icon-container">
+                                <div class="main-image-glow">
+                                    <img src="images/IphoneVPLogo.PNG" alt="Developer Path Icon" class="main-journey-icon-large" loading="lazy">
+                                </div>
                             </div>
-                            
-                            <div class="journey-steps">
-                                <div class="journey-step">
-                                    <div class="journey-step-number">1</div>
-                                    <div class="journey-step-content">
-                                        <h4 class="journey-step-title">Explore the SDK</h4>
-                                        <p class="journey-step-description">Browse documentation and code examples on GitHub</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="journey-step">
-                                    <div class="journey-step-number">2</div>
-                                    <div class="journey-step-content">
-                                        <h4 class="journey-step-title">Start Building</h4>
-                                        <p class="journey-step-description">Use our free tier to prototype and test your ideas</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="journey-step">
-                                    <div class="journey-step-number">3</div>
-                                    <div class="journey-step-content">
-                                        <h4 class="journey-step-title">Scale Your App</h4>
-                                        <p class="journey-step-description">Upgrade as you grow with flexible pricing tiers</p>
-                                    </div>
+                            <h3 class="journey-path-title">For Developers</h3>
+                            <p class="journey-path-subtitle">Build your own location-based crypto app with our SDK</p>
+                        </div>
+                        
+                        <div class="journey-steps">
+                            <div class="journey-step">
+                                <div class="journey-step-number">1</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Explore the SDK</h4>
+                                    <p class="journey-step-description">Browse documentation and code examples on GitHub</p>
                                 </div>
                             </div>
                             
-                            <div class="journey-cta">
-                                <a href="https://github.com/Vault-Phoenix-SDK" class="journey-cta-button" target="_blank" rel="noopener noreferrer" aria-label="View SDK on GitHub">
-                                    <svg width="45" height="45" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                    </svg>
-                                    <span class="journey-cta-text">View on GitHub</span>
-                                </a>
-                                <a href="#pricing" class="journey-secondary-link">
-                                    See SDK Pricing <span>→</span>
-                                </a>
+                            <div class="journey-step">
+                                <div class="journey-step-number">2</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Start Building</h4>
+                                    <p class="journey-step-description">Use our free tier to prototype and test your ideas</p>
+                                </div>
                             </div>
+                            
+                            <div class="journey-step">
+                                <div class="journey-step-number">3</div>
+                                <div class="journey-step-content">
+                                    <h4 class="journey-step-title">Scale Your App</h4>
+                                    <p class="journey-step-description">Upgrade as you grow with flexible pricing tiers</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="journey-cta">
+                            <a href="https://github.com/Vault-Phoenix-SDK" class="journey-cta-button" target="_blank" rel="noopener noreferrer" aria-label="View SDK on GitHub">
+                                <svg width="45" height="45" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                </svg>
+                                <span class="journey-cta-text">View on GitHub</span>
+                            </a>
+                            <a href="#pricing" class="journey-secondary-link">
+                                See SDK Pricing <span>→</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -2690,7 +2569,7 @@
             });
     </script>
     
-    <!-- Page-specific JavaScript for thumbnail galleries -->
+    <!-- Page-specific JavaScript for thumbnail galleries and scroll reveal -->
     <script>
         // Phone gallery functionality
         function changeImage(imageSrc, altText) {
@@ -2716,7 +2595,7 @@
             event.currentTarget.classList.add('active');
         }
         
-        // Scroll reveal animation
+        // Scroll reveal animation - Includes Enterprise Token Infrastructure section
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -2730,7 +2609,13 @@
             });
         }, observerOptions);
         
+        // Observe all scroll-reveal elements (includes new Enterprise Token section)
         document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+        
+        console.log('✅ Main.html page-specific JavaScript initialized');
+        console.log('📊 Enterprise Token Infrastructure section loaded');
+        console.log('⏰ Countdown timer IDs: main-days, main-hours, main-minutes, main-seconds');
+        console.log('🔍 Verify shared.js has updateCountdown() function for timer to work');
     </script>
 </body>
 </html>
