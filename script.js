@@ -4,7 +4,7 @@
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // SENIOR JS ENGINEERING: Mobile-First, Performance-Optimized
 // PRODUCTION READY: Clean, maintainable, and scalable code
-// VERSION: 5.1 - VP-Showcase Global Functions Fixed
+// VERSION: 6.0 - Cleaned Architecture (Removed Duplicate Scroll Progress)
 // ============================================
 
 'use strict';
@@ -70,7 +70,6 @@ const VaultPhoenix = (function() {
         mainScreenshot: null,
         mainLaptopScreenshot: null,
         logoIcon: null,
-        scrollProgress: null,
         floatingCoins: null,
         
         /**
@@ -82,7 +81,6 @@ const VaultPhoenix = (function() {
             this.mainScreenshot = safeQuery('#mainScreenshot');
             this.mainLaptopScreenshot = safeQuery('#mainLaptopScreenshot');
             this.logoIcon = safeQuery('.logo-icon');
-            this.scrollProgress = safeQuery('.phoenix-scroll-progress');
             
             console.log('💾 DOM cache initialized');
         },
@@ -1364,49 +1362,6 @@ const VaultPhoenix = (function() {
     }
     
     // ============================================
-    // SCROLL PROGRESS INDICATOR
-    // ============================================
-    
-    /**
-     * Create scroll progress indicator
-     */
-    function createScrollProgressIndicator() {
-        // Check if indicator already exists
-        if (DOMCache.scrollProgress) {
-            console.log('📊 Scroll progress already initialized');
-            return;
-        }
-        
-        const indicator = document.createElement('div');
-        indicator.className = 'phoenix-scroll-progress';
-        indicator.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
-            z-index: 9999;
-            width: 0%;
-            transition: width 0.1s ease;
-            box-shadow: 0 2px 5px rgba(215, 51, 39, 0.3);
-            will-change: width;
-        `;
-        document.body.appendChild(indicator);
-        DOMCache.scrollProgress = indicator;
-        
-        const updateProgress = throttle(() => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            indicator.style.width = scrolled + '%';
-        }, 50);
-        
-        window.addEventListener('scroll', updateProgress, { passive: true });
-        
-        console.log('📊 Scroll progress indicator initialized');
-    }
-    
-    // ============================================
     // MOBILE PERFORMANCE OPTIMIZATIONS
     // ============================================
     
@@ -1549,7 +1504,7 @@ const VaultPhoenix = (function() {
      * DOM Content Loaded - Initialize all features
      */
     function initializePage() {
-        console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v5.1)...');
+        console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v6.0 - Clean Architecture)...');
         
         // Ensure dark background
         document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
@@ -1582,7 +1537,8 @@ const VaultPhoenix = (function() {
         initializeEmberCoinImage();
         initializeCryptoBenefits();
         initializeEmberHighlights();
-        createScrollProgressIndicator();
+        
+        // ✅ REMOVED: createScrollProgressIndicator() - Now handled by shared-script.js
         
         // Create floating particles (optimized for device)
         createFloatingParticles();
@@ -1604,8 +1560,9 @@ const VaultPhoenix = (function() {
         }
         
         console.log('🔥🪙 Vault Phoenix initialized successfully!');
-        console.log('✅ Using shared-script.js for: smooth scrolling, countdown timer, mobile menu, navbar transitions, chatbot');
+        console.log('✅ Using shared-script.js for: scroll progress, smooth scrolling, countdown timer, mobile menu, navbar transitions, chatbot');
         console.log('✅ VP-Showcase section integrated with auto-rotation and keyboard navigation');
+        console.log('✅ Removed duplicate scroll progress indicator - using shared implementation');
     }
     
     /**
@@ -1725,7 +1682,7 @@ window.vpChangeLaptopImage = VaultPhoenix.vpChangeLaptopImage;
 console.log('%c🔥🪙 VAULT PHOENIX', 'color: #d73327; font-size: 24px; font-weight: bold;');
 console.log('%c🚀 AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 16px; font-weight: bold;');
 console.log('%c📧 contact@vaultphoenix.com', 'color: #374151; font-size: 12px;');
-console.log('%c💡 Senior Engineering - Mobile-First Architecture v5.1', 'color: #22c55e; font-size: 12px; font-weight: bold;');
-console.log('%c✅ VP-Showcase Global Functions Fixed', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
+console.log('%c💡 Senior Engineering - Clean Architecture v6.0', 'color: #22c55e; font-size: 12px; font-weight: bold;');
+console.log('%c✅ Removed Duplicate Scroll Progress - Using Shared Implementation', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
 console.log('%c✅ Namespace protected, event delegation optimized, memory managed', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
 console.log('Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
