@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CRITICAL FIX: Added maximum-scale and user-scalable constraints -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- Primary Meta Tags -->
     <title>$Ember Token - Revolutionary AR Crypto Gaming Platform | 166.7M Token Presale</title>
@@ -2115,14 +2116,53 @@
     </div>
 
     <!-- =================================================================
-         SCRIPTS - LOAD IN CORRECT ORDER
+         CRITICAL FIX: SCRIPTS - LOAD IN CORRECT ORDER WITH DEFER
          ================================================================= -->
     
-    <!-- 1. Shared functionality first (includes chatbot JS and countdown timer) -->
-    <script src="shared-script.js"></script>
+    <!-- 1. Shared functionality first (includes mobile menu, chatbot, etc.) -->
+    <script src="shared-script.js" defer></script>
     
-    <!-- 2. Page-specific scripts second (ember-script.js will contain modal functions) -->
-    <script src="ember-script.js"></script>
+    <!-- 2. Page-specific Ember functionality second (modal functions, presale logic) -->
+    <script src="ember-script.js" defer></script>
+
+    <!-- 3. CRITICAL FIX: Initialization safety check -->
+    <script>
+        // Prevent multiple initializations and check ember page initialization
+        // Use a small delay to ensure deferred scripts have executed
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                // Safety check for ember page initialization
+                if (window.emberPage && typeof window.emberPage.initialized === 'function') {
+                    if (window.emberPage.initialized()) {
+                        console.log('✓ Ember page initialized successfully');
+                    } else {
+                        console.warn('⚠ Ember page initialization check - may need manual init');
+                    }
+                }
+                
+                // Verify critical modal functions exist
+                if (typeof window.showTpaModal === 'function') {
+                    console.log('✓ TPA modal functions loaded');
+                } else {
+                    console.error('❌ Critical: TPA modal functions not loaded');
+                }
+                
+                if (typeof window.showWhitepaperModal === 'function') {
+                    console.log('✓ Whitepaper modal functions loaded');
+                } else {
+                    console.error('❌ Critical: Whitepaper modal functions not loaded');
+                }
+                
+                // Verify countdown timer initialized
+                const daysElement = document.getElementById('days');
+                if (daysElement && daysElement.textContent !== '--') {
+                    console.log('✓ Countdown timer initialized');
+                } else {
+                    console.warn('⚠ Countdown timer may not be initialized');
+                }
+            }, 100); // Small delay to allow deferred scripts to execute
+        });
+    </script>
 
 </body>
 </html>
