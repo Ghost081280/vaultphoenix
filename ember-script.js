@@ -1,5 +1,5 @@
 // ============================================================================
-// EMBER PAGE JAVASCRIPT - COMPLETE REWRITE
+// EMBER PAGE JAVASCRIPT - PRODUCTION FIX V2
 // Handles all ember.html specific functionality
 // ============================================================================
 
@@ -7,6 +7,7 @@
 // GLOBAL STATE
 // ============================================================================
 let tpaAgreed = false;
+let emberPageInitialized = false; // Prevent double initialization
 
 // ============================================================================
 // MODAL FUNCTIONS - TPA (Token Presale Agreement)
@@ -19,7 +20,9 @@ window.showTpaModal = function() {
     const modal = document.getElementById('tpaModal');
     if (modal) {
         modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.style.overflow = 'hidden';
+        // Ensure modal is above everything
+        modal.style.zIndex = '10000';
     }
 };
 
@@ -30,7 +33,7 @@ window.closeTpaModal = function() {
     const modal = document.getElementById('tpaModal');
     if (modal) {
         modal.style.display = 'none';
-        document.body.style.overflow = ''; // Restore scrolling
+        document.body.style.overflow = '';
     }
 };
 
@@ -68,6 +71,7 @@ window.showWhitepaperModal = function() {
     if (modal) {
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        modal.style.zIndex = '10000';
     }
 };
 
@@ -94,14 +98,18 @@ function updatePresaleButtonState() {
     const button = document.getElementById('presale-buy-button');
     
     if (checkbox && button) {
-        if (checkbox.checked && tpaAgreed) {
+        if (checkbox.checked || tpaAgreed) {
             button.disabled = false;
             button.textContent = '🔥 Join Presale (Coming Soon)';
             button.style.cursor = 'pointer';
+            button.style.background = 'linear-gradient(135deg, #d73327, #fb923c)';
+            button.style.opacity = '1';
         } else {
             button.disabled = true;
             button.textContent = '🔥 Join Presale (Coming Soon)';
             button.style.cursor = 'not-allowed';
+            button.style.background = 'rgba(128, 128, 128, 0.5)';
+            button.style.opacity = '0.6';
         }
     }
 }
@@ -124,7 +132,7 @@ function updateInvestmentCalculator() {
     const MIN_INVESTMENT = 10;
     const MAX_INVESTMENT = 50000;
     
-    let investmentAmount = parseFloat(input.value) || 0;
+    let investmentAmount = parseFloat(input.value) || MIN_INVESTMENT;
     
     // Validate investment amount
     if (investmentAmount < MIN_INVESTMENT) {
@@ -173,7 +181,6 @@ function updateDevFundTracker() {
     withdrawnElement.textContent = '$' + withdrawn.toLocaleString();
     
     // Update timestamp
-    const now = new Date();
     timestampElement.textContent = 'Presale not yet started';
 }
 
@@ -205,16 +212,16 @@ function updatePresaleProgress() {
 }
 
 // ============================================================================
-// COUNTDOWN TIMER
+// COUNTDOWN TIMER - FIXED DATE
 // ============================================================================
 
 /**
  * Initialize and manage presale countdown timer
  */
 function initializeCountdownTimer() {
-    // Set your presale launch date here
-    // Format: 'YYYY-MM-DD HH:MM:SS' in UTC
-    const PRESALE_LAUNCH_DATE = new Date('2025-12-01 00:00:00 UTC').getTime();
+    // Set a realistic presale launch date
+    // Change this to your actual launch date
+    const PRESALE_LAUNCH_DATE = new Date('2025-02-01 00:00:00 UTC').getTime();
     
     const daysElement = document.getElementById('days');
     const hoursElement = document.getElementById('hours');
@@ -236,6 +243,11 @@ function initializeCountdownTimer() {
             hoursElement.textContent = '00';
             minutesElement.textContent = '00';
             secondsElement.textContent = '00';
+            
+            // Clear interval when countdown is done
+            if (window.emberCountdownInterval) {
+                clearInterval(window.emberCountdownInterval);
+            }
             return;
         }
         
@@ -250,11 +262,16 @@ function initializeCountdownTimer() {
         secondsElement.textContent = String(seconds).padStart(2, '0');
     }
     
+    // Clear any existing interval
+    if (window.emberCountdownInterval) {
+        clearInterval(window.emberCountdownInterval);
+    }
+    
     // Update immediately
     updateCountdown();
     
     // Update every second
-    setInterval(updateCountdown, 1000);
+    window.emberCountdownInterval = setInterval(updateCountdown, 1000);
 }
 
 // ============================================================================
@@ -273,6 +290,8 @@ function initializeScrollAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('revealed');
+                // Optional: stop observing after reveal
+                revealOnScroll.unobserve(entry.target);
             }
         });
     }, {
@@ -297,8 +316,8 @@ function initializeSmoothScrolling() {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             
-            // Don't prevent default for just '#' (like modals that trigger JS functions)
-            if (href === '#') return;
+            // Don't prevent default for just '#' or modal triggers
+            if (href === '#' || href === '#presale') return;
             
             const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
@@ -306,13 +325,24 @@ function initializeSmoothScrolling() {
             if (targetElement) {
                 e.preventDefault();
                 
-                const navHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+                const navHeight = document.querySelector('.navbar')?.offsetHeight || 80;
                 const targetPosition = targetElement.offsetTop - navHeight - 20;
                 
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileOverlay = document.getElementById('mobile-menu-overlay');
+                if (mobileMenu && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    if (mobileOverlay) {
+                        mobileOverlay.classList.remove('active');
+                    }
+                    document.body.style.overflow = '';
+                }
             }
         });
     });
@@ -330,7 +360,7 @@ function initializeModalCloseOnClickOutside() {
     const tpaModal = document.getElementById('tpaModal');
     if (tpaModal) {
         tpaModal.addEventListener('click', function(e) {
-            if (e.target === this) {
+            if (e.target === this || e.target.classList.contains('tpa-modal-overlay')) {
                 closeTpaModal();
             }
         });
@@ -340,7 +370,7 @@ function initializeModalCloseOnClickOutside() {
     const whitepaperModal = document.getElementById('whitepaperModal');
     if (whitepaperModal) {
         whitepaperModal.addEventListener('click', function(e) {
-            if (e.target === this) {
+            if (e.target === this || e.target.classList.contains('tpa-modal-overlay')) {
                 closeWhitepaperModal();
             }
         });
@@ -391,11 +421,7 @@ function initializeEventListeners() {
     const tpaCheckbox = document.getElementById('tpa-agree-checkbox');
     if (tpaCheckbox) {
         tpaCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                tpaAgreed = true;
-            } else {
-                tpaAgreed = false;
-            }
+            tpaAgreed = this.checked;
             updatePresaleButtonState();
         });
     }
@@ -403,8 +429,9 @@ function initializeEventListeners() {
     // Presale Button (currently disabled, but ready for functionality)
     const presaleButton = document.getElementById('presale-buy-button');
     if (presaleButton) {
-        presaleButton.addEventListener('click', function() {
+        presaleButton.addEventListener('click', function(e) {
             if (!this.disabled) {
+                e.preventDefault();
                 // This is where you'd handle the presale purchase
                 console.log('Presale button clicked');
                 alert('Presale coming soon! This will connect to your wallet when live.');
@@ -421,6 +448,12 @@ function initializeEventListeners() {
  * Main initialization function - called when DOM is ready
  */
 function initializeEmberPage() {
+    // Prevent double initialization
+    if (emberPageInitialized) {
+        console.log('⚠ Ember page already initialized');
+        return;
+    }
+    
     console.log('🔥 Initializing Ember Token Page...');
     
     // Initialize all components
@@ -435,12 +468,20 @@ function initializeEmberPage() {
     initializeModalCloseOnClickOutside();
     initializeKeyboardAccessibility();
     
+    emberPageInitialized = true;
     console.log('✓ Ember Token Page initialized successfully');
 }
 
 // ============================================================================
 // DOM READY - START INITIALIZATION
 // ============================================================================
+
+// Clean up any existing intervals on page unload
+window.addEventListener('beforeunload', function() {
+    if (window.emberCountdownInterval) {
+        clearInterval(window.emberCountdownInterval);
+    }
+});
 
 // Wait for DOM to be fully loaded
 if (document.readyState === 'loading') {
@@ -457,24 +498,24 @@ if (document.readyState === 'loading') {
 /**
  * Format number with commas for display
  */
-function formatNumberWithCommas(number) {
+window.formatNumberWithCommas = function(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+};
 
 /**
  * Validate email format
  */
-function isValidEmail(email) {
+window.isValidEmail = function(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
-}
+};
 
 /**
  * Check if user prefers reduced motion (accessibility)
  */
-function prefersReducedMotion() {
+window.prefersReducedMotion = function() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
+};
 
 // ============================================================================
 // EXPORT FUNCTIONS FOR EXTERNAL USE
@@ -485,7 +526,8 @@ window.emberPage = {
     updatePresaleProgress,
     updateDevFundTracker,
     updateInvestmentCalculator,
-    updatePresaleButtonState
+    updatePresaleButtonState,
+    initialized: function() { return emberPageInitialized; }
 };
 
 console.log('✓ ember-script.js loaded successfully');
