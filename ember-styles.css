@@ -1,4 +1,4 @@
-/* Ember Token Page Stylesheet - CLEANED VERSION */
+/* Ember Token Page Stylesheet - COMPLETE PRODUCTION VERSION */
 /* Navigation & Footer inherited from shared-styles.css */
 /* Chatbot styles moved to shared-styles.css */
 
@@ -3036,6 +3036,8 @@ body {
     display: inline-block;
     vertical-align: middle;
     margin-right: 8px;
+    filter: brightness(1.2);
+    transition: filter 0.3s ease;
 }
 
 .presale-button:hover:not(:disabled) {
@@ -3043,6 +3045,7 @@ body {
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
 }
 
+/* PRODUCTION FIX: Enhanced disabled button state */
 .presale-button:disabled {
     background: rgba(128, 128, 128, 0.5) !important;
     cursor: not-allowed !important;
@@ -3054,6 +3057,11 @@ body {
 .presale-button:disabled:hover {
     transform: none !important;
     box-shadow: none !important;
+    background: rgba(128, 128, 128, 0.5) !important;
+}
+
+.presale-button:disabled img {
+    filter: grayscale(100%) brightness(0.7);
 }
 
 .presale-note {
@@ -3450,10 +3458,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10000;
+    z-index: 10000 !important;
     display: flex;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .tpa-modal-overlay {
