@@ -4,7 +4,7 @@
 // Phoenix Rising from Digital Ashes - Crypto Gaming Edition
 // SENIOR JS ENGINEERING: Mobile-First, Performance-Optimized
 // PRODUCTION READY: Clean, maintainable, and scalable code
-// VERSION: 6.1 - Fixed Initialization Sequence (Waits for Shared Script)
+// VERSION: 4.0 - Optimized (Conflicts resolved, performance enhanced)
 // ============================================
 
 'use strict';
@@ -70,6 +70,7 @@ const VaultPhoenix = (function() {
         mainScreenshot: null,
         mainLaptopScreenshot: null,
         logoIcon: null,
+        scrollProgress: null,
         floatingCoins: null,
         
         /**
@@ -81,6 +82,7 @@ const VaultPhoenix = (function() {
             this.mainScreenshot = safeQuery('#mainScreenshot');
             this.mainLaptopScreenshot = safeQuery('#mainLaptopScreenshot');
             this.logoIcon = safeQuery('.logo-icon');
+            this.scrollProgress = safeQuery('.phoenix-scroll-progress');
             
             console.log('💾 DOM cache initialized');
         },
@@ -252,325 +254,6 @@ const VaultPhoenix = (function() {
     }
     
     // ============================================
-    // VP-SHOWCASE GALLERY SYSTEM
-    // ============================================
-    
-    /**
-     * VP-Showcase state management for new section
-     */
-    const VPShowcaseState = {
-        phoneAutoRotateInterval: null,
-        laptopAutoRotateInterval: null,
-        phoneCurrentIndex: 0,
-        laptopCurrentIndex: 0,
-        
-        phoneImages: [
-            { src: 'images/ARView.jpg', alt: 'AR View screenshot showing augmented reality coin collection interface' },
-            { src: 'images/EmberAirdrop.jpg', alt: 'Ember Airdrop screenshot showing token distribution interface' },
-            { src: 'images/EmberCollected.jpg', alt: 'Ember Collected screenshot showing collected tokens' },
-            { src: 'images/EmberNearby.jpg', alt: 'Ember Nearby screenshot showing nearby coin locations' },
-            { src: 'images/EmberVault.jpg', alt: 'Ember Vault screenshot showing player wallet' },
-            { src: 'images/HuntMap.jpg', alt: 'Hunt Map screenshot showing coin locations on map' }
-        ],
-        
-        laptopImages: [
-            { src: 'images/CampaignControl.PNG', alt: 'Campaign Control dashboard showing campaign management interface' },
-            { src: 'images/DashboardOverview.PNG', alt: 'Dashboard Overview showing analytics and metrics' },
-            { src: 'images/AdvertiserManagement.PNG', alt: 'Advertiser Management showing sponsor controls' },
-            { src: 'images/AirdropCenter.PNG', alt: 'Airdrop Center showing token distribution system' },
-            { src: 'images/Walletandfunding.PNG', alt: 'Wallet and Funding showing financial management' },
-            { src: 'images/AppbuilderSDK.PNG', alt: 'App Builder SDK showing developer integration interface' }
-        ]
-    };
-    
-    /**
-     * Change VP-Showcase phone image with fade effect
-     * @param {string} src - Image source path
-     * @param {string} alt - Image alt text
-     * @param {HTMLElement} clickedThumb - The thumbnail button that was clicked
-     */
-    function vpChangePhoneImage(src, alt, clickedThumb) {
-        const img = safeQuery('#vpPhoneImage');
-        if (!img) return;
-        
-        // Stop auto-rotation when user manually selects
-        vpStopAutoRotation('phone');
-        
-        // Add fading class for smooth transition
-        img.classList.add('vp-fading');
-        
-        setTimeout(() => {
-            img.src = src;
-            img.alt = alt;
-            img.classList.remove('vp-fading');
-        }, 150);
-        
-        // Update active thumbnail
-        vpUpdateActiveThumbnail(clickedThumb, 'phone');
-        
-        // Update current index for auto-rotation
-        const index = VPShowcaseState.phoneImages.findIndex(image => image.src === src);
-        if (index !== -1) {
-            VPShowcaseState.phoneCurrentIndex = index;
-        }
-    }
-    
-    /**
-     * Change VP-Showcase laptop image with fade effect
-     * @param {string} src - Image source path
-     * @param {string} alt - Image alt text
-     * @param {HTMLElement} clickedThumb - The thumbnail button that was clicked
-     */
-    function vpChangeLaptopImage(src, alt, clickedThumb) {
-        const img = safeQuery('#vpLaptopImage');
-        if (!img) return;
-        
-        // Stop auto-rotation when user manually selects
-        vpStopAutoRotation('laptop');
-        
-        // Add fading class for smooth transition
-        img.classList.add('vp-fading');
-        
-        setTimeout(() => {
-            img.src = src;
-            img.alt = alt;
-            img.classList.remove('vp-fading');
-        }, 150);
-        
-        // Update active thumbnail
-        vpUpdateActiveThumbnail(clickedThumb, 'laptop');
-        
-        // Update current index for auto-rotation
-        const index = VPShowcaseState.laptopImages.findIndex(image => image.src === src);
-        if (index !== -1) {
-            VPShowcaseState.laptopCurrentIndex = index;
-        }
-    }
-    
-    /**
-     * Update active thumbnail state for VP-Showcase
-     * @param {HTMLElement} clickedThumb - The thumbnail that was clicked
-     * @param {string} device - 'phone' or 'laptop'
-     */
-    function vpUpdateActiveThumbnail(clickedThumb, device) {
-        if (!clickedThumb) return;
-        
-        // Get the container for the thumbnails
-        const container = device === 'phone' 
-            ? safeQuery('.vp-showcase-phone-thumbs')
-            : safeQuery('.vp-showcase-laptop-thumbs');
-        
-        if (!container) return;
-        
-        // Remove active class from all thumbnails in this container
-        const allThumbs = safeQueryAll('.vp-showcase-thumb-btn', container);
-        allThumbs.forEach(thumb => {
-            thumb.classList.remove('vp-showcase-thumb-active');
-            thumb.classList.remove('vp-auto-rotating');
-        });
-        
-        // Add active class to clicked thumbnail
-        clickedThumb.classList.add('vp-showcase-thumb-active');
-    }
-    
-    /**
-     * Start auto-rotation for VP-Showcase devices
-     */
-    function vpStartAutoRotation() {
-        // Start phone rotation
-        VPShowcaseState.phoneAutoRotateInterval = setInterval(() => {
-            vpRotatePhoneImage();
-        }, 4500);
-        
-        // Start laptop rotation (offset by 2250ms for variety)
-        setTimeout(() => {
-            VPShowcaseState.laptopAutoRotateInterval = setInterval(() => {
-                vpRotateLaptopImage();
-            }, 4500);
-        }, 2250);
-    }
-    
-    /**
-     * Rotate to next VP-Showcase phone image
-     */
-    function vpRotatePhoneImage() {
-        VPShowcaseState.phoneCurrentIndex = (VPShowcaseState.phoneCurrentIndex + 1) % VPShowcaseState.phoneImages.length;
-        const nextImage = VPShowcaseState.phoneImages[VPShowcaseState.phoneCurrentIndex];
-        
-        // Find the corresponding thumbnail button
-        const thumbs = safeQueryAll('.vp-showcase-phone-thumbs .vp-showcase-thumb-btn');
-        const nextThumb = thumbs[VPShowcaseState.phoneCurrentIndex];
-        
-        // Add auto-rotating class for visual feedback
-        if (nextThumb) {
-            nextThumb.classList.add('vp-auto-rotating');
-        }
-        
-        // Change the image
-        vpChangePhoneImage(nextImage.src, nextImage.alt, nextThumb);
-    }
-    
-    /**
-     * Rotate to next VP-Showcase laptop image
-     */
-    function vpRotateLaptopImage() {
-        VPShowcaseState.laptopCurrentIndex = (VPShowcaseState.laptopCurrentIndex + 1) % VPShowcaseState.laptopImages.length;
-        const nextImage = VPShowcaseState.laptopImages[VPShowcaseState.laptopCurrentIndex];
-        
-        // Find the corresponding thumbnail button
-        const thumbs = safeQueryAll('.vp-showcase-laptop-thumbs .vp-showcase-thumb-btn');
-        const nextThumb = thumbs[VPShowcaseState.laptopCurrentIndex];
-        
-        // Add auto-rotating class for visual feedback
-        if (nextThumb) {
-            nextThumb.classList.add('vp-auto-rotating');
-        }
-        
-        // Change the image
-        vpChangeLaptopImage(nextImage.src, nextImage.alt, nextThumb);
-    }
-    
-    /**
-     * Stop auto-rotation for VP-Showcase devices
-     * @param {string} device - 'phone', 'laptop', or 'all'
-     */
-    function vpStopAutoRotation(device) {
-        if (device === 'phone' || device === 'all') {
-            if (VPShowcaseState.phoneAutoRotateInterval) {
-                clearInterval(VPShowcaseState.phoneAutoRotateInterval);
-                VPShowcaseState.phoneAutoRotateInterval = null;
-            }
-        }
-        
-        if (device === 'laptop' || device === 'all') {
-            if (VPShowcaseState.laptopAutoRotateInterval) {
-                clearInterval(VPShowcaseState.laptopAutoRotateInterval);
-                VPShowcaseState.laptopAutoRotateInterval = null;
-            }
-        }
-        
-        // Remove auto-rotating class from all thumbnails
-        const allThumbs = safeQueryAll('.vp-showcase-thumb-btn');
-        allThumbs.forEach(thumb => {
-            thumb.classList.remove('vp-auto-rotating');
-        });
-    }
-    
-    /**
-     * Initialize VP-Showcase functionality
-     */
-    function initVPShowcase() {
-        // Check if VP-Showcase section exists
-        const showcaseSection = safeQuery('.vp-showcase-section');
-        if (!showcaseSection) {
-            console.log('📱 VP-Showcase section not found - skipping initialization');
-            return;
-        }
-        
-        // Start auto-rotation after a short delay
-        setTimeout(() => {
-            vpStartAutoRotation();
-        }, 2000);
-        
-        // Add hover listeners to pause rotation on hover
-        const phoneGallery = safeQuery('.vp-showcase-phone-column');
-        const laptopGallery = safeQuery('.vp-showcase-laptop-column');
-        
-        if (phoneGallery) {
-            phoneGallery.addEventListener('mouseenter', () => {
-                vpStopAutoRotation('phone');
-            });
-            
-            phoneGallery.addEventListener('mouseleave', () => {
-                // Resume rotation after 5 seconds
-                setTimeout(() => {
-                    if (!VPShowcaseState.phoneAutoRotateInterval) {
-                        VPShowcaseState.phoneAutoRotateInterval = setInterval(() => {
-                            vpRotatePhoneImage();
-                        }, 4500);
-                    }
-                }, 5000);
-            });
-        }
-        
-        if (laptopGallery) {
-            laptopGallery.addEventListener('mouseenter', () => {
-                vpStopAutoRotation('laptop');
-            });
-            
-            laptopGallery.addEventListener('mouseleave', () => {
-                // Resume rotation after 5 seconds
-                setTimeout(() => {
-                    if (!VPShowcaseState.laptopAutoRotateInterval) {
-                        VPShowcaseState.laptopAutoRotateInterval = setInterval(() => {
-                            vpRotateLaptopImage();
-                        }, 4500);
-                    }
-                }, 5000);
-            });
-        }
-        
-        // Stop rotation when page is not visible
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                vpStopAutoRotation('all');
-            } else {
-                // Resume rotation when page becomes visible again
-                setTimeout(() => {
-                    vpStartAutoRotation();
-                }, 1000);
-            }
-        });
-        
-        // Add keyboard navigation support
-        document.addEventListener('keydown', (e) => {
-            // Only work if showcase section is in viewport
-            const rect = showcaseSection.getBoundingClientRect();
-            const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
-            
-            if (!isInViewport) return;
-            
-            // Arrow key navigation
-            if (e.key === 'ArrowLeft') {
-                // Previous phone image
-                VPShowcaseState.phoneCurrentIndex = (VPShowcaseState.phoneCurrentIndex - 1 + VPShowcaseState.phoneImages.length) % VPShowcaseState.phoneImages.length;
-                const prevImage = VPShowcaseState.phoneImages[VPShowcaseState.phoneCurrentIndex];
-                const thumbs = safeQueryAll('.vp-showcase-phone-thumbs .vp-showcase-thumb-btn');
-                vpChangePhoneImage(prevImage.src, prevImage.alt, thumbs[VPShowcaseState.phoneCurrentIndex]);
-            } else if (e.key === 'ArrowRight') {
-                // Next phone image
-                vpRotatePhoneImage();
-            }
-        });
-        
-        console.log('🔄 VP-Showcase auto-rotation initialized');
-    }
-    
-    /**
-     * VP-Showcase scroll reveal animation
-     */
-    function vpShowcaseScrollReveal() {
-        const reveals = safeQueryAll('.vp-showcase-section .scroll-reveal');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('active');
-                    }, index * 100);
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        reveals.forEach(reveal => {
-            observer.observe(reveal);
-        });
-    }
-    
-    // ============================================
     // MOBILE ALLOCATION CARDS
     // ============================================
     
@@ -684,11 +367,11 @@ const VaultPhoenix = (function() {
     }
     
     // ============================================
-    // LEGACY GALLERY SYSTEM (Keeping for backward compatibility)
+    // GALLERY SYSTEM - Consolidated
     // ============================================
     
     /**
-     * Gallery state management (legacy simple galleries)
+     * Gallery state management
      */
     const GalleryState = {
         currentPhoneIndex: 0,
@@ -716,12 +399,12 @@ const VaultPhoenix = (function() {
     };
     
     /**
-     * Change main phone gallery image (legacy)
+     * Change main phone gallery image
      * @param {string} imageSrc - Image source URL
      * @param {string} title - Image title/alt text
      */
     function changePhoneImage(imageSrc, title) {
-        const mainImg = DOMCache.mainScreenshot || safeQuery('#mainScreenshot');
+        const mainImg = DOMCache.mainScreenshot;
         const thumbs = safeQueryAll('.simple-thumb');
         
         if (!mainImg) return;
@@ -747,12 +430,12 @@ const VaultPhoenix = (function() {
     }
     
     /**
-     * Change main laptop gallery image (legacy)
+     * Change main laptop gallery image
      * @param {string} imageSrc - Image source URL
      * @param {string} title - Image title/alt text
      */
     function changeLaptopImage(imageSrc, title) {
-        const mainImg = DOMCache.mainLaptopScreenshot || safeQuery('#mainLaptopScreenshot');
+        const mainImg = DOMCache.mainLaptopScreenshot;
         const thumbs = safeQueryAll('.simple-thumb-laptop');
         
         if (!mainImg) return;
@@ -775,6 +458,96 @@ const VaultPhoenix = (function() {
                 thumb.classList.add('active');
             }
         });
+    }
+    
+    /**
+     * Auto-rotate phone gallery
+     */
+    function autoRotatePhoneGallery() {
+        const showcaseSection = safeQuery('#showcase');
+        if (!showcaseSection) return;
+        
+        const rect = showcaseSection.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isVisible) {
+            GalleryState.currentPhoneIndex = (GalleryState.currentPhoneIndex + 1) % GalleryState.phoneImages.length;
+            const currentImage = GalleryState.phoneImages[GalleryState.currentPhoneIndex];
+            changePhoneImage(currentImage.src, currentImage.title);
+        }
+    }
+    
+    /**
+     * Auto-rotate laptop gallery
+     */
+    function autoRotateLaptopGallery() {
+        const showcaseSection = safeQuery('#showcase');
+        if (!showcaseSection) return;
+        
+        const rect = showcaseSection.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isVisible) {
+            GalleryState.currentLaptopIndex = (GalleryState.currentLaptopIndex + 1) % GalleryState.laptopImages.length;
+            const currentImage = GalleryState.laptopImages[GalleryState.currentLaptopIndex];
+            changeLaptopImage(currentImage.src, currentImage.title);
+        }
+    }
+    
+    /**
+     * Reset auto-rotate timer
+     * @param {string} galleryType - 'phone' or 'laptop'
+     */
+    function resetAutoRotate(galleryType) {
+        if (galleryType === 'phone') {
+            if (GalleryState.phoneAutoRotateInterval) {
+                clearInterval(GalleryState.phoneAutoRotateInterval);
+            }
+            setTimeout(() => {
+                GalleryState.phoneAutoRotateInterval = setInterval(autoRotatePhoneGallery, 4500);
+            }, 15000);
+        } else if (galleryType === 'laptop') {
+            if (GalleryState.laptopAutoRotateInterval) {
+                clearInterval(GalleryState.laptopAutoRotateInterval);
+            }
+            setTimeout(() => {
+                GalleryState.laptopAutoRotateInterval = setInterval(autoRotateLaptopGallery, 4500);
+            }, 15000);
+        }
+    }
+    
+    /**
+     * Initialize gallery auto-rotation
+     */
+    function initializeGalleryAutoRotation() {
+        // Start auto-rotation after delay
+        setTimeout(() => {
+            GalleryState.phoneAutoRotateInterval = setInterval(autoRotatePhoneGallery, 4500);
+            GalleryState.laptopAutoRotateInterval = setInterval(autoRotateLaptopGallery, 4500);
+        }, 3000);
+        
+        // Event delegation for phone thumbnails
+        document.addEventListener('click', (e) => {
+            const phoneThumb = e.target.closest('.simple-thumb');
+            if (phoneThumb) {
+                const img = phoneThumb.querySelector('img');
+                if (img) {
+                    changePhoneImage(img.src, img.alt);
+                    resetAutoRotate('phone');
+                }
+            }
+            
+            const laptopThumb = e.target.closest('.simple-thumb-laptop');
+            if (laptopThumb) {
+                const img = laptopThumb.querySelector('img');
+                if (img) {
+                    changeLaptopImage(img.src, img.alt);
+                    resetAutoRotate('laptop');
+                }
+            }
+        });
+        
+        console.log('🔄 Gallery auto-rotation initialized with event delegation');
     }
     
     // ============================================
@@ -1362,6 +1135,49 @@ const VaultPhoenix = (function() {
     }
     
     // ============================================
+    // SCROLL PROGRESS INDICATOR
+    // ============================================
+    
+    /**
+     * Create scroll progress indicator
+     */
+    function createScrollProgressIndicator() {
+        // Check if indicator already exists
+        if (DOMCache.scrollProgress) {
+            console.log('📊 Scroll progress already initialized');
+            return;
+        }
+        
+        const indicator = document.createElement('div');
+        indicator.className = 'phoenix-scroll-progress';
+        indicator.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
+            z-index: 9999;
+            width: 0%;
+            transition: width 0.1s ease;
+            box-shadow: 0 2px 5px rgba(215, 51, 39, 0.3);
+            will-change: width;
+        `;
+        document.body.appendChild(indicator);
+        DOMCache.scrollProgress = indicator;
+        
+        const updateProgress = throttle(() => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            indicator.style.width = scrolled + '%';
+        }, 50);
+        
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        
+        console.log('📊 Scroll progress indicator initialized');
+    }
+    
+    // ============================================
     // MOBILE PERFORMANCE OPTIMIZATIONS
     // ============================================
     
@@ -1504,7 +1320,7 @@ const VaultPhoenix = (function() {
      * DOM Content Loaded - Initialize all features
      */
     function initializePage() {
-        console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v6.1 - Fixed Initialization)...');
+        console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v4.0)...');
         
         // Ensure dark background
         document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
@@ -1526,10 +1342,6 @@ const VaultPhoenix = (function() {
         // Initialize viewport handlers
         initializeViewportHandlers();
         
-        // Initialize VP-Showcase section
-        initVPShowcase();
-        vpShowcaseScrollReveal();
-        
         // Initialize features
         initializeMobileAllocationCards();
         preloadCriticalImages();
@@ -1537,8 +1349,7 @@ const VaultPhoenix = (function() {
         initializeEmberCoinImage();
         initializeCryptoBenefits();
         initializeEmberHighlights();
-        
-        // ✅ REMOVED: createScrollProgressIndicator() - Now handled by shared-script.js
+        createScrollProgressIndicator();
         
         // Create floating particles (optimized for device)
         createFloatingParticles();
@@ -1549,6 +1360,7 @@ const VaultPhoenix = (function() {
         
         // Initialize interactions
         initializeCardEffects();
+        initializeGalleryAutoRotation();
         initializeCTAFeedback();
         
         // Initialize easter egg
@@ -1560,9 +1372,7 @@ const VaultPhoenix = (function() {
         }
         
         console.log('🔥🪙 Vault Phoenix initialized successfully!');
-        console.log('✅ Using shared-script.js for: scroll progress, smooth scrolling, countdown timer, mobile menu, navbar transitions, chatbot');
-        console.log('✅ VP-Showcase section integrated with auto-rotation and keyboard navigation');
-        console.log('✅ Removed duplicate scroll progress indicator - using shared implementation');
+        console.log('✅ Using shared-script.js for: smooth scrolling, countdown timer, mobile menu, navbar transitions, chatbot');
     }
     
     /**
@@ -1586,11 +1396,6 @@ const VaultPhoenix = (function() {
             if (DOMCache.mainScreenshot && DOMCache.mainScreenshot.src.includes('images/')) {
                 console.log('✅ Gallery images loaded');
             }
-            
-            const vpShowcase = safeQuery('.vp-showcase-section');
-            if (vpShowcase) {
-                console.log('✅ VP-Showcase section active');
-            }
         }, 500);
         
         // Performance timing
@@ -1608,16 +1413,13 @@ const VaultPhoenix = (function() {
      * Cleanup function for page unload
      */
     function cleanup() {
-        // Clear intervals for legacy galleries
+        // Clear intervals
         if (GalleryState.phoneAutoRotateInterval) {
             clearInterval(GalleryState.phoneAutoRotateInterval);
         }
         if (GalleryState.laptopAutoRotateInterval) {
             clearInterval(GalleryState.laptopAutoRotateInterval);
         }
-        
-        // Clear intervals for VP-Showcase galleries
-        vpStopAutoRotation('all');
         
         // Clear DOM cache
         DOMCache.clear();
@@ -1629,25 +1431,11 @@ const VaultPhoenix = (function() {
     // EVENT LISTENERS - Initialization
     // ============================================
     
-    // ============================================
-    // WAIT FOR SHARED SCRIPT - Critical for proper initialization
-    // ============================================
-    
-    function waitForSharedScript() {
-        if (window.sharedScriptReady) {
-            console.log('✅ Shared script ready - initializing page scripts');
-            initializePage();
-        } else {
-            console.log('⏳ Waiting for shared-script.js to initialize...');
-            setTimeout(waitForSharedScript, 50);
-        }
-    }
-    
-    // Initialize on DOM ready (but wait for shared script)
+    // Initialize on DOM ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', waitForSharedScript);
+        document.addEventListener('DOMContentLoaded', initializePage);
     } else {
-        waitForSharedScript();
+        initializePage();
     }
     
     // Final optimizations on window load
@@ -1661,13 +1449,9 @@ const VaultPhoenix = (function() {
     // ============================================
     
     return {
-        // Gallery functions for global access (legacy)
+        // Gallery functions for global access
         changePhoneImage: changePhoneImage,
         changeLaptopImage: changeLaptopImage,
-        
-        // VP-Showcase functions for global access
-        vpChangePhoneImage: vpChangePhoneImage,
-        vpChangeLaptopImage: vpChangeLaptopImage,
         
         // Utility functions
         DeviceInfo: DeviceInfo,
@@ -1681,13 +1465,9 @@ const VaultPhoenix = (function() {
 // GLOBAL FUNCTION ALIASES (Backward Compatibility)
 // ============================================
 
-// Expose legacy gallery functions globally for onclick handlers
+// Expose gallery functions globally for onclick handlers
 window.changeImage = VaultPhoenix.changePhoneImage;
 window.changeLaptopImage = VaultPhoenix.changeLaptopImage;
-
-// ✅ FIX: Expose VP-Showcase functions globally for onclick handlers
-window.vpChangePhoneImage = VaultPhoenix.vpChangePhoneImage;
-window.vpChangeLaptopImage = VaultPhoenix.vpChangeLaptopImage;
 
 // ============================================
 // CONSOLE MESSAGES
@@ -1696,7 +1476,6 @@ window.vpChangeLaptopImage = VaultPhoenix.vpChangeLaptopImage;
 console.log('%c🔥🪙 VAULT PHOENIX', 'color: #d73327; font-size: 24px; font-weight: bold;');
 console.log('%c🚀 AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 16px; font-weight: bold;');
 console.log('%c📧 contact@vaultphoenix.com', 'color: #374151; font-size: 12px;');
-console.log('%c💡 Senior Engineering - Clean Architecture v6.1', 'color: #22c55e; font-size: 12px; font-weight: bold;');
-console.log('%c✅ Fixed Initialization Sequence - Waits for Shared Script', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
+console.log('%c💡 Senior Engineering - Mobile-First Architecture v4.0', 'color: #22c55e; font-size: 12px; font-weight: bold;');
 console.log('%c✅ Namespace protected, event delegation optimized, memory managed', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
 console.log('Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');

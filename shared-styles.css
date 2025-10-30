@@ -1,102 +1,37 @@
 /* ===================================
-   VAULT PHOENIX - SHARED STYLES v3.0
-   Pure Global Architecture | Zero Overrides | 100% Consistency
-   All pages use these exact same styles with semantic modifiers
+   SHARED STYLES - VAULT PHOENIX
+   Consolidated styles used across multiple pages
+   Complete branding, colors, fonts, navigation, footer, and cookie consent
    =================================== */
 
 /* ===================================
-   PART 1: CSS VARIABLES - COMPLETE SYSTEM
+   CSS VARIABLES - RESPONSIVE SIZING & BRANDING
    =================================== */
 
 :root {
-    /* Brand Colors */
+    /* Icon sizing system */
+    --icon-hero: clamp(100px, 15vw, 140px);
+    --icon-section: clamp(90px, 12vw, 120px);
+    --icon-card: clamp(60px, 8vw, 80px);
+    --icon-inline: clamp(35px, 5vw, 50px);
+    
+    /* Brand colors - Vault Phoenix Theme */
     --ember-dark-red: #d73327;
     --ember-orange: #fb923c;
     --ember-gold: #f0a500;
-    --ember-purple: #8b5cf6;
-    --ember-indigo: #6366f1;
-    --ember-green: #10b981;
-    
-    /* Dark Backgrounds */
     --ember-dark: #0f0f0f;
     --ember-charcoal: #1a1a1a;
     --ember-brown: #2d1810;
     --ember-deep-brown: #451a03;
     --ember-rust: #7c2d12;
     
-    /* Gradients */
-    --ember-gradient-primary: linear-gradient(135deg, #d73327, #fb923c);
-    --ember-gradient-secondary: linear-gradient(135deg, #6366f1, #8b5cf6);
-    --ember-gradient-background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
-    --ember-gradient-card: linear-gradient(135deg, rgba(215, 51, 39, 0.15), rgba(251, 146, 60, 0.1));
-    
-    /* Shadows (5 levels) */
-    --ember-shadow-xs: 0 3px 10px rgba(215, 51, 39, 0.1);
-    --ember-shadow-sm: 0 6px 20px rgba(215, 51, 39, 0.15);
-    --ember-shadow-md: 0 20px 60px rgba(215, 51, 39, 0.25);
-    --ember-shadow-lg: 0 30px 80px rgba(215, 51, 39, 0.35);
-    --ember-shadow-xl: 0 40px 100px rgba(215, 51, 39, 0.45);
-    
-    /* Spacing (8 levels) */
-    --space-xs: 8px;
-    --space-sm: 12px;
-    --space-md: 20px;
-    --space-lg: 30px;
-    --space-xl: 40px;
-    --space-2xl: 60px;
-    --space-3xl: 80px;
-    --space-4xl: 100px;
-    
-    /* Section Spacing (responsive) */
+    /* Spacing variables */
     --section-padding: clamp(60px, 10vw, 120px);
     --container-padding: clamp(20px, 5vw, 40px);
-    
-    /* Z-Index (9 levels) */
-    --z-background: 0;
-    --z-background-elements: 1;
-    --z-content: 10;
-    --z-cards: 20;
-    --z-elevated-cards: 30;
-    --z-sticky: 50;
-    --z-header: 100;
-    --z-modal: 1000;
-    --z-tooltip: 2000;
-    
-    /* Transitions (4 types) */
-    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-smooth: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
-    /* Border Radius (8 levels) */
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
-    --radius-2xl: 25px;
-    --radius-3xl: 30px;
-    --radius-full: 9999px;
-    
-    /* Typography (9 levels) */
-    --font-xs: 0.75rem;
-    --font-sm: 0.875rem;
-    --font-base: 1rem;
-    --font-lg: 1.125rem;
-    --font-xl: 1.25rem;
-    --font-2xl: 1.5rem;
-    --font-3xl: 2rem;
-    --font-4xl: 2.5rem;
-    --font-5xl: 3rem;
-    
-    /* Icon Sizing (4 levels) */
-    --icon-hero: clamp(100px, 15vw, 140px);
-    --icon-section: clamp(90px, 12vw, 120px);
-    --icon-card: clamp(60px, 8vw, 80px);
-    --icon-inline: clamp(35px, 5vw, 50px);
 }
 
 /* ===================================
-   PART 2: GLOBAL RESET & BASE STYLES
+   GLOBAL RESET & BASE STYLES
    =================================== */
 
 * {
@@ -115,11 +50,10 @@ body {
     line-height: 1.6;
     color: #ffffff;
     overflow-x: hidden;
-    background: var(--ember-gradient-background);
 }
 
 /* ===================================
-   PART 3: NAVIGATION - EXACT SAME ON ALL PAGES
+   NAVIGATION BAR - EMBER-THEMED DESIGN
    =================================== */
 
 .navbar {
@@ -133,7 +67,7 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: var(--z-header);
+    z-index: 1000;
     box-shadow: 0 4px 20px rgba(215, 51, 39, 0.3);
     backdrop-filter: blur(20px);
     border-bottom: 2px solid rgba(240, 165, 0, 0.4);
@@ -157,7 +91,7 @@ body {
     align-items: center;
     gap: 1rem;
     text-decoration: none;
-    transition: transform var(--transition-base);
+    transition: transform 0.3s ease;
 }
 
 .logo:hover {
@@ -167,7 +101,7 @@ body {
 .logo-image {
     height: 70px;
     width: auto;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
     filter: drop-shadow(0 0 10px rgba(215, 51, 39, 0.4));
 }
 
@@ -201,7 +135,7 @@ body {
     text-decoration: none;
     font-weight: 600;
     font-size: 1.05rem;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
     position: relative;
     padding: 0.5rem 0;
 }
@@ -236,7 +170,7 @@ body {
     background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
     color: white !important;
     padding: 10px 20px !important;
-    border-radius: var(--radius-2xl) !important;
+    border-radius: 25px !important;
     font-weight: 700 !important;
     font-size: 1.05rem !important;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4) !important;
@@ -244,7 +178,7 @@ body {
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
-    transition: all var(--transition-base) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .ember-link::after {
@@ -264,7 +198,7 @@ body {
     height: 24px;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .ember-link:hover .nav-ember-coin {
@@ -276,7 +210,7 @@ body {
     background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange)) !important;
     color: white !important;
     padding: 10px 20px !important;
-    border-radius: var(--radius-2xl) !important;
+    border-radius: 25px !important;
     font-weight: 700 !important;
     font-size: 1.05rem !important;
     box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4) !important;
@@ -284,7 +218,7 @@ body {
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
-    transition: all var(--transition-base) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .presale-link::after {
@@ -304,7 +238,7 @@ body {
     height: 24px;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .presale-link:hover .nav-presale-icon {
@@ -320,9 +254,9 @@ body {
     font-size: 1.8rem;
     cursor: pointer;
     padding: 0.6rem 1rem;
-    border-radius: var(--radius-md);
+    border-radius: 12px;
     z-index: 1001;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
 }
 
@@ -337,7 +271,7 @@ body {
 }
 
 /* ===================================
-   MOBILE MENU - OVERLAY & PANEL
+   MOBILE MENU - OVERLAY & PANEL STYLES
    =================================== */
 
 .mobile-menu-overlay {
@@ -351,7 +285,7 @@ body {
     backdrop-filter: blur(10px);
     z-index: 998;
     opacity: 0;
-    transition: opacity var(--transition-base);
+    transition: opacity 0.3s ease;
 }
 
 .mobile-menu-overlay.active {
@@ -373,10 +307,10 @@ body {
     z-index: 999;
     padding: 70px 30px 30px 30px;
     overflow-y: auto;
-    transition: right var(--transition-bounce);
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8), 0 8px 30px rgba(215, 51, 39, 0.4);
     border-left: 3px solid rgba(215, 51, 39, 0.5);
-    border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
+    border-radius: 25px 0 0 25px;
     border-top: 3px solid rgba(240, 165, 0, 0.5);
     border-bottom: 3px solid rgba(240, 165, 0, 0.5);
 }
@@ -401,7 +335,7 @@ body {
     height: 45px;
     object-fit: contain;
     filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.4));
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .mobile-menu-flame {
@@ -434,7 +368,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
     z-index: 1001;
 }
@@ -470,9 +404,9 @@ body {
     font-size: 1.3rem;
     padding: 1rem 1.5rem;
     text-align: center;
-    border-radius: var(--radius-md);
+    border-radius: 12px;
     background: rgba(215, 51, 39, 0.05);
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
@@ -522,7 +456,7 @@ body {
     height: 24px;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .mobile-nav-links .ember-link:hover .nav-ember-coin {
@@ -553,7 +487,7 @@ body {
     height: 24px;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .mobile-nav-links .presale-link:hover .nav-presale-icon {
@@ -561,187 +495,271 @@ body {
 }
 
 /* ===================================
-   PART 4: UNIVERSAL HERO SECTION SYSTEM
+   RESPONSIVE NAVIGATION - TABLET & MOBILE
    =================================== */
 
-.hero-section {
-    min-height: 100vh;
-    background: var(--ember-gradient-background);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: calc(110px + 80px) var(--container-padding) 80px;
-    isolation: isolate;
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 1rem 1.5rem;
+        height: 90px;
+    }
+    
+    .logo-image {
+        height: 55px;
+    }
+    
+    .logo span {
+        font-size: 1.5rem;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu-panel {
+        width: 70%;
+    }
 }
 
-/* Hero Variants (semantic modifiers) */
-.hero-section.hero-compact {
-    min-height: 80vh;
-    padding: calc(110px + 60px) var(--container-padding) 60px;
-}
-
-.hero-section.hero-presale {
-    min-height: 90vh;
-    padding: calc(110px + 70px) var(--container-padding) 70px;
-}
-
-.hero-section.hero-full {
-    min-height: 100vh;
-    padding: calc(110px + 80px) var(--container-padding) 80px;
-}
-
-/* Hero Content Container */
-.hero-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    text-align: center;
-    color: white;
-    z-index: var(--z-content);
-    position: relative;
-}
-
-/* Hero Titles */
-.hero-title {
-    font-size: clamp(2.2rem, 5.5vw, 4.5rem);
-    font-weight: 900;
-    margin-bottom: 20px;
-    color: #ffffff;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-}
-
-.hero-subtitle {
-    font-size: clamp(1rem, 2.2vw, 1.5rem);
-    color: rgba(255, 255, 255, 0.95);
-    max-width: 1000px;
-    margin: 0 auto 50px;
-    font-weight: 500;
-    line-height: 1.6;
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+        height: 75px;
+    }
+    
+    .logo-image {
+        height: 45px;
+    }
+    
+    .logo span {
+        font-size: 1.3rem;
+    }
+    
+    .mobile-menu-btn {
+        font-size: 1.5rem;
+        padding: 0.5rem 0.8rem;
+    }
+    
+    .mobile-menu-panel {
+        width: 85%;
+        padding: 60px 20px 20px 20px;
+        top: 90px;
+        height: calc(100vh - 180px);
+        border-radius: 20px 0 0 20px;
+    }
+    
+    .mobile-menu-branding {
+        top: 12px;
+        left: 12px;
+        gap: 8px;
+    }
+    
+    .mobile-menu-coin,
+    .mobile-menu-flame {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .mobile-menu-close {
+        width: 40px;
+        height: 40px;
+        font-size: 1.8rem;
+        top: 12px;
+        right: 12px;
+    }
+    
+    .mobile-nav-links a {
+        font-size: 1.2rem;
+        padding: 0.9rem 1.2rem;
+    }
+    
+    .mobile-nav-links .ember-link,
+    .mobile-nav-links .presale-link {
+        padding: 12px 20px !important;
+        font-size: 1.1rem !important;
+    }
+    
+    .mobile-nav-links .nav-ember-coin,
+    .mobile-nav-links .nav-presale-icon {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 /* ===================================
-   PART 5: UNIVERSAL GRID SYSTEM
+   COOKIE CONSENT BANNER - GDPR COMPLIANT
    =================================== */
 
-.grid-container {
-    display: grid;
-    gap: var(--space-xl);
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* Grid Variants */
-.grid-container.grid-2col {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-container.grid-3col {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.grid-container.grid-4col {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.grid-container.grid-auto {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-
-/* ===================================
-   PART 6: UNIVERSAL CARD SYSTEM
-   =================================== */
-
-.card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-    backdrop-filter: blur(20px);
-    transition: all var(--transition-smooth);
-    position: relative;
-    overflow: hidden;
-    z-index: var(--z-cards);
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
+.cookie-consent-banner {
+    position: fixed;
+    bottom: -100%;
     left: 0;
     right: 0;
-    height: 3px;
-    background: var(--ember-gradient-primary);
+    z-index: 10000;
+    background: linear-gradient(135deg, 
+        rgba(15, 15, 15, 0.98) 0%, 
+        rgba(26, 26, 26, 0.98) 100%
+    );
+    border-top: 3px solid rgba(240, 165, 0, 0.5);
+    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.8), 0 -4px 20px rgba(215, 51, 39, 0.4);
+    backdrop-filter: blur(20px);
+    transition: bottom 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    padding: clamp(20px, 4vw, 30px);
 }
 
-.card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(215, 51, 39, 0.6);
-    box-shadow: var(--ember-shadow-md);
-    z-index: var(--z-elevated-cards);
+.cookie-consent-banner.show {
+    bottom: 0;
 }
 
-/* Card Variants */
-.card.card-secondary::before {
-    background: var(--ember-gradient-secondary);
-}
-
-.card.card-secondary {
-    border-color: rgba(99, 102, 241, 0.3);
-}
-
-.card.card-secondary:hover {
-    border-color: rgba(99, 102, 241, 0.6);
-    box-shadow: 0 25px 60px rgba(99, 102, 241, 0.3);
-}
-
-/* Card Content Structure */
-.card-header {
+.cookie-consent-content {
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: var(--space-md);
-    margin-bottom: var(--space-lg);
+    gap: clamp(20px, 4vw, 40px);
+    flex-wrap: wrap;
 }
 
-.card-icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5));
+.cookie-consent-icon {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     flex-shrink: 0;
+    animation: cookieBounce 2s ease-in-out infinite;
 }
 
-.card-title {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: var(--space-sm);
+@keyframes cookieBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
-.card-description {
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.7;
+.cookie-consent-text {
+    flex: 1;
+    min-width: 280px;
+}
+
+.cookie-consent-text h4 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cookie-consent-text p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+}
+
+.cookie-consent-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cookie-btn {
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+}
+
+.cookie-accept {
+    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
+    color: white;
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+}
+
+.cookie-accept:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(215, 51, 39, 0.6);
+    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
+}
+
+.cookie-decline {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.cookie-decline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+}
+
+.cookie-privacy-link {
+    color: var(--ember-gold);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.cookie-privacy-link:hover {
+    color: var(--ember-orange);
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .cookie-consent-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cookie-consent-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .cookie-btn {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cookie-consent-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cookie-btn {
+        width: 100%;
+    }
+    
+    .cookie-privacy-link {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
 }
 
 /* ===================================
-   PART 7: STANDARDIZED BUTTONS
+   STANDARDIZED BUTTONS
    =================================== */
 
 .cta-button,
 .ember-cta-primary {
     padding: clamp(16px, 4vw, 20px) clamp(30px, 8vw, 45px);
     font-size: clamp(1.1rem, 3vw, 1.3rem);
-    background: var(--ember-gradient-primary);
+    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
     color: white;
     border: none;
-    border-radius: var(--radius-full);
+    border-radius: 50px;
     font-weight: 700;
     cursor: pointer;
-    transition: all var(--transition-base);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     display: inline-block;
     text-align: center;
@@ -786,10 +804,10 @@ body {
     background: transparent;
     color: var(--ember-gold);
     border: 3px solid var(--ember-gold);
-    border-radius: var(--radius-full);
+    border-radius: 50px;
     font-weight: 700;
     cursor: pointer;
-    transition: all var(--transition-base);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     display: inline-block;
     text-align: center;
@@ -805,147 +823,7 @@ body {
 }
 
 /* ===================================
-   PART 8: PERFECT CIRCLE GLOW SYSTEM
-   =================================== */
-
-.main-image-glow {
-    position: relative;
-    display: inline-block;
-    line-height: 0;
-    isolation: isolate;
-}
-
-.main-image-glow img {
-    position: relative;
-    z-index: 2;
-    display: block;
-}
-
-.main-image-glow::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle at center,
-        rgba(240, 165, 0, 0.6) 0%, 
-        rgba(251, 146, 60, 0.4) 30%, 
-        rgba(215, 51, 39, 0.2) 50%, 
-        transparent 70%
-    );
-    border-radius: 50%;
-    filter: blur(20px);
-    opacity: 0.6;
-    z-index: 1;
-    transition: all var(--transition-smooth);
-}
-
-.main-image-glow:hover::before {
-    opacity: 0.85;
-    transform: translate(-50%, -50%) scale(1.08);
-    filter: blur(25px);
-}
-
-/* Glow color variants */
-.main-image-glow.glow-purple::before {
-    background: radial-gradient(
-        circle at center,
-        rgba(99, 102, 241, 0.6) 0%, 
-        rgba(139, 92, 246, 0.4) 30%, 
-        transparent 70%
-    );
-}
-
-.main-image-glow.glow-orange::before {
-    background: radial-gradient(
-        circle at center,
-        rgba(240, 165, 0, 0.6) 0%, 
-        rgba(251, 146, 60, 0.4) 30%, 
-        transparent 70%
-    );
-}
-
-.main-image-glow.glow-red::before {
-    background: radial-gradient(
-        circle at center,
-        rgba(215, 51, 39, 0.6) 0%, 
-        rgba(251, 146, 60, 0.4) 30%, 
-        transparent 70%
-    );
-}
-
-/* ===================================
-   PART 9: SCROLL REVEAL ANIMATIONS
-   =================================== */
-
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.scroll-reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.fade-in {
-    opacity: 0;
-    transform: translateY(40px);
-    animation: fadeInUp 1s ease forwards;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Stagger delays */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-
-/* ===================================
-   PART 10: SECTION TITLES & SUBTITLES
-   =================================== */
-
-.section-title {
-    text-align: center;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    margin-bottom: 25px;
-    color: #ffffff;
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #ffffff 0%, var(--ember-orange) 50%, var(--ember-dark-red) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.section-subtitle {
-    text-align: center;
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-    color: rgba(255, 255, 255, 0.95);
-    margin-bottom: 80px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: 500;
-    line-height: 1.6;
-}
-
-/* ===================================
-   PART 11: UTILITY CLASSES
+   UTILITY CLASSES
    =================================== */
 
 .container {
@@ -973,16 +851,61 @@ body {
 .golden-highlight {
     color: var(--ember-gold);
     font-weight: 700;
+    text-shadow: 0 1px 4px rgba(240, 165, 0, 0.2);
 }
 
-/* Icon Sizing */
-.icon-hero { width: var(--icon-hero); height: var(--icon-hero); }
-.icon-section { width: var(--icon-section); height: var(--icon-section); }
-.icon-card { width: var(--icon-card); height: var(--icon-card); }
-.icon-inline { width: var(--icon-inline); height: var(--icon-inline); }
+.icon-hero {
+    width: var(--icon-hero);
+    height: var(--icon-hero);
+}
+
+.icon-section {
+    width: var(--icon-section);
+    height: var(--icon-section);
+}
+
+.icon-card {
+    width: var(--icon-card);
+    height: var(--icon-card);
+}
+
+.icon-inline {
+    width: var(--icon-inline);
+    height: var(--icon-inline);
+}
 
 /* ===================================
-   PART 12: FOOTER - EXACT SAME ON ALL PAGES
+   SECTION TITLES & SUBTITLES
+   =================================== */
+
+.section-title {
+    text-align: center;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    margin-bottom: 25px;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, var(--ember-orange) 50%, var(--ember-dark-red) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(215, 51, 39, 0.3);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 80px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* ===================================
+   FOOTER STYLES
    =================================== */
 
 .footer {
@@ -1012,7 +935,7 @@ body {
     height: 60px;
     width: auto;
     filter: drop-shadow(0 0 8px rgba(215, 51, 39, 0.4));
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .footer-logo:hover .footer-logo-image {
@@ -1041,7 +964,7 @@ body {
     text-decoration: none;
     font-weight: 600;
     font-size: 1.05rem;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
     position: relative;
 }
 
@@ -1053,7 +976,7 @@ body {
     width: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--ember-dark-red), var(--ember-orange), var(--ember-gold));
-    transition: width var(--transition-base);
+    transition: width 0.3s ease;
 }
 
 .footer-links a:hover::after {
@@ -1069,7 +992,7 @@ body {
     background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
     color: white !important;
     padding: 10px 20px !important;
-    border-radius: var(--radius-2xl) !important;
+    border-radius: 25px !important;
     font-weight: 700 !important;
     font-size: 1.05rem !important;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4) !important;
@@ -1078,7 +1001,7 @@ body {
     display: inline-flex !important;
     align-items: center !important;
     gap: 8px !important;
-    transition: all var(--transition-base) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .footer-ember-link::after {
@@ -1097,7 +1020,7 @@ body {
     height: 24px;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .footer-ember-link:hover .footer-ember-coin {
@@ -1121,7 +1044,7 @@ body {
     border-radius: 50%;
     color: white;
     text-decoration: none;
-    transition: all var(--transition-base);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 25px rgba(215, 51, 39, 0.3);
 }
 
@@ -1134,7 +1057,7 @@ body {
 .social-icon {
     width: 24px;
     height: 24px;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .social-link:hover .social-icon {
@@ -1142,7 +1065,514 @@ body {
 }
 
 /* ===================================
-   PART 13: CHATBOT - EXACT SAME ON ALL PAGES
+   ANIMATIONS
+   =================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes phoenixFloat {
+    0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
+    33% { transform: translateY(-15px) scale(1.02) rotate(1deg); }
+    66% { transform: translateY(8px) scale(0.98) rotate(-1deg); }
+}
+
+@keyframes coinPulse {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUp 1s ease forwards;
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+/* ===================================
+   ACCESSIBILITY & FOCUS STYLES
+   =================================== */
+
+a:focus,
+button:focus {
+    outline: 3px solid var(--ember-gold);
+    outline-offset: 3px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--ember-gold);
+    outline-offset: 3px;
+}
+
+/* ===================================
+   SCROLLBAR STYLING
+   =================================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--ember-charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--ember-dark-red), var(--ember-orange), var(--ember-gold));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--ember-gold), var(--ember-orange), var(--ember-dark-red));
+}
+
+/* ===================================
+   TEXT SELECTION
+   =================================== */
+
+::selection {
+    background: rgba(215, 51, 39, 0.4);
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: rgba(215, 51, 39, 0.4);
+    color: #ffffff;
+}
+
+/* ===================================
+   REDUCED MOTION PREFERENCE
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ===================================
+   PRIVACY POLICY MODAL - COMPLIANCE MODULE
+   =================================== */
+
+.privacy-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 10002;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.privacy-modal-overlay.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.privacy-modal {
+    background: linear-gradient(135deg, 
+        rgba(26, 26, 26, 0.98) 0%, 
+        rgba(45, 24, 16, 0.98) 50%,
+        rgba(26, 26, 26, 0.98) 100%
+    );
+    border-radius: 25px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(215, 51, 39, 0.3);
+    border: 3px solid rgba(215, 51, 39, 0.4);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    margin: auto;
+}
+
+.privacy-modal-overlay.active .privacy-modal {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.privacy-modal-header {
+    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
+    padding: 25px 30px;
+    border-radius: 22px 22px 0 0;
+    border-bottom: 2px solid rgba(240, 165, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.privacy-modal-header h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 900;
+    color: white;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.privacy-modal-icon {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+}
+
+.privacy-modal-close {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.privacy-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg) scale(1.1);
+}
+
+.privacy-modal-body {
+    padding: 30px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+}
+
+.privacy-modal-intro {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(215, 51, 39, 0.1);
+    border-left: 4px solid var(--ember-gold);
+    border-radius: 8px;
+}
+
+.privacy-modal-date {
+    font-size: 0.95rem;
+    color: var(--ember-gold);
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.privacy-key-points {
+    margin-bottom: 30px;
+}
+
+.privacy-key-points h3 {
+    font-size: 1.4rem;
+    color: var(--ember-gold);
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.privacy-points-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.privacy-point {
+    background: rgba(215, 51, 39, 0.08);
+    border: 2px solid rgba(215, 51, 39, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.privacy-point:hover {
+    background: rgba(215, 51, 39, 0.12);
+    border-color: rgba(240, 165, 0, 0.4);
+    transform: translateX(5px);
+}
+
+.privacy-point-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.privacy-point-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.privacy-point-header h4 {
+    font-size: 1.15rem;
+    color: var(--ember-gold);
+    margin: 0;
+    font-weight: 700;
+}
+
+.privacy-point p {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.privacy-contact-section {
+    margin-top: 30px;
+    padding: 25px;
+    background: rgba(240, 165, 0, 0.1);
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 15px;
+}
+
+.privacy-contact-section h4 {
+    font-size: 1.2rem;
+    color: var(--ember-gold);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.privacy-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.privacy-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+.privacy-contact-item a {
+    color: var(--ember-gold);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.privacy-contact-item a:hover {
+    color: var(--ember-orange);
+    text-decoration: underline;
+}
+
+.privacy-modal-footer {
+    padding: 25px 30px;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 2px solid rgba(215, 51, 39, 0.2);
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.privacy-download-btn {
+    padding: 15px 35px;
+    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.privacy-download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.6);
+    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
+}
+
+.privacy-download-icon {
+    font-size: 1.3rem;
+}
+
+.privacy-close-btn {
+    padding: 15px 35px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.privacy-close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+}
+
+/* Privacy Modal Responsive */
+@media (max-width: 768px) {
+    .privacy-modal {
+        max-width: 95%;
+        max-height: 95vh;
+        border-radius: 20px;
+    }
+    
+    .privacy-modal-header {
+        padding: 20px;
+    }
+    
+    .privacy-modal-header h2 {
+        font-size: 1.4rem;
+    }
+    
+    .privacy-modal-close {
+        width: 36px;
+        height: 36px;
+        font-size: 1.3rem;
+    }
+    
+    .privacy-modal-body {
+        padding: 20px;
+    }
+    
+    .privacy-modal-intro {
+        font-size: 1rem;
+        padding: 15px;
+    }
+    
+    .privacy-point {
+        padding: 15px;
+    }
+    
+    .privacy-point-header h4 {
+        font-size: 1.05rem;
+    }
+    
+    .privacy-contact-section {
+        padding: 20px;
+    }
+    
+    .privacy-modal-footer {
+        padding: 20px;
+        flex-direction: column;
+    }
+    
+    .privacy-download-btn,
+    .privacy-close-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .privacy-modal-overlay {
+        padding: 10px;
+    }
+    
+    .privacy-modal {
+        border-radius: 15px;
+    }
+    
+    .privacy-modal-header {
+        padding: 15px;
+    }
+    
+    .privacy-modal-header h2 {
+        font-size: 1.2rem;
+        gap: 8px;
+    }
+    
+    .privacy-modal-icon {
+        font-size: 1.5rem;
+    }
+    
+    .privacy-modal-close {
+        width: 32px;
+        height: 32px;
+        font-size: 1.2rem;
+    }
+    
+    .privacy-modal-body {
+        padding: 15px;
+    }
+    
+    .privacy-key-points h3 {
+        font-size: 1.2rem;
+    }
+    
+    .privacy-point {
+        padding: 12px;
+    }
+    
+    .privacy-point-icon {
+        font-size: 1.3rem;
+    }
+    
+    .privacy-contact-section {
+        padding: 15px;
+    }
+}
+
+/* ===================================
+   PHOENIX AI CHATBOT - FLOATING BUTTON & WINDOW
    =================================== */
 
 /* Floating Chatbot Button */
@@ -1188,7 +1618,7 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 8px 30px rgba(215, 51, 39, 0.5);
-    transition: all var(--transition-base);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 3px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -1203,7 +1633,7 @@ body {
     height: 55px;
     object-fit: contain;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .chatbot-button:hover .chatbot-icon {
@@ -1218,13 +1648,13 @@ body {
     padding: 8px 16px;
     background: rgba(0, 0, 0, 0.9);
     color: white;
-    border-radius: var(--radius-sm);
+    border-radius: 8px;
     font-size: 0.9rem;
     font-weight: 600;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transition: opacity var(--transition-base);
+    transition: opacity 0.3s ease;
 }
 
 .chatbot-button-container:hover .chatbot-tooltip {
@@ -1241,7 +1671,7 @@ body {
     max-height: 550px;
     min-height: 400px;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #451a03 100%);
-    border-radius: var(--radius-2xl);
+    border-radius: 25px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     border: 3px solid rgba(215, 51, 39, 0.4);
     z-index: 9996;
@@ -1321,7 +1751,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .chatbot-close:hover {
@@ -1396,7 +1826,7 @@ body {
     border: 1px solid rgba(215, 51, 39, 0.3);
     color: rgba(255, 255, 255, 0.95);
     padding: 12px 16px;
-    border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 4px;
+    border-radius: 12px 12px 12px 4px;
     line-height: 1.6;
     font-size: 0.95rem;
     word-wrap: break-word;
@@ -1420,7 +1850,7 @@ body {
     border: 1px solid rgba(240, 165, 0, 0.3);
     color: rgba(255, 255, 255, 0.95);
     padding: 12px 16px;
-    border-radius: var(--radius-md) var(--radius-md) 4px var(--radius-md);
+    border-radius: 12px 12px 4px 12px;
     line-height: 1.6;
     font-size: 0.95rem;
     word-wrap: break-word;
@@ -1481,7 +1911,7 @@ body {
     padding: 12px 16px;
     background: rgba(215, 51, 39, 0.15);
     border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 4px;
+    border-radius: 12px 12px 12px 4px;
 }
 
 .typing-dots span {
@@ -1534,10 +1964,10 @@ body {
     padding: 12px 16px;
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
+    border-radius: 15px;
     color: white;
     font-size: 16px;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
     resize: none;
     max-height: 60px;
     overflow-y: auto;
@@ -1545,9 +1975,15 @@ body {
 
 .chatbot-input:focus {
     outline: none;
-    border-color: var(--ember-gold);
+    border-color: rgba(240, 165, 0, 0.8) !important;
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.2);
+    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.3), 0 0 20px rgba(240, 165, 0, 0.4) !important;
+}
+
+/* ✅ FIX: Override global focus-visible for chatbot input to prevent double yellow border */
+.chatbot-input:focus-visible {
+    outline: none;
+    outline-offset: 0;
 }
 
 .chatbot-input::placeholder {
@@ -1558,11 +1994,11 @@ body {
     padding: 12px 20px;
     background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
     border: none;
-    border-radius: var(--radius-lg);
+    border-radius: 15px;
     color: white;
     font-weight: 700;
     cursor: pointer;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
     font-size: 16px;
     height: 60px;
@@ -1579,591 +2015,8 @@ body {
     cursor: not-allowed;
 }
 
-/* ===================================
-   PART 14: COOKIE CONSENT BANNER
-   =================================== */
-
-.cookie-consent-banner {
-    position: fixed;
-    bottom: -100%;
-    left: 0;
-    right: 0;
-    z-index: 10000;
-    background: linear-gradient(135deg, 
-        rgba(15, 15, 15, 0.98) 0%, 
-        rgba(26, 26, 26, 0.98) 100%
-    );
-    border-top: 3px solid rgba(240, 165, 0, 0.5);
-    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.8), 0 -4px 20px rgba(215, 51, 39, 0.4);
-    backdrop-filter: blur(20px);
-    transition: bottom var(--transition-bounce);
-    padding: clamp(20px, 4vw, 30px);
-}
-
-.cookie-consent-banner.show {
-    bottom: 0;
-}
-
-.cookie-consent-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: clamp(20px, 4vw, 40px);
-    flex-wrap: wrap;
-}
-
-.cookie-consent-icon {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    flex-shrink: 0;
-    animation: cookieBounce 2s ease-in-out infinite;
-}
-
-@keyframes cookieBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.cookie-consent-text {
-    flex: 1;
-    min-width: 280px;
-}
-
-.cookie-consent-text h4 {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    margin-bottom: 8px;
-    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.cookie-consent-text p {
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.5;
-}
-
-.cookie-consent-buttons {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.cookie-btn {
-    padding: 12px 28px;
-    font-size: 1rem;
-    font-weight: 700;
-    border: none;
-    border-radius: var(--radius-2xl);
-    cursor: pointer;
-    transition: all var(--transition-base);
-    white-space: nowrap;
-}
-
-.cookie-accept {
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
-    color: white;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
-}
-
-.cookie-accept:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(215, 51, 39, 0.6);
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
-}
-
-.cookie-decline {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.85);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.cookie-decline:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-3px);
-}
-
-.cookie-privacy-link {
-    color: var(--ember-gold);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all var(--transition-base);
-    white-space: nowrap;
-}
-
-.cookie-privacy-link:hover {
-    color: var(--ember-orange);
-    text-decoration: underline;
-}
-
-/* ===================================
-   PART 15: PRIVACY POLICY MODAL
-   =================================== */
-
-.privacy-modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-    z-index: 10002;
-    opacity: 0;
-    transition: opacity var(--transition-base);
-    overflow-y: auto;
-    padding: 20px;
-}
-
-.privacy-modal-overlay.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 1;
-}
-
-.privacy-modal {
-    background: linear-gradient(135deg, 
-        rgba(26, 26, 26, 0.98) 0%, 
-        rgba(45, 24, 16, 0.98) 50%,
-        rgba(26, 26, 26, 0.98) 100%
-    );
-    border-radius: var(--radius-2xl);
-    max-width: 900px;
-    width: 100%;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(215, 51, 39, 0.3);
-    border: 3px solid rgba(215, 51, 39, 0.4);
-    transform: scale(0.9);
-    opacity: 0;
-    transition: all var(--transition-bounce);
-    position: relative;
-    margin: auto;
-}
-
-.privacy-modal-overlay.active .privacy-modal {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.privacy-modal-header {
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
-    padding: 25px 30px;
-    border-radius: 22px 22px 0 0;
-    border-bottom: 2px solid rgba(240, 165, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-}
-
-.privacy-modal-header h2 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: 900;
-    color: white;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.privacy-modal-icon {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-}
-
-.privacy-modal-close {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-base);
-    flex-shrink: 0;
-}
-
-.privacy-modal-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: rotate(90deg) scale(1.1);
-}
-
-.privacy-modal-body {
-    padding: 30px;
-    overflow-y: auto;
-    flex: 1;
-    min-height: 0;
-}
-
-.privacy-modal-intro {
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.7;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: rgba(215, 51, 39, 0.1);
-    border-left: 4px solid var(--ember-gold);
-    border-radius: var(--radius-sm);
-}
-
-.privacy-modal-date {
-    font-size: 0.95rem;
-    color: var(--ember-gold);
-    margin-bottom: 25px;
-    font-weight: 600;
-}
-
-.privacy-key-points {
-    margin-bottom: 30px;
-}
-
-.privacy-key-points h3 {
-    font-size: 1.4rem;
-    color: var(--ember-gold);
-    margin-bottom: 20px;
-    font-weight: 800;
-}
-
-.privacy-points-grid {
-    display: grid;
-    gap: 20px;
-}
-
-.privacy-point {
-    background: rgba(215, 51, 39, 0.08);
-    border: 2px solid rgba(215, 51, 39, 0.2);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    transition: all var(--transition-base);
-}
-
-.privacy-point:hover {
-    background: rgba(215, 51, 39, 0.12);
-    border-color: rgba(240, 165, 0, 0.4);
-    transform: translateX(5px);
-}
-
-.privacy-point-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
-}
-
-.privacy-point-icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-}
-
-.privacy-point-header h4 {
-    font-size: 1.15rem;
-    color: var(--ember-gold);
-    margin: 0;
-    font-weight: 700;
-}
-
-.privacy-point p {
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
-    margin: 0;
-    font-size: 0.95rem;
-}
-
-.privacy-contact-section {
-    margin-top: 30px;
-    padding: 25px;
-    background: rgba(240, 165, 0, 0.1);
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-lg);
-}
-
-.privacy-contact-section h4 {
-    font-size: 1.2rem;
-    color: var(--ember-gold);
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.privacy-contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.privacy-contact-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.95rem;
-}
-
-.privacy-contact-item a {
-    color: var(--ember-gold);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all var(--transition-base);
-}
-
-.privacy-contact-item a:hover {
-    color: var(--ember-orange);
-    text-decoration: underline;
-}
-
-.privacy-modal-footer {
-    padding: 25px 30px;
-    background: rgba(0, 0, 0, 0.3);
-    border-top: 2px solid rgba(215, 51, 39, 0.2);
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-shrink: 0;
-    flex-wrap: wrap;
-}
-
-.privacy-download-btn {
-    padding: 15px 35px;
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
-    color: white;
-    border: none;
-    border-radius: var(--radius-full);
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all var(--transition-base);
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
-
-.privacy-download-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.6);
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
-}
-
-.privacy-download-icon {
-    font-size: 1.3rem;
-}
-
-.privacy-close-btn {
-    padding: 15px 35px;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.85);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radius-full);
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all var(--transition-base);
-}
-
-.privacy-close-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-3px);
-}
-
-/* ===================================
-   PART 16: SCROLL PROGRESS INDICATORS
-   =================================== */
-
-.scroll-progress-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 9999;
-    pointer-events: none;
-}
-
-.scroll-progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, 
-        var(--ember-dark-red) 0%, 
-        var(--ember-orange) 50%, 
-        var(--ember-gold) 100%);
-    transition: width 0.1s ease-out;
-    box-shadow: 0 0 10px rgba(215, 51, 39, 0.6);
-}
-
-/* Vertical Scrollbar Styling */
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--ember-charcoal);
-    border-left: 1px solid rgba(215, 51, 39, 0.2);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, 
-        var(--ember-dark-red) 0%, 
-        var(--ember-orange) 50%, 
-        var(--ember-gold) 100%);
-    border-radius: 6px;
-    border: 2px solid var(--ember-charcoal);
-    box-shadow: 0 0 10px rgba(215, 51, 39, 0.4);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, 
-        var(--ember-gold) 0%, 
-        var(--ember-orange) 50%, 
-        var(--ember-dark-red) 100%);
-    box-shadow: 0 0 15px rgba(240, 165, 0, 0.6);
-}
-
-/* Firefox Scrollbar */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--ember-orange) var(--ember-charcoal);
-}
-
-/* ===================================
-   PART 17: ACCESSIBILITY & FOCUS STYLES
-   =================================== */
-
-a:focus,
-button:focus {
-    outline: 3px solid var(--ember-gold);
-    outline-offset: 3px;
-}
-
-a:focus:not(:focus-visible),
-button:focus:not(:focus-visible) {
-    outline: none;
-}
-
-a:focus-visible,
-button:focus-visible {
-    outline: 3px solid var(--ember-gold);
-    outline-offset: 3px;
-}
-
-/* Override global focus for chatbot input */
-.chatbot-input:focus-visible {
-    outline: none;
-    outline-offset: 0;
-}
-
-/* ===================================
-   PART 18: TEXT SELECTION
-   =================================== */
-
-::selection {
-    background: rgba(215, 51, 39, 0.4);
-    color: #ffffff;
-}
-
-::-moz-selection {
-    background: rgba(215, 51, 39, 0.4);
-    color: #ffffff;
-}
-
-/* ===================================
-   PART 19: REDUCED MOTION PREFERENCE
-   =================================== */
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* ===================================
-   PART 20: RESPONSIVE BREAKPOINTS
-   =================================== */
-
-/* Tablet - 1024px and below */
+/* Chatbot Responsive Design */
 @media (max-width: 1024px) {
-    .navbar {
-        padding: 1rem 1.5rem;
-        height: 90px;
-    }
-    
-    .logo-image {
-        height: 55px;
-    }
-    
-    .logo span {
-        font-size: 1.5rem;
-    }
-    
-    .mobile-menu-btn {
-        display: block;
-    }
-    
-    .nav-links {
-        display: none;
-    }
-    
-    .mobile-menu-panel {
-        width: 70%;
-        top: 90px;
-    }
-    
-    .hero-section {
-        min-height: auto;
-        padding: calc(90px + 60px) 15px 60px;
-    }
-    
-    .hero-section.hero-compact { 
-        padding: calc(90px + 50px) 15px 50px; 
-    }
-    
-    .hero-section.hero-presale { 
-        padding: calc(90px + 55px) 15px 55px; 
-    }
-    
-    .section-subtitle { 
-        margin-bottom: 60px; 
-    }
-    
-    .grid-container.grid-3col,
-    .grid-container.grid-4col {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .card {
-        padding: var(--space-lg);
-    }
-    
-    .card-icon { 
-        width: 50px; 
-        height: 50px; 
-    }
-    
-    .card-title { 
-        font-size: 1.3rem; 
-    }
-    
-    .card-description { 
-        font-size: 0.95rem; 
-    }
-    
     .chatbot-window {
         width: 500px;
         height: calc(100vh - 280px);
@@ -2172,95 +2025,7 @@ button:focus-visible {
     }
 }
 
-/* Mobile - 768px and below */
 @media (max-width: 768px) {
-    .hero-subtitle { 
-        margin-bottom: 35px; 
-    }
-    
-    .grid-container.grid-2col,
-    .grid-container.grid-3col,
-    .grid-container.grid-4col {
-        grid-template-columns: 1fr;
-        gap: var(--space-lg);
-    }
-    
-    .main-image-glow::before {
-        max-width: 100%;
-        max-height: 100%;
-        transform: translate(-50%, -50%) scale(1.0);
-        filter: blur(18px);
-    }
-    
-    .cookie-consent-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .cookie-consent-buttons {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .cookie-btn {
-        flex: 1;
-        min-width: 120px;
-    }
-    
-    .privacy-modal {
-        max-width: 95%;
-        max-height: 95vh;
-        border-radius: var(--radius-xl);
-    }
-    
-    .privacy-modal-header {
-        padding: 20px;
-    }
-    
-    .privacy-modal-header h2 {
-        font-size: 1.4rem;
-    }
-    
-    .privacy-modal-close {
-        width: 36px;
-        height: 36px;
-        font-size: 1.3rem;
-    }
-    
-    .privacy-modal-body {
-        padding: 20px;
-    }
-    
-    .privacy-modal-intro {
-        font-size: 1rem;
-        padding: 15px;
-    }
-    
-    .privacy-point {
-        padding: 15px;
-    }
-    
-    .privacy-point-header h4 {
-        font-size: 1.05rem;
-    }
-    
-    .privacy-contact-section {
-        padding: 20px;
-    }
-    
-    .privacy-modal-footer {
-        padding: 20px;
-        flex-direction: column;
-    }
-    
-    .privacy-download-btn,
-    .privacy-close-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 14px 25px;
-        font-size: 1rem;
-    }
-    
     .chatbot-button-container {
         bottom: 20px;
         right: 20px;
@@ -2325,149 +2090,7 @@ button:focus-visible {
     }
 }
 
-/* Small Mobile - 480px and below */
 @media (max-width: 480px) {
-    .navbar {
-        padding: 0.8rem 1rem;
-        height: 75px;
-    }
-    
-    .logo-image {
-        height: 45px;
-    }
-    
-    .logo span {
-        font-size: 1.3rem;
-    }
-    
-    .mobile-menu-btn {
-        font-size: 1.5rem;
-        padding: 0.5rem 0.8rem;
-    }
-    
-    .mobile-menu-panel {
-        width: 85%;
-        padding: 60px 20px 20px 20px;
-        top: 90px;
-        height: calc(100vh - 180px);
-        border-radius: var(--radius-xl) 0 0 var(--radius-xl);
-    }
-    
-    .mobile-menu-branding {
-        top: 12px;
-        left: 12px;
-        gap: 8px;
-    }
-    
-    .mobile-menu-coin,
-    .mobile-menu-flame {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .mobile-menu-close {
-        width: 40px;
-        height: 40px;
-        font-size: 1.8rem;
-        top: 12px;
-        right: 12px;
-    }
-    
-    .mobile-nav-links a {
-        font-size: 1.2rem;
-        padding: 0.9rem 1.2rem;
-    }
-    
-    .mobile-nav-links .ember-link,
-    .mobile-nav-links .presale-link {
-        padding: 12px 20px !important;
-        font-size: 1.1rem !important;
-    }
-    
-    .mobile-nav-links .nav-ember-coin,
-    .mobile-nav-links .nav-presale-icon {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .hero-section {
-        padding: calc(75px + 50px) 12px 50px;
-    }
-    
-    .hero-section.hero-compact { 
-        padding: calc(75px + 40px) 12px 40px; 
-    }
-    
-    .hero-section.hero-presale { 
-        padding: calc(75px + 45px) 12px 45px; 
-    }
-    
-    .hero-subtitle { 
-        margin-bottom: 25px; 
-    }
-    
-    .cookie-consent-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .cookie-btn {
-        width: 100%;
-    }
-    
-    .cookie-privacy-link {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-    }
-    
-    .privacy-modal-overlay {
-        padding: 10px;
-    }
-    
-    .privacy-modal {
-        border-radius: var(--radius-lg);
-    }
-    
-    .privacy-modal-header {
-        padding: 15px;
-    }
-    
-    .privacy-modal-header h2 {
-        font-size: 1.2rem;
-        gap: 8px;
-    }
-    
-    .privacy-modal-icon {
-        font-size: 1.5rem;
-    }
-    
-    .privacy-modal-close {
-        width: 32px;
-        height: 32px;
-        font-size: 1.2rem;
-    }
-    
-    .privacy-modal-body {
-        padding: 15px;
-    }
-    
-    .privacy-key-points h3 {
-        font-size: 1.2rem;
-    }
-    
-    .privacy-point {
-        padding: 12px;
-    }
-    
-    .privacy-point-icon {
-        font-size: 1.3rem;
-    }
-    
-    .privacy-contact-section {
-        padding: 15px;
-    }
-    
     .chatbot-button {
         width: 70px;
         height: 70px;
@@ -2531,8 +2154,3 @@ button:focus-visible {
         height: 45px;
     }
 }
-
-/* ===================================
-   END OF SHARED STYLES v3.0
-   Pure Global Architecture | Zero Overrides | 100% Consistency
-   =================================== */

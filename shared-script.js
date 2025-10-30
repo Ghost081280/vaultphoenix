@@ -1,5 +1,5 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V2 WITH READY SIGNAL
+// SHARED JAVASCRIPT FOR VAULT PHOENIX
 // ============================================
 // This file contains shared functionality used across multiple pages
 // including mobile navigation, scroll effects, animations, countdown timer, and cookie consent
@@ -7,70 +7,55 @@
 (function() {
     'use strict';
 
-    // ============================================
-    // MOBILE MENU SYSTEM - FIXED FOR NEW HTML STRUCTURE
-    // ============================================
+ // ============================================
+// MOBILE MENU SYSTEM - FIXED FOR NEW HTML STRUCTURE
+// ============================================
 
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+const mobileMenuClose = document.getElementById('mobile-menu-close');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
 
-    // Toggle mobile menu
-    if (mobileMenuBtn && mobileMenu && mobileMenuOverlay) {
-        mobileMenuBtn.addEventListener('click', function() {
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-            mobileMenu.classList.toggle('active');
-            mobileMenuOverlay.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        });
-    }
-
-    // Close mobile menu when clicking close button
-    if (mobileMenuClose && mobileMenu && mobileMenuOverlay) {
-        mobileMenuClose.addEventListener('click', function() {
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            }
-            document.body.style.overflow = '';
-        });
-    }
-
-    // Close mobile menu when clicking overlay
-    if (mobileMenuOverlay && mobileMenu) {
-        mobileMenuOverlay.addEventListener('click', function() {
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            }
-            document.body.style.overflow = '';
-        });
-    }
-
-    // Close mobile menu when clicking mobile nav links
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (mobileMenu && mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-                if (mobileMenuOverlay) {
-                    mobileMenuOverlay.classList.remove('active');
-                }
-                if (mobileMenuBtn) {
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
-                document.body.style.overflow = '';
-            }
-        });
+// Toggle mobile menu
+if (mobileMenuBtn && mobileMenu && mobileMenuOverlay) {
+    mobileMenuBtn.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('active');
+        mobileMenuOverlay.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     });
+}
 
-    // Close mobile menu on escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
+// Close mobile menu when clicking close button
+if (mobileMenuClose && mobileMenu && mobileMenuOverlay) {
+    mobileMenuClose.addEventListener('click', function() {
+        mobileMenu.classList.remove('active');
+        mobileMenuOverlay.classList.remove('active');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
+    });
+}
+
+// Close mobile menu when clicking overlay
+if (mobileMenuOverlay && mobileMenu) {
+    mobileMenuOverlay.addEventListener('click', function() {
+        mobileMenu.classList.remove('active');
+        mobileMenuOverlay.classList.remove('active');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
+    });
+}
+
+// Close mobile menu when clicking mobile nav links
+mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
             mobileMenu.classList.remove('active');
             if (mobileMenuOverlay) {
                 mobileMenuOverlay.classList.remove('active');
@@ -81,6 +66,21 @@
             document.body.style.overflow = '';
         }
     });
+});
+
+// Close mobile menu on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.classList.remove('active');
+        }
+        if (mobileMenuBtn) {
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
+    }
+});
 
     // ============================================
     // NAVBAR SMOOTH SCROLL TRANSITION
@@ -180,53 +180,6 @@
         }
         scrollTimeout = window.requestAnimationFrame(handleNavbarScroll);
     }, { passive: true });
-
-    // ============================================
-    // SCROLL PROGRESS INDICATOR - HORIZONTAL TOP BAR
-    // ============================================
-
-    function initializeScrollProgress() {
-        console.log('📊 Initializing scroll progress indicator...');
-        
-        // Create progress bar elements
-        const progressContainer = document.createElement('div');
-        progressContainer.className = 'scroll-progress-container';
-        
-        const progressBar = document.createElement('div');
-        progressBar.className = 'scroll-progress-bar';
-        
-        progressContainer.appendChild(progressBar);
-        document.body.appendChild(progressContainer);
-        
-        console.log('📊 Progress bar elements created and appended to body');
-        
-        // Update progress on scroll
-        function updateScrollProgress() {
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Calculate scroll percentage
-            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
-            
-            // Update progress bar width
-            progressBar.style.width = scrollPercentage + '%';
-        }
-        
-        // Throttled scroll listener for performance
-        let scrollProgressTimeout;
-        window.addEventListener('scroll', function() {
-            if (scrollProgressTimeout) {
-                window.cancelAnimationFrame(scrollProgressTimeout);
-            }
-            scrollProgressTimeout = window.requestAnimationFrame(updateScrollProgress);
-        }, { passive: true });
-        
-        // Initial update
-        updateScrollProgress();
-        
-        console.log('✅ Scroll progress indicator initialized successfully');
-    }
 
     // ============================================
     // UNIVERSAL COUNTDOWN TIMER
@@ -1087,7 +1040,7 @@ If asked about financial advice, remind users to do their own research and consu
     // ============================================
     
     function init() {
-        console.log('🔥 Vault Phoenix Shared Scripts Initializing...');
+        console.log('🔥 Vault Phoenix Shared Scripts Initialized');
         
         // Initial navbar state
         handleNavbarScroll();
@@ -1097,9 +1050,6 @@ If asked about financial advice, remind users to do their own research and consu
         
         // Initialize privacy policy modal
         initializePrivacyPolicyModal();
-        
-        // Initialize scroll progress indicator
-        initializeScrollProgress();
         
         // Initialize Phoenix AI Chatbot with retry logic
         console.log('🤖 Attempting chatbot initialization...');
@@ -1140,12 +1090,6 @@ If asked about financial advice, remind users to do their own research and consu
         
         // Add loaded class to body
         document.body.classList.add('loaded');
-        
-        console.log('✅ Vault Phoenix Shared Scripts Initialization Complete');
-        
-        // Signal that shared script is fully initialized and ready
-        window.sharedScriptReady = true;
-        console.log('✅ shared-script.js fully initialized and ready - signaling to dependent scripts');
     }
 
     // Initialize when DOM is ready

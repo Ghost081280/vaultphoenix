@@ -1,109 +1,20 @@
-/* ============================================================================
-   EMBER TOKEN PAGE STYLESHEET - PRODUCTION READY V3
-   Navigation & Footer inherited from shared-styles.css
-   Chatbot styles in shared-styles.css
-   All critical fixes applied and verified
-   ============================================================================ */
+/* Ember Token Page Stylesheet - CLEANED VERSION */
+/* Navigation & Footer inherited from shared-styles.css */
+/* Chatbot styles moved to shared-styles.css */
 
-/* ============================================================================
-   CRITICAL FIXES SECTION - VERIFIED AND APPLIED
-   ============================================================================ */
-
-/* Fix #1: Viewport and Horizontal Scroll Prevention - CRITICAL */
-* {
-    max-width: 100vw !important;
+/* CRITICAL: Prevent horizontal scroll on mobile */
+html {
+    overflow-x: hidden;
+    width: 100%;
 }
 
-html, body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    position: relative !important;
+body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
 }
 
-/* Fix #2: Modal Z-Index Hierarchy - CRITICAL */
-.tpa-modal {
-    z-index: 10000 !important;
-}
-
-.chatbot-window {
-    z-index: 9999 !important;
-}
-
-.mobile-menu-overlay {
-    z-index: 9997 !important;
-}
-
-.mobile-menu-panel {
-    z-index: 9998 !important;
-}
-
-/* Fix #3: Presale Button Disabled State - CRITICAL */
-.presale-button:disabled {
-    background: rgba(128, 128, 128, 0.5) !important;
-    cursor: not-allowed !important;
-    box-shadow: none !important;
-    opacity: 0.6 !important;
-    transform: none !important;
-    pointer-events: none !important;
-}
-
-.presale-button:disabled:hover {
-    transform: none !important;
-    box-shadow: none !important;
-    background: rgba(128, 128, 128, 0.5) !important;
-}
-
-.presale-button:disabled img {
-    filter: grayscale(100%) brightness(0.7) !important;
-}
-
-/* Fix #4: Mobile Glow Performance Optimization - CRITICAL */
-@media (max-width: 768px) {
-    .main-image-glow img,
-    .hero-crypto-coin-icon,
-    .ember-token-icon-image {
-        filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6)) !important;
-        animation: none !important;
-    }
-}
-
-/* Fix #5: Countdown Timer Mobile Grid - CRITICAL */
-@media (max-width: 480px) {
-    .countdown-timer {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
-    }
-}
-
-/* Fix #6: Floating Coins Performance - CRITICAL */
-.hero-floating-coins {
-    pointer-events: none !important;
-    z-index: 0 !important;
-}
-
-@media (max-width: 768px) {
-    .hero-floating-coins,
-    .ember-floating-coins {
-        display: none !important;
-    }
-}
-
-/* Fix #7: Section Overflow Prevention - CRITICAL */
-.ember-section {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-}
-
-/* ============================================================================
-   END CRITICAL FIXES
-   ============================================================================ */
-
-/* ============================================================================
-   BASE STYLES & RESET
-   ============================================================================ */
-
+/* RESET AND BASE STYLES */
 * {
     margin: 0;
     padding: 0;
@@ -126,10 +37,7 @@ body {
     font-weight: 700;
 }
 
-/* ============================================================================
-   EMBER HERO SECTION
-   ============================================================================ */
-
+/* EMBER HERO SECTION */
 .ember-hero {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
@@ -164,10 +72,7 @@ body {
     66% { transform: translateY(8px) scale(0.98) rotate(-1deg); }
 }
 
-/* ============================================================================
-   FLOATING COINS - ALWAYS BEHIND CONTENT
-   ============================================================================ */
-
+/* FLOATING COINS - ALWAYS BEHIND CONTENT - CRITICAL FIX */
 .hero-floating-coins {
     position: absolute !important;
     top: 0 !important;
@@ -186,7 +91,7 @@ body {
     animation: heroCoinFloat 6s ease-in-out infinite !important;
 }
 
-/* Enhanced Glow Effect with Pulsing Animation */
+/* RESTORED: Consistent glow effect with pulsing animation */
 .hero-crypto-coin-icon {
     width: clamp(35px, 5vw, 50px) !important;
     height: clamp(35px, 5vw, 50px) !important;
@@ -270,10 +175,7 @@ body {
     }
 }
 
-/* ============================================================================
-   HERO CONTENT
-   ============================================================================ */
-
+/* HERO CONTENT */
 .ember-hero-content {
     max-width: 1400px;
     margin: 0 auto;
@@ -293,7 +195,7 @@ body {
     align-items: center;
 }
 
-/* Enhanced Glow with Pulsing Animation */
+/* RESTORED: Enhanced glow with pulsing animation */
 .ember-token-icon-image {
     width: clamp(120px, 15vw, 160px);
     height: clamp(120px, 15vw, 160px);
@@ -346,10 +248,7 @@ body {
     line-height: 1.4;
 }
 
-/* ============================================================================
-   ENHANCED STATS GRID
-   ============================================================================ */
-
+/* Enhanced Stats Grid */
 .ember-stats-grid-enhanced {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -405,7 +304,7 @@ body {
     opacity: 1;
 }
 
-/* Enhanced Glow for Stat Icons */
+/* RESTORED: Enhanced glow for stat icons */
 .stat-icon {
     font-size: 3.2rem;
     filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.8));
@@ -457,10 +356,6 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ============================================================================
-   HERO CTA BUTTONS
-   ============================================================================ */
-
 .ember-hero-cta {
     display: flex;
     gap: 25px;
@@ -511,10 +406,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* ============================================================================
-   EMBER SECTIONS
-   ============================================================================ */
-
+/* Ember Sections */
 .ember-section {
     padding: 120px 40px;
     position: relative;
@@ -545,7 +437,7 @@ body {
     margin-bottom: 80px;
 }
 
-/* Section Header Icons with Enhanced Glow */
+/* RESTORED: All section header icons with enhanced glow */
 .ember-section-icon {
     font-size: 4.5rem;
     margin-bottom: 25px;
@@ -612,9 +504,9 @@ body {
     font-weight: 500;
 }
 
-/* ============================================================================
-   HOW IT WORKS SECTION - COMPLETE BEAUTIFUL STYLES
-   ============================================================================ */
+/* ============================================
+   HOW IT WORKS SECTION - COMPLETE BEAUTIFUL STYLES + ALL GLOWS
+   ============================================ */
 
 .how-it-works-section {
     background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #374151 100%);
@@ -693,7 +585,7 @@ body {
     box-shadow: 0 30px 60px rgba(34, 197, 94, 0.3);
 }
 
-/* Stakeholder Icons with Double Glow Layer */
+/* COMPLETE GLOW: Stakeholder icons with double glow layer + beautiful styling */
 .stakeholder-icon {
     font-size: 5rem;
     margin-bottom: 20px;
@@ -885,7 +777,7 @@ body {
     }
 }
 
-/* Path Icon with Double Glow Layer */
+/* COMPLETE GLOW: Path icon with double glow layer + beautiful styling */
 .path-icon img {
     width: 75px;
     height: 75px;
@@ -973,9 +865,9 @@ body {
     }
 }
 
-/* ============================================================================
-   VALUE PROPOSITION - PERFECTLY CENTERED WITH GLOWS
-   ============================================================================ */
+/* ============================================
+   VALUE PROPOSITION - PERFECTLY CENTERED WITH GLOWS + BEAUTIFUL STYLES
+   ============================================ */
 
 .value-proposition-enhanced {
     background: rgba(240, 165, 0, 0.1);
@@ -1064,7 +956,7 @@ body {
     opacity: 1;
 }
 
-/* Utility Icon with Enhanced Glow and Pulsing */
+/* COMPLETE GLOW: Utility icon with enhanced glow and pulsing */
 .utility-icon {
     font-size: 3.2rem;
     margin-bottom: 20px;
@@ -1146,10 +1038,291 @@ body {
     text-shadow: 0 0 10px rgba(240, 165, 0, 0.5);
 }
 
-/* ============================================================================
-   WHITE PAPER SECTION
-   ============================================================================ */
+/* ============================================
+   MOBILE RESPONSIVE - BOTH SECTIONS WITH GLOWS
+   ============================================ */
 
+@media (max-width: 768px) {
+    /* How It Works Section - Mobile */
+    .how-it-works-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0;
+    }
+
+    .stakeholder-card {
+        padding: 30px 25px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .stakeholder-icon {
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.7));
+        margin-bottom: 18px;
+    }
+
+    .stakeholder-icon img {
+        width: 140px;
+        height: 140px;
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.7));
+    }
+
+    .stakeholder-card:hover .stakeholder-icon {
+        filter: drop-shadow(0 0 45px rgba(240, 165, 0, 0.95));
+    }
+
+    .stakeholder-card:hover .stakeholder-icon img {
+        filter: drop-shadow(0 0 50px rgba(240, 165, 0, 1));
+    }
+
+    .stakeholder-title {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .flow-step {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .step-number {
+        min-width: 28px;
+        width: 28px;
+        height: 28px;
+        font-size: 0.85rem;
+    }
+
+    .step-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .dual-path {
+        padding: 8px;
+    }
+
+    .path-option {
+        padding: 14px 12px;
+        gap: 12px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .path-icon {
+        width: 65px;
+        min-width: 65px;
+    }
+
+    .path-icon img {
+        width: 65px;
+        height: 65px;
+        filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
+    }
+
+    .path-option:hover .path-icon img {
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.9));
+    }
+
+    .path-text {
+        font-size: 0.9rem;
+    }
+
+    .path-divider {
+        font-size: 1rem;
+        padding: 8px 0;
+    }
+
+    .stakeholder-benefits {
+        padding: 18px;
+    }
+
+    .stakeholder-benefits h4 {
+        font-size: 1.05rem;
+    }
+
+    .stakeholder-benefits li {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    /* Value Proposition Section - Mobile */
+    .value-proposition-enhanced {
+        padding: 30px 20px;
+    }
+
+    .value-proposition-enhanced h3 {
+        font-size: 1.6rem;
+        margin-bottom: 30px;
+    }
+
+    .utility-grid-enhanced {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0;
+    }
+
+    .utility-item-enhanced {
+        padding: 25px 20px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .utility-icon {
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.7));
+    }
+
+    .utility-icon img {
+        width: 75px;
+        height: 75px;
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.7));
+    }
+
+    .utility-item-enhanced:hover .utility-icon {
+        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.9));
+    }
+
+    .utility-item-enhanced:hover .utility-icon img {
+        filter: drop-shadow(0 0 40px rgba(240, 165, 0, 1));
+    }
+
+    .utility-item-enhanced h4 {
+        font-size: 1.15rem;
+    }
+
+    .utility-item-enhanced p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* How It Works Section - Small Mobile */
+    .stakeholder-card {
+        padding: 25px 20px;
+    }
+
+    .stakeholder-icon {
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+        margin-bottom: 15px;
+    }
+
+    .stakeholder-icon img {
+        width: 120px;
+        height: 120px;
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+    }
+
+    .stakeholder-card:hover .stakeholder-icon {
+        filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.9));
+    }
+
+    .stakeholder-card:hover .stakeholder-icon img {
+        filter: drop-shadow(0 0 45px rgba(240, 165, 0, 1));
+    }
+
+    .stakeholder-title {
+        font-size: 1.5rem;
+        margin-bottom: 18px;
+    }
+
+    .flow-step {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .step-number {
+        min-width: 26px;
+        width: 26px;
+        height: 26px;
+        font-size: 0.8rem;
+    }
+
+    .step-text {
+        font-size: 0.85rem;
+    }
+
+    .path-option {
+        padding: 12px 10px;
+    }
+
+    .path-icon {
+        width: 55px;
+        min-width: 55px;
+    }
+
+    .path-icon img {
+        width: 55px;
+        height: 55px;
+        filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6));
+    }
+
+    .path-option:hover .path-icon img {
+        filter: drop-shadow(0 0 22px rgba(240, 165, 0, 0.85));
+    }
+
+    .path-text {
+        font-size: 0.85rem;
+    }
+
+    .path-divider {
+        font-size: 0.95rem;
+    }
+
+    .stakeholder-benefits {
+        padding: 15px;
+    }
+
+    .stakeholder-benefits h4 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .stakeholder-benefits li {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+        padding-left: 18px;
+    }
+
+    /* Value Proposition Section - Small Mobile */
+    .value-proposition-enhanced {
+        padding: 25px 15px;
+    }
+
+    .value-proposition-enhanced h3 {
+        font-size: 1.4rem;
+    }
+
+    .utility-item-enhanced {
+        padding: 20px 15px;
+    }
+
+    .utility-icon {
+        filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
+    }
+
+    .utility-icon img {
+        width: 65px;
+        height: 65px;
+        filter: drop-shadow(0 0 18px rgba(240, 165, 0, 0.6));
+    }
+
+    .utility-item-enhanced:hover .utility-icon {
+        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.85));
+    }
+
+    .utility-item-enhanced:hover .utility-icon img {
+        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 1));
+    }
+
+    .utility-item-enhanced h4 {
+        font-size: 1.1rem;
+    }
+
+    .utility-item-enhanced p {
+        font-size: 0.85rem;
+    }
+}
+
+/* RESTORED: White Paper Section with Beautiful Overview Module */
 .whitepaper-content {
     max-width: 1000px;
     margin: 0 auto;
@@ -1238,7 +1411,7 @@ body {
     margin-bottom: 15px;
 }
 
-/* Inline Icon with Glow */
+/* RESTORED: Inline icon with glow */
 .whitepaper-section h4 img {
     width: 60px;
     height: 60px;
@@ -1296,7 +1469,7 @@ body {
     box-shadow: 0 15px 40px rgba(240, 165, 0, 0.5);
 }
 
-/* Inline Button Icon with Glow */
+/* RESTORED: Inline button icon with glow */
 .download-button img {
     width: 40px;
     height: 40px;
@@ -1308,10 +1481,7 @@ body {
     transition: filter 0.3s ease;
 }
 
-/* ============================================================================
-   ROADMAP SECTION
-   ============================================================================ */
-
+/* Roadmap Section */
 .roadmap-section {
     background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
 }
@@ -1371,7 +1541,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* Inline Roadmap Icon with Glow */
+/* RESTORED: Inline roadmap icon with glow */
 .roadmap-title img {
     width: 60px;
     height: 60px;
@@ -1470,7 +1640,7 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
-/* Trust Icon with Enhanced Glow */
+/* RESTORED: Trust icon with enhanced glow */
 .trust-icon {
     font-size: 4rem;
     margin-bottom: 20px;
@@ -1500,10 +1670,7 @@ body {
     line-height: 1.6;
 }
 
-/* ============================================================================
-   TEAM SECTION
-   ============================================================================ */
-
+/* Team Section */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1658,10 +1825,7 @@ body {
     line-height: 1.6;
 }
 
-/* ============================================================================
-   TOKENOMICS SECTION
-   ============================================================================ */
-
+/* Updated Professional Tokenomics Section */
 .tokenomics-section {
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
 }
@@ -1737,7 +1901,7 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
-/* Incentive Icon with Enhanced Glow */
+/* RESTORED: Incentive icon with enhanced glow */
 .incentive-icon {
     font-size: 4rem;
     margin-bottom: 20px;
@@ -1924,11 +2088,6 @@ body {
     border-bottom: none;
 }
 
-/* Mobile Cards for Tokenomics Table */
-.allocation-cards-mobile {
-    display: none;
-}
-
 @media (max-width: 768px) {
     .table-container {
         background: transparent;
@@ -1940,11 +2099,35 @@ body {
         display: none;
     }
     
+    .allocation-table::after {
+        content: '';
+        display: block;
+    }
+}
+
+.allocation-cards-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .table-container {
+        background: transparent;
+        border: none;
+        overflow-x: visible;
+    }
+    
+    .allocation-cards-mobile {
+        margin-bottom: 60px;
+    }
+    
+    .tokenomics-table {
+        display: none;
+    }
+    
     .allocation-cards-mobile {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        margin-bottom: 60px;
     }
     
     .allocation-card-mobile {
@@ -2072,10 +2255,7 @@ body {
     line-height: 1.6;
 }
 
-/* ============================================================================
-   PRESALE SECTION
-   ============================================================================ */
-
+/* Updated Professional Presale Section */
 .presale-section {
     background: linear-gradient(135deg, #2d1810 0%, #451a03 50%, #7c2d12 100%);
     overflow-x: hidden;
@@ -2130,7 +2310,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* Metric Icon with Enhanced Glow */
+/* RESTORED: Metric icon with enhanced glow */
 .metric-icon {
     font-size: 2.8rem;
     margin-bottom: 10px;
@@ -2488,7 +2668,6 @@ body {
     line-height: 1.4;
 }
 
-/* Presale Form - Sticky Sidebar */
 .presale-form {
     position: sticky;
     top: 140px;
@@ -2644,7 +2823,7 @@ body {
     height: 24px;
 }
 
-/* Presale Promo Image with Enhanced Glow */
+/* RESTORED: EmberTokenPresale.PNG Image with Enhanced Glow */
 .presale-promo-image {
     width: 100%;
     text-align: center;
@@ -2674,7 +2853,27 @@ body {
     transform: translateY(-5px);
 }
 
-/* TPA Section */
+@media (max-width: 768px) {
+    .presale-promo-image {
+        margin-top: 30px;
+    }
+    
+    .presale-promo-image img {
+        width: 100%;
+        border-radius: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .presale-promo-image {
+        margin-top: 25px;
+    }
+    
+    .presale-promo-image img {
+        border-radius: 12px;
+    }
+}
+
 .tpa-section {
     margin-bottom: 25px;
     padding: 20px;
@@ -2837,13 +3036,23 @@ body {
     display: inline-block;
     vertical-align: middle;
     margin-right: 8px;
-    filter: brightness(1.2);
-    transition: filter 0.3s ease;
 }
 
 .presale-button:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
+}
+
+.presale-button:disabled {
+    background: rgba(128, 128, 128, 0.5);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.presale-button:disabled:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 .presale-note {
@@ -2898,7 +3107,7 @@ body {
     box-shadow: 0 20px 40px rgba(240, 165, 0, 0.2);
 }
 
-/* Benefit Icon with Enhanced Glow */
+/* RESTORED: Benefit icon with enhanced glow */
 .benefit-icon {
     font-size: 4rem;
     margin-bottom: 20px;
@@ -2928,10 +3137,7 @@ body {
     line-height: 1.6;
 }
 
-/* ============================================================================
-   ENHANCED CTA PRESALE SECTION
-   ============================================================================ */
-
+/* Enhanced CTA Presale Section */
 .cta-presale-section-enhanced {
     background: linear-gradient(135deg, #0f0f0f 0%, #2d1810 50%, #451a03 100%);
     position: relative;
@@ -2980,7 +3186,7 @@ body {
     animation-delay: 4s;
 }
 
-/* Floating Coin Images with Enhanced Glow */
+/* RESTORED: Floating coin images with enhanced glow */
 .floating-coin-image {
     width: 60px;
     height: 60px;
@@ -3095,7 +3301,7 @@ body {
     flex-shrink: 0;
 }
 
-/* Prop Icon with Enhanced Glow */
+/* RESTORED: Prop icon with enhanced glow */
 .prop-icon-image {
     width: 75px;
     height: 75px;
@@ -3236,22 +3442,17 @@ body {
     margin-right: 6px;
 }
 
-/* ============================================================================
-   TPA MODAL STYLES
-   ============================================================================ */
-
+/* TPA Modal Styles */
 .tpa-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10000 !important;
+    z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
 }
 
 .tpa-modal-overlay {
@@ -3274,7 +3475,6 @@ body {
     max-height: 80vh;
     overflow: hidden;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-    z-index: 10001 !important;
 }
 
 .tpa-modal-header {
@@ -3424,10 +3624,7 @@ body {
     box-shadow: 0 15px 35px rgba(74, 222, 128, 0.5);
 }
 
-/* ============================================================================
-   LEGAL & REGULATORY COMPLIANCE SECTION
-   ============================================================================ */
-
+/* Legal & Regulatory Compliance Section */
 .legal-compliance-section {
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 75%, #451a03 100%);
 }
@@ -3474,7 +3671,7 @@ body {
     margin-bottom: 0;
 }
 
-/* Compliance Grid - 2x2 Square Layout */
+/* COMPLIANCE GRID - 2x2 SQUARE LAYOUT */
 .compliance-grid {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
@@ -3546,9 +3743,22 @@ body {
     color: #f0a500;
 }
 
-/* ============================================================================
-   SOCIAL SHARING SECTION - COMPACT DESIGN
-   ============================================================================ */
+@media (max-width: 968px) {
+    .compliance-grid {
+        grid-template-columns: 1fr !important;
+        max-width: 100% !important;
+    }
+    
+    .compliance-card {
+        min-height: auto;
+    }
+}
+
+/* ==================================================================
+   VAULT PHOENIX - PROFESSIONAL COMPACT SOCIAL SHARING SECTION
+   Matching main.html "Spread the Phoenix Fire" design
+   Theme Colors: #d73327 (Phoenix Red), #f0a500 (Ember Orange)
+   ================================================================== */
 
 .social-sharing-section-compact {
     padding: 80px 40px;
@@ -3613,7 +3823,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* Share Icon with Enhanced Glow */
+/* RESTORED: Share icon with enhanced glow */
 .share-icon-compact {
     width: 85px;
     height: 85px;
@@ -3742,21 +3952,76 @@ body {
     box-shadow: 0 15px 40px rgba(251, 146, 60, 0.5);
 }
 
-/* ============================================================================
-   MOBILE RESPONSIVE DESIGN - COMPREHENSIVE FIXES
-   ============================================================================ */
-
-@media (max-width: 968px) {
-    .compliance-grid {
-        grid-template-columns: 1fr !important;
-        max-width: 100% !important;
+@media (max-width: 768px) {
+    .social-sharing-section-compact {
+        padding: 60px 20px;
     }
     
-    .compliance-card {
-        min-height: auto;
+    .social-sharing-content-compact {
+        padding: 40px 25px;
+        border-radius: 20px;
+    }
+    
+    .social-sharing-header-compact {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .share-icon-compact {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .share-text-compact h3 {
+        font-size: 1.6rem;
+    }
+    
+    .share-text-compact p {
+        font-size: 1rem;
+    }
+    
+    .social-sharing-buttons-compact {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .social-share-button-compact {
+        padding: 16px 24px;
+        font-size: 0.95rem;
     }
 }
 
+@media (max-width: 480px) {
+    .social-sharing-section-compact {
+        padding: 50px 15px;
+    }
+    
+    .social-sharing-content-compact {
+        padding: 30px 20px;
+    }
+    
+    .share-icon-compact {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .share-text-compact h3 {
+        font-size: 1.4rem;
+    }
+    
+    .share-text-compact p {
+        font-size: 0.95rem;
+    }
+    
+    .social-share-button-compact {
+        padding: 14px 20px;
+        font-size: 0.9rem;
+        gap: 10px;
+    }
+}
+
+/* Mobile Responsive Design - COMPREHENSIVE FIXES */
 @media (max-width: 768px) {
     html, body {
         overflow-x: hidden !important;
@@ -3838,6 +4103,13 @@ body {
         font-size: 1.1rem;
     }
 
+    .hero-crypto-coin-icon {
+        width: clamp(25px, 4vw, 35px) !important;
+        height: clamp(25px, 4vw, 35px) !important;
+        opacity: 0.5 !important;
+        filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.7)) !important;
+    }
+
     .presale-content {
         grid-template-columns: 1fr !important;
         gap: 40px;
@@ -3865,6 +4137,11 @@ body {
     .metrics-grid-presale {
         grid-template-columns: 1fr !important;
         gap: 15px;
+    }
+    
+    .countdown-timer {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px;
     }
     
     .time-unit {
@@ -3924,6 +4201,11 @@ body {
 
     .stat-divider {
         display: none;
+    }
+
+    .compliance-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
 
     .ember-section-icon img {
@@ -3992,56 +4274,16 @@ body {
         grid-template-columns: 1fr;
         gap: 10px;
     }
-    
-    .presale-promo-image {
-        margin-top: 30px;
-    }
-    
-    .presale-promo-image img {
-        width: 100%;
-        border-radius: 15px;
-    }
-    
-    .social-sharing-section-compact {
-        padding: 60px 20px;
-    }
-    
-    .social-sharing-content-compact {
-        padding: 40px 25px;
-        border-radius: 20px;
-    }
-    
-    .social-sharing-header-compact {
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 30px;
-    }
-    
-    .share-icon-compact {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .share-text-compact h3 {
-        font-size: 1.6rem;
-    }
-    
-    .share-text-compact p {
-        font-size: 1rem;
-    }
-    
-    .social-sharing-buttons-compact {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .social-share-button-compact {
-        padding: 16px 24px;
-        font-size: 0.95rem;
-    }
 }
 
 @media (max-width: 480px) {
+    .hero-crypto-coin-icon {
+        width: clamp(20px, 3vw, 30px) !important;
+        height: clamp(20px, 3vw, 30px) !important;
+        opacity: 0.4 !important;
+        filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6)) !important;
+    }
+
     .ember-token-icon-image {
         width: clamp(80px, 25vw, 120px);
         height: clamp(80px, 25vw, 120px);
@@ -4116,46 +4358,12 @@ body {
         height: 50px;
     }
     
-    .presale-promo-image {
-        margin-top: 25px;
-    }
-    
-    .presale-promo-image img {
-        border-radius: 12px;
-    }
-    
-    .social-sharing-section-compact {
-        padding: 50px 15px;
-    }
-    
-    .social-sharing-content-compact {
-        padding: 30px 20px;
-    }
-    
-    .share-icon-compact {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .share-text-compact h3 {
-        font-size: 1.4rem;
-    }
-    
-    .share-text-compact p {
-        font-size: 0.95rem;
-    }
-    
-    .social-share-button-compact {
-        padding: 14px 20px;
-        font-size: 0.9rem;
-        gap: 10px;
+    .countdown-timer {
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
-/* ============================================================================
-   SCROLL ANIMATIONS
-   ============================================================================ */
-
+/* Scroll Animations */
 .scroll-reveal {
     opacity: 0;
     transform: translateY(60px);
@@ -4170,10 +4378,6 @@ body {
 html {
     scroll-behavior: smooth;
 }
-
-/* ============================================================================
-   ACCESSIBILITY
-   ============================================================================ */
 
 @media (prefers-contrast: high) {
     .ember-hero-title,
@@ -4202,10 +4406,6 @@ html {
     }
 }
 
-/* ============================================================================
-   SCROLLBAR STYLING
-   ============================================================================ */
-
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -4223,10 +4423,6 @@ html {
     background: linear-gradient(180deg, #fb923c, #f0a500);
 }
 
-/* ============================================================================
-   TEXT SELECTION
-   ============================================================================ */
-
 ::selection {
     background: rgba(240, 165, 0, 0.3);
     color: #ffffff;
@@ -4236,7 +4432,3 @@ html {
     background: rgba(240, 165, 0, 0.3);
     color: #ffffff;
 }
-
-/* ============================================================================
-   END OF EMBER STYLES - PRODUCTION READY V3
-   ============================================================================ */
