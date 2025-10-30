@@ -7,55 +7,70 @@
 (function() {
     'use strict';
 
- // ============================================
-// MOBILE MENU SYSTEM - FIXED FOR NEW HTML STRUCTURE
-// ============================================
+    // ============================================
+    // MOBILE MENU SYSTEM - FIXED FOR NEW HTML STRUCTURE
+    // ============================================
 
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-const mobileMenuClose = document.getElementById('mobile-menu-close');
-const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
 
-// Toggle mobile menu
-if (mobileMenuBtn && mobileMenu && mobileMenuOverlay) {
-    mobileMenuBtn.addEventListener('click', function() {
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !isExpanded);
-        mobileMenu.classList.toggle('active');
-        mobileMenuOverlay.classList.toggle('active');
-        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    // Toggle mobile menu
+    if (mobileMenuBtn && mobileMenu && mobileMenuOverlay) {
+        mobileMenuBtn.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+
+    // Close mobile menu when clicking close button
+    if (mobileMenuClose && mobileMenu && mobileMenuOverlay) {
+        mobileMenuClose.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close mobile menu when clicking overlay
+    if (mobileMenuOverlay && mobileMenu) {
+        mobileMenuOverlay.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close mobile menu when clicking mobile nav links
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                if (mobileMenuOverlay) {
+                    mobileMenuOverlay.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+                document.body.style.overflow = '';
+            }
+        });
     });
-}
 
-// Close mobile menu when clicking close button
-if (mobileMenuClose && mobileMenu && mobileMenuOverlay) {
-    mobileMenuClose.addEventListener('click', function() {
-        mobileMenu.classList.remove('active');
-        mobileMenuOverlay.classList.remove('active');
-        if (mobileMenuBtn) {
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        }
-        document.body.style.overflow = '';
-    });
-}
-
-// Close mobile menu when clicking overlay
-if (mobileMenuOverlay && mobileMenu) {
-    mobileMenuOverlay.addEventListener('click', function() {
-        mobileMenu.classList.remove('active');
-        mobileMenuOverlay.classList.remove('active');
-        if (mobileMenuBtn) {
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        }
-        document.body.style.overflow = '';
-    });
-}
-
-// Close mobile menu when clicking mobile nav links
-mobileNavLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        if (mobileMenu && mobileMenu.classList.contains('active')) {
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
             mobileMenu.classList.remove('active');
             if (mobileMenuOverlay) {
                 mobileMenuOverlay.classList.remove('active');
@@ -66,21 +81,6 @@ mobileNavLinks.forEach(link => {
             document.body.style.overflow = '';
         }
     });
-});
-
-// Close mobile menu on escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
-        mobileMenu.classList.remove('active');
-        if (mobileMenuOverlay) {
-            mobileMenuOverlay.classList.remove('active');
-        }
-        if (mobileMenuBtn) {
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        }
-        document.body.style.overflow = '';
-    }
-});
 
     // ============================================
     // NAVBAR SMOOTH SCROLL TRANSITION
@@ -1092,14 +1092,14 @@ If asked about financial advice, remind users to do their own research and consu
         // Initial navbar state
         handleNavbarScroll();
         
-        // Initialize scroll progress indicator
-        initializeScrollProgress();
-        
         // Initialize cookie consent banner
         initializeCookieConsent();
         
         // Initialize privacy policy modal
         initializePrivacyPolicyModal();
+        
+        // Initialize scroll progress indicator
+        initializeScrollProgress();
         
         // Initialize Phoenix AI Chatbot with retry logic
         console.log('🤖 Attempting chatbot initialization...');
@@ -1144,7 +1144,6 @@ If asked about financial advice, remind users to do their own research and consu
         console.log('✅ Vault Phoenix Shared Scripts Initialization Complete');
         
         // Signal that shared script is fully initialized and ready
-        // THIS IS THE CRITICAL FIX - moved INSIDE init() to execute AFTER initialization completes
         window.sharedScriptReady = true;
         console.log('✅ shared-script.js fully initialized and ready - signaling to dependent scripts');
     }
