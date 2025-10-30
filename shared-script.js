@@ -1142,6 +1142,11 @@ If asked about financial advice, remind users to do their own research and consu
         document.body.classList.add('loaded');
         
         console.log('✅ Vault Phoenix Shared Scripts Initialization Complete');
+        
+        // Signal that shared script is fully initialized and ready
+        // THIS IS THE CRITICAL FIX - moved INSIDE init() to execute AFTER initialization completes
+        window.sharedScriptReady = true;
+        console.log('✅ shared-script.js fully initialized and ready - signaling to dependent scripts');
     }
 
     // Initialize when DOM is ready
@@ -1150,14 +1155,5 @@ If asked about financial advice, remind users to do their own research and consu
     } else {
         init();
     }
-
-    // ============================================
-    // SIGNAL SCRIPT READY TO OTHER SCRIPTS
-    // ============================================
-    
-    // Signal that shared script is fully loaded and ready
-    // This must be OUTSIDE the init() function so it executes immediately
-    window.sharedScriptReady = true;
-    console.log('✅ shared-script.js fully loaded and ready - signaling to other scripts');
 
 })();
