@@ -1214,8 +1214,6 @@
 
     <!-- ===================================
          FOOTER (Controlled by shared-styles.css)
-         Structure: .footer > .footer-content (logo + links) + .footer-links
-         Note: Add footer HTML here if needed, or generate via JS
          =================================== -->
     <footer class="footer">
         <div class="footer-content">
@@ -1240,7 +1238,8 @@
 
     <!-- ===================================
          CHATBOT (Controlled by shared-styles.css & shared-script.js)
-         Automatically initialized by shared-script.js
+         NOTE: Chatbot is initialized automatically by shared-script.js
+         This HTML structure is required for the chatbot to work
          =================================== -->
     <div class="chatbot-button-container">
         <div class="chatbot-glow"></div>
@@ -1262,24 +1261,7 @@
             <button class="chatbot-close" id="chatbot-close" aria-label="Close chat">×</button>
         </div>
         <div class="chatbot-body" id="chatbot-body">
-            <div class="chat-message assistant-message">
-                <div class="message-content">
-                    <div class="message-avatar">
-                        <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
-                    </div>
-                    <div class="message-text">
-                        <strong>Welcome to Vault Phoenix!</strong><br>
-                        I'm Phoenix AI, your intelligent assistant for AR crypto gaming. I can help you with:
-                        <ul>
-                            <li>Understanding GPS & Beacon technology</li>
-                            <li>Choosing the right solution for your needs</li>
-                            <li>Exploring $Ember Token details</li>
-                            <li>Campaign strategy and revenue potential</li>
-                        </ul>
-                        What would you like to know?
-                    </div>
-                </div>
-            </div>
+            <!-- Messages will be added here by shared-script.js -->
         </div>
         <div class="chatbot-footer">
             <textarea class="chatbot-input" id="chatbot-input" placeholder="Ask me anything about Vault Phoenix..." rows="1"></textarea>
@@ -1288,71 +1270,10 @@
     </div>
 
     <!-- ===================================
-         COOKIE CONSENT (Controlled by shared-styles.css & shared-script.js)
-         Automatically initialized by shared-script.js
+         COOKIE CONSENT & PRIVACY MODAL
+         NOTE: These are created dynamically by shared-script.js
+         DO NOT add HTML for these - the script creates them automatically
          =================================== -->
-    <div class="cookie-consent-banner" id="cookie-consent">
-        <div class="cookie-consent-content">
-            <div class="cookie-consent-text">
-                <p class="cookie-title">🍪 We value your privacy</p>
-                <p class="cookie-description">We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
-            </div>
-            <div class="cookie-consent-buttons">
-                <button class="cookie-btn cookie-accept" id="cookie-accept">Accept All</button>
-                <button class="cookie-btn cookie-reject" id="cookie-reject">Reject All</button>
-                <button class="cookie-btn cookie-settings" id="cookie-privacy-link">Privacy Policy</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Privacy Policy Modal (Controlled by shared-styles.css & shared-script.js) -->
-    <div class="privacy-modal-overlay" id="privacy-modal-overlay">
-        <div class="privacy-modal" id="privacy-modal">
-            <div class="privacy-modal-header">
-                <h2>
-                    <span class="privacy-modal-icon">🔒</span>
-                    Privacy Policy
-                </h2>
-                <button class="privacy-modal-close" id="privacy-modal-close" aria-label="Close privacy policy">×</button>
-            </div>
-            <div class="privacy-modal-body">
-                <div class="privacy-modal-intro">
-                    <p><strong>Last Updated:</strong> October 30, 2025</p>
-                    <p>Vault Phoenix ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AR crypto gaming platform.</p>
-                </div>
-                <div class="privacy-key-points">
-                    <h3>Key Privacy Points</h3>
-                    <div class="privacy-points-grid">
-                        <div class="privacy-point">
-                            <div class="privacy-point-header">
-                                <span class="privacy-point-icon">📊</span>
-                                <h4>Information We Collect</h4>
-                            </div>
-                            <p>We collect location data (GPS coordinates), device information, wallet addresses, and usage analytics to provide our AR gaming services.</p>
-                        </div>
-                        <div class="privacy-point">
-                            <div class="privacy-point-header">
-                                <span class="privacy-point-icon">🔐</span>
-                                <h4>How We Use Your Data</h4>
-                            </div>
-                            <p>Your data enables coin placement verification, campaign analytics, reward distribution, and platform improvement.</p>
-                        </div>
-                        <div class="privacy-point">
-                            <div class="privacy-point-header">
-                                <span class="privacy-point-icon">🛡️</span>
-                                <h4>Data Security</h4>
-                            </div>
-                            <p>We implement industry-standard encryption, secure cloud storage, and regular security audits.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="privacy-modal-footer">
-                <button class="privacy-download-btn">📄 Download Full Privacy Policy</button>
-                <button class="privacy-close-btn" id="privacy-close-btn">Close</button>
-            </div>
-        </div>
-    </div>
 
     <!-- ===================================
          SCRIPTS
