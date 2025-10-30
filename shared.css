@@ -1,2584 +1,1164 @@
-/* ===================================
-   VAULT PHOENIX - SHARED STYLES v4.0
-   OPTIMIZED FOR MAXIMUM PERFORMANCE & MOBILE RESPONSIVENESS
-   Pure Global Architecture | Zero Overrides | 100% Consistency
-   All pages use these exact same styles with semantic modifiers
-   
-   CRITICAL: These shared styles ALWAYS take precedence
-   No other CSS, JS, or HTML file can override these styles
-   =================================== */
-
-/* ===================================
-   PART 1: CSS VARIABLES - COMPLETE SYSTEM
-   =================================== */
-
-:root {
-    /* Brand Colors */
-    --ember-dark-red: #d73327;
-    --ember-orange: #fb923c;
-    --ember-gold: #f0a500;
-    --ember-purple: #8b5cf6;
-    --ember-indigo: #6366f1;
-    --ember-green: #10b981;
-    
-    /* Dark Backgrounds */
-    --ember-dark: #0f0f0f;
-    --ember-charcoal: #1a1a1a;
-    --ember-brown: #2d1810;
-    --ember-deep-brown: #451a03;
-    --ember-rust: #7c2d12;
-    
-    /* Gradients */
-    --ember-gradient-primary: linear-gradient(135deg, #d73327, #fb923c);
-    --ember-gradient-secondary: linear-gradient(135deg, #6366f1, #8b5cf6);
-    --ember-gradient-background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%);
-    --ember-gradient-card: linear-gradient(135deg, rgba(215, 51, 39, 0.15), rgba(251, 146, 60, 0.1));
-    
-    /* Shadows (5 levels) */
-    --ember-shadow-xs: 0 3px 10px rgba(215, 51, 39, 0.1);
-    --ember-shadow-sm: 0 6px 20px rgba(215, 51, 39, 0.15);
-    --ember-shadow-md: 0 20px 60px rgba(215, 51, 39, 0.25);
-    --ember-shadow-lg: 0 30px 80px rgba(215, 51, 39, 0.35);
-    --ember-shadow-xl: 0 40px 100px rgba(215, 51, 39, 0.45);
-    
-    /* Spacing (8 levels) */
-    --space-xs: 8px;
-    --space-sm: 12px;
-    --space-md: 20px;
-    --space-lg: 30px;
-    --space-xl: 40px;
-    --space-2xl: 60px;
-    --space-3xl: 80px;
-    --space-4xl: 100px;
-    
-    /* Section Spacing (responsive) */
-    --section-padding: clamp(60px, 10vw, 120px);
-    --container-padding: clamp(20px, 5vw, 40px);
-    
-    /* Z-Index (9 levels) */
-    --z-background: 0;
-    --z-background-elements: 1;
-    --z-content: 10;
-    --z-cards: 20;
-    --z-elevated-cards: 30;
-    --z-sticky: 50;
-    --z-header: 100;
-    --z-modal: 1000;
-    --z-tooltip: 2000;
-    
-    /* Transitions (4 types) */
-    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-smooth: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
-    /* Border Radius (8 levels) */
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
-    --radius-2xl: 25px;
-    --radius-3xl: 30px;
-    --radius-full: 9999px;
-    
-    /* Typography (9 levels) */
-    --font-xs: 0.75rem;
-    --font-sm: 0.875rem;
-    --font-base: 1rem;
-    --font-lg: 1.125rem;
-    --font-xl: 1.25rem;
-    --font-2xl: 1.5rem;
-    --font-3xl: 2rem;
-    --font-4xl: 2.5rem;
-    --font-5xl: 3rem;
-    
-    /* Icon Sizing (4 levels) */
-    --icon-hero: clamp(100px, 15vw, 140px);
-    --icon-section: clamp(90px, 12vw, 120px);
-    --icon-card: clamp(60px, 8vw, 80px);
-    --icon-inline: clamp(35px, 5vw, 50px);
-}
-
-/* ===================================
-   PART 2: GLOBAL RESET & BASE STYLES
-   =================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    background: var(--ember-dark);
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    line-height: 1.6;
-    color: #ffffff;
-    overflow-x: hidden;
-    background: var(--ember-gradient-background);
-}
-
-/* ===================================
-   PART 3: NAVIGATION - EXACT SAME ON ALL PAGES
-   =================================== */
-
-.navbar {
-    background: linear-gradient(135deg, 
-        rgba(45, 24, 16, 0.95) 0%,
-        rgba(69, 26, 3, 0.92) 30%,
-        rgba(124, 45, 18, 0.90) 60%,
-        rgba(215, 51, 39, 0.85) 100%
-    );
-    padding: 1.2rem 2.5rem;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: var(--z-header);
-    box-shadow: 0 4px 20px rgba(215, 51, 39, 0.3);
-    backdrop-filter: blur(20px);
-    border-bottom: 2px solid rgba(240, 165, 0, 0.4);
-    height: 110px;
-    display: flex;
-    align-items: center;
-}
-
-.nav-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    transition: transform var(--transition-base);
-}
-
-.logo:hover {
-    transform: translateY(-3px);
-}
-
-.logo-image {
-    height: 70px;
-    width: auto;
-    transition: all var(--transition-base);
-    filter: drop-shadow(0 0 10px rgba(215, 51, 39, 0.4));
-}
-
-.logo:hover .logo-image {
-    filter: drop-shadow(0 0 15px rgba(215, 51, 39, 0.6));
-    transform: scale(1.05);
-}
-
-.logo span {
-    font-size: 1.8rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.02em;
-    text-shadow: 0 2px 10px rgba(215, 51, 39, 0.3);
-}
-
-.nav-links {
-    display: flex;
-    gap: 2.5rem;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links a {
-    color: rgba(255, 255, 255, 0.95);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.05rem;
-    transition: all var(--transition-base);
-    position: relative;
-    padding: 0.5rem 0;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--ember-dark-red), var(--ember-orange), var(--ember-gold));
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 2px;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-.nav-links a:hover {
-    color: var(--ember-gold);
-    transform: translateY(-2px);
-}
-
-.nav-links a:focus {
-    outline: none;
-}
-
-/* Ember Link Button in Navigation */
-.ember-link {
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
-    color: white !important;
-    padding: 10px 20px !important;
-    border-radius: var(--radius-2xl) !important;
-    font-weight: 700 !important;
-    font-size: 1.05rem !important;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4) !important;
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    transition: all var(--transition-base) !important;
-}
-
-.ember-link::after {
-    display: none !important;
-}
-
-.ember-link:hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 6px 25px rgba(215, 51, 39, 0.6) !important;
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold)) !important;
-    color: white !important;
-    border-color: rgba(255, 255, 255, 0.4) !important;
-}
-
-.nav-ember-coin {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
-}
-
-.ember-link:hover .nav-ember-coin {
-    transform: scale(1.15) rotate(10deg);
-}
-
-/* Presale Link Button in Navigation */
-.presale-link {
-    background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange)) !important;
-    color: white !important;
-    padding: 10px 20px !important;
-    border-radius: var(--radius-2xl) !important;
-    font-weight: 700 !important;
-    font-size: 1.05rem !important;
-    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4) !important;
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    transition: all var(--transition-base) !important;
-}
-
-.presale-link::after {
-    display: none !important;
-}
-
-.presale-link:hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 6px 25px rgba(240, 165, 0, 0.6) !important;
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-dark-red)) !important;
-    color: white !important;
-    border-color: rgba(255, 255, 255, 0.4) !important;
-}
-
-.nav-presale-icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
-}
-
-.presale-link:hover .nav-presale-icon {
-    transform: scale(1.15) rotate(10deg);
-}
-
-/* Mobile Menu Button */
-.mobile-menu-btn {
-    display: none;
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    font-size: 1.8rem;
-    cursor: pointer;
-    padding: 0.6rem 1rem;
-    border-radius: var(--radius-md);
-    z-index: 1001;
-    transition: all var(--transition-base);
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
-}
-
-.mobile-menu-btn:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
-    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.6);
-}
-
-.mobile-menu-btn:focus {
-    outline: none;
-}
-
-/* ===================================
-   MOBILE MENU - OVERLAY & PANEL
-   =================================== */
-
-.mobile-menu-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    z-index: 998;
-    opacity: 0;
-    transition: opacity var(--transition-base);
-}
-
-.mobile-menu-overlay.active {
-    display: block;
-    opacity: 1;
-}
-
-.mobile-menu-panel {
-    position: fixed;
-    top: 100px;
-    right: -100%;
-    height: calc(100vh - 200px);
-    width: 85%;
-    max-width: 400px;
-    background: linear-gradient(135deg, 
-        rgba(15, 15, 15, 0.98) 0%, 
-        rgba(26, 26, 26, 0.98) 100%
-    );
-    z-index: 999;
-    padding: 70px 30px 30px 30px;
-    overflow-y: auto;
-    transition: right var(--transition-bounce);
-    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8), 0 8px 30px rgba(215, 51, 39, 0.4);
-    border-left: 3px solid rgba(215, 51, 39, 0.5);
-    border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
-    border-top: 3px solid rgba(240, 165, 0, 0.5);
-    border-bottom: 3px solid rgba(240, 165, 0, 0.5);
-}
-
-.mobile-menu-panel.active {
-    right: 0;
-}
-
-.mobile-menu-branding {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 999;
-}
-
-.mobile-menu-coin,
-.mobile-menu-flame {
-    width: 45px;
-    height: 45px;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.4));
-    transition: all var(--transition-base);
-}
-
-.mobile-menu-flame {
-    animation: flameFlicker 2s ease-in-out infinite;
-}
-
-@keyframes flameFlicker {
-    0%, 100% { 
-        filter: drop-shadow(0 4px 8px rgba(215, 51, 39, 0.4));
-        transform: scale(1);
-    }
-    50% { 
-        filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.6));
-        transform: scale(1.05);
-    }
-}
-
-.mobile-menu-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    font-size: 2rem;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-base);
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
-    z-index: 1001;
-}
-
-.mobile-menu-close:hover {
-    transform: rotate(90deg) scale(1.1);
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
-    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.6);
-}
-
-.mobile-menu-close:focus {
-    outline: none;
-}
-
-.mobile-nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.mobile-nav-links li {
-    width: 100%;
-}
-
-.mobile-nav-links a {
-    display: block;
-    color: rgba(255, 255, 255, 0.95);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.3rem;
-    padding: 1rem 1.5rem;
-    text-align: center;
-    border-radius: var(--radius-md);
-    background: rgba(215, 51, 39, 0.05);
-    transition: all var(--transition-base);
-    position: relative;
-    overflow: hidden;
-}
-
-.mobile-nav-links a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(240, 165, 0, 0.2), transparent);
-    transition: left 0.4s ease;
-}
-
-.mobile-nav-links a:hover::before {
-    left: 100%;
-}
-
-.mobile-nav-links a:hover {
-    background: rgba(215, 51, 39, 0.2);
-    transform: translateX(-10px);
-    color: var(--ember-gold);
-}
-
-.mobile-nav-links .ember-link {
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
-    color: white !important;
-    font-weight: 700 !important;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4) !important;
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    padding: 14px 24px !important;
-}
-
-.mobile-nav-links .ember-link:hover {
-    transform: translateX(-10px) !important;
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold)) !important;
-    box-shadow: 0 6px 25px rgba(215, 51, 39, 0.6) !important;
-}
-
-.mobile-nav-links .nav-ember-coin {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
-}
-
-.mobile-nav-links .ember-link:hover .nav-ember-coin {
-    transform: scale(1.15) rotate(10deg);
-}
-
-.mobile-nav-links .presale-link {
-    background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange)) !important;
-    color: white !important;
-    font-weight: 700 !important;
-    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4) !important;
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    padding: 14px 24px !important;
-}
-
-.mobile-nav-links .presale-link:hover {
-    transform: translateX(-10px) !important;
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-dark-red)) !important;
-    box-shadow: 0 6px 25px rgba(240, 165, 0, 0.6) !important;
-}
-
-.mobile-nav-links .nav-presale-icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
-}
-
-.mobile-nav-links .presale-link:hover .nav-presale-icon {
-    transform: scale(1.15) rotate(10deg);
-}
-
-/* ===================================
-   PART 4: UNIVERSAL HERO SECTION SYSTEM
-   =================================== */
-
-.hero-section {
-    min-height: 100vh;
-    background: var(--ember-gradient-background);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: calc(110px + 80px) var(--container-padding) 80px;
-    isolation: isolate;
-}
-
-/* Hero Variants (semantic modifiers) */
-.hero-section.hero-compact {
-    min-height: 80vh;
-    padding: calc(110px + 60px) var(--container-padding) 60px;
-}
-
-.hero-section.hero-presale {
-    min-height: 90vh;
-    padding: calc(110px + 70px) var(--container-padding) 70px;
-}
-
-.hero-section.hero-full {
-    min-height: 100vh;
-    padding: calc(110px + 80px) var(--container-padding) 80px;
-}
-
-/* Hero Content Container */
-.hero-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    text-align: center;
-    color: white;
-    z-index: var(--z-content);
-    position: relative;
-}
-
-/* Hero Titles */
-.hero-title {
-    font-size: clamp(2.2rem, 5.5vw, 4.5rem);
-    font-weight: 900;
-    margin-bottom: 20px;
-    color: #ffffff;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-}
-
-.hero-subtitle {
-    font-size: clamp(1rem, 2.2vw, 1.5rem);
-    color: rgba(255, 255, 255, 0.95);
-    max-width: 1000px;
-    margin: 0 auto 50px;
-    font-weight: 500;
-    line-height: 1.6;
-}
-
-/* ===================================
-   PART 5: UNIVERSAL GRID SYSTEM
-   =================================== */
-
-.grid-container {
-    display: grid;
-    gap: var(--space-xl);
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* Grid Variants */
-.grid-container.grid-2col {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-container.grid-3col {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.grid-container.grid-4col {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.grid-container.grid-auto {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-
-/* ===================================
-   PART 6: UNIVERSAL CARD SYSTEM
-   =================================== */
-
-.card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-    backdrop-filter: blur(20px);
-    transition: all var(--transition-smooth);
-    position: relative;
-    overflow: hidden;
-    z-index: var(--z-cards);
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--ember-gradient-primary);
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(215, 51, 39, 0.6);
-    box-shadow: var(--ember-shadow-md);
-    z-index: var(--z-elevated-cards);
-}
-
-/* Card Variants */
-.card.card-secondary::before {
-    background: var(--ember-gradient-secondary);
-}
-
-.card.card-secondary {
-    border-color: rgba(99, 102, 241, 0.3);
-}
-
-.card.card-secondary:hover {
-    border-color: rgba(99, 102, 241, 0.6);
-    box-shadow: 0 25px 60px rgba(99, 102, 241, 0.3);
-}
-
-/* Card Content Structure */
-.card-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-    margin-bottom: var(--space-lg);
-}
-
-.card-icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5));
-    flex-shrink: 0;
-}
-
-.card-title {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: var(--space-sm);
-}
-
-.card-description {
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.7;
-}
-
-/* ===================================
-   PART 7: STANDARDIZED BUTTONS
-   =================================== */
-
-.cta-button,
-.ember-cta-primary {
-    padding: clamp(16px, 4vw, 20px) clamp(30px, 8vw, 45px);
-    font-size: clamp(1.1rem, 3vw, 1.3rem);
-    background: var(--ember-gradient-primary);
-    color: white;
-    border: none;
-    border-radius: var(--radius-full);
-    font-weight: 700;
-    cursor: pointer;
-    transition: all var(--transition-base);
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
-    position: relative;
-    overflow: hidden;
-}
-
-.cta-button::before,
-.ember-cta-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.6s ease;
-}
-
-.cta-button:hover::before,
-.ember-cta-primary:hover::before {
-    left: 100%;
-}
-
-.cta-button:hover,
-.ember-cta-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.6);
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
-}
-
-.cta-button:active,
-.ember-cta-primary:active {
-    transform: translateY(-1px);
-}
-
-.cta-button-secondary,
-.ember-cta-secondary {
-    padding: clamp(16px, 4vw, 20px) clamp(30px, 8vw, 45px);
-    font-size: clamp(1.1rem, 3vw, 1.3rem);
-    background: transparent;
-    color: var(--ember-gold);
-    border: 3px solid var(--ember-gold);
-    border-radius: var(--radius-full);
-    font-weight: 700;
-    cursor: pointer;
-    transition: all var(--transition-base);
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.3);
-}
-
-.cta-button-secondary:hover,
-.ember-cta-secondary:hover {
-    background: var(--ember-gold);
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(240, 165, 0, 0.5);
-}
-
-/* ===================================
-   PART 8: PERFECT CIRCLE GLOW SYSTEM
-   =================================== */
-
-.main-image-glow {
-    position: relative;
-    display: inline-block;
-    line-height: 0;
-    isolation: isolate;
-}
-
-.main-image-glow img {
-    position: relative;
-    z-index: 2;
-    display: block;
-}
-
-.main-image-glow::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle at center,
-        rgba(240, 165, 0, 0.6) 0%, 
-        rgba(251, 146, 60, 0.4) 30%, 
-        rgba(215, 51, 39, 0.2) 50%, 
-        transparent 70%
-    );
-    border-radius: 50%;
-    filter: blur(20px);
-    opacity: 0.6;
-    z-index: 1;
-    transition: all var(--transition-smooth);
-}
-
-.main-image-glow:hover::before {
-    opacity: 0.85;
-    transform: translate(-50%, -50%) scale(1.08);
-    filter: blur(25px);
-}
-
-/* Glow color variants */
-.main-image-glow.glow-purple::before {
-    background: radial-gradient(
-        circle at center,
-        rgba(99, 102, 241, 0.6) 0%, 
-        rgba(139, 92, 246, 0.4) 30%, 
-        transparent 70%
-    );
-}
-
-.main-image-glow.glow-orange::before {
-    background: radial-gradient(
-        circle at center,
-        rgba(240, 165, 0, 0.6) 0%, 
-        rgba(251, 146, 60, 0.4) 30%, 
-        transparent 70%
-    );
-}
-
-.main-image-glow.glow-red::before {
-    background: radial-gradient(
-        circle at center,
-        rgba(215, 51, 39, 0.6) 0%, 
-        rgba(251, 146, 60, 0.4) 30%, 
-        transparent 70%
-    );
-}
-
-/* ===================================
-   PART 9: SCROLL REVEAL ANIMATIONS
-   =================================== */
-
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.scroll-reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.fade-in {
-    opacity: 0;
-    transform: translateY(40px);
-    animation: fadeInUp 1s ease forwards;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Stagger delays */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-
-/* ===================================
-   PART 10: SECTION TITLES & SUBTITLES
-   =================================== */
-
-.section-title {
-    text-align: center;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    margin-bottom: 25px;
-    color: #ffffff;
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #ffffff 0%, var(--ember-orange) 50%, var(--ember-dark-red) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.section-subtitle {
-    text-align: center;
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-    color: rgba(255, 255, 255, 0.95);
-    margin-bottom: 80px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: 500;
-    line-height: 1.6;
-}
-
-/* ===================================
-   PART 11: UTILITY CLASSES
-   =================================== */
-
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-}
-
-.section-padding {
-    padding: var(--section-padding) 0;
-}
-
-.gradient-text {
-    background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange), var(--ember-dark-red));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.golden-text {
-    color: var(--ember-gold) !important;
-    text-shadow: 0 2px 8px rgba(240, 165, 0, 0.3);
-}
-
-.golden-highlight {
-    color: var(--ember-gold);
-    font-weight: 700;
-}
-
-/* Icon Sizing */
-.icon-hero { width: var(--icon-hero); height: var(--icon-hero); }
-.icon-section { width: var(--icon-section); height: var(--icon-section); }
-.icon-card { width: var(--icon-card); height: var(--icon-card); }
-.icon-inline { width: var(--icon-inline); height: var(--icon-inline); }
-
-/* ===================================
-   PART 12: FOOTER - EXACT SAME ON ALL PAGES
-   OPTIMIZED GRID LAYOUT FOR DESKTOP & MOBILE
-   =================================== */
-
-.footer {
-    background: linear-gradient(135deg, var(--ember-dark) 0%, var(--ember-charcoal) 100%) !important;
-    color: white !important;
-    padding: 60px var(--container-padding) 30px !important;
-    border-top: 3px solid rgba(215, 51, 39, 0.3) !important;
-}
-
-.footer-content {
-    max-width: 1400px !important;
-    margin: 0 auto !important;
-}
-
-/* Footer Grid Layout */
-.footer-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
-    gap: 40px !important;
-    margin-bottom: 40px !important;
-}
-
-.footer-column {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 15px !important;
-}
-
-/* Footer Logo Column */
-.footer-logo {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    margin-bottom: 10px !important;
-}
-
-.footer-logo-image {
-    height: 50px !important;
-    width: auto !important;
-    filter: drop-shadow(0 0 8px rgba(215, 51, 39, 0.4)) !important;
-    transition: all var(--transition-base) !important;
-}
-
-.footer-logo:hover .footer-logo-image {
-    filter: drop-shadow(0 0 12px rgba(215, 51, 39, 0.6)) !important;
-    transform: scale(1.05) !important;
-}
-
-.footer-logo-text {
-    font-size: 1.5rem !important;
-    font-weight: 900 !important;
-    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-}
-
-.footer-tagline {
-    color: rgba(255, 255, 255, 0.7) !important;
-    font-size: 0.95rem !important;
-    margin-bottom: 20px !important;
-}
-
-/* Footer Social Links */
-.footer-social {
-    display: flex !important;
-    gap: 15px !important;
-    flex-wrap: wrap !important;
-}
-
-.social-link {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 45px !important;
-    height: 45px !important;
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
-    border-radius: 50% !important;
-    color: white !important;
-    text-decoration: none !important;
-    transition: all var(--transition-base) !important;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3) !important;
-}
-
-.social-link:hover {
-    transform: translateY(-3px) scale(1.1) !important;
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.5) !important;
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold)) !important;
-}
-
-.social-link svg {
-    width: 20px !important;
-    height: 20px !important;
-    transition: all var(--transition-base) !important;
-}
-
-.social-link:hover svg {
-    transform: scale(1.1) !important;
-}
-
-/* Footer Headings */
-.footer-heading {
-    font-size: 1.2rem !important;
-    font-weight: 700 !important;
-    color: var(--ember-gold) !important;
-    margin-bottom: 10px !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-}
-
-/* Footer Links Lists */
-.footer-links {
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-}
-
-.footer-links li {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.8) !important;
-    text-decoration: none !important;
-    font-size: 0.95rem !important;
-    transition: all var(--transition-base) !important;
-    display: inline-block !important;
-    position: relative !important;
-}
-
-.footer-links a::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: -2px !important;
-    left: 0 !important;
-    width: 0 !important;
-    height: 2px !important;
-    background: linear-gradient(90deg, var(--ember-dark-red), var(--ember-orange), var(--ember-gold)) !important;
-    transition: width var(--transition-base) !important;
-}
-
-.footer-links a:hover::after {
-    width: 100% !important;
-}
-
-.footer-links a:hover {
-    color: var(--ember-gold) !important;
-    transform: translateX(5px) !important;
-}
-
-/* Footer Ember Link */
-.footer-ember-link {
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
-    color: white !important;
-    padding: 8px 16px !important;
-    border-radius: var(--radius-2xl) !important;
-    font-weight: 700 !important;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4) !important;
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    transition: all var(--transition-base) !important;
-}
-
-.footer-ember-link::after {
-    display: none !important;
-}
-
-.footer-ember-link:hover {
-    transform: translateX(0) translateY(-3px) !important;
-    box-shadow: 0 6px 25px rgba(215, 51, 39, 0.6) !important;
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold)) !important;
-}
-
-.footer-ember-icon {
-    width: 20px !important;
-    height: 20px !important;
-    object-fit: contain !important;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
-    transition: all var(--transition-base) !important;
-}
-
-.footer-ember-link:hover .footer-ember-icon {
-    transform: scale(1.15) rotate(10deg) !important;
-}
-
-/* Footer Bottom Section */
-.footer-bottom {
-    padding-top: 30px !important;
-    border-top: 2px solid rgba(255, 255, 255, 0.1) !important;
-    margin-top: 20px !important;
-}
-
-.footer-bottom-content {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 10px !important;
-    text-align: center !important;
-}
-
-.footer-copyright {
-    color: rgba(255, 255, 255, 0.7) !important;
-    font-size: 0.9rem !important;
-    margin: 0 !important;
-}
-
-.footer-disclaimer {
-    color: rgba(255, 255, 255, 0.5) !important;
-    font-size: 0.85rem !important;
-    margin: 0 !important;
-    font-style: italic !important;
-}
-
-/* ===================================
-   PART 13: CHATBOT - EXACT SAME ON ALL PAGES
-   =================================== */
-
-/* Floating Chatbot Button */
-.chatbot-button-container {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9998;
-    cursor: pointer;
-}
-
-.chatbot-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 160px;
-    height: 160px;
-    background: radial-gradient(circle, rgba(215, 51, 39, 0.3) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: chatbotPulse 2s ease-in-out infinite;
-    pointer-events: none;
-}
-
-@keyframes chatbotPulse {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.6;
-    }
-    50% {
-        transform: translate(-50%, -50%) scale(1.1);
-        opacity: 0.8;
-    }
-}
-
-.chatbot-button {
-    position: relative;
-    width: 90px;
-    height: 90px;
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 30px rgba(215, 51, 39, 0.5);
-    transition: all var(--transition-base);
-    border: 3px solid rgba(255, 255, 255, 0.2);
-}
-
-.chatbot-button:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 12px 40px rgba(215, 51, 39, 0.7);
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
-}
-
-.chatbot-icon {
-    width: 55px;
-    height: 55px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
-    transition: all var(--transition-base);
-}
-
-.chatbot-button:hover .chatbot-icon {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.chatbot-tooltip {
-    position: absolute;
-    bottom: 100%;
-    right: 0;
-    margin-bottom: 10px;
-    padding: 8px 16px;
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    border-radius: var(--radius-sm);
-    font-size: 0.9rem;
-    font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition-base);
-}
-
-.chatbot-button-container:hover .chatbot-tooltip {
-    opacity: 1;
-}
-
-/* Chatbot Window */
-.chatbot-window {
-    position: fixed;
-    bottom: 160px;
-    right: 30px;
-    width: 550px;
-    height: calc(100vh - 310px);
-    max-height: 550px;
-    min-height: 400px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 50%, #451a03 100%);
-    border-radius: var(--radius-2xl);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    border: 3px solid rgba(215, 51, 39, 0.4);
-    z-index: 9996;
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-    backdrop-filter: blur(20px);
-    animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.chatbot-window.active {
-    display: flex;
-}
-
-@keyframes slideInUp {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.chatbot-header {
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
-    height: 80px;
-}
-
-.chatbot-header-content {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.chatbot-header-icons {
-    display: flex;
-    gap: 8px;
-}
-
-.chatbot-header-icon {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
-}
-
-.chatbot-header-text h3 {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: white;
-    margin: 0;
-}
-
-.chatbot-header-text p {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0;
-}
-
-.chatbot-close {
-    width: 32px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    border-radius: 50%;
-    color: white;
-    font-size: 1.3rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-base);
-}
-
-.chatbot-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
-}
-
-/* Chat Body */
-.chatbot-body {
-    flex: 1;
-    min-height: 0;
-    height: 0;
-    padding: 20px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background: rgba(0, 0, 0, 0.3);
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Message Styling */
-.chat-message {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    animation: messageSlideIn 0.3s ease;
-}
-
-@keyframes messageSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Assistant Messages - Left with Avatar */
-.chat-message.assistant-message {
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.chat-message.assistant-message .message-content {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    max-width: 85%;
-}
-
-.chat-message.assistant-message .message-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-}
-
-.chat-message.assistant-message .message-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.chat-message.assistant-message .message-text {
-    background: rgba(215, 51, 39, 0.15);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    color: rgba(255, 255, 255, 0.95);
-    padding: 12px 16px;
-    border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 4px;
-    line-height: 1.6;
-    font-size: 0.95rem;
-    word-wrap: break-word;
-}
-
-/* User Messages - Right, No Avatar */
-.chat-message.user-message {
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-}
-
-.chat-message.user-message .message-content {
-    display: flex;
-    justify-content: flex-end;
-    max-width: 85%;
-    margin-left: auto;
-}
-
-.chat-message.user-message .message-text {
-    background: rgba(240, 165, 0, 0.2);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    color: rgba(255, 255, 255, 0.95);
-    padding: 12px 16px;
-    border-radius: var(--radius-md) var(--radius-md) 4px var(--radius-md);
-    line-height: 1.6;
-    font-size: 0.95rem;
-    word-wrap: break-word;
-}
-
-/* Message Text Formatting */
-.message-text strong {
-    color: var(--ember-gold);
-    font-weight: 700;
-}
-
-.message-text ul {
-    margin: 10px 0;
-    padding-left: 20px;
-}
-
-.message-text li {
-    margin: 5px 0;
-}
-
-.message-text br {
-    display: block;
-    content: "";
-    margin: 5px 0;
-}
-
-/* Typing Indicator */
-.typing-indicator {
-    margin-bottom: 15px;
-}
-
-.typing-indicator .message-content {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.typing-indicator .message-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-}
-
-.typing-indicator .message-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.typing-dots {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 12px 16px;
-    background: rgba(215, 51, 39, 0.15);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 4px;
-}
-
-.typing-dots span {
-    width: 8px;
-    height: 8px;
-    background: var(--ember-gold);
-    border-radius: 50%;
-    animation: typingBounce 1.4s infinite ease-in-out;
-}
-
-.typing-dots span:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.typing-dots span:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.typing-dots span:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes typingBounce {
-    0%, 60%, 100% {
-        transform: translateY(0);
-        opacity: 0.7;
-    }
-    30% {
-        transform: translateY(-10px);
-        opacity: 1;
-    }
-}
-
-/* Chat Footer */
-.chatbot-footer {
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.4);
-    border-top: 2px solid rgba(215, 51, 39, 0.2);
-    flex-shrink: 0;
-    height: 100px;
-}
-
-.chatbot-input-container {
-    display: flex;
-    gap: 10px;
-}
-
-.chatbot-input {
-    flex: 1;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
-    color: white;
-    font-size: 16px;
-    transition: all var(--transition-base);
-    resize: none;
-    max-height: 60px;
-    overflow-y: auto;
-}
-
-.chatbot-input:focus {
-    outline: none;
-    border-color: var(--ember-gold);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.2);
-}
-
-.chatbot-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.chatbot-send {
-    padding: 12px 20px;
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
-    border: none;
-    border-radius: var(--radius-lg);
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all var(--transition-base);
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
-    font-size: 16px;
-    height: 60px;
-}
-
-.chatbot-send:hover:not(:disabled) {
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
-    box-shadow: 0 6px 20px rgba(240, 165, 0, 0.5);
-    transform: translateY(-2px);
-}
-
-.chatbot-send:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* ===================================
-   PART 14: COOKIE CONSENT BANNER
-   =================================== */
-
-.cookie-consent {
-    position: fixed !important;
-    bottom: -100% !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 10000 !important;
-    background: linear-gradient(135deg, 
-        rgba(15, 15, 15, 0.98) 0%, 
-        rgba(26, 26, 26, 0.98) 100%
-    ) !important;
-    border-top: 3px solid rgba(240, 165, 0, 0.5) !important;
-    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.8), 0 -4px 20px rgba(215, 51, 39, 0.4) !important;
-    backdrop-filter: blur(20px) !important;
-    transition: bottom var(--transition-bounce) !important;
-    padding: clamp(20px, 4vw, 30px) !important;
-}
-
-.cookie-consent.show {
-    bottom: 0 !important;
-}
-
-.cookie-consent-content {
-    max-width: 1400px !important;
-    margin: 0 auto !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: clamp(20px, 4vw, 40px) !important;
-    flex-wrap: wrap !important;
-}
-
-.cookie-consent-text {
-    flex: 1 !important;
-    min-width: 280px !important;
-}
-
-.cookie-consent-text p {
-    font-size: clamp(0.9rem, 2vw, 1rem) !important;
-    color: rgba(255, 255, 255, 0.85) !important;
-    line-height: 1.5 !important;
-}
-
-.cookie-consent-buttons {
-    display: flex !important;
-    gap: 15px !important;
-    align-items: center !important;
-    flex-wrap: wrap !important;
-}
-
-.cookie-btn {
-    padding: 12px 28px !important;
-    font-size: 1rem !important;
-    font-weight: 700 !important;
-    border: none !important;
-    border-radius: var(--radius-2xl) !important;
-    cursor: pointer !important;
-    transition: all var(--transition-base) !important;
-    white-space: nowrap !important;
-}
-
-.cookie-accept {
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange)) !important;
-    color: white !important;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4) !important;
-}
-
-.cookie-accept:hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 6px 25px rgba(215, 51, 39, 0.6) !important;
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold)) !important;
-}
-
-.cookie-decline {
-    background: transparent !important;
-    color: rgba(255, 255, 255, 0.85) !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
-}
-
-.cookie-decline:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
-    transform: translateY(-3px) !important;
-}
-
-.cookie-privacy-link {
-    color: var(--ember-gold) !important;
-    text-decoration: none !important;
-    font-weight: 600 !important;
-    font-size: 0.95rem !important;
-    transition: all var(--transition-base) !important;
-    white-space: nowrap !important;
-}
-
-.cookie-privacy-link:hover {
-    color: var(--ember-orange) !important;
-    text-decoration: underline !important;
-}
-
-/* ===================================
-   PART 15: PRIVACY POLICY MODAL
-   =================================== */
-
-.privacy-modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-    z-index: 10002;
-    opacity: 0;
-    transition: opacity var(--transition-base);
-    overflow-y: auto;
-    padding: 20px;
-}
-
-.privacy-modal-overlay.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 1;
-}
-
-.privacy-modal {
-    background: linear-gradient(135deg, 
-        rgba(26, 26, 26, 0.98) 0%, 
-        rgba(45, 24, 16, 0.98) 50%,
-        rgba(26, 26, 26, 0.98) 100%
-    );
-    border-radius: var(--radius-2xl);
-    max-width: 900px;
-    width: 100%;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(215, 51, 39, 0.3);
-    border: 3px solid rgba(215, 51, 39, 0.4);
-    transform: scale(0.9);
-    opacity: 0;
-    transition: all var(--transition-bounce);
-    position: relative;
-    margin: auto;
-}
-
-.privacy-modal-overlay.active .privacy-modal {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.privacy-modal-header {
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
-    padding: 25px 30px;
-    border-radius: 22px 22px 0 0;
-    border-bottom: 2px solid rgba(240, 165, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-}
-
-.privacy-modal-header h2 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: 900;
-    color: white;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.privacy-modal-icon {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-}
-
-.privacy-modal-close {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-base);
-    flex-shrink: 0;
-}
-
-.privacy-modal-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: rotate(90deg) scale(1.1);
-}
-
-.privacy-modal-body {
-    padding: 30px;
-    overflow-y: auto;
-    flex: 1;
-    min-height: 0;
-}
-
-.privacy-modal-intro {
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.7;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: rgba(215, 51, 39, 0.1);
-    border-left: 4px solid var(--ember-gold);
-    border-radius: var(--radius-sm);
-}
-
-.privacy-modal-date {
-    font-size: 0.95rem;
-    color: var(--ember-gold);
-    margin-bottom: 25px;
-    font-weight: 600;
-}
-
-.privacy-key-points {
-    margin-bottom: 30px;
-}
-
-.privacy-key-points h3 {
-    font-size: 1.4rem;
-    color: var(--ember-gold);
-    margin-bottom: 20px;
-    font-weight: 800;
-}
-
-.privacy-points-grid {
-    display: grid;
-    gap: 20px;
-}
-
-.privacy-point {
-    background: rgba(215, 51, 39, 0.08);
-    border: 2px solid rgba(215, 51, 39, 0.2);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    transition: all var(--transition-base);
-}
-
-.privacy-point:hover {
-    background: rgba(215, 51, 39, 0.12);
-    border-color: rgba(240, 165, 0, 0.4);
-    transform: translateX(5px);
-}
-
-.privacy-point-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
-}
-
-.privacy-point-icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-}
-
-.privacy-point-header h4 {
-    font-size: 1.15rem;
-    color: var(--ember-gold);
-    margin: 0;
-    font-weight: 700;
-}
-
-.privacy-point p {
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
-    margin: 0;
-    font-size: 0.95rem;
-}
-
-.privacy-contact-section {
-    margin-top: 30px;
-    padding: 25px;
-    background: rgba(240, 165, 0, 0.1);
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-lg);
-}
-
-.privacy-contact-section h4 {
-    font-size: 1.2rem;
-    color: var(--ember-gold);
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.privacy-contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.privacy-contact-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.95rem;
-}
-
-.privacy-contact-item a {
-    color: var(--ember-gold);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all var(--transition-base);
-}
-
-.privacy-contact-item a:hover {
-    color: var(--ember-orange);
-    text-decoration: underline;
-}
-
-.privacy-modal-footer {
-    padding: 25px 30px;
-    background: rgba(0, 0, 0, 0.3);
-    border-top: 2px solid rgba(215, 51, 39, 0.2);
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-shrink: 0;
-    flex-wrap: wrap;
-}
-
-.privacy-download-btn {
-    padding: 15px 35px;
-    background: linear-gradient(135deg, var(--ember-dark-red), var(--ember-orange));
-    color: white;
-    border: none;
-    border-radius: var(--radius-full);
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all var(--transition-base);
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
-
-.privacy-download-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.6);
-    background: linear-gradient(135deg, var(--ember-orange), var(--ember-gold));
-}
-
-.privacy-download-icon {
-    font-size: 1.3rem;
-}
-
-.privacy-close-btn {
-    padding: 15px 35px;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.85);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radius-full);
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all var(--transition-base);
-}
-
-.privacy-close-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-3px);
-}
-
-/* ===================================
-   PART 16: SCROLL PROGRESS INDICATORS
-   =================================== */
-
-.scroll-progress-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 9999;
-    pointer-events: none;
-}
-
-.scroll-progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, 
-        var(--ember-dark-red) 0%, 
-        var(--ember-orange) 50%, 
-        var(--ember-gold) 100%);
-    transition: width 0.1s ease-out;
-    box-shadow: 0 0 10px rgba(215, 51, 39, 0.6);
-}
-
-/* Vertical Scrollbar Styling */
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--ember-charcoal);
-    border-left: 1px solid rgba(215, 51, 39, 0.2);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, 
-        var(--ember-dark-red) 0%, 
-        var(--ember-orange) 50%, 
-        var(--ember-gold) 100%);
-    border-radius: 6px;
-    border: 2px solid var(--ember-charcoal);
-    box-shadow: 0 0 10px rgba(215, 51, 39, 0.4);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, 
-        var(--ember-gold) 0%, 
-        var(--ember-orange) 50%, 
-        var(--ember-dark-red) 100%);
-    box-shadow: 0 0 15px rgba(240, 165, 0, 0.6);
-}
-
-/* Firefox Scrollbar */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--ember-orange) var(--ember-charcoal);
-}
-
-/* ===================================
-   PART 17: ACCESSIBILITY & FOCUS STYLES
-   =================================== */
-
-a:focus,
-button:focus {
-    outline: 3px solid var(--ember-gold);
-    outline-offset: 3px;
-}
-
-a:focus:not(:focus-visible),
-button:focus:not(:focus-visible) {
-    outline: none;
-}
-
-a:focus-visible,
-button:focus-visible {
-    outline: 3px solid var(--ember-gold);
-    outline-offset: 3px;
-}
-
-/* Override global focus for chatbot input */
-.chatbot-input:focus-visible {
-    outline: none;
-    outline-offset: 0;
-}
-
-/* ===================================
-   PART 18: TEXT SELECTION
-   =================================== */
-
-::selection {
-    background: rgba(215, 51, 39, 0.4);
-    color: #ffffff;
-}
-
-::-moz-selection {
-    background: rgba(215, 51, 39, 0.4);
-    color: #ffffff;
-}
-
-/* ===================================
-   PART 19: REDUCED MOTION PREFERENCE
-   =================================== */
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* ===================================
-   PART 20: RESPONSIVE BREAKPOINTS
-   =================================== */
-
-/* Tablet - 1024px and below */
-@media (max-width: 1024px) {
-    .navbar {
-        padding: 1rem 1.5rem;
-        height: 90px;
-    }
-    
-    .logo-image {
-        height: 55px;
-    }
-    
-    .logo span {
-        font-size: 1.5rem;
-    }
-    
-    .mobile-menu-btn {
-        display: block;
-    }
-    
-    .nav-links {
-        display: none;
-    }
-    
-    .mobile-menu-panel {
-        width: 70%;
-        top: 90px;
-    }
-    
-    .hero-section {
-        min-height: auto;
-        padding: calc(90px + 60px) 15px 60px;
-    }
-    
-    .hero-section.hero-compact { 
-        padding: calc(90px + 50px) 15px 50px; 
-    }
-    
-    .hero-section.hero-presale { 
-        padding: calc(90px + 55px) 15px 55px; 
-    }
-    
-    .section-subtitle { 
-        margin-bottom: 60px; 
-    }
-    
-    .grid-container.grid-3col,
-    .grid-container.grid-4col {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .card {
-        padding: var(--space-lg);
-    }
-    
-    .card-icon { 
-        width: 50px; 
-        height: 50px; 
-    }
-    
-    .card-title { 
-        font-size: 1.3rem; 
-    }
-    
-    .card-description { 
-        font-size: 0.95rem; 
-    }
-    
-    .chatbot-window {
-        width: 500px;
-        height: calc(100vh - 280px);
-        max-height: 500px;
-        min-height: 380px;
-    }
-}
-
-/* Mobile - 768px and below */
-@media (max-width: 768px) {
-    .hero-subtitle { 
-        margin-bottom: 35px; 
-    }
-    
-    .grid-container.grid-2col,
-    .grid-container.grid-3col,
-    .grid-container.grid-4col {
-        grid-template-columns: 1fr;
-        gap: var(--space-lg);
-    }
-    
-    .main-image-glow::before {
-        max-width: 100%;
-        max-height: 100%;
-        transform: translate(-50%, -50%) scale(1.0);
-        filter: blur(18px);
-    }
-    
-    .cookie-consent-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .cookie-consent-buttons {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .cookie-btn {
-        flex: 1;
-        min-width: 120px;
-    }
-    
-    .privacy-modal {
-        max-width: 95%;
-        max-height: 95vh;
-        border-radius: var(--radius-xl);
-    }
-    
-    .privacy-modal-header {
-        padding: 20px;
-    }
-    
-    .privacy-modal-header h2 {
-        font-size: 1.4rem;
-    }
-    
-    .privacy-modal-close {
-        width: 36px;
-        height: 36px;
-        font-size: 1.3rem;
-    }
-    
-    .privacy-modal-body {
-        padding: 20px;
-    }
-    
-    .privacy-modal-intro {
-        font-size: 1rem;
-        padding: 15px;
-    }
-    
-    .privacy-point {
-        padding: 15px;
-    }
-    
-    .privacy-point-header h4 {
-        font-size: 1.05rem;
-    }
-    
-    .privacy-contact-section {
-        padding: 20px;
-    }
-    
-    .privacy-modal-footer {
-        padding: 20px;
-        flex-direction: column;
-    }
-    
-    .privacy-download-btn,
-    .privacy-close-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 14px 25px;
-        font-size: 1rem;
-    }
-    
-    .chatbot-button-container {
-        bottom: 20px;
-        right: 20px;
-    }
-    
-    .chatbot-button {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .chatbot-icon {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .chatbot-glow {
-        width: 130px;
-        height: 130px;
-    }
-    
-    .chatbot-tooltip {
-        display: none;
-    }
-    
-    .chatbot-window {
-        bottom: 120px;
-        right: 20px;
-        left: 20px;
-        width: calc(100% - 40px);
-        height: calc(100vh - 240px);
-        max-height: calc(100vh - 240px);
-        min-height: 350px;
-    }
-    
-    .chatbot-header {
-        padding: 15px;
-        height: 70px;
-    }
-    
-    .chatbot-body {
-        padding: 15px;
-    }
-    
-    .chatbot-footer {
-        padding: 15px;
-        height: 90px;
-    }
-    
-    .chat-message.assistant-message .message-content,
-    .chat-message.user-message .message-content {
-        max-width: 90%;
-    }
-    
-    .chatbot-input {
-        font-size: 16px;
-        max-height: 50px;
-    }
-    
-    .chatbot-send {
-        font-size: 16px;
-        height: 50px;
-    }
-}
-
-/* Small Mobile - 480px and below */
-@media (max-width: 480px) {
-    .navbar {
-        padding: 0.8rem 1rem;
-        height: 75px;
-    }
-    
-    .logo-image {
-        height: 45px;
-    }
-    
-    .logo span {
-        font-size: 1.3rem;
-    }
-    
-    .mobile-menu-btn {
-        font-size: 1.5rem;
-        padding: 0.5rem 0.8rem;
-    }
-    
-    .mobile-menu-panel {
-        width: 85%;
-        padding: 60px 20px 20px 20px;
-        top: 90px;
-        height: calc(100vh - 180px);
-        border-radius: var(--radius-xl) 0 0 var(--radius-xl);
-    }
-    
-    .mobile-menu-branding {
-        top: 12px;
-        left: 12px;
-        gap: 8px;
-    }
-    
-    .mobile-menu-coin,
-    .mobile-menu-flame {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .mobile-menu-close {
-        width: 40px;
-        height: 40px;
-        font-size: 1.8rem;
-        top: 12px;
-        right: 12px;
-    }
-    
-    .mobile-nav-links a {
-        font-size: 1.2rem;
-        padding: 0.9rem 1.2rem;
-    }
-    
-    .mobile-nav-links .ember-link,
-    .mobile-nav-links .presale-link {
-        padding: 12px 20px !important;
-        font-size: 1.1rem !important;
-    }
-    
-    .mobile-nav-links .nav-ember-coin,
-    .mobile-nav-links .nav-presale-icon {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .hero-section {
-        padding: calc(75px + 50px) 12px 50px;
-    }
-    
-    .hero-section.hero-compact { 
-        padding: calc(75px + 40px) 12px 40px; 
-    }
-    
-    .hero-section.hero-presale { 
-        padding: calc(75px + 45px) 12px 45px; 
-    }
-    
-    .hero-subtitle { 
-        margin-bottom: 25px; 
-    }
-    
-    .cookie-consent-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .cookie-btn {
-        width: 100%;
-    }
-    
-    .cookie-privacy-link {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-    }
-    
-    .privacy-modal-overlay {
-        padding: 10px;
-    }
-    
-    .privacy-modal {
-        border-radius: var(--radius-lg);
-    }
-    
-    .privacy-modal-header {
-        padding: 15px;
-    }
-    
-    .privacy-modal-header h2 {
-        font-size: 1.2rem;
-        gap: 8px;
-    }
-    
-    .privacy-modal-icon {
-        font-size: 1.5rem;
-    }
-    
-    .privacy-modal-close {
-        width: 32px;
-        height: 32px;
-        font-size: 1.2rem;
-    }
-    
-    .privacy-modal-body {
-        padding: 15px;
-    }
-    
-    .privacy-key-points h3 {
-        font-size: 1.2rem;
-    }
-    
-    .privacy-point {
-        padding: 12px;
-    }
-    
-    .privacy-point-icon {
-        font-size: 1.3rem;
-    }
-    
-    .privacy-contact-section {
-        padding: 15px;
-    }
-    
-    .chatbot-button {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .chatbot-icon {
-        width: 42px;
-        height: 42px;
-    }
-    
-    .chatbot-glow {
-        width: 110px;
-        height: 110px;
-    }
-    
-    .chatbot-window {
-        bottom: 100px;
-        height: calc(100vh - 220px);
-        max-height: calc(100vh - 220px);
-        min-height: 320px;
-    }
-    
-    .chatbot-header {
-        padding: 12px;
-        height: 65px;
-    }
-    
-    .chatbot-header-icon {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .chatbot-header-text h3 {
-        font-size: 1rem;
-    }
-    
-    .chatbot-body {
-        padding: 12px;
-    }
-    
-    .chatbot-footer {
-        padding: 12px;
-        height: 85px;
-    }
-    
-    .chat-message.assistant-message .message-avatar {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .message-text {
-        font-size: 0.9rem;
-        padding: 10px 14px;
-    }
-    
-    .chatbot-input {
-        max-height: 45px;
-    }
-    
-    .chatbot-send {
-        height: 45px;
-    }
-}
-
-/* ===================================
-   END OF SHARED STYLES v3.0
-   Pure Global Architecture | Zero Overrides | 100% Consistency
-   =================================== */
+// ============================================
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V4.0 OPTIMIZED
+// ============================================
+// This file contains shared functionality used across multiple pages
+// including mobile navigation, scroll effects, animations, countdown timer,
+// cookie consent, chatbot, and all interactive features
+// 
+// CRITICAL: This script ALWAYS takes precedence
+// All event handlers are non-conflicting and use proper delegation
+// Performance optimized with requestAnimationFrame and debouncing
+// ============================================
+
+(function() {
+    'use strict';
+
+    // ============================================
+    // MOBILE MENU SYSTEM - FIXED FOR NEW HTML STRUCTURE
+    // ============================================
+
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+    // Toggle mobile menu
+    if (mobileMenuBtn && mobileMenu && mobileMenuOverlay) {
+        mobileMenuBtn.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+
+    // Close mobile menu when clicking close button
+    if (mobileMenuClose && mobileMenu && mobileMenuOverlay) {
+        mobileMenuClose.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close mobile menu when clicking overlay
+    if (mobileMenuOverlay && mobileMenu) {
+        mobileMenuOverlay.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close mobile menu when clicking mobile nav links
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                if (mobileMenuOverlay) {
+                    mobileMenuOverlay.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('active');
+            }
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+            document.body.style.overflow = '';
+        }
+    });
+
+    // ============================================
+    // NAVBAR SMOOTH SCROLL TRANSITION
+    // Gradually changes navbar from ember gradient to black
+    // ============================================
+    
+    const navbar = document.querySelector('.navbar');
+    let lastScrollTop = 0;
+    let scrollTimeout;
+    const transitionDistance = 400; // Pixels over which transition happens
+
+    function handleNavbarScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (navbar) {
+            // Calculate progress (0 to 1) over the transition distance
+            const progress = Math.min(scrollTop / transitionDistance, 1);
+            
+            // Interpolate between ember colors and black
+            const emberBrown = { r: 45, g: 24, b: 16, a: 0.95 };
+            const emberDeep = { r: 69, g: 26, b: 3, a: 0.92 };
+            const emberRust = { r: 124, g: 45, b: 18, a: 0.90 };
+            const emberRed = { r: 215, g: 51, b: 39, a: 0.85 };
+            
+            const black1 = { r: 15, g: 15, b: 15, a: 0.98 };
+            const black2 = { r: 20, g: 20, b: 20, a: 0.98 };
+            const black3 = { r: 23, g: 23, b: 23, a: 0.98 };
+            const black4 = { r: 26, g: 26, b: 26, a: 0.98 };
+            
+            // Interpolate each color stop
+            const c1 = {
+                r: Math.round(emberBrown.r + (black1.r - emberBrown.r) * progress),
+                g: Math.round(emberBrown.g + (black1.g - emberBrown.g) * progress),
+                b: Math.round(emberBrown.b + (black1.b - emberBrown.b) * progress),
+                a: emberBrown.a + (black1.a - emberBrown.a) * progress
+            };
+            const c2 = {
+                r: Math.round(emberDeep.r + (black2.r - emberDeep.r) * progress),
+                g: Math.round(emberDeep.g + (black2.g - emberDeep.g) * progress),
+                b: Math.round(emberDeep.b + (black2.b - emberDeep.b) * progress),
+                a: emberDeep.a + (black2.a - emberDeep.a) * progress
+            };
+            const c3 = {
+                r: Math.round(emberRust.r + (black3.r - emberRust.r) * progress),
+                g: Math.round(emberRust.g + (black3.g - emberRust.g) * progress),
+                b: Math.round(emberRust.b + (black3.b - emberRust.b) * progress),
+                a: emberRust.a + (black3.a - emberRust.a) * progress
+            };
+            const c4 = {
+                r: Math.round(emberRed.r + (black4.r - emberRed.r) * progress),
+                g: Math.round(emberRed.g + (black4.g - emberRed.g) * progress),
+                b: Math.round(emberRed.b + (black4.b - emberRed.b) * progress),
+                a: emberRed.a + (black4.a - emberRed.a) * progress
+            };
+            
+            // Create smooth gradient
+            const gradient = `linear-gradient(135deg, 
+                rgba(${c1.r}, ${c1.g}, ${c1.b}, ${c1.a}) 0%, 
+                rgba(${c2.r}, ${c2.g}, ${c2.b}, ${c2.a}) 30%, 
+                rgba(${c3.r}, ${c3.g}, ${c3.b}, ${c3.a}) 60%, 
+                rgba(${c4.r}, ${c4.g}, ${c4.b}, ${c4.a}) 100%)`;
+            
+            navbar.style.background = gradient;
+            
+            // Interpolate border color
+            const borderStart = { r: 240, g: 165, b: 0, a: 0.4 };
+            const borderEnd = { r: 215, g: 51, b: 39, a: 0.3 };
+            const borderColor = {
+                r: Math.round(borderStart.r + (borderEnd.r - borderStart.r) * progress),
+                g: Math.round(borderStart.g + (borderEnd.g - borderStart.g) * progress),
+                b: Math.round(borderStart.b + (borderEnd.b - borderStart.b) * progress),
+                a: borderStart.a + (borderEnd.a - borderStart.a) * progress
+            };
+            navbar.style.borderBottom = `2px solid rgba(${borderColor.r}, ${borderColor.g}, ${borderColor.b}, ${borderColor.a})`;
+            
+            // Interpolate shadow
+            const shadowStart = { r: 215, g: 51, b: 39, a: 0.3 };
+            const shadowEnd = { r: 0, g: 0, b: 0, a: 0.6 };
+            const shadowColor = {
+                r: Math.round(shadowStart.r + (shadowEnd.r - shadowStart.r) * progress),
+                g: Math.round(shadowStart.g + (shadowEnd.g - shadowStart.g) * progress),
+                b: Math.round(shadowStart.b + (shadowEnd.b - shadowStart.b) * progress),
+                a: shadowStart.a + (shadowEnd.a - shadowStart.a) * progress
+            };
+            const shadowBlur = 4 + (progress * 2);
+            const shadowSpread = 20 + (progress * 10);
+            navbar.style.boxShadow = `0 ${shadowBlur}px ${shadowSpread}px rgba(${shadowColor.r}, ${shadowColor.g}, ${shadowColor.b}, ${shadowColor.a})`;
+        }
+        
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    }
+
+    // Use requestAnimationFrame for smooth 60fps transitions
+    window.addEventListener('scroll', function() {
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+        }
+        scrollTimeout = window.requestAnimationFrame(handleNavbarScroll);
+    }, { passive: true });
+
+    // ============================================
+    // SCROLL PROGRESS INDICATOR - HORIZONTAL TOP BAR
+    // ============================================
+
+    function initializeScrollProgress() {
+        console.log('📊 Initializing scroll progress indicator...');
+        
+        // Create progress bar elements
+        const progressContainer = document.createElement('div');
+        progressContainer.className = 'scroll-progress-container';
+        
+        const progressBar = document.createElement('div');
+        progressBar.className = 'scroll-progress-bar';
+        
+        progressContainer.appendChild(progressBar);
+        document.body.appendChild(progressContainer);
+        
+        console.log('📊 Progress bar elements created and appended to body');
+        
+        // Update progress on scroll
+        function updateScrollProgress() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Calculate scroll percentage
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+            
+            // Update progress bar width
+            progressBar.style.width = scrollPercentage + '%';
+        }
+        
+        // Throttled scroll listener for performance
+        let scrollProgressTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollProgressTimeout) {
+                window.cancelAnimationFrame(scrollProgressTimeout);
+            }
+            scrollProgressTimeout = window.requestAnimationFrame(updateScrollProgress);
+        }, { passive: true });
+        
+        // Initial update
+        updateScrollProgress();
+        
+        console.log('✅ Scroll progress indicator initialized successfully');
+    }
+
+    // ============================================
+    // UNIVERSAL COUNTDOWN TIMER
+    // Works for both main page and ember token page
+    // ============================================
+    
+    function initializeUniversalCountdown() {
+        console.log('🔥 COUNTDOWN: Initializing universal countdown timer...');
+        
+        // Target date: November 1, 2025 at midnight UTC
+        const targetDate = new Date('November 1, 2025 00:00:00 UTC');
+        console.log('🔥 COUNTDOWN: Target date set to:', targetDate.toString());
+        
+        // Find ALL possible countdown elements on the page
+        const countdownElements = {
+            // Main page countdown (in ember token section)
+            mainDays: document.getElementById('main-days'),
+            mainHours: document.getElementById('main-hours'),
+            mainMinutes: document.getElementById('main-minutes'),
+            mainSeconds: document.getElementById('main-seconds'),
+            
+            // Ember page countdown (in presale section)
+            emberDays: document.getElementById('days'),
+            emberHours: document.getElementById('hours'),
+            emberMinutes: document.getElementById('minutes'),
+            emberSeconds: document.getElementById('seconds'),
+            
+            // Ember page countdown (alternative naming)
+            countdownDays: document.getElementById('countdown-days'),
+            countdownHours: document.getElementById('countdown-hours'),
+            countdownMinutes: document.getElementById('countdown-minutes'),
+            countdownSeconds: document.getElementById('countdown-seconds')
+        };
+        
+        console.log('🔥 COUNTDOWN: Found elements:', {
+            mainPage: {
+                days: !!countdownElements.mainDays,
+                hours: !!countdownElements.mainHours,
+                minutes: !!countdownElements.mainMinutes,
+                seconds: !!countdownElements.mainSeconds
+            },
+            emberPage_days: {
+                days: !!countdownElements.emberDays,
+                hours: !!countdownElements.emberHours,
+                minutes: !!countdownElements.emberMinutes,
+                seconds: !!countdownElements.emberSeconds
+            },
+            emberPage_countdown: {
+                days: !!countdownElements.countdownDays,
+                hours: !!countdownElements.countdownHours,
+                minutes: !!countdownElements.countdownMinutes,
+                seconds: !!countdownElements.countdownSeconds
+            }
+        });
+        
+        // Check if ANY countdown elements exist
+        const hasAnyCountdown = Object.values(countdownElements).some(el => el !== null);
+        
+        if (!hasAnyCountdown) {
+            console.log('🔥 COUNTDOWN: No countdown elements found on this page');
+            return false;
+        }
+        
+        console.log('🔥 COUNTDOWN: Starting countdown update loop...');
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+            
+            // Calculate time components
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Format with leading zeros
+            const formattedDays = days.toString().padStart(2, '0');
+            const formattedHours = hours.toString().padStart(2, '0');
+            const formattedMinutes = minutes.toString().padStart(2, '0');
+            const formattedSeconds = seconds.toString().padStart(2, '0');
+            
+            // Handle countdown expiration
+            if (distance < 0) {
+                Object.entries(countdownElements).forEach(([key, element]) => {
+                    if (element) {
+                        element.textContent = '00';
+                    }
+                });
+                console.log('🔥 COUNTDOWN: Expired! All elements set to 00');
+                return;
+            }
+            
+            // Update all countdown elements
+            if (countdownElements.mainDays) countdownElements.mainDays.textContent = formattedDays;
+            if (countdownElements.mainHours) countdownElements.mainHours.textContent = formattedHours;
+            if (countdownElements.mainMinutes) countdownElements.mainMinutes.textContent = formattedMinutes;
+            if (countdownElements.mainSeconds) countdownElements.mainSeconds.textContent = formattedSeconds;
+            
+            if (countdownElements.emberDays) countdownElements.emberDays.textContent = formattedDays;
+            if (countdownElements.emberHours) countdownElements.emberHours.textContent = formattedHours;
+            if (countdownElements.emberMinutes) countdownElements.emberMinutes.textContent = formattedMinutes;
+            if (countdownElements.emberSeconds) countdownElements.emberSeconds.textContent = formattedSeconds;
+            
+            if (countdownElements.countdownDays) countdownElements.countdownDays.textContent = formattedDays;
+            if (countdownElements.countdownHours) countdownElements.countdownHours.textContent = formattedHours;
+            if (countdownElements.countdownMinutes) countdownElements.countdownMinutes.textContent = formattedMinutes;
+            if (countdownElements.countdownSeconds) countdownElements.countdownSeconds.textContent = formattedSeconds;
+        }
+        
+        // Update immediately
+        updateCountdown();
+        console.log('🔥 COUNTDOWN: Initial update complete');
+        
+        // Update every second
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        console.log('🔥 COUNTDOWN: Update interval set (every 1 second)');
+        
+        // Store interval ID globally
+        window.countdownInterval = countdownInterval;
+        
+        console.log('🔥 COUNTDOWN: ✅ Universal countdown successfully initialized!');
+        return true;
+    }
+    
+    // Expose the countdown function globally
+    window.initializeUniversalCountdown = initializeUniversalCountdown;
+
+    // ============================================
+    // COOKIE CONSENT BANNER - GDPR COMPLIANT
+    // ============================================
+    
+    function initializeCookieConsent() {
+        // Check if user has already made a choice
+        const cookieConsent = localStorage.getItem('vaultphoenix_cookie_consent');
+        
+        if (cookieConsent !== null) {
+            console.log('🍪 Cookie consent already recorded:', cookieConsent);
+            return; // User has already accepted or declined
+        }
+        
+        // Create cookie consent banner
+        const consentBanner = document.createElement('div');
+        consentBanner.className = 'cookie-consent-banner';
+        consentBanner.setAttribute('role', 'dialog');
+        consentBanner.setAttribute('aria-label', 'Cookie consent banner');
+        consentBanner.setAttribute('aria-live', 'polite');
+        
+        consentBanner.innerHTML = `
+            <div class="cookie-consent-content">
+                <div class="cookie-consent-icon">
+                    🍪
+                </div>
+                <div class="cookie-consent-text">
+                    <h4>We Value Your Privacy</h4>
+                    <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. By clicking "Accept", you consent to our use of cookies.</p>
+                </div>
+                <div class="cookie-consent-buttons">
+                    <button class="cookie-btn cookie-accept" aria-label="Accept cookies">
+                        Accept
+                    </button>
+                    <button class="cookie-btn cookie-decline" aria-label="Decline cookies">
+                        Decline
+                    </button>
+                    <a href="#" class="cookie-privacy-link" id="cookie-privacy-link" aria-label="View privacy policy">
+                        Privacy Policy
+                    </a>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(consentBanner);
+        
+        // Show banner with animation
+        setTimeout(() => {
+            consentBanner.classList.add('show');
+        }, 500);
+        
+        // Handle Accept button
+        const acceptBtn = consentBanner.querySelector('.cookie-accept');
+        acceptBtn.addEventListener('click', function() {
+            localStorage.setItem('vaultphoenix_cookie_consent', 'accepted');
+            console.log('🍪 Cookies accepted by user');
+            consentBanner.classList.remove('show');
+            setTimeout(() => {
+                consentBanner.remove();
+            }, 400);
+        });
+        
+        // Handle Decline button
+        const declineBtn = consentBanner.querySelector('.cookie-decline');
+        declineBtn.addEventListener('click', function() {
+            localStorage.setItem('vaultphoenix_cookie_consent', 'declined');
+            console.log('🍪 Cookies declined by user');
+            consentBanner.classList.remove('show');
+            setTimeout(() => {
+                consentBanner.remove();
+            }, 400);
+        });
+        
+        console.log('🍪 Cookie consent banner initialized');
+    }
+
+    // ============================================
+    // PRIVACY POLICY MODAL SYSTEM
+    // ============================================
+    
+    function initializePrivacyPolicyModal() {
+        console.log('🔒 Initializing Privacy Policy Modal...');
+        
+        // Create modal overlay and content
+        const modalHTML = `
+            <div class="privacy-modal-overlay" id="privacy-modal-overlay" role="dialog" aria-labelledby="privacy-modal-title" aria-modal="true">
+                <div class="privacy-modal">
+                    <div class="privacy-modal-header">
+                        <h2 id="privacy-modal-title">
+                            <span class="privacy-modal-icon">🔒</span>
+                            Privacy Policy
+                        </h2>
+                        <button class="privacy-modal-close" id="privacy-modal-close" aria-label="Close privacy policy">
+                            ×
+                        </button>
+                    </div>
+                    
+                    <div class="privacy-modal-body">
+                        <div class="privacy-modal-date">
+                            Effective Date: October 27, 2025 | Last Updated: October 27, 2025
+                        </div>
+                        
+                        <div class="privacy-modal-intro">
+                            Welcome to Vault Phoenix LLC. We value your privacy and are committed to protecting your personal information. This policy explains how we collect, use, and protect data when you use our AR-based campaigns, token programs, and services.
+                        </div>
+                        
+                        <div class="privacy-key-points">
+                            <h3>Key Privacy Highlights</h3>
+                            <div class="privacy-points-grid">
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">📧</span>
+                                        <h4>Information We Collect</h4>
+                                    </div>
+                                    <p>We collect email addresses, wallet addresses, device information, and geolocation data (only with your consent for AR campaigns). All data collection is transparent and purposeful.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">🎯</span>
+                                        <h4>How We Use Your Data</h4>
+                                    </div>
+                                    <p>Your information helps us operate and improve our services, enable AR campaigns, process token transactions, and communicate important updates. We ensure compliance with all legal and regulatory requirements.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">🤝</span>
+                                        <h4>Information Sharing</h4>
+                                    </div>
+                                    <p>We only share limited data with service providers, compliance partners for KYC/AML verification, and legal authorities when required. We never sell or rent your personal information to third parties.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">🍪</span>
+                                        <h4>Cookies & Tracking</h4>
+                                    </div>
+                                    <p>We use cookies and local storage to enhance your experience, measure engagement, and manage AR campaign performance. You can manage cookie preferences in your browser settings.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">🔐</span>
+                                        <h4>Data Security</h4>
+                                    </div>
+                                    <p>We employ industry-standard encryption, secure hosting, and strict access controls to protect your personal data. While no system is 100% secure, we continuously monitor and improve our security measures.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">⚖️</span>
+                                        <h4>Your Rights</h4>
+                                    </div>
+                                    <p>You have the right to access, correct, or delete your personal information, request limits on processing, and withdraw consent for geolocation or marketing communications at any time.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">👶</span>
+                                        <h4>Children's Privacy</h4>
+                                    </div>
+                                    <p>Our platform is not intended for children under 13 (or under 16 in certain jurisdictions). We do not knowingly collect personal information from minors.</p>
+                                </div>
+                                
+                                <div class="privacy-point">
+                                    <div class="privacy-point-header">
+                                        <span class="privacy-point-icon">🌍</span>
+                                        <h4>International Transfers</h4>
+                                    </div>
+                                    <p>If you're outside the United States, your data may be transferred and processed in the U.S. or other locations where Vault Phoenix operates, in compliance with international data protection standards.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="privacy-contact-section">
+                            <h4>Contact Us About Privacy</h4>
+                            <div class="privacy-contact-info">
+                                <div class="privacy-contact-item">
+                                    <span>📧</span>
+                                    <span>Email: <a href="mailto:contact@vaultphoenix.com">contact@vaultphoenix.com</a></span>
+                                </div>
+                                <div class="privacy-contact-item">
+                                    <span>🌐</span>
+                                    <span>Website: <a href="https://www.vaultphoenix.com" target="_blank" rel="noopener">www.vaultphoenix.com</a></span>
+                                </div>
+                                <div class="privacy-contact-item">
+                                    <span>🏢</span>
+                                    <span>Vault Phoenix LLC</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="privacy-modal-footer">
+                        <a href="docs/PRIVACY_POLICY.pdf" download class="privacy-download-btn">
+                            <span class="privacy-download-icon">📥</span>
+                            Download Full Policy (PDF)
+                        </a>
+                        <button class="privacy-close-btn" id="privacy-modal-close-btn">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add modal to body
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        
+        // Get modal elements
+        const modalOverlay = document.getElementById('privacy-modal-overlay');
+        const modalClose = document.getElementById('privacy-modal-close');
+        const modalCloseBtn = document.getElementById('privacy-modal-close-btn');
+        
+        // Function to open modal
+        function openPrivacyModal(e) {
+            if (e) e.preventDefault();
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            console.log('🔒 Privacy Policy Modal opened');
+        }
+        
+        // Function to close modal
+        function closePrivacyModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            console.log('🔒 Privacy Policy Modal closed');
+        }
+        
+        // Event listeners for privacy policy links
+        const privacyLinks = document.querySelectorAll('[href="#privacy-policy"], #cookie-privacy-link, .cookie-privacy-link');
+        privacyLinks.forEach(link => {
+            link.addEventListener('click', openPrivacyModal);
+        });
+        
+        // Close modal handlers
+        if (modalClose) {
+            modalClose.addEventListener('click', closePrivacyModal);
+        }
+        
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closePrivacyModal);
+        }
+        
+        // Close on overlay click
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closePrivacyModal();
+                }
+            });
+        }
+        
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closePrivacyModal();
+            }
+        });
+        
+        // Expose function globally for external use
+        window.openPrivacyPolicyModal = openPrivacyModal;
+        
+        console.log('🔒 Privacy Policy Modal initialized successfully');
+    }
+
+    // ============================================
+    // SMOOTH SCROLLING FOR ANCHOR LINKS
+    // ============================================
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Skip if it's just "#" or empty
+            if (!href || href === '#') return;
+            
+            const targetElement = document.querySelector(href);
+            
+            if (targetElement) {
+                e.preventDefault();
+                
+                // Get navbar height for offset
+                const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Update URL without jumping
+                if (history.pushState) {
+                    history.pushState(null, null, href);
+                }
+            }
+        });
+    });
+
+    // ============================================
+    // SCROLL REVEAL ANIMATIONS
+    // ============================================
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements with scroll-reveal class
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    revealElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    // Additional observer for fade-in-up animations
+    const fadeUpElements = document.querySelectorAll('.fade-in-up');
+    fadeUpElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    // Additional observer for slide-in animations
+    const slideInElements = document.querySelectorAll('.slide-in-left, .slide-in-right');
+    slideInElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    // ============================================
+    // PHOENIX AI CHATBOT SYSTEM
+    // ============================================
+    
+    // Chatbot configuration
+    const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE'; // Replace with actual API key
+    const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
+    const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
+    
+    let conversationHistory = [];
+    let isTyping = false;
+    
+    // System prompt for Vault Phoenix context
+    const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token presale, a revolutionary crypto token that powers AR gaming rewards and location-based marketing campaigns.
+
+Key Information about $Ember Token:
+- Token Symbol: $EMBER
+- Presale Launch: November 1, 2025
+- Presale Price: $0.003 per token
+- Total Supply: 166.7M tokens available in presale
+- Hard Cap: $500K
+- Platform: Polygon blockchain (ERC-20)
+- Use Cases: Platform currency for GPS & Beacon campaigns, SDK integration, local redemption network
+
+Token Allocation:
+- Campaign Token Pool: 35% - Sold to Platform Operators through management system
+- Platform Operator & SDK Incentives: 30% - Customer onboarding bonuses
+- Presale: 16.67% - Early investors at $0.003
+- Team & Development: 10% - 1-year cliff, 3-year vesting
+- Treasury/Growth: 5% - Community governed
+- Reserve/Burn: 3.33% - Deflationary mechanisms
+
+Key Benefits:
+- First-mover advantage at $0.003 presale price
+- Built-in demand from Platform Operators and Advertisers
+- GPS & Beacon technology for complete location coverage
+- Dual redemption: local businesses OR Coinbase cash-out
+- $200K liquidity guarantee (40% of presale)
+- Professional legal and financial oversight
+
+Vault Phoenix Platform:
+- White-label AR crypto gaming with GPS (Outdoors) & Beacon (Indoors)
+- Management system for campaign deployment
+- SDK for developers
+- Three-stakeholder ecosystem: Platform Operators, Players, Advertisers
+
+Your role:
+- Answer questions about $Ember token, presale, and ecosystem
+- Explain investment opportunities professionally
+- Guide users toward participating in presale
+- Be enthusiastic yet professional about crypto
+- Keep responses concise but informative
+
+If asked about financial advice, remind users to do their own research and consult professionals.`;
+
+    // Initialize chatbot
+    function initializeChatbot() {
+        console.log('🤖 CHATBOT: Starting initialization...');
+        
+        const chatbotButton = document.querySelector('.chatbot-button-container');
+        const chatbotWindow = document.querySelector('.chatbot-window');
+        const chatbotClose = document.querySelector('.chatbot-close');
+        const chatbotInput = document.querySelector('.chatbot-input');
+        const chatbotSend = document.querySelector('.chatbot-send');
+        const chatbotBody = document.querySelector('.chatbot-body');
+        
+        console.log('🤖 CHATBOT: Element check:', {
+            button: !!chatbotButton,
+            window: !!chatbotWindow,
+            close: !!chatbotClose,
+            input: !!chatbotInput,
+            send: !!chatbotSend,
+            body: !!chatbotBody
+        });
+        
+        if (!chatbotButton || !chatbotWindow) {
+            console.error('❌ CHATBOT: Required elements not found!');
+            return false;
+        }
+        
+        // Remove any existing event listeners (prevents duplicates)
+        const newChatbotButton = chatbotButton.cloneNode(true);
+        chatbotButton.parentNode.replaceChild(newChatbotButton, chatbotButton);
+        
+        // Toggle chatbot window
+        newChatbotButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('🤖 CHATBOT: Button clicked!');
+            chatbotWindow.classList.toggle('active');
+            if (chatbotWindow.classList.contains('active')) {
+                console.log('🤖 CHATBOT: Window opened');
+                if (chatbotBody && chatbotBody.children.length === 0) {
+                    addWelcomeMessage();
+                }
+            } else {
+                console.log('🤖 CHATBOT: Window closed');
+            }
+        });
+        
+        console.log('🤖 CHATBOT: Button click listener attached');
+        
+        // Close chatbot
+        if (chatbotClose) {
+            chatbotClose.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('🤖 CHATBOT: Close button clicked');
+                chatbotWindow.classList.remove('active');
+            });
+        }
+        
+        // Send message on button click
+        if (chatbotSend) {
+            chatbotSend.addEventListener('click', function(e) {
+                e.preventDefault();
+                sendMessage();
+            });
+        }
+        
+        // Send message on Enter key
+        if (chatbotInput) {
+            chatbotInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        }
+        
+        console.log('✅ CHATBOT: Initialization complete!');
+        return true;
+    }
+    
+    // Welcome message
+    function addWelcomeMessage() {
+        const welcomeMsg = `
+            <div class="chat-message assistant-message">
+                <div class="message-content">
+                    <div class="message-avatar">
+                        <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                    </div>
+                    <div class="message-text">
+                        <strong>Welcome to Vault Phoenix!</strong><br><br>
+                        I'm your AI assistant for $Ember Token and our AR crypto gaming platform. Ask me about:
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>$Ember token presale details & pricing</li>
+                            <li>GPS & Beacon technology integration</li>
+                            <li>White-label app deployment</li>
+                            <li>Platform Operator opportunities</li>
+                            <li>How to participate in presale</li>
+                        </ul>
+                        What would you like to know?
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const chatbotBody = document.querySelector('.chatbot-body');
+        if (chatbotBody) {
+            chatbotBody.innerHTML = welcomeMsg;
+        }
+    }
+    
+    // Send message to Claude API
+    async function sendMessage() {
+        const chatbotInput = document.querySelector('.chatbot-input');
+        const chatbotBody = document.querySelector('.chatbot-body');
+        const chatbotSend = document.querySelector('.chatbot-send');
+        
+        if (!chatbotInput || !chatbotBody || !chatbotSend) return;
+        
+        const message = chatbotInput.value.trim();
+        
+        if (!message || isTyping) return;
+        
+        // Check API key
+        if (CLAUDE_API_KEY === 'YOUR_CLAUDE_API_KEY_HERE') {
+            addChatMessage('user', message);
+            addChatMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
+            chatbotInput.value = '';
+            return;
+        }
+        
+        // Add user message
+        addChatMessage('user', message);
+        chatbotInput.value = '';
+        chatbotInput.disabled = true;
+        chatbotSend.disabled = true;
+        isTyping = true;
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        try {
+            const messages = [
+                ...conversationHistory,
+                { role: 'user', content: message }
+            ];
+            
+            const response = await fetch(CLAUDE_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': CLAUDE_API_KEY,
+                    'anthropic-version': '2023-06-01'
+                },
+                body: JSON.stringify({
+                    model: CLAUDE_MODEL,
+                    max_tokens: 1024,
+                    system: SYSTEM_PROMPT,
+                    messages: messages
+                })
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.error?.message || `API Error: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            removeTypingIndicator();
+            
+            const assistantMessage = data.content[0].text;
+            
+            conversationHistory.push(
+                { role: 'user', content: message },
+                { role: 'assistant', content: assistantMessage }
+            );
+            
+            addChatMessage('assistant', assistantMessage);
+            
+        } catch (error) {
+            removeTypingIndicator();
+            
+            let errorMessage = '❌ Sorry, I encountered an error. ';
+            
+            if (error.message.includes('401')) {
+                errorMessage += 'Invalid API key. Please check your configuration.';
+            } else if (error.message.includes('429')) {
+                errorMessage += 'Rate limit exceeded. Please try again in a moment.';
+            } else if (error.message.includes('500') || error.message.includes('529')) {
+                errorMessage += 'Claude API is temporarily unavailable. Please try again.';
+            } else {
+                errorMessage += 'Please try again or contact us at contact@vaultphoenix.com';
+            }
+            
+            addChatMessage('assistant', errorMessage);
+        } finally {
+            chatbotInput.disabled = false;
+            chatbotSend.disabled = false;
+            isTyping = false;
+        }
+    }
+    
+    // Add message to chat
+    function addChatMessage(role, content) {
+        const chatbotBody = document.querySelector('.chatbot-body');
+        if (!chatbotBody) return;
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${role}-message`;
+        
+        if (role === 'user') {
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="message-text">${escapeHtml(content)}</div>
+                </div>
+            `;
+        } else {
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="message-avatar">
+                        <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                    </div>
+                    <div class="message-text">${formatChatMessage(content)}</div>
+                </div>
+            `;
+        }
+        
+        chatbotBody.appendChild(messageDiv);
+        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    }
+    
+    // Typing indicator
+    function showTypingIndicator() {
+        const chatbotBody = document.querySelector('.chatbot-body');
+        if (!chatbotBody) return;
+        
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chat-message assistant-message typing-indicator';
+        typingDiv.innerHTML = `
+            <div class="message-content">
+                <div class="message-avatar">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                </div>
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        `;
+        
+        chatbotBody.appendChild(typingDiv);
+        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    }
+    
+    function removeTypingIndicator() {
+        const typingIndicator = document.querySelector('.typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+    
+    // Message formatting
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    function formatChatMessage(text) {
+        let formatted = escapeHtml(text);
+        formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
+        formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+        formatted = formatted.replace(/\n/g, '<br>');
+        return formatted;
+    }
+    
+    // Expose chatbot initialization globally
+    window.initializePhoenixChatbot = initializeChatbot;
+
+    // ============================================
+    // UTILITY FUNCTIONS
+    // ============================================
+    
+    // Debounce function
+    window.debounce = function(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    };
+
+    // Throttle function
+    window.throttle = function(func, limit) {
+        let inThrottle;
+        return function(...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    };
+
+    // Check if element is in viewport
+    window.isInViewport = function(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    };
+
+    // ============================================
+    // RESPONSIVE HANDLING
+    // ============================================
+    
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            // Close mobile menu on desktop resize
+            if (window.innerWidth > 1024 && mobileMenu && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                if (mobileMenuOverlay) {
+                    mobileMenuOverlay.classList.remove('active');
+                }
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+                document.body.style.overflow = '';
+            }
+        }, 250);
+    });
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    
+    function init() {
+        console.log('🔥 Vault Phoenix Shared Scripts Initializing...');
+        
+        // Initial navbar state
+        handleNavbarScroll();
+        
+        // Initialize cookie consent banner
+        initializeCookieConsent();
+        
+        // Initialize privacy policy modal
+        initializePrivacyPolicyModal();
+        
+        // Initialize scroll progress indicator
+        initializeScrollProgress();
+        
+        // Initialize Phoenix AI Chatbot with retry logic
+        console.log('🤖 Attempting chatbot initialization...');
+        let chatbotInitialized = initializeChatbot();
+        
+        if (!chatbotInitialized) {
+            console.log('🤖 First attempt failed, retrying after 100ms...');
+            setTimeout(() => {
+                chatbotInitialized = initializeChatbot();
+                if (!chatbotInitialized) {
+                    console.log('🤖 Second attempt failed, retrying after 500ms...');
+                    setTimeout(() => {
+                        chatbotInitialized = initializeChatbot();
+                        if (!chatbotInitialized) {
+                            console.error('❌ CHATBOT: Failed to initialize after 3 attempts');
+                        }
+                    }, 500);
+                }
+            }, 100);
+        }
+        
+        // Initialize countdown timer with retries
+        console.log('🔥 Attempting countdown initialization...');
+        const success1 = initializeUniversalCountdown();
+        
+        if (!success1) {
+            console.log('🔥 First attempt failed, retrying after 100ms...');
+            setTimeout(() => {
+                const success2 = initializeUniversalCountdown();
+                if (!success2) {
+                    console.log('🔥 Second attempt failed, retrying after 500ms...');
+                    setTimeout(() => {
+                        initializeUniversalCountdown();
+                    }, 500);
+                }
+            }, 100);
+        }
+        
+        // Add loaded class to body
+        document.body.classList.add('loaded');
+        
+        console.log('✅ Vault Phoenix Shared Scripts Initialization Complete');
+        
+        // Signal that shared script is fully initialized and ready
+        window.sharedScriptReady = true;
+        console.log('✅ shared-script.js fully initialized and ready - signaling to dependent scripts');
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+})();
