@@ -1,1225 +1,491 @@
-// ============================================
-// VAULT PHOENIX - INTERACTIVE JAVASCRIPT
-// ============================================
-// Phoenix Rising from Digital Ashes - Crypto Gaming Edition
-// SENIOR JS ENGINEERING: Mobile-First, Performance-Optimized
-// PRODUCTION READY: Clean, maintainable, and scalable code
-// VERSION: 3.1 - Duplicates Removed (Scroll reveal now in shared-script.js)
-// ============================================
+// ============================================================================
+// EMBER PAGE JAVASCRIPT - COMPLETE REWRITE
+// Handles all ember.html specific functionality
+// ============================================================================
 
-'use strict';
+// ============================================================================
+// GLOBAL STATE
+// ============================================================================
+let tpaAgreed = false;
 
-// ============================================
-// DEVICE DETECTION & PERFORMANCE
-// ============================================
+// ============================================================================
+// MODAL FUNCTIONS - TPA (Token Presale Agreement)
+// ============================================================================
 
 /**
- * Detect device capabilities and set performance flags
+ * Show the Token Presale Agreement modal
  */
-const DeviceInfo = {
-    isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-    isIOS: /iPhone|iPad|iPod/i.test(navigator.userAgent),
-    isAndroid: /Android/i.test(navigator.userAgent),
-    isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
-    supportsTouch: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
-    screenWidth: window.innerWidth,
-    screenHeight: window.innerHeight,
-    pixelRatio: window.devicePixelRatio || 1,
-    prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-    
-    /**
-     * Check if device is low-end for performance optimization
-     */
-    isLowEndDevice() {
-        const memory = navigator.deviceMemory || 4;
-        const cores = navigator.hardwareConcurrency || 2;
-        return memory < 4 || cores < 4 || this.isMobile;
-    },
-    
-    /**
-     * Get optimal particle count based on device
-     */
-    getOptimalParticleCount() {
-        if (this.prefersReducedMotion) return 0;
-        if (this.screenWidth < 480) return 3;
-        if (this.screenWidth < 768) return 4;
-        if (this.isLowEndDevice()) return 4;
-        return 6;
+window.showTpaModal = function() {
+    const modal = document.getElementById('tpaModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
     }
 };
 
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
+/**
+ * Close the Token Presale Agreement modal
+ */
+window.closeTpaModal = function() {
+    const modal = document.getElementById('tpaModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+};
 
 /**
- * Safely query DOM element with error handling
+ * Handle TPA agreement - enables presale button
  */
-function safeQuery(selector, context = document) {
-    try {
-        return context.querySelector(selector);
-    } catch (error) {
-        console.warn(`Failed to query selector: ${selector}`, error);
-        return null;
+window.agreeTpa = function() {
+    tpaAgreed = true;
+    
+    // Check the checkbox
+    const checkbox = document.getElementById('tpa-agree-checkbox');
+    if (checkbox) {
+        checkbox.checked = true;
+    }
+    
+    // Enable the presale button
+    updatePresaleButtonState();
+    
+    // Close the modal
+    closeTpaModal();
+    
+    // Optional: Show success message
+    console.log('✓ TPA Agreement accepted');
+};
+
+// ============================================================================
+// MODAL FUNCTIONS - WHITEPAPER
+// ============================================================================
+
+/**
+ * Show the Whitepaper modal
+ */
+window.showWhitepaperModal = function() {
+    const modal = document.getElementById('whitepaperModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+/**
+ * Close the Whitepaper modal
+ */
+window.closeWhitepaperModal = function() {
+    const modal = document.getElementById('whitepaperModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+};
+
+// ============================================================================
+// PRESALE BUTTON STATE MANAGEMENT
+// ============================================================================
+
+/**
+ * Update presale button enabled/disabled state based on TPA checkbox
+ */
+function updatePresaleButtonState() {
+    const checkbox = document.getElementById('tpa-agree-checkbox');
+    const button = document.getElementById('presale-buy-button');
+    
+    if (checkbox && button) {
+        if (checkbox.checked && tpaAgreed) {
+            button.disabled = false;
+            button.textContent = '🔥 Join Presale (Coming Soon)';
+            button.style.cursor = 'pointer';
+        } else {
+            button.disabled = true;
+            button.textContent = '🔥 Join Presale (Coming Soon)';
+            button.style.cursor = 'not-allowed';
+        }
     }
 }
 
+// ============================================================================
+// INVESTMENT CALCULATOR
+// ============================================================================
+
 /**
- * Safely query all DOM elements with error handling
+ * Calculate and update investment calculator results
  */
-function safeQueryAll(selector, context = document) {
-    try {
-        return Array.from(context.querySelectorAll(selector));
-    } catch (error) {
-        console.warn(`Failed to query selector: ${selector}`, error);
-        return [];
+function updateInvestmentCalculator() {
+    const input = document.getElementById('investment-amount');
+    const emberTokensDisplay = document.getElementById('ember-tokens');
+    const totalInvestmentDisplay = document.getElementById('total-investment');
+    
+    if (!input || !emberTokensDisplay || !totalInvestmentDisplay) return;
+    
+    const EMBER_PRICE = 0.003; // $0.003 per token
+    const MIN_INVESTMENT = 10;
+    const MAX_INVESTMENT = 50000;
+    
+    let investmentAmount = parseFloat(input.value) || 0;
+    
+    // Validate investment amount
+    if (investmentAmount < MIN_INVESTMENT) {
+        investmentAmount = MIN_INVESTMENT;
+        input.value = MIN_INVESTMENT;
     }
+    
+    if (investmentAmount > MAX_INVESTMENT) {
+        investmentAmount = MAX_INVESTMENT;
+        input.value = MAX_INVESTMENT;
+    }
+    
+    // Calculate tokens
+    const emberTokens = Math.floor(investmentAmount / EMBER_PRICE);
+    
+    // Update displays with formatting
+    emberTokensDisplay.textContent = emberTokens.toLocaleString();
+    totalInvestmentDisplay.textContent = '$' + investmentAmount.toLocaleString('en-US', { 
+        minimumFractionDigits: 2, 
+        maximumFractionDigits: 2 
+    });
 }
 
-/**
- * Request animation frame with fallback
- */
-const requestAnimFrame = window.requestAnimationFrame || 
-                         window.webkitRequestAnimationFrame || 
-                         window.mozRequestAnimationFrame || 
-                         function(callback) { setTimeout(callback, 1000 / 60); };
-
-// ============================================
-// VIEWPORT & ZOOM STABILITY
-// ============================================
+// ============================================================================
+// DEVELOPMENT FUND TRACKER
+// ============================================================================
 
 /**
- * Prevent page reload on zoom - throttle resize events
+ * Update development fund tracker display
+ * In production, this would fetch real data from an API
  */
-let lastWidth = window.innerWidth;
-let lastHeight = window.innerHeight;
-
-const handleResize = window.throttle(() => {
-    const newWidth = window.innerWidth;
-    const newHeight = window.innerHeight;
+function updateDevFundTracker() {
+    const fillElement = document.getElementById('dev-fund-fill');
+    const withdrawnElement = document.getElementById('dev-fund-withdrawn');
+    const timestampElement = document.getElementById('dev-fund-timestamp');
     
-    // Check if this is a zoom event (viewport doesn't change proportionally)
-    const isZoom = Math.abs(newWidth - lastWidth) < 5 && Math.abs(newHeight - lastHeight) < 5;
+    if (!fillElement || !withdrawnElement || !timestampElement) return;
     
-    if (!isZoom) {
-        DeviceInfo.screenWidth = newWidth;
-        DeviceInfo.screenHeight = newHeight;
-        console.log('📐 Window resized:', DeviceInfo.screenWidth, 'x', DeviceInfo.screenHeight);
-    }
+    // These values would come from your API/smart contract in production
+    const TOTAL_FUND = 30000; // $30,000
+    const withdrawn = 0; // Start at $0
     
-    lastWidth = newWidth;
-    lastHeight = newHeight;
-}, 250);
-
-window.addEventListener('resize', handleResize);
-
-/**
- * Detect and handle zoom events specifically
- */
-let lastZoom = window.devicePixelRatio;
-
-const handleZoom = window.throttle(() => {
-    const currentZoom = window.devicePixelRatio;
+    const percentage = (withdrawn / TOTAL_FUND) * 100;
     
-    if (Math.abs(currentZoom - lastZoom) > 0.1) {
-        console.log('🔍 Zoom detected:', currentZoom);
-        
-        // Stabilize layout during zoom
-        document.body.style.transition = 'none';
-        requestAnimFrame(() => {
-            document.body.style.transition = '';
-        });
-    }
+    fillElement.style.width = percentage + '%';
+    withdrawnElement.textContent = '$' + withdrawn.toLocaleString();
     
-    lastZoom = currentZoom;
-}, 100);
-
-// Monitor zoom via visualViewport if available
-if ('visualViewport' in window) {
-    window.visualViewport.addEventListener('resize', handleZoom);
-} else {
-    window.addEventListener('resize', handleZoom);
+    // Update timestamp
+    const now = new Date();
+    timestampElement.textContent = 'Presale not yet started';
 }
 
-// ============================================
-// MOBILE ALLOCATION CARDS
-// ============================================
+// ============================================================================
+// PRESALE PROGRESS BAR
+// ============================================================================
 
 /**
- * Initialize mobile-friendly allocation cards
+ * Update presale progress bar
+ * In production, this would fetch real data from your smart contract
  */
-function initializeMobileAllocationCards() {
-    // Only on mobile devices
-    if (window.innerWidth > 768) {
-        console.log('📱 Desktop detected - skipping mobile allocation cards');
+function updatePresaleProgress() {
+    const progressFill = document.querySelector('.presale-progress .progress-fill');
+    const progressStats = document.querySelector('.presale-progress .progress-stats');
+    
+    if (!progressFill || !progressStats) return;
+    
+    // These values would come from your smart contract in production
+    const HARD_CAP = 500000; // $500,000
+    const raised = 0; // Start at $0
+    
+    const percentage = (raised / HARD_CAP) * 100;
+    
+    progressFill.style.width = percentage + '%';
+    progressStats.innerHTML = `
+        <span>$${raised.toLocaleString()} raised</span>
+        <span>Goal: $${HARD_CAP.toLocaleString()}</span>
+    `;
+}
+
+// ============================================================================
+// COUNTDOWN TIMER
+// ============================================================================
+
+/**
+ * Initialize and manage presale countdown timer
+ */
+function initializeCountdownTimer() {
+    // Set your presale launch date here
+    // Format: 'YYYY-MM-DD HH:MM:SS' in UTC
+    const PRESALE_LAUNCH_DATE = new Date('2025-12-01 00:00:00 UTC').getTime();
+    
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+    
+    if (!daysElement || !hoursElement || !minutesElement || !secondsElement) {
+        console.warn('Countdown timer elements not found');
         return;
     }
     
-    const tableContainer = safeQuery('.allocation-table .table-container');
-    if (!tableContainer) {
-        console.log('📱 Table container not found - skipping mobile allocation cards');
-        return;
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = PRESALE_LAUNCH_DATE - now;
+        
+        if (distance < 0) {
+            // Countdown finished
+            daysElement.textContent = '00';
+            hoursElement.textContent = '00';
+            minutesElement.textContent = '00';
+            secondsElement.textContent = '00';
+            return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        daysElement.textContent = String(days).padStart(2, '0');
+        hoursElement.textContent = String(hours).padStart(2, '0');
+        minutesElement.textContent = String(minutes).padStart(2, '0');
+        secondsElement.textContent = String(seconds).padStart(2, '0');
     }
     
-    // Token allocation data
-    const allocations = [
-        {
-            category: 'Public Presale',
-            percentage: '50%',
-            tokens: '83.35M',
-            price: '$0.003',
-            vesting: 'No lock-up',
-            note: 'Available to all investors during presale'
-        },
-        {
-            category: 'Ecosystem Development',
-            percentage: '20%',
-            tokens: '33.34M',
-            price: 'Reserved',
-            vesting: '24 months',
-            note: 'Platform growth, partnerships, integrations'
-        },
-        {
-            category: 'Team & Advisors',
-            percentage: '15%',
-            tokens: '25M',
-            price: 'Reserved',
-            vesting: '12 months',
-            note: '6-month cliff, 18-month linear vesting'
-        },
-        {
-            category: 'Marketing & Partnerships',
-            percentage: '10%',
-            tokens: '16.67M',
-            price: 'Reserved',
-            vesting: '18 months',
-            note: 'Brand awareness, strategic partnerships'
-        },
-        {
-            category: 'Liquidity Pool',
-            percentage: '5%',
-            tokens: '8.34M',
-            price: 'Reserved',
-            vesting: '3 months',
-            note: 'DEX liquidity, locked for 3 months post-presale'
-        }
-    ];
+    // Update immediately
+    updateCountdown();
     
-    // Create mobile cards container
-    const mobileContainer = document.createElement('div');
-    mobileContainer.className = 'allocation-cards-mobile';
-    
-    // Generate cards
-    allocations.forEach(allocation => {
-        const card = document.createElement('div');
-        card.className = 'allocation-card-mobile';
-        
-        card.innerHTML = `
-            <div class="allocation-card-header">
-                <div class="allocation-card-category">${allocation.category}</div>
-                <div class="allocation-card-percentage">${allocation.percentage}</div>
-            </div>
-            <div class="allocation-card-details">
-                <div class="allocation-detail-item">
-                    <div class="allocation-detail-label">Tokens</div>
-                    <div class="allocation-detail-value">${allocation.tokens}</div>
-                </div>
-                <div class="allocation-detail-item">
-                    <div class="allocation-detail-label">Price</div>
-                    <div class="allocation-detail-value">${allocation.price}</div>
-                </div>
-                <div class="allocation-detail-item">
-                    <div class="allocation-detail-label">Vesting</div>
-                    <div class="allocation-detail-value">${allocation.vesting}</div>
-                </div>
-            </div>
-            <div class="allocation-card-note">${allocation.note}</div>
-        `;
-        
-        mobileContainer.appendChild(card);
-    });
-    
-    // Insert after table container
-    tableContainer.parentNode.insertBefore(mobileContainer, tableContainer.nextSibling);
-    
-    console.log('📱 Mobile allocation cards initialized successfully!');
+    // Update every second
+    setInterval(updateCountdown, 1000);
 }
 
-// ============================================
-// PAGE INITIALIZATION
-// ============================================
-
-// Immediately prevent flash by setting dark background
-(function() {
-    document.documentElement.style.background = '#0f0f0f';
-    if (document.body) {
-        document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
-        document.body.style.opacity = '1';
-    }
-})();
+// ============================================================================
+// SCROLL ANIMATIONS
+// ============================================================================
 
 /**
- * DOM Content Loaded - Initialize all features
+ * Initialize scroll reveal animations for sections
  */
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥🪙 Vault Phoenix loading (Mobile-Optimized v3.1 - Duplicates Removed)...');
+function initializeScrollAnimations() {
+    const revealElements = document.querySelectorAll('.scroll-reveal');
     
-    // Ensure dark background
-    document.body.style.background = 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1810 50%, #451a03 75%, #7c2d12 100%)';
-    document.body.style.opacity = '1';
-    document.body.classList.add('loaded');
+    if (revealElements.length === 0) return;
     
-    // Log device info
-    console.log('📱 Device:', {
-        mobile: DeviceInfo.isMobile,
-        width: DeviceInfo.screenWidth,
-        touch: DeviceInfo.supportsTouch,
-        reducedMotion: DeviceInfo.prefersReducedMotion
-    });
-    
-    // Initialize features
-    initializeMobileAllocationCards();
-    preloadCriticalImages();
-    initializeCryptoCoinImage();
-    initializeEmberCoinImage();
-    initializeCryptoBenefits();
-    initializeEmberHighlights();
-    createScrollProgressIndicator();
-    
-    // Create floating particles (optimized for device)
-    createFloatingParticles();
-    
-    // Initialize stats animation observer (scroll reveal is now in shared-script.js)
-    initializeStatsAnimationObserver();
-    
-    // Initialize interactions
-    initializeCardEffects();
-    initializeGalleryAutoRotation();
-    initializeCTAFeedback();
-    
-    // Mobile-specific optimizations
-    if (DeviceInfo.isMobile) {
-        optimizeMobilePerformance();
-    }
-    
-    console.log('🔥🪙 Vault Phoenix initialized successfully!');
-    console.log('✅ Using shared-script.js for: smooth scrolling, countdown timer, mobile menu, navbar transitions, chatbot, scroll reveal');
-});
-
-// ============================================
-// GALLERY FUNCTIONS (PAGE-SPECIFIC)
-// ============================================
-
-/**
- * Change main phone gallery image
- */
-function changeImage(imageSrc, title) {
-    const mainImg = safeQuery('#mainScreenshot');
-    const thumbs = safeQueryAll('.simple-thumb');
-    
-    if (!mainImg) return;
-    
-    // Add will-change before transition
-    mainImg.style.willChange = 'opacity';
-    mainImg.style.opacity = '0.7';
-    
-    setTimeout(() => {
-        mainImg.src = imageSrc;
-        mainImg.alt = title;
-        mainImg.style.opacity = '1';
-        
-        // Remove will-change after transition
-        setTimeout(() => {
-            mainImg.style.willChange = 'auto';
-        }, 300);
-    }, 150);
-    
-    // Update active states
-    thumbs.forEach(thumb => {
-        thumb.classList.remove('active');
-        const thumbImg = thumb.querySelector('img');
-        if (thumbImg && thumbImg.src.includes(imageSrc.split('/').pop())) {
-            thumb.classList.add('active');
-        }
-    });
-}
-
-/**
- * Change main laptop gallery image
- */
-function changeLaptopImage(imageSrc, title) {
-    const mainImg = safeQuery('#mainLaptopScreenshot');
-    const thumbs = safeQueryAll('.simple-thumb-laptop');
-    
-    if (!mainImg) return;
-    
-    // Add will-change before transition
-    mainImg.style.willChange = 'opacity';
-    mainImg.style.opacity = '0.7';
-    
-    setTimeout(() => {
-        mainImg.src = imageSrc;
-        mainImg.alt = title;
-        mainImg.style.opacity = '1';
-        
-        // Remove will-change after transition
-        setTimeout(() => {
-            mainImg.style.willChange = 'auto';
-        }, 300);
-    }, 150);
-    
-    // Update active states
-    thumbs.forEach(thumb => {
-        thumb.classList.remove('active');
-        const thumbImg = thumb.querySelector('img');
-        if (thumbImg && thumbImg.src.includes(imageSrc.split('/').pop())) {
-            thumb.classList.add('active');
-        }
-    });
-}
-
-// ============================================
-// IMAGE FADE-IN OPTIMIZATION
-// ============================================
-
-/**
- * Optimize image loading to prevent blinking
- */
-function optimizeImageLoading() {
-    safeQueryAll('img').forEach(img => {
-        // Add will-change for images that will animate
-        if (img.closest('.scroll-reveal') || img.closest('.image-with-glow')) {
-            img.style.willChange = 'opacity';
-        }
-        
-        // Handle image loading
-        if (!img.complete) {
-            img.style.opacity = '0';
-            
-            img.addEventListener('load', function() {
-                requestAnimFrame(() => {
-                    this.style.transition = 'opacity 0.3s ease-in-out';
-                    this.style.opacity = '1';
-                    
-                    // Remove will-change after load
-                    setTimeout(() => {
-                        this.style.willChange = 'auto';
-                    }, 300);
-                });
-            }, { once: true });
-        }
-        
-        // Handle errors
-        img.addEventListener('error', function() {
-            console.warn('⚠️ Image failed to load:', this.src);
-            this.style.opacity = '0.5';
-            this.alt = 'Image loading...';
-        }, { once: true });
-    });
-    
-    console.log('🖼️ Image loading optimized with fade-in prevention');
-}
-
-// ============================================
-// INTERACTIVE CARD EFFECTS
-// ============================================
-
-/**
- * Initialize hover effects for interactive cards
- */
-function initializeCardEffects() {
-    // Skip hover effects on touch devices
-    if (DeviceInfo.supportsTouch && DeviceInfo.isMobile) {
-        console.log('🎴 Skipping hover effects for touch device');
-        return;
-    }
-    
-    const cards = safeQueryAll('.feature-card, .use-case-card, .simple-thumb, .simple-thumb-laptop, .crypto-benefit, .ember-highlight-redesigned');
-    
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            // Add will-change before transform
-            this.style.willChange = 'transform, box-shadow';
-            
-            if (this.classList.contains('simple-thumb') || this.classList.contains('simple-thumb-laptop')) {
-                this.style.transform = 'translateY(-5px) scale(1.05)';
-            } else if (this.classList.contains('crypto-benefit')) {
-                this.style.transform = 'translateX(15px)';
-            } else if (this.classList.contains('ember-highlight-redesigned')) {
-                this.style.transform = 'translateX(12px)';
-            } else {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            }
-            
-            // Add glow effect
-            if (this.classList.contains('feature-card') || this.classList.contains('use-case-card')) {
-                this.style.boxShadow = '0 30px 80px rgba(215, 51, 39, 0.2)';
-            }
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            if (!this.classList.contains('active')) {
-                this.style.transform = 'translateY(0) scale(1)';
-                if (this.classList.contains('crypto-benefit') || this.classList.contains('ember-highlight-redesigned')) {
-                    this.style.transform = 'translateX(0)';
-                }
-                this.style.boxShadow = '';
-            }
-            
-            // Remove will-change after animation
-            setTimeout(() => {
-                this.style.willChange = 'auto';
-            }, 300);
-        });
-    });
-    
-    console.log('🎴 Interactive card effects initialized with will-change optimization');
-}
-
-// ============================================
-// STATS ANIMATION
-// ============================================
-
-/**
- * Initialize stats animation observer
- */
-function initializeStatsAnimationObserver() {
-    const heroSection = safeQuery('.hero');
-    if (!heroSection) return;
-    
-    const heroObserver = new IntersectionObserver((entries) => {
+    const revealOnScroll = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setTimeout(animateStats, 500);
-                heroObserver.disconnect();
+                entry.target.classList.add('revealed');
             }
         });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     });
     
-    heroObserver.observe(heroSection);
-    
-    console.log('📊 Stats animation observer initialized');
+    revealElements.forEach(element => {
+        revealOnScroll.observe(element);
+    });
 }
 
+// ============================================================================
+// SMOOTH SCROLLING FOR ANCHOR LINKS
+// ============================================================================
+
 /**
- * Animate stats with counting effect
+ * Add smooth scrolling behavior to all anchor links
  */
-function animateStats() {
-    const stats = safeQueryAll('.stat-number, .revenue-number');
-    
-    stats.forEach(stat => {
-        const finalValue = stat.textContent;
-        const numericValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
-        
-        if (numericValue && numericValue > 0) {
-            let currentValue = 0;
-            const duration = 2500;
-            const increment = numericValue / (duration / 50);
+function initializeSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
             
-            const timer = setInterval(() => {
-                currentValue += increment;
-                if (currentValue >= numericValue) {
-                    stat.textContent = finalValue;
-                    clearInterval(timer);
-                } else {
-                    const displayValue = Math.floor(currentValue * 10) / 10;
-                    const suffix = finalValue.replace(/[\d.,]/g, '');
-                    if (finalValue.includes('.')) {
-                        stat.textContent = displayValue.toFixed(1) + suffix;
-                    } else {
-                        stat.textContent = Math.floor(displayValue).toLocaleString() + suffix;
-                    }
-                }
-            }, 50);
-        }
-    });
-}
-
-// ============================================
-// AUTO-ROTATE GALLERY
-// ============================================
-
-let currentImageIndex = 0;
-const imageRotation = [
-    { src: 'images/ARView.jpg', title: 'AR View' },
-    { src: 'images/EmberAirdrop.jpg', title: 'Ember Airdrop' },
-    { src: 'images/EmberCollected.jpg', title: 'Ember Collected' },
-    { src: 'images/EmberNearby.jpg', title: 'Ember Nearby' },
-    { src: 'images/EmberVault.jpg', title: 'Ember Vault' },
-    { src: 'images/HuntMap.jpg', title: 'Hunt Map' }
-];
-
-let currentLaptopImageIndex = 0;
-const laptopImageRotation = [
-    { src: 'images/CampaignControl.PNG', title: 'Campaign Control' },
-    { src: 'images/DashboardOverview.PNG', title: 'Dashboard Overview' },
-    { src: 'images/AdvertiserManagement.PNG', title: 'Advertiser Management' },
-    { src: 'images/AirdropCenter.PNG', title: 'Airdrop Center' },
-    { src: 'images/Walletandfunding.PNG', title: 'Wallet and Funding' },
-    { src: 'images/AppbuilderSDK.PNG', title: 'App Builder SDK' }
-];
-
-/**
- * Initialize gallery auto-rotation
- */
-function initializeGalleryAutoRotation() {
-    let autoRotateInterval;
-    let autoRotateLaptopInterval;
-    
-    function autoRotateGallery() {
-        const showcaseSection = safeQuery('#showcase');
-        if (!showcaseSection) return;
-        
-        const rect = showcaseSection.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        
-        if (isVisible) {
-            currentImageIndex = (currentImageIndex + 1) % imageRotation.length;
-            const currentImage = imageRotation[currentImageIndex];
-            changeImage(currentImage.src, currentImage.title);
-        }
-    }
-    
-    function autoRotateLaptopGallery() {
-        const showcaseSection = safeQuery('#showcase');
-        if (!showcaseSection) return;
-        
-        const rect = showcaseSection.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        
-        if (isVisible) {
-            currentLaptopImageIndex = (currentLaptopImageIndex + 1) % laptopImageRotation.length;
-            const currentImage = laptopImageRotation[currentLaptopImageIndex];
-            changeLaptopImage(currentImage.src, currentImage.title);
-        }
-    }
-    
-    // Start auto-rotation after delay
-    setTimeout(() => {
-        autoRotateInterval = setInterval(autoRotateGallery, 4500);
-        autoRotateLaptopInterval = setInterval(autoRotateLaptopGallery, 4500);
-    }, 3000);
-    
-    // Pause auto-rotation when user interacts
-    safeQueryAll('.simple-thumb').forEach(thumb => {
-        thumb.addEventListener('click', () => {
-            if (autoRotateInterval) {
-                clearInterval(autoRotateInterval);
-            }
-            setTimeout(() => {
-                autoRotateInterval = setInterval(autoRotateGallery, 4500);
-            }, 15000);
-        });
-    });
-    
-    safeQueryAll('.simple-thumb-laptop').forEach(thumb => {
-        thumb.addEventListener('click', () => {
-            if (autoRotateLaptopInterval) {
-                clearInterval(autoRotateLaptopInterval);
-            }
-            setTimeout(() => {
-                autoRotateLaptopInterval = setInterval(autoRotateLaptopGallery, 4500);
-            }, 15000);
-        });
-    });
-    
-    console.log('🔄 Gallery auto-rotation initialized');
-}
-
-// ============================================
-// CTA BUTTON FEEDBACK
-// ============================================
-
-/**
- * Initialize CTA button feedback
- */
-function initializeCTAFeedback() {
-    // Email CTAs
-    safeQueryAll('a[href^="mailto:"]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            console.log('📧 Email CTA clicked:', link.href);
-            link.style.willChange = 'transform';
-            link.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                link.style.transform = '';
-                link.style.willChange = 'auto';
-            }, 150);
-        });
-    });
-    
-    // SMS CTAs
-    safeQueryAll('a[href^="sms:"]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            console.log('📱 SMS CTA clicked:', link.href);
-            link.style.willChange = 'transform';
-            link.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                link.style.transform = '';
-                link.style.willChange = 'auto';
-            }, 150);
-        });
-    });
-    
-    console.log('📲 CTA button feedback initialized with will-change');
-}
-
-// ============================================
-// PAGE LOAD HANDLING
-// ============================================
-
-/**
- * Window load event - final optimizations
- */
-window.addEventListener('load', () => {
-    console.log('🔥🪙 Vault Phoenix fully loaded!');
-    
-    // Optimize image loading after page load
-    optimizeImageLoading();
-    
-    // Add phoenix flame effect to logo
-    const logoIcon = safeQuery('.logo-icon');
-    if (logoIcon) {
-        logoIcon.style.filter = 'drop-shadow(0 0 15px rgba(215, 51, 39, 0.8))';
-    }
-    
-    // Performance monitoring
-    setTimeout(() => {
-        const floatingCoins = safeQuery('.hero-floating-coins');
-        if (floatingCoins) {
-            console.log('✅ Floating coins active');
-        }
-        
-        const mainScreenshot = safeQuery('#mainScreenshot');
-        if (mainScreenshot && mainScreenshot.src.includes('images/')) {
-            console.log('✅ Gallery images loaded');
-        }
-    }, 500);
-    
-    // Performance timing
-    const loadTime = performance.now();
-    console.log(`%c🔥 Page loaded in ${Math.round(loadTime)}ms`, 'color: #22c55e; font-weight: bold;');
-});
-
-// ============================================
-// IMAGE PRELOADING
-// ============================================
-
-/**
- * Preload critical images
- */
-function preloadCriticalImages() {
-    const criticalImages = [
-        // App Screenshots
-        'images/ARView.jpg',
-        'images/EmberAirdrop.jpg',
-        'images/EmberCollected.jpg',
-        'images/EmberNearby.jpg',
-        'images/EmberVault.jpg',
-        'images/HuntMap.jpg',
-        // Management System
-        'images/CampaignControl.PNG',
-        'images/DashboardOverview.PNG',
-        'images/AdvertiserManagement.PNG',
-        'images/AirdropCenter.PNG',
-        'images/Walletandfunding.PNG',
-        'images/AppbuilderSDK.PNG',
-        // Core Images
-        'images/VPEmberCoin.PNG',
-        'images/PhoenixHoldingCoin.PNG',
-        'images/VPLogoNoText.PNG'
-    ];
-    
-    criticalImages.forEach(src => {
-        const img = new Image();
-        img.src = src;
-    });
-    
-    console.log('🖼️ Image preloading initiated');
-}
-
-// ============================================
-// FLOATING PARTICLES - MOBILE OPTIMIZED
-// ============================================
-
-/**
- * Create floating crypto particles (optimized for performance)
- */
-function createFloatingParticles() {
-    const hero = safeQuery('.hero');
-    if (!hero) {
-        console.warn('⚠️ Hero section not found');
-        return;
-    }
-    
-    // Skip particles if user prefers reduced motion
-    if (DeviceInfo.prefersReducedMotion) {
-        console.log('⚠️ Reduced motion enabled - skipping particles');
-        return;
-    }
-    
-    console.log('🪙 Creating floating particles...');
-    
-    // Create container
-    const floatingCoins = document.createElement('div');
-    floatingCoins.className = 'hero-floating-coins';
-    floatingCoins.style.cssText = `
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
-        overflow: hidden;
-    `;
-    
-    // Get optimal particle count
-    const particleCount = DeviceInfo.getOptimalParticleCount();
-    
-    // Optimized positions
-    const coinPositions = [
-        { top: '15%', left: '10%', delay: '0s', duration: '6s' },
-        { top: '70%', left: '8%', delay: '1s', duration: '7s' },
-        { top: '25%', right: '12%', delay: '2s', duration: '8s' },
-        { top: '65%', right: '10%', delay: '3s', duration: '6s' },
-        { top: '10%', left: '80%', delay: '4s', duration: '7s' },
-        { bottom: '20%', right: '85%', delay: '5s', duration: '9s' }
-    ].slice(0, particleCount);
-    
-    coinPositions.forEach((pos, index) => {
-        const coin = document.createElement('div');
-        coin.className = `hero-coin hero-coin-${index + 1}`;
-        
-        const coinImg = document.createElement('img');
-        coinImg.src = 'images/VPEmberCoin.PNG';
-        coinImg.alt = 'VP Ember Coin';
-        coinImg.className = 'hero-crypto-coin-icon';
-        coinImg.loading = 'lazy';
-        
-        // Mobile-optimized sizing
-        const size = DeviceInfo.isMobile ? 'clamp(20px, 4vw, 35px)' : 'clamp(35px, 5vw, 50px)';
-        const opacity = DeviceInfo.isMobile ? '0.5' : '0.7';
-        
-        coinImg.style.cssText = `
-            width: ${size};
-            height: ${size};
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
-            opacity: ${opacity};
-            border-radius: 50%;
-            will-change: transform;
-        `;
-        
-        coinImg.onerror = function() {
-            console.warn('⚠️ Coin image failed, using emoji fallback');
-            const fallback = document.createElement('div');
-            fallback.innerHTML = '🪙';
-            fallback.style.cssText = `
-                font-size: ${size};
-                filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
-            `;
-            coin.appendChild(fallback);
-        };
-        
-        coin.appendChild(coinImg);
-        
-        coin.style.cssText = `
-            position: absolute;
-            animation: heroCoinFloat ${pos.duration} ease-in-out infinite;
-            animation-delay: ${pos.delay};
-            z-index: 1;
-            pointer-events: none;
-            ${pos.top ? `top: ${pos.top};` : ''}
-            ${pos.bottom ? `bottom: ${pos.bottom};` : ''}
-            ${pos.left ? `left: ${pos.left};` : ''}
-            ${pos.right ? `right: ${pos.right};` : ''}
-        `;
-        
-        floatingCoins.appendChild(coin);
-    });
-    
-    hero.insertBefore(floatingCoins, hero.firstChild);
-    
-    // Add animation CSS if not present
-    if (!document.querySelector('#heroCoinFloatAnimation')) {
-        const style = document.createElement('style');
-        style.id = 'heroCoinFloatAnimation';
-        style.textContent = `
-            @keyframes heroCoinFloat {
-                0%, 100% { 
-                    transform: translateY(0px) rotate(0deg) scale(1); 
-                }
-                25% { 
-                    transform: translateY(-20px) rotate(90deg) scale(1.1); 
-                }
-                50% { 
-                    transform: translateY(-10px) rotate(180deg) scale(0.9); 
-                }
-                75% { 
-                    transform: translateY(-25px) rotate(270deg) scale(1.15); 
-                }
-            }
+            // Don't prevent default for just '#' (like modals that trigger JS functions)
+            if (href === '#') return;
             
-            @media (prefers-reduced-motion: reduce) {
-                .hero-coin {
-                    animation: none !important;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-    
-    console.log(`🪙 ${particleCount} floating particles created with will-change optimization`);
-}
-
-// ============================================
-// COIN IMAGE INTERACTIONS
-// ============================================
-
-/**
- * Initialize crypto coin image interactions
- */
-function initializeCryptoCoinImage() {
-    const cryptoImage = safeQuery('.phoenix-coin-image');
-    if (!cryptoImage) return;
-    
-    // Skip hover effects on mobile
-    if (DeviceInfo.isMobile) return;
-    
-    cryptoImage.addEventListener('mouseenter', function() {
-        this.style.willChange = 'filter';
-        this.style.filter = 'drop-shadow(0 0 30px rgba(251, 146, 60, 0.8)) brightness(1.1)';
-    });
-    
-    cryptoImage.addEventListener('mouseleave', function() {
-        this.style.filter = '';
-        setTimeout(() => {
-            this.style.willChange = 'auto';
-        }, 300);
-    });
-    
-    console.log('🪙 Crypto coin interactions initialized with will-change');
-}
-
-/**
- * Initialize ember coin image interactions
- */
-function initializeEmberCoinImage() {
-    const emberCoinImage = safeQuery('.phoenix-holding-coin-redesigned');
-    if (!emberCoinImage) return;
-    
-    // Skip hover effects on mobile
-    if (DeviceInfo.isMobile) return;
-    
-    emberCoinImage.addEventListener('mouseenter', function() {
-        this.style.willChange = 'filter, transform';
-        this.style.filter = 'drop-shadow(0 0 50px rgba(240, 165, 0, 0.9)) brightness(1.2)';
-        this.style.transform = 'scale(1.1) translateY(-10px)';
-    });
-    
-    emberCoinImage.addEventListener('mouseleave', function() {
-        this.style.filter = '';
-        this.style.transform = '';
-        setTimeout(() => {
-            this.style.willChange = 'auto';
-        }, 300);
-    });
-    
-    console.log('🪙 Ember coin interactions initialized with will-change');
-}
-
-// ============================================
-// CRYPTO BENEFITS ANIMATIONS
-// ============================================
-
-/**
- * Initialize crypto benefits animations
- */
-function initializeCryptoBenefits() {
-    const benefits = safeQueryAll('.crypto-benefit');
-    if (!benefits.length) return;
-    
-    const benefitsObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.willChange = 'transform, opacity';
-                    entry.target.style.transform = 'translateX(0)';
-                    entry.target.style.opacity = '1';
-                    
-                    // Remove will-change after animation
-                    setTimeout(() => {
-                        entry.target.style.willChange = 'auto';
-                    }, 600);
-                    
-                    const icon = entry.target.querySelector('.benefit-icon');
-                    if (icon && !DeviceInfo.prefersReducedMotion) {
-                        if (!document.querySelector('#coinBounceAnimation')) {
-                            const style = document.createElement('style');
-                            style.id = 'coinBounceAnimation';
-                            style.textContent = `
-                                @keyframes coinBounce {
-                                    0% { transform: scale(1) rotateY(0deg); }
-                                    50% { transform: scale(1.2) rotateY(180deg); }
-                                    100% { transform: scale(1) rotateY(360deg); }
-                                }
-                            `;
-                            document.head.appendChild(style);
-                        }
-                        icon.style.willChange = 'transform';
-                        icon.style.animation = 'coinBounce 0.6s ease-out';
-                        setTimeout(() => {
-                            icon.style.willChange = 'auto';
-                        }, 600);
-                    }
-                }, index * 200);
-            }
-        });
-    }, { threshold: 0.3 });
-    
-    benefits.forEach(benefit => {
-        benefit.style.transform = 'translateX(-50px)';
-        benefit.style.opacity = '0';
-        benefitsObserver.observe(benefit);
-    });
-    
-    console.log('💰 Crypto benefits animations initialized with will-change');
-}
-
-/**
- * Initialize ember highlights animations
- */
-function initializeEmberHighlights() {
-    const highlights = safeQueryAll('.ember-highlight-redesigned');
-    if (!highlights.length) return;
-    
-    const highlightsObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.willChange = 'transform, opacity';
-                    entry.target.style.transform = 'translateX(0)';
-                    entry.target.style.opacity = '1';
-                    
-                    // Remove will-change after animation
-                    setTimeout(() => {
-                        entry.target.style.willChange = 'auto';
-                    }, 600);
-                    
-                    const emoji = entry.target.querySelector('.highlight-emoji-redesigned');
-                    if (emoji && !DeviceInfo.prefersReducedMotion) {
-                        if (!document.querySelector('#emberFlickerAnimation')) {
-                            const style = document.createElement('style');
-                            style.id = 'emberFlickerAnimation';
-                            style.textContent = `
-                                @keyframes emberFlicker {
-                                    0%, 100% { transform: scale(1); }
-                                    25% { transform: scale(1.1); }
-                                    50% { transform: scale(0.95); }
-                                    75% { transform: scale(1.05); }
-                                }
-                            `;
-                            document.head.appendChild(style);
-                        }
-                        emoji.style.willChange = 'transform';
-                        emoji.style.animation = 'emberFlicker 1s ease-in-out';
-                        setTimeout(() => {
-                            emoji.style.willChange = 'auto';
-                        }, 1000);
-                    }
-                }, index * 150);
-            }
-        });
-    }, { threshold: 0.3 });
-    
-    highlights.forEach(highlight => {
-        highlight.style.transform = 'translateX(-30px)';
-        highlight.style.opacity = '0';
-        highlightsObserver.observe(highlight);
-    });
-    
-    console.log('🔥 Ember highlights animations initialized with will-change');
-}
-
-// ============================================
-// CTA BUTTON ENHANCEMENTS
-// ============================================
-
-/**
- * Enhance CTA buttons with effects
- */
-safeQueryAll('.cta-button, .cta-primary, .cta-secondary, .demo-button, .join-presale-button-redesigned, .demo-button-enhanced').forEach(button => {
-    // Skip effects on mobile or reduced motion
-    if (DeviceInfo.isMobile || DeviceInfo.prefersReducedMotion) return;
-    
-    button.addEventListener('mouseenter', function() {
-        this.style.willChange = 'filter';
-        this.style.filter = 'brightness(1.1) saturate(1.2)';
-    });
-    
-    button.addEventListener('mouseleave', function() {
-        this.style.filter = '';
-        setTimeout(() => {
-            this.style.willChange = 'auto';
-        }, 300);
-    });
-    
-    button.addEventListener('mousedown', function() {
-        this.style.willChange = 'transform';
-        this.style.transform = 'scale(0.95)';
-    });
-    
-    button.addEventListener('mouseup', function() {
-        this.style.transform = '';
-        setTimeout(() => {
-            this.style.willChange = 'auto';
-        }, 150);
-    });
-});
-
-console.log('✨ CTA enhancements initialized with will-change');
-
-// ============================================
-// SCROLL PROGRESS INDICATOR
-// ============================================
-
-/**
- * Create scroll progress indicator
- */
-function createScrollProgressIndicator() {
-    const indicator = document.createElement('div');
-    indicator.className = 'phoenix-scroll-progress';
-    indicator.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #d73327, #fb923c, #f0a500);
-        z-index: 9999;
-        width: 0%;
-        transition: width 0.1s ease;
-        box-shadow: 0 2px 5px rgba(215, 51, 39, 0.3);
-        will-change: width;
-    `;
-    document.body.appendChild(indicator);
-    
-    const updateProgress = window.throttle(() => {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        indicator.style.width = scrolled + '%';
-    }, 50);
-    
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    
-    console.log('📊 Scroll progress indicator initialized with will-change');
-}
-
-// ============================================
-// MOBILE PERFORMANCE OPTIMIZATIONS
-// ============================================
-
-/**
- * Apply mobile-specific performance optimizations
- */
-function optimizeMobilePerformance() {
-    console.log('📱 Applying mobile optimizations...');
-    
-    // Disable hover effects on touch devices
-    document.body.classList.add('touch-device');
-    
-    // Optimize scroll performance
-    const scrollElements = safeQueryAll('.allocation-cards-mobile');
-    scrollElements.forEach(el => {
-        el.style.webkitOverflowScrolling = 'touch';
-        el.style.overscrollBehavior = 'contain';
-    });
-    
-    // Reduce animation complexity
-    if (DeviceInfo.isLowEndDevice()) {
-        document.body.classList.add('low-end-device');
-        console.log('📱 Low-end device optimizations applied');
-    }
-    
-    // Handle orientation changes
-    window.addEventListener('orientationchange', window.debounce(() => {
-        console.log('📱 Orientation changed');
-        DeviceInfo.screenWidth = window.innerWidth;
-        DeviceInfo.screenHeight = window.innerHeight;
-    }, 300));
-    
-    console.log('📱 Mobile optimizations complete');
-}
-
-// ============================================
-// EASTER EGG: KONAMI CODE
-// ============================================
-
-let konamiCode = [];
-const konamiSequence = [
-    'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-    'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-    'KeyB', 'KeyA'
-];
-
-document.addEventListener('keydown', (e) => {
-    konamiCode.push(e.code);
-    if (konamiCode.length > konamiSequence.length) {
-        konamiCode.shift();
-    }
-    
-    if (konamiCode.join(',') === konamiSequence.join(',')) {
-        console.log('🔥🪙 BONUS ACTIVATED!');
-        
-        // Create coin rain (reduced on mobile)
-        const coinCount = DeviceInfo.isMobile ? 15 : 30;
-        
-        for (let i = 0; i < coinCount; i++) {
-            setTimeout(() => {
-                const coin = document.createElement('div');
-                coin.innerHTML = '🪙';
-                coin.style.cssText = `
-                    position: fixed;
-                    font-size: ${Math.random() * 20 + 25}px;
-                    left: ${Math.random() * 100}vw;
-                    top: -50px;
-                    z-index: 10000;
-                    pointer-events: none;
-                    animation: coinFall ${Math.random() * 2 + 2}s linear forwards;
-                    will-change: transform, opacity;
-                `;
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                e.preventDefault();
                 
-                document.body.appendChild(coin);
-                setTimeout(() => coin.remove(), 4000);
-            }, i * 100);
-        }
-        
-        // Add animation if not present
-        if (!document.querySelector('#coinFallAnimation')) {
-            const style = document.createElement('style');
-            style.id = 'coinFallAnimation';
-            style.textContent = `
-                @keyframes coinFall {
-                    to { 
-                        transform: translateY(calc(100vh + 100px)) rotate(720deg); 
-                        opacity: 0; 
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        konamiCode = [];
+                const navHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+                const targetPosition = targetElement.offsetTop - navHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// ============================================================================
+// MODAL CLICK OUTSIDE TO CLOSE
+// ============================================================================
+
+/**
+ * Close modals when clicking outside the modal content
+ */
+function initializeModalCloseOnClickOutside() {
+    // TPA Modal
+    const tpaModal = document.getElementById('tpaModal');
+    if (tpaModal) {
+        tpaModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTpaModal();
+            }
+        });
     }
-});
+    
+    // Whitepaper Modal
+    const whitepaperModal = document.getElementById('whitepaperModal');
+    if (whitepaperModal) {
+        whitepaperModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeWhitepaperModal();
+            }
+        });
+    }
+}
 
-// ============================================
-// CONSOLE MESSAGES
-// ============================================
+// ============================================================================
+// KEYBOARD ACCESSIBILITY - ESC TO CLOSE MODALS
+// ============================================================================
 
-console.log('%c🔥🪙 VAULT PHOENIX', 'color: #d73327; font-size: 24px; font-weight: bold;');
-console.log('%c🚀 AR Crypto Gaming Revolution', 'color: #fb923c; font-size: 16px; font-weight: bold;');
-console.log('%c📧 contact@vaultphoenix.com', 'color: #374151; font-size: 12px;');
-console.log('%c💡 Senior Engineering - Mobile-First Architecture v3.1', 'color: #22c55e; font-size: 12px; font-weight: bold;');
-console.log('%c✅ Integrated with shared-script.js (smooth scroll, countdown, mobile menu, navbar, chatbot, scroll reveal)', 'color: #3b82f6; font-size: 12px; font-weight: bold;');
-console.log('Try the Konami Code for a surprise! ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
+/**
+ * Allow ESC key to close modals
+ */
+function initializeKeyboardAccessibility() {
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+            // Check if any modal is open and close it
+            const tpaModal = document.getElementById('tpaModal');
+            const whitepaperModal = document.getElementById('whitepaperModal');
+            
+            if (tpaModal && tpaModal.style.display === 'flex') {
+                closeTpaModal();
+            }
+            
+            if (whitepaperModal && whitepaperModal.style.display === 'flex') {
+                closeWhitepaperModal();
+            }
+        }
+    });
+}
+
+// ============================================================================
+// EVENT LISTENERS
+// ============================================================================
+
+/**
+ * Initialize all event listeners after DOM is loaded
+ */
+function initializeEventListeners() {
+    // Investment Calculator Input
+    const investmentInput = document.getElementById('investment-amount');
+    if (investmentInput) {
+        investmentInput.addEventListener('input', updateInvestmentCalculator);
+        investmentInput.addEventListener('change', updateInvestmentCalculator);
+    }
+    
+    // TPA Checkbox
+    const tpaCheckbox = document.getElementById('tpa-agree-checkbox');
+    if (tpaCheckbox) {
+        tpaCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                tpaAgreed = true;
+            } else {
+                tpaAgreed = false;
+            }
+            updatePresaleButtonState();
+        });
+    }
+    
+    // Presale Button (currently disabled, but ready for functionality)
+    const presaleButton = document.getElementById('presale-buy-button');
+    if (presaleButton) {
+        presaleButton.addEventListener('click', function() {
+            if (!this.disabled) {
+                // This is where you'd handle the presale purchase
+                console.log('Presale button clicked');
+                alert('Presale coming soon! This will connect to your wallet when live.');
+            }
+        });
+    }
+}
+
+// ============================================================================
+// INITIALIZATION
+// ============================================================================
+
+/**
+ * Main initialization function - called when DOM is ready
+ */
+function initializeEmberPage() {
+    console.log('🔥 Initializing Ember Token Page...');
+    
+    // Initialize all components
+    initializeEventListeners();
+    updateInvestmentCalculator(); // Set initial values
+    updatePresaleButtonState(); // Set initial button state
+    updateDevFundTracker();
+    updatePresaleProgress();
+    initializeCountdownTimer();
+    initializeScrollAnimations();
+    initializeSmoothScrolling();
+    initializeModalCloseOnClickOutside();
+    initializeKeyboardAccessibility();
+    
+    console.log('✓ Ember Token Page initialized successfully');
+}
+
+// ============================================================================
+// DOM READY - START INITIALIZATION
+// ============================================================================
+
+// Wait for DOM to be fully loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeEmberPage);
+} else {
+    // DOM is already loaded
+    initializeEmberPage();
+}
+
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+
+/**
+ * Format number with commas for display
+ */
+function formatNumberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+/**
+ * Validate email format
+ */
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+/**
+ * Check if user prefers reduced motion (accessibility)
+ */
+function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+// ============================================================================
+// EXPORT FUNCTIONS FOR EXTERNAL USE
+// ============================================================================
+
+// Export functions that might be needed by other scripts
+window.emberPage = {
+    updatePresaleProgress,
+    updateDevFundTracker,
+    updateInvestmentCalculator,
+    updatePresaleButtonState
+};
+
+console.log('✓ ember-script.js loaded successfully');
