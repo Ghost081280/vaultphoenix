@@ -2115,54 +2115,16 @@
         </div>
     </div>
 
-    <!-- =================================================================
-         CRITICAL FIX: SCRIPTS - LOAD IN CORRECT ORDER WITH DEFER
-         ================================================================= -->
+    <!-- ================================================================= -->
+    <!-- SCRIPTS - PROPER SEPARATION OF CONCERNS -->
+    <!-- Shared = Nav/Footer/Chatbot/Scroll | Ember = Body Content Only -->
+    <!-- ================================================================= -->
     
-    <!-- 1. Shared functionality first (includes mobile menu, chatbot, etc.) -->
-    <script src="shared-script.js" defer></script>
+    <!-- 1. Load shared first - handles global UI -->
+    <script src="shared-script.js"></script>
     
-    <!-- 2. Page-specific Ember functionality second (modal functions, presale logic) -->
-    <script src="ember-script.js" defer></script>
-
-    <!-- 3. CRITICAL FIX: Initialization safety check -->
-    <script>
-        // Prevent multiple initializations and check ember page initialization
-        // Use a small delay to ensure deferred scripts have executed
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                // Safety check for ember page initialization
-                if (window.emberPage && typeof window.emberPage.initialized === 'function') {
-                    if (window.emberPage.initialized()) {
-                        console.log('✓ Ember page initialized successfully');
-                    } else {
-                        console.warn('⚠ Ember page initialization check - may need manual init');
-                    }
-                }
-                
-                // Verify critical modal functions exist
-                if (typeof window.showTpaModal === 'function') {
-                    console.log('✓ TPA modal functions loaded');
-                } else {
-                    console.error('❌ Critical: TPA modal functions not loaded');
-                }
-                
-                if (typeof window.showWhitepaperModal === 'function') {
-                    console.log('✓ Whitepaper modal functions loaded');
-                } else {
-                    console.error('❌ Critical: Whitepaper modal functions not loaded');
-                }
-                
-                // Verify countdown timer initialized
-                const daysElement = document.getElementById('days');
-                if (daysElement && daysElement.textContent !== '--') {
-                    console.log('✓ Countdown timer initialized');
-                } else {
-                    console.warn('⚠ Countdown timer may not be initialized');
-                }
-            }, 100); // Small delay to allow deferred scripts to execute
-        });
-    </script>
+    <!-- 2. Load ember second - handles body content -->
+    <script src="ember-script.js"></script>
 
 </body>
 </html>
