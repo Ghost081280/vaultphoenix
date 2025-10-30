@@ -1,6 +1,7 @@
 // ============================================================================
-// EMBER PAGE JAVASCRIPT - PRODUCTION FIX V2
+// EMBER PAGE JAVASCRIPT - PRODUCTION FIX V3 - CONFLICT RESOLUTION
 // Handles all ember.html specific functionality
+// Countdown timer and smooth scrolling now handled by shared-script.js
 // ============================================================================
 
 // ============================================================================
@@ -212,67 +213,11 @@ function updatePresaleProgress() {
 }
 
 // ============================================================================
-// COUNTDOWN TIMER - FIXED DATE
+// COUNTDOWN TIMER - REMOVED (Now handled by shared-script.js)
 // ============================================================================
-
-/**
- * Initialize and manage presale countdown timer
- */
-function initializeCountdownTimer() {
-    // Set a realistic presale launch date
-    // Change this to your actual launch date
-    const PRESALE_LAUNCH_DATE = new Date('2025-02-01 00:00:00 UTC').getTime();
-    
-    const daysElement = document.getElementById('days');
-    const hoursElement = document.getElementById('hours');
-    const minutesElement = document.getElementById('minutes');
-    const secondsElement = document.getElementById('seconds');
-    
-    if (!daysElement || !hoursElement || !minutesElement || !secondsElement) {
-        console.warn('Countdown timer elements not found');
-        return;
-    }
-    
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = PRESALE_LAUNCH_DATE - now;
-        
-        if (distance < 0) {
-            // Countdown finished
-            daysElement.textContent = '00';
-            hoursElement.textContent = '00';
-            minutesElement.textContent = '00';
-            secondsElement.textContent = '00';
-            
-            // Clear interval when countdown is done
-            if (window.emberCountdownInterval) {
-                clearInterval(window.emberCountdownInterval);
-            }
-            return;
-        }
-        
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        daysElement.textContent = String(days).padStart(2, '0');
-        hoursElement.textContent = String(hours).padStart(2, '0');
-        minutesElement.textContent = String(minutes).padStart(2, '0');
-        secondsElement.textContent = String(seconds).padStart(2, '0');
-    }
-    
-    // Clear any existing interval
-    if (window.emberCountdownInterval) {
-        clearInterval(window.emberCountdownInterval);
-    }
-    
-    // Update immediately
-    updateCountdown();
-    
-    // Update every second
-    window.emberCountdownInterval = setInterval(updateCountdown, 1000);
-}
+// Note: The universal countdown timer in shared-script.js handles all countdown
+// elements across both main.html and ember.html automatically.
+// No ember-specific countdown code needed here.
 
 // ============================================================================
 // SCROLL ANIMATIONS
@@ -305,48 +250,10 @@ function initializeScrollAnimations() {
 }
 
 // ============================================================================
-// SMOOTH SCROLLING FOR ANCHOR LINKS
+// SMOOTH SCROLLING - REMOVED (Now handled by shared-script.js)
 // ============================================================================
-
-/**
- * Add smooth scrolling behavior to all anchor links
- */
-function initializeSmoothScrolling() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            
-            // Don't prevent default for just '#' or modal triggers
-            if (href === '#' || href === '#presale') return;
-            
-            const targetId = href.substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                e.preventDefault();
-                
-                const navHeight = document.querySelector('.navbar')?.offsetHeight || 80;
-                const targetPosition = targetElement.offsetTop - navHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
-                const mobileMenu = document.getElementById('mobile-menu');
-                const mobileOverlay = document.getElementById('mobile-menu-overlay');
-                if (mobileMenu && mobileMenu.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
-                    if (mobileOverlay) {
-                        mobileOverlay.classList.remove('active');
-                    }
-                    document.body.style.overflow = '';
-                }
-            }
-        });
-    });
-}
+// Note: Smooth scrolling for anchor links is now handled globally by
+// shared-script.js for consistency across all pages.
 
 // ============================================================================
 // MODAL CLICK OUTSIDE TO CLOSE
@@ -456,20 +363,24 @@ function initializeEmberPage() {
     
     console.log('🔥 Initializing Ember Token Page...');
     
-    // Initialize all components
+    // Initialize ember-specific components only
     initializeEventListeners();
     updateInvestmentCalculator(); // Set initial values
     updatePresaleButtonState(); // Set initial button state
     updateDevFundTracker();
     updatePresaleProgress();
-    initializeCountdownTimer();
-    initializeScrollAnimations();
-    initializeSmoothScrolling();
-    initializeModalCloseOnClickOutside();
-    initializeKeyboardAccessibility();
+    
+    // Note: Countdown timer handled by shared-script.js
+    // Note: Smooth scrolling handled by shared-script.js
+    
+    initializeScrollAnimations(); // Ember-specific reveal animations
+    initializeModalCloseOnClickOutside(); // TPA/Whitepaper modals
+    initializeKeyboardAccessibility(); // ESC key for ember modals
     
     emberPageInitialized = true;
     console.log('✓ Ember Token Page initialized successfully');
+    console.log('✓ Countdown timer managed by shared-script.js');
+    console.log('✓ Smooth scrolling managed by shared-script.js');
 }
 
 // ============================================================================
@@ -478,9 +389,8 @@ function initializeEmberPage() {
 
 // Clean up any existing intervals on page unload
 window.addEventListener('beforeunload', function() {
-    if (window.emberCountdownInterval) {
-        clearInterval(window.emberCountdownInterval);
-    }
+    // Note: Countdown interval is managed by shared-script.js
+    console.log('🔥 Ember page unloading');
 });
 
 // Wait for DOM to be fully loaded
@@ -530,4 +440,4 @@ window.emberPage = {
     initialized: function() { return emberPageInitialized; }
 };
 
-console.log('✓ ember-script.js loaded successfully');
+console.log('✓ ember-script.js loaded successfully (V3 - Conflict Resolution Complete)');
