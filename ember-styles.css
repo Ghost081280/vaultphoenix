@@ -3044,15 +3044,16 @@ body {
 }
 
 .presale-button:disabled {
-    background: rgba(128, 128, 128, 0.5);
-    cursor: not-allowed;
-    box-shadow: none;
-    opacity: 0.6;
+    background: rgba(128, 128, 128, 0.5) !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    opacity: 0.6 !important;
+    transform: none !important;
 }
 
 .presale-button:disabled:hover {
-    transform: none;
-    box-shadow: none;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 .presale-note {
