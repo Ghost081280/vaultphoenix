@@ -182,6 +182,53 @@ document.addEventListener('keydown', (e) => {
     }, { passive: true });
 
     // ============================================
+    // SCROLL PROGRESS INDICATOR - HORIZONTAL TOP BAR
+    // ============================================
+
+    function initializeScrollProgress() {
+        console.log('📊 Initializing scroll progress indicator...');
+        
+        // Create progress bar elements
+        const progressContainer = document.createElement('div');
+        progressContainer.className = 'scroll-progress-container';
+        
+        const progressBar = document.createElement('div');
+        progressBar.className = 'scroll-progress-bar';
+        
+        progressContainer.appendChild(progressBar);
+        document.body.appendChild(progressContainer);
+        
+        console.log('📊 Progress bar elements created and appended to body');
+        
+        // Update progress on scroll
+        function updateScrollProgress() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Calculate scroll percentage
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+            
+            // Update progress bar width
+            progressBar.style.width = scrollPercentage + '%';
+        }
+        
+        // Throttled scroll listener for performance
+        let scrollProgressTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollProgressTimeout) {
+                window.cancelAnimationFrame(scrollProgressTimeout);
+            }
+            scrollProgressTimeout = window.requestAnimationFrame(updateScrollProgress);
+        }, { passive: true });
+        
+        // Initial update
+        updateScrollProgress();
+        
+        console.log('✅ Scroll progress indicator initialized successfully');
+    }
+
+    // ============================================
     // UNIVERSAL COUNTDOWN TIMER
     // Works for both main page and ember token page
     // ============================================
@@ -1044,6 +1091,9 @@ If asked about financial advice, remind users to do their own research and consu
         
         // Initial navbar state
         handleNavbarScroll();
+        
+        // Initialize scroll progress indicator
+        initializeScrollProgress();
         
         // Initialize cookie consent banner
         initializeCookieConsent();
