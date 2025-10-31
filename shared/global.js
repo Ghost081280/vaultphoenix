@@ -1,9 +1,9 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.2 OPTIMIZED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.3 OPTIMIZED
 // ============================================
 // Mobile & Desktop Optimized - Hardcoded Navigation
-// Updated: Fixed Quick Links population, smooth send with delay,
-// complete scroll isolation, better keyboard handling
+// Updated: Confirmed Quick Links footer population from same source,
+// all three nav areas (desktop, mobile, footer) pulling from MAIN_PAGE_NAV_LINKS
 // ============================================
 
 (function() {
@@ -12,6 +12,7 @@
     // ============================================
     // HARDCODED NAVIGATION SYSTEM
     // These IDs must match your main.html section IDs
+    // ALL THREE NAV AREAS pull from this single source
     // ============================================
     
     const MAIN_PAGE_NAV_LINKS = [
@@ -22,14 +23,14 @@
     ];
     
     function generateNavigation() {
-        console.log('🔗 Generating hardcoded navigation...');
+        console.log('🔗 Generating hardcoded navigation from single source...');
         
-        // Update all three navigation areas
+        // Update all three navigation areas FROM THE SAME ARRAY
         updateDesktopNav(MAIN_PAGE_NAV_LINKS);
         updateMobileNav(MAIN_PAGE_NAV_LINKS);
         updateFooterNav(MAIN_PAGE_NAV_LINKS);
         
-        console.log('✅ Navigation generated successfully');
+        console.log('✅ Navigation generated successfully - all areas synced');
     }
     
     function updateDesktopNav(navLinks) {
@@ -136,7 +137,7 @@
         // Clear existing links
         linksContainer.innerHTML = '';
         
-        // Add all navigation links
+        // Add all navigation links FROM THE SAME ARRAY
         navLinks.forEach(link => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -157,6 +158,7 @@
         linksContainer.appendChild(emberLi);
         
         console.log('✅ Footer Quick Links populated with', navLinks.length + 1, 'links');
+        console.log('🎯 CONFIRMED: All three nav areas pulling from MAIN_PAGE_NAV_LINKS array');
     }
 
     // ============================================
@@ -761,7 +763,7 @@ Your role:
         
         updateChatbotStatus();
         
-        // FIX: Complete scroll isolation - prevent body scroll when chatbot is scrolled
+        // Complete scroll isolation - prevent body scroll when chatbot is scrolled
         if (chatbotBody) {
             let startY = 0;
             
@@ -947,7 +949,7 @@ Your role:
         `;
     }
     
-    // FIX: Smooth send experience with 1-second delay before closing keyboard
+    // Smooth send experience with 1-second delay before closing keyboard
     async function sendMessage() {
         const chatbotInput = document.querySelector('.chatbot-input');
         const chatbotSend = document.querySelector('.chatbot-send');
@@ -1130,7 +1132,7 @@ Your role:
     // ============================================
     
     function init() {
-        console.log('🔥 Vault Phoenix Shared Scripts v6.2 Initializing...');
+        console.log('🔥 Vault Phoenix Shared Scripts v6.3 Initializing...');
         
         handleNavbarScroll();
         initializeCookieConsent();
@@ -1156,7 +1158,7 @@ Your role:
         document.body.classList.add('loaded');
         window.sharedScriptReady = true;
         
-        console.log('✅ Vault Phoenix Shared Scripts v6.2 Initialization Complete');
+        console.log('✅ Vault Phoenix Shared Scripts v6.3 Initialization Complete');
         console.log('💡 Navigation links target these section IDs:');
         MAIN_PAGE_NAV_LINKS.forEach(link => {
             const id = link.href.replace('#', '');
