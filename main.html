@@ -1645,6 +1645,408 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* ===================================
+           ENTERPRISE TOKEN INFRASTRUCTURE SECTION
+           =================================== */
+        
+        .enterprise-token-section {
+            padding: var(--section-padding) 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .enterprise-token-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(215, 51, 39, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(240, 165, 0, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .enterprise-token-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Header Section with Phoenix Visual */
+        .enterprise-header-wrapper {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+            margin-bottom: var(--space-4xl);
+        }
+        
+        .enterprise-phoenix-visual {
+            position: relative;
+        }
+        
+        .enterprise-phoenix-image {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 10px 40px rgba(240, 165, 0, 0.3);
+            transition: transform var(--transition-base);
+        }
+        
+        .enterprise-phoenix-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .enterprise-header-content {
+            text-align: left;
+        }
+        
+        .enterprise-main-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--ember-gold);
+            margin-bottom: var(--space-lg);
+            line-height: 1.1;
+        }
+        
+        .enterprise-main-description {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 900px;
+        }
+        
+        /* Featured Modules Grid (2-column for presale + compliance) */
+        .enterprise-featured-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-3xl);
+        }
+        
+        .enterprise-module {
+            background: var(--ember-gradient-card);
+            border: 1px solid rgba(215, 51, 39, 0.3);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            transition: all var(--transition-base);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .enterprise-module:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--ember-shadow-lg);
+            border-color: var(--ember-orange);
+        }
+        
+        .enterprise-module-visual {
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+        
+        .enterprise-coin-image,
+        .enterprise-lock-image {
+            width: 180px;
+            height: auto;
+            filter: drop-shadow(0 8px 24px rgba(240, 165, 0, 0.4));
+        }
+        
+        .enterprise-module-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .enterprise-module-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .enterprise-module-description {
+            font-size: var(--font-base);
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: var(--space-xl);
+            flex: 1;
+        }
+        
+        /* Presale Countdown Timer */
+        .presale-countdown {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-lg);
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+        }
+        
+        .countdown-value {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 800;
+            color: var(--ember-gold);
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 2px 8px rgba(240, 165, 0, 0.5);
+        }
+        
+        .countdown-label {
+            font-size: var(--font-sm);
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: var(--space-xs);
+        }
+        
+        .countdown-separator {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--ember-orange);
+            padding: 0 var(--space-xs);
+        }
+        
+        /* Presale Details */
+        .presale-details {
+            display: flex;
+            justify-content: space-around;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--radius-md);
+        }
+        
+        .presale-info-item {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .presale-info-label {
+            font-size: var(--font-sm);
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .presale-info-value {
+            font-size: var(--font-lg);
+            font-weight: 700;
+            color: #ffffff;
+        }
+        
+        .presale-price {
+            color: var(--ember-gold);
+            font-size: clamp(1.3rem, 2vw, 1.6rem);
+        }
+        
+        /* CTA Buttons */
+        .enterprise-cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-2xl);
+            background: var(--ember-gradient-primary);
+            color: white;
+            font-size: var(--font-lg);
+            font-weight: 700;
+            border: none;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            transition: all var(--transition-base);
+            box-shadow: var(--ember-shadow-sm);
+            margin-top: auto;
+        }
+        
+        .enterprise-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--ember-shadow-lg);
+        }
+        
+        .cta-flame-icon {
+            width: 28px;
+            height: 28px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+        
+        .enterprise-secondary-button {
+            display: inline-block;
+            padding: var(--space-md) var(--space-xl);
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: var(--font-base);
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            transition: all var(--transition-base);
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        .enterprise-secondary-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--ember-gold);
+            color: var(--ember-gold);
+        }
+        
+        /* Supporting Modules Grid (3 equal columns) */
+        .enterprise-supporting-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+        }
+        
+        .enterprise-support-module {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: all var(--transition-base);
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .enterprise-support-module:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--ember-gold);
+            transform: translateY(-4px);
+        }
+        
+        .enterprise-support-icon {
+            margin: 0 auto var(--space-lg);
+        }
+        
+        .enterprise-support-icon img {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.3));
+        }
+        
+        .enterprise-support-title {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--ember-gold);
+            margin-bottom: var(--space-md);
+        }
+        
+        .enterprise-support-description {
+            font-size: var(--font-base);
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--space-lg);
+            flex: 1;
+        }
+        
+        .enterprise-support-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            color: var(--ember-gold);
+            font-size: var(--font-base);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition-base);
+        }
+        
+        .enterprise-support-link:hover {
+            color: #ffffff;
+            gap: var(--space-sm);
+        }
+        
+        .enterprise-support-link span {
+            transition: transform var(--transition-base);
+        }
+        
+        .enterprise-support-link:hover span {
+            transform: translateX(4px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .enterprise-header-wrapper {
+                grid-template-columns: 280px 1fr;
+                gap: var(--space-2xl);
+            }
+            
+            .enterprise-featured-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            
+            .enterprise-supporting-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .enterprise-header-wrapper {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+                text-align: center;
+            }
+            
+            .enterprise-phoenix-visual {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            
+            .enterprise-header-content {
+                text-align: center;
+            }
+            
+            .enterprise-main-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .presale-countdown {
+                flex-wrap: wrap;
+                gap: var(--space-xs);
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+            }
+            
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+            
+            .countdown-separator {
+                font-size: 1.5rem;
+            }
+            
+            .presale-details {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .enterprise-coin-image,
+            .enterprise-lock-image {
+                width: 140px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1819,6 +2221,134 @@
                         <a href="#showcase" class="main-secondary-cta-button">
                             <span>View Live Demos</span>
                             <span>↓</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enterprise Token Infrastructure Section -->
+        <section class="enterprise-token-section" id="enterprise-token">
+            <div class="enterprise-token-container">
+                <!-- Section Header with Phoenix Visual -->
+                <div class="enterprise-header-wrapper">
+                    <div class="enterprise-phoenix-visual">
+                        <img src="images/PhoenixHoldingCoin.PNG" alt="Phoenix Holding Ember Coin" class="enterprise-phoenix-image" loading="lazy">
+                    </div>
+                    <div class="enterprise-header-content">
+                        <h2 class="enterprise-main-title">Enterprise Token Infrastructure</h2>
+                        <p class="enterprise-main-description">
+                            Vault Phoenix operates with institutional-grade $Ember Token infrastructure powering the next generation of location-based AR gaming. Our enterprise blockchain technology drives measurable ROI for marketing campaigns worldwide through proven monetization strategies.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Primary Featured Modules Grid -->
+                <div class="enterprise-featured-grid">
+                    <!-- $Ember Presale Launch Module -->
+                    <div class="enterprise-module enterprise-presale-module">
+                        <div class="enterprise-module-visual">
+                            <img src="images/VPEmberCoin.PNG" alt="$Ember Token" class="enterprise-coin-image" loading="lazy">
+                        </div>
+                        <div class="enterprise-module-content">
+                            <h3 class="enterprise-module-title">$Ember Presale Launch</h3>
+                            
+                            <!-- Countdown Timer -->
+                            <div class="presale-countdown">
+                                <div class="countdown-item">
+                                    <span class="countdown-value" id="days">00</span>
+                                    <span class="countdown-label">Days</span>
+                                </div>
+                                <div class="countdown-separator">:</div>
+                                <div class="countdown-item">
+                                    <span class="countdown-value" id="hours">00</span>
+                                    <span class="countdown-label">Hours</span>
+                                </div>
+                                <div class="countdown-separator">:</div>
+                                <div class="countdown-item">
+                                    <span class="countdown-value" id="minutes">00</span>
+                                    <span class="countdown-label">Minutes</span>
+                                </div>
+                                <div class="countdown-separator">:</div>
+                                <div class="countdown-item">
+                                    <span class="countdown-value" id="seconds">00</span>
+                                    <span class="countdown-label">Seconds</span>
+                                </div>
+                            </div>
+                            
+                            <div class="presale-details">
+                                <div class="presale-info-item">
+                                    <span class="presale-info-label">Launch Date:</span>
+                                    <span class="presale-info-value">November 1, 2025</span>
+                                </div>
+                                <div class="presale-info-item">
+                                    <span class="presale-info-label">Token Price:</span>
+                                    <span class="presale-info-value presale-price">$0.003</span>
+                                </div>
+                            </div>
+                            
+                            <a href="ember-presale.html" class="enterprise-cta-button presale-cta">
+                                <img src="images/VPEmberFlame.svg" alt="Ember Flame" class="cta-flame-icon" loading="lazy">
+                                <span>Join Presale</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Regulatory Compliance Module -->
+                    <div class="enterprise-module enterprise-compliance-module">
+                        <div class="enterprise-module-visual">
+                            <img src="images/EmberCoinLock.PNG" alt="Regulatory Compliance Security" class="enterprise-lock-image" loading="lazy">
+                        </div>
+                        <div class="enterprise-module-content">
+                            <h3 class="enterprise-module-title">Regulatory Compliance</h3>
+                            <p class="enterprise-module-description">
+                                Vault Phoenix operates under comprehensive regulatory oversight with institutional-grade compliance procedures, multi-signature treasury management, and professional legal frameworks ensuring maximum security and transparency.
+                            </p>
+                            <a href="#compliance-docs" class="enterprise-secondary-button">
+                                View Compliance Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Supporting Modules Grid -->
+                <div class="enterprise-supporting-grid">
+                    <div class="enterprise-support-module">
+                        <div class="enterprise-support-icon">
+                            <img src="images/VPBlueLock.PNG" alt="Technical Documentation" loading="lazy">
+                        </div>
+                        <h4 class="enterprise-support-title">Technical Documentation</h4>
+                        <p class="enterprise-support-description">
+                            Access comprehensive technical specifications, API documentation, and integration guides for the $Ember Token infrastructure.
+                        </p>
+                        <a href="#technical-docs" class="enterprise-support-link">
+                            View Documentation <span>→</span>
+                        </a>
+                    </div>
+                    
+                    <div class="enterprise-support-module">
+                        <div class="enterprise-support-icon">
+                            <img src="images/VPCompass.PNG" alt="Development Roadmap" loading="lazy">
+                        </div>
+                        <h4 class="enterprise-support-title">Development Roadmap</h4>
+                        <p class="enterprise-support-description">
+                            Explore our detailed timeline for platform evolution, feature releases, and upcoming blockchain infrastructure enhancements.
+                        </p>
+                        <a href="#roadmap" class="enterprise-support-link">
+                            View Roadmap <span>→</span>
+                        </a>
+                    </div>
+                    
+                    <div class="enterprise-support-module">
+                        <div class="enterprise-support-icon">
+                            <img src="images/PhoenixBullseye.PNG" alt="Phoenix Builders Community" loading="lazy">
+                        </div>
+                        <h4 class="enterprise-support-title">Phoenix Builders</h4>
+                        <p class="enterprise-support-description">
+                            Join our developer community to build innovative AR gaming experiences and shape the future of location-based crypto gaming.
+                        </p>
+                        <a href="#builders" class="enterprise-support-link">
+                            Join Builders <span>→</span>
                         </a>
                     </div>
                 </div>
@@ -2731,6 +3261,39 @@
         }, observerOptions);
         
         document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+        
+        // Enterprise Token Infrastructure - Countdown Timer
+        function updateCountdown() {
+            // Set launch date to November 1, 2025 at 00:00:00 UTC
+            const launchDate = new Date('2025-11-01T00:00:00Z').getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            // If countdown is finished
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+            
+            // Calculate time units
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Update display with zero-padding
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+        
+        // Update countdown immediately and then every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
