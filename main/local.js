@@ -220,37 +220,37 @@
     // SHARED COMPONENTS LOADER
     // ============================================
 
-    /**
-     * Loads shared HTML components from shared.html file
-     * 
-     * @function loadSharedComponents
-     * @async
-     * @returns {Promise<void>}
-     * 
-     * @description
-     * Dynamically loads shared components (chatbot, footer, cookie banner, privacy modal)
-     * from shared.html and injects them into the DOM. Reinitializes chatbot after loading.
-     * 
-     * @throws Will log error if fetch fails or container not found
-     * 
-     * @components
-     * - Phoenix AI Chatbot
-     * - Site Footer
-     * - Cookie Consent Banner
-     * - Privacy Policy Modal
-     */
-    function loadSharedComponents() {
-        LOGGER.info('Loading shared components from shared.html...');
-        
-        fetch('shared.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                return response.text();
-            })
-            .then(html => {
-                const container = document.getElementById('shared-components-container');
+   /**
+ * Loads shared HTML components from shared/global.html file
+ * 
+ * @function loadSharedComponents
+ * @async
+ * @returns {Promise<void>}
+ * 
+ * @description
+ * Dynamically loads shared components (chatbot, footer, cookie banner, privacy modal)
+ * from shared/global.html and injects them into the DOM. Reinitializes chatbot after loading.
+ * 
+ * @throws Will log error if fetch fails or container not found
+ * 
+ * @components
+ * - Phoenix AI Chatbot
+ * - Site Footer
+ * - Cookie Consent Banner
+ * - Privacy Policy Modal
+ */
+function loadSharedComponents() {
+    LOGGER.info('Loading shared components from shared/global.html...');
+    
+    fetch('shared/global.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(html => {
+            const container = document.getElementById('shared-components-container');
                 
                 if (!container) {
                     throw new Error('Shared components container (#shared-components-container) not found');
