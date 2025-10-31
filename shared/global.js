@@ -1,13 +1,237 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.3 OPTIMIZED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.4 OPTIMIZED
 // ============================================
 // Mobile & Desktop Optimized - Hardcoded Navigation
-// Updated: Confirmed Quick Links footer population from same source,
-// all three nav areas (desktop, mobile, footer) pulling from MAIN_PAGE_NAV_LINKS
+// Phoenix AI Integration with Dynamic Site Scanning
+// Updated: Import Phoenix AI training data and site scanning
 // ============================================
+
+// Import Phoenix AI training configuration
+import phoenixAI from './phoenix_ai_training_v4.7.json' assert { type: 'json' };
 
 (function() {
     'use strict';
+
+    // ============================================
+    // PHOENIX AI SITE SCANNER
+    // Dynamically scans all pages, links, anchors, and content
+    // ============================================
+    
+    const siteScanner = {
+        scannedData: {
+            pages: [],
+            sections: [],
+            links: [],
+            teamMembers: [],
+            navigation: []
+        },
+        
+        async initializeScan() {
+            console.log('🔍 Phoenix AI Site Scanner: Starting comprehensive scan...');
+            
+            // Scan current page
+            this.scanCurrentPage();
+            
+            // Scan navigation links
+            this.scanNavigation();
+            
+            // Scan footer content
+            this.scanFooter();
+            
+            // If training data specifies targets, scan those too
+            if (phoenixAI.site_scan && phoenixAI.site_scan.scan_targets) {
+                await this.scanTargetPages(phoenixAI.site_scan.scan_targets);
+            }
+            
+            console.log('✅ Phoenix AI Site Scanner: Scan complete');
+            console.log('📊 Scanned data:', this.scannedData);
+            
+            return this.scannedData;
+        },
+        
+        scanCurrentPage() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            console.log(`📄 Scanning current page: ${currentPage}`);
+            
+            // Scan all sections with IDs
+            const sections = document.querySelectorAll('section[id], div[id]');
+            sections.forEach(section => {
+                const id = section.id;
+                const heading = section.querySelector('h1, h2, h3, h4');
+                const headingText = heading ? heading.textContent.trim() : '';
+                
+                this.scannedData.sections.push({
+                    page: currentPage,
+                    id: id,
+                    heading: headingText,
+                    anchor: `#${id}`,
+                    fullLink: `./${currentPage}#${id}`
+                });
+            });
+            
+            // Scan all links
+            const links = document.querySelectorAll('a[href]');
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                const text = link.textContent.trim();
+                
+                if (href && href !== '#' && !href.startsWith('javascript:')) {
+                    this.scannedData.links.push({
+                        page: currentPage,
+                        href: href,
+                        text: text,
+                        isExternal: href.startsWith('http'),
+                        isAnchor: href.startsWith('#')
+                    });
+                }
+            });
+            
+            console.log(`✅ Found ${this.scannedData.sections.length} sections and ${this.scannedData.links.length} links`);
+        },
+        
+        scanNavigation() {
+            console.log('🧭 Scanning navigation structure...');
+            
+            MAIN_PAGE_NAV_LINKS.forEach(navLink => {
+                this.scannedData.navigation.push({
+                    title: navLink.title,
+                    href: navLink.href,
+                    type: 'main-nav'
+                });
+            });
+            
+            console.log(`✅ Scanned ${this.scannedData.navigation.length} navigation items`);
+        },
+        
+        scanFooter() {
+            console.log('🦶 Scanning footer content...');
+            
+            const footerLinks = document.querySelectorAll('.footer a[href]');
+            footerLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                const text = link.textContent.trim();
+                const column = link.closest('.footer-column');
+                const columnHeading = column ? column.querySelector('.footer-heading')?.textContent.trim() : '';
+                
+                if (href && href !== '#') {
+                    this.scannedData.links.push({
+                        page: 'footer',
+                        section: columnHeading,
+                        href: href,
+                        text: text,
+                        isExternal: href.startsWith('http'),
+                        type: 'footer-link'
+                    });
+                }
+            });
+            
+            console.log('✅ Footer scan complete');
+        },
+        
+        async scanTargetPages(targets) {
+            console.log('🎯 Scanning target pages:', targets);
+            
+            for (const target of targets) {
+                // Skip JS files from page scanning
+                if (target.endsWith('.js')) continue;
+                
+                try {
+                    const response = await fetch(target);
+                    if (response.ok) {
+                        const html = await response.text();
+                        this.parseHTMLContent(html, target);
+                    }
+                } catch (error) {
+                    console.warn(`⚠️ Could not scan ${target}:`, error.message);
+                }
+            }
+        },
+        
+        parseHTMLContent(html, filename) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            // Extract sections with IDs
+            const sections = doc.querySelectorAll('section[id], div[id]');
+            sections.forEach(section => {
+                const id = section.id;
+                const heading = section.querySelector('h1, h2, h3, h4');
+                const headingText = heading ? heading.textContent.trim() : '';
+                
+                if (id) {
+                    this.scannedData.sections.push({
+                        page: filename,
+                        id: id,
+                        heading: headingText,
+                        anchor: `#${id}`,
+                        fullLink: `./${filename}#${id}`
+                    });
+                }
+            });
+            
+            // Extract team members if this is team page
+            if (filename.includes('team')) {
+                const teamCards = doc.querySelectorAll('.team-card, .team-member, [class*="team"]');
+                teamCards.forEach(card => {
+                    const name = card.querySelector('h2, h3, h4, .name, [class*="name"]')?.textContent.trim();
+                    const title = card.querySelector('p, .title, [class*="title"]')?.textContent.trim();
+                    const socialLinks = {};
+                    
+                    card.querySelectorAll('a[href]').forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href.includes('twitter.com') || href.includes('x.com')) {
+                            socialLinks.x = href;
+                        } else if (href.includes('linkedin.com')) {
+                            socialLinks.linkedin = href;
+                        } else if (href.includes('facebook.com')) {
+                            socialLinks.facebook = href;
+                        }
+                    });
+                    
+                    if (name) {
+                        this.scannedData.teamMembers.push({
+                            name: name,
+                            title: title,
+                            social: socialLinks
+                        });
+                    }
+                });
+            }
+            
+            console.log(`✅ Parsed ${filename}`);
+        },
+        
+        getNavigationMap() {
+            return this.scannedData.navigation;
+        },
+        
+        getSectionMap() {
+            return this.scannedData.sections;
+        },
+        
+        getTeamMembers() {
+            return this.scannedData.teamMembers;
+        },
+        
+        getAllLinks() {
+            return this.scannedData.links;
+        },
+        
+        findSection(query) {
+            const lowerQuery = query.toLowerCase();
+            return this.scannedData.sections.find(section => 
+                section.id.toLowerCase().includes(lowerQuery) ||
+                section.heading.toLowerCase().includes(lowerQuery)
+            );
+        },
+        
+        findTeamMember(name) {
+            const lowerName = name.toLowerCase();
+            return this.scannedData.teamMembers.find(member =>
+                member.name.toLowerCase().includes(lowerName)
+            );
+        }
+    };
 
     // ============================================
     // HARDCODED NAVIGATION SYSTEM
@@ -719,6 +943,7 @@
 
     // ============================================
     // PHOENIX AI CHATBOT SYSTEM - COMPLETE SCROLL ISOLATION
+    // Enhanced with Site Scanner Integration
     // ============================================
     
     const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE';
@@ -728,26 +953,71 @@
     let conversationHistory = [];
     let isTyping = false;
     let isOnline = false;
+    let phoenixSiteData = null;
     
-    const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token presale and AR crypto gaming platform.
-
-Key Information:
-- Token: $EMBER
-- Presale Launch: November 1, 2025
-- Price: $0.003 per token
-- Total Supply: 166.7M tokens
-- Hard Cap: $500K
-- Platform: Polygon blockchain
-
-Your role:
-- Answer questions about $Ember token and platform
-- Explain investment opportunities professionally
-- Guide users toward participating in presale
-- Be enthusiastic yet professional
-- Keep responses concise but informative`;
-
+    // Enhanced system prompt with site navigation capabilities
+    function getEnhancedSystemPrompt() {
+        let basePrompt = phoenixAI.description || 'You are Phoenix, the AI assistant for Vault Phoenix.';
+        
+        // Add site navigation data if available
+        if (phoenixSiteData) {
+            basePrompt += '\n\nSite Navigation Data:';
+            
+            if (phoenixSiteData.sections && phoenixSiteData.sections.length > 0) {
+                basePrompt += '\n\nAvailable Sections:';
+                phoenixSiteData.sections.forEach(section => {
+                    basePrompt += `\n- ${section.heading} (${section.fullLink})`;
+                });
+            }
+            
+            if (phoenixSiteData.teamMembers && phoenixSiteData.teamMembers.length > 0) {
+                basePrompt += '\n\nTeam Members:';
+                phoenixSiteData.teamMembers.forEach(member => {
+                    basePrompt += `\n- ${member.name} (${member.title})`;
+                    if (member.social) {
+                        if (member.social.x) basePrompt += ` - X: ${member.social.x}`;
+                        if (member.social.linkedin) basePrompt += ` - LinkedIn: ${member.social.linkedin}`;
+                    }
+                });
+            }
+            
+            if (phoenixAI.team && phoenixAI.team.length > 0) {
+                basePrompt += '\n\nOfficial Team Contacts:';
+                phoenixAI.team.forEach(member => {
+                    basePrompt += `\n- ${member.name} (${member.title})`;
+                    if (member.social) {
+                        if (member.social.x) basePrompt += ` - X: ${member.social.x}`;
+                        if (member.social.linkedin) basePrompt += ` - LinkedIn: ${member.social.linkedin}`;
+                    }
+                });
+            }
+        }
+        
+        // Add training instructions
+        if (phoenixAI.behavior_rules) {
+            basePrompt += '\n\nBehavior Rules:';
+            basePrompt += `\n- Tone: ${phoenixAI.behavior_rules.tone}`;
+            basePrompt += `\n- Persona: ${phoenixAI.behavior_rules.persona}`;
+            if (phoenixAI.behavior_rules.response_style) {
+                basePrompt += '\n- Response Style: ' + phoenixAI.behavior_rules.response_style.join(', ');
+            }
+        }
+        
+        // Add focus areas
+        if (phoenixAI.focus_areas) {
+            basePrompt += '\n\nFocus Areas: ' + phoenixAI.focus_areas.join(', ');
+        }
+        
+        // Add network/token info
+        basePrompt += `\n\nNetwork: ${phoenixAI.network || 'Solana'}`;
+        basePrompt += `\n\nWhen users ask about sections, pages, or team contacts, provide direct clickable links from the site navigation data.`;
+        
+        return basePrompt;
+    }
+    
     function initializeChatbot() {
-        console.log('🤖 Initializing chatbot...');
+        console.log('🤖 Initializing Phoenix AI chatbot...');
+        console.log('📋 Phoenix AI Config:', phoenixAI);
         
         const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
         const chatbotWindow = document.querySelector('.chatbot-window');
@@ -843,7 +1113,7 @@ Your role:
             });
         }
         
-        console.log('✅ Chatbot initialized with complete scroll isolation');
+        console.log('✅ Phoenix AI chatbot initialized with site scanning');
         return true;
     }
     
@@ -922,27 +1192,34 @@ Your role:
         const chatbotBody = document.querySelector('.chatbot-body');
         if (!chatbotBody) return;
         
+        const assistantName = phoenixAI.assistant_name || 'Phoenix AI';
+        
         const statusMessage = isOnline ? 
             'I\'m online and ready to help!' : 
             'I\'m currently offline. Please check back later or contact support.';
+        
+        let welcomeContent = `<strong>Welcome to Vault Phoenix!</strong><br><br>${statusMessage}`;
+        
+        if (isOnline && phoenixAI.focus_areas) {
+            welcomeContent += '<br><br>Ask me about:';
+            welcomeContent += '<ul style="margin: 10px 0; padding-left: 20px;">';
+            phoenixAI.focus_areas.forEach(area => {
+                welcomeContent += `<li>${area}</li>`;
+            });
+            welcomeContent += '</ul>';
+            welcomeContent += 'What would you like to know?';
+        } else if (!isOnline) {
+            welcomeContent = `<strong>Welcome to Vault Phoenix!</strong><br><br>${statusMessage}<br><br>Thank you for your interest in Vault Phoenix!`;
+        }
         
         chatbotBody.innerHTML = `
             <div class="chat-message assistant-message">
                 <div class="message-content">
                     <div class="message-avatar">
-                        <img src="images/VPLogoNoText.PNG" alt="Phoenix AI">
+                        <img src="images/VPLogoNoText.PNG" alt="${assistantName}">
                     </div>
                     <div class="message-text">
-                        <strong>Welcome to Vault Phoenix!</strong><br><br>
-                        ${statusMessage}<br><br>
-                        ${isOnline ? `Ask me about:
-                        <ul style="margin: 10px 0; padding-left: 20px;">
-                            <li>$Ember token presale & pricing</li>
-                            <li>GPS & Beacon technology</li>
-                            <li>White-label app deployment</li>
-                            <li>Platform opportunities</li>
-                        </ul>
-                        What would you like to know?` : 'Thank you for your interest in Vault Phoenix!'}
+                        ${welcomeContent}
                     </div>
                 </div>
             </div>
@@ -1012,7 +1289,7 @@ Your role:
                 body: JSON.stringify({
                     model: CLAUDE_MODEL,
                     max_tokens: 1024,
-                    system: SYSTEM_PROMPT,
+                    system: getEnhancedSystemPrompt(),
                     messages: messages
                 })
             });
@@ -1112,6 +1389,7 @@ Your role:
     }
     
     window.initializePhoenixChatbot = initializeChatbot;
+    window.phoenixSiteScanner = siteScanner;
 
     // ============================================
     // RESPONSIVE HANDLING
@@ -1131,8 +1409,9 @@ Your role:
     // INITIALIZATION
     // ============================================
     
-    function init() {
-        console.log('🔥 Vault Phoenix Shared Scripts v6.3 Initializing...');
+    async function init() {
+        console.log('🔥 Vault Phoenix Shared Scripts v6.4 Initializing...');
+        console.log('🤖 Phoenix AI Version:', phoenixAI.version);
         
         handleNavbarScroll();
         initializeCookieConsent();
@@ -1140,6 +1419,10 @@ Your role:
         initializeScrollProgress();
         
         generateNavigation();
+        
+        // Initialize site scanner
+        phoenixSiteData = await siteScanner.initializeScan();
+        console.log('📊 Site data available for Phoenix AI:', phoenixSiteData);
         
         setTimeout(() => {
             attachSmoothScrollListeners();
@@ -1158,7 +1441,7 @@ Your role:
         document.body.classList.add('loaded');
         window.sharedScriptReady = true;
         
-        console.log('✅ Vault Phoenix Shared Scripts v6.3 Initialization Complete');
+        console.log('✅ Vault Phoenix Shared Scripts v6.4 Initialization Complete');
         console.log('💡 Navigation links target these section IDs:');
         MAIN_PAGE_NAV_LINKS.forEach(link => {
             const id = link.href.replace('#', '');
