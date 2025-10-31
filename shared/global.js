@@ -3,11 +3,11 @@
 // ============================================
 // Mobile & Desktop Optimized - Hardcoded Navigation
 // Phoenix AI Integration with Dynamic Site Scanning
-// Updated: Import Phoenix AI training data and site scanning
+// Updated: Import phoenix_ai_training.json for AI configuration
 // ============================================
 
 // Import Phoenix AI training configuration
-import phoenixAI from './phoenix_ai_training_v4.7.json' assert { type: 'json' };
+import phoenixAI from './phoenix_ai_training.json' assert { type: 'json' };
 
 (function() {
     'use strict';
