@@ -51,12 +51,15 @@
     <link rel="icon" href="images/PhoenixBullseye.PNG" type="image/png">
     <link rel="apple-touch-icon" href="images/PhoenixBullseye.PNG">
     
-    <!-- CRITICAL: Shared CSS v4.0 - MUST BE FIRST -->
-    <link rel="stylesheet" href="shared.css">
+    <!-- ===================================
+         CSS LOADING ORDER - CRITICAL
+         =================================== -->
     
+    <!-- 1. SHARED CSS v4.0 - Core styles used across ALL pages -->
+    <link rel="stylesheet" href="shared/css">
     
-    <!-- Page-specific CSS -->
-    <link rel="stylesheet" href="main.css">
+    <!-- 2. LOCAL CSS - Page-specific styles for main.html -->
+    <link rel="stylesheet" href="main/local.css">
 
 </head>
 <body>
@@ -1071,14 +1074,18 @@
 
     <!-- ===================================
          SHARED COMPONENTS LOADER
-         Loads chatbot, footer, cookie banner, and privacy modal from shared.html
+         Loads chatbot, footer, cookie banner, and privacy modal from shared/html
          =================================== -->
     <div id="shared-components-container"></div>
 
-    <!-- CRITICAL: Shared JavaScript v4.0 - MUST BE FIRST -->
-    <script src="shared.js"></script>
+    <!-- ===================================
+         JAVASCRIPT LOADING ORDER - CRITICAL
+         =================================== -->
     
-    <!-- Page-specific JavaScript for main.html -->
-    <script src="main.js"></script>
+    <!-- 1. SHARED JAVASCRIPT v4.0 - Core functionality used across ALL pages -->
+    <script src="shared/js"></script>
+    
+    <!-- 2. LOCAL JAVASCRIPT - Page-specific functionality for main.html -->
+    <script src="main/local.js"></script>
 </body>
 </html>
