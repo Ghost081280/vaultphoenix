@@ -1,9 +1,9 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.1 OPTIMIZED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.2 OPTIMIZED
 // ============================================
 // Mobile & Desktop Optimized - Hardcoded Navigation
-// Updated: Fixed chatbot mobile experience, tooltip removal on click,
-// scroll handling, keyboard management, navigation link connections
+// Updated: Fixed Quick Links population, smooth send with delay,
+// complete scroll isolation, better keyboard handling
 // ============================================
 
 (function() {
@@ -34,7 +34,10 @@
     
     function updateDesktopNav(navLinks) {
         const desktopNav = document.querySelector('.nav-links');
-        if (!desktopNav) return;
+        if (!desktopNav) {
+            console.warn('⚠️ Desktop nav not found');
+            return;
+        }
         
         desktopNav.innerHTML = '';
         
@@ -60,12 +63,15 @@
         li.appendChild(a);
         desktopNav.appendChild(li);
         
-        console.log('✅ Desktop nav updated');
+        console.log('✅ Desktop nav updated with', navLinks.length + 1, 'links');
     }
     
     function updateMobileNav(navLinks) {
         const mobileNav = document.querySelector('.mobile-nav-links');
-        if (!mobileNav) return;
+        if (!mobileNav) {
+            console.warn('⚠️ Mobile nav not found');
+            return;
+        }
         
         mobileNav.innerHTML = '';
         
@@ -92,22 +98,45 @@
         li.appendChild(a);
         mobileNav.appendChild(li);
         
-        console.log('✅ Mobile nav updated');
+        console.log('✅ Mobile nav updated with', navLinks.length + 1, 'links');
     }
     
     function updateFooterNav(navLinks) {
-        const quickLinksColumn = Array.from(document.querySelectorAll('.footer-column')).find(col => {
+        console.log('🔍 Looking for footer Quick Links column...');
+        
+        // Find all footer columns
+        const footerColumns = document.querySelectorAll('.footer-column');
+        console.log('📋 Found', footerColumns.length, 'footer columns');
+        
+        let quickLinksColumn = null;
+        
+        // Search through each column for the "Quick Links" heading
+        footerColumns.forEach((col, index) => {
             const heading = col.querySelector('.footer-heading');
-            return heading && heading.textContent.includes('Quick Links');
+            if (heading) {
+                console.log(`   Column ${index}: "${heading.textContent.trim()}"`);
+                if (heading.textContent.trim() === 'Quick Links') {
+                    quickLinksColumn = col;
+                    console.log('✅ Found Quick Links column at index', index);
+                }
+            }
         });
         
-        if (!quickLinksColumn) return;
+        if (!quickLinksColumn) {
+            console.error('❌ Quick Links column not found in footer');
+            return;
+        }
         
         const linksContainer = quickLinksColumn.querySelector('.footer-links');
-        if (!linksContainer) return;
+        if (!linksContainer) {
+            console.error('❌ Footer links container not found');
+            return;
+        }
         
+        // Clear existing links
         linksContainer.innerHTML = '';
         
+        // Add all navigation links
         navLinks.forEach(link => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -127,7 +156,7 @@
         emberLi.appendChild(emberA);
         linksContainer.appendChild(emberLi);
         
-        console.log('✅ Footer nav updated');
+        console.log('✅ Footer Quick Links populated with', navLinks.length + 1, 'links');
     }
 
     // ============================================
@@ -687,7 +716,7 @@
     });
 
     // ============================================
-    // PHOENIX AI CHATBOT SYSTEM - IMPROVED MOBILE
+    // PHOENIX AI CHATBOT SYSTEM - COMPLETE SCROLL ISOLATION
     // ============================================
     
     const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE';
@@ -732,12 +761,50 @@ Your role:
         
         updateChatbotStatus();
         
-        // Prevent body scroll when chatbot body is scrolled
+        // FIX: Complete scroll isolation - prevent body scroll when chatbot is scrolled
         if (chatbotBody) {
-            chatbotBody.addEventListener('touchmove', function(e) {
-                e.stopPropagation();
+            let startY = 0;
+            
+            chatbotBody.addEventListener('touchstart', function(e) {
+                startY = e.touches[0].pageY;
             }, { passive: true });
+            
+            chatbotBody.addEventListener('touchmove', function(e) {
+                const currentY = e.touches[0].pageY;
+                const scrollTop = chatbotBody.scrollTop;
+                const scrollHeight = chatbotBody.scrollHeight;
+                const clientHeight = chatbotBody.clientHeight;
+                
+                const isAtTop = scrollTop === 0;
+                const isAtBottom = scrollTop + clientHeight >= scrollHeight;
+                const isScrollingUp = currentY > startY;
+                const isScrollingDown = currentY < startY;
+                
+                // Prevent body scroll when at boundaries
+                if ((isAtTop && isScrollingUp) || (isAtBottom && isScrollingDown)) {
+                    e.preventDefault();
+                }
+                
+                e.stopPropagation();
+            }, { passive: false });
         }
+        
+        // Prevent body scroll when chatbot is open
+        const originalOpenChatbot = openChatbot;
+        window.openChatbot = function() {
+            originalOpenChatbot();
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+        };
+        
+        const originalCloseChatbot = closeChatbot;
+        window.closeChatbot = function() {
+            originalCloseChatbot();
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+        };
         
         const newChatbotButtonContainer = chatbotButtonContainer.cloneNode(true);
         chatbotButtonContainer.parentNode.replaceChild(newChatbotButtonContainer, chatbotButtonContainer);
@@ -774,7 +841,7 @@ Your role:
             });
         }
         
-        console.log('✅ Chatbot initialized');
+        console.log('✅ Chatbot initialized with complete scroll isolation');
         return true;
     }
     
@@ -807,6 +874,11 @@ Your role:
         chatbotWindow.classList.add('active');
         chatbotButtonContainer.classList.add('chatbot-active');
         
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        
         if (chatbotBody && chatbotBody.children.length === 0) {
             addWelcomeMessage();
         }
@@ -820,6 +892,11 @@ Your role:
         
         chatbotWindow.classList.remove('active');
         chatbotButtonContainer.classList.remove('chatbot-active');
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
         
         console.log('✅ Chatbot closed');
     }
@@ -870,6 +947,7 @@ Your role:
         `;
     }
     
+    // FIX: Smooth send experience with 1-second delay before closing keyboard
     async function sendMessage() {
         const chatbotInput = document.querySelector('.chatbot-input');
         const chatbotSend = document.querySelector('.chatbot-send');
@@ -881,6 +959,12 @@ Your role:
         
         if (!isOnline) {
             addChatMessage('user', message);
+            
+            // Show message for 1 second before closing keyboard
+            setTimeout(() => {
+                chatbotInput.blur();
+            }, 1000);
+            
             addChatMessage('assistant', '⚠️ I\'m currently offline. Please contact support for assistance.');
             chatbotInput.value = '';
             return;
@@ -888,6 +972,12 @@ Your role:
         
         if (CLAUDE_API_KEY === 'YOUR_CLAUDE_API_KEY_HERE') {
             addChatMessage('user', message);
+            
+            // Show message for 1 second before closing keyboard
+            setTimeout(() => {
+                chatbotInput.blur();
+            }, 1000);
+            
             addChatMessage('assistant', '⚠️ API key not configured. Get your key at: https://console.anthropic.com/');
             chatbotInput.value = '';
             return;
@@ -895,6 +985,12 @@ Your role:
         
         addChatMessage('user', message);
         chatbotInput.value = '';
+        
+        // Show message for 1 second before closing keyboard
+        setTimeout(() => {
+            chatbotInput.blur();
+        }, 1000);
+        
         chatbotInput.disabled = true;
         chatbotSend.disabled = true;
         isTyping = true;
@@ -1034,7 +1130,7 @@ Your role:
     // ============================================
     
     function init() {
-        console.log('🔥 Vault Phoenix Shared Scripts v6.1 Initializing...');
+        console.log('🔥 Vault Phoenix Shared Scripts v6.2 Initializing...');
         
         handleNavbarScroll();
         initializeCookieConsent();
@@ -1060,7 +1156,7 @@ Your role:
         document.body.classList.add('loaded');
         window.sharedScriptReady = true;
         
-        console.log('✅ Vault Phoenix Shared Scripts v6.1 Initialization Complete');
+        console.log('✅ Vault Phoenix Shared Scripts v6.2 Initialization Complete');
         console.log('💡 Navigation links target these section IDs:');
         MAIN_PAGE_NAV_LINKS.forEach(link => {
             const id = link.href.replace('#', '');
