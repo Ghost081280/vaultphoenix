@@ -1075,72 +1075,10 @@
          =================================== -->
     <div id="shared-components-container"></div>
 
-    <!-- CRITICAL: Shared JavaScript v4.0 - MUST BE LAST -->
+    <!-- CRITICAL: Shared JavaScript v4.0 - MUST BE FIRST -->
     <script src="shared.js"></script>
     
-    <!-- Load shared components from shared.html -->
-    <script>
-        // Load shared.html components after shared.js is loaded
-        fetch('shared.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to load shared.html');
-                }
-                return response.text();
-            })
-            .then(html => {
-                const container = document.getElementById('shared-components-container');
-                if (container) {
-                    container.innerHTML = html;
-                    console.log('✅ Shared components loaded successfully');
-                }
-            })
-            .catch(error => {
-                console.error('❌ Error loading shared components:', error);
-            });
-    </script>
-    
-    <!-- Page-specific JavaScript for thumbnail galleries -->
-    <script>
-        // Phone gallery functionality
-        function changeImage(imageSrc, altText) {
-            const mainImage = document.getElementById('mainPhoneScreenshot');
-            mainImage.src = imageSrc;
-            mainImage.alt = altText;
-            
-            // Update active state
-            const thumbs = document.querySelectorAll('.simple-thumb');
-            thumbs.forEach(thumb => thumb.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        }
-        
-        // Laptop gallery functionality
-        function changeLaptopImage(imageSrc, altText) {
-            const mainImage = document.getElementById('mainLaptopScreenshot');
-            mainImage.src = imageSrc;
-            mainImage.alt = altText;
-            
-            // Update active state
-            const thumbs = document.querySelectorAll('.simple-thumb-laptop');
-            thumbs.forEach(thumb => thumb.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        }
-        
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
-    </script>
+    <!-- Page-specific JavaScript for main.html -->
+    <script src="main.js"></script>
 </body>
 </html>
