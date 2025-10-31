@@ -1,12 +1,8 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V4.0 OPTIMIZED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V5.0 OPTIMIZED
 // ============================================
-// This file contains shared functionality used across multiple pages
-// including mobile navigation, scroll effects, animations, countdown timer,
-// cookie consent, chatbot, and all interactive features
-// 
-// CRITICAL: This script ALWAYS takes precedence
-// All event handlers are non-conflicting and use proper delegation
+// Mobile & Desktop Optimized - Dynamic Navigation
+// Fixed: All mobile link issues, dynamic quick links, chatbot positioning
 // Performance optimized with requestAnimationFrame and debouncing
 // ============================================
 
@@ -14,98 +10,350 @@
     'use strict';
 
     // ============================================
-    // MOBILE MENU SYSTEM - FIXED FOR NEW HTML STRUCTURE
+    // DYNAMIC NAVIGATION SYSTEM
+    // Automatically generates navigation links based on page sections
+    // ============================================
+    
+    function generateDynamicNavigation() {
+        console.log('🔗 Generating dynamic navigation...');
+        
+        // Get all main sections with IDs (excluding navbar, footer, etc.)
+        const sections = document.querySelectorAll('main section[id]');
+        const navLinks = [];
+        
+        sections.forEach(section => {
+            const id = section.id;
+            const heading = section.querySelector('h1, h2, .main-section-title, .main-hero-title-new');
+            
+            if (id && heading) {
+                // Extract short title (first 1-2 words)
+                let title = heading.textContent.trim();
+                
+                // Create shortened version
+                const words = title.split(' ');
+                if (words.length > 2) {
+                    title = words.slice(0, 2).join(' ');
+                }
+                
+                // Clean up title
+                title = title.replace(/[^\w\s]/gi, '').trim();
+                
+                // Store nav link data
+                navLinks.push({
+                    id: id,
+                    title: title,
+                    href: `#${id}`
+                });
+            }
+        });
+        
+        console.log('🔗 Found sections:', navLinks);
+        
+        // Update desktop navigation
+        updateDesktopNav(navLinks);
+        
+        // Update mobile navigation
+        updateMobileNav(navLinks);
+        
+        // Update footer quick links
+        updateFooterNav(navLinks);
+        
+        console.log('✅ Dynamic navigation generated successfully');
+    }
+    
+    function updateDesktopNav(navLinks) {
+        const desktopNav = document.querySelector('.nav-links');
+        if (!desktopNav) return;
+        
+        // Clear existing links (keep ember link separate)
+        const emberLink = desktopNav.querySelector('.ember-link')?.parentElement;
+        desktopNav.innerHTML = '';
+        
+        // Add dynamic section links
+        navLinks.forEach(link => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = link.href;
+            a.textContent = link.title;
+            a.addEventListener('click', handleSmoothScroll);
+            li.appendChild(a);
+            desktopNav.appendChild(li);
+        });
+        
+        // Re-add Ember link if it existed
+        if (emberLink) {
+            desktopNav.appendChild(emberLink);
+        } else {
+            // Create Ember link
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = 'ember-presale.html';
+            a.className = 'ember-link';
+            a.innerHTML = `
+                <img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">
+                $Ember Token
+            `;
+            li.appendChild(a);
+            desktopNav.appendChild(li);
+        }
+        
+        console.log('✅ Desktop nav updated');
+    }
+    
+    function updateMobileNav(navLinks) {
+        const mobileNav = document.querySelector('.mobile-nav-links');
+        if (!mobileNav) return;
+        
+        // Clear existing links
+        mobileNav.innerHTML = '';
+        
+        // Add dynamic section links
+        navLinks.forEach(link => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = link.href;
+            a.textContent = link.title;
+            a.addEventListener('click', handleSmoothScroll);
+            a.addEventListener('click', closeMobileMenu);
+            li.appendChild(a);
+            mobileNav.appendChild(li);
+        });
+        
+        // Add Ember link
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = 'ember-presale.html';
+        a.className = 'ember-link';
+        a.innerHTML = `
+            <img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">
+            $Ember Token
+        `;
+        li.appendChild(a);
+        mobileNav.appendChild(li);
+        
+        console.log('✅ Mobile nav updated');
+    }
+    
+    function updateFooterNav(navLinks) {
+        const footerQuickLinks = document.querySelector('.footer-links');
+        if (!footerQuickLinks) return;
+        
+        // Find the Quick Links column
+        const quickLinksColumn = Array.from(document.querySelectorAll('.footer-column')).find(col => {
+            const heading = col.querySelector('.footer-heading');
+            return heading && heading.textContent.includes('Quick Links');
+        });
+        
+        if (!quickLinksColumn) return;
+        
+        const linksContainer = quickLinksColumn.querySelector('.footer-links');
+        if (!linksContainer) return;
+        
+        // Clear existing links
+        linksContainer.innerHTML = '';
+        
+        // Add Home link
+        const homeLi = document.createElement('li');
+        const homeA = document.createElement('a');
+        homeA.href = 'index.html';
+        homeA.textContent = 'Home';
+        homeLi.appendChild(homeA);
+        linksContainer.appendChild(homeLi);
+        
+        // Add Platform link (if not on main.html already)
+        if (!window.location.href.includes('main.html')) {
+            const platformLi = document.createElement('li');
+            const platformA = document.createElement('a');
+            platformA.href = 'main.html';
+            platformA.textContent = 'Platform';
+            platformLi.appendChild(platformA);
+            linksContainer.appendChild(platformLi);
+        }
+        
+        // Add dynamic section links
+        navLinks.forEach(link => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = link.href;
+            a.textContent = link.title;
+            a.addEventListener('click', handleSmoothScroll);
+            li.appendChild(a);
+            linksContainer.appendChild(li);
+        });
+        
+        // Add Ember link (without icon in footer)
+        const emberLi = document.createElement('li');
+        const emberA = document.createElement('a');
+        emberA.href = 'ember-presale.html';
+        emberA.className = 'footer-ember-link';
+        emberA.textContent = '$Ember Token';
+        emberLi.appendChild(emberA);
+        linksContainer.appendChild(emberLi);
+        
+        console.log('✅ Footer nav updated');
+    }
+
+    // ============================================
+    // MOBILE MENU SYSTEM - FIXED FOR ALL DEVICES
     // ============================================
 
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
     const mobileMenuClose = document.getElementById('mobile-menu-close');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+    function openMobileMenu(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        console.log('📱 Opening mobile menu...');
+        if (mobileMenu && mobileMenuOverlay) {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            }
+            document.body.style.overflow = 'hidden';
+            console.log('✅ Mobile menu opened');
+        }
+    }
+
+    function closeMobileMenu(e) {
+        if (e) {
+            e.stopPropagation();
+        }
+        console.log('📱 Closing mobile menu...');
+        if (mobileMenu && mobileMenuOverlay) {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+            document.body.style.overflow = '';
+            console.log('✅ Mobile menu closed');
+        }
+    }
 
     // Toggle mobile menu
     if (mobileMenuBtn && mobileMenu && mobileMenuOverlay) {
-        mobileMenuBtn.addEventListener('click', function() {
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-            mobileMenu.classList.toggle('active');
-            mobileMenuOverlay.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        // Remove any existing listeners
+        const newBtn = mobileMenuBtn.cloneNode(true);
+        mobileMenuBtn.parentNode.replaceChild(newBtn, mobileMenuBtn);
+        
+        newBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
         });
+        
+        newBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }, { passive: false });
+        
+        console.log('✅ Mobile menu button initialized');
     }
 
     // Close mobile menu when clicking close button
     if (mobileMenuClose && mobileMenu && mobileMenuOverlay) {
-        mobileMenuClose.addEventListener('click', function() {
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            }
-            document.body.style.overflow = '';
-        });
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileMenuClose.addEventListener('touchstart', closeMobileMenu, { passive: true });
     }
 
     // Close mobile menu when clicking overlay
     if (mobileMenuOverlay && mobileMenu) {
-        mobileMenuOverlay.addEventListener('click', function() {
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            }
-            document.body.style.overflow = '';
-        });
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+        mobileMenuOverlay.addEventListener('touchstart', closeMobileMenu, { passive: true });
     }
-
-    // Close mobile menu when clicking mobile nav links
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (mobileMenu && mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-                if (mobileMenuOverlay) {
-                    mobileMenuOverlay.classList.remove('active');
-                }
-                if (mobileMenuBtn) {
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
-                document.body.style.overflow = '';
-            }
-        });
-    });
 
     // Close mobile menu on escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
-            mobileMenu.classList.remove('active');
-            if (mobileMenuOverlay) {
-                mobileMenuOverlay.classList.remove('active');
-            }
-            if (mobileMenuBtn) {
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            }
-            document.body.style.overflow = '';
+            closeMobileMenu();
         }
     });
 
     // ============================================
+    // SMOOTH SCROLLING FOR ANCHOR LINKS
+    // ============================================
+    
+    function handleSmoothScroll(e) {
+        const href = this.getAttribute('href');
+        
+        // Skip if it's just "#" or empty or external link
+        if (!href || href === '#' || href.startsWith('http') || !href.includes('#')) {
+            return;
+        }
+        
+        e.preventDefault();
+        
+        // Get target element
+        const targetId = href.includes('#') ? href.split('#')[1] : href;
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            // Get navbar height for offset
+            const navbar = document.querySelector('.navbar');
+            const navbarHeight = navbar ? navbar.offsetHeight : 80;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+            
+            // Smooth scroll
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+
+            // Update URL without jumping
+            if (history.pushState) {
+                history.pushState(null, null, `#${targetId}`);
+            }
+            
+            // Close mobile menu if open
+            closeMobileMenu();
+        }
+    }
+    
+    // Apply to all anchor links after navigation is generated
+    function attachSmoothScrollListeners() {
+        document.querySelectorAll('a[href^="#"], a[href*="#"]').forEach(anchor => {
+            // Remove existing listener
+            const newAnchor = anchor.cloneNode(true);
+            anchor.parentNode.replaceChild(newAnchor, anchor);
+            
+            // Add new listener
+            newAnchor.addEventListener('click', handleSmoothScroll);
+        });
+        
+        console.log('✅ Smooth scroll listeners attached');
+    }
+
+    // ============================================
     // NAVBAR SMOOTH SCROLL TRANSITION
-    // Gradually changes navbar from ember gradient to black
     // ============================================
     
     const navbar = document.querySelector('.navbar');
     let lastScrollTop = 0;
     let scrollTimeout;
-    const transitionDistance = 400; // Pixels over which transition happens
+    const transitionDistance = 400;
 
     function handleNavbarScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
         if (navbar) {
-            // Calculate progress (0 to 1) over the transition distance
             const progress = Math.min(scrollTop / transitionDistance, 1);
             
-            // Interpolate between ember colors and black
             const emberBrown = { r: 45, g: 24, b: 16, a: 0.95 };
             const emberDeep = { r: 69, g: 26, b: 3, a: 0.92 };
             const emberRust = { r: 124, g: 45, b: 18, a: 0.90 };
@@ -116,7 +364,6 @@
             const black3 = { r: 23, g: 23, b: 23, a: 0.98 };
             const black4 = { r: 26, g: 26, b: 26, a: 0.98 };
             
-            // Interpolate each color stop
             const c1 = {
                 r: Math.round(emberBrown.r + (black1.r - emberBrown.r) * progress),
                 g: Math.round(emberBrown.g + (black1.g - emberBrown.g) * progress),
@@ -142,7 +389,6 @@
                 a: emberRed.a + (black4.a - emberRed.a) * progress
             };
             
-            // Create smooth gradient
             const gradient = `linear-gradient(135deg, 
                 rgba(${c1.r}, ${c1.g}, ${c1.b}, ${c1.a}) 0%, 
                 rgba(${c2.r}, ${c2.g}, ${c2.b}, ${c2.a}) 30%, 
@@ -151,7 +397,6 @@
             
             navbar.style.background = gradient;
             
-            // Interpolate border color
             const borderStart = { r: 240, g: 165, b: 0, a: 0.4 };
             const borderEnd = { r: 215, g: 51, b: 39, a: 0.3 };
             const borderColor = {
@@ -162,7 +407,6 @@
             };
             navbar.style.borderBottom = `2px solid rgba(${borderColor.r}, ${borderColor.g}, ${borderColor.b}, ${borderColor.a})`;
             
-            // Interpolate shadow
             const shadowStart = { r: 215, g: 51, b: 39, a: 0.3 };
             const shadowEnd = { r: 0, g: 0, b: 0, a: 0.6 };
             const shadowColor = {
@@ -179,7 +423,6 @@
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }
 
-    // Use requestAnimationFrame for smooth 60fps transitions
     window.addEventListener('scroll', function() {
         if (scrollTimeout) {
             window.cancelAnimationFrame(scrollTimeout);
@@ -188,13 +431,12 @@
     }, { passive: true });
 
     // ============================================
-    // SCROLL PROGRESS INDICATOR - HORIZONTAL TOP BAR
+    // SCROLL PROGRESS INDICATOR
     // ============================================
 
     function initializeScrollProgress() {
         console.log('📊 Initializing scroll progress indicator...');
         
-        // Create progress bar elements
         const progressContainer = document.createElement('div');
         progressContainer.className = 'scroll-progress-container';
         
@@ -204,22 +446,14 @@
         progressContainer.appendChild(progressBar);
         document.body.appendChild(progressContainer);
         
-        console.log('📊 Progress bar elements created and appended to body');
-        
-        // Update progress on scroll
         function updateScrollProgress() {
             const windowHeight = window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Calculate scroll percentage
             const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
-            
-            // Update progress bar width
             progressBar.style.width = scrollPercentage + '%';
         }
         
-        // Throttled scroll listener for performance
         let scrollProgressTimeout;
         window.addEventListener('scroll', function() {
             if (scrollProgressTimeout) {
@@ -228,104 +462,62 @@
             scrollProgressTimeout = window.requestAnimationFrame(updateScrollProgress);
         }, { passive: true });
         
-        // Initial update
         updateScrollProgress();
-        
-        console.log('✅ Scroll progress indicator initialized successfully');
+        console.log('✅ Scroll progress indicator initialized');
     }
 
     // ============================================
     // UNIVERSAL COUNTDOWN TIMER
-    // Works for both main page and ember token page
     // ============================================
     
     function initializeUniversalCountdown() {
         console.log('🔥 COUNTDOWN: Initializing universal countdown timer...');
         
-        // Target date: November 1, 2025 at midnight UTC
         const targetDate = new Date('November 1, 2025 00:00:00 UTC');
-        console.log('🔥 COUNTDOWN: Target date set to:', targetDate.toString());
         
-        // Find ALL possible countdown elements on the page
         const countdownElements = {
-            // Main page countdown (in ember token section)
             mainDays: document.getElementById('main-days'),
             mainHours: document.getElementById('main-hours'),
             mainMinutes: document.getElementById('main-minutes'),
             mainSeconds: document.getElementById('main-seconds'),
-            
-            // Ember page countdown (in presale section)
             emberDays: document.getElementById('days'),
             emberHours: document.getElementById('hours'),
             emberMinutes: document.getElementById('minutes'),
             emberSeconds: document.getElementById('seconds'),
-            
-            // Ember page countdown (alternative naming)
             countdownDays: document.getElementById('countdown-days'),
             countdownHours: document.getElementById('countdown-hours'),
             countdownMinutes: document.getElementById('countdown-minutes'),
             countdownSeconds: document.getElementById('countdown-seconds')
         };
         
-        console.log('🔥 COUNTDOWN: Found elements:', {
-            mainPage: {
-                days: !!countdownElements.mainDays,
-                hours: !!countdownElements.mainHours,
-                minutes: !!countdownElements.mainMinutes,
-                seconds: !!countdownElements.mainSeconds
-            },
-            emberPage_days: {
-                days: !!countdownElements.emberDays,
-                hours: !!countdownElements.emberHours,
-                minutes: !!countdownElements.emberMinutes,
-                seconds: !!countdownElements.emberSeconds
-            },
-            emberPage_countdown: {
-                days: !!countdownElements.countdownDays,
-                hours: !!countdownElements.countdownHours,
-                minutes: !!countdownElements.countdownMinutes,
-                seconds: !!countdownElements.countdownSeconds
-            }
-        });
-        
-        // Check if ANY countdown elements exist
         const hasAnyCountdown = Object.values(countdownElements).some(el => el !== null);
         
         if (!hasAnyCountdown) {
-            console.log('🔥 COUNTDOWN: No countdown elements found on this page');
+            console.log('🔥 COUNTDOWN: No countdown elements found');
             return false;
         }
-        
-        console.log('🔥 COUNTDOWN: Starting countdown update loop...');
         
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate.getTime() - now;
             
-            // Calculate time components
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
             
-            // Format with leading zeros
             const formattedDays = days.toString().padStart(2, '0');
             const formattedHours = hours.toString().padStart(2, '0');
             const formattedMinutes = minutes.toString().padStart(2, '0');
             const formattedSeconds = seconds.toString().padStart(2, '0');
             
-            // Handle countdown expiration
             if (distance < 0) {
                 Object.entries(countdownElements).forEach(([key, element]) => {
-                    if (element) {
-                        element.textContent = '00';
-                    }
+                    if (element) element.textContent = '00';
                 });
-                console.log('🔥 COUNTDOWN: Expired! All elements set to 00');
                 return;
             }
             
-            // Update all countdown elements
             if (countdownElements.mainDays) countdownElements.mainDays.textContent = formattedDays;
             if (countdownElements.mainHours) countdownElements.mainHours.textContent = formattedHours;
             if (countdownElements.mainMinutes) countdownElements.mainMinutes.textContent = formattedMinutes;
@@ -342,107 +534,74 @@
             if (countdownElements.countdownSeconds) countdownElements.countdownSeconds.textContent = formattedSeconds;
         }
         
-        // Update immediately
         updateCountdown();
-        console.log('🔥 COUNTDOWN: Initial update complete');
-        
-        // Update every second
         const countdownInterval = setInterval(updateCountdown, 1000);
-        console.log('🔥 COUNTDOWN: Update interval set (every 1 second)');
-        
-        // Store interval ID globally
         window.countdownInterval = countdownInterval;
         
-        console.log('🔥 COUNTDOWN: ✅ Universal countdown successfully initialized!');
+        console.log('✅ Universal countdown initialized');
         return true;
     }
     
-    // Expose the countdown function globally
     window.initializeUniversalCountdown = initializeUniversalCountdown;
 
     // ============================================
-    // COOKIE CONSENT BANNER - GDPR COMPLIANT
+    // COOKIE CONSENT BANNER
     // ============================================
     
     function initializeCookieConsent() {
-        // Check if user has already made a choice
         const cookieConsent = localStorage.getItem('vaultphoenix_cookie_consent');
         
         if (cookieConsent !== null) {
-            console.log('🍪 Cookie consent already recorded:', cookieConsent);
-            return; // User has already accepted or declined
+            console.log('🍪 Cookie consent already recorded');
+            return;
         }
         
-        // Create cookie consent banner
         const consentBanner = document.createElement('div');
         consentBanner.className = 'cookie-consent-banner';
         consentBanner.setAttribute('role', 'dialog');
         consentBanner.setAttribute('aria-label', 'Cookie consent banner');
-        consentBanner.setAttribute('aria-live', 'polite');
         
         consentBanner.innerHTML = `
             <div class="cookie-consent-content">
-                <div class="cookie-consent-icon">
-                    🍪
-                </div>
+                <div class="cookie-consent-icon">🍪</div>
                 <div class="cookie-consent-text">
                     <h4>We Value Your Privacy</h4>
                     <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. By clicking "Accept", you consent to our use of cookies.</p>
                 </div>
                 <div class="cookie-consent-buttons">
-                    <button class="cookie-btn cookie-accept" aria-label="Accept cookies">
-                        Accept
-                    </button>
-                    <button class="cookie-btn cookie-decline" aria-label="Decline cookies">
-                        Decline
-                    </button>
-                    <a href="#" class="cookie-privacy-link" id="cookie-privacy-link" aria-label="View privacy policy">
-                        Privacy Policy
-                    </a>
+                    <button class="cookie-btn cookie-accept">Accept</button>
+                    <button class="cookie-btn cookie-decline">Decline</button>
+                    <a href="#" class="cookie-privacy-link" id="cookie-privacy-link">Privacy Policy</a>
                 </div>
             </div>
         `;
         
         document.body.appendChild(consentBanner);
         
-        // Show banner with animation
-        setTimeout(() => {
-            consentBanner.classList.add('show');
-        }, 500);
+        setTimeout(() => consentBanner.classList.add('show'), 500);
         
-        // Handle Accept button
-        const acceptBtn = consentBanner.querySelector('.cookie-accept');
-        acceptBtn.addEventListener('click', function() {
+        consentBanner.querySelector('.cookie-accept').addEventListener('click', function() {
             localStorage.setItem('vaultphoenix_cookie_consent', 'accepted');
-            console.log('🍪 Cookies accepted by user');
             consentBanner.classList.remove('show');
-            setTimeout(() => {
-                consentBanner.remove();
-            }, 400);
+            setTimeout(() => consentBanner.remove(), 400);
         });
         
-        // Handle Decline button
-        const declineBtn = consentBanner.querySelector('.cookie-decline');
-        declineBtn.addEventListener('click', function() {
+        consentBanner.querySelector('.cookie-decline').addEventListener('click', function() {
             localStorage.setItem('vaultphoenix_cookie_consent', 'declined');
-            console.log('🍪 Cookies declined by user');
             consentBanner.classList.remove('show');
-            setTimeout(() => {
-                consentBanner.remove();
-            }, 400);
+            setTimeout(() => consentBanner.remove(), 400);
         });
         
         console.log('🍪 Cookie consent banner initialized');
     }
 
     // ============================================
-    // PRIVACY POLICY MODAL SYSTEM
+    // PRIVACY POLICY MODAL
     // ============================================
     
     function initializePrivacyPolicyModal() {
         console.log('🔒 Initializing Privacy Policy Modal...');
         
-        // Create modal overlay and content
         const modalHTML = `
             <div class="privacy-modal-overlay" id="privacy-modal-overlay" role="dialog" aria-labelledby="privacy-modal-title" aria-modal="true">
                 <div class="privacy-modal">
@@ -451,20 +610,11 @@
                             <span class="privacy-modal-icon">🔒</span>
                             Privacy Policy
                         </h2>
-                        <button class="privacy-modal-close" id="privacy-modal-close" aria-label="Close privacy policy">
-                            ×
-                        </button>
+                        <button class="privacy-modal-close" id="privacy-modal-close">×</button>
                     </div>
-                    
                     <div class="privacy-modal-body">
-                        <div class="privacy-modal-date">
-                            Effective Date: October 27, 2025 | Last Updated: October 27, 2025
-                        </div>
-                        
-                        <div class="privacy-modal-intro">
-                            Welcome to Vault Phoenix LLC. We value your privacy and are committed to protecting your personal information. This policy explains how we collect, use, and protect data when you use our AR-based campaigns, token programs, and services.
-                        </div>
-                        
+                        <div class="privacy-modal-date">Effective Date: October 27, 2025 | Last Updated: October 27, 2025</div>
+                        <div class="privacy-modal-intro">Welcome to Vault Phoenix LLC. We value your privacy and are committed to protecting your personal information.</div>
                         <div class="privacy-key-points">
                             <h3>Key Privacy Highlights</h3>
                             <div class="privacy-points-grid">
@@ -473,67 +623,45 @@
                                         <span class="privacy-point-icon">📧</span>
                                         <h4>Information We Collect</h4>
                                     </div>
-                                    <p>We collect email addresses, wallet addresses, device information, and geolocation data (only with your consent for AR campaigns). All data collection is transparent and purposeful.</p>
+                                    <p>We collect email addresses, wallet addresses, device information, and geolocation data (only with your consent for AR campaigns).</p>
                                 </div>
-                                
                                 <div class="privacy-point">
                                     <div class="privacy-point-header">
                                         <span class="privacy-point-icon">🎯</span>
                                         <h4>How We Use Your Data</h4>
                                     </div>
-                                    <p>Your information helps us operate and improve our services, enable AR campaigns, process token transactions, and communicate important updates. We ensure compliance with all legal and regulatory requirements.</p>
+                                    <p>Your information helps us operate and improve our services, enable AR campaigns, process token transactions, and communicate important updates.</p>
                                 </div>
-                                
                                 <div class="privacy-point">
                                     <div class="privacy-point-header">
                                         <span class="privacy-point-icon">🤝</span>
                                         <h4>Information Sharing</h4>
                                     </div>
-                                    <p>We only share limited data with service providers, compliance partners for KYC/AML verification, and legal authorities when required. We never sell or rent your personal information to third parties.</p>
+                                    <p>We only share limited data with service providers and compliance partners. We never sell your personal information.</p>
                                 </div>
-                                
                                 <div class="privacy-point">
                                     <div class="privacy-point-header">
                                         <span class="privacy-point-icon">🍪</span>
                                         <h4>Cookies & Tracking</h4>
                                     </div>
-                                    <p>We use cookies and local storage to enhance your experience, measure engagement, and manage AR campaign performance. You can manage cookie preferences in your browser settings.</p>
+                                    <p>We use cookies to enhance your experience. You can manage cookie preferences in your browser settings.</p>
                                 </div>
-                                
                                 <div class="privacy-point">
                                     <div class="privacy-point-header">
                                         <span class="privacy-point-icon">🔐</span>
                                         <h4>Data Security</h4>
                                     </div>
-                                    <p>We employ industry-standard encryption, secure hosting, and strict access controls to protect your personal data. While no system is 100% secure, we continuously monitor and improve our security measures.</p>
+                                    <p>We employ industry-standard encryption, secure hosting, and strict access controls to protect your data.</p>
                                 </div>
-                                
                                 <div class="privacy-point">
                                     <div class="privacy-point-header">
                                         <span class="privacy-point-icon">⚖️</span>
                                         <h4>Your Rights</h4>
                                     </div>
-                                    <p>You have the right to access, correct, or delete your personal information, request limits on processing, and withdraw consent for geolocation or marketing communications at any time.</p>
-                                </div>
-                                
-                                <div class="privacy-point">
-                                    <div class="privacy-point-header">
-                                        <span class="privacy-point-icon">👶</span>
-                                        <h4>Children's Privacy</h4>
-                                    </div>
-                                    <p>Our platform is not intended for children under 13 (or under 16 in certain jurisdictions). We do not knowingly collect personal information from minors.</p>
-                                </div>
-                                
-                                <div class="privacy-point">
-                                    <div class="privacy-point-header">
-                                        <span class="privacy-point-icon">🌍</span>
-                                        <h4>International Transfers</h4>
-                                    </div>
-                                    <p>If you're outside the United States, your data may be transferred and processed in the U.S. or other locations where Vault Phoenix operates, in compliance with international data protection standards.</p>
+                                    <p>You have the right to access, correct, or delete your personal information at any time.</p>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="privacy-contact-section">
                             <h4>Contact Us About Privacy</h4>
                             <div class="privacy-contact-info">
@@ -543,121 +671,60 @@
                                 </div>
                                 <div class="privacy-contact-item">
                                     <span>🌐</span>
-                                    <span>Website: <a href="https://www.vaultphoenix.com" target="_blank" rel="noopener">www.vaultphoenix.com</a></span>
-                                </div>
-                                <div class="privacy-contact-item">
-                                    <span>🏢</span>
-                                    <span>Vault Phoenix LLC</span>
+                                    <span>Website: <a href="https://www.vaultphoenix.com" target="_blank">www.vaultphoenix.com</a></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="privacy-modal-footer">
                         <a href="docs/PRIVACY_POLICY.pdf" download class="privacy-download-btn">
                             <span class="privacy-download-icon">📥</span>
-                            Download Full Policy (PDF)
+                            Download Full Policy
                         </a>
-                        <button class="privacy-close-btn" id="privacy-modal-close-btn">
-                            Close
-                        </button>
+                        <button class="privacy-close-btn" id="privacy-modal-close-btn">Close</button>
                     </div>
                 </div>
             </div>
         `;
         
-        // Add modal to body
         document.body.insertAdjacentHTML('beforeend', modalHTML);
         
-        // Get modal elements
         const modalOverlay = document.getElementById('privacy-modal-overlay');
         const modalClose = document.getElementById('privacy-modal-close');
         const modalCloseBtn = document.getElementById('privacy-modal-close-btn');
         
-        // Function to open modal
         function openPrivacyModal(e) {
             if (e) e.preventDefault();
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-            console.log('🔒 Privacy Policy Modal opened');
         }
         
-        // Function to close modal
         function closePrivacyModal() {
             modalOverlay.classList.remove('active');
             document.body.style.overflow = '';
-            console.log('🔒 Privacy Policy Modal closed');
         }
         
-        // Event listeners for privacy policy links
-        const privacyLinks = document.querySelectorAll('[href="#privacy-policy"], #cookie-privacy-link, .cookie-privacy-link, .privacy-policy-link');
-        privacyLinks.forEach(link => {
+        document.querySelectorAll('[href="#privacy-policy"], #cookie-privacy-link, .cookie-privacy-link, .privacy-policy-link').forEach(link => {
             link.addEventListener('click', openPrivacyModal);
         });
         
-        // Close modal handlers
-        if (modalClose) {
-            modalClose.addEventListener('click', closePrivacyModal);
-        }
-        
-        if (modalCloseBtn) {
-            modalCloseBtn.addEventListener('click', closePrivacyModal);
-        }
-        
-        // Close on overlay click
+        if (modalClose) modalClose.addEventListener('click', closePrivacyModal);
+        if (modalCloseBtn) modalCloseBtn.addEventListener('click', closePrivacyModal);
         if (modalOverlay) {
             modalOverlay.addEventListener('click', function(e) {
-                if (e.target === modalOverlay) {
-                    closePrivacyModal();
-                }
+                if (e.target === modalOverlay) closePrivacyModal();
             });
         }
         
-        // Close on escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
                 closePrivacyModal();
             }
         });
         
-        // Expose function globally for external use
         window.openPrivacyPolicyModal = openPrivacyModal;
-        
-        console.log('🔒 Privacy Policy Modal initialized successfully');
+        console.log('✅ Privacy Policy Modal initialized');
     }
-
-    // ============================================
-    // SMOOTH SCROLLING FOR ANCHOR LINKS
-    // ============================================
-    
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            // Skip if it's just "#" or empty
-            if (!href || href === '#') return;
-            
-            const targetElement = document.querySelector(href);
-            
-            if (targetElement) {
-                e.preventDefault();
-                
-                // Get navbar height for offset
-                const navbarHeight = navbar ? navbar.offsetHeight : 80;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-
-                // Update URL without jumping
-                if (history.pushState) {
-                    history.pushState(null, null, href);
-                }
-            }
-        });
-    });
 
     // ============================================
     // SCROLL REVEAL ANIMATIONS
@@ -676,82 +743,40 @@
         });
     }, observerOptions);
 
-    // Observe elements with scroll-reveal class
-    const revealElements = document.querySelectorAll('.scroll-reveal');
-    revealElements.forEach(element => {
-        observer.observe(element);
-    });
-
-    // Additional observer for fade-in-up animations
-    const fadeUpElements = document.querySelectorAll('.fade-in-up');
-    fadeUpElements.forEach(element => {
-        observer.observe(element);
-    });
-
-    // Additional observer for slide-in animations
-    const slideInElements = document.querySelectorAll('.slide-in-left, .slide-in-right');
-    slideInElements.forEach(element => {
+    document.querySelectorAll('.scroll-reveal, .fade-in-up, .slide-in-left, .slide-in-right').forEach(element => {
         observer.observe(element);
     });
 
     // ============================================
-    // PHOENIX AI CHATBOT SYSTEM
+    // PHOENIX AI CHATBOT SYSTEM - OPTIMIZED
     // ============================================
     
-    // Chatbot configuration
-    const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE'; // Replace with actual API key
+    const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE';
     const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
     const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
     
     let conversationHistory = [];
     let isTyping = false;
     
-    // System prompt for Vault Phoenix context
-    const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token presale, a revolutionary crypto token that powers AR gaming rewards and location-based marketing campaigns.
+    const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token presale and AR crypto gaming platform.
 
-Key Information about $Ember Token:
-- Token Symbol: $EMBER
+Key Information:
+- Token: $EMBER
 - Presale Launch: November 1, 2025
-- Presale Price: $0.003 per token
-- Total Supply: 166.7M tokens available in presale
+- Price: $0.003 per token
+- Total Supply: 166.7M tokens
 - Hard Cap: $500K
-- Platform: Polygon blockchain (ERC-20)
-- Use Cases: Platform currency for GPS & Beacon campaigns, SDK integration, local redemption network
-
-Token Allocation:
-- Campaign Token Pool: 35% - Sold to Platform Operators through management system
-- Platform Operator & SDK Incentives: 30% - Customer onboarding bonuses
-- Presale: 16.67% - Early investors at $0.003
-- Team & Development: 10% - 1-year cliff, 3-year vesting
-- Treasury/Growth: 5% - Community governed
-- Reserve/Burn: 3.33% - Deflationary mechanisms
-
-Key Benefits:
-- First-mover advantage at $0.003 presale price
-- Built-in demand from Platform Operators and Advertisers
-- GPS & Beacon technology for complete location coverage
-- Dual redemption: local businesses OR Coinbase cash-out
-- $200K liquidity guarantee (40% of presale)
-- Professional legal and financial oversight
-
-Vault Phoenix Platform:
-- White-label AR crypto gaming with GPS (Outdoors) & Beacon (Indoors)
-- Management system for campaign deployment
-- SDK for developers
-- Three-stakeholder ecosystem: Platform Operators, Players, Advertisers
+- Platform: Polygon blockchain
 
 Your role:
-- Answer questions about $Ember token, presale, and ecosystem
+- Answer questions about $Ember token and platform
 - Explain investment opportunities professionally
 - Guide users toward participating in presale
-- Be enthusiastic yet professional about crypto
-- Keep responses concise but informative
+- Be enthusiastic yet professional
+- Keep responses concise but informative`;
 
-If asked about financial advice, remind users to do their own research and consult professionals.`;
-
-    // Initialize chatbot
     function initializeChatbot() {
-        console.log('🤖 CHATBOT: Starting initialization...');
+        console.log('🤖 Initializing chatbot...');
         
         const chatbotButton = document.querySelector('.chatbot-button-container');
         const chatbotWindow = document.querySelector('.chatbot-window');
@@ -760,61 +785,34 @@ If asked about financial advice, remind users to do their own research and consu
         const chatbotSend = document.querySelector('.chatbot-send');
         const chatbotBody = document.querySelector('.chatbot-body');
         
-        console.log('🤖 CHATBOT: Element check:', {
-            button: !!chatbotButton,
-            window: !!chatbotWindow,
-            close: !!chatbotClose,
-            input: !!chatbotInput,
-            send: !!chatbotSend,
-            body: !!chatbotBody
-        });
-        
         if (!chatbotButton || !chatbotWindow) {
-            console.error('❌ CHATBOT: Required elements not found!');
+            console.error('❌ Chatbot elements not found');
             return false;
         }
         
-        // Remove any existing event listeners (prevents duplicates)
         const newChatbotButton = chatbotButton.cloneNode(true);
         chatbotButton.parentNode.replaceChild(newChatbotButton, chatbotButton);
         
-        // Toggle chatbot window
         newChatbotButton.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('🤖 CHATBOT: Button clicked!');
             chatbotWindow.classList.toggle('active');
-            if (chatbotWindow.classList.contains('active')) {
-                console.log('🤖 CHATBOT: Window opened');
-                if (chatbotBody && chatbotBody.children.length === 0) {
-                    addWelcomeMessage();
-                }
-            } else {
-                console.log('🤖 CHATBOT: Window closed');
+            if (chatbotWindow.classList.contains('active') && chatbotBody && chatbotBody.children.length === 0) {
+                addWelcomeMessage();
             }
         });
         
-        console.log('🤖 CHATBOT: Button click listener attached');
-        
-        // Close chatbot
         if (chatbotClose) {
             chatbotClose.addEventListener('click', function(e) {
                 e.preventDefault();
-                e.stopPropagation();
-                console.log('🤖 CHATBOT: Close button clicked');
                 chatbotWindow.classList.remove('active');
             });
         }
         
-        // Send message on button click
         if (chatbotSend) {
-            chatbotSend.addEventListener('click', function(e) {
-                e.preventDefault();
-                sendMessage();
-            });
+            chatbotSend.addEventListener('click', sendMessage);
         }
         
-        // Send message on Enter key
         if (chatbotInput) {
             chatbotInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
@@ -824,75 +822,62 @@ If asked about financial advice, remind users to do their own research and consu
             });
         }
         
-        console.log('✅ CHATBOT: Initialization complete!');
+        console.log('✅ Chatbot initialized');
         return true;
     }
     
-    // Welcome message
     function addWelcomeMessage() {
-        const welcomeMsg = `
+        const chatbotBody = document.querySelector('.chatbot-body');
+        if (!chatbotBody) return;
+        
+        chatbotBody.innerHTML = `
             <div class="chat-message assistant-message">
                 <div class="message-content">
                     <div class="message-avatar">
-                        <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                        <img src="images/VPLogoNoText.PNG" alt="Phoenix AI">
                     </div>
                     <div class="message-text">
                         <strong>Welcome to Vault Phoenix!</strong><br><br>
-                        I'm your AI assistant for $Ember Token and our AR crypto gaming platform. Ask me about:
+                        I'm your AI assistant. Ask me about:
                         <ul style="margin: 10px 0; padding-left: 20px;">
-                            <li>$Ember token presale details & pricing</li>
-                            <li>GPS & Beacon technology integration</li>
+                            <li>$Ember token presale & pricing</li>
+                            <li>GPS & Beacon technology</li>
                             <li>White-label app deployment</li>
-                            <li>Platform Operator opportunities</li>
-                            <li>How to participate in presale</li>
+                            <li>Platform opportunities</li>
                         </ul>
                         What would you like to know?
                     </div>
                 </div>
             </div>
         `;
-        
-        const chatbotBody = document.querySelector('.chatbot-body');
-        if (chatbotBody) {
-            chatbotBody.innerHTML = welcomeMsg;
-        }
     }
     
-    // Send message to Claude API
     async function sendMessage() {
         const chatbotInput = document.querySelector('.chatbot-input');
-        const chatbotBody = document.querySelector('.chatbot-body');
         const chatbotSend = document.querySelector('.chatbot-send');
         
-        if (!chatbotInput || !chatbotBody || !chatbotSend) return;
+        if (!chatbotInput || !chatbotSend) return;
         
         const message = chatbotInput.value.trim();
-        
         if (!message || isTyping) return;
         
-        // Check API key
         if (CLAUDE_API_KEY === 'YOUR_CLAUDE_API_KEY_HERE') {
             addChatMessage('user', message);
-            addChatMessage('assistant', '⚠️ API key not configured. Please add your Claude API key to enable chat functionality. Get your key at: https://console.anthropic.com/');
+            addChatMessage('assistant', '⚠️ API key not configured. Get your key at: https://console.anthropic.com/');
             chatbotInput.value = '';
             return;
         }
         
-        // Add user message
         addChatMessage('user', message);
         chatbotInput.value = '';
         chatbotInput.disabled = true;
         chatbotSend.disabled = true;
         isTyping = true;
         
-        // Show typing indicator
         showTypingIndicator();
         
         try {
-            const messages = [
-                ...conversationHistory,
-                { role: 'user', content: message }
-            ];
+            const messages = [...conversationHistory, { role: 'user', content: message }];
             
             const response = await fetch(CLAUDE_API_URL, {
                 method: 'POST',
@@ -910,15 +895,13 @@ If asked about financial advice, remind users to do their own research and consu
             });
             
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error?.message || `API Error: ${response.status}`);
+                throw new Error(`API Error: ${response.status}`);
             }
             
             const data = await response.json();
             removeTypingIndicator();
             
             const assistantMessage = data.content[0].text;
-            
             conversationHistory.push(
                 { role: 'user', content: message },
                 { role: 'assistant', content: assistantMessage }
@@ -928,20 +911,7 @@ If asked about financial advice, remind users to do their own research and consu
             
         } catch (error) {
             removeTypingIndicator();
-            
-            let errorMessage = '❌ Sorry, I encountered an error. ';
-            
-            if (error.message.includes('401')) {
-                errorMessage += 'Invalid API key. Please check your configuration.';
-            } else if (error.message.includes('429')) {
-                errorMessage += 'Rate limit exceeded. Please try again in a moment.';
-            } else if (error.message.includes('500') || error.message.includes('529')) {
-                errorMessage += 'Claude API is temporarily unavailable. Please try again.';
-            } else {
-                errorMessage += 'Please try again or contact us at contact@vaultphoenix.com';
-            }
-            
-            addChatMessage('assistant', errorMessage);
+            addChatMessage('assistant', '❌ Sorry, I encountered an error. Please try again.');
         } finally {
             chatbotInput.disabled = false;
             chatbotSend.disabled = false;
@@ -949,7 +919,6 @@ If asked about financial advice, remind users to do their own research and consu
         }
     }
     
-    // Add message to chat
     function addChatMessage(role, content) {
         const chatbotBody = document.querySelector('.chatbot-body');
         if (!chatbotBody) return;
@@ -967,7 +936,7 @@ If asked about financial advice, remind users to do their own research and consu
             messageDiv.innerHTML = `
                 <div class="message-content">
                     <div class="message-avatar">
-                        <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                        <img src="images/VPLogoNoText.PNG" alt="Phoenix AI">
                     </div>
                     <div class="message-text">${formatChatMessage(content)}</div>
                 </div>
@@ -978,7 +947,6 @@ If asked about financial advice, remind users to do their own research and consu
         chatbotBody.scrollTop = chatbotBody.scrollHeight;
     }
     
-    // Typing indicator
     function showTypingIndicator() {
         const chatbotBody = document.querySelector('.chatbot-body');
         if (!chatbotBody) return;
@@ -988,7 +956,7 @@ If asked about financial advice, remind users to do their own research and consu
         typingDiv.innerHTML = `
             <div class="message-content">
                 <div class="message-avatar">
-                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix">
+                    <img src="images/VPLogoNoText.PNG" alt="Phoenix AI">
                 </div>
                 <div class="typing-dots">
                     <span></span><span></span><span></span>
@@ -1002,12 +970,9 @@ If asked about financial advice, remind users to do their own research and consu
     
     function removeTypingIndicator() {
         const typingIndicator = document.querySelector('.typing-indicator');
-        if (typingIndicator) {
-            typingIndicator.remove();
-        }
+        if (typingIndicator) typingIndicator.remove();
     }
     
-    // Message formatting
     function escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
@@ -1023,48 +988,7 @@ If asked about financial advice, remind users to do their own research and consu
         return formatted;
     }
     
-    // Expose chatbot initialization globally
     window.initializePhoenixChatbot = initializeChatbot;
-
-    // ============================================
-    // UTILITY FUNCTIONS
-    // ============================================
-    
-    // Debounce function
-    window.debounce = function(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    };
-
-    // Throttle function
-    window.throttle = function(func, limit) {
-        let inThrottle;
-        return function(...args) {
-            if (!inThrottle) {
-                func.apply(this, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    };
-
-    // Check if element is in viewport
-    window.isInViewport = function(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    };
 
     // ============================================
     // RESPONSIVE HANDLING
@@ -1074,16 +998,8 @@ If asked about financial advice, remind users to do their own research and consu
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(function() {
-            // Close mobile menu on desktop resize
             if (window.innerWidth > 1024 && mobileMenu && mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-                if (mobileMenuOverlay) {
-                    mobileMenuOverlay.classList.remove('active');
-                }
-                if (mobileMenuBtn) {
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
-                document.body.style.overflow = '';
+                closeMobileMenu();
             }
         }, 250);
     });
@@ -1095,66 +1011,37 @@ If asked about financial advice, remind users to do their own research and consu
     function init() {
         console.log('🔥 Vault Phoenix Shared Scripts Initializing...');
         
-        // Initial navbar state
         handleNavbarScroll();
-        
-        // Initialize cookie consent banner
         initializeCookieConsent();
-        
-        // Initialize privacy policy modal
         initializePrivacyPolicyModal();
-        
-        // Initialize scroll progress indicator
         initializeScrollProgress();
         
-        // Initialize Phoenix AI Chatbot with retry logic
-        console.log('🤖 Attempting chatbot initialization...');
+        // Generate dynamic navigation FIRST
+        generateDynamicNavigation();
+        
+        // Then attach smooth scroll listeners
+        setTimeout(() => {
+            attachSmoothScrollListeners();
+        }, 100);
+        
+        // Initialize chatbot
         let chatbotInitialized = initializeChatbot();
-        
         if (!chatbotInitialized) {
-            console.log('🤖 First attempt failed, retrying after 100ms...');
-            setTimeout(() => {
-                chatbotInitialized = initializeChatbot();
-                if (!chatbotInitialized) {
-                    console.log('🤖 Second attempt failed, retrying after 500ms...');
-                    setTimeout(() => {
-                        chatbotInitialized = initializeChatbot();
-                        if (!chatbotInitialized) {
-                            console.error('❌ CHATBOT: Failed to initialize after 3 attempts');
-                        }
-                    }, 500);
-                }
-            }, 100);
+            setTimeout(() => initializeChatbot(), 100);
         }
         
-        // Initialize countdown timer with retries
-        console.log('🔥 Attempting countdown initialization...');
-        const success1 = initializeUniversalCountdown();
-        
-        if (!success1) {
-            console.log('🔥 First attempt failed, retrying after 100ms...');
-            setTimeout(() => {
-                const success2 = initializeUniversalCountdown();
-                if (!success2) {
-                    console.log('🔥 Second attempt failed, retrying after 500ms...');
-                    setTimeout(() => {
-                        initializeUniversalCountdown();
-                    }, 500);
-                }
-            }, 100);
+        // Initialize countdown
+        let countdownInitialized = initializeUniversalCountdown();
+        if (!countdownInitialized) {
+            setTimeout(() => initializeUniversalCountdown(), 100);
         }
         
-        // Add loaded class to body
         document.body.classList.add('loaded');
+        window.sharedScriptReady = true;
         
         console.log('✅ Vault Phoenix Shared Scripts Initialization Complete');
-        
-        // Signal that shared script is fully initialized and ready
-        window.sharedScriptReady = true;
-        console.log('✅ shared/global.js fully initialized and ready - signaling to dependent scripts');
     }
 
-    // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
