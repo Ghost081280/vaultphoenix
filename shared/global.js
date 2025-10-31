@@ -1,8 +1,9 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V5.0 OPTIMIZED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.0 OPTIMIZED
 // ============================================
-// Mobile & Desktop Optimized - Dynamic Navigation
-// Fixed: All mobile link issues, dynamic quick links, chatbot positioning
+// Mobile & Desktop Optimized - Hardcoded Navigation
+// Updated: Hardcoded nav links, improved mobile slider animation, 
+// offline status indicator, better chatbot positioning
 // Performance optimized with requestAnimationFrame and debouncing
 // ============================================
 
@@ -10,66 +11,40 @@
     'use strict';
 
     // ============================================
-    // DYNAMIC NAVIGATION SYSTEM
-    // Automatically generates navigation links based on page sections
+    // HARDCODED NAVIGATION SYSTEM FOR MAIN PAGE
+    // Update these links per page as needed
     // ============================================
     
-    function generateDynamicNavigation() {
-        console.log('🔗 Generating dynamic navigation...');
-        
-        // Get all main sections with IDs (excluding navbar, footer, etc.)
-        const sections = document.querySelectorAll('main section[id]');
-        const navLinks = [];
-        
-        sections.forEach(section => {
-            const id = section.id;
-            const heading = section.querySelector('h1, h2, .main-section-title, .main-hero-title-new');
-            
-            if (id && heading) {
-                // Extract short title (first 1-2 words)
-                let title = heading.textContent.trim();
-                
-                // Create shortened version
-                const words = title.split(' ');
-                if (words.length > 2) {
-                    title = words.slice(0, 2).join(' ');
-                }
-                
-                // Clean up title
-                title = title.replace(/[^\w\s]/gi, '').trim();
-                
-                // Store nav link data
-                navLinks.push({
-                    id: id,
-                    title: title,
-                    href: `#${id}`
-                });
-            }
-        });
-        
-        console.log('🔗 Found sections:', navLinks);
+    const MAIN_PAGE_NAV_LINKS = [
+        { title: 'How it Works', href: '#deploy-crypto-coins' },
+        { title: 'Live Demo', href: '#experience-both-systems' },
+        { title: 'Get Ideas', href: '#crypto-gaming-industries' },
+        { title: 'Pricing', href: '#developer-sdk-pricing' }
+    ];
+    
+    function generateNavigation() {
+        console.log('🔗 Generating hardcoded navigation...');
         
         // Update desktop navigation
-        updateDesktopNav(navLinks);
+        updateDesktopNav(MAIN_PAGE_NAV_LINKS);
         
         // Update mobile navigation
-        updateMobileNav(navLinks);
+        updateMobileNav(MAIN_PAGE_NAV_LINKS);
         
         // Update footer quick links
-        updateFooterNav(navLinks);
+        updateFooterNav(MAIN_PAGE_NAV_LINKS);
         
-        console.log('✅ Dynamic navigation generated successfully');
+        console.log('✅ Navigation generated successfully');
     }
     
     function updateDesktopNav(navLinks) {
         const desktopNav = document.querySelector('.nav-links');
         if (!desktopNav) return;
         
-        // Clear existing links (keep ember link separate)
-        const emberLink = desktopNav.querySelector('.ember-link')?.parentElement;
+        // Clear existing links
         desktopNav.innerHTML = '';
         
-        // Add dynamic section links
+        // Add hardcoded section links
         navLinks.forEach(link => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -80,22 +55,17 @@
             desktopNav.appendChild(li);
         });
         
-        // Re-add Ember link if it existed
-        if (emberLink) {
-            desktopNav.appendChild(emberLink);
-        } else {
-            // Create Ember link
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = 'ember-presale.html';
-            a.className = 'ember-link';
-            a.innerHTML = `
-                <img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">
-                $Ember Token
-            `;
-            li.appendChild(a);
-            desktopNav.appendChild(li);
-        }
+        // Add Ember link with button and image
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = 'ember-presale.html';
+        a.className = 'ember-link';
+        a.innerHTML = `
+            <img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">
+            $Ember Token
+        `;
+        li.appendChild(a);
+        desktopNav.appendChild(li);
         
         console.log('✅ Desktop nav updated');
     }
@@ -107,7 +77,7 @@
         // Clear existing links
         mobileNav.innerHTML = '';
         
-        // Add dynamic section links
+        // Add hardcoded section links
         navLinks.forEach(link => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -119,7 +89,7 @@
             mobileNav.appendChild(li);
         });
         
-        // Add Ember link
+        // Add Ember link with button and image
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = 'ember-presale.html';
@@ -135,9 +105,6 @@
     }
     
     function updateFooterNav(navLinks) {
-        const footerQuickLinks = document.querySelector('.footer-links');
-        if (!footerQuickLinks) return;
-        
         // Find the Quick Links column
         const quickLinksColumn = Array.from(document.querySelectorAll('.footer-column')).find(col => {
             const heading = col.querySelector('.footer-heading');
@@ -152,25 +119,7 @@
         // Clear existing links
         linksContainer.innerHTML = '';
         
-        // Add Home link
-        const homeLi = document.createElement('li');
-        const homeA = document.createElement('a');
-        homeA.href = 'index.html';
-        homeA.textContent = 'Home';
-        homeLi.appendChild(homeA);
-        linksContainer.appendChild(homeLi);
-        
-        // Add Platform link (if not on main.html already)
-        if (!window.location.href.includes('main.html')) {
-            const platformLi = document.createElement('li');
-            const platformA = document.createElement('a');
-            platformA.href = 'main.html';
-            platformA.textContent = 'Platform';
-            platformLi.appendChild(platformA);
-            linksContainer.appendChild(platformLi);
-        }
-        
-        // Add dynamic section links
+        // Add hardcoded section links
         navLinks.forEach(link => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -181,7 +130,7 @@
             linksContainer.appendChild(li);
         });
         
-        // Add Ember link (without icon in footer)
+        // Add Ember link (text only in footer)
         const emberLi = document.createElement('li');
         const emberA = document.createElement('a');
         emberA.href = 'ember-presale.html';
@@ -194,7 +143,7 @@
     }
 
     // ============================================
-    // MOBILE MENU SYSTEM - FIXED FOR ALL DEVICES
+    // MOBILE MENU SYSTEM - IMPROVED ANIMATION
     // ============================================
 
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -307,7 +256,7 @@
             // Get navbar height for offset
             const navbar = document.querySelector('.navbar');
             const navbarHeight = navbar ? navbar.offsetHeight : 80;
-            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
             
             // Smooth scroll
             window.scrollTo({
@@ -757,6 +706,7 @@
     
     let conversationHistory = [];
     let isTyping = false;
+    let isOnline = false; // Currently offline
     
     const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token presale and AR crypto gaming platform.
 
@@ -789,6 +739,9 @@ Your role:
             console.error('❌ Chatbot elements not found');
             return false;
         }
+        
+        // Update status indicator based on API connection
+        updateChatbotStatus();
         
         const newChatbotButton = chatbotButton.cloneNode(true);
         chatbotButton.parentNode.replaceChild(newChatbotButton, chatbotButton);
@@ -826,9 +779,28 @@ Your role:
         return true;
     }
     
+    function updateChatbotStatus() {
+        const statusElement = document.querySelector('.chatbot-status');
+        const statusDot = document.querySelector('.chatbot-status-dot');
+        
+        if (statusElement && statusDot) {
+            if (isOnline) {
+                statusDot.classList.add('online');
+                statusElement.innerHTML = `<span class="chatbot-status-dot online"></span>Online`;
+            } else {
+                statusDot.classList.remove('online');
+                statusElement.innerHTML = `<span class="chatbot-status-dot"></span>Offline`;
+            }
+        }
+    }
+    
     function addWelcomeMessage() {
         const chatbotBody = document.querySelector('.chatbot-body');
         if (!chatbotBody) return;
+        
+        const statusMessage = isOnline ? 
+            'I\'m online and ready to help!' : 
+            'I\'m currently offline. Please check back later or contact support.';
         
         chatbotBody.innerHTML = `
             <div class="chat-message assistant-message">
@@ -838,14 +810,15 @@ Your role:
                     </div>
                     <div class="message-text">
                         <strong>Welcome to Vault Phoenix!</strong><br><br>
-                        I'm your AI assistant. Ask me about:
+                        ${statusMessage}<br><br>
+                        ${isOnline ? `Ask me about:
                         <ul style="margin: 10px 0; padding-left: 20px;">
                             <li>$Ember token presale & pricing</li>
                             <li>GPS & Beacon technology</li>
                             <li>White-label app deployment</li>
                             <li>Platform opportunities</li>
                         </ul>
-                        What would you like to know?
+                        What would you like to know?` : 'Thank you for your interest in Vault Phoenix!'}
                     </div>
                 </div>
             </div>
@@ -860,6 +833,13 @@ Your role:
         
         const message = chatbotInput.value.trim();
         if (!message || isTyping) return;
+        
+        if (!isOnline) {
+            addChatMessage('user', message);
+            addChatMessage('assistant', '⚠️ I\'m currently offline. Please contact support for assistance.');
+            chatbotInput.value = '';
+            return;
+        }
         
         if (CLAUDE_API_KEY === 'YOUR_CLAUDE_API_KEY_HERE') {
             addChatMessage('user', message);
@@ -1009,15 +989,15 @@ Your role:
     // ============================================
     
     function init() {
-        console.log('🔥 Vault Phoenix Shared Scripts Initializing...');
+        console.log('🔥 Vault Phoenix Shared Scripts v6.0 Initializing...');
         
         handleNavbarScroll();
         initializeCookieConsent();
         initializePrivacyPolicyModal();
         initializeScrollProgress();
         
-        // Generate dynamic navigation FIRST
-        generateDynamicNavigation();
+        // Generate hardcoded navigation
+        generateNavigation();
         
         // Then attach smooth scroll listeners
         setTimeout(() => {
@@ -1039,7 +1019,7 @@ Your role:
         document.body.classList.add('loaded');
         window.sharedScriptReady = true;
         
-        console.log('✅ Vault Phoenix Shared Scripts Initialization Complete');
+        console.log('✅ Vault Phoenix Shared Scripts v6.0 Initialization Complete');
     }
 
     if (document.readyState === 'loading') {
