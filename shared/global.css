@@ -1,9 +1,9 @@
 /* ===================================
-   VAULT PHOENIX - SHARED CSS v6.2 OPTIMIZED
+   VAULT PHOENIX - SHARED CSS v6.3 OPTIMIZED
    Core styles used across ALL pages
    Mobile & Desktop Optimized
-   Updated: Fixed $Ember link hover, wider button padding, gold borders,
-   ember scrollbars, optimized footer, landscape improvements
+   Updated: Main page vertical scrollbar ember colors, wider $Ember button,
+   improved mobile footer, mobile slider positioning, responsive chatbot width
    =================================== */
 
 /* ===================================
@@ -119,6 +119,32 @@ body {
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: none;
     min-height: -webkit-fill-available;
+}
+
+/* FIX: Main page vertical scrollbar - EMBER COLORS! */
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(26, 15, 10, 0.8);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, 
+        var(--ember-orange) 0%, 
+        var(--ember-red) 50%, 
+        var(--ember-gold) 100%);
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 10px rgba(215, 51, 39, 0.5);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, 
+        var(--ember-gold) 0%, 
+        var(--ember-orange) 50%, 
+        var(--ember-red) 100%);
+    box-shadow: 0 0 15px rgba(240, 165, 0, 0.7);
 }
 
 /* Prevent zoom on mobile inputs */
@@ -309,12 +335,12 @@ button {
     width: 100%;
 }
 
-/* FIX: Remove underline on hover for $Ember button */
+/* FIX: Wider $Ember button with better spacing */
 .ember-link {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1.5rem; /* WIDER padding left/right */
+    padding: 0.5rem 2rem; /* INCREASED from 1.5rem to 2rem */
     background: var(--ember-gradient-primary);
     border-radius: var(--radius-full);
     color: white !important;
@@ -369,6 +395,7 @@ button {
     pointer-events: all;
 }
 
+/* FIX: Mobile slider bottom positioning - above iPhone home indicator */
 .mobile-menu-panel {
     position: fixed;
     top: calc(var(--navbar-height) + 10px);
@@ -376,6 +403,7 @@ button {
     width: 85%;
     max-width: 380px;
     height: calc(100vh - var(--navbar-height) - 30px);
+    max-height: calc(100vh - var(--navbar-height) - 110px); /* Extra space for iPhone home indicator */
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.98) 0%, 
         rgba(45, 24, 16, 0.95) 50%, 
@@ -477,7 +505,7 @@ button {
 
 .mobile-nav-links .ember-link {
     margin: 1rem 0.5rem 0;
-    padding: 0.875rem 1.5rem; /* WIDER padding */
+    padding: 0.875rem 2rem; /* INCREASED width */
     justify-content: center;
     border-radius: var(--radius-lg);
 }
@@ -761,7 +789,7 @@ button {
     pointer-events: none;
     transition: var(--transition-base);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    border: 2px solid rgba(240, 165, 0, 0.4); /* GOLD border */
+    border: 2px solid rgba(240, 165, 0, 0.4);
 }
 
 .chatbot-tooltip::after {
@@ -788,7 +816,7 @@ button {
     pointer-events: none !important;
 }
 
-/* Desktop Chatbot Window - Opens above button */
+/* FIX: Responsive chatbot width - expands on smaller desktops */
 .chatbot-window {
     position: fixed;
     bottom: 130px;
@@ -800,7 +828,7 @@ button {
         rgba(26, 15, 10, 0.98) 0%, 
         rgba(45, 24, 16, 0.95) 100%);
     border-radius: var(--radius-2xl);
-    border: 2px solid rgba(240, 165, 0, 0.4); /* GOLD border */
+    border: 2px solid rgba(240, 165, 0, 0.4);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
@@ -906,7 +934,7 @@ button {
     transform: rotate(90deg);
 }
 
-/* FIX: Ember-colored scrollbar for chatbot */
+/* Ember-colored scrollbar for chatbot */
 .chatbot-body {
     flex: 1;
     overflow-y: auto;
@@ -1045,7 +1073,7 @@ button {
     gap: 0.75rem;
     padding: 1rem 1.25rem;
     background: rgba(15, 15, 15, 0.6);
-    border-top: 1px solid rgba(240, 165, 0, 0.3); /* GOLD border */
+    border-top: 1px solid rgba(240, 165, 0, 0.3);
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
     flex-shrink: 0;
 }
@@ -1053,7 +1081,7 @@ button {
 .chatbot-input {
     flex: 1;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(240, 165, 0, 0.3); /* GOLD border */
+    border: 1px solid rgba(240, 165, 0, 0.3);
     border-radius: var(--radius-lg);
     padding: 0.75rem 1rem;
     color: white;
@@ -1544,6 +1572,22 @@ button {
     .privacy-points-grid {
         grid-template-columns: 1fr;
     }
+    
+    /* FIX: Chatbot expands width on tablet */
+    .chatbot-window {
+        width: 90%;
+        max-width: 600px;
+        right: 5%;
+    }
+}
+
+/* Small Desktop / Large Tablet */
+@media (max-width: 900px) {
+    .chatbot-window {
+        width: 85%;
+        max-width: 550px;
+        right: 7.5%;
+    }
 }
 
 /* Mobile Portrait & Landscape */
@@ -1639,7 +1683,6 @@ button {
         font-size: 0.9rem;
     }
     
-    /* FIX: Better placeholder text on mobile */
     .chatbot-input {
         font-size: 16px;
         padding: 0.75rem;
@@ -1689,21 +1732,17 @@ button {
         justify-content: center;
     }
     
-    /* FIX: Footer Mobile Optimization - More compact, prioritize Quick Links */
+    /* FIX: Footer Mobile Optimization - Quick Links below social, above Resources */
     .footer {
         padding: var(--space-2xl) 0 var(--space-md);
     }
     
     .footer-grid {
         grid-template-columns: 1fr;
-        gap: var(--space-lg);
+        gap: var(--space-xl);
     }
     
-    /* Prioritize Quick Links - Make it first */
-    .footer-column:nth-child(2) {
-        order: -1;
-    }
-    
+    /* Keep natural order: Branding → Quick Links → Resources → Legal */
     .footer-column {
         text-align: center;
         align-items: center;
@@ -1759,9 +1798,10 @@ button {
         max-width: 350px;
         top: calc(var(--navbar-height) + 5px);
         height: calc(100vh - var(--navbar-height) - 10px);
+        max-height: calc(100vh - var(--navbar-height) - 90px);
     }
     
-    /* FIX: Footer landscape mode - Two columns */
+    /* Footer landscape mode - Two columns */
     .footer {
         padding: var(--space-xl) 0 var(--space-md);
     }
