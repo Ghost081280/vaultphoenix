@@ -157,15 +157,86 @@
             </div>
         </section>
 
-        <!-- PLATFORM VIDEO - COMPACT -->
+        <!-- LIVE DEMO SECTION - COMPACT -->
         <section class="main-section" id="showcase">
             <div class="main-container">
                 <div class="main-section-header">
-                    <h2 class="main-section-title">See It In Action</h2>
-                    <p class="main-section-subtitle">Watch how easy it is to create AR crypto gaming campaigns with our platform</p>
+                    <h2 class="main-section-title">Experience Both Systems Live</h2>
+                    <p class="main-section-subtitle">Try our interactive demos on mobile and desktop to see the complete platform in action</p>
                 </div>
-                <div class="main-video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vault Phoenix Platform Demo" allowfullscreen loading="lazy"></iframe>
+
+                <div class="main-demo-grid">
+                    <!-- Mobile App Demo -->
+                    <div class="main-demo-card">
+                        <div class="main-demo-device">
+                            <img src="images/IphoneVPLogo.PNG" alt="Mobile App Demo" class="main-demo-main-image" id="mainPhoneScreenshot" loading="lazy">
+                        </div>
+                        <div class="main-demo-thumbs">
+                            <button class="main-demo-thumb active" onclick="changeImage('images/IphoneVPLogo.PNG', 'Mobile App Home Screen')" aria-label="View Home Screen">
+                                <img src="images/IphoneVPLogo.PNG" alt="Home" loading="lazy">
+                                <span>Home</span>
+                            </button>
+                            <button class="main-demo-thumb" onclick="changeImage('images/IphoneRadar.PNG', 'Radar View')" aria-label="View Radar Screen">
+                                <img src="images/IphoneRadar.PNG" alt="Radar" loading="lazy">
+                                <span>Radar</span>
+                            </button>
+                            <button class="main-demo-thumb" onclick="changeImage('images/IphoneCamera.PNG', 'Camera AR View')" aria-label="View Camera Screen">
+                                <img src="images/IphoneCamera.PNG" alt="Camera" loading="lazy">
+                                <span>Camera</span>
+                            </button>
+                            <button class="main-demo-thumb" onclick="changeImage('images/IphoneWallet.PNG', 'Wallet View')" aria-label="View Wallet Screen">
+                                <img src="images/IphoneWallet.PNG" alt="Wallet" loading="lazy">
+                                <span>Wallet</span>
+                            </button>
+                        </div>
+                        <a href="https://ghost081280.github.io/vaultphoenix/demo/" target="_blank" rel="noopener noreferrer" class="main-demo-btn" aria-label="Try Mobile Demo">
+                            <span>Try Mobile Demo</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Management System Demo -->
+                    <div class="main-demo-card">
+                        <div class="main-demo-device main-demo-laptop">
+                            <img src="images/EmberAnalytics.PNG" alt="Management System Demo" class="main-demo-main-image" id="mainLaptopScreenshot" loading="lazy">
+                        </div>
+                        <div class="main-demo-thumbs">
+                            <button class="main-demo-thumb active" onclick="changeLaptopImage('images/EmberAnalytics.PNG', 'Analytics Dashboard')" aria-label="View Analytics">
+                                <img src="images/EmberAnalytics.PNG" alt="Analytics" loading="lazy">
+                                <span>Analytics</span>
+                            </button>
+                            <button class="main-demo-thumb" onclick="changeLaptopImage('images/PlaceTokens.PNG', 'Place Tokens')" aria-label="View Token Placement">
+                                <img src="images/PlaceTokens.PNG" alt="Tokens" loading="lazy">
+                                <span>Tokens</span>
+                            </button>
+                            <button class="main-demo-thumb" onclick="changeLaptopImage('images/Walletandfunding.PNG', 'Wallet Management')" aria-label="View Wallet">
+                                <img src="images/Walletandfunding.PNG" alt="Wallet" loading="lazy">
+                                <span>Wallet</span>
+                            </button>
+                            <button class="main-demo-thumb" onclick="changeLaptopImage('images/AppbuilderSDK.PNG', 'SDK Builder')" aria-label="View SDK">
+                                <img src="images/AppbuilderSDK.PNG" alt="SDK" loading="lazy">
+                                <span>SDK</span>
+                            </button>
+                        </div>
+                        <a href="https://ghost081280.github.io/vaultphoenix/management-system/index.html" target="_blank" rel="noopener noreferrer" class="main-demo-btn" aria-label="Try Management System">
+                            <span>Try Management System</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Connection Indicator -->
+                <div class="main-demo-connection">
+                    <div class="main-connection-line"></div>
+                    <div class="main-connection-badge">
+                        <img src="images/EmberRepeatArrows.PNG" alt="Connected" loading="lazy">
+                        <span>Seamlessly Connected</span>
+                    </div>
+                    <div class="main-connection-line"></div>
                 </div>
             </div>
         </section>
@@ -469,8 +540,41 @@
             });
     </script>
     
-    <!-- Scroll reveal animation -->
+    <!-- Page-specific JavaScript for thumbnail galleries -->
     <script>
+        // Phone gallery functionality
+        function changeImage(imageSrc, altText) {
+            const mainImage = document.getElementById('mainPhoneScreenshot');
+            if (mainImage) {
+                mainImage.src = imageSrc;
+                mainImage.alt = altText;
+            }
+            
+            // Update active state
+            const thumbs = document.querySelectorAll('.main-demo-thumb');
+            thumbs.forEach(thumb => thumb.classList.remove('active'));
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+        }
+        
+        // Laptop gallery functionality
+        function changeLaptopImage(imageSrc, altText) {
+            const mainImage = document.getElementById('mainLaptopScreenshot');
+            if (mainImage) {
+                mainImage.src = imageSrc;
+                mainImage.alt = altText;
+            }
+            
+            // Update active state
+            const thumbs = document.querySelectorAll('.main-demo-thumb');
+            thumbs.forEach(thumb => thumb.classList.remove('active'));
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+        }
+        
+        // Scroll reveal animation
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
