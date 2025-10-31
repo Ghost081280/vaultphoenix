@@ -1,7 +1,8 @@
 /* ===================================
-   VAULT PHOENIX - SHARED CSS v5.0 OPTIMIZED
+   VAULT PHOENIX - SHARED CSS v6.0 OPTIMIZED
    Core styles used across ALL pages
    Mobile & Desktop Optimized
+   Updated: Chatbot positioning, mobile slider, scroll indicator
    =================================== */
 
 /* ===================================
@@ -64,6 +65,7 @@
     /* Transitions */
     --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     
     /* Layout */
     --container-padding: clamp(1rem, 5vw, 3rem);
@@ -347,7 +349,7 @@ button {
     position: relative;
 }
 
-/* Mobile Menu */
+/* Mobile Menu - Improved Design */
 .mobile-menu-overlay {
     display: none;
     position: fixed;
@@ -369,12 +371,11 @@ button {
 
 .mobile-menu-panel {
     position: fixed;
-    top: 0;
+    top: calc(var(--navbar-height) + 10px);
     right: -100%;
     width: 85%;
-    max-width: 400px;
-    height: 100vh;
-    height: -webkit-fill-available;
+    max-width: 380px;
+    height: calc(100vh - var(--navbar-height) - 20px);
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.98) 0%, 
         rgba(45, 24, 16, 0.95) 50%, 
@@ -382,10 +383,13 @@ button {
     backdrop-filter: blur(20px);
     box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
     z-index: 1999;
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 2rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-right: none;
 }
 
 .mobile-menu-panel.active {
@@ -394,11 +398,11 @@ button {
 
 .mobile-menu-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 2.5rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 2rem;
     color: white;
-    background: transparent;
+    background: rgba(215, 51, 39, 0.2);
     border: none;
     cursor: pointer;
     width: 44px;
@@ -407,35 +411,36 @@ button {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: var(--transition-base);
+    transition: var(--transition-bounce);
 }
 
 .mobile-menu-close:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: rotate(90deg);
+    background: var(--ember-gradient-primary);
+    transform: rotate(90deg) scale(1.1);
 }
 
 .mobile-menu-branding {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
+    padding-left: 0.5rem;
 }
 
 .mobile-menu-coin {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(215, 51, 39, 0.8));
     animation: pulse 2s ease-in-out infinite;
 }
 
 .mobile-menu-flame {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.8));
 }
@@ -454,12 +459,13 @@ button {
 .mobile-nav-links a {
     display: flex;
     align-items: center;
-    padding: 1.25rem 0.5rem;
+    padding: 1rem 0.5rem;
     color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     transition: var(--transition-base);
     width: 100%;
+    border-radius: var(--radius-md);
 }
 
 .mobile-nav-links a:hover,
@@ -471,13 +477,13 @@ button {
 
 .mobile-nav-links .ember-link {
     margin: 1rem 0.5rem 0;
-    padding: 1rem;
+    padding: 0.875rem 1rem;
     justify-content: center;
     border-radius: var(--radius-lg);
 }
 
 /* ===================================
-   SCROLL PROGRESS INDICATOR
+   SCROLL PROGRESS INDICATOR - EMBER THEMED
    =================================== */
 .scroll-progress-container {
     position: fixed;
@@ -485,17 +491,35 @@ button {
     left: 0;
     right: 0;
     height: 4px;
-    background: rgba(15, 15, 15, 0.8);
+    background: rgba(26, 15, 10, 0.8);
     z-index: 1001;
     pointer-events: none;
 }
 
 .scroll-progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, var(--ember-orange) 0%, var(--ember-gold) 100%);
+    background: linear-gradient(90deg, 
+        var(--ember-orange) 0%, 
+        var(--ember-red) 25%,
+        var(--ember-rust) 50%,
+        var(--ember-gold) 75%,
+        var(--ember-orange) 100%);
     width: 0%;
     transition: width 0.1s ease;
-    box-shadow: 0 0 10px rgba(215, 51, 39, 0.8);
+    box-shadow: 0 0 15px rgba(215, 51, 39, 0.9),
+                0 0 30px rgba(240, 165, 0, 0.6);
+    animation: ember-glow 3s ease-in-out infinite;
+}
+
+@keyframes ember-glow {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(215, 51, 39, 0.9),
+                    0 0 30px rgba(240, 165, 0, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(215, 51, 39, 1),
+                    0 0 45px rgba(240, 165, 0, 0.8);
+    }
 }
 
 /* ===================================
@@ -653,7 +677,9 @@ button {
 }
 
 /* ===================================
-   CHATBOT SYSTEM - OPTIMIZED POSITIONING
+   CHATBOT SYSTEM - DESKTOP & MOBILE OPTIMIZED
+   Desktop: Opens above button with proper spacing
+   Mobile: Compact, positioned on left side below navbar
    =================================== */
 .chatbot-button-container {
     position: fixed;
@@ -743,12 +769,13 @@ button {
     right: calc(100% + 20px);
 }
 
+/* Desktop Chatbot Window - Opens above button */
 .chatbot-window {
     position: fixed;
-    bottom: 30px;
+    bottom: 130px;
     right: 30px;
-    width: min(450px, calc(100vw - 60px));
-    height: calc(100vh - var(--navbar-height) - 60px);
+    width: 480px;
+    height: calc(100vh - var(--navbar-height) - 180px);
     max-height: 700px;
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.98) 0%, 
@@ -813,6 +840,30 @@ button {
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.9);
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.chatbot-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ef4444;
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.chatbot-status-dot.online {
+    background: var(--ember-green);
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
 }
 
 .chatbot-close {
@@ -1458,22 +1509,6 @@ button {
     .privacy-points-grid {
         grid-template-columns: 1fr;
     }
-    
-    .chatbot-window {
-        width: calc(100vw - 40px);
-        height: calc(100vh - var(--navbar-height) - 50px);
-        right: 20px;
-        bottom: 20px;
-    }
-    
-    .chatbot-button-container {
-        bottom: 20px;
-        right: 20px;
-    }
-    
-    .chatbot-tooltip {
-        display: none;
-    }
 }
 
 /* Mobile Portrait & Landscape */
@@ -1488,7 +1523,6 @@ button {
     }
     
     body {
-        /* Prevent bounce scroll showing yellow background */
         overscroll-behavior: none;
     }
     
@@ -1501,15 +1535,7 @@ button {
         height: 40px;
     }
     
-    .chatbot-window {
-        width: 100vw;
-        height: calc(100vh - var(--navbar-height));
-        bottom: 0;
-        right: 0;
-        border-radius: 0;
-        max-height: none;
-    }
-    
+    /* Mobile Chatbot - Compact Left Positioned */
     .chatbot-button-container {
         bottom: 20px;
         right: 20px;
@@ -1528,6 +1554,63 @@ button {
     .chatbot-glow {
         width: 100px;
         height: 100px;
+    }
+    
+    .chatbot-window {
+        top: calc(var(--navbar-height) + 20px);
+        left: 15px;
+        right: auto;
+        bottom: auto;
+        width: calc(100vw - 30px);
+        max-width: 400px;
+        height: calc(100vh - var(--navbar-height) - 120px);
+        max-height: calc(100vh - var(--navbar-height) - 120px);
+        border-radius: var(--radius-2xl);
+    }
+    
+    .chatbot-header {
+        padding: 0.875rem 1rem;
+    }
+    
+    .chatbot-header-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .chatbot-header-icon-secondary {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .chatbot-header-text h3 {
+        font-size: 0.95rem;
+    }
+    
+    .chatbot-status {
+        font-size: 0.75rem;
+    }
+    
+    .chatbot-body {
+        padding: 1rem;
+    }
+    
+    .chatbot-footer {
+        padding: 0.875rem 1rem;
+    }
+    
+    .message-text {
+        font-size: 0.85rem;
+    }
+    
+    .chatbot-input {
+        font-size: 0.85rem;
+        padding: 0.625rem 0.875rem;
+    }
+    
+    .chatbot-send {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
     }
     
     .cookie-consent-content {
@@ -1564,19 +1647,20 @@ button {
         justify-content: center;
     }
     
-    /* Footer Mobile Optimization */
+    /* Footer Mobile Optimization - More Compact */
     .footer {
         padding: var(--space-3xl) 0 var(--space-lg);
     }
     
     .footer-grid {
         grid-template-columns: 1fr;
-        gap: var(--space-2xl);
+        gap: var(--space-xl);
     }
     
     .footer-column {
         text-align: center;
         align-items: center;
+        gap: var(--space-md);
     }
     
     .footer-logo {
@@ -1589,31 +1673,37 @@ button {
     
     .footer-links {
         align-items: center;
+        gap: 0.375rem;
+    }
+    
+    .footer-links a {
+        font-size: 0.9rem;
+        min-height: 28px;
+        padding: 0.125rem 0;
+    }
+    
+    .footer-heading {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .footer-tagline {
+        font-size: 0.875rem;
     }
 }
 
 /* Mobile Landscape Specific */
 @media (max-width: 768px) and (orientation: landscape) {
     .chatbot-window {
-        height: calc(100vh - 10px);
-        max-height: calc(100vh - 10px);
-    }
-    
-    .chatbot-header {
-        padding: 0.75rem 1rem;
-    }
-    
-    .chatbot-body {
-        padding: 1rem;
-    }
-    
-    .chatbot-footer {
-        padding: 0.75rem 1rem;
+        height: calc(100vh - 100px);
+        max-height: calc(100vh - 100px);
     }
     
     .mobile-menu-panel {
         width: 60%;
         max-width: 350px;
+        top: calc(var(--navbar-height) + 5px);
+        height: calc(100vh - var(--navbar-height) - 10px);
     }
     
     .footer-grid {
@@ -1651,12 +1741,8 @@ button {
         height: 90px;
     }
     
-    .message-text {
-        font-size: 0.85rem;
-    }
-    
-    .chatbot-input {
-        font-size: 0.85rem;
+    .chatbot-window {
+        max-width: calc(100vw - 30px);
     }
 }
 
@@ -1674,5 +1760,10 @@ button {
     .chatbot-button-container {
         bottom: 15px;
         right: 15px;
+    }
+    
+    .chatbot-window {
+        left: 10px;
+        width: calc(100vw - 20px);
     }
 }
