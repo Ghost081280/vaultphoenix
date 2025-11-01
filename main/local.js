@@ -4,7 +4,7 @@
  * ============================================
  * 
  * @file        local.js
- * @version     2.0.0
+ * @version     2.1.0
  * @author      Vault Phoenix LLC
  * 
  * @description
@@ -19,10 +19,11 @@
  * @features
  * 1. Phone Gallery - Interactive phone screenshot viewer
  * 2. Laptop Gallery - Interactive laptop screenshot viewer
- * 3. $Ember Airdrop System - Claim form and status tracking
- * 4. Scroll Reveal - Intersection Observer animations
- * 5. Shared Components Loader - Dynamic HTML component injection
- * 6. Initialization System - Graceful startup with shared.js coordination
+ * 3. $Ember Airdrop System - Claim form and status tracking WITH SHARE BUTTONS
+ * 4. Social Share Buttons - X/Twitter, Facebook, Telegram sharing
+ * 5. Scroll Reveal - Intersection Observer animations
+ * 6. Shared Components Loader - Dynamic HTML component injection
+ * 7. Initialization System - Graceful startup with shared.js coordination
  * 
  * @browser_support
  * - Chrome 60+
@@ -34,6 +35,9 @@
  * - Lazy loading for images
  * - Debounced scroll events via Intersection Observer
  * - Efficient DOM queries with caching
+ * 
+ * @changelog
+ * v2.1.0 - Added share button functionality to airdrop section
  * ============================================
  */
 
@@ -55,12 +59,31 @@
         SCROLL_REVEAL_THRESHOLD: 0.1,    // Intersection Observer threshold
         SCROLL_REVEAL_ROOT_MARGIN: '0px 0px -50px 0px',
         
-        // Airdrop Configuration
+        // Airdrop Configuration - UPDATED
         BACKEND_READY: false,            // Set to true when backend is ready
         API_BASE: '/api',                // API endpoint base URL
-        TOTAL_EMBER: 10000000,           // Total $Ember pool
-        TOKENS_PER_CLAIM: 1000,          // Tokens per claim
-        MAX_RECIPIENTS: 10000            // Maximum number of recipients
+        TOTAL_EMBER: 16670000,           // Total $Ember pool (UPDATED from 10M)
+        TOKENS_PER_CLAIM: 3333,          // Tokens per claim (UPDATED from 1000)
+        MAX_RECIPIENTS: 5000             // Maximum number of recipients (UPDATED from 10000)
+    };
+
+    /**
+     * Share button configuration with OpenGraph content
+     * @const {Object}
+     */
+    const SHARE_CONFIG = {
+        // OpenGraph data from ember.html
+        title: "$Ember Token Presale - Revolutionary AR Crypto Gaming at $0.003",
+        description: "Join the $Ember Token presale NOW! 166.7M tokens at $0.003 each. Revolutionary location-based AR gaming with GPS & Beacon technology. $500K hard cap - secure your tokens before Platform Operators create demand!",
+        url: "https://vaultphoenix.com/ember.html",
+        image: "https://vaultphoenix.com/images/VPEmberCoin.PNG",
+        hashtags: "EmberToken,CryptoPresale,ARGaming,VaultPhoenix",
+        
+        // Twitter-specific content
+        twitterText: "🔥 Revolutionary AR crypto gaming token presale! GPS & Beacon technology meets blockchain rewards. $500K hard cap. Join early before Platform Operators drive demand!",
+        
+        // Telegram-specific content
+        telegramText: "🔥 $Ember Token Presale LIVE! Revolutionary AR crypto gaming at $0.003. 166.7M tokens available. Join now!"
     };
 
     /**
@@ -162,6 +185,140 @@
     };
 
     // ============================================
+    // SOCIAL SHARE BUTTONS - NEW
+    // ============================================
+
+    /**
+     * Initialize share button event listeners
+     * 
+     * @function initializeShareButtons
+     * @returns {void}
+     */
+    function initializeShareButtons() {
+        LOGGER.info('Initializing share buttons...');
+        
+        // X/Twitter Share Button
+        const shareXBtn = document.getElementById('share-x-btn');
+        if (shareXBtn) {
+            shareXBtn.addEventListener('click', handleXShare);
+        }
+        
+        // Facebook Share Button
+        const shareFacebookBtn = document.getElementById('share-facebook-btn');
+        if (shareFacebookBtn) {
+            shareFacebookBtn.addEventListener('click', handleFacebookShare);
+        }
+        
+        // Telegram Share Button
+        const shareTelegramBtn = document.getElementById('share-telegram-btn');
+        if (shareTelegramBtn) {
+            shareTelegramBtn.addEventListener('click', handleTelegramShare);
+        }
+        
+        LOGGER.success('Share buttons initialized');
+    }
+
+    /**
+     * Handle X/Twitter share button click
+     * 
+     * @function handleXShare
+     * @returns {void}
+     */
+    function handleXShare() {
+        const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_CONFIG.twitterText)}&url=${encodeURIComponent(SHARE_CONFIG.url)}&hashtags=${encodeURIComponent(SHARE_CONFIG.hashtags)}`;
+        
+        // Open in new window
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+        
+        // Log event
+        LOGGER.debug('X/Twitter share clicked');
+        
+        // Show helpful message
+        showShareConfirmation('X/Twitter');
+    }
+
+    /**
+     * Handle Facebook share button click
+     * 
+     * @function handleFacebookShare
+     * @returns {void}
+     */
+    function handleFacebookShare() {
+        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SHARE_CONFIG.url)}`;
+        
+        // Open in new window
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+        
+        // Log event
+        LOGGER.debug('Facebook share clicked');
+        
+        // Show helpful message
+        showShareConfirmation('Facebook');
+    }
+
+    /**
+     * Handle Telegram share button click
+     * 
+     * @function handleTelegramShare
+     * @returns {void}
+     */
+    function handleTelegramShare() {
+        const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(SHARE_CONFIG.url)}&text=${encodeURIComponent(SHARE_CONFIG.telegramText)}`;
+        
+        // Open in new window
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+        
+        // Log event
+        LOGGER.debug('Telegram share clicked');
+        
+        // Show helpful message
+        showShareConfirmation('Telegram');
+    }
+
+    /**
+     * Show confirmation message after share button click
+     * 
+     * @function showShareConfirmation
+     * @param {string} platform - Social platform name
+     * @returns {void}
+     */
+    function showShareConfirmation(platform) {
+        const messageBox = document.getElementById('ember-message-box');
+        
+        if (!messageBox) return;
+        
+        const message = `
+            ✅ <strong>${platform} Share Opened!</strong><br><br>
+            <strong>Next Steps:</strong><br>
+            1. Complete your ${platform} post<br>
+            2. Copy the link to your post<br>
+            3. Paste it in the "Social Media Post URL" field below<br>
+            4. Complete the form and claim your $Ember tokens!
+        `;
+        
+        // Show message
+        messageBox.innerHTML = message;
+        messageBox.className = 'message-box-compact info';
+        messageBox.style.display = 'block';
+        
+        // Scroll to form
+        setTimeout(() => {
+            const claimForm = document.getElementById('ember-claim-form');
+            if (claimForm) {
+                claimForm.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'nearest'
+                });
+            }
+        }, 500);
+        
+        // Auto-hide after 10 seconds
+        setTimeout(() => {
+            messageBox.style.display = 'none';
+        }, 10000);
+    }
+
+    // ============================================
     // $EMBER AIRDROP SYSTEM
     // ============================================
 
@@ -185,6 +342,7 @@
             claimForm: document.getElementById('ember-claim-form'),
             claimWallet: document.getElementById('claim-wallet'),
             claimEmail: document.getElementById('claim-email'),
+            claimSocialUrl: document.getElementById('claim-social-url'), // NEW
             claimTwitter: document.getElementById('claim-twitter'),
             claimTelegram: document.getElementById('claim-telegram'),
             claimButton: document.getElementById('claim-submit-btn'),
@@ -210,6 +368,9 @@
         
         // Setup event listeners
         setupAirdropEventListeners();
+        
+        // Initialize share buttons
+        initializeShareButtons();
         
         // Load real-time data if backend ready
         if (CONFIG.BACKEND_READY) {
@@ -251,10 +412,17 @@
                 validateEmailInput(this);
             });
         }
+        
+        // Real-time validation for social URL input - NEW
+        if (airdropElements.claimSocialUrl) {
+            airdropElements.claimSocialUrl.addEventListener('blur', function() {
+                validateSocialUrlInput(this);
+            });
+        }
     }
 
     /**
-     * Handle claim form submission
+     * Handle claim form submission - UPDATED
      * 
      * @function handleClaimSubmit
      * @param {Event} e - Form submission event
@@ -265,13 +433,34 @@
         
         const wallet = airdropElements.claimWallet.value.trim();
         const email = airdropElements.claimEmail.value.trim();
-        const twitter = airdropElements.claimTwitter.value.trim();
-        const telegram = airdropElements.claimTelegram.value.trim();
+        const socialUrl = airdropElements.claimSocialUrl ? airdropElements.claimSocialUrl.value.trim() : ''; // NEW
+        const twitter = airdropElements.claimTwitter ? airdropElements.claimTwitter.value.trim() : '';
+        const telegram = airdropElements.claimTelegram ? airdropElements.claimTelegram.value.trim() : '';
         
-        // Validate required fields
+        // Validate required fields - UPDATED
         if (!wallet || !email) {
             showMessage('❌ Please fill in all required fields (Wallet Address and Email).', 'error');
             return;
+        }
+        
+        // Validate social URL if present - NEW
+        if (socialUrl && !validateUrl(socialUrl)) {
+            showMessage('❌ Invalid social media post URL format. Please enter a valid URL.', 'error');
+            airdropElements.claimSocialUrl.focus();
+            return;
+        }
+        
+        // Check if URL is from supported platforms - NEW
+        if (socialUrl) {
+            const supportedPlatforms = ['twitter.com', 'x.com', 'facebook.com', 'fb.com', 't.me', 'telegram.org'];
+            const urlHost = new URL(socialUrl).hostname.toLowerCase();
+            const isSupported = supportedPlatforms.some(platform => urlHost.includes(platform));
+            
+            if (!isSupported) {
+                showMessage('❌ Social media post URL must be from X/Twitter, Facebook, or Telegram.', 'error');
+                airdropElements.claimSocialUrl.focus();
+                return;
+            }
         }
         
         // Validate wallet format
@@ -315,6 +504,7 @@
                 body: JSON.stringify({
                     wallet,
                     email,
+                    socialUrl: socialUrl || null, // NEW
                     twitter: twitter || null,
                     telegram: telegram || null
                 })
@@ -562,6 +752,40 @@
     }
 
     /**
+     * Validate social URL input field - NEW
+     * 
+     * @function validateSocialUrlInput
+     * @param {HTMLInputElement} input - Input element to validate
+     * @returns {void}
+     */
+    function validateSocialUrlInput(input) {
+        const url = input.value.trim();
+        if (url) {
+            if (!validateUrl(url)) {
+                input.style.borderColor = '#ef4444';
+                return;
+            }
+            
+            // Check if from supported platforms
+            try {
+                const supportedPlatforms = ['twitter.com', 'x.com', 'facebook.com', 'fb.com', 't.me', 'telegram.org'];
+                const urlHost = new URL(url).hostname.toLowerCase();
+                const isSupported = supportedPlatforms.some(platform => urlHost.includes(platform));
+                
+                if (!isSupported) {
+                    input.style.borderColor = '#ef4444';
+                } else {
+                    input.style.borderColor = '';
+                }
+            } catch {
+                input.style.borderColor = '#ef4444';
+            }
+        } else {
+            input.style.borderColor = '';
+        }
+    }
+
+    /**
      * Show message to user
      * 
      * @function showMessage
@@ -580,7 +804,7 @@
         }
         
         airdropElements.messageBox.innerHTML = message;
-        airdropElements.messageBox.className = `ember-message-box ${type}`;
+        airdropElements.messageBox.className = `message-box-compact ${type}`;
         airdropElements.messageBox.style.display = 'block';
         
         // Set ARIA attributes for accessibility
@@ -791,14 +1015,14 @@ function loadSharedComponents() {
      * Coordinates the initialization of all main.js features:
      * 1. Waits for shared.js to be ready
      * 2. Initializes scroll reveal animations
-     * 3. Initializes $Ember airdrop system
+     * 3. Initializes $Ember airdrop system with share buttons
      * 4. Loads shared HTML components
      * 5. Reports initialization status
      * 
      * @initialization_order
      * 1. Wait for shared.js (up to 5 seconds)
      * 2. Initialize scroll reveal observer
-     * 3. Initialize airdrop system
+     * 3. Initialize airdrop system (includes share buttons)
      * 4. Fetch and inject shared components
      * 5. Reinitialize chatbot
      */
@@ -819,7 +1043,7 @@ function loadSharedComponents() {
             LOGGER.error(`Scroll reveal initialization failed: ${error.message}`);
         }
         
-        // Initialize $Ember airdrop system
+        // Initialize $Ember airdrop system (includes share buttons)
         try {
             initializeAirdropSystem();
         } catch (error) {
@@ -861,7 +1085,9 @@ function loadSharedComponents() {
             reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
             online: navigator.onLine,
             language: navigator.language,
-            backendStatus: CONFIG.BACKEND_READY ? 'READY' : 'OFFLINE'
+            backendStatus: CONFIG.BACKEND_READY ? 'READY' : 'OFFLINE',
+            tokensPerClaim: CONFIG.TOKENS_PER_CLAIM,
+            totalEmber: CONFIG.TOTAL_EMBER
         };
         
         LOGGER.debug('Environment Info:');
@@ -927,23 +1153,30 @@ function loadSharedComponents() {
      * @namespace VaultPhoenixMain
      */
     window.VaultPhoenixMain = {
-        version: '2.0.0',
+        version: '2.1.0',
         changeImage: window.changeImage,
         changeLaptopImage: window.changeLaptopImage,
         reinitialize: initialize,
         airdrop: {
             refreshData: loadRealTimeData,
             validateWallet: validateWallet,
-            validateEmail: validateEmail
+            validateEmail: validateEmail,
+            validateUrl: validateUrl
+        },
+        share: {
+            handleXShare: handleXShare,
+            handleFacebookShare: handleFacebookShare,
+            handleTelegramShare: handleTelegramShare,
+            config: SHARE_CONFIG
         }
     };
 
-    LOGGER.info('Local.js v2.0 loaded successfully with $Ember Airdrop');
+    LOGGER.info('Local.js v2.1 loaded successfully with Share Buttons');
 
 })();
 
 /**
  * ============================================
- * END OF LOCAL.JS v2.0
+ * END OF LOCAL.JS v2.1
  * ============================================
  */
