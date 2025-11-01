@@ -4,13 +4,61 @@
 // UPDATES: Hybrid AI integration with local + Claude fallback
 // ============================================
 
-// ============================================
-// HYBRID AI IMPORT
-// ============================================
-import { askPhoenixAI } from './ai-lib/gpt4all-wrapper.js';
-
 (function() {
 'use strict';
+
+// ============================================
+// HYBRID AI WRAPPER - INLINE VERSION
+// ============================================
+async function askPhoenixAI(question) {
+  try {
+    // Try the local offline AI first (Muhammad's server)
+    const offlineResponse = await fetch('/api/ask_offline', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question })
+    });
+
+    if (offlineResponse.ok) {
+      const offlineData = await offlineResponse.json();
+      if (offlineData && offlineData.answer) {
+        return offlineData.answer;
+      }
+    }
+
+    // If offline AI can't answer, fall back to Claude
+    const claudeResponse = await fetch('/api/claude', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question })
+    });
+
+    if (claudeResponse.ok) {
+      const claudeData = await claudeResponse.json();
+
+      // Send Claude's answer back to the server to learn for next time
+      try {
+        await fetch('/api/save_learning', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            question,
+            answer: claudeData.answer
+          })
+        });
+      } catch (saveErr) {
+        console.warn('Could not save learning data:', saveErr);
+      }
+
+      return claudeData.answer;
+    }
+
+    throw new Error('Both AI services unavailable');
+  } catch (err) {
+    console.error('Phoenix AI Error:', err);
+    return "Sorry, I'm having trouble reaching my brain right now. Please try again in a moment.";
+  }
+}
 
 // ============================================
 // PHOENIX AI CONFIGURATION - DYNAMIC LOADING
@@ -694,7 +742,7 @@ document.querySelectorAll('.scroll-reveal, .fade-in-up, .slide-in-left, .slide-i
 
 let conversationHistory = [];
 let isTyping = false;
-let isOnline = true; // Default to true since hybrid system auto-detects
+let isOnline = true;
 let phoenixSiteData = null;
 let hasUserScrolled = false;
 
@@ -768,6 +816,7 @@ function initializeChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     
     if (!chatbotButtonContainer || !chatbotWindow) {
+        console.warn('⚠️ Chatbot elements not found');
         return false;
     }
     
@@ -842,6 +891,7 @@ function initializeChatbot() {
     // Re-initialize tooltip behavior after cloning
     initializeChatbotTooltip();
     
+    console.log('✅ Chatbot initialized successfully');
     return true;
 }
 
@@ -934,7 +984,7 @@ function addWelcomeMessage() {
 
 // ============================================
 // HYBRID AI MESSAGE HANDLER
-// Uses askPhoenixAI from gpt4all-wrapper.js
+// Uses inline askPhoenixAI function
 // ============================================
 
 async function sendMessage() {
@@ -957,13 +1007,10 @@ async function sendMessage() {
     showTypingIndicator();
     
     try {
-        // HYBRID AI: Use the wrapper that tries local first, then Claude
+        // HYBRID AI: Use the inline wrapper that tries local first, then Claude
         const reply = await askPhoenixAI(message);
         
         removeTypingIndicator();
-        
-        // Add system prompt context for better responses
-        const enhancedContext = getEnhancedSystemPrompt();
         
         // Store in conversation history
         conversationHistory.push(
