@@ -121,30 +121,41 @@ body {
 }
 
 /* FIX: Matching scrollbars - vertical matches horizontal perfectly */
+/* Works on Chrome, Safari, Edge, Opera */
 body::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 6px !important;
+    height: 6px !important;
 }
 
 body::-webkit-scrollbar-track {
-    background: transparent;
+    background: transparent !important;
 }
 
 body::-webkit-scrollbar-thumb {
     background: linear-gradient(135deg, 
         var(--ember-orange) 0%, 
         var(--ember-red) 50%, 
-        var(--ember-gold) 100%);
-    border-radius: var(--radius-sm);
-    box-shadow: 0 0 8px rgba(215, 51, 39, 0.5);
+        var(--ember-gold) 100%) !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: 0 0 8px rgba(215, 51, 39, 0.5) !important;
 }
 
 body::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, 
         var(--ember-gold) 0%, 
         var(--ember-orange) 50%, 
-        var(--ember-red) 100%);
-    box-shadow: 0 0 12px rgba(240, 165, 0, 0.7);
+        var(--ember-red) 100%) !important;
+    box-shadow: 0 0 12px rgba(240, 165, 0, 0.7) !important;
+}
+
+body::-webkit-scrollbar-corner {
+    background: transparent !important;
+}
+
+/* Firefox scrollbar */
+body {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--ember-orange) transparent !important;
 }
 
 /* Prevent zoom on mobile inputs */
