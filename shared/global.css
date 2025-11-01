@@ -1,8 +1,8 @@
 /* ===================================
-   VAULT PHOENIX - SHARED CSS v7.4 IPHONE LANDSCAPE PERFECTED
+   VAULT PHOENIX - SHARED CSS v7.5 FINAL LANDSCAPE + DESKTOP FIX
    Core styles used across ALL pages
    Mobile & Desktop Optimized
-   FIXES: iPhone landscape detection, mobile menu landscape, chatbot left-side positioning
+   FIXES: iPhone landscape no-zoom chatbot, mobile menu width, desktop resize containment
    =================================== */
 
 /* ===================================
@@ -701,8 +701,8 @@ button {
 }
 
 /* ===================================
-   CHATBOT SYSTEM - RESPONSIVE PERFECTED
-   FIXES: iPhone landscape left-side positioning, desktop fluid resizing
+   CHATBOT SYSTEM - DESKTOP + MOBILE OPTIMIZED
+   FIXES: Desktop resize containment, mobile landscape no-zoom behavior
    =================================== */
 
 .chatbot-button-container {
@@ -832,14 +832,14 @@ button {
     right: calc(100% + 15px) !important;
 }
 
-/* DESKTOP: Fluid responsive sizing */
+/* DESKTOP: Proper resize containment restored */
 .chatbot-window {
     position: fixed;
     bottom: 130px;
     right: 30px;
-    width: 480px;
+    width: min(480px, calc(100vw - 60px));
     height: calc(100vh - var(--navbar-height) - 180px);
-    max-height: 700px;
+    max-height: min(700px, calc(100vh - var(--navbar-height) - 180px));
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.98) 0%, 
         rgba(45, 24, 16, 0.95) 100%);
@@ -852,7 +852,7 @@ button {
     opacity: 0;
     transform: translateY(20px) scale(0.95);
     pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .chatbot-window.active {
@@ -1610,29 +1610,32 @@ button {
    RESPONSIVE DESIGN
    =================================== */
 
-/* Large Desktop - Full size */
+/* Large Desktop - Full size with proper containment */
 @media (min-width: 1200px) {
     .chatbot-window {
-        width: 480px;
+        width: min(480px, calc(100vw - 60px));
+        max-width: 480px;
     }
 }
 
-/* Medium Desktop - Scale down slightly */
+/* Medium Desktop - Scale down with containment */
 @media (max-width: 1199px) and (min-width: 900px) {
     .chatbot-window {
-        width: 420px;
+        width: min(420px, calc(100vw - 50px));
+        max-width: 420px;
         right: 25px;
         bottom: 120px;
     }
 }
 
-/* Small Desktop/Large Tablet - More compact */
+/* Small Desktop/Large Tablet - Compact with containment */
 @media (max-width: 899px) and (min-width: 769px) {
     .chatbot-window {
-        width: 380px;
+        width: min(380px, calc(100vw - 40px));
+        max-width: 380px;
         right: 20px;
         bottom: 110px;
-        max-height: 650px;
+        max-height: min(650px, calc(100vh - var(--navbar-height) - 140px));
     }
 }
 
@@ -1709,6 +1712,7 @@ button {
         height: 110px;
     }
     
+    /* Mobile portrait chatbot - proper behavior */
     .chatbot-window {
         position: fixed;
         top: calc(var(--navbar-height) + 15px);
@@ -1719,6 +1723,12 @@ button {
         max-width: none;
         height: auto;
         max-height: none;
+        transform: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .chatbot-window.active {
+        transform: none;
     }
     
     .chatbot-header {
@@ -1859,24 +1869,32 @@ button {
 }
 
 /* ===================================
-   IPHONE LANDSCAPE - PERFECTED! 🎯
-   Multi-device detection for reliable landscape behavior
+   IPHONE LANDSCAPE - NO ZOOM, STABLE BEHAVIOR! 🎯
+   FIXES: No transform scaling, proper containment like portrait, wider menu
    =================================== */
 @media (max-width: 926px) and (max-height: 428px) and (orientation: landscape),
        (max-width: 844px) and (max-height: 390px) and (orientation: landscape),
        (max-width: 768px) and (max-height: 500px) and (orientation: landscape) {
     
-    /* Chatbot Window - LEFT side positioning (genius move!) */
+    /* Chatbot Window - LEFT side, NO ZOOM transforms! */
     .chatbot-window {
         position: fixed !important;
         top: calc(var(--navbar-height) + 8px) !important;
         left: 8px !important;
-        right: 95px !important; /* Leave room for button on right */
+        right: 88px !important; /* Space for button */
         bottom: 8px !important;
-        max-height: calc(100vh - var(--navbar-height) - 16px) !important;
-        height: auto !important;
         width: auto !important;
         max-width: none !important;
+        height: auto !important;
+        max-height: calc(100vh - var(--navbar-height) - 16px) !important;
+        transform: none !important; /* NO TRANSFORMS = NO ZOOM */
+        transition: opacity 0.3s ease !important;
+    }
+    
+    .chatbot-window.active {
+        opacity: 1 !important;
+        transform: none !important; /* Keep it stable */
+        pointer-events: all !important;
     }
     
     /* Chatbot Button - stays on right */
@@ -1924,12 +1942,11 @@ button {
         font-size: 0.7rem !important;
     }
     
-    /* Chatbot Body - optimized space */
+    /* Chatbot Body - optimized */
     .chatbot-body {
         flex: 1 !important;
         padding: 0.625rem !important;
         min-height: 80px !important;
-        overflow-y: auto !important;
     }
     
     /* Chatbot Footer - compact */
@@ -1965,13 +1982,13 @@ button {
         height: 30px !important;
     }
     
-    /* Mobile Menu - optimized for landscape */
+    /* Mobile Menu - WIDER for no-scroll viewing! */
     .mobile-menu-panel {
-        width: 60% !important;
-        max-width: 350px !important;
+        width: 75% !important; /* Increased from 60% */
+        max-width: 400px !important; /* Increased from 350px */
         top: calc(var(--navbar-height) + 5px) !important;
         height: calc(100vh - var(--navbar-height) - 10px) !important;
-        max-height: calc(100vh - var(--navbar-height) - 90px) !important;
+        max-height: calc(100vh - var(--navbar-height) - 20px) !important; /* More visible height */
         padding: 1rem !important;
     }
     
@@ -1996,7 +2013,7 @@ button {
         padding: 0.75rem 1.5rem !important;
     }
     
-    /* Footer - 2 columns in landscape */
+    /* Footer - 2 columns */
     .footer-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: var(--space-lg) !important;
@@ -2006,20 +2023,12 @@ button {
         text-align: left !important;
         align-items: flex-start !important;
     }
-    
-    .footer-logo {
-        justify-content: flex-start !important;
-    }
-    
-    .footer-social {
-        justify-content: flex-start !important;
-    }
 }
 
 /* Very small landscape - even more compact */
 @media (max-width: 640px) and (orientation: landscape) {
     .chatbot-window {
-        right: 85px !important; /* Smaller button means less space needed */
+        right: 78px !important; /* Smaller button space */
     }
     
     .chatbot-button {
@@ -2032,23 +2041,9 @@ button {
         height: 38px !important;
     }
     
-    .chatbot-header {
-        padding: 0.625rem 0.875rem !important;
-    }
-    
-    .chatbot-header-icon {
-        width: 30px !important;
-        height: 30px !important;
-    }
-    
-    .chatbot-header-icon-secondary {
-        width: 28px !important;
-        height: 28px !important;
-    }
-    
     .mobile-menu-panel {
-        width: 50% !important;
-        max-width: 300px !important;
+        width: 70% !important;
+        max-width: 350px !important;
     }
 }
 
@@ -2114,6 +2109,6 @@ button {
 }
 
 /* ===================================
-   END OF VAULT PHOENIX - GLOBAL.CSS v7.4
-   IPHONE LANDSCAPE PERFECTED! 🎯
+   END OF VAULT PHOENIX - GLOBAL.CSS v7.5
+   DESKTOP RESIZE FIX + IPHONE LANDSCAPE NO-ZOOM! 🎯
    =================================== */
