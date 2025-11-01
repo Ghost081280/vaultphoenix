@@ -1779,6 +1779,12 @@ button {
         transform: none !important;
     }
     
+    /* CRITICAL: Disable keyboard-visible class in portrait mode */
+    .chatbot-window.keyboard-visible {
+        top: calc(var(--navbar-height) + 10px) !important;
+        bottom: 100px !important;
+    }
+    
     .chatbot-header {
         padding: 0.875rem 1rem;
         min-height: 60px;
