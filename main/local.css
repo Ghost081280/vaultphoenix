@@ -4,7 +4,7 @@
  * ============================================
  * 
  * @file        local.css
- * @version     2.0.0
+ * @version     2.1.0
  * @author      Vault Phoenix LLC
  * 
  * @description
@@ -19,7 +19,7 @@
  * 1. Hero Section
  * 2. Three-Step Process
  * 3. Dual Path CTAs
- * 4. $Ember Airdrop Section (NEW - Replaces Social Sharing)
+ * 4. $Ember Airdrop Section (WITH SHARE BUTTONS)
  * 5. Crypto Coin Section
  * 6. Technology Modules (GPS & Beacon)
  * 7. Live Demo Section
@@ -34,6 +34,9 @@
  * - Tablet:        769px - 1024px
  * - Mobile:        481px - 768px
  * - Small Mobile:  480px and below
+ * 
+ * @changelog
+ * v2.1.0 - Added share button functionality to airdrop section
  * ============================================
  */
 
@@ -423,13 +426,12 @@
 }
 
 /* ============================================
-   4. $EMBER AIRDROP SECTION - COMPACT SINGLE MODULE
-   NEW: Replaces Social Sharing Section
+   4. $EMBER AIRDROP SECTION - COMPACT WITH SHARE BUTTONS
    ============================================ */
 
 /**
  * Main $Ember Airdrop section - Everything in ONE compact outer module
- * @features Unified container with all components tightly packed
+ * @features Unified container with all components tightly packed INCLUDING share buttons
  */
 .ember-airdrop-section {
     padding: var(--section-padding) var(--container-padding);
@@ -707,6 +709,137 @@
     color: var(--ember-orange);
 }
 
+/* ============================================
+   SHARE TO CLAIM SECTION - NEW
+   ============================================ */
+
+.share-to-claim-section {
+    background: rgba(139, 92, 246, 0.1);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.share-to-claim-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ember-purple);
+    margin-bottom: var(--space-xs);
+    text-align: center;
+}
+
+.share-to-claim-subtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+/* Share Buttons Grid */
+.share-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
+}
+
+.share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, var(--ember-purple), var(--ember-indigo));
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    border-radius: var(--radius-lg);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.share-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+    border-color: rgba(139, 92, 246, 0.6);
+}
+
+.share-button:active {
+    transform: translateY(-1px);
+}
+
+.share-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Individual Platform Colors on Hover */
+.share-x:hover {
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+}
+
+.share-facebook:hover {
+    background: linear-gradient(135deg, #1877f2, #0d5dba);
+}
+
+.share-telegram:hover {
+    background: linear-gradient(135deg, #0088cc, #006699);
+}
+
+/* Field Hint */
+.field-hint {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+/* Presale Details Compact */
+.presale-details-compact {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(215, 51, 39, 0.2);
+}
+
+.presale-details-compact h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.presale-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
+}
+
+.presale-info-item {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
+    text-align: center;
+}
+
+.presale-info-item .info-label {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 2px;
+}
+
+.presale-info-item .info-value {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+}
+
 /* Form - Compact */
 .ember-form-compact {
     display: flex;
@@ -923,7 +1056,7 @@
 }
 
 /* ============================================
-   RESPONSIVE - Compact Airdrop Module
+   RESPONSIVE - Compact Airdrop Module WITH SHARE BUTTONS
    ============================================ */
 
 @media (max-width: 1024px) {
@@ -977,6 +1110,20 @@
     .ember-info-compact {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    /* Share Buttons - Mobile */
+    .share-buttons-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .share-button {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .presale-info-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 480px) {
@@ -991,6 +1138,21 @@
     .phantom-promo-compact {
         flex-direction: column;
         text-align: center;
+    }
+    
+    /* Share Buttons - Small Mobile */
+    .share-to-claim-section {
+        padding: var(--space-md);
+    }
+    
+    .share-button {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+    
+    .share-icon {
+        width: 16px;
+        height: 16px;
     }
 }
 
@@ -2534,5 +2696,5 @@
 }
 
 /* ============================================
-   END OF LOCAL.CSS v2.0
+   END OF LOCAL.CSS v2.1
    ============================================ */
