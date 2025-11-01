@@ -4,7 +4,7 @@
  * ============================================
  * 
  * @file        local.js
- * @version     2.1.0
+ * @version     2.1.1
  * @author      Vault Phoenix LLC
  * 
  * @description
@@ -13,17 +13,31 @@
  * Works in conjunction with shared.js for core functionality.
  * 
  * @dependencies
- * - shared.js (v4.0+) - Required for core navigation and chatbot functionality
+ * - shared.js (v8.0+) - Required for core navigation, chatbot, and site-wide features
  * - shared.html - Required for shared components (footer, chatbot, modals)
  * 
  * @features
  * 1. Phone Gallery - Interactive phone screenshot viewer
  * 2. Laptop Gallery - Interactive laptop screenshot viewer
  * 3. $Ember Airdrop System - Claim form and status tracking WITH SHARE BUTTONS
- * 4. Social Share Buttons - X/Twitter, Facebook, Telegram sharing
+ * 4. Social Share Buttons - X/Twitter, Facebook, Telegram sharing (PAGE-SPECIFIC)
  * 5. Scroll Reveal - Intersection Observer animations
  * 6. Shared Components Loader - Dynamic HTML component injection
  * 7. Initialization System - Graceful startup with shared.js coordination
+ * 
+ * @separation_from_shared
+ * This file handles ONLY main.html-specific features:
+ * - Share buttons (unique to airdrop section)
+ * - Airdrop form logic (page-specific)
+ * - Phone/laptop gallery (page-specific)
+ * 
+ * shared.js handles site-wide features:
+ * - Navigation (desktop & mobile)
+ * - Chatbot system
+ * - Cookie consent
+ * - Privacy modal
+ * - Footer generation
+ * - Scroll effects
  * 
  * @browser_support
  * - Chrome 60+
@@ -37,6 +51,7 @@
  * - Efficient DOM queries with caching
  * 
  * @changelog
+ * v2.1.1 - Improved documentation, verified no duplication with shared.js
  * v2.1.0 - Added share button functionality to airdrop section
  * ============================================
  */
@@ -70,6 +85,7 @@
     /**
      * Share button configuration with OpenGraph content
      * @const {Object}
+     * @note PAGE-SPECIFIC - Only used in main.html airdrop section
      */
     const SHARE_CONFIG = {
         // OpenGraph data from ember.html
@@ -99,7 +115,7 @@
     };
 
     // ============================================
-    // PHONE GALLERY FUNCTIONALITY
+    // PHONE GALLERY FUNCTIONALITY (PAGE-SPECIFIC)
     // ============================================
 
     /**
@@ -142,7 +158,7 @@
     };
 
     // ============================================
-    // LAPTOP GALLERY FUNCTIONALITY
+    // LAPTOP GALLERY FUNCTIONALITY (PAGE-SPECIFIC)
     // ============================================
 
     /**
@@ -185,11 +201,12 @@
     };
 
     // ============================================
-    // SOCIAL SHARE BUTTONS - NEW
+    // SOCIAL SHARE BUTTONS - PAGE-SPECIFIC
     // ============================================
 
     /**
      * Initialize share button event listeners
+     * @note PAGE-SPECIFIC - Only used in main.html airdrop section
      * 
      * @function initializeShareButtons
      * @returns {void}
@@ -220,6 +237,7 @@
 
     /**
      * Handle X/Twitter share button click
+     * @note PAGE-SPECIFIC - Opens X share dialog with pre-filled content
      * 
      * @function handleXShare
      * @returns {void}
@@ -239,6 +257,7 @@
 
     /**
      * Handle Facebook share button click
+     * @note PAGE-SPECIFIC - Opens Facebook share dialog
      * 
      * @function handleFacebookShare
      * @returns {void}
@@ -258,6 +277,7 @@
 
     /**
      * Handle Telegram share button click
+     * @note PAGE-SPECIFIC - Opens Telegram share dialog
      * 
      * @function handleTelegramShare
      * @returns {void}
@@ -277,6 +297,7 @@
 
     /**
      * Show confirmation message after share button click
+     * @note PAGE-SPECIFIC - Guides user through claim process
      * 
      * @function showShareConfirmation
      * @param {string} platform - Social platform name
@@ -319,17 +340,19 @@
     }
 
     // ============================================
-    // $EMBER AIRDROP SYSTEM
+    // $EMBER AIRDROP SYSTEM (PAGE-SPECIFIC)
     // ============================================
 
     /**
      * Airdrop system elements cache
      * @type {Object}
+     * @note PAGE-SPECIFIC - Only used in main.html
      */
     let airdropElements = null;
 
     /**
      * Initialize airdrop system and cache DOM elements
+     * @note PAGE-SPECIFIC - Only used in main.html airdrop section
      * 
      * @function initializeAirdropSystem
      * @returns {void}
@@ -342,7 +365,7 @@
             claimForm: document.getElementById('ember-claim-form'),
             claimWallet: document.getElementById('claim-wallet'),
             claimEmail: document.getElementById('claim-email'),
-            claimSocialUrl: document.getElementById('claim-social-url'), // NEW
+            claimSocialUrl: document.getElementById('claim-social-url'),
             claimTwitter: document.getElementById('claim-twitter'),
             claimTelegram: document.getElementById('claim-telegram'),
             claimButton: document.getElementById('claim-submit-btn'),
@@ -369,7 +392,7 @@
         // Setup event listeners
         setupAirdropEventListeners();
         
-        // Initialize share buttons
+        // Initialize share buttons (PAGE-SPECIFIC)
         initializeShareButtons();
         
         // Load real-time data if backend ready
@@ -384,6 +407,7 @@
 
     /**
      * Setup event listeners for airdrop functionality
+     * @note PAGE-SPECIFIC
      * 
      * @function setupAirdropEventListeners
      * @returns {void}
@@ -413,7 +437,7 @@
             });
         }
         
-        // Real-time validation for social URL input - NEW
+        // Real-time validation for social URL input
         if (airdropElements.claimSocialUrl) {
             airdropElements.claimSocialUrl.addEventListener('blur', function() {
                 validateSocialUrlInput(this);
@@ -422,7 +446,8 @@
     }
 
     /**
-     * Handle claim form submission - UPDATED
+     * Handle claim form submission
+     * @note PAGE-SPECIFIC - Validates and submits airdrop claim
      * 
      * @function handleClaimSubmit
      * @param {Event} e - Form submission event
@@ -433,24 +458,24 @@
         
         const wallet = airdropElements.claimWallet.value.trim();
         const email = airdropElements.claimEmail.value.trim();
-        const socialUrl = airdropElements.claimSocialUrl ? airdropElements.claimSocialUrl.value.trim() : ''; // NEW
+        const socialUrl = airdropElements.claimSocialUrl ? airdropElements.claimSocialUrl.value.trim() : '';
         const twitter = airdropElements.claimTwitter ? airdropElements.claimTwitter.value.trim() : '';
         const telegram = airdropElements.claimTelegram ? airdropElements.claimTelegram.value.trim() : '';
         
-        // Validate required fields - UPDATED
+        // Validate required fields
         if (!wallet || !email) {
             showMessage('❌ Please fill in all required fields (Wallet Address and Email).', 'error');
             return;
         }
         
-        // Validate social URL if present - NEW
+        // Validate social URL if present
         if (socialUrl && !validateUrl(socialUrl)) {
             showMessage('❌ Invalid social media post URL format. Please enter a valid URL.', 'error');
             airdropElements.claimSocialUrl.focus();
             return;
         }
         
-        // Check if URL is from supported platforms - NEW
+        // Check if URL is from supported platforms
         if (socialUrl) {
             const supportedPlatforms = ['twitter.com', 'x.com', 'facebook.com', 'fb.com', 't.me', 'telegram.org'];
             const urlHost = new URL(socialUrl).hostname.toLowerCase();
@@ -504,7 +529,7 @@
                 body: JSON.stringify({
                     wallet,
                     email,
-                    socialUrl: socialUrl || null, // NEW
+                    socialUrl: socialUrl || null,
                     twitter: twitter || null,
                     telegram: telegram || null
                 })
@@ -546,6 +571,7 @@
 
     /**
      * Handle status check button click
+     * @note PAGE-SPECIFIC
      * 
      * @function handleStatusCheck
      * @returns {void}
@@ -619,6 +645,7 @@
 
     /**
      * Load real-time airdrop data from backend
+     * @note PAGE-SPECIFIC
      * 
      * @function loadRealTimeData
      * @returns {void}
@@ -638,6 +665,7 @@
 
     /**
      * Update tracker display with stats
+     * @note PAGE-SPECIFIC
      * 
      * @function updateTrackerDisplay
      * @param {Object|null} data - Stats data from backend
@@ -677,6 +705,7 @@
 
     /**
      * Validate Solana wallet address format
+     * @note PAGE-SPECIFIC validation utility
      * 
      * @function validateWallet
      * @param {string} wallet - Wallet address to validate
@@ -691,6 +720,7 @@
 
     /**
      * Validate wallet input field
+     * @note PAGE-SPECIFIC
      * 
      * @function validateWalletInput
      * @param {HTMLInputElement} input - Input element to validate
@@ -707,6 +737,7 @@
 
     /**
      * Validate email address format
+     * @note PAGE-SPECIFIC validation utility
      * 
      * @function validateEmail
      * @param {string} email - Email to validate
@@ -720,6 +751,7 @@
 
     /**
      * Validate email input field
+     * @note PAGE-SPECIFIC
      * 
      * @function validateEmailInput
      * @param {HTMLInputElement} input - Input element to validate
@@ -736,6 +768,7 @@
 
     /**
      * Validate URL format
+     * @note PAGE-SPECIFIC validation utility
      * 
      * @function validateUrl
      * @param {string} url - URL to validate
@@ -752,7 +785,8 @@
     }
 
     /**
-     * Validate social URL input field - NEW
+     * Validate social URL input field
+     * @note PAGE-SPECIFIC
      * 
      * @function validateSocialUrlInput
      * @param {HTMLInputElement} input - Input element to validate
@@ -787,6 +821,7 @@
 
     /**
      * Show message to user
+     * @note PAGE-SPECIFIC - Shows messages in airdrop section
      * 
      * @function showMessage
      * @param {string} message - Message HTML content
@@ -834,6 +869,7 @@
 
     /**
      * Format number with commas
+     * @note Utility function
      * 
      * @function formatNumber
      * @param {number} num - Number to format
@@ -850,6 +886,7 @@
 
     /**
      * Initializes Intersection Observer for scroll reveal animations
+     * @note Handles page-specific scroll animations
      * 
      * @function initializeScrollReveal
      * @returns {void}
@@ -911,37 +948,38 @@
     // SHARED COMPONENTS LOADER
     // ============================================
 
-   /**
- * Loads shared HTML components from shared/global.html file
- * 
- * @function loadSharedComponents
- * @async
- * @returns {Promise<void>}
- * 
- * @description
- * Dynamically loads shared components (chatbot, footer, cookie banner, privacy modal)
- * from shared/global.html and injects them into the DOM. Reinitializes chatbot after loading.
- * 
- * @throws Will log error if fetch fails or container not found
- * 
- * @components
- * - Phoenix AI Chatbot
- * - Site Footer
- * - Cookie Consent Banner
- * - Privacy Policy Modal
- */
-function loadSharedComponents() {
-    LOGGER.info('Loading shared components from shared/global.html...');
-    
-    fetch('shared/global.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            return response.text();
-        })
-        .then(html => {
-            const container = document.getElementById('shared-components-container');
+    /**
+     * Loads shared HTML components from shared/global.html file
+     * @note This loads footer, chatbot, cookie banner, privacy modal
+     * 
+     * @function loadSharedComponents
+     * @async
+     * @returns {Promise<void>}
+     * 
+     * @description
+     * Dynamically loads shared components (chatbot, footer, cookie banner, privacy modal)
+     * from shared/global.html and injects them into the DOM. Reinitializes chatbot after loading.
+     * 
+     * @throws Will log error if fetch fails or container not found
+     * 
+     * @components
+     * - Phoenix AI Chatbot
+     * - Site Footer
+     * - Cookie Consent Banner
+     * - Privacy Policy Modal
+     */
+    function loadSharedComponents() {
+        LOGGER.info('Loading shared components from shared/global.html...');
+        
+        fetch('shared/global.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(html => {
+                const container = document.getElementById('shared-components-container');
                 
                 if (!container) {
                     throw new Error('Shared components container (#shared-components-container) not found');
@@ -1015,7 +1053,7 @@ function loadSharedComponents() {
      * Coordinates the initialization of all main.js features:
      * 1. Waits for shared.js to be ready
      * 2. Initializes scroll reveal animations
-     * 3. Initializes $Ember airdrop system with share buttons
+     * 3. Initializes $Ember airdrop system with share buttons (PAGE-SPECIFIC)
      * 4. Loads shared HTML components
      * 5. Reports initialization status
      * 
@@ -1043,7 +1081,7 @@ function loadSharedComponents() {
             LOGGER.error(`Scroll reveal initialization failed: ${error.message}`);
         }
         
-        // Initialize $Ember airdrop system (includes share buttons)
+        // Initialize $Ember airdrop system (PAGE-SPECIFIC - includes share buttons)
         try {
             initializeAirdropSystem();
         } catch (error) {
@@ -1153,7 +1191,7 @@ function loadSharedComponents() {
      * @namespace VaultPhoenixMain
      */
     window.VaultPhoenixMain = {
-        version: '2.1.0',
+        version: '2.1.1',
         changeImage: window.changeImage,
         changeLaptopImage: window.changeLaptopImage,
         reinitialize: initialize,
@@ -1171,12 +1209,12 @@ function loadSharedComponents() {
         }
     };
 
-    LOGGER.info('Local.js v2.1 loaded successfully with Share Buttons');
+    LOGGER.info('Local.js v2.1.1 loaded successfully - Properly separated from shared.js');
 
 })();
 
 /**
  * ============================================
- * END OF LOCAL.JS v2.1
+ * END OF LOCAL.JS v2.1.1
  * ============================================
  */
