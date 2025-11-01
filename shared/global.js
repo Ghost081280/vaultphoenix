@@ -337,6 +337,7 @@ function initScrollProgress() {
 let conversationHistory = [];
 let isTyping = false;
 let hasScrolled = false;
+let scrollPosition = 0;
 
 // TOOLTIP STATE MACHINE
 function initTooltipStateMachine() {
@@ -433,11 +434,19 @@ function openChatbot() {
     const container = document.querySelector('.chatbot-button-container');
     const body = document.querySelector('.chatbot-body');
     
+    // Store current scroll position
+    scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
     // State 4: Hide tooltip when opening
     container.classList.add('chatbot-open');
     
     window_el.classList.add('active');
+    
+    // Fix body position to prevent scroll
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollPosition}px`;
+    document.body.style.width = '100%';
     
     if (body && body.children.length === 0) {
         addWelcomeMessage();
@@ -452,7 +461,15 @@ function closeChatbot() {
     container.classList.remove('chatbot-open');
     
     window_el.classList.remove('active');
+    
+    // Restore body scroll
     document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    
+    // Restore scroll position
+    window.scrollTo(0, scrollPosition);
 }
 
 // SINGLE STATUS INDICATOR
