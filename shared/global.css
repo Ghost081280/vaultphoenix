@@ -1,8 +1,8 @@
 /* ===================================
-   VAULT PHOENIX - SHARED CSS v7.0 PERFECTED
+   VAULT PHOENIX - SHARED CSS v7.1 MOBILE PERFECTED
    Core styles used across ALL pages
    Mobile & Desktop Optimized
-   FIXES: Matching scrollbars, smooth chatbot float, unified navigation
+   FIXES: Mobile close button, tactile send button, scroll layer separation
    =================================== */
 
 /* ===================================
@@ -701,11 +701,11 @@ button {
 }
 
 /* ===================================
-   CHATBOT SYSTEM - PRODUCTION OPTIMIZED
-   FIXES: Immediate visibility, smooth tooltip, no page jump, improved touch
+   CHATBOT SYSTEM - MOBILE PERFECTED
+   FIXES: Mobile close button, tactile send, scroll layer separation
    =================================== */
 
-/* FIX: Chatbot loads AFTER privacy banner handled */
+/* Chatbot loads AFTER privacy banner handled */
 .chatbot-button-container {
     position: fixed;
     bottom: 30px;
@@ -784,7 +784,7 @@ button {
     pointer-events: none;
 }
 
-/* FIX: Improved tooltip behavior */
+/* Improved tooltip behavior */
 .chatbot-tooltip {
     position: absolute;
     bottom: 50%;
@@ -903,7 +903,7 @@ button {
     margin: 0;
 }
 
-/* FIX: Single status indicator with dual text */
+/* Single status indicator with dual text */
 .chatbot-status {
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.9);
@@ -949,11 +949,17 @@ button {
     border-radius: 50%;
     transition: var(--transition-base);
     flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .chatbot-close:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: rotate(90deg);
+}
+
+.chatbot-close:active {
+    transform: scale(0.9);
 }
 
 .chatbot-body {
@@ -1124,6 +1130,7 @@ button {
     color: rgba(255, 255, 255, 0.4);
 }
 
+/* IMPROVED TACTILE SEND BUTTON */
 .chatbot-send {
     min-width: 80px;
     height: 44px;
@@ -1134,21 +1141,55 @@ button {
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
-    transition: var(--transition-base);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(215, 51, 39, 0.3);
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
+/* Desktop hover effect */
 .chatbot-send:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--ember-shadow-md);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.5);
+}
+
+/* Desktop and mobile active (click/tap) effect */
+.chatbot-send:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 1px 4px rgba(215, 51, 39, 0.4);
+    background: linear-gradient(135deg, #c62828 0%, #b71c1c 50%, #a31010 100%);
+}
+
+/* Visual feedback animation on tap/click */
+@keyframes button-press {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.chatbot-send.pressing {
+    animation: button-press 0.2s ease;
 }
 
 .chatbot-send:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
+}
+
+.chatbot-send:disabled:active {
+    transform: none;
 }
 
 /* ===================================
@@ -1632,7 +1673,7 @@ button {
         height: 40px;
     }
     
-    /* FIX: Mobile chatbot with improved touch and positioning */
+    /* Mobile chatbot with improved touch and positioning */
     .chatbot-button-container {
         bottom: 20px;
         right: 20px;
@@ -1654,7 +1695,7 @@ button {
         height: 110px;
     }
     
-    /* FIX: Mobile chatbot window - no page jump */
+    /* Mobile chatbot window - floats above page */
     .chatbot-window {
         position: fixed;
         top: calc(var(--navbar-height) + 15px);
@@ -1976,5 +2017,5 @@ button {
 }
 
 /* ===================================
-   END OF VAULT PHOENIX - GLOBAL.CSS v6.5
+   END OF VAULT PHOENIX - GLOBAL.CSS v7.1
    =================================== */
