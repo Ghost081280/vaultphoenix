@@ -861,6 +861,9 @@ function initializeChatbot() {
             e.preventDefault();
             closeChatbot();
         });
+        newChatbotClose.addEventListener('touchstart', function(e) {
+            closeChatbot();
+        }, { passive: true });
     }
     
     const newChatbotSend = chatbotWindow.querySelector('.chatbot-send');
@@ -913,15 +916,18 @@ function openChatbot() {
     chatbotWindow.classList.add('active');
     chatbotButtonContainer.classList.add('chatbot-active');
     
-    // NO page manipulation - just overlay
-    // Chatbot floats smoothly on top
+    // Lock body scroll completely
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.top = `-${window.scrollY}px`;
     
     if (chatbotBody && chatbotBody.children.length === 0) {
         addWelcomeMessage();
     }
 }
 
-// FIX: Smooth close - no scrolling
+// FIX: Smooth close and restore scroll position
 function closeChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
@@ -929,10 +935,16 @@ function closeChatbot() {
     chatbotWindow.classList.remove('active');
     chatbotButtonContainer.classList.remove('chatbot-active');
     
+    // Restore body scroll
+    const scrollY = document.body.style.top;
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.top = '';
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    
     // Show tooltip again after closing
     showTooltipAfterClose();
-    
-    // NO page manipulation - stays exactly where it is
 }
 
 function updateChatbotStatus() {
