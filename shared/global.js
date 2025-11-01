@@ -1,7 +1,7 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V7.3 NO-ZOOM FIX
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.0 NO SHAKE
 // ============================================
-// FIXES: Streaming responses, scroll isolation, smooth mobile UX, empty input feedback, KEYBOARD NO-ZOOM
+// FIXES: NO SHAKE during streaming, Keyboard handling NO ZOOM, Button stays visible
 // ============================================
 
 (function() {
@@ -758,12 +758,11 @@ document.querySelectorAll('.scroll-reveal, .fade-in-up, .slide-in-left, .slide-i
 });
 
 // ============================================
-// PHOENIX AI CHATBOT - STREAMING RESPONSES
+// PHOENIX AI CHATBOT - NO SHAKE STREAMING
 // ============================================
 let conversationHistory = [];
 let isTyping = false;
 let phoenixSiteData = null;
-let currentStreamingMessage = null;
 
 function getEnhancedSystemPrompt() {
     let basePrompt = phoenixAI.description || 'You are Phoenix, the AI assistant for Vault Phoenix.';
@@ -916,9 +915,10 @@ function initializeChatbot() {
         }, { passive: true });
     }
     
-    initializeChatbotTooltip();
+    // CRITICAL: Initialize keyboard handler
+    initializeChatbotKeyboardHandler();
     
-    console.log('✅ Chatbot initialized with streaming responses');
+    console.log('✅ Chatbot initialized with NO SHAKE streaming');
     return true;
 }
 
@@ -959,6 +959,7 @@ function closeChatbot() {
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     
     chatbotWindow.classList.remove('active');
+    chatbotWindow.classList.remove('keyboard-visible');
     chatbotButtonContainer.classList.remove('chatbot-active');
     
     showTooltipAfterClose();
@@ -1041,21 +1042,6 @@ async function sendMessage() {
     addChatMessage('user', message);
     chatbotInput.value = '';
     
-    // FIX: Smooth transition on mobile - small pause then scroll
-    if (window.innerWidth <= 768) {
-        setTimeout(() => {
-            chatbotInput.blur();
-            // Smooth scroll to bottom
-            const chatbotBody = document.querySelector('.chatbot-body');
-            if (chatbotBody) {
-                chatbotBody.scrollTo({
-                    top: chatbotBody.scrollHeight,
-                    behavior: 'smooth'
-                });
-            }
-        }, 150);
-    }
-    
     chatbotInput.disabled = true;
     chatbotSend.disabled = true;
     isTyping = true;
@@ -1072,8 +1058,8 @@ async function sendMessage() {
             { role: 'assistant', content: reply }
         );
         
-        // Stream the response word by word
-        await streamChatMessage(reply);
+        // CRITICAL: NO SHAKE - Stream the response with stable rendering
+        await streamChatMessageNoShake(reply);
         
     } catch (error) {
         console.error('AI Error:', error);
@@ -1086,12 +1072,12 @@ async function sendMessage() {
     }
 }
 
-// FIX: Stream AI response like real chat
-async function streamChatMessage(fullText) {
+// CRITICAL: NO SHAKE - Stream AI response with stable DOM updates
+async function streamChatMessageNoShake(fullText) {
     const chatbotBody = document.querySelector('.chatbot-body');
     if (!chatbotBody) return;
     
-    // Create message container
+    // Create message container with fixed structure
     const messageDiv = document.createElement('div');
     messageDiv.className = 'chat-message assistant-message';
     
@@ -1108,29 +1094,43 @@ async function streamChatMessage(fullText) {
     messageContent.appendChild(avatar);
     messageContent.appendChild(textDiv);
     messageDiv.appendChild(messageContent);
+    
+    // CRITICAL: Append container BEFORE streaming to avoid layout shift
     chatbotBody.appendChild(messageDiv);
     
     // Split into words
     const words = fullText.split(' ');
     let currentText = '';
     
-    // Stream words one by one
+    // CRITICAL: Batch updates to reduce reflows
+    let updateBatch = '';
+    const batchSize = 3; // Update every 3 words
+    
     for (let i = 0; i < words.length; i++) {
         currentText += (i > 0 ? ' ' : '') + words[i];
-        textDiv.innerHTML = formatChatMessage(currentText) + '<span class="streaming-cursor"></span>';
+        updateBatch += (i % batchSize === 0 && i > 0 ? ' ' : '') + words[i];
         
-        // Scroll to bottom
-        chatbotBody.scrollTop = chatbotBody.scrollHeight;
-        
-        // Slight delay between words for natural feel
-        await new Promise(resolve => setTimeout(resolve, 35));
+        // Update DOM in batches to reduce shake
+        if (i % batchSize === 0 || i === words.length - 1) {
+            textDiv.innerHTML = formatChatMessage(currentText) + '<span class="streaming-cursor"></span>';
+            
+            // Smooth scroll without triggering reflow
+            requestAnimationFrame(() => {
+                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+            });
+            
+            // Shorter delay for smoother feel
+            await new Promise(resolve => setTimeout(resolve, 40));
+        }
     }
     
-    // Remove cursor
+    // Remove cursor and finalize
     textDiv.innerHTML = formatChatMessage(currentText);
     
     // Final scroll
-    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    requestAnimationFrame(() => {
+        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    });
 }
 
 function addChatMessage(role, content) {
@@ -1184,13 +1184,12 @@ window.initializePhoenixChatbot = initializeChatbot;
 window.phoenixSiteScanner = siteScanner;
 
 // ============================================
-// CHATBOT KEYBOARD HANDLER - NO ZOOM FIX
-// Prevents zoom by shifting chatbot up when keyboard appears
-// Works for both portrait and landscape iPhone modes
+// CHATBOT KEYBOARD HANDLER - NO ZOOM, BUTTON STAYS VISIBLE
 // ============================================
 function initializeChatbotKeyboardHandler() {
     const chatbotInput = document.querySelector('.chatbot-input');
     const chatbotWindow = document.querySelector('.chatbot-window');
+    const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     
     if (!chatbotInput || !chatbotWindow) {
         console.warn('⚠️ Keyboard handler: chatbot elements not found');
@@ -1199,36 +1198,52 @@ function initializeChatbotKeyboardHandler() {
     
     // Detect when keyboard appears (input focused)
     chatbotInput.addEventListener('focus', function() {
-        chatbotWindow.classList.add('keyboard-visible');
-        console.log('📱 Keyboard visible - shifting chatbot up');
+        // Only shift on mobile landscape
+        if (window.innerWidth <= 926 && window.innerHeight <= 500 && window.matchMedia('(orientation: landscape)').matches) {
+            chatbotWindow.classList.add('keyboard-visible');
+            console.log('📱 Keyboard visible (landscape) - shifting chatbot up, button stays visible');
+        }
     });
     
     // Detect when keyboard disappears (input blurred)
     chatbotInput.addEventListener('blur', function() {
-        chatbotWindow.classList.remove('keyboard-visible');
-        console.log('📱 Keyboard hidden - restoring chatbot position');
+        setTimeout(() => {
+            chatbotWindow.classList.remove('keyboard-visible');
+            console.log('📱 Keyboard hidden - restoring chatbot position');
+        }, 100);
     });
     
     // Handle window resize (keyboard showing/hiding can trigger this)
     let lastHeight = window.innerHeight;
+    let lastWidth = window.innerWidth;
+    
     window.addEventListener('resize', function() {
         const currentHeight = window.innerHeight;
+        const currentWidth = window.innerWidth;
+        const isLandscape = window.matchMedia('(orientation: landscape)').matches;
         
-        // If window height decreased significantly, keyboard probably appeared
-        if (lastHeight - currentHeight > 150) {
-            if (document.activeElement === chatbotInput) {
-                chatbotWindow.classList.add('keyboard-visible');
+        // Only handle keyboard on mobile landscape
+        if (currentWidth <= 926 && currentHeight <= 500 && isLandscape) {
+            // If window height decreased significantly, keyboard probably appeared
+            if (lastHeight - currentHeight > 100) {
+                if (document.activeElement === chatbotInput) {
+                    chatbotWindow.classList.add('keyboard-visible');
+                }
             }
-        }
-        // If window height increased significantly, keyboard probably disappeared
-        else if (currentHeight - lastHeight > 150) {
+            // If window height increased significantly, keyboard probably disappeared
+            else if (currentHeight - lastHeight > 100) {
+                chatbotWindow.classList.remove('keyboard-visible');
+            }
+        } else {
+            // Remove keyboard-visible class on non-landscape mobile
             chatbotWindow.classList.remove('keyboard-visible');
         }
         
         lastHeight = currentHeight;
+        lastWidth = currentWidth;
     }, { passive: true });
     
-    console.log('✅ Chatbot keyboard handler initialized - NO ZOOM mode!');
+    console.log('✅ Chatbot keyboard handler initialized - NO ZOOM, button stays visible!');
     return true;
 }
 
@@ -1248,10 +1263,10 @@ window.addEventListener('resize', function() {
 });
 
 // ============================================
-// INITIALIZATION - PRIVACY FIRST, THEN CHATBOT
+// INITIALIZATION
 // ============================================
 async function init() {
-    console.log('🔥 Vault Phoenix v7.3 NO-ZOOM FIX Initializing...');
+    console.log('🔥 Vault Phoenix v8.0 NO SHAKE Initializing...');
     
     await loadPhoenixAITraining();
     
@@ -1266,15 +1281,6 @@ async function init() {
         console.warn('⚠️ Chatbot failed, retrying...');
         setTimeout(() => initializeChatbot(), 100);
     }
-    
-    // Initialize keyboard handler after chatbot is ready
-    setTimeout(() => {
-        let keyboardHandlerInit = initializeChatbotKeyboardHandler();
-        if (!keyboardHandlerInit) {
-            console.warn('⚠️ Keyboard handler failed, retrying...');
-            setTimeout(() => initializeChatbotKeyboardHandler(), 200);
-        }
-    }, 150);
     
     setTimeout(() => {
         const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
@@ -1302,12 +1308,10 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v7.3 NO-ZOOM FIX Complete');
-    console.log('💬 Streaming Responses: Word-by-word like real AI');
-    console.log('📜 Scroll Isolation: Perfect separation');
-    console.log('📱 Mobile UX: Smooth transitions');
-    console.log('⚠️ Empty Input: Blinking border feedback');
-    console.log('📱 Keyboard Handler: NO ZOOM mode active!');
+    console.log('✅ Vault Phoenix v8.0 NO SHAKE Complete');
+    console.log('💬 Streaming: NO SHAKE with batched DOM updates');
+    console.log('📱 Mobile Landscape: NO ZOOM, button stays visible');
+    console.log('🖥️ Desktop: Fixed sizing at ALL browser widths');
 }
 
 if (document.readyState === 'loading') {
