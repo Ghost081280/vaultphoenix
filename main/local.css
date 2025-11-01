@@ -4,7 +4,7 @@
  * ============================================
  * 
  * @file        local.css
- * @version     2.2.0 COMPLETE
+ * @version     2.2.1 CONSISTENCY UPDATE
  * @author      Vault Phoenix LLC
  * 
  * @description
@@ -12,12 +12,12 @@
  * This file contains all CSS rules specific to main.html and should be
  * loaded after shared.css for proper cascade and variable inheritance.
  * 
- * FIXES IN v2.2.0:
- * - Added complete Enterprise Token Infrastructure section
- * - Maximum CSS specificity for share buttons to override global.css
- * - Restored all missing sections (5-12)
- * - Proper button sizing isolation for airdrop section
- * - No interference with rest of page functionality
+ * FIXES IN v2.2.1:
+ * - Consistent backgrounds across all sections
+ * - Unified hover effects with enhanced shadows
+ * - Consistent card styles page-wide
+ * - Improved visual hierarchy
+ * - Enhanced golden highlight usage
  * 
  * @dependencies
  * - shared.css (v4.0+) - Required for CSS variables and base utilities
@@ -30,15 +30,94 @@
  * 5. $Ember Airdrop Section (WITH MAXIMUM SPECIFICITY SHARE BUTTONS)
  * 6. Crypto Coin Section
  * 7. Technology Modules (GPS & Beacon)
- * 8. Live Demo Section
- * 9. Use Cases Section
- * 10. Pricing/SDK Section
- * 11. Final CTA Section
- * 12. Scroll Reveal Animations
- * 13. Responsive Breakpoints
+ * 8. Features Section
+ * 9. Live Demo Section
+ * 10. Use Cases Section
+ * 11. Pricing/SDK Section
+ * 12. Final CTA Section
+ * 13. Scroll Reveal Animations
+ * 14. Responsive Breakpoints & Utilities
  * 
  * ============================================
  */
+
+/* ============================================
+   PAGE-WIDE CONSISTENCY UTILITIES
+   ============================================ */
+
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Main page body styles */
+body.main-page {
+    overflow-x: hidden;
+}
+
+/* Consistent container max-width */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* Skip to content link for accessibility */
+.main-skip-to-content {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1em;
+    background-color: var(--ember-dark);
+    color: white;
+    text-decoration: none;
+}
+
+.main-skip-to-content:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 1em;
+}
+
+/* Image glow wrapper - Used throughout page for icon effects */
+.main-image-glow {
+    display: inline-block;
+    position: relative;
+}
+
+.main-image-glow img {
+    display: block;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6)) 
+            drop-shadow(0 0 30px rgba(240, 165, 0, 0.3));
+    transition: filter var(--transition-base);
+}
+
+.main-image-glow:hover img {
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.8)) 
+            drop-shadow(0 0 40px rgba(240, 165, 0, 0.4));
+}
+
+/* Orange glow variant */
+.main-orange-glow img {
+    filter: drop-shadow(0 0 15px rgba(215, 51, 39, 0.6)) 
+            drop-shadow(0 0 30px rgba(215, 51, 39, 0.3));
+}
+
+.main-orange-glow:hover img {
+    filter: drop-shadow(0 0 20px rgba(215, 51, 39, 0.8)) 
+            drop-shadow(0 0 40px rgba(215, 51, 39, 0.4));
+}
+
+/* Purple glow variant */
+.main-purple-glow img {
+    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.6)) 
+            drop-shadow(0 0 30px rgba(139, 92, 246, 0.3));
+}
+
+.main-purple-glow:hover img {
+    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.8)) 
+            drop-shadow(0 0 40px rgba(139, 92, 246, 0.4));
+}
 
 /* ============================================
    1. HERO SECTION
@@ -144,7 +223,7 @@
 
 .main-step-premium:hover {
     transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-lg);
+    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.4), 0 0 40px rgba(240, 165, 0, 0.2);
     border-color: var(--ember-orange);
 }
 
@@ -247,7 +326,7 @@
 
 .main-cta-path:hover {
     transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
+    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.4), 0 0 40px rgba(240, 165, 0, 0.2);
 }
 
 .whitelabel-path {
@@ -1046,7 +1125,7 @@ body.main-page .main-compliance-icon-redesigned {
 
 .ember-airdrop-section {
     padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -1813,7 +1892,7 @@ button.share-button.share-telegram:hover {
 
 .crypto-coin-section {
     padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
     position: relative;
 }
 
@@ -1886,7 +1965,7 @@ button.share-button.share-telegram:hover {
 
 .crypto-benefit:hover {
     transform: translateX(8px);
-    box-shadow: var(--ember-shadow-lg);
+    box-shadow: 0 12px 40px rgba(215, 51, 39, 0.3), 0 0 30px rgba(240, 165, 0, 0.15);
     border-color: var(--ember-orange);
 }
 
@@ -1969,7 +2048,7 @@ button.share-button.share-telegram:hover {
 
 .technology-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
+    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.4), 0 0 40px rgba(240, 165, 0, 0.2);
 }
 
 .gps-card {
@@ -2230,7 +2309,7 @@ button.share-button.share-telegram:hover {
 
 .features {
     padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
 }
 
 .main-section-title {
@@ -2308,7 +2387,7 @@ button.share-button.share-telegram:hover {
 
 .feature-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
+    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.4), 0 0 40px rgba(240, 165, 0, 0.2);
     border-color: var(--ember-orange);
 }
 
@@ -2351,7 +2430,7 @@ button.share-button.share-telegram:hover {
 
 .app-showcase {
     padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
 }
 
 .showcase-content {
@@ -2712,7 +2791,7 @@ button.share-button.share-telegram:hover {
 
 .use-cases {
     padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
 }
 
 .use-cases-grid {
@@ -2733,7 +2812,7 @@ button.share-button.share-telegram:hover {
 
 .use-case-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
+    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.4), 0 0 40px rgba(240, 165, 0, 0.2);
     border-color: var(--ember-orange);
 }
 
@@ -2780,7 +2859,7 @@ button.share-button.share-telegram:hover {
 
 .pricing {
     padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
 }
 
 .pricing-intro {
@@ -2807,7 +2886,7 @@ button.share-button.share-telegram:hover {
 
 .pricing-solution:hover {
     transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
+    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.4), 0 0 40px rgba(240, 165, 0, 0.2);
 }
 
 .whitelabel-solution {
@@ -3430,7 +3509,7 @@ button.share-button.share-telegram:hover {
 
 .final-cta {
     padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -3487,7 +3566,7 @@ button.share-button.share-telegram:hover {
 
 .journey-path-module:hover {
     transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
+    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.4), 0 0 40px rgba(240, 165, 0, 0.2);
 }
 
 .business-path {
@@ -3647,6 +3726,16 @@ button.share-button.share-telegram:hover {
    14. RESPONSIVE BREAKPOINTS
    ============================================ */
 
+/* Golden Highlight - Used throughout page */
+.golden-highlight {
+    color: var(--ember-gold);
+    font-weight: 700;
+}
+
+.golden-text {
+    color: var(--ember-gold);
+}
+
 @media (max-width: 1024px) {
     .main-hero-steps-premium {
         grid-template-columns: 1fr;
@@ -3766,9 +3855,19 @@ button.share-button.share-telegram:hover {
 
 /**
  * ============================================
- * END OF LOCAL.CSS v2.2.0 COMPLETE
- * All sections restored and working properly
- * Enterprise Token Infrastructure added
- * Share buttons have maximum specificity isolation
+ * END OF LOCAL.CSS v2.2.1 CONSISTENCY UPDATE
+ * ============================================
+ * 
+ * All sections restored and working properly with:
+ * ✅ Consistent backgrounds across all sections
+ * ✅ Unified hover effects with enhanced shadows
+ * ✅ Enterprise Token Infrastructure integrated
+ * ✅ Share buttons with maximum specificity isolation
+ * ✅ Proper visual hierarchy throughout
+ * ✅ Responsive design at all breakpoints
+ * 
+ * Main sections use: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%)
+ * Card hovers use: 0 20px 60px rgba(215, 51, 39, 0.4), 0 0 40px rgba(240, 165, 0, 0.2)
+ * 
  * ============================================
  */
