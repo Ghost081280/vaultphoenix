@@ -957,10 +957,17 @@ function openChatbot() {
 function closeChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
+    const chatbotInput = document.querySelector('.chatbot-input');
     
+    // CRITICAL: Remove all state classes and blur input
     chatbotWindow.classList.remove('active');
     chatbotWindow.classList.remove('keyboard-visible');
     chatbotButtonContainer.classList.remove('chatbot-active');
+    
+    // CRITICAL: Force blur to close keyboard
+    if (chatbotInput) {
+        chatbotInput.blur();
+    }
     
     showTooltipAfterClose();
 }
@@ -1213,17 +1220,45 @@ function initializeChatbotKeyboardHandler() {
         }, 100);
     });
     
+    // CRITICAL: Handle orientation change - clean up keyboard-visible class
+    window.addEventListener('orientationchange', function() {
+        setTimeout(() => {
+            const chatbotWindow = document.querySelector('.chatbot-window');
+            if (chatbotWindow) {
+                chatbotWindow.classList.remove('keyboard-visible');
+                console.log('📱 Orientation changed - removed keyboard-visible class');
+            }
+            
+            // Also blur any focused inputs to close keyboard
+            const chatbotInput = document.querySelector('.chatbot-input');
+            if (chatbotInput && document.activeElement === chatbotInput) {
+                chatbotInput.blur();
+                console.log('📱 Orientation changed - closed keyboard');
+            }
+        }, 300); // Wait for orientation change to complete
+    });
+    
     // Handle window resize (keyboard showing/hiding can trigger this)
     let lastHeight = window.innerHeight;
     let lastWidth = window.innerWidth;
+    let lastOrientation = window.matchMedia('(orientation: landscape)').matches;
     
     window.addEventListener('resize', function() {
         const currentHeight = window.innerHeight;
         const currentWidth = window.innerWidth;
-        const isLandscape = window.matchMedia('(orientation: landscape)').matches;
+        const currentOrientation = window.matchMedia('(orientation: landscape)').matches;
+        const isLandscape = currentOrientation;
         
+        // CRITICAL: If orientation changed, clean up keyboard-visible
+        if (currentOrientation !== lastOrientation) {
+            chatbotWindow.classList.remove('keyboard-visible');
+            if (chatbotInput && document.activeElement === chatbotInput) {
+                chatbotInput.blur();
+            }
+            console.log('📱 Orientation change detected in resize - cleaned up');
+        }
         // Only handle keyboard on mobile landscape
-        if (currentWidth <= 926 && currentHeight <= 500 && isLandscape) {
+        else if (currentWidth <= 926 && currentHeight <= 500 && isLandscape) {
             // If window height decreased significantly, keyboard probably appeared
             if (lastHeight - currentHeight > 100) {
                 if (document.activeElement === chatbotInput) {
@@ -1241,6 +1276,7 @@ function initializeChatbotKeyboardHandler() {
         
         lastHeight = currentHeight;
         lastWidth = currentWidth;
+        lastOrientation = currentOrientation;
     }, { passive: true });
     
     console.log('✅ Chatbot keyboard handler initialized - NO ZOOM, button stays visible!');
