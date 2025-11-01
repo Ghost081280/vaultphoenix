@@ -383,7 +383,7 @@ if (mobileMenuBtn && mobileMenu && mobileMenuOverlay) {
         } else {
             openMobileMenu();
         }
-    }, { passive: false });
+    }, { passive: true });
 }
 
 if (mobileMenuClose && mobileMenu && mobileMenuOverlay) {
@@ -839,33 +839,6 @@ function initializeChatbot() {
     updateChatbotStatus();
     initializeChatbotTooltip();
     
-    const chatbotBody = document.querySelector('.chatbot-body');
-    if (chatbotBody) {
-        let startY = 0;
-        
-        chatbotBody.addEventListener('touchstart', function(e) {
-            startY = e.touches[0].pageY;
-        }, { passive: true });
-        
-        chatbotBody.addEventListener('touchmove', function(e) {
-            const currentY = e.touches[0].pageY;
-            const scrollTop = chatbotBody.scrollTop;
-            const scrollHeight = chatbotBody.scrollHeight;
-            const clientHeight = chatbotBody.clientHeight;
-            
-            const isAtTop = scrollTop === 0;
-            const isAtBottom = scrollTop + clientHeight >= scrollHeight;
-            const isScrollingUp = currentY > startY;
-            const isScrollingDown = currentY < startY;
-            
-            if ((isAtTop && isScrollingUp) || (isAtBottom && isScrollingDown)) {
-                e.preventDefault();
-            }
-            
-            e.stopPropagation();
-        }, { passive: false });
-    }
-    
     const newChatbotButtonContainer = chatbotButtonContainer.cloneNode(true);
     chatbotButtonContainer.parentNode.replaceChild(newChatbotButtonContainer, chatbotButtonContainer);
     
@@ -877,11 +850,10 @@ function initializeChatbot() {
         toggleChatbot();
     });
     
-    chatbotButton.addEventListener('touchend', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    // Touch support for mobile without passive false
+    chatbotButton.addEventListener('touchstart', function(e) {
         toggleChatbot();
-    }, { passive: false });
+    }, { passive: true });
     
     const newChatbotClose = chatbotWindow.querySelector('.chatbot-close');
     if (newChatbotClose) {
