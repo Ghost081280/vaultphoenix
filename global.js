@@ -1,43 +1,75 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.1 OPTIMIZED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V5.0 OPTIMIZED
 // ============================================
-// Mobile & Desktop Optimized - Hardcoded Navigation
-// Updated: Fixed chatbot mobile experience, tooltip removal on click,
-// scroll handling, keyboard management, navigation link connections
+// Mobile & Desktop Optimized - Dynamic Navigation
+// Fixed: All mobile link issues, dynamic quick links, chatbot positioning
+// Performance optimized with requestAnimationFrame and debouncing
 // ============================================
 
 (function() {
     'use strict';
 
     // ============================================
-    // HARDCODED NAVIGATION SYSTEM
-    // These IDs must match your main.html section IDs
+    // DYNAMIC NAVIGATION SYSTEM
+    // Automatically generates navigation links based on page sections
     // ============================================
     
-    const MAIN_PAGE_NAV_LINKS = [
-        { title: 'How it Works', href: '#deploy-crypto-coins' },
-        { title: 'Live Demo', href: '#experience-both-systems' },
-        { title: 'Get Ideas', href: '#crypto-gaming-industries' },
-        { title: 'Pricing', href: '#developer-sdk-pricing' }
-    ];
-    
-    function generateNavigation() {
-        console.log('🔗 Generating hardcoded navigation...');
+    function generateDynamicNavigation() {
+        console.log('🔗 Generating dynamic navigation...');
         
-        // Update all three navigation areas
-        updateDesktopNav(MAIN_PAGE_NAV_LINKS);
-        updateMobileNav(MAIN_PAGE_NAV_LINKS);
-        updateFooterNav(MAIN_PAGE_NAV_LINKS);
+        // Get all main sections with IDs (excluding navbar, footer, etc.)
+        const sections = document.querySelectorAll('main section[id]');
+        const navLinks = [];
         
-        console.log('✅ Navigation generated successfully');
+        sections.forEach(section => {
+            const id = section.id;
+            const heading = section.querySelector('h1, h2, .main-section-title, .main-hero-title-new');
+            
+            if (id && heading) {
+                // Extract short title (first 1-2 words)
+                let title = heading.textContent.trim();
+                
+                // Create shortened version
+                const words = title.split(' ');
+                if (words.length > 2) {
+                    title = words.slice(0, 2).join(' ');
+                }
+                
+                // Clean up title
+                title = title.replace(/[^\w\s]/gi, '').trim();
+                
+                // Store nav link data
+                navLinks.push({
+                    id: id,
+                    title: title,
+                    href: `#${id}`
+                });
+            }
+        });
+        
+        console.log('🔗 Found sections:', navLinks);
+        
+        // Update desktop navigation
+        updateDesktopNav(navLinks);
+        
+        // Update mobile navigation
+        updateMobileNav(navLinks);
+        
+        // Update footer quick links
+        updateFooterNav(navLinks);
+        
+        console.log('✅ Dynamic navigation generated successfully');
     }
     
     function updateDesktopNav(navLinks) {
         const desktopNav = document.querySelector('.nav-links');
         if (!desktopNav) return;
         
+        // Clear existing links (keep ember link separate)
+        const emberLink = desktopNav.querySelector('.ember-link')?.parentElement;
         desktopNav.innerHTML = '';
         
+        // Add dynamic section links
         navLinks.forEach(link => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -48,17 +80,22 @@
             desktopNav.appendChild(li);
         });
         
-        // Add Ember link
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = 'ember-presale.html';
-        a.className = 'ember-link';
-        a.innerHTML = `
-            <img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">
-            $Ember Token
-        `;
-        li.appendChild(a);
-        desktopNav.appendChild(li);
+        // Re-add Ember link if it existed
+        if (emberLink) {
+            desktopNav.appendChild(emberLink);
+        } else {
+            // Create Ember link
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = 'ember-presale.html';
+            a.className = 'ember-link';
+            a.innerHTML = `
+                <img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">
+                $Ember Token
+            `;
+            li.appendChild(a);
+            desktopNav.appendChild(li);
+        }
         
         console.log('✅ Desktop nav updated');
     }
@@ -67,8 +104,10 @@
         const mobileNav = document.querySelector('.mobile-nav-links');
         if (!mobileNav) return;
         
+        // Clear existing links
         mobileNav.innerHTML = '';
         
+        // Add dynamic section links
         navLinks.forEach(link => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -96,6 +135,10 @@
     }
     
     function updateFooterNav(navLinks) {
+        const footerQuickLinks = document.querySelector('.footer-links');
+        if (!footerQuickLinks) return;
+        
+        // Find the Quick Links column
         const quickLinksColumn = Array.from(document.querySelectorAll('.footer-column')).find(col => {
             const heading = col.querySelector('.footer-heading');
             return heading && heading.textContent.includes('Quick Links');
@@ -106,8 +149,28 @@
         const linksContainer = quickLinksColumn.querySelector('.footer-links');
         if (!linksContainer) return;
         
+        // Clear existing links
         linksContainer.innerHTML = '';
         
+        // Add Home link
+        const homeLi = document.createElement('li');
+        const homeA = document.createElement('a');
+        homeA.href = 'index.html';
+        homeA.textContent = 'Home';
+        homeLi.appendChild(homeA);
+        linksContainer.appendChild(homeLi);
+        
+        // Add Platform link (if not on main.html already)
+        if (!window.location.href.includes('main.html')) {
+            const platformLi = document.createElement('li');
+            const platformA = document.createElement('a');
+            platformA.href = 'main.html';
+            platformA.textContent = 'Platform';
+            platformLi.appendChild(platformA);
+            linksContainer.appendChild(platformLi);
+        }
+        
+        // Add dynamic section links
         navLinks.forEach(link => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -118,7 +181,7 @@
             linksContainer.appendChild(li);
         });
         
-        // Add Ember link
+        // Add Ember link (without icon in footer)
         const emberLi = document.createElement('li');
         const emberA = document.createElement('a');
         emberA.href = 'ember-presale.html';
@@ -131,7 +194,7 @@
     }
 
     // ============================================
-    // MOBILE MENU SYSTEM
+    // MOBILE MENU SYSTEM - FIXED FOR ALL DEVICES
     // ============================================
 
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -145,13 +208,6 @@
             e.stopPropagation();
         }
         console.log('📱 Opening mobile menu...');
-        
-        // Close chatbot if open
-        const chatbotWindow = document.querySelector('.chatbot-window');
-        if (chatbotWindow && chatbotWindow.classList.contains('active')) {
-            closeChatbot();
-        }
-        
         if (mobileMenu && mobileMenuOverlay) {
             mobileMenu.classList.add('active');
             mobileMenuOverlay.classList.add('active');
@@ -181,6 +237,7 @@
 
     // Toggle mobile menu
     if (mobileMenuBtn && mobileMenu && mobileMenuOverlay) {
+        // Remove any existing listeners
         const newBtn = mobileMenuBtn.cloneNode(true);
         mobileMenuBtn.parentNode.replaceChild(newBtn, mobileMenuBtn);
         
@@ -209,16 +266,19 @@
         console.log('✅ Mobile menu button initialized');
     }
 
+    // Close mobile menu when clicking close button
     if (mobileMenuClose && mobileMenu && mobileMenuOverlay) {
         mobileMenuClose.addEventListener('click', closeMobileMenu);
         mobileMenuClose.addEventListener('touchstart', closeMobileMenu, { passive: true });
     }
 
+    // Close mobile menu when clicking overlay
     if (mobileMenuOverlay && mobileMenu) {
         mobileMenuOverlay.addEventListener('click', closeMobileMenu);
         mobileMenuOverlay.addEventListener('touchstart', closeMobileMenu, { passive: true });
     }
 
+    // Close mobile menu on escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
             closeMobileMenu();
@@ -232,46 +292,47 @@
     function handleSmoothScroll(e) {
         const href = this.getAttribute('href');
         
-        // Skip external links or empty
+        // Skip if it's just "#" or empty or external link
         if (!href || href === '#' || href.startsWith('http') || !href.includes('#')) {
             return;
         }
         
         e.preventDefault();
         
-        // Get target ID
+        // Get target element
         const targetId = href.includes('#') ? href.split('#')[1] : href;
         const targetElement = document.getElementById(targetId);
         
         if (targetElement) {
+            // Get navbar height for offset
             const navbar = document.querySelector('.navbar');
             const navbarHeight = navbar ? navbar.offsetHeight : 80;
-            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
             
+            // Smooth scroll
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
             });
 
+            // Update URL without jumping
             if (history.pushState) {
                 history.pushState(null, null, `#${targetId}`);
             }
             
+            // Close mobile menu if open
             closeMobileMenu();
-        } else {
-            console.warn(`⚠️ Target element not found: ${targetId}`);
-            console.warn('💡 Make sure your main.html has sections with these IDs:');
-            MAIN_PAGE_NAV_LINKS.forEach(link => {
-                const id = link.href.replace('#', '');
-                console.warn(`   - ${id}`);
-            });
         }
     }
     
+    // Apply to all anchor links after navigation is generated
     function attachSmoothScrollListeners() {
         document.querySelectorAll('a[href^="#"], a[href*="#"]').forEach(anchor => {
+            // Remove existing listener
             const newAnchor = anchor.cloneNode(true);
             anchor.parentNode.replaceChild(newAnchor, anchor);
+            
+            // Add new listener
             newAnchor.addEventListener('click', handleSmoothScroll);
         });
         
@@ -687,7 +748,7 @@
     });
 
     // ============================================
-    // PHOENIX AI CHATBOT SYSTEM - IMPROVED MOBILE
+    // PHOENIX AI CHATBOT SYSTEM - OPTIMIZED
     // ============================================
     
     const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE';
@@ -696,7 +757,6 @@
     
     let conversationHistory = [];
     let isTyping = false;
-    let isOnline = false;
     
     const SYSTEM_PROMPT = `You are an AI assistant for Vault Phoenix's $Ember Token presale and AR crypto gaming platform.
 
@@ -718,55 +778,43 @@ Your role:
     function initializeChatbot() {
         console.log('🤖 Initializing chatbot...');
         
-        const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
+        const chatbotButton = document.querySelector('.chatbot-button-container');
         const chatbotWindow = document.querySelector('.chatbot-window');
         const chatbotClose = document.querySelector('.chatbot-close');
         const chatbotInput = document.querySelector('.chatbot-input');
         const chatbotSend = document.querySelector('.chatbot-send');
         const chatbotBody = document.querySelector('.chatbot-body');
         
-        if (!chatbotButtonContainer || !chatbotWindow) {
+        if (!chatbotButton || !chatbotWindow) {
             console.error('❌ Chatbot elements not found');
             return false;
         }
         
-        updateChatbotStatus();
+        const newChatbotButton = chatbotButton.cloneNode(true);
+        chatbotButton.parentNode.replaceChild(newChatbotButton, chatbotButton);
         
-        // Prevent body scroll when chatbot body is scrolled
-        if (chatbotBody) {
-            chatbotBody.addEventListener('touchmove', function(e) {
-                e.stopPropagation();
-            }, { passive: true });
-        }
-        
-        const newChatbotButtonContainer = chatbotButtonContainer.cloneNode(true);
-        chatbotButtonContainer.parentNode.replaceChild(newChatbotButtonContainer, chatbotButtonContainer);
-        
-        const chatbotButton = newChatbotButtonContainer.querySelector('.chatbot-button');
-        
-        chatbotButton.addEventListener('click', function(e) {
+        newChatbotButton.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            toggleChatbot();
+            chatbotWindow.classList.toggle('active');
+            if (chatbotWindow.classList.contains('active') && chatbotBody && chatbotBody.children.length === 0) {
+                addWelcomeMessage();
+            }
         });
         
-        // Update close button reference after cloning
-        const newChatbotClose = chatbotWindow.querySelector('.chatbot-close');
-        if (newChatbotClose) {
-            newChatbotClose.addEventListener('click', function(e) {
+        if (chatbotClose) {
+            chatbotClose.addEventListener('click', function(e) {
                 e.preventDefault();
-                closeChatbot();
+                chatbotWindow.classList.remove('active');
             });
         }
         
-        const newChatbotSend = chatbotWindow.querySelector('.chatbot-send');
-        if (newChatbotSend) {
-            newChatbotSend.addEventListener('click', sendMessage);
+        if (chatbotSend) {
+            chatbotSend.addEventListener('click', sendMessage);
         }
         
-        const newChatbotInput = chatbotWindow.querySelector('.chatbot-input');
-        if (newChatbotInput) {
-            newChatbotInput.addEventListener('keypress', (e) => {
+        if (chatbotInput) {
+            chatbotInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
                     sendMessage();
@@ -778,74 +826,9 @@ Your role:
         return true;
     }
     
-    function toggleChatbot() {
-        const chatbotWindow = document.querySelector('.chatbot-window');
-        const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
-        const chatbotBody = document.querySelector('.chatbot-body');
-        
-        if (!chatbotWindow || !chatbotButtonContainer) return;
-        
-        const isActive = chatbotWindow.classList.contains('active');
-        
-        if (isActive) {
-            closeChatbot();
-        } else {
-            openChatbot();
-        }
-    }
-    
-    function openChatbot() {
-        const chatbotWindow = document.querySelector('.chatbot-window');
-        const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
-        const chatbotBody = document.querySelector('.chatbot-body');
-        
-        // Close mobile menu if open
-        if (mobileMenu && mobileMenu.classList.contains('active')) {
-            closeMobileMenu();
-        }
-        
-        chatbotWindow.classList.add('active');
-        chatbotButtonContainer.classList.add('chatbot-active');
-        
-        if (chatbotBody && chatbotBody.children.length === 0) {
-            addWelcomeMessage();
-        }
-        
-        console.log('✅ Chatbot opened');
-    }
-    
-    function closeChatbot() {
-        const chatbotWindow = document.querySelector('.chatbot-window');
-        const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
-        
-        chatbotWindow.classList.remove('active');
-        chatbotButtonContainer.classList.remove('chatbot-active');
-        
-        console.log('✅ Chatbot closed');
-    }
-    
-    function updateChatbotStatus() {
-        const statusElement = document.querySelector('.chatbot-status');
-        const statusDot = document.querySelector('.chatbot-status-dot');
-        
-        if (statusElement && statusDot) {
-            if (isOnline) {
-                statusDot.classList.add('online');
-                statusElement.innerHTML = `<span class="chatbot-status-dot online"></span>Online`;
-            } else {
-                statusDot.classList.remove('online');
-                statusElement.innerHTML = `<span class="chatbot-status-dot"></span>Offline`;
-            }
-        }
-    }
-    
     function addWelcomeMessage() {
         const chatbotBody = document.querySelector('.chatbot-body');
         if (!chatbotBody) return;
-        
-        const statusMessage = isOnline ? 
-            'I\'m online and ready to help!' : 
-            'I\'m currently offline. Please check back later or contact support.';
         
         chatbotBody.innerHTML = `
             <div class="chat-message assistant-message">
@@ -855,15 +838,14 @@ Your role:
                     </div>
                     <div class="message-text">
                         <strong>Welcome to Vault Phoenix!</strong><br><br>
-                        ${statusMessage}<br><br>
-                        ${isOnline ? `Ask me about:
+                        I'm your AI assistant. Ask me about:
                         <ul style="margin: 10px 0; padding-left: 20px;">
                             <li>$Ember token presale & pricing</li>
                             <li>GPS & Beacon technology</li>
                             <li>White-label app deployment</li>
                             <li>Platform opportunities</li>
                         </ul>
-                        What would you like to know?` : 'Thank you for your interest in Vault Phoenix!'}
+                        What would you like to know?
                     </div>
                 </div>
             </div>
@@ -878,13 +860,6 @@ Your role:
         
         const message = chatbotInput.value.trim();
         if (!message || isTyping) return;
-        
-        if (!isOnline) {
-            addChatMessage('user', message);
-            addChatMessage('assistant', '⚠️ I\'m currently offline. Please contact support for assistance.');
-            chatbotInput.value = '';
-            return;
-        }
         
         if (CLAUDE_API_KEY === 'YOUR_CLAUDE_API_KEY_HERE') {
             addChatMessage('user', message);
@@ -1034,24 +1009,28 @@ Your role:
     // ============================================
     
     function init() {
-        console.log('🔥 Vault Phoenix Shared Scripts v6.1 Initializing...');
+        console.log('🔥 Vault Phoenix Shared Scripts Initializing...');
         
         handleNavbarScroll();
         initializeCookieConsent();
         initializePrivacyPolicyModal();
         initializeScrollProgress();
         
-        generateNavigation();
+        // Generate dynamic navigation FIRST
+        generateDynamicNavigation();
         
+        // Then attach smooth scroll listeners
         setTimeout(() => {
             attachSmoothScrollListeners();
         }, 100);
         
+        // Initialize chatbot
         let chatbotInitialized = initializeChatbot();
         if (!chatbotInitialized) {
             setTimeout(() => initializeChatbot(), 100);
         }
         
+        // Initialize countdown
         let countdownInitialized = initializeUniversalCountdown();
         if (!countdownInitialized) {
             setTimeout(() => initializeUniversalCountdown(), 100);
@@ -1060,12 +1039,7 @@ Your role:
         document.body.classList.add('loaded');
         window.sharedScriptReady = true;
         
-        console.log('✅ Vault Phoenix Shared Scripts v6.1 Initialization Complete');
-        console.log('💡 Navigation links target these section IDs:');
-        MAIN_PAGE_NAV_LINKS.forEach(link => {
-            const id = link.href.replace('#', '');
-            console.log(`   - ${id}`);
-        });
+        console.log('✅ Vault Phoenix Shared Scripts Initialization Complete');
     }
 
     if (document.readyState === 'loading') {
