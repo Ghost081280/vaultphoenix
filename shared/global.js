@@ -1,40 +1,64 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.7 HYBRID AI
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.8 DUAL STATUS
 // ============================================
-// UPDATES: Hybrid AI integration with local + Claude fallback
+// UPDATES: Dual status indicators (Online/Local), immediate load, hardcoded footer links
 // ============================================
 
 (function() {
 'use strict';
 
 // ============================================
-// HYBRID AI WRAPPER - INLINE VERSION
+// SERVICE STATUS TRACKING
+// ============================================
+let serviceStatus = {
+    local: false,  // Default offline until backend confirms
+    online: false  // Default offline until backend confirms
+};
+
+// ============================================
+// HYBRID AI WRAPPER - INLINE VERSION WITH STATUS TRACKING
 // ============================================
 async function askPhoenixAI(question) {
+  let localAvailable = false;
+  let onlineAvailable = false;
+  
   try {
     // Try the local offline AI first (Muhammad's server)
     const offlineResponse = await fetch('/api/ask_offline', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question })
+      body: JSON.stringify({ question }),
+      signal: AbortSignal.timeout(5000) // 5 second timeout
     });
 
     if (offlineResponse.ok) {
       const offlineData = await offlineResponse.json();
       if (offlineData && offlineData.answer) {
+        localAvailable = true;
+        serviceStatus.local = true;
+        updateChatbotStatus();
         return offlineData.answer;
       }
     }
+  } catch (localErr) {
+    console.log('Local AI unavailable:', localErr.message);
+    serviceStatus.local = false;
+  }
 
+  try {
     // If offline AI can't answer, fall back to Claude
     const claudeResponse = await fetch('/api/claude', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question })
+      body: JSON.stringify({ question }),
+      signal: AbortSignal.timeout(10000) // 10 second timeout
     });
 
     if (claudeResponse.ok) {
       const claudeData = await claudeResponse.json();
+      onlineAvailable = true;
+      serviceStatus.online = true;
+      updateChatbotStatus();
 
       // Send Claude's answer back to the server to learn for next time
       try {
@@ -52,12 +76,19 @@ async function askPhoenixAI(question) {
 
       return claudeData.answer;
     }
-
-    throw new Error('Both AI services unavailable');
-  } catch (err) {
-    console.error('Phoenix AI Error:', err);
-    return "Sorry, I'm having trouble reaching my brain right now. Please try again in a moment.";
+  } catch (onlineErr) {
+    console.log('Online AI unavailable:', onlineErr.message);
+    serviceStatus.online = false;
   }
+
+  updateChatbotStatus();
+  
+  // Both services failed
+  if (!localAvailable && !onlineAvailable) {
+    return "I apologize, but both my AI services are currently offline. Please try again in a moment, or contact support@vaultphoenix.com for assistance.";
+  }
+  
+  return "Sorry, I'm having trouble processing that request right now. Please try again.";
 }
 
 // ============================================
@@ -185,13 +216,23 @@ const MAIN_PAGE_NAV_LINKS = [
     { title: 'Pricing', href: '#developer-sdk-pricing' }
 ];
 
+// FIX: HARDCODED FOOTER QUICK LINKS - Actual page navigation
+const FOOTER_QUICK_LINKS = [
+    { title: 'Home', href: 'main.html' },
+    { title: 'About Us', href: 'about.html' },
+    { title: 'Team', href: 'team.html' },
+    { title: 'Campaigns', href: 'campaigns.html' },
+    { title: 'SDK', href: 'sdk.html' },
+    { title: '$Ember Token', href: 'ember-presale.html' }
+];
+
 function generateNavigation() {
     updateDesktopNav(MAIN_PAGE_NAV_LINKS);
     updateMobileNav(MAIN_PAGE_NAV_LINKS);
     
-    // FIX: Delay footer navigation to ensure DOM is fully loaded
+    // FIX: Use FOOTER_QUICK_LINKS instead of MAIN_PAGE_NAV_LINKS
     setTimeout(() => {
-        updateFooterNav(MAIN_PAGE_NAV_LINKS);
+        updateFooterNav(FOOTER_QUICK_LINKS);
     }, 100);
     
     // FIX: Retry footer navigation if it failed the first time
@@ -199,7 +240,7 @@ function generateNavigation() {
         const footerLinks = document.querySelector('.footer-column .footer-links');
         if (footerLinks && footerLinks.children.length === 0) {
             console.log('🔄 Retrying footer navigation population...');
-            updateFooterNav(MAIN_PAGE_NAV_LINKS);
+            updateFooterNav(FOOTER_QUICK_LINKS);
         }
     }, 500);
 }
@@ -255,8 +296,8 @@ function updateMobileNav(navLinks) {
     mobileNav.appendChild(li);
 }
 
-function updateFooterNav(navLinks) {
-    console.log('🔧 Attempting to update footer navigation...');
+function updateFooterNav(footerLinks) {
+    console.log('🔧 Attempting to update footer navigation with HARDCODED links...');
     
     const footerColumns = document.querySelectorAll('.footer-column');
     console.log('📋 Found footer columns:', footerColumns.length);
@@ -287,28 +328,19 @@ function updateFooterNav(navLinks) {
     console.log('🔧 Clearing existing footer links...');
     linksContainer.innerHTML = '';
     
-    console.log('🔧 Adding navigation links to footer...');
-    navLinks.forEach((link, index) => {
+    console.log('🔧 Adding HARDCODED page links to footer...');
+    footerLinks.forEach((link, index) => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = link.href;
         a.textContent = link.title;
-        a.addEventListener('click', handleSmoothScroll);
+        // No smooth scroll for page navigation links
         li.appendChild(a);
         linksContainer.appendChild(li);
-        console.log(`✅ Added link ${index + 1}: ${link.title}`);
+        console.log(`✅ Added HARDCODED link ${index + 1}: ${link.title} → ${link.href}`);
     });
     
-    const emberLi = document.createElement('li');
-    const emberA = document.createElement('a');
-    emberA.href = 'ember-presale.html';
-    emberA.className = 'footer-ember-link';
-    emberA.textContent = '$Ember Token';
-    emberLi.appendChild(emberA);
-    linksContainer.appendChild(emberLi);
-    console.log('✅ Added $Ember Token link');
-    
-    console.log('✅ Footer navigation updated successfully!');
+    console.log('✅ Footer Quick Links updated successfully with HARDCODED page links!');
 }
 
 // ============================================
@@ -737,12 +769,11 @@ document.querySelectorAll('.scroll-reveal, .fade-in-up, .slide-in-left, .slide-i
 });
 
 // ============================================
-// PHOENIX AI CHATBOT SYSTEM - HYBRID VERSION
+// PHOENIX AI CHATBOT SYSTEM - DUAL STATUS VERSION
 // ============================================
 
 let conversationHistory = [];
 let isTyping = false;
-let isOnline = true;
 let phoenixSiteData = null;
 let hasUserScrolled = false;
 
@@ -820,9 +851,10 @@ function initializeChatbot() {
         return false;
     }
     
-    // FIX: Ensure chatbot is visible immediately
+    // FIX: Ensure chatbot is visible IMMEDIATELY - no delays
     chatbotButtonContainer.style.opacity = '1';
     chatbotButtonContainer.style.visibility = 'visible';
+    chatbotButtonContainer.style.display = 'block';
     
     updateChatbotStatus();
     initializeChatbotTooltip();
@@ -948,9 +980,16 @@ function updateChatbotStatus() {
     const statusDot = document.querySelector('.chatbot-status-dot');
     
     if (statusElement && statusDot) {
-        // Hybrid system is always "online" as it auto-falls back
-        statusDot.classList.add('online');
-        statusElement.innerHTML = '<span class="chatbot-status-dot online"></span>Online';
+        // Show dual status with separate indicators
+        const onlineStatus = serviceStatus.online ? 
+            '<span class="chatbot-status-dot online"></span>Online' : 
+            '<span class="chatbot-status-dot"></span>Offline';
+        
+        const localStatus = serviceStatus.local ? 
+            '<span class="chatbot-status-dot online"></span>Local' : 
+            '<span class="chatbot-status-dot"></span>Offline';
+        
+        statusElement.innerHTML = `${onlineStatus} | ${localStatus}`;
     }
 }
 
@@ -960,15 +999,19 @@ function addWelcomeMessage() {
     
     const assistantName = phoenixAI.assistant_name || 'Phoenix AI';
     
-    let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>I\'m online and ready to help with our hybrid AI system!';
-    
-    if (phoenixAI.focus_areas) {
-        welcomeContent += '<br><br>Ask me about:<ul style="margin: 10px 0; padding-left: 20px;">';
-        phoenixAI.focus_areas.forEach(area => {
-            welcomeContent += '<li>' + area + '</li>';
-        });
-        welcomeContent += '</ul>';
+    // Determine service status message
+    let statusMessage = '';
+    if (!serviceStatus.online && !serviceStatus.local) {
+        statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both AI services are currently offline. Please try again later or contact support.</em>';
+    } else if (!serviceStatus.online && serviceStatus.local) {
+        statusMessage = '<br><br><em style="color: #f59e0b;">⚠️ Only local AI is available right now. Our cloud service is temporarily offline.</em>';
+    } else if (serviceStatus.online && !serviceStatus.local) {
+        statusMessage = '<br><br><em style="color: #f59e0b;">⚠️ Only cloud AI is available right now. Our local service is temporarily offline.</em>';
     }
+    
+    let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>Ask me anything about our platform, $Ember tokens, campaigns, or SDK integration!';
+    
+    welcomeContent += statusMessage;
     
     chatbotBody.innerHTML = `
         <div class="chat-message assistant-message">
@@ -983,8 +1026,7 @@ function addWelcomeMessage() {
 }
 
 // ============================================
-// HYBRID AI MESSAGE HANDLER
-// Uses inline askPhoenixAI function
+// DUAL STATUS AI MESSAGE HANDLER
 // ============================================
 
 async function sendMessage() {
@@ -1007,7 +1049,7 @@ async function sendMessage() {
     showTypingIndicator();
     
     try {
-        // HYBRID AI: Use the inline wrapper that tries local first, then Claude
+        // Use the dual-status AI wrapper
         const reply = await askPhoenixAI(message);
         
         removeTypingIndicator();
@@ -1021,7 +1063,7 @@ async function sendMessage() {
         addChatMessage('assistant', reply);
         
     } catch (error) {
-        console.error('Hybrid AI Error:', error);
+        console.error('AI Error:', error);
         removeTypingIndicator();
         addChatMessage('assistant', '❌ Sorry, I encountered an error. Please try again.');
     } finally {
@@ -1096,11 +1138,18 @@ window.addEventListener('resize', function() {
 });
 
 // ============================================
-// INITIALIZATION
+// INITIALIZATION - IMMEDIATE CHATBOT LOAD
 // ============================================
 
 async function init() {
-    console.log('🔥 Vault Phoenix v6.7 HYBRID AI Initializing...');
+    console.log('🔥 Vault Phoenix v6.8 DUAL STATUS Initializing...');
+    
+    // FIX: Initialize chatbot FIRST and IMMEDIATELY - no delays
+    let chatbotInitialized = initializeChatbot();
+    if (!chatbotInitialized) {
+        console.warn('⚠️ Chatbot failed to initialize, retrying...');
+        setTimeout(() => initializeChatbot(), 10);
+    }
     
     await loadPhoenixAITraining();
     
@@ -1109,13 +1158,7 @@ async function init() {
     initializePrivacyPolicyModal();
     initializeScrollProgress();
     
-    // FIX: Initialize chatbot IMMEDIATELY before navigation
-    let chatbotInitialized = initializeChatbot();
-    if (!chatbotInitialized) {
-        setTimeout(() => initializeChatbot(), 50);
-    }
-    
-    // Generate navigation after a short delay to ensure DOM is ready
+    // Generate navigation with HARDCODED footer links
     setTimeout(() => {
         generateNavigation();
     }, 50);
@@ -1134,8 +1177,9 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v6.7 HYBRID AI Complete');
-    console.log('🤖 Hybrid AI Mode: Local AI → Claude Fallback → Learning System');
+    console.log('✅ Vault Phoenix v6.8 DUAL STATUS Complete');
+    console.log('🤖 AI Mode: Dual Status (Online | Local) with separate indicators');
+    console.log('📋 Footer: HARDCODED Quick Links implemented');
 }
 
 if (document.readyState === 'loading') {
