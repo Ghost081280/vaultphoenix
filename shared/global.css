@@ -1,8 +1,8 @@
 /* ===================================
-   VAULT PHOENIX - SHARED CSS v7.6 FINAL - NO ZOOM FIX
+   VAULT PHOENIX - SHARED CSS v8.0 FINAL - ALL SCENARIOS PERFECTED
    Core styles used across ALL pages
-   Mobile & Desktop Optimized
-   FIXES: iPhone landscape keyboard shift (no zoom), desktop resize perfected
+   Desktop (all sizes) + Mobile (portrait + landscape) Optimized
+   FIXES: Desktop large screen containment, iPhone landscape NO ZOOM, streaming text stability
    =================================== */
 
 /* ===================================
@@ -121,7 +121,7 @@ body {
     min-height: -webkit-fill-available;
 }
 
-/* Scrollbars - Clean approach for both axes */
+/* Scrollbars */
 * {
     scrollbar-width: thin;
     scrollbar-color: #d73327 transparent;
@@ -145,7 +145,7 @@ body {
     background: linear-gradient(to bottom, #f0a500, #d73327, #c62828);
 }
 
-/* Prevent zoom on mobile inputs - CRITICAL FOR LANDSCAPE */
+/* CRITICAL: Prevent zoom on mobile inputs */
 input, textarea, select {
     font-size: 16px !important;
 }
@@ -222,7 +222,6 @@ button {
     font-weight: 700;
 }
 
-/* Skip to Content Link */
 .skip-to-content {
     position: absolute;
     top: -40px;
@@ -701,8 +700,9 @@ button {
 }
 
 /* ===================================
-   CHATBOT SYSTEM - FINAL NO-ZOOM FIX
-   Desktop containment + Mobile shift behavior
+   CHATBOT SYSTEM - ALL SCENARIOS PERFECTED
+   Desktop (all sizes) + Mobile (portrait + landscape)
+   NO ZOOM, NO SHAKE, PERFECT CONTAINMENT
    =================================== */
 
 .chatbot-button-container {
@@ -832,12 +832,13 @@ button {
     right: calc(100% + 15px) !important;
 }
 
-/* DESKTOP: Strict containment with proper breakpoints */
+/* DESKTOP: Perfect containment at ALL sizes */
 .chatbot-window {
     position: fixed;
     bottom: 130px;
     right: 30px;
     width: 480px;
+    max-width: calc(100vw - 140px); /* Account for button + margins */
     height: calc(100vh - var(--navbar-height) - 180px);
     max-height: 700px;
     background: linear-gradient(135deg, 
@@ -853,17 +854,14 @@ button {
     transform: translateY(20px) scale(0.95);
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
+    /* CRITICAL: Prevent shake during streaming */
+    will-change: opacity;
 }
 
 .chatbot-window.active {
     opacity: 1;
     transform: translateY(0) scale(1);
     pointer-events: all;
-}
-
-/* Keyboard focus shift class - JavaScript adds this */
-.chatbot-window.keyboard-visible {
-    transition: top 0.3s ease, opacity 0.3s ease;
 }
 
 .chatbot-header {
@@ -976,6 +974,8 @@ button {
     min-height: 200px;
     position: relative;
     isolation: isolate;
+    /* CRITICAL: Prevent shake during streaming */
+    width: 100%;
 }
 
 .chatbot-body::-webkit-scrollbar {
@@ -1008,6 +1008,9 @@ button {
     margin-bottom: 0.75rem;
     animation: slideIn 0.3s ease;
     width: 100%;
+    /* CRITICAL: Prevent shake */
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .user-message {
@@ -1053,6 +1056,8 @@ button {
     color: rgba(255, 255, 255, 0.95);
     word-wrap: break-word;
     overflow-wrap: break-word;
+    /* CRITICAL: Prevent shake during streaming */
+    min-width: 0;
 }
 
 .user-message .message-text {
@@ -1612,17 +1617,26 @@ button {
 }
 
 /* ===================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - ALL SCENARIOS
    =================================== */
 
-/* Desktop - Better breakpoint management */
-@media (min-width: 1400px) {
+/* Very Large Desktop - Max size with perfect containment */
+@media (min-width: 1920px) {
     .chatbot-window {
         width: 480px;
         right: 30px;
     }
 }
 
+/* Large Desktop */
+@media (min-width: 1400px) and (max-width: 1919px) {
+    .chatbot-window {
+        width: 480px;
+        right: 30px;
+    }
+}
+
+/* Medium Desktop */
 @media (min-width: 1200px) and (max-width: 1399px) {
     .chatbot-window {
         width: 450px;
@@ -1630,6 +1644,7 @@ button {
     }
 }
 
+/* Small Desktop */
 @media (min-width: 1000px) and (max-width: 1199px) {
     .chatbot-window {
         width: 420px;
@@ -1638,6 +1653,7 @@ button {
     }
 }
 
+/* Compact Desktop */
 @media (min-width: 900px) and (max-width: 999px) {
     .chatbot-window {
         width: 400px;
@@ -1647,6 +1663,7 @@ button {
     }
 }
 
+/* Mini Desktop */
 @media (min-width: 769px) and (max-width: 899px) {
     .chatbot-window {
         width: 380px;
@@ -1684,8 +1701,8 @@ button {
     }
 }
 
-/* Mobile Portrait */
-@media (max-width: 768px) {
+/* Mobile Portrait - NO ZOOM MODE */
+@media (max-width: 768px) and (orientation: portrait) {
     :root {
         --navbar-height: 70px;
         --container-padding: 1rem;
@@ -1716,7 +1733,6 @@ button {
     .chatbot-button {
         width: 75px;
         height: 75px;
-        -webkit-tap-highlight-color: transparent;
     }
     
     .chatbot-icon {
@@ -1729,7 +1745,7 @@ button {
         height: 110px;
     }
     
-    /* Mobile portrait chatbot - NO ZOOM, shift up only */
+    /* CRITICAL: NO ZOOM in portrait */
     .chatbot-window {
         position: fixed;
         top: calc(var(--navbar-height) + 15px);
@@ -1740,12 +1756,14 @@ button {
         max-width: none;
         height: auto;
         max-height: none;
-        transform: none;
+        transform: none !important;
         transition: top 0.3s ease, opacity 0.3s ease;
+        will-change: top, opacity;
     }
     
     .chatbot-window.active {
-        transform: none;
+        opacity: 1;
+        transform: none !important;
     }
     
     /* Keyboard visible - shift up */
@@ -1791,10 +1809,6 @@ button {
     .chatbot-input {
         font-size: 16px;
         padding: 0.75rem;
-    }
-    
-    .chatbot-input::placeholder {
-        font-size: 14px;
     }
     
     .chatbot-send {
@@ -1890,15 +1904,12 @@ button {
     }
 }
 
-/* ===================================
-   IPHONE LANDSCAPE - SHIFT UP, NO ZOOM! 🎯
-   Same keyboard behavior as portrait
-   =================================== */
+/* iPhone Landscape - NO ZOOM, LEFT SIDE, SHIFT UP */
 @media (max-width: 926px) and (max-height: 428px) and (orientation: landscape),
        (max-width: 844px) and (max-height: 390px) and (orientation: landscape),
        (max-width: 768px) and (max-height: 500px) and (orientation: landscape) {
     
-    /* Chatbot Window - LEFT side, NO ZOOM, shift up on keyboard */
+    /* CRITICAL: NO ZOOM in landscape */
     .chatbot-window {
         position: fixed !important;
         top: calc(var(--navbar-height) + 8px) !important;
@@ -1911,6 +1922,7 @@ button {
         max-height: calc(100vh - var(--navbar-height) - 16px) !important;
         transform: none !important;
         transition: top 0.3s ease, opacity 0.3s ease !important;
+        will-change: top, opacity !important;
     }
     
     .chatbot-window.active {
@@ -2067,8 +2079,8 @@ button {
     }
 }
 
-/* Small Mobile */
-@media (max-width: 480px) {
+/* Small Mobile Portrait */
+@media (max-width: 480px) and (orientation: portrait) {
     html {
         font-size: 14px;
     }
@@ -2106,8 +2118,8 @@ button {
     }
 }
 
-/* Very Small Mobile */
-@media (max-width: 360px) {
+/* Very Small Mobile Portrait */
+@media (max-width: 360px) and (orientation: portrait) {
     :root {
         --navbar-height: 60px;
         --container-padding: 0.75rem;
@@ -2129,6 +2141,6 @@ button {
 }
 
 /* ===================================
-   END OF VAULT PHOENIX - GLOBAL.CSS v7.6
-   FINAL NO-ZOOM FIX - KEYBOARD SHIFT BEHAVIOR! 🎯
+   END OF VAULT PHOENIX - GLOBAL.CSS v8.0
+   ALL SCENARIOS PERFECTED! 🎯
    =================================== */
