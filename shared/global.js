@@ -667,8 +667,15 @@ function showChatbotButton() {
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     if (chatbotButtonContainer) {
         chatbotButtonContainer.classList.add('ready');
+        // Force visibility for mobile
+        chatbotButtonContainer.style.display = 'block';
         // Re-initialize tooltip after showing button
-        initializeChatbotTooltip();
+        setTimeout(() => {
+            initializeChatbotTooltip();
+        }, 100);
+        console.log('✅ Chatbot button shown');
+    } else {
+        console.warn('⚠️ Chatbot button container not found');
     }
 }
 
@@ -1131,12 +1138,21 @@ async function init() {
     initializeCookieConsent();
     initializePrivacyPolicyModal();
     
-    // Initialize chatbot structure (but don't show button yet)
+    // Initialize chatbot structure (but don't show button yet - privacy first)
     let chatbotInitialized = initializeChatbot();
     if (!chatbotInitialized) {
         console.warn('⚠️ Chatbot failed, retrying...');
         setTimeout(() => initializeChatbot(), 10);
     }
+    
+    // Fallback: If no privacy popup needed, ensure button shows after short delay
+    setTimeout(() => {
+        const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
+        if (chatbotButtonContainer && !chatbotButtonContainer.classList.contains('ready')) {
+            console.log('🔄 No privacy popup - showing chatbot button');
+            showChatbotButton();
+        }
+    }, 1000);
     
     // Unified navigation
     setTimeout(() => {
