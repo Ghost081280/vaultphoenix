@@ -1,14 +1,95 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.5 FIXED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.8 DUAL STATUS
 // ============================================
-// Mobile & Desktop Optimized - Hardcoded Navigation
-// Phoenix AI Integration with Dynamic Site Scanning
-// FIXED: Removed ES6 imports, restored all functionality
-// Updated: Dynamic JSON loading, all features working
+// UPDATES: Dual status indicators (Online/Local), immediate load, hardcoded footer links
 // ============================================
 
 (function() {
 'use strict';
+
+// ============================================
+// SERVICE STATUS TRACKING
+// ============================================
+let serviceStatus = {
+    local: false,  // Default offline until backend confirms
+    online: false  // Default offline until backend confirms
+};
+
+// ============================================
+// HYBRID AI WRAPPER - INLINE VERSION WITH STATUS TRACKING
+// ============================================
+async function askPhoenixAI(question) {
+  let localAvailable = false;
+  let onlineAvailable = false;
+  
+  try {
+    // Try the local offline AI first (Muhammad's server)
+    const offlineResponse = await fetch('/api/ask_offline', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question }),
+      signal: AbortSignal.timeout(5000) // 5 second timeout
+    });
+
+    if (offlineResponse.ok) {
+      const offlineData = await offlineResponse.json();
+      if (offlineData && offlineData.answer) {
+        localAvailable = true;
+        serviceStatus.local = true;
+        updateChatbotStatus();
+        return offlineData.answer;
+      }
+    }
+  } catch (localErr) {
+    console.log('Local AI unavailable:', localErr.message);
+    serviceStatus.local = false;
+  }
+
+  try {
+    // If offline AI can't answer, fall back to Claude
+    const claudeResponse = await fetch('/api/claude', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question }),
+      signal: AbortSignal.timeout(10000) // 10 second timeout
+    });
+
+    if (claudeResponse.ok) {
+      const claudeData = await claudeResponse.json();
+      onlineAvailable = true;
+      serviceStatus.online = true;
+      updateChatbotStatus();
+
+      // Send Claude's answer back to the server to learn for next time
+      try {
+        await fetch('/api/save_learning', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            question,
+            answer: claudeData.answer
+          })
+        });
+      } catch (saveErr) {
+        console.warn('Could not save learning data:', saveErr);
+      }
+
+      return claudeData.answer;
+    }
+  } catch (onlineErr) {
+    console.log('Online AI unavailable:', onlineErr.message);
+    serviceStatus.online = false;
+  }
+
+  updateChatbotStatus();
+  
+  // Both services failed
+  if (!localAvailable && !onlineAvailable) {
+    return "I apologize, but both my AI services are currently offline. Please try again in a moment, or contact support@vaultphoenix.com for assistance.";
+  }
+  
+  return "Sorry, I'm having trouble processing that request right now. Please try again.";
+}
 
 // ============================================
 // PHOENIX AI CONFIGURATION - DYNAMIC LOADING
@@ -19,7 +100,7 @@ let phoenixAI = {
     version: "1.0.0",
     assistant_name: "Phoenix AI",
     description: "AI assistant for Vault Phoenix's $Ember Token presale and AR crypto gaming platform",
-    network: "Polygon",
+    network: "Solana",
     focus_areas: [
         "$Ember token presale & pricing",
         "GPS & Beacon technology",
@@ -135,10 +216,33 @@ const MAIN_PAGE_NAV_LINKS = [
     { title: 'Pricing', href: '#developer-sdk-pricing' }
 ];
 
+// FIX: HARDCODED FOOTER QUICK LINKS - Actual page navigation
+const FOOTER_QUICK_LINKS = [
+    { title: 'Home', href: 'main.html' },
+    { title: 'About Us', href: 'about.html' },
+    { title: 'Team', href: 'team.html' },
+    { title: 'Campaigns', href: 'campaigns.html' },
+    { title: 'SDK', href: 'sdk.html' },
+    { title: '$Ember Token', href: 'ember-presale.html' }
+];
+
 function generateNavigation() {
     updateDesktopNav(MAIN_PAGE_NAV_LINKS);
     updateMobileNav(MAIN_PAGE_NAV_LINKS);
-    updateFooterNav(MAIN_PAGE_NAV_LINKS);
+    
+    // FIX: Use FOOTER_QUICK_LINKS instead of MAIN_PAGE_NAV_LINKS
+    setTimeout(() => {
+        updateFooterNav(FOOTER_QUICK_LINKS);
+    }, 100);
+    
+    // FIX: Retry footer navigation if it failed the first time
+    setTimeout(() => {
+        const footerLinks = document.querySelector('.footer-column .footer-links');
+        if (footerLinks && footerLinks.children.length === 0) {
+            console.log('🔄 Retrying footer navigation population...');
+            updateFooterNav(FOOTER_QUICK_LINKS);
+        }
+    }, 500);
 }
 
 function updateDesktopNav(navLinks) {
@@ -192,41 +296,51 @@ function updateMobileNav(navLinks) {
     mobileNav.appendChild(li);
 }
 
-function updateFooterNav(navLinks) {
+function updateFooterNav(footerLinks) {
+    console.log('🔧 Attempting to update footer navigation with HARDCODED links...');
+    
     const footerColumns = document.querySelectorAll('.footer-column');
+    console.log('📋 Found footer columns:', footerColumns.length);
+    
     let quickLinksColumn = null;
     
-    footerColumns.forEach(col => {
+    footerColumns.forEach((col, index) => {
         const heading = col.querySelector('.footer-heading');
+        console.log(`Column ${index}: Heading = "${heading ? heading.textContent.trim() : 'none'}"`);
+        
         if (heading && heading.textContent.trim() === 'Quick Links') {
             quickLinksColumn = col;
+            console.log('✅ Found Quick Links column!');
         }
     });
     
-    if (!quickLinksColumn) return;
+    if (!quickLinksColumn) {
+        console.warn('⚠️ Quick Links column not found in footer');
+        return;
+    }
     
     const linksContainer = quickLinksColumn.querySelector('.footer-links');
-    if (!linksContainer) return;
+    if (!linksContainer) {
+        console.warn('⚠️ Footer links container not found');
+        return;
+    }
     
+    console.log('🔧 Clearing existing footer links...');
     linksContainer.innerHTML = '';
     
-    navLinks.forEach(link => {
+    console.log('🔧 Adding HARDCODED page links to footer...');
+    footerLinks.forEach((link, index) => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = link.href;
         a.textContent = link.title;
-        a.addEventListener('click', handleSmoothScroll);
+        // No smooth scroll for page navigation links
         li.appendChild(a);
         linksContainer.appendChild(li);
+        console.log(`✅ Added HARDCODED link ${index + 1}: ${link.title} → ${link.href}`);
     });
     
-    const emberLi = document.createElement('li');
-    const emberA = document.createElement('a');
-    emberA.href = 'ember-presale.html';
-    emberA.className = 'footer-ember-link';
-    emberA.textContent = '$Ember Token';
-    emberLi.appendChild(emberA);
-    linksContainer.appendChild(emberLi);
+    console.log('✅ Footer Quick Links updated successfully with HARDCODED page links!');
 }
 
 // ============================================
@@ -655,17 +769,13 @@ document.querySelectorAll('.scroll-reveal, .fade-in-up, .slide-in-left, .slide-i
 });
 
 // ============================================
-// PHOENIX AI CHATBOT SYSTEM
+// PHOENIX AI CHATBOT SYSTEM - DUAL STATUS VERSION
 // ============================================
-
-const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE';
-const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
-const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 
 let conversationHistory = [];
 let isTyping = false;
-let isOnline = false;
 let phoenixSiteData = null;
+let hasUserScrolled = false;
 
 function getEnhancedSystemPrompt() {
     let basePrompt = phoenixAI.description || 'You are Phoenix, the AI assistant for Vault Phoenix.';
@@ -692,15 +802,62 @@ function getEnhancedSystemPrompt() {
     return basePrompt;
 }
 
+// FIX: Tooltip behavior - show on load, hide on scroll, return on hover
+function initializeChatbotTooltip() {
+    const tooltip = document.querySelector('.chatbot-tooltip');
+    const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
+    
+    if (!tooltip || !chatbotButtonContainer) return;
+    
+    // Show tooltip immediately on page load
+    tooltip.style.opacity = '1';
+    tooltip.style.right = 'calc(100% + 20px)';
+    
+    // Hide tooltip when user scrolls
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (!hasUserScrolled) {
+            hasUserScrolled = true;
+            tooltip.style.opacity = '0';
+            tooltip.style.right = 'calc(100% + 15px)';
+        }
+        
+        // Clear any existing timeout
+        clearTimeout(scrollTimeout);
+    }, { passive: true });
+    
+    // Show tooltip on hover after user has scrolled
+    chatbotButtonContainer.addEventListener('mouseenter', function() {
+        if (hasUserScrolled && !chatbotButtonContainer.classList.contains('chatbot-active')) {
+            tooltip.style.opacity = '1';
+            tooltip.style.right = 'calc(100% + 20px)';
+        }
+    });
+    
+    chatbotButtonContainer.addEventListener('mouseleave', function() {
+        if (hasUserScrolled) {
+            tooltip.style.opacity = '0';
+            tooltip.style.right = 'calc(100% + 15px)';
+        }
+    });
+}
+
 function initializeChatbot() {
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     const chatbotWindow = document.querySelector('.chatbot-window');
     
     if (!chatbotButtonContainer || !chatbotWindow) {
+        console.warn('⚠️ Chatbot elements not found');
         return false;
     }
     
+    // FIX: Ensure chatbot is visible IMMEDIATELY - no delays
+    chatbotButtonContainer.style.opacity = '1';
+    chatbotButtonContainer.style.visibility = 'visible';
+    chatbotButtonContainer.style.display = 'block';
+    
     updateChatbotStatus();
+    initializeChatbotTooltip();
     
     const chatbotBody = document.querySelector('.chatbot-body');
     if (chatbotBody) {
@@ -763,6 +920,10 @@ function initializeChatbot() {
         });
     }
     
+    // Re-initialize tooltip behavior after cloning
+    initializeChatbotTooltip();
+    
+    console.log('✅ Chatbot initialized successfully');
     return true;
 }
 
@@ -819,13 +980,16 @@ function updateChatbotStatus() {
     const statusDot = document.querySelector('.chatbot-status-dot');
     
     if (statusElement && statusDot) {
-        if (isOnline) {
-            statusDot.classList.add('online');
-            statusElement.innerHTML = '<span class="chatbot-status-dot online"></span>Online';
-        } else {
-            statusDot.classList.remove('online');
-            statusElement.innerHTML = '<span class="chatbot-status-dot"></span>Offline';
-        }
+        // Show dual status with separate indicators
+        const onlineStatus = serviceStatus.online ? 
+            '<span class="chatbot-status-dot online"></span>Online' : 
+            '<span class="chatbot-status-dot"></span>Offline';
+        
+        const localStatus = serviceStatus.local ? 
+            '<span class="chatbot-status-dot online"></span>Local' : 
+            '<span class="chatbot-status-dot"></span>Offline';
+        
+        statusElement.innerHTML = `${onlineStatus} | ${localStatus}`;
     }
 }
 
@@ -834,17 +998,20 @@ function addWelcomeMessage() {
     if (!chatbotBody) return;
     
     const assistantName = phoenixAI.assistant_name || 'Phoenix AI';
-    const statusMessage = isOnline ? "I'm online and ready to help!" : "I'm currently offline.";
     
-    let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>' + statusMessage;
-    
-    if (isOnline && phoenixAI.focus_areas) {
-        welcomeContent += '<br><br>Ask me about:<ul style="margin: 10px 0; padding-left: 20px;">';
-        phoenixAI.focus_areas.forEach(area => {
-            welcomeContent += '<li>' + area + '</li>';
-        });
-        welcomeContent += '</ul>';
+    // Determine service status message
+    let statusMessage = '';
+    if (!serviceStatus.online && !serviceStatus.local) {
+        statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both AI services are currently offline. Please try again later or contact support.</em>';
+    } else if (!serviceStatus.online && serviceStatus.local) {
+        statusMessage = '<br><br><em style="color: #f59e0b;">⚠️ Only local AI is available right now. Our cloud service is temporarily offline.</em>';
+    } else if (serviceStatus.online && !serviceStatus.local) {
+        statusMessage = '<br><br><em style="color: #f59e0b;">⚠️ Only cloud AI is available right now. Our local service is temporarily offline.</em>';
     }
+    
+    let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>Ask me anything about our platform, $Ember tokens, campaigns, or SDK integration!';
+    
+    welcomeContent += statusMessage;
     
     chatbotBody.innerHTML = `
         <div class="chat-message assistant-message">
@@ -858,6 +1025,10 @@ function addWelcomeMessage() {
     `;
 }
 
+// ============================================
+// DUAL STATUS AI MESSAGE HANDLER
+// ============================================
+
 async function sendMessage() {
     const chatbotInput = document.querySelector('.chatbot-input');
     const chatbotSend = document.querySelector('.chatbot-send');
@@ -866,22 +1037,6 @@ async function sendMessage() {
     
     const message = chatbotInput.value.trim();
     if (!message || isTyping) return;
-    
-    if (!isOnline) {
-        addChatMessage('user', message);
-        setTimeout(() => chatbotInput.blur(), 1000);
-        addChatMessage('assistant', '⚠️ I am currently offline.');
-        chatbotInput.value = '';
-        return;
-    }
-    
-    if (CLAUDE_API_KEY === 'YOUR_CLAUDE_API_KEY_HERE') {
-        addChatMessage('user', message);
-        setTimeout(() => chatbotInput.blur(), 1000);
-        addChatMessage('assistant', '⚠️ API key not configured.');
-        chatbotInput.value = '';
-        return;
-    }
     
     addChatMessage('user', message);
     chatbotInput.value = '';
@@ -894,41 +1049,23 @@ async function sendMessage() {
     showTypingIndicator();
     
     try {
-        const messages = [...conversationHistory, { role: 'user', content: message }];
+        // Use the dual-status AI wrapper
+        const reply = await askPhoenixAI(message);
         
-        const response = await fetch(CLAUDE_API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': CLAUDE_API_KEY,
-                'anthropic-version': '2023-06-01'
-            },
-            body: JSON.stringify({
-                model: CLAUDE_MODEL,
-                max_tokens: 1024,
-                system: getEnhancedSystemPrompt(),
-                messages: messages
-            })
-        });
-        
-        if (!response.ok) {
-            throw new Error('API Error: ' + response.status);
-        }
-        
-        const data = await response.json();
         removeTypingIndicator();
         
-        const assistantMessage = data.content[0].text;
+        // Store in conversation history
         conversationHistory.push(
             { role: 'user', content: message },
-            { role: 'assistant', content: assistantMessage }
+            { role: 'assistant', content: reply }
         );
         
-        addChatMessage('assistant', assistantMessage);
+        addChatMessage('assistant', reply);
         
     } catch (error) {
+        console.error('AI Error:', error);
         removeTypingIndicator();
-        addChatMessage('assistant', '❌ Sorry, I encountered an error.');
+        addChatMessage('assistant', '❌ Sorry, I encountered an error. Please try again.');
     } finally {
         chatbotInput.disabled = false;
         chatbotSend.disabled = false;
@@ -1001,11 +1138,18 @@ window.addEventListener('resize', function() {
 });
 
 // ============================================
-// INITIALIZATION
+// INITIALIZATION - IMMEDIATE CHATBOT LOAD
 // ============================================
 
 async function init() {
-    console.log('🔥 Vault Phoenix v6.5 Initializing...');
+    console.log('🔥 Vault Phoenix v6.8 DUAL STATUS Initializing...');
+    
+    // FIX: Initialize chatbot FIRST and IMMEDIATELY - no delays
+    let chatbotInitialized = initializeChatbot();
+    if (!chatbotInitialized) {
+        console.warn('⚠️ Chatbot failed to initialize, retrying...');
+        setTimeout(() => initializeChatbot(), 10);
+    }
     
     await loadPhoenixAITraining();
     
@@ -1014,18 +1158,16 @@ async function init() {
     initializePrivacyPolicyModal();
     initializeScrollProgress();
     
-    generateNavigation();
+    // Generate navigation with HARDCODED footer links
+    setTimeout(() => {
+        generateNavigation();
+    }, 50);
     
     phoenixSiteData = await siteScanner.initializeScan();
     
     setTimeout(() => {
         attachSmoothScrollListeners();
     }, 100);
-    
-    let chatbotInitialized = initializeChatbot();
-    if (!chatbotInitialized) {
-        setTimeout(() => initializeChatbot(), 100);
-    }
     
     let countdownInitialized = initializeUniversalCountdown();
     if (!countdownInitialized) {
@@ -1035,7 +1177,9 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v6.5 Complete');
+    console.log('✅ Vault Phoenix v6.8 DUAL STATUS Complete');
+    console.log('🤖 AI Mode: Dual Status (Online | Local) with separate indicators');
+    console.log('📋 Footer: HARDCODED Quick Links implemented');
 }
 
 if (document.readyState === 'loading') {
