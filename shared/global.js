@@ -232,6 +232,9 @@ function updateDesktopNav(navLinks) {
     desktopNav.innerHTML = '';
     
     navLinks.forEach(link => {
+        // Skip the $Ember Token from the unified list - we'll add it as a special button at the end
+        if (link.title === '$Ember Token') return;
+        
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = link.href;
@@ -243,7 +246,7 @@ function updateDesktopNav(navLinks) {
         desktopNav.appendChild(li);
     });
     
-    // Add $Ember Token button last
+    // Add $Ember Token button ONCE at the end
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.href = 'ember-presale.html';
@@ -260,6 +263,9 @@ function updateMobileNav(navLinks) {
     mobileNav.innerHTML = '';
     
     navLinks.forEach(link => {
+        // Skip the $Ember Token from the unified list - we'll add it as a special button at the end
+        if (link.title === '$Ember Token') return;
+        
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = link.href;
@@ -272,6 +278,7 @@ function updateMobileNav(navLinks) {
         mobileNav.appendChild(li);
     });
     
+    // Add $Ember Token button ONCE at the end
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.href = 'ember-presale.html';
@@ -784,41 +791,33 @@ function getEnhancedSystemPrompt() {
     return basePrompt;
 }
 
-// FIX: Tooltip that ACTUALLY hides on scroll
+// FIX: Tooltip behavior - shows on load, fades on scroll, returns on hover, shows after close
 function initializeChatbotTooltip() {
     const tooltip = document.querySelector('.chatbot-tooltip');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     
     if (!tooltip || !chatbotButtonContainer) return;
     
-    // Show tooltip initially
-    tooltip.classList.remove('hidden');
-    hasUserScrolled = false;
+    // Start with tooltip visible
+    tooltip.classList.remove('scrolled');
     
-    // Hide on ANY scroll event
-    const hideTooltipOnScroll = function() {
-        if (!hasUserScrolled) {
-            hasUserScrolled = true;
-            tooltip.classList.add('hidden');
-        }
+    // Fade on scroll
+    const handleScroll = function() {
+        tooltip.classList.add('scrolled');
     };
     
-    // Remove old listeners and add new one
-    window.removeEventListener('scroll', hideTooltipOnScroll);
-    window.addEventListener('scroll', hideTooltipOnScroll, { passive: true, once: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
-    // Show on hover after scroll
-    chatbotButtonContainer.addEventListener('mouseenter', function() {
-        if (hasUserScrolled && !chatbotButtonContainer.classList.contains('chatbot-active')) {
-            tooltip.classList.remove('hidden');
-        }
-    });
-    
-    chatbotButtonContainer.addEventListener('mouseleave', function() {
-        if (hasUserScrolled) {
-            tooltip.classList.add('hidden');
-        }
-    });
+    // Store reference so we can remove it later
+    chatbotButtonContainer._scrollHandler = handleScroll;
+}
+
+// Show tooltip after chatbot closes
+function showTooltipAfterClose() {
+    const tooltip = document.querySelector('.chatbot-tooltip');
+    if (tooltip) {
+        tooltip.classList.remove('scrolled');
+    }
 }
 
 function initializeChatbot() {
@@ -950,6 +949,9 @@ function closeChatbot() {
     
     chatbotWindow.classList.remove('active');
     chatbotButtonContainer.classList.remove('chatbot-active');
+    
+    // Show tooltip again after closing
+    showTooltipAfterClose();
     
     // NO page manipulation - stays exactly where it is
 }
