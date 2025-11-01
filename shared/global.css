@@ -120,42 +120,28 @@ body {
     min-height: -webkit-fill-available;
 }
 
-/* FIX: Matching scrollbars - vertical matches horizontal perfectly */
-/* Works on Chrome, Safari, Edge, Opera */
-body::-webkit-scrollbar {
-    width: 6px !important;
-    height: 6px !important;
+/* Scrollbars - Clean approach for both axes */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #d73327 transparent;
 }
 
-body::-webkit-scrollbar-track {
-    background: transparent !important;
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
 }
 
-body::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, 
-        var(--ember-orange) 0%, 
-        var(--ember-red) 50%, 
-        var(--ember-gold) 100%) !important;
-    border-radius: var(--radius-sm) !important;
-    box-shadow: 0 0 8px rgba(215, 51, 39, 0.5) !important;
+*::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-body::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, 
-        var(--ember-gold) 0%, 
-        var(--ember-orange) 50%, 
-        var(--ember-red) 100%) !important;
-    box-shadow: 0 0 12px rgba(240, 165, 0, 0.7) !important;
+*::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #d73327, #c62828, #f0a500);
+    border-radius: 4px;
 }
 
-body::-webkit-scrollbar-corner {
-    background: transparent !important;
-}
-
-/* Firefox scrollbar */
-body {
-    scrollbar-width: thin !important;
-    scrollbar-color: var(--ember-orange) transparent !important;
+*::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #f0a500, #d73327, #c62828);
 }
 
 /* Prevent zoom on mobile inputs */
@@ -977,9 +963,8 @@ button {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
-    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
 }
 
 .chatbot-body::-webkit-scrollbar {
