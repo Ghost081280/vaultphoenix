@@ -1,8 +1,8 @@
 /* ===================================
-   VAULT PHOENIX - SHARED CSS v7.2 CHATBOT PERFECTED
+   VAULT PHOENIX - SHARED CSS v7.3 RESPONSIVE PERFECTED
    Core styles used across ALL pages
    Mobile & Desktop Optimized
-   FIXES: Scroll isolation, landscape mode, streaming responses, subtle button feedback
+   FIXES: Landscape left-side positioning, responsive desktop resizing
    =================================== */
 
 /* ===================================
@@ -701,11 +701,10 @@ button {
 }
 
 /* ===================================
-   CHATBOT SYSTEM - PERFECTED EXPERIENCE
-   FIXES: Scroll isolation, streaming responses, landscape mode, subtle feedback
+   CHATBOT SYSTEM - RESPONSIVE PERFECTED
+   FIXES: Landscape left-side positioning, desktop fluid resizing
    =================================== */
 
-/* Chatbot loads AFTER privacy banner handled */
 .chatbot-button-container {
     position: fixed;
     bottom: 30px;
@@ -746,7 +745,6 @@ button {
     }
 }
 
-/* SUBTLE button feedback - just scale */
 .chatbot-button {
     width: 80px;
     height: 80px;
@@ -785,7 +783,6 @@ button {
     pointer-events: none;
 }
 
-/* Improved tooltip behavior */
 .chatbot-tooltip {
     position: absolute;
     bottom: 50%;
@@ -820,24 +817,22 @@ button {
     border-color: transparent transparent transparent rgba(45, 24, 16, 0.95);
 }
 
-/* Fade out slowly when user scrolls */
 .chatbot-tooltip.scrolled {
     opacity: 0;
     right: calc(100% + 10px);
 }
 
-/* Hide when chatbot is active */
 .chatbot-button-container.chatbot-active .chatbot-tooltip {
     opacity: 0 !important;
     pointer-events: none !important;
 }
 
-/* Show on hover if not active */
 .chatbot-button-container:not(.chatbot-active):hover .chatbot-tooltip {
     opacity: 1 !important;
     right: calc(100% + 15px) !important;
 }
 
+/* DESKTOP: Fluid responsive sizing */
 .chatbot-window {
     position: fixed;
     bottom: 130px;
@@ -904,7 +899,6 @@ button {
     margin: 0;
 }
 
-/* Single status indicator with dual text */
 .chatbot-status {
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.9);
@@ -963,7 +957,6 @@ button {
     transform: scale(0.9);
 }
 
-/* CRITICAL: Scroll isolation for chatbot body */
 .chatbot-body {
     flex: 1;
     overflow-y: auto;
@@ -980,7 +973,6 @@ button {
     isolation: isolate;
 }
 
-/* Prevent body scroll when touching chatbot body */
 .chatbot-body::-webkit-scrollbar {
     width: 6px;
 }
@@ -1076,7 +1068,6 @@ button {
     margin: 0.25rem 0;
 }
 
-/* Streaming AI response indicator */
 .typing-indicator .typing-dots {
     display: flex;
     gap: 4px;
@@ -1101,7 +1092,6 @@ button {
     animation-delay: 0.4s;
 }
 
-/* Streaming text cursor */
 .streaming-cursor {
     display: inline-block;
     width: 2px;
@@ -1151,7 +1141,6 @@ button {
     color: rgba(255, 255, 255, 0.4);
 }
 
-/* Blinking border animation for empty input */
 @keyframes blink-border {
     0%, 100% {
         border-color: rgba(240, 165, 0, 0.3);
@@ -1166,7 +1155,6 @@ button {
     animation: blink-border 0.4s ease 3;
 }
 
-/* SUBTLE send button - just scale feedback */
 .chatbot-send {
     min-width: 80px;
     height: 44px;
@@ -1622,6 +1610,32 @@ button {
    RESPONSIVE DESIGN
    =================================== */
 
+/* Large Desktop - Full size */
+@media (min-width: 1200px) {
+    .chatbot-window {
+        width: 480px;
+    }
+}
+
+/* Medium Desktop - Scale down slightly */
+@media (max-width: 1199px) and (min-width: 900px) {
+    .chatbot-window {
+        width: 420px;
+        right: 25px;
+        bottom: 120px;
+    }
+}
+
+/* Small Desktop/Large Tablet - More compact */
+@media (max-width: 899px) and (min-width: 769px) {
+    .chatbot-window {
+        width: 380px;
+        right: 20px;
+        bottom: 110px;
+        max-height: 650px;
+    }
+}
+
 /* Tablet */
 @media (max-width: 1024px) {
     :root {
@@ -1648,23 +1662,9 @@ button {
     .privacy-points-grid {
         grid-template-columns: 1fr;
     }
-    
-    .chatbot-window {
-        width: 90%;
-        max-width: 600px;
-        right: 5%;
-    }
 }
 
-@media (max-width: 900px) {
-    .chatbot-window {
-        width: 85%;
-        max-width: 550px;
-        right: 7.5%;
-    }
-}
-
-/* Mobile Portrait & Landscape */
+/* Mobile Portrait */
 @media (max-width: 768px) {
     :root {
         --navbar-height: 70px;
@@ -1688,7 +1688,6 @@ button {
         height: 40px;
     }
     
-    /* Mobile chatbot with improved touch and positioning */
     .chatbot-button-container {
         bottom: 20px;
         right: 20px;
@@ -1710,7 +1709,6 @@ button {
         height: 110px;
     }
     
-    /* Mobile chatbot window - floats above page */
     .chatbot-window {
         position: fixed;
         top: calc(var(--navbar-height) + 15px);
@@ -1860,12 +1858,13 @@ button {
     }
 }
 
-/* Mobile Landscape - FIXED positioning to left of button */
+/* Mobile Landscape - GENIUS left-side positioning! */
 @media (max-width: 768px) and (orientation: landscape) {
     .chatbot-window {
+        /* Position to LEFT of button - brilliant! */
         top: calc(var(--navbar-height) + 10px);
         left: 10px;
-        right: 130px; /* Leave space for button */
+        right: 100px; /* Leave room for button on right */
         bottom: 10px;
         max-height: calc(100vh - var(--navbar-height) - 20px);
         height: auto;
@@ -1875,6 +1874,16 @@ button {
     .chatbot-button-container {
         bottom: 10px;
         right: 10px;
+    }
+    
+    .chatbot-button {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .chatbot-icon {
+        width: 44px;
+        height: 44px;
     }
     
     .chatbot-body {
@@ -1921,10 +1930,10 @@ button {
     }
 }
 
-/* Very small landscape adjustments */
+/* Very small landscape */
 @media (max-width: 640px) and (orientation: landscape) {
     .chatbot-window {
-        right: 110px;
+        right: 85px; /* Smaller button means less space needed */
     }
     
     .chatbot-button {
@@ -2014,5 +2023,5 @@ button {
 }
 
 /* ===================================
-   END OF VAULT PHOENIX - GLOBAL.CSS v7.2
+   END OF VAULT PHOENIX - GLOBAL.CSS v7.3
    =================================== */
