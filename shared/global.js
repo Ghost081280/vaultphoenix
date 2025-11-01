@@ -1,7 +1,7 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V7.1 MOBILE PERFECTED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V7.2 CHATBOT PERFECTED
 // ============================================
-// FIXES: Mobile close button, tactile send feedback, scroll layer separation
+// FIXES: Streaming responses, scroll isolation, smooth mobile UX, empty input feedback
 // ============================================
 
 (function() {
@@ -94,7 +94,7 @@ async function askPhoenixAI(question) {
   updateChatbotStatus();
   
   if (!localAvailable && !onlineAvailable) {
-    return "I apologize, but both our Online and Local AI services are currently offline. Please try again in a moment, or contact contact@vaultphoenix.com for assistance.";
+    return "Both our online and local AI services are temporarily offline. Please try again later or reach us at contact@vaultphoenix.com for assistance.";
   }
   
   return "Sorry, I'm having trouble processing that request right now. Please try again.";
@@ -232,7 +232,6 @@ function updateDesktopNav(navLinks) {
     desktopNav.innerHTML = '';
     
     navLinks.forEach(link => {
-        // Skip the $Ember Token from the unified list - we'll add it as a special button at the end
         if (link.title === '$Ember Token') return;
         
         const li = document.createElement('li');
@@ -246,7 +245,6 @@ function updateDesktopNav(navLinks) {
         desktopNav.appendChild(li);
     });
     
-    // Add $Ember Token button ONCE at the end
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.href = 'ember-presale.html';
@@ -263,7 +261,6 @@ function updateMobileNav(navLinks) {
     mobileNav.innerHTML = '';
     
     navLinks.forEach(link => {
-        // Skip the $Ember Token from the unified list - we'll add it as a special button at the end
         if (link.title === '$Ember Token') return;
         
         const li = document.createElement('li');
@@ -278,7 +275,6 @@ function updateMobileNav(navLinks) {
         mobileNav.appendChild(li);
     });
     
-    // Add $Ember Token button ONCE at the end
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.href = 'ember-presale.html';
@@ -618,7 +614,6 @@ function initializeCookieConsent() {
     const cookieConsent = localStorage.getItem('vaultphoenix_cookie_consent');
     
     if (cookieConsent !== null) {
-        // Cookie consent already handled, show chatbot immediately
         showChatbotButton();
         return;
     }
@@ -662,14 +657,11 @@ function initializeCookieConsent() {
     });
 }
 
-// Show chatbot button AFTER privacy handled
 function showChatbotButton() {
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     if (chatbotButtonContainer) {
         chatbotButtonContainer.classList.add('ready');
-        // Force visibility for mobile
         chatbotButtonContainer.style.display = 'block';
-        // Re-initialize tooltip after showing button
         setTimeout(() => {
             initializeChatbotTooltip();
         }, 100);
@@ -766,12 +758,12 @@ document.querySelectorAll('.scroll-reveal, .fade-in-up, .slide-in-left, .slide-i
 });
 
 // ============================================
-// PHOENIX AI CHATBOT - MOBILE PERFECTED
+// PHOENIX AI CHATBOT - STREAMING RESPONSES
 // ============================================
 let conversationHistory = [];
 let isTyping = false;
 let phoenixSiteData = null;
-let hasUserScrolled = false;
+let currentStreamingMessage = null;
 
 function getEnhancedSystemPrompt() {
     let basePrompt = phoenixAI.description || 'You are Phoenix, the AI assistant for Vault Phoenix.';
@@ -798,32 +790,46 @@ function getEnhancedSystemPrompt() {
     return basePrompt;
 }
 
-// Tooltip behavior - shows on load, fades on scroll, returns on hover, shows after close
 function initializeChatbotTooltip() {
     const tooltip = document.querySelector('.chatbot-tooltip');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     
     if (!tooltip || !chatbotButtonContainer) return;
     
-    // Start with tooltip visible
     tooltip.classList.remove('scrolled');
     
-    // Fade on scroll
     const handleScroll = function() {
         tooltip.classList.add('scrolled');
     };
     
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Store reference so we can remove it later
     chatbotButtonContainer._scrollHandler = handleScroll;
 }
 
-// Show tooltip after chatbot closes
 function showTooltipAfterClose() {
     const tooltip = document.querySelector('.chatbot-tooltip');
     if (tooltip) {
         tooltip.classList.remove('scrolled');
+    }
+}
+
+// CRITICAL: Prevent page scroll when touching chatbot body
+function preventPageScroll(e) {
+    const chatbotBody = e.currentTarget;
+    const isScrollable = chatbotBody.scrollHeight > chatbotBody.clientHeight;
+    
+    if (!isScrollable) {
+        e.preventDefault();
+        return;
+    }
+    
+    const scrollTop = chatbotBody.scrollTop;
+    const scrollHeight = chatbotBody.scrollHeight;
+    const clientHeight = chatbotBody.clientHeight;
+    const delta = e.deltaY || -e.wheelDelta || e.detail;
+    
+    if ((delta < 0 && scrollTop <= 0) || (delta > 0 && scrollTop + clientHeight >= scrollHeight)) {
+        e.preventDefault();
     }
 }
 
@@ -839,13 +845,11 @@ function initializeChatbot() {
     updateChatbotStatus();
     initializeChatbotTooltip();
     
-    // Clone and replace chatbot button to ensure clean event listeners
     const newChatbotButtonContainer = chatbotButtonContainer.cloneNode(true);
     chatbotButtonContainer.parentNode.replaceChild(newChatbotButtonContainer, chatbotButtonContainer);
     
     const chatbotButton = newChatbotButtonContainer.querySelector('.chatbot-button');
     
-    // FIX: Use touchend for better mobile response
     chatbotButton.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -858,14 +862,11 @@ function initializeChatbot() {
         toggleChatbot();
     }, { passive: false });
     
-    // FIX: Properly handle close button for BOTH desktop and mobile
     const chatbotClose = chatbotWindow.querySelector('.chatbot-close');
     if (chatbotClose) {
-        // Remove old listeners by cloning
         const newChatbotClose = chatbotClose.cloneNode(true);
         chatbotClose.parentNode.replaceChild(newChatbotClose, chatbotClose);
         
-        // Add fresh listeners
         newChatbotClose.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -879,25 +880,19 @@ function initializeChatbot() {
         }, { passive: false });
     }
     
-    // FIX: Add tactile feedback to send button
     const chatbotSend = chatbotWindow.querySelector('.chatbot-send');
     if (chatbotSend) {
-        // Remove old listeners
         const newChatbotSend = chatbotSend.cloneNode(true);
         chatbotSend.parentNode.replaceChild(newChatbotSend, chatbotSend);
         
-        // Desktop click
         newChatbotSend.addEventListener('click', function(e) {
             e.preventDefault();
-            addTactileFeedback(this);
             sendMessage();
         });
         
-        // Mobile touch with tactile feedback
         newChatbotSend.addEventListener('touchend', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            addTactileFeedback(this);
             sendMessage();
         }, { passive: false });
     }
@@ -907,36 +902,24 @@ function initializeChatbot() {
         chatbotInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                const sendBtn = chatbotWindow.querySelector('.chatbot-send');
-                if (sendBtn) addTactileFeedback(sendBtn);
                 sendMessage();
             }
         });
     }
     
-    // Re-initialize tooltip after cloning
-    initializeChatbotTooltip();
-    
-    console.log('✅ Chatbot initialized with mobile fixes');
-    return true;
-}
-
-// FIX: Add tactile feedback function for buttons
-function addTactileFeedback(button) {
-    if (!button) return;
-    
-    // Add pressing class for visual animation
-    button.classList.add('pressing');
-    
-    // Vibrate on mobile if supported
-    if ('vibrate' in navigator) {
-        navigator.vibrate(50);
+    // CRITICAL: Add scroll isolation to chatbot body
+    const chatbotBody = chatbotWindow.querySelector('.chatbot-body');
+    if (chatbotBody) {
+        chatbotBody.addEventListener('wheel', preventPageScroll, { passive: false });
+        chatbotBody.addEventListener('touchmove', function(e) {
+            e.stopPropagation();
+        }, { passive: true });
     }
     
-    // Remove pressing class after animation
-    setTimeout(() => {
-        button.classList.remove('pressing');
-    }, 200);
+    initializeChatbotTooltip();
+    
+    console.log('✅ Chatbot initialized with streaming responses');
+    return true;
 }
 
 function toggleChatbot() {
@@ -954,7 +937,6 @@ function toggleChatbot() {
     }
 }
 
-// FIX: Smooth float - page scrolls freely, chatbot floats above
 function openChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
@@ -967,15 +949,11 @@ function openChatbot() {
     chatbotWindow.classList.add('active');
     chatbotButtonContainer.classList.add('chatbot-active');
     
-    // DON'T lock body scroll - let page scroll naturally
-    // The chatbot floats above with its own scroll in chatbot-body
-    
     if (chatbotBody && chatbotBody.children.length === 0) {
         addWelcomeMessage();
     }
 }
 
-// FIX: Clean close without scroll position issues
 function closeChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
@@ -983,7 +961,6 @@ function closeChatbot() {
     chatbotWindow.classList.remove('active');
     chatbotButtonContainer.classList.remove('chatbot-active');
     
-    // Show tooltip again after closing
     showTooltipAfterClose();
 }
 
@@ -1017,7 +994,7 @@ function addWelcomeMessage() {
     
     let statusMessage = '';
     if (!serviceStatus.online && !serviceStatus.local) {
-        statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both our Online and Local AI services are currently offline. Please try again later or contact contact@vaultphoenix.com for assistance.</em>';
+        statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both our online and local AI services are temporarily offline. Please try again later or reach us at contact@vaultphoenix.com for assistance.</em>';
     } else if (!serviceStatus.online && serviceStatus.local) {
         statusMessage = '<br><br><em style="color: #f59e0b;">ℹ️ Running on local AI. Cloud service temporarily offline.</em>';
     } else if (serviceStatus.online && !serviceStatus.local) {
@@ -1049,14 +1026,34 @@ async function sendMessage() {
     if (!chatbotInput || !chatbotSend) return;
     
     const message = chatbotInput.value.trim();
-    if (!message || isTyping) return;
+    
+    // FIX: Blink border if empty
+    if (!message) {
+        chatbotInput.classList.add('blink-empty');
+        setTimeout(() => {
+            chatbotInput.classList.remove('blink-empty');
+        }, 1200);
+        return;
+    }
+    
+    if (isTyping) return;
     
     addChatMessage('user', message);
     chatbotInput.value = '';
     
-    // FIX: Blur input to hide keyboard on mobile
+    // FIX: Smooth transition on mobile - small pause then scroll
     if (window.innerWidth <= 768) {
-        chatbotInput.blur();
+        setTimeout(() => {
+            chatbotInput.blur();
+            // Smooth scroll to bottom
+            const chatbotBody = document.querySelector('.chatbot-body');
+            if (chatbotBody) {
+                chatbotBody.scrollTo({
+                    top: chatbotBody.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
+        }, 150);
     }
     
     chatbotInput.disabled = true;
@@ -1075,7 +1072,8 @@ async function sendMessage() {
             { role: 'assistant', content: reply }
         );
         
-        addChatMessage('assistant', reply);
+        // Stream the response word by word
+        await streamChatMessage(reply);
         
     } catch (error) {
         console.error('AI Error:', error);
@@ -1086,6 +1084,53 @@ async function sendMessage() {
         chatbotSend.disabled = false;
         isTyping = false;
     }
+}
+
+// FIX: Stream AI response like real chat
+async function streamChatMessage(fullText) {
+    const chatbotBody = document.querySelector('.chatbot-body');
+    if (!chatbotBody) return;
+    
+    // Create message container
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'chat-message assistant-message';
+    
+    const messageContent = document.createElement('div');
+    messageContent.className = 'message-content';
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar';
+    avatar.innerHTML = '<img src="images/VPLogoNoText.PNG" alt="Phoenix AI">';
+    
+    const textDiv = document.createElement('div');
+    textDiv.className = 'message-text';
+    
+    messageContent.appendChild(avatar);
+    messageContent.appendChild(textDiv);
+    messageDiv.appendChild(messageContent);
+    chatbotBody.appendChild(messageDiv);
+    
+    // Split into words
+    const words = fullText.split(' ');
+    let currentText = '';
+    
+    // Stream words one by one
+    for (let i = 0; i < words.length; i++) {
+        currentText += (i > 0 ? ' ' : '') + words[i];
+        textDiv.innerHTML = formatChatMessage(currentText) + '<span class="streaming-cursor"></span>';
+        
+        // Scroll to bottom
+        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        
+        // Slight delay between words for natural feel
+        await new Promise(resolve => setTimeout(resolve, 35));
+    }
+    
+    // Remove cursor
+    textDiv.innerHTML = formatChatMessage(currentText);
+    
+    // Final scroll
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
 }
 
 function addChatMessage(role, content) {
@@ -1155,25 +1200,22 @@ window.addEventListener('resize', function() {
 // INITIALIZATION - PRIVACY FIRST, THEN CHATBOT
 // ============================================
 async function init() {
-    console.log('🔥 Vault Phoenix v7.1 MOBILE PERFECTED Initializing...');
+    console.log('🔥 Vault Phoenix v7.2 CHATBOT PERFECTED Initializing...');
     
     await loadPhoenixAITraining();
     
     handleNavbarScroll();
     initializeScrollProgress();
     
-    // Privacy popup FIRST, chatbot AFTER
     initializeCookieConsent();
     initializePrivacyPolicyModal();
     
-    // Initialize chatbot structure (but don't show button yet - privacy first)
     let chatbotInitialized = initializeChatbot();
     if (!chatbotInitialized) {
         console.warn('⚠️ Chatbot failed, retrying...');
         setTimeout(() => initializeChatbot(), 100);
     }
     
-    // Fallback: If no privacy popup needed, ensure button shows after short delay
     setTimeout(() => {
         const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
         if (chatbotButtonContainer && !chatbotButtonContainer.classList.contains('ready')) {
@@ -1182,7 +1224,6 @@ async function init() {
         }
     }, 1000);
     
-    // Unified navigation
     setTimeout(() => {
         generateNavigation();
     }, 50);
@@ -1201,10 +1242,11 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v7.1 MOBILE PERFECTED Complete');
-    console.log('📱 Mobile Close: Fixed button handling');
-    console.log('🖱️ Tactile Send: Added button feedback');
-    console.log('📜 Scroll Layer: Chatbot floats independently');
+    console.log('✅ Vault Phoenix v7.2 CHATBOT PERFECTED Complete');
+    console.log('💬 Streaming Responses: Word-by-word like real AI');
+    console.log('📜 Scroll Isolation: Perfect separation');
+    console.log('📱 Mobile UX: Smooth transitions');
+    console.log('⚠️ Empty Input: Blinking border feedback');
 }
 
 if (document.readyState === 'loading') {
