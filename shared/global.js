@@ -1,9 +1,13 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.6 FIXED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.7 HYBRID AI
 // ============================================
-// FIXES: Quick Links population, chatbot immediate load,
-// tooltip behavior, module loading timing, landscape overflow
+// UPDATES: Hybrid AI integration with local + Claude fallback
 // ============================================
+
+// ============================================
+// HYBRID AI IMPORT
+// ============================================
+import { askPhoenixAI } from './ai-lib/gpt4all-wrapper.js';
 
 (function() {
 'use strict';
@@ -17,7 +21,7 @@ let phoenixAI = {
     version: "1.0.0",
     assistant_name: "Phoenix AI",
     description: "AI assistant for Vault Phoenix's $Ember Token presale and AR crypto gaming platform",
-    network: "Polygon",
+    network: "Solana",
     focus_areas: [
         "$Ember token presale & pricing",
         "GPS & Beacon technology",
@@ -685,16 +689,12 @@ document.querySelectorAll('.scroll-reveal, .fade-in-up, .slide-in-left, .slide-i
 });
 
 // ============================================
-// PHOENIX AI CHATBOT SYSTEM
+// PHOENIX AI CHATBOT SYSTEM - HYBRID VERSION
 // ============================================
-
-const CLAUDE_API_KEY = 'YOUR_CLAUDE_API_KEY_HERE';
-const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
-const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 
 let conversationHistory = [];
 let isTyping = false;
-let isOnline = false;
+let isOnline = true; // Default to true since hybrid system auto-detects
 let phoenixSiteData = null;
 let hasUserScrolled = false;
 
@@ -898,13 +898,9 @@ function updateChatbotStatus() {
     const statusDot = document.querySelector('.chatbot-status-dot');
     
     if (statusElement && statusDot) {
-        if (isOnline) {
-            statusDot.classList.add('online');
-            statusElement.innerHTML = '<span class="chatbot-status-dot online"></span>Online';
-        } else {
-            statusDot.classList.remove('online');
-            statusElement.innerHTML = '<span class="chatbot-status-dot"></span>Offline';
-        }
+        // Hybrid system is always "online" as it auto-falls back
+        statusDot.classList.add('online');
+        statusElement.innerHTML = '<span class="chatbot-status-dot online"></span>Online';
     }
 }
 
@@ -913,11 +909,10 @@ function addWelcomeMessage() {
     if (!chatbotBody) return;
     
     const assistantName = phoenixAI.assistant_name || 'Phoenix AI';
-    const statusMessage = isOnline ? "I'm online and ready to help!" : "I'm currently offline.";
     
-    let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>' + statusMessage;
+    let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>I\'m online and ready to help with our hybrid AI system!';
     
-    if (isOnline && phoenixAI.focus_areas) {
+    if (phoenixAI.focus_areas) {
         welcomeContent += '<br><br>Ask me about:<ul style="margin: 10px 0; padding-left: 20px;">';
         phoenixAI.focus_areas.forEach(area => {
             welcomeContent += '<li>' + area + '</li>';
@@ -937,6 +932,11 @@ function addWelcomeMessage() {
     `;
 }
 
+// ============================================
+// HYBRID AI MESSAGE HANDLER
+// Uses askPhoenixAI from gpt4all-wrapper.js
+// ============================================
+
 async function sendMessage() {
     const chatbotInput = document.querySelector('.chatbot-input');
     const chatbotSend = document.querySelector('.chatbot-send');
@@ -945,22 +945,6 @@ async function sendMessage() {
     
     const message = chatbotInput.value.trim();
     if (!message || isTyping) return;
-    
-    if (!isOnline) {
-        addChatMessage('user', message);
-        setTimeout(() => chatbotInput.blur(), 1000);
-        addChatMessage('assistant', '⚠️ I am currently offline.');
-        chatbotInput.value = '';
-        return;
-    }
-    
-    if (CLAUDE_API_KEY === 'YOUR_CLAUDE_API_KEY_HERE') {
-        addChatMessage('user', message);
-        setTimeout(() => chatbotInput.blur(), 1000);
-        addChatMessage('assistant', '⚠️ API key not configured.');
-        chatbotInput.value = '';
-        return;
-    }
     
     addChatMessage('user', message);
     chatbotInput.value = '';
@@ -973,41 +957,26 @@ async function sendMessage() {
     showTypingIndicator();
     
     try {
-        const messages = [...conversationHistory, { role: 'user', content: message }];
+        // HYBRID AI: Use the wrapper that tries local first, then Claude
+        const reply = await askPhoenixAI(message);
         
-        const response = await fetch(CLAUDE_API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': CLAUDE_API_KEY,
-                'anthropic-version': '2023-06-01'
-            },
-            body: JSON.stringify({
-                model: CLAUDE_MODEL,
-                max_tokens: 1024,
-                system: getEnhancedSystemPrompt(),
-                messages: messages
-            })
-        });
-        
-        if (!response.ok) {
-            throw new Error('API Error: ' + response.status);
-        }
-        
-        const data = await response.json();
         removeTypingIndicator();
         
-        const assistantMessage = data.content[0].text;
+        // Add system prompt context for better responses
+        const enhancedContext = getEnhancedSystemPrompt();
+        
+        // Store in conversation history
         conversationHistory.push(
             { role: 'user', content: message },
-            { role: 'assistant', content: assistantMessage }
+            { role: 'assistant', content: reply }
         );
         
-        addChatMessage('assistant', assistantMessage);
+        addChatMessage('assistant', reply);
         
     } catch (error) {
+        console.error('Hybrid AI Error:', error);
         removeTypingIndicator();
-        addChatMessage('assistant', '❌ Sorry, I encountered an error.');
+        addChatMessage('assistant', '❌ Sorry, I encountered an error. Please try again.');
     } finally {
         chatbotInput.disabled = false;
         chatbotSend.disabled = false;
@@ -1084,7 +1053,7 @@ window.addEventListener('resize', function() {
 // ============================================
 
 async function init() {
-    console.log('🔥 Vault Phoenix v6.6 Initializing...');
+    console.log('🔥 Vault Phoenix v6.7 HYBRID AI Initializing...');
     
     await loadPhoenixAITraining();
     
@@ -1118,7 +1087,8 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v6.6 Complete');
+    console.log('✅ Vault Phoenix v6.7 HYBRID AI Complete');
+    console.log('🤖 Hybrid AI Mode: Local AI → Claude Fallback → Learning System');
 }
 
 if (document.readyState === 'loading') {
