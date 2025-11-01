@@ -716,7 +716,7 @@ button {
     opacity: 0;
     visibility: hidden;
     display: block;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .chatbot-button-container.ready {
@@ -803,7 +803,7 @@ button {
     white-space: nowrap;
     opacity: 1;
     pointer-events: none;
-    transition: opacity 0.3s ease, right 0.3s ease;
+    transition: opacity 0.6s ease, right 0.3s ease;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     border: 2px solid rgba(240, 165, 0, 0.4);
 }
@@ -821,15 +821,22 @@ button {
     border-color: transparent transparent transparent rgba(45, 24, 16, 0.95);
 }
 
-/* Hide tooltip when scrolled or chatbot active */
-.chatbot-tooltip.hidden {
+/* Fade out slowly when user scrolls */
+.chatbot-tooltip.scrolled {
     opacity: 0;
     right: calc(100% + 10px);
 }
 
+/* Hide when chatbot is active */
 .chatbot-button-container.chatbot-active .chatbot-tooltip {
     opacity: 0 !important;
     pointer-events: none !important;
+}
+
+/* Show on hover if not active */
+.chatbot-button-container:not(.chatbot-active):hover .chatbot-tooltip {
+    opacity: 1 !important;
+    right: calc(100% + 15px) !important;
 }
 
 .chatbot-window {
