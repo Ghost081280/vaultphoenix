@@ -1,7 +1,7 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V7.2 CHATBOT PERFECTED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V7.3 NO-ZOOM FIX
 // ============================================
-// FIXES: Streaming responses, scroll isolation, smooth mobile UX, empty input feedback
+// FIXES: Streaming responses, scroll isolation, smooth mobile UX, empty input feedback, KEYBOARD NO-ZOOM
 // ============================================
 
 (function() {
@@ -1184,6 +1184,57 @@ window.initializePhoenixChatbot = initializeChatbot;
 window.phoenixSiteScanner = siteScanner;
 
 // ============================================
+// CHATBOT KEYBOARD HANDLER - NO ZOOM FIX
+// Prevents zoom by shifting chatbot up when keyboard appears
+// Works for both portrait and landscape iPhone modes
+// ============================================
+function initializeChatbotKeyboardHandler() {
+    const chatbotInput = document.querySelector('.chatbot-input');
+    const chatbotWindow = document.querySelector('.chatbot-window');
+    
+    if (!chatbotInput || !chatbotWindow) {
+        console.warn('⚠️ Keyboard handler: chatbot elements not found');
+        return false;
+    }
+    
+    // Detect when keyboard appears (input focused)
+    chatbotInput.addEventListener('focus', function() {
+        chatbotWindow.classList.add('keyboard-visible');
+        console.log('📱 Keyboard visible - shifting chatbot up');
+    });
+    
+    // Detect when keyboard disappears (input blurred)
+    chatbotInput.addEventListener('blur', function() {
+        chatbotWindow.classList.remove('keyboard-visible');
+        console.log('📱 Keyboard hidden - restoring chatbot position');
+    });
+    
+    // Handle window resize (keyboard showing/hiding can trigger this)
+    let lastHeight = window.innerHeight;
+    window.addEventListener('resize', function() {
+        const currentHeight = window.innerHeight;
+        
+        // If window height decreased significantly, keyboard probably appeared
+        if (lastHeight - currentHeight > 150) {
+            if (document.activeElement === chatbotInput) {
+                chatbotWindow.classList.add('keyboard-visible');
+            }
+        }
+        // If window height increased significantly, keyboard probably disappeared
+        else if (currentHeight - lastHeight > 150) {
+            chatbotWindow.classList.remove('keyboard-visible');
+        }
+        
+        lastHeight = currentHeight;
+    }, { passive: true });
+    
+    console.log('✅ Chatbot keyboard handler initialized - NO ZOOM mode!');
+    return true;
+}
+
+window.initializeChatbotKeyboardHandler = initializeChatbotKeyboardHandler;
+
+// ============================================
 // RESPONSIVE HANDLING
 // ============================================
 let resizeTimeout;
@@ -1200,7 +1251,7 @@ window.addEventListener('resize', function() {
 // INITIALIZATION - PRIVACY FIRST, THEN CHATBOT
 // ============================================
 async function init() {
-    console.log('🔥 Vault Phoenix v7.2 CHATBOT PERFECTED Initializing...');
+    console.log('🔥 Vault Phoenix v7.3 NO-ZOOM FIX Initializing...');
     
     await loadPhoenixAITraining();
     
@@ -1215,6 +1266,15 @@ async function init() {
         console.warn('⚠️ Chatbot failed, retrying...');
         setTimeout(() => initializeChatbot(), 100);
     }
+    
+    // Initialize keyboard handler after chatbot is ready
+    setTimeout(() => {
+        let keyboardHandlerInit = initializeChatbotKeyboardHandler();
+        if (!keyboardHandlerInit) {
+            console.warn('⚠️ Keyboard handler failed, retrying...');
+            setTimeout(() => initializeChatbotKeyboardHandler(), 200);
+        }
+    }, 150);
     
     setTimeout(() => {
         const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
@@ -1242,11 +1302,12 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v7.2 CHATBOT PERFECTED Complete');
+    console.log('✅ Vault Phoenix v7.3 NO-ZOOM FIX Complete');
     console.log('💬 Streaming Responses: Word-by-word like real AI');
     console.log('📜 Scroll Isolation: Perfect separation');
     console.log('📱 Mobile UX: Smooth transitions');
     console.log('⚠️ Empty Input: Blinking border feedback');
+    console.log('📱 Keyboard Handler: NO ZOOM mode active!');
 }
 
 if (document.readyState === 'loading') {
