@@ -1,8 +1,8 @@
 /* ===================================
-   VAULT PHOENIX - SHARED CSS v7.1 MOBILE PERFECTED
+   VAULT PHOENIX - SHARED CSS v7.2 CHATBOT PERFECTED
    Core styles used across ALL pages
    Mobile & Desktop Optimized
-   FIXES: Mobile close button, tactile send button, scroll layer separation
+   FIXES: Scroll isolation, landscape mode, streaming responses, subtle button feedback
    =================================== */
 
 /* ===================================
@@ -701,8 +701,8 @@ button {
 }
 
 /* ===================================
-   CHATBOT SYSTEM - MOBILE PERFECTED
-   FIXES: Mobile close button, tactile send, scroll layer separation
+   CHATBOT SYSTEM - PERFECTED EXPERIENCE
+   FIXES: Scroll isolation, streaming responses, landscape mode, subtle feedback
    =================================== */
 
 /* Chatbot loads AFTER privacy banner handled */
@@ -746,6 +746,7 @@ button {
     }
 }
 
+/* SUBTLE button feedback - just scale */
 .chatbot-button {
     width: 80px;
     height: 80px;
@@ -758,7 +759,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition-base);
+    transition: transform 0.1s ease;
     position: relative;
     z-index: 10;
     -webkit-tap-highlight-color: transparent;
@@ -766,11 +767,11 @@ button {
 }
 
 .chatbot-button:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
 }
 
 .chatbot-button:hover {
-    transform: translateY(-5px) scale(1.1);
+    transform: translateY(-5px) scale(1.05);
     box-shadow: 0 12px 48px rgba(215, 51, 39, 0.7),
                 0 0 60px rgba(240, 165, 0, 0.5);
     border-color: var(--ember-gold);
@@ -962,6 +963,7 @@ button {
     transform: scale(0.9);
 }
 
+/* CRITICAL: Scroll isolation for chatbot body */
 .chatbot-body {
     flex: 1;
     overflow-y: auto;
@@ -974,8 +976,11 @@ button {
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
     min-height: 200px;
+    position: relative;
+    isolation: isolate;
 }
 
+/* Prevent body scroll when touching chatbot body */
 .chatbot-body::-webkit-scrollbar {
     width: 6px;
 }
@@ -1071,6 +1076,7 @@ button {
     margin: 0.25rem 0;
 }
 
+/* Streaming AI response indicator */
 .typing-indicator .typing-dots {
     display: flex;
     gap: 4px;
@@ -1093,6 +1099,21 @@ button {
 
 .typing-dots span:nth-child(3) {
     animation-delay: 0.4s;
+}
+
+/* Streaming text cursor */
+.streaming-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--ember-gold);
+    margin-left: 2px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 .chatbot-footer {
@@ -1130,7 +1151,22 @@ button {
     color: rgba(255, 255, 255, 0.4);
 }
 
-/* IMPROVED TACTILE SEND BUTTON */
+/* Blinking border animation for empty input */
+@keyframes blink-border {
+    0%, 100% {
+        border-color: rgba(240, 165, 0, 0.3);
+    }
+    50% {
+        border-color: var(--ember-gold);
+        box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.15);
+    }
+}
+
+.chatbot-input.blink-empty {
+    animation: blink-border 0.4s ease 3;
+}
+
+/* SUBTLE send button - just scale feedback */
 .chatbot-send {
     min-width: 80px;
     height: 44px;
@@ -1141,7 +1177,7 @@ button {
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.1s ease, box-shadow 0.2s ease;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -1152,34 +1188,13 @@ button {
     touch-action: manipulation;
 }
 
-/* Desktop hover effect */
 .chatbot-send:hover {
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 6px 20px rgba(215, 51, 39, 0.5);
 }
 
-/* Desktop and mobile active (click/tap) effect */
 .chatbot-send:active {
-    transform: translateY(1px) scale(0.98);
-    box-shadow: 0 1px 4px rgba(215, 51, 39, 0.4);
-    background: linear-gradient(135deg, #c62828 0%, #b71c1c 50%, #a31010 100%);
-}
-
-/* Visual feedback animation on tap/click */
-@keyframes button-press {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(0.95);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.chatbot-send.pressing {
-    animation: button-press 0.2s ease;
+    transform: scale(0.95);
 }
 
 .chatbot-send:disabled {
@@ -1845,23 +1860,31 @@ button {
     }
 }
 
-/* Mobile Landscape */
+/* Mobile Landscape - FIXED positioning to left of button */
 @media (max-width: 768px) and (orientation: landscape) {
     .chatbot-window {
-        top: calc(var(--navbar-height) + 5px);
-        bottom: 90px;
+        top: calc(var(--navbar-height) + 10px);
         left: 10px;
+        right: 130px; /* Leave space for button */
+        bottom: 10px;
+        max-height: calc(100vh - var(--navbar-height) - 20px);
+        height: auto;
+        width: auto;
+    }
+    
+    .chatbot-button-container {
+        bottom: 10px;
         right: 10px;
-        max-height: calc(100vh - var(--navbar-height) - 100px);
     }
     
     .chatbot-body {
         flex: 1;
-        max-height: calc(100vh - var(--navbar-height) - 180px);
+        padding: 0.75rem;
+        min-height: 100px;
     }
     
     .chatbot-footer {
-        padding: 0.75rem 1rem;
+        padding: 0.75rem;
         gap: 0.5rem;
     }
     
@@ -1869,6 +1892,7 @@ button {
         max-height: 60px;
         min-height: 40px;
         padding: 0.625rem 0.875rem;
+        font-size: 15px;
     }
     
     .chatbot-send {
@@ -1897,61 +1921,34 @@ button {
     }
 }
 
-@media (max-width: 480px) and (orientation: landscape) {
+/* Very small landscape adjustments */
+@media (max-width: 640px) and (orientation: landscape) {
     .chatbot-window {
-        top: calc(var(--navbar-height) + 3px);
-        bottom: 85px;
-        max-height: calc(100vh - var(--navbar-height) - 95px);
+        right: 110px;
     }
     
-    .chatbot-body {
-        max-height: calc(100vh - var(--navbar-height) - 175px);
+    .chatbot-button {
+        width: 60px;
+        height: 60px;
     }
     
-    .chatbot-footer {
+    .chatbot-icon {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .chatbot-header {
         padding: 0.625rem 0.875rem;
     }
     
-    .chatbot-input {
-        max-height: 50px;
-        font-size: 15px;
-        padding: 0.5rem 0.75rem;
+    .chatbot-header-icon {
+        width: 30px;
+        height: 30px;
     }
     
-    .chatbot-send {
-        min-width: 60px;
-        max-width: 60px;
-        height: 38px;
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 360px) and (orientation: landscape) {
-    .chatbot-window {
-        top: calc(var(--navbar-height) + 2px);
-        bottom: 80px;
-        max-height: calc(100vh - var(--navbar-height) - 90px);
-    }
-    
-    .chatbot-body {
-        max-height: calc(100vh - var(--navbar-height) - 170px);
-    }
-    
-    .chatbot-footer {
-        padding: 0.5rem 0.75rem;
-    }
-    
-    .chatbot-input {
-        max-height: 45px;
-        font-size: 14px;
-        padding: 0.5rem;
-    }
-    
-    .chatbot-send {
-        min-width: 55px;
-        max-width: 55px;
-        height: 36px;
-        font-size: 0.75rem;
+    .chatbot-header-icon-secondary {
+        width: 28px;
+        height: 28px;
     }
 }
 
@@ -2017,5 +2014,5 @@ button {
 }
 
 /* ===================================
-   END OF VAULT PHOENIX - GLOBAL.CSS v7.1
+   END OF VAULT PHOENIX - GLOBAL.CSS v7.2
    =================================== */
