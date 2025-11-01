@@ -4,7 +4,7 @@
  * ============================================
  * 
  * @file        local.css
- * @version     1.0.0
+ * @version     2.0.0
  * @author      Vault Phoenix LLC
  * 
  * @description
@@ -19,7 +19,7 @@
  * 1. Hero Section
  * 2. Three-Step Process
  * 3. Dual Path CTAs
- * 4. Social Sharing Section
+ * 4. $Ember Airdrop Section (NEW - Replaces Social Sharing)
  * 5. Crypto Coin Section
  * 6. Technology Modules (GPS & Beacon)
  * 7. Live Demo Section
@@ -107,6 +107,10 @@
 
 .stagger-3 {
     animation-delay: 0.6s;
+}
+
+.stagger-4 {
+    animation-delay: 0.8s;
 }
 
 @keyframes fadeIn {
@@ -419,91 +423,546 @@
 }
 
 /* ============================================
-   4. SOCIAL SHARING SECTION
+   4. $EMBER AIRDROP SECTION
+   NEW: Replaces Social Sharing Section
    ============================================ */
 
 /**
- * Compact social sharing component
- * @features Share buttons for X, Facebook, and Telegram
+ * Main $Ember Airdrop section
+ * @features Multi-module layout with tracker, claim form, and status checker
  */
-.social-sharing-section-compact {
-    padding: var(--space-2xl) var(--container-padding);
+.ember-airdrop-section {
+    padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
 }
 
-.social-sharing-content-compact {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: var(--ember-gradient-card);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-xl) var(--space-2xl);
-}
-
-.social-sharing-header-compact {
+/* Airdrop Header */
+.ember-airdrop-header {
     display: flex;
     align-items: center;
+    gap: var(--space-xl);
+    max-width: 1200px;
+    margin: 0 auto var(--space-4xl);
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+}
+
+.ember-airdrop-header-icon {
+    flex-shrink: 0;
+}
+
+.ember-parachute-icon {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+.ember-airdrop-header-text {
+    flex: 1;
+}
+
+.ember-airdrop-title {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: var(--space-md);
+    color: #ffffff;
+}
+
+.ember-airdrop-subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Coming Soon Banner */
+.ember-coming-soon-banner {
+    background: linear-gradient(135deg, 
+        rgba(45, 24, 16, 0.95) 0%,
+        rgba(69, 26, 3, 0.92) 30%,
+        rgba(124, 45, 18, 0.90) 60%,
+        rgba(215, 51, 39, 0.85) 100%
+    );
+    border: 3px solid rgba(240, 165, 0, 0.4);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.4);
+    margin-bottom: var(--space-3xl);
+    position: relative;
+    overflow: hidden;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ember-coming-soon-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { left: -100%; }
+    50% { left: 100%; }
+}
+
+.ember-coming-soon-icon {
+    font-size: clamp(3rem, 8vw, 5rem);
+    margin-bottom: var(--space-md);
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.6));
+}
+
+.ember-coming-soon-banner h3 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 900;
+    margin-bottom: var(--space-md);
+    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.ember-coming-soon-banner p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: var(--space-xl);
+    line-height: 1.6;
+}
+
+/* Social Links */
+.ember-social-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.ember-social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 14px 28px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-full);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all var(--transition-base);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ember-social-link:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(240, 165, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.ember-social-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Airdrop Grid - Main Layout */
+.ember-airdrop-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2xl);
+    max-width: 1400px;
+    margin: 0 auto var(--space-3xl);
+}
+
+/* Airdrop Module Base */
+.ember-airdrop-module {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+    transition: all var(--transition-base);
+}
+
+.ember-airdrop-module:hover {
+    border-color: var(--ember-orange);
+    box-shadow: var(--ember-shadow-lg);
+}
+
+.ember-module-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 2px solid rgba(215, 51, 39, 0.3);
+}
+
+.ember-module-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.ember-module-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+    margin: 0;
+}
+
+/* Tracker Module */
+.ember-tracker-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-lg);
     margin-bottom: var(--space-xl);
 }
 
-.main-social-sharing-icon-compact {
+.ember-stat-box {
+    background: rgba(15, 15, 15, 0.6);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+}
+
+.ember-stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--space-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ember-stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+}
+
+.ember-stat-claimed {
+    color: var(--ember-orange);
+}
+
+.ember-stat-remaining {
+    color: var(--ember-green);
+}
+
+/* Progress Bar */
+.ember-progress-container {
+    margin-top: var(--space-xl);
+}
+
+.ember-progress-bar-bg {
+    width: 100%;
+    height: 30px;
+    background: rgba(15, 15, 15, 0.6);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+}
+
+.ember-progress-bar {
+    height: 100%;
+    background: var(--ember-gradient-primary);
+    border-radius: var(--radius-lg);
+    width: 0%;
+    transition: width 1s ease;
+    box-shadow: 0 0 20px rgba(215, 51, 39, 0.6);
+}
+
+.ember-progress-text {
+    text-align: center;
+    margin-top: var(--space-sm);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+}
+
+/* Phantom Wallet Promo */
+.ember-wallet-promo {
+    background: linear-gradient(135deg, 
+        rgba(139, 92, 246, 0.2) 0%, 
+        rgba(99, 102, 241, 0.15) 100%
+    );
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.ember-wallet-promo-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.ember-wallet-promo-icon {
+    flex-shrink: 0;
+}
+
+.phantom-wallet-icon {
     width: 60px;
     height: 60px;
     object-fit: contain;
 }
 
-.social-sharing-text-compact {
-    flex: 1;
-}
-
-.social-sharing-title-compact {
-    font-size: 1.8rem;
-    font-weight: 800;
+.ember-wallet-promo-text strong {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ember-purple);
     margin-bottom: var(--space-xs);
-    color: var(--ember-gold);
 }
 
-.social-sharing-subtitle-compact {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.85);
+.ember-wallet-promo-text p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
 }
 
-.social-sharing-buttons-compact {
-    display: flex;
-    gap: var(--space-md);
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.social-share-button-compact {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
+.ember-wallet-promo-button {
+    display: block;
+    width: 100%;
     padding: 12px 24px;
-    background: rgba(215, 51, 39, 0.2);
-    border: 2px solid rgba(215, 51, 39, 0.4);
-    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, var(--ember-purple), var(--ember-indigo));
     color: white;
+    text-align: center;
     text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.ember-wallet-promo-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Claim Form */
+.ember-claim-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.ember-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.ember-form-label {
+    font-size: 0.95rem;
     font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.ember-required {
+    color: var(--ember-orange);
+}
+
+.ember-optional {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+    font-size: 0.85rem;
+}
+
+.ember-form-input {
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
     transition: all var(--transition-base);
 }
 
-.social-share-button-compact:hover {
+.ember-form-input:focus {
+    outline: none;
+    border-color: var(--ember-gold);
+    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.ember-form-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.ember-input-hint {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+/* Claim Button */
+.ember-claim-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: 16px 30px;
     background: var(--ember-gradient-primary);
-    border-color: var(--ember-orange);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--ember-shadow-md);
+    margin-top: var(--space-md);
+}
+
+.ember-claim-button:hover:not(:disabled) {
     transform: translateY(-4px);
+    box-shadow: var(--ember-shadow-lg);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.ember-claim-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.ember-button-icon {
+    font-size: 1.5rem;
+}
+
+/* Message Box */
+.ember-message-box {
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-lg);
+    font-size: 1rem;
+    line-height: 1.6;
+    border: 2px solid;
+}
+
+.ember-message-box.success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--ember-green);
+    color: #ffffff;
+}
+
+.ember-message-box.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+    color: #ffffff;
+}
+
+.ember-message-box.info {
+    background: rgba(240, 165, 0, 0.1);
+    border-color: var(--ember-gold);
+    color: #ffffff;
+}
+
+/* Status Module */
+.ember-status-module {
+    max-width: 1200px;
+    margin: 0 auto var(--space-3xl);
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+}
+
+.ember-status-input-group {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.ember-status-input-group .ember-form-input {
+    flex: 1;
+}
+
+.ember-status-button {
+    padding: 14px 28px;
+    background: var(--ember-gradient-primary);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    white-space: nowrap;
+}
+
+.ember-status-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--ember-shadow-md);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.ember-status-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Info Grid */
+.ember-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.ember-info-card {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    text-align: center;
+    transition: all var(--transition-base);
+}
+
+.ember-info-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--ember-orange);
     box-shadow: var(--ember-shadow-md);
 }
 
-.social-share-icon-compact {
-    width: 20px;
-    height: 20px;
+.ember-info-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+    filter: drop-shadow(0 2px 8px rgba(240, 165, 0, 0.4));
 }
 
-.social-share-text-compact {
+.ember-info-card h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: var(--space-sm);
+}
+
+.ember-info-card p {
     font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
 }
 
 /* ============================================
@@ -1894,6 +2353,10 @@
         grid-template-columns: 1fr;
     }
     
+    .ember-airdrop-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .crypto-content {
         grid-template-columns: 1fr;
     }
@@ -1925,6 +2388,10 @@
     .journey-paths-container {
         grid-template-columns: 1fr;
     }
+    
+    .ember-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /**
@@ -1944,18 +2411,39 @@
         display: none;
     }
     
-    .social-sharing-header-compact {
+    .ember-airdrop-header {
         flex-direction: column;
         text-align: center;
     }
     
-    .social-sharing-buttons-compact {
+    .ember-parachute-icon {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .ember-social-links {
         flex-direction: column;
     }
     
-    .social-share-button-compact {
+    .ember-social-link {
         width: 100%;
         justify-content: center;
+    }
+    
+    .ember-tracker-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .ember-status-input-group {
+        flex-direction: column;
+    }
+    
+    .ember-status-button {
+        width: 100%;
+    }
+    
+    .ember-info-grid {
+        grid-template-columns: 1fr;
     }
     
     .technology-stats {
@@ -2004,8 +2492,18 @@
     .demo-button-row {
         flex-direction: column;
     }
+    
+    .ember-wallet-promo-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .solution-highlight-box {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 /* ============================================
-   END OF LOCAL.CSS
+   END OF LOCAL.CSS v2.0
    ============================================ */
