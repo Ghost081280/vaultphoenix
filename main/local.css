@@ -423,13 +423,13 @@
 }
 
 /* ============================================
-   4. $EMBER AIRDROP SECTION
+   4. $EMBER AIRDROP SECTION - COMPACT SINGLE MODULE
    NEW: Replaces Social Sharing Section
    ============================================ */
 
 /**
- * Main $Ember Airdrop section
- * @features Multi-module layout with tracker, claim form, and status checker
+ * Main $Ember Airdrop section - Everything in ONE compact outer module
+ * @features Unified container with all components tightly packed
  */
 .ember-airdrop-section {
     padding: var(--section-padding) var(--container-padding);
@@ -438,531 +438,560 @@
     overflow: hidden;
 }
 
-/* Airdrop Header */
-.ember-airdrop-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xl);
+/* ONE MAIN OUTER MODULE CONTAINER */
+.ember-airdrop-outer-module {
     max-width: 1200px;
-    margin: 0 auto var(--space-4xl);
+    margin: 0 auto;
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
+    padding: var(--space-xl);
+    box-shadow: var(--ember-shadow-lg);
 }
 
-.ember-airdrop-header-icon {
+/* Compact Header */
+.ember-airdrop-compact-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 2px solid rgba(215, 51, 39, 0.3);
+}
+
+.ember-header-icon-small {
     flex-shrink: 0;
 }
 
-.ember-parachute-icon {
-    width: 120px;
-    height: 120px;
+.ember-parachute-small {
+    width: 80px;
+    height: 80px;
     object-fit: contain;
     animation: float 3s ease-in-out infinite;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-}
-
-.ember-airdrop-header-text {
+.ember-header-text-compact {
     flex: 1;
 }
 
-.ember-airdrop-title {
-    font-size: clamp(2rem, 5vw, 2.8rem);
+.ember-title-compact {
+    font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: 800;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-xs);
     color: #ffffff;
 }
 
-.ember-airdrop-subtitle {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.7;
+.ember-subtitle-compact {
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
-}
-
-/* Coming Soon Banner */
-.ember-coming-soon-banner {
-    background: linear-gradient(135deg, 
-        rgba(45, 24, 16, 0.95) 0%,
-        rgba(69, 26, 3, 0.92) 30%,
-        rgba(124, 45, 18, 0.90) 60%,
-        rgba(215, 51, 39, 0.85) 100%
-    );
-    border: 3px solid rgba(240, 165, 0, 0.4);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.4);
-    margin-bottom: var(--space-3xl);
-    position: relative;
-    overflow: hidden;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.ember-coming-soon-banner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-    0%, 100% { left: -100%; }
-    50% { left: 100%; }
-}
-
-.ember-coming-soon-icon {
-    font-size: clamp(3rem, 8vw, 5rem);
-    margin-bottom: var(--space-md);
-    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.6));
-}
-
-.ember-coming-soon-banner h3 {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    font-weight: 900;
-    margin-bottom: var(--space-md);
-    background: linear-gradient(135deg, #ffffff 0%, #fb923c 50%, #d73327 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.ember-coming-soon-banner p {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-    color: rgba(255, 255, 255, 0.95);
-    margin-bottom: var(--space-xl);
-    line-height: 1.6;
-}
-
-/* Social Links */
-.ember-social-links {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-md);
-    flex-wrap: wrap;
-}
-
-.ember-social-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: 14px 28px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: var(--radius-full);
-    color: white;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.05rem;
-    transition: all var(--transition-base);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.ember-social-link:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(240, 165, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-.ember-social-icon {
-    width: 24px;
-    height: 24px;
-}
-
-/* Airdrop Grid - Main Layout */
-.ember-airdrop-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-2xl);
-    max-width: 1400px;
-    margin: 0 auto var(--space-3xl);
-}
-
-/* Airdrop Module Base */
-.ember-airdrop-module {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
-    transition: all var(--transition-base);
-}
-
-.ember-airdrop-module:hover {
-    border-color: var(--ember-orange);
-    box-shadow: var(--ember-shadow-lg);
-}
-
-.ember-module-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-    margin-bottom: var(--space-xl);
-    padding-bottom: var(--space-md);
-    border-bottom: 2px solid rgba(215, 51, 39, 0.3);
-}
-
-.ember-module-icon {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-}
-
-.ember-module-title {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--ember-gold);
     margin: 0;
 }
 
-/* Tracker Module */
-.ember-tracker-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
-}
-
-.ember-stat-box {
-    background: rgba(15, 15, 15, 0.6);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    text-align: center;
-}
-
-.ember-stat-label {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: var(--space-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.ember-stat-value {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--ember-gold);
-}
-
-.ember-stat-claimed {
-    color: var(--ember-orange);
-}
-
-.ember-stat-remaining {
-    color: var(--ember-green);
-}
-
-/* Progress Bar */
-.ember-progress-container {
-    margin-top: var(--space-xl);
-}
-
-.ember-progress-bar-bg {
-    width: 100%;
-    height: 30px;
-    background: rgba(15, 15, 15, 0.6);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    position: relative;
-}
-
-.ember-progress-bar {
-    height: 100%;
-    background: var(--ember-gradient-primary);
-    border-radius: var(--radius-lg);
-    width: 0%;
-    transition: width 1s ease;
-    box-shadow: 0 0 20px rgba(215, 51, 39, 0.6);
-}
-
-.ember-progress-text {
-    text-align: center;
-    margin-top: var(--space-sm);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-}
-
-/* Phantom Wallet Promo */
-.ember-wallet-promo {
+/* Coming Soon Banner - Compact */
+.ember-coming-soon-compact {
     background: linear-gradient(135deg, 
-        rgba(139, 92, 246, 0.2) 0%, 
-        rgba(99, 102, 241, 0.15) 100%
-    );
-    border: 2px solid rgba(139, 92, 246, 0.3);
+        rgba(45, 24, 16, 0.6) 0%,
+        rgba(124, 45, 18, 0.5) 100%);
+    border: 2px solid rgba(240, 165, 0, 0.3);
     border-radius: var(--radius-xl);
     padding: var(--space-lg);
     margin-bottom: var(--space-xl);
-}
-
-.ember-wallet-promo-content {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
-    margin-bottom: var(--space-md);
+    gap: var(--space-lg);
+    flex-wrap: wrap;
 }
 
-.ember-wallet-promo-icon {
+.ember-coming-icon-small {
+    font-size: 2.5rem;
     flex-shrink: 0;
+    filter: drop-shadow(0 2px 8px rgba(240, 165, 0, 0.6));
 }
 
-.phantom-wallet-icon {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
+.ember-coming-text {
+    flex: 1;
+    min-width: 200px;
 }
 
-.ember-wallet-promo-text strong {
-    display: block;
-    font-size: 1.1rem;
+.ember-coming-text h3 {
+    font-size: 1.3rem;
     font-weight: 700;
-    color: var(--ember-purple);
     margin-bottom: var(--space-xs);
+    color: var(--ember-gold);
 }
 
-.ember-wallet-promo-text p {
+.ember-coming-text p {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
 
-.ember-wallet-promo-button {
-    display: block;
-    width: 100%;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, var(--ember-purple), var(--ember-indigo));
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
+/* Social Links - Three Side by Side */
+.ember-social-links-compact {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.ember-social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all var(--transition-base);
 }
 
-.ember-wallet-promo-button:hover {
+.ember-social-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--ember-gold);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.5);
-    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(240, 165, 0, 0.4);
 }
 
-/* Claim Form */
-.ember-claim-form {
+.ember-social-icon-small {
+    width: 18px;
+    height: 18px;
+}
+
+/* Compact Two-Column Grid */
+.ember-compact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+/* Inner Modules */
+.ember-inner-module {
+    background: rgba(15, 15, 15, 0.4);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+}
+
+.ember-mini-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid rgba(215, 51, 39, 0.2);
+}
+
+.ember-mini-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.ember-mini-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin: 0;
+}
+
+/* Tracker Stats - Compact */
+.ember-stats-compact {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.ember-stat-mini {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
+    text-align: center;
+}
+
+.ember-stat-mini .stat-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.ember-stat-mini .stat-value {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+}
+
+.ember-stat-mini .stat-value.claimed {
+    color: var(--ember-orange);
+}
+
+.ember-stat-mini .stat-value.remaining {
+    color: var(--ember-green);
+}
+
+/* Progress Bar - Compact */
+.ember-progress-compact {
+    margin-top: var(--space-md);
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--ember-gradient-primary);
+    width: 0%;
+    transition: width 1s ease;
+    box-shadow: 0 0 15px rgba(215, 51, 39, 0.6);
+}
+
+.progress-text {
+    text-align: center;
+    margin-top: var(--space-xs);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ember-gold);
+}
+
+/* Phantom Promo - Compact */
+.phantom-promo-compact {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.phantom-icon-small {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.phantom-text-small {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: 2px;
 }
 
-.ember-form-group {
+.phantom-text-small strong {
+    font-size: 0.85rem;
+    color: var(--ember-purple);
+}
+
+.phantom-text-small a {
+    font-size: 0.8rem;
+    color: var(--ember-gold);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.phantom-text-small a:hover {
+    color: var(--ember-orange);
+}
+
+/* Form - Compact */
+.ember-form-compact {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
 }
 
-.ember-form-label {
-    font-size: 0.95rem;
+.form-group-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-group-compact label {
+    font-size: 0.85rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
 }
 
-.ember-required {
+.required {
     color: var(--ember-orange);
 }
 
-.ember-optional {
+.optional {
     color: rgba(255, 255, 255, 0.5);
     font-weight: 400;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
 }
 
-.ember-form-input {
-    padding: 14px 18px;
+.input-compact {
+    padding: 10px 14px;
     background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-md);
     color: white;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-family: inherit;
     transition: all var(--transition-base);
 }
 
-.ember-form-input:focus {
+.input-compact:focus {
     outline: none;
     border-color: var(--ember-gold);
-    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.15);
+    box-shadow: 0 0 0 2px rgba(240, 165, 0, 0.15);
     background: rgba(255, 255, 255, 0.08);
 }
 
-.ember-form-input::placeholder {
+.input-compact::placeholder {
     color: rgba(255, 255, 255, 0.4);
-}
-
-.ember-input-hint {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-style: italic;
 }
 
-/* Claim Button */
-.ember-claim-button {
+.claim-btn-compact {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
     width: 100%;
-    padding: 16px 30px;
+    padding: 12px 24px;
     background: var(--ember-gradient-primary);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: all var(--transition-base);
-    box-shadow: var(--ember-shadow-md);
-    margin-top: var(--space-md);
+    margin-top: var(--space-xs);
 }
 
-.ember-claim-button:hover:not(:disabled) {
-    transform: translateY(-4px);
-    box-shadow: var(--ember-shadow-lg);
+.claim-btn-compact:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.5);
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-.ember-claim-button:disabled {
+.claim-btn-compact:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-.ember-button-icon {
-    font-size: 1.5rem;
+/* Message Box - Compact */
+.message-box-compact {
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    margin-top: var(--space-sm);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    border: 1px solid;
 }
 
-/* Message Box */
-.ember-message-box {
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    margin-top: var(--space-lg);
-    font-size: 1rem;
-    line-height: 1.6;
-    border: 2px solid;
-}
-
-.ember-message-box.success {
+.message-box-compact.success {
     background: rgba(16, 185, 129, 0.1);
     border-color: var(--ember-green);
     color: #ffffff;
 }
 
-.ember-message-box.error {
+.message-box-compact.error {
     background: rgba(239, 68, 68, 0.1);
     border-color: #ef4444;
     color: #ffffff;
 }
 
-.ember-message-box.info {
+.message-box-compact.info {
     background: rgba(240, 165, 0, 0.1);
     border-color: var(--ember-gold);
     color: #ffffff;
 }
 
-/* Status Module */
-.ember-status-module {
-    max-width: 1200px;
-    margin: 0 auto var(--space-3xl);
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
+/* Status Checker - Compact */
+.ember-status-compact {
+    background: rgba(15, 15, 15, 0.4);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
 }
 
-.ember-status-input-group {
+.status-header-compact {
     display: flex;
-    gap: var(--space-md);
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
 }
 
-.ember-status-input-group .ember-form-input {
+.status-icon-small {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.status-header-compact h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin: 0;
+}
+
+.status-input-row {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.status-input-row .input-compact {
     flex: 1;
 }
 
-.ember-status-button {
-    padding: 14px 28px;
+.status-btn-compact {
+    padding: 10px 24px;
     background: var(--ember-gradient-primary);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-lg);
-    font-weight: 700;
-    font-size: 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all var(--transition-base);
     white-space: nowrap;
 }
 
-.ember-status-button:hover:not(:disabled) {
+.status-btn-compact:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: var(--ember-shadow-md);
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-.ember-status-button:disabled {
+.status-btn-compact:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-/* Info Grid */
-.ember-info-grid {
+/* Info Cards - Compact */
+.ember-info-compact {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-lg);
-    max-width: 1400px;
-    margin: 0 auto;
+    gap: var(--space-sm);
 }
 
-.ember-info-card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
+.info-card-mini {
+    background: rgba(15, 15, 15, 0.4);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
     text-align: center;
     transition: all var(--transition-base);
 }
 
-.ember-info-card:hover {
-    transform: translateY(-4px);
+.info-card-mini:hover {
     border-color: var(--ember-orange);
-    box-shadow: var(--ember-shadow-md);
+    transform: translateY(-2px);
 }
 
-.ember-info-icon {
-    font-size: 3rem;
-    margin-bottom: var(--space-md);
-    filter: drop-shadow(0 2px 8px rgba(240, 165, 0, 0.4));
+.info-icon-mini {
+    font-size: 1.8rem;
+    margin-bottom: var(--space-xs);
+    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.3));
 }
 
-.ember-info-card h4 {
-    font-size: 1.2rem;
+.info-text-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.info-text-mini strong {
+    font-size: 0.9rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: var(--space-sm);
 }
 
-.ember-info-card p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
+.info-text-mini span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ============================================
+   RESPONSIVE - Compact Airdrop Module
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .ember-compact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ember-coming-soon-compact {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .ember-social-links-compact {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .ember-airdrop-compact-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .ember-parachute-small {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .ember-social-links-compact {
+        width: 100%;
+    }
+    
+    .ember-social-btn {
+        flex: 1;
+        justify-content: center;
+        min-width: 100px;
+    }
+    
+    .ember-stats-compact {
+        grid-template-columns: 1fr;
+    }
+    
+    .status-input-row {
+        flex-direction: column;
+    }
+    
+    .status-btn-compact {
+        width: 100%;
+    }
+    
+    .ember-info-compact {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .ember-airdrop-outer-module {
+        padding: var(--space-md);
+    }
+    
+    .ember-info-compact {
+        grid-template-columns: 1fr;
+    }
+    
+    .phantom-promo-compact {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 /* ============================================
