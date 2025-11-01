@@ -1,10 +1,8 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.5 FIXED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.6 FIXED
 // ============================================
-// Mobile & Desktop Optimized - Hardcoded Navigation
-// Phoenix AI Integration with Dynamic Site Scanning
-// FIXED: Removed ES6 imports, restored all functionality
-// Updated: Dynamic JSON loading, all features working
+// FIXES: Quick Links population, chatbot immediate load,
+// tooltip behavior, module loading timing, landscape overflow
 // ============================================
 
 (function() {
@@ -138,7 +136,20 @@ const MAIN_PAGE_NAV_LINKS = [
 function generateNavigation() {
     updateDesktopNav(MAIN_PAGE_NAV_LINKS);
     updateMobileNav(MAIN_PAGE_NAV_LINKS);
-    updateFooterNav(MAIN_PAGE_NAV_LINKS);
+    
+    // FIX: Delay footer navigation to ensure DOM is fully loaded
+    setTimeout(() => {
+        updateFooterNav(MAIN_PAGE_NAV_LINKS);
+    }, 100);
+    
+    // FIX: Retry footer navigation if it failed the first time
+    setTimeout(() => {
+        const footerLinks = document.querySelector('.footer-column .footer-links');
+        if (footerLinks && footerLinks.children.length === 0) {
+            console.log('🔄 Retrying footer navigation population...');
+            updateFooterNav(MAIN_PAGE_NAV_LINKS);
+        }
+    }, 500);
 }
 
 function updateDesktopNav(navLinks) {
@@ -193,24 +204,39 @@ function updateMobileNav(navLinks) {
 }
 
 function updateFooterNav(navLinks) {
+    console.log('🔧 Attempting to update footer navigation...');
+    
     const footerColumns = document.querySelectorAll('.footer-column');
+    console.log('📋 Found footer columns:', footerColumns.length);
+    
     let quickLinksColumn = null;
     
-    footerColumns.forEach(col => {
+    footerColumns.forEach((col, index) => {
         const heading = col.querySelector('.footer-heading');
+        console.log(`Column ${index}: Heading = "${heading ? heading.textContent.trim() : 'none'}"`);
+        
         if (heading && heading.textContent.trim() === 'Quick Links') {
             quickLinksColumn = col;
+            console.log('✅ Found Quick Links column!');
         }
     });
     
-    if (!quickLinksColumn) return;
+    if (!quickLinksColumn) {
+        console.warn('⚠️ Quick Links column not found in footer');
+        return;
+    }
     
     const linksContainer = quickLinksColumn.querySelector('.footer-links');
-    if (!linksContainer) return;
+    if (!linksContainer) {
+        console.warn('⚠️ Footer links container not found');
+        return;
+    }
     
+    console.log('🔧 Clearing existing footer links...');
     linksContainer.innerHTML = '';
     
-    navLinks.forEach(link => {
+    console.log('🔧 Adding navigation links to footer...');
+    navLinks.forEach((link, index) => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = link.href;
@@ -218,6 +244,7 @@ function updateFooterNav(navLinks) {
         a.addEventListener('click', handleSmoothScroll);
         li.appendChild(a);
         linksContainer.appendChild(li);
+        console.log(`✅ Added link ${index + 1}: ${link.title}`);
     });
     
     const emberLi = document.createElement('li');
@@ -227,6 +254,9 @@ function updateFooterNav(navLinks) {
     emberA.textContent = '$Ember Token';
     emberLi.appendChild(emberA);
     linksContainer.appendChild(emberLi);
+    console.log('✅ Added $Ember Token link');
+    
+    console.log('✅ Footer navigation updated successfully!');
 }
 
 // ============================================
@@ -666,6 +696,7 @@ let conversationHistory = [];
 let isTyping = false;
 let isOnline = false;
 let phoenixSiteData = null;
+let hasUserScrolled = false;
 
 function getEnhancedSystemPrompt() {
     let basePrompt = phoenixAI.description || 'You are Phoenix, the AI assistant for Vault Phoenix.';
@@ -692,6 +723,46 @@ function getEnhancedSystemPrompt() {
     return basePrompt;
 }
 
+// FIX: Tooltip behavior - show on load, hide on scroll, return on hover
+function initializeChatbotTooltip() {
+    const tooltip = document.querySelector('.chatbot-tooltip');
+    const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
+    
+    if (!tooltip || !chatbotButtonContainer) return;
+    
+    // Show tooltip immediately on page load
+    tooltip.style.opacity = '1';
+    tooltip.style.right = 'calc(100% + 20px)';
+    
+    // Hide tooltip when user scrolls
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (!hasUserScrolled) {
+            hasUserScrolled = true;
+            tooltip.style.opacity = '0';
+            tooltip.style.right = 'calc(100% + 15px)';
+        }
+        
+        // Clear any existing timeout
+        clearTimeout(scrollTimeout);
+    }, { passive: true });
+    
+    // Show tooltip on hover after user has scrolled
+    chatbotButtonContainer.addEventListener('mouseenter', function() {
+        if (hasUserScrolled && !chatbotButtonContainer.classList.contains('chatbot-active')) {
+            tooltip.style.opacity = '1';
+            tooltip.style.right = 'calc(100% + 20px)';
+        }
+    });
+    
+    chatbotButtonContainer.addEventListener('mouseleave', function() {
+        if (hasUserScrolled) {
+            tooltip.style.opacity = '0';
+            tooltip.style.right = 'calc(100% + 15px)';
+        }
+    });
+}
+
 function initializeChatbot() {
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     const chatbotWindow = document.querySelector('.chatbot-window');
@@ -700,7 +771,12 @@ function initializeChatbot() {
         return false;
     }
     
+    // FIX: Ensure chatbot is visible immediately
+    chatbotButtonContainer.style.opacity = '1';
+    chatbotButtonContainer.style.visibility = 'visible';
+    
     updateChatbotStatus();
+    initializeChatbotTooltip();
     
     const chatbotBody = document.querySelector('.chatbot-body');
     if (chatbotBody) {
@@ -762,6 +838,9 @@ function initializeChatbot() {
             }
         });
     }
+    
+    // Re-initialize tooltip behavior after cloning
+    initializeChatbotTooltip();
     
     return true;
 }
@@ -1005,7 +1084,7 @@ window.addEventListener('resize', function() {
 // ============================================
 
 async function init() {
-    console.log('🔥 Vault Phoenix v6.5 Initializing...');
+    console.log('🔥 Vault Phoenix v6.6 Initializing...');
     
     await loadPhoenixAITraining();
     
@@ -1014,18 +1093,22 @@ async function init() {
     initializePrivacyPolicyModal();
     initializeScrollProgress();
     
-    generateNavigation();
+    // FIX: Initialize chatbot IMMEDIATELY before navigation
+    let chatbotInitialized = initializeChatbot();
+    if (!chatbotInitialized) {
+        setTimeout(() => initializeChatbot(), 50);
+    }
+    
+    // Generate navigation after a short delay to ensure DOM is ready
+    setTimeout(() => {
+        generateNavigation();
+    }, 50);
     
     phoenixSiteData = await siteScanner.initializeScan();
     
     setTimeout(() => {
         attachSmoothScrollListeners();
     }, 100);
-    
-    let chatbotInitialized = initializeChatbot();
-    if (!chatbotInitialized) {
-        setTimeout(() => initializeChatbot(), 100);
-    }
     
     let countdownInitialized = initializeUniversalCountdown();
     if (!countdownInitialized) {
@@ -1035,7 +1118,7 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v6.5 Complete');
+    console.log('✅ Vault Phoenix v6.6 Complete');
 }
 
 if (document.readyState === 'loading') {
