@@ -1,7 +1,7 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V7.0 PERFECTED
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V7.1 MOBILE PERFECTED
 // ============================================
-// FIXES: Privacy first, smooth float, tooltip hide on scroll, unified navigation
+// FIXES: Mobile close button, tactile send feedback, scroll layer separation
 // ============================================
 
 (function() {
@@ -94,7 +94,7 @@ async function askPhoenixAI(question) {
   updateChatbotStatus();
   
   if (!localAvailable && !onlineAvailable) {
-    return "I apologize, but both my AI services are currently offline. Please try again in a moment, or contact support@vaultphoenix.com for assistance.";
+    return "I apologize, but both our Online and Local AI services are currently offline. Please try again in a moment, or contact contact@vaultphoenix.com for assistance.";
   }
   
   return "Sorry, I'm having trouble processing that request right now. Please try again.";
@@ -662,7 +662,7 @@ function initializeCookieConsent() {
     });
 }
 
-// FIX: Show chatbot button AFTER privacy handled
+// Show chatbot button AFTER privacy handled
 function showChatbotButton() {
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     if (chatbotButtonContainer) {
@@ -766,7 +766,7 @@ document.querySelectorAll('.scroll-reveal, .fade-in-up, .slide-in-left, .slide-i
 });
 
 // ============================================
-// PHOENIX AI CHATBOT - SMOOTH FLOAT
+// PHOENIX AI CHATBOT - MOBILE PERFECTED
 // ============================================
 let conversationHistory = [];
 let isTyping = false;
@@ -798,7 +798,7 @@ function getEnhancedSystemPrompt() {
     return basePrompt;
 }
 
-// FIX: Tooltip behavior - shows on load, fades on scroll, returns on hover, shows after close
+// Tooltip behavior - shows on load, fades on scroll, returns on hover, shows after close
 function initializeChatbotTooltip() {
     const tooltip = document.querySelector('.chatbot-tooltip');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
@@ -839,43 +839,76 @@ function initializeChatbot() {
     updateChatbotStatus();
     initializeChatbotTooltip();
     
+    // Clone and replace chatbot button to ensure clean event listeners
     const newChatbotButtonContainer = chatbotButtonContainer.cloneNode(true);
     chatbotButtonContainer.parentNode.replaceChild(newChatbotButtonContainer, chatbotButtonContainer);
     
     const chatbotButton = newChatbotButtonContainer.querySelector('.chatbot-button');
     
+    // FIX: Use touchend for better mobile response
     chatbotButton.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         toggleChatbot();
     });
     
-    // Touch support for mobile without passive false
-    chatbotButton.addEventListener('touchstart', function(e) {
+    chatbotButton.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         toggleChatbot();
-    }, { passive: true });
+    }, { passive: false });
     
-    const newChatbotClose = chatbotWindow.querySelector('.chatbot-close');
-    if (newChatbotClose) {
+    // FIX: Properly handle close button for BOTH desktop and mobile
+    const chatbotClose = chatbotWindow.querySelector('.chatbot-close');
+    if (chatbotClose) {
+        // Remove old listeners by cloning
+        const newChatbotClose = chatbotClose.cloneNode(true);
+        chatbotClose.parentNode.replaceChild(newChatbotClose, chatbotClose);
+        
+        // Add fresh listeners
         newChatbotClose.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             closeChatbot();
         });
-        newChatbotClose.addEventListener('touchstart', function(e) {
+        
+        newChatbotClose.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             closeChatbot();
-        }, { passive: true });
+        }, { passive: false });
     }
     
-    const newChatbotSend = chatbotWindow.querySelector('.chatbot-send');
-    if (newChatbotSend) {
-        newChatbotSend.addEventListener('click', sendMessage);
+    // FIX: Add tactile feedback to send button
+    const chatbotSend = chatbotWindow.querySelector('.chatbot-send');
+    if (chatbotSend) {
+        // Remove old listeners
+        const newChatbotSend = chatbotSend.cloneNode(true);
+        chatbotSend.parentNode.replaceChild(newChatbotSend, chatbotSend);
+        
+        // Desktop click
+        newChatbotSend.addEventListener('click', function(e) {
+            e.preventDefault();
+            addTactileFeedback(this);
+            sendMessage();
+        });
+        
+        // Mobile touch with tactile feedback
+        newChatbotSend.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            addTactileFeedback(this);
+            sendMessage();
+        }, { passive: false });
     }
     
-    const newChatbotInput = chatbotWindow.querySelector('.chatbot-input');
-    if (newChatbotInput) {
-        newChatbotInput.addEventListener('keypress', (e) => {
+    const chatbotInput = chatbotWindow.querySelector('.chatbot-input');
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
+                const sendBtn = chatbotWindow.querySelector('.chatbot-send');
+                if (sendBtn) addTactileFeedback(sendBtn);
                 sendMessage();
             }
         });
@@ -884,8 +917,26 @@ function initializeChatbot() {
     // Re-initialize tooltip after cloning
     initializeChatbotTooltip();
     
-    console.log('✅ Chatbot initialized');
+    console.log('✅ Chatbot initialized with mobile fixes');
     return true;
+}
+
+// FIX: Add tactile feedback function for buttons
+function addTactileFeedback(button) {
+    if (!button) return;
+    
+    // Add pressing class for visual animation
+    button.classList.add('pressing');
+    
+    // Vibrate on mobile if supported
+    if ('vibrate' in navigator) {
+        navigator.vibrate(50);
+    }
+    
+    // Remove pressing class after animation
+    setTimeout(() => {
+        button.classList.remove('pressing');
+    }, 200);
 }
 
 function toggleChatbot() {
@@ -903,7 +954,7 @@ function toggleChatbot() {
     }
 }
 
-// FIX: Smooth float - no page scrolling
+// FIX: Smooth float - page scrolls freely, chatbot floats above
 function openChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
@@ -916,32 +967,21 @@ function openChatbot() {
     chatbotWindow.classList.add('active');
     chatbotButtonContainer.classList.add('chatbot-active');
     
-    // Lock body scroll completely
-    document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
-    document.body.style.top = `-${window.scrollY}px`;
+    // DON'T lock body scroll - let page scroll naturally
+    // The chatbot floats above with its own scroll in chatbot-body
     
     if (chatbotBody && chatbotBody.children.length === 0) {
         addWelcomeMessage();
     }
 }
 
-// FIX: Smooth close and restore scroll position
+// FIX: Clean close without scroll position issues
 function closeChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     
     chatbotWindow.classList.remove('active');
     chatbotButtonContainer.classList.remove('chatbot-active');
-    
-    // Restore body scroll
-    const scrollY = document.body.style.top;
-    document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.width = '';
-    document.body.style.top = '';
-    window.scrollTo(0, parseInt(scrollY || '0') * -1);
     
     // Show tooltip again after closing
     showTooltipAfterClose();
@@ -977,7 +1017,7 @@ function addWelcomeMessage() {
     
     let statusMessage = '';
     if (!serviceStatus.online && !serviceStatus.local) {
-        statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both AI services are currently offline. Please try again later or contact support@vaultphoenix.com for assistance.</em>';
+        statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both our Online and Local AI services are currently offline. Please try again later or contact contact@vaultphoenix.com for assistance.</em>';
     } else if (!serviceStatus.online && serviceStatus.local) {
         statusMessage = '<br><br><em style="color: #f59e0b;">ℹ️ Running on local AI. Cloud service temporarily offline.</em>';
     } else if (serviceStatus.online && !serviceStatus.local) {
@@ -1013,7 +1053,11 @@ async function sendMessage() {
     
     addChatMessage('user', message);
     chatbotInput.value = '';
-    setTimeout(() => chatbotInput.blur(), 1000);
+    
+    // FIX: Blur input to hide keyboard on mobile
+    if (window.innerWidth <= 768) {
+        chatbotInput.blur();
+    }
     
     chatbotInput.disabled = true;
     chatbotSend.disabled = true;
@@ -1111,14 +1155,14 @@ window.addEventListener('resize', function() {
 // INITIALIZATION - PRIVACY FIRST, THEN CHATBOT
 // ============================================
 async function init() {
-    console.log('🔥 Vault Phoenix v7.0 PERFECTED Initializing...');
+    console.log('🔥 Vault Phoenix v7.1 MOBILE PERFECTED Initializing...');
     
     await loadPhoenixAITraining();
     
     handleNavbarScroll();
     initializeScrollProgress();
     
-    // FIX: Privacy popup FIRST, chatbot AFTER
+    // Privacy popup FIRST, chatbot AFTER
     initializeCookieConsent();
     initializePrivacyPolicyModal();
     
@@ -1126,7 +1170,7 @@ async function init() {
     let chatbotInitialized = initializeChatbot();
     if (!chatbotInitialized) {
         console.warn('⚠️ Chatbot failed, retrying...');
-        setTimeout(() => initializeChatbot(), 10);
+        setTimeout(() => initializeChatbot(), 100);
     }
     
     // Fallback: If no privacy popup needed, ensure button shows after short delay
@@ -1157,11 +1201,10 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v7.0 PERFECTED Complete');
-    console.log('🎯 Privacy First: Chatbot appears AFTER consent');
-    console.log('🎨 Smooth Float: No wild scrolling');
-    console.log('🔗 Unified Nav: All menus use same source');
-    console.log('📊 Matching Scrollbars: Vertical = Horizontal');
+    console.log('✅ Vault Phoenix v7.1 MOBILE PERFECTED Complete');
+    console.log('📱 Mobile Close: Fixed button handling');
+    console.log('🖱️ Tactile Send: Added button feedback');
+    console.log('📜 Scroll Layer: Chatbot floats independently');
 }
 
 if (document.readyState === 'loading') {
