@@ -1,7 +1,7 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.8 DUAL STATUS
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.9 PRODUCTION
 // ============================================
-// UPDATES: Dual status indicators (Online/Local), immediate load, hardcoded footer links
+// FIXES: Immediate load, smooth tooltip, no page jump, single status indicator
 // ============================================
 
 (function() {
@@ -11,24 +11,36 @@
 // SERVICE STATUS TRACKING
 // ============================================
 let serviceStatus = {
-    local: false,  // Default offline until backend confirms
-    online: false  // Default offline until backend confirms
+    local: false,
+    online: false
 };
 
 // ============================================
-// HYBRID AI WRAPPER - INLINE VERSION WITH STATUS TRACKING
+// SCROLL POSITION MANAGEMENT
+// ============================================
+let savedScrollPosition = 0;
+
+function saveScrollPosition() {
+    savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+}
+
+function restoreScrollPosition() {
+    window.scrollTo(0, savedScrollPosition);
+}
+
+// ============================================
+// HYBRID AI WRAPPER WITH STATUS TRACKING
 // ============================================
 async function askPhoenixAI(question) {
   let localAvailable = false;
   let onlineAvailable = false;
   
   try {
-    // Try the local offline AI first (Muhammad's server)
     const offlineResponse = await fetch('/api/ask_offline', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question }),
-      signal: AbortSignal.timeout(5000) // 5 second timeout
+      signal: AbortSignal.timeout(5000)
     });
 
     if (offlineResponse.ok) {
@@ -46,12 +58,11 @@ async function askPhoenixAI(question) {
   }
 
   try {
-    // If offline AI can't answer, fall back to Claude
     const claudeResponse = await fetch('/api/claude', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question }),
-      signal: AbortSignal.timeout(10000) // 10 second timeout
+      signal: AbortSignal.timeout(10000)
     });
 
     if (claudeResponse.ok) {
@@ -60,7 +71,6 @@ async function askPhoenixAI(question) {
       serviceStatus.online = true;
       updateChatbotStatus();
 
-      // Send Claude's answer back to the server to learn for next time
       try {
         await fetch('/api/save_learning', {
           method: 'POST',
@@ -83,7 +93,6 @@ async function askPhoenixAI(question) {
 
   updateChatbotStatus();
   
-  // Both services failed
   if (!localAvailable && !onlineAvailable) {
     return "I apologize, but both my AI services are currently offline. Please try again in a moment, or contact support@vaultphoenix.com for assistance.";
   }
@@ -92,14 +101,12 @@ async function askPhoenixAI(question) {
 }
 
 // ============================================
-// PHOENIX AI CONFIGURATION - DYNAMIC LOADING
-// Loads training data without ES6 imports
+// PHOENIX AI CONFIGURATION
 // ============================================
-
 let phoenixAI = {
     version: "1.0.0",
     assistant_name: "Phoenix AI",
-    description: "AI assistant for Vault Phoenix's $Ember Token presale and AR crypto gaming platform",
+    description: "AI assistant for Vault Phoenix",
     network: "Solana",
     focus_areas: [
         "$Ember token presale & pricing",
@@ -113,25 +120,22 @@ let phoenixAI = {
     }
 };
 
-// Try to load external training data if available
 async function loadPhoenixAITraining() {
     try {
         const response = await fetch('./shared/phoenix_ai_training.json');
         if (response.ok) {
             const trainingData = await response.json();
             phoenixAI = { ...phoenixAI, ...trainingData };
-            console.log('✅ Phoenix AI training data loaded:', phoenixAI);
+            console.log('✅ Phoenix AI training data loaded');
         }
     } catch (error) {
-        console.log('ℹ️ Using default Phoenix AI configuration (training file not found)');
+        console.log('ℹ️ Using default Phoenix AI configuration');
     }
 }
 
 // ============================================
-// PHOENIX AI SITE SCANNER
-// Dynamically scans all pages, links, anchors, and content
+// SITE SCANNER
 // ============================================
-
 const siteScanner = {
     scannedData: {
         pages: [],
@@ -142,17 +146,13 @@ const siteScanner = {
     },
     
     async initializeScan() {
-        console.log('🔍 Phoenix AI Site Scanner: Starting comprehensive scan...');
+        console.log('🔍 Phoenix AI Site Scanner: Starting scan...');
         
         this.scanCurrentPage();
         this.scanNavigation();
         this.scanFooter();
         
-        if (phoenixAI.site_scan && phoenixAI.site_scan.scan_targets) {
-            await this.scanTargetPages(phoenixAI.site_scan.scan_targets);
-        }
-        
-        console.log('✅ Phoenix AI Site Scanner: Scan complete');
+        console.log('✅ Phoenix AI Site Scanner: Complete');
         return this.scannedData;
     },
     
@@ -206,9 +206,8 @@ const siteScanner = {
 };
 
 // ============================================
-// HARDCODED NAVIGATION SYSTEM
+// HARDCODED NAVIGATION
 // ============================================
-
 const MAIN_PAGE_NAV_LINKS = [
     { title: 'How it Works', href: '#deploy-crypto-coins' },
     { title: 'Live Demo', href: '#experience-both-systems' },
@@ -216,7 +215,6 @@ const MAIN_PAGE_NAV_LINKS = [
     { title: 'Pricing', href: '#developer-sdk-pricing' }
 ];
 
-// FIX: HARDCODED FOOTER QUICK LINKS - Actual page navigation
 const FOOTER_QUICK_LINKS = [
     { title: 'Home', href: 'main.html' },
     { title: 'About Us', href: 'about.html' },
@@ -230,16 +228,14 @@ function generateNavigation() {
     updateDesktopNav(MAIN_PAGE_NAV_LINKS);
     updateMobileNav(MAIN_PAGE_NAV_LINKS);
     
-    // FIX: Use FOOTER_QUICK_LINKS instead of MAIN_PAGE_NAV_LINKS
     setTimeout(() => {
         updateFooterNav(FOOTER_QUICK_LINKS);
     }, 100);
     
-    // FIX: Retry footer navigation if it failed the first time
     setTimeout(() => {
         const footerLinks = document.querySelector('.footer-column .footer-links');
         if (footerLinks && footerLinks.children.length === 0) {
-            console.log('🔄 Retrying footer navigation population...');
+            console.log('🔄 Retrying footer navigation...');
             updateFooterNav(FOOTER_QUICK_LINKS);
         }
     }, 500);
@@ -297,56 +293,37 @@ function updateMobileNav(navLinks) {
 }
 
 function updateFooterNav(footerLinks) {
-    console.log('🔧 Attempting to update footer navigation with HARDCODED links...');
-    
     const footerColumns = document.querySelectorAll('.footer-column');
-    console.log('📋 Found footer columns:', footerColumns.length);
     
     let quickLinksColumn = null;
     
-    footerColumns.forEach((col, index) => {
+    footerColumns.forEach(col => {
         const heading = col.querySelector('.footer-heading');
-        console.log(`Column ${index}: Heading = "${heading ? heading.textContent.trim() : 'none'}"`);
-        
         if (heading && heading.textContent.trim() === 'Quick Links') {
             quickLinksColumn = col;
-            console.log('✅ Found Quick Links column!');
         }
     });
     
-    if (!quickLinksColumn) {
-        console.warn('⚠️ Quick Links column not found in footer');
-        return;
-    }
+    if (!quickLinksColumn) return;
     
     const linksContainer = quickLinksColumn.querySelector('.footer-links');
-    if (!linksContainer) {
-        console.warn('⚠️ Footer links container not found');
-        return;
-    }
+    if (!linksContainer) return;
     
-    console.log('🔧 Clearing existing footer links...');
     linksContainer.innerHTML = '';
     
-    console.log('🔧 Adding HARDCODED page links to footer...');
-    footerLinks.forEach((link, index) => {
+    footerLinks.forEach(link => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = link.href;
         a.textContent = link.title;
-        // No smooth scroll for page navigation links
         li.appendChild(a);
         linksContainer.appendChild(li);
-        console.log(`✅ Added HARDCODED link ${index + 1}: ${link.title} → ${link.href}`);
     });
-    
-    console.log('✅ Footer Quick Links updated successfully with HARDCODED page links!');
 }
 
 // ============================================
-// MOBILE MENU SYSTEM
+// MOBILE MENU
 // ============================================
-
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
@@ -432,7 +409,6 @@ document.addEventListener('keydown', (e) => {
 // ============================================
 // SMOOTH SCROLLING
 // ============================================
-
 function handleSmoothScroll(e) {
     const href = this.getAttribute('href');
     
@@ -472,9 +448,8 @@ function attachSmoothScrollListeners() {
 }
 
 // ============================================
-// NAVBAR SMOOTH SCROLL TRANSITION
+// NAVBAR SMOOTH TRANSITIONS
 // ============================================
-
 const navbar = document.querySelector('.navbar');
 let scrollTimeout;
 
@@ -534,7 +509,6 @@ window.addEventListener('scroll', function() {
 // ============================================
 // SCROLL PROGRESS INDICATOR
 // ============================================
-
 function initializeScrollProgress() {
     const progressContainer = document.createElement('div');
     progressContainer.className = 'scroll-progress-container';
@@ -567,7 +541,6 @@ function initializeScrollProgress() {
 // ============================================
 // UNIVERSAL COUNTDOWN TIMER
 // ============================================
-
 function initializeUniversalCountdown() {
     const targetDate = new Date('November 1, 2025 00:00:00 UTC');
     
@@ -639,7 +612,6 @@ window.initializeUniversalCountdown = initializeUniversalCountdown;
 // ============================================
 // COOKIE CONSENT BANNER
 // ============================================
-
 function initializeCookieConsent() {
     const cookieConsent = localStorage.getItem('vaultphoenix_cookie_consent');
     
@@ -683,7 +655,6 @@ function initializeCookieConsent() {
 // ============================================
 // PRIVACY POLICY MODAL
 // ============================================
-
 function initializePrivacyPolicyModal() {
     const modalHTML = `
         <div class="privacy-modal-overlay" id="privacy-modal-overlay">
@@ -750,7 +721,6 @@ function initializePrivacyPolicyModal() {
 // ============================================
 // SCROLL REVEAL ANIMATIONS
 // ============================================
-
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -769,9 +739,8 @@ document.querySelectorAll('.scroll-reveal, .fade-in-up, .slide-in-left, .slide-i
 });
 
 // ============================================
-// PHOENIX AI CHATBOT SYSTEM - DUAL STATUS VERSION
+// PHOENIX AI CHATBOT - PRODUCTION OPTIMIZED
 // ============================================
-
 let conversationHistory = [];
 let isTyping = false;
 let phoenixSiteData = null;
@@ -802,46 +771,39 @@ function getEnhancedSystemPrompt() {
     return basePrompt;
 }
 
-// FIX: Tooltip behavior - show on load, hide on scroll, return on hover
+// FIX: Smart tooltip behavior
 function initializeChatbotTooltip() {
     const tooltip = document.querySelector('.chatbot-tooltip');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     
     if (!tooltip || !chatbotButtonContainer) return;
     
-    // Show tooltip immediately on page load
-    tooltip.style.opacity = '1';
-    tooltip.style.right = 'calc(100% + 20px)';
+    // Show tooltip on load
+    tooltip.classList.remove('hidden');
     
-    // Hide tooltip when user scrolls
-    let scrollTimeout;
+    // Hide on scroll
     window.addEventListener('scroll', function() {
         if (!hasUserScrolled) {
             hasUserScrolled = true;
-            tooltip.style.opacity = '0';
-            tooltip.style.right = 'calc(100% + 15px)';
+            tooltip.classList.add('hidden');
         }
-        
-        // Clear any existing timeout
-        clearTimeout(scrollTimeout);
-    }, { passive: true });
+    }, { passive: true, once: true });
     
-    // Show tooltip on hover after user has scrolled
+    // Show on hover (after scroll)
     chatbotButtonContainer.addEventListener('mouseenter', function() {
         if (hasUserScrolled && !chatbotButtonContainer.classList.contains('chatbot-active')) {
-            tooltip.style.opacity = '1';
-            tooltip.style.right = 'calc(100% + 20px)';
+            tooltip.classList.remove('hidden');
         }
     });
     
     chatbotButtonContainer.addEventListener('mouseleave', function() {
         if (hasUserScrolled) {
-            tooltip.style.opacity = '0';
-            tooltip.style.right = 'calc(100% + 15px)';
+            tooltip.classList.add('hidden');
         }
     });
 }
 
+// FIX: Immediate chatbot initialization
 function initializeChatbot() {
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     const chatbotWindow = document.querySelector('.chatbot-window');
@@ -851,7 +813,7 @@ function initializeChatbot() {
         return false;
     }
     
-    // FIX: Ensure chatbot is visible IMMEDIATELY - no delays
+    // Ensure immediate visibility
     chatbotButtonContainer.style.opacity = '1';
     chatbotButtonContainer.style.visibility = 'visible';
     chatbotButtonContainer.style.display = 'block';
@@ -897,6 +859,12 @@ function initializeChatbot() {
         toggleChatbot();
     });
     
+    chatbotButton.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleChatbot();
+    }, { passive: false });
+    
     const newChatbotClose = chatbotWindow.querySelector('.chatbot-close');
     if (newChatbotClose) {
         newChatbotClose.addEventListener('click', function(e) {
@@ -920,10 +888,10 @@ function initializeChatbot() {
         });
     }
     
-    // Re-initialize tooltip behavior after cloning
+    // Re-initialize tooltip after cloning
     initializeChatbotTooltip();
     
-    console.log('✅ Chatbot initialized successfully');
+    console.log('✅ Chatbot initialized');
     return true;
 }
 
@@ -942,27 +910,36 @@ function toggleChatbot() {
     }
 }
 
+// FIX: Open chatbot without page jump
 function openChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     const chatbotBody = document.querySelector('.chatbot-body');
     
+    // Close mobile menu if open
     if (mobileMenu && mobileMenu.classList.contains('active')) {
         closeMobileMenu();
     }
     
+    // Save scroll position
+    saveScrollPosition();
+    
     chatbotWindow.classList.add('active');
     chatbotButtonContainer.classList.add('chatbot-active');
     
-    document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
+    // Prevent body scroll on mobile without jumping
+    if (window.innerWidth <= 768) {
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${savedScrollPosition}px`;
+        document.body.style.width = '100%';
+    }
     
     if (chatbotBody && chatbotBody.children.length === 0) {
         addWelcomeMessage();
     }
 }
 
+// FIX: Close chatbot and restore scroll position
 function closeChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
@@ -970,27 +947,39 @@ function closeChatbot() {
     chatbotWindow.classList.remove('active');
     chatbotButtonContainer.classList.remove('chatbot-active');
     
-    document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.width = '';
+    // Restore body scroll and position
+    if (window.innerWidth <= 768) {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        restoreScrollPosition();
+    }
 }
 
+// FIX: Single status indicator with detailed text
 function updateChatbotStatus() {
     const statusElement = document.querySelector('.chatbot-status');
-    const statusDot = document.querySelector('.chatbot-status-dot');
     
-    if (statusElement && statusDot) {
-        // Show dual status with separate indicators
-        const onlineStatus = serviceStatus.online ? 
-            '<span class="chatbot-status-dot online"></span>Online' : 
-            '<span class="chatbot-status-dot"></span>Offline';
-        
-        const localStatus = serviceStatus.local ? 
-            '<span class="chatbot-status-dot online"></span>Local' : 
-            '<span class="chatbot-status-dot"></span>Offline';
-        
-        statusElement.innerHTML = `${onlineStatus} | ${localStatus}`;
+    if (!statusElement) return;
+    
+    // Determine overall status
+    const isAnyOnline = serviceStatus.online || serviceStatus.local;
+    
+    // Build status text
+    let statusText = '';
+    if (serviceStatus.online && serviceStatus.local) {
+        statusText = 'Online & Local Active';
+    } else if (serviceStatus.online) {
+        statusText = 'Online (Cloud Active)';
+    } else if (serviceStatus.local) {
+        statusText = 'Local AI Active';
+    } else {
+        statusText = 'Services Offline';
     }
+    
+    // Update DOM with single indicator
+    const dotClass = isAnyOnline ? 'chatbot-status-dot online' : 'chatbot-status-dot';
+    statusElement.innerHTML = `<span class="${dotClass}"></span>${statusText}`;
 }
 
 function addWelcomeMessage() {
@@ -999,14 +988,15 @@ function addWelcomeMessage() {
     
     const assistantName = phoenixAI.assistant_name || 'Phoenix AI';
     
-    // Determine service status message
     let statusMessage = '';
     if (!serviceStatus.online && !serviceStatus.local) {
-        statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both AI services are currently offline. Please try again later or contact support.</em>';
+        statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both AI services are currently offline. Please try again later or contact support@vaultphoenix.com for assistance.</em>';
     } else if (!serviceStatus.online && serviceStatus.local) {
-        statusMessage = '<br><br><em style="color: #f59e0b;">⚠️ Only local AI is available right now. Our cloud service is temporarily offline.</em>';
+        statusMessage = '<br><br><em style="color: #f59e0b;">ℹ️ Running on local AI. Cloud service temporarily offline.</em>';
     } else if (serviceStatus.online && !serviceStatus.local) {
-        statusMessage = '<br><br><em style="color: #f59e0b;">⚠️ Only cloud AI is available right now. Our local service is temporarily offline.</em>';
+        statusMessage = '<br><br><em style="color: #f59e0b;">ℹ️ Running on cloud AI. Local service temporarily offline.</em>';
+    } else {
+        statusMessage = '<br><br><em style="color: #10b981;">✓ Both AI services online and ready!</em>';
     }
     
     let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>Ask me anything about our platform, $Ember tokens, campaigns, or SDK integration!';
@@ -1024,10 +1014,6 @@ function addWelcomeMessage() {
         </div>
     `;
 }
-
-// ============================================
-// DUAL STATUS AI MESSAGE HANDLER
-// ============================================
 
 async function sendMessage() {
     const chatbotInput = document.querySelector('.chatbot-input');
@@ -1049,12 +1035,10 @@ async function sendMessage() {
     showTypingIndicator();
     
     try {
-        // Use the dual-status AI wrapper
         const reply = await askPhoenixAI(message);
         
         removeTypingIndicator();
         
-        // Store in conversation history
         conversationHistory.push(
             { role: 'user', content: message },
             { role: 'assistant', content: reply }
@@ -1126,7 +1110,6 @@ window.phoenixSiteScanner = siteScanner;
 // ============================================
 // RESPONSIVE HANDLING
 // ============================================
-
 let resizeTimeout;
 window.addEventListener('resize', function() {
     clearTimeout(resizeTimeout);
@@ -1138,16 +1121,15 @@ window.addEventListener('resize', function() {
 });
 
 // ============================================
-// INITIALIZATION - IMMEDIATE CHATBOT LOAD
+// INITIALIZATION - IMMEDIATE CHATBOT
 // ============================================
-
 async function init() {
-    console.log('🔥 Vault Phoenix v6.8 DUAL STATUS Initializing...');
+    console.log('🔥 Vault Phoenix v6.9 PRODUCTION Initializing...');
     
-    // FIX: Initialize chatbot FIRST and IMMEDIATELY - no delays
+    // Initialize chatbot IMMEDIATELY
     let chatbotInitialized = initializeChatbot();
     if (!chatbotInitialized) {
-        console.warn('⚠️ Chatbot failed to initialize, retrying...');
+        console.warn('⚠️ Chatbot failed, retrying...');
         setTimeout(() => initializeChatbot(), 10);
     }
     
@@ -1158,7 +1140,6 @@ async function init() {
     initializePrivacyPolicyModal();
     initializeScrollProgress();
     
-    // Generate navigation with HARDCODED footer links
     setTimeout(() => {
         generateNavigation();
     }, 50);
@@ -1177,9 +1158,10 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v6.8 DUAL STATUS Complete');
-    console.log('🤖 AI Mode: Dual Status (Online | Local) with separate indicators');
-    console.log('📋 Footer: HARDCODED Quick Links implemented');
+    console.log('✅ Vault Phoenix v6.9 PRODUCTION Complete');
+    console.log('🤖 Chatbot: Immediate load with smart tooltip');
+    console.log('📱 Mobile: Optimized touch & no page jump');
+    console.log('📊 Status: Single indicator with detailed text');
 }
 
 if (document.readyState === 'loading') {
