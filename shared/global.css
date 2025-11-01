@@ -103,6 +103,7 @@ html {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
+    scroll-padding-top: 80px;
 }
 
 body {
@@ -965,6 +966,8 @@ button {
     gap: 1rem;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    min-height: 200px;
 }
 
 .chatbot-body::-webkit-scrollbar {
