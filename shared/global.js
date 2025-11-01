@@ -1,7 +1,7 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V6.9 PRODUCTION
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V7.0 PERFECTED
 // ============================================
-// FIXES: Immediate load, smooth tooltip, no page jump, single status indicator
+// FIXES: Privacy first, smooth float, tooltip hide on scroll, unified navigation
 // ============================================
 
 (function() {
@@ -16,17 +16,17 @@ let serviceStatus = {
 };
 
 // ============================================
-// SCROLL POSITION MANAGEMENT
+// UNIFIED NAVIGATION SOURCE
+// Desktop nav, mobile menu, and footer Quick Links ALL use this
 // ============================================
-let savedScrollPosition = 0;
-
-function saveScrollPosition() {
-    savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-}
-
-function restoreScrollPosition() {
-    window.scrollTo(0, savedScrollPosition);
-}
+const UNIFIED_NAV_LINKS = [
+    { title: 'Home', href: 'main.html' },
+    { title: 'About Us', href: 'about.html' },
+    { title: 'Team', href: 'team.html' },
+    { title: 'Campaigns', href: 'campaigns.html' },
+    { title: 'SDK', href: 'sdk.html' },
+    { title: '$Ember Token', href: 'ember-presale.html' }
+];
 
 // ============================================
 // HYBRID AI WRAPPER WITH STATUS TRACKING
@@ -178,7 +178,7 @@ const siteScanner = {
     },
     
     scanNavigation() {
-        MAIN_PAGE_NAV_LINKS.forEach(navLink => {
+        UNIFIED_NAV_LINKS.forEach(navLink => {
             this.scannedData.navigation.push({
                 title: navLink.title,
                 href: navLink.href,
@@ -206,37 +206,21 @@ const siteScanner = {
 };
 
 // ============================================
-// HARDCODED NAVIGATION
+// UNIFIED NAVIGATION GENERATOR
 // ============================================
-const MAIN_PAGE_NAV_LINKS = [
-    { title: 'How it Works', href: '#deploy-crypto-coins' },
-    { title: 'Live Demo', href: '#experience-both-systems' },
-    { title: 'Get Ideas', href: '#crypto-gaming-industries' },
-    { title: 'Pricing', href: '#developer-sdk-pricing' }
-];
-
-const FOOTER_QUICK_LINKS = [
-    { title: 'Home', href: 'main.html' },
-    { title: 'About Us', href: 'about.html' },
-    { title: 'Team', href: 'team.html' },
-    { title: 'Campaigns', href: 'campaigns.html' },
-    { title: 'SDK', href: 'sdk.html' },
-    { title: '$Ember Token', href: 'ember-presale.html' }
-];
-
 function generateNavigation() {
-    updateDesktopNav(MAIN_PAGE_NAV_LINKS);
-    updateMobileNav(MAIN_PAGE_NAV_LINKS);
+    updateDesktopNav(UNIFIED_NAV_LINKS);
+    updateMobileNav(UNIFIED_NAV_LINKS);
     
     setTimeout(() => {
-        updateFooterNav(FOOTER_QUICK_LINKS);
+        updateFooterNav(UNIFIED_NAV_LINKS);
     }, 100);
     
     setTimeout(() => {
         const footerLinks = document.querySelector('.footer-column .footer-links');
         if (footerLinks && footerLinks.children.length === 0) {
             console.log('🔄 Retrying footer navigation...');
-            updateFooterNav(FOOTER_QUICK_LINKS);
+            updateFooterNav(UNIFIED_NAV_LINKS);
         }
     }, 500);
 }
@@ -252,11 +236,14 @@ function updateDesktopNav(navLinks) {
         const a = document.createElement('a');
         a.href = link.href;
         a.textContent = link.title;
-        a.addEventListener('click', handleSmoothScroll);
+        if (link.href.startsWith('#')) {
+            a.addEventListener('click', handleSmoothScroll);
+        }
         li.appendChild(a);
         desktopNav.appendChild(li);
     });
     
+    // Add $Ember Token button last
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.href = 'ember-presale.html';
@@ -277,7 +264,9 @@ function updateMobileNav(navLinks) {
         const a = document.createElement('a');
         a.href = link.href;
         a.textContent = link.title;
-        a.addEventListener('click', handleSmoothScroll);
+        if (link.href.startsWith('#')) {
+            a.addEventListener('click', handleSmoothScroll);
+        }
         a.addEventListener('click', closeMobileMenu);
         li.appendChild(a);
         mobileNav.appendChild(li);
@@ -401,8 +390,14 @@ if (mobileMenuOverlay && mobileMenu) {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
-        closeMobileMenu();
+    if (e.key === 'Escape') {
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+            closeMobileMenu();
+        }
+        const chatbotWindow = document.querySelector('.chatbot-window');
+        if (chatbotWindow && chatbotWindow.classList.contains('active')) {
+            closeChatbot();
+        }
     }
 });
 
@@ -616,6 +611,8 @@ function initializeCookieConsent() {
     const cookieConsent = localStorage.getItem('vaultphoenix_cookie_consent');
     
     if (cookieConsent !== null) {
+        // Cookie consent already handled, show chatbot immediately
+        showChatbotButton();
         return;
     }
     
@@ -642,14 +639,30 @@ function initializeCookieConsent() {
     consentBanner.querySelector('.cookie-accept').addEventListener('click', function() {
         localStorage.setItem('vaultphoenix_cookie_consent', 'accepted');
         consentBanner.classList.remove('show');
-        setTimeout(() => consentBanner.remove(), 400);
+        setTimeout(() => {
+            consentBanner.remove();
+            showChatbotButton();
+        }, 400);
     });
     
     consentBanner.querySelector('.cookie-decline').addEventListener('click', function() {
         localStorage.setItem('vaultphoenix_cookie_consent', 'declined');
         consentBanner.classList.remove('show');
-        setTimeout(() => consentBanner.remove(), 400);
+        setTimeout(() => {
+            consentBanner.remove();
+            showChatbotButton();
+        }, 400);
     });
+}
+
+// FIX: Show chatbot button AFTER privacy handled
+function showChatbotButton() {
+    const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
+    if (chatbotButtonContainer) {
+        chatbotButtonContainer.classList.add('ready');
+        // Re-initialize tooltip after showing button
+        initializeChatbotTooltip();
+    }
 }
 
 // ============================================
@@ -739,7 +752,7 @@ document.querySelectorAll('.scroll-reveal, .fade-in-up, .slide-in-left, .slide-i
 });
 
 // ============================================
-// PHOENIX AI CHATBOT - PRODUCTION OPTIMIZED
+// PHOENIX AI CHATBOT - SMOOTH FLOAT
 // ============================================
 let conversationHistory = [];
 let isTyping = false;
@@ -771,25 +784,30 @@ function getEnhancedSystemPrompt() {
     return basePrompt;
 }
 
-// FIX: Smart tooltip behavior
+// FIX: Tooltip that ACTUALLY hides on scroll
 function initializeChatbotTooltip() {
     const tooltip = document.querySelector('.chatbot-tooltip');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     
     if (!tooltip || !chatbotButtonContainer) return;
     
-    // Show tooltip on load
+    // Show tooltip initially
     tooltip.classList.remove('hidden');
+    hasUserScrolled = false;
     
-    // Hide on scroll
-    window.addEventListener('scroll', function() {
+    // Hide on ANY scroll event
+    const hideTooltipOnScroll = function() {
         if (!hasUserScrolled) {
             hasUserScrolled = true;
             tooltip.classList.add('hidden');
         }
-    }, { passive: true, once: true });
+    };
     
-    // Show on hover (after scroll)
+    // Remove old listeners and add new one
+    window.removeEventListener('scroll', hideTooltipOnScroll);
+    window.addEventListener('scroll', hideTooltipOnScroll, { passive: true, once: true });
+    
+    // Show on hover after scroll
     chatbotButtonContainer.addEventListener('mouseenter', function() {
         if (hasUserScrolled && !chatbotButtonContainer.classList.contains('chatbot-active')) {
             tooltip.classList.remove('hidden');
@@ -803,7 +821,6 @@ function initializeChatbotTooltip() {
     });
 }
 
-// FIX: Immediate chatbot initialization
 function initializeChatbot() {
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     const chatbotWindow = document.querySelector('.chatbot-window');
@@ -812,11 +829,6 @@ function initializeChatbot() {
         console.warn('⚠️ Chatbot elements not found');
         return false;
     }
-    
-    // Ensure immediate visibility
-    chatbotButtonContainer.style.opacity = '1';
-    chatbotButtonContainer.style.visibility = 'visible';
-    chatbotButtonContainer.style.display = 'block';
     
     updateChatbotStatus();
     initializeChatbotTooltip();
@@ -910,36 +922,28 @@ function toggleChatbot() {
     }
 }
 
-// FIX: Open chatbot without page jump
+// FIX: Smooth float - no page scrolling
 function openChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
     const chatbotBody = document.querySelector('.chatbot-body');
     
-    // Close mobile menu if open
     if (mobileMenu && mobileMenu.classList.contains('active')) {
         closeMobileMenu();
     }
     
-    // Save scroll position
-    saveScrollPosition();
-    
     chatbotWindow.classList.add('active');
     chatbotButtonContainer.classList.add('chatbot-active');
     
-    // Prevent body scroll on mobile without jumping
-    if (window.innerWidth <= 768) {
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${savedScrollPosition}px`;
-        document.body.style.width = '100%';
-    }
+    // NO page manipulation - just overlay
+    // Chatbot floats smoothly on top
     
     if (chatbotBody && chatbotBody.children.length === 0) {
         addWelcomeMessage();
     }
 }
 
-// FIX: Close chatbot and restore scroll position
+// FIX: Smooth close - no scrolling
 function closeChatbot() {
     const chatbotWindow = document.querySelector('.chatbot-window');
     const chatbotButtonContainer = document.querySelector('.chatbot-button-container');
@@ -947,25 +951,16 @@ function closeChatbot() {
     chatbotWindow.classList.remove('active');
     chatbotButtonContainer.classList.remove('chatbot-active');
     
-    // Restore body scroll and position
-    if (window.innerWidth <= 768) {
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        restoreScrollPosition();
-    }
+    // NO page manipulation - stays exactly where it is
 }
 
-// FIX: Single status indicator with detailed text
 function updateChatbotStatus() {
     const statusElement = document.querySelector('.chatbot-status');
     
     if (!statusElement) return;
     
-    // Determine overall status
     const isAnyOnline = serviceStatus.online || serviceStatus.local;
     
-    // Build status text
     let statusText = '';
     if (serviceStatus.online && serviceStatus.local) {
         statusText = 'Online & Local Active';
@@ -977,7 +972,6 @@ function updateChatbotStatus() {
         statusText = 'Services Offline';
     }
     
-    // Update DOM with single indicator
     const dotClass = isAnyOnline ? 'chatbot-status-dot online' : 'chatbot-status-dot';
     statusElement.innerHTML = `<span class="${dotClass}"></span>${statusText}`;
 }
@@ -1121,25 +1115,28 @@ window.addEventListener('resize', function() {
 });
 
 // ============================================
-// INITIALIZATION - IMMEDIATE CHATBOT
+// INITIALIZATION - PRIVACY FIRST, THEN CHATBOT
 // ============================================
 async function init() {
-    console.log('🔥 Vault Phoenix v6.9 PRODUCTION Initializing...');
+    console.log('🔥 Vault Phoenix v7.0 PERFECTED Initializing...');
     
-    // Initialize chatbot IMMEDIATELY
+    await loadPhoenixAITraining();
+    
+    handleNavbarScroll();
+    initializeScrollProgress();
+    
+    // FIX: Privacy popup FIRST, chatbot AFTER
+    initializeCookieConsent();
+    initializePrivacyPolicyModal();
+    
+    // Initialize chatbot structure (but don't show button yet)
     let chatbotInitialized = initializeChatbot();
     if (!chatbotInitialized) {
         console.warn('⚠️ Chatbot failed, retrying...');
         setTimeout(() => initializeChatbot(), 10);
     }
     
-    await loadPhoenixAITraining();
-    
-    handleNavbarScroll();
-    initializeCookieConsent();
-    initializePrivacyPolicyModal();
-    initializeScrollProgress();
-    
+    // Unified navigation
     setTimeout(() => {
         generateNavigation();
     }, 50);
@@ -1158,10 +1155,11 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v6.9 PRODUCTION Complete');
-    console.log('🤖 Chatbot: Immediate load with smart tooltip');
-    console.log('📱 Mobile: Optimized touch & no page jump');
-    console.log('📊 Status: Single indicator with detailed text');
+    console.log('✅ Vault Phoenix v7.0 PERFECTED Complete');
+    console.log('🎯 Privacy First: Chatbot appears AFTER consent');
+    console.log('🎨 Smooth Float: No wild scrolling');
+    console.log('🔗 Unified Nav: All menus use same source');
+    console.log('📊 Matching Scrollbars: Vertical = Horizontal');
 }
 
 if (document.readyState === 'loading') {
