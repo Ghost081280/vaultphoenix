@@ -4,7 +4,7 @@
  * ============================================
  * 
  * @file        local.js
- * @version     1.0.0
+ * @version     2.0.0
  * @author      Vault Phoenix LLC
  * 
  * @description
@@ -19,9 +19,10 @@
  * @features
  * 1. Phone Gallery - Interactive phone screenshot viewer
  * 2. Laptop Gallery - Interactive laptop screenshot viewer
- * 3. Scroll Reveal - Intersection Observer animations
- * 4. Shared Components Loader - Dynamic HTML component injection
- * 5. Initialization System - Graceful startup with shared.js coordination
+ * 3. $Ember Airdrop System - Claim form and status tracking
+ * 4. Scroll Reveal - Intersection Observer animations
+ * 5. Shared Components Loader - Dynamic HTML component injection
+ * 6. Initialization System - Graceful startup with shared.js coordination
  * 
  * @browser_support
  * - Chrome 60+
@@ -52,7 +53,14 @@
         SHARED_READY_CHECK_INTERVAL: 50, // Check interval for shared.js
         CHATBOT_INIT_DELAY: 100,         // Delay before chatbot initialization
         SCROLL_REVEAL_THRESHOLD: 0.1,    // Intersection Observer threshold
-        SCROLL_REVEAL_ROOT_MARGIN: '0px 0px -50px 0px'
+        SCROLL_REVEAL_ROOT_MARGIN: '0px 0px -50px 0px',
+        
+        // Airdrop Configuration
+        BACKEND_READY: false,            // Set to true when backend is ready
+        API_BASE: '/api',                // API endpoint base URL
+        TOTAL_EMBER: 10000000,           // Total $Ember pool
+        TOKENS_PER_CLAIM: 1000,          // Tokens per claim
+        MAX_RECIPIENTS: 10000            // Maximum number of recipients
     };
 
     /**
@@ -152,6 +160,465 @@
         
         LOGGER.debug(`Laptop image changed to: ${imageSrc}`);
     };
+
+    // ============================================
+    // $EMBER AIRDROP SYSTEM
+    // ============================================
+
+    /**
+     * Airdrop system elements cache
+     * @type {Object}
+     */
+    let airdropElements = null;
+
+    /**
+     * Initialize airdrop system and cache DOM elements
+     * 
+     * @function initializeAirdropSystem
+     * @returns {void}
+     */
+    function initializeAirdropSystem() {
+        LOGGER.info('Initializing $Ember Airdrop system...');
+        
+        // Cache DOM elements
+        airdropElements = {
+            claimForm: document.getElementById('ember-claim-form'),
+            claimWallet: document.getElementById('claim-wallet'),
+            claimEmail: document.getElementById('claim-email'),
+            claimTwitter: document.getElementById('claim-twitter'),
+            claimTelegram: document.getElementById('claim-telegram'),
+            claimButton: document.getElementById('claim-submit-btn'),
+            messageBox: document.getElementById('ember-message-box'),
+            statusWallet: document.getElementById('status-wallet'),
+            checkStatusBtn: document.getElementById('check-status-btn'),
+            totalEmber: document.getElementById('ember-total-ember'),
+            emberClaimed: document.getElementById('ember-claimed'),
+            emberRemaining: document.getElementById('ember-remaining'),
+            peopleClaimed: document.getElementById('ember-people-claimed'),
+            progressPercentage: document.getElementById('ember-progress-percentage'),
+            progressBar: document.getElementById('ember-progress-bar')
+        };
+        
+        // Validate required elements exist
+        if (!airdropElements.claimForm) {
+            LOGGER.warn('Airdrop form not found - system not initialized');
+            return;
+        }
+        
+        // Initialize tracker display
+        updateTrackerDisplay();
+        
+        // Setup event listeners
+        setupAirdropEventListeners();
+        
+        // Load real-time data if backend ready
+        if (CONFIG.BACKEND_READY) {
+            loadRealTimeData();
+            // Refresh data every 30 seconds
+            setInterval(loadRealTimeData, 30000);
+        }
+        
+        LOGGER.success('$Ember Airdrop system initialized');
+    }
+
+    /**
+     * Setup event listeners for airdrop functionality
+     * 
+     * @function setupAirdropEventListeners
+     * @returns {void}
+     */
+    function setupAirdropEventListeners() {
+        // Claim form submission
+        if (airdropElements.claimForm) {
+            airdropElements.claimForm.addEventListener('submit', handleClaimSubmit);
+        }
+        
+        // Status check button
+        if (airdropElements.checkStatusBtn) {
+            airdropElements.checkStatusBtn.addEventListener('click', handleStatusCheck);
+        }
+        
+        // Real-time validation for wallet input
+        if (airdropElements.claimWallet) {
+            airdropElements.claimWallet.addEventListener('blur', function() {
+                validateWalletInput(this);
+            });
+        }
+        
+        // Real-time validation for email input
+        if (airdropElements.claimEmail) {
+            airdropElements.claimEmail.addEventListener('blur', function() {
+                validateEmailInput(this);
+            });
+        }
+    }
+
+    /**
+     * Handle claim form submission
+     * 
+     * @function handleClaimSubmit
+     * @param {Event} e - Form submission event
+     * @returns {void}
+     */
+    async function handleClaimSubmit(e) {
+        e.preventDefault();
+        
+        const wallet = airdropElements.claimWallet.value.trim();
+        const email = airdropElements.claimEmail.value.trim();
+        const twitter = airdropElements.claimTwitter.value.trim();
+        const telegram = airdropElements.claimTelegram.value.trim();
+        
+        // Validate required fields
+        if (!wallet || !email) {
+            showMessage('❌ Please fill in all required fields (Wallet Address and Email).', 'error');
+            return;
+        }
+        
+        // Validate wallet format
+        if (!validateWallet(wallet)) {
+            showMessage('❌ Invalid Solana wallet address format. Please check and try again.<br><small>Valid addresses are 32-44 characters long and use base58 encoding.</small>', 'error');
+            airdropElements.claimWallet.focus();
+            return;
+        }
+        
+        // Validate email format
+        if (!validateEmail(email)) {
+            showMessage('❌ Invalid email address format. Please enter a valid email.', 'error');
+            airdropElements.claimEmail.focus();
+            return;
+        }
+        
+        // Validate Twitter URL if provided
+        if (twitter && !validateUrl(twitter)) {
+            showMessage('❌ Invalid Twitter/X profile URL. Please enter a valid URL (e.g., https://x.com/username).', 'error');
+            airdropElements.claimTwitter.focus();
+            return;
+        }
+        
+        // Check if backend is ready
+        if (!CONFIG.BACKEND_READY) {
+            showMessage('⏳ <strong>Airdrop Coming Soon!</strong><br><br>The $EMBER airdrop system is not yet active. Follow us on social media to be notified the moment it launches!<br><br>Your information has been noted for when the airdrop goes live.', 'info');
+            return;
+        }
+        
+        // Disable form during submission
+        airdropElements.claimButton.disabled = true;
+        const originalButtonText = airdropElements.claimButton.innerHTML;
+        airdropElements.claimButton.innerHTML = '<span class="ember-button-icon">⏳</span><span>Processing...</span>';
+        
+        try {
+            const response = await fetch(`${CONFIG.API_BASE}/claim.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    wallet,
+                    email,
+                    twitter: twitter || null,
+                    telegram: telegram || null
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Server responded with ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                showMessage(`✅ <strong>Claim Successful!</strong><br><br>Congratulations! You've successfully claimed <span class="golden-highlight">${formatNumber(CONFIG.TOKENS_PER_CLAIM)} $EMBER</span> tokens.<br><br>Your tokens will be distributed to your wallet within 24-48 hours. Check your claim status anytime using the status checker below.`, 'success');
+                
+                // Reset form
+                airdropElements.claimForm.reset();
+                
+                // Refresh tracker data
+                if (CONFIG.BACKEND_READY) {
+                    loadRealTimeData();
+                }
+            } else {
+                showMessage(`❌ <strong>Claim Failed</strong><br><br>${data.message || 'An error occurred while processing your claim. Please try again.'}`, 'error');
+            }
+        } catch (error) {
+            LOGGER.error('Claim submission error:', error);
+            let errorMessage = '❌ <strong>Submission Failed</strong><br><br>';
+            if (error.message.includes('Failed to fetch')) {
+                errorMessage += 'Unable to connect to the server. Please check your internet connection and try again.';
+            } else {
+                errorMessage += 'An unexpected error occurred. Please try again in a moment.';
+            }
+            showMessage(errorMessage, 'error');
+        } finally {
+            airdropElements.claimButton.disabled = false;
+            airdropElements.claimButton.innerHTML = originalButtonText;
+        }
+    }
+
+    /**
+     * Handle status check button click
+     * 
+     * @function handleStatusCheck
+     * @returns {void}
+     */
+    async function handleStatusCheck() {
+        const wallet = airdropElements.statusWallet.value.trim();
+        
+        if (!wallet) {
+            showMessage('❌ Please enter your Solana wallet address to check status.', 'error');
+            airdropElements.statusWallet.focus();
+            return;
+        }
+        
+        if (!validateWallet(wallet)) {
+            showMessage('❌ Invalid Solana wallet address format. Please check and try again.<br><small>Valid addresses are 32-44 characters long and use base58 encoding.</small>', 'error');
+            airdropElements.statusWallet.focus();
+            return;
+        }
+        
+        if (!CONFIG.BACKEND_READY) {
+            showMessage('⏳ Status checking will be available when the airdrop launches. Stay tuned!', 'info');
+            return;
+        }
+        
+        // Disable button and show loading state
+        airdropElements.checkStatusBtn.disabled = true;
+        const originalText = airdropElements.checkStatusBtn.textContent;
+        airdropElements.checkStatusBtn.textContent = '🔄 Checking...';
+        
+        try {
+            const response = await fetch(`${CONFIG.API_BASE}/check-status.php?wallet=${encodeURIComponent(wallet)}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Server responded with ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.claimed) {
+                let statusMessage = `✅ <strong>Claim Verified!</strong><br><br>`;
+                statusMessage += `📍 <strong>Wallet:</strong> ${wallet.substring(0, 6)}...${wallet.substring(wallet.length - 4)}<br>`;
+                statusMessage += `💎 <strong>Tokens:</strong> ${formatNumber(data.token_amount || CONFIG.TOKENS_PER_CLAIM)} $EMBER<br>`;
+                statusMessage += `📊 <strong>Status:</strong> ${data.verification_status || 'Pending Verification'}<br>`;
+                if (data.claimed_at) {
+                    statusMessage += `📅 <strong>Claimed:</strong> ${new Date(data.claimed_at).toLocaleString()}`;
+                }
+                
+                showMessage(statusMessage, 'success');
+            } else {
+                showMessage('ℹ️ <strong>No Claim Found</strong><br><br>This wallet address hasn\'t submitted a claim yet. Make sure you\'ve filled out the claim form above and used the correct wallet address.', 'info');
+            }
+        } catch (error) {
+            LOGGER.error('Status check error:', error);
+            let errorMessage = '❌ <strong>Status Check Failed</strong><br><br>';
+            if (error.message.includes('Failed to fetch')) {
+                errorMessage += 'Unable to connect to the server. Please check your internet connection and try again.';
+            } else {
+                errorMessage += 'An unexpected error occurred. Please try again in a moment.';
+            }
+            showMessage(errorMessage, 'error');
+        } finally {
+            airdropElements.checkStatusBtn.disabled = false;
+            airdropElements.checkStatusBtn.textContent = originalText;
+        }
+    }
+
+    /**
+     * Load real-time airdrop data from backend
+     * 
+     * @function loadRealTimeData
+     * @returns {void}
+     */
+    async function loadRealTimeData() {
+        try {
+            const response = await fetch(`${CONFIG.API_BASE}/stats.php`);
+            const data = await response.json();
+            
+            if (response.ok) {
+                updateTrackerDisplay(data);
+            }
+        } catch (error) {
+            LOGGER.error('Data loading error:', error);
+        }
+    }
+
+    /**
+     * Update tracker display with stats
+     * 
+     * @function updateTrackerDisplay
+     * @param {Object|null} data - Stats data from backend
+     * @returns {void}
+     */
+    function updateTrackerDisplay(data = null) {
+        // Use provided data or defaults
+        const stats = data || {
+            total_ember: CONFIG.TOTAL_EMBER,
+            ember_claimed: 0,
+            ember_remaining: CONFIG.TOTAL_EMBER,
+            people_claimed: 0,
+            progress_percentage: 0
+        };
+        
+        // Update DOM elements
+        if (airdropElements.totalEmber) {
+            airdropElements.totalEmber.textContent = formatNumber(stats.total_ember);
+        }
+        if (airdropElements.emberClaimed) {
+            airdropElements.emberClaimed.textContent = formatNumber(stats.ember_claimed);
+        }
+        if (airdropElements.emberRemaining) {
+            airdropElements.emberRemaining.textContent = formatNumber(stats.ember_remaining);
+        }
+        if (airdropElements.peopleClaimed) {
+            airdropElements.peopleClaimed.textContent = 
+                `${formatNumber(stats.people_claimed)} / ${formatNumber(CONFIG.MAX_RECIPIENTS)}`;
+        }
+        if (airdropElements.progressPercentage) {
+            airdropElements.progressPercentage.textContent = stats.progress_percentage;
+        }
+        if (airdropElements.progressBar) {
+            airdropElements.progressBar.style.width = `${stats.progress_percentage}%`;
+        }
+    }
+
+    /**
+     * Validate Solana wallet address format
+     * 
+     * @function validateWallet
+     * @param {string} wallet - Wallet address to validate
+     * @returns {boolean}
+     */
+    function validateWallet(wallet) {
+        if (!wallet) return false;
+        // Solana wallet: 32-44 characters, base58 encoded
+        const solanaRegex = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+        return solanaRegex.test(wallet);
+    }
+
+    /**
+     * Validate wallet input field
+     * 
+     * @function validateWalletInput
+     * @param {HTMLInputElement} input - Input element to validate
+     * @returns {void}
+     */
+    function validateWalletInput(input) {
+        const wallet = input.value.trim();
+        if (wallet && !validateWallet(wallet)) {
+            input.style.borderColor = '#ef4444';
+        } else {
+            input.style.borderColor = '';
+        }
+    }
+
+    /**
+     * Validate email address format
+     * 
+     * @function validateEmail
+     * @param {string} email - Email to validate
+     * @returns {boolean}
+     */
+    function validateEmail(email) {
+        if (!email) return false;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    /**
+     * Validate email input field
+     * 
+     * @function validateEmailInput
+     * @param {HTMLInputElement} input - Input element to validate
+     * @returns {void}
+     */
+    function validateEmailInput(input) {
+        const email = input.value.trim();
+        if (email && !validateEmail(email)) {
+            input.style.borderColor = '#ef4444';
+        } else {
+            input.style.borderColor = '';
+        }
+    }
+
+    /**
+     * Validate URL format
+     * 
+     * @function validateUrl
+     * @param {string} url - URL to validate
+     * @returns {boolean}
+     */
+    function validateUrl(url) {
+        if (!url) return false;
+        try {
+            new URL(url);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    /**
+     * Show message to user
+     * 
+     * @function showMessage
+     * @param {string} message - Message HTML content
+     * @param {string} type - Message type (success, error, info)
+     * @returns {void}
+     */
+    let messageTimeout = null;
+    
+    function showMessage(message, type) {
+        if (!airdropElements.messageBox) return;
+        
+        // Clear any existing timeout
+        if (messageTimeout) {
+            clearTimeout(messageTimeout);
+        }
+        
+        airdropElements.messageBox.innerHTML = message;
+        airdropElements.messageBox.className = `ember-message-box ${type}`;
+        airdropElements.messageBox.style.display = 'block';
+        
+        // Set ARIA attributes for accessibility
+        airdropElements.messageBox.setAttribute('role', type === 'error' ? 'alert' : 'status');
+        airdropElements.messageBox.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+        
+        // Smooth scroll to message
+        setTimeout(() => {
+            airdropElements.messageBox.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'nearest',
+                inline: 'nearest'
+            });
+        }, 100);
+        
+        // Auto-hide after appropriate duration
+        const baseTime = type === 'error' ? 10000 : 8000;
+        const messageLength = message.replace(/<[^>]*>/g, '').length;
+        const displayTime = Math.min(baseTime + (messageLength * 30), 15000);
+        
+        messageTimeout = setTimeout(() => {
+            airdropElements.messageBox.style.display = 'none';
+            airdropElements.messageBox.removeAttribute('role');
+            airdropElements.messageBox.removeAttribute('aria-live');
+        }, displayTime);
+    }
+
+    /**
+     * Format number with commas
+     * 
+     * @function formatNumber
+     * @param {number} num - Number to format
+     * @returns {string}
+     */
+    function formatNumber(num) {
+        if (num === null || num === undefined) return '0';
+        return Number(num).toLocaleString('en-US');
+    }
 
     // ============================================
     // SCROLL REVEAL ANIMATION SYSTEM
@@ -324,14 +791,16 @@ function loadSharedComponents() {
      * Coordinates the initialization of all main.js features:
      * 1. Waits for shared.js to be ready
      * 2. Initializes scroll reveal animations
-     * 3. Loads shared HTML components
-     * 4. Reports initialization status
+     * 3. Initializes $Ember airdrop system
+     * 4. Loads shared HTML components
+     * 5. Reports initialization status
      * 
      * @initialization_order
      * 1. Wait for shared.js (up to 5 seconds)
      * 2. Initialize scroll reveal observer
-     * 3. Fetch and inject shared components
-     * 4. Reinitialize chatbot
+     * 3. Initialize airdrop system
+     * 4. Fetch and inject shared components
+     * 5. Reinitialize chatbot
      */
     async function initialize() {
         LOGGER.info('Initializing main page features...');
@@ -348,6 +817,13 @@ function loadSharedComponents() {
             initializeScrollReveal();
         } catch (error) {
             LOGGER.error(`Scroll reveal initialization failed: ${error.message}`);
+        }
+        
+        // Initialize $Ember airdrop system
+        try {
+            initializeAirdropSystem();
+        } catch (error) {
+            LOGGER.error(`Airdrop system initialization failed: ${error.message}`);
         }
         
         // Load shared HTML components
@@ -384,7 +860,8 @@ function loadSharedComponents() {
             colorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
             reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
             online: navigator.onLine,
-            language: navigator.language
+            language: navigator.language,
+            backendStatus: CONFIG.BACKEND_READY ? 'READY' : 'OFFLINE'
         };
         
         LOGGER.debug('Environment Info:');
@@ -450,18 +927,23 @@ function loadSharedComponents() {
      * @namespace VaultPhoenixMain
      */
     window.VaultPhoenixMain = {
-        version: '1.0.0',
+        version: '2.0.0',
         changeImage: window.changeImage,
         changeLaptopImage: window.changeLaptopImage,
-        reinitialize: initialize
+        reinitialize: initialize,
+        airdrop: {
+            refreshData: loadRealTimeData,
+            validateWallet: validateWallet,
+            validateEmail: validateEmail
+        }
     };
 
-    LOGGER.info('Local.js loaded successfully');
+    LOGGER.info('Local.js v2.0 loaded successfully with $Ember Airdrop');
 
 })();
 
 /**
  * ============================================
- * END OF LOCAL.JS
+ * END OF LOCAL.JS v2.0
  * ============================================
  */
