@@ -108,166 +108,92 @@
     <!-- Main Content -->
     <main id="main-content">
       <!-- ===================================
-     HERO SECTION - FULLY FIXED
-     Matches local.css: .main-hero-steps-premium, .main-step-premium
+     HERO SECTION - REBUILT FROM SCRATCH
+     NO CONFLICTS. NO !important. WORKS EVERYWHERE.
      =================================== -->
 <section class="main-hero" id="main-content">
-    <div class="main-hero-content">
+    <div class="hero-container">
+        
         <!-- HEADER -->
-        <div class="main-hero-header">
-            <h1 class="main-hero-title-new">
+        <div class="hero-header">
+            <h1 class="hero-title">
                 Turn Real-World Engagement Into Real Revenue in <span class="golden-highlight">3 Easy Steps</span>
             </h1>
-            <p class="main-hero-subtitle-new">
+            <p class="hero-subtitle">
                 Launch white-label AR crypto web apps in 24 hours or integrate via SDK in 1-2 weeks. 
                 No coding required—but full SDK access if you want it. Starting at $149/mo.
             </p>
-            <p class="main-hero-tagline">
+            <p class="hero-tagline">
                 Place Crypto Coins with GPS & Beacons
             </p>
         </div>
 
-        <!-- 3-STEP PROCESS GRID -->
-        <div class="main-hero-steps-premium">
+        <!-- 3-STEP GRID -->
+        <div class="steps-grid">
             <!-- STEP 1 -->
-            <div class="main-step-premium">
-                <div class="main-step-number-badge">1</div>
-                <div class="main-step-visual">
-                    <img src="images/step1-visual.png" alt="Choose Your Path">
-                </div>
-                <div class="main-step-content">
-                    <h3 class="main-step-title-premium">Choose Your Path</h3>
-                    <p class="main-step-description-premium">
-                        White-label web app or SDK integration
-                    </p>
-                </div>
+            <div class="step-card">
+                <div class="step-badge">1</div>
+                <img src="images/step1-visual.png" alt="Choose Path" class="step-image">
+                <h3>Choose Your Path</h3>
+                <p>White-label web app or SDK integration</p>
             </div>
 
-            <!-- ARROW -->
-            <div class="main-step-arrow-wrapper">
-                <span class="main-step-arrow">→</span>
-            </div>
+            <div class="step-arrow">→</div>
 
             <!-- STEP 2 -->
-            <div class="main-step-premium">
-                <div class="main-step-number-badge">2</div>
-                <div class="main-step-visual">
-                    <img src="images/step2-visual.png" alt="Place Coins">
-                </div>
-                <div class="main-step-content">
-                    <h3 class="main-step-title-premium">Place Coins</h3>
-                    <p class="main-step-description-premium">
-                        GPS locations or indoor beacons
-                    </p>
-                </div>
+            <div class="step-card">
+                <div class="step-badge">2</div>
+                <img src="images/step2-visual.png" alt="Place Coins" class="step-image">
+                <h3>Place Coins</h3>
+                <p>GPS locations or indoor beacons</p>
             </div>
 
-            <!-- ARROW -->
-            <div class="main-step-arrow-wrapper">
-                <span class="main-step-arrow">→</span>
-            </div>
+            <div class="step-arrow">→</div>
 
             <!-- STEP 3 -->
-            <div class="main-step-premium">
-                <div class="main-step-number-badge">3</div>
-                <div class="main-step-visual">
-                    <img src="images/step3-visual.png" alt="Earn Revenue">
-                </div>
-                <div class="main-step-content">
-                    <h3 class="main-step-title-premium">Earn Revenue</h3>
-                    <p class="main-step-description-premium">
-                        Players find coins → you get paid
-                    </p>
-                </div>
+            <div class="step-card">
+                <div class="step-badge">3</div>
+                <img src="images/step3-visual.png" alt="Earn Revenue" class="step-image">
+                <h3>Earn Revenue</h3>
+                <p>Players find coins → you get paid</p>
             </div>
         </div>
 
-        <!-- DUAL PATH CTAS -->
-        <div class="main-cta-path-container">
-            <!-- BUSINESS PATH -->
-            <div class="main-cta-path">
-                <div class="coming-soon-badge">Coming Soon!</div>
-                <div class="main-cta-icon">
-                    <img src="images/business-icon.png" alt="Business">
+        <!-- DUAL CTAs -->
+        <div class="cta-grid">
+            <!-- BUSINESS -->
+            <div class="cta-card">
+                <div class="badge coming-soon">Coming Soon!</div>
+                <img src="images/business-icon.png" alt="Business" class="cta-icon">
+                <h3>Business Path</h3>
+                <p>No coding. Launch in 24 hours.</p>
+                <div class="journey-list">
+                    <div class="journey-item"><span>1</span> Sign Up</div>
+                    <div class="journey-item"><span>2</span> Design Campaign</div>
+                    <div class="journey-item"><span>3</span> Launch & Earn</div>
                 </div>
-                <h3 class="journey-path-title">Business Path</h3>
-                <p class="journey-path-subtitle">
-                    No coding. Launch in 24 hours.
-                </p>
-                <div class="journey-steps">
-                    <div class="journey-step">
-                        <div class="journey-step-number">1</div>
-                        <div class="journey-step-content">
-                            <h4>Sign Up</h4>
-                            <p>Create your account</p>
-                        </div>
-                    </div>
-                    <div class="journey-step">
-                        <div class="journey-step-number">2</div>
-                        <div class="journey-step-content">
-                            <h4>Design Campaign</h4>
-                            <p>Use our no-code builder</p>
-                        </div>
-                    </div>
-                    <div class="journey-step">
-                        <div class="journey-step-number">3</div>
-                        <div class="journey-step-content">
-                            <h4>Launch & Earn</h4>
-                            <p>Go live instantly</p>
-                        </div>
-                    </div>
-                </div>
-                <a href="#" class="journey-cta-button">
-                    <span>Get Started</span>
-                    <span>→</span>
-                </a>
-                <a href="#" class="journey-secondary-link">
-                    View Pricing <span>→</span>
-                </a>
+                <a href="#" class="btn-primary">Get Started →</a>
+                <a href="#" class="secondary-link">View Pricing →</a>
             </div>
 
-            <!-- DEVELOPER PATH -->
-            <div class="main-cta-path">
-                <div class="early-2026-badge">Early 2026</div>
-                <div class="main-cta-icon">
-                    <img src="images/developer-icon.png" alt="Developer">
+            <!-- DEVELOPER -->
+            <div class="cta-card">
+                <div class="badge early-2026">Early 2026</div>
+                <img src="images/developer-icon.png" alt="Developer" class="cta-icon">
+                <h3>Developer Path</h3>
+                <p>Full SDK. Integrate in 1-2 weeks.</p>
+                <div class="journey-list">
+                    <div class="journey-item"><span>1</span> Explore the SDK</div>
+                    <div class="journey-item"><span>2</span> Start Building</div>
+                    <div class="journey-item"><span>3</span> Scale Your App</div>
                 </div>
-                <h3 class="journey-path-title">Developer Path</h3>
-                <p class="journey-path-subtitle">
-                    Full SDK. Integrate in 1-2 weeks.
-                </p>
-                <div class="journey-steps">
-                    <div class="journey-step">
-                        <div class="journey-step-number">1</div>
-                        <div class="journey-step-content">
-                            <h4>Explore the SDK</h4>
-                            <p>Browse documentation and code examples on GitHub</p>
-                        </div>
-                    </div>
-                    <div class="journey-step">
-                        <div class="journey-step-number">2</div>
-                        <div class="journey-step-content">
-                            <h4>Start Building</h4>
-                            <p>Use our free tier to prototype and test your ideas</p>
-                        </div>
-                    </div>
-                    <div class="journey-step">
-                        <div class="journey-step-number">3</div>
-                        <div class="journey-step-content">
-                            <h4>Scale Your App</h4>
-                            <p>Upgrade as you grow with flexible pricing tiers</p>
-                        </div>
-                    </div>
-                </div>
-                <a href="https://github.com/Vault-Phoenix-SDK" class="journey-cta-button" target="_blank" rel="noopener noreferrer">
-                    <svg width="45" height="45" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <a href="https://github.com/Vault-Phoenix-SDK" class="btn-primary" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                     </svg>
-                    <span>View on GitHub</span>
+                    View on GitHub
                 </a>
-                <a href="#pricing" class="journey-secondary-link">
-                    See SDK Pricing <span>→</span>
-                </a>
+                <a href="#pricing" class="secondary-link">See SDK Pricing →</a>
             </div>
         </div>
     </div>
