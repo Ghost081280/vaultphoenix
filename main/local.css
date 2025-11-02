@@ -1,13 +1,14 @@
 /**
  * ============================================
  * VAULT PHOENIX - MAIN PAGE LOCAL STYLES
- * v2.4.0 COMPLETE REBUILD - ALL SECTIONS
+ * v2.4.1 COMPLETE WITH ALL FIXES
  * ============================================
  * 
  * This file contains ONLY main.html specific styles.
  * It works WITH global.css, not against it.
  * 
  * ALL sections from the original document fully restored.
+ * INCLUDES: Proven Model Badge, Feature Titles, Use Case Titles
  * ============================================
  */
 
@@ -1051,6 +1052,35 @@ body.main-page {
     margin: 0 auto 4rem;
 }
 
+/* PROVEN MODEL BADGE - NEW */
+.proven-model { margin-bottom: 3rem; }
+
+.proven-badge {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.1), rgba(215, 51, 39, 0.05));
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.proven-badge:hover {
+    background: linear-gradient(135deg, rgba(240, 165, 0, 0.15), rgba(215, 51, 39, 0.08));
+    border-color: rgba(240, 165, 0, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(240, 165, 0, 0.3);
+}
+
+.badge-icon { flex-shrink: 0; }
+.custom-badge-icon { width: 80px; height: 80px; object-fit: contain; }
+.badge-content { flex: 1; }
+.badge-content h4 { font-size: 1.5rem; font-weight: 800; color: #f0a500; margin-bottom: 0.75rem; }
+.badge-content p { font-size: 1.05rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); }
+
 .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1096,6 +1126,26 @@ body.main-page {
     font-size: 1rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
+}
+
+/* FEATURE CARD TITLES - NEW */
+.feature-coin-icon, .feature-ar-discovery-icon, .feature-crypto-gaming-icon,
+.feature-revenue-icon, .feature-phoenix-brand-icon, .feature-analytics-icon {
+    width: 80px; height: 80px; object-fit: contain;
+}
+
+.feature-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f0a500;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.feature-description {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* ============================================
@@ -1306,6 +1356,44 @@ body.main-page {
     font-size: 1rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
+}
+
+/* USE CASE TITLES - NEW */
+.use-case-icon-container-large {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 1.5rem;
+}
+
+.use-case-icon-image-large {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.use-case-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 1rem;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.use-case-example {
+    font-size: 1.05rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.use-case-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
 }
 
 /* ============================================
@@ -1939,6 +2027,7 @@ body.main-page {
 }
 
 /**
- * END OF LOCAL.CSS v2.4.0 COMPLETE REBUILD
+ * END OF LOCAL.CSS v2.4.1 COMPLETE WITH ALL FIXES
  * All sections fully restored and styled
+ * INCLUDES: Proven Model Badge, Feature Card Titles, Use Case Titles
  */
