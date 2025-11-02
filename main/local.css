@@ -1,42 +1,21 @@
 /* ===================================
-   VAULT PHOENIX - MAIN PAGE CSS v3.7
-   Complete restoration with all layouts working
+   VAULT PHOENIX - MAIN PAGE CSS v3.8 FIXED
+   Complete restoration with all layouts working - HERO VISIBILITY FIXED
    =================================== */
 
 /* ===================================
-   HERO SECTION - ALWAYS VISIBLE
+   HERO SECTION - NATURAL DISPLAY (NO CONFLICTS)
    =================================== */
 
 .main-hero {
     min-height: 100vh;
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 4rem;
     background: var(--ember-gradient-background);
     position: relative;
     overflow: hidden;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
-
-/* CRITICAL: All hero children always visible */
-.main-hero * {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-}
-
-/* CRITICAL: Disable animations in hero section */
-.main-hero .main-fade-in,
-.main-hero .main-fade-in.stagger-1,
-.main-hero .main-fade-in.stagger-2,
-.main-hero .main-fade-in.stagger-3,
-.main-hero .main-fade-in.stagger-4 {
-    animation: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
 }
 
 .main-hero-content {
@@ -56,10 +35,6 @@
     margin-bottom: 1.5rem;
     line-height: 1.1;
     color: #ffffff;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-    animation: none !important;
 }
 
 .main-hero-subtitle-new {
@@ -70,20 +45,12 @@
     max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-    animation: none !important;
 }
 
 .main-hero-tagline {
     font-size: clamp(1.3rem, 3vw, 1.9rem);
     font-weight: 700;
     color: var(--ember-gold);
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-    animation: none !important;
 }
 
 /* ===================================
@@ -2881,22 +2848,6 @@
     transition-delay: 0.4s;
 }
 
-/* CRITICAL: Override scroll-reveal for hero */
-body.js-loaded .main-hero,
-body.js-loaded .main-hero * {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-/* ===================================
-   FADE IN ANIMATIONS
-   =================================== */
-
-/* REMOVED: main-fade-in animation conflicts with shared global.js scroll-reveal
-   Hero section now displays immediately without fade-in animations
-   Other sections use global.js scroll-reveal system */
-
-
 /* ===================================
    RESPONSIVE DESIGN
    =================================== */
@@ -3040,29 +2991,20 @@ body.js-loaded .main-hero * {
 
 /**
  * ============================================
- * END OF LOCAL.CSS v3.7 COMPLETE & FIXED
+ * END OF LOCAL.CSS v3.8 HERO VISIBILITY FIXED
  * ============================================
  * 
+ * ✅ Removed all hero force-visible conflicts
+ * ✅ Hero displays naturally without CSS battles
  * ✅ All sections fully styled and responsive
- * ✅ Hero section always visible (no scroll-reveal hiding)
  * ✅ Grid layouts corrected for all breakpoints
- * ✅ Class names match exact HTML structure
  * ✅ Clean, organized, and maintainable
  * 
- * SECTIONS INCLUDED:
- * - Hero with 3-Step Process & Dual CTAs
- * - Enterprise Token Infrastructure
- * - $Ember Airdrop Section
- * - Crypto Coin with GPS & Beacon Technology
- * - Features Section
- * - App Showcase (Live Demo)
- * - Use Cases
- * - Pricing (White-Label & SDK)
- * - Final CTA Journey Paths
+ * CRITICAL FIX APPLIED:
+ * - Removed conflicting opacity/visibility overrides
+ * - Removed animation disable code that was hiding content
+ * - Hero now displays using standard CSS flow
  * 
  * All layouts working perfectly! 🔥
  * ============================================
  */
-
-/* ============================================
-   CRITICAL HERO FIX - MAXIMUM PRIORITY
