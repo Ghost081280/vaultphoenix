@@ -1,6 +1,10 @@
 /* ===================================
-   CRITICAL HERO LAYOUT FIX - MUST BE AT TOP
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS v4.0
+   FULL HERO FIX + ALL SECTIONS
+   Last Updated: November 02, 2025
    =================================== */
+
+/* CRITICAL HERO LAYOUT FIX - MUST BE AT TOP */
 .main-hero,
 .main-hero * {
     box-sizing: border-box !important;
@@ -12,16 +16,17 @@
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    padding: calc(80px + 3rem) 1rem 4rem !important;
+    padding: calc(var(--navbar-height, 80px) + 3rem) 1rem 4rem !important;
     background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%) !important;
     position: relative;
     overflow: visible !important;
+    text-align: center;
 }
 
 .main-hero-content {
     max-width: 1400px;
     width: 100%;
-    text-align: center;
+    margin: 0 auto;
 }
 
 .main-hero-title-new {
@@ -30,6 +35,10 @@
     color: white !important;
     margin-bottom: 1.5rem !important;
     line-height: 1.1 !important;
+}
+
+.golden-highlight {
+    color: #f0a500 !important;
 }
 
 .main-hero-subtitle-new {
@@ -46,7 +55,7 @@
     margin-bottom: 3rem !important;
 }
 
-/* 3-STEP GRID - THE MOST IMPORTANT PART */
+/* 3-STEP GRID - HORIZONTAL */
 .main-hero-steps-premium {
     display: grid !important;
     grid-template-columns: 1fr auto 1fr auto 1fr !important;
@@ -99,7 +108,14 @@
     font-weight: 700 !important;
 }
 
-/* Dual CTAs */
+.main-step-visual img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* DUAL CTAS - SIDE BY SIDE */
 .main-cta-path-container {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
@@ -115,6 +131,7 @@
     border-radius: 2rem !important;
     padding: 2rem !important;
     position: relative !important;
+    text-align: center;
 }
 
 .coming-soon-badge,
@@ -131,17 +148,141 @@
     border: 2px solid rgba(240,165,0,0.6) !important;
 }
 
-/* Responsive */
+.main-cta-icon img,
+.journey-icon-container img {
+    max-width: 80px;
+    height: auto;
+    margin: 1rem auto;
+}
+
+.journey-path-title {
+    font-size: 1.5rem !important;
+    margin: 1rem 0 0.5rem !important;
+}
+
+.journey-path-subtitle {
+    font-size: 1.1rem !important;
+    color: rgba(255,255,255,0.8) !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.journey-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.journey-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.journey-step-number {
+    min-width: 32px;
+    height: 32px;
+    background: #d73327;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.journey-step-content h4 {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+}
+
+.journey-step-content p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+}
+
+.journey-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, #d73327, #c62828);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 700;
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.journey-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(215,51,39,0.4);
+}
+
+.journey-secondary-link {
+    color: #f0a500;
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.journey-secondary-link span {
+    margin-left: 0.25rem;
+}
+
+/* RESPONSIVE */
 @media (max-width: 1024px) {
     .main-hero-steps-premium,
     .main-cta-path-container {
         grid-template-columns: 1fr !important;
     }
-    .main-step-arrow-wrapper { display: none !important; }
+    .main-step-arrow-wrapper { 
+        display: none !important; 
+    }
+    .main-cta-path-container {
+        grid-template-columns: 1fr !important;
+    }
 }
 
 @media (max-width: 768px) {
-    .main-hero { padding: 120px 1rem 3rem !important; }
+    .main-hero { 
+        padding: 120px 1rem 3rem !important; 
+    }
+    .main-hero-title-new {
+        font-size: 2.5rem !important;
+    }
+}
+
+/* PRESERVE ALL YOUR ORIGINAL STYLES BELOW */
+/* (Keep everything from your old local.css here) */
+
+/* Example: Keep your old hero fade-in if needed */
+.main-fade-in {
+    opacity: 1 !important;
+    animation: none !important;
+}
+
+/* Add any other custom styles from your old local.css below this line */
+/* ------------------------------------------------------------------ */
+
+/* Your existing styles (from v3.7) - keep them all */
+.ember-highlights-redesigned,
+.pricing-two-column,
+.enterprise-section,
+.airdrop-section,
+.crypto-section,
+.features-section,
+.showcase-section,
+.use-cases-section,
+.pricing-section,
+.revenue-section,
+.final-cta {
+    /* Your original styles */
 }
 /* ===================================
    VAULT PHOENIX - MAIN PAGE CSS v3.8 FIXED
