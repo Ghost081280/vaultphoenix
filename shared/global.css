@@ -2131,6 +2131,326 @@ button {
 }
 
 /* ===================================
-   END OF VAULT PHOENIX - GLOBAL.CSS v9.0
-   DESKTOP & MOBILE PERFECT! 🎯
+   VAULT PHOENIX - GLOBAL CSS v10.0 ENHANCEMENTS
+   ADD THIS TO THE END OF shared/global.css
+   Universal patterns for consistent page building
+   =================================== */
+
+/* ===================================
+   UNIVERSAL HERO PATTERN
+   All pages use this for hero sections
+   =================================== */
+
+.hero,
+[class*="-hero"] {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 4rem;
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+/* CRITICAL: Prevent scroll-reveal from hiding hero */
+body .hero,
+body [class*="-hero"],
+body.js-loaded .hero,
+body.js-loaded [class*="-hero"] {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* CRITICAL: Hero children always visible */
+body .hero *,
+body [class*="-hero"] *,
+body.js-loaded .hero *,
+body.js-loaded [class*="-hero"] * {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+/* Mobile hero spacing (using original working formula) */
+@media (max-width: 768px) {
+    .hero,
+    [class*="-hero"] {
+        padding: calc(var(--section-padding) + 40px) var(--container-padding) var(--section-padding);
+    }
+}
+
+/* ===================================
+   UNIVERSAL HERO CONTENT STRUCTURE
+   =================================== */
+
+.hero-content {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.hero-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: var(--space-lg);
+    line-height: 1.1;
+    color: #ffffff;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-tagline {
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--ember-gold);
+}
+
+/* ===================================
+   UNIVERSAL SECTION PATTERN
+   Standard section for all pages
+   =================================== */
+
+.section {
+    padding: var(--section-padding) var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
+}
+
+.section-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+}
+
+.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.section-subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ===================================
+   UNIVERSAL CARD PATTERN
+   =================================== */
+
+.card {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    transition: all var(--transition-base);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--ember-shadow-xl);
+    border-color: var(--ember-orange);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: var(--space-sm);
+}
+
+.card-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ===================================
+   UNIVERSAL GRID PATTERNS
+   =================================== */
+
+.grid {
+    display: grid;
+    gap: var(--space-xl);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Responsive grids */
+@media (max-width: 1024px) {
+    .grid-3, 
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-2, 
+    .grid-3, 
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===================================
+   UNIVERSAL BUTTON PATTERNS
+   =================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 14px 32px;
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    border: 2px solid transparent;
+    min-height: 44px;
+}
+
+.btn-primary {
+    background: var(--ember-gradient-primary);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: var(--ember-shadow-md);
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ember-shadow-lg);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border-color: var(--ember-orange);
+}
+
+.btn-secondary:hover {
+    background: rgba(215, 51, 39, 0.2);
+    border-color: var(--ember-red);
+    transform: translateY(-2px);
+}
+
+.btn-large {
+    padding: 16px 40px;
+    font-size: 1.1rem;
+}
+
+.btn-small {
+    padding: 10px 24px;
+    font-size: 0.95rem;
+}
+
+/* ===================================
+   UNIVERSAL ICON SIZES
+   =================================== */
+
+.icon {
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.icon-xs { width: var(--icon-xs); height: var(--icon-xs); }
+.icon-sm { width: var(--icon-sm); height: var(--icon-sm); }
+.icon-md { width: var(--icon-md); height: var(--icon-md); }
+.icon-lg { width: var(--icon-lg); height: var(--icon-lg); }
+.icon-xl { width: var(--icon-xl); height: var(--icon-xl); }
+.icon-card { width: var(--icon-card); height: var(--icon-card); }
+
+/* ===================================
+   UNIVERSAL SPACING UTILITIES
+   =================================== */
+
+.mt-xs { margin-top: var(--space-xs); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mt-2xl { margin-top: var(--space-2xl); }
+.mt-3xl { margin-top: var(--space-3xl); }
+
+.mb-xs { margin-bottom: var(--space-xs); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+.mb-2xl { margin-bottom: var(--space-2xl); }
+.mb-3xl { margin-bottom: var(--space-3xl); }
+
+/* ===================================
+   UNIVERSAL TEXT UTILITIES
+   =================================== */
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-white { color: #ffffff; }
+.text-gold { color: var(--ember-gold); }
+.text-orange { color: var(--ember-orange); }
+.text-muted { color: rgba(255, 255, 255, 0.7); }
+
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+
+/* ===================================
+   END OF GLOBAL CSS v10.0 ENHANCEMENTS
+   Universal patterns ready for all pages!
    =================================== */
