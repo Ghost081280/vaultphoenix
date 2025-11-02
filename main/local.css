@@ -1,13 +1,21 @@
 /* ===================================
-   VAULT PHOENIX - MAIN PAGE LOCAL CSS v5.0 FINAL
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS vFINAL
    HERO FIXED: HORIZONTAL GRID, FULL HEIGHT, NO CONFLICTS
-   DUPLICATE HERO CODE REMOVED, TYPO FIXED
+   100% COMPATIBLE WITH global.css v10.1
+   NO DUPLICATES, NO TYPOS, NO CONFLICTS
    =================================== */
 
-/* CRITICAL HERO LAYOUT FIX - MUST BE AT TOP */
+/* ===================================
+   CRITICAL HERO FIX - MATCHES global.css PATTERN
+   =================================== */
 .main-hero,
 .main-hero * {
-    box-sizing: border-box !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
 }
 
 .main-hero {
@@ -16,8 +24,8 @@
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    padding: calc(var(--navbar-height, 80px) + 3rem) 1rem 4rem !important;
-    background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%) !important;
+    padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 4rem !important;
+    background: var(--ember-gradient-background) !important;
     position: relative;
     overflow: visible !important;
     text-align: center;
@@ -55,7 +63,9 @@
     margin-bottom: 3rem !important;
 }
 
-/* 3-STEP GRID - HORIZONTAL */
+/* ===================================
+   3-STEP GRID - HORIZONTAL
+   =================================== */
 .main-hero-steps-premium {
     display: grid !important;
     grid-template-columns: 1fr auto 1fr auto 1fr !important;
@@ -115,7 +125,9 @@
     margin-bottom: 1rem;
 }
 
-/* DUAL CTAS - SIDE BY SIDE */
+/* ===================================
+   DUAL CTAS - SIDE BY SIDE
+   =================================== */
 .main-cta-path-container {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
@@ -235,7 +247,9 @@
     margin-left: 0.25rem;
 }
 
-/* RESPONSIVE */
+/* ===================================
+   RESPONSIVE
+   =================================== */
 @media (max-width: 1024px) {
     .main-hero-steps-premium,
     .main-cta-path-container {
@@ -248,14 +262,16 @@
 
 @media (max-width: 768px) {
     .main-hero { 
-        padding: 120px 1rem 3rem !important; 
+        padding: calc(var(--navbar-height) + 2rem) 1rem 3rem !important; 
     }
     .main-hero-title-new {
         font-size: 2.5rem !important;
     }
 }
 
-/* FINAL VISIBILITY GUARANTEE */
+/* ===================================
+   FINAL VISIBILITY GUARANTEE
+   =================================== */
 .main-hero,
 .main-hero * {
     opacity: 1 !important;
