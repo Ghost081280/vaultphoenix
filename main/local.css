@@ -2892,36 +2892,10 @@ body.js-loaded .main-hero * {
    FADE IN ANIMATIONS
    =================================== */
 
-.main-fade-in {
-    animation: fadeInUp 0.8s ease forwards;
-}
+/* REMOVED: main-fade-in animation conflicts with shared global.js scroll-reveal
+   Hero section now displays immediately without fade-in animations
+   Other sections use global.js scroll-reveal system */
 
-.main-fade-in.stagger-1 {
-    animation-delay: 0.2s;
-}
-
-.main-fade-in.stagger-2 {
-    animation-delay: 0.4s;
-}
-
-.main-fade-in.stagger-3 {
-    animation-delay: 0.6s;
-}
-
-.main-fade-in.stagger-4 {
-    animation-delay: 0.8s;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 /* ===================================
    RESPONSIVE DESIGN
