@@ -49,7 +49,8 @@ body.main-page {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: calc(var(--navbar-height) + 2rem);
+    margin-top: var(--navbar-height);
+    padding-top: 2rem;
     padding-bottom: 4rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -3791,7 +3792,8 @@ body.js-loaded .scroll-reveal.revealed {
 
 @media (max-width: 768px) {
     .main-hero {
-        padding-top: calc(var(--navbar-height) + 1.5rem);
+        margin-top: var(--navbar-height);
+        padding-top: 1.5rem;
         padding-bottom: 3rem;
     }
     
