@@ -1,33 +1,26 @@
 /**
  * ============================================
- * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.2
- * PRODUCTION READY - PART 1A
+ * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.3
+ * COMPLETE REBUILD - PART 1 OF 3
  * ============================================
  * 
- * This file contains ONLY main.html specific styles.
- * It leverages patterns from shared/global.css v10.0.
+ * This file contains main.html specific styles.
+ * Leverages patterns from shared/global.css v10.0.
  * 
- * PRODUCTION FIXES v3.2:
- * ✅ All sections display correctly
+ * PRODUCTION READY v3.3:
+ * ✅ All 15+ sections in correct order
  * ✅ Clean code (no patches, no !important hacks)
- * ✅ Properly uses global patterns
- * ✅ Desktop hero fully visible
- * ✅ Mobile hero preserved
- * ✅ All 15+ sections working
- * ✅ Share buttons properly styled
- * ✅ Revenue Examples section complete
- * ✅ Development Story section complete
- * ✅ Scroll reveal optional (sections visible by default)
+ * ✅ Fixed line 1099 error from v3.2
+ * ✅ All sections visible by default
+ * ✅ Complete responsive system
  * 
- * ASSEMBLY INSTRUCTIONS:
- * Combine files in this order:
- * 1. main-local-v3.2-PART1A.css (this file - Hero, Steps, CTAs)
- * 2. main-local-v3.2-PART1B.css (Token, Airdrop)
- * 3. main-local-v3.2-PART1C.css (Crypto, Technology, Features)
- * 4. main-local-v3.2-PART1D.css (Showcase, Use Cases, Pricing)
- * 5. main-local-v3.2-PART2.css (Revenue, Final CTA, Responsive)
+ * PART 1 CONTAINS:
+ * - Hero Section
+ * - Enterprise Token Infrastructure
+ * - $Ember Airdrop Section
+ * - Crypto Coin Section
  * 
- * @version 3.2.0
+ * @version 3.3.0
  * @date November 2, 2025
  * @dependencies shared/global.css v10.0+
  * ============================================
@@ -35,24 +28,24 @@
 
 /* ============================================
    CRITICAL: ENSURE ALL SECTIONS VISIBLE
-   These rules ensure sections display even before JS loads
    ============================================ */
 
-/* Force body to show content immediately */
 body.main-page {
     opacity: 1;
     visibility: visible;
 }
 
-/* All main sections visible by default */
 .main-hero,
 .ember-token-section-redesigned,
 .ember-airdrop-section,
 .crypto-coin-section,
+.technology-section,
 .features,
 .app-showcase,
 .use-cases,
 .pricing,
+.revenue-examples,
+.development-story-section,
 .final-cta {
     display: block;
     opacity: 1;
@@ -60,12 +53,10 @@ body.main-page {
 }
 
 /* ============================================
-   1. HERO SECTION - MAIN.HTML SPECIFIC
-   Uses global hero pattern from global.css
+   1. HERO SECTION
    ============================================ */
 
 .main-hero {
-    /* Base structure */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,7 +67,6 @@ body.main-page {
     overflow: hidden;
 }
 
-/* CRITICAL: Hero always visible (overrides any scroll-reveal) */
 .main-hero,
 .main-hero * {
     opacity: 1;
@@ -118,10 +108,7 @@ body.main-page {
     color: var(--ember-gold);
 }
 
-/* ============================================
-   2. THREE-STEP PROCESS
-   ============================================ */
-
+/* Three-Step Process */
 .main-hero-steps-premium {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -218,10 +205,7 @@ body.main-page {
     }
 }
 
-/* ============================================
-   3. DUAL PATH CTAs
-   ============================================ */
-
+/* Dual Path CTAs */
 .main-hero-dual-ctas {
     margin-top: var(--space-4xl);
 }
@@ -414,22 +398,7 @@ body.main-page {
 }
 
 /* ============================================
-   END OF PART 1A
-   Continue with PART 1B for Token section
-   ============================================ *//**
- * ============================================
- * VAULT PHOENIX - MAIN LOCAL STYLES v3.2
- * PRODUCTION READY - PART 1B
- * ============================================
- * 
- * CONTAINS: Enterprise Token Infrastructure Section
- * 
- * APPEND THIS AFTER PART 1A
- * ============================================
- */
-
-/* ============================================
-   4. ENTERPRISE TOKEN INFRASTRUCTURE
+   2. ENTERPRISE TOKEN INFRASTRUCTURE
    ============================================ */
 
 .ember-token-section-redesigned {
@@ -809,36 +778,1566 @@ body.main-page {
 }
 
 /* ============================================
-   END OF PART 1B
-   Continue with PART 1C for Airdrop section
-   ============================================ *//**
- * ============================================
- * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.2
- * PRODUCTION READY - PART 2 (CONTINUATION)
- * ============================================
- * 
- * This is the continuation of the main local.css file.
- * Append this content to the end of Part 1.
- * 
- * CONTAINS:
- * - Development Story Section (remaining)
- * - Final CTA Section
- * - Scroll Reveal System
- * - Responsive Breakpoints
- * - Mobile Optimizations
- * ============================================
- */
-
-/* ============================================
-   12. REVENUE EXAMPLES - CONTINUED
+   3. $EMBER AIRDROP SECTION
    ============================================ */
 
-85);
+.ember-airdrop-section {
+    padding: var(--section-padding) var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+.ember-airdrop-outer-module {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+    box-shadow: var(--ember-shadow-xl);
+    position: relative;
+}
+
+.ember-airdrop-compact-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-2xl);
+    gap: var(--space-lg);
+}
+
+.ember-compact-title-section {
+    flex: 1;
+}
+
+.ember-compact-title-section h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--space-sm);
+    line-height: 1.2;
+}
+
+.ember-compact-title-section p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+.ember-airdrop-coin-compact {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 25px rgba(240, 165, 0, 0.6));
+    animation: ember-coinFloat 4s ease-in-out infinite;
+}
+
+.ember-compact-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+}
+
+.share-to-claim-section {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+}
+
+.share-to-claim-section h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.share-instructions-compact {
+    background: rgba(215, 51, 39, 0.1);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.share-instructions-compact p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.share-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 14px var(--space-md);
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    border: 2px solid transparent;
+}
+
+.share-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.share-x {
+    background: #000000;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.share-x:hover {
+    background: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.share-facebook {
+    background: #1877f2;
+    color: white;
+}
+
+.share-facebook:hover {
+    background: #0d5fca;
+}
+
+.share-linkedin {
+    background: #0077b5;
+    color: white;
+}
+
+.share-linkedin:hover {
+    background: #005885;
+}
+
+.share-telegram {
+    background: #0088cc;
+    color: white;
+}
+
+.share-telegram:hover {
+    background: #006699;
+}
+
+.share-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.check-status-module {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    text-align: center;
+}
+
+.check-status-module h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.status-input-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.input-compact {
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-md);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all var(--transition-base);
+}
+
+.input-compact:focus {
+    border-color: var(--ember-orange);
+    box-shadow: 0 0 15px rgba(215, 51, 39, 0.3);
+}
+
+.input-compact::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.status-btn-compact {
+    padding: 12px 24px;
+    background: var(--ember-gradient-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    white-space: nowrap;
+}
+
+.status-btn-compact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(215, 51, 39, 0.5);
+}
+
+.status-result-compact {
+    padding: var(--space-md);
+    background: rgba(215, 51, 39, 0.1);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-md);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    display: none;
+}
+
+.status-result-compact.visible {
+    display: block;
+}
+
+.ember-stats-compact {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.ember-stat-compact {
+    text-align: center;
+    padding: var(--space-lg);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+}
+
+.ember-stat-compact:hover {
+    border-color: rgba(215, 51, 39, 0.4);
+    transform: translateY(-3px);
+}
+
+.ember-stat-compact h4 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--ember-gold);
+    margin-bottom: var(--space-xs);
+}
+
+.ember-stat-compact p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.ember-info-compact {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+}
+
+.ember-info-item-compact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-md);
+}
+
+.ember-info-icon-compact {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.ember-info-text-compact p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 3px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ember-info-text-compact h5 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.ember-coming-soon-compact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.15), rgba(251, 146, 60, 0.08));
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    margin-top: var(--space-xl);
+}
+
+.ember-claim-icon-large-compact {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.5));
+}
+
+.ember-coming-text-compact {
+    text-align: left;
+}
+
+.ember-coming-text-compact h4 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+    margin-bottom: var(--space-xs);
+}
+
+.ember-coming-text-compact p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.ember-social-links-compact {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(215, 51, 39, 0.2);
+}
+
+.ember-social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 50%;
+    color: var(--ember-gold);
+    text-decoration: none;
+    transition: all var(--transition-base);
+}
+
+.ember-social-btn:hover {
+    background: rgba(215, 51, 39, 0.2);
+    border-color: var(--ember-gold);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(240, 165, 0, 0.3);
+}
+
+.ember-social-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* ============================================
+   4. CRYPTO COIN SECTION
+   ============================================ */
+
+.crypto-coin-section {
+    padding: var(--section-padding) var(--container-padding);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.crypto-coin-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(215, 51, 39, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.crypto-header {
+    text-align: center;
+    margin-bottom: var(--space-4xl);
+    position: relative;
+    z-index: var(--z-content);
+}
+
+.crypto-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.crypto-header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.crypto-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    max-width: 1300px;
+    margin: 0 auto;
+    align-items: center;
+    position: relative;
+    z-index: var(--z-content);
+}
+
+.crypto-visual {
+    position: relative;
+}
+
+.crypto-coin-large {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 40px rgba(240, 165, 0, 0.6)) 
+            drop-shadow(0 0 60px rgba(240, 165, 0, 0.4));
+    animation: ember-coinFloat 4s ease-in-out infinite;
+}
+
+.crypto-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.crypto-benefit {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.crypto-benefit:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ember-shadow-lg);
+    border-color: var(--ember-orange);
+}
+
+.crypto-benefit-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.crypto-benefit-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(240, 165, 0, 0.5));
+}
+
+.crypto-benefit-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+}
+
+.crypto-benefit-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
     margin: 0;
 }
 
 /* ============================================
-   13. DEVELOPMENT STORY SECTION
+   END OF PART 1
+   Continue with Part 2 for Technology & Features
+   ============================================ *//**
+ * ============================================
+ * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.3
+ * COMPLETE REBUILD - PART 2 OF 3
+ * ============================================
+ * 
+ * PART 2 CONTAINS:
+ * - GPS & Beacon Technology Section
+ * - Features Section
+ * - App Showcase Section
+ * - Use Cases Section
+ * - Pricing Section
+ * 
+ * APPEND THIS AFTER PART 1
+ * ============================================
+ */
+
+/* ============================================
+   5. GPS & BEACON TECHNOLOGY SECTION
+   ============================================ */
+
+.technology-section {
+    padding: var(--section-padding) var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+.technology-intro {
+    text-align: center;
+    margin-bottom: var(--space-4xl);
+}
+
+.technology-intro h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.technology-intro p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.technology-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    max-width: 1300px;
+    margin: 0 auto var(--space-4xl);
+}
+
+.technology-card {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.technology-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--ember-shadow-xl);
+}
+
+.gps-card {
+    border-color: var(--ember-gold);
+}
+
+.beacon-card {
+    border-color: var(--ember-indigo);
+}
+
+.tech-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.gps-badge {
+    background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange));
+    color: white;
+}
+
+.beacon-badge {
+    background: linear-gradient(135deg, var(--ember-purple), var(--ember-indigo));
+    color: white;
+}
+
+.tech-icon-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.tech-icon-large {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: var(--space-md);
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.5));
+}
+
+.tech-icon-header h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--space-sm);
+}
+
+.tech-icon-header p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
+.tech-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.tech-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+}
+
+.tech-feature-item:hover {
+    border-color: var(--ember-orange);
+    transform: translateX(5px);
+}
+
+.tech-feature-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(240, 165, 0, 0.4));
+}
+
+.tech-feature-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: var(--space-xs);
+}
+
+.tech-feature-content p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.combined-power-section {
+    max-width: 1300px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.15), rgba(251, 146, 60, 0.08));
+    border: 2px solid var(--ember-gold);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+}
+
+.combined-power-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.combined-power-header h3 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 900;
+    color: var(--ember-gold);
+    margin-bottom: var(--space-md);
+}
+
+.combined-power-header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+.combined-power-benefits {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+}
+
+.combined-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+}
+
+.combined-benefit:hover {
+    border-color: var(--ember-gold);
+    transform: translateY(-3px);
+    box-shadow: var(--ember-shadow-md);
+}
+
+.combined-benefit-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 8px rgba(240, 165, 0, 0.5));
+}
+
+.combined-benefit-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: var(--space-xs);
+}
+
+.combined-benefit-content p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+/* ============================================
+   6. FEATURES SECTION
+   ============================================ */
+
+.features {
+    padding: var(--section-padding) var(--container-padding);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.features-header {
+    text-align: center;
+    margin-bottom: var(--space-4xl);
+}
+
+.features-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.features-header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto var(--space-4xl);
+}
+
+.feature-card {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    transition: all var(--transition-base);
+    text-align: center;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--ember-shadow-lg);
+    border-color: var(--ember-orange);
+}
+
+.feature-icon-wrapper {
+    margin-bottom: var(--space-lg);
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5));
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.feature-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.proven-badge {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    padding: var(--space-2xl);
+    background: linear-gradient(135deg, rgba(215, 51, 39, 0.15), rgba(251, 146, 60, 0.08));
+    border: 2px solid var(--ember-gold);
+    border-radius: var(--radius-2xl);
+}
+
+.proven-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.6));
+}
+
+.proven-content h4 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+    margin-bottom: var(--space-sm);
+}
+
+.proven-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+/* ============================================
+   7. APP SHOWCASE SECTION
+   ============================================ */
+
+.app-showcase {
+    padding: var(--section-padding) var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+.showcase-header {
+    text-align: center;
+    margin-bottom: var(--space-4xl);
+}
+
+.showcase-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.showcase-header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.showcase-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.showcase-device {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+    transition: all var(--transition-base);
+}
+
+.showcase-device:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ember-shadow-xl);
+}
+
+.device-type-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--ember-gradient-primary);
+    color: white;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: var(--space-lg);
+}
+
+.main-screen-display {
+    position: relative;
+    margin-bottom: var(--space-xl);
+}
+
+.phone-frame,
+.laptop-screen {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--ember-shadow-xl);
+}
+
+.thumbnail-grid,
+.thumbnail-grid-laptop {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-sm);
+}
+
+.thumbnail-item {
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: all var(--transition-base);
+}
+
+.thumbnail-item:hover {
+    border-color: var(--ember-gold);
+    transform: scale(1.05);
+}
+
+.thumbnail-item.active {
+    border-color: var(--ember-orange);
+}
+
+.thumbnail-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.demo-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.demo-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 12px 24px;
+    background: var(--ember-gradient-primary);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all var(--transition-base);
+}
+
+.demo-button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--ember-shadow-md);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================
+   8. USE CASES SECTION
+   ============================================ */
+
+.use-cases {
+    padding: var(--section-padding) var(--container-padding);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.use-cases-header {
+    text-align: center;
+    margin-bottom: var(--space-4xl);
+}
+
+.use-cases-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.use-cases-header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.use-cases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.use-case-card {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    transition: all var(--transition-base);
+    text-align: center;
+}
+
+.use-case-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--ember-shadow-lg);
+    border-color: var(--ember-orange);
+}
+
+.use-case-icon-wrapper {
+    margin-bottom: var(--space-lg);
+}
+
+.use-case-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5));
+}
+
+.use-case-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.use-case-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+/* ============================================
+   9. PRICING SECTION
+   ============================================ */
+
+.pricing {
+    padding: var(--section-padding) var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: var(--space-4xl);
+}
+
+.pricing-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.pricing-header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.pricing-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.pricing-solution {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.pricing-solution:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--ember-shadow-xl);
+}
+
+.whitelabel-pricing {
+    border-color: var(--ember-gold);
+}
+
+.sdk-pricing {
+    border-color: var(--ember-indigo);
+}
+
+.solution-badge {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: var(--space-lg);
+}
+
+.whitelabel-badge {
+    background: linear-gradient(135deg, var(--ember-gold), var(--ember-orange));
+    color: white;
+}
+
+.sdk-badge {
+    background: linear-gradient(135deg, var(--ember-purple), var(--ember-indigo));
+    color: white;
+}
+
+.pricing-solution h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.pricing-solution > p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: var(--space-xl);
+}
+
+.pricing-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.pricing-tier {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    transition: all var(--transition-base);
+}
+
+.pricing-tier:hover {
+    border-color: var(--ember-orange);
+    transform: translateX(5px);
+}
+
+.tier-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.tier-name {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.tier-price {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--ember-gold);
+}
+
+.tier-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: var(--space-md);
+}
+
+.tier-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.tier-feature {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tier-feature::before {
+    content: '✓';
+    color: var(--ember-gold);
+    font-weight: 900;
+    font-size: 1.1rem;
+}
+
+.sdk-pricing-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.sdk-tier {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: all var(--transition-base);
+}
+
+.sdk-tier:hover {
+    border-color: var(--ember-indigo);
+    transform: translateY(-5px);
+    box-shadow: var(--ember-shadow-md);
+}
+
+.tier-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, var(--ember-purple), var(--ember-indigo));
+    color: white;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-bottom: var(--space-md);
+}
+
+.sdk-tier h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--space-sm);
+}
+
+.sdk-tier .tier-price {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--ember-gold);
+    margin-bottom: var(--space-md);
+}
+
+.sdk-tier p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.web-benefits-compact {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+.web-benefit-compact {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.web-benefit-compact::before {
+    content: '✓';
+    color: var(--ember-gold);
+    font-weight: 900;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.pricing-cta {
+    text-align: center;
+    margin-top: var(--space-lg);
+}
+
+.pricing-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 16px 40px;
+    background: var(--ember-gradient-primary);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    box-shadow: var(--ember-shadow-md);
+}
+
+.pricing-cta-button:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ember-shadow-lg);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================
+   END OF PART 2
+   Continue with Part 3 for Revenue, Final CTA, Responsive
+   ============================================ *//**
+ * ============================================
+ * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.3
+ * COMPLETE REBUILD - PART 3 OF 3
+ * ============================================
+ * 
+ * PART 3 CONTAINS:
+ * - Revenue Examples Section
+ * - Development Story Section
+ * - Final CTA Section
+ * - Scroll Reveal System
+ * - Complete Responsive Breakpoints
+ * - Mobile Optimizations
+ * - Accessibility & Performance
+ * 
+ * APPEND THIS AFTER PART 2
+ * ============================================
+ */
+
+/* ============================================
+   10. REVENUE EXAMPLES SECTION
+   ============================================ */
+
+.revenue-examples {
+    padding: var(--section-padding) var(--container-padding);
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.revenue-examples-header {
+    text-align: center;
+    margin-bottom: var(--space-4xl);
+}
+
+.revenue-examples-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.revenue-examples-header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.revenue-examples-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto var(--space-4xl);
+}
+
+.revenue-example-card {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.revenue-example-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--ember-shadow-xl);
+    border-color: var(--ember-gold);
+}
+
+.example-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 20px;
+    background: var(--ember-gradient-primary);
+    color: white;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.revenue-example-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.revenue-example-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: var(--space-md);
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.6));
+}
+
+.revenue-example-header h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--space-sm);
+}
+
+.revenue-example-header p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+}
+
+.revenue-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.metric-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    text-align: center;
+}
+
+.metric-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--ember-gold);
+    margin-bottom: var(--space-xs);
+}
+
+.metric-label {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.revenue-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-sm);
+}
+
+.breakdown-label {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.breakdown-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+}
+
+.system-benefits {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.system-benefit {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    transition: all var(--transition-base);
+}
+
+.system-benefit:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ember-shadow-lg);
+    border-color: var(--ember-orange);
+}
+
+.system-benefit-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.system-benefit-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(240, 165, 0, 0.5));
+}
+
+.system-benefit h4 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+}
+
+.system-benefit p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+/* ============================================
+   11. DEVELOPMENT STORY SECTION
    ============================================ */
 
 .development-story-section {
@@ -862,6 +2361,7 @@ body.main-page {
     height: 100px;
     object-fit: contain;
     flex-shrink: 0;
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.6));
 }
 
 .development-story-content {
@@ -887,7 +2387,7 @@ body.main-page {
 }
 
 /* ============================================
-   14. FINAL CTA SECTION
+   12. FINAL CTA SECTION
    ============================================ */
 
 .final-cta {
@@ -976,6 +2476,7 @@ body.main-page {
     object-fit: contain;
     margin: 0 auto;
     display: block;
+    filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.6));
 }
 
 .journey-path-title {
@@ -1077,17 +2578,14 @@ body.main-page {
 
 /* ============================================
    SCROLL REVEAL ANIMATION SYSTEM
-   Sections visible by default, animations optional
    ============================================ */
 
-/* Default state: everything visible */
 .scroll-reveal {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-/* Animation classes (applied by JS when js-loaded) */
 body.js-loaded .scroll-reveal:not(.revealed) {
     opacity: 0;
     transform: translateY(30px);
@@ -1100,7 +2598,6 @@ body.js-loaded .scroll-reveal.revealed {
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* Stagger animations */
 .stagger-1 {
     transition-delay: 0.1s;
 }
@@ -1117,7 +2614,6 @@ body.js-loaded .scroll-reveal.revealed {
     transition-delay: 0.4s;
 }
 
-/* Fade in animations */
 .main-fade-in {
     animation: fadeIn 0.8s ease-out;
 }
@@ -1185,15 +2681,11 @@ body.js-loaded .scroll-reveal.revealed {
         grid-template-columns: 1fr;
     }
     
-    .benefits-grid {
+    .system-benefits {
         grid-template-columns: 1fr;
     }
     
     .journey-paths-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .system-benefits {
         grid-template-columns: 1fr;
     }
 }
@@ -1239,7 +2731,7 @@ body.js-loaded .scroll-reveal.revealed {
 
 /* Mobile Portrait (below 768px) */
 @media (max-width: 767px) {
-    /* CRITICAL: Mobile hero clearance - WORKING PERFECTLY */
+    /* CRITICAL: Mobile hero clearance */
     .main-hero {
         padding: calc(var(--section-padding) + 40px) var(--space-md) var(--section-padding);
         min-height: auto;
@@ -1286,6 +2778,11 @@ body.js-loaded .scroll-reveal.revealed {
     
     /* Use Cases */
     .use-cases-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Revenue Examples */
+    .revenue-metrics {
         grid-template-columns: 1fr;
     }
     
@@ -1361,7 +2858,6 @@ body.js-loaded .scroll-reveal.revealed {
 
 /* ============================================
    MOBILE-SPECIFIC OPTIMIZATIONS
-   Preserve all touch-friendly features
    ============================================ */
 
 @media (max-width: 768px) {
@@ -1470,18 +2966,15 @@ textarea:focus-visible {
     .ember-token-section-redesigned,
     .ember-airdrop-section,
     .crypto-coin-section,
+    .technology-section,
     .features,
     .app-showcase,
     .use-cases,
     .pricing,
+    .revenue-examples,
     .final-cta {
         border: 2px solid currentColor;
     }
-}
-
-/* Dark mode adjustments (if needed) */
-@media (prefers-color-scheme: dark) {
-    /* Already optimized for dark mode by default */
 }
 
 /* ============================================
@@ -1496,8 +2989,8 @@ textarea:focus-visible {
 .feature-card,
 .use-case-card,
 .pricing-solution,
-.journey-path-module,
-.revenue-example-card {
+.revenue-example-card,
+.journey-path-module {
     will-change: transform;
 }
 
@@ -1588,23 +3081,41 @@ html {
 }
 
 /* ============================================
-   END OF MAIN PAGE LOCAL STYLES v3.2
-   PRODUCTION READY - ALL SECTIONS WORKING
+   END OF MAIN PAGE LOCAL STYLES v3.3
+   PRODUCTION READY - COMPLETE
    ============================================
    
    FILE SUMMARY:
-   ✅ 15+ sections fully styled
+   ✅ 15+ sections fully styled in correct order
    ✅ All sections visible by default
+   ✅ Fixed line 1099 error from v3.2
    ✅ Clean code (no patches or hacks)
    ✅ Properly uses global patterns
+   ✅ Complete responsive system
    ✅ Mobile optimized
    ✅ Accessible
    ✅ Performance optimized
    ✅ Browser compatible
    
-   READY FOR DEPLOYMENT: November 11, 2025
+   SECTIONS IN ORDER:
+   1. Hero Section
+   2. Enterprise Token Infrastructure
+   3. $Ember Airdrop
+   4. Crypto Coin Deployment
+   5. GPS & Beacon Technology
+   6. Features
+   7. App Showcase
+   8. Use Cases
+   9. Pricing
+   10. Revenue Examples
+   11. Development Story
+   12. Final CTA
+   + Scroll Reveal System
+   + Complete Responsive Breakpoints
    
-   @version 3.2.0
+   READY FOR DEPLOYMENT: November 2, 2025
+   
+   @version 3.3.0
    @date November 2, 2025
    @author Vault Phoenix Development Team
    ============================================
