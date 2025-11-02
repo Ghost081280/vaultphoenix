@@ -1,14 +1,13 @@
 /**
  * ============================================
  * VAULT PHOENIX - MAIN PAGE LOCAL JAVASCRIPT
- * v2.2.0 FIXED - ALL SECTIONS VISIBLE
+ * v2.3.0 HERO VISIBILITY FIXED
  * ============================================
  * 
- * FIXES:
- * - Scroll reveal now optional (sections visible by default)
- * - Added js-loaded class to body when JS is ready
- * - Improved error handling for shared components
- * - Better timing coordination with shared.js
+ * CRITICAL FIX:
+ * - Hero section excluded from scroll-reveal system
+ * - Hero displays immediately on page load
+ * - Other sections use scroll-reveal as normal
  * 
  * @dependencies
  * - shared.js (v8.0+) - Required for core functionality
@@ -537,20 +536,20 @@
     }
 
     // ============================================
-    // SCROLL REVEAL ANIMATION SYSTEM (ENHANCED)
+    // SCROLL REVEAL ANIMATION SYSTEM (HERO EXCLUDED)
     // ============================================
 
     function initializeScrollReveal() {
-        // CRITICAL: Add js-loaded class to body
+        // CRITICAL: Mark body as loaded so CSS knows JS is ready
         document.body.classList.add('js-loaded');
-        LOGGER.info('Body marked as js-loaded - scroll reveal activated');
+        LOGGER.info('Body marked as js-loaded');
         
         // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         
         if (prefersReducedMotion) {
             const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
-            scrollRevealElements.forEach(el => el.classList.add('revealed'));
+            scrollRevealElements.forEach(el => el.classList.add('visible'));
             LOGGER.info('Scroll reveal skipped (prefers-reduced-motion)');
             return;
         }
@@ -563,17 +562,27 @@
         const observerCallback = (entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
+                    entry.target.classList.add('visible');
                 }
             });
         };
         
         const observer = new IntersectionObserver(observerCallback, observerOptions);
         
-        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        // CRITICAL: Select scroll-reveal elements BUT exclude hero section
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal:not(.main-hero):not(.main-hero *)');
         scrollRevealElements.forEach(el => observer.observe(el));
         
-        LOGGER.success(`Scroll reveal initialized for ${scrollRevealElements.length} elements`);
+        // CRITICAL: Ensure hero is always visible
+        const heroSection = document.querySelector('.main-hero');
+        if (heroSection) {
+            heroSection.style.display = 'flex';
+            heroSection.style.opacity = '1';
+            heroSection.style.visibility = 'visible';
+            LOGGER.success('Hero section forced visible');
+        }
+        
+        LOGGER.success(`Scroll reveal initialized for ${scrollRevealElements.length} elements (hero excluded)`);
     }
 
     // ============================================
@@ -611,7 +620,6 @@
             })
             .catch(error => {
                 LOGGER.error(`Failed to load shared components: ${error.message}`);
-                // Don't let this block the rest of the page
                 LOGGER.warn('Continuing without shared components...');
             });
     }
@@ -651,7 +659,7 @@
             LOGGER.success('Shared.js ready, initializing main.js features...');
         }
         
-        // Initialize scroll reveal (marks body as js-loaded)
+        // Initialize scroll reveal (marks body as js-loaded, excludes hero)
         try {
             initializeScrollReveal();
         } catch (error) {
@@ -672,7 +680,7 @@
             LOGGER.error(`Shared components loading failed: ${error.message}`);
         }
         
-        LOGGER.success('Main page initialization complete');
+        LOGGER.success('Main page initialization complete - HERO VISIBILITY FIXED');
         logEnvironmentInfo();
     }
 
@@ -727,7 +735,7 @@
     // ============================================
 
     window.VaultPhoenixMain = {
-        version: '2.2.0',
+        version: '2.3.0',
         changeImage: window.changeImage,
         changeLaptopImage: window.changeLaptopImage,
         reinitialize: initialize,
@@ -745,6 +753,6 @@
         }
     };
 
-    LOGGER.info('Local.js v2.2.0 FIXED - All sections visible by default');
+    LOGGER.info('Local.js v2.3.0 HERO VISIBILITY FIXED - Hero displays immediately!');
 
 })();
