@@ -3614,6 +3614,18 @@ body.js-loaded .scroll-reveal.revealed {
  * This is a failsafe if scroll-reveal has issues
  */
 
+/* CRITICAL: Hero must ALWAYS be visible */
+.main-hero,
+.main-hero *,
+.main-hero-content,
+.main-hero-header,
+.main-hero-title-new,
+.main-hero-subtitle-new {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
 .main-hero,
 .ember-token-section-redesigned,
 .ember-airdrop-section,
@@ -3869,13 +3881,16 @@ body.js-loaded .scroll-reveal.revealed {
  * ✅ Scroll reveal fixed (visible by default)
  * ✅ Explicit visibility failsafe rules
  * ✅ Graceful degradation if JavaScript fails
- * 
- * RESTORED SECTIONS:
- * - GPS & Beacon Technology Modules
- * - Combined Power Section
- * - Revenue Examples Section
- * - Development Story Section
- * 
- * All sections now guaranteed to be visible!
- * ============================================
- */
+/* ============================================
+   CRITICAL DEBUG FIX - HERO VISIBILITY
+   ============================================ */
+
+/* Ensure hero section and ALL its children are ALWAYS visible */
+body .main-hero,
+body.js-loaded .main-hero,
+body .main-hero *,
+body.js-loaded .main-hero * {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
