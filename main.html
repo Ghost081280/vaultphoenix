@@ -50,9 +50,9 @@
     <link rel="icon" href="images/PhoenixBullseye.PNG" type="image/png">
     <link rel="apple-touch-icon" href="images/PhoenixBullseye.PNG">
     
-    <!-- Stylesheets - GLOBAL + LOCAL + CACHE BUST -->
-    <link rel="stylesheet" href="shared/global.css?v=1">
-    <link rel="stylesheet" href="main/local.css?v=2">
+    <!-- Stylesheets - OLD WORKING + CACHE BUST -->
+    <link rel="stylesheet" href="shared-styles.css?v=1">
+    <link rel="stylesheet" href="styles.css?v=2">
 
 </head>
 <body class="main-page">
@@ -94,7 +94,7 @@
         <!-- Links added by JS -->
     </div>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION - FULLY FIXED -->
     <section class="main-hero" id="main-content">
         <div class="main-hero-content">
             <div class="main-hero-header">
@@ -151,35 +151,58 @@
             <div class="main-cta-path-container">
                 <div class="main-cta-path">
                     <div class="coming-soon-badge">Coming Soon!</div>
-                    <div class="main-cta-icon">
-                        <img src="images/white-label-icon.png" alt="White-Label Solution Icon" class="main-journey-icon-large" loading="lazy">
-                    </div>
                     <h3 class="main-cta-title">For Marketers & Agencies</h3>
                     <h4 class="main-cta-subtitle">Build Your White-Label Web App (No Code)</h4>
-                    <p class="main-cta-description">Log in, customize branding, place coins, configure rewards, and deploy at yourdomain.com/app-name in under 24 hours. Perfect for running campaigns or selling coin placements.</p>
+                    <p class="main-cta-description">Log in, customize branding, place coins, configure rewards, and deploy at yourdomain.com/app-name in under 24 hours.</p>
                     <a href="mailto:contact@vaultphoenix.com" class="btn btn-primary">Start Building Your App</a>
                 </div>
 
                 <div class="main-cta-path">
                     <div class="early-2026-badge">Early 2026</div>
-                    <div class="main-cta-icon">
-                        <img src="images/sdk-integration.png" alt="SDK Integration" class="main-journey-icon-large" loading="lazy">
-                    </div>
                     <h3 class="main-cta-title">For Developers & Tech Teams</h3>
                     <h4 class="main-cta-subtitle">Integrate Our AR Engine into Web or Native Apps</h4>
-                    <p class="main-cta-description">Add location-based AR crypto gaming in 1-2 weeks. Our SDK gives full API control over coin placement, rewards, analytics, and user tracking. Keep your users, retain your brand.</p>
+                    <p class="main-cta-description">Add location-based AR crypto gaming in 1-2 weeks. Full API control. Keep your brand.</p>
                     <a href="https://github.com/Vault-Phoenix-SDK" class="btn btn-primary" target="_blank">Explore SDK Documentation</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Shared Components Container -->
-    <div id="shared-components-container"></div>
+    <!-- Footer & Chatbot (Inline from your old version) -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="footer-logo-image">
+                        <span class="footer-logo-text">Vault Phoenix</span>
+                    </div>
+                    <p class="footer-tagline">The Future of AR Crypto Gaming</p>
+                    <div class="footer-social">
+                        <a href="https://x.com/vaultphoenix" target="_blank" rel="noopener" class="social-link" aria-label="X">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <!-- Add other socials -->
+                    </div>
+                </div>
+                <!-- Other footer columns -->
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2025 Vault Phoenix LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Scripts - GLOBAL + LOCAL + CACHE BUST -->
-    <script src="shared/global.js?v=1"></script>
-    <script src="main/local.js?v=2"></script>
+    <!-- Chatbot (Inline) -->
+    <div class="chatbot-button-container">
+        <button class="chatbot-button" aria-label="Open AI Assistant">
+            <img src="images/PhoenixBot.PNG" alt="Phoenix AI" class="chatbot-icon">
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="shared-script.js?v=1"></script>
+    <script src="script.js?v=2"></script>
 </body>
 </html>
  
