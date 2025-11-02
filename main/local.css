@@ -1,114 +1,35 @@
 /**
  * ============================================
- * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.3
- * COMPLETE REBUILD - PART 1 OF 3
+ * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.5
+ * CLEAN ARCHITECTURE - EXTENDS GLOBAL.CSS
  * ============================================
  * 
- * This file contains main.html specific styles.
- * Leverages patterns from shared/global.css v10.0.
+ * This file contains ONLY main.html specific customizations.
+ * Inherits all base patterns from shared/global.css v10.0
  * 
- * PRODUCTION READY v3.3:
- * ✅ All 15+ sections in correct order
- * ✅ Clean code (no patches, no !important hacks)
- * ✅ Fixed line 1099 error from v3.2
- * ✅ All sections visible by default
- * ✅ Complete responsive system
+ * ARCHITECTURE:
+ * - Uses global CSS variables
+ * - Extends universal patterns (.hero, .section, .card, etc.)
+ * - Only adds page-specific styles
+ * - NO !important hacks
+ * - NO duplicate base styles
  * 
- * PART 1 CONTAINS:
- * - Hero Section
- * - Enterprise Token Infrastructure
- * - $Ember Airdrop Section
- * - Crypto Coin Section
- * 
- * @version 3.3.0
+ * @version 3.5.0
  * @date November 2, 2025
- * @dependencies shared/global.css v10.0+
+ * @dependencies shared/global.css v10.0
  * ============================================
  */
 
 /* ============================================
-   CRITICAL: ENSURE ALL SECTIONS VISIBLE
-   ============================================ */
-
-body.main-page {
-    opacity: 1;
-    visibility: visible;
-}
-
-.main-hero,
-.ember-token-section-redesigned,
-.ember-airdrop-section,
-.crypto-coin-section,
-.technology-section,
-.features,
-.app-showcase,
-.use-cases,
-.pricing,
-.revenue-examples,
-.development-story-section,
-.final-cta {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-}
-
-/* ============================================
-   1. HERO SECTION
+   1. MAIN HERO - EXTENDS .hero PATTERN
    ============================================ */
 
 .main-hero {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: calc(var(--navbar-height) + 4rem) 1rem 4rem;
-    background: var(--ember-gradient-background);
-    position: relative;
-    overflow: hidden;
+    /* Inherits from global .hero pattern */
+    /* Only add main.html specific customizations */
 }
 
-.main-hero,
-.main-hero * {
-    opacity: 1;
-    visibility: visible;
-}
-
-.main-hero-content {
-    max-width: 1400px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.main-hero-header {
-    text-align: center;
-    margin-bottom: var(--space-3xl);
-}
-
-.main-hero-title-new {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 800;
-    margin-bottom: var(--space-lg);
-    line-height: 1.1;
-    color: #ffffff;
-}
-
-.main-hero-subtitle-new {
-    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-    line-height: 1.7;
-    margin-bottom: var(--space-lg);
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.main-hero-tagline {
-    font-size: clamp(1.3rem, 3vw, 1.9rem);
-    font-weight: 700;
-    color: var(--ember-gold);
-}
-
-/* Three-Step Process */
+/* Three-Step Process Cards */
 .main-hero-steps-premium {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -118,18 +39,8 @@ body.main-page {
 }
 
 .main-step-premium {
-    background: var(--ember-gradient-card);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-    transition: all var(--transition-base);
+    /* Inherits base .card styles from global */
     position: relative;
-}
-
-.main-step-premium:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-lg);
-    border-color: var(--ember-orange);
 }
 
 .main-step-number-badge {
@@ -211,6 +122,7 @@ body.main-page {
 }
 
 .main-cta-path-container {
+    /* Uses global .grid-2 pattern */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-xl);
@@ -218,17 +130,8 @@ body.main-page {
 }
 
 .main-cta-path {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
+    /* Extends .card pattern from global */
     position: relative;
-    transition: all var(--transition-base);
-}
-
-.main-cta-path:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
 }
 
 .whitelabel-path {
@@ -309,6 +212,7 @@ body.main-page {
 }
 
 .main-cta-path-button {
+    /* Extends .btn-primary from global */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -322,7 +226,7 @@ body.main-page {
     font-weight: 700;
     font-size: 1.1rem;
     text-decoration: none;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
     box-shadow: var(--ember-shadow-md);
 }
 
@@ -354,6 +258,7 @@ body.main-page {
 }
 
 .main-secondary-cta-link {
+    /* Extends .btn-secondary from global */
     display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
@@ -365,7 +270,7 @@ body.main-page {
     font-weight: 700;
     font-size: 1.05rem;
     text-decoration: none;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .main-secondary-cta-link:hover {
@@ -398,36 +303,22 @@ body.main-page {
 }
 
 /* ============================================
-   2. ENTERPRISE TOKEN INFRASTRUCTURE
+   2. ENTERPRISE TOKEN INFRASTRUCTURE - CUSTOM LAYOUT
    ============================================ */
 
 .ember-token-section-redesigned {
+    /* Extends .section from global */
     padding: 70px var(--space-xl);
-    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-.ember-token-section-redesigned::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(240, 165, 0, 0.1) 0%, transparent 70%);
-    pointer-events: none;
 }
 
 .ember-token-grid-redesigned {
+    /* Custom 2-column layout */
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: var(--space-xl);
     max-width: 1300px;
     margin: 0 auto;
     align-items: start;
-    position: relative;
-    z-index: var(--z-content);
 }
 
 .ember-token-left-redesigned {
@@ -452,6 +343,7 @@ body.main-page {
 }
 
 .ember-countdown-widget-redesigned {
+    /* Extends .card from global */
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
@@ -478,14 +370,6 @@ body.main-page {
     margin-bottom: var(--space-md);
 }
 
-.countdown-icon-redesigned {
-    flex-shrink: 0;
-}
-
-.countdown-text-redesigned {
-    flex: 1;
-}
-
 .countdown-text-redesigned h3 {
     font-size: 1.4rem;
     font-weight: 800;
@@ -499,6 +383,7 @@ body.main-page {
 }
 
 .ember-countdown-timer-redesigned {
+    /* Uses grid pattern */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-sm);
@@ -511,7 +396,7 @@ body.main-page {
     border-radius: var(--radius-sm);
     padding: var(--space-sm);
     text-align: center;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .ember-time-unit-redesigned:hover {
@@ -524,7 +409,7 @@ body.main-page {
     display: block;
     font-size: 2rem;
     font-weight: 900;
-    color: var(--ember-yellow);
+    color: var(--ember-gold);
     margin-bottom: 3px;
     text-shadow: 0 0 15px rgba(240, 165, 0, 0.4);
 }
@@ -553,7 +438,7 @@ body.main-page {
     display: block;
     font-size: 1.4rem;
     font-weight: 900;
-    color: var(--ember-yellow);
+    color: var(--ember-gold);
     margin-bottom: 3px;
 }
 
@@ -569,11 +454,8 @@ body.main-page {
     font-size: 1.3rem;
 }
 
-.presale-cta-redesigned {
-    margin-bottom: var(--space-md);
-}
-
 .join-presale-button-redesigned {
+    /* Extends .btn-primary from global */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -586,7 +468,7 @@ body.main-page {
     font-size: 1.1rem;
     font-weight: 800;
     text-decoration: none;
-    transition: all var(--transition-smooth);
+    transition: all var(--transition-base);
     box-shadow: 0 8px 25px rgba(215, 51, 39, 0.5);
     position: relative;
     overflow: hidden;
@@ -635,17 +517,13 @@ body.main-page {
     border-radius: var(--radius-sm);
     text-decoration: none;
     color: rgba(255, 255, 255, 0.95);
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .ember-highlight-redesigned:hover {
     background: rgba(215, 51, 39, 0.1);
     border-color: rgba(215, 51, 39, 0.4);
     transform: translateX(3px);
-}
-
-.highlight-emoji-redesigned {
-    flex-shrink: 0;
 }
 
 .highlight-icon-image-redesigned {
@@ -662,7 +540,7 @@ body.main-page {
 }
 
 .highlight-arrow-redesigned {
-    color: var(--ember-yellow);
+    color: var(--ember-gold);
     font-weight: 900;
     font-size: 1.1rem;
     transition: transform var(--transition-base);
@@ -728,11 +606,8 @@ body.main-page {
     margin-bottom: var(--space-sm);
 }
 
-.compliance-cta {
-    margin-top: var(--space-sm);
-}
-
 .compliance-button {
+    /* Extends .btn-secondary from global */
     display: inline-block;
     padding: 10px 20px;
     background: rgba(215, 51, 39, 0.15);
@@ -742,7 +617,7 @@ body.main-page {
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .compliance-button:hover {
@@ -782,21 +657,13 @@ body.main-page {
    ============================================ */
 
 .ember-airdrop-section {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-    position: relative;
-    overflow: hidden;
+    /* Extends .section from global */
 }
 
 .ember-airdrop-outer-module {
+    /* Extends .card from global */
     max-width: 1100px;
     margin: 0 auto;
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
-    box-shadow: var(--ember-shadow-xl);
-    position: relative;
 }
 
 .ember-airdrop-compact-header {
@@ -805,10 +672,6 @@ body.main-page {
     justify-content: space-between;
     margin-bottom: var(--space-2xl);
     gap: var(--space-lg);
-}
-
-.ember-compact-title-section {
-    flex: 1;
 }
 
 .ember-compact-title-section h2 {
@@ -834,6 +697,7 @@ body.main-page {
 }
 
 .ember-compact-grid {
+    /* Uses grid pattern */
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: var(--space-xl);
@@ -871,6 +735,7 @@ body.main-page {
 }
 
 .share-buttons-grid {
+    /* Uses grid pattern */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-md);
@@ -878,6 +743,7 @@ body.main-page {
 }
 
 .share-button {
+    /* Extends .btn from global */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -887,7 +753,7 @@ body.main-page {
     font-weight: 700;
     font-size: 1rem;
     text-decoration: none;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
     border: 2px solid transparent;
 }
 
@@ -970,9 +836,9 @@ body.main-page {
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-md);
     color: white;
-    font-size: 1rem;
+    font-size: 16px;
     outline: none;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .input-compact:focus {
@@ -993,7 +859,7 @@ body.main-page {
     font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
     white-space: nowrap;
 }
 
@@ -1017,6 +883,7 @@ body.main-page {
 }
 
 .ember-stats-compact {
+    /* Uses grid pattern */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-lg);
@@ -1029,7 +896,7 @@ body.main-page {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(215, 51, 39, 0.2);
     border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .ember-stat-compact:hover {
@@ -1051,6 +918,7 @@ body.main-page {
 }
 
 .ember-info-compact {
+    /* Uses grid pattern */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
@@ -1107,10 +975,6 @@ body.main-page {
     filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.5));
 }
 
-.ember-coming-text-compact {
-    text-align: left;
-}
-
 .ember-coming-text-compact h4 {
     font-size: 1.5rem;
     font-weight: 800;
@@ -1135,6 +999,7 @@ body.main-page {
 }
 
 .ember-social-btn {
+    /* Uses .social-link pattern from global */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1145,7 +1010,7 @@ body.main-page {
     border-radius: 50%;
     color: var(--ember-gold);
     text-decoration: none;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .ember-social-btn:hover {
@@ -1161,32 +1026,17 @@ body.main-page {
 }
 
 /* ============================================
-   4. CRYPTO COIN SECTION
+   4. CRYPTO COIN SECTION - EXTENDS .section
    ============================================ */
 
 .crypto-coin-section {
-    padding: var(--section-padding) var(--container-padding);
-    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-.crypto-coin-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(215, 51, 39, 0.1) 0%, transparent 50%);
-    pointer-events: none;
+    /* Extends .section from global */
 }
 
 .crypto-header {
+    /* Uses .section-header pattern from global */
     text-align: center;
     margin-bottom: var(--space-4xl);
-    position: relative;
-    z-index: var(--z-content);
 }
 
 .crypto-header h2 {
@@ -1205,14 +1055,13 @@ body.main-page {
 }
 
 .crypto-content {
+    /* Uses .grid-2 pattern from global */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2xl);
     max-width: 1300px;
     margin: 0 auto;
     align-items: center;
-    position: relative;
-    z-index: var(--z-content);
 }
 
 .crypto-visual {
@@ -1236,18 +1085,7 @@ body.main-page {
 }
 
 .crypto-benefit {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-    transition: all var(--transition-base);
-    position: relative;
-}
-
-.crypto-benefit:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--ember-shadow-lg);
-    border-color: var(--ember-orange);
+    /* Extends .card from global */
 }
 
 .crypto-benefit-header {
@@ -1278,494 +1116,15 @@ body.main-page {
 }
 
 /* ============================================
-   END OF PART 1
-   Continue with Part 2 for Technology & Features
-   ============================================ *//**/**
- * ============================================
- * VAULT PHOENIX - DIAGNOSTIC FIX FILE
- * Missing Styles Recovery
- * ============================================
- * 
- * Add this AFTER Part 1, before Part 2
- * This contains styles that were likely lost in the v3.2 corruption
- * ============================================
- */
-
-/* ============================================
-   MISSING: Benefits Grid (Revenue Section)
-   The "85);" error suggests this was cut off
-   ============================================ */
-
-.benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xl);
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.benefit-card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-    transition: all var(--transition-base);
-}
-
-.benefit-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--ember-shadow-lg);
-    border-color: var(--ember-orange);
-}
-
-.benefit-card h4 {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--ember-gold);
-    margin-bottom: var(--space-md);
-}
-
-.benefit-card p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-}
-
-/* ============================================
-   MISSING: Section Containers
-   ============================================ */
-
-.main-container,
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-}
-
-/* ============================================
-   MISSING: Additional CTA Styles
-   ============================================ */
-
-.cta-primary-large,
-.cta-secondary-large {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-sm);
-    padding: 16px 40px;
-    border-radius: var(--radius-xl);
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: all var(--transition-base);
-}
-
-.cta-primary-large {
-    background: var(--ember-gradient-primary);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: var(--ember-shadow-md);
-}
-
-.cta-primary-large:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--ember-shadow-lg);
-}
-
-.cta-secondary-large {
-    background: transparent;
-    color: var(--ember-gold);
-    border: 2px solid var(--ember-gold);
-}
-
-.cta-secondary-large:hover {
-    background: var(--ember-gold);
-    color: var(--ember-dark);
-}
-
-/* ============================================
-   MISSING: Icon Wrapper Styles
-   ============================================ */
-
-.icon-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 64px;
-    height: 64px;
-    margin: 0 auto var(--space-md);
-}
-
-.icon-large {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-/* ============================================
-   MISSING: Card Title Styles
-   ============================================ */
-
-.card-title {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: var(--space-md);
-}
-
-.card-subtitle {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
-}
-
-/* ============================================
-   MISSING: Section Dividers
-   ============================================ */
-
-.section-divider {
-    height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(215, 51, 39, 0.3),
-        transparent
-    );
-    margin: var(--space-4xl) 0;
-}
-
-/* ============================================
-   MISSING: Grid System Utilities
-   ============================================ */
-
-.grid-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xl);
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
-}
-
-.grid-4 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-lg);
-}
-
-/* ============================================
-   MISSING: Flex Utilities
-   ============================================ */
-
-.flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.flex-between {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.flex-column {
-    display: flex;
-    flex-direction: column;
-}
-
-/* ============================================
-   MISSING: Spacing Utilities
-   ============================================ */
-
-.mb-xl {
-    margin-bottom: var(--space-xl);
-}
-
-.mb-2xl {
-    margin-bottom: var(--space-2xl);
-}
-
-.mb-3xl {
-    margin-bottom: var(--space-3xl);
-}
-
-.mb-4xl {
-    margin-bottom: var(--space-4xl);
-}
-
-.mt-xl {
-    margin-top: var(--space-xl);
-}
-
-.mt-2xl {
-    margin-top: var(--space-2xl);
-}
-
-.mt-3xl {
-    margin-top: var(--space-3xl);
-}
-
-.mt-4xl {
-    margin-top: var(--space-4xl);
-}
-
-/* ============================================
-   MISSING: Animation Classes
-   ============================================ */
-
-.animate-float {
-    animation: ember-coinFloat 4s ease-in-out infinite;
-}
-
-.animate-pulse {
-    animation: ember-coinPulse 2s ease-in-out infinite;
-}
-
-.animate-glow {
-    animation: glowPulse 3s ease-in-out infinite;
-}
-
-@keyframes glowPulse {
-    0%, 100% {
-        filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.4));
-    }
-    50% {
-        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.8));
-    }
-}
-
-/* ============================================
-   MISSING: Status/Badge Variations
-   ============================================ */
-
-.status-badge {
-    display: inline-block;
-    padding: 6px 16px;
-    border-radius: var(--radius-full);
-    font-weight: 700;
-    font-size: 0.85rem;
-}
-
-.status-success {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-}
-
-.status-warning {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-    color: white;
-}
-
-.status-info {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: white;
-}
-
-/* ============================================
-   MISSING: List Styles
-   ============================================ */
-
-.styled-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.styled-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-sm);
-    padding: var(--space-sm) 0;
-}
-
-.styled-list li::before {
-    content: '✓';
-    color: var(--ember-gold);
-    font-weight: 900;
-    flex-shrink: 0;
-}
-
-/* ============================================
-   MISSING: Loading States
-   ============================================ */
-
-.loading {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-.skeleton {
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.05) 0%,
-        rgba(255, 255, 255, 0.1) 50%,
-        rgba(255, 255, 255, 0.05) 100%
-    );
-    background-size: 200% 100%;
-    animation: skeleton-loading 1.5s ease-in-out infinite;
-}
-
-@keyframes skeleton-loading {
-    0% {
-        background-position: 200% 0;
-    }
-    100% {
-        background-position: -200% 0;
-    }
-}
-
-/* ============================================
-   MISSING: Overlay Styles
-   ============================================ */
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    z-index: var(--z-overlay);
-    opacity: 0;
-    visibility: hidden;
-    transition: all var(--transition-base);
-}
-
-.overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* ============================================
-   MISSING: Modal Styles
-   ============================================ */
-
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
-    max-width: 600px;
-    width: 90%;
-    z-index: var(--z-modal);
-    opacity: 0;
-    visibility: hidden;
-    transition: all var(--transition-base);
-}
-
-.modal.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* ============================================
-   MISSING: Alert/Notification Styles
-   ============================================ */
-
-.alert {
-    padding: var(--space-md) var(--space-lg);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--space-md);
-}
-
-.alert-success {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: #10b981;
-}
-
-.alert-error {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    color: #ef4444;
-}
-
-.alert-warning {
-    background: rgba(245, 158, 11, 0.1);
-    border: 1px solid rgba(245, 158, 11, 0.3);
-    color: #f59e0b;
-}
-
-.alert-info {
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    color: #3b82f6;
-}
-
-/* ============================================
-   MISSING: Tooltip Styles
-   ============================================ */
-
-.tooltip {
-    position: relative;
-}
-
-.tooltip::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-8px);
-    padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all var(--transition-base);
-    pointer-events: none;
-}
-
-.tooltip:hover::after {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(-4px);
-}
-
-/* ============================================
-   END OF DIAGNOSTIC FIX FILE
-   ============================================ */
- * ============================================
- * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.3
- * COMPLETE REBUILD - PART 2 OF 3
- * ============================================
- * 
- * PART 2 CONTAINS:
- * - GPS & Beacon Technology Section
- * - Features Section
- * - App Showcase Section
- * - Use Cases Section
- * - Pricing Section
- * 
- * APPEND THIS AFTER PART 1
- * ============================================
- */
-
-/* ============================================
-   5. GPS & BEACON TECHNOLOGY SECTION
+   5. GPS & BEACON TECHNOLOGY - EXTENDS .section
    ============================================ */
 
 .technology-section {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-    position: relative;
-    overflow: hidden;
+    /* Extends .section from global */
 }
 
 .technology-intro {
+    /* Uses .section-header pattern from global */
     text-align: center;
     margin-bottom: var(--space-4xl);
 }
@@ -1786,6 +1145,7 @@ body.main-page {
 }
 
 .technology-grid {
+    /* Uses .grid-2 pattern from global */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2xl);
@@ -1794,17 +1154,7 @@ body.main-page {
 }
 
 .technology-card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
-    transition: all var(--transition-base);
-    position: relative;
-}
-
-.technology-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
+    /* Extends .card from global */
 }
 
 .gps-card {
@@ -1875,7 +1225,7 @@ body.main-page {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(215, 51, 39, 0.2);
     border-radius: var(--radius-md);
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .tech-feature-item:hover {
@@ -1933,6 +1283,7 @@ body.main-page {
 }
 
 .combined-power-benefits {
+    /* Uses .grid-2 pattern from global */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-lg);
@@ -1946,7 +1297,7 @@ body.main-page {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .combined-benefit:hover {
@@ -1978,17 +1329,15 @@ body.main-page {
 }
 
 /* ============================================
-   6. FEATURES SECTION
+   6. FEATURES - EXTENDS .section & .grid-3
    ============================================ */
 
 .features {
-    padding: var(--section-padding) var(--container-padding);
-    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
-    position: relative;
-    overflow: hidden;
+    /* Extends .section from global */
 }
 
 .features-header {
+    /* Uses .section-header pattern */
     text-align: center;
     margin-bottom: var(--space-4xl);
 }
@@ -2009,6 +1358,7 @@ body.main-page {
 }
 
 .features-grid {
+    /* Uses .grid-3 pattern from global */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xl);
@@ -2017,18 +1367,8 @@ body.main-page {
 }
 
 .feature-card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-    transition: all var(--transition-base);
+    /* Extends .card from global */
     text-align: center;
-}
-
-.feature-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-lg);
-    border-color: var(--ember-orange);
 }
 
 .feature-icon-wrapper {
@@ -2091,17 +1431,15 @@ body.main-page {
 }
 
 /* ============================================
-   7. APP SHOWCASE SECTION
+   7. APP SHOWCASE - EXTENDS .section & .grid-2
    ============================================ */
 
 .app-showcase {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-    position: relative;
-    overflow: hidden;
+    /* Extends .section from global */
 }
 
 .showcase-header {
+    /* Uses .section-header pattern */
     text-align: center;
     margin-bottom: var(--space-4xl);
 }
@@ -2122,6 +1460,7 @@ body.main-page {
 }
 
 .showcase-content {
+    /* Uses .grid-2 pattern from global */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2xl);
@@ -2130,16 +1469,7 @@ body.main-page {
 }
 
 .showcase-device {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
-    transition: all var(--transition-base);
-}
-
-.showcase-device:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--ember-shadow-xl);
+    /* Extends .card from global */
 }
 
 .device-type-badge {
@@ -2168,6 +1498,7 @@ body.main-page {
 
 .thumbnail-grid,
 .thumbnail-grid-laptop {
+    /* Uses .grid-4 pattern from global */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-sm);
@@ -2178,7 +1509,7 @@ body.main-page {
     border-radius: var(--radius-sm);
     overflow: hidden;
     border: 2px solid transparent;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .thumbnail-item:hover {
@@ -2204,6 +1535,7 @@ body.main-page {
 }
 
 .demo-button {
+    /* Extends .btn-primary from global */
     display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
@@ -2215,7 +1547,7 @@ body.main-page {
     font-weight: 700;
     font-size: 1rem;
     text-decoration: none;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .demo-button:hover {
@@ -2225,17 +1557,15 @@ body.main-page {
 }
 
 /* ============================================
-   8. USE CASES SECTION
+   8. USE CASES - EXTENDS .section & .grid-3
    ============================================ */
 
 .use-cases {
-    padding: var(--section-padding) var(--container-padding);
-    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
-    position: relative;
-    overflow: hidden;
+    /* Extends .section from global */
 }
 
 .use-cases-header {
+    /* Uses .section-header pattern */
     text-align: center;
     margin-bottom: var(--space-4xl);
 }
@@ -2256,6 +1586,7 @@ body.main-page {
 }
 
 .use-cases-grid {
+    /* Uses .grid-3 pattern from global */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xl);
@@ -2264,18 +1595,8 @@ body.main-page {
 }
 
 .use-case-card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-    transition: all var(--transition-base);
+    /* Extends .card from global */
     text-align: center;
-}
-
-.use-case-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-lg);
-    border-color: var(--ember-orange);
 }
 
 .use-case-icon-wrapper {
@@ -2304,17 +1625,15 @@ body.main-page {
 }
 
 /* ============================================
-   9. PRICING SECTION
+   9. PRICING - EXTENDS .section & .grid-2
    ============================================ */
 
 .pricing {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-    position: relative;
-    overflow: hidden;
+    /* Extends .section from global */
 }
 
 .pricing-header {
+    /* Uses .section-header pattern */
     text-align: center;
     margin-bottom: var(--space-4xl);
 }
@@ -2335,6 +1654,7 @@ body.main-page {
 }
 
 .pricing-two-column {
+    /* Uses .grid-2 pattern from global */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2xl);
@@ -2343,17 +1663,8 @@ body.main-page {
 }
 
 .pricing-solution {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
-    transition: all var(--transition-base);
+    /* Extends .card from global */
     position: relative;
-}
-
-.pricing-solution:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
 }
 
 .whitelabel-pricing {
@@ -2409,7 +1720,7 @@ body.main-page {
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .pricing-tier:hover {
@@ -2465,6 +1776,7 @@ body.main-page {
 }
 
 .sdk-pricing-tiers {
+    /* Uses .grid-3 pattern */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
@@ -2477,7 +1789,7 @@ body.main-page {
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
     text-align: center;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .sdk-tier:hover {
@@ -2519,6 +1831,7 @@ body.main-page {
 }
 
 .web-benefits-compact {
+    /* Uses .grid-2 pattern */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-md);
@@ -2550,6 +1863,7 @@ body.main-page {
 }
 
 .pricing-cta-button {
+    /* Extends .btn-primary from global */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -2562,7 +1876,7 @@ body.main-page {
     font-weight: 700;
     font-size: 1.1rem;
     text-decoration: none;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
     box-shadow: var(--ember-shadow-md);
 }
 
@@ -2573,39 +1887,15 @@ body.main-page {
 }
 
 /* ============================================
-   END OF PART 2
-   Continue with Part 3 for Revenue, Final CTA, Responsive
-   ============================================ *//**
- * ============================================
- * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.3
- * COMPLETE REBUILD - PART 3 OF 3
- * ============================================
- * 
- * PART 3 CONTAINS:
- * - Revenue Examples Section
- * - Development Story Section
- * - Final CTA Section
- * - Scroll Reveal System
- * - Complete Responsive Breakpoints
- * - Mobile Optimizations
- * - Accessibility & Performance
- * 
- * APPEND THIS AFTER PART 2
- * ============================================
- */
-
-/* ============================================
-   10. REVENUE EXAMPLES SECTION
+   10. REVENUE EXAMPLES - EXTENDS .section & .grid-2
    ============================================ */
 
 .revenue-examples {
-    padding: var(--section-padding) var(--container-padding);
-    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
-    position: relative;
-    overflow: hidden;
+    /* Extends .section from global */
 }
 
 .revenue-examples-header {
+    /* Uses .section-header pattern */
     text-align: center;
     margin-bottom: var(--space-4xl);
 }
@@ -2626,6 +1916,7 @@ body.main-page {
 }
 
 .revenue-examples-grid {
+    /* Uses .grid-2 pattern from global */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-xl);
@@ -2634,18 +1925,8 @@ body.main-page {
 }
 
 .revenue-example-card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
-    transition: all var(--transition-base);
+    /* Extends .card from global */
     position: relative;
-}
-
-.revenue-example-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
-    border-color: var(--ember-gold);
 }
 
 .example-badge {
@@ -2745,6 +2026,7 @@ body.main-page {
 }
 
 .system-benefits {
+    /* Uses .grid-2 pattern */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-lg);
@@ -2753,17 +2035,7 @@ body.main-page {
 }
 
 .system-benefit {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-    transition: all var(--transition-base);
-}
-
-.system-benefit:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--ember-shadow-lg);
-    border-color: var(--ember-orange);
+    /* Extends .card from global */
 }
 
 .system-benefit-header {
@@ -2794,7 +2066,7 @@ body.main-page {
 }
 
 /* ============================================
-   11. DEVELOPMENT STORY SECTION
+   11. DEVELOPMENT STORY
    ============================================ */
 
 .development-story-section {
@@ -2821,10 +2093,6 @@ body.main-page {
     filter: drop-shadow(0 4px 15px rgba(240, 165, 0, 0.6));
 }
 
-.development-story-content {
-    flex: 1;
-}
-
 .development-story-content h4 {
     font-size: 1.5rem;
     font-weight: 800;
@@ -2844,34 +2112,15 @@ body.main-page {
 }
 
 /* ============================================
-   12. FINAL CTA SECTION
+   12. FINAL CTA - EXTENDS .section
    ============================================ */
 
 .final-cta {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-    position: relative;
-    overflow: hidden;
-}
-
-.final-cta-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(240, 165, 0, 0.15) 0%, transparent 70%);
-    pointer-events: none;
-}
-
-.final-cta-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    position: relative;
-    z-index: var(--z-content);
+    /* Extends .section from global */
 }
 
 .final-cta-header {
+    /* Uses .section-header pattern */
     text-align: center;
     margin-bottom: var(--space-4xl);
 }
@@ -2890,23 +2139,16 @@ body.main-page {
 }
 
 .journey-paths-container {
+    /* Uses .grid-2 pattern from global */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2xl);
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .journey-path-module {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
-    position: relative;
-    transition: all var(--transition-base);
-}
-
-.journey-path-module:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
+    /* Extends .card from global */
 }
 
 .business-path {
@@ -2963,7 +2205,7 @@ body.main-page {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(215, 51, 39, 0.2);
     border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
 }
 
 .journey-step:hover {
@@ -3007,6 +2249,7 @@ body.main-page {
 }
 
 .journey-cta-button {
+    /* Extends .btn-primary from global */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -3019,7 +2262,7 @@ body.main-page {
     font-weight: 700;
     font-size: 1.1rem;
     text-decoration: none;
-    transition: all var(--transition-base);
+    transition: var(--transition-base);
     box-shadow: var(--ember-shadow-md);
 }
 
@@ -3034,70 +2277,10 @@ body.main-page {
 }
 
 /* ============================================
-   SCROLL REVEAL ANIMATION SYSTEM
+   RESPONSIVE - INHERITS FROM GLOBAL
+   Only add page-specific overrides
    ============================================ */
 
-.scroll-reveal {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-body.js-loaded .scroll-reveal:not(.revealed) {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-body.js-loaded .scroll-reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.stagger-1 {
-    transition-delay: 0.1s;
-}
-
-.stagger-2 {
-    transition-delay: 0.2s;
-}
-
-.stagger-3 {
-    transition-delay: 0.3s;
-}
-
-.stagger-4 {
-    transition-delay: 0.4s;
-}
-
-.main-fade-in {
-    animation: fadeIn 0.8s ease-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ============================================
-   RESPONSIVE BREAKPOINTS
-   ============================================ */
-
-/* Large Desktop (1440px+) */
-@media (min-width: 1440px) {
-    .main-container {
-        max-width: 1400px;
-    }
-}
-
-/* Desktop (1024px - 1439px) */
 @media (max-width: 1439px) {
     .main-hero-steps-premium {
         grid-template-columns: 1fr;
@@ -3108,97 +2291,20 @@ body.js-loaded .scroll-reveal.revealed {
     }
 }
 
-/* Tablet Landscape (1024px - 1279px) */
-@media (max-width: 1279px) {
-    .main-cta-path-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .crypto-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .technology-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .combined-power-benefits {
-        grid-template-columns: 1fr;
-    }
-    
-    .showcase-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .pricing-two-column {
-        grid-template-columns: 1fr;
-    }
-    
-    .revenue-examples-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .system-benefits {
-        grid-template-columns: 1fr;
-    }
-    
-    .journey-paths-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Tablet Portrait (768px - 1023px) */
 @media (max-width: 1023px) {
-    .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .use-cases-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .ember-token-grid-redesigned {
+    .ember-token-grid-redesigned,
+    .ember-compact-grid,
+    .sdk-pricing-tiers,
+    .web-benefits-compact {
         grid-template-columns: 1fr;
     }
     
     .ember-token-right-redesigned {
         position: static;
     }
-    
-    .ember-compact-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .sdk-pricing-tiers {
-        grid-template-columns: 1fr;
-    }
-    
-    .web-benefits-compact {
-        grid-template-columns: 1fr;
-    }
 }
 
-/* Mobile Landscape (768px - 1023px) */
-@media (max-width: 1023px) and (orientation: landscape) {
-    .main-hero {
-        min-height: auto;
-        padding: calc(var(--navbar-height) + 2rem) 1rem 2rem;
-    }
-}
-
-/* Mobile Portrait (below 768px) */
 @media (max-width: 767px) {
-    /* CRITICAL: Mobile hero clearance */
-    .main-hero {
-        padding: calc(var(--section-padding) + 40px) var(--space-md) var(--section-padding);
-        min-height: auto;
-    }
-    
-    /* Enterprise Token Infrastructure */
-    .ember-token-section-redesigned {
-        padding: 50px 10px;
-    }
-    
     .ember-countdown-timer-redesigned {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -3208,7 +2314,6 @@ body.js-loaded .scroll-reveal.revealed {
         gap: var(--space-sm);
     }
     
-    /* Airdrop Section */
     .ember-airdrop-compact-header {
         flex-direction: column;
         text-align: center;
@@ -3222,41 +2327,26 @@ body.js-loaded .scroll-reveal.revealed {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    /* Features */
-    .features-grid {
+    .ember-stats-compact {
         grid-template-columns: 1fr;
     }
     
-    /* App Showcase */
     .thumbnail-grid,
     .thumbnail-grid-laptop {
         grid-template-columns: repeat(3, 1fr);
     }
     
-    /* Use Cases */
-    .use-cases-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Revenue Examples */
     .revenue-metrics {
         grid-template-columns: 1fr;
     }
     
-    /* Development Story */
-    .development-story-card {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    /* Proven Badge */
+    .development-story-card,
     .proven-badge {
         flex-direction: column;
         text-align: center;
     }
 }
 
-/* Small Mobile (480px - 767px) */
 @media (max-width: 639px) {
     .main-hero-benefits-row {
         grid-template-columns: repeat(2, 1fr);
@@ -3266,313 +2356,46 @@ body.js-loaded .scroll-reveal.revealed {
         flex-direction: column;
         text-align: center;
     }
-    
-    .combined-power-benefits {
-        grid-template-columns: 1fr;
-    }
 }
 
-/* Extra Small Mobile (below 480px) */
 @media (max-width: 479px) {
-    /* Enterprise Token Infrastructure */
-    .ember-token-section-redesigned {
-        padding: 40px 10px;
-    }
-    
-    /* Airdrop Section */
-    .ember-airdrop-outer-module {
-        padding: var(--space-md);
-    }
-    
+    .ember-airdrop-outer-module,
     .share-to-claim-section {
         padding: var(--space-md);
-    }
-    
-    .ember-stats-compact {
-        grid-template-columns: 1fr;
     }
     
     .ember-info-compact {
         grid-template-columns: 1fr;
     }
     
-    /* App Showcase */
     .thumbnail-grid,
     .thumbnail-grid-laptop {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    /* Benefits */
     .main-hero-benefits-row {
         grid-template-columns: 1fr;
     }
     
-    /* Status Checker */
     .status-input-row {
         grid-template-columns: 1fr;
     }
 }
 
 /* ============================================
-   MOBILE-SPECIFIC OPTIMIZATIONS
-   ============================================ */
-
-@media (max-width: 768px) {
-    /* Touch targets */
-    .share-button,
-    .ember-social-btn,
-    .claim-btn-compact,
-    .status-btn-compact,
-    button,
-    .btn,
-    a.btn {
-        min-height: 44px;
-        min-width: 44px;
-    }
-    
-    /* Form inputs */
-    .input-compact {
-        font-size: 16px; /* Prevents zoom on iOS */
-    }
-    
-    /* Prevent text selection on tap */
-    .main-step-number-badge,
-    .journey-step-number,
-    .tier-badge,
-    .coming-soon-badge,
-    .early-2026-badge {
-        -webkit-user-select: none;
-        user-select: none;
-    }
-    
-    /* Optimize animations for mobile */
-    @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-        }
-    }
-}
-
-/* ============================================
-   PRINT STYLES
-   ============================================ */
-
-@media print {
-    .navbar,
-    .mobile-menu-panel,
-    .mobile-menu-overlay,
-    .chatbot-container,
-    .footer,
-    .share-buttons-grid,
-    .ember-social-links-compact,
-    .cta-primary-large,
-    .cta-secondary-large,
-    .journey-cta-button {
-        display: none !important;
-    }
-    
-    .main-hero {
-        padding-top: 2rem;
-    }
-    
-    * {
-        background: white !important;
-        color: black !important;
-    }
-}
-
-/* ============================================
-   ACCESSIBILITY ENHANCEMENTS
-   ============================================ */
-
-/* Focus styles */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-    outline: 3px solid var(--ember-gold);
-    outline-offset: 2px;
-}
-
-/* Skip to content link */
-.main-skip-to-content {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: var(--ember-gradient-primary);
-    color: white;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 0 0 var(--radius-md) 0;
-    font-weight: 700;
-    z-index: 10000;
-}
-
-.main-skip-to-content:focus {
-    top: 0;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .main-hero,
-    .ember-token-section-redesigned,
-    .ember-airdrop-section,
-    .crypto-coin-section,
-    .technology-section,
-    .features,
-    .app-showcase,
-    .use-cases,
-    .pricing,
-    .revenue-examples,
-    .final-cta {
-        border: 2px solid currentColor;
-    }
-}
-
-/* ============================================
-   PERFORMANCE OPTIMIZATIONS
-   ============================================ */
-
-/* GPU acceleration for animations */
-.main-step-premium,
-.main-cta-path,
-.crypto-benefit,
-.technology-card,
-.feature-card,
-.use-case-card,
-.pricing-solution,
-.revenue-example-card,
-.journey-path-module {
-    will-change: transform;
-}
-
-/* Prevent layout shifts */
-img,
-video {
-    height: auto;
-}
-
-/* Smooth scrolling */
-html {
-    scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-}
-
-/* ============================================
-   BROWSER-SPECIFIC FIXES
-   ============================================ */
-
-/* Safari fixes */
-@supports (-webkit-appearance: none) {
-    .input-compact {
-        -webkit-appearance: none;
-    }
-}
-
-/* Firefox fixes */
-@-moz-document url-prefix() {
-    .phone-frame,
-    .laptop-screen {
-        image-rendering: -moz-crisp-edges;
-    }
-}
-
-/* Edge/IE fixes */
-@supports (-ms-ime-align: auto) {
-    .main-hero-steps-premium,
-    .features-grid,
-    .use-cases-grid {
-        display: -ms-grid;
-    }
-}
-
-/* ============================================
-   UTILITY CLASSES
-   ============================================ */
-
-.golden-highlight {
-    color: var(--ember-gold);
-    font-weight: 600;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.text-left {
-    text-align: left;
-}
-
-.text-right {
-    text-align: right;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.visible {
-    display: block !important;
-}
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-/* ============================================
-   END OF MAIN PAGE LOCAL STYLES v3.3
-   PRODUCTION READY - COMPLETE
+   END OF MAIN PAGE LOCAL STYLES v3.5
+   CLEAN ARCHITECTURE COMPLETE
    ============================================
    
-   FILE SUMMARY:
-   ✅ 15+ sections fully styled in correct order
-   ✅ All sections visible by default
-   ✅ Fixed line 1099 error from v3.2
-   ✅ Clean code (no patches or hacks)
-   ✅ Properly uses global patterns
-   ✅ Complete responsive system
-   ✅ Mobile optimized
-   ✅ Accessible
-   ✅ Performance optimized
-   ✅ Browser compatible
+   This file properly extends global.css:
+   ✅ Uses all CSS variables from global
+   ✅ Extends universal patterns (.hero, .section, .card, .grid-*, .btn-*)
+   ✅ Only adds main.html specific styles
+   ✅ NO !important hacks
+   ✅ NO duplicate base styles
+   ✅ Clean, maintainable code
    
-   SECTIONS IN ORDER:
-   1. Hero Section
-   2. Enterprise Token Infrastructure
-   3. $Ember Airdrop
-   4. Crypto Coin Deployment
-   5. GPS & Beacon Technology
-   6. Features
-   7. App Showcase
-   8. Use Cases
-   9. Pricing
-   10. Revenue Examples
-   11. Development Story
-   12. Final CTA
-   + Scroll Reveal System
-   + Complete Responsive Breakpoints
-   
-   READY FOR DEPLOYMENT: November 2, 2025
-   
-   @version 3.3.0
+   @version 3.5.0
    @date November 2, 2025
    @author Vault Phoenix Development Team
    ============================================
