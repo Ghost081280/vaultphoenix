@@ -50,13 +50,13 @@
     <link rel="icon" href="images/PhoenixBullseye.PNG" type="image/png">
     <link rel="apple-touch-icon" href="images/PhoenixBullseye.PNG">
     
-    <!-- Stylesheets - OLD WORKING + CACHE BUST -->
-    <link rel="stylesheet" href="shared-styles.css?v=1">
-    <link rel="stylesheet" href="styles.css?v=2">
+    <!-- Stylesheets - Correct Load Order with Cache Bust -->
+    <link rel="stylesheet" href="shared/global.css?v=1">
+    <link rel="stylesheet" href="main/local.css?v=1">
 
 </head>
 <body class="main-page">
-    <!-- Skip to Content Link -->
+    <!-- Skip to Content Link - Accessibility -->
     <div style="position: absolute; top: 0; left: 0; overflow: hidden; clip: rect(0, 0, 0, 0); height: 1px; width: 1px;">
         <a href="#main-content" class="main-skip-to-content">Skip to main content</a>
     </div>
@@ -94,7 +94,7 @@
         <!-- Links added by JS -->
     </div>
 
-    <!-- HERO SECTION - FULLY FIXED -->
+    <!-- HERO SECTION - FIXED WITH FULL LAYOUT -->
     <section class="main-hero" id="main-content">
         <div class="main-hero-content">
             <div class="main-hero-header">
@@ -150,59 +150,321 @@
             <!-- DUAL CTAS -->
             <div class="main-cta-path-container">
                 <div class="main-cta-path">
-                    <div class="coming-soon-badge">Coming Soon!</div>
-                    <h3 class="main-cta-title">For Marketers & Agencies</h3>
-                    <h4 class="main-cta-subtitle">Build Your White-Label Web App (No Code)</h4>
-                    <p class="main-cta-description">Log in, customize branding, place coins, configure rewards, and deploy at yourdomain.com/app-name in under 24 hours.</p>
-                    <a href="mailto:contact@vaultphoenix.com" class="btn btn-primary">Start Building Your App</a>
+                    <span class="coming-soon-badge">Coming Soon!</span>
+                    <div class="journey-icon-container">
+                        <div class="main-image-glow">
+                            <img src="images/white-label-icon.png" alt="White-Label Solution Icon" class="main-journey-icon-large" loading="lazy">
+                        </div>
+                    </div>
+                    <h3 class="journey-path-title">For Businesses</h3>
+                    <p class="journey-path-subtitle">Launch your location-based crypto marketing campaign</p>
+                    <div class="journey-steps">
+                        <div class="journey-step">
+                            <div class="journey-step-number">1</div>
+                            <h4 class="journey-step-title">Schedule Your Demo</h4>
+                            <p class="journey-step-description">See the platform in action with a personalized walkthrough</p>
+                        </div>
+                        <div class="journey-step">
+                            <div class="journey-step-number">2</div>
+                            <h4 class="journey-step-title">Design Your Campaign</h4>
+                            <p class="journey-step-description">Work with our team to create your custom token hunt experience</p>
+                        </div>
+                        <div class="journey-step">
+                            <div class="journey-step-number">3</div>
+                            <h4 class="journey-step-title">Launch & Track Results</h4>
+                            <p class="journey-step-description">Go live and watch real-time analytics as customers engage</p>
+                        </div>
+                    </div>
+                    <a href="mailto:contact@vaultphoenix.com?subject=Interested in launching a location-based crypto marketing campaign. Please send me details about getting started." class="journey-cta-button" aria-label="Contact us to start your campaign">
+                        <div class="main-image-glow">
+                            <img src="images/VPEmberFlame.svg" alt="Phoenix Flame Icon" class="journey-cta-icon-large" loading="lazy">
+                        </div>
+                        <span class="journey-cta-text">Book Your Demo</span>
+                    </a>
+                    <a href="#pricing" class="journey-secondary-link">
+                        View Pricing <span>→</span>
+                    </a>
                 </div>
-
-                <div class="main-cta-path">
-                    <div class="early-2026-badge">Early 2026</div>
-                    <h3 class="main-cta-title">For Developers & Tech Teams</h3>
-                    <h4 class="main-cta-subtitle">Integrate Our AR Engine into Web or Native Apps</h4>
-                    <p class="main-cta-description">Add location-based AR crypto gaming in 1-2 weeks. Full API control. Keep your brand.</p>
-                    <a href="https://github.com/Vault-Phoenix-SDK" class="btn btn-primary" target="_blank">Explore SDK Documentation</a>
+                
+                <div class="main-cta-path developer-path">
+                    <span class="early-2026-badge">Early 2026</span>
+                    <div class="journey-icon-container">
+                        <div class="main-image-glow">
+                            <img src="images/IphoneVPLogo.PNG" alt="Developer Path Icon" class="main-journey-icon-large" loading="lazy">
+                        </div>
+                    </div>
+                    <h3 class="journey-path-title">For Developers</h3>
+                    <p class="journey-path-subtitle">Build your own location-based crypto app with our SDK</p>
+                    <div class="journey-steps">
+                        <div class="journey-step">
+                            <div class="journey-step-number">1</div>
+                            <h4 class="journey-step-title">Explore the SDK</h4>
+                            <p class="journey-step-description">Browse documentation and code examples on GitHub</p>
+                        </div>
+                        <div class="journey-step">
+                            <div class="journey-step-number">2</div>
+                            <h4 class="journey-step-title">Start Building</h4>
+                            <p class="journey-step-description">Use our free tier to prototype and test your ideas</p>
+                        </div>
+                        <div class="journey-step">
+                            <div class="journey-step-number">3</div>
+                            <h4 class="journey-step-title">Scale Your App</h4>
+                            <p class="journey-step-description">Upgrade as you grow with flexible pricing tiers</p>
+                        </div>
+                    </div>
+                    <a href="https://github.com/Vault-Phoenix-SDK" class="journey-cta-button" target="_blank" rel="noopener noreferrer" aria-label="View SDK on GitHub">
+                        <svg width="45" height="45" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                        <span class="journey-cta-text">View on GitHub</span>
+                    </a>
+                    <a href="#pricing" class="journey-secondary-link">
+                        See SDK Pricing <span>→</span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer & Chatbot (Inline from your old version) -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <div class="footer-logo">
-                        <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="footer-logo-image">
-                        <span class="footer-logo-text">Vault Phoenix</span>
+    <!-- Enterprise Token Infrastructure -->
+    <section class="enterprise-section">
+        <div class="container">
+            <h2>Enterprise Token Infrastructure</h2>
+            <p>Vault Phoenix operates with institutional-grade $Ember Token infrastructure powering the next generation of location-based AR gaming. Our enterprise blockchain technology drives measurable ROI for marketing campaigns worldwide through proven monetization strategies.</p>
+            <div class="ember-coin-section">
+                <img src="images/VPEmberCoin.PNG" alt="Ember Coin Presale Token" class="ember-coin">
+                <h3>$Ember Presale Launch</h3>
+                <p>166.7M tokens available</p>
+                <div class="ember-countdown-timer-redesigned">
+                    <!-- Countdown code -->
+                </div>
+                <div class="presale-stats-redesigned">
+                    <div class="stat-card">
+                        <h4>$0.003</h4>
+                        <p>Launch Price</p>
                     </div>
-                    <p class="footer-tagline">The Future of AR Crypto Gaming</p>
-                    <div class="footer-social">
-                        <a href="https://x.com/vaultphoenix" target="_blank" rel="noopener" class="social-link" aria-label="X">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                        <!-- Add other socials -->
+                    <div class="stat-card">
+                        <h4>166.7M</h4>
+                        <p>Available</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>$500K</h4>
+                        <p>Cap</p>
                     </div>
                 </div>
-                <!-- Other footer columns -->
-            </div>
-            <div class="footer-bottom">
-                <p class="footer-copyright">© 2025 Vault Phoenix LLC. All rights reserved.</p>
+                <img src="images/PhoenixHoldingCoin.PNG" alt="Phoenix Holding Crypto Coin" class="phoenix-holding-coin">
+                <h4>Regulatory Compliance</h4>
+                <p>Vault Phoenix operates under comprehensive regulatory oversight with institutional-grade compliance procedures, multi-signature treasury management, and professional legal frameworks ensuring maximum security and transparency.</p>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <!-- Chatbot (Inline) -->
-    <div class="chatbot-button-container">
-        <button class="chatbot-button" aria-label="Open AI Assistant">
-            <img src="images/PhoenixBot.PNG" alt="Phoenix AI" class="chatbot-icon">
-        </button>
-    </div>
+    <!-- $Ember Airdrop -->
+    <section class="airdrop-section">
+        <div class="container">
+            <h2>Spread the Phoenix Fire with an $Ember Airdrop</h2>
+            <p>Join our community and get FREE $Ember tokens! Limited supply available.</p>
+            <!-- Full airdrop content here -->
+            <h3>$EMBER Airdrop Coming Soon!</h3>
+            <p>Follow us to be notified the moment it goes live!</p>
+            <div class="airdrop-tracker">
+                <p>Total Pool: 16,670,000</p>
+                <p>Claimed: 0</p>
+                <p>Remaining: 16,670,000</p>
+                <p>People: 0 / 5,000</p>
+                <p>0 % Claimed</p>
+            </div>
+            <h4>Presale Details</h4>
+            <p>Per Claim: 3,333 EMBER</p>
+            <p>Token Price: $0.003</p>
+            <p>Value: $10</p>
+            <a href="#">Claim Your $Ember</a>
+            <p>Need a wallet? Get Phantom →</p>
+            <p>Paste the link to your post about Vault Phoenix (X, Facebook, or Telegram)</p>
+            <h4>Check $Ember Claim Status</h4>
+            <p>3,333 $Ember per wallet</p>
+            <p>24-48 Hours distribution</p>
+            <p>5,000 Wallets limited supply</p>
+            <p>One Per Wallet no duplicates</p>
+        </div>
+    </section>
 
-    <!-- Scripts -->
-    <script src="shared-script.js?v=1"></script>
-    <script src="script.js?v=2"></script>
+    <!-- Deploy Crypto Coins -->
+    <section class="crypto-section">
+        <div class="container">
+            <img src="images/VPEmberCoinAtStorefront.PNG" alt="Ember Coin at Storefront Location">
+            <h2>Deploy Crypto Coins Anywhere</h2>
+            <p>Players explore your branded AR world, collecting valuable crypto coins at strategic locations using GPS (Outdoors) and Beacon (Indoors) technology. Each collection creates measurable foot traffic and guaranteed revenue.</p>
+            <h3>Collectible Coins</h3>
+            <p>Hunt rare crypto coins at partner locations</p>
+            <h3>Strategic Placement</h3>
+            <p>High-value locations drive guaranteed traffic</p>
+            <h3>Revenue Generation</h3>
+            <p>Partners pay premium rates for coin placement</p>
+            <h3>Complete Location Coverage: Outdoor & Indoor Precision</h3>
+            <h4>GPS Technology</h4>
+            <p>Precision GPS tracking places $Ember coins at exact outdoor coordinates with meter-level accuracy.</p>
+            <!-- Full GPS/Beacon details -->
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2>Features</h2>
+            <!-- Full features grid -->
+        </div>
+    </section>
+
+    <!-- Live Demo -->
+    <section id="showcase" class="showcase-section">
+        <div class="container">
+            <h2>Live Demo</h2>
+            <!-- Full demo content -->
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section id="use-cases" class="use-cases-section">
+        <div class="container">
+            <h2>Get Ideas</h2>
+            <!-- Full use cases -->
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2>Pricing</h2>
+            <!-- Full pricing tiers -->
+        </div>
+    </section>
+
+    <!-- Revenue Examples -->
+    <section class="revenue-section">
+        <div class="container">
+            <h2>Potential Revenue Opportunities</h2>
+            <!-- Full revenue examples -->
+        </div>
+    </section>
+
+    <!-- Journey Paths -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>What Happens Next in Your Journey?</h2>
+            <div class="journey-paths-container">
+                <div class="journey-path-module business-path">
+                    <div class="journey-path-header">
+                        <span class="coming-soon-badge">Coming Soon!</span>
+                        <div class="journey-icon-container">
+                            <div class="main-image-glow">
+                                <img src="images/VPLogoNoText.PNG" alt="Business Path Icon" class="main-journey-icon-large" loading="lazy">
+                            </div>
+                        </div>
+                        <h3 class="journey-path-title">For Businesses</h3>
+                        <p class="journey-path-subtitle">Launch your location-based crypto marketing campaign</p>
+                    </div>
+                    
+                    <div class="journey-steps">
+                        <div class="journey-step">
+                            <div class="journey-step-number">1</div>
+                            <div class="journey-step-content">
+                                <h4 class="journey-step-title">Schedule Your Demo</h4>
+                                <p class="journey-step-description">See the platform in action with a personalized walkthrough</p>
+                            </div>
+                        </div>
+                        
+                        <div class="journey-step">
+                            <div class="journey-step-number">2</div>
+                            <div class="journey-step-content">
+                                <h4 class="journey-step-title">Design Your Campaign</h4>
+                                <p class="journey-step-description">Work with our team to create your custom token hunt experience</p>
+                            </div>
+                        </div>
+                        
+                        <div class="journey-step">
+                            <div class="journey-step-number">3</div>
+                            <div class="journey-step-content">
+                                <h4 class="journey-step-title">Launch & Track Results</h4>
+                                <p class="journey-step-description">Go live and watch real-time analytics as customers engage</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="journey-cta">
+                        <a href="mailto:contact@vaultphoenix.com?subject=Interested in launching a location-based crypto marketing campaign. Please send me details about getting started." class="journey-cta-button" aria-label="Contact us to start your campaign">
+                            <div class="main-image-glow">
+                                <img src="images/VPEmberFlame.svg" alt="Phoenix Flame Icon" class="journey-cta-icon-large" loading="lazy">
+                            </div>
+                            <span class="journey-cta-text">Book Your Demo</span>
+                        </a>
+                        <a href="#pricing" class="journey-secondary-link">
+                            View Pricing <span>→</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Developer Path -->
+                <div class="journey-path-module developer-path">
+                    <div class="journey-path-header">
+                        <span class="early-2026-badge">Early 2026</span>
+                        <div class="journey-icon-container">
+                            <div class="main-image-glow">
+                                <img src="images/IphoneVPLogo.PNG" alt="Developer Path Icon" class="main-journey-icon-large" loading="lazy">
+                            </div>
+                        </div>
+                        <h3 class="journey-path-title">For Developers</h3>
+                        <p class="journey-path-subtitle">Build your own location-based crypto app with our SDK</p>
+                    </div>
+                    
+                    <div class="journey-steps">
+                        <div class="journey-step">
+                            <div class="journey-step-number">1</div>
+                            <div class="journey-step-content">
+                                <h4 class="journey-step-title">Explore the SDK</h4>
+                                <p class="journey-step-description">Browse documentation and code examples on GitHub</p>
+                            </div>
+                        </div>
+                        
+                        <div class="journey-step">
+                            <div class="journey-step-number">2</div>
+                            <div class="journey-step-content">
+                                <h4 class="journey-step-title">Start Building</h4>
+                                <p class="journey-step-description">Use our free tier to prototype and test your ideas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="journey-step">
+                            <div class="journey-step-number">3</div>
+                            <div class="journey-step-content">
+                                <h4 class="journey-step-title">Scale Your App</h4>
+                                <p class="journey-step-description">Upgrade as you grow with flexible pricing tiers</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="journey-cta">
+                        <a href="https://github.com/Vault-Phoenix-SDK" class="journey-cta-button" target="_blank" rel="noopener noreferrer" aria-label="View SDK on GitHub">
+                            <svg width="45" height="45" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                            <span class="journey-cta-text">View on GitHub</span>
+                        </a>
+                        <a href="#pricing" class="journey-secondary-link">
+                            See SDK Pricing <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shared Components Container -->
+    <div id="shared-components-container"></div>
+
+    <!-- Scripts - Correct Load Order -->
+    <script src="shared/global.js"></script>
+    <script src="main/local.js"></script>
 </body>
 </html>
  
