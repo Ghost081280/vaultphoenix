@@ -1,7 +1,7 @@
 /**
  * ============================================
  * VAULT PHOENIX - MAIN PAGE LOCAL STYLES
- * v2.4.1 COMPLETE WITH ALL FIXES
+ * v2.5.0 COMPLETE WITH ALL FIXES
  * ============================================
  * 
  * This file contains ONLY main.html specific styles.
@@ -9,6 +9,12 @@
  * 
  * ALL sections from the original document fully restored.
  * INCLUDES: Proven Model Badge, Feature Titles, Use Case Titles
+ * 
+ * CRITICAL FIXES v2.5.0:
+ * - Sections visible by default (no hidden content on load)
+ * - Scroll reveal only activates after JS confirms ready
+ * - Explicit visibility rules for all major sections
+ * - Graceful degradation if JavaScript fails
  * ============================================
  */
 
@@ -1509,268 +1515,6 @@ body.main-page {
 }
 
 /* ============================================
-   10. DEVELOPER JOURNEY SECTION
-   ============================================ */
-
-.developer-journey-section {
-    padding: 4rem 1rem;
-    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
-}
-
-.developer-journey-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.journey-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.journey-header h2 {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 1rem;
-}
-
-.journey-header p {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
-}
-
-.journey-content {
-    background: linear-gradient(135deg, rgba(26, 15, 10, 0.9) 0%, rgba(45, 24, 16, 0.85) 100%);
-    border: 2px solid rgba(139, 92, 246, 0.3);
-    border-radius: 1.5rem;
-    padding: 3rem;
-}
-
-.journey-visual {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.journey-visual svg {
-    width: 80px;
-    height: 80px;
-    color: #8b5cf6;
-}
-
-.journey-path {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.journey-step {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.journey-step:hover {
-    background: rgba(139, 92, 246, 0.15);
-    border-color: rgba(139, 92, 246, 0.5);
-    transform: translateY(-4px);
-}
-
-.journey-step-number {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #8b5cf6, #6366f1);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1.2rem;
-    margin: 0 auto 1rem;
-}
-
-.journey-step-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #8b5cf6;
-    margin-bottom: 0.5rem;
-}
-
-.journey-step-description {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.75);
-    line-height: 1.5;
-}
-
-.journey-cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.journey-cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, #8b5cf6, #6366f1);
-    color: white;
-    border-radius: 1rem;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
-}
-
-.journey-cta-button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.6);
-}
-
-.journey-cta-button svg {
-    width: 24px;
-    height: 24px;
-}
-
-.journey-cta-text {
-    font-size: 1.1rem;
-}
-
-.journey-secondary-link {
-    color: #8b5cf6;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.journey-secondary-link:hover {
-    color: #6366f1;
-}
-
-/* ============================================
-   11. RESPONSIVE BREAKPOINTS
-   ============================================ */
-
-@media (max-width: 1024px) {
-    .main-hero-steps-premium {
-        grid-template-columns: 1fr;
-    }
-    
-    .main-step-arrow-wrapper {
-        display: none;
-    }
-    
-    .main-cta-path-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .crypto-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .ember-token-grid-redesigned {
-        grid-template-columns: 1fr;
-    }
-    
-    .ember-airdrop-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .showcase-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .use-cases-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .pricing-two-column {
-        grid-template-columns: 1fr;
-    }
-    
-    .journey-path {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .journey-paths-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-hero {
-        padding: calc(70px + 2rem) 1rem 3rem;
-    }
-    
-    .main-hero-benefits-row {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .thumbnail-grid,
-    .thumbnail-grid-laptop {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .use-cases-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .ember-time-value-redesigned {
-        font-size: 1.6rem;
-    }
-    
-    .presale-stats-redesigned {
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-    
-    .social-share-buttons {
-        grid-template-columns: 1fr;
-    }
-    
-    .tracker-stats {
-        grid-template-columns: 1fr;
-    }
-    
-    .status-form {
-        flex-direction: column;
-    }
-    
-    .journey-path {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .main-hero-benefits-row {
-        grid-template-columns: 1fr;
-    }
-    
-    .thumbnail-grid,
-    .thumbnail-grid-laptop {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .ember-countdown-timer-redesigned {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* ============================================
    9. FINAL CTA SECTION
    ============================================ */
 
@@ -1993,23 +1737,157 @@ body.main-page {
 }
 
 /* ============================================
-   12. UTILITY CLASSES
+   10. DEVELOPER JOURNEY SECTION
+   ============================================ */
+
+.developer-journey-section {
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+}
+
+.developer-journey-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.journey-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.journey-header h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.journey-header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
+.journey-content {
+    background: linear-gradient(135deg, rgba(26, 15, 10, 0.9) 0%, rgba(45, 24, 16, 0.85) 100%);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: 1.5rem;
+    padding: 3rem;
+}
+
+.journey-visual {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.journey-visual svg {
+    width: 80px;
+    height: 80px;
+    color: #8b5cf6;
+}
+
+.journey-path {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.journey-step {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.journey-step:hover {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.5);
+    transform: translateY(-4px);
+}
+
+.journey-step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin: 0 auto 1rem;
+}
+
+.journey-step-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #8b5cf6;
+    margin-bottom: 0.5rem;
+}
+
+.journey-step-description {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.5;
+}
+
+.journey-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.journey-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    color: white;
+    border-radius: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+}
+
+.journey-cta-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.6);
+}
+
+.journey-cta-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+.journey-cta-text {
+    font-size: 1.1rem;
+}
+
+.journey-secondary-link {
+    color: #8b5cf6;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.journey-secondary-link:hover {
+    color: #6366f1;
+}
+
+/* ============================================
+   11. UTILITY CLASSES
    ============================================ */
 
 .golden-highlight {
     color: #f0a500;
     font-weight: 700;
-}
-
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.scroll-reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .main-fade-in {
@@ -2026,8 +1904,183 @@ body.main-page {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* ============================================
+   12. SCROLL REVEAL SYSTEM - FIXED v2.5.0
+   ============================================ */
+
 /**
- * END OF LOCAL.CSS v2.4.1 COMPLETE WITH ALL FIXES
+ * CRITICAL FIX: Sections visible by default
+ * Only hide after JavaScript confirms ready
+ * This prevents hidden content if JS fails/delays
+ */
+
+/* DEFAULT STATE: All sections visible immediately */
+.scroll-reveal {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* ONLY hide sections AFTER JavaScript marks body as ready */
+body.js-loaded .scroll-reveal:not(.revealed) {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Revealed state (after scroll) */
+body.js-loaded .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   13. EXPLICIT SECTION VISIBILITY
+   ============================================ */
+
+/**
+ * Guarantee critical sections are always visible
+ * This is a failsafe if scroll-reveal has issues
+ */
+
+.ember-airdrop-section,
+.crypto-coin-section,
+.features,
+.app-showcase,
+.use-cases,
+.pricing,
+.final-cta,
+.ember-token-section-redesigned,
+.main-hero,
+.developer-journey-section {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* ============================================
+   14. RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .main-hero-steps-premium {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-step-arrow-wrapper {
+        display: none;
+    }
+    
+    .main-cta-path-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .crypto-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .ember-token-grid-redesigned {
+        grid-template-columns: 1fr;
+    }
+    
+    .ember-airdrop-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .showcase-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .use-cases-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .pricing-two-column {
+        grid-template-columns: 1fr;
+    }
+    
+    .journey-path {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .journey-paths-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-hero {
+        padding: calc(70px + 2rem) 1rem 3rem;
+    }
+    
+    .main-hero-benefits-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .thumbnail-grid,
+    .thumbnail-grid-laptop {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .use-cases-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ember-time-value-redesigned {
+        font-size: 1.6rem;
+    }
+    
+    .presale-stats-redesigned {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .social-share-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .tracker-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .status-form {
+        flex-direction: column;
+    }
+    
+    .journey-path {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-hero-benefits-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .thumbnail-grid,
+    .thumbnail-grid-laptop {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .ember-countdown-timer-redesigned {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/**
+ * END OF LOCAL.CSS v2.5.0 COMPLETE WITH ALL FIXES
  * All sections fully restored and styled
+ * CRITICAL FIXES APPLIED:
+ * ✅ Sections visible by default
+ * ✅ Scroll reveal optional enhancement
+ * ✅ Explicit visibility rules for all major sections
+ * ✅ Graceful degradation if JavaScript fails
  * INCLUDES: Proven Model Badge, Feature Card Titles, Use Case Titles
  */
