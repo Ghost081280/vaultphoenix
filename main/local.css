@@ -1,4 +1,33 @@
- * ============================================
+/* ============================================
+   CRITICAL FIX - Force Hero & Sections Visible
+   ============================================ */
+
+/* Override scroll-reveal hiding */
+.main-hero,
+.main-hero *,
+.scroll-reveal,
+.scroll-reveal * {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Ensure proper display types */
+.main-hero {
+    display: flex !important;
+}
+
+.main-hero-content {
+    display: block !important;
+}
+
+.main-hero-header,
+.main-hero-steps-premium,
+.main-hero-dual-ctas,
+.main-hero-benefits-row {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+} * ============================================
  * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.6
  * CORRECT CLASS NAMES - MATCHES main.html
  * ============================================
