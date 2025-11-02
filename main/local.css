@@ -1,4 +1,9 @@
-/**
+/* EMERGENCY FIX - Force all sections visible */
+body * {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}/**
  * ============================================
  * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.6
  * CORRECT CLASS NAMES - MATCHES main.html
