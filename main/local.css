@@ -1280,7 +1280,464 @@ body.main-page {
 /* ============================================
    END OF PART 1
    Continue with Part 2 for Technology & Features
-   ============================================ *//**
+   ============================================ *//**/**
+ * ============================================
+ * VAULT PHOENIX - DIAGNOSTIC FIX FILE
+ * Missing Styles Recovery
+ * ============================================
+ * 
+ * Add this AFTER Part 1, before Part 2
+ * This contains styles that were likely lost in the v3.2 corruption
+ * ============================================
+ */
+
+/* ============================================
+   MISSING: Benefits Grid (Revenue Section)
+   The "85);" error suggests this was cut off
+   ============================================ */
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.benefit-card {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    transition: all var(--transition-base);
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ember-shadow-lg);
+    border-color: var(--ember-orange);
+}
+
+.benefit-card h4 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+    margin-bottom: var(--space-md);
+}
+
+.benefit-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+/* ============================================
+   MISSING: Section Containers
+   ============================================ */
+
+.main-container,
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* ============================================
+   MISSING: Additional CTA Styles
+   ============================================ */
+
+.cta-primary-large,
+.cta-secondary-large {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 16px 40px;
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all var(--transition-base);
+}
+
+.cta-primary-large {
+    background: var(--ember-gradient-primary);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--ember-shadow-md);
+}
+
+.cta-primary-large:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ember-shadow-lg);
+}
+
+.cta-secondary-large {
+    background: transparent;
+    color: var(--ember-gold);
+    border: 2px solid var(--ember-gold);
+}
+
+.cta-secondary-large:hover {
+    background: var(--ember-gold);
+    color: var(--ember-dark);
+}
+
+/* ============================================
+   MISSING: Icon Wrapper Styles
+   ============================================ */
+
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--space-md);
+}
+
+.icon-large {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ============================================
+   MISSING: Card Title Styles
+   ============================================ */
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+}
+
+.card-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
+/* ============================================
+   MISSING: Section Dividers
+   ============================================ */
+
+.section-divider {
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(215, 51, 39, 0.3),
+        transparent
+    );
+    margin: var(--space-4xl) 0;
+}
+
+/* ============================================
+   MISSING: Grid System Utilities
+   ============================================ */
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+}
+
+/* ============================================
+   MISSING: Flex Utilities
+   ============================================ */
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   MISSING: Spacing Utilities
+   ============================================ */
+
+.mb-xl {
+    margin-bottom: var(--space-xl);
+}
+
+.mb-2xl {
+    margin-bottom: var(--space-2xl);
+}
+
+.mb-3xl {
+    margin-bottom: var(--space-3xl);
+}
+
+.mb-4xl {
+    margin-bottom: var(--space-4xl);
+}
+
+.mt-xl {
+    margin-top: var(--space-xl);
+}
+
+.mt-2xl {
+    margin-top: var(--space-2xl);
+}
+
+.mt-3xl {
+    margin-top: var(--space-3xl);
+}
+
+.mt-4xl {
+    margin-top: var(--space-4xl);
+}
+
+/* ============================================
+   MISSING: Animation Classes
+   ============================================ */
+
+.animate-float {
+    animation: ember-coinFloat 4s ease-in-out infinite;
+}
+
+.animate-pulse {
+    animation: ember-coinPulse 2s ease-in-out infinite;
+}
+
+.animate-glow {
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.8));
+    }
+}
+
+/* ============================================
+   MISSING: Status/Badge Variations
+   ============================================ */
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.status-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.status-warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.status-info {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+/* ============================================
+   MISSING: List Styles
+   ============================================ */
+
+.styled-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.styled-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+}
+
+.styled-list li::before {
+    content: '✓';
+    color: var(--ember-gold);
+    font-weight: 900;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   MISSING: Loading States
+   ============================================ */
+
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ============================================
+   MISSING: Overlay Styles
+   ============================================ */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: var(--z-overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+   MISSING: Modal Styles
+   ============================================ */
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+    max-width: 600px;
+    width: 90%;
+    z-index: var(--z-modal);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ============================================
+   MISSING: Alert/Notification Styles
+   ============================================ */
+
+.alert {
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.alert-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.alert-warning {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: #f59e0b;
+}
+
+.alert-info {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+}
+
+/* ============================================
+   MISSING: Tooltip Styles
+   ============================================ */
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+    pointer-events: none;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+/* ============================================
+   END OF DIAGNOSTIC FIX FILE
+   ============================================ */
  * ============================================
  * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.3
  * COMPLETE REBUILD - PART 2 OF 3
