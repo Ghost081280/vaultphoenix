@@ -1421,7 +1421,7 @@ body.main-page {
 }
 
 /* ============================================
-   9. DEVELOPER JOURNEY SECTION
+   10. DEVELOPER JOURNEY SECTION
    ============================================ */
 
 .developer-journey-section {
@@ -1566,7 +1566,7 @@ body.main-page {
 }
 
 /* ============================================
-   10. RESPONSIVE BREAKPOINTS
+   11. RESPONSIVE BREAKPOINTS
    ============================================ */
 
 @media (max-width: 1024px) {
@@ -1612,6 +1612,10 @@ body.main-page {
     
     .journey-path {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .journey-paths-container {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1679,7 +1683,229 @@ body.main-page {
 }
 
 /* ============================================
-   11. UTILITY CLASSES
+   9. FINAL CTA SECTION
+   ============================================ */
+
+.final-cta {
+    padding: 6rem 1rem;
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.final-cta-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(215, 51, 39, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.final-cta-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.final-cta-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.final-cta-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.final-cta-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+}
+
+.journey-paths-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+}
+
+.journey-path-module {
+    background: linear-gradient(135deg, rgba(26, 15, 10, 0.9) 0%, rgba(45, 24, 16, 0.85) 100%);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 1.5rem;
+    padding: 3rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.journey-path-module:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(215, 51, 39, 0.4);
+    border-color: #d73327;
+}
+
+.business-path {
+    border-color: #f0a500;
+}
+
+.developer-path {
+    border-color: #6366f1;
+}
+
+.journey-path-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.journey-icon-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+}
+
+.main-journey-icon-large {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.journey-path-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #f0a500;
+    margin-bottom: 0.5rem;
+}
+
+.developer-path .journey-path-title {
+    color: #8b5cf6;
+}
+
+.journey-path-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
+.journey-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.journey-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.journey-step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #d73327 0%, #c62828 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.developer-path .journey-step-number {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+}
+
+.journey-step-content {
+    flex: 1;
+}
+
+.journey-step-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.journey-step-description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+}
+
+.journey-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.journey-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #d73327 0%, #c62828 100%);
+    color: white;
+    border-radius: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(215, 51, 39, 0.4);
+}
+
+.developer-path .journey-cta-button {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+}
+
+.journey-cta-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(215, 51, 39, 0.6);
+}
+
+.developer-path .journey-cta-button:hover {
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.6);
+}
+
+.journey-cta-icon-large {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.journey-cta-text {
+    font-size: 1.1rem;
+}
+
+.journey-secondary-link {
+    color: #f0a500;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.developer-path .journey-secondary-link {
+    color: #8b5cf6;
+}
+
+.journey-secondary-link:hover {
+    color: #d73327;
+}
+
+.developer-path .journey-secondary-link:hover {
+    color: #6366f1;
+}
+
+/* ============================================
+   12. UTILITY CLASSES
    ============================================ */
 
 .golden-highlight {
