@@ -1,4 +1,149 @@
 /* ===================================
+   CRITICAL HERO LAYOUT FIX - MUST BE AT TOP
+   =================================== */
+.main-hero,
+.main-hero * {
+    box-sizing: border-box !important;
+}
+
+.main-hero {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: calc(80px + 3rem) 1rem 4rem !important;
+    background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%) !important;
+    position: relative;
+    overflow: visible !important;
+}
+
+.main-hero-content {
+    max-width: 1400px;
+    width: 100%;
+    text-align: center;
+}
+
+.main-hero-title-new {
+    font-size: clamp(2.5rem, 6vw, 4rem) !important;
+    font-weight: 800 !important;
+    color: white !important;
+    margin-bottom: 1.5rem !important;
+    line-height: 1.1 !important;
+}
+
+.main-hero-subtitle-new {
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem) !important;
+    color: rgba(255,255,255,0.9) !important;
+    max-width: 1100px;
+    margin: 0 auto 1.5rem !important;
+}
+
+.main-hero-tagline {
+    font-size: clamp(1.3rem, 3vw, 1.9rem) !important;
+    font-weight: 700 !important;
+    color: #f0a500 !important;
+    margin-bottom: 3rem !important;
+}
+
+/* 3-STEP GRID - THE MOST IMPORTANT PART */
+.main-hero-steps-premium {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr auto 1fr !important;
+    gap: 2rem !important;
+    align-items: center !important;
+    justify-items: center !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 3rem auto !important;
+}
+
+.main-step-premium {
+    background: linear-gradient(135deg, rgba(26,15,10,0.9), rgba(45,24,16,0.85)) !important;
+    border: 2px solid rgba(215,51,39,0.3) !important;
+    border-radius: 1.5rem !important;
+    padding: 2rem !important;
+    position: relative !important;
+    width: 100% !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+}
+
+.main-step-premium:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 16px 48px rgba(215,51,39,0.45) !important;
+    border-color: #d73327 !important;
+}
+
+.main-step-number-badge {
+    position: absolute !important;
+    top: -15px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: linear-gradient(135deg, #d73327, #c62828) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.3rem !important;
+    font-weight: 800 !important;
+    color: white !important;
+    border: 3px solid rgba(240,165,0,0.6) !important;
+}
+
+.main-step-arrow {
+    font-size: 3rem !important;
+    color: #f0a500 !important;
+    font-weight: 700 !important;
+}
+
+/* Dual CTAs */
+.main-cta-path-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+    max-width: 1000px !important;
+    width: 100% !important;
+    margin: 3rem auto 0 !important;
+}
+
+.main-cta-path {
+    background: linear-gradient(135deg, rgba(26,15,10,0.9), rgba(45,24,16,0.85)) !important;
+    border: 2px solid rgba(215,51,39,0.3) !important;
+    border-radius: 2rem !important;
+    padding: 2rem !important;
+    position: relative !important;
+}
+
+.coming-soon-badge,
+.early-2026-badge {
+    position: absolute !important;
+    top: -12px !important;
+    right: 20px !important;
+    background: linear-gradient(135deg, #d73327, #c62828) !important;
+    color: white !important;
+    padding: 6px 16px !important;
+    border-radius: 9999px !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    border: 2px solid rgba(240,165,0,0.6) !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .main-hero-steps-premium,
+    .main-cta-path-container {
+        grid-template-columns: 1fr !important;
+    }
+    .main-step-arrow-wrapper { display: none !important; }
+}
+
+@media (max-width: 768px) {
+    .main-hero { padding: 120px 1rem 3rem !important; }
+}
+/* ===================================
    VAULT PHOENIX - MAIN PAGE CSS v3.8 FIXED
    Complete restoration with all layouts working - HERO VISIBILITY FIXED
    =================================== */
