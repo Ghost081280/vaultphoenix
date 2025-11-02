@@ -1,33 +1,66 @@
 /* ============================================
-   CRITICAL FIX - Force Hero & Sections Visible
+   CRITICAL FIX - Force Hero & Sections Visible + Layout
    ============================================ */
 
 /* Override scroll-reveal hiding */
-.main-hero,
-.main-hero *,
 .scroll-reveal,
 .scroll-reveal * {
     opacity: 1 !important;
     visibility: visible !important;
 }
 
-/* Ensure proper display types */
+/* Hero Section Structure */
 .main-hero {
     display: flex !important;
+    min-height: 100vh;
 }
 
 .main-hero-content {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding, 2rem);
 }
 
-.main-hero-header,
-.main-hero-steps-premium,
-.main-hero-dual-ctas,
-.main-hero-benefits-row {
+.main-hero-header {
     display: block !important;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.main-hero-steps-premium {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+}
+
+.main-hero-dual-ctas {
+    display: block !important;
+    margin-top: 4rem;
+}
+
+.main-cta-path-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.main-hero-benefits-row {
+    display: flex !important;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+
+/* Ensure all sections visible */
+section {
     opacity: 1 !important;
     visibility: visible !important;
-} * ============================================
+}
+* ============================================
  * VAULT PHOENIX - MAIN PAGE LOCAL STYLES v3.6
  * CORRECT CLASS NAMES - MATCHES main.html
  * ============================================
