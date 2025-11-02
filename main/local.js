@@ -1,17 +1,17 @@
 /**
  * ============================================
  * VAULT PHOENIX - MAIN PAGE LOCAL JAVASCRIPT
- * v2.3.0 HERO VISIBILITY FIXED
+ * v2.4 BULLETPROOF HERO VISIBILITY
  * ============================================
  * 
  * CRITICAL FIX:
- * - Hero section excluded from scroll-reveal system
- * - Hero displays immediately on page load
- * - Other sections use scroll-reveal as normal
+ * - Hero sections COMPLETELY EXCLUDED from scroll-reveal
+ * - Scroll-reveal ONLY for non-hero content
+ * - No JavaScript needed for hero visibility
  * 
  * @dependencies
- * - shared.js (v8.0+) - Required for core functionality
- * - shared.html - Required for shared components
+ * - shared/global.js (v8.0+) - Required for core functionality
+ * - shared/global.html - Required for shared components
  * ============================================
  */
 
@@ -536,13 +536,12 @@
     }
 
     // ============================================
-    // SCROLL REVEAL ANIMATION SYSTEM (HERO EXCLUDED)
+    // SCROLL REVEAL ANIMATION SYSTEM
+    // CRITICAL: Hero sections COMPLETELY EXCLUDED
     // ============================================
 
     function initializeScrollReveal() {
-        // CRITICAL: Mark body as loaded so CSS knows JS is ready
-        document.body.classList.add('js-loaded');
-        LOGGER.info('Body marked as js-loaded');
+        LOGGER.info('Initializing scroll-reveal (hero excluded)...');
         
         // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -569,24 +568,23 @@
         
         const observer = new IntersectionObserver(observerCallback, observerOptions);
         
-        // CRITICAL: Select scroll-reveal elements BUT exclude hero section
+        // CRITICAL: Select ONLY scroll-reveal elements that are NOT hero sections
+        // This selector excludes ALL hero sections and their children
         const scrollRevealElements = document.querySelectorAll('.scroll-reveal:not(.main-hero):not(.main-hero *)');
-        scrollRevealElements.forEach(el => observer.observe(el));
         
-        // CRITICAL: Ensure hero is always visible
-        const heroSection = document.querySelector('.main-hero');
-        if (heroSection) {
-            heroSection.style.display = 'flex';
-            heroSection.style.opacity = '1';
-            heroSection.style.visibility = 'visible';
-            LOGGER.success('Hero section forced visible');
-        }
+        scrollRevealElements.forEach(el => {
+            // Double-check: never observe hero elements
+            const isHeroOrChild = el.closest('.main-hero, [class*="-hero"]');
+            if (!isHeroOrChild) {
+                observer.observe(el);
+            }
+        });
         
         LOGGER.success(`Scroll reveal initialized for ${scrollRevealElements.length} elements (hero excluded)`);
     }
 
     // ============================================
-    // SHARED COMPONENTS LOADER (IMPROVED)
+    // SHARED COMPONENTS LOADER
     // ============================================
 
     function loadSharedComponents() {
@@ -659,7 +657,7 @@
             LOGGER.success('Shared.js ready, initializing main.js features...');
         }
         
-        // Initialize scroll reveal (marks body as js-loaded, excludes hero)
+        // Initialize scroll reveal (excludes hero completely)
         try {
             initializeScrollReveal();
         } catch (error) {
@@ -680,7 +678,7 @@
             LOGGER.error(`Shared components loading failed: ${error.message}`);
         }
         
-        LOGGER.success('Main page initialization complete - HERO VISIBILITY FIXED');
+        LOGGER.success('Main page initialization complete - BULLETPROOF HERO');
         logEnvironmentInfo();
     }
 
@@ -735,7 +733,7 @@
     // ============================================
 
     window.VaultPhoenixMain = {
-        version: '2.3.0',
+        version: '2.4.0',
         changeImage: window.changeImage,
         changeLaptopImage: window.changeLaptopImage,
         reinitialize: initialize,
@@ -753,6 +751,6 @@
         }
     };
 
-    LOGGER.info('Local.js v2.3.0 HERO VISIBILITY FIXED - Hero displays immediately!');
+    LOGGER.info('Local.js v2.4 BULLETPROOF - Hero always visible, no conflicts!');
 
 })();
