@@ -49,7 +49,10 @@ body.main-page {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 140px 1rem 4rem;
+    padding-top: calc(var(--navbar-height) + 2rem);
+    padding-bottom: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     background: var(--ember-gradient-background);
     position: relative;
     overflow: hidden;
@@ -3788,7 +3791,8 @@ body.js-loaded .scroll-reveal.revealed {
 
 @media (max-width: 768px) {
     .main-hero {
-        padding: calc(70px + 3rem) 1rem 3rem;
+        padding-top: calc(var(--navbar-height) + 1.5rem);
+        padding-bottom: 3rem;
     }
     
     .main-hero-benefits-row {
