@@ -1,330 +1,669 @@
-/* ===================================
+<!-- PART 3 OF 3 - MODULE 2 (PRICING) AND MODULE 3 (THE CLOSE) -->
+<!-- ==================================================================================
+     This file continues from Part 2 and completes the document
+     ==================================================================================
+-->
+
+<!-- ===================================
+     MODULE 2 (MIDDLE) - THE PRICING/DETAILS
+     Two persona pricing sections
+     =================================== -->
+<section class="pricing" id="pricing">
+    <div class="main-container">
+        <div class="pricing-intro">
+            <h2 class="main-section-title scroll-reveal">Investment That Pays For Itself</h2>
+            <p class="main-section-subtitle scroll-reveal">Choose the solution that matches your business model. Both paths include everything you need to succeed.</p>
+        </div>
+
+        <!-- MARKETER JOURNEY MODULE 2 - PRICING/DETAILS -->
+        <div class="pricing-solution-wrapper marketer-pricing-module scroll-reveal" id="marketer-pricing">
+            <div class="coming-soon-badge-overlay-solid">Coming Soon!</div>
+            <div class="solution-header">
+                <div class="solution-category-title">For Marketers & Agencies</div>
+                <div class="solution-badge">White-Label Web App Solution</div>
+                <h3 class="solution-title">Professional-Grade AR Crypto Platform</h3>
+                <p class="solution-subtitle">Everything you need to launch and run profitable location-based marketing campaigns. No technical skills required.</p>
+            </div>
+
+            <div class="pricing-details-container">
+                <div class="pricing-col">
+                    <div class="pricing-tier-header">
+                        <h4>One-Time Setup</h4>
+                        <div class="price-display">
+                            <span class="price-amount">$149</span>
+                            <span class="price-note">Pay once, yours forever</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features-list">
+                        <li><strong>Fully-Branded Web App:</strong> At yourdomain.com/game-name</li>
+                        <li><strong>Complete Management System:</strong> Control every aspect of your campaigns</li>
+                        <li><strong>GPS & Beacon Coin Placement:</strong> Place coins anywhere, indoors or outdoors</li>
+                        <li><strong>Real-Time Analytics Dashboard:</strong> Track ROI, player activity, sponsor engagement</li>
+                        <li><strong>Professional Design Package:</strong> Custom branding, logos, color schemes</li>
+                        <li><strong>Launch Support:</strong> 2-hour onboarding call + campaign strategy session</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-col">
+                    <div class="pricing-tier-header">
+                        <h4>Monthly Management</h4>
+                        <div class="price-display">
+                            <span class="price-amount">Starting at $149/mo</span>
+                            <span class="price-note">Scale as you grow</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-tiers-grid">
+                        <div class="mini-tier">
+                            <div class="mini-tier-name">Starter</div>
+                            <div class="mini-tier-price">$149<span>/mo</span></div>
+                            <div class="mini-tier-details">
+                                <p>5 active campaigns</p>
+                                <p>50K player interactions</p>
+                                <p>Basic analytics</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mini-tier featured-tier">
+                            <div class="tier-badge-mini">Most Popular</div>
+                            <div class="mini-tier-name">Growth</div>
+                            <div class="mini-tier-price">$299<span>/mo</span></div>
+                            <div class="mini-tier-details">
+                                <p>20 active campaigns</p>
+                                <p>250K player interactions</p>
+                                <p>Advanced analytics + reporting</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mini-tier">
+                            <div class="mini-tier-name">Enterprise</div>
+                            <div class="mini-tier-price">$599<span>/mo</span></div>
+                            <div class="mini-tier-details">
+                                <p>Unlimited campaigns</p>
+                                <p>1M+ player interactions</p>
+                                <p>White-glove support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="value-props-section">
+                <h4 class="value-props-title">Why Marketers Choose Us</h4>
+                <div class="value-props-grid">
+                    <div class="value-prop-item">
+                        <div class="value-prop-icon">
+                            <div class="main-image-glow">
+                                <img src="images/EmberRepeatArrows.PNG" alt="24hr Deployment" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="value-prop-text">
+                            <strong>24-Hour Deployment</strong>
+                            <p>From signup to live campaign faster than any competitor</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-prop-item">
+                        <div class="value-prop-icon">
+                            <div class="main-image-glow">
+                                <img src="images/VPEmberCoin.PNG" alt="Free Tokens" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="value-prop-text">
+                            <strong>$100 in FREE $Ember Tokens</strong>
+                            <p>Pre-loaded into your management system to start campaigns immediately</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-prop-item">
+                        <div class="value-prop-icon">
+                            <div class="main-image-glow">
+                                <img src="images/EmberCoinMoneyBag.PNG" alt="Revenue Model" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="value-prop-text">
+                            <strong>Multiple Revenue Streams</strong>
+                            <p>Sell coin placements, run your own campaigns, or white-label the entire platform</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-prop-item">
+                        <div class="value-prop-icon">
+                            <div class="main-image-glow">
+                                <img src="images/PhoenixGoldTrophy.PNG" alt="Support" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="value-prop-text">
+                            <strong>Campaign Strategy Support</strong>
+                            <p>Expert guidance on maximizing ROI from location-based AR campaigns</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="solution-cta-bottom">
+                <a href="mailto:contact@vaultphoenix.com?subject=White-Label Marketing Solution" class="cta-primary-large">
+                    <div class="main-image-glow">
+                        <img src="images/VPEmberFlame.svg" alt="Start Now" class="journey-cta-icon-large" loading="lazy">
+                    </div>
+                    <span>Get Started Today</span>
+                </a>
+                <p class="cta-footnote-bottom">Talk to a campaign strategist within 2 hours</p>
+            </div>
+        </div>
+
+        <!-- DEVELOPER JOURNEY MODULE 2 - PRICING/DETAILS -->
+        <div class="pricing-solution-wrapper developer-pricing-module scroll-reveal" id="developer-pricing">
+            <div class="early-2026-badge-overlay-solid">Early 2026</div>
+            <div class="solution-header">
+                <div class="solution-category-title">For Developers & Tech Teams</div>
+                <div class="solution-badge sdk-badge">SDK Integration Solution</div>
+                <h3 class="solution-title">Battle-Tested AR Crypto SDK</h3>
+                <p class="solution-subtitle">Add proven location-based AR gaming to your existing app. Keep your brand, your users, and your revenue. Just add our engine.</p>
+            </div>
+
+            <div class="pricing-details-container">
+                <div class="pricing-col">
+                    <div class="pricing-tier-header">
+                        <h4>SDK Core Package</h4>
+                        <div class="price-display">
+                            <span class="price-amount">100% FREE</span>
+                            <span class="price-note">Forever. No licensing fees.</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features-list">
+                        <li><strong>Complete SDK Access:</strong> Full source code, documentation, and examples</li>
+                        <li><strong>GPS & Beacon Integration:</strong> Outdoor and indoor location technology</li>
+                        <li><strong>Crypto Wallet Support:</strong> Multi-chain compatibility built-in</li>
+                        <li><strong>AR Coin Engine:</strong> Complete collectible and reward system</li>
+                        <li><strong>Management API:</strong> Programmatic campaign control</li>
+                        <li><strong>Technical Documentation:</strong> Comprehensive guides and code samples</li>
+                        <li><strong>Community Support:</strong> GitHub issues, Discord, and developer forums</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-col">
+                    <div class="pricing-tier-header">
+                        <h4>Management System Access</h4>
+                        <div class="price-display">
+                            <span class="price-amount">Starting at $49/mo</span>
+                            <span class="price-note">Pay only for API usage</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-tiers-grid">
+                        <div class="mini-tier">
+                            <div class="mini-tier-name">Starter</div>
+                            <div class="mini-tier-price">$49<span>/mo</span></div>
+                            <div class="mini-tier-details">
+                                <p>10K API calls/month</p>
+                                <p>Standard support</p>
+                                <p>Community access</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mini-tier featured-tier">
+                            <div class="tier-badge-mini">Best Value</div>
+                            <div class="mini-tier-name">Growth</div>
+                            <div class="mini-tier-price">$149<span>/mo</span></div>
+                            <div class="mini-tier-details">
+                                <p>100K API calls/month</p>
+                                <p>Priority support</p>
+                                <p>Advanced analytics</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mini-tier">
+                            <div class="mini-tier-name">Enterprise</div>
+                            <div class="mini-tier-price">$399<span>/mo</span></div>
+                            <div class="mini-tier-details">
+                                <p>500K API calls/month</p>
+                                <p>Dedicated support</p>
+                                <p>Custom SLAs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="value-props-section">
+                <h4 class="value-props-title">Why Developers Choose Us</h4>
+                <div class="value-props-grid">
+                    <div class="value-prop-item">
+                        <div class="value-prop-icon">
+                            <div class="main-image-glow">
+                                <img src="images/PhoenixGoldTrophy.PNG" alt="Battle Tested" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="value-prop-text">
+                            <strong>6+ Years of Development</strong>
+                            <p>Battle-tested in 12+ successful AR games. Zero guesswork.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-prop-item">
+                        <div class="value-prop-icon">
+                            <div class="main-image-glow">
+                                <img src="images/VPEmberCoin.PNG" alt="Free Tokens" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="value-prop-text">
+                            <strong>$100 in FREE $Ember Tokens</strong>
+                            <p>Test with real tokens before you commit to a package tier</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-prop-item">
+                        <div class="value-prop-icon">
+                            <div class="main-image-glow">
+                                <img src="images/EmberRepeatArrows.PNG" alt="Fast Integration" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="value-prop-text">
+                            <strong>1-2 Week Integration</strong>
+                            <p>Skip months of development. Get to market fast.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="value-prop-item">
+                        <div class="value-prop-icon">
+                            <div class="main-image-glow">
+                                <img src="images/CustomDevelopment.PNG" alt="Full Control" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="value-prop-text">
+                            <strong>Your Brand, Your Rules</strong>
+                            <p>Keep your app name, URL, and users. Just add AR crypto gaming power.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="solution-cta-bottom">
+                <a href="mailto:contact@vaultphoenix.com?subject=SDK Integration Inquiry" class="cta-primary-large">
+                    <div class="main-image-glow">
+                        <img src="images/VPEmberFlame.svg" alt="Start Building" class="journey-cta-icon-large" loading="lazy">
+                    </div>
+                    <span>Start Building Today</span>
+                </a>
+                <p class="cta-footnote-bottom">Available early 2026 • Join the waitlist now</p>
+                <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" rel="noopener noreferrer" class="journey-secondary-link">
+                    Explore SDK on GitHub <span>→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- PHOENIX SEPARATOR - TOOLS & EXPERTISE -->
+<div class="phoenix-separator-section">
+    <div class="main-container">
+        <div class="phoenix-separator-content">
+            <div class="phoenix-separator-glow">
+                <img src="images/PhoenixDesign.PNG" alt="Vault Phoenix - Built for You" class="phoenix-separator-image" loading="lazy">
+            </div>
+            <div class="phoenix-separator-text">
+                <h3 class="phoenix-separator-title">Built by Experts. <span class="golden-highlight">Powered by Phoenix Fire.</span></h3>
+                <p class="phoenix-separator-subtitle">Professional-grade AR crypto gaming technology, battle-tested and ready to deploy for your business.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================
+     MODULE 3 (BOTTOM) - THE CLOSE
+     Final conversion push for both personas
+     =================================== -->
+<section class="final-cta" id="final-cta">
+    <div class="final-cta-background"></div>
+    <div class="main-container">
+        <div class="final-cta-content">
+            <div class="final-cta-header">
+                <h2 class="final-cta-title scroll-reveal">Ready to Transform Engagement Into Revenue?</h2>
+                <p class="final-cta-subtitle scroll-reveal">Choose your path. Start building today. See results tomorrow.</p>
+            </div>
+            
+            <div class="journey-paths-container">
+                <!-- MARKETER JOURNEY MODULE 3 - THE CLOSE -->
+                <div class="journey-path-module business-path scroll-reveal">
+                    <div class="coming-soon-badge-overlay-solid">Coming Soon!</div>
+                    
+                    <div class="journey-path-header">
+                        <p class="solution-category-title">For Marketers & Agencies</p>
+                        <div class="journey-icon-container">
+                            <div class="main-image-glow">
+                                <img src="images/AllRedLogo.png" alt="Marketer Success" class="main-journey-icon-large" loading="lazy">
+                            </div>
+                        </div>
+                        <h3 class="journey-path-title">From Zero to Revenue in 24 Hours</h3>
+                        <p class="journey-path-subtitle">Join marketers who are already generating revenue from location-based AR crypto campaigns</p>
+                    </div>
+                    
+                    <div class="close-reasons-grid">
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>Try Risk-Free</strong>
+                                <p>Test the $Ember Hunt app and management system before you buy. See exactly what you're getting.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>Launch Today, Earn Tomorrow</strong>
+                                <p>Our fastest client launched their first campaign in 4 hours and closed their first sponsor deal the next day.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>$100 in FREE Tokens</strong>
+                                <p>Start running campaigns immediately with pre-loaded $Ember tokens. No additional investment required.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>Zero Technical Skills Needed</strong>
+                                <p>If you can use Facebook, you can run AR crypto campaigns. We handle all the technical complexity.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>Multiple Revenue Models</strong>
+                                <p>Sell coin placements to local businesses, run branded campaigns, or white-label the entire platform to clients.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>We Support You All The Way</strong>
+                                <p>2-hour onboarding call, campaign strategy session, and ongoing support. You're never alone.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="urgency-block">
+                        <div class="urgency-icon">
+                            <div class="main-image-glow">
+                                <img src="images/EmberCoinRocket.PNG" alt="Limited Time" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="urgency-text">
+                            <h4>First-Mover Advantage Available Now</h4>
+                            <p>Be the first AR crypto gaming platform in your market. Lock in your territory before your competitors do. Early adopters are seeing 3x higher engagement rates.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="journey-cta">
+                        <a href="mailto:contact@vaultphoenix.com?subject=Ready to Launch White-Label Campaign" class="journey-cta-button journey-cta-button-large">
+                            <div class="main-image-glow">
+                                <img src="images/VPEmberFlame.svg" alt="Launch Now" class="journey-cta-icon-large" loading="lazy">
+                            </div>
+                            <span class="journey-cta-text">Launch Your Campaign Now</span>
+                        </a>
+                        <p class="journey-cta-subtext">Talk to a strategist within 2 hours • Launch within 24 hours</p>
+                        <a href="#showcase" class="journey-secondary-link">
+                            Try the Live Demo First <span>→</span>
+                        </a>
+                    </div>
+                    
+                    <div class="satisfaction-guarantee">
+                        <p><strong>Our Promise:</strong> If you're not generating sponsor interest within 30 days, we'll work with you for free until you do.</p>
+                    </div>
+                </div>
+                
+                <!-- DEVELOPER JOURNEY MODULE 3 - THE CLOSE -->
+                <div class="journey-path-module developer-path scroll-reveal">
+                    <div class="early-2026-badge-overlay-solid">Early 2026</div>
+                    
+                    <div class="journey-path-header">
+                        <p class="solution-category-title">For Developers & Tech Teams</p>
+                        <div class="journey-icon-container">
+                            <div class="main-image-glow">
+                                <img src="images/CustomDevelopment.PNG" alt="Developer Success" class="main-journey-icon-large" loading="lazy">
+                            </div>
+                        </div>
+                        <h3 class="journey-path-title">Skip 6 Years of Development</h3>
+                        <p class="journey-path-subtitle">Integrate battle-tested AR crypto gaming in weeks, not years</p>
+                    </div>
+                    
+                    <div class="close-reasons-grid">
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>100% FREE SDK Forever</strong>
+                                <p>No licensing fees. No hidden costs. Full source code access. You only pay for management system API calls.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>Test Everything First</strong>
+                                <p>Free testing environment with real tokens. Experience the full platform before selecting a package tier.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>$100 in FREE Tokens</strong>
+                                <p>Pre-loaded $Ember tokens in your management system. Start testing immediately with zero investment.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>Battle-Tested Technology</strong>
+                                <p>6+ years of development. 12+ successful AR games. Proven GPS & Beacon framework. No experimental tech here.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>Keep Your Brand & Revenue</strong>
+                                <p>Your app. Your URL. Your users. Your revenue. We're just the AR engine under the hood.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="close-reason-item">
+                            <div class="close-reason-icon">✓</div>
+                            <div class="close-reason-text">
+                                <strong>Comprehensive Documentation</strong>
+                                <p>Detailed integration guides, code samples, API references, and active community support on GitHub and Discord.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="urgency-block">
+                        <div class="urgency-icon">
+                            <div class="main-image-glow">
+                                <img src="images/EmberCoinRocket.PNG" alt="Early Access" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="urgency-text">
+                            <h4>Early 2026 Release • Join the Waitlist Now</h4>
+                            <p>Be among the first developers with access to the SDK. Early adopters get priority support, exclusive features, and discounted API pricing for life.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="journey-cta">
+                        <a href="mailto:contact@vaultphoenix.com?subject=SDK Early Access Request" class="journey-cta-button journey-cta-button-large">
+                            <div class="main-image-glow">
+                                <img src="images/VPEmberFlame.svg" alt="Join Waitlist" class="journey-cta-icon-large" loading="lazy">
+                            </div>
+                            <span class="journey-cta-text">Join SDK Waitlist</span>
+                        </a>
+                        <p class="journey-cta-subtext">Early 2026 release • Priority access for waitlist members</p>
+                        <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" rel="noopener noreferrer" class="journey-secondary-link">
+                            Explore SDK Documentation <span>→</span>
+                        </a>
+                    </div>
+                    
+                    <div class="satisfaction-guarantee">
+                        <p><strong>Our Promise:</strong> If you can't integrate within 2 weeks, we'll provide hands-on integration support at no additional cost.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>  <!-- ✅ CLOSE MAIN TAG HERE - NO MORE SECTIONS AFTER THIS -->
+
+    <!-- ===================================
+         MODALS - OUTSIDE MAIN CONTENT
+         =================================== -->
+    
+    <!-- AIRDROP TERMS MODAL -->
+    <div class="airdrop-terms-modal-overlay" id="airdrop-terms-modal">
+        <div class="airdrop-terms-modal">
+            <div class="airdrop-terms-modal-header">
+                <h3>Airdrop Terms & Conditions</h3>
+                <button type="button" class="airdrop-terms-close" id="close-terms-modal">×</button>
+            </div>
+            <div class="airdrop-terms-modal-body">
+                <p><strong>By participating in the $Ember Airdrop, you agree to the following terms:</strong></p>
+                <ul>
+                    <li>Each wallet address can claim only once</li>
+                    <li>Social media posts must remain public until tokens are distributed</li>
+                    <li>Vault Phoenix reserves the right to verify all submissions</li>
+                    <li>Invalid or fraudulent submissions will be rejected</li>
+                    <li>Token distribution occurs after presale verification</li>
+                    <li>Limited to first 5,000 valid claims</li>
+                    <li>We only pay out if we reach our $500K campaign goal</li>
+                    <li>Your post must still be live at the time of verification</li>
+                    <li>Gas fees for claiming tokens are paid by the recipient</li>
+                    <li>Vault Phoenix is not responsible for wallet security or lost private keys</li>
+                </ul>
+                <p><strong>Important:</strong> You must keep your social media post live until the campaign ends and verification is complete. If your post is deleted or made private before verification, you will not be eligible for the airdrop.</p>
+            </div>
+            <div class="airdrop-terms-modal-footer">
+                <button type="button" class="airdrop-terms-agree-btn" id="agree-terms-btn">✓ I Agree</button>
+                <button type="button" class="airdrop-terms-cancel-btn" id="cancel-terms-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AIRDROP INFO MODAL -->
+    <div class="airdrop-info-modal-overlay" id="airdrop-info-modal">
+        <div class="airdrop-info-modal">
+            <div class="airdrop-info-modal-header">
+                <h3>How the $EMBER Airdrop Works</h3>
+                <button type="button" class="airdrop-info-close" id="close-info-modal">×</button>
+            </div>
+            <div class="airdrop-info-modal-body">
+                <div class="airdrop-info-step">
+                    <div class="airdrop-info-step-number">1</div>
+                    <div class="airdrop-info-step-content">
+                        <h4>Share the Campaign</h4>
+                        <p>Connect your wallet and share the campaign post using X, Facebook, or Telegram</p>
+                    </div>
+                </div>
+                <div class="airdrop-info-step">
+                    <div class="airdrop-info-step-number">2</div>
+                    <div class="airdrop-info-step-content">
+                        <h4>Keep Your Post Live</h4>
+                        <p>Keep your post live until the campaign ends (45 days)</p>
+                    </div>
+                </div>
+                <div class="airdrop-info-step">
+                    <div class="airdrop-info-step-number">3</div>
+                    <div class="airdrop-info-step-content">
+                        <h4>Verification Process</h4>
+                        <p>After campaign ends, our system verifies posts via API</p>
+                    </div>
+                </div>
+                <div class="airdrop-info-step">
+                    <div class="airdrop-info-step-number">4</div>
+                    <div class="airdrop-info-step-content">
+                        <h4>Receive Tokens</h4>
+                        <p>If your post is still up AND we hit the $500K goal, you automatically qualify</p>
+                    </div>
+                </div>
+                <div class="airdrop-info-step">
+                    <div class="airdrop-info-step-number">5</div>
+                    <div class="airdrop-info-step-content">
+                        <h4>Claim Your Tokens</h4>
+                        <p>Gas fees paid by recipient when claiming. If presale goal isn't met or your post is gone, no airdrop issued</p>
+                    </div>
+                </div>
+            </div>
+            <div class="airdrop-info-modal-footer">
+                <button type="button" class="airdrop-info-ok-btn" id="ok-info-btn">Got It!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================
+         SHARED COMPONENTS CONTAINER
+         Footer & Chatbot loaded by global.js
+         =================================== -->
+    <div id="shared-components-container"></div>
+
+    <!-- ===================================
+         SCRIPTS - Load global.js FIRST
+         =================================== -->
+    <script src="shared/global.js"></script>
+    <script src="main/local.js"></script>
+</body>
+</html>
+
+<!-- END OF PART 3 -->
+<!-- ==================================================================================
+     PART 3 OF 3 COMPLETE - DOCUMENT FINISHED
+     
+     This part includes:
+     ✅ MODULE 2 - THE PRICING/DETAILS
+        - Marketer pricing with 3 tiers (Starter/Growth/Enterprise)
+        - Developer pricing with FREE SDK + 3 API tiers
+        - Growth tiers highlighted in gold
+        - Value propositions for both personas
+        - "Why Choose Us" sections
+     
+     ✅ MODULE 3 - THE CLOSE
+        - Marketer: "From Zero to Revenue in 24 Hours"
+        - Developer: "Skip 6 Years of Development"
+        - 6 compelling reasons to act NOW for each persona
+        - Urgency blocks (first-mover advantage/early access)
+        - Satisfaction guarantees
+        - Multiple CTAs with clear next steps
+     
+     ✅ Phoenix Separator
+     ✅ Modals (Airdrop Terms & Info)
+     ✅ Shared components container
+     ✅ Scripts
+     ✅ Closing HTML tags
+     
+     ALL 6 CONVERSION MODULES COMPLETE:
+     Module 1 (Hook) → Module 2 (Pricing) → Module 3 (Close)
+     For both Marketers & Developers
+     
+     COMBINE ALL 3 PARTS TO CREATE YOUR COMPLETE main.html FILE!
+     ==================================================================================
+-->/* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   FULLY UPDATED WITH MODAL FIXES & NEW STYLES
+   PART 2 OF 3 - MODALS THROUGH FEATURES
    =================================== */
 
 /* ===================================
-   FREE $EMBER TOKENS BANNER - ORIGINAL PURPLE (EXISTING)
+   MODAL SYSTEM - Z-INDEX & BODY LOCK
    =================================== */
-.free-tokens-banner {
-    background: linear-gradient(135deg, 
-        rgba(139, 92, 246, 0.15) 0%, 
-        rgba(124, 58, 237, 0.15) 100%);
-    border: 2px solid rgba(139, 92, 246, 0.4);
-    border-radius: 12px;
-    padding: 1rem;
-    margin: 1rem 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    animation: subtle-glow 3s ease-in-out infinite;
-}
-
-@keyframes subtle-glow {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
-    }
-}
-
-/* ===================================
-   FREE $EMBER TOKENS BANNER - NEW RED VERSION
-   =================================== */
-.free-tokens-banner-red {
-    background: linear-gradient(135deg, 
-        rgba(215, 51, 39, 0.15) 0%, 
-        rgba(198, 40, 40, 0.15) 100%);
-    border: 2px solid rgba(215, 51, 39, 0.4);
-    border-radius: 12px;
-    padding: 1rem;
-    margin: 1rem 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    animation: subtle-glow-red 3s ease-in-out infinite;
-}
-
-@keyframes subtle-glow-red {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(215, 51, 39, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 30px rgba(215, 51, 39, 0.5);
-    }
-}
-
-.free-tokens-icon {
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-}
-
-.free-tokens-text {
-    flex: 1;
-}
-
-.free-tokens-text strong {
-    display: block;
-    color: var(--ember-gold);
-    font-size: 1.05rem;
-    margin-bottom: 0.25rem;
-}
-
-.free-tokens-text p {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-    line-height: 1.4;
-}
-
-/* Button icon styling */
-.btn-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    filter: brightness(0) invert(1);
-}
-
-/* ===================================
-   BUTTON STYLE MATCHING (NEW)
-   =================================== */
-.btn-style-match,
-.join-presale-button-redesigned,
-.compliance-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 14px 32px;
-    background: var(--ember-gradient-primary);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-xl);
-    font-weight: 700;
-    font-size: 1.05rem;
-    text-decoration: none;
-    transition: all var(--transition-base);
-    cursor: pointer;
-    box-shadow: var(--ember-shadow-md);
-}
-
-.btn-style-match:hover,
-.join-presale-button-redesigned:hover,
-.compliance-button:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--ember-shadow-lg);
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-/* ===================================
-   PARACHUTE CRATE - ENLARGED (NEW)
-   =================================== */
-.parachute-crate-enlarged {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    object-fit: contain;
-    margin: 0 auto;
-    display: block;
-}
-
-@media (max-width: 768px) {
-    .parachute-crate-enlarged {
-        max-width: 280px;
-    }
-}
-
-/* ===================================
-   TRANSPARENT PURPLE BUTTONS (NEW)
-   =================================== */
-.ember-social-btn-transparent,
-.share-button-transparent,
-.share-x-transparent,
-.share-facebook-transparent,
-.share-telegram-transparent {
-    background: rgba(139, 92, 246, 0.2) !important;
-    border: 2px solid rgba(139, 92, 246, 0.5) !important;
-    color: white !important;
-    padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.ember-social-btn-transparent:hover,
-.share-button-transparent:hover,
-.share-x-transparent:hover,
-.share-facebook-transparent:hover,
-.share-telegram-transparent:hover {
-    background: rgba(139, 92, 246, 0.4) !important;
-    border-color: rgba(139, 92, 246, 0.8) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-}
-
-.ember-social-btn-transparent svg,
-.share-button-transparent svg {
-    width: 20px;
-    height: 20px;
-    fill: white;
-}
-
-/* ===================================
-   TOKEN ALLOCATION - PURPLE TEXT LINK (NEW)
-   =================================== */
-.allocation-link-btn {
-    display: inline-block;
-    color: var(--ember-purple);
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    padding: 0.5rem 0;
-}
-
-.allocation-link-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--ember-purple);
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    padding: 0.5rem 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.allocation-link-btn:hover {
-    color: var(--ember-gold);
-    transform: translateX(4px);
-}
-
-.allocation-link-btn::after {
-    content: '→';
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-/* ===================================
-   PHANTOM WALLET - COMPACT VERSION (NEW)
-   =================================== */
-.phantom-icon-compact {
-    width: 48px !important;
-    height: 48px !important;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.phantom-text-compact {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.phantom-get-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--ember-purple);
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    margin-top: 0.25rem;
-}
-
-.phantom-get-link:hover {
-    color: var(--ember-gold);
-    transform: translateX(4px);
-}
-
-.phantom-get-link::after {
-    content: '→';
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-/* ===================================
-   AIRDROP POWERED BY - BOTTOM RIGHT INSIDE TRACKER MODULE (NEW)
-   =================================== */
-.status-checker-integrated {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1rem;
-    position: relative;
-    padding-bottom: 3rem; /* Add space for the powered by text */
-}
-
-.airdrop-powered-by {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
-    font-style: italic;
-    text-align: right;
-}
-
-/* ===================================
-   INFO BADGE BUTTON (NEW)
-   =================================== */
-.info-badge-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    background: rgba(139, 92, 246, 0.3);
-    border: 2px solid rgba(139, 92, 246, 0.5);
-    border-radius: 50%;
-    margin-left: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    vertical-align: middle;
-}
-
-.info-badge-button:hover {
-    background: rgba(139, 92, 246, 0.5);
-    transform: scale(1.1);
-}
-
-.info-badge-button svg {
-    width: 16px;
-    height: 16px;
-    fill: white;
-}
-
-/* ===================================
-   BODY MODAL OPEN STATE - CRITICAL FIX
-   =================================== */
-/* Prevent body scroll when modal is open */
 body.modal-open {
     overflow: hidden !important;
     position: fixed;
     width: 100%;
     height: 100%;
 }
-
-/* ===================================
-   MODAL OVERLAY - Z-INDEX HIERARCHY FIX
-   =================================== */
-/* 
-   Z-Index Hierarchy:
-   - Navbar: 2000 (from global.css)
-   - Chatbot: 1000 (from global.css)
-   - Modals: 10000 (above everything)
-*/
 
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
@@ -337,7 +676,7 @@ body.modal-open {
     height: 100vh;
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(5px);
-    z-index: 10000; /* Higher than navbar (2000) and chatbot (1000) */
+    z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -346,9 +685,6 @@ body.modal-open {
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     pointer-events: none;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
 }
 
 .airdrop-terms-modal-overlay.active,
@@ -358,13 +694,10 @@ body.modal-open {
     pointer-events: auto;
 }
 
-/* ===================================
-   MODAL CONTENT - PROPER POSITIONING
-   =================================== */
 .airdrop-terms-modal,
 .airdrop-info-modal {
     position: relative;
-    z-index: 10001; /* Above overlay */
+    z-index: 10001;
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.98) 0%, 
         rgba(45, 24, 16, 0.95) 100%);
@@ -385,9 +718,6 @@ body.modal-open {
     transform: scale(1);
 }
 
-/* ===================================
-   MODAL HEADER
-   =================================== */
 .airdrop-terms-modal-header,
 .airdrop-info-modal-header {
     display: flex;
@@ -422,7 +752,6 @@ body.modal-open {
     justify-content: center;
     border-radius: 50%;
     transition: var(--transition-base);
-    line-height: 1;
 }
 
 .airdrop-terms-close:hover,
@@ -431,25 +760,16 @@ body.modal-open {
     transform: rotate(90deg);
 }
 
-/* ===================================
-   MODAL BODY - SCROLLABLE CONTENT
-   =================================== */
 .airdrop-terms-modal-body,
 .airdrop-info-modal-body {
     flex: 1;
     overflow-y: auto;
     padding: 2rem;
-    -webkit-overflow-scrolling: touch;
 }
 
 .airdrop-terms-modal-body::-webkit-scrollbar,
 .airdrop-info-modal-body::-webkit-scrollbar {
     width: 6px;
-}
-
-.airdrop-terms-modal-body::-webkit-scrollbar-track,
-.airdrop-info-modal-body::-webkit-scrollbar-track {
-    background: transparent;
 }
 
 .airdrop-terms-modal-body::-webkit-scrollbar-thumb,
@@ -458,35 +778,23 @@ body.modal-open {
     border-radius: 3px;
 }
 
-.airdrop-terms-modal-body::-webkit-scrollbar-thumb:hover,
-.airdrop-info-modal-body::-webkit-scrollbar-thumb:hover {
-    background: rgba(215, 51, 39, 0.7);
-}
-
-.airdrop-terms-content h4,
-.airdrop-info-content h4 {
-    font-size: 1.2rem;
-    color: var(--ember-gold);
-    margin-bottom: 1rem;
-}
-
-.airdrop-terms-content p,
-.airdrop-info-content p {
+.airdrop-terms-modal-body p,
+.airdrop-info-modal-body p {
     font-size: 0.95rem;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.85);
     margin-bottom: 1rem;
 }
 
-.airdrop-terms-content ul,
-.airdrop-info-content ul {
+.airdrop-terms-modal-body ul,
+.airdrop-info-modal-body ul {
     list-style: none;
-    padding-left: 0;
+    padding: 0;
     margin: 1rem 0;
 }
 
-.airdrop-terms-content li,
-.airdrop-info-content li {
+.airdrop-terms-modal-body li,
+.airdrop-info-modal-body li {
     font-size: 0.9rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
@@ -495,8 +803,8 @@ body.modal-open {
     position: relative;
 }
 
-.airdrop-terms-content li::before,
-.airdrop-info-content li::before {
+.airdrop-terms-modal-body li::before,
+.airdrop-info-modal-body li::before {
     content: '→';
     position: absolute;
     left: 0;
@@ -504,17 +812,11 @@ body.modal-open {
     font-weight: 700;
 }
 
-.airdrop-info-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin: 1.5rem 0;
-}
-
 .airdrop-info-step {
     display: flex;
     gap: 1rem;
     align-items: flex-start;
+    margin-bottom: 1.5rem;
 }
 
 .airdrop-info-step-number {
@@ -537,13 +839,6 @@ body.modal-open {
     margin-bottom: 0.5rem;
 }
 
-.airdrop-info-step-content p {
-    margin: 0;
-}
-
-/* ===================================
-   MODAL FOOTER
-   =================================== */
 .airdrop-terms-modal-footer,
 .airdrop-info-modal-footer {
     display: flex;
@@ -575,7 +870,6 @@ body.modal-open {
 .airdrop-info-ok-btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--ember-shadow-lg);
-    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .airdrop-terms-cancel-btn {
@@ -605,7 +899,6 @@ body.modal-open {
     border: none;
     cursor: pointer;
     padding: 0;
-    margin: 0 4px;
     transition: all 0.3s ease;
 }
 
@@ -614,110 +907,7 @@ body.modal-open {
 }
 
 /* ===================================
-   PREVENT CONFLICTS WITH GLOBAL COMPONENTS
-   =================================== */
-/* Ensure chatbot stays accessible but below modals */
-.chatbot-button,
-.chatbot-widget {
-    z-index: 1000 !important;
-}
-
-/* Dim chatbot when modal is open */
-body.modal-open .chatbot-button {
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-/* Ensure navbar stays below modals */
-.navbar,
-header {
-    z-index: 2000 !important;
-}
-
-/* ===================================
-   MOBILE MODAL IMPROVEMENTS
-   =================================== */
-@media (max-width: 768px) {
-    .airdrop-terms-modal-overlay,
-    .airdrop-info-modal-overlay {
-        padding: 1rem;
-        align-items: flex-start;
-        padding-top: 2rem;
-    }
-    
-    .airdrop-terms-modal,
-    .airdrop-info-modal {
-        max-height: calc(100vh - 4rem);
-        margin: auto;
-    }
-    
-    .airdrop-terms-modal-header,
-    .airdrop-info-modal-header {
-        padding: 1.25rem 1.5rem;
-    }
-    
-    .airdrop-terms-modal-header h3,
-    .airdrop-info-modal-header h3 {
-        font-size: 1.25rem;
-    }
-    
-    .airdrop-terms-modal-body,
-    .airdrop-info-modal-body {
-        padding: 1.5rem;
-    }
-    
-    .airdrop-terms-modal-footer,
-    .airdrop-info-modal-footer {
-        flex-direction: column;
-        padding: 1.25rem 1.5rem;
-    }
-    
-    .airdrop-terms-agree-btn,
-    .airdrop-info-ok-btn,
-    .airdrop-terms-cancel-btn {
-        width: 100%;
-    }
-}
-
-/* ===================================
-   BADGE STYLES - TRANSPARENT (EXISTING)
-   =================================== */
-.coming-soon-badge-overlay,
-.early-2026-badge-overlay {
-    background: rgba(139, 92, 246, 0.2) !important;
-    border: 2px solid rgba(139, 92, 246, 0.5) !important;
-    color: white !important;
-}
-
-/* ===================================
-   BADGE STYLES - SOLID (NEW)
-   =================================== */
-.coming-soon-badge-overlay-solid,
-.early-2026-badge-overlay-solid {
-    position: absolute;
-    top: -12px;
-    left: 20px;
-    padding: 6px 16px;
-    border-radius: 9999px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: white;
-    z-index: 10;
-    border: none;
-}
-
-.coming-soon-badge-overlay-solid {
-    background: #d73327;
-    box-shadow: 0 4px 12px rgba(215, 51, 39, 0.5);
-}
-
-.early-2026-badge-overlay-solid {
-    background: #8b5cf6;
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
-}
-
-/* ===================================
-   HERO SECTION - CLEAN & WORKING
+   HERO SECTION
    =================================== */
 .main-hero {
     min-height: 100vh;
@@ -843,34 +1033,8 @@ header {
     background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
 }
 
-.badge {
-    position: absolute; 
-    top: -12px; 
-    left: 20px;
-    background: linear-gradient(135deg, #d73327, #c62828);
-    color: white; 
-    padding: 6px 16px; 
-    border-radius: 9999px;
-    font-size: 0.85rem; 
-    font-weight: 700;
-    border: 2px solid rgba(240,165,0,0.6);
-    z-index: 10;
-}
-
-.early-2026 {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-}
-
 .cta-card-header {
     margin-bottom: 1.5rem;
-}
-
-.cta-card-header .solution-category-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
 }
 
 .cta-card h3 {
@@ -880,48 +1044,9 @@ header {
     margin-bottom: 1rem;
 }
 
-.cta-card-description {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1.5rem;
-    flex-grow: 1;
-}
-
 .cta-icon { 
     max-width: 80px; 
     margin: 0 auto 1.5rem; 
-}
-
-.journey-list {
-    display: flex; 
-    flex-direction: column; 
-    gap: 1rem; 
-    margin: 1.5rem 0; 
-    text-align: left;
-}
-
-.journey-item {
-    display: flex; 
-    align-items: flex-start; 
-    gap: 0.75rem;
-}
-
-.journey-item span {
-    min-width: 32px; 
-    height: 32px; 
-    background: #d73327; 
-    color: white;
-    border-radius: 50%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    font-weight: 700; 
-    font-size: 0.9rem;
-}
-
-.developer-card .journey-item span {
-    background: #8b5cf6;
 }
 
 .btn-primary {
@@ -948,15 +1073,6 @@ header {
     box-shadow: 0 8px 24px rgba(215,51,39,0.4);
 }
 
-.developer-card .btn-primary:hover {
-    box-shadow: 0 8px 24px rgba(139,92,246,0.4);
-}
-
-.btn-primary svg {
-    width: 20px;
-    height: 20px;
-}
-
 .secondary-link {
     color: #f0a500; 
     text-decoration: none; 
@@ -966,11 +1082,6 @@ header {
     display: inline-block;
 }
 
-.secondary-link span { 
-    margin-left: 0.25rem; 
-}
-
-/* Four feature icons below CTA cards */
 .hero-features-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1002,7 +1113,6 @@ header {
 /* ===================================
    EMBER TOKEN SECTION
    =================================== */
-
 .ember-token-section-redesigned {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
@@ -1015,12 +1125,6 @@ header {
     align-items: start;
 }
 
-.ember-token-left-redesigned {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
 .ember-token-title-redesigned {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
@@ -1028,46 +1132,11 @@ header {
     margin-bottom: 1rem;
 }
 
-.ember-token-description-redesigned {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-}
-
 .ember-countdown-widget-redesigned {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
     padding: 2rem;
-}
-
-.countdown-header-redesigned {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.countdown-icon-redesigned {
-    flex-shrink: 0;
-}
-
-.main-ember-countdown-icon-redesigned {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-}
-
-.countdown-text-redesigned h3 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.25rem;
-}
-
-.countdown-text-redesigned p {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.7);
 }
 
 .ember-countdown-timer-redesigned {
@@ -1091,74 +1160,6 @@ header {
     font-weight: 800;
     color: var(--ember-gold);
     margin-bottom: 0.25rem;
-}
-
-.ember-time-label-redesigned {
-    display: block;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-    text-transform: uppercase;
-}
-
-.presale-stats-redesigned {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.stat-item-redesigned {
-    text-align: center;
-}
-
-.stat-number-redesigned {
-    display: block;
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--ember-gold);
-    margin-bottom: 0.25rem;
-}
-
-.stat-label-redesigned {
-    display: block;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.stat-divider-redesigned {
-    color: rgba(215, 51, 39, 0.5);
-    font-size: 1.5rem;
-}
-
-.presale-cta-redesigned {
-    text-align: center;
-}
-
-.join-presale-button-redesigned {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 14px 32px;
-    background: var(--ember-gradient-primary);
-    color: white;
-    border-radius: var(--radius-xl);
-    font-weight: 700;
-    font-size: 1.05rem;
-    text-decoration: none;
-    transition: var(--transition-base);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: var(--ember-shadow-md);
-}
-
-.join-presale-button-redesigned:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--ember-shadow-lg);
-}
-
-.cta-icon-image-redesigned {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
 }
 
 .ember-highlights-redesigned {
@@ -1185,36 +1186,6 @@ header {
     transform: translateX(5px);
 }
 
-.highlight-icon-image-redesigned {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-}
-
-.highlight-text-redesigned {
-    flex: 1;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.highlight-arrow-redesigned {
-    color: var(--ember-gold);
-    font-size: 1.2rem;
-    display: none;
-}
-
-/* Right Column */
-.ember-token-right-redesigned {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.ember-phoenix-container-redesigned {
-    text-align: center;
-}
-
 .phoenix-glow-animated {
     animation: phoenixGlow 3s ease-in-out infinite;
 }
@@ -1224,22 +1195,6 @@ header {
     50% { filter: drop-shadow(0 0 40px rgba(240,165,0,0.8)); }
 }
 
-.phoenix-glow-animated:hover {
-    animation: phoenixGlowHover 1.5s ease-in-out infinite;
-}
-
-@keyframes phoenixGlowHover {
-    0%, 100% { filter: drop-shadow(0 0 30px rgba(240,165,0,0.6)); }
-    50% { filter: drop-shadow(0 0 60px rgba(240,165,0,1)); }
-}
-
-.phoenix-holding-coin-redesigned {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: var(--radius-xl);
-}
-
 .compliance-disclaimer-redesigned {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -1247,66 +1202,12 @@ header {
     padding: 2rem;
 }
 
-.compliance-disclaimer-redesigned h4 {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 1rem;
-}
-
-.main-compliance-icon-redesigned {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-}
-
-.compliance-disclaimer-redesigned p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1.5rem;
-}
-
-.compliance-cta {
-    text-align: center;
-}
-
-.compliance-button {
-    display: inline-flex;
-    align-items: center;
-    padding: 12px 24px;
-    background: rgba(215, 51, 39, 0.2);
-    color: white;
-    border: 2px solid rgba(215, 51, 39, 0.5);
-    border-radius: var(--radius-lg);
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition-base);
-}
-
-.compliance-button:hover {
-    background: rgba(215, 51, 39, 0.3);
-    border-color: var(--ember-orange);
-    transform: translateY(-2px);
-}
-
 /* ===================================
-   AIRDROP SECTION - COMPACT & PURPLE
+   AIRDROP SECTION
    =================================== */
-
 .ember-airdrop-section {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
-    position: relative;
-}
-
-/* Parachute above module */
-.parachute-header {
-    text-align: center;
-    margin-bottom: 2rem;
 }
 
 .parachute-glow {
@@ -1325,12 +1226,6 @@ header {
     }
 }
 
-.parachute-crate {
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-}
-
 .ember-airdrop-outer-module {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -1338,192 +1233,12 @@ header {
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
-    position: relative;
-}
-
-/* ===================================
-   AIRDROP SECTION - COMPACT & PURPLE
-   =================================== */
-
-.ember-airdrop-section {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-    position: relative;
-}
-
-/* Parachute above module */
-.parachute-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.parachute-glow {
-    animation: parachuteFloat 4s ease-in-out infinite;
-    display: inline-block;
-}
-
-@keyframes parachuteFloat {
-    0%, 100% { 
-        transform: translateY(0) translateX(-10px);
-        filter: drop-shadow(0 0 25px rgba(240,165,0,0.6));
-    }
-    50% { 
-        transform: translateY(-30px) translateX(10px);
-        filter: drop-shadow(0 0 40px rgba(240,165,0,0.9));
-    }
-}
-
-.parachute-crate {
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-}
-
-.parachute-crate-enlarged {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    object-fit: contain;
-    margin: 0 auto;
-    display: block;
-}
-
-@media (max-width: 768px) {
-    .parachute-crate-enlarged {
-        max-width: 280px;
-    }
-}
-
-.ember-airdrop-outer-module {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.ember-airdrop-compact-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px solid rgba(215, 51, 39, 0.3);
-}
-
-.ember-title-compact {
-    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-}
-
-.ember-subtitle-compact {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.ember-coming-soon-compact {
-    background: rgba(215, 51, 39, 0.2);
-    border: 2px solid rgba(215, 51, 39, 0.4);
-    border-radius: var(--radius-xl);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.ember-coming-text h3 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.5rem;
-}
-
-.ember-coming-text p {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1rem;
-}
-
-.ember-social-links-compact {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.ember-social-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 10px 20px;
-    background: rgba(215, 51, 39, 0.2);
-    color: white;
-    border: 2px solid rgba(215, 51, 39, 0.5);
-    border-radius: var(--radius-lg);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: var(--transition-base);
-}
-
-.ember-social-btn:hover {
-    background: var(--ember-gradient-primary);
-    border-color: var(--ember-orange);
-    transform: translateY(-2px);
-}
-
-/* ===================================
-   TRANSPARENT PURPLE BUTTONS (NEW)
-   =================================== */
-.ember-social-btn-transparent,
-.share-button-transparent,
-.share-x-transparent,
-.share-facebook-transparent,
-.share-telegram-transparent {
-    background: rgba(139, 92, 246, 0.2) !important;
-    border: 2px solid rgba(139, 92, 246, 0.5) !important;
-    color: white !important;
-    padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.ember-social-btn-transparent:hover,
-.share-button-transparent:hover,
-.share-x-transparent:hover,
-.share-facebook-transparent:hover,
-.share-telegram-transparent:hover {
-    background: rgba(139, 92, 246, 0.4) !important;
-    border-color: rgba(139, 92, 246, 0.8) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-}
-
-.ember-social-btn-transparent svg,
-.share-button-transparent svg {
-    width: 20px;
-    height: 20px;
-    fill: white;
-}
-
-.ember-social-icon-small {
-    width: 18px;
-    height: 18px;
 }
 
 .ember-compact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    margin-bottom: 3rem;
 }
 
 .ember-inner-module {
@@ -1533,58 +1248,6 @@ header {
     padding: 1.5rem;
     position: relative;
     padding-bottom: 3rem;
-}
-
-.ember-mini-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(215, 51, 39, 0.2);
-    position: relative;
-}
-
-.ember-mini-icon {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
-}
-
-.ember-mini-header h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #ffffff;
-    flex: 1;
-}
-
-/* ===================================
-   INFO BADGE BUTTON - FAR RIGHT (NEW)
-   =================================== */
-.info-badge-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: rgba(139, 92, 246, 0.3);
-    border: 2px solid rgba(139, 92, 246, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-    margin-left: auto;
-}
-
-.info-badge-button:hover {
-    background: rgba(139, 92, 246, 0.5);
-    transform: scale(1.1);
-}
-
-.info-badge-button svg {
-    width: 20px;
-    height: 20px;
-    fill: white;
 }
 
 .ember-stats-compact {
@@ -1600,32 +1263,6 @@ header {
     border-radius: var(--radius-md);
     padding: 1rem;
     text-align: center;
-}
-
-.ember-stat-mini .stat-label {
-    display: block;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.5rem;
-}
-
-.ember-stat-mini .stat-value {
-    display: block;
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--ember-gold);
-}
-
-.ember-stat-mini .stat-value.claimed {
-    color: var(--ember-orange);
-}
-
-.ember-stat-mini .stat-value.remaining {
-    color: #60a5fa;
-}
-
-.ember-progress-compact {
-    margin-bottom: 1.5rem;
 }
 
 .progress-bar-bg {
@@ -1644,229 +1281,12 @@ header {
     transition: width 0.5s ease;
 }
 
-.progress-text {
-    text-align: center;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.85);
-    margin-top: 0.5rem;
-}
-
-.presale-details-compact {
-    background: rgba(215, 51, 39, 0.1);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.presale-details-compact h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.75rem;
-}
-
-.presale-info-grid {
-    display: grid;
-    gap: 0.5rem;
-}
-
-.presale-info-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.info-label {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.info-value {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: white;
-}
-
-.allocation-info {
-    margin-top: 1rem;
-    padding: 1rem;
-    background: rgba(139, 92, 246, 0.05);
-    border-radius: var(--radius-md);
-    margin-bottom: 1.5rem;
-}
-
-.allocation-info h5 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #8b5cf6;
-    margin-bottom: 0.75rem;
-}
-
-.allocation-details {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.allocation-details strong {
-    color: var(--ember-gold);
-}
-
-.allocation-cta {
-    margin-top: 1rem;
-    text-align: center;
-}
-
-/* ===================================
-   TOKEN ALLOCATION - PURPLE TEXT LINK (NEW)
-   =================================== */
-.allocation-link-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--ember-purple);
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    padding: 0.5rem 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.allocation-link-btn:hover {
-    color: var(--ember-gold);
-    transform: translateX(4px);
-}
-
-.allocation-link-btn::after {
-    content: '→';
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-/* Status Checker Integrated */
-.status-checker-integrated {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1rem;
-}
-
-.status-checker-integrated h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #8b5cf6;
-    margin-bottom: 0.75rem;
-}
-
-.status-checker-description {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 1rem;
-    line-height: 1.5;
-}
-
-.status-input-row {
-    display: flex;
-    gap: 0.75rem;
-}
-
-.status-input-row .input-compact {
-    flex: 1;
-}
-
-.status-btn-compact {
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    color: white;
-    border: none;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition-base);
-    white-space: nowrap;
-}
-
-.status-btn-compact:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(139,92,246,0.4);
-}
-
-/* ===================================
-   AIRDROP POWERED BY - BOTTOM RIGHT OF AIRDROP TRACKER MODULE
-   =================================== */
-.airdrop-powered-by {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
-    font-style: italic;
-    text-align: right;
-}
-
-/* Share to Claim Section */
-.share-to-claim-section {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.share-to-claim-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-}
-
-.share-to-claim-subtitle {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1rem;
-}
-
 .share-buttons-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
 }
 
-.share-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: rgba(139, 92, 246, 0.2);
-    border: 2px solid rgba(139, 92, 246, 0.5);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: var(--transition-base);
-}
-
-.share-button:hover {
-    background: rgba(139, 92, 246, 0.4);
-    border-color: #8b5cf6;
-    transform: translateY(-2px);
-}
-
-.share-icon {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0) invert(1);
-}
-
-.share-button span {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #ffffff;
-}
-
-/* Phantom Promo - Better Spacing */
 .phantom-promo-compact {
     display: flex;
     align-items: center;
@@ -1876,106 +1296,6 @@ header {
     border-radius: var(--radius-lg);
     padding: 1.25rem 1.5rem;
     margin-bottom: 1.5rem;
-}
-
-/* ===================================
-   PHANTOM WALLET - COMPACT VERSION (NEW)
-   =================================== */
-.phantom-icon-compact {
-    width: 48px !important;
-    height: 48px !important;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.phantom-text-compact {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.phantom-get-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--ember-purple);
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    margin-top: 0.25rem;
-}
-
-.phantom-get-link:hover {
-    color: var(--ember-gold);
-    transform: translateX(4px);
-}
-
-.phantom-get-link::after {
-    content: '→';
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-.phantom-icon-large {
-    width: 56px;
-    height: 56px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.phantom-text-large {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.phantom-text-large strong {
-    display: block;
-    font-size: 1.05rem;
-    color: #ffffff;
-}
-
-.phantom-get-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    color: white;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: var(--transition-base);
-    align-self: flex-start;
-}
-
-.phantom-get-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139,92,246,0.4);
-}
-
-.ember-form-compact {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.form-group-compact {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.form-group-compact label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.required {
-    color: var(--ember-orange);
 }
 
 .input-compact {
@@ -1994,60 +1314,6 @@ header {
     outline: none;
     border-color: var(--ember-gold);
     box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.15);
-}
-
-.field-hint {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-style: italic;
-}
-
-.field-note {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.5;
-}
-
-/* Terms Checkbox */
-.terms-group {
-    margin: 0.5rem 0;
-}
-
-.terms-checkbox {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    cursor: pointer;
-}
-
-.terms-checkbox input[type="checkbox"] {
-    margin-top: 0.25rem;
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-}
-
-.terms-checkbox span {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.terms-link-btn {
-    display: inline;
-    color: var(--ember-purple);
-    font-weight: 600;
-    text-decoration: underline;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin: 0 4px;
-    transition: all 0.3s ease;
-}
-
-.terms-link-btn:hover {
-    color: var(--ember-gold);
 }
 
 .claim-btn-compact {
@@ -2071,51 +1337,9 @@ header {
     box-shadow: var(--ember-shadow-lg);
 }
 
-.message-box-compact {
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: var(--radius-md);
-    font-size: 0.9rem;
-    text-align: center;
-}
-
-.message-box-compact.success {
-    background: rgba(96, 165, 250, 0.2);
-    border: 1px solid rgba(96, 165, 250, 0.5);
-    color: #60a5fa;
-}
-
-.message-box-compact.error {
-    background: rgba(239, 68, 68, 0.2);
-    border: 1px solid rgba(239, 68, 68, 0.5);
-    color: #ef4444;
-}
-
-.message-box-compact.info {
-    background: rgba(139, 92, 246, 0.2);
-    border: 1px solid rgba(139, 92, 246, 0.5);
-    color: #8b5cf6;
-}
-
-@media (max-width: 968px) {
-    .ember-compact-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .ember-countdown-timer-redesigned,
-    .presale-stats-redesigned,
-    .share-buttons-grid,
-    .ember-stats-compact {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* ===================================
    CRYPTO COIN SECTION
    =================================== */
-
 .crypto-coin-section {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
@@ -2126,11 +1350,6 @@ header {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: center;
-    margin-bottom: 3rem;
-}
-
-.crypto-image {
-    text-align: center;
 }
 
 .crypto-coin-phone-frame {
@@ -2144,17 +1363,8 @@ header {
 }
 
 @keyframes gentleRock {
-    0%, 100% {
-        transform: rotate(-2deg);
-    }
-    50% {
-        transform: rotate(2deg);
-    }
-}
-
-.crypto-coin-screen-wrapper {
-    border-radius: 20px;
-    overflow: hidden;
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
 }
 
 .phoenix-coin-image {
@@ -2162,24 +1372,6 @@ header {
     max-width: 350px;
     height: auto;
     display: block;
-}
-
-.crypto-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.crypto-title {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    font-weight: 800;
-    color: #ffffff;
-}
-
-.crypto-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
 }
 
 .crypto-benefits {
@@ -2205,25 +1397,6 @@ header {
     transform: translateX(8px);
 }
 
-.benefit-icon {
-    flex-shrink: 0;
-    animation: spinOnScroll 1s ease-out;
-    animation-play-state: paused;
-}
-
-.benefit-icon.animate {
-    animation-play-state: running;
-}
-
-@keyframes spinOnScroll {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .custom-coin-icon-large,
 .custom-placement-icon-large {
     width: 64px;
@@ -2237,46 +1410,10 @@ header {
     object-fit: contain;
 }
 
-.benefit-content h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-}
-
-.benefit-content p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-/* Technology Modules */
-.technology-modules {
-    margin-top: 3rem;
-}
-
-.technology-modules-title {
-    font-size: clamp(1.8rem, 3.5vw, 2.3rem);
-    font-weight: 800;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.technology-modules-subtitle {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto 2rem;
-}
-
 .technology-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-    margin-bottom: 2rem;
 }
 
 .technology-card {
@@ -2290,189 +1427,6 @@ header {
 .technology-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--ember-shadow-xl);
-    border-color: var(--ember-orange);
-}
-
-.technology-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.technology-icon-container {
-    flex-shrink: 0;
-}
-
-.technology-icon {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-}
-
-.technology-header-text {
-    flex: 1;
-}
-
-.technology-badge {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: var(--radius-md);
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-}
-
-.outdoor-badge {
-    background: rgba(215, 51, 39, 0.2);
-    color: var(--ember-orange);
-}
-
-.indoor-badge {
-    background: rgba(139, 92, 246, 0.2);
-    color: #8b5cf6;
-}
-
-.technology-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.technology-description {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1.5rem;
-}
-
-.technology-features h5 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.75rem;
-}
-
-.technology-features ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-}
-
-.technology-features li {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.technology-features li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--ember-gold);
-    font-weight: 700;
-}
-
-.technology-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.tech-stat {
-    background: rgba(15, 15, 15, 0.6);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md);
-    padding: 1rem;
-    text-align: center;
-}
-
-.tech-stat-number {
-    display: block;
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--ember-gold);
-    margin-bottom: 0.25rem;
-}
-
-.tech-stat-label {
-    display: block;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.technology-highlight {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    background: rgba(215, 51, 39, 0.1);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1rem;
-}
-
-.tech-highlight-icon {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.tech-highlight-content strong {
-    display: block;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.5rem;
-}
-
-.tech-highlight-content p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-/* Combined Technology Power */
-.combined-technology-power {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: 2rem;
-}
-
-.combined-power-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.combined-power-icon {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-}
-
-.combined-power-header h4 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #ffffff;
-}
-
-.combined-power-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto 2rem;
 }
 
 .combined-power-benefits {
@@ -2496,74 +1450,15 @@ header {
 
 .combined-benefit:hover {
     background: rgba(215, 51, 39, 0.2);
-    border-color: var(--ember-orange);
     transform: translateY(-5px);
-}
-
-.combined-benefit-icon img {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
-}
-
-.combined-benefit-text strong {
-    display: block;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-}
-
-.combined-benefit-text p {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.85);
 }
 
 /* ===================================
    FEATURES SECTION
    =================================== */
-
 .features {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
-}
-
-.proven-model {
-    margin-bottom: 2rem;
-}
-
-.proven-badge {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.badge-icon {
-    flex-shrink: 0;
-}
-
-.custom-badge-icon {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-}
-
-.badge-content h4 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.75rem;
-}
-
-.badge-content p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
 }
 
 .features-grid {
@@ -2587,11 +1482,6 @@ header {
     border-color: var(--ember-orange);
 }
 
-.feature-icon {
-    display: inline-block;
-    margin-bottom: 1.5rem;
-}
-
 .feature-coin-icon,
 .feature-ar-discovery-icon,
 .feature-crypto-gaming-icon,
@@ -2603,23 +1493,14 @@ header {
     object-fit: contain;
 }
 
-.feature-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 1rem;
-}
-
-.feature-description {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-}
+/* END OF PART 2 *//* ===================================
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS
+   PART 3 OF 3 - APP SHOWCASE THROUGH END
+   =================================== */
 
 /* ===================================
    APP SHOWCASE SECTION
    =================================== */
-
 .app-showcase {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
@@ -2920,15 +1801,6 @@ header {
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
 }
 
-/* ===================================
-   LARGER BENEFIT HEADER ICONS (NEW)
-   =================================== */
-.benefit-header-icon {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-}
-
 .benefit-header-icon-large {
     width: 56px;
     height: 56px;
@@ -3028,7 +1900,7 @@ header {
 }
 
 /* ===================================
-   PRICING SECTION - BALANCED & COMPACT
+   PRICING & FINAL CTA SECTIONS
    =================================== */
 
 .pricing {
@@ -3040,422 +1912,14 @@ header {
     margin-bottom: 2rem;
 }
 
-.pricing-two-column {
+.journey-paths-container {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-    margin-bottom: 2rem;
-    align-items: stretch;
 }
 
-.pricing-solution {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: 2.5rem 2rem;
-    position: relative;
-    transition: var(--transition-base);
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    max-width: 100%;
-}
-
-.whitelabel-solution {
-    border-color: rgba(215,51,39,0.5);
-}
-
-.sdk-solution {
-    border-color: rgba(139,92,246,0.5);
-    background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
-}
-
-.pricing-solution:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--ember-shadow-xl);
-}
-
-.whitelabel-solution:hover {
-    border-color: var(--ember-orange);
-}
-
-.sdk-solution:hover {
-    border-color: #8b5cf6;
-}
-
-/* Badge Overlays */
-.coming-soon-badge-overlay,
-.early-2026-badge-overlay {
-    position: absolute;
-    top: -12px;
-    left: 20px;
-    padding: 6px 16px;
-    border-radius: 9999px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: white;
-    border: 2px solid rgba(240,165,0,0.6);
-    z-index: 10;
-}
-
-.coming-soon-badge-overlay-solid {
-    position: absolute;
-    top: -12px;
-    left: 20px;
-    padding: 6px 16px;
-    border-radius: 9999px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: white;
-    z-index: 10;
-    background: #d73327;
-    box-shadow: 0 4px 12px rgba(215, 51, 39, 0.5);
-    border: none;
-}
-
-.early-2026-badge-overlay-solid {
-    position: absolute;
-    top: -12px;
-    left: 20px;
-    padding: 6px 16px;
-    border-radius: 9999px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: white;
-    z-index: 10;
-    background: #8b5cf6;
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
-    border: none;
-}
-
-.solution-header {
-    margin-bottom: 1.5rem;
-}
-
-.solution-category-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-}
-
-.solution-badge {
-    display: inline-block;
-    background: rgba(215, 51, 39, 0.2);
-    color: var(--ember-gold);
-    padding: 8px 16px;
-    border-radius: var(--radius-lg);
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.sdk-badge {
-    background: rgba(139, 92, 246, 0.2);
-    color: #8b5cf6;
-}
-
-.solution-title {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 1rem;
-    line-height: 1.3;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-}
-
-.solution-subtitle {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.solution-price {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 2px solid rgba(215, 51, 39, 0.3);
-}
-
-.sdk-solution .solution-price {
-    border-bottom-color: rgba(139,92,246,0.3);
-}
-
-.price-amount {
-    font-size: 2.5rem;
-    font-weight: 800;
-}
-
-.golden-text {
-    color: var(--ember-gold);
-}
-
-.price-period {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.solution-description {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1.5rem;
-}
-
-.sdk-pricing-tiers {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    align-items: end;
-}
-
-.sdk-tier {
-    background: rgba(15, 15, 15, 0.6);
-    border: 2px solid rgba(139, 92, 246, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem 0.75rem;
-    text-align: center;
-    position: relative;
-    transition: var(--transition-base);
-}
-
-.sdk-tier.featured {
-    border-color: var(--ember-gold);
-    background: linear-gradient(135deg, 
-        rgba(240, 165, 0, 0.15) 0%, 
-        rgba(215, 51, 39, 0.1) 100%);
-    box-shadow: 0 0 30px rgba(240, 165, 0, 0.3);
-    transform: translateY(-8px);
-    padding: 1.5rem 0.75rem;
-}
-
-.sdk-tier:hover {
-    border-color: #8b5cf6;
-    transform: translateY(-2px);
-}
-
-.sdk-tier.featured:hover {
-    transform: translateY(-10px);
-}
-
-.tier-badge {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--ember-gradient-primary);
-    color: white;
-    padding: 4px 12px;
-    border-radius: var(--radius-full);
-    font-size: 0.75rem;
-    font-weight: 700;
-}
-
-.tier-name {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-}
-
-.tier-price {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: var(--ember-gold);
-    margin-bottom: 0.5rem;
-}
-
-.tier-price span {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.tier-info {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.solution-features {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    flex-grow: 1;
-}
-
-.solution-features li {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.solution-features li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--ember-gold);
-    font-weight: 700;
-}
-
-.solution-highlight-box {
-    background: rgba(215, 51, 39, 0.1);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-}
-
-.sdk-solution .solution-highlight-box {
-    background: rgba(139, 92, 246, 0.1);
-    border-color: rgba(139, 92, 246, 0.3);
-}
-
-.solution-highlight-icon {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.solution-highlight-content h5 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.5rem;
-}
-
-.solution-highlight-content p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.solution-cta {
-    text-align: center;
-    margin-top: auto;
-}
-
-.cta-primary-large {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    width: 100%;
-    padding: 16px 32px;
-    background: var(--ember-gradient-primary);
-    color: white;
-    border-radius: var(--radius-xl);
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: var(--transition-base);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: var(--ember-shadow-md);
-    margin-bottom: 0.75rem;
-}
-
-.cta-primary-large:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--ember-shadow-lg);
-}
-
-.cta-primary-large img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-}
-
-.journey-cta-icon-large {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-}
-
-.cta-footnote {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 1rem;
-}
-
-.cta-secondary-large {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    width: 100%;
-    padding: 14px 32px;
-    background: transparent;
-    color: white;
-    border: 2px solid rgba(139, 92, 246, 0.5);
-    border-radius: var(--radius-xl);
-    font-weight: 700;
-    font-size: 1.05rem;
-    text-decoration: none;
-    transition: var(--transition-base);
-    margin-bottom: 0.75rem;
-}
-
-.cta-secondary-large:hover {
-    background: rgba(139, 92, 246, 0.2);
-    border-color: #8b5cf6;
-    transform: translateY(-2px);
-}
-
-.cta-github-icon {
-    width: 20px;
-    height: 20px;
-}
-
-.journey-secondary-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--ember-gold);
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition-base);
-}
-
-.journey-secondary-link:hover {
-    color: var(--ember-orange);
-    transform: translateX(3px);
-}
-
-@media (max-width: 1024px) {
-    .pricing-two-column {
-        grid-template-columns: 1fr;
-    }
-    
-    .sdk-pricing-tiers {
-        grid-template-columns: 1fr;
-        align-items: stretch;
-    }
-    
-    .sdk-tier.featured {
-        transform: translateY(0);
-    }
-    
-    .sdk-tier.featured:hover {
-        transform: translateY(-2px);
-    }
-}
 /* ===================================
-   PHOENIX SEPARATOR - BETWEEN PRICING & FINAL CTA
+   PHOENIX SEPARATOR
    =================================== */
 
 .phoenix-separator-section {
@@ -3546,22 +2010,8 @@ header {
     color: rgba(255, 255, 255, 0.85);
 }
 
-@media (max-width: 768px) {
-    .phoenix-separator-section {
-        padding: 3rem var(--container-padding);
-    }
-    
-    .phoenix-separator-content {
-        gap: 2rem;
-    }
-    
-    .phoenix-separator-image {
-        max-width: 200px;
-    }
-}
-
 /* ===================================
-   FINAL CTA SECTION - BALANCED & COMPACT
+   FINAL CTA SECTION
    =================================== */
 
 .final-cta {
@@ -3604,161 +2054,28 @@ header {
     margin: 0 auto;
 }
 
-.journey-paths-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-}
-
-.journey-path-module {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: 2.5rem 2rem;
-    position: relative;
+.cta-primary-large {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 16px 32px;
+    background: var(--ember-gradient-primary);
+    color: white;
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
     transition: var(--transition-base);
-    display: flex;
-    flex-direction: column;
-}
-
-.journey-path-module.business-path {
-    border-color: rgba(215,51,39,0.5);
-}
-
-.journey-path-module.developer-path {
-    border-color: rgba(139,92,246,0.5);
-    background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
-}
-
-/* Journey badges overlay */
-.journey-path-module .coming-soon-badge-overlay,
-.journey-path-module .early-2026-badge-overlay {
-    position: absolute;
-    top: -12px;
-    left: 20px;
-}
-
-.journey-path-module:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--ember-shadow-xl);
-}
-
-.business-path:hover {
-    border-color: var(--ember-orange);
-}
-
-.developer-path:hover {
-    border-color: #8b5cf6;
-}
-
-.journey-path-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.journey-path-header .solution-category-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-}
-
-.journey-icon-container {
-    display: inline-block;
-    margin-bottom: 1.5rem;
-}
-
-.main-journey-icon-large {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-}
-
-.journey-path-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--ember-shadow-md);
     margin-bottom: 0.75rem;
 }
 
-.journey-path-subtitle {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.journey-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    flex-grow: 1;
-}
-
-.journey-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    background: rgba(15, 15, 15, 0.6);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    transition: var(--transition-base);
-}
-
-.developer-path .journey-step {
-    border-color: rgba(139,92,246,0.3);
-}
-
-.journey-step:hover {
-    background: rgba(215, 51, 39, 0.1);
-    border-color: var(--ember-orange);
-    transform: translateX(5px);
-}
-
-.developer-path .journey-step:hover {
-    background: rgba(139,92,246,0.1);
-    border-color: #8b5cf6;
-}
-
-.journey-step-number {
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    background: var(--ember-gradient-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: white;
-}
-
-.developer-path .journey-step-number {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-}
-
-.journey-step-content {
-    flex: 1;
-}
-
-.journey-step-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.5rem;
-}
-
-.journey-step-description {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.journey-cta {
-    text-align: center;
-    margin-top: auto;
+.cta-primary-large:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ember-shadow-lg);
 }
 
 .journey-cta-button {
@@ -3789,10 +2106,6 @@ header {
     box-shadow: var(--ember-shadow-lg);
 }
 
-.journey-cta-text {
-    font-size: 1.1rem;
-}
-
 /* ===================================
    SCROLL REVEAL ANIMATIONS
    =================================== */
@@ -3808,21 +2121,10 @@ header {
     transform: translateY(0);
 }
 
-.scroll-reveal.stagger-1 {
-    transition-delay: 0.1s;
-}
-
-.scroll-reveal.stagger-2 {
-    transition-delay: 0.2s;
-}
-
-.scroll-reveal.stagger-3 {
-    transition-delay: 0.3s;
-}
-
-.scroll-reveal.stagger-4 {
-    transition-delay: 0.4s;
-}
+.scroll-reveal.stagger-1 { transition-delay: 0.1s; }
+.scroll-reveal.stagger-2 { transition-delay: 0.2s; }
+.scroll-reveal.stagger-3 { transition-delay: 0.3s; }
+.scroll-reveal.stagger-4 { transition-delay: 0.4s; }
 
 /* ===================================
    RESPONSIVE DESIGN
@@ -3845,7 +2147,6 @@ header {
     .technology-grid,
     .showcase-content,
     .system-benefits,
-    .pricing-two-column,
     .journey-paths-container {
         grid-template-columns: 1fr;
     }
@@ -3872,7 +2173,23 @@ header {
         grid-template-columns: repeat(3, 1fr);
     }
     
-    .sdk-pricing-tiers {
+    .pricing-tiers-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mini-tier.featured-tier {
+        transform: translateY(0);
+    }
+    
+    .pricing-details-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .value-props-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .close-reasons-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -3883,9 +2200,7 @@ header {
         padding: calc(var(--section-padding) + 40px) var(--container-padding) var(--section-padding);
     }
     
-    /* ===================================
-       MOBILE 2x2 GRID FOR HERO FEATURES (NEW)
-       =================================== */
+    /* Mobile 2x2 grid for hero features */
     .hero-features-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
@@ -3902,9 +2217,7 @@ header {
         grid-template-columns: 1fr;
     }
     
-    /* ===================================
-       MOBILE PHONE IMAGE FIX (NEW)
-       =================================== */
+    /* Mobile phone image fix */
     .crypto-coin-phone-frame {
         display: block;
         padding: 10px;
@@ -3920,6 +2233,63 @@ header {
     .thumbnail-grid,
     .thumbnail-grid-laptop {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .parachute-crate-enlarged {
+        max-width: 280px;
+    }
+    
+    /* Modal mobile adjustments */
+    .airdrop-terms-modal-overlay,
+    .airdrop-info-modal-overlay {
+        padding: 1rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+    
+    .airdrop-terms-modal,
+    .airdrop-info-modal {
+        max-height: calc(100vh - 4rem);
+        margin: auto;
+    }
+    
+    .airdrop-terms-modal-header,
+    .airdrop-info-modal-header {
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .airdrop-terms-modal-header h3,
+    .airdrop-info-modal-header h3 {
+        font-size: 1.25rem;
+    }
+    
+    .airdrop-terms-modal-body,
+    .airdrop-info-modal-body {
+        padding: 1.5rem;
+    }
+    
+    .airdrop-terms-modal-footer,
+    .airdrop-info-modal-footer {
+        flex-direction: column;
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .airdrop-terms-agree-btn,
+    .airdrop-info-ok-btn,
+    .airdrop-terms-cancel-btn {
+        width: 100%;
+    }
+    
+    .phoenix-separator-content {
+        gap: 2rem;
+    }
+    
+    .phoenix-separator-image {
+        max-width: 200px;
+    }
+    
+    .phoenix-separator-section {
+        padding: 3rem var(--container-padding);
     }
 }
 
@@ -3952,7 +2322,6 @@ header {
         font-size: 0.65rem;
     }
     
-    /* Further reduce phone frame on very small screens */
     .crypto-coin-phone-frame {
         padding: 8px;
     }
@@ -3962,23 +2331,59 @@ header {
     }
 }
 
+/* ===================================
+   UTILITY CLASSES
+   =================================== */
+
+.golden-highlight {
+    color: var(--ember-gold);
+    font-weight: 600;
+}
+
+.main-section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.main-section-subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+}
+
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ===================================
+   CHATBOT & NAVBAR Z-INDEX FIXES
+   =================================== */
+
+.chatbot-button,
+.chatbot-widget {
+    z-index: 1000 !important;
+}
+
+body.modal-open .chatbot-button {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.navbar,
+header {
+    z-index: 2000 !important;
+}
+
 /**
  * ============================================
- * END OF LOCAL.CSS - FULLY UPDATED WITH ALL EDITS
- * ============================================
- * 
- * CHANGELOG:
- * - Added .free-tokens-banner-red with red gradient and glow animation
- * - Added .phantom-icon-compact (48px) for compact phantom wallet display
- * - Added .phantom-text-compact for flexible column layout
- * - Updated .phantom-get-link with 0.9rem font size
- * - Added .coming-soon-badge-overlay-solid and .early-2026-badge-overlay-solid
- * - Updated .airdrop-powered-by to be centered with transform
- * - Added .benefit-header-icon-large (56px) for larger benefit icons
- * - Added golden styling to .sdk-tier.featured with gold border and shadow
- * - Added mobile 2x2 grid for .hero-features-grid at 768px breakpoint
- * - Added mobile phone image fixes for .crypto-coin-phone-frame and .phoenix-coin-image
- * - All modal z-index fixes and body scroll prevention maintained
- * - All existing styles preserved
+ * END OF LOCAL.CSS - PART 3 OF 3 COMPLETE
  * ============================================
  */
