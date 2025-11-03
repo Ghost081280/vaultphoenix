@@ -189,9 +189,29 @@
     padding: 0.5rem 0;
 }
 
+.allocation-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ember-purple);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 .allocation-link-btn:hover {
     color: var(--ember-gold);
     transform: translateX(4px);
+}
+
+.allocation-link-btn::after {
+    content: '→';
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 /* ===================================
@@ -212,7 +232,9 @@
 }
 
 .phantom-get-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--ember-purple);
     font-weight: 600;
     text-decoration: none;
@@ -226,11 +248,10 @@
     transform: translateX(4px);
 }
 
-/* PHANTOM WALLET - ENLARGED LOGO (EXISTING) */
-.phantom-icon-enlarged {
-    width: 80px !important;
-    height: 80px !important;
-    object-fit: contain;
+.phantom-get-link::after {
+    content: '→';
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 /* ===================================
