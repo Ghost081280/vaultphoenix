@@ -3035,9 +3035,10 @@ header {
 
 .pricing-two-column {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin-bottom: 2rem;
+    align-items: stretch; /* Makes both cards same height */
 }
 
 .pricing-solution {
@@ -3049,6 +3050,7 @@ header {
     transition: var(--transition-base);
     display: flex;
     flex-direction: column;
+    min-height: 100%; /* Ensures both cards stretch to same height */
 }
 
 .whitelabel-solution {
