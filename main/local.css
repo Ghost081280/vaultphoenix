@@ -1342,16 +1342,51 @@ header {
 }
 
 /* ===================================
-   AIRDROP POWERED BY - BOTTOM RIGHT OF INNER MODULE (NEW)
+   AIRDROP SECTION - COMPACT & PURPLE
    =================================== */
-.airdrop-powered-by {
-    text-align: right;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
-    font-style: italic;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(215, 51, 39, 0.2);
+
+.ember-airdrop-section {
+    padding: var(--section-padding) var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
+}
+
+/* Parachute above module */
+.parachute-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.parachute-glow {
+    animation: parachuteFloat 4s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes parachuteFloat {
+    0%, 100% { 
+        transform: translateY(0) translateX(-10px);
+        filter: drop-shadow(0 0 25px rgba(240,165,0,0.6));
+    }
+    50% { 
+        transform: translateY(-30px) translateX(10px);
+        filter: drop-shadow(0 0 40px rgba(240,165,0,0.9));
+    }
+}
+
+.parachute-crate {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
+
+.ember-airdrop-outer-module {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
 }
 
 .ember-airdrop-compact-header {
@@ -1601,6 +1636,8 @@ header {
     border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--radius-lg);
     padding: 1rem;
+    position: relative;
+    padding-bottom: 3rem;
 }
 
 .status-checker-integrated h4 {
@@ -1640,20 +1677,28 @@ header {
 }
 
 .allocation-link-btn {
-    display: inline-block;
-    padding: 8px 16px;
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    color: white;
-    border-radius: var(--radius-md);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ember-purple);
     font-weight: 600;
-    font-size: 0.85rem;
     text-decoration: none;
-    transition: var(--transition-base);
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .allocation-link-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139,92,246,0.4);
+    color: var(--ember-gold);
+    transform: translateX(4px);
+}
+
+.allocation-link-btn::after {
+    content: '→';
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 .status-input-row {
@@ -1682,6 +1727,19 @@ header {
     box-shadow: 0 8px 24px rgba(139,92,246,0.4);
 }
 
+/* ===================================
+   AIRDROP POWERED BY - BOTTOM RIGHT INSIDE TRACKER MODULE (NEW)
+   =================================== */
+.airdrop-powered-by {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+    text-align: right;
+}
+
 /* Share to Claim Section */
 .share-to-claim-section {
     background: rgba(139, 92, 246, 0.1);
@@ -1694,7 +1752,7 @@ header {
 .share-to-claim-title {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #ffffff; /* Changed from #8b5cf6 to white */
+    color: #ffffff;
     margin-bottom: 0.5rem;
 }
 
@@ -1716,7 +1774,7 @@ header {
     align-items: center;
     gap: 0.5rem;
     padding: 1rem;
-    background: rgba(139, 92, 246, 0.2); /* Changed from white to purple */
+    background: rgba(139, 92, 246, 0.2);
     border: 2px solid rgba(139, 92, 246, 0.5);
     border-radius: var(--radius-md);
     cursor: pointer;
@@ -1724,7 +1782,7 @@ header {
 }
 
 .share-button:hover {
-    background: rgba(139, 92, 246, 0.4); /* Changed from white to darker purple */
+    background: rgba(139, 92, 246, 0.4);
     border-color: #8b5cf6;
     transform: translateY(-2px);
 }
@@ -1732,13 +1790,13 @@ header {
 .share-icon {
     width: 24px;
     height: 24px;
-    filter: brightness(0) invert(1); /* Makes icons white */
+    filter: brightness(0) invert(1);
 }
 
 .share-button span {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #ffffff; /* Changed from #333 to white */
+    color: #ffffff;
 }
 
 /* Phantom Promo - Better Spacing */
@@ -1987,7 +2045,9 @@ header {
     left: 0;
     color: var(--ember-gold);
     font-weight: 700;
-}/* ===================================
+}
+
+/* ===================================
    CRYPTO COIN SECTION
    =================================== */
 
