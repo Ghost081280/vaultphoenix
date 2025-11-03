@@ -255,25 +255,25 @@
 }
 
 /* ===================================
-   AIRDROP SECTION SPACING FIX (NEW)
+   AIRDROP POWERED BY - BOTTOM RIGHT INSIDE TRACKER MODULE (NEW)
    =================================== */
-.ember-compact-grid-with-spacing {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin-top: 2rem;
+.status-checker-integrated {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    position: relative;
+    padding-bottom: 3rem; /* Add space for the powered by text */
 }
 
-.status-checker-integrated-spacing {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(215, 51, 39, 0.2);
-}
-
-@media (max-width: 968px) {
-    .ember-compact-grid-with-spacing {
-        grid-template-columns: 1fr;
-    }
+.airdrop-powered-by {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+    text-align: right;
 }
 
 /* ===================================
