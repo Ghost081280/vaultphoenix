@@ -1,6 +1,6 @@
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   FULLY UPDATED WITH ALL NEW FEATURES
+   FULLY UPDATED WITH MODAL FIXES
    =================================== */
 
 /* ===================================
@@ -243,8 +243,23 @@
 }
 
 /* ===================================
-   AIRDROP TERMS MODAL (NEW)
+   BODY MODAL OPEN STATE
    =================================== */
+/* Prevent body scroll when modal is open - compatible with global.js */
+body.modal-open {
+    overflow: hidden !important;
+    padding-right: var(--scrollbar-width, 0);
+}
+
+/* Calculate scrollbar width to prevent content shift */
+body {
+    --scrollbar-width: 0px;
+}
+
+/* ===================================
+   MODAL Z-INDEX FIXES
+   =================================== */
+/* Ensure modals appear above everything including navbar and chatbot */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
     position: fixed;
@@ -254,7 +269,7 @@
     bottom: 0;
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(5px);
-    z-index: 3000;
+    z-index: 9999; /* Higher than navbar (2000) and chatbot (1000) */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -262,16 +277,32 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none; /* Prevent interaction when not active */
+    transform: translateZ(0); /* Create new stacking context */
+    backface-visibility: hidden;
 }
 
 .airdrop-terms-modal-overlay.active,
 .airdrop-info-modal-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto; /* Enable interaction when active */
 }
 
+/* Ensure modal backgrounds are truly full screen */
+.airdrop-terms-modal-overlay::before,
+.airdrop-info-modal-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* Ensure modal content is properly positioned */
 .airdrop-terms-modal,
 .airdrop-info-modal {
+    position: relative; /* Not fixed, parent handles positioning */
+    z-index: 10000; /* Above overlay */
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.98) 0%, 
         rgba(45, 24, 16, 0.95) 100%);
@@ -290,6 +321,50 @@
 .airdrop-terms-modal-overlay.active .airdrop-terms-modal,
 .airdrop-info-modal-overlay.active .airdrop-info-modal {
     transform: scale(1);
+}
+
+/* ===================================
+   PREVENT CONFLICTS WITH GLOBAL COMPONENTS
+   =================================== */
+/* Ensure footer stays below modals */
+#shared-components-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure main content doesn't overflow when modal is open */
+main#main-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure chatbot button stays accessible but below modals */
+.chatbot-button,
+.chatbot-widget {
+    z-index: 1000 !important; /* Below modals (9999) but above content */
+}
+
+/* When modal is open, dim chatbot slightly */
+body.modal-open .chatbot-button {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ===================================
+   SCROLLBAR WIDTH CALCULATION
+   =================================== */
+/* Calculate and store scrollbar width on page load */
+@supports (scrollbar-width: thin) {
+    body {
+        --scrollbar-width: 0px; /* Firefox handles this automatically */
+    }
+}
+
+/* For webkit browsers (Chrome, Safari, Edge) */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    body {
+        --scrollbar-width: calc(100vw - 100%);
+    }
 }
 
 .airdrop-terms-modal-header,
@@ -508,6 +583,30 @@
     color: var(--ember-gold);
 }
 
+/* Mobile modal improvements */
+@media (max-width: 768px) {
+    .airdrop-terms-modal-overlay,
+    .airdrop-info-modal-overlay {
+        padding: 1rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+    
+    .airdrop-terms-modal,
+    .airdrop-info-modal {
+        max-height: calc(100vh - 4rem);
+        margin: auto;
+    }
+    
+    /* Prevent body scroll bounce on iOS */
+    body.modal-open {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+}
+
 /* ===================================
    COMING SOON & EARLY 2026 BADGES - TRANSPARENT (NEW)
    =================================== */
@@ -661,9 +760,7 @@
 
 .early-2026 {
     background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-}
-
-.cta-card-header {
+}.cta-card-header {
     margin-bottom: 1.5rem;
 }
 
@@ -1891,9 +1988,7 @@
     font-size: 1rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
-}
-
-/* Technology Modules */
+}/* Technology Modules */
 .technology-modules {
     margin-top: 3rem;
 }
@@ -3448,6 +3543,6 @@
 
 /**
  * ============================================
- * END OF LOCAL.CSS - POLISHED & PERFECTED
+ * END OF LOCAL.CSS - WITH MODAL FIXES APPLIED
  * ============================================
  */
