@@ -1,10 +1,40 @@
 // ============================================
 // VAULT PHOENIX MAIN.HTML LOCAL JAVASCRIPT
-// FIXED VERSION - Compatible with global.js
+// FIXED VERSION v2.0 - Proper global.js integration
 // ============================================
 
 (function() {
 'use strict';
+
+// ============================================
+// WAIT FOR GLOBAL.JS TO COMPLETE
+// ============================================
+function waitForGlobalReady(callback) {
+    // Check if global.js has finished loading
+    if (window.sharedScriptReady) {
+        console.log('✅ Global.js ready - initializing main.js');
+        callback();
+        return;
+    }
+    
+    // Check every 50ms for global.js to be ready
+    let checkCount = 0;
+    const maxChecks = 100; // 5 seconds max wait
+    
+    const checkInterval = setInterval(() => {
+        checkCount++;
+        
+        if (window.sharedScriptReady) {
+            clearInterval(checkInterval);
+            console.log('✅ Global.js ready - initializing main.js');
+            callback();
+        } else if (checkCount >= maxChecks) {
+            clearInterval(checkInterval);
+            console.warn('⚠️ Global.js timeout - initializing anyway');
+            callback();
+        }
+    }, 50);
+}
 
 // ============================================
 // AIRDROP TERMS MODAL
@@ -27,13 +57,13 @@ function initializeTermsModal() {
         e.preventDefault();
         e.stopPropagation();
         modal.classList.add('active');
-        document.body.classList.add('modal-open'); // FIXED: Use class instead of inline style
+        document.body.classList.add('modal-open');
     });
     
     // Close modal
     function closeModal() {
         modal.classList.remove('active');
-        document.body.classList.remove('modal-open'); // FIXED: Use class instead of inline style
+        document.body.classList.remove('modal-open');
     }
     
     if (closeBtn) {
@@ -87,13 +117,13 @@ function initializeInfoModal() {
         e.preventDefault();
         e.stopPropagation();
         modal.classList.add('active');
-        document.body.classList.add('modal-open'); // FIXED: Use class instead of inline style
+        document.body.classList.add('modal-open');
     });
     
     // Close modal
     function closeModal() {
         modal.classList.remove('active');
-        document.body.classList.remove('modal-open'); // FIXED: Use class instead of inline style
+        document.body.classList.remove('modal-open');
     }
     
     if (closeBtn) {
@@ -335,41 +365,60 @@ function initializeAirdropTracker() {
 }
 
 // ============================================
-// INITIALIZATION
+// CHECK SHARED COMPONENTS LOADED
 // ============================================
-function init() {
-    console.log('🔥 Main page local JS initializing...');
+function checkSharedComponentsLoaded() {
+    const footer = document.querySelector('.footer');
+    const chatbot = document.querySelector('.chatbot-button-container');
     
-    // FIXED: Wait for both DOM and global.js to be ready
-    function waitForGlobal() {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                // Small delay to ensure global.js completes loading footer/chatbot
-                setTimeout(initializeAllComponents, 150);
-            });
-        } else {
-            // DOM already loaded, small delay for global.js to finish
-            setTimeout(initializeAllComponents, 150);
-        }
+    if (footer && chatbot) {
+        console.log('✅ Shared components verified: Footer and Chatbot present');
+        return true;
+    } else {
+        console.warn('⚠️ Missing shared components:', {
+            footer: !!footer,
+            chatbot: !!chatbot
+        });
+        return false;
     }
-    
-    function initializeAllComponents() {
-        // Initialize all components
-        initializeTermsModal();
-        initializeInfoModal();
-        initializeAirdropForm();
-        initializeStatusChecker();
-        initializeShareButtons();
-        initializeAirdropTracker();
-        
-        console.log('✅ Main page local JS initialized');
-        console.log('✅ Footer and chatbot should now be visible');
-    }
-    
-    waitForGlobal();
 }
 
-// Start initialization
-init();
+// ============================================
+// INITIALIZATION SEQUENCE
+// ============================================
+function initializeMainPage() {
+    console.log('🔥 Main page local JS initializing...');
+    
+    // Initialize all main-specific components
+    initializeTermsModal();
+    initializeInfoModal();
+    initializeAirdropForm();
+    initializeStatusChecker();
+    initializeShareButtons();
+    initializeAirdropTracker();
+    
+    // Verify shared components loaded
+    setTimeout(() => {
+        const componentsLoaded = checkSharedComponentsLoaded();
+        if (componentsLoaded) {
+            console.log('✅ Main page fully initialized with shared components');
+        } else {
+            console.error('❌ Shared components missing - check global.js loading');
+        }
+    }, 500);
+    
+    console.log('✅ Main page local JS initialized');
+}
+
+// ============================================
+// START INITIALIZATION
+// ============================================
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        waitForGlobalReady(initializeMainPage);
+    });
+} else {
+    waitForGlobalReady(initializeMainPage);
+}
 
 })();
