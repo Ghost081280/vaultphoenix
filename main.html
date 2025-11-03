@@ -135,9 +135,12 @@
         <div class="cta-grid">
             <!-- BUSINESS -->
             <div class="cta-card business-card">
-                <div class="badge coming-soon">Coming Soon!</div>
-                <img src="images/EmberCoinMoneyBag.PNG" alt="Business" class="cta-icon">
-                <h3>Business Path</h3>
+                <div class="cta-card-header">
+                    <p class="solution-category-title">For Marketers & Agencies</p>
+                </div>
+                <div class="coming-soon-badge-overlay">Coming Soon!</div>
+                <img src="images/AllRedLogo.png" alt="White-label" class="cta-icon">
+                <h3>White-Label Web App</h3>
                 <p>No coding. Launch in 24 hours.</p>
                 <div class="journey-list">
                     <div class="journey-item"><span>1</span> Sign Up</div>
@@ -150,9 +153,12 @@
 
             <!-- DEVELOPER -->
             <div class="cta-card developer-card">
-                <div class="badge early-2026">Early 2026</div>
-                <img src="images/IphoneVPLogo.PNG" alt="Developer" class="cta-icon">
-                <h3>Developer Path</h3>
+                <div class="cta-card-header">
+                    <p class="solution-category-title">For Developers & Tech Teams</p>
+                </div>
+                <div class="early-2026-badge-overlay">Early 2026</div>
+                <img src="images/GITHUBlogo.png" alt="SDK" class="cta-icon">
+                <h3>SDK</h3>
                 <p>Full SDK. Integrate in 1-2 weeks.</p>
                 <div class="journey-list">
                     <div class="journey-item"><span>1</span> Explore the SDK</div>
@@ -168,10 +174,36 @@
                 <a href="#pricing" class="secondary-link">See SDK Pricing →</a>
             </div>
         </div>
-    </div>
-</section>
 
-        <!-- Phoenix Token Evolution Section -->
+        <!-- 4 HERO FEATURES GRID - NEW ADDITION -->
+        <div class="hero-features-grid">
+            <div class="hero-feature-item">
+                <div class="main-image-glow">
+                    <img src="images/PhoenixBullseye.PNG" alt="GPS & Beacon Precision" class="hero-feature-icon">
+                </div>
+                <p class="hero-feature-text">GPS & Beacon Precision</p>
+            </div>
+            <div class="hero-feature-item">
+                <div class="main-image-glow">
+                    <img src="images/VPEmberCoin.PNG" alt="Real Crypto Rewards" class="hero-feature-icon">
+                </div>
+                <p class="hero-feature-text">Real Crypto Rewards</p>
+            </div>
+            <div class="hero-feature-item">
+                <div class="main-image-glow">
+                    <img src="images/EmberAnalytics.PNG" alt="Real-Time Analytics" class="hero-feature-icon">
+                </div>
+                <p class="hero-feature-text">Real-Time Analytics</p>
+            </div>
+            <div class="hero-feature-item">
+                <div class="main-image-glow">
+                    <img src="images/EmberRepeatArrows.PNG" alt="24hr Deployment" class="hero-feature-icon">
+                </div>
+                <p class="hero-feature-text">24hr Deployment</p>
+            </div>
+        </div>
+    </div>
+</section><!-- Phoenix Token Evolution Section -->
         <section class="ember-token-section-redesigned" id="ember-token">
             <div class="main-container">
                 <div class="ember-token-grid-redesigned">
@@ -306,19 +338,20 @@
             </div>
         </section>
 
-        <!-- $EMBER AIRDROP SECTION -->
+        <!-- $EMBER AIRDROP SECTION - UPDATED -->
         <section class="ember-airdrop-section" id="ember-airdrop">
             <div class="main-container">
-                <!-- ONE MAIN OUTER MODULE CONTAINER -->
-                <div class="ember-airdrop-outer-module scroll-reveal">
-                    
-                    <!-- Parachute Header with Animation -->
-                    <div class="parachute-header">
-                        <div class="main-image-glow parachute-glow">
-                            <img src="images/Parachutecrate.PNG" alt="$Ember Airdrop Parachute" class="parachute-crate" loading="lazy">
-                        </div>
+                <!-- Parachute OUTSIDE module -->
+                <div class="parachute-header">
+                    <div class="main-image-glow parachute-glow">
+                        <img src="images/Parachutecrate.PNG" alt="$Ember Airdrop Parachute" class="parachute-crate" loading="lazy">
                     </div>
+                </div>
 
+                <!-- NOW start module -->
+                <div class="ember-airdrop-outer-module scroll-reveal">
+                    <span class="airdrop-powered-by">Powered by the $Ember Airdrop System</span>
+                    
                     <!-- Compact Header -->
                     <div class="ember-airdrop-compact-header">
                         <div class="ember-header-text-compact">
@@ -409,6 +442,19 @@
                                 </div>
                             </div>
 
+                            <!-- Allocation Info - NEW ADDITION -->
+                            <div class="allocation-info">
+                                <h5>Community Airdrop Allocation</h5>
+                                <div class="allocation-details">
+                                    <strong>10%</strong> (≈16.7M EMBER) | <strong>≈$50K value</strong><br>
+                                    Rewards verified supporters who keep posts live until campaign end.<br>
+                                    <strong>Distribution:</strong> Only if $500K presale goal is reached; posts must still be live at verification; no vesting.
+                                </div>
+                                <div class="allocation-cta">
+                                    <a href="ember.html#development-fund" class="allocation-link-btn">View Full Token Allocation →</a>
+                                </div>
+                            </div>
+
                             <!-- Status Checker Integrated -->
                             <div class="status-checker-integrated">
                                 <h4>Check Claim Status</h4>
@@ -419,7 +465,7 @@
                             </div>
                         </div>
 
-                        <!-- Right: Claim Form -->
+                        <!-- Right: Claim Form - UPDATED FORM FIELDS -->
                         <div class="ember-inner-module">
                             <div class="ember-mini-header">
                                 <img src="images/VPEmberFlame.svg" alt="Claim" class="ember-mini-icon" loading="lazy">
@@ -464,15 +510,23 @@
                                 </div>
                             </div>
 
+                            <!-- UPDATED FORM FIELDS -->
                             <form id="ember-claim-form" class="ember-form-compact">
                                 <div class="form-group-compact">
-                                    <label for="claim-wallet">Solana Wallet <span class="required">*</span></label>
+                                    <label for="claim-name">Full Name (Optional)</label>
+                                    <input type="text" id="claim-name" class="input-compact" placeholder="Your full name">
+                                    <span class="field-note">Recommended for personalized communications</span>
+                                </div>
+
+                                <div class="form-group-compact">
+                                    <label for="claim-wallet">Solana Wallet Address <span class="required">*</span></label>
                                     <input type="text" id="claim-wallet" class="input-compact" placeholder="Your Solana wallet address" required>
                                 </div>
 
                                 <div class="form-group-compact">
-                                    <label for="claim-email">Email <span class="required">*</span></label>
-                                    <input type="email" id="claim-email" class="input-compact" placeholder="your@email.com" required>
+                                    <label for="claim-email">Email Address (Optional but Recommended)</label>
+                                    <input type="email" id="claim-email" class="input-compact" placeholder="your@email.com">
+                                    <span class="field-note">Recommended: Get notified when tokens are ready + campaign updates</span>
                                 </div>
 
                                 <div class="form-group-compact">
@@ -496,6 +550,21 @@
                             </form>
                             
                             <div id="ember-message-box" class="message-box-compact" style="display: none;"></div>
+
+                            <!-- Terms & Conditions Section - NEW ADDITION -->
+                            <div class="airdrop-terms-section">
+                                <h4>Airdrop Terms & Conditions</h4>
+                                <p>By participating, you agree to:</p>
+                                <ul>
+                                    <li>Each wallet address can claim only once</li>
+                                    <li>Social media posts must remain public until tokens are distributed</li>
+                                    <li>Vault Phoenix reserves the right to verify all submissions</li>
+                                    <li>Invalid or fraudulent submissions will be rejected</li>
+                                    <li>Token distribution occurs after presale verification</li>
+                                    <li>Limited to first 5,000 valid claims</li>
+                                    <li>We only pay out if we reach our $500K campaign goal</li>
+                                </ul>
+                            </div>
 
                             <!-- How It Works -->
                             <div class="how-it-works-compact">
@@ -744,7 +813,7 @@
     </div>
 </section>
 
-        <!-- Features Section -->
+        <!-- Features Section - UPDATED BATTLE-TESTED TEXT -->
         <section class="features" id="features">
             <div class="main-container">
                 <h2 class="main-section-title scroll-reveal">Self-Service Platform Powered by 6+ Years of Development</h2>
@@ -759,7 +828,7 @@
                         </span>
                         <div class="badge-content">
                             <h4>Battle-Tested Technology System</h4>
-                            <p><span class="golden-highlight">6+ years</span> of development and <span class="golden-highlight">over 12+ successful location-based AR games</span> have refined our marketing platform.</p>
+                            <p><span class="golden-highlight">6+ years</span> of development and <span class="golden-highlight">over 12+ successful location-based AR games</span> have refined our marketing platform. Now we're breaking new ground by adding crypto tokens for in-game rewards - same proven GPS & Beacon framework, enhanced with cryptocurrency incentives.</p>
                         </div>
                     </div>
                 </div>
@@ -1238,7 +1307,7 @@
     </div>
 </section>
 
-        <!-- Final CTA Section -->
+        <!-- Final CTA Section - UPDATED LABELS -->
         <section class="final-cta" id="contact">
             <div class="final-cta-background"></div>
             <div class="main-container">
@@ -1253,12 +1322,13 @@
                         <div class="journey-path-module business-path">
                             <div class="coming-soon-badge-overlay">Coming Soon!</div>
                             <div class="journey-path-header">
+                                <div class="solution-category-title">For Marketers & Agencies</div>
                                 <div class="journey-icon-container">
                                     <div class="main-image-glow">
                                         <img src="images/EmberCoinMoneyBag.PNG" alt="Business Path Icon" class="main-journey-icon-large" loading="lazy">
                                     </div>
                                 </div>
-                                <h3 class="journey-path-title">For Businesses</h3>
+                                <h3 class="journey-path-title">White-Label Apps</h3>
                                 <p class="journey-path-subtitle">Launch your location-based crypto marketing campaign</p>
                             </div>
                             
@@ -1305,6 +1375,7 @@
                         <div class="journey-path-module developer-path">
                             <div class="early-2026-badge-overlay">Early 2026</div>
                             <div class="journey-path-header">
+                                <div class="solution-category-title">For Developers & Tech Teams</div>
                                 <div class="journey-icon-container">
                                     <div class="main-image-glow">
                                         <img src="images/IphoneVPLogo.PNG" alt="Developer Path Icon" class="main-journey-icon-large" loading="lazy">
