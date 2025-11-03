@@ -1,662 +1,921 @@
-<!-- PART 3 OF 3 - MODULE 2 (PRICING) AND MODULE 3 (THE CLOSE) -->
-<!-- ==================================================================================
-     This file continues from Part 2 and completes the document
-     ==================================================================================
--->
-
-<!-- ===================================
-     MODULE 2 (MIDDLE) - THE PRICING/DETAILS
-     Two persona pricing sections
-     =================================== -->
-<section class="pricing" id="pricing">
-    <div class="main-container">
-        <div class="pricing-intro">
-            <h2 class="main-section-title scroll-reveal">Investment That Pays For Itself</h2>
-            <p class="main-section-subtitle scroll-reveal">Choose the solution that matches your business model. Both paths include everything you need to succeed.</p>
-        </div>
-
-        <!-- MARKETER JOURNEY MODULE 2 - PRICING/DETAILS -->
-        <div class="pricing-solution-wrapper marketer-pricing-module scroll-reveal" id="marketer-pricing">
-            <div class="coming-soon-badge-overlay-solid">Coming Soon!</div>
-            <div class="solution-header">
-                <div class="solution-category-title">For Marketers & Agencies</div>
-                <div class="solution-badge">White-Label Web App Solution</div>
-                <h3 class="solution-title">Professional-Grade AR Crypto Platform</h3>
-                <p class="solution-subtitle">Everything you need to launch and run profitable location-based marketing campaigns. No technical skills required.</p>
-            </div>
-
-            <div class="pricing-details-container">
-                <div class="pricing-col">
-                    <div class="pricing-tier-header">
-                        <h4>One-Time Setup</h4>
-                        <div class="price-display">
-                            <span class="price-amount">$149</span>
-                            <span class="price-note">Pay once, yours forever</span>
-                        </div>
-                    </div>
-                    <ul class="pricing-features-list">
-                        <li><strong>Fully-Branded Web App:</strong> At yourdomain.com/game-name</li>
-                        <li><strong>Complete Management System:</strong> Control every aspect of your campaigns</li>
-                        <li><strong>GPS & Beacon Coin Placement:</strong> Place coins anywhere, indoors or outdoors</li>
-                        <li><strong>Real-Time Analytics Dashboard:</strong> Track ROI, player activity, sponsor engagement</li>
-                        <li><strong>Professional Design Package:</strong> Custom branding, logos, color schemes</li>
-                        <li><strong>Launch Support:</strong> 2-hour onboarding call + campaign strategy session</li>
-                    </ul>
-                </div>
-
-                <div class="pricing-col">
-                    <div class="pricing-tier-header">
-                        <h4>Monthly Management</h4>
-                        <div class="price-display">
-                            <span class="price-amount">Starting at $149/mo</span>
-                            <span class="price-note">Scale as you grow</span>
-                        </div>
-                    </div>
-                    
-                    <div class="pricing-tiers-grid">
-                        <div class="mini-tier">
-                            <div class="mini-tier-name">Starter</div>
-                            <div class="mini-tier-price">$149<span>/mo</span></div>
-                            <div class="mini-tier-details">
-                                <p>5 active campaigns</p>
-                                <p>50K player interactions</p>
-                                <p>Basic analytics</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mini-tier featured-tier">
-                            <div class="tier-badge-mini">Most Popular</div>
-                            <div class="mini-tier-name">Growth</div>
-                            <div class="mini-tier-price">$299<span>/mo</span></div>
-                            <div class="mini-tier-details">
-                                <p>20 active campaigns</p>
-                                <p>250K player interactions</p>
-                                <p>Advanced analytics + reporting</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mini-tier">
-                            <div class="mini-tier-name">Enterprise</div>
-                            <div class="mini-tier-price">$599<span>/mo</span></div>
-                            <div class="mini-tier-details">
-                                <p>Unlimited campaigns</p>
-                                <p>1M+ player interactions</p>
-                                <p>White-glove support</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="value-props-section">
-                <h4 class="value-props-title">Why Marketers Choose Us</h4>
-                <div class="value-props-grid">
-                    <div class="value-prop-item">
-                        <div class="value-prop-icon">
-                            <div class="main-image-glow">
-                                <img src="images/EmberRepeatArrows.PNG" alt="24hr Deployment" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="value-prop-text">
-                            <strong>24-Hour Deployment</strong>
-                            <p>From signup to live campaign faster than any competitor</p>
-                        </div>
-                    </div>
-                    
-                    <div class="value-prop-item">
-                        <div class="value-prop-icon">
-                            <div class="main-image-glow">
-                                <img src="images/VPEmberCoin.PNG" alt="Free Tokens" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="value-prop-text">
-                            <strong>$100 in FREE $Ember Tokens</strong>
-                            <p>Pre-loaded into your management system to start campaigns immediately</p>
-                        </div>
-                    </div>
-                    
-                    <div class="value-prop-item">
-                        <div class="value-prop-icon">
-                            <div class="main-image-glow">
-                                <img src="images/EmberCoinMoneyBag.PNG" alt="Revenue Model" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="value-prop-text">
-                            <strong>Multiple Revenue Streams</strong>
-                            <p>Sell coin placements, run your own campaigns, or white-label the entire platform</p>
-                        </div>
-                    </div>
-                    
-                    <div class="value-prop-item">
-                        <div class="value-prop-icon">
-                            <div class="main-image-glow">
-                                <img src="images/PhoenixGoldTrophy.PNG" alt="Support" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="value-prop-text">
-                            <strong>Campaign Strategy Support</strong>
-                            <p>Expert guidance on maximizing ROI from location-based AR campaigns</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="solution-cta-bottom">
-                <a href="mailto:contact@vaultphoenix.com?subject=White-Label Marketing Solution" class="cta-primary-large">
-                    <div class="main-image-glow">
-                        <img src="images/VPEmberFlame.svg" alt="Start Now" class="journey-cta-icon-large" loading="lazy">
-                    </div>
-                    <span>Get Started Today</span>
-                </a>
-                <p class="cta-footnote-bottom">Talk to a campaign strategist within 2 hours</p>
-            </div>
-        </div>
-
-        <!-- DEVELOPER JOURNEY MODULE 2 - PRICING/DETAILS -->
-        <div class="pricing-solution-wrapper developer-pricing-module scroll-reveal" id="developer-pricing">
-            <div class="early-2026-badge-overlay-solid">Early 2026</div>
-            <div class="solution-header">
-                <div class="solution-category-title">For Developers & Tech Teams</div>
-                <div class="solution-badge sdk-badge">SDK Integration Solution</div>
-                <h3 class="solution-title">Battle-Tested AR Crypto SDK</h3>
-                <p class="solution-subtitle">Add proven location-based AR gaming to your existing app. Keep your brand, your users, and your revenue. Just add our engine.</p>
-            </div>
-
-            <div class="pricing-details-container">
-                <div class="pricing-col">
-                    <div class="pricing-tier-header">
-                        <h4>SDK Core Package</h4>
-                        <div class="price-display">
-                            <span class="price-amount">100% FREE</span>
-                            <span class="price-note">Forever. No licensing fees.</span>
-                        </div>
-                    </div>
-                    <ul class="pricing-features-list">
-                        <li><strong>Complete SDK Access:</strong> Full source code, documentation, and examples</li>
-                        <li><strong>GPS & Beacon Integration:</strong> Outdoor and indoor location technology</li>
-                        <li><strong>Crypto Wallet Support:</strong> Multi-chain compatibility built-in</li>
-                        <li><strong>AR Coin Engine:</strong> Complete collectible and reward system</li>
-                        <li><strong>Management API:</strong> Programmatic campaign control</li>
-                        <li><strong>Technical Documentation:</strong> Comprehensive guides and code samples</li>
-                        <li><strong>Community Support:</strong> GitHub issues, Discord, and developer forums</li>
-                    </ul>
-                </div>
-
-                <div class="pricing-col">
-                    <div class="pricing-tier-header">
-                        <h4>Management System Access</h4>
-                        <div class="price-display">
-                            <span class="price-amount">Starting at $49/mo</span>
-                            <span class="price-note">Pay only for API usage</span>
-                        </div>
-                    </div>
-                    
-                    <div class="pricing-tiers-grid">
-                        <div class="mini-tier">
-                            <div class="mini-tier-name">Starter</div>
-                            <div class="mini-tier-price">$49<span>/mo</span></div>
-                            <div class="mini-tier-details">
-                                <p>10K API calls/month</p>
-                                <p>Standard support</p>
-                                <p>Community access</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mini-tier featured-tier">
-                            <div class="tier-badge-mini">Best Value</div>
-                            <div class="mini-tier-name">Growth</div>
-                            <div class="mini-tier-price">$149<span>/mo</span></div>
-                            <div class="mini-tier-details">
-                                <p>100K API calls/month</p>
-                                <p>Priority support</p>
-                                <p>Advanced analytics</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mini-tier">
-                            <div class="mini-tier-name">Enterprise</div>
-                            <div class="mini-tier-price">$399<span>/mo</span></div>
-                            <div class="mini-tier-details">
-                                <p>500K API calls/month</p>
-                                <p>Dedicated support</p>
-                                <p>Custom SLAs</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="value-props-section">
-                <h4 class="value-props-title">Why Developers Choose Us</h4>
-                <div class="value-props-grid">
-                    <div class="value-prop-item">
-                        <div class="value-prop-icon">
-                            <div class="main-image-glow">
-                                <img src="images/PhoenixGoldTrophy.PNG" alt="Battle Tested" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="value-prop-text">
-                            <strong>6+ Years of Development</strong>
-                            <p>Battle-tested in 12+ successful AR games. Zero guesswork.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="value-prop-item">
-                        <div class="value-prop-icon">
-                            <div class="main-image-glow">
-                                <img src="images/VPEmberCoin.PNG" alt="Free Tokens" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="value-prop-text">
-                            <strong>$100 in FREE $Ember Tokens</strong>
-                            <p>Test with real tokens before you commit to a package tier</p>
-                        </div>
-                    </div>
-                    
-                    <div class="value-prop-item">
-                        <div class="value-prop-icon">
-                            <div class="main-image-glow">
-                                <img src="images/EmberRepeatArrows.PNG" alt="Fast Integration" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="value-prop-text">
-                            <strong>1-2 Week Integration</strong>
-                            <p>Skip months of development. Get to market fast.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="value-prop-item">
-                        <div class="value-prop-icon">
-                            <div class="main-image-glow">
-                                <img src="images/CustomDevelopment.PNG" alt="Full Control" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="value-prop-text">
-                            <strong>Your Brand, Your Rules</strong>
-                            <p>Keep your app name, URL, and users. Just add AR crypto gaming power.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="solution-cta-bottom">
-                <a href="mailto:contact@vaultphoenix.com?subject=SDK Integration Inquiry" class="cta-primary-large">
-                    <div class="main-image-glow">
-                        <img src="images/VPEmberFlame.svg" alt="Start Building" class="journey-cta-icon-large" loading="lazy">
-                    </div>
-                    <span>Start Building Today</span>
-                </a>
-                <p class="cta-footnote-bottom">Available early 2026 • Join the waitlist now</p>
-                <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" rel="noopener noreferrer" class="journey-secondary-link">
-                    Explore SDK on GitHub <span>→</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-        <!-- PHOENIX SEPARATOR - TOOLS & EXPERTISE -->
-<div class="phoenix-separator-section">
-    <div class="main-container">
-        <div class="phoenix-separator-content">
-            <div class="phoenix-separator-glow">
-                <img src="images/PhoenixDesign.PNG" alt="Vault Phoenix - Built for You" class="phoenix-separator-image" loading="lazy">
-            </div>
-            <div class="phoenix-separator-text">
-                <h3 class="phoenix-separator-title">Built by Experts. <span class="golden-highlight">Powered by Phoenix Fire.</span></h3>
-                <p class="phoenix-separator-subtitle">Professional-grade AR crypto gaming technology, battle-tested and ready to deploy for your business.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ===================================
-     MODULE 3 (BOTTOM) - THE CLOSE
-     Final conversion push for both personas
-     =================================== -->
-<section class="final-cta" id="final-cta">
-    <div class="final-cta-background"></div>
-    <div class="main-container">
-        <div class="final-cta-content">
-            <div class="final-cta-header">
-                <h2 class="final-cta-title scroll-reveal">Ready to Transform Engagement Into Revenue?</h2>
-                <p class="final-cta-subtitle scroll-reveal">Choose your path. Start building today. See results tomorrow.</p>
-            </div>
-            
-            <div class="journey-paths-container">
-                <!-- MARKETER JOURNEY MODULE 3 - THE CLOSE -->
-                <div class="journey-path-module business-path scroll-reveal">
-                    <div class="coming-soon-badge-overlay-solid">Coming Soon!</div>
-                    
-                    <div class="journey-path-header">
-                        <p class="solution-category-title">For Marketers & Agencies</p>
-                        <div class="journey-icon-container">
-                            <div class="main-image-glow">
-                                <img src="images/AllRedLogo.png" alt="Marketer Success" class="main-journey-icon-large" loading="lazy">
-                            </div>
-                        </div>
-                        <h3 class="journey-path-title">From Zero to Revenue in 24 Hours</h3>
-                        <p class="journey-path-subtitle">Join marketers who are already generating revenue from location-based AR crypto campaigns</p>
-                    </div>
-                    
-                    <div class="close-reasons-grid">
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>Try Risk-Free</strong>
-                                <p>Test the $Ember Hunt app and management system before you buy. See exactly what you're getting.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>Launch Today, Earn Tomorrow</strong>
-                                <p>Our fastest client launched their first campaign in 4 hours and closed their first sponsor deal the next day.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>$100 in FREE Tokens</strong>
-                                <p>Start running campaigns immediately with pre-loaded $Ember tokens. No additional investment required.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>Zero Technical Skills Needed</strong>
-                                <p>If you can use Facebook, you can run AR crypto campaigns. We handle all the technical complexity.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>Multiple Revenue Models</strong>
-                                <p>Sell coin placements to local businesses, run branded campaigns, or white-label the entire platform to clients.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>We Support You All The Way</strong>
-                                <p>2-hour onboarding call, campaign strategy session, and ongoing support. You're never alone.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="urgency-block">
-                        <div class="urgency-icon">
-                            <div class="main-image-glow">
-                                <img src="images/EmberCoinRocket.PNG" alt="Limited Time" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="urgency-text">
-                            <h4>First-Mover Advantage Available Now</h4>
-                            <p>Be the first AR crypto gaming platform in your market. Lock in your territory before your competitors do. Early adopters are seeing 3x higher engagement rates.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="journey-cta">
-                        <a href="mailto:contact@vaultphoenix.com?subject=Ready to Launch White-Label Campaign" class="journey-cta-button journey-cta-button-large">
-                            <div class="main-image-glow">
-                                <img src="images/VPEmberFlame.svg" alt="Launch Now" class="journey-cta-icon-large" loading="lazy">
-                            </div>
-                            <span class="journey-cta-text">Launch Your Campaign Now</span>
-                        </a>
-                        <p class="journey-cta-subtext">Talk to a strategist within 2 hours • Launch within 24 hours</p>
-                        <a href="#showcase" class="journey-secondary-link">
-                            Try the Live Demo First <span>→</span>
-                        </a>
-                    </div>
-                    
-                    <div class="satisfaction-guarantee">
-                        <p><strong>Our Promise:</strong> If you're not generating sponsor interest within 30 days, we'll work with you for free until you do.</p>
-                    </div>
-                </div>
-                
-                <!-- DEVELOPER JOURNEY MODULE 3 - THE CLOSE -->
-                <div class="journey-path-module developer-path scroll-reveal">
-                    <div class="early-2026-badge-overlay-solid">Early 2026</div>
-                    
-                    <div class="journey-path-header">
-                        <p class="solution-category-title">For Developers & Tech Teams</p>
-                        <div class="journey-icon-container">
-                            <div class="main-image-glow">
-                                <img src="images/CustomDevelopment.PNG" alt="Developer Success" class="main-journey-icon-large" loading="lazy">
-                            </div>
-                        </div>
-                        <h3 class="journey-path-title">Skip 6 Years of Development</h3>
-                        <p class="journey-path-subtitle">Integrate battle-tested AR crypto gaming in weeks, not years</p>
-                    </div>
-                    
-                    <div class="close-reasons-grid">
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>100% FREE SDK Forever</strong>
-                                <p>No licensing fees. No hidden costs. Full source code access. You only pay for management system API calls.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>Test Everything First</strong>
-                                <p>Free testing environment with real tokens. Experience the full platform before selecting a package tier.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>$100 in FREE Tokens</strong>
-                                <p>Pre-loaded $Ember tokens in your management system. Start testing immediately with zero investment.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>Battle-Tested Technology</strong>
-                                <p>6+ years of development. 12+ successful AR games. Proven GPS & Beacon framework. No experimental tech here.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>Keep Your Brand & Revenue</strong>
-                                <p>Your app. Your URL. Your users. Your revenue. We're just the AR engine under the hood.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="close-reason-item">
-                            <div class="close-reason-icon">✓</div>
-                            <div class="close-reason-text">
-                                <strong>Comprehensive Documentation</strong>
-                                <p>Detailed integration guides, code samples, API references, and active community support on GitHub and Discord.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="urgency-block">
-                        <div class="urgency-icon">
-                            <div class="main-image-glow">
-                                <img src="images/EmberCoinRocket.PNG" alt="Early Access" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="urgency-text">
-                            <h4>Early 2026 Release • Join the Waitlist Now</h4>
-                            <p>Be among the first developers with access to the SDK. Early adopters get priority support, exclusive features, and discounted API pricing for life.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="journey-cta">
-                        <a href="mailto:contact@vaultphoenix.com?subject=SDK Early Access Request" class="journey-cta-button journey-cta-button-large">
-                            <div class="main-image-glow">
-                                <img src="images/VPEmberFlame.svg" alt="Join Waitlist" class="journey-cta-icon-large" loading="lazy">
-                            </div>
-                            <span class="journey-cta-text">Join SDK Waitlist</span>
-                        </a>
-                        <p class="journey-cta-subtext">Early 2026 release • Priority access for waitlist members</p>
-                        <a href="https://github.com/Vault-Phoenix-SDK" target="_blank" rel="noopener noreferrer" class="journey-secondary-link">
-                            Explore SDK Documentation <span>→</span>
-                        </a>
-                    </div>
-                    
-                    <div class="satisfaction-guarantee">
-                        <p><strong>Our Promise:</strong> If you can't integrate within 2 weeks, we'll provide hands-on integration support at no additional cost.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    </main>  <!-- ✅ CLOSE MAIN TAG HERE - NO MORE SECTIONS AFTER THIS -->
-
-    <!-- ===================================
-         MODALS - OUTSIDE MAIN CONTENT
-         =================================== -->
-    
-    <!-- AIRDROP TERMS MODAL -->
-    <div class="airdrop-terms-modal-overlay" id="airdrop-terms-modal">
-        <div class="airdrop-terms-modal">
-            <div class="airdrop-terms-modal-header">
-                <h3>Airdrop Terms & Conditions</h3>
-                <button type="button" class="airdrop-terms-close" id="close-terms-modal">×</button>
-            </div>
-            <div class="airdrop-terms-modal-body">
-                <p><strong>By participating in the $Ember Airdrop, you agree to the following terms:</strong></p>
-                <ul>
-                    <li>Each wallet address can claim only once</li>
-                    <li>Social media posts must remain public until tokens are distributed</li>
-                    <li>Vault Phoenix reserves the right to verify all submissions</li>
-                    <li>Invalid or fraudulent submissions will be rejected</li>
-                    <li>Token distribution occurs after presale verification</li>
-                    <li>Limited to first 5,000 valid claims</li>
-                    <li>We only pay out if we reach our $500K campaign goal</li>
-                    <li>Your post must still be live at the time of verification</li>
-                    <li>Gas fees for claiming tokens are paid by the recipient</li>
-                    <li>Vault Phoenix is not responsible for wallet security or lost private keys</li>
-                </ul>
-                <p><strong>Important:</strong> You must keep your social media post live until the campaign ends and verification is complete. If your post is deleted or made private before verification, you will not be eligible for the airdrop.</p>
-            </div>
-            <div class="airdrop-terms-modal-footer">
-                <button type="button" class="airdrop-terms-agree-btn" id="agree-terms-btn">✓ I Agree</button>
-                <button type="button" class="airdrop-terms-cancel-btn" id="cancel-terms-btn">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- AIRDROP INFO MODAL -->
-    <div class="airdrop-info-modal-overlay" id="airdrop-info-modal">
-        <div class="airdrop-info-modal">
-            <div class="airdrop-info-modal-header">
-                <h3>How the $EMBER Airdrop Works</h3>
-                <button type="button" class="airdrop-info-close" id="close-info-modal">×</button>
-            </div>
-            <div class="airdrop-info-modal-body">
-                <div class="airdrop-info-step">
-                    <div class="airdrop-info-step-number">1</div>
-                    <div class="airdrop-info-step-content">
-                        <h4>Share the Campaign</h4>
-                        <p>Connect your wallet and share the campaign post using X, Facebook, or Telegram</p>
-                    </div>
-                </div>
-                <div class="airdrop-info-step">
-                    <div class="airdrop-info-step-number">2</div>
-                    <div class="airdrop-info-step-content">
-                        <h4>Keep Your Post Live</h4>
-                        <p>Keep your post live until the campaign ends (45 days)</p>
-                    </div>
-                </div>
-                <div class="airdrop-info-step">
-                    <div class="airdrop-info-step-number">3</div>
-                    <div class="airdrop-info-step-content">
-                        <h4>Verification Process</h4>
-                        <p>After campaign ends, our system verifies posts via API</p>
-                    </div>
-                </div>
-                <div class="airdrop-info-step">
-                    <div class="airdrop-info-step-number">4</div>
-                    <div class="airdrop-info-step-content">
-                        <h4>Receive Tokens</h4>
-                        <p>If your post is still up AND we hit the $500K goal, you automatically qualify</p>
-                    </div>
-                </div>
-                <div class="airdrop-info-step">
-                    <div class="airdrop-info-step-number">5</div>
-                    <div class="airdrop-info-step-content">
-                        <h4>Claim Your Tokens</h4>
-                        <p>Gas fees paid by recipient when claiming. If presale goal isn't met or your post is gone, no airdrop issued</p>
-                    </div>
-                </div>
-            </div>
-            <div class="airdrop-info-modal-footer">
-                <button type="button" class="airdrop-info-ok-btn" id="ok-info-btn">Got It!</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================================
-         SHARED COMPONENTS CONTAINER
-         Footer & Chatbot loaded by global.js
-         =================================== -->
-    <div id="shared-components-container"></div>
-
-    <!-- ===================================
-         SCRIPTS - Load global.js FIRST
-         =================================== -->
-    <script src="shared/global.js"></script>
-    <script src="main/local.js"></script>
-</body>
-</html>
-
-<!-- END OF PART 3 -->
-<!-- ==================================================================================
-     PART 3 OF 3 COMPLETE - DOCUMENT FINISHED
-     
-     This part includes:
-     ✅ MODULE 2 - THE PRICING/DETAILS
-        - Marketer pricing with 3 tiers (Starter/Growth/Enterprise)
-        - Developer pricing with FREE SDK + 3 API tiers
-        - Growth tiers highlighted in gold
-        - Value propositions for both personas
-        - "Why Choose Us" sections
-     
-     ✅ MODULE 3 - THE CLOSE
-        - Marketer: "From Zero to Revenue in 24 Hours"
-        - Developer: "Skip 6 Years of Development"
-        - 6 compelling reasons to act NOW for each persona
-        - Urgency blocks (first-mover advantage/early access)
-        - Satisfaction guarantees
-        - Multiple CTAs with clear next steps
-     
-     ✅ Phoenix Separator
-     ✅ Modals (Airdrop Terms & Info)
-     ✅ Shared components container
-     ✅ Scripts
-     ✅ Closing HTML tags
-     
-     ALL 6 CONVERSION MODULES COMPLETE:
-     Module 1 (Hook) → Module 2 (Pricing) → Module 3 (Close)
-     For both Marketers & Developers
-     
-     COMBINE ALL 3 PARTS TO CREATE YOUR COMPLETE main.html FILE!
-     ==================================================================================
--->/* ===================================
+/* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 2 OF 3 - MODALS THROUGH FEATURES
+   PART 1 OF 3 - CORRECTED (NO GLOBAL OVERRIDES)
+   =================================== */
+
+/* ===================================
+   FREE $EMBER TOKENS BANNER - ORIGINAL PURPLE
+   =================================== */
+.free-tokens-banner {
+    background: linear-gradient(135deg, 
+        rgba(139, 92, 246, 0.15) 0%, 
+        rgba(124, 58, 237, 0.15) 100%);
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: subtle-glow 3s ease-in-out infinite;
+}
+
+@keyframes subtle-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+    }
+}
+
+/* ===================================
+   FREE $EMBER TOKENS BANNER - RED VERSION
+   =================================== */
+.free-tokens-banner-red {
+    background: linear-gradient(135deg, 
+        rgba(215, 51, 39, 0.15) 0%, 
+        rgba(198, 40, 40, 0.15) 100%);
+    border: 2px solid rgba(215, 51, 39, 0.4);
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: subtle-glow-red 3s ease-in-out infinite;
+}
+
+@keyframes subtle-glow-red {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(215, 51, 39, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(215, 51, 39, 0.5);
+    }
+}
+
+.free-tokens-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.free-tokens-text {
+    flex: 1;
+}
+
+.free-tokens-text strong {
+    display: block;
+    color: var(--ember-gold);
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+}
+
+.free-tokens-text p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    filter: brightness(0) invert(1);
+}
+
+/* ===================================
+   MODULE 1 - THE HOOK STYLES
+   =================================== */
+
+.hook-compelling-copy {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+}
+
+.hook-benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.hook-benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(15, 15, 15, 0.4);
+    border-radius: var(--radius-md);
+    transition: var(--transition-base);
+}
+
+.hook-benefit-item:hover {
+    background: rgba(215, 51, 39, 0.1);
+    transform: translateX(3px);
+}
+
+.developer-card .hook-benefit-item:hover {
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.hook-check {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--ember-gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: white;
+}
+
+.developer-card .hook-check {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.hook-benefit-item strong {
+    color: var(--ember-gold);
+    font-size: 0.95rem;
+}
+
+.hook-use-cases {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(215, 51, 39, 0.05);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-lg);
+}
+
+.developer-card .hook-use-cases {
+    background: rgba(139, 92, 246, 0.05);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+.hook-use-case-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hook-use-case-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.hook-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(215, 51, 39, 0.2);
+    border: 1px solid rgba(215, 51, 39, 0.4);
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+}
+
+.developer-card .hook-tag {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+/* ===================================
+   MODULE 2 - PRICING/DETAILS STYLES
+   =================================== */
+
+.pricing-solution-wrapper {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: 2.5rem 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.marketer-pricing-module {
+    border-color: rgba(215, 51, 39, 0.3);
+}
+
+.developer-pricing-module {
+    border-color: rgba(139, 92, 246, 0.3);
+    background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
+}
+
+.solution-header {
+    margin-bottom: 1.5rem;
+}
+
+.solution-badge {
+    display: inline-block;
+    background: rgba(215, 51, 39, 0.2);
+    color: var(--ember-gold);
+    padding: 8px 16px;
+    border-radius: var(--radius-lg);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.sdk-badge {
+    background: rgba(139, 92, 246, 0.2);
+    color: #8b5cf6;
+}
+
+.solution-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.solution-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.pricing-details-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.pricing-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.pricing-tier-header {
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(215, 51, 39, 0.3);
+}
+
+.developer-pricing-module .pricing-tier-header {
+    border-bottom-color: rgba(139, 92, 246, 0.3);
+}
+
+.pricing-tier-header h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 1rem;
+}
+
+.price-display {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.price-display .price-amount {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+    line-height: 1;
+}
+
+.price-display .price-note {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.pricing-features-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pricing-features-list li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.pricing-features-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--ember-gold);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.pricing-features-list strong {
+    color: var(--ember-gold);
+    font-weight: 600;
+}
+
+.pricing-tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    align-items: end;
+}
+
+.mini-tier {
+    background: rgba(15, 15, 15, 0.6);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1rem;
+    text-align: center;
+    position: relative;
+    transition: var(--transition-base);
+}
+
+.mini-tier:hover {
+    border-color: #8b5cf6;
+    transform: translateY(-2px);
+}
+
+.mini-tier.featured-tier {
+    border-color: var(--ember-gold);
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.15) 0%, 
+        rgba(215, 51, 39, 0.1) 100%);
+    box-shadow: 0 0 30px rgba(240, 165, 0, 0.3);
+    transform: translateY(-8px);
+    padding: 1.5rem 1rem;
+}
+
+.mini-tier.featured-tier:hover {
+    transform: translateY(-10px);
+}
+
+.tier-badge-mini {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ember-gradient-primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.mini-tier-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+}
+
+.mini-tier-price {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+    margin-bottom: 0.75rem;
+    line-height: 1;
+}
+
+.mini-tier-price span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.mini-tier-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.mini-tier-details p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.value-props-section {
+    background: rgba(15, 15, 15, 0.4);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.developer-pricing-module .value-props-section {
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+.value-props-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.value-props-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.value-prop-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(215, 51, 39, 0.05);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-lg);
+    transition: var(--transition-base);
+}
+
+.developer-pricing-module .value-prop-item {
+    background: rgba(139, 92, 246, 0.05);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+.value-prop-item:hover {
+    background: rgba(215, 51, 39, 0.1);
+    border-color: rgba(215, 51, 39, 0.4);
+    transform: translateX(3px);
+}
+
+.developer-pricing-module .value-prop-item:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.value-prop-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+}
+
+.value-prop-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.value-prop-text strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 0.5rem;
+}
+
+.value-prop-text p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.solution-cta-bottom {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.cta-footnote-bottom {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0.75rem 0 1rem;
+}
+
+/* ===================================
+   MODULE 3 - THE CLOSE STYLES
+   =================================== */
+
+.journey-path-module {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: var(--transition-base);
+    display: flex;
+    flex-direction: column;
+}
+
+.journey-path-module.business-path {
+    border-color: rgba(215,51,39,0.5);
+}
+
+.journey-path-module.developer-path {
+    border-color: rgba(139,92,246,0.5);
+    background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
+}
+
+.journey-path-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.journey-icon-container {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.main-journey-icon-large {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.journey-path-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+}
+
+.journey-path-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.close-reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.close-reason-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(15, 15, 15, 0.6);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-lg);
+    transition: var(--transition-base);
+}
+
+.developer-path .close-reason-item {
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.close-reason-item:hover {
+    background: rgba(215, 51, 39, 0.1);
+    border-color: var(--ember-orange);
+    transform: translateY(-3px);
+}
+
+.developer-path .close-reason-item:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: #8b5cf6;
+}
+
+.close-reason-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--ember-gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+}
+
+.developer-path .close-reason-icon {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.close-reason-text strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 0.5rem;
+}
+
+.close-reason-text p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.urgency-block {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.4);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    animation: urgencyPulse 3s ease-in-out infinite;
+}
+
+@keyframes urgencyPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(240, 165, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(240, 165, 0, 0.5);
+    }
+}
+
+.developer-path .urgency-block {
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.urgency-icon {
+    flex-shrink: 0;
+}
+
+.urgency-icon img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.urgency-text h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 0.75rem;
+}
+
+.urgency-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.journey-cta {
+    text-align: center;
+    margin-top: auto;
+}
+
+.journey-cta-button-large {
+    padding: 18px 36px !important;
+    font-size: 1.15rem !important;
+}
+
+.journey-cta-icon-large {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.journey-cta-subtext {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0.75rem 0 1rem;
+}
+
+.journey-secondary-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ember-gold);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+.journey-secondary-link:hover {
+    color: var(--ember-orange);
+    transform: translateX(3px);
+}
+
+.satisfaction-guarantee {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.satisfaction-guarantee p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.satisfaction-guarantee strong {
+    color: #60a5fa;
+    font-weight: 700;
+}
+
+/* ===================================
+   BUTTON STYLE MATCHING
+   =================================== */
+.btn-style-match,
+.join-presale-button-redesigned,
+.compliance-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 14px 32px;
+    background: var(--ember-gradient-primary);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    box-shadow: var(--ember-shadow-md);
+}
+
+.btn-style-match:hover,
+.join-presale-button-redesigned:hover,
+.compliance-button:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ember-shadow-lg);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ===================================
+   PARACHUTE & BADGES
+   =================================== */
+.parachute-crate-enlarged {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+}
+
+.coming-soon-badge-overlay-solid,
+.early-2026-badge-overlay-solid {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    padding: 6px 16px;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    z-index: 10;
+    border: none;
+}
+
+.coming-soon-badge-overlay-solid {
+    background: #d73327;
+    box-shadow: 0 4px 12px rgba(215, 51, 39, 0.5);
+}
+
+.early-2026-badge-overlay-solid {
+    background: #8b5cf6;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
+}
+
+/* ===================================
+   TRANSPARENT PURPLE BUTTONS
+   =================================== */
+.ember-social-btn-transparent,
+.share-button-transparent,
+.share-x-transparent,
+.share-facebook-transparent,
+.share-telegram-transparent {
+    background: rgba(139, 92, 246, 0.2) !important;
+    border: 2px solid rgba(139, 92, 246, 0.5) !important;
+    color: white !important;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.ember-social-btn-transparent:hover,
+.share-button-transparent:hover,
+.share-x-transparent:hover,
+.share-facebook-transparent:hover,
+.share-telegram-transparent:hover {
+    background: rgba(139, 92, 246, 0.4) !important;
+    border-color: rgba(139, 92, 246, 0.8) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+/* ===================================
+   PHANTOM WALLET & LINKS
+   =================================== */
+.phantom-icon-compact {
+    width: 48px !important;
+    height: 48px !important;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.phantom-text-compact {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.phantom-get-link,
+.allocation-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ember-purple);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.phantom-get-link:hover,
+.allocation-link-btn:hover {
+    color: var(--ember-gold);
+    transform: translateX(4px);
+}
+
+.phantom-get-link::after,
+.allocation-link-btn::after {
+    content: '→';
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* ===================================
+   STATUS CHECKER & INFO BADGE
+   =================================== */
+.status-checker-integrated {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    position: relative;
+    padding-bottom: 3rem;
+}
+
+.airdrop-powered-by {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+    text-align: right;
+}
+
+.info-badge-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: rgba(139, 92, 246, 0.3);
+    border: 2px solid rgba(139, 92, 246, 0.5);
+    border-radius: 50%;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.info-badge-button:hover {
+    background: rgba(139, 92, 246, 0.5);
+    transform: scale(1.1);
+}
+
+/* END OF PART 1 - CORRECTED *//* ===================================
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS
+   PART 2 OF 3 - CORRECTED (NO GLOBAL OVERRIDES)
    =================================== */
 
 /* ===================================
    MODAL SYSTEM - Z-INDEX & BODY LOCK
+   Note: Navbar/chatbot z-index handled by global.css
    =================================== */
 body.modal-open {
     overflow: hidden !important;
@@ -1493,9 +1752,9 @@ body.modal-open {
     object-fit: contain;
 }
 
-/* END OF PART 2 *//* ===================================
+/* END OF PART 2 - CORRECTED *//* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 3 OF 3 - APP SHOWCASE THROUGH END
+   PART 3 OF 3 - CORRECTED (NO GLOBAL OVERRIDES)
    =================================== */
 
 /* ===================================
@@ -2331,59 +2590,22 @@ body.modal-open {
     }
 }
 
-/* ===================================
-   UTILITY CLASSES
-   =================================== */
-
-.golden-highlight {
-    color: var(--ember-gold);
-    font-weight: 600;
-}
-
-.main-section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.main-section-subtitle {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto 3rem;
-}
-
-.main-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-/* ===================================
-   CHATBOT & NAVBAR Z-INDEX FIXES
-   =================================== */
-
-.chatbot-button,
-.chatbot-widget {
-    z-index: 1000 !important;
-}
-
-body.modal-open .chatbot-button {
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-.navbar,
-header {
-    z-index: 2000 !important;
-}
-
 /**
  * ============================================
- * END OF LOCAL.CSS - PART 3 OF 3 COMPLETE
+ * END OF LOCAL.CSS - PART 3 OF 3 CORRECTED
+ * ============================================
+ * 
+ * REMOVED GLOBAL CSS OVERRIDES:
+ * ❌ Chatbot button/widget z-index (handled by global.css)
+ * ❌ Navbar z-index (handled by global.css)
+ * ❌ Body.modal-open chatbot dimming (handled by global.js)
+ * 
+ * THIS FILE NOW ONLY CONTAINS:
+ * ✅ Main page-specific styles
+ * ✅ New conversion module styles
+ * ✅ Local component styles
+ * ✅ Page-specific responsive styles
+ * 
+ * No conflicts with shared/global.css or shared/global.js
  * ============================================
  */
