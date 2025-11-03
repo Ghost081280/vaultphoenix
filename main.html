@@ -1432,8 +1432,12 @@
             </div>
         </section>
 
-    </main>  <!-- ✅ CRITICAL FIX: MAIN TAG MOVED HERE - BEFORE MODALS -->
+    </main>  <!-- ✅ CLOSE MAIN CONTENT AREA HERE - AFTER ALL SECTIONS -->
 
+    <!-- ===================================
+         MODALS - OUTSIDE MAIN CONTENT
+         =================================== -->
+    
     <!-- AIRDROP TERMS MODAL -->
     <div class="airdrop-terms-modal-overlay" id="airdrop-terms-modal">
         <div class="airdrop-terms-modal">
@@ -1514,10 +1518,15 @@
         </div>
     </div>
 
-    <!-- Shared Components Container (Footer & Chatbot loaded by global.js) -->
+    <!-- ===================================
+         SHARED COMPONENTS CONTAINER
+         Footer & Chatbot loaded by global.js
+         =================================== -->
     <div id="shared-components-container"></div>
 
-    <!-- Scripts - Load global.js FIRST to initialize shared components -->
+    <!-- ===================================
+         SCRIPTS - Load global.js FIRST
+         =================================== -->
     <script src="shared/global.js"></script>
     <script src="main/local.js"></script>
 </body>
