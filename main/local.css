@@ -1643,7 +1643,7 @@ header {
 .share-to-claim-title {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #8b5cf6;
+    color: #ffffff; /* Changed from #8b5cf6 to white */
     margin-bottom: 0.5rem;
 }
 
@@ -1665,15 +1665,15 @@ header {
     align-items: center;
     gap: 0.5rem;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.95);
-    border: 2px solid rgba(139, 92, 246, 0.3);
+    background: rgba(139, 92, 246, 0.2); /* Changed from white to purple */
+    border: 2px solid rgba(139, 92, 246, 0.5);
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: var(--transition-base);
 }
 
 .share-button:hover {
-    background: rgba(255, 255, 255, 1);
+    background: rgba(139, 92, 246, 0.4); /* Changed from white to darker purple */
     border-color: #8b5cf6;
     transform: translateY(-2px);
 }
@@ -1681,12 +1681,13 @@ header {
 .share-icon {
     width: 24px;
     height: 24px;
+    filter: brightness(0) invert(1); /* Makes icons white */
 }
 
 .share-button span {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #333;
+    color: #ffffff; /* Changed from #333 to white */
 }
 
 /* Phantom Promo - Better Spacing */
