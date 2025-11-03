@@ -102,7 +102,7 @@ function initializeTermsModal() {
 }
 
 // ============================================
-// AIRDROP INFO MODAL
+// AIRDROP INFO MODAL - FINAL FIX
 // ============================================
 function initializeInfoModal() {
     const modal = document.getElementById('airdrop-info-modal');
@@ -115,27 +115,40 @@ function initializeInfoModal() {
         return;
     }
     
-    // Open modal
+    // Open modal - TRIPLE PROTECTION
     openBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
+        
         modal.classList.add('active');
         document.body.classList.add('modal-open');
-    });
+        
+        return false;
+    }, { capture: true, passive: false });
     
     // Close modal
     function closeModal(e) {
-        if (e) e.preventDefault();
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
     }
     
     if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
+        closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeModal();
+        });
     }
     
     if (okBtn) {
-        okBtn.addEventListener('click', closeModal);
+        okBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeModal();
+        });
     }
     
     // Click outside to close
