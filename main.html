@@ -436,82 +436,83 @@
 
             <!-- Compact Two-Column Grid -->
             <div class="ember-compact-grid">
-                <!-- Left: Tracker + Status Checker Combined -->
-                <div class="ember-inner-module">
-                    <div class="ember-mini-header">
-                        <img src="images/VPEmberCoin.PNG" alt="Tracker" class="ember-mini-icon" loading="lazy">
-                        <h3>Airdrop Tracker</h3>
-                    </div>
-                    
-                    <div class="ember-stats-compact">
-                        <div class="ember-stat-mini">
-                            <div class="stat-label">Total Pool</div>
-                            <div class="stat-value"><span id="ember-total-ember">16,670,000</span></div>
-                        </div>
-                        <div class="ember-stat-mini">
-                            <div class="stat-label">Claimed</div>
-                            <div class="stat-value claimed"><span id="ember-claimed">0</span></div>
-                        </div>
-                        <div class="ember-stat-mini">
-                            <div class="stat-label">Remaining</div>
-                            <div class="stat-value remaining"><span id="ember-remaining">16,670,000</span></div>
-                        </div>
-                        <div class="ember-stat-mini">
-                            <div class="stat-label">People</div>
-                            <div class="stat-value"><span id="ember-people-claimed">0 / 5,000</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="ember-progress-compact">
-                        <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" id="ember-progress-bar"></div>
-                        </div>
-                        <div class="progress-text"><span id="ember-progress-percentage">0</span>% Claimed</div>
-                    </div>
+               <!-- Left: Tracker + Status Checker Combined -->
+<div class="ember-inner-module">
+    <div class="ember-mini-header">
+        <img src="images/VPEmberCoin.PNG" alt="Tracker" class="ember-mini-icon" loading="lazy">
+        <h3>Airdrop Tracker</h3>
+    </div>
+    
+    <div class="ember-stats-compact">
+        <div class="ember-stat-mini">
+            <div class="stat-label">Total Pool</div>
+            <div class="stat-value"><span id="ember-total-ember">16,670,000</span></div>
+        </div>
+        <div class="ember-stat-mini">
+            <div class="stat-label">Claimed</div>
+            <div class="stat-value claimed"><span id="ember-claimed">0</span></div>
+        </div>
+        <div class="ember-stat-mini">
+            <div class="stat-label">Remaining</div>
+            <div class="stat-value remaining"><span id="ember-remaining">16,670,000</span></div>
+        </div>
+        <div class="ember-stat-mini">
+            <div class="stat-label">People</div>
+            <div class="stat-value"><span id="ember-people-claimed">0 / 5,000</span></div>
+        </div>
+    </div>
+    
+    <div class="ember-progress-compact">
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="ember-progress-bar"></div>
+        </div>
+        <div class="progress-text"><span id="ember-progress-percentage">0</span>% Claimed</div>
+    </div>
 
-                    <!-- Presale Details -->
-                    <div class="presale-details-compact">
-                        <h4>Presale Details</h4>
-                        <div class="presale-info-grid">
-                            <div class="presale-info-item">
-                                <span class="info-label">Per Claim:</span>
-                                <span class="info-value">3,333 EMBER</span>
-                            </div>
-                            <div class="presale-info-item">
-                                <span class="info-label">Token Price:</span>
-                                <span class="info-value">$0.003</span>
-                            </div>
-                            <div class="presale-info-item">
-                                <span class="info-label">Value:</span>
-                                <span class="info-value golden-highlight">≈$10</span>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Presale Details -->
+    <div class="presale-details-compact">
+        <h4>Presale Details</h4>
+        <div class="presale-info-grid">
+            <div class="presale-info-item">
+                <span class="info-label">Per Claim:</span>
+                <span class="info-value">3,333 EMBER</span>
+            </div>
+            <div class="presale-info-item">
+                <span class="info-label">Token Price:</span>
+                <span class="info-value">$0.003</span>
+            </div>
+            <div class="presale-info-item">
+                <span class="info-label">Value:</span>
+                <span class="info-value golden-highlight">≈$10</span>
+            </div>
+        </div>
+    </div>
 
-                    <!-- Allocation Info -->
-                    <div class="allocation-info">
-                        <h5>Community Airdrop Allocation</h5>
-                        <div class="allocation-details">
-                            <strong>10%</strong> (≈16.7M EMBER) | <strong>≈$50K value</strong><br>
-                            Rewards verified supporters who keep posts live until campaign end.<br>
-                            <strong>Distribution:</strong> Only if $500K presale goal is reached; posts must still be live at verification.
-                        </div>
-                        <div class="allocation-cta">
-                            <a href="ember.html#development-fund" class="allocation-link-btn">View Full Token Allocation</a>
-                        </div>
-                    </div>
+    <!-- Allocation Info -->
+    <div class="allocation-info">
+        <h5>Community Airdrop Allocation</h5>
+        <div class="allocation-details">
+            <strong>10%</strong> (≈16.7M EMBER) | <strong>≈$50K value</strong><br>
+            Rewards verified supporters who keep posts live until campaign end.<br>
+            <strong>Distribution:</strong> Only if $500K presale goal is reached; posts must still be live at verification.
+        </div>
+        <div class="allocation-cta">
+            <a href="ember.html#development-fund" class="allocation-link-btn">View Full Token Allocation</a>
+        </div>
+    </div>
 
-                    <!-- Status Checker Integrated -->
-                    <div class="status-checker-integrated">
-                        <h4>Check Claim Status</h4>
-                        <div class="status-input-row">
-                            <input type="text" id="status-wallet" class="input-compact" placeholder="Enter Solana wallet address">
-                            <button type="button" class="status-btn-compact" id="check-status-btn">Check</button>
-                        </div>
-                        
-                        <!-- POWERED BY TEXT -->
-                        <span class="airdrop-powered-by">Powered by the $Ember Airdrop System</span>
-                    </div>
+    <!-- Status Checker Integrated -->
+    <div class="status-checker-integrated">
+        <h4>Check Claim Status</h4>
+        <div class="status-input-row">
+            <input type="text" id="status-wallet" class="input-compact" placeholder="Enter Solana wallet address">
+            <button type="button" class="status-btn-compact" id="check-status-btn">Check</button>
+        </div>
+    </div>
+    
+    <!-- POWERED BY TEXT - MOVED TO BOTTOM RIGHT OF AIRDROP TRACKER MODULE -->
+    <span class="airdrop-powered-by">Powered by the $Ember Airdrop System</span>
+</div>
                 </div>
 
                 <!-- Right: Claim Form -->
