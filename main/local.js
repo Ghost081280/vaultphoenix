@@ -1,17 +1,7 @@
 /**
  * ============================================
  * VAULT PHOENIX - MAIN PAGE LOCAL JAVASCRIPT
- * v2.4 BULLETPROOF HERO VISIBILITY
- * ============================================
- * 
- * CRITICAL FIX:
- * - Hero sections COMPLETELY EXCLUDED from scroll-reveal
- * - Scroll-reveal ONLY for non-hero content
- * - No JavaScript needed for hero visibility
- * 
- * @dependencies
- * - shared/global.js (v8.0+) - Required for core functionality
- * - shared/global.html - Required for shared components
+ * CLEANED & OPTIMIZED
  * ============================================
  */
 
@@ -19,7 +9,7 @@
     'use strict';
 
     // ============================================
-    // CONFIGURATION & CONSTANTS
+    // CONFIGURATION
     // ============================================
 
     const CONFIG = {
@@ -39,11 +29,11 @@
 
     const SHARE_CONFIG = {
         title: "$Ember Token Presale - Revolutionary AR Crypto Gaming at $0.003",
-        description: "Join the $Ember Token presale NOW! 166.7M tokens at $0.003 each. Revolutionary location-based AR gaming with GPS & Beacon technology. $500K hard cap - secure your tokens before Platform Operators create demand!",
+        description: "Join the $Ember Token presale NOW! 166.7M tokens at $0.003 each. Revolutionary location-based AR gaming with GPS & Beacon technology. $500K hard cap!",
         url: "https://vaultphoenix.com/ember.html",
         image: "https://vaultphoenix.com/images/VPEmberCoin.PNG",
         hashtags: "EmberToken,CryptoPresale,ARGaming,VaultPhoenix",
-        twitterText: "🔥 Revolutionary AR crypto gaming token presale! GPS & Beacon technology meets blockchain rewards. $500K hard cap. Join early before Platform Operators drive demand!",
+        twitterText: "🔥 Revolutionary AR crypto gaming token presale! GPS & Beacon technology meets blockchain rewards. $500K hard cap. Join early!",
         telegramText: "🔥 $Ember Token Presale LIVE! Revolutionary AR crypto gaming at $0.003. 166.7M tokens available. Join now!"
     };
 
@@ -51,15 +41,14 @@
         info: (msg) => console.log(`🔥 [Main.js] ${msg}`),
         success: (msg) => console.log(`✅ [Main.js] ${msg}`),
         error: (msg) => console.error(`❌ [Main.js] ${msg}`),
-        warn: (msg) => console.warn(`⚠️ [Main.js] ${msg}`),
-        debug: (msg) => console.log(`🐛 [Main.js] ${msg}`)
+        warn: (msg) => console.warn(`⚠️ [Main.js] ${msg}`)
     };
 
     // ============================================
     // PHONE GALLERY FUNCTIONALITY
     // ============================================
 
-    window.changeImage = function(imageSrc, altText) {
+    window.changePhoneImage = function(imageSrc, altText) {
         const mainImage = document.getElementById('mainPhoneScreenshot');
         
         if (!mainImage) {
@@ -77,7 +66,7 @@
             event.currentTarget.classList.add('active');
         }
         
-        LOGGER.debug(`Phone image changed to: ${imageSrc}`);
+        LOGGER.info(`Phone image changed to: ${imageSrc}`);
     };
 
     // ============================================
@@ -102,7 +91,7 @@
             event.currentTarget.classList.add('active');
         }
         
-        LOGGER.debug(`Laptop image changed to: ${imageSrc}`);
+        LOGGER.info(`Laptop image changed to: ${imageSrc}`);
     };
 
     // ============================================
@@ -133,21 +122,21 @@
     function handleXShare() {
         const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_CONFIG.twitterText)}&url=${encodeURIComponent(SHARE_CONFIG.url)}&hashtags=${encodeURIComponent(SHARE_CONFIG.hashtags)}`;
         window.open(shareUrl, '_blank', 'width=600,height=400');
-        LOGGER.debug('X/Twitter share clicked');
+        LOGGER.info('X/Twitter share clicked');
         showShareConfirmation('X/Twitter');
     }
 
     function handleFacebookShare() {
         const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SHARE_CONFIG.url)}`;
         window.open(shareUrl, '_blank', 'width=600,height=400');
-        LOGGER.debug('Facebook share clicked');
+        LOGGER.info('Facebook share clicked');
         showShareConfirmation('Facebook');
     }
 
     function handleTelegramShare() {
         const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(SHARE_CONFIG.url)}&text=${encodeURIComponent(SHARE_CONFIG.telegramText)}`;
         window.open(shareUrl, '_blank', 'width=600,height=400');
-        LOGGER.debug('Telegram share clicked');
+        LOGGER.info('Telegram share clicked');
         showShareConfirmation('Telegram');
     }
 
@@ -195,6 +184,7 @@
             claimWallet: document.getElementById('claim-wallet'),
             claimEmail: document.getElementById('claim-email'),
             claimSocialUrl: document.getElementById('claim-social-url'),
+            claimTerms: document.getElementById('claim-terms'),
             claimButton: document.getElementById('claim-submit-btn'),
             messageBox: document.getElementById('ember-message-box'),
             statusWallet: document.getElementById('status-wallet'),
@@ -208,7 +198,7 @@
         };
         
         if (!airdropElements.claimForm) {
-            LOGGER.warn('Airdrop form not found - system not initialized');
+            LOGGER.warn('Airdrop form not found');
             return;
         }
         
@@ -258,9 +248,15 @@
         const wallet = airdropElements.claimWallet.value.trim();
         const email = airdropElements.claimEmail.value.trim();
         const socialUrl = airdropElements.claimSocialUrl ? airdropElements.claimSocialUrl.value.trim() : '';
+        const termsAccepted = airdropElements.claimTerms ? airdropElements.claimTerms.checked : false;
         
         if (!wallet || !email) {
             showMessage('❌ Please fill in all required fields (Wallet Address and Email).', 'error');
+            return;
+        }
+
+        if (!termsAccepted) {
+            showMessage('❌ You must agree to the airdrop terms to continue.', 'error');
             return;
         }
         
@@ -283,19 +279,19 @@
         }
         
         if (!validateWallet(wallet)) {
-            showMessage('❌ Invalid Solana wallet address format. Please check and try again.<br><small>Valid addresses are 32-44 characters long and use base58 encoding.</small>', 'error');
+            showMessage('❌ Invalid Solana wallet address format.', 'error');
             airdropElements.claimWallet.focus();
             return;
         }
         
         if (!validateEmail(email)) {
-            showMessage('❌ Invalid email address format. Please enter a valid email.', 'error');
+            showMessage('❌ Invalid email address format.', 'error');
             airdropElements.claimEmail.focus();
             return;
         }
         
         if (!CONFIG.BACKEND_READY) {
-            showMessage('⏳ <strong>Airdrop Coming Soon!</strong><br><br>The $EMBER airdrop system is not yet active. Follow us on social media to be notified the moment it launches!<br><br>Your information has been noted for when the airdrop goes live.', 'info');
+            showMessage('⏳ <strong>Airdrop Coming Soon!</strong><br><br>The $EMBER airdrop system is not yet active. Follow us on social media to be notified the moment it launches!', 'info');
             return;
         }
         
@@ -328,13 +324,7 @@
             }
         } catch (error) {
             LOGGER.error('Claim submission error:', error);
-            let errorMessage = '❌ <strong>Submission Failed</strong><br><br>';
-            if (error.message.includes('Failed to fetch')) {
-                errorMessage += 'Unable to connect to the server. Please check your internet connection and try again.';
-            } else {
-                errorMessage += 'An unexpected error occurred. Please try again in a moment.';
-            }
-            showMessage(errorMessage, 'error');
+            showMessage('❌ <strong>Submission Failed</strong><br><br>Unable to connect to the server. Please check your internet connection and try again.', 'error');
         } finally {
             airdropElements.claimButton.disabled = false;
             airdropElements.claimButton.innerHTML = originalButtonText;
@@ -357,7 +347,7 @@
         }
         
         if (!CONFIG.BACKEND_READY) {
-            showMessage('⏳ Status checking will be available when the airdrop launches. Stay tuned!', 'info');
+            showMessage('⏳ Status checking will be available when the airdrop launches.', 'info');
             return;
         }
         
@@ -509,9 +499,6 @@
         airdropElements.messageBox.className = `message-box-compact ${type}`;
         airdropElements.messageBox.style.display = 'block';
         
-        airdropElements.messageBox.setAttribute('role', type === 'error' ? 'alert' : 'status');
-        airdropElements.messageBox.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
-        
         setTimeout(() => {
             airdropElements.messageBox.scrollIntoView({ 
                 behavior: 'smooth', 
@@ -525,8 +512,6 @@
         
         messageTimeout = setTimeout(() => {
             airdropElements.messageBox.style.display = 'none';
-            airdropElements.messageBox.removeAttribute('role');
-            airdropElements.messageBox.removeAttribute('aria-live');
         }, displayTime);
     }
 
@@ -537,13 +522,11 @@
 
     // ============================================
     // SCROLL REVEAL ANIMATION SYSTEM
-    // CRITICAL: Hero sections COMPLETELY EXCLUDED
     // ============================================
 
     function initializeScrollReveal() {
-        LOGGER.info('Initializing scroll-reveal (hero excluded)...');
+        LOGGER.info('Initializing scroll-reveal...');
         
-        // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         
         if (prefersReducedMotion) {
@@ -568,19 +551,16 @@
         
         const observer = new IntersectionObserver(observerCallback, observerOptions);
         
-        // CRITICAL: Select ONLY scroll-reveal elements that are NOT hero sections
-        // This selector excludes ALL hero sections and their children
         const scrollRevealElements = document.querySelectorAll('.scroll-reveal:not(.main-hero):not(.main-hero *)');
         
         scrollRevealElements.forEach(el => {
-            // Double-check: never observe hero elements
             const isHeroOrChild = el.closest('.main-hero, [class*="-hero"]');
             if (!isHeroOrChild) {
                 observer.observe(el);
             }
         });
         
-        LOGGER.success(`Scroll reveal initialized for ${scrollRevealElements.length} elements (hero excluded)`);
+        LOGGER.success(`Scroll reveal initialized for ${scrollRevealElements.length} elements`);
     }
 
     // ============================================
@@ -588,12 +568,12 @@
     // ============================================
 
     function loadSharedComponents() {
-        LOGGER.info('Loading shared components from shared/global.html...');
+        LOGGER.info('Loading shared components...');
         
         fetch('shared/global.html')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    throw new Error(`HTTP ${response.status}`);
                 }
                 return response.text();
             })
@@ -605,25 +585,22 @@
                 }
                 
                 container.innerHTML = html;
-                LOGGER.success('Shared components loaded successfully');
+                LOGGER.success('Shared components loaded');
                 
                 if (window.initializePhoenixChatbot) {
                     setTimeout(() => {
                         window.initializePhoenixChatbot();
-                        LOGGER.success('Phoenix chatbot reinitialized');
+                        LOGGER.success('Phoenix chatbot initialized');
                     }, CONFIG.CHATBOT_INIT_DELAY);
-                } else {
-                    LOGGER.warn('Phoenix chatbot initialization function not found');
                 }
             })
             .catch(error => {
                 LOGGER.error(`Failed to load shared components: ${error.message}`);
-                LOGGER.warn('Continuing without shared components...');
             });
     }
 
     // ============================================
-    // INITIALIZATION SYSTEM
+    // INITIALIZATION
     // ============================================
 
     function waitForSharedScript() {
@@ -635,13 +612,13 @@
                 
                 if (window.sharedScriptReady) {
                     clearInterval(checkInterval);
-                    LOGGER.success('Shared.js detected and ready');
+                    LOGGER.success('Shared.js ready');
                     resolve(true);
                 }
                 
                 if (elapsed >= CONFIG.SHARED_READY_TIMEOUT) {
                     clearInterval(checkInterval);
-                    LOGGER.warn(`Shared.js not ready after ${CONFIG.SHARED_READY_TIMEOUT}ms, continuing anyway...`);
+                    LOGGER.warn('Shared.js timeout, continuing...');
                     resolve(false);
                 }
             }, CONFIG.SHARED_READY_CHECK_INTERVAL);
@@ -649,69 +626,29 @@
     }
 
     async function initialize() {
-        LOGGER.info('Initializing main page features...');
+        LOGGER.info('Initializing main page...');
         
-        const sharedReady = await waitForSharedScript();
+        await waitForSharedScript();
         
-        if (sharedReady) {
-            LOGGER.success('Shared.js ready, initializing main.js features...');
-        }
-        
-        // Initialize scroll reveal (excludes hero completely)
         try {
             initializeScrollReveal();
         } catch (error) {
-            LOGGER.error(`Scroll reveal initialization failed: ${error.message}`);
+            LOGGER.error(`Scroll reveal failed: ${error.message}`);
         }
         
-        // Initialize $Ember airdrop system
         try {
             initializeAirdropSystem();
         } catch (error) {
-            LOGGER.error(`Airdrop system initialization failed: ${error.message}`);
+            LOGGER.error(`Airdrop system failed: ${error.message}`);
         }
         
-        // Load shared HTML components
         try {
             loadSharedComponents();
         } catch (error) {
-            LOGGER.error(`Shared components loading failed: ${error.message}`);
+            LOGGER.error(`Shared components failed: ${error.message}`);
         }
         
-        LOGGER.success('Main page initialization complete - BULLETPROOF HERO');
-        logEnvironmentInfo();
-    }
-
-    function logEnvironmentInfo() {
-        const info = {
-            userAgent: navigator.userAgent,
-            viewport: `${window.innerWidth}x${window.innerHeight}`,
-            pixelRatio: window.devicePixelRatio,
-            colorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-            reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-            online: navigator.onLine,
-            language: navigator.language,
-            backendStatus: CONFIG.BACKEND_READY ? 'READY' : 'OFFLINE',
-            tokensPerClaim: CONFIG.TOKENS_PER_CLAIM,
-            totalEmber: CONFIG.TOTAL_EMBER
-        };
-        
-        LOGGER.debug('Environment Info:');
-        console.table(info);
-    }
-
-    function handleGlobalError(event) {
-        LOGGER.error(`Uncaught error: ${event.message}`);
-        LOGGER.error(`  at ${event.filename}:${event.lineno}:${event.colno}`);
-    }
-
-    function handleUnhandledRejection(event) {
-        LOGGER.error(`Unhandled promise rejection: ${event.reason}`);
-    }
-
-    function setupErrorHandlers() {
-        window.addEventListener('error', handleGlobalError);
-        window.addEventListener('unhandledrejection', handleUnhandledRejection);
+        LOGGER.success('Main page initialization complete');
     }
 
     // ============================================
@@ -719,12 +656,8 @@
     // ============================================
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            setupErrorHandlers();
-            initialize();
-        });
+        document.addEventListener('DOMContentLoaded', initialize);
     } else {
-        setupErrorHandlers();
         initialize();
     }
 
@@ -733,24 +666,12 @@
     // ============================================
 
     window.VaultPhoenixMain = {
-        version: '2.4.0',
-        changeImage: window.changeImage,
+        version: '3.0.0',
+        changePhoneImage: window.changePhoneImage,
         changeLaptopImage: window.changeLaptopImage,
-        reinitialize: initialize,
-        airdrop: {
-            refreshData: loadRealTimeData,
-            validateWallet: validateWallet,
-            validateEmail: validateEmail,
-            validateUrl: validateUrl
-        },
-        share: {
-            handleXShare: handleXShare,
-            handleFacebookShare: handleFacebookShare,
-            handleTelegramShare: handleTelegramShare,
-            config: SHARE_CONFIG
-        }
+        reinitialize: initialize
     };
 
-    LOGGER.info('Local.js v2.4 BULLETPROOF - Hero always visible, no conflicts!');
+    LOGGER.info('Local.js v3.0 loaded - Clean & Optimized');
 
 })();
