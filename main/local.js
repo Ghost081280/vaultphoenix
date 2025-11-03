@@ -1,6 +1,6 @@
 // ============================================
 // VAULT PHOENIX MAIN.HTML LOCAL JAVASCRIPT
-// FIXED VERSION v2.0 - Proper global.js integration
+// UPDATED VERSION - Proper global.js integration
 // ============================================
 
 (function() {
