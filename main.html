@@ -1311,9 +1311,7 @@
             </div>
         </div>
     </div>
-</section>
-
-        <!-- Final CTA Section - UPDATED LABELS -->
+</section><!-- Final CTA Section - UPDATED LABELS -->
         <section class="final-cta" id="contact">
             <div class="final-cta-background"></div>
             <div class="main-container">
@@ -1434,6 +1432,8 @@
             </div>
         </section>
 
+    </main>  <!-- ✅ CRITICAL FIX: MAIN TAG MOVED HERE - BEFORE MODALS -->
+
     <!-- AIRDROP TERMS MODAL -->
     <div class="airdrop-terms-modal-overlay" id="airdrop-terms-modal">
         <div class="airdrop-terms-modal">
@@ -1513,12 +1513,11 @@
             </div>
         </div>
     </div>
-    </main>
 
-    <!-- Shared Components Container -->
+    <!-- Shared Components Container (Footer & Chatbot loaded by global.js) -->
     <div id="shared-components-container"></div>
 
-    <!-- Scripts -->
+    <!-- Scripts - Load global.js FIRST to initialize shared components -->
     <script src="shared/global.js"></script>
     <script src="main/local.js"></script>
 </body>
