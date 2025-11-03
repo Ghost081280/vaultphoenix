@@ -1342,17 +1342,16 @@ header {
 }
 
 /* ===================================
-   AIRDROP POWERED BY - CENTERED (NEW)
+   AIRDROP POWERED BY - BOTTOM RIGHT OF INNER MODULE (NEW)
    =================================== */
 .airdrop-powered-by {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
+    text-align: right;
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.4);
     font-style: italic;
-    text-align: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(215, 51, 39, 0.2);
 }
 
 .ember-airdrop-compact-header {
