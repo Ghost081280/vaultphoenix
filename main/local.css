@@ -1531,17 +1531,31 @@ header {
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
     padding: 1.5rem;
-    position: relative;  /* ADD THIS */
-    padding-bottom: 3rem;  /* ADD THIS - creates space for the text */
+    position: relative;
+    padding-bottom: 3rem;
 }
 
-.status-checker-integrated {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1rem;
-    /* REMOVE: position: relative; */
-    /* REMOVE: padding-bottom: 3rem; */
+.ember-mini-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(215, 51, 39, 0.2);
+    position: relative;
+}
+
+.ember-mini-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.ember-mini-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    flex: 1;
 }
 
 /* ===================================
@@ -1738,8 +1752,6 @@ header {
     border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--radius-lg);
     padding: 1rem;
-    position: relative;
-    padding-bottom: 3rem;
 }
 
 .status-checker-integrated h4 {
@@ -1776,7 +1788,7 @@ header {
 }
 
 /* ===================================
-   AIRDROP POWERED BY - BOTTOM RIGHT INSIDE TRACKER MODULE (NEW)
+   AIRDROP POWERED BY - BOTTOM RIGHT OF AIRDROP TRACKER MODULE
    =================================== */
 .airdrop-powered-by {
     position: absolute;
