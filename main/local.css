@@ -3061,15 +3061,26 @@ header {
     max-width: 100%;
 }
 
-.solution-title {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 1rem;
-    line-height: 1.3;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
+.whitelabel-solution {
+    border-color: rgba(215,51,39,0.5);
+}
+
+.sdk-solution {
+    border-color: rgba(139,92,246,0.5);
+    background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
+}
+
+.pricing-solution:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ember-shadow-xl);
+}
+
+.whitelabel-solution:hover {
+    border-color: var(--ember-orange);
+}
+
+.sdk-solution:hover {
+    border-color: #8b5cf6;
 }
 
 /* Badge Overlays */
@@ -3153,6 +3164,7 @@ header {
     line-height: 1.3;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .solution-subtitle {
@@ -3170,9 +3182,8 @@ header {
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
 }
 
-.sdk-solution {
-    border-color: rgba(139,92,246,0.5);
-    background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
+.sdk-solution .solution-price {
+    border-bottom-color: rgba(139,92,246,0.3);
 }
 
 .price-amount {
@@ -3199,15 +3210,16 @@ header {
 .sdk-pricing-tiers {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 0.75rem;
     margin-bottom: 1.5rem;
+    align-items: end;
 }
 
 .sdk-tier {
     background: rgba(15, 15, 15, 0.6);
     border: 2px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--radius-lg);
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 0.75rem;
     text-align: center;
     position: relative;
     transition: var(--transition-base);
@@ -3219,11 +3231,17 @@ header {
         rgba(240, 165, 0, 0.15) 0%, 
         rgba(215, 51, 39, 0.1) 100%);
     box-shadow: 0 0 30px rgba(240, 165, 0, 0.3);
+    transform: translateY(-8px);
+    padding: 1.5rem 0.75rem;
 }
 
 .sdk-tier:hover {
     border-color: #8b5cf6;
     transform: translateY(-2px);
+}
+
+.sdk-tier.featured:hover {
+    transform: translateY(-10px);
 }
 
 .tier-badge {
@@ -3240,27 +3258,27 @@ header {
 }
 
 .tier-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 0.5rem;
 }
 
 .tier-price {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 800;
     color: var(--ember-gold);
     margin-bottom: 0.5rem;
 }
 
 .tier-price span {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);
 }
 
 .tier-info {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.7);
 }
 
@@ -3425,8 +3443,18 @@ header {
     
     .sdk-pricing-tiers {
         grid-template-columns: 1fr;
+        align-items: stretch;
+    }
+    
+    .sdk-tier.featured {
+        transform: translateY(0);
+    }
+    
+    .sdk-tier.featured:hover {
+        transform: translateY(-2px);
     }
 }
+
 /* ===================================
    FINAL CTA SECTION - BALANCED & COMPACT
    =================================== */
