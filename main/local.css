@@ -1379,6 +1379,21 @@ header {
     object-fit: contain;
 }
 
+.parachute-crate-enlarged {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .parachute-crate-enlarged {
+        max-width: 280px;
+    }
+}
+
 .ember-airdrop-outer-module {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -1456,6 +1471,47 @@ header {
     background: var(--ember-gradient-primary);
     border-color: var(--ember-orange);
     transform: translateY(-2px);
+}
+
+/* ===================================
+   TRANSPARENT PURPLE BUTTONS (NEW)
+   =================================== */
+.ember-social-btn-transparent,
+.share-button-transparent,
+.share-x-transparent,
+.share-facebook-transparent,
+.share-telegram-transparent {
+    background: rgba(139, 92, 246, 0.2) !important;
+    border: 2px solid rgba(139, 92, 246, 0.5) !important;
+    color: white !important;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.ember-social-btn-transparent:hover,
+.share-button-transparent:hover,
+.share-x-transparent:hover,
+.share-facebook-transparent:hover,
+.share-telegram-transparent:hover {
+    background: rgba(139, 92, 246, 0.4) !important;
+    border-color: rgba(139, 92, 246, 0.8) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+.ember-social-btn-transparent svg,
+.share-button-transparent svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
 }
 
 .ember-social-icon-small {
@@ -1630,28 +1686,12 @@ header {
     color: white;
 }
 
-/* Status Checker Integrated */
-.status-checker-integrated {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1rem;
-    position: relative;
-    padding-bottom: 3rem;
-}
-
-.status-checker-integrated h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #8b5cf6;
-    margin-bottom: 0.75rem;
-}
-
 .allocation-info {
     margin-top: 1rem;
     padding: 1rem;
     background: rgba(139, 92, 246, 0.05);
     border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
 }
 
 .allocation-info h5 {
@@ -1676,6 +1716,9 @@ header {
     text-align: center;
 }
 
+/* ===================================
+   TOKEN ALLOCATION - PURPLE TEXT LINK (NEW)
+   =================================== */
 .allocation-link-btn {
     display: inline-flex;
     align-items: center;
@@ -1699,6 +1742,23 @@ header {
     content: '→';
     font-size: 1.2rem;
     font-weight: 700;
+}
+
+/* Status Checker Integrated */
+.status-checker-integrated {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    position: relative;
+    padding-bottom: 3rem;
+}
+
+.status-checker-integrated h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #8b5cf6;
+    margin-bottom: 0.75rem;
 }
 
 .status-input-row {
@@ -1809,6 +1869,46 @@ header {
     border-radius: var(--radius-lg);
     padding: 1.25rem 1.5rem;
     margin-bottom: 1.5rem;
+}
+
+/* ===================================
+   PHANTOM WALLET - COMPACT VERSION (NEW)
+   =================================== */
+.phantom-icon-compact {
+    width: 48px !important;
+    height: 48px !important;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.phantom-text-compact {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.phantom-get-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ember-purple);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.phantom-get-link:hover {
+    color: var(--ember-gold);
+    transform: translateX(4px);
+}
+
+.phantom-get-link::after {
+    content: '→';
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 .phantom-icon-large {
@@ -1926,6 +2026,23 @@ header {
     color: rgba(255, 255, 255, 0.85);
 }
 
+.terms-link-btn {
+    display: inline;
+    color: var(--ember-purple);
+    font-weight: 600;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0 4px;
+    transition: all 0.3s ease;
+}
+
+.terms-link-btn:hover {
+    color: var(--ember-gold);
+}
+
 .claim-btn-compact {
     display: flex;
     align-items: center;
@@ -1973,78 +2090,19 @@ header {
     color: #8b5cf6;
 }
 
-/* How It Works */
-.how-it-works-compact {
-    background: rgba(215, 51, 39, 0.1);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1rem;
-    margin-top: 1.5rem;
+@media (max-width: 968px) {
+    .ember-compact-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-.how-it-works-compact h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.75rem;
-}
-
-.how-it-works-compact ol {
-    padding-left: 1.25rem;
-    margin: 0;
-}
-
-.how-it-works-compact li {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 0.5rem;
-}
-
-/* Airdrop Terms Section */
-.airdrop-terms-section {
-    background: rgba(215, 51, 39, 0.1);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.airdrop-terms-section h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 1rem;
-}
-
-.airdrop-terms-section p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 0.75rem;
-}
-
-.airdrop-terms-section ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0.75rem 0;
-}
-
-.airdrop-terms-section li {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.airdrop-terms-section li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--ember-gold);
-    font-weight: 700;
+@media (max-width: 768px) {
+    .ember-countdown-timer-redesigned,
+    .presale-stats-redesigned,
+    .share-buttons-grid,
+    .ember-stats-compact {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ===================================
