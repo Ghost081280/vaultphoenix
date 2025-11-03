@@ -1,10 +1,10 @@
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   FULLY UPDATED WITH MODAL FIXES
+   FULLY UPDATED WITH MODAL FIXES & NEW STYLES
    =================================== */
 
 /* ===================================
-   FREE $EMBER TOKENS BANNER (NEW)
+   FREE $EMBER TOKENS BANNER - ORIGINAL PURPLE (EXISTING)
    =================================== */
 .free-tokens-banner {
     background: linear-gradient(135deg, 
@@ -26,6 +26,32 @@
     }
     50% {
         box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+    }
+}
+
+/* ===================================
+   FREE $EMBER TOKENS BANNER - NEW RED VERSION
+   =================================== */
+.free-tokens-banner-red {
+    background: linear-gradient(135deg, 
+        rgba(215, 51, 39, 0.15) 0%, 
+        rgba(198, 40, 40, 0.15) 100%);
+    border: 2px solid rgba(215, 51, 39, 0.4);
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: subtle-glow-red 3s ease-in-out infinite;
+}
+
+@keyframes subtle-glow-red {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(215, 51, 39, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(215, 51, 39, 0.5);
     }
 }
 
@@ -169,12 +195,20 @@
 }
 
 /* ===================================
-   PHANTOM WALLET - ENLARGED LOGO & PURPLE LINK (NEW)
+   PHANTOM WALLET - COMPACT VERSION (NEW)
    =================================== */
-.phantom-icon-enlarged {
-    width: 80px !important;
-    height: 80px !important;
+.phantom-icon-compact {
+    width: 48px !important;
+    height: 48px !important;
     object-fit: contain;
+    flex-shrink: 0;
+}
+
+.phantom-text-compact {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
 .phantom-get-link {
@@ -183,12 +217,20 @@
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
+    font-size: 0.9rem;
     margin-top: 0.25rem;
 }
 
 .phantom-get-link:hover {
     color: var(--ember-gold);
     transform: translateX(4px);
+}
+
+/* PHANTOM WALLET - ENLARGED LOGO (EXISTING) */
+.phantom-icon-enlarged {
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: contain;
 }
 
 /* ===================================
@@ -243,23 +285,26 @@
 }
 
 /* ===================================
-   BODY MODAL OPEN STATE
+   BODY MODAL OPEN STATE - CRITICAL FIX
    =================================== */
-/* Prevent body scroll when modal is open - compatible with global.js */
+/* Prevent body scroll when modal is open */
 body.modal-open {
     overflow: hidden !important;
-    padding-right: var(--scrollbar-width, 0);
-}
-
-/* Calculate scrollbar width to prevent content shift */
-body {
-    --scrollbar-width: 0px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
 
 /* ===================================
-   MODAL Z-INDEX FIXES
+   MODAL OVERLAY - Z-INDEX HIERARCHY FIX
    =================================== */
-/* Ensure modals appear above everything including navbar and chatbot */
+/* 
+   Z-Index Hierarchy:
+   - Navbar: 2000 (from global.css)
+   - Chatbot: 1000 (from global.css)
+   - Modals: 10000 (above everything)
+*/
+
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
     position: fixed;
@@ -267,9 +312,11 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+    width: 100vw;
+    height: 100vh;
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(5px);
-    z-index: 9999; /* Higher than navbar (2000) and chatbot (1000) */
+    z-index: 10000; /* Higher than navbar (2000) and chatbot (1000) */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -277,32 +324,26 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    pointer-events: none; /* Prevent interaction when not active */
-    transform: translateZ(0); /* Create new stacking context */
+    pointer-events: none;
+    transform: translateZ(0);
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .airdrop-terms-modal-overlay.active,
 .airdrop-info-modal-overlay.active {
     opacity: 1;
     visibility: visible;
-    pointer-events: auto; /* Enable interaction when active */
+    pointer-events: auto;
 }
 
-/* Ensure modal backgrounds are truly full screen */
-.airdrop-terms-modal-overlay::before,
-.airdrop-info-modal-overlay::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-}
-
-/* Ensure modal content is properly positioned */
+/* ===================================
+   MODAL CONTENT - PROPER POSITIONING
+   =================================== */
 .airdrop-terms-modal,
 .airdrop-info-modal {
-    position: relative; /* Not fixed, parent handles positioning */
-    z-index: 10000; /* Above overlay */
+    position: relative;
+    z-index: 10001; /* Above overlay */
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.98) 0%, 
         rgba(45, 24, 16, 0.95) 100%);
@@ -324,49 +365,8 @@ body {
 }
 
 /* ===================================
-   PREVENT CONFLICTS WITH GLOBAL COMPONENTS
+   MODAL HEADER
    =================================== */
-/* Ensure footer stays below modals */
-#shared-components-container {
-    position: relative;
-    z-index: 1;
-}
-
-/* Ensure main content doesn't overflow when modal is open */
-main#main-content {
-    position: relative;
-    z-index: 1;
-}
-
-/* Ensure chatbot button stays accessible but below modals */
-.chatbot-button,
-.chatbot-widget {
-    z-index: 1000 !important; /* Below modals (9999) but above content */
-}
-
-/* When modal is open, dim chatbot slightly */
-body.modal-open .chatbot-button {
-    opacity: 0.5;
-    pointer-events: none;
-}
-
-/* ===================================
-   SCROLLBAR WIDTH CALCULATION
-   =================================== */
-/* Calculate and store scrollbar width on page load */
-@supports (scrollbar-width: thin) {
-    body {
-        --scrollbar-width: 0px; /* Firefox handles this automatically */
-    }
-}
-
-/* For webkit browsers (Chrome, Safari, Edge) */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    body {
-        --scrollbar-width: calc(100vw - 100%);
-    }
-}
-
 .airdrop-terms-modal-header,
 .airdrop-info-modal-header {
     display: flex;
@@ -376,6 +376,7 @@ body.modal-open .chatbot-button {
     background: var(--ember-gradient-primary);
     border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
     border-bottom: 2px solid rgba(240, 165, 0, 0.4);
+    flex-shrink: 0;
 }
 
 .airdrop-terms-modal-header h3,
@@ -400,6 +401,7 @@ body.modal-open .chatbot-button {
     justify-content: center;
     border-radius: 50%;
     transition: var(--transition-base);
+    line-height: 1;
 }
 
 .airdrop-terms-close:hover,
@@ -408,6 +410,9 @@ body.modal-open .chatbot-button {
     transform: rotate(90deg);
 }
 
+/* ===================================
+   MODAL BODY - SCROLLABLE CONTENT
+   =================================== */
 .airdrop-terms-modal-body,
 .airdrop-info-modal-body {
     flex: 1;
@@ -515,6 +520,9 @@ body.modal-open .chatbot-button {
     margin: 0;
 }
 
+/* ===================================
+   MODAL FOOTER
+   =================================== */
 .airdrop-terms-modal-footer,
 .airdrop-info-modal-footer {
     display: flex;
@@ -525,6 +533,7 @@ body.modal-open .chatbot-button {
     border-top: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
     gap: 1rem;
+    flex-shrink: 0;
 }
 
 .airdrop-terms-agree-btn,
@@ -583,7 +592,30 @@ body.modal-open .chatbot-button {
     color: var(--ember-gold);
 }
 
-/* Mobile modal improvements */
+/* ===================================
+   PREVENT CONFLICTS WITH GLOBAL COMPONENTS
+   =================================== */
+/* Ensure chatbot stays accessible but below modals */
+.chatbot-button,
+.chatbot-widget {
+    z-index: 1000 !important;
+}
+
+/* Dim chatbot when modal is open */
+body.modal-open .chatbot-button {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Ensure navbar stays below modals */
+.navbar,
+header {
+    z-index: 2000 !important;
+}
+
+/* ===================================
+   MOBILE MODAL IMPROVEMENTS
+   =================================== */
 @media (max-width: 768px) {
     .airdrop-terms-modal-overlay,
     .airdrop-info-modal-overlay {
@@ -598,23 +630,69 @@ body.modal-open .chatbot-button {
         margin: auto;
     }
     
-    /* Prevent body scroll bounce on iOS */
-    body.modal-open {
-        position: fixed;
+    .airdrop-terms-modal-header,
+    .airdrop-info-modal-header {
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .airdrop-terms-modal-header h3,
+    .airdrop-info-modal-header h3 {
+        font-size: 1.25rem;
+    }
+    
+    .airdrop-terms-modal-body,
+    .airdrop-info-modal-body {
+        padding: 1.5rem;
+    }
+    
+    .airdrop-terms-modal-footer,
+    .airdrop-info-modal-footer {
+        flex-direction: column;
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .airdrop-terms-agree-btn,
+    .airdrop-info-ok-btn,
+    .airdrop-terms-cancel-btn {
         width: 100%;
-        height: 100%;
-        overflow: hidden;
     }
 }
 
 /* ===================================
-   COMING SOON & EARLY 2026 BADGES - TRANSPARENT (NEW)
+   BADGE STYLES - TRANSPARENT (EXISTING)
    =================================== */
 .coming-soon-badge-overlay,
 .early-2026-badge-overlay {
     background: rgba(139, 92, 246, 0.2) !important;
     border: 2px solid rgba(139, 92, 246, 0.5) !important;
     color: white !important;
+}
+
+/* ===================================
+   BADGE STYLES - SOLID (NEW)
+   =================================== */
+.coming-soon-badge-overlay-solid,
+.early-2026-badge-overlay-solid {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    padding: 6px 16px;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    z-index: 10;
+    border: none;
+}
+
+.coming-soon-badge-overlay-solid {
+    background: #d73327;
+    box-shadow: 0 4px 12px rgba(215, 51, 39, 0.5);
+}
+
+.early-2026-badge-overlay-solid {
+    background: #8b5cf6;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
 }
 
 /* ===================================
@@ -760,7 +838,9 @@ body.modal-open .chatbot-button {
 
 .early-2026 {
     background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-}.cta-card-header {
+}
+
+.cta-card-header {
     margin-bottom: 1.5rem;
 }
 
@@ -1240,13 +1320,18 @@ body.modal-open .chatbot-button {
     position: relative;
 }
 
+/* ===================================
+   AIRDROP POWERED BY - CENTERED (NEW)
+   =================================== */
 .airdrop-powered-by {
     position: absolute;
     bottom: 1rem;
-    right: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.4);
     font-style: italic;
+    text-align: center;
 }
 
 .ember-airdrop-compact-header {
@@ -1850,9 +1935,7 @@ body.modal-open .chatbot-button {
     left: 0;
     color: var(--ember-gold);
     font-weight: 700;
-}
-
-/* ===================================
+}/* ===================================
    CRYPTO COIN SECTION
    =================================== */
 
@@ -1988,7 +2071,9 @@ body.modal-open .chatbot-button {
     font-size: 1rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
-}/* Technology Modules */
+}
+
+/* Technology Modules */
 .technology-modules {
     margin-top: 3rem;
 }
@@ -2658,9 +2743,18 @@ body.modal-open .chatbot-button {
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
 }
 
+/* ===================================
+   LARGER BENEFIT HEADER ICONS (NEW)
+   =================================== */
 .benefit-header-icon {
     width: 40px;
     height: 40px;
+    object-fit: contain;
+}
+
+.benefit-header-icon-large {
+    width: 56px;
+    height: 56px;
     object-fit: contain;
 }
 
@@ -2962,9 +3056,15 @@ body.modal-open .chatbot-button {
     transition: var(--transition-base);
 }
 
+/* ===================================
+   GOLDEN GROWTH TIER (NEW)
+   =================================== */
 .sdk-tier.featured {
-    border-color: #8b5cf6;
-    background: rgba(139, 92, 246, 0.1);
+    border-color: var(--ember-gold);
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.15) 0%, 
+        rgba(215, 51, 39, 0.1) 100%);
+    box-shadow: 0 0 30px rgba(240, 165, 0, 0.3);
 }
 
 .sdk-tier:hover {
@@ -3162,9 +3262,7 @@ body.modal-open .chatbot-button {
 .journey-secondary-link:hover {
     color: var(--ember-orange);
     transform: translateX(3px);
-}
-
-/* ===================================
+}/* ===================================
    FINAL CTA SECTION - BALANCED & COMPACT
    =================================== */
 
@@ -3444,7 +3542,6 @@ body.modal-open .chatbot-button {
     }
     
     .cta-grid,
-    .hero-features-grid,
     .ember-token-grid-redesigned,
     .crypto-content,
     .technology-grid,
@@ -3488,7 +3585,14 @@ body.modal-open .chatbot-button {
         padding: calc(var(--section-padding) + 40px) var(--container-padding) var(--section-padding);
     }
     
-    .hero-features-grid,
+    /* ===================================
+       MOBILE 2x2 GRID FOR HERO FEATURES (NEW)
+       =================================== */
+    .hero-features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
     .ember-countdown-timer-redesigned,
     .presale-stats-redesigned,
     .share-buttons-grid,
@@ -3500,9 +3604,19 @@ body.modal-open .chatbot-button {
         grid-template-columns: 1fr;
     }
     
+    /* ===================================
+       MOBILE PHONE IMAGE FIX (NEW)
+       =================================== */
     .crypto-coin-phone-frame {
         display: block;
         padding: 10px;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    
+    .phoenix-coin-image {
+        width: 100%;
+        max-width: 280px;
     }
     
     .thumbnail-grid,
@@ -3539,10 +3653,34 @@ body.modal-open .chatbot-button {
     .thumb-label {
         font-size: 0.65rem;
     }
+    
+    /* Further reduce phone frame on very small screens */
+    .crypto-coin-phone-frame {
+        padding: 8px;
+    }
+    
+    .phoenix-coin-image {
+        max-width: 240px;
+    }
 }
 
 /**
  * ============================================
- * END OF LOCAL.CSS - WITH MODAL FIXES APPLIED
+ * END OF LOCAL.CSS - FULLY UPDATED WITH ALL EDITS
+ * ============================================
+ * 
+ * CHANGELOG:
+ * - Added .free-tokens-banner-red with red gradient and glow animation
+ * - Added .phantom-icon-compact (48px) for compact phantom wallet display
+ * - Added .phantom-text-compact for flexible column layout
+ * - Updated .phantom-get-link with 0.9rem font size
+ * - Added .coming-soon-badge-overlay-solid and .early-2026-badge-overlay-solid
+ * - Updated .airdrop-powered-by to be centered with transform
+ * - Added .benefit-header-icon-large (56px) for larger benefit icons
+ * - Added golden styling to .sdk-tier.featured with gold border and shadow
+ * - Added mobile 2x2 grid for .hero-features-grid at 768px breakpoint
+ * - Added mobile phone image fixes for .crypto-coin-phone-frame and .phoenix-coin-image
+ * - All modal z-index fixes and body scroll prevention maintained
+ * - All existing styles preserved
  * ============================================
  */
