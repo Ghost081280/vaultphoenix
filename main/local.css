@@ -3170,8 +3170,9 @@ header {
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
 }
 
-.sdk-solution .solution-price {
-    border-bottom-color: rgba(139,92,246,0.3);
+.sdk-solution {
+    border-color: rgba(139,92,246,0.5);
+    background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
 }
 
 .price-amount {
