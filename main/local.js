@@ -62,7 +62,7 @@ function initializeTermsModal() {
     
     // Close modal
     function closeModal(e) {
-        if (e) e.preventDefault(); // ADDED - Prevents page jump
+        if (e) e.preventDefault();
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
     }
@@ -78,7 +78,7 @@ function initializeTermsModal() {
     // Click outside to close
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
-            e.preventDefault(); // ADDED - Prevents page jump
+            e.preventDefault();
             closeModal();
         }
     });
@@ -86,7 +86,7 @@ function initializeTermsModal() {
     // Agree button - enables checkbox and closes modal
     if (agreeBtn) {
         agreeBtn.addEventListener('click', function(e) {
-            e.preventDefault(); // ADDED - Prevents page jump
+            e.preventDefault();
             termsCheckbox.disabled = false;
             termsCheckbox.checked = true;
             closeModal();
@@ -115,14 +115,12 @@ function initializeInfoModal() {
         return;
     }
     
-    // Open modal - FIXED TO PREVENT PAGE JUMP
+    // Open modal
     openBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        e.stopImmediatePropagation(); // ADDED - Extra protection
         modal.classList.add('active');
         document.body.classList.add('modal-open');
-        return false; // ADDED - Extra protection
     });
     
     // Close modal
@@ -155,6 +153,7 @@ function initializeInfoModal() {
         }
     });
 }
+
 // ============================================
 // PHONE IMAGE GALLERY
 // ============================================
