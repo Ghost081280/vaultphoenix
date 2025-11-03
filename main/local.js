@@ -1,6 +1,6 @@
 // ============================================
 // VAULT PHOENIX MAIN.HTML LOCAL JAVASCRIPT
-// Updated with modal functionality and all interactive features
+// FIXED VERSION - Compatible with global.js
 // ============================================
 
 (function() {
@@ -27,13 +27,13 @@ function initializeTermsModal() {
         e.preventDefault();
         e.stopPropagation();
         modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        document.body.classList.add('modal-open'); // FIXED: Use class instead of inline style
     });
     
     // Close modal
     function closeModal() {
         modal.classList.remove('active');
-        document.body.style.overflow = '';
+        document.body.classList.remove('modal-open'); // FIXED: Use class instead of inline style
     }
     
     if (closeBtn) {
@@ -87,13 +87,13 @@ function initializeInfoModal() {
         e.preventDefault();
         e.stopPropagation();
         modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        document.body.classList.add('modal-open'); // FIXED: Use class instead of inline style
     });
     
     // Close modal
     function closeModal() {
         modal.classList.remove('active');
-        document.body.style.overflow = '';
+        document.body.classList.remove('modal-open'); // FIXED: Use class instead of inline style
     }
     
     if (closeBtn) {
@@ -203,7 +203,7 @@ function initializeAirdropForm() {
         }
         
         // Simulate submission (replace with actual API call)
-        showMessage('loading', 'Submitting your claim...');
+        showMessage('info', 'Submitting your claim...');
         
         try {
             // TODO: Replace with actual API endpoint
@@ -340,16 +340,20 @@ function initializeAirdropTracker() {
 function init() {
     console.log('🔥 Main page local JS initializing...');
     
-    // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeModals();
-        });
-    } else {
-        initializeModals();
+    // FIXED: Wait for both DOM and global.js to be ready
+    function waitForGlobal() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                // Small delay to ensure global.js completes loading footer/chatbot
+                setTimeout(initializeAllComponents, 150);
+            });
+        } else {
+            // DOM already loaded, small delay for global.js to finish
+            setTimeout(initializeAllComponents, 150);
+        }
     }
     
-    function initializeModals() {
+    function initializeAllComponents() {
         // Initialize all components
         initializeTermsModal();
         initializeInfoModal();
@@ -359,7 +363,10 @@ function init() {
         initializeAirdropTracker();
         
         console.log('✅ Main page local JS initialized');
+        console.log('✅ Footer and chatbot should now be visible');
     }
+    
+    waitForGlobal();
 }
 
 // Start initialization
