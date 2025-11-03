@@ -1,11 +1,55 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.0 NO SHAKE
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.1 FIXED LOADER
 // ============================================
-// FIXES: NO SHAKE during streaming, Keyboard handling NO ZOOM, Button stays visible
+// FIXES: Proper component loading sequence, better initialization
 // ============================================
 
 (function() {
 'use strict';
+
+// ============================================
+// LOAD SHARED COMPONENTS FROM shared/global.html
+// ============================================
+async function loadSharedComponents() {
+    console.log('📦 Loading shared components...');
+    
+    const container = document.getElementById('shared-components-container');
+    if (!container) {
+        console.error('❌ #shared-components-container not found in HTML!');
+        return false;
+    }
+    
+    try {
+        const response = await fetch('./shared/global.html');
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const html = await response.text();
+        container.innerHTML = html;
+        
+        console.log('✅ Shared components loaded successfully');
+        
+        // Verify components are present
+        const footer = document.querySelector('.footer');
+        const chatbot = document.querySelector('.chatbot-button-container');
+        
+        if (footer && chatbot) {
+            console.log('✅ Footer and Chatbot verified in DOM');
+            return true;
+        } else {
+            console.error('❌ Components loaded but not found:', {
+                footer: !!footer,
+                chatbot: !!chatbot
+            });
+            return false;
+        }
+        
+    } catch (error) {
+        console.error('❌ Failed to load shared components:', error);
+        return false;
+    }
+}
 
 // ============================================
 // SERVICE STATUS TRACKING
@@ -1299,10 +1343,19 @@ window.addEventListener('resize', function() {
 });
 
 // ============================================
-// INITIALIZATION
+// INITIALIZATION SEQUENCE
 // ============================================
 async function init() {
-    console.log('🔥 Vault Phoenix v8.0 NO SHAKE Initializing...');
+    console.log('🔥 Vault Phoenix v8.1 FIXED LOADER Initializing...');
+    
+    // CRITICAL: Load shared components FIRST
+    const componentsLoaded = await loadSharedComponents();
+    
+    if (!componentsLoaded) {
+        console.error('❌ Failed to load shared components - retrying in 1 second...');
+        setTimeout(init, 1000);
+        return;
+    }
     
     await loadPhoenixAITraining();
     
@@ -1344,10 +1397,8 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v8.0 NO SHAKE Complete');
-    console.log('💬 Streaming: NO SHAKE with batched DOM updates');
-    console.log('📱 Mobile Landscape: NO ZOOM, button stays visible');
-    console.log('🖥️ Desktop: Fixed sizing at ALL browser widths');
+    console.log('✅ Vault Phoenix v8.1 FIXED LOADER Complete');
+    console.log('✅ Footer and Chatbot loaded from shared/global.html');
 }
 
 if (document.readyState === 'loading') {
