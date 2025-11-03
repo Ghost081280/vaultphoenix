@@ -61,7 +61,8 @@ function initializeTermsModal() {
     });
     
     // Close modal
-    function closeModal() {
+    function closeModal(e) {
+        if (e) e.preventDefault(); // ADDED - Prevents page jump
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
     }
@@ -77,13 +78,15 @@ function initializeTermsModal() {
     // Click outside to close
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
+            e.preventDefault(); // ADDED - Prevents page jump
             closeModal();
         }
     });
     
     // Agree button - enables checkbox and closes modal
     if (agreeBtn) {
-        agreeBtn.addEventListener('click', function() {
+        agreeBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // ADDED - Prevents page jump
             termsCheckbox.disabled = false;
             termsCheckbox.checked = true;
             closeModal();
@@ -121,7 +124,8 @@ function initializeInfoModal() {
     });
     
     // Close modal
-    function closeModal() {
+    function closeModal(e) {
+        if (e) e.preventDefault(); // ADDED - Prevents page jump
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
     }
@@ -137,6 +141,7 @@ function initializeInfoModal() {
     // Click outside to close
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
+            e.preventDefault(); // ADDED - Prevents page jump
             closeModal();
         }
     });
