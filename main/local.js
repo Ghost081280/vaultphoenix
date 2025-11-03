@@ -115,17 +115,19 @@ function initializeInfoModal() {
         return;
     }
     
-    // Open modal
+    // Open modal - FIXED TO PREVENT PAGE JUMP
     openBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation(); // ADDED - Extra protection
         modal.classList.add('active');
         document.body.classList.add('modal-open');
+        return false; // ADDED - Extra protection
     });
     
     // Close modal
     function closeModal(e) {
-        if (e) e.preventDefault(); // ADDED - Prevents page jump
+        if (e) e.preventDefault();
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
     }
@@ -141,7 +143,7 @@ function initializeInfoModal() {
     // Click outside to close
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
-            e.preventDefault(); // ADDED - Prevents page jump
+            e.preventDefault();
             closeModal();
         }
     });
@@ -153,7 +155,6 @@ function initializeInfoModal() {
         }
     });
 }
-
 // ============================================
 // PHONE IMAGE GALLERY
 // ============================================
