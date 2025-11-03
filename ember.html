@@ -151,41 +151,9 @@
         <img src="images/VPEmberCoin.PNG" alt="Ember Coin Icon" class="free-tokens-icon">
         <div class="free-tokens-text">
             <strong>Free $Ember Tokens Airdrop</strong>
-            <p>Share this page on social media and get 3,333 $Ember tokens for free! Learn more in our airdrop section.</p>
+            <p>Share this page on social media and get 3,333 $Ember tokens for free! Learn more in our airdrop section below.</p>
         </div>
     </div>
-
-    <!-- Airdrop Progress Tracker -->
-    <section class="airdrop-progress-section">
-        <div class="airdrop-progress-container">
-            <h2 class="airdrop-progress-title">Airdrop Progress</h2>
-            <div class="airdrop-progress-bar">
-                <div class="airdrop-progress-fill" id="ember-progress-bar" style="width: 0%;"></div>
-            </div>
-            <div class="airdrop-progress-stats">
-                <div class="airdrop-stat">
-                    <span class="airdrop-stat-label">Total Pool:</span>
-                    <span class="airdrop-stat-value">16,670,000</span>
-                </div>
-                <div class="airdrop-stat">
-                    <span class="airdrop-stat-label">Claimed:</span>
-                    <span class="airdrop-stat-value" id="ember-claimed">0</span>
-                </div>
-                <div class="airdrop-stat">
-                    <span class="airdrop-stat-label">Remaining:</span>
-                    <span class="airdrop-stat-value" id="ember-remaining">16,670,000</span>
-                </div>
-                <div class="airdrop-stat">
-                    <span class="airdrop-stat-label">People:</span>
-                    <span class="airdrop-stat-value" id="ember-people-claimed">0 / 5,000</span>
-                </div>
-                <div class="airdrop-stat">
-                    <span class="airdrop-stat-label">Progress:</span>
-                    <span class="airdrop-stat-value" id="ember-progress-percentage">0</span>%
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Airdrop Claim Form -->
     <section class="airdrop-claim-section" id="presale-form">
@@ -230,6 +198,34 @@
 
             <!-- Info Button -->
             <button id="airdrop-info-btn" class="airdrop-info-btn">How Does the Airdrop Work?</button>
+        </div>
+    </section>
+
+    <!-- Airdrop Progress Tracker -->
+    <section class="airdrop-progress-section">
+        <div class="airdrop-progress-container">
+            <h3 class="airdrop-progress-title">Airdrop Progress</h3>
+            <div class="airdrop-progress-bar-container">
+                <div class="airdrop-progress-bar" id="ember-progress-bar" style="width: 0%;"></div>
+            </div>
+            <div class="airdrop-stats-grid">
+                <div class="airdrop-stat">
+                    <span class="airdrop-stat-label">Claimed:</span>
+                    <span class="airdrop-stat-value" id="ember-claimed">0</span>
+                </div>
+                <div class="airdrop-stat">
+                    <span class="airdrop-stat-label">Remaining:</span>
+                    <span class="airdrop-stat-value" id="ember-remaining">16,670,000</span>
+                </div>
+                <div class="airdrop-stat">
+                    <span class="airdrop-stat-label">People:</span>
+                    <span class="airdrop-stat-value" id="ember-people-claimed">0 / 5,000</span>
+                </div>
+                <div class="airdrop-stat">
+                    <span class="airdrop-stat-label">Progress:</span>
+                    <span class="airdrop-stat-value" id="ember-progress-percentage">0</span>%
+                </div>
+            </div>
         </div>
     </section>
 
@@ -327,6 +323,89 @@
             </div>
         </div>
     </section>
+
+    <!-- Token Presale Agreement Modal -->
+    <div id="tpa-modal" class="tpa-modal" style="display: none;">
+        <div class="tpa-modal-overlay" onclick="window.closeTpaModal()"></div>
+        <div class="tpa-modal-content">
+            <div class="tpa-modal-header">
+                <h3><img src="images/PhoenixLegal.PNG" alt="Legal" style="width: 36px; height: 36px; display: inline-block; vertical-align: middle; margin-right: 10px;"> Token Presale Agreement & Disclosures</h3>
+                <button class="tpa-modal-close" onclick="window.closeTpaModal()" aria-label="Close modal">×</button>
+            </div>
+            <div class="tpa-modal-body">
+                <p style="font-weight: 600; color: #f0a500; margin-bottom: 20px;"><img src="images/EmberWings.PNG" alt="Warning" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 6px;"> <strong>Important Legal Notice:</strong> You must read and agree to both the Token Presale Agreement and Ember Token Disclosures before participating in the presale.</p>
+                
+                <div style="background: rgba(215, 51, 39, 0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 25px;">
+                    <h4 style="color: #d73327; margin-bottom: 15px;"><img src="images/EmberWings.PNG" alt="Risk" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;"> Key Risk Disclosures:</h4>
+                    <ul style="margin-left: 20px; margin-bottom: 0; line-height: 1.8;">
+                        <li><strong>Investment Risk:</strong> Cryptocurrency investments are highly volatile and may result in total loss</li>
+                        <li><strong>No Refunds:</strong> All presale purchases are final and non-refundable</li>
+                        <li><strong>Regulatory Risks:</strong> Potential changes in cryptocurrency regulations and compliance requirements</li>
+                        <li><strong>Technology Risks:</strong> Smart contract vulnerabilities, platform development risks</li>
+                        <li><strong>KYC Requirements:</strong> Identity verification required for purchases over $1,000</li>
+                        <li><strong>No Guarantees:</strong> Forward-looking statements and project success uncertainties</li>
+                        <li><strong>Geographic Restrictions:</strong> Token sales availability by jurisdiction</li>
+                        <li><strong>Tax Implications:</strong> Responsibility for tax reporting and obligations</li>
+                    </ul>
+                </div>
+
+                <p style="font-weight: 600; color: #f0a500; margin-bottom: 20px;"><img src="images/EmberWings.PNG" alt="Important" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 6px;"> <strong>Important:</strong> Both documents must be reviewed and understood before proceeding with your investment. These documents contain critical legal terms, rights, obligations, and risk disclosures that protect both you and Vault Phoenix.</p>
+            </div>
+            
+            <div class="tpa-modal-actions">
+                <a href="docs/Token_Presale_Agreement_Utility_Token.pdf" target="_blank" rel="noopener noreferrer" class="tpa-download-btn" style="margin-bottom: 10px;" aria-label="Download Token Presale Agreement PDF">
+                    <img src="images/TechnicalFoundation.PNG" alt="Download" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;"> Download Token Presale Agreement (PDF)
+                </a>
+                <a href="docs/Ember_Token_Disclosures.pdf" target="_blank" rel="noopener noreferrer" class="tpa-download-btn" style="margin-bottom: 20px;" aria-label="Download Token Disclosures PDF">
+                    <img src="images/Legalandfinancialoversight.PNG" alt="Download" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;"> Download Token Disclosures (PDF)
+                </a>
+                <button class="tpa-agree-btn" onclick="window.agreeTpa()" aria-label="Agree to Token Presale terms and disclosures">
+                    I Have Read Both Documents and Agree to Terms
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Whitepaper Modal -->
+    <div id="whitepaperModal" class="tpa-modal" style="display: none;">
+        <div class="tpa-modal-overlay" onclick="window.closeWhitepaperModal()"></div>
+        <div class="tpa-modal-content">
+            <div class="tpa-modal-header">
+                <h3><img src="images/PhoenixWhitepaper.PNG" alt="Books" style="width: 36px; height: 36px; display: inline-block; vertical-align: middle; margin-right: 10px;"> Vault Phoenix Whitepaper 2025</h3>
+                <button class="tpa-modal-close" onclick="window.closeWhitepaperModal()" aria-label="Close whitepaper modal">×</button>
+            </div>
+            <div class="tpa-modal-body">
+                <div class="tpa-preview">
+                    <h4><img src="images/TechnicalFoundation.PNG" alt="Book" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;"> Comprehensive Technical Documentation</h4>
+                    <p style="margin-bottom: 25px;">Our complete whitepaper provides in-depth technical analysis, business model documentation, and strategic roadmap for the Vault Phoenix AR crypto gaming platform.</p>
+                    
+                    <div style="background: rgba(240, 165, 0, 0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(240, 165, 0, 0.3); margin-bottom: 25px;">
+                        <h4 style="color: #f0a500; margin-bottom: 15px;"><img src="images/TechnicalFoundation.PNG" alt="Document" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;"> What's Inside the Whitepaper:</h4>
+                        <ul style="margin-left: 20px; margin-bottom: 0; line-height: 1.8;">
+                            <li><strong>Token Economics:</strong> Complete $Ember tokenomics including allocation, vesting schedules, and utility mechanics</li>
+                            <li><strong>GPS & Beacon Technology:</strong> Comprehensive integration guide for outdoor (GPS) and indoor (Beacon) location tracking</li>
+                            <li><strong>Business Model:</strong> Three-stakeholder ecosystem (Platform Operators, Players, Advertisers) revenue flows</li>
+                            <li><strong>Technical Architecture:</strong> Smart contract design, management system infrastructure, SDK documentation</li>
+                            <li><strong>White-Label Platform:</strong> Deployment guide for white-label AR gaming applications</li>
+                            <li><strong>Market Analysis:</strong> Industry research, competitive landscape, growth projections</li>
+                            <li><strong>Legal & Compliance:</strong> Regulatory framework, KYC/AML procedures, security measures</li>
+                            <li><strong>Development Roadmap:</strong> Detailed quarter-by-quarter execution plan through 2026+</li>
+                            <li><strong>Security Protocols:</strong> Smart contract audits, multi-sig wallet security, risk mitigation</li>
+                            <li><strong>Case Studies:</strong> Example use cases and deployment scenarios</li>
+                        </ul>
+                    </div>
+
+                    <p style="font-weight: 600; color: #f0a500; margin-bottom: 20px; text-align: center;"><img src="images/TechnicalFoundation.PNG" alt="Document" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 6px;"> 23-page comprehensive guide to the future of location-based AR crypto gaming</p>
+                </div>
+                
+                <div class="tpa-modal-actions">
+                    <a href="docs/Vault_Phoenix_Whitepaper_2025.pdf" target="_blank" rel="noopener noreferrer" class="tpa-download-btn" download aria-label="Download Vault Phoenix Whitepaper PDF">
+                        <img src="images/PhoenixWhitepaper.PNG" alt="Download" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;"> Download Whitepaper (PDF)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Shared Components Container -->
     <div id="shared-components-container"></div>
