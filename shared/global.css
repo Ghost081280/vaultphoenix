@@ -285,11 +285,6 @@ div[class*="-hero"].scroll-reveal,
     display: inline-block;
     filter: drop-shadow(0 0 20px rgba(215, 51, 39, 0.6));
 }
-.main-image-glow img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
 
 .main-orange-glow {
     filter: drop-shadow(0 0 20px rgba(215, 51, 39, 0.8));
