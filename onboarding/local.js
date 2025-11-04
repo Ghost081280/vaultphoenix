@@ -41,27 +41,22 @@ function calculateROI() {
     const pricePerLocation = parseFloat(document.getElementById('price-per-location').value) || 0;
     const duration = parseInt(document.getElementById('duration').value) || 1;
     
-    // Update slider value display
     document.getElementById('locations-value').textContent = locations;
 
-    // Calculations
     const monthlyRevenue = locations * pricePerLocation;
     const totalSetupRevenue = setupFee;
     const totalRecurringRevenue = monthlyRevenue * duration;
     const totalCampaignRevenue = totalSetupRevenue + totalRecurringRevenue;
     const revenuePerLocation = locations > 0 ? totalCampaignRevenue / locations : 0;
 
-    // Update results
     document.getElementById('monthly-revenue').textContent = `$${monthlyRevenue.toLocaleString()}`;
     document.getElementById('total-revenue').textContent = `$${totalCampaignRevenue.toLocaleString()}`;
     document.getElementById('revenue-per-location').textContent = `$${revenuePerLocation.toFixed(0)}`;
 }
 
-// Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
-    calculateROI(); // Run once on load
+    calculateROI();
     
-    // Re-calculate on any input change
     const inputs = ['locations', 'setup-fee', 'price-per-location', 'duration'];
     inputs.forEach(id => {
         const el = document.getElementById(id);
@@ -71,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Scroll reveal animation
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -79,11 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, { threshold: 0.1 });
-    
-    document.querySelectorAll('.scroll-reveal').forEach(el => {
-        observer.observe(el);
-    });
-});
     
     document.querySelectorAll('.scroll-reveal').forEach(el => {
         observer.observe(el);
