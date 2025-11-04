@@ -1,7 +1,7 @@
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 1 OF 3 - FIXED VERSION
-   Core Styles + Hero Section + Steps
+   PART 1 OF 3 - RESTORED & FIXED VERSION
+   Core Styles + Hero Section + Steps + Airdrop Fixes
    =================================== */
 
 /* ===================================
@@ -315,6 +315,12 @@
     border-color: rgba(139, 92, 246, 0.8) !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+.ember-social-icon-small {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
 /* ===================================
@@ -637,11 +643,10 @@
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* END OF PART 1 */
-/* ===================================
+/* END OF PART 1 *//* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 2 OF 3 - FIXED VERSION
-   Ember Token Section + Airdrop Section + Crypto Coins Section (MOBILE FIXED)
+   PART 2 OF 3 - RESTORED & FIXED VERSION
+   Ember Token Section + FIXED AIRDROP SECTION + FIXED CRYPTO COINS SECTION
    =================================== */
 
 /* ===================================
@@ -918,7 +923,7 @@
 }
 
 /* ===================================
-   $EMBER AIRDROP SECTION - COMPACT FOR MOBILE
+   $EMBER AIRDROP SECTION - FULLY RESTORED & FIXED
    =================================== */
 .ember-airdrop-section {
     padding: var(--section-padding) var(--container-padding);
@@ -992,6 +997,7 @@
 .ember-coming-text p {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.85rem;
 }
 
 .ember-social-links-compact {
@@ -1000,11 +1006,6 @@
     gap: 0.85rem;
     flex-wrap: wrap;
     margin-top: 0.85rem;
-}
-
-.ember-social-icon-small {
-    width: 18px;
-    height: 18px;
 }
 
 .ember-compact-grid {
@@ -1070,12 +1071,443 @@
     transform: scale(1.15);
 }
 
-/* Additional airdrop styles continue... */
+/* AIRDROP STATS - RESTORED */
+.ember-stats-compact {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
+}
+
+.ember-stat-mini {
+    background: rgba(215, 51, 39, 0.1);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 0.85rem;
+    text-align: center;
+}
+
+.ember-stat-mini .stat-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    display: block;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ember-stat-mini .stat-value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--ember-gold);
+    display: block;
+}
+
+.ember-stat-mini .stat-value.claimed {
+    color: #60a5fa;
+}
+
+.ember-stat-mini .stat-value.remaining {
+    color: #f0a500;
+}
+
+/* PROGRESS BAR - RESTORED */
+.ember-progress-compact {
+    margin-bottom: 1.25rem;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 12px;
+    background: rgba(15, 15, 15, 0.6);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: 0.6rem;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--ember-gradient-primary);
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.progress-text {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+/* PRESALE DETAILS - RESTORED */
+.presale-details-compact {
+    background: rgba(215, 51, 39, 0.1);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.presale-details-compact h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 0.85rem;
+    text-align: center;
+}
+
+.presale-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+}
+
+.presale-info-item {
+    text-align: center;
+}
+
+.presale-info-item .info-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.presale-info-item .info-value {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    display: block;
+}
+
+/* ALLOCATION INFO - RESTORED */
+.allocation-info {
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.allocation-info h5 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #60a5fa;
+    margin-bottom: 0.65rem;
+    text-align: center;
+}
+
+.allocation-details {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    margin-bottom: 0.85rem;
+}
+
+.allocation-cta {
+    text-align: center;
+}
+
+.allocation-link-btn {
+    display: inline-block;
+    padding: 7px 14px;
+    background: rgba(96, 165, 250, 0.2);
+    border: 1px solid rgba(96, 165, 250, 0.5);
+    border-radius: var(--radius-lg);
+    color: #60a5fa;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+.allocation-link-btn:hover {
+    background: rgba(96, 165, 250, 0.3);
+    transform: translateY(-2px);
+}
+
+/* STATUS CHECKER - RESTORED */
+.status-checker-integrated {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.status-checker-integrated h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #8b5cf6;
+    margin-bottom: 0.4rem;
+    text-align: center;
+}
+
+.status-checker-description {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin-bottom: 0.85rem;
+}
+
+.status-input-row {
+    display: flex;
+    gap: 0.65rem;
+}
+
+.input-compact {
+    flex: 1;
+    padding: 0.7rem;
+    background: rgba(15, 15, 15, 0.6);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 0.85rem;
+}
+
+.input-compact::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.input-compact:focus {
+    outline: none;
+    border-color: #8b5cf6;
+}
+
+.status-btn-compact {
+    padding: 0.7rem 1.25rem;
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition-base);
+    flex-shrink: 0;
+}
+
+.status-btn-compact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+/* POWERED BY TEXT */
+.airdrop-powered-by {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 1.25rem;
+    font-style: italic;
+}
+
+/* SHARE TO CLAIM SECTION - RESTORED */
+.share-to-claim-section {
+    margin-bottom: 1.25rem;
+}
+
+.share-to-claim-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 0.4rem;
+    text-align: center;
+}
+
+.share-to-claim-subtitle {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin-bottom: 0.85rem;
+}
+
+.share-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+    margin-bottom: 1.25rem;
+}
+
+.share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem;
+    border-radius: var(--radius-lg);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-base);
+    border: 2px solid;
+    text-decoration: none;
+}
+
+.share-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* PHANTOM PROMO - RESTORED */
+.phantom-promo-compact {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 0.85rem;
+    margin-bottom: 1.25rem;
+}
+
+.phantom-icon-compact {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.phantom-text-compact {
+    flex: 1;
+}
+
+.phantom-text-compact strong {
+    display: block;
+    font-size: 0.85rem;
+    color: #ffffff;
+    margin-bottom: 0.2rem;
+}
+
+.phantom-get-link {
+    font-size: 0.8rem;
+    color: #60a5fa;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.phantom-get-link:hover {
+    text-decoration: underline;
+}
+
+/* FORM FIELDS - RESTORED */
+.ember-form-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group-compact label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-group-compact .required {
+    color: #f87171;
+}
+
+.form-group-compact input[type="text"],
+.form-group-compact input[type="email"],
+.form-group-compact input[type="url"] {
+    width: 100%;
+}
+
+/* TERMS CHECKBOX - RESTORED */
+.terms-group {
+    margin: 0.85rem 0;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+}
+
+.terms-checkbox input[type="checkbox"] {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.terms-link-btn {
+    background: none;
+    border: none;
+    color: #60a5fa;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    font-size: inherit;
+}
+
+.terms-link-btn:hover {
+    color: #93c5fd;
+}
+
+/* CLAIM BUTTON - RESTORED */
+.claim-btn-compact {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.5rem;
+    background: var(--ember-gradient-primary);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition-base);
+    margin-top: 0.85rem;
+}
+
+.claim-btn-compact:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--ember-shadow-lg);
+}
+
+.claim-btn-compact:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* MESSAGE BOX - RESTORED */
+.message-box-compact {
+    margin-top: 1.25rem;
+    padding: 0.85rem;
+    border-radius: var(--radius-lg);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.message-box-compact.success {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.5);
+    color: #4ade80;
+}
+
+.message-box-compact.error {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    color: #f87171;
+}
 
 /* ===================================
-/* ===================================
-   CRYPTO COIN SECTION - CLEAN REBUILD
-   Single definitive section, no duplicates
+   CRYPTO COIN SECTION - MOBILE DISPLAY FIXED
    =================================== */
 
 .crypto-coin-section {
@@ -1135,7 +1567,7 @@
     line-height: 0;
 }
 
-/* Image */
+/* Image - CRITICAL FIX FOR MOBILE */
 .phoenix-coin-image {
     width: 100%;
     max-width: 100%;
@@ -1234,20 +1666,103 @@
     .crypto-content {
         grid-template-columns: 1fr;
     }
+    
+    .ember-token-grid-redesigned {
+        grid-template-columns: 1fr;
+    }
+    
+    .ember-token-right-redesigned {
+        position: static;
+    }
+    
+    .ember-highlights-redesigned {
+        grid-template-columns: 1fr;
+    }
+    
+    .ember-compact-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* Responsive - Mobile */
+/* Responsive - Mobile - CRITICAL FIXES */
 @media (max-width: 768px) {
     .crypto-content {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
     
+    /* CRITICAL: Ensure phone frame displays on mobile */
     .crypto-coin-phone-frame {
         max-width: 310px;
         padding: 10px;
         filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.5)) 
                 drop-shadow(0 0 50px rgba(215, 51, 39, 0.3));
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .crypto-coin-screen-wrapper {
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    .phoenix-coin-image {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    /* Airdrop mobile fixes */
+    .parachute-crate-enlarged {
+        max-width: 260px;
+    }
+    
+    .ember-airdrop-outer-module {
+        padding: 1.25rem;
+    }
+    
+    .ember-title-compact {
+        font-size: 1.5rem;
+        margin-bottom: 0.65rem;
+    }
+    
+    .ember-subtitle-compact {
+        font-size: 0.85rem;
+    }
+    
+    .ember-coming-soon-compact {
+        padding: 1rem;
+    }
+    
+    .ember-inner-module {
+        padding: 1rem;
+    }
+    
+    .ember-mini-header {
+        padding-bottom: 0.7rem;
+        margin-bottom: 1rem;
+    }
+    
+    .ember-stats-compact {
+        grid-template-columns: 1fr;
+    }
+    
+    .share-buttons-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .presale-stats-redesigned {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+    }
+    
+    .stat-divider-redesigned {
+        display: none;
+    }
+    
+    .presale-info-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1257,12 +1772,19 @@
         max-width: 280px;
         padding: 8px;
     }
+    
+    .parachute-crate-enlarged {
+        max-width: 220px;
+    }
+    
+    .ember-title-compact {
+        font-size: 1.35rem;
+    }
 }
 
-/* END OF CRYPTO COIN SECTION */
-/* ===================================
+/* END OF PART 2 *//* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 3 OF 3 - FINAL VERSION
+   PART 3 OF 3 - RESTORED & COMPLETE
    Technology Modules + Features + Showcase + Use Cases + Pricing + Final CTA + Modals + Responsive
    =================================== */
 
@@ -2825,7 +3347,7 @@
 }
 
 /* ===================================
-   MODALS - NO GLOBAL Z-INDEX CONFLICTS
+   MODALS - PROPERLY STYLED WITH NO CONFLICTS
    =================================== */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
@@ -3078,26 +3600,12 @@
 /* Tablet - 1024px and below */
 @media (max-width: 1024px) {
     .cta-grid,
-    .ember-token-grid-redesigned,
-    .technology-grid,
     .showcase-content,
     .system-benefits,
     .pricing-modules-container,
     .journey-paths-container {
         grid-template-columns: 1fr;
         gap: 1.75rem;
-    }
-    
-    .ember-token-right-redesigned {
-        position: static;
-    }
-    
-    .ember-highlights-redesigned {
-        grid-template-columns: 1fr;
-    }
-    
-    .ember-compact-grid {
-        grid-template-columns: 1fr;
     }
     
     .features-grid,
@@ -3166,11 +3674,6 @@
         height: 48px;
     }
     
-    /* CRITICAL: Compact $Ember Presale Launch for mobile */
-    .ember-countdown-widget-redesigned {
-        padding: 1.25rem;
-    }
-    
     .main-ember-countdown-icon-redesigned {
         width: 48px;
         height: 48px;
@@ -3196,78 +3699,12 @@
         font-size: 0.75rem;
     }
     
-    /* CRITICAL: Compact airdrop module for mobile */
-    .ember-airdrop-outer-module {
-        padding: 1.25rem;
-    }
-    
-    .parachute-crate-enlarged {
-        max-width: 260px;
-    }
-    
-    .ember-title-compact {
-        font-size: 1.5rem;
-        margin-bottom: 0.65rem;
-    }
-    
-    .ember-subtitle-compact {
-        font-size: 0.85rem;
-    }
-    
-    .ember-coming-soon-compact {
-        padding: 1rem;
-    }
-    
-    .ember-coming-text h3 {
-        font-size: 1.05rem;
-    }
-    
-    .ember-coming-text p {
-        font-size: 0.85rem;
-    }
-    
-    .ember-inner-module {
-        padding: 1rem;
-    }
-    
-    .ember-mini-header {
-        padding-bottom: 0.7rem;
-        margin-bottom: 1rem;
-    }
-    
-    .ember-mini-icon {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .info-badge-button {
-        width: 24px;
-        height: 24px;
-    }
-    
-    .info-badge-button svg {
-        width: 14px;
-        height: 14px;
-    }
-    
     .ember-countdown-timer-redesigned,
-    .presale-stats-redesigned,
-    .share-buttons-grid,
-    .ember-stats-compact,
     .combined-power-benefits,
     .features-grid,
     .use-cases-grid,
     .technology-stats {
         grid-template-columns: 1fr;
-    }
-    
-    .presale-stats-redesigned {
-        grid-template-columns: 1fr;
-        gap: 0.6rem;
-    }
-    
-    .stat-divider-redesigned {
-        display: none;
     }
     
     .thumbnail-grid,
@@ -3327,7 +3764,7 @@
         padding: 2.75rem var(--container-padding);
     }
     
-    .presale-info-grid {
+    .technology-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -3360,19 +3797,11 @@
     .thumb-label {
         font-size: 0.6rem;
     }
-    
-    .parachute-crate-enlarged {
-        max-width: 220px;
-    }
-    
-    .ember-title-compact {
-        font-size: 1.35rem;
-    }
 }
 
 /**
  * ============================================
- * END OF LOCAL.CSS - PART 3 OF 3 (COMPLETE)
+ * END OF LOCAL.CSS - PART 3 OF 3 (COMPLETE & RESTORED)
  * ============================================
  * 
  * ALL CRITICAL FIXES IMPLEMENTED:
@@ -3382,8 +3811,8 @@
  * ✅ Desktop: Compact final CTA modules
  * ✅ Mobile: All sections responsive
  * ✅ Mobile: Compact modules throughout
- * ✅ Mobile: Phone image displays correctly
- * ✅ Mobile: No red box around step 3
+ * ✅ Mobile: Phone image displays correctly (FORCED VISIBILITY)
+ * ✅ Mobile: Airdrop section fully restored with all styles
  * ✅ Modals: Proper z-index and styling
  * ✅ Production-ready with proper organization
  * ============================================
