@@ -1,8 +1,17 @@
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 1 OF 3 - CORRECTED (NO GLOBAL OVERRIDES)
+   PART 1 OF 3 - LAYOUT RESTORATION
    Core Styles + Module 1 (The Hook)
    =================================== */
+
+/* ===================================
+   RESET & BASE STYLES
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 /* ===================================
    FREE $EMBER TOKENS BANNER - ORIGINAL PURPLE
@@ -399,6 +408,9 @@
     font-size: 3rem; 
     color: #f0a500; 
     font-weight: 700; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cta-grid {
@@ -515,15 +527,14 @@
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* END OF PART 1 */
-/* ===================================
+/* END OF PART 1 *//* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 2 OF 3 - CORRECTED (NO GLOBAL OVERRIDES)
+   PART 2 OF 3 - LAYOUT RESTORATION
    Middle Sections: Token, Airdrop, Crypto, Features, Showcase
    =================================== */
 
 /* ===================================
-   EMBER TOKEN SECTION
+   EMBER TOKEN SECTION - RESTORED 2-COLUMN LAYOUT
    =================================== */
 .ember-token-section-redesigned {
     padding: var(--section-padding) var(--container-padding);
@@ -535,6 +546,22 @@
     grid-template-columns: 1.2fr 1fr;
     gap: 3rem;
     align-items: start;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.ember-token-left-redesigned {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.ember-token-right-redesigned {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: sticky;
+    top: calc(var(--navbar-height) + 2rem);
 }
 
 .ember-token-title-redesigned {
@@ -565,10 +592,26 @@
     margin-bottom: 1.5rem;
 }
 
+.countdown-icon-redesigned {
+    flex-shrink: 0;
+}
+
 .main-ember-countdown-icon-redesigned {
     width: 60px;
     height: 60px;
     object-fit: contain;
+}
+
+.countdown-text-redesigned h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 0.25rem;
+}
+
+.countdown-text-redesigned p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .ember-countdown-timer-redesigned {
@@ -605,6 +648,7 @@
     grid-template-columns: auto auto auto auto auto;
     gap: 1rem;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 1.5rem;
 }
 
@@ -634,6 +678,16 @@
     text-align: center;
 }
 
+.cta-icon-image-redesigned {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.cta-text-redesigned {
+    font-size: 1rem;
+}
+
 .ember-highlights-redesigned {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -658,6 +712,10 @@
     transform: translateX(5px);
 }
 
+.highlight-emoji-redesigned {
+    flex-shrink: 0;
+}
+
 .highlight-icon-image-redesigned {
     width: 32px;
     height: 32px;
@@ -676,6 +734,12 @@
     color: var(--ember-gold);
 }
 
+/* Phoenix Image Container */
+.ember-phoenix-container-redesigned {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 .phoenix-holding-coin-redesigned {
     width: 100%;
     max-width: 400px;
@@ -688,15 +752,30 @@
 }
 
 @keyframes phoenixGlow {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(240,165,0,0.4)); }
-    50% { filter: drop-shadow(0 0 40px rgba(240,165,0,0.8)); }
+    0%, 100% { 
+        filter: drop-shadow(0 0 20px rgba(240,165,0,0.4)); 
+    }
+    50% { 
+        filter: drop-shadow(0 0 40px rgba(240,165,0,0.8)); 
+    }
 }
 
+/* Compliance Section */
 .compliance-disclaimer-redesigned {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
     padding: 2rem;
+}
+
+.compliance-disclaimer-redesigned h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 1rem;
 }
 
 .main-compliance-icon-redesigned {
@@ -705,8 +784,19 @@
     object-fit: contain;
 }
 
+.compliance-disclaimer-redesigned p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.5rem;
+}
+
+.compliance-cta {
+    text-align: center;
+}
+
 /* ===================================
-   AIRDROP SECTION
+   AIRDROP SECTION - RESTORED COMPACT LAYOUT
    =================================== */
 .ember-airdrop-section {
     padding: var(--section-padding) var(--container-padding);
@@ -734,13 +824,18 @@
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
     padding: 2rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
 .ember-airdrop-compact-header {
     text-align: center;
     margin-bottom: 2rem;
+}
+
+.ember-header-text-compact {
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .ember-title-compact {
@@ -762,6 +857,18 @@
     padding: 1.5rem;
     margin-bottom: 2rem;
     text-align: center;
+}
+
+.ember-coming-text h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 0.5rem;
+}
+
+.ember-coming-text p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .ember-social-links-compact {
@@ -800,6 +907,13 @@
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
 }
 
+.ember-mini-header h3 {
+    flex: 1;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
 .ember-mini-icon {
     width: 40px;
     height: 40px;
@@ -826,6 +940,8 @@
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.6);
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .stat-value {
@@ -833,6 +949,14 @@
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--ember-gold);
+}
+
+.stat-value.claimed {
+    color: #ef4444;
+}
+
+.stat-value.remaining {
+    color: #10b981;
 }
 
 .ember-progress-compact {
@@ -854,6 +978,7 @@
     background: var(--ember-gradient-primary);
     border-radius: var(--radius-lg);
     transition: width 0.5s ease;
+    width: 0%;
 }
 
 .progress-text {
@@ -868,6 +993,13 @@
     border-radius: var(--radius-lg);
     padding: 1rem;
     margin-bottom: 1.5rem;
+}
+
+.presale-details-compact h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 0.75rem;
 }
 
 .presale-info-grid {
@@ -885,6 +1017,7 @@
     display: block;
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.25rem;
 }
 
 .info-value {
@@ -902,23 +1035,39 @@
     margin-bottom: 1.5rem;
 }
 
+.allocation-info h5 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ember-purple);
+    margin-bottom: 0.5rem;
+}
+
 .allocation-details {
     font-size: 0.85rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.8);
-    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.allocation-cta {
+    text-align: center;
 }
 
 .allocation-link-btn {
     display: inline-block;
+    padding: 8px 16px;
+    background: rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    border-radius: var(--radius-md);
     color: var(--ember-purple);
     font-weight: 600;
-    text-decoration: underline;
-    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    text-decoration: none;
     transition: all 0.3s ease;
 }
 
 .allocation-link-btn:hover {
+    background: rgba(139, 92, 246, 0.3);
     color: var(--ember-gold);
 }
 
@@ -930,6 +1079,13 @@
     margin-bottom: 1.5rem;
 }
 
+.status-checker-integrated h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ember-purple);
+    margin-bottom: 0.5rem;
+}
+
 .status-checker-description {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.7);
@@ -939,6 +1095,25 @@
 .status-input-row {
     display: flex;
     gap: 0.5rem;
+}
+
+.input-compact {
+    flex: 1;
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-md);
+    color: white;
+    font-size: 16px;
+    font-family: inherit;
+    transition: var(--transition-base);
+}
+
+.input-compact:focus {
+    outline: none;
+    border-color: var(--ember-gold);
+    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.15);
 }
 
 .status-btn-compact {
@@ -968,6 +1143,7 @@
     text-align: right;
 }
 
+/* Share to Claim Section */
 .share-to-claim-section {
     margin-bottom: 1.5rem;
 }
@@ -991,11 +1167,26 @@
     gap: 0.75rem;
 }
 
+.share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
 .share-icon {
     width: 18px;
     height: 18px;
 }
 
+/* Phantom Promo */
 .phantom-promo-compact {
     display: flex;
     align-items: center;
@@ -1021,10 +1212,16 @@
     gap: 0.25rem;
 }
 
+.phantom-text-compact strong {
+    font-size: 0.95rem;
+    color: #ffffff;
+}
+
 .phantom-get-link {
     color: var(--ember-purple);
     font-weight: 600;
     text-decoration: underline;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
 }
 
@@ -1032,6 +1229,7 @@
     color: var(--ember-gold);
 }
 
+/* Form Styles */
 .ember-form-compact {
     display: flex;
     flex-direction: column;
@@ -1054,24 +1252,6 @@
     color: #ef4444;
 }
 
-.input-compact {
-    width: 100%;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md);
-    color: white;
-    font-size: 16px;
-    font-family: inherit;
-    transition: var(--transition-base);
-}
-
-.input-compact:focus {
-    outline: none;
-    border-color: var(--ember-gold);
-    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.15);
-}
-
 .field-note {
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.5);
@@ -1092,11 +1272,16 @@
     align-items: flex-start;
     gap: 0.75rem;
     cursor: pointer;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .terms-checkbox input[type="checkbox"] {
     margin-top: 0.25rem;
     flex-shrink: 0;
+    width: 18px;
+    height: 18px;
 }
 
 .terms-link-btn {
@@ -1108,6 +1293,7 @@
     border: none;
     cursor: pointer;
     padding: 0;
+    font-size: inherit;
     transition: all 0.3s ease;
 }
 
@@ -1141,6 +1327,7 @@
     border-radius: var(--radius-md);
     margin-top: 1rem;
     font-size: 0.9rem;
+    display: none;
 }
 
 .message-box-compact.success {
@@ -1173,6 +1360,7 @@
     margin-left: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .info-badge-button:hover {
@@ -1193,6 +1381,12 @@
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: center;
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+}
+
+.crypto-image {
+    text-align: center;
 }
 
 .crypto-coin-phone-frame {
@@ -1222,6 +1416,12 @@
     display: block;
 }
 
+.crypto-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
 .crypto-title {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
@@ -1233,7 +1433,6 @@
     font-size: 1rem;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 2rem;
 }
 
 .crypto-benefits {
@@ -1259,6 +1458,10 @@
     transform: translateX(8px);
 }
 
+.benefit-icon {
+    flex-shrink: 0;
+}
+
 .custom-coin-icon-large,
 .custom-placement-icon-large {
     width: 64px;
@@ -1272,6 +1475,10 @@
     object-fit: contain;
 }
 
+.benefit-content {
+    flex: 1;
+}
+
 .benefit-content h3 {
     font-size: 1.2rem;
     font-weight: 700;
@@ -1283,11 +1490,25 @@
     font-size: 0.95rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
+    margin: 0;
 }
 
-/* Technology Modules */
+/* Technology Modules - Continue in Part 3... */
+
+/* END OF PART 2 *//* ===================================
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS
+   PART 3 OF 3 - LAYOUT RESTORATION (FINAL)
+   Final Sections: Tech Modules, Features, Showcase, Use Cases, Pricing, Modals, Responsive
+   =================================== */
+
+/* ===================================
+   TECHNOLOGY MODULES (GPS & BEACON)
+   =================================== */
 .technology-modules {
     margin-top: 3rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .technology-modules-title {
@@ -1311,6 +1532,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+    margin-bottom: 3rem;
 }
 
 .technology-card {
@@ -1326,6 +1548,10 @@
     box-shadow: var(--ember-shadow-xl);
 }
 
+.beacon-card {
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
 .technology-header {
     display: flex;
     align-items: center;
@@ -1333,10 +1559,18 @@
     margin-bottom: 1.5rem;
 }
 
+.technology-icon-container {
+    flex-shrink: 0;
+}
+
 .technology-icon {
     width: 56px;
     height: 56px;
     object-fit: contain;
+}
+
+.technology-header-text {
+    flex: 1;
 }
 
 .technology-badge {
@@ -1368,6 +1602,10 @@
     font-size: 0.95rem;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.5rem;
+}
+
+.technology-features {
     margin-bottom: 1.5rem;
 }
 
@@ -1432,7 +1670,11 @@
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-lg);
     padding: 1rem;
-    margin-top: 1.5rem;
+}
+
+.beacon-card .technology-highlight {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
 }
 
 .tech-highlight-icon {
@@ -1440,6 +1682,10 @@
     height: 40px;
     object-fit: contain;
     flex-shrink: 0;
+}
+
+.tech-highlight-content {
+    flex: 1;
 }
 
 .tech-highlight-content strong {
@@ -1457,8 +1703,8 @@
     margin: 0;
 }
 
+/* Combined Technology Power */
 .combined-technology-power {
-    margin-top: 3rem;
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
@@ -1477,6 +1723,12 @@
     width: 60px;
     height: 60px;
     object-fit: contain;
+}
+
+.combined-power-header h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ember-gold);
 }
 
 .combined-power-description {
@@ -1509,6 +1761,10 @@
 .combined-benefit:hover {
     background: rgba(215, 51, 39, 0.2);
     transform: translateY(-5px);
+}
+
+.combined-benefit-icon {
+    flex-shrink: 0;
 }
 
 .combined-benefit-icon img {
@@ -1546,6 +1802,9 @@
     border-radius: var(--radius-2xl);
     padding: 2rem;
     margin-bottom: 3rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .proven-badge {
@@ -1554,10 +1813,18 @@
     gap: 1.5rem;
 }
 
+.badge-icon {
+    flex-shrink: 0;
+}
+
 .custom-badge-icon {
     width: 80px;
     height: 80px;
     object-fit: contain;
+}
+
+.badge-content {
+    flex: 1;
 }
 
 .badge-content h4 {
@@ -1577,6 +1844,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .feature-card {
@@ -1622,13 +1891,6 @@
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* END OF PART 2 */
-/* ===================================
-   VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 3 OF 3 - CORRECTED (NO GLOBAL OVERRIDES)
-   Final Sections: Showcase, Use Cases, Pricing, Modals, Responsive
-   =================================== */
-
 /* ===================================
    APP SHOWCASE SECTION
    =================================== */
@@ -1642,6 +1904,9 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
     margin-bottom: 3rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .phone-gallery,
@@ -1876,6 +2141,8 @@
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
     padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .connection-header {
@@ -1980,6 +2247,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .use-case-card {
@@ -2030,7 +2299,7 @@
 }
 
 /* ===================================
-   PRICING & FINAL CTA SECTIONS
+   PRICING & FINAL CTA SECTIONS - RESTORED SIDE-BY-SIDE LAYOUT
    =================================== */
 .pricing {
     padding: var(--section-padding) var(--container-padding);
@@ -2038,7 +2307,20 @@
 }
 
 .pricing-intro {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* CRITICAL: Side-by-side pricing wrapper */
+.pricing-modules-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .pricing-solution-wrapper {
@@ -2046,16 +2328,17 @@
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
     padding: 2.5rem 2rem;
-    margin-bottom: 2rem;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .marketer-pricing-module {
-    border-color: rgba(215, 51, 39, 0.3);
+    border-color: rgba(215, 51, 39, 0.5);
 }
 
 .developer-pricing-module {
-    border-color: rgba(139, 92, 246, 0.3);
+    border-color: rgba(139, 92, 246, 0.5);
     background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
 }
 
@@ -2095,7 +2378,7 @@
 
 .pricing-details-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 2rem;
     margin: 2rem 0;
 }
@@ -2275,7 +2558,7 @@
 
 .value-props-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
 }
 
@@ -2335,7 +2618,8 @@
 
 .solution-cta-bottom {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: auto;
+    padding-top: 2rem;
 }
 
 .cta-footnote-bottom {
@@ -2363,6 +2647,10 @@
     margin-bottom: 0.75rem;
 }
 
+.developer-pricing-module .cta-primary-large {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
 .cta-primary-large:hover {
     transform: translateY(-2px);
     box-shadow: var(--ember-shadow-lg);
@@ -2374,9 +2662,161 @@
     object-fit: contain;
 }
 
+.journey-secondary-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ember-gold);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+.journey-secondary-link:hover {
+    color: var(--ember-orange);
+    transform: translateX(3px);
+}
+
 /* ===================================
-   MODULE 3 - THE CLOSE STYLES
+   PHOENIX SEPARATOR
    =================================== */
+.phoenix-separator-section {
+    padding: 4rem var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+.phoenix-separator-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(215, 51, 39, 0.5) 20%, 
+        var(--ember-gold) 50%, 
+        rgba(215, 51, 39, 0.5) 80%, 
+        transparent 100%);
+}
+
+.phoenix-separator-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(215, 51, 39, 0.5) 20%, 
+        var(--ember-gold) 50%, 
+        rgba(215, 51, 39, 0.5) 80%, 
+        transparent 100%);
+}
+
+.phoenix-separator-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.phoenix-separator-glow {
+    position: relative;
+    animation: phoenixPulse 3s ease-in-out infinite;
+}
+
+@keyframes phoenixPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6))
+                drop-shadow(0 0 60px rgba(215, 51, 39, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.9))
+                drop-shadow(0 0 80px rgba(215, 51, 39, 0.6));
+    }
+}
+
+.phoenix-separator-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    object-fit: contain;
+}
+
+.phoenix-separator-text {
+    flex: 1;
+    max-width: 600px;
+    text-align: center;
+}
+
+.phoenix-separator-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.phoenix-separator-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ===================================
+   FINAL CTA SECTION - RESTORED SIDE-BY-SIDE LAYOUT
+   =================================== */
+.final-cta {
+    padding: var(--section-padding) var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
+}
+
+.final-cta-background {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, 
+        rgba(215, 51, 39, 0.15) 0%, 
+        transparent 70%);
+    pointer-events: none;
+}
+
+.final-cta-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.final-cta-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.final-cta-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.final-cta-subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* CRITICAL: Side-by-side journey paths */
 .journey-paths-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -2433,7 +2873,7 @@
 
 .close-reasons-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     margin: 2rem 0;
 }
@@ -2590,22 +3030,6 @@
     margin: 0.75rem 0 1rem;
 }
 
-.journey-secondary-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--ember-gold);
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition-base);
-}
-
-.journey-secondary-link:hover {
-    color: var(--ember-orange);
-    transform: translateX(3px);
-}
-
 .satisfaction-guarantee {
     margin-top: 2rem;
     padding: 1.5rem;
@@ -2625,140 +3049,6 @@
 .satisfaction-guarantee strong {
     color: #60a5fa;
     font-weight: 700;
-}
-
-/* ===================================
-   PHOENIX SEPARATOR
-   =================================== */
-.phoenix-separator-section {
-    padding: 4rem var(--container-padding);
-    background: var(--ember-gradient-background);
-    position: relative;
-    overflow: hidden;
-}
-
-.phoenix-separator-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(215, 51, 39, 0.5) 20%, 
-        var(--ember-gold) 50%, 
-        rgba(215, 51, 39, 0.5) 80%, 
-        transparent 100%);
-}
-
-.phoenix-separator-section::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(215, 51, 39, 0.5) 20%, 
-        var(--ember-gold) 50%, 
-        rgba(215, 51, 39, 0.5) 80%, 
-        transparent 100%);
-}
-
-.phoenix-separator-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-}
-
-.phoenix-separator-glow {
-    position: relative;
-    animation: phoenixPulse 3s ease-in-out infinite;
-}
-
-@keyframes phoenixPulse {
-    0%, 100% {
-        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6))
-                drop-shadow(0 0 60px rgba(215, 51, 39, 0.4));
-    }
-    50% {
-        filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.9))
-                drop-shadow(0 0 80px rgba(215, 51, 39, 0.6));
-    }
-}
-
-.phoenix-separator-image {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    object-fit: contain;
-}
-
-.phoenix-separator-text {
-    flex: 1;
-    max-width: 600px;
-    text-align: center;
-}
-
-.phoenix-separator-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 1rem;
-    line-height: 1.3;
-}
-
-.phoenix-separator-subtitle {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-/* ===================================
-   FINAL CTA SECTION
-   =================================== */
-.final-cta {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-    position: relative;
-}
-
-.final-cta-background {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, 
-        rgba(215, 51, 39, 0.15) 0%, 
-        transparent 70%);
-    pointer-events: none;
-}
-
-.final-cta-content {
-    position: relative;
-    z-index: 1;
-}
-
-.final-cta-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.final-cta-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 1rem;
-}
-
-.final-cta-subtitle {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 700px;
-    margin: 0 auto;
 }
 
 /* ===================================
@@ -3029,8 +3319,14 @@
     .technology-grid,
     .showcase-content,
     .system-benefits,
+    .pricing-modules-container,
     .journey-paths-container {
         grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .ember-token-right-redesigned {
+        position: static;
     }
     
     .ember-highlights-redesigned {
@@ -3063,10 +3359,6 @@
         transform: translateY(0);
     }
     
-    .pricing-details-container {
-        grid-template-columns: 1fr;
-    }
-    
     .value-props-grid {
         grid-template-columns: 1fr;
     }
@@ -3096,6 +3388,14 @@
     .use-cases-grid,
     .technology-stats {
         grid-template-columns: 1fr;
+    }
+    
+    .presale-stats-redesigned {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-divider-redesigned {
+        display: none;
     }
     
     .crypto-coin-phone-frame {
@@ -3170,6 +3470,10 @@
     .phoenix-separator-section {
         padding: 3rem var(--container-padding);
     }
+    
+    .presale-info-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Small Mobile - 480px and below */
@@ -3215,17 +3519,16 @@
  * END OF LOCAL.CSS - PART 3 OF 3 CORRECTED
  * ============================================
  * 
- * REMOVED GLOBAL CSS OVERRIDES:
- * ❌ Chatbot button/widget z-index (handled by global.css)
- * ❌ Navbar z-index (handled by global.css)
- * ❌ Body.modal-open chatbot dimming (handled by global.js)
+ * LAYOUT FIXES APPLIED:
+ * ✅ Token section: 2-column grid (1.2fr 1fr)
+ * ✅ Airdrop section: compact 2-column grid
+ * ✅ Pricing section: side-by-side modules wrapper
+ * ✅ Final CTA: side-by-side journey paths
+ * ✅ All max-widths added for consistency (1400px)
+ * ✅ Responsive breakpoints preserved
+ * ✅ No global CSS overrides
  * 
- * THIS FILE NOW ONLY CONTAINS:
- * ✅ Main page-specific styles
- * ✅ New conversion module styles
- * ✅ Local component styles
- * ✅ Page-specific responsive styles
- * 
- * No conflicts with shared/global.css or shared/global.js
+ * This CSS file restores all original layouts while
+ * preserving your new messaging updates in the HTML
  * ============================================
  */
