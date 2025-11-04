@@ -36,37 +36,54 @@ function copyToClipboard(button) {
 }
 
 function calculateROI() {
-    const locations = parseInt(document.getElementById('locations').value);
-    const pricePerLocation = parseFloat(document.getElementById('price-per-location').value);
-    const collectionsPerDay = parseInt(document.getElementById('collections-per-day').value);
-    const duration = parseInt(document.getElementById('duration').value);
+    const locations = parseInt(document.getElementById('locations').value) || 0;
+    const setupFee = parseFloat(document.getElementById('setup-fee').value) || 0;
+    const pricePerLocation = parseFloat(document.getElementById('price-per-location').value) || 0;
+    const duration = parseInt(document.getElementById('duration').value) || 1;
     
+    // Update slider value display
     document.getElementById('locations-value').textContent = locations;
-    document.getElementById('collections-value').textContent = collectionsPerDay;
-    
+
+    // Calculations
     const monthlyRevenue = locations * pricePerLocation;
-    const totalRevenue = monthlyRevenue * duration;
-    const totalCollections = locations * collectionsPerDay * 30 * duration;
-    const revenuePerCollection = totalCollections > 0 ? totalRevenue / totalCollections : 0;
-    
+    const totalSetupRevenue = setupFee;
+    const totalRecurringRevenue = monthlyRevenue * duration;
+    const totalCampaignRevenue = totalSetupRevenue + totalRecurringRevenue;
+    const revenuePerLocation = locations > 0 ? totalCampaignRevenue / locations : 0;
+
+    // Update results
     document.getElementById('monthly-revenue').textContent = `$${monthlyRevenue.toLocaleString()}`;
-    document.getElementById('total-revenue').textContent = `$${totalRevenue.toLocaleString()}`;
-    document.getElementById('total-collections').textContent = totalCollections.toLocaleString();
-    document.getElementById('revenue-per-collection').textContent = `$${revenuePerCollection.toFixed(2)}`;
+    document.getElementById('total-revenue').textContent = `$${totalCampaignRevenue.toLocaleString()}`;
+    document.getElementById('revenue-per-location').textContent = `$${revenuePerLocation.toFixed(0)}`;
 }
 
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
-    calculateROI();
+    calculateROI(); // Run once on load
     
+    // Re-calculate on any input change
+    const inputs = ['locations', 'setup-fee', 'price-per-location', 'duration'];
+    inputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', calculateROI);
+            el.addEventListener('change', calculateROI);
+        }
+    });
+
+    // Scroll reveal animation
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('revealed');
             }
         });
-    }, {
-        threshold: 0.1
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+        observer.observe(el);
     });
+});
     
     document.querySelectorAll('.scroll-reveal').forEach(el => {
         observer.observe(el);
