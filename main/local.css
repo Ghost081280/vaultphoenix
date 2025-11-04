@@ -1404,8 +1404,11 @@
 }
 
 /* ===================================
-   CRYPTO COIN SECTION - CRITICAL MOBILE IMAGE FIX
+   CRYPTO COIN SECTION - PERFECT MOBILE SIZE + EDGE ALIGNMENT + GLOW
+   Replace the crypto coin section in your local.css with this code
+   Matches the Player-Facing Mobile App section styling exactly
    =================================== */
+
 .crypto-coin-section {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
@@ -1426,26 +1429,22 @@
     z-index: 1;
 }
 
-/* CRITICAL FIX #1: Phone frame container - force visibility */
+/* PERFECT FIX: Phone frame container - matching Player-Facing section */
 .crypto-coin-phone-frame {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    display: inline-block;
     padding: 13px;
     background: linear-gradient(135deg, rgba(45, 24, 16, 0.9) 0%, rgba(69, 26, 3, 0.85) 100%);
     border-radius: 28px;
     border: 3px solid rgba(215, 51, 39, 0.4);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 10px 20px rgba(215, 51, 39, 0.3);
+    box-shadow: var(--ember-shadow-xl);
     animation: gentleRock 4s ease-in-out infinite;
     max-width: 400px;
     margin: 0 auto;
     width: 100%;
     position: relative;
-    z-index: 2;
-    /* Extra protection */
-    pointer-events: auto;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
+    /* ADDED: Glow effect behind phone */
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.4)) 
+            drop-shadow(0 0 60px rgba(215, 51, 39, 0.3));
 }
 
 @keyframes gentleRock {
@@ -1453,46 +1452,33 @@
     50% { transform: rotate(2deg); }
 }
 
-/* CRITICAL FIX #2: Screen wrapper - perfect containment */
+/* PERFECT FIX: Screen wrapper - exact edge fit */
 .crypto-coin-screen-wrapper {
-    border-radius: 15px;
+    border-radius: 18px;
     overflow: hidden;
     width: 100%;
-    height: 100%;
     position: relative;
-    display: block !important;
-    visibility: visible !important;
     background: #000;
-    /* Lock the aspect ratio container */
-    aspect-ratio: 9 / 16;
+    /* Lock aspect ratio */
+    line-height: 0;
 }
 
-/* CRITICAL FIX #3: The actual image - perfect alignment */
+/* PERFECT FIX: Image - flush to all 4 edges */
 .phoenix-coin-image {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: 100% !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    /* Changed from 'contain' to 'cover' for edge-to-edge fill */
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    /* CRITICAL: Use 'cover' to fill edge-to-edge */
     object-fit: cover;
     object-position: center;
-    /* Match the wrapper aspect ratio */
-    aspect-ratio: 9 / 16;
-    /* Remove any gaps */
+    /* Remove ALL gaps */
     vertical-align: top;
     margin: 0;
     padding: 0;
     border: 0;
-    /* Force hardware acceleration */
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    /* Smooth edges */
-    border-radius: 15px;
-    /* Extra protection */
-    position: relative;
-    z-index: 1;
+    /* Maintain aspect ratio */
+    aspect-ratio: 9 / 16;
 }
 
 .crypto-text {
@@ -1570,6 +1556,57 @@
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
+}
+
+/* ===================================
+   RESPONSIVE - MOBILE PERFECT SIZING
+   =================================== */
+
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
+    .crypto-content {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+    
+    .crypto-coin-phone-frame {
+        max-width: 350px;
+    }
+}
+
+/* Mobile - 768px and below - MATCH PLAYER-FACING SIZE */
+@media (max-width: 768px) {
+    .crypto-coin-phone-frame {
+        /* CRITICAL: Match Player-Facing Mobile App size */
+        display: inline-block;
+        padding: 13px;
+        max-width: 310px;
+        margin: 0 auto;
+        /* Keep glow on mobile */
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.5)) 
+                drop-shadow(0 0 50px rgba(215, 51, 39, 0.3));
+    }
+    
+    .crypto-coin-screen-wrapper {
+        border-radius: 18px;
+    }
+    
+    .phoenix-coin-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        aspect-ratio: 9 / 16;
+    }
+}
+
+/* Small Mobile - 480px and below - EVEN SMALLER */
+@media (max-width: 480px) {
+    .crypto-coin-phone-frame {
+        /* Match Player-Facing size on small mobile */
+        padding: 13px;
+        max-width: 280px;
+        margin: 0 auto;
+    }
 }
 
 /* Technology Modules */
