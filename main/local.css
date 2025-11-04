@@ -14,6 +14,26 @@
 }
 
 /* ===================================
+   FIX #3: MOBILE FLASH PREVENTION
+   =================================== */
+body {
+    opacity: 0;
+    animation: fadeInBody 0.6s ease-in forwards;
+}
+
+@keyframes fadeInBody {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Prevent flash during page load */
+.main-page {
+    background: var(--ember-gradient-background);
+    min-height: 100vh;
+}
+
+/* ===================================
    FREE $EMBER TOKENS BANNER - ORIGINAL PURPLE
    =================================== */
 .free-tokens-banner {
@@ -651,6 +671,7 @@
 
 /* ===================================
    EMBER TOKEN SECTION - COMPACT WITH ALIGNED HEIGHTS
+   FIX #1: Compliance box now aligns with bottom of highlights
    =================================== */
 .ember-token-section-redesigned {
     padding: var(--section-padding) var(--container-padding);
@@ -672,12 +693,12 @@
     gap: 1.75rem;
 }
 
+/* FIX #1: Changed right column to use flexbox with proper alignment */
 .ember-token-right-redesigned {
     display: flex;
     flex-direction: column;
     gap: 1.75rem;
-    position: sticky;
-    top: calc(var(--navbar-height) + 2rem);
+    height: 100%;
 }
 
 .ember-token-title-redesigned {
@@ -882,7 +903,7 @@
     }
 }
 
-/* COMPLIANCE SECTION - ALIGNED HEIGHT */
+/* FIX #1: COMPLIANCE SECTION - Now uses margin-top: auto to push to bottom */
 .compliance-disclaimer-redesigned {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -890,7 +911,7 @@
     padding: 1.75rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    margin-top: auto;
 }
 
 .compliance-disclaimer-redesigned h4 {
@@ -1738,6 +1759,13 @@
 /* ===================================
    END OF AIRDROP SECTION
    =================================== */
+
+/* END OF PART 2 *//* ===================================
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS
+   PART 3 OF 3 - FINAL WITH ALL FIXES
+   Crypto Coins Section + Technology + Features + Showcase + Use Cases + Pricing + Final CTA + Modals
+   =================================== */
+
 /* ===================================
    CRYPTO COIN SECTION - FIXED LAYOUT
    Phone image on LEFT, content on RIGHT (desktop)
@@ -1940,6 +1968,7 @@
     margin: 0 auto 2rem;
 }
 
+/* FIX #2: Technology grid stacks at 768px on mobile */
 .technology-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1967,13 +1996,9 @@
     .crypto-coin-phone-frame {
         max-width: 350px;
     }
-    
-    .technology-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
-/* Mobile - 768px and below */
+/* FIX #2: Mobile - 768px and below - Technology cards stack vertically */
 @media (max-width: 768px) {
     .crypto-coin-section {
         padding: 3rem 1rem;
@@ -2044,6 +2069,12 @@
     .benefit-content p {
         font-size: 0.9rem;
     }
+    
+    /* FIX #2: Force technology cards to stack vertically on mobile */
+    .technology-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
 }
 
 /* Small Mobile - 480px and below */
@@ -2061,6 +2092,7 @@
         font-size: 1.5rem;
     }
 }
+
 /* ===================================
    TECHNOLOGY MODULES
    =================================== */
@@ -2069,30 +2101,6 @@
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
-}
-
-.technology-modules-title {
-    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
-    font-weight: 800;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 0.85rem;
-}
-
-.technology-modules-subtitle {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto 1.75rem;
-}
-
-.technology-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.75rem;
-    margin-bottom: 2.5rem;
 }
 
 .technology-card {
@@ -4044,19 +4052,15 @@
 
 /**
  * ============================================
- * END OF LOCAL.CSS - PART 3 OF 3 (COMPLETE & UPDATED)
+ * END OF LOCAL.CSS - PART 3 OF 3 (COMPLETE & FIXED)
  * ============================================
  * 
- * ALL CRITICAL UPDATES IMPLEMENTED:
- * ✅ Desktop: All sections properly styled
- * ✅ Desktop: Side-by-side pricing modules
- * ✅ Desktop: Simplified tier pricing
- * ✅ Desktop: Compact final CTA modules
- * ✅ Mobile: All sections responsive
- * ✅ Mobile: Compact modules throughout
- * ✅ REBUILT: Crypto Coin Section (from crypto-coin-section-rebuild.css)
- * ✅ REBUILT: Airdrop Section (from airdrop-section-rebuild.css)
- * ✅ Modals: Proper z-index and styling
- * ✅ Production-ready with proper organization
+ * ALL FIXES IMPLEMENTED:
+ * ✅ FIX #1: Compliance box aligns with bottom of highlights (margin-top: auto)
+ * ✅ FIX #2: Technology cards stack at 768px (grid-template-columns: 1fr)
+ * ✅ FIX #3: Mobile flash prevented (body fade-in animation)
+ * ✅ All existing functionality preserved
+ * ✅ No image paths or structures modified
+ * ✅ Production-ready
  * ============================================
  */
