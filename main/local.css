@@ -3864,6 +3864,144 @@ body {
     color: #60a5fa;
     font-weight: 700;
 }
+/* ===================================
+   ONBOARDING SUCCESS GUIDE CTA BUTTON
+   =================================== */
+
+.onboarding-cta-wrapper {
+    margin: 3rem auto 0;
+    padding: 2.5rem 2rem;
+    max-width: 900px;
+    text-align: center;
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.1) 0%, 
+        rgba(215, 51, 39, 0.08) 100%);
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: var(--radius-2xl);
+    position: relative;
+    overflow: hidden;
+    animation: onboardingGlow 3s ease-in-out infinite;
+}
+
+@keyframes onboardingGlow {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(240, 165, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 50px rgba(240, 165, 0, 0.5);
+    }
+}
+
+.onboarding-cta-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, 
+        rgba(240, 165, 0, 0.15) 0%, 
+        transparent 70%);
+    animation: rotate 8s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.onboarding-button {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    padding: 1.25rem 3rem;
+    background: var(--ember-gradient-primary);
+    color: white;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-xl);
+    font-weight: 800;
+    font-size: 1.15rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(215, 51, 39, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.onboarding-button:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 48px rgba(240, 165, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.onboarding-button .main-image-glow img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.onboarding-subtext {
+    position: relative;
+    z-index: 1;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 1rem;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .onboarding-cta-wrapper {
+        padding: 2rem 1.5rem;
+        margin: 2.5rem auto 0;
+    }
+    
+    .onboarding-button {
+        padding: 1.1rem 2.25rem;
+        font-size: 1rem;
+        gap: 0.65rem;
+    }
+    
+    .onboarding-button .main-image-glow img {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .onboarding-subtext {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .onboarding-cta-wrapper {
+        padding: 1.75rem 1.25rem;
+    }
+    
+    .onboarding-button {
+        padding: 1rem 2rem;
+        font-size: 0.95rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .onboarding-button .main-image-glow img {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .onboarding-subtext {
+        font-size: 0.85rem;
+    }
+}
 
 /* ===================================
    MODALS - PROPERLY STYLED
