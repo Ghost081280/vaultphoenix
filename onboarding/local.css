@@ -1,3 +1,8 @@
+/* ========================================
+   Vault Phoenix Onboarding - Local CSS
+   Compact, Responsive, Centered Images
+   ======================================== */
+
 :root {
     --ember-orange: #f0a500;
     --ember-red: #d73327;
@@ -25,24 +30,45 @@ body {
     overflow-x: hidden;
 }
 
+/* ========================================
+   NOTICES
+   ======================================== */
 .under-construction,
 .chatbot-notice {
     text-align: center;
     padding: 1rem;
-    background: rgba(240, 165, 0, 0.2);
+    background: rgba(240, 165, 0, 0.15);
     color: var(--text-primary);
     font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 10;
+    width: 100%;
 }
 
+.under-construction {
+    background: rgba(240, 165, 0, 0.25);
+    border-bottom: 1px solid rgba(240, 165, 0, 0.4);
+}
+
+.chatbot-notice {
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: -1px;
+}
+
+/* ========================================
+   HERO
+   ======================================== */
 .hero-section {
-    min-height: 70vh; /* More compact */
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--dark-bg) 0%, #1a0505 100%);
     position: relative;
     overflow: hidden;
-    padding: 1.5rem; /* Reduced padding */
+    padding: 1.5rem;
 }
 
 .hero-section::before {
@@ -64,7 +90,7 @@ body {
 .hero-content {
     text-align: center;
     z-index: 2;
-    max-width: 900px; /* Slightly smaller for compact */
+    max-width: 900px;
 }
 
 .hero-badge {
@@ -81,7 +107,7 @@ body {
 }
 
 .hero-title {
-    font-size: clamp(2rem, 5vw, 3.5rem); /* Smaller fonts */
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 800;
     margin-bottom: 1rem;
     background: linear-gradient(90deg, var(--ember-orange), var(--ember-red));
@@ -165,8 +191,11 @@ body {
     transform: translateY(-3px);
 }
 
+/* ========================================
+   CONTENT SECTIONS
+   ======================================== */
 .content-section {
-    padding: 4rem 1.5rem; /* Reduced padding for compact */
+    padding: 4rem 1.5rem;
 }
 
 .dark-section {
@@ -174,7 +203,7 @@ body {
 }
 
 .container {
-    max-width: 1200px; /* Smaller container */
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -196,9 +225,12 @@ body {
     margin-bottom: 2.5rem;
 }
 
+/* ========================================
+   STEPS
+   ======================================== */
 .steps-container {
     display: grid;
-    gap: 2rem; /* Reduced gap */
+    gap: 2rem;
 }
 
 .step-card {
@@ -289,6 +321,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    margin-top: 1.5rem;
 }
 
 .step-img,
@@ -300,9 +333,12 @@ body {
     height: auto;
     border-radius: 10px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-    margin: 0 auto; /* Center images */
+    margin: 0 auto;
 }
 
+/* ========================================
+   TABLES & FORMULAS
+   ======================================== */
 .revenue-table-container {
     overflow-x: auto;
     margin-bottom: 2rem;
@@ -374,6 +410,59 @@ body {
     margin-top: 1.5rem;
 }
 
+/* ========================================
+   COPY BOXES
+   ======================================== */
+.copy-box {
+    position: relative;
+    background: var(--dark-card);
+    border-radius: 10px;
+    padding: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.copy-box.large {
+    padding: 1.5rem;
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    background: var(--ember-orange);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.copy-button:hover {
+    background: var(--ember-red);
+    transform: scale(1.05);
+}
+
+.copy-box pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.copy-box code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    display: block;
+}
+
+/* ========================================
+   PRICING, TIPS, CHECKLIST, OBJECTIONS
+   ======================================== */
 .scripts-grid,
 .templates-grid,
 .pricing-grid,
@@ -409,68 +498,6 @@ body {
     object-fit: contain;
 }
 
-.script-card,
-.template-card {
-    margin-bottom: 1.5rem;
-}
-
-.script-title {
-    font-size: 1.2rem;
-    color: var(--text-primary);
-    margin-bottom: 0.8rem;
-}
-
-.copy-box {
-    position: relative;
-    background: var(--dark-card);
-    border-radius: 10px;
-    padding: 1.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.copy-box.large {
-    padding: 1.5rem;
-}
-
-.copy-button {
-    position: absolute;
-    top: 0.8rem;
-    right: 0.8rem;
-    background: var(--ember-orange);
-    color: white;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
-    z-index: 10;
-}
-
-.copy-button:hover {
-    background: var(--ember-red);
-    transform: scale(1.05);
-}
-
-.copy-button:active {
-    transform: scale(0.95);
-}
-
-.copy-box pre {
-    margin: 0;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-
-.copy-box code {
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: var(--text-secondary);
-    display: block;
-}
-
 .pricing-card {
     background: var(--dark-card);
     border-radius: 15px;
@@ -485,29 +512,9 @@ body {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
 
-.pricing-card.bronze {
-    border-color: var(--bronze);
-}
-
-.pricing-card.bronze:hover {
-    box-shadow: 0 15px 40px rgba(205, 127, 50, 0.3);
-}
-
-.pricing-card.silver {
-    border-color: var(--silver);
-}
-
-.pricing-card.silver:hover {
-    box-shadow: 0 15px 40px rgba(192, 192, 192, 0.3);
-}
-
-.pricing-card.gold {
-    border-color: var(--gold);
-}
-
-.pricing-card.gold:hover {
-    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
-}
+.pricing-card.bronze { border-color: var(--bronze); }
+.pricing-card.silver { border-color: var(--silver); }
+.pricing-card.gold { border-color: var(--gold); }
 
 .tier-badge {
     position: absolute;
@@ -521,20 +528,9 @@ body {
     font-size: 0.85rem;
 }
 
-.bronze .tier-badge {
-    background: var(--bronze);
-    color: white;
-}
-
-.silver .tier-badge {
-    background: var(--silver);
-    color: var(--dark-bg);
-}
-
-.gold .tier-badge {
-    background: var(--gold);
-    color: var(--dark-bg);
-}
+.bronze .tier-badge { background: var(--bronze); color: white; }
+.silver .tier-badge { background: var(--silver); color: var(--dark-bg); }
+.gold .tier-badge { background: var(--gold); color: var(--dark-bg); }
 
 .tip-card-large {
     background: var(--dark-bg);
@@ -605,11 +601,6 @@ body {
     margin-bottom: 0.8rem;
 }
 
-.objection-answer p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
 .checklist-items {
     display: grid;
     gap: 0.8rem;
@@ -642,6 +633,9 @@ body {
     font-size: 1rem;
 }
 
+/* ========================================
+   CALCULATOR
+   ======================================== */
 .calculator-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -740,6 +734,9 @@ body {
     color: var(--ember-orange);
 }
 
+/* ========================================
+   CTA
+   ======================================== */
 .cta-section {
     background: linear-gradient(135deg, var(--dark-bg) 0%, #1a0505 100%);
     text-align: center;
@@ -844,69 +841,41 @@ body {
     transform: scale(1.1);
 }
 
+/* ========================================
+   RESPONSIVE
+   ======================================== */
 @media (max-width: 1024px) {
-    .calculator-container {
-        grid-template-columns: 1fr;
-    }
-    
+    .calculator-container,
     .result-grid {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 768px) {
-    .content-section {
-        padding: 3rem 1rem;
-    }
-    
-    .hero-section {
-        min-height: 60vh;
-        padding: 1rem;
-    }
-    
-    .hero-visual {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
+    .content-section { padding: 3rem 1rem; }
+    .hero-section { min-height: 60vh; padding: 1rem; }
+    .hero-visual { flex-direction: column; gap: 1.5rem; }
     .pricing-grid,
     .objections-grid,
     .scripts-grid,
-    .tips-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .partners-logos {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
+    .tips-container { grid-template-columns: 1fr; }
+    .partners-logos { flex-direction: column; gap: 1.5rem; }
 }
 
 @media (max-width: 480px) {
     .step-card,
     .script-category,
     .checklist-phase,
-    .calculator-container {
-        padding: 1.2rem;
-    }
-    
-    .copy-button {
-        position: static;
-        width: 100%;
-        margin-bottom: 0.8rem;
-    }
-    
-    .copy-box pre {
-        font-size: 0.8rem;
-    }
-    
+    .calculator-container { padding: 1.2rem; }
+    .copy-button { position: static; width: 100%; margin-bottom: 0.8rem; }
+    .copy-box pre { font-size: 0.8rem; }
     .revenue-table th,
-    .revenue-table td {
-        padding: 0.8rem;
-        font-size: 0.85rem;
-    }
+    .revenue-table td { padding: 0.8rem; font-size: 0.85rem; }
 }
 
+/* ========================================
+   SCROLL REVEAL
+   ======================================== */
 .scroll-reveal {
     opacity: 0;
     transform: translateY(20px);
