@@ -1,7 +1,7 @@
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 1 OF 3 - UPDATED VERSION
-   Core Styles + Hero Section + Steps + Token Banner
+   UPDATED VERSION - ALL FIXES APPLIED
+   Core Styles + Hero Section + All Sections + Mobile Perfect
    =================================== */
 
 /* ===================================
@@ -14,14 +14,16 @@
 }
 
 /* ===================================
-   FIX #3: MOBILE FLASH PREVENTION
+   FIX: SMOOTH PAGE LOAD - NO FLASH
    =================================== */
 body {
     opacity: 0;
-    animation: fadeInBody 0.6s ease-in forwards;
+    animation: fadeInBodySmooth 0.4s ease-in forwards;
+    background: var(--ember-gradient-background);
+    min-height: 100vh;
 }
 
-@keyframes fadeInBody {
+@keyframes fadeInBodySmooth {
     to {
         opacity: 1;
     }
@@ -31,6 +33,57 @@ body {
 .main-page {
     background: var(--ember-gradient-background);
     min-height: 100vh;
+}
+
+/* ===================================
+   CONSISTENT IMAGE GLOWS FOR ALL IMAGES OUTSIDE MODULES
+   =================================== */
+.main-image-glow {
+    display: inline-block;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 40px rgba(215, 51, 39, 0.3));
+    animation: consistentGlow 3s ease-in-out infinite;
+}
+
+@keyframes consistentGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5)) 
+                drop-shadow(0 0 40px rgba(215, 51, 39, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.8)) 
+                drop-shadow(0 0 60px rgba(215, 51, 39, 0.5));
+    }
+}
+
+/* Special glow for phoenix images */
+.phoenix-glow-animated {
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6)) 
+            drop-shadow(0 0 50px rgba(215, 51, 39, 0.4)) !important;
+    animation: phoenixGlowEnhanced 3s ease-in-out infinite;
+}
+
+@keyframes phoenixGlowEnhanced {
+    0%, 100% { 
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6)) 
+                drop-shadow(0 0 50px rgba(215, 51, 39, 0.4));
+    }
+    50% { 
+        filter: drop-shadow(0 0 45px rgba(240, 165, 0, 0.9)) 
+                drop-shadow(0 0 70px rgba(215, 51, 39, 0.6));
+    }
+}
+
+/* Orange glow variant */
+.main-orange-glow {
+    filter: drop-shadow(0 0 20px rgba(215, 51, 39, 0.5)) 
+            drop-shadow(0 0 35px rgba(240, 165, 0, 0.3));
+}
+
+/* Purple glow variant */
+.main-purple-glow {
+    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5)) 
+            drop-shadow(0 0 35px rgba(124, 58, 237, 0.3));
 }
 
 /* ===================================
@@ -663,15 +716,9 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* END OF PART 1 *//* ===================================
-   VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 2 OF 3 - UPDATED VERSION WITH REBUILT SECTIONS
-   Ember Token Section + REBUILT AIRDROP SECTION + REBUILT CRYPTO COINS SECTION
-   =================================== */
-
 /* ===================================
-   EMBER TOKEN SECTION - COMPACT WITH ALIGNED HEIGHTS
-   FIX #1: Compliance box now aligns with bottom of highlights
+   EMBER TOKEN SECTION - MOBILE REBUILT
+   Compact countdown, restored arrows, phoenix glow, compliance at bottom
    =================================== */
 .ember-token-section-redesigned {
     padding: var(--section-padding) var(--container-padding);
@@ -693,7 +740,6 @@ body {
     gap: 1.75rem;
 }
 
-/* FIX #1: Changed right column to use flexbox with proper alignment */
 .ember-token-right-redesigned {
     display: flex;
     flex-direction: column;
@@ -825,7 +871,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* EMBER HIGHLIGHTS - COMPACT WITH ARROWS INSIDE */
+/* EMBER HIGHLIGHTS - WITH ARROWS RESTORED */
 .ember-highlights-redesigned {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -870,6 +916,7 @@ body {
     line-height: 1.3;
 }
 
+/* ARROW RESTORED */
 .highlight-arrow-redesigned {
     font-size: 1.1rem;
     color: var(--ember-gold);
@@ -890,20 +937,7 @@ body {
     object-fit: contain;
 }
 
-.phoenix-glow-animated {
-    animation: phoenixGlow 3s ease-in-out infinite;
-}
-
-@keyframes phoenixGlow {
-    0%, 100% { 
-        filter: drop-shadow(0 0 20px rgba(240,165,0,0.4)); 
-    }
-    50% { 
-        filter: drop-shadow(0 0 40px rgba(240,165,0,0.8)); 
-    }
-}
-
-/* FIX #1: COMPLIANCE SECTION - Now uses margin-top: auto to push to bottom */
+/* COMPLIANCE SECTION - At bottom with margin-top: auto */
 .compliance-disclaimer-redesigned {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -944,9 +978,151 @@ body {
 }
 
 /* ===================================
-   $EMBER AIRDROP SECTION - FINAL PRODUCTION VERSION
-   Clean, professional, mobile-perfect from the ground up
-   Box-sizing built-in, no patches needed
+   EMBER TOKEN SECTION - MOBILE REBUILD
+   =================================== */
+@media (max-width: 1024px) {
+    .ember-token-grid-redesigned {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .ember-token-section-redesigned {
+        padding: 3rem 1rem;
+    }
+    
+    .ember-token-grid-redesigned {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    /* Compact countdown for mobile */
+    .ember-countdown-widget-redesigned {
+        padding: 1.5rem;
+    }
+    
+    .countdown-header-redesigned {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .main-ember-countdown-icon-redesigned {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .countdown-text-redesigned h3 {
+        font-size: 1.1rem;
+    }
+    
+    .countdown-text-redesigned p {
+        font-size: 0.8rem;
+    }
+    
+    /* Keep countdown as 4 columns but smaller */
+    .ember-countdown-timer-redesigned {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .ember-time-unit-redesigned {
+        padding: 0.65rem;
+    }
+    
+    .ember-time-value-redesigned {
+        font-size: 1.5rem;
+    }
+    
+    .ember-time-label-redesigned {
+        font-size: 0.7rem;
+    }
+    
+    /* Presale stats - stack on mobile */
+    .presale-stats-redesigned {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .stat-divider-redesigned {
+        display: none;
+    }
+    
+    .stat-number-redesigned {
+        font-size: 1rem;
+    }
+    
+    .stat-label-redesigned {
+        font-size: 0.7rem;
+    }
+    
+    /* Highlights - stack vertically on mobile */
+    .ember-highlights-redesigned {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .ember-highlight-redesigned {
+        padding: 1rem;
+    }
+    
+    .highlight-icon-image-redesigned {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .highlight-text-redesigned {
+        font-size: 0.9rem;
+    }
+    
+    /* Phoenix image - ensure it shows with glow */
+    .ember-phoenix-container-redesigned {
+        margin: 1.5rem 0;
+    }
+    
+    .phoenix-holding-coin-redesigned {
+        max-width: 280px;
+    }
+    
+    /* Compliance at bottom */
+    .compliance-disclaimer-redesigned {
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .compliance-disclaimer-redesigned h4 {
+        font-size: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .main-compliance-icon-redesigned {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .compliance-disclaimer-redesigned p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ember-time-value-redesigned {
+        font-size: 1.3rem;
+    }
+    
+    .ember-time-label-redesigned {
+        font-size: 0.65rem;
+    }
+    
+    .phoenix-holding-coin-redesigned {
+        max-width: 240px;
+    }
+}
+
+/* ===================================
+   $EMBER AIRDROP SECTION - WITH PHANTOM WALLET UPDATE
    =================================== */
 
 /* Base box-sizing for entire section */
@@ -1468,45 +1644,75 @@ body {
     height: 18px;
 }
 
-/* Phantom Promo */
+/* PHANTOM WALLET PROMO - ENHANCED WITH NEW TEXT */
 .phantom-promo-compact {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 1rem;
-    background: rgba(96, 165, 250, 0.1);
-    border: 1px solid rgba(96, 165, 250, 0.3);
-    border-radius: 12px;
-    padding: 1rem;
+    background: linear-gradient(135deg, 
+        rgba(96, 165, 250, 0.15) 0%, 
+        rgba(59, 130, 246, 0.1) 100%);
+    border: 2px solid rgba(96, 165, 250, 0.4);
+    border-radius: 16px;
+    padding: 1.5rem;
     margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.phantom-promo-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .phantom-icon-compact {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
     flex-shrink: 0;
 }
 
 .phantom-text-compact {
     flex: 1;
+    text-align: left;
 }
 
 .phantom-text-compact strong {
     display: block;
+    font-size: 1.05rem;
+    color: #60a5fa;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.phantom-text-compact p {
     font-size: 0.9rem;
-    color: #ffffff;
-    margin-bottom: 0.25rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
 }
 
 .phantom-get-link {
-    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(96, 165, 250, 0.2);
+    border: 2px solid rgba(96, 165, 250, 0.5);
+    border-radius: 12px;
     color: #60a5fa;
+    font-size: 0.95rem;
+    font-weight: 700;
     text-decoration: none;
-    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .phantom-get-link:hover {
-    text-decoration: underline;
+    background: rgba(96, 165, 250, 0.3);
+    border-color: #60a5fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
 }
 
 /* Form Fields */
@@ -1654,7 +1860,7 @@ body {
 }
 
 /* ===================================
-   RESPONSIVE - MOBILE
+   AIRDROP RESPONSIVE - MOBILE
    =================================== */
 
 @media (max-width: 768px) {
@@ -1732,6 +1938,15 @@ body {
         flex-direction: column;
         gap: 0.75rem;
     }
+    
+    /* Phantom promo mobile */
+    .phantom-promo-header {
+        flex-direction: column;
+    }
+    
+    .phantom-text-compact {
+        text-align: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1756,13 +1971,9 @@ body {
     }
 }
 
-/* ===================================
-   END OF AIRDROP SECTION
-   =================================== */
-
-/* END OF PART 2 *//* ===================================
+/* Continue with rest of CSS in next response... *//* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 3 OF 3 - FINAL WITH ALL FIXES
+   PART 2 - CONTINUATION
    Crypto Coins Section + Technology + Features + Showcase + Use Cases + Pricing + Final CTA + Modals
    =================================== */
 
@@ -1784,7 +1995,6 @@ body {
     margin: 0 auto;
 }
 
-/* CRITICAL FIX: Desktop Layout - Phone LEFT (400px), Text RIGHT (flexible) */
 .crypto-content {
     display: grid;
     grid-template-columns: 400px 1fr;
@@ -1793,7 +2003,6 @@ body {
     margin-bottom: 3rem;
 }
 
-/* Image Column - LEFT side on desktop */
 .crypto-image {
     text-align: center;
     position: relative;
@@ -1802,7 +2011,6 @@ body {
     top: calc(var(--navbar-height) + 2rem);
 }
 
-/* Phone Frame Styling */
 .crypto-coin-phone-frame {
     display: inline-block;
     padding: 13px;
@@ -1827,7 +2035,6 @@ body {
     }
 }
 
-/* Screen Wrapper */
 .crypto-coin-screen-wrapper {
     border-radius: 18px;
     overflow: hidden;
@@ -1837,7 +2044,6 @@ body {
     line-height: 0;
 }
 
-/* The Actual Image */
 .phoenix-coin-image {
     width: 100%;
     max-width: 100%;
@@ -1852,7 +2058,6 @@ body {
     aspect-ratio: 9 / 16;
 }
 
-/* Text Column - RIGHT side on desktop */
 .crypto-text {
     display: flex;
     flex-direction: column;
@@ -1873,7 +2078,6 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* Benefits List */
 .crypto-benefits {
     display: flex;
     flex-direction: column;
@@ -1932,7 +2136,6 @@ body {
     margin: 0;
 }
 
-/* Custom Icon Size Classes */
 .custom-coin-icon-large,
 .custom-placement-icon-large {
     width: 60px;
@@ -1946,7 +2149,6 @@ body {
     object-fit: contain;
 }
 
-/* Technology Modules Section (below crypto coins) */
 .technology-modules {
     margin-top: 3rem;
 }
@@ -1968,7 +2170,6 @@ body {
     margin: 0 auto 2rem;
 }
 
-/* FIX #2: Technology grid stacks at 768px on mobile */
 .technology-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1976,19 +2177,12 @@ body {
     margin-bottom: 3rem;
 }
 
-/* ===================================
-   RESPONSIVE BREAKPOINTS
-   =================================== */
-
-/* Tablet - 1024px and below */
 @media (max-width: 1024px) {
-    /* Switch to stacked layout on tablet */
     .crypto-content {
         grid-template-columns: 1fr;
         gap: 2.5rem;
     }
     
-    /* Remove sticky positioning on tablet/mobile */
     .crypto-image {
         position: static;
     }
@@ -1998,7 +2192,6 @@ body {
     }
 }
 
-/* FIX #2: Mobile - 768px and below - Technology cards stack vertically */
 @media (max-width: 768px) {
     .crypto-coin-section {
         padding: 3rem 1rem;
@@ -2009,7 +2202,6 @@ body {
         gap: 2rem;
     }
     
-    /* Ensure phone frame displays properly on mobile */
     .crypto-image {
         display: block;
         text-align: center;
@@ -2070,14 +2262,12 @@ body {
         font-size: 0.9rem;
     }
     
-    /* FIX #2: Force technology cards to stack vertically on mobile */
     .technology-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 }
 
-/* Small Mobile - 480px and below */
 @media (max-width: 480px) {
     .crypto-coin-section {
         padding: 2.5rem 1rem;
@@ -2271,7 +2461,6 @@ body {
     margin: 0;
 }
 
-/* Combined Technology Power */
 .combined-technology-power {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -2704,7 +2893,6 @@ body {
     border-radius: var(--radius-xl);
 }
 
-/* System Connection */
 .system-connection {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -2868,7 +3056,9 @@ body {
 }
 
 /* ===================================
-   PRICING SECTION - SIDE BY SIDE WITH EQUAL HEIGHTS
+   PRICING SECTION - WITH COLOR MATCHING
+   Marketer modules = RED/ORANGE
+   Developer modules = PURPLE
    =================================== */
 .pricing {
     padding: var(--section-padding) var(--container-padding);
@@ -2883,7 +3073,6 @@ body {
     margin-right: auto;
 }
 
-/* CRITICAL: Side-by-side pricing wrapper with equal heights */
 .pricing-modules-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2904,13 +3093,83 @@ body {
     min-height: 100%;
 }
 
+/* MARKETER PRICING - RED/ORANGE THEME */
 .marketer-pricing-module {
     border-color: rgba(215, 51, 39, 0.5);
+    background: linear-gradient(135deg, rgba(26,15,10,0.9), rgba(45,24,16,0.85));
 }
 
+.marketer-pricing-module .pricing-tier-header {
+    border-bottom-color: rgba(215, 51, 39, 0.3);
+}
+
+.marketer-pricing-module .mini-tier {
+    border-color: rgba(215, 51, 39, 0.3);
+}
+
+.marketer-pricing-module .mini-tier:hover {
+    border-color: #d73327;
+}
+
+.marketer-pricing-module .mini-tier.featured-tier {
+    border-color: var(--ember-gold);
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.15) 0%, 
+        rgba(215, 51, 39, 0.1) 100%);
+    box-shadow: 0 0 30px rgba(240, 165, 0, 0.3);
+}
+
+.marketer-pricing-module .value-props-section {
+    border-color: rgba(215, 51, 39, 0.2);
+}
+
+.marketer-pricing-module .value-prop-item {
+    background: rgba(215, 51, 39, 0.05);
+    border-color: rgba(215, 51, 39, 0.2);
+}
+
+.marketer-pricing-module .value-prop-item:hover {
+    background: rgba(215, 51, 39, 0.1);
+    border-color: rgba(215, 51, 39, 0.4);
+}
+
+/* DEVELOPER PRICING - PURPLE THEME */
 .developer-pricing-module {
     border-color: rgba(139, 92, 246, 0.5);
     background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
+}
+
+.developer-pricing-module .pricing-tier-header {
+    border-bottom-color: rgba(139, 92, 246, 0.3);
+}
+
+.developer-pricing-module .mini-tier {
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.developer-pricing-module .mini-tier:hover {
+    border-color: #8b5cf6;
+}
+
+.developer-pricing-module .mini-tier.featured-tier {
+    border-color: var(--ember-gold);
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.15) 0%, 
+        rgba(139, 92, 246, 0.1) 100%);
+}
+
+.developer-pricing-module .value-props-section {
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+.developer-pricing-module .value-prop-item {
+    background: rgba(139, 92, 246, 0.05);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+.developer-pricing-module .value-prop-item:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.4);
 }
 
 .solution-header {
@@ -2963,10 +3222,6 @@ body {
 .pricing-tier-header {
     padding-bottom: 1.25rem;
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
-}
-
-.developer-pricing-module .pricing-tier-header {
-    border-bottom-color: rgba(139, 92, 246, 0.3);
 }
 
 .pricing-tier-header h4 {
@@ -3024,7 +3279,6 @@ body {
     font-weight: 600;
 }
 
-/* PRICING TIERS - SIMPLIFIED */
 .pricing-tiers-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -3043,16 +3297,10 @@ body {
 }
 
 .mini-tier:hover {
-    border-color: #8b5cf6;
     transform: translateY(-2px);
 }
 
 .mini-tier.featured-tier {
-    border-color: var(--ember-gold);
-    background: linear-gradient(135deg, 
-        rgba(240, 165, 0, 0.15) 0%, 
-        rgba(215, 51, 39, 0.1) 100%);
-    box-shadow: 0 0 30px rgba(240, 165, 0, 0.3);
     transform: translateY(-6px);
     padding: 1.35rem 0.85rem;
 }
@@ -3096,7 +3344,6 @@ body {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* SIMPLIFIED TIER DETAILS - ONLY API CALLS + FULL ACCESS */
 .mini-tier-details {
     display: flex;
     flex-direction: column;
@@ -3116,10 +3363,6 @@ body {
     border-radius: var(--radius-xl);
     padding: 1.75rem;
     margin: 1.75rem 0;
-}
-
-.developer-pricing-module .value-props-section {
-    border-color: rgba(139, 92, 246, 0.2);
 }
 
 .value-props-title {
@@ -3147,20 +3390,8 @@ body {
     transition: var(--transition-base);
 }
 
-.developer-pricing-module .value-prop-item {
-    background: rgba(139, 92, 246, 0.05);
-    border-color: rgba(139, 92, 246, 0.2);
-}
-
 .value-prop-item:hover {
-    background: rgba(215, 51, 39, 0.1);
-    border-color: rgba(215, 51, 39, 0.4);
     transform: translateX(3px);
-}
-
-.developer-pricing-module .value-prop-item:hover {
-    background: rgba(139, 92, 246, 0.1);
-    border-color: rgba(139, 92, 246, 0.4);
 }
 
 .value-prop-icon {
@@ -3251,6 +3482,12 @@ body {
     color: var(--ember-orange);
     transform: translateX(3px);
 }
+
+/* Continue in next response... *//* ===================================
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS
+   PART 3 - FINAL SECTIONS
+   Phoenix Separator + Final CTA + Modals + Complete Responsive
+   =================================== */
 
 /* ===================================
    PHOENIX SEPARATOR
@@ -3346,7 +3583,7 @@ body {
 }
 
 /* ===================================
-   FINAL CTA SECTION - ULTRA COMPACT SIDE-BY-SIDE
+   FINAL CTA SECTION - COMPACT SIDE-BY-SIDE
    =================================== */
 .final-cta {
     padding: var(--section-padding) var(--container-padding);
@@ -3390,7 +3627,6 @@ body {
     margin: 0 auto;
 }
 
-/* CRITICAL: Side-by-side compact journey paths */
 .journey-paths-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -3628,7 +3864,7 @@ body {
 }
 
 /* ===================================
-   MODALS - PROPERLY STYLED WITH NO CONFLICTS
+   MODALS - PROPERLY STYLED
    =================================== */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
@@ -3875,7 +4111,7 @@ body {
 .scroll-reveal.stagger-4 { transition-delay: 0.4s; }
 
 /* ===================================
-   RESPONSIVE DESIGN - COMPLETE MOBILE FIXES
+   RESPONSIVE DESIGN - COMPLETE
    =================================== */
 
 /* Tablet - 1024px and below */
@@ -3920,7 +4156,7 @@ body {
     }
 }
 
-/* Mobile - 768px and below - CRITICAL FIXES */
+/* Mobile - 768px and below */
 @media (max-width: 768px) {
     .main-hero {
         padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem;
@@ -4050,17 +4286,6 @@ body {
     }
 }
 
-/**
- * ============================================
- * END OF LOCAL.CSS - PART 3 OF 3 (COMPLETE & FIXED)
- * ============================================
- * 
- * ALL FIXES IMPLEMENTED:
- * ✅ FIX #1: Compliance box aligns with bottom of highlights (margin-top: auto)
- * ✅ FIX #2: Technology cards stack at 768px (grid-template-columns: 1fr)
- * ✅ FIX #3: Mobile flash prevented (body fade-in animation)
- * ✅ All existing functionality preserved
- * ✅ No image paths or structures modified
- * ✅ Production-ready
- * ============================================
- */
+/* ===================================
+   END OF LOCAL.CSS - COMPLETE & PRODUCTION READY
+   =================================== */
