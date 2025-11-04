@@ -923,17 +923,32 @@
 }
 
 /* ===================================
-   $EMBER AIRDROP SECTION - COMPLETE REBUILD
-   Clean, professional, fully functional styles
+   $EMBER AIRDROP SECTION - FINAL PRODUCTION VERSION
+   Clean, professional, mobile-perfect from the ground up
+   Box-sizing built-in, no patches needed
    =================================== */
+
+/* Base box-sizing for entire section */
+.ember-airdrop-section,
+.ember-airdrop-section *,
+.ember-airdrop-section *::before,
+.ember-airdrop-section *::after {
+    box-sizing: border-box;
+}
 
 .ember-airdrop-section {
     padding: 4rem 1rem;
     background: linear-gradient(135deg, rgba(13, 12, 12, 0.95) 0%, rgba(26, 15, 10, 0.9) 100%);
     position: relative;
+    overflow-x: hidden;
 }
 
 /* Parachute Header */
+.parachute-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 .parachute-glow {
     display: inline-block;
     animation: parachuteFloat 4s ease-in-out infinite;
@@ -950,6 +965,15 @@
     }
 }
 
+.parachute-crate-enlarged {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+}
+
 /* Main Outer Module */
 .ember-airdrop-outer-module {
     background: linear-gradient(135deg, rgba(26, 15, 10, 0.9) 0%, rgba(45, 24, 16, 0.85) 100%);
@@ -959,6 +983,7 @@
     max-width: 1400px;
     margin: 0 auto;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 100%;
 }
 
 /* Compact Header */
@@ -1017,12 +1042,42 @@
     flex-wrap: wrap;
 }
 
+.ember-social-btn-transparent {
+    background: rgba(139, 92, 246, 0.2);
+    border: 2px solid rgba(139, 92, 246, 0.5);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.ember-social-btn-transparent:hover {
+    background: rgba(139, 92, 246, 0.4);
+    border-color: rgba(139, 92, 246, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+.ember-social-icon-small {
+    width: 20px;
+    height: 20px;
+}
+
 /* Compact Grid - Two Columns */
 .ember-compact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     margin-top: 2rem;
+    width: 100%;
 }
 
 /* Inner Modules */
@@ -1032,6 +1087,7 @@
     border-radius: 16px;
     padding: 1.5rem;
     position: relative;
+    width: 100%;
 }
 
 /* Mini Header */
@@ -1091,6 +1147,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     margin-bottom: 1.5rem;
+    width: 100%;
 }
 
 .ember-stat-mini {
@@ -1129,6 +1186,7 @@
 /* Progress Bar */
 .ember-progress-compact {
     margin-bottom: 1.5rem;
+    width: 100%;
 }
 
 .progress-bar-bg {
@@ -1177,6 +1235,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
+    width: 100%;
 }
 
 .presale-info-item {
@@ -1272,6 +1331,7 @@
 .status-input-row {
     display: flex;
     gap: 0.75rem;
+    width: 100%;
 }
 
 .input-compact {
@@ -1282,6 +1342,7 @@
     border-radius: 12px;
     color: white;
     font-size: 0.9rem;
+    width: 100%;
 }
 
 .input-compact::placeholder {
@@ -1348,6 +1409,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
     margin-bottom: 1.5rem;
+    width: 100%;
 }
 
 .share-button,
@@ -1431,12 +1493,14 @@
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    width: 100%;
 }
 
 .form-group-compact {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    width: 100%;
 }
 
 .form-group-compact label {
@@ -1568,6 +1632,112 @@
     color: #f87171;
 }
 
+/* ===================================
+   RESPONSIVE - MOBILE
+   =================================== */
+
+@media (max-width: 768px) {
+    .ember-airdrop-section {
+        padding: 3rem 1rem;
+    }
+    
+    .ember-airdrop-outer-module {
+        padding: 1.5rem;
+    }
+    
+    .parachute-crate-enlarged {
+        max-width: 260px;
+    }
+    
+    .ember-title-compact {
+        font-size: 1.5rem;
+    }
+    
+    .ember-subtitle-compact {
+        font-size: 0.9rem;
+    }
+    
+    .ember-coming-soon-compact {
+        padding: 1.25rem;
+    }
+    
+    .ember-coming-text h3 {
+        font-size: 1.1rem;
+    }
+    
+    .ember-coming-text p {
+        font-size: 0.85rem;
+    }
+    
+    .ember-compact-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .ember-inner-module {
+        padding: 1.25rem;
+    }
+    
+    .ember-mini-header {
+        padding-bottom: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .ember-mini-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .ember-mini-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .ember-stats-compact {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .share-buttons-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .presale-info-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .ember-social-links-compact {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ember-airdrop-section {
+        padding: 2.5rem 1rem;
+    }
+    
+    .parachute-crate-enlarged {
+        max-width: 220px;
+    }
+    
+    .ember-title-compact {
+        font-size: 1.35rem;
+    }
+    
+    .ember-airdrop-outer-module {
+        padding: 1.25rem;
+    }
+    
+    .ember-inner-module {
+        padding: 1rem;
+    }
+}
+
+/* ===================================
+   END OF AIRDROP SECTION
+   =================================== */
 /* ===================================
    CRYPTO COIN SECTION - COMPLETE REBUILD
    Clean, professional, mobile-first approach
