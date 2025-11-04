@@ -15,6 +15,29 @@
 }
 
 /* ===================================
+   IMAGE DISPLAY FIX - CRITICAL
+   =================================== */
+.main-image-glow {
+    display: inline-block;
+    position: relative;
+    line-height: 0;
+}
+
+.main-image-glow img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Images without main-image-glow wrapper */
+img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ===================================
    FOUC PREVENTION - FIX FOR MOBILE FLASH
    =================================== */
 html {
