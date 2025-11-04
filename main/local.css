@@ -318,12 +318,16 @@
 }
 
 /* ===================================
-   HERO SECTION - COMPACT
+   HERO SECTION - FIXED MOBILE SPACING
+   Replace the hero section in your local.css with this code
+   Adds proper spacing below navbar on mobile
    =================================== */
+
 .main-hero {
     min-height: 100vh;
     background: var(--ember-gradient-background);
-    padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem;
+    /* FIXED: Added more padding-top on mobile */
+    padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -334,6 +338,10 @@
     width: 100%; 
     margin: 0 auto; 
     text-align: center; 
+}
+
+.hero-header {
+    margin-bottom: 2.5rem;
 }
 
 .hero-title { 
@@ -356,6 +364,65 @@
     font-weight: 700; 
     color: #f0a500; 
     margin-bottom: 2.5rem; 
+}
+
+/* ===================================
+   RESPONSIVE - MOBILE SPACING FIX
+   =================================== */
+
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
+    .main-hero {
+        /* Add extra space on tablet */
+        padding: calc(var(--navbar-height) + 2.5rem) var(--container-padding) calc(var(--section-padding) - 1rem);
+    }
+}
+
+/* Mobile - 768px and below - CRITICAL SPACING FIX */
+@media (max-width: 768px) {
+    .main-hero {
+        /* FIXED: Increased from +2rem to +4rem for better spacing */
+        padding: calc(var(--navbar-height) + 4rem) var(--container-padding) calc(var(--section-padding) - 1rem);
+    }
+    
+    .hero-header {
+        margin-bottom: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-tagline {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Small Mobile - 480px and below */
+@media (max-width: 480px) {
+    .main-hero {
+        /* Even more space on very small screens */
+        padding: calc(var(--navbar-height) + 4.5rem) var(--container-padding) calc(var(--section-padding) - 1rem);
+    }
+    
+    .hero-title {
+        font-size: 1.9rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .hero-tagline {
+        font-size: 1.15rem;
+    }
 }
 
 .steps-grid {
