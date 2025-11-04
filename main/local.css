@@ -1,4 +1,13 @@
-/* ===================================
+.main-image-glow {
+    display: inline-block;
+    position: relative;
+}
+
+.main-image-glow img {
+    display: block;
+    width: 100%;
+    height: auto;
+}/* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
    COMPLETE VERSION WITH ALL CRITICAL FIXES
    Reset + Base + Performance + Hero + Steps + CTA + Ember Token
