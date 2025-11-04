@@ -1,8 +1,7 @@
-
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   COMPLETE VERSION WITH ALL CRITICAL FIXES + IMAGE FIX
-   Reset + Base + Performance + Hero + Steps + CTA + Ember Token
+   PART 1 OF 3 - UPDATED VERSION
+   Core Styles + Hero Section + Steps + Token Banner
    =================================== */
 
 /* ===================================
@@ -12,87 +11,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-/* ===================================
-   IMAGE DISPLAY FIX - CRITICAL
-   =================================== */
-.main-image-glow {
-    display: inline-block;
-    position: relative;
-    line-height: 0;
-}
-
-.main-image-glow img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-
-/* Images without main-image-glow wrapper */
-img {
-    max-width: 100%;
-    height: auto;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-/* ===================================
-   FOUC PREVENTION - FIX FOR MOBILE FLASH
-   =================================== */
-html {
-    scroll-behavior: smooth;
-    background-color: #0d0c0c;
-}
-
-body {
-    opacity: 0;
-    transition: opacity 0.3s ease-in;
-}
-
-body.loaded {
-    opacity: 1;
-}
-
-/* Prevent background color flash on mobile */
-.main-page {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #0d0c0c;
-    min-height: 100vh;
-}
-
-/* ===================================
-   PERFORMANCE OPTIMIZATIONS
-   =================================== */
-
-/* Hardware acceleration for animated elements */
-.main-image-glow,
-.scroll-reveal,
-.step-card,
-.feature-card,
-.use-case-card,
-.crypto-benefit {
-    will-change: transform;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-}
-
-/* ENHANCED: Smooth lazy loading image fade-in */
-img[loading="lazy"] {
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-}
-
-img[loading="lazy"].loaded,
-img.loaded {
-    opacity: 1;
-}
-
-/* Smooth image rendering */
-img {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
 }
 
 /* ===================================
@@ -725,8 +643,14 @@ img {
     color: rgba(255, 255, 255, 0.9);
 }
 
+/* END OF PART 1 *//* ===================================
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS
+   PART 2 OF 3 - UPDATED VERSION WITH REBUILT SECTIONS
+   Ember Token Section + REBUILT AIRDROP SECTION + REBUILT CRYPTO COINS SECTION
+   =================================== */
+
 /* ===================================
-   EMBER TOKEN SECTION - CRITICAL FIX FOR EQUAL HEIGHTS
+   EMBER TOKEN SECTION - COMPACT WITH ALIGNED HEIGHTS
    =================================== */
 .ember-token-section-redesigned {
     padding: var(--section-padding) var(--container-padding);
@@ -748,14 +672,12 @@ img {
     gap: 1.75rem;
 }
 
-/* CRITICAL FIX: Right column uses flexbox for equal height alignment */
 .ember-token-right-redesigned {
     display: flex;
     flex-direction: column;
     gap: 1.75rem;
     position: sticky;
     top: calc(var(--navbar-height) + 2rem);
-    height: fit-content;
 }
 
 .ember-token-title-redesigned {
@@ -882,12 +804,12 @@ img {
     font-size: 0.95rem;
 }
 
-/* CRITICAL FIX: Ember highlights - flexbox for equal heights */
+/* EMBER HIGHLIGHTS - COMPACT WITH ARROWS INSIDE */
 .ember-highlights-redesigned {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.85rem;
-    align-items: stretch;
-    min-height: 80px;
+    height: 100%;
 }
 
 .ember-highlight-redesigned {
@@ -901,7 +823,6 @@ img {
     text-decoration: none;
     transition: var(--transition-base);
     position: relative;
-    flex: 1;
 }
 
 .ember-highlight-redesigned:hover {
@@ -938,7 +859,7 @@ img {
 /* Phoenix Image Container */
 .ember-phoenix-container-redesigned {
     text-align: center;
-    flex: 0 0 auto;
+    flex: 1;
 }
 
 .phoenix-holding-coin-redesigned {
@@ -961,7 +882,7 @@ img {
     }
 }
 
-/* CRITICAL FIX: Compliance section - uses margin-top auto to push to bottom */
+/* COMPLIANCE SECTION - ALIGNED HEIGHT */
 .compliance-disclaimer-redesigned {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -969,7 +890,7 @@ img {
     padding: 1.75rem;
     display: flex;
     flex-direction: column;
-    margin-top: auto;
+    height: 100%;
 }
 
 .compliance-disclaimer-redesigned h4 {
@@ -999,11 +920,7 @@ img {
 .compliance-cta {
     text-align: center;
     margin-top: auto;
-}/* ===================================
-   VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 2 OF 3 - COMPLETE VERSION WITH IMAGE FIXES
-   Airdrop Section + Crypto Coins Section + Technology Modules
-   =================================== */
+}
 
 /* ===================================
    $EMBER AIRDROP SECTION - FINAL PRODUCTION VERSION
@@ -1123,6 +1040,35 @@ img {
     justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
+}
+
+.ember-social-btn-transparent {
+    background: rgba(139, 92, 246, 0.2);
+    border: 2px solid rgba(139, 92, 246, 0.5);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.ember-social-btn-transparent:hover {
+    background: rgba(139, 92, 246, 0.4);
+    border-color: rgba(139, 92, 246, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+.ember-social-icon-small {
+    width: 20px;
+    height: 20px;
 }
 
 /* Compact Grid - Two Columns */
@@ -1687,6 +1633,112 @@ img {
 }
 
 /* ===================================
+   RESPONSIVE - MOBILE
+   =================================== */
+
+@media (max-width: 768px) {
+    .ember-airdrop-section {
+        padding: 3rem 1rem;
+    }
+    
+    .ember-airdrop-outer-module {
+        padding: 1.5rem;
+    }
+    
+    .parachute-crate-enlarged {
+        max-width: 260px;
+    }
+    
+    .ember-title-compact {
+        font-size: 1.5rem;
+    }
+    
+    .ember-subtitle-compact {
+        font-size: 0.9rem;
+    }
+    
+    .ember-coming-soon-compact {
+        padding: 1.25rem;
+    }
+    
+    .ember-coming-text h3 {
+        font-size: 1.1rem;
+    }
+    
+    .ember-coming-text p {
+        font-size: 0.85rem;
+    }
+    
+    .ember-compact-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .ember-inner-module {
+        padding: 1.25rem;
+    }
+    
+    .ember-mini-header {
+        padding-bottom: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .ember-mini-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .ember-mini-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .ember-stats-compact {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .share-buttons-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .presale-info-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .ember-social-links-compact {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ember-airdrop-section {
+        padding: 2.5rem 1rem;
+    }
+    
+    .parachute-crate-enlarged {
+        max-width: 220px;
+    }
+    
+    .ember-title-compact {
+        font-size: 1.35rem;
+    }
+    
+    .ember-airdrop-outer-module {
+        padding: 1.25rem;
+    }
+    
+    .ember-inner-module {
+        padding: 1rem;
+    }
+}
+
+/* ===================================
+   END OF AIRDROP SECTION
+   =================================== */
+/* ===================================
    CRYPTO COIN SECTION - FIXED LAYOUT
    Phone image on LEFT, content on RIGHT (desktop)
    Stacks vertically on mobile
@@ -1866,8 +1918,151 @@ img {
     object-fit: contain;
 }
 
+/* Technology Modules Section (below crypto coins) */
+.technology-modules {
+    margin-top: 3rem;
+}
+
+.technology-modules-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.technology-modules-subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+}
+
+.technology-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
 /* ===================================
-   TECHNOLOGY MODULES - CRITICAL MOBILE STACKING FIX
+   RESPONSIVE BREAKPOINTS
+   =================================== */
+
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
+    /* Switch to stacked layout on tablet */
+    .crypto-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    /* Remove sticky positioning on tablet/mobile */
+    .crypto-image {
+        position: static;
+    }
+    
+    .crypto-coin-phone-frame {
+        max-width: 350px;
+    }
+    
+    .technology-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile - 768px and below */
+@media (max-width: 768px) {
+    .crypto-coin-section {
+        padding: 3rem 1rem;
+    }
+    
+    .crypto-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    /* Ensure phone frame displays properly on mobile */
+    .crypto-image {
+        display: block;
+        text-align: center;
+        margin-bottom: 2rem;
+        position: static;
+    }
+    
+    .crypto-coin-phone-frame {
+        display: inline-block;
+        max-width: 310px;
+        padding: 10px;
+        margin: 0 auto;
+    }
+    
+    .crypto-coin-screen-wrapper {
+        display: block;
+        border-radius: 16px;
+    }
+    
+    .phoenix-coin-image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    
+    .crypto-text {
+        text-align: left;
+    }
+    
+    .crypto-title {
+        font-size: 1.75rem;
+    }
+    
+    .crypto-description {
+        font-size: 0.95rem;
+    }
+    
+    .crypto-benefit {
+        padding: 1rem;
+    }
+    
+    .coin-image img,
+    .placement-image img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .revenue-image img {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .benefit-content h3 {
+        font-size: 1.05rem;
+    }
+    
+    .benefit-content p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Small Mobile - 480px and below */
+@media (max-width: 480px) {
+    .crypto-coin-section {
+        padding: 2.5rem 1rem;
+    }
+    
+    .crypto-coin-phone-frame {
+        max-width: 280px;
+        padding: 8px;
+    }
+    
+    .crypto-title {
+        font-size: 1.5rem;
+    }
+}
+/* ===================================
+   TECHNOLOGY MODULES
    =================================== */
 .technology-modules {
     margin-top: 2.5rem;
@@ -1893,7 +2088,6 @@ img {
     margin: 0 auto 1.75rem;
 }
 
-/* CRITICAL FIX: Desktop shows 2 columns */
 .technology-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -2152,11 +2346,7 @@ img {
     line-height: 1.4;
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
-}/* ===================================
-   VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 3 OF 3 - COMPLETE VERSION (FINAL) WITH IMAGE FIXES
-   Features + Showcase + Use Cases + Pricing + Phoenix Separator + Final CTA + Modals + Responsive
-   =================================== */
+}
 
 /* ===================================
    FEATURES SECTION
@@ -3430,7 +3620,7 @@ img {
 }
 
 /* ===================================
-   MODALS - PROPERLY STYLED WITH Z-INDEX 10000+
+   MODALS - PROPERLY STYLED WITH NO CONFLICTS
    =================================== */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
@@ -3691,22 +3881,6 @@ img {
         gap: 1.75rem;
     }
     
-    .ember-token-grid-redesigned {
-        grid-template-columns: 1fr;
-    }
-    
-    .ember-token-right-redesigned {
-        position: static;
-    }
-    
-    .crypto-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .crypto-image {
-        position: static;
-    }
-    
     .features-grid,
     .use-cases-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -3771,44 +3945,6 @@ img {
     .hero-feature-icon {
         width: 48px;
         height: 48px;
-    }
-    
-    .ember-highlights-redesigned {
-        flex-direction: column;
-    }
-    
-    .ember-airdrop-section {
-        padding: 3rem 1rem;
-    }
-    
-    .ember-airdrop-outer-module {
-        padding: 1.5rem;
-    }
-    
-    .ember-compact-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .ember-stats-compact {
-        grid-template-columns: 1fr;
-    }
-    
-    .share-buttons-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .presale-info-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* CRITICAL FIX: Force mobile stacking for technology grid with !important */
-    .technology-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem;
-    }
-    
-    .technology-card {
-        margin-bottom: 0;
     }
     
     .combined-power-benefits,
@@ -3904,40 +4040,23 @@ img {
     .thumb-label {
         font-size: 0.6rem;
     }
-    
-    .parachute-crate-enlarged {
-        max-width: 220px;
-    }
-    
-    .crypto-coin-phone-frame {
-        max-width: 280px;
-        padding: 8px;
-    }
-    
-    /* CRITICAL: Ensure technology grid stays stacked on smallest screens */
-    .technology-grid {
-        grid-template-columns: 1fr !important;
-    }
 }
 
 /**
  * ============================================
- * END OF LOCAL.CSS - COMPLETE & PRODUCTION READY WITH IMAGE FIXES
+ * END OF LOCAL.CSS - PART 3 OF 3 (COMPLETE & UPDATED)
  * ============================================
  * 
- * ALL CRITICAL FIXES IMPLEMENTED:
- * ✅ ISSUE 1: Ember Token Section equal heights with flexbox + margin-top auto
- * ✅ ISSUE 2: Technology Grid mobile stacking forced with !important at 768px
- * ✅ ISSUE 3: Mobile refresh FOUC prevention with body.loaded
- * ✅ ISSUE 4: Smooth scroll & enhanced image lazy-load transitions
- * ✅ IMAGE FIX: Added proper .main-image-glow and base img styles at top
- * ✅ All image glows properly wrapped
- * ✅ Performance optimizations included
- * ✅ Complete responsive breakpoints
- * ✅ Modals with proper z-index 10000+
- * ✅ All sections from hero through final CTA
+ * ALL CRITICAL UPDATES IMPLEMENTED:
+ * ✅ Desktop: All sections properly styled
+ * ✅ Desktop: Side-by-side pricing modules
+ * ✅ Desktop: Simplified tier pricing
+ * ✅ Desktop: Compact final CTA modules
+ * ✅ Mobile: All sections responsive
+ * ✅ Mobile: Compact modules throughout
+ * ✅ REBUILT: Crypto Coin Section (from crypto-coin-section-rebuild.css)
+ * ✅ REBUILT: Airdrop Section (from airdrop-section-rebuild.css)
+ * ✅ Modals: Proper z-index and styling
  * ✅ Production-ready with proper organization
- * 
- * TOTAL LINES: ~2,900
  * ============================================
  */
