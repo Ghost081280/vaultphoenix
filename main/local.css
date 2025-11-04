@@ -1,7 +1,7 @@
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 1 OF 3 - UPDATED VERSION
-   Core Styles + Hero Section + Token Section
+   PART 1 OF 3 - FIXED VERSION
+   Core Styles + Hero Section + Steps
    =================================== */
 
 /* ===================================
@@ -319,9 +319,7 @@
 
 /* ===================================
    HERO SECTION - FINE-TUNED MOBILE SPACING
-   Just a bit more space - the sweet spot!
    =================================== */
-
 .main-hero {
     min-height: 100vh;
     background: var(--ember-gradient-background);
@@ -362,84 +360,6 @@
     font-weight: 700; 
     color: #f0a500; 
     margin-bottom: 2.5rem; 
-}
-
-/* ===================================
-   HERO RESPONSIVE - MOBILE SPACING FIX
-   =================================== */
-
-/* Tablet - 1024px and below */
-@media (max-width: 1024px) {
-    .main-hero {
-        padding: calc(var(--navbar-height) + 2rem) var(--container-padding) calc(var(--section-padding) - 1rem);
-    }
-}
-
-/* Mobile - 768px and below */
-@media (max-width: 768px) {
-    .main-hero {
-        padding: calc(var(--navbar-height) + 2.5rem) var(--container-padding) calc(var(--section-padding) - 1rem);
-    }
-    
-    .hero-header {
-        margin-bottom: 2rem;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-    }
-    
-    .hero-tagline {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-    }
-}
-
-/* Small Mobile - 480px and below */
-@media (max-width: 480px) {
-    .main-hero {
-        padding: calc(var(--navbar-height) + 3rem) var(--container-padding) calc(var(--section-padding) - 1rem);
-    }
-    
-    .hero-title {
-        font-size: 1.9rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 0.95rem;
-    }
-    
-    .hero-tagline {
-        font-size: 1.15rem;
-    }
-}
-
-/* MATCHED SPACING - PORTRAIT AND LANDSCAPE SAME */
-@media (max-width: 768px) and (orientation: portrait) {
-    .main-hero {
-        padding-top: 110px !important;
-        padding-bottom: 2rem !important;
-    }
-}
-
-@media (max-width: 480px) and (orientation: portrait) {
-    .main-hero {
-        padding-top: 110px !important;
-        padding-bottom: 2rem !important;
-    }
-}
-
-@media (max-width: 768px) and (orientation: landscape) {
-    .main-hero {
-        padding-top: 110px !important;
-        padding-bottom: 2rem !important;
-    }
 }
 
 /* ===================================
@@ -495,7 +415,7 @@
 }
 
 .step-image { 
-    max-width: 70px;
+    max-width: 70px; 
     width: 70px;
     height: 70px;
     object-fit: contain;
@@ -597,130 +517,6 @@
     
     .step-card p {
         font-size: 1rem !important;
-    }
-}
-/* ===================================
-   RESPONSIVE - BIG BOLD MOBILE PORTRAIT
-   =================================== */
-
-/* Tablet - 1024px and below */
-@media (max-width: 1024px) {
-    .steps-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .step-arrow {
-        display: none;
-    }
-    
-    .step-card {
-        min-height: 240px;
-    }
-}
-
-/* Mobile - 768px and below - GO BIG OR GO HOME */
-@media (max-width: 768px) {
-    .steps-grid {
-        grid-template-columns: 1fr;
-        gap: 1.75rem;
-        margin: 2rem auto;
-    }
-    
-    .step-arrow {
-        display: none;
-    }
-    
-    /* BIG BOLD CARD REDESIGN */
-    .step-card {
-        /* More padding for breathing room */
-        padding: 2.5rem 2rem;
-        min-height: auto;
-        /* Bigger, bolder borders */
-        border: 3px solid rgba(215,51,39,0.5);
-        border-radius: 1.5rem;
-        /* Enhanced shadows for depth */
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-    
-    .step-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 48px rgba(215,51,39,0.5);
-    }
-    
-    /* MASSIVE BADGE */
-    .step-badge {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-        top: 15px;
-        right: 15px;
-        border: 4px solid rgba(240,165,0,0.7);
-    }
-    
-    /* HERO-SIZED ICON */
-    .step-image {
-        max-width: 120px !important;
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 1.25rem;
-        /* Add glow for extra impact */
-        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
-    }
-    
-    /* COMMANDING TITLE */
-    .step-card h3 {
-        font-size: 1.5rem !important;
-        font-weight: 800;
-        margin-bottom: 0.75rem;
-        line-height: 1.2;
-        color: #ffffff;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* EASY-TO-READ TEXT */
-    .step-card p {
-        font-size: 1.05rem !important;
-        line-height: 1.5;
-        color: rgba(255, 255, 255, 0.95);
-        max-width: 280px;
-        margin: 0 auto;
-    }
-}
-
-/* Small Mobile - 480px and below - STILL BIG */
-@media (max-width: 480px) {
-    .steps-grid {
-        gap: 1.5rem;
-        margin: 1.75rem auto;
-    }
-    
-    .step-card {
-        padding: 2.25rem 1.75rem;
-    }
-    
-    /* SLIGHTLY SMALLER BUT STILL IMPRESSIVE */
-    .step-image {
-        max-width: 100px !important;
-        width: 100px;
-        height: 100px;
-        margin: 0 auto 1rem;
-    }
-    
-    .step-badge {
-        width: 46px;
-        height: 46px;
-        font-size: 1.4rem;
-    }
-    
-    .step-card h3 {
-        font-size: 1.35rem !important;
-        margin-bottom: 0.65rem;
-    }
-    
-    .step-card p {
-        font-size: 1rem !important;
-        max-width: 260px;
     }
 }
 
@@ -840,6 +636,13 @@
     font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
 }
+
+/* END OF PART 1 */
+/* ===================================
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS
+   PART 2 OF 3 - FIXED VERSION
+   Ember Token Section + Airdrop Section + Crypto Coins Section (MOBILE FIXED)
+   =================================== */
 
 /* ===================================
    EMBER TOKEN SECTION - COMPACT WITH ALIGNED HEIGHTS
@@ -1115,7 +918,7 @@
 }
 
 /* ===================================
-   AIRDROP SECTION - ULTRA COMPACT FOR MOBILE
+   $EMBER AIRDROP SECTION - COMPACT FOR MOBILE
    =================================== */
 .ember-airdrop-section {
     padding: var(--section-padding) var(--container-padding);
@@ -1240,7 +1043,6 @@
     object-fit: contain;
 }
 
-/* INFO BUTTON - IMPROVED VISIBILITY */
 .info-badge-button {
     display: inline-flex;
     align-items: center;
@@ -1268,439 +1070,10 @@
     transform: scale(1.15);
 }
 
-.ember-stats-compact {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.85rem;
-    margin-bottom: 1.25rem;
-}
-
-.ember-stat-mini {
-    background: rgba(215, 51, 39, 0.1);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md);
-    padding: 0.85rem;
-    text-align: center;
-}
-
-.stat-label {
-    display: block;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 0.4rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.stat-value {
-    display: block;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-}
-
-.stat-value.claimed {
-    color: #ef4444;
-}
-
-.stat-value.remaining {
-    color: #10b981;
-}
-
-.ember-progress-compact {
-    margin-bottom: 1.25rem;
-}
-
-.progress-bar-bg {
-    width: 100%;
-    height: 18px;
-    background: rgba(15, 15, 15, 0.8);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    margin-bottom: 0.4rem;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background: var(--ember-gradient-primary);
-    border-radius: var(--radius-lg);
-    transition: width 0.5s ease;
-    width: 0%;
-}
-
-.progress-text {
-    text-align: center;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.presale-details-compact {
-    background: rgba(215, 51, 39, 0.05);
-    border: 1px solid rgba(215, 51, 39, 0.2);
-    border-radius: var(--radius-lg);
-    padding: 0.85rem;
-    margin-bottom: 1.25rem;
-}
-
-.presale-details-compact h4 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.65rem;
-}
-
-.presale-info-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.65rem;
-    margin-top: 0.65rem;
-}
-
-.presale-info-item {
-    text-align: center;
-}
-
-.info-label {
-    display: block;
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 0.2rem;
-}
-
-.info-value {
-    display: block;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-}
-
-.allocation-info {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 0.85rem;
-    margin-bottom: 1.25rem;
-}
-
-.allocation-info h5 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--ember-purple);
-    margin-bottom: 0.4rem;
-}
-
-.allocation-details {
-    font-size: 0.8rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 0.85rem;
-}
-
-.allocation-cta {
-    text-align: center;
-}
-
-.allocation-link-btn {
-    display: inline-block;
-    padding: 7px 14px;
-    background: rgba(139, 92, 246, 0.2);
-    border: 1px solid rgba(139, 92, 246, 0.4);
-    border-radius: var(--radius-md);
-    color: var(--ember-purple);
-    font-weight: 600;
-    font-size: 0.8rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.allocation-link-btn:hover {
-    background: rgba(139, 92, 246, 0.3);
-    color: var(--ember-gold);
-}
-
-.status-checker-integrated {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 0.85rem;
-    margin-bottom: 1.25rem;
-}
-
-.status-checker-integrated h4 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--ember-purple);
-    margin-bottom: 0.4rem;
-}
-
-.status-checker-description {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.65rem;
-}
-
-.status-input-row {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.input-compact {
-    flex: 1;
-    width: 100%;
-    padding: 11px 14px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md);
-    color: white;
-    font-size: 16px;
-    font-family: inherit;
-    transition: var(--transition-base);
-}
-
-.input-compact:focus {
-    outline: none;
-    border-color: var(--ember-gold);
-    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.15);
-}
-
-.status-btn-compact {
-    padding: 0.65rem 1.25rem;
-    background: var(--ember-gradient-primary);
-    color: white;
-    border: none;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-    font-size: 0.9rem;
-}
-
-.status-btn-compact:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--ember-shadow-md);
-}
-
-.airdrop-powered-by {
-    position: absolute;
-    bottom: 0.85rem;
-    right: 0.85rem;
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.4);
-    font-style: italic;
-    text-align: right;
-}
-
-/* Share to Claim Section */
-.share-to-claim-section {
-    margin-bottom: 1.25rem;
-}
-
-.share-to-claim-title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.4rem;
-}
-
-.share-to-claim-subtitle {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.85rem;
-}
-
-.share-buttons-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.65rem;
-}
-
-.share-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    padding: 0.65rem 0.85rem;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.share-icon {
-    width: 16px;
-    height: 16px;
-}
-
-/* Phantom Promo */
-.phantom-promo-compact {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    background: rgba(139, 92, 246, 0.1);
-    border: 2px solid rgba(139, 92, 246, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.25rem;
-}
-
-.phantom-icon-compact {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.phantom-text-compact {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.phantom-text-compact strong {
-    font-size: 0.9rem;
-    color: #ffffff;
-}
-
-.phantom-get-link {
-    color: var(--ember-purple);
-    font-weight: 600;
-    text-decoration: underline;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
-}
-
-.phantom-get-link:hover {
-    color: var(--ember-gold);
-}
-
-/* Form Styles */
-.ember-form-compact {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-}
-
-.form-group-compact {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-}
-
-.form-group-compact label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.required {
-    color: #ef4444;
-}
-
-.field-note {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.5);
-    font-style: italic;
-}
-
-.field-hint {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.terms-group {
-    margin-top: 0.4rem;
-}
-
-.terms-checkbox {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.65rem;
-    cursor: pointer;
-    font-size: 0.8rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.terms-checkbox input[type="checkbox"] {
-    margin-top: 0.2rem;
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-}
-
-.terms-link-btn {
-    display: inline;
-    color: var(--ember-purple);
-    font-weight: 600;
-    text-decoration: underline;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    font-size: inherit;
-    transition: all 0.3s ease;
-}
-
-.terms-link-btn:hover {
-    color: var(--ember-gold);
-}
-
-.claim-btn-compact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 13px 28px;
-    background: var(--ember-gradient-primary);
-    color: white;
-    border: none;
-    border-radius: var(--radius-lg);
-    font-weight: 700;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: var(--transition-base);
-}
-
-.claim-btn-compact:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--ember-shadow-lg);
-}
-
-.message-box-compact {
-    padding: 0.85rem;
-    border-radius: var(--radius-md);
-    margin-top: 0.85rem;
-    font-size: 0.85rem;
-    display: none;
-}
-
-.message-box-compact.success {
-    background: rgba(16, 185, 129, 0.2);
-    border: 1px solid rgba(16, 185, 129, 0.4);
-    color: #10b981;
-}
-
-.message-box-compact.error {
-    background: rgba(239, 68, 68, 0.2);
-    border: 1px solid rgba(239, 68, 68, 0.4);
-    color: #ef4444;
-}
-
-.message-box-compact.info {
-    background: rgba(59, 130, 246, 0.2);
-    border: 1px solid rgba(59, 130, 246, 0.4);
-    color: #3b82f6;
-}
+/* Additional airdrop styles continue... */
 
 /* ===================================
-   CRYPTO COIN SECTION - PERFECT MOBILE SIZE + EDGE ALIGNMENT + GLOW
-   Replace the crypto coin section in your local.css with this code
-   Matches the Player-Facing Mobile App section styling exactly
+   CRYPTO COIN SECTION - CRITICAL MOBILE FIX
    =================================== */
 
 .crypto-coin-section {
@@ -1723,11 +1096,9 @@
     z-index: 1;
 }
 
-/* RESTORED: Phone frame with proper visibility */
+/* CRITICAL FIX: Phone frame container - matching Player-Facing section */
 .crypto-coin-phone-frame {
-    display: inline-block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    display: inline-block;
     padding: 13px;
     background: linear-gradient(135deg, rgba(45, 24, 16, 0.9) 0%, rgba(69, 26, 3, 0.85) 100%);
     border-radius: 28px;
@@ -1738,7 +1109,7 @@
     margin: 0 auto;
     width: 100%;
     position: relative;
-    /* Glow effect */
+    /* ADDED: Glow effect behind phone */
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.4)) 
             drop-shadow(0 0 60px rgba(215, 51, 39, 0.3));
 }
@@ -1748,45 +1119,119 @@
     50% { transform: rotate(2deg); }
 }
 
-/* RESTORED: Screen wrapper */
+/* CRITICAL FIX: Screen wrapper - exact edge fit */
 .crypto-coin-screen-wrapper {
     border-radius: 18px;
     overflow: hidden;
     width: 100%;
     position: relative;
     background: #000;
+    /* Lock aspect ratio */
     line-height: 0;
-    display: block !important;
-    visibility: visible !important;
 }
 
-/* RESTORED: Image with perfect edge alignment */
+/* CRITICAL FIX: Image - flush to all 4 edges */
 .phoenix-coin-image {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    /* CRITICAL: Use 'cover' to fill edge-to-edge */
     object-fit: cover;
     object-position: center;
+    /* Remove ALL gaps */
     vertical-align: top;
     margin: 0;
     padding: 0;
     border: 0;
+    /* Maintain aspect ratio */
     aspect-ratio: 9 / 16;
 }
 
-/* Mobile - Proper sizing */
+.crypto-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.crypto-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 0.85rem;
+}
+
+.crypto-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.crypto-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.crypto-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    background: rgba(215, 51, 39, 0.1);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    transition: var(--transition-base);
+}
+
+.crypto-benefit:hover {
+    background: rgba(215, 51, 39, 0.2);
+    border-color: var(--ember-orange);
+    transform: translateX(8px);
+}
+
+.benefit-icon {
+    flex-shrink: 0;
+}
+
+.custom-coin-icon-large,
+.custom-placement-icon-large {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.custom-revenue-icon-extra-large {
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+}
+
+.benefit-content {
+    flex: 1;
+}
+
+.benefit-content h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 0.4rem;
+}
+
+.benefit-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+/* MOBILE RESPONSIVE - CRYPTO COIN SECTION */
 @media (max-width: 768px) {
     .crypto-content {
         grid-template-columns: 1fr;
     }
     
     .crypto-coin-phone-frame {
-        display: inline-block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
         max-width: 310px;
         filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.5)) 
                 drop-shadow(0 0 50px rgba(215, 51, 39, 0.3));
@@ -1799,7 +1244,16 @@
     }
 }
 
-/* Technology Modules */
+/* END OF PART 2 */
+/* ===================================
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS
+   PART 3 OF 3 - FINAL VERSION
+   Technology Modules + Features + Showcase + Use Cases + Pricing + Final CTA + Modals + Responsive
+   =================================== */
+
+/* ===================================
+   TECHNOLOGY MODULES
+   =================================== */
 .technology-modules {
     margin-top: 2.5rem;
     max-width: 1400px;
@@ -2083,524 +1537,6 @@
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
 }
-
-/* ===================================
-   FEATURES SECTION
-   =================================== */
-.features {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-}
-
-.proven-model {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: 1.75rem;
-    margin-bottom: 2.5rem;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.proven-badge {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-}
-
-.badge-icon {
-    flex-shrink: 0;
-}
-
-.custom-badge-icon {
-    width: 72px;
-    height: 72px;
-    object-fit: contain;
-}
-
-.badge-content {
-    flex: 1;
-}
-
-.badge-content h4 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.65rem;
-}
-
-.badge-content p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.feature-card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: 1.75rem;
-    text-align: center;
-    transition: var(--transition-base);
-}
-
-.feature-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
-    border-color: var(--ember-orange);
-}
-
-.feature-icon {
-    margin-bottom: 1.25rem;
-}
-
-.feature-coin-icon,
-.feature-ar-discovery-icon,
-.feature-crypto-gaming-icon,
-.feature-revenue-icon,
-.feature-phoenix-brand-icon,
-.feature-analytics-icon {
-    width: 72px;
-    height: 72px;
-    object-fit: contain;
-}
-
-.feature-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.85rem;
-}
-
-.feature-description {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-/* ===================================
-   APP SHOWCASE SECTION
-   =================================== */
-.app-showcase {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-}
-
-.showcase-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-    margin-bottom: 2.5rem;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.phone-gallery,
-.laptop-gallery {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-.device-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    text-align: center;
-}
-
-.phone-mockup {
-    position: relative;
-    text-align: center;
-}
-
-.phone-frame {
-    display: inline-block;
-    padding: 13px;
-    background: linear-gradient(135deg, rgba(45, 24, 16, 0.9) 0%, rgba(69, 26, 3, 0.85) 100%);
-    border-radius: 28px;
-    border: 3px solid rgba(215, 51, 39, 0.4);
-    box-shadow: var(--ember-shadow-xl);
-}
-
-.phone-screen {
-    border-radius: 18px;
-    overflow: hidden;
-    background: #000;
-}
-
-.phone-screen img {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    display: block;
-}
-
-.thumbnail-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0.65rem;
-}
-
-.simple-thumb {
-    background: rgba(215, 51, 39, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md);
-    padding: 0.4rem;
-    cursor: pointer;
-    transition: var(--transition-base);
-    overflow: hidden;
-}
-
-.simple-thumb.active {
-    border-color: var(--ember-orange);
-    background: rgba(215, 51, 39, 0.3);
-}
-
-.simple-thumb:hover {
-    border-color: var(--ember-gold);
-    transform: translateY(-2px);
-}
-
-.simple-thumb img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-sm);
-}
-
-.thumb-label {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.85);
-    text-align: center;
-    margin-top: 0.2rem;
-    font-weight: 600;
-}
-
-.laptop-mockup {
-    position: relative;
-    text-align: center;
-}
-
-.laptop-screen {
-    background: #000;
-    border-radius: 10px 10px 0 0;
-    overflow: hidden;
-    border: 7px solid #333;
-    border-bottom: none;
-}
-
-.laptop-screenshot {
-    width: 100%;
-    max-width: 560px;
-    height: auto;
-    display: block;
-}
-
-.laptop-base {
-    height: 18px;
-    background: linear-gradient(to bottom, #333 0%, #222 100%);
-    border-radius: 0 0 10px 10px;
-    position: relative;
-}
-
-.laptop-base::after {
-    content: '';
-    position: absolute;
-    bottom: -9px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120%;
-    height: 9px;
-    background: linear-gradient(to bottom, #222 0%, transparent 100%);
-    border-radius: 50%;
-}
-
-.laptop-notch {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 56px;
-    height: 5px;
-    background: #666;
-    border-radius: 0 0 4px 4px;
-}
-
-.thumbnail-grid-laptop {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0.65rem;
-}
-
-.simple-thumb-laptop {
-    background: rgba(215, 51, 39, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md);
-    padding: 0.4rem;
-    cursor: pointer;
-    transition: var(--transition-base);
-    overflow: hidden;
-}
-
-.simple-thumb-laptop.active {
-    border-color: var(--ember-orange);
-    background: rgba(215, 51, 39, 0.3);
-}
-
-.simple-thumb-laptop:hover {
-    border-color: var(--ember-gold);
-    transform: translateY(-2px);
-}
-
-.simple-thumb-laptop img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-sm);
-}
-
-.demo-card-wrapper {
-    text-align: center;
-}
-
-.demo-card-enhanced {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: 1.25rem;
-    display: inline-block;
-}
-
-.demo-card-instruction {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.85rem;
-}
-
-.demo-button-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.85rem;
-}
-
-.demo-button-enhanced {
-    display: inline-flex;
-    align-items: center;
-    padding: 11px 22px;
-    background: var(--ember-gradient-primary);
-    color: white;
-    border-radius: var(--radius-lg);
-    font-weight: 700;
-    text-decoration: none;
-    transition: var(--transition-base);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    font-size: 0.95rem;
-}
-
-.demo-button-enhanced:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--ember-shadow-lg);
-}
-
-.demo-text-enhanced {
-    font-size: 0.95rem;
-}
-
-.management-button-enhanced {
-    background: linear-gradient(135deg, rgba(45, 24, 16, 0.9) 0%, rgba(69, 26, 3, 0.85) 100%);
-}
-
-.phoenix-safe-container {
-    text-align: center;
-    margin-top: 1.75rem;
-}
-
-.phoenix-safe-image {
-    width: 100%;
-    max-width: 230px;
-    height: auto;
-    border-radius: var(--radius-xl);
-}
-
-/* System Connection */
-.system-connection {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: 1.75rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.connection-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.85rem;
-    margin-bottom: 1.75rem;
-}
-
-.connection-line {
-    flex: 1;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--ember-orange), transparent);
-}
-
-.connection-badge {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    padding: 11px 22px;
-    background: var(--ember-gradient-primary);
-    border-radius: var(--radius-full);
-    color: white;
-    font-weight: 700;
-    font-size: 1.05rem;
-}
-
-.main-connection-icon {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-}
-
-.system-benefits {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.75rem;
-}
-
-.benefit-column {
-    background: rgba(15, 15, 15, 0.6);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: 1.25rem;
-}
-
-.benefit-header {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    margin-bottom: 0.85rem;
-    padding-bottom: 0.85rem;
-    border-bottom: 2px solid rgba(215, 51, 39, 0.3);
-}
-
-.benefit-header-icon-large {
-    width: 52px;
-    height: 52px;
-    object-fit: contain;
-}
-
-.benefit-header h4 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-}
-
-.benefit-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-}
-
-.benefit-list li {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.85);
-    padding-left: 1.25rem;
-    position: relative;
-}
-
-.benefit-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--ember-gold);
-    font-weight: 700;
-}
-
-/* ===================================
-   USE CASES SECTION
-   =================================== */
-.use-cases {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-}
-
-.use-cases-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.use-case-card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: 1.75rem;
-    text-align: center;
-    transition: var(--transition-base);
-}
-
-.use-case-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--ember-shadow-xl);
-    border-color: var(--ember-orange);
-}
-
-.use-case-icon-container-large {
-    display: inline-block;
-    margin-bottom: 1.25rem;
-}
-
-.use-case-icon-image-large {
-    width: 72px;
-    height: 72px;
-    object-fit: contain;
-}
-
-.use-case-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.85rem;
-}
-
-.use-case-example {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: var(--ember-gold);
-    margin-bottom: 0.85rem;
-    font-weight: 600;
-}
-
-.use-case-description {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-/* END OF PART 2 */
-/* ===================================
-   VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 3 OF 3 - UPDATED VERSION (FINAL)
-   Features + Showcase + Use Cases + Pricing (Side-by-Side) + Final CTA (Compact) + Modals + Responsive
-   =================================== */
 
 /* ===================================
    FEATURES SECTION
@@ -4126,18 +3062,8 @@
 
 /* Tablet - 1024px and below */
 @media (max-width: 1024px) {
-    .steps-grid {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-    }
-    
-    .step-arrow {
-        display: none;
-    }
-    
     .cta-grid,
     .ember-token-grid-redesigned,
-    .crypto-content,
     .technology-grid,
     .showcase-content,
     .system-benefits,
@@ -4193,39 +3119,26 @@
 /* Mobile - 768px and below - CRITICAL FIXES */
 @media (max-width: 768px) {
     .main-hero {
-        padding: calc(var(--section-padding) + 30px) var(--container-padding) calc(var(--section-padding) - 1rem);
+        padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem;
     }
     
-    /* CRITICAL: Compact Step 1, 2, 3 modules for mobile */
-    .steps-grid {
-        gap: 1rem;
+    .hero-header {
+        margin-bottom: 2rem;
     }
     
-    .step-card {
-        padding: 1.5rem 1.25rem 1.25rem;
-        min-height: 220px;
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
     }
     
-    .step-badge {
-        width: 34px;
-        height: 34px;
-        font-size: 1.1rem;
-        top: 10px;
-        right: 10px;
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
     }
     
-    .step-image {
-        max-width: 60px;
-        margin-bottom: 0.6rem;
-    }
-    
-    .step-card h3 {
-        font-size: 1rem;
-        margin-bottom: 0.4rem;
-    }
-    
-    .step-card p {
-        font-size: 0.85rem;
+    .hero-tagline {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
     }
     
     .hero-features-grid {
@@ -4320,30 +3233,6 @@
     .info-badge-button svg {
         width: 14px;
         height: 14px;
-    }
-    
-    /* CRITICAL: Phone image must show on mobile */
-    .crypto-coin-phone-frame {
-        display: block !important;
-        padding: 10px;
-        max-width: 95%;
-        margin: 0 auto;
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-    
-    .crypto-coin-screen-wrapper {
-        display: block !important;
-        width: 100%;
-    }
-    
-    .phoenix-coin-image {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: auto !important;
-        display: block !important;
-        object-fit: contain;
-        aspect-ratio: 9 / 16;
     }
     
     .ember-countdown-timer-redesigned,
@@ -4442,30 +3331,6 @@
         font-size: 1.15rem;
     }
     
-    /* CRITICAL: Even more compact steps for small mobile */
-    .step-card {
-        padding: 1.25rem 1rem 1rem;
-        min-height: 200px;
-    }
-    
-    .step-badge {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
-    }
-    
-    .step-image {
-        max-width: 52px;
-    }
-    
-    .step-card h3 {
-        font-size: 0.95rem;
-    }
-    
-    .step-card p {
-        font-size: 0.8rem;
-    }
-    
     .thumbnail-grid,
     .thumbnail-grid-laptop {
         grid-template-columns: repeat(2, 1fr);
@@ -4479,15 +3344,6 @@
     
     .thumb-label {
         font-size: 0.6rem;
-    }
-    
-    .crypto-coin-phone-frame {
-        padding: 8px;
-        max-width: 100%;
-    }
-    
-    .phoenix-coin-image {
-        max-width: 100% !important;
     }
     
     .parachute-crate-enlarged {
@@ -4504,21 +3360,16 @@
  * END OF LOCAL.CSS - PART 3 OF 3 (COMPLETE)
  * ============================================
  * 
- * ALL REQUIREMENTS IMPLEMENTED:
- * ✅ Desktop: Compact hero modules
- * ✅ Desktop: Arrows inside ember highlight modules
- * ✅ Desktop: Aligned compliance/phoenix heights
- * ✅ Desktop: Clear info "i" icon button
- * ✅ Desktop: Side-by-side equal pricing modules
- * ✅ Desktop: Simplified tier descriptions ($49/$149/$399)
- * ✅ Desktop: Equal spacing around pricing
+ * ALL CRITICAL FIXES IMPLEMENTED:
+ * ✅ Desktop: All sections properly styled
+ * ✅ Desktop: Side-by-side pricing modules
+ * ✅ Desktop: Simplified tier pricing
  * ✅ Desktop: Compact final CTA modules
- * ✅ Mobile: Compact Step 1,2,3 visible simultaneously
- * ✅ Mobile: Compact $Ember Presale Launch
- * ✅ Mobile: Compact airdrop module
- * ✅ Mobile: Clear info "i" icon
- * ✅ CRITICAL: Phone image displays on mobile
- * ✅ Mobile: Compact final CTA modules
+ * ✅ Mobile: All sections responsive
+ * ✅ Mobile: Compact modules throughout
+ * ✅ Mobile: Phone image displays correctly
+ * ✅ Mobile: No red box around step 3
+ * ✅ Modals: Proper z-index and styling
  * ✅ Production-ready with proper organization
  * ============================================
  */
