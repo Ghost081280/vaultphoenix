@@ -12,6 +12,15 @@
     padding: 0;
     box-sizing: border-box;
 }
+/* FOUC Prevention - ADD THIS */
+body {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+body.loaded {
+    opacity: 1;
+}
 
 /* ===================================
    FREE $EMBER TOKENS BANNER - ORIGINAL PURPLE
@@ -678,6 +687,7 @@
     gap: 1.75rem;
     position: sticky;
     top: calc(var(--navbar-height) + 2rem);
+    height: fit-content;
 }
 
 .ember-token-title-redesigned {
@@ -890,9 +900,8 @@
     padding: 1.75rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    margin-top: auto;  /* ← ONLY THIS LINE CHANGED (was: height: 100%;) */
 }
-
 .compliance-disclaimer-redesigned h4 {
     display: flex;
     align-items: center;
@@ -902,13 +911,11 @@
     color: var(--ember-gold);
     margin-bottom: 0.85rem;
 }
-
 .main-compliance-icon-redesigned {
     width: 36px;
     height: 36px;
     object-fit: contain;
 }
-
 .compliance-disclaimer-redesigned p {
     font-size: 0.85rem;
     line-height: 1.6;
@@ -916,12 +923,10 @@
     margin-bottom: 1.25rem;
     flex: 1;
 }
-
 .compliance-cta {
     text-align: center;
     margin-top: auto;
 }
-
 /* ===================================
    $EMBER AIRDROP SECTION - FINAL PRODUCTION VERSION
    Clean, professional, mobile-perfect from the ground up
@@ -1644,7 +1649,10 @@
     .ember-airdrop-outer-module {
         padding: 1.5rem;
     }
-    
+    .technology-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
     .parachute-crate-enlarged {
         max-width: 260px;
     }
