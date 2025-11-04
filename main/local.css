@@ -1,7 +1,7 @@
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 1 OF 3 - LAYOUT RESTORATION
-   Core Styles + Module 1 (The Hook)
+   PART 1 OF 3 - UPDATED VERSION
+   Core Styles + Hero Section + Token Section
    =================================== */
 
 /* ===================================
@@ -22,11 +22,11 @@
         rgba(124, 58, 237, 0.15) 100%);
     border: 2px solid rgba(139, 92, 246, 0.4);
     border-radius: 12px;
-    padding: 1rem;
-    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    margin: 0.75rem 0;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     animation: subtle-glow 3s ease-in-out infinite;
 }
 
@@ -48,11 +48,11 @@
         rgba(198, 40, 40, 0.15) 100%);
     border: 2px solid rgba(215, 51, 39, 0.4);
     border-radius: 12px;
-    padding: 1rem;
-    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    margin: 0.75rem 0;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     animation: subtle-glow-red 3s ease-in-out infinite;
 }
 
@@ -66,8 +66,8 @@
 }
 
 .free-tokens-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     flex-shrink: 0;
 }
 
@@ -78,15 +78,15 @@
 .free-tokens-text strong {
     display: block;
     color: var(--ember-gold);
-    font-size: 1.05rem;
-    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
 }
 
 .free-tokens-text p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
-    line-height: 1.4;
+    line-height: 1.3;
 }
 
 .btn-icon {
@@ -97,28 +97,28 @@
 }
 
 /* ===================================
-   MODULE 1 - THE HOOK STYLES
+   MODULE 1 - THE HOOK STYLES (COMPACT)
    =================================== */
 
 .hook-compelling-copy {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .hook-benefits-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin: 1.5rem 0;
+    gap: 0.75rem;
+    margin: 1rem 0;
 }
 
 .hook-benefit-item {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.75rem;
+    gap: 0.6rem;
+    padding: 0.6rem;
     background: rgba(15, 15, 15, 0.4);
     border-radius: var(--radius-md);
     transition: var(--transition-base);
@@ -135,14 +135,14 @@
 
 .hook-check {
     flex-shrink: 0;
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     background: var(--ember-gradient-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: white;
 }
@@ -153,12 +153,17 @@
 
 .hook-benefit-item strong {
     color: var(--ember-gold);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+}
+
+.hook-benefit-item div {
+    font-size: 0.85rem;
+    line-height: 1.4;
 }
 
 .hook-use-cases {
-    margin: 1.5rem 0;
-    padding: 1rem;
+    margin: 1rem 0;
+    padding: 0.75rem;
     background: rgba(215, 51, 39, 0.05);
     border: 1px solid rgba(215, 51, 39, 0.2);
     border-radius: var(--radius-lg);
@@ -170,10 +175,10 @@
 }
 
 .hook-use-case-title {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -181,16 +186,16 @@
 .hook-use-case-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
 .hook-tag {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 5px 10px;
     background: rgba(215, 51, 39, 0.2);
     border: 1px solid rgba(215, 51, 39, 0.4);
     border-radius: var(--radius-full);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
     white-space: nowrap;
@@ -211,13 +216,13 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 14px 32px;
+    padding: 12px 28px;
     background: var(--ember-gradient-primary);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-xl);
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 1rem;
     text-decoration: none;
     transition: all var(--transition-base);
     cursor: pointer;
@@ -237,7 +242,7 @@
    =================================== */
 .parachute-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .parachute-glow {
@@ -246,7 +251,7 @@
 
 .parachute-crate-enlarged {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     height: auto;
     object-fit: contain;
     margin: 0 auto;
@@ -288,7 +293,7 @@
     background: rgba(139, 92, 246, 0.2) !important;
     border: 2px solid rgba(139, 92, 246, 0.5) !important;
     color: white !important;
-    padding: 0.75rem 1.5rem;
+    padding: 0.65rem 1.25rem;
     border-radius: 12px;
     display: inline-flex;
     align-items: center;
@@ -298,6 +303,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     text-decoration: none;
+    font-size: 0.9rem;
 }
 
 .ember-social-btn-transparent:hover,
@@ -312,12 +318,12 @@
 }
 
 /* ===================================
-   HERO SECTION
+   HERO SECTION - COMPACT
    =================================== */
 .main-hero {
     min-height: 100vh;
     background: var(--ember-gradient-background);
-    padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 4rem;
+    padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -331,43 +337,45 @@
 }
 
 .hero-title { 
-    font-size: clamp(2.5rem, 6vw, 4rem); 
+    font-size: clamp(2.2rem, 5.5vw, 3.5rem); 
     font-weight: 800; 
-    margin-bottom: 1.5rem; 
+    margin-bottom: 1.25rem; 
+    line-height: 1.2;
 }
 
 .hero-subtitle { 
-    font-size: clamp(1.1rem, 2.2vw, 1.4rem); 
+    font-size: clamp(1rem, 2vw, 1.3rem); 
     max-width: 1100px; 
-    margin: 0 auto 1.5rem; 
+    margin: 0 auto 1.25rem; 
     color: rgba(255,255,255,0.9); 
+    line-height: 1.5;
 }
 
 .hero-tagline { 
-    font-size: clamp(1.3rem, 3vw, 1.9rem); 
+    font-size: clamp(1.2rem, 2.8vw, 1.75rem); 
     font-weight: 700; 
     color: #f0a500; 
-    margin-bottom: 3rem; 
+    margin-bottom: 2.5rem; 
 }
 
 .steps-grid {
     display: grid;
     grid-template-columns: 1fr auto 1fr auto 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
     max-width: 1200px;
-    margin: 3rem auto;
+    margin: 2.5rem auto;
     align-items: stretch;
 }
 
 .step-card {
     background: linear-gradient(135deg, rgba(26,15,10,0.9), rgba(45,24,16,0.85));
     border: 2px solid rgba(215,51,39,0.3);
-    border-radius: 1.5rem;
-    padding: 2.5rem 2rem 2rem;
+    border-radius: 1.25rem;
+    padding: 2rem 1.5rem 1.75rem;
     position: relative;
     text-align: center;
     transition: all 0.3s ease;
-    min-height: 280px;
+    min-height: 260px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -382,16 +390,16 @@
 
 .step-badge {
     position: absolute; 
-    top: 15px; 
-    right: 15px;
-    width: 40px; 
-    height: 40px; 
+    top: 12px; 
+    right: 12px;
+    width: 38px; 
+    height: 38px; 
     background: linear-gradient(135deg, #d73327, #c62828);
     border-radius: 50%; 
     display: flex; 
     align-items: center; 
     justify-content: center;
-    font-size: 1.3rem; 
+    font-size: 1.2rem; 
     font-weight: 800; 
     color: white;
     border: 3px solid rgba(240,165,0,0.6);
@@ -399,13 +407,22 @@
 }
 
 .step-image { 
-    max-width: 80px; 
+    max-width: 70px; 
     border-radius: 1rem; 
-    margin: 0 auto 1rem; 
+    margin: 0 auto 0.75rem; 
+}
+
+.step-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-card p {
+    font-size: 0.9rem;
 }
 
 .step-arrow { 
-    font-size: 3rem; 
+    font-size: 2.5rem; 
     color: #f0a500; 
     font-weight: 700; 
     display: flex;
@@ -413,19 +430,20 @@
     justify-content: center;
 }
 
+/* CTA GRID - MORE COMPACT */
 .cta-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
     max-width: 1200px;
-    margin: 3rem auto 0;
+    margin: 2.5rem auto 0;
 }
 
 .cta-card {
     background: linear-gradient(135deg, rgba(26,15,10,0.9), rgba(45,24,16,0.85));
     border: 2px solid rgba(215,51,39,0.3);
-    border-radius: 2rem;
-    padding: 2.5rem 2rem;
+    border-radius: 1.5rem;
+    padding: 1.75rem 1.5rem;
     position: relative;
     text-align: center;
     display: flex;
@@ -442,42 +460,44 @@
 }
 
 .cta-card-header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .solution-category-title {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .cta-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
 }
 
 .cta-icon { 
-    max-width: 80px; 
-    margin: 0 auto 1.5rem; 
+    max-width: 70px; 
+    margin: 0 auto 1rem; 
 }
 
 .btn-primary {
     display: inline-flex; 
     align-items: center; 
     justify-content: center; 
-    gap: 0.75rem;
+    gap: 0.6rem;
     background: linear-gradient(135deg, #d73327, #c62828); 
     color: white;
-    padding: 0.75rem 1.5rem; 
+    padding: 0.65rem 1.35rem; 
     border-radius: 9999px; 
     text-decoration: none;
     font-weight: 700; 
-    margin: 1rem 0 0.5rem; 
+    font-size: 0.95rem;
+    margin: 0.75rem 0 0.4rem; 
     transition: all 0.3s ease;
 }
 
@@ -493,48 +513,42 @@
 .secondary-link {
     color: #f0a500; 
     text-decoration: none; 
-    font-size: 0.95rem; 
+    font-size: 0.9rem; 
     margin-top: auto;
-    padding-top: 1rem;
+    padding-top: 0.75rem;
     display: inline-block;
 }
 
 .hero-features-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    gap: 1.75rem;
     max-width: 1200px;
-    margin: 3rem auto 0;
+    margin: 2.5rem auto 0;
 }
 
 .hero-feature-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     text-align: center;
 }
 
 .hero-feature-icon {
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     object-fit: contain;
 }
 
 .hero-feature-text {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* END OF PART 1 *//* ===================================
-   VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 2 OF 3 - LAYOUT RESTORATION
-   Middle Sections: Token, Airdrop, Crypto, Features, Showcase
-   =================================== */
-
 /* ===================================
-   EMBER TOKEN SECTION - RESTORED 2-COLUMN LAYOUT
+   EMBER TOKEN SECTION - COMPACT WITH ALIGNED HEIGHTS
    =================================== */
 .ember-token-section-redesigned {
     padding: var(--section-padding) var(--container-padding);
@@ -544,7 +558,7 @@
 .ember-token-grid-redesigned {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
     align-items: start;
     max-width: 1400px;
     margin: 0 auto;
@@ -553,43 +567,43 @@
 .ember-token-left-redesigned {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.75rem;
 }
 
 .ember-token-right-redesigned {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.75rem;
     position: sticky;
     top: calc(var(--navbar-height) + 2rem);
 }
 
 .ember-token-title-redesigned {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.8rem, 3.5vw, 2.75rem);
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .ember-token-description-redesigned {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .ember-countdown-widget-redesigned {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
-    padding: 2rem;
+    padding: 1.75rem;
 }
 
 .countdown-header-redesigned {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
 }
 
 .countdown-icon-redesigned {
@@ -597,59 +611,59 @@
 }
 
 .main-ember-countdown-icon-redesigned {
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     object-fit: contain;
 }
 
 .countdown-text-redesigned h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
 }
 
 .countdown-text-redesigned p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.7);
 }
 
 .ember-countdown-timer-redesigned {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
 }
 
 .ember-time-unit-redesigned {
     background: rgba(215, 51, 39, 0.2);
     border: 1px solid rgba(215, 51, 39, 0.4);
     border-radius: var(--radius-lg);
-    padding: 1rem;
+    padding: 0.85rem;
     text-align: center;
 }
 
 .ember-time-value-redesigned {
     display: block;
-    font-size: 2rem;
+    font-size: 1.85rem;
     font-weight: 800;
     color: var(--ember-gold);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
 }
 
 .ember-time-label-redesigned {
     display: block;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.7);
 }
 
 .presale-stats-redesigned {
     display: grid;
     grid-template-columns: auto auto auto auto auto;
-    gap: 1rem;
+    gap: 0.75rem;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .stat-item-redesigned {
@@ -658,20 +672,20 @@
 
 .stat-number-redesigned {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--ember-gold);
 }
 
 .stat-label-redesigned {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.6);
 }
 
 .stat-divider-redesigned {
     color: rgba(255, 255, 255, 0.3);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .presale-cta-redesigned {
@@ -679,37 +693,40 @@
 }
 
 .cta-icon-image-redesigned {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
 }
 
 .cta-text-redesigned {
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
+/* EMBER HIGHLIGHTS - COMPACT WITH ARROWS INSIDE */
 .ember-highlights-redesigned {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 0.85rem;
+    height: 100%;
 }
 
 .ember-highlight-redesigned {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem;
+    gap: 0.65rem;
+    padding: 0.85rem;
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-lg);
     text-decoration: none;
     transition: var(--transition-base);
+    position: relative;
 }
 
 .ember-highlight-redesigned:hover {
     background: rgba(215, 51, 39, 0.2);
     border-color: var(--ember-orange);
-    transform: translateX(5px);
+    transform: translateX(3px);
 }
 
 .highlight-emoji-redesigned {
@@ -717,32 +734,35 @@
 }
 
 .highlight-icon-image-redesigned {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
 }
 
 .highlight-text-redesigned {
     flex: 1;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
+    line-height: 1.3;
 }
 
 .highlight-arrow-redesigned {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--ember-gold);
+    margin-left: auto;
+    flex-shrink: 0;
 }
 
 /* Phoenix Image Container */
 .ember-phoenix-container-redesigned {
     text-align: center;
-    margin-bottom: 2rem;
+    flex: 1;
 }
 
 .phoenix-holding-coin-redesigned {
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     height: auto;
     object-fit: contain;
 }
@@ -760,43 +780,55 @@
     }
 }
 
-/* Compliance Section */
+/* COMPLIANCE SECTION - ALIGNED HEIGHT */
 .compliance-disclaimer-redesigned {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: 2rem;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .compliance-disclaimer-redesigned h4 {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-size: 1.2rem;
+    gap: 0.65rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .main-compliance-icon-redesigned {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     object-fit: contain;
 }
 
 .compliance-disclaimer-redesigned p {
-    font-size: 0.9rem;
-    line-height: 1.7;
+    font-size: 0.85rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+    flex: 1;
 }
 
 .compliance-cta {
     text-align: center;
+    margin-top: auto;
 }
 
+/* END OF PART 1 */
 /* ===================================
-   AIRDROP SECTION - RESTORED COMPACT LAYOUT
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS
+   PART 2 OF 3 - UPDATED VERSION
+   Airdrop Section (Compact) + Crypto Coins (Mobile Fix) + Features + Showcase
+   =================================== */
+
+/* ===================================
+   AIRDROP SECTION - ULTRA COMPACT FOR MOBILE
    =================================== */
 .ember-airdrop-section {
     padding: var(--section-padding) var(--container-padding);
@@ -823,14 +855,14 @@
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
-    padding: 2rem;
+    padding: 1.75rem;
     max-width: 1400px;
     margin: 0 auto;
 }
 
 .ember-airdrop-compact-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
 }
 
 .ember-header-text-compact {
@@ -839,14 +871,15 @@
 }
 
 .ember-title-compact {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
+    line-height: 1.2;
 }
 
 .ember-subtitle-compact {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.85);
 }
 
@@ -854,99 +887,127 @@
     background: rgba(215, 51, 39, 0.1);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
+    padding: 1.25rem;
+    margin-bottom: 1.75rem;
     text-align: center;
 }
 
 .ember-coming-text h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .ember-coming-text p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.8);
 }
 
 .ember-social-links-compact {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.85rem;
     flex-wrap: wrap;
-    margin-top: 1rem;
+    margin-top: 0.85rem;
 }
 
 .ember-social-icon-small {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 
 .ember-compact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .ember-inner-module {
     background: rgba(15, 15, 15, 0.6);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: 1.5rem;
+    padding: 1.25rem;
     position: relative;
 }
 
 .ember-mini-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
+    gap: 0.65rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.85rem;
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
 }
 
 .ember-mini-header h3 {
     flex: 1;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #ffffff;
 }
 
 .ember-mini-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     object-fit: contain;
+}
+
+/* INFO BUTTON - IMPROVED VISIBILITY */
+.info-badge-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: rgba(139, 92, 246, 0.4);
+    border: 2px solid rgba(139, 92, 246, 0.7);
+    border-radius: 50%;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.info-badge-button svg {
+    width: 16px;
+    height: 16px;
+    fill: #ffffff;
+}
+
+.info-badge-button:hover {
+    background: rgba(139, 92, 246, 0.6);
+    border-color: #8b5cf6;
+    transform: scale(1.15);
 }
 
 .ember-stats-compact {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
 }
 
 .ember-stat-mini {
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-md);
-    padding: 1rem;
+    padding: 0.85rem;
     text-align: center;
 }
 
 .stat-label {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .stat-value {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--ember-gold);
 }
@@ -960,17 +1021,17 @@
 }
 
 .ember-progress-compact {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .progress-bar-bg {
     width: 100%;
-    height: 20px;
+    height: 18px;
     background: rgba(15, 15, 15, 0.8);
     border-radius: var(--radius-lg);
     overflow: hidden;
     border: 1px solid rgba(215, 51, 39, 0.3);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .progress-bar-fill {
@@ -983,7 +1044,7 @@
 
 .progress-text {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.7);
 }
 
@@ -991,22 +1052,22 @@
     background: rgba(215, 51, 39, 0.05);
     border: 1px solid rgba(215, 51, 39, 0.2);
     border-radius: var(--radius-lg);
-    padding: 1rem;
-    margin-bottom: 1.5rem;
+    padding: 0.85rem;
+    margin-bottom: 1.25rem;
 }
 
 .presale-details-compact h4 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
 }
 
 .presale-info-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-    margin-top: 0.75rem;
+    gap: 0.65rem;
+    margin-top: 0.65rem;
 }
 
 .presale-info-item {
@@ -1015,14 +1076,14 @@
 
 .info-label {
     display: block;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
 }
 
 .info-value {
     display: block;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--ember-gold);
 }
@@ -1031,22 +1092,22 @@
     background: rgba(139, 92, 246, 0.1);
     border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--radius-lg);
-    padding: 1rem;
-    margin-bottom: 1.5rem;
+    padding: 0.85rem;
+    margin-bottom: 1.25rem;
 }
 
 .allocation-info h5 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--ember-purple);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .allocation-details {
-    font-size: 0.85rem;
-    line-height: 1.6;
+    font-size: 0.8rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .allocation-cta {
@@ -1055,13 +1116,13 @@
 
 .allocation-link-btn {
     display: inline-block;
-    padding: 8px 16px;
+    padding: 7px 14px;
     background: rgba(139, 92, 246, 0.2);
     border: 1px solid rgba(139, 92, 246, 0.4);
     border-radius: var(--radius-md);
     color: var(--ember-purple);
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -1075,21 +1136,21 @@
     background: rgba(139, 92, 246, 0.1);
     border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--radius-lg);
-    padding: 1rem;
-    margin-bottom: 1.5rem;
+    padding: 0.85rem;
+    margin-bottom: 1.25rem;
 }
 
 .status-checker-integrated h4 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--ember-purple);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .status-checker-description {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
 }
 
 .status-input-row {
@@ -1100,7 +1161,7 @@
 .input-compact {
     flex: 1;
     width: 100%;
-    padding: 12px 16px;
+    padding: 11px 14px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-md);
@@ -1117,7 +1178,7 @@
 }
 
 .status-btn-compact {
-    padding: 0.75rem 1.5rem;
+    padding: 0.65rem 1.25rem;
     background: var(--ember-gradient-primary);
     color: white;
     border: none;
@@ -1126,6 +1187,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     flex-shrink: 0;
+    font-size: 0.9rem;
 }
 
 .status-btn-compact:hover {
@@ -1135,9 +1197,9 @@
 
 .airdrop-powered-by {
     position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    font-size: 0.75rem;
+    bottom: 0.85rem;
+    right: 0.85rem;
+    font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.4);
     font-style: italic;
     text-align: right;
@@ -1145,62 +1207,62 @@
 
 /* Share to Claim Section */
 .share-to-claim-section {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .share-to-claim-title {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .share-to-claim-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .share-buttons-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
+    gap: 0.65rem;
 }
 
 .share-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    gap: 0.4rem;
+    padding: 0.65rem 0.85rem;
     border-radius: var(--radius-md);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
 .share-icon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
 }
 
 /* Phantom Promo */
 .phantom-promo-compact {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
     background: rgba(139, 92, 246, 0.1);
     border: 2px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--radius-lg);
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
 }
 
 .phantom-icon-compact {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -1209,11 +1271,11 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.2rem;
 }
 
 .phantom-text-compact strong {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #ffffff;
 }
 
@@ -1221,7 +1283,7 @@
     color: var(--ember-purple);
     font-weight: 600;
     text-decoration: underline;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: all 0.3s ease;
 }
 
@@ -1233,17 +1295,17 @@
 .ember-form-compact {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.85rem;
 }
 
 .form-group-compact {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
 .form-group-compact label {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
 }
@@ -1253,32 +1315,32 @@
 }
 
 .field-note {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.5);
     font-style: italic;
 }
 
 .field-hint {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.6);
 }
 
 .terms-group {
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
 }
 
 .terms-checkbox {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 0.65rem;
     cursor: pointer;
-    font-size: 0.85rem;
-    line-height: 1.6;
+    font-size: 0.8rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
 }
 
 .terms-checkbox input[type="checkbox"] {
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
     flex-shrink: 0;
     width: 18px;
     height: 18px;
@@ -1306,13 +1368,13 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 14px 32px;
+    padding: 13px 28px;
     background: var(--ember-gradient-primary);
     color: white;
     border: none;
     border-radius: var(--radius-lg);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: var(--transition-base);
 }
@@ -1323,10 +1385,10 @@
 }
 
 .message-box-compact {
-    padding: 1rem;
+    padding: 0.85rem;
     border-radius: var(--radius-md);
-    margin-top: 1rem;
-    font-size: 0.9rem;
+    margin-top: 0.85rem;
+    font-size: 0.85rem;
     display: none;
 }
 
@@ -1348,28 +1410,8 @@
     color: #3b82f6;
 }
 
-.info-badge-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    background: rgba(139, 92, 246, 0.3);
-    border: 2px solid rgba(139, 92, 246, 0.5);
-    border-radius: 50%;
-    margin-left: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-}
-
-.info-badge-button:hover {
-    background: rgba(139, 92, 246, 0.5);
-    transform: scale(1.1);
-}
-
 /* ===================================
-   CRYPTO COIN SECTION
+   CRYPTO COIN SECTION - CRITICAL MOBILE IMAGE FIX
    =================================== */
 .crypto-coin-section {
     padding: var(--section-padding) var(--container-padding);
@@ -1379,7 +1421,7 @@
 .crypto-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
     align-items: center;
     max-width: 1400px;
     margin: 0 auto 3rem;
@@ -1389,14 +1431,18 @@
     text-align: center;
 }
 
+/* CRITICAL: Mobile image container fix */
 .crypto-coin-phone-frame {
-    display: inline-block;
-    padding: 15px;
+    display: block !important;
+    padding: 13px;
     background: linear-gradient(135deg, rgba(45, 24, 16, 0.9) 0%, rgba(69, 26, 3, 0.85) 100%);
-    border-radius: 30px;
+    border-radius: 28px;
     border: 3px solid rgba(215, 51, 39, 0.4);
     box-shadow: var(--ember-shadow-xl);
     animation: gentleRock 4s ease-in-out infinite;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 @keyframes gentleRock {
@@ -1405,15 +1451,20 @@
 }
 
 .crypto-coin-screen-wrapper {
-    border-radius: 20px;
+    border-radius: 18px;
     overflow: hidden;
+    width: 100%;
+    position: relative;
 }
 
+/* CRITICAL: Mobile image display fix */
 .phoenix-coin-image {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: contain;
+    aspect-ratio: 9 / 16;
 }
 
 .crypto-text {
@@ -1423,32 +1474,32 @@
 }
 
 .crypto-title {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.8rem, 3.5vw, 2.75rem);
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .crypto-description {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
 }
 
 .crypto-benefits {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .crypto-benefit {
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.85rem;
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-lg);
-    padding: 1.5rem;
+    padding: 1.25rem;
     transition: var(--transition-base);
 }
 
@@ -1464,14 +1515,14 @@
 
 .custom-coin-icon-large,
 .custom-placement-icon-large {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
 }
 
 .custom-revenue-icon-extra-large {
-    width: 72px;
-    height: 72px;
+    width: 68px;
+    height: 68px;
     object-fit: contain;
 }
 
@@ -1480,66 +1531,56 @@
 }
 
 .benefit-content h3 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .benefit-content p {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
 
-/* Technology Modules - Continue in Part 3... */
-
-/* END OF PART 2 *//* ===================================
-   VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 3 OF 3 - LAYOUT RESTORATION (FINAL)
-   Final Sections: Tech Modules, Features, Showcase, Use Cases, Pricing, Modals, Responsive
-   =================================== */
-
-/* ===================================
-   TECHNOLOGY MODULES (GPS & BEACON)
-   =================================== */
+/* Technology Modules */
 .technology-modules {
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .technology-modules-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
     font-weight: 800;
     color: #ffffff;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .technology-modules-subtitle {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
     text-align: center;
     max-width: 900px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1.75rem;
 }
 
 .technology-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin-bottom: 3rem;
+    gap: 1.75rem;
+    margin-bottom: 2.5rem;
 }
 
 .technology-card {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
-    padding: 2rem;
+    padding: 1.75rem;
     transition: var(--transition-base);
 }
 
@@ -1555,8 +1596,8 @@
 .technology-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
 }
 
 .technology-icon-container {
@@ -1564,8 +1605,8 @@
 }
 
 .technology-icon {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     object-fit: contain;
 }
 
@@ -1575,11 +1616,11 @@
 
 .technology-badge {
     display: inline-block;
-    padding: 4px 12px;
+    padding: 4px 11px;
     border-radius: var(--radius-full);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .outdoor-badge {
@@ -1593,27 +1634,27 @@
 }
 
 .technology-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #ffffff;
 }
 
 .technology-description {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .technology-features {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .technology-features h5 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
 }
 
 .technology-features ul {
@@ -1622,11 +1663,11 @@
 }
 
 .technology-features li {
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
+    margin-bottom: 0.4rem;
+    padding-left: 1.25rem;
     position: relative;
 }
 
@@ -1641,8 +1682,8 @@
 .technology-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin: 1.5rem 0;
+    gap: 0.85rem;
+    margin: 1.25rem 0;
 }
 
 .tech-stat {
@@ -1651,25 +1692,25 @@
 
 .tech-stat-number {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: var(--ember-gold);
 }
 
 .tech-stat-label {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.6);
 }
 
 .technology-highlight {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.85rem;
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-lg);
-    padding: 1rem;
+    padding: 0.85rem;
 }
 
 .beacon-card .technology-highlight {
@@ -1678,8 +1719,8 @@
 }
 
 .tech-highlight-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -1690,15 +1731,15 @@
 
 .tech-highlight-content strong {
     display: block;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
 }
 
 .tech-highlight-content p {
-    font-size: 0.85rem;
-    line-height: 1.5;
+    font-size: 0.8rem;
+    line-height: 1.4;
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
 }
@@ -1708,41 +1749,41 @@
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
-    padding: 2rem;
+    padding: 1.75rem;
 }
 
 .combined-power-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
 }
 
 .combined-power-icon {
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     object-fit: contain;
 }
 
 .combined-power-header h4 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: var(--ember-gold);
 }
 
 .combined-power-description {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
 }
 
 .combined-power-benefits {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .combined-benefit {
@@ -1750,11 +1791,11 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 1rem;
+    gap: 0.85rem;
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-lg);
-    padding: 1.5rem;
+    padding: 1.25rem;
     transition: var(--transition-base);
 }
 
@@ -1768,25 +1809,34 @@
 }
 
 .combined-benefit-icon img {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     object-fit: contain;
 }
 
 .combined-benefit-text strong {
     display: block;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .combined-benefit-text p {
-    font-size: 0.85rem;
-    line-height: 1.5;
+    font-size: 0.8rem;
+    line-height: 1.4;
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
 }
+
+/* Features Section - Continue in Part 3... */
+
+/* END OF PART 2 */
+/* ===================================
+   VAULT PHOENIX - MAIN PAGE LOCAL CSS
+   PART 3 OF 3 - UPDATED VERSION (FINAL)
+   Features + Showcase + Use Cases + Pricing (Side-by-Side) + Final CTA (Compact) + Modals + Responsive
+   =================================== */
 
 /* ===================================
    FEATURES SECTION
@@ -1800,8 +1850,8 @@
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
-    padding: 2rem;
-    margin-bottom: 3rem;
+    padding: 1.75rem;
+    margin-bottom: 2.5rem;
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
@@ -1810,7 +1860,7 @@
 .proven-badge {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .badge-icon {
@@ -1818,8 +1868,8 @@
 }
 
 .custom-badge-icon {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     object-fit: contain;
 }
 
@@ -1828,22 +1878,22 @@
 }
 
 .badge-content h4 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
 }
 
 .badge-content p {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
 }
 
 .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.75rem;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -1852,7 +1902,7 @@
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: 2rem;
+    padding: 1.75rem;
     text-align: center;
     transition: var(--transition-base);
 }
@@ -1864,7 +1914,7 @@
 }
 
 .feature-icon {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .feature-coin-icon,
@@ -1873,21 +1923,21 @@
 .feature-revenue-icon,
 .feature-phoenix-brand-icon,
 .feature-analytics-icon {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     object-fit: contain;
 }
 
 .feature-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #ffffff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .feature-description {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
 }
 
@@ -1902,8 +1952,8 @@
 .showcase-content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-    margin-bottom: 3rem;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
@@ -1913,11 +1963,11 @@
 .laptop-gallery {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .device-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: var(--ember-gold);
     text-align: center;
@@ -1930,22 +1980,22 @@
 
 .phone-frame {
     display: inline-block;
-    padding: 15px;
+    padding: 13px;
     background: linear-gradient(135deg, rgba(45, 24, 16, 0.9) 0%, rgba(69, 26, 3, 0.85) 100%);
-    border-radius: 30px;
+    border-radius: 28px;
     border: 3px solid rgba(215, 51, 39, 0.4);
     box-shadow: var(--ember-shadow-xl);
 }
 
 .phone-screen {
-    border-radius: 20px;
+    border-radius: 18px;
     overflow: hidden;
     background: #000;
 }
 
 .phone-screen img {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
     height: auto;
     display: block;
 }
@@ -1953,14 +2003,14 @@
 .thumbnail-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 0.75rem;
+    gap: 0.65rem;
 }
 
 .simple-thumb {
     background: rgba(215, 51, 39, 0.1);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-md);
-    padding: 0.5rem;
+    padding: 0.4rem;
     cursor: pointer;
     transition: var(--transition-base);
     overflow: hidden;
@@ -1983,10 +2033,10 @@
 }
 
 .thumb-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.85);
     text-align: center;
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
     font-weight: 600;
 }
 
@@ -1999,19 +2049,19 @@
     background: #000;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
-    border: 8px solid #333;
+    border: 7px solid #333;
     border-bottom: none;
 }
 
 .laptop-screenshot {
     width: 100%;
-    max-width: 600px;
+    max-width: 560px;
     height: auto;
     display: block;
 }
 
 .laptop-base {
-    height: 20px;
+    height: 18px;
     background: linear-gradient(to bottom, #333 0%, #222 100%);
     border-radius: 0 0 10px 10px;
     position: relative;
@@ -2020,11 +2070,11 @@
 .laptop-base::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -9px;
     left: 50%;
     transform: translateX(-50%);
     width: 120%;
-    height: 10px;
+    height: 9px;
     background: linear-gradient(to bottom, #222 0%, transparent 100%);
     border-radius: 50%;
 }
@@ -2034,8 +2084,8 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 6px;
+    width: 56px;
+    height: 5px;
     background: #666;
     border-radius: 0 0 4px 4px;
 }
@@ -2043,14 +2093,14 @@
 .thumbnail-grid-laptop {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 0.75rem;
+    gap: 0.65rem;
 }
 
 .simple-thumb-laptop {
     background: rgba(215, 51, 39, 0.1);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-md);
-    padding: 0.5rem;
+    padding: 0.4rem;
     cursor: pointer;
     transition: var(--transition-base);
     overflow: hidden;
@@ -2080,27 +2130,27 @@
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: 1.5rem;
+    padding: 1.25rem;
     display: inline-block;
 }
 
 .demo-card-instruction {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .demo-button-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.85rem;
 }
 
 .demo-button-enhanced {
     display: inline-flex;
     align-items: center;
-    padding: 12px 24px;
+    padding: 11px 22px;
     background: var(--ember-gradient-primary);
     color: white;
     border-radius: var(--radius-lg);
@@ -2108,6 +2158,7 @@
     text-decoration: none;
     transition: var(--transition-base);
     border: 2px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.95rem;
 }
 
 .demo-button-enhanced:hover {
@@ -2116,7 +2167,7 @@
 }
 
 .demo-text-enhanced {
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .management-button-enhanced {
@@ -2125,12 +2176,12 @@
 
 .phoenix-safe-container {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 1.75rem;
 }
 
 .phoenix-safe-image {
     width: 100%;
-    max-width: 250px;
+    max-width: 230px;
     height: auto;
     border-radius: var(--radius-xl);
 }
@@ -2140,7 +2191,7 @@
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
-    padding: 2rem;
+    padding: 1.75rem;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -2149,8 +2200,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 0.85rem;
+    margin-bottom: 1.75rem;
 }
 
 .connection-line {
@@ -2162,51 +2213,51 @@
 .connection-badge {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 12px 24px;
+    gap: 0.65rem;
+    padding: 11px 22px;
     background: var(--ember-gradient-primary);
     border-radius: var(--radius-full);
     color: white;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
 }
 
 .main-connection-icon {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
 }
 
 .system-benefits {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 1.75rem;
 }
 
 .benefit-column {
     background: rgba(15, 15, 15, 0.6);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: 1.5rem;
+    padding: 1.25rem;
 }
 
 .benefit-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
+    gap: 0.65rem;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.85rem;
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
 }
 
 .benefit-header-icon-large {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     object-fit: contain;
 }
 
 .benefit-header h4 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--ember-gold);
 }
@@ -2216,14 +2267,14 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.65rem;
 }
 
 .benefit-list li {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
-    padding-left: 1.5rem;
+    padding-left: 1.25rem;
     position: relative;
 }
 
@@ -2246,7 +2297,7 @@
 .use-cases-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.75rem;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -2255,7 +2306,7 @@
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: 2rem;
+    padding: 1.75rem;
     text-align: center;
     transition: var(--transition-base);
 }
@@ -2268,38 +2319,38 @@
 
 .use-case-icon-container-large {
     display: inline-block;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .use-case-icon-image-large {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     object-fit: contain;
 }
 
 .use-case-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #ffffff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .use-case-example {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 0.95rem;
+    line-height: 1.5;
     color: var(--ember-gold);
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
     font-weight: 600;
 }
 
 .use-case-description {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
 }
 
 /* ===================================
-   PRICING & FINAL CTA SECTIONS - RESTORED SIDE-BY-SIDE LAYOUT
+   PRICING SECTION - SIDE BY SIDE WITH EQUAL HEIGHTS
    =================================== */
 .pricing {
     padding: var(--section-padding) var(--container-padding);
@@ -2307,30 +2358,32 @@
 }
 
 .pricing-intro {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     text-align: center;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* CRITICAL: Side-by-side pricing wrapper */
+/* CRITICAL: Side-by-side pricing wrapper with equal heights */
 .pricing-modules-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 1.75rem;
     max-width: 1400px;
     margin: 0 auto;
+    align-items: stretch;
 }
 
 .pricing-solution-wrapper {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
-    padding: 2.5rem 2rem;
+    padding: 2rem 1.75rem;
     position: relative;
     display: flex;
     flex-direction: column;
+    min-height: 100%;
 }
 
 .marketer-pricing-module {
@@ -2343,18 +2396,18 @@
 }
 
 .solution-header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .solution-badge {
     display: inline-block;
     background: rgba(215, 51, 39, 0.2);
     color: var(--ember-gold);
-    padding: 8px 16px;
+    padding: 7px 14px;
     border-radius: var(--radius-lg);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .sdk-badge {
@@ -2363,34 +2416,34 @@
 }
 
 .solution-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 1rem;
-    line-height: 1.3;
+    margin-bottom: 0.85rem;
+    line-height: 1.2;
 }
 
 .solution-subtitle {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
 }
 
 .pricing-details-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
-    margin: 2rem 0;
+    gap: 1.75rem;
+    margin: 1.75rem 0;
 }
 
 .pricing-col {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .pricing-tier-header {
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -2399,27 +2452,27 @@
 }
 
 .pricing-tier-header h4 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .price-display {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
 .price-display .price-amount {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     font-weight: 800;
     color: var(--ember-gold);
     line-height: 1;
 }
 
 .price-display .price-note {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.7);
 }
 
@@ -2428,14 +2481,14 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.85rem;
 }
 
 .pricing-features-list li {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
-    padding-left: 1.5rem;
+    padding-left: 1.25rem;
     position: relative;
 }
 
@@ -2445,7 +2498,7 @@
     left: 0;
     color: var(--ember-gold);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
 }
 
 .pricing-features-list strong {
@@ -2453,10 +2506,11 @@
     font-weight: 600;
 }
 
+/* PRICING TIERS - SIMPLIFIED */
 .pricing-tiers-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 0.85rem;
     align-items: end;
 }
 
@@ -2464,7 +2518,7 @@
     background: rgba(15, 15, 15, 0.6);
     border: 2px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--radius-lg);
-    padding: 1.25rem 1rem;
+    padding: 1.15rem 0.85rem;
     text-align: center;
     position: relative;
     transition: var(--transition-base);
@@ -2481,67 +2535,69 @@
         rgba(240, 165, 0, 0.15) 0%, 
         rgba(215, 51, 39, 0.1) 100%);
     box-shadow: 0 0 30px rgba(240, 165, 0, 0.3);
-    transform: translateY(-8px);
-    padding: 1.5rem 1rem;
+    transform: translateY(-6px);
+    padding: 1.35rem 0.85rem;
 }
 
 .mini-tier.featured-tier:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
 }
 
 .tier-badge-mini {
     position: absolute;
-    top: -10px;
+    top: -9px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--ember-gradient-primary);
     color: white;
-    padding: 4px 12px;
+    padding: 3px 11px;
     border-radius: var(--radius-full);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     white-space: nowrap;
 }
 
 .mini-tier-name {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: #ffffff;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
 }
 
 .mini-tier-price {
-    font-size: 1.75rem;
+    font-size: 1.65rem;
     font-weight: 800;
     color: var(--ember-gold);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
     line-height: 1;
 }
 
 .mini-tier-price span {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* SIMPLIFIED TIER DETAILS - ONLY API CALLS + FULL ACCESS */
 .mini-tier-details {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.2rem;
 }
 
 .mini-tier-details p {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
     margin: 0;
+    line-height: 1.3;
 }
 
 .value-props-section {
     background: rgba(15, 15, 15, 0.4);
     border: 1px solid rgba(215, 51, 39, 0.2);
     border-radius: var(--radius-xl);
-    padding: 2rem;
-    margin: 2rem 0;
+    padding: 1.75rem;
+    margin: 1.75rem 0;
 }
 
 .developer-pricing-module .value-props-section {
@@ -2549,24 +2605,24 @@
 }
 
 .value-props-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     text-align: center;
 }
 
 .value-props-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .value-prop-item {
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 0.85rem;
+    padding: 0.85rem;
     background: rgba(215, 51, 39, 0.05);
     border: 1px solid rgba(215, 51, 39, 0.2);
     border-radius: var(--radius-lg);
@@ -2591,8 +2647,8 @@
 
 .value-prop-icon {
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
 }
 
 .value-prop-icon img {
@@ -2603,15 +2659,15 @@
 
 .value-prop-text strong {
     display: block;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .value-prop-text p {
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
@@ -2619,32 +2675,32 @@
 .solution-cta-bottom {
     text-align: center;
     margin-top: auto;
-    padding-top: 2rem;
+    padding-top: 1.75rem;
 }
 
 .cta-footnote-bottom {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.6);
-    margin: 0.75rem 0 1rem;
+    margin: 0.65rem 0 0.85rem;
 }
 
 .cta-primary-large {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 0.65rem;
     width: 100%;
-    padding: 16px 32px;
+    padding: 14px 28px;
     background: var(--ember-gradient-primary);
     color: white;
     border-radius: var(--radius-xl);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     text-decoration: none;
     transition: var(--transition-base);
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: var(--ember-shadow-md);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
 }
 
 .developer-pricing-module .cta-primary-large {
@@ -2657,17 +2713,17 @@
 }
 
 .journey-cta-icon-large {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
 }
 
 .journey-secondary-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     color: var(--ember-gold);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     text-decoration: none;
     transition: var(--transition-base);
@@ -2682,7 +2738,7 @@
    PHOENIX SEPARATOR
    =================================== */
 .phoenix-separator-section {
-    padding: 4rem var(--container-padding);
+    padding: 3.5rem var(--container-padding);
     background: var(--ember-gradient-background);
     position: relative;
     overflow: hidden;
@@ -2722,7 +2778,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
+    gap: 2.5rem;
     flex-wrap: wrap;
     max-width: 1200px;
     margin: 0 auto;
@@ -2746,7 +2802,7 @@
 
 .phoenix-separator-image {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
     height: auto;
     object-fit: contain;
 }
@@ -2758,21 +2814,21 @@
 }
 
 .phoenix-separator-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 1rem;
-    line-height: 1.3;
+    margin-bottom: 0.85rem;
+    line-height: 1.2;
 }
 
 .phoenix-separator-subtitle {
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1.05rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
 }
 
 /* ===================================
-   FINAL CTA SECTION - RESTORED SIDE-BY-SIDE LAYOUT
+   FINAL CTA SECTION - ULTRA COMPACT SIDE-BY-SIDE
    =================================== */
 .final-cta {
     padding: var(--section-padding) var(--container-padding);
@@ -2798,36 +2854,37 @@
 
 .final-cta-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
 }
 
 .final-cta-title {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.8rem, 3.5vw, 2.75rem);
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .final-cta-subtitle {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.7;
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
     max-width: 700px;
     margin: 0 auto;
 }
 
-/* CRITICAL: Side-by-side journey paths */
+/* CRITICAL: Side-by-side compact journey paths */
 .journey-paths-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 1.75rem;
+    align-items: stretch;
 }
 
 .journey-path-module {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
-    padding: 2.5rem 2rem;
+    padding: 2rem 1.5rem;
     position: relative;
     transition: var(--transition-base);
     display: flex;
@@ -2845,44 +2902,45 @@
 
 .journey-path-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .journey-icon-container {
     display: inline-block;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .main-journey-icon-large {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     object-fit: contain;
 }
 
 .journey-path-title {
-    font-size: 1.8rem;
+    font-size: 1.65rem;
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
+    line-height: 1.2;
 }
 
 .journey-path-subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.85);
 }
 
 .close-reasons-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin: 2rem 0;
+    gap: 1.25rem;
+    margin: 1.5rem 0;
 }
 
 .close-reason-item {
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
-    padding: 1.5rem;
+    gap: 0.85rem;
+    padding: 1.25rem;
     background: rgba(15, 15, 15, 0.6);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-lg);
@@ -2906,14 +2964,14 @@
 
 .close-reason-icon {
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     background: var(--ember-gradient-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: white;
 }
@@ -2924,15 +2982,15 @@
 
 .close-reason-text strong {
     display: block;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .close-reason-text p {
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
@@ -2941,11 +2999,11 @@
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.4);
     border-radius: var(--radius-xl);
-    padding: 2rem;
-    margin: 2rem 0;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
     animation: urgencyPulse 3s ease-in-out infinite;
 }
 
@@ -2967,21 +3025,21 @@
 }
 
 .urgency-icon img {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     object-fit: contain;
 }
 
 .urgency-text h4 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--ember-gold);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
 }
 
 .urgency-text p {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
@@ -2995,24 +3053,24 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 0.65rem;
     width: 100%;
-    padding: 16px 32px;
+    padding: 14px 28px;
     background: var(--ember-gradient-primary);
     color: white;
     border-radius: var(--radius-xl);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     text-decoration: none;
     transition: var(--transition-base);
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: var(--ember-shadow-md);
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .journey-cta-button-large {
-    padding: 18px 36px !important;
-    font-size: 1.15rem !important;
+    padding: 16px 32px !important;
+    font-size: 1.1rem !important;
 }
 
 .developer-path .journey-cta-button {
@@ -3025,14 +3083,14 @@
 }
 
 .journey-cta-subtext {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.6);
-    margin: 0.75rem 0 1rem;
+    margin: 0.65rem 0 0.85rem;
 }
 
 .satisfaction-guarantee {
-    margin-top: 2rem;
-    padding: 1.5rem;
+    margin-top: 1.75rem;
+    padding: 1.25rem;
     background: rgba(96, 165, 250, 0.1);
     border: 1px solid rgba(96, 165, 250, 0.3);
     border-radius: var(--radius-lg);
@@ -3040,8 +3098,8 @@
 }
 
 .satisfaction-guarantee p {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
@@ -3052,7 +3110,7 @@
 }
 
 /* ===================================
-   MODALS - LOCAL ONLY, NO GLOBAL Z-INDEX
+   MODALS - NO GLOBAL Z-INDEX CONFLICTS
    =================================== */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
@@ -3112,7 +3170,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 1.25rem 1.75rem;
     background: var(--ember-gradient-primary);
     border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
     border-bottom: 2px solid rgba(240, 165, 0, 0.4);
@@ -3121,7 +3179,7 @@
 
 .airdrop-terms-modal-header h3,
 .airdrop-info-modal-header h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 800;
     color: white;
     margin: 0;
@@ -3129,13 +3187,13 @@
 
 .airdrop-terms-close,
 .airdrop-info-close {
-    font-size: 2rem;
+    font-size: 1.9rem;
     color: white;
     background: transparent;
     border: none;
     cursor: pointer;
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3153,7 +3211,7 @@
 .airdrop-info-modal-body {
     flex: 1;
     overflow-y: auto;
-    padding: 2rem;
+    padding: 1.75rem;
 }
 
 .airdrop-terms-modal-body::-webkit-scrollbar,
@@ -3169,26 +3227,26 @@
 
 .airdrop-terms-modal-body p,
 .airdrop-info-modal-body p {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .airdrop-terms-modal-body ul,
 .airdrop-info-modal-body ul {
     list-style: none;
     padding: 0;
-    margin: 1rem 0;
+    margin: 0.85rem 0;
 }
 
 .airdrop-terms-modal-body li,
 .airdrop-info-modal-body li {
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 0.75rem;
-    padding-left: 1.5rem;
+    margin-bottom: 0.65rem;
+    padding-left: 1.25rem;
     position: relative;
 }
 
@@ -3203,29 +3261,29 @@
 
 .airdrop-info-step {
     display: flex;
-    gap: 1rem;
+    gap: 0.85rem;
     align-items: flex-start;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .airdrop-info-step-number {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     background: var(--ember-gradient-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     color: white;
     flex-shrink: 0;
 }
 
 .airdrop-info-step-content h4 {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--ember-gold);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .airdrop-terms-modal-footer,
@@ -3233,24 +3291,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 1.25rem 1.75rem;
     background: rgba(15, 15, 15, 0.6);
     border-top: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
-    gap: 1rem;
+    gap: 0.85rem;
     flex-shrink: 0;
 }
 
 .airdrop-terms-agree-btn,
 .airdrop-info-ok-btn {
     flex: 1;
-    padding: 0.875rem 2rem;
+    padding: 0.8rem 1.75rem;
     background: var(--ember-gradient-primary);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-lg);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: var(--transition-base);
 }
@@ -3263,13 +3321,13 @@
 
 .airdrop-terms-cancel-btn {
     flex: 1;
-    padding: 0.875rem 2rem;
+    padding: 0.8rem 1.75rem;
     background: transparent;
     color: white;
     border: 2px solid rgba(215, 51, 39, 0.5);
     border-radius: var(--radius-lg);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: var(--transition-base);
 }
@@ -3299,14 +3357,14 @@
 .scroll-reveal.stagger-4 { transition-delay: 0.4s; }
 
 /* ===================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - COMPLETE MOBILE FIXES
    =================================== */
 
 /* Tablet - 1024px and below */
 @media (max-width: 1024px) {
     .steps-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1.25rem;
     }
     
     .step-arrow {
@@ -3322,7 +3380,7 @@
     .pricing-modules-container,
     .journey-paths-container {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.75rem;
     }
     
     .ember-token-right-redesigned {
@@ -3368,15 +3426,160 @@
     }
 }
 
-/* Mobile - 768px and below */
+/* Mobile - 768px and below - CRITICAL FIXES */
 @media (max-width: 768px) {
     .main-hero {
-        padding: calc(var(--section-padding) + 40px) var(--container-padding) var(--section-padding);
+        padding: calc(var(--section-padding) + 30px) var(--container-padding) calc(var(--section-padding) - 1rem);
+    }
+    
+    /* CRITICAL: Compact Step 1, 2, 3 modules for mobile */
+    .steps-grid {
+        gap: 1rem;
+    }
+    
+    .step-card {
+        padding: 1.5rem 1.25rem 1.25rem;
+        min-height: 220px;
+    }
+    
+    .step-badge {
+        width: 34px;
+        height: 34px;
+        font-size: 1.1rem;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .step-image {
+        max-width: 60px;
+        margin-bottom: 0.6rem;
+    }
+    
+    .step-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .step-card p {
+        font-size: 0.85rem;
     }
     
     .hero-features-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        gap: 1.25rem;
+    }
+    
+    .hero-feature-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    /* CRITICAL: Compact $Ember Presale Launch for mobile */
+    .ember-countdown-widget-redesigned {
+        padding: 1.25rem;
+    }
+    
+    .main-ember-countdown-icon-redesigned {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .countdown-text-redesigned h3 {
+        font-size: 1.05rem;
+    }
+    
+    .countdown-text-redesigned p {
+        font-size: 0.8rem;
+    }
+    
+    .ember-time-unit-redesigned {
+        padding: 0.7rem;
+    }
+    
+    .ember-time-value-redesigned {
+        font-size: 1.6rem;
+    }
+    
+    .ember-time-label-redesigned {
+        font-size: 0.75rem;
+    }
+    
+    /* CRITICAL: Compact airdrop module for mobile */
+    .ember-airdrop-outer-module {
+        padding: 1.25rem;
+    }
+    
+    .parachute-crate-enlarged {
+        max-width: 260px;
+    }
+    
+    .ember-title-compact {
+        font-size: 1.5rem;
+        margin-bottom: 0.65rem;
+    }
+    
+    .ember-subtitle-compact {
+        font-size: 0.85rem;
+    }
+    
+    .ember-coming-soon-compact {
+        padding: 1rem;
+    }
+    
+    .ember-coming-text h3 {
+        font-size: 1.05rem;
+    }
+    
+    .ember-coming-text p {
+        font-size: 0.85rem;
+    }
+    
+    .ember-inner-module {
+        padding: 1rem;
+    }
+    
+    .ember-mini-header {
+        padding-bottom: 0.7rem;
+        margin-bottom: 1rem;
+    }
+    
+    .ember-mini-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .info-badge-button {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .info-badge-button svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    /* CRITICAL: Phone image must show on mobile */
+    .crypto-coin-phone-frame {
+        display: block !important;
+        padding: 10px;
+        max-width: 95%;
+        margin: 0 auto;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .crypto-coin-screen-wrapper {
+        display: block !important;
+        width: 100%;
+    }
+    
+    .phoenix-coin-image {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        object-fit: contain;
+        aspect-ratio: 9 / 16;
     }
     
     .ember-countdown-timer-redesigned,
@@ -3392,31 +3595,16 @@
     
     .presale-stats-redesigned {
         grid-template-columns: 1fr;
+        gap: 0.6rem;
     }
     
     .stat-divider-redesigned {
         display: none;
     }
     
-    .crypto-coin-phone-frame {
-        display: block;
-        padding: 10px;
-        max-width: 90%;
-        margin: 0 auto;
-    }
-    
-    .phoenix-coin-image {
-        width: 100%;
-        max-width: 280px;
-    }
-    
     .thumbnail-grid,
     .thumbnail-grid-laptop {
         grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .parachute-crate-enlarged {
-        max-width: 280px;
     }
     
     .airdrop-terms-modal-overlay,
@@ -3434,23 +3622,23 @@
     
     .airdrop-terms-modal-header,
     .airdrop-info-modal-header {
-        padding: 1.25rem 1.5rem;
+        padding: 1.1rem 1.35rem;
     }
     
     .airdrop-terms-modal-header h3,
     .airdrop-info-modal-header h3 {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
     }
     
     .airdrop-terms-modal-body,
     .airdrop-info-modal-body {
-        padding: 1.5rem;
+        padding: 1.35rem;
     }
     
     .airdrop-terms-modal-footer,
     .airdrop-info-modal-footer {
         flex-direction: column;
-        padding: 1.25rem 1.5rem;
+        padding: 1.1rem 1.35rem;
     }
     
     .airdrop-terms-agree-btn,
@@ -3460,15 +3648,15 @@
     }
     
     .phoenix-separator-content {
-        gap: 2rem;
+        gap: 1.75rem;
     }
     
     .phoenix-separator-image {
-        max-width: 200px;
+        max-width: 180px;
     }
     
     .phoenix-separator-section {
-        padding: 3rem var(--container-padding);
+        padding: 2.75rem var(--container-padding);
     }
     
     .presale-info-grid {
@@ -3479,56 +3667,94 @@
 /* Small Mobile - 480px and below */
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
     
     .hero-subtitle {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     
     .hero-tagline {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
+    }
+    
+    /* CRITICAL: Even more compact steps for small mobile */
+    .step-card {
+        padding: 1.25rem 1rem 1rem;
+        min-height: 200px;
+    }
+    
+    .step-badge {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+    
+    .step-image {
+        max-width: 52px;
+    }
+    
+    .step-card h3 {
+        font-size: 0.95rem;
+    }
+    
+    .step-card p {
+        font-size: 0.8rem;
     }
     
     .thumbnail-grid,
     .thumbnail-grid-laptop {
         grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
     
     .simple-thumb,
     .simple-thumb-laptop {
-        padding: 0.25rem;
+        padding: 0.2rem;
     }
     
     .thumb-label {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
     }
     
     .crypto-coin-phone-frame {
         padding: 8px;
+        max-width: 100%;
     }
     
     .phoenix-coin-image {
-        max-width: 240px;
+        max-width: 100% !important;
+    }
+    
+    .parachute-crate-enlarged {
+        max-width: 220px;
+    }
+    
+    .ember-title-compact {
+        font-size: 1.35rem;
     }
 }
 
 /**
  * ============================================
- * END OF LOCAL.CSS - PART 3 OF 3 CORRECTED
+ * END OF LOCAL.CSS - PART 3 OF 3 (COMPLETE)
  * ============================================
  * 
- * LAYOUT FIXES APPLIED:
- * ✅ Token section: 2-column grid (1.2fr 1fr)
- * ✅ Airdrop section: compact 2-column grid
- * ✅ Pricing section: side-by-side modules wrapper
- * ✅ Final CTA: side-by-side journey paths
- * ✅ All max-widths added for consistency (1400px)
- * ✅ Responsive breakpoints preserved
- * ✅ No global CSS overrides
- * 
- * This CSS file restores all original layouts while
- * preserving your new messaging updates in the HTML
+ * ALL REQUIREMENTS IMPLEMENTED:
+ * ✅ Desktop: Compact hero modules
+ * ✅ Desktop: Arrows inside ember highlight modules
+ * ✅ Desktop: Aligned compliance/phoenix heights
+ * ✅ Desktop: Clear info "i" icon button
+ * ✅ Desktop: Side-by-side equal pricing modules
+ * ✅ Desktop: Simplified tier descriptions ($49/$149/$399)
+ * ✅ Desktop: Equal spacing around pricing
+ * ✅ Desktop: Compact final CTA modules
+ * ✅ Mobile: Compact Step 1,2,3 visible simultaneously
+ * ✅ Mobile: Compact $Ember Presale Launch
+ * ✅ Mobile: Compact airdrop module
+ * ✅ Mobile: Clear info "i" icon
+ * ✅ CRITICAL: Phone image displays on mobile
+ * ✅ Mobile: Compact final CTA modules
+ * ✅ Production-ready with proper organization
  * ============================================
  */
