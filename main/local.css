@@ -364,10 +364,6 @@
     margin-bottom: 2.5rem; 
 }
 
-/* ===================================
-   RESPONSIVE - FINE-TUNED MOBILE SPACING
-   =================================== */
-
 /* Tablet - 1024px and below */
 @media (max-width: 1024px) {
     .main-hero {
@@ -420,27 +416,21 @@
     }
 }
 
-/* ===================================
-   PORTRAIT MODE - SWEET SPOT SPACING
-   =================================== */
-
-/* Mobile Portrait - FINE-TUNED (added ~15px more) */
+/* MATCHED SPACING - PORTRAIT AND LANDSCAPE SAME */
 @media (max-width: 768px) and (orientation: portrait) {
     .main-hero {
-        padding-top: 135px !important;
+        padding-top: 110px !important;
         padding-bottom: 2rem !important;
     }
 }
 
-/* Small Mobile Portrait */
 @media (max-width: 480px) and (orientation: portrait) {
     .main-hero {
-        padding-top: 145px !important;
+        padding-top: 110px !important;
         padding-bottom: 2rem !important;
     }
 }
 
-/* Mobile Landscape */
 @media (max-width: 768px) and (orientation: landscape) {
     .main-hero {
         padding-top: 110px !important;
