@@ -1,6 +1,6 @@
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   COMPLETE VERSION WITH CRITICAL FIXES
+   COMPLETE VERSION WITH ALL CRITICAL FIXES
    Reset + Base + Performance + Hero + Steps + CTA + Ember Token
    =================================== */
 
@@ -858,7 +858,7 @@ img {
     font-size: 0.95rem;
 }
 
-/* CRITICAL FIX: Ember highlights - container sets equal heights */
+/* CRITICAL FIX: Ember highlights - flexbox for equal heights */
 .ember-highlights-redesigned {
     display: flex;
     gap: 0.85rem;
@@ -937,7 +937,7 @@ img {
     }
 }
 
-/* CRITICAL FIX: Compliance section - flex container for equal height */
+/* CRITICAL FIX: Compliance section - uses margin-top auto to push to bottom */
 .compliance-disclaimer-redesigned {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -945,8 +945,7 @@ img {
     padding: 1.75rem;
     display: flex;
     flex-direction: column;
-    flex: 1 1 auto;
-    min-height: 100%;
+    margin-top: auto;
 }
 
 .compliance-disclaimer-redesigned h4 {
@@ -976,9 +975,7 @@ img {
 .compliance-cta {
     text-align: center;
     margin-top: auto;
-}
-
-/* END OF PART 1 *//* ===================================
+}/* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
    PART 2 OF 3 - COMPLETE VERSION
    Airdrop Section + Crypto Coins Section + Technology Modules
@@ -2131,9 +2128,7 @@ img {
     line-height: 1.4;
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
-}
-
-/* END OF PART 2 *//* ===================================
+}/* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
    PART 3 OF 3 - COMPLETE VERSION (FINAL)
    Features + Showcase + Use Cases + Pricing + Phoenix Separator + Final CTA + Modals + Responsive
@@ -3907,8 +3902,8 @@ img {
  * ============================================
  * 
  * ALL CRITICAL FIXES IMPLEMENTED:
- * ✅ ISSUE 1: Ember Token Section equal heights with flexbox
- * ✅ ISSUE 2: Technology Grid mobile stacking forced with !important
+ * ✅ ISSUE 1: Ember Token Section equal heights with flexbox + margin-top auto
+ * ✅ ISSUE 2: Technology Grid mobile stacking forced with !important at 768px
  * ✅ ISSUE 3: Mobile refresh FOUC prevention with body.loaded
  * ✅ ISSUE 4: Smooth scroll & enhanced image lazy-load transitions
  * ✅ All image glows properly wrapped
