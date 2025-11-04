@@ -318,16 +318,14 @@
 }
 
 /* ===================================
-   HERO SECTION - COMPLETE WITH PORTRAIT FIX
+   HERO SECTION - PROPER MOBILE SPACING (NOT TOO MUCH!)
    Replace the hero section in your local.css with this code
-   Adds proper spacing below navbar on mobile + portrait fix
    =================================== */
 
 .main-hero {
     min-height: 100vh;
     background: var(--ember-gradient-background);
-    /* FIXED: Added more padding-top on mobile */
-    padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 3rem;
+    padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -367,22 +365,20 @@
 }
 
 /* ===================================
-   RESPONSIVE - MOBILE SPACING FIX
+   RESPONSIVE - BALANCED MOBILE SPACING
    =================================== */
 
 /* Tablet - 1024px and below */
 @media (max-width: 1024px) {
     .main-hero {
-        /* Add extra space on tablet */
-        padding: calc(var(--navbar-height) + 2.5rem) var(--container-padding) calc(var(--section-padding) - 1rem);
+        padding: calc(var(--navbar-height) + 2rem) var(--container-padding) calc(var(--section-padding) - 1rem);
     }
 }
 
-/* Mobile - 768px and below - CRITICAL SPACING FIX */
+/* Mobile - 768px and below */
 @media (max-width: 768px) {
     .main-hero {
-        /* FIXED: Increased from +2rem to +4rem for better spacing */
-        padding: calc(var(--navbar-height) + 4rem) var(--container-padding) calc(var(--section-padding) - 1rem);
+        padding: calc(var(--navbar-height) + 2.5rem) var(--container-padding) calc(var(--section-padding) - 1rem);
     }
     
     .hero-header {
@@ -408,8 +404,7 @@
 /* Small Mobile - 480px and below */
 @media (max-width: 480px) {
     .main-hero {
-        /* Even more space on very small screens */
-        padding: calc(var(--navbar-height) + 4.5rem) var(--container-padding) calc(var(--section-padding) - 1rem);
+        padding: calc(var(--navbar-height) + 3rem) var(--container-padding) calc(var(--section-padding) - 1rem);
     }
     
     .hero-title {
@@ -426,65 +421,33 @@
 }
 
 /* ===================================
-   PORTRAIT MODE FIX - ADDED FOR MOBILE
+   PORTRAIT MODE FIX - JUST RIGHT SPACING
    =================================== */
 
-/* Mobile Portrait - CRITICAL FIX */
+/* Mobile Portrait - GOLDILOCKS FIX (not too much, not too little) */
 @media (max-width: 768px) and (orientation: portrait) {
     .main-hero {
-        padding-top: 180px !important;
+        padding-top: 120px !important;
         padding-bottom: 2rem !important;
-        min-height: auto !important;
-    }
-    
-    .hero-container {
-        padding-top: 2rem;
     }
 }
 
 /* Small Mobile Portrait */
 @media (max-width: 480px) and (orientation: portrait) {
     .main-hero {
-        padding-top: 200px !important;
+        padding-top: 130px !important;
         padding-bottom: 2rem !important;
-    }
-    
-    .hero-container {
-        padding-top: 2.5rem;
     }
 }
 
-/* Mobile Landscape - Keep existing working fix */
+/* Mobile Landscape */
 @media (max-width: 768px) and (orientation: landscape) {
     .main-hero {
-        padding-top: 140px !important;
+        padding-top: 110px !important;
         padding-bottom: 2rem !important;
     }
 }
 
-/* Tall narrow screens backup (if orientation doesn't work) */
-@media (max-width: 768px) and (min-height: 600px) {
-    .main-hero {
-        padding-top: 180px !important;
-        padding-bottom: 2rem !important;
-    }
-    
-    .hero-container {
-        padding-top: 2rem;
-    }
-}
-
-/* Extra tall narrow screens */
-@media (max-width: 480px) and (min-height: 700px) {
-    .main-hero {
-        padding-top: 200px !important;
-        padding-bottom: 2rem !important;
-    }
-    
-    .hero-container {
-        padding-top: 2.5rem;
-    }
-}
 
 .steps-grid {
     display: grid;
