@@ -318,9 +318,9 @@
 }
 
 /* ===================================
-   HERO SECTION - FIXED MOBILE SPACING
+   HERO SECTION - COMPLETE WITH PORTRAIT FIX
    Replace the hero section in your local.css with this code
-   Adds proper spacing below navbar on mobile
+   Adds proper spacing below navbar on mobile + portrait fix
    =================================== */
 
 .main-hero {
@@ -422,6 +422,67 @@
     
     .hero-tagline {
         font-size: 1.15rem;
+    }
+}
+
+/* ===================================
+   PORTRAIT MODE FIX - ADDED FOR MOBILE
+   =================================== */
+
+/* Mobile Portrait - CRITICAL FIX */
+@media (max-width: 768px) and (orientation: portrait) {
+    .main-hero {
+        padding-top: 180px !important;
+        padding-bottom: 2rem !important;
+        min-height: auto !important;
+    }
+    
+    .hero-container {
+        padding-top: 2rem;
+    }
+}
+
+/* Small Mobile Portrait */
+@media (max-width: 480px) and (orientation: portrait) {
+    .main-hero {
+        padding-top: 200px !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    .hero-container {
+        padding-top: 2.5rem;
+    }
+}
+
+/* Mobile Landscape - Keep existing working fix */
+@media (max-width: 768px) and (orientation: landscape) {
+    .main-hero {
+        padding-top: 140px !important;
+        padding-bottom: 2rem !important;
+    }
+}
+
+/* Tall narrow screens backup (if orientation doesn't work) */
+@media (max-width: 768px) and (min-height: 600px) {
+    .main-hero {
+        padding-top: 180px !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    .hero-container {
+        padding-top: 2rem;
+    }
+}
+
+/* Extra tall narrow screens */
+@media (max-width: 480px) and (min-height: 700px) {
+    .main-hero {
+        padding-top: 200px !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    .hero-container {
+        padding-top: 2.5rem;
     }
 }
 
