@@ -486,28 +486,35 @@
     z-index: 10;
 }
 
-.step-image { 
-    max-width: 70px; 
-    border-radius: 1rem; 
-    margin: 0 auto 0.75rem; 
+.step-image {
+    max-width: 70px;
+    width: 70px;
+    height: 70px;
+    object-fit: contain !important; /* CRITICAL - keeps aspect ratio */
+    border-radius: 1rem;
+    margin: 0 auto 0.75rem;
 }
 
-.step-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+/* Mobile - Make images bigger but maintain aspect ratio */
+@media (max-width: 768px) {
+    .step-image {
+        max-width: 120px !important;
+        width: 120px;
+        height: 120px;
+        object-fit: contain !important; /* CRITICAL - no squishing */
+        margin: 0 auto 1.25rem;
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
+    }
 }
 
-.step-card p {
-    font-size: 0.9rem;
-}
-
-.step-arrow { 
-    font-size: 2.5rem; 
-    color: #f0a500; 
-    font-weight: 700; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@media (max-width: 480px) {
+    .step-image {
+        max-width: 100px !important;
+        width: 100px;
+        height: 100px;
+        object-fit: contain !important; /* CRITICAL - no squishing */
+        margin: 0 auto 1rem;
+    }
 }
 
 /* ===================================
@@ -1634,9 +1641,11 @@
     z-index: 1;
 }
 
-/* PERFECT FIX: Phone frame container - matching Player-Facing section */
+/* RESTORED: Phone frame with proper visibility */
 .crypto-coin-phone-frame {
-    display: inline-block;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     padding: 13px;
     background: linear-gradient(135deg, rgba(45, 24, 16, 0.9) 0%, rgba(69, 26, 3, 0.85) 100%);
     border-radius: 28px;
@@ -1647,7 +1656,7 @@
     margin: 0 auto;
     width: 100%;
     position: relative;
-    /* ADDED: Glow effect behind phone */
+    /* Glow effect */
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.4)) 
             drop-shadow(0 0 60px rgba(215, 51, 39, 0.3));
 }
@@ -1657,160 +1666,54 @@
     50% { transform: rotate(2deg); }
 }
 
-/* PERFECT FIX: Screen wrapper - exact edge fit */
+/* RESTORED: Screen wrapper */
 .crypto-coin-screen-wrapper {
     border-radius: 18px;
     overflow: hidden;
     width: 100%;
     position: relative;
     background: #000;
-    /* Lock aspect ratio */
     line-height: 0;
+    display: block !important;
+    visibility: visible !important;
 }
 
-/* PERFECT FIX: Image - flush to all 4 edges */
+/* RESTORED: Image with perfect edge alignment */
 .phoenix-coin-image {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    /* CRITICAL: Use 'cover' to fill edge-to-edge */
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     object-fit: cover;
     object-position: center;
-    /* Remove ALL gaps */
     vertical-align: top;
     margin: 0;
     padding: 0;
     border: 0;
-    /* Maintain aspect ratio */
     aspect-ratio: 9 / 16;
 }
 
-.crypto-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.crypto-title {
-    font-size: clamp(1.8rem, 3.5vw, 2.75rem);
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 0.85rem;
-}
-
-.crypto-description {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.crypto-benefits {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-.crypto-benefit {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
-    background: rgba(215, 51, 39, 0.1);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem;
-    transition: var(--transition-base);
-}
-
-.crypto-benefit:hover {
-    background: rgba(215, 51, 39, 0.2);
-    border-color: var(--ember-orange);
-    transform: translateX(8px);
-}
-
-.benefit-icon {
-    flex-shrink: 0;
-}
-
-.custom-coin-icon-large,
-.custom-placement-icon-large {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-}
-
-.custom-revenue-icon-extra-large {
-    width: 68px;
-    height: 68px;
-    object-fit: contain;
-}
-
-.benefit-content {
-    flex: 1;
-}
-
-.benefit-content h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin-bottom: 0.4rem;
-}
-
-.benefit-content p {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-}
-
-/* ===================================
-   RESPONSIVE - MOBILE PERFECT SIZING
-   =================================== */
-
-/* Tablet - 1024px and below */
-@media (max-width: 1024px) {
+/* Mobile - Proper sizing */
+@media (max-width: 768px) {
     .crypto-content {
         grid-template-columns: 1fr;
-        gap: 1.75rem;
     }
     
     .crypto-coin-phone-frame {
-        max-width: 350px;
-    }
-}
-
-/* Mobile - 768px and below - MATCH PLAYER-FACING SIZE */
-@media (max-width: 768px) {
-    .crypto-coin-phone-frame {
-        /* CRITICAL: Match Player-Facing Mobile App size */
-        display: inline-block;
-        padding: 13px;
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         max-width: 310px;
-        margin: 0 auto;
-        /* Keep glow on mobile */
         filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.5)) 
                 drop-shadow(0 0 50px rgba(215, 51, 39, 0.3));
     }
-    
-    .crypto-coin-screen-wrapper {
-        border-radius: 18px;
-    }
-    
-    .phoenix-coin-image {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        aspect-ratio: 9 / 16;
-    }
 }
 
-/* Small Mobile - 480px and below - EVEN SMALLER */
 @media (max-width: 480px) {
     .crypto-coin-phone-frame {
-        /* Match Player-Facing size on small mobile */
-        padding: 13px;
         max-width: 280px;
-        margin: 0 auto;
     }
 }
 
