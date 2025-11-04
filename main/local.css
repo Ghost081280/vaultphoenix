@@ -318,8 +318,8 @@
 }
 
 /* ===================================
-   HERO SECTION - PROPER MOBILE SPACING (NOT TOO MUCH!)
-   Replace the hero section in your local.css with this code
+   HERO SECTION - FINE-TUNED MOBILE SPACING
+   Just a bit more space - the sweet spot!
    =================================== */
 
 .main-hero {
@@ -365,7 +365,7 @@
 }
 
 /* ===================================
-   RESPONSIVE - BALANCED MOBILE SPACING
+   RESPONSIVE - FINE-TUNED MOBILE SPACING
    =================================== */
 
 /* Tablet - 1024px and below */
@@ -421,13 +421,13 @@
 }
 
 /* ===================================
-   PORTRAIT MODE FIX - JUST RIGHT SPACING
+   PORTRAIT MODE - SWEET SPOT SPACING
    =================================== */
 
-/* Mobile Portrait - GOLDILOCKS FIX (not too much, not too little) */
+/* Mobile Portrait - FINE-TUNED (added ~15px more) */
 @media (max-width: 768px) and (orientation: portrait) {
     .main-hero {
-        padding-top: 120px !important;
+        padding-top: 135px !important;
         padding-bottom: 2rem !important;
     }
 }
@@ -435,7 +435,7 @@
 /* Small Mobile Portrait */
 @media (max-width: 480px) and (orientation: portrait) {
     .main-hero {
-        padding-top: 130px !important;
+        padding-top: 145px !important;
         padding-bottom: 2rem !important;
     }
 }
