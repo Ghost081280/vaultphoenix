@@ -1739,8 +1739,9 @@
    END OF AIRDROP SECTION
    =================================== */
 /* ===================================
-   CRYPTO COIN SECTION - COMPLETE REBUILD
-   Clean, professional, mobile-first approach
+   CRYPTO COIN SECTION - FIXED LAYOUT
+   Phone image on LEFT, content on RIGHT (desktop)
+   Stacks vertically on mobile
    =================================== */
 
 .crypto-coin-section {
@@ -1755,20 +1756,22 @@
     margin: 0 auto;
 }
 
-/* Content Grid */
+/* CRITICAL FIX: Desktop Layout - Phone LEFT (400px), Text RIGHT (flexible) */
 .crypto-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 400px 1fr;
     gap: 3rem;
-    align-items: center;
+    align-items: start;
     margin-bottom: 3rem;
 }
 
-/* Image Column */
+/* Image Column - LEFT side on desktop */
 .crypto-image {
     text-align: center;
     position: relative;
     z-index: 1;
+    position: sticky;
+    top: calc(var(--navbar-height) + 2rem);
 }
 
 /* Phone Frame Styling */
@@ -1780,7 +1783,7 @@
     border: 3px solid rgba(215, 51, 39, 0.4);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     animation: gentleRock 4s ease-in-out infinite;
-    max-width: 400px;
+    max-width: 100%;
     width: 100%;
     position: relative;
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.4)) 
@@ -1821,7 +1824,7 @@
     aspect-ratio: 9 / 16;
 }
 
-/* Text Column */
+/* Text Column - RIGHT side on desktop */
 .crypto-text {
     display: flex;
     flex-direction: column;
@@ -1944,31 +1947,25 @@
     margin-bottom: 3rem;
 }
 
-/* Responsive - Tablet */
+/* ===================================
+   RESPONSIVE BREAKPOINTS
+   =================================== */
+
+/* Tablet - 1024px and below */
 @media (max-width: 1024px) {
+    /* Switch to stacked layout on tablet */
     .crypto-content {
         grid-template-columns: 1fr;
         gap: 2.5rem;
     }
     
-    .crypto-coin-phone-frame {
-        max-width: 350px;
-    }
-    
-    .ember-token-grid-redesigned {
-        grid-template-columns: 1fr;
-    }
-    
-    .ember-token-right-redesigned {
+    /* Remove sticky positioning on tablet/mobile */
+    .crypto-image {
         position: static;
     }
     
-    .ember-highlights-redesigned {
-        grid-template-columns: 1fr;
-    }
-    
-    .ember-compact-grid {
-        grid-template-columns: 1fr;
+    .crypto-coin-phone-frame {
+        max-width: 350px;
     }
     
     .technology-grid {
@@ -1976,7 +1973,7 @@
     }
 }
 
-/* Responsive - Mobile */
+/* Mobile - 768px and below */
 @media (max-width: 768px) {
     .crypto-coin-section {
         padding: 3rem 1rem;
@@ -1987,11 +1984,12 @@
         gap: 2rem;
     }
     
-    /* CRITICAL: Phone frame must show on mobile */
+    /* Ensure phone frame displays properly on mobile */
     .crypto-image {
         display: block;
         text-align: center;
         margin-bottom: 2rem;
+        position: static;
     }
     
     .crypto-coin-phone-frame {
@@ -2046,118 +2044,9 @@
     .benefit-content p {
         font-size: 0.9rem;
     }
-    
-    /* Airdrop mobile fixes */
-    .ember-airdrop-section {
-        padding: 3rem 1rem;
-    }
-    
-    .ember-airdrop-outer-module {
-        padding: 1.5rem;
-    }
-    
-    .parachute-crate-enlarged {
-        max-width: 260px;
-    }
-    
-    .ember-title-compact {
-        font-size: 1.5rem;
-    }
-    
-    .ember-subtitle-compact {
-        font-size: 0.9rem;
-    }
-    
-    .ember-coming-soon-compact {
-        padding: 1.25rem;
-    }
-    
-    .ember-coming-text h3 {
-        font-size: 1.1rem;
-    }
-    
-    .ember-coming-text p {
-        font-size: 0.85rem;
-    }
-    
-    .ember-compact-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .ember-inner-module {
-        padding: 1.25rem;
-    }
-    
-    .ember-mini-header {
-        padding-bottom: 0.75rem;
-        margin-bottom: 1.25rem;
-    }
-    
-    .ember-mini-icon {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .ember-mini-header h3 {
-        font-size: 1.1rem;
-    }
-    
-    .ember-stats-compact {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
-    
-    .share-buttons-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
-    
-    .presale-info-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
-    
-    .presale-stats-redesigned {
-        grid-template-columns: 1fr;
-        gap: 0.6rem;
-    }
-    
-    .stat-divider-redesigned {
-        display: none;
-    }
-    
-    .main-ember-countdown-icon-redesigned {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .countdown-text-redesigned h3 {
-        font-size: 1.05rem;
-    }
-    
-    .countdown-text-redesigned p {
-        font-size: 0.8rem;
-    }
-    
-    .ember-time-unit-redesigned {
-        padding: 0.7rem;
-    }
-    
-    .ember-time-value-redesigned {
-        font-size: 1.6rem;
-    }
-    
-    .ember-time-label-redesigned {
-        font-size: 0.75rem;
-    }
-    
-    .ember-countdown-timer-redesigned {
-        grid-template-columns: 1fr;
-    }
 }
 
-/* Responsive - Small Mobile */
+/* Small Mobile - 480px and below */
 @media (max-width: 480px) {
     .crypto-coin-section {
         padding: 2.5rem 1rem;
@@ -2171,33 +2060,7 @@
     .crypto-title {
         font-size: 1.5rem;
     }
-    
-    .ember-airdrop-section {
-        padding: 2.5rem 1rem;
-    }
-    
-    .parachute-crate-enlarged {
-        max-width: 220px;
-    }
-    
-    .ember-title-compact {
-        font-size: 1.35rem;
-    }
-    
-    .ember-airdrop-outer-module {
-        padding: 1.25rem;
-    }
-    
-    .ember-inner-module {
-        padding: 1rem;
-    }
 }
-
-/* END OF PART 2 *//* ===================================
-   VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   PART 3 OF 3 - UPDATED & COMPLETE
-   Technology Modules + Features + Showcase + Use Cases + Pricing + Final CTA + Modals + Responsive
-   =================================== */
 
 /* ===================================
    TECHNOLOGY MODULES
