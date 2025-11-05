@@ -4349,7 +4349,7 @@ body {
    =================================== */
 .success-guide-integrated {
     margin-top: 4rem;
-    padding: 3rem 0;
+    padding: 3rem 0 3rem 0;
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -4449,7 +4449,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    padding: 2.5rem 0 2.5rem 0; /* Equal padding top and bottom */
+    padding: 0;
 }
 
 .success-primary-button {
@@ -4499,7 +4499,7 @@ body {
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .success-cta-wrapper {
-        padding: 2rem 0 2rem 0; /* Equal spacing on mobile too */
+        padding: 0;
     }
     
     .success-primary-button {
@@ -4516,7 +4516,7 @@ body {
 
 @media (max-width: 480px) {
     .success-cta-wrapper {
-        padding: 1.5rem 0 1.5rem 0;
+        padding: 0;
     }
     
     .success-primary-button {
@@ -4776,7 +4776,7 @@ body {
 
 @media (max-width: 768px) {
     .final-cta {
-        padding: 3rem 1rem;
+        padding: 3rem 1rem 0 1rem;
     }
     
     .final-cta-title {
@@ -4822,7 +4822,7 @@ body {
     
     .success-guide-integrated {
         margin-top: 3rem;
-        padding: 2.5rem 0;
+        padding: 2.5rem 0 2.5rem 0;
     }
     
     .success-benefits-container {
@@ -4846,10 +4846,6 @@ body {
     
     .success-benefit-box p {
         font-size: 0.85rem;
-    }
-    
-    .success-cta-wrapper {
-        padding: 2rem 0;
     }
     
     .success-primary-button {
@@ -4901,6 +4897,10 @@ body {
     
     .close-reason-text p {
         font-size: 0.8rem;
+    }
+    
+    .success-guide-integrated {
+        padding: 2rem 0 2rem 0;
     }
     
     .success-benefit-icon img {
