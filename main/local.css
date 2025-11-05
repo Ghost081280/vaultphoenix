@@ -4345,11 +4345,11 @@ body {
 }
 
 /* ===================================
-   SUCCESS GUIDE INTEGRATED - PERFECT EQUAL SPACING
+   SUCCESS GUIDE INTEGRATED - CLEAN REBUILD WITH PERFECT SPACING
    =================================== */
 .success-guide-integrated {
-    margin-top: 4rem;
-    padding: 4rem 0;
+    margin: 4rem 0 0 0; /* Top margin only, no bottom */
+    padding: 4rem 0 0 0; /* Top padding only, no bottom */
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -4384,6 +4384,7 @@ body {
     font-size: clamp(0.95rem, 1.8vw, 1.15rem);
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
+    margin: 0;
 }
 
 .success-benefits-container {
@@ -4439,12 +4440,11 @@ body {
     margin: 0;
 }
 
-/* FIXED: Perfect equal spacing top and bottom */
 .success-cta-wrapper {
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0; /* No padding at all */
 }
 
 .success-primary-button {
@@ -4467,7 +4467,7 @@ body {
         0 10px 40px rgba(240, 165, 0, 0.5),
         0 0 60px rgba(215, 51, 39, 0.3);
     min-height: 60px;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0; /* Bottom margin only for spacing to footnote */
 }
 
 .success-primary-button img {
@@ -4489,10 +4489,13 @@ body {
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.75);
     font-weight: 600;
-    margin: 0;
+    margin: 0; /* No margin at all */
+    padding: 0; /* No padding at all */
 }
 
-/* Mobile adjustments */
+/* ===================================
+   MOBILE RESPONSIVE FOR SUCCESS GUIDE
+   =================================== */
 @media (max-width: 1024px) {
     .success-benefits-container {
         grid-template-columns: repeat(2, 1fr);
@@ -4501,8 +4504,8 @@ body {
 
 @media (max-width: 768px) {
     .success-guide-integrated {
-        margin-top: 3rem;
-        padding: 3rem 0;
+        margin: 3rem 0 0 0;
+        padding: 3rem 0 0 0;
     }
     
     .success-benefits-container {
@@ -4546,7 +4549,8 @@ body {
 
 @media (max-width: 480px) {
     .success-guide-integrated {
-        padding: 2.5rem 0;
+        margin: 2.5rem 0 0 0;
+        padding: 2.5rem 0 0 0;
     }
     
     .success-benefit-icon img {
@@ -4571,7 +4575,6 @@ body {
         font-size: 0.8rem;
     }
 }
-
 /* ===================================
    MODALS
    =================================== */
