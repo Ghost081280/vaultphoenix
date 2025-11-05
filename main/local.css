@@ -4345,11 +4345,12 @@ body {
 }
 
 /* ===================================
-   SUCCESS GUIDE INTEGRATED - CLEAN REBUILD WITH PERFECT SPACING
+   SUCCESS GUIDE INTEGRATED - FINAL PERFECT SPACING VERSION
+   Equal spacing above and below, centered button/text
    =================================== */
 .success-guide-integrated {
-    margin: 4rem 0 0 0; /* Top margin only, no bottom */
-    padding: 4rem 0 4rem 0; /* ADDED: Equal top and bottom padding */
+    margin: 0; /* No margin at all */
+    padding: 5rem 0; /* Equal padding top and bottom for perfect centering */
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -4392,7 +4393,7 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     max-width: 1200px;
-    margin: 0 auto 3rem;
+    margin: 0 auto 2.5rem; /* Reduced from 3rem to 2.5rem for better balance */
 }
 
 .success-benefit-box {
@@ -4444,7 +4445,7 @@ body {
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
-    padding: 0; /* No padding at all */
+    padding: 0;
 }
 
 .success-primary-button {
@@ -4467,7 +4468,7 @@ body {
         0 10px 40px rgba(240, 165, 0, 0.5),
         0 0 60px rgba(215, 51, 39, 0.3);
     min-height: 60px;
-    margin: 0 0 1rem 0; /* Bottom margin only for spacing to footnote */
+    margin: 0 0 1rem 0;
 }
 
 .success-primary-button img {
@@ -4489,8 +4490,8 @@ body {
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.75);
     font-weight: 600;
-    margin: 0; /* No margin at all */
-    padding: 0; /* No padding at all */
+    margin: 0;
+    padding: 0;
 }
 
 /* ===================================
@@ -4504,14 +4505,13 @@ body {
 
 @media (max-width: 768px) {
     .success-guide-integrated {
-        margin: 3rem 0 0 0;
-        padding: 3rem 0 0 0;
+        padding: 4rem 0; /* Slightly less padding on mobile */
     }
     
     .success-benefits-container {
         grid-template-columns: 1fr;
         gap: 1.25rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 2rem;
     }
     
     .success-benefit-box {
@@ -4549,8 +4549,7 @@ body {
 
 @media (max-width: 480px) {
     .success-guide-integrated {
-        margin: 2.5rem 0 0 0;
-        padding: 2.5rem 0 0 0;
+        padding: 3rem 0; /* Even less on very small screens */
     }
     
     .success-benefit-icon img {
