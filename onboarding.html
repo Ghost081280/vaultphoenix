@@ -97,7 +97,7 @@
             </div>
         </div>
 
-        <!-- HERO SECTION - DRAMATICALLY ENHANCED -->
+        <!-- HERO SECTION -->
         <section class="onboarding-hero" id="hero">
             <div class="hero-background-effects">
                 <div class="hero-glow-orb hero-glow-1"></div>
@@ -245,7 +245,7 @@
             </div>
         </section>
 
-        <!-- ONBOARDING PROCESS - DRAMATICALLY ENHANCED -->
+        <!-- ONBOARDING PROCESS - 5 STEPS -->
         <section class="onboarding-process-section" id="onboarding-process">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
@@ -705,128 +705,8 @@
             </div>
         </section>
 
-        <!-- INTERACTIVE CALCULATOR -->
-        <section class="interactive-calculator-section" id="interactive-calculator">
-            <div class="main-container">
-                <div class="section-header-enhanced scroll-reveal">
-                    <div class="section-badge">Revenue Planning</div>
-                    <h2 class="main-section-title">Interactive ROI Calculator</h2>
-                    <p class="main-section-subtitle">Calculate your potential revenue with custom inputs.</p>
-                </div>
-                
-                <div class="calculator-wrapper scroll-reveal">
-                    <div class="calculator-container-enhanced">
-                        <div class="calculator-inputs-col">
-                            <h3 class="calculator-section-title">Your Campaign Parameters</h3>
-                            
-                            <div class="input-group-enhanced">
-                                <label for="locations">Number of Locations</label>
-                                <input type="range" id="locations" min="1" max="50" value="10" oninput="calculateROI()">
-                                <span id="locations-value">10</span> locations
-                            </div>
-                            
-                            <div class="input-group-enhanced">
-                                <label for="setup-fee">Setup Fee ($)</label>
-                                <input type="number" id="setup-fee" min="0" value="1000" oninput="calculateROI()">
-                            </div>
-                            
-                            <div class="input-group-enhanced">
-                                <label for="price-per-location">Price per Location per Month ($)</label>
-                                <input type="number" id="price-per-location" min="50" max="500" value="200" oninput="calculateROI()">
-                            </div>
-                            
-                            <div class="input-group-enhanced">
-                                <label for="duration">Campaign Duration</label>
-                                <select id="duration" oninput="calculateROI()">
-                                    <option value="1">1 month</option>
-                                    <option value="3" selected>3 months</option>
-                                    <option value="6">6 months</option>
-                                    <option value="12">12 months</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="calculator-results-col">
-                            <h3 class="calculator-section-title">Projected Revenue</h3>
-                            
-                            <div class="result-cards">
-                                <div class="result-card-large">
-                                    <div class="result-label">Monthly Recurring Revenue</div>
-                                    <div class="result-value" id="monthly-revenue">$2,000</div>
-                                </div>
-                                
-                                <div class="result-card-large">
-                                    <div class="result-label">Total Campaign Revenue</div>
-                                    <div class="result-value" id="total-revenue">$7,000</div>
-                                    <div class="result-note">Including setup fee</div>
-                                </div>
-                                
-                                <div class="result-card-large">
-                                    <div class="result-label">Revenue per Location</div>
-                                    <div class="result-value" id="revenue-per-location">$700</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <p class="disclaimer-enhanced">*Revenue projections are illustrative. Actual results vary.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- FINAL CTA -->
-        <section class="final-cta-section" id="final-cta">
-            <div class="cta-background-effects">
-                <div class="cta-glow-orb cta-glow-1"></div>
-                <div class="cta-glow-orb cta-glow-2"></div>
-            </div>
-            
-            <div class="main-container">
-                <div class="final-cta-content scroll-reveal">
-                    <div class="cta-phoenix-showcase">
-                        <div class="main-image-glow phoenix-cta-glow">
-                            <img src="images/PhoenixHoldingCoin.PNG" alt="Start Success Journey" class="cta-phoenix-image" loading="lazy">
-                        </div>
-                    </div>
-                    
-                    <h2 class="cta-title">Ready to Launch Your First Campaign?</h2>
-                    <p class="cta-subtitle">Join marketers and developers generating revenue from location-based AR crypto campaigns.</p>
-                    
-                    <div class="cta-buttons-row">
-                        <a href="mailto:contact@vaultphoenix.com?subject=Ready%20to%20Launch" class="cta-button-primary">
-                            <div class="main-image-glow">
-                                <img src="images/VPEmberFlame.svg" alt="Book Call" loading="lazy">
-                            </div>
-                            <span>Book a Strategy Call</span>
-                        </a>
-                        <a href="main.html" class="cta-button-secondary">
-                            <span>Explore Platform</span>
-                            <span class="cta-arrow">→</span>
-                        </a>
-                    </div>
-                    
-                    <div class="tech-partners-showcase">
-                        <p class="partners-label">Powered by Industry Leaders</p>
-                        <div class="partners-logos-grid">
-                            <img src="images/AllWhiteLogo.png" alt="Vault Phoenix" loading="lazy">
-                            <img src="images/solana.png" alt="Solana" loading="lazy">
-                            <img src="images/phantom.png" alt="Phantom" loading="lazy">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Shared Components Container -->
-    <div id="shared-components-container"></div>
-
-    <!-- Scripts -->
-    <script src="shared/global.js"></script>
-<!-- This continues from the onboarding process section -->
-
-        <!-- REVENUE POTENTIAL CALCULATOR - DRAMATICALLY ENHANCED -->
-        <section class="revenue-calculator-section" id="revenue-calculator-preview">
+        <!-- REVENUE POTENTIAL CALCULATOR -->
+        <section class="revenue-calculator-section" id="revenue-calculator">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
                     <div class="section-badge">Revenue Modeling</div>
@@ -834,7 +714,7 @@
                     <p class="main-section-subtitle">Illustrative examples of what's possible with location-based AR campaigns. Campaign owners set price per location. Advertisers pay for locations and fund with $Ember tokens.</p>
                 </div>
                 
-                <!-- Revenue Examples Table - Enhanced -->
+                <!-- Revenue Examples Table -->
                 <div class="revenue-showcase scroll-reveal">
                     <div class="revenue-table-wrapper">
                         <table class="revenue-table-enhanced">
@@ -860,7 +740,7 @@
                                     <td><strong>10</strong></td>
                                     <td>$200</td>
                                     <td>50 $Ember</td>
-                                    <td class="highlight-value">$20,000</td>
+                                    <td class="highlight-value">$2,000</td>
                                 </tr>
                                 <tr class="table-row-interactive">
                                     <td>
@@ -888,7 +768,7 @@
                                     <td><strong>25</strong></td>
                                     <td>$150</td>
                                     <td>30 $Ember</td>
-                                    <td class="highlight-value">$37,500</td>
+                                    <td class="highlight-value">$3,750</td>
                                 </tr>
                                 <tr class="table-row-interactive">
                                     <td>
@@ -902,13 +782,13 @@
                                     <td><strong>15</strong></td>
                                     <td>$300</td>
                                     <td>75 $Ember</td>
-                                    <td class="highlight-value">$45,000</td>
+                                    <td class="highlight-value">$4,500</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     
-                    <!-- Formula Box Enhanced -->
+                    <!-- Formula Box -->
                     <div class="formula-box-enhanced scroll-reveal">
                         <div class="formula-header">
                             <div class="main-image-glow">
@@ -937,7 +817,7 @@
             </div>
         </section>
 
-        <!-- SALES SCRIPTS - DRAMATICALLY ENHANCED -->
+        <!-- SALES SCRIPTS SECTION -->
         <section class="sales-scripts-section" id="sales-scripts">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
@@ -975,7 +855,7 @@
                             </div>
                             <div class="script-content">
                                 <div class="copy-action-bar">
-                                    <button class="copy-button-enhanced" onclick="copyToClipboard(this)" aria-label="Copy script">
+                                    <button class="copy-button-enhanced" aria-label="Copy script">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1014,7 +894,7 @@ Can we schedule 15 minutes to show you how this works?</code></pre>
                             </div>
                             <div class="script-content">
                                 <div class="copy-action-bar">
-                                    <button class="copy-button-enhanced" onclick="copyToClipboard(this)" aria-label="Copy script">
+                                    <button class="copy-button-enhanced" aria-label="Copy script">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1051,7 +931,7 @@ Plus, local businesses can sponsor coin placements, which creates a new revenue 
                             </div>
                             <div class="script-content">
                                 <div class="copy-action-bar">
-                                    <button class="copy-button-enhanced" onclick="copyToClipboard(this)" aria-label="Copy script">
+                                    <button class="copy-button-enhanced" aria-label="Copy script">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1092,7 +972,7 @@ The Solana community loves this kind of gamification. Can we explore how this wo
                             </div>
                             <div class="script-content">
                                 <div class="copy-action-bar">
-                                    <button class="copy-button-enhanced" onclick="copyToClipboard(this)" aria-label="Copy script">
+                                    <button class="copy-button-enhanced" aria-label="Copy script">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1144,7 +1024,7 @@ Boost fan engagement by 30%+ with gamified experiences. Let's demo how this fits
                             </div>
                             <div class="script-content">
                                 <div class="copy-action-bar">
-                                    <button class="copy-button-enhanced" onclick="copyToClipboard(this)" aria-label="Copy script">
+                                    <button class="copy-button-enhanced" aria-label="Copy script">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1185,7 +1065,7 @@ Plus, you can partner with local businesses for sponsored content. Let's talk in
                             </div>
                             <div class="script-content">
                                 <div class="copy-action-bar">
-                                    <button class="copy-button-enhanced" onclick="copyToClipboard(this)" aria-label="Copy script">
+                                    <button class="copy-button-enhanced" aria-label="Copy script">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1222,7 +1102,7 @@ You pay only for API usage (starts at $49/mo). Want to see the SDK docs?</code><
                             </div>
                             <div class="script-content">
                                 <div class="copy-action-bar">
-                                    <button class="copy-button-enhanced" onclick="copyToClipboard(this)" aria-label="Copy script">
+                                    <button class="copy-button-enhanced" aria-label="Copy script">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1245,10 +1125,7 @@ Advertisers pay {{Price}} per location/month, fund with $Ember for redemptions. 
             </div>
         </section>
 
-<!-- Part 3 will contain: Client Proposals, Pricing Tiers, Upselling Tips, Launch Checklist, Interactive Calculator, Success Tips, and Final CTA -->
-<!-- This continues from Part 2 -->
-
-        <!-- CLIENT PROPOSAL TEMPLATES - ENHANCED -->
+        <!-- CLIENT PROPOSAL TEMPLATES -->
         <section class="proposals-section" id="client-proposal-templates">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
@@ -1272,7 +1149,7 @@ Advertisers pay {{Price}} per location/month, fund with $Ember for redemptions. 
                         
                         <div class="proposal-content">
                             <div class="copy-action-bar">
-                                <button class="copy-button-enhanced" onclick="copyToClipboard(this)" aria-label="Copy proposal">
+                                <button class="copy-button-enhanced" aria-label="Copy proposal">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1337,7 +1214,7 @@ Schedule a 15-minute demo call to see the platform in action.
                         
                         <div class="proposal-content">
                             <div class="copy-action-bar">
-                                <button class="copy-button-enhanced" onclick="copyToClipboard(this)" aria-label="Copy proposal">
+                                <button class="copy-button-enhanced" aria-label="Copy proposal">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1383,8 +1260,14 @@ Schedule integration demo and review available locations.
                             <div class="proposal-stat">
                                 <strong>$49/mo</strong>
                                 <span>Starting API</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <!-- PRICING TIERS SECTION -->
+        <!-- PRICING TIERS -->
         <section class="pricing-tiers-section" id="location-pricing-tiers">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
@@ -1572,7 +1455,7 @@ Schedule integration demo and review available locations.
                 <div class="calculator-wrapper scroll-reveal">
                     <div class="calculator-container-enhanced">
                         <div class="calculator-inputs-col">
-                            <h3>Your Campaign Parameters</h3>
+                            <h3 class="calculator-section-title">Your Campaign Parameters</h3>
                             
                             <div class="input-group-enhanced">
                                 <label for="locations">Number of Locations</label>
@@ -1586,7 +1469,7 @@ Schedule integration demo and review available locations.
                             </div>
                             
                             <div class="input-group-enhanced">
-                                <label for="price-per-location">Price per Location/Month ($)</label>
+                                <label for="price-per-location">Price per Location per Month ($)</label>
                                 <input type="number" id="price-per-location" min="50" max="500" value="200" oninput="calculateROI()">
                             </div>
                             
@@ -1602,17 +1485,18 @@ Schedule integration demo and review available locations.
                         </div>
                         
                         <div class="calculator-results-col">
-                            <h3>Projected Revenue</h3>
+                            <h3 class="calculator-section-title">Projected Revenue</h3>
                             
                             <div class="result-cards">
                                 <div class="result-card-large">
-                                    <div class="result-label">Monthly Revenue</div>
+                                    <div class="result-label">Monthly Recurring Revenue</div>
                                     <div class="result-value" id="monthly-revenue">$2,000</div>
                                 </div>
                                 
                                 <div class="result-card-large">
                                     <div class="result-label">Total Campaign Revenue</div>
                                     <div class="result-value" id="total-revenue">$7,000</div>
+                                    <div class="result-note">Including setup fee</div>
                                 </div>
                                 
                                 <div class="result-card-large">
@@ -1623,7 +1507,7 @@ Schedule integration demo and review available locations.
                         </div>
                     </div>
                     
-                    <p class="disclaimer-enhanced">*Revenue projections are illustrative examples only.</p>
+                    <p class="disclaimer-enhanced">*Revenue projections are illustrative. Actual results vary.</p>
                 </div>
             </div>
         </section>
