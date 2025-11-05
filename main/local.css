@@ -4490,6 +4490,9 @@ body {
     transform: translateX(3px);
 }
 
+/* ===================================
+   SATISFACTION GUARANTEE
+   =================================== */
 .satisfaction-guarantee {
     margin-top: 1.75rem;
     padding: 1.25rem;
@@ -4511,10 +4514,13 @@ body {
     font-weight: 700;
 }
 
-/* SUCCESS GUIDE - EQUAL SPACING FIX */
+/* ===================================
+   SUCCESS GUIDE - EQUAL SPACING FIX
+   ✅ FINAL VERSION - NO DUPLICATES
+   =================================== */
 .success-guide-integrated {
     margin: 0;
-    padding: var(--section-padding) 0 0 0;
+    padding: var(--section-padding) 0 var(--section-padding) 0;
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -4609,7 +4615,7 @@ body {
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
-    padding: 0 0 var(--section-padding) 0;
+    padding: 0;
 }
 
 .success-primary-button {
@@ -4658,6 +4664,18 @@ body {
     padding: 0;
 }
 
+/* ===================================
+   FINAL CTA SECTION FIX
+   =================================== */
+.final-cta {
+    padding: var(--section-padding) var(--container-padding) 0 var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
+}
+
+/* ===================================
+   RESPONSIVE - TABLET
+   =================================== */
 @media (max-width: 1024px) {
     .success-benefits-container {
         grid-template-columns: repeat(2, 1fr);
@@ -4669,6 +4687,9 @@ body {
     }
 }
 
+/* ===================================
+   RESPONSIVE - MOBILE
+   =================================== */
 @media (max-width: 768px) {
     .phoenix-separator-section {
         padding: 3rem 1rem;
@@ -4733,11 +4754,7 @@ body {
     }
     
     .success-guide-integrated {
-        padding: 3rem 0 0 0;
-    }
-    
-    .success-cta-wrapper {
-        padding: 0 0 3rem 0;
+        padding: 3rem 0 3rem 0;
     }
     
     .success-benefits-container {
@@ -4779,6 +4796,9 @@ body {
     }
 }
 
+/* ===================================
+   RESPONSIVE - SMALL MOBILE
+   =================================== */
 @media (max-width: 480px) {
     .journey-path-title {
         font-size: 1.25rem;
@@ -4793,11 +4813,7 @@ body {
     }
     
     .success-guide-integrated {
-        padding: 2rem 0 0 0;
-    }
-    
-    .success-cta-wrapper {
-        padding: 0 0 2rem 0;
+        padding: 2rem 0 2rem 0;
     }
     
     .success-benefit-icon img {
@@ -4823,215 +4839,9 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    .journey-path-title {
-        font-size: 1.25rem;
-    }
-    
-    .close-reason-text strong {
-        font-size: 0.9rem;
-    }
-    
-    .close-reason-text p {
-        font-size: 0.8rem;
-    }
-    
-    .success-guide-integrated {
-        padding: 2rem 0 0 0;
-    }
-    
-    .success-cta-wrapper {
-        padding: 0 0 2rem 0;
-    }
-    
-    .success-benefit-icon img {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .success-benefit-box h4 {
-        font-size: 0.95rem;
-    }
-    
-    .success-benefit-box p {
-        font-size: 0.8rem;
-    }
-    
-    .success-primary-button {
-        padding: 1rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .success-footnote {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 1024px) {
-    .success-benefits-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .journey-paths-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .phoenix-separator-section {
-        padding: 3rem 1rem;
-    }
-    
-    .phoenix-separator-content {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .phoenix-separator-image {
-        max-width: 220px;
-    }
-    
-    .phoenix-separator-subtitle {
-        font-size: 0.95rem;
-    }
-    
-    .final-cta {
-        padding: 3rem 1rem;
-    }
-    
-    .final-cta-title {
-        font-size: 1.75rem;
-    }
-    
-    .journey-paths-container {
-        grid-template-columns: 1fr;
-        gap: 1.75rem;
-    }
-    
-    .journey-path-module {
-        padding: 1.5rem;
-    }
-    
-    .main-journey-icon-large {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .journey-path-title {
-        font-size: 1.4rem;
-    }
-    
-    .close-reason-item {
-        padding: 1rem;
-    }
-    
-    .urgency-block {
-        flex-direction: column;
-        text-align: center;
-        padding: 1.25rem;
-    }
-    
-    .urgency-icon img {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .urgency-text h4 {
-        font-size: 1.1rem;
-    }
-    
-    .success-guide-integrated {
-        padding: 3rem 0 0 0;
-    }
-    
-    .success-cta-wrapper {
-        padding: 0 0 3rem 0;
-    }
-    
-    .success-benefits-container {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-        margin-bottom: 2rem;
-    }
-    
-    .success-benefit-box {
-        padding: 1.5rem 1rem;
-    }
-    
-    .success-benefit-icon img {
-        width: 56px;
-        height: 56px;
-    }
-    
-    .success-benefit-box h4 {
-        font-size: 1rem;
-    }
-    
-    .success-benefit-box p {
-        font-size: 0.85rem;
-    }
-    
-    .success-primary-button {
-        width: 100%;
-        padding: 1.1rem 2rem;
-        font-size: 1rem;
-    }
-    
-    .success-primary-button img {
-        width: 24px;
-        height: 24px;
-    }
-    
-    .success-footnote {
-        font-size: 0.85rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .journey-path-title {
-        font-size: 1.25rem;
-    }
-    
-    .close-reason-text strong {
-        font-size: 0.9rem;
-    }
-    
-    .close-reason-text p {
-        font-size: 0.8rem;
-    }
-    
-    .success-guide-integrated {
-        padding: 2rem 0 0 0;
-    }
-    
-    .success-cta-wrapper {
-        padding: 0 0 2rem 0;
-    }
-    
-    .success-benefit-icon img {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .success-benefit-box h4 {
-        font-size: 0.95rem;
-    }
-    
-    .success-benefit-box p {
-        font-size: 0.8rem;
-    }
-    
-    .success-primary-button {
-        padding: 1rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .success-footnote {
-        font-size: 0.8rem;
-    }
-}
-/* MODALS */
+/* ===================================
+   MODALS - AIRDROP TERMS & INFO
+   =================================== */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
     position: fixed;
@@ -5282,3 +5092,7 @@ body {
         width: 100%;
     }
 }
+
+/* ===================================
+   END OF LOCAL.CSS - MAIN PAGE
+   =================================== */
