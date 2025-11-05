@@ -3883,8 +3883,9 @@ body {
 }
 
 /* ===================================
-   ENHANCEMENT 2: GRAND FINALE - ULTRA COMPACT VERSION
+   ENHANCEMENT 2: GRAND FINALE - ULTRA COMPACT VERSION (FIXED)
    Streamlined, conversion-focused design with MASSIVE hero image
+   NO EXCESSIVE BLACK BOX - TIGHT SPACING
    =================================== */
 
 .grand-finale-separator {
@@ -3893,7 +3894,7 @@ body {
 
 .onboarding-cta-wrapper-enhanced-ultra-compact {
     margin: 3rem auto 0;
-    padding: 0 0 2rem 0;
+    padding: 0.5rem 0 1rem 0; /* FIXED: Minimal padding top/bottom */
     max-width: 900px;
     text-align: center;
     background: linear-gradient(135deg, 
@@ -3903,7 +3904,7 @@ body {
     border: 3px solid rgba(240, 165, 0, 0.5);
     border-radius: 32px;
     position: relative;
-    overflow: visible; /* CRITICAL: Allow badge to overflow */
+    overflow: visible;
     box-shadow: 
         0 0 60px rgba(240, 165, 0, 0.4),
         0 20px 80px rgba(0, 0, 0, 0.6),
@@ -3977,7 +3978,7 @@ body {
 
 /* MASSIVE HERO PHOENIX IMAGE - FEATURED */
 .finale-hero-phoenix {
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 1rem; /* FIXED: Reduced bottom margin */
     padding: 0;
     text-align: center;
 }
@@ -4013,7 +4014,7 @@ body {
 
 /* COMPACT HEADER */
 .finale-header-ultra-compact {
-    padding: 0 2rem 1.5rem 2rem;
+    padding: 0 2rem 1.25rem 2rem; /* FIXED: Reduced padding */
     text-align: center;
 }
 
@@ -4021,7 +4022,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem; /* FIXED: Reduced margin */
 }
 
 .finale-title-line1 {
@@ -4058,7 +4059,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
-    margin: 0 2rem 1.75rem 2rem;
+    margin: 0 2rem 1.5rem 2rem; /* FIXED: Reduced bottom margin */
 }
 
 .finale-benefit-ultra-compact {
@@ -4110,7 +4111,7 @@ body {
 
 /* CTA BUTTON - COMPACT */
 .finale-cta-row-ultra-compact {
-    margin: 0 2rem 1rem 2rem;
+    margin: 0 2rem 0.85rem 2rem; /* FIXED: Reduced margins */
 }
 
 .finale-button-ultra-compact {
@@ -4218,17 +4219,17 @@ body {
     font-size: 0.9rem;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.8);
-    margin: 1rem 2rem 0 2rem;
+    margin: 0.85rem 2rem 0 2rem; /* FIXED: Reduced top margin */
     font-weight: 600;
 }
 
 /* ===================================
-   RESPONSIVE - ULTRA COMPACT VERSION
+   RESPONSIVE - ULTRA COMPACT VERSION (FIXED)
    =================================== */
 
 @media (max-width: 768px) {
     .onboarding-cta-wrapper-enhanced-ultra-compact {
-        padding: 0 0 1.75rem 0;
+        padding: 0.5rem 0 1rem 0; /* FIXED: Minimal padding */
         margin: 2.5rem auto 0;
         border-radius: 24px;
         max-width: calc(100% - 2rem);
@@ -4249,18 +4250,26 @@ body {
         font-size: 0.9rem;
     }
     
+    .finale-hero-phoenix {
+        margin-bottom: 0.85rem; /* FIXED: Reduced margin */
+    }
+    
     .finale-phoenix-mega {
         max-width: 220px;
     }
     
     .finale-header-ultra-compact {
-        padding: 0 1.5rem 1.25rem 1.5rem;
+        padding: 0 1.5rem 1rem 1.5rem; /* FIXED: Reduced padding */
+    }
+    
+    .finale-title-ultra-compact {
+        margin-bottom: 0.5rem; /* FIXED: Reduced margin */
     }
     
     .finale-benefits-grid-ultra-compact {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
-        margin: 0 1.5rem 1.5rem 1.5rem;
+        margin: 0 1.5rem 1.25rem 1.5rem; /* FIXED: Reduced bottom margin */
     }
     
     .finale-benefit-ultra-compact {
@@ -4273,7 +4282,7 @@ body {
     }
     
     .finale-cta-row-ultra-compact {
-        margin: 0 1.5rem 0.85rem 1.5rem;
+        margin: 0 1.5rem 0.75rem 1.5rem; /* FIXED: Reduced margins */
     }
     
     .finale-button-ultra-compact {
@@ -4287,14 +4296,14 @@ body {
     }
     
     .finale-footnote-ultra-compact {
-        margin: 0.85rem 1.5rem 0 1.5rem;
+        margin: 0.75rem 1.5rem 0 1.5rem; /* FIXED: Reduced top margin */
         font-size: 0.85rem;
     }
 }
 
 @media (max-width: 480px) {
     .onboarding-cta-wrapper-enhanced-ultra-compact {
-        padding: 0 0 1.5rem 0;
+        padding: 0.5rem 0 0.85rem 0; /* FIXED: Even more compact */
         border-radius: 20px;
     }
     
@@ -4314,18 +4323,26 @@ body {
         letter-spacing: 0.5px;
     }
     
+    .finale-hero-phoenix {
+        margin-bottom: 0.75rem; /* FIXED: Reduced margin */
+    }
+    
     .finale-phoenix-mega {
         max-width: 180px;
     }
     
     .finale-header-ultra-compact {
-        padding: 0 1.25rem 1rem 1.25rem;
+        padding: 0 1.25rem 0.85rem 1.25rem; /* FIXED: Reduced padding */
+    }
+    
+    .finale-title-ultra-compact {
+        margin-bottom: 0.5rem; /* FIXED: Reduced margin */
     }
     
     .finale-benefits-grid-ultra-compact {
         grid-template-columns: 1fr;
         gap: 0.85rem;
-        margin: 0 1.25rem 1.25rem 1.25rem;
+        margin: 0 1.25rem 1rem 1.25rem; /* FIXED: Reduced bottom margin */
     }
     
     .finale-benefit-icon-ultra-compact img {
@@ -4334,7 +4351,7 @@ body {
     }
     
     .finale-cta-row-ultra-compact {
-        margin: 0 1.25rem 0.75rem 1.25rem;
+        margin: 0 1.25rem 0.65rem 1.25rem; /* FIXED: Reduced margins */
     }
     
     .finale-button-ultra-compact {
@@ -4343,13 +4360,13 @@ body {
     }
     
     .finale-footnote-ultra-compact {
-        margin: 0.75rem 1.25rem 0 1.25rem;
+        margin: 0.65rem 1.25rem 0 1.25rem; /* FIXED: Reduced top margin */
         font-size: 0.8rem;
     }
 }
 
 /* ===================================
-   END OF GRAND FINALE ULTRA COMPACT CSS
+   END OF GRAND FINALE ULTRA COMPACT CSS (FIXED VERSION)
    =================================== */
 /* ===================================
    MODALS - PROPERLY STYLED
