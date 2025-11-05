@@ -3889,12 +3889,12 @@ body {
    =================================== */
 
 .grand-finale-separator {
-    height: 2rem;
+    height: 1.5rem;
 }
 
 .onboarding-cta-wrapper-enhanced-ultra-compact {
-    margin: 3rem auto 0;
-    padding: 0.5rem 0 1rem 0; /* FIXED: Minimal padding top/bottom */
+    margin: 2.5rem auto 0;
+    padding: 0; /* CRITICAL: No padding on wrapper */
     max-width: 900px;
     text-align: center;
     background: linear-gradient(135deg, 
@@ -3978,7 +3978,7 @@ body {
 
 /* MASSIVE HERO PHOENIX IMAGE - FEATURED */
 .finale-hero-phoenix {
-    margin: 0 auto 1rem; /* FIXED: Reduced bottom margin */
+    margin: 0.5rem auto 0.5rem; /* TIGHT: Minimal margins */
     padding: 0;
     text-align: center;
 }
@@ -4014,15 +4014,15 @@ body {
 
 /* COMPACT HEADER */
 .finale-header-ultra-compact {
-    padding: 0 2rem 1.25rem 2rem; /* FIXED: Reduced padding */
+    padding: 0 1.5rem 0.75rem 1.5rem; /* TIGHT: Minimal padding */
     text-align: center;
 }
 
 .finale-title-ultra-compact {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
-    margin-bottom: 0.65rem; /* FIXED: Reduced margin */
+    gap: 0.2rem;
+    margin-bottom: 0.5rem; /* TIGHT: Minimal margin */
 }
 
 .finale-title-line1 {
@@ -4058,8 +4058,8 @@ body {
 .finale-benefits-grid-ultra-compact {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin: 0 2rem 1.5rem 2rem; /* FIXED: Reduced bottom margin */
+    gap: 0.75rem;
+    margin: 0 1.5rem 0.75rem 1.5rem; /* TIGHT: Minimal margins */
 }
 
 .finale-benefit-ultra-compact {
@@ -4111,7 +4111,7 @@ body {
 
 /* CTA BUTTON - COMPACT */
 .finale-cta-row-ultra-compact {
-    margin: 0 2rem 0.85rem 2rem; /* FIXED: Reduced margins */
+    margin: 0 1.5rem 0.5rem 1.5rem; /* TIGHT: Minimal margins */
 }
 
 .finale-button-ultra-compact {
@@ -4219,7 +4219,8 @@ body {
     font-size: 0.9rem;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.8);
-    margin: 0.85rem 2rem 0 2rem; /* FIXED: Reduced top margin */
+    margin: 0.5rem 1.5rem 0 1.5rem; /* TIGHT: Minimal top margin */
+    padding-bottom: 0.75rem; /* Add bottom padding to wrapper */
     font-weight: 600;
 }
 
@@ -4229,8 +4230,8 @@ body {
 
 @media (max-width: 768px) {
     .onboarding-cta-wrapper-enhanced-ultra-compact {
-        padding: 0.5rem 0 1rem 0; /* FIXED: Minimal padding */
-        margin: 2.5rem auto 0;
+        padding: 0; /* TIGHT: No padding */
+        margin: 2rem auto 0;
         border-radius: 24px;
         max-width: calc(100% - 2rem);
     }
@@ -4251,7 +4252,7 @@ body {
     }
     
     .finale-hero-phoenix {
-        margin-bottom: 0.85rem; /* FIXED: Reduced margin */
+        margin: 0.5rem auto 0.5rem; /* TIGHT: Minimal margins */
     }
     
     .finale-phoenix-mega {
@@ -4259,21 +4260,21 @@ body {
     }
     
     .finale-header-ultra-compact {
-        padding: 0 1.5rem 1rem 1.5rem; /* FIXED: Reduced padding */
+        padding: 0 1.25rem 0.65rem 1.25rem; /* TIGHT: Minimal padding */
     }
     
     .finale-title-ultra-compact {
-        margin-bottom: 0.5rem; /* FIXED: Reduced margin */
+        margin-bottom: 0.4rem; /* TIGHT: Minimal margin */
     }
     
     .finale-benefits-grid-ultra-compact {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        margin: 0 1.5rem 1.25rem 1.5rem; /* FIXED: Reduced bottom margin */
+        gap: 0.75rem;
+        margin: 0 1.25rem 0.75rem 1.25rem; /* TIGHT: Minimal margins */
     }
     
     .finale-benefit-ultra-compact {
-        padding: 1.15rem 0.85rem;
+        padding: 1rem 0.75rem;
     }
     
     .finale-benefit-icon-ultra-compact img {
@@ -4282,7 +4283,7 @@ body {
     }
     
     .finale-cta-row-ultra-compact {
-        margin: 0 1.5rem 0.75rem 1.5rem; /* FIXED: Reduced margins */
+        margin: 0 1.25rem 0.5rem 1.25rem; /* TIGHT: Minimal margins */
     }
     
     .finale-button-ultra-compact {
@@ -4296,14 +4297,15 @@ body {
     }
     
     .finale-footnote-ultra-compact {
-        margin: 0.75rem 1.5rem 0 1.5rem; /* FIXED: Reduced top margin */
+        margin: 0.5rem 1.25rem 0 1.25rem; /* TIGHT: Minimal margin */
+        padding-bottom: 0.65rem;
         font-size: 0.85rem;
     }
 }
 
 @media (max-width: 480px) {
     .onboarding-cta-wrapper-enhanced-ultra-compact {
-        padding: 0.5rem 0 0.85rem 0; /* FIXED: Even more compact */
+        padding: 0; /* TIGHT: No padding */
         border-radius: 20px;
     }
     
@@ -4324,7 +4326,7 @@ body {
     }
     
     .finale-hero-phoenix {
-        margin-bottom: 0.75rem; /* FIXED: Reduced margin */
+        margin: 0.5rem auto 0.5rem; /* TIGHT: Minimal margins */
     }
     
     .finale-phoenix-mega {
@@ -4332,17 +4334,17 @@ body {
     }
     
     .finale-header-ultra-compact {
-        padding: 0 1.25rem 0.85rem 1.25rem; /* FIXED: Reduced padding */
+        padding: 0 1rem 0.5rem 1rem; /* TIGHT: Minimal padding */
     }
     
     .finale-title-ultra-compact {
-        margin-bottom: 0.5rem; /* FIXED: Reduced margin */
+        margin-bottom: 0.4rem; /* TIGHT: Minimal margin */
     }
     
     .finale-benefits-grid-ultra-compact {
         grid-template-columns: 1fr;
-        gap: 0.85rem;
-        margin: 0 1.25rem 1rem 1.25rem; /* FIXED: Reduced bottom margin */
+        gap: 0.65rem;
+        margin: 0 1rem 0.65rem 1rem; /* TIGHT: Minimal margins */
     }
     
     .finale-benefit-icon-ultra-compact img {
@@ -4351,7 +4353,7 @@ body {
     }
     
     .finale-cta-row-ultra-compact {
-        margin: 0 1.25rem 0.65rem 1.25rem; /* FIXED: Reduced margins */
+        margin: 0 1rem 0.5rem 1rem; /* TIGHT: Minimal margins */
     }
     
     .finale-button-ultra-compact {
@@ -4360,7 +4362,8 @@ body {
     }
     
     .finale-footnote-ultra-compact {
-        margin: 0.65rem 1.25rem 0 1.25rem; /* FIXED: Reduced top margin */
+        margin: 0.5rem 1rem 0 1rem; /* TIGHT: Minimal margin */
+        padding-bottom: 0.5rem;
         font-size: 0.8rem;
     }
 }
