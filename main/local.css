@@ -4069,124 +4069,12 @@ body {
 }
 
 /* ===================================
-   SUCCESS GUIDE SECTION - CLEAN (NO BLACK BOX)
+   SUCCESS GUIDE INTEGRATED
    =================================== */
-
-.grand-finale-separator {
-    height: 2rem;
-}
-
-.success-guide-section {
-    padding: 4rem var(--container-padding);
-    background: var(--ember-gradient-background);
-    position: relative;
-    overflow: visible;
-}
-
-.success-guide-section::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 900px;
-    height: 900px;
-    background: radial-gradient(circle, 
-        rgba(240, 165, 0, 0.06) 0%, 
-        rgba(215, 51, 39, 0.04) 40%, 
-        transparent 70%);
-    pointer-events: none;
-    animation: ambientPulse 8s ease-in-out infinite;
-}
-
-@keyframes ambientPulse {
-    0%, 100% {
-        opacity: 0.5;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1.05);
-    }
-}
-
-.success-badge-top {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    width: fit-content;
-    margin: 0 auto 2rem;
-    padding: 12px 28px;
-    background: linear-gradient(135deg, #d73327 0%, #c62828 100%);
-    border: 3px solid rgba(240, 165, 0, 0.8);
-    border-radius: 999px;
-    box-shadow: 
-        0 6px 24px rgba(215, 51, 39, 0.6),
-        0 0 50px rgba(240, 165, 0, 0.4);
-    animation: badgeFloat 3s ease-in-out infinite;
-    position: relative;
-    z-index: 10;
-}
-
-@keyframes badgeFloat {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-6px);
-    }
-}
-
-.success-badge-top img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-}
-
-.success-badge-top span {
-    font-size: 1rem;
-    font-weight: 900;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-}
-
-.success-phoenix-hero {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    position: relative;
-    z-index: 1;
-}
-
-.phoenix-mega-glow {
-    display: inline-block;
-    filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8)) 
-            drop-shadow(0 0 80px rgba(215, 51, 39, 0.6));
-    animation: phoenixMegaGlow 4s ease-in-out infinite;
-}
-
-@keyframes phoenixMegaGlow {
-    0%, 100% {
-        filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8)) 
-                drop-shadow(0 0 80px rgba(215, 51, 39, 0.6));
-        transform: scale(1);
-    }
-    50% {
-        filter: drop-shadow(0 0 60px rgba(240, 165, 0, 1)) 
-                drop-shadow(0 0 100px rgba(215, 51, 39, 0.8));
-        transform: scale(1.02);
-    }
-}
-
-.success-phoenix-img {
-    width: 100%;
-    max-width: 340px;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
+.success-guide-integrated {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
 .success-text-header {
@@ -4558,6 +4446,10 @@ body {
    =================================== */
 
 @media (max-width: 1024px) {
+    .use-cases-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .pricing-modules-container,
     .journey-paths-container {
         grid-template-columns: 1fr;
@@ -4577,26 +4469,9 @@ body {
 }
 
 @media (max-width: 768px) {
-    .success-guide-section {
-        padding: 3rem var(--container-padding);
-    }
-    
-    .success-badge-top {
-        padding: 10px 24px;
-    }
-    
-    .success-phoenix-img {
-        max-width: 260px;
-    }
-    
+    .use-cases-grid,
     .success-benefits-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-    
-    .success-primary-button {
-        padding: 1.15rem 2.5rem;
-        font-size: 1rem;
+        grid-template-columns: 1fr;
     }
     
     .airdrop-terms-modal-overlay,
@@ -4617,14 +4492,6 @@ body {
 }
 
 @media (max-width: 480px) {
-    .success-guide-section {
-        padding: 2.5rem var(--container-padding);
-    }
-    
-    .success-phoenix-img {
-        max-width: 220px;
-    }
-    
     .success-benefits-container {
         grid-template-columns: 1fr;
     }
