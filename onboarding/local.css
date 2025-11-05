@@ -106,6 +106,109 @@ body.onboarding-page {
     margin-top: var(--navbar-height);
 }
 
+/* ========================================
+   UNDER CONSTRUCTION BANNER - PROMINENT
+   ======================================== */
+.construction-banner {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.15), rgba(255, 193, 7, 0.15));
+    border: 2px solid rgba(255, 152, 0, 0.4);
+    border-left: 5px solid #ff9800;
+    padding: 1.25rem clamp(1rem, 3vw, 2rem);
+    position: relative;
+    z-index: 101;
+    margin-top: var(--navbar-height);
+    animation: pulse-construction 2s ease-in-out infinite;
+}
+
+@keyframes pulse-construction {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 152, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 152, 0, 0.4);
+    }
+}
+
+.construction-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.construction-icon {
+    font-size: 2rem;
+    animation: rotate-construction 2s linear infinite;
+}
+
+@keyframes rotate-construction {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.construction-text {
+    flex: 1;
+    min-width: 250px;
+}
+
+.construction-main {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ff9800;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.construction-main .blink {
+    animation: blink-text 1s ease-in-out infinite;
+}
+
+@keyframes blink-text {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.construction-sub {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+}
+
+.construction-close {
+    background: transparent;
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    color: #ff9800;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.construction-close:hover {
+    background: rgba(255, 152, 0, 0.2);
+    border-color: #ff9800;
+    transform: scale(1.05);
+}
+
+.construction-banner.hidden {
+    display: none;
+}
+
 .status-banner-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -412,7 +515,7 @@ body.onboarding-page {
     transform: translateX(5px);
 }
 
-/* Hero Phoenix Showcase - REMOVE RANDOM FLOATING COIN, ADD ANIMATED BACKGROUND COINS */
+/* Hero Phoenix Showcase - REMOVE BLACK BOX, ADD ANIMATED BACKGROUND COINS */
 .hero-phoenix-showcase {
     position: relative;
     margin-top: 2rem;
@@ -420,11 +523,13 @@ body.onboarding-page {
     justify-content: center;
     align-items: center;
     padding: 2rem 0;
+    background: transparent; /* CRITICAL: Remove black box */
 }
 
 .phoenix-hero-glow {
     position: relative;
     z-index: 2;
+    background: transparent; /* CRITICAL: Remove black box */
 }
 
 .hero-phoenix-image {
