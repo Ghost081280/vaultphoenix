@@ -4061,7 +4061,7 @@ body {
    FINAL CTA SECTION - COMPLETE
    =================================== */
 .final-cta {
-    padding: var(--section-padding) var(--container-padding);
+    padding: var(--section-padding) var(--container-padding) 0 var(--container-padding);
     background: var(--ember-gradient-background);
     position: relative;
 }
@@ -4345,12 +4345,11 @@ body {
 }
 
 /* ===================================
-   SUCCESS GUIDE INTEGRATED - FINAL PERFECT SPACING VERSION
-   Equal spacing above and below, centered button/text
+   SUCCESS GUIDE INTEGRATED - PERFECT SPACING VERSION
    =================================== */
 .success-guide-integrated {
-    margin: 0; /* No margin at all */
-    padding: 5rem 0; /* Equal padding top and bottom for perfect centering */
+    margin: 0;
+    padding: var(--section-padding) 0;
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -4393,7 +4392,7 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     max-width: 1200px;
-    margin: 0 auto 2.5rem; /* Reduced from 3rem to 2.5rem for better balance */
+    margin: 0 auto 2.5rem;
 }
 
 .success-benefit-box {
@@ -4505,7 +4504,7 @@ body {
 
 @media (max-width: 768px) {
     .success-guide-integrated {
-        padding: 4rem 0; /* Slightly less padding on mobile */
+        padding: 3rem 0;
     }
     
     .success-benefits-container {
@@ -4549,7 +4548,7 @@ body {
 
 @media (max-width: 480px) {
     .success-guide-integrated {
-        padding: 3rem 0; /* Even less on very small screens */
+        padding: 2.5rem 0;
     }
     
     .success-benefit-icon img {
