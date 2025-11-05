@@ -49,7 +49,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: clamp(80px, 12vh, 120px) 20px clamp(60px, 8vh, 80px);
+    padding: clamp(120px, 15vh, 150px) 20px clamp(80px, 10vh, 100px);
     overflow: hidden;
     background: linear-gradient(135deg, 
         var(--ember-dark) 0%, 
@@ -127,8 +127,8 @@
 }
 
 .ember-token-icon-image {
-    width: clamp(80px, 15vw, 150px);
-    height: clamp(80px, 15vw, 150px);
+    width: clamp(100px, 18vw, 180px);
+    height: clamp(100px, 18vw, 180px);
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
     animation: emberGlow 3s ease-in-out infinite;
@@ -145,9 +145,9 @@
 
 /* Hero Title */
 .ember-hero-title {
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
     font-weight: 900;
-    margin-bottom: clamp(15px, 3vh, 25px);
+    margin-bottom: clamp(15px, 3vh, 20px);
     background: linear-gradient(135deg, var(--ember-accent), var(--ember-secondary), var(--ember-primary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -158,7 +158,7 @@
 
 /* Hero Subtitle Main */
 .ember-hero-subtitle-main {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(1.25rem, 3.5vw, 2rem);
     font-weight: 700;
     margin-bottom: clamp(15px, 3vh, 20px);
     color: var(--text-secondary);
@@ -167,9 +167,9 @@
 
 /* Hero Subtitle */
 .ember-hero-subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-size: clamp(0.95rem, 2.2vw, 1.15rem);
     color: var(--text-muted);
-    margin-bottom: clamp(30px, 5vh, 50px);
+    margin-bottom: clamp(35px, 6vh, 50px);
     line-height: 1.6;
     max-width: 700px;
     margin-left: auto;
@@ -185,11 +185,14 @@
 .ember-stats-grid-enhanced {
     display: grid;
     gap: clamp(15px, 3vw, 25px);
-    margin-bottom: clamp(30px, 5vh, 50px);
+    margin-bottom: clamp(35px, 6vh, 50px);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .ember-stats-three-col {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .ember-stat-card-enhanced {
@@ -197,10 +200,10 @@
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--card-radius);
-    padding: clamp(20px, 4vw, 30px);
+    padding: clamp(18px, 3.5vw, 28px);
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     transition: all var(--transition-normal);
 }
 
@@ -216,8 +219,8 @@
 }
 
 .stat-icon img {
-    width: clamp(40px, 8vw, 60px);
-    height: clamp(40px, 8vw, 60px);
+    width: clamp(36px, 7vw, 55px);
+    height: clamp(36px, 7vw, 55px);
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
 }
@@ -225,18 +228,19 @@
 .stat-content {
     flex: 1;
     text-align: left;
+    min-width: 0;
 }
 
 .stat-number {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
     font-weight: 800;
     color: var(--ember-accent);
     line-height: 1.1;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .stat-label {
-    font-size: clamp(0.85rem, 2vw, 1rem);
+    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
     color: var(--text-secondary);
     font-weight: 500;
 }
@@ -288,10 +292,30 @@
 }
 
 /* Mobile Optimization for Hero */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .ember-hero {
+        padding: 140px 20px 80px;
+    }
+    
+    .ember-token-icon-image {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .ember-stats-three-col {
+        max-width: 700px;
+    }
+    
+    .stat-icon img {
+        width: 48px;
+        height: 48px;
+    }
+}
+
 @media (max-width: 768px) {
     .ember-hero {
         min-height: auto;
-        padding: 100px 15px 60px;
+        padding: 120px 15px 60px;
     }
     
     .hero-coin {
@@ -304,11 +328,31 @@
         display: block;
     }
     
+    .ember-token-icon-image {
+        width: 120px;
+        height: 120px;
+    }
+    
     .ember-stats-three-col {
         grid-template-columns: 1fr;
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
+        max-width: 350px;
+    }
+    
+    .ember-stat-card-enhanced {
+        padding: 16px;
+    }
+    
+    .stat-icon img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .stat-number {
+        font-size: 1.75rem;
+    }
+    
+    .stat-label {
+        font-size: 0.85rem;
     }
     
     .ember-hero-cta {
