@@ -894,7 +894,113 @@ body {
     font-size: 0.95rem;
 }
 
-.ember-highlights-redesigned
+/* ===================================
+   EMBER HIGHLIGHTS - ENHANCED SIZE (FIXED)
+   =================================== */
+.ember-highlights-redesigned {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    height: 100%;
+}
+
+.ember-highlight-redesigned {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.15rem 1rem;
+    background: rgba(215, 51, 39, 0.1);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: var(--transition-base);
+    position: relative;
+}
+
+.ember-highlight-redesigned:hover {
+    background: rgba(215, 51, 39, 0.2);
+    border-color: var(--ember-orange);
+    transform: translateX(3px);
+}
+
+.highlight-emoji-redesigned {
+    flex-shrink: 0;
+}
+
+.highlight-icon-image-redesigned {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.highlight-text-redesigned {
+    flex: 1;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.35;
+}
+
+.highlight-arrow-redesigned {
+    font-size: 1.3rem;
+    color: var(--ember-gold);
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* Phoenix container */
+.ember-phoenix-container-redesigned {
+    text-align: center;
+    flex: 1;
+}
+
+.phoenix-holding-coin-redesigned {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Compliance at bottom */
+.compliance-disclaimer-redesigned {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+.compliance-disclaimer-redesigned h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin-bottom: 0.85rem;
+}
+
+.main-compliance-icon-redesigned {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.compliance-disclaimer-redesigned p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.25rem;
+    flex: 1;
+}
+
+.compliance-cta {
+    text-align: center;
+    margin-top: auto;
+}
+
 /* ===================================
    EMBER TOKEN SECTION - MOBILE REBUILD
    =================================== */
