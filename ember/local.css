@@ -41,8 +41,12 @@
 }
 
 /* ============================================================================
-   EMBER HERO SECTION - REBUILT FROM SCRATCH
+   EMBER HERO SECTION + SOCIAL SHARING - COMPLETE CSS
    Mobile-first responsive design
+   ============================================================================ */
+
+/* ============================================================================
+   HERO SECTION
    ============================================================================ */
 
 /* Hero Section Container */
@@ -65,10 +69,7 @@
     z-index: 2;
 }
 
-/* ============================================================================
-   FLOATING COINS BACKGROUND ANIMATION
-   ============================================================================ */
-
+/* Floating Coins Background Animation */
 .hero-floating-coins {
     position: absolute;
     top: 0;
@@ -150,10 +151,7 @@
     }
 }
 
-/* ============================================================================
-   HERO CONTENT
-   ============================================================================ */
-
+/* Hero Content */
 .ember-hero-content {
     text-align: center;
     position: relative;
@@ -223,10 +221,7 @@
     font-weight: 600;
 }
 
-/* ============================================================================
-   STATS CARDS
-   ============================================================================ */
-
+/* Stats Cards */
 .ember-hero-stats {
     display: grid;
     grid-template-columns: 1fr;
@@ -274,10 +269,7 @@
     font-weight: 500;
 }
 
-/* ============================================================================
-   CTA BUTTONS
-   ============================================================================ */
-
+/* CTA Buttons */
 .ember-hero-buttons {
     display: flex;
     flex-direction: column;
@@ -338,10 +330,126 @@
 }
 
 /* ============================================================================
+   SOCIAL SHARING SECTION
+   ============================================================================ */
+
+.social-sharing-section-compact {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 60px 20px;
+    border-top: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.social-sharing-content-compact {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.social-sharing-header-compact {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+}
+
+.share-icon-compact {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+    flex-shrink: 0;
+}
+
+.share-text-compact h3 {
+    font-size: 1.5rem;
+    color: #f0a500;
+    margin: 0 0 8px;
+    font-weight: 700;
+}
+
+.share-text-compact p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.social-sharing-buttons-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+.social-share-button-compact {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid;
+    flex: 1 1 auto;
+    min-width: 150px;
+    justify-content: center;
+}
+
+.social-share-button-compact svg {
+    flex-shrink: 0;
+}
+
+.twitter-share-compact {
+    background: transparent;
+    color: #1DA1F2;
+    border-color: #1DA1F2;
+}
+
+.twitter-share-compact:hover {
+    background: #1DA1F2;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(29, 161, 242, 0.4);
+}
+
+.facebook-share-compact {
+    background: transparent;
+    color: #1877F2;
+    border-color: #1877F2;
+}
+
+.facebook-share-compact:hover {
+    background: #1877F2;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(24, 119, 242, 0.4);
+}
+
+.telegram-share-compact {
+    background: transparent;
+    color: #0088cc;
+    border-color: #0088cc;
+}
+
+.telegram-share-compact:hover {
+    background: #0088cc;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4);
+}
+
+/* ============================================================================
    TABLET BREAKPOINT (768px+)
    ============================================================================ */
 
 @media (min-width: 768px) {
+    /* Hero adjustments */
     .ember-hero {
         padding: 140px 40px 100px;
     }
@@ -406,6 +514,34 @@
         width: 80px;
         height: 80px;
     }
+    
+    /* Social sharing adjustments */
+    .social-sharing-section-compact {
+        padding: 80px 40px;
+    }
+    
+    .social-sharing-content-compact {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .social-sharing-header-compact {
+        flex: 1;
+    }
+    
+    .social-sharing-buttons-compact {
+        flex: 1;
+        justify-content: flex-end;
+    }
+    
+    .share-text-compact h3 {
+        font-size: 1.8rem;
+    }
+    
+    .share-text-compact p {
+        font-size: 1.1rem;
+    }
 }
 
 /* ============================================================================
@@ -413,6 +549,7 @@
    ============================================================================ */
 
 @media (min-width: 1024px) {
+    /* Hero adjustments */
     .ember-hero {
         padding: 160px 60px 120px;
     }
@@ -455,6 +592,20 @@
     .hero-coin {
         width: 100px;
         height: 100px;
+    }
+    
+    /* Social sharing adjustments */
+    .social-sharing-section-compact {
+        padding: 100px 60px;
+    }
+    
+    .share-icon-compact {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .share-text-compact h3 {
+        font-size: 2rem;
     }
 }
 
