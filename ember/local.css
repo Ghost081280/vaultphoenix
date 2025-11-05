@@ -1,61 +1,64 @@
 /* ===================================
-   VAULT PHOENIX - EMBER PAGE LOCAL CSS
-   MATCHING MAIN.HTML STYLES + GOLD/ORANGE BRANDING
-   Complete redesign for consistency
+   VAULT PHOENIX - EMBER PAGE LOCAL CSS (PART 1)
+   Hero Section → Tokenomics
+   ~1200 lines of ember-specific styles
+   Matches main.html design with gold/orange ember branding
+   NO shared component duplication (nav/footer/chatbot in global.css)
    =================================== */
 
 /* ===================================
-   RESET & BASE STYLES
+   EMBER PAGE BASE & VARIABLES
    =================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* ===================================
-   SMOOTH PAGE LOAD - NO FLASH
-   =================================== */
-body.ember-page {
-    opacity: 0;
-    animation: fadeInBodySmooth 0.4s ease-in forwards;
-    background: var(--ember-gradient-background);
-    min-height: 100vh;
-}
-
-@keyframes fadeInBodySmooth {
-    to {
-        opacity: 1;
-    }
-}
-
-/* ===================================
-   EMBER HERO SECTION - REDESIGNED WITH BIG COIN CENTER
-   Matching main.html hero structure
-   =================================== */
-.ember-hero-redesigned {
-    min-height: 100vh;
+.ember-page {
     background: linear-gradient(135deg, 
-        rgba(13, 12, 12, 0.95) 0%, 
-        rgba(26, 15, 10, 0.9) 25%,
-        rgba(45, 24, 16, 0.85) 75%,
-        rgba(69, 26, 3, 0.8) 100%);
-    padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem;
+        #0f0f0f 0%, 
+        #1a0f0a 25%, 
+        #2d1810 50%, 
+        #451a03 75%, 
+        #0f0f0f 100%);
+    min-height: 100vh;
+}
+
+/* Ember-specific color variables */
+:root {
+    --ember-gold: #f0a500;
+    --ember-orange: #fb923c;
+    --ember-red: #d73327;
+    --ember-dark-brown: #1a0f0a;
+    --ember-brown: #2d1810;
+    --ember-deep: #451a03;
+}
+
+/* ===================================
+   EMBER HERO SECTION
+   Matches main.html hero structure with gold/orange branding
+   =================================== */
+.ember-hero {
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 4rem;
     position: relative;
     overflow: hidden;
+    background: linear-gradient(135deg, 
+        rgba(13, 12, 12, 0.95) 0%, 
+        rgba(26, 15, 10, 0.9) 25%,
+        rgba(45, 24, 16, 0.85) 50%,
+        rgba(69, 26, 3, 0.8) 75%,
+        rgba(13, 12, 12, 0.95) 100%);
 }
 
-.hero-background-effects {
+/* Hero Background Effects */
+.ember-hero-background {
     position: absolute;
     inset: 0;
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
 }
 
-.hero-glow-orb {
+.hero-glow {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
@@ -66,7 +69,7 @@ body.ember-page {
 .hero-glow-1 {
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(240, 165, 0, 0.4) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.5) 0%, transparent 70%);
     top: 10%;
     left: 5%;
     animation-delay: 0s;
@@ -75,7 +78,7 @@ body.ember-page {
 .hero-glow-2 {
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(215, 51, 39, 0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(215, 51, 39, 0.4) 0%, transparent 70%);
     bottom: 10%;
     right: 5%;
     animation-delay: 4s;
@@ -87,8 +90,8 @@ body.ember-page {
         transform: scale(1);
     }
     50% {
-        opacity: 0.5;
-        transform: scale(1.1);
+        opacity: 0.6;
+        transform: scale(1.15);
     }
 }
 
@@ -113,7 +116,8 @@ body.ember-page {
     }
 }
 
-.hero-container {
+/* Hero Content Container */
+.ember-hero-content {
     max-width: 1400px;
     width: 100%;
     margin: 0 auto;
@@ -122,8 +126,8 @@ body.ember-page {
     z-index: 10;
 }
 
-/* Hero Badge - Matching main.html */
-.hero-badge-enhanced {
+/* Hero Badge */
+.ember-hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.65rem;
@@ -140,7 +144,7 @@ body.ember-page {
         box-shadow: 0 0 20px rgba(240, 165, 0, 0.3);
     }
     50% {
-        box-shadow: 0 0 40px rgba(240, 165, 0, 0.5);
+        box-shadow: 0 0 40px rgba(240, 165, 0, 0.6);
     }
 }
 
@@ -150,15 +154,15 @@ body.ember-page {
     object-fit: contain;
 }
 
-.hero-badge-enhanced span {
-    color: #f0a500;
+.ember-hero-badge span {
+    color: var(--ember-gold);
     font-weight: 700;
     font-size: 0.95rem;
     letter-spacing: 0.3px;
 }
 
-/* Hero Title - Matching main.html */
-.hero-title-enhanced {
+/* Hero Title */
+.ember-hero-title {
     font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: 900;
     margin-bottom: 1.5rem;
@@ -166,15 +170,16 @@ body.ember-page {
     color: white;
 }
 
-.golden-highlight {
+.ember-golden-text {
     background: linear-gradient(135deg, #f0a500 0%, #fb923c 50%, #d73327 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4));
 }
 
-/* Hero Subtitle - Matching main.html */
-.hero-subtitle-enhanced {
+/* Hero Subtitle */
+.ember-hero-subtitle {
     font-size: clamp(1.05rem, 2.2vw, 1.3rem);
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
@@ -182,7 +187,7 @@ body.ember-page {
     margin: 0 auto 2.5rem;
 }
 
-/* BIG EMBER COIN SHOWCASE - CENTER STAGE */
+/* Ember Coin Showcase - CENTER STAGE */
 .ember-coin-showcase {
     margin: 3rem auto;
     display: flex;
@@ -191,9 +196,13 @@ body.ember-page {
     position: relative;
 }
 
-.coin-glow-container {
+.coin-glow-wrapper {
     position: relative;
     display: inline-block;
+}
+
+.ember-coin-glow {
+    filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8)) drop-shadow(0 0 60px rgba(251, 146, 60, 0.6));
 }
 
 .ember-hero-coin {
@@ -220,27 +229,8 @@ body.ember-page {
     }
 }
 
-.coin-particles {
-    position: absolute;
-    inset: -50%;
-    background: radial-gradient(circle at center, rgba(240, 165, 0, 0.2) 0%, transparent 60%);
-    animation: particleExpand 4s ease-in-out infinite;
-    z-index: 1;
-}
-
-@keyframes particleExpand {
-    0%, 100% {
-        opacity: 0.3;
-        transform: scale(0.8);
-    }
-    50% {
-        opacity: 0.6;
-        transform: scale(1.2);
-    }
-}
-
-/* Hero Stats Grid - Matching main.html */
-.hero-stats-grid {
+/* Hero Stats Grid */
+.ember-stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.75rem;
@@ -248,7 +238,7 @@ body.ember-page {
     margin: 2.5rem auto;
 }
 
-.hero-stat-card {
+.ember-stat-card {
     background: linear-gradient(135deg, 
         rgba(240, 165, 0, 0.1) 0%, 
         rgba(215, 51, 39, 0.05) 100%);
@@ -261,23 +251,23 @@ body.ember-page {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.hero-stat-card:hover {
+.ember-stat-card:hover {
     transform: translateY(-5px);
     border-color: rgba(240, 165, 0, 0.6);
     box-shadow: 0 15px 40px rgba(240, 165, 0, 0.3);
 }
 
-.stat-icon {
+.stat-icon-wrapper {
     flex-shrink: 0;
 }
 
-.stat-icon img {
+.stat-icon-wrapper img {
     width: 52px;
     height: 52px;
     object-fit: contain;
 }
 
-.stat-content {
+.stat-info {
     text-align: left;
     flex: 1;
 }
@@ -286,7 +276,7 @@ body.ember-page {
     display: block;
     font-size: 1.8rem;
     font-weight: 900;
-    color: #f0a500;
+    color: var(--ember-gold);
     line-height: 1;
     margin-bottom: 0.35rem;
 }
@@ -300,8 +290,8 @@ body.ember-page {
     letter-spacing: 0.5px;
 }
 
-/* Hero CTA Buttons - Matching main.html */
-.hero-cta-row {
+/* Hero CTA Buttons */
+.ember-hero-cta {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
@@ -309,8 +299,8 @@ body.ember-page {
     margin: 2.5rem auto 2rem;
 }
 
-.hero-cta-primary,
-.hero-cta-secondary {
+.ember-cta-primary,
+.ember-cta-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -323,32 +313,32 @@ body.ember-page {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.hero-cta-primary {
+.ember-cta-primary {
     background: linear-gradient(135deg, #f0a500, #fb923c);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 10px 30px rgba(240, 165, 0, 0.4);
 }
 
-.hero-cta-primary:hover {
+.ember-cta-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(240, 165, 0, 0.5);
+    box-shadow: 0 15px 40px rgba(240, 165, 0, 0.6);
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-.hero-cta-primary img {
+.ember-cta-primary img {
     width: 24px;
     height: 24px;
     object-fit: contain;
 }
 
-.hero-cta-secondary {
+.ember-cta-secondary {
     background: transparent;
     color: white;
     border: 3px solid rgba(255, 255, 255, 0.8);
 }
 
-.hero-cta-secondary:hover {
+.ember-cta-secondary:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: white;
     transform: translateY(-3px);
@@ -359,12 +349,12 @@ body.ember-page {
     transition: transform 0.3s ease;
 }
 
-.hero-cta-secondary:hover .cta-arrow {
+.ember-cta-secondary:hover .cta-arrow {
     transform: translateX(5px);
 }
 
-/* Hero Trust Row - Matching main.html */
-.hero-trust-row {
+/* Hero Trust Row */
+.ember-trust-row {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -374,19 +364,19 @@ body.ember-page {
     border-top: 1px solid rgba(240, 165, 0, 0.2);
 }
 
-.trust-item {
+.trust-badge {
     display: flex;
     align-items: center;
     gap: 0.65rem;
 }
 
-.trust-item img {
+.trust-badge img {
     width: 32px;
     height: 32px;
     object-fit: contain;
 }
 
-.trust-item span {
+.trust-badge span {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.85);
     font-weight: 600;
@@ -399,9 +389,10 @@ body.ember-page {
 }
 
 /* ===================================
-   CREDENTIALS BAR - MATCHING MAIN.HTML
+   CREDENTIALS BAR
+   Matches main.html style
    =================================== */
-.credentials-bar {
+.ember-credentials-bar {
     padding: 2.5rem var(--container-padding);
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.9) 0%, 
@@ -441,7 +432,7 @@ body.ember-page {
 .credential-text strong {
     font-size: 1.05rem;
     font-weight: 800;
-    color: #f0a500;
+    color: var(--ember-gold);
 }
 
 .credential-text span {
@@ -457,9 +448,9 @@ body.ember-page {
 }
 
 /* ===================================
-   SECTION HEADERS - MATCHING MAIN.HTML
+   SECTION HEADERS (Ember-specific)
    =================================== */
-.section-header-enhanced {
+.ember-section-header {
     text-align: center;
     margin-bottom: 3rem;
 }
@@ -470,7 +461,7 @@ body.ember-page {
     background: rgba(240, 165, 0, 0.15);
     border: 1px solid rgba(240, 165, 0, 0.4);
     border-radius: var(--radius-full);
-    color: #f0a500;
+    color: var(--ember-gold);
     font-weight: 700;
     font-size: 0.85rem;
     text-transform: uppercase;
@@ -478,28 +469,15 @@ body.ember-page {
     margin-bottom: 1rem;
 }
 
-.main-section-title {
-    font-size: clamp(2rem, 4.5vw, 3.5rem);
-    font-weight: 900;
-    margin-bottom: 1rem;
-    color: white;
-    line-height: 1.2;
-}
-
-.main-section-subtitle {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 800px;
-    margin: 0 auto;
-}
-
 /* ===================================
-   WHAT IS $EMBER SECTION - MATCHING MAIN.HTML CARDS
+   WHAT IS $EMBER SECTION
    =================================== */
 .what-is-ember-section {
     padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, 
+        #0f0f0f 0%, 
+        #1a0f0a 50%, 
+        #0f0f0f 100%);
 }
 
 .ember-intro-grid {
@@ -543,7 +521,7 @@ body.ember-page {
 .ember-usecases-card h3 {
     font-size: 1.75rem;
     font-weight: 800;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 1.25rem;
 }
 
@@ -594,7 +572,7 @@ body.ember-page {
     display: block;
     font-size: 1.05rem;
     font-weight: 700;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 0.35rem;
 }
 
@@ -676,7 +654,7 @@ body.ember-page {
     display: block;
     font-size: 1.15rem;
     font-weight: 800;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 0.5rem;
 }
 
@@ -688,7 +666,7 @@ body.ember-page {
 }
 
 /* ===================================
-   HOW IT WORKS - MATCHING MAIN.HTML STEPS
+   HOW IT WORKS SECTION
    =================================== */
 .how-it-works-ember {
     padding: var(--section-padding) var(--container-padding);
@@ -697,7 +675,7 @@ body.ember-page {
         rgba(26, 15, 10, 0.9) 100%);
 }
 
-.steps-grid {
+.ember-steps-grid {
     display: grid;
     grid-template-columns: 1fr auto 1fr auto 1fr;
     gap: 1.5rem;
@@ -706,7 +684,7 @@ body.ember-page {
     align-items: stretch;
 }
 
-.step-card {
+.ember-step-card {
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.9) 0%, 
         rgba(45, 24, 16, 0.85) 100%);
@@ -723,7 +701,7 @@ body.ember-page {
     align-items: center;
 }
 
-.step-card:hover {
+.ember-step-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 50px rgba(240, 165, 0, 0.3);
     border-color: rgba(240, 165, 0, 0.6);
@@ -759,14 +737,14 @@ body.ember-page {
     border-radius: var(--radius-lg);
 }
 
-.step-card h3 {
+.ember-step-card h3 {
     font-size: 1.25rem;
     font-weight: 700;
     color: white;
     margin-bottom: 0.75rem;
 }
 
-.step-card p {
+.ember-step-card p {
     font-size: 0.95rem;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
@@ -774,7 +752,7 @@ body.ember-page {
 
 .step-arrow {
     font-size: 2.5rem;
-    color: #f0a500;
+    color: var(--ember-gold);
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -802,7 +780,7 @@ body.ember-page {
 .steps-cta h3 {
     font-size: 1.75rem;
     font-weight: 800;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 1rem;
 }
 
@@ -813,321 +791,7 @@ body.ember-page {
     margin-bottom: 1.5rem;
 }
 
-/* ===================================
-   STAKEHOLDER BENEFITS - MATCHING MAIN.HTML CTA GRID
-   =================================== */
-.stakeholder-benefits-section {
-    padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
-}
-
-.cta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    max-width: 1400px;
-    margin: 0 auto 2rem;
-}
-
-.cta-card {
-    background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.9) 0%, 
-        rgba(45, 24, 16, 0.85) 100%);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: 2rem 1.75rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.3s ease;
-}
-
-.cta-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(240, 165, 0, 0.2);
-}
-
-.business-card {
-    border-color: rgba(215, 51, 39, 0.5);
-}
-
-.developer-card {
-    border-color: rgba(139, 92, 246, 0.5);
-    background: linear-gradient(135deg, 
-        rgba(26, 15, 30, 0.9) 0%, 
-        rgba(45, 24, 46, 0.85) 100%);
-}
-
-.cta-card-header {
-    margin-bottom: 1.25rem;
-}
-
-.solution-category-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.5rem;
-}
-
-.cta-card h3 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 1rem;
-    line-height: 1.3;
-}
-
-.cta-icon {
-    max-width: 80px;
-    margin: 0 auto 1.25rem;
-}
-
-.cta-icon img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-}
-
-/* Hook Components - Matching main.html */
-.hook-compelling-copy {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 1.25rem;
-}
-
-.hook-benefits-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-    margin: 1.25rem 0;
-}
-
-.hook-benefit-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    background: rgba(15, 15, 15, 0.4);
-    border-radius: var(--radius-md);
-    transition: all 0.3s ease;
-    text-align: left;
-}
-
-.hook-benefit-item:hover {
-    background: rgba(240, 165, 0, 0.1);
-    transform: translateX(5px);
-}
-
-.developer-card .hook-benefit-item:hover {
-    background: rgba(139, 92, 246, 0.1);
-}
-
-.hook-check {
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    background: linear-gradient(135deg, #f0a500, #fb923c);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: white;
-}
-
-.developer-card .hook-check {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-}
-
-.hook-benefit-item strong {
-    color: #f0a500;
-    font-size: 0.95rem;
-}
-
-.hook-benefit-item div {
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-.hook-use-cases {
-    margin: 1.25rem 0;
-    padding: 1rem;
-    background: rgba(240, 165, 0, 0.05);
-    border: 1px solid rgba(240, 165, 0, 0.2);
-    border-radius: var(--radius-lg);
-}
-
-.developer-card .hook-use-cases {
-    background: rgba(139, 92, 246, 0.05);
-    border-color: rgba(139, 92, 246, 0.2);
-}
-
-.hook-use-case-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-align: center;
-}
-
-.hook-use-case-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-}
-
-.hook-tag {
-    display: inline-block;
-    padding: 6px 12px;
-    background: rgba(240, 165, 0, 0.2);
-    border: 1px solid rgba(240, 165, 0, 0.4);
-    border-radius: var(--radius-full);
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
-    white-space: nowrap;
-}
-
-.developer-card .hook-tag {
-    background: rgba(139, 92, 246, 0.2);
-    border-color: rgba(139, 92, 246, 0.4);
-}
-
-/* Buttons - Matching main.html */
-.btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.65rem;
-    background: linear-gradient(135deg, #f0a500, #fb923c);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.95rem;
-    margin: 1rem auto 0.5rem;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 6px 20px rgba(240, 165, 0, 0.3);
-}
-
-.developer-card .btn-primary {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(240, 165, 0, 0.4);
-}
-
-.developer-card .btn-primary:hover {
-    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
-}
-
-.btn-icon {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-}
-
-.secondary-link {
-    color: #f0a500;
-    text-decoration: none;
-    font-size: 0.9rem;
-    margin-top: auto;
-    padding-top: 0.75rem;
-    display: inline-block;
-    transition: all 0.3s ease;
-}
-
-.secondary-link:hover {
-    color: #fb923c;
-    transform: translateX(3px);
-}
-
-/* Full Width Stakeholder Card */
-.stakeholder-fullwidth-card {
-    grid-column: 1 / -1;
-    background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.9) 0%, 
-        rgba(45, 24, 16, 0.85) 100%);
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: 2.5rem;
-    transition: all 0.3s ease;
-}
-
-.stakeholder-fullwidth-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(240, 165, 0, 0.2);
-    border-color: rgba(240, 165, 0, 0.5);
-}
-
-.fullwidth-card-inner {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 2rem;
-    align-items: center;
-}
-
-.fullwidth-icon {
-    flex-shrink: 0;
-}
-
-.fullwidth-icon img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-}
-
-.fullwidth-content {
-    flex: 1;
-}
-
-.fullwidth-content h3 {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 0.75rem;
-}
-
-.fullwidth-content p {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 1rem;
-}
-
-.fullwidth-benefits {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.benefit-mini {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.benefit-mini strong {
-    color: #f0a500;
-    font-weight: 700;
-}
-
-.fullwidth-cta {
-    flex-shrink: 0;
-}
-
-.btn-style-match {
+.ember-btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1144,23 +808,26 @@ body.ember-page {
     box-shadow: 0 8px 25px rgba(240, 165, 0, 0.3);
 }
 
-.btn-style-match:hover {
+.ember-btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 35px rgba(240, 165, 0, 0.4);
 }
 
-.btn-style-match img {
+.ember-btn-primary img {
     width: 24px;
     height: 24px;
     object-fit: contain;
-}/* ===================================
-   TOKENOMICS SECTION - MATCHING MAIN.HTML PRICING STYLE
+}
+
+/* ===================================
+   TOKENOMICS SECTION
    =================================== */
-.tokenomics-section-redesigned {
+.tokenomics-section {
     padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, 
-        rgba(13, 12, 12, 0.95) 0%, 
-        rgba(26, 15, 10, 0.9) 100%);
+        #0f0f0f 0%, 
+        #1a0f0a 50%, 
+        #0f0f0f 100%);
 }
 
 /* Token Overview Stats */
@@ -1202,7 +869,7 @@ body.ember-page {
 .stat-number-large {
     font-size: 2.2rem;
     font-weight: 900;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 0.5rem;
     line-height: 1;
 }
@@ -1227,18 +894,9 @@ body.ember-page {
 .subsection-title {
     font-size: 2rem;
     font-weight: 800;
-    color: #f0a500;
+    color: var(--ember-gold);
     text-align: center;
     margin-bottom: 1.5rem;
-}
-
-.subsection-description {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 2.5rem;
 }
 
 .distribution-grid {
@@ -1327,7 +985,7 @@ body.ember-page {
 .legend-percentage {
     font-size: 1.5rem;
     font-weight: 900;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 0.25rem;
 }
 
@@ -1343,140 +1001,123 @@ body.ember-page {
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* Vesting Schedule */
-.vesting-schedule-section {
-    margin-bottom: 4rem;
+/* ===================================
+   RESPONSIVE DESIGN - Part 1
+   =================================== */
+
+@media (max-width: 1024px) {
+    .ember-intro-grid,
+    .distribution-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .ember-stats-grid,
+    .token-overview-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.vesting-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+@media (max-width: 768px) {
+    .ember-hero {
+        padding: calc(var(--navbar-height) + 1.5rem) 1rem 2.5rem;
+    }
+    
+    .ember-hero-coin {
+        width: clamp(160px, 35vw, 240px);
+        height: clamp(160px, 35vw, 240px);
+    }
+    
+    .ember-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    
+    .ember-stat-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .stat-info {
+        text-align: center;
+    }
+    
+    .ember-trust-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .trust-divider {
+        display: none;
+    }
+    
+    .credentials-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .credential-divider {
+        display: none;
+    }
+    
+    .ember-steps-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .step-arrow {
+        display: none;
+    }
+    
+    .ember-step-card {
+        min-height: auto;
+    }
+    
+    .token-overview-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .pie-chart-container {
+        width: 260px;
+        height: 260px;
+    }
 }
 
-.vesting-card {
-    background: linear-gradient(135deg, 
-        rgba(240, 165, 0, 0.1) 0%, 
-        rgba(215, 51, 39, 0.05) 100%);
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-xl);
-    padding: 2rem;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.vesting-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(240, 165, 0, 0.6);
-    box-shadow: 0 15px 40px rgba(240, 165, 0, 0.2);
-}
-
-.vesting-icon {
-    margin-bottom: 1.25rem;
-}
-
-.vesting-icon img {
-    width: 72px;
-    height: 72px;
-    object-fit: contain;
-}
-
-.vesting-card h4 {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 1rem;
-}
-
-.vesting-timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-}
-
-.vesting-phase {
-    padding: 0.75rem;
-    background: rgba(240, 165, 0, 0.1);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-md);
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.vesting-phase strong {
-    color: #f0a500;
-    font-weight: 700;
-}
-
-.vesting-note {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.75);
-    font-style: italic;
-}
-
-/* Investor Incentives */
-.investor-incentives-section {
-    margin-bottom: 4rem;
-}
-
-.incentives-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.incentive-card {
-    background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.9) 0%, 
-        rgba(45, 24, 16, 0.85) 100%);
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-xl);
-    padding: 2rem;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.incentive-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(240, 165, 0, 0.6);
-    box-shadow: 0 20px 50px rgba(240, 165, 0, 0.3);
-}
-
-.incentive-icon {
-    margin-bottom: 1.25rem;
-}
-
-.incentive-icon img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-}
-
-.incentive-card h4 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #f0a500;
-    margin-bottom: 1rem;
-}
-
-.incentive-card p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
+@media (max-width: 480px) {
+    .ember-hero-coin {
+        width: clamp(140px, 40vw, 200px);
+        height: clamp(140px, 40vw, 200px);
+    }
+    
+    .ember-hero-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .credentials-content {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
 }
 
 /* ===================================
-   PRESALE DETAILS - MATCHING MAIN.HTML PRICING
+   END OF PART 1
+   Next: Presale Details → Final CTA in Part 2
+   =================================== *//* ===================================
+   VAULT PHOENIX - EMBER PAGE LOCAL CSS (PART 2)
+   Presale Details → Final CTA
+   ~1200 lines completing ember-specific styles
+   =================================== */
+
+/* ===================================
+   PRESALE DETAILS SECTION
    =================================== */
 .presale-details-section {
     padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, 
+        rgba(13, 12, 12, 0.95) 0%, 
+        rgba(26, 15, 10, 0.9) 100%);
 }
 
 .presale-grid {
@@ -1495,64 +1136,7 @@ body.ember-page {
     gap: 2rem;
 }
 
-/* Countdown Card */
-.presale-countdown-card {
-    background: linear-gradient(135deg, 
-        rgba(240, 165, 0, 0.15) 0%, 
-        rgba(215, 51, 39, 0.1) 100%);
-    border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: var(--radius-xl);
-    padding: 2rem;
-    text-align: center;
-}
-
-.presale-countdown-card h3 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 1.5rem;
-}
-
-.countdown-display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-}
-
-.countdown-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.countdown-number {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #f0a500;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    min-width: 80px;
-}
-
-.countdown-label {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.countdown-separator {
-    font-size: 2rem;
-    color: rgba(240, 165, 0, 0.5);
-    font-weight: 700;
-}
-
-/* Progress Card */
+/* Presale Progress Card */
 .presale-progress-card {
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.9) 0%, 
@@ -1602,7 +1186,7 @@ body.ember-page {
     display: block;
     font-size: 1.1rem;
     font-weight: 800;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 0.25rem;
 }
 
@@ -1611,86 +1195,7 @@ body.ember-page {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* Presale Tiers */
-.presale-tiers-card {
-    background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.9) 0%, 
-        rgba(45, 24, 16, 0.85) 100%);
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-xl);
-    padding: 2rem;
-}
-
-.presale-tiers-card h4 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.tier-item {
-    padding: 1.25rem;
-    background: rgba(240, 165, 0, 0.05);
-    border: 2px solid rgba(240, 165, 0, 0.2);
-    border-radius: var(--radius-lg);
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
-}
-
-.tier-item:last-child {
-    margin-bottom: 0;
-}
-
-.tier-item:hover {
-    background: rgba(240, 165, 0, 0.1);
-    border-color: rgba(240, 165, 0, 0.4);
-    transform: translateX(5px);
-}
-
-.tier-item.active-tier {
-    background: rgba(240, 165, 0, 0.2);
-    border-color: rgba(240, 165, 0, 0.6);
-    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.3);
-}
-
-.tier-badge {
-    display: inline-block;
-    padding: 0.4rem 1rem;
-    background: linear-gradient(135deg, #f0a500, #fb923c);
-    color: white;
-    border-radius: var(--radius-full);
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.tier-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.tier-price {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #f0a500;
-}
-
-.tier-bonus {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: white;
-}
-
-.tier-allocation {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* Presale Benefits */
+/* Presale Benefits Card */
 .presale-benefits-card {
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.9) 0%, 
@@ -1761,7 +1266,7 @@ body.ember-page {
 .calculator-card h3 {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 0.75rem;
     text-align: center;
 }
@@ -1793,8 +1298,7 @@ body.ember-page {
     color: rgba(255, 255, 255, 0.9);
 }
 
-.form-group input,
-.form-group select {
+.form-group input {
     width: 100%;
     padding: 0.85rem;
     background: rgba(0, 0, 0, 0.3);
@@ -1805,8 +1309,7 @@ body.ember-page {
     transition: all 0.3s ease;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.form-group input:focus {
     outline: none;
     border-color: rgba(240, 165, 0, 0.6);
     box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.1);
@@ -1875,16 +1378,6 @@ body.ember-page {
     color: white;
 }
 
-.highlight-row {
-    background: rgba(240, 165, 0, 0.1);
-    padding: 0.5rem;
-    border-radius: var(--radius-sm);
-}
-
-.highlight-row .result-value {
-    color: #f0a500;
-}
-
 .total-row {
     padding-top: 0.75rem;
     margin-top: 0.5rem;
@@ -1900,41 +1393,10 @@ body.ember-page {
 .total-row .result-value {
     font-size: 1.5rem;
     font-weight: 900;
-    color: #f0a500;
+    color: var(--ember-gold);
 }
 
-/* Calculator Note */
-.calculator-note {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 1rem;
-    background: rgba(240, 165, 0, 0.1);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-md);
-    margin-top: 1.25rem;
-}
-
-.calculator-note img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.calculator-note p {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-}
-
-.calculator-note strong {
-    color: #f0a500;
-    font-weight: 700;
-}
-
-/* Payment Methods */
+/* Payment Methods Card */
 .payment-methods-card {
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.9) 0%, 
@@ -1988,62 +1450,6 @@ body.ember-page {
     font-size: 0.9rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
-}
-
-/* Wallet Setup Card */
-.wallet-setup-card {
-    background: linear-gradient(135deg, 
-        rgba(139, 92, 246, 0.15) 0%, 
-        rgba(124, 58, 237, 0.1) 100%);
-    border: 2px solid rgba(139, 92, 246, 0.4);
-    border-radius: var(--radius-xl);
-    padding: 2rem;
-    text-align: center;
-}
-
-.wallet-icon {
-    margin-bottom: 1.25rem;
-}
-
-.wallet-icon img {
-    width: 72px;
-    height: 72px;
-    object-fit: contain;
-}
-
-.wallet-setup-card h4 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #8b5cf6;
-    margin-bottom: 1rem;
-}
-
-.wallet-setup-card p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 1.5rem;
-}
-
-.wallet-setup-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.65rem;
-    padding: 0.85rem 1.75rem;
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-lg);
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
-}
-
-.wallet-setup-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
 }
 
 /* Presale CTA Card */
@@ -2103,49 +1509,15 @@ body.ember-page {
     object-fit: contain;
 }
 
-/* Trust Signals */
-.presale-trust-signals {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 3rem auto 0;
-    padding-top: 3rem;
-    border-top: 1px solid rgba(240, 165, 0, 0.2);
-}
-
-.trust-signal-item {
-    text-align: center;
-}
-
-.trust-signal-item img {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
-    margin-bottom: 1rem;
-}
-
-.trust-signal-item strong {
-    display: block;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #f0a500;
-    margin-bottom: 0.5rem;
-}
-
-.trust-signal-item p {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
 /* ===================================
-   ROADMAP - MATCHING MAIN.HTML STYLE
+   ROADMAP SECTION
    =================================== */
 .roadmap-section {
     padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, 
-        rgba(13, 12, 12, 0.95) 0%, 
-        rgba(26, 15, 10, 0.9) 100%);
+        #0f0f0f 0%, 
+        #1a0f0a 50%, 
+        #0f0f0f 100%);
 }
 
 .roadmap-timeline {
@@ -2239,7 +1611,7 @@ body.ember-page {
 
 .active-status {
     background: rgba(240, 165, 0, 0.2);
-    color: #f0a500;
+    color: var(--ember-gold);
     border: 1px solid rgba(240, 165, 0, 0.5);
 }
 
@@ -2276,45 +1648,18 @@ body.ember-page {
     content: '→';
     position: absolute;
     left: 0;
-    color: #f0a500;
+    color: var(--ember-gold);
     font-weight: 700;
 }
 
-/* Roadmap CTA */
-.roadmap-cta {
-    text-align: center;
-    padding: 2.5rem;
-    background: rgba(240, 165, 0, 0.1);
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-xl);
-    margin-top: 3rem;
-}
-
-.roadmap-cta img {
-    width: 140px;
-    height: 140px;
-    object-fit: contain;
-    margin-bottom: 1.5rem;
-}
-
-.roadmap-cta h3 {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #f0a500;
-    margin-bottom: 1rem;
-}
-
-.roadmap-cta p {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 1.5rem;
-}/* ===================================
-   TEAM SECTION - MATCHING MAIN.HTML
+/* ===================================
+   TEAM SECTION
    =================================== */
 .team-section {
     padding: var(--section-padding) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, 
+        rgba(13, 12, 12, 0.95) 0%, 
+        rgba(26, 15, 10, 0.9) 100%);
 }
 
 .section-icon-xlarge {
@@ -2395,7 +1740,7 @@ body.ember-page {
 
 .member-role {
     font-size: 1.05rem;
-    color: #f0a500;
+    color: var(--ember-gold);
     font-weight: 600;
     margin-bottom: 1rem;
 }
@@ -2423,7 +1768,7 @@ body.ember-page {
     height: 40px;
     background: rgba(240, 165, 0, 0.2);
     border-radius: 50%;
-    color: #f0a500;
+    color: var(--ember-gold);
     text-decoration: none;
     transition: all 0.3s ease;
     border: 1px solid rgba(240, 165, 0, 0.3);
@@ -2454,7 +1799,7 @@ body.ember-page {
 .advisors-section h3 {
     font-size: 1.75rem;
     font-weight: 800;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 1.5rem;
 }
 
@@ -2464,13 +1809,14 @@ body.ember-page {
 }
 
 /* ===================================
-   LEGAL & COMPLIANCE - MATCHING MAIN.HTML
+   LEGAL & COMPLIANCE
    =================================== */
 .legal-compliance-section {
     padding: var(--section-padding) var(--container-padding);
     background: linear-gradient(135deg, 
-        rgba(13, 12, 12, 0.95) 0%, 
-        rgba(26, 15, 10, 0.9) 100%);
+        #0f0f0f 0%, 
+        #1a0f0a 50%, 
+        #0f0f0f 100%);
 }
 
 .compliance-grid {
@@ -2512,7 +1858,7 @@ body.ember-page {
 .compliance-card h3 {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 1.25rem;
     text-align: center;
 }
@@ -2543,7 +1889,7 @@ body.ember-page {
 
 .compliance-card li span {
     flex-shrink: 0;
-    color: #f0a500;
+    color: var(--ember-gold);
     font-weight: 700;
     font-size: 1.1rem;
 }
@@ -2565,7 +1911,7 @@ body.ember-page {
     gap: 1rem;
     font-size: 1.5rem;
     font-weight: 800;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 1.5rem;
     text-align: center;
 }
@@ -2591,21 +1937,23 @@ body.ember-page {
 }
 
 .disclaimer-content strong {
-    color: #f0a500;
+    color: var(--ember-gold);
     font-weight: 700;
 }
 
 /* ===================================
-   SOCIAL SHARING - MATCHING MAIN.HTML COMPACT STYLE
+   SOCIAL SHARING
    =================================== */
-.social-sharing-section-compact {
+.social-sharing-section {
     padding: 4rem var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, 
+        rgba(13, 12, 12, 0.95) 0%, 
+        rgba(26, 15, 10, 0.9) 100%);
     position: relative;
     overflow: hidden;
 }
 
-.social-sharing-section-compact::before {
+.social-sharing-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -2618,7 +1966,7 @@ body.ember-page {
     z-index: 0;
 }
 
-.social-sharing-content-compact {
+.social-sharing-content {
     max-width: 900px;
     margin: 0 auto;
     background: rgba(240, 165, 0, 0.08);
@@ -2631,25 +1979,7 @@ body.ember-page {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-.social-sharing-content-compact::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, #f0a500, #fb923c, #d73327, transparent);
-    border-radius: 0 0 4px 4px;
-    animation: gradientSlide 3s ease-in-out infinite;
-}
-
-@keyframes gradientSlide {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-}
-
-.social-sharing-header-compact {
+.social-sharing-header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2658,7 +1988,7 @@ body.ember-page {
     flex-wrap: wrap;
 }
 
-.share-icon-compact {
+.share-icon {
     width: 72px;
     height: 72px;
     object-fit: contain;
@@ -2670,11 +2000,11 @@ body.ember-page {
     50% { transform: scale(1.1); }
 }
 
-.share-text-compact {
+.share-text {
     text-align: center;
 }
 
-.share-text-compact h3 {
+.share-text h3 {
     font-size: 1.75rem;
     font-weight: 900;
     margin-bottom: 0.75rem;
@@ -2685,20 +2015,20 @@ body.ember-page {
     letter-spacing: -0.02em;
 }
 
-.share-text-compact p {
+.share-text p {
     font-size: 1.05rem;
     color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
     line-height: 1.4;
 }
 
-.social-sharing-buttons-compact {
+.social-sharing-buttons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
 }
 
-.social-share-button-compact {
+.social-share-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2714,68 +2044,52 @@ body.ember-page {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-.social-share-button-compact::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.social-share-button-compact:hover::before {
-    opacity: 1;
-}
-
-.social-share-button-compact:hover {
+.social-share-button:hover {
     transform: translateY(-4px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
-.social-share-button-compact svg {
+.social-share-button svg {
     flex-shrink: 0;
     transition: transform 0.3s ease;
 }
 
-.social-share-button-compact:hover svg {
+.social-share-button:hover svg {
     transform: scale(1.1);
 }
 
-.twitter-share-compact {
+.twitter-share {
     background: linear-gradient(135deg, #f0a500, #fb923c);
     color: white;
     border: 1px solid rgba(240, 165, 0, 0.3);
 }
 
-.twitter-share-compact:hover {
+.twitter-share:hover {
     box-shadow: 0 15px 40px rgba(240, 165, 0, 0.5);
 }
 
-.facebook-share-compact {
+.facebook-share {
     background: linear-gradient(135deg, #fb923c, #d73327);
     color: white;
     border: 1px solid rgba(215, 51, 39, 0.3);
 }
 
-.facebook-share-compact:hover {
+.facebook-share:hover {
     box-shadow: 0 15px 40px rgba(215, 51, 39, 0.5);
 }
 
-.telegram-share-compact {
+.telegram-share {
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: white;
     border: 1px solid rgba(251, 146, 60, 0.3);
 }
 
-.telegram-share-compact:hover {
+.telegram-share:hover {
     box-shadow: 0 15px 40px rgba(251, 146, 60, 0.5);
 }
 
 /* ===================================
-   FINAL CTA - MATCHING MAIN.HTML
+   FINAL CTA
    =================================== */
 .final-cta-ember {
     padding: var(--section-padding) var(--container-padding);
@@ -2846,6 +2160,10 @@ body.ember-page {
     align-items: center;
 }
 
+.phoenix-cta-glow {
+    filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.9)) drop-shadow(0 0 80px rgba(251, 146, 60, 0.7));
+}
+
 .cta-phoenix-image {
     width: clamp(180px, 25vw, 280px);
     height: auto;
@@ -2859,44 +2177,6 @@ body.ember-page {
     }
     50% {
         transform: translateY(-20px) scale(1.05);
-    }
-}
-
-.cta-floating-coins {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-}
-
-.floating-coin-1,
-.floating-coin-2 {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    animation: floatCoin 8s ease-in-out infinite;
-}
-
-.floating-coin-1 {
-    top: 10%;
-    left: 15%;
-    animation-delay: 0s;
-}
-
-.floating-coin-2 {
-    top: 20%;
-    right: 15%;
-    animation-delay: 4s;
-}
-
-@keyframes floatCoin {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.6;
-    }
-    50% {
-        transform: translateY(-30px) rotate(180deg);
-        opacity: 0.8;
     }
 }
 
@@ -2933,7 +2213,7 @@ body.ember-page {
     display: block;
     font-size: 1.5rem;
     font-weight: 900;
-    color: #f0a500;
+    color: var(--ember-gold);
     margin-bottom: 0.25rem;
 }
 
@@ -3037,22 +2317,17 @@ body.ember-page {
 }
 
 /* ===================================
-   MOBILE RESPONSIVE - COMPREHENSIVE
+   RESPONSIVE DESIGN - Part 2
    =================================== */
 
 @media (max-width: 1024px) {
-    .ember-intro-grid,
-    .distribution-grid,
     .presale-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
     
-    .hero-stats-grid,
-    .token-overview-stats,
-    .vesting-grid,
-    .incentives-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .calculator-card {
+        position: static;
     }
     
     .compliance-grid {
@@ -3066,106 +2341,6 @@ body.ember-page {
 }
 
 @media (max-width: 768px) {
-    /* Hero Section Mobile */
-    .ember-hero-redesigned {
-        padding: calc(var(--navbar-height) + 1.5rem) 1rem 2.5rem;
-    }
-    
-    .ember-hero-coin {
-        width: clamp(160px, 35vw, 240px);
-        height: clamp(160px, 35vw, 240px);
-    }
-    
-    .hero-stats-grid {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-    }
-    
-    .hero-stat-card {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.75rem;
-    }
-    
-    .stat-content {
-        text-align: center;
-    }
-    
-    .hero-trust-row {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .trust-divider {
-        display: none;
-    }
-    
-    /* Credentials Bar Mobile */
-    .credentials-content {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-    
-    .credential-divider {
-        display: none;
-    }
-    
-    /* Steps Grid Mobile */
-    .steps-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .step-arrow {
-        display: none;
-    }
-    
-    .step-card {
-        min-height: auto;
-    }
-    
-    /* CTA Grid Mobile */
-    .cta-grid {
-        grid-template-columns: 1fr;
-        gap: 1.75rem;
-    }
-    
-    /* Tokenomics Mobile */
-    .token-overview-stats,
-    .vesting-grid,
-    .incentives-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .pie-chart-container {
-        width: 260px;
-        height: 260px;
-    }
-    
-    /* Presale Mobile */
-    .presale-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .calculator-card {
-        position: static;
-    }
-    
-    .countdown-display {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-    }
-    
-    .countdown-separator {
-        display: none;
-    }
-    
-    .presale-trust-signals {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-    
-    /* Roadmap Mobile */
     .phase-content {
         grid-template-columns: 1fr;
         gap: 1.25rem;
@@ -3177,21 +2352,19 @@ body.ember-page {
         justify-self: start;
     }
     
-    /* Social Sharing Mobile */
-    .social-sharing-content-compact {
+    .social-sharing-content {
         padding: 2rem 1.5rem;
     }
     
-    .social-sharing-header-compact {
+    .social-sharing-header {
         flex-direction: column;
         gap: 1rem;
     }
     
-    .social-sharing-buttons-compact {
+    .social-sharing-buttons {
         grid-template-columns: 1fr;
     }
     
-    /* Final CTA Mobile */
     .cta-stats-row {
         flex-direction: column;
         gap: 1.25rem;
@@ -3211,39 +2384,13 @@ body.ember-page {
         width: 100%;
         max-width: 100%;
     }
-}
-
-@media (max-width: 480px) {
-    /* Small Mobile Adjustments */
-    .ember-hero-coin {
-        width: clamp(140px, 40vw, 200px);
-        height: clamp(140px, 40vw, 200px);
-    }
-    
-    .hero-badge-enhanced {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
-    }
-    
-    .credentials-content {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-    }
     
     .payment-options {
         grid-template-columns: 1fr;
     }
-    
-    .countdown-number {
-        font-size: 2rem;
-        padding: 0.75rem 1rem;
-        min-width: 70px;
-    }
-    
-    .presale-trust-signals {
-        grid-template-columns: 1fr;
-    }
-    
+}
+
+@media (max-width: 480px) {
     .partners-logos-grid {
         gap: 1.5rem;
     }
@@ -3251,40 +2398,6 @@ body.ember-page {
     .partners-logos-grid img {
         height: 32px;
     }
-}
-
-/* ===================================
-   SCROLL ANIMATIONS - MATCHING MAIN.HTML
-   =================================== */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.scroll-reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.scroll-reveal.stagger-1 {
-    transition-delay: 0.1s;
-}
-
-.scroll-reveal.stagger-2 {
-    transition-delay: 0.2s;
-}
-
-.scroll-reveal.stagger-3 {
-    transition-delay: 0.3s;
-}
-
-.scroll-reveal.stagger-4 {
-    transition-delay: 0.4s;
-}
-
-.scroll-reveal.stagger-5 {
-    transition-delay: 0.5s;
 }
 
 /* ===================================
@@ -3297,94 +2410,10 @@ body.ember-page {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-    
-    .scroll-reveal {
-        transform: none;
-        opacity: 1;
-    }
-}
-
-@media (prefers-contrast: high) {
-    .hero-title-enhanced,
-    .main-section-title {
-        -webkit-text-fill-color: inherit;
-        background: none;
-        color: #ffffff;
-    }
-    
-    .golden-highlight {
-        -webkit-text-fill-color: inherit;
-        background: none;
-        color: #f0a500;
-    }
-}
-
-/* ===================================
-   SCROLLBAR STYLING
-   =================================== */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #0f0f0f;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #f0a500, #fb923c, #d73327);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #fb923c, #f0a500, #d73327);
-}
-
-/* ===================================
-   SELECTION STYLING
-   =================================== */
-::selection {
-    background: rgba(240, 165, 0, 0.3);
-    color: #ffffff;
-}
-
-::-moz-selection {
-    background: rgba(240, 165, 0, 0.3);
-    color: #ffffff;
-}
-
-/* ===================================
-   SMOOTH SCROLLING
-   =================================== */
-html {
-    scroll-behavior: smooth;
-}
-
-/* ===================================
-   PRINT STYLES
-   =================================== */
-@media print {
-    .navbar,
-    .mobile-menu-overlay,
-    .mobile-menu-panel,
-    .social-sharing-section-compact,
-    .final-cta-ember {
-        display: none;
-    }
-    
-    body {
-        background: white;
-        color: black;
-    }
-    
-    .hero-background-effects,
-    .cta-background-effects {
-        display: none;
     }
 }
 
 /* ===================================
    END OF EMBER/LOCAL.CSS
-   All styles matched to main.html with orange/gold branding
+   Complete ember-specific styles (Part 1 + Part 2 = ~2400 lines)
    =================================== */
