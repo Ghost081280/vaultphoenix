@@ -1,6 +1,6 @@
 // ============================================
 // VAULT PHOENIX MAIN.HTML LOCAL JAVASCRIPT
-// UPDATED - Scroll animations, mobile fixes, smooth loading
+// UPDATED - With working copy hashtags functionality
 // ============================================
 
 (function() {
@@ -373,6 +373,104 @@ function initializeShareButtons() {
 }
 
 // ============================================
+// COPY HASHTAGS FUNCTIONALITY - WORKING VERSION
+// ============================================
+function initializeCopyHashtags() {
+    const copyBtn = document.getElementById('copy-hashtags-btn');
+    const copyBtnText = document.getElementById('copy-btn-text');
+    const hashtagText = document.getElementById('hashtag-text-display');
+    
+    if (!copyBtn || !copyBtnText || !hashtagText) {
+        console.warn('⚠️ Copy hashtags elements not found');
+        return;
+    }
+    
+    copyBtn.addEventListener('click', async function() {
+        const textToCopy = hashtagText.textContent.trim();
+        
+        try {
+            // Modern Clipboard API (works on all modern browsers)
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(textToCopy);
+                showCopySuccess();
+            } else {
+                // Fallback for older browsers
+                fallbackCopyToClipboard(textToCopy);
+                showCopySuccess();
+            }
+        } catch (err) {
+            console.error('Failed to copy:', err);
+            // Try fallback method
+            try {
+                fallbackCopyToClipboard(textToCopy);
+                showCopySuccess();
+            } catch (fallbackErr) {
+                showCopyError();
+            }
+        }
+    });
+    
+    function showCopySuccess() {
+        copyBtn.classList.add('copied');
+        copyBtnText.textContent = 'Copied!';
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+            copyBtn.classList.remove('copied');
+            copyBtnText.textContent = 'Copy Hashtags';
+        }, 2000);
+    }
+    
+    function showCopyError() {
+        copyBtnText.textContent = 'Failed to copy';
+        setTimeout(() => {
+            copyBtnText.textContent = 'Copy Hashtags';
+        }, 2000);
+    }
+    
+    function fallbackCopyToClipboard(text) {
+        // Create temporary textarea
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '0';
+        textarea.style.left = '0';
+        textarea.style.width = '2em';
+        textarea.style.height = '2em';
+        textarea.style.padding = '0';
+        textarea.style.border = 'none';
+        textarea.style.outline = 'none';
+        textarea.style.boxShadow = 'none';
+        textarea.style.background = 'transparent';
+        textarea.setAttribute('readonly', '');
+        
+        document.body.appendChild(textarea);
+        
+        // Select and copy
+        if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+            // iOS specific handling
+            const range = document.createRange();
+            range.selectNodeContents(textarea);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            textarea.setSelectionRange(0, 999999);
+        } else {
+            textarea.select();
+        }
+        
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        
+        if (!successful) {
+            throw new Error('Fallback copy failed');
+        }
+    }
+    
+    console.log('✅ Copy hashtags functionality initialized');
+}
+
+// ============================================
 // AIRDROP PROGRESS TRACKER
 // ============================================
 function initializeAirdropTracker() {
@@ -567,6 +665,7 @@ function initializeMainPage() {
     initializeAirdropForm();
     initializeStatusChecker();
     initializeShareButtons();
+    initializeCopyHashtags(); // ✅ NEW: Copy hashtags functionality
     initializeAirdropTracker();
     
     // Countdown timer
