@@ -4486,9 +4486,11 @@ body {
 
 /* ===================================
    SUCCESS GUIDE - STANDALONE SECTION
+   ✅ FIXED: Reduced bottom padding for consistent spacing
    =================================== */
 .success-guide-section {
     padding: var(--section-padding) var(--container-padding);
+    padding-bottom: 3rem; /* ✅ REDUCED from var(--section-padding) */
     background: var(--ember-gradient-background);
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
@@ -4584,6 +4586,7 @@ body {
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
+    padding-bottom: 0; /* ✅ REMOVED: No extra bottom padding */
 }
 
 .success-primary-button {
@@ -4628,7 +4631,8 @@ body {
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.75);
     font-weight: 600;
-    margin: 0;
+    margin: 0; /* ✅ CONFIRMED: No extra bottom margin */
+    padding-bottom: 0; /* ✅ CONFIRMED: No extra bottom padding */
 }
 
 /* ===================================
@@ -4638,81 +4642,15 @@ body {
     .success-benefits-container {
         grid-template-columns: repeat(2, 1fr);
     }
-    
-    .journey-paths-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
 }
 
 /* ===================================
    RESPONSIVE - MOBILE
    =================================== */
 @media (max-width: 768px) {
-    .phoenix-separator-section {
-        padding: 3rem 1rem;
-    }
-    
-    .phoenix-separator-content {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .phoenix-separator-image {
-        max-width: 220px;
-    }
-    
-    .phoenix-separator-subtitle {
-        font-size: 0.95rem;
-    }
-    
-    .final-cta {
-        padding: 3rem 1rem;
-    }
-    
-    .final-cta-title {
-        font-size: 1.75rem;
-    }
-    
-    .journey-paths-container {
-        grid-template-columns: 1fr;
-        gap: 1.75rem;
-    }
-    
-    .journey-path-module {
-        padding: 1.5rem;
-    }
-    
-    .main-journey-icon-large {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .journey-path-title {
-        font-size: 1.4rem;
-    }
-    
-    .close-reason-item {
-        padding: 1rem;
-    }
-    
-    .urgency-block {
-        flex-direction: column;
-        text-align: center;
-        padding: 1.25rem;
-    }
-    
-    .urgency-icon img {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .urgency-text h4 {
-        font-size: 1.1rem;
-    }
-    
     .success-guide-section {
         padding: 3rem 1rem;
+        padding-bottom: 2rem; /* ✅ REDUCED: Even less on mobile */
     }
     
     .success-benefits-container {
@@ -4756,8 +4694,10 @@ body {
 
 /* ===================================
    RESPONSIVE - SMALL MOBILE
+   ✅ MERGED: Combined both 480px breakpoints
    =================================== */
 @media (max-width: 480px) {
+    /* Journey path styles (from original) */
     .journey-path-title {
         font-size: 1.25rem;
     }
@@ -4770,8 +4710,10 @@ body {
         font-size: 0.8rem;
     }
     
+    /* Success guide styles (merged) */
     .success-guide-section {
         padding: 2rem 1rem;
+        padding-bottom: 1.5rem; /* ✅ REDUCED: Minimal bottom padding on small screens */
     }
     
     .success-benefit-icon img {
