@@ -4270,7 +4270,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.75rem;
     align-items: stretch;
-    margin-bottom: 0;
+    margin-bottom: 3rem;  /* ✅ THIS IS CORRECT */
 }
 
 .journey-path-module {
