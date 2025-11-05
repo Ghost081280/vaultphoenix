@@ -397,8 +397,8 @@ body {
 }
 
 /* ===================================
-   HERO SECTION - COMPLETE MOBILE FIX
-   All elements properly sized and stacked
+   HERO SECTION - COMPLETE WITH ALL STYLES
+   Final version with buttons, tags, and centering
    =================================== */
 .main-hero {
     min-height: 100vh;
@@ -555,6 +555,19 @@ body {
     background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
 }
 
+.cta-card-header {
+    margin-bottom: 1rem;
+}
+
+.solution-category-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.4rem;
+}
+
 .cta-card h3 {
     font-size: 1.35rem;
     font-weight: 800;
@@ -566,6 +579,166 @@ body {
 .cta-icon { 
     max-width: 70px; 
     margin: 0 auto 1rem; 
+}
+
+.hook-compelling-copy {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+}
+
+.hook-benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.hook-benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.6rem;
+    background: rgba(15, 15, 15, 0.4);
+    border-radius: var(--radius-md);
+    transition: var(--transition-base);
+    text-align: left;
+}
+
+.hook-benefit-item:hover {
+    background: rgba(215, 51, 39, 0.1);
+    transform: translateX(3px);
+}
+
+.developer-card .hook-benefit-item:hover {
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.hook-check {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    background: var(--ember-gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+}
+
+.developer-card .hook-check {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.hook-benefit-item strong {
+    color: var(--ember-gold);
+    font-size: 0.9rem;
+}
+
+.hook-benefit-item div {
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.hook-use-cases {
+    margin: 1rem 0;
+    padding: 0.75rem;
+    background: rgba(215, 51, 39, 0.05);
+    border: 1px solid rgba(215, 51, 39, 0.2);
+    border-radius: var(--radius-lg);
+}
+
+.developer-card .hook-use-cases {
+    background: rgba(139, 92, 246, 0.05);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+.hook-use-case-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.hook-use-case-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+}
+
+.hook-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background: rgba(215, 51, 39, 0.2);
+    border: 1px solid rgba(215, 51, 39, 0.4);
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+}
+
+.developer-card .hook-tag {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.btn-primary {
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 0.6rem;
+    background: linear-gradient(135deg, #d73327, #c62828); 
+    color: white;
+    padding: 0.65rem 1.35rem; 
+    border-radius: 9999px; 
+    text-decoration: none;
+    font-weight: 700; 
+    font-size: 0.95rem;
+    margin: 0.75rem auto 0.4rem;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(215, 51, 39, 0.3);
+}
+
+.developer-card .btn-primary {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 24px rgba(215,51,39,0.4);
+}
+
+.developer-card .btn-primary:hover {
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
+.secondary-link {
+    color: #f0a500; 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    margin-top: auto;
+    padding-top: 0.75rem;
+    display: inline-block;
+}
+
+.secondary-link:hover {
+    color: #d73327;
 }
 
 /* ===================================
@@ -688,6 +861,11 @@ body {
         grid-template-columns: 1fr !important;
         gap: 1.75rem;
         margin: 2rem auto 0;
+    }
+    
+    .btn-primary {
+        width: 100%;
+        max-width: 100%;
     }
     
     /* HERO FEATURES 2x2 GRID ON MOBILE */
