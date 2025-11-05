@@ -4111,7 +4111,9 @@ body {
     }
 }
 
-/* Phoenix separator, final CTA, success guide, modals - keeping all existing styles */
+/* ===================================
+   PHOENIX SEPARATOR & FINAL CTA SECTIONS
+   =================================== */
 .phoenix-separator-section {
     padding: 3.5rem var(--container-padding);
     background: var(--ember-gradient-background);
@@ -4268,7 +4270,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.75rem;
     align-items: stretch;
-    margin-bottom: 3rem;
+    margin-bottom: 0;
 }
 
 .journey-path-module {
@@ -4822,232 +4824,8 @@ body {
         font-size: 0.8rem;
     }
 }
-@media (max-width: 1024px) {
-    .success-benefits-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
-@media (max-width: 768px) {
-    .success-guide-integrated {
-        padding: 3rem 0 0 0; /* ✅ FIXED: Adjusted for mobile */
-    }
-    
-    .success-cta-wrapper {
-        padding: 0 0 3rem 0; /* ✅ FIXED: Mobile bottom padding */
-    }
-    
-    .success-benefits-container {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-        margin-bottom: 2rem;
-    }
-    
-    .success-benefit-box {
-        padding: 1.5rem 1rem;
-    }
-    
-    .success-benefit-icon img {
-        width: 56px;
-        height: 56px;
-    }
-    
-    .success-benefit-box h4 {
-        font-size: 1rem;
-    }
-    
-    .success-benefit-box p {
-        font-size: 0.85rem;
-    }
-    
-    .success-primary-button {
-        width: 100%;
-        padding: 1.1rem 2rem;
-        font-size: 1rem;
-    }
-    
-    .success-primary-button img {
-        width: 24px;
-        height: 24px;
-    }
-    
-    .success-footnote {
-        font-size: 0.85rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .success-guide-integrated {
-        padding: 2rem 0 0 0;
-    }
-    
-    .success-cta-wrapper {
-        padding: 0 0 2rem 0;
-    }
-    
-    .success-benefit-icon img {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .success-benefit-box h4 {
-        font-size: 0.95rem;
-    }
-    
-    .success-benefit-box p {
-        font-size: 0.8rem;
-    }
-    
-    .success-primary-button {
-        padding: 1rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .success-footnote {
-        font-size: 0.8rem;
-    }
-}
-@media (max-width: 1024px) {
-    .success-benefits-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .journey-paths-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .final-cta {
-        padding: 3rem 1rem 0 1rem;
-    }
-    
-    .final-cta-title {
-        font-size: 1.75rem;
-    }
-    
-    .journey-paths-container {
-        grid-template-columns: 1fr;
-        gap: 1.75rem;
-    }
-    
-    .journey-path-module {
-        padding: 1.5rem;
-    }
-    
-    .main-journey-icon-large {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .journey-path-title {
-        font-size: 1.4rem;
-    }
-    
-    .close-reason-item {
-        padding: 1rem;
-    }
-    
-    .urgency-block {
-        flex-direction: column;
-        text-align: center;
-        padding: 1.25rem;
-    }
-    
-    .urgency-icon img {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .urgency-text h4 {
-        font-size: 1.1rem;
-    }
-    
-    .success-guide-integrated {
-        margin-top: 3rem;
-        padding: 2.5rem 0 2.5rem 0; /* Keep equal spacing on mobile */
-    }
-    
-    .success-benefits-container {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-        margin-bottom: 2rem;
-    }
-    
-    .success-benefit-box {
-        padding: 1.5rem 1rem;
-    }
-    
-    .success-benefit-icon img {
-        width: 56px;
-        height: 56px;
-    }
-    
-    .success-benefit-box h4 {
-        font-size: 1rem;
-    }
-    
-    .success-benefit-box p {
-        font-size: 0.85rem;
-    }
-    
-    .success-primary-button {
-        width: 100%;
-        padding: 1.1rem 2rem;
-        font-size: 1rem;
-    }
-    
-    .success-primary-button img {
-        width: 24px;
-        height: 24px;
-    }
-    
-    .success-footnote {
-        font-size: 0.85rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .journey-path-title {
-        font-size: 1.25rem;
-    }
-    
-    .close-reason-text strong {
-        font-size: 0.9rem;
-    }
-    
-    .close-reason-text p {
-        font-size: 0.8rem;
-    }
-    
-    .success-guide-integrated {
-        padding: 2rem 0 2rem 0;
-    }
-    
-    .success-benefit-icon img {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .success-benefit-box h4 {
-        font-size: 0.95rem;
-    }
-    
-    .success-benefit-box p {
-        font-size: 0.8rem;
-    }
-    
-    .success-primary-button {
-        padding: 1rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .success-footnote {
-        font-size: 0.8rem;
-    }
-}
-
+/* MODALS */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
     position: fixed;
@@ -5298,10 +5076,3 @@ body {
         width: 100%;
     }
 }
-
-/* ===================================
-   END OF LOCAL.CSS - COMPLETE FILE WITH ALL 3 FIXES APPLIED
-   ✅ FIX #1: Success Guide - Equal Spacing (var(--section-padding))
-   ✅ FIX #2: Airdrop Section - Balanced Layout (flexbox, equal heights, powered-by bottom)
-   ✅ FIX #3: Pricing Headers - Mobile Spacing (padding-top on mobile breakpoints)
-   =================================== */
