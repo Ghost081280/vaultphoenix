@@ -4204,25 +4204,6 @@ body {
     color: rgba(255, 255, 255, 0.85);
 }
 
-@media (max-width: 768px) {
-    .phoenix-separator-section {
-        padding: 3rem 1rem;
-    }
-    
-    .phoenix-separator-content {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .phoenix-separator-image {
-        max-width: 220px;
-    }
-    
-    .phoenix-separator-subtitle {
-        font-size: 0.95rem;
-    }
-}
-
 .final-cta {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
@@ -4270,7 +4251,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.75rem;
     align-items: stretch;
-    margin-bottom: 3rem;  /* ✅ THIS IS CORRECT */
+    margin-bottom: 3rem;
 }
 
 .journey-path-module {
@@ -4683,14 +4664,29 @@ body {
     }
     
     .journey-paths-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.75rem;
-    align-items: stretch;
-    margin-bottom: 3rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 768px) {
+    .phoenix-separator-section {
+        padding: 3rem 1rem;
+    }
+    
+    .phoenix-separator-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .phoenix-separator-image {
+        max-width: 220px;
+    }
+    
+    .phoenix-separator-subtitle {
+        font-size: 0.95rem;
+    }
+    
     .final-cta {
         padding: 3rem 1rem;
     }
@@ -4826,7 +4822,6 @@ body {
         font-size: 0.8rem;
     }
 }
-
 /* MODALS */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
