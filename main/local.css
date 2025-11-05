@@ -4506,11 +4506,12 @@ body {
 }
 
 /* ===================================
-   ✅ FIX #1: SUCCESS GUIDE - EQUAL SPACING TOP & BOTTOM
+   ✅ FIXED: SUCCESS GUIDE - EQUAL SPACING TOP & BOTTOM
+   Removed excessive bottom padding to match module spacing
    =================================== */
 .success-guide-integrated {
     margin: 0;
-    padding: var(--section-padding) 0 var(--section-padding) 0; /* ✅ FIXED: Changed from 2.5rem */
+    padding: var(--section-padding) 0 0 0; /* ✅ FIXED: Removed bottom padding */
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -4605,7 +4606,7 @@ body {
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 0 var(--section-padding) 0; /* ✅ FIXED: Added bottom padding to wrapper */
 }
 
 .success-primary-button {
@@ -4654,6 +4655,91 @@ body {
     padding: 0;
 }
 
+@media (max-width: 1024px) {
+    .success-benefits-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .success-guide-integrated {
+        padding: 3rem 0 0 0; /* ✅ FIXED: Adjusted for mobile */
+    }
+    
+    .success-cta-wrapper {
+        padding: 0 0 3rem 0; /* ✅ FIXED: Mobile bottom padding */
+    }
+    
+    .success-benefits-container {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin-bottom: 2rem;
+    }
+    
+    .success-benefit-box {
+        padding: 1.5rem 1rem;
+    }
+    
+    .success-benefit-icon img {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .success-benefit-box h4 {
+        font-size: 1rem;
+    }
+    
+    .success-benefit-box p {
+        font-size: 0.85rem;
+    }
+    
+    .success-primary-button {
+        width: 100%;
+        padding: 1.1rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .success-primary-button img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .success-footnote {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .success-guide-integrated {
+        padding: 2rem 0 0 0;
+    }
+    
+    .success-cta-wrapper {
+        padding: 0 0 2rem 0;
+    }
+    
+    .success-benefit-icon img {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .success-benefit-box h4 {
+        font-size: 0.95rem;
+    }
+    
+    .success-benefit-box p {
+        font-size: 0.8rem;
+    }
+    
+    .success-primary-button {
+        padding: 1rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .success-footnote {
+        font-size: 0.8rem;
+    }
+}
 @media (max-width: 1024px) {
     .success-benefits-container {
         grid-template-columns: repeat(2, 1fr);
