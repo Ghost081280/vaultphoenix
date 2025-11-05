@@ -68,7 +68,7 @@
     
     /* Layout */
     --container-padding: clamp(1rem, 5vw, 3rem);
-    --section-padding: clamp(3rem, 8vw, 6rem);
+    --section-padding: clamp(2rem, 5vw, 3.5rem);
     
     /* Icon Sizes */
     --icon-xs: 16px;
