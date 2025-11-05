@@ -853,6 +853,8 @@ body {
     }
 }/* ===================================
    EMBER TOKEN SECTION - COMPLETE FIX
+   ✅ FIX #2: COUNTDOWN TIMER FIXED (min-width added)
+   ✅ FIX #3: BALANCED LAYOUT (compact header, smaller phoenix, aligned compliance)
    Text, images, and equal heights FIXED
    =================================== */
 .ember-token-section-redesigned {
@@ -878,22 +880,23 @@ body {
 .ember-token-right-redesigned {
     display: flex;
     flex-direction: column;
-    gap: 1.75rem;
+    gap: 1.5rem;
     height: 100%;
+    justify-content: space-between;
 }
 
 .ember-token-title-redesigned {
     font-size: clamp(1.8rem, 3.5vw, 2.75rem);
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .ember-token-description-redesigned {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .ember-countdown-widget-redesigned {
@@ -953,6 +956,8 @@ body {
     font-weight: 800;
     color: var(--ember-gold);
     margin-bottom: 0.2rem;
+    /* ✅ FIX #2: Prevent flashing until connected to backend */
+    min-width: 45px;
 }
 
 .ember-time-label-redesigned {
@@ -1073,7 +1078,7 @@ body {
 }
 
 /* ===================================
-   RIGHT COLUMN - EQUAL HEIGHT TO LEFT
+   RIGHT COLUMN - ✅ FIX #3: BALANCED & EQUAL HEIGHT
    =================================== */
 .ember-phoenix-container-redesigned {
     text-align: center;
@@ -1082,19 +1087,21 @@ body {
 
 .phoenix-holding-coin-redesigned {
     width: 100%;
-    max-width: 380px;
+    max-width: 320px;
     height: auto;
     object-fit: contain;
+    margin: 0 auto;
 }
 
 .compliance-disclaimer-redesigned {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: 1.75rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     height: 100%;
+    align-self: end;
 }
 
 .compliance-disclaimer-redesigned h4 {
@@ -1724,6 +1731,140 @@ body {
     font-style: italic;
 }
 
+/* ===================================
+   ✅ FIX #1: SOCIAL TRACKING SECTION
+   Complete styles for social tracking with hashtags
+   =================================== */
+.social-tracking-section {
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.12) 0%, 
+        rgba(215, 51, 39, 0.08) 100%);
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.social-tracking-section h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f0a500;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.social-tracking-description {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.social-hashtags-display {
+    background: rgba(15, 15, 15, 0.6);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.hashtag-platform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.65rem;
+}
+
+.platform-icon {
+    font-size: 1.1rem;
+    color: #f0a500;
+}
+
+.platform-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hashtag-text {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #f0a500;
+    text-align: center;
+    line-height: 1.6;
+    word-break: break-word;
+    user-select: all;
+}
+
+.copy-hashtags-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.25) 0%, 
+        rgba(215, 51, 39, 0.2) 100%);
+    border: 2px solid rgba(240, 165, 0, 0.5);
+    border-radius: 10px;
+    color: #f0a500;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 44px;
+}
+
+.copy-hashtags-btn:hover {
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.35) 0%, 
+        rgba(215, 51, 39, 0.3) 100%);
+    border-color: #f0a500;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4);
+}
+
+.copy-hashtags-btn.copied {
+    background: linear-gradient(135deg, 
+        rgba(34, 197, 94, 0.25) 0%, 
+        rgba(34, 197, 94, 0.2) 100%);
+    border-color: rgba(34, 197, 94, 0.6);
+    color: #4ade80;
+}
+
+.copy-hashtags-btn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.social-tracking-note {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin-top: 0.65rem;
+    margin-bottom: 0;
+    font-style: italic;
+}
+
+/* Mobile adjustments for social tracking */
+@media (max-width: 768px) {
+    .social-tracking-section {
+        padding: 1rem;
+    }
+    
+    .hashtag-text {
+        font-size: 0.85rem;
+    }
+    
+    .copy-hashtags-btn {
+        font-size: 0.85rem;
+    }
+}
+
 /* Share to Claim Section */
 .share-to-claim-section {
     margin-bottom: 1.5rem;
@@ -1859,9 +2000,7 @@ body {
     border-color: #60a5fa;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
-}
-
-/* Form Fields */
+}/* Form Fields */
 .ember-form-compact {
     display: flex;
     flex-direction: column;
@@ -2120,12 +2259,12 @@ body {
     .ember-inner-module {
         padding: 1rem;
     }
-}/* ===================================
-   CRYPTO COIN SECTION - FIXED LAYOUT
-   Phone image on LEFT, content on RIGHT (desktop)
-   Stacks vertically on mobile
-   =================================== */
+}
 
+/* ===================================
+   CRYPTO COIN, TECHNOLOGY, FEATURES SECTIONS
+   (Keeping all existing styles unchanged)
+   =================================== */
 .crypto-coin-section {
     padding: 4rem 1rem;
     background: linear-gradient(135deg, rgba(13, 12, 12, 0.95) 0%, rgba(26, 15, 10, 0.9) 100%);
@@ -2426,10 +2565,7 @@ body {
     }
 }
 
-/* ===================================
-   TECHNOLOGY MODULES - FIXED FOR MOBILE
-   Combined Power Section stays inside outer module
-   =================================== */
+/* Technology modules, features, app showcase, use cases - keeping all existing styles */
 .technology-modules {
     margin-top: 2.5rem;
     max-width: 1400px;
@@ -2605,10 +2741,6 @@ body {
     margin: 0;
 }
 
-/* ===================================
-   COMBINED TECHNOLOGY POWER - MOBILE OPTIMIZED
-   All content stays inside outer module on mobile
-   =================================== */
 .combined-technology-power {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -2693,7 +2825,6 @@ body {
     margin: 0;
 }
 
-/* Mobile optimization for combined power */
 @media (max-width: 1024px) {
     .combined-power-benefits {
         grid-template-columns: repeat(2, 1fr);
@@ -2749,9 +2880,6 @@ body {
     }
 }
 
-/* ===================================
-   FEATURES SECTION - MOBILE OPTIMIZED
-   =================================== */
 .features {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
@@ -2852,7 +2980,6 @@ body {
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* Mobile optimization for features */
 @media (max-width: 1024px) {
     .features-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2917,9 +3044,7 @@ body {
     }
 }
 
-/* ===================================
-   APP SHOWCASE SECTION - MOBILE OPTIMIZED
-   =================================== */
+/* App showcase and system connection sections continue... (keeping all existing styles) */
 .app-showcase {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
@@ -2990,7 +3115,7 @@ body {
     cursor: pointer;
     transition: var(--transition-base);
     overflow: hidden;
-    min-height: 44px; /* Touch target */
+    min-height: 44px;
 }
 
 .simple-thumb.active {
@@ -3081,7 +3206,7 @@ body {
     cursor: pointer;
     transition: var(--transition-base);
     overflow: hidden;
-    min-height: 44px; /* Touch target */
+    min-height: 44px;
 }
 
 .simple-thumb-laptop.active {
@@ -3137,7 +3262,7 @@ body {
     transition: var(--transition-base);
     border: 2px solid rgba(255, 255, 255, 0.2);
     font-size: 0.95rem;
-    min-height: 44px; /* Touch target */
+    min-height: 44px;
 }
 
 .demo-button-enhanced:hover {
@@ -3165,9 +3290,6 @@ body {
     border-radius: var(--radius-xl);
 }
 
-/* ===================================
-   SYSTEM CONNECTION - MOBILE OPTIMIZED
-   =================================== */
 .system-connection {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
@@ -3267,7 +3389,6 @@ body {
     font-weight: 700;
 }
 
-/* Mobile optimization for showcase and system connection */
 @media (max-width: 1024px) {
     .showcase-content {
         grid-template-columns: 1fr;
@@ -3400,9 +3521,6 @@ body {
     }
 }
 
-/* ===================================
-   USE CASES SECTION
-   =================================== */
 .use-cases {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
@@ -3502,7 +3620,8 @@ body {
 }
 
 /* ===================================
-   PRICING SECTION - WITH COLOR MATCHING
+   ✅ FIX #4: PRICING SECTION - WITH ENHANCED HEADERS & SPACING
+   All badge, title, and spacing updates applied
    =================================== */
 .pricing {
     padding: var(--section-padding) var(--container-padding);
@@ -3547,10 +3666,21 @@ body {
     background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
 }
 
+/* ✅ FIX #4: Updated header spacing */
 .solution-header {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.75rem;
 }
 
+.solution-category-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+}
+
+/* ✅ FIX #4: New badge styles */
 .solution-badge {
     display: inline-block;
     background: rgba(215, 51, 39, 0.2);
@@ -3559,7 +3689,7 @@ body {
     border-radius: var(--radius-lg);
     font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 0.85rem;
+    margin-bottom: 1rem;
 }
 
 .sdk-badge {
@@ -3567,17 +3697,19 @@ body {
     color: #8b5cf6;
 }
 
+/* ✅ FIX #4: Enhanced title styles */
 .solution-title {
     font-size: 1.5rem;
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 0.85rem;
+    margin-bottom: 1rem;
     line-height: 1.2;
 }
 
+/* ✅ FIX #4: Improved subtitle */
 .solution-subtitle {
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
 }
 
@@ -3858,7 +3990,7 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: var(--ember-shadow-md);
     margin-bottom: 0.65rem;
-    min-height: 54px; /* Larger touch target */
+    min-height: 54px;
 }
 
 .developer-pricing-module .cta-primary-large {
@@ -3885,7 +4017,7 @@ body {
     font-weight: 600;
     text-decoration: none;
     transition: var(--transition-base);
-    min-height: 44px; /* Touch target */
+    min-height: 44px;
 }
 
 .journey-secondary-link:hover {
@@ -3945,9 +4077,7 @@ body {
     }
 }
 
-/* ===================================
-   PHOENIX SEPARATOR
-   =================================== */
+/* Phoenix separator, final CTA, success guide, modals - keeping all existing styles */
 .phoenix-separator-section {
     padding: 3.5rem var(--container-padding);
     background: var(--ember-gradient-background);
@@ -4057,9 +4187,6 @@ body {
     }
 }
 
-/* ===================================
-   FINAL CTA SECTION - COMPLETE
-   =================================== */
 .final-cta {
     padding: var(--section-padding) var(--container-padding) 0 var(--container-padding);
     background: var(--ember-gradient-background);
@@ -4344,9 +4471,6 @@ body {
     font-weight: 700;
 }
 
-/* ===================================
-   SUCCESS GUIDE INTEGRATED - PERFECT SPACING VERSION
-   =================================== */
 .success-guide-integrated {
     margin: 0;
     padding: var(--section-padding) 0 2.5rem 0;
@@ -4493,18 +4617,66 @@ body {
     padding: 0;
 }
 
-/* ===================================
-   MOBILE RESPONSIVE FOR SUCCESS GUIDE
-   =================================== */
 @media (max-width: 1024px) {
     .success-benefits-container {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    .journey-paths-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 768px) {
+    .final-cta {
+        padding: 3rem 1rem 0 1rem;
+    }
+    
+    .final-cta-title {
+        font-size: 1.75rem;
+    }
+    
+    .journey-paths-container {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+    
+    .journey-path-module {
+        padding: 1.5rem;
+    }
+    
+    .main-journey-icon-large {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .journey-path-title {
+        font-size: 1.4rem;
+    }
+    
+    .close-reason-item {
+        padding: 1rem;
+    }
+    
+    .urgency-block {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.25rem;
+    }
+    
+    .urgency-icon img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .urgency-text h4 {
+        font-size: 1.1rem;
+    }
+    
     .success-guide-integrated {
-        padding: 3rem 0;
+        margin-top: 3rem;
+        padding: 2.5rem 0 2.5rem 0;
     }
     
     .success-benefits-container {
@@ -4547,8 +4719,20 @@ body {
 }
 
 @media (max-width: 480px) {
+    .journey-path-title {
+        font-size: 1.25rem;
+    }
+    
+    .close-reason-text strong {
+        font-size: 0.9rem;
+    }
+    
+    .close-reason-text p {
+        font-size: 0.8rem;
+    }
+    
     .success-guide-integrated {
-        padding: 2.5rem 0;
+        padding: 2rem 0 2rem 0;
     }
     
     .success-benefit-icon img {
@@ -4573,9 +4757,7 @@ body {
         font-size: 0.8rem;
     }
 }
-/* ===================================
-   MODALS
-   =================================== */
+
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
     position: fixed;
@@ -4803,110 +4985,7 @@ body {
     border-color: var(--ember-orange);
 }
 
-/* ===================================
-   RESPONSIVE - FINAL CTA + SUCCESS + MODALS
-   =================================== */
-
-@media (max-width: 1024px) {
-    .journey-paths-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .success-benefits-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 @media (max-width: 768px) {
-    .final-cta {
-        padding: 3rem 1rem 0 1rem;
-    }
-    
-    .final-cta-title {
-        font-size: 1.75rem;
-    }
-    
-    .journey-paths-container {
-        grid-template-columns: 1fr;
-        gap: 1.75rem;
-    }
-    
-    .journey-path-module {
-        padding: 1.5rem;
-    }
-    
-    .main-journey-icon-large {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .journey-path-title {
-        font-size: 1.4rem;
-    }
-    
-    .close-reason-item {
-        padding: 1rem;
-    }
-    
-    .urgency-block {
-        flex-direction: column;
-        text-align: center;
-        padding: 1.25rem;
-    }
-    
-    .urgency-icon img {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .urgency-text h4 {
-        font-size: 1.1rem;
-    }
-    
-    .success-guide-integrated {
-        margin-top: 3rem;
-        padding: 2.5rem 0 2.5rem 0;
-    }
-    
-    .success-benefits-container {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-        margin-bottom: 2rem;
-    }
-    
-    .success-benefit-box {
-        padding: 1.5rem 1rem;
-    }
-    
-    .success-benefit-icon img {
-        width: 56px;
-        height: 56px;
-    }
-    
-    .success-benefit-box h4 {
-        font-size: 1rem;
-    }
-    
-    .success-benefit-box p {
-        font-size: 0.85rem;
-    }
-    
-    .success-primary-button {
-        width: 100%;
-        padding: 1.1rem 2rem;
-        font-size: 1rem;
-    }
-    
-    .success-primary-button img {
-        width: 24px;
-        height: 24px;
-    }
-    
-    .success-footnote {
-        font-size: 0.85rem;
-    }
-    
     .airdrop-terms-modal-overlay,
     .airdrop-info-modal-overlay {
         padding: 1rem;
@@ -4930,46 +5009,10 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    .journey-path-title {
-        font-size: 1.25rem;
-    }
-    
-    .close-reason-text strong {
-        font-size: 0.9rem;
-    }
-    
-    .close-reason-text p {
-        font-size: 0.8rem;
-    }
-    
-    .success-guide-integrated {
-        padding: 2rem 0 2rem 0;
-    }
-    
-    .success-benefit-icon img {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .success-benefit-box h4 {
-        font-size: 0.95rem;
-    }
-    
-    .success-benefit-box p {
-        font-size: 0.8rem;
-    }
-    
-    .success-primary-button {
-        padding: 1rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .success-footnote {
-        font-size: 0.8rem;
-    }
-}
-
 /* ===================================
-   END OF LOCAL.CSS - COMPLETE FILE
+   END OF LOCAL.CSS - COMPLETE FILE WITH ALL 4 FIXES
+   ✅ FIX #1: Social Tracking Section Added
+   ✅ FIX #2: Countdown Timer Fixed (min-width)
+   ✅ FIX #3: Ember Token Section Balanced
+   ✅ FIX #4: Pricing Headers Enhanced
    =================================== */
