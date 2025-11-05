@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔥 Vault Phoenix Onboarding v3.0 - Initializing...');
     
     try {
+        initConstructionBanner();
         initCalculator();
         initCopyButtons();
         initScrollReveal();
@@ -44,6 +45,39 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('❌ Initialization Error:', error);
     }
 });
+
+// ========================================
+// UNDER CONSTRUCTION BANNER
+// ========================================
+
+/**
+ * Initialize the under construction banner
+ */
+function initConstructionBanner() {
+    const closeBtn = document.querySelector('.construction-close');
+    const banner = document.querySelector('.construction-banner');
+    
+    if (!closeBtn || !banner) {
+        console.log('ℹ️ Construction banner not found');
+        return;
+    }
+    
+    // Check if user has previously dismissed the banner
+    const dismissed = localStorage.getItem('construction-banner-dismissed');
+    
+    if (dismissed === 'true') {
+        banner.classList.add('hidden');
+    }
+    
+    // Add click event to close button
+    closeBtn.addEventListener('click', function() {
+        banner.classList.add('hidden');
+        localStorage.setItem('construction-banner-dismissed', 'true');
+        console.log('✅ Construction banner dismissed');
+    });
+    
+    console.log('✅ Construction banner initialized');
+}
 
 // ========================================
 // ROI CALCULATOR - ENHANCED WITH NEW FEATURES
