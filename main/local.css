@@ -1,6 +1,6 @@
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   UPDATED VERSION - ALL MOBILE FIXES + SMOOTH ANIMATIONS
+   UPDATED VERSION - ALL MOBILE FIXES + SMOOTH ANIMATIONS + ALL 3 SPACING FIXES
    Core Styles + Hero Section + All Sections + Mobile Perfect
    =================================== */
 
@@ -852,6 +852,11 @@ body {
         font-size: 0.85rem;
     }
 }/* ===================================
+   PART 2 OF 3 - EMBER TOKEN SECTION THROUGH AIRDROP SECTION
+   WITH ALL FIXES APPLIED
+   =================================== */
+
+/* ===================================
    EMBER TOKEN SECTION - COMPLETE FIX
    ✅ FIX #2: COUNTDOWN TIMER FIXED (min-width added)
    ✅ FIX #3: BALANCED LAYOUT (compact header, smaller phoenix, aligned compliance)
@@ -1295,6 +1300,7 @@ body {
 
 /* ===================================
    $EMBER AIRDROP SECTION - FIXED VERSION
+   ✅ FIX #2: BALANCED LAYOUT WITH EQUAL HEIGHTS
    Ultra-compact social tracking module
    =================================== */
 
@@ -1412,16 +1418,17 @@ body {
     flex-wrap: wrap;
 }
 
-/* Compact Grid - Two Columns */
+/* ✅ FIX #2: Compact Grid - Equal Heights with Flexbox */
 .ember-compact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     margin-top: 2rem;
     width: 100%;
+    align-items: stretch; /* ✅ FIXED: Ensure equal heights */
 }
 
-/* Inner Modules */
+/* ✅ FIX #2: Inner modules with flexbox for equal heights */
 .ember-inner-module {
     background: rgba(15, 15, 15, 0.6);
     border: 1px solid rgba(215, 51, 39, 0.3);
@@ -1429,6 +1436,8 @@ body {
     padding: 1.5rem;
     position: relative;
     width: 100%;
+    display: flex; /* ✅ FIXED: Use flexbox */
+    flex-direction: column; /* ✅ FIXED: Stack content vertically */
 }
 
 /* Mini Header */
@@ -1722,14 +1731,21 @@ body {
     box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }
 
-/* Powered By Text */
+/* ✅ FIX #2: Push "Powered by" text to bottom of tracker module */
 .airdrop-powered-by {
     display: block;
     text-align: center;
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.4);
-    margin-top: 1.5rem;
+    margin-top: auto; /* ✅ FIXED: Push to bottom */
+    padding-top: 1.5rem; /* ✅ FIXED: Space from content above */
     font-style: italic;
+}
+
+/* ✅ ENSURE LEFT MODULE (TRACKER) FILLS HEIGHT TOO */
+.ember-inner-module:first-child {
+    display: flex;
+    flex-direction: column;
 }
 
 /* ===================================
@@ -1995,12 +2011,13 @@ body {
     box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
 }
 
-/* Form Fields */
+/* ✅ FIX #2: Form should expand to fill space */
 .ember-form-compact {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
     width: 100%;
+    flex: 1; /* ✅ FIXED: Allow form to grow */
 }
 
 .form-group-compact {
@@ -2084,7 +2101,7 @@ body {
     color: #93c5fd;
 }
 
-/* Claim Button */
+/* ✅ FIX #2: Claim button positioning */
 .claim-btn-compact {
     width: 100%;
     display: flex;
@@ -2101,7 +2118,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 1rem;
-    min-height: 54px; /* Larger touch target for primary action */
+    min-height: 54px;
 }
 
 .claim-btn-compact:hover:not(:disabled) {
@@ -2120,9 +2137,9 @@ body {
     object-fit: contain;
 }
 
-/* Message Box */
+/* ✅ FIX #2: Message box pushed to bottom if needed */
 .message-box-compact {
-    margin-top: 1.5rem;
+    margin-top: auto; /* ✅ FIXED: Push to bottom */
     padding: 1rem;
     border-radius: 12px;
     font-size: 0.9rem;
@@ -2254,7 +2271,10 @@ body {
     .ember-inner-module {
         padding: 1rem;
     }
-}
+}/* ===================================
+   PART 3 OF 3 (FINAL) - CRYPTO COIN SECTION THROUGH END
+   WITH ALL FIXES APPLIED
+   =================================== */
 
 /* ===================================
    CRYPTO COIN, TECHNOLOGY, FEATURES SECTIONS
@@ -3615,7 +3635,7 @@ body {
 }
 
 /* ===================================
-   ✅ FIX #4: PRICING SECTION - WITH ENHANCED HEADERS & SPACING
+   ✅ FIX #3: PRICING SECTION - WITH ENHANCED HEADERS & SPACING
    All badge, title, and spacing updates applied
    =================================== */
 .pricing {
@@ -3661,9 +3681,10 @@ body {
     background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
 }
 
-/* ✅ FIX #4: Updated header spacing */
+/* ✅ FIX #3: Updated header spacing */
 .solution-header {
     margin-bottom: 1.75rem;
+    padding-top: 0; /* Default: no extra padding on desktop */
 }
 
 .solution-category-title {
@@ -3675,7 +3696,7 @@ body {
     margin-bottom: 0.75rem;
 }
 
-/* ✅ FIX #4: New badge styles */
+/* ✅ FIX #3: New badge styles */
 .solution-badge {
     display: inline-block;
     background: rgba(215, 51, 39, 0.2);
@@ -3692,7 +3713,7 @@ body {
     color: #8b5cf6;
 }
 
-/* ✅ FIX #4: Enhanced title styles */
+/* ✅ FIX #3: Enhanced title styles */
 .solution-title {
     font-size: 1.5rem;
     font-weight: 800;
@@ -3701,7 +3722,7 @@ body {
     line-height: 1.2;
 }
 
-/* ✅ FIX #4: Improved subtitle */
+/* ✅ FIX #3: Improved subtitle */
 .solution-subtitle {
     font-size: 0.9rem;
     line-height: 1.6;
@@ -4044,6 +4065,15 @@ body {
         padding: 1.5rem;
     }
     
+    /* ✅ FIX #3: Add top padding to pricing headers on mobile */
+    .solution-header {
+        padding-top: 1.5rem; /* ✅ FIXED: Space from top on mobile */
+    }
+    
+    .solution-category-title {
+        font-size: 0.9rem; /* Slightly larger on mobile for visibility */
+    }
+    
     .solution-title {
         font-size: 1.3rem;
     }
@@ -4069,6 +4099,13 @@ body {
         flex-direction: column;
         align-items: center;
         text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    /* ✅ FIX #3: Pricing Headers - Extra spacing on very small screens */
+    .solution-header {
+        padding-top: 2rem; /* ✅ FIXED: More space on very small screens */
     }
 }
 
@@ -4466,9 +4503,12 @@ body {
     font-weight: 700;
 }
 
+/* ===================================
+   ✅ FIX #1: SUCCESS GUIDE - EQUAL SPACING TOP & BOTTOM
+   =================================== */
 .success-guide-integrated {
     margin: 0;
-    padding: var(--section-padding) 0 2.5rem 0;
+    padding: var(--section-padding) 0 var(--section-padding) 0; /* ✅ FIXED: Changed from 2.5rem */
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -4671,7 +4711,7 @@ body {
     
     .success-guide-integrated {
         margin-top: 3rem;
-        padding: 2.5rem 0 2.5rem 0;
+        padding: 2.5rem 0 2.5rem 0; /* Keep equal spacing on mobile */
     }
     
     .success-benefits-container {
@@ -5005,9 +5045,8 @@ body {
 }
 
 /* ===================================
-   END OF LOCAL.CSS - COMPLETE FILE WITH ALL 4 FIXES
-   ✅ FIX #1: Social Tracking Section Added
-   ✅ FIX #2: Countdown Timer Fixed (min-width)
-   ✅ FIX #3: Ember Token Section Balanced
-   ✅ FIX #4: Pricing Headers Enhanced
+   END OF LOCAL.CSS - COMPLETE FILE WITH ALL 3 FIXES APPLIED
+   ✅ FIX #1: Success Guide - Equal Spacing (var(--section-padding))
+   ✅ FIX #2: Airdrop Section - Balanced Layout (flexbox, equal heights, powered-by bottom)
+   ✅ FIX #3: Pricing Headers - Mobile Spacing (padding-top on mobile breakpoints)
    =================================== */
