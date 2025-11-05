@@ -4058,7 +4058,7 @@ body {
 }
 
 /* ===================================
-   FINAL CTA SECTION - FIXED
+   FINAL CTA SECTION - COMPLETE
    =================================== */
 .final-cta {
     padding: var(--section-padding) var(--container-padding);
@@ -4345,11 +4345,11 @@ body {
 }
 
 /* ===================================
-   SUCCESS GUIDE INTEGRATED - FIXED SPACING
+   SUCCESS GUIDE INTEGRATED - WITH EQUAL SPACING FIX
    =================================== */
 .success-guide-integrated {
     margin-top: 4rem;
-    padding-top: 3rem;
+    padding: 3rem 0;
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -4439,6 +4439,7 @@ body {
     margin: 0;
 }
 
+/* FIXED: Equal spacing for button from top and bottom */
 .success-cta-wrapper {
     text-align: center;
     max-width: 700px;
@@ -4446,8 +4447,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
-    padding: 2rem 0;
+    padding: 3rem 0;
 }
 
 .success-primary-button {
@@ -4495,7 +4497,7 @@ body {
 }
 
 /* ===================================
-   MODALS - FIXED
+   MODALS
    =================================== */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
@@ -4725,7 +4727,7 @@ body {
 }
 
 /* ===================================
-   RESPONSIVE - FINAL CTA + SUCCESS GUIDE + MODALS
+   RESPONSIVE - FINAL CTA + SUCCESS + MODALS
    =================================== */
 
 @media (max-width: 1024px) {
@@ -4768,18 +4770,12 @@ body {
     
     .close-reason-item {
         padding: 1rem;
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .close-reason-icon {
-        width: 36px;
-        height: 36px;
     }
     
     .urgency-block {
         flex-direction: column;
         text-align: center;
+        padding: 1.25rem;
     }
     
     .urgency-icon img {
@@ -4787,14 +4783,19 @@ body {
         height: 60px;
     }
     
+    .urgency-text h4 {
+        font-size: 1.1rem;
+    }
+    
     .success-guide-integrated {
         margin-top: 3rem;
-        padding-top: 2.5rem;
+        padding: 2.5rem 0;
     }
     
     .success-benefits-container {
         grid-template-columns: 1fr;
         gap: 1.25rem;
+        margin-bottom: 2rem;
     }
     
     .success-benefit-box {
@@ -4806,10 +4807,31 @@ body {
         height: 56px;
     }
     
+    .success-benefit-box h4 {
+        font-size: 1rem;
+    }
+    
+    .success-benefit-box p {
+        font-size: 0.85rem;
+    }
+    
+    .success-cta-wrapper {
+        padding: 2rem 0;
+    }
+    
     .success-primary-button {
         width: 100%;
         padding: 1.1rem 2rem;
         font-size: 1rem;
+    }
+    
+    .success-primary-button img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .success-footnote {
+        font-size: 0.85rem;
     }
     
     .airdrop-terms-modal-overlay,
@@ -4825,6 +4847,7 @@ body {
     .airdrop-terms-modal-footer,
     .airdrop-info-modal-footer {
         flex-direction: column;
+        padding: 1rem 1.5rem;
     }
     
     .airdrop-terms-agree-btn,
@@ -4835,6 +4858,18 @@ body {
 }
 
 @media (max-width: 480px) {
+    .journey-path-title {
+        font-size: 1.25rem;
+    }
+    
+    .close-reason-text strong {
+        font-size: 0.9rem;
+    }
+    
+    .close-reason-text p {
+        font-size: 0.8rem;
+    }
+    
     .success-benefit-icon img {
         width: 48px;
         height: 48px;
@@ -4845,15 +4880,19 @@ body {
     }
     
     .success-benefit-box p {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
     
     .success-primary-button {
         padding: 1rem 1.5rem;
         font-size: 0.9rem;
     }
+    
+    .success-footnote {
+        font-size: 0.8rem;
+    }
 }
 
 /* ===================================
-   END OF FIXED CSS
+   END OF LOCAL.CSS - COMPLETE FILE
    =================================== */
