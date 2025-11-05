@@ -4205,7 +4205,7 @@ body {
 }
 
 .final-cta {
-    padding: var(--section-padding) var(--container-padding) 0 var(--container-padding);
+    padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
     position: relative;
 }
@@ -4251,7 +4251,6 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.75rem;
     align-items: stretch;
-    margin-bottom: 3rem;
 }
 
 .journey-path-module {
@@ -4490,9 +4489,6 @@ body {
     transform: translateX(3px);
 }
 
-/* ===================================
-   SATISFACTION GUARANTEE
-   =================================== */
 .satisfaction-guarantee {
     margin-top: 1.75rem;
     padding: 1.25rem;
@@ -4515,12 +4511,11 @@ body {
 }
 
 /* ===================================
-   SUCCESS GUIDE - EQUAL SPACING FIX
-   ✅ FINAL VERSION - NO DUPLICATES
+   SUCCESS GUIDE - STANDALONE SECTION
    =================================== */
-.success-guide-integrated {
-    margin: 0;
-    padding: var(--section-padding) 0 var(--section-padding) 0;
+.success-guide-section {
+    padding: var(--section-padding) var(--container-padding);
+    background: var(--ember-gradient-background);
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -4615,7 +4610,6 @@ body {
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
-    padding: 0;
 }
 
 .success-primary-button {
@@ -4661,16 +4655,6 @@ body {
     color: rgba(255, 255, 255, 0.75);
     font-weight: 600;
     margin: 0;
-    padding: 0;
-}
-
-/* ===================================
-   FINAL CTA SECTION FIX
-   =================================== */
-.final-cta {
-    padding: var(--section-padding) var(--container-padding) 0 var(--container-padding);
-    background: var(--ember-gradient-background);
-    position: relative;
 }
 
 /* ===================================
@@ -4709,7 +4693,7 @@ body {
     }
     
     .final-cta {
-        padding: 3rem 1rem 0 1rem;
+        padding: 3rem 1rem;
     }
     
     .final-cta-title {
@@ -4753,8 +4737,8 @@ body {
         font-size: 1.1rem;
     }
     
-    .success-guide-integrated {
-        padding: 3rem 0 3rem 0;
+    .success-guide-section {
+        padding: 3rem 1rem;
     }
     
     .success-benefits-container {
@@ -4812,8 +4796,8 @@ body {
         font-size: 0.8rem;
     }
     
-    .success-guide-integrated {
-        padding: 2rem 0 2rem 0;
+    .success-guide-section {
+        padding: 2rem 1rem;
     }
     
     .success-benefit-icon img {
@@ -4840,7 +4824,7 @@ body {
 }
 
 /* ===================================
-   MODALS - AIRDROP TERMS & INFO
+   MODALS
    =================================== */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
@@ -5092,7 +5076,3 @@ body {
         width: 100%;
     }
 }
-
-/* ===================================
-   END OF LOCAL.CSS - MAIN PAGE
-   =================================== */
