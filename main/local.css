@@ -4449,7 +4449,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    padding: 3rem 0;
+    padding: 2.5rem 0 2.5rem 0; /* Equal padding top and bottom */
 }
 
 .success-primary-button {
@@ -4494,6 +4494,39 @@ body {
     color: rgba(255, 255, 255, 0.75);
     font-weight: 600;
     margin: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .success-cta-wrapper {
+        padding: 2rem 0 2rem 0; /* Equal spacing on mobile too */
+    }
+    
+    .success-primary-button {
+        width: 100%;
+        padding: 1.1rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .success-primary-button img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .success-cta-wrapper {
+        padding: 1.5rem 0 1.5rem 0;
+    }
+    
+    .success-primary-button {
+        padding: 1rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .success-footnote {
+        font-size: 0.85rem;
+    }
 }
 
 /* ===================================
