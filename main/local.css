@@ -4349,7 +4349,7 @@ body {
    =================================== */
 .success-guide-integrated {
     margin: 4rem 0 0 0; /* Top margin only, no bottom */
-    padding: 4rem 0 0 0; /* Top padding only, no bottom */
+    padding: 4rem 0 4rem 0; /* ADDED: Equal top and bottom padding */
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
