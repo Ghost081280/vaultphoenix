@@ -951,7 +951,8 @@ body.onboarding-page #main-content *::after {
     }
 }
 
-/* END OF PART 1 *//* ========================================
+/* END OF PART 1 */
+/* ========================================
    VAULT PHOENIX ONBOARDING - REBUILT CSS v4.0
    PART 2 OF 3: Process Steps, Calculator, Scripts, Proposals
    Mobile-First Responsive Design
@@ -2181,7 +2182,8 @@ body.onboarding-page #main-content *::after {
     }
 }
 
-/* END OF PART 2 *//* ========================================
+/* END OF PART 2 */
+/* ========================================
    VAULT PHOENIX ONBOARDING - REBUILT CSS v4.0
    PART 3 OF 3: Scripts, Proposals, Pricing, Checklist, CTA, Responsive
    Mobile-First Responsive Design - Final Section
@@ -4012,3 +4014,621 @@ body.onboarding-page select:focus {
 }
 
 /* END OF PART 3 - FILE COMPLETE */
+/* ========================================
+   VAULT PHOENIX ONBOARDING - CRITICAL FIXES v4.1
+   Fixes: Blacked out sections, missing modals, copy/paste areas
+   Add this AFTER the 3-part CSS or integrate into local.css
+   ======================================== */
+
+/* ========================================
+   FIX 1: COPY/PASTE SECTIONS - REMOVE BLACK BACKGROUND
+   ======================================== */
+
+/* Script content - make readable */
+.script-content pre {
+    background: rgba(240, 165, 0, 0.05) !important; /* Light orange tint instead of black */
+    border: 2px solid rgba(240, 165, 0, 0.2) !important;
+    padding: 1.5rem !important;
+}
+
+.script-content code {
+    color: rgba(255, 255, 255, 0.95) !important; /* High contrast text */
+    font-size: 0.9rem !important;
+    line-height: 1.8 !important;
+}
+
+/* Proposal content - make readable */
+.proposal-content pre {
+    background: rgba(240, 165, 0, 0.05) !important;
+    border: 2px solid rgba(240, 165, 0, 0.2) !important;
+    padding: 1.5rem !important;
+}
+
+.proposal-content code {
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-size: 0.9rem !important;
+    line-height: 1.8 !important;
+}
+
+/* ========================================
+   FIX 2: COPY BUTTON FUNCTIONALITY & VISIBILITY
+   ======================================== */
+
+.copy-button-enhanced {
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(240, 165, 0, 0.3);
+}
+
+.copy-button-enhanced:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.copy-button-enhanced.copied {
+    background: var(--success, #4caf50) !important;
+}
+
+.copy-button-enhanced.copied::after {
+    content: '✓ Copied!';
+    position: absolute;
+    top: -30px;
+    right: 0;
+    background: var(--success, #4caf50);
+    color: white;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--border-radius-sm, 4px);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    animation: fade-in-out 2s ease-in-out;
+}
+
+@keyframes fade-in-out {
+    0% { opacity: 0; transform: translateY(5px); }
+    15% { opacity: 1; transform: translateY(0); }
+    85% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-5px); }
+}
+
+/* ========================================
+   FIX 3: CHECKLIST MODAL - ADD MISSING STYLES
+   ======================================== */
+
+/* Modal overlay */
+.checklist-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity var(--transition-normal, 0.25s);
+}
+
+.checklist-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Modal container */
+.checklist-modal {
+    background: var(--dark-card, #1a1a1a);
+    border-radius: var(--border-radius-lg, 12px);
+    max-width: 600px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+    transform: scale(0.9);
+    transition: transform var(--transition-normal, 0.25s);
+}
+
+.checklist-modal-overlay.active .checklist-modal {
+    transform: scale(1);
+}
+
+/* Modal header */
+.checklist-modal-header {
+    padding: 1.5rem;
+    border-bottom: 2px solid rgba(240, 165, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(240, 165, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.checklist-modal-header h3 {
+    color: var(--ember-orange, #f0a500);
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.checklist-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all var(--transition-fast, 0.15s);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0;
+    line-height: 1;
+}
+
+.checklist-modal-close:hover {
+    background: rgba(240, 165, 0, 0.2);
+    color: var(--ember-orange, #f0a500);
+    transform: rotate(90deg);
+}
+
+/* Modal body */
+.checklist-modal-body {
+    padding: 1.5rem;
+}
+
+.checklist-modal-body h4 {
+    color: var(--text-primary, #ffffff);
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.checklist-modal-body h4:first-child {
+    margin-top: 0;
+}
+
+.checklist-modal-body p {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.checklist-modal-body ul {
+    list-style: none;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+}
+
+.checklist-modal-body li {
+    padding: 0.65rem 0;
+    padding-left: 1.75rem;
+    position: relative;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+    line-height: 1.6;
+}
+
+.checklist-modal-body li::before {
+    content: '→';
+    position: absolute;
+    left: 0.5rem;
+    color: var(--ember-orange, #f0a500);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* ========================================
+   FIX 4: ENHANCED VISUAL HIERARCHY
+   ======================================== */
+
+/* Make section backgrounds more distinct */
+.onboarding-process-section,
+.sales-scripts-section,
+.launch-checklist-section,
+.success-tips-section {
+    background: linear-gradient(180deg, var(--dark-bg, #0a0a0a) 0%, rgba(10, 10, 10, 0.95) 100%);
+}
+
+.revenue-calculator-section,
+.proposals-section,
+.pricing-tiers-section,
+.upselling-section,
+.interactive-calculator-section {
+    background: linear-gradient(180deg, rgba(15, 15, 15, 0.95) 0%, var(--dark-section, #0f0f0f) 100%);
+}
+
+/* Add subtle separation lines */
+.onboarding-process-section,
+.revenue-calculator-section,
+.sales-scripts-section,
+.proposals-section,
+.pricing-tiers-section,
+.upselling-section,
+.launch-checklist-section,
+.interactive-calculator-section,
+.success-tips-section {
+    border-top: 1px solid rgba(240, 165, 0, 0.1);
+}
+
+/* ========================================
+   FIX 5: IMPROVE CARD HOVER EFFECTS
+   ======================================== */
+
+/* Enhanced card shadows */
+.process-step-enhanced:hover,
+.script-card-enhanced:hover,
+.proposal-card-enhanced:hover,
+.pricing-tier-card:hover {
+    box-shadow: 0 15px 50px rgba(240, 165, 0, 0.2),
+                0 0 50px rgba(240, 165, 0, 0.1) !important;
+}
+
+/* ========================================
+   FIX 6: BETTER MOBILE TOUCH TARGETS
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* Increase button sizes on mobile */
+    .hero-cta-primary,
+    .hero-cta-secondary,
+    .success-cta-primary,
+    .success-cta-secondary,
+    .cta-button-primary,
+    .cta-button-secondary,
+    .step-demo-button,
+    .calculator-cta-button {
+        min-height: 48px;
+    }
+    
+    /* Larger tap targets for checkboxes */
+    .checklist-item {
+        padding: 1.25rem !important;
+    }
+    
+    .checklist-item input[type="checkbox"] {
+        width: 24px !important;
+        height: 24px !important;
+    }
+}
+
+/* ========================================
+   FIX 7: SCROLLBAR STYLING FOR DARK THEME
+   ======================================== */
+
+/* Custom scrollbar for modals and overflow areas */
+.checklist-modal::-webkit-scrollbar,
+.revenue-table-wrapper::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.checklist-modal::-webkit-scrollbar-track,
+.revenue-table-wrapper::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.checklist-modal::-webkit-scrollbar-thumb,
+.revenue-table-wrapper::-webkit-scrollbar-thumb {
+    background: var(--ember-orange, #f0a500);
+    border-radius: 10px;
+}
+
+.checklist-modal::-webkit-scrollbar-thumb:hover,
+.revenue-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: var(--ember-red, #d73327);
+}
+
+/* ========================================
+   FIX 8: ADD SHINE/GLOW EFFECTS TO KEY ELEMENTS
+   ======================================== */
+
+/* Animated glow for primary CTAs */
+.hero-cta-primary,
+.success-cta-primary,
+.cta-button-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-cta-primary::before,
+.success-cta-primary::before,
+.cta-button-primary::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    50% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+}
+
+/* ========================================
+   FIX 9: IMPROVE FORMULA BOX & CALLOUTS
+   ======================================== */
+
+.formula-box-enhanced,
+.best-practice-callout,
+.optimization-callout {
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.08) 0%, 
+        rgba(240, 165, 0, 0.03) 100%) !important;
+    border-left: 4px solid var(--ember-orange, #f0a500) !important;
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.1);
+}
+
+/* ========================================
+   FIX 10: ENHANCE TABLE READABILITY
+   ======================================== */
+
+/* Better table cell padding and spacing */
+.revenue-table-enhanced td,
+.revenue-table-enhanced th {
+    padding: 1rem 1.25rem !important;
+}
+
+/* Alternating row colors for better readability */
+.revenue-table-enhanced tbody tr:nth-child(even) {
+    background: rgba(240, 165, 0, 0.02);
+}
+
+/* Stronger hover effect */
+.table-row-interactive:hover {
+    background: rgba(240, 165, 0, 0.1) !important;
+    transform: scale(1.01) !important;
+}
+
+/* ========================================
+   FIX 11: ADD LOADING STATES
+   ======================================== */
+
+/* Loading spinner for copy buttons */
+.copy-button-enhanced.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.copy-button-enhanced.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   FIX 12: IMPROVE STEP VISUAL INDICATORS
+   ======================================== */
+
+/* Add connecting lines between steps */
+@media (min-width: 768px) {
+    .process-step-enhanced::before {
+        content: '';
+        position: absolute;
+        left: 30px;
+        top: 80px;
+        width: 2px;
+        height: calc(100% - 80px);
+        background: linear-gradient(
+            to bottom,
+            rgba(240, 165, 0, 0.3),
+            transparent
+        );
+        z-index: 0;
+    }
+    
+    .process-step-enhanced:last-of-type::before {
+        display: none;
+    }
+    
+    .step-number-badge {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+/* ========================================
+   FIX 13: ENHANCE PARTNER LOGOS
+   ======================================== */
+
+.partners-logos-grid img {
+    filter: brightness(1.1) grayscale(0.3);
+}
+
+.partners-logos-grid img:hover {
+    filter: brightness(1.3) grayscale(0);
+}
+
+/* ========================================
+   FIX 14: ADD PULSE ANIMATIONS TO IMPORTANT ELEMENTS
+   ======================================== */
+
+/* Pulse effect for badges */
+.hero-badge-enhanced,
+.section-badge {
+    animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* ========================================
+   FIX 15: IMPROVE FOCUS STATES FOR ACCESSIBILITY
+   ======================================== */
+
+body.onboarding-page a:focus-visible,
+body.onboarding-page button:focus-visible,
+body.onboarding-page input:focus-visible,
+body.onboarding-page select:focus-visible {
+    outline: 3px solid var(--ember-orange, #f0a500) !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 6px rgba(240, 165, 0, 0.2) !important;
+}
+
+/* ========================================
+   FIX 16: ADD PRINT STYLES
+   ======================================== */
+
+@media print {
+    .construction-banner,
+    .status-banner,
+    .navbar,
+    .mobile-menu-panel,
+    .mobile-menu-overlay,
+    .copy-button-enhanced,
+    .hero-cta-row,
+    .success-cta-buttons,
+    .cta-buttons-row {
+        display: none !important;
+    }
+    
+    .hero-background-effects,
+    .cta-background-effects,
+    .hero-particles {
+        display: none !important;
+    }
+    
+    body.onboarding-page {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .process-step-enhanced,
+    .script-card-enhanced,
+    .proposal-card-enhanced {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ========================================
+   FIX 17: ENHANCE TEXT SELECTION
+   ======================================== */
+
+body.onboarding-page ::selection {
+    background: rgba(240, 165, 0, 0.3);
+    color: white;
+}
+
+body.onboarding-page ::-moz-selection {
+    background: rgba(240, 165, 0, 0.3);
+    color: white;
+}
+
+/* ========================================
+   FIX 18: ADD SKELETON LOADING STATES
+   ======================================== */
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.03) 0%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.03) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: var(--border-radius-sm, 4px);
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ========================================
+   FIX 19: IMPROVE EMPTY STATES
+   ======================================== */
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted, rgba(255, 255, 255, 0.6));
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state-message {
+    font-size: 1.1rem;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+}
+
+/* ========================================
+   FIX 20: ADD TOOLTIP STYLES
+   ======================================== */
+
+[data-tooltip] {
+    position: relative;
+    cursor: help;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    padding: 0.5rem 0.75rem;
+    background: var(--dark-card, #1a1a1a);
+    color: white;
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: var(--border-radius-sm, 4px);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--transition-fast, 0.15s);
+    z-index: 1000;
+}
+
+[data-tooltip]:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ========================================
+   END OF CRITICAL FIXES
+   ======================================== */
