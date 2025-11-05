@@ -391,115 +391,6 @@ function initChecklistModals() {
                 <h4>Weekly Review</h4>
                 <p>Every Friday, do a deeper 30-minute analysis. Calculate ROI per location. Identify trends. Plan next week's optimizations. Share insights with stakeholders.</p>
             `
-        },
-        'target-audience': {
-            title: 'Target Audience Identified',
-            content: `
-                <h4>Why This Matters</h4>
-                <p>Understanding your target audience ensures you place coins in the right locations and craft messaging that resonates with players.</p>
-                
-                <h4>Key Demographics to Define</h4>
-                <ul>
-                    <li><strong>Age Range:</strong> Gen Z (18-25), Millennials (26-40), or broader</li>
-                    <li><strong>Interests:</strong> Gaming, crypto, shopping, dining, events</li>
-                    <li><strong>Behaviors:</strong> Early adopters, social sharers, deal seekers</li>
-                    <li><strong>Location Patterns:</strong> Where does your audience spend time?</li>
-                    <li><strong>Tech Savviness:</strong> Comfortable with AR and crypto or need guidance</li>
-                </ul>
-                
-                <h4>Research Methods</h4>
-                <p>Use social media analytics to understand your existing audience. Survey current customers about their interests. Check competitor campaigns to see who engages. Use Google Analytics and foot traffic data to validate assumptions.</p>
-                
-                <h4>Best Practice</h4>
-                <p>Start narrow and expand. Better to perfectly serve 1,000 ideal users than loosely target 10,000 random people.</p>
-            `
-        },
-        'coin-rewards': {
-            title: 'Coin Rarity & Rewards Configured',
-            content: `
-                <h4>Why This Matters</h4>
-                <p>Reward structure drives player motivation. Proper balance between common and rare coins keeps players engaged without depleting your token budget.</p>
-                
-                <h4>Recommended Rarity Tiers</h4>
-                <ul>
-                    <li><strong>Common (70%):</strong> 10-50 $Ember tokens - Easy to find, keeps players hunting</li>
-                    <li><strong>Rare (25%):</strong> 100-250 $Ember tokens - Exciting finds that generate social shares</li>
-                    <li><strong>Legendary (5%):</strong> 500-1000 $Ember tokens - Viral moments, creates FOMO</li>
-                </ul>
-                
-                <h4>Dynamic Rewards Strategy</h4>
-                <p>Start with higher rewards during launch week to drive initial engagement. Gradually adjust based on player feedback and budget. Use legendary coins for special events and partner promotions.</p>
-                
-                <h4>Budget Management</h4>
-                <p>Calculate your total token budget upfront. Monitor redemption rates daily. Adjust rarity distribution if players are collecting too quickly or too slowly. Aim for 60-70% of tokens distributed within campaign duration.</p>
-            `
-        },
-        'airdrop-schedule': {
-            title: 'Airdrop Schedule Planned',
-            content: `
-                <h4>Why This Matters</h4>
-                <p>Scheduled airdrops create viral moments and drive player acquisition. Strategic timing can 10X your social media engagement.</p>
-                
-                <h4>Airdrop Strategy</h4>
-                <ul>
-                    <li><strong>Launch Airdrop:</strong> Day 1 - First 100 players get bonus tokens</li>
-                    <li><strong>Weekly Airdrops:</strong> Every Friday at 5pm - "Happy Hour" token drops</li>
-                    <li><strong>Milestone Airdrops:</strong> When you hit 500, 1000, 5000 players</li>
-                    <li><strong>Partner Airdrops:</strong> Coordinate with sponsors for co-branded drops</li>
-                    <li><strong>Event Airdrops:</strong> During festivals, sports games, or local events</li>
-                </ul>
-                
-                <h4>Announcement Best Practices</h4>
-                <p>Announce airdrops 24-48 hours in advance to build anticipation. Create countdown posts on social media. Share photos/videos of past airdrops. Make sharing a requirement for entry to amplify reach.</p>
-                
-                <h4>Timing Tips</h4>
-                <p>Schedule airdrops during peak engagement hours (lunch 12-1pm, evening 5-7pm). Coordinate with partner businesses for maximum foot traffic. Track which time slots perform best and optimize future airdrops.</p>
-            `
-        },
-        'marketing-materials': {
-            title: 'Marketing Materials Ready',
-            content: `
-                <h4>Why This Matters</h4>
-                <p>Professional marketing materials establish credibility and drive player acquisition. Good content = more downloads = more engagement.</p>
-                
-                <h4>Essential Marketing Assets</h4>
-                <ul>
-                    <li><strong>App Screenshots:</strong> 3-5 images showing AR gameplay, coin collection, rewards</li>
-                    <li><strong>Teaser Video:</strong> 15-30 second demo showing the app in action</li>
-                    <li><strong>Social Media Graphics:</strong> Branded posts for Instagram, Facebook, Twitter</li>
-                    <li><strong>Press Kit:</strong> Logo, screenshots, campaign description, contact info</li>
-                    <li><strong>QR Codes:</strong> For physical locations directing to app download</li>
-                    <li><strong>Partner Materials:</strong> Posters, table tents for participating businesses</li>
-                </ul>
-                
-                <h4>Content Calendar</h4>
-                <p>Plan 2 weeks of social posts in advance. Mix educational content (how to play), user-generated content (player success stories), and promotional content (airdrops, new locations). Post daily during launch week, then 3-4 times per week.</p>
-                
-                <h4>Quick Creation Tips</h4>
-                <p>Use Canva for quick graphics. Record screen capture videos on your phone. Repurpose player testimonials and location photos. Keep messaging simple and action-focused.</p>
-            `
-        },
-        'user-feedback': {
-            title: 'User Feedback System in Place',
-            content: `
-                <h4>Why This Matters</h4>
-                <p>Player feedback is your secret weapon for continuous improvement. Users will tell you exactly what's working and what needs fixing.</p>
-                
-                <h4>Feedback Collection Methods</h4>
-                <ul>
-                    <li><strong>In-App Surveys:</strong> Quick 1-2 question polls after coin collection</li>
-                    <li><strong>Social Listening:</strong> Monitor mentions, comments, DMs on social platforms</li>
-                    <li><strong>Direct Emails:</strong> Set up support@yourdomain.com for player questions</li>
-                    <li><strong>Discord/Telegram:</strong> Create community channels for player discussions</li>
-                    <li><strong>App Store Reviews:</strong> Respond to both positive and negative reviews</li>
-                </ul>
-                
-                <h4>What to Ask</h4>
-                <p>Keep surveys short: "How easy was it to find coins? (1-5)" or "Would you recommend this to friends? (Yes/No/Maybe)". Ask open-ended questions like "What would make this more fun?" at the end of campaigns.</p>
-                
-                <h4>Acting on Feedback</h4>
-                <p>Categorize feedback into: Bugs (fix immediately), Features (evaluate for future), Complaints (address quickly), Praise (share with team). Implement at least one user suggestion per week to show you're listening. Thank users publicly when you implement their ideas.</p>
-            `
         }
     };
     
@@ -546,26 +437,7 @@ function initChecklistModals() {
         }
     });
     
-    // CRITICAL FIX: Add handlers for "Learn More" buttons with data-content attributes
-    const learnMoreButtons = document.querySelectorAll('.checklist-learn-btn[data-content]');
-    
-    learnMoreButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const contentKey = this.getAttribute('data-content');
-            console.log('Learn More clicked:', contentKey);
-            
-            if (contentKey && checklistContent[contentKey]) {
-                openChecklistModal(checklistContent[contentKey]);
-            } else {
-                console.error('No content found for key:', contentKey);
-            }
-        });
-    });
-    
-    console.log(`✅ Initialized ${checklistItems.length} checklist items and ${learnMoreButtons.length} Learn More buttons`);
+    console.log(`✅ Initialized ${checklistItems.length} checklist items with modal details`);
 }
 
 /**
@@ -576,20 +448,12 @@ function initChecklistModals() {
 function getContentKeyFromSpan(text) {
     const keyMap = {
         'Platform account created': 'platform-account',
-        'Demo tested on mobile & desktop': 'demo-tested',
         'Demo tested': 'demo-tested',
-        'Branding finalized (logo, colors)': 'branding-finalized',
         'Branding finalized': 'branding-finalized',
-        'Target audience identified': 'target-audience',
         'Target locations identified': 'locations-identified',
         'GPS vs Beacon strategy decided': 'gps-beacon-strategy',
-        'Coin rarity & rewards configured': 'coin-rewards',
-        'Airdrop schedule planned': 'airdrop-schedule',
-        'Marketing materials ready': 'marketing-materials',
-        'Launch announced on social media': 'launch-announced',
         'Launch announced': 'launch-announced',
-        'Daily monitoring active': 'daily-monitoring',
-        'User feedback system in place': 'user-feedback'
+        'Daily monitoring active': 'daily-monitoring'
     };
     
     return keyMap[text] || null;
