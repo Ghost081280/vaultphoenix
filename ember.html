@@ -82,7 +82,7 @@
 
     <!-- Main Content -->
     <main id="main-content">
-        <!-- EMBER HERO SECTION - REBUILT -->
+        <!-- EMBER HERO SECTION -->
         <section class="ember-hero-redesigned" id="hero">
             <div class="hero-background-effects">
                 <div class="hero-glow-orb hero-glow-1"></div>
@@ -198,7 +198,7 @@
             </div>
         </section>
 
-        <!-- CREDENTIALS BAR - MATCHING MAIN.HTML -->
+        <!-- CREDENTIALS BAR -->
         <section class="credentials-bar scroll-reveal">
             <div class="main-container">
                 <div class="credentials-content">
@@ -251,7 +251,7 @@
             </div>
         </section>
 
-        <!-- WHAT IS $EMBER SECTION - MATCHING MAIN.HTML CARD STYLE -->
+        <!-- WHAT IS $EMBER SECTION -->
         <section class="what-is-ember-section" id="what-is-ember">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
@@ -354,7 +354,7 @@
             </div>
         </section>
 
-        <!-- HOW IT WORKS - MATCHING MAIN.HTML STEPS STYLE -->
+        <!-- HOW IT WORKS -->
         <section class="how-it-works-ember" id="how-it-works">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
@@ -421,7 +421,7 @@
             </div>
         </section>
 
-        <!-- STAKEHOLDER BENEFITS - MATCHING MAIN.HTML CTA GRID -->
+        <!-- STAKEHOLDER BENEFITS -->
         <section class="stakeholder-benefits-section" id="stakeholder-benefits">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
@@ -578,15 +578,15 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- TOKENOMICS SECTION -->
+        </section><!-- TOKENOMICS SECTION -->
         <section class="tokenomics-section-redesigned" id="tokenomics">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
                     <h2 class="main-section-title">$Ember Tokenomics</h2>
                     <p class="main-section-subtitle">Transparent allocation designed for sustainable growth and long-term value.</p>
-                </div><!-- Token Overview Stats -->
+                </div>
+                
+                <!-- Token Overview Stats -->
                 <div class="token-overview-stats scroll-reveal">
                     <div class="overview-stat-card">
                         <div class="stat-icon-large">
@@ -830,7 +830,7 @@
             </div>
         </section>
 
-        <!-- PRESALE DETAILS - MATCHING MAIN.HTML PRICING STYLE -->
+        <!-- PRESALE DETAILS -->
         <section class="presale-details-section" id="presale-details">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
@@ -1103,7 +1103,7 @@
             </div>
         </section>
 
-        <!-- ROADMAP SECTION - MATCHING MAIN.HTML STYLE -->
+        <!-- ROADMAP SECTION -->
         <section class="roadmap-section" id="roadmap">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
@@ -1212,9 +1212,7 @@
                     </a>
                 </div>
             </div>
-        </section>
-
-        <!-- TEAM SECTION -->
+        </section><!-- TEAM SECTION -->
         <section class="team-section" id="team">
             <div class="main-container">
                 <div class="section-header-enhanced scroll-reveal">
@@ -1497,5 +1495,70 @@
     <!-- Scripts -->
     <script src="shared/global.js"></script>
     <script src="ember/local.js"></script>
+    
+    <!-- Countdown Timer Script -->
+    <script>
+        // Countdown to November 1, 2025
+        const launchDate = new Date('November 1, 2025 00:00:00 EST').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Presale Calculator
+        function calculatePresale() {
+            const investment = parseFloat(document.getElementById('investment-amount').value) || 0;
+            const tier = document.getElementById('presale-tier').value;
+            
+            let pricePerToken, bonusPercent;
+            
+            if (tier === 'tier1') {
+                pricePerToken = 0.003;
+                bonusPercent = 0.20;
+            } else if (tier === 'tier2') {
+                pricePerToken = 0.004;
+                bonusPercent = 0.10;
+            } else {
+                pricePerToken = 0.005;
+                bonusPercent = 0;
+            }
+            
+            const baseTokens = Math.floor(investment / pricePerToken);
+            const bonusTokens = Math.floor(baseTokens * bonusPercent);
+            const totalTokens = baseTokens + bonusTokens;
+            const initialUnlock = Math.floor(totalTokens * 0.30);
+            const vestedAmount = totalTokens - initialUnlock;
+            
+            document.getElementById('base-tokens').textContent = baseTokens.toLocaleString();
+            document.getElementById('bonus-tokens').textContent = bonusTokens.toLocaleString();
+            document.getElementById('total-tokens').textContent = totalTokens.toLocaleString();
+            document.getElementById('initial-unlock').textContent = initialUnlock.toLocaleString();
+            document.getElementById('vested-amount').textContent = vestedAmount.toLocaleString();
+        }
+        
+        // Initialize calculator on page load
+        window.addEventListener('load', calculatePresale);
+    </script>
 </body>
 </html>
