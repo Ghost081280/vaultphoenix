@@ -4632,3 +4632,603 @@ body.onboarding-page ::-moz-selection {
 /* ========================================
    END OF CRITICAL FIXES
    ======================================== */
+/* ========================================
+   VAULT PHOENIX ONBOARDING - STYLE MATCHING v1.0
+   Matches main.html visual styling for consistency
+   Add this AFTER the complete local.css file
+   ======================================== */
+
+/* ========================================
+   GLOBAL CONSISTENCY - MATCH MAIN PAGE
+   ======================================== */
+
+/* Background gradient matching main page */
+body.onboarding-page {
+    background: linear-gradient(135deg, 
+        rgba(13, 12, 12, 0.95) 0%, 
+        rgba(26, 15, 10, 0.9) 50%,
+        rgba(13, 12, 12, 0.95) 100%) !important;
+}
+
+/* Smooth scroll reveal animations like main page */
+body.onboarding-page .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.onboarding-page .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   IMAGE GLOW EFFECTS - MATCH MAIN PAGE
+   ======================================== */
+
+/* Consistent glow for all images */
+body.onboarding-page .main-image-glow {
+    display: inline-block;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 40px rgba(215, 51, 39, 0.3));
+    animation: consistentGlow 3s ease-in-out infinite;
+}
+
+@keyframes consistentGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5)) 
+                drop-shadow(0 0 40px rgba(215, 51, 39, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.8)) 
+                drop-shadow(0 0 60px rgba(215, 51, 39, 0.5));
+    }
+}
+
+/* Phoenix glow enhancement */
+body.onboarding-page .phoenix-glow-animated,
+body.onboarding-page .phoenix-hero-glow,
+body.onboarding-page .phoenix-cta-glow {
+    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6)) 
+            drop-shadow(0 0 50px rgba(215, 51, 39, 0.4)) !important;
+    animation: phoenixGlowEnhanced 3s ease-in-out infinite !important;
+}
+
+@keyframes phoenixGlowEnhanced {
+    0%, 100% { 
+        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6)) 
+                drop-shadow(0 0 50px rgba(215, 51, 39, 0.4));
+    }
+    50% { 
+        filter: drop-shadow(0 0 45px rgba(240, 165, 0, 0.9)) 
+                drop-shadow(0 0 70px rgba(215, 51, 39, 0.6));
+    }
+}
+
+/* ========================================
+   CARD STYLES - MATCH MAIN PAGE GRADIENT
+   ======================================== */
+
+/* Process steps matching main CTA cards */
+.process-step-enhanced {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9), 
+        rgba(45, 24, 16, 0.85)) !important;
+    border: 2px solid rgba(215, 51, 39, 0.3) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+.process-step-enhanced:hover {
+    border-color: rgba(215, 51, 39, 0.6) !important;
+    box-shadow: 0 15px 50px rgba(240, 165, 0, 0.2),
+                0 0 50px rgba(240, 165, 0, 0.1) !important;
+    transform: translateY(-5px) !important;
+}
+
+/* Script and proposal cards */
+.script-card-enhanced,
+.proposal-card-enhanced {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9), 
+        rgba(45, 24, 16, 0.85)) !important;
+    border: 2px solid rgba(215, 51, 39, 0.3) !important;
+}
+
+.script-card-enhanced:hover,
+.proposal-card-enhanced:hover {
+    border-color: rgba(215, 51, 39, 0.6) !important;
+    box-shadow: 0 15px 50px rgba(240, 165, 0, 0.2),
+                0 0 50px rgba(240, 165, 0, 0.1) !important;
+}
+
+/* ========================================
+   BUTTONS - MATCH MAIN PAGE EXACTLY
+   ======================================== */
+
+/* Primary buttons matching main page */
+.hero-cta-primary,
+.success-cta-primary,
+.cta-button-primary,
+.join-presale-button-redesigned,
+.claim-btn-compact,
+.journey-cta-button {
+    background: linear-gradient(135deg, #d73327, #c62828) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 12px rgba(215, 51, 39, 0.3) !important;
+}
+
+.hero-cta-primary:hover,
+.success-cta-primary:hover,
+.cta-button-primary:hover,
+.join-presale-button-redesigned:hover,
+.claim-btn-compact:hover:not(:disabled),
+.journey-cta-button:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 24px rgba(215, 51, 39, 0.5) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Secondary buttons */
+.hero-cta-secondary,
+.calculator-cta-button {
+    background: transparent !important;
+    border: 2px solid rgba(240, 165, 0, 0.5) !important;
+    color: var(--ember-orange, #f0a500) !important;
+}
+
+.hero-cta-secondary:hover,
+.calculator-cta-button:hover {
+    background: rgba(240, 165, 0, 0.1) !important;
+    border-color: var(--ember-orange, #f0a500) !important;
+}
+
+/* Purple transparent buttons for developer paths */
+.ember-social-btn-transparent,
+.share-button-transparent {
+    background: rgba(139, 92, 246, 0.2) !important;
+    border: 2px solid rgba(139, 92, 246, 0.5) !important;
+}
+
+.ember-social-btn-transparent:hover,
+.share-button-transparent:hover {
+    background: rgba(139, 92, 246, 0.4) !important;
+    border-color: rgba(139, 92, 246, 0.8) !important;
+}
+
+/* ========================================
+   BADGES & TAGS - MATCH MAIN PAGE
+   ======================================== */
+
+/* Hero badge matching main */
+.hero-badge-enhanced,
+.section-badge {
+    background: rgba(240, 165, 0, 0.08) !important;
+    border: 2px solid rgba(240, 165, 0, 0.25) !important;
+    backdrop-filter: blur(10px);
+    animation: badge-glow 3s ease-in-out infinite;
+}
+
+@keyframes badge-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(240, 165, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(240, 165, 0, 0.4);
+    }
+}
+
+/* Coming soon badges */
+.coming-soon-badge-overlay-solid {
+    background: #d73327 !important;
+    box-shadow: 0 4px 12px rgba(215, 51, 39, 0.5) !important;
+}
+
+.early-2026-badge-overlay-solid {
+    background: #8b5cf6 !important;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5) !important;
+}
+
+/* ========================================
+   PRICING TIERS - MATCH MAIN PAGE COLORS
+   ======================================== */
+
+.pricing-tier-card {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9), 
+        rgba(45, 24, 16, 0.85)) !important;
+    border: 2px solid transparent !important;
+}
+
+.bronze-tier {
+    border-color: #cd7f32 !important;
+}
+
+.bronze-tier:hover {
+    box-shadow: 0 10px 35px rgba(205, 127, 50, 0.3) !important;
+}
+
+.silver-tier {
+    border-color: #c0c0c0 !important;
+}
+
+.silver-tier:hover {
+    box-shadow: 0 10px 35px rgba(192, 192, 192, 0.3) !important;
+}
+
+.gold-tier {
+    border-color: #ffd700 !important;
+}
+
+.gold-tier:hover {
+    box-shadow: 0 10px 35px rgba(255, 215, 0, 0.3) !important;
+}
+
+.tier-badge-top {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bronze-tier .tier-badge-top {
+    background: #cd7f32 !important;
+    color: white !important;
+}
+
+.silver-tier .tier-badge-top {
+    background: #c0c0c0 !important;
+    color: #0a0a0a !important;
+}
+
+.gold-tier .tier-badge-top {
+    background: #ffd700 !important;
+    color: #0a0a0a !important;
+}
+
+/* ========================================
+   CALCULATOR SECTION - MATCH MAIN STYLING
+   ======================================== */
+
+.calculator-container-enhanced {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9), 
+        rgba(45, 24, 16, 0.85)) !important;
+    border: 2px solid rgba(215, 51, 39, 0.3) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+.result-card-large {
+    background: rgba(15, 15, 15, 0.6) !important;
+    border: 2px solid rgba(240, 165, 0, 0.2) !important;
+}
+
+.result-card-large:hover {
+    border-color: var(--ember-orange, #f0a500) !important;
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.2) !important;
+}
+
+/* ========================================
+   REVENUE TABLE - ENHANCED STYLING
+   ======================================== */
+
+.revenue-table-enhanced {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9), 
+        rgba(45, 24, 16, 0.85)) !important;
+}
+
+.revenue-table-enhanced thead {
+    background: linear-gradient(135deg, 
+        var(--ember-orange, #f0a500), 
+        var(--ember-red, #d73327)) !important;
+}
+
+.table-row-interactive:hover {
+    background: rgba(240, 165, 0, 0.1) !important;
+    transform: scale(1.005) !important;
+}
+
+/* ========================================
+   CHECKLIST & SUCCESS TIPS
+   ======================================== */
+
+.checklist-phase-card,
+.success-tip-card,
+.upsell-card {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9), 
+        rgba(45, 24, 16, 0.85)) !important;
+    border: 2px solid rgba(215, 51, 39, 0.3) !important;
+}
+
+.checklist-phase-card:hover,
+.success-tip-card:hover,
+.upsell-card:hover {
+    border-color: rgba(240, 165, 0, 0.3) !important;
+    box-shadow: 0 10px 40px rgba(240, 165, 0, 0.2) !important;
+}
+
+/* ========================================
+   MODALS - MATCH MAIN PAGE AIRDROP STYLE
+   ======================================== */
+
+.checklist-modal {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.98) 0%, 
+        rgba(45, 24, 16, 0.95) 100%) !important;
+    border: 2px solid rgba(215, 51, 39, 0.3) !important;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8) !important;
+}
+
+.checklist-modal-header {
+    background: linear-gradient(135deg, #d73327, #c62828) !important;
+    border-bottom: 2px solid rgba(240, 165, 0, 0.4) !important;
+}
+
+/* ========================================
+   FORMULA BOX & CALLOUTS
+   ======================================== */
+
+.formula-box-enhanced,
+.best-practice-callout,
+.optimization-callout {
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.08) 0%, 
+        rgba(240, 165, 0, 0.03) 100%) !important;
+    border-left: 4px solid var(--ember-orange, #f0a500) !important;
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.1) !important;
+}
+
+/* ========================================
+   DEPLOYMENT PATHS - MATCH MAIN CTA STYLING
+   ======================================== */
+
+.deployment-path-card {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9), 
+        rgba(45, 24, 16, 0.85)) !important;
+}
+
+.marketer-path {
+    border-color: rgba(215, 51, 39, 0.5) !important;
+}
+
+.marketer-path:hover {
+    border-color: var(--ember-orange, #f0a500) !important;
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.2) !important;
+}
+
+.developer-path {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 30, 0.9), 
+        rgba(45, 24, 46, 0.85)) !important;
+    border-color: rgba(139, 92, 246, 0.5) !important;
+}
+
+.developer-path:hover {
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2) !important;
+}
+
+/* ========================================
+   STEP DETAILS CARDS - ENHANCED
+   ======================================== */
+
+.step-detail-card {
+    background: rgba(15, 15, 15, 0.6) !important;
+    border: 1px solid rgba(215, 51, 39, 0.2) !important;
+}
+
+.step-detail-card:hover {
+    background: rgba(215, 51, 39, 0.05) !important;
+    border-color: rgba(240, 165, 0, 0.4) !important;
+}
+
+/* ========================================
+   FINAL CTA SECTION - DRAMATIC FINISH
+   ======================================== */
+
+.final-cta-section {
+    background: linear-gradient(135deg, 
+        var(--dark-bg, #0a0a0a) 0%, 
+        #1a0505 50%,
+        var(--dark-bg, #0a0a0a) 100%) !important;
+}
+
+.cta-glow-orb {
+    animation: float-glow 10s ease-in-out infinite !important;
+}
+
+@keyframes float-glow {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(25px, -25px) scale(1.08);
+        opacity: 0.5;
+    }
+}
+
+/* ========================================
+   TECH PARTNERS - MATCH MAIN PAGE
+   ======================================== */
+
+.tech-partners-showcase {
+    border-top: 2px solid rgba(215, 51, 39, 0.2) !important;
+}
+
+.partners-logos-grid img {
+    filter: brightness(1.1) grayscale(0.3);
+    transition: all var(--transition-normal, 0.25s);
+}
+
+.partners-logos-grid img:hover {
+    filter: brightness(1.3) grayscale(0);
+    transform: scale(1.12);
+}
+
+/* ========================================
+   INPUT FIELDS - MATCH MAIN PAGE STYLE
+   ======================================== */
+
+.input-group-enhanced input[type="number"],
+.input-group-enhanced input[type="text"],
+.input-group-enhanced input[type="email"],
+.input-group-enhanced select {
+    background: rgba(15, 15, 15, 0.6) !important;
+    border: 2px solid rgba(215, 51, 39, 0.3) !important;
+}
+
+.input-group-enhanced input:focus,
+.input-group-enhanced select:focus {
+    border-color: var(--ember-orange, #f0a500) !important;
+    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.1) !important;
+}
+
+/* Range slider matching main */
+.input-group-enhanced input[type="range"] {
+    background: rgba(15, 15, 15, 0.6) !important;
+}
+
+.input-group-enhanced input[type="range"]::-webkit-slider-thumb {
+    background: var(--ember-orange, #f0a500) !important;
+    box-shadow: 0 0 5px rgba(240, 165, 0, 0.5);
+}
+
+/* ========================================
+   FREE TOKENS BANNERS - PURPLE & RED
+   ======================================== */
+
+.free-tokens-banner {
+    background: linear-gradient(135deg, 
+        rgba(139, 92, 246, 0.15) 0%, 
+        rgba(124, 58, 237, 0.15) 100%) !important;
+    border: 2px solid rgba(139, 92, 246, 0.4) !important;
+    animation: subtle-glow 3s ease-in-out infinite;
+}
+
+@keyframes subtle-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+    }
+}
+
+.free-tokens-banner-red {
+    background: linear-gradient(135deg, 
+        rgba(215, 51, 39, 0.15) 0%, 
+        rgba(198, 40, 40, 0.15) 100%) !important;
+    border: 2px solid rgba(215, 51, 39, 0.4) !important;
+    animation: subtle-glow-red 3s ease-in-out infinite;
+}
+
+@keyframes subtle-glow-red {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(215, 51, 39, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(215, 51, 39, 0.5);
+    }
+}
+
+/* ========================================
+   TYPOGRAPHY MATCHING
+   ======================================== */
+
+body.onboarding-page h1,
+body.onboarding-page h2,
+body.onboarding-page h3 {
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+body.onboarding-page .golden-highlight,
+body.onboarding-page .main-section-title {
+    background: linear-gradient(135deg, 
+        var(--ember-orange, #f0a500), 
+        var(--ember-red, #d73327), 
+        var(--ember-gold, #ffd700)) !important;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ========================================
+   HOVER ENHANCEMENTS - CONSISTENT BEHAVIOR
+   ======================================== */
+
+body.onboarding-page .script-card-enhanced:hover,
+body.onboarding-page .proposal-card-enhanced:hover,
+body.onboarding-page .process-step-enhanced:hover,
+body.onboarding-page .pricing-tier-card:hover {
+    transform: translateY(-5px) !important;
+}
+
+/* ========================================
+   SCROLLBAR STYLING - MATCH MAIN
+   ======================================== */
+
+body.onboarding-page *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body.onboarding-page *::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+body.onboarding-page *::-webkit-scrollbar-thumb {
+    background: var(--ember-orange, #f0a500);
+    border-radius: 10px;
+}
+
+body.onboarding-page *::-webkit-scrollbar-thumb:hover {
+    background: var(--ember-red, #d73327);
+}
+
+/* ========================================
+   LOADING & TRANSITION STATES
+   ======================================== */
+
+body.onboarding-page {
+    opacity: 1 !important;
+    transition: opacity 0.3s ease !important;
+}
+
+/* Remove any flash on load */
+@keyframes fadeInBodySmooth {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ========================================
+   MOBILE RESPONSIVENESS - MAINTAIN STYLE
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* Ensure cards maintain gradient on mobile */
+    .process-step-enhanced,
+    .script-card-enhanced,
+    .proposal-card-enhanced,
+    .checklist-phase-card {
+        background: linear-gradient(135deg, 
+            rgba(26, 15, 10, 0.95), 
+            rgba(45, 24, 16, 0.9)) !important;
+    }
+    
+    /* Maintain button styling */
+    .hero-cta-primary,
+    .success-cta-primary,
+    .cta-button-primary {
+        background: linear-gradient(135deg, #d73327, #c62828) !important;
+        box-shadow: 0 4px 12px rgba(215, 51, 39, 0.3) !important;
+    }
+}
+
+/* ========================================
+   END OF STYLE MATCHING CSS
+   ======================================== */
