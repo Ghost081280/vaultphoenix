@@ -4349,7 +4349,7 @@ body {
    =================================== */
 .success-guide-integrated {
     margin: 0;
-    padding: var(--section-padding) 0;
+    padding: var(--section-padding) 0 2.5rem 0;
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
