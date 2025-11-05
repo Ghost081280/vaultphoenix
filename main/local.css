@@ -4224,7 +4224,7 @@ body {
 }
 
 .final-cta {
-    padding: var(--section-padding) var(--container-padding) 0 var(--container-padding);
+    padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
     position: relative;
 }
