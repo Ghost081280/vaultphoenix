@@ -1,18 +1,15 @@
 /* ========================================
-   VAULT PHOENIX ONBOARDING - COMPLETE CSS v3.0
+   VAULT PHOENIX ONBOARDING - COMPLETE CSS v3.1
    PART 1 OF 3: Variables, Base, Hero, Credentials
    Production-Ready Enhanced Stylesheet
-   FIXES: Content overflow, huge spacing, module balance, chatbot colors
+   CRITICAL FIX: Removed global * selector that broke footer/chatbot
    ======================================== */
 
 /* ========================================
-   BASE STYLES
+   BASE STYLES - SCOPED TO ONBOARDING PAGE ONLY
    ======================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
+/* DO NOT USE: * { margin: 0; padding: 0; } - This breaks global components! */
 
 body.onboarding-page {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -22,6 +19,13 @@ body.onboarding-page {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scoped box-sizing only for onboarding main content */
+body.onboarding-page #main-content *,
+body.onboarding-page #main-content *::before,
+body.onboarding-page #main-content *::after {
+    box-sizing: border-box;
 }
 
 .main-container {
@@ -621,7 +625,7 @@ body.onboarding-page {
 }
 
 /* END OF PART 1 *//* ========================================
-   VAULT PHOENIX ONBOARDING - COMPLETE CSS v3.0
+   VAULT PHOENIX ONBOARDING - COMPLETE CSS v3.1
    PART 2 OF 3: Process Steps, Tables, Scripts, Proposals
    FIXES: Screenshot sizing, content overflow, module details
    ======================================== */
@@ -1410,11 +1414,10 @@ body.onboarding-page {
     object-fit: contain;
 }
 
-/* END OF PART 2 */
-/* ========================================
-   VAULT PHOENIX ONBOARDING - COMPLETE CSS v3.0
-   PART 3 OF 3: Scripts, Calculator with Info Icons, Checklist Modals, CTA, Responsive
-   FINAL FIXES: Bottom black rectangle, powered by logos, info badges
+/* END OF PART 2 *//* ========================================
+   VAULT PHOENIX ONBOARDING - COMPLETE CSS v3.1
+   PART 3 OF 3: Scripts, Calculator, Checklist, CTA, Responsive
+   FINAL FIXES: Bottom sections, powered by logos, responsive design
    ======================================== */
 
 /* ========================================
@@ -1568,8 +1571,8 @@ body.onboarding-page {
     padding: var(--spacing-md);
     border-radius: var(--border-radius-sm);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    max-height: none; /* FIX: Remove height restriction */
-    overflow: visible; /* FIX: Show all content */
+    max-height: none;
+    overflow: visible;
 }
 
 .script-content code {
@@ -1658,8 +1661,8 @@ body.onboarding-page {
 }
 
 .proposal-content pre {
-    max-height: none; /* FIX: Remove height restriction */
-    overflow: visible; /* FIX: Show all content */
+    max-height: none;
+    overflow: visible;
 }
 
 .proposal-footer {
@@ -1922,7 +1925,7 @@ body.onboarding-page {
 }
 
 /* ========================================
-   LAUNCH CHECKLIST SECTION - WITH MODAL FUNCTIONALITY
+   LAUNCH CHECKLIST SECTION
    ======================================== */
 .launch-checklist-section {
     padding: var(--spacing-2xl) 0;
@@ -1979,7 +1982,6 @@ body.onboarding-page {
 .checklist-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: var(--spacing-sm);
     padding: var(--spacing-md);
     background: rgba(26, 26, 26, 0.5);
@@ -1992,13 +1994,6 @@ body.onboarding-page {
 .checklist-item:hover {
     background: var(--dark-hover);
     border-color: rgba(240, 165, 0, 0.2);
-}
-
-.checklist-item-left {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    flex: 1;
 }
 
 .checklist-item input[type="checkbox"] {
@@ -2017,25 +2012,6 @@ body.onboarding-page {
 .checklist-item input[type="checkbox"]:checked + span {
     color: var(--text-primary);
     text-decoration: line-through;
-}
-
-.checklist-item-info-btn {
-    padding: 0.4rem 0.8rem;
-    background: rgba(240, 165, 0, 0.15);
-    color: var(--ember-orange);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--border-radius-sm);
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    flex-shrink: 0;
-}
-
-.checklist-item-info-btn:hover {
-    background: var(--ember-orange);
-    color: white;
-    transform: scale(1.05);
 }
 
 /* Checklist Modal */
@@ -2151,7 +2127,7 @@ body.onboarding-page {
 }
 
 /* ========================================
-   INTERACTIVE CALCULATOR SECTION - WITH INFO BADGES
+   INTERACTIVE CALCULATOR SECTION
    ======================================== */
 .interactive-calculator-section {
     padding: var(--spacing-2xl) 0;
@@ -2192,60 +2168,11 @@ body.onboarding-page {
 }
 
 .input-group-enhanced label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: block;
     color: var(--text-primary);
     font-weight: 600;
     margin-bottom: var(--spacing-sm);
     font-size: 0.9rem;
-}
-
-/* Info Badge Icons */
-.info-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    background: rgba(240, 165, 0, 0.2);
-    color: var(--ember-orange);
-    border-radius: 50%;
-    font-size: 0.7rem;
-    font-weight: 700;
-    cursor: help;
-    border: 1px solid rgba(240, 165, 0, 0.4);
-    transition: all var(--transition-fast);
-}
-
-.info-badge:hover {
-    background: var(--ember-orange);
-    color: white;
-    transform: scale(1.15);
-}
-
-/* Tooltip for info badges */
-.info-badge::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-8px);
-    background: rgba(0, 0, 0, 0.95);
-    color: white;
-    padding: 0.5rem 0.75rem;
-    border-radius: var(--border-radius-sm);
-    font-size: 0.8rem;
-    font-weight: 400;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition-fast);
-    z-index: 1000;
-}
-
-.info-badge:hover::after {
-    opacity: 1;
 }
 
 .input-group-enhanced input[type="range"] {
@@ -2414,14 +2341,13 @@ body.onboarding-page {
 }
 
 /* ========================================
-   FINAL CTA SECTION - FIX BOTTOM BLACK RECTANGLE
+   FINAL CTA SECTION
    ======================================== */
 .final-cta-section {
     position: relative;
     padding: var(--spacing-4xl) var(--spacing-md);
     background: linear-gradient(135deg, var(--dark-bg) 0%, #1a0505 100%);
     overflow: hidden;
-    /* REMOVE any bottom margin/padding that causes black rectangle */
     margin-bottom: 0;
     padding-bottom: var(--spacing-4xl);
 }
@@ -2550,7 +2476,7 @@ body.onboarding-page {
     transform: translateY(-2px);
 }
 
-/* FIX: Powered by Industry Leaders - BIGGER LOGOS */
+/* Tech Partners - Bigger Logos */
 .tech-partners-showcase {
     padding-top: var(--spacing-2xl);
     border-top: 2px solid rgba(255, 255, 255, 0.1);
@@ -2575,7 +2501,7 @@ body.onboarding-page {
 }
 
 .partners-logos-grid img {
-    height: 60px; /* INCREASED from 36px */
+    height: 60px;
     width: auto;
     opacity: 0.8;
     transition: all var(--transition-normal);
