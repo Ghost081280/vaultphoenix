@@ -632,7 +632,7 @@ div[class*="-hero"].scroll-reveal,
         rgba(45, 24, 16, 0.95) 100%);
     border-top: 2px solid rgba(215, 51, 39, 0.3);
     padding: var(--space-4xl) 0 var(--space-xl);
-    margin-top: var(--space-4xl);
+    margin-top: 0;
     width: 100%;
 }
 
