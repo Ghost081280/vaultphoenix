@@ -1,7 +1,7 @@
 /* ========================================
-   VAULT PHOENIX ONBOARDING - LOCAL JS v3.0
+   VAULT PHOENIX ONBOARDING - LOCAL JS v3.1
    Production-Ready Enhanced JavaScript
-   IMPROVEMENTS: Up to 10000 locations, day/week/month pricing, maintenance fees, checklist modals
+   FIXES: Added data-content button handlers, fixed modal titles
    ======================================== */
 
 'use strict';
@@ -17,9 +17,9 @@ const OnboardingApp = {
         locations: 10,
         setupFee: 1000,
         pricePerLocation: 200,
-        pricePeriod: 'month', // day, week, or month
+        pricePeriod: 'month',
         duration: 3,
-        maintenanceFee: 500 // New: monthly maintenance fee for agencies
+        maintenanceFee: 500
     },
     checklistModals: {}
 };
@@ -28,7 +28,7 @@ const OnboardingApp = {
 // INITIALIZATION
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥 Vault Phoenix Onboarding v3.0 - Initializing...');
+    console.log('🔥 Vault Phoenix Onboarding v3.1 - Initializing...');
     
     try {
         initConstructionBanner();
@@ -62,14 +62,12 @@ function initConstructionBanner() {
         return;
     }
     
-    // Check if user has previously dismissed the banner
     const dismissed = localStorage.getItem('construction-banner-dismissed');
     
     if (dismissed === 'true') {
         banner.classList.add('hidden');
     }
     
-    // Add click event to close button
     closeBtn.addEventListener('click', function() {
         banner.classList.add('hidden');
         localStorage.setItem('construction-banner-dismissed', 'true');
@@ -80,11 +78,11 @@ function initConstructionBanner() {
 }
 
 // ========================================
-// ROI CALCULATOR - ENHANCED WITH NEW FEATURES
+// ROI CALCULATOR
 // ========================================
 
 /**
- * Initialize the interactive ROI calculator with enhanced features
+ * Initialize the interactive ROI calculator
  */
 function initCalculator() {
     const calculatorInputs = {
@@ -96,7 +94,6 @@ function initCalculator() {
         maintenanceFee: document.getElementById('maintenance-fee')
     };
     
-    // Check if calculator elements exist
     const hasCalculator = calculatorInputs.locations !== null;
     
     if (!hasCalculator) {
@@ -104,7 +101,6 @@ function initCalculator() {
         return;
     }
     
-    // Add event listeners to all inputs
     Object.keys(calculatorInputs).forEach(key => {
         const input = calculatorInputs[key];
         if (input) {
@@ -113,18 +109,16 @@ function initCalculator() {
         }
     });
     
-    // Initial calculation
     calculateROI();
     
-    console.log('✅ Calculator initialized with enhanced features');
+    console.log('✅ Calculator initialized');
 }
 
 /**
- * Calculate and update ROI values in real-time with new pricing models
+ * Calculate and update ROI values in real-time
  */
 function calculateROI() {
     try {
-        // Get input values
         const locations = parseInt(document.getElementById('locations')?.value) || 0;
         const setupFee = parseFloat(document.getElementById('setup-fee')?.value) || 0;
         const pricePerLocation = parseFloat(document.getElementById('price-per-location')?.value) || 0;
@@ -132,21 +126,19 @@ function calculateROI() {
         const duration = parseInt(document.getElementById('duration')?.value) || 1;
         const maintenanceFee = parseFloat(document.getElementById('maintenance-fee')?.value) || 0;
         
-        // Update the locations display value
         const locationsValue = document.getElementById('locations-value');
         if (locationsValue) {
             locationsValue.textContent = locations.toLocaleString();
         }
         
-        // Calculate base revenue per location based on period
         let monthlyRevenuePerLocation = pricePerLocation;
         
         switch(pricePeriod) {
             case 'day':
-                monthlyRevenuePerLocation = pricePerLocation * 30; // Approximate 30 days/month
+                monthlyRevenuePerLocation = pricePerLocation * 30;
                 break;
             case 'week':
-                monthlyRevenuePerLocation = pricePerLocation * 4.33; // Average weeks per month
+                monthlyRevenuePerLocation = pricePerLocation * 4.33;
                 break;
             case 'month':
             default:
@@ -154,7 +146,6 @@ function calculateROI() {
                 break;
         }
         
-        // Calculate revenues
         const monthlyLocationRevenue = locations * monthlyRevenuePerLocation;
         const monthlyMaintenanceRevenue = maintenanceFee;
         const monthlyRevenue = monthlyLocationRevenue + monthlyMaintenanceRevenue;
@@ -162,15 +153,12 @@ function calculateROI() {
         const totalCampaignRevenue = setupFee + totalRecurringRevenue;
         const revenuePerLocation = locations > 0 ? totalCampaignRevenue / locations : 0;
         
-        // Update display values with animation
         updateCalculatorValue('monthly-revenue', monthlyRevenue);
         updateCalculatorValue('total-revenue', totalCampaignRevenue);
         updateCalculatorValue('revenue-per-location', revenuePerLocation);
         
-        // Update breakdown if element exists
         updateRevenueBreakdown(monthlyLocationRevenue, monthlyMaintenanceRevenue);
         
-        // Store values in global state
         OnboardingApp.calculatorValues = {
             locations,
             setupFee,
@@ -187,8 +175,6 @@ function calculateROI() {
 
 /**
  * Update revenue breakdown display
- * @param {number} locationRevenue - Revenue from location fees
- * @param {number} maintenanceRevenue - Revenue from maintenance fees
  */
 function updateRevenueBreakdown(locationRevenue, maintenanceRevenue) {
     const breakdownElement = document.getElementById('revenue-breakdown');
@@ -204,8 +190,6 @@ function updateRevenueBreakdown(locationRevenue, maintenanceRevenue) {
 
 /**
  * Update calculator display value with animation
- * @param {string} elementId - The ID of the element to update
- * @param {number} value - The new value to display
  */
 function updateCalculatorValue(elementId, value) {
     const element = document.getElementById(elementId);
@@ -213,7 +197,6 @@ function updateCalculatorValue(elementId, value) {
     
     const formattedValue = formatCurrency(value);
     
-    // Add pulse animation
     element.style.transform = 'scale(1.05)';
     element.textContent = formattedValue;
     
@@ -223,11 +206,11 @@ function updateCalculatorValue(elementId, value) {
 }
 
 // ========================================
-// CHECKLIST MODAL FUNCTIONALITY
+// CHECKLIST MODAL FUNCTIONALITY - FIXED
 // ========================================
 
 /**
- * Initialize checklist modals with detailed information for each step
+ * Initialize checklist modals with proper button handlers
  */
 function initChecklistModals() {
     const checklistItems = document.querySelectorAll('.checklist-item');
@@ -237,7 +220,6 @@ function initChecklistModals() {
         return;
     }
     
-    // Create modal overlay if it doesn't exist
     createModalOverlay();
     
     // Define content for each checklist item
@@ -262,7 +244,7 @@ function initChecklistModals() {
             `
         },
         'demo-tested': {
-            title: 'Demo Tested',
+            title: 'Demo Tested on Mobile & Desktop',
             content: `
                 <h4>Why This Matters</h4>
                 <p>Testing the demo gives you firsthand experience of what your customers will see and helps you understand the player journey.</p>
@@ -281,7 +263,7 @@ function initChecklistModals() {
             `
         },
         'branding-finalized': {
-            title: 'Branding Finalized',
+            title: 'Branding Finalized (Logo, Colors)',
             content: `
                 <h4>Why This Matters</h4>
                 <p>Your branding makes the campaign feel authentic and trustworthy to players. Professional branding increases engagement by 40%.</p>
@@ -297,6 +279,28 @@ function initChecklistModals() {
                 
                 <h4>Professional Tips</h4>
                 <p>Use consistent branding across all touchpoints. Your AR coins, redemption screens, and marketing materials should all feel cohesive. If you need design help, many successful clients use Fiverr or 99designs for quick professional assets.</p>
+            `
+        },
+        'target-audience': {
+            title: 'Target Audience Identified',
+            content: `
+                <h4>Why This Matters</h4>
+                <p>Understanding your target audience ensures you place coins in the right locations and craft messaging that resonates with players.</p>
+                
+                <h4>Key Demographics to Define</h4>
+                <ul>
+                    <li><strong>Age Range:</strong> Gen Z (18-25), Millennials (26-40), or broader</li>
+                    <li><strong>Interests:</strong> Gaming, crypto, shopping, dining, events</li>
+                    <li><strong>Behaviors:</strong> Early adopters, social sharers, deal seekers</li>
+                    <li><strong>Location Patterns:</strong> Where does your audience spend time?</li>
+                    <li><strong>Tech Savviness:</strong> Comfortable with AR and crypto or need guidance</li>
+                </ul>
+                
+                <h4>Research Methods</h4>
+                <p>Use social media analytics to understand your existing audience. Survey current customers about their interests. Check competitor campaigns to see who engages. Use Google Analytics and foot traffic data to validate assumptions.</p>
+                
+                <h4>Best Practice</h4>
+                <p>Start narrow and expand. Better to perfectly serve 1,000 ideal users than loosely target 10,000 random people.</p>
             `
         },
         'locations-identified': {
@@ -347,8 +351,73 @@ function initChecklistModals() {
                 <p>Many successful campaigns use both: GPS for outdoor locations and beacons for indoor precision. This provides comprehensive coverage and the best player experience.</p>
             `
         },
+        'coin-rewards': {
+            title: 'Coin Rarity & Rewards Configured',
+            content: `
+                <h4>Why This Matters</h4>
+                <p>Reward structure drives player motivation. Proper balance between common and rare coins keeps players engaged without depleting your token budget.</p>
+                
+                <h4>Recommended Rarity Tiers</h4>
+                <ul>
+                    <li><strong>Common (70%):</strong> 10-50 $Ember tokens - Easy to find, keeps players hunting</li>
+                    <li><strong>Rare (25%):</strong> 100-250 $Ember tokens - Exciting finds that generate social shares</li>
+                    <li><strong>Legendary (5%):</strong> 500-1000 $Ember tokens - Viral moments, creates FOMO</li>
+                </ul>
+                
+                <h4>Dynamic Rewards Strategy</h4>
+                <p>Start with higher rewards during launch week to drive initial engagement. Gradually adjust based on player feedback and budget. Use legendary coins for special events and partner promotions.</p>
+                
+                <h4>Budget Management</h4>
+                <p>Calculate your total token budget upfront. Monitor redemption rates daily. Adjust rarity distribution if players are collecting too quickly or too slowly. Aim for 60-70% of tokens distributed within campaign duration.</p>
+            `
+        },
+        'airdrop-schedule': {
+            title: 'Airdrop Schedule Planned',
+            content: `
+                <h4>Why This Matters</h4>
+                <p>Scheduled airdrops create viral moments and drive player acquisition. Strategic timing can 10X your social media engagement.</p>
+                
+                <h4>Airdrop Strategy</h4>
+                <ul>
+                    <li><strong>Launch Airdrop:</strong> Day 1 - First 100 players get bonus tokens</li>
+                    <li><strong>Weekly Airdrops:</strong> Every Friday at 5pm - "Happy Hour" token drops</li>
+                    <li><strong>Milestone Airdrops:</strong> When you hit 500, 1000, 5000 players</li>
+                    <li><strong>Partner Airdrops:</strong> Coordinate with sponsors for co-branded drops</li>
+                    <li><strong>Event Airdrops:</strong> During festivals, sports games, or local events</li>
+                </ul>
+                
+                <h4>Announcement Best Practices</h4>
+                <p>Announce airdrops 24-48 hours in advance to build anticipation. Create countdown posts on social media. Share photos/videos of past airdrops. Make sharing a requirement for entry to amplify reach.</p>
+                
+                <h4>Timing Tips</h4>
+                <p>Schedule airdrops during peak engagement hours (lunch 12-1pm, evening 5-7pm). Coordinate with partner businesses for maximum foot traffic. Track which time slots perform best and optimize future airdrops.</p>
+            `
+        },
+        'marketing-materials': {
+            title: 'Marketing Materials Ready',
+            content: `
+                <h4>Why This Matters</h4>
+                <p>Professional marketing materials establish credibility and drive player acquisition. Good content = more downloads = more engagement.</p>
+                
+                <h4>Essential Marketing Assets</h4>
+                <ul>
+                    <li><strong>App Screenshots:</strong> 3-5 images showing AR gameplay, coin collection, rewards</li>
+                    <li><strong>Teaser Video:</strong> 15-30 second demo showing the app in action</li>
+                    <li><strong>Social Media Graphics:</strong> Branded posts for Instagram, Facebook, Twitter</li>
+                    <li><strong>Press Kit:</strong> Logo, screenshots, campaign description, contact info</li>
+                    <li><strong>QR Codes:</strong> For physical locations directing to app download</li>
+                    <li><strong>Partner Materials:</strong> Posters, table tents for participating businesses</li>
+                </ul>
+                
+                <h4>Content Calendar</h4>
+                <p>Plan 2 weeks of social posts in advance. Mix educational content (how to play), user-generated content (player success stories), and promotional content (airdrops, new locations). Post daily during launch week, then 3-4 times per week.</p>
+                
+                <h4>Quick Creation Tips</h4>
+                <p>Use Canva for quick graphics. Record screen capture videos on your phone. Repurpose player testimonials and location photos. Keep messaging simple and action-focused.</p>
+            `
+        },
         'launch-announced': {
-            title: 'Launch Announced',
+            title: 'Launch Announced on Social Media',
             content: `
                 <h4>Why This Matters</h4>
                 <p>Strategic launch announcements create FOMO (fear of missing out) and drive initial player acquisition. Your first 48 hours set the tone for the entire campaign.</p>
@@ -391,30 +460,67 @@ function initChecklistModals() {
                 <h4>Weekly Review</h4>
                 <p>Every Friday, do a deeper 30-minute analysis. Calculate ROI per location. Identify trends. Plan next week's optimizations. Share insights with stakeholders.</p>
             `
+        },
+        'user-feedback': {
+            title: 'User Feedback System in Place',
+            content: `
+                <h4>Why This Matters</h4>
+                <p>Player feedback is your secret weapon for continuous improvement. Users will tell you exactly what's working and what needs fixing.</p>
+                
+                <h4>Feedback Collection Methods</h4>
+                <ul>
+                    <li><strong>In-App Surveys:</strong> Quick 1-2 question polls after coin collection</li>
+                    <li><strong>Social Listening:</strong> Monitor mentions, comments, DMs on social platforms</li>
+                    <li><strong>Direct Emails:</strong> Set up support@yourdomain.com for player questions</li>
+                    <li><strong>Discord/Telegram:</strong> Create community channels for player discussions</li>
+                    <li><strong>App Store Reviews:</strong> Respond to both positive and negative reviews</li>
+                </ul>
+                
+                <h4>What to Ask</h4>
+                <p>Keep surveys short: "How easy was it to find coins? (1-5)" or "Would you recommend this to friends? (Yes/No/Maybe)". Ask open-ended questions like "What would make this more fun?" at the end of campaigns.</p>
+                
+                <h4>Acting on Feedback</h4>
+                <p>Categorize feedback into: Bugs (fix immediately), Features (evaluate for future), Complaints (address quickly), Praise (share with team). Implement at least one user suggestion per week to show you're listening. Thank users publicly when you implement their ideas.</p>
+            `
         }
     };
     
     // Store content in global state
     OnboardingApp.checklistModals = checklistContent;
     
-    // Add event listeners to each checklist item
+    // CRITICAL FIX: Add event listeners to "Learn More" buttons with data-content attributes
+    const learnMoreButtons = document.querySelectorAll('.checklist-learn-btn[data-content]');
+    
+    learnMoreButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const contentKey = this.getAttribute('data-content');
+            console.log('Learn More clicked:', contentKey);
+            
+            if (contentKey && checklistContent[contentKey]) {
+                openChecklistModal(checklistContent[contentKey]);
+            } else {
+                console.error('No content found for key:', contentKey);
+            }
+        });
+    });
+    
+    // Also handle checkbox state persistence
     checklistItems.forEach((item, index) => {
         const checkbox = item.querySelector('input[type="checkbox"]');
-        const span = item.querySelector('span');
         
-        if (checkbox && span) {
-            // Load saved state from localStorage
+        if (checkbox) {
             const savedState = localStorage.getItem(`checklist-${index}`);
             if (savedState === 'true') {
                 checkbox.checked = true;
             }
             
-            // Save state on change
             checkbox.addEventListener('change', function(e) {
                 e.stopPropagation();
                 localStorage.setItem(`checklist-${index}`, this.checked);
                 
-                // Add completion animation
                 if (this.checked) {
                     const itemEl = this.closest('.checklist-item');
                     itemEl.style.animation = 'none';
@@ -423,47 +529,16 @@ function initChecklistModals() {
                     }, 10);
                 }
             });
-            
-            // Add click event to open modal
-            item.addEventListener('click', function(e) {
-                // Don't open modal if clicking checkbox
-                if (e.target.type !== 'checkbox') {
-                    const contentKey = getContentKeyFromSpan(span.textContent);
-                    if (contentKey && checklistContent[contentKey]) {
-                        openChecklistModal(checklistContent[contentKey]);
-                    }
-                }
-            });
         }
     });
     
-    console.log(`✅ Initialized ${checklistItems.length} checklist items with modal details`);
-}
-
-/**
- * Get content key from checklist item text
- * @param {string} text - The text content of the checklist item
- * @returns {string} - The corresponding content key
- */
-function getContentKeyFromSpan(text) {
-    const keyMap = {
-        'Platform account created': 'platform-account',
-        'Demo tested': 'demo-tested',
-        'Branding finalized': 'branding-finalized',
-        'Target locations identified': 'locations-identified',
-        'GPS vs Beacon strategy decided': 'gps-beacon-strategy',
-        'Launch announced': 'launch-announced',
-        'Daily monitoring active': 'daily-monitoring'
-    };
-    
-    return keyMap[text] || null;
+    console.log(`✅ Initialized ${checklistItems.length} checklist items with ${learnMoreButtons.length} Learn More buttons`);
 }
 
 /**
  * Create modal overlay element
  */
 function createModalOverlay() {
-    // Check if overlay already exists
     if (document.getElementById('checklist-modal-overlay')) {
         return;
     }
@@ -475,7 +550,7 @@ function createModalOverlay() {
     overlay.innerHTML = `
         <div class="checklist-modal">
             <div class="checklist-modal-header">
-                <h3 id="modal-title">Step Details</h3>
+                <h3 id="modal-title">Loading...</h3>
                 <button class="checklist-modal-close" aria-label="Close modal">&times;</button>
             </div>
             <div class="checklist-modal-body" id="modal-body">
@@ -486,7 +561,6 @@ function createModalOverlay() {
     
     document.body.appendChild(overlay);
     
-    // Add event listeners
     const closeBtn = overlay.querySelector('.checklist-modal-close');
     closeBtn.addEventListener('click', closeChecklistModal);
     
@@ -496,7 +570,6 @@ function createModalOverlay() {
         }
     });
     
-    // Close on escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             closeChecklistModal();
@@ -506,7 +579,6 @@ function createModalOverlay() {
 
 /**
  * Open checklist modal with content
- * @param {Object} content - Object containing title and content
  */
 function openChecklistModal(content) {
     const overlay = document.getElementById('checklist-modal-overlay');
@@ -519,6 +591,8 @@ function openChecklistModal(content) {
         
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        console.log('Modal opened:', content.title);
     }
 }
 
@@ -551,156 +625,69 @@ function initCopyButtons() {
         });
     });
     
-    console.log(`✅ Initialized ${copyButtons.length} copy buttons`);
+    if (copyButtons.length > 0) {
+        console.log(`✅ Initialized ${copyButtons.length} copy buttons`);
+    }
 }
 
 /**
- * Copy content to clipboard with visual feedback
- * @param {HTMLElement} button - The button element that was clicked
+ * Copy text to clipboard
  */
 function copyToClipboard(button) {
-    try {
-        // Find the closest content container
-        const copyBox = button.closest('.script-content') || button.closest('.proposal-content');
-        
-        if (!copyBox) {
-            console.error('Copy box not found');
-            showCopyFeedback(button, false, 'Error: Content not found');
-            return;
-        }
-        
-        // Get the code element
-        const codeElement = copyBox.querySelector('code') || copyBox.querySelector('pre');
-        
-        if (!codeElement) {
-            console.error('Code element not found');
-            showCopyFeedback(button, false, 'Error: Code not found');
-            return;
-        }
-        
-        const textToCopy = codeElement.textContent;
-        
-        // Modern Clipboard API
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(textToCopy)
-                .then(() => {
-                    showCopyFeedback(button, true);
-                    console.log('✅ Text copied to clipboard');
-                })
-                .catch(err => {
-                    console.error('Clipboard API failed:', err);
-                    fallbackCopyToClipboard(textToCopy, button);
-                });
-        } else {
-            // Fallback for older browsers
-            fallbackCopyToClipboard(textToCopy, button);
-        }
-        
-    } catch (error) {
-        console.error('Copy Error:', error);
-        showCopyFeedback(button, false, 'Copy Failed');
-    }
-}
-
-/**
- * Fallback copy method for older browsers
- * @param {string} text - Text to copy
- * @param {HTMLElement} button - Button element for feedback
- */
-function fallbackCopyToClipboard(text, button) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.top = '0';
-    textArea.style.left = '0';
-    textArea.style.opacity = '0';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
+    const targetId = button.getAttribute('data-target');
+    const targetElement = document.getElementById(targetId);
     
-    try {
-        const successful = document.execCommand('copy');
-        showCopyFeedback(button, successful);
-        if (successful) {
-            console.log('✅ Text copied (fallback method)');
-        }
-    } catch (err) {
-        console.error('Fallback copy failed:', err);
-        showCopyFeedback(button, false, 'Copy Failed');
+    if (!targetElement) {
+        console.error('Target element not found:', targetId);
+        return;
     }
     
-    document.body.removeChild(textArea);
-}
-
-/**
- * Show visual feedback after copy attempt
- * @param {HTMLElement} button - The button to show feedback on
- * @param {boolean} success - Whether the copy was successful
- * @param {string} customMessage - Optional custom message
- */
-function showCopyFeedback(button, success, customMessage = null) {
-    // Store original content
-    const originalHTML = button.innerHTML;
-    const originalBg = button.style.background;
+    const textToCopy = targetElement.textContent || targetElement.value;
     
-    // Create feedback message
-    const message = customMessage || (success ? 'Copied!' : 'Failed');
-    const backgroundColor = success ? '#4caf50' : '#f44336';
-    const icon = success ? '✓' : '✗';
-    
-    // Update button
-    button.innerHTML = `<span style="display: inline-flex; align-items: center; gap: 0.5rem;">
-        <span>${icon}</span>
-        <span>${message}</span>
-    </span>`;
-    button.style.background = backgroundColor;
-    button.style.pointerEvents = 'none';
-    
-    // Add pulse animation
-    button.style.transform = 'scale(1.05)';
-    setTimeout(() => {
-        button.style.transform = 'scale(1)';
-    }, 100);
-    
-    // Reset after 2 seconds
-    setTimeout(() => {
-        button.innerHTML = originalHTML;
-        button.style.background = originalBg;
-        button.style.pointerEvents = 'auto';
-        button.style.transform = 'scale(1)';
-    }, 2000);
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = button.textContent;
+        button.textContent = '✓ Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+        alert('Failed to copy to clipboard');
+    });
 }
 
 // ========================================
-// SCROLL REVEAL ANIMATIONS
+// SCROLL REVEAL ANIMATION
 // ========================================
 
 /**
- * Initialize Intersection Observer for scroll animations
+ * Initialize scroll reveal animations
  */
 function initScrollReveal() {
-    // Options for the observer
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    
+    if (revealElements.length === 0) {
+        console.log('ℹ️ No scroll reveal elements found');
+        return;
+    }
+    
     const observerOptions = {
-        root: null,
-        rootMargin: '0px 0px -100px 0px',
-        threshold: 0.1
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
     
-    // Create the observer
     OnboardingApp.scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('revealed');
-                }, 50);
-                
+                entry.target.classList.add('revealed');
                 OnboardingApp.scrollObserver.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
-    // Observe all elements with scroll-reveal class
-    const revealElements = document.querySelectorAll('.scroll-reveal');
     revealElements.forEach(el => {
         OnboardingApp.scrollObserver.observe(el);
     });
@@ -709,7 +696,7 @@ function initScrollReveal() {
 }
 
 // ========================================
-// SMOOTH SCROLLING
+// SMOOTH SCROLL
 // ========================================
 
 /**
@@ -744,8 +731,6 @@ function initSmoothScroll() {
 
 /**
  * Smooth scroll to a target element
- * @param {HTMLElement} target - The element to scroll to
- * @param {number} offset - Optional offset from top (default: 80px for navbar)
  */
 function smoothScrollTo(target, offset = 80) {
     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
@@ -758,7 +743,6 @@ function smoothScrollTo(target, offset = 80) {
 
 /**
  * Scroll to a section by ID
- * @param {string} sectionId - The ID of the section to scroll to
  */
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
@@ -843,9 +827,6 @@ function closeMobileMenu() {
 
 /**
  * Format currency value
- * @param {number} value - The value to format
- * @param {string} currency - Currency symbol (default: $)
- * @returns {string} - Formatted currency string
  */
 function formatCurrency(value, currency = '$') {
     return `${currency}${value.toLocaleString('en-US', {
@@ -855,10 +836,7 @@ function formatCurrency(value, currency = '$') {
 }
 
 /**
- * Debounce function to limit how often a function can fire
- * @param {Function} func - The function to debounce
- * @param {number} wait - The time to wait in milliseconds
- * @returns {Function} - Debounced function
+ * Debounce function
  */
 function debounce(func, wait = 250) {
     let timeout;
@@ -873,10 +851,7 @@ function debounce(func, wait = 250) {
 }
 
 /**
- * Throttle function to limit how often a function can fire
- * @param {Function} func - The function to throttle
- * @param {number} limit - The time limit in milliseconds
- * @returns {Function} - Throttled function
+ * Throttle function
  */
 function throttle(func, limit = 250) {
     let inThrottle;
@@ -891,8 +866,6 @@ function throttle(func, limit = 250) {
 
 /**
  * Validate email format
- * @param {string} email - Email to validate
- * @returns {boolean} - True if valid
  */
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -901,8 +874,6 @@ function validateEmail(email) {
 
 /**
  * Get query parameter from URL
- * @param {string} param - Parameter name
- * @returns {string|null} - Parameter value or null
  */
 function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -910,7 +881,7 @@ function getQueryParam(param) {
 }
 
 // ========================================
-// EXPORT FUNCTIONS (for global access if needed)
+// EXPORT FUNCTIONS
 // ========================================
 
 window.VaultPhoenix = {
@@ -961,4 +932,4 @@ window.addEventListener('load', function() {
     }
 });
 
-console.log('🔥 Vault Phoenix Onboarding v3.0 - Ready!');
+console.log('🔥 Vault Phoenix Onboarding v3.1 - Ready!');
