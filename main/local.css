@@ -4090,10 +4090,8 @@ body {
    ✅ FIXED: Reduced padding for consistent spacing
    =================================== */
 .phoenix-separator-section {
-    padding: 2rem var(--container-padding); /* ✅ REDUCED from 3.5rem */
-    background: var(--ember-gradient-background);
-    position: relative;
-    overflow: hidden;
+    padding: var(--section-padding) var(--container-padding);
+    /* Remove any padding-bottom overrides, let it use the variable */
 }
 
 .phoenix-separator-section::before {
@@ -4180,10 +4178,8 @@ body {
 }
 
 .final-cta {
-    padding: 2.5rem var(--container-padding); /* ✅ REDUCED from var(--section-padding) */
-    padding-bottom: 1.5rem; /* ✅ Even less at bottom */
-    background: var(--ember-gradient-background);
-    position: relative;
+    padding: var(--section-padding) var(--container-padding);
+    /* Remove any padding-bottom overrides, let it use the variable */
 }
 
 .final-cta-background {
@@ -4491,10 +4487,8 @@ body {
    ✅ FIXED: Reduced bottom padding for consistent spacing
    =================================== */
 .success-guide-section {
-    padding: 2.5rem var(--container-padding); /* ✅ REDUCED top */
-    padding-bottom: 1.5rem; /* ✅ REDUCED bottom */
-    background: var(--ember-gradient-background);
-    border-top: 2px solid rgba(215, 51, 39, 0.3);
+    padding: var(--section-padding) var(--container-padding);
+    /* Remove any padding-bottom overrides, let it use the variable */
 }
 
 .success-text-header {
