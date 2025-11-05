@@ -1,6 +1,6 @@
 // ============================================
 // VAULT PHOENIX MAIN.HTML LOCAL JAVASCRIPT
-// UPDATED - With scroll position restoration & smooth page load
+// UPDATED - Scroll animations, mobile fixes, smooth loading
 // ============================================
 
 (function() {
@@ -31,6 +31,60 @@ window.addEventListener('load', restoreScrollPosition);
 window.addEventListener('pagehide', () => {
     sessionStorage.removeItem('scrollPosition');
 });
+
+// ============================================
+// SMOOTH SCROLL REVEAL ANIMATIONS
+// Intersection Observer for butter-smooth reveals
+// ============================================
+function initializeScrollReveal() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                // Optional: Stop observing after reveal for better performance
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all scroll-reveal elements
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    revealElements.forEach(el => observer.observe(el));
+    
+    console.log(`✅ Scroll reveal initialized for ${revealElements.length} elements`);
+}
+
+// ============================================
+// LAZY LOADING FOR IMAGES
+// Better performance on mobile
+// ============================================
+function initializeLazyLoading() {
+    if ('loading' in HTMLImageElement.prototype) {
+        // Browser supports native lazy loading
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        console.log(`✅ Native lazy loading enabled for ${images.length} images`);
+    } else {
+        // Fallback for older browsers
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src || img.src;
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => imageObserver.observe(img));
+        console.log(`✅ Fallback lazy loading initialized for ${images.length} images`);
+    }
+}
 
 // ============================================
 // WAIT FOR GLOBAL.JS TO COMPLETE
@@ -107,6 +161,8 @@ function initializeTermsModal() {
             closeModal();
         }
     });
+    
+    console.log('✅ Terms modal initialized');
 }
 
 // ============================================
@@ -150,6 +206,8 @@ function initializeInfoModal() {
             closeModal();
         }
     });
+    
+    console.log('✅ Info modal initialized');
 }
 
 // ============================================
@@ -245,6 +303,8 @@ function initializeAirdropForm() {
             setTimeout(() => messageBox.style.display = 'none', 5000);
         }
     }
+    
+    console.log('✅ Airdrop form initialized');
 }
 
 // ============================================
@@ -275,6 +335,8 @@ function initializeStatusChecker() {
             checkBtn.disabled = false;
         }
     });
+    
+    console.log('✅ Status checker initialized');
 }
 
 // ============================================
@@ -306,6 +368,8 @@ function initializeShareButtons() {
             window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank', 'width=600,height=400');
         });
     }
+    
+    console.log('✅ Share buttons initialized');
 }
 
 // ============================================
@@ -328,8 +392,160 @@ function initializeAirdropTracker() {
     if (claimedEl) claimedEl.textContent = claimed.toLocaleString();
     if (remainingEl) remainingEl.textContent = remaining.toLocaleString();
     if (peopleEl) peopleEl.textContent = `${people.toLocaleString()} / ${maxPeople.toLocaleString()}`;
-    if (progressBar) progressBar.style.width = `${percentage}%`;
+    if (progressBar) {
+        // Animate progress bar
+        setTimeout(() => {
+            progressBar.style.width = `${percentage}%`;
+        }, 500);
+    }
     if (progressPercentage) progressPercentage.textContent = percentage;
+    
+    console.log('✅ Airdrop tracker initialized');
+}
+
+// ============================================
+// EMBER TOKEN COUNTDOWN TIMER
+// ============================================
+function initializeCountdownTimer() {
+    const targetDate = new Date('November 1, 2025 00:00:00').getTime();
+    
+    const daysEl = document.getElementById('main-days');
+    const hoursEl = document.getElementById('main-hours');
+    const minutesEl = document.getElementById('main-minutes');
+    const secondsEl = document.getElementById('main-seconds');
+    
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        if (distance < 0) {
+            daysEl.textContent = '0';
+            hoursEl.textContent = '0';
+            minutesEl.textContent = '0';
+            secondsEl.textContent = '0';
+            return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        daysEl.textContent = days.toString().padStart(2, '0');
+        hoursEl.textContent = hours.toString().padStart(2, '0');
+        minutesEl.textContent = minutes.toString().padStart(2, '0');
+        secondsEl.textContent = seconds.toString().padStart(2, '0');
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    
+    console.log('✅ Countdown timer initialized');
+}
+
+// ============================================
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ============================================
+function initializeSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Skip if href is just "#"
+            if (href === '#') {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                return;
+            }
+            
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                e.preventDefault();
+                const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+                const targetPosition = targetElement.offsetTop - navbarHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    console.log('✅ Smooth scroll initialized');
+}
+
+// ============================================
+// PERFORMANCE MONITORING
+// ============================================
+function monitorPerformance() {
+    if ('performance' in window) {
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const perfData = performance.getEntriesByType('navigation')[0];
+                if (perfData) {
+                    console.log('📊 Performance Metrics:');
+                    console.log(`   DOM Content Loaded: ${Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart)}ms`);
+                    console.log(`   Page Load Complete: ${Math.round(perfData.loadEventEnd - perfData.loadEventStart)}ms`);
+                    console.log(`   Total Load Time: ${Math.round(perfData.loadEventEnd - perfData.fetchStart)}ms`);
+                }
+            }, 0);
+        });
+    }
+}
+
+// ============================================
+// TOUCH DEVICE DETECTION
+// Add class for touch-specific styles
+// ============================================
+function detectTouchDevice() {
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.body.classList.add('touch-device');
+        console.log('✅ Touch device detected');
+    } else {
+        document.body.classList.add('no-touch');
+        console.log('✅ Non-touch device detected');
+    }
+}
+
+// ============================================
+// VIEWPORT HEIGHT FIX FOR MOBILE
+// Fixes 100vh issues on mobile browsers
+// ============================================
+function fixMobileViewport() {
+    function setViewportHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', setViewportHeight);
+    
+    console.log('✅ Mobile viewport height fixed');
+}
+
+// ============================================
+// DEBOUNCE UTILITY
+// For optimizing resize/scroll handlers
+// ============================================
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
 // ============================================
@@ -338,16 +554,38 @@ function initializeAirdropTracker() {
 function initializeMainPage() {
     console.log('🔥 Main page local JS initializing...');
     
+    // Core functionality
+    detectTouchDevice();
+    fixMobileViewport();
+    initializeSmoothScroll();
+    
+    // Modals
     initializeTermsModal();
     initializeInfoModal();
+    
+    // Airdrop features
     initializeAirdropForm();
     initializeStatusChecker();
     initializeShareButtons();
     initializeAirdropTracker();
     
-    console.log('✅ Main page local JS initialized');
+    // Countdown timer
+    initializeCountdownTimer();
+    
+    // Animations and optimization
+    initializeScrollReveal();
+    initializeLazyLoading();
+    
+    // Performance monitoring
+    monitorPerformance();
+    
+    console.log('✅ Main page local JS fully initialized');
+    console.log('🎉 All systems ready - Vault Phoenix Main Page loaded');
 }
 
+// ============================================
+// START EVERYTHING
+// ============================================
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
         waitForGlobalReady(initializeMainPage);
