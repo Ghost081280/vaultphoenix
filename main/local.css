@@ -4345,11 +4345,11 @@ body {
 }
 
 /* ===================================
-   SUCCESS GUIDE INTEGRATED - WITH EQUAL SPACING FIX
+   SUCCESS GUIDE INTEGRATED - PERFECT EQUAL SPACING
    =================================== */
 .success-guide-integrated {
     margin-top: 4rem;
-    padding: 3rem 0 3rem 0;
+    padding: 4rem 0;
     border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -4391,7 +4391,7 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     max-width: 1200px;
-    margin: 0 auto 2.5rem;
+    margin: 0 auto 3rem;
 }
 
 .success-benefit-box {
@@ -4439,16 +4439,11 @@ body {
     margin: 0;
 }
 
-/* FIXED: Equal spacing for button from top and bottom */
+/* FIXED: Perfect equal spacing top and bottom */
 .success-cta-wrapper {
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
     padding: 0;
 }
 
@@ -4472,6 +4467,7 @@ body {
         0 10px 40px rgba(240, 165, 0, 0.5),
         0 0 60px rgba(215, 51, 39, 0.3);
     min-height: 60px;
+    margin-bottom: 1rem;
 }
 
 .success-primary-button img {
@@ -4497,9 +4493,39 @@ body {
 }
 
 /* Mobile adjustments */
+@media (max-width: 1024px) {
+    .success-benefits-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
-    .success-cta-wrapper {
-        padding: 0;
+    .success-guide-integrated {
+        margin-top: 3rem;
+        padding: 3rem 0;
+    }
+    
+    .success-benefits-container {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .success-benefit-box {
+        padding: 1.5rem 1rem;
+    }
+    
+    .success-benefit-icon img {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .success-benefit-box h4 {
+        font-size: 1rem;
+    }
+    
+    .success-benefit-box p {
+        font-size: 0.85rem;
     }
     
     .success-primary-button {
@@ -4512,11 +4538,28 @@ body {
         width: 24px;
         height: 24px;
     }
+    
+    .success-footnote {
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 480px) {
-    .success-cta-wrapper {
-        padding: 0;
+    .success-guide-integrated {
+        padding: 2.5rem 0;
+    }
+    
+    .success-benefit-icon img {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .success-benefit-box h4 {
+        font-size: 0.95rem;
+    }
+    
+    .success-benefit-box p {
+        font-size: 0.8rem;
     }
     
     .success-primary-button {
@@ -4525,7 +4568,7 @@ body {
     }
     
     .success-footnote {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 }
 
