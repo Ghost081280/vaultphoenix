@@ -1,8 +1,8 @@
 /* ========================================
-   VAULT PHOENIX ONBOARDING - COMPLETE CSS v2.0
+   VAULT PHOENIX ONBOARDING - COMPLETE CSS v3.0
    PART 1 OF 3: Variables, Base, Hero, Credentials
    Production-Ready Enhanced Stylesheet
-   FIXES: Navbar overlap, excessive spacing, poor hierarchy
+   FIXES: Content overflow, huge spacing, module balance, chatbot colors
    ======================================== */
 
 /* ========================================
@@ -103,7 +103,7 @@ body.onboarding-page {
     padding: 0.875rem clamp(1rem, 3vw, 2rem);
     position: relative;
     z-index: 100;
-    margin-top: var(--navbar-height); /* CRITICAL FIX - Clears navbar */
+    margin-top: var(--navbar-height);
 }
 
 .status-banner-content {
@@ -296,20 +296,23 @@ body.onboarding-page {
     line-height: 1.6;
 }
 
-/* Hero Value Grid */
+/* Hero Value Grid - BIGGER ICONS, BETTER BALANCE */
 .hero-value-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
     margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-value-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    background: rgba(26, 26, 26, 0.5);
-    padding: 1rem;
+    gap: 1rem;
+    background: rgba(26, 26, 26, 0.6);
+    padding: 1.25rem;
     border-radius: var(--border-radius-md);
     border: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -323,27 +326,30 @@ body.onboarding-page {
 }
 
 .hero-value-icon {
-    width: 32px;
-    height: 32px;
+    width: 56px;
+    height: 56px;
     object-fit: contain;
     flex-shrink: 0;
 }
 
 .hero-value-text {
     text-align: left;
+    flex: 1;
 }
 
 .hero-value-text strong {
     display: block;
     color: var(--text-primary);
-    font-size: 0.9rem;
-    margin-bottom: 0.125rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
 }
 
 .hero-value-text p {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     margin: 0;
+    line-height: 1.4;
 }
 
 /* Hero CTA Buttons */
@@ -406,17 +412,19 @@ body.onboarding-page {
     transform: translateX(5px);
 }
 
-/* Hero Phoenix Showcase */
+/* Hero Phoenix Showcase - REMOVE RANDOM FLOATING COIN, ADD ANIMATED BACKGROUND COINS */
 .hero-phoenix-showcase {
     position: relative;
     margin-top: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2rem 0;
 }
 
 .phoenix-hero-glow {
     position: relative;
+    z-index: 2;
 }
 
 .hero-phoenix-image {
@@ -435,28 +443,46 @@ body.onboarding-page {
     }
 }
 
+/* REMOVE THE SINGLE FLOATING COIN - Create animated background coins instead */
 .hero-ember-float {
+    display: none; /* Remove the single coin */
+}
+
+/* Add floating coins in background */
+.hero-phoenix-showcase::before,
+.hero-phoenix-showcase::after {
+    content: '';
     position: absolute;
-    top: 15%;
-    right: -5%;
-    animation: rotate-ember 8s linear infinite;
+    width: 40px;
+    height: 40px;
+    background-image: url('../images/VPEmberCoin.PNG');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    animation: float-coin 6s ease-in-out infinite;
+    z-index: 1;
 }
 
-.hero-ember-coin {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
+.hero-phoenix-showcase::before {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
 }
 
-@keyframes rotate-ember {
-    0% {
-        transform: rotate(0deg) translateY(0px);
+.hero-phoenix-showcase::after {
+    bottom: 15%;
+    right: 8%;
+    animation-delay: 3s;
+}
+
+@keyframes float-coin {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.2;
     }
     50% {
-        transform: rotate(180deg) translateY(-10px);
-    }
-    100% {
-        transform: rotate(360deg) translateY(0px);
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 0.4;
     }
 }
 
@@ -554,8 +580,9 @@ body.onboarding-page {
 }
 
 /* END OF PART 1 *//* ========================================
-   VAULT PHOENIX ONBOARDING - COMPLETE CSS v2.0
+   VAULT PHOENIX ONBOARDING - COMPLETE CSS v3.0
    PART 2 OF 3: Process Steps, Tables, Scripts, Proposals
+   FIXES: Screenshot sizing, content overflow, module details
    ======================================== */
 
 /* ========================================
@@ -603,6 +630,7 @@ body.onboarding-page {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    min-width: 300px;
 }
 
 .step-number-badge {
@@ -634,13 +662,16 @@ body.onboarding-page {
     color: white;
 }
 
+/* FIX FOR STEP 3 - Show dashboard screenshot instead of icon */
 .step-icon-showcase {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 0.5rem;
+    width: 100%;
 }
 
+/* DEFAULT: Icons for steps 1, 5 */
 .step-showcase-icon {
     width: 120px;
     height: 120px;
@@ -648,12 +679,27 @@ body.onboarding-page {
     animation: float-step-icon 4s ease-in-out infinite;
 }
 
+/* SPECIAL: Step 3 uses dashboard screenshot instead */
+.process-step-enhanced[data-step="3"] .step-icon-showcase {
+    width: 100%;
+    max-width: 350px;
+}
+
+.process-step-enhanced[data-step="3"] .step-showcase-icon {
+    width: 100%;
+    height: auto;
+    max-width: 350px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    animation: float-step-icon 4s ease-in-out infinite;
+}
+
 @keyframes float-step-icon {
     0%, 100% {
-        transform: translateY(0px) rotate(0deg);
+        transform: translateY(0px);
     }
     50% {
-        transform: translateY(-12px) rotate(3deg);
+        transform: translateY(-12px);
     }
 }
 
@@ -661,8 +707,8 @@ body.onboarding-page {
     filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5));
 }
 
-.step-glow-purple .step-showcase-icon {
-    filter: drop-shadow(0 0 20px rgba(156, 39, 176, 0.5));
+.step-glow-purple {
+    /* For step 3 dashboard screenshot, don't apply icon glow */
 }
 
 .step-glow-green .step-showcase-icon {
@@ -673,6 +719,7 @@ body.onboarding-page {
 .step-image-showcase {
     position: relative;
     width: 100%;
+    max-width: 350px;
 }
 
 .showcase-image-primary {
@@ -1322,10 +1369,11 @@ body.onboarding-page {
     object-fit: contain;
 }
 
-/* END OF PART 2 *//* ========================================
-   VAULT PHOENIX ONBOARDING - COMPLETE CSS v2.0
-   PART 3 OF 3: Scripts, Proposals, Pricing, Calculator, Success Tips, CTA, Responsive
-   FINAL PART
+/* END OF PART 2 */
+/* ========================================
+   VAULT PHOENIX ONBOARDING - COMPLETE CSS v3.0
+   PART 3 OF 3: Scripts, Calculator with Info Icons, Checklist Modals, CTA, Responsive
+   FINAL FIXES: Bottom black rectangle, powered by logos, info badges
    ======================================== */
 
 /* ========================================
@@ -1479,6 +1527,8 @@ body.onboarding-page {
     padding: var(--spacing-md);
     border-radius: var(--border-radius-sm);
     border: 1px solid rgba(255, 255, 255, 0.05);
+    max-height: none; /* FIX: Remove height restriction */
+    overflow: visible; /* FIX: Show all content */
 }
 
 .script-content code {
@@ -1564,6 +1614,11 @@ body.onboarding-page {
 .proposal-content {
     position: relative;
     padding: 1.25rem;
+}
+
+.proposal-content pre {
+    max-height: none; /* FIX: Remove height restriction */
+    overflow: visible; /* FIX: Show all content */
 }
 
 .proposal-footer {
@@ -1826,7 +1881,7 @@ body.onboarding-page {
 }
 
 /* ========================================
-   LAUNCH CHECKLIST SECTION
+   LAUNCH CHECKLIST SECTION - WITH MODAL FUNCTIONALITY
    ======================================== */
 .launch-checklist-section {
     padding: var(--spacing-2xl) 0;
@@ -1883,17 +1938,26 @@ body.onboarding-page {
 .checklist-item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--spacing-sm);
     padding: var(--spacing-md);
     background: rgba(26, 26, 26, 0.5);
     border-radius: var(--border-radius-sm);
     cursor: pointer;
     transition: all var(--transition-normal);
+    border: 2px solid transparent;
 }
 
 .checklist-item:hover {
     background: var(--dark-hover);
-    transform: translateX(5px);
+    border-color: rgba(240, 165, 0, 0.2);
+}
+
+.checklist-item-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex: 1;
 }
 
 .checklist-item input[type="checkbox"] {
@@ -1901,6 +1965,7 @@ body.onboarding-page {
     height: 20px;
     cursor: pointer;
     accent-color: var(--ember-orange);
+    flex-shrink: 0;
 }
 
 .checklist-item span {
@@ -1913,8 +1978,139 @@ body.onboarding-page {
     text-decoration: line-through;
 }
 
+.checklist-item-info-btn {
+    padding: 0.4rem 0.8rem;
+    background: rgba(240, 165, 0, 0.15);
+    color: var(--ember-orange);
+    border: 1px solid rgba(240, 165, 0, 0.3);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.checklist-item-info-btn:hover {
+    background: var(--ember-orange);
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Checklist Modal */
+.checklist-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.checklist-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.checklist-modal {
+    background: var(--dark-card);
+    border-radius: var(--border-radius-lg);
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    box-shadow: var(--shadow-xl);
+    transform: scale(0.9);
+    transition: transform var(--transition-normal);
+}
+
+.checklist-modal-overlay.active .checklist-modal {
+    transform: scale(1);
+}
+
+.checklist-modal-header {
+    padding: 1.5rem;
+    border-bottom: 2px solid rgba(240, 165, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(240, 165, 0, 0.05);
+}
+
+.checklist-modal-header h3 {
+    color: var(--ember-orange);
+    font-size: 1.4rem;
+}
+
+.checklist-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.checklist-modal-close:hover {
+    background: rgba(240, 165, 0, 0.2);
+    color: var(--ember-orange);
+}
+
+.checklist-modal-body {
+    padding: 1.5rem;
+}
+
+.checklist-modal-body h4 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+.checklist-modal-body p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.checklist-modal-body ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.checklist-modal-body li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.checklist-modal-body li::before {
+    content: '•';
+    position: absolute;
+    left: 0.5rem;
+    color: var(--ember-orange);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
 /* ========================================
-   INTERACTIVE CALCULATOR SECTION
+   INTERACTIVE CALCULATOR SECTION - WITH INFO BADGES
    ======================================== */
 .interactive-calculator-section {
     padding: var(--spacing-2xl) 0;
@@ -1955,11 +2151,60 @@ body.onboarding-page {
 }
 
 .input-group-enhanced label {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--text-primary);
     font-weight: 600;
     margin-bottom: var(--spacing-sm);
     font-size: 0.9rem;
+}
+
+/* Info Badge Icons */
+.info-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: rgba(240, 165, 0, 0.2);
+    color: var(--ember-orange);
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: help;
+    border: 1px solid rgba(240, 165, 0, 0.4);
+    transition: all var(--transition-fast);
+}
+
+.info-badge:hover {
+    background: var(--ember-orange);
+    color: white;
+    transform: scale(1.15);
+}
+
+/* Tooltip for info badges */
+.info-badge::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.8rem;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+    z-index: 1000;
+}
+
+.info-badge:hover::after {
+    opacity: 1;
 }
 
 .input-group-enhanced input[type="range"] {
@@ -2128,13 +2373,16 @@ body.onboarding-page {
 }
 
 /* ========================================
-   FINAL CTA SECTION
+   FINAL CTA SECTION - FIX BOTTOM BLACK RECTANGLE
    ======================================== */
 .final-cta-section {
     position: relative;
-    padding: var(--spacing-2xl) var(--spacing-md);
+    padding: var(--spacing-4xl) var(--spacing-md);
     background: linear-gradient(135deg, var(--dark-bg) 0%, #1a0505 100%);
     overflow: hidden;
+    /* REMOVE any bottom margin/padding that causes black rectangle */
+    margin-bottom: 0;
+    padding-bottom: var(--spacing-4xl);
 }
 
 .cta-background-effects {
@@ -2216,7 +2464,7 @@ body.onboarding-page {
     gap: var(--spacing-md);
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-3xl);
 }
 
 .cta-button-primary,
@@ -2261,37 +2509,42 @@ body.onboarding-page {
     transform: translateY(-2px);
 }
 
+/* FIX: Powered by Industry Leaders - BIGGER LOGOS */
 .tech-partners-showcase {
-    padding-top: var(--spacing-xl);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--spacing-2xl);
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    margin-top: var(--spacing-2xl);
 }
 
 .partners-label {
     color: var(--text-muted);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: var(--spacing-md);
+    letter-spacing: 1.5px;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 600;
 }
 
 .partners-logos-grid {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--spacing-xl);
+    gap: clamp(2rem, 5vw, 4rem);
     flex-wrap: wrap;
 }
 
 .partners-logos-grid img {
-    height: 36px;
+    height: 60px; /* INCREASED from 36px */
     width: auto;
-    opacity: 0.7;
+    opacity: 0.8;
     transition: all var(--transition-normal);
+    filter: brightness(1.1);
 }
 
 .partners-logos-grid img:hover {
     opacity: 1;
-    transform: scale(1.08);
+    transform: scale(1.12);
+    filter: brightness(1.3);
 }
 
 /* ========================================
@@ -2351,6 +2604,7 @@ body.onboarding-page {
     .step-visual-col {
         flex-direction: row;
         justify-content: center;
+        min-width: auto;
     }
     
     .calculator-container-enhanced {
@@ -2394,6 +2648,11 @@ body.onboarding-page {
         gap: 0.75rem;
     }
     
+    .hero-value-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
     .hero-cta-row {
         flex-direction: column;
         gap: 0.75rem;
@@ -2407,10 +2666,6 @@ body.onboarding-page {
     
     .hero-phoenix-image {
         max-width: 300px;
-    }
-    
-    .hero-ember-float {
-        display: none;
     }
     
     .credentials-content {
@@ -2472,6 +2727,10 @@ body.onboarding-page {
     .step-details-grid {
         grid-template-columns: 1fr;
     }
+    
+    .partners-logos-grid img {
+        height: 48px;
+    }
 }
 
 /* Small Mobile */
@@ -2526,6 +2785,14 @@ body.onboarding-page {
     .step-showcase-icon {
         width: 90px;
         height: 90px;
+    }
+    
+    .process-step-enhanced[data-step="3"] .step-showcase-icon {
+        max-width: 100%;
+    }
+    
+    .partners-logos-grid img {
+        height: 40px;
     }
 }
 
