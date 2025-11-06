@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$Ember Token - Hero Debug</title>
+    
+    <style>
+        /* ===================================
+           DIAGNOSTIC CSS - INLINE TO ISOLATE ISSUE
+           =================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0d0c0c;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        /* ===================================
+           HERO - MAXIMUM PRIORITY
+           =================================== */
+        .ember-hero {
+            /* FORCE VISIBILITY - HIGHEST PRIORITY */
+            display: flex !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            
+            /* LAYOUT */
+            min-height: 100vh !important;
+            max-height: none !important; /* Let it grow naturally */
+            width: 100% !important;
+            
+            /* FLEXBOX */
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            
+            /* SPACING */
+            padding: 120px 20px 80px !important;
+            
+            /* BACKGROUND */
+            background: linear-gradient(135deg, 
+                rgba(13, 12, 12, 1) 0%, 
+                rgba(26, 15, 10, 0.95) 50%, 
+                rgba(13, 12, 12, 1) 100%) !important;
+            
+            /* DEBUG - MAKE IT OBVIOUS */
+            border: 5px solid lime !important; /* YOU SHOULD SEE GREEN BORDER */
+        }
+        
+        /* Force all hero children visible */
+        .ember-hero * {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        .ember-hero-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .ember-hero-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .ember-hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0;
+            line-height: 1.1;
+        }
+        
+        .ember-hero-subtitle {
+            font-size: clamp(1.3rem, 3.5vw, 2.2rem);
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 0;
+            line-height: 1.4;
+            max-width: 900px;
+        }
+        
+        .highlight-gold {
+            color: #f0a500;
+            font-weight: 800;
+        }
+        
+        .ember-hero-description {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 850px;
+            margin: 0;
+        }
+        
+        /* ===================================
+           OTHER SECTIONS - TO PROVE THEY WORK
+           =================================== */
+        .test-section {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: #1a0f0a;
+            border: 3px solid yellow; /* SHOULD SEE YELLOW BORDER */
+        }
+        
+        .test-section h2 {
+            font-size: 2.5rem;
+            color: #f0a500;
+            text-align: center;
+        }
+        
+        /* ===================================
+           DIAGNOSTIC INFO BOX
+           =================================== */
+        .debug-box {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.9);
+            color: lime;
+            padding: 15px;
+            border: 2px solid lime;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            max-width: 300px;
+            z-index: 9999;
+        }
+        
+        .debug-box h3 {
+            color: yellow;
+            margin-bottom: 10px;
+        }
+        
+        .debug-box p {
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- DEBUG INFO BOX -->
+    <div class="debug-box">
+        <h3>🔍 HERO DEBUG</h3>
+        <p id="debug-info">Loading...</p>
+    </div>
+
+    <!-- HERO SECTION WITH DEBUG BORDER -->
+    <section class="ember-hero" id="home" role="banner">
+        <div class="ember-hero-container">
+            <div class="ember-hero-content">
+                
+                <!-- Title -->
+                <h1 class="ember-hero-title">$Ember Token</h1>
+                
+                <!-- Subtitle -->
+                <h2 class="ember-hero-subtitle">
+                    <span class="highlight-gold">Fueling</span> Location-Based AR 
+                    <span class="highlight-gold">Gaming Revolution</span>
+                </h2>
+                
+                <!-- Description -->
+                <p class="ember-hero-description">
+                    The utility token powering <span class="highlight-gold">white-label AR gaming apps</span> 
+                    and <span class="highlight-gold">SDK distribution</span> — creating value for Platform Operators, 
+                    Advertisers, and players worldwide through <span class="highlight-gold">GPS (Outdoors)</span> 
+                    and <span class="highlight-gold">Beacon (Indoors)</span> technology.
+                </p>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- TEST SECTION 1 -->
+    <section class="test-section">
+        <div>
+            <h2>✅ Test Section 1</h2>
+            <p style="color: white; margin-top: 1rem; font-size: 1.2rem;">
+                This section has a YELLOW border.<br>
+                Can you see it?
+            </p>
+        </div>
+    </section>
+    
+    <!-- TEST SECTION 2 -->
+    <section class="test-section" style="background: #2d1810; border-color: cyan;">
+        <div>
+            <h2>✅ Test Section 2</h2>
+            <p style="color: white; margin-top: 1rem; font-size: 1.2rem;">
+                This section has a CYAN border.<br>
+                Can you see it?
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // ===================================
+        // COMPREHENSIVE DIAGNOSTIC SCRIPT
+        // ===================================
+        
+        console.log('═══════════════════════════════════');
+        console.log('🔍 EMBER HERO DIAGNOSTIC REPORT');
+        console.log('═══════════════════════════════════');
+        
+        const hero = document.querySelector('.ember-hero');
+        const debugInfo = document.getElementById('debug-info');
+        let report = '';
+        
+        if (!hero) {
+            console.error('❌ CRITICAL: .ember-hero NOT FOUND IN DOM!');
+            report = '❌ Hero element NOT FOUND!';
+            debugInfo.innerHTML = report;
+        } else {
+            console.log('✅ Hero element FOUND in DOM');
+            
+            // Get computed styles
+            const styles = window.getComputedStyle(hero);
+            
+            // Critical properties
+            const display = styles.display;
+            const opacity = styles.opacity;
+            const visibility = styles.visibility;
+            const position = styles.position;
+            const zIndex = styles.zIndex;
+            const height = styles.height;
+            const minHeight = styles.minHeight;
+            const width = styles.width;
+            
+            console.log('📊 Computed Styles:');
+            console.log('  display:', display);
+            console.log('  opacity:', opacity);
+            console.log('  visibility:', visibility);
+            console.log('  position:', position);
+            console.log('  z-index:', zIndex);
+            console.log('  height:', height);
+            console.log('  min-height:', minHeight);
+            console.log('  width:', width);
+            
+            // Build report
+            report = `
+                <strong>✅ HERO FOUND</strong><br>
+                display: ${display}<br>
+                opacity: ${opacity}<br>
+                visibility: ${visibility}<br>
+                height: ${height}<br>
+                min-height: ${minHeight}<br>
+                width: ${width}
+            `;
+            
+            // Check if visible
+            const rect = hero.getBoundingClientRect();
+            console.log('📐 Bounding Rect:');
+            console.log('  top:', rect.top);
+            console.log('  left:', rect.left);
+            console.log('  width:', rect.width);
+            console.log('  height:', rect.height);
+            
+            if (rect.height === 0) {
+                console.error('❌ Hero has ZERO height!');
+                report += '<br><br>❌ HEIGHT IS ZERO!';
+            } else {
+                console.log('✅ Hero has height:', rect.height + 'px');
+                report += `<br><br>✅ Height: ${rect.height}px`;
+            }
+            
+            // Check for conflicting styles
+            const inlineStyle = hero.getAttribute('style');
+            if (inlineStyle) {
+                console.warn('⚠️ Inline styles detected:', inlineStyle);
+                report += '<br><br>⚠️ Has inline styles!';
+            }
+            
+            // Check for hiding classes
+            const classes = hero.className;
+            console.log('🏷️ Classes:', classes);
+            
+            if (classes.includes('hidden') || classes.includes('hide')) {
+                console.error('❌ Has hiding class!');
+                report += '<br><br>❌ Has hiding class!';
+            }
+            
+            debugInfo.innerHTML = report;
+        }
+        
+        // Check for external CSS conflicts
+        const stylesheets = document.styleSheets;
+        console.log('📄 Loaded stylesheets:', stylesheets.length);
+        
+        console.log('═══════════════════════════════════');
+        console.log('END DIAGNOSTIC REPORT');
+        console.log('═══════════════════════════════════');
+        
+        // Final instruction
+        console.log(' ');
+        console.log('🎯 WHAT TO LOOK FOR:');
+        console.log('1. Do you see a GREEN border around the hero?');
+        console.log('2. Do you see YELLOW border around first test section?');
+        console.log('3. Do you see CYAN border around second test section?');
+        console.log('4. Check the debug box in top-right corner');
+        console.log(' ');
+    </script>
+
+</body>
+</html>
