@@ -9,56 +9,46 @@
    =================================== */
 
 /* ===================================
-   HERO SECTION - PROPER FLEX LAYOUT
-   Overrides shared/global.css with correct flex-direction
+   NEW HERO - USING WORKING SECTION STRUCTURE
+   Add this to your ember/local.css
    =================================== */
-.ember-hero {
-    min-height: 100vh !important;
-    display: flex !important;
-    flex-direction: column !important;  /* CRITICAL - global.css was missing this */
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 140px 20px 80px !important;
-    background: linear-gradient(135deg, 
-        rgba(13, 12, 12, 1) 0%, 
-        rgba(26, 15, 10, 0.95) 50%, 
-        rgba(13, 12, 12, 1) 100%) !important;
-    width: 100% !important;
+
+/* Make the first section (home) look like a hero */
+#home.ember-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 140px;
+    padding-bottom: 80px;
 }
 
-.ember-hero-container {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
+/* Make the section header bigger for hero */
+#home .ember-section-header {
+    margin-bottom: 0;
 }
 
-.ember-hero-content {
-    text-align: center;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 2rem;
-    width: 100%;
-}
-
-.ember-hero-title {
+#home .ember-section-title {
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 900;
-    color: #ffffff;
-    margin: 0;
-    line-height: 1.1;
+    margin-bottom: 1.5rem;
 }
 
-.ember-hero-subtitle {
+#home .ember-section-icon-large {
+    width: clamp(180px, 25vw, 280px);
+    height: clamp(180px, 25vw, 280px);
+}
+
+#home .ember-section-subtitle {
     font-size: clamp(1.3rem, 3.5vw, 2.2rem);
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.95);
-    margin: 0;
-    line-height: 1.4;
-    max-width: 900px;
+    margin-bottom: 1.5rem;
+}
+
+#home .ember-section-subtitle:last-child {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    margin-bottom: 0;
 }
 
 .highlight-gold {
@@ -66,22 +56,11 @@
     font-weight: 800;
 }
 
-.ember-hero-description {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 850px;
-    margin: 0;
-}
-
-/* Mobile adjustments */
+/* Mobile */
 @media (max-width: 768px) {
-    .ember-hero {
-        padding: 100px 20px 60px !important;
-    }
-    
-    .ember-hero-content {
-        gap: 1.5rem;
+    #home.ember-section {
+        padding-top: 100px;
+        padding-bottom: 60px;
     }
 }
 
