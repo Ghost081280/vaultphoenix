@@ -1,29 +1,12 @@
 /* ===================================
-   VAULT PHOENIX - EMBER LOCAL CSS v2.0 PART 1
+   VAULT PHOENIX - EMBER LOCAL CSS v2.1 FINAL
    REBUILT & OPTIMIZED
    Hero + Spread Fire + How It Works sections
+   
+   CRITICAL: This file uses CSS variables from shared/global.css
+   DO NOT duplicate variables - they are defined globally
+   DO NOT override .navbar, .footer, .chatbot-* classes
    =================================== */
-
-/* ===================================
-   CSS VARIABLES
-   =================================== */
-:root {
-    --ember-red: #d73327;
-    --ember-orange: #fb923c;
-    --ember-gold: #f0a500;
-    --ember-gradient-primary: linear-gradient(135deg, #d73327 0%, #fb923c 50%, #f0a500 100%);
-    --ember-gradient-background: linear-gradient(180deg, rgba(13, 12, 12, 1) 0%, rgba(26, 15, 10, 0.95) 50%, rgba(13, 12, 12, 1) 100%);
-    --ember-gradient-card: linear-gradient(135deg, rgba(26, 15, 10, 0.95) 0%, rgba(45, 24, 16, 0.90) 100%);
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
-    --radius-2xl: 24px;
-    --radius-full: 9999px;
-    --navbar-height: 80px;
-    --container-padding: max(1rem, env(safe-area-inset-left, 1rem));
-    --icon-lg: 80px;
-    --icon-section: 100px;
-}
 
 /* ===================================
    HERO SECTION - .ember-hero
