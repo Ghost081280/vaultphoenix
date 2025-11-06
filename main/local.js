@@ -1,93 +1,268 @@
 // ============================================
 // VAULT PHOENIX MAIN.HTML LOCAL JAVASCRIPT
-// UPDATED - With working copy hashtags functionality
+// ULTIMATE BUTTER-SMOOTH VERSION
+// Optimized for perfect page loads and image timing
 // ============================================
 
 (function() {
 'use strict';
 
 // ============================================
-// SCROLL POSITION RESTORATION
-// Fixes refresh flash and returns user to same spot
+// PERFORMANCE STATE TRACKING
+// ============================================
+const pageState = {
+    isReady: false,
+    imagesLoaded: false,
+    fontsLoaded: false,
+    criticalImagesLoaded: false
+};
+
+// ============================================
+// CRITICAL IMAGES PRELOADER
+// Load hero/above-fold images first for instant display
+// ============================================
+function preloadCriticalImages() {
+    return new Promise((resolve) => {
+        const criticalImages = [
+            'images/PhoenixDesign.PNG',
+            'images/VPEmberCoin.PNG',
+            'images/PhoenixHoldingCoin.PNG',
+            'images/VPLogoNoText.PNG'
+        ];
+        
+        let loadedCount = 0;
+        const totalImages = criticalImages.length;
+        
+        if (totalImages === 0) {
+            resolve();
+            return;
+        }
+        
+        criticalImages.forEach(src => {
+            const img = new Image();
+            img.onload = img.onerror = () => {
+                loadedCount++;
+                if (loadedCount === totalImages) {
+                    pageState.criticalImagesLoaded = true;
+                    console.log('✅ Critical images preloaded');
+                    resolve();
+                }
+            };
+            img.src = src;
+        });
+        
+        // Timeout fallback
+        setTimeout(() => {
+            if (!pageState.criticalImagesLoaded) {
+                pageState.criticalImagesLoaded = true;
+                console.log('⚠️ Critical images timeout - proceeding anyway');
+                resolve();
+            }
+        }, 3000);
+    });
+}
+
+// ============================================
+// FONT LOADING OPTIMIZATION
+// Ensure fonts are ready before reveal
+// ============================================
+function waitForFonts() {
+    return new Promise((resolve) => {
+        if ('fonts' in document) {
+            document.fonts.ready.then(() => {
+                pageState.fontsLoaded = true;
+                console.log('✅ Fonts loaded');
+                resolve();
+            }).catch(() => {
+                pageState.fontsLoaded = true;
+                console.log('⚠️ Font loading error - proceeding');
+                resolve();
+            });
+            
+            // Timeout fallback
+            setTimeout(() => {
+                if (!pageState.fontsLoaded) {
+                    pageState.fontsLoaded = true;
+                    console.log('⚠️ Font loading timeout - proceeding');
+                    resolve();
+                }
+            }, 2000);
+        } else {
+            pageState.fontsLoaded = true;
+            resolve();
+        }
+    });
+}
+
+// ============================================
+// SCROLL POSITION RESTORATION - ENHANCED
+// Instant restoration with no flash
 // ============================================
 function saveScrollPosition() {
-    sessionStorage.setItem('scrollPosition', window.scrollY);
+    sessionStorage.setItem('vp_scroll', window.scrollY);
+    sessionStorage.setItem('vp_scroll_time', Date.now());
 }
 
 function restoreScrollPosition() {
-    const scrollPosition = sessionStorage.getItem('scrollPosition');
-    if (scrollPosition) {
-        requestAnimationFrame(() => {
-            window.scrollTo({
-                top: parseInt(scrollPosition, 10),
-                behavior: 'instant'
-            });
+    const scrollPos = sessionStorage.getItem('vp_scroll');
+    const scrollTime = sessionStorage.getItem('vp_scroll_time');
+    
+    // Only restore if scroll was saved in last 30 seconds (fresh page reload)
+    if (scrollPos && scrollTime && (Date.now() - parseInt(scrollTime)) < 30000) {
+        // Use instant behavior for no visual jump
+        window.scrollTo({
+            top: parseInt(scrollPos, 10),
+            behavior: 'instant'
         });
+        console.log(`✅ Scroll restored to ${scrollPos}px`);
     }
 }
 
+// Setup scroll position handlers
 window.addEventListener('beforeunload', saveScrollPosition);
-window.addEventListener('load', restoreScrollPosition);
 window.addEventListener('pagehide', () => {
-    sessionStorage.removeItem('scrollPosition');
+    saveScrollPosition();
+    // Clean up old scroll data after navigation
+    setTimeout(() => {
+        sessionStorage.removeItem('vp_scroll');
+        sessionStorage.removeItem('vp_scroll_time');
+    }, 100);
 });
 
 // ============================================
-// SMOOTH SCROLL REVEAL ANIMATIONS
-// Intersection Observer for butter-smooth reveals
+// SMOOTH SCROLL REVEAL ANIMATIONS - OPTIMIZED
+// Staggered reveals with perfect timing
 // ============================================
 function initializeScrollReveal() {
+    // Reveal elements immediately in viewport on load
+    const viewportHeight = window.innerHeight;
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    
+    revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        // If element is in initial viewport, reveal immediately
+        if (rect.top < viewportHeight && rect.bottom > 0) {
+            el.classList.add('revealed');
+        }
+    });
+    
+    // Setup observer for remaining elements
     const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -80px 0px' // Trigger slightly before element enters view
     };
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                // Optional: Stop observing after reveal for better performance
+                // Small delay for staggered effect on grouped elements
+                const delay = entry.target.classList.contains('stagger-1') ? 100 :
+                             entry.target.classList.contains('stagger-2') ? 200 :
+                             entry.target.classList.contains('stagger-3') ? 300 :
+                             entry.target.classList.contains('stagger-4') ? 400 : 0;
+                
+                setTimeout(() => {
+                    entry.target.classList.add('revealed');
+                }, delay);
+                
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
-    // Observe all scroll-reveal elements
-    const revealElements = document.querySelectorAll('.scroll-reveal');
-    revealElements.forEach(el => observer.observe(el));
+    // Observe only elements not already revealed
+    revealElements.forEach(el => {
+        if (!el.classList.contains('revealed')) {
+            observer.observe(el);
+        }
+    });
     
     console.log(`✅ Scroll reveal initialized for ${revealElements.length} elements`);
 }
 
 // ============================================
-// LAZY LOADING FOR IMAGES
-// Better performance on mobile
+// INTELLIGENT IMAGE LOADING
+// Priority-based loading with smooth fade-ins
 // ============================================
-function initializeLazyLoading() {
-    if ('loading' in HTMLImageElement.prototype) {
-        // Browser supports native lazy loading
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        console.log(`✅ Native lazy loading enabled for ${images.length} images`);
-    } else {
-        // Fallback for older browsers
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        const imageObserver = new IntersectionObserver((entries) => {
+function initializeImageLoading() {
+    const images = document.querySelectorAll('img');
+    let loadedCount = 0;
+    const totalImages = images.length;
+    
+    // Categorize images by priority
+    const heroImages = document.querySelectorAll('.main-hero img, .hero-container img');
+    const aboveFoldImages = [];
+    const belowFoldImages = [];
+    
+    images.forEach(img => {
+        const rect = img.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 1.5) {
+            aboveFoldImages.push(img);
+        } else {
+            belowFoldImages.push(img);
+        }
+    });
+    
+    console.log(`📊 Image Loading Plan:
+   - Hero: ${heroImages.length}
+   - Above Fold: ${aboveFoldImages.length}
+   - Below Fold: ${belowFoldImages.length}
+   - Total: ${totalImages}`);
+    
+    // Add loaded class when image loads
+    images.forEach(img => {
+        if (img.complete && img.naturalHeight !== 0) {
+            img.classList.add('img-loaded');
+            loadedCount++;
+        } else {
+            img.addEventListener('load', () => {
+                img.classList.add('img-loaded');
+                loadedCount++;
+                
+                if (loadedCount === totalImages) {
+                    pageState.imagesLoaded = true;
+                    console.log('✅ All images loaded');
+                }
+            });
+            
+            img.addEventListener('error', () => {
+                console.warn(`⚠️ Failed to load: ${img.src}`);
+                img.classList.add('img-error');
+                loadedCount++;
+            });
+        }
+    });
+    
+    // Lazy load below-fold images with Intersection Observer
+    if ('IntersectionObserver' in window) {
+        const lazyObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.src = img.dataset.src || img.src;
-                    imageObserver.unobserve(img);
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    lazyObserver.unobserve(img);
                 }
             });
+        }, {
+            rootMargin: '200px' // Start loading 200px before entering viewport
         });
         
-        images.forEach(img => imageObserver.observe(img));
-        console.log(`✅ Fallback lazy loading initialized for ${images.length} images`);
+        belowFoldImages.forEach(img => {
+            if (img.loading === 'lazy') {
+                lazyObserver.observe(img);
+            }
+        });
     }
+    
+    console.log('✅ Image loading system initialized');
 }
 
 // ============================================
 // WAIT FOR GLOBAL.JS TO COMPLETE
+// Enhanced with better timeout handling
 // ============================================
 function waitForGlobalReady(callback) {
     if (window.sharedScriptReady) {
@@ -97,7 +272,7 @@ function waitForGlobalReady(callback) {
     }
     
     let checkCount = 0;
-    const maxChecks = 100;
+    const maxChecks = 50; // Reduced from 100 for faster fallback
     
     const checkInterval = setInterval(() => {
         checkCount++;
@@ -111,7 +286,7 @@ function waitForGlobalReady(callback) {
             console.warn('⚠️ Global.js timeout - initializing anyway');
             callback();
         }
-    }, 50);
+    }, 40); // Reduced interval for faster response
 }
 
 // ============================================
@@ -211,15 +386,22 @@ function initializeInfoModal() {
 }
 
 // ============================================
-// PHONE & LAPTOP IMAGE GALLERIES
+// PHONE & LAPTOP IMAGE GALLERIES - OPTIMIZED
+// Preload adjacent thumbnails for instant switching
 // ============================================
 window.changePhoneImage = function(imagePath, altText) {
     const mainImage = document.getElementById('mainPhoneScreenshot');
     const thumbs = document.querySelectorAll('.simple-thumb');
     
     if (mainImage) {
-        mainImage.src = imagePath;
-        mainImage.alt = altText;
+        // Smooth fade transition
+        mainImage.style.opacity = '0.7';
+        
+        setTimeout(() => {
+            mainImage.src = imagePath;
+            mainImage.alt = altText;
+            mainImage.style.opacity = '1';
+        }, 150);
     }
     
     thumbs.forEach(thumb => {
@@ -237,8 +419,14 @@ window.changeLaptopImage = function(imagePath, altText) {
     const thumbs = document.querySelectorAll('.simple-thumb-laptop');
     
     if (mainImage) {
-        mainImage.src = imagePath;
-        mainImage.alt = altText;
+        // Smooth fade transition
+        mainImage.style.opacity = '0.7';
+        
+        setTimeout(() => {
+            mainImage.src = imagePath;
+            mainImage.alt = altText;
+            mainImage.style.opacity = '1';
+        }, 150);
     }
     
     thumbs.forEach(thumb => {
@@ -251,12 +439,42 @@ window.changeLaptopImage = function(imagePath, altText) {
     });
 };
 
+// Preload gallery images for instant switching
+function preloadGalleryImages() {
+    const phoneImages = [
+        'images/ARView.jpg',
+        'images/EmberAirdrop.jpg',
+        'images/EmberCollected.jpg',
+        'images/EmberNearby.jpg',
+        'images/EmberVault.jpg',
+        'images/HuntMap.jpg'
+    ];
+    
+    const laptopImages = [
+        'images/CampaignControl.PNG',
+        'images/DashboardOverview.PNG',
+        'images/AdvertiserManagement.PNG',
+        'images/AirdropCenter.PNG',
+        'images/Walletandfunding.PNG',
+        'images/AppbuilderSDK.PNG'
+    ];
+    
+    [...phoneImages, ...laptopImages].forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+    
+    console.log('✅ Gallery images preloaded');
+}
+
 // ============================================
-// AIRDROP FORM HANDLING
+// AIRDROP FORM HANDLING - ENHANCED
+// Better validation and user feedback
 // ============================================
 function initializeAirdropForm() {
     const form = document.getElementById('ember-claim-form');
     const messageBox = document.getElementById('ember-message-box');
+    const submitBtn = document.getElementById('claim-submit-btn');
     
     if (!form) return;
     
@@ -267,30 +485,46 @@ function initializeAirdropForm() {
         const socialUrl = document.getElementById('claim-social-url').value.trim();
         const termsChecked = document.getElementById('claim-terms').checked;
         
+        // Validation
         if (!wallet) {
-            showMessage('error', 'Please enter your Solana wallet address');
+            showMessage('error', '❌ Please enter your Solana wallet address');
             return;
         }
         
         if (!socialUrl) {
-            showMessage('error', 'Please enter your social media post URL');
+            showMessage('error', '❌ Please enter your social media post URL');
             return;
         }
         
         if (!termsChecked) {
-            showMessage('error', 'Please agree to the terms and conditions');
+            showMessage('error', '❌ Please agree to the terms and conditions');
             return;
         }
         
-        showMessage('info', 'Submitting your claim...');
+        // Disable submit button during processing
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+        }
+        
+        showMessage('info', '⏳ Submitting your claim...');
         
         try {
+            // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 2000));
+            
             showMessage('success', '🎉 Claim submitted successfully! Check your email for confirmation.');
             form.reset();
             document.getElementById('claim-terms').disabled = true;
+            
         } catch (error) {
-            showMessage('error', 'Failed to submit claim. Please try again.');
+            showMessage('error', '❌ Failed to submit claim. Please try again.');
+        } finally {
+            // Re-enable submit button
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<div class="main-image-glow"><img src="images/VPEmberCoin.PNG" alt="Ember Coin" style="width: 24px; height: 24px; object-fit: contain;" loading="lazy"></div><span>Claim $Ember</span>';
+            }
         }
     });
     
@@ -299,8 +533,14 @@ function initializeAirdropForm() {
         messageBox.style.display = 'block';
         messageBox.className = 'message-box-compact ' + type;
         messageBox.textContent = text;
+        
+        // Scroll message into view
+        messageBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
         if (type === 'success') {
-            setTimeout(() => messageBox.style.display = 'none', 5000);
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 5000);
         }
     }
     
@@ -308,7 +548,7 @@ function initializeAirdropForm() {
 }
 
 // ============================================
-// CHECK CLAIM STATUS
+// CHECK CLAIM STATUS - ENHANCED
 // ============================================
 function initializeStatusChecker() {
     const checkBtn = document.getElementById('check-status-btn');
@@ -318,18 +558,25 @@ function initializeStatusChecker() {
     
     checkBtn.addEventListener('click', async function() {
         const wallet = walletInput.value.trim();
+        
         if (!wallet) {
-            alert('Please enter a wallet address');
+            alert('⚠️ Please enter a wallet address');
             return;
         }
         
         try {
+            const originalText = checkBtn.textContent;
             checkBtn.textContent = 'Checking...';
             checkBtn.disabled = true;
+            
+            // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 1500));
-            alert(`Status for ${wallet.substring(0, 8)}...${wallet.substring(wallet.length - 4)}:\n\nNo claims found for this wallet address.`);
+            
+            const shortWallet = `${wallet.substring(0, 8)}...${wallet.substring(wallet.length - 4)}`;
+            alert(`📊 Status for ${shortWallet}:\n\n❌ No claims found for this wallet address.\n\nYou can submit a new claim using the form below!`);
+            
         } catch (error) {
-            alert('Error checking status. Please try again.');
+            alert('❌ Error checking status. Please try again.');
         } finally {
             checkBtn.textContent = 'Check';
             checkBtn.disabled = false;
@@ -340,40 +587,60 @@ function initializeStatusChecker() {
 }
 
 // ============================================
-// SHARE BUTTON HANDLERS
+// SHARE BUTTON HANDLERS - OPTIMIZED
 // ============================================
 function initializeShareButtons() {
-    const shareXBtn = document.getElementById('share-x-btn');
-    if (shareXBtn) {
-        shareXBtn.addEventListener('click', function() {
-            const text = 'Join me in the $Ember Airdrop! 🔥 AR Crypto Gaming with GPS & Beacon technology. Get your FREE tokens now!';
-            const url = 'https://vaultphoenix.com/ember.html';
-            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
-        });
-    }
+    const shareConfig = {
+        x: {
+            btn: 'share-x-btn',
+            handler: () => {
+                const text = '🔥 Join me in the $Ember Airdrop! AR Crypto Gaming with GPS & Beacon technology. Get your FREE tokens now! #VaultPhoenix #Ember';
+                const url = 'https://vaultphoenix.com/ember.html';
+                window.open(
+                    `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+                    '_blank',
+                    'width=600,height=400,scrollbars=yes'
+                );
+            }
+        },
+        facebook: {
+            btn: 'share-facebook-btn',
+            handler: () => {
+                const url = 'https://vaultphoenix.com/ember.html';
+                window.open(
+                    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+                    '_blank',
+                    'width=600,height=400,scrollbars=yes'
+                );
+            }
+        },
+        telegram: {
+            btn: 'share-telegram-btn',
+            handler: () => {
+                const text = '🔥 Join me in the $Ember Airdrop! AR Crypto Gaming with GPS & Beacon technology. Get your FREE tokens now!';
+                const url = 'https://vaultphoenix.com/ember.html';
+                window.open(
+                    `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
+                    '_blank',
+                    'width=600,height=400,scrollbars=yes'
+                );
+            }
+        }
+    };
     
-    const shareFacebookBtn = document.getElementById('share-facebook-btn');
-    if (shareFacebookBtn) {
-        shareFacebookBtn.addEventListener('click', function() {
-            const url = 'https://vaultphoenix.com/ember.html';
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
-        });
-    }
-    
-    const shareTelegramBtn = document.getElementById('share-telegram-btn');
-    if (shareTelegramBtn) {
-        shareTelegramBtn.addEventListener('click', function() {
-            const text = 'Join me in the $Ember Airdrop! 🔥 AR Crypto Gaming with GPS & Beacon technology. Get your FREE tokens now!';
-            const url = 'https://vaultphoenix.com/ember.html';
-            window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank', 'width=600,height=400');
-        });
-    }
+    Object.values(shareConfig).forEach(config => {
+        const btn = document.getElementById(config.btn);
+        if (btn) {
+            btn.addEventListener('click', config.handler);
+        }
+    });
     
     console.log('✅ Share buttons initialized');
 }
 
 // ============================================
-// COPY HASHTAGS FUNCTIONALITY - WORKING VERSION
+// COPY HASHTAGS FUNCTIONALITY - ULTIMATE VERSION
+// Works on all devices including iOS
 // ============================================
 function initializeCopyHashtags() {
     const copyBtn = document.getElementById('copy-hashtags-btn');
@@ -389,40 +656,42 @@ function initializeCopyHashtags() {
         const textToCopy = hashtagText.textContent.trim();
         
         try {
-            // Modern Clipboard API (works on all modern browsers)
+            // Try modern Clipboard API first
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 await navigator.clipboard.writeText(textToCopy);
                 showCopySuccess();
             } else {
-                // Fallback for older browsers
+                // Fallback for older browsers and iOS
                 fallbackCopyToClipboard(textToCopy);
                 showCopySuccess();
             }
         } catch (err) {
-            console.error('Failed to copy:', err);
+            console.error('Copy failed:', err);
             // Try fallback method
             try {
                 fallbackCopyToClipboard(textToCopy);
                 showCopySuccess();
             } catch (fallbackErr) {
+                console.error('Fallback copy failed:', fallbackErr);
                 showCopyError();
             }
         }
     });
     
     function showCopySuccess() {
+        const originalHTML = copyBtn.innerHTML;
         copyBtn.classList.add('copied');
-        copyBtnText.textContent = 'Copied!';
+        copyBtnText.textContent = '✓ Copied!';
         
-        // Reset after 2 seconds
+        // Reset after 2.5 seconds
         setTimeout(() => {
             copyBtn.classList.remove('copied');
             copyBtnText.textContent = 'Copy Hashtags';
-        }, 2000);
+        }, 2500);
     }
     
     function showCopyError() {
-        copyBtnText.textContent = 'Failed to copy';
+        copyBtnText.textContent = '❌ Failed';
         setTimeout(() => {
             copyBtnText.textContent = 'Copy Hashtags';
         }, 2000);
@@ -432,6 +701,8 @@ function initializeCopyHashtags() {
         // Create temporary textarea
         const textarea = document.createElement('textarea');
         textarea.value = text;
+        
+        // Make it invisible but not display:none (iOS requirement)
         textarea.style.position = 'fixed';
         textarea.style.top = '0';
         textarea.style.left = '0';
@@ -446,9 +717,8 @@ function initializeCopyHashtags() {
         
         document.body.appendChild(textarea);
         
-        // Select and copy
+        // iOS specific handling
         if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
-            // iOS specific handling
             const range = document.createRange();
             range.selectNodeContents(textarea);
             const selection = window.getSelection();
@@ -456,14 +726,20 @@ function initializeCopyHashtags() {
             selection.addRange(range);
             textarea.setSelectionRange(0, 999999);
         } else {
+            textarea.focus();
             textarea.select();
         }
         
-        const successful = document.execCommand('copy');
-        document.body.removeChild(textarea);
-        
-        if (!successful) {
-            throw new Error('Fallback copy failed');
+        try {
+            const successful = document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+            if (!successful) {
+                throw new Error('execCommand copy failed');
+            }
+        } catch (err) {
+            document.body.removeChild(textarea);
+            throw err;
         }
     }
     
@@ -471,7 +747,8 @@ function initializeCopyHashtags() {
 }
 
 // ============================================
-// AIRDROP PROGRESS TRACKER
+// AIRDROP PROGRESS TRACKER - ENHANCED
+// Animated number counting
 // ============================================
 function initializeAirdropTracker() {
     const totalEmber = 16670000;
@@ -487,25 +764,54 @@ function initializeAirdropTracker() {
     const progressBar = document.getElementById('ember-progress-bar');
     const progressPercentage = document.getElementById('ember-progress-percentage');
     
-    if (claimedEl) claimedEl.textContent = claimed.toLocaleString();
-    if (remainingEl) remainingEl.textContent = remaining.toLocaleString();
-    if (peopleEl) peopleEl.textContent = `${people.toLocaleString()} / ${maxPeople.toLocaleString()}`;
+    // Animate numbers with counting effect
+    function animateValue(element, start, end, duration) {
+        if (!element) return;
+        
+        const range = end - start;
+        const increment = range / (duration / 16);
+        let current = start;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= end) {
+                current = end;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current).toLocaleString();
+        }, 16);
+    }
+    
+    // Animate the numbers
+    if (claimedEl) animateValue(claimedEl, 0, claimed, 1000);
+    if (remainingEl) animateValue(remainingEl, 0, remaining, 1200);
+    
+    if (peopleEl) {
+        peopleEl.textContent = `${people.toLocaleString()} / ${maxPeople.toLocaleString()}`;
+    }
+    
+    // Animate progress bar
     if (progressBar) {
-        // Animate progress bar
         setTimeout(() => {
             progressBar.style.width = `${percentage}%`;
         }, 500);
     }
-    if (progressPercentage) progressPercentage.textContent = percentage;
+    
+    if (progressPercentage) {
+        setTimeout(() => {
+            progressPercentage.textContent = percentage;
+        }, 500);
+    }
     
     console.log('✅ Airdrop tracker initialized');
 }
 
 // ============================================
-// EMBER TOKEN COUNTDOWN TIMER
+// EMBER TOKEN COUNTDOWN TIMER - ENHANCED
+// More precise timing and better formatting
 // ============================================
 function initializeCountdownTimer() {
-    const targetDate = new Date('November 1, 2025 00:00:00').getTime();
+    const targetDate = new Date('November 1, 2025 00:00:00 UTC').getTime();
     
     const daysEl = document.getElementById('main-days');
     const hoursEl = document.getElementById('main-hours');
@@ -519,10 +825,10 @@ function initializeCountdownTimer() {
         const distance = targetDate - now;
         
         if (distance < 0) {
-            daysEl.textContent = '0';
-            hoursEl.textContent = '0';
-            minutesEl.textContent = '0';
-            secondsEl.textContent = '0';
+            daysEl.textContent = '00';
+            hoursEl.textContent = '00';
+            minutesEl.textContent = '00';
+            secondsEl.textContent = '00';
             return;
         }
         
@@ -531,72 +837,115 @@ function initializeCountdownTimer() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
-        daysEl.textContent = days.toString().padStart(2, '0');
-        hoursEl.textContent = hours.toString().padStart(2, '0');
-        minutesEl.textContent = minutes.toString().padStart(2, '0');
-        secondsEl.textContent = seconds.toString().padStart(2, '0');
+        // Smooth number updates with transition
+        daysEl.textContent = String(days).padStart(2, '0');
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
     }
     
+    // Initial update
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    
+    // Update every second
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+        clearInterval(countdownInterval);
+    });
     
     console.log('✅ Countdown timer initialized');
 }
 
 // ============================================
-// SMOOTH SCROLL FOR ANCHOR LINKS
+// SMOOTH SCROLL FOR ANCHOR LINKS - ENHANCED
+// Better offset calculation and smooth behavior
 // ============================================
 function initializeSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
+    // Use event delegation for better performance
+    document.addEventListener('click', function(e) {
+        const target = e.target.closest('a[href^="#"]');
+        if (!target) return;
+        
+        const href = target.getAttribute('href');
+        
+        // Skip if href is just "#" - scroll to top
+        if (href === '#') {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            return;
+        }
+        
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            e.preventDefault();
             
-            // Skip if href is just "#"
-            if (href === '#') {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                return;
+            const navbar = document.querySelector('.navbar');
+            const navbarHeight = navbar ? navbar.offsetHeight : 0;
+            const targetPosition = targetElement.offsetTop - navbarHeight - 20;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            
+            // Update URL without triggering scroll
+            if (history.pushState) {
+                history.pushState(null, null, href);
             }
-            
-            const targetId = href.substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                e.preventDefault();
-                const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
-                const targetPosition = targetElement.offsetTop - navbarHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
+        }
     });
     
     console.log('✅ Smooth scroll initialized');
 }
 
 // ============================================
-// PERFORMANCE MONITORING
+// PERFORMANCE MONITORING - ENHANCED
+// More detailed metrics and optimization tips
 // ============================================
 function monitorPerformance() {
-    if ('performance' in window) {
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const perfData = performance.getEntriesByType('navigation')[0];
-                if (perfData) {
-                    console.log('📊 Performance Metrics:');
-                    console.log(`   DOM Content Loaded: ${Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart)}ms`);
-                    console.log(`   Page Load Complete: ${Math.round(perfData.loadEventEnd - perfData.loadEventStart)}ms`);
-                    console.log(`   Total Load Time: ${Math.round(perfData.loadEventEnd - perfData.fetchStart)}ms`);
-                }
-            }, 0);
-        });
-    }
+    if (!('performance' in window)) return;
+    
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            if (!perfData) return;
+            
+            const metrics = {
+                dns: Math.round(perfData.domainLookupEnd - perfData.domainLookupStart),
+                tcp: Math.round(perfData.connectEnd - perfData.connectStart),
+                request: Math.round(perfData.responseStart - perfData.requestStart),
+                response: Math.round(perfData.responseEnd - perfData.responseStart),
+                domParse: Math.round(perfData.domContentLoadedEventStart - perfData.responseEnd),
+                domReady: Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart),
+                load: Math.round(perfData.loadEventEnd - perfData.loadEventStart),
+                total: Math.round(perfData.loadEventEnd - perfData.fetchStart)
+            };
+            
+            console.log('📊 Performance Metrics:');
+            console.log(`   DNS Lookup: ${metrics.dns}ms`);
+            console.log(`   TCP Connection: ${metrics.tcp}ms`);
+            console.log(`   Request Time: ${metrics.request}ms`);
+            console.log(`   Response Time: ${metrics.response}ms`);
+            console.log(`   DOM Parse: ${metrics.domParse}ms`);
+            console.log(`   DOM Ready: ${metrics.domReady}ms`);
+            console.log(`   Page Load: ${metrics.load}ms`);
+            console.log(`   ⭐ Total: ${metrics.total}ms`);
+            
+            // Performance recommendations
+            if (metrics.total > 3000) {
+                console.warn('⚠️ Slow page load detected. Consider optimizing images and reducing JavaScript.');
+            } else if (metrics.total < 1000) {
+                console.log('🚀 Excellent page load performance!');
+            }
+        }, 100);
+    });
 }
 
 // ============================================
@@ -604,12 +953,20 @@ function monitorPerformance() {
 // Add class for touch-specific styles
 // ============================================
 function detectTouchDevice() {
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    if (isTouch) {
         document.body.classList.add('touch-device');
         console.log('✅ Touch device detected');
     } else {
         document.body.classList.add('no-touch');
         console.log('✅ Non-touch device detected');
+    }
+    
+    // Add hover support detection
+    const hasHover = window.matchMedia('(hover: hover)').matches;
+    if (hasHover) {
+        document.body.classList.add('has-hover');
     }
 }
 
@@ -624,73 +981,148 @@ function fixMobileViewport() {
     }
     
     setViewportHeight();
-    window.addEventListener('resize', setViewportHeight);
-    window.addEventListener('orientationchange', setViewportHeight);
+    
+    // Debounced resize handler
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(setViewportHeight, 100);
+    });
+    
+    window.addEventListener('orientationchange', () => {
+        setTimeout(setViewportHeight, 100);
+    });
     
     console.log('✅ Mobile viewport height fixed');
 }
 
 // ============================================
-// DEBOUNCE UTILITY
-// For optimizing resize/scroll handlers
+// REDUCE MOTION FOR ACCESSIBILITY
+// Respect user's motion preferences
 // ============================================
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+function respectReducedMotion() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+        document.body.classList.add('reduce-motion');
+        console.log('✅ Reduced motion enabled for accessibility');
+    }
 }
 
 // ============================================
-// INITIALIZATION
+// CONNECTION QUALITY DETECTION
+// Adjust loading strategy based on connection
 // ============================================
-function initializeMainPage() {
-    console.log('🔥 Main page local JS initializing...');
+function detectConnectionQuality() {
+    if ('connection' in navigator) {
+        const connection = navigator.connection;
+        const effectiveType = connection.effectiveType;
+        
+        console.log(`📡 Connection: ${effectiveType}`);
+        
+        if (effectiveType === 'slow-2g' || effectiveType === '2g') {
+            document.body.classList.add('slow-connection');
+            console.log('⚠️ Slow connection detected - optimizing loading');
+        } else if (effectiveType === '4g') {
+            document.body.classList.add('fast-connection');
+            console.log('🚀 Fast connection detected');
+        }
+        
+        // Listen for connection changes
+        connection.addEventListener('change', () => {
+            console.log(`📡 Connection changed to: ${connection.effectiveType}`);
+        });
+    }
+}
+
+// ============================================
+// MASTER INITIALIZATION SEQUENCE
+// Coordinated startup for butter-smooth experience
+// ============================================
+async function initializeMainPage() {
+    console.log('🔥 Vault Phoenix - Main Page Initialization Starting...');
+    console.log('⏱️  Start Time:', new Date().toISOString());
     
-    // Core functionality
+    // Phase 1: Immediate Setup (0ms)
     detectTouchDevice();
     fixMobileViewport();
+    respectReducedMotion();
+    detectConnectionQuality();
+    restoreScrollPosition(); // Instant scroll restoration
+    
+    console.log('✅ Phase 1: Immediate setup complete');
+    
+    // Phase 2: Critical Resources (parallel loading)
+    const startTime = performance.now();
+    
+    await Promise.all([
+        preloadCriticalImages(),
+        waitForFonts()
+    ]);
+    
+    const resourcesTime = performance.now() - startTime;
+    console.log(`✅ Phase 2: Critical resources loaded in ${Math.round(resourcesTime)}ms`);
+    
+    // Phase 3: Core Functionality
     initializeSmoothScroll();
-    
-    // Modals
-    initializeTermsModal();
-    initializeInfoModal();
-    
-    // Airdrop features
-    initializeAirdropForm();
-    initializeStatusChecker();
-    initializeShareButtons();
-    initializeCopyHashtags(); // ✅ NEW: Copy hashtags functionality
-    initializeAirdropTracker();
-    
-    // Countdown timer
-    initializeCountdownTimer();
-    
-    // Animations and optimization
     initializeScrollReveal();
-    initializeLazyLoading();
+    initializeImageLoading();
     
-    // Performance monitoring
-    monitorPerformance();
+    console.log('✅ Phase 3: Core functionality initialized');
     
-    console.log('✅ Main page local JS fully initialized');
-    console.log('🎉 All systems ready - Vault Phoenix Main Page loaded');
+    // Phase 4: Feature Initialization (can be slightly delayed)
+    requestAnimationFrame(() => {
+        // Modals
+        initializeTermsModal();
+        initializeInfoModal();
+        
+        // Airdrop features
+        initializeAirdropForm();
+        initializeStatusChecker();
+        initializeShareButtons();
+        initializeCopyHashtags();
+        initializeAirdropTracker();
+        
+        // Countdown timer
+        initializeCountdownTimer();
+        
+        // Gallery preloading
+        preloadGalleryImages();
+        
+        // Performance monitoring
+        monitorPerformance();
+        
+        pageState.isReady = true;
+        
+        const totalTime = performance.now() - startTime;
+        console.log(`✅ Phase 4: All features initialized in ${Math.round(totalTime)}ms`);
+        console.log('🎉 Vault Phoenix Main Page - FULLY LOADED AND READY');
+        console.log('⏱️  End Time:', new Date().toISOString());
+        
+        // Dispatch custom ready event
+        window.dispatchEvent(new CustomEvent('vpMainPageReady', {
+            detail: { loadTime: totalTime }
+        }));
+    });
 }
 
 // ============================================
-// START EVERYTHING
+// START EVERYTHING - OPTIMIZED ENTRY POINT
 // ============================================
 if (document.readyState === 'loading') {
+    // DOM still loading
     document.addEventListener('DOMContentLoaded', function() {
         waitForGlobalReady(initializeMainPage);
     });
 } else {
+    // DOM already loaded
     waitForGlobalReady(initializeMainPage);
 }
+
+// Export for debugging
+window.vaultPhoenixMainPage = {
+    state: pageState,
+    version: '2.0.0-butter-smooth'
+};
 
 })();
