@@ -1944,43 +1944,25 @@ body {
     transition: all 0.3s ease;
 }
 
-.phantom-promo-compact:hover {
-    background: rgba(139, 92, 246, 0.3) !important;
-    border-color: rgba(139, 92, 246, 0.7) !important;
-}
-
-.phantom-promo-header {
+.phantom-promo-compact {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     gap: 1rem;
-}
-
-.phantom-icon-compact {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.phantom-text-compact {
-    flex: 1;
-    text-align: left;
+    background: rgba(139, 92, 246, 0.2) !important;
+    border: 2px solid rgba(139, 92, 246, 0.5) !important;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
 }
 
 .phantom-text-compact strong {
     display: block;
     font-size: 1.05rem;
-    color: #8b5cf6;
+    color: #ffffff !important;
     font-weight: 700;
     margin-bottom: 0.5rem;
-}
-
-.phantom-text-compact p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
 }
 
 .phantom-get-link {
@@ -1991,7 +1973,7 @@ body {
     background: rgba(139, 92, 246, 0.3);
     border: 2px solid rgba(139, 92, 246, 0.6);
     border-radius: 12px;
-    color: #8b5cf6;
+    color: #ffffff !important;
     font-size: 0.95rem;
     font-weight: 700;
     text-decoration: none;
@@ -2002,6 +1984,7 @@ body {
 .phantom-get-link:hover {
     background: rgba(139, 92, 246, 0.4);
     border-color: #8b5cf6;
+    color: #ffffff !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }/* Form Fields */
