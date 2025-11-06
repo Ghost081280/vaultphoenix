@@ -9,7 +9,8 @@
    =================================== */
 
 /* ===================================
-   HERO SECTION - ADD TO BOTTOM OF ember/local.css
+   HERO SECTION - UPDATED WITH PROPER SIZING
+   Replace the hero section in ember/local.css with this
    =================================== */
 
 /* Make the first section (home) look like a hero */
@@ -31,32 +32,55 @@
     margin-bottom: 0;
 }
 
+/* Title - "$Ember Token" - Keep good size */
 #home .ember-section-title {
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 900;
     margin-bottom: 1.5rem;
 }
 
+/* Coin icon */
 #home .ember-section-icon-large {
     width: clamp(180px, 25vw, 280px);
     height: clamp(180px, 25vw, 280px);
 }
 
-#home .ember-section-subtitle {
+/* Coin spin animation */
+#home .ember-section-icon-large img {
+    animation: coin-spin 8s linear infinite;
+}
+
+@keyframes coin-spin {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+/* First subtitle - "Fueling Location-Based AR Gaming Revolution" - Keep good size */
+#home .ember-section-subtitle:first-of-type {
     font-size: clamp(1.3rem, 3.5vw, 2.2rem);
     font-weight: 700;
     margin-bottom: 1.5rem;
 }
 
-#home .ember-section-subtitle:last-child {
-    font-size: clamp(1rem, 2vw, 1.25rem);
+/* Second subtitle/description - "The utility token powering..." - MAKE SMALLER */
+#home .ember-section-subtitle:last-of-type {
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);  /* SMALLER */
     font-weight: 400;
+    line-height: 1.7;
     margin-bottom: 2rem;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgba(255, 255, 255, 0.85);  /* Slightly muted */
 }
 
 .highlight-gold {
     color: #f0a500;
-    font-weight: 800;
+    font-weight: 700;
 }
 
 /* HERO BUTTONS */
@@ -141,6 +165,11 @@
     .hero-btn {
         width: 100%;
         justify-content: center;
+    }
+    
+    /* Make description even smaller on mobile */
+    #home .ember-section-subtitle:last-of-type {
+        font-size: 0.9rem;
     }
 }
 
