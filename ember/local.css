@@ -134,8 +134,13 @@ body {
     }
 }
 
+/* ============================================
+   REPLACE OR ADD TO ember/local.css
+   Updated Hero Section & Spread Fire Section
+   ============================================ */
+
 /* ============================================================================
-   EMBER HERO SECTION - MATCHING MAIN STYLE
+   EMBER HERO SECTION - UPDATED TO MATCH SCREENSHOT
    ============================================================================ */
 
 .ember-hero {
@@ -144,20 +149,24 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, 
+        rgba(13, 12, 12, 0.98) 0%, 
+        rgba(26, 15, 10, 0.95) 50%,
+        rgba(45, 24, 16, 0.92) 100%
+    );
     overflow: hidden;
-    padding: 120px 20px 80px;
+    padding: 140px 20px 80px;
 }
 
 .ember-hero-container {
     position: relative;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     z-index: 2;
 }
 
-/* Floating Coins Background - Matching Main Animation Style */
+/* Floating Coins Background */
 .hero-floating-coins {
     position: absolute;
     top: 0;
@@ -170,8 +179,8 @@ body {
 
 .hero-coin {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: clamp(60px, 8vw, 100px);
+    height: clamp(60px, 8vw, 100px);
     background-image: url('../images/VPEmberCoin.PNG');
     background-size: contain;
     background-repeat: no-repeat;
@@ -201,291 +210,341 @@ body {
     text-align: center;
     position: relative;
     z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* Token Icon - LARGE & CENTERED */
 .ember-token-icon {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 30px;
-    animation: glow-pulse 3s ease-in-out infinite;
+    width: clamp(200px, 25vw, 350px);
+    height: clamp(200px, 25vw, 350px);
+    margin: 0 auto 50px;
+    position: relative;
 }
 
 .ember-token-icon img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6));
+    filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8)) 
+            drop-shadow(0 0 80px rgba(215, 51, 39, 0.6));
+    animation: heroTokenPulse 3s ease-in-out infinite;
 }
 
-@keyframes glow-pulse {
+@keyframes heroTokenPulse {
     0%, 100% {
-        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.6));
+        filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8)) 
+                drop-shadow(0 0 80px rgba(215, 51, 39, 0.6));
         transform: scale(1);
     }
     50% {
-        filter: drop-shadow(0 0 50px rgba(240, 165, 0, 0.8));
+        filter: drop-shadow(0 0 60px rgba(240, 165, 0, 1)) 
+                drop-shadow(0 0 100px rgba(215, 51, 39, 0.8));
         transform: scale(1.05);
     }
 }
 
-/* Typography - Matching Main */
+/* Typography */
 .ember-hero-title {
-    font-size: 3rem;
-    font-weight: 800;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
     color: #f0a500;
-    margin: 0 0 20px;
-    text-shadow: 0 0 30px rgba(240, 165, 0, 0.5);
-    line-height: 1.2;
+    margin: 0 0 30px;
+    text-shadow: 0 0 40px rgba(240, 165, 0, 0.6),
+                 0 0 80px rgba(215, 51, 39, 0.4);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
 }
 
 .ember-hero-subtitle {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #fb923c;
-    margin: 0 0 20px;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 40px;
     line-height: 1.3;
 }
 
-.ember-hero-subtitle .white-text {
-    color: #ffffff;
+.ember-hero-subtitle .highlight-gold {
+    color: #f0a500;
+    text-shadow: 0 0 20px rgba(240, 165, 0, 0.5);
 }
 
 .ember-hero-description {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.2vw, 1.4rem);
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 800px;
-    margin: 0 auto 50px;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-.ember-hero-description .highlight {
+.ember-hero-description .highlight-gold {
     color: #f0a500;
     font-weight: 600;
 }
 
-/* Stats Cards - Matching Main Style */
-.ember-hero-stats {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 900px;
-    margin: 0 auto 50px;
-}
-
-.stat-card {
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-xl);
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    transition: all var(--transition-normal);
-    backdrop-filter: blur(10px);
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(240, 165, 0, 0.6);
-    box-shadow: 0 10px 40px rgba(240, 165, 0, 0.3);
-}
-
-.stat-icon {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #f0a500;
-    line-height: 1;
-}
-
-.stat-label {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 500;
-}
-
-/* CTA Buttons - Matching Main Button Style */
+/* Hide old elements that were removed */
+.ember-hero-stats,
 .ember-hero-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.btn-primary,
-.btn-secondary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 18px 40px;
-    border-radius: var(--radius-full);
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all var(--transition-normal);
-    cursor: pointer;
-    min-height: 54px;
-}
-
-.btn-primary img,
-.btn-secondary img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-}
-
-.btn-primary {
-    background: var(--ember-gradient-primary);
-    color: #000000;
-    border: 2px solid transparent;
-    box-shadow: var(--ember-shadow-md);
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--ember-shadow-lg);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: #f0a500;
-    border: 2px solid #f0a500;
-}
-
-.btn-secondary img {
-    filter: brightness(0) invert(1);
-}
-
-.btn-secondary:hover {
-    background: rgba(240, 165, 0, 0.1);
-    border-color: #fb923c;
-    color: #fb923c;
-    transform: translateY(-3px);
+    display: none !important;
 }
 
 /* ============================================================================
-   SOCIAL SHARING SECTION - MATCHING MAIN COMPACT STYLE
+   SPREAD THE $EMBER FIRE SECTION - NEW SEPARATE SECTION
    ============================================================================ */
 
-.social-sharing-section-compact {
-    background: var(--ember-gradient-background);
-    padding: 60px 20px;
-    border-top: 1px solid rgba(240, 165, 0, 0.2);
+.spread-ember-fire-section {
+    padding: clamp(60px, 10vw, 100px) 20px;
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.95) 0%, 
+        rgba(45, 24, 16, 0.92) 100%
+    );
+    position: relative;
+    overflow: hidden;
 }
 
-.social-sharing-content-compact {
-    max-width: 900px;
+.spread-fire-content {
+    max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
+    background: linear-gradient(135deg, 
+        rgba(215, 51, 39, 0.15) 0%, 
+        rgba(240, 165, 0, 0.15) 100%
+    );
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 30px;
+    padding: clamp(40px, 6vw, 60px);
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
-.social-sharing-header-compact {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    text-align: left;
+/* Fire Icon */
+.spread-fire-icon {
+    margin-bottom: 30px;
 }
 
-.share-icon-compact {
-    width: 50px;
-    height: 50px;
+.fire-icon-animated {
+    width: clamp(80px, 12vw, 120px);
+    height: clamp(80px, 12vw, 120px);
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
-    flex-shrink: 0;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
+    animation: fireIconFlicker 2s ease-in-out infinite;
 }
 
-.share-text-compact h3 {
-    font-size: 1.5rem;
-    color: #f0a500;
-    margin: 0 0 8px;
-    font-weight: 700;
+@keyframes fireIconFlicker {
+    0%, 100% {
+        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        filter: drop-shadow(0 0 40px rgba(215, 51, 39, 0.9));
+        transform: scale(1.05) rotate(-5deg);
+    }
+    50% {
+        filter: drop-shadow(0 0 50px rgba(240, 165, 0, 1));
+        transform: scale(1.1) rotate(0deg);
+    }
+    75% {
+        filter: drop-shadow(0 0 40px rgba(215, 51, 39, 0.9));
+        transform: scale(1.05) rotate(5deg);
+    }
 }
 
-.share-text-compact p {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
-    line-height: 1.5;
+/* Title */
+.spread-fire-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.social-sharing-buttons-compact {
+/* Subtitle */
+.spread-fire-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* Social Buttons */
+.spread-fire-buttons {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
     justify-content: center;
-    width: 100%;
+    flex-wrap: wrap;
 }
 
-.social-share-button-compact {
+.spread-fire-btn {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 24px;
-    border-radius: var(--radius-full);
-    font-size: 1rem;
-    font-weight: 600;
+    gap: 12px;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-weight: 700;
     text-decoration: none;
-    transition: all var(--transition-normal);
-    border: 2px solid;
-    flex: 1 1 auto;
-    min-width: 150px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    min-width: 220px;
     justify-content: center;
-    min-height: 44px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.social-share-button-compact svg {
+.spread-fire-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.spread-fire-btn svg {
     flex-shrink: 0;
 }
 
-.twitter-share-compact {
-    background: transparent;
-    color: #1DA1F2;
-    border-color: #1DA1F2;
-}
-
-.twitter-share-compact:hover {
-    background: #1DA1F2;
+/* Twitter Button */
+.twitter-btn {
+    background: linear-gradient(135deg, #d73327, #fb923c);
     color: #ffffff;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(29, 161, 242, 0.4);
 }
 
-.facebook-share-compact {
-    background: transparent;
-    color: #1877F2;
-    border-color: #1877F2;
+.twitter-btn:hover {
+    background: linear-gradient(135deg, #c62828, #f57c00);
 }
 
-.facebook-share-compact:hover {
-    background: #1877F2;
+/* Facebook Button */
+.facebook-btn {
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    color: #000000;
+}
+
+.facebook-btn:hover {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+}
+
+/* Telegram Button */
+.telegram-btn {
+    background: linear-gradient(135deg, #fb923c, #d73327);
     color: #ffffff;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(24, 119, 242, 0.4);
 }
 
-.telegram-share-compact {
-    background: transparent;
-    color: #0088cc;
-    border-color: #0088cc;
+.telegram-btn:hover {
+    background: linear-gradient(135deg, #f57c00, #c62828);
 }
 
-.telegram-share-compact:hover {
-    background: #0088cc;
-    color: #ffffff;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4);
+/* ============================================
+   REMOVE/HIDE OLD SOCIAL SHARING SECTION
+   ============================================ */
+.social-sharing-section-compact {
+    display: none !important;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Tablet - 1024px */
+@media (max-width: 1024px) {
+    .ember-hero {
+        padding: 120px 30px 60px;
+    }
+    
+    .ember-token-icon {
+        width: clamp(180px, 22vw, 300px);
+        height: clamp(180px, 22vw, 300px);
+        margin-bottom: 40px;
+    }
+    
+    .ember-hero-title {
+        margin-bottom: 25px;
+    }
+    
+    .ember-hero-subtitle {
+        margin-bottom: 35px;
+    }
+    
+    .spread-fire-buttons {
+        gap: 15px;
+    }
+    
+    .spread-fire-btn {
+        min-width: 200px;
+        padding: 16px 35px;
+    }
+}
+
+/* Mobile - 768px */
+@media (max-width: 768px) {
+    .ember-hero {
+        padding: 100px 20px 50px;
+    }
+    
+    .ember-token-icon {
+        width: clamp(150px, 35vw, 250px);
+        height: clamp(150px, 35vw, 250px);
+        margin-bottom: 30px;
+    }
+    
+    .ember-hero-title {
+        margin-bottom: 20px;
+    }
+    
+    .ember-hero-subtitle {
+        margin-bottom: 30px;
+    }
+    
+    .spread-ember-fire-section {
+        padding: 50px 15px;
+    }
+    
+    .spread-fire-content {
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+    
+    .spread-fire-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .spread-fire-btn {
+        width: 100%;
+        min-width: auto;
+        padding: 16px 30px;
+    }
+}
+
+/* Small Mobile - 480px */
+@media (max-width: 480px) {
+    .ember-hero {
+        padding: 90px 15px 40px;
+    }
+    
+    .ember-token-icon {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 25px;
+    }
+    
+    .spread-fire-icon .fire-icon-animated {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .ember-token-icon img,
+    .fire-icon-animated,
+    .hero-coin {
+        animation: none !important;
+    }
+    
+    .spread-fire-btn:hover {
+        transform: none;
+    }
 }
 
 /* ============================================
