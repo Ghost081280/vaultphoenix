@@ -1,6 +1,7 @@
 // ============================================
 // VAULT PHOENIX MAIN.HTML LOCAL JAVASCRIPT
-// ULTIMATE BUTTER-SMOOTH VERSION
+// ULTIMATE BUTTER-SMOOTH VERSION v2.1
+// NOW WITH ENHANCED AIRDROP MODAL CONTENT! 🔥
 // Optimized for perfect page loads and image timing
 // ============================================
 
@@ -290,9 +291,105 @@ function waitForGlobalReady(callback) {
 }
 
 // ============================================
-// AIRDROP TERMS MODAL
+// AIRDROP TERMS MODAL - ENHANCED CONTENT
 // ============================================
 function initializeTermsModal() {
+    const modal = document.getElementById('airdrop-terms-modal');
+    if (!modal) {
+        // Create the modal dynamically with enhanced content
+        const newModal = document.createElement('div');
+        newModal.id = 'airdrop-terms-modal';
+        newModal.className = 'tpa-modal';
+        newModal.style.display = 'none';
+        newModal.setAttribute('role', 'dialog');
+        newModal.setAttribute('aria-labelledby', 'airdrop-terms-title');
+        newModal.setAttribute('aria-modal', 'true');
+        
+        newModal.innerHTML = `
+            <div class="tpa-modal-overlay"></div>
+            <div class="tpa-modal-content" style="max-width: 800px;">
+                <div class="tpa-modal-header">
+                    <h3 id="airdrop-terms-title">
+                        <img src="images/TechnicalFoundation.PNG" alt="" aria-hidden="true">
+                        $Ember Airdrop Terms & Conditions
+                    </h3>
+                    <button class="tpa-modal-close" id="close-terms-modal" aria-label="Close terms modal">×</button>
+                </div>
+                <div class="tpa-modal-body">
+                    <div class="tpa-preview">
+                        <p style="font-size: 1.1rem; color: #f0a500; font-weight: 600; margin-bottom: 20px;">
+                            Please read these terms carefully before claiming your $Ember airdrop tokens.
+                        </p>
+                        
+                        <div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">
+                            <h4 style="color: #f0a500; margin-bottom: 15px;">1. Eligibility Requirements</h4>
+                            <ul style="margin-left: 20px; line-height: 1.8;">
+                                <li>You must share the Vault Phoenix $Ember presale campaign on a public social media account (X/Twitter, Facebook, or Telegram)</li>
+                                <li>Your social media post must remain live and publicly visible until the presale campaign officially ends</li>
+                                <li>You must provide a valid Solana wallet address to receive tokens</li>
+                                <li>You must provide a direct URL link to your social media post</li>
+                                <li>One claim per person - duplicate claims from the same wallet will be rejected</li>
+                                <li>Limited to first 5,000 verified participants</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">
+                            <h4 style="color: #f0a500; margin-bottom: 15px;">2. Token Distribution</h4>
+                            <ul style="margin-left: 20px; line-height: 1.8;">
+                                <li>Each verified participant receives 3,333 EMBER tokens (≈$10 value at $0.003 presale price)</li>
+                                <li>Tokens will be distributed to your Solana wallet address after the presale campaign ends</li>
+                                <li>Distribution timeline: Within 30 days after presale completion</li>
+                                <li>Total airdrop pool: 16,670,000 EMBER tokens (≈$50K value)</li>
+                                <li>Tokens are subject to the same utility and vesting terms as presale tokens</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">
+                            <h4 style="color: #f0a500; margin-bottom: 15px;">3. Post Verification & Compliance</h4>
+                            <ul style="margin-left: 20px; line-height: 1.8;">
+                                <li>Your social media post will be verified for authenticity and compliance</li>
+                                <li>Posts must include genuine promotion of the $Ember presale (spam or misleading posts will be rejected)</li>
+                                <li><strong style="color: #f87171;">CRITICAL:</strong> If you delete your post before the presale campaign ends, you forfeit your airdrop reward</li>
+                                <li>We reserve the right to verify post status at any time during the campaign</li>
+                                <li>Posts that violate social media platform terms of service will be disqualified</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">
+                            <h4 style="color: #f0a500; margin-bottom: 15px;">4. Important Disclaimers</h4>
+                            <ul style="margin-left: 20px; line-height: 1.8;">
+                                <li>Vault Phoenix reserves the right to verify all claims and reject fraudulent submissions</li>
+                                <li>Token values may fluctuate - the $10 value is based on presale price and not guaranteed</li>
+                                <li>Participation in this airdrop does not constitute an investment or financial advice</li>
+                                <li>You are responsible for any tax obligations in your jurisdiction</li>
+                                <li>Vault Phoenix may modify or terminate the airdrop program at any time</li>
+                                <li>By participating, you agree to Vault Phoenix's Terms of Service and Privacy Policy</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(240, 165, 0, 0.1); padding: 20px; border-radius: 15px; border: 2px solid rgba(240, 165, 0, 0.4); margin-top: 25px;">
+                            <p style="margin: 0; font-weight: 600; text-align: center; color: #f0a500; font-size: 1.05rem;">
+                                <img src="images/EmberCoinLock.PNG" alt="" aria-hidden="true" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                By clicking "I Agree" below, you confirm that you have read, understood, and agree to comply with all terms and conditions outlined above.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="tpa-modal-actions" style="margin-top: 25px;">
+                        <button class="tpa-agree-btn" id="agree-terms-btn" style="background: var(--ember-gradient-primary);">
+                            ✓ I Agree to Terms & Conditions
+                        </button>
+                        <button class="tpa-download-btn" id="cancel-terms-btn" style="margin-top: 10px;">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(newModal);
+    }
+    
     const modal = document.getElementById('airdrop-terms-modal');
     const openBtn = document.getElementById('open-terms-modal');
     const closeBtn = document.getElementById('close-terms-modal');
@@ -306,21 +403,28 @@ function initializeTermsModal() {
         e.preventDefault();
         e.stopPropagation();
         modal.classList.add('active');
+        modal.style.display = 'flex';
         document.body.classList.add('modal-open');
+        document.body.style.overflow = 'hidden';
     });
     
     function closeModal(e) {
         if (e) e.preventDefault();
         modal.classList.remove('active');
+        modal.style.display = 'none';
         document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
     }
     
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
     
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeModal(e);
-    });
+    const overlay = modal.querySelector('.tpa-modal-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) closeModal(e);
+        });
+    }
     
     if (agreeBtn) {
         agreeBtn.addEventListener('click', function(e) {
@@ -332,7 +436,7 @@ function initializeTermsModal() {
     }
     
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
             closeModal();
         }
     });
@@ -341,9 +445,82 @@ function initializeTermsModal() {
 }
 
 // ============================================
-// AIRDROP INFO MODAL
+// AIRDROP INFO MODAL - ENHANCED CONTENT
 // ============================================
 function initializeInfoModal() {
+    const modal = document.getElementById('airdrop-info-modal');
+    if (!modal) {
+        // Create the modal dynamically with enhanced content
+        const newModal = document.createElement('div');
+        newModal.id = 'airdrop-info-modal';
+        newModal.className = 'tpa-modal';
+        newModal.style.display = 'none';
+        newModal.setAttribute('role', 'dialog');
+        newModal.setAttribute('aria-labelledby', 'airdrop-info-title');
+        newModal.setAttribute('aria-modal', 'true');
+        
+        newModal.innerHTML = `
+            <div class="tpa-modal-overlay"></div>
+            <div class="tpa-modal-content" style="max-width: 700px;">
+                <div class="tpa-modal-header">
+                    <h3 id="airdrop-info-title">
+                        <img src="images/VPEmberCoin.PNG" alt="" aria-hidden="true">
+                        How the $Ember Airdrop Works
+                    </h3>
+                    <button class="tpa-modal-close" id="close-info-modal" aria-label="Close info modal">×</button>
+                </div>
+                <div class="tpa-modal-body">
+                    <div class="tpa-preview">
+                        <h4>🔥 Spread the Phoenix Fire!</h4>
+                        <p><strong>Share our presale campaign on social media and earn FREE $Ember tokens!</strong></p>
+                        
+                        <div style="background: rgba(240, 165, 0, 0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(240, 165, 0, 0.3); margin: 20px 0;">
+                            <h4 style="color: #f0a500; margin-bottom: 15px;">📋 Step-by-Step Process:</h4>
+                            <ol style="margin-left: 20px; line-height: 1.8;">
+                                <li><strong>Click a Share Button</strong> - Choose X (Twitter), Facebook, or Telegram</li>
+                                <li><strong>Share the Post</strong> - Post about the $Ember presale on your social media</li>
+                                <li><strong>Copy Your Post URL</strong> - Get the link to your shared post</li>
+                                <li><strong>Fill the Claim Form</strong> - Enter your Solana wallet and post URL</li>
+                                <li><strong>Agree to Terms</strong> - Keep your post live until campaign end</li>
+                                <li><strong>Submit</strong> - Claim your 3,333 EMBER tokens (worth ≈$10)!</li>
+                            </ol>
+                        </div>
+                        
+                        <h4 style="color: #f0a500; margin-top: 20px;">🎁 What You Get:</h4>
+                        <ul style="margin-left: 20px; line-height: 1.8;">
+                            <li><strong>3,333 EMBER tokens</strong> per verified claim</li>
+                            <li><strong>≈$10 value</strong> at presale price ($0.003)</li>
+                            <li><strong>Distributed after presale ends</strong> - early supporter rewards!</li>
+                        </ul>
+                        
+                        <h4 style="color: #f0a500; margin-top: 20px;">⚠️ Important Rules:</h4>
+                        <ul style="margin-left: 20px; line-height: 1.8;">
+                            <li>You must <strong>keep your post live</strong> until the presale campaign ends</li>
+                            <li>Only <strong>one claim per person</strong> (verified by wallet address)</li>
+                            <li>Posts that are deleted before campaign end <strong>forfeit rewards</strong></li>
+                            <li>Limited to <strong>first 5,000 participants</strong> (16.7M EMBER pool)</li>
+                        </ul>
+                        
+                        <div style="background: rgba(215, 51, 39, 0.1); padding: 15px; border-radius: 10px; border-left: 3px solid #d73327; margin-top: 20px;">
+                            <p style="margin: 0; font-weight: 600;">
+                                <img src="images/VPEmberFlame.svg" alt="" aria-hidden="true" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                Ready to claim your FREE $Ember? Click a share button below to get started!
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="tpa-modal-actions" style="margin-top: 25px;">
+                        <button class="tpa-agree-btn" id="ok-info-btn">
+                            ✓ Got It - Let's Share!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(newModal);
+    }
+    
     const modal = document.getElementById('airdrop-info-modal');
     const openBtn = document.getElementById('airdrop-info-btn');
     const closeBtn = document.getElementById('close-info-modal');
@@ -356,7 +533,9 @@ function initializeInfoModal() {
         e.stopPropagation();
         e.stopImmediatePropagation();
         modal.classList.add('active');
+        modal.style.display = 'flex';
         document.body.classList.add('modal-open');
+        document.body.style.overflow = 'hidden';
         return false;
     }, { capture: true, passive: false });
     
@@ -366,18 +545,23 @@ function initializeInfoModal() {
             e.stopPropagation();
         }
         modal.classList.remove('active');
+        modal.style.display = 'none';
         document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
     }
     
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     if (okBtn) okBtn.addEventListener('click', closeModal);
     
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeModal(e);
-    });
+    const overlay = modal.querySelector('.tpa-modal-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) closeModal(e);
+        });
+    }
     
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
             closeModal();
         }
     });
@@ -1072,7 +1256,7 @@ async function initializeMainPage() {
     
     // Phase 4: Feature Initialization (can be slightly delayed)
     requestAnimationFrame(() => {
-        // Modals
+        // Modals with enhanced content
         initializeTermsModal();
         initializeInfoModal();
         
@@ -1122,7 +1306,7 @@ if (document.readyState === 'loading') {
 // Export for debugging
 window.vaultPhoenixMainPage = {
     state: pageState,
-    version: '2.0.0-butter-smooth'
+    version: '2.1.0-enhanced-modals'
 };
 
 })();
