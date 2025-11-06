@@ -1314,7 +1314,7 @@ body {
 
 .ember-airdrop-section {
     padding: 4rem 1rem;
-    background: var(--ember-gradient-background); /* ✅ FIXED - was causing red filter */
+    background: var(--ember-gradient-background); /* ✅ CHANGED */
     position: relative;
     overflow-x: hidden;
 }
@@ -2258,7 +2258,7 @@ body {
    =================================== */
 .crypto-coin-section {
     padding: 4rem 1rem;
-    background: var(--ember-gradient-background); /* ✅ FIXED - was causing red filter */
+    background: var(--ember-gradient-background); /* ✅ CHANGED */
     position: relative;
     overflow: hidden;
 }
