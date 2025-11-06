@@ -1935,14 +1935,18 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    background: linear-gradient(135deg, 
-        rgba(96, 165, 250, 0.15) 0%, 
-        rgba(59, 130, 246, 0.1) 100%);
-    border: 2px solid rgba(96, 165, 250, 0.4);
+    background: rgba(139, 92, 246, 0.2) !important;
+    border: 2px solid rgba(139, 92, 246, 0.5) !important;
     border-radius: 16px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     text-align: center;
+    transition: all 0.3s ease;
+}
+
+.phantom-promo-compact:hover {
+    background: rgba(139, 92, 246, 0.3) !important;
+    border-color: rgba(139, 92, 246, 0.7) !important;
 }
 
 .phantom-promo-header {
@@ -1967,7 +1971,7 @@ body {
 .phantom-text-compact strong {
     display: block;
     font-size: 1.05rem;
-    color: #60a5fa;
+    color: #8b5cf6;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
@@ -1984,22 +1988,22 @@ body {
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: rgba(96, 165, 250, 0.2);
-    border: 2px solid rgba(96, 165, 250, 0.5);
+    background: rgba(139, 92, 246, 0.3);
+    border: 2px solid rgba(139, 92, 246, 0.6);
     border-radius: 12px;
-    color: #60a5fa;
+    color: #8b5cf6;
     font-size: 0.95rem;
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s ease;
-    min-height: 44px; /* Touch target */
+    min-height: 44px;
 }
 
 .phantom-get-link:hover {
-    background: rgba(96, 165, 250, 0.3);
-    border-color: #60a5fa;
+    background: rgba(139, 92, 246, 0.4);
+    border-color: #8b5cf6;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }/* Form Fields */
 .ember-form-compact {
     display: flex;
