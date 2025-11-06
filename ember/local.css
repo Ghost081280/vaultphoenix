@@ -291,8 +291,8 @@
 }
 
 /* ===================================
-   $EMBER AIRDROP SECTION - EMBER PAGE VERSION
-   Orange/Red theme matching ember.html design
+   $EMBER AIRDROP SECTION - PURPLE VERSION (MATCHING MAIN PAGE)
+   Orange/Red theme REPLACED with Purple theme
    =================================== */
 
 /* Base box-sizing for entire section */
@@ -380,10 +380,10 @@
     line-height: 1.5;
 }
 
-/* Coming Soon Banner - EMBER COLORS */
+/* Coming Soon Banner - PURPLE VERSION */
 .ember-coming-soon-compact {
-    background: rgba(215, 51, 39, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
+    background: rgba(139, 92, 246, 0.1);
+    border: 2px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--radius-xl);
     padding: clamp(1.25rem, 2.5vw, 1.5rem);
     margin-bottom: clamp(1.5rem, 3vw, 2rem);
@@ -403,7 +403,7 @@
     margin-bottom: 1rem;
 }
 
-/* Social Links - EMBER ORANGE BUTTONS */
+/* Social Links - PURPLE BUTTONS */
 .ember-social-links-compact {
     display: flex;
     justify-content: center;
@@ -412,8 +412,8 @@
 }
 
 .ember-social-btn-ember {
-    background: rgba(215, 51, 39, 0.2) !important;
-    border: 2px solid rgba(215, 51, 39, 0.5) !important;
+    background: rgba(139, 92, 246, 0.2) !important;
+    border: 2px solid rgba(139, 92, 246, 0.5) !important;
     color: white !important;
     padding: 0.65rem 1.25rem;
     border-radius: var(--radius-lg);
@@ -430,10 +430,10 @@
 }
 
 .ember-social-btn-ember:hover {
-    background: rgba(215, 51, 39, 0.4) !important;
-    border-color: rgba(215, 51, 39, 0.8) !important;
+    background: rgba(139, 92, 246, 0.4) !important;
+    border-color: rgba(139, 92, 246, 0.8) !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }
 
 .ember-social-icon-small {
@@ -494,8 +494,8 @@
     height: 32px;
     min-width: 44px;
     min-height: 44px;
-    background: rgba(215, 51, 39, 0.4);
-    border: 2px solid rgba(215, 51, 39, 0.7);
+    background: rgba(139, 92, 246, 0.4);
+    border: 2px solid rgba(139, 92, 246, 0.7);
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -509,8 +509,8 @@
 }
 
 .info-badge-button:hover {
-    background: rgba(215, 51, 39, 0.6);
-    border-color: var(--ember-orange);
+    background: rgba(139, 92, 246, 0.6);
+    border-color: #8b5cf6;
     transform: scale(1.1);
 }
 
@@ -681,10 +681,10 @@
     transform: translateY(-2px);
 }
 
-/* Status Checker */
+/* Status Checker - PURPLE VERSION */
 .status-checker-integrated {
-    background: rgba(215, 51, 39, 0.1);
-    border: 1px solid rgba(215, 51, 39, 0.3);
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--radius-lg);
     padding: clamp(1rem, 2vw, 1.25rem);
     margin-bottom: clamp(1.25rem, 2.5vw, 1.5rem);
@@ -693,7 +693,7 @@
 .status-checker-integrated h4 {
     font-size: clamp(0.95rem, 1.8vw, 1rem);
     font-weight: 700;
-    color: var(--ember-orange);
+    color: #8b5cf6;
     margin-bottom: 0.5rem;
     text-align: center;
 }
@@ -715,7 +715,7 @@
     flex: 1;
     padding: 0.75rem;
     background: rgba(15, 15, 15, 0.6);
-    border: 1px solid rgba(215, 51, 39, 0.3);
+    border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--radius-lg);
     color: white;
     font-size: clamp(0.85rem, 1.5vw, 0.9rem);
@@ -729,13 +729,13 @@
 
 .input-compact:focus {
     outline: none;
-    border-color: var(--ember-orange);
-    box-shadow: 0 0 0 3px rgba(215, 51, 39, 0.2);
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
 }
 
 .status-btn-compact {
     padding: 0.75rem 1.5rem;
-    background: var(--ember-gradient-primary);
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
     color: white;
     border: none;
     border-radius: var(--radius-lg);
@@ -749,10 +749,10 @@
 
 .status-btn-compact:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }
 
-/* Social Tracking Section - EMBER COLORS */
+/* Social Tracking Section - GOLD/EMBER COLORS (KEPT) */
 .social-tracking-section {
     background: linear-gradient(135deg, 
         rgba(240, 165, 0, 0.12) 0%, 
@@ -897,8 +897,8 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 0.7rem;
-    background: rgba(215, 51, 39, 0.2);
-    border: 2px solid rgba(215, 51, 39, 0.5);
+    background: rgba(139, 92, 246, 0.2);
+    border: 2px solid rgba(139, 92, 246, 0.5);
     border-radius: var(--radius-lg);
     font-size: clamp(0.8rem, 1.4vw, 0.85rem);
     font-weight: 600;
@@ -913,10 +913,10 @@
 .share-x-ember:hover,
 .share-facebook-ember:hover,
 .share-telegram-ember:hover {
-    background: rgba(215, 51, 39, 0.4);
-    border-color: rgba(215, 51, 39, 0.8);
+    background: rgba(139, 92, 246, 0.4);
+    border-color: rgba(139, 92, 246, 0.8);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }
 
 .share-icon {
@@ -924,13 +924,13 @@
     height: 18px;
 }
 
-/* Phantom Promo */
+/* Phantom Promo - PURPLE VERSION */
 .phantom-promo-compact {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    background: rgba(215, 51, 39, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
+    background: rgba(139, 92, 246, 0.2) !important;
+    border: 2px solid rgba(139, 92, 246, 0.5) !important;
     border-radius: var(--radius-xl);
     padding: clamp(1.25rem, 2.5vw, 1.5rem);
     margin-bottom: clamp(1.25rem, 2.5vw, 1.5rem);
@@ -939,8 +939,8 @@
 }
 
 .phantom-promo-compact:hover {
-    background: rgba(215, 51, 39, 0.15);
-    border-color: rgba(215, 51, 39, 0.5);
+    background: rgba(139, 92, 246, 0.3) !important;
+    border-color: rgba(139, 92, 246, 0.7) !important;
 }
 
 .phantom-promo-header {
@@ -965,7 +965,7 @@
 .phantom-text-compact strong {
     display: block;
     font-size: clamp(1rem, 1.8vw, 1.05rem);
-    color: var(--ember-orange);
+    color: #8b5cf6;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
@@ -982,10 +982,10 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: rgba(215, 51, 39, 0.3);
-    border: 2px solid rgba(215, 51, 39, 0.6);
+    background: rgba(139, 92, 246, 0.3);
+    border: 2px solid rgba(139, 92, 246, 0.6);
     border-radius: var(--radius-lg);
-    color: var(--ember-orange);
+    color: #8b5cf6;
     font-size: clamp(0.9rem, 1.6vw, 0.95rem);
     font-weight: 700;
     text-decoration: none;
@@ -994,10 +994,10 @@
 }
 
 .phantom-get-link:hover {
-    background: rgba(215, 51, 39, 0.4);
-    border-color: var(--ember-orange);
+    background: rgba(139, 92, 246, 0.4);
+    border-color: #8b5cf6;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }
 
 /* Form Fields */
