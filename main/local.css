@@ -4048,6 +4048,13 @@ body {
     .pricing-solution-wrapper {
         padding: 1.5rem;
     }
+   .solution-header {
+        padding-top: 1rem;
+    }
+    
+    .solution-category-title {
+        margin-top: 0.5rem;
+    }
     
     .solution-title {
         font-size: 1.3rem;
