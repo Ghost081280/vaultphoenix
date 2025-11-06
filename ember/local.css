@@ -9,126 +9,23 @@
    =================================== */
 
 /* ===================================
-   HERO SECTION - .ember-hero
-   Token icon, title, subtitle, description
-   Floating coins animation
+   EMBER HERO SECTION - SIMPLE & WORKING
+   Fresh start - no complex animations breaking visibility
    =================================== */
 
 .ember-hero {
-    position: relative;
+    padding: calc(var(--navbar-height) + 4rem) var(--container-padding) 4rem;
+    background: linear-gradient(135deg, 
+        rgba(13, 12, 12, 1) 0%, 
+        rgba(26, 15, 10, 0.95) 50%, 
+        rgba(13, 12, 12, 1) 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 4rem;
-    background: linear-gradient(180deg, 
-        rgba(13, 12, 12, 1) 0%, 
-        rgba(26, 15, 10, 0.95) 20%,
-        rgba(45, 24, 16, 0.90) 50%,
-        rgba(26, 15, 10, 0.95) 80%,
-        rgba(13, 12, 12, 1) 100%);
-    overflow: hidden;
-    z-index: 1;
 }
 
-/* Floating Coins Background Animation */
-.hero-floating-coins {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.hero-coin {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background-image: url('../images/VPEmberCoin.PNG');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.15;
-    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.3));
-    animation: float-coin 20s ease-in-out infinite;
-}
-
-.hero-coin-1 {
-    top: 10%;
-    left: 5%;
-    animation-delay: 0s;
-    animation-duration: 18s;
-}
-
-.hero-coin-2 {
-    top: 20%;
-    right: 10%;
-    width: 80px;
-    height: 80px;
-    animation-delay: 3s;
-    animation-duration: 22s;
-}
-
-.hero-coin-3 {
-    bottom: 15%;
-    left: 15%;
-    width: 70px;
-    height: 70px;
-    animation-delay: 6s;
-    animation-duration: 20s;
-}
-
-.hero-coin-4 {
-    top: 50%;
-    right: 5%;
-    width: 50px;
-    height: 50px;
-    animation-delay: 9s;
-    animation-duration: 19s;
-}
-
-.hero-coin-5 {
-    bottom: 25%;
-    right: 20%;
-    animation-delay: 12s;
-    animation-duration: 21s;
-}
-
-.hero-coin-6 {
-    top: 30%;
-    left: 10%;
-    width: 55px;
-    height: 55px;
-    animation-delay: 15s;
-    animation-duration: 23s;
-}
-
-@keyframes float-coin {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.15;
-    }
-    25% {
-        transform: translateY(-30px) rotate(90deg);
-        opacity: 0.25;
-    }
-    50% {
-        transform: translateY(-50px) rotate(180deg);
-        opacity: 0.15;
-    }
-    75% {
-        transform: translateY(-30px) rotate(270deg);
-        opacity: 0.25;
-    }
-}
-
-/* Hero Container */
 .ember-hero-container {
-    position: relative;
-    z-index: 2;
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
@@ -139,34 +36,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(1rem, 3vw, 2rem);
+    gap: 2rem;
 }
 
 /* Token Icon */
 .ember-token-icon {
-    margin-bottom: clamp(1rem, 2vw, 1.5rem);
-    animation: pulse-glow 3s ease-in-out infinite;
+    margin-bottom: 1rem;
 }
 
 .ember-token-icon img {
     width: clamp(180px, 25vw, 280px);
     height: clamp(180px, 25vw, 280px);
     object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.8))
-            drop-shadow(0 0 50px rgba(240, 165, 0, 0.5));
-}
-
-@keyframes pulse-glow {
-    0%, 100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.8))
-                drop-shadow(0 0 50px rgba(240, 165, 0, 0.5));
-    }
-    50% {
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 40px rgba(215, 51, 39, 1))
-                drop-shadow(0 0 70px rgba(240, 165, 0, 0.7));
-    }
+    filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.6))
+            drop-shadow(0 0 50px rgba(240, 165, 0, 0.4));
 }
 
 /* Hero Title */
@@ -176,9 +59,7 @@
     color: #ffffff;
     margin: 0;
     line-height: 1.1;
-    text-shadow: 0 0 20px rgba(215, 51, 39, 0.5),
-                 0 0 40px rgba(240, 165, 0, 0.3);
-    letter-spacing: -0.02em;
+    text-shadow: 0 0 20px rgba(215, 51, 39, 0.5);
 }
 
 /* Hero Subtitle */
@@ -194,8 +75,6 @@
 .highlight-gold {
     color: var(--ember-gold);
     font-weight: 800;
-    position: relative;
-    display: inline-block;
 }
 
 /* Hero Description */
@@ -207,9 +86,15 @@
     margin: 0;
 }
 
-.ember-hero-description .highlight-gold {
-    color: var(--ember-gold);
-    font-weight: 700;
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .ember-hero {
+        padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem;
+    }
+    
+    .ember-hero-content {
+        gap: 1.5rem;
+    }
 }
 
 /* ===================================
@@ -709,9 +594,12 @@
 
 /* Tablet (768px+) */
 @media (min-width: 768px) {
-    /* Hero adjustments */
     .ember-hero {
-        padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 5rem;
+        padding: calc(var(--navbar-height) + 5rem) var(--container-padding) 5rem;
+    }
+    
+    .ember-hero-content {
+        gap: 2.5rem;
     }
     
     /* Social buttons in row */
@@ -732,13 +620,12 @@
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
-    /* Hero larger spacing */
     .ember-hero {
-        padding: calc(var(--navbar-height) + 4rem) var(--container-padding) 6rem;
+        padding: calc(var(--navbar-height) + 6rem) var(--container-padding) 6rem;
     }
     
     .ember-hero-content {
-        gap: 2.5rem;
+        gap: 3rem;
     }
     
     /* Stakeholder cards 3 columns */
@@ -749,22 +636,6 @@
     /* Utility grid 3 columns */
     .utility-grid-enhanced {
         grid-template-columns: repeat(3, 1fr);
-    }
-    
-    /* Larger floating coins on desktop */
-    .hero-coin {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .hero-coin-2 {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .hero-coin-3 {
-        width: 90px;
-        height: 90px;
     }
 }
 
