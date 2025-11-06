@@ -1,35 +1,29 @@
 /* ============================================
-   VAULT PHOENIX - EMBER TOKEN PAGE CSS
-   VERSION: 6.0 - GLOBAL CASCADE FIX
-   Updated to work seamlessly with shared/global.css
+   VAULT PHOENIX - EMBER TOKEN PAGE LOCAL CSS
+   VERSION: 10.0 - CLEAN REBUILD
+   
+   Philosophy: Extend global.css, don't fight it
+   Sections: Hero → Spread Fire → How It Works
+   
+   Global provides: Structure, visibility, base styles
+   Local provides: Ember-specific visuals only
    ============================================ */
 
 /* ===================================
-   ROOT VARIABLES - PAGE-SPECIFIC ONLY
-   (Core variables inherited from global.css)
+   EMBER HERO SECTION
+   Global handles: display, opacity, min-height, padding
+   Local adds: Background gradient, ember-specific styling
    =================================== */
-:root {
-    /* Ember-specific extensions (don't redefine global vars) */
-    --ember-card-radius: 20px;
-    --container-max: 1400px;
-}
 
-/* ============================================
-   HERO SECTION - EMBER-SPECIFIC OVERRIDES
-   Leverages global.css hero base, adds page-specific styling
-   ============================================ */
-
-/* CRITICAL: Let global.css handle visibility/display
-   Only override visual styling here */
+/* Background - ember-specific visual */
 .ember-hero {
-    /* Visual enhancements only - global handles structure */
     background: linear-gradient(135deg, 
         rgba(13, 12, 12, 0.98) 0%, 
         rgba(26, 15, 10, 0.95) 50%,
-        rgba(45, 24, 16, 0.92) 100%) !important;
+        rgba(45, 24, 16, 0.92) 100%);
 }
 
-/* Floating Coins Background - Ember-specific */
+/* Floating Coins - ember-specific decoration */
 .hero-floating-coins {
     position: absolute;
     top: 0;
@@ -49,7 +43,7 @@
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.12;
-    animation: float 20s infinite ease-in-out;
+    animation: floatCoin 20s infinite ease-in-out;
     border-radius: 50%;
 }
 
@@ -60,37 +54,33 @@
 .hero-coin-5 { top: 50%; left: 5%; animation-delay: 8s; animation-duration: 19s; }
 .hero-coin-6 { top: 60%; right: 5%; animation-delay: 10s; animation-duration: 21s; }
 
-@keyframes float {
+@keyframes floatCoin {
     0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
     25% { transform: translateY(-20px) translateX(10px) rotate(90deg); }
     50% { transform: translateY(0) translateX(20px) rotate(180deg); }
     75% { transform: translateY(20px) translateX(10px) rotate(270deg); }
 }
 
-/* Hero Container - extends global pattern */
+/* Hero Content Structure - uses global's .hero-content pattern */
 .ember-hero-container {
-    position: relative;
+    max-width: 1400px;
     width: 100%;
-    max-width: var(--container-max);
     margin: 0 auto;
+    position: relative;
     z-index: 2;
 }
 
-/* Hero Content - ember-specific layout */
 .ember-hero-content {
     text-align: center;
-    position: relative;
-    z-index: 2;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Token Icon - ember-specific */
+/* Token Icon - ember-specific element */
 .ember-token-icon {
     width: 280px;
     height: 280px;
     margin: 0 auto 50px;
-    position: relative;
 }
 
 .ember-token-icon img {
@@ -98,29 +88,29 @@
     height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8)) 
-            drop-shadow(0 0 80px rgba(215, 51, 39, 0.6)) !important;
-    animation: heroTokenPulse 3s ease-in-out infinite;
+            drop-shadow(0 0 80px rgba(215, 51, 39, 0.6));
+    animation: emberPulse 3s ease-in-out infinite;
 }
 
-@keyframes heroTokenPulse {
+@keyframes emberPulse {
     0%, 100% {
         filter: drop-shadow(0 0 40px rgba(240, 165, 0, 0.8)) 
-                drop-shadow(0 0 80px rgba(215, 51, 39, 0.6)) !important;
+                drop-shadow(0 0 80px rgba(215, 51, 39, 0.6));
         transform: scale(1);
     }
     50% {
         filter: drop-shadow(0 0 60px rgba(240, 165, 0, 1)) 
-                drop-shadow(0 0 100px rgba(215, 51, 39, 0.8)) !important;
+                drop-shadow(0 0 100px rgba(215, 51, 39, 0.8));
         transform: scale(1.05);
     }
 }
 
-/* Typography - ember-specific */
+/* Typography - extends global's hero-title pattern */
 .ember-hero-title {
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 900;
     color: #f0a500;
-    margin: 0 0 30px;
+    margin-bottom: 30px;
     text-shadow: 0 0 40px rgba(240, 165, 0, 0.6),
                  0 0 80px rgba(215, 51, 39, 0.4);
     line-height: 1.1;
@@ -131,12 +121,14 @@
     font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 700;
     color: #ffffff;
-    margin: 0 0 40px;
+    margin-bottom: 40px;
     line-height: 1.3;
 }
 
-.ember-hero-subtitle .highlight-gold {
+.ember-hero-subtitle .highlight-gold,
+.ember-hero-description .highlight-gold {
     color: #f0a500;
+    font-weight: 600;
     text-shadow: 0 0 20px rgba(240, 165, 0, 0.5);
 }
 
@@ -148,22 +140,16 @@
     margin: 0 auto;
 }
 
-.ember-hero-description .highlight-gold {
-    color: #f0a500;
-    font-weight: 600;
-}
-
-/* ============================================
+/* ===================================
    SPREAD THE $EMBER FIRE SECTION
-   Social sharing CTA - ember-specific
-   ============================================ */
+   Uses global's .section pattern
+   =================================== */
+
 .spread-ember-fire-section {
     padding: clamp(60px, 10vw, 80px) 20px;
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.95) 0%, 
         rgba(45, 24, 16, 0.92) 100%);
-    position: relative;
-    overflow: hidden;
 }
 
 .spread-fire-content {
@@ -179,7 +165,6 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-/* Fire Icon */
 .spread-fire-icon {
     margin-bottom: 30px;
 }
@@ -189,10 +174,10 @@
     height: clamp(70px, 15vw, 100px);
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
-    animation: fireIconFlicker 2s ease-in-out infinite;
+    animation: fireFlicker 2s ease-in-out infinite;
 }
 
-@keyframes fireIconFlicker {
+@keyframes fireFlicker {
     0%, 100% {
         filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
         transform: scale(1) rotate(0deg);
@@ -211,7 +196,6 @@
     }
 }
 
-/* Title */
 .spread-fire-title {
     font-size: clamp(1.75rem, 5vw, 3rem);
     font-weight: 900;
@@ -222,7 +206,6 @@
     background-clip: text;
 }
 
-/* Subtitle */
 .spread-fire-subtitle {
     font-size: clamp(1rem, 2.5vw, 1.3rem);
     color: rgba(255, 255, 255, 0.9);
@@ -230,7 +213,6 @@
     line-height: 1.6;
 }
 
-/* Social Buttons */
 .spread-fire-buttons {
     display: flex;
     gap: 20px;
@@ -248,8 +230,6 @@
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
     min-width: 220px;
     justify-content: center;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -261,17 +241,13 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
-.spread-fire-btn:active {
-    transform: translateY(-2px) scale(0.98);
-}
-
 .spread-fire-btn svg {
     flex-shrink: 0;
     width: 24px;
     height: 24px;
 }
 
-/* Button Variants */
+/* Button color variants */
 .twitter-btn {
     background: linear-gradient(135deg, #d73327, #fb923c);
     color: #ffffff;
@@ -297,6 +273,361 @@
 
 .telegram-btn:hover {
     background: linear-gradient(135deg, #f57c00, #c62828);
+}
+
+/* ===================================
+   HOW IT WORKS SECTION
+   Uses global's .section pattern with .card pattern
+   =================================== */
+
+.how-it-works-section {
+    padding: clamp(60px, 10vw, 80px) 20px;
+    background: var(--ember-gradient-background);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Section Header - follows global .section-header pattern */
+.ember-section-header {
+    text-align: center;
+    margin-bottom: clamp(40px, 6vw, 60px);
+}
+
+.ember-section-icon {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.ember-section-icon-large img {
+    width: clamp(60px, 12vw, 100px);
+    height: clamp(60px, 12vw, 100px);
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+}
+
+.ember-section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #f0a500, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.ember-section-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Stakeholder Cards - extends global .card pattern */
+.how-it-works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(25px, 4vw, 40px);
+    margin-bottom: clamp(50px, 8vw, 80px);
+}
+
+.stakeholder-card {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9) 0%, 
+        rgba(45, 24, 16, 0.85) 100%);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: clamp(25px, 4vw, 35px);
+    transition: all 0.3s ease;
+}
+
+.stakeholder-card:hover {
+    transform: translateY(-8px);
+    border-color: #f0a500;
+    box-shadow: 0 25px 50px rgba(240, 165, 0, 0.2);
+}
+
+/* Card color accents */
+.platform-operator-card {
+    border-top: 4px solid #d73327;
+}
+
+.player-card {
+    border-top: 4px solid #f0a500;
+}
+
+.merchant-card {
+    border-top: 4px solid #fb923c;
+}
+
+.stakeholder-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.stakeholder-icon img {
+    width: clamp(60px, 12vw, 80px);
+    height: clamp(60px, 12vw, 80px);
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.5));
+}
+
+.stakeholder-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: #f0a500;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Flow Steps */
+.stakeholder-flow {
+    margin-bottom: 25px;
+}
+
+.flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border-left: 3px solid #f0a500;
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #d73327, #c62828);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.step-text {
+    flex: 1;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.5;
+}
+
+/* Dual Path - player-specific */
+.dual-path {
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(240, 165, 0, 0.05);
+}
+
+.path-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.path-icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.path-text {
+    flex: 1;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.path-divider {
+    text-align: center;
+    font-weight: 700;
+    color: #f0a500;
+    margin: 5px 0;
+}
+
+/* Benefits */
+.stakeholder-benefits {
+    background: rgba(240, 165, 0, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(240, 165, 0, 0.2);
+}
+
+.stakeholder-benefits h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f0a500;
+    margin-bottom: 12px;
+}
+
+.stakeholder-benefits ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.stakeholder-benefits li {
+    padding: 8px 0 8px 25px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    position: relative;
+}
+
+.stakeholder-benefits li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: 700;
+}
+
+/* Value Proposition - extends global .card pattern */
+.value-proposition-enhanced {
+    background: rgba(215, 51, 39, 0.05);
+    border: 2px solid rgba(215, 51, 39, 0.2);
+    border-radius: 20px;
+    padding: clamp(30px, 5vw, 50px);
+    margin-top: clamp(40px, 6vw, 60px);
+}
+
+.value-proposition-enhanced h3 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #f0a500;
+    text-align: center;
+    margin-bottom: clamp(30px, 5vw, 40px);
+}
+
+.utility-grid-enhanced {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(20px, 3vw, 30px);
+}
+
+.utility-item-enhanced {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.utility-item-enhanced:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #f0a500;
+}
+
+.utility-icon {
+    margin-bottom: 15px;
+}
+
+.utility-icon img {
+    width: clamp(50px, 10vw, 70px);
+    height: clamp(50px, 10vw, 70px);
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.5));
+}
+
+.utility-item-enhanced h4 {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    font-weight: 700;
+    color: #f0a500;
+    margin-bottom: 10px;
+}
+
+.utility-item-enhanced p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.utility-item-enhanced strong {
+    color: #f0a500;
+    font-weight: 700;
+}
+
+/* ===================================
+   MOBILE RESPONSIVE
+   Global handles most, these are ember-specific
+   =================================== */
+
+@media (max-width: 768px) {
+    .ember-token-icon {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 30px;
+    }
+    
+    .hero-coin {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .spread-fire-content {
+        border-radius: 20px;
+    }
+    
+    .spread-fire-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .spread-fire-btn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .how-it-works-grid,
+    .utility-grid-enhanced {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .ember-token-icon {
+        width: 160px;
+        height: 160px;
+        margin-bottom: 25px;
+    }
+    
+    .hero-coin {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* ===================================
+   REDUCED MOTION
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .ember-token-icon img,
+    .fire-icon-animated,
+    .hero-coin {
+        animation: none !important;
+    }
+    
+    .spread-fire-btn:hover,
+    .stakeholder-card:hover,
+    .utility-item-enhanced:hover {
+        transform: none;
+    }
 }
 
 /* ============================================
