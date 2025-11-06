@@ -1,68 +1,27 @@
 /* ============================================
-   EMBER TOKEN PAGE - LOCAL STYLES (Part 1/3)
-   ============================================
-   Updated to match main/local.css design style
-   Consistent branding, colors, and animations
-   VERSION: 5.0 - Brand Alignment Update
-   SECTIONS: Hero, Social Sharing, How It Works
+   EMBER TOKEN PAGE - TOP SECTIONS CSS
+   Hero Section + Spread Fire Section
+   Place this at the TOP of ember/local.css
    ============================================ */
 
 /* ============================================
-   ROOT VARIABLES - EMBER THEME (ALIGNED)
+   ROOT VARIABLES
    ============================================ */
 :root {
-    /* Ember Color Palette - Matching Main */
     --ember-primary: #d73327;
     --ember-secondary: #fb923c;
     --ember-accent: #f0a500;
-    --ember-gold: #f0a500;
-    --ember-orange: #d73327;
-    --ember-purple: #8b5cf6;
-    --ember-blue: #3b82f6;
-    --ember-green: #22c55e;
     --ember-dark: #0f0f0f;
     --ember-dark-2: #1a1a1a;
-    --ember-dark-3: #2d1810;
-    --ember-dark-4: #451a03;
-    --ember-dark-5: #7c2d12;
-    
-    /* Text Colors */
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.8);
     --text-muted: rgba(255, 255, 255, 0.6);
-    
-    /* Spacing - Matching Main */
-    --section-padding: clamp(40px, 8vw, 80px);
-    --container-padding: 1rem;
-    --container-max: 1400px;
-    --card-radius: 20px;
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
-    --radius-2xl: 24px;
-    --radius-full: 9999px;
-    
-    /* Transitions */
-    --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
-    --transition-base: 0.3s ease;
-    --transition-slow: 0.5s ease;
-    
-    /* Gradients - Matching Main */
-    --ember-gradient-background: linear-gradient(135deg, rgba(13, 12, 12, 0.95) 0%, rgba(26, 15, 10, 0.9) 100%);
-    --ember-gradient-card: linear-gradient(135deg, rgba(26, 15, 10, 0.9) 0%, rgba(45, 24, 16, 0.85) 100%);
-    --ember-gradient-primary: linear-gradient(135deg, #d73327, #c62828);
-    
-    /* Shadows */
-    --ember-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --ember-shadow-md: 0 4px 12px rgba(215, 51, 39, 0.3);
-    --ember-shadow-lg: 0 8px 24px rgba(215, 51, 39, 0.4);
-    --ember-shadow-xl: 0 10px 40px rgba(0, 0, 0, 0.3);
+    --card-radius: 20px;
 }
 
 /* ============================================
-   RESET & BASE - MATCHING MAIN
+   BASE STYLES
    ============================================ */
 * {
     margin: 0;
@@ -72,77 +31,13 @@
 
 body {
     opacity: 1 !important;
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, rgba(13, 12, 12, 0.95) 0%, rgba(26, 15, 10, 0.9) 100%);
     min-height: 100vh;
 }
 
 /* ============================================
-   SCROLL REVEAL ANIMATIONS - MATCHING MAIN
+   HERO SECTION
    ============================================ */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.scroll-reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.scroll-reveal.stagger-1 { transition-delay: 0.1s; }
-.scroll-reveal.stagger-2 { transition-delay: 0.2s; }
-.scroll-reveal.stagger-3 { transition-delay: 0.3s; }
-.scroll-reveal.stagger-4 { transition-delay: 0.4s; }
-
-/* ============================================
-   CONSISTENT IMAGE GLOWS - MATCHING MAIN
-   ============================================ */
-.main-image-glow {
-    display: inline-block;
-    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5)) 
-            drop-shadow(0 0 40px rgba(215, 51, 39, 0.3));
-    animation: consistentGlow 3s ease-in-out infinite;
-}
-
-@keyframes consistentGlow {
-    0%, 100% {
-        filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5)) 
-                drop-shadow(0 0 40px rgba(215, 51, 39, 0.3));
-    }
-    50% {
-        filter: drop-shadow(0 0 35px rgba(240, 165, 0, 0.8)) 
-                drop-shadow(0 0 60px rgba(215, 51, 39, 0.5));
-    }
-}
-
-.phoenix-glow-animated {
-    filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6)) 
-            drop-shadow(0 0 50px rgba(215, 51, 39, 0.4)) !important;
-    animation: phoenixGlowEnhanced 3s ease-in-out infinite;
-}
-
-@keyframes phoenixGlowEnhanced {
-    0%, 100% { 
-        filter: drop-shadow(0 0 25px rgba(240, 165, 0, 0.6)) 
-                drop-shadow(0 0 50px rgba(215, 51, 39, 0.4));
-    }
-    50% { 
-        filter: drop-shadow(0 0 45px rgba(240, 165, 0, 0.9)) 
-                drop-shadow(0 0 70px rgba(215, 51, 39, 0.6));
-    }
-}
-
-/* ============================================
-   REPLACE OR ADD TO ember/local.css
-   Updated Hero Section & Spread Fire Section
-   ============================================ */
-
-/* ============================================================================
-   EMBER HERO SECTION - UPDATED TO MATCH SCREENSHOT
-   ============================================================================ */
-
 .ember-hero {
     position: relative;
     min-height: 100vh;
@@ -179,16 +74,15 @@ body {
 
 .hero-coin {
     position: absolute;
-    width: clamp(60px, 8vw, 100px);
-    height: clamp(60px, 8vw, 100px);
+    width: 80px;
+    height: 80px;
     background-image: url('../images/VPEmberCoin.PNG');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.15;
+    opacity: 0.12;
     animation: float 20s infinite ease-in-out;
     border-radius: 50%;
-    box-shadow: 0 0 30px rgba(240, 165, 0, 0.3);
 }
 
 .hero-coin-1 { top: 10%; left: 10%; animation-delay: 0s; animation-duration: 18s; }
@@ -214,10 +108,10 @@ body {
     margin: 0 auto;
 }
 
-/* Token Icon - LARGE & CENTERED */
+/* Token Icon */
 .ember-token-icon {
-    width: clamp(200px, 25vw, 350px);
-    height: clamp(200px, 25vw, 350px);
+    width: 280px;
+    height: 280px;
     margin: 0 auto 50px;
     position: relative;
 }
@@ -246,7 +140,7 @@ body {
 
 /* Typography */
 .ember-hero-title {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: 5rem;
     font-weight: 900;
     color: #f0a500;
     margin: 0 0 30px;
@@ -257,7 +151,7 @@ body {
 }
 
 .ember-hero-subtitle {
-    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-size: 2.5rem;
     font-weight: 700;
     color: #ffffff;
     margin: 0 0 40px;
@@ -270,7 +164,7 @@ body {
 }
 
 .ember-hero-description {
-    font-size: clamp(1rem, 2.2vw, 1.4rem);
+    font-size: 1.3rem;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.9);
     max-width: 1000px;
@@ -282,18 +176,11 @@ body {
     font-weight: 600;
 }
 
-/* Hide old elements that were removed */
-.ember-hero-stats,
-.ember-hero-buttons {
-    display: none !important;
-}
-
-/* ============================================================================
-   SPREAD THE $EMBER FIRE SECTION - NEW SEPARATE SECTION
-   ============================================================================ */
-
+/* ============================================
+   SPREAD THE $EMBER FIRE SECTION
+   ============================================ */
 .spread-ember-fire-section {
-    padding: clamp(60px, 10vw, 100px) 20px;
+    padding: 80px 20px;
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.95) 0%, 
         rgba(45, 24, 16, 0.92) 100%
@@ -311,10 +198,9 @@ body {
     );
     border: 2px solid rgba(240, 165, 0, 0.3);
     border-radius: 30px;
-    padding: clamp(40px, 6vw, 60px);
+    padding: 50px 40px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    position: relative;
 }
 
 /* Fire Icon */
@@ -323,8 +209,8 @@ body {
 }
 
 .fire-icon-animated {
-    width: clamp(80px, 12vw, 120px);
-    height: clamp(80px, 12vw, 120px);
+    width: 100px;
+    height: 100px;
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
     animation: fireIconFlicker 2s ease-in-out infinite;
@@ -351,7 +237,7 @@ body {
 
 /* Title */
 .spread-fire-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: 3rem;
     font-weight: 900;
     margin-bottom: 20px;
     background: linear-gradient(135deg, #f0a500, #fb923c);
@@ -362,7 +248,7 @@ body {
 
 /* Subtitle */
 .spread-fire-subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-size: 1.3rem;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 40px;
     line-height: 1.6;
@@ -382,13 +268,13 @@ body {
     gap: 12px;
     padding: 18px 40px;
     border-radius: 50px;
-    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-size: 1.1rem;
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    min-width: 220px;
+    min-width: 240px;
     justify-content: center;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
@@ -433,102 +319,175 @@ body {
 }
 
 /* ============================================
-   REMOVE/HIDE OLD SOCIAL SHARING SECTION
+   TABLET RESPONSIVE (1024px)
    ============================================ */
-.social-sharing-section-compact {
-    display: none !important;
-}
-
-/* ============================================
-   RESPONSIVE BREAKPOINTS
-   ============================================ */
-
-/* Tablet - 1024px */
 @media (max-width: 1024px) {
     .ember-hero {
         padding: 120px 30px 60px;
     }
     
     .ember-token-icon {
-        width: clamp(180px, 22vw, 300px);
-        height: clamp(180px, 22vw, 300px);
+        width: 240px;
+        height: 240px;
         margin-bottom: 40px;
     }
     
     .ember-hero-title {
+        font-size: 4rem;
         margin-bottom: 25px;
     }
     
     .ember-hero-subtitle {
+        font-size: 2rem;
         margin-bottom: 35px;
     }
     
-    .spread-fire-buttons {
-        gap: 15px;
+    .ember-hero-description {
+        font-size: 1.2rem;
+    }
+    
+    .spread-ember-fire-section {
+        padding: 60px 30px;
+    }
+    
+    .spread-fire-content {
+        padding: 40px 30px;
+    }
+    
+    .spread-fire-title {
+        font-size: 2.5rem;
+    }
+    
+    .spread-fire-subtitle {
+        font-size: 1.2rem;
     }
     
     .spread-fire-btn {
-        min-width: 200px;
+        min-width: 220px;
         padding: 16px 35px;
     }
 }
 
-/* Mobile - 768px */
+/* ============================================
+   MOBILE RESPONSIVE (768px)
+   ============================================ */
 @media (max-width: 768px) {
     .ember-hero {
         padding: 100px 20px 50px;
     }
     
     .ember-token-icon {
-        width: clamp(150px, 35vw, 250px);
-        height: clamp(150px, 35vw, 250px);
+        width: 200px;
+        height: 200px;
         margin-bottom: 30px;
     }
     
     .ember-hero-title {
+        font-size: 3rem;
         margin-bottom: 20px;
     }
     
     .ember-hero-subtitle {
+        font-size: 1.5rem;
         margin-bottom: 30px;
     }
     
+    .ember-hero-description {
+        font-size: 1.1rem;
+    }
+    
+    .hero-coin {
+        width: 60px;
+        height: 60px;
+    }
+    
     .spread-ember-fire-section {
-        padding: 50px 15px;
+        padding: 50px 20px;
     }
     
     .spread-fire-content {
-        padding: 30px 20px;
+        padding: 35px 25px;
         border-radius: 20px;
+    }
+    
+    .fire-icon-animated {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .spread-fire-title {
+        font-size: 2rem;
+    }
+    
+    .spread-fire-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
     }
     
     .spread-fire-buttons {
         flex-direction: column;
         align-items: stretch;
+        gap: 15px;
     }
     
     .spread-fire-btn {
         width: 100%;
         min-width: auto;
         padding: 16px 30px;
+        font-size: 1rem;
     }
 }
 
-/* Small Mobile - 480px */
+/* ============================================
+   SMALL MOBILE (480px)
+   ============================================ */
 @media (max-width: 480px) {
     .ember-hero {
         padding: 90px 15px 40px;
     }
     
     .ember-token-icon {
-        width: 140px;
-        height: 140px;
+        width: 160px;
+        height: 160px;
         margin-bottom: 25px;
     }
     
-    .spread-fire-icon .fire-icon-animated {
+    .ember-hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .ember-hero-subtitle {
+        font-size: 1.25rem;
+    }
+    
+    .ember-hero-description {
+        font-size: 1rem;
+    }
+    
+    .hero-coin {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .spread-ember-fire-section {
+        padding: 40px 15px;
+    }
+    
+    .spread-fire-content {
+        padding: 30px 20px;
+    }
+    
+    .fire-icon-animated {
         width: 70px;
         height: 70px;
+    }
+    
+    .spread-fire-title {
+        font-size: 1.75rem;
+    }
+    
+    .spread-fire-subtitle {
+        font-size: 1rem;
     }
 }
 
