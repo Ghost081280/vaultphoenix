@@ -1,4 +1,44 @@
 /* ===================================
+   🔥 EMERGENCY HERO FIX - ADD THIS AT THE VERY TOP OF ember/local.css
+   =================================== */
+
+/* NUCLEAR OPTION - Override everything */
+section.ember-hero,
+.ember-hero,
+#home {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    min-height: 100vh !important;
+    width: 100% !important;
+    padding-top: 120px !important;
+    padding-bottom: 80px !important;
+    background: #1a0f0a !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Force all children visible */
+.ember-hero *,
+#home * {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Make flex container visible */
+.ember-hero .ember-hero-container,
+.ember-hero .ember-hero-content {
+    display: flex !important;
+    flex-direction: column !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* ===================================
+   END EMERGENCY FIX
+   =================================== */
+/* ===================================
    VAULT PHOENIX - EMBER LOCAL CSS v2.1 FINAL
    REBUILT & OPTIMIZED
    Hero + Spread Fire + How It Works sections
