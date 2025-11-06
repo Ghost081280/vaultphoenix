@@ -9,8 +9,7 @@
    =================================== */
 
 /* ===================================
-   HERO SECTION - UPDATED WITH COIN GLOW & ROCK
-   Replace the hero section in ember/local.css with this
+   HERO SECTION - COMPLETE WITH METRICS
    =================================== */
 
 /* Make the first section (home) look like a hero */
@@ -117,7 +116,72 @@
     font-weight: 700;
 }
 
-/* HERO BUTTONS */
+/* ===================================
+   HERO TOKEN METRICS
+   =================================== */
+
+.hero-token-metrics {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto clamp(2rem, 4vw, 2.5rem);
+}
+
+.hero-metric-card {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-metric-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(215, 51, 39, 0.4);
+    border-color: var(--ember-orange);
+}
+
+.hero-metric-icon {
+    width: clamp(48px, 10vw, 64px);
+    height: clamp(48px, 10vw, 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-metric-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.5));
+}
+
+.hero-metric-value {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: var(--ember-gold);
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(240, 165, 0, 0.3);
+}
+
+.hero-metric-label {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+/* ===================================
+   HERO BUTTONS
+   =================================== */
+
 .hero-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -181,7 +245,26 @@
     transform: translateY(-2px);
 }
 
-/* Mobile */
+/* ===================================
+   RESPONSIVE - HERO SECTION
+   =================================== */
+
+/* Tablet (768px+) - 3 columns for metrics */
+@media (min-width: 768px) {
+    .hero-token-metrics {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+}
+
+/* Desktop (1024px+) - slightly larger gap */
+@media (min-width: 1024px) {
+    .hero-token-metrics {
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile Portrait */
 @media (max-width: 768px) {
     #home.ember-section {
         padding-top: 100px;
