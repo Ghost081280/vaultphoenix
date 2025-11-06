@@ -9,6 +9,19 @@
    =================================== */
 
 /* ===================================
+   CRITICAL HERO VISIBILITY - MUST BE FIRST
+   Forces hero visible before any other styles load
+   =================================== */
+.ember-hero {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+}
+
+/* ===================================
    EMBER HERO SECTION - SIMPLE & WORKING
    Fresh start - no complex animations breaking visibility
    =================================== */
