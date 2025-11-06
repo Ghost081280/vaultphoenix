@@ -9,8 +9,7 @@
    =================================== */
 
 /* ===================================
-   NEW HERO - USING WORKING SECTION STRUCTURE
-   Add this to your ember/local.css
+   HERO SECTION - ADD TO BOTTOM OF ember/local.css
    =================================== */
 
 /* Make the first section (home) look like a hero */
@@ -21,6 +20,10 @@
     justify-content: center;
     padding-top: 140px;
     padding-bottom: 80px;
+    background: linear-gradient(135deg, 
+        rgba(13, 12, 12, 1) 0%, 
+        rgba(26, 15, 10, 0.95) 50%, 
+        rgba(13, 12, 12, 1) 100%);
 }
 
 /* Make the section header bigger for hero */
@@ -48,7 +51,7 @@
 #home .ember-section-subtitle:last-child {
     font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: 400;
-    margin-bottom: 0;
+    margin-bottom: 2rem;
 }
 
 .highlight-gold {
@@ -56,11 +59,88 @@
     font-weight: 800;
 }
 
+/* HERO BUTTONS */
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.125rem 2.5rem;
+    border-radius: 1rem;
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    min-height: 44px;
+}
+
+.hero-btn img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+/* Primary Button (Join Presale) */
+.hero-btn-primary {
+    background: linear-gradient(135deg, #d73327 0%, #c62828 50%, #b71c1c 100%);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+}
+
+.hero-btn-primary img {
+    filter: brightness(0) invert(1);
+}
+
+.hero-btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Secondary Button (Whitepaper) */
+.hero-btn-secondary {
+    background: transparent;
+    color: #ffffff;
+    border-color: rgba(215, 51, 39, 0.5);
+}
+
+.hero-btn-secondary img {
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+}
+
+.hero-btn-secondary:hover {
+    background: rgba(215, 51, 39, 0.2);
+    border-color: #d73327;
+    transform: translateY(-2px);
+}
+
 /* Mobile */
 @media (max-width: 768px) {
     #home.ember-section {
         padding-top: 100px;
         padding-bottom: 60px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .hero-btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 
