@@ -8,37 +8,43 @@
    DO NOT override .navbar, .footer, .chatbot-* classes
    =================================== */
 
-/* ===================================
-   CRITICAL HERO VISIBILITY - MUST BE FIRST
-   Forces hero visible before any other styles load
+* ===================================
+   CRITICAL HERO VISIBILITY - CONSOLIDATED & BULLETPROOF
+   All hero rules in ONE place with maximum specificity
+   NO duplicate .ember-hero rules anywhere else!
    =================================== */
-.ember-hero {
+.ember-hero,
+section.ember-hero,
+div.ember-hero,
+main .ember-hero {
+    /* CRITICAL: Visibility first */
     display: flex !important;
     opacity: 1 !important;
     visibility: visible !important;
+    
+    /* Layout - CRITICAL: No height: auto! */
     min-height: 100vh !important;
     max-height: 100vh !important;
     overflow: hidden !important;
-}
-
-/* ===================================
-   EMBER HERO SECTION - SIMPLE & WORKING
-   Fresh start - no complex animations breaking visibility
-   =================================== */
-
-.ember-hero {
-    padding: calc(var(--navbar-height) + 4rem) var(--container-padding) 4rem;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    /* Spacing */
+    padding: calc(var(--navbar-height) + 4rem) var(--container-padding) 4rem !important;
+    
+    /* Background */
     background: linear-gradient(135deg, 
         rgba(13, 12, 12, 1) 0%, 
         rgba(26, 15, 10, 0.95) 50%, 
-        rgba(13, 12, 12, 1) 100%);
-    min-height: 100vh;
-    max-height: 100vh; /* CRITICAL: Prevent expansion */
-    height: auto; /* Allow natural height but constrained by max */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Hide any overflow */
+        rgba(13, 12, 12, 1) 100%) !important;
+}
+
+/* CRITICAL: Hero children also visible */
+.ember-hero *,
+section.ember-hero *,
+div.ember-hero * {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .ember-hero-container {
@@ -105,7 +111,7 @@
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .ember-hero {
-        padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem;
+        padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem !important;
     }
     
     .ember-hero-content {
