@@ -9,7 +9,7 @@
    =================================== */
 
 /* ===================================
-   HERO SECTION - UPDATED WITH PROPER SIZING
+   HERO SECTION - UPDATED WITH COIN GLOW & ROCK
    Replace the hero section in ember/local.css with this
    =================================== */
 
@@ -39,23 +39,57 @@
     margin-bottom: 1.5rem;
 }
 
-/* Coin icon */
+/* Coin icon container with glow */
 #home .ember-section-icon-large {
     width: clamp(180px, 25vw, 280px);
     height: clamp(180px, 25vw, 280px);
+    position: relative;
 }
 
-/* Coin spin animation */
+/* Coin with gentle rock and glow */
 #home .ember-section-icon-large img {
-    animation: coin-spin 8s linear infinite;
+    animation: coin-rock 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.6))
+            drop-shadow(0 0 50px rgba(240, 165, 0, 0.4));
 }
 
-@keyframes coin-spin {
-    from {
-        transform: rotateY(0deg);
+/* Glow effect behind coin */
+#home .ember-section-icon-large::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, 
+        rgba(240, 165, 0, 0.4) 0%, 
+        rgba(215, 51, 39, 0.3) 30%, 
+        transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Gentle rocking animation */
+@keyframes coin-rock {
+    0%, 100% {
+        transform: rotate(-3deg);
     }
-    to {
-        transform: rotateY(360deg);
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+/* Pulsing glow animation */
+@keyframes glow-pulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
     }
 }
 
@@ -66,16 +100,16 @@
     margin-bottom: 1.5rem;
 }
 
-/* Second subtitle/description - "The utility token powering..." - MAKE SMALLER */
+/* Second subtitle/description - "The utility token powering..." - SMALLER */
 #home .ember-section-subtitle:last-of-type {
-    font-size: clamp(0.95rem, 1.8vw, 1.15rem);  /* SMALLER */
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
     font-weight: 400;
     line-height: 1.7;
     margin-bottom: 2rem;
     max-width: 850px;
     margin-left: auto;
     margin-right: auto;
-    color: rgba(255, 255, 255, 0.85);  /* Slightly muted */
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .highlight-gold {
