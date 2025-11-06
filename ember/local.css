@@ -1,8 +1,29 @@
 /* ===================================
-   VAULT PHOENIX - EMBER LOCAL CSS v1.0 PART 1
-   Page-specific styles for ember.html
+   VAULT PHOENIX - EMBER LOCAL CSS v2.0 PART 1
+   REBUILT & OPTIMIZED
    Hero + Spread Fire + How It Works sections
    =================================== */
+
+/* ===================================
+   CSS VARIABLES
+   =================================== */
+:root {
+    --ember-red: #d73327;
+    --ember-orange: #fb923c;
+    --ember-gold: #f0a500;
+    --ember-gradient-primary: linear-gradient(135deg, #d73327 0%, #fb923c 50%, #f0a500 100%);
+    --ember-gradient-background: linear-gradient(180deg, rgba(13, 12, 12, 1) 0%, rgba(26, 15, 10, 0.95) 50%, rgba(13, 12, 12, 1) 100%);
+    --ember-gradient-card: linear-gradient(135deg, rgba(26, 15, 10, 0.95) 0%, rgba(45, 24, 16, 0.90) 100%);
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+    --navbar-height: 80px;
+    --container-padding: max(1rem, env(safe-area-inset-left, 1rem));
+    --icon-lg: 80px;
+    --icon-section: 100px;
+}
 
 /* ===================================
    HERO SECTION - .ember-hero
@@ -24,6 +45,7 @@
         rgba(26, 15, 10, 0.95) 80%,
         rgba(13, 12, 12, 1) 100%);
     overflow: hidden;
+    z-index: 1;
 }
 
 /* Floating Coins Background Animation */
@@ -797,8 +819,10 @@
 /* ===================================
    END OF EMBER LOCAL CSS PART 1
    Hero + Spread Fire + How It Works ✅
-   =================================== *//* ===================================
-   VAULT PHOENIX - EMBER LOCAL CSS v1.0 PART 2
+   =================================== */
+/* ===================================
+   VAULT PHOENIX - EMBER LOCAL CSS v2.0 PART 2
+   REBUILT & OPTIMIZED
    Technical Foundation + Roadmap + Team + Tokenomics sections
    =================================== */
 
@@ -938,6 +962,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
     min-height: 44px;
+    text-decoration: none;
 }
 
 .download-button img {
@@ -963,6 +988,7 @@
    =================================== */
 
 .roadmap-section {
+    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
     background: linear-gradient(135deg, 
         rgba(13, 12, 12, 1) 0%, 
         rgba(26, 15, 10, 0.95) 50%, 
@@ -1206,6 +1232,11 @@
    Team members and advisors
    =================================== */
 
+.team-section {
+    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
+    background: var(--ember-gradient-background);
+}
+
 /* Extra-large team icon */
 .team-section-icon-xlarge {
     width: clamp(100px, 18vw, 140px) !important;
@@ -1318,6 +1349,7 @@
     color: rgba(255, 255, 255, 0.8);
     transition: all 0.3s ease;
     border: 1px solid rgba(215, 51, 39, 0.3);
+    text-decoration: none;
 }
 
 .social-link-team:hover {
@@ -1374,6 +1406,7 @@
    =================================== */
 
 .tokenomics-section {
+    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.95) 0%, 
         rgba(45, 24, 16, 0.90) 50%, 
@@ -1821,8 +1854,6 @@
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
-    /* Whitepaper sections 2 columns (stays same) */
-    
     /* Trust grid 4 columns */
     .trust-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -1863,10 +1894,11 @@
 /* ===================================
    END OF EMBER LOCAL CSS PART 2
    Technical + Roadmap + Team + Tokenomics ✅
-   =================================== *//* ===================================
-   VAULT PHOENIX - EMBER LOCAL CSS v1.0 PART 3
+   =================================== */
+/* ===================================
+   VAULT PHOENIX - EMBER LOCAL CSS v2.0 PART 3
+   REBUILT & OPTIMIZED - FINAL PART
    Presale + Enhanced CTA + Legal Compliance + Modals sections
-   FINAL PART - Completes ember/local.css
    =================================== */
 
 /* ===================================
@@ -1875,6 +1907,7 @@
    =================================== */
 
 .presale-section {
+    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
     background: var(--ember-gradient-background);
 }
 
@@ -2504,6 +2537,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     min-height: 44px;
+    text-decoration: none;
 }
 
 .tpa-download-button img {
@@ -2559,10 +2593,6 @@
     border-color: var(--ember-orange);
 }
 
-.tpa-checkmark {
-    display: none;
-}
-
 .tpa-checkbox-text {
     flex: 1;
     font-size: clamp(0.85rem, 1.5vw, 0.95rem);
@@ -2614,6 +2644,7 @@
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
     margin-bottom: 1.25rem;
     min-height: 44px;
+    text-decoration: none;
 }
 
 .presale-button img {
@@ -3076,6 +3107,7 @@
    =================================== */
 
 .legal-compliance-section {
+    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
     background: var(--ember-gradient-background);
 }
 
@@ -3487,5 +3519,5 @@
 /* ===================================
    END OF EMBER LOCAL CSS PART 3
    Presale + Enhanced CTA + Legal + Modals ✅
-   COMPLETE - ember/local.css FINISHED! 🔥
+   COMPLETE - ember/local.css FULLY REBUILT! 🔥
    =================================== */
