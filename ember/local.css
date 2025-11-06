@@ -8,43 +8,17 @@
    DO NOT override .navbar, .footer, .chatbot-* classes
    =================================== */
 
-* ===================================
-   CRITICAL HERO VISIBILITY - CONSOLIDATED & BULLETPROOF
-   All hero rules in ONE place with maximum specificity
-   NO duplicate .ember-hero rules anywhere else!
-   =================================== */
-.ember-hero,
-section.ember-hero,
-div.ember-hero,
-main .ember-hero {
-    /* CRITICAL: Visibility first */
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    
-    /* Layout - CRITICAL: No height: auto! */
-    min-height: 100vh !important;
-    max-height: 100vh !important;
-    overflow: hidden !important;
-    align-items: center !important;
-    justify-content: center !important;
-    
-    /* Spacing */
-    padding: calc(var(--navbar-height) + 4rem) var(--container-padding) 4rem !important;
-    
-    /* Background */
+/* HERO SECTION - CLEAN VERSION */
+.ember-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 140px 20px 80px;
     background: linear-gradient(135deg, 
         rgba(13, 12, 12, 1) 0%, 
         rgba(26, 15, 10, 0.95) 50%, 
-        rgba(13, 12, 12, 1) 100%) !important;
-}
-
-/* CRITICAL: Hero children also visible */
-.ember-hero *,
-section.ember-hero *,
-div.ember-hero * {
-    opacity: 1 !important;
-    visibility: visible !important;
+        rgba(13, 12, 12, 1) 100%);
 }
 
 .ember-hero-container {
@@ -61,30 +35,14 @@ div.ember-hero * {
     gap: 2rem;
 }
 
-/* Token Icon */
-.ember-token-icon {
-    margin-bottom: 1rem;
-}
-
-.ember-token-icon img {
-    width: clamp(180px, 25vw, 280px);
-    height: clamp(180px, 25vw, 280px);
-    object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.6))
-            drop-shadow(0 0 50px rgba(240, 165, 0, 0.4));
-}
-
-/* Hero Title */
 .ember-hero-title {
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 900;
     color: #ffffff;
     margin: 0;
     line-height: 1.1;
-    text-shadow: 0 0 20px rgba(215, 51, 39, 0.5);
 }
 
-/* Hero Subtitle */
 .ember-hero-subtitle {
     font-size: clamp(1.3rem, 3.5vw, 2.2rem);
     font-weight: 700;
@@ -95,11 +53,10 @@ div.ember-hero * {
 }
 
 .highlight-gold {
-    color: var(--ember-gold);
+    color: #f0a500;
     font-weight: 800;
 }
 
-/* Hero Description */
 .ember-hero-description {
     font-size: clamp(1rem, 2vw, 1.25rem);
     line-height: 1.7;
@@ -108,14 +65,10 @@ div.ember-hero * {
     margin: 0;
 }
 
-/* Mobile adjustments */
+/* Mobile */
 @media (max-width: 768px) {
     .ember-hero {
-        padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem !important;
-    }
-    
-    .ember-hero-content {
-        gap: 1.5rem;
+        padding: 100px 20px 60px;
     }
 }
 
