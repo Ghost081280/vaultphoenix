@@ -20,9 +20,12 @@
         rgba(26, 15, 10, 0.95) 50%, 
         rgba(13, 12, 12, 1) 100%);
     min-height: 100vh;
+    max-height: 100vh; /* CRITICAL: Prevent expansion */
+    height: auto; /* Allow natural height but constrained by max */
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden; /* Hide any overflow */
 }
 
 .ember-hero-container {
