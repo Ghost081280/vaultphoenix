@@ -1,6 +1,6 @@
 /* ===================================
    VAULT PHOENIX - MAIN PAGE LOCAL CSS
-   UPDATED VERSION - ALL MOBILE FIXES + SMOOTH ANIMATIONS + ALL 3 SPACING FIXES
+   UPDATED VERSION - ALL MOBILE FIXES + SMOOTH ANIMATIONS
    Core Styles + Hero Section + All Sections + Mobile Perfect
    =================================== */
 
@@ -851,13 +851,7 @@ body {
     .hero-feature-text {
         font-size: 0.85rem;
     }
-}
-/* ===================================
-   PART 2 OF 3 - EMBER TOKEN SECTION THROUGH AIRDROP SECTION
-   WITH ALL FIXES APPLIED
-   =================================== */
-
-/* ===================================
+}/* ===================================
    EMBER TOKEN SECTION - COMPLETE FIX
    ✅ FIX #2: COUNTDOWN TIMER FIXED (min-width added)
    ✅ FIX #3: BALANCED LAYOUT (compact header, smaller phoenix, aligned compliance)
@@ -1300,8 +1294,7 @@ body {
 }
 
 /* ===================================
-   $EMBER AIRDROP SECTION - FINAL FIXED VERSION
-   ✅ EQUAL COLUMN HEIGHTS WITH PROPER BOTTOM ALIGNMENT
+   $EMBER AIRDROP SECTION - WITH PHANTOM WALLET UPDATE
    =================================== */
 
 /* Base box-sizing for entire section */
@@ -1314,7 +1307,7 @@ body {
 
 .ember-airdrop-section {
     padding: 4rem 1rem;
-    background: var(--ember-gradient-background); /* ✅ CHANGED */
+    background: linear-gradient(135deg, rgba(13, 12, 12, 0.95) 0%, rgba(26, 15, 10, 0.9) 100%);
     position: relative;
     overflow-x: hidden;
 }
@@ -1418,17 +1411,16 @@ body {
     flex-wrap: wrap;
 }
 
-/* ✅ CRITICAL FIX: Compact Grid with Equal Heights */
+/* Compact Grid - Two Columns */
 .ember-compact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     margin-top: 2rem;
     width: 100%;
-    align-items: stretch; /* Force equal heights */
 }
 
-/* ✅ CRITICAL FIX: Inner modules must use flexbox to push content */
+/* Inner Modules */
 .ember-inner-module {
     background: rgba(15, 15, 15, 0.6);
     border: 1px solid rgba(215, 51, 39, 0.3);
@@ -1436,10 +1428,6 @@ body {
     padding: 1.5rem;
     position: relative;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* This ensures both columns have equal height */
-    min-height: 100%;
 }
 
 /* Mini Header */
@@ -1450,7 +1438,6 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid rgba(215, 51, 39, 0.3);
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .ember-mini-icon {
@@ -1474,7 +1461,7 @@ body {
     justify-content: center;
     width: 32px;
     height: 32px;
-    min-width: 44px;
+    min-width: 44px; /* Touch target */
     min-height: 44px;
     background: rgba(139, 92, 246, 0.4);
     border: 2px solid rgba(139, 92, 246, 0.7);
@@ -1503,7 +1490,6 @@ body {
     gap: 1rem;
     margin-bottom: 1.5rem;
     width: 100%;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .ember-stat-mini {
@@ -1543,7 +1529,6 @@ body {
 .ember-progress-compact {
     margin-bottom: 1.5rem;
     width: 100%;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .progress-bar-bg {
@@ -1578,7 +1563,6 @@ body {
     border-radius: 12px;
     padding: 1.25rem;
     margin-bottom: 1.5rem;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .presale-details-compact h4 {
@@ -1622,7 +1606,6 @@ body {
     border-radius: 12px;
     padding: 1.25rem;
     margin-bottom: 1.5rem;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .allocation-info h5 {
@@ -1656,7 +1639,7 @@ body {
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
-    min-height: 44px;
+    min-height: 44px; /* Touch target */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1674,7 +1657,6 @@ body {
     border-radius: 12px;
     padding: 1.25rem;
     margin-bottom: 1.5rem;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .status-checker-integrated h4 {
@@ -1707,7 +1689,7 @@ body {
     color: white;
     font-size: 0.9rem;
     width: 100%;
-    min-height: 44px;
+    min-height: 44px; /* Touch target */
 }
 
 .input-compact::placeholder {
@@ -1731,7 +1713,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     flex-shrink: 0;
-    min-height: 44px;
+    min-height: 44px; /* Touch target */
 }
 
 .status-btn-compact:hover {
@@ -1739,48 +1721,79 @@ body {
     box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }
 
-/* ✅ CRITICAL FIX: Social Tracking - Prevent shrinking */
+/* Powered By Text */
+.airdrop-powered-by {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 1.5rem;
+    font-style: italic;
+}
+
+/* ===================================
+   ✅ FIX #1: SOCIAL TRACKING SECTION
+   Complete styles for social tracking with hashtags
+   =================================== */
 .social-tracking-section {
     background: linear-gradient(135deg, 
         rgba(240, 165, 0, 0.12) 0%, 
         rgba(215, 51, 39, 0.08) 100%);
     border: 2px solid rgba(240, 165, 0, 0.4);
     border-radius: 12px;
-    padding: 0.85rem;
+    padding: 1.25rem;
     margin-bottom: 1.5rem;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .social-tracking-section h4 {
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #f0a500;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
     text-align: center;
 }
 
 .social-tracking-description {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.7);
     text-align: center;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
 }
 
 .social-hashtags-display {
     background: rgba(15, 15, 15, 0.6);
     border: 1px solid rgba(240, 165, 0, 0.3);
     border-radius: 10px;
-    padding: 0.75rem;
-    margin-bottom: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.hashtag-platform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.65rem;
+}
+
+.platform-icon {
+    font-size: 1.1rem;
+    color: #f0a500;
+}
+
+.platform-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .hashtag-text {
     font-family: 'Courier New', monospace;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #f0a500;
     text-align: center;
-    line-height: 1.5;
+    line-height: 1.6;
     word-break: break-word;
     user-select: all;
 }
@@ -1791,14 +1804,14 @@ body {
     justify-content: center;
     gap: 0.5rem;
     width: 100%;
-    padding: 0.65rem;
+    padding: 0.75rem;
     background: linear-gradient(135deg, 
         rgba(240, 165, 0, 0.25) 0%, 
         rgba(215, 51, 39, 0.2) 100%);
     border: 2px solid rgba(240, 165, 0, 0.5);
     border-radius: 10px;
     color: #f0a500;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1829,30 +1842,32 @@ body {
 }
 
 .social-tracking-note {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.5);
     text-align: center;
-    margin-top: 0.5rem;
+    margin-top: 0.65rem;
     margin-bottom: 0;
     font-style: italic;
 }
 
-/* ✅ THE CRITICAL FIX: Push "Powered by" text to absolute bottom */
-.airdrop-powered-by {
-    display: block;
-    text-align: center;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
-    margin-top: auto; /* ✅ THIS PUSHES IT TO THE BOTTOM */
-    padding-top: 1.5rem;
-    font-style: italic;
-    flex-shrink: 0; /* Never shrink this element */
+/* Mobile adjustments for social tracking */
+@media (max-width: 768px) {
+    .social-tracking-section {
+        padding: 1rem;
+    }
+    
+    .hashtag-text {
+        font-size: 0.85rem;
+    }
+    
+    .copy-hashtags-btn {
+        font-size: 0.85rem;
+    }
 }
 
 /* Share to Claim Section */
 .share-to-claim-section {
     margin-bottom: 1.5rem;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .share-to-claim-title {
@@ -1897,7 +1912,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-    min-height: 44px;
+    min-height: 44px; /* Touch target */
 }
 
 .share-button:hover,
@@ -1915,7 +1930,7 @@ body {
     height: 18px;
 }
 
-/* PHANTOM WALLET PROMO */
+/* PHANTOM WALLET PROMO - ENHANCED WITH NEW TEXT */
 .phantom-promo-compact {
     display: flex;
     flex-direction: column;
@@ -1928,7 +1943,6 @@ body {
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     text-align: center;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .phantom-promo-header {
@@ -1978,7 +1992,7 @@ body {
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s ease;
-    min-height: 44px;
+    min-height: 44px; /* Touch target */
 }
 
 .phantom-get-link:hover {
@@ -1986,15 +2000,12 @@ body {
     border-color: #60a5fa;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
-}
-
-/* ✅ Form fills remaining space naturally */
+}/* Form Fields */
 .ember-form-compact {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
     width: 100%;
-    flex: 1; /* Allow form to grow */
 }
 
 .form-group-compact {
@@ -2002,7 +2013,6 @@ body {
     flex-direction: column;
     gap: 0.5rem;
     width: 100%;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .form-group-compact label {
@@ -2025,7 +2035,7 @@ body {
     border-radius: 12px;
     color: white;
     font-size: 0.9rem;
-    min-height: 44px;
+    min-height: 44px; /* Touch target */
 }
 
 .form-group-compact input::placeholder {
@@ -2041,7 +2051,6 @@ body {
 /* Terms Checkbox */
 .terms-group {
     margin: 1rem 0;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .terms-checkbox {
@@ -2073,7 +2082,7 @@ body {
     padding: 0;
     text-decoration: underline;
     font-size: inherit;
-    min-height: 24px;
+    min-height: 24px; /* Touch target for inline button */
 }
 
 .terms-link-btn:hover {
@@ -2097,8 +2106,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 1rem;
-    min-height: 54px;
-    flex-shrink: 0; /* Prevent shrinking */
+    min-height: 54px; /* Larger touch target for primary action */
 }
 
 .claim-btn-compact:hover:not(:disabled) {
@@ -2119,13 +2127,12 @@ body {
 
 /* Message Box */
 .message-box-compact {
+    margin-top: 1.5rem;
     padding: 1rem;
     border-radius: 12px;
     font-size: 0.9rem;
     text-align: center;
     display: none;
-    margin-top: 1rem;
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .message-box-compact.success {
@@ -2143,7 +2150,7 @@ body {
 }
 
 /* ===================================
-   MOBILE RESPONSIVE
+   AIRDROP RESPONSIVE - MOBILE
    =================================== */
 
 @media (max-width: 768px) {
@@ -2222,6 +2229,7 @@ body {
         gap: 0.75rem;
     }
     
+    /* Phantom promo mobile */
     .phantom-promo-header {
         flex-direction: column;
     }
@@ -2252,13 +2260,14 @@ body {
         padding: 1rem;
     }
 }
+
 /* ===================================
    CRYPTO COIN, TECHNOLOGY, FEATURES SECTIONS
    (Keeping all existing styles unchanged)
    =================================== */
 .crypto-coin-section {
     padding: 4rem 1rem;
-    background: var(--ember-gradient-background); /* ✅ CHANGED */
+    background: linear-gradient(135deg, rgba(13, 12, 12, 0.95) 0%, rgba(26, 15, 10, 0.9) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -3611,7 +3620,7 @@ body {
 }
 
 /* ===================================
-   ✅ FIX #3: PRICING SECTION - WITH ENHANCED HEADERS & SPACING
+   ✅ FIX #4: PRICING SECTION - WITH ENHANCED HEADERS & SPACING
    All badge, title, and spacing updates applied
    =================================== */
 .pricing {
@@ -3657,10 +3666,9 @@ body {
     background: linear-gradient(135deg, rgba(26,15,30,0.9), rgba(45,24,46,0.85));
 }
 
-/* ✅ FIX #3: Updated header spacing */
+/* ✅ FIX #4: Updated header spacing */
 .solution-header {
     margin-bottom: 1.75rem;
-    padding-top: 0; /* Default: no extra padding on desktop */
 }
 
 .solution-category-title {
@@ -3672,7 +3680,7 @@ body {
     margin-bottom: 0.75rem;
 }
 
-/* ✅ FIX #3: New badge styles */
+/* ✅ FIX #4: New badge styles */
 .solution-badge {
     display: inline-block;
     background: rgba(215, 51, 39, 0.2);
@@ -3689,7 +3697,7 @@ body {
     color: #8b5cf6;
 }
 
-/* ✅ FIX #3: Enhanced title styles */
+/* ✅ FIX #4: Enhanced title styles */
 .solution-title {
     font-size: 1.5rem;
     font-weight: 800;
@@ -3698,7 +3706,7 @@ body {
     line-height: 1.2;
 }
 
-/* ✅ FIX #3: Improved subtitle */
+/* ✅ FIX #4: Improved subtitle */
 .solution-subtitle {
     font-size: 0.9rem;
     line-height: 1.6;
@@ -4041,15 +4049,6 @@ body {
         padding: 1.5rem;
     }
     
-    /* ✅ FIX #3: Add top padding to pricing headers on mobile */
-    .solution-header {
-        padding-top: 1.5rem; /* ✅ FIXED: Space from top on mobile */
-    }
-    
-    .solution-category-title {
-        font-size: 0.9rem; /* Slightly larger on mobile for visibility */
-    }
-    
     .solution-title {
         font-size: 1.3rem;
     }
@@ -4078,20 +4077,12 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    /* ✅ FIX #3: Pricing Headers - Extra spacing on very small screens */
-    .solution-header {
-        padding-top: 2rem; /* ✅ FIXED: More space on very small screens */
-    }
-}
-
-/* ===================================
-   PHOENIX SEPARATOR & FINAL CTA SECTIONS
-   ✅ FIXED: Reduced padding for consistent spacing
-   =================================== */
+/* Phoenix separator, final CTA, success guide, modals - keeping all existing styles */
 .phoenix-separator-section {
-    padding: var(--section-padding) var(--container-padding);
-    /* Remove any padding-bottom overrides, let it use the variable */
+    padding: 3.5rem var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
 }
 
 .phoenix-separator-section::before {
@@ -4177,9 +4168,29 @@ body {
     color: rgba(255, 255, 255, 0.85);
 }
 
+@media (max-width: 768px) {
+    .phoenix-separator-section {
+        padding: 3rem 1rem;
+    }
+    
+    .phoenix-separator-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .phoenix-separator-image {
+        max-width: 220px;
+    }
+    
+    .phoenix-separator-subtitle {
+        font-size: 0.95rem;
+    }
+}
+
 .final-cta {
-    padding: var(--section-padding) var(--container-padding);
-    /* Remove any padding-bottom overrides, let it use the variable */
+    padding: var(--section-padding) var(--container-padding) 0 var(--container-padding);
+    background: var(--ember-gradient-background);
+    position: relative;
 }
 
 .final-cta-background {
@@ -4223,6 +4234,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.75rem;
     align-items: stretch;
+    margin-bottom: 3rem;
 }
 
 .journey-path-module {
@@ -4428,12 +4440,6 @@ body {
     box-shadow: var(--ember-shadow-lg);
 }
 
-.journey-cta-icon-large {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-}
-
 .journey-cta-text {
     font-size: inherit;
 }
@@ -4442,23 +4448,6 @@ body {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.6);
     margin: 0.65rem 0 0.85rem;
-}
-
-.journey-secondary-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--ember-gold);
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition-base);
-    min-height: 44px;
-}
-
-.journey-secondary-link:hover {
-    color: var(--ember-orange);
-    transform: translateX(3px);
 }
 
 .satisfaction-guarantee {
@@ -4482,13 +4471,10 @@ body {
     font-weight: 700;
 }
 
-/* ===================================
-   SUCCESS GUIDE - STANDALONE SECTION
-   ✅ FIXED: Reduced bottom padding for consistent spacing
-   =================================== */
-.success-guide-section {
-    padding: var(--section-padding) var(--container-padding);
-    /* Remove any padding-bottom overrides, let it use the variable */
+.success-guide-integrated {
+    margin: 0;
+    padding: var(--section-padding) 0 2.5rem 0;
+    border-top: 2px solid rgba(215, 51, 39, 0.3);
 }
 
 .success-text-header {
@@ -4582,6 +4568,7 @@ body {
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
+    padding: 0;
 }
 
 .success-primary-button {
@@ -4627,46 +4614,23 @@ body {
     color: rgba(255, 255, 255, 0.75);
     font-weight: 600;
     margin: 0;
+    padding: 0;
 }
 
-/* ===================================
-   RESPONSIVE - TABLET
-   =================================== */
 @media (max-width: 1024px) {
+    .success-benefits-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .journey-paths-container {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
-    .success-benefits-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
-/* ===================================
-   RESPONSIVE - MOBILE
-   =================================== */
 @media (max-width: 768px) {
-    .phoenix-separator-section {
-        padding: 2rem 1rem; /* ✅ REDUCED */
-    }
-    
     .final-cta {
-        padding: 2rem 1rem; /* ✅ REDUCED */
-        padding-bottom: 1.5rem;
-    }
-    
-    .phoenix-separator-content {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .phoenix-separator-image {
-        max-width: 220px;
-    }
-    
-    .phoenix-separator-subtitle {
-        font-size: 0.95rem;
+        padding: 3rem 1rem 0 1rem;
     }
     
     .final-cta-title {
@@ -4710,9 +4674,9 @@ body {
         font-size: 1.1rem;
     }
     
-    .success-guide-section {
-        padding: 2rem 1rem; /* ✅ REDUCED */
-        padding-bottom: 1.5rem;
+    .success-guide-integrated {
+        margin-top: 3rem;
+        padding: 2.5rem 0 2.5rem 0;
     }
     
     .success-benefits-container {
@@ -4754,19 +4718,7 @@ body {
     }
 }
 
-/* ===================================
-   RESPONSIVE - SMALL MOBILE
-   =================================== */
 @media (max-width: 480px) {
-    .phoenix-separator-section {
-        padding: 1.5rem 1rem; /* ✅ MINIMAL */
-    }
-    
-    .final-cta {
-        padding: 1.5rem 1rem; /* ✅ MINIMAL */
-        padding-bottom: 1rem;
-    }
-    
     .journey-path-title {
         font-size: 1.25rem;
     }
@@ -4779,9 +4731,8 @@ body {
         font-size: 0.8rem;
     }
     
-    .success-guide-section {
-        padding: 1.5rem 1rem; /* ✅ MINIMAL */
-        padding-bottom: 1rem;
+    .success-guide-integrated {
+        padding: 2rem 0 2rem 0;
     }
     
     .success-benefit-icon img {
@@ -4807,10 +4758,6 @@ body {
     }
 }
 
-/* Modals section continues... */
-/* ===================================
-   MODALS
-   =================================== */
 .airdrop-terms-modal-overlay,
 .airdrop-info-modal-overlay {
     position: fixed;
@@ -5061,3 +5008,11 @@ body {
         width: 100%;
     }
 }
+
+/* ===================================
+   END OF LOCAL.CSS - COMPLETE FILE WITH ALL 4 FIXES
+   ✅ FIX #1: Social Tracking Section Added
+   ✅ FIX #2: Countdown Timer Fixed (min-width)
+   ✅ FIX #3: Ember Token Section Balanced
+   ✅ FIX #4: Pricing Headers Enhanced
+   =================================== */
