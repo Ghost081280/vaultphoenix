@@ -8,31 +8,40 @@
    DO NOT override .navbar, .footer, .chatbot-* classes
    =================================== */
 
-/* HERO SECTION - CLEAN VERSION */
+/* ===================================
+   HERO SECTION - PROPER FLEX LAYOUT
+   Overrides shared/global.css with correct flex-direction
+   =================================== */
 .ember-hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 140px 20px 80px;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;  /* CRITICAL - global.css was missing this */
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 140px 20px 80px !important;
     background: linear-gradient(135deg, 
         rgba(13, 12, 12, 1) 0%, 
         rgba(26, 15, 10, 0.95) 50%, 
-        rgba(13, 12, 12, 1) 100%);
+        rgba(13, 12, 12, 1) 100%) !important;
+    width: 100% !important;
 }
 
 .ember-hero-container {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
 }
 
 .ember-hero-content {
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     gap: 2rem;
+    width: 100%;
 }
 
 .ember-hero-title {
@@ -65,10 +74,14 @@
     margin: 0;
 }
 
-/* Mobile */
+/* Mobile adjustments */
 @media (max-width: 768px) {
     .ember-hero {
-        padding: 100px 20px 60px;
+        padding: 100px 20px 60px !important;
+    }
+    
+    .ember-hero-content {
+        gap: 1.5rem;
     }
 }
 
