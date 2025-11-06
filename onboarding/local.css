@@ -1,7 +1,8 @@
 /* ========================================
-   VAULT PHOENIX ONBOARDING - LOCAL CSS v5.0
+   VAULT PHOENIX ONBOARDING - LOCAL CSS v5.1
    PART 1 OF 3: Base, Hero, Credentials, Web3 Education
    Mobile-First Responsive Design with Ember Gradient Theme
+   UPDATED: Added Checklist Modal Styles
    ======================================== */
 
 /* ========================================
@@ -1213,9 +1214,10 @@ body.onboarding-page #main-content *::after {
 }
 
 /* END OF PART 1 *//* ========================================
-   VAULT PHOENIX ONBOARDING - LOCAL CSS v5.0
+   VAULT PHOENIX ONBOARDING - LOCAL CSS v5.1
    PART 2 OF 3: Process Steps, Calculator Hub, Pricing
    Mobile-First Responsive Design
+   UPDATED: Added Checklist Modal Styles
    ======================================== */
 
 /* ========================================
@@ -2498,9 +2500,10 @@ body.onboarding-page #main-content *::after {
 }
 
 /* END OF PART 2 *//* ========================================
-   VAULT PHOENIX ONBOARDING - LOCAL CSS v5.0
+   VAULT PHOENIX ONBOARDING - LOCAL CSS v5.1
    PART 3 OF 3: Scripts, Proposals, Checklist, Modals, CTA
    Mobile-First Responsive Design - Final Section
+   UPDATED: Added Checklist Modal Styles
    ======================================== */
 
 /* ========================================
@@ -3776,6 +3779,191 @@ body.onboarding-page #main-content *::after {
 }
 
 /* ========================================
+   CHECKLIST MODAL STYLES - REQUIRED
+   ======================================== */
+/* Modal Overlay - Initially Hidden */
+.checklist-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 1rem;
+}
+
+/* Modal Visible State */
+.checklist-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Container */
+.checklist-modal {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    border: 2px solid #f0a500;
+    border-radius: 16px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(240, 165, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.checklist-modal-overlay.active .checklist-modal {
+    transform: scale(1);
+}
+
+/* Modal Header */
+.checklist-modal-header {
+    background: linear-gradient(135deg, #f0a500 0%, #d73327 100%);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.checklist-modal-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Close Button */
+.checklist-modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.checklist-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* Modal Body */
+.checklist-modal-body {
+    padding: 2rem;
+    overflow-y: auto;
+    max-height: calc(85vh - 100px);
+    color: #e0e0e0;
+}
+
+.checklist-modal-body h4 {
+    color: #f0a500;
+    font-size: 1.25rem;
+    margin: 1.5rem 0 0.75rem 0;
+    font-weight: 700;
+}
+
+.checklist-modal-body h4:first-child {
+    margin-top: 0;
+}
+
+.checklist-modal-body p {
+    margin: 0.75rem 0;
+    line-height: 1.7;
+    color: #d0d0d0;
+}
+
+.checklist-modal-body ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.checklist-modal-body ul li {
+    margin: 0.75rem 0;
+    line-height: 1.6;
+    color: #d0d0d0;
+}
+
+.checklist-modal-body ul li strong {
+    color: #fb923c;
+    font-weight: 600;
+}
+
+/* Scrollbar */
+.checklist-modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.checklist-modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.checklist-modal-body::-webkit-scrollbar-thumb {
+    background: #f0a500;
+    border-radius: 4px;
+}
+
+.checklist-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #d73327;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .checklist-modal-overlay {
+        padding: 0.5rem;
+    }
+    
+    .checklist-modal {
+        max-height: 90vh;
+        border-radius: 12px;
+    }
+    
+    .checklist-modal-header {
+        padding: 1rem 1.25rem;
+    }
+    
+    .checklist-modal-header h3 {
+        font-size: 1.25rem;
+    }
+    
+    .checklist-modal-close {
+        width: 36px;
+        height: 36px;
+        font-size: 1.75rem;
+    }
+    
+    .checklist-modal-body {
+        padding: 1.25rem;
+        max-height: calc(90vh - 80px);
+    }
+}
+
+/* Animation */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* ========================================
    FINAL CTA SECTION
    ======================================== */
 .final-cta-section {
@@ -4345,4 +4533,5 @@ body.onboarding-page select:focus {
 
 /* ========================================
    END OF PART 3 - FILE COMPLETE
+   CHECKLIST MODAL STYLES ADDED
    ======================================== */
