@@ -2824,17 +2824,16 @@
 .presale-content {
     display: flex;
     flex-direction: column;
-    gap: clamp(2.5rem, 5vw, 4rem);
-}
-
-/* Presale Main Content */
-.presale-main {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(2rem, 4vw, 3rem);
+    gap: clamp(2rem, 4vw, 2.5rem);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Presale Metrics */
+.presale-metrics {
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
 .presale-metrics h3 {
     font-size: clamp(1.4rem, 3vw, 1.9rem);
     font-weight: 800;
@@ -2845,17 +2844,21 @@
 
 .metrics-grid-presale {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(1.25rem, 2.5vw, 1.75rem);
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1rem, 2vw, 1.5rem);
 }
 
 .metric-card {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    padding: clamp(1.25rem, 2.5vw, 1.5rem);
     text-align: center;
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .metric-card:hover {
@@ -2867,39 +2870,36 @@
 .metric-icon {
     display: flex;
     justify-content: center;
-    margin-bottom: 1rem;
 }
 
 .metric-icon img {
-    width: clamp(48px, 8vw, 64px);
-    height: clamp(48px, 8vw, 64px);
+    width: clamp(40px, 8vw, 56px);
+    height: clamp(40px, 8vw, 56px);
     object-fit: contain;
     filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.5));
 }
 
 .metric-value {
-    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
     font-weight: 900;
     color: var(--ember-gold);
-    margin-bottom: 0.5rem;
     line-height: 1;
 }
 
 .metric-label {
-    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
     font-weight: 600;
     color: #ffffff;
-    margin-bottom: 0.25rem;
 }
 
 .metric-desc {
-    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+    font-size: clamp(0.8rem, 1.4vw, 0.9rem);
     color: rgba(255, 255, 255, 0.7);
 }
 
 /* Presale Timer */
 .presale-timer {
-    padding: clamp(2rem, 4vw, 3rem);
+    padding: clamp(1.5rem, 3vw, 2rem);
     background: linear-gradient(135deg, 
         rgba(215, 51, 39, 0.15) 0%, 
         rgba(240, 165, 0, 0.1) 100%);
@@ -2908,17 +2908,17 @@
 }
 
 .presale-timer h3 {
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
     font-weight: 800;
     color: var(--ember-gold);
     text-align: center;
-    margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+    margin: 0 0 clamp(1.25rem, 2.5vw, 1.5rem);
 }
 
 .countdown-timer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: clamp(0.75rem, 2vw, 1.5rem);
+    gap: clamp(0.75rem, 2vw, 1.25rem);
 }
 
 .time-unit {
@@ -2926,14 +2926,14 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    padding: clamp(1rem, 2vw, 1.5rem);
+    padding: clamp(0.875rem, 1.75vw, 1.25rem);
     background: rgba(26, 15, 10, 0.6);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-lg);
 }
 
 .time-value {
-    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 900;
     color: var(--ember-gold);
     line-height: 1;
@@ -3010,156 +3010,6 @@
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* Development Fund Tracker */
-.development-fund-tracker {
-    padding: clamp(2rem, 4vw, 3rem);
-    background: var(--ember-gradient-card);
-    border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: var(--radius-2xl);
-}
-
-.development-fund-tracker h3 {
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
-    font-weight: 800;
-    color: var(--ember-gold);
-    text-align: center;
-    margin: 0 0 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-}
-
-.development-fund-tracker h3 img {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.6));
-}
-
-.tracker-description {
-    text-align: center;
-    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0 0 1.5rem;
-}
-
-.tracker-progress {
-    margin-bottom: 2rem;
-}
-
-.tracker-bar {
-    width: 100%;
-    height: 32px;
-    background: rgba(26, 15, 10, 0.8);
-    border-radius: var(--radius-full);
-    overflow: hidden;
-    border: 2px solid rgba(240, 165, 0, 0.3);
-}
-
-.tracker-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #f0a500, #fb923c, #d73327);
-    transition: width 0.5s ease;
-    box-shadow: 0 0 15px rgba(240, 165, 0, 0.6);
-}
-
-.tracker-stats {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.tracker-update {
-    text-align: center;
-    font-size: clamp(0.8rem, 1.4vw, 0.9rem);
-    color: rgba(255, 255, 255, 0.7);
-    margin-top: 0.5rem;
-}
-
-/* Tracker Breakdown */
-.tracker-breakdown h4 {
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin: 0 0 1.25rem;
-}
-
-.breakdown-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background: rgba(215, 51, 39, 0.1);
-    border-radius: var(--radius-lg);
-    border-left: 3px solid var(--ember-orange);
-}
-
-.breakdown-icon {
-    flex-shrink: 0;
-}
-
-.breakdown-icon img {
-    width: 38px;
-    height: 38px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
-}
-
-.breakdown-details {
-    flex: 1;
-}
-
-.breakdown-title {
-    font-size: clamp(0.9rem, 1.6vw, 1rem);
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 0.25rem;
-}
-
-.breakdown-amount {
-    font-size: clamp(1rem, 1.8vw, 1.15rem);
-    font-weight: 800;
-    color: var(--ember-gold);
-}
-
-/* Tracker Note */
-.tracker-note {
-    margin-top: 1.5rem;
-    padding: 1.25rem;
-    background: rgba(240, 165, 0, 0.1);
-    border: 1px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-lg);
-}
-
-.tracker-note p {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0 0 0.75rem;
-    font-size: clamp(0.9rem, 1.6vw, 1rem);
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.tracker-note p:last-child {
-    margin-bottom: 0;
-}
-
-.tracker-note img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    flex-shrink: 0;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
-}
-
 /* Fund Usage */
 .fund-usage {
     padding: clamp(1.5rem, 3vw, 2rem);
@@ -3169,11 +3019,11 @@
 }
 
 .fund-usage h3 {
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
     font-weight: 800;
     color: var(--ember-gold);
     text-align: center;
-    margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+    margin: 0 0 clamp(1.25rem, 2.5vw, 1.5rem);
 }
 
 .usage-breakdown {
@@ -3193,11 +3043,11 @@
 }
 
 .usage-percentage {
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-size: clamp(1.3rem, 2.5vw, 1.6rem);
     font-weight: 900;
     color: var(--ember-gold);
     flex-shrink: 0;
-    min-width: 60px;
+    min-width: 50px;
 }
 
 .usage-details {
@@ -3205,7 +3055,7 @@
 }
 
 .usage-title {
-    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 0.5rem;
@@ -3217,28 +3067,20 @@
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* Presale Form Sidebar */
-.presale-form {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.5rem, 3vw, 2rem);
-}
-
+/* Presale Card */
 .presale-card {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(240, 165, 0, 0.4);
     border-radius: var(--radius-2xl);
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-    position: sticky;
-    top: calc(var(--navbar-height) + 1rem);
+    padding: clamp(1.5rem, 3vw, 2rem);
 }
 
 .presale-card h3 {
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
     font-weight: 800;
     color: var(--ember-gold);
     text-align: center;
-    margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+    margin: 0 0 clamp(1.25rem, 2.5vw, 1.5rem);
 }
 
 /* Investment Calculator */
@@ -3332,7 +3174,7 @@
     font-size: clamp(1.2rem, 2vw, 1.4rem);
     font-weight: 900;
     color: var(--ember-gold);
-    min-width: 50px;
+    min-width: 60px;
 }
 
 .vesting-time {
@@ -3360,8 +3202,9 @@
 
 .payment-options {
     display: flex;
-    justify-content: space-around;
-    gap: 1rem;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .payment-option {
@@ -3369,33 +3212,38 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem;
+    padding: 1rem;
     background: rgba(215, 51, 39, 0.1);
     border-radius: var(--radius-md);
-    flex: 1;
-    min-width: 0;
+    min-width: 100px;
 }
 
 .payment-icon {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--ember-gold);
+    font-size: 1.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .payment-icon img {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
 }
 
 .payment-option span:last-child {
-    font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
+}
+
+.payment-note {
+    text-align: center;
+    font-size: clamp(0.8rem, 1.4vw, 0.85rem);
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    margin: 0;
 }
 
 /* TPA Section */
@@ -3447,7 +3295,6 @@
     cursor: pointer;
     transition: all 0.3s ease;
     min-height: 44px;
-    text-decoration: none;
 }
 
 .tpa-download-button img {
@@ -3554,7 +3401,6 @@
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
     margin-bottom: 1.25rem;
     min-height: 44px;
-    text-decoration: none;
 }
 
 .presale-button img {
@@ -3597,27 +3443,6 @@
     height: 28px;
     flex-shrink: 0;
     filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
-}
-
-/* Presale Promo Image */
-.presale-promo-image {
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    border: 2px solid rgba(240, 165, 0, 0.3);
-    transition: all 0.3s ease;
-}
-
-.presale-promo-image:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 36px rgba(240, 165, 0, 0.4);
-    border-color: var(--ember-gold);
-}
-
-.presale-promo-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
 }
 
 /* Presale Benefits */
@@ -3679,6 +3504,51 @@
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN - TABLET & DESKTOP
+   =================================== */
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+    /* Metrics grid 2x2 */
+    .metrics-grid-presale {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Benefits grid 2 columns */
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    /* Metrics grid 4 columns */
+    .metrics-grid-presale {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Benefits grid 4 columns */
+    .benefits-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .countdown-timer {
+        gap: 0.5rem;
+    }
+    
+    .time-unit {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .payment-options {
+        gap: 1rem;
+    }
 }
 
 /* ===================================
