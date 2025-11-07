@@ -3985,137 +3985,139 @@
 }
 
 /* ===================================
-   LEGAL COMPLIANCE SECTION
-   Compliance cards + legal disclaimer
+   LEGAL & REGULATORY COMPLIANCE SECTION
+   Trust signals and compliance
    =================================== */
 
 .legal-compliance-section {
     padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
-    background: var(--ember-gradient-background);
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.95) 0%, 
+        rgba(45, 24, 16, 0.90) 50%, 
+        rgba(26, 15, 10, 0.95) 100%);
 }
 
+.legal-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 6vw, 4rem);
+}
+
+/* Compliance Grid */
 .compliance-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(2rem, 4vw, 3rem);
-    margin-bottom: clamp(3rem, 6vw, 5rem);
+    gap: clamp(1.5rem, 3vw, 2rem);
 }
 
-.compliance-card {
+.compliance-item {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: clamp(2rem, 4vw, 3rem);
+    padding: clamp(1.5rem, 3vw, 2rem);
+    text-align: center;
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
-.compliance-card:hover {
+.compliance-item:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 48px rgba(215, 51, 39, 0.4);
+    box-shadow: 0 12px 36px rgba(215, 51, 39, 0.4);
     border-color: var(--ember-orange);
 }
 
-.compliance-card h3 {
-    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin: 0 0 1.25rem;
+/* Compliance Icon */
+.compliance-icon {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.compliance-card h3 img {
-    width: clamp(40px, 7vw, 56px);
-    height: clamp(40px, 7vw, 56px);
-    object-fit: contain;
-    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.5));
-}
-
-.compliance-card > p {
-    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0 0 1.5rem;
-}
-
-.compliance-card ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.compliance-card li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    font-size: clamp(0.9rem, 1.6vw, 1rem);
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    padding: 0.75rem;
-    background: rgba(215, 51, 39, 0.05);
-    border-radius: var(--radius-md);
-}
-
-.compliance-card li span {
-    color: var(--ember-gold);
-    font-weight: 800;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-}
-
-/* Legal Disclaimer */
-.legal-disclaimer {
-    padding: clamp(2.5rem, 5vw, 4rem);
-    background: linear-gradient(135deg, 
-        rgba(215, 51, 39, 0.15) 0%, 
-        rgba(240, 165, 0, 0.1) 100%);
-    border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: var(--radius-2xl);
-}
-
-.legal-disclaimer h3 {
-    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-    font-weight: 800;
-    color: var(--ember-gold);
-    margin: 0 0 clamp(1.5rem, 3vw, 2rem);
-    display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+    align-items: center;
 }
 
-.legal-disclaimer h3 img {
-    width: clamp(48px, 9vw, 64px);
-    height: clamp(48px, 9vw, 64px);
+.compliance-icon img {
+    width: clamp(56px, 10vw, 72px);
+    height: clamp(56px, 10vw, 72px);
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
 }
 
-.disclaimer-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.compliance-item h3 {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin: 0;
 }
 
-.disclaimer-content p {
+.compliance-item p {
     font-size: clamp(0.9rem, 1.6vw, 1rem);
-    line-height: 1.7;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
-    padding: 1.25rem;
-    background: rgba(26, 15, 10, 0.6);
-    border-left: 3px solid var(--ember-orange);
-    border-radius: var(--radius-md);
 }
 
-.disclaimer-content strong {
+/* Legal Disclaimer */
+.legal-disclaimer {
+    padding: clamp(2rem, 4vw, 3rem);
+    background: rgba(215, 51, 39, 0.1);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-left: 5px solid var(--ember-orange);
+    border-radius: var(--radius-xl);
+}
+
+.legal-disclaimer h3 {
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-weight: 800;
+    color: var(--ember-gold);
+    margin: 0 0 clamp(1.25rem, 2.5vw, 1.5rem);
+    text-align: center;
+}
+
+.legal-disclaimer p {
+    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 1rem;
+}
+
+.legal-disclaimer p:last-child {
+    margin-bottom: 0;
+}
+
+.legal-disclaimer strong {
     color: var(--ember-gold);
     font-weight: 700;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN - TABLET & DESKTOP
+   =================================== */
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+    /* Compliance grid 2 columns */
+    .compliance-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    /* Compliance grid 3 columns */
+    .compliance-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+    .compliance-icon img {
+        width: 72px;
+        height: 72px;
+    }
 }
 
 /* ===================================
