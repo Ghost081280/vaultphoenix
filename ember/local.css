@@ -1,12 +1,61 @@
 /* ===================================
-   VAULT PHOENIX - EMBER LOCAL CSS v2.1 FINAL
+   VAULT PHOENIX - EMBER LOCAL CSS v2.2 CORRECTED
    REBUILT & OPTIMIZED
-   Hero + Spread Fire + How It Works sections
+   Hero + Airdrop + How It Works sections
    
    CRITICAL: This file uses CSS variables from shared/global.css
    DO NOT duplicate variables - they are defined globally
    DO NOT override .navbar, .footer, .chatbot-* classes
    =================================== */
+
+/* ===================================
+   CRITICAL FIX: MODAL HIDING RULES
+   All modals hidden by default - prevent footer bleed
+   =================================== */
+
+/* Hide ALL modal overlays and containers by default */
+.tpa-modal,
+.modal-overlay,
+#tpaModal,
+#whitepaperModal,
+#airdrop-info-modal,
+#airdrop-terms-modal {
+    display: none !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Show modals only when explicitly activated */
+.tpa-modal[style*="display: flex"],
+.tpa-modal[style*="display: block"],
+.modal-overlay.active {
+    display: flex !important;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Ensure modal content doesn't leak */
+.tpa-modal-content,
+.modal-container {
+    position: relative;
+    z-index: 10001;
+}
+
+/* Footer isolation - prevent content bleeding */
+#shared-components-container {
+    position: relative;
+    z-index: 100;
+    clear: both;
+}
+
+/* Prevent any floating elements from escaping */
+body::after {
+    content: '';
+    display: table;
+    clear: both;
+}
 
 /* ===================================
    HERO SECTION - COMPLETE WITH METRICS
@@ -291,8 +340,8 @@
 }
 
 /* ===================================
-   $EMBER AIRDROP SECTION - PURPLE VERSION (MATCHING MAIN PAGE)
-   Orange/Red theme REPLACED with Purple theme
+   $EMBER AIRDROP SECTION - PURPLE VERSION
+   Complete airdrop system with all components
    =================================== */
 
 /* Base box-sizing for entire section */
@@ -752,7 +801,7 @@
     box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
 }
 
-/* Social Tracking Section - GOLD/EMBER COLORS (KEPT) */
+/* Social Tracking Section - GOLD/EMBER COLORS */
 .social-tracking-section {
     background: linear-gradient(135deg, 
         rgba(240, 165, 0, 0.12) 0%, 
@@ -1268,10 +1317,6 @@
         padding: 1rem;
     }
 }
-
-/* ===================================
-   END OF AIRDROP SECTION CSS
-   =================================== */
 
 /* ===================================
    HOW IT WORKS SECTION
