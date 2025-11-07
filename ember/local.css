@@ -2158,8 +2158,11 @@
 .team-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(2rem, 4vw, 3rem);
+    gap: clamp(1.5rem, 3vw, 2rem);
     margin-bottom: clamp(3rem, 6vw, 4rem);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Team Member Card */
@@ -2167,7 +2170,7 @@
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
-    padding: clamp(1.5rem, 3vw, 2.5rem);
+    padding: clamp(1.5rem, 3vw, 2rem);
     text-align: center;
     transition: all 0.3s ease;
     display: flex;
@@ -2279,11 +2282,12 @@
 /* Advisors Section */
 .advisors-section {
     text-align: center;
-    margin: clamp(3rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+    margin: clamp(3rem, 6vw, 5rem) auto clamp(2rem, 4vw, 3rem);
     padding: clamp(1.5rem, 3vw, 2rem);
     background: rgba(240, 165, 0, 0.1);
     border-radius: var(--radius-xl);
     border: 2px solid rgba(240, 165, 0, 0.3);
+    max-width: 1200px;
 }
 
 .advisors-section h3 {
@@ -2309,6 +2313,26 @@
 .team-member-placeholder {
     visibility: hidden;
     pointer-events: none;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN - TABLET & DESKTOP
+   =================================== */
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+    /* Team grid 2 columns */
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    /* Team grid 3 columns */
+    .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 /* ===================================
