@@ -6,6 +6,32 @@
    DO NOT duplicate variables - they are defined globally
    DO NOT override .navbar, .footer, .chatbot-* classes
    =================================== */
+/* ===================================
+   GLOBAL SECTION SPACING FIX
+   Consistent bottom padding for all sections
+   =================================== */
+
+.ember-section,
+.how-it-works-section,
+.whitepaper-content,
+.roadmap-section,
+.team-section,
+.tokenomics-section,
+.presale-section,
+.cta-presale-section-enhanced,
+.legal-compliance-section,
+.ember-airdrop-section {
+    padding-bottom: clamp(4rem, 8vw, 6rem) !important;
+}
+
+/* Ensure modules within sections have breathing room */
+.ember-airdrop-outer-module,
+.presale-card,
+.stakeholder-card,
+.whitepaper-overview,
+.token-distribution {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+}
 
 /* ===================================
    MODAL SYSTEM - CLEAN & WORKING
