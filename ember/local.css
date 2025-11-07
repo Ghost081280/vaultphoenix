@@ -3080,6 +3080,7 @@
     line-height: 1.4;
     color: rgba(255, 255, 255, 0.8);
 }
+
 /* Presale Timeline */
 .presale-timeline {
     padding: clamp(1.25rem, 2.5vw, 1.5rem);
@@ -3160,8 +3161,6 @@
     border: 2px solid rgba(240, 165, 0, 0.4);
     border-radius: var(--radius-2xl);
     padding: clamp(1.5rem, 3vw, 2rem);
-    position: sticky;
-    top: 100px;
 }
 
 .presale-card h3 {
@@ -3612,6 +3611,7 @@
     /* Two column layout */
     .presale-two-column {
         grid-template-columns: 1fr 450px;
+        align-items: start;
     }
     
     /* Benefits grid 4 columns */
