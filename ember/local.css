@@ -3080,6 +3080,79 @@
     line-height: 1.4;
     color: rgba(255, 255, 255, 0.8);
 }
+/* Presale Timeline */
+.presale-timeline {
+    padding: clamp(1.25rem, 2.5vw, 1.5rem);
+    background: linear-gradient(135deg, 
+        rgba(215, 51, 39, 0.15) 0%, 
+        rgba(240, 165, 0, 0.1) 100%);
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: var(--radius-xl);
+}
+
+.presale-timeline h3 {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-weight: 800;
+    color: var(--ember-gold);
+    text-align: center;
+    margin: 0 0 clamp(1rem, 2vw, 1.25rem);
+}
+
+.timeline-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem;
+    background: rgba(26, 15, 10, 0.6);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+    background: rgba(45, 24, 16, 0.7);
+    border-color: var(--ember-orange);
+    transform: translateX(4px);
+}
+
+.timeline-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.timeline-icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-title {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+}
+
+.timeline-date {
+    font-size: clamp(0.8rem, 1.3vw, 0.85rem);
+    color: var(--ember-gold);
+    font-weight: 600;
+}
 
 /* Presale Card */
 .presale-card {
