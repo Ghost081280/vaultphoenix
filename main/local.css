@@ -4765,11 +4765,11 @@ body {
     }
     
     .success-footnote {
-        font-size: 0.8rem;
+font-size: 0.8rem;
     }
 }
 
-* TPA Modal Base Styles */
+/* TPA Modal Base Styles */
 .tpa-modal {
     display: none;
     position: fixed;
@@ -4783,6 +4783,7 @@ body {
 }
 
 .tpa-modal.active {
+    display: flex;  /* ✅ ADD THIS */
     opacity: 1;
 }
 
