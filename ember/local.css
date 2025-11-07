@@ -3507,51 +3507,6 @@
 }
 
 /* ===================================
-   RESPONSIVE DESIGN - TABLET & DESKTOP
-   =================================== */
-
-/* Tablet (768px+) */
-@media (min-width: 768px) {
-    /* Metrics grid 2x2 */
-    .metrics-grid-presale {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Benefits grid 2 columns */
-    .benefits-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Desktop (1024px+) */
-@media (min-width: 1024px) {
-    /* Metrics grid 4 columns */
-    .metrics-grid-presale {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    /* Benefits grid 4 columns */
-    .benefits-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* Mobile adjustments */
-@media (max-width: 480px) {
-    .countdown-timer {
-        gap: 0.5rem;
-    }
-    
-    .time-unit {
-        padding: 0.75rem 0.5rem;
-    }
-    
-    .payment-options {
-        gap: 1rem;
-    }
-}
-
-/* ===================================
    ENHANCED CTA PRESALE SECTION
    Final call-to-action with value props
    =================================== */
@@ -3937,54 +3892,6 @@
 }
 
 /* ===================================
-   RESPONSIVE DESIGN - TABLET & DESKTOP
-   =================================== */
-
-/* Tablet (768px+) */
-@media (min-width: 768px) {
-    /* Value prop rows 2 columns */
-    .value-prop-row {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Show stat dividers */
-    .stat-divider {
-        display: block;
-    }
-    
-    /* Buttons side by side */
-    .cta-presale-buttons-enhanced {
-        flex-direction: row;
-        justify-content: center;
-    }
-    
-    .cta-presale-primary-enhanced,
-    .cta-presale-secondary-enhanced {
-        flex: 0 1 280px;
-    }
-}
-
-/* Desktop (1024px+) */
-@media (min-width: 1024px) {
-    .cta-main-icon {
-        width: 120px;
-        height: 120px;
-    }
-    
-    .floating-coin-image {
-        width: 100px;
-        height: 100px;
-    }
-}
-
-/* Hide floating coins on small mobile */
-@media (max-width: 480px) {
-    .cta-floating-elements {
-        display: none;
-    }
-}
-
-/* ===================================
    LEGAL & REGULATORY COMPLIANCE SECTION
    Trust signals and compliance
    =================================== */
@@ -4098,6 +4005,37 @@
 
 /* Tablet (768px+) */
 @media (min-width: 768px) {
+    /* Metrics grid 2x2 */
+    .metrics-grid-presale {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Benefits grid 2 columns */
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Value prop rows 2 columns */
+    .value-prop-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Show stat dividers */
+    .stat-divider {
+        display: block;
+    }
+    
+    /* Buttons side by side */
+    .cta-presale-buttons-enhanced {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .cta-presale-primary-enhanced,
+    .cta-presale-secondary-enhanced {
+        flex: 0 1 280px;
+    }
+    
     /* Compliance grid 2 columns */
     .compliance-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -4106,6 +4044,26 @@
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
+    /* Metrics grid 4 columns */
+    .metrics-grid-presale {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Benefits grid 4 columns */
+    .benefits-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .cta-main-icon {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .floating-coin-image {
+        width: 100px;
+        height: 100px;
+    }
+    
     /* Compliance grid 3 columns */
     .compliance-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -4120,270 +4078,12 @@
     }
 }
 
-/* ===================================
-   MODALS (TPA + Whitepaper)
-   =================================== */
-
-.tpa-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 3000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.tpa-modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-}
-
-.tpa-modal-content {
-    position: relative;
-    background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.98) 0%, 
-        rgba(45, 24, 16, 0.95) 100%);
-    border: 2px solid rgba(215, 51, 39, 0.4);
-    border-radius: var(--radius-2xl);
-    max-width: 900px;
-    width: 100%;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.9);
-    z-index: 1;
-}
-
-.tpa-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 2rem;
-    background: var(--ember-gradient-primary);
-    border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
-    border-bottom: 2px solid rgba(240, 165, 0, 0.4);
-    flex-shrink: 0;
-}
-
-.tpa-modal-header h3 {
-    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
-    font-weight: 800;
-    color: #ffffff;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.tpa-modal-header img {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-}
-
-.tpa-modal-close {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: #ffffff;
-    background: transparent;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-}
-
-.tpa-modal-close:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: rotate(90deg);
-}
-
-.tpa-modal-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 2rem;
-    -webkit-overflow-scrolling: touch;
-}
-
-.tpa-modal-body::-webkit-scrollbar {
-    width: 6px;
-}
-
-.tpa-modal-body::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.tpa-modal-body::-webkit-scrollbar-thumb {
-    background: var(--ember-gradient-primary);
-    border-radius: 3px;
-}
-
-.tpa-preview h4 {
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-    font-weight: 700;
-    color: var(--ember-gold);
-    margin: 0 0 1.25rem;
-}
-
-.tpa-preview p {
-    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0 0 1.5rem;
-}
-
-.tpa-modal-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.tpa-download-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
-    background: rgba(215, 51, 39, 0.2);
-    color: #ffffff;
-    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
-    font-weight: 600;
-    border: 2px solid rgba(215, 51, 39, 0.4);
-    border-radius: var(--radius-lg);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    min-height: 44px;
-}
-
-.tpa-download-btn img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
-}
-
-.tpa-download-btn:hover {
-    background: rgba(215, 51, 39, 0.3);
-    border-color: var(--ember-orange);
-    transform: translateY(-2px);
-}
-
-.tpa-agree-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1.125rem 2rem;
-    background: var(--ember-gradient-primary);
-    color: #ffffff;
-    font-size: clamp(1rem, 1.8vw, 1.15rem);
-    font-weight: 700;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-lg);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
-}
-
-.tpa-agree-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.6);
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-/* ===================================
-   RESPONSIVE DESIGN - TABLET & DESKTOP
-   =================================== */
-
-/* Tablet (768px+) */
-@media (min-width: 768px) {
-    /* Presale metrics 2 columns */
-    .metrics-grid-presale {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Presale content side-by-side */
-    .presale-content {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-    
-    .presale-main {
-        flex: 1.2;
-    }
-    
-    .presale-form {
-        flex: 0 0 400px;
-    }
-    
-    /* Benefits grid 2 columns */
-    .benefits-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Value prop rows 2 columns */
-    .value-prop-row {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* CTA buttons side-by-side */
-    .cta-presale-buttons-enhanced {
-        flex-direction: row;
-        max-width: none;
-    }
-    
-    /* Compliance grid 2 columns */
-    .compliance-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Desktop (1024px+) */
-@media (min-width: 1024px) {
-    /* Presale metrics 4 columns */
-    .metrics-grid-presale {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    /* Benefits grid 4 columns */
-    .benefits-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    /* Presale form sidebar larger */
-    .presale-form {
-        flex: 0 0 450px;
-    }
-}
-
-/* Large Desktop (1400px+) */
-@media (min-width: 1400px) {
-    .presale-main {
-        flex: 1.3;
-    }
-    
-    .presale-form {
-        flex: 0 0 480px;
-    }
-}
-
-/* Mobile Portrait Adjustments */
+/* Hide floating coins on small mobile */
 @media (max-width: 480px) {
+    .cta-floating-elements {
+        display: none;
+    }
+    
     .countdown-timer {
         gap: 0.5rem;
     }
@@ -4393,16 +4093,6 @@
     }
     
     .payment-options {
-        flex-direction: column;
-    }
-    
-    .stat-divider {
-        display: none;
+        gap: 1rem;
     }
 }
-
-/* ===================================
-   END OF EMBER LOCAL CSS PART 3
-   Presale + Enhanced CTA + Legal + Modals ✅
-   COMPLETE - ember/local.css FULLY REBUILT! 🔥
-   =================================== */
