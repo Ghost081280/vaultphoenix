@@ -2,6 +2,7 @@
 // VAULT PHOENIX MAIN.HTML LOCAL JAVASCRIPT
 // ULTIMATE BUTTER-SMOOTH VERSION v2.1
 // COMPLETE WITH ALL ORIGINAL FEATURES + ENHANCED MODALS
+// MATCHING EMBER PAGE AIRDROP MODALS
 // ============================================
 
 (function() {
@@ -270,7 +271,7 @@ function waitForGlobalReady(callback) {
 }
 
 // ============================================
-// AIRDROP TERMS MODAL - ENHANCED
+// AIRDROP TERMS MODAL - ENHANCED TO MATCH EMBER
 // ============================================
 function initializeTermsModal() {
     let modal = document.getElementById('airdrop-terms-modal');
@@ -291,7 +292,7 @@ function initializeTermsModal() {
                         <img src="images/TechnicalFoundation.PNG" alt="" aria-hidden="true">
                         $Ember Airdrop Terms & Conditions
                     </h3>
-                    <button class="tpa-modal-close" id="close-terms-modal">×</button>
+                    <button class="tpa-modal-close" id="close-terms-modal" aria-label="Close terms modal">×</button>
                 </div>
                 <div class="tpa-modal-body">
                     <div class="tpa-preview">
@@ -347,14 +348,14 @@ function initializeTermsModal() {
                         
                         <div style="background: rgba(240, 165, 0, 0.1); padding: 20px; border-radius: 15px; border: 2px solid rgba(240, 165, 0, 0.4); margin-top: 25px;">
                             <p style="margin: 0; font-weight: 600; text-align: center; color: #f0a500; font-size: 1.05rem;">
-                                <img src="images/EmberCoinLock.PNG" alt="" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <img src="images/EmberCoinLock.PNG" alt="" aria-hidden="true" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;">
                                 By clicking "I Agree" below, you confirm that you have read, understood, and agree to comply with all terms and conditions outlined above.
                             </p>
                         </div>
                     </div>
                     
                     <div class="tpa-modal-actions" style="margin-top: 25px;">
-                        <button class="tpa-agree-btn" id="agree-terms-btn">
+                        <button class="tpa-agree-btn" id="agree-terms-btn" style="background: var(--ember-gradient-primary);">
                             ✓ I Agree to Terms & Conditions
                         </button>
                         <button class="tpa-download-btn" id="cancel-terms-btn" style="margin-top: 10px;">
@@ -419,7 +420,7 @@ function initializeTermsModal() {
 }
 
 // ============================================
-// AIRDROP INFO MODAL - ENHANCED
+// AIRDROP INFO MODAL - ENHANCED TO MATCH EMBER
 // ============================================
 function initializeInfoModal() {
     let modal = document.getElementById('airdrop-info-modal');
@@ -437,10 +438,10 @@ function initializeInfoModal() {
             <div class="tpa-modal-content" style="max-width: 700px;">
                 <div class="tpa-modal-header">
                     <h3>
-                        <img src="images/VPEmberCoin.PNG" alt="">
+                        <img src="images/VPEmberCoin.PNG" alt="" aria-hidden="true">
                         How the $Ember Airdrop Works
                     </h3>
-                    <button class="tpa-modal-close" id="close-info-modal">×</button>
+                    <button class="tpa-modal-close" id="close-info-modal" aria-label="Close info modal">×</button>
                 </div>
                 <div class="tpa-modal-body">
                     <div class="tpa-preview">
@@ -476,7 +477,7 @@ function initializeInfoModal() {
                         
                         <div style="background: rgba(215, 51, 39, 0.1); padding: 15px; border-radius: 10px; border-left: 3px solid #d73327; margin-top: 20px;">
                             <p style="margin: 0; font-weight: 600;">
-                                <img src="images/VPEmberFlame.svg" alt="" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <img src="images/VPEmberFlame.svg" alt="" aria-hidden="true" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;">
                                 Ready to claim your FREE $Ember? Click a share button below to get started!
                             </p>
                         </div>
