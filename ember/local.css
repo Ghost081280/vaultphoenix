@@ -180,6 +180,134 @@ body::after {
     transform: rotate(90deg) scale(0.95);
 }
 
+/* TPA Modal Body */
+.tpa-modal-body {
+    padding: clamp(1.5rem, 3vw, 2rem);
+}
+
+.tpa-modal-body h4 {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin: 0 0 1rem;
+}
+
+.tpa-modal-body p {
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 1rem;
+}
+
+.tpa-modal-body ul,
+.tpa-modal-body ol {
+    margin: 0 0 1rem 1.5rem;
+    padding: 0;
+}
+
+.tpa-modal-body li {
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0.5rem;
+}
+
+.tpa-modal-body strong {
+    color: var(--ember-gold);
+    font-weight: 700;
+}
+
+/* TPA Modal Actions */
+.tpa-modal-actions {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border-top: 2px solid rgba(215, 51, 39, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tpa-download-btn,
+.tpa-agree-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-lg);
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    text-decoration: none;
+    min-height: 44px;
+}
+
+.tpa-download-btn {
+    background: rgba(215, 51, 39, 0.2);
+    color: #ffffff;
+    border-color: rgba(215, 51, 39, 0.4);
+}
+
+.tpa-download-btn:hover {
+    background: rgba(215, 51, 39, 0.3);
+    border-color: var(--ember-orange);
+    transform: translateY(-2px);
+}
+
+.tpa-download-btn img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
+}
+
+.tpa-agree-btn {
+    background: var(--ember-gradient-primary);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
+}
+
+.tpa-agree-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.tpa-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Hide body scroll when modal is open */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Scrollbar Styling for Modal */
+.tpa-modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tpa-modal-content::-webkit-scrollbar-track {
+    background: rgba(26, 15, 10, 0.6);
+    border-radius: 4px;
+}
+
+.tpa-modal-content::-webkit-scrollbar-thumb {
+    background: var(--ember-gradient-primary);
+    border-radius: 4px;
+}
+
+.tpa-modal-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, 
+        var(--ember-orange) 0%, 
+        var(--ember-red) 100%);
+}
+
 /* ===================================
    HERO SECTION - COMPLETE WITH METRICS
    =================================== */
