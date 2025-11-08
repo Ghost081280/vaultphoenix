@@ -3816,61 +3816,99 @@ body.modal-open {
 }
 
 /* ===================================
-   PRESALE SECTION
+   PRESALE SECTION - POLISHED & CLEAN
    Countdown, calculator, payment options
    =================================== */
 
 .presale-section {
-    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
-    background: var(--ember-gradient-background);
+    padding: clamp(5rem, 10vw, 7rem) var(--container-padding);
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.98) 0%, 
+        rgba(35, 20, 13, 0.95) 50%,
+        rgba(26, 15, 10, 0.98) 100%);
+    position: relative;
 }
+
+/* Subtle background pattern */
+.presale-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(240, 165, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(215, 51, 39, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* ===================================
+   PRESALE CONTENT WRAPPER
+   =================================== */
 
 .presale-content {
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
-/* Two Column Layout */
-.presale-two-column {
+/* ===================================
+   TWO COLUMN LAYOUT
+   =================================== */
+
+.presale-layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(1.5rem, 3vw, 2rem);
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+    gap: clamp(2rem, 4vw, 3rem);
+    margin-bottom: clamp(3rem, 6vw, 5rem);
 }
 
 /* Left Column */
-.presale-left-column {
+.presale-left {
     display: flex;
     flex-direction: column;
-    gap: clamp(1.5rem, 3vw, 2rem);
+    gap: clamp(2rem, 4vw, 2.5rem);
 }
 
 /* Right Column */
-.presale-right-column {
+.presale-right {
     display: flex;
     flex-direction: column;
 }
 
-/* Presale Metrics */
+/* ===================================
+   PRESALE METRICS
+   =================================== */
+
+.presale-metrics {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9) 0%, 
+        rgba(45, 24, 16, 0.8) 100%);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 1.5rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
+}
+
 .presale-metrics h3 {
     font-size: clamp(1.2rem, 2.5vw, 1.5rem);
     font-weight: 800;
     color: var(--ember-gold);
     text-align: center;
-    margin: 0 0 clamp(1rem, 2vw, 1.25rem);
+    margin: 0 0 1.5rem;
 }
 
-.metrics-grid-presale {
+.metrics-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(0.75rem, 1.5vw, 1rem);
+    gap: 1rem;
 }
 
 .metric-card {
-    background: var(--ember-gradient-card);
+    background: rgba(215, 51, 39, 0.1);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
-    padding: clamp(1rem, 2vw, 1.25rem);
+    border-radius: 1rem;
+    padding: 1.25rem;
     text-align: center;
     transition: all 0.3s ease;
     display: flex;
@@ -3886,13 +3924,16 @@ body.modal-open {
 }
 
 .metric-icon {
+    width: clamp(32px, 6vw, 40px);
+    height: clamp(32px, 6vw, 40px);
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
 .metric-icon img {
-    width: clamp(32px, 6vw, 40px);
-    height: clamp(32px, 6vw, 40px);
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
 }
@@ -3915,39 +3956,42 @@ body.modal-open {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* Presale Timer */
-.presale-timer {
-    padding: clamp(1.25rem, 2.5vw, 1.5rem);
+/* ===================================
+   COUNTDOWN TIMER
+   =================================== */
+
+.presale-countdown {
     background: linear-gradient(135deg, 
         rgba(215, 51, 39, 0.15) 0%, 
         rgba(240, 165, 0, 0.1) 100%);
     border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: var(--radius-xl);
+    border-radius: 1.5rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
 }
 
-.presale-timer h3 {
+.presale-countdown h3 {
     font-size: clamp(1.1rem, 2vw, 1.3rem);
     font-weight: 800;
     color: var(--ember-gold);
     text-align: center;
-    margin: 0 0 clamp(1rem, 2vw, 1.25rem);
+    margin: 0 0 1.5rem;
 }
 
-.countdown-timer {
+.countdown-display {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: clamp(0.5rem, 1.5vw, 0.75rem);
+    gap: 0.75rem;
 }
 
-.time-unit {
+.time-box {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    padding: clamp(0.75rem, 1.5vw, 1rem);
+    padding: 1rem;
     background: rgba(26, 15, 10, 0.6);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md);
+    border-radius: 0.75rem;
 }
 
 .time-value {
@@ -3966,12 +4010,15 @@ body.modal-open {
     letter-spacing: 0.05em;
 }
 
-/* Presale Progress */
+/* ===================================
+   PROGRESS BAR
+   =================================== */
+
 .presale-progress {
-    padding: clamp(1.25rem, 2.5vw, 1.5rem);
-    background: rgba(26, 15, 10, 0.6);
+    background: rgba(26, 15, 10, 0.8);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
+    border-radius: 1.5rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
 }
 
 .presale-progress h3 {
@@ -3982,11 +4029,15 @@ body.modal-open {
     margin: 0 0 1rem;
 }
 
+.progress-bar-wrapper {
+    margin-bottom: 0.75rem;
+}
+
 .progress-bar {
     width: 100%;
     height: 32px;
     background: rgba(26, 15, 10, 0.8);
-    border-radius: var(--radius-full);
+    border-radius: 999px;
     overflow: hidden;
     border: 2px solid rgba(215, 51, 39, 0.3);
     position: relative;
@@ -3994,7 +4045,7 @@ body.modal-open {
 
 .progress-fill {
     height: 100%;
-    background: var(--ember-gradient-primary);
+    background: linear-gradient(90deg, #d73327, #fb923c);
     transition: width 0.5s ease;
     box-shadow: 0 0 20px rgba(215, 51, 39, 0.6);
     position: relative;
@@ -4022,18 +4073,20 @@ body.modal-open {
 .progress-stats {
     display: flex;
     justify-content: space-between;
-    margin-top: 0.75rem;
     font-size: clamp(0.85rem, 1.4vw, 0.95rem);
     font-weight: 600;
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* Fund Usage */
+/* ===================================
+   FUND USAGE
+   =================================== */
+
 .fund-usage {
-    padding: clamp(1.25rem, 2.5vw, 1.5rem);
-    background: rgba(26, 15, 10, 0.6);
+    background: rgba(26, 15, 10, 0.8);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
+    border-radius: 1.5rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
 }
 
 .fund-usage h3 {
@@ -4041,10 +4094,10 @@ body.modal-open {
     font-weight: 800;
     color: var(--ember-gold);
     text-align: center;
-    margin: 0 0 clamp(1rem, 2vw, 1.25rem);
+    margin: 0 0 1.5rem;
 }
 
-.usage-breakdown {
+.usage-list {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -4056,11 +4109,11 @@ body.modal-open {
     gap: 0.75rem;
     padding: 0.75rem;
     background: rgba(215, 51, 39, 0.1);
-    border-radius: var(--radius-md);
+    border-radius: 0.75rem;
     border-left: 3px solid var(--ember-orange);
 }
 
-.usage-percentage {
+.usage-percent {
     font-size: clamp(1.1rem, 2vw, 1.3rem);
     font-weight: 900;
     color: var(--ember-gold);
@@ -4085,14 +4138,17 @@ body.modal-open {
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* Presale Timeline */
+/* ===================================
+   PRESALE TIMELINE
+   =================================== */
+
 .presale-timeline {
-    padding: clamp(1.25rem, 2.5vw, 1.5rem);
     background: linear-gradient(135deg, 
         rgba(215, 51, 39, 0.15) 0%, 
         rgba(240, 165, 0, 0.1) 100%);
     border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: var(--radius-xl);
+    border-radius: 1.5rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
 }
 
 .presale-timeline h3 {
@@ -4100,10 +4156,10 @@ body.modal-open {
     font-weight: 800;
     color: var(--ember-gold);
     text-align: center;
-    margin: 0 0 clamp(1rem, 2vw, 1.25rem);
+    margin: 0 0 1.5rem;
 }
 
-.timeline-items {
+.timeline-list {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -4116,7 +4172,7 @@ body.modal-open {
     padding: 0.875rem;
     background: rgba(26, 15, 10, 0.6);
     border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md);
+    border-radius: 0.75rem;
     transition: all 0.3s ease;
 }
 
@@ -4127,11 +4183,11 @@ body.modal-open {
 }
 
 .timeline-icon {
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
     flex-shrink: 0;
 }
 
@@ -4159,12 +4215,19 @@ body.modal-open {
     font-weight: 600;
 }
 
-/* Presale Card */
+/* ===================================
+   PRESALE CARD (Right Column)
+   =================================== */
+
 .presale-card {
-    background: var(--ember-gradient-card);
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9) 0%, 
+        rgba(45, 24, 16, 0.8) 100%);
     border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: var(--radius-2xl);
-    padding: clamp(1.5rem, 3vw, 2rem);
+    border-radius: 1.5rem;
+    padding: clamp(2rem, 4vw, 2.5rem);
+    position: sticky;
+    top: calc(var(--navbar-height) + 2rem);
 }
 
 .presale-card h3 {
@@ -4172,10 +4235,13 @@ body.modal-open {
     font-weight: 800;
     color: var(--ember-gold);
     text-align: center;
-    margin: 0 0 clamp(1.25rem, 2.5vw, 1.5rem);
+    margin: 0 0 1.5rem;
 }
 
-/* Investment Calculator */
+/* ===================================
+   INVESTMENT CALCULATOR
+   =================================== */
+
 .investment-calculator {
     margin-bottom: 1.5rem;
 }
@@ -4195,7 +4261,7 @@ body.modal-open {
     font-weight: 600;
     background: rgba(26, 15, 10, 0.6);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
+    border-radius: 0.75rem;
     color: #ffffff;
     transition: all 0.3s ease;
 }
@@ -4211,7 +4277,7 @@ body.modal-open {
     padding: 1.25rem;
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
+    border-radius: 0.75rem;
 }
 
 .result-line {
@@ -4227,19 +4293,22 @@ body.modal-open {
     border-bottom: 1px solid rgba(215, 51, 39, 0.2);
 }
 
-.result-line.total {
+.total-line {
     font-size: clamp(1.1rem, 2vw, 1.3rem);
     font-weight: 700;
     color: var(--ember-gold);
     padding-top: 0.75rem;
 }
 
-/* Vesting Info */
+/* ===================================
+   VESTING INFO
+   =================================== */
+
 .vesting-info {
     padding: 1.25rem;
     background: rgba(240, 165, 0, 0.1);
     border: 1px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-lg);
+    border-radius: 0.75rem;
     margin-bottom: 1.5rem;
 }
 
@@ -4262,25 +4331,28 @@ body.modal-open {
     gap: 0.75rem;
 }
 
-.vesting-percentage {
+.vesting-percent {
     font-size: clamp(1.2rem, 2vw, 1.4rem);
     font-weight: 900;
     color: var(--ember-gold);
     min-width: 60px;
 }
 
-.vesting-time {
+.vesting-text {
     flex: 1;
     font-size: clamp(0.9rem, 1.6vw, 1rem);
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* Payment Methods */
+/* ===================================
+   PAYMENT METHODS
+   =================================== */
+
 .payment-methods {
     padding: 1.25rem;
     background: rgba(26, 15, 10, 0.6);
     border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
+    border-radius: 0.75rem;
     margin-bottom: 1.5rem;
 }
 
@@ -4306,7 +4378,7 @@ body.modal-open {
     gap: 0.5rem;
     padding: 1rem;
     background: rgba(215, 51, 39, 0.1);
-    border-radius: var(--radius-md);
+    border-radius: 0.75rem;
     min-width: 100px;
 }
 
@@ -4338,12 +4410,15 @@ body.modal-open {
     margin: 0;
 }
 
-/* TPA Section */
+/* ===================================
+   TPA SECTION
+   =================================== */
+
 .tpa-section {
     padding: 1.5rem;
     background: rgba(240, 165, 0, 0.1);
     border: 2px solid rgba(240, 165, 0, 0.3);
-    border-radius: var(--radius-lg);
+    border-radius: 0.75rem;
     margin-bottom: 1.5rem;
 }
 
@@ -4371,7 +4446,7 @@ body.modal-open {
     margin: 0 0 1rem;
 }
 
-.tpa-download-button {
+.tpa-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4383,31 +4458,33 @@ body.modal-open {
     font-size: clamp(0.95rem, 1.6vw, 1.05rem);
     font-weight: 600;
     border: 2px solid rgba(215, 51, 39, 0.4);
-    border-radius: var(--radius-lg);
+    border-radius: 0.75rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-height: 44px;
 }
 
-.tpa-download-button img {
+.tpa-button img {
     width: 28px;
     height: 28px;
     object-fit: contain;
     filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
 }
 
-.tpa-download-button:hover {
+.tpa-button:hover {
     background: rgba(215, 51, 39, 0.3);
     border-color: var(--ember-orange);
     transform: translateY(-2px);
 }
 
-/* TPA Compliance Checkbox */
+/* ===================================
+   TPA COMPLIANCE
+   =================================== */
+
 .tpa-compliance {
     margin-bottom: 1.5rem;
 }
 
-.tpa-checkbox-container {
+.tpa-label {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
@@ -4415,11 +4492,11 @@ body.modal-open {
     padding: 1rem;
     background: rgba(26, 15, 10, 0.6);
     border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-md);
+    border-radius: 0.75rem;
     transition: all 0.3s ease;
 }
 
-.tpa-checkbox-container:hover {
+.tpa-label:hover {
     background: rgba(45, 24, 16, 0.7);
     border-color: rgba(215, 51, 39, 0.5);
 }
@@ -4438,26 +4515,26 @@ body.modal-open {
 }
 
 .tpa-checkbox:checked {
-    background: var(--ember-gradient-primary);
+    background: linear-gradient(135deg, #d73327, #c62828);
     border-color: var(--ember-orange);
 }
 
-.tpa-checkbox-text {
+.tpa-text {
     flex: 1;
     font-size: clamp(0.85rem, 1.5vw, 0.95rem);
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
 }
 
-.tpa-compliance-note {
+.tpa-note {
     margin-top: 0.75rem;
     padding: 0.75rem;
     background: rgba(215, 51, 39, 0.1);
     border-left: 3px solid var(--ember-orange);
-    border-radius: var(--radius-md);
+    border-radius: 0.5rem;
 }
 
-.tpa-compliance-note p {
+.tpa-note p {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -4467,14 +4544,17 @@ body.modal-open {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.tpa-compliance-note img {
+.tpa-note img {
     width: 28px;
     height: 28px;
     flex-shrink: 0;
     filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
 }
 
-/* Presale Button */
+/* ===================================
+   PRESALE BUTTON
+   =================================== */
+
 .presale-button {
     display: flex;
     align-items: center;
@@ -4482,17 +4562,16 @@ body.modal-open {
     gap: 0.75rem;
     width: 100%;
     padding: 1.125rem 2rem;
-    background: var(--ember-gradient-primary);
+    background: linear-gradient(135deg, #d73327 0%, #c62828 50%, #b71c1c 100%);
     color: #ffffff;
     font-size: clamp(1rem, 1.8vw, 1.15rem);
     font-weight: 700;
     border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-xl);
+    border-radius: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
     margin-bottom: 1.25rem;
-    min-height: 44px;
 }
 
 .presale-button img {
@@ -4513,7 +4592,10 @@ body.modal-open {
     cursor: not-allowed;
 }
 
-/* Presale Note */
+/* ===================================
+   PRESALE NOTE
+   =================================== */
+
 .presale-note {
     display: flex;
     flex-direction: column;
@@ -4537,9 +4619,12 @@ body.modal-open {
     filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
 }
 
-/* Presale Benefits */
+/* ===================================
+   PRESALE BENEFITS (Full Width)
+   =================================== */
+
 .presale-benefits {
-    margin-top: clamp(2rem, 4vw, 3rem);
+    margin-top: clamp(3rem, 6vw, 5rem);
 }
 
 .presale-benefits h3 {
@@ -4556,42 +4641,50 @@ body.modal-open {
     gap: clamp(1.5rem, 3vw, 2rem);
 }
 
-.benefit-item {
-    background: var(--ember-gradient-card);
+.benefit-card {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9) 0%, 
+        rgba(45, 24, 16, 0.8) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
+    border-radius: 1.5rem;
     padding: clamp(1.5rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    gap: 1rem;
     transition: all 0.3s ease;
 }
 
-.benefit-item:hover {
+.benefit-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 36px rgba(215, 51, 39, 0.4);
     border-color: var(--ember-orange);
 }
 
 .benefit-icon {
+    width: clamp(56px, 10vw, 72px);
+    height: clamp(56px, 10vw, 72px);
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 1.25rem;
 }
 
 .benefit-icon img {
-    width: clamp(56px, 10vw, 72px);
-    height: clamp(56px, 10vw, 72px);
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
 }
 
-.benefit-item h4 {
+.benefit-card h4 {
     font-size: clamp(1.2rem, 2.5vw, 1.5rem);
     font-weight: 700;
     color: #ffffff;
-    margin: 0 0 1rem;
+    margin: 0;
 }
 
-.benefit-item p {
+.benefit-card p {
     font-size: clamp(0.9rem, 1.6vw, 1rem);
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
@@ -4599,12 +4692,11 @@ body.modal-open {
 }
 
 /* ===================================
-   RESPONSIVE DESIGN - TABLET & DESKTOP
+   RESPONSIVE DESIGN
    =================================== */
 
 /* Tablet (768px+) */
 @media (min-width: 768px) {
-    /* Benefits grid 2 columns */
     .benefits-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -4612,13 +4704,11 @@ body.modal-open {
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
-    /* Two column layout */
-    .presale-two-column {
+    .presale-layout {
         grid-template-columns: 1fr 450px;
         align-items: start;
     }
     
-    /* Benefits grid 4 columns */
     .benefits-grid {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -4626,8 +4716,44 @@ body.modal-open {
 
 /* Large Desktop (1200px+) */
 @media (min-width: 1200px) {
-    .presale-two-column {
+    .presale-layout {
         grid-template-columns: 1fr 480px;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .countdown-display {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .presale-section {
+        padding: 4rem 1rem;
+    }
+    
+    .presale-card {
+        position: static;
+    }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .progress-fill::after {
+        animation: none;
+    }
+    
+    .metric-card:hover,
+    .timeline-item:hover,
+    .benefit-card:hover,
+    .presale-button:hover,
+    .tpa-button:hover {
+        transform: none;
     }
 }
 
