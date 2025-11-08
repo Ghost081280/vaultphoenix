@@ -1498,32 +1498,29 @@
     </div>
 </section>
 
-        <!-- =================================================================
-     PRESALE SECTION
-     Countdown, calculator, payment options
-     ================================================================= -->
-<section class="ember-section presale-section" id="presale" aria-labelledby="presale-title">
+        <!-- PRESALE SECTION -->
+<section class="presale-section" id="presale" aria-labelledby="presale-title">
     <div class="container">
         <!-- Section Header -->
-        <div class="ember-section-header">
-            <div class="ember-section-icon ember-section-icon-large" aria-hidden="true">
+        <div class="section-header">
+            <div class="section-icon">
                 <img src="images/PresalePrice.PNG" alt="">
             </div>
-            <h2 id="presale-title" class="ember-section-title">$Ember Token Presale</h2>
-            <p class="ember-section-subtitle">Secure your tokens at launch price — help build the AR gaming distribution ecosystem with GPS & Beacon technology</p>
+            <h2 id="presale-title" class="section-title">$Ember Token Presale</h2>
+            <p class="section-subtitle">Secure your tokens at launch price — help build the AR gaming distribution ecosystem with GPS & Beacon technology</p>
         </div>
         
         <div class="presale-content">
             <!-- Two Column Layout -->
-            <div class="presale-two-column">
-                <!-- Left Column -->
-                <div class="presale-left-column">
+            <div class="presale-layout">
+                <!-- Left Column: Details & Countdown -->
+                <div class="presale-left">
                     <!-- Presale Key Metrics -->
                     <div class="presale-metrics">
                         <h3>Presale Details</h3>
-                        <div class="metrics-grid-presale">
+                        <div class="metrics-grid">
                             <div class="metric-card">
-                                <div class="metric-icon" aria-hidden="true">
+                                <div class="metric-icon">
                                     <img src="images/PresalePrice.PNG" alt="">
                                 </div>
                                 <div class="metric-value">166.7M</div>
@@ -1531,7 +1528,7 @@
                                 <div class="metric-desc">16.67% of total supply</div>
                             </div>
                             <div class="metric-card">
-                                <div class="metric-icon" aria-hidden="true">
+                                <div class="metric-icon">
                                     <img src="images/VPEmberCoin.PNG" alt="">
                                 </div>
                                 <div class="metric-value">$0.003</div>
@@ -1539,7 +1536,7 @@
                                 <div class="metric-desc">Fixed presale rate</div>
                             </div>
                             <div class="metric-card">
-                                <div class="metric-icon" aria-hidden="true">
+                                <div class="metric-icon">
                                     <img src="images/HardCap.PNG" alt="">
                                 </div>
                                 <div class="metric-value">$500K</div>
@@ -1547,7 +1544,7 @@
                                 <div class="metric-desc">Maximum raise target</div>
                             </div>
                             <div class="metric-card">
-                                <div class="metric-icon" aria-hidden="true">
+                                <div class="metric-icon">
                                     <img src="images/EmberRepeatArrows.PNG" alt="">
                                 </div>
                                 <div class="metric-value">45 Days</div>
@@ -1558,23 +1555,23 @@
                     </div>
                     
                     <!-- Countdown Timer -->
-                    <div class="presale-timer">
+                    <div class="presale-countdown">
                         <h3>Presale Launch Countdown</h3>
-                        <div class="countdown-timer" role="timer" aria-live="polite" aria-atomic="true">
-                            <div class="time-unit">
-                                <span class="time-value" id="days" aria-label="Days remaining">--</span>
+                        <div class="countdown-display">
+                            <div class="time-box">
+                                <span class="time-value" id="days">--</span>
                                 <span class="time-label">Days</span>
                             </div>
-                            <div class="time-unit">
-                                <span class="time-value" id="hours" aria-label="Hours remaining">--</span>
+                            <div class="time-box">
+                                <span class="time-value" id="hours">--</span>
                                 <span class="time-label">Hours</span>
                             </div>
-                            <div class="time-unit">
-                                <span class="time-value" id="minutes" aria-label="Minutes remaining">--</span>
+                            <div class="time-box">
+                                <span class="time-value" id="minutes">--</span>
                                 <span class="time-label">Minutes</span>
                             </div>
-                            <div class="time-unit">
-                                <span class="time-value" id="seconds" aria-label="Seconds remaining">--</span>
+                            <div class="time-box">
+                                <span class="time-value" id="seconds">--</span>
                                 <span class="time-label">Seconds</span>
                             </div>
                         </div>
@@ -1583,8 +1580,10 @@
                     <!-- Progress Bar -->
                     <div class="presale-progress">
                         <h3>Funding Progress</h3>
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="500000" aria-label="Presale funding progress">
-                            <div class="progress-fill" style="width: 0%"></div>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
                         </div>
                         <div class="progress-stats">
                             <span>$0 raised</span>
@@ -1595,30 +1594,30 @@
                     <!-- Fund Usage Breakdown -->
                     <div class="fund-usage">
                         <h3>Development Fund Allocation</h3>
-                        <div class="usage-breakdown">
+                        <div class="usage-list">
                             <div class="usage-item">
-                                <div class="usage-percentage">40%</div>
+                                <div class="usage-percent">40%</div>
                                 <div class="usage-details">
                                     <div class="usage-title">Liquidity Pool</div>
                                     <div class="usage-desc">$200K locked in liquidity pool for 3 months on Solana</div>
                                 </div>
                             </div>
                             <div class="usage-item">
-                                <div class="usage-percentage">35%</div>
+                                <div class="usage-percent">35%</div>
                                 <div class="usage-details">
                                     <div class="usage-title">Development</div>
                                     <div class="usage-desc">White-label app with GPS & Beacon, SDK, platform</div>
                                 </div>
                             </div>
                             <div class="usage-item">
-                                <div class="usage-percentage">15%</div>
+                                <div class="usage-percent">15%</div>
                                 <div class="usage-details">
                                     <div class="usage-title">Legal & Compliance</div>
                                     <div class="usage-desc">Legal team, audits, regulatory compliance</div>
                                 </div>
                             </div>
                             <div class="usage-item">
-                                <div class="usage-percentage">10%</div>
+                                <div class="usage-percent">10%</div>
                                 <div class="usage-details">
                                     <div class="usage-title">Marketing</div>
                                     <div class="usage-desc">Platform Operator acquisition, partnerships</div>
@@ -1630,9 +1629,9 @@
                     <!-- Presale Timeline -->
                     <div class="presale-timeline">
                         <h3>Presale Timeline</h3>
-                        <div class="timeline-items">
+                        <div class="timeline-list">
                             <div class="timeline-item">
-                                <div class="timeline-icon" aria-hidden="true">
+                                <div class="timeline-icon">
                                     <img src="images/VPEmberFlame.svg" alt="">
                                 </div>
                                 <div class="timeline-content">
@@ -1641,7 +1640,7 @@
                                 </div>
                             </div>
                             <div class="timeline-item">
-                                <div class="timeline-icon" aria-hidden="true">
+                                <div class="timeline-icon">
                                     <img src="images/EmberRepeatArrows.PNG" alt="">
                                 </div>
                                 <div class="timeline-content">
@@ -1650,7 +1649,7 @@
                                 </div>
                             </div>
                             <div class="timeline-item">
-                                <div class="timeline-icon" aria-hidden="true">
+                                <div class="timeline-icon">
                                     <img src="images/VPEmberCoin.PNG" alt="">
                                 </div>
                                 <div class="timeline-content">
@@ -1659,7 +1658,7 @@
                                 </div>
                             </div>
                             <div class="timeline-item">
-                                <div class="timeline-icon" aria-hidden="true">
+                                <div class="timeline-icon">
                                     <img src="images/EmberCoinLock.PNG" alt="">
                                 </div>
                                 <div class="timeline-content">
@@ -1671,9 +1670,9 @@
                     </div>
                 </div>
 
-                <!-- Right Column -->
-                <div class="presale-right-column">
-                    <!-- Calculator & Form Card -->
+                <!-- Right Column: Calculator & Form -->
+                <div class="presale-right">
+                    <!-- Presale Card -->
                     <div class="presale-card">
                         <h3>Join the Presale</h3>
                         
@@ -1685,10 +1684,8 @@
                                    placeholder="10" 
                                    value="10" 
                                    min="10" 
-                                   max="50000"
-                                   aria-label="Investment amount in USD"
-                                   aria-describedby="calculation-result">
-                            <div class="calculation-result" id="calculation-result">
+                                   max="50000">
+                            <div class="calculation-result">
                                 <div class="result-line">
                                     <span>EMBER Tokens:</span>
                                     <span id="ember-tokens">3,333</span>
@@ -1697,7 +1694,7 @@
                                     <span>Price per Token:</span>
                                     <span>$0.003</span>
                                 </div>
-                                <div class="result-line total">
+                                <div class="result-line total-line">
                                     <span>Total Investment:</span>
                                     <span id="total-investment">$10</span>
                                 </div>
@@ -1709,8 +1706,8 @@
                             <h4>Vesting Schedule</h4>
                             <div class="vesting-details">
                                 <div class="vesting-item">
-                                    <span class="vesting-percentage">100%</span>
-                                    <span class="vesting-time">Tokens received at TGE but locked for 90 days</span>
+                                    <span class="vesting-percent">100%</span>
+                                    <span class="vesting-text">Tokens received at TGE but locked for 90 days</span>
                                 </div>
                             </div>
                         </div>
@@ -1721,7 +1718,7 @@
                             <div class="payment-options">
                                 <div class="payment-option">
                                     <span class="payment-icon">
-                                        <img src="images/VPEmberCoin.PNG" alt="" aria-hidden="true">
+                                        <img src="images/VPEmberCoin.PNG" alt="">
                                     </span>
                                     <span>SOL</span>
                                 </div>
@@ -1736,96 +1733,95 @@
                         <!-- TPA Section -->
                         <div class="tpa-section">
                             <h4>
-                                <img src="images/TechnicalFoundation.PNG" alt="" aria-hidden="true">
+                                <img src="images/TechnicalFoundation.PNG" alt="">
                                 Required Legal Documents
                             </h4>
                             <p class="tpa-instruction">Review both the Token Presale Agreement and Token Disclosures before proceeding with your investment.</p>
-                            <button class="tpa-download-button" onclick="window.showTpaModal()" aria-label="Review legal documents for $Ember Token presale">
-                                <img src="images/TechnicalFoundation.PNG" alt="" aria-hidden="true">
+                            <button class="tpa-button" onclick="window.showTpaModal()">
+                                <img src="images/TechnicalFoundation.PNG" alt="">
                                 Review Legal Documents
                             </button>
                         </div>
 
                         <!-- TPA Compliance Checkbox -->
                         <div class="tpa-compliance">
-                            <label class="tpa-checkbox-container">
+                            <label class="tpa-label">
                                 <input type="checkbox" id="tpa-agree-checkbox" class="tpa-checkbox">
-                                <span class="tpa-checkmark"></span>
-                                <span class="tpa-checkbox-text">I have read and agree to the Token Presale Agreement and understand all Token Disclosures.</span>
+                                <span class="tpa-text">I have read and agree to the Token Presale Agreement and understand all Token Disclosures.</span>
                             </label>
-                            <div class="tpa-compliance-note">
+                            <div class="tpa-note">
                                 <p>
-                                    <img src="images/Legalandfinancialoversight.PNG" alt="" aria-hidden="true">
+                                    <img src="images/Legalandfinancialoversight.PNG" alt="">
                                     You must review and agree to both documents before proceeding with your purchase.
                                 </p>
                             </div>
                         </div>
                         
                         <!-- Presale Button -->
-                        <button class="presale-button" id="presale-buy-button" disabled aria-label="Join $Ember Token presale">
-                            <img src="images/VPEmberFlame.svg" alt="" aria-hidden="true">
+                        <button class="presale-button" id="presale-buy-button" disabled>
+                            <img src="images/VPEmberFlame.svg" alt="">
                             Join Presale (Coming Soon)
                         </button>
                         
                         <!-- Presale Note -->
                         <div class="presale-note">
                             <p>
-                                <img src="images/Legalandfinancialoversight.PNG" alt="" aria-hidden="true">
+                                <img src="images/Legalandfinancialoversight.PNG" alt="">
                                 Minimum investment: $10 USD | Maximum: $50,000 USD
                             </p>
                             <p>
-                                <img src="images/EmberCoinLock.PNG" alt="" aria-hidden="true">
+                                <img src="images/EmberCoinLock.PNG" alt="">
                                 Tokens distributed at TGE (Q4 2025)
                             </p>
                             <p>
-                                <img src="images/PhoenixSafe.PNG" alt="" aria-hidden="true">
+                                <img src="images/PhoenixSafe.PNG" alt="">
                                 Multi-sig security, KYC required for large purchases
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Presale Benefits (Full Width Below) -->
-        <div class="presale-benefits">
-            <h3>Why Join the Presale?</h3>
-            <div class="benefits-grid">
-                <!-- Early Access Price -->
-                <article class="benefit-item">
-                    <span class="benefit-icon" aria-hidden="true">
-                        <img src="images/VPEmberCoin.PNG" alt="">
-                    </span>
-                    <h4>Early Access Price</h4>
-                    <p>Secure tokens at $0.003 before massive demand from Platform Operators and Advertisers deploying GPS & Beacon campaigns</p>
-                </article>
-                
-                <!-- Built-In Demand -->
-                <article class="benefit-item">
-                    <span class="benefit-icon" aria-hidden="true">
-                        <img src="images/EmberGameController.PNG" alt="">
-                    </span>
-                    <h4>Built-In Demand</h4>
-                    <p>White-label apps and SDK licenses with GPS & Beacon support create ongoing token demand through management system</p>
-                </article>
-                
-                <!-- Liquidity Guarantee -->
-                <article class="benefit-item">
-                    <span class="benefit-icon" aria-hidden="true">
-                        <img src="images/TotalSupply.PNG" alt="">
-                    </span>
-                    <h4>Liquidity Guarantee</h4>
-                    <p>$200K (40% of funds) locked in liquidity pool for 3 months to ensure trading depth during investor lock period</p>
-                </article>
-                
-                <!-- Platform Utility -->
-                <article class="benefit-item">
-                    <span class="benefit-icon" aria-hidden="true">
-                        <img src="images/IphoneVPLogo.PNG" alt="">
-                    </span>
-                    <h4>Platform Utility</h4>
-                    <p>Essential for GPS & Beacon campaign deployment, app operations, and Advertiser participation</p>
-                </article>
+            
+            <!-- Presale Benefits (Full Width Below) -->
+            <div class="presale-benefits">
+                <h3>Why Join the Presale?</h3>
+                <div class="benefits-grid">
+                    <!-- Early Access Price -->
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <img src="images/VPEmberCoin.PNG" alt="">
+                        </div>
+                        <h4>Early Access Price</h4>
+                        <p>Secure tokens at $0.003 before massive demand from Platform Operators and Advertisers deploying GPS & Beacon campaigns</p>
+                    </article>
+                    
+                    <!-- Built-In Demand -->
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <img src="images/EmberGameController.PNG" alt="">
+                        </div>
+                        <h4>Built-In Demand</h4>
+                        <p>White-label apps and SDK licenses with GPS & Beacon support create ongoing token demand through management system</p>
+                    </article>
+                    
+                    <!-- Liquidity Guarantee -->
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <img src="images/TotalSupply.PNG" alt="">
+                        </div>
+                        <h4>Liquidity Guarantee</h4>
+                        <p>$200K (40% of funds) locked in liquidity pool for 3 months to ensure trading depth during investor lock period</p>
+                    </article>
+                    
+                    <!-- Platform Utility -->
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <img src="images/IphoneVPLogo.PNG" alt="">
+                        </div>
+                        <h4>Platform Utility</h4>
+                        <p>Essential for GPS & Beacon campaign deployment, app operations, and Advertiser participation</p>
+                    </article>
+                </div>
             </div>
         </div>
     </div>
