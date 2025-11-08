@@ -324,12 +324,12 @@ body.modal-open {
    END SECTION 1: MODAL SYSTEM
    =================================== */
 /* ===================================
-   HERO SECTION - COMPACT VERSION
+   HERO SECTION BASE
    =================================== */
 .ember-section.hero-section {
     padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 3rem;
     background: var(--ember-gradient-background);
-    min-height: auto; /* Remove min-height to make it more compact */
+    min-height: auto;
 }
 
 .hero-section .container {
@@ -343,19 +343,23 @@ body.modal-open {
     margin: 0 auto;
 }
 
-/* Hero Icon */
+/* ===================================
+   HERO ICON - KEEP LARGE SIZE (120px)
+   =================================== */
 .ember-section-icon-large {
     display: inline-block;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
 }
 
 .ember-section-icon-large img {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
 }
 
-/* Hero Title */
+/* ===================================
+   HERO TEXT ELEMENTS
+   =================================== */
 .ember-section-title {
     font-size: clamp(2.2rem, 5vw, 3.2rem);
     font-weight: 800;
@@ -364,7 +368,6 @@ body.modal-open {
     line-height: 1.2;
 }
 
-/* Hero Subtitle */
 .ember-section-subtitle {
     font-size: clamp(1.1rem, 2.5vw, 1.5rem);
     font-weight: 700;
@@ -373,7 +376,9 @@ body.modal-open {
     line-height: 1.4;
 }
 
-/* Hero Description */
+/* ===================================
+   HERO DESCRIPTION - WITH SPACING AFTER
+   =================================== */
 .ember-section-description {
     font-size: clamp(0.95rem, 1.8vw, 1.1rem);
     line-height: 1.7;
@@ -384,65 +389,71 @@ body.modal-open {
     margin-right: auto;
 }
 
-/* Highlight Gold Spans */
 .highlight-gold {
     color: var(--ember-gold);
     font-weight: 700;
 }
 
 /* ===================================
-   HERO TOKEN METRICS - COMPACT
+   HERO TOKEN METRICS - COMPACT CARDS
    =================================== */
+.hero-token-metrics,
 .hero-token-metrics-compact {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
+    gap: 1rem; /* Reduced from 1.5rem */
     max-width: 750px;
     margin: 0 auto 2.5rem; /* ✅ SPACING BELOW METRICS */
 }
 
+.hero-metric-card,
 .hero-metric-card-compact {
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.9) 0%, 
         rgba(45, 24, 16, 0.85) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: 16px;
-    padding: 1.25rem 1rem; /* Reduced from 1.5rem */
+    border-radius: 14px; /* Slightly smaller radius */
+    padding: 1rem 0.85rem; /* Reduced from 1.5rem */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.65rem; /* Reduced from 0.85rem */
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+.hero-metric-card:hover,
 .hero-metric-card-compact:hover {
     transform: translateY(-5px);
     border-color: var(--ember-gold);
     box-shadow: 0 8px 25px rgba(240, 165, 0, 0.3);
 }
 
+.hero-metric-icon,
 .hero-metric-icon-compact {
-    width: 48px; /* Reduced from 56px */
-    height: 48px;
+    width: 44px; /* Reduced from 56px */
+    height: 44px;
     flex-shrink: 0;
 }
 
+.hero-metric-icon img,
 .hero-metric-icon-compact img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
+.hero-metric-value,
 .hero-metric-value-compact {
-    font-size: 1.8rem; /* Reduced from 2rem */
+    font-size: 1.65rem; /* Reduced from 2rem */
     font-weight: 800;
     color: var(--ember-gold);
     line-height: 1;
 }
 
+.hero-metric-label,
 .hero-metric-label-compact {
-    font-size: 0.75rem; /* Reduced from 0.8rem */
+    font-size: 0.7rem; /* Reduced from 0.8rem */
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);
     text-transform: uppercase;
@@ -451,8 +462,9 @@ body.modal-open {
 }
 
 /* ===================================
-   HERO BUTTONS - COMPACT
+   HERO BUTTONS - COMPACT SIZE
    =================================== */
+.hero-buttons,
 .hero-buttons-compact {
     display: flex;
     align-items: center;
@@ -463,28 +475,31 @@ body.modal-open {
     margin: 0 auto;
 }
 
+.hero-btn,
 .hero-btn-compact {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.85rem 1.75rem; /* Reduced from 1rem 2rem */
+    padding: 0.75rem 1.5rem; /* Reduced from 1rem 2rem */
     border-radius: 12px;
     font-weight: 700;
-    font-size: 0.95rem; /* Reduced from 1rem */
+    font-size: 0.9rem; /* Reduced from 1rem */
     text-decoration: none;
     transition: all 0.3s ease;
     border: 2px solid transparent;
     cursor: pointer;
-    min-height: 48px; /* Touch target */
+    min-height: 46px; /* Slightly smaller touch target */
 }
 
+.hero-btn img,
 .hero-btn-compact img {
     width: 20px; /* Reduced from 24px */
     height: 20px;
     object-fit: contain;
 }
 
+.hero-btn-primary,
 .hero-btn-primary-compact {
     background: linear-gradient(135deg, #d73327, #c62828);
     color: white;
@@ -492,18 +507,21 @@ body.modal-open {
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
 }
 
+.hero-btn-primary:hover,
 .hero-btn-primary-compact:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(215, 51, 39, 0.5);
     border-color: rgba(255, 255, 255, 0.3);
 }
 
+.hero-btn-secondary,
 .hero-btn-secondary-compact {
     background: rgba(215, 51, 39, 0.1);
     color: var(--ember-gold);
     border-color: rgba(215, 51, 39, 0.4);
 }
 
+.hero-btn-secondary:hover,
 .hero-btn-secondary-compact:hover {
     background: rgba(215, 51, 39, 0.2);
     border-color: var(--ember-gold);
@@ -518,26 +536,36 @@ body.modal-open {
         padding: calc(var(--navbar-height) + 2.5rem) var(--container-padding) 2.5rem;
     }
     
+    .ember-section-icon-large img {
+        width: 100px; /* Slightly smaller on tablet */
+        height: 100px;
+    }
+    
+    .hero-token-metrics,
     .hero-token-metrics-compact {
         max-width: 650px;
-        gap: 1rem;
+        gap: 0.85rem;
     }
     
+    .hero-metric-card,
     .hero-metric-card-compact {
-        padding: 1.15rem 0.85rem;
+        padding: 0.95rem 0.75rem;
     }
     
+    .hero-metric-icon,
     .hero-metric-icon-compact {
-        width: 44px;
-        height: 44px;
+        width: 40px;
+        height: 40px;
     }
     
+    .hero-metric-value,
     .hero-metric-value-compact {
-        font-size: 1.65rem;
+        font-size: 1.5rem;
     }
     
+    .hero-metric-label,
     .hero-metric-label-compact {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
     }
 }
 
@@ -550,8 +578,8 @@ body.modal-open {
     }
     
     .ember-section-icon-large img {
-        width: 70px;
-        height: 70px;
+        width: 90px; /* Smaller on mobile but still prominent */
+        height: 90px;
     }
     
     .ember-section-description {
@@ -560,48 +588,56 @@ body.modal-open {
     }
     
     /* Stack metrics vertically on mobile */
+    .hero-token-metrics,
     .hero-token-metrics-compact {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 0.85rem;
         max-width: 350px;
         margin-bottom: 2rem; /* Reduced spacing on mobile */
     }
     
+    .hero-metric-card,
     .hero-metric-card-compact {
-        padding: 1.25rem 1.5rem;
+        padding: 1rem 1.25rem;
         flex-direction: row;
         justify-content: flex-start;
-        gap: 1rem;
+        gap: 0.85rem;
     }
     
+    .hero-metric-icon,
     .hero-metric-icon-compact {
-        width: 48px;
-        height: 48px;
+        width: 42px;
+        height: 42px;
     }
     
+    .hero-metric-value,
     .hero-metric-value-compact {
-        font-size: 1.75rem;
+        font-size: 1.6rem;
     }
     
+    .hero-metric-label,
     .hero-metric-label-compact {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         text-align: left;
     }
     
     /* Stack buttons vertically on mobile */
+    .hero-buttons,
     .hero-buttons-compact {
         flex-direction: column;
-        gap: 0.85rem;
+        gap: 0.75rem;
         max-width: 100%;
     }
     
+    .hero-btn,
     .hero-btn-compact {
         width: 100%;
         max-width: 350px;
-        padding: 1rem 2rem;
-        font-size: 1rem;
+        padding: 0.85rem 1.75rem;
+        font-size: 0.95rem;
     }
     
+    .hero-btn img,
     .hero-btn-compact img {
         width: 22px;
         height: 22px;
@@ -617,8 +653,8 @@ body.modal-open {
     }
     
     .ember-section-icon-large img {
-        width: 60px;
-        height: 60px;
+        width: 80px; /* Smaller on small mobile */
+        height: 80px;
     }
     
     .ember-section-title {
@@ -634,31 +670,37 @@ body.modal-open {
         margin-bottom: 1.75rem;
     }
     
+    .hero-token-metrics,
     .hero-token-metrics-compact {
         max-width: 100%;
         margin-bottom: 1.75rem;
     }
     
+    .hero-metric-card,
     .hero-metric-card-compact {
-        padding: 1.15rem 1.25rem;
+        padding: 0.95rem 1.15rem;
     }
     
+    .hero-metric-icon,
     .hero-metric-icon-compact {
-        width: 44px;
-        height: 44px;
+        width: 40px;
+        height: 40px;
     }
     
+    .hero-metric-value,
     .hero-metric-value-compact {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
     
+    .hero-metric-label,
     .hero-metric-label-compact {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
     }
     
+    .hero-btn,
     .hero-btn-compact {
         max-width: 100%;
-        padding: 0.95rem 1.5rem;
+        padding: 0.8rem 1.5rem;
     }
 }
 /* ===================================
