@@ -324,320 +324,341 @@ body.modal-open {
    END SECTION 1: MODAL SYSTEM
    =================================== */
 /* ===================================
-   SECTION 2: HERO SECTION - OPTIMIZED v2
-   Complete hero with metrics, buttons, and proper spacing
+   HERO SECTION - COMPACT VERSION
    =================================== */
-
-/* ===================================
-   GLOBAL SECTION SPACING
-   =================================== */
-
-.ember-section,
-.how-it-works-section,
-.whitepaper-content,
-.roadmap-section,
-.team-section,
-.tokenomics-section,
-.presale-section,
-.cta-presale-section-enhanced,
-.legal-compliance-section,
-.ember-airdrop-section {
-    padding-bottom: clamp(4rem, 8vw, 6rem) !important;
+.ember-section.hero-section {
+    padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 3rem;
+    background: var(--ember-gradient-background);
+    min-height: auto; /* Remove min-height to make it more compact */
 }
 
-.ember-airdrop-outer-module,
-.presale-card,
-.stakeholder-card,
-.whitepaper-overview,
-.token-distribution {
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+.hero-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* ===================================
-   HERO CONTAINER
-   =================================== */
-
-#home.ember-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 140px;
-    padding-bottom: 80px;
-    background: linear-gradient(135deg, 
-        rgba(13, 12, 12, 1) 0%, 
-        rgba(26, 15, 10, 0.95) 50%, 
-        rgba(13, 12, 12, 1) 100%);
+.ember-section-header {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-#home .ember-section-header {
-    margin-bottom: 0;
+/* Hero Icon */
+.ember-section-icon-large {
+    display: inline-block;
+    margin-bottom: 1.25rem;
 }
 
-/* ===================================
-   HERO TYPOGRAPHY
-   =================================== */
-
-#home .ember-section-title {
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    font-weight: 900;
-    margin-bottom: 1.5rem;
+.ember-section-icon-large img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
 }
 
-#home .ember-section-subtitle:first-of-type {
-    font-size: clamp(1.3rem, 3.5vw, 2.2rem);
+/* Hero Title */
+.ember-section-title {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+/* Hero Subtitle */
+.ember-section-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1rem;
+    line-height: 1.4;
 }
 
-#home .ember-section-subtitle:last-of-type {
-    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
-    font-weight: 400;
+/* Hero Description */
+.ember-section-description {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
     line-height: 1.7;
-    margin-bottom: clamp(3rem, 5vw, 4rem); /* INCREASED SPACING AFTER DESCRIPTION */
-    max-width: 850px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2.5rem; /* ✅ SPACING AFTER DESCRIPTION */
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    color: rgba(255, 255, 255, 0.85);
 }
 
+/* Highlight Gold Spans */
 .highlight-gold {
-    color: #f0a500;
+    color: var(--ember-gold);
     font-weight: 700;
-}
-
-/* ===================================
-   HERO COIN ICON
-   =================================== */
-
-#home .ember-section-icon-large {
-    width: clamp(180px, 25vw, 280px);
-    height: clamp(180px, 25vw, 280px);
-    position: relative;
-}
-
-#home .ember-section-icon-large img {
-    animation: coin-rock 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.6))
-            drop-shadow(0 0 50px rgba(240, 165, 0, 0.4));
-}
-
-#home .ember-section-icon-large::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, 
-        rgba(240, 165, 0, 0.4) 0%, 
-        rgba(215, 51, 39, 0.3) 30%, 
-        transparent 70%);
-    border-radius: 50%;
-    z-index: -1;
-    animation: glow-pulse 3s ease-in-out infinite;
-}
-
-@keyframes coin-rock {
-    0%, 100% { transform: rotate(-3deg); }
-    50% { transform: rotate(3deg); }
-}
-
-@keyframes glow-pulse {
-    0%, 100% {
-        opacity: 0.6;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.1);
-    }
 }
 
 /* ===================================
    HERO TOKEN METRICS - COMPACT
    =================================== */
-
-.hero-token-metrics {
+.hero-token-metrics-compact {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    max-width: 900px;
-    margin: 0 auto clamp(2.5rem, 4vw, 3.5rem); /* Spacing after metrics */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 750px;
+    margin: 0 auto 2.5rem; /* ✅ SPACING BELOW METRICS */
 }
 
-.hero-metric-card {
-    background: var(--ember-gradient-card);
+.hero-metric-card-compact {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9) 0%, 
+        rgba(45, 24, 16, 0.85) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-lg);
-    padding: clamp(1rem, 2vw, 1.25rem); /* REDUCED PADDING */
+    border-radius: 16px;
+    padding: 1.25rem 1rem; /* Reduced from 1.5rem */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem; /* REDUCED GAP */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.hero-metric-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(215, 51, 39, 0.4);
-    border-color: var(--ember-orange);
+.hero-metric-card-compact:hover {
+    transform: translateY(-5px);
+    border-color: var(--ember-gold);
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.3);
 }
 
-.hero-metric-icon {
-    width: clamp(36px, 7vw, 48px); /* SMALLER ICONS */
-    height: clamp(36px, 7vw, 48px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.hero-metric-icon-compact {
+    width: 48px; /* Reduced from 56px */
+    height: 48px;
+    flex-shrink: 0;
 }
 
-.hero-metric-icon img {
+.hero-metric-icon-compact img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
 }
 
-.hero-metric-value {
-    font-size: clamp(1.5rem, 3.5vw, 2rem); /* SMALLER VALUES */
-    font-weight: 900;
+.hero-metric-value-compact {
+    font-size: 1.8rem; /* Reduced from 2rem */
+    font-weight: 800;
     color: var(--ember-gold);
     line-height: 1;
-    text-shadow: 0 0 10px rgba(240, 165, 0, 0.3);
 }
 
-.hero-metric-label {
-    font-size: clamp(0.8rem, 1.5vw, 0.95rem); /* SMALLER LABELS */
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.9);
+.hero-metric-label-compact {
+    font-size: 0.75rem; /* Reduced from 0.8rem */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.5px;
     text-align: center;
 }
 
 /* ===================================
-   HERO BUTTONS
+   HERO BUTTONS - COMPACT
    =================================== */
-
-.hero-buttons {
+.hero-buttons-compact {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    align-items: center;
     justify-content: center;
-    margin-top: 0;
+    gap: 1rem;
+    flex-wrap: wrap;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.hero-btn {
+.hero-btn-compact {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1.125rem 2.5rem;
-    border-radius: 1rem;
-    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem; /* Reduced from 1rem 2rem */
+    border-radius: 12px;
     font-weight: 700;
+    font-size: 0.95rem; /* Reduced from 1rem */
     text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     border: 2px solid transparent;
-    min-height: 44px;
+    cursor: pointer;
+    min-height: 48px; /* Touch target */
 }
 
-.hero-btn img {
-    width: 32px;
-    height: 32px;
+.hero-btn-compact img {
+    width: 20px; /* Reduced from 24px */
+    height: 20px;
     object-fit: contain;
 }
 
-.hero-btn-primary {
-    background: linear-gradient(135deg, #d73327 0%, #c62828 50%, #b71c1c 100%);
-    color: #ffffff;
+.hero-btn-primary-compact {
+    background: linear-gradient(135deg, #d73327, #c62828);
+    color: white;
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
 }
 
-.hero-btn-primary img {
-    filter: brightness(0) invert(1);
+.hero-btn-primary-compact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
-.hero-btn-primary:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.6);
-    border-color: rgba(255, 255, 255, 0.4);
+.hero-btn-secondary-compact {
+    background: rgba(215, 51, 39, 0.1);
+    color: var(--ember-gold);
+    border-color: rgba(215, 51, 39, 0.4);
 }
 
-.hero-btn-secondary {
-    background: transparent;
-    color: #ffffff;
-    border-color: rgba(215, 51, 39, 0.5);
-}
-
-.hero-btn-secondary img {
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
-}
-
-.hero-btn-secondary:hover {
+.hero-btn-secondary-compact:hover {
     background: rgba(215, 51, 39, 0.2);
-    border-color: #d73327;
+    border-color: var(--ember-gold);
     transform: translateY(-2px);
 }
 
 /* ===================================
-   HERO RESPONSIVE
+   TABLET RESPONSIVE - 1024px
    =================================== */
-
-@media (min-width: 768px) {
-    .hero-token-metrics {
-        grid-template-columns: repeat(3, 1fr);
+@media (max-width: 1024px) {
+    .ember-section.hero-section {
+        padding: calc(var(--navbar-height) + 2.5rem) var(--container-padding) 2.5rem;
+    }
+    
+    .hero-token-metrics-compact {
+        max-width: 650px;
         gap: 1rem;
-        margin-bottom: clamp(3rem, 5vw, 4rem);
+    }
+    
+    .hero-metric-card-compact {
+        padding: 1.15rem 0.85rem;
+    }
+    
+    .hero-metric-icon-compact {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .hero-metric-value-compact {
+        font-size: 1.65rem;
+    }
+    
+    .hero-metric-label-compact {
+        font-size: 0.7rem;
     }
 }
 
-@media (min-width: 1024px) {
-    .hero-token-metrics {
-        gap: 1.25rem;
-        margin-bottom: clamp(3.5rem, 6vw, 4.5rem);
-    }
-}
-
+/* ===================================
+   MOBILE RESPONSIVE - 768px
+   =================================== */
 @media (max-width: 768px) {
-    #home.ember-section {
-        padding-top: 100px;
-        padding-bottom: 60px;
+    .ember-section.hero-section {
+        padding: calc(var(--navbar-height) + 2rem) 1rem 2rem;
     }
     
-    .hero-buttons {
+    .ember-section-icon-large img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .ember-section-description {
+        font-size: 0.95rem;
+        margin-bottom: 2rem; /* Reduced spacing on mobile */
+    }
+    
+    /* Stack metrics vertically on mobile */
+    .hero-token-metrics-compact {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 350px;
+        margin-bottom: 2rem; /* Reduced spacing on mobile */
+    }
+    
+    .hero-metric-card-compact {
+        padding: 1.25rem 1.5rem;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+    
+    .hero-metric-icon-compact {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .hero-metric-value-compact {
+        font-size: 1.75rem;
+    }
+    
+    .hero-metric-label-compact {
+        font-size: 0.75rem;
+        text-align: left;
+    }
+    
+    /* Stack buttons vertically on mobile */
+    .hero-buttons-compact {
         flex-direction: column;
-        width: 100%;
-        max-width: 300px;
-        margin-left: auto;
-        margin-right: auto;
+        gap: 0.85rem;
+        max-width: 100%;
     }
     
-    .hero-btn {
+    .hero-btn-compact {
         width: 100%;
-        justify-content: center;
+        max-width: 350px;
+        padding: 1rem 2rem;
+        font-size: 1rem;
     }
     
-    #home .ember-section-subtitle:last-of-type {
-        font-size: 0.9rem;
-        margin-bottom: 2.5rem; /* Adjusted for mobile */
+    .hero-btn-compact img {
+        width: 22px;
+        height: 22px;
     }
 }
 
+/* ===================================
+   SMALL MOBILE - 480px
+   =================================== */
 @media (max-width: 480px) {
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
+    .ember-section.hero-section {
+        padding: calc(var(--navbar-height) + 1.5rem) 1rem 1.5rem;
     }
     
-    .hero-btn {
-        width: 100%;
+    .ember-section-icon-large img {
+        width: 60px;
+        height: 60px;
     }
     
-    #home .ember-section-subtitle:last-of-type {
-        margin-bottom: 2rem; /* Smaller spacing on mobile */
+    .ember-section-title {
+        font-size: 2rem;
+    }
+    
+    .ember-section-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .ember-section-description {
+        font-size: 0.9rem;
+        margin-bottom: 1.75rem;
+    }
+    
+    .hero-token-metrics-compact {
+        max-width: 100%;
+        margin-bottom: 1.75rem;
+    }
+    
+    .hero-metric-card-compact {
+        padding: 1.15rem 1.25rem;
+    }
+    
+    .hero-metric-icon-compact {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .hero-metric-value-compact {
+        font-size: 1.6rem;
+    }
+    
+    .hero-metric-label-compact {
+        font-size: 0.7rem;
+    }
+    
+    .hero-btn-compact {
+        max-width: 100%;
+        padding: 0.95rem 1.5rem;
     }
 }
 /* ===================================
