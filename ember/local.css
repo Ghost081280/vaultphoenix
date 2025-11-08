@@ -2939,44 +2939,92 @@ body.modal-open {
 }
 
 /* ===================================
-   TEAM SECTION
-   Team members and advisors
+   TEAM SECTION - POLISHED & CLEAN
+   Team members and advisors with photos
    =================================== */
 
 .team-section {
-    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
-    background: var(--ember-gradient-background);
+    padding: clamp(5rem, 10vw, 7rem) var(--container-padding);
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.98) 0%, 
+        rgba(35, 20, 13, 0.95) 50%,
+        rgba(26, 15, 10, 0.98) 100%);
+    position: relative;
 }
 
-/* Extra-large team icon */
-.team-section-icon-xlarge {
-    width: clamp(100px, 18vw, 140px) !important;
-    height: clamp(100px, 18vw, 140px) !important;
+/* Subtle background pattern */
+.team-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(240, 165, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(215, 51, 39, 0.06) 0%, transparent 50%);
+    pointer-events: none;
 }
 
-/* Team Grid */
+/* Extra large team icon */
+.team-icon-xlarge {
+    width: clamp(100px, 18vw, 140px);
+    height: clamp(100px, 18vw, 140px);
+}
+
+/* ===================================
+   TEAM GRID
+   =================================== */
+
 .team-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(1.5rem, 3vw, 2rem);
-    margin-bottom: clamp(3rem, 6vw, 4rem);
+    gap: clamp(2rem, 4vw, 3rem);
+    margin-bottom: clamp(4rem, 8vw, 6rem);
+    position: relative;
+    z-index: 2;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Team Member Card */
+/* ===================================
+   TEAM MEMBER CARD
+   =================================== */
+
 .team-member {
-    background: var(--ember-gradient-card);
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9) 0%, 
+        rgba(45, 24, 16, 0.8) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: clamp(1.5rem, 3vw, 2rem);
-    text-align: center;
-    transition: all 0.3s ease;
+    border-radius: 1.5rem;
+    padding: clamp(2rem, 4vw, 2.5rem);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    text-align: center;
+    gap: 1.25rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer effect */
+.team-member::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(240, 165, 0, 0.08), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.team-member:hover::before {
+    left: 100%;
 }
 
 .team-member:hover {
@@ -2985,32 +3033,50 @@ body.modal-open {
     border-color: var(--ember-orange);
 }
 
-/* Member Avatar */
-.member-avatar {
+/* ===================================
+   MEMBER PHOTO
+   =================================== */
+
+.member-photo-wrapper {
     width: clamp(120px, 20vw, 160px);
     height: clamp(120px, 20vw, 160px);
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid var(--ember-orange);
     box-shadow: 0 0 30px rgba(215, 51, 39, 0.5);
-    margin-bottom: 0.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.team-member:hover .member-photo-wrapper {
+    border-color: var(--ember-gold);
+    box-shadow: 0 0 40px rgba(240, 165, 0, 0.6);
+    transform: scale(1.05);
 }
 
 .member-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-/* Member Name */
+.team-member:hover .member-photo {
+    transform: scale(1.1);
+}
+
+/* ===================================
+   MEMBER INFO
+   =================================== */
+
 .member-name {
     font-size: clamp(1.3rem, 2.5vw, 1.6rem);
     font-weight: 800;
     color: #ffffff;
     margin: 0;
+    line-height: 1.2;
 }
 
-/* Member Role */
 .member-role {
     font-size: clamp(1rem, 1.8vw, 1.15rem);
     font-weight: 600;
@@ -3018,7 +3084,6 @@ body.modal-open {
     margin: 0;
 }
 
-/* Member Bio */
 .member-bio {
     font-size: clamp(0.9rem, 1.6vw, 1rem);
     line-height: 1.6;
@@ -3027,7 +3092,10 @@ body.modal-open {
     max-width: 500px;
 }
 
-/* Member Skills */
+/* ===================================
+   MEMBER SKILLS
+   =================================== */
+
 .member-skills {
     display: flex;
     flex-wrap: wrap;
@@ -3041,18 +3109,28 @@ body.modal-open {
     color: var(--ember-gold);
     font-size: clamp(0.8rem, 1.4vw, 0.9rem);
     font-weight: 600;
-    border-radius: var(--radius-full);
+    border-radius: 999px;
     border: 1px solid rgba(240, 165, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
-/* Member Socials */
+.skill-tag:hover {
+    background: rgba(240, 165, 0, 0.3);
+    border-color: var(--ember-gold);
+    transform: translateY(-2px);
+}
+
+/* ===================================
+   MEMBER SOCIALS
+   =================================== */
+
 .member-socials {
     display: flex;
     gap: 0.75rem;
     justify-content: center;
 }
 
-.social-link-team {
+.social-link {
     width: 44px;
     height: 44px;
     display: flex;
@@ -3066,62 +3144,68 @@ body.modal-open {
     text-decoration: none;
 }
 
-.social-link-team:hover {
-    background: var(--ember-gradient-primary);
+.social-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+.social-link:hover {
+    background: linear-gradient(135deg, #d73327, #c62828);
     color: #ffffff;
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(215, 51, 39, 0.5);
     border-color: var(--ember-orange);
 }
 
-.social-link-team svg {
-    width: 20px;
-    height: 20px;
-}
+/* ===================================
+   ADVISORS DIVIDER
+   =================================== */
 
-/* Advisors Section */
-.advisors-section {
+.advisors-divider {
     text-align: center;
-    margin: clamp(3rem, 6vw, 5rem) auto clamp(2rem, 4vw, 3rem);
-    padding: clamp(1.5rem, 3vw, 2rem);
-    background: rgba(240, 165, 0, 0.1);
-    border-radius: var(--radius-xl);
+    padding: clamp(2rem, 4vw, 3rem);
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.12) 0%, 
+        rgba(215, 51, 39, 0.08) 100%);
     border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: 1.5rem;
+    margin: 0 auto clamp(3rem, 6vw, 5rem);
     max-width: 1200px;
+    position: relative;
+    z-index: 2;
 }
 
-.advisors-section h3 {
+.advisors-divider h3 {
     font-size: clamp(1.5rem, 3.5vw, 2.2rem);
     font-weight: 800;
     color: var(--ember-gold);
     margin: 0 0 0.75rem;
 }
 
-.advisors-section p {
+.advisors-divider p {
     font-size: clamp(1rem, 1.8vw, 1.15rem);
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
-}
-
-/* Team Grid Advisors */
-.team-grid-advisors {
-    margin-bottom: 0;
-}
-
-/* Placeholder cards (invisible) */
-.team-member-placeholder {
-    visibility: hidden;
-    pointer-events: none;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* ===================================
-   RESPONSIVE DESIGN - TABLET & DESKTOP
+   ADVISORS GRID
+   =================================== */
+
+.advisors-grid {
+    margin-bottom: 0;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
    =================================== */
 
 /* Tablet (768px+) */
 @media (min-width: 768px) {
-    /* Team grid 2 columns */
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -3129,9 +3213,48 @@ body.modal-open {
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
-    /* Team grid 3 columns */
     .team-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+    .team-grid {
+        gap: 3rem;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .team-section {
+        padding: 4rem 1rem;
+    }
+    
+    .team-member {
+        padding: 1.5rem;
+    }
+    
+    .advisors-divider {
+        padding: 1.5rem;
+    }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .team-member::before {
+        display: none;
+    }
+    
+    .team-member:hover,
+    .member-photo-wrapper:hover,
+    .skill-tag:hover,
+    .social-link:hover {
+        transform: none;
+    }
+    
+    .member-photo {
+        transition: none;
     }
 }
 
