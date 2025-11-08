@@ -5287,111 +5287,322 @@ body.modal-open {
 }
 
 /* ===================================
-   LEGAL & REGULATORY COMPLIANCE SECTION
-   Trust signals and compliance
+   LEGAL & COMPLIANCE SECTION - POLISHED & CLEAN
+   Documents, compliance, disclaimers
    =================================== */
 
 .legal-compliance-section {
-    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
+    padding: clamp(5rem, 10vw, 7rem) var(--container-padding);
     background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.95) 0%, 
-        rgba(45, 24, 16, 0.90) 50%, 
-        rgba(26, 15, 10, 0.95) 100%);
+        rgba(26, 15, 10, 0.98) 0%, 
+        rgba(35, 20, 13, 0.95) 50%,
+        rgba(26, 15, 10, 0.98) 100%);
+    position: relative;
 }
+
+/* Subtle background pattern */
+.legal-compliance-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(240, 165, 0, 0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+/* ===================================
+   LEGAL CONTENT WRAPPER
+   =================================== */
 
 .legal-content {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: clamp(3rem, 6vw, 4rem);
+    gap: clamp(3rem, 6vw, 5rem);
+    position: relative;
+    z-index: 2;
 }
 
-/* Compliance Grid */
-.compliance-grid {
+/* ===================================
+   LEGAL DOCUMENTS
+   =================================== */
+
+.legal-documents h3 {
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    color: var(--ember-gold);
+    text-align: center;
+    margin: 0 0 clamp(2rem, 4vw, 3rem);
+}
+
+.documents-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: clamp(1.5rem, 3vw, 2rem);
 }
 
-.compliance-item {
-    background: var(--ember-gradient-card);
+.document-card {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9) 0%, 
+        rgba(45, 24, 16, 0.8) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
+    border-radius: 1.5rem;
     padding: clamp(1.5rem, 3vw, 2rem);
-    text-align: center;
-    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: 1rem;
+    transition: all 0.3s ease;
 }
 
-.compliance-item:hover {
+.document-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 36px rgba(215, 51, 39, 0.4);
     border-color: var(--ember-orange);
 }
 
-/* Compliance Icon */
-.compliance-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.compliance-icon img {
+.document-icon {
     width: clamp(56px, 10vw, 72px);
     height: clamp(56px, 10vw, 72px);
-    object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.compliance-item h3 {
-    font-size: clamp(1.1rem, 2vw, 1.35rem);
+.document-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6));
+}
+
+.document-card h4 {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
     font-weight: 700;
-    color: var(--ember-gold);
+    color: #ffffff;
     margin: 0;
 }
 
-.compliance-item p {
+.document-card p {
     font-size: clamp(0.9rem, 1.6vw, 1rem);
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
 
-/* Legal Disclaimer */
-.legal-disclaimer {
-    padding: clamp(2rem, 4vw, 3rem);
-    background: rgba(215, 51, 39, 0.1);
-    border: 2px solid rgba(215, 51, 39, 0.3);
-    border-left: 5px solid var(--ember-orange);
-    border-radius: var(--radius-xl);
+.document-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(215, 51, 39, 0.2);
+    color: #ffffff;
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    font-weight: 600;
+    border: 2px solid rgba(215, 51, 39, 0.4);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.legal-disclaimer h3 {
-    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+.document-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.document-button:hover {
+    background: rgba(215, 51, 39, 0.3);
+    border-color: var(--ember-orange);
+    transform: translateX(4px);
+}
+
+/* ===================================
+   COMPLIANCE FEATURES
+   =================================== */
+
+.compliance-features {
+    padding: clamp(2.5rem, 5vw, 4rem);
+    background: linear-gradient(135deg, 
+        rgba(215, 51, 39, 0.15) 0%, 
+        rgba(240, 165, 0, 0.1) 100%);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 2rem;
+}
+
+.compliance-features h3 {
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
     font-weight: 800;
     color: var(--ember-gold);
-    margin: 0 0 clamp(1.25rem, 2.5vw, 1.5rem);
+    text-align: center;
+    margin: 0 0 clamp(2rem, 4vw, 3rem);
+}
+
+.compliance-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.compliance-card {
+    background: rgba(26, 15, 10, 0.6);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: 1.25rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.compliance-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(215, 51, 39, 0.3);
+    border-color: var(--ember-orange);
+}
+
+.compliance-icon {
+    width: clamp(56px, 10vw, 72px);
+    height: clamp(56px, 10vw, 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.compliance-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.5));
+}
+
+.compliance-card h4 {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.compliance-card p {
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+/* ===================================
+   RISK DISCLAIMER
+   =================================== */
+
+.risk-disclaimer {
+    padding: clamp(2rem, 4vw, 3rem);
+    background: rgba(215, 51, 39, 0.1);
+    border: 2px solid rgba(215, 51, 39, 0.4);
+    border-left: 5px solid var(--ember-orange);
+    border-radius: 1rem;
+}
+
+.risk-disclaimer h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-weight: 800;
+    color: var(--ember-orange);
+    text-align: center;
+    margin: 0 0 1.5rem;
+}
+
+.risk-disclaimer h3 img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(215, 51, 39, 0.6));
+}
+
+.disclaimer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.disclaimer-content p {
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.disclaimer-content strong {
+    color: var(--ember-gold);
+    font-weight: 700;
+}
+
+/* ===================================
+   LEGAL CONTACT
+   =================================== */
+
+.legal-contact {
+    padding: clamp(2rem, 4vw, 3rem);
+    background: rgba(26, 15, 10, 0.8);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 1.5rem;
     text-align: center;
 }
 
-.legal-disclaimer p {
-    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
+.legal-contact h3 {
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-weight: 800;
+    color: var(--ember-gold);
     margin: 0 0 1rem;
 }
 
-.legal-disclaimer p:last-child {
-    margin-bottom: 0;
+.legal-contact > p {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 1.5rem;
 }
 
-.legal-disclaimer strong {
-    color: var(--ember-gold);
-    font-weight: 700;
+.contact-methods {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.contact-method {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: rgba(215, 51, 39, 0.2);
+    border: 2px solid rgba(215, 51, 39, 0.4);
+    border-radius: 0.75rem;
+    color: #ffffff;
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contact-method svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.contact-method:hover {
+    background: rgba(215, 51, 39, 0.3);
+    border-color: var(--ember-orange);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(215, 51, 39, 0.4);
 }
 
 /* ===================================
