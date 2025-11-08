@@ -344,18 +344,66 @@ body.modal-open {
 }
 
 /* ===================================
-   HERO ICON - LARGE SIZE (140px)
+   HERO ICON - LARGER SIZE WITH ROCK ANIMATION
    =================================== */
 .ember-section-icon-large {
     display: inline-block;
     margin-bottom: 1.5rem;
+    animation: gentleRock 4s ease-in-out infinite;
 }
 
 .ember-section-icon-large img {
-    width: 140px !important;
-    height: 140px !important;
+    width: 160px !important; /* ✅ BIGGER: Was 140px, now 160px */
+    height: 160px !important;
     object-fit: contain;
 }
+
+/* ✅ ROCKING ANIMATION - Gentle back and forth */
+@keyframes gentleRock {
+    0%, 100% { 
+        transform: rotate(-3deg); 
+    }
+    50% { 
+        transform: rotate(3deg); 
+    }
+}
+
+/* ===================================
+   RESPONSIVE SIZES
+   =================================== */
+
+/* Tablet - 1024px */
+@media (max-width: 1024px) {
+    .ember-section-icon-large img {
+        width: 140px !important;
+        height: 140px !important;
+    }
+}
+
+/* Mobile - 768px */
+@media (max-width: 768px) {
+    .ember-section-icon-large img {
+        width: 120px !important;
+        height: 120px !important;
+    }
+}
+
+/* Small Mobile - 480px */
+@media (max-width: 480px) {
+    .ember-section-icon-large img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+}
+
+/* Very Small Mobile - 360px */
+@media (max-width: 360px) {
+    .ember-section-icon-large img {
+        width: 90px !important;
+        height: 90px !important;
+    }
+}
+
 
 /* ===================================
    HERO TEXT ELEMENTS
