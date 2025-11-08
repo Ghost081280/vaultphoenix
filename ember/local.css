@@ -322,9 +322,10 @@ body.modal-open {
 
 /* ===================================
    END SECTION 1: MODAL SYSTEM
-   =================================== *//* ===================================
-   SECTION 2: HERO SECTION - OPTIMIZED
-   Complete hero with metrics, buttons, and animations
+   =================================== */
+/* ===================================
+   SECTION 2: HERO SECTION - OPTIMIZED v2
+   Complete hero with metrics, buttons, and proper spacing
    =================================== */
 
 /* ===================================
@@ -463,7 +464,7 @@ body.modal-open {
     grid-template-columns: 1fr;
     gap: 1rem;
     max-width: 900px;
-    margin: 0 auto clamp(2rem, 4vw, 2.5rem);
+    margin: 0 auto clamp(3rem, 5vw, 4rem); /* INCREASED BOTTOM SPACING */
 }
 
 .hero-metric-card {
@@ -525,7 +526,7 @@ body.modal-open {
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 0; /* REMOVED TOP MARGIN - spacing comes from metrics */
 }
 
 .hero-btn {
@@ -589,12 +590,14 @@ body.modal-open {
     .hero-token-metrics {
         grid-template-columns: repeat(3, 1fr);
         gap: 1.25rem;
+        margin-bottom: clamp(3.5rem, 6vw, 5rem); /* EXTRA SPACING ON TABLET+ */
     }
 }
 
 @media (min-width: 1024px) {
     .hero-token-metrics {
         gap: 1.5rem;
+        margin-bottom: clamp(4rem, 7vw, 6rem); /* EVEN MORE SPACING ON DESKTOP */
     }
 }
 
@@ -632,10 +635,7 @@ body.modal-open {
         width: 100%;
     }
 }
-
 /* ===================================
-   END SECTION 2: HERO SECTION
-   =================================== *//* ===================================
    SECTION 3: AIRDROP SECTION - OPTIMIZED
    Complete airdrop system with purple theme
    =================================== */
