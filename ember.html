@@ -2002,82 +2002,165 @@
      LEGAL & REGULATORY COMPLIANCE SECTION
      Trust signals and compliance information
      ================================================================= -->
-<section class="ember-section legal-compliance-section" id="legal" aria-labelledby="legal-title">
+<section class="legal-compliance-section" id="legal-compliance" aria-labelledby="legal-title">
     <div class="container">
         <!-- Section Header -->
-        <div class="ember-section-header">
-            <div class="ember-section-icon ember-section-icon-large" aria-hidden="true">
+        <div class="section-header">
+            <div class="section-icon">
                 <img src="images/Legalandfinancialoversight.PNG" alt="">
             </div>
-            <h2 id="legal-title" class="ember-section-title">Legal & Regulatory Compliance</h2>
-            <p class="ember-section-subtitle">Professional oversight and full regulatory compliance ensuring investor protection and operational integrity</p>
+            <h2 id="legal-title" class="section-title">Legal & Compliance</h2>
+            <p class="section-subtitle">Committed to transparency, regulatory compliance, and investor protection</p>
         </div>
         
         <div class="legal-content">
-            <!-- Compliance Grid -->
-            <div class="compliance-grid">
-                <!-- Legal Oversight -->
-                <article class="compliance-item">
-                    <div class="compliance-icon" aria-hidden="true">
-                        <img src="images/Professionallegalandprofessionaloversight.PNG" alt="">
-                    </div>
-                    <h3>Professional Legal Oversight</h3>
-                    <p>Dedicated legal team providing comprehensive guidance on securities regulations, token classifications, and investor protection requirements across all jurisdictions</p>
-                </article>
-                
-                <!-- Financial Compliance -->
-                <article class="compliance-item">
-                    <div class="compliance-icon" aria-hidden="true">
-                        <img src="images/Legalandfinancialoversight.PNG" alt="">
-                    </div>
-                    <h3>Financial Compliance</h3>
-                    <p>Professional financial oversight ensuring adherence to anti-money laundering (AML) and know-your-customer (KYC) regulations for all significant investments</p>
-                </article>
-                
-                <!-- Smart Contract Audits -->
-                <article class="compliance-item">
-                    <div class="compliance-icon" aria-hidden="true">
-                        <img src="images/Smartcontractaudits.PNG" alt="">
-                    </div>
-                    <h3>Smart Contract Audits</h3>
-                    <p>Third-party security audits by reputable blockchain security firms before token deployment, ensuring code integrity and vulnerability prevention</p>
-                </article>
-                
-                <!-- Transparent Reporting -->
-                <article class="compliance-item">
-                    <div class="compliance-icon" aria-hidden="true">
-                        <img src="images/Transparentreporting.PNG" alt="">
-                    </div>
-                    <h3>Transparent Reporting</h3>
-                    <p>Regular public reports on development progress, fund utilization, white-label app sales, and platform metrics to maintain investor confidence</p>
-                </article>
-                
-                <!-- Investor Protection -->
-                <article class="compliance-item">
-                    <div class="compliance-icon" aria-hidden="true">
-                        <img src="images/PhoenixSafe.PNG" alt="">
-                    </div>
-                    <h3>Investor Protection</h3>
-                    <p>Multi-signature wallet security, timelocked smart contracts, and vesting schedules designed to prevent early dumps and protect token value</p>
-                </article>
-                
-                <!-- Regulatory Compliance -->
-                <article class="compliance-item">
-                    <div class="compliance-icon" aria-hidden="true">
-                        <img src="images/KYCAMLprocedures.PNG" alt="">
-                    </div>
-                    <h3>Regulatory Compliance</h3>
-                    <p>Proactive engagement with regulatory authorities and compliance with applicable securities laws to ensure long-term operational legitimacy</p>
-                </article>
+            <!-- Legal Documents -->
+            <div class="legal-documents">
+                <h3>Important Legal Documents</h3>
+                <div class="documents-grid">
+                    <!-- Token Presale Agreement -->
+                    <article class="document-card">
+                        <div class="document-icon">
+                            <img src="images/TechnicalFoundation.PNG" alt="">
+                        </div>
+                        <h4>Token Presale Agreement</h4>
+                        <p>Complete terms and conditions for token purchase, including investor rights, obligations, and risk disclosures.</p>
+                        <button class="document-button" onclick="window.showTpaModal()">
+                            <span>View Agreement</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </article>
+                    
+                    <!-- Token Disclosures -->
+                    <article class="document-card">
+                        <div class="document-icon">
+                            <img src="images/PhoenixWhitepaper.PNG" alt="">
+                        </div>
+                        <h4>Token Disclosures</h4>
+                        <p>Comprehensive risk factors, regulatory status, and important information all investors must understand.</p>
+                        <button class="document-button" onclick="window.showTpaModal()">
+                            <span>View Disclosures</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </article>
+                    
+                    <!-- Privacy Policy -->
+                    <article class="document-card">
+                        <div class="document-icon">
+                            <img src="images/PhoenixSafe.PNG" alt="">
+                        </div>
+                        <h4>Privacy Policy</h4>
+                        <p>How we collect, use, protect, and handle your personal information in compliance with data protection laws.</p>
+                        <button class="document-button" onclick="window.showPrivacyModal()">
+                            <span>View Policy</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </article>
+                    
+                    <!-- Terms of Service -->
+                    <article class="document-card">
+                        <div class="document-icon">
+                            <img src="images/Smartcontractaudits.PNG" alt="">
+                        </div>
+                        <h4>Terms of Service</h4>
+                        <p>User agreement covering platform usage, acceptable conduct, and service limitations.</p>
+                        <button class="document-button" onclick="window.showTermsModal()">
+                            <span>View Terms</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </article>
+                </div>
             </div>
             
-            <!-- Disclaimer -->
-            <div class="legal-disclaimer">
-                <h3>Important Disclosure</h3>
-                <p><strong>Risk Warning:</strong> Cryptocurrency investments involve substantial risk. Token values may fluctuate significantly. Past performance does not guarantee future results. Only invest what you can afford to lose.</p>
-                <p><strong>Not Financial Advice:</strong> Information provided is for educational purposes only and does not constitute financial, investment, legal, or tax advice. Consult qualified professionals before making investment decisions.</p>
-                <p><strong>Jurisdictional Restrictions:</strong> Token sales may be restricted in certain jurisdictions. It is your responsibility to ensure compliance with local laws and regulations.</p>
-                <p><strong>Token Utility:</strong> $Ember tokens are utility tokens designed for use within the Vault Phoenix AR gaming ecosystem. They are not securities and do not represent ownership, equity, or profit-sharing rights.</p>
+            <!-- Compliance Features -->
+            <div class="compliance-features">
+                <h3>Our Compliance Commitment</h3>
+                <div class="compliance-grid">
+                    <!-- Legal Oversight -->
+                    <article class="compliance-card">
+                        <div class="compliance-icon">
+                            <img src="images/Professionallegalandprofessionaloversight.PNG" alt="">
+                        </div>
+                        <h4>Professional Legal Oversight</h4>
+                        <p>Dedicated legal team ensuring compliance with securities laws, consumer protection regulations, and international standards.</p>
+                    </article>
+                    
+                    <!-- KYC/AML -->
+                    <article class="compliance-card">
+                        <div class="compliance-icon">
+                            <img src="images/KYCAMLprocedures.PNG" alt="">
+                        </div>
+                        <h4>KYC/AML Procedures</h4>
+                        <p>Know Your Customer and Anti-Money Laundering verification for significant purchases, preventing financial crimes.</p>
+                    </article>
+                    
+                    <!-- Smart Contract Audits -->
+                    <article class="compliance-card">
+                        <div class="compliance-icon">
+                            <img src="images/Smartcontractaudits.PNG" alt="">
+                        </div>
+                        <h4>Third-Party Audits</h4>
+                        <p>Independent security audits of all smart contracts before deployment to ensure code safety and integrity.</p>
+                    </article>
+                    
+                    <!-- Transparent Reporting -->
+                    <article class="compliance-card">
+                        <div class="compliance-icon">
+                            <img src="images/Transparentreporting.PNG" alt="">
+                        </div>
+                        <h4>Transparent Reporting</h4>
+                        <p>Regular public updates on development progress, token metrics, and platform performance.</p>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- Risk Disclaimer -->
+            <div class="risk-disclaimer">
+                <h3>
+                    <img src="images/Legalandfinancialoversight.PNG" alt="">
+                    Important Risk Disclaimer
+                </h3>
+                <div class="disclaimer-content">
+                    <p><strong>Investment Risk:</strong> Cryptocurrency investments involve substantial risk. Token values can be highly volatile and may result in complete loss of investment. Past performance does not guarantee future results.</p>
+                    
+                    <p><strong>Regulatory Status:</strong> The regulatory status of cryptocurrencies and tokens varies by jurisdiction. Laws and regulations are evolving and may affect the project. Investors should understand their local regulatory environment.</p>
+                    
+                    <p><strong>Technology Risk:</strong> Blockchain technology and smart contracts may contain vulnerabilities despite audits. Platform development may face technical challenges or delays.</p>
+                    
+                    <p><strong>Market Risk:</strong> Token liquidity, trading volumes, and market conditions can impact your ability to buy or sell tokens at desired prices.</p>
+                    
+                    <p><strong>No Guarantee:</strong> Nothing in these materials constitutes investment advice, financial advice, or a guarantee of returns. All forward-looking statements are subject to risks and uncertainties.</p>
+                    
+                    <p><strong>Do Your Research:</strong> Investors should conduct thorough due diligence, review all legal documents, and consult with qualified financial and legal advisors before making any investment decision.</p>
+                </div>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="legal-contact">
+                <h3>Questions or Concerns?</h3>
+                <p>For legal inquiries, compliance questions, or investor support, please contact our team:</p>
+                <div class="contact-methods">
+                    <a href="mailto:legal@vaultphoenix.com" class="contact-method">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <span>legal@vaultphoenix.com</span>
+                    </a>
+                    <a href="mailto:support@vaultphoenix.com" class="contact-method">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/>
+                        </svg>
+                        <span>support@vaultphoenix.com</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
