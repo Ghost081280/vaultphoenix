@@ -344,7 +344,7 @@ body.modal-open {
 }
 
 /* ===================================
-   HERO ICON - KEEP LARGE SIZE (120px)
+   HERO ICON - LARGE SIZE (140px)
    =================================== */
 .ember-section-icon-large {
     display: inline-block;
@@ -352,8 +352,8 @@ body.modal-open {
 }
 
 .ember-section-icon-large img {
-    width: 120px;
-    height: 120px;
+    width: 140px !important;
+    height: 140px !important;
     object-fit: contain;
 }
 
@@ -377,13 +377,13 @@ body.modal-open {
 }
 
 /* ===================================
-   HERO DESCRIPTION - WITH SPACING AFTER
+   HERO DESCRIPTION - 3REM SPACING AFTER
    =================================== */
 .ember-section-description {
     font-size: clamp(0.95rem, 1.8vw, 1.1rem);
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 2.5rem; /* ✅ SPACING AFTER DESCRIPTION */
+    margin-bottom: 3rem !important; /* ✅ CRITICAL: 3REM SPACING */
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -396,64 +396,67 @@ body.modal-open {
 
 /* ===================================
    HERO TOKEN METRICS - COMPACT CARDS
+   Desktop: 3 columns centered
+   Mobile: 1 column, horizontal layout
    =================================== */
-.hero-token-metrics,
-.hero-token-metrics-compact {
+.hero-token-metrics {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem; /* Reduced from 1.5rem */
+    gap: 1rem;
     max-width: 750px;
-    margin: 0 auto 2.5rem; /* ✅ SPACING BELOW METRICS */
+    margin: 0 auto 2.5rem; /* ✅ 2.5REM SPACING BELOW */
 }
 
-.hero-metric-card,
-.hero-metric-card-compact {
+.hero-metric-card {
     background: linear-gradient(135deg, 
         rgba(26, 15, 10, 0.9) 0%, 
         rgba(45, 24, 16, 0.85) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: 14px; /* Slightly smaller radius */
-    padding: 1rem 0.85rem; /* Reduced from 1.5rem */
+    border-radius: 14px;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.65rem; /* Reduced from 0.85rem */
+    justify-content: center;
+    gap: 0.65rem;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.hero-metric-card:hover,
-.hero-metric-card-compact:hover {
+.hero-metric-card:hover {
     transform: translateY(-5px);
     border-color: var(--ember-gold);
     box-shadow: 0 8px 25px rgba(240, 165, 0, 0.3);
 }
 
-.hero-metric-icon,
-.hero-metric-icon-compact {
-    width: 44px; /* Reduced from 56px */
+.hero-metric-icon {
+    width: 44px;
     height: 44px;
     flex-shrink: 0;
 }
 
-.hero-metric-icon img,
-.hero-metric-icon-compact img {
+.hero-metric-icon img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.hero-metric-value,
-.hero-metric-value-compact {
-    font-size: 1.65rem; /* Reduced from 2rem */
+.hero-metric-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.hero-metric-value {
+    font-size: 1.65rem;
     font-weight: 800;
     color: var(--ember-gold);
     line-height: 1;
 }
 
-.hero-metric-label,
-.hero-metric-label-compact {
-    font-size: 0.7rem; /* Reduced from 0.8rem */
+.hero-metric-label {
+    font-size: 0.7rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);
     text-transform: uppercase;
@@ -464,8 +467,7 @@ body.modal-open {
 /* ===================================
    HERO BUTTONS - COMPACT SIZE
    =================================== */
-.hero-buttons,
-.hero-buttons-compact {
+.hero-buttons {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -475,54 +477,48 @@ body.modal-open {
     margin: 0 auto;
 }
 
-.hero-btn,
-.hero-btn-compact {
+.hero-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.5rem; /* Reduced from 1rem 2rem */
+    padding: 0.75rem 1.5rem;
     border-radius: 12px;
     font-weight: 700;
-    font-size: 0.9rem; /* Reduced from 1rem */
+    font-size: 0.9rem;
     text-decoration: none;
     transition: all 0.3s ease;
     border: 2px solid transparent;
     cursor: pointer;
-    min-height: 46px; /* Slightly smaller touch target */
+    min-height: 46px;
 }
 
-.hero-btn img,
-.hero-btn-compact img {
-    width: 20px; /* Reduced from 24px */
+.hero-btn img {
+    width: 20px;
     height: 20px;
     object-fit: contain;
 }
 
-.hero-btn-primary,
-.hero-btn-primary-compact {
+.hero-btn-primary {
     background: linear-gradient(135deg, #d73327, #c62828);
     color: white;
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
 }
 
-.hero-btn-primary:hover,
-.hero-btn-primary-compact:hover {
+.hero-btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(215, 51, 39, 0.5);
     border-color: rgba(255, 255, 255, 0.3);
 }
 
-.hero-btn-secondary,
-.hero-btn-secondary-compact {
+.hero-btn-secondary {
     background: rgba(215, 51, 39, 0.1);
     color: var(--ember-gold);
     border-color: rgba(215, 51, 39, 0.4);
 }
 
-.hero-btn-secondary:hover,
-.hero-btn-secondary-compact:hover {
+.hero-btn-secondary:hover {
     background: rgba(215, 51, 39, 0.2);
     border-color: var(--ember-gold);
     transform: translateY(-2px);
@@ -537,108 +533,106 @@ body.modal-open {
     }
     
     .ember-section-icon-large img {
-        width: 100px; /* Slightly smaller on tablet */
-        height: 100px;
+        width: 120px !important;
+        height: 120px !important;
     }
     
-    .hero-token-metrics,
-    .hero-token-metrics-compact {
+    .hero-token-metrics {
         max-width: 650px;
         gap: 0.85rem;
     }
     
-    .hero-metric-card,
-    .hero-metric-card-compact {
-        padding: 0.95rem 0.75rem;
+    .hero-metric-card {
+        padding: 0.95rem 0.85rem;
     }
     
-    .hero-metric-icon,
-    .hero-metric-icon-compact {
+    .hero-metric-icon {
         width: 40px;
         height: 40px;
     }
     
-    .hero-metric-value,
-    .hero-metric-value-compact {
+    .hero-metric-value {
         font-size: 1.5rem;
     }
     
-    .hero-metric-label,
-    .hero-metric-label-compact {
+    .hero-metric-label {
         font-size: 0.65rem;
     }
 }
 
 /* ===================================
    MOBILE RESPONSIVE - 768px
+   ✅ PERFECT HORIZONTAL CARD LAYOUT
    =================================== */
 @media (max-width: 768px) {
     .ember-section.hero-section {
         padding: calc(var(--navbar-height) + 2rem) 1rem 2rem;
     }
     
+    /* Slightly smaller coin on mobile */
     .ember-section-icon-large img {
-        width: 90px; /* Smaller on mobile but still prominent */
-        height: 90px;
+        width: 100px !important;
+        height: 100px !important;
     }
     
+    /* Reduced spacing on mobile */
     .ember-section-description {
         font-size: 0.95rem;
-        margin-bottom: 2rem; /* Reduced spacing on mobile */
+        margin-bottom: 2.5rem !important; /* Still need good spacing */
     }
     
-    /* Stack metrics vertically on mobile */
-    .hero-token-metrics,
-    .hero-token-metrics-compact {
+    /* ✅ MOBILE: Stack cards vertically, horizontal layout */
+    .hero-token-metrics {
         grid-template-columns: 1fr;
-        gap: 0.85rem;
-        max-width: 350px;
-        margin-bottom: 2rem; /* Reduced spacing on mobile */
+        gap: 1rem;
+        max-width: 100%;
+        margin-bottom: 2rem;
     }
     
-    .hero-metric-card,
-    .hero-metric-card-compact {
-        padding: 1rem 1.25rem;
+    /* ✅ MOBILE: Horizontal card layout (icon + text side-by-side) */
+    .hero-metric-card {
         flex-direction: row;
         justify-content: flex-start;
-        gap: 0.85rem;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        text-align: left;
     }
     
-    .hero-metric-icon,
-    .hero-metric-icon-compact {
-        width: 42px;
-        height: 42px;
+    .hero-metric-icon {
+        width: 48px;
+        height: 48px;
     }
     
-    .hero-metric-value,
-    .hero-metric-value-compact {
-        font-size: 1.6rem;
+    .hero-metric-content {
+        align-items: flex-start;
+        text-align: left;
     }
     
-    .hero-metric-label,
-    .hero-metric-label-compact {
-        font-size: 0.7rem;
+    .hero-metric-value {
+        font-size: 1.75rem;
+    }
+    
+    .hero-metric-label {
+        font-size: 0.75rem;
         text-align: left;
     }
     
     /* Stack buttons vertically on mobile */
-    .hero-buttons,
-    .hero-buttons-compact {
+    .hero-buttons {
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0.85rem;
         max-width: 100%;
     }
     
-    .hero-btn,
-    .hero-btn-compact {
+    .hero-btn {
         width: 100%;
-        max-width: 350px;
-        padding: 0.85rem 1.75rem;
+        max-width: 100%;
+        padding: 1rem 2rem;
         font-size: 0.95rem;
     }
     
-    .hero-btn img,
-    .hero-btn-compact img {
+    .hero-btn img {
         width: 22px;
         height: 22px;
     }
@@ -649,12 +643,12 @@ body.modal-open {
    =================================== */
 @media (max-width: 480px) {
     .ember-section.hero-section {
-        padding: calc(var(--navbar-height) + 1.5rem) 1rem 1.5rem;
+        padding: calc(var(--navbar-height) + 1.75rem) 1rem 1.75rem;
     }
     
     .ember-section-icon-large img {
-        width: 80px; /* Smaller on small mobile */
-        height: 80px;
+        width: 90px !important;
+        height: 90px !important;
     }
     
     .ember-section-title {
@@ -667,40 +661,59 @@ body.modal-open {
     
     .ember-section-description {
         font-size: 0.9rem;
+        margin-bottom: 2rem !important;
+    }
+    
+    .hero-token-metrics {
         margin-bottom: 1.75rem;
     }
     
-    .hero-token-metrics,
-    .hero-token-metrics-compact {
-        max-width: 100%;
-        margin-bottom: 1.75rem;
+    .hero-metric-card {
+        padding: 1.15rem 1.25rem;
     }
     
-    .hero-metric-card,
-    .hero-metric-card-compact {
-        padding: 0.95rem 1.15rem;
+    .hero-metric-icon {
+        width: 44px;
+        height: 44px;
     }
     
-    .hero-metric-icon,
-    .hero-metric-icon-compact {
+    .hero-metric-value {
+        font-size: 1.6rem;
+    }
+    
+    .hero-metric-label {
+        font-size: 0.7rem;
+    }
+    
+    .hero-btn {
+        padding: 0.95rem 1.75rem;
+    }
+}
+
+/* ===================================
+   VERY SMALL MOBILE - 360px
+   =================================== */
+@media (max-width: 360px) {
+    .ember-section-icon-large img {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    
+    .hero-metric-card {
+        padding: 1rem 1.15rem;
+    }
+    
+    .hero-metric-icon {
         width: 40px;
         height: 40px;
     }
     
-    .hero-metric-value,
-    .hero-metric-value-compact {
+    .hero-metric-value {
         font-size: 1.5rem;
     }
     
-    .hero-metric-label,
-    .hero-metric-label-compact {
+    .hero-metric-label {
         font-size: 0.65rem;
-    }
-    
-    .hero-btn,
-    .hero-btn-compact {
-        max-width: 100%;
-        padding: 0.8rem 1.5rem;
     }
 }
 /* ===================================
