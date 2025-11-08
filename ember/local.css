@@ -1,21 +1,14 @@
 /* ===================================
-   VAULT PHOENIX - EMBER LOCAL CSS v2.4 OPTIMIZED
-   COMPLETE FILE - PART 1 OF 3
+   VAULT PHOENIX - EMBER LOCAL CSS v2.3 FINAL
+   CLEAN MODAL SYSTEM - NO HACKS
    
    CRITICAL: This file uses CSS variables from shared/global.css
    DO NOT duplicate variables - they are defined globally
    DO NOT override .navbar, .footer, .chatbot-* classes
-   
-   SECTIONS IN PART 1:
-   - Global section spacing
-   - Modal system (TPA, Whitepaper, Airdrop modals)
-   - Hero section
-   - $Ember Airdrop section
    =================================== */
-
 /* ===================================
-   GLOBAL SECTION SPACING
-   Consistent spacing for all sections
+   GLOBAL SECTION SPACING FIX
+   Consistent bottom padding for all sections
    =================================== */
 
 .ember-section,
@@ -345,10 +338,10 @@ body.modal-open {
 }
 
 /* ===================================
-   HERO SECTION - SEAMLESS BACKGROUND
-   First section with smooth gradient
+   HERO SECTION - COMPLETE WITH METRICS
    =================================== */
 
+/* Make the first section (home) look like a hero */
 #home.ember-section {
     min-height: 100vh;
     display: flex;
@@ -358,16 +351,16 @@ body.modal-open {
     padding-bottom: 80px;
     background: linear-gradient(135deg, 
         rgba(13, 12, 12, 1) 0%, 
-        rgba(26, 15, 10, 0.98) 30%,
-        rgba(26, 15, 10, 0.95) 100%);
+        rgba(26, 15, 10, 0.95) 50%, 
+        rgba(13, 12, 12, 1) 100%);
 }
 
-/* Section header spacing */
+/* Make the section header bigger for hero */
 #home .ember-section-header {
     margin-bottom: 0;
 }
 
-/* Title styling */
+/* Title - "$Ember Token" - Keep good size */
 #home .ember-section-title {
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 900;
@@ -428,14 +421,14 @@ body.modal-open {
     }
 }
 
-/* First subtitle */
+/* First subtitle - "Fueling Location-Based AR Gaming Revolution" - Keep good size */
 #home .ember-section-subtitle:first-of-type {
     font-size: clamp(1.3rem, 3.5vw, 2.2rem);
     font-weight: 700;
     margin-bottom: 1.5rem;
 }
 
-/* Second subtitle/description - SMALLER */
+/* Second subtitle/description - "The utility token powering..." - SMALLER */
 #home .ember-section-subtitle:last-of-type {
     font-size: clamp(0.95rem, 1.8vw, 1.15rem);
     font-weight: 400;
@@ -627,8 +620,8 @@ body.modal-open {
 }
 
 /* ===================================
-   $EMBER AIRDROP SECTION - SEAMLESS BACKGROUND
-   Purple-themed airdrop system
+   $EMBER AIRDROP SECTION - PURPLE VERSION
+   Complete airdrop system with all components
    =================================== */
 
 /* Base box-sizing for entire section */
@@ -642,9 +635,8 @@ body.modal-open {
 .ember-airdrop-section {
     padding: clamp(3rem, 6vw, 5rem) var(--container-padding);
     background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.95) 0%, 
-        rgba(26, 15, 10, 0.92) 50%,
-        rgba(26, 15, 10, 0.90) 100%);
+        rgba(13, 12, 12, 0.95) 0%, 
+        rgba(26, 15, 10, 0.9) 100%);
     position: relative;
     overflow-x: hidden;
 }
@@ -691,21 +683,6 @@ body.modal-open {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     width: 100%;
 }
-
-/* ===================================
-   END OF PART 1 - EMBER/LOCAL.CSS
-   Next: Part 2 starts with compact header
-   =================================== *//* ===================================
-   VAULT PHOENIX - EMBER LOCAL CSS v2.4 OPTIMIZED
-   COMPLETE FILE - PART 2 OF 3
-   
-   SECTIONS IN PART 2:
-   - Airdrop section continuation (compact header, forms, modules)
-   - How It Works section
-   - Technical Foundation section
-   - Roadmap section
-   - Team section
-   =================================== */
 
 /* Compact Header */
 .ember-airdrop-compact-header {
@@ -1520,7 +1497,7 @@ body.modal-open {
 }
 
 /* ===================================
-   RESPONSIVE - AIRDROP TABLET
+   RESPONSIVE - TABLET
    =================================== */
 @media (max-width: 1024px) {
     .ember-compact-grid {
@@ -1530,7 +1507,7 @@ body.modal-open {
 }
 
 /* ===================================
-   RESPONSIVE - AIRDROP MOBILE
+   RESPONSIVE - MOBILE
    =================================== */
 @media (max-width: 768px) {
     .ember-airdrop-section {
@@ -1543,6 +1520,49 @@ body.modal-open {
     
     .parachute-crate-enlarged {
         max-width: 260px;
+    }
+    
+    .ember-title-compact {
+        font-size: 1.5rem;
+    }
+    
+    .ember-subtitle-compact {
+        font-size: 0.9rem;
+    }
+    
+    .ember-coming-soon-compact {
+        padding: 1.25rem;
+    }
+    
+    .ember-coming-text h3 {
+        font-size: 1.1rem;
+    }
+    
+    .ember-coming-text p {
+        font-size: 0.85rem;
+    }
+    
+    .ember-compact-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .ember-inner-module {
+        padding: 1.25rem;
+    }
+    
+    .ember-mini-header {
+        padding-bottom: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .ember-mini-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .ember-mini-header h3 {
+        font-size: 1.1rem;
     }
     
     .ember-stats-compact {
@@ -1574,17 +1594,36 @@ body.modal-open {
     }
 }
 
+@media (max-width: 480px) {
+    .ember-airdrop-section {
+        padding: 2.5rem 1rem;
+    }
+    
+    .parachute-crate-enlarged {
+        max-width: 220px;
+    }
+    
+    .ember-title-compact {
+        font-size: 1.35rem;
+    }
+    
+    .ember-airdrop-outer-module {
+        padding: 1.25rem;
+    }
+    
+    .ember-inner-module {
+        padding: 1rem;
+    }
+}
+
 /* ===================================
-   HOW IT WORKS SECTION - SEAMLESS BACKGROUND
-   Stakeholder cards and utility grid
+   HOW IT WORKS SECTION
+   Stakeholder cards, flow steps, utility grid
    =================================== */
 
 .how-it-works-section {
     padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
-    background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.90) 0%, 
-        rgba(26, 15, 10, 0.88) 50%,
-        rgba(26, 15, 10, 0.85) 100%);
+    background: var(--ember-gradient-background);
 }
 
 /* Section Header (uses global pattern) */
@@ -1915,11 +1954,24 @@ body.modal-open {
 }
 
 /* ===================================
-   RESPONSIVE DESIGN - HOW IT WORKS
+   RESPONSIVE DESIGN - TABLET & DESKTOP
    =================================== */
 
 /* Tablet (768px+) */
 @media (min-width: 768px) {
+    .ember-hero {
+        padding: calc(var(--navbar-height) + 5rem) var(--container-padding) 5rem;
+    }
+    
+    .ember-hero-content {
+        gap: 2.5rem;
+    }
+    
+    /* Social buttons in row */
+    .spread-fire-buttons {
+        flex-wrap: nowrap;
+    }
+    
     /* Stakeholder cards 2 columns */
     .how-it-works-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1933,6 +1985,14 @@ body.modal-open {
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
+    .ember-hero {
+        padding: calc(var(--navbar-height) + 6rem) var(--container-padding) 6rem;
+    }
+    
+    .ember-hero-content {
+        gap: 3rem;
+    }
+    
     /* Stakeholder cards 3 columns */
     .how-it-works-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -1944,28 +2004,50 @@ body.modal-open {
     }
 }
 
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+    .ember-hero-content {
+        gap: 3rem;
+    }
+    
+    .how-it-works-grid {
+        gap: 3rem;
+    }
+    
+    .utility-grid-enhanced {
+        gap: 2.5rem;
+    }
+}
+
+/* Mobile Portrait Fine-tuning */
+@media (max-width: 480px) {
+    .spread-fire-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .spread-fire-btn {
+        width: 100%;
+    }
+    
+    .stakeholder-card {
+        padding: 1.25rem;
+    }
+}
+
 /* ===================================
-   END OF PART 2 - EMBER/LOCAL.CSS
-   Next: Part 3 starts with Technical Foundation
-   =================================== *//* ===================================
-   VAULT PHOENIX - EMBER LOCAL CSS v2.4 OPTIMIZED
-   COMPLETE FILE - PART 3 OF 3 (FINAL)
-   
-   SECTIONS IN PART 3:
-   - Technical Foundation section
-   - Roadmap section
-   - Team section
-   - Tokenomics section
-   - Presale section
-   - Enhanced CTA section
-   - Legal & Compliance section
-   - Modal styles
-   - Final responsive rules
+   END OF EMBER LOCAL CSS PART 1
+   Hero + Spread Fire + How It Works ✅
+   =================================== */
+/* ===================================
+   VAULT PHOENIX - EMBER LOCAL CSS v2.0 PART 2
+   REBUILT & OPTIMIZED
+   Technical Foundation + Roadmap + Team + Tokenomics sections
    =================================== */
 
 /* ===================================
-   TECHNICAL FOUNDATION SECTION - SEAMLESS BACKGROUND
-   Whitepaper overview with download
+   TECHNICAL FOUNDATION SECTION
+   Whitepaper overview with download button
    =================================== */
 
 .whitepaper-content {
@@ -2129,22 +2211,23 @@ body.modal-open {
 
 /* Tablet (768px+) */
 @media (min-width: 768px) {
+    /* Whitepaper sections 2 columns */
     .whitepaper-sections {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 /* ===================================
-   ROADMAP SECTION - SEAMLESS BACKGROUND
-   Timeline with phases
+   ROADMAP SECTION
+   Timeline with phases and trust signals
    =================================== */
 
 .roadmap-section {
     padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
     background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.85) 0%, 
-        rgba(26, 15, 10, 0.82) 50%,
-        rgba(26, 15, 10, 0.80) 100%);
+        rgba(13, 12, 12, 1) 0%, 
+        rgba(26, 15, 10, 0.95) 50%, 
+        rgba(13, 12, 12, 1) 100%);
 }
 
 /* Roadmap Timeline */
@@ -2158,6 +2241,8 @@ body.modal-open {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* Remove the timeline connector line completely */
 
 /* Roadmap Item */
 .roadmap-item {
@@ -2376,8 +2461,13 @@ body.modal-open {
     margin: 0;
 }
 
+/* ===================================
+   RESPONSIVE DESIGN - TABLET & DESKTOP
+   =================================== */
+
 /* Tablet (768px+) */
 @media (min-width: 768px) {
+    /* Trust grid 2 columns */
     .trust-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2385,22 +2475,20 @@ body.modal-open {
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
+    /* Trust grid 4 columns */
     .trust-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 /* ===================================
-   TEAM SECTION - SEAMLESS BACKGROUND
+   TEAM SECTION
    Team members and advisors
    =================================== */
 
 .team-section {
     padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
-    background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.80) 0%, 
-        rgba(26, 15, 10, 0.78) 50%,
-        rgba(26, 15, 10, 0.75) 100%);
+    background: var(--ember-gradient-background);
 }
 
 /* Extra-large team icon */
@@ -2570,8 +2658,13 @@ body.modal-open {
     pointer-events: none;
 }
 
+/* ===================================
+   RESPONSIVE DESIGN - TABLET & DESKTOP
+   =================================== */
+
 /* Tablet (768px+) */
 @media (min-width: 768px) {
+    /* Team grid 2 columns */
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2579,22 +2672,23 @@ body.modal-open {
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
+    /* Team grid 3 columns */
     .team-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 /* ===================================
-   TOKENOMICS SECTION - SEAMLESS BACKGROUND
-   Distribution and allocation
+   TOKENOMICS SECTION
+   Distribution, allocation, trust features
    =================================== */
 
 .tokenomics-section {
     padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
     background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.75) 0%, 
-        rgba(26, 15, 10, 0.72) 50%,
-        rgba(26, 15, 10, 0.70) 100%);
+        rgba(26, 15, 10, 0.95) 0%, 
+        rgba(45, 24, 16, 0.90) 50%, 
+        rgba(26, 15, 10, 0.95) 100%);
 }
 
 .tokenomics-content {
@@ -3000,12 +3094,18 @@ body.modal-open {
     margin: 0;
 }
 
+/* ===================================
+   RESPONSIVE DESIGN - TABLET & DESKTOP
+   =================================== */
+
 /* Tablet (768px+) */
 @media (min-width: 768px) {
+    /* Overview stats 3 columns */
     .overview-stats {
         grid-template-columns: repeat(3, 1fr);
     }
     
+    /* Distribution visual side-by-side */
     .distribution-visual {
         flex-direction: row;
         align-items: flex-start;
@@ -3019,6 +3119,7 @@ body.modal-open {
         flex: 1;
     }
     
+    /* Trust features 2 columns */
     .trust-features-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -3026,6 +3127,7 @@ body.modal-open {
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
+    /* Show desktop table, hide mobile cards */
     .table-container {
         display: block;
     }
@@ -3034,26 +3136,32 @@ body.modal-open {
         display: none;
     }
     
+    /* Incentive grid 3 columns */
     .incentive-grid {
         grid-template-columns: repeat(3, 1fr);
     }
     
+    /* Trust features 4 columns */
     .trust-features-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+    .distribution-chart-container {
+        max-width: 400px;
+    }
+}
+
 /* ===================================
-   PRESALE SECTION - SEAMLESS BACKGROUND
-   Calculator, timer, payment options
+   PRESALE SECTION
+   Countdown, calculator, payment options
    =================================== */
 
 .presale-section {
     padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
-    background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.70) 0%, 
-        rgba(26, 15, 10, 0.68) 50%,
-        rgba(26, 15, 10, 0.65) 100%);
+    background: var(--ember-gradient-background);
 }
 
 .presale-content {
@@ -3829,8 +3937,13 @@ body.modal-open {
     margin: 0;
 }
 
+/* ===================================
+   RESPONSIVE DESIGN - TABLET & DESKTOP
+   =================================== */
+
 /* Tablet (768px+) */
 @media (min-width: 768px) {
+    /* Benefits grid 2 columns */
     .benefits-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -3838,27 +3951,36 @@ body.modal-open {
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
+    /* Two column layout */
     .presale-two-column {
         grid-template-columns: 1fr 450px;
         align-items: start;
     }
     
+    /* Benefits grid 4 columns */
     .benefits-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
+/* Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+    .presale-two-column {
+        grid-template-columns: 1fr 480px;
+    }
+}
+
 /* ===================================
-   ENHANCED CTA PRESALE SECTION - SEAMLESS BACKGROUND
-   Final call-to-action
+   ENHANCED CTA PRESALE SECTION
+   Final call-to-action with value props
    =================================== */
 
 .cta-presale-section-enhanced {
     padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
     background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.65) 0%, 
-        rgba(26, 15, 10, 0.62) 50%,
-        rgba(26, 15, 10, 0.60) 100%);
+        rgba(13, 12, 12, 1) 0%, 
+        rgba(26, 15, 10, 0.95) 50%, 
+        rgba(13, 12, 12, 1) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -4233,38 +4355,17 @@ body.modal-open {
     filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
 }
 
-/* Tablet (768px+) */
-@media (min-width: 768px) {
-    .value-prop-row {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .stat-divider {
-        display: block;
-    }
-    
-    .cta-presale-buttons-enhanced {
-        flex-direction: row;
-        justify-content: center;
-    }
-    
-    .cta-presale-primary-enhanced,
-    .cta-presale-secondary-enhanced {
-        flex: 0 1 280px;
-    }
-}
-
 /* ===================================
-   LEGAL & REGULATORY COMPLIANCE SECTION - FINAL BACKGROUND
+   LEGAL & REGULATORY COMPLIANCE SECTION
    Trust signals and compliance
    =================================== */
 
 .legal-compliance-section {
     padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
     background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.60) 0%, 
-        rgba(26, 15, 10, 0.58) 50%,
-        rgba(13, 12, 12, 1) 100%);
+        rgba(26, 15, 10, 0.95) 0%, 
+        rgba(45, 24, 16, 0.90) 50%, 
+        rgba(26, 15, 10, 0.95) 100%);
 }
 
 .legal-content {
@@ -4362,8 +4463,424 @@ body.modal-open {
     font-weight: 700;
 }
 
+/* ===================================
+   ENHANCED CTA PRESALE SECTION
+   Final call-to-action with value props
+   =================================== */
+
+.cta-presale-section-enhanced {
+    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
+    background: linear-gradient(135deg, 
+        rgba(13, 12, 12, 1) 0%, 
+        rgba(26, 15, 10, 0.95) 50%, 
+        rgba(13, 12, 12, 1) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-presale-background {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Floating Coins Animation */
+.cta-floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-coin {
+    position: absolute;
+    opacity: 0.15;
+}
+
+.floating-coin-1 {
+    top: 10%;
+    left: 5%;
+    animation: float-1 8s ease-in-out infinite;
+}
+
+.floating-coin-2 {
+    top: 60%;
+    right: 5%;
+    animation: float-2 10s ease-in-out infinite;
+}
+
+.floating-coin-3 {
+    bottom: 15%;
+    left: 10%;
+    animation: float-3 12s ease-in-out infinite;
+}
+
+.floating-coin-image {
+    width: clamp(60px, 10vw, 100px);
+    height: clamp(60px, 10vw, 100px);
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5));
+}
+
+@keyframes float-1 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(20px, -20px) rotate(90deg); }
+    50% { transform: translate(0, -40px) rotate(180deg); }
+    75% { transform: translate(-20px, -20px) rotate(270deg); }
+}
+
+@keyframes float-2 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-30px, 20px) rotate(120deg); }
+    66% { transform: translate(-15px, -20px) rotate(240deg); }
+}
+
+@keyframes float-3 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(25px, -30px) rotate(180deg); }
+}
+
+/* CTA Content */
+.cta-presale-content-enhanced {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    text-align: center;
+}
+
+/* CTA Icon */
+.cta-presale-icon-enhanced {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: clamp(0.5rem, 1vw, 1rem);
+}
+
+.cta-main-icon {
+    width: clamp(80px, 15vw, 120px);
+    height: clamp(80px, 15vw, 120px);
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
+    animation: pulse-glow 3s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+.icon-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(240, 165, 0, 0.3) 0%, transparent 70%);
+    animation: glow-pulse 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        filter: drop-shadow(0 0 30px rgba(240, 165, 0, 0.8));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 50px rgba(240, 165, 0, 1));
+        transform: scale(1.05);
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+/* CTA Title & Subtitle */
+.cta-presale-title-enhanced {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 0 2px 10px rgba(215, 51, 39, 0.5);
+}
+
+.cta-presale-subtitle-enhanced {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    max-width: 700px;
+}
+
+/* Value Props Grid */
+.cta-value-props {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    width: 100%;
+    margin: clamp(1rem, 2vw, 1.5rem) 0;
+}
+
+.value-prop-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.value-prop {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    background: rgba(26, 15, 10, 0.6);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-xl);
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+.value-prop:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(215, 51, 39, 0.3);
+    border-color: var(--ember-orange);
+}
+
+.prop-icon {
+    flex-shrink: 0;
+}
+
+.prop-icon-image {
+    width: clamp(40px, 8vw, 56px);
+    height: clamp(40px, 8vw, 56px);
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.6));
+}
+
+.prop-text {
+    flex: 1;
+}
+
+.prop-text h3 {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin: 0 0 0.5rem;
+}
+
+.prop-text p {
+    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+/* CTA Stats */
+.cta-presale-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 2rem);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    background: rgba(240, 165, 0, 0.1);
+    border: 2px solid rgba(240, 165, 0, 0.3);
+    border-radius: var(--radius-xl);
+    width: 100%;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.stat-number {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 900;
+    color: var(--ember-gold);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: clamp(0.8rem, 1.4vw, 0.9rem);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-divider {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: rgba(240, 165, 0, 0.3);
+    display: none;
+}
+
+/* CTA Buttons */
+.cta-presale-buttons-enhanced {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px;
+    margin-top: clamp(0.5rem, 1vw, 1rem);
+}
+
+.cta-presale-primary-enhanced,
+.cta-presale-secondary-enhanced {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: clamp(1rem, 2vw, 1.25rem) clamp(1.5rem, 3vw, 2rem);
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    min-height: 70px;
+}
+
+.button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.button-icon img {
+    width: clamp(36px, 6vw, 44px);
+    height: clamp(36px, 6vw, 44px);
+    object-fit: contain;
+}
+
+.button-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    text-align: left;
+}
+
+.button-main-text {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.button-sub-text {
+    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Primary Button */
+.cta-presale-primary-enhanced {
+    background: var(--ember-gradient-primary);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(215, 51, 39, 0.5);
+}
+
+.cta-presale-primary-enhanced .button-icon img {
+    filter: brightness(0) invert(1);
+}
+
+.cta-presale-primary-enhanced:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(215, 51, 39, 0.7);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Secondary Button */
+.cta-presale-secondary-enhanced {
+    background: rgba(26, 15, 10, 0.8);
+    color: #ffffff;
+    border-color: rgba(215, 51, 39, 0.5);
+}
+
+.cta-presale-secondary-enhanced .button-icon img {
+    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.6));
+}
+
+.cta-presale-secondary-enhanced:hover {
+    background: rgba(45, 24, 16, 0.9);
+    border-color: var(--ember-orange);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+}
+
+/* CTA Disclaimer */
+.cta-presale-disclaimer-enhanced {
+    margin-top: clamp(0.5rem, 1vw, 1rem);
+}
+
+.cta-presale-disclaimer-enhanced p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-size: clamp(0.8rem, 1.4vw, 0.9rem);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+    flex-wrap: wrap;
+}
+
+.cta-presale-disclaimer-enhanced img {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
+}
+
+/* ===================================
+   RESPONSIVE DESIGN - TABLET & DESKTOP
+   =================================== */
+
 /* Tablet (768px+) */
 @media (min-width: 768px) {
+    /* Benefits grid 2 columns */
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Value prop rows 2 columns */
+    .value-prop-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Show stat dividers */
+    .stat-divider {
+        display: block;
+    }
+    
+    /* Buttons side by side */
+    .cta-presale-buttons-enhanced {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .cta-presale-primary-enhanced,
+    .cta-presale-secondary-enhanced {
+        flex: 0 1 280px;
+    }
+    
+    /* Compliance grid 2 columns */
     .compliance-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -4371,8 +4888,42 @@ body.modal-open {
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
+    /* Two column layout */
+    .presale-two-column {
+        grid-template-columns: 1fr 450px;
+        align-items: start;
+    }
+    
+    /* Benefits grid 4 columns */
+    .benefits-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .cta-main-icon {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .floating-coin-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Compliance grid 3 columns */
     .compliance-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+    .presale-two-column {
+        grid-template-columns: 1fr 480px;
+    }
+    
+    .compliance-icon img {
+        width: 72px;
+        height: 72px;
     }
 }
 
@@ -4381,9 +4932,381 @@ body.modal-open {
     .cta-floating-elements {
         display: none;
     }
+    
+    .countdown-timer {
+        gap: 0.5rem;
+    }
+    
+    .time-unit {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .payment-options {
+        gap: 1rem;
+    }
 }
 
 /* ===================================
-   END OF PART 3 - EMBER/LOCAL.CSS
-   ✅ COMPLETE FILE - ALL SECTIONS OPTIMIZED
+   AIRDROP MODAL STYLES
+   Info buttons and terms & conditions modals
    =================================== */
+
+/* Info Button */
+.info-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: rgba(240, 165, 0, 0.2);
+    border: 2px solid rgba(240, 165, 0, 0.5);
+    border-radius: 50%;
+    color: var(--ember-gold);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
+}
+
+.info-button:hover {
+    background: rgba(240, 165, 0, 0.3);
+    border-color: var(--ember-gold);
+    transform: scale(1.1);
+}
+
+/* Terms Link */
+.terms-link {
+    color: var(--ember-gold);
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.terms-link:hover {
+    color: var(--ember-orange);
+    text-decoration: none;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+}
+
+.modal-overlay.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal Container */
+.modal-container {
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: var(--radius-2xl);
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border-bottom: 2px solid rgba(215, 51, 39, 0.3);
+    position: sticky;
+    top: 0;
+    background: var(--ember-gradient-card);
+    z-index: 10;
+}
+
+.modal-header h3 {
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-weight: 800;
+    color: var(--ember-gold);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.modal-header-icon {
+    width: clamp(32px, 6vw, 40px);
+    height: clamp(32px, 6vw, 40px);
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.6));
+}
+
+/* Modal Close Button */
+.modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(215, 51, 39, 0.2);
+    border: 2px solid rgba(215, 51, 39, 0.4);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.modal-close:hover {
+    background: rgba(215, 51, 39, 0.4);
+    border-color: var(--ember-orange);
+    transform: rotate(90deg);
+}
+
+/* Modal Body */
+.modal-body {
+    padding: clamp(1.5rem, 3vw, 2rem);
+}
+
+.modal-body h4 {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin: 0 0 1rem;
+}
+
+.modal-body p {
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 1rem;
+}
+
+.modal-body p:last-child {
+    margin-bottom: 0;
+}
+
+.modal-body ul,
+.modal-body ol {
+    margin: 0 0 1rem 1.5rem;
+    padding: 0;
+}
+
+.modal-body li {
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0.5rem;
+}
+
+.modal-body strong {
+    color: var(--ember-gold);
+    font-weight: 700;
+}
+
+/* Modal Section Divider */
+.modal-divider {
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(215, 51, 39, 0.5), 
+        transparent);
+    margin: clamp(1.5rem, 3vw, 2rem) 0;
+}
+
+/* Info Modal Content */
+.info-modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-item {
+    padding: 1.25rem;
+    background: rgba(215, 51, 39, 0.1);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-left: 3px solid var(--ember-orange);
+    border-radius: var(--radius-lg);
+}
+
+.info-item-title {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin: 0 0 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-item-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(240, 165, 0, 0.5));
+}
+
+.info-item-text {
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+/* Terms Modal Specific Styles */
+.terms-section {
+    margin-bottom: 2rem;
+}
+
+.terms-section:last-child {
+    margin-bottom: 0;
+}
+
+.terms-section h4 {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-weight: 700;
+    color: var(--ember-gold);
+    margin: 0 0 1rem;
+}
+
+.terms-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.terms-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.terms-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--ember-orange);
+    font-weight: 700;
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border-top: 2px solid rgba(215, 51, 39, 0.3);
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    position: sticky;
+    bottom: 0;
+    background: var(--ember-gradient-card);
+}
+
+.modal-button {
+    padding: 0.875rem 1.75rem;
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    font-weight: 700;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    min-height: 44px;
+}
+
+.modal-button-primary {
+    background: var(--ember-gradient-primary);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-button-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(215, 51, 39, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.modal-button-secondary {
+    background: rgba(26, 15, 10, 0.8);
+    color: #ffffff;
+    border-color: rgba(215, 51, 39, 0.5);
+}
+
+.modal-button-secondary:hover {
+    background: rgba(45, 24, 16, 0.9);
+    border-color: var(--ember-orange);
+}
+
+/* Scrollbar Styling for Modal */
+.modal-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-container::-webkit-scrollbar-track {
+    background: rgba(26, 15, 10, 0.6);
+    border-radius: 4px;
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+    background: var(--ember-gradient-primary);
+    border-radius: 4px;
+}
+
+.modal-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, 
+        var(--ember-orange) 0%, 
+        var(--ember-red) 100%);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .modal-overlay {
+        padding: 1rem;
+    }
+    
+    .modal-container {
+        max-height: 95vh;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .modal-button {
+        width: 100%;
+    }
+}
