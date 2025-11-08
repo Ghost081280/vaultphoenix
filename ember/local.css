@@ -1673,49 +1673,68 @@ body.modal-open {
 }
 
 /* ===================================
-   HOW IT WORKS SECTION
-   Stakeholder cards, flow steps, utility grid
+   HOW IT WORKS SECTION - POLISHED & CLEAN
+   Three stakeholder cards + utility grid
    =================================== */
 
 .how-it-works-section {
-    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
-    background: var(--ember-gradient-background);
+    padding: clamp(5rem, 10vw, 7rem) var(--container-padding);
+    background: linear-gradient(135deg, 
+        rgba(35, 20, 13, 0.95) 0%, 
+        rgba(26, 15, 10, 0.98) 50%,
+        rgba(35, 20, 13, 0.95) 100%);
+    position: relative;
 }
 
-/* Section Header (uses global pattern) */
-.ember-section-header {
+/* Subtle pattern overlay */
+.how-it-works-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(215, 51, 39, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(240, 165, 0, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* ===================================
+   SECTION HEADER
+   =================================== */
+
+.section-header {
     text-align: center;
-    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+    position: relative;
+    z-index: 2;
 }
 
-.ember-section-icon {
-    width: var(--icon-lg);
-    height: var(--icon-lg);
-    margin: 0 auto clamp(1rem, 2vw, 1.5rem);
-    display: block;
+.section-icon {
+    width: clamp(64px, 12vw, 96px);
+    height: clamp(64px, 12vw, 96px);
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.ember-section-icon-large {
-    width: var(--icon-section);
-    height: var(--icon-section);
-}
-
-.ember-section-icon img {
+.section-icon img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(215, 51, 39, 0.6));
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
 }
 
-.ember-section-title {
+.section-title {
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 800;
     color: #ffffff;
-    margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+    margin: 0 0 1.5rem;
     line-height: 1.2;
 }
 
-.ember-section-subtitle {
+.section-subtitle {
     font-size: clamp(1rem, 2vw, 1.25rem);
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.85);
@@ -1723,100 +1742,148 @@ body.modal-open {
     margin: 0 auto;
 }
 
-/* Stakeholder Cards Grid */
-.how-it-works-grid {
+/* ===================================
+   STAKEHOLDER CARDS GRID
+   =================================== */
+
+.stakeholder-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-    margin-bottom: clamp(3rem, 6vw, 5rem);
+    gap: clamp(2rem, 4vw, 3rem);
+    margin-bottom: clamp(4rem, 8vw, 6rem);
+    position: relative;
+    z-index: 2;
 }
 
-/* Stakeholder Card */
+/* ===================================
+   STAKEHOLDER CARD BASE
+   =================================== */
+
 .stakeholder-card {
-    background: var(--ember-gradient-card);
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9) 0%, 
+        rgba(45, 24, 16, 0.8) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1.5rem;
+    padding: clamp(2rem, 4vw, 3rem);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    gap: clamp(1.25rem, 2.5vw, 2rem);
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer effect on hover */
+.stakeholder-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(240, 165, 0, 0.1), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.stakeholder-card:hover::before {
+    left: 100%;
 }
 
 .stakeholder-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 16px 48px rgba(215, 51, 39, 0.4);
-    border-color: var(--ember-orange);
 }
 
-/* Platform Operator Card - Orange accent */
-.platform-operator-card {
+/* Card type-specific colors */
+.stakeholder-card.platform-operator {
     border-color: rgba(215, 51, 39, 0.4);
 }
 
-.platform-operator-card:hover {
+.stakeholder-card.platform-operator:hover {
     border-color: var(--ember-orange);
     box-shadow: 0 16px 48px rgba(215, 51, 39, 0.5);
 }
 
-/* Player Card - Gold accent */
-.player-card {
+.stakeholder-card.player {
     border-color: rgba(240, 165, 0, 0.4);
 }
 
-.player-card:hover {
+.stakeholder-card.player:hover {
     border-color: var(--ember-gold);
     box-shadow: 0 16px 48px rgba(240, 165, 0, 0.5);
 }
 
-/* Merchant/Advertiser Card - Secondary accent */
-.merchant-card {
+.stakeholder-card.advertiser {
     border-color: rgba(251, 146, 60, 0.4);
 }
 
-.merchant-card:hover {
+.stakeholder-card.advertiser:hover {
     border-color: #fb923c;
     box-shadow: 0 16px 48px rgba(251, 146, 60, 0.5);
 }
 
-/* Stakeholder Icon */
-.stakeholder-icon {
+/* ===================================
+   STAKEHOLDER HEADER
+   =================================== */
+
+.stakeholder-header {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+.stakeholder-icon {
+    width: clamp(64px, 12vw, 80px);
+    height: clamp(64px, 12vw, 80px);
+    display: flex;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 0.5rem;
 }
 
 .stakeholder-icon img {
-    width: clamp(60px, 10vw, 80px);
-    height: clamp(60px, 10vw, 80px);
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 0 12px rgba(215, 51, 39, 0.5));
+    filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
 }
 
-/* Stakeholder Title */
 .stakeholder-title {
     font-size: clamp(1.4rem, 3vw, 1.8rem);
     font-weight: 700;
     color: var(--ember-gold);
-    text-align: center;
     margin: 0;
 }
 
-/* Flow Steps */
+/* ===================================
+   FLOW STEPS
+   =================================== */
+
 .stakeholder-flow {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 .flow-step {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.75rem;
+    gap: 1rem;
+    padding: 1rem;
     background: rgba(215, 51, 39, 0.1);
-    border-radius: var(--radius-md);
+    border-radius: 0.75rem;
     border-left: 3px solid var(--ember-orange);
+    transition: all 0.3s ease;
+}
+
+.flow-step:hover {
+    background: rgba(215, 51, 39, 0.15);
+    transform: translateX(4px);
 }
 
 .step-number {
@@ -1825,7 +1892,7 @@ body.modal-open {
     justify-content: center;
     min-width: 32px;
     height: 32px;
-    background: var(--ember-gradient-primary);
+    background: linear-gradient(135deg, #d73327, #c62828);
     color: #ffffff;
     font-weight: 800;
     font-size: 1rem;
@@ -1836,10 +1903,10 @@ body.modal-open {
 
 .step-text {
     flex: 1;
-    font-size: clamp(0.9rem, 1.5vw, 1rem);
-    line-height: 1.5;
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
-    padding-top: 0.25rem;
+    padding-top: 0.35rem;
 }
 
 .step-text strong {
@@ -1847,40 +1914,55 @@ body.modal-open {
     font-weight: 700;
 }
 
-/* Dual Path (Players only) */
+/* ===================================
+   DUAL PATH (Players only)
+   =================================== */
+
 .dual-path {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
     background: rgba(240, 165, 0, 0.1);
     border-left-color: var(--ember-gold);
-    padding: 1rem;
+    padding: 1.5rem;
 }
 
 .path-option {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
+    gap: 1rem;
+    padding: 1rem;
     background: rgba(26, 15, 10, 0.6);
-    border-radius: var(--radius-md);
+    border-radius: 0.75rem;
     border: 1px solid rgba(240, 165, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.path-option:hover {
+    background: rgba(45, 24, 16, 0.7);
+    border-color: rgba(240, 165, 0, 0.5);
+    transform: translateX(4px);
 }
 
 .path-icon {
     flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .path-icon img {
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
 }
 
 .path-text {
     flex: 1;
-    font-size: clamp(0.85rem, 1.4vw, 0.95rem);
-    line-height: 1.4;
+    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
 }
 
@@ -1889,12 +1971,34 @@ body.modal-open {
     font-size: 1.1rem;
     font-weight: 800;
     color: var(--ember-gold);
-    padding: 0.25rem 0;
+    padding: 0.5rem 0;
+    position: relative;
 }
 
-/* Stakeholder Benefits */
+.path-divider::before,
+.path-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(240, 165, 0, 0.3), transparent);
+}
+
+.path-divider::before {
+    left: 0;
+}
+
+.path-divider::after {
+    right: 0;
+}
+
+/* ===================================
+   STAKEHOLDER BENEFITS
+   =================================== */
+
 .stakeholder-benefits {
-    padding-top: 1rem;
+    padding-top: 1.5rem;
     border-top: 1px solid rgba(215, 51, 39, 0.3);
 }
 
@@ -1902,7 +2006,7 @@ body.modal-open {
     font-size: clamp(1.1rem, 2vw, 1.3rem);
     font-weight: 700;
     color: var(--ember-gold);
-    margin: 0 0 0.75rem;
+    margin: 0 0 1rem;
 }
 
 .stakeholder-benefits ul {
@@ -1911,15 +2015,15 @@ body.modal-open {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
 }
 
 .stakeholder-benefits li {
     display: flex;
     align-items: flex-start;
-    gap: 0.5rem;
-    font-size: clamp(0.9rem, 1.5vw, 1rem);
-    line-height: 1.5;
+    gap: 0.75rem;
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
 }
 
@@ -1932,174 +2036,202 @@ body.modal-open {
     margin-top: -2px;
 }
 
-/* Value Proposition Enhanced */
-.value-proposition-enhanced {
-    margin-top: clamp(3rem, 6vw, 5rem);
-    padding: clamp(2rem, 4vw, 3rem);
+/* ===================================
+   ECOSYSTEM VALUE SECTION
+   =================================== */
+
+.ecosystem-value {
+    padding: clamp(2.5rem, 5vw, 4rem);
     background: linear-gradient(135deg, 
         rgba(215, 51, 39, 0.15) 0%, 
         rgba(240, 165, 0, 0.1) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
+    border-radius: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
-.value-proposition-enhanced h3 {
+.ecosystem-value h3 {
     font-size: clamp(1.5rem, 3.5vw, 2.2rem);
     font-weight: 800;
     color: var(--ember-gold);
     text-align: center;
-    margin: 0 0 clamp(2rem, 4vw, 3rem);
+    margin: 0 0 clamp(2.5rem, 5vw, 4rem);
 }
 
-/* Utility Grid */
-.utility-grid-enhanced {
+/* ===================================
+   UTILITY GRID
+   =================================== */
+
+.utility-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(1.25rem, 2.5vw, 2rem);
+    gap: clamp(1.5rem, 3vw, 2rem);
 }
 
-.utility-item-enhanced {
+.utility-item {
     background: rgba(26, 15, 10, 0.6);
     border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-radius: 1.25rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.utility-item-enhanced:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(215, 51, 39, 0.3);
+.utility-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(240, 165, 0, 0.08), 
+        transparent);
+    transition: left 0.5s ease;
+}
+
+.utility-item:hover::before {
+    left: 100%;
+}
+
+.utility-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(215, 51, 39, 0.3);
     border-color: var(--ember-orange);
 }
 
 .utility-icon {
+    width: clamp(56px, 10vw, 72px);
+    height: clamp(56px, 10vw, 72px);
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 0.5rem;
 }
 
 .utility-icon img {
-    width: clamp(48px, 8vw, 64px);
-    height: clamp(48px, 8vw, 64px);
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(240, 165, 0, 0.5));
+    filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.5));
 }
 
-.utility-item-enhanced h4 {
+.utility-item h4 {
     font-size: clamp(1.1rem, 2vw, 1.35rem);
     font-weight: 700;
     color: #ffffff;
-    text-align: center;
     margin: 0;
 }
 
-.utility-item-enhanced p {
-    font-size: clamp(0.9rem, 1.5vw, 1rem);
+.utility-item p {
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
-    text-align: center;
     margin: 0;
 }
 
-.utility-item-enhanced p strong {
+.utility-item p strong {
     color: var(--ember-gold);
     font-weight: 700;
 }
 
 /* ===================================
-   RESPONSIVE DESIGN - TABLET & DESKTOP
+   RESPONSIVE DESIGN
    =================================== */
 
 /* Tablet (768px+) */
 @media (min-width: 768px) {
-    .ember-hero {
-        padding: calc(var(--navbar-height) + 5rem) var(--container-padding) 5rem;
-    }
-    
-    .ember-hero-content {
-        gap: 2.5rem;
-    }
-    
-    /* Social buttons in row */
-    .spread-fire-buttons {
-        flex-wrap: nowrap;
-    }
-    
-    /* Stakeholder cards 2 columns */
-    .how-it-works-grid {
+    .stakeholder-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    /* Utility grid 2 columns */
-    .utility-grid-enhanced {
+    /* Make third card span full width on 2-column layout */
+    .stakeholder-card:nth-child(3) {
+        grid-column: 1 / -1;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .utility-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
-    .ember-hero {
-        padding: calc(var(--navbar-height) + 6rem) var(--container-padding) 6rem;
-    }
-    
-    .ember-hero-content {
-        gap: 3rem;
-    }
-    
-    /* Stakeholder cards 3 columns */
-    .how-it-works-grid {
+    .stakeholder-grid {
         grid-template-columns: repeat(3, 1fr);
     }
     
-    /* Utility grid 3 columns */
-    .utility-grid-enhanced {
+    /* Reset third card on 3-column layout */
+    .stakeholder-card:nth-child(3) {
+        grid-column: auto;
+        max-width: none;
+    }
+    
+    .utility-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 /* Large Desktop (1400px+) */
 @media (min-width: 1400px) {
-    .ember-hero-content {
+    .stakeholder-grid {
         gap: 3rem;
     }
     
-    .how-it-works-grid {
-        gap: 3rem;
-    }
-    
-    .utility-grid-enhanced {
+    .utility-grid {
         gap: 2.5rem;
     }
 }
 
-/* Mobile Portrait Fine-tuning */
+/* Mobile adjustments */
 @media (max-width: 480px) {
-    .spread-fire-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .spread-fire-btn {
-        width: 100%;
+    .how-it-works-section {
+        padding: 4rem 1rem;
     }
     
     .stakeholder-card {
-        padding: 1.25rem;
+        padding: 1.5rem;
+    }
+    
+    .flow-step {
+        padding: 0.875rem;
+    }
+    
+    .path-option {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .path-divider::before,
+    .path-divider::after {
+        display: none;
     }
 }
 
-/* ===================================
-   END OF EMBER LOCAL CSS PART 1
-   Hero + Spread Fire + How It Works ✅
-   =================================== */
-/* ===================================
-   VAULT PHOENIX - EMBER LOCAL CSS v2.0 PART 2
-   REBUILT & OPTIMIZED
-   Technical Foundation + Roadmap + Team + Tokenomics sections
-   =================================== */
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .stakeholder-card::before,
+    .utility-item::before {
+        display: none;
+    }
+    
+    .stakeholder-card:hover,
+    .flow-step:hover,
+    .path-option:hover,
+    .utility-item:hover {
+        transform: none;
+    }
+}
 
 /* ===================================
    TECHNICAL FOUNDATION SECTION
