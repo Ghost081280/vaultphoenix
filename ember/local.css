@@ -3259,17 +3259,35 @@ body.modal-open {
 }
 
 /* ===================================
-   TOKENOMICS SECTION
+   TOKENOMICS SECTION - POLISHED & CLEAN
    Distribution, allocation, trust features
    =================================== */
 
 .tokenomics-section {
-    padding: clamp(4rem, 8vw, 6rem) var(--container-padding);
+    padding: clamp(5rem, 10vw, 7rem) var(--container-padding);
     background: linear-gradient(135deg, 
-        rgba(26, 15, 10, 0.95) 0%, 
-        rgba(45, 24, 16, 0.90) 50%, 
-        rgba(26, 15, 10, 0.95) 100%);
+        rgba(35, 20, 13, 0.95) 0%, 
+        rgba(26, 15, 10, 0.98) 50%,
+        rgba(35, 20, 13, 0.95) 100%);
+    position: relative;
 }
+
+/* Subtle background pattern */
+.tokenomics-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(240, 165, 0, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 70%, rgba(215, 51, 39, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* ===================================
+   TOKENOMICS CONTENT WRAPPER
+   =================================== */
 
 .tokenomics-content {
     display: flex;
@@ -3277,14 +3295,21 @@ body.modal-open {
     gap: clamp(3rem, 6vw, 5rem);
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
-/* Token Overview */
+/* ===================================
+   TOKEN OVERVIEW
+   =================================== */
+
 .token-overview {
     padding: clamp(2rem, 4vw, 3rem);
-    background: var(--ember-gradient-card);
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.12) 0%, 
+        rgba(215, 51, 39, 0.08) 100%);
     border: 2px solid rgba(240, 165, 0, 0.4);
-    border-radius: var(--radius-2xl);
+    border-radius: 1.5rem;
 }
 
 .overview-stats {
@@ -3293,12 +3318,19 @@ body.modal-open {
     gap: clamp(1.5rem, 3vw, 2rem);
 }
 
-.overview-stat {
+.stat-box {
     text-align: center;
     padding: clamp(1.25rem, 2.5vw, 1.75rem);
     background: rgba(215, 51, 39, 0.1);
-    border-radius: var(--radius-xl);
+    border-radius: 1rem;
     border: 1px solid rgba(215, 51, 39, 0.3);
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(215, 51, 39, 0.3);
+    border-color: var(--ember-orange);
 }
 
 .stat-value {
@@ -3309,23 +3341,26 @@ body.modal-open {
     line-height: 1;
 }
 
-.stat-desc {
+.stat-label {
     font-size: clamp(0.9rem, 1.6vw, 1.05rem);
     font-weight: 600;
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* Investor Incentive Section */
-.investor-incentive-section {
+/* ===================================
+   INVESTOR INCENTIVE
+   =================================== */
+
+.investor-incentive {
     padding: clamp(2rem, 4vw, 3rem);
     background: linear-gradient(135deg, 
         rgba(215, 51, 39, 0.15) 0%, 
         rgba(240, 165, 0, 0.1) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
+    border-radius: 1.5rem;
 }
 
-.investor-incentive-section h3 {
+.investor-incentive h3 {
     font-size: clamp(1.5rem, 3.5vw, 2.2rem);
     font-weight: 800;
     color: var(--ember-gold);
@@ -3340,11 +3375,15 @@ body.modal-open {
 }
 
 .incentive-card {
-    background: rgba(26, 15, 10, 0.6);
+    background: rgba(26, 15, 10, 0.8);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
+    border-radius: 1.25rem;
     padding: clamp(1.5rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    gap: 1rem;
     transition: all 0.3s ease;
 }
 
@@ -3355,14 +3394,16 @@ body.modal-open {
 }
 
 .incentive-icon {
+    width: clamp(60px, 12vw, 80px);
+    height: clamp(60px, 12vw, 80px);
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 1.25rem;
 }
 
 .incentive-icon img {
-    width: clamp(60px, 12vw, 80px);
-    height: clamp(60px, 12vw, 80px);
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(240, 165, 0, 0.6));
 }
@@ -3371,7 +3412,7 @@ body.modal-open {
     font-size: clamp(1.2rem, 2.5vw, 1.5rem);
     font-weight: 700;
     color: #ffffff;
-    margin: 0 0 1rem;
+    margin: 0;
 }
 
 .incentive-card p {
@@ -3386,7 +3427,17 @@ body.modal-open {
     font-weight: 700;
 }
 
-/* Token Distribution */
+/* ===================================
+   TOKEN DISTRIBUTION
+   =================================== */
+
+.token-distribution {
+    padding: clamp(2rem, 4vw, 3rem);
+    background: rgba(26, 15, 10, 0.6);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    border-radius: 1.5rem;
+}
+
 .token-distribution h3 {
     font-size: clamp(1.5rem, 3.5vw, 2.2rem);
     font-weight: 800;
@@ -3395,15 +3446,15 @@ body.modal-open {
     margin: 0 0 clamp(2rem, 4vw, 3rem);
 }
 
-.distribution-visual {
+.distribution-layout {
     display: flex;
     flex-direction: column;
-    gap: clamp(2rem, 4vw, 3rem);
     align-items: center;
+    gap: clamp(2rem, 4vw, 3rem);
 }
 
-/* Pie Chart Container */
-.distribution-chart-container {
+/* Pie Chart */
+.pie-chart-wrapper {
     width: 100%;
     max-width: 400px;
     aspect-ratio: 1;
@@ -3413,7 +3464,6 @@ body.modal-open {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    position: relative;
     background: conic-gradient(
         #d73327 0% 35%,
         #fb923c 35% 65%,
@@ -3440,7 +3490,7 @@ body.modal-open {
     gap: 1rem;
     padding: 0.75rem;
     background: rgba(26, 15, 10, 0.6);
-    border-radius: var(--radius-md);
+    border-radius: 0.75rem;
     border: 1px solid rgba(215, 51, 39, 0.2);
     transition: all 0.3s ease;
 }
@@ -3475,9 +3525,12 @@ body.modal-open {
     color: var(--ember-gold);
 }
 
-/* Allocation Table (Desktop) */
+/* ===================================
+   ALLOCATION TABLE
+   =================================== */
+
 .allocation-table {
-    margin-top: clamp(2rem, 4vw, 3rem);
+    margin-top: 0;
 }
 
 .allocation-table h3 {
@@ -3488,12 +3541,12 @@ body.modal-open {
     margin: 0 0 clamp(1.5rem, 3vw, 2rem);
 }
 
-.table-container {
+/* Desktop Table */
+.table-wrapper {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: var(--radius-xl);
+    border-radius: 1rem;
     border: 2px solid rgba(215, 51, 39, 0.3);
-    display: none; /* Hidden on mobile */
+    display: none;
 }
 
 .tokenomics-table {
@@ -3503,7 +3556,7 @@ body.modal-open {
 }
 
 .tokenomics-table thead {
-    background: var(--ember-gradient-primary);
+    background: linear-gradient(135deg, #d73327, #c62828);
 }
 
 .tokenomics-table th {
@@ -3539,21 +3592,23 @@ body.modal-open {
     gap: 1.5rem;
 }
 
-.allocation-card-mobile {
-    background: var(--ember-gradient-card);
+.allocation-card {
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9) 0%, 
+        rgba(45, 24, 16, 0.8) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
+    border-radius: 1.25rem;
     padding: 1.5rem;
     transition: all 0.3s ease;
 }
 
-.allocation-card-mobile:hover {
+.allocation-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(215, 51, 39, 0.3);
     border-color: var(--ember-orange);
 }
 
-.allocation-card-header {
+.card-header-allocation {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -3562,60 +3617,62 @@ body.modal-open {
     border-bottom: 1px solid rgba(215, 51, 39, 0.3);
 }
 
-.allocation-card-category {
+.allocation-name {
     font-size: clamp(1.1rem, 2vw, 1.25rem);
     font-weight: 700;
     color: #ffffff;
 }
 
-.allocation-card-percentage {
+.allocation-percent {
     font-size: clamp(1.2rem, 2.5vw, 1.4rem);
     font-weight: 900;
     color: var(--ember-gold);
 }
 
-.allocation-card-details {
+.card-details {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
 }
 
-.allocation-detail-item {
+.detail-row {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
 }
 
-.allocation-detail-label {
+.detail-label {
     font-size: 0.85rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);
 }
 
-.allocation-detail-value {
+.detail-value {
     font-size: 1rem;
     font-weight: 700;
     color: var(--ember-gold);
 }
 
-.allocation-card-note {
-    font-size: 0.9rem;
+.card-purpose {
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
     padding: 0.75rem;
     background: rgba(215, 51, 39, 0.1);
-    border-radius: var(--radius-md);
+    border-radius: 0.5rem;
 }
 
-/* Trust Features */
+/* ===================================
+   TRUST FEATURES
+   =================================== */
+
 .trust-features {
-    margin-top: clamp(3rem, 6vw, 5rem);
-    padding: clamp(2rem, 4vw, 3rem);
+    padding: clamp(2.5rem, 5vw, 4rem);
     background: linear-gradient(135deg, 
         rgba(215, 51, 39, 0.15) 0%, 
         rgba(240, 165, 0, 0.1) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-2xl);
+    border-radius: 1.5rem;
 }
 
 .trust-features h3 {
@@ -3635,27 +3692,33 @@ body.modal-open {
 .trust-feature {
     background: rgba(26, 15, 10, 0.6);
     border: 1px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
+    border-radius: 1.25rem;
     padding: clamp(1.5rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    gap: 1rem;
     transition: all 0.3s ease;
 }
 
 .trust-feature:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(215, 51, 39, 0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(215, 51, 39, 0.3);
     border-color: var(--ember-orange);
 }
 
-.trust-feature .trust-icon {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-
-.trust-feature .trust-icon img {
+.feature-icon {
     width: clamp(56px, 10vw, 72px);
     height: clamp(56px, 10vw, 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.5));
 }
@@ -3664,7 +3727,7 @@ body.modal-open {
     font-size: clamp(1.1rem, 2vw, 1.35rem);
     font-weight: 700;
     color: #ffffff;
-    margin: 0 0 0.75rem;
+    margin: 0;
 }
 
 .trust-feature p {
@@ -3675,23 +3738,21 @@ body.modal-open {
 }
 
 /* ===================================
-   RESPONSIVE DESIGN - TABLET & DESKTOP
+   RESPONSIVE DESIGN
    =================================== */
 
 /* Tablet (768px+) */
 @media (min-width: 768px) {
-    /* Overview stats 3 columns */
     .overview-stats {
         grid-template-columns: repeat(3, 1fr);
     }
     
-    /* Distribution visual side-by-side */
-    .distribution-visual {
+    .distribution-layout {
         flex-direction: row;
         align-items: flex-start;
     }
     
-    .distribution-chart-container {
+    .pie-chart-wrapper {
         max-width: 350px;
     }
     
@@ -3699,7 +3760,6 @@ body.modal-open {
         flex: 1;
     }
     
-    /* Trust features 2 columns */
     .trust-features-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -3707,8 +3767,7 @@ body.modal-open {
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
-    /* Show desktop table, hide mobile cards */
-    .table-container {
+    .table-wrapper {
         display: block;
     }
     
@@ -3716,12 +3775,10 @@ body.modal-open {
         display: none;
     }
     
-    /* Incentive grid 3 columns */
     .incentive-grid {
         grid-template-columns: repeat(3, 1fr);
     }
     
-    /* Trust features 4 columns */
     .trust-features-grid {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -3729,8 +3786,32 @@ body.modal-open {
 
 /* Large Desktop (1400px+) */
 @media (min-width: 1400px) {
-    .distribution-chart-container {
+    .pie-chart-wrapper {
         max-width: 400px;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .tokenomics-section {
+        padding: 4rem 1rem;
+    }
+    
+    .token-overview,
+    .investor-incentive,
+    .token-distribution,
+    .trust-features {
+        padding: 1.5rem;
+    }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .stat-box:hover,
+    .incentive-card:hover,
+    .allocation-card:hover,
+    .trust-feature:hover {
+        transform: none;
     }
 }
 
