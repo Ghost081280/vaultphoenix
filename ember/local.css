@@ -338,52 +338,63 @@ body.modal-open {
 }
 
 /* ===================================
-   HERO SECTION - COMPLETE WITH METRICS
+   HERO SECTION - POLISHED & CLEAN
+   Full-height hero with metrics & CTAs
    =================================== */
 
-/* Make the first section (home) look like a hero */
-#home.ember-section {
+.hero-section {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 140px;
-    padding-bottom: 80px;
+    padding: calc(var(--navbar-height) + 3rem) var(--container-padding) 4rem;
     background: linear-gradient(135deg, 
         rgba(13, 12, 12, 1) 0%, 
-        rgba(26, 15, 10, 0.95) 50%, 
+        rgba(26, 15, 10, 0.98) 30%,
+        rgba(35, 20, 13, 0.95) 70%,
         rgba(13, 12, 12, 1) 100%);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Make the section header bigger for hero */
-#home .ember-section-header {
-    margin-bottom: 0;
+/* Subtle background pattern */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(215, 51, 39, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(240, 165, 0, 0.06) 0%, transparent 50%);
+    pointer-events: none;
 }
 
-/* Title - "$Ember Token" - Keep good size */
-#home .ember-section-title {
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    font-weight: 900;
-    margin-bottom: 1.5rem;
+/* Hero Content Container */
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
 }
 
-/* Coin icon container with glow */
-#home .ember-section-icon-large {
+/* ===================================
+   HERO ICON WITH GLOW
+   =================================== */
+
+.hero-icon {
+    position: relative;
     width: clamp(180px, 25vw, 280px);
     height: clamp(180px, 25vw, 280px);
-    position: relative;
+    margin-bottom: 1rem;
 }
 
-/* Coin with gentle rock and glow */
-#home .ember-section-icon-large img {
-    animation: coin-rock 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.6))
-            drop-shadow(0 0 50px rgba(240, 165, 0, 0.4));
-}
-
-/* Glow effect behind coin */
-#home .ember-section-icon-large::before {
-    content: '';
+.hero-icon-glow {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -395,21 +406,9 @@ body.modal-open {
         rgba(215, 51, 39, 0.3) 30%, 
         transparent 70%);
     border-radius: 50%;
-    z-index: -1;
     animation: glow-pulse 3s ease-in-out infinite;
 }
 
-/* Gentle rocking animation */
-@keyframes coin-rock {
-    0%, 100% {
-        transform: rotate(-3deg);
-    }
-    50% {
-        transform: rotate(3deg);
-    }
-}
-
-/* Pulsing glow animation */
 @keyframes glow-pulse {
     0%, 100% {
         opacity: 0.6;
@@ -421,52 +420,101 @@ body.modal-open {
     }
 }
 
-/* First subtitle - "Fueling Location-Based AR Gaming Revolution" - Keep good size */
-#home .ember-section-subtitle:first-of-type {
-    font-size: clamp(1.3rem, 3.5vw, 2.2rem);
-    font-weight: 700;
-    margin-bottom: 1.5rem;
+.hero-coin {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(215, 51, 39, 0.6))
+            drop-shadow(0 0 50px rgba(240, 165, 0, 0.4));
+    animation: coin-rock 3s ease-in-out infinite;
 }
 
-/* Second subtitle/description - "The utility token powering..." - SMALLER */
-#home .ember-section-subtitle:last-of-type {
+@keyframes coin-rock {
+    0%, 100% {
+        transform: rotate(-3deg);
+    }
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+/* ===================================
+   HERO TEXT ELEMENTS
+   =================================== */
+
+.hero-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.hero-tagline {
+    font-size: clamp(1.3rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.hero-description {
     font-size: clamp(0.95rem, 1.8vw, 1.15rem);
     font-weight: 400;
     line-height: 1.7;
-    margin-bottom: 2rem;
-    max-width: 850px;
-    margin-left: auto;
-    margin-right: auto;
     color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    max-width: 800px;
 }
 
 .highlight-gold {
-    color: #f0a500;
+    color: var(--ember-gold);
     font-weight: 700;
 }
 
 /* ===================================
-   HERO TOKEN METRICS
+   HERO METRICS GRID
    =================================== */
 
-.hero-token-metrics {
+.hero-metrics {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+    width: 100%;
     max-width: 900px;
-    margin: 0 auto clamp(2rem, 4vw, 2.5rem);
+    margin-top: 1rem;
 }
 
 .hero-metric-card {
-    background: var(--ember-gradient-card);
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.8) 0%, 
+        rgba(45, 24, 16, 0.6) 100%);
     border: 2px solid rgba(215, 51, 39, 0.3);
-    border-radius: var(--radius-xl);
-    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(240, 165, 0, 0.1), 
+        transparent);
+    transition: left 0.5s ease;
 }
 
 .hero-metric-card:hover {
@@ -475,22 +523,26 @@ body.modal-open {
     border-color: var(--ember-orange);
 }
 
-.hero-metric-icon {
-    width: clamp(48px, 10vw, 64px);
-    height: clamp(48px, 10vw, 64px);
+.hero-metric-card:hover::before {
+    left: 100%;
+}
+
+.metric-icon {
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.hero-metric-icon img {
+.metric-icon img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 0 12px rgba(240, 165, 0, 0.5));
 }
 
-.hero-metric-value {
+.metric-value {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 900;
     color: var(--ember-gold);
@@ -498,17 +550,16 @@ body.modal-open {
     text-shadow: 0 0 10px rgba(240, 165, 0, 0.3);
 }
 
-.hero-metric-label {
+.metric-label {
     font-size: clamp(0.9rem, 1.8vw, 1.1rem);
     font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    text-align: center;
 }
 
 /* ===================================
-   HERO BUTTONS
+   HERO CTA BUTTONS
    =================================== */
 
 .hero-buttons {
@@ -516,12 +567,14 @@ body.modal-open {
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    width: 100%;
 }
 
 .hero-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.75rem;
     padding: 1.125rem 2.5rem;
     border-radius: 1rem;
@@ -530,18 +583,48 @@ body.modal-open {
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid transparent;
-    min-height: 44px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-btn img {
     width: 32px;
     height: 32px;
     object-fit: contain;
+    position: relative;
+    z-index: 2;
 }
 
-/* Primary Button (Join Presale) */
+.hero-btn span {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.hero-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Primary Button - Join Presale */
 .hero-btn-primary {
-    background: linear-gradient(135deg, #d73327 0%, #c62828 50%, #b71c1c 100%);
+    background: linear-gradient(135deg, 
+        #d73327 0%, 
+        #c62828 50%, 
+        #b71c1c 100%);
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 15px rgba(215, 51, 39, 0.4);
@@ -552,12 +635,16 @@ body.modal-open {
 }
 
 .hero-btn-primary:hover {
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(215, 51, 39, 0.6);
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Secondary Button (Whitepaper) */
+.hero-btn-primary:active {
+    transform: translateY(-1px);
+}
+
+/* Secondary Button - Whitepaper */
 .hero-btn-secondary {
     background: transparent;
     color: #ffffff;
@@ -570,52 +657,124 @@ body.modal-open {
 
 .hero-btn-secondary:hover {
     background: rgba(215, 51, 39, 0.2);
-    border-color: #d73327;
+    border-color: var(--ember-orange);
     transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(215, 51, 39, 0.3);
+}
+
+.hero-btn-secondary:active {
+    transform: translateY(0);
 }
 
 /* ===================================
-   RESPONSIVE - HERO SECTION
+   RESPONSIVE DESIGN
    =================================== */
 
-/* Tablet (768px+) - 3 columns for metrics */
-@media (min-width: 768px) {
-    .hero-token-metrics {
-        grid-template-columns: repeat(3, 1fr);
+/* Mobile Portrait (default styles above) */
+
+/* Mobile Landscape & Small Tablet (576px+) */
+@media (min-width: 576px) {
+    .hero-section {
+        padding: calc(var(--navbar-height) + 4rem) var(--container-padding) 5rem;
+    }
+    
+    .hero-content {
+        gap: 2.5rem;
+    }
+    
+    .hero-metrics {
+        grid-template-columns: repeat(2, 1fr);
         gap: 1.25rem;
     }
-}
-
-/* Desktop (1024px+) - slightly larger gap */
-@media (min-width: 1024px) {
-    .hero-token-metrics {
-        gap: 1.5rem;
+    
+    .hero-metric-card:last-child {
+        grid-column: 1 / -1;
+        max-width: 400px;
+        margin: 0 auto;
     }
 }
 
-/* Mobile Portrait */
-@media (max-width: 768px) {
-    #home.ember-section {
-        padding-top: 100px;
-        padding-bottom: 60px;
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+    .hero-section {
+        padding: calc(var(--navbar-height) + 5rem) var(--container-padding) 6rem;
+    }
+    
+    .hero-content {
+        gap: 3rem;
+    }
+    
+    .hero-metrics {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .hero-metric-card:last-child {
+        grid-column: auto;
+        max-width: none;
+    }
+    
+    .hero-buttons {
+        flex-wrap: nowrap;
+    }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    .hero-section {
+        padding: calc(var(--navbar-height) + 6rem) var(--container-padding) 7rem;
+    }
+    
+    .hero-content {
+        gap: 3.5rem;
+    }
+    
+    .hero-icon {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+    .hero-content {
+        gap: 4rem;
+    }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+    .hero-section {
+        min-height: auto;
+        padding: calc(var(--navbar-height) + 2rem) var(--container-padding) 3rem;
     }
     
     .hero-buttons {
         flex-direction: column;
         width: 100%;
-        max-width: 300px;
-        margin-left: auto;
-        margin-right: auto;
+        max-width: 320px;
     }
     
     .hero-btn {
         width: 100%;
-        justify-content: center;
     }
     
-    /* Make description even smaller on mobile */
-    #home .ember-section-subtitle:last-of-type {
+    .hero-description {
         font-size: 0.9rem;
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .hero-coin,
+    .hero-icon-glow,
+    .hero-metric-card::before,
+    .hero-btn::before {
+        animation: none;
+    }
+    
+    .hero-metric-card:hover,
+    .hero-btn:hover {
+        transform: none;
     }
 }
 
