@@ -4842,6 +4842,32 @@ body.modal-open {
 /* ===================================
    END SECTION 11: LEGAL & COMPLIANCE SECTION
    =================================== */
+/* TEMPORARY TEST: Fix chatbot glow centering */
+.chatbot-button-container {
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important;
+}
+
+.chatbot-glow {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    animation: pulse-glow 2s ease-in-out infinite !important;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1;
+    }
+}
 
 /* ===================================
    END OF EMBER LOCAL CSS v2.4 OPTIMIZED
