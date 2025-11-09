@@ -19,10 +19,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1500;  /* ✅ FIXED: Below chatbot (2000+), above navbar (1000) */
+    z-index: 1500;
     background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     align-items: center;
     justify-content: center;
     padding: 2rem 1rem;
@@ -4844,17 +4842,6 @@ body.modal-open {
 /* ===================================
    END SECTION 11: LEGAL & COMPLIANCE SECTION
    =================================== */
-/* TEMPORARY TEST: Fix chatbot glow centering */
-.chatbot-button-container {
-    position: relative !important;
-}
-
-.chatbot-glow {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-}
 
 /* ===================================
    END OF EMBER LOCAL CSS v2.4 OPTIMIZED
