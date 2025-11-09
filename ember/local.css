@@ -4849,19 +4849,20 @@ body.modal-open {
 
 .chatbot-button-container {
     position: fixed !important;
+    z-index: 2001 !important;
 }
 
 .chatbot-glow {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
-    transform: translate(-50%, -50%) !important;
     width: 120px !important;
     height: 120px !important;
     background: radial-gradient(circle, rgba(215, 51, 39, 0.6) 0%, rgba(240, 165, 0, 0.4) 40%, transparent 70%) !important;
     border-radius: 50% !important;
-    animation: pulse-glow 2s ease-in-out infinite !important;
     pointer-events: none !important;
+    will-change: transform, opacity !important;
+    animation: pulse-glow 2s ease-in-out infinite !important;
 }
 
 @keyframes pulse-glow {
