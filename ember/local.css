@@ -4848,13 +4848,6 @@ body.modal-open {
         grid-template-columns: repeat(3, 1fr);
     }
 }
-.chatbot-button-container .chatbot-glow {
-    z-index: 1 !important;
-}
-
-.chatbot-button-container .chatbot-button {
-    z-index: 10 !important;
-}
 
 /* ===================================
    END SECTION 11: LEGAL & COMPLIANCE SECTION
