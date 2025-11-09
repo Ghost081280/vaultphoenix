@@ -19,7 +19,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10000;
+    z-index: 1500;  /* ✅ FIXED: Below chatbot (2000+), above navbar (1000) */
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
