@@ -773,20 +773,13 @@ body.modal-open {
    AIRDROP BASE STYLES
    =================================== */
 
-.ember-airdrop-section,
-.ember-airdrop-section *,
-.ember-airdrop-section *::before,
-.ember-airdrop-section *::after {
-    box-sizing: border-box;
-}
-
 .ember-airdrop-section {
     padding: clamp(3rem, 6vw, 5rem) var(--container-padding);
     background: linear-gradient(135deg, 
         rgba(13, 12, 12, 0.95) 0%, 
         rgba(26, 15, 10, 0.9) 100%);
     position: relative;
-    overflow-x: hidden;
+    overflow-x: clip; /* ✅ Prevents horizontal scroll WITHOUT creating stacking context */
 }
 
 /* ===================================
