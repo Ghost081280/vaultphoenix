@@ -807,6 +807,7 @@ div[class*="-hero"].scroll-reveal,
     border-radius: 50%;
     animation: pulse-glow 2s ease-in-out infinite;
     pointer-events: none;
+   z-index: 1;
 }
 
 @keyframes pulse-glow {
