@@ -4848,6 +4848,33 @@ body.modal-open {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+/* ===================================
+   EMBER PAGE CHATBOT Z-INDEX FIX
+   Ensure glow appears behind button
+   =================================== */
+
+.chatbot-button-container {
+    z-index: 2001 !important;
+}
+
+.chatbot-glow {
+    position: absolute;
+    z-index: 1 !important; /* Behind button */
+}
+
+.chatbot-button {
+    position: relative;
+    z-index: 10 !important; /* Above glow */
+}
+
+/* Ensure modals stay below chatbot */
+.tpa-modal,
+#tpaModal,
+#whitepaperModal,
+#airdrop-info-modal,
+#airdrop-terms-modal {
+    z-index: 1500 !important;
+}
 
 /* ===================================
    END SECTION 11: LEGAL & COMPLIANCE SECTION
