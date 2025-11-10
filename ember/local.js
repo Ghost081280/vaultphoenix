@@ -1,99 +1,32 @@
 /* ===================================
-   VAULT PHOENIX - EMBER LOCAL JS v3.0
+   VAULT PHOENIX - EMBER LOCAL JS v2.0
    Page-specific functionality for ember.html
    Works with shared/global.js
-   NOW WITH SCENARIO SWITCHING + COMPLETE AIRDROP SYSTEM! 🔥
+   NOW WITH COMPLETE AIRDROP SYSTEM SUPPORT! 🔥
    =================================== */
 
 (function() {
     'use strict';
     
-    // ===================================
-    // CONFIGURATION WITH SCENARIO SUPPORT
-    // ===================================
+    // Configuration
     const CONFIG = {
-        scenarios: {
-            hardCap: {
-                name: 'Hard Cap',
-                amount: 300000,
-                tokens: 100000000,
-                maxInvestment: 50000,
-                minInvestment: 10,
-                airdrop: {
-                    totalEmber: 18000000,
-                    tokensPerClaim: 3600,
-                    maxPeople: 5000,
-                    valuePerClaim: 10.80,
-                    percentage: '1.8%',
-                    poolValue: '≈$54K'
-                },
-                fundAllocation: {
-                    liquidity: 120000,
-                    development: 105000,
-                    legal: 15000,
-                    marketing: 60000
-                },
-                tokenomics: {
-                    presale: { percentage: '10%', tokens: '100M', desc: '10% of total supply' },
-                    airdrop: { percentage: '1.8%', tokens: '18M' },
-                    liquidityIncentives: { percentage: '4.87%', tokens: '48.7M' }
-                }
-            },
-            softCap: {
-                name: 'Soft Cap',
-                amount: 150000,
-                tokens: 50000000,
-                maxInvestment: 25000,
-                minInvestment: 10,
-                airdrop: {
-                    totalEmber: 9000000,
-                    tokensPerClaim: 1800,
-                    maxPeople: 5000,
-                    valuePerClaim: 5.40,
-                    percentage: '0.9%',
-                    poolValue: '≈$27K'
-                },
-                fundAllocation: {
-                    liquidity: 60000,
-                    development: 52500,
-                    legal: 7500,
-                    marketing: 30000
-                },
-                tokenomics: {
-                    presale: { percentage: '5%', tokens: '50M', desc: '5% of total supply' },
-                    airdrop: { percentage: '0.9%', tokens: '9M' },
-                    liquidityIncentives: { percentage: '4.87%', tokens: '48.7M' },
-                    unallocated: { percentage: '5.9%', tokens: '59M' }
-                }
-            }
-        },
-        currentScenario: 'hardCap', // default
-        tokenPrice: 0.003,
-        presaleDate: '2025-11-01T12:00:00-05:00'
+        presaleDate: '2025-11-01T12:00:00-05:00', // November 1, 2025, 12:00 PM EST
+        tokenPrice: 0.003, // $0.003 per EMBER token
+        minInvestment: 10,
+        maxInvestment: 50000,
+        defaultInvestment: 10,
+        // Airdrop configuration
+        airdrop: {
+            totalEmber: 16670000,
+            claimed: 0,
+            maxPeople: 5000,
+            tokensPerClaim: 3333
+        }
     };
     
     // Wait for DOM to be ready
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('🔥 Ember page v3.0 initialized with Scenario Switching + Airdrop System');
-        
-        // Check localStorage for saved scenario
-        const savedScenario = localStorage.getItem('emberScenario') || 'hardCap';
-        
-        // Check URL hash for scenario
-        const hash = window.location.hash;
-        if (hash === '#soft-cap') {
-            CONFIG.currentScenario = 'softCap';
-        } else if (hash === '#hard-cap') {
-            CONFIG.currentScenario = 'hardCap';
-        } else if (savedScenario) {
-            CONFIG.currentScenario = savedScenario;
-        }
-        
-        // Initialize scenario toggle system FIRST
-        initScenarioToggle();
-        
-        // Apply the current scenario (this will update all dynamic content)
-        switchScenario(CONFIG.currentScenario, false);
+        console.log('🔥 Ember page initialized with Airdrop System v2.0');
         
         // Initialize core presale functionality
         initCountdownTimer();
@@ -110,297 +43,8 @@
         initCopyHashtags();
         initAirdropTracker();
         
-        console.log('✅ All Ember page features initialized with scenario:', CONFIG.currentScenario);
+        console.log('✅ All Ember page features initialized');
     });
-    
-    /* ===================================
-       SCENARIO TOGGLE SYSTEM
-       =================================== */
-    function initScenarioToggle() {
-        const hardCapBtn = document.getElementById('hard-cap-btn');
-        const softCapBtn = document.getElementById('soft-cap-btn');
-        
-        if (!hardCapBtn || !softCapBtn) {
-            console.warn('Scenario toggle buttons not found');
-            return;
-        }
-        
-        // Attach click handlers
-        hardCapBtn.addEventListener('click', function() {
-            switchScenario('hardCap', true);
-        });
-        
-        softCapBtn.addEventListener('click', function() {
-            switchScenario('softCap', true);
-        });
-        
-        // Set initial active state
-        updateToggleButtons();
-        
-        console.log('✅ Scenario toggle initialized');
-    }
-    
-    function updateToggleButtons() {
-        const hardCapBtn = document.getElementById('hard-cap-btn');
-        const softCapBtn = document.getElementById('soft-cap-btn');
-        
-        if (!hardCapBtn || !softCapBtn) return;
-        
-        if (CONFIG.currentScenario === 'hardCap') {
-            hardCapBtn.classList.add('active');
-            hardCapBtn.setAttribute('aria-selected', 'true');
-            softCapBtn.classList.remove('active');
-            softCapBtn.setAttribute('aria-selected', 'false');
-        } else {
-            softCapBtn.classList.add('active');
-            softCapBtn.setAttribute('aria-selected', 'true');
-            hardCapBtn.classList.remove('active');
-            hardCapBtn.setAttribute('aria-selected', 'false');
-        }
-    }
-    
-    /* ===================================
-       MAIN SCENARIO SWITCHING FUNCTION
-       =================================== */
-    function switchScenario(scenarioKey, saveToStorage = true) {
-        console.log('🔄 Switching to scenario:', scenarioKey);
-        
-        // Update current scenario
-        CONFIG.currentScenario = scenarioKey;
-        const scenario = CONFIG.scenarios[scenarioKey];
-        
-        // Update toggle button states
-        updateToggleButtons();
-        
-        // Update all dynamic content
-        updateHeroMetrics(scenario);
-        updatePresaleMetrics(scenario);
-        updateAirdropStats(scenario);
-        updateCalculator(scenario);
-        updateBenefitCards(scenario);
-        updateCTAStats(scenario);
-        updateInvestmentLimits(scenario);
-        updateTokenomicsTables(scenario);
-        updateAirdropModals(scenario);
-        updateInvestorIncentive(scenario);
-        updateFundAllocation(scenario);
-        
-        // Save to localStorage
-        if (saveToStorage) {
-            localStorage.setItem('emberScenario', scenarioKey);
-        }
-        
-        // Update URL hash
-        const hashName = scenarioKey === 'hardCap' ? 'hard-cap' : 'soft-cap';
-        if (window.location.hash !== '#' + hashName) {
-            history.replaceState(null, null, '#' + hashName);
-        }
-        
-        console.log('✅ Scenario switched successfully to', scenario.name);
-    }
-    
-    /* ===================================
-       UPDATE FUNCTIONS FOR DYNAMIC CONTENT
-       =================================== */
-    
-    function updateHeroMetrics(scenario) {
-        updateElement('[data-dynamic="hero-cap"]', formatCurrency(scenario.amount));
-        updateElement('[data-dynamic="hero-cap-label"]', scenario.name.toUpperCase());
-    }
-    
-    function updatePresaleMetrics(scenario) {
-        updateElement('[data-dynamic="presale-tokens"]', formatTokensShort(scenario.tokens));
-        updateElement('[data-dynamic="presale-tokens-desc"]', scenario.tokenomics.presale.desc);
-        updateElement('[data-dynamic="presale-cap"]', formatCurrency(scenario.amount));
-        updateElement('[data-dynamic="cap-label"]', scenario.name);
-        
-        // Update progress bar max
-        const progressBar = document.querySelector('[data-dynamic="progress-bar-max"]');
-        if (progressBar) {
-            progressBar.setAttribute('aria-valuemax', scenario.amount);
-        }
-        
-        updateElement('[data-dynamic="progress-goal"]', formatCurrency(scenario.amount));
-    }
-    
-    function updateAirdropStats(scenario) {
-        const airdrop = scenario.airdrop;
-        
-        // Update all airdrop total elements (may appear multiple times)
-        updateAllElements('[data-dynamic="airdrop-total"]', formatNumber(airdrop.totalEmber));
-        updateElement('[data-dynamic="airdrop-per-claim"]', formatNumber(airdrop.tokensPerClaim) + ' EMBER');
-        updateElement('[data-dynamic="airdrop-value"]', '≈$' + airdrop.valuePerClaim.toFixed(2));
-        updateElement('[data-dynamic="airdrop-percentage"]', airdrop.percentage);
-        updateElement('[data-dynamic="airdrop-total-short"]', formatTokensShort(airdrop.totalEmber));
-        updateElement('[data-dynamic="airdrop-pool-value"]', airdrop.poolValue);
-        
-        // Update airdrop tracker with new values
-        updateAirdropTrackerValues(airdrop);
-    }
-    
-    function updateCalculator(scenario) {
-        const investmentInput = document.getElementById('investment-amount');
-        if (!investmentInput) return;
-        
-        // Update max attribute
-        investmentInput.setAttribute('max', scenario.maxInvestment);
-        updateElement('[data-dynamic="max-investment"]', formatCurrency(scenario.maxInvestment));
-        
-        // Validate current input value against new max
-        const currentValue = parseFloat(investmentInput.value) || CONFIG.scenarios.hardCap.minInvestment;
-        if (currentValue > scenario.maxInvestment) {
-            investmentInput.value = scenario.maxInvestment;
-        }
-        
-        // Recalculate tokens
-        calculateTokens();
-    }
-    
-    function updateBenefitCards(scenario) {
-        // Early Access - no change needed
-        
-        // Built-In Demand
-        const demandText = scenario.name === 'Hard Cap' 
-            ? 'White-label apps and SDK licenses with GPS & Beacon support create ongoing token demand through management system'
-            : 'Focus on $Ember Hunt App creates immediate demand with GPS & Beacon gameplay';
-        updateElement('[data-dynamic="benefit-demand"]', demandText);
-        
-        // Liquidity Guarantee
-        const liquidityText = `$${formatNumber(scenario.fundAllocation.liquidity)} liquidity locked for 3 months to ensure trading depth during investor vesting period`;
-        updateElement('[data-dynamic="benefit-liquidity"]', liquidityText);
-    }
-    
-    function updateCTAStats(scenario) {
-        updateElement('[data-dynamic="cta-tokens"]', formatTokensShort(scenario.tokens));
-        updateElement('[data-dynamic="cta-cap"]', formatCurrency(scenario.amount));
-        updateElement('[data-dynamic="cta-cap-label"]', scenario.name);
-    }
-    
-    function updateInvestmentLimits(scenario) {
-        const limitsText = `Minimum investment: $${scenario.minInvestment} USD | Maximum: ${formatCurrency(scenario.maxInvestment)} USD`;
-        updateElement('[data-dynamic="investment-limits"]', limitsText);
-    }
-    
-    function updateTokenomicsTables(scenario) {
-        const hardCapTable = document.getElementById('hard-cap-table');
-        const softCapTable = document.getElementById('soft-cap-table');
-        
-        if (hardCapTable && softCapTable) {
-            if (CONFIG.currentScenario === 'hardCap') {
-                hardCapTable.style.display = 'block';
-                softCapTable.style.display = 'none';
-            } else {
-                hardCapTable.style.display = 'none';
-                softCapTable.style.display = 'block';
-            }
-        }
-        
-        // Update mobile cards if they exist
-        updateMobileTokenomicsCards(scenario);
-    }
-    
-    function updateMobileTokenomicsCards(scenario) {
-        const mobileContainer = document.getElementById('allocation-cards-mobile');
-        if (!mobileContainer) return;
-        
-        // This would populate mobile cards with tokenomics data
-        // Implementation depends on mobile card structure
-        console.log('Mobile tokenomics cards update - structure TBD');
-    }
-    
-    function updateAirdropModals(scenario) {
-        const airdrop = scenario.airdrop;
-        
-        // Update airdrop info modal content
-        updateElement('[data-dynamic="airdrop-info-tokens"]', formatNumber(airdrop.tokensPerClaim) + ' EMBER');
-        updateElement('[data-dynamic="airdrop-info-pool"]', airdrop.poolValue);
-        
-        // Update terms modal
-        const termsText = `${airdrop.percentage} (${formatTokensShort(airdrop.totalEmber)} EMBER) distributed to verified supporters`;
-        updateElement('[data-dynamic="terms-distribution"]', termsText);
-    }
-    
-    function updateInvestorIncentive(scenario) {
-        // Investor Advantage
-        const advantageText = scenario.name === 'Hard Cap'
-            ? 'The $500K raise builds the first-to-market location-based AR gaming token economy with GPS & Beacon technology. Early investors secure tokens at $0.003 before massive demand from Platform Operators and Advertisers.'
-            : 'The $150K raise launches our flagship $Ember Hunt App with GPS & Beacon technology. Early investors secure tokens at $0.003 before app release creates player demand.';
-        updateElement('[data-dynamic="investor-advantage-text"]', advantageText);
-        
-        // Professional Development
-        const devText = `${formatCurrency(scenario.amount)} funds: ${Math.round((scenario.fundAllocation.liquidity/scenario.amount)*100)}% liquidity pool, ${Math.round((scenario.fundAllocation.development/scenario.amount)*100)}% development, ${Math.round((scenario.fundAllocation.legal/scenario.amount)*100)}% legal compliance, ${Math.round((scenario.fundAllocation.marketing/scenario.amount)*100)}% marketing — ensuring immediate trading and professional execution.`;
-        updateElement('[data-dynamic="professional-dev-text"]', devText);
-    }
-    
-    function updateFundAllocation(scenario) {
-        // Update fund allocation cards if they exist
-        const hardCapAllocation = document.getElementById('hard-cap-allocation');
-        const softCapAllocation = document.getElementById('soft-cap-allocation');
-        
-        if (hardCapAllocation && softCapAllocation) {
-            // Both cards are always visible for comparison
-            // No changes needed - they're static in HTML
-            console.log('Fund allocation cards are side-by-side comparison');
-        }
-    }
-    
-    function updateAirdropTrackerValues(airdrop) {
-        // Update the airdrop configuration
-        CONFIG.scenarios[CONFIG.currentScenario].airdrop = airdrop;
-        
-        // Reinitialize tracker with new values
-        initAirdropTracker();
-    }
-    
-    /* ===================================
-       HELPER FUNCTIONS
-       =================================== */
-    
-    function updateElement(selector, value) {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(el => {
-            if (el) {
-                // Add fade transition
-                el.style.opacity = '0';
-                setTimeout(() => {
-                    el.textContent = value;
-                    el.style.transition = 'opacity 300ms ease-in-out';
-                    el.style.opacity = '1';
-                }, 150);
-            }
-        });
-    }
-    
-    function updateAllElements(selector, value) {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(el => {
-            if (el) {
-                el.style.opacity = '0';
-                setTimeout(() => {
-                    el.textContent = value;
-                    el.style.transition = 'opacity 300ms ease-in-out';
-                    el.style.opacity = '1';
-                }, 150);
-            }
-        });
-    }
-    
-    function formatNumber(num) {
-        return Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-    
-    function formatCurrency(amount) {
-        return '$' + formatNumber(amount);
-    }
-    
-    function formatTokensShort(amount) {
-        if (amount >= 1000000) {
-            return (amount / 1000000) + 'M';
-        } else if (amount >= 1000) {
-            return (amount / 1000) + 'K';
-        }
-        return formatNumber(amount);
-    }
     
     /* ===================================
        COUNTDOWN TIMER
@@ -478,20 +122,20 @@
             return;
         }
         
-        // Expose calculateTokens globally so it can be called by other functions
-        window.calculateTokens = calculateTokens;
+        function formatNumber(num) {
+            return Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
         
         function calculateTokens() {
-            const scenario = CONFIG.scenarios[CONFIG.currentScenario];
-            let amount = parseFloat(investmentInput.value) || scenario.minInvestment;
+            let amount = parseFloat(investmentInput.value) || CONFIG.defaultInvestment;
             
             // Enforce min/max limits
-            if (amount < scenario.minInvestment) {
-                amount = scenario.minInvestment;
+            if (amount < CONFIG.minInvestment) {
+                amount = CONFIG.minInvestment;
                 investmentInput.value = amount;
             }
-            if (amount > scenario.maxInvestment) {
-                amount = scenario.maxInvestment;
+            if (amount > CONFIG.maxInvestment) {
+                amount = CONFIG.maxInvestment;
                 investmentInput.value = amount;
             }
             
@@ -500,7 +144,7 @@
             
             // Update displays
             emberTokensDisplay.textContent = formatNumber(tokens);
-            totalInvestmentDisplay.textContent = formatCurrency(amount);
+            totalInvestmentDisplay.textContent = '$' + formatNumber(amount);
         }
         
         // Listen for input changes
@@ -664,13 +308,13 @@
                                 <li><strong>Copy Your Post URL</strong> - Get the link to your shared post</li>
                                 <li><strong>Fill the Claim Form</strong> - Enter your Solana wallet and post URL</li>
                                 <li><strong>Agree to Terms</strong> - Keep your post live until campaign end</li>
-                                <li><strong>Submit</strong> - Claim your tokens worth ≈$10!</li>
+                                <li><strong>Submit</strong> - Claim your 3,333 EMBER tokens (worth ≈$10)!</li>
                             </ol>
                         </div>
                         
                         <h4 style="color: #f0a500; margin-top: 20px;">🎁 What You Get:</h4>
                         <ul style="margin-left: 20px; line-height: 1.8;">
-                            <li><strong>FREE EMBER tokens</strong> per verified claim (amount varies by scenario)</li>
+                            <li><strong>3,333 EMBER tokens</strong> per verified claim</li>
                             <li><strong>≈$10 value</strong> at presale price ($0.003)</li>
                             <li><strong>Distributed after presale ends</strong> - early supporter rewards!</li>
                         </ul>
@@ -680,7 +324,7 @@
                             <li>You must <strong>keep your post live</strong> until the presale campaign ends</li>
                             <li>Only <strong>one claim per person</strong> (verified by wallet address)</li>
                             <li>Posts that are deleted before campaign end <strong>forfeit rewards</strong></li>
-                            <li>Limited to <strong>first 5,000 participants</strong></li>
+                            <li>Limited to <strong>first 5,000 participants</strong> (16.7M EMBER pool)</li>
                         </ul>
                         
                         <div style="background: rgba(215, 51, 39, 0.1); padding: 15px; border-radius: 10px; border-left: 3px solid #d73327; margin-top: 20px;">
@@ -785,10 +429,10 @@
                         <div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">
                             <h4 style="color: #f0a500; margin-bottom: 15px;">2. Token Distribution</h4>
                             <ul style="margin-left: 20px; line-height: 1.8;">
-                                <li>Each verified participant receives FREE EMBER tokens (≈$10 value at $0.003 presale price)</li>
+                                <li>Each verified participant receives 3,333 EMBER tokens (≈$10 value at $0.003 presale price)</li>
                                 <li>Tokens will be distributed to your Solana wallet address after the presale campaign ends</li>
                                 <li>Distribution timeline: Within 30 days after presale completion</li>
-                                <li>Token amount varies by funding scenario (Hard Cap vs Soft Cap)</li>
+                                <li>Total airdrop pool: 16,670,000 EMBER tokens (≈$50K value)</li>
                                 <li>Tokens are subject to the same utility and vesting terms as presale tokens</li>
                             </ul>
                         </div>
@@ -1022,14 +666,10 @@
                 
                 const shortWallet = `${wallet.substring(0, 8)}...${wallet.substring(wallet.length - 4)}`;
                 
-                // Get current scenario tokens
-                const scenario = CONFIG.scenarios[CONFIG.currentScenario];
-                const tokens = scenario.airdrop.tokensPerClaim;
-                
                 // Simulate response (replace with actual API response)
                 const claimStatus = {
                     found: false, // Change to true when claim exists
-                    tokens: tokens,
+                    tokens: 3333,
                     status: 'pending', // 'pending', 'verified', 'distributed'
                     postVerified: false
                 };
@@ -1074,7 +714,7 @@
             x: {
                 btn: 'share-x-btn',
                 handler: () => {
-                    const text = '🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. Get your FREE airdrop tokens! #VaultPhoenix #Ember $Ember @VaultPhoenix';
+                    const text = '🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. 166.7M tokens at $0.003 each! #VaultPhoenix #Ember $Ember @VaultPhoenix';
                     const url = 'https://vaultphoenix.com/ember.html';
                     window.open(
                         `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
@@ -1234,12 +874,11 @@
        Animated number counting and progress bar
        =================================== */
     function initAirdropTracker() {
-        const scenario = CONFIG.scenarios[CONFIG.currentScenario];
-        const totalEmber = scenario.airdrop.totalEmber;
-        const claimed = 0; // Start at 0, update from backend
+        const totalEmber = CONFIG.airdrop.totalEmber;
+        const claimed = CONFIG.airdrop.claimed;
         const remaining = totalEmber - claimed;
         const people = 0; // Current number of claims
-        const maxPeople = scenario.airdrop.maxPeople;
+        const maxPeople = CONFIG.airdrop.maxPeople;
         const percentage = ((claimed / totalEmber) * 100).toFixed(2);
         
         const totalEmberEl = document.getElementById('ember-total-ember');
@@ -1249,11 +888,8 @@
         const progressBar = document.getElementById('ember-progress-bar');
         const progressPercentage = document.getElementById('ember-progress-percentage');
         
-        // Set total values with current scenario
-        const totalElements = document.querySelectorAll('[data-dynamic="airdrop-total"]');
-        totalElements.forEach(el => {
-            if (el) el.textContent = totalEmber.toLocaleString();
-        });
+        // Set initial values
+        if (totalEmberEl) totalEmberEl.textContent = totalEmber.toLocaleString();
         
         // Animate numbers with counting effect
         function animateValue(element, start, end, duration) {
@@ -1354,16 +990,71 @@
             // Example: updateProgressBar(presaleProgress, 0, 500000, currentAmount);
         }
         
+        // Development fund tracker
+        const devFundFill = document.getElementById('dev-fund-fill');
+        const devFundWithdrawn = document.getElementById('dev-fund-withdrawn');
+        const devFundTimestamp = document.getElementById('dev-fund-timestamp');
+        
+        if (devFundFill && devFundWithdrawn && devFundTimestamp) {
+            // Static for now - can be updated with real data from backend
+            const totalDevFund = 30000;
+            const withdrawn = 0; // Update this with actual withdrawn amount
+            
+            updateDevFundTracker(withdrawn, totalDevFund);
+        }
+        
         console.log('✅ Progress bars initialized');
+    }
+    
+    // Helper function to update dev fund tracker
+    function updateDevFundTracker(withdrawn, total) {
+        const devFundFill = document.getElementById('dev-fund-fill');
+        const devFundWithdrawn = document.getElementById('dev-fund-withdrawn');
+        const devFundTimestamp = document.getElementById('dev-fund-timestamp');
+        
+        if (!devFundFill || !devFundWithdrawn || !devFundTimestamp) return;
+        
+        const percentage = (withdrawn / total) * 100;
+        
+        devFundFill.style.width = percentage + '%';
+        devFundWithdrawn.textContent = '$' + withdrawn.toLocaleString();
+        
+        if (withdrawn > 0) {
+            const now = new Date();
+            devFundTimestamp.textContent = now.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        } else {
+            devFundTimestamp.textContent = 'Presale not yet started';
+        }
     }
     
     /* ===================================
        UTILITY FUNCTIONS
        =================================== */
     
+    // Format currency
+    function formatCurrency(amount) {
+        return '$' + amount.toLocaleString('en-US', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    }
+    
+    // Format token amount
+    function formatTokens(amount) {
+        return amount.toLocaleString('en-US', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    }
+    
     // Validate investment amount
     function validateInvestmentAmount(amount) {
-        const scenario = CONFIG.scenarios[CONFIG.currentScenario];
         const numAmount = parseFloat(amount);
         
         if (isNaN(numAmount)) {
@@ -1373,17 +1064,17 @@
             };
         }
         
-        if (numAmount < scenario.minInvestment) {
+        if (numAmount < CONFIG.minInvestment) {
             return {
                 valid: false,
-                error: 'Minimum investment is $' + scenario.minInvestment
+                error: 'Minimum investment is $' + CONFIG.minInvestment
             };
         }
         
-        if (numAmount > scenario.maxInvestment) {
+        if (numAmount > CONFIG.maxInvestment) {
             return {
                 valid: false,
-                error: 'Maximum investment is $' + formatCurrency(scenario.maxInvestment)
+                error: 'Maximum investment is $' + formatCurrency(CONFIG.maxInvestment)
             };
         }
         
@@ -1398,23 +1089,20 @@
        For use in other scripts or console
        =================================== */
     window.emberUtils = {
-        switchScenario: switchScenario,
+        updateDevFundTracker: updateDevFundTracker,
         formatCurrency: formatCurrency,
-        formatNumber: formatNumber,
-        formatTokensShort: formatTokensShort,
+        formatTokens: formatTokens,
         validateInvestmentAmount: validateInvestmentAmount,
         config: CONFIG
     };
     
-    console.log('✅ Ember local.js v3.0 loaded successfully with Scenario Switching + Airdrop System! 🔥');
+    console.log('✅ Ember local.js v2.0 loaded successfully with full Airdrop System support! 🔥');
     
 })();
 
 /* ===================================
-   END OF EMBER LOCAL JS v3.0
-   All features complete ✅
-   - SCENARIO SWITCHING (Hard Cap / Soft Cap)
-   - Dynamic content updates across all sections
+   END OF EMBER LOCAL JS v2.0
+   All page-specific functionality complete ✅
    - Presale countdown & calculator
    - TPA & Whitepaper modals
    - Airdrop Info & Terms modals
@@ -1424,6 +1112,4 @@
    - Copy hashtags (cross-platform)
    - Airdrop progress tracker
    - Smooth scroll & progress bars
-   - LocalStorage persistence
-   - URL hash support
    =================================== */
