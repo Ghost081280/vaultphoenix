@@ -3400,8 +3400,8 @@ body.modal-open {
    =================================== */
 
 .presale-two-column {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: clamp(1.5rem, 3vw, 2rem);
     margin-bottom: clamp(2rem, 4vw, 3rem);
 }
@@ -3411,6 +3411,39 @@ body.modal-open {
     display: flex;
     flex-direction: column;
     gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+/* Mobile stacking order - make it logical */
+.presale-left-column {
+    order: 1; /* Shows first on mobile */
+}
+
+.presale-right-column {
+    order: 2; /* Shows second on mobile */
+}
+
+/* Desktop: Switch to grid layout */
+@media (min-width: 1024px) {
+    .presale-two-column {
+        display: grid;
+        grid-template-columns: 1fr 450px;
+        align-items: start;
+    }
+    
+    .presale-left-column,
+    .presale-right-column {
+        order: unset; /* Remove order on desktop */
+    }
+    
+    .benefits-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .presale-two-column {
+        grid-template-columns: 1fr 480px;
+    }
 }
 
 /* ===================================
@@ -4209,23 +4242,6 @@ body.modal-open {
 @media (min-width: 768px) {
     .benefits-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 1024px) {
-    .presale-two-column {
-        grid-template-columns: 1fr 450px;
-        align-items: start;
-    }
-    
-    .benefits-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (min-width: 1200px) {
-    .presale-two-column {
-        grid-template-columns: 1fr 480px;
     }
 }
 
