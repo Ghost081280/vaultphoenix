@@ -5164,3 +5164,18 @@ body.modal-open {
         grid-template-columns: 1fr;
     }
 }
+
+/* =====================================================
+   INVESTMENT CALCULATOR VALIDATION
+   ===================================================== */
+
+#investment-amount {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#investment-amount:focus {
+    outline: none;
+}
+
+/* Valid state will be set by JS with green border */
+/* Invalid state will be set by JS with red border */
