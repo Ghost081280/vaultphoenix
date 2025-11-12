@@ -17,9 +17,9 @@
         defaultInvestment: 10,
         // Airdrop configuration
         airdrop: {
-            totalEmber: 16670000,
+            totalEmber: 9000000,
             claimed: 0,
-            maxPeople: 5000,
+            maxPeople: 2700,
             tokensPerClaim: 3333
         }
     };
@@ -324,7 +324,7 @@
                             <li>You must <strong>keep your post live</strong> until the presale campaign ends</li>
                             <li>Only <strong>one claim per person</strong> (verified by wallet address)</li>
                             <li>Posts that are deleted before campaign end <strong>forfeit rewards</strong></li>
-                            <li>Limited to <strong>first 5,000 participants</strong> (16.7M EMBER pool)</li>
+                            <li>Limited to <strong>first 2,700 participants</strong> (9M EMBER pool)</li>
                         </ul>
                         
                         <div style="background: rgba(215, 51, 39, 0.1); padding: 15px; border-radius: 10px; border-left: 3px solid #d73327; margin-top: 20px;">
@@ -422,7 +422,7 @@
                                 <li>You must provide a valid Solana wallet address to receive tokens</li>
                                 <li>You must provide a direct URL link to your social media post</li>
                                 <li>One claim per person - duplicate claims from the same wallet will be rejected</li>
-                                <li>Limited to first 5,000 verified participants</li>
+                                <li>Limited to first 2,700 verified participants</li>
                             </ul>
                         </div>
                         
@@ -432,7 +432,7 @@
                                 <li>Each verified participant receives 3,333 EMBER tokens (≈$10 value at $0.003 presale price)</li>
                                 <li>Tokens will be distributed to your Solana wallet address after the presale campaign ends</li>
                                 <li>Distribution timeline: Within 30 days after presale completion</li>
-                                <li>Total airdrop pool: 16,670,000 EMBER tokens (≈$50K value)</li>
+                                <li>Total airdrop pool: 9,000,000 EMBER tokens (≈$27K value)</li>
                                 <li>Tokens are subject to the same utility and vesting terms as presale tokens</li>
                             </ul>
                         </div>
@@ -714,7 +714,7 @@
             x: {
                 btn: 'share-x-btn',
                 handler: () => {
-                    const text = '🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. 166.7M tokens at $0.003 each! #VaultPhoenix #Ember $Ember @VaultPhoenix';
+                    const text = '🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. 100M tokens at $0.003 each! #VaultPhoenix #Ember $Ember @VaultPhoenix';
                     const url = 'https://vaultphoenix.com/ember.html';
                     window.open(
                         `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
