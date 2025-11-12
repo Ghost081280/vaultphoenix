@@ -1591,12 +1591,16 @@
                                     <label for="investment-amount">Investment Amount (USD)</label>
                                     <input type="number" 
                                            id="investment-amount" 
-                                           placeholder="10" 
+                                           placeholder="Enter amount (Min: $10)" 
                                            value="10" 
                                            min="10" 
                                            max="50000"
+                                           step="1"
                                            aria-label="Investment amount in USD"
-                                           aria-describedby="calculation-result">
+                                           aria-describedby="calculation-result investment-hint">
+                                    <div id="investment-hint" style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.6); margin-top: 8px; text-align: center;">
+                                        Minimum: $10 | Maximum: $50,000
+                                    </div>
                                     <div class="calculation-result" id="calculation-result">
                                         <div class="result-line">
                                             <span>EMBER Tokens:</span>
