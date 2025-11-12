@@ -110,7 +110,7 @@
     
     /* ===================================
        INVESTMENT CALCULATOR
-       Real-time calculation of EMBER tokens
+       Real-time calculation of EMBER tokens with validation
        =================================== */
     function initInvestmentCalculator() {
         const investmentInput = document.getElementById('investment-amount');
@@ -126,20 +126,35 @@
             return Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
         
-        function calculateTokens() {
-            let amount = parseFloat(investmentInput.value) || CONFIG.defaultInvestment;
+        function validateAndCalculate() {
+            let amount = parseFloat(investmentInput.value);
             
-            // Enforce min/max limits
+            // Check if input is valid number
+            if (isNaN(amount) || amount <= 0) {
+                amount = 0;
+                investmentInput.style.border = '2px solid #ef4444';
+                investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+                emberTokensDisplay.textContent = '0';
+                totalInvestmentDisplay.textContent = '$0';
+                return;
+            }
+            
+            // Validate min/max and show visual feedback
             if (amount < CONFIG.minInvestment) {
-                amount = CONFIG.minInvestment;
-                investmentInput.value = amount;
-            }
-            if (amount > CONFIG.maxInvestment) {
-                amount = CONFIG.maxInvestment;
-                investmentInput.value = amount;
+                // Below minimum - show red border
+                investmentInput.style.border = '2px solid #ef4444';
+                investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+            } else if (amount > CONFIG.maxInvestment) {
+                // Above maximum - show red border
+                investmentInput.style.border = '2px solid #ef4444';
+                investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+            } else {
+                // Valid amount - show green border
+                investmentInput.style.border = '2px solid #10b981';
+                investmentInput.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.1)';
             }
             
-            // Calculate tokens
+            // Calculate tokens (even for invalid amounts, so user can see calculation)
             const tokens = amount / CONFIG.tokenPrice;
             
             // Update displays
@@ -148,13 +163,20 @@
         }
         
         // Listen for input changes
-        investmentInput.addEventListener('input', calculateTokens);
-        investmentInput.addEventListener('change', calculateTokens);
+        investmentInput.addEventListener('input', validateAndCalculate);
+        investmentInput.addEventListener('change', validateAndCalculate);
+        
+        // Allow user to clear the field
+        investmentInput.addEventListener('focus', function() {
+            if (this.value === '10') {
+                this.select(); // Select all text when focused
+            }
+        });
         
         // Initial calculation
-        calculateTokens();
+        validateAndCalculate();
         
-        console.log('✅ Investment calculator initialized');
+        console.log('✅ Investment calculator initialized with validation');
     }
     
     /* ===================================
