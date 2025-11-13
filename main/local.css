@@ -5246,3 +5246,21 @@ body.main-page .main-social-sharing-icon-compact {
         height: 75px !important;
     }
 }
+
+
+/* ===================================
+   FIX: Make sure child elements don't block clicks on highlight buttons
+   =================================== */
+.ember-highlight-redesigned .highlight-content-wrapper,
+.ember-highlight-redesigned .highlight-emoji-redesigned,
+.ember-highlight-redesigned .main-image-glow,
+.ember-highlight-redesigned .highlight-icon-image-redesigned,
+.ember-highlight-redesigned .highlight-text-redesigned,
+.ember-highlight-redesigned .highlight-arrow-redesigned {
+    pointer-events: none;
+}
+
+.ember-highlight-redesigned {
+    pointer-events: auto;
+    cursor: pointer;
+}
