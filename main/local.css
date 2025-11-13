@@ -5250,17 +5250,62 @@ body.main-page .main-social-sharing-icon-compact {
 
 /* ===================================
    FIX: Make sure child elements don't block clicks on highlight buttons
+   STRENGTHENED WITH !important
    =================================== */
 .ember-highlight-redesigned .highlight-content-wrapper,
 .ember-highlight-redesigned .highlight-emoji-redesigned,
 .ember-highlight-redesigned .main-image-glow,
+.ember-highlight-redesigned .main-image-glow *,
 .ember-highlight-redesigned .highlight-icon-image-redesigned,
 .ember-highlight-redesigned .highlight-text-redesigned,
 .ember-highlight-redesigned .highlight-arrow-redesigned {
-    pointer-events: none;
+    pointer-events: none !imp
+/* ===================================
+   NUCLEAR FIX: Force Enterprise Token Buttons to be Clickable
+   =================================== */
+.ember-highlights-redesigned {
+    position: relative;
+    z-index: 10;
+    isolation: isolate;
 }
 
 .ember-highlight-redesigned {
-    pointer-events: auto;
-    cursor: pointer;
+    position: relative !important;
+
+/* ===================================
+   FIXED: Simplified Enterprise Token Buttons CSS
+   =================================== */
+.ember-highlight-redesigned {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(215, 51, 39, 0.1);
+    border: 1px solid rgba(215, 51, 39, 0.3);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+.ember-highlight-redesigned:hover {
+    background: rgba(215, 51, 39, 0.2);
+    border-color: var(--ember-orange);
+    transform: translateX(3px);
+}
+
+.ember-highlight-redesigned .main-image-glow {
+    flex-shrink: 0;
+}
+
+.ember-highlight-redesigned .highlight-icon-image-redesigned {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.ember-highlight-redesigned .highlight-text-redesigned {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
 }
