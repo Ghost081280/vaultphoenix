@@ -308,7 +308,7 @@ function initializeTermsModal() {
                                 <li>You must provide a valid Solana wallet address to receive tokens</li>
                                 <li>You must provide a direct URL link to your social media post</li>
                                 <li>One claim per person - duplicate claims from the same wallet will be rejected</li>
-                                <li>Limited to first 5,000 verified participants</li>
+                                <li>Limited to first 2,700 verified participants</li>
                             </ul>
                         </div>
                         
@@ -472,7 +472,7 @@ function initializeInfoModal() {
                             <li>You must <strong>keep your post live</strong> until the presale campaign ends</li>
                             <li>Only <strong>one claim per person</strong> (verified by wallet address)</li>
                             <li>Posts that are deleted before campaign end <strong>forfeit rewards</strong></li>
-                            <li>Limited to <strong>first 5,000 participants</strong> (16.7M EMBER pool)</li>
+                            <li>Limited to <strong>first 2,700 participants</strong> (9M EMBER pool)</li>
                         </ul>
                         
                         <div style="background: rgba(215, 51, 39, 0.1); padding: 15px; border-radius: 10px; border-left: 3px solid #d73327; margin-top: 20px;">
@@ -678,7 +678,7 @@ function initializeAirdropForm() {
         if (type === 'success') {
             setTimeout(() => {
                 messageBox.style.display = 'none';
-            }, 5000);
+            }, 2700);
         }
     }
     
@@ -865,11 +865,11 @@ function initializeCopyHashtags() {
 // AIRDROP TRACKER
 // ============================================
 function initializeAirdropTracker() {
-    const totalEmber = 16670000;
+    const totalEmber = 9000000;
     const claimed = 0;
     const remaining = totalEmber - claimed;
     const people = 0;
-    const maxPeople = 5000;
+    const maxPeople = 2700;
     const percentage = ((claimed / totalEmber) * 100).toFixed(2);
     
     const claimedEl = document.getElementById('ember-claimed');
