@@ -1305,26 +1305,6 @@ body {
    =================================== */
 
 /* Main Section */
-.social-fire-section {
-    background: linear-gradient(135deg, rgba(26, 15, 10, 0.95) 0%, rgba(45, 24, 16, 0.9) 100%);
-    padding: 4rem 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.social-fire-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 50%, rgba(215, 51, 39, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(240, 165, 0, 0.08) 0%, transparent 50%);
-    pointer-events: none;
-}
-
 /* Header */
 .social-fire-header {
     text-align: center;
@@ -1668,10 +1648,6 @@ body {
    MOBILE RESPONSIVE - SOCIAL FIRE SECTION
    =================================== */
 @media (max-width: 768px) {
-    .social-fire-section {
-        padding: 3rem 0;
-    }
-
     .social-fire-parachute {
         max-width: 200px;
         margin-bottom: 1.5rem;
@@ -5099,3 +5075,174 @@ body.modal-open {
    ✅ FIX #3: Ember Token Section Balanced
    ✅ FIX #4: Pricing Headers Enhanced
    =================================== */
+
+/* ===================================
+   SOCIAL SHARING SECTION - COMPACT (ORIGINAL)
+   =================================== */
+body.main-page .social-sharing-section-compact {
+    padding: 70px var(--space-xl);
+    background: var(--ember-gradient-background);
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    body.main-page .social-sharing-section-compact {
+        padding: 50px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .social-sharing-section-compact {
+        padding: 40px 10px;
+    }
+}
+
+body.main-page .social-sharing-section-compact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(240, 165, 0, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+body.main-page .social-sharing-content-compact {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+body.main-page .social-sharing-header-compact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    body.main-page .social-sharing-header-compact {
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 32px;
+    }
+}
+
+body.main-page .social-sharing-text-compact {
+    text-align: center;
+}
+
+body.main-page .social-sharing-title-compact {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+body.main-page .social-sharing-subtitle-compact {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+body.main-page .social-sharing-buttons-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 480px) {
+    body.main-page .social-sharing-buttons-compact {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+}
+
+body.main-page .social-share-button-compact {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #d73327, #c62828);
+    color: white;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(215, 51, 39, 0.4);
+    border: 2px solid rgba(215, 51, 39, 0.3);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    body.main-page .social-share-button-compact {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body.main-page .social-share-button-compact {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+    }
+}
+
+body.main-page .social-share-button-compact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+body.main-page .social-share-button-compact:hover::before {
+    left: 100%;
+}
+
+body.main-page .social-share-button-compact:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(215, 51, 39, 0.5);
+}
+
+body.main-page .social-share-icon-compact {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+body.main-page .social-share-text-compact {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+body.main-page .main-social-sharing-icon-compact {
+    width: 95px !important;
+    height: 95px !important;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(240, 165, 0, 0.5)) 
+            drop-shadow(0 0 20px rgba(240, 165, 0, 0.3));
+    animation: consistentGlow 3s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    body.main-page .main-social-sharing-icon-compact {
+        width: 75px !important;
+        height: 75px !important;
+    }
+}
