@@ -80,31 +80,6 @@
     text-align: center;
 }
 
-/* Breadcrumb Navigation */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 2rem;
-}
-
-.breadcrumb a {
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-    transition: var(--transition-base);
-}
-
-.breadcrumb a:hover {
-    color: var(--ember-gold);
-}
-
-.breadcrumb span:last-child {
-    color: rgba(255, 255, 255, 0.85);
-}
-
 /* Hero Badge - Matching Main Style */
 .hero-badge-new {
     display: inline-flex;
