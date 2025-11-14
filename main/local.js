@@ -1108,7 +1108,47 @@ if (document.readyState === 'loading') {
 
 window.vaultPhoenixMainPage = {
     state: pageState,
-    version: '2.2.0-complete'
+    version: '2.3.0-complete'
 };
+
+// ============================================
+// NUCLEAR FIX: FORCE EMBER.HTML LINKS TO WORK
+// This bypasses ANY JavaScript interference
+// ============================================
+function forceEmberLinksToWork() {
+    // Get ALL links that point to ember.html
+    const emberLinks = document.querySelectorAll('a[href*="ember.html"]');
+    
+    console.log(`🔥 FORCE FIX: Found ${emberLinks.length} ember.html links`);
+    
+    emberLinks.forEach((link, index) => {
+        // Remove ANY existing click handlers by cloning
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+        
+        // Add fresh click handler with highest priority
+        newLink.addEventListener('click', function(e) {
+            e.stopImmediatePropagation(); // Stop ALL other handlers
+            
+            const href = this.getAttribute('href');
+            console.log(`🔥 FORCE NAVIGATION to: ${href}`);
+            
+            // Force navigation
+            window.location.href = href;
+            
+            // Prevent any other handlers
+            e.preventDefault();
+            return false;
+        }, true); // Use capture phase - fires FIRST
+        
+        console.log(`✅ Force fix applied to link ${index + 1}: ${newLink.getAttribute('href')}`);
+    });
+}
+
+// Run this AFTER everything else is loaded
+setTimeout(() => {
+    forceEmberLinksToWork();
+    console.log('🔥 FORCE FIX COMPLETE - ember.html links should now work!');
+}, 2000);
 
 })();
