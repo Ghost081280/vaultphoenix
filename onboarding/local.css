@@ -1,7 +1,6 @@
 /* ===================================
    VAULT PHOENIX - ONBOARDING PAGE LOCAL CSS
-   PART 1: BASE, HERO, TRUST BAR, SECTION HEADERS
-   Matching Main Page Styles
+   TOP SECTION: Reset through Getting Started
    =================================== */
 
 /* ===================================
@@ -400,6 +399,489 @@
 }
 
 /* ===================================
+   WEB3 CRASH COURSE SECTION STYLES
+   =================================== */
+
+.web3-crash-course-section {
+    padding: var(--section-padding) var(--container-padding);
+    background: linear-gradient(135deg, 
+        rgba(26, 15, 10, 0.9) 0%, 
+        rgba(13, 12, 12, 0.95) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.web3-crash-course-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    background: radial-gradient(ellipse at top, 
+        rgba(240, 165, 0, 0.08) 0%, 
+        transparent 60%);
+    pointer-events: none;
+}
+
+.web3-shift-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================================
+   WEB2 vs WEB3 COMPARISON GRID
+   =================================== */
+
+.web3-comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.web3-comparison-card {
+    padding: 2.5rem;
+    border-radius: var(--radius-2xl);
+    border: 3px solid;
+    transition: var(--transition-base);
+    background: var(--ember-gradient-card);
+}
+
+.web3-comparison-card.outdated {
+    border-color: rgba(239, 68, 68, 0.4);
+    background: linear-gradient(135deg, 
+        rgba(30, 15, 15, 0.9) 0%, 
+        rgba(45, 20, 20, 0.85) 100%);
+}
+
+.web3-comparison-card.modern {
+    border-color: rgba(34, 197, 94, 0.4);
+    background: linear-gradient(135deg, 
+        rgba(15, 30, 20, 0.9) 0%, 
+        rgba(20, 45, 30, 0.85) 100%);
+}
+
+.web3-comparison-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ember-shadow-xl);
+}
+
+.comparison-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.comparison-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.comparison-header h3 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    color: #ffffff;
+}
+
+.comparison-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.outdated-badge {
+    background: rgba(239, 68, 68, 0.15);
+    border: 2px solid rgba(239, 68, 68, 0.4);
+    color: #ef4444;
+}
+
+.modern-badge {
+    background: rgba(34, 197, 94, 0.15);
+    border: 2px solid rgba(34, 197, 94, 0.4);
+    color: #22c55e;
+}
+
+.comparison-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.comparison-list li {
+    padding: 1rem;
+    margin-bottom: 0.85rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid;
+    transition: var(--transition-base);
+}
+
+.outdated .comparison-list li {
+    border-color: rgba(239, 68, 68, 0.5);
+}
+
+.modern .comparison-list li {
+    border-color: rgba(34, 197, 94, 0.5);
+}
+
+.comparison-list li:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transform: translateX(3px);
+}
+
+.comparison-list strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.4rem;
+}
+
+.comparison-list span {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.5;
+}
+
+.comparison-problem,
+.comparison-solution {
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid;
+}
+
+.comparison-problem {
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+.comparison-solution {
+    border-color: rgba(34, 197, 94, 0.4);
+}
+
+.comparison-problem strong,
+.comparison-solution strong {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.comparison-problem strong {
+    color: #ef4444;
+}
+
+.comparison-solution strong {
+    color: #22c55e;
+}
+
+.comparison-problem p,
+.comparison-solution p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.comparison-problem em,
+.comparison-solution em {
+    color: var(--ember-gold);
+    font-style: italic;
+    font-weight: 600;
+}
+
+/* ===================================
+   SOLANA EXPLAINER CARD
+   =================================== */
+
+.solana-explainer-card {
+    padding: 2.5rem;
+    background: var(--ember-gradient-card);
+    border: 3px solid rgba(139, 92, 246, 0.4);
+    border-radius: var(--radius-2xl);
+    margin-bottom: 3rem;
+    box-shadow: var(--ember-shadow-lg);
+}
+
+.solana-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.solana-icon {
+    width: 72px;
+    height: 72px;
+    filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.6));
+    flex-shrink: 0;
+}
+
+.solana-title-group h3 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    color: #ffffff;
+}
+
+.solana-title-group p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+}
+
+.solana-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.solana-benefit {
+    padding: 1.75rem;
+    background: rgba(139, 92, 246, 0.1);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-xl);
+    transition: var(--transition-base);
+}
+
+.solana-benefit:hover {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.5);
+    transform: translateY(-3px);
+}
+
+.benefit-stat {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #a78bfa;
+    margin-bottom: 0.4rem;
+}
+
+.benefit-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.85rem;
+}
+
+.solana-benefit p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.solana-bottom-cta {
+    padding-top: 2rem;
+    border-top: 2px solid rgba(139, 92, 246, 0.3);
+}
+
+.solana-quote {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+}
+
+.solana-quote svg {
+    flex-shrink: 0;
+    color: #a78bfa;
+    width: 32px;
+    height: 32px;
+}
+
+.solana-quote p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.solana-quote strong {
+    color: var(--ember-gold);
+}
+
+/* ===================================
+   PLAYER FLOW CARD
+   =================================== */
+
+.player-flow-card {
+    padding: 2.5rem;
+    background: var(--ember-gradient-card);
+    border: 3px solid rgba(240, 165, 0, 0.4);
+    border-radius: var(--radius-2xl);
+    margin-bottom: 3rem;
+}
+
+.player-flow-card h3 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    color: #ffffff;
+    text-align: center;
+}
+
+.player-flow-intro {
+    text-align: center;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 2.5rem 0;
+}
+
+.player-steps {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.player-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.step-number-circle {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ember-gradient-primary);
+    border-radius: 50%;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: white;
+    box-shadow: 0 4px 20px rgba(240, 165, 0, 0.5);
+    border: 3px solid rgba(240, 165, 0, 0.3);
+}
+
+.step-content-player h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.65rem 0;
+    color: #ffffff;
+}
+
+.step-content-player p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.step-content-player strong {
+    color: var(--ember-gold);
+}
+
+.player-flow-result {
+    padding: 1.5rem;
+    background: rgba(240, 165, 0, 0.1);
+    border-left: 4px solid var(--ember-orange);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.player-flow-result strong {
+    color: var(--ember-gold);
+    font-weight: 700;
+}
+
+/* ===================================
+   KEY INSIGHT CARD
+   =================================== */
+
+.key-insight-card {
+    padding: 2.5rem;
+    background: linear-gradient(135deg, 
+        rgba(240, 165, 0, 0.15) 0%, 
+        rgba(215, 51, 39, 0.1) 100%);
+    border: 3px solid var(--ember-orange);
+    border-radius: var(--radius-2xl);
+    display: flex;
+    gap: 1.75rem;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    box-shadow: var(--ember-shadow-xl);
+}
+
+.insight-icon {
+    font-size: 4rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.6));
+}
+
+.insight-content h4 {
+    font-size: 1.65rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    color: var(--ember-gold);
+}
+
+.insight-content p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 1rem 0;
+}
+
+.insight-content p:last-child {
+    margin-bottom: 0;
+}
+
+.insight-content strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* ===================================
+   CRASH COURSE CTA
+   =================================== */
+
+.crash-course-cta {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--ember-gradient-card);
+    border: 2px solid rgba(240, 165, 0, 0.4);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--ember-shadow-md);
+}
+
+.crash-course-cta h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    color: #ffffff;
+}
+
+.crash-course-cta p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+.crash-course-cta em {
+    color: var(--ember-gold);
+    font-style: italic;
+    font-weight: 600;
+}
+
+/* ===================================
    GETTING STARTED SECTION
    =================================== */
 .getting-started-section {
@@ -546,93 +1028,6 @@
     color: var(--ember-gold);
     font-weight: 700;
 }
-
-/* ===================================
-   RESPONSIVE - HERO & HEADERS
-   =================================== */
-@media (max-width: 1024px) {
-    .stats-bar-inline {
-        gap: 1.5rem;
-    }
-    
-    .path-tabs {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .path-tab {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .onboarding-hero-new {
-        padding: calc(var(--navbar-height) + 2rem) 1rem 3rem;
-    }
-    
-    .stats-bar-inline {
-        flex-direction: column;
-        gap: 1.25rem;
-        padding: 1.5rem;
-    }
-    
-    .stat-divider {
-        width: 40px;
-        height: 2px;
-    }
-    
-    .audience-buttons {
-        grid-template-columns: 1fr;
-    }
-    
-    .quick-jump-links {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .quick-jump-link {
-        justify-content: center;
-        text-align: center;
-    }
-    
-    .trust-container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .path-intro-card {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .onboarding-hero-new {
-        padding: calc(var(--navbar-height) + 1.5rem) 1rem 2.5rem;
-    }
-    
-    .hero-badge-new img {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .audience-btn {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .path-intro-icon img {
-        width: 60px;
-        height: 60px;
-    }
-}
-
-/* END OF PART 1 *//* ===================================
-   VAULT PHOENIX - ONBOARDING PAGE LOCAL CSS
-   PART 2: STEPS, SCRIPTS, PROPOSALS, PRICING
-   Matching Main Page Styles
-   =================================== */
 
 /* ===================================
    STEPS TIMELINE - MATCHING MAIN STEPS
@@ -1061,7 +1456,211 @@
 }
 
 /* ===================================
-   SALES TOOLKIT SECTION
+   RESPONSIVE - HERO & GETTING STARTED
+   =================================== */
+@media (max-width: 1024px) {
+    .stats-bar-inline {
+        gap: 1.5rem;
+    }
+    
+    .path-tabs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .path-tab {
+        justify-content: center;
+    }
+    
+    .steps-timeline::before {
+        display: none;
+    }
+    
+    .location-types {
+        grid-template-columns: 1fr;
+    }
+    
+    .web3-comparison-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .solana-benefits-grid {
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .onboarding-hero-new {
+        padding: calc(var(--navbar-height) + 2rem) 1rem 3rem;
+    }
+    
+    .stats-bar-inline {
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1.5rem;
+    }
+    
+    .stat-divider {
+        width: 40px;
+        height: 2px;
+    }
+    
+    .audience-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-jump-links {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .quick-jump-link {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .trust-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .path-intro-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .step-card {
+        flex-direction: column;
+        padding: 1.75rem 1.5rem;
+    }
+    
+    .step-number {
+        width: 56px;
+        height: 56px;
+        font-size: 1.6rem;
+    }
+    
+    .step-demo-links {
+        grid-template-columns: 1fr;
+    }
+    
+    .success-banner-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .success-banner-content img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .web3-crash-course-section {
+        padding: 3rem 1rem;
+    }
+    
+    .web3-comparison-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .solana-explainer-card,
+    .player-flow-card,
+    .key-insight-card,
+    .crash-course-cta {
+        padding: 2rem 1.5rem;
+    }
+    
+    .solana-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .solana-benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .player-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .key-insight-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .solana-quote {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .onboarding-hero-new {
+        padding: calc(var(--navbar-height) + 1.5rem) 1rem 2.5rem;
+    }
+    
+    .hero-badge-new img {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .audience-btn {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .path-intro-icon img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .step-title {
+        font-size: 1.25rem;
+    }
+    
+    .step-description {
+        font-size: 0.9rem;
+    }
+    
+    .integration-checklist {
+        grid-template-columns: 1fr;
+    }
+    
+    .comparison-icon {
+        font-size: 2.5rem;
+    }
+    
+    .comparison-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .benefit-stat {
+        font-size: 2rem;
+    }
+    
+    .solana-icon {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .step-number-circle {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+    }
+    
+    .insight-icon {
+        font-size: 3rem;
+    }
+}
+
+/* ===================================
+   END OF TOP SECTION CSS
+   SALES TOOLKIT SECTION STARTS BELOW
    =================================== */
 .sales-toolkit-section {
     padding: var(--section-padding) var(--container-padding);
