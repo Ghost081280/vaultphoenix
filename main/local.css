@@ -5246,3 +5246,17 @@ body.main-page .main-social-sharing-icon-compact {
         height: 75px !important;
     }
 }
+/* ===================================
+   DIAGNOSTIC TEST - REMOVE AFTER TESTING
+   =================================== */
+.ember-highlights-redesigned {
+    position: relative;
+    z-index: 999 !important;
+    isolation: isolate !important;
+}
+
+.ember-highlight-redesigned {
+    position: relative;
+    z-index: 1000 !important;
+    pointer-events: auto !important;
+}
