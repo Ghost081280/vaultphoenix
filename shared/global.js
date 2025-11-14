@@ -1,7 +1,7 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.1 FIXED LOADER
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.2 PAGE-SPECIFIC NAV
 // ============================================
-// FIXES: Proper component loading sequence, better initialization
+// UPDATES: Page-specific quick links, fixed cookie popup icon
 // ============================================
 
 (function() {
@@ -60,17 +60,51 @@ let serviceStatus = {
 };
 
 // ============================================
-// UNIFIED NAVIGATION SOURCE
-// Desktop nav, mobile menu, and footer Quick Links ALL use this
+// PAGE-SPECIFIC NAVIGATION SYSTEM
+// Shows 5 quick links based on current page + $Ember Token button
 // ============================================
-const UNIFIED_NAV_LINKS = [
-    { title: 'Home', href: 'main.html' },
-    { title: 'About Us', href: 'about.html' },
-    { title: 'Team', href: 'team.html' },
-    { title: 'Campaigns', href: 'campaigns.html' },
-    { title: 'SDK', href: 'sdk.html' },
-    { title: '$Ember Token', href: 'ember-presale.html' }
-];
+
+// Get current page filename
+function getCurrentPage() {
+    const path = window.location.pathname;
+    const page = path.split('/').pop() || 'main.html';
+    return page;
+}
+
+// Page-specific quick links (5 links per page)
+const PAGE_QUICK_LINKS = {
+    'main.html': [
+        { title: 'Features', href: '#features' },
+        { title: 'Live Demo', href: '#showcase' },
+        { title: 'Get Ideas', href: '#use-cases' },
+        { title: 'Pricing', href: '#pricing' },
+        { title: 'Success Guide', href: 'onboarding.html' }
+    ],
+    'ember.html': [
+        { title: 'Presale', href: '#presale' },
+        { title: 'Whitepaper', href: '#whitepaper' },
+        { title: 'Roadmap', href: '#roadmap' },
+        { title: 'Team', href: '#team' },
+        { title: 'Legal', href: '#legal' }
+    ],
+    'onboarding.html': [
+        { title: 'Getting Started', href: '#getting-started' },
+        { title: 'ROI Calculators', href: '#roi-calculators' },
+        { title: 'Sales Scripts', href: '#sales-scripts' },
+        { title: 'Implementation', href: '#implementation' },
+        { title: 'Resources', href: '#resources' }
+    ]
+};
+
+// $Ember Token link (same for all pages)
+const EMBER_TOKEN_LINK = { title: '$Ember Token', href: 'ember.html' };
+
+// Get navigation links for current page
+function getNavigationLinks() {
+    const currentPage = getCurrentPage();
+    const quickLinks = PAGE_QUICK_LINKS[currentPage] || PAGE_QUICK_LINKS['main.html'];
+    return quickLinks;
+}
 
 // ============================================
 // HYBRID AI WRAPPER WITH STATUS TRACKING
@@ -201,7 +235,7 @@ const siteScanner = {
     },
     
     scanCurrentPage() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const currentPage = getCurrentPage();
         
         const sections = document.querySelectorAll('section[id], div[id]');
         sections.forEach(section => {
@@ -222,7 +256,8 @@ const siteScanner = {
     },
     
     scanNavigation() {
-        UNIFIED_NAV_LINKS.forEach(navLink => {
+        const navLinks = getNavigationLinks();
+        navLinks.forEach(navLink => {
             this.scannedData.navigation.push({
                 title: navLink.title,
                 href: navLink.href,
@@ -250,23 +285,28 @@ const siteScanner = {
 };
 
 // ============================================
-// UNIFIED NAVIGATION GENERATOR
+// NAVIGATION GENERATOR (PAGE-SPECIFIC)
 // ============================================
 function generateNavigation() {
-    updateDesktopNav(UNIFIED_NAV_LINKS);
-    updateMobileNav(UNIFIED_NAV_LINKS);
+    const navLinks = getNavigationLinks();
     
-    setTimeout(() => {
-        updateFooterNav(UNIFIED_NAV_LINKS);
-    }, 100);
+    updateDesktopNav(navLinks);
+    updateMobileNav(navLinks);
     
-    setTimeout(() => {
-        const footerLinks = document.querySelector('.footer-column .footer-links');
-        if (footerLinks && footerLinks.children.length === 0) {
-            console.log('🔄 Retrying footer navigation...');
-            updateFooterNav(UNIFIED_NAV_LINKS);
-        }
-    }, 500);
+    // Only show footer quick links on mobile
+    if (window.innerWidth <= 768) {
+        setTimeout(() => {
+            updateFooterNav(navLinks);
+        }, 100);
+        
+        setTimeout(() => {
+            const footerLinks = document.querySelector('.footer-column .footer-links');
+            if (footerLinks && footerLinks.children.length === 0) {
+                console.log('🔄 Retrying footer navigation...');
+                updateFooterNav(navLinks);
+            }
+        }, 500);
+    }
 }
 
 function updateDesktopNav(navLinks) {
@@ -276,8 +316,6 @@ function updateDesktopNav(navLinks) {
     desktopNav.innerHTML = '';
     
     navLinks.forEach(link => {
-        if (link.title === '$Ember Token') return;
-        
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = link.href;
@@ -289,11 +327,17 @@ function updateDesktopNav(navLinks) {
         desktopNav.appendChild(li);
     });
     
+    // Add $Ember Token button
     const li = document.createElement('li');
     const a = document.createElement('a');
-    a.href = 'ember-presale.html';
+    a.href = EMBER_TOKEN_LINK.href;
     a.className = 'ember-link';
-    a.innerHTML = '<img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">$Ember Token';
+    a.innerHTML = `
+        <div class="main-image-glow">
+            <img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">
+        </div>
+        <span>${EMBER_TOKEN_LINK.title}</span>
+    `;
     li.appendChild(a);
     desktopNav.appendChild(li);
 }
@@ -305,8 +349,6 @@ function updateMobileNav(navLinks) {
     mobileNav.innerHTML = '';
     
     navLinks.forEach(link => {
-        if (link.title === '$Ember Token') return;
-        
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = link.href;
@@ -319,11 +361,17 @@ function updateMobileNav(navLinks) {
         mobileNav.appendChild(li);
     });
     
+    // Add $Ember Token button
     const li = document.createElement('li');
     const a = document.createElement('a');
-    a.href = 'ember-presale.html';
+    a.href = EMBER_TOKEN_LINK.href;
     a.className = 'ember-link';
-    a.innerHTML = '<img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">$Ember Token';
+    a.innerHTML = `
+        <div class="main-image-glow">
+            <img src="images/VPEmberCoin.PNG" alt="Ember" class="nav-ember-coin">
+        </div>
+        ${EMBER_TOKEN_LINK.title}
+    `;
     li.appendChild(a);
     mobileNav.appendChild(li);
 }
@@ -652,7 +700,7 @@ function initializeUniversalCountdown() {
 window.initializeUniversalCountdown = initializeUniversalCountdown;
 
 // ============================================
-// COOKIE CONSENT BANNER
+// COOKIE CONSENT BANNER (UPDATED WITH LOGO ICON)
 // ============================================
 function initializeCookieConsent() {
     const cookieConsent = localStorage.getItem('vaultphoenix_cookie_consent');
@@ -666,7 +714,11 @@ function initializeCookieConsent() {
     consentBanner.className = 'cookie-consent-banner';
     consentBanner.innerHTML = `
         <div class="cookie-consent-content">
-            <div class="cookie-consent-icon">🍪</div>
+            <div class="cookie-consent-icon">
+                <div class="main-image-glow">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix" style="width: 50px; height: 50px; object-fit: contain;">
+                </div>
+            </div>
             <div class="cookie-consent-text">
                 <h4>We Value Your Privacy</h4>
                 <p>We use cookies to enhance your browsing experience.</p>
@@ -674,7 +726,7 @@ function initializeCookieConsent() {
             <div class="cookie-consent-buttons">
                 <button class="cookie-btn cookie-accept">Accept</button>
                 <button class="cookie-btn cookie-decline">Decline</button>
-                <a href="#" class="cookie-privacy-link" id="cookie-privacy-link">Privacy Policy</a>
+                <a href="docs/__PRIVACY_POLICY.pdf" class="cookie-privacy-link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
             </div>
         </div>
     `;
@@ -743,6 +795,9 @@ function initializePrivacyPolicyModal() {
                     </div>
                 </div>
                 <div class="privacy-modal-footer">
+                    <a href="docs/__PRIVACY_POLICY.pdf" class="privacy-download-btn" target="_blank" rel="noopener noreferrer">
+                        <span class="privacy-download-icon">📄</span> View Full Policy
+                    </a>
                     <button class="privacy-close-btn" id="privacy-modal-close-btn">Close</button>
                 </div>
             </div>
@@ -1339,6 +1394,27 @@ window.addEventListener('resize', function() {
         if (window.innerWidth > 1024 && mobileMenu && mobileMenu.classList.contains('active')) {
             closeMobileMenu();
         }
+        
+        // Re-check footer quick links visibility on resize
+        const footerColumn = document.querySelector('.footer-column .footer-links');
+        if (footerColumn) {
+            if (window.innerWidth <= 768) {
+                // Mobile: Show quick links
+                generateNavigation();
+            } else {
+                // Desktop: Clear quick links (they're in nav)
+                const quickLinksColumn = Array.from(document.querySelectorAll('.footer-column')).find(col => {
+                    const heading = col.querySelector('.footer-heading');
+                    return heading && heading.textContent.trim() === 'Quick Links';
+                });
+                if (quickLinksColumn) {
+                    const linksContainer = quickLinksColumn.querySelector('.footer-links');
+                    if (linksContainer) {
+                        linksContainer.innerHTML = '';
+                    }
+                }
+            }
+        }
     }, 250);
 });
 
@@ -1346,7 +1422,7 @@ window.addEventListener('resize', function() {
 // INITIALIZATION SEQUENCE
 // ============================================
 async function init() {
-    console.log('🔥 Vault Phoenix v8.1 FIXED LOADER Initializing...');
+    console.log('🔥 Vault Phoenix v8.2 PAGE-SPECIFIC NAV Initializing...');
     
     // CRITICAL: Load shared components FIRST
     const componentsLoaded = await loadSharedComponents();
@@ -1397,8 +1473,10 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v8.1 FIXED LOADER Complete');
+    console.log('✅ Vault Phoenix v8.2 PAGE-SPECIFIC NAV Complete');
     console.log('✅ Footer and Chatbot loaded from shared/global.html');
+    console.log(`✅ Current page: ${getCurrentPage()}`);
+    console.log(`✅ Quick links: ${getNavigationLinks().map(l => l.title).join(', ')}`);
 }
 
 if (document.readyState === 'loading') {
