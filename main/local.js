@@ -1,8 +1,9 @@
 // ============================================
 // VAULT PHOENIX MAIN.HTML LOCAL JAVASCRIPT
-// ULTIMATE BUTTER-SMOOTH VERSION v2.1
+// ULTIMATE BUTTER-SMOOTH VERSION v2.2
 // COMPLETE WITH ALL ORIGINAL FEATURES + ENHANCED MODALS
 // MATCHING EMBER PAGE AIRDROP MODALS
+// ✅ FIX: Smooth scroll no longer blocks ember.html anchor links
 // ============================================
 
 (function() {
@@ -945,26 +946,27 @@ function initializeCountdownTimer() {
 }
 
 // ============================================
-// SMOOTH SCROLL - FIXED TO ALLOW EMBER.HTML LINKS
+// SMOOTH SCROLL - FIXED VERSION v2.2
+// ✅ Now properly allows ember.html anchor links to work
 // ============================================
 function initializeSmoothScroll() {
     document.addEventListener('click', function(e) {
+        // Only handle links that start with # (same-page anchors)
         const target = e.target.closest('a[href^="#"]');
+        
+        // If it's not a same-page anchor link, don't interfere
         if (!target) return;
         
         const href = target.getAttribute('href');
         
-        // CRITICAL FIX: Don't interfere with ember.html anchor links
-        if (href && href.includes('ember.html')) {
-            return; // Let the browser handle ember.html links normally
-        }
-        
+        // Handle scroll to top
         if (href === '#') {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
         }
         
+        // Handle same-page anchors
         const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
         
@@ -978,8 +980,9 @@ function initializeSmoothScroll() {
         }
     });
     
-    console.log('✅ Smooth scroll initialized');
+    console.log('✅ Smooth scroll initialized (v2.2 - ember.html links work)');
 }
+
 // ============================================
 // PERFORMANCE MONITORING
 // ============================================
@@ -1059,7 +1062,7 @@ function detectConnectionQuality() {
 // MASTER INITIALIZATION
 // ============================================
 async function initializeMainPage() {
-    console.log('🔥 Vault Phoenix - Main Page v2.1 COMPLETE - Starting...');
+    console.log('🔥 Vault Phoenix - Main Page v2.2 COMPLETE - Starting...');
     
     detectTouchDevice();
     fixMobileViewport();
@@ -1105,7 +1108,7 @@ if (document.readyState === 'loading') {
 
 window.vaultPhoenixMainPage = {
     state: pageState,
-    version: '2.1.0-complete'
+    version: '2.2.0-complete'
 };
 
 })();
