@@ -2459,6 +2459,101 @@ div[class*="-hero"].scroll-reveal,
         right: 8px;
     }
 }
+/* ===================================
+   EMBER LINK BUTTON FIX
+   Better fit around coin image and text
+   =================================== */
+
+.ember-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    background: var(--ember-gradient-primary);
+    border-radius: var(--radius-full);
+    color: white !important;
+    box-shadow: var(--ember-shadow-md);
+    position: relative;
+    white-space: nowrap;
+}
+
+.ember-link .main-image-glow {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ember-link::after {
+    display: none !important;
+}
+
+.ember-link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ember-shadow-lg);
+}
+
+.nav-ember-coin {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Mobile ember link */
+.mobile-nav-links .ember-link {
+    margin: 1rem 0.5rem 0;
+    padding: 0.75rem 1.5rem;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+}
+
+.mobile-nav-links .ember-link .main-image-glow {
+    margin-right: 0.5rem;
+}
+
+/* ===================================
+   COOKIE CONSENT ICON FIX
+   Replace emoji with logo
+   =================================== */
+
+.cookie-consent-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cookie-consent-icon .main-image-glow img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(215, 51, 39, 0.6));
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .cookie-consent-icon .main-image-glow img {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .ember-link {
+        padding: 0.55rem 1.25rem;
+        gap: 0.4rem;
+    }
+    
+    .nav-ember-coin {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cookie-consent-icon .main-image-glow img {
+        width: 40px;
+        height: 40px;
+    }
+}
 
 /**
  * ============================================
