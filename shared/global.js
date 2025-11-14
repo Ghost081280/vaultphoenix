@@ -293,20 +293,21 @@ function generateNavigation() {
     updateDesktopNav(navLinks);
     updateMobileNav(navLinks);
     
-    // Only show footer quick links on mobile
-    if (window.innerWidth <= 768) {
-        setTimeout(() => {
+    // Always show footer quick links
+    setTimeout(() => {
+        updateFooterNav(navLinks);
+    }, 100);
+    
+    setTimeout(() => {
+        const footerLinks = document.querySelector('.footer-column .footer-links');
+        if (footerLinks && footerLinks.children.length === 0) {
+            console.log('🔄 Retrying footer navigation...');
             updateFooterNav(navLinks);
-        }, 100);
-        
-        setTimeout(() => {
-            const footerLinks = document.querySelector('.footer-column .footer-links');
-            if (footerLinks && footerLinks.children.length === 0) {
-                console.log('🔄 Retrying footer navigation...');
-                updateFooterNav(navLinks);
-            }
-        }, 500);
-    }
+        }
+    }, 500);
+    
+    // Hide Resources and Legal columns on mobile
+    updateFooterResponsiveness();
 }
 
 function updateDesktopNav(navLinks) {
@@ -402,6 +403,26 @@ function updateFooterNav(footerLinks) {
         a.textContent = link.title;
         li.appendChild(a);
         linksContainer.appendChild(li);
+    });
+}
+
+// Hide Resources and Legal columns on mobile, show on desktop
+function updateFooterResponsiveness() {
+    const footerColumns = document.querySelectorAll('.footer-column');
+    
+    footerColumns.forEach(col => {
+        const heading = col.querySelector('.footer-heading');
+        if (heading) {
+            const headingText = heading.textContent.trim();
+            // Hide Resources and Legal on mobile (≤768px)
+            if (headingText === 'Resources' || headingText === 'Legal') {
+                if (window.innerWidth <= 768) {
+                    col.style.display = 'none';
+                } else {
+                    col.style.display = 'flex';
+                }
+            }
+        }
     });
 }
 
@@ -1395,26 +1416,8 @@ window.addEventListener('resize', function() {
             closeMobileMenu();
         }
         
-        // Re-check footer quick links visibility on resize
-        const footerColumn = document.querySelector('.footer-column .footer-links');
-        if (footerColumn) {
-            if (window.innerWidth <= 768) {
-                // Mobile: Show quick links
-                generateNavigation();
-            } else {
-                // Desktop: Clear quick links (they're in nav)
-                const quickLinksColumn = Array.from(document.querySelectorAll('.footer-column')).find(col => {
-                    const heading = col.querySelector('.footer-heading');
-                    return heading && heading.textContent.trim() === 'Quick Links';
-                });
-                if (quickLinksColumn) {
-                    const linksContainer = quickLinksColumn.querySelector('.footer-links');
-                    if (linksContainer) {
-                        linksContainer.innerHTML = '';
-                    }
-                }
-            }
-        }
+        // Update footer responsiveness on resize
+        updateFooterResponsiveness();
     }, 250);
 });
 
