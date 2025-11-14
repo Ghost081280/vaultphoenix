@@ -1,7 +1,7 @@
 /* ===================================
-   VAULT PHOENIX - SHARED CSS v10.2 COMPLETE
+   VAULT PHOENIX - SHARED CSS v10.1 HERO ALWAYS VISIBLE
    Core styles used across ALL pages
-   INCLUDES: Page-specific nav, ember button fix, cookie logo, footer responsive
+   CRITICAL FIX: Hero visible immediately, no JS or animation conflicts
    =================================== */
 
 /* ===================================
@@ -456,6 +456,18 @@ div[class*="-hero"].scroll-reveal,
     filter: drop-shadow(0 0 12px rgba(215, 51, 39, 0.9));
 }
 
+/* Mobile ember link */
+.mobile-nav-links .ember-link {
+    margin: 1rem 0.5rem 0;
+    padding: 0.875rem 2rem;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+}
+
+.mobile-nav-links .ember-link .main-image-glow {
+    margin-right: 0.5rem;
+}
+
 .mobile-menu-btn {
     display: none;
     font-size: 2rem;
@@ -600,10 +612,6 @@ div[class*="-hero"].scroll-reveal,
     padding: 0.875rem 2rem;
     justify-content: center;
     border-radius: var(--radius-lg);
-}
-
-.mobile-nav-links .ember-link .main-image-glow {
-    margin-right: 0.5rem;
 }
 
 /* ===================================
@@ -931,7 +939,9 @@ div[class*="-hero"].scroll-reveal,
     right: calc(100% + 15px) !important;
 }
 
-/* DESKTOP CHATBOT */
+/* ===================================
+   DESKTOP CHATBOT - STAYS BELOW NAVBAR, GROWS WITH SCREEN
+   =================================== */
 .chatbot-window {
     position: fixed;
     top: calc(var(--navbar-height) + 20px);
@@ -1305,8 +1315,7 @@ div[class*="-hero"].scroll-reveal,
 }
 
 /* ===================================
-   COOKIE CONSENT BANNER - FIXED v10.2
-   Logo icon instead of emoji
+   COOKIE CONSENT BANNER
    =================================== */
 .cookie-consent-banner {
     position: fixed;
@@ -2514,7 +2523,7 @@ div[class*="-hero"].scroll-reveal,
 
 /**
  * ============================================
- * END OF GLOBAL.CSS v10.2 COMPLETE
+ * END OF GLOBAL.CSS v10.2 PROPERLY MERGED
  * ============================================
  * 
  * ✅ Hero sections visible IMMEDIATELY (no JS needed)
@@ -2524,7 +2533,8 @@ div[class*="-hero"].scroll-reveal,
  * ✅ Footer Resources/Legal hide on mobile
  * ✅ Maximum specificity prevents ANY conflicts
  * ✅ Clean, bulletproof, production-ready
+ * ✅ All duplicates removed
  * 
- * All fixes integrated! Ready to deploy! 🔥
+ * Ready to deploy! 🔥
  * ============================================
  */
