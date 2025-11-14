@@ -852,17 +852,14 @@ body {
         font-size: 0.85rem;
     }
 }/* ===================================
-   EMBER TOKEN SECTION - COMPLETE FIX
-   ✅ FIX #2: COUNTDOWN TIMER FIXED (min-width added)
-   ✅ FIX #3: BALANCED LAYOUT (compact header, smaller phoenix, aligned compliance)
-   Text, images, and equal heights FIXED
+   EMBER TOKEN SECTION - REBUILT CLEAN
    =================================== */
-.ember-token-section-redesigned {
+.ember-token-section {
     padding: var(--section-padding) var(--container-padding);
     background: var(--ember-gradient-background);
 }
 
-.ember-token-grid-redesigned {
+.ember-token-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 2.5rem;
@@ -871,13 +868,13 @@ body {
     margin: 0 auto;
 }
 
-.ember-token-left-redesigned {
+.ember-token-left {
     display: flex;
     flex-direction: column;
     gap: 1.75rem;
 }
 
-.ember-token-right-redesigned {
+.ember-token-right {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -885,64 +882,65 @@ body {
     justify-content: space-between;
 }
 
-.ember-token-title-redesigned {
+.ember-token-title {
     font-size: clamp(1.8rem, 3.5vw, 2.75rem);
     font-weight: 800;
     color: #ffffff;
     margin-bottom: 0.5rem;
 }
 
-.ember-token-description-redesigned {
+.ember-token-description {
     font-size: 0.9rem;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 1.25rem;
 }
 
-.ember-countdown-widget-redesigned {
+/* Countdown Widget */
+.ember-countdown-widget {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-2xl);
     padding: 1.75rem;
 }
 
-.countdown-header-redesigned {
+.countdown-header {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 1.25rem;
 }
 
-.countdown-icon-redesigned {
+.countdown-icon {
     flex-shrink: 0;
 }
 
-.main-ember-countdown-icon-redesigned {
+.ember-countdown-icon {
     width: 56px;
     height: 56px;
     object-fit: contain;
 }
 
-.countdown-text-redesigned h3 {
+.countdown-text h3 {
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--ember-gold);
     margin-bottom: 0.2rem;
 }
 
-.countdown-text-redesigned p {
+.countdown-text p {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.7);
 }
 
-.ember-countdown-timer-redesigned {
+.ember-countdown-timer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0.75rem;
     margin-bottom: 1.25rem;
 }
 
-.ember-time-unit-redesigned {
+.ember-time-unit {
     background: rgba(215, 51, 39, 0.2);
     border: 1px solid rgba(215, 51, 39, 0.4);
     border-radius: var(--radius-lg);
@@ -950,23 +948,22 @@ body {
     text-align: center;
 }
 
-.ember-time-value-redesigned {
+.ember-time-value {
     display: block;
     font-size: 1.85rem;
     font-weight: 800;
     color: var(--ember-gold);
     margin-bottom: 0.2rem;
-    /* ✅ FIX #2: Prevent flashing until connected to backend */
     min-width: 45px;
 }
 
-.ember-time-label-redesigned {
+.ember-time-label {
     display: block;
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.7);
 }
 
-.presale-stats-redesigned {
+.presale-stats {
     display: grid;
     grid-template-columns: auto auto auto auto auto;
     gap: 0.75rem;
@@ -975,117 +972,89 @@ body {
     margin-bottom: 1.25rem;
 }
 
-.stat-item-redesigned {
+.stat-item {
     text-align: center;
 }
 
-.stat-number-redesigned {
+.stat-number {
     display: block;
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--ember-gold);
 }
 
-.stat-label-redesigned {
+.stat-label {
     display: block;
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.6);
 }
 
-.stat-divider-redesigned {
+.stat-divider {
     color: rgba(255, 255, 255, 0.3);
     font-size: 1.4rem;
 }
 
-.presale-cta-redesigned {
+.presale-cta {
     text-align: center;
 }
 
-.cta-icon-image-redesigned {
+.cta-icon-small {
     width: 22px;
     height: 22px;
     object-fit: contain;
 }
 
-.cta-text-redesigned {
-    font-size: 0.95rem;
-}
-
 /* ===================================
-   EMBER HIGHLIGHTS - FIXED SIZING AND EQUAL HEIGHTS
+   EMBER HIGHLIGHTS - REBUILT CLEAN WITH WORKING LINKS
    =================================== */
-.ember-highlights-redesigned {
+.ember-highlights {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    height: auto;
 }
 
-.ember-highlight-redesigned {
+.ember-highlight-link {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.75rem 0.65rem;
+    gap: 0.65rem;
+    padding: 1rem 0.85rem;
     background: rgba(215, 51, 39, 0.1);
     border: 1px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-lg);
     text-decoration: none;
-    transition: var(--transition-base);
-    position: relative;
-    min-height: 70px;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.ember-highlight-redesigned:hover {
+.ember-highlight-link:hover {
     background: rgba(215, 51, 39, 0.2);
     border-color: var(--ember-orange);
-    transform: translateX(3px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(215, 51, 39, 0.3);
 }
 
-.highlight-content-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex: 1;
-    min-width: 0;
-}
-
-.highlight-emoji-redesigned {
+.ember-highlight-link .highlight-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
     flex-shrink: 0;
 }
 
-.highlight-icon-image-redesigned {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-}
-
-.highlight-text-redesigned {
+.ember-highlight-link .highlight-text {
     flex: 1;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
-    line-height: 1.25;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    line-height: 1.3;
 }
 
-.highlight-arrow-redesigned {
-    font-size: 1.1rem;
-    color: var(--ember-gold);
-    flex-shrink: 0;
-    margin-left: 0.25rem;
-}
-
-/* ===================================
-   RIGHT COLUMN - ✅ FIX #3: BALANCED & EQUAL HEIGHT
-   =================================== */
-.ember-phoenix-container-redesigned {
+/* Right Column */
+.ember-phoenix-container {
     text-align: center;
     flex: 1;
 }
 
-.phoenix-holding-coin-redesigned {
+.phoenix-holding-coin {
     width: 100%;
     max-width: 320px;
     height: auto;
@@ -1093,7 +1062,7 @@ body {
     margin: 0 auto;
 }
 
-.compliance-disclaimer-redesigned {
+.compliance-disclaimer {
     background: var(--ember-gradient-card);
     border: 2px solid rgba(215, 51, 39, 0.3);
     border-radius: var(--radius-xl);
@@ -1104,7 +1073,7 @@ body {
     align-self: end;
 }
 
-.compliance-disclaimer-redesigned h4 {
+.compliance-disclaimer h4 {
     display: flex;
     align-items: center;
     gap: 0.65rem;
@@ -1114,13 +1083,13 @@ body {
     margin-bottom: 0.85rem;
 }
 
-.main-compliance-icon-redesigned {
+.compliance-icon {
     width: 36px;
     height: 36px;
     object-fit: contain;
 }
 
-.compliance-disclaimer-redesigned p {
+.compliance-disclaimer p {
     font-size: 0.85rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
@@ -1134,161 +1103,153 @@ body {
 }
 
 /* ===================================
-   EMBER TOKEN RESPONSIVE - TABLET
+   RESPONSIVE - EMBER TOKEN SECTION
    =================================== */
 @media (max-width: 1024px) {
-    .ember-token-grid-redesigned {
+    .ember-token-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
     
-    .ember-highlights-redesigned {
+    .ember-highlights {
         grid-template-columns: 1fr;
         gap: 0.75rem;
     }
-    
-    .ember-highlight-redesigned {
-        min-height: auto;
-    }
 }
 
-/* ===================================
-   EMBER TOKEN RESPONSIVE - MOBILE
-   =================================== */
 @media (max-width: 768px) {
-    .ember-token-section-redesigned {
+    .ember-token-section {
         padding: 3rem 1rem;
     }
     
-    .ember-token-grid-redesigned {
+    .ember-token-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
     
-    .ember-countdown-widget-redesigned {
+    .ember-countdown-widget {
         padding: 1.5rem;
     }
     
-    .countdown-header-redesigned {
+    .countdown-header {
         flex-direction: column;
         text-align: center;
         gap: 0.5rem;
     }
     
-    .main-ember-countdown-icon-redesigned {
+    .ember-countdown-icon {
         width: 48px;
         height: 48px;
     }
     
-    .countdown-text-redesigned h3 {
+    .countdown-text h3 {
         font-size: 1.1rem;
     }
     
-    .countdown-text-redesigned p {
+    .countdown-text p {
         font-size: 0.8rem;
     }
     
-    .ember-countdown-timer-redesigned {
+    .ember-countdown-timer {
         grid-template-columns: repeat(4, 1fr);
         gap: 0.5rem;
     }
     
-    .ember-time-unit-redesigned {
+    .ember-time-unit {
         padding: 0.65rem;
     }
     
-    .ember-time-value-redesigned {
+    .ember-time-value {
         font-size: 1.5rem;
     }
     
-    .ember-time-label-redesigned {
+    .ember-time-label {
         font-size: 0.7rem;
     }
     
-    .presale-stats-redesigned {
+    .presale-stats {
         grid-template-columns: repeat(3, 1fr);
         gap: 0.5rem;
     }
     
-    .stat-divider-redesigned {
+    .stat-divider {
         display: none;
     }
     
-    .stat-number-redesigned {
+    .stat-number {
         font-size: 1rem;
     }
     
-    .stat-label-redesigned {
+    .stat-label {
         font-size: 0.7rem;
     }
     
-    .ember-highlights-redesigned {
+    .ember-highlights {
         grid-template-columns: 1fr;
         gap: 0.75rem;
     }
     
-    .ember-highlight-redesigned {
+    .ember-highlight-link {
         padding: 1rem;
-        min-height: auto;
     }
     
-    .highlight-icon-image-redesigned {
-        width: 36px;
-        height: 36px;
+    .ember-highlight-link .highlight-icon {
+        width: 40px;
+        height: 40px;
     }
     
-    .highlight-text-redesigned {
+    .ember-highlight-link .highlight-text {
         font-size: 0.9rem;
     }
     
-    .ember-phoenix-container-redesigned {
+    .ember-phoenix-container {
         margin: 1.5rem 0;
     }
     
-    .phoenix-holding-coin-redesigned {
+    .phoenix-holding-coin {
         max-width: 280px;
     }
     
-    .compliance-disclaimer-redesigned {
+    .compliance-disclaimer {
         padding: 1.5rem;
         margin-top: 1.5rem;
     }
     
-    .compliance-disclaimer-redesigned h4 {
+    .compliance-disclaimer h4 {
         font-size: 1rem;
         flex-direction: column;
         text-align: center;
     }
     
-    .main-compliance-icon-redesigned {
+    .compliance-icon {
         width: 40px;
         height: 40px;
     }
     
-    .compliance-disclaimer-redesigned p {
+    .compliance-disclaimer p {
         font-size: 0.85rem;
     }
 }
 
 @media (max-width: 480px) {
-    .ember-time-value-redesigned {
+    .ember-time-value {
         font-size: 1.3rem;
     }
     
-    .ember-time-label-redesigned {
+    .ember-time-label {
         font-size: 0.65rem;
     }
     
-    .phoenix-holding-coin-redesigned {
+    .phoenix-holding-coin {
         max-width: 240px;
     }
     
-    .highlight-icon-image-redesigned {
-        width: 32px;
-        height: 32px;
+    .ember-highlight-link .highlight-icon {
+        width: 36px;
+        height: 36px;
     }
     
-    .highlight-text-redesigned {
+    .ember-highlight-link .highlight-text {
         font-size: 0.85rem;
     }
 }
