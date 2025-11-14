@@ -945,7 +945,7 @@ function initializeCountdownTimer() {
 }
 
 // ============================================
-// SMOOTH SCROLL
+// SMOOTH SCROLL - FIXED TO ALLOW EMBER.HTML LINKS
 // ============================================
 function initializeSmoothScroll() {
     document.addEventListener('click', function(e) {
@@ -953,6 +953,12 @@ function initializeSmoothScroll() {
         if (!target) return;
         
         const href = target.getAttribute('href');
+        
+        // CRITICAL FIX: Don't interfere with ember.html anchor links
+        if (href && href.includes('ember.html')) {
+            return; // Let the browser handle ember.html links normally
+        }
+        
         if (href === '#') {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -974,7 +980,6 @@ function initializeSmoothScroll() {
     
     console.log('✅ Smooth scroll initialized');
 }
-
 // ============================================
 // PERFORMANCE MONITORING
 // ============================================
