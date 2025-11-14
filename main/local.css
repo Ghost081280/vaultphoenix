@@ -5247,33 +5247,8 @@ body.main-page .main-social-sharing-icon-compact {
     }
 }
 
-
 /* ===================================
-   FIX: Make sure child elements don't block clicks on highlight buttons
-   STRENGTHENED WITH !important
-   =================================== */
-.ember-highlight-redesigned .highlight-content-wrapper,
-.ember-highlight-redesigned .highlight-emoji-redesigned,
-.ember-highlight-redesigned .main-image-glow,
-.ember-highlight-redesigned .main-image-glow *,
-.ember-highlight-redesigned .highlight-icon-image-redesigned,
-.ember-highlight-redesigned .highlight-text-redesigned,
-.ember-highlight-redesigned .highlight-arrow-redesigned {
-    pointer-events: none !imp
-/* ===================================
-   NUCLEAR FIX: Force Enterprise Token Buttons to be Clickable
-   =================================== */
-.ember-highlights-redesigned {
-    position: relative;
-    z-index: 10;
-    isolation: isolate;
-}
-
-.ember-highlight-redesigned {
-    position: relative !important;
-
-/* ===================================
-   FIXED: Simplified Enterprise Token Buttons CSS
+   ✅ FIXED: Enterprise Token Infrastructure Buttons - Clickable
    =================================== */
 .ember-highlight-redesigned {
     display: flex;
@@ -5285,6 +5260,8 @@ body.main-page .main-social-sharing-icon-compact {
     border-radius: var(--radius-lg);
     text-decoration: none;
     transition: var(--transition-base);
+    cursor: pointer;
+    position: relative;
 }
 
 .ember-highlight-redesigned:hover {
@@ -5308,4 +5285,5 @@ body.main-page .main-social-sharing-icon-compact {
     font-size: 0.9rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
+    line-height: 1.3;
 }
