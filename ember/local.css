@@ -3379,16 +3379,6 @@ body.modal-open {
    =================================== */
 /* ===================================
    SECTION 9: PRESALE SECTION - COMPLETE
-   Countdown, calculator, payment options, funding scenarios
-   =================================== */
-
-/* ===================================
-   SECTION 9: PRESALE SECTION - COMPLETE
-   Countdown, calculator, payment options, funding scenarios
-   =================================== */
-
-/* ===================================
-   PRESALE CONTAINER
    =================================== */
 
 .presale-section {
@@ -3420,8 +3410,7 @@ body.modal-open {
 }
 
 /* ===================================
-   MOBILE STACKING ORDER - FIXED
-   Order: Metrics → Timer → Progress → Fund Usage → Scenario 1 → Scenario 2 → Both Scenarios → Presale Card
+   MOBILE STACKING ORDER
    =================================== */
 
 @media (max-width: 1023px) {
@@ -3430,23 +3419,18 @@ body.modal-open {
         flex-direction: column;
     }
     
-    /* Left column items */
     .presale-metrics { order: 1; }
     .presale-timer { order: 2; }
     .presale-progress { order: 3; }
     .fund-usage { order: 4; }
     
-    /* Make funding-scenarios transparent so Scenario 1 can be ordered */
     .funding-scenarios { 
         display: contents;
     }
     
-    /* Scenarios */
     .soft-cap-scenario { order: 5; }
     .hard-cap-scenario { order: 6; }
     .scenarios-shared { order: 7; }
-    
-    /* Presale card last */
     .presale-card { order: 8; }
 }
 
@@ -3459,26 +3443,14 @@ body.modal-open {
         gap: clamp(1.5rem, 3vw, 2rem);
     }
     
-    /* Left column spans full height */
     .presale-left-column {
         grid-column: 1;
-        grid-row: 1;
     }
     
-    /* Right column spans full height */
     .presale-right-column {
         grid-column: 2;
-        grid-row: 1;
     }
     
-    /* Both Scenarios Include goes below left column */
-    .scenarios-shared {
-        grid-column: 1 / -1; /* Span both columns */
-        grid-row: 2;
-        margin-top: 0; /* Remove extra margin */
-    }
-    
-    /* Reset all orders on desktop */
     .presale-metrics,
     .presale-timer,
     .presale-progress,
@@ -3749,26 +3721,13 @@ body.modal-open {
 }
 
 /* ===================================
-   FUNDING SCENARIOS MODULE
+   FUNDING SCENARIOS
    =================================== */
 
 .funding-scenarios {
-    /* No margin-top needed anymore */
-}
-
-.funding-scenarios > h3 {
-    font-size: 1.8rem;
-    color: #f0a500;
-    text-align: center;
-    margin-bottom: 30px;
-    font-weight: 700;
-    display: none;
-}
-
-.funding-scenarios-grid {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: clamp(1.5rem, 3vw, 2rem);
 }
 
 .scenario-card {
@@ -3939,7 +3898,6 @@ body.modal-open {
     padding: 25px;
     border: 2px solid rgba(240, 165, 0, 0.3);
     text-align: center;
-    margin-top: 0; /* Remove margin, grid handles spacing */
 }
 
 .scenarios-shared h4 {
@@ -4037,10 +3995,6 @@ body.modal-open {
     outline: none;
     border-color: var(--ember-gold);
     box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.2);
-}
-
-#investment-amount {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .calculation-result {
@@ -4249,7 +4203,7 @@ body.modal-open {
 }
 
 /* ===================================
-   TPA COMPLIANCE CHECKBOX
+   TPA COMPLIANCE
    =================================== */
 
 .tpa-compliance {
@@ -4457,7 +4411,7 @@ body.modal-open {
 }
 
 /* ===================================
-   RESPONSIVE BREAKPOINTS
+   RESPONSIVE
    =================================== */
 
 @media (min-width: 768px) {
