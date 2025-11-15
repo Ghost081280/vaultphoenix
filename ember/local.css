@@ -3376,7 +3376,8 @@ body.modal-open {
 
 /* ===================================
    END SECTION 8: TOKENOMICS SECTION
-   =================================== *//* ===================================
+   =================================== */
+/* ===================================
    SECTION 9: PRESALE SECTION - OPTIMIZED
    Countdown, calculator, payment options
    =================================== */
@@ -3413,13 +3414,49 @@ body.modal-open {
     gap: clamp(1.5rem, 3vw, 2rem);
 }
 
-/* Mobile stacking order - make it logical */
+/* ===================================
+   MOBILE STACKING ORDER (CRITICAL)
+   Order: Scenario 1 → Scenario 2 → Both Scenarios → Presale Card
+   =================================== */
+
+/* Mobile order */
 .presale-left-column {
-    order: 1; /* Shows first on mobile */
+    order: 1;
 }
 
 .presale-right-column {
-    order: 2; /* Shows second on mobile */
+    order: 4; /* Presale card goes LAST on mobile */
+}
+
+/* Scenario cards within left column */
+.presale-left-column > *:not(.funding-scenarios) {
+    order: 0; /* Metrics, timer, progress, fund usage stay at top */
+}
+
+.funding-scenarios {
+    order: 5; /* Funding scenarios module */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hide the duplicate title above funding scenarios */
+.funding-scenarios > h3:first-child {
+    display: none;
+}
+
+/* Soft cap scenario */
+.soft-cap-scenario {
+    order: 1;
+}
+
+/* Hard cap scenario */
+.hard-cap-scenario {
+    order: 2;
+}
+
+/* Both scenarios shared */
+.scenarios-shared {
+    order: 3;
 }
 
 /* Desktop: Switch to grid layout */
@@ -3433,6 +3470,14 @@ body.modal-open {
     .presale-left-column,
     .presale-right-column {
         order: unset; /* Remove order on desktop */
+    }
+    
+    /* Reset all orders on desktop */
+    .funding-scenarios,
+    .soft-cap-scenario,
+    .hard-cap-scenario,
+    .scenarios-shared {
+        order: unset;
     }
     
     .benefits-grid {
@@ -4261,7 +4306,8 @@ body.modal-open {
 
 /* ===================================
    END SECTION 9: PRESALE SECTION
-   =================================== *//* ===================================
+   =================================== */
+/* ===================================
    SECTION 10: ENHANCED CTA SECTION - OPTIMIZED
    Final call-to-action with value props
    =================================== */
