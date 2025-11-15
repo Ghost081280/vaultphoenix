@@ -3383,6 +3383,11 @@ body.modal-open {
    =================================== */
 
 /* ===================================
+   SECTION 9: PRESALE SECTION - COMPLETE
+   Countdown, calculator, payment options, funding scenarios
+   =================================== */
+
+/* ===================================
    PRESALE CONTAINER
    =================================== */
 
@@ -3431,11 +3436,17 @@ body.modal-open {
     .presale-timer { order: 2; }
     .presale-progress { order: 3; }
     .fund-usage { order: 4; }
+    
+    /* Funding scenarios container */
     .funding-scenarios { order: 5; }
     
+    /* Inside funding-scenarios: Scenario 1 and Both Scenarios */
+    .soft-cap-scenario { order: 1; }
+    .scenarios-shared { order: 3; } /* Both Scenarios comes AFTER Scenario 2 */
+    
     /* Right column items - reorder for mobile */
-    .hard-cap-scenario { order: 6; } /* Scenario 2 comes after funding-scenarios */
-    .presale-card { order: 7; } /* Presale card comes LAST */
+    .hard-cap-scenario { order: 6; } /* Scenario 2 comes after Scenario 1 but BEFORE Both Scenarios */
+    .presale-card { order: 8; } /* Presale card comes LAST */
 }
 
 /* Desktop: Switch to grid layout */
@@ -3452,6 +3463,8 @@ body.modal-open {
     .presale-progress,
     .fund-usage,
     .funding-scenarios,
+    .soft-cap-scenario,
+    .scenarios-shared,
     .hard-cap-scenario,
     .presale-card {
         order: unset;
