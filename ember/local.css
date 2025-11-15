@@ -3378,7 +3378,7 @@ body.modal-open {
    END SECTION 8: TOKENOMICS SECTION
    =================================== */
 /* ===================================
-   SECTION 9: PRESALE SECTION - COMPLETE FIX
+   SECTION 9: PRESALE SECTION - FINAL FIX
    =================================== */
 
 .presale-section {
@@ -3392,59 +3392,46 @@ body.modal-open {
 }
 
 /* ===================================
-   TWO COLUMN LAYOUT
+   MOBILE: Single column grid with explicit row placement
    =================================== */
 
 .presale-two-column {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: clamp(1.5rem, 3vw, 2rem);
     margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .presale-left-column,
 .presale-right-column {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.5rem, 3vw, 2rem);
+    display: contents;
 }
+
+.funding-scenarios {
+    display: contents;
+}
+
+/* Mobile: Explicit grid row placement */
+.presale-metrics { grid-row: 1; }
+.presale-timer { grid-row: 2; }
+.presale-progress { grid-row: 3; }
+.fund-usage { grid-row: 4; }
+.soft-cap-scenario { grid-row: 5; }
+.hard-cap-scenario { grid-row: 6; }
+.scenarios-shared { grid-row: 7; }
+.presale-card { grid-row: 8; }
 
 /* ===================================
-   MOBILE: Make columns transparent so all children can be ordered
+   DESKTOP: Two column grid
    =================================== */
 
-@media (max-width: 1023px) {
-    /* Make BOTH columns transparent containers */
-    .presale-left-column,
-    .presale-right-column {
-        display: contents;
-    }
-    
-    /* Make funding-scenarios transparent too */
-    .funding-scenarios {
-        display: contents;
-    }
-    
-    /* Now ALL items are direct children of presale-two-column and can be ordered */
-    .presale-metrics { order: 1; }
-    .presale-timer { order: 2; }
-    .presale-progress { order: 3; }
-    .fund-usage { order: 4; }
-    .soft-cap-scenario { order: 5; }
-    .hard-cap-scenario { order: 6; }
-    .scenarios-shared { order: 7; }
-    .presale-card { order: 8; }
-}
-
-/* Desktop: Grid layout with proper columns */
 @media (min-width: 1024px) {
     .presale-two-column {
-        display: grid;
         grid-template-columns: 1fr 450px;
-        align-items: start;
-        gap: clamp(1.5rem, 3vw, 2rem);
+        grid-template-rows: auto;
     }
     
+    /* Reset display for columns */
     .presale-left-column {
         grid-column: 1;
         display: flex;
@@ -3459,17 +3446,22 @@ body.modal-open {
         gap: clamp(1.5rem, 3vw, 2rem);
     }
     
-    /* Reset all orders */
+    .funding-scenarios {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(1.5rem, 3vw, 2rem);
+    }
+    
+    /* Reset grid placement */
     .presale-metrics,
     .presale-timer,
     .presale-progress,
     .fund-usage,
-    .funding-scenarios,
     .soft-cap-scenario,
     .scenarios-shared,
     .hard-cap-scenario,
     .presale-card {
-        order: unset;
+        grid-row: auto;
     }
     
     .benefits-grid {
