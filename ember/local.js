@@ -1,653 +1,55 @@
 /* ===================================
-   VAULT PHOENIX - EMBER LOCAL JS v3.0 ULTRA-POLISHED
-   🔥 CROWN JEWEL - AGENCY-LEVEL DELIVERY 🔥
-   
-   The $Ember Token presale page - premium, trustworthy, 60fps smooth
-   Zero-flash instant paint, intelligent glow system, complete optimization
-   
+   VAULT PHOENIX - EMBER LOCAL JS v2.0
    Page-specific functionality for ember.html
    Works with shared/global.js
-   
-   FEATURES:
-   ✅ Zero-flash instant background paint
-   ✅ Intelligent glow system (Ember-optimized - MAXIMUM glows)
-   ✅ 60fps butter-smooth animations
-   ✅ Progressive image loading with priority
-   ✅ Smart scroll reveals with stagger
-   ✅ Device optimizations (touch, slow connection, reduced motion)
-   ✅ Phased initialization (0ms → 100ms → 300ms → 600ms)
-   ✅ Performance tracking with color-coded logs
-   ✅ Backend-friendly window.VaultPhoenix.Ember exports
-   ✅ Complete Airdrop System support
-   ✅ Professional polish for financial trust
-   
+   NOW WITH COMPLETE AIRDROP SYSTEM SUPPORT! 🔥
    =================================== */
 
 (function() {
     'use strict';
     
-    /* ===================================
-       PHASE IMMEDIATE (0ms) - ZERO-FLASH INSTANT PAINT
-       Critical operations that MUST happen before first paint
-       =================================== */
-    
-    // Mark start time
-    performance.mark('ember-init-start');
-    
-    // CRITICAL: Instant background paint - NO WHITE FLASH
-    (function instantBackgroundPaint() {
-        const body = document.body;
-        if (body) {
-            body.style.background = 'linear-gradient(135deg, rgba(13, 12, 12, 1) 0%, rgba(26, 15, 10, 0.95) 50%, rgba(13, 12, 12, 1) 100%)';
-            body.style.backgroundColor = '#0d0c0c';
-            body.style.opacity = '1';
-        }
-    })();
-    
-    /* ===================================
-       CONFIGURATION & CONSTANTS
-       =================================== */
-    
+    // Configuration
     const CONFIG = {
-        // Presale Configuration
         presaleDate: '2025-11-01T12:00:00-05:00', // November 1, 2025, 12:00 PM EST
         tokenPrice: 0.003, // $0.003 per EMBER token
         minInvestment: 10,
         maxInvestment: 50000,
         defaultInvestment: 10,
-        
-        // Airdrop Configuration
+        // Airdrop configuration
         airdrop: {
             totalEmber: 9000000,
             claimed: 0,
             maxPeople: 2700,
             tokensPerClaim: 3333
-        },
-        
-        // Performance Configuration
-        performance: {
-            enableTracking: true,
-            enableLogs: true,
-            logColors: {
-                phase: '#f0a500',
-                success: '#4ade80',
-                warning: '#fb923c',
-                error: '#f87171',
-                info: '#60a5fa'
-            }
-        },
-        
-        // Glow System Configuration (EMBER-OPTIMIZED - HEAVY GLOWS)
-        glows: {
-            coin: { blur: 50, spread: 80, intensity: 0.9, animate: true }, // MAXIMUM glow for $Ember coins
-            phoenix: { blur: 40, spread: 60, intensity: 0.8, animate: true }, // Strong glow for Phoenix
-            flame: { blur: 30, spread: 50, intensity: 0.7, animate: true }, // Medium-strong for flames
-            icon: { blur: 15, spread: 20, intensity: 0.5, animate: false }, // Subtle for icons
-            mobileReduction: 0.6 // 40% reduction on mobile (same as main/onboarding)
-        },
-        
-        // Image Loading Priority
-        imagePriority: {
-            critical: 0,    // Hero section - immediate
-            high: 100,      // Above-fold - 100ms delay
-            lazy: null      // Below-fold - intersection observer
-        },
-        
-        // Animation Configuration
-        animations: {
-            scrollRevealDelay: 150,  // Stagger delay for scroll reveals
-            scrollRevealDuration: 600, // Animation duration
-            respectReducedMotion: true
-        },
-        
-        // Device Detection
-        device: {
-            isMobile: window.innerWidth <= 768,
-            isTouch: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
-            isSlowConnection: navigator.connection?.effectiveType === 'slow-2g' || navigator.connection?.effectiveType === '2g',
-            prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
         }
     };
     
-    /* ===================================
-       PERFORMANCE TRACKING SYSTEM
-       Color-coded console logs with detailed metrics
-       =================================== */
-    
-    const Perf = {
-        marks: {},
-        measures: {},
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🔥 Ember page initialized with Airdrop System v2.0');
         
-        mark(name) {
-            if (!CONFIG.performance.enableTracking) return;
-            performance.mark(name);
-            this.marks[name] = performance.now();
-        },
+        // Initialize core presale functionality
+        initCountdownTimer();
+        initInvestmentCalculator();
+        initModals();
+        initSmoothScroll();
+        initProgressBars();
         
-        measure(name, startMark, endMark) {
-            if (!CONFIG.performance.enableTracking) return;
-            try {
-                performance.measure(name, startMark, endMark);
-                const measure = performance.getEntriesByName(name, 'measure')[0];
-                this.measures[name] = measure.duration;
-                return measure.duration;
-            } catch (e) {
-                console.warn('Performance measure failed:', name, e);
-                return 0;
-            }
-        },
+        // Initialize Airdrop System
+        initAirdropModals();
+        initAirdropForm();
+        initStatusChecker();
+        initShareButtons();
+        initCopyHashtags();
+        initAirdropTracker();
         
-        log(phase, message, color) {
-            if (!CONFIG.performance.enableLogs) return;
-            const timestamp = performance.now().toFixed(2);
-            console.log(
-                `%c[EMBER ${phase}] ${message} (${timestamp}ms)`,
-                `color: ${color || CONFIG.performance.logColors.phase}; font-weight: bold;`
-            );
-        },
-        
-        logPhase(phase, duration) {
-            this.log(phase, `Completed in ${duration.toFixed(2)}ms`, CONFIG.performance.logColors.success);
-        },
-        
-        logError(message) {
-            this.log('ERROR', message, CONFIG.performance.logColors.error);
-        },
-        
-        logWarning(message) {
-            this.log('WARNING', message, CONFIG.performance.logColors.warning);
-        },
-        
-        logInfo(message) {
-            this.log('INFO', message, CONFIG.performance.logColors.info);
-        },
-        
-        getSummary() {
-            return {
-                marks: this.marks,
-                measures: this.measures,
-                totalTime: performance.now(),
-                device: CONFIG.device
-            };
-        }
-    };
-    
-    /* ===================================
-       GLOW SYSTEM - EMBER OPTIMIZED
-       Maximum glows for $Ember coins, intelligent scaling
-       =================================== */
-    
-    const GlowSystem = {
-        initialized: false,
-        glowElements: new Map(),
-        
-        init() {
-            Perf.mark('glow-system-start');
-            
-            // Apply glows based on element type
-            this.applyGlows();
-            
-            // Setup resize handler
-            this.setupResizeHandler();
-            
-            this.initialized = true;
-            const duration = Perf.measure('glow-system-duration', 'glow-system-start', 'ember-init-start');
-            Perf.logPhase('GLOW SYSTEM', duration);
-        },
-        
-        applyGlows() {
-            const glowSelectors = {
-                coin: [
-                    '.ember-section-icon-large img[src*="EmberCoin"]',
-                    '.hero-metric-icon img[src*="EmberCoin"]',
-                    '.parachute-crate-enlarged',
-                    '.ember-mini-icon[src*="EmberCoin"]',
-                    '.metric-icon img[src*="EmberCoin"]'
-                ],
-                phoenix: [
-                    'img[src*="Phoenix"]',
-                    'img[src*="FOURPHOENIX"]',
-                    '.member-photo'
-                ],
-                flame: [
-                    'img[src*="Flame.svg"]',
-                    '.mobile-menu-flame'
-                ],
-                icon: [
-                    '.trust-icon img',
-                    '.compliance-icon img',
-                    '.benefit-icon img',
-                    '.utility-icon img'
-                ]
-            };
-            
-            // Apply glow to each category
-            Object.entries(glowSelectors).forEach(([category, selectors]) => {
-                const config = CONFIG.glows[category];
-                if (!config) return;
-                
-                selectors.forEach(selector => {
-                    document.querySelectorAll(selector).forEach(el => {
-                        this.applyGlow(el, config, category);
-                    });
-                });
-            });
-            
-            Perf.logInfo(`Applied ${this.glowElements.size} glow effects`);
-        },
-        
-        applyGlow(element, config, category) {
-            if (!element || this.glowElements.has(element)) return;
-            
-            // Calculate glow values (reduce on mobile)
-            const isMobile = CONFIG.device.isMobile;
-            const reduction = isMobile ? CONFIG.glows.mobileReduction : 1;
-            
-            const blur = config.blur * reduction;
-            const spread = config.spread * reduction;
-            const intensity = config.intensity;
-            
-            // Build filter
-            const filters = [
-                `drop-shadow(0 0 ${blur}px rgba(240, 165, 0, ${intensity}))`,
-                `drop-shadow(0 0 ${spread}px rgba(215, 51, 39, ${intensity * 0.6}))`
-            ];
-            
-            element.style.filter = filters.join(' ');
-            
-            // Add animation if enabled
-            if (config.animate && !CONFIG.device.prefersReducedMotion) {
-                this.addGlowAnimation(element, category);
-            }
-            
-            this.glowElements.set(element, { config, category });
-        },
-        
-        addGlowAnimation(element, category) {
-            const animations = {
-                coin: 'pulse-glow 3s ease-in-out infinite',
-                phoenix: 'gentle-glow 4s ease-in-out infinite',
-                flame: 'flicker-glow 2s ease-in-out infinite'
-            };
-            
-            if (animations[category]) {
-                element.style.animation = animations[category];
-            }
-        },
-        
-        setupResizeHandler() {
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    CONFIG.device.isMobile = window.innerWidth <= 768;
-                    this.updateGlows();
-                }, 250);
-            });
-        },
-        
-        updateGlows() {
-            this.glowElements.forEach((data, element) => {
-                const isMobile = CONFIG.device.isMobile;
-                const reduction = isMobile ? CONFIG.glows.mobileReduction : 1;
-                const blur = data.config.blur * reduction;
-                const spread = data.config.spread * reduction;
-                const intensity = data.config.intensity;
-                
-                const filters = [
-                    `drop-shadow(0 0 ${blur}px rgba(240, 165, 0, ${intensity}))`,
-                    `drop-shadow(0 0 ${spread}px rgba(215, 51, 39, ${intensity * 0.6}))`
-                ];
-                
-                element.style.filter = filters.join(' ');
-            });
-        },
-        
-        disable() {
-            this.glowElements.forEach((data, element) => {
-                element.style.filter = 'none';
-                element.style.animation = 'none';
-            });
-        }
-    };
-    
-    /* ===================================
-       PROGRESSIVE IMAGE LOADER
-       Priority-based loading with intersection observer
-       =================================== */
-    
-    const ImageLoader = {
-        initialized: false,
-        loadedImages: new Set(),
-        observers: [],
-        
-        init() {
-            Perf.mark('image-loader-start');
-            
-            // Load critical images immediately (hero section)
-            this.loadCriticalImages();
-            
-            // Load high-priority images after 100ms
-            setTimeout(() => this.loadHighPriorityImages(), CONFIG.imagePriority.high);
-            
-            // Setup lazy loading for remaining images
-            this.setupLazyLoading();
-            
-            this.initialized = true;
-            const duration = Perf.measure('image-loader-duration', 'image-loader-start', 'ember-init-start');
-            Perf.logPhase('IMAGE LOADER', duration);
-        },
-        
-        loadCriticalImages() {
-            // Hero section images
-            const criticalSelectors = [
-                '.ember-section-icon-large img',
-                '.hero-metric-icon img',
-                '.hero-btn img'
-            ];
-            
-            criticalSelectors.forEach(selector => {
-                document.querySelectorAll(selector).forEach(img => {
-                    this.loadImage(img, 'critical');
-                });
-            });
-        },
-        
-        loadHighPriorityImages() {
-            // Above-fold images
-            const highPrioritySelectors = [
-                '.ember-mini-icon',
-                '.presale-section img[src*="VPEmberCoin"]'
-            ];
-            
-            highPrioritySelectors.forEach(selector => {
-                document.querySelectorAll(selector).forEach(img => {
-                    this.loadImage(img, 'high');
-                });
-            });
-        },
-        
-        setupLazyLoading() {
-            if (!('IntersectionObserver' in window)) {
-                // Fallback: load all remaining images
-                this.loadAllRemainingImages();
-                return;
-            }
-            
-            const lazyImageObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        this.loadImage(img, 'lazy');
-                        lazyImageObserver.unobserve(img);
-                    }
-                });
-            }, {
-                rootMargin: '50px 0px', // Start loading 50px before entering viewport
-                threshold: 0.01
-            });
-            
-            // Observe all images not yet loaded
-            document.querySelectorAll('img[loading="lazy"], img[data-lazy]').forEach(img => {
-                if (!this.loadedImages.has(img)) {
-                    lazyImageObserver.observe(img);
-                }
-            });
-            
-            this.observers.push(lazyImageObserver);
-        },
-        
-        loadImage(img, priority) {
-            if (this.loadedImages.has(img) || !img) return;
-            
-            // If src already set, mark as loaded
-            if (img.src && !img.dataset.src) {
-                this.loadedImages.add(img);
-                return;
-            }
-            
-            // Load from data-src if present
-            if (img.dataset.src) {
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-            }
-            
-            img.loading = priority === 'critical' ? 'eager' : 'lazy';
-            this.loadedImages.add(img);
-            
-            Perf.logInfo(`Loaded ${priority} image: ${img.src?.split('/').pop() || 'unknown'}`);
-        },
-        
-        loadAllRemainingImages() {
-            document.querySelectorAll('img').forEach(img => {
-                this.loadImage(img, 'fallback');
-            });
-        },
-        
-        cleanup() {
-            this.observers.forEach(observer => observer.disconnect());
-            this.observers = [];
-        }
-    };
-    
-    /* ===================================
-       SCROLL REVEAL SYSTEM
-       Smooth staggered animations on scroll
-       =================================== */
-    
-    const ScrollReveal = {
-        initialized: false,
-        revealedElements: new Set(),
-        observer: null,
-        
-        init() {
-            if (CONFIG.device.prefersReducedMotion) {
-                Perf.logInfo('Scroll reveals disabled - prefers-reduced-motion');
-                return;
-            }
-            
-            Perf.mark('scroll-reveal-start');
-            
-            // Setup intersection observer
-            this.setupObserver();
-            
-            // Find all elements with scroll-reveal class
-            this.observeElements();
-            
-            this.initialized = true;
-            const duration = Perf.measure('scroll-reveal-duration', 'scroll-reveal-start', 'ember-init-start');
-            Perf.logPhase('SCROLL REVEAL', duration);
-        },
-        
-        setupObserver() {
-            if (!('IntersectionObserver' in window)) {
-                // Fallback: make all elements visible
-                document.querySelectorAll('.scroll-reveal').forEach(el => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'none';
-                });
-                return;
-            }
-            
-            this.observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !this.revealedElements.has(entry.target)) {
-                        this.revealElement(entry.target);
-                    }
-                });
-            }, {
-                rootMargin: '-50px 0px',
-                threshold: 0.1
-            });
-        },
-        
-        observeElements() {
-            const revealElements = document.querySelectorAll('.scroll-reveal, .stakeholder-card, .team-member, .roadmap-item');
-            
-            revealElements.forEach((el, index) => {
-                // Set initial state
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = `opacity ${CONFIG.animations.scrollRevealDuration}ms ease, transform ${CONFIG.animations.scrollRevealDuration}ms ease`;
-                
-                // Add stagger delay
-                el.dataset.revealDelay = index * CONFIG.animations.scrollRevealDelay;
-                
-                if (this.observer) {
-                    this.observer.observe(el);
-                }
-            });
-            
-            Perf.logInfo(`Observing ${revealElements.length} scroll reveal elements`);
-        },
-        
-        revealElement(element) {
-            const delay = parseInt(element.dataset.revealDelay || 0);
-            
-            setTimeout(() => {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-                this.revealedElements.add(element);
-            }, delay);
-        },
-        
-        cleanup() {
-            if (this.observer) {
-                this.observer.disconnect();
-            }
-        }
-    };
-    
-    /* ===================================
-       PHASED INITIALIZATION SYSTEM
-       0ms → 100ms → 300ms → 600ms
-       =================================== */
-    
-    const PhasedInit = {
-        currentPhase: 'immediate',
-        
-        // PHASE IMMEDIATE (0ms) - Already executed at top of file
-        // - Instant background paint
-        // - Device detection
-        // - Glow system initialization
-        
-        // PHASE 1 (100ms) - Core functionality
-        phase1() {
-            Perf.mark('phase1-start');
-            this.currentPhase = 'phase1';
-            
-            try {
-                // Countdown timer
-                initCountdownTimer();
-                
-                // Investment calculator
-                initInvestmentCalculator();
-                
-                // Modal systems
-                initModals();
-                
-                // Smooth scroll
-                initSmoothScroll();
-                
-                const duration = Perf.measure('phase1-duration', 'phase1-start', 'ember-init-start');
-                Perf.logPhase('PHASE 1 (100ms)', duration);
-                
-            } catch (error) {
-                Perf.logError('Phase 1 failed: ' + error.message);
-                console.error(error);
-            }
-        },
-        
-        // PHASE 2 (300ms) - Enhanced features
-        phase2() {
-            Perf.mark('phase2-start');
-            this.currentPhase = 'phase2';
-            
-            try {
-                // Scroll reveal system
-                ScrollReveal.init();
-                
-                // Progress bars
-                initProgressBars();
-                
-                // Airdrop modals
-                initAirdropModals();
-                
-                const duration = Perf.measure('phase2-duration', 'phase2-start', 'ember-init-start');
-                Perf.logPhase('PHASE 2 (300ms)', duration);
-                
-            } catch (error) {
-                Perf.logError('Phase 2 failed: ' + error.message);
-                console.error(error);
-            }
-        },
-        
-        // PHASE 3 (600ms) - Airdrop & delight features
-        phase3() {
-            Perf.mark('phase3-start');
-            this.currentPhase = 'phase3';
-            
-            try {
-                // Airdrop system
-                initAirdropForm();
-                initStatusChecker();
-                initShareButtons();
-                initCopyHashtags();
-                initAirdropTracker();
-                
-                // Analytics (if needed)
-                // initAnalytics();
-                
-                const duration = Perf.measure('phase3-duration', 'phase3-start', 'ember-init-start');
-                Perf.logPhase('PHASE 3 (600ms)', duration);
-                
-                // Log total initialization time
-                const totalDuration = Perf.measure('total-init-duration', 'ember-init-start', 'phase3-start');
-                Perf.log('COMPLETE', `Total initialization: ${totalDuration.toFixed(2)}ms`, CONFIG.performance.logColors.success);
-                
-            } catch (error) {
-                Perf.logError('Phase 3 failed: ' + error.message);
-                console.error(error);
-            }
-        },
-        
-        execute() {
-            // Phase 1: 100ms
-            setTimeout(() => this.phase1(), 100);
-            
-            // Phase 2: 300ms
-            setTimeout(() => this.phase2(), 300);
-            
-            // Phase 3: 600ms
-            setTimeout(() => this.phase3(), 600);
-        }
-    };
-    
-    /* ===================================
-       DOM READY - INITIALIZE IMMEDIATELY
-       =================================== */
-    
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeEmberPage);
-    } else {
-        initializeEmberPage();
-    }
-    
-    function initializeEmberPage() {
-        Perf.log('INIT', '🔥 Ember page v3.0 ULTRA-POLISHED initializing...', CONFIG.performance.logColors.phase);
-        
-        // Phase Immediate - Glow system (critical for first paint)
-        GlowSystem.init();
-        
-        // Execute phased initialization
-        PhasedInit.execute();
-    }
+        console.log('✅ All Ember page features initialized');
+    });
     
     /* ===================================
        COUNTDOWN TIMER
        Updates every second until presale launch
        =================================== */
-    
     function initCountdownTimer() {
         const timerElements = {
             days: document.getElementById('days'),
@@ -656,9 +58,10 @@
             seconds: document.getElementById('seconds')
         };
         
+        // Check if all elements exist
         const allElementsExist = Object.values(timerElements).every(el => el !== null);
         if (!allElementsExist) {
-            Perf.logWarning('Countdown timer elements not found');
+            console.warn('Countdown timer elements not found');
             return;
         }
         
@@ -669,12 +72,17 @@
             
             if (diff <= 0) {
                 // Presale has started
-                Object.values(timerElements).forEach(el => el.textContent = '00');
+                timerElements.days.textContent = '00';
+                timerElements.hours.textContent = '00';
+                timerElements.minutes.textContent = '00';
+                timerElements.seconds.textContent = '00';
                 
+                // Optional: Update button text
                 const presaleButton = document.getElementById('presale-buy-button');
                 if (presaleButton) {
                     presaleButton.innerHTML = '<img src="images/VPEmberFlame.svg" alt="" aria-hidden="true" style="width: 32px; height: 32px;"> Join Presale Now!';
                 }
+                
                 return;
             }
             
@@ -684,36 +92,33 @@
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
-            // Update DOM with smooth transitions
-            requestAnimationFrame(() => {
-                timerElements.days.textContent = days.toString().padStart(2, '0');
-                timerElements.hours.textContent = hours.toString().padStart(2, '0');
-                timerElements.minutes.textContent = minutes.toString().padStart(2, '0');
-                timerElements.seconds.textContent = seconds.toString().padStart(2, '0');
-            });
+            // Update DOM with padded values
+            timerElements.days.textContent = days.toString().padStart(2, '0');
+            timerElements.hours.textContent = hours.toString().padStart(2, '0');
+            timerElements.minutes.textContent = minutes.toString().padStart(2, '0');
+            timerElements.seconds.textContent = seconds.toString().padStart(2, '0');
         }
         
         // Initial update
         updateCountdown();
         
-        // Update every second with RAF for smoothness
+        // Update every second
         setInterval(updateCountdown, 1000);
         
-        Perf.logInfo('Countdown timer initialized');
+        console.log('✅ Countdown timer initialized');
     }
     
     /* ===================================
        INVESTMENT CALCULATOR
-       Real-time calculation with 60fps updates
+       Real-time calculation of EMBER tokens with validation
        =================================== */
-    
     function initInvestmentCalculator() {
         const investmentInput = document.getElementById('investment-amount');
         const emberTokensDisplay = document.getElementById('ember-tokens');
         const totalInvestmentDisplay = document.getElementById('total-investment');
         
         if (!investmentInput || !emberTokensDisplay || !totalInvestmentDisplay) {
-            Perf.logWarning('Investment calculator elements not found');
+            console.warn('Investment calculator elements not found');
             return;
         }
         
@@ -721,95 +126,92 @@
             return Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
         
-        let rafId;
         function validateAndCalculate() {
-            if (rafId) cancelAnimationFrame(rafId);
+            let amount = parseFloat(investmentInput.value);
             
-            rafId = requestAnimationFrame(() => {
-                let amount = parseFloat(investmentInput.value);
-                
-                // Validate input
-                if (isNaN(amount) || amount <= 0) {
-                    amount = 0;
-                    investmentInput.style.border = '2px solid #ef4444';
-                    investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
-                    emberTokensDisplay.textContent = '0';
-                    totalInvestmentDisplay.textContent = '$0';
-                    return;
-                }
-                
-                // Validate min/max with visual feedback
-                if (amount < CONFIG.minInvestment) {
-                    investmentInput.style.border = '2px solid #ef4444';
-                    investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
-                } else if (amount > CONFIG.maxInvestment) {
-                    investmentInput.style.border = '2px solid #ef4444';
-                    investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
-                } else {
-                    investmentInput.style.border = '2px solid #10b981';
-                    investmentInput.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.1)';
-                }
-                
-                // Calculate tokens
-                const tokens = amount / CONFIG.tokenPrice;
-                
-                // Update displays with smooth transitions
-                emberTokensDisplay.textContent = formatNumber(tokens);
-                totalInvestmentDisplay.textContent = '$' + formatNumber(amount);
-            });
+            // Check if input is valid number
+            if (isNaN(amount) || amount <= 0) {
+                amount = 0;
+                investmentInput.style.border = '2px solid #ef4444';
+                investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+                emberTokensDisplay.textContent = '0';
+                totalInvestmentDisplay.textContent = '$0';
+                return;
+            }
+            
+            // Validate min/max and show visual feedback
+            if (amount < CONFIG.minInvestment) {
+                // Below minimum - show red border
+                investmentInput.style.border = '2px solid #ef4444';
+                investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+            } else if (amount > CONFIG.maxInvestment) {
+                // Above maximum - show red border
+                investmentInput.style.border = '2px solid #ef4444';
+                investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+            } else {
+                // Valid amount - show green border
+                investmentInput.style.border = '2px solid #10b981';
+                investmentInput.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.1)';
+            }
+            
+            // Calculate tokens (even for invalid amounts, so user can see calculation)
+            const tokens = amount / CONFIG.tokenPrice;
+            
+            // Update displays
+            emberTokensDisplay.textContent = formatNumber(tokens);
+            totalInvestmentDisplay.textContent = '$' + formatNumber(amount);
         }
         
         // Listen for input changes
         investmentInput.addEventListener('input', validateAndCalculate);
         investmentInput.addEventListener('change', validateAndCalculate);
         
-        // Focus behavior
+        // Allow user to clear the field
         investmentInput.addEventListener('focus', function() {
-            if (this.value === String(CONFIG.defaultInvestment)) {
-                this.select();
+            if (this.value === '10') {
+                this.select(); // Select all text when focused
             }
         });
         
         // Initial calculation
         validateAndCalculate();
         
-        Perf.logInfo('Investment calculator initialized with 60fps updates');
+        console.log('✅ Investment calculator initialized with validation');
     }
     
     /* ===================================
-       MODAL SYSTEMS
-       TPA, Whitepaper, Airdrop modals
+       MODAL SYSTEMS (TPA & WHITEPAPER)
+       Token Presale Agreement + Disclosures + Whitepaper
        =================================== */
-    
     function initModals() {
         initTpaModal();
         initWhitepaperModal();
     }
     
+    // TPA Modal (Token Presale Agreement + Disclosures)
     function initTpaModal() {
         const modal = document.getElementById('tpaModal');
         const checkbox = document.getElementById('tpa-agree-checkbox');
         const presaleButton = document.getElementById('presale-buy-button');
         
         if (!modal) {
-            Perf.logWarning('TPA modal not found');
+            console.warn('TPA modal not found');
             return;
         }
         
+        // Show TPA modal
         window.showTpaModal = function() {
-            requestAnimationFrame(() => {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         };
         
+        // Close TPA modal
         window.closeTpaModal = function() {
-            requestAnimationFrame(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = '';
-            });
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
         };
         
+        // Agree to TPA
         window.agreeTpa = function() {
             if (checkbox) {
                 checkbox.checked = true;
@@ -818,78 +220,84 @@
             window.closeTpaModal();
         };
         
+        // Enable presale button when checkbox is checked
         if (checkbox && presaleButton) {
             checkbox.addEventListener('change', function() {
-                requestAnimationFrame(() => {
-                    if (this.checked) {
-                        presaleButton.disabled = false;
-                        presaleButton.style.opacity = '1';
-                        presaleButton.style.cursor = 'pointer';
-                    } else {
-                        presaleButton.disabled = true;
-                        presaleButton.style.opacity = '0.6';
-                        presaleButton.style.cursor = 'not-allowed';
-                    }
-                });
+                if (this.checked) {
+                    presaleButton.disabled = false;
+                    presaleButton.style.opacity = '1';
+                    presaleButton.style.cursor = 'pointer';
+                } else {
+                    presaleButton.disabled = true;
+                    presaleButton.style.opacity = '0.6';
+                    presaleButton.style.cursor = 'not-allowed';
+                }
             });
         }
         
+        // Close modal when clicking overlay
         const overlay = modal.querySelector('.tpa-modal-overlay');
-        if (overlay) overlay.addEventListener('click', window.closeTpaModal);
+        if (overlay) {
+            overlay.addEventListener('click', window.closeTpaModal);
+        }
         
+        // Close with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modal.style.display === 'flex') {
                 window.closeTpaModal();
             }
         });
         
-        Perf.logInfo('TPA modal initialized');
+        console.log('✅ TPA modal initialized');
     }
     
+    // Whitepaper Modal
     function initWhitepaperModal() {
         const modal = document.getElementById('whitepaperModal');
         
         if (!modal) {
-            Perf.logWarning('Whitepaper modal not found');
+            console.warn('Whitepaper modal not found');
             return;
         }
         
+        // Show whitepaper modal
         window.showWhitepaperModal = function() {
-            requestAnimationFrame(() => {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         };
         
+        // Close whitepaper modal
         window.closeWhitepaperModal = function() {
-            requestAnimationFrame(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = '';
-            });
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
         };
         
+        // Close modal when clicking overlay
         const overlay = modal.querySelector('.tpa-modal-overlay');
-        if (overlay) overlay.addEventListener('click', window.closeWhitepaperModal);
+        if (overlay) {
+            overlay.addEventListener('click', window.closeWhitepaperModal);
+        }
         
+        // Close with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modal.style.display === 'flex') {
                 window.closeWhitepaperModal();
             }
         });
         
-        Perf.logInfo('Whitepaper modal initialized');
+        console.log('✅ Whitepaper modal initialized');
     }
     
     /* ===================================
-       AIRDROP MODAL SYSTEMS
-       Info and Terms modals
+       AIRDROP MODALS SYSTEM
+       Info Modal + Terms Modal for Airdrop
        =================================== */
-    
     function initAirdropModals() {
         initAirdropInfoModal();
         initAirdropTermsModal();
     }
     
+    // Airdrop Info Modal (How it works)
     function initAirdropInfoModal() {
         const modal = document.createElement('div');
         modal.id = 'airdrop-info-modal';
@@ -966,17 +374,16 @@
         const overlay = modal.querySelector('.tpa-modal-overlay');
         
         if (!openBtn) {
-            Perf.logWarning('Airdrop info button not found');
+            console.warn('Airdrop info button not found');
             return;
         }
         
         function openModal(e) {
             e.preventDefault();
             e.stopPropagation();
-            requestAnimationFrame(() => {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
+            e.stopImmediatePropagation();
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
             return false;
         }
         
@@ -985,10 +392,8 @@
                 e.preventDefault();
                 e.stopPropagation();
             }
-            requestAnimationFrame(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = '';
-            });
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
         }
         
         openBtn.addEventListener('click', openModal, { capture: true, passive: false });
@@ -1002,9 +407,10 @@
             }
         });
         
-        Perf.logInfo('Airdrop info modal initialized');
+        console.log('✅ Airdrop info modal initialized');
     }
     
+    // Airdrop Terms Modal
     function initAirdropTermsModal() {
         const modal = document.createElement('div');
         modal.id = 'airdrop-terms-modal';
@@ -1106,17 +512,15 @@
         const termsCheckbox = document.getElementById('claim-terms');
         
         if (!openBtn) {
-            Perf.logWarning('Airdrop terms button not found');
+            console.warn('Airdrop terms button not found');
             return;
         }
         
         function openModal(e) {
             e.preventDefault();
             e.stopPropagation();
-            requestAnimationFrame(() => {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
         
         function closeModal(e) {
@@ -1124,10 +528,8 @@
                 e.preventDefault();
                 e.stopPropagation();
             }
-            requestAnimationFrame(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = '';
-            });
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
         }
         
         openBtn.addEventListener('click', openModal);
@@ -1150,20 +552,20 @@
             }
         });
         
-        Perf.logInfo('Airdrop terms modal initialized');
+        console.log('✅ Airdrop terms modal initialized');
     }
     
     /* ===================================
        AIRDROP FORM HANDLING
+       Form validation and submission
        =================================== */
-    
     function initAirdropForm() {
         const form = document.getElementById('ember-claim-form');
         const messageBox = document.getElementById('ember-message-box');
         const submitBtn = document.getElementById('claim-submit-btn');
         
         if (!form) {
-            Perf.logWarning('Airdrop form not found');
+            console.warn('Airdrop form not found');
             return;
         }
         
@@ -1176,6 +578,7 @@
             const socialUrl = document.getElementById('claim-social-url')?.value.trim() || '';
             const termsChecked = document.getElementById('claim-terms')?.checked || false;
             
+            // Validation
             if (!wallet) {
                 showMessage('error', '❌ Please enter your Solana wallet address');
                 return;
@@ -1191,11 +594,13 @@
                 return;
             }
             
+            // Validate URL format
             if (!isValidUrl(socialUrl)) {
                 showMessage('error', '❌ Please enter a valid URL for your social media post');
                 return;
             }
             
+            // Disable submit button during processing
             if (submitBtn) {
                 submitBtn.disabled = true;
                 const originalHTML = submitBtn.innerHTML;
@@ -1204,6 +609,7 @@
                 showMessage('info', '⏳ Submitting your claim... Please wait.');
                 
                 try {
+                    // Simulate API call (replace with actual API endpoint)
                     await new Promise(resolve => setTimeout(resolve, 2000));
                     
                     showMessage('success', '🎉 Claim submitted successfully! Check your email for confirmation. Tokens will be distributed after presale ends.');
@@ -1212,8 +618,9 @@
                     
                 } catch (error) {
                     showMessage('error', '❌ Failed to submit claim. Please try again or contact support.');
-                    Perf.logError('Airdrop claim error: ' + error.message);
+                    console.error('Airdrop claim error:', error);
                 } finally {
+                    // Re-enable submit button
                     if (submitBtn) {
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = originalHTML;
@@ -1224,12 +631,12 @@
         
         function showMessage(type, text) {
             if (!messageBox) return;
-            requestAnimationFrame(() => {
-                messageBox.style.display = 'block';
-                messageBox.className = 'message-box-compact ' + type;
-                messageBox.textContent = text;
-                messageBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            });
+            messageBox.style.display = 'block';
+            messageBox.className = 'message-box-compact ' + type;
+            messageBox.textContent = text;
+            
+            // Scroll message into view
+            messageBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             
             if (type === 'success') {
                 setTimeout(() => {
@@ -1247,19 +654,19 @@
             }
         }
         
-        Perf.logInfo('Airdrop form initialized');
+        console.log('✅ Airdrop form initialized');
     }
     
     /* ===================================
        STATUS CHECKER
+       Check claim status by wallet address
        =================================== */
-    
     function initStatusChecker() {
         const checkBtn = document.getElementById('check-status-btn');
         const walletInput = document.getElementById('status-wallet');
         
         if (!checkBtn || !walletInput) {
-            Perf.logWarning('Status checker elements not found');
+            console.warn('Status checker elements not found');
             return;
         }
         
@@ -1276,14 +683,16 @@
                 checkBtn.textContent = 'Checking...';
                 checkBtn.disabled = true;
                 
+                // Simulate API call (replace with actual API endpoint)
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
                 const shortWallet = `${wallet.substring(0, 8)}...${wallet.substring(wallet.length - 4)}`;
                 
+                // Simulate response (replace with actual API response)
                 const claimStatus = {
-                    found: false,
+                    found: false, // Change to true when claim exists
                     tokens: 3333,
-                    status: 'pending',
+                    status: 'pending', // 'pending', 'verified', 'distributed'
                     postVerified: false
                 };
                 
@@ -1301,26 +710,27 @@
                 
             } catch (error) {
                 alert('❌ Error checking status. Please try again.');
-                Perf.logError('Status check error: ' + error.message);
+                console.error('Status check error:', error);
             } finally {
                 checkBtn.textContent = 'Check';
                 checkBtn.disabled = false;
             }
         });
         
+        // Allow Enter key to check status
         walletInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkBtn.click();
             }
         });
         
-        Perf.logInfo('Status checker initialized');
+        console.log('✅ Status checker initialized');
     }
     
     /* ===================================
        SHARE BUTTONS
+       Social media share functionality
        =================================== */
-    
     function initShareButtons() {
         const shareConfig = {
             x: {
@@ -1370,20 +780,20 @@
             }
         });
         
-        Perf.logInfo('Share buttons initialized');
+        console.log('✅ Share buttons initialized');
     }
     
     /* ===================================
-       COPY HASHTAGS
+       COPY HASHTAGS FUNCTIONALITY
+       Ultimate cross-platform copy solution
        =================================== */
-    
     function initCopyHashtags() {
         const copyBtn = document.getElementById('copy-hashtags-btn');
         const copyBtnText = document.getElementById('copy-btn-text');
         const hashtagText = document.getElementById('hashtag-text-display');
         
         if (!copyBtn || !copyBtnText || !hashtagText) {
-            Perf.logWarning('Copy hashtags elements not found');
+            console.warn('Copy hashtags elements not found');
             return;
         }
         
@@ -1392,30 +802,33 @@
             const textToCopy = hashtagText.textContent.trim();
             
             try {
+                // Try modern Clipboard API first
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     await navigator.clipboard.writeText(textToCopy);
                     showCopySuccess();
                 } else {
+                    // Fallback for older browsers and iOS
                     fallbackCopyToClipboard(textToCopy);
                     showCopySuccess();
                 }
             } catch (err) {
+                console.error('Copy failed:', err);
+                // Try fallback method
                 try {
                     fallbackCopyToClipboard(textToCopy);
                     showCopySuccess();
                 } catch (fallbackErr) {
-                    Perf.logError('Copy failed: ' + fallbackErr.message);
+                    console.error('Fallback copy failed:', fallbackErr);
                     showCopyError();
                 }
             }
         });
         
         function showCopySuccess() {
-            requestAnimationFrame(() => {
-                copyBtn.classList.add('copied');
-                copyBtnText.textContent = '✓ Copied!';
-            });
+            copyBtn.classList.add('copied');
+            copyBtnText.textContent = '✓ Copied!';
             
+            // Reset after 2.5 seconds
             setTimeout(() => {
                 copyBtn.classList.remove('copied');
                 copyBtnText.textContent = 'Copy Hashtags';
@@ -1430,8 +843,11 @@
         }
         
         function fallbackCopyToClipboard(text) {
+            // Create temporary textarea
             const textarea = document.createElement('textarea');
             textarea.value = text;
+            
+            // Make it invisible but not display:none (iOS requirement)
             textarea.style.position = 'fixed';
             textarea.style.top = '0';
             textarea.style.left = '0';
@@ -1446,6 +862,7 @@
             
             document.body.appendChild(textarea);
             
+            // iOS specific handling
             if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
                 const range = document.createRange();
                 range.selectNodeContents(textarea);
@@ -1461,25 +878,28 @@
             try {
                 const successful = document.execCommand('copy');
                 document.body.removeChild(textarea);
-                if (!successful) throw new Error('execCommand copy failed');
+                
+                if (!successful) {
+                    throw new Error('execCommand copy failed');
+                }
             } catch (err) {
                 document.body.removeChild(textarea);
                 throw err;
             }
         }
         
-        Perf.logInfo('Copy hashtags functionality initialized');
+        console.log('✅ Copy hashtags functionality initialized');
     }
     
     /* ===================================
-       AIRDROP TRACKER
+       AIRDROP PROGRESS TRACKER
+       Animated number counting and progress bar
        =================================== */
-    
     function initAirdropTracker() {
         const totalEmber = CONFIG.airdrop.totalEmber;
         const claimed = CONFIG.airdrop.claimed;
         const remaining = totalEmber - claimed;
-        const people = 0;
+        const people = 0; // Current number of claims
         const maxPeople = CONFIG.airdrop.maxPeople;
         const percentage = ((claimed / totalEmber) * 100).toFixed(2);
         
@@ -1490,8 +910,10 @@
         const progressBar = document.getElementById('ember-progress-bar');
         const progressPercentage = document.getElementById('ember-progress-percentage');
         
+        // Set initial values
         if (totalEmberEl) totalEmberEl.textContent = totalEmber.toLocaleString();
         
+        // Animate numbers with counting effect
         function animateValue(element, start, end, duration) {
             if (!element) return;
             
@@ -1499,20 +921,17 @@
             const increment = range / (duration / 16);
             let current = start;
             
-            function update() {
+            const timer = setInterval(() => {
                 current += increment;
                 if (current >= end) {
                     current = end;
-                    element.textContent = Math.floor(current).toLocaleString();
-                    return;
+                    clearInterval(timer);
                 }
                 element.textContent = Math.floor(current).toLocaleString();
-                requestAnimationFrame(update);
-            }
-            
-            requestAnimationFrame(update);
+            }, 16);
         }
         
+        // Animate the numbers
         if (claimedEl) animateValue(claimedEl, 0, claimed, 1000);
         if (remainingEl) animateValue(remainingEl, 0, remaining, 1200);
         
@@ -1520,6 +939,7 @@
             peopleEl.textContent = `${people.toLocaleString()} / ${maxPeople.toLocaleString()}`;
         }
         
+        // Animate progress bar
         if (progressBar) {
             setTimeout(() => {
                 progressBar.style.width = `${percentage}%`;
@@ -1532,21 +952,27 @@
             }, 500);
         }
         
-        Perf.logInfo('Airdrop tracker initialized');
+        console.log('✅ Airdrop tracker initialized');
     }
     
     /* ===================================
-       SMOOTH SCROLL
+       SMOOTH SCROLL FOR ANCHOR LINKS
+       Smooth scrolling with navbar offset
        =================================== */
-    
     function initSmoothScroll() {
+        // Get navbar height for offset
         const navbar = document.getElementById('navbar');
         const navbarHeight = navbar ? navbar.offsetHeight : 80;
         
+        // Handle all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
-                if (href === '#') return;
+                
+                // Skip if it's just "#" (empty anchor)
+                if (href === '#') {
+                    return;
+                }
                 
                 const targetId = href.substring(1);
                 const targetElement = document.getElementById(targetId);
@@ -1554,13 +980,16 @@
                 if (targetElement) {
                     e.preventDefault();
                     
+                    // Calculate position with navbar offset
                     const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
                     
+                    // Smooth scroll
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
                     });
                     
+                    // Update URL without jumping
                     if (history.pushState) {
                         history.pushState(null, null, href);
                     }
@@ -1568,90 +997,141 @@
             });
         });
         
-        Perf.logInfo('Smooth scroll initialized');
+        console.log('✅ Smooth scroll initialized');
     }
     
     /* ===================================
        PROGRESS BARS
+       Can be updated with real data from backend
        =================================== */
-    
     function initProgressBars() {
-        Perf.logInfo('Progress bars initialized');
+        // Presale progress bar
+        const presaleProgress = document.querySelector('.presale-progress .progress-fill');
+        if (presaleProgress) {
+            // Static for now - can be updated with real data
+            // Example: updateProgressBar(presaleProgress, 0, 500000, currentAmount);
+        }
+        
+        // Development fund tracker
+        const devFundFill = document.getElementById('dev-fund-fill');
+        const devFundWithdrawn = document.getElementById('dev-fund-withdrawn');
+        const devFundTimestamp = document.getElementById('dev-fund-timestamp');
+        
+        if (devFundFill && devFundWithdrawn && devFundTimestamp) {
+            // Static for now - can be updated with real data from backend
+            const totalDevFund = 30000;
+            const withdrawn = 0; // Update this with actual withdrawn amount
+            
+            updateDevFundTracker(withdrawn, totalDevFund);
+        }
+        
+        console.log('✅ Progress bars initialized');
+    }
+    
+    // Helper function to update dev fund tracker
+    function updateDevFundTracker(withdrawn, total) {
+        const devFundFill = document.getElementById('dev-fund-fill');
+        const devFundWithdrawn = document.getElementById('dev-fund-withdrawn');
+        const devFundTimestamp = document.getElementById('dev-fund-timestamp');
+        
+        if (!devFundFill || !devFundWithdrawn || !devFundTimestamp) return;
+        
+        const percentage = (withdrawn / total) * 100;
+        
+        devFundFill.style.width = percentage + '%';
+        devFundWithdrawn.textContent = '$' + withdrawn.toLocaleString();
+        
+        if (withdrawn > 0) {
+            const now = new Date();
+            devFundTimestamp.textContent = now.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        } else {
+            devFundTimestamp.textContent = 'Presale not yet started';
+        }
     }
     
     /* ===================================
-       BACKEND-FRIENDLY EXPORTS
-       window.VaultPhoenix.Ember for debugging and state management
+       UTILITY FUNCTIONS
        =================================== */
     
-    window.VaultPhoenix = window.VaultPhoenix || {};
-    window.VaultPhoenix.Ember = {
-        // Systems
-        GlowSystem,
-        ScrollReveal,
-        Perf,
-        PhasedInit,
+    // Format currency
+    function formatCurrency(amount) {
+        return '$' + amount.toLocaleString('en-US', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    }
+    
+    // Format token amount
+    function formatTokens(amount) {
+        return amount.toLocaleString('en-US', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    }
+    
+    // Validate investment amount
+    function validateInvestmentAmount(amount) {
+        const numAmount = parseFloat(amount);
         
-        // State
-        getState() {
+        if (isNaN(numAmount)) {
             return {
-                currentPhase: PhasedInit.currentPhase,
-                device: CONFIG.device,
-                config: CONFIG,
-                initialized: {
-                    glowSystem: GlowSystem.initialized,
-                    scrollReveal: ScrollReveal.initialized
-                },
-                metrics: {
-                    glowElements: GlowSystem.glowElements.size,
-                    revealedElements: ScrollReveal.revealedElements.size
-                }
+                valid: false,
+                error: 'Please enter a valid number'
             };
-        },
-        
-        // Debug
-        logState() {
-            console.table(this.getState());
-        },
-        
-        logPerformance() {
-            console.table(Perf.getSummary());
-        },
-        
-        // Control
-        disableGlows() {
-            GlowSystem.disable();
-        },
-        
-        enableDebug() {
-            CONFIG.performance.enableLogs = true;
-            CONFIG.performance.enableTracking = true;
         }
-    };
+        
+        if (numAmount < CONFIG.minInvestment) {
+            return {
+                valid: false,
+                error: 'Minimum investment is $' + CONFIG.minInvestment
+            };
+        }
+        
+        if (numAmount > CONFIG.maxInvestment) {
+            return {
+                valid: false,
+                error: 'Maximum investment is $' + formatCurrency(CONFIG.maxInvestment)
+            };
+        }
+        
+        return {
+            valid: true,
+            amount: numAmount
+        };
+    }
     
     /* ===================================
-       FINAL LOG
+       EXPOSE UTILITY FUNCTIONS
+       For use in other scripts or console
        =================================== */
+    window.emberUtils = {
+        updateDevFundTracker: updateDevFundTracker,
+        formatCurrency: formatCurrency,
+        formatTokens: formatTokens,
+        validateInvestmentAmount: validateInvestmentAmount,
+        config: CONFIG
+    };
     
-    Perf.log('🔥 COMPLETE', 'Ember page v3.0 ULTRA-POLISHED loaded successfully!', CONFIG.performance.logColors.success);
-    console.log('%c🔥 CROWN JEWEL: Monday deployment ready! 🔥', 'color: #f0a500; font-size: 16px; font-weight: bold;');
+    console.log('✅ Ember local.js v2.0 loaded successfully with full Airdrop System support! 🔥');
     
 })();
 
 /* ===================================
-   END OF EMBER LOCAL JS v3.0 ULTRA-POLISHED
-   
-   ✅ Zero-flash instant background paint
-   ✅ Intelligent glow system (Ember-optimized with maximum glows)
-   ✅ 60fps butter-smooth animations
-   ✅ Progressive image loading with priority
-   ✅ Smart scroll reveals with stagger
-   ✅ Device optimizations (touch, slow connection, reduced motion)
-   ✅ Phased initialization (0ms → 100ms → 300ms → 600ms)
-   ✅ Performance tracking with color-coded logs
-   ✅ Backend-friendly window.VaultPhoenix.Ember exports
-   ✅ Complete Airdrop System support
-   ✅ Professional polish for financial trust
-   
-   AGENCY-LEVEL DELIVERY - THE CROWN JEWEL 🔥
+   END OF EMBER LOCAL JS v2.0
+   All page-specific functionality complete ✅
+   - Presale countdown & calculator
+   - TPA & Whitepaper modals
+   - Airdrop Info & Terms modals
+   - Airdrop form submission
+   - Status checker
+   - Share buttons (X, Facebook, Telegram)
+   - Copy hashtags (cross-platform)
+   - Airdrop progress tracker
+   - Smooth scroll & progress bars
    =================================== */
