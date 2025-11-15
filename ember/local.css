@@ -3436,6 +3436,11 @@ body.modal-open {
     .presale-progress { order: 3; }
     .fund-usage { order: 4; }
     
+    /* Make funding-scenarios transparent so Scenario 1 can be ordered */
+    .funding-scenarios { 
+        display: contents;
+    }
+    
     /* Scenarios */
     .soft-cap-scenario { order: 5; }
     .hard-cap-scenario { order: 6; }
@@ -3443,11 +3448,6 @@ body.modal-open {
     
     /* Presale card last */
     .presale-card { order: 8; }
-    
-    /* Hide the funding-scenarios wrapper on mobile since we're pulling items out */
-    .funding-scenarios {
-        display: contents;
-    }
 }
 
 /* Desktop: Switch to grid layout */
@@ -3456,6 +3456,26 @@ body.modal-open {
         display: grid;
         grid-template-columns: 1fr 450px;
         align-items: start;
+        gap: clamp(1.5rem, 3vw, 2rem);
+    }
+    
+    /* Left column spans full height */
+    .presale-left-column {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    
+    /* Right column spans full height */
+    .presale-right-column {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    
+    /* Both Scenarios Include goes below left column */
+    .scenarios-shared {
+        grid-column: 1 / -1; /* Span both columns */
+        grid-row: 2;
+        margin-top: 0; /* Remove extra margin */
     }
     
     /* Reset all orders on desktop */
@@ -3733,7 +3753,7 @@ body.modal-open {
    =================================== */
 
 .funding-scenarios {
-    margin-top: 40px;
+    /* No margin-top needed anymore */
 }
 
 .funding-scenarios > h3 {
@@ -3919,7 +3939,7 @@ body.modal-open {
     padding: 25px;
     border: 2px solid rgba(240, 165, 0, 0.3);
     text-align: center;
-    margin-top: 30px;
+    margin-top: 0; /* Remove margin, grid handles spacing */
 }
 
 .scenarios-shared h4 {
