@@ -356,7 +356,6 @@
         loadHighPriorityImages() {
             // Above-fold images
             const highPrioritySelectors = [
-                '.parachute-crate-enlarged',
                 '.ember-mini-icon',
                 '.presale-section img[src*="VPEmberCoin"]'
             ];
