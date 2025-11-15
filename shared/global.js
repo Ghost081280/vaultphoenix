@@ -819,7 +819,7 @@ function initializePrivacyPolicyModal() {
                     </div>
                 </div>
                 <div class="privacy-modal-footer">
-                    <a href="docs/__PRIVACY_POLICY.pdf" class="privacy-download-btn" target="_blank" rel="noopener noreferrer">
+                    <a href="docs/PRIVACY_POLICY.pdf" class="privacy-download-btn" target="_blank" rel="noopener noreferrer">
                         <span class="privacy-download-icon">📄</span> View Full Policy
                     </a>
                     <button class="privacy-close-btn" id="privacy-modal-close-btn">Close</button>
