@@ -3420,11 +3420,10 @@ body.modal-open {
 }
 
 /* ===================================
-   MOBILE STACKING ORDER (CRITICAL FIX)
+   MOBILE STACKING ORDER - FIXED
    Order: Metrics → Timer → Progress → Fund Usage → Scenario 1 → Scenario 2 → Both Scenarios → Presale Card
    =================================== */
 
-/* Mobile: Force correct stacking order */
 @media (max-width: 1023px) {
     .presale-two-column {
         display: flex;
@@ -3437,19 +3436,20 @@ body.modal-open {
     .presale-progress { order: 3; }
     .fund-usage { order: 4; }
     
-    /* Funding scenarios container */
-    .funding-scenarios { order: 5; }
+    /* Scenarios */
+    .soft-cap-scenario { order: 5; }
+    .hard-cap-scenario { order: 6; }
+    .scenarios-shared { order: 7; }
     
-    /* Inside funding-scenarios: Scenario 1 and Both Scenarios */
-    .soft-cap-scenario { order: 1; }
-    .scenarios-shared { order: 3; } /* Both Scenarios comes AFTER Scenario 2 */
+    /* Presale card last */
+    .presale-card { order: 8; }
     
-    /* Right column items - reorder for mobile */
-    .hard-cap-scenario { order: 6; } /* Scenario 2 comes after Scenario 1 but BEFORE Both Scenarios */
-    .presale-card { order: 8; } /* Presale card comes LAST */
+    /* Hide the funding-scenarios wrapper on mobile since we're pulling items out */
+    .funding-scenarios {
+        display: contents;
+    }
 }
 
-/* Desktop: Switch to grid layout */
 @media (min-width: 1024px) {
     .presale-two-column {
         display: grid;
@@ -3472,12 +3472,6 @@ body.modal-open {
     
     .benefits-grid {
         grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (min-width: 1200px) {
-    .presale-two-column {
-        grid-template-columns: 1fr 480px;
     }
 }
 
