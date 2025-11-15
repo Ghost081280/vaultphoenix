@@ -3378,7 +3378,7 @@ body.modal-open {
    END SECTION 8: TOKENOMICS SECTION
    =================================== */
 /* ===================================
-   SECTION 9: PRESALE SECTION - COMPLETE
+   SECTION 9: PRESALE SECTION - COMPLETE FIX
    =================================== */
 
 .presale-section {
@@ -3410,31 +3410,33 @@ body.modal-open {
 }
 
 /* ===================================
-   MOBILE STACKING ORDER
+   MOBILE: Make columns transparent so all children can be ordered
    =================================== */
 
 @media (max-width: 1023px) {
-    .presale-two-column {
-        display: flex;
-        flex-direction: column;
+    /* Make BOTH columns transparent containers */
+    .presale-left-column,
+    .presale-right-column {
+        display: contents;
     }
     
+    /* Make funding-scenarios transparent too */
+    .funding-scenarios {
+        display: contents;
+    }
+    
+    /* Now ALL items are direct children of presale-two-column and can be ordered */
     .presale-metrics { order: 1; }
     .presale-timer { order: 2; }
     .presale-progress { order: 3; }
     .fund-usage { order: 4; }
-    
-    .funding-scenarios { 
-        display: contents;
-    }
-    
     .soft-cap-scenario { order: 5; }
     .hard-cap-scenario { order: 6; }
     .scenarios-shared { order: 7; }
     .presale-card { order: 8; }
 }
 
-/* Desktop: Switch to grid layout */
+/* Desktop: Grid layout with proper columns */
 @media (min-width: 1024px) {
     .presale-two-column {
         display: grid;
@@ -3445,12 +3447,19 @@ body.modal-open {
     
     .presale-left-column {
         grid-column: 1;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(1.5rem, 3vw, 2rem);
     }
     
     .presale-right-column {
         grid-column: 2;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(1.5rem, 3vw, 2rem);
     }
     
+    /* Reset all orders */
     .presale-metrics,
     .presale-timer,
     .presale-progress,
