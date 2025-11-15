@@ -1370,4 +1370,39 @@ window.VaultPhoenix.systems = {
 
 console.log('✓ Main.js v3.0 COMPLETE loaded - waiting for DOM...');
 
+// ============================================
+// NUCLEAR FIX: FORCE EMBER.HTML LINKS TO WORK
+// This bypasses ANY JavaScript interference
+// ============================================
+setTimeout(() => {
+    const emberLinks = document.querySelectorAll('a[href*="ember.html"]');
+    
+    console.log(`🔥 FORCE FIX: Found ${emberLinks.length} ember.html links`);
+    
+    emberLinks.forEach((link, index) => {
+        // Remove ANY existing click handlers by cloning
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+        
+        // Add fresh click handler with highest priority
+        newLink.addEventListener('click', function(e) {
+            e.stopImmediatePropagation(); // Stop ALL other handlers
+            
+            const href = this.getAttribute('href');
+            console.log(`🔥 FORCE NAVIGATION to: ${href}`);
+            
+            // Force navigation
+            window.location.href = href;
+            
+            // Prevent any other handlers
+            e.preventDefault();
+            return false;
+        }, true); // Use capture phase - fires FIRST
+        
+        console.log(`✅ Force fix applied to link ${index + 1}: ${newLink.getAttribute('href')}`);
+    });
+    
+    console.log('🔥 EMBER LINK FORCE FIX COMPLETE!');
+}, 2000);
+
 })();
