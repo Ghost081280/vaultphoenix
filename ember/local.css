@@ -3450,6 +3450,7 @@ body.modal-open {
     }
 }
 
+/* Desktop: Switch to grid layout */
 @media (min-width: 1024px) {
     .presale-two-column {
         display: grid;
@@ -3472,6 +3473,12 @@ body.modal-open {
     
     .benefits-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .presale-two-column {
+        grid-template-columns: 1fr 480px;
     }
 }
 
@@ -3735,7 +3742,7 @@ body.modal-open {
     text-align: center;
     margin-bottom: 30px;
     font-weight: 700;
-    display: none; /* Hidden per your request */
+    display: none;
 }
 
 .funding-scenarios-grid {
