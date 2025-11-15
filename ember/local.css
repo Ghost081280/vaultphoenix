@@ -3378,7 +3378,7 @@ body.modal-open {
    END SECTION 8: TOKENOMICS SECTION
    =================================== */
 /* ===================================
-   SECTION 9: PRESALE SECTION - FINAL FIX
+   SECTION 9: PRESALE SECTION - COMPLETE
    =================================== */
 
 .presale-section {
@@ -3431,7 +3431,6 @@ body.modal-open {
         grid-template-rows: auto;
     }
     
-    /* Reset display for columns */
     .presale-left-column {
         grid-column: 1;
         display: flex;
@@ -3452,7 +3451,6 @@ body.modal-open {
         gap: clamp(1.5rem, 3vw, 2rem);
     }
     
-    /* Reset grid placement */
     .presale-metrics,
     .presale-timer,
     .presale-progress,
@@ -3724,12 +3722,6 @@ body.modal-open {
 /* ===================================
    FUNDING SCENARIOS
    =================================== */
-
-.funding-scenarios {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.5rem, 3vw, 2rem);
-}
 
 .scenario-card {
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
