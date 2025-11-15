@@ -791,6 +791,9 @@ function showChatbotButton() {
 // ============================================
 // PRIVACY POLICY MODAL (WITH CORRECT PDF LINK)
 // ============================================
+// ============================================
+// PRIVACY POLICY MODAL (WITH HELPER TO RE-ATTACH LISTENERS)
+// ============================================
 function initializePrivacyPolicyModal() {
     const modalHTML = `
         <div class="privacy-modal-overlay" id="privacy-modal-overlay">
@@ -833,20 +836,18 @@ function initializePrivacyPolicyModal() {
     
     function openPrivacyModal(e) {
         if (e) e.preventDefault();
+        console.log('🔒 Opening privacy modal');
         modalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
     
     function closePrivacyModal() {
+        console.log('🔒 Closing privacy modal');
         modalOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
     
-    // Attach to all privacy policy links
-    document.querySelectorAll('.privacy-policy-link').forEach(link => {
-        link.addEventListener('click', openPrivacyModal);
-    });
-    
+    // Attach to modal buttons
     if (modalClose) modalClose.addEventListener('click', closePrivacyModal);
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closePrivacyModal);
     if (modalOverlay) {
@@ -855,7 +856,43 @@ function initializePrivacyPolicyModal() {
         });
     }
     
+    // Store the open function globally
     window.openPrivacyPolicyModal = openPrivacyModal;
+    
+    // CRITICAL: Attach listeners immediately to any existing links
+    attachPrivacyModalListeners();
+    
+    console.log('✅ Privacy modal initialized');
+}
+
+// CRITICAL: Helper function to attach/reattach privacy modal listeners
+function attachPrivacyModalListeners() {
+    console.log('🔗 Attaching privacy modal listeners...');
+    
+    // Find all privacy policy links
+    const privacyLinks = document.querySelectorAll('.privacy-policy-link');
+    
+    console.log(`Found ${privacyLinks.length} privacy policy links`);
+    
+    // Attach listeners to each link
+    privacyLinks.forEach(link => {
+        // Remove old listener if exists (prevent duplicates)
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+        
+        // Add new listener
+        newLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('🔒 Privacy policy link clicked');
+            if (window.openPrivacyPolicyModal) {
+                window.openPrivacyPolicyModal(e);
+            } else {
+                console.error('❌ Privacy modal not initialized!');
+            }
+        });
+    });
+    
+    console.log('✅ Privacy modal listeners attached');
 }
 
 // ============================================
@@ -1444,6 +1481,17 @@ async function init() {
     
     initializeCookieConsent();
     initializePrivacyPolicyModal();
+    
+    // CRITICAL: Re-attach privacy modal listeners after footer loads
+    setTimeout(() => {
+        attachPrivacyModalListeners();
+    }, 200);
+    
+    // Also re-attach after navigation is generated (which includes footer)
+    setTimeout(() => {
+        attachPrivacyModalListeners();
+    }, 600);
+    
     
     let chatbotInitialized = initializeChatbot();
     if (!chatbotInitialized) {
