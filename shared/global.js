@@ -1,7 +1,7 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.2 PAGE-SPECIFIC NAV
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.3 PRIVACY PDF FIX
 // ============================================
-// UPDATES: Page-specific quick links, fixed cookie popup icon
+// UPDATES: Privacy modal button links to correct PDF path
 // ============================================
 
 (function() {
@@ -721,7 +721,7 @@ function initializeUniversalCountdown() {
 window.initializeUniversalCountdown = initializeUniversalCountdown;
 
 // ============================================
-// COOKIE CONSENT BANNER (UPDATED WITH LOGO ICON)
+// COOKIE CONSENT BANNER (WITH CORRECT PDF LINK)
 // ============================================
 function initializeCookieConsent() {
     const cookieConsent = localStorage.getItem('vaultphoenix_cookie_consent');
@@ -747,7 +747,7 @@ function initializeCookieConsent() {
             <div class="cookie-consent-buttons">
                 <button class="cookie-btn cookie-accept">Accept</button>
                 <button class="cookie-btn cookie-decline">Decline</button>
-                <a href="docs/__PRIVACY_POLICY.pdf" class="cookie-privacy-link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                <a href="#" class="cookie-privacy-link privacy-policy-link">Privacy Policy</a>
             </div>
         </div>
     `;
@@ -789,7 +789,7 @@ function showChatbotButton() {
 }
 
 // ============================================
-// PRIVACY POLICY MODAL
+// PRIVACY POLICY MODAL (WITH CORRECT PDF LINK)
 // ============================================
 function initializePrivacyPolicyModal() {
     const modalHTML = `
@@ -842,7 +842,8 @@ function initializePrivacyPolicyModal() {
         document.body.style.overflow = '';
     }
     
-    document.querySelectorAll('[href="#privacy-policy"], #cookie-privacy-link, .cookie-privacy-link, .privacy-policy-link').forEach(link => {
+    // Attach to all privacy policy links
+    document.querySelectorAll('.privacy-policy-link').forEach(link => {
         link.addEventListener('click', openPrivacyModal);
     });
     
@@ -1425,7 +1426,7 @@ window.addEventListener('resize', function() {
 // INITIALIZATION SEQUENCE
 // ============================================
 async function init() {
-    console.log('🔥 Vault Phoenix v8.2 PAGE-SPECIFIC NAV Initializing...');
+    console.log('🔥 Vault Phoenix v8.3 PRIVACY PDF FIX Initializing...');
     
     // CRITICAL: Load shared components FIRST
     const componentsLoaded = await loadSharedComponents();
@@ -1476,7 +1477,7 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v8.2 PAGE-SPECIFIC NAV Complete');
+    console.log('✅ Vault Phoenix v8.3 PRIVACY PDF FIX Complete');
     console.log('✅ Footer and Chatbot loaded from shared/global.html');
     console.log(`✅ Current page: ${getCurrentPage()}`);
     console.log(`✅ Quick links: ${getNavigationLinks().map(l => l.title).join(', ')}`);
