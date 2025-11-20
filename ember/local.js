@@ -696,7 +696,7 @@
             const wallet = walletInput.value.trim();
             
             if (!wallet) {
-                alert('⚠️ Please enter a Solana wallet address');
+                alert('Feature Coming soon');
                 return;
             }
             
