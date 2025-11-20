@@ -593,7 +593,7 @@ function preloadGalleryImages() {
 // COUNTDOWN TIMER
 // ============================================
 const CountdownTimer = {
-    targetDate: new Date('November 1, 2025 00:00:00 UTC').getTime(),
+    targetDate: new Date('December 1, 2025 00:00:00 UTC').getTime(),
     interval: null,
     
     init() {
