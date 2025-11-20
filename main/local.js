@@ -711,7 +711,7 @@ const StatusChecker = {
             const wallet = walletInput.value.trim();
             
             if (!wallet) {
-                alert('⚠️ Please enter a wallet address');
+                alert('Coming Soon');
                 return;
             }
             
