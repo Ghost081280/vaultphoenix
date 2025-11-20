@@ -32,7 +32,7 @@
     
     // Configuration
     const CONFIG = {
-        presaleDate: '2025-11-01T12:00:00-05:00', // November 1, 2025, 12:00 PM EST
+        presaleDate: '2025-12-01T12:00:00-05:00', // November 1, 2025, 12:00 PM EST
         tokenPrice: 0.003, // $0.003 per EMBER token
         minInvestment: 10,
         maxInvestment: 50000,
