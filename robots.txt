@@ -1,0 +1,17 @@
+# Vault Phoenix - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://vaultphoenix.com/sitemap.xml
+
+# Block admin/backend if you have any
+Disallow: /admin/
+Disallow: /cgi-bin/
+
+# Allow all bots to crawl images
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Crawl delay (optional - only if getting hit too hard)
+# Crawl-delay: 10
