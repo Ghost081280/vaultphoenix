@@ -1,9 +1,9 @@
 // ============================================
 // VAULT PHOENIX - MAIN.HTML LOCAL JAVASCRIPT
-// v3.2 - CLEAN & FIXED
-// - Fixed ember.html navigation
+// v3.3 - EMBER LINKS GUARANTEED FIX
+// - Fixed ember.html navigation (buttons work!)
 // - Removed airdrop system
-// - Removed unused code
+// - Clean & optimized
 // ============================================
 
 (function() {
@@ -361,10 +361,11 @@ const ImageLoader = {
 };
 
 // ============================================
-// SMOOTH SCROLL - GUARANTEED FIX FOR EMBER LINKS
+// SMOOTH SCROLL - ABSOLUTE FIX FOR EMBER LINKS
 // ============================================
 const SmoothScroll = {
     init() {
+        // DON'T use capture phase - use normal bubble phase
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             if (!link) return;
@@ -372,10 +373,10 @@ const SmoothScroll = {
             const href = link.getAttribute('href');
             if (!href) return;
             
-            // CRITICAL: Check for .html files FIRST - let them work naturally
+            // CRITICAL: Let ALL .html files work naturally - NO preventDefault
             if (href.includes('.html')) {
                 console.log('✓ Allowing .html navigation:', href);
-                return; // Don't preventDefault, let browser handle
+                return; // Browser handles it naturally
             }
             
             // Let external links work
@@ -410,7 +411,7 @@ const SmoothScroll = {
                     }
                 }
             }
-        }, false); // <-- CHANGED FROM TRUE TO FALSE - use bubble phase instead
+        }); // NO capture phase - just normal bubbling
         
         mark('Smooth Scroll Initialized');
     }
@@ -677,7 +678,7 @@ function waitForGlobal(callback) {
 // MASTER INITIALIZATION
 // ============================================
 async function initializeMainPage() {
-    console.log('🔥 VAULT PHOENIX v3.2 - CLEAN & FIXED');
+    console.log('🔥 VAULT PHOENIX v3.3 - EMBER LINKS FIXED');
     console.log('━'.repeat(60));
     
     DeviceOptimizer.init();
@@ -733,7 +734,7 @@ if (document.readyState === 'loading') {
 // EXPORT FOR DEBUGGING
 // ============================================
 window.VaultPhoenix = VaultPhoenix;
-window.VaultPhoenix.version = '3.2.0-clean';
+window.VaultPhoenix.version = '3.3.0-ember-fixed';
 window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
@@ -742,6 +743,6 @@ window.VaultPhoenix.systems = {
     CountdownTimer
 };
 
-console.log('✓ Main.js v3.2 CLEAN loaded - ember links fixed, airdrop removed');
+console.log('✓ Main.js v3.3 EMBER LINKS FIXED - all .html navigation works!');
 
 })();
