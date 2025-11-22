@@ -383,7 +383,7 @@ const ImageLoader = {
 };
 
 // ============================================
-// SMOOTH SCROLL WITH EMBER FIX - FUTURE PROOF
+// SMOOTH SCROLL WITH EMBER FIX - MOBILE OPTIMIZED
 // ============================================
 const SmoothScroll = {
     init() {
@@ -394,11 +394,13 @@ const SmoothScroll = {
             const href = link.getAttribute('href');
             if (!href) return;
             
-            // ✅ SKIP ember token section links - they have their own handler
+            // ✅ CRITICAL: CHECK THIS FIRST - BEFORE ANY preventDefault()
+            // Skip ember token section links - they have their own handler
             if (link.classList.contains('ember-highlight-link') ||
                 link.classList.contains('join-presale-button') ||
                 link.classList.contains('compliance-button')) {
-                return;
+                console.log('🔥 Allowing enterprise link to pass through:', href);
+                return; // Let them pass through completely - don't touch them!
             }
             
             // ✅ EXPLICITLY ALLOW these to pass through naturally
@@ -406,11 +408,11 @@ const SmoothScroll = {
             if (href.startsWith('http') || 
                 href.endsWith('.html') || 
                 href.includes('ember.html') ||
-                href.includes('ember#') ||  // NEW: ember without .html
-                /\/ember[#?]/.test(href) ||  // NEW: /ember# or /ember?
+                href.includes('ember#') ||  // ember without .html
+                /\/ember[#?]/.test(href) ||  // /ember# or /ember?
                 href.includes('onboarding.html') ||
-                href.includes('onboarding#') ||  // NEW: onboarding without .html
-                /\/onboarding[#?]/.test(href) ||  // NEW: /onboarding# or /onboarding?
+                href.includes('onboarding#') ||  // onboarding without .html
+                /\/onboarding[#?]/.test(href) ||  // /onboarding# or /onboarding?
                 href.startsWith('mailto:') ||
                 href.startsWith('tel:')) {
                 // Let browser handle it - don't prevent default
