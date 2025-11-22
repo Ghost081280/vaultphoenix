@@ -32,7 +32,7 @@
     
     // Configuration
     const CONFIG = {
-        presaleDate: '2025-12-01T12:00:00-05:00', // November 1, 2025, 12:00 PM EST
+        presaleDate: '2025-11-01T12:00:00-05:00', // November 1, 2025, 12:00 PM EST
         tokenPrice: 0.003, // $0.003 per EMBER token
         minInvestment: 10,
         maxInvestment: 50000,
@@ -72,7 +72,64 @@
        COUNTDOWN TIMER
        Updates every second until presale launch
        =================================== */
-   
+    function initCountdownTimer() {
+        const timerElements = {
+            days: document.getElementById('days'),
+            hours: document.getElementById('hours'),
+            minutes: document.getElementById('minutes'),
+            seconds: document.getElementById('seconds')
+        };
+        
+        // Check if all elements exist
+        const allElementsExist = Object.values(timerElements).every(el => el !== null);
+        if (!allElementsExist) {
+            console.warn('Countdown timer elements not found');
+            return;
+        }
+        
+        function updateCountdown() {
+            const targetDate = new Date(CONFIG.presaleDate);
+            const now = new Date();
+            const diff = targetDate - now;
+            
+            if (diff <= 0) {
+                // Presale has started
+                timerElements.days.textContent = '00';
+                timerElements.hours.textContent = '00';
+                timerElements.minutes.textContent = '00';
+                timerElements.seconds.textContent = '00';
+                
+                // Optional: Update button text
+                const presaleButton = document.getElementById('presale-buy-button');
+                if (presaleButton) {
+                    presaleButton.innerHTML = '<img src="images/VPEmberFlame.svg" alt="" aria-hidden="true" style="width: 32px; height: 32px;"> Join Presale Now!';
+                }
+                
+                return;
+            }
+            
+            // Calculate time units
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // Update DOM with padded values
+            timerElements.days.textContent = days.toString().padStart(2, '0');
+            timerElements.hours.textContent = hours.toString().padStart(2, '0');
+            timerElements.minutes.textContent = minutes.toString().padStart(2, '0');
+            timerElements.seconds.textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Initial update
+        updateCountdown();
+        
+        // Update every second
+        setInterval(updateCountdown, 1000);
+        
+        Perf.log('✅ Countdown timer initialized');
+    }
+    
     /* ===================================
        INVESTMENT CALCULATOR
        Real-time calculation of EMBER tokens with validation
@@ -639,7 +696,7 @@
             const wallet = walletInput.value.trim();
             
             if (!wallet) {
-                alert('Feature Coming soon');
+                alert('⚠️ Please enter a Solana wallet address');
                 return;
             }
             
