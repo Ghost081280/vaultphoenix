@@ -5224,3 +5224,54 @@ body.main-page .main-social-sharing-icon-compact {
     visibility: visible !important;
     transition: none !important;
 }
+/* ============================================
+   IMAGE OPTIMIZATION - PERFORMANCE
+   ============================================ */
+
+/* Lazy load images with blur-up effect */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+img[loading="lazy"].loaded,
+img[loading="lazy"][complete] {
+    opacity: 1;
+}
+
+/* Prevent layout shift while images load */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Use GPU acceleration for transforms */
+.main-image-glow,
+.scroll-reveal {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Critical CSS: Above-the-fold content renders faster */
+.main-hero,
+.hero-container {
+    contain: layout style paint;
+}
+
+/* Font display swap for faster text rendering */
+@font-face {
+    font-display: swap;
+}
