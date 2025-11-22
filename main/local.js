@@ -1,7 +1,7 @@
 // ============================================
 // VAULT PHOENIX - MAIN.HTML LOCAL JAVASCRIPT
-// v3.5 - ALL 5 EMBER BUTTONS FIXED
-// - Force fix for all Enterprise Token Infrastructure buttons
+// v4.0 - CLEAN VERSION (ROOT CAUSE FIXED IN GLOBAL.JS)
+// - No force fixes needed - smooth scroll properly configured
 // - Removed airdrop system
 // - Clean & optimized
 // ============================================
@@ -361,61 +361,6 @@ const ImageLoader = {
 };
 
 // ============================================
-// SMOOTH SCROLL - NO INTERFERENCE
-// ============================================
-const SmoothScroll = {
-    init() {
-        document.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            if (!link) return;
-            
-            const href = link.getAttribute('href');
-            if (!href) return;
-            
-            // Let ALL .html files work naturally - NO preventDefault
-            if (href.includes('.html')) {
-                return;
-            }
-            
-            // Let external links work
-            if (href.startsWith('http') || href.includes('mailto:')) {
-                return;
-            }
-            
-            // Only handle same-page anchors (#section)
-            if (href.startsWith('#')) {
-                e.preventDefault();
-                
-                if (href === '#') {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    return;
-                }
-                
-                const targetId = href.substring(1);
-                const target = document.getElementById(targetId);
-                
-                if (target) {
-                    const navbar = document.querySelector('.navbar');
-                    const offset = navbar ? navbar.offsetHeight + 20 : 20;
-                    const targetPos = target.offsetTop - offset;
-                    
-                    window.scrollTo({
-                        top: targetPos,
-                        behavior: 'smooth'
-                    });
-                    
-                    if (history.pushState) {
-                        history.pushState(null, null, href);
-                    }
-                }
-            }
-        });
-        
-        mark('Smooth Scroll Initialized');
-    }
-};
-
-// ============================================
 // DEVICE OPTIMIZATIONS
 // ============================================
 const DeviceOptimizer = {
@@ -676,7 +621,7 @@ function waitForGlobal(callback) {
 // MASTER INITIALIZATION
 // ============================================
 async function initializeMainPage() {
-    console.log('🔥 VAULT PHOENIX v3.5 - ALL 5 BUTTONS FIXED');
+    console.log('🔥 VAULT PHOENIX v4.0 - CLEAN (ROOT CAUSE FIXED)');
     console.log('━'.repeat(60));
     
     DeviceOptimizer.init();
@@ -691,7 +636,6 @@ async function initializeMainPage() {
         GlowSystem.apply();
         ScrollReveal.init();
         ImageLoader.init();
-        SmoothScroll.init();
     });
     
     requestAnimationFrame(() => {
@@ -732,80 +676,14 @@ if (document.readyState === 'loading') {
 // EXPORT FOR DEBUGGING
 // ============================================
 window.VaultPhoenix = VaultPhoenix;
-window.VaultPhoenix.version = '3.5.0-all-buttons-fixed';
+window.VaultPhoenix.version = '4.0.0-clean';
 window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
     ImageLoader,
-    SmoothScroll,
     CountdownTimer
 };
 
-console.log('✓ Main.js v3.5 LOADED - preparing force fix for all buttons...');
+console.log('✓ Main.js v4.0 CLEAN - root cause fixed in global.js, no hacks needed! 🎉');
 
 })();
-
-// ============================================
-// FORCE FIX: ALL Enterprise Token Infrastructure Buttons
-// Handles all 5 buttons - runs OUTSIDE the IIFE
-// ============================================
-function forceAllEmberButtonsToWork() {
-    console.log('🔧 Forcing ALL ember buttons to work...');
-    
-    // Find ALL buttons in the Enterprise Token Infrastructure section
-    const allButtons = document.querySelectorAll(
-        '.ember-highlight-link, ' +
-        '.join-presale-button, ' +
-        '.join-presale-button-redesigned, ' +
-        '.compliance-button, ' +
-        'a[href*="ember.html#presale"], ' +
-        'a[href*="ember.html#whitepaper"], ' +
-        'a[href*="ember.html#roadmap"], ' +
-        'a[href*="ember.html#team"], ' +
-        'a[href*="ember.html#legal"]'
-    );
-    
-    console.log(`Found ${allButtons.length} total ember buttons`);
-    
-    allButtons.forEach((button, index) => {
-        const href = button.getAttribute('href');
-        console.log(`Button ${index + 1}: ${href}`);
-        
-        // Remove ALL existing event listeners by cloning
-        const newButton = button.cloneNode(true);
-        button.parentNode.replaceChild(newButton, button);
-        
-        // Add DIRECT navigation - HIGHEST priority
-        newButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-            
-            const targetHref = this.getAttribute('href');
-            console.log('🚀 FORCING NAVIGATION TO:', targetHref);
-            
-            // Force navigation
-            window.location.href = targetHref;
-        }, true); // Capture phase - FIRST to handle event
-        
-        // Also handle touch events for mobile
-        newButton.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-            
-            const targetHref = this.getAttribute('href');
-            console.log('🚀 TOUCH - FORCING NAVIGATION TO:', targetHref);
-            
-            window.location.href = targetHref;
-        }, true);
-    });
-}
-
-// Run after everything loads - multiple times to ensure it catches ALL buttons
-setTimeout(forceAllEmberButtonsToWork, 500);
-setTimeout(forceAllEmberButtonsToWork, 1000);
-setTimeout(forceAllEmberButtonsToWork, 2000);
-setTimeout(forceAllEmberButtonsToWork, 3000);
-
-console.log('✓ ALL ember button force fix installed - all 5 buttons should work now! 🔥');
