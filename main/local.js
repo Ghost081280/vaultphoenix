@@ -361,7 +361,7 @@ const ImageLoader = {
 };
 
 // ============================================
-// SMOOTH SCROLL - CORRECT FIX FOR EMBER LINKS
+// SMOOTH SCROLL - GUARANTEED FIX FOR EMBER LINKS
 // ============================================
 const SmoothScroll = {
     init() {
@@ -372,11 +372,15 @@ const SmoothScroll = {
             const href = link.getAttribute('href');
             if (!href) return;
             
-            // Let ALL external links and files with .html work normally
-            if (href.startsWith('http') || 
-                href.includes('.html') ||  // Changed from .endsWith to .includes
-                href.includes('mailto:')) {
-                return; // Browser handles it
+            // CRITICAL: Let ember.html links work - check BEFORE doing anything
+            if (href.includes('.html')) {
+                console.log('✓ Allowing .html navigation:', href);
+                return; // Let browser handle it naturally
+            }
+            
+            // Let external links work
+            if (href.startsWith('http') || href.includes('mailto:')) {
+                return;
             }
             
             // Only handle same-page anchors (#section)
@@ -406,7 +410,7 @@ const SmoothScroll = {
                     }
                 }
             }
-        });
+        }, true); // <-- ADDED TRUE HERE - this is capture phase!
         
         mark('Smooth Scroll Initialized');
     }
