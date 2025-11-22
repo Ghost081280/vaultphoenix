@@ -1673,41 +1673,82 @@
 </div>
 <!-- END SUCCESS GUIDE -->
 
-<!-- CONTACT SECTION -->
+<!-- CONTACT SECTION - MODERN DESIGN -->
 <section class="contact-section" id="contact">
     <div class="main-container">
         <div class="contact-content scroll-reveal">
-            <h2 class="contact-title">Get Started with Vault Phoenix</h2>
-            <p class="contact-subtitle">Ready to launch your location-based AR campaigns? Contact us or request a free consultation.</p>
+            <div class="contact-header">
+                <div class="main-image-glow contact-logo-glow">
+                    <img src="images/VPLogoNoText.PNG" alt="Vault Phoenix Logo" class="contact-logo" loading="lazy">
+                </div>
+                <h2 class="contact-title">Let's Build Something Amazing</h2>
+                <p class="contact-subtitle">Whether you're an agency, developer, or enterprise - we're here to help you launch successful AR campaigns.</p>
+            </div>
             
-            <div class="contact-grid">
-                <!-- Email Button -->
-                <div class="contact-option">
-                    <a href="mailto:contact@vaultphoenix.com?subject=Vault Phoenix Inquiry" class="contact-email-button" aria-label="Email Vault Phoenix">
-                        <div class="main-image-glow">
-                            <img src="images/VPEmberCoin.PNG" alt="Contact Icon" class="contact-icon" loading="lazy">
-                        </div>
-                        <span>Email Us Directly</span>
+            <div class="contact-cards">
+                <!-- Quick Email Card -->
+                <div class="contact-card contact-card-email scroll-reveal stagger-1">
+                    <div class="contact-card-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <h3>Quick Email</h3>
+                    <p>Get a response within 24 hours</p>
+                    <a href="mailto:contact@vaultphoenix.com?subject=Vault Phoenix Inquiry" class="contact-card-button">
+                        Send Email →
                     </a>
                 </div>
                 
-                <!-- Contact Form -->
-                <div class="contact-option">
-                    <form action="https://formspree.io/f/xblbzaqr" method="POST" class="contact-form" aria-label="Contact form">
-                        <input type="text" name="name" placeholder="Your Name" required aria-label="Your name">
-                        <input type="email" name="email" placeholder="Your Email" required aria-label="Your email">
-                        <select name="inquiry-type" required aria-label="Inquiry type">
-                            <option value="">I'm interested in...</option>
-                            <option value="agency">White-Label Solution (Agency)</option>
-                            <option value="developer">SDK Integration (Developer)</option>
-                            <option value="enterprise">Enterprise Campaign</option>
-                            <option value="demo">Request Demo</option>
-                        </select>
-                        <textarea name="message" placeholder="Tell us about your project" rows="4" aria-label="Your message"></textarea>
-                        <button type="submit" class="contact-submit-button">Send Message</button>
+                <!-- Contact Form Card -->
+                <div class="contact-card contact-card-form scroll-reveal stagger-2">
+                    <div class="contact-card-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
+                        </svg>
+                    </div>
+                    <h3>Tell Us About Your Project</h3>
+                    <form action="https://formspree.io/f/xblbzaqr" method="POST" class="modern-contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Your Name*" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Your Email*" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select name="inquiry-type" required>
+                                <option value="">What brings you here?*</option>
+                                <option value="agency">🏢 White-Label Solution (Agency)</option>
+                                <option value="developer">💻 SDK Integration (Developer)</option>
+                                <option value="enterprise">🚀 Enterprise Campaign</option>
+                                <option value="demo">👀 Just Want a Demo</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Tell us about your vision..." rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="modern-submit-button">
+                            <span>Send Message</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                        </button>
                     </form>
                 </div>
             </div>
+            
+            <p class="contact-trust-note">🔒 Your information is secure. We respond to all inquiries within 24 hours.</p>
         </div>
     </div>
 </section>
