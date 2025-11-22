@@ -1,7 +1,7 @@
 // ============================================
 // VAULT PHOENIX - MAIN.HTML LOCAL JAVASCRIPT
-// v3.3 - EMBER LINKS GUARANTEED FIX
-// - Fixed ember.html navigation (buttons work!)
+// v3.4 - FORCE FIX FOR EMBER BUTTONS
+// - Force fix for Enterprise Token Infrastructure buttons
 // - Removed airdrop system
 // - Clean & optimized
 // ============================================
@@ -361,11 +361,10 @@ const ImageLoader = {
 };
 
 // ============================================
-// SMOOTH SCROLL - ABSOLUTE FIX FOR EMBER LINKS
+// SMOOTH SCROLL - NO INTERFERENCE
 // ============================================
 const SmoothScroll = {
     init() {
-        // DON'T use capture phase - use normal bubble phase
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
             if (!link) return;
@@ -373,10 +372,9 @@ const SmoothScroll = {
             const href = link.getAttribute('href');
             if (!href) return;
             
-            // CRITICAL: Let ALL .html files work naturally - NO preventDefault
+            // Let ALL .html files work naturally - NO preventDefault
             if (href.includes('.html')) {
-                console.log('✓ Allowing .html navigation:', href);
-                return; // Browser handles it naturally
+                return;
             }
             
             // Let external links work
@@ -411,7 +409,7 @@ const SmoothScroll = {
                     }
                 }
             }
-        }); // NO capture phase - just normal bubbling
+        });
         
         mark('Smooth Scroll Initialized');
     }
@@ -678,7 +676,7 @@ function waitForGlobal(callback) {
 // MASTER INITIALIZATION
 // ============================================
 async function initializeMainPage() {
-    console.log('🔥 VAULT PHOENIX v3.3 - EMBER LINKS FIXED');
+    console.log('🔥 VAULT PHOENIX v3.4 - FORCE FIX INSTALLED');
     console.log('━'.repeat(60));
     
     DeviceOptimizer.init();
@@ -734,7 +732,7 @@ if (document.readyState === 'loading') {
 // EXPORT FOR DEBUGGING
 // ============================================
 window.VaultPhoenix = VaultPhoenix;
-window.VaultPhoenix.version = '3.3.0-ember-fixed';
+window.VaultPhoenix.version = '3.4.0-force-fix';
 window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
@@ -743,6 +741,61 @@ window.VaultPhoenix.systems = {
     CountdownTimer
 };
 
-console.log('✓ Main.js v3.3 EMBER LINKS FIXED - all .html navigation works!');
+console.log('✓ Main.js v3.4 LOADED - preparing force fix...');
 
 })();
+
+// ============================================
+// FORCE FIX: Enterprise Token Infrastructure Buttons
+// Override ANY interference - runs OUTSIDE the IIFE
+// ============================================
+function forceEmberLinksToWork() {
+    console.log('🔧 Forcing ember links to work...');
+    
+    // Find all ember highlight links
+    const emberLinks = document.querySelectorAll('.ember-highlight-link');
+    
+    console.log(`Found ${emberLinks.length} ember highlight links`);
+    
+    emberLinks.forEach((link, index) => {
+        const href = link.getAttribute('href');
+        console.log(`Link ${index + 1}: ${href}`);
+        
+        // Remove ALL existing event listeners by cloning
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+        
+        // Add DIRECT navigation - HIGHEST priority
+        newLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            const targetHref = this.getAttribute('href');
+            console.log('🚀 FORCING NAVIGATION TO:', targetHref);
+            
+            // Force navigation
+            window.location.href = targetHref;
+        }, true); // Capture phase - FIRST to handle event
+        
+        // Also handle touch events for mobile
+        newLink.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            const targetHref = this.getAttribute('href');
+            console.log('🚀 TOUCH - FORCING NAVIGATION TO:', targetHref);
+            
+            window.location.href = targetHref;
+        }, true);
+    });
+}
+
+// Run after everything loads - multiple times to ensure it catches the links
+setTimeout(forceEmberLinksToWork, 500);
+setTimeout(forceEmberLinksToWork, 1000);
+setTimeout(forceEmberLinksToWork, 2000);
+setTimeout(forceEmberLinksToWork, 3000);
+
+console.log('✓ Ember link force fix installed - buttons should work now!');
