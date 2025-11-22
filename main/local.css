@@ -5217,3 +5217,10 @@ body.main-page .main-social-sharing-icon-compact {
             drop-shadow(0 0 35px rgba(215, 51, 39, 0.3));
     animation: consistentGlow 3s ease-in-out infinite;
 }
+/* FORCE: Button icons visible immediately, no transitions */
+.ember-highlight-link img,
+.join-presale-button img {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: none !important;
+}
