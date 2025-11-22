@@ -393,6 +393,11 @@ const SmoothScroll = {
             const href = link.getAttribute('href');
             if (!href) return;
             
+            // ✅ SKIP ember-highlight-link - they have their own handler
+            if (link.classList.contains('ember-highlight-link')) {
+                return;
+            }
+            
             // ✅ EXPLICITLY ALLOW these to pass through naturally
             if (href.startsWith('http') || 
                 href.endsWith('.html') || 
@@ -593,6 +598,46 @@ function preloadGalleryImages() {
 }
 
 // ============================================
+// ENTERPRISE TOKEN LINKS FIX
+// Ensures ember.html links work properly
+// ============================================
+const EnterpriseTokenLinks = {
+    init() {
+        // Wait a bit for global.js to finish its setup
+        setTimeout(() => {
+            const emberLinks = document.querySelectorAll('.ember-highlight-link');
+            
+            console.log(`🔧 Fixing ${emberLinks.length} enterprise token links`);
+            
+            emberLinks.forEach((link, index) => {
+                // Remove any existing handlers by cloning
+                const newLink = link.cloneNode(true);
+                link.parentNode.replaceChild(newLink, link);
+                
+                // Add clean click handler with highest priority (capture phase)
+                newLink.addEventListener('click', function(e) {
+                    e.stopImmediatePropagation(); // Stop ALL other handlers
+                    
+                    const href = this.getAttribute('href');
+                    console.log(`✅ Enterprise link clicked: ${href}`);
+                    
+                    // Direct navigation
+                    window.location.href = href;
+                    
+                    // Safety: prevent any bubbling
+                    e.preventDefault();
+                    return false;
+                }, true); // TRUE = capture phase (fires first)
+                
+                console.log(`✅ Fixed link ${index + 1}: ${newLink.getAttribute('href')}`);
+            });
+            
+            mark('Enterprise Token Links Fixed');
+        }, 500); // Wait 500ms for global.js to settle
+    }
+};
+
+// ============================================
 // PERFORMANCE MONITORING
 // ============================================
 function monitorPerformance() {
@@ -678,8 +723,9 @@ async function initializeMainPage() {
         SmoothScroll.init();
     });
     
-    // Phase 4: Interactive (300-600ms) - Gallery features
+    // Phase 4: Interactive (300-600ms) - Gallery features + Enterprise links fix
     requestAnimationFrame(() => {
+        EnterpriseTokenLinks.init(); // FIX EMBER LINKS
         preloadGalleryImages();
         monitorPerformance();
     });
@@ -725,7 +771,8 @@ window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
     ImageLoader,
-    SmoothScroll
+    SmoothScroll,
+    EnterpriseTokenLinks
 };
 
 console.log('✓ Main.js v3.0 COMPLETE loaded - waiting for DOM...');
