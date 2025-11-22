@@ -1,7 +1,7 @@
 // ============================================
 // VAULT PHOENIX - MAIN.HTML LOCAL JAVASCRIPT
-// v4.3 - BUTTON FLASH FIX (CSS GLOW)
-// - Button icons use CSS glow (no flash)
+// v4.4 - BACK NAVIGATION FIX (NO BLINK ON RETURN)
+// - Prevents glow re-application on back button
 // - All 5 buttons work with one tap
 // - Clean & optimized
 // ============================================
@@ -83,18 +83,38 @@ function preventFlash() {
 preventFlash();
 
 // ============================================
+// BACK NAVIGATION DETECTION
+// ============================================
+const isBackNavigation = (performance.navigation && performance.navigation.type === 2) || 
+                         (performance.getEntriesByType('navigation')[0]?.type === 'back_forward');
+
+if (isBackNavigation) {
+    console.log('⚠️ Back button detected - optimizing for cached content');
+    document.body.classList.add('back-navigation');
+}
+
+// ============================================
 // INTELLIGENT GLOW SYSTEM
 // ============================================
 const GlowSystem = {
     isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent),
+    applied: false,
     
     apply() {
+        // CRITICAL: Skip if already applied (prevents blink on back button)
+        if (this.applied || document.body.classList.contains('glow-applied')) {
+            console.log('✓ Glow already applied - skipping to prevent blink');
+            return;
+        }
+        
         const intensity = this.isMobile ? VaultPhoenix.config.glowIntensity.mobile : 1.0;
         
         this.applyPhoenixGlow(intensity);
         this.applyEmberGlow(intensity);
         this.applyIconGlow(intensity);
         
+        this.applied = true;
+        document.body.classList.add('glow-applied');
         mark('Glow System Applied');
     },
     
@@ -109,12 +129,13 @@ const GlowSystem = {
         phoenixImages.forEach(selector => {
             document.querySelectorAll(selector).forEach(img => {
                 const wrapper = img.closest('.main-image-glow');
-                if (wrapper) {
+                if (wrapper && !wrapper.hasAttribute('data-glow-applied')) {
                     wrapper.style.filter = `
                         drop-shadow(0 0 ${25 * mult}px rgba(240, 165, 0, ${0.6 * mult}))
                         drop-shadow(0 0 ${50 * mult}px rgba(215, 51, 39, ${0.4 * mult}))
                     `;
                     wrapper.style.animation = 'phoenixGlowEnhanced 3s ease-in-out infinite';
+                    wrapper.setAttribute('data-glow-applied', 'true');
                 }
             });
         });
@@ -135,12 +156,13 @@ const GlowSystem = {
                 // CRITICAL: Skip button icons - they're handled by CSS
                 const isButtonIcon = img.closest('.ember-highlight-link, .join-presale-button');
                 
-                if (wrapper && !isButtonIcon) {
+                if (wrapper && !isButtonIcon && !wrapper.hasAttribute('data-glow-applied')) {
                     wrapper.style.filter = `
                         drop-shadow(0 0 ${20 * mult}px rgba(240, 165, 0, ${0.5 * mult}))
                         drop-shadow(0 0 ${35 * mult}px rgba(215, 51, 39, ${0.3 * mult}))
                     `;
                     wrapper.style.animation = 'consistentGlow 3s ease-in-out infinite';
+                    wrapper.setAttribute('data-glow-applied', 'true');
                 }
             });
         });
@@ -157,11 +179,12 @@ const GlowSystem = {
         iconImages.forEach(selector => {
             document.querySelectorAll(selector).forEach(img => {
                 const wrapper = img.closest('.main-image-glow');
-                if (wrapper) {
+                if (wrapper && !wrapper.hasAttribute('data-glow-applied')) {
                     wrapper.style.filter = `
                         drop-shadow(0 0 ${15 * mult}px rgba(240, 165, 0, ${0.4 * mult}))
                         drop-shadow(0 0 ${25 * mult}px rgba(215, 51, 39, ${0.2 * mult}))
                     `;
+                    wrapper.setAttribute('data-glow-applied', 'true');
                 }
             });
         });
@@ -410,6 +433,9 @@ const SmartButtonTouch = {
             const href = button.getAttribute('href');
             console.log(`   Button ${index + 1}: ${href}`);
             
+            // Skip if already attached
+            if (button.hasAttribute('data-touch-attached')) return;
+            
             // Remove existing listeners by cloning
             const newButton = button.cloneNode(true);
             button.parentNode.replaceChild(newButton, button);
@@ -452,6 +478,9 @@ const SmartButtonTouch = {
                 // On touch devices, click is handled by touchend
                 e.preventDefault();
             });
+            
+            // Mark as attached
+            newButton.setAttribute('data-touch-attached', 'true');
         });
     }
 };
@@ -717,7 +746,7 @@ function waitForGlobal(callback) {
 // MASTER INITIALIZATION
 // ============================================
 async function initializeMainPage() {
-    console.log('🔥 VAULT PHOENIX v4.3 - BUTTON FLASH FIXED');
+    console.log('🔥 VAULT PHOENIX v4.4 - BACK NAV FIX (NO BLINK)');
     console.log('━'.repeat(60));
     
     DeviceOptimizer.init();
@@ -773,7 +802,7 @@ if (document.readyState === 'loading') {
 // EXPORT FOR DEBUGGING
 // ============================================
 window.VaultPhoenix = VaultPhoenix;
-window.VaultPhoenix.version = '4.3.0-button-flash-fixed';
+window.VaultPhoenix.version = '4.4.0-back-nav-fixed';
 window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
@@ -782,6 +811,6 @@ window.VaultPhoenix.systems = {
     SmartButtonTouch
 };
 
-console.log('✓ Main.js v4.3 - Button flash fixed via CSS + smart touch! 🔥');
+console.log('✓ Main.js v4.4 - Back navigation fix (no blink on return)! 🔥');
 
 })();
