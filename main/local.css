@@ -994,79 +994,6 @@ body {
     font-size: 1.4rem;
 }
 
-/* Funding Caps Card */
-.funding-caps-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    background: linear-gradient(135deg, 
-        rgba(215, 51, 39, 0.15) 0%, 
-        rgba(240, 165, 0, 0.1) 100%);
-    border: 2px solid rgba(215, 51, 39, 0.4);
-    border-radius: 16px;
-    padding: 1.5rem;
-    margin-bottom: 1.25rem;
-    animation: capsGlow 3s ease-in-out infinite;
-}
-
-@keyframes capsGlow {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(215, 51, 39, 0.3);
-        border-color: rgba(215, 51, 39, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 35px rgba(215, 51, 39, 0.5);
-        border-color: rgba(215, 51, 39, 0.6);
-    }
-}
-
-.funding-cap-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex: 1;
-}
-
-.cap-icon {
-    flex-shrink: 0;
-}
-
-.cap-icon img {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-}
-
-.cap-content {
-    flex: 1;
-}
-
-.cap-amount {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: var(--ember-gold);
-    line-height: 1;
-    margin-bottom: 0.4rem;
-}
-
-.cap-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    letter-spacing: 0.5px;
-}
-
-.funding-cap-divider {
-    width: 2px;
-    height: 60px;
-    background: linear-gradient(to bottom, 
-        transparent 0%, 
-        rgba(215, 51, 39, 0.5) 50%, 
-        transparent 100%);
-    flex-shrink: 0;
-}
-
 .presale-cta {
     text-align: center;
 }
@@ -1257,36 +1184,6 @@ body {
         font-size: 0.7rem;
     }
     
-    /* Funding Caps Card - Mobile */
-    .funding-caps-card {
-        flex-direction: column;
-        gap: 1.25rem;
-        padding: 1.25rem;
-    }
-    
-    .funding-cap-item {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .funding-cap-divider {
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(to right, 
-            transparent 0%, 
-            rgba(215, 51, 39, 0.5) 50%, 
-            transparent 100%);
-    }
-    
-    .cap-amount {
-        font-size: 1.6rem;
-    }
-    
-    .cap-icon img {
-        width: 44px;
-        height: 44px;
-    }
-    
     .ember-highlights {
         grid-template-columns: 1fr;
         gap: 0.75rem;
@@ -1354,20 +1251,6 @@ body {
     
     .ember-highlight-link .highlight-text {
         font-size: 0.85rem;
-    }
-    
-    /* Funding Caps Card - Small Mobile */
-    .cap-amount {
-        font-size: 1.4rem;
-    }
-    
-    .cap-label {
-        font-size: 0.8rem;
-    }
-    
-    .cap-icon img {
-        width: 40px;
-        height: 40px;
     }
 }
 
