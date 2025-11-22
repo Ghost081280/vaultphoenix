@@ -5207,3 +5207,13 @@ body.main-page .main-social-sharing-icon-compact {
         height: 75px !important;
     }
 }
+/* ============================================
+   FIX: Button Icon Glow - No Flash
+   Apply glow via CSS instead of JavaScript
+   ============================================ */
+.ember-highlight-link .main-image-glow,
+.join-presale-button .main-image-glow {
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.5))
+            drop-shadow(0 0 35px rgba(215, 51, 39, 0.3));
+    animation: consistentGlow 3s ease-in-out infinite;
+}
