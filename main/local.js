@@ -1,7 +1,7 @@
 // ============================================
 // VAULT PHOENIX - MAIN.HTML LOCAL JAVASCRIPT
-// v3.4 - FORCE FIX FOR EMBER BUTTONS
-// - Force fix for Enterprise Token Infrastructure buttons
+// v3.5 - ALL 5 EMBER BUTTONS FIXED
+// - Force fix for all Enterprise Token Infrastructure buttons
 // - Removed airdrop system
 // - Clean & optimized
 // ============================================
@@ -676,7 +676,7 @@ function waitForGlobal(callback) {
 // MASTER INITIALIZATION
 // ============================================
 async function initializeMainPage() {
-    console.log('🔥 VAULT PHOENIX v3.4 - FORCE FIX INSTALLED');
+    console.log('🔥 VAULT PHOENIX v3.5 - ALL 5 BUTTONS FIXED');
     console.log('━'.repeat(60));
     
     DeviceOptimizer.init();
@@ -732,7 +732,7 @@ if (document.readyState === 'loading') {
 // EXPORT FOR DEBUGGING
 // ============================================
 window.VaultPhoenix = VaultPhoenix;
-window.VaultPhoenix.version = '3.4.0-force-fix';
+window.VaultPhoenix.version = '3.5.0-all-buttons-fixed';
 window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
@@ -741,32 +741,42 @@ window.VaultPhoenix.systems = {
     CountdownTimer
 };
 
-console.log('✓ Main.js v3.4 LOADED - preparing force fix...');
+console.log('✓ Main.js v3.5 LOADED - preparing force fix for all buttons...');
 
 })();
 
 // ============================================
-// FORCE FIX: Enterprise Token Infrastructure Buttons
-// Override ANY interference - runs OUTSIDE the IIFE
+// FORCE FIX: ALL Enterprise Token Infrastructure Buttons
+// Handles all 5 buttons - runs OUTSIDE the IIFE
 // ============================================
-function forceEmberLinksToWork() {
-    console.log('🔧 Forcing ember links to work...');
+function forceAllEmberButtonsToWork() {
+    console.log('🔧 Forcing ALL ember buttons to work...');
     
-    // Find all ember highlight links
-    const emberLinks = document.querySelectorAll('.ember-highlight-link');
+    // Find ALL buttons in the Enterprise Token Infrastructure section
+    const allButtons = document.querySelectorAll(
+        '.ember-highlight-link, ' +
+        '.join-presale-button, ' +
+        '.join-presale-button-redesigned, ' +
+        '.compliance-button, ' +
+        'a[href*="ember.html#presale"], ' +
+        'a[href*="ember.html#whitepaper"], ' +
+        'a[href*="ember.html#roadmap"], ' +
+        'a[href*="ember.html#team"], ' +
+        'a[href*="ember.html#legal"]'
+    );
     
-    console.log(`Found ${emberLinks.length} ember highlight links`);
+    console.log(`Found ${allButtons.length} total ember buttons`);
     
-    emberLinks.forEach((link, index) => {
-        const href = link.getAttribute('href');
-        console.log(`Link ${index + 1}: ${href}`);
+    allButtons.forEach((button, index) => {
+        const href = button.getAttribute('href');
+        console.log(`Button ${index + 1}: ${href}`);
         
         // Remove ALL existing event listeners by cloning
-        const newLink = link.cloneNode(true);
-        link.parentNode.replaceChild(newLink, link);
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
         
         // Add DIRECT navigation - HIGHEST priority
-        newLink.addEventListener('click', function(e) {
+        newButton.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -779,7 +789,7 @@ function forceEmberLinksToWork() {
         }, true); // Capture phase - FIRST to handle event
         
         // Also handle touch events for mobile
-        newLink.addEventListener('touchend', function(e) {
+        newButton.addEventListener('touchend', function(e) {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -792,10 +802,10 @@ function forceEmberLinksToWork() {
     });
 }
 
-// Run after everything loads - multiple times to ensure it catches the links
-setTimeout(forceEmberLinksToWork, 500);
-setTimeout(forceEmberLinksToWork, 1000);
-setTimeout(forceEmberLinksToWork, 2000);
-setTimeout(forceEmberLinksToWork, 3000);
+// Run after everything loads - multiple times to ensure it catches ALL buttons
+setTimeout(forceAllEmberButtonsToWork, 500);
+setTimeout(forceAllEmberButtonsToWork, 1000);
+setTimeout(forceAllEmberButtonsToWork, 2000);
+setTimeout(forceAllEmberButtonsToWork, 3000);
 
-console.log('✓ Ember link force fix installed - buttons should work now!');
+console.log('✓ ALL ember button force fix installed - all 5 buttons should work now! 🔥');
