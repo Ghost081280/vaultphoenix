@@ -1718,7 +1718,7 @@
                         </svg>
                     </div>
                     <h3>Tell Us About Your Project</h3>
-                    <form action="https://formspree.io/f/xblbzaqr" method="POST" class="modern-contact-form">
+                    <form action="https://formspree.io/f/xblbzaqr" method="POST" enctype="multipart/form-data" class="modern-contact-form" id="vaultContactForm">
                         <div class="form-row">
                             <div class="form-group">
                                 <input type="text" name="name" placeholder="Your Name*" required>
@@ -1740,6 +1740,20 @@
                         
                         <div class="form-group">
                             <textarea name="message" placeholder="Tell us about your vision..." rows="4"></textarea>
+                        </div>
+                        
+                        <!-- File Upload -->
+                        <div class="form-group file-upload-group">
+                            <label for="fileUpload" class="file-upload-label">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                                <span class="file-upload-text">Attach files (pitch deck, flyer, etc.)</span>
+                                <span class="file-name"></span>
+                            </label>
+                            <input type="file" name="upload" id="fileUpload" accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png" multiple>
                         </div>
                         
                         <button type="submit" class="modern-submit-button">
@@ -1766,6 +1780,24 @@
 
 <!-- SHARED COMPONENTS CONTAINER -->
 <div id="shared-components-container"></div>
+
+<!-- Success Popup -->
+<div id="formSuccessPopup" class="form-success-popup">
+    <div class="form-success-content">
+        <div class="success-icon-wrapper">
+            <div class="main-image-glow">
+                <img src="images/VPLogoNoText.PNG" alt="Success" class="success-logo">
+            </div>
+            <svg class="success-checkmark" viewBox="0 0 52 52">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+        </div>
+        <h3>Message Sent! 🎉</h3>
+        <p>Thanks for reaching out! We'll get back to you within 24 hours.</p>
+        <button class="success-close-button" onclick="closeSuccessPopup()">Got it!</button>
+    </div>
+</div>
 
 <!-- SCRIPTS -->
 <script src="shared/global.js"></script>
