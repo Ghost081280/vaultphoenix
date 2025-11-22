@@ -372,10 +372,10 @@ const SmoothScroll = {
             const href = link.getAttribute('href');
             if (!href) return;
             
-            // CRITICAL: Let ember.html links work - check BEFORE doing anything
+            // CRITICAL: Check for .html files FIRST - let them work naturally
             if (href.includes('.html')) {
                 console.log('✓ Allowing .html navigation:', href);
-                return; // Let browser handle it naturally
+                return; // Don't preventDefault, let browser handle
             }
             
             // Let external links work
@@ -410,7 +410,7 @@ const SmoothScroll = {
                     }
                 }
             }
-        }, true); // <-- ADDED TRUE HERE - this is capture phase!
+        }, false); // <-- CHANGED FROM TRUE TO FALSE - use bubble phase instead
         
         mark('Smooth Scroll Initialized');
     }
