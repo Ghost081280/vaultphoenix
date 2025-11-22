@@ -179,7 +179,7 @@ const GlowSystem = {
             }
         });
     });
-}
+},
 
 // ============================================
 // CRITICAL RESOURCE PRELOADING
