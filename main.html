@@ -1686,7 +1686,7 @@
             </div>
             
             <div class="contact-cards">
-               <!-- Quick Email Card -->
+                <!-- Quick Email Card -->
                 <div class="contact-card contact-card-email scroll-reveal stagger-1">
                     <div class="contact-card-icon">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1719,6 +1719,12 @@
                     </div>
                     <h3>Tell Us About Your Project</h3>
                     <form action="https://formspree.io/f/xblbzaqr" method="POST" class="modern-contact-form" id="vaultContactForm">
+                        <!-- Honeypot spam protection -->
+                        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                        
+                        <!-- Auto-reply confirmation -->
+                        <input type="hidden" name="_autoresponse" value="Thanks for contacting Vault Phoenix! We've received your message and will respond within 24 hours. - The Vault Phoenix Team">
+                        
                         <div class="form-row">
                             <div class="form-group">
                                 <input type="text" name="name" placeholder="Your Name*" required>
@@ -1767,8 +1773,8 @@
 <!-- SHARED COMPONENTS CONTAINER -->
 <div id="shared-components-container"></div>
 
-<!-- Success Popup -->
-<div id="formSuccessPopup" class="form-success-popup">
+<!-- Success Popup - HIDDEN BY DEFAULT -->
+<div id="formSuccessPopup" class="form-success-popup" style="display: none;">
     <div class="form-success-content">
         <div class="success-icon-wrapper">
             <div class="main-image-glow">
