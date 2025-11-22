@@ -1,48 +1,13 @@
 // ============================================
 // VAULT PHOENIX - MAIN.HTML LOCAL JAVASCRIPT
-// v4.2 - ALL 5 BUTTONS FIXED (CORRECT ICONS + UNIFIED TOUCH)
-// - Correct icon preloading (no flash)
-// - Unified touch detection (all buttons work with one tap)
+// v4.3 - BUTTON FLASH FIX (CSS GLOW)
+// - Button icons use CSS glow (no flash)
+// - All 5 buttons work with one tap
 // - Clean & optimized
 // ============================================
 
 (function() {
 'use strict';
-
-// ============================================
-// PRELOAD BUTTON ICONS - NO FLASH (CORRECT PATHS)
-// ============================================
-function preloadButtonIcons() {
-    const buttonIcons = [
-        'images/PhoenixWhitepaper.PNG',
-        'images/EmberRoadmap.PNG',
-        'images/PhoenixGoldTrophy.PNG',
-        'images/VPEmberFlame.svg'
-        // Note: Button 5 (Compliance) has no icon
-    ];
-    
-    // Preload using link tags for instant availability
-    buttonIcons.forEach(src => {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'image';
-        link.href = src;
-        document.head.appendChild(link);
-    });
-    
-    // Also preload using Image objects as backup (except SVG)
-    buttonIcons.forEach(src => {
-        if (!src.endsWith('.svg')) {
-            const img = new Image();
-            img.src = src;
-        }
-    });
-    
-    console.log('✓ Button icons preloaded (correct paths) - no flash');
-}
-
-// Run immediately before anything else
-preloadButtonIcons();
 
 // ============================================
 // PERFORMANCE & STATE MANAGEMENT
@@ -156,30 +121,52 @@ const GlowSystem = {
     },
     
     applyEmberGlow(mult) {
-    const emberImages = [
-        'img[src*="Ember"]',
-        'img[alt*="Ember"]',
-        '.nav-ember-coin',
-        '.ember-countdown-icon'
-    ];
-    
-    emberImages.forEach(selector => {
-        document.querySelectorAll(selector).forEach(img => {
-            const wrapper = img.closest('.main-image-glow');
-            
-            // CRITICAL: Skip button icons - they're handled by CSS
-            const isButtonIcon = img.closest('.ember-highlight-link, .join-presale-button');
-            
-            if (wrapper && !isButtonIcon) {
-                wrapper.style.filter = `
-                    drop-shadow(0 0 ${20 * mult}px rgba(240, 165, 0, ${0.5 * mult}))
-                    drop-shadow(0 0 ${35 * mult}px rgba(215, 51, 39, ${0.3 * mult}))
-                `;
-                wrapper.style.animation = 'consistentGlow 3s ease-in-out infinite';
-            }
+        const emberImages = [
+            'img[src*="Ember"]',
+            'img[alt*="Ember"]',
+            '.nav-ember-coin',
+            '.ember-countdown-icon'
+        ];
+        
+        emberImages.forEach(selector => {
+            document.querySelectorAll(selector).forEach(img => {
+                const wrapper = img.closest('.main-image-glow');
+                
+                // CRITICAL: Skip button icons - they're handled by CSS
+                const isButtonIcon = img.closest('.ember-highlight-link, .join-presale-button');
+                
+                if (wrapper && !isButtonIcon) {
+                    wrapper.style.filter = `
+                        drop-shadow(0 0 ${20 * mult}px rgba(240, 165, 0, ${0.5 * mult}))
+                        drop-shadow(0 0 ${35 * mult}px rgba(215, 51, 39, ${0.3 * mult}))
+                    `;
+                    wrapper.style.animation = 'consistentGlow 3s ease-in-out infinite';
+                }
+            });
         });
-    });
-},
+    },
+    
+    applyIconGlow(mult) {
+        const iconImages = [
+            '.feature-icon img',
+            '.use-case-icon-image-large',
+            '.technology-icon',
+            '.benefit-header-icon-large'
+        ];
+        
+        iconImages.forEach(selector => {
+            document.querySelectorAll(selector).forEach(img => {
+                const wrapper = img.closest('.main-image-glow');
+                if (wrapper) {
+                    wrapper.style.filter = `
+                        drop-shadow(0 0 ${15 * mult}px rgba(240, 165, 0, ${0.4 * mult}))
+                        drop-shadow(0 0 ${25 * mult}px rgba(215, 51, 39, ${0.2 * mult}))
+                    `;
+                }
+            });
+        });
+    }
+};
 
 // ============================================
 // CRITICAL RESOURCE PRELOADING
@@ -189,7 +176,12 @@ async function preloadCriticalAssets() {
         'images/VPLogoNoText.PNG',
         'images/PhoenixDesign.PNG',
         'images/VPEmberCoin.PNG',
-        'images/PhoenixHoldingCoin.PNG'
+        'images/PhoenixHoldingCoin.PNG',
+        // Preload button icons too
+        'images/PhoenixWhitepaper.PNG',
+        'images/EmberRoadmap.PNG',
+        'images/PhoenixGoldTrophy.PNG',
+        'images/VPEmberFlame.svg'
     ];
     
     const promises = criticalImages.map(src => {
@@ -725,7 +717,7 @@ function waitForGlobal(callback) {
 // MASTER INITIALIZATION
 // ============================================
 async function initializeMainPage() {
-    console.log('🔥 VAULT PHOENIX v4.2 - ALL 5 BUTTONS PERFECT');
+    console.log('🔥 VAULT PHOENIX v4.3 - BUTTON FLASH FIXED');
     console.log('━'.repeat(60));
     
     DeviceOptimizer.init();
@@ -740,7 +732,7 @@ async function initializeMainPage() {
         GlowSystem.apply();
         ScrollReveal.init();
         ImageLoader.init();
-        SmartButtonTouch.init(); // Initialize unified smart touch
+        SmartButtonTouch.init();
     });
     
     requestAnimationFrame(() => {
@@ -781,7 +773,7 @@ if (document.readyState === 'loading') {
 // EXPORT FOR DEBUGGING
 // ============================================
 window.VaultPhoenix = VaultPhoenix;
-window.VaultPhoenix.version = '4.2.0-all-5-buttons-perfect';
+window.VaultPhoenix.version = '4.3.0-button-flash-fixed';
 window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
@@ -790,6 +782,6 @@ window.VaultPhoenix.systems = {
     SmartButtonTouch
 };
 
-console.log('✓ Main.js v4.2 - Correct icons preloaded + unified touch (all 5 buttons one-tap)! 🔥');
+console.log('✓ Main.js v4.3 - Button flash fixed via CSS + smart touch! 🔥');
 
 })();
