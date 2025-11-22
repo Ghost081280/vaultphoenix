@@ -740,3 +740,54 @@ window.VaultPhoenix.systems = {
 console.log('✓ Main.js v5.0 PRODUCTION READY - Countdown handled by global.js');
 
 })();
+
+// ============================================
+// ACCESSIBILITY ENHANCEMENTS
+// ============================================
+function enhanceAccessibility() {
+    // Ensure all images have alt text
+    document.querySelectorAll('img:not([alt])').forEach(img => {
+        const src = img.src.split('/').pop().split('.')[0];
+        img.alt = src.replace(/[-_]/g, ' ');
+        console.warn(`⚠️ Missing alt text added for: ${src}`);
+    });
+    
+    // Add skip to main content link
+    if (!document.querySelector('.skip-to-main')) {
+        const skipLink = document.createElement('a');
+        skipLink.href = '#main-content';
+        skipLink.className = 'skip-to-main';
+        skipLink.textContent = 'Skip to main content';
+        skipLink.style.cssText = `
+            position: absolute;
+            left: -9999px;
+            z-index: 999;
+            padding: 1em;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+        `;
+        skipLink.addEventListener('focus', function() {
+            this.style.left = '0';
+        });
+        skipLink.addEventListener('blur', function() {
+            this.style.left = '-9999px';
+        });
+        document.body.insertBefore(skipLink, document.body.firstChild);
+    }
+    
+    // Ensure buttons have proper ARIA labels
+    document.querySelectorAll('button:not([aria-label]), a.button:not([aria-label])').forEach(btn => {
+        if (!btn.textContent.trim()) {
+            btn.setAttribute('aria-label', 'Button');
+            console.warn('⚠️ Button missing aria-label:', btn);
+        }
+    });
+    
+    console.log('✓ Accessibility enhancements applied');
+}
+
+// Run after page loads
+window.addEventListener('load', () => {
+    setTimeout(enhanceAccessibility, 1000);
+});
