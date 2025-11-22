@@ -361,7 +361,7 @@ const ImageLoader = {
 };
 
 // ============================================
-// SMOOTH SCROLL - CLEAN FIX FOR EMBER LINKS
+// SMOOTH SCROLL - CORRECT FIX FOR EMBER LINKS
 // ============================================
 const SmoothScroll = {
     init() {
@@ -372,9 +372,9 @@ const SmoothScroll = {
             const href = link.getAttribute('href');
             if (!href) return;
             
-            // Let ALL external links and .html files work normally
+            // Let ALL external links and files with .html work normally
             if (href.startsWith('http') || 
-                href.endsWith('.html') ||
+                href.includes('.html') ||  // Changed from .endsWith to .includes
                 href.includes('mailto:')) {
                 return; // Browser handles it
             }
