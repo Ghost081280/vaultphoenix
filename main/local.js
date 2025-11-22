@@ -3,6 +3,7 @@
 // ULTRA POLISH v3.0 - AGENCY DELIVERY COMPLETE
 // ALL ORIGINAL FEATURES PRESERVED + ENHANCEMENTS
 // 60FPS | NO FLASH | BUTTER SMOOTH | PERFECT GLOWS
+// FUTURE-PROOF FOR CLEAN URLS (NO .HTML EXTENSION)
 // ============================================
 
 (function() {
@@ -382,7 +383,7 @@ const ImageLoader = {
 };
 
 // ============================================
-// SMOOTH SCROLL WITH EMBER FIX
+// SMOOTH SCROLL WITH EMBER FIX - FUTURE PROOF
 // ============================================
 const SmoothScroll = {
     init() {
@@ -401,10 +402,15 @@ const SmoothScroll = {
             }
             
             // ✅ EXPLICITLY ALLOW these to pass through naturally
+            // Handles both ember.html AND ember (no extension)
             if (href.startsWith('http') || 
                 href.endsWith('.html') || 
                 href.includes('ember.html') ||
+                href.includes('ember#') ||  // NEW: ember without .html
+                /\/ember[#?]/.test(href) ||  // NEW: /ember# or /ember?
                 href.includes('onboarding.html') ||
+                href.includes('onboarding#') ||  // NEW: onboarding without .html
+                /\/onboarding[#?]/.test(href) ||  // NEW: /onboarding# or /onboarding?
                 href.startsWith('mailto:') ||
                 href.startsWith('tel:')) {
                 // Let browser handle it - don't prevent default
@@ -600,14 +606,14 @@ function preloadGalleryImages() {
 }
 
 // ============================================
-// ENTERPRISE TOKEN LINKS FIX
-// Ensures ALL 5 ember.html links work properly
+// ENTERPRISE TOKEN LINKS FIX - FUTURE PROOF
+// Works with BOTH ember.html AND ember (no extension)
 // ============================================
 const EnterpriseTokenLinks = {
     init() {
         // Wait a bit for global.js to finish its setup
         setTimeout(() => {
-            // Target ALL ember.html links in the token section
+            // Target ALL ember links in the token section
             const emberLinks = document.querySelectorAll(
                 '.ember-highlight-link, ' +
                 '.join-presale-button, ' +
@@ -617,9 +623,17 @@ const EnterpriseTokenLinks = {
             console.log(`🔧 Fixing ${emberLinks.length} enterprise token links`);
             
             emberLinks.forEach((link, index) => {
-                // Skip if not an ember.html link
                 const href = link.getAttribute('href');
-                if (!href || !href.includes('ember.html')) {
+                
+                // Check if this is an ember page link (with or without .html)
+                const isEmberLink = href && (
+                    href.includes('ember.html') || 
+                    href.includes('ember#') || 
+                    /\/ember[#?]/.test(href) ||
+                    href === 'ember'
+                );
+                
+                if (!isEmberLink) {
                     return;
                 }
                 
@@ -646,7 +660,7 @@ const EnterpriseTokenLinks = {
             });
             
             mark('Enterprise Token Links Fixed');
-        }, 500); // Wait 500ms for global.js to settle
+        }, 500);
     }
 };
 
@@ -738,7 +752,7 @@ async function initializeMainPage() {
     
     // Phase 4: Interactive (300-600ms) - Gallery features + Enterprise links fix
     requestAnimationFrame(() => {
-        EnterpriseTokenLinks.init(); // FIX ALL 5 EMBER LINKS
+        EnterpriseTokenLinks.init(); // FIX ALL 5 EMBER LINKS (FUTURE-PROOF)
         preloadGalleryImages();
         monitorPerformance();
     });
@@ -779,7 +793,7 @@ if (document.readyState === 'loading') {
 // EXPORT FOR DEBUGGING & BACKEND INTEGRATION
 // ============================================
 window.VaultPhoenix = VaultPhoenix;
-window.VaultPhoenix.version = '3.0.0-complete';
+window.VaultPhoenix.version = '3.0.0-future-proof';
 window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
@@ -788,6 +802,6 @@ window.VaultPhoenix.systems = {
     EnterpriseTokenLinks
 };
 
-console.log('✓ Main.js v3.0 COMPLETE loaded - waiting for DOM...');
+console.log('✓ Main.js v3.0 FUTURE-PROOF loaded - waiting for DOM...');
 
 })();
