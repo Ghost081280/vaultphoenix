@@ -1,7 +1,7 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.3 PRIVACY PDF FIX
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.4 ROOT CAUSE FIX
 // ============================================
-// UPDATES: Privacy modal button links to correct PDF path
+// UPDATES: Fixed smooth scroll to allow ember.html# links to work
 // ============================================
 
 (function() {
@@ -172,9 +172,7 @@ async function askPhoenixAI(question) {
   updateChatbotStatus();
   
   if (!localAvailable && !onlineAvailable) {
-  //  return "Both our online and local AI services are temporarily offline. Please try again later or reach us at contact@vaultphoenix.com for assistance.";
-   return "Coming Soon.";
-  
+    return "Coming Soon.";
   }
   
   return "Sorry, I'm having trouble processing that request right now. Please try again.";
@@ -520,18 +518,34 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ============================================
-// SMOOTH SCROLLING
+// SMOOTH SCROLLING - ROOT CAUSE FIX
 // ============================================
 function handleSmoothScroll(e) {
     const href = this.getAttribute('href');
     
-    if (!href || href === '#' || href.startsWith('http') || !href.includes('#')) {
+    // CRITICAL: Let .html files work - don't preventDefault
+    if (!href || href.includes('.html')) {
+        return; // Let browser handle naturally
+    }
+    
+    // Let external links work
+    if (href.startsWith('http') || href.includes('mailto:')) {
         return;
     }
     
-    e.preventDefault();
+    // Only handle same-page anchors (starting with #)
+    if (!href.startsWith('#')) {
+        return;
+    }
     
-    const targetId = href.includes('#') ? href.split('#')[1] : href;
+    e.preventDefault(); // Only preventDefault for same-page anchors
+    
+    if (href === '#') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+    
+    const targetId = href.substring(1);
     const targetElement = document.getElementById(targetId);
     
     if (targetElement) {
@@ -790,9 +804,6 @@ function showChatbotButton() {
     }
 }
 
-// ============================================
-// PRIVACY POLICY MODAL (WITH CORRECT PDF LINK)
-// ============================================
 // ============================================
 // PRIVACY POLICY MODAL (WITH HELPER TO RE-ATTACH LISTENERS)
 // ============================================
@@ -1162,8 +1173,7 @@ function addWelcomeMessage() {
     
     let statusMessage = '';
     if (!serviceStatus.online && !serviceStatus.local) {
-    //    statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both our online and local AI services are temporarily offline. Please try again later or reach us at contact@vaultphoenix.com for assistance.</em>';
-   statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Coming soon.</em>';
+        statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Coming soon.</em>';
     } else if (!serviceStatus.online && serviceStatus.local) {
         statusMessage = '<br><br><em style="color: #f59e0b;">ℹ️ Running on local AI. Cloud service temporarily offline.</em>';
     } else if (serviceStatus.online && !serviceStatus.local) {
@@ -1172,8 +1182,7 @@ function addWelcomeMessage() {
         statusMessage = '<br><br><em style="color: #10b981;">✓ Both AI services online and ready!</em>';
     }
     
- //   let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>Ask me anything about our platform, $Ember tokens, campaigns, or SDK integration!';
-      let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>Our AI assistant is getting its training will be live soon. ';
+    let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>Our AI assistant is getting its training will be live soon. ';
     
     welcomeContent += statusMessage;
     
@@ -1467,7 +1476,7 @@ window.addEventListener('resize', function() {
 // INITIALIZATION SEQUENCE
 // ============================================
 async function init() {
-    console.log('🔥 Vault Phoenix v8.3 PRIVACY PDF FIX Initializing...');
+    console.log('🔥 Vault Phoenix v8.4 ROOT CAUSE FIX Initializing...');
     
     // CRITICAL: Load shared components FIRST
     const componentsLoaded = await loadSharedComponents();
@@ -1529,7 +1538,7 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v8.3 PRIVACY PDF FIX Complete');
+    console.log('✅ Vault Phoenix v8.4 ROOT CAUSE FIX Complete');
     console.log('✅ Footer and Chatbot loaded from shared/global.html');
     console.log(`✅ Current page: ${getCurrentPage()}`);
     console.log(`✅ Quick links: ${getNavigationLinks().map(l => l.title).join(', ')}`);
