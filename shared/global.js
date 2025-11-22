@@ -172,7 +172,9 @@ async function askPhoenixAI(question) {
   updateChatbotStatus();
   
   if (!localAvailable && !onlineAvailable) {
-    return "Both our online and local AI services are temporarily offline. Please try again later or reach us at contact@vaultphoenix.com for assistance.";
+  //  return "Both our online and local AI services are temporarily offline. Please try again later or reach us at contact@vaultphoenix.com for assistance.";
+   return "Coming Soon.";
+  
   }
   
   return "Sorry, I'm having trouble processing that request right now. Please try again.";
@@ -653,7 +655,7 @@ function initializeScrollProgress() {
 // UNIVERSAL COUNTDOWN TIMER
 // ============================================
 function initializeUniversalCountdown() {
-    const targetDate = new Date('November 1, 2025 00:00:00 UTC');
+    const targetDate = new Date('December 1, 2025 00:00:00 UTC');
     
     const countdownElements = {
         mainDays: document.getElementById('main-days'),
@@ -1160,7 +1162,8 @@ function addWelcomeMessage() {
     
     let statusMessage = '';
     if (!serviceStatus.online && !serviceStatus.local) {
-        statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both our online and local AI services are temporarily offline. Please try again later or reach us at contact@vaultphoenix.com for assistance.</em>';
+    //    statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Both our online and local AI services are temporarily offline. Please try again later or reach us at contact@vaultphoenix.com for assistance.</em>';
+   statusMessage = '<br><br><em style="color: #ef4444;">⚠️ Coming soon.</em>';
     } else if (!serviceStatus.online && serviceStatus.local) {
         statusMessage = '<br><br><em style="color: #f59e0b;">ℹ️ Running on local AI. Cloud service temporarily offline.</em>';
     } else if (serviceStatus.online && !serviceStatus.local) {
@@ -1169,7 +1172,8 @@ function addWelcomeMessage() {
         statusMessage = '<br><br><em style="color: #10b981;">✓ Both AI services online and ready!</em>';
     }
     
-    let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>Ask me anything about our platform, $Ember tokens, campaigns, or SDK integration!';
+ //   let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>Ask me anything about our platform, $Ember tokens, campaigns, or SDK integration!';
+      let welcomeContent = '<strong>Welcome to Vault Phoenix!</strong><br><br>Our AI assistant is getting its training will be live soon. ';
     
     welcomeContent += statusMessage;
     
