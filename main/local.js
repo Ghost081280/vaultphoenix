@@ -1,8 +1,9 @@
 // ============================================
 // VAULT PHOENIX - MAIN.HTML LOCAL JAVASCRIPT
-// ULTRA POLISH v3.1 - CLEAN VERSION
-// Removed: Countdown Timer, Airdrop System
-// Fixed: Ember.html navigation links
+// ULTRA POLISH v3.1 - CORRECTED VERSION
+// Kept: Countdown Timer
+// Removed: Airdrop System (old unused code)
+// Fixed: Ember.html navigation
 // ============================================
 
 (function() {
@@ -360,7 +361,7 @@ const ImageLoader = {
 };
 
 // ============================================
-// SMOOTH SCROLL - FIXED FOR EMBER.HTML
+// SMOOTH SCROLL - DOES NOT INTERFERE WITH EMBER LINKS
 // ============================================
 const SmoothScroll = {
     init() {
@@ -371,12 +372,17 @@ const SmoothScroll = {
             const href = link.getAttribute('href');
             if (!href) return;
             
-            // Allow ember.html and external links to work normally
+            // Skip if it has ember-nav-link class (let browser handle)
+            if (link.classList.contains('ember-nav-link')) {
+                console.log('✓ Ember link - allowing default navigation');
+                return;
+            }
+            
+            // Allow external links and HTML files to work normally
             if (href.startsWith('http') || 
-                href.includes('ember.html') ||
-                href.includes('onboarding.html') ||
-                href.endsWith('.html')) {
-                return; // Let browser handle it naturally
+                href.endsWith('.html') ||
+                href.includes('mailto:')) {
+                return;
             }
             
             // Handle same-page anchors only
@@ -560,6 +566,55 @@ function preloadGalleryImages() {
 }
 
 // ============================================
+// COUNTDOWN TIMER - KEPT AS REQUESTED
+// ============================================
+const CountdownTimer = {
+    targetDate: new Date('December 1, 2025 00:00:00 UTC').getTime(),
+    interval: null,
+    
+    init() {
+        const elements = {
+            days: document.getElementById('main-days'),
+            hours: document.getElementById('main-hours'),
+            minutes: document.getElementById('main-minutes'),
+            seconds: document.getElementById('main-seconds')
+        };
+        
+        if (!elements.days) return;
+        
+        this.update(elements);
+        this.interval = setInterval(() => this.update(elements), 1000);
+        
+        window.addEventListener('beforeunload', () => {
+            if (this.interval) clearInterval(this.interval);
+        });
+        
+        mark('Countdown Timer Started');
+    },
+    
+    update(elements) {
+        const now = new Date().getTime();
+        const distance = this.targetDate - now;
+        
+        if (distance < 0) {
+            Object.values(elements).forEach(el => el.textContent = '00');
+            if (this.interval) clearInterval(this.interval);
+            return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        elements.days.textContent = String(days).padStart(2, '0');
+        elements.hours.textContent = String(hours).padStart(2, '0');
+        elements.minutes.textContent = String(minutes).padStart(2, '0');
+        elements.seconds.textContent = String(seconds).padStart(2, '0');
+    }
+};
+
+// ============================================
 // PERFORMANCE MONITORING
 // ============================================
 function monitorPerformance() {
@@ -624,7 +679,7 @@ function waitForGlobal(callback) {
 // MASTER INITIALIZATION
 // ============================================
 async function initializeMainPage() {
-    console.log('🔥 VAULT PHOENIX v3.1 - CLEAN & OPTIMIZED');
+    console.log('🔥 VAULT PHOENIX v3.1 - CORRECTED VERSION');
     console.log('━'.repeat(60));
     
     DeviceOptimizer.init();
@@ -643,6 +698,7 @@ async function initializeMainPage() {
     });
     
     requestAnimationFrame(() => {
+        CountdownTimer.init();
         preloadGalleryImages();
         monitorPerformance();
     });
@@ -679,14 +735,15 @@ if (document.readyState === 'loading') {
 // EXPORT FOR DEBUGGING
 // ============================================
 window.VaultPhoenix = VaultPhoenix;
-window.VaultPhoenix.version = '3.1.0-clean';
+window.VaultPhoenix.version = '3.1.0-corrected';
 window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
     ImageLoader,
-    SmoothScroll
+    SmoothScroll,
+    CountdownTimer
 };
 
-console.log('✓ Main.js v3.1 CLEAN loaded - countdown & airdrop removed');
+console.log('✓ Main.js v3.1 CORRECTED - Countdown kept, links fixed');
 
 })();
