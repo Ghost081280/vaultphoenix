@@ -796,21 +796,6 @@ window.addEventListener('load', () => {
 // ============================================
 function initContactForm() {
     const form = document.getElementById('vaultContactForm');
-    const fileInput = document.getElementById('fileUpload');
-    const fileLabel = fileInput?.parentElement.querySelector('.file-upload-label');
-    const fileNameSpan = fileLabel?.querySelector('.file-name');
-    
-    // File upload display
-    if (fileInput && fileNameSpan) {
-        fileInput.addEventListener('change', function() {
-            if (this.files.length > 0) {
-                const fileNames = Array.from(this.files).map(f => f.name).join(', ');
-                fileNameSpan.textContent = fileNames;
-            } else {
-                fileNameSpan.textContent = '';
-            }
-        });
-    }
     
     // Form submission
     if (form) {
@@ -838,7 +823,6 @@ function initContactForm() {
                     // Show success popup
                     showSuccessPopup();
                     form.reset();
-                    if (fileNameSpan) fileNameSpan.textContent = '';
                 } else {
                     throw new Error('Form submission failed');
                 }
