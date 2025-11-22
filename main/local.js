@@ -1,9 +1,9 @@
 // ============================================
 // VAULT PHOENIX - MAIN.HTML LOCAL JAVASCRIPT
-// v4.4 - BACK NAVIGATION FIX (NO BLINK ON RETURN)
-// - Prevents glow re-application on back button
-// - All 5 buttons work with one tap
-// - Clean & optimized
+// v5.0 - PRODUCTION READY
+// - Countdown handled by global.js (removed duplicate)
+// - All optimizations in place
+// - Professional & maintainable
 // ============================================
 
 (function() {
@@ -200,7 +200,7 @@ async function preloadCriticalAssets() {
         'images/PhoenixDesign.PNG',
         'images/VPEmberCoin.PNG',
         'images/PhoenixHoldingCoin.PNG',
-        // Preload button icons too
+        // Button icons
         'images/PhoenixWhitepaper.PNG',
         'images/EmberRoadmap.PNG',
         'images/PhoenixGoldTrophy.PNG',
@@ -400,86 +400,63 @@ const SmartButtonTouch = {
     touchStartTime: 0,
     
     init() {
-        // Wait for buttons to load
-        setTimeout(() => {
-            this.attachToButtons();
-        }, 500);
-        
-        // Also attach after a longer delay to catch lazy-loaded buttons
-        setTimeout(() => {
-            this.attachToButtons();
-        }, 2000);
-        
+        setTimeout(() => this.attachToButtons(), 500);
+        setTimeout(() => this.attachToButtons(), 2000);
         mark('Smart Button Touch Initialized');
     },
     
     attachToButtons() {
-        // CRITICAL: Find ALL 5 buttons with ALL possible selectors
         const emberButtons = document.querySelectorAll(
-            '.ember-highlight-link, ' +           // Buttons 1, 2, 3
-            '.join-presale-button, ' +            // Button 4
-            '.join-presale-button-redesigned, ' + // Button 4 alternate
-            '.compliance-button, ' +              // Button 5
-            'a[href*="ember.html#presale"], ' +   // Button 4 by href
-            'a[href*="ember.html#legal"], ' +     // Button 5 by href
-            'a[href*="ember.html#whitepaper"], ' +// Button 1 by href
-            'a[href*="ember.html#roadmap"], ' +   // Button 2 by href
-            'a[href*="ember.html#team"]'          // Button 3 by href
+            '.ember-highlight-link, ' +
+            '.join-presale-button, ' +
+            '.join-presale-button-redesigned, ' +
+            '.compliance-button, ' +
+            'a[href*="ember.html#presale"], ' +
+            'a[href*="ember.html#legal"], ' +
+            'a[href*="ember.html#whitepaper"], ' +
+            'a[href*="ember.html#roadmap"], ' +
+            'a[href*="ember.html#team"]'
         );
         
-        console.log(`📱 Attaching unified smart touch to ${emberButtons.length} buttons`);
+        console.log(`📱 Attaching smart touch to ${emberButtons.length} buttons`);
         
         emberButtons.forEach((button, index) => {
             const href = button.getAttribute('href');
             console.log(`   Button ${index + 1}: ${href}`);
             
-            // Skip if already attached
             if (button.hasAttribute('data-touch-attached')) return;
             
-            // Remove existing listeners by cloning
             const newButton = button.cloneNode(true);
             button.parentNode.replaceChild(newButton, button);
             
-            // Track touch start
             newButton.addEventListener('touchstart', (e) => {
                 this.touchStartY = e.touches[0].clientY;
                 this.touchStartTime = Date.now();
             }, { passive: true });
             
-            // UNIFIED smart touch end - same logic for all buttons
             newButton.addEventListener('touchend', (e) => {
                 const touchEndY = e.changedTouches[0].clientY;
                 const touchDuration = Date.now() - this.touchStartTime;
                 const touchDistance = Math.abs(touchEndY - this.touchStartY);
                 
-                // More lenient settings - easier to tap
-                // Touch < 250ms AND movement < 20px = valid tap
                 if (touchDuration < 250 && touchDistance < 20) {
-                    // Valid tap - navigate immediately
                     const targetHref = newButton.getAttribute('href');
                     if (targetHref) {
-                        console.log(`✓ Valid tap on button - navigating to: ${targetHref}`);
+                        console.log(`✓ Valid tap - navigating to: ${targetHref}`);
                         window.location.href = targetHref;
                     }
                 } else {
-                    // Scroll detected - prevent navigation
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log(`✗ Scroll detected (${touchDuration}ms, ${touchDistance}px) - blocked`);
+                    console.log(`✗ Scroll detected (${touchDuration}ms, ${touchDistance}px)`);
                 }
             }, { passive: false });
             
-            // Keep click working for desktop
             newButton.addEventListener('click', (e) => {
-                // On desktop (no touch), let it work normally
-                if (!('ontouchstart' in window)) {
-                    return;
-                }
-                // On touch devices, click is handled by touchend
+                if (!('ontouchstart' in window)) return;
                 e.preventDefault();
             });
             
-            // Mark as attached
             newButton.setAttribute('data-touch-attached', 'true');
         });
     }
@@ -633,55 +610,6 @@ function preloadGalleryImages() {
 }
 
 // ============================================
-// COUNTDOWN TIMER
-// ============================================
-const CountdownTimer = {
-    targetDate: new Date('December 1, 2025 00:00:00 UTC').getTime(),
-    interval: null,
-    
-    init() {
-        const elements = {
-            days: document.getElementById('main-days'),
-            hours: document.getElementById('main-hours'),
-            minutes: document.getElementById('main-minutes'),
-            seconds: document.getElementById('main-seconds')
-        };
-        
-        if (!elements.days) return;
-        
-        this.update(elements);
-        this.interval = setInterval(() => this.update(elements), 1000);
-        
-        window.addEventListener('beforeunload', () => {
-            if (this.interval) clearInterval(this.interval);
-        });
-        
-        mark('Countdown Timer Started');
-    },
-    
-    update(elements) {
-        const now = new Date().getTime();
-        const distance = this.targetDate - now;
-        
-        if (distance < 0) {
-            Object.values(elements).forEach(el => el.textContent = '00');
-            if (this.interval) clearInterval(this.interval);
-            return;
-        }
-        
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        elements.days.textContent = String(days).padStart(2, '0');
-        elements.hours.textContent = String(hours).padStart(2, '0');
-        elements.minutes.textContent = String(minutes).padStart(2, '0');
-        elements.seconds.textContent = String(seconds).padStart(2, '0');
-    }
-};
-
-// ============================================
 // PERFORMANCE MONITORING
 // ============================================
 function monitorPerformance() {
@@ -746,7 +674,7 @@ function waitForGlobal(callback) {
 // MASTER INITIALIZATION
 // ============================================
 async function initializeMainPage() {
-    console.log('🔥 VAULT PHOENIX v4.4 - BACK NAV FIX (NO BLINK)');
+    console.log('🔥 VAULT PHOENIX v5.0 - PRODUCTION READY');
     console.log('━'.repeat(60));
     
     DeviceOptimizer.init();
@@ -765,7 +693,6 @@ async function initializeMainPage() {
     });
     
     requestAnimationFrame(() => {
-        CountdownTimer.init();
         preloadGalleryImages();
         monitorPerformance();
     });
@@ -802,15 +729,14 @@ if (document.readyState === 'loading') {
 // EXPORT FOR DEBUGGING
 // ============================================
 window.VaultPhoenix = VaultPhoenix;
-window.VaultPhoenix.version = '4.4.0-back-nav-fixed';
+window.VaultPhoenix.version = '5.0.0-production';
 window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
     ImageLoader,
-    CountdownTimer,
     SmartButtonTouch
 };
 
-console.log('✓ Main.js v4.4 - Back navigation fix (no blink on return)! 🔥');
+console.log('✓ Main.js v5.0 PRODUCTION READY - Countdown handled by global.js');
 
 })();
