@@ -791,3 +791,85 @@ function enhanceAccessibility() {
 window.addEventListener('load', () => {
     setTimeout(enhanceAccessibility, 1000);
 });
+// ============================================
+// CONTACT FORM HANDLER
+// ============================================
+function initContactForm() {
+    const form = document.getElementById('vaultContactForm');
+    const fileInput = document.getElementById('fileUpload');
+    const fileLabel = fileInput?.parentElement.querySelector('.file-upload-label');
+    const fileNameSpan = fileLabel?.querySelector('.file-name');
+    
+    // File upload display
+    if (fileInput && fileNameSpan) {
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const fileNames = Array.from(this.files).map(f => f.name).join(', ');
+                fileNameSpan.textContent = fileNames;
+            } else {
+                fileNameSpan.textContent = '';
+            }
+        });
+    }
+    
+    // Form submission
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('.modern-submit-button');
+            const originalText = submitButton.querySelector('span').textContent;
+            
+            // Loading state
+            submitButton.disabled = true;
+            submitButton.querySelector('span').textContent = 'Sending...';
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Show success popup
+                    showSuccessPopup();
+                    form.reset();
+                    if (fileNameSpan) fileNameSpan.textContent = '';
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                alert('Oops! There was a problem sending your message. Please try emailing us directly at contact@vaultphoenix.com');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.querySelector('span').textContent = originalText;
+            }
+        });
+    }
+}
+
+function showSuccessPopup() {
+    const popup = document.getElementById('formSuccessPopup');
+    if (popup) {
+        popup.classList.add('show');
+    }
+}
+
+function closeSuccessPopup() {
+    const popup = document.getElementById('formSuccessPopup');
+    if (popup) {
+        popup.classList.remove('show');
+    }
+}
+
+// Make closeSuccessPopup globally available
+window.closeSuccessPopup = closeSuccessPopup;
+
+// Initialize on load
+window.addEventListener('load', () => {
+    setTimeout(initContactForm, 1000);
+});
