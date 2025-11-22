@@ -393,8 +393,10 @@ const SmoothScroll = {
             const href = link.getAttribute('href');
             if (!href) return;
             
-            // ✅ SKIP ember-highlight-link - they have their own handler
-            if (link.classList.contains('ember-highlight-link')) {
+            // ✅ SKIP ember token section links - they have their own handler
+            if (link.classList.contains('ember-highlight-link') ||
+                link.classList.contains('join-presale-button') ||
+                link.classList.contains('compliance-button')) {
                 return;
             }
             
@@ -599,17 +601,28 @@ function preloadGalleryImages() {
 
 // ============================================
 // ENTERPRISE TOKEN LINKS FIX
-// Ensures ember.html links work properly
+// Ensures ALL 5 ember.html links work properly
 // ============================================
 const EnterpriseTokenLinks = {
     init() {
         // Wait a bit for global.js to finish its setup
         setTimeout(() => {
-            const emberLinks = document.querySelectorAll('.ember-highlight-link');
+            // Target ALL ember.html links in the token section
+            const emberLinks = document.querySelectorAll(
+                '.ember-highlight-link, ' +
+                '.join-presale-button, ' +
+                '.compliance-button'
+            );
             
             console.log(`🔧 Fixing ${emberLinks.length} enterprise token links`);
             
             emberLinks.forEach((link, index) => {
+                // Skip if not an ember.html link
+                const href = link.getAttribute('href');
+                if (!href || !href.includes('ember.html')) {
+                    return;
+                }
+                
                 // Remove any existing handlers by cloning
                 const newLink = link.cloneNode(true);
                 link.parentNode.replaceChild(newLink, link);
@@ -725,7 +738,7 @@ async function initializeMainPage() {
     
     // Phase 4: Interactive (300-600ms) - Gallery features + Enterprise links fix
     requestAnimationFrame(() => {
-        EnterpriseTokenLinks.init(); // FIX EMBER LINKS
+        EnterpriseTokenLinks.init(); // FIX ALL 5 EMBER LINKS
         preloadGalleryImages();
         monitorPerformance();
     });
