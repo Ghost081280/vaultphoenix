@@ -797,49 +797,53 @@ window.addEventListener('load', () => {
 function initContactForm() {
     const form = document.getElementById('vaultContactForm');
     
-    // Form submission
-    if (form) {
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(form);
-            const submitButton = form.querySelector('.modern-submit-button');
-            const originalText = submitButton.querySelector('span').textContent;
-            
-            // Loading state
-            submitButton.disabled = true;
-            submitButton.querySelector('span').textContent = 'Sending...';
-            
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    // Show success popup
-                    showSuccessPopup();
-                    form.reset();
-                } else {
-                    throw new Error('Form submission failed');
+    if (!form) return;
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('.modern-submit-button');
+        const originalText = submitButton.querySelector('span').textContent;
+        
+        // Loading state
+        submitButton.disabled = true;
+        submitButton.querySelector('span').textContent = 'Sending...';
+        
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
                 }
-            } catch (error) {
-                alert('Oops! There was a problem sending your message. Please try emailing us directly at contact@vaultphoenix.com');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.querySelector('span').textContent = originalText;
+            });
+            
+            if (response.ok) {
+                // Show success popup
+                showSuccessPopup();
+                form.reset();
+            } else {
+                throw new Error('Form submission failed');
             }
-        });
-    }
+        } catch (error) {
+            console.error('Form error:', error);
+            alert('Oops! There was a problem sending your message. Please try emailing us directly at contact@vaultphoenix.com');
+        } finally {
+            submitButton.disabled = false;
+            submitButton.querySelector('span').textContent = originalText;
+        }
+    });
 }
 
 function showSuccessPopup() {
     const popup = document.getElementById('formSuccessPopup');
     if (popup) {
-        popup.classList.add('show');
+        popup.style.display = 'flex';
+        // Small delay for animation
+        setTimeout(() => {
+            popup.classList.add('show');
+        }, 10);
     }
 }
 
@@ -847,6 +851,9 @@ function closeSuccessPopup() {
     const popup = document.getElementById('formSuccessPopup');
     if (popup) {
         popup.classList.remove('show');
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 400);
     }
 }
 
