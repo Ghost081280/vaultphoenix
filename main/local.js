@@ -1,13 +1,46 @@
 // ============================================
 // VAULT PHOENIX - MAIN.HTML LOCAL JAVASCRIPT
-// v4.0 - CLEAN VERSION (ROOT CAUSE FIXED IN GLOBAL.JS)
-// - No force fixes needed - smooth scroll properly configured
-// - Removed airdrop system
+// v4.1 - BUTTON ICON PRELOAD + SMART TOUCH
+// - Preload button icons to prevent flash
+// - Smart touch detection on buttons (no scroll-open)
 // - Clean & optimized
 // ============================================
 
 (function() {
 'use strict';
+
+// ============================================
+// PRELOAD BUTTON ICONS - NO FLASH
+// ============================================
+function preloadButtonIcons() {
+    const buttonIcons = [
+        'images/VPEmberCoin.PNG',
+        'images/WhitepaperIcon.PNG',
+        'images/RoadmapIcon.PNG',
+        'images/TeamIcon.PNG',
+        'images/LegalIcon.PNG'
+    ];
+    
+    // Preload using link tags for instant availability
+    buttonIcons.forEach(src => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
+    });
+    
+    // Also preload using Image objects as backup
+    buttonIcons.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+    
+    console.log('✓ Button icons preloaded - no flash');
+}
+
+// Run immediately before anything else
+preloadButtonIcons();
 
 // ============================================
 // PERFORMANCE & STATE MANAGEMENT
@@ -361,6 +394,84 @@ const ImageLoader = {
 };
 
 // ============================================
+// SMART TOUCH FOR EMBER BUTTONS - NO SCROLL-OPEN
+// ============================================
+const SmartButtonTouch = {
+    touchStartY: 0,
+    touchStartTime: 0,
+    
+    init() {
+        // Wait for buttons to load
+        setTimeout(() => {
+            this.attachToButtons();
+        }, 500);
+        
+        // Also attach after a longer delay to catch lazy-loaded buttons
+        setTimeout(() => {
+            this.attachToButtons();
+        }, 2000);
+        
+        mark('Smart Button Touch Initialized');
+    },
+    
+    attachToButtons() {
+        const emberButtons = document.querySelectorAll(
+            '.ember-highlight-link, ' +
+            '.join-presale-button, ' +
+            '.join-presale-button-redesigned, ' +
+            '.compliance-button'
+        );
+        
+        console.log(`📱 Attaching smart touch to ${emberButtons.length} buttons`);
+        
+        emberButtons.forEach(button => {
+            // Remove existing listeners by cloning
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+            
+            // Track touch start
+            newButton.addEventListener('touchstart', (e) => {
+                this.touchStartY = e.touches[0].clientY;
+                this.touchStartTime = Date.now();
+            }, { passive: true });
+            
+            // Smart touch end - detect tap vs scroll
+            newButton.addEventListener('touchend', (e) => {
+                const touchEndY = e.changedTouches[0].clientY;
+                const touchDuration = Date.now() - this.touchStartTime;
+                const touchDistance = Math.abs(touchEndY - this.touchStartY);
+                
+                // Only navigate if:
+                // 1. Touch was quick (< 200ms)
+                // 2. Finger didn't move much (< 15px)
+                if (touchDuration < 200 && touchDistance < 15) {
+                    // Valid tap - let it navigate
+                    const href = newButton.getAttribute('href');
+                    if (href) {
+                        window.location.href = href;
+                    }
+                } else {
+                    // Scroll detected - prevent navigation
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('✗ Scroll detected on button - blocked navigation');
+                }
+            }, { passive: false });
+            
+            // Keep click working for desktop
+            newButton.addEventListener('click', (e) => {
+                // On desktop (no touch), let it work normally
+                if (!('ontouchstart' in window)) {
+                    return;
+                }
+                // On touch devices, click is handled by touchend
+                e.preventDefault();
+            });
+        });
+    }
+};
+
+// ============================================
 // DEVICE OPTIMIZATIONS
 // ============================================
 const DeviceOptimizer = {
@@ -621,7 +732,7 @@ function waitForGlobal(callback) {
 // MASTER INITIALIZATION
 // ============================================
 async function initializeMainPage() {
-    console.log('🔥 VAULT PHOENIX v4.0 - CLEAN (ROOT CAUSE FIXED)');
+    console.log('🔥 VAULT PHOENIX v4.1 - BUTTON FIXES (NO FLASH + SMART TOUCH)');
     console.log('━'.repeat(60));
     
     DeviceOptimizer.init();
@@ -636,6 +747,7 @@ async function initializeMainPage() {
         GlowSystem.apply();
         ScrollReveal.init();
         ImageLoader.init();
+        SmartButtonTouch.init(); // Initialize smart touch for buttons
     });
     
     requestAnimationFrame(() => {
@@ -676,14 +788,15 @@ if (document.readyState === 'loading') {
 // EXPORT FOR DEBUGGING
 // ============================================
 window.VaultPhoenix = VaultPhoenix;
-window.VaultPhoenix.version = '4.0.0-clean';
+window.VaultPhoenix.version = '4.1.0-button-fixes';
 window.VaultPhoenix.systems = {
     GlowSystem,
     ScrollReveal,
     ImageLoader,
-    CountdownTimer
+    CountdownTimer,
+    SmartButtonTouch
 };
 
-console.log('✓ Main.js v4.0 CLEAN - root cause fixed in global.js, no hacks needed! 🎉');
+console.log('✓ Main.js v4.1 - Button icons preloaded + smart touch (no scroll-open)! 🎉');
 
 })();
