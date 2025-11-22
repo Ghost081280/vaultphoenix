@@ -592,51 +592,51 @@ function preloadGalleryImages() {
 // ============================================
 // COUNTDOWN TIMER
 // ============================================
-const CountdownTimer = {
-    targetDate: new Date('November 1, 2025 00:00:00 UTC').getTime(),
-    interval: null,
+//const CountdownTimer = {
+    //targetDate: new Date('December 1, 2025 00:00:00 UTC').getTime(),
+    //interval: null,
     
-    init() {
-        const elements = {
-            days: document.getElementById('main-days'),
-            hours: document.getElementById('main-hours'),
-            minutes: document.getElementById('main-minutes'),
-            seconds: document.getElementById('main-seconds')
-        };
+    //init() {
+        //const elements = {
+           // days: document.getElementById('main-days'),
+            //hours: document.getElementById('main-hours'),
+            //minutes: document.getElementById('main-minutes'),
+            //seconds: document.getElementById('main-seconds')
+        //};
         
-        if (!elements.days) return;
+        //if (!elements.days) return;
         
-        this.update(elements);
-        this.interval = setInterval(() => this.update(elements), 1000);
+        //this.update(elements);
+        //this.interval = setInterval(() => this.update(elements), 1000);
         
-        window.addEventListener('beforeunload', () => {
-            if (this.interval) clearInterval(this.interval);
-        });
+        //window.addEventListener('beforeunload', () => {
+           // if (this.interval) clearInterval(this.interval);
+        //});
         
-        mark('Countdown Timer Started');
-    },
+        //mark('Countdown Timer Started');
+   // },
     
-    update(elements) {
-        const now = new Date().getTime();
-        const distance = this.targetDate - now;
+    //update(elements) {
+       // const now = new Date().getTime();
+        //const distance = this.targetDate - now;
         
-        if (distance < 0) {
-            Object.values(elements).forEach(el => el.textContent = '00');
-            if (this.interval) clearInterval(this.interval);
-            return;
-        }
+        //if (distance < 0) {
+          //  Object.values(elements).forEach(el => el.textContent = '00');
+            //if (this.interval) clearInterval(this.interval);
+            //return;
+        //}
         
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        //const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        //const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        //const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
-        elements.days.textContent = String(days).padStart(2, '0');
-        elements.hours.textContent = String(hours).padStart(2, '0');
-        elements.minutes.textContent = String(minutes).padStart(2, '0');
-        elements.seconds.textContent = String(seconds).padStart(2, '0');
-    }
-};
+      //  elements.days.textContent = String(days).padStart(2, '0');
+       // elements.hours.textContent = String(hours).padStart(2, '0');
+      //  elements.minutes.textContent = String(minutes).padStart(2, '0');
+      //  elements.seconds.textContent = String(seconds).padStart(2, '0');
+   // }
+//};
 
 // ============================================
 // AIRDROP TRACKER - WITH ANIMATED STATS
@@ -711,7 +711,7 @@ const StatusChecker = {
             const wallet = walletInput.value.trim();
             
             if (!wallet) {
-                alert('⚠️ Please enter a wallet address');
+                alert('Coming Soon');
                 return;
             }
             
