@@ -5590,3 +5590,43 @@ img {
         font-size: 1.5rem;
     }
 }
+/* Email Card Visual */
+.email-card-visual {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.email-envelope-image {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(240, 165, 0, 0.4))
+            drop-shadow(0 0 35px rgba(215, 51, 39, 0.3));
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+/* Floating animation for envelope */
+@keyframes floatAnimation {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .email-card-visual {
+        margin-top: 1.5rem;
+        padding: 0.5rem;
+    }
+    
+    .email-envelope-image {
+        max-width: 200px;
+    }
+}
