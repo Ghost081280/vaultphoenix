@@ -156,48 +156,30 @@ const GlowSystem = {
     },
     
     applyEmberGlow(mult) {
-        const emberImages = [
-            'img[src*="Ember"]',
-            'img[alt*="Ember"]',
-            '.nav-ember-coin',
-            '.ember-countdown-icon'
-        ];
-        
-        emberImages.forEach(selector => {
-            document.querySelectorAll(selector).forEach(img => {
-                const wrapper = img.closest('.main-image-glow');
-                if (wrapper) {
-                    wrapper.style.filter = `
-                        drop-shadow(0 0 ${20 * mult}px rgba(240, 165, 0, ${0.5 * mult}))
-                        drop-shadow(0 0 ${35 * mult}px rgba(215, 51, 39, ${0.3 * mult}))
-                    `;
-                    wrapper.style.animation = 'consistentGlow 3s ease-in-out infinite';
-                }
-            });
-        });
-    },
+    const emberImages = [
+        'img[src*="Ember"]',
+        'img[alt*="Ember"]',
+        '.nav-ember-coin',
+        '.ember-countdown-icon'
+    ];
     
-    applyIconGlow(mult) {
-        const iconImages = [
-            '.feature-icon img',
-            '.use-case-icon-image-large',
-            '.technology-icon',
-            '.benefit-header-icon-large'
-        ];
-        
-        iconImages.forEach(selector => {
-            document.querySelectorAll(selector).forEach(img => {
-                const wrapper = img.closest('.main-image-glow');
-                if (wrapper) {
-                    wrapper.style.filter = `
-                        drop-shadow(0 0 ${15 * mult}px rgba(240, 165, 0, ${0.4 * mult}))
-                        drop-shadow(0 0 ${25 * mult}px rgba(215, 51, 39, ${0.2 * mult}))
-                    `;
-                }
-            });
+    emberImages.forEach(selector => {
+        document.querySelectorAll(selector).forEach(img => {
+            const wrapper = img.closest('.main-image-glow');
+            
+            // CRITICAL: Skip button icons - they're handled by CSS
+            const isButtonIcon = img.closest('.ember-highlight-link, .join-presale-button');
+            
+            if (wrapper && !isButtonIcon) {
+                wrapper.style.filter = `
+                    drop-shadow(0 0 ${20 * mult}px rgba(240, 165, 0, ${0.5 * mult}))
+                    drop-shadow(0 0 ${35 * mult}px rgba(215, 51, 39, ${0.3 * mult}))
+                `;
+                wrapper.style.animation = 'consistentGlow 3s ease-in-out infinite';
+            }
         });
-    }
-};
+    });
+}
 
 // ============================================
 // CRITICAL RESOURCE PRELOADING
