@@ -46,6 +46,58 @@
         }
     };
     
+    // Create modal functions IMMEDIATELY (before DOM ready)
+    window.showTpaModal = function() {
+        const modal = document.getElementById('tpaModal');
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            console.log('✅ TPA modal opened');
+        } else {
+            console.error('❌ TPA modal not found');
+            alert('TPA modal not found. Please refresh the page.');
+        }
+    };
+    
+    window.closeTpaModal = function() {
+        const modal = document.getElementById('tpaModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    };
+    
+    window.agreeTpa = function() {
+        const checkbox = document.getElementById('tpa-agree-checkbox');
+        if (checkbox) {
+            checkbox.checked = true;
+            checkbox.dispatchEvent(new Event('change'));
+        }
+        window.closeTpaModal();
+    };
+    
+    window.showWhitepaperModal = function() {
+        const modal = document.getElementById('whitepaperModal');
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            console.log('✅ Whitepaper modal opened');
+        } else {
+            console.error('❌ Whitepaper modal not found');
+            alert('Whitepaper modal not found. Please refresh the page.');
+        }
+    };
+    
+    window.closeWhitepaperModal = function() {
+        const modal = document.getElementById('whitepaperModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    };
+    
+    console.log('✅ Modal functions created immediately');
+    
     // Wait for DOM to be ready
     document.addEventListener('DOMContentLoaded', function() {
         Perf.log('🔥 Ember page initialized with Airdrop System v2.0');
@@ -191,41 +243,14 @@
     
     // TPA Modal (Token Presale Agreement + Disclosures)
     function initTpaModal() {
-        // Create window functions IMMEDIATELY, even if modal not found yet
-        window.showTpaModal = function() {
-            const modal = document.getElementById('tpaModal');
-            if (modal) {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            } else {
-                console.error('TPA modal not found when trying to show it');
-            }
-        };
-        
-        window.closeTpaModal = function() {
-            const modal = document.getElementById('tpaModal');
-            if (modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-        };
-        
-        window.agreeTpa = function() {
-            const checkbox = document.getElementById('tpa-agree-checkbox');
-            if (checkbox) {
-                checkbox.checked = true;
-                checkbox.dispatchEvent(new Event('change'));
-            }
-            window.closeTpaModal();
-        };
-        
-        // Now set up the rest if modal exists
+        // Window functions already created at script load
+        // Just set up event listeners here
         const modal = document.getElementById('tpaModal');
         const checkbox = document.getElementById('tpa-agree-checkbox');
         const presaleButton = document.getElementById('presale-buy-button');
         
         if (!modal) {
-            console.warn('TPA modal not found during init - functions created anyway');
+            console.warn('TPA modal not found during init');
             return;
         }
         
@@ -262,30 +287,12 @@
     
     // Whitepaper Modal
     function initWhitepaperModal() {
-        // Create window functions IMMEDIATELY, even if modal not found yet
-        window.showWhitepaperModal = function() {
-            const modal = document.getElementById('whitepaperModal');
-            if (modal) {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            } else {
-                console.error('Whitepaper modal not found when trying to show it');
-            }
-        };
-        
-        window.closeWhitepaperModal = function() {
-            const modal = document.getElementById('whitepaperModal');
-            if (modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-        };
-        
-        // Now set up the rest if modal exists
+        // Window functions already created at script load
+        // Just set up event listeners here
         const modal = document.getElementById('whitepaperModal');
         
         if (!modal) {
-            console.warn('Whitepaper modal not found during init - functions created anyway');
+            console.warn('Whitepaper modal not found during init');
             return;
         }
         
