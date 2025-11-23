@@ -72,6 +72,42 @@
        COUNTDOWN TIMER
        Updates every second until presale launch
        =================================== */
+    function initCountdownTimer() {
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const target = new Date(CONFIG.presaleDate).getTime();
+            const distance = target - now;
+            
+            if (distance < 0) {
+                ['days', 'hours', 'minutes', 'seconds'].forEach(unit => {
+                    const el = document.getElementById(`countdown-${unit}`);
+                    if (el) el.textContent = '00';
+                });
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            const pad = (num) => String(num).padStart(2, '0');
+            
+            const daysEl = document.getElementById('countdown-days');
+            const hoursEl = document.getElementById('countdown-hours');
+            const minutesEl = document.getElementById('countdown-minutes');
+            const secondsEl = document.getElementById('countdown-seconds');
+            
+            if (daysEl) daysEl.textContent = pad(days);
+            if (hoursEl) hoursEl.textContent = pad(hours);
+            if (minutesEl) minutesEl.textContent = pad(minutes);
+            if (secondsEl) secondsEl.textContent = pad(seconds);
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        Perf.log('✅ Countdown timer initialized');
+    }
    
     /* ===================================
        INVESTMENT CALCULATOR
