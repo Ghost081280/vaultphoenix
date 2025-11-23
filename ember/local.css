@@ -13,26 +13,30 @@
 /* ===================================
    UNIVERSAL SECTION BACKGROUND
    Ensures consistent background across all sections
-   Uses !important to override individual section backgrounds
+   Define gradient directly to ensure it matches main page
    =================================== */
+
+/* Define the gradient variable in case it's not loaded from global.css */
+:root {
+    --ember-gradient-background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+}
+
+/* Apply to all sections */
 .ember-section,
 body,
 [class*="-section"] {
-    background: var(--ember-gradient-background) !important;
+    background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%) !important;
 }
 
-/* Force transparency on ALL containers, wrappers, headers, and content divs inside sections */
-/* Only cards, modals, and specific UI elements keep their backgrounds */
-[class*="-section"] .container,
-[class*="-section"] .ember-section-header,
-[class*="-section"] [class*="header"]:not([class*="card"]):not([class*="modal"]),
-[class*="-section"] [class*="content"]:not([class*="card"]):not([class*="modal"]),
-[class*="-section"] [class*="wrapper"]:not([class*="card"]):not([class*="modal"]),
-[class*="section-header"],
-.hero-section .container,
-.hero-section > div:not([class*="card"]):not([class*="grid"]) {
-    background: transparent !important;
+/* Make sure NO elements inside sections have their own backgrounds */
+/* This forces everything to be transparent except the main section */
+.ember-section *:not([class*="card"]):not([class*="button"]):not([class*="btn"]):not([class*="modal"]),
+[class*="-section"] *:not([class*="card"]):not([class*="button"]):not([class*="btn"]):not([class*="modal"]) {
+    background-color: transparent !important;
+    background-image: none !important;
 }
+
+
 
    VAULT PHOENIX - EMBER LOCAL CSS v2.4
    SECTION 1: MODAL SYSTEM - OPTIMIZED
