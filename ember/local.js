@@ -191,35 +191,43 @@
     
     // TPA Modal (Token Presale Agreement + Disclosures)
     function initTpaModal() {
-        const modal = document.getElementById('tpaModal');
-        const checkbox = document.getElementById('tpa-agree-checkbox');
-        const presaleButton = document.getElementById('presale-buy-button');
-        
-        if (!modal) {
-            console.warn('TPA modal not found');
-            return;
-        }
-        
-        // Show TPA modal
+        // Create window functions IMMEDIATELY, even if modal not found yet
         window.showTpaModal = function() {
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            const modal = document.getElementById('tpaModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('TPA modal not found when trying to show it');
+            }
         };
         
-        // Close TPA modal
         window.closeTpaModal = function() {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
+            const modal = document.getElementById('tpaModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
         };
         
-        // Agree to TPA
         window.agreeTpa = function() {
+            const checkbox = document.getElementById('tpa-agree-checkbox');
             if (checkbox) {
                 checkbox.checked = true;
                 checkbox.dispatchEvent(new Event('change'));
             }
             window.closeTpaModal();
         };
+        
+        // Now set up the rest if modal exists
+        const modal = document.getElementById('tpaModal');
+        const checkbox = document.getElementById('tpa-agree-checkbox');
+        const presaleButton = document.getElementById('presale-buy-button');
+        
+        if (!modal) {
+            console.warn('TPA modal not found during init - functions created anyway');
+            return;
+        }
         
         // Enable presale button when checkbox is checked
         if (checkbox && presaleButton) {
@@ -254,24 +262,32 @@
     
     // Whitepaper Modal
     function initWhitepaperModal() {
+        // Create window functions IMMEDIATELY, even if modal not found yet
+        window.showWhitepaperModal = function() {
+            const modal = document.getElementById('whitepaperModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Whitepaper modal not found when trying to show it');
+            }
+        };
+        
+        window.closeWhitepaperModal = function() {
+            const modal = document.getElementById('whitepaperModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        };
+        
+        // Now set up the rest if modal exists
         const modal = document.getElementById('whitepaperModal');
         
         if (!modal) {
-            console.warn('Whitepaper modal not found');
+            console.warn('Whitepaper modal not found during init - functions created anyway');
             return;
         }
-        
-        // Show whitepaper modal
-        window.showWhitepaperModal = function() {
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        };
-        
-        // Close whitepaper modal
-        window.closeWhitepaperModal = function() {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        };
         
         // Close modal when clicking overlay
         const overlay = modal.querySelector('.tpa-modal-overlay');
