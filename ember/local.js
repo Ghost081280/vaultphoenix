@@ -265,26 +265,9 @@
             return;
         }
         
-        // Show TPA modal
-        window.showTpaModal = function() {
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        };
-        
-        // Close TPA modal
-        window.closeTpaModal = function() {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        };
-        
-        // Agree to TPA
-        window.agreeTpa = function() {
-            if (checkbox) {
-                checkbox.checked = true;
-                checkbox.dispatchEvent(new Event('change'));
-            }
-            window.closeTpaModal();
-        };
+        // NOTE: window.showTpaModal, closeTpaModal, and agreeTpa 
+        // are already created at the top of the file!
+        // We just set up the event listeners here.
         
         // Enable presale button when checkbox is checked
         if (checkbox && presaleButton) {
@@ -326,17 +309,9 @@
             return;
         }
         
-        // Show whitepaper modal
-        window.showWhitepaperModal = function() {
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        };
-        
-        // Close whitepaper modal
-        window.closeWhitepaperModal = function() {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        };
+        // NOTE: window.showWhitepaperModal and closeWhitepaperModal
+        // are already created at the top of the file!
+        // We just set up the event listeners here.
         
         // Close modal when clicking overlay
         const overlay = modal.querySelector('.tpa-modal-overlay');
