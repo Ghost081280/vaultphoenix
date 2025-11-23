@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Button Test - Vault Phoenix</title>
+    <style>
+        body {
+            background: #0f0f0f;
+            color: white;
+            font-family: Arial;
+            padding: 50px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background: #d73327;
+            color: white;
+            border: 2px solid #f0a500;
+            border-radius: 10px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .modal-content {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+        }
+        #console {
+            background: #000;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Vault Phoenix Button Diagnostic Test</h1>
+    
+    <h2>Test 1: Simple JavaScript Alert</h2>
+    <button id="test-alert">Click Me - Should Show Alert</button>
+    
+    <h2>Test 2: Modal Open/Close</h2>
+    <button id="open-modal">Open Modal</button>
+    
+    <div id="test-modal" class="modal">
+        <div class="modal-content">
+            <h3>✅ Modal Works!</h3>
+            <p>If you see this, modals are functional.</p>
+            <button id="close-modal">Close Modal</button>
+        </div>
+    </div>
+    
+    <h2>Test 3: Exact Button From Your HTML</h2>
+    <button type="button" class="info-badge-button" id="airdrop-info-btn" aria-label="How it works">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+        </svg>
+        Airdrop Info (From Your HTML)
+    </button>
+    
+    <h2>Test 4: Share Button</h2>
+    <button type="button" id="share-x-ember">Share on X (From Your HTML)</button>
+    
+    <h2>Console Output:</h2>
+    <div id="console"></div>
+    
+    <script>
+        // Console logging
+        const consoleDiv = document.getElementById('console');
+        function log(msg, color = '#4ade80') {
+            consoleDiv.innerHTML += `<div style="color: ${color}">${msg}</div>`;
+            console.log(msg);
+        }
+        
+        log('🔥 Script loaded at: ' + new Date().toLocaleTimeString());
+        
+        // Test 1: Alert button
+        const alertBtn = document.getElementById('test-alert');
+        if (alertBtn) {
+            log('✅ Alert button found');
+            alertBtn.addEventListener('click', function() {
+                alert('Button click works!');
+                log('✅ Alert button clicked!');
+            });
+        } else {
+            log('❌ Alert button NOT found', '#ef4444');
+        }
+        
+        // Test 2: Modal
+        const openModalBtn = document.getElementById('open-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const modal = document.getElementById('test-modal');
+        
+        if (openModalBtn) {
+            log('✅ Modal buttons found');
+            openModalBtn.addEventListener('click', function() {
+                log('✅ Open modal clicked');
+                modal.classList.add('show');
+            });
+            closeModalBtn.addEventListener('click', function() {
+                log('✅ Close modal clicked');
+                modal.classList.remove('show');
+            });
+        }
+        
+        // Test 3: Your exact airdrop button
+        const airdropBtn = document.getElementById('airdrop-info-btn');
+        if (airdropBtn) {
+            log('✅ Airdrop info button found (id="airdrop-info-btn")');
+            airdropBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Airdrop button clicked! This means JavaScript CAN attach to your buttons.');
+                log('✅ Airdrop button clicked!');
+            });
+        } else {
+            log('❌ Airdrop button NOT found', '#ef4444');
+        }
+        
+        // Test 4: Share button
+        const shareBtn = document.getElementById('share-x-ember');
+        if (shareBtn) {
+            log('✅ Share button found (id="share-x-ember")');
+            shareBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Share button clicked!');
+                log('✅ Share button clicked!');
+            });
+        } else {
+            log('❌ Share button NOT found', '#ef4444');
+        }
+        
+        log('✅ All tests initialized');
+        log('👆 Click the buttons above to test!');
+    </script>
+</body>
+</html>
