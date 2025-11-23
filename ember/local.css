@@ -30,8 +30,8 @@ body,
 
 /* Make sure NO elements inside sections have their own backgrounds */
 /* This forces everything to be transparent except the main section */
-.ember-section *:not([class*="card"]):not([class*="button"]):not([class*="btn"]):not([class*="modal"]),
-[class*="-section"] *:not([class*="card"]):not([class*="button"]):not([class*="btn"]):not([class*="modal"]) {
+.ember-section *:not([class*="card"]):not([class*="button"]):not([class*="btn"]):not([class*="modal"]):not(img):not([class*="chart"]):not([class*="pie"]):not(svg):not(canvas),
+[class*="-section"] *:not([class*="card"]):not([class*="button"]):not([class*="btn"]):not([class*="modal"]):not(img):not([class*="chart"]):not([class*="pie"]):not(svg):not(canvas) {
     background-color: transparent !important;
     background-image: none !important;
 }
