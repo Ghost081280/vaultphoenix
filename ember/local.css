@@ -21,6 +21,14 @@ body,
     background: var(--ember-gradient-background) !important;
 }
 
+/* Remove backgrounds from section containers and headers */
+[class*="-section"] .container,
+[class*="-section"] .ember-section-header,
+[class*="section-header"],
+[class*="-content"] {
+    background: transparent !important;
+}
+
    VAULT PHOENIX - EMBER LOCAL CSS v2.4
    SECTION 1: MODAL SYSTEM - OPTIMIZED
    All modals: TPA, Whitepaper, Airdrop Info, Airdrop Terms
