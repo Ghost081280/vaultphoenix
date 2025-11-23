@@ -1,4 +1,24 @@
 /* ===================================
+   VAULT PHOENIX - EMBER LOCAL CSS v2.5
+   ✅ UPDATED: November 2025
+   
+   CHANGES IN v2.5:
+   1. Universal section background fix
+   2. Team section mobile spacing fix
+   
+   All sections now use consistent
+   var(--ember-gradient-background)
+   =================================== */
+
+/* ===================================
+   UNIVERSAL SECTION BACKGROUND
+   Ensures consistent background across all sections
+   =================================== */
+.ember-section,
+body {
+    background: var(--ember-gradient-background);
+}
+
    VAULT PHOENIX - EMBER LOCAL CSS v2.4
    SECTION 1: MODAL SYSTEM - OPTIMIZED
    All modals: TPA, Whitepaper, Airdrop Info, Airdrop Terms
@@ -2687,6 +2707,7 @@ body.modal-open {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 var(--container-padding); /* ✅ CRITICAL FIX: Adds side spacing on mobile */
 }
 
 /* ===================================
@@ -2862,12 +2883,20 @@ body.modal-open {
 }
 
 /* ===================================
-   TEAM RESPONSIVE
+   TEAM RESPONSIVE - UPDATED WITH MOBILE FIX
    =================================== */
+
+/* Mobile: Keep padding for spacing */
+@media (max-width: 767px) {
+    .team-grid {
+        padding: 0 var(--container-padding); /* ✅ Explicit mobile spacing */
+    }
+}
 
 @media (min-width: 768px) {
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
+        padding: 0; /* Remove padding on larger screens since container handles it */
     }
 }
 
