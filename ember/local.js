@@ -69,6 +69,11 @@
     });
     
     /* ===================================
+       COUNTDOWN TIMER
+       Updates every second until presale launch
+       =================================== */
+   
+    /* ===================================
        INVESTMENT CALCULATOR
        Real-time calculation of EMBER tokens with validation
        =================================== */
