@@ -304,6 +304,14 @@
         modal.id = 'airdrop-info-modal';
         modal.className = 'tpa-modal';
         modal.style.display = 'none';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.zIndex = '99999';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-labelledby', 'airdrop-info-title');
         modal.setAttribute('aria-modal', 'true');
@@ -417,6 +425,14 @@
         modal.id = 'airdrop-terms-modal';
         modal.className = 'tpa-modal';
         modal.style.display = 'none';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.zIndex = '99999';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-labelledby', 'airdrop-terms-title');
         modal.setAttribute('aria-modal', 'true');
@@ -735,7 +751,7 @@
     function initShareButtons() {
         const shareConfig = {
             x: {
-                btn: 'share-x-btn',
+                btn: 'share-x-ember',
                 handler: () => {
                     const text = '🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. 100M tokens at $0.003 each! #VaultPhoenix #Ember $Ember @VaultPhoenix';
                     const url = 'https://vaultphoenix.com/ember.html';
@@ -747,7 +763,7 @@
                 }
             },
             facebook: {
-                btn: 'share-facebook-btn',
+                btn: 'share-facebook-ember',
                 handler: () => {
                     const url = 'https://vaultphoenix.com/ember.html';
                     window.open(
@@ -758,7 +774,7 @@
                 }
             },
             telegram: {
-                btn: 'share-telegram-btn',
+                btn: 'share-telegram-ember',
                 handler: () => {
                     const text = '🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. Get your FREE airdrop tokens!';
                     const url = 'https://vaultphoenix.com/ember.html';
