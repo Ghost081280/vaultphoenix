@@ -1,7 +1,7 @@
 // ============================================
-// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.4 ROOT CAUSE FIX
+// SHARED JAVASCRIPT FOR VAULT PHOENIX - V8.5 ONBOARDING LINKS FIXED
 // ============================================
-// UPDATES: Fixed smooth scroll to allow ember.html# links to work
+// UPDATES: Fixed onboarding page anchor links to match actual IDs
 // ============================================
 
 (function() {
@@ -89,10 +89,10 @@ const PAGE_QUICK_LINKS = {
     ],
     'onboarding.html': [
         { title: 'Getting Started', href: '#getting-started' },
-        { title: 'ROI Calculators', href: '#roi-calculators' },
-        { title: 'Sales Scripts', href: '#sales-scripts' },
-        { title: 'Implementation', href: '#implementation' },
-        { title: 'Resources', href: '#resources' }
+        { title: 'ROI Calculator', href: '#roi-calculator' },
+        { title: 'Sales Toolkit', href: '#sales-toolkit' },
+        { title: 'Technical Guides', href: '#technical-guides' },
+        { title: 'Platform', href: 'main.html#features' }
     ]
 };
 
@@ -1476,7 +1476,7 @@ window.addEventListener('resize', function() {
 // INITIALIZATION SEQUENCE
 // ============================================
 async function init() {
-    console.log('🔥 Vault Phoenix v8.4 ROOT CAUSE FIX Initializing...');
+    console.log('🔥 Vault Phoenix v8.5 ONBOARDING LINKS FIXED Initializing...');
     
     // CRITICAL: Load shared components FIRST
     const componentsLoaded = await loadSharedComponents();
@@ -1538,7 +1538,7 @@ async function init() {
     document.body.classList.add('loaded');
     window.sharedScriptReady = true;
     
-    console.log('✅ Vault Phoenix v8.4 ROOT CAUSE FIX Complete');
+    console.log('✅ Vault Phoenix v8.5 ONBOARDING LINKS FIXED Complete');
     console.log('✅ Footer and Chatbot loaded from shared/global.html');
     console.log(`✅ Current page: ${getCurrentPage()}`);
     console.log(`✅ Quick links: ${getNavigationLinks().map(l => l.title).join(', ')}`);
