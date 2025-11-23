@@ -1,107 +1,96 @@
-/* ULTRA DEBUG VERSION - Logs everything */
+/* FORCE MODAL FUNCTIONS - GUARANTEED NOT TO BE OVERWRITTEN */
 
 (function() {
     'use strict';
     
-    console.log('🔥🔥🔥 SCRIPT LOADING - DEBUG VERSION 🔥🔥🔥');
+    console.log('🔥 FORCE MODALS VERSION LOADING...');
     
-    // Configuration
-    const CONFIG = {
-        presaleDate: '2025-12-01T12:00:00-05:00',
-        tokenPrice: 0.003,
-        minInvestment: 10,
-        maxInvestment: 50000,
-        airdrop: {
-            totalEmber: 9000000,
-            claimed: 0,
-            maxPeople: 2700,
-            tokensPerClaim: 3333
-        }
-    };
-    
-    console.log('✅ Config loaded');
-    
-    // Create TPA modal function IMMEDIATELY
-    window.showTpaModal = function() {
-        console.log('🚀 showTpaModal CALLED!');
-        const modal = document.getElementById('tpaModal');
-        console.log('Modal element:', modal);
+    // Define functions MULTIPLE times to ensure they exist
+    const createModalFunctions = function() {
+        console.log('Creating modal functions...');
         
-        if (modal) {
-            console.log('✅ Modal found, setting display flex');
-            modal.style.display = 'flex';
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.zIndex = '99999';
-            document.body.style.overflow = 'hidden';
-            console.log('✅ TPA modal should now be visible');
-        } else {
-            console.error('❌ TPA MODAL NOT FOUND!');
-        }
-    };
-    
-    window.closeTpaModal = function() {
-        console.log('Closing TPA modal');
-        const modal = document.getElementById('tpaModal');
-        if (modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-    };
-    
-    window.agreeTpa = function() {
-        console.log('Agreeing to TPA');
-        const checkbox = document.getElementById('tpa-agree-checkbox');
-        if (checkbox) {
-            checkbox.checked = true;
-            checkbox.dispatchEvent(new Event('change'));
-        }
-        window.closeTpaModal();
-    };
-    
-    console.log('✅ TPA functions created');
-    console.log('window.showTpaModal:', window.showTpaModal);
-    
-    // Create Whitepaper modal function IMMEDIATELY
-    window.showWhitepaperModal = function() {
-        console.log('🚀 showWhitepaperModal CALLED!');
-        const modal = document.getElementById('whitepaperModal');
-        console.log('Modal element:', modal);
+        // TPA Modal
+        window.showTpaModal = function() {
+            console.log('🚀 showTpaModal called');
+            const modal = document.getElementById('tpaModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';  
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.zIndex = '99999';
+                document.body.style.overflow = 'hidden';
+                console.log('✅ TPA modal opened');
+            } else {
+                console.error('❌ TPA modal not found');
+            }
+        };
         
-        if (modal) {
-            console.log('✅ Modal found, setting display flex');
-            modal.style.display = 'flex';
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.zIndex = '99999';
-            document.body.style.overflow = 'hidden';
-            console.log('✅ Whitepaper modal should now be visible');
-        } else {
-            console.error('❌ WHITEPAPER MODAL NOT FOUND!');
-        }
+        window.closeTpaModal = function() {
+            const modal = document.getElementById('tpaModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        };
+        
+        window.agreeTpa = function() {
+            const checkbox = document.getElementById('tpa-agree-checkbox');
+            if (checkbox) {
+                checkbox.checked = true;
+                checkbox.dispatchEvent(new Event('change'));
+            }
+            window.closeTpaModal();
+        };
+        
+        // Whitepaper Modal
+        window.showWhitepaperModal = function() {
+            console.log('🚀 showWhitepaperModal called');
+            const modal = document.getElementById('whitepaperModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.zIndex = '99999';
+                document.body.style.overflow = 'hidden';
+                console.log('✅ Whitepaper modal opened');
+            } else {
+                console.error('❌ Whitepaper modal not found');
+            }
+        };
+        
+        window.closeWhitepaperModal = function() {
+            const modal = document.getElementById('whitepaperModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        };
+        
+        console.log('✅ Modal functions created');
     };
     
-    window.closeWhitepaperModal = function() {
-        console.log('Closing Whitepaper modal');
-        const modal = document.getElementById('whitepaperModal');
-        if (modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-    };
+    // Create functions IMMEDIATELY
+    createModalFunctions();
     
-    console.log('✅ Whitepaper functions created');
-    console.log('window.showWhitepaperModal:', window.showWhitepaperModal);
+    // Create again after 100ms
+    setTimeout(createModalFunctions, 100);
     
-    console.log('✅✅✅ ALL MODAL FUNCTIONS CREATED SUCCESSFULLY ✅✅✅');
-    console.log('Type window.showTpaModal() or window.showWhitepaperModal() to test');
+    // Create again after 500ms
+    setTimeout(createModalFunctions, 500);
+    
+    // Create again when DOM ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', createModalFunctions);
+    } else {
+        createModalFunctions();
+    }
+    
+    console.log('🔥 FORCE MODALS VERSION LOADED - Functions created multiple times to ensure they exist!');
     
 })();
-
-console.log('🔥 DEBUG VERSION LOADED COMPLETELY 🔥');
