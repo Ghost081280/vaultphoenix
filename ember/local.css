@@ -13,10 +13,12 @@
 /* ===================================
    UNIVERSAL SECTION BACKGROUND
    Ensures consistent background across all sections
+   Uses !important to override individual section backgrounds
    =================================== */
 .ember-section,
-body {
-    background: var(--ember-gradient-background);
+body,
+[class*="-section"] {
+    background: var(--ember-gradient-background) !important;
 }
 
    VAULT PHOENIX - EMBER LOCAL CSS v2.4
