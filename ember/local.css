@@ -21,11 +21,16 @@ body,
     background: var(--ember-gradient-background) !important;
 }
 
-/* Remove backgrounds from section containers and headers */
+/* Force transparency on ALL containers, wrappers, headers, and content divs inside sections */
+/* Only cards, modals, and specific UI elements keep their backgrounds */
 [class*="-section"] .container,
 [class*="-section"] .ember-section-header,
+[class*="-section"] [class*="header"]:not([class*="card"]):not([class*="modal"]),
+[class*="-section"] [class*="content"]:not([class*="card"]):not([class*="modal"]),
+[class*="-section"] [class*="wrapper"]:not([class*="card"]):not([class*="modal"]),
 [class*="section-header"],
-[class*="-content"] {
+.hero-section .container,
+.hero-section > div:not([class*="card"]):not([class*="grid"]) {
     background: transparent !important;
 }
 
