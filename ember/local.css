@@ -1,5 +1,3 @@
-/* Remove the problematic transparency rule */
-/* This version removes the universal transparency that might be breaking buttons */
 /* ===================================
    VAULT PHOENIX - EMBER LOCAL CSS v2.5
    ✅ UPDATED: November 2025
@@ -30,8 +28,13 @@ body,
     background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%) !important;
 }
 
-/* TRANSPARENCY RULE REMOVED - Testing if this was breaking buttons */
-
+/* Make sure NO elements inside sections have their own backgrounds */
+/* This forces everything to be transparent except the main section */
+.ember-section *:not([class*="card"]):not([class*="button"]):not([class*="btn"]):not([class*="modal"]):not(img):not([class*="chart"]):not([class*="pie"]):not(svg):not(canvas),
+[class*="-section"] *:not([class*="card"]):not([class*="button"]):not([class*="btn"]):not([class*="modal"]):not(img):not([class*="chart"]):not([class*="pie"]):not(svg):not(canvas) {
+    background-color: transparent !important;
+    background-image: none !important;
+}
 
 
 
