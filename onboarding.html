@@ -155,12 +155,23 @@
             </div>
         </section>
 
-        <!-- TRUST BAR - SIMPLE -->
+        <!-- TRUST BAR - VERIFIED CAMPAIGNS -->
         <section class="trust-bar">
             <div class="trust-container">
-                <p class="trust-label">Vault Phoenix enables campaigns similar to</p>
-                <div class="trust-logos">
-                    <span class="trust-text">Starbucks • Nike • Cadbury • Pizza Hut • Hollister</span>
+                <p class="trust-label">Proven Location-Based AR Technology</p>
+                <div class="trust-campaigns">
+                    <div class="trust-campaign-item">
+                        <strong>Starbucks</strong>
+                        <span>Geo-fencing rewards program increased store visits by 35%</span>
+                    </div>
+                    <div class="trust-campaign-item">
+                        <strong>Nike</strong>
+                        <span>Paris AR scavenger hunt drove 40% increase in foot traffic</span>
+                    </div>
+                    <div class="trust-campaign-item">
+                        <strong>Cadbury</strong>
+                        <span>Global AR treasure hunt reached 2M+ participants</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -170,7 +181,7 @@
             <div class="section-container">
                 <div class="section-header-clean">
                     <span class="section-label">Essential Context</span>
-                    <h2 class="section-title-clean">How to Reach Gen Z & Alpha: <span class="gradient-text">They Want Crypto, Not Coupons</span></h2>
+                    <h2 class="section-title-clean">How to Reach Gen Z: <span class="gradient-text">They Want Crypto, Not Coupons</span></h2>
                     <p class="section-description">The marketing playbook has changed. Here's what agencies and developers need to know about Web3 to win the next generation of consumers.</p>
                 </div>
 
@@ -204,7 +215,7 @@
                             </ul>
                             <div class="comparison-problem">
                                 <strong>The Problem:</strong>
-                                <p>Gen Z and Gen Alpha don't trust traditional loyalty programs. They want <em>real value</em> they can own, trade, and use anywhere.</p>
+                                <p>Gen Z doesn't trust traditional loyalty programs. They want <em>real value</em> they can own, trade, and use anywhere.</p>
                             </div>
                         </div>
 
@@ -270,7 +281,7 @@
                             </div>
 
                             <div class="solana-benefit">
-                                <div class="benefit-stat">Gen Z/Alpha</div>
+                                <div class="benefit-stat">Gen Z</div>
                                 <div class="benefit-label">Primary demographic</div>
                                 <p>Solana's user base skews young, tech-savvy, and crypto-native—exactly who you're trying to reach.</p>
                             </div>
@@ -1547,97 +1558,130 @@ Questions? Let's discuss your goals.
                     <p class="section-description">Calculate potential revenue for your campaigns. Adjust inputs to match your specific situation.</p>
                 </div>
 
-                <div class="calculator-container-clean">
-                    <div class="calculator-inputs">
-                        <h3>Campaign Parameters</h3>
+                <!-- TWO CALCULATORS SIDE BY SIDE -->
+                <div class="calculator-scenarios-grid">
+                    
+                    <!-- AGENCY CALCULATOR -->
+                    <div class="calculator-scenario agency-calculator">
+                        <h3>Agency / Marketer Calculator</h3>
                         
+                        <!-- Setup Fee (Agency ONLY) -->
                         <div class="input-group-clean">
-                            <label for="calc-locations">Number of Locations</label>
+                            <label for="agency-setup-fee">Setup Fee (one-time)</label>
+                            <div class="input-with-prefix">
+                                <span class="input-prefix">$</span>
+                                <input type="number" id="agency-setup-fee" min="0" max="10000" value="1000">
+                            </div>
+                        </div>
+                        
+                        <!-- Platform Cost (with API details) -->
+                        <div class="input-group-clean">
+                            <label for="agency-platform-cost">Your Platform Cost (monthly)</label>
+                            <select id="agency-platform-cost">
+                                <option value="49">Starter - $49/mo (10K API calls)</option>
+                                <option value="149" selected>Growth - $149/mo (100K API calls)</option>
+                                <option value="399">Scale - $399/mo (500K API calls)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Number of Locations -->
+                        <div class="input-group-clean">
+                            <label for="agency-locations">Number of Locations</label>
                             <div class="input-with-display">
-                                <input type="range" id="calc-locations" min="1" max="50" value="10" oninput="calculateROI()">
-                                <span class="input-value" id="locations-display">10</span>
+                                <input type="range" id="agency-locations" min="1" max="50" value="10">
+                                <span class="input-value" id="agency-locations-display">10</span>
                             </div>
                         </div>
-
+                        
+                        <!-- Price per Location (what they charge clients) -->
                         <div class="input-group-clean">
-                            <label for="calc-price-per-location">Price per Location (monthly)</label>
+                            <label for="agency-price-per-location">Price per Location (monthly)</label>
                             <div class="input-with-prefix">
                                 <span class="input-prefix">$</span>
-                                <input type="number" id="calc-price-per-location" min="50" max="1000" value="200" oninput="calculateROI()">
+                                <input type="number" id="agency-price-per-location" min="50" max="1000" value="200">
                             </div>
                         </div>
-
+                        
+                        <!-- Campaign Duration -->
                         <div class="input-group-clean">
-                            <label for="calc-setup-fee">Setup Fee (one-time)</label>
-                            <div class="input-with-prefix">
-                                <span class="input-prefix">$</span>
-                                <input type="number" id="calc-setup-fee" min="0" max="5000" value="1000" oninput="calculateROI()">
-                            </div>
-                        </div>
-
-                        <div class="input-group-clean">
-                            <label for="calc-duration">Campaign Duration</label>
-                            <select id="calc-duration" oninput="calculateROI()">
+                            <label for="agency-duration">Campaign Duration</label>
+                            <select id="agency-duration">
                                 <option value="1">1 month</option>
                                 <option value="3" selected>3 months</option>
                                 <option value="6">6 months</option>
                                 <option value="12">12 months</option>
                             </select>
                         </div>
-
-                        <div class="input-group-clean">
-                            <label for="calc-platform-cost">Your Platform Cost (monthly)</label>
-                            <select id="calc-platform-cost" oninput="calculateROI()">
-                                <option value="49">Starter - $49/mo</option>
-                                <option value="149" selected>Growth - $149/mo</option>
-                                <option value="399">Scale - $399/mo</option>
-                            </select>
+                        
+                        <!-- Results Display -->
+                        <div class="calculator-results">
+                            <div class="result-card-clean primary-result">
+                                <div class="result-label">Total Revenue</div>
+                                <div class="result-value" id="agency-total-revenue">$7,000</div>
+                            </div>
+                            <div class="result-card-clean">
+                                <div class="result-label">Your Profit</div>
+                                <div class="result-value profit" id="agency-profit">$6,553</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="calculator-results">
-                        <h3>Projected Revenue</h3>
+                    <!-- DEVELOPER CALCULATOR -->
+                    <div class="calculator-scenario developer-calculator">
+                        <h3>Developer / Tech Team Calculator</h3>
                         
-                        <div class="result-card-clean primary-result">
-                            <div class="result-label">Total Campaign Revenue</div>
-                            <div class="result-value" id="total-revenue">$7,000</div>
-                            <div class="result-detail" id="revenue-breakdown">$2,000/mo × 3 months + $1,000 setup</div>
+                        <!-- NO Setup Fee for Developer -->
+                        
+                        <!-- Platform Cost (with API details) -->
+                        <div class="input-group-clean">
+                            <label for="developer-platform-cost">Your Platform Cost (monthly)</label>
+                            <select id="developer-platform-cost">
+                                <option value="49">Starter - $49/mo (10K API calls)</option>
+                                <option value="149" selected>Growth - $149/mo (100K API calls)</option>
+                                <option value="399">Scale - $399/mo (500K API calls)</option>
+                            </select>
                         </div>
-
-                        <div class="results-grid">
-                            <div class="result-card-clean">
-                                <div class="result-label">Monthly Recurring</div>
-                                <div class="result-value" id="monthly-revenue">$2,000</div>
-                            </div>
-
-                            <div class="result-card-clean">
-                                <div class="result-label">Your Platform Cost</div>
-                                <div class="result-value" id="platform-cost">$447</div>
-                                <div class="result-detail" id="cost-breakdown">$149/mo × 3 months</div>
-                            </div>
-
-                            <div class="result-card-clean">
-                                <div class="result-label">Gross Profit</div>
-                                <div class="result-value profit" id="gross-profit">$6,553</div>
-                            </div>
-
-                            <div class="result-card-clean">
-                                <div class="result-label">Profit Margin</div>
-                                <div class="result-value profit" id="profit-margin">94%</div>
+                        
+                        <!-- Number of Locations -->
+                        <div class="input-group-clean">
+                            <label for="developer-locations">Number of Locations</label>
+                            <div class="input-with-display">
+                                <input type="range" id="developer-locations" min="1" max="50" value="10">
+                                <span class="input-value" id="developer-locations-display">10</span>
                             </div>
                         </div>
-
-                        <div class="calculator-notes">
-                            <p><strong>Note:</strong> Figures are illustrative. Actual results vary based on market conditions, location quality, and campaign execution.</p>
+                        
+                        <!-- Price per Location (what they charge advertisers) -->
+                        <div class="input-group-clean">
+                            <label for="developer-price-per-location">Price per Location (monthly)</label>
+                            <div class="input-with-prefix">
+                                <span class="input-prefix">$</span>
+                                <input type="number" id="developer-price-per-location" min="50" max="1000" value="200">
+                            </div>
                         </div>
-
-                        <button class="btn-primary-clean" onclick="emailCalculation()">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                            Email These Results
-                        </button>
+                        
+                        <!-- Campaign Duration -->
+                        <div class="input-group-clean">
+                            <label for="developer-duration">Campaign Duration</label>
+                            <select id="developer-duration">
+                                <option value="1">1 month</option>
+                                <option value="3" selected>3 months</option>
+                                <option value="6">6 months</option>
+                                <option value="12">12 months</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Results Display -->
+                        <div class="calculator-results">
+                            <div class="result-card-clean primary-result">
+                                <div class="result-label">Total Revenue</div>
+                                <div class="result-value" id="developer-total-revenue">$6,000</div>
+                            </div>
+                            <div class="result-card-clean">
+                                <div class="result-label">Your Profit</div>
+                                <div class="result-value profit" id="developer-profit">$5,553</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1774,7 +1818,7 @@ Questions? Let's discuss your goals.
                 </div>
 
                 <!-- Quick Start Code Example -->
-                <div class="code-example-section">
+                <div class="code-example-section" style="display: none;">
                     <h3>Quick Start Example</h3>
                     <div class="code-tabs">
                         <button class="code-tab active" onclick="showCodeTab('react-native')">React Native</button>
