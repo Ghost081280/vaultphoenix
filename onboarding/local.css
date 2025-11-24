@@ -2846,7 +2846,7 @@
         padding: 1.5rem;
     }
     
-    .results-grid {
+.results-grid {
         grid-template-columns: 1fr;
     }
     
@@ -2936,6 +2936,7 @@
         padding: 0.65rem 1rem;
         font-size: 0.85rem;
     }
+}
 
 /* ===================================
    UTILITY CLASSES
@@ -2949,7 +2950,6 @@
 .mb-2 { margin-bottom: 1rem; }
 .mb-3 { margin-bottom: 1.5rem; }
 .mb-4 { margin-bottom: 2rem; }
-
 .mt-0 { margin-top: 0; }
 .mt-1 { margin-top: 0.5rem; }
 .mt-2 { margin-top: 1rem; }
