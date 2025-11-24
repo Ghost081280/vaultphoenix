@@ -453,6 +453,16 @@
                     }, 300);
                 }
             });
+            
+            // SHOW/HIDE QUICK START EXAMPLE BASED ON PATH
+            const quickStartExample = document.querySelector('.code-example-section');
+            if (quickStartExample) {
+                if (path === 'developer') {
+                    quickStartExample.style.display = 'block';
+                } else {
+                    quickStartExample.style.display = 'none';
+                }
+            }
         }
     };
 
@@ -1081,7 +1091,6 @@ Generated from: https://vaultphoenix.com/onboarding.html`);
         });
         
         PhaseManager.register('phase1', () => {
-            ROICalculator.init();
             SmoothScroll.init();
             InputEnhancer.init();
         });
@@ -1096,6 +1105,7 @@ Generated from: https://vaultphoenix.com/onboarding.html`);
             // Initialize default states
             ToolkitNav.show('scripts');
             CodeTabSwitcher.show('react-native');
+            initializeROICalculators();
             
             // Handle URL hash
             if (window.location.hash) {
@@ -1235,9 +1245,138 @@ Generated from: https://vaultphoenix.com/onboarding.html`);
 
 })();
 
-/* ============================================
-   END OF ONBOARDING PAGE JAVASCRIPT
-   All original functionality preserved and enhanced
-   Agency-level polish applied throughout
-   Ready for Monday deployment
-   ============================================ */
+/* ========================================
+   JAVASCRIPT ADDITIONS FOR ONBOARDING PAGE
+   Add these to the END of onboarding/local.js
+   AFTER all existing code
+   ======================================== */
+
+// ============================================
+// TWO SEPARATE ROI CALCULATORS
+// ============================================
+
+const AgencyROICalculator = {
+    calculate() {
+        const setupFee = parseFloat(document.getElementById('agency-setup-fee')?.value || 1000);
+        const platformCost = parseFloat(document.getElementById('agency-platform-cost')?.value || 149);
+        const locations = parseInt(document.getElementById('agency-locations')?.value || 10);
+        const pricePerLocation = parseFloat(document.getElementById('agency-price-per-location')?.value || 200);
+        const duration = parseInt(document.getElementById('agency-duration')?.value || 3);
+        
+        const monthlyRevenue = locations * pricePerLocation;
+        const totalRevenue = (monthlyRevenue * duration) + setupFee;
+        const totalCost = platformCost * duration;
+        const profit = totalRevenue - totalCost;
+        
+        this.updateUI(totalRevenue, profit);
+    },
+    
+    updateUI(revenue, profit) {
+        const revenueEl = document.getElementById('agency-total-revenue');
+        const profitEl = document.getElementById('agency-profit');
+        if (revenueEl) revenueEl.textContent = this.formatCurrency(revenue);
+        if (profitEl) profitEl.textContent = this.formatCurrency(profit);
+    },
+    
+    formatCurrency(amount) {
+        return '$' + Math.round(amount).toLocaleString('en-US');
+    }
+};
+
+const DeveloperROICalculator = {
+    calculate() {
+        // NO setup fee for developer
+        const platformCost = parseFloat(document.getElementById('developer-platform-cost')?.value || 149);
+        const locations = parseInt(document.getElementById('developer-locations')?.value || 10);
+        const pricePerLocation = parseFloat(document.getElementById('developer-price-per-location')?.value || 200);
+        const duration = parseInt(document.getElementById('developer-duration')?.value || 3);
+        
+        const monthlyRevenue = locations * pricePerLocation;
+        const totalRevenue = monthlyRevenue * duration; // NO setup fee
+        const totalCost = platformCost * duration;
+        const profit = totalRevenue - totalCost;
+        
+        this.updateUI(totalRevenue, profit);
+    },
+    
+    updateUI(revenue, profit) {
+        const revenueEl = document.getElementById('developer-total-revenue');
+        const profitEl = document.getElementById('developer-profit');
+        if (revenueEl) revenueEl.textContent = this.formatCurrency(revenue);
+        if (profitEl) profitEl.textContent = this.formatCurrency(profit);
+    },
+    
+    formatCurrency(amount) {
+        return '$' + Math.round(amount).toLocaleString('en-US');
+    }
+};
+
+// Initialize both calculators
+function initializeROICalculators() {
+    // Agency calculator inputs
+    const agencyInputs = [
+        'agency-setup-fee',
+        'agency-platform-cost',
+        'agency-locations',
+        'agency-price-per-location',
+        'agency-duration'
+    ];
+    
+    agencyInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', () => {
+                AgencyROICalculator.calculate();
+                // Update range display
+                if (id === 'agency-locations') {
+                    const display = document.getElementById('agency-locations-display');
+                    if (display) display.textContent = input.value;
+                }
+            });
+            input.addEventListener('change', () => AgencyROICalculator.calculate());
+        }
+    });
+    
+    // Developer calculator inputs
+    const developerInputs = [
+        'developer-platform-cost',
+        'developer-locations',
+        'developer-price-per-location',
+        'developer-duration'
+    ];
+    
+    developerInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', () => {
+                DeveloperROICalculator.calculate();
+                // Update range display
+                if (id === 'developer-locations') {
+                    const display = document.getElementById('developer-locations-display');
+                    if (display) display.textContent = input.value;
+                }
+            });
+            input.addEventListener('change', () => DeveloperROICalculator.calculate());
+        }
+    });
+    
+    // Initial calculations
+    AgencyROICalculator.calculate();
+    DeveloperROICalculator.calculate();
+}
+
+// ============================================
+// EXPORT FOR DEBUGGING
+// ============================================
+
+if (typeof window.VaultPhoenix === 'undefined') {
+    window.VaultPhoenix = {};
+}
+if (typeof window.VaultPhoenix.Onboarding === 'undefined') {
+    window.VaultPhoenix.Onboarding = {};
+}
+
+window.VaultPhoenix.Onboarding.AgencyROICalculator = AgencyROICalculator;
+window.VaultPhoenix.Onboarding.DeveloperROICalculator = DeveloperROICalculator;
+
+console.log('✅ Two calculator system loaded');
