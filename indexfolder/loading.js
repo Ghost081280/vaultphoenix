@@ -328,13 +328,13 @@ function transitionToMainSite() {
         // FIXED: Almost immediate redirect for clean transition
         setTimeout(() => {
             console.log('🔥🪙 Direct redirect to main page...');
-            window.location.href = 'main.html';
+            window.location.href = 'https://vaultphoenix.com/main';
         }, 100); // Minimal delay for smooth visual continuity
         
         console.log('🔥🪙 Clean direct transition initiated!');
     } else {
         // Fallback if container not found
-        window.location.href = 'main.html';
+        window.location.href = 'https://vaultphoenix.com/main';
     }
 }
 
