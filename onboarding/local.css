@@ -3053,52 +3053,6 @@ select:focus,
 }
 
 /* ===================================
-   FIX 2: TRUST BAR - VERIFIED CAMPAIGNS
-   =================================== */
-.trust-campaigns {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-
-.trust-campaign-item {
-    text-align: center;
-    padding: 1rem;
-    background: rgba(215, 51, 39, 0.1);
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(215, 51, 39, 0.3);
-    transition: var(--transition-base);
-}
-
-.trust-campaign-item:hover {
-    background: rgba(240, 165, 0, 0.15);
-    border-color: var(--ember-orange);
-    transform: translateY(-3px);
-}
-
-.trust-campaign-item strong {
-    display: block;
-    font-size: 1.1rem;
-    color: var(--ember-gold);
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-}
-
-.trust-campaign-item span {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.4;
-    display: block;
-}
-
-@media (max-width: 768px) {
-    .trust-campaigns {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* ===================================
    FIX 3: TWO CALCULATOR LAYOUT
    =================================== */
 .calculator-scenarios-grid {
