@@ -1,25 +1,18 @@
 /* ===================================
-   VAULT PHOENIX - EMBER LOCAL JS v2.1 SAFE VERSION
-   Conservative enhancement - NO IMAGE OR DISPLAY CHANGES
-   
-   Your original working code with ONLY these additions:
-   - Performance tracking
-   - Window exports for debugging
-   - Better console logging
-   
-   ALL original functionality preserved exactly as-is
+   VAULT PHOENIX - EMBER LOCAL JS v2.2 SOL VERSION
+   Updated pricing from USD to SOL
+   0.003 SOL = 1 $Ember
    =================================== */
 
 /* ===================================
    CRITICAL: CREATE MODAL FUNCTIONS FIRST!
-   These MUST be created before anything else
    =================================== */
 (function() {
     console.log('🔥 Creating modal functions IMMEDIATELY...');
     
     window.showTpaModal = function() {
         console.log('🚀 showTpaModal called');
-        const modal = document.getElementById('tpaModal');
+        var modal = document.getElementById('tpaModal');
         if (modal) {
             modal.style.display = 'flex';
             modal.style.position = 'fixed';
@@ -33,7 +26,7 @@
     };
     
     window.closeTpaModal = function() {
-        const modal = document.getElementById('tpaModal');
+        var modal = document.getElementById('tpaModal');
         if (modal) {
             modal.style.display = 'none';
             document.body.style.overflow = '';
@@ -41,7 +34,7 @@
     };
     
     window.agreeTpa = function() {
-        const checkbox = document.getElementById('tpa-agree-checkbox');
+        var checkbox = document.getElementById('tpa-agree-checkbox');
         if (checkbox) {
             checkbox.checked = true;
             checkbox.dispatchEvent(new Event('change'));
@@ -51,7 +44,7 @@
     
     window.showWhitepaperModal = function() {
         console.log('🚀 showWhitepaperModal called');
-        const modal = document.getElementById('whitepaperModal');
+        var modal = document.getElementById('whitepaperModal');
         if (modal) {
             modal.style.display = 'flex';
             modal.style.position = 'fixed';
@@ -65,7 +58,7 @@
     };
     
     window.closeWhitepaperModal = function() {
-        const modal = document.getElementById('whitepaperModal');
+        var modal = document.getElementById('whitepaperModal');
         if (modal) {
             modal.style.display = 'none';
             document.body.style.overflow = '';
@@ -79,50 +72,43 @@
     'use strict';
     
     /* ===================================
-       PERFORMANCE TRACKING (NEW - SAFE)
-       Just for monitoring, doesn't affect functionality
+       PERFORMANCE TRACKING
        =================================== */
-    
-    const Perf = {
+    var Perf = {
         startTime: performance.now(),
-        
-        log(message, color = '#f0a500') {
-            const timestamp = (performance.now() - this.startTime).toFixed(2);
-            console.log(
-                `%c[EMBER] ${message} (${timestamp}ms)`,
-                `color: ${color}; font-weight: bold;`
-            );
+        log: function(message, color) {
+            color = color || '#f0a500';
+            var timestamp = (performance.now() - this.startTime).toFixed(2);
+            console.log('%c[EMBER] ' + message + ' (' + timestamp + 'ms)', 'color: ' + color + '; font-weight: bold;');
         }
     };
     
-    // Configuration
-    const CONFIG = {
-        presaleDate: '2025-12-01T12:00:00-05:00', // November 1, 2025, 12:00 PM EST
-        tokenPrice: 0.003, // $0.003 per EMBER token
-        minInvestment: 10,
-        maxInvestment: 50000,
-        defaultInvestment: 10,
-        // Airdrop configuration
+    // Configuration - UPDATED FOR SOL PRICING
+    var CONFIG = {
+        presaleDate: '2025-12-01T12:00:00-05:00',
+        tokenPrice: 0.003, // 0.003 SOL per EMBER token
+        minInvestment: 0.1, // Minimum 0.1 SOL
+        maxInvestment: 50000, // Maximum 50,000 SOL
+        defaultInvestment: 1, // Default 1 SOL
+        currency: 'SOL',
         airdrop: {
             totalEmber: 9000000,
             claimed: 0,
             maxPeople: 2700,
-            tokensPerClaim: 3333
+            tokensPerClaim: 3333,
+            valuePerClaim: 10 // ~10 SOL value at presale price
         }
     };
     
     // Wait for DOM to be ready
     document.addEventListener('DOMContentLoaded', function() {
-        Perf.log('🔥 Ember page initialized with Airdrop System v2.0');
+        Perf.log('🔥 Ember page initialized with SOL Pricing v2.2');
         
-        // Initialize core presale functionality
         initCountdownTimer();
         initInvestmentCalculator();
         initModals();
         initSmoothScroll();
         initProgressBars();
-        
-        // Initialize Airdrop System
         initAirdropModals();
         initAirdropForm();
         initStatusChecker();
@@ -135,33 +121,32 @@
     
     /* ===================================
        COUNTDOWN TIMER
-       Updates every second until presale launch
        =================================== */
     function initCountdownTimer() {
         function updateCountdown() {
-            const now = new Date().getTime();
-            const target = new Date(CONFIG.presaleDate).getTime();
-            const distance = target - now;
+            var now = new Date().getTime();
+            var target = new Date(CONFIG.presaleDate).getTime();
+            var distance = target - now;
             
             if (distance < 0) {
-                ['days', 'hours', 'minutes', 'seconds'].forEach(unit => {
-                    const el = document.getElementById(`countdown-${unit}`);
+                ['days', 'hours', 'minutes', 'seconds'].forEach(function(unit) {
+                    var el = document.getElementById(unit);
                     if (el) el.textContent = '00';
                 });
                 return;
             }
             
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
             
-            const pad = (num) => String(num).padStart(2, '0');
+            function pad(num) { return String(num).padStart(2, '0'); }
             
-            const daysEl = document.getElementById('countdown-days');
-            const hoursEl = document.getElementById('countdown-hours');
-            const minutesEl = document.getElementById('countdown-minutes');
-            const secondsEl = document.getElementById('countdown-seconds');
+            var daysEl = document.getElementById('days');
+            var hoursEl = document.getElementById('hours');
+            var minutesEl = document.getElementById('minutes');
+            var secondsEl = document.getElementById('seconds');
             
             if (daysEl) daysEl.textContent = pad(days);
             if (hoursEl) hoursEl.textContent = pad(hours);
@@ -175,13 +160,12 @@
     }
    
     /* ===================================
-       INVESTMENT CALCULATOR
-       Real-time calculation of EMBER tokens with validation
+       INVESTMENT CALCULATOR - SOL VERSION
        =================================== */
     function initInvestmentCalculator() {
-        const investmentInput = document.getElementById('investment-amount');
-        const emberTokensDisplay = document.getElementById('ember-tokens');
-        const totalInvestmentDisplay = document.getElementById('total-investment');
+        var investmentInput = document.getElementById('investment-amount');
+        var emberTokensDisplay = document.getElementById('ember-tokens');
+        var totalInvestmentDisplay = document.getElementById('total-investment');
         
         if (!investmentInput || !emberTokensDisplay || !totalInvestmentDisplay) {
             console.warn('Investment calculator elements not found');
@@ -192,84 +176,67 @@
             return Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
         
+        function formatSOL(num) {
+            if (num >= 1) {
+                return num.toLocaleString('en-US', { maximumFractionDigits: 2 });
+            } else {
+                return num.toLocaleString('en-US', { maximumFractionDigits: 4 });
+            }
+        }
+        
         function validateAndCalculate() {
-            let amount = parseFloat(investmentInput.value);
+            var amount = parseFloat(investmentInput.value);
             
-            // Check if input is valid number
             if (isNaN(amount) || amount <= 0) {
                 amount = 0;
                 investmentInput.style.border = '2px solid #ef4444';
                 investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
                 emberTokensDisplay.textContent = '0';
-                totalInvestmentDisplay.textContent = '$0';
+                totalInvestmentDisplay.textContent = '0 SOL';
                 return;
             }
             
-            // Validate min/max and show visual feedback
-            if (amount < CONFIG.minInvestment) {
-                // Below minimum - show red border
-                investmentInput.style.border = '2px solid #ef4444';
-                investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
-            } else if (amount > CONFIG.maxInvestment) {
-                // Above maximum - show red border
+            if (amount < CONFIG.minInvestment || amount > CONFIG.maxInvestment) {
                 investmentInput.style.border = '2px solid #ef4444';
                 investmentInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
             } else {
-                // Valid amount - show green border
                 investmentInput.style.border = '2px solid #10b981';
                 investmentInput.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.1)';
             }
             
-            // Calculate tokens (even for invalid amounts, so user can see calculation)
-            const tokens = amount / CONFIG.tokenPrice;
-            
-            // Update displays
+            var tokens = amount / CONFIG.tokenPrice;
             emberTokensDisplay.textContent = formatNumber(tokens);
-            totalInvestmentDisplay.textContent = '$' + formatNumber(amount);
+            totalInvestmentDisplay.textContent = formatSOL(amount) + ' SOL';
         }
         
-        // Listen for input changes
         investmentInput.addEventListener('input', validateAndCalculate);
         investmentInput.addEventListener('change', validateAndCalculate);
-        
-        // Allow user to clear the field
         investmentInput.addEventListener('focus', function() {
-            if (this.value === '10') {
-                this.select(); // Select all text when focused
-            }
+            if (this.value === '1') this.select();
         });
         
-        // Initial calculation
         validateAndCalculate();
-        
-        Perf.log('✅ Investment calculator initialized with validation');
+        Perf.log('✅ Investment calculator initialized with SOL pricing');
     }
     
     /* ===================================
-       MODAL SYSTEMS (TPA & WHITEPAPER)
-       Token Presale Agreement + Disclosures + Whitepaper
+       MODAL SYSTEMS
        =================================== */
     function initModals() {
         initTpaModal();
         initWhitepaperModal();
     }
     
-    // TPA Modal (Token Presale Agreement + Disclosures)
     function initTpaModal() {
-        const modal = document.getElementById('tpaModal');
-        const checkbox = document.getElementById('tpa-agree-checkbox');
-        const presaleButton = document.getElementById('presale-buy-button');
+        var modal = document.getElementById('tpaModal');
+        var checkbox = document.getElementById('tpa-agree-checkbox');
+        var presaleButton = document.getElementById('presale-buy-button');
         
         if (!modal) {
             console.warn('TPA modal not found');
             return;
         }
         
-        // NOTE: window.showTpaModal, closeTpaModal, and agreeTpa 
-        // are already created at the top of the file!
-        // We just set up the event listeners here.
-        
-        // Enable presale button when checkbox is checked
         if (checkbox && presaleButton) {
             checkbox.addEventListener('change', function() {
                 if (this.checked) {
@@ -284,13 +251,9 @@
             });
         }
         
-        // Close modal when clicking overlay
-        const overlay = modal.querySelector('.tpa-modal-overlay');
-        if (overlay) {
-            overlay.addEventListener('click', window.closeTpaModal);
-        }
+        var overlay = modal.querySelector('.tpa-modal-overlay');
+        if (overlay) overlay.addEventListener('click', window.closeTpaModal);
         
-        // Close with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modal.style.display === 'flex') {
                 window.closeTpaModal();
@@ -300,26 +263,16 @@
         Perf.log('✅ TPA modal initialized');
     }
     
-    // Whitepaper Modal
     function initWhitepaperModal() {
-        const modal = document.getElementById('whitepaperModal');
-        
+        var modal = document.getElementById('whitepaperModal');
         if (!modal) {
             console.warn('Whitepaper modal not found');
             return;
         }
         
-        // NOTE: window.showWhitepaperModal and closeWhitepaperModal
-        // are already created at the top of the file!
-        // We just set up the event listeners here.
+        var overlay = modal.querySelector('.tpa-modal-overlay');
+        if (overlay) overlay.addEventListener('click', window.closeWhitepaperModal);
         
-        // Close modal when clicking overlay
-        const overlay = modal.querySelector('.tpa-modal-overlay');
-        if (overlay) {
-            overlay.addEventListener('click', window.closeWhitepaperModal);
-        }
-        
-        // Close with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modal.style.display === 'flex') {
                 window.closeWhitepaperModal();
@@ -331,94 +284,63 @@
     
     /* ===================================
        AIRDROP MODALS SYSTEM
-       Info Modal + Terms Modal for Airdrop
        =================================== */
     function initAirdropModals() {
         initAirdropInfoModal();
         initAirdropTermsModal();
     }
     
-    // Airdrop Info Modal (How it works)
     function initAirdropInfoModal() {
-        const modal = document.createElement('div');
+        var modal = document.createElement('div');
         modal.id = 'airdrop-info-modal';
         modal.className = 'tpa-modal';
-        modal.style.display = 'none';
-        modal.style.position = 'fixed';
-        modal.style.top = '0';
-        modal.style.left = '0';
-        modal.style.width = '100%';
-        modal.style.height = '100%';
-        modal.style.zIndex = '99999';
+        modal.style.cssText = 'display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;';
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-labelledby', 'airdrop-info-title');
         modal.setAttribute('aria-modal', 'true');
         
-        modal.innerHTML = `
-            <div class="tpa-modal-overlay"></div>
-            <div class="tpa-modal-content" style="max-width: 700px;">
-                <div class="tpa-modal-header">
-                    <h3 id="airdrop-info-title">
-                        <img src="images/VPEmberCoin.PNG" alt="" aria-hidden="true">
-                        How the $Ember Airdrop Works
-                    </h3>
-                    <button class="tpa-modal-close" id="close-airdrop-info-modal" aria-label="Close info modal">×</button>
-                </div>
-                <div class="tpa-modal-body">
-                    <div class="tpa-preview">
-                        <h4>🔥 Spread the Phoenix Fire!</h4>
-                        <p><strong>Share our presale campaign on social media and earn FREE $Ember tokens!</strong></p>
-                        
-                        <div style="background: rgba(240, 165, 0, 0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(240, 165, 0, 0.3); margin: 20px 0;">
-                            <h4 style="color: #f0a500; margin-bottom: 15px;">📋 Step-by-Step Process:</h4>
-                            <ol style="margin-left: 20px; line-height: 1.8;">
-                                <li><strong>Click a Share Button</strong> - Choose X (Twitter), Facebook, or Telegram</li>
-                                <li><strong>Share the Post</strong> - Post about the $Ember presale on your social media</li>
-                                <li><strong>Copy Your Post URL</strong> - Get the link to your shared post</li>
-                                <li><strong>Fill the Claim Form</strong> - Enter your Solana wallet and post URL</li>
-                                <li><strong>Agree to Terms</strong> - Keep your post live until campaign end</li>
-                                <li><strong>Submit</strong> - Claim your 3,333 EMBER tokens (worth ≈$10)!</li>
-                            </ol>
-                        </div>
-                        
-                        <h4 style="color: #f0a500; margin-top: 20px;">🎁 What You Get:</h4>
-                        <ul style="margin-left: 20px; line-height: 1.8;">
-                            <li><strong>3,333 EMBER tokens</strong> per verified claim</li>
-                            <li><strong>≈$10 value</strong> at presale price ($0.003)</li>
-                            <li><strong>Distributed after presale ends</strong> - early supporter rewards!</li>
-                        </ul>
-                        
-                        <h4 style="color: #f0a500; margin-top: 20px;">⚠️ Important Rules:</h4>
-                        <ul style="margin-left: 20px; line-height: 1.8;">
-                            <li>You must <strong>keep your post live</strong> until the presale campaign ends</li>
-                            <li>Only <strong>one claim per person</strong> (verified by wallet address)</li>
-                            <li>Posts that are deleted before campaign end <strong>forfeit rewards</strong></li>
-                            <li>Limited to <strong>first 2,700 participants</strong> (9M EMBER pool)</li>
-                        </ul>
-                        
-                        <div style="background: rgba(215, 51, 39, 0.1); padding: 15px; border-radius: 10px; border-left: 3px solid #d73327; margin-top: 20px;">
-                            <p style="margin: 0; font-weight: 600;">
-                                <img src="images/VPEmberFlame.svg" alt="" aria-hidden="true" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;">
-                                Ready to claim your FREE $Ember? Click a share button below to get started!
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="tpa-modal-actions" style="margin-top: 25px;">
-                        <button class="tpa-agree-btn" id="ok-airdrop-info-btn">
-                            ✓ Got It - Let's Share!
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
+        modal.innerHTML = '<div class="tpa-modal-overlay"></div>' +
+            '<div class="tpa-modal-content" style="max-width: 700px;">' +
+            '<div class="tpa-modal-header">' +
+            '<h3 id="airdrop-info-title"><img src="images/VPEmberCoin.PNG" alt="" aria-hidden="true"> How the $Ember Airdrop Works</h3>' +
+            '<button class="tpa-modal-close" id="close-airdrop-info-modal" aria-label="Close info modal">×</button>' +
+            '</div>' +
+            '<div class="tpa-modal-body"><div class="tpa-preview">' +
+            '<h4>🔥 Spread the Phoenix Fire!</h4>' +
+            '<p><strong>Share our presale campaign on social media and earn FREE $Ember tokens!</strong></p>' +
+            '<div style="background: rgba(240, 165, 0, 0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(240, 165, 0, 0.3); margin: 20px 0;">' +
+            '<h4 style="color: #f0a500; margin-bottom: 15px;">📋 Step-by-Step Process:</h4>' +
+            '<ol style="margin-left: 20px; line-height: 1.8;">' +
+            '<li><strong>Click a Share Button</strong> - Choose X (Twitter), Facebook, or Telegram</li>' +
+            '<li><strong>Share the Post</strong> - Post about the $Ember presale on your social media</li>' +
+            '<li><strong>Copy Your Post URL</strong> - Get the link to your shared post</li>' +
+            '<li><strong>Fill the Claim Form</strong> - Enter your Solana wallet and post URL</li>' +
+            '<li><strong>Agree to Terms</strong> - Keep your post live until campaign end</li>' +
+            '<li><strong>Submit</strong> - Claim your 3,333 EMBER tokens (worth ≈10 SOL)!</li>' +
+            '</ol></div>' +
+            '<h4 style="color: #f0a500; margin-top: 20px;">🎁 What You Get:</h4>' +
+            '<ul style="margin-left: 20px; line-height: 1.8;">' +
+            '<li><strong>3,333 EMBER tokens</strong> per verified claim</li>' +
+            '<li><strong>≈10 SOL value</strong> at presale price (0.003 SOL)</li>' +
+            '<li><strong>Distributed after presale ends</strong> - early supporter rewards!</li></ul>' +
+            '<h4 style="color: #f0a500; margin-top: 20px;">⚠️ Important Rules:</h4>' +
+            '<ul style="margin-left: 20px; line-height: 1.8;">' +
+            '<li>You must <strong>keep your post live</strong> until the presale campaign ends</li>' +
+            '<li>Only <strong>one claim per person</strong> (verified by wallet address)</li>' +
+            '<li>Posts that are deleted before campaign end <strong>forfeit rewards</strong></li>' +
+            '<li>Limited to <strong>first 2,700 participants</strong> (9M EMBER pool)</li></ul>' +
+            '<div style="background: rgba(215, 51, 39, 0.1); padding: 15px; border-radius: 10px; border-left: 3px solid #d73327; margin-top: 20px;">' +
+            '<p style="margin: 0; font-weight: 600;"><img src="images/VPEmberFlame.svg" alt="" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px;"> Ready to claim your FREE $Ember? Click a share button below to get started!</p></div>' +
+            '</div><div class="tpa-modal-actions" style="margin-top: 25px;">' +
+            '<button class="tpa-agree-btn" id="ok-airdrop-info-btn">✓ Got It - Let\'s Share!</button>' +
+            '</div></div></div>';
         
         document.body.appendChild(modal);
         
-        const openBtn = document.getElementById('airdrop-info-btn');
-        const closeBtn = modal.querySelector('#close-airdrop-info-modal');
-        const okBtn = modal.querySelector('#ok-airdrop-info-btn');
-        const overlay = modal.querySelector('.tpa-modal-overlay');
+        var openBtn = document.getElementById('airdrop-info-btn');
+        var closeBtn = modal.querySelector('#close-airdrop-info-modal');
+        var okBtn = modal.querySelector('#ok-airdrop-info-btn');
+        var overlay = modal.querySelector('.tpa-modal-overlay');
         
         if (!openBtn) {
             console.warn('Airdrop info button not found');
@@ -428,17 +350,13 @@
         function openModal(e) {
             e.preventDefault();
             e.stopPropagation();
-            e.stopImmediatePropagation();
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             return false;
         }
         
         function closeModal(e) {
-            if (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
+            if (e) { e.preventDefault(); e.stopPropagation(); }
             modal.style.display = 'none';
             document.body.style.overflow = '';
         }
@@ -449,120 +367,59 @@
         if (overlay) overlay.addEventListener('click', closeModal);
         
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.style.display === 'flex') {
-                closeModal();
-            }
+            if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
         });
         
         Perf.log('✅ Airdrop info modal initialized');
     }
     
-    // Airdrop Terms Modal
     function initAirdropTermsModal() {
-        const modal = document.createElement('div');
+        var modal = document.createElement('div');
         modal.id = 'airdrop-terms-modal';
         modal.className = 'tpa-modal';
-        modal.style.display = 'none';
-        modal.style.position = 'fixed';
-        modal.style.top = '0';
-        modal.style.left = '0';
-        modal.style.width = '100%';
-        modal.style.height = '100%';
-        modal.style.zIndex = '99999';
+        modal.style.cssText = 'display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;';
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-labelledby', 'airdrop-terms-title');
         modal.setAttribute('aria-modal', 'true');
         
-        modal.innerHTML = `
-            <div class="tpa-modal-overlay"></div>
-            <div class="tpa-modal-content" style="max-width: 800px;">
-                <div class="tpa-modal-header">
-                    <h3 id="airdrop-terms-title">
-                        <img src="images/TechnicalFoundation.PNG" alt="" aria-hidden="true">
-                        $Ember Airdrop Terms & Conditions
-                    </h3>
-                    <button class="tpa-modal-close" id="close-airdrop-terms-modal" aria-label="Close terms modal">×</button>
-                </div>
-                <div class="tpa-modal-body">
-                    <div class="tpa-preview">
-                        <p style="font-size: 1.1rem; color: #f0a500; font-weight: 600; margin-bottom: 20px;">
-                            Please read these terms carefully before claiming your $Ember airdrop tokens.
-                        </p>
-                        
-                        <div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">
-                            <h4 style="color: #f0a500; margin-bottom: 15px;">1. Eligibility Requirements</h4>
-                            <ul style="margin-left: 20px; line-height: 1.8;">
-                                <li>You must share the Vault Phoenix $Ember presale campaign on a public social media account (X/Twitter, Facebook, or Telegram)</li>
-                                <li>Your social media post must remain live and publicly visible until the presale campaign officially ends</li>
-                                <li>You must provide a valid Solana wallet address to receive tokens</li>
-                                <li>You must provide a direct URL link to your social media post</li>
-                                <li>One claim per person - duplicate claims from the same wallet will be rejected</li>
-                                <li>Limited to first 2,700 verified participants</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">
-                            <h4 style="color: #f0a500; margin-bottom: 15px;">2. Token Distribution</h4>
-                            <ul style="margin-left: 20px; line-height: 1.8;">
-                                <li>Each verified participant receives 3,333 EMBER tokens (≈$10 value at $0.003 presale price)</li>
-                                <li>Tokens will be distributed to your Solana wallet address after the presale campaign ends</li>
-                                <li>Distribution timeline: Within 30 days after presale completion</li>
-                                <li>Total airdrop pool: 9,000,000 EMBER tokens (≈$27K value)</li>
-                                <li>Tokens are subject to the same utility and vesting terms as presale tokens</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">
-                            <h4 style="color: #f0a500; margin-bottom: 15px;">3. Post Verification & Compliance</h4>
-                            <ul style="margin-left: 20px; line-height: 1.8;">
-                                <li>Your social media post will be verified for authenticity and compliance</li>
-                                <li>Posts must include genuine promotion of the $Ember presale (spam or misleading posts will be rejected)</li>
-                                <li><strong style="color: #f87171;">CRITICAL:</strong> If you delete your post before the presale campaign ends, you forfeit your airdrop reward</li>
-                                <li>We reserve the right to verify post status at any time during the campaign</li>
-                                <li>Posts that violate social media platform terms of service will be disqualified</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">
-                            <h4 style="color: #f0a500; margin-bottom: 15px;">4. Important Disclaimers</h4>
-                            <ul style="margin-left: 20px; line-height: 1.8;">
-                                <li>Vault Phoenix reserves the right to verify all claims and reject fraudulent submissions</li>
-                                <li>Token values may fluctuate - the $10 value is based on presale price and not guaranteed</li>
-                                <li>Participation in this airdrop does not constitute an investment or financial advice</li>
-                                <li>You are responsible for any tax obligations in your jurisdiction</li>
-                                <li>Vault Phoenix may modify or terminate the airdrop program at any time</li>
-                                <li>By participating, you agree to Vault Phoenix's Terms of Service and Privacy Policy</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="background: rgba(240, 165, 0, 0.1); padding: 20px; border-radius: 15px; border: 2px solid rgba(240, 165, 0, 0.4); margin-top: 25px;">
-                            <p style="margin: 0; font-weight: 600; text-align: center; color: #f0a500; font-size: 1.05rem;">
-                                <img src="images/EmberCoinLock.PNG" alt="" aria-hidden="true" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;">
-                                By clicking "I Agree" below, you confirm that you have read, understood, and agree to comply with all terms and conditions outlined above.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="tpa-modal-actions" style="margin-top: 25px;">
-                        <button class="tpa-agree-btn" id="agree-airdrop-terms-btn" style="background: var(--ember-gradient-primary);">
-                            ✓ I Agree to Terms & Conditions
-                        </button>
-                        <button class="tpa-download-btn" id="cancel-airdrop-terms-btn" style="margin-top: 10px;">
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
+        modal.innerHTML = '<div class="tpa-modal-overlay"></div>' +
+            '<div class="tpa-modal-content" style="max-width: 800px;">' +
+            '<div class="tpa-modal-header">' +
+            '<h3 id="airdrop-terms-title"><img src="images/TechnicalFoundation.PNG" alt="" aria-hidden="true"> $Ember Airdrop Terms & Conditions</h3>' +
+            '<button class="tpa-modal-close" id="close-airdrop-terms-modal" aria-label="Close terms modal">×</button></div>' +
+            '<div class="tpa-modal-body"><div class="tpa-preview">' +
+            '<p style="font-size: 1.1rem; color: #f0a500; font-weight: 600; margin-bottom: 20px;">Please read these terms carefully before claiming your $Ember airdrop tokens.</p>' +
+            '<div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">' +
+            '<h4 style="color: #f0a500; margin-bottom: 15px;">1. Eligibility Requirements</h4>' +
+            '<ul style="margin-left: 20px; line-height: 1.8;">' +
+            '<li>You must share the Vault Phoenix $Ember presale campaign on a public social media account</li>' +
+            '<li>Your social media post must remain live until the presale campaign officially ends</li>' +
+            '<li>You must provide a valid Solana wallet address to receive tokens</li>' +
+            '<li>One claim per person - duplicate claims will be rejected</li>' +
+            '<li>Limited to first 2,700 verified participants</li></ul></div>' +
+            '<div style="background: rgba(26, 15, 10, 0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(215, 51, 39, 0.3); margin-bottom: 20px;">' +
+            '<h4 style="color: #f0a500; margin-bottom: 15px;">2. Token Distribution</h4>' +
+            '<ul style="margin-left: 20px; line-height: 1.8;">' +
+            '<li>Each verified participant receives 3,333 EMBER tokens (≈10 SOL value at 0.003 SOL presale price)</li>' +
+            '<li>Tokens will be distributed after the presale campaign ends</li>' +
+            '<li>Distribution timeline: Within 30 days after presale completion</li>' +
+            '<li>Total airdrop pool: 9,000,000 EMBER tokens (≈27K SOL value)</li></ul></div>' +
+            '<div style="background: rgba(240, 165, 0, 0.1); padding: 20px; border-radius: 15px; border: 2px solid rgba(240, 165, 0, 0.4); margin-top: 25px;">' +
+            '<p style="margin: 0; font-weight: 600; text-align: center; color: #f0a500; font-size: 1.05rem;">' +
+            '<img src="images/EmberCoinLock.PNG" alt="" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 8px;"> ' +
+            'By clicking "I Agree" below, you confirm that you have read and agree to all terms.</p></div></div>' +
+            '<div class="tpa-modal-actions" style="margin-top: 25px;">' +
+            '<button class="tpa-agree-btn" id="agree-airdrop-terms-btn" style="background: var(--ember-gradient-primary);">✓ I Agree to Terms & Conditions</button>' +
+            '<button class="tpa-download-btn" id="cancel-airdrop-terms-btn" style="margin-top: 10px;">Cancel</button></div></div></div>';
         
         document.body.appendChild(modal);
         
-        const openBtn = document.getElementById('open-terms-modal');
-        const closeBtn = modal.querySelector('#close-airdrop-terms-modal');
-        const agreeBtn = modal.querySelector('#agree-airdrop-terms-btn');
-        const cancelBtn = modal.querySelector('#cancel-airdrop-terms-btn');
-        const overlay = modal.querySelector('.tpa-modal-overlay');
-        const termsCheckbox = document.getElementById('claim-terms');
+        var openBtn = document.getElementById('open-terms-modal');
+        var closeBtn = modal.querySelector('#close-airdrop-terms-modal');
+        var agreeBtn = modal.querySelector('#agree-airdrop-terms-btn');
+        var cancelBtn = modal.querySelector('#cancel-airdrop-terms-btn');
+        var overlay = modal.querySelector('.tpa-modal-overlay');
+        var termsCheckbox = document.getElementById('claim-terms');
         
         if (!openBtn) {
             console.warn('Airdrop terms button not found');
@@ -577,10 +434,7 @@
         }
         
         function closeModal(e) {
-            if (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
+            if (e) { e.preventDefault(); e.stopPropagation(); }
             modal.style.display = 'none';
             document.body.style.overflow = '';
         }
@@ -600,9 +454,7 @@
         }
         
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.style.display === 'flex') {
-                closeModal();
-            }
+            if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
         });
         
         Perf.log('✅ Airdrop terms modal initialized');
@@ -610,12 +462,11 @@
     
     /* ===================================
        AIRDROP FORM HANDLING
-       Form validation and submission
        =================================== */
     function initAirdropForm() {
-        const form = document.getElementById('ember-claim-form');
-        const messageBox = document.getElementById('ember-message-box');
-        const submitBtn = document.getElementById('claim-submit-btn');
+        var form = document.getElementById('ember-claim-form');
+        var messageBox = document.getElementById('ember-message-box');
+        var submitBtn = document.getElementById('claim-submit-btn');
         
         if (!form) {
             console.warn('Airdrop form not found');
@@ -625,59 +476,44 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const name = document.getElementById('claim-name')?.value.trim() || '';
-            const wallet = document.getElementById('claim-wallet')?.value.trim() || '';
-            const email = document.getElementById('claim-email')?.value.trim() || '';
-            const socialUrl = document.getElementById('claim-social-url')?.value.trim() || '';
-            const termsChecked = document.getElementById('claim-terms')?.checked || false;
+            var walletEl = document.getElementById('claim-wallet');
+            var socialUrlEl = document.getElementById('claim-social-url');
+            var termsEl = document.getElementById('claim-terms');
             
-            // Validation
-            if (!wallet) {
-                showMessage('error', '❌ Please enter your Solana wallet address');
-                return;
+            var wallet = walletEl ? walletEl.value.trim() : '';
+            var socialUrl = socialUrlEl ? socialUrlEl.value.trim() : '';
+            var termsChecked = termsEl ? termsEl.checked : false;
+            
+            if (!wallet) { showMessage('error', '❌ Please enter your Solana wallet address'); return; }
+            if (!socialUrl) { showMessage('error', '❌ Please enter your social media post URL'); return; }
+            if (!termsChecked) { showMessage('error', '❌ Please agree to the terms and conditions'); return; }
+            
+            try {
+                var url = new URL(socialUrl);
+                if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+                    showMessage('error', '❌ Please enter a valid URL'); return;
+                }
+            } catch (_) {
+                showMessage('error', '❌ Please enter a valid URL'); return;
             }
             
-            if (!socialUrl) {
-                showMessage('error', '❌ Please enter your social media post URL');
-                return;
-            }
-            
-            if (!termsChecked) {
-                showMessage('error', '❌ Please agree to the terms and conditions');
-                return;
-            }
-            
-            // Validate URL format
-            if (!isValidUrl(socialUrl)) {
-                showMessage('error', '❌ Please enter a valid URL for your social media post');
-                return;
-            }
-            
-            // Disable submit button during processing
             if (submitBtn) {
                 submitBtn.disabled = true;
-                const originalHTML = submitBtn.innerHTML;
+                var originalHTML = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<span>⏳ Submitting...</span>';
-                
                 showMessage('info', '⏳ Submitting your claim... Please wait.');
                 
                 try {
-                    // Simulate API call (replace with actual API endpoint)
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-                    
-                    showMessage('success', '🎉 Claim submitted successfully! Check your email for confirmation. Tokens will be distributed after presale ends.');
+                    await new Promise(function(r) { setTimeout(r, 2000); });
+                    showMessage('success', '🎉 Claim submitted successfully! Tokens will be distributed after presale ends.');
                     form.reset();
-                    document.getElementById('claim-terms').disabled = true;
-                    
+                    if (termsEl) termsEl.disabled = true;
                 } catch (error) {
-                    showMessage('error', '❌ Failed to submit claim. Please try again or contact support.');
+                    showMessage('error', '❌ Failed to submit claim. Please try again.');
                     console.error('Airdrop claim error:', error);
                 } finally {
-                    // Re-enable submit button
-                    if (submitBtn) {
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = originalHTML;
-                    }
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalHTML;
                 }
             }
         });
@@ -687,24 +523,8 @@
             messageBox.style.display = 'block';
             messageBox.className = 'message-box-compact ' + type;
             messageBox.textContent = text;
-            
-            // Scroll message into view
             messageBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
-            if (type === 'success') {
-                setTimeout(() => {
-                    messageBox.style.display = 'none';
-                }, 8000);
-            }
-        }
-        
-        function isValidUrl(string) {
-            try {
-                const url = new URL(string);
-                return url.protocol === 'http:' || url.protocol === 'https:';
-            } catch (_) {
-                return false;
-            }
+            if (type === 'success') setTimeout(function() { messageBox.style.display = 'none'; }, 8000);
         }
         
         Perf.log('✅ Airdrop form initialized');
@@ -712,11 +532,10 @@
     
     /* ===================================
        STATUS CHECKER
-       Check claim status by wallet address
        =================================== */
     function initStatusChecker() {
-        const checkBtn = document.getElementById('check-status-btn');
-        const walletInput = document.getElementById('status-wallet');
+        var checkBtn = document.getElementById('check-status-btn');
+        var walletInput = document.getElementById('status-wallet');
         
         if (!checkBtn || !walletInput) {
             console.warn('Status checker elements not found');
@@ -724,111 +543,48 @@
         }
         
         checkBtn.addEventListener('click', async function() {
-            const wallet = walletInput.value.trim();
-            
-            if (!wallet) {
-                alert('Feature Coming soon');
-                return;
-            }
+            var wallet = walletInput.value.trim();
+            if (!wallet) { alert('Feature Coming soon'); return; }
             
             try {
-                const originalText = checkBtn.textContent;
                 checkBtn.textContent = 'Checking...';
                 checkBtn.disabled = true;
+                await new Promise(function(r) { setTimeout(r, 1500); });
                 
-                // Simulate API call (replace with actual API endpoint)
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                const shortWallet = `${wallet.substring(0, 8)}...${wallet.substring(wallet.length - 4)}`;
-                
-                // Simulate response (replace with actual API response)
-                const claimStatus = {
-                    found: false, // Change to true when claim exists
-                    tokens: 3333,
-                    status: 'pending', // 'pending', 'verified', 'distributed'
-                    postVerified: false
-                };
-                
-                if (claimStatus.found) {
-                    alert(`✅ Claim Status for ${shortWallet}:\n\n` +
-                          `• Tokens: ${claimStatus.tokens.toLocaleString()} EMBER\n` +
-                          `• Status: ${claimStatus.status.toUpperCase()}\n` +
-                          `• Post Verified: ${claimStatus.postVerified ? 'Yes' : 'Pending'}\n\n` +
-                          `Keep your post live until presale ends!`);
-                } else {
-                    alert(`📊 Status for ${shortWallet}:\n\n` +
-                          `❌ No claims found for this wallet address.\n\n` +
-                          `You can submit a new claim using the form below!`);
-                }
-                
+                var shortWallet = wallet.substring(0, 8) + '...' + wallet.substring(wallet.length - 4);
+                alert('📊 Status for ' + shortWallet + ':\n\n❌ No claims found for this wallet address.\n\nYou can submit a new claim using the form below!');
             } catch (error) {
                 alert('❌ Error checking status. Please try again.');
-                console.error('Status check error:', error);
             } finally {
                 checkBtn.textContent = 'Check';
                 checkBtn.disabled = false;
             }
         });
         
-        // Allow Enter key to check status
         walletInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkBtn.click();
-            }
+            if (e.key === 'Enter') checkBtn.click();
         });
         
         Perf.log('✅ Status checker initialized');
     }
     
     /* ===================================
-       SHARE BUTTONS
-       Social media share functionality
+       SHARE BUTTONS - UPDATED FOR SOL
        =================================== */
     function initShareButtons() {
-        const shareConfig = {
-            x: {
-                btn: 'share-x-ember',
-                handler: () => {
-                    const text = '🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. 100M tokens at $0.003 each! #VaultPhoenix #Ember $Ember @VaultPhoenix';
-                    const url = 'https://vaultphoenix.com/ember.html';
-                    window.open(
-                        `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-                        '_blank',
-                        'width=600,height=450,scrollbars=yes'
-                    );
-                }
-            },
-            facebook: {
-                btn: 'share-facebook-ember',
-                handler: () => {
-                    const url = 'https://vaultphoenix.com/ember.html';
-                    window.open(
-                        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-                        '_blank',
-                        'width=600,height=450,scrollbars=yes'
-                    );
-                }
-            },
-            telegram: {
-                btn: 'share-telegram-ember',
-                handler: () => {
-                    const text = '🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. Get your FREE airdrop tokens!';
-                    const url = 'https://vaultphoenix.com/ember.html';
-                    window.open(
-                        `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
-                        '_blank',
-                        'width=600,height=450,scrollbars=yes'
-                    );
-                }
-            }
+        var shareConfig = {
+            x: { btn: 'share-x-ember', url: 'https://twitter.com/intent/tweet?text=' + encodeURIComponent('🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. 100M tokens at 0.003 SOL each! #VaultPhoenix #Ember $Ember @VaultPhoenix') + '&url=' + encodeURIComponent('https://vaultphoenix.com/ember.html') },
+            facebook: { btn: 'share-facebook-ember', url: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://vaultphoenix.com/ember.html') },
+            telegram: { btn: 'share-telegram-ember', url: 'https://t.me/share/url?url=' + encodeURIComponent('https://vaultphoenix.com/ember.html') + '&text=' + encodeURIComponent('🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming. Get your FREE airdrop tokens!') }
         };
         
-        Object.values(shareConfig).forEach(config => {
-            const btn = document.getElementById(config.btn);
+        Object.keys(shareConfig).forEach(function(key) {
+            var config = shareConfig[key];
+            var btn = document.getElementById(config.btn);
             if (btn) {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    config.handler();
+                    window.open(config.url, '_blank', 'width=600,height=450,scrollbars=yes');
                 });
             }
         });
@@ -837,215 +593,107 @@
     }
     
     /* ===================================
-       COPY HASHTAGS FUNCTIONALITY
-       Ultimate cross-platform copy solution
+       COPY HASHTAGS
        =================================== */
     function initCopyHashtags() {
-        const copyBtn = document.getElementById('copy-hashtags-btn');
-        const copyBtnText = document.getElementById('copy-btn-text');
-        const hashtagText = document.getElementById('hashtag-text-display');
+        var copyBtn = document.getElementById('copy-hashtags-btn');
+        var copyBtnText = document.getElementById('copy-btn-text');
+        var hashtagText = document.getElementById('hashtag-text-display');
         
-        if (!copyBtn || !copyBtnText || !hashtagText) {
-            console.warn('Copy hashtags elements not found');
-            return;
-        }
+        if (!copyBtn || !copyBtnText || !hashtagText) return;
         
         copyBtn.addEventListener('click', async function(e) {
             e.preventDefault();
-            const textToCopy = hashtagText.textContent.trim();
+            var text = hashtagText.textContent.trim();
             
             try {
-                // Try modern Clipboard API first
                 if (navigator.clipboard && navigator.clipboard.writeText) {
-                    await navigator.clipboard.writeText(textToCopy);
-                    showCopySuccess();
+                    await navigator.clipboard.writeText(text);
                 } else {
-                    // Fallback for older browsers and iOS
-                    fallbackCopyToClipboard(textToCopy);
-                    showCopySuccess();
+                    var textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.cssText = 'position:fixed;top:0;left:0;width:2em;height:2em;opacity:0;';
+                    document.body.appendChild(textarea);
+                    textarea.focus();
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
                 }
+                copyBtn.classList.add('copied');
+                copyBtnText.textContent = '✓ Copied!';
+                setTimeout(function() {
+                    copyBtn.classList.remove('copied');
+                    copyBtnText.textContent = 'Copy Hashtags';
+                }, 2500);
             } catch (err) {
-                console.error('Copy failed:', err);
-                // Try fallback method
-                try {
-                    fallbackCopyToClipboard(textToCopy);
-                    showCopySuccess();
-                } catch (fallbackErr) {
-                    console.error('Fallback copy failed:', fallbackErr);
-                    showCopyError();
-                }
+                copyBtnText.textContent = '❌ Failed';
+                setTimeout(function() { copyBtnText.textContent = 'Copy Hashtags'; }, 2000);
             }
         });
         
-        function showCopySuccess() {
-            copyBtn.classList.add('copied');
-            copyBtnText.textContent = '✓ Copied!';
-            
-            // Reset after 2.5 seconds
-            setTimeout(() => {
-                copyBtn.classList.remove('copied');
-                copyBtnText.textContent = 'Copy Hashtags';
-            }, 2500);
-        }
-        
-        function showCopyError() {
-            copyBtnText.textContent = '❌ Failed';
-            setTimeout(() => {
-                copyBtnText.textContent = 'Copy Hashtags';
-            }, 2000);
-        }
-        
-        function fallbackCopyToClipboard(text) {
-            // Create temporary textarea
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            
-            // Make it invisible but not display:none (iOS requirement)
-            textarea.style.position = 'fixed';
-            textarea.style.top = '0';
-            textarea.style.left = '0';
-            textarea.style.width = '2em';
-            textarea.style.height = '2em';
-            textarea.style.padding = '0';
-            textarea.style.border = 'none';
-            textarea.style.outline = 'none';
-            textarea.style.boxShadow = 'none';
-            textarea.style.background = 'transparent';
-            textarea.setAttribute('readonly', '');
-            
-            document.body.appendChild(textarea);
-            
-            // iOS specific handling
-            if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
-                const range = document.createRange();
-                range.selectNodeContents(textarea);
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
-                textarea.setSelectionRange(0, 999999);
-            } else {
-                textarea.focus();
-                textarea.select();
-            }
-            
-            try {
-                const successful = document.execCommand('copy');
-                document.body.removeChild(textarea);
-                
-                if (!successful) {
-                    throw new Error('execCommand copy failed');
-                }
-            } catch (err) {
-                document.body.removeChild(textarea);
-                throw err;
-            }
-        }
-        
-        Perf.log('✅ Copy hashtags functionality initialized');
+        Perf.log('✅ Copy hashtags initialized');
     }
     
     /* ===================================
        AIRDROP PROGRESS TRACKER
-       Animated number counting and progress bar
        =================================== */
     function initAirdropTracker() {
-        const totalEmber = CONFIG.airdrop.totalEmber;
-        const claimed = CONFIG.airdrop.claimed;
-        const remaining = totalEmber - claimed;
-        const people = 0; // Current number of claims
-        const maxPeople = CONFIG.airdrop.maxPeople;
-        const percentage = ((claimed / totalEmber) * 100).toFixed(2);
+        var totalEmber = CONFIG.airdrop.totalEmber;
+        var claimed = CONFIG.airdrop.claimed;
+        var remaining = totalEmber - claimed;
+        var maxPeople = CONFIG.airdrop.maxPeople;
+        var percentage = ((claimed / totalEmber) * 100).toFixed(2);
         
-        const totalEmberEl = document.getElementById('ember-total-ember');
-        const claimedEl = document.getElementById('ember-claimed');
-        const remainingEl = document.getElementById('ember-remaining');
-        const peopleEl = document.getElementById('ember-people-claimed');
-        const progressBar = document.getElementById('ember-progress-bar');
-        const progressPercentage = document.getElementById('ember-progress-percentage');
+        var totalEmberEl = document.getElementById('ember-total-ember');
+        var claimedEl = document.getElementById('ember-claimed');
+        var remainingEl = document.getElementById('ember-remaining');
+        var peopleEl = document.getElementById('ember-people-claimed');
+        var progressBar = document.getElementById('ember-progress-bar');
+        var progressPercentage = document.getElementById('ember-progress-percentage');
         
-        // Set initial values
         if (totalEmberEl) totalEmberEl.textContent = totalEmber.toLocaleString();
         
-        // Animate numbers with counting effect
         function animateValue(element, start, end, duration) {
             if (!element) return;
-            
-            const range = end - start;
-            const increment = range / (duration / 16);
-            let current = start;
-            
-            const timer = setInterval(() => {
+            var range = end - start;
+            var increment = range / (duration / 16);
+            var current = start;
+            var timer = setInterval(function() {
                 current += increment;
-                if (current >= end) {
-                    current = end;
-                    clearInterval(timer);
-                }
+                if (current >= end) { current = end; clearInterval(timer); }
                 element.textContent = Math.floor(current).toLocaleString();
             }, 16);
         }
         
-        // Animate the numbers
         if (claimedEl) animateValue(claimedEl, 0, claimed, 1000);
         if (remainingEl) animateValue(remainingEl, 0, remaining, 1200);
-        
-        if (peopleEl) {
-            peopleEl.textContent = `${people.toLocaleString()} / ${maxPeople.toLocaleString()}`;
-        }
-        
-        // Animate progress bar
-        if (progressBar) {
-            setTimeout(() => {
-                progressBar.style.width = `${percentage}%`;
-            }, 500);
-        }
-        
-        if (progressPercentage) {
-            setTimeout(() => {
-                progressPercentage.textContent = percentage;
-            }, 500);
-        }
+        if (peopleEl) peopleEl.textContent = '0 / ' + maxPeople.toLocaleString();
+        if (progressBar) setTimeout(function() { progressBar.style.width = percentage + '%'; }, 500);
+        if (progressPercentage) setTimeout(function() { progressPercentage.textContent = percentage; }, 500);
         
         Perf.log('✅ Airdrop tracker initialized');
     }
     
     /* ===================================
-       SMOOTH SCROLL FOR ANCHOR LINKS
-       Smooth scrolling with navbar offset
+       SMOOTH SCROLL
        =================================== */
     function initSmoothScroll() {
-        // Get navbar height for offset
-        const navbar = document.getElementById('navbar');
-        const navbarHeight = navbar ? navbar.offsetHeight : 80;
+        var navbar = document.getElementById('navbar');
+        var navbarHeight = navbar ? navbar.offsetHeight : 80;
         
-        // Handle all anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
             anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
+                var href = this.getAttribute('href');
+                if (href === '#') return;
                 
-                // Skip if it's just "#" (empty anchor)
-                if (href === '#') {
-                    return;
-                }
-                
-                const targetId = href.substring(1);
-                const targetElement = document.getElementById(targetId);
+                var targetId = href.substring(1);
+                var targetElement = document.getElementById(targetId);
                 
                 if (targetElement) {
                     e.preventDefault();
-                    
-                    // Calculate position with navbar offset
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
-                    
-                    // Smooth scroll
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Update URL without jumping
-                    if (history.pushState) {
-                        history.pushState(null, null, href);
-                    }
+                    var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                    if (history.pushState) history.pushState(null, null, href);
                 }
             });
         });
@@ -1055,48 +703,24 @@
     
     /* ===================================
        PROGRESS BARS
-       Can be updated with real data from backend
        =================================== */
     function initProgressBars() {
-        // Presale progress bar
-        const presaleProgress = document.querySelector('.presale-progress .progress-fill');
-        if (presaleProgress) {
-            // Static for now - can be updated with real data
-            // Example: updateProgressBar(presaleProgress, 0, 500000, currentAmount);
-        }
-        
         Perf.log('✅ Progress bars initialized');
     }
     
     /* ===================================
-       WINDOW EXPORTS FOR DEBUGGING (NEW)
+       WINDOW EXPORTS
        =================================== */
-    
     window.VaultPhoenix = window.VaultPhoenix || {};
     window.VaultPhoenix.Ember = {
         config: CONFIG,
-        version: '2.1-SAFE',
-        
-        getState() {
-            return {
-                config: CONFIG,
-                performance: {
-                    uptime: (performance.now() - Perf.startTime).toFixed(2) + 'ms'
-                }
-            };
+        version: '2.2-SOL',
+        getState: function() {
+            return { config: CONFIG, performance: { uptime: (performance.now() - Perf.startTime).toFixed(2) + 'ms' } };
         },
-        
-        logState() {
-            console.table(this.getState());
-        }
+        logState: function() { console.table(this.getState()); }
     };
     
-    Perf.log('✅ Ember local.js v2.1-SAFE loaded successfully! 🔥', '#4ade80');
+    Perf.log('✅ Ember local.js v2.2-SOL loaded successfully! 🔥', '#4ade80');
     
 })();
-
-/* ===================================
-   END OF EMBER LOCAL JS v2.1 SAFE VERSION
-   Your original working code + minimal enhancements
-   NO image loading changes - everything displays normally
-   =================================== */
