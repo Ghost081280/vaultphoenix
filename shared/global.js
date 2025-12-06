@@ -669,7 +669,7 @@ function initializeScrollProgress() {
 // UNIVERSAL COUNTDOWN TIMER
 // ============================================
 function initializeUniversalCountdown() {
-    const targetDate = new Date('December 1, 2025 00:00:00 UTC');
+    const targetDate = new Date('January 16, 2026 00:00:00 UTC');
     
     const countdownElements = {
         mainDays: document.getElementById('main-days'),
