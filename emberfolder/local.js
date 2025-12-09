@@ -104,7 +104,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         Perf.log('🔥 Ember page initialized with SOL Pricing v2.2');
         
-        initCountdownTimer();
+       /* initCountdownTimer(); */
         initInvestmentCalculator();
         initModals();
         initSmoothScroll();
@@ -552,7 +552,7 @@
                 await new Promise(function(r) { setTimeout(r, 1500); });
                 
                 var shortWallet = wallet.substring(0, 8) + '...' + wallet.substring(wallet.length - 4);
-                alert('📊 Status for ' + shortWallet + ':\n\n❌ No claims found for this wallet address.\n\nYou can submit a new claim using the form below!');
+                alert('Please wait until 15th Jan,2026 to check your claim status');
             } catch (error) {
                 alert('❌ Error checking status. Please try again.');
             } finally {
@@ -570,10 +570,16 @@
     
     /* ===================================
        SHARE BUTTONS - UPDATED FOR SOL
+        // x: { btn: 'share-x-ember', url: 'https://twitter.com/intent/tweet?text=' + encodeURIComponent('🔥 Join me in the $Ember Token Presale! AR Crypto Gaming with GPS & Beacon technology. 786,666 tokens at 0.003 SOL each!\n\n #VaultPhoenix #Ember $Ember @VaultPhoenix') + '&url=' + encodeURIComponent('https://tools.smithii.io/launch/$Ember-Presale') },
+       
        =================================== */
     function initShareButtons() {
         var shareConfig = {
-            x: { btn: 'share-x-ember', url: 'https://twitter.com/intent/tweet?text=' + encodeURIComponent('🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. 100M tokens at 0.003 SOL each! #VaultPhoenix #Ember $Ember @VaultPhoenix') + '&url=' + encodeURIComponent('https://tools.smithii.io/launch/$Ember-Presale') },
+          
+            x: { btn: 'share-x-ember', url: 'https://twitter.com/intent/tweet?text=' + encodeURIComponent('🔥 Join me in the $Ember Token Presale! AR Crypto Gaming with GPS & Beacon technology. 786,666 tokens at 0.003 SOL each!\n') + '&url=' + encodeURIComponent('https://tools.smithii.io/launch/$Ember-Presale') + encodeURIComponent('\n\n#VaultPhoenix #Ember $Ember @VaultPhoenix') },
+       
+       
+       
             facebook: { btn: 'share-facebook-ember', url: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://tools.smithii.io/launch/$Ember-Presale') },
             telegram: { btn: 'share-telegram-ember', url: 'https://t.me/share/url?url=' + encodeURIComponent('https://tools.smithii.io/launch/$Ember-Presale') + '&text=' + encodeURIComponent('🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming. Get your FREE airdrop tokens!') }
         };
