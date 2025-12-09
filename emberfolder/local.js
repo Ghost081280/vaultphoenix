@@ -573,9 +573,9 @@
        =================================== */
     function initShareButtons() {
         var shareConfig = {
-            x: { btn: 'share-x-ember', url: 'https://twitter.com/intent/tweet?text=' + encodeURIComponent('🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. 100M tokens at 0.003 SOL each! #VaultPhoenix #Ember $Ember @VaultPhoenix') + '&url=' + encodeURIComponent('https://vaultphoenix.com/ember.html') },
-            facebook: { btn: 'share-facebook-ember', url: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://vaultphoenix.com/ember.html') },
-            telegram: { btn: 'share-telegram-ember', url: 'https://t.me/share/url?url=' + encodeURIComponent('https://vaultphoenix.com/ember.html') + '&text=' + encodeURIComponent('🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming. Get your FREE airdrop tokens!') }
+            x: { btn: 'share-x-ember', url: 'https://twitter.com/intent/tweet?text=' + encodeURIComponent('🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming with GPS & Beacon technology. 100M tokens at 0.003 SOL each! #VaultPhoenix #Ember $Ember @VaultPhoenix') + '&url=' + encodeURIComponent('https://tools.smithii.io/launch/$Ember-Presale') },
+            facebook: { btn: 'share-facebook-ember', url: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://tools.smithii.io/launch/$Ember-Presale') },
+            telegram: { btn: 'share-telegram-ember', url: 'https://t.me/share/url?url=' + encodeURIComponent('https://tools.smithii.io/launch/$Ember-Presale') + '&text=' + encodeURIComponent('🔥 Join me in the $Ember Token Presale! Revolutionary AR Crypto Gaming. Get your FREE airdrop tokens!') }
         };
         
         Object.keys(shareConfig).forEach(function(key) {
