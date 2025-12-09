@@ -128,6 +128,11 @@
     <link rel="stylesheet" href="shared/global.css">
     <!-- Then load page-specific ember/local.css -->
     <link rel="stylesheet" href="emberfolder/local.css">
+    
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- Add CSRF token for Laravel -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
 </head>
 
 <body>
@@ -512,6 +517,18 @@
                                             class="required">*</span></label>
                                     <input type="url" id="claim-social-url" class="input-compact"
                                         placeholder="https://x.com/yourpost or https://facebook.com/yourpost" required>
+                                </div>
+
+                                <!-- reCAPTCHA Widget -->
+                                <div class="form-group-compact">
+                                    <div class="g-recaptcha" data-sitekey="6LciZCYsAAAAAL9Hs8DMrGsdt0nloEZg_hWdkb91"
+                                        data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired"
+                                        data-error-callback="onRecaptchaError">
+                                    </div>
+                                    <div id="recaptcha-error" class="error-message"
+                                        style="display: none; color: #ff4444; font-size: 12px; margin-top: 5px;">
+                                        Please complete the reCAPTCHA verification
+                                    </div>
                                 </div>
 
                                 <!-- Terms Checkbox -->
@@ -1626,20 +1643,14 @@
                                         <span class="time-label">Seconds</span>
                                     </div>
                                 </div>
+                                <a href="https://tools.smithii.io/launch/$Ember-Presale">
+  <button class="presale-button" aria-label="Join $Ember Token presale" style="margin-left: 10px;margin-top: 10px;">
+    Join Presale
+  </button>
+  </a>
                             </div>
 
-                            <!-- Progress Bar -->
-                            <div class="presale-progress">
-                                <h3>Funding Progress</h3>
-                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
-                                    aria-valuemax="500000" aria-label="Presale funding progress">
-                                    <div class="progress-fill" style="width: 0%"></div>
-                                </div>
-                                <div class="progress-stats">
-                                    <span>$0 raised</span>
-                                    <span>Goal:  2360 SOL</span>
-                                </div>
-                            </div>
+                            
 
                             <!-- Fund Usage Breakdown -->
                             <div class="fund-usage">
@@ -2297,43 +2308,91 @@
             color: #ff4444;
         }
     </style>
-    <script>
-        // Add this script to your HTML or in a separate JS file
+      <script>
+        // Add this to your existing JavaScript or create a new script
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('ember-claim-form');
             const submitBtn = document.getElementById('claim-submit-btn');
             const termsCheckbox = document.getElementById('claim-terms');
+            let recaptchaVerified = false;
 
-            // Enable terms checkbox (since it's initially disabled in your HTML)
+            // Enable terms checkbox
             termsCheckbox.disabled = false;
+
+            // reCAPTCHA Callback Functions
+            window.onRecaptchaSuccess = function (response) {
+                console.log('reCAPTCHA verified:', response);
+                recaptchaVerified = true;
+                document.getElementById('recaptcha-error').style.display = 'none';
+            };
+
+            window.onRecaptchaExpired = function () {
+                console.log('reCAPTCHA expired');
+                recaptchaVerified = false;
+            };
+
+            window.onRecaptchaError = function () {
+                console.log('reCAPTCHA error');
+                recaptchaVerified = false;
+                showRecaptchaError('Error verifying reCAPTCHA. Please try again.');
+            };
 
             // Form submission handler
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                // Validate required fields
+                // Validate reCAPTCHA
+                if (!recaptchaVerified) {
+                    showRecaptchaError('Please complete the reCAPTCHA verification');
+                    return;
+                }
+
+                // Get reCAPTCHA token
+                const recaptchaResponse = grecaptcha.getResponse();
+                if (!recaptchaResponse) {
+                    showRecaptchaError('reCAPTCHA verification failed. Please try again.');
+                    return;
+                }
+
+                // Your existing validation logic
                 if (!validateForm()) {
                     return;
                 }
 
-                // Disable submit button to prevent multiple submissions
+                // Disable submit button
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<span>Claiming $Ember...</span>';
 
-                // Prepare form data
+                // Prepare form data with reCAPTCHA token
                 const formData = {
                     full_name: document.getElementById('claim-name').value.trim(),
                     wallet_address: document.getElementById('claim-wallet').value.trim(),
                     email: document.getElementById('claim-email').value.trim(),
                     social_media_url: document.getElementById('claim-social-url').value.trim(),
-                    terms_agreed: document.getElementById('claim-terms').checked
+                    terms_agreed: document.getElementById('claim-terms').checked,
+                    'g-recaptcha-response': recaptchaResponse
                 };
 
-                // Make AJAX request
-                makeAjaxCall(formData);
+                // Make AJAX call to Laravel backend
+                submitFormToLaravel(formData);
             });
 
+            function showRecaptchaError(message) {
+                const errorElement = document.getElementById('recaptcha-error');
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+
+                // Scroll to reCAPTCHA
+                errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    errorElement.style.display = 'none';
+                }, 5000);
+            }
+
             function validateForm() {
+                // Your existing validation logic here
                 const walletAddress = document.getElementById('claim-wallet').value.trim();
                 const socialUrl = document.getElementById('claim-social-url').value.trim();
                 const termsAgreed = document.getElementById('claim-terms').checked;
@@ -2345,87 +2404,64 @@
 
                 // Validate required fields
                 if (!walletAddress) {
-                    showError('claim-wallet', 'Wallet address is required');
+                    showFieldError('claim-wallet', 'Wallet address is required');
                     isValid = false;
                 }
 
                 if (!socialUrl) {
-                    showError('claim-social-url', 'Social media URL is required');
+                    showFieldError('claim-social-url', 'Social media URL is required');
                     isValid = false;
                 }
 
                 if (!termsAgreed) {
-                    showError('claim-terms', 'You must agree to the terms and conditions');
+                    showFieldError('claim-terms', 'You must agree to the terms and conditions');
                     isValid = false;
                 }
 
                 // Validate URL format
                 if (socialUrl && !isValidUrl(socialUrl)) {
-                    showError('claim-social-url', 'Please enter a valid URL');
+                    showFieldError('claim-social-url', 'Please enter a valid URL');
                     isValid = false;
                 }
 
                 // Validate email if provided
                 const email = document.getElementById('claim-email').value.trim();
                 if (email && !isValidEmail(email)) {
-                    showError('claim-email', 'Please enter a valid email address');
+                    showFieldError('claim-email', 'Please enter a valid email address');
                     isValid = false;
                 }
 
                 return isValid;
             }
 
-            function makeAjaxCall(formData) {
-                // Create AJAX request
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', 'https://backend.vaultphoenix.com/api/airdrop/submit', true);
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.setRequestHeader('Accept', 'application/json');
+            function showFieldError(fieldId, message) {
+                const field = document.getElementById(fieldId);
+                const formGroup = field.closest('.form-group-compact');
 
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4) {
-                        // Re-enable submit button
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = `
-                    <div class="main-image-glow">
-                        <img src="images/VPEmberCoin.PNG" alt="Ember Coin" style="width: 24px; height: 24px; object-fit: contain;" loading="lazy">
-                    </div>
-                    <span>Claim $Ember</span>
-                `;
+                field.classList.add('error');
 
-                        try {
-                            const response = JSON.parse(xhr.responseText);
-
-                            if (xhr.status === 201) {
-                                // Success
-                                showSuccess('Airdrop claim submitted successfully!');
-                                form.reset(); // Clear the form
-                            } else {
-                                // Error
-                                showError('general', response.message || 'Failed to submit claim');
-                            }
-                        } catch (e) {
-                            showError('general', 'An error occurred while processing your request');
-                        }
-                    }
-                };
-
-                xhr.onerror = function () {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = `
-                <div class="main-image-glow">
-                    <img src="images/VPEmberCoin.PNG" alt="Ember Coin" style="width: 24px; height: 24px; object-fit: contain;" loading="lazy">
-                </div>
-                <span>Claim $Ember</span>
-            `;
-                    showError('general', 'Network error. Please check your connection.');
-                };
-
-                // Send the request
-                xhr.send(JSON.stringify(formData));
+                let errorElement = formGroup.querySelector('.field-error');
+                if (!errorElement) {
+                    errorElement = document.createElement('div');
+                    errorElement.className = 'field-error';
+                    errorElement.style.cssText = 'color: #ff4444; font-size: 12px; margin-top: 5px;';
+                    formGroup.appendChild(errorElement);
+                }
+                errorElement.textContent = message;
             }
 
-            // Utility functions
+            function clearErrors() {
+                // Clear field errors
+                const fieldErrors = document.querySelectorAll('.field-error');
+                fieldErrors.forEach(error => error.remove());
+
+                // Reset error classes
+                const inputs = form.querySelectorAll('input');
+                inputs.forEach(input => {
+                    input.classList.remove('error');
+                });
+            }
+
             function isValidUrl(string) {
                 try {
                     new URL(string);
@@ -2440,84 +2476,64 @@
                 return emailRegex.test(email);
             }
 
-            function showError(fieldId, message) {
-                if (fieldId === 'general') {
-                    // Show general error message
-                    const errorDiv = document.createElement('div');
-                    errorDiv.className = 'error-message general-error';
-                    errorDiv.style.cssText = 'color: #ff4444; background: #ffebee; padding: 10px; border-radius: 4px; margin-bottom: 15px;';
-                    errorDiv.textContent = message;
+            async function submitFormToLaravel(formData) {
+                try {
+                    const response = await fetch('https://backend.vaultphoenix.com/api/airdrop/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify(formData)
+                    });
 
-                    // Remove existing general error if any
-                    const existingError = document.querySelector('.general-error');
-                    if (existingError) {
-                        existingError.remove();
+                    const data = await response.json();
+
+                    // Reset reCAPTCHA
+                    grecaptcha.reset();
+                    recaptchaVerified = false;
+
+                    if (response.ok && data.success) {
+                        // Success
+                        showSuccess('Airdrop claim submitted successfully!');
+                        form.reset();
+                    } else {
+                        // Error
+                        const errorMessage = data.message || data.errors?.['g-recaptcha-response']?.[0] || 'Failed to submit claim';
+                        showError('general', errorMessage);
                     }
-
-                    form.insertBefore(errorDiv, form.firstChild);
-                } else {
-                    // Show field-specific error
-                    const field = document.getElementById(fieldId);
-                    const formGroup = field.closest('.form-group-compact');
-
-                    // Add error class to input
-                    field.style.borderColor = '#ff4444';
-
-                    // Create or update error message
-                    let errorElement = formGroup.querySelector('.field-error');
-                    if (!errorElement) {
-                        errorElement = document.createElement('div');
-                        errorElement.className = 'field-error';
-                        errorElement.style.cssText = 'color: #ff4444; font-size: 12px; margin-top: 5px;';
-                        formGroup.appendChild(errorElement);
-                    }
-                    errorElement.textContent = message;
+                } catch (error) {
+                    console.error('Error:', error);
+                    showError('general', 'Network error. Please check your connection.');
+                } finally {
+                    // Re-enable submit button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `
+                <div class="main-image-glow">
+                    <img src="images/VPEmberCoin.PNG" alt="Ember Coin" style="width: 24px; height: 24px; object-fit: contain;" loading="lazy">
+                </div>
+                <span>Claim $Ember</span>
+            `;
                 }
-            }
-
-            function clearErrors() {
-                // Clear general errors
-                const generalErrors = document.querySelectorAll('.general-error');
-                generalErrors.forEach(error => error.remove());
-
-                // Clear field errors
-                const fieldErrors = document.querySelectorAll('.field-error');
-                fieldErrors.forEach(error => error.remove());
-
-                // Reset border colors
-                const inputs = form.querySelectorAll('input');
-                inputs.forEach(input => {
-                    input.style.borderColor = '';
-                });
             }
 
             function showSuccess(message) {
-                // Remove existing success messages
-                const existingSuccess = document.querySelector('.success-message');
-                if (existingSuccess) {
-                    existingSuccess.remove();
-                }
-
-                // Create success message
-                const successDiv = document.createElement('div');
-                successDiv.className = 'success-message';
-                successDiv.style.cssText = 'color: #00C851; background: #e8f5e8; padding: 10px; border-radius: 4px; margin-bottom: 15px; text-align: center;';
-                successDiv.textContent = message;
-
-                form.insertBefore(successDiv, form.firstChild);
-
-                // Auto-remove success message after 5 seconds
-                setTimeout(() => {
-                    successDiv.remove();
-                }, 5000);
+                // Your existing success message logic
+                alert('Success: ' + message);
             }
 
-            // Real-time validation for better UX
+            function showError(type, message) {
+                // Your existing error message logic
+                alert('Error: ' + message);
+            }
+
+            // Real-time validation
             const inputs = form.querySelectorAll('input[required]');
             inputs.forEach(input => {
                 input.addEventListener('blur', function () {
                     if (this.value.trim()) {
-                        this.style.borderColor = '';
+                        this.classList.remove('error');
                         const errorElement = this.closest('.form-group-compact').querySelector('.field-error');
                         if (errorElement) {
                             errorElement.remove();
@@ -2551,7 +2567,7 @@
 
                 if (data.success) {
                     // Update the count in the DOM
-                    document.getElementById('ember-claimed').textContent = data.data.count;
+                    document.getElementById('ember-claimed').textContent = data.data.count || "0";
                     document.getElementById('ember-claimed').className = '';
                 } else {
                     throw new Error(data.message || 'Failed to fetch count');
