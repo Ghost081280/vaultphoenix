@@ -201,7 +201,7 @@
                                 <img src="images/VPEmberCoin.PNG" alt="">
                             </div>
                             <div class="hero-metric-content">
-                                <div class="hero-metric-value">100M</div>
+                                <div class="hero-metric-value">786,666</div>
                                 <div class="hero-metric-label">PRESALE TOKENS</div>
                             </div>
                         </div>
@@ -210,7 +210,7 @@
                                 <img src="images/VPEmberFlame.svg" alt="">
                             </div>
                             <div class="hero-metric-content">
-                                <div class="hero-metric-value">$0.003</div>
+                                <div class="hero-metric-value">0.003 SOL</div>
                                 <div class="hero-metric-label">PRESALE PRICE</div>
                             </div>
                         </div>
@@ -233,12 +233,12 @@
 
                     <!-- HERO BUTTONS - COMPACT -->
                     <div class="hero-buttons">
-                        <a href="#presale" class="hero-btn hero-btn-primary">
+                        <a href="https://tools.smithii.io/launch/$Ember-Presale" target="_blank" class="hero-btn hero-btn-primary">
                             <img src="images/VPEmberFlame.svg" alt="" aria-hidden="true">
                             <!-- Join Presale -->
-                            Presale coming soon
+                            Join Presale
                         </a>
-                        <a href="#whitepaper" class="hero-btn hero-btn-secondary">
+                        <a href="https://vaultphoenix.com/Vault_Phoenix_Whitepaper_2025V1.pdf" target="_blank" class="hero-btn hero-btn-secondary">
                             <img src="images/PhoenixWhitepaper.PNG" alt="" aria-hidden="true">
                             Read Whitepaper
                         </a>
@@ -322,9 +322,11 @@
                                     <div class="stat-label">Total Pool</div>
                                     <div class="stat-value">78,666 Ember</div>
                                 </div>
-                                <div class="ember-stat-mini">
+                               <div class="ember-stat-mini">
                                     <div class="stat-label">Claimed</div>
-                                    <div class="stat-value claimed"><span id="ember-claimed">0</span></div>
+                                    <div class="stat-value claimed">
+                                        <span id="ember-claimed" class="loading">Loading...</span>
+                                    </div>
                                 </div>
                                 <div class="ember-stat-mini">
                                     <div class="stat-label">Remaining</div>
@@ -1605,7 +1607,7 @@
 
                             <!-- Countdown Timer -->
                             <div class="presale-timer">
-                                <h3>Presale Launch Countdown</h3>
+                                <h3>Presale Countdown</h3>
                                 <div class="countdown-timer" role="timer" aria-live="polite" aria-atomic="true">
                                     <div class="time-unit">
                                         <span class="time-value" id="days" aria-label="Days remaining">--</span>
@@ -2264,7 +2266,7 @@
 
                 <!-- Modal Actions -->
                 <div class="tpa-modal-actions">
-                    <a href="Vault_Phoenix_Whitepaper_2025 V1.pdf" target="_blank" rel="noopener noreferrer"
+                    <a href="https://vaultphoenix.com/Vault_Phoenix_Whitepaper_2025V1.pdf" target="_blank" rel="noopener noreferrer"
                         class="tpa-download-btn" download aria-label="Download Vault Phoenix Whitepaper PDF">
                         <img src="images/PhoenixWhitepaper.PNG" alt="" aria-hidden="true">
                          Download Whitepaper (PDF) 
@@ -2525,6 +2527,55 @@
             });
         });
     </script>
+    
+    <script>
+        // Your API base URL (update this with your actual Laravel API URL)
+        const API_BASE_URL = 'https://backend.vaultphoenix.com/api';
+
+        // Function to fetch approved count
+        async function fetchApprovedCount() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/airdrop/approved-count`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Update the count in the DOM
+                    document.getElementById('ember-claimed').textContent = data.data.count;
+                    document.getElementById('ember-claimed').className = '';
+                } else {
+                    throw new Error(data.message || 'Failed to fetch count');
+                }
+
+            } catch (error) {
+                console.error('Error fetching approved count:', error);
+                document.getElementById('ember-claimed').textContent = 'Error';
+                document.getElementById('ember-claimed').className = 'error';
+
+                // Optionally retry after 5 seconds
+                setTimeout(fetchApprovedCount, 5000);
+            }
+        }
+
+        // Fetch count on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchApprovedCount();
+
+            // Optionally refresh every 30 seconds
+            setInterval(fetchApprovedCount, 30000);
+        });
+    </script>
+
 
 </body>
 
